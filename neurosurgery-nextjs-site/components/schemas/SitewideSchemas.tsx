@@ -29,6 +29,13 @@ export default function SitewideSchemas() {
     name: "Dr. Sayuj Krishnan",
     url: SITE_URL,
     telephone: "+91-98484-17094",
+    logo: {
+      "@type": "ImageObject",
+      url: `${SITE_URL}/images/logo.png`,
+      width: 512,
+      height: 512,
+      contentUrl: `${SITE_URL}/images/logo.png`
+    },
     address: {
       "@type": "PostalAddress",
       streetAddress:
