@@ -8,6 +8,15 @@ export default function SitewideSchemas() {
   const PHYS_ID = idFor(SITE_URL, "physician");
   const CONTACT_ID = idFor(SITE_URL, "contact");
 
+  // Social profiles (sameAs) for Organization and Physician
+  const sameAs = [
+    "https://x.com/drsayuj",
+    "https://www.facebook.com/drsayuj/",
+    "https://in.linkedin.com/in/dr-sayuj-krishnan-s-275baa66",
+    "https://www.youtube.com/channel/UCc-KQY7cjePPy0p49W3SZFQ",
+    "https://www.instagram.com/thespinedoc/?hl=en"
+  ];
+
   // WebSite with SearchAction; publisher is the Person (personal brand)
   const website = {
     "@type": "WebSite",
@@ -29,6 +38,7 @@ export default function SitewideSchemas() {
     name: "Dr. Sayuj Krishnan",
     url: SITE_URL,
     telephone: "+91-98484-17094",
+    sameAs,
     logo: {
       "@type": "ImageObject",
       url: `${SITE_URL}/images/logo.png`,
@@ -57,6 +67,7 @@ export default function SitewideSchemas() {
   const physician: any = physicianJsonLd();
   physician["@id"] = PHYS_ID;
   physician.worksFor = { "@id": ORG_ID };
+  physician.sameAs = sameAs;
 
   // Unified ContactPoint for the site
   const contact = contactPointJsonLd({

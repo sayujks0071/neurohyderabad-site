@@ -87,6 +87,14 @@ export default function RootLayout({
           href="https://www.googletagmanager.com"
           crossOrigin="anonymous"
         />
+        {/* Social + robots enhancements */}
+        <meta name="robots" content="max-image-preview:large" />
+        <meta property="og:image:alt" content="Dr. Sayuj Krishnan — Neurosurgeon in Hyderabad" />
+        <meta property="og:locale" content="en_US" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@drsayuj" />
+        <meta name="twitter:creator" content="@drsayuj" />
+        <meta name="twitter:image:alt" content="Dr. Sayuj Krishnan — Neurosurgeon in Hyderabad" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
