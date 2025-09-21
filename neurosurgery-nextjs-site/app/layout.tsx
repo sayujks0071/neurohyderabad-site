@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import WebsiteSchema from "./components/schemas/WebsiteSchema";
-import PhysicianSchema from "./components/schemas/PhysicianSchema";
-import HospitalSchema from "./components/schemas/HospitalSchema";
+import SitewideSchemas from "@/components/schemas/SitewideSchemas";
 import { SITE_URL } from "@/lib/seo";
 
 const geistSans = Geist({
@@ -86,9 +84,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <WebsiteSchema />
-        <PhysicianSchema />
-        <HospitalSchema />
+        <SitewideSchemas />
         {children}
       </body>
     </html>

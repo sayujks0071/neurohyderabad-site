@@ -1,0 +1,70 @@
+import React from "react";
+import { SITE_URL, physicianJsonLd, contactPointJsonLd, idFor } from "@/lib/seo";
+
+export default function SitewideSchemas() {
+  // Stable @id references
+  const WEB_ID = idFor(SITE_URL, "website");
+  const ORG_ID = idFor(SITE_URL, "organization");
+  const PHYS_ID = idFor(SITE_URL, "physician");
+  const CONTACT_ID = idFor(SITE_URL, "contact");
+
+  // WebSite with SearchAction; publisher is the Person (personal brand)
+  const website = {
+    "@type": "WebSite",
+    "@id": WEB_ID,
+    name: "Dr. Sayuj Krishnan",
+    url: SITE_URL,
+    publisher: { "@id": PHYS_ID },
+    potentialAction: {
+      "@type": "SearchAction",
+      target: "https://www.drsayuj.com/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  };
+
+  // MedicalOrganization with PostalAddress and sitewide ContactPoint
+  const organization = {
+    "@type": "MedicalOrganization",
+    "@id": ORG_ID,
+    name: "Dr. Sayuj Krishnan",
+    url: SITE_URL,
+    telephone: "+91-98484-17094",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress:
+        "Room no 317, 3rd floor, OPD Block, Yashoda hospital, Malakpet",
+      addressLocality: "Hyderabad",
+      addressRegion: "Telangana",
+      addressCountry: "IN"
+    },
+    contactPoint: [{ "@id": CONTACT_ID }]
+  };
+
+  // Physician (Person) linked to the MedicalOrganization via worksFor
+  const physician: any = physicianJsonLd();
+  physician["@id"] = PHYS_ID;
+  physician.worksFor = { "@id": ORG_ID };
+
+  // Unified ContactPoint for the site
+  const contact = contactPointJsonLd({
+    phone: "+91-98484-17094",
+    contactType: "appointments",
+    areaServed: ["IN"],
+    availableLanguage: ["en", "hi", "te"],
+    id: CONTACT_ID
+  });
+
+  const graph = [website, organization, physician, contact];
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": graph
+        })
+      }}
+    />
+  );
+}
