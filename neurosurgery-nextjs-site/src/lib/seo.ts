@@ -1,6 +1,12 @@
 // Canonical host (enforced via middleware)
 export const SITE_URL = "https://www.drsayuj.com";
 export const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "contact@drsayujkrishnan.com";
+
+// Helper: Build stable @id values for entities on a page
+export function idFor(canonical: string, fragment: string) {
+  // Always ensure canonical has trailing slash in callers if needed
+  return `${canonical}#${fragment}`;
+}
 export const CONTACT_PHONE = "+91-98484-17094";
 
 interface ServiceJsonLdProps {
@@ -110,6 +116,8 @@ interface WebPageJsonLdProps {
   datePublished?: string; // ISO
   dateModified?: string;  // ISO
   mainEntity?: any;       // Primary MedicalProcedure/MedicalCondition/Service JSON-LD
+  about?: any;
+  mentions?: any;
 }
 
 export function webPageJsonLd({
@@ -118,7 +126,9 @@ export function webPageJsonLd({
   url,
   datePublished,
   dateModified,
-  mainEntity
+  mainEntity,
+  about,
+  mentions
 }: WebPageJsonLdProps) {
   const base: any = {
     "@context": "https://schema.org",
@@ -130,32 +140,42 @@ export function webPageJsonLd({
   if (datePublished) base.datePublished = datePublished;
   if (dateModified) base.dateModified = dateModified;
   if (mainEntity) base.mainEntity = mainEntity;
+  if (about) base.about = about;
+  if (mentions) base.mentions = mentions;
   return base;
 }
 
 interface ItemListJsonLdProps {
+  name?: string;
   items: Array<{
     name: string;
     url: string;
     description?: string;
   }>;
+  id?: string;
+  order?: "ItemListOrderAscending" | "ItemListOrderDescending" | "ItemListUnordered";
 }
 
-export function itemListJsonLd({ items }: ItemListJsonLdProps) {
-  return {
+export function itemListJsonLd({ name, items, id, order }: ItemListJsonLdProps) {
+  const obj: any = {
     "@context": "https://schema.org",
     "@type": "ItemList",
+    ...(name ? { name } : {}),
     itemListElement: items.map((item, index) => ({
       "@type": "ListItem",
       position: index + 1,
       item: {
-        "@type": "Thing",
-        url: item.url,
+        "@type": "WebPage",
         name: item.name,
+        url: item.url,
         ...(item.description && { description: item.description })
       }
     }))
   };
+  if (id) obj["@id"] = id;
+  if (order) obj.itemListOrder = `https://schema.org/${order}`;
+  else obj.itemListOrder = "https://schema.org/ItemListOrderAscending";
+  return obj;
 }
 
 export const ORGANIZATION_LOGO = {

@@ -1,0 +1,90 @@
+*** Begin Patch
+*** Update File: src/lib/seo.ts
+@@
+ export const SITE_URL = "https://www.drsayuj.com";
+ export const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "contact@drsayujkrishnan.com";
+ 
++// Helper: Build stable @id values for entities on a page
++export function idFor(canonical: string, fragment: string) {
++  // Always ensure canonical has trailing slash in callers if needed
++  return `${canonical}#${fragment}`;
++}
++
+ export function webPageJsonLd(args: {
+   name: string;
+   description?: string;
+   url: string;
+   datePublished?: string; // ISO
+   dateModified?: string;  // ISO
+   mainEntity?: any;       // Primary MedicalProcedure/MedicalCondition/Service JSON-LD
++  about?: any;
++  mentions?: any;
+ }) {
+-  const { name, description, url, datePublished, dateModified, mainEntity } = args;
++  const { name, description, url, datePublished, dateModified, mainEntity, about, mentions } = args;
+   const base: any = {
+     "@context": "https://schema.org",
+     "@type": "WebPage",
+     name,
+     url
+   };
+   if (description) base.description = description;
+   if (datePublished) base.datePublished = datePublished;
+   if (dateModified) base.dateModified = dateModified;
+   if (mainEntity) base.mainEntity = mainEntity;
++  if (about) base.about = about;
++  if (mentions) base.mentions = mentions;
+   return base;
+ }
+
+// ItemList JSON-LD helper for RelatedContent blocks
+export function itemListJsonLd(params: {
+  name?: string;
+  items: Array<{ name: string; url: string }>;
++  id?: string;
++  order?: "ItemListOrderAscending" | "ItemListOrderDescending" | "ItemListUnordered";
+}) {
+-  const { name, items } = params;
+-  return {
++  const { name, items, id, order } = params;
++  const obj: any = {
+     "@context": "https://schema.org",
+     "@type": "ItemList",
+     ...(name ? { name } : {}),
+     itemListElement: items.map((it, idx) => ({
+       "@type": "ListItem",
+       position: idx + 1,
+       item: {
+         "@type": "WebPage",
+         name: it.name,
+         url: it.url
+       }
+     }))
+   };
++  if (id) obj["@id"] = id;
++  if (order) obj.itemListOrder = `https://schema.org/${order}`;
++  else obj.itemListOrder = "https://schema.org/ItemListOrderAscending";
++  return obj;
+}
+
+export function contactPointJsonLd(params: {
+  phone: string;
+  contactType: string;
+  areaServed?: string[];
+  availableLanguage?: string[];
++  id?: string;
+}) {
+-  const { phone, contactType, areaServed, availableLanguage } = params;
++  const { phone, contactType, areaServed, availableLanguage, id } = params;
+   const obj: any = {
+     "@context": "https://schema.org",
+     "@type": "ContactPoint",
+     telephone: phone,
+     contactType,
+     ...(areaServed ? { areaServed } : {}),
+     ...(availableLanguage ? { availableLanguage } : {})
+   };
++  if (id) obj["@id"] = id;
+   return obj;
+}
+*** End Patch
