@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import WebsiteSchema from "./components/schemas/WebsiteSchema";
+import PhysicianSchema from "./components/schemas/PhysicianSchema";
+import HospitalSchema from "./components/schemas/HospitalSchema";
+import { SITE_URL } from "@/lib/seo";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,12 +26,12 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_IE",
-    url: "https://www.drsayuj.com",
+    url: SITE_URL,
     title: "Dr. Sayuj Krishnan | Best Neurosurgeon in Hyderabad",
     description: "Expert neurosurgeon in Hyderabad specializing in minimally invasive brain & spine surgery",
     siteName: "Dr. Sayuj Krishnan - Neurosurgeon",
     images: [{
-      url: "https://www.drsayuj.com/og-image.jpg",
+      url: `${SITE_URL}/og-image.jpg`,
       width: 1200,
       height: 630,
       alt: "Dr. Sayuj Krishnan - Neurosurgeon in Hyderabad"
@@ -37,7 +41,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Dr. Sayuj Krishnan | Neurosurgeon in Hyderabad",
     description: "Expert neurosurgeon specializing in minimally invasive brain & spine surgery",
-    images: ["https://www.drsayuj.com/twitter-image.jpg"],
+    images: [`${SITE_URL}/twitter-image.jpg`],
   },
   robots: {
     index: true,
@@ -62,9 +66,29 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link
+          rel="preconnect"
+          href="https://fonts.googleapis.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preconnect"
+          href="https://www.googletagmanager.com"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <WebsiteSchema />
+        <PhysicianSchema />
+        <HospitalSchema />
         {children}
       </body>
     </html>

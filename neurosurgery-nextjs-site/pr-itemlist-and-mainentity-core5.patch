@@ -1,0 +1,51 @@
+*** Begin Patch
+*** Update File: src/lib/seo.ts
+@@
+ export const SITE_URL = "https://www.drsayuj.com";
+ export const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "contact@drsayujkrishnan.com";
+ 
++// Ensure webPageJsonLd supports mainEntity (Procedure/Condition/Service)
+ export function webPageJsonLd(args: {
+   name: string;
+   description?: string;
+   url: string;
+   datePublished?: string; // ISO
+   dateModified?: string;  // ISO
+   mainEntity?: any;       // Primary MedicalProcedure/MedicalCondition/Service JSON-LD
+ }) {
+   const { name, description, url, datePublished, dateModified, mainEntity } = args;
+   const base: any = {
+     "@context": "https://schema.org",
+     "@type": "WebPage",
+     name,
+     url
+   };
+   if (description) base.description = description;
+   if (datePublished) base.datePublished = datePublished;
+   if (dateModified) base.dateModified = dateModified;
+   if (mainEntity) base.mainEntity = mainEntity;
+   return base;
+ }
+ 
++// ItemList JSON-LD for RelatedContent blocks
++export function itemListJsonLd(params: {
++  name?: string;
++  items: Array<{ name: string; url: string }>;
++}) {
++  const { name, items } = params;
++  return {
++    "@context": "https://schema.org",
++    "@type": "ItemList",
++    ...(name ? { name } : {}),
++    itemListElement: items.map((it, idx) => ({
++      "@type": "ListItem",
++      position: idx + 1,
++      item: {
++        "@type": "WebPage",
++        name: it.name,
++        url: it.url
++      }
++    }))
++  };
++}
+*** End Patch
