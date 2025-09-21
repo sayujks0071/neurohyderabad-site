@@ -36,6 +36,12 @@ export default function SitewideSchemas() {
       height: 512,
       contentUrl: `${SITE_URL}/images/logo.png`
     },
+    image: {
+      "@type": "ImageObject",
+      url: `${SITE_URL}/images/og-default.jpg`,
+      width: 1200,
+      height: 630
+    },
     address: {
       "@type": "PostalAddress",
       streetAddress:

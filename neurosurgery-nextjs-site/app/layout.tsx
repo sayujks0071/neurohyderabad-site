@@ -16,6 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.drsayuj.com'),
   icons: {
     icon: [
       { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
@@ -38,19 +39,14 @@ export const metadata: Metadata = {
     url: SITE_URL,
     title: "Dr. Sayuj Krishnan | Best Neurosurgeon in Hyderabad",
     description: "Expert neurosurgeon in Hyderabad specializing in minimally invasive brain & spine surgery",
-    siteName: "Dr. Sayuj Krishnan - Neurosurgeon",
-    images: [{
-      url: `${SITE_URL}/og-image.jpg`,
-      width: 1200,
-      height: 630,
-      alt: "Dr. Sayuj Krishnan - Neurosurgeon in Hyderabad"
-    }],
+    siteName: "Dr. Sayuj — Brain & Spine Care",
+    images: ['/images/og-default.jpg'],
   },
   twitter: {
     card: "summary_large_image",
     title: "Dr. Sayuj Krishnan | Neurosurgeon in Hyderabad",
     description: "Expert neurosurgeon specializing in minimally invasive brain & spine surgery",
-    images: [`${SITE_URL}/twitter-image.jpg`],
+    images: ['/images/og-default.jpg'],
   },
   robots: {
     index: true,
