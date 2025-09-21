@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import SitewideSchemas from "@/components/schemas/SitewideSchemas";
 import { SITE_URL } from "@/lib/seo";
+import Header from "@/components/Header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,6 +16,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  icons: {
+    icon: [
+      { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
+      { url: "/favicon-16x16.png", type: "image/png", sizes: "16x16" },
+      { url: "/favicon.ico", sizes: "any" }
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }]
+  },
+  manifest: "/site.webmanifest",
+  themeColor: "#2563eb",
   title: "Dr. Sayuj Krishnan | Best Neurosurgeon in Hyderabad | Brain & Spine Specialist",
   description: "Dr. Sayuj Krishnan is a highly skilled neurosurgeon in Hyderabad specializing in minimally invasive brain & spine surgery. Expert treatment for brain tumors, spine disorders & more.",
   keywords: "neurosurgeon hyderabad, brain surgeon, spine specialist, brain tumor surgery, spine surgery, dr sayuj krishnan",
@@ -85,6 +96,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <SitewideSchemas />
+        <Header />
         {children}
       </body>
     </html>
