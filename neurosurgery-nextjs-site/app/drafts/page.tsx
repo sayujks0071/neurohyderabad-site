@@ -9,6 +9,8 @@ export const metadata: Metadata = {
 };
 
 export default function DraftsPage() {
+  // Access is controlled by middleware
+
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="container mx-auto px-4 py-8">
@@ -19,6 +21,9 @@ export default function DraftsPage() {
           <p className="text-gray-600">
             Preview generated content from the GEO bot before publishing
           </p>
+          <div className="mt-2 p-2 bg-yellow-100 border border-yellow-300 rounded text-sm text-yellow-800">
+            ⚠️ Admin Access Only - This page is not visible to the public
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
