@@ -37,17 +37,29 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">Services</h3>
             <nav className="space-y-2">
-              <Link href="/services" className="block text-gray-300 hover:text-white transition-colors">
+              <Link href="/services/" className="block text-gray-300 hover:text-white transition-colors">
                 All Services
               </Link>
-              <Link href="/services/minimally-invasive-spine-surgery" className="block text-gray-300 hover:text-white transition-colors">
+              <Link href="/services/minimally-invasive-spine-surgery/" className="block text-gray-300 hover:text-white transition-colors">
                 Minimally Invasive Spine Surgery
               </Link>
-              <Link href="/services/brain-tumor-surgery-hyderabad" className="block text-gray-300 hover:text-white transition-colors">
+              <Link href="/services/endoscopic-discectomy-hyderabad/" className="block text-gray-300 hover:text-white transition-colors">
+                Endoscopic Discectomy
+              </Link>
+              <Link href="/services/endoscopic-foraminotomy-hyderabad/" className="block text-gray-300 hover:text-white transition-colors">
+                Endoscopic Foraminotomy
+              </Link>
+              <Link href="/services/endoscopic-ulbd-hyderabad/" className="block text-gray-300 hover:text-white transition-colors">
+                Endoscopic ULBD
+              </Link>
+              <Link href="/services/brain-tumor-surgery-hyderabad/" className="block text-gray-300 hover:text-white transition-colors">
                 Brain Tumor Surgery
               </Link>
-              <Link href="/services/epilepsy-surgery-hyderabad" className="block text-gray-300 hover:text-white transition-colors">
-                Epilepsy Surgery
+              <Link href="/services/microvascular-decompression-mvd-hyderabad/" className="block text-gray-300 hover:text-white transition-colors">
+                Microvascular Decompression
+              </Link>
+              <Link href="/services/radiosurgery-gamma-knife-hyderabad/" className="block text-gray-300 hover:text-white transition-colors">
+                Radiosurgery (Gamma Knife)
               </Link>
             </nav>
           </div>
@@ -56,17 +68,20 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">Conditions</h3>
             <nav className="space-y-2">
-              <Link href="/conditions" className="block text-gray-300 hover:text-white transition-colors">
+              <Link href="/conditions/" className="block text-gray-300 hover:text-white transition-colors">
                 All Conditions
               </Link>
-              <Link href="/conditions/slip-disc-treatment-hyderabad" className="block text-gray-300 hover:text-white transition-colors">
-                Slip Disc Treatment
+              <Link href="/conditions/slip-disc-treatment-hyderabad/" className="block text-gray-300 hover:text-white transition-colors">
+                Sciatica Treatment
               </Link>
-              <Link href="/conditions/spinal-stenosis-treatment-hyderabad" className="block text-gray-300 hover:text-white transition-colors">
-                Spinal Stenosis Treatment
+              <Link href="/conditions/spinal-stenosis-treatment-hyderabad/" className="block text-gray-300 hover:text-white transition-colors">
+                Lumbar Spinal Stenosis Treatment
               </Link>
-              <Link href="/conditions/trigeminal-neuralgia-treatment-hyderabad" className="block text-gray-300 hover:text-white transition-colors">
+              <Link href="/conditions/trigeminal-neuralgia-treatment-hyderabad/" className="block text-gray-300 hover:text-white transition-colors">
                 Trigeminal Neuralgia Treatment
+              </Link>
+              <Link href="/conditions/cervical-radiculopathy-treatment-hyderabad/" className="block text-gray-300 hover:text-white transition-colors">
+                Cervical Radiculopathy Treatment
               </Link>
             </nav>
           </div>

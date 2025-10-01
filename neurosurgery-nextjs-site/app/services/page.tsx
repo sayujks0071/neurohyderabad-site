@@ -30,27 +30,63 @@ export const metadata: Metadata = {
 export default function ServicesPage() {
   const services = [
     {
-      title: "Minimally Invasive Spine Surgery (MISS)",
-      description: "Advanced minimally invasive techniques for spine conditions with reduced tissue trauma and faster recovery.",
-      href: "/services/minimally-invasive-spine-surgery",
+      title: "Minimally Invasive Spine Surgery",
+      description: "Tiny-incision minimally invasive spine surgery in Hyderabad. Endoscopic discectomy/foraminotomy with faster recovery when appropriate.",
+      href: "/services/minimally-invasive-spine-surgery/",
       features: ["Smaller incisions", "Less muscle damage", "Faster recovery", "Lower infection risk"]
     },
     {
-      title: "Endoscopic Spine Surgery",
-      description: "Full endoscopic and uniportal spine surgery for disc herniation and stenosis with minimal tissue disruption.",
-      href: "/services/minimally-invasive-spine-surgery",
+      title: "Endoscopic Discectomy",
+      description: "Tiny-incision endoscopic discectomy for slip disc and sciatica in Hyderabad. Faster mobilization when appropriate.",
+      href: "/services/endoscopic-discectomy-hyderabad/",
       features: ["Minimal scarring", "Quick recovery", "Reduced pain", "Outpatient procedures"]
     },
     {
+      title: "Endoscopic Foraminotomy",
+      description: "Targeted endoscopic decompression for foraminal stenosis with minimal tissue disruption. Clear recovery plan and insurance support.",
+      href: "/services/endoscopic-foraminotomy-hyderabad/",
+      features: ["Precise decompression", "Minimal tissue damage", "Faster healing", "Structured rehab"]
+    },
+    {
+      title: "Endoscopic ULBD",
+      description: "Tiny-incision endoscopic ULBD for lumbar spinal stenosis in Hyderabad. Who qualifies, benefits/risks, recovery, and day-care eligibility.",
+      href: "/services/endoscopic-ulbd-hyderabad/",
+      features: ["Bilateral decompression", "Single incision", "Day-care eligible", "Structured recovery"]
+    },
+    {
+      title: "Endoscopic Cervical Discectomy",
+      description: "Motion-preserving endoscopic cervical discectomy for selected radiculopathy cases. Multidisciplinary planning and clear rehab.",
+      href: "/services/endoscopic-cervical-discectomy-hyderabad/",
+      features: ["Motion preservation", "Minimal approach", "Neck/arm pain relief", "Structured recovery"]
+    },
+    {
+      title: "Cervical Foraminotomy",
+      description: "Endoscopic or microscopic cervical foraminotomy for nerve root decompression. Personalized approach based on anatomy and symptoms.",
+      href: "/services/cervical-foraminotomy-hyderabad/",
+      features: ["Nerve root decompression", "Flexible approach", "Neck/arm relief", "Individualized care"]
+    },
+    {
       title: "Brain Tumor Surgery",
-      description: "Microsurgical techniques for maximal safe resection of primary and metastatic brain tumors.",
-      href: "/services/brain-tumor-surgery-hyderabad",
+      description: "Neuronavigation-guided microsurgery with neuromonitoring for maximal safe resection when appropriate. Multidisciplinary care.",
+      href: "/services/brain-tumor-surgery-hyderabad/",
       features: ["Microsurgical precision", "Maximal safe resection", "Advanced imaging", "Multidisciplinary care"]
     },
     {
+      title: "Microvascular Decompression (MVD)",
+      description: "MVD for trigeminal neuralgia in Hyderabad—who qualifies, MRI planning, benefits/risks vs radiosurgery and percutaneous options.",
+      href: "/services/microvascular-decompression-mvd-hyderabad/",
+      features: ["Vascular decompression", "Durable pain relief", "Preserved sensation", "Comprehensive evaluation"]
+    },
+    {
+      title: "Radiosurgery (Gamma Knife)",
+      description: "Non-incisional radiosurgery for selected brain tumors and trigeminal neuralgia in Hyderabad. Indications, benefits/risks, recovery.",
+      href: "/services/radiosurgery-gamma-knife-hyderabad/",
+      features: ["No incision", "Outpatient treatment", "Precise targeting", "Minimal downtime"]
+    },
+    {
       title: "Epilepsy Surgery",
-      description: "Surgical options for drug-resistant epilepsy with comprehensive evaluation and advanced techniques.",
-      href: "/services/epilepsy-surgery-hyderabad",
+      description: "For drug-resistant epilepsy: LITT/resection/VNS after full workup. Individualized plans and clear risk counseling.",
+      href: "/services/epilepsy-surgery-hyderabad/",
       features: ["Comprehensive evaluation", "Advanced techniques", "Multidisciplinary care", "Personalized treatment"]
     }
   ];

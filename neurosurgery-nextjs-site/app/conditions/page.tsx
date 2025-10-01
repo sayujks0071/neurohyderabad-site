@@ -23,28 +23,28 @@ export const metadata: Metadata = {
 export default function ConditionsPage() {
   const conditions = [
     {
-      title: "Slip Disc (Herniated Disc) Treatment",
-      description: "Accurate diagnosis and effective treatment for slip disc and sciatica with endoscopic discectomy and same-day ambulation.",
-      href: "/conditions/slip-disc-treatment-hyderabad",
+      title: "Sciatica Treatment",
+      description: "Stepwise sciatica care: medicines, physiotherapy, injections, and endoscopic decompression when indicated. Return-to-work guidance.",
+      href: "/conditions/slip-disc-treatment-hyderabad/",
       symptoms: ["Back/leg pain", "Numbness", "Weakness", "Sciatica"]
     },
     {
-      title: "Spinal Stenosis Treatment",
-      description: "Relief for leg pain and numbness from spinal stenosis with evidence-based therapy and minimally invasive decompression.",
-      href: "/conditions/spinal-stenosis-treatment-hyderabad",
+      title: "Lumbar Spinal Stenosis Treatment",
+      description: "Image-guided stenosis relief with endoscopic or microscopic decompression. Personalized rehab and safety-first protocols.",
+      href: "/conditions/spinal-stenosis-treatment-hyderabad/",
       symptoms: ["Leg pain", "Numbness", "Walking difficulty", "Neurogenic claudication"]
     },
     {
       title: "Trigeminal Neuralgia Treatment",
-      description: "Personalized care with medical therapy, microvascular decompression, and radiosurgery for facial pain relief.",
-      href: "/conditions/trigeminal-neuralgia-treatment-hyderabad",
+      description: "Medication optimization, microvascular decompression, radiosurgery, and percutaneous options. Tailored to imaging and symptoms.",
+      href: "/conditions/trigeminal-neuralgia-treatment-hyderabad/",
       symptoms: ["Severe facial pain", "Electric shock episodes", "Trigger zones", "Brief episodes"]
     },
     {
-      title: "Brain Tumor Treatment",
-      description: "Comprehensive care for brain tumors with advanced diagnosis, microsurgery, and recovery planning.",
-      href: "/conditions/brain-tumor-treatment-hyderabad",
-      symptoms: ["Headaches", "Seizures", "Vision changes", "Cognitive changes"]
+      title: "Cervical Radiculopathy Treatment",
+      description: "Comprehensive care for cervical radiculopathy with conservative management, injections, and endoscopic decompression when appropriate.",
+      href: "/conditions/cervical-radiculopathy-treatment-hyderabad/",
+      symptoms: ["Neck pain", "Arm pain", "Numbness", "Weakness"]
     }
   ];
 
