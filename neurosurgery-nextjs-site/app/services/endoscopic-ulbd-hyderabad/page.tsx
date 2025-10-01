@@ -94,9 +94,9 @@ export default function EndoscopicULBDPage() {
       <main className="container mx-auto px-4 py-16 max-w-4xl">
         <Breadcrumbs 
           items={[
-            { label: 'Home', href: '/' },
-            { label: 'Services', href: '/services/' },
-            { label: 'Endoscopic ULBD in Hyderabad', href: '/services/endoscopic-ulbd-hyderabad/' }
+            { name: 'Home', href: '/' },
+            { name: 'Services', href: '/services/' },
+            { name: 'Endoscopic ULBD in Hyderabad', href: '/services/endoscopic-ulbd-hyderabad/' }
           ]} 
         />
         

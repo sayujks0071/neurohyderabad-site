@@ -104,9 +104,9 @@ export default function TrigeminalNeuralgiaTreatmentPage() {
       <main className="container mx-auto px-4 py-16 max-w-4xl">
         <Breadcrumbs 
           items={[
-            { label: 'Home', href: '/' },
-            { label: 'Conditions', href: '/conditions/' },
-            { label: 'Trigeminal Neuralgia Treatment in Hyderabad', href: '/conditions/trigeminal-neuralgia-treatment-hyderabad/' }
+            { name: 'Home', href: '/' },
+            { name: 'Conditions', href: '/conditions/' },
+            { name: 'Trigeminal Neuralgia Treatment in Hyderabad', href: '/conditions/trigeminal-neuralgia-treatment-hyderabad/' }
           ]} 
         />
         
