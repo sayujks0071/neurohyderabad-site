@@ -98,6 +98,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: `${baseUrl}/blog/return-to-work-after-endoscopic-discectomy-hyderabad/`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/blog/endoscopic-vs-microdiscectomy-hyderabad/`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
       url: `${baseUrl}/appointments/`,
       lastModified: new Date(),
       changeFrequency: 'monthly',

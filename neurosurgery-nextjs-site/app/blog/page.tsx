@@ -54,6 +54,22 @@ export default async function BlogPage() {
       excerpt: 'Transparent overview of endoscopic spine surgery costs in Hyderabad—what affects price, insurance, day-care eligibility, and recovery planning.',
       date: '2025-09-30',
       featuredImage: '/images/og-default.jpg'
+    },
+    {
+      id: 'return-to-work-after-endoscopic-discectomy-hyderabad',
+      title: 'Return to Work After Endoscopic Discectomy in Hyderabad: A Practical Guide',
+      slug: 'return-to-work-after-endoscopic-discectomy-hyderabad',
+      excerpt: 'Week‑by‑week recovery after endoscopic discectomy in Hyderabad. Desk vs manual timelines, red flags, and safe activity progressions.',
+      date: '2025-10-01',
+      featuredImage: '/images/og-default.jpg'
+    },
+    {
+      id: 'endoscopic-vs-microdiscectomy-hyderabad',
+      title: 'Endoscopic vs Microdiscectomy in Hyderabad: Which Approach Suits You?',
+      slug: 'endoscopic-vs-microdiscectomy-hyderabad',
+      excerpt: 'Compare endoscopic discectomy and microdiscectomy in Hyderabad: candidacy, incision size, hospital stay, recovery, risks, and costs.',
+      date: '2025-10-01',
+      featuredImage: '/images/og-default.jpg'
     }
   ];
 
