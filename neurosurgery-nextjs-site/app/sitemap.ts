@@ -50,6 +50,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: `${baseUrl}/services/cervical-foraminotomy-hyderabad/`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/services/brain-tumor-surgery-hyderabad/`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
