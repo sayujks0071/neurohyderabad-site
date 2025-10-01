@@ -19,18 +19,19 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Ensure all text has proper contrast */
+/* Ensure headings have proper contrast */
 h1, h2, h3, h4, h5, h6 {
-  color: #1f2937 !important; /* text-gray-800 */
+  color: #111827 !important; /* text-gray-900 - darker for better contrast */
 }
 
+/* Ensure body text has proper contrast */
 p, li, span, div {
-  color: #374151 !important; /* text-gray-700 */
+  color: #1f2937 !important; /* text-gray-800 - darker for better contrast */
 }
 
 /* Ensure breadcrumbs are readable */
 .text-gray-600 {
-  color: #4b5563 !important;
+  color: #374151 !important; /* text-gray-700 - darker for better contrast */
 }
 
 .text-gray-900 {

@@ -3,7 +3,7 @@ module.exports = {
   ci: {
     collect: {
       // Start your Next app locally in CI:
-      startServerCommand: "pnpm build && pnpm start",
+      startServerCommand: "npm run build && npm start",
       startServerReadyPattern: "started server on",
       url: [
         "http://localhost:3000/",
