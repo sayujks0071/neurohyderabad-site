@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import RelatedContent from "../../../components/RelatedContent";
 
 export const metadata: Metadata = {
-  title: "Slip Disc Treatment in Hyderabad | Endoscopic Discectomy",
-  description: "Accurate diagnosis and effective treatment for slip disc and sciatica. Non-surgical care and endoscopic discectomy. Same-day ambulation in Hyderabad.",
-  alternates: { canonical: "/conditions/slip-disc-treatment-hyderabad" },
+  title: "Sciatica Treatment in Hyderabad | Conservative to Endoscopic",
+  description: "Stepwise sciatica care: medicines, physiotherapy, injections, and endoscopic decompression when indicated. Return‑to‑work guidance.",
+  alternates: { canonical: "/conditions/slip-disc-treatment-hyderabad/" },
   openGraph: {
     images: [
       {

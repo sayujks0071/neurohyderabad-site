@@ -4,9 +4,9 @@ import RelatedContent from "../../../components/RelatedContent";
 import Breadcrumbs from "../../components/Breadcrumbs";
 
 export const metadata: Metadata = {
-  title: "Endoscopic Foraminotomy in Hyderabad",
-  description: "Targeted relief for foraminal stenosis with a tiny incision. Benefits, risks, recovery, and insurance support in Hyderabad.",
-  alternates: { canonical: "/services/endoscopic-foraminotomy-hyderabad" },
+  title: "Endoscopic Foraminotomy in Hyderabad | Foraminal Stenosis Relief",
+  description: "Targeted endoscopic decompression for foraminal stenosis with minimal tissue disruption. Clear recovery plan and insurance support.",
+  alternates: { canonical: "/services/endoscopic-foraminotomy-hyderabad/" },
   openGraph: {
     images: [
       {

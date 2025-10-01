@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import RelatedContent from "../../../components/RelatedContent";
 
 export const metadata: Metadata = {
-  title: "Endoscopic ULBD in Hyderabad | Lumbar Stenosis Treatment",
-  description: "Unilateral laminotomy bilateral decompression for lumbar stenosis. Minimally invasive relief for spinal canal narrowing in Hyderabad.",
-  alternates: { canonical: "/services/endoscopic-ulbd-hyderabad" },
+  title: "Endoscopic ULBD in Hyderabad | Lumbar Stenosis Decompression",
+  description: "Endoscopic ULBD for lumbar spinal stenosis—unilateral approach to bilateral decompression. Safety‑first, evidence‑based care.",
+  alternates: { canonical: "/services/endoscopic-ulbd-hyderabad/" },
   openGraph: {
     images: [
       {

@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import RelatedContent from "../../../components/RelatedContent";
 
 export const metadata: Metadata = {
-  title: "Trigeminal Neuralgia Treatment in Hyderabad | MVD & Options",
-  description: "Personalized trigeminal neuralgia care: medicines, microvascular decompression (MVD), and radiosurgery options. Call +91-9778280044.",
-  alternates: { canonical: "/conditions/trigeminal-neuralgia-treatment-hyderabad" },
+  title: "Trigeminal Neuralgia Treatment in Hyderabad | MVD & Radiosurgery",
+  description: "Medication optimization, microvascular decompression, radiosurgery, and percutaneous options. Tailored to imaging and symptoms.",
+  alternates: { canonical: "/conditions/trigeminal-neuralgia-treatment-hyderabad/" },
   openGraph: {
     images: [
       {

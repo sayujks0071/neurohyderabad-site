@@ -5,8 +5,8 @@ import Breadcrumbs from "../../components/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Brain Tumor Surgery in Hyderabad | Microsurgery",
-  description: "Microsurgical brain tumor surgery in Hyderabad with neuronavigation and monitoring. Focus on maximal safe resection. Book a consultation.",
-  alternates: { canonical: "/services/brain-tumor-surgery-hyderabad" },
+  description: "Neuronavigation‑guided microsurgery with neuromonitoring for maximal safe resection when appropriate. Multidisciplinary care.",
+  alternates: { canonical: "/services/brain-tumor-surgery-hyderabad/" },
   openGraph: {
     images: [
       {

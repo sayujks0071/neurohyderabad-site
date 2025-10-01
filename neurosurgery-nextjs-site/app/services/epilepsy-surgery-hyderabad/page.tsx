@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import RelatedContent from "../../../components/RelatedContent";
 
 export const metadata: Metadata = {
-  title: "Epilepsy Surgery in Hyderabad | Multimodal Workup & Care",
-  description: "Surgical options for drug-resistant epilepsy with video EEG, MRI, and neuropsych workup. Consult Dr. Sayuj: +91-9778280044.",
-  alternates: { canonical: "/services/epilepsy-surgery-hyderabad" },
+  title: "Epilepsy Surgery in Hyderabad | Comprehensive Evaluation",
+  description: "For drug‑resistant epilepsy: LITT/resection/VNS after full workup. Individualized plans and clear risk counseling.",
+  alternates: { canonical: "/services/epilepsy-surgery-hyderabad/" },
   openGraph: {
     images: [
       {

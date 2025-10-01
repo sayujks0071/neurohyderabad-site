@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import RelatedContent from "../../../components/RelatedContent";
 
 export const metadata: Metadata = {
-  title: "Spinal Stenosis Treatment in Hyderabad | MISS Decompression",
-  description: "Personalized care for spinal stenosis: medicines, physio, injections, and minimally invasive decompression when required. Call +91-9778280044.",
-  alternates: { canonical: "/conditions/spinal-stenosis-treatment-hyderabad" },
+  title: "Spinal Stenosis Treatment in Hyderabad | Endoscopic ULBD",
+  description: "Image‑guided stenosis relief with endoscopic or microscopic decompression. Personalized rehab and safety‑first protocols.",
+  alternates: { canonical: "/conditions/spinal-stenosis-treatment-hyderabad/" },
   openGraph: {
     images: [
       {
