@@ -68,6 +68,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: `${baseUrl}/services/microvascular-decompression-mvd-hyderabad/`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/services/radiosurgery-gamma-knife-hyderabad/`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/conditions/`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
