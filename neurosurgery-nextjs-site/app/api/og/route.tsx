@@ -85,7 +85,7 @@ async function loadInterFonts() {
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
-  const title = searchParams.get("title") || "Dr. Sayuj Krishnan";
+  const title = searchParams.get("title") || "Dr Sayuj Krishnan";
   const subtitle =
     searchParams.get("subtitle") || "Neurosurgeon • Hyderabad, India";
   const BRAND = normalizeBrand(searchParams.get("brand"));
@@ -159,7 +159,7 @@ export async function GET(req: NextRequest) {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={logoDataUrl}
-                    alt="Dr. Sayuj Krishnan logo"
+                    alt="Dr Sayuj Krishnan logo"
                     width={120}
                     height={120}
                     style={{ objectFit: "contain" }}

@@ -22,7 +22,7 @@ export const metadata: Metadata = {
         url: 'https://www.drsayuj.com/images/og-default.jpg',
         width: 1200,
         height: 630,
-        alt: 'Sciatica Treatment - Dr. Sayuj Krishnan'
+        alt: 'Sciatica Treatment - Dr Sayuj Krishnan'
       }
     ]
   },
@@ -150,7 +150,7 @@ export default function SciaticaTreatmentPage() {
               Comprehensive treatment approach for sciatica with conservative-first care and minimally invasive surgical options
             </p>
             <div className="mt-4 text-sm text-gray-500">
-              Last medically reviewed: October 1, 2025 by Dr. Sayuj Krishnan
+              Last medically reviewed: October 1, 2025 by Dr Sayuj Krishnan
             </div>
           </header>
 
@@ -402,7 +402,7 @@ export default function SciaticaTreatmentPage() {
                   Educational content only; decisions are individualized after exam and imaging. No outcome is guaranteed.
                 </p>
                 <p className="text-yellow-700 text-sm mt-2">
-                  Last medically reviewed: October 1, 2025 by Dr. Sayuj Krishnan
+                  Last medically reviewed: October 1, 2025 by Dr Sayuj Krishnan
                 </p>
               </div>
             </section>

@@ -8,8 +8,8 @@ import Image from "next/image";
 export const revalidate = 86400;
 
 export const metadata: Metadata = {
-  title: "Blog | Dr. Sayuj Krishnan - Neurosurgery Insights",
-  description: "Latest insights, research, and updates in neurosurgery from Dr. Sayuj Krishnan. Expert articles on brain and spine conditions, treatments, and innovations.",
+  title: "Blog | Dr Sayuj Krishnan - Neurosurgery Insights",
+  description: "Latest insights, research, and updates in neurosurgery from Dr Sayuj Krishnan. Expert articles on brain and spine conditions, treatments, and innovations.",
   alternates: {
     canonical: "/blog",
   },
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
         url: `${SITE_URL}/api/og?title=${encodeURIComponent("Neurosurgery Blog")}&subtitle=${encodeURIComponent("Expert insights & research")}`,
         width: 1200,
         height: 630,
-        alt: "Neurosurgery Blog — Dr. Sayuj Krishnan",
+        alt: "Neurosurgery Blog — Dr Sayuj Krishnan",
       },
     ],
   },

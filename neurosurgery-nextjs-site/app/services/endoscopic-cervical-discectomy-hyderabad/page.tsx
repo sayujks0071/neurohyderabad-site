@@ -22,7 +22,7 @@ export const metadata: Metadata = {
         url: 'https://www.drsayuj.com/images/og-default.jpg',
         width: 1200,
         height: 630,
-        alt: 'Endoscopic Cervical Discectomy - Dr. Sayuj Krishnan'
+        alt: 'Endoscopic Cervical Discectomy - Dr Sayuj Krishnan'
       }
     ]
   },
@@ -225,7 +225,7 @@ export default function EndoscopicCervicalDiscectomyPage() {
                 <li>Swallowing difficulties (temporary)</li>
               </ul>
               <p className="mt-4">
-                Dr. Sayuj Krishnan discusses all risks and benefits during consultation to ensure informed decision-making.
+                Dr Sayuj Krishnan discusses all risks and benefits during consultation to ensure informed decision-making.
               </p>
             </section>
 
@@ -297,7 +297,7 @@ export default function EndoscopicCervicalDiscectomyPage() {
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">Why Choose Dr. Sayuj Krishnan?</h2>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">Why Choose Dr Sayuj Krishnan?</h2>
               <ul className="list-disc pl-6 space-y-2">
                 <li>Expertise in advanced endoscopic cervical spine surgery</li>
                 <li>Motion-preserving techniques for optimal outcomes</li>
@@ -312,7 +312,7 @@ export default function EndoscopicCervicalDiscectomyPage() {
               <h2 className="text-2xl font-semibold text-gray-900 mb-4">Call to Action</h2>
               <div className="bg-blue-50 border-l-4 border-blue-400 p-6">
                 <p className="text-lg text-blue-800 mb-4">
-                  If you're experiencing cervical radiculopathy or neck/arm pain, schedule a consultation with Dr. Sayuj Krishnan at Yashoda Hospitals – Malakpet. Bring your MRI and medical history for a comprehensive evaluation.
+                  If you're experiencing cervical radiculopathy or neck/arm pain, schedule a consultation with Dr Sayuj Krishnan at Yashoda Hospitals – Malakpet. Bring your MRI and medical history for a comprehensive evaluation.
                 </p>
                 <a 
                   href="/appointments/" 

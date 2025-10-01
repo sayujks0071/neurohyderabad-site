@@ -19,9 +19,9 @@ export const metadata: Metadata = {
   title: "Neurosurgeon in Hyderabad | Endoscopic Spine Surgeon",
   description: "Endoscopic discectomy, foraminotomy, and minimally invasive spine surgery in Hyderabad. Same-day mobilization. Book a consultation.",
   keywords: "neurosurgeon hyderabad, brain surgeon, spine specialist, brain tumor surgery, spine surgery, dr sayuj krishnan",
-  authors: [{ name: "Dr. Sayuj Krishnan" }],
-  creator: "Dr. Sayuj Krishnan",
-  publisher: "Dr. Sayuj Krishnan",
+  authors: [{ name: "Dr Sayuj Krishnan" }],
+  creator: "Dr Sayuj Krishnan",
+  publisher: "Dr Sayuj Krishnan",
   alternates: {
     canonical: SITE_URL,
     languages: {
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Dr. Sayuj Krishnan | Full Endoscopic Spine Surgeon in Hyderabad",
+    title: "Dr Sayuj Krishnan | Full Endoscopic Spine Surgeon in Hyderabad",
     description: "Expert neurosurgeon in Hyderabad specializing in minimally invasive brain & spine surgery",
     url: SITE_URL,
     siteName: "Dr. Sayuj — Brain & Spine Care",
@@ -41,13 +41,13 @@ export const metadata: Metadata = {
         url: "/images/og-default.jpg",
         width: 1200,
         height: 630,
-        alt: "Dr. Sayuj Krishnan — Neurosurgeon in Hyderabad",
+        alt: "Dr Sayuj Krishnan — Neurosurgeon in Hyderabad",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dr. Sayuj Krishnan | Full Endoscopic Spine Surgeon in Hyderabad",
+    title: "Dr Sayuj Krishnan | Full Endoscopic Spine Surgeon in Hyderabad",
     description: "Expert neurosurgeon specializing in minimally invasive brain & spine surgery",
     images: ["/images/og-default.jpg"],
     site: "@drsayuj",

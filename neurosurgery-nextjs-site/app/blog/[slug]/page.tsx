@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     : null;
 
   return {
-    title: `${postTitle} | Dr. Sayuj Krishnan Blog`,
+    title: `${postTitle} | Dr Sayuj Krishnan Blog`,
     description: post.excerpt.rendered.replace(/<[^>]*>/g, '').substring(0, 160),
     openGraph: {
       title: postTitle,
@@ -62,7 +62,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
         },
       ] : [
         {
-          url: `${SITE_URL}/api/og?title=${encodeURIComponent(postTitle)}&subtitle=${encodeURIComponent("Dr. Sayuj Krishnan Blog")}`,
+          url: `${SITE_URL}/api/og?title=${encodeURIComponent(postTitle)}&subtitle=${encodeURIComponent("Dr Sayuj Krishnan Blog")}`,
           width: 1200,
           height: 630,
           alt: postTitle,
@@ -219,7 +219,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <div className="mt-12 p-8 bg-blue-50 rounded-lg text-center">
           <h2 className="text-2xl font-semibold mb-4">Need Expert Neurosurgical Care?</h2>
           <p className="text-gray-600 mb-6">
-            Contact Dr. Sayuj Krishnan for a consultation and personalized treatment plan.
+            Contact Dr Sayuj Krishnan for a consultation and personalized treatment plan.
           </p>
           <Link 
             href="/appointments"

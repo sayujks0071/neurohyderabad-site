@@ -29,7 +29,7 @@ export default function Home() {
               Best Neurosurgeon in Hyderabad — Brain & Spine Surgery
             </h1>
             <p className="text-xl md:text-2xl mb-8">
-              Dr. Sayuj Krishnan — Leading Expert in Minimally Invasive Neurosurgery
+              Dr Sayuj Krishnan — Leading Expert in Minimally Invasive Neurosurgery
               <br />
               Specializing in Endoscopic Spine Surgery, Brain Tumor Surgery & Epilepsy Treatment
             </p>
@@ -48,7 +48,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <p className="text-gray-700">
-              <strong>Medically reviewed by Dr. Sayuj Krishnan</strong> — MBBS, DNB Neurosurgery (Direct 6 years), 
+              <strong>Medically reviewed by Dr Sayuj Krishnan</strong> — MBBS, DNB Neurosurgery (Direct 6 years), 
               Fellowship in Minimally Invasive and Advanced Spine Surgery, Observer-ship in Full Endoscopic Spine Surgery (Germany)
             </p>
             <p className="text-sm text-gray-600 mt-2">
@@ -75,7 +75,7 @@ export default function Home() {
                     </div>
                   </div>
                 <p className="text-lg text-gray-700 mb-6">
-                  Dr. Sayuj Krishnan uses advanced minimally invasive spine surgery techniques. 
+                  Dr Sayuj Krishnan uses advanced minimally invasive spine surgery techniques. 
                   These methods help patients recover faster with less pain and smaller scars.
                 </p>
                 <ul className="space-y-3 text-gray-700">
@@ -158,7 +158,7 @@ export default function Home() {
               </div>
               <div>
                 <p className="text-lg text-gray-700 mb-6">
-                  Dr. Sayuj Krishnan performs advanced brain tumor surgery. He uses the latest 
+                  Dr Sayuj Krishnan performs advanced brain tumor surgery. He uses the latest 
                   microsurgical techniques, neuronavigation, and monitoring to safely remove tumors 
                   while protecting brain function.
                 </p>
@@ -188,7 +188,7 @@ export default function Home() {
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
                 <p className="text-lg text-gray-700 mb-6">
-                  Trigeminal neuralgia causes severe facial pain that can be debilitating. Dr. Sayuj Krishnan 
+                  Trigeminal neuralgia causes severe facial pain that can be debilitating. Dr Sayuj Krishnan 
                   offers comprehensive treatment options from medical therapy to advanced surgical procedures 
                   including microvascular decompression (MVD) and radiosurgery.
                 </p>
@@ -264,7 +264,7 @@ export default function Home() {
               </div>
               <div>
                 <p className="text-lg text-gray-700 mb-6">
-                  Dr. Sayuj Krishnan specializes in epilepsy surgery for patients who don't respond 
+                  Dr Sayuj Krishnan specializes in epilepsy surgery for patients who don't respond 
                   to medications. With advanced techniques including laser ablation, resection surgery, 
                   and vagus nerve stimulation (VNS), he helps patients achieve better seizure control.
                 </p>
@@ -296,7 +296,7 @@ export default function Home() {
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-12">Why Choose Dr. Sayuj Krishnan</h2>
+            <h2 className="text-3xl font-bold text-center mb-12">Why Choose Dr Sayuj Krishnan</h2>
             <div className="grid md:grid-cols-3 gap-8">
               <div className="bg-white p-8 rounded-lg shadow-lg text-center">
                 <div className="text-4xl mb-4">🎓</div>
@@ -335,7 +335,7 @@ export default function Home() {
             <div className="grid md:grid-cols-2 gap-12">
               <div>
                 <p className="text-lg text-gray-700 mb-6">
-                  Dr. Sayuj Krishnan serves patients across Hyderabad and surrounding areas, providing 
+                  Dr Sayuj Krishnan serves patients across Hyderabad and surrounding areas, providing 
                   expert neurosurgical care at Yashoda Hospital, Malakpet. As the leading endoscopic spine surgeon 
                   in Hyderabad, Dr. Krishnan specializes in minimally invasive procedures for patients from 
                   Jubilee Hills, Banjara Hills, Hi-Tech City, Gachibowli, Madhapur, Kondapur, and throughout Telangana.
@@ -436,7 +436,7 @@ export default function Home() {
                 </p>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-md">
-                <h3 className="text-xl font-semibold mb-3 text-blue-700">What makes Dr. Sayuj Krishnan the best neurosurgeon in Hyderabad?</h3>
+                <h3 className="text-xl font-semibold mb-3 text-blue-700">What makes Dr Sayuj Krishnan the best neurosurgeon in Hyderabad?</h3>
                 <p className="text-gray-700">
                   Dr. Krishnan combines 15+ years of experience with advanced training in Germany, state-of-the-art 
                   minimally invasive techniques, and a patient-centered approach. His expertise in endoscopic spine 
@@ -497,7 +497,7 @@ export default function Home() {
               </div>
               
               <div className="bg-blue-50 p-8 rounded-lg">
-                <h3 className="text-2xl font-semibold mb-6 text-blue-800">Why Choose Dr. Sayuj Krishnan?</h3>
+                <h3 className="text-2xl font-semibold mb-6 text-blue-800">Why Choose Dr Sayuj Krishnan?</h3>
                 <ul className="space-y-4 text-blue-700">
                   <li className="flex items-start">
                     <span className="text-blue-600 mr-3 mt-1">✓</span>
@@ -537,7 +537,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="bg-gray-800 text-white py-8">
         <div className="container mx-auto px-4 text-center">
-          <p>&copy; {new Date().getFullYear()} Dr. Sayuj Krishnan. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Dr Sayuj Krishnan. All rights reserved.</p>
         </div>
       </footer>
 

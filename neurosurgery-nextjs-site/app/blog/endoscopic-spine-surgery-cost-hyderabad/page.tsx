@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     type: 'article',
     publishedTime: '2025-09-30T00:00:00.000Z',
     modifiedTime: '2025-09-30T00:00:00.000Z',
-    authors: ['Dr. Sayuj Krishnan'],
+    authors: ['Dr Sayuj Krishnan'],
     section: 'Spine Surgery',
     tags: ['endoscopic spine surgery', 'cost', 'hyderabad', 'insurance', 'day care']
   },
@@ -267,7 +267,7 @@ export default function EndoscopicSpineSurgeryCostPage() {
               Call to action
             </h2>
             <p className="mb-4">
-              If you're considering endoscopic spine surgery in Hyderabad, schedule an evaluation with Dr. Sayuj Krishnan at Yashoda Hospitals – Malakpet. Bring your MRI and policy details to receive a precise, personalized estimate and a clear recovery plan.
+              If you're considering endoscopic spine surgery in Hyderabad, schedule an evaluation with Dr Sayuj Krishnan at Yashoda Hospitals – Malakpet. Bring your MRI and policy details to receive a precise, personalized estimate and a clear recovery plan.
             </p>
             <div className="bg-blue-50 border-l-4 border-blue-400 p-4">
               <p className="text-blue-800">

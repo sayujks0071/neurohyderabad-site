@@ -6,7 +6,7 @@ import Link from "next/link";
 export const revalidate = 86400;
 
 export const metadata: Metadata = {
-  title: "Services | Dr. Sayuj Krishnan - Neurosurgeon in Hyderabad",
+  title: "Services | Dr Sayuj Krishnan - Neurosurgeon in Hyderabad",
   description: "Neurosurgery services in Hyderabad: brain tumor surgery, MISS/endoscopic spine, epilepsy surgery, and facial pain care.",
   alternates: {
     canonical: "/services",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
         url: `${SITE_URL}/api/og?title=${encodeURIComponent("Neurosurgical Services")}&subtitle=${encodeURIComponent("Expert brain & spine care")}`,
         width: 1200,
         height: 630,
-        alt: "Neurosurgical Services — Dr. Sayuj Krishnan",
+        alt: "Neurosurgical Services — Dr Sayuj Krishnan",
       },
     ],
   },
@@ -59,7 +59,7 @@ export default function ServicesPage() {
     <main className="container mx-auto px-4 py-16">
       <h1 className="text-4xl font-bold text-center mb-8">Neurosurgical Services</h1>
       <p className="text-lg text-gray-600 mb-12 text-center max-w-3xl mx-auto">
-        Dr. Sayuj Krishnan offers comprehensive neurosurgical services using the latest minimally invasive techniques 
+        Dr Sayuj Krishnan offers comprehensive neurosurgical services using the latest minimally invasive techniques 
         for optimal patient outcomes and faster recovery.
       </p>
       

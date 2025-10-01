@@ -12,7 +12,7 @@ export const metadata: Metadata = {
         url: `${SITE_URL}/api/og?title=${encodeURIComponent("Epilepsy Surgery in Hyderabad")}&subtitle=${encodeURIComponent("Drug-resistant seizure treatment")}`,
         width: 1200,
         height: 630,
-        alt: "Epilepsy Surgery — Dr. Sayuj Krishnan",
+        alt: "Epilepsy Surgery — Dr Sayuj Krishnan",
       },
     ],
   },
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     images: [
       {
         url: `${SITE_URL}/api/og?title=${encodeURIComponent("Epilepsy Surgery in Hyderabad")}&subtitle=${encodeURIComponent("Drug-resistant seizure treatment")}`,
-        alt: "Epilepsy Surgery — Dr. Sayuj Krishnan",
+        alt: "Epilepsy Surgery — Dr Sayuj Krishnan",
       },
     ],
   },

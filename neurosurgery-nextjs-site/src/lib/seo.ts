@@ -30,7 +30,7 @@ export function serviceJsonLd({
   url,
   areaServed = "Hyderabad, Telangana, India",
   provider = {
-    name: "Dr. Sayuj Krishnan",
+    name: "Dr Sayuj Krishnan",
     url: SITE_URL,
     sameAs: [
       "https://g.co/kgs/9366939683880052414",
@@ -209,7 +209,7 @@ export function physicianJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "Physician",
-    name: "Dr. Sayuj Krishnan",
+    name: "Dr Sayuj Krishnan",
     url: SITE_URL,
     medicalSpecialty: ["Neurosurgery", "Brain Surgery", "Spine Surgery"],
     address: {

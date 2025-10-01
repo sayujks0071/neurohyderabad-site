@@ -19,7 +19,7 @@ export const metadata: Metadata = {
         url: `${SITE_URL}/api/og?title=${encodeURIComponent("Brain Tumor Surgery in Hyderabad")}&subtitle=${encodeURIComponent("Microsurgery • Maximal safe resection")}`,
         width: 1200,
         height: 630,
-        alt: "Brain Tumor Surgery — Dr. Sayuj Krishnan",
+        alt: "Brain Tumor Surgery — Dr Sayuj Krishnan",
       },
     ],
   },
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     images: [
       {
         url: `${SITE_URL}/api/og?title=${encodeURIComponent("Brain Tumor Surgery in Hyderabad")}&subtitle=${encodeURIComponent("Microsurgery • Maximal safe resection")}`,
-        alt: "Brain Tumor Surgery — Dr. Sayuj Krishnan",
+        alt: "Brain Tumor Surgery — Dr Sayuj Krishnan",
       },
     ],
   },

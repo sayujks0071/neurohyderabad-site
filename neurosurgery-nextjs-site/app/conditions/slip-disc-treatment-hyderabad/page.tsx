@@ -12,7 +12,7 @@ export const metadata: Metadata = {
         url: `${SITE_URL}/api/og?title=${encodeURIComponent("Slip Disc (Herniated Disc) Treatment in Hyderabad")}&subtitle=${encodeURIComponent("Endoscopic discectomy • Same-day ambulation")}`,
         width: 1200,
         height: 630,
-        alt: "Slip Disc Treatment — Dr. Sayuj Krishnan",
+        alt: "Slip Disc Treatment — Dr Sayuj Krishnan",
       },
     ],
   },
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     images: [
       {
         url: `${SITE_URL}/api/og?title=${encodeURIComponent("Slip Disc (Herniated Disc) Treatment in Hyderabad")}&subtitle=${encodeURIComponent("Endoscopic discectomy • Same-day ambulation")}`,
-        alt: "Slip Disc Treatment — Dr. Sayuj Krishnan",
+        alt: "Slip Disc Treatment — Dr Sayuj Krishnan",
       },
     ],
   },

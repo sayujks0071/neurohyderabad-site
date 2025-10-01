@@ -5,8 +5,8 @@ export default function AppointmentSchema() {
     "@context": "https://schema.org",
     "@type": "ScheduleAction",
     "@id": `${SITE_URL}/appointments#schedule`,
-    "name": "Schedule Appointment with Dr. Sayuj Krishnan",
-    "description": "Book a consultation with Dr. Sayuj Krishnan, leading neurosurgeon in Hyderabad",
+    "name": "Schedule Appointment with Dr Sayuj Krishnan",
+    "description": "Book a consultation with Dr Sayuj Krishnan, leading neurosurgeon in Hyderabad",
     "target": {
       "@type": "EntryPoint",
       "urlTemplate": `${SITE_URL}/appointments`,
@@ -23,7 +23,7 @@ export default function AppointmentSchema() {
     "provider": {
       "@type": "Physician",
       "@id": `${SITE_URL}/#physician`,
-      "name": "Dr. Sayuj Krishnan",
+      "name": "Dr Sayuj Krishnan",
       "url": SITE_URL
     }
   };

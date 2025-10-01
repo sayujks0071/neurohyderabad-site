@@ -6,7 +6,7 @@ export default function WebsiteSchema() {
     "@type": "WebSite",
     "@id": `${SITE_URL}/#website`,
     "url": SITE_URL,
-    "name": "Dr. Sayuj Krishnan - Neurosurgeon in Hyderabad",
+    "name": "Dr Sayuj Krishnan - Neurosurgeon in Hyderabad",
     "description": "Expert neurosurgeon in Hyderabad specializing in minimally invasive brain & spine surgery",
     "potentialAction": {
       "@type": "SearchAction",

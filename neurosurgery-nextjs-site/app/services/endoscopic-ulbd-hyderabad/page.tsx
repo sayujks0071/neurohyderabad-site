@@ -20,7 +20,7 @@ export const metadata: Metadata = {
         url: `${SITE_URL}/api/og?title=${encodeURIComponent("Endoscopic ULBD in Hyderabad")}&subtitle=${encodeURIComponent("Lumbar Stenosis • Tiny incision relief")}`,
         width: 1200,
         height: 630,
-        alt: "Endoscopic ULBD - Dr. Sayuj Krishnan",
+        alt: "Endoscopic ULBD - Dr Sayuj Krishnan",
       },
     ],
   },
@@ -208,7 +208,7 @@ export default function EndoscopicULBDPage() {
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">Why choose Dr. Sayuj Krishnan</h2>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">Why choose Dr Sayuj Krishnan</h2>
             <ul className="list-disc pl-6 space-y-2 text-gray-700">
               <li>Expertise in endoscopic and minimally invasive decompression techniques</li>
               <li>Safety‑first protocols with detailed pre‑op planning and structured follow‑up</li>
@@ -274,7 +274,7 @@ export default function EndoscopicULBDPage() {
           </section>
 
           <div className="mt-8 text-sm text-gray-500 text-center">
-            <p>Last medically reviewed: October 1, 2025 — Medical reviewer: Dr. Sayuj Krishnan, MBBS, MS, MCh (Neurosurgery)</p>
+            <p>Last medically reviewed: October 1, 2025 — Medical reviewer: Dr Sayuj Krishnan, MBBS, DNB Neurosurgery (Direct 6 years)</p>
           </div>
         </article>
 

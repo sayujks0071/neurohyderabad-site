@@ -95,7 +95,7 @@ export default function Footer() {
         <div className="border-t border-gray-700 mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-sm text-gray-400 mb-4 md:mb-0">
-              <p>© 2024 Dr. Sayuj Krishnan. All rights reserved.</p>
+              <p>© 2024 Dr Sayuj Krishnan. All rights reserved.</p>
               <p className="mt-1">
                 MBBS, DNB Neurosurgery (Direct 6 years) | Fellowship in Minimally Invasive and Advanced Spine Surgery
               </p>

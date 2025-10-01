@@ -3,16 +3,16 @@ import type { Metadata } from "next";
 import Breadcrumbs from "../components/Breadcrumbs";
 
 export const metadata: Metadata = {
-  title: "Contact Dr. Sayuj Krishnan | Neurosurgeon in Hyderabad",
-  description: "Contact Dr. Sayuj Krishnan for neurosurgical consultations. Phone: +91 9778280044, Email: neurospinehyd@drsayuj.com. Located at Yashoda Hospital, Malakpet.",
+  title: "Contact Dr Sayuj Krishnan | Neurosurgeon in Hyderabad",
+  description: "Contact Dr Sayuj Krishnan for neurosurgical consultations. Phone: +91 9778280044, Email: neurospinehyd@drsayuj.com. Located at Yashoda Hospital, Malakpet.",
   alternates: { canonical: "/contact" },
   openGraph: {
     images: [
       {
-        url: `${SITE_URL}/api/og?title=${encodeURIComponent("Contact Dr. Sayuj Krishnan")}&subtitle=${encodeURIComponent("Expert neurosurgical care")}`,
+        url: `${SITE_URL}/api/og?title=${encodeURIComponent("Contact Dr Sayuj Krishnan")}&subtitle=${encodeURIComponent("Expert neurosurgical care")}`,
         width: 1200,
         height: 630,
-        alt: "Contact Dr. Sayuj Krishnan — Neurosurgeon in Hyderabad",
+        alt: "Contact Dr Sayuj Krishnan — Neurosurgeon in Hyderabad",
       },
     ],
   },
@@ -28,7 +28,7 @@ export default function ContactPage() {
         ]}
       />
       <main className="container mx-auto px-4 py-16">
-        <h1 className="text-4xl font-bold text-center mb-8">Contact Dr. Sayuj Krishnan</h1>
+        <h1 className="text-4xl font-bold text-center mb-8">Contact Dr Sayuj Krishnan</h1>
       
       <div className="max-w-4xl mx-auto">
         <div className="grid md:grid-cols-2 gap-8 mb-12">
@@ -117,7 +117,7 @@ export default function ContactPage() {
           <h2 className="text-2xl font-semibold mb-6 text-blue-700">Location Details</h2>
           <div className="text-gray-600">
             <p className="mb-4">
-              Dr. Sayuj Krishnan practices at Yashoda Hospital, one of Hyderabad's leading healthcare facilities, 
+              Dr Sayuj Krishnan practices at Yashoda Hospital, one of Hyderabad's leading healthcare facilities, 
               providing comprehensive neurosurgical care with state-of-the-art equipment and facilities.
             </p>
             <div className="bg-gray-50 p-4 rounded-lg">

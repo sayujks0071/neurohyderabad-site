@@ -20,7 +20,7 @@ export const metadata: Metadata = {
         url: `${SITE_URL}/api/og?title=${encodeURIComponent("Trigeminal Neuralgia Treatment in Hyderabad")}&subtitle=${encodeURIComponent("Facial Pain Relief • MVD & Radiosurgery")}`,
         width: 1200,
         height: 630,
-        alt: "Trigeminal Neuralgia Treatment - Dr. Sayuj Krishnan",
+        alt: "Trigeminal Neuralgia Treatment - Dr Sayuj Krishnan",
       },
     ],
   },
@@ -176,7 +176,7 @@ export default function TrigeminalNeuralgiaTreatmentPage() {
                 </ul>
               </div>
             </div>
-          </section>
+        </section>
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">Choosing the right option</h2>
@@ -285,9 +285,9 @@ export default function TrigeminalNeuralgiaTreatmentPage() {
           </section>
 
           <div className="mt-8 text-sm text-gray-500 text-center">
-            <p>Last medically reviewed: October 1, 2025 — Medical reviewer: Dr. Sayuj Krishnan, MBBS, MS, MCh (Neurosurgery)</p>
-          </div>
-        </article>
+            <p>Last medically reviewed: October 1, 2025 — Medical reviewer: Dr Sayuj Krishnan, MBBS, DNB Neurosurgery (Direct 6 years)</p>
+        </div>
+      </article>
 
         <RelatedContent 
           items={[
@@ -316,8 +316,8 @@ export default function TrigeminalNeuralgiaTreatmentPage() {
               category: "condition" as const
             }
           ]}
-        />
-      </main>
+      />
+    </main>
     </>
   );
 }

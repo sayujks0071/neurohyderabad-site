@@ -2,16 +2,16 @@ import { SITE_URL } from "../../src/lib/seo";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About Dr. Sayuj Krishnan | Leading Neurosurgeon in Hyderabad",
-  description: "Dr. Sayuj Krishnan is a highly experienced neurosurgeon with 15 years of expertise in minimally invasive brain and spine surgery in Hyderabad. MBBS, DNB Neurosurgery, Fellowship in MISS.",
+  title: "About Dr Sayuj Krishnan | Leading Neurosurgeon in Hyderabad",
+  description: "Dr Sayuj Krishnan is a highly experienced neurosurgeon with 15 years of expertise in minimally invasive brain and spine surgery in Hyderabad. MBBS, DNB Neurosurgery, Fellowship in MISS.",
   alternates: { canonical: "/about" },
   openGraph: {
     images: [
       {
-        url: `${SITE_URL}/api/og?title=${encodeURIComponent("About Dr. Sayuj Krishnan")}&subtitle=${encodeURIComponent("15 years of neurosurgical expertise")}`,
+        url: `${SITE_URL}/api/og?title=${encodeURIComponent("About Dr Sayuj Krishnan")}&subtitle=${encodeURIComponent("15 years of neurosurgical expertise")}`,
         width: 1200,
         height: 630,
-        alt: "About Dr. Sayuj Krishnan — Neurosurgeon in Hyderabad",
+        alt: "About Dr Sayuj Krishnan — Neurosurgeon in Hyderabad",
       },
     ],
   },
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <main className="container mx-auto px-4 py-16">
-      <h1 className="text-4xl font-bold text-center mb-8">About Dr. Sayuj Krishnan</h1>
+      <h1 className="text-4xl font-bold text-center mb-8">About Dr Sayuj Krishnan</h1>
       
       <div className="max-w-4xl mx-auto">
         {/* Professional Credentials */}
@@ -79,7 +79,7 @@ export default function AboutPage() {
         <div className="bg-white p-8 rounded-lg shadow-md mb-8">
           <h2 className="text-2xl font-semibold mb-6 text-blue-700">Practice Philosophy</h2>
           <p className="text-gray-600 mb-4">
-            Dr. Sayuj Krishnan believes in providing personalized, evidence-based neurosurgical care that prioritizes 
+            Dr Sayuj Krishnan believes in providing personalized, evidence-based neurosurgical care that prioritizes 
             patient safety, optimal outcomes, and minimal invasiveness. His approach combines advanced surgical 
             techniques with compassionate patient care.
           </p>
@@ -148,7 +148,7 @@ export default function AboutPage() {
         <div className="text-center bg-blue-50 p-8 rounded-lg">
           <h2 className="text-2xl font-semibold mb-4">Schedule a Consultation</h2>
           <p className="text-gray-600 mb-6">
-            Experience expert neurosurgical care with Dr. Sayuj Krishnan. Get personalized treatment 
+            Experience expert neurosurgical care with Dr Sayuj Krishnan. Get personalized treatment 
             for your neurological condition with advanced minimally invasive techniques.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

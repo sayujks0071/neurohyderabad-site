@@ -22,7 +22,7 @@ export const metadata: Metadata = {
         url: 'https://www.drsayuj.com/images/og-default.jpg',
         width: 1200,
         height: 630,
-        alt: 'Spinal Stenosis Treatment - Dr. Sayuj Krishnan'
+        alt: 'Spinal Stenosis Treatment - Dr Sayuj Krishnan'
       }
     ]
   },
@@ -150,7 +150,7 @@ export default function SpinalStenosisTreatmentPage() {
               Comprehensive treatment approach for lumbar spinal stenosis with conservative-first care and minimally invasive options
             </p>
             <div className="mt-4 text-sm text-gray-500">
-              Last medically reviewed: October 1, 2025 by Dr. Sayuj Krishnan
+              Last medically reviewed: October 1, 2025 by Dr Sayuj Krishnan
             </div>
           </header>
 
@@ -408,7 +408,7 @@ export default function SpinalStenosisTreatmentPage() {
                   Educational content only; not a substitute for clinical evaluation. Treatment is individualized after exam and imaging. No outcome is guaranteed.
                 </p>
                 <p className="text-yellow-700 text-sm mt-2">
-                  Last medically reviewed: October 1, 2025 by Dr. Sayuj Krishnan
+                  Last medically reviewed: October 1, 2025 by Dr Sayuj Krishnan
                 </p>
               </div>
             </section>

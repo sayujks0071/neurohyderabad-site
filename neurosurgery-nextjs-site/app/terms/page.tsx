@@ -2,8 +2,8 @@ import { SITE_URL } from "../../src/lib/seo";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Terms of Service | Dr. Sayuj Krishnan - Neurosurgeon in Hyderabad",
-  description: "Terms of service for Dr. Sayuj Krishnan's neurosurgical practice in Hyderabad. Read our terms and conditions for using our website and services.",
+  title: "Terms of Service | Dr Sayuj Krishnan - Neurosurgeon in Hyderabad",
+  description: "Terms of service for Dr Sayuj Krishnan's neurosurgical practice in Hyderabad. Read our terms and conditions for using our website and services.",
   alternates: { canonical: "/terms" },
 };
 
@@ -21,7 +21,7 @@ export default function TermsPage() {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">Agreement to Terms</h2>
             <p>
-              By accessing and using the website {SITE_URL} and the services provided by Dr. Sayuj Krishnan, 
+              By accessing and using the website {SITE_URL} and the services provided by Dr Sayuj Krishnan, 
               you agree to be bound by these Terms of Service and all applicable laws and regulations. 
               If you do not agree with any of these terms, you are prohibited from using this site.
             </p>
@@ -35,7 +35,7 @@ export default function TermsPage() {
               physician or other qualified health provider with any questions you may have regarding a medical condition.
             </p>
             <p className="mt-4">
-              Dr. Sayuj Krishnan's services are provided in accordance with applicable medical standards and regulations. 
+              Dr Sayuj Krishnan's services are provided in accordance with applicable medical standards and regulations. 
               Individual results may vary, and no guarantee of specific outcomes is made.
             </p>
           </section>
@@ -60,7 +60,7 @@ export default function TermsPage() {
               Online appointment scheduling is provided as a convenience service. All appointments are subject to:
             </p>
             <ul className="list-disc list-inside space-y-2 mt-4">
-              <li>Availability of Dr. Sayuj Krishnan</li>
+              <li>Availability of Dr Sayuj Krishnan</li>
               <li>Confirmation by our office staff</li>
               <li>Completion of required medical history forms</li>
               <li>Payment of applicable consultation fees</li>
@@ -86,9 +86,9 @@ export default function TermsPage() {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">Limitation of Liability</h2>
             <p>
-              In no event shall Dr. Sayuj Krishnan or his representatives be liable for any damages (including, without limitation, 
+              In no event shall Dr Sayuj Krishnan or his representatives be liable for any damages (including, without limitation, 
               damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use 
-              the materials on this website, even if Dr. Sayuj Krishnan or an authorized representative has been notified orally 
+              the materials on this website, even if Dr Sayuj Krishnan or an authorized representative has been notified orally 
               or in writing of the possibility of such damage.
             </p>
           </section>
@@ -107,7 +107,7 @@ export default function TermsPage() {
               If you have any questions about these Terms of Service, please contact us:
             </p>
             <div className="mt-4 p-4 bg-gray-50 rounded-lg">
-              <p><strong>Dr. Sayuj Krishnan</strong></p>
+              <p><strong>Dr Sayuj Krishnan</strong></p>
               <p>Room No 317, OPD Block, Yashoda Hospital, Malakpet</p>
               <p>Hyderabad, Telangana 500036</p>
               <p>Phone: <a href="tel:+919778280044" className="text-blue-600 hover:underline">+91-9778280044</a></p>
@@ -118,7 +118,7 @@ export default function TermsPage() {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">Changes to Terms</h2>
             <p>
-              Dr. Sayuj Krishnan reserves the right to revise these terms of service at any time without notice. 
+              Dr Sayuj Krishnan reserves the right to revise these terms of service at any time without notice. 
               By using this website, you are agreeing to be bound by the then current version of these Terms of Service.
             </p>
           </section>

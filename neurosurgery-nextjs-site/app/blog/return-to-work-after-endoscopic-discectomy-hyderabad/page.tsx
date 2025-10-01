@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     type: 'article',
     publishedTime: '2025-10-01T00:00:00.000Z',
     modifiedTime: '2025-10-01T00:00:00.000Z',
-    authors: ['Dr. Sayuj Krishnan'],
+    authors: ['Dr Sayuj Krishnan'],
     section: 'Spine Surgery',
     tags: ['endoscopic discectomy', 'recovery', 'return to work', 'hyderabad', 'rehabilitation']
   },
@@ -369,7 +369,7 @@ export default function ReturnToWorkAfterEndoscopicDiscectomyPage() {
                   Educational only; not a substitute for clinical advice. Timelines vary; safety first.
                 </p>
                 <p className="text-yellow-700 text-sm mt-2">
-                  Last medically reviewed: October 1, 2025 by Dr. Sayuj Krishnan
+                  Last medically reviewed: October 1, 2025 by Dr Sayuj Krishnan
                 </p>
               </div>
             </section>

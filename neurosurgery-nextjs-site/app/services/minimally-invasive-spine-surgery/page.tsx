@@ -25,7 +25,7 @@ export const metadata: Metadata = {
         url: 'https://www.drsayuj.com/images/og-default.jpg',
         width: 1200,
         height: 630,
-        alt: 'Minimally Invasive Spine Surgery - Dr. Sayuj Krishnan'
+        alt: 'Minimally Invasive Spine Surgery - Dr Sayuj Krishnan'
       }
     ]
   },
@@ -283,7 +283,7 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
           </section>
 
           <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">Why choose Dr. Sayuj Krishnan at Yashoda Hospitals – Malakpet</h2>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">Why choose Dr Sayuj Krishnan at Yashoda Hospitals – Malakpet</h2>
               <ul className="list-disc pl-6 space-y-2">
                 <li>Expertise in Full Endoscopic Spine Surgery and minimally invasive techniques</li>
                 <li>Safety‑first protocols with neuronavigation and neuromonitoring where indicated</li>

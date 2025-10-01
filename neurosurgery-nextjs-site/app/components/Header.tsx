@@ -8,13 +8,13 @@ export default function Header() {
         <Link href="/" className="flex items-center gap-3">
           <Image
             src="/images/logo.svg"
-            alt="Dr. Sayuj Krishnan"
+            alt="Dr Sayuj Krishnan"
             width={32}
             height={32}
             className="h-8 w-8"
             priority
           />
-          <span className="font-semibold text-gray-900">Dr. Sayuj Krishnan</span>
+          <span className="font-semibold text-gray-900">Dr Sayuj Krishnan</span>
           <span className="sr-only">Homepage</span>
         </Link>
         

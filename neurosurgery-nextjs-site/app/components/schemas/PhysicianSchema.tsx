@@ -5,10 +5,10 @@ export default function PhysicianSchema() {
     "@context": "https://schema.org",
     "@type": "Physician",
     "@id": `${SITE_URL}/#physician`,
-    "name": "Dr. Sayuj Krishnan",
+    "name": "Dr Sayuj Krishnan",
     "url": SITE_URL,
     "image": `${SITE_URL}/images/dr-sayuj-krishnan.jpg`,
-    "description": "Dr. Sayuj Krishnan is a highly experienced neurosurgeon in Hyderabad specializing in minimally invasive brain & spine surgery",
+    "description": "Dr Sayuj Krishnan is a highly experienced neurosurgeon in Hyderabad specializing in minimally invasive brain & spine surgery",
     "medicalSpecialty": [
       "Neurosurgery",
       "Brain Surgery",

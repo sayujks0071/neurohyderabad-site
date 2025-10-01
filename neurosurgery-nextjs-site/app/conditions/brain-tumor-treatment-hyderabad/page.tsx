@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import RelatedContent from "../../../components/RelatedContent";
 
 export const metadata: Metadata = {
-  title: "Brain Tumor Treatment in Hyderabad | Advanced Neurosurgery — Dr. Sayuj Krishnan",
+  title: "Brain Tumor Treatment in Hyderabad | Advanced Neurosurgery — Dr Sayuj Krishnan",
   description: "Comprehensive care for brain tumors—diagnosis, surgery, and recovery. Microsurgery with neuronavigation and IOM in Hyderabad.",
   alternates: { canonical: "/conditions/brain-tumor-treatment-hyderabad" },
   openGraph: {
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
         url: `${SITE_URL}/api/og?title=${encodeURIComponent("Brain Tumor Treatment in Hyderabad")}&subtitle=${encodeURIComponent("Comprehensive diagnosis • Microsurgery")}`,
         width: 1200,
         height: 630,
-        alt: "Brain Tumor Treatment — Dr. Sayuj Krishnan",
+        alt: "Brain Tumor Treatment — Dr Sayuj Krishnan",
       },
     ],
   },
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     images: [
       {
         url: `${SITE_URL}/api/og?title=${encodeURIComponent("Brain Tumor Treatment in Hyderabad")}&subtitle=${encodeURIComponent("Comprehensive diagnosis • Microsurgery")}`,
-        alt: "Brain Tumor Treatment — Dr. Sayuj Krishnan",
+        alt: "Brain Tumor Treatment — Dr Sayuj Krishnan",
       },
     ],
   },

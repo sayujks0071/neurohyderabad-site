@@ -2,8 +2,8 @@ import { SITE_URL } from "../../src/lib/seo";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Dr. Sayuj Krishnan - Neurosurgeon in Hyderabad",
-  description: "Privacy policy for Dr. Sayuj Krishnan's neurosurgical practice in Hyderabad. Learn how we protect your personal and medical information.",
+  title: "Privacy Policy | Dr Sayuj Krishnan - Neurosurgeon in Hyderabad",
+  description: "Privacy policy for Dr Sayuj Krishnan's neurosurgical practice in Hyderabad. Learn how we protect your personal and medical information.",
   alternates: { canonical: "/privacy" },
 };
 
@@ -21,7 +21,7 @@ export default function PrivacyPage() {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">Introduction</h2>
             <p>
-              Dr. Sayuj Krishnan ("we," "our," or "us") is committed to protecting your privacy and personal information. 
+              Dr Sayuj Krishnan ("we," "our," or "us") is committed to protecting your privacy and personal information. 
               This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit 
               our website {SITE_URL} or use our services.
             </p>
@@ -99,7 +99,7 @@ export default function PrivacyPage() {
               If you have any questions about this Privacy Policy or our data practices, please contact us:
             </p>
             <div className="mt-4 p-4 bg-gray-50 rounded-lg">
-              <p><strong>Dr. Sayuj Krishnan</strong></p>
+              <p><strong>Dr Sayuj Krishnan</strong></p>
               <p>Room No 317, OPD Block, Yashoda Hospital, Malakpet</p>
               <p>Hyderabad, Telangana 500036</p>
               <p>Phone: <a href="tel:+919778280044" className="text-blue-600 hover:underline">+91-9778280044</a></p>

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Conditions | Dr. Sayuj Krishnan - Neurosurgeon in Hyderabad",
+  title: "Conditions | Dr Sayuj Krishnan - Neurosurgeon in Hyderabad",
   description: "Expert treatment for neurological conditions including slip disc, spinal stenosis, trigeminal neuralgia, and brain tumors in Hyderabad.",
   alternates: {
     canonical: "/conditions",
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
         url: `${SITE_URL}/api/og?title=${encodeURIComponent("Neurological Conditions")}&subtitle=${encodeURIComponent("Expert diagnosis & treatment")}`,
         width: 1200,
         height: 630,
-        alt: "Neurological Conditions — Dr. Sayuj Krishnan",
+        alt: "Neurological Conditions — Dr Sayuj Krishnan",
       },
     ],
   },
@@ -52,7 +52,7 @@ export default function ConditionsPage() {
     <main className="container mx-auto px-4 py-16">
       <h1 className="text-4xl font-bold text-center mb-8">Neurological Conditions We Treat</h1>
       <p className="text-lg text-gray-600 mb-12 text-center max-w-3xl mx-auto">
-        Dr. Sayuj Krishnan provides expert diagnosis and treatment for a wide range of neurological conditions 
+        Dr Sayuj Krishnan provides expert diagnosis and treatment for a wide range of neurological conditions 
         using the latest minimally invasive techniques and evidence-based approaches.
       </p>
       

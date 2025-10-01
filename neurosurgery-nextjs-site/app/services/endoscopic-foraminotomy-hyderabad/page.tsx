@@ -19,7 +19,7 @@ export const metadata: Metadata = {
         url: `/api/og?title=${encodeURIComponent("Endoscopic Foraminotomy in Hyderabad")}&subtitle=${encodeURIComponent("Foraminal Stenosis • Tiny incision relief")}`,
         width: 1200,
         height: 630,
-        alt: "Endoscopic Foraminotomy — Dr. Sayuj Krishnan"
+        alt: "Endoscopic Foraminotomy — Dr Sayuj Krishnan"
       }
     ]
   }
@@ -90,7 +90,7 @@ export default function EndoscopicForaminotomyPage() {
         <div className="prose max-w-none">
           <section className="mb-8">
             <h2>What is Endoscopic Foraminotomy?</h2>
-            <p>Endoscopic foraminotomy is a minimally invasive procedure that enlarges the neural foramen (the opening where nerve roots exit the spine) to relieve compression and pain. Dr. Sayuj Krishnan uses advanced endoscopic techniques to access the spine through tiny incisions, providing targeted relief for foraminal stenosis.</p>
+            <p>Endoscopic foraminotomy is a minimally invasive procedure that enlarges the neural foramen (the opening where nerve roots exit the spine) to relieve compression and pain. Dr Sayuj Krishnan uses advanced endoscopic techniques to access the spine through tiny incisions, providing targeted relief for foraminal stenosis.</p>
           </section>
 
           <section className="mb-8">

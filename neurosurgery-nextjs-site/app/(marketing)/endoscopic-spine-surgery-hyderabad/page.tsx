@@ -3,12 +3,12 @@ import { JsonLd, loadJsonLd } from '../../../src/lib/seo/jsonld';
 import ReactMarkdown from 'react-markdown';
 
 export const metadata: Metadata = {
-  title: 'endoscopic-spine-surgery-hyderabad | Dr. Sayuj Krishnan - Brain & Spine Surgeon',
-  description: 'Expert neurosurgery services for endoscopic-spine-surgery-hyderabad in Hyderabad by Dr. Sayuj Krishnan',
+  title: 'endoscopic-spine-surgery-hyderabad | Dr Sayuj Krishnan - Brain & Spine Surgeon',
+  description: 'Expert neurosurgery services for endoscopic-spine-surgery-hyderabad in Hyderabad by Dr Sayuj Krishnan',
   keywords: ['endoscopic, spine, surgery, hyderabad', 'neurosurgery', 'hyderabad', 'dr sayuj krishnan'],
   openGraph: {
-    title: 'endoscopic-spine-surgery-hyderabad | Dr. Sayuj Krishnan',
-    description: 'Expert neurosurgery services for endoscopic-spine-surgery-hyderabad in Hyderabad by Dr. Sayuj Krishnan',
+    title: 'endoscopic-spine-surgery-hyderabad | Dr Sayuj Krishnan',
+    description: 'Expert neurosurgery services for endoscopic-spine-surgery-hyderabad in Hyderabad by Dr Sayuj Krishnan',
     type: 'website',
     locale: 'en_IN',
   },
