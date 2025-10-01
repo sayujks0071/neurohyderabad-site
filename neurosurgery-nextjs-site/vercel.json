@@ -8,11 +8,11 @@
   "cleanUrls": true,
   "redirects": [
     { "source": "/index.html", "destination": "/", "permanent": true },
-    { 
-      "source": "/(.*)", 
+    {
+      "source": "/(.*)",
       "has": [{ "type": "host", "value": "drsayuj.com" }],
-      "destination": "https://www.drsayuj.com/$1", 
-      "permanent": true 
+      "destination": "https://www.drsayuj.com/$1",
+      "permanent": true
     }
   ],
   "rewrites": [

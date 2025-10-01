@@ -1,20 +1,25 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+
+const WWW_HOST = 'www.drsayuj.com'
+const APEX_HOST = 'drsayuj.com'
 
 export function middleware(req: NextRequest) {
-  const url = req.nextUrl.clone();
-  const host = req.headers.get("host") || "";
-  
-  // Force HTTPS
-  if (url.protocol === 'http:') {
-    url.protocol = 'https:';
-    return NextResponse.redirect(url, 308);
+  const url = req.nextUrl.clone()
+  const host = req.headers.get('host') ?? ''
+  const proto = req.headers.get('x-forwarded-proto') ?? 'https' // 'http' or 'https'
+
+  // 1) Canonical host: apex -> www (force https in the same hop)
+  if (host === APEX_HOST) {
+    url.host = WWW_HOST
+    url.protocol = 'https'
+    return NextResponse.redirect(url, 308)
   }
-  
-  // Force www canonical: drsayuj.com -> www.drsayuj.com
-  if (host === "drsayuj.com") {
-    url.host = "www.drsayuj.com";
-    return NextResponse.redirect(url, 308);
+
+  // 2) Protocol: ensure https on any other host (e.g., www)
+  if (proto === 'http') {
+    url.protocol = 'https'
+    return NextResponse.redirect(url, 308)
   }
 
   // Protect drafts route - redirect to home if accessed publicly
@@ -29,8 +34,13 @@ export function middleware(req: NextRequest) {
     }
   }
 
-  return NextResponse.next();
+  return NextResponse.next()
 }
 
-export const config = { matcher: ['/((?!_next|api/health|images|assets).*)'] };
+export const config = {
+  matcher: [
+    // skip static/assets for perf
+    '/((?!_next|assets|images|favicon.ico|robots.txt|sitemap.xml|site.webmanifest).*)',
+  ],
+}
 
