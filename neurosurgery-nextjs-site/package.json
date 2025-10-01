@@ -10,7 +10,10 @@
     "promote:draft": "ts-node scripts/promote-draft.ts",
     "check:schemas": "ts-node scripts/check-schemas.ts",
     "check:lighthouse": "ts-node scripts/check-lighthouse.ts",
-    "lhci": "lhci autorun"
+    "lhci": "lhci autorun",
+    "seo:lh": "lhci autorun --collect.url=https://www.drsayuj.com --upload.target=temporary-public-storage",
+    "seo:a11y": "pa11y https://www.drsayuj.com --threshold 5 || true",
+    "seo:links": "blc -ro https://www.drsayuj.com || true"
   },
   "dependencies": {
     "@vercel/og": "^0.8.5",
@@ -26,7 +29,10 @@
     "@types/node": "^20.19.17",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "broken-link-checker": "^0.7.8",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
     "next-sitemap": "^4.2.3",
+    "pa11y": "^6.4.0",
     "tailwindcss": "^4",
     "ts-node": "^10.9.2",
     "typescript": "^5",

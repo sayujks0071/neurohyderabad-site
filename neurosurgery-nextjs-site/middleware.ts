@@ -2,11 +2,17 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export function middleware(req: NextRequest) {
+  const url = req.nextUrl.clone();
   const host = req.headers.get("host") || "";
+  
+  // Force HTTPS
+  if (url.protocol === 'http:') {
+    url.protocol = 'https:';
+    return NextResponse.redirect(url, 308);
+  }
   
   // Force www canonical: drsayuj.com -> www.drsayuj.com
   if (host === "drsayuj.com") {
-    const url = req.nextUrl.clone();
     url.host = "www.drsayuj.com";
     return NextResponse.redirect(url, 308);
   }
@@ -26,5 +32,5 @@ export function middleware(req: NextRequest) {
   return NextResponse.next();
 }
 
-export const config = { matcher: "/:path*" };
+export const config = { matcher: ['/((?!_next|api/health|images|assets).*)'] };
 

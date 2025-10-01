@@ -11,6 +11,18 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
+        hostname: '**.wp.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.wordpress.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+      {
+        protocol: 'https',
         hostname: '**',
       },
     ],
@@ -92,6 +104,12 @@ const nextConfig = {
         source: "/images/:path*",
         headers: [
           { key: "Cache-Control", value: "public, max-age=31536000, immutable" }
+        ]
+      },
+      {
+        source: "/:all*(svg|jpg|jpeg|png|gif|webp|avif|ico|js|css|woff2)",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=0, s-maxage=31536000, immutable" }
         ]
       },
     ];
