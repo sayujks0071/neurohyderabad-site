@@ -10,3 +10,4 @@ export default {
   priority: 0.7,
   sitemapBaseFileName: "sitemap",
 };
+

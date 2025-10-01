@@ -8,7 +8,7 @@ const TEXT = "#0B1220";
 const SUBTEXT = "#334155";
 const WHITE = "#ffffff";
 const BORDER = "#E2E8F0";
-const LOGO_URL = "https://www.drsayuj.com/images/logo.png";
+const LOGO_URL = "/images/logo.svg";
 
 let interLoaded: Promise<void> | null = null;
 let inter600: ArrayBuffer | null = null;
@@ -95,20 +95,8 @@ export async function GET(req: NextRequest) {
   // Load fonts (best effort)
   await loadInterFonts();
 
-  // Try to fetch and embed logo as data URL (graceful fallback to initials)
+  // Skip logo loading for now to avoid edge runtime issues
   let logoDataUrl: string | null = null;
-  if (showLogo) {
-    try {
-      const res = await fetch(LOGO_URL, { cache: "no-store" });
-      if (res.ok) {
-        const ab = await res.arrayBuffer();
-        const b64 = base64FromArrayBuffer(ab);
-        logoDataUrl = `data:image/png;base64,${b64}`;
-      }
-    } catch {
-      // ignore; will use initials fallback
-    }
-  }
 
   const titleSize = computeTitleSize(title);
 

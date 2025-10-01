@@ -1,5 +1,5 @@
 /** @type {import('next-sitemap').IConfig} */
-export default {
+module.exports = {
   siteUrl: "https://www.drsayuj.com",
   generateRobotsTxt: true,
   robotsTxtOptions: {

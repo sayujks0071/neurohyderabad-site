@@ -1,5 +1,5 @@
 import React from "react";
-import { SITE_URL, physicianJsonLd, contactPointJsonLd, idFor } from "@/lib/seo";
+import { SITE_URL, physicianJsonLd, contactPointJsonLd, idFor } from "../../src/lib/seo";
 
 export default function SitewideSchemas() {
   // Stable @id references
@@ -10,6 +10,7 @@ export default function SitewideSchemas() {
 
   // Social profiles (sameAs) for Organization and Physician
   const sameAs = [
+    "https://g.co/kgs/9366939683880052414",
     "https://x.com/drsayuj",
     "https://www.facebook.com/drsayuj/",
     "https://in.linkedin.com/in/dr-sayuj-krishnan-s-275baa66",
@@ -17,18 +18,25 @@ export default function SitewideSchemas() {
     "https://www.instagram.com/thespinedoc/?hl=en"
   ];
 
-  // WebSite with SearchAction; publisher is the Person (personal brand)
+  // WebSite with SearchAction and ScheduleAction; publisher is the Person (personal brand)
   const website = {
     "@type": "WebSite",
     "@id": WEB_ID,
     name: "Dr. Sayuj Krishnan",
     url: SITE_URL,
     publisher: { "@id": PHYS_ID },
-    potentialAction: {
-      "@type": "SearchAction",
-      target: "https://www.drsayuj.com/search?q={search_term_string}",
-      "query-input": "required name=search_term_string"
-    }
+    potentialAction: [
+      {
+        "@type": "SearchAction",
+        target: "https://www.drsayuj.com/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      },
+      {
+        "@type": "ScheduleAction",
+        target: "https://www.drsayuj.com/appointments",
+        name: "Book an appointment"
+      }
+    ]
   };
 
   // MedicalOrganization with PostalAddress and sitewide ContactPoint
@@ -37,7 +45,7 @@ export default function SitewideSchemas() {
     "@id": ORG_ID,
     name: "Dr. Sayuj Krishnan",
     url: SITE_URL,
-    telephone: "+91-98484-17094",
+    telephone: "+91 9778280044",
     sameAs,
     logo: {
       "@type": "ImageObject",
@@ -54,12 +62,22 @@ export default function SitewideSchemas() {
     },
     address: {
       "@type": "PostalAddress",
-      streetAddress:
-        "Room no 317, 3rd floor, OPD Block, Yashoda hospital, Malakpet",
+      streetAddress: "Room No 317, OPD Block, Yashoda Hospital, Malakpet",
       addressLocality: "Hyderabad",
       addressRegion: "Telangana",
+      postalCode: "500036",
       addressCountry: "IN"
     },
+    areaServed: [
+      "Jubilee Hills",
+      "Banjara Hills", 
+      "Hi-Tech City",
+      "Gachibowli",
+      "Madhapur",
+      "Kondapur",
+      "Hyderabad"
+    ],
+    hasMap: "https://maps.google.com/?q=Yashoda+Hospital+Malakpet",
     contactPoint: [{ "@id": CONTACT_ID }]
   };
 
@@ -68,13 +86,32 @@ export default function SitewideSchemas() {
   physician["@id"] = PHYS_ID;
   physician.worksFor = { "@id": ORG_ID };
   physician.sameAs = sameAs;
+  physician.description = "MBBS, DNB Neurosurgery (Direct 6 years), Fellowship in Minimally Invasive and Advanced Spine Surgery, Observer-ship in Full Endoscopic Spine Surgery (Germany).";
+  physician.areaServed = [
+    "Jubilee Hills",
+    "Banjara Hills", 
+    "Hi-Tech City",
+    "Gachibowli",
+    "Madhapur",
+    "Kondapur",
+    "Hyderabad"
+  ];
+  physician.hasMap = "https://maps.google.com/?q=Yashoda+Hospital+Malakpet";
+  physician.potentialAction = {
+    "@type": "ReserveAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://www.drsayuj.com/appointments",
+      "inLanguage": "en-IN"
+    }
+  };
 
   // Unified ContactPoint for the site
   const contact = contactPointJsonLd({
-    phone: "+91-98484-17094",
+    phone: "+91 9778280044",
     contactType: "appointments",
-    areaServed: ["IN"],
-    availableLanguage: ["en", "hi", "te"],
+    areaServed: "IN",
+    languages: ["en", "hi", "te"],
     id: CONTACT_ID
   });
 

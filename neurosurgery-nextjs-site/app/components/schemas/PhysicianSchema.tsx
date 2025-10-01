@@ -1,4 +1,4 @@
-import { SITE_URL } from '@/lib/seo';
+import { SITE_URL } from '../../../src/lib/seo';
 
 export default function PhysicianSchema() {
   const schema = {
@@ -18,7 +18,7 @@ export default function PhysicianSchema() {
       {
         "@type": "MedicalProcedure",
         "name": "Brain Tumor Surgery",
-        "url": `${SITE_URL}/brain-tumor-surgery-hyderabad`
+        "url": `${SITE_URL}/services/brain-tumor-surgery-hyderabad`
       },
       {
         "@type": "MedicalProcedure",
@@ -28,9 +28,19 @@ export default function PhysicianSchema() {
       {
         "@type": "MedicalProcedure",
         "name": "Endoscopic Spine Surgery",
-        "url": `${SITE_URL}/endoscopic-spine-surgery-hyderabad`
+        "url": `${SITE_URL}/services/minimally-invasive-spine-surgery`
       }
     ],
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Room No 317, OPD Block, Yashoda Hospital, Malakpet",
+      "addressLocality": "Hyderabad",
+      "addressRegion": "Telangana",
+      "postalCode": "500036",
+      "addressCountry": "IN"
+    },
+    "telephone": "+91 9778280044",
+    "email": "neurospinehyd@drsayuj.com",
     "workLocation": {
       "@type": "Hospital",
       "name": "Yashoda Hospital, Malakpet",
@@ -42,7 +52,12 @@ export default function PhysicianSchema() {
         "postalCode": "500036",
         "addressCountry": "IN"
       }
-    }
+    },
+    "sameAs": [
+      "https://g.co/kgs/9366939683880052414",
+      "https://www.google.com/maps/place/Dr+Sayuj+Krishnan",
+      "https://www.yashodahospitals.com/doctor/dr-sayuj-krishnan/"
+    ]
   };
 
   return (

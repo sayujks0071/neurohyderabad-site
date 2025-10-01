@@ -7,11 +7,11 @@ export default function Header() {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-3">
           <Image
-            src="/images/logo.png"
+            src="/images/logo.svg"
             alt="Dr. Sayuj Krishnan"
-            width={112}
-            height={112}
-            className="h-8 w-auto"
+            width={32}
+            height={32}
+            className="h-8 w-8"
             priority
           />
           <span className="font-semibold text-gray-900">Dr. Sayuj Krishnan</span>
@@ -22,6 +22,7 @@ export default function Header() {
           <Link href="/services" className="text-gray-600 hover:text-blue-600">Services</Link>
           <Link href="/conditions" className="text-gray-600 hover:text-blue-600">Conditions</Link>
           <Link href="/appointments" className="text-gray-600 hover:text-blue-600">Appointments</Link>
+          <Link href="/drafts" className="text-gray-600 hover:text-blue-600">Drafts</Link>
           <Link 
             href="/appointments" 
             className="rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"

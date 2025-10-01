@@ -1,4 +1,4 @@
-import { SITE_URL } from '@/lib/seo';
+import { SITE_URL } from '../../../src/lib/seo';
 
 interface BreadcrumbSchemaProps {
   items: Array<{
