@@ -279,14 +279,37 @@ export default function EndoscopicULBDPage() {
         </article>
 
         <RelatedContent 
-          services={[
-            { title: "Minimally Invasive Spine Surgery", href: "/services/minimally-invasive-spine-surgery/" },
-            { title: "Endoscopic Discectomy", href: "/services/endoscopic-discectomy-hyderabad/" },
-            { title: "Endoscopic Foraminotomy", href: "/services/endoscopic-foraminotomy-hyderabad/" }
-          ]}
-          conditions={[
-            { title: "Spinal Stenosis Treatment", href: "/conditions/spinal-stenosis-treatment-hyderabad/" },
-            { title: "Sciatica Treatment", href: "/conditions/sciatica-treatment-hyderabad/" }
+          items={[
+            { 
+              title: "Minimally Invasive Spine Surgery", 
+              description: "Comprehensive minimally invasive spine surgery options",
+              href: "/services/minimally-invasive-spine-surgery/",
+              category: "procedure" as const
+            },
+            { 
+              title: "Endoscopic Discectomy", 
+              description: "Tiny-incision endoscopic discectomy for slip disc relief",
+              href: "/services/endoscopic-discectomy-hyderabad/",
+              category: "procedure" as const
+            },
+            { 
+              title: "Endoscopic Foraminotomy", 
+              description: "Targeted endoscopic decompression for foraminal stenosis",
+              href: "/services/endoscopic-foraminotomy-hyderabad/",
+              category: "procedure" as const
+            },
+            { 
+              title: "Spinal Stenosis Treatment", 
+              description: "Comprehensive treatment options for spinal stenosis",
+              href: "/conditions/spinal-stenosis-treatment-hyderabad/",
+              category: "condition" as const
+            },
+            { 
+              title: "Sciatica Treatment", 
+              description: "Stepwise treatment approach for sciatica relief",
+              href: "/conditions/sciatica-treatment-hyderabad/",
+              category: "condition" as const
+            }
           ]}
         />
       </main>

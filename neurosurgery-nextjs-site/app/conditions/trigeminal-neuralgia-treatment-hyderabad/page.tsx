@@ -290,13 +290,31 @@ export default function TrigeminalNeuralgiaTreatmentPage() {
         </article>
 
         <RelatedContent 
-          services={[
-            { title: "Brain Tumor Surgery", href: "/services/brain-tumor-surgery-hyderabad/" },
-            { title: "Epilepsy Surgery", href: "/services/epilepsy-surgery-hyderabad/" }
-          ]}
-          conditions={[
-            { title: "Spinal Stenosis Treatment", href: "/conditions/spinal-stenosis-treatment-hyderabad/" },
-            { title: "Sciatica Treatment", href: "/conditions/sciatica-treatment-hyderabad/" }
+          items={[
+            { 
+              title: "Brain Tumor Surgery", 
+              description: "Neuronavigation-guided microsurgery with neuromonitoring",
+              href: "/services/brain-tumor-surgery-hyderabad/",
+              category: "procedure" as const
+            },
+            { 
+              title: "Epilepsy Surgery", 
+              description: "Comprehensive evaluation and treatment for drug-resistant epilepsy",
+              href: "/services/epilepsy-surgery-hyderabad/",
+              category: "procedure" as const
+            },
+            { 
+              title: "Spinal Stenosis Treatment", 
+              description: "Comprehensive treatment options for spinal stenosis",
+              href: "/conditions/spinal-stenosis-treatment-hyderabad/",
+              category: "condition" as const
+            },
+            { 
+              title: "Sciatica Treatment", 
+              description: "Stepwise treatment approach for sciatica relief",
+              href: "/conditions/sciatica-treatment-hyderabad/",
+              category: "condition" as const
+            }
           ]}
         />
       </main>
