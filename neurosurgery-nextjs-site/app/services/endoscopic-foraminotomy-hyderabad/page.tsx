@@ -4,9 +4,15 @@ import RelatedContent from "../../../components/RelatedContent";
 import Breadcrumbs from "../../components/Breadcrumbs";
 
 export const metadata: Metadata = {
-  title: "Endoscopic Foraminotomy in Hyderabad | Foraminal Stenosis Relief",
+  title: "Endoscopic Foraminotomy in Hyderabad",
   description: "Targeted endoscopic decompression for foraminal stenosis with minimal tissue disruption. Clear recovery plan and insurance support.",
-  alternates: { canonical: "/services/endoscopic-foraminotomy-hyderabad/" },
+  alternates: { 
+    canonical: "/services/endoscopic-foraminotomy-hyderabad/",
+    languages: {
+      'en-IN': 'https://www.drsayuj.com/services/endoscopic-foraminotomy-hyderabad/',
+      'x-default': 'https://www.drsayuj.com/services/endoscopic-foraminotomy-hyderabad/'
+    }
+  },
   openGraph: {
     images: [
       {

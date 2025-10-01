@@ -4,8 +4,14 @@ import BreadcrumbSchema from "./components/schemas/BreadcrumbSchema";
 import { SITE_URL } from "../src/lib/seo";
 
 export const metadata = {
+  title: 'Neurosurgeon in Hyderabad | Endoscopic Spine Surgeon',
+  description: 'Endoscopic discectomy, foraminotomy, and minimally invasive spine surgery in Hyderabad. Same-day mobilization. Book a consultation.',
   alternates: {
     canonical: `${SITE_URL}/`,
+    languages: {
+      'en-IN': 'https://www.drsayuj.com/',
+      'x-default': 'https://www.drsayuj.com/'
+    }
   },
 };
 
@@ -482,6 +488,14 @@ export default function Home() {
                   </div>
                 </div>
               </div>
+              
+              {/* Concluding Paragraph */}
+              <div className="bg-white p-8 rounded-lg border border-gray-200 mb-8">
+                <p className="text-lg text-gray-700 leading-relaxed">
+                  If you're facing persistent neck or back pain, sciatica, or a diagnosed brain or spine condition, we'll help you understand safe options step by step. Book a consultation at Yashoda Hospitals – Malakpet to review your MRI, get a clear plan, and know what to expect in recovery.
+                </p>
+              </div>
+              
               <div className="bg-blue-50 p-8 rounded-lg">
                 <h3 className="text-2xl font-semibold mb-6 text-blue-800">Why Choose Dr. Sayuj Krishnan?</h3>
                 <ul className="space-y-4 text-blue-700">

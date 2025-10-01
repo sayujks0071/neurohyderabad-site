@@ -5,8 +5,14 @@ import Breadcrumbs from "../../components/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Brain Tumor Surgery in Hyderabad | Microsurgery",
-  description: "Neuronavigation‑guided microsurgery with neuromonitoring for maximal safe resection when appropriate. Multidisciplinary care.",
-  alternates: { canonical: "/services/brain-tumor-surgery-hyderabad/" },
+  description: "Neuronavigation‑guided microsurgery with neuromonitoring for maximal safe resection when appropriate. Multidisciplinary care. Book a consultation.",
+  alternates: { 
+    canonical: "/services/brain-tumor-surgery-hyderabad/",
+    languages: {
+      'en-IN': 'https://www.drsayuj.com/services/brain-tumor-surgery-hyderabad/',
+      'x-default': 'https://www.drsayuj.com/services/brain-tumor-surgery-hyderabad/'
+    }
+  },
   openGraph: {
     images: [
       {

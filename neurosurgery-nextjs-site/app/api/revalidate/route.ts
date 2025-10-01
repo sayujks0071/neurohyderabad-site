@@ -1,65 +1,39 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { revalidatePath, revalidateTag } from 'next/cache';
+import { revalidatePath } from 'next/cache';
 
-export async function POST(request: NextRequest) {
+export async function GET(request: NextRequest) {
+  const { searchParams } = new URL(request.url);
+  const secret = searchParams.get('secret');
+  const path = searchParams.get('path');
+
+  // Check for secret to confirm this is a valid request
+  if (secret !== process.env.REVALIDATE_TOKEN) {
+    return NextResponse.json(
+      { error: 'Unauthorized' },
+      { status: 401 }
+    );
+  }
+
+  if (!path) {
+    return NextResponse.json(
+      { error: 'Path is required' },
+      { status: 400 }
+    );
+  }
+
   try {
-    const body = await request.json();
-    const { secret, type, slug } = body;
-
-    // Verify the secret token (set this in your environment variables)
-    if (secret !== process.env.REVALIDATE_SECRET) {
-      return NextResponse.json({ message: 'Invalid secret' }, { status: 401 });
-    }
-
-    // Revalidate based on content type
-    switch (type) {
-      case 'post':
-        if (slug) {
-          revalidatePath(`/blog/${slug}`);
-        }
-        revalidatePath('/blog');
-        revalidateTag('blog-posts');
-        break;
-      
-      case 'page':
-        if (slug) {
-          revalidatePath(`/${slug}`);
-        }
-        revalidateTag('pages');
-        break;
-      
-      case 'service':
-        revalidatePath('/services');
-        revalidateTag('services');
-        break;
-      
-      case 'condition':
-        revalidatePath('/conditions');
-        revalidateTag('conditions');
-        break;
-      
-      default:
-        // Revalidate all pages
-        revalidatePath('/');
-        revalidatePath('/blog');
-        revalidatePath('/services');
-        revalidatePath('/conditions');
-        revalidatePath('/about');
-        revalidatePath('/contact');
-        break;
-    }
-
-    return NextResponse.json({ 
-      message: 'Revalidation successful',
-      type,
-      slug: slug || 'all'
+    // Revalidate the specific path
+    revalidatePath(path);
+    
+    return NextResponse.json({
+      revalidated: true,
+      path,
+      timestamp: new Date().toISOString()
     });
   } catch (error) {
-    console.error('Revalidation error:', error);
     return NextResponse.json(
-      { message: 'Error revalidating' }, 
+      { error: 'Error revalidating' },
       { status: 500 }
     );
   }
 }
-

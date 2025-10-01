@@ -2,11 +2,18 @@ import { SITE_URL } from "../../src/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 
+// ISR: Revalidate every 24 hours
+export const revalidate = 86400;
+
 export const metadata: Metadata = {
   title: "Services | Dr. Sayuj Krishnan - Neurosurgeon in Hyderabad",
   description: "Neurosurgery services in Hyderabad: brain tumor surgery, MISS/endoscopic spine, epilepsy surgery, and facial pain care.",
   alternates: {
     canonical: "/services",
+    languages: {
+      'en-IN': 'https://www.drsayuj.com/services/',
+      'x-default': 'https://www.drsayuj.com/services/'
+    }
   },
   openGraph: {
     images: [

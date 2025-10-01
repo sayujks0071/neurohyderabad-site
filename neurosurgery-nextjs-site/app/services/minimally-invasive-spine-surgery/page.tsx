@@ -1,8 +1,11 @@
 import { Metadata } from 'next'
 import { JsonLd } from '../../../src/lib/seo/jsonld'
 
+// ISR: Revalidate every 24 hours
+export const revalidate = 86400;
+
 export const metadata: Metadata = {
-  title: 'Minimally Invasive Spine Surgery in Hyderabad | Endoscopic Options',
+  title: 'Minimally Invasive Spine Surgery in Hyderabad',
   description: 'Tiny‑incision minimally invasive spine surgery in Hyderabad. Endoscopic discectomy/foraminotomy with faster recovery when appropriate. Book a consultation.',
   keywords: [
     'minimally invasive spine surgery hyderabad',
@@ -27,7 +30,11 @@ export const metadata: Metadata = {
     ]
   },
   alternates: {
-    canonical: 'https://www.drsayuj.com/services/minimally-invasive-spine-surgery/'
+    canonical: 'https://www.drsayuj.com/services/minimally-invasive-spine-surgery/',
+    languages: {
+      'en-IN': 'https://www.drsayuj.com/services/minimally-invasive-spine-surgery/',
+      'x-default': 'https://www.drsayuj.com/services/minimally-invasive-spine-surgery/'
+    }
   }
 }
 
@@ -72,27 +79,27 @@ const faqSchema = {
         "text": "Yes, a graded plan after wound healing focuses on core stability and posture."
       }
     },
-    {
-      "@type": "Question",
+      {
+        "@type": "Question",
       "name": "Can the disc re-herniate?",
       "acceptedAnswer": {
-        "@type": "Answer",
+          "@type": "Answer",
         "text": "Recurrence can occur; we minimize risk with precise technique and guidance, but no approach eliminates risk."
-      }
-    },
-    {
-      "@type": "Question",
+        }
+      },
+      {
+        "@type": "Question",
       "name": "What if endoscopy isn't possible on the day?",
       "acceptedAnswer": {
-        "@type": "Answer",
+          "@type": "Answer",
         "text": "If visualization/access is limited, conversion to a microscopic approach may be advised for safety."
-      }
-    },
-    {
-      "@type": "Question",
+        }
+      },
+      {
+        "@type": "Question",
       "name": "Is day-care discharge realistic?",
       "acceptedAnswer": {
-        "@type": "Answer",
+          "@type": "Answer",
         "text": "Many qualify; if monitoring is safer, we recommend an overnight stay."
       }
     }
@@ -148,7 +155,7 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
             <h1 className="text-4xl font-bold text-gray-900 mb-4">
               Minimally Invasive Spine Surgery (MISS) in Hyderabad
             </h1>
-          </header>
+        </header>
 
           <div className="prose prose-lg max-w-none">
             <section className="mb-8">
@@ -199,10 +206,10 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
               </ol>
               <p className="mt-4">
                 Duration varies (about 30–90 minutes) based on anatomy and complexity.
-              </p>
-            </section>
+          </p>
+        </section>
 
-            <section className="mb-8">
+          <section className="mb-8">
               <h2 className="text-2xl font-semibold text-gray-900 mb-4">Benefits and risks</h2>
               
               <div className="mb-6">
@@ -225,10 +232,10 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
 
               <p>
                 We discuss your personalized risk–benefit profile, alternatives, and expected timelines before making a decision.
-              </p>
-            </section>
+            </p>
+          </section>
 
-            <section className="mb-8">
+          <section className="mb-8">
               <h2 className="text-2xl font-semibold text-gray-900 mb-4">Recovery and return to activity</h2>
               
               <div className="grid md:grid-cols-2 gap-6 mb-6">
@@ -255,35 +262,35 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
                   <li><strong>Desk/remote roles:</strong> 1–2 weeks</li>
                   <li><strong>Light field work:</strong> 2–4 weeks</li>
                   <li><strong>Heavy/manual work:</strong> 4–8+ weeks with graded re‑entry</li>
-                </ul>
+            </ul>
               </div>
-            </section>
+          </section>
 
-            <section className="mb-8">
+          <section className="mb-8">
               <h2 className="text-2xl font-semibold text-gray-900 mb-4">Costs and insurance</h2>
               <p>
                 We provide a written estimate after evaluation. Many policies cover indicated in‑patient procedures with pre‑authorization. Day‑care discharge is feasible for some patients when safety criteria are met; otherwise, an overnight stay is recommended. Bring your policy details and MRI to streamline planning.
               </p>
-            </section>
+          </section>
 
-            <section className="mb-8">
+          <section className="mb-8">
               <h2 className="text-2xl font-semibold text-gray-900 mb-4">When MISS may not be preferred</h2>
               <ul className="list-disc pl-6 space-y-2">
                 <li>Overt spinal instability or deformity requiring stabilization</li>
                 <li>Extensive canal compromise needing wider decompression</li>
                 <li>Early in conservative care when non‑surgical therapy is still likely to work</li>
-              </ul>
-            </section>
+            </ul>
+          </section>
 
-            <section className="mb-8">
+          <section className="mb-8">
               <h2 className="text-2xl font-semibold text-gray-900 mb-4">Why choose Dr. Sayuj Krishnan at Yashoda Hospitals – Malakpet</h2>
               <ul className="list-disc pl-6 space-y-2">
                 <li>Expertise in Full Endoscopic Spine Surgery and minimally invasive techniques</li>
                 <li>Safety‑first protocols with neuronavigation and neuromonitoring where indicated</li>
                 <li>Clear counseling, realistic expectations, and structured follow‑up</li>
                 <li>Patients visit from Malakpet, Charminar, Koti, Himayat Nagar, Abids, Secunderabad, Hitech City, Banjara Hills, Gachibowli, and LB Nagar</li>
-              </ul>
-            </section>
+            </ul>
+          </section>
 
             <section className="mb-8">
               <h2 className="text-2xl font-semibold text-gray-900 mb-4">Frequently Asked Questions</h2>
@@ -349,7 +356,7 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
                   <p className="text-sm text-gray-600">Advanced neurosurgical techniques</p>
                 </div>
               </div>
-            </section>
+          </section>
 
             <section className="mb-8">
               <h2 className="text-2xl font-semibold text-gray-900 mb-4">Related Conditions</h2>
@@ -371,7 +378,7 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
                   <p className="text-sm text-gray-600">Advanced treatment for herniated discs</p>
                 </div>
               </div>
-            </section>
+          </section>
 
             <section className="mb-8">
               <h2 className="text-2xl font-semibold text-gray-900 mb-4">Call to action</h2>
@@ -386,9 +393,9 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
                   Schedule Consultation
                 </a>
               </div>
-            </section>
+          </section>
 
-            <section className="mb-8">
+          <section className="mb-8">
               <h2 className="text-2xl font-semibold text-gray-900 mb-4">References</h2>
               <ul className="list-disc pl-6 space-y-2 text-sm">
                 <li>
@@ -414,6 +421,15 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
               </ul>
             </section>
 
+            {/* Concluding Paragraph */}
+            <section className="border-t pt-6 mb-6">
+              <div className="bg-blue-50 border-l-4 border-blue-400 p-6">
+                <p className="text-lg text-blue-800 leading-relaxed">
+                  MISS is one of several safe, evidence‑based options for selected patients. After examining you and reviewing your MRI, we'll confirm if endoscopic or microscopic decompression—or continued conservative care—is the best next step. Book a consultation at Yashoda Hospitals – Malakpet to receive a personalized plan and timeline.
+                </p>
+              </div>
+            </section>
+
             <section className="border-t pt-6">
               <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4">
                 <h3 className="font-semibold text-yellow-800 mb-2">Disclaimer</h3>
@@ -421,9 +437,9 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
                   This page is educational, not a substitute for medical advice. Decisions are made after clinical evaluation and imaging review. Outcomes are not guaranteed.
                 </p>
               </div>
-            </section>
-          </div>
-        </article>
+          </section>
+        </div>
+      </article>
       </div>
     </>
   )

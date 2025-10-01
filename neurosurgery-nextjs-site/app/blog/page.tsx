@@ -4,6 +4,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 
+// ISR: Revalidate every 24 hours
+export const revalidate = 86400;
+
 export const metadata: Metadata = {
   title: "Blog | Dr. Sayuj Krishnan - Neurosurgery Insights",
   description: "Latest insights, research, and updates in neurosurgery from Dr. Sayuj Krishnan. Expert articles on brain and spine conditions, treatments, and innovations.",
