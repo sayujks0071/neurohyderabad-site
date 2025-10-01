@@ -7,11 +7,11 @@ export default function Header() {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-3">
           <Image
-            src="/images/logo.svg"
-            alt="Dr Sayuj Krishnan"
-            width={32}
-            height={32}
-            className="h-8 w-8"
+            src="/images/logo.png"
+            alt="Dr Sayuj Krishnan - Brain & Spine Surgeon"
+            width={120}
+            height={80}
+            className="h-12 w-auto"
             priority
           />
           <span className="font-semibold text-gray-900">Dr Sayuj Krishnan</span>

@@ -8,7 +8,7 @@ const TEXT = "#0B1220";
 const SUBTEXT = "#334155";
 const WHITE = "#ffffff";
 const BORDER = "#E2E8F0";
-const LOGO_URL = "/images/logo.svg";
+const LOGO_URL = "/images/logo.png";
 
 let interLoaded: Promise<void> | null = null;
 let inter600: ArrayBuffer | null = null;
