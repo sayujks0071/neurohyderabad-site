@@ -42,8 +42,28 @@ function extractTitleFromContent(content: string, fallbackTitle: string): string
 }
 
 export default async function BlogPage() {
-  // Fetch posts from WordPress
-  const posts = await getPosts(12); // Get latest 12 posts
+  // Static blog posts (can be combined with WordPress posts later)
+  const staticPosts = [
+    {
+      id: 'endoscopic-spine-surgery-cost-hyderabad',
+      title: 'Endoscopic Spine Surgery Cost in Hyderabad: What Affects Your Final Bill',
+      slug: 'endoscopic-spine-surgery-cost-hyderabad',
+      excerpt: 'Transparent overview of endoscopic spine surgery costs in Hyderabad—what affects price, insurance, day-care eligibility, and recovery planning.',
+      date: '2025-09-30',
+      featuredImage: '/images/og-default.jpg'
+    }
+  ];
+
+  // Try to fetch posts from WordPress (fallback to static posts)
+  let wordpressPosts = [];
+  try {
+    wordpressPosts = await getPosts(12);
+  } catch (error) {
+    console.log('WordPress posts not available, using static posts');
+  }
+
+  // Combine static and WordPress posts
+  const allPosts = [...staticPosts, ...(wordpressPosts || [])];
 
   return (
     <main className="container mx-auto px-4 py-16">
@@ -53,18 +73,20 @@ export default async function BlogPage() {
         Expert articles on brain and spine conditions, treatments, and innovations.
       </p>
       
-      {posts && posts.length > 0 ? (
+      {allPosts && allPosts.length > 0 ? (
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {posts.map((post: any) => {
-            // Extract title from content if WordPress title is empty
-            const postTitle = post.title.rendered || extractTitleFromContent(post.content.rendered, `Post ${post.id}`);
+          {allPosts.map((post: any) => {
+            const postTitle = post.title || post.title?.rendered || `Post ${post.id}`;
+            const postExcerpt = post.excerpt || post.excerpt?.rendered || 'Read more about this topic...';
+            const postDate = post.date || new Date().toISOString();
+            const postSlug = post.slug || post.id;
             
             return (
               <article key={post.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden">
-                {post._embedded && post._embedded['wp:featuredmedia'] && (
+                {post.featuredImage && (
                   <div className="aspect-video relative">
                     <Image
-                      src={post._embedded['wp:featuredmedia'][0].source_url}
+                      src={post.featuredImage}
                       alt={postTitle}
                       fill
                       className="object-cover"
@@ -74,28 +96,28 @@ export default async function BlogPage() {
                 <div className="p-6">
                   <h2 className="text-xl font-semibold mb-3 text-blue-700 line-clamp-2">
                     <Link 
-                      href={`/blog/${post.slug}`}
+                      href={`/blog/${postSlug}`}
                       className="hover:text-blue-800 transition-colors"
                     >
                       {postTitle}
                     </Link>
                   </h2>
-                  <div 
-                    className="text-gray-600 mb-4 line-clamp-3"
-                    dangerouslySetInnerHTML={{ 
-                      __html: post.excerpt.rendered.replace(/<[^>]*>/g, '').substring(0, 150) + '...' 
-                    }}
-                  />
+                  <div className="text-gray-600 mb-4 line-clamp-3">
+                    {typeof postExcerpt === 'string' 
+                      ? postExcerpt.replace(/<[^>]*>/g, '').substring(0, 150) + '...'
+                      : postExcerpt
+                    }
+                  </div>
                   <div className="flex items-center justify-between text-sm text-gray-500">
                     <span>
-                      {new Date(post.date).toLocaleDateString('en-US', {
+                      {new Date(postDate).toLocaleDateString('en-US', {
                         year: 'numeric',
                         month: 'long',
                         day: 'numeric'
                       })}
                     </span>
                     <Link 
-                      href={`/blog/${post.slug}`}
+                      href={`/blog/${postSlug}`}
                       className="text-blue-600 hover:text-blue-800 font-medium"
                     >
                       Read More →
