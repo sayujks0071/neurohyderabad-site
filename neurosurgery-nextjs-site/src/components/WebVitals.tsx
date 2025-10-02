@@ -7,20 +7,20 @@ import { monitorPerformance } from '../lib/monitoring';
 export default function WebVitals() {
   useEffect(() => {
     // Import web-vitals dynamically
-    import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
+    import('web-vitals').then(({ onCLS, onFID, onFCP, onLCP, onTTFB }) => {
       // Track for analytics
-      getCLS(trackWebVitals);
-      getFID(trackWebVitals);
-      getFCP(trackWebVitals);
-      getLCP(trackWebVitals);
-      getTTFB(trackWebVitals);
+      onCLS(trackWebVitals);
+      onFID(trackWebVitals);
+      onFCP(trackWebVitals);
+      onLCP(trackWebVitals);
+      onTTFB(trackWebVitals);
       
       // Monitor for alerts
-      getCLS(monitorPerformance);
-      getFID(monitorPerformance);
-      getFCP(monitorPerformance);
-      getLCP(monitorPerformance);
-      getTTFB(monitorPerformance);
+      onCLS(monitorPerformance);
+      onFID(monitorPerformance);
+      onFCP(monitorPerformance);
+      onLCP(monitorPerformance);
+      onTTFB(monitorPerformance);
     });
   }, []);
 
