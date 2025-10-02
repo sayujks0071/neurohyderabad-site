@@ -83,6 +83,9 @@ export function track(eventName: string, props: EventProps = {}) {
 
 // Convenience functions for common events
 export const analytics = {
+  // Generic track function
+  track,
+  
   // Core funnel events
   pageView: (pageSlug: string, pageType: string, serviceOrCondition?: string) => {
     track('Page_View', {
