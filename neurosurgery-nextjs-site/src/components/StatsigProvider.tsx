@@ -21,31 +21,8 @@ export default function StatsigProvider({ children }: StatsigProviderProps) {
 
   useEffect(() => {
     if (hasConsent && !isInitialized) {
-      // Initialize Statsig with privacy-safe configuration
-      const initStatsig = async () => {
-        try {
-          const StatsigClient = await import('@statsig/js-client');
-          
-          await StatsigClient.initialize(
-            process.env.NEXT_PUBLIC_STATSIG_CLIENT_KEY!,
-            {
-              // Privacy-safe user ID (no PII)
-              userID: `anonymous_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-              customIDs: {},
-              // Disable automatic event logging for privacy
-              disableAutoMetrics: true,
-              // Short session timeout for medical compliance
-              sessionTimeoutMs: 30 * 60 * 1000, // 30 minutes
-            }
-          );
-          
-          setIsInitialized(true);
-        } catch (error) {
-          console.error('Statsig initialization failed:', error);
-        }
-      };
-
-      initStatsig();
+      // Mark as initialized - the actual Statsig initialization will be handled by the React bindings
+      setIsInitialized(true);
     }
   }, [hasConsent, isInitialized]);
 
