@@ -22,35 +22,35 @@ export default function StatsigAnalytics() {
         onCLS((metric) => {
           trackPerformance('CLS', metric.value, 'score');
           client?.logEvent('web_vital', 'CLS', {
-            value: metric.value,
+            value: metric.value.toString(),
             unit: 'score'
           });
         });
         onINP((metric) => {
           trackPerformance('INP', metric.value, 'ms');
           client?.logEvent('web_vital', 'INP', {
-            value: metric.value,
+            value: metric.value.toString(),
             unit: 'ms'
           });
         });
         onFCP((metric) => {
           trackPerformance('FCP', metric.value, 'ms');
           client?.logEvent('web_vital', 'FCP', {
-            value: metric.value,
+            value: metric.value.toString(),
             unit: 'ms'
           });
         });
         onLCP((metric) => {
           trackPerformance('LCP', metric.value, 'ms');
           client?.logEvent('web_vital', 'LCP', {
-            value: metric.value,
+            value: metric.value.toString(),
             unit: 'ms'
           });
         });
         onTTFB((metric) => {
           trackPerformance('TTFB', metric.value, 'ms');
           client?.logEvent('web_vital', 'TTFB', {
-            value: metric.value,
+            value: metric.value.toString(),
             unit: 'ms'
           });
         });
