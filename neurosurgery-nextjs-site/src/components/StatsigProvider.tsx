@@ -24,7 +24,7 @@ export default function StatsigProvider({ children }: StatsigProviderProps) {
       // Initialize Statsig with privacy-safe configuration
       const initStatsig = async () => {
         try {
-          const { Statsig } = await import('@statsig/js-client');
+          const Statsig = (await import('@statsig/js-client')).default;
           
           await Statsig.initialize(
             process.env.NEXT_PUBLIC_STATSIG_CLIENT_KEY!,
