@@ -13,22 +13,22 @@ interface HeroCTAProps {
 }
 
 export function HeroCTA({ pageSlug, serviceOrCondition, className = "" }: HeroCTAProps) {
-  const { value: ctaVariant } = useFeatureGate('exp_hero_cta_copy');
+  const { value: showVariantB } = useFeatureGate('exp_hero_cta_variant_b');
+  const { value: showVariantC } = useFeatureGate('exp_hero_cta_variant_c');
   
   // Track experiment exposure
   React.useEffect(() => {
-    trackExperimentExposure('exp_hero_cta_copy', ctaVariant, pageSlug);
-  }, [ctaVariant, pageSlug]);
+    let variant = 'control';
+    if (showVariantC) variant = 'talk_to_neurosurgeon';
+    else if (showVariantB) variant = 'book_appointment_today';
+    
+    trackExperimentExposure('exp_hero_cta_copy', variant, pageSlug);
+  }, [showVariantB, showVariantC, pageSlug]);
   
   const getCTAText = () => {
-    switch (ctaVariant) {
-      case 'book_appointment_today':
-        return 'Book Appointment Today';
-      case 'talk_to_neurosurgeon':
-        return 'Talk to a Neurosurgeon';
-      default:
-        return 'Book Consultation';
-    }
+    if (showVariantC) return 'Talk to a Neurosurgeon';
+    if (showVariantB) return 'Book Appointment Today';
+    return 'Book Consultation';
   };
 
   const handleClick = () => {
@@ -160,17 +160,13 @@ interface NavCTAProps {
 }
 
 export function NavCTA({ pageSlug, className = "" }: NavCTAProps) {
-  const { value: navVariant } = useFeatureGate('exp_hero_cta_copy');
+  const { value: showVariantB } = useFeatureGate('exp_hero_cta_variant_b');
+  const { value: showVariantC } = useFeatureGate('exp_hero_cta_variant_c');
   
   const getNavText = () => {
-    switch (navVariant) {
-      case 'book_appointment_today':
-        return 'Book Appointment Today';
-      case 'talk_to_neurosurgeon':
-        return 'Talk to a Neurosurgeon';
-      default:
-        return 'Book Consultation';
-    }
+    if (showVariantC) return 'Talk to a Neurosurgeon';
+    if (showVariantB) return 'Book Appointment Today';
+    return 'Book Consultation';
   };
 
   const handleClick = () => {
