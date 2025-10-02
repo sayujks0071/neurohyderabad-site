@@ -1,8 +1,8 @@
 'use client';
 
 import { 
-  useStatsig as useStatsigCore,
-  useFeatureFlag,
+  useStatsigClient,
+  useFeatureGate,
   useExperiment
 } from '@statsig/react-bindings';
 import { 
@@ -15,10 +15,10 @@ import {
 } from '../lib/statsig';
 
 export const useStatsig = () => {
-  const { logEvent } = useStatsigCore();
+  const client = useStatsigClient();
 
   return {
-    logEvent,
+    logEvent: client?.logEvent.bind(client),
     trackAppointmentBooking,
     trackServiceInquiry,
     trackContactForm,
@@ -54,7 +54,7 @@ export const useInteractionTracking = () => {
 // Hook for A/B testing
 export const useABTesting = () => {
   const isFeatureEnabled = (featureName: string): boolean => {
-    return useFeatureFlag(featureName);
+    return useFeatureGate(featureName);
   };
 
   const getExperimentVariant = (experimentName: string) => {

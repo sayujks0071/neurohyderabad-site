@@ -2,12 +2,12 @@
 
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { useStatsig } from '@statsig/react-bindings';
+import { useStatsigClient } from '@statsig/react-bindings';
 import { trackPageView, trackPerformance, trackError } from '../lib/statsig';
 
 export default function StatsigAnalytics() {
   const pathname = usePathname();
-  const { logEvent } = useStatsig();
+  const client = useStatsigClient();
 
   useEffect(() => {
     // Track page views
@@ -21,7 +21,7 @@ export default function StatsigAnalytics() {
       import('web-vitals').then(({ onCLS, onINP, onFCP, onLCP, onTTFB }) => {
         onCLS((metric) => {
           trackPerformance('CLS', metric.value, 'score');
-          logEvent('web_vital', {
+          client?.logEvent('web_vital', {
             metric: 'CLS',
             value: metric.value,
             unit: 'score'
@@ -29,7 +29,7 @@ export default function StatsigAnalytics() {
         });
         onINP((metric) => {
           trackPerformance('INP', metric.value, 'ms');
-          logEvent('web_vital', {
+          client?.logEvent('web_vital', {
             metric: 'INP',
             value: metric.value,
             unit: 'ms'
@@ -37,7 +37,7 @@ export default function StatsigAnalytics() {
         });
         onFCP((metric) => {
           trackPerformance('FCP', metric.value, 'ms');
-          logEvent('web_vital', {
+          client?.logEvent('web_vital', {
             metric: 'FCP',
             value: metric.value,
             unit: 'ms'
@@ -45,7 +45,7 @@ export default function StatsigAnalytics() {
         });
         onLCP((metric) => {
           trackPerformance('LCP', metric.value, 'ms');
-          logEvent('web_vital', {
+          client?.logEvent('web_vital', {
             metric: 'LCP',
             value: metric.value,
             unit: 'ms'
@@ -53,7 +53,7 @@ export default function StatsigAnalytics() {
         });
         onTTFB((metric) => {
           trackPerformance('TTFB', metric.value, 'ms');
-          logEvent('web_vital', {
+          client?.logEvent('web_vital', {
             metric: 'TTFB',
             value: metric.value,
             unit: 'ms'
@@ -65,7 +65,7 @@ export default function StatsigAnalytics() {
     // Track errors
     const handleError = (event: ErrorEvent) => {
       trackError('javascript_error', event.message, pathname);
-      logEvent('error_occurred', {
+      client?.logEvent('error_occurred', {
         error_type: 'javascript_error',
         error_message: event.message,
         page_path: pathname
@@ -74,7 +74,7 @@ export default function StatsigAnalytics() {
 
     const handleUnhandledRejection = (event: PromiseRejectionEvent) => {
       trackError('unhandled_promise_rejection', event.reason?.toString() || 'Unknown error', pathname);
-      logEvent('error_occurred', {
+      client?.logEvent('error_occurred', {
         error_type: 'unhandled_promise_rejection',
         error_message: event.reason?.toString() || 'Unknown error',
         page_path: pathname
@@ -93,7 +93,7 @@ export default function StatsigAnalytics() {
       window.removeEventListener('error', handleError);
       window.removeEventListener('unhandledrejection', handleUnhandledRejection);
     };
-  }, [pathname, logEvent]);
+  }, [pathname, client]);
 
   return null;
 }
