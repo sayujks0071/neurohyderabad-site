@@ -34,22 +34,7 @@ export default function WebVitals() {
           trackCoreWebVitals(metric);
         });
 
-        // Track INP (Interaction to Next Paint) if available
-        if ('PerformanceObserver' in window) {
-          const observer = new PerformanceObserver((list) => {
-            for (const entry of list.getEntries()) {
-              if (entry.entryType === 'event' && entry.name === 'click') {
-                trackCoreWebVitals({
-                  name: 'INP',
-                  value: entry.processingStart - entry.startTime,
-                  id: `inp_${Date.now()}`,
-                });
-              }
-            }
-          });
-          
-          observer.observe({ entryTypes: ['event'] });
-        }
+        // INP tracking is handled by the web-vitals library
       } catch (error) {
         console.error('Web Vitals tracking failed:', error);
       }
