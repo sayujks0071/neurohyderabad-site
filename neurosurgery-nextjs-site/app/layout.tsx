@@ -10,7 +10,6 @@ import GoogleAnalytics from "../src/components/GoogleAnalytics";
 import WebVitals from "../src/components/WebVitals";
 import StatsigProvider from "../src/components/StatsigProvider";
 import StatsigAnalytics from "../src/components/StatsigAnalytics";
-import StatsigSessionReplay from "../src/components/StatsigSessionReplay";
 import { SITE_URL } from "../src/lib/seo";
 
 const inter = Inter({
@@ -107,7 +106,6 @@ export default function RootLayout({
           <GoogleAnalytics />
           <WebVitals />
           <StatsigAnalytics />
-          <StatsigSessionReplay />
           <WebsiteSchema />
           <PhysicianSchema />
           <HospitalSchema />

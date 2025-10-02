@@ -1,7 +1,7 @@
 // Statsig Configuration and Analytics
 export const STATSIG_CONFIG = {
   // Statsig client key (get from Statsig dashboard)
-  clientKey: process.env.NEXT_PUBLIC_STATSIG_CLIENT_KEY || '',
+  clientKey: process.env.NEXT_PUBLIC_STATSIG_CLIENT_KEY || 'client-6rsFaE0Of4SIMTVQ5J4l560K8ciY7v4wkWTXqPjD5RP',
   
   // User properties for medical practice
   userProperties: {

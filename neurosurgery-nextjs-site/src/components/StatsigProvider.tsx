@@ -1,6 +1,9 @@
 'use client';
 
-import { StatsigProvider as StatsigProviderCore } from '@statsig/react-bindings';
+import React from "react";
+import { StatsigProvider as StatsigProviderCore, useClientAsyncInit } from '@statsig/react-bindings';
+import { StatsigAutoCapturePlugin } from '@statsig/web-analytics';
+import { StatsigSessionReplayPlugin } from '@statsig/session-replay';
 import { STATSIG_CONFIG } from '../lib/statsig';
 
 interface StatsigProviderProps {
@@ -14,23 +17,26 @@ export default function StatsigProvider({ children }: StatsigProviderProps) {
     return <>{children}</>;
   }
 
+  const { client } = useClientAsyncInit(
+    STATSIG_CONFIG.clientKey,
+    { 
+      userID: 'anonymous', // You can customize this based on user authentication
+      custom: {
+        medicalSpecialty: 'neurosurgery',
+        location: 'hyderabad',
+        practiceType: 'private'
+      }
+    }, 
+    { 
+      plugins: [ 
+        new StatsigAutoCapturePlugin(), 
+        new StatsigSessionReplayPlugin() 
+      ] 
+    },
+  );
+
   return (
-    <StatsigProviderCore
-      clientKey={STATSIG_CONFIG.clientKey}
-      user={{
-        userID: 'anonymous', // You can customize this based on user authentication
-        custom: {
-          medicalSpecialty: 'neurosurgery',
-          location: 'hyderabad',
-          practiceType: 'private'
-        }
-      }}
-      options={{
-        environment: {
-          tier: process.env.NODE_ENV === 'production' ? 'production' : 'development'
-        }
-      }}
-    >
+    <StatsigProviderCore client={client} loadingComponent={<div>Loading...</div>}>
       {children}
     </StatsigProviderCore>
   );
