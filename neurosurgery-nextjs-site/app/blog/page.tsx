@@ -48,6 +48,14 @@ export default async function BlogPage() {
   // Static blog posts (can be combined with WordPress posts later)
   const staticPosts = [
     {
+      id: 'endoscopic-discectomy-cost-hyderabad',
+      title: 'Endoscopic Discectomy Cost in Hyderabad: Complete Pricing Guide',
+      slug: 'endoscopic-discectomy-cost-hyderabad',
+      excerpt: 'Complete guide to endoscopic discectomy costs in Hyderabad. Insurance coverage, factors affecting price, and payment options.',
+      date: '2025-09-30',
+      featuredImage: '/images/og-default.jpg'
+    },
+    {
       id: 'endoscopic-spine-surgery-cost-hyderabad',
       title: 'Endoscopic Spine Surgery Cost in Hyderabad: What Affects Your Final Bill',
       slug: 'endoscopic-spine-surgery-cost-hyderabad',
@@ -70,13 +78,40 @@ export default async function BlogPage() {
       excerpt: 'Compare endoscopic discectomy and microdiscectomy in Hyderabad: candidacy, incision size, hospital stay, recovery, risks, and costs.',
       date: '2025-10-01',
       featuredImage: '/images/og-default.jpg'
+    },
+    {
+      id: 'day-care-endoscopic-spine-surgery-eligibility',
+      title: 'Day-Care Eligibility for Endoscopic Spine Surgery in Hyderabad',
+      slug: 'day-care-endoscopic-spine-surgery-eligibility',
+      excerpt: 'Understanding day-care eligibility for endoscopic spine surgery in Hyderabad. Criteria, benefits, and what to expect.',
+      date: '2025-10-01',
+      featuredImage: '/images/og-default.jpg'
+    },
+    {
+      id: 'mvd-vs-radiosurgery-trigeminal-neuralgia',
+      title: 'MVD vs Radiosurgery vs Percutaneous for Trigeminal Neuralgia',
+      slug: 'mvd-vs-radiosurgery-trigeminal-neuralgia',
+      excerpt: 'Compare MVD, radiosurgery, and percutaneous procedures for trigeminal neuralgia treatment. Success rates, risks, and recovery.',
+      date: '2025-10-01',
+      featuredImage: '/images/og-default.jpg'
     }
   ];
 
   // Try to fetch posts from WordPress (fallback to static posts)
   let wordpressPosts = [];
   try {
-    wordpressPosts = await getPosts(12);
+    const ENDPOINT = process.env.WORDPRESS_API_URL;
+    if (ENDPOINT) {
+      const res = await fetch(ENDPOINT, { 
+        next: { revalidate: 3600 },
+        headers: {
+          'Accept': 'application/json',
+        }
+      });
+      if (res.ok) {
+        wordpressPosts = await res.json();
+      }
+    }
   } catch (error) {
     console.log('WordPress posts not available, using static posts');
   }

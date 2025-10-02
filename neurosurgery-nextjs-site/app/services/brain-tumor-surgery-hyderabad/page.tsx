@@ -1,15 +1,16 @@
 import { SITE_URL } from "../../../src/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { HeroCTA, SocialProof, InsuranceBand } from "../../../src/components/Experiments";
+import { HeroCTA } from "../../../src/components/Experiments";
+import SocialProofBand from "../../../src/components/Experiments/SocialProofBand";
 import { analytics } from "../../../src/lib/analytics";
 import ScrollDepthTracker from "../../../src/components/ScrollDepthTracker";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import RelatedContent from "../../components/RelatedContent";
 
 export const metadata: Metadata = {
-  title: "Brain Tumor Surgery in Hyderabad | Microsurgery & Radiosurgery",
-  description: "Neuronavigation-guided brain tumor surgery with neuromonitoring and multidisciplinary care in Hyderabad. When surgery is recommended, risks, recovery, and alternatives.",
+  title: "Brain Tumor Surgery in Hyderabad | Microsurgery & Radiosurgery Care",
+  description: "Brain tumor surgery with neuronavigation and neuromonitoring in Hyderabad. Risks, recovery, and alternatives explained.",
   alternates: {
     canonical: `${SITE_URL}/services/brain-tumor-surgery-hyderabad/`,
     languages: {
@@ -102,8 +103,6 @@ export default function BrainTumorSurgeryPage() {
               </p>
             </div>
 
-            {/* Insurance Band */}
-            <InsuranceBand pageSlug="/services/brain-tumor-surgery-hyderabad/" />
 
             <section className="mb-8">
               <h2>When is Surgery Recommended?</h2>

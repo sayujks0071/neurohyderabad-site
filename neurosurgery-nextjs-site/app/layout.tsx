@@ -8,7 +8,7 @@ import PhysicianSchema from "./components/schemas/PhysicianSchema";
 import HospitalSchema from "./components/schemas/HospitalSchema";
 import GoogleAnalytics from "../src/components/GoogleAnalytics";
 import WebVitals from "../src/components/WebVitals";
-import StatsigProvider from "../src/components/StatsigProvider";
+import StatsigClientProvider from "./providers/statsig-provider";
 import StatsigSessionReplay from "../src/components/StatsigSessionReplay";
 import { SITE_URL } from "../src/lib/seo";
 
@@ -102,7 +102,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
       </head>
       <body className={`${inter.variable} antialiased`}>
-        <StatsigProvider>
+        <StatsigClientProvider>
           <GoogleAnalytics />
           <WebVitals />
           <StatsigSessionReplay />
@@ -112,7 +112,7 @@ export default function RootLayout({
           <Header />
           {children}
           <Footer />
-        </StatsigProvider>
+        </StatsigClientProvider>
       </body>
     </html>
   );

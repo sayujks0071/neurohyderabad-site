@@ -6,6 +6,14 @@ const nextConfig = {
   // Consistent trailing slash behavior
   trailingSlash: true,
   
+  // Safari optimization: Reduce hydration payload
+  experimental: {
+    // Reduce hydration data size for Safari compatibility
+    optimizePackageImports: ['@/components', '@/lib'],
+    // Enable partial pre-rendering for better performance
+    ppr: false,
+  },
+  
   // Configure images for dynamic OG generation and local images
   images: {
     remotePatterns: [
@@ -52,12 +60,6 @@ const nextConfig = {
         destination: '/services/brain-tumor-surgery-hyderabad',
         permanent: true,
       },
-      // Endoscopic spine surgery redirects
-      {
-        source: '/endoscopic-spine-surgery-hyderabad',
-        destination: '/services/minimally-invasive-spine-surgery',
-        permanent: true,
-      },
       // Trigeminal neuralgia redirects
       {
         source: '/conditions/trigeminal-neuralgia',
@@ -70,6 +72,38 @@ const nextConfig = {
         destination: '/conditions/slip-disc-treatment-hyderabad',
         permanent: true,
       },
+      // Consolidate specific endoscopic procedures to main MISS page
+      {
+        source: '/services/endoscopic-foraminotomy-hyderabad',
+        destination: '/services/minimally-invasive-spine-surgery',
+        permanent: true,
+      },
+      {
+        source: '/services/endoscopic-ulbd-hyderabad',
+        destination: '/services/minimally-invasive-spine-surgery',
+        permanent: true,
+      },
+      {
+        source: '/services/endoscopic-cervical-discectomy-hyderabad',
+        destination: '/services/minimally-invasive-spine-surgery',
+        permanent: true,
+      },
+      {
+        source: '/services/cervical-foraminotomy-hyderabad',
+        destination: '/services/minimally-invasive-spine-surgery',
+        permanent: true,
+      },
+      // Redirect MVD and radiosurgery to trigeminal neuralgia page
+      {
+        source: '/services/microvascular-decompression-mvd-hyderabad',
+        destination: '/conditions/trigeminal-neuralgia-treatment-hyderabad',
+        permanent: true,
+      },
+      {
+        source: '/services/radiosurgery-gamma-knife-hyderabad',
+        destination: '/conditions/trigeminal-neuralgia-treatment-hyderabad',
+        permanent: true,
+      },
     ];
   },
   
@@ -77,7 +111,7 @@ const nextConfig = {
   async headers() {
     return [
       {
-        source: "/:path*",
+        source: "/((?!_next|api|images|favicon.ico|robots.txt|sitemap.xml|site.webmanifest).*)",
         headers: [
           // Security headers
           { key: "X-Content-Type-Options", value: "nosniff" },
@@ -86,12 +120,28 @@ const nextConfig = {
           { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
           // HSTS for security (after redirects are confirmed)
           { key: "Strict-Transport-Security", value: "max-age=31536000; includeSubDomains; preload" },
+          // Safari optimization: Help with content decoding
+          { key: "Content-Type", value: "text/html; charset=utf-8" },
         ]
       },
       {
         source: "/api/:path*",
         headers: [
           { key: "Cache-Control", value: "public, max-age=3600, s-maxage=3600" }
+        ]
+      },
+      {
+        source: "/_next/static/css/:path*",
+        headers: [
+          { key: "Content-Type", value: "text/css; charset=utf-8" },
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" }
+        ]
+      },
+      {
+        source: "/_next/static/js/:path*",
+        headers: [
+          { key: "Content-Type", value: "application/javascript; charset=utf-8" },
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" }
         ]
       },
       {

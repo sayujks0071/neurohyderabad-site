@@ -1,13 +1,14 @@
 import { SITE_URL } from "../../src/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { HeroCTA, SocialProof } from "../../src/components/Experiments";
+import { HeroCTA } from "../../src/components/Experiments";
+import SocialProofBand from "../../src/components/Experiments/SocialProofBand";
 import { analytics } from "../../src/lib/analytics";
 import ScrollDepthTracker from "../../src/components/ScrollDepthTracker";
 
 export const metadata: Metadata = {
   title: "Best Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan",
-  description: "Looking for the best neurosurgeon in Hyderabad? Dr. Sayuj Krishnan offers endoscopic spine surgery, brain tumor surgery, trigeminal neuralgia and epilepsy care. Safety-first, evidence-based treatment.",
+  description: "Evidence-based brain and spine care in Hyderabad. Endoscopic spine, brain tumor, trigeminal neuralgia, epilepsy treatment. Book a consultation.",
   alternates: {
     canonical: `${SITE_URL}/best-neurosurgeon-in-hyderabad/`,
     languages: {
@@ -60,16 +61,13 @@ export default function BestNeurosurgeonPage() {
                 <br />
                 Specializing in Endoscopic Spine Surgery, Brain Tumor Surgery & Epilepsy Treatment
               </p>
-              <HeroCTA 
-                pageSlug="/best-neurosurgeon-in-hyderabad/"
-                serviceOrCondition="neurosurgery"
-              />
+              <HeroCTA />
             </div>
           </div>
         </header>
 
         {/* Social Proof Section */}
-        <SocialProof pageSlug="/best-neurosurgeon-in-hyderabad/" />
+        <SocialProofBand />
 
         {/* Introduction */}
         <section className="py-16 bg-gray-50">
@@ -383,8 +381,6 @@ export default function BestNeurosurgeonPage() {
               for a safe, stepwise plan.
             </p>
             <HeroCTA 
-              pageSlug="/best-neurosurgeon-in-hyderabad/"
-              serviceOrCondition="neurosurgery"
               className="bg-white text-blue-800 hover:bg-blue-100"
             />
           </div>

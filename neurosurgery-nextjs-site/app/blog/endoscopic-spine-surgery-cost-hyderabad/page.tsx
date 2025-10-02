@@ -289,7 +289,7 @@ export default function EndoscopicSpineSurgeryCostPage() {
             <div className="grid md:grid-cols-2 gap-4">
               <div className="border rounded-lg p-4">
                 <h3 className="font-semibold mb-2">
-                  <a href="/services/endoscopic-foraminotomy-hyderabad/" className="text-blue-600 hover:text-blue-800">
+                  <a href="/services/minimally-invasive-spine-surgery/" className="text-blue-600 hover:text-blue-800">
                     Endoscopic Foraminotomy
                   </a>
                 </h3>

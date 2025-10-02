@@ -2,7 +2,8 @@ import Link from "next/link";
 import FAQPageSchema from "./components/schemas/FAQPageSchema";
 import BreadcrumbSchema from "./components/schemas/BreadcrumbSchema";
 import { SITE_URL } from "../src/lib/seo";
-import { HeroCTA, StickyCTA, SocialProof } from "../src/components/Experiments";
+import { HeroCTA, StickyCTA } from "../src/components/Experiments";
+import SocialProofBand from "../src/components/Experiments/SocialProofBand";
 import ScrollDepthTracker from "../src/components/ScrollDepthTracker";
 import { analytics } from "../src/lib/analytics";
 
@@ -22,10 +23,6 @@ export const metadata = {
 export const revalidate = 21600;
 
 export default function Home() {
-  // Track page view
-  if (typeof window !== 'undefined') {
-    analytics.pageView('/', 'home', 'endoscopic_spine_surgery');
-  }
 
   return (
     <>
@@ -43,16 +40,13 @@ export default function Home() {
               <br />
               Specializing in Endoscopic Spine Surgery, Brain Tumor Surgery & Epilepsy Treatment
             </p>
-            <HeroCTA 
-              pageSlug="/"
-              serviceOrCondition="endoscopic_spine_surgery"
-            />
+            <HeroCTA />
           </div>
         </div>
       </header>
 
       {/* Social Proof Section */}
-      <SocialProof pageSlug="/" />
+      <SocialProofBand />
 
 
       {/* Minimally Invasive Spine Surgery (MISS) */}
@@ -545,7 +539,7 @@ export default function Home() {
       ]} />
       
       {/* Sticky CTA for mobile */}
-      <StickyCTA pageSlug="/" />
+      <StickyCTA />
     </div>
     </>
   );
