@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { useStatsigClient } from '@statsig/react-bindings';
-import { trackPageView, trackPerformance, trackError } from '../lib/statsig';
+import { analytics } from '../lib/analytics';
 
 export default function StatsigAnalytics() {
   const pathname = usePathname();
@@ -12,7 +12,9 @@ export default function StatsigAnalytics() {
   useEffect(() => {
     // Track page views
     if (pathname) {
-      trackPageView(pathname, document.title);
+      const pageType = getPageType(pathname);
+      const serviceOrCondition = getServiceOrCondition(pathname);
+      analytics.pageView(pathname, pageType, serviceOrCondition);
     }
 
     // Track performance metrics
@@ -20,57 +22,37 @@ export default function StatsigAnalytics() {
       // Track Core Web Vitals
       import('web-vitals').then(({ onCLS, onINP, onFCP, onLCP, onTTFB }) => {
         onCLS((metric) => {
-          trackPerformance('CLS', metric.value, 'score');
-          client?.logEvent('web_vital', 'CLS', {
-            value: metric.value.toString(),
-            unit: 'score'
-          });
+          analytics.coreWebVitals('CLS', metric.value, pathname);
         });
         onINP((metric) => {
-          trackPerformance('INP', metric.value, 'ms');
-          client?.logEvent('web_vital', 'INP', {
-            value: metric.value.toString(),
-            unit: 'ms'
-          });
+          analytics.coreWebVitals('INP', metric.value, pathname);
         });
         onFCP((metric) => {
-          trackPerformance('FCP', metric.value, 'ms');
-          client?.logEvent('web_vital', 'FCP', {
-            value: metric.value.toString(),
-            unit: 'ms'
-          });
+          analytics.coreWebVitals('FCP', metric.value, pathname);
         });
         onLCP((metric) => {
-          trackPerformance('LCP', metric.value, 'ms');
-          client?.logEvent('web_vital', 'LCP', {
-            value: metric.value.toString(),
-            unit: 'ms'
-          });
+          analytics.coreWebVitals('LCP', metric.value, pathname);
         });
         onTTFB((metric) => {
-          trackPerformance('TTFB', metric.value, 'ms');
-          client?.logEvent('web_vital', 'TTFB', {
-            value: metric.value.toString(),
-            unit: 'ms'
-          });
+          analytics.coreWebVitals('TTFB', metric.value, pathname);
         });
       });
     };
 
     // Track errors
     const handleError = (event: ErrorEvent) => {
-      trackError('javascript_error', event.message, pathname);
-      client?.logEvent('error_occurred', 'javascript_error', {
+      analytics.track('JavaScript_Error', {
+        page_slug: pathname,
         error_message: event.message,
-        page_path: pathname
+        error_type: 'javascript_error'
       });
     };
 
     const handleUnhandledRejection = (event: PromiseRejectionEvent) => {
-      trackError('unhandled_promise_rejection', event.reason?.toString() || 'Unknown error', pathname);
-      client?.logEvent('error_occurred', 'unhandled_promise_rejection', {
+      analytics.track('Unhandled_Promise_Rejection', {
+        page_slug: pathname,
         error_message: event.reason?.toString() || 'Unknown error',
-        page_path: pathname
+        error_type: 'unhandled_promise_rejection'
       });
     };
 
@@ -87,6 +69,26 @@ export default function StatsigAnalytics() {
       window.removeEventListener('unhandledrejection', handleUnhandledRejection);
     };
   }, [pathname, client]);
+
+  // Helper functions
+  function getPageType(pathname: string): string {
+    if (pathname === '/') return 'home';
+    if (pathname.startsWith('/services/')) return 'service';
+    if (pathname.startsWith('/conditions/')) return 'condition';
+    if (pathname.startsWith('/blog/')) return 'blog';
+    if (pathname.startsWith('/locations/')) return 'location';
+    return 'other';
+  }
+
+  function getServiceOrCondition(pathname: string): string | undefined {
+    if (pathname.startsWith('/services/')) {
+      return pathname.split('/')[2]?.replace(/-/g, '_');
+    }
+    if (pathname.startsWith('/conditions/')) {
+      return pathname.split('/')[2]?.replace(/-/g, '_');
+    }
+    return undefined;
+  }
 
   return null;
 }
