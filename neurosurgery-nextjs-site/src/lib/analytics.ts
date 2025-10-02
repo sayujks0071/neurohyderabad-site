@@ -1,5 +1,5 @@
 // Centralized event tracking helper with privacy-safe instrumentation
-import { Statsig } from '@statsig/js-client';
+// import { Statsig } from '@statsig/js-client';
 
 // Export GA4 measurement ID for GoogleAnalytics component
 export const GA4_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID || 'G-XXXXXXXXXX';
@@ -69,8 +69,10 @@ export function track(eventName: string, props: EventProps = {}) {
       }
     });
 
-    // Log to Statsig
-    Statsig.logEvent(eventName, undefined, enrichedProps);
+    // Log to Statsig (when properly initialized)
+    if (typeof window !== 'undefined' && (window as any).Statsig) {
+      (window as any).Statsig.logEvent(eventName, undefined, enrichedProps);
+    }
     
     // Optional: Log to console in development
     if (process.env.NODE_ENV === 'development') {
