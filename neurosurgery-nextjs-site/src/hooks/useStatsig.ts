@@ -54,7 +54,8 @@ export const useInteractionTracking = () => {
 // Hook for A/B testing
 export const useABTesting = () => {
   const isFeatureEnabled = (featureName: string): boolean => {
-    return useFeatureGate(featureName);
+    const gate = useFeatureGate(featureName);
+    return gate?.value || false;
   };
 
   const getExperimentVariant = (experimentName: string) => {
