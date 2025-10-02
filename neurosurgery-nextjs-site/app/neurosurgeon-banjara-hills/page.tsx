@@ -1,14 +1,14 @@
 import React from "react";
 
 export const metadata = {
-  title: "Neurosurgeon in Jubilee Hills, Hyderabad | Endoscopic Spine | Dr. Sayuj Krishnan",
+  title: "Neurosurgeon in Banjara Hills, Hyderabad | Endoscopic Spine | Dr. Sayuj Krishnan",
   description:
-    "Consult Dr. Sayuj Krishnan near Jubilee Hills, Hyderabad for endoscopic spine & minimally invasive brain surgery. OPD timings, parking, directions, WhatsApp booking, and FAQs.",
-  alternates: { canonical: "https://www.drsayuj.com/neurosurgeon-jubilee-hills" },
+    "Consult Dr. Sayuj Krishnan near Banjara Hills, Hyderabad for endoscopic spine & minimally invasive brain surgery. OPD timings, parking, directions, WhatsApp booking, and FAQs.",
+  alternates: { canonical: "https://www.drsayuj.com/neurosurgeon-banjara-hills" },
 };
 
 const FAQ = [
-  { q: "How far is the OPD from Jubilee Hills?", a: "Typically 20–35 minutes by car depending on traffic; see landmark directions below." },
+  { q: "How far is the OPD from Banjara Hills?", a: "Typically 15–25 minutes by car depending on traffic; see landmark directions below." },
   { q: "Parking availability?", a: "On-site hospital parking with valet options during peak hours." },
   { q: "Fastest way to book?", a: "WhatsApp us your MRI and symptoms; we'll confirm the earliest slot." },
 ];
@@ -19,7 +19,7 @@ export default function Page() {
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: "https://www.drsayuj.com/" },
-      { "@type": "ListItem", position: 2, name: "Neurosurgeon in Jubilee Hills", item: "https://www.drsayuj.com/neurosurgeon-jubilee-hills" },
+      { "@type": "ListItem", position: 2, name: "Neurosurgeon in Banjara Hills", item: "https://www.drsayuj.com/neurosurgeon-banjara-hills" },
     ],
   };
 
@@ -35,9 +35,9 @@ export default function Page() {
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
-      <h1 className="text-3xl md:text-4xl font-bold">Neurosurgeon in Jubilee Hills, Hyderabad</h1>
+      <h1 className="text-3xl md:text-4xl font-bold">Neurosurgeon in Banjara Hills, Hyderabad</h1>
       <p className="mt-4 text-lg">
-        Serving patients from <strong>Jubilee Hills</strong> and nearby localities. OPD at Yashoda Hospitals (Malakpet) with endoscopic spine expertise.
+        Serving patients from <strong>Banjara Hills</strong> and nearby localities. OPD at Yashoda Hospitals (Malakpet) with endoscopic spine expertise.
       </p>
 
       <div className="mt-6 flex flex-wrap gap-3">
@@ -54,11 +54,11 @@ export default function Page() {
             <li>Emergency 24×7 via hospital triage</li>
           </ul>
 
-          <h3 className="text-xl font-semibold mt-6">Landmark Directions from Jubilee Hills</h3>
+          <h3 className="text-xl font-semibold mt-6">Landmark Directions from Banjara Hills</h3>
           <ol className="mt-3 list-decimal pl-5">
-            <li>From Jubilee Hills Check Post → Road No. 36 → Banjara Hills → Malakpet</li>
-            <li>From Film Nagar → Road No. 45 → Masab Tank → Malakpet Bridge</li>
-            <li>Metro: Jubilee Hills Check Post → Malakpet (8–12 min cab from station)</li>
+            <li>From Road No. 1 → Road No. 12 → Masab Tank → Malakpet</li>
+            <li>From GVK One Mall → Road No. 45 → Malakpet Bridge</li>
+            <li>Metro: Banjara Hills → Malakpet (5–8 min cab from station)</li>
           </ol>
         </div>
 
