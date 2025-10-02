@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { trackScrollDepth } from '../lib/statsig';
+import { analytics } from '../lib/analytics';
 
 interface ScrollDepthTrackerProps {
   pageSlug: string;
@@ -28,7 +28,7 @@ export default function ScrollDepthTracker({ pageSlug }: ScrollDepthTrackerProps
       scrollThresholds.forEach(threshold => {
         if (scrollPercentage >= threshold && !trackedThresholds.has(threshold)) {
           trackedThresholds.add(threshold);
-          trackScrollDepth(pageSlug, threshold);
+          analytics.scrollDepth(pageSlug, threshold);
         }
       });
     };
@@ -50,7 +50,7 @@ export default function ScrollDepthTracker({ pageSlug }: ScrollDepthTrackerProps
     // Track final scroll depth on page unload
     const handleBeforeUnload = () => {
       if (maxScrollDepth > 0) {
-        trackScrollDepth(pageSlug, maxScrollDepth);
+        analytics.scrollDepth(pageSlug, maxScrollDepth);
       }
     };
 

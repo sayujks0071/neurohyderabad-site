@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { trackCoreWebVitals } from '../lib/statsig';
+import { analytics } from '../lib/analytics';
 
 export default function WebVitals() {
   useEffect(() => {
@@ -15,23 +15,23 @@ export default function WebVitals() {
 
         // Track Core Web Vitals
         onCLS((metric) => {
-          trackCoreWebVitals(metric);
+          analytics.coreWebVitals(metric.name, metric.value, window.location.pathname);
         });
 
         onINP((metric) => {
-          trackCoreWebVitals(metric);
+          analytics.coreWebVitals(metric.name, metric.value, window.location.pathname);
         });
 
         onFCP((metric) => {
-          trackCoreWebVitals(metric);
+          analytics.coreWebVitals(metric.name, metric.value, window.location.pathname);
         });
 
         onLCP((metric) => {
-          trackCoreWebVitals(metric);
+          analytics.coreWebVitals(metric.name, metric.value, window.location.pathname);
         });
 
         onTTFB((metric) => {
-          trackCoreWebVitals(metric);
+          analytics.coreWebVitals(metric.name, metric.value, window.location.pathname);
         });
 
         // INP tracking is handled by the web-vitals library
