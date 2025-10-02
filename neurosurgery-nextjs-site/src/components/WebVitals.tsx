@@ -11,26 +11,26 @@ export default function WebVitals() {
 
     const trackWebVitals = async () => {
       try {
-        const { getCLS, getFID, getFCP, getLCP, getTTFB } = await import('web-vitals');
+        const { onCLS, onINP, onFCP, onLCP, onTTFB } = await import('web-vitals');
 
         // Track Core Web Vitals
-        getCLS((metric) => {
+        onCLS((metric) => {
           trackCoreWebVitals(metric);
         });
 
-        getFID((metric) => {
+        onINP((metric) => {
           trackCoreWebVitals(metric);
         });
 
-        getFCP((metric) => {
+        onFCP((metric) => {
           trackCoreWebVitals(metric);
         });
 
-        getLCP((metric) => {
+        onLCP((metric) => {
           trackCoreWebVitals(metric);
         });
 
-        getTTFB((metric) => {
+        onTTFB((metric) => {
           trackCoreWebVitals(metric);
         });
 
