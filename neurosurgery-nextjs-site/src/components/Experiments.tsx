@@ -262,3 +262,37 @@ export function DirectionsLink({ pageSlug, children, className }: DirectionsLink
     </a>
   );
 }
+
+// Insurance Band Component
+interface InsuranceBandProps {
+  pageSlug: string;
+}
+
+export function InsuranceBand({ pageSlug }: InsuranceBandProps) {
+  const { value: showInsuranceBand } = useFeatureGate('exp_insurance_band', false);
+  
+  // Track experiment exposure
+  React.useEffect(() => {
+    trackExperimentExposure('exp_insurance_band', showInsuranceBand ? 'treatment' : 'control', pageSlug);
+  }, [showInsuranceBand, pageSlug]);
+  
+  if (!showInsuranceBand) return null;
+
+  return (
+    <div className="bg-green-50 border-l-4 border-green-400 p-4 mb-6">
+      <div className="flex items-center">
+        <div className="flex-shrink-0">
+          <span className="text-green-400 text-xl">✓</span>
+        </div>
+        <div className="ml-3">
+          <p className="text-sm text-green-700">
+            <strong>Insurance Accepted</strong> • Most major insurance providers and TPAs
+          </p>
+          <p className="text-sm text-green-600">
+            Day-care eligible procedures available • Flexible payment options
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
