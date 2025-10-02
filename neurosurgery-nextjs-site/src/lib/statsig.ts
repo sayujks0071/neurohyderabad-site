@@ -1,4 +1,4 @@
-import { Statsig } from 'statsig-react';
+import { Statsig } from '@statsig/js-client';
 
 // Privacy-safe event tracking for medical site
 export interface StatsigEvent {

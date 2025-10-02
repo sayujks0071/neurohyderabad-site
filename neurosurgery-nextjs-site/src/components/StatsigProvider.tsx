@@ -1,6 +1,6 @@
 'use client';
 
-import { StatsigProvider as StatsigProviderBase } from 'statsig-react';
+import { StatsigProvider as StatsigProviderBase } from '@statsig/react-bindings';
 import { ReactNode, useEffect, useState } from 'react';
 
 interface StatsigProviderProps {
@@ -24,7 +24,7 @@ export default function StatsigProvider({ children }: StatsigProviderProps) {
       // Initialize Statsig with privacy-safe configuration
       const initStatsig = async () => {
         try {
-          const { Statsig } = await import('statsig-react');
+          const { Statsig } = await import('@statsig/js-client');
           
           await Statsig.initialize(
             process.env.NEXT_PUBLIC_STATSIG_CLIENT_KEY!,

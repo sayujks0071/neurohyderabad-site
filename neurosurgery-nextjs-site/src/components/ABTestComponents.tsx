@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useFeatureGate } from 'statsig-react';
+import { useFeatureGate } from '@statsig/react-bindings';
 import { trackHeroCTAClick, trackStickyCTAClick, trackNavCTAClick } from '../lib/statsig';
 import Link from 'next/link';
 

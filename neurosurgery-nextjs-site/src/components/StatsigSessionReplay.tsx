@@ -10,7 +10,7 @@ export default function StatsigSessionReplay() {
 
     const initSessionReplay = async () => {
       try {
-        const { Statsig } = await import('statsig-react');
+        const { Statsig } = await import('@statsig/js-client');
         
         // Configure session replay with privacy masking
         Statsig.updateUser({
