@@ -1,7 +1,7 @@
-import { SITE_URL } from '../../../src/lib/seo';
+import { SITE_URL } from "../lib/seo";
 
-export default function PhysicianSchema() {
-  const schema = {
+export function GlobalStructuredData() {
+  const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
       {
@@ -10,7 +10,7 @@ export default function PhysicianSchema() {
         "name": "Dr Sayuj Krishnan",
         "alternateName": "Dr Sayuj",
         "description": "Expert neurosurgeon in Hyderabad specializing in endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures",
-        "url": SITE_URL,
+        "url": `${SITE_URL}`,
         "image": `${SITE_URL}/images/dr-sayuj-krishnan.jpg`,
         "telephone": "+919778280044",
         "email": "neurospinehyd@drsayuj.com",
@@ -51,6 +51,12 @@ export default function PhysicianSchema() {
             "educationalLevel": "Fellowship in Minimally Invasive Spine Surgery"
           }
         ],
+        "alumniOf": [
+          {
+            "@type": "EducationalOrganization",
+            "name": "Medical College"
+          }
+        ],
         "memberOf": [
           {
             "@type": "Organization",
@@ -77,31 +83,40 @@ export default function PhysicianSchema() {
             "@type": "MedicalService",
             "name": "Endoscopic Spine Surgery",
             "description": "Minimally invasive spine surgery using endoscopic techniques",
-            "url": `${SITE_URL}/services/minimally-invasive-spine-surgery`
+            "provider": {
+              "@type": "Physician",
+              "name": "Dr Sayuj Krishnan"
+            }
           },
           {
             "@type": "MedicalService",
             "name": "Brain Tumor Surgery",
             "description": "Advanced brain tumor surgery with neuronavigation",
-            "url": `${SITE_URL}/services/brain-tumor-surgery-hyderabad`
+            "provider": {
+              "@type": "Physician",
+              "name": "Dr Sayuj Krishnan"
+            }
           },
           {
             "@type": "MedicalService",
             "name": "Epilepsy Surgery",
             "description": "Surgical treatment for drug-resistant epilepsy",
-            "url": `${SITE_URL}/services/epilepsy-surgery-hyderabad`
+            "provider": {
+              "@type": "Physician",
+              "name": "Dr Sayuj Krishnan"
+            }
           },
           {
             "@type": "MedicalService",
             "name": "Trigeminal Neuralgia Treatment",
             "description": "Advanced treatment for trigeminal neuralgia including microvascular decompression",
-            "url": `${SITE_URL}/conditions/trigeminal-neuralgia-treatment-hyderabad`
+            "provider": {
+              "@type": "Physician",
+              "name": "Dr Sayuj Krishnan"
+            }
           }
         ],
         "sameAs": [
-          "https://g.co/kgs/9366939683880052414",
-          "https://www.google.com/maps/place/Dr+Sayuj+Krishnan",
-          "https://www.yashodahospitals.com/doctor/dr-sayuj-krishnan/",
           "https://www.linkedin.com/in/dr-sayuj-krishnan",
           "https://www.researchgate.net/profile/Dr-Sayuj-Krishnan"
         ]
@@ -111,7 +126,7 @@ export default function PhysicianSchema() {
         "@id": `${SITE_URL}/#localbusiness`,
         "name": "Dr Sayuj Krishnan - Neurosurgeon in Hyderabad",
         "description": "Expert neurosurgeon specializing in endoscopic spine surgery and brain surgery in Hyderabad",
-        "url": SITE_URL,
+        "url": `${SITE_URL}`,
         "telephone": "+919778280044",
         "email": "neurospinehyd@drsayuj.com",
         "address": {
@@ -175,7 +190,85 @@ export default function PhysicianSchema() {
               "name": "Hyderabad"
             }
           }
-        ]
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Neurosurgical Services",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "MedicalService",
+                "name": "Endoscopic Spine Surgery",
+                "description": "Minimally invasive spine surgery using endoscopic techniques"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "MedicalService",
+                "name": "Brain Tumor Surgery",
+                "description": "Advanced brain tumor surgery with neuronavigation"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "MedicalService",
+                "name": "Epilepsy Surgery",
+                "description": "Surgical treatment for drug-resistant epilepsy"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "MedicalService",
+                "name": "Trigeminal Neuralgia Treatment",
+                "description": "Advanced treatment for trigeminal neuralgia"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${SITE_URL}/#website`,
+        "url": `${SITE_URL}`,
+        "name": "Dr Sayuj Krishnan - Neurosurgeon in Hyderabad",
+        "description": "Expert neurosurgeon specializing in endoscopic spine surgery and brain surgery in Hyderabad",
+        "publisher": {
+          "@id": `${SITE_URL}/#physician`
+        },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": `${SITE_URL}/search?q={search_term_string}`
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": `${SITE_URL}/#organization`,
+        "name": "Dr Sayuj Krishnan - Neurosurgeon",
+        "url": `${SITE_URL}`,
+        "logo": `${SITE_URL}/images/logo.png`,
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+919778280044",
+          "contactType": "customer service",
+          "areaServed": "IN",
+          "availableLanguage": "English"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Room No 317, OPD Block",
+          "addressLocality": "Malakpet",
+          "addressRegion": "Telangana",
+          "postalCode": "500036",
+          "addressCountry": "IN"
+        }
       }
     ]
   };
@@ -183,7 +276,7 @@ export default function PhysicianSchema() {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
     />
   );
 }

@@ -104,3 +104,4 @@ export function HospitalJsonLd() {
   }
   return <Script id="hospital-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
 }
+

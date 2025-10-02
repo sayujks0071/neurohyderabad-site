@@ -14,3 +14,4 @@ export default function SmartImage({ priority = false, ...props }: SmartImagePro
     />
   )
 }
+

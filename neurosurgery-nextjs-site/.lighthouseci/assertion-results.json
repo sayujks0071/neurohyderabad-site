@@ -25,6 +25,22 @@
     ],
     "operator": ">=",
     "passed": false,
+    "auditId": "dom-size-insight",
+    "level": "warn",
+    "url": "https://www.drsayuj.com/",
+    "auditTitle": "Optimize DOM size",
+    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/dom-size/"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.9,
+    "actual": 0,
+    "values": [
+      0,
+      0
+    ],
+    "operator": ">=",
+    "passed": false,
     "auditId": "heading-order",
     "level": "error",
     "url": "https://www.drsayuj.com/",
@@ -52,7 +68,7 @@
     "expected": 0.9,
     "actual": 0.5,
     "values": [
-      0,
+      0.5,
       0.5
     ],
     "operator": ">=",
@@ -145,22 +161,6 @@
   },
   {
     "name": "minScore",
-    "expected": 0.9,
-    "actual": 0.32,
-    "values": [
-      0.27,
-      0.32
-    ],
-    "operator": ">=",
-    "passed": false,
-    "auditId": "interactive",
-    "level": "warn",
-    "url": "https://www.drsayuj.com/",
-    "auditTitle": "Time to Interactive",
-    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/interactive/"
-  },
-  {
-    "name": "minScore",
     "expected": 0.95,
     "actual": 0.94,
     "values": [
@@ -172,21 +172,6 @@
     "auditProperty": "accessibility",
     "auditId": "categories",
     "level": "error",
-    "url": "https://www.drsayuj.com/"
-  },
-  {
-    "name": "minScore",
-    "expected": 0.9,
-    "actual": 0.8,
-    "values": [
-      0.8,
-      0.75
-    ],
-    "operator": ">=",
-    "passed": false,
-    "auditProperty": "performance",
-    "auditId": "categories",
-    "level": "warn",
     "url": "https://www.drsayuj.com/"
   }
 ]
