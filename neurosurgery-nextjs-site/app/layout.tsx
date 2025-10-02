@@ -10,6 +10,7 @@ import GoogleAnalytics from "../src/components/GoogleAnalytics";
 import WebVitals from "../src/components/WebVitals";
 import StatsigClientProvider from "./providers/statsig-provider";
 import StatsigSessionReplay from "../src/components/StatsigSessionReplay";
+import SEOOptimizer from "../src/components/SEOOptimizer";
 import { SITE_URL } from "../src/lib/seo";
 
 const inter = Inter({
@@ -38,7 +39,7 @@ export const metadata: Metadata = {
     description: "Expert neurosurgeon in Hyderabad specializing in minimally invasive brain & spine surgery",
     url: SITE_URL,
     siteName: "Dr. Sayuj — Brain & Spine Care",
-    locale: "en_IE",
+    locale: "en_IN",
     type: "website",
     images: [
       {
@@ -69,7 +70,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: "your-google-verification-code",
+    google: process.env.GOOGLE_SITE_VERIFICATION || "your-google-verification-code",
   },
   icons: {
     icon: [
@@ -106,6 +107,7 @@ export default function RootLayout({
           <GoogleAnalytics />
           <WebVitals />
           <StatsigSessionReplay />
+          <SEOOptimizer pageType="home" pageSlug="/" />
           <WebsiteSchema />
           <PhysicianSchema />
           <HospitalSchema />

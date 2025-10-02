@@ -5,6 +5,8 @@ import { SITE_URL } from "../src/lib/seo";
 import { HeroCTA, StickyCTA } from "../src/components/Experiments";
 import SocialProofBand from "../src/components/Experiments/SocialProofBand";
 import ScrollDepthTracker from "../src/components/ScrollDepthTracker";
+import SEODashboard from "../src/components/SEODashboard";
+import SEOAuditDashboard from "../src/components/SEOAuditDashboard";
 import { analytics } from "../src/lib/analytics";
 
 export const metadata = {
@@ -540,6 +542,16 @@ export default function Home() {
       
       {/* Sticky CTA for mobile */}
       <StickyCTA />
+      
+      {/* SEO Dashboard - only in development */}
+      {process.env.NODE_ENV === 'development' && (
+        <SEODashboard pageType="home" pageSlug="/" />
+      )}
+      
+      {/* SEO Audit Dashboard - only in development */}
+      {process.env.NODE_ENV === 'development' && (
+        <SEOAuditDashboard pageType="home" pageSlug="/" />
+      )}
     </div>
     </>
   );
