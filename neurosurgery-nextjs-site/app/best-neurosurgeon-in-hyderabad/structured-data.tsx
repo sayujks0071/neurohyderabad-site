@@ -1,4 +1,4 @@
-import { SITE_URL } from "../../src/lib/seo";
+import { SITE_URL } from "../../../src/lib/seo";
 
 export function BestNeurosurgeonStructuredData() {
   const structuredData = {

@@ -1,4 +1,4 @@
-import { SITE_URL } from "../../src/lib/seo";
+import { SITE_URL } from "../../../src/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 

@@ -1,4 +1,4 @@
-import { SITE_URL, webPageJsonLd, serviceJsonLd, medicalGuidelineJsonLd, physicianJsonLd, breadcrumbJsonLd, contactPointJsonLd, procedureJsonLd, itemListJsonLd, idFor } from "../../src/lib/seo";
+import { SITE_URL, webPageJsonLd, serviceJsonLd, medicalGuidelineJsonLd, physicianJsonLd, breadcrumbJsonLd, contactPointJsonLd, procedureJsonLd, itemListJsonLd, idFor } from "../../../src/lib/seo";
 import type { Metadata } from "next";
 import RelatedContent from "../../components/RelatedContent";
 import Breadcrumbs from "../../components/Breadcrumbs";
