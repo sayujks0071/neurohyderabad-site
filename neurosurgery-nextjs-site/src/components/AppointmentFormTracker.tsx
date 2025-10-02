@@ -19,7 +19,7 @@ export default function AppointmentFormTracker({
   locationHint
 }: AppointmentFormTrackerProps) {
   const hasTrackedStart = useRef(false);
-  const formRef = useRef<HTMLFormElement>(null);
+  const formRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Only track if user has given consent
