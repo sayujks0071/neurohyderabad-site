@@ -6,10 +6,10 @@ import Footer from "./components/Footer";
 import WebsiteSchema from "./components/schemas/WebsiteSchema";
 import PhysicianSchema from "./components/schemas/PhysicianSchema";
 import HospitalSchema from "./components/schemas/HospitalSchema";
-import GoogleAnalytics from "../src/components/GoogleAnalytics";
-import WebVitals from "../src/components/WebVitals";
-import StatsigAnalytics from "../src/components/StatsigAnalytics";
-import MyStatsig from "./my-statsig";
+// import GoogleAnalytics from "../src/components/GoogleAnalytics";
+// import WebVitals from "../src/components/WebVitals";
+// import StatsigAnalytics from "../src/components/StatsigAnalytics";
+// import MyStatsig from "./my-statsig";
 import { SITE_URL } from "../src/lib/seo";
 
 const inter = Inter({
@@ -102,17 +102,12 @@ export default function RootLayout({
         <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
       </head>
       <body className={`${inter.variable} antialiased`}>
-        <MyStatsig>
-          <GoogleAnalytics />
-          <WebVitals />
-          <StatsigAnalytics />
-          <WebsiteSchema />
-          <PhysicianSchema />
-          <HospitalSchema />
-          <Header />
-          {children}
-          <Footer />
-        </MyStatsig>
+        <WebsiteSchema />
+        <PhysicianSchema />
+        <HospitalSchema />
+        <Header />
+        {children}
+        <Footer />
       </body>
     </html>
   );
