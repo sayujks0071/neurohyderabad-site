@@ -7,7 +7,7 @@ const APEX_HOST = 'drsayuj.com'
 export function middleware(req: NextRequest) {
   const url = req.nextUrl.clone()
   const host = req.headers.get('host') ?? ''
-  const proto = req.headers.get('x-forwarded-proto') ?? 'https' // 'http' or 'https'
+  const proto = req.headers.get('x-forwarded-proto') ?? 'https'
 
   // 1) Canonical host: apex -> www (force https in the same hop)
   if (host === APEX_HOST) {
@@ -16,8 +16,8 @@ export function middleware(req: NextRequest) {
     return NextResponse.redirect(url, 308)
   }
 
-  // 2) Protocol: ensure https on any other host (e.g., www)
-  if (proto === 'http') {
+  // 2) Protocol: ensure https on www subdomain
+  if (host === WWW_HOST && proto === 'http') {
     url.protocol = 'https'
     return NextResponse.redirect(url, 308)
   }
