@@ -3,7 +3,7 @@ export const MONITORING_CONFIG = {
   // Performance thresholds for alerts
   performance: {
     lcp: 2500, // Largest Contentful Paint (ms)
-    fid: 100,  // First Input Delay (ms)
+    inp: 200,  // Interaction to Next Paint (ms)
     cls: 0.1,  // Cumulative Layout Shift
     fcp: 1800, // First Contentful Paint (ms)
     ttfb: 600  // Time to First Byte (ms)
@@ -83,10 +83,10 @@ export const monitorPerformance = (metric: any) => {
         message = `LCP is ${value}ms (threshold: ${thresholds.lcp}ms)`;
       }
       break;
-    case 'FID':
-      if (value > thresholds.fid) {
-        severity = value > thresholds.fid * 2 ? 'high' : 'medium';
-        message = `FID is ${value}ms (threshold: ${thresholds.fid}ms)`;
+    case 'INP':
+      if (value > thresholds.inp) {
+        severity = value > thresholds.inp * 2 ? 'high' : 'medium';
+        message = `INP is ${value}ms (threshold: ${thresholds.inp}ms)`;
       }
       break;
     case 'CLS':
