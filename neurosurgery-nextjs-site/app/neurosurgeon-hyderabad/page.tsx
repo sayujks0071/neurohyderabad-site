@@ -1,345 +1,161 @@
-import { Metadata } from 'next';
-import Link from 'next/link';
+import React from "react";
 import { SITE_URL } from '../../src/lib/seo';
-import MedicalReviewNotice from '../../src/components/MedicalReviewNotice';
 
-export const metadata: Metadata = {
-  title: 'Best Neurosurgeon in Hyderabad | Endoscopic Spine & Brain Surgery | Dr. Sayuj Krishnan',
-  description: 'Best neurosurgeon in Hyderabad specializing in endoscopic spine surgery, brain tumor surgery, epilepsy surgery. OPD at Yashoda Malakpet. Book consultation with Dr. Sayuj Krishnan.',
-  alternates: {
-    canonical: `${SITE_URL}/neurosurgeon-hyderabad/`,
-    languages: {
-      'en-IN': `${SITE_URL}/neurosurgeon-hyderabad/`,
-      'x-default': `${SITE_URL}/neurosurgeon-hyderabad/`
-    }
-  },
-  openGraph: {
-    title: 'Best Neurosurgeon in Hyderabad | Endoscopic Spine & Brain Surgery | Dr. Sayuj Krishnan',
-    description: 'Best neurosurgeon in Hyderabad specializing in endoscopic spine surgery, brain tumor surgery, epilepsy surgery. OPD at Yashoda Malakpet. Book consultation.',
-    url: `${SITE_URL}/neurosurgeon-hyderabad/`,
-    siteName: 'Dr. Sayuj Krishnan - Neurosurgeon in Hyderabad',
-    images: [
-      {
-        url: `${SITE_URL}/api/og?title=Best%20Neurosurgeon%20in%20Hyderabad&subtitle=Dr.%20Sayuj%20Krishnan`,
-        width: 1200,
-        height: 630,
-        alt: 'Best Neurosurgeon in Hyderabad - Dr. Sayuj Krishnan',
-      },
-    ],
-    locale: 'en_IN',
-    type: 'website',
-  },
+export const metadata = {
+  title: "Best Neurosurgeon in Hyderabad | Endoscopic Spine Surgery | Dr. Sayuj Krishnan",
+  description:
+    "Consult Dr. Sayuj Krishnan, neurosurgeon in Hyderabad specializing in full endoscopic spine & minimally invasive brain surgery. OPD timings, directions, FAQs, and WhatsApp booking.",
+  alternates: { canonical: "https://www.drsayuj.com/neurosurgeon-hyderabad" },
 };
 
-export default function NeurosurgeonHyderabadPage() {
-  const services = [
-    {
-      title: 'Endoscopic Spine Surgery',
-      description: 'Minimally invasive spine procedures with faster recovery',
-      href: '/services/minimally-invasive-spine-surgery/',
-      features: ['8-10mm incisions', 'Same-day discharge', 'Faster recovery', 'Less pain']
-    },
-    {
-      title: 'Brain Tumor Surgery',
-      description: 'Advanced neuronavigation-guided microsurgery',
-      href: '/services/brain-tumor-surgery-hyderabad/',
-      features: ['Neuronavigation', 'Neuromonitoring', 'Awake craniotomy', 'Multidisciplinary care']
-    },
-    {
-      title: 'Epilepsy Surgery',
-      description: 'Comprehensive treatment for drug-resistant epilepsy',
-      href: '/services/epilepsy-surgery-hyderabad/',
-      features: ['LITT', 'Resection surgery', 'VNS', 'Comprehensive evaluation']
-    },
-    {
-      title: 'Trigeminal Neuralgia Treatment',
-      description: 'Advanced MVD and radiosurgery techniques',
-      href: '/conditions/trigeminal-neuralgia-treatment-hyderabad/',
-      features: ['MVD', 'Radiosurgery', 'Percutaneous procedures', 'Medical therapy']
-    }
-  ];
+const FAQ = [
+  {
+    q: "Who is an ideal candidate for endoscopic cervical discectomy?",
+    a: "Patients with soft cervical disc herniation causing radiculopathy who have failed conservative care and show MRI correlation. Selection requires clinical-radiological concordance and a focused neurological exam.",
+  },
+  {
+    q: "Endoscopic vs microdiscectomy—what's the difference?",
+    a: "Endoscopic uses a keyhole portal with continuous irrigation; microdiscectomy is a tubular/micro approach. Endoscopic can reduce muscle disruption, blood loss, and post-op pain for selected indications.",
+  },
+  {
+    q: "What is typical recovery time after endoscopic spine surgery?",
+    a: "Mobilization within hours, routine activities within 3–7 days, and graded return to work by 2–3 weeks for desk jobs (varies by pathology and baseline fitness).",
+  },
+  {
+    q: "Do you treat trigeminal neuralgia and epilepsy?",
+    a: "Yes. Options include microvascular decompression (MVD) for trigeminal neuralgia and comprehensive epilepsy surgery pathways when indicated. Patients receive individualized, guideline-based counseling.",
+  },
+  {
+    q: "Which areas of Hyderabad do you serve?",
+    a: "City-wide with OPD at Yashoda Hospitals (Malakpet). Dedicated pages available for Jubilee Hills, Banjara Hills, Hitech City, Gachibowli, and Secunderabad with maps and directions.",
+  },
+  {
+    q: "How can I book an appointment quickly?",
+    a: "Tap WhatsApp for slot confirmation, share MRI/Pain timeline, and we'll allocate the nearest OPD/OT window.",
+  },
+];
 
-  const locations = [
-    { name: 'Jubilee Hills', href: '/neurosurgeon-jubilee-hills/' },
-    { name: 'Banjara Hills', href: '/neurosurgeon-banjara-hills/' },
-    { name: 'Hitech City', href: '/neurosurgeon-hitech-city/' },
-    { name: 'Gachibowli', href: '/neurosurgeon-gachibowli/' },
-    { name: 'Secunderabad', href: '/neurosurgeon-secunderabad/' },
-    { name: 'Malakpet', href: '/locations/malakpet/' }
-  ];
+export default function Page() {
+  const physicianSchema = {
+    "@context": "https://schema.org",
+    "@type": "Physician",
+    name: "Dr. Sayuj Krishnan",
+    medicalSpecialty: [
+      "Neurosurgery",
+      "Endoscopic Spine Surgery",
+      "Minimally Invasive Brain Surgery",
+    ],
+    url: "https://www.drsayuj.com",
+    image: "https://www.drsayuj.com/images/dr-sayuj.jpg",
+    telephone: "+919778280044",
+    areaServed: ["Hyderabad", "Telangana", "India"],
+    sameAs: [
+      "https://www.yashodahospitals.com/doctors/dr-sayuj-krishnan/",
+      "https://www.practo.com/hyderabad/doctor/dr-sayuj-krishnan-neurosurgeon",
+      "https://www.facebook.com/drsayujkrishnan",
+      "https://www.youtube.com/@drsayujkrishnan",
+      "https://www.linkedin.com/in/dr-sayuj-krishnan",
+    ],
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Yashoda Hospitals, Malakpet",
+      addressLocality: "Hyderabad",
+      addressRegion: "Telangana",
+      postalCode: "500036",
+      addressCountry: "IN",
+    },
+  };
+
+  const breadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.drsayuj.com/" },
+      { "@type": "ListItem", position: 2, name: "Neurosurgeon in Hyderabad", item: "https://www.drsayuj.com/neurosurgeon-hyderabad" },
+    ],
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: FAQ.map(({ q, a }) => ({
+      "@type": "Question",
+      name: q,
+      acceptedAnswer: { "@type": "Answer", text: a },
+    })),
+  };
 
   return (
-    <div className="min-h-screen bg-white">
-      <div className="container mx-auto px-4 py-16">
-        <header className="text-center mb-8">
-          <h1 className="text-4xl font-bold mb-4">Best Neurosurgeon in Hyderabad</h1>
-          <p className="text-lg text-gray-600">Dr. Sayuj Krishnan - Expert Endoscopic Spine & Brain Surgery</p>
-        </header>
+    <main className="mx-auto max-w-5xl px-4 py-10">
+      <section className="mb-8">
+        <h1 className="text-3xl md:text-4xl font-bold">
+          Neurosurgeon in Hyderabad — Endoscopic Spine & Minimally Invasive Brain Surgery
+        </h1>
+        <p className="mt-4 text-lg">
+          Consult <strong>Dr. Sayuj Krishnan</strong>, Consultant Neurosurgeon at Yashoda Hospitals, Malakpet.
+          Focus on <strong>Full Endoscopic Spine Surgery (FESS)</strong>, cervical radiculopathy, sciatica, and
+          minimally invasive brain procedures. Evidence-based, patient-first counseling with transparent risks and recovery plans.
+        </p>
 
-        <section className="bg-blue-50 p-6 rounded-lg mb-8">
-          <p className="text-center">
-            <strong>Contact:</strong>
-            <a href="tel:+919778280044" className="text-blue-600 hover:underline ml-2">+91-9778280044</a> •
-            <a href="mailto:neurospinehyd@drsayuj.com" className="text-blue-600 hover:underline ml-2">neurospinehyd@drsayuj.com</a> •
-            <a href="/appointments" className="text-blue-600 hover:underline ml-2">Book Appointment</a>
-          </p>
-        </section>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <a
+            href="https://wa.me/919778280044?text=Hi%20I%20want%20to%20book%20an%20appointment"
+            className="rounded-2xl px-6 py-3 bg-green-600 text-white"
+          >
+            WhatsApp Booking
+          </a>
+          <a href="tel:+919778280044" className="rounded-2xl px-6 py-3 border">
+            Call: +91-9778280044
+          </a>
+          <a href="https://maps.google.com/?q=Yashoda+Hospitals+Malakpet+Hyderabad" className="rounded-2xl px-6 py-3 border">
+            Directions (Google Maps)
+          </a>
+        </div>
+      </section>
 
-        <MedicalReviewNotice />
+      <section className="grid md:grid-cols-2 gap-8 mb-10">
+        <div>
+          <h2 className="text-2xl font-semibold">OPD Timings & Location</h2>
+          <ul className="mt-3 list-disc pl-5">
+            <li>Yashoda Hospitals – Malakpet, Hyderabad</li>
+            <li>OPD: Mon–Sat, 10:00–16:00 (IST) • By appointment</li>
+            <li>Emergency: 24×7 via hospital triage</li>
+          </ul>
+        </div>
+        <div>
+          <h2 className="text-2xl font-semibold">Conditions & Procedures</h2>
+          <ul className="mt-3 list-disc pl-5">
+            <li>Endoscopic cervical & lumbar discectomy, foraminotomy, ULBD</li>
+            <li>Cervical/lumbar radiculopathy, spinal stenosis, disc herniation</li>
+            <li>Trigeminal neuralgia (MVD), epilepsy surgery pathways</li>
+          </ul>
+        </div>
+      </section>
 
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold text-blue-800 mb-6">Why Choose Dr. Sayuj Krishnan?</h2>
-          <div className="prose max-w-none">
-            <p className="text-lg text-gray-700 mb-6">
-              Dr. Sayuj Krishnan is recognized as one of the best neurosurgeons in Hyderabad, specializing in minimally invasive 
-              endoscopic spine surgery and advanced brain surgery techniques. With over 15 years of experience and specialized 
-              training in endoscopic procedures, Dr. Sayuj offers patients the benefits of modern surgical techniques with 
-              reduced trauma and quicker recovery.
-            </p>
-            <p className="text-gray-700 mb-6">
-              Dr. Sayuj's expertise in endoscopic spine surgery has made him a preferred choice for patients seeking 
-              advanced neurosurgical care in Hyderabad. His commitment to patient safety, evidence-based practice, 
-              and continuous learning ensures optimal outcomes for every patient.
-            </p>
-          </div>
-        </section>
+      <section className="mb-12">
+        <h2 className="text-2xl font-semibold">Why Choose Endoscopic Spine?</h2>
+        <p className="mt-3">
+          Selected patients benefit from smaller access corridors, reduced muscle disruption, lower blood loss, and
+          faster return to work—when indications are correct and peri-operative protocols are followed. We practice
+          guideline-aligned selection and provide day-by-day recovery calendars.
+        </p>
+      </section>
 
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold text-blue-800 mb-6">Specialized Services</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            {services.map((service, index) => (
-              <div key={index} className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
-                <h3 className="text-xl font-semibold text-blue-700 mb-3">{service.title}</h3>
-                <p className="text-gray-700 mb-4">{service.description}</p>
-                
-                <div className="mb-4">
-                  <h4 className="font-semibold text-gray-700 mb-2">Key Features:</h4>
-                  <ul className="space-y-1">
-                    {service.features.map((feature, idx) => (
-                      <li key={idx} className="text-sm text-gray-600">• {feature}</li>
-                    ))}
-                  </ul>
-                </div>
-                
-                <Link 
-                  href={service.href}
-                  className="inline-block bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-colors"
-                >
-                  Learn More
-                </Link>
-              </div>
-            ))}
-          </div>
-        </section>
+      <section>
+        <h2 className="text-2xl font-semibold">FAQs</h2>
+        <div className="mt-4 space-y-4">
+          {FAQ.map(({ q, a }) => (
+            <details key={q} className="rounded-xl border p-4">
+              <summary className="font-medium">{q}</summary>
+              <p className="mt-2">{a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
 
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold text-blue-800 mb-6">OPD Details & Location</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-white p-6 rounded-lg shadow-sm border">
-              <h3 className="text-lg font-semibold mb-3 text-blue-700">Yashoda Hospital, Malakpet</h3>
-              <ul className="space-y-2 text-gray-700">
-                <li>• <strong>Address:</strong> Yashoda Hospital, Malakpet, Hyderabad</li>
-                <li>• <strong>OPD Days:</strong> Monday to Saturday</li>
-                <li>• <strong>Timings:</strong> 9:00 AM - 5:00 PM</li>
-                <li>• <strong>Emergency:</strong> 24/7 available</li>
-                <li>• <strong>Parking:</strong> Free parking available</li>
-                <li>• <strong>Metro:</strong> Malakpet Metro Station (5 min walk)</li>
-              </ul>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-sm border">
-              <h3 className="text-lg font-semibold mb-3 text-blue-700">Insurance & Payment</h3>
-              <ul className="space-y-2 text-gray-700">
-                <li>• Most major insurance providers accepted</li>
-                <li>• Cashless treatment available</li>
-                <li>• EMI options for major procedures</li>
-                <li>• Transparent pricing</li>
-                <li>• No hidden charges</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold text-blue-800 mb-6">Serving Areas in Hyderabad</h2>
-          <div className="grid md:grid-cols-3 gap-4">
-            {locations.map((location, index) => (
-              <Link 
-                key={index}
-                href={location.href}
-                className="bg-blue-50 p-4 rounded-lg text-center hover:bg-blue-100 transition-colors"
-              >
-                <span className="text-blue-700 font-medium">Neurosurgeon in {location.name}</span>
-              </Link>
-            ))}
-          </div>
-        </section>
-
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold text-blue-800 mb-6">Frequently Asked Questions</h2>
-          <div className="space-y-6">
-            <div className="bg-gray-50 p-6 rounded-lg">
-              <h3 className="text-xl font-semibold mb-3 text-blue-700">What makes Dr. Sayuj the best neurosurgeon in Hyderabad?</h3>
-              <p className="text-gray-700">Dr. Sayuj Krishnan combines extensive experience (15+ years) with specialized training in endoscopic spine surgery. His expertise in minimally invasive techniques, commitment to patient safety, and evidence-based approach make him a preferred choice for neurosurgical care in Hyderabad.</p>
-            </div>
-            <div className="bg-gray-50 p-6 rounded-lg">
-              <h3 className="text-xl font-semibold mb-3 text-blue-700">What is endoscopic spine surgery?</h3>
-              <p className="text-gray-700">Endoscopic spine surgery uses small incisions (8-10mm) and specialized instruments to treat spine conditions. This minimally invasive approach results in less pain, faster recovery, and reduced risk of complications compared to traditional open surgery.</p>
-            </div>
-            <div className="bg-gray-50 p-6 rounded-lg">
-              <h3 className="text-xl font-semibold mb-3 text-blue-700">How do I book an appointment?</h3>
-              <p className="text-gray-700">You can book an appointment by calling +91-9778280044, emailing neurospinehyd@drsayuj.com, or using our online booking system. OPD consultations are available Monday to Saturday at Yashoda Hospital, Malakpet.</p>
-            </div>
-            <div className="bg-gray-50 p-6 rounded-lg">
-              <h3 className="text-xl font-semibold mb-3 text-blue-700">Do you accept insurance?</h3>
-              <p className="text-gray-700">Yes, we accept most major insurance providers including corporate insurance plans. Cashless treatment is available for eligible patients. Please bring your insurance card and referral letter for your consultation.</p>
-            </div>
-            <div className="bg-gray-50 p-6 rounded-lg">
-              <h3 className="text-xl font-semibold mb-3 text-blue-700">What should I bring to my consultation?</h3>
-              <p className="text-gray-700">Please bring your MRI/CT scans, previous medical records, list of current medications, insurance card, and referral letter (if required). Having your imaging studies helps Dr. Sayuj provide a more accurate assessment.</p>
-            </div>
-            <div className="bg-gray-50 p-6 rounded-lg">
-              <h3 className="text-xl font-semibold mb-3 text-blue-700">How long is the recovery time for endoscopic procedures?</h3>
-              <p className="text-gray-700">Recovery times vary by procedure, but most endoscopic spine surgeries allow patients to return to desk work within 1-2 weeks and full activities within 4-6 weeks. This is significantly faster than traditional open surgery.</p>
-            </div>
-            <div className="bg-gray-50 p-6 rounded-lg">
-              <h3 className="text-xl font-semibold mb-3 text-blue-700">Is emergency consultation available?</h3>
-              <p className="text-gray-700">Yes, emergency consultations are available 24/7 for urgent neurosurgical cases. For emergencies, please call +91-9778280044 or visit the emergency department at Yashoda Hospital, Malakpet.</p>
-            </div>
-            <div className="bg-gray-50 p-6 rounded-lg">
-              <h3 className="text-xl font-semibold mb-3 text-blue-700">What are the success rates of endoscopic spine surgery?</h3>
-              <p className="text-gray-700">Endoscopic spine surgery has success rates of 85-90% for appropriately selected patients. Success depends on proper patient selection, accurate diagnosis, and surgical technique. Dr. Sayuj discusses expected outcomes during consultation.</p>
-            </div>
-          </div>
-        </section>
-
-        <section className="bg-blue-50 p-8 rounded-lg text-center">
-          <h2 className="text-2xl font-bold text-blue-800 mb-4">Ready to Consult Hyderabad's Best Neurosurgeon?</h2>
-          <p className="text-gray-600 mb-6">
-            Dr. Sayuj Krishnan provides expert neurosurgical care with advanced endoscopic techniques and personalized treatment plans.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link 
-              href="/appointments/"
-              className="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-colors"
-            >
-              Book Consultation
-            </Link>
-            <a 
-              href="https://wa.me/919778280044"
-              className="border-2 border-green-600 text-green-600 px-8 py-3 rounded-full hover:bg-green-600 hover:text-white transition-colors"
-            >
-              WhatsApp
-            </a>
-            <Link 
-              href="/about/"
-              className="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-full hover:bg-blue-600 hover:text-white transition-colors"
-            >
-              About Dr. Sayuj
-            </Link>
-          </div>
-        </section>
-      </div>
-
-      {/* JSON-LD Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "MedicalWebPage",
-            "mainEntityOfPage": `${SITE_URL}/neurosurgeon-hyderabad/`,
-            "name": "Best Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan",
-            "description": "Best neurosurgeon in Hyderabad specializing in endoscopic spine surgery, brain tumor surgery, epilepsy surgery. OPD at Yashoda Malakpet.",
-            "medicalSpecialty": "Neurosurgery",
-            "about": [
-              {
-                "@type": "MedicalProcedure",
-                "name": "Endoscopic Spine Surgery",
-                "description": "Minimally invasive spine procedures with faster recovery"
-              },
-              {
-                "@type": "MedicalProcedure",
-                "name": "Brain Tumor Surgery", 
-                "description": "Advanced neuronavigation-guided microsurgery"
-              },
-              {
-                "@type": "MedicalProcedure",
-                "name": "Epilepsy Surgery",
-                "description": "Comprehensive treatment for drug-resistant epilepsy"
-              }
-            ],
-            "author": {
-              "@id": `${SITE_URL}/#physician`
-            },
-            "publisher": {
-              "@id": `${SITE_URL}/#organization`
-            },
-            "datePublished": "2023-01-01T00:00:00+05:30",
-            "dateModified": new Date().toISOString(),
-            "breadcrumb": {
-              "@type": "BreadcrumbList",
-              "itemListElement": [
-                {
-                  "@type": "ListItem",
-                  "position": 1,
-                  "name": "Home",
-                  "item": `${SITE_URL}/`
-                },
-                {
-                  "@type": "ListItem",
-                  "position": 2,
-                  "name": "Best Neurosurgeon in Hyderabad",
-                  "item": `${SITE_URL}/neurosurgeon-hyderabad/`
-                }
-              ]
-            },
-            "potentialAction": {
-              "@type": "SeekToAction",
-              "target": `${SITE_URL}/appointments`,
-              "queryInput": "required name=query"
-            },
-            "hasPart": [
-              {
-                "@type": "FAQPage",
-                "mainEntity": [
-                  {
-                    "@type": "Question",
-                    "name": "What makes Dr. Sayuj the best neurosurgeon in Hyderabad?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": "Dr. Sayuj Krishnan combines extensive experience (15+ years) with specialized training in endoscopic spine surgery. His expertise in minimally invasive techniques, commitment to patient safety, and evidence-based approach make him a preferred choice for neurosurgical care in Hyderabad."
-                    }
-                  },
-                  {
-                    "@type": "Question",
-                    "name": "What is endoscopic spine surgery?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": "Endoscopic spine surgery uses small incisions (8-10mm) and specialized instruments to treat spine conditions. This minimally invasive approach results in less pain, faster recovery, and reduced risk of complications compared to traditional open surgery."
-                    }
-                  },
-                  {
-                    "@type": "Question",
-                    "name": "How do I book an appointment?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": "You can book an appointment by calling +91-9778280044, emailing neurospinehyd@drsayuj.com, or using our online booking system. OPD consultations are available Monday to Saturday at Yashoda Hospital, Malakpet."
-                    }
-                  },
-                  {
-                    "@type": "Question",
-                    "name": "Do you accept insurance?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": "Yes, we accept most major insurance providers including corporate insurance plans. Cashless treatment is available for eligible patients. Please bring your insurance card and referral letter for your consultation."
-                    }
-                  }
-                ]
-              }
-            ]
-          })
-        }}
-      />
-    </div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(physicianSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+    </main>
   );
 }
