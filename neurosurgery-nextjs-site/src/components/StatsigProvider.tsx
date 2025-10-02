@@ -42,7 +42,7 @@ export default function StatsigProvider({ children }: StatsigProviderProps) {
   }
 
   return (
-    <StatsigProviderBase>
+    <StatsigProviderBase client={null}>
       {children}
     </StatsigProviderBase>
   );
