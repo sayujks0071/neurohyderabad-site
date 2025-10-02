@@ -11,7 +11,7 @@ import { analytics } from "../src/lib/analytics";
 
 export const metadata = {
   title: 'Neurosurgeon in Hyderabad | Endoscopic Spine Surgeon',
-  description: 'Endoscopic discectomy, foraminotomy, and minimally invasive spine surgery in Hyderabad. Same-day mobilization. Book a consultation.',
+  description: 'Expert neurosurgeon Dr. Sayuj Krishnan in Hyderabad. Specializing in endoscopic spine surgery, brain tumor surgery & epilepsy treatment. Same-day discharge. Book consultation.',
   alternates: {
     canonical: `${SITE_URL}/`,
     languages: {
@@ -96,14 +96,18 @@ export default function Home() {
                   >
                     Learn More About MISS →
                   </Link>
+                  <div className="mt-4">
+                    <Link href="/conditions/slip-disc-treatment-hyderabad/" className="text-blue-600 hover:underline mr-4">Slip Disc Treatment</Link>
+                    <Link href="/conditions/spinal-stenosis-treatment-hyderabad/" className="text-blue-600 hover:underline">Spinal Stenosis</Link>
+                  </div>
                 </div>
               </div>
               <div className="bg-white p-8 rounded-lg shadow-lg">
                 <h3 className="text-xl font-semibold mb-4 text-blue-700">Who Benefits from MISS?</h3>
                 <ul className="space-y-2 text-gray-600">
-                  <li>• Patients with herniated discs (slip disc)</li>
-                  <li>• Spinal stenosis causing leg pain</li>
-                  <li>• Sciatica not improving with conservative treatment</li>
+                  <li>• <Link href="/conditions/slip-disc-treatment-hyderabad/" className="text-blue-600 hover:underline">Patients with herniated discs (slip disc)</Link></li>
+                  <li>• <Link href="/conditions/spinal-stenosis-treatment-hyderabad/" className="text-blue-600 hover:underline">Spinal stenosis causing leg pain</Link></li>
+                  <li>• <Link href="/conditions/sciatica-treatment-hyderabad/" className="text-blue-600 hover:underline">Sciatica not improving with conservative treatment</Link></li>
                   <li>• Recurrent disc herniations</li>
                   <li>• Foraminal stenosis</li>
                 </ul>
@@ -166,6 +170,10 @@ export default function Home() {
                   >
                     Learn More About Brain Tumor Surgery →
                   </Link>
+                  <div className="mt-4">
+                    <Link href="/services/epilepsy-surgery-hyderabad/" className="text-blue-600 hover:underline mr-4">Epilepsy Surgery</Link>
+                    <Link href="/conditions/trigeminal-neuralgia-treatment-hyderabad/" className="text-blue-600 hover:underline">Trigeminal Neuralgia</Link>
+                  </div>
                 </div>
               </div>
             </div>
