@@ -4,8 +4,8 @@ import Link from "next/link";
 import { HeroCTA, SocialProof, InsuranceBand } from "../../../src/components/Experiments";
 import { analytics } from "../../../src/lib/analytics";
 import ScrollDepthTracker from "../../../src/components/ScrollDepthTracker";
-import Breadcrumbs from "../../../components/Breadcrumbs";
-import RelatedContent from "../../../components/RelatedContent";
+import Breadcrumbs from "../../components/Breadcrumbs";
+import RelatedContent from "../../components/RelatedContent";
 
 export const metadata: Metadata = {
   title: "Brain Tumor Surgery in Hyderabad | Microsurgery & Radiosurgery",
