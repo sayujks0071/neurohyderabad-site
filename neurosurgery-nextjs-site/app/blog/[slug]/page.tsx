@@ -1,4 +1,4 @@
-import { SITE_URL } from "../../../src/lib/seo";
+import { SITE_URL } from "../../src/lib/seo";
 import { getPostBySlug, getPosts } from "../../../src/lib/wordpress";
 import type { Metadata } from "next";
 import Link from "next/link";
