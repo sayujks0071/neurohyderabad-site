@@ -5,26 +5,19 @@ import {
   useFeatureGate,
   useExperiment
 } from '@statsig/react-bindings';
-import { 
-  trackAppointmentBooking, 
-  trackServiceInquiry, 
-  trackContactForm, 
-  trackPhoneCall, 
-  trackEmailClick,
-  trackEngagement
-} from '../lib/statsig';
+import { analytics } from '../lib/analytics';
 
 export const useStatsig = () => {
   const client = useStatsigClient();
 
   return {
     logEvent: client?.logEvent.bind(client),
-    trackAppointmentBooking,
-    trackServiceInquiry,
-    trackContactForm,
-    trackPhoneCall,
-    trackEmailClick,
-    trackEngagement
+    trackAppointmentBooking: (data: any) => analytics.appointmentSuccess(data.pageSlug, data.serviceOrCondition),
+    trackServiceInquiry: (data: any) => analytics.appointmentStart(data.pageSlug, data.serviceOrCondition),
+    trackContactForm: (data: any) => analytics.appointmentSubmit(data.pageSlug, data.errorCount),
+    trackPhoneCall: (data: any) => analytics.phoneClick(data.pageSlug, 'main'),
+    trackEmailClick: (data: any) => analytics.track('Email_Click', { page_slug: data.pageSlug }),
+    trackEngagement: (data: any) => analytics.track('Engagement', { page_slug: data.pageSlug, engagement_type: data.type })
   };
 };
 
