@@ -2,6 +2,9 @@ import Link from "next/link";
 import FAQPageSchema from "./components/schemas/FAQPageSchema";
 import BreadcrumbSchema from "./components/schemas/BreadcrumbSchema";
 import { SITE_URL } from "../src/lib/seo";
+import { HeroCTA, StickyCTA, SocialProof, LocalH1 } from "../src/components/ABTestComponents";
+import ScrollDepthTracker from "../src/components/ScrollDepthTracker";
+import { trackPageView } from "../src/lib/statsig";
 
 export const metadata = {
   title: 'Neurosurgeon in Hyderabad | Endoscopic Spine Surgeon',
@@ -19,44 +22,39 @@ export const metadata = {
 export const revalidate = 21600;
 
 export default function Home() {
+  // Track page view
+  if (typeof window !== 'undefined') {
+    trackPageView('home', '/', 'endoscopic_spine_surgery');
+  }
+
   return (
-    <div className="min-h-screen bg-white">
+    <>
+      <ScrollDepthTracker pageSlug="/" />
+      <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <header className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Best Neurosurgeon in Hyderabad — Brain & Spine Surgery
-            </h1>
+            <LocalH1 
+              baseTitle="Best Neurosurgeon in Hyderabad — Brain & Spine Surgery"
+              pageSlug="/"
+              service="endoscopic_spine_surgery"
+            />
             <p className="text-xl md:text-2xl mb-8">
               Dr Sayuj Krishnan — Leading Expert in Minimally Invasive Neurosurgery
               <br />
               Specializing in Endoscopic Spine Surgery, Brain Tumor Surgery & Epilepsy Treatment
             </p>
-            <a
-              href="#appointment"
-              className="bg-white text-blue-800 px-8 py-3 rounded-full text-lg font-semibold hover:bg-blue-50 transition-colors"
-            >
-              Book Appointment
-            </a>
+            <HeroCTA 
+              pageSlug="/"
+              service="endoscopic_spine_surgery"
+            />
           </div>
         </div>
       </header>
 
-      {/* Author Byline */}
-      <section className="py-8 bg-blue-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <p className="text-gray-700">
-              <strong>Medically reviewed by Dr Sayuj Krishnan</strong> — MBBS, DNB Neurosurgery (Direct 6 years), 
-              Fellowship in Minimally Invasive and Advanced Spine Surgery, Observer-ship in Full Endoscopic Spine Surgery (Germany)
-            </p>
-            <p className="text-sm text-gray-600 mt-2">
-              Last reviewed: September 22, 2025
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* Social Proof Section */}
+      <SocialProof pageSlug="/" />
 
 
       {/* Minimally Invasive Spine Surgery (MISS) */}
@@ -547,6 +545,10 @@ export default function Home() {
       <BreadcrumbSchema items={[
         { name: "Home", path: "/" }
       ]} />
+      
+      {/* Sticky CTA for mobile */}
+      <StickyCTA pageSlug="/" />
     </div>
+    </>
   );
 }
