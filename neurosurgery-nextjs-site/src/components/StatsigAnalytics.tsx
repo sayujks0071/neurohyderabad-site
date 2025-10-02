@@ -41,19 +41,11 @@ export default function StatsigAnalytics() {
 
     // Track errors
     const handleError = (event: ErrorEvent) => {
-      analytics.track('JavaScript_Error', {
-        page_slug: pathname,
-        error_message: event.message,
-        error_type: 'javascript_error'
-      });
+      analytics.formError(pathname, 'javascript_error', event.message);
     };
 
     const handleUnhandledRejection = (event: PromiseRejectionEvent) => {
-      analytics.track('Unhandled_Promise_Rejection', {
-        page_slug: pathname,
-        error_message: event.reason?.toString() || 'Unknown error',
-        error_type: 'unhandled_promise_rejection'
-      });
+      analytics.formError(pathname, 'unhandled_promise_rejection', event.reason?.toString() || 'Unknown error');
     };
 
     // Add event listeners
