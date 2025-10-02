@@ -21,40 +21,35 @@ export default function StatsigAnalytics() {
       import('web-vitals').then(({ onCLS, onINP, onFCP, onLCP, onTTFB }) => {
         onCLS((metric) => {
           trackPerformance('CLS', metric.value, 'score');
-          client?.logEvent('web_vital', {
-            metric: 'CLS',
+          client?.logEvent('web_vital', 'CLS', {
             value: metric.value,
             unit: 'score'
           });
         });
         onINP((metric) => {
           trackPerformance('INP', metric.value, 'ms');
-          client?.logEvent('web_vital', {
-            metric: 'INP',
+          client?.logEvent('web_vital', 'INP', {
             value: metric.value,
             unit: 'ms'
           });
         });
         onFCP((metric) => {
           trackPerformance('FCP', metric.value, 'ms');
-          client?.logEvent('web_vital', {
-            metric: 'FCP',
+          client?.logEvent('web_vital', 'FCP', {
             value: metric.value,
             unit: 'ms'
           });
         });
         onLCP((metric) => {
           trackPerformance('LCP', metric.value, 'ms');
-          client?.logEvent('web_vital', {
-            metric: 'LCP',
+          client?.logEvent('web_vital', 'LCP', {
             value: metric.value,
             unit: 'ms'
           });
         });
         onTTFB((metric) => {
           trackPerformance('TTFB', metric.value, 'ms');
-          client?.logEvent('web_vital', {
-            metric: 'TTFB',
+          client?.logEvent('web_vital', 'TTFB', {
             value: metric.value,
             unit: 'ms'
           });
@@ -65,8 +60,7 @@ export default function StatsigAnalytics() {
     // Track errors
     const handleError = (event: ErrorEvent) => {
       trackError('javascript_error', event.message, pathname);
-      client?.logEvent('error_occurred', {
-        error_type: 'javascript_error',
+      client?.logEvent('error_occurred', 'javascript_error', {
         error_message: event.message,
         page_path: pathname
       });
@@ -74,8 +68,7 @@ export default function StatsigAnalytics() {
 
     const handleUnhandledRejection = (event: PromiseRejectionEvent) => {
       trackError('unhandled_promise_rejection', event.reason?.toString() || 'Unknown error', pathname);
-      client?.logEvent('error_occurred', {
-        error_type: 'unhandled_promise_rejection',
+      client?.logEvent('error_occurred', 'unhandled_promise_rejection', {
         error_message: event.reason?.toString() || 'Unknown error',
         page_path: pathname
       });
