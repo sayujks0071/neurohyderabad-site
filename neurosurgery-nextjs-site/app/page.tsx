@@ -2,9 +2,9 @@ import Link from "next/link";
 import FAQPageSchema from "./components/schemas/FAQPageSchema";
 import BreadcrumbSchema from "./components/schemas/BreadcrumbSchema";
 import { SITE_URL } from "../src/lib/seo";
-import { HeroCTA, StickyCTA, SocialProof, LocalH1 } from "../src/components/ABTestComponents";
+import { HeroCTA, StickyCTA, SocialProof } from "../src/components/Experiments";
 import ScrollDepthTracker from "../src/components/ScrollDepthTracker";
-import { trackPageView } from "../src/lib/statsig";
+import { analytics } from "../src/lib/analytics";
 
 export const metadata = {
   title: 'Neurosurgeon in Hyderabad | Endoscopic Spine Surgeon',
@@ -24,7 +24,7 @@ export const revalidate = 21600;
 export default function Home() {
   // Track page view
   if (typeof window !== 'undefined') {
-    trackPageView('home', '/', 'endoscopic_spine_surgery');
+    analytics.pageView('/', 'home', 'endoscopic_spine_surgery');
   }
 
   return (
@@ -35,11 +35,9 @@ export default function Home() {
       <header className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <LocalH1 
-              baseTitle="Best Neurosurgeon in Hyderabad — Brain & Spine Surgery"
-              pageSlug="/"
-              service="endoscopic_spine_surgery"
-            />
+            <h1 className="text-4xl md:text-6xl font-bold mb-6">
+              Best Neurosurgeon in Hyderabad — Brain & Spine Surgery
+            </h1>
             <p className="text-xl md:text-2xl mb-8">
               Dr Sayuj Krishnan — Leading Expert in Minimally Invasive Neurosurgery
               <br />
@@ -47,7 +45,7 @@ export default function Home() {
             </p>
             <HeroCTA 
               pageSlug="/"
-              service="endoscopic_spine_surgery"
+              serviceOrCondition="endoscopic_spine_surgery"
             />
           </div>
         </div>

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { NavCTA } from "../../src/components/ABTestComponents";
+import { NavCTA } from "../../src/components/Experiments";
 
 export default function Header() {
   return (

@@ -1,50 +1,212 @@
-// Google Analytics 4 Configuration
-// Replace with your actual GA4 Measurement ID
-export const GA4_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID || 'G-XXXXXXXXXX';
+// Centralized event tracking helper with privacy-safe instrumentation
+import { Statsig } from '@statsig/js-client';
 
-// Custom events for medical practice tracking
-export const trackEvent = (eventName: string, parameters?: Record<string, any>) => {
-  if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('event', eventName, parameters);
+// Event tracking interface
+interface EventProps {
+  page_type?: string;
+  page_slug?: string;
+  device?: 'mobile' | 'desktop' | 'tablet';
+  service_or_condition?: string;
+  experiment_variant?: string;
+  [key: string]: string | number | boolean | undefined;
+}
+
+// Device detection helper
+function getDevice(): 'mobile' | 'desktop' | 'tablet' {
+  if (typeof window === 'undefined') return 'desktop';
+  
+  const width = window.innerWidth;
+  if (width < 768) return 'mobile';
+  if (width < 1024) return 'tablet';
+  return 'desktop';
+}
+
+// Privacy-safe value masking
+function maskSensitiveValue(value: string): string {
+  const sensitivePatterns = [
+    /email/i,
+    /phone/i,
+    /name/i,
+    /address/i,
+    /ssn/i,
+    /credit/i,
+    /card/i,
+    /password/i
+  ];
+  
+  for (const pattern of sensitivePatterns) {
+    if (pattern.test(value)) {
+      return 'masked_field';
+    }
+  }
+  
+  return value;
+}
+
+// Main tracking function
+export function track(eventName: string, props: EventProps = {}) {
+  // Only track if user has given consent
+  const hasConsent = typeof window !== 'undefined' && 
+    localStorage.getItem('analytics-consent') === 'true';
+  
+  if (!hasConsent) return;
+
+  try {
+    // Add default properties
+    const enrichedProps: EventProps = {
+      device: getDevice(),
+      timestamp: Date.now(),
+      ...props
+    };
+
+    // Mask sensitive values
+    Object.keys(enrichedProps).forEach(key => {
+      if (typeof enrichedProps[key] === 'string') {
+        enrichedProps[key] = maskSensitiveValue(enrichedProps[key] as string);
+      }
+    });
+
+    // Log to Statsig
+    Statsig.logEvent(eventName, undefined, enrichedProps);
+    
+    // Optional: Log to console in development
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Analytics Event:', eventName, enrichedProps);
+    }
+  } catch (error) {
+    console.error('Analytics tracking error:', error);
+  }
+}
+
+// Convenience functions for common events
+export const analytics = {
+  // Core funnel events
+  pageView: (pageSlug: string, pageType: string, serviceOrCondition?: string) => {
+    track('Page_View', {
+      page_slug: pageSlug,
+      page_type: pageType,
+      service_or_condition: serviceOrCondition
+    });
+  },
+
+  heroCTAClick: (pageSlug: string, ctaLabel: string, serviceOrCondition?: string) => {
+    track('Hero_CTA_Click', {
+      page_slug: pageSlug,
+      cta_label: ctaLabel,
+      service_or_condition: serviceOrCondition
+    });
+  },
+
+  stickyCTAClick: (pageSlug: string, ctaLabel: string) => {
+    track('Sticky_CTA_Click', {
+      page_slug: pageSlug,
+      cta_label: ctaLabel
+    });
+  },
+
+  navCTAClick: (pageSlug: string, ctaLabel: string) => {
+    track('Nav_CTA_Click', {
+      page_slug: pageSlug,
+      cta_label: ctaLabel
+    });
+  },
+
+  appointmentStart: (pageSlug: string, serviceOrCondition?: string) => {
+    track('Appointment_Start', {
+      page_slug: pageSlug,
+      service_or_condition: serviceOrCondition
+    });
+  },
+
+  appointmentSubmit: (pageSlug: string, errorCount: number = 0) => {
+    track('Appointment_Submit', {
+      page_slug: pageSlug,
+      form_errors_count: errorCount
+    });
+  },
+
+  appointmentSuccess: (pageSlug: string, serviceOrCondition?: string) => {
+    track('Appointment_Success', {
+      page_slug: pageSlug,
+      service_or_condition: serviceOrCondition
+    });
+  },
+
+  // Assist events
+  phoneClick: (pageSlug: string, phoneType: 'main' | 'whatsapp' | 'emergency') => {
+    track('Phone_Click', {
+      page_slug: pageSlug,
+      phone_type: phoneType
+    });
+  },
+
+  whatsAppClick: (pageSlug: string) => {
+    track('WhatsApp_Click', {
+      page_slug: pageSlug
+    });
+  },
+
+  directionsClick: (pageSlug: string) => {
+    track('Directions_Click', {
+      page_slug: pageSlug
+    });
+  },
+
+  formError: (pageSlug: string, fieldName: string, errorType: string) => {
+    track('Form_Error', {
+      page_slug: pageSlug,
+      field_name: maskSensitiveValue(fieldName),
+      error_type: errorType
+    });
+  },
+
+  formRageClicks: (pageSlug: string, clickCount: number) => {
+    track('Form_Rage_Clicks', {
+      page_slug: pageSlug,
+      click_count: clickCount
+    });
+  },
+
+  faqToggle: (pageSlug: string, faqId: string, opened: boolean) => {
+    track('FAQ_Toggle', {
+      page_slug: pageSlug,
+      faq_id: faqId,
+      opened: opened
+    });
+  },
+
+  // Core Web Vitals
+  coreWebVitals: (metricName: string, value: number, pageSlug: string) => {
+    track('Core_Web_Vitals', {
+      metric_name: metricName,
+      metric_value: value,
+      page_slug: pageSlug
+    });
+  },
+
+  // Scroll depth
+  scrollDepth: (pageSlug: string, depth: number) => {
+    track('Scroll_Depth', {
+      page_slug: pageSlug,
+      depth_percentage: depth
+    });
   }
 };
 
-// Medical practice specific events
-export const trackAppointmentBooking = (source: string) => {
-  trackEvent('appointment_booking', {
-    event_category: 'conversion',
-    event_label: source,
-    value: 1
+// Experiment exposure tracking
+export function trackExperimentExposure(experimentName: string, variant: string, pageSlug: string) {
+  track('Experiment_Exposure', {
+    experiment_name: experimentName,
+    experiment_variant: variant,
+    page_slug: pageSlug
   });
-};
+}
 
-export const trackPageView = (pagePath: string, pageTitle: string) => {
-  trackEvent('page_view', {
-    page_path: pagePath,
-    page_title: pageTitle
+// Feature gate exposure tracking
+export function trackFeatureGateExposure(gateName: string, enabled: boolean, pageSlug: string) {
+  track('Feature_Gate_Exposure', {
+    gate_name: gateName,
+    gate_enabled: enabled,
+    page_slug: pageSlug
   });
-};
-
-export const trackServiceInquiry = (serviceName: string) => {
-  trackEvent('service_inquiry', {
-    event_category: 'engagement',
-    event_label: serviceName
-  });
-};
-
-export const trackContactForm = (formType: string) => {
-  trackEvent('contact_form_submit', {
-    event_category: 'conversion',
-    event_label: formType
-  });
-};
-
-// Core Web Vitals tracking
-export const trackWebVitals = (metric: any) => {
-  trackEvent('web_vitals', {
-    event_category: 'performance',
-    event_label: metric.name,
-    value: Math.round(metric.value),
-    non_interaction: true
-  });
-};
+}
