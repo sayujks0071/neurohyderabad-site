@@ -9,9 +9,9 @@
   "redirects": [
     { "source": "/index.html", "destination": "/", "permanent": true },
     {
-      "source": "/(.*)",
+      "source": "/:path*",
       "has": [{ "type": "host", "value": "drsayuj.com" }],
-      "destination": "https://www.drsayuj.com/$1",
+      "destination": "https://www.drsayuj.com/:path*",
       "permanent": true
     }
   ],
