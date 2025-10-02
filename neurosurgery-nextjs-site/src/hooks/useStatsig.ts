@@ -26,15 +26,15 @@ export const useInteractionTracking = () => {
   const { trackEngagement } = useStatsig();
 
   const trackClick = (element: string, action: string = 'click') => {
-    trackEngagement(action, element);
+    trackEngagement({ type: action, element, pageSlug: window.location.pathname });
   };
 
   const trackHover = (element: string, duration: number) => {
-    trackEngagement('hover', element, duration);
+    trackEngagement({ type: 'hover', element, duration, pageSlug: window.location.pathname });
   };
 
   const trackScroll = (element: string, percentage: number) => {
-    trackEngagement('scroll', element, percentage);
+    trackEngagement({ type: 'scroll', element, percentage, pageSlug: window.location.pathname });
   };
 
   return {
