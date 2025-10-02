@@ -8,6 +8,9 @@ import PhysicianSchema from "./components/schemas/PhysicianSchema";
 import HospitalSchema from "./components/schemas/HospitalSchema";
 import GoogleAnalytics from "../src/components/GoogleAnalytics";
 import WebVitals from "../src/components/WebVitals";
+import StatsigProvider from "../src/components/StatsigProvider";
+import StatsigAnalytics from "../src/components/StatsigAnalytics";
+import StatsigSessionReplay from "../src/components/StatsigSessionReplay";
 import { SITE_URL } from "../src/lib/seo";
 
 const inter = Inter({
@@ -21,9 +24,9 @@ export const metadata: Metadata = {
   title: "Neurosurgeon in Hyderabad | Endoscopic Spine Surgeon",
   description: "Endoscopic discectomy, foraminotomy, and minimally invasive spine surgery in Hyderabad. Same-day mobilization. Book a consultation.",
   keywords: "neurosurgeon hyderabad, brain surgeon, spine specialist, brain tumor surgery, spine surgery, dr sayuj krishnan",
-  authors: [{ name: "Dr Sayuj Krishnan" }],
-  creator: "Dr Sayuj Krishnan",
-  publisher: "Dr Sayuj Krishnan",
+  authors: [{ name: "Dr. Sayuj Krishnan" }],
+  creator: "Dr. Sayuj Krishnan",
+  publisher: "Dr. Sayuj Krishnan",
   alternates: {
     canonical: SITE_URL,
     languages: {
@@ -32,7 +35,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Dr Sayuj Krishnan | Full Endoscopic Spine Surgeon in Hyderabad",
+    title: "Dr. Sayuj Krishnan | Full Endoscopic Spine Surgeon in Hyderabad",
     description: "Expert neurosurgeon in Hyderabad specializing in minimally invasive brain & spine surgery",
     url: SITE_URL,
     siteName: "Dr. Sayuj — Brain & Spine Care",
@@ -43,13 +46,13 @@ export const metadata: Metadata = {
         url: "/images/og-default.jpg",
         width: 1200,
         height: 630,
-        alt: "Dr Sayuj Krishnan — Neurosurgeon in Hyderabad",
+        alt: "Dr. Sayuj Krishnan — Neurosurgeon in Hyderabad",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dr Sayuj Krishnan | Full Endoscopic Spine Surgeon in Hyderabad",
+    title: "Dr. Sayuj Krishnan | Full Endoscopic Spine Surgeon in Hyderabad",
     description: "Expert neurosurgeon specializing in minimally invasive brain & spine surgery",
     images: ["/images/og-default.jpg"],
     site: "@drsayuj",
@@ -71,11 +74,14 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon.ico" },
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" }
+      { url: "/favicon.ico", type: "image/x-icon", sizes: "16x16" },
+      { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
+      { url: "/favicon-16x16.png", type: "image/png", sizes: "16x16" },
+      { url: "/favicon.ico", sizes: "any" },
     ],
-    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }]
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180" },
+    ],
   },
   manifest: "/site.webmanifest",
 };
@@ -95,18 +101,20 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://i0.wp.com" crossOrigin="" />
-        <link rel="dns-prefetch" href="https://i0.wp.com" />
       </head>
       <body className={`${inter.variable} antialiased`}>
-        <GoogleAnalytics />
-        <WebVitals />
-        <WebsiteSchema />
-        <PhysicianSchema />
-        <HospitalSchema />
-        <Header />
-        {children}
-        <Footer />
+        <StatsigProvider>
+          <GoogleAnalytics />
+          <WebVitals />
+          <StatsigAnalytics />
+          <StatsigSessionReplay />
+          <WebsiteSchema />
+          <PhysicianSchema />
+          <HospitalSchema />
+          <Header />
+          {children}
+          <Footer />
+        </StatsigProvider>
       </body>
     </html>
   );
