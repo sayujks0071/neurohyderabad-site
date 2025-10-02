@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { trackAppointmentStart, trackAppointmentSubmit, trackFormError } from '../lib/statsig';
+import { analytics } from '../lib/analytics';
 
 interface AppointmentFormTrackerProps {
   pageSlug: string;
@@ -33,7 +33,7 @@ export default function AppointmentFormTracker({
     const handleFirstFocus = () => {
       if (!hasTrackedStart.current) {
         hasTrackedStart.current = true;
-        trackAppointmentStart(pageSlug, service, condition, insuranceFlag, locationHint);
+        analytics.appointmentStart(pageSlug, service || condition);
       }
     };
 
@@ -50,11 +50,11 @@ export default function AppointmentFormTracker({
         if (!element.checkValidity()) {
           errorCount++;
           // Track individual field errors (with privacy masking)
-          trackFormError(pageSlug, element.name || element.id || 'unknown_field', 'validation_error');
+          analytics.formError(pageSlug, element.name || element.id || 'unknown_field', 'validation_error');
         }
       });
 
-      trackAppointmentSubmit(pageSlug, errorCount);
+      analytics.appointmentSubmit(pageSlug, errorCount);
     };
 
     // Track rage clicks (rapid clicking on submit button)
@@ -65,7 +65,7 @@ export default function AppointmentFormTracker({
       if (now - lastClickTime < 1000) { // Within 1 second
         clickCount++;
         if (clickCount >= 3) {
-          trackFormError(pageSlug, 'submit_button', 'rage_click');
+          analytics.formRageClicks(pageSlug, clickCount);
           clickCount = 0; // Reset to avoid spam
         }
       } else {
