@@ -13,7 +13,7 @@ interface HeroCTAProps {
 }
 
 export function HeroCTA({ pageSlug, serviceOrCondition, className = "" }: HeroCTAProps) {
-  const { value: ctaVariant } = useFeatureGate('exp_hero_cta_copy', 'control');
+  const { value: ctaVariant } = useFeatureGate('exp_hero_cta_copy');
   
   // Track experiment exposure
   React.useEffect(() => {
@@ -52,7 +52,7 @@ interface StickyCTAProps {
 }
 
 export function StickyCTA({ pageSlug }: StickyCTAProps) {
-  const { value: showStickyCTA } = useFeatureGate('exp_sticky_cta_mobile', false);
+  const { value: showStickyCTA } = useFeatureGate('exp_sticky_cta_mobile');
   
   // Track experiment exposure
   React.useEffect(() => {
@@ -90,7 +90,7 @@ interface SocialProofProps {
 }
 
 export function SocialProof({ pageSlug }: SocialProofProps) {
-  const { value: showSocialProof } = useFeatureGate('exp_social_proof_band', false);
+  const { value: showSocialProof } = useFeatureGate('exp_social_proof_band');
   
   // Track experiment exposure
   React.useEffect(() => {
@@ -160,7 +160,7 @@ interface NavCTAProps {
 }
 
 export function NavCTA({ pageSlug, className = "" }: NavCTAProps) {
-  const { value: navVariant } = useFeatureGate('exp_hero_cta_copy', 'control');
+  const { value: navVariant } = useFeatureGate('exp_hero_cta_copy');
   
   const getNavText = () => {
     switch (navVariant) {
@@ -269,7 +269,7 @@ interface InsuranceBandProps {
 }
 
 export function InsuranceBand({ pageSlug }: InsuranceBandProps) {
-  const { value: showInsuranceBand } = useFeatureGate('exp_insurance_band', false);
+  const { value: showInsuranceBand } = useFeatureGate('exp_insurance_band');
   
   // Track experiment exposure
   React.useEffect(() => {
