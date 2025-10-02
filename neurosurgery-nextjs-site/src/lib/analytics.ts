@@ -1,6 +1,9 @@
 // Centralized event tracking helper with privacy-safe instrumentation
 import { Statsig } from '@statsig/js-client';
 
+// Export GA4 measurement ID for GoogleAnalytics component
+export const GA4_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID || 'G-XXXXXXXXXX';
+
 // Event tracking interface
 interface EventProps {
   page_type?: string;
