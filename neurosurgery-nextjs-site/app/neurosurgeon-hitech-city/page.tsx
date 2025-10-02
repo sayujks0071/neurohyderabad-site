@@ -1,5 +1,10 @@
 import React from "react";
 
+// Force static generation
+export const dynamic = 'force-static';
+export const dynamicParams = false;
+export const revalidate = 86400;
+
 export const metadata = {
   title: "Neurosurgeon in Hitech City, Hyderabad | Endoscopic Spine | Dr. Sayuj Krishnan",
   description:
