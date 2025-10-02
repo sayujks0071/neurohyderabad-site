@@ -41,11 +41,7 @@ export default function StatsigProvider({ children }: StatsigProviderProps) {
     return <>{children}</>;
   }
 
-  return (
-    <StatsigProviderBase client={null}>
-      {children}
-    </StatsigProviderBase>
-  );
+  return <>{children}</>;
 }
 
 // Privacy-compliant consent banner
