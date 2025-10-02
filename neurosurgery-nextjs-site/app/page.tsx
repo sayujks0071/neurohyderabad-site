@@ -1,7 +1,6 @@
 import Link from "next/link";
 import FAQPageSchema from "./components/schemas/FAQPageSchema";
 import BreadcrumbSchema from "./components/schemas/BreadcrumbSchema";
-import SimpleStatsigTest from "./simple-statsig-test";
 import { SITE_URL } from "../src/lib/seo";
 
 export const metadata = {
@@ -59,8 +58,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Statsig Test Panel */}
-      <SimpleStatsigTest />
 
       {/* Minimally Invasive Spine Surgery (MISS) */}
       <section className="py-16 bg-gray-50">
