@@ -24,9 +24,9 @@ export default function StatsigProvider({ children }: StatsigProviderProps) {
       // Initialize Statsig with privacy-safe configuration
       const initStatsig = async () => {
         try {
-          const Statsig = (await import('@statsig/js-client')).default;
+          const StatsigClient = await import('@statsig/js-client');
           
-          await Statsig.initialize(
+          await StatsigClient.initialize(
             process.env.NEXT_PUBLIC_STATSIG_CLIENT_KEY!,
             {
               // Privacy-safe user ID (no PII)
