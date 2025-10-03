@@ -49,9 +49,9 @@ const nextConfig = {
     return [
       // CRITICAL: Apex domain redirect to www (single hop 301)
       {
-        source: '/:path*',
+        source: '/((?!api|_next|images|favicon.ico|robots.txt|sitemap.xml|site.webmanifest).*)',
         has: [{ type: 'host', value: 'drsayuj.com' }],
-        destination: 'https://www.drsayuj.com/:path*',
+        destination: 'https://www.drsayuj.com/$1',
         permanent: true,
       },
       // Brain tumor surgery redirects
