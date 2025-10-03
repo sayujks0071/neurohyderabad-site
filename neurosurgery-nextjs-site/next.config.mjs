@@ -3,8 +3,8 @@ const nextConfig = {
   // Enable compression
   compress: true,
   
-  // Consistent trailing slash behavior
-  trailingSlash: true,
+  // Consistent trailing slash behavior - disabled for API routes
+  trailingSlash: false,
   
   // Safari optimization: Reduce hydration payload
   experimental: {
