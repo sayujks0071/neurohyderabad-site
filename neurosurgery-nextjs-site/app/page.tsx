@@ -7,6 +7,7 @@ import SocialProofBand from "../src/components/Experiments/SocialProofBand";
 import ScrollDepthTracker from "../src/components/ScrollDepthTracker";
 import SEODashboard from "../src/components/SEODashboard";
 import SEOAuditDashboard from "../src/components/SEOAuditDashboard";
+import GoogleOAuth from "../src/components/GoogleOAuth";
 import { analytics } from "../src/lib/analytics";
 
 export const metadata = {
@@ -521,13 +522,29 @@ export default function Home() {
                     <span>State-of-the-art technology</span>
                   </li>
                 </ul>
-                <div className="mt-8">
+                <div className="mt-8 space-y-4">
                   <Link 
                     href="/appointments"
                     className="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-colors text-lg font-semibold inline-block"
                   >
                     Book Your Consultation
                   </Link>
+                  
+                  {/* Google OAuth for patient verification */}
+                  <div className="text-center">
+                    <p className="text-sm text-blue-700 mb-2">Verified patients can access priority booking</p>
+                    <GoogleOAuth 
+                      buttonText="Verify with Google"
+                      onSuccess={(response) => {
+                        console.log('Google verification successful:', response);
+                        // Handle successful verification
+                      }}
+                      onError={(error) => {
+                        console.error('Google verification failed:', error);
+                        // Handle verification error
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
             </div>

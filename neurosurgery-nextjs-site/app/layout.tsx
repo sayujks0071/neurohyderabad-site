@@ -96,12 +96,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
-      </head>
+        <html lang="en">
+          <head>
+            <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+            <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
+            <link rel="preconnect" href="https://accounts.google.com" crossOrigin="anonymous" />
+            <script src="https://accounts.google.com/gsi/client" async defer></script>
+          </head>
       <body className={`${inter.variable} antialiased`}>
         <StatsigClientProvider>
           <GoogleAnalytics />
