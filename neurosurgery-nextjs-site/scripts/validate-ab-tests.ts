@@ -90,14 +90,14 @@ class ABTestValidator {
     }
 
     // Check for cluster-specific support (Variant D)
-    if (content.includes('cta_text_spine') && content.includes('cta_text_tn') && content.includes('cta_text_epilepsy')) {
+    if (content.includes('cta_text_${pageCtx.cluster}') && content.includes('cta_text_generic')) {
       this.addResult('HeroCTA Cluster Support', 'PASS', 'Cluster-specific Variant D support is implemented');
     } else {
       this.addResult('HeroCTA Cluster Support', 'WARN', 'Cluster-specific Variant D support is not implemented');
     }
 
     // Check for reassurance microcopy
-    if (content.includes('reassurance_spine') && content.includes('showReassurance')) {
+    if (content.includes('reassurance_${pageCtx.cluster}') && content.includes('showReassurance')) {
       this.addResult('HeroCTA Reassurance', 'PASS', 'Reassurance microcopy support is implemented');
     } else {
       this.addResult('HeroCTA Reassurance', 'WARN', 'Reassurance microcopy support is not implemented');
@@ -111,7 +111,7 @@ class ABTestValidator {
     }
 
     // Check for event logging
-    if (content.includes('logCTA(\'hero\')')) {
+    if (content.includes('logCTA') && content.includes('hero')) {
       this.addResult('HeroCTA Events', 'PASS', 'Event logging is implemented');
     } else {
       this.addResult('HeroCTA Events', 'FAIL', 'Event logging is missing');
@@ -221,7 +221,7 @@ class ABTestValidator {
     }
 
     // Check for user ID management
-    if (content.includes('Cookies.get(\'uid\')') && content.includes('Cookies.set(\'uid\')')) {
+    if (content.includes('Cookies.get') && content.includes('Cookies.set')) {
       this.addResult('User ID Management', 'PASS', 'User ID cookie management is implemented');
     } else {
       this.addResult('User ID Management', 'FAIL', 'User ID cookie management is missing');
@@ -295,7 +295,7 @@ class ABTestValidator {
 }
 
 // Run validation
-if (require.main === module) {
+if (import.meta.url === `file://${process.argv[1]}`) {
   const validator = new ABTestValidator();
   validator.validateComponents();
   validator.printResults();

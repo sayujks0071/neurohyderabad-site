@@ -1,6 +1,6 @@
 'use client';
 
-import { useGate, useWebLogger, getPageContext } from '@/app/lib/ab';
+import { useWebLogger, getPageContext, useGate } from '@/app/lib/ab';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 

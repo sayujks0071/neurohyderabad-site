@@ -26,8 +26,6 @@ export default function StatsigClientProvider({ children }: { children: React.Re
     <StatsigProvider
       sdkKey={process.env.NEXT_PUBLIC_STATSIG_CLIENT_KEY!}
       user={user}
-      waitForInitialization={false}
-      options={{ environment: { tier: process.env.NEXT_PUBLIC_SITE_ENV || 'production' } }}
     >
       {children}
     </StatsigProvider>

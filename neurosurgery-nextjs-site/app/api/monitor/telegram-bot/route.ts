@@ -108,25 +108,25 @@ export async function POST(request: NextRequest) {
     const logsDir = join(process.cwd(), 'logs');
     const logFile = join(logsDir, `bot-activity-${today}.json`);
 
-    let existingLogs: any[] = [];
+    let activityLogs: any[] = [];
     try {
       const existingContent = await readFile(logFile, 'utf-8');
-      existingLogs = JSON.parse(existingContent);
+      activityLogs = JSON.parse(existingContent);
     } catch (error) {
       // File doesn't exist or is empty, start fresh
     }
 
-    existingLogs.push({
+    activityLogs.push({
       timestamp: new Date().toISOString(),
       ...activityLogEntry
     });
 
     // Keep only last 1000 entries
-    if (existingLogs.length > 1000) {
-      existingLogs = existingLogs.slice(-1000);
+    if (activityLogs.length > 1000) {
+      activityLogs = activityLogs.slice(-1000);
     }
 
-    await writeFile(logFile, JSON.stringify(existingLogs, null, 2));
+    await writeFile(logFile, JSON.stringify(activityLogs, null, 2));
 
     return NextResponse.json({
       success: true,

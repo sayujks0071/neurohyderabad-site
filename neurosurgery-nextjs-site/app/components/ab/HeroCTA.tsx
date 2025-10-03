@@ -26,22 +26,22 @@ export default function HeroCTA({
   const { logCTA } = useWebLogger(pageCtx);
 
   // Medical-appropriate variants with cluster-specific support
-  const getVariantText = () => {
+  const getVariantText = (): string => {
     if (!expEnabled || !hero) return defaultText;
     
     // Check for cluster-specific text first (Variant D)
     const clusterKey = `cta_text_${pageCtx.cluster}`;
-    if (hero[clusterKey]) {
+    if (hero[clusterKey] && typeof hero[clusterKey] === 'string') {
       return hero[clusterKey];
     }
     
     // Fall back to generic cluster text
-    if (hero.cta_text_generic) {
+    if (hero.cta_text_generic && typeof hero.cta_text_generic === 'string') {
       return hero.cta_text_generic;
     }
     
     // Fall back to original variant text
-    if (hero.cta_text) {
+    if (hero.cta_text && typeof hero.cta_text === 'string') {
       switch (hero.cta_text) {
         case 'book_consultation_dr_sayuj':
           return 'Book Consultation with Dr. Sayuj (Hyderabad)';
@@ -56,20 +56,20 @@ export default function HeroCTA({
     return defaultText;
   };
 
-  const label = getVariantText();
+  const label = getVariantText() || defaultText;
   const style = (expEnabled && hero?.cta_style) || defaultStyle;
 
   // Get reassurance microcopy for cluster-specific messaging
-  const getReassuranceText = () => {
+  const getReassuranceText = (): string | null => {
     if (!expEnabled || !hero || !showReassurance) return null;
     
     const reassuranceKey = `reassurance_${pageCtx.cluster}`;
-    if (hero[reassuranceKey]) {
+    if (hero[reassuranceKey] && typeof hero[reassuranceKey] === 'string') {
       return hero[reassuranceKey];
     }
     
     // Fall back to generic reassurance
-    if (hero.reassurance_generic) {
+    if (hero.reassurance_generic && typeof hero.reassurance_generic === 'string') {
       return hero.reassurance_generic;
     }
     

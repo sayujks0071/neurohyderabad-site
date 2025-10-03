@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { StatsigProvider as SSProvider } from '@statsig/react';
+import { StatsigProvider as SSProvider } from '@statsig/react-bindings';
 import Cookies from 'js-cookie';
 
 export default function StatsigProvider({ children }: { children: React.ReactNode }) {
@@ -20,8 +20,6 @@ export default function StatsigProvider({ children }: { children: React.ReactNod
     <SSProvider
       sdkKey={process.env.NEXT_PUBLIC_STATSIG_CLIENT_SDK_KEY as string}
       user={{ userID: uid, country: 'IN' }}
-      waitForInitialization={false}
-      options={{ environment: { tier: process.env.NEXT_PUBLIC_SITE_ENV || 'production' } }}
     >
       {children}
     </SSProvider>

@@ -1,13 +1,16 @@
 'use client';
 
-import { useExperiment, useGate, useStatsigLogEvent } from '@statsig/react-bindings';
+import { useExperiment, useFeatureGate, useStatsigClient } from '@statsig/react-bindings';
 
 export function useWebExperiments() {
-  const expEnabled = useGate('web_exp_enabled')?.value ?? true;
+  const expEnabled = useFeatureGate('web_exp_enabled')?.value ?? true;
   const hero = useExperiment('web_exp_hero_cta')?.value || {};
   const sticky = useExperiment('web_exp_sticky_cta')?.value || {};
   return { expEnabled, hero, sticky };
 }
+
+// Export useFeatureGate as useGate for use in components
+export { useFeatureGate as useGate };
 
 export function useWebLogger(ctx: { 
   page_path: string; 
@@ -16,11 +19,14 @@ export function useWebLogger(ctx: {
   device: string; 
   utm?: Record<string, string> 
 }) {
-  const logEvent = useStatsigLogEvent();
+  const client = useStatsigClient();
+  const logEvent = (eventName: string, properties?: Record<string, any>) => {
+    client?.logEvent(eventName, properties as any);
+  };
   
   // Enhanced context with referrer and entry page
   const getEnhancedContext = () => {
-    const enhancedCtx = { ...ctx };
+    const enhancedCtx: any = { ...ctx };
     
     if (typeof window !== 'undefined') {
       // Add referrer information
