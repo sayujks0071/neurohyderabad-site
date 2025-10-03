@@ -43,7 +43,7 @@ export default function Home() {
               <br />
               Specializing in Endoscopic Spine Surgery, Brain Tumor Surgery & Epilepsy Treatment
             </p>
-            <HeroCTA />
+            <HeroCTA pageSlug="/" />
           </div>
         </div>
       </header>
