@@ -8,20 +8,37 @@ interface HeroCTAProps {
   className?: string;
   defaultText?: string;
   defaultStyle?: 'primary' | 'outline' | 'success';
+  ariaLabel?: string;
 }
 
 export default function HeroCTA({ 
   onClick, 
   className = '', 
   defaultText = 'Book Consultation',
-  defaultStyle = 'primary'
+  defaultStyle = 'primary',
+  ariaLabel
 }: HeroCTAProps) {
   const { expEnabled, hero } = useWebExperiments();
   const pathname = usePathname();
   const pageCtx = getPageContext(pathname);
   const { logCTA } = useWebLogger(pageCtx);
 
-  const label = (expEnabled && hero?.cta_text) || defaultText;
+  // Medical-appropriate variants
+  const getVariantText = () => {
+    if (!expEnabled || !hero?.cta_text) return defaultText;
+    
+    switch (hero.cta_text) {
+      case 'book_consultation_dr_sayuj':
+        return 'Book Consultation with Dr. Sayuj (Hyderabad)';
+      case 'mri_review_today':
+        return 'Get Your MRI/Reports Reviewed Today';
+      case 'book_consultation':
+      default:
+        return 'Book Consultation';
+    }
+  };
+
+  const label = getVariantText();
   const style = (expEnabled && hero?.cta_style) || defaultStyle;
 
   const handleClick = () => {
@@ -50,6 +67,7 @@ export default function HeroCTA({
       onClick={handleClick}
       data-testid="hero-cta"
       data-experiment-variant={expEnabled ? style : 'control'}
+      aria-label={ariaLabel || `Book consultation with Dr. Sayuj - ${label}`}
     >
       {label}
     </button>

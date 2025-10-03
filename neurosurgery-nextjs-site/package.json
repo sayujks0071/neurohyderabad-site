@@ -10,6 +10,7 @@
     "promote:draft": "ts-node scripts/promote-draft.ts",
     "check:schemas": "ts-node scripts/check-schemas.ts",
     "check:lighthouse": "ts-node scripts/check-lighthouse.ts",
+    "validate:ab-tests": "ts-node scripts/validate-ab-tests.ts",
     "lhci": "lhci autorun",
     "seo:lh": "lhci autorun --collect.url=https://www.drsayuj.com --upload.target=temporary-public-storage"
   },

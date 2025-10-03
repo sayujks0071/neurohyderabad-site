@@ -17,6 +17,8 @@ export default function LocationBanner({ className = '' }: LocationBannerProps) 
 
   const handleClick = () => {
     logCTA('banner');
+    // Open appointment modal or navigate to booking page
+    window.location.href = '/appointments';
   };
 
   const handleDismiss = () => {
@@ -39,7 +41,7 @@ export default function LocationBanner({ className = '' }: LocationBannerProps) 
           </div>
           <div className="ml-3">
             <p className="text-sm text-blue-800">
-              <strong>Hyderabad Location:</strong> Dr. Sayuj Krishnan provides world-class neurosurgery services in Hyderabad with state-of-the-art facilities.
+              <strong>Consult Hyderabad's Neurosurgeon</strong> — Same-day appointments at Malakpet & Banjara Hills. Board-certified, minimally invasive options.
             </p>
           </div>
         </div>
@@ -47,8 +49,9 @@ export default function LocationBanner({ className = '' }: LocationBannerProps) 
           <button
             onClick={handleClick}
             className="text-sm bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded transition-colors duration-200"
+            aria-label="Book appointment with Dr. Sayuj"
           >
-            Learn More
+            Book now
           </button>
           <button
             onClick={handleDismiss}
