@@ -9,6 +9,7 @@ interface HeroCTAProps {
   defaultText?: string;
   defaultStyle?: 'primary' | 'outline' | 'success';
   ariaLabel?: string;
+  showReassurance?: boolean;
 }
 
 export default function HeroCTA({ 
@@ -16,30 +17,66 @@ export default function HeroCTA({
   className = '', 
   defaultText = 'Book Consultation',
   defaultStyle = 'primary',
-  ariaLabel
+  ariaLabel,
+  showReassurance = false
 }: HeroCTAProps) {
   const { expEnabled, hero } = useWebExperiments();
   const pathname = usePathname();
   const pageCtx = getPageContext(pathname);
   const { logCTA } = useWebLogger(pageCtx);
 
-  // Medical-appropriate variants
+  // Medical-appropriate variants with cluster-specific support
   const getVariantText = () => {
-    if (!expEnabled || !hero?.cta_text) return defaultText;
+    if (!expEnabled || !hero) return defaultText;
     
-    switch (hero.cta_text) {
-      case 'book_consultation_dr_sayuj':
-        return 'Book Consultation with Dr. Sayuj (Hyderabad)';
-      case 'mri_review_today':
-        return 'Get Your MRI/Reports Reviewed Today';
-      case 'book_consultation':
-      default:
-        return 'Book Consultation';
+    // Check for cluster-specific text first (Variant D)
+    const clusterKey = `cta_text_${pageCtx.cluster}`;
+    if (hero[clusterKey]) {
+      return hero[clusterKey];
     }
+    
+    // Fall back to generic cluster text
+    if (hero.cta_text_generic) {
+      return hero.cta_text_generic;
+    }
+    
+    // Fall back to original variant text
+    if (hero.cta_text) {
+      switch (hero.cta_text) {
+        case 'book_consultation_dr_sayuj':
+          return 'Book Consultation with Dr. Sayuj (Hyderabad)';
+        case 'mri_review_today':
+          return 'Get Your MRI/Reports Reviewed Today';
+        case 'book_consultation':
+        default:
+          return 'Book Consultation';
+      }
+    }
+    
+    return defaultText;
   };
 
   const label = getVariantText();
   const style = (expEnabled && hero?.cta_style) || defaultStyle;
+
+  // Get reassurance microcopy for cluster-specific messaging
+  const getReassuranceText = () => {
+    if (!expEnabled || !hero || !showReassurance) return null;
+    
+    const reassuranceKey = `reassurance_${pageCtx.cluster}`;
+    if (hero[reassuranceKey]) {
+      return hero[reassuranceKey];
+    }
+    
+    // Fall back to generic reassurance
+    if (hero.reassurance_generic) {
+      return hero.reassurance_generic;
+    }
+    
+    return null;
+  };
+
+  const reassuranceText = getReassuranceText();
 
   const handleClick = () => {
     logCTA('hero');
@@ -62,14 +99,21 @@ export default function HeroCTA({
   };
 
   return (
-    <button 
-      className={`${getStyleClasses()} ${className}`}
-      onClick={handleClick}
-      data-testid="hero-cta"
-      data-experiment-variant={expEnabled ? style : 'control'}
-      aria-label={ariaLabel || `Book consultation with Dr. Sayuj - ${label}`}
-    >
-      {label}
-    </button>
+    <div className={`hero-cta-container ${className}`}>
+      <button 
+        className={`${getStyleClasses()}`}
+        onClick={handleClick}
+        data-testid="hero-cta"
+        data-experiment-variant={expEnabled ? style : 'control'}
+        aria-label={ariaLabel || `Book consultation with Dr. Sayuj - ${label}`}
+      >
+        {label}
+      </button>
+      {reassuranceText && (
+        <p className="text-xs text-gray-600 mt-2 text-center max-w-sm mx-auto">
+          {reassuranceText}
+        </p>
+      )}
+    </div>
   );
 }

@@ -43,9 +43,21 @@ export default function StickyCTA({ onClick, className = '', phoneNumber = '+91-
     window.open(`https://wa.me/919848417094`, '_blank');
   };
 
-  // Get sticky CTA variant
+  // Get sticky CTA variant with after-hours logic
   const getStickyVariant = () => {
     if (!expEnabled || !sticky?.variant) return 'book_consultation';
+    
+    // Check for after-hours WhatsApp switching
+    if (sticky.enable_after_hours && sticky.variant === 'book_consultation') {
+      const now = new Date();
+      const istHour = now.getUTCHours() + 5.5; // IST offset
+      
+      // Switch to WhatsApp after 7 PM IST
+      if (istHour >= 19) {
+        return 'whatsapp';
+      }
+    }
+    
     return sticky.variant;
   };
 

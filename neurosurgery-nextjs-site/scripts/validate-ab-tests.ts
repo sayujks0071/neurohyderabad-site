@@ -89,6 +89,20 @@ class ABTestValidator {
       this.addResult('HeroCTA Variants', 'FAIL', 'Required variants are missing');
     }
 
+    // Check for cluster-specific support (Variant D)
+    if (content.includes('cta_text_spine') && content.includes('cta_text_tn') && content.includes('cta_text_epilepsy')) {
+      this.addResult('HeroCTA Cluster Support', 'PASS', 'Cluster-specific Variant D support is implemented');
+    } else {
+      this.addResult('HeroCTA Cluster Support', 'WARN', 'Cluster-specific Variant D support is not implemented');
+    }
+
+    // Check for reassurance microcopy
+    if (content.includes('reassurance_spine') && content.includes('showReassurance')) {
+      this.addResult('HeroCTA Reassurance', 'PASS', 'Reassurance microcopy support is implemented');
+    } else {
+      this.addResult('HeroCTA Reassurance', 'WARN', 'Reassurance microcopy support is not implemented');
+    }
+
     // Check for style variants
     if (content.includes('primary') && content.includes('outline') && content.includes('success')) {
       this.addResult('HeroCTA Styles', 'PASS', 'Style variants are implemented');
