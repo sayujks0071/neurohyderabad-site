@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { readdir, stat } from 'fs/promises';
+import { readdir, stat, readFile } from 'fs/promises';
 import { join } from 'path';
 
 interface BotMetrics {
@@ -11,6 +11,9 @@ interface BotMetrics {
   healthStatus: 'healthy' | 'warning' | 'error';
   uptime: string;
   responseTime: number;
+  telegramBotEvents: number;
+  telegramBotSuccessRate: number;
+  telegramBotAvgProcessingTime: number;
 }
 
 export async function GET(request: NextRequest) {
@@ -25,7 +28,10 @@ export async function GET(request: NextRequest) {
       averageFileSize: 0,
       healthStatus: 'healthy',
       uptime: '',
-      responseTime: 0
+      responseTime: 0,
+      telegramBotEvents: 0,
+      telegramBotSuccessRate: 0,
+      telegramBotAvgProcessingTime: 0
     };
 
     // Check content directory
@@ -116,6 +122,34 @@ export async function GET(request: NextRequest) {
     
     // Response time
     metrics.responseTime = Date.now() - startTime;
+
+    // Calculate Telegram bot metrics
+    try {
+      const botLogsDir = join(process.cwd(), 'logs', 'telegram-bot');
+      const today = new Date().toISOString().split('T')[0];
+      const botLogFile = join(botLogsDir, `telegram-bot-${today}.json`);
+      
+      const botLogContent = await readFile(botLogFile, 'utf-8');
+      const botEvents = JSON.parse(botLogContent);
+      
+      metrics.telegramBotEvents = botEvents.length;
+      
+      if (botEvents.length > 0) {
+        const successfulEvents = botEvents.filter((event: any) => event.success);
+        metrics.telegramBotSuccessRate = (successfulEvents.length / botEvents.length) * 100;
+        
+        const processingTimes = botEvents
+          .filter((event: any) => event.processing_time_ms > 0)
+          .map((event: any) => event.processing_time_ms);
+        
+        if (processingTimes.length > 0) {
+          metrics.telegramBotAvgProcessingTime = processingTimes.reduce((sum: number, time: number) => sum + time, 0) / processingTimes.length;
+        }
+      }
+    } catch (error) {
+      // No bot logs found or error reading them
+      console.log('No telegram bot logs found for today');
+    }
 
     return NextResponse.json(metrics);
   } catch (error) {

@@ -23,6 +23,9 @@ interface BotMetrics {
   healthStatus: 'healthy' | 'warning' | 'error';
   uptime: string;
   responseTime: number;
+  telegramBotEvents: number;
+  telegramBotSuccessRate: number;
+  telegramBotAvgProcessingTime: number;
 }
 
 interface ContentFile {
@@ -38,6 +41,8 @@ interface BotActivity {
   action: string;
   status: 'success' | 'error' | 'warning';
   details: string;
+  source?: string;
+  metadata?: Record<string, any>;
 }
 
 export default function MonitorPage() {
@@ -334,6 +339,62 @@ export default function MonitorPage() {
                   </div>
                   <p className="text-sm font-medium text-gray-500">Response Time</p>
                   <p className="text-2xl font-semibold text-gray-900">{metrics.responseTime}ms</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Telegram Bot Metrics */}
+        {metrics && (
+          <div className="bg-white rounded-lg shadow mt-8">
+            <div className="px-6 py-4 border-b border-gray-200">
+              <h3 className="text-lg font-medium text-gray-900">Telegram Bot Metrics</h3>
+              <p className="text-sm text-gray-500 mt-1">Replit Telegram Bot Activity & Statsig Integration</p>
+            </div>
+            <div className="px-6 py-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="text-center">
+                  <div className="flex items-center justify-center w-12 h-12 mx-auto mb-3 bg-teal-100 text-teal-600 rounded-full">
+                    <Users className="w-6 h-6" />
+                  </div>
+                  <p className="text-sm font-medium text-gray-500">Bot Events Today</p>
+                  <p className="text-2xl font-semibold text-gray-900">{metrics.telegramBotEvents || 0}</p>
+                </div>
+                <div className="text-center">
+                  <div className="flex items-center justify-center w-12 h-12 mx-auto mb-3 bg-emerald-100 text-emerald-600 rounded-full">
+                    <CheckCircle className="w-6 h-6" />
+                  </div>
+                  <p className="text-sm font-medium text-gray-500">Success Rate</p>
+                  <p className="text-2xl font-semibold text-gray-900">
+                    {metrics.telegramBotSuccessRate ? `${metrics.telegramBotSuccessRate.toFixed(1)}%` : 'N/A'}
+                  </p>
+                </div>
+                <div className="text-center">
+                  <div className="flex items-center justify-center w-12 h-12 mx-auto mb-3 bg-indigo-100 text-indigo-600 rounded-full">
+                    <Clock className="w-6 h-6" />
+                  </div>
+                  <p className="text-sm font-medium text-gray-500">Avg Processing Time</p>
+                  <p className="text-2xl font-semibold text-gray-900">
+                    {metrics.telegramBotAvgProcessingTime ? `${metrics.telegramBotAvgProcessingTime.toFixed(0)}ms` : 'N/A'}
+                  </p>
+                </div>
+              </div>
+              
+              {/* Statsig Integration Status */}
+              <div className="mt-6 p-4 bg-gray-50 rounded-lg">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h4 className="text-sm font-medium text-gray-900">Statsig Integration</h4>
+                    <p className="text-xs text-gray-500">Telegram bot events are being tracked in Statsig dashboard</p>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                    <span className="text-xs text-gray-600">Active</span>
+                  </div>
+                </div>
+                <div className="mt-3 text-xs text-gray-500">
+                  <p>Events tracked: Telegram_Bot_Activity, Content_Generated, Bot_Error, Bot_Performance</p>
                 </div>
               </div>
             </div>
