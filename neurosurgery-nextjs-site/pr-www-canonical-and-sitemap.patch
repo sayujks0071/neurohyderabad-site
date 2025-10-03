@@ -1,0 +1,42 @@
+*** Begin Patch
+*** Add File: middleware.ts
++import { NextResponse } from "next/server";
++import type { NextRequest } from "next/server";
++
++export function middleware(req: NextRequest) {
++  const host = req.headers.get("host") || "";
++  // Force www canonical: drsayuj.com -> www.drsayuj.com
++  if (host === "drsayuj.com") {
++    const url = req.nextUrl.clone();
++    url.host = "www.drsayuj.com";
++    return NextResponse.redirect(url, 308);
++  }
++  return NextResponse.next();
++}
++
++export const config = { matcher: "/:path*" };
++
+*** End Patch
+*** Update File: src/lib/seo.ts
+@@
+-export const SITE_URL = "https://drsayuj.com";
++// Canonical host (enforced via middleware)
++export const SITE_URL = "https://www.drsayuj.com";
+ export const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "contact@drsayujkrishnan.com";
+*** End Patch
+*** Add File: next-sitemap.config.mjs
++/** @type {import('next-sitemap').IConfig} */
++export default {
++  siteUrl: "https://www.drsayuj.com",
++  generateRobotsTxt: true,
++  robotsTxtOptions: {
++    policies: [{ userAgent: "*", allow: "/" }],
++  },
++  exclude: ["/api/*", "/404", "/500"],
++  changefreq: "weekly",
++  priority: 0.7,
++  sitemapBaseFileName: "sitemap",
++};
++
+*** End Patch
+

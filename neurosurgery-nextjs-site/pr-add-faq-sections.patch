@@ -1,0 +1,89 @@
+*** Begin Patch
+*** Update File: app/slip-disc-treatment-hyderabad/page.tsx
+@@
+-import { SITE_URL, webPageJsonLd, medicalGuidelineJsonLd, physicianJsonLd, breadcrumbJsonLd, contactPointJsonLd, conditionJsonLd, itemListJsonLd } from "@/lib/seo";
++import { SITE_URL, webPageJsonLd, medicalGuidelineJsonLd, physicianJsonLd, breadcrumbJsonLd, contactPointJsonLd, conditionJsonLd, itemListJsonLd, idFor } from "@/lib/seo";
+ import RelatedContent from "@/components/RelatedContent";
+@@
+   const canonical = `${SITE_URL}/slip-disc-treatment-hyderabad/`;
++  const faqId = idFor(canonical, "faq");
++  const ldFaq = {
++    "@context": "https://schema.org",
++    "@type": "FAQPage",
++    "@id": faqId,
++    mainEntity: [
++      {
++        "@type": "Question",
++        name: "When is surgery needed for a herniated (slipped) disc?",
++        acceptedAnswer: {
++          "@type": "Answer",
++          text: "Surgery is considered after adequate conservative care if disabling leg-dominant pain, progressive weakness, or neurological deficits persist and correlate with MRI. Urgent surgery is considered for red-flag signs such as cauda equina syndrome."
++        }
++      },
++      {
++        "@type": "Question",
++        name: "Can a herniated disc heal without surgery?",
++        acceptedAnswer: {
++          "@type": "Answer",
++          text: "Yes. Many patients improve within weeks to months with physiotherapy, medications, ergonomics, and sometimes targeted injections. Imaging and symptoms should be correlated when deciding next steps."
++        }
++      },
++      {
++        "@type": "Question",
++        name: "How long is recovery after endoscopic or MISS discectomy?",
++        acceptedAnswer: {
++          "@type": "Answer",
++          text: "Most patients mobilise the same day and return to desk work in 1–2 weeks. Heavier activity typically resumes over 4–6 weeks with a graded physiotherapy plan."
++        }
++      },
++      {
++        "@type": "Question",
++        name: "What are the risks of discectomy?",
++        acceptedAnswer: {
++          "@type": "Answer",
++          text: "Complications are uncommon but may include infection, dural tear/CSF leak, nerve irritation or injury, bleeding, or recurrent herniation. Your surgeon will discuss personalised risks."
++        }
++      }
++    ]
++  };
+@@
+   return (
+     <>
+@@
++      {/* Visible FAQs (content matches JSON-LD) */}
++      <section id="faqs" aria-labelledby="faqs-heading">
++        <h2 id="faqs-heading">Slip Disc FAQs</h2>
++        <details>
++          <summary>When is surgery needed for a herniated (slipped) disc?</summary>
++          <p>Surgery is considered after adequate conservative care if disabling leg-dominant pain, progressive weakness, or neurological deficits persist and correlate with MRI. Urgent surgery is considered for red-flag signs such as cauda equina syndrome.</p>
++        </details>
++        <details>
++          <summary>Can a herniated disc heal without surgery?</summary>
++          <p>Yes. Many patients improve within weeks to months with physiotherapy, medications, ergonomics, and sometimes targeted injections. Imaging and symptoms should be correlated when deciding next steps.</p>
++        </details>
++        <details>
++          <summary>How long is recovery after endoscopic or MISS discectomy?</summary>
++          <p>Most patients mobilise the same day and return to desk work in 1–2 weeks. Heavier activity typically resumes over 4–6 weeks with a graded physiotherapy plan.</p>
++        </details>
++        <details>
++          <summary>What are the risks of discectomy?</summary>
++          <p>Complications are uncommon but may include infection, dural tear/CSF leak, nerve irritation or injury, bleeding, or recurrent herniation. Your surgeon will discuss personalised risks.</p>
++        </details>
++      </section>
+@@
+-      {/* JSON-LD */}
++      {/* JSON-LD: Keep your existing scripts; we add FAQPage as a separate schema block */}
+       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldWeb) }} />
+       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldPhys) }} />
+       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldCrumbs) }} />
+       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldGuidelineAans) }} />
+       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldGuidelineNass) }} />
+       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldContact) }} />
+       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldRelatedList) }} />
+       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldCondition) }} />
++      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldFaq) }} />
+     </>
+   );
+ }
+*** End Patch
+
