@@ -166,4 +166,4 @@ const nextConfig = {
   }
 };
 
-export default nextConfig;
+export default nextConfig;// Force deployment Fri Oct  3 12:33:37 IST 2025
