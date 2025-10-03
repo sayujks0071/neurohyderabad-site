@@ -266,7 +266,7 @@ export default function SlipDiscTreatmentPage() {
         breadcrumbs={breadcrumbs}
       />
       
-      <FAQPageSchema faqs={FAQ} />
+      <FAQPageSchema />
       <BreadcrumbSchema items={breadcrumbs} />
     </main>
   );

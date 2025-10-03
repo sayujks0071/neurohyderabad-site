@@ -87,9 +87,9 @@ export const technicalSEOAudit = {
         page_speed: await technicalSEOAudit.auditPageSpeed(url),
         security_accessibility: await technicalSEOAudit.auditSecurityAccessibility(url)
       },
-      recommendations: [],
-      critical_issues: [],
-      warnings: []
+      recommendations: [] as any[],
+      critical_issues: [] as any[],
+      warnings: [] as any[]
     };
 
     // Calculate overall score
@@ -220,7 +220,7 @@ export const technicalSEOAudit = {
 
     Object.keys(categories).forEach(category => {
       const categoryScore = categories[category].overall_score || categories[category].score || 0;
-      const weight = weights[category]?.weight || 0.1;
+      const weight = (weights as any)[category]?.weight || 0.1;
       
       totalScore += categoryScore * weight;
       totalWeight += weight;

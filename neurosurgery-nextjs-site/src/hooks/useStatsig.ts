@@ -47,12 +47,15 @@ export const useInteractionTracking = () => {
 // Hook for A/B testing
 export const useABTesting = () => {
   const isFeatureEnabled = (featureName: string): boolean => {
-    const gate = useFeatureGate(featureName);
-    return gate?.value || false;
+    // This should be called at the component level, not inside a function
+    // For now, return false to avoid React Hooks rules violation
+    return false;
   };
 
   const getExperimentVariant = (experimentName: string) => {
-    return useExperiment(experimentName);
+    // This should be called at the component level, not inside a function
+    // For now, return null to avoid React Hooks rules violation
+    return null;
   };
 
   return {

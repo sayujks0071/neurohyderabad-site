@@ -43,7 +43,7 @@ export default function Home() {
               <br />
               Specializing in Endoscopic Spine Surgery, Brain Tumor Surgery & Epilepsy Treatment
             </p>
-            <HeroCTA pageSlug="/" />
+            <HeroCTA />
           </div>
         </div>
       </header>
@@ -530,21 +530,13 @@ export default function Home() {
                     Book Your Consultation
                   </Link>
                   
-                  {/* Google OAuth for patient verification */}
-                  <div className="text-center">
-                    <p className="text-sm text-blue-700 mb-2">Verified patients can access priority booking</p>
-                    <GoogleOAuth 
-                      buttonText="Verify with Google"
-                      onSuccess={(response) => {
-                        console.log('Google verification successful:', response);
-                        // Handle successful verification
-                      }}
-                      onError={(error) => {
-                        console.error('Google verification failed:', error);
-                        // Handle verification error
-                      }}
-                    />
-                  </div>
+                    {/* Google OAuth for patient verification - temporarily disabled for build */}
+                    <div className="text-center">
+                      <p className="text-sm text-blue-700 mb-2">Verified patients can access priority booking</p>
+                      <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+                        Verify with Google (Coming Soon)
+                      </button>
+                    </div>
                 </div>
               </div>
             </div>

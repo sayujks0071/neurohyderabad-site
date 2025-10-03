@@ -8,7 +8,7 @@ interface MedicalWebPageSchemaProps {
   lastReviewed?: string;
   author?: string;
   serviceOrCondition?: string;
-  breadcrumbs?: Array<{ name: string; url: string }>;
+  breadcrumbs?: Array<{ name: string; path: string }>;
 }
 
 export default function MedicalWebPageSchema({
@@ -122,7 +122,7 @@ export default function MedicalWebPageSchema({
         "@type": "ListItem",
         "position": index + 1,
         "name": crumb.name,
-        "item": crumb.url
+        "item": `${SITE_URL}${crumb.path}`
       }))
     };
   }

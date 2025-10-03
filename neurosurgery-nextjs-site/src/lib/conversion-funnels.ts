@@ -338,7 +338,7 @@ export const funnelHelpers = {
     // Group data by segment
     for (const step of funnel.steps) {
       segmentData[step.id] = {};
-      for (const value of funnel.segments.find(s => s.property === segment)?.values || []) {
+      for (const value of funnel.segments.find((s: any) => s.property === segment)?.values || []) {
         segmentData[step.id][value] = data[step.id]?.[value] || 0;
       }
     }

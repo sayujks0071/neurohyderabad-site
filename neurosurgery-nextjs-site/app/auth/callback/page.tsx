@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { analytics } from '../../../src/lib/analytics';
 
-export default function AuthCallback() {
+function AuthCallbackContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
@@ -25,7 +25,7 @@ export default function AuthCallback() {
           // Track authentication errors
           analytics.track('Google_OAuth_Callback_Error', {
             error: error,
-            state: state,
+            state: state || 'unknown',
             timestamp: Date.now()
           });
           
@@ -41,7 +41,7 @@ export default function AuthCallback() {
         // Track successful callback
         analytics.track('Google_OAuth_Callback_Success', {
           has_code: !!code,
-          state: state,
+          state: state || 'unknown',
           timestamp: Date.now()
         });
 
@@ -115,5 +115,13 @@ export default function AuthCallback() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function AuthCallback() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <AuthCallbackContent />
+    </Suspense>
   );
 }
