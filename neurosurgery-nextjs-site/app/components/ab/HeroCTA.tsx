@@ -79,7 +79,9 @@ export default function HeroCTA({
   const reassuranceText = getReassuranceText();
 
   const handleClick = () => {
-    logCTA('hero');
+    // Include variant information for easier analysis
+    const variant = expEnabled ? `${style}_${pageCtx.cluster}` : 'control';
+    logCTA('hero', variant);
     onClick();
   };
 

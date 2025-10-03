@@ -29,18 +29,23 @@ export default function StickyCTA({ onClick, className = '', phoneNumber = '+91-
   }, []);
 
   const handleClick = () => {
-    logCTA('sticky');
+    const variant = expEnabled ? 'book_consultation' : 'control';
+    logCTA('sticky', variant);
     onClick();
   };
 
   const handleCallClick = () => {
-    logCTA('sticky');
+    const variant = expEnabled ? 'call_now' : 'control';
+    logCTA('sticky', variant);
     window.location.href = `tel:${phoneNumber}`;
   };
 
   const handleWhatsAppClick = () => {
-    logCTA('sticky');
-    window.open(`https://wa.me/919848417094`, '_blank');
+    const variant = expEnabled ? 'whatsapp' : 'control';
+    logCTA('sticky', variant);
+    // Enhanced WhatsApp link with pre-filled message and tel fallback
+    const whatsappUrl = `https://wa.me/919848417094?text=Hi%20Dr.%20Sayuj,%20I%20would%20like%20to%20book%20a%20consultation%20for%20neurosurgery%20services%20in%20Hyderabad.`;
+    window.open(whatsappUrl, '_blank');
   };
 
   // Get sticky CTA variant with after-hours logic

@@ -43,13 +43,20 @@ export function useWebLogger(ctx: {
         sessionStorage.setItem('session_id', sessionId);
       }
       enhancedCtx.session_id = sessionId;
+      
+      // Add hours context for dayparting analysis
+      const now = new Date();
+      const istHour = now.getUTCHours() + 5.5; // IST offset
+      enhancedCtx.local_hour = Math.floor(istHour);
+      enhancedCtx.is_after_hours = istHour >= 19 || istHour < 7;
     }
     
     return enhancedCtx;
   };
   
-  const logCTA = (surface: string) => logEvent('web_CTA_Click', { 
+  const logCTA = (surface: string, variant?: string) => logEvent('web_CTA_Click', { 
     surface, 
+    variant: variant || 'default',
     ...getEnhancedContext(), 
     ...ctx.utm 
   });
@@ -61,6 +68,11 @@ export function useWebLogger(ctx: {
     appointment_type 
   });
 
+  const logApptAbandon = (time_in_form?: number) => logEvent('web_Appointment_Abandon', { 
+    ...getEnhancedContext(), 
+    time_in_form: time_in_form || 0
+  });
+
   const logWhatsApp = () => logEvent('web_WhatsApp_Click', getEnhancedContext());
   const logCall = () => logEvent('web_Call_Click', getEnhancedContext());
   const logDirections = () => logEvent('web_Directions_Click', getEnhancedContext());
@@ -69,6 +81,7 @@ export function useWebLogger(ctx: {
     logCTA, 
     logApptStart, 
     logApptSuccess, 
+    logApptAbandon,
     logWhatsApp, 
     logCall, 
     logDirections 

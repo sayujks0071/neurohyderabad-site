@@ -7,7 +7,7 @@ import { useCallback } from 'react';
 export function useAppointmentLogger() {
   const pathname = usePathname();
   const pageCtx = getPageContext(pathname);
-  const { logCTA, logApptStart, logApptSuccess } = useWebLogger(pageCtx);
+  const { logCTA, logApptStart, logApptSuccess, logApptAbandon } = useWebLogger(pageCtx);
 
   const logAppointmentCTA = useCallback((surface: 'header' | 'footer' | 'card' | 'hero' | 'sticky') => {
     logCTA(surface);
@@ -21,10 +21,15 @@ export function useAppointmentLogger() {
     logApptSuccess(appointment_type);
   }, [logApptSuccess]);
 
+  const logAppointmentAbandon = useCallback((time_in_form?: number) => {
+    logApptAbandon(time_in_form);
+  }, [logApptAbandon]);
+
   return {
     logAppointmentCTA,
     logAppointmentStart,
-    logAppointmentSuccess
+    logAppointmentSuccess,
+    logAppointmentAbandon
   };
 }
 
