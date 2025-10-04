@@ -518,6 +518,74 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Disease Guides Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-blue-800 mb-4">Comprehensive Disease Guides</h2>
+              <p className="text-lg text-gray-700">
+                Expert information about neurological and spinal conditions, their symptoms, causes, and treatment options
+              </p>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="bg-white rounded-lg shadow-lg p-6 text-center">
+                <div className="text-4xl mb-4">🦴</div>
+                <h3 className="text-lg font-semibold text-blue-700 mb-3">Degenerative Disc Disease</h3>
+                <p className="text-gray-600 text-sm mb-4">Age-related wear and tear of spinal discs</p>
+                <Link 
+                  href="/disease-guides/degenerative-disc-disease"
+                  className="text-blue-600 hover:text-blue-800 font-medium"
+                >
+                  Learn More →
+                </Link>
+              </div>
+              <div className="bg-white rounded-lg shadow-lg p-6 text-center">
+                <div className="text-4xl mb-4">🔗</div>
+                <h3 className="text-lg font-semibold text-blue-700 mb-3">Spinal Stenosis</h3>
+                <p className="text-gray-600 text-sm mb-4">Narrowing of spinal canal causing nerve compression</p>
+                <Link 
+                  href="/disease-guides"
+                  className="text-blue-600 hover:text-blue-800 font-medium"
+                >
+                  Learn More →
+                </Link>
+              </div>
+              <div className="bg-white rounded-lg shadow-lg p-6 text-center">
+                <div className="text-4xl mb-4">😣</div>
+                <h3 className="text-lg font-semibold text-blue-700 mb-3">Trigeminal Neuralgia</h3>
+                <p className="text-gray-600 text-sm mb-4">Severe facial pain from nerve compression</p>
+                <Link 
+                  href="/disease-guides"
+                  className="text-blue-600 hover:text-blue-800 font-medium"
+                >
+                  Learn More →
+                </Link>
+              </div>
+              <div className="bg-white rounded-lg shadow-lg p-6 text-center">
+                <div className="text-4xl mb-4">🧠</div>
+                <h3 className="text-lg font-semibold text-blue-700 mb-3">Epilepsy</h3>
+                <p className="text-gray-600 text-sm mb-4">Neurological disorder causing recurrent seizures</p>
+                <Link 
+                  href="/disease-guides"
+                  className="text-blue-600 hover:text-blue-800 font-medium"
+                >
+                  Learn More →
+                </Link>
+              </div>
+            </div>
+            <div className="text-center mt-8">
+              <Link 
+                href="/disease-guides"
+                className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+              >
+                View All Disease Guides
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Contact Section */}
       <section id="appointment" className="py-16">
         <div className="container mx-auto px-4">
