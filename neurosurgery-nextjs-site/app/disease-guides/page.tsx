@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+// Updated for deployment
 import Link from 'next/link';
 import { SITE_URL } from '../../src/lib/seo';
 import MedicalReviewNotice from '../../src/components/MedicalReviewNotice';
