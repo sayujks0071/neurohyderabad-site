@@ -335,6 +335,60 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Emergency Services */}
+      <section className="py-16 bg-red-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-red-800 mb-4">24/7 Emergency Neurosurgical Care</h2>
+              <p className="text-lg text-red-700">
+                Immediate access to expert neurosurgical consultation for brain and spine emergencies
+              </p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="bg-white rounded-lg shadow-lg p-6 text-center border-l-4 border-red-500">
+                <div className="text-4xl mb-4">🚨</div>
+                <h3 className="text-xl font-semibold text-red-700 mb-3">Emergency Hotline</h3>
+                <p className="text-2xl font-bold text-red-600 mb-2">+91-9778280044</p>
+                <p className="text-gray-600 mb-4">Available 24/7 for urgent consultations</p>
+                <Link 
+                  href="/emergency-rehabilitation"
+                  className="text-red-600 hover:text-red-800 font-medium"
+                >
+                  Learn More About Emergency Care →
+                </Link>
+              </div>
+              <div className="bg-white rounded-lg shadow-lg p-6 text-center border-l-4 border-orange-500">
+                <div className="text-4xl mb-4">⚡</div>
+                <h3 className="text-xl font-semibold text-orange-700 mb-3">Rapid Response</h3>
+                <p className="text-gray-600 mb-4">
+                  Immediate triage and assessment for traumatic brain injuries, spinal cord injuries, and stroke
+                </p>
+                <Link 
+                  href="/emergency-rehabilitation"
+                  className="text-orange-600 hover:text-orange-800 font-medium"
+                >
+                  Emergency Conditions →
+                </Link>
+              </div>
+              <div className="bg-white rounded-lg shadow-lg p-6 text-center border-l-4 border-green-500">
+                <div className="text-4xl mb-4">🏥</div>
+                <h3 className="text-xl font-semibold text-green-700 mb-3">Hospital Partnership</h3>
+                <p className="text-gray-600 mb-4">
+                  Coordinated care with Yashoda Hospital emergency department for seamless patient care
+                </p>
+                <Link 
+                  href="/emergency-rehabilitation"
+                  className="text-green-600 hover:text-green-800 font-medium"
+                >
+                  Rehabilitation Services →
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Areas We Serve in Hyderabad */}
       <section className="py-16">
         <div className="container mx-auto px-4">
