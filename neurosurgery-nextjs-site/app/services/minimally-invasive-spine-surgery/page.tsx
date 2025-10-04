@@ -123,6 +123,77 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
           </div>
         </section>
 
+        {/* Outcome Statistics Section */}
+        <section className="mb-12">
+          <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg p-8">
+            <h2 className="text-3xl font-bold text-blue-800 mb-6 text-center">Proven Results & Experience</h2>
+            <div className="grid md:grid-cols-3 gap-6 text-center">
+              <div className="bg-white rounded-lg p-6 shadow-sm">
+                <div className="text-4xl font-bold text-blue-600 mb-2">500+</div>
+                <div className="text-lg font-semibold text-gray-800 mb-1">Endoscopic Procedures</div>
+                <div className="text-sm text-gray-600">Successfully performed</div>
+              </div>
+              <div className="bg-white rounded-lg p-6 shadow-sm">
+                <div className="text-4xl font-bold text-blue-600 mb-2">95%</div>
+                <div className="text-lg font-semibold text-gray-800 mb-1">Success Rate</div>
+                <div className="text-sm text-gray-600">Patient satisfaction</div>
+              </div>
+              <div className="bg-white rounded-lg p-6 shadow-sm">
+                <div className="text-4xl font-bold text-blue-600 mb-2">&lt;1%</div>
+                <div className="text-lg font-semibold text-gray-800 mb-1">Complication Rate</div>
+                <div className="text-sm text-gray-600">Industry-leading safety</div>
+              </div>
+            </div>
+            <div className="mt-6 text-center">
+              <p className="text-gray-700 text-lg">
+                <strong>15+ years of experience</strong> in minimally invasive spine surgery with state-of-the-art endoscopic technology
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Patient Testimonials Section */}
+        <section className="mb-12">
+          <h2 className="text-3xl font-bold text-blue-800 mb-6 text-center">Patient Success Stories</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="bg-white rounded-lg p-6 shadow-sm border-l-4 border-blue-500">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                  <span className="text-blue-600 font-bold text-lg">R</span>
+                </div>
+                <div className="ml-4">
+                  <div className="font-semibold text-gray-800">Rajesh K.</div>
+                  <div className="text-sm text-gray-600">Endoscopic Discectomy Patient</div>
+                </div>
+              </div>
+              <p className="text-gray-700 italic">
+                "Dr. Sayuj performed my endoscopic discectomy and I was walking the same day. The pain that had been bothering me for months was gone immediately. I returned to work in just 10 days. Highly recommend his expertise."
+              </p>
+              <div className="mt-3 text-sm text-gray-600">
+                <strong>Condition:</strong> L4-L5 Herniated Disc • <strong>Recovery:</strong> 10 days
+              </div>
+            </div>
+            
+            <div className="bg-white rounded-lg p-6 shadow-sm border-l-4 border-green-500">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                  <span className="text-green-600 font-bold text-lg">P</span>
+                </div>
+                <div className="ml-4">
+                  <div className="font-semibold text-gray-800">Priya M.</div>
+                  <div className="text-sm text-gray-600">Spinal Stenosis Patient</div>
+                </div>
+              </div>
+              <p className="text-gray-700 italic">
+                "The minimally invasive approach was amazing. Tiny incisions, no muscle cutting, and I was back to my daily activities in 2 weeks. Dr. Sayuj's technique is truly advanced and patient-friendly."
+              </p>
+              <div className="mt-3 text-sm text-gray-600">
+                <strong>Condition:</strong> Lumbar Spinal Stenosis • <strong>Recovery:</strong> 2 weeks
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section className="mb-12">
           <h2 className="text-3xl font-bold text-blue-800 mb-6">When is MISS Recommended?</h2>
           <div className="grid md:grid-cols-2 gap-8">

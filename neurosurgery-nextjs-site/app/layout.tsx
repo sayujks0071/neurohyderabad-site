@@ -11,6 +11,8 @@ import WebVitals from "../src/components/WebVitals";
 import StatsigClientProvider from "./providers/statsig-provider";
 import StatsigSessionReplay from "../src/components/StatsigSessionReplay";
 import SEOOptimizer from "../src/components/SEOOptimizer";
+import FloatingWhatsApp from "../src/components/FloatingWhatsApp";
+import CookieConsent from "../src/components/CookieConsent";
 import { SITE_URL } from "../src/lib/seo";
 
 const inter = Inter({
@@ -116,6 +118,8 @@ export default function RootLayout({
           <Header />
           {children}
           <Footer />
+          <FloatingWhatsApp />
+          <CookieConsent />
         </StatsigClientProvider>
       </body>
     </html>
