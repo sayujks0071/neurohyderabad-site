@@ -80,6 +80,20 @@ export default function TrigeminalNeuralgiaTreatmentPage() {
             <a href="mailto:neurospinehyd@drsayuj.com" className="text-blue-600 hover:underline ml-2">neurospinehyd@drsayuj.com</a> •
             <a href="/appointments" className="text-blue-600 hover:underline ml-2">Appointments</a>
           </p>
+          <div className="mt-4 text-center">
+            <p className="text-sm text-gray-600 mb-2">Related Services:</p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link href="/services/brain-tumor-surgery-hyderabad" className="text-blue-600 hover:text-blue-800 text-sm">
+                Brain Tumor Surgery
+              </Link>
+              <Link href="/services/peripheral-nerve-surgery-hyderabad" className="text-blue-600 hover:text-blue-800 text-sm">
+                Peripheral Nerve Surgery
+              </Link>
+              <Link href="/services/epilepsy-surgery-hyderabad" className="text-blue-600 hover:text-blue-800 text-sm">
+                Epilepsy Surgery
+              </Link>
+            </div>
+          </div>
         </section>
 
         <MedicalReviewNotice />

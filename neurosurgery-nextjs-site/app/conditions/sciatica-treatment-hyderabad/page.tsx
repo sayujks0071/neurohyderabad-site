@@ -31,6 +31,20 @@ export default function SciaticaTreatmentPage() {
             <a href="mailto:neurospinehyd@drsayuj.com" className="text-blue-600 hover:underline ml-2">neurospinehyd@drsayuj.com</a> •
             <a href="/appointments" className="text-blue-600 hover:underline ml-2">Appointments</a>
           </p>
+          <div className="mt-4 text-center">
+            <p className="text-sm text-gray-600 mb-2">Related Services:</p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link href="/services/minimally-invasive-spine-surgery" className="text-blue-600 hover:text-blue-800 text-sm">
+                Endoscopic Spine Surgery
+              </Link>
+              <Link href="/services/peripheral-nerve-surgery-hyderabad" className="text-blue-600 hover:text-blue-800 text-sm">
+                Peripheral Nerve Surgery
+              </Link>
+              <Link href="/services/spinal-fusion-surgery-hyderabad" className="text-blue-600 hover:text-blue-800 text-sm">
+                Spinal Fusion Surgery
+              </Link>
+            </div>
+          </div>
         </section>
 
         <MedicalReviewNotice />
