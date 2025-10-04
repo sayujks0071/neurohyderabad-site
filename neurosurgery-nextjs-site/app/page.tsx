@@ -319,10 +319,16 @@ export default function Home() {
               <div className="bg-white p-8 rounded-lg shadow-lg text-center">
                 <div className="text-4xl mb-4">🔬</div>
                 <h3 className="text-xl font-semibold mb-4 text-blue-700">Advanced Technology</h3>
-                <p className="text-gray-700">
+                <p className="text-gray-700 mb-4">
                   State-of-the-art equipment including neuronavigation, intraoperative monitoring, 
                   and minimally invasive surgical techniques.
                 </p>
+                <Link 
+                  href="/technology-facilities"
+                  className="text-blue-600 hover:text-blue-800 font-medium"
+                >
+                  Explore Our Technology →
+                </Link>
               </div>
             </div>
           </div>
