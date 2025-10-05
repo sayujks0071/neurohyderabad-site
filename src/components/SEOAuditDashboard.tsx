@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { analytics } from '../lib/analytics';
 import { contentAnalysis } from '../lib/content-analysis';
 import { technicalSEOAudit } from '../lib/technical-seo-audit';
@@ -25,7 +25,7 @@ export default function SEOAuditDashboard({ pageSlug, pageType, serviceOrConditi
   const [isRunning, setIsRunning] = useState(false);
   const [activeTab, setActiveTab] = useState<'overview' | 'content' | 'technical' | 'performance'>('overview');
 
-  const runSEOAudit = async () => {
+  const runSEOAudit = useCallback(async () => {
     setIsRunning(true);
     
     try {
@@ -96,13 +96,13 @@ export default function SEOAuditDashboard({ pageSlug, pageType, serviceOrConditi
     } finally {
       setIsRunning(false);
     }
-  };
+  }, [pageSlug, pageType, serviceOrCondition]);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       runSEOAudit();
     }
-  }, [pageSlug, pageType, serviceOrCondition]);
+  }, [runSEOAudit]);
 
   const getScoreColor = (score: number) => {
     if (score >= 80) return 'text-green-600';

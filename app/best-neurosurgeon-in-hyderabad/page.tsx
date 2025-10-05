@@ -1,6 +1,7 @@
 import { SITE_URL } from "../../src/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
+import SmartImage from '@/components/SmartImage';
 import { HeroCTA } from "../../src/components/Experiments";
 import SocialProofBand from "../../src/components/Experiments/SocialProofBand";
 import { analytics } from "../../src/lib/analytics";
@@ -44,6 +45,8 @@ export default function BestNeurosurgeonPage() {
   if (typeof window !== 'undefined') {
     analytics.pageView('/best-neurosurgeon-in-hyderabad/', 'landing', 'neurosurgery');
   }
+
+  const heroImageUrl = 'https://images.unsplash.com/photo-1624297463486-356c388adb22?auto=format&fit=crop&w=900&q=80';
 
   return (
     <>
@@ -140,10 +143,12 @@ export default function BestNeurosurgeonPage() {
                 </div>
               </div>
               <div className="flex justify-center">
-                <img
-                  src="/images/dr-sayuj-krishnan-profile.jpg"
-                  alt="Dr Sayuj Krishnan - Best Neurosurgeon in Hyderabad"
-                  className="rounded-lg shadow-xl w-full max-w-md"
+                <SmartImage
+                  src={heroImageUrl}
+                  width={900}
+                  height={900}
+                  className="w-full max-w-md rounded-lg shadow-xl"
+                  alt="Dr Sayuj Krishnan consulting a patient in Hyderabad"
                 />
               </div>
             </div>
@@ -438,9 +443,9 @@ export default function BestNeurosurgeonPage() {
                 "isPartOf": { "@id": `${SITE_URL}/#website` },
                 "primaryImageOfPage": {
                   "@type": "ImageObject",
-                  "url": `${SITE_URL}/images/dr-sayuj-krishnan-profile.jpg`,
-                  "width": 800,
-                  "height": 800
+                  "url": heroImageUrl,
+                  "width": 900,
+                  "height": 900
                 },
                 "inLanguage": "en-IN",
                 "reviewedBy": { "@id": `${SITE_URL}/#physician` },

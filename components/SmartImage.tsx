@@ -5,11 +5,12 @@ interface SmartImageProps extends Omit<ImageProps, 'loading' | 'sizes'> {
   priority?: boolean;
 }
 
-export default function SmartImage({ alt, priority = false, ...props }: SmartImageProps) {
+export default function SmartImage({ alt, priority = false, quality, ...props }: SmartImageProps) {
   return (
     <Image
       loading={priority ? 'eager' : 'lazy'}
-      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 800px"
+      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 960px"
+      quality={quality ?? 80}
       alt={alt}
       {...props}
     />

@@ -49,6 +49,9 @@ curl -I -L http://drsayuj.com         # should end at https://www.drsayuj.com/
 curl -I https://drsayuj.com           # 308 → https://www.drsayuj.com/
 curl -I https://www.drsayuj.com       # 200
 
+# Compression check
+curl -sI https://www.drsayuj.com/ | grep -i "content-encoding"
+
 # Test script
 ./test-apex-redirects.sh
 ```

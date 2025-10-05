@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { analytics } from '../lib/analytics';
 
 interface SEOMetrics {
@@ -55,7 +55,7 @@ export default function SEODashboard({ pageType, pageSlug, serviceOrCondition }:
   const [metrics, setMetrics] = useState<SEOMetrics | null>(null);
   const [isVisible, setIsVisible] = useState(false);
 
-  const runSEOAudit = async () => {
+  const runSEOAudit = useCallback(async () => {
     try {
       const data: SEOMetrics = {
         // Initialize with null values
@@ -191,12 +191,12 @@ export default function SEODashboard({ pageType, pageSlug, serviceOrCondition }:
         error_message: error instanceof Error ? error.message : 'Unknown error'
       });
     }
-  };
+  }, [pageSlug, pageType, serviceOrCondition]);
 
   useEffect(() => {
     // Auto-run audit on component mount
     runSEOAudit();
-  }, [pageType, pageSlug, serviceOrCondition]);
+  }, [runSEOAudit]);
 
   // Only show in development or when explicitly enabled
   if (process.env.NODE_ENV !== 'development' && !isVisible) {

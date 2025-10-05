@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { Metadata } from 'next'
 import { JsonLd } from '../../../src/lib/seo/jsonld'
 import ReviewedBy from '@/app/_components/ReviewedBy'
@@ -102,9 +103,9 @@ export default function ReturnToWorkAfterEndoscopicDiscectomyPage() {
         {/* Breadcrumbs */}
         <nav className="mb-6" aria-label="Breadcrumb">
           <ol className="flex items-center space-x-2 text-sm text-gray-600">
-            <li><a href="/" className="hover:text-blue-600">Home</a></li>
+            <li><Link href="/" className="hover:text-blue-600">Home</Link></li>
             <li className="text-gray-400">/</li>
-            <li><a href="/blog/" className="hover:text-blue-600">Blog</a></li>
+            <li><Link href="/blog/" className="hover:text-blue-600">Blog</Link></li>
             <li className="text-gray-400">/</li>
             <li className="text-gray-900 font-medium">Return to Work After Endoscopic Discectomy</li>
           </ol>
