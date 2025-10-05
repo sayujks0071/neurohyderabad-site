@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.drsayuj.com
+
+# Sitemaps
+Sitemap: https://www.drsayuj.com/sitemap.xml
