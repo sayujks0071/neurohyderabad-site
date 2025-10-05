@@ -11,6 +11,8 @@ import { patientStories } from "../../../src/content/stories";
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import NAP from '@/app/_components/NAP';
 import MedicalCitations from '@/app/_components/MedicalCitations';
+import ReassuranceMicrocopy from '@/app/_components/ReassuranceMicrocopy';
+import YMYLAttribution from '@/app/_components/YMYLAttribution';
 import { makeMetadata } from '@/app/_lib/meta';
 
 const brainStory = patientStories.find((story) => story.tags.includes("brain"));
@@ -94,6 +96,8 @@ export default function BrainTumorSurgeryPage() {
             <h1 className="text-4xl font-bold mb-4">Brain Tumor Surgery in Hyderabad</h1>
             <p className="text-lg text-gray-600">Neuronavigation-guided microsurgery with multidisciplinary care</p>
           </header>
+
+          <ReassuranceMicrocopy serviceType="brain" className="mb-8" />
 
           <section className="bg-blue-50 p-6 rounded-lg mb-8">
             <p className="text-center">
@@ -518,6 +522,7 @@ export default function BrainTumorSurgeryPage() {
         
         <ReviewedBy lastReviewed="2025-01-15" />
         <MedicalCitations />
+        <YMYLAttribution lastReviewed="2025-01-15" className="mb-8" />
         <NAP />
       </main>
     </>

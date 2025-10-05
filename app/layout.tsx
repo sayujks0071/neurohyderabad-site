@@ -14,6 +14,8 @@ import StatsigAnalytics from "../src/components/StatsigAnalytics";
 import SEOOptimizer from "../src/components/SEOOptimizer";
 import FloatingWhatsApp from "../src/components/FloatingWhatsApp";
 import CookieConsent from "../src/components/CookieConsent";
+import TrustStrip from "./_components/TrustStrip";
+import StickyCTA from "./_components/StickyCTA";
 import Script from "next/script";
 import { SITE_URL } from "../src/lib/seo";
 
@@ -125,10 +127,12 @@ export default function RootLayout({
             Skip to content
           </a>
           <Header />
+          <TrustStrip />
           <div id="main-content" tabIndex={-1}>
             {children}
           </div>
           <Footer />
+          <StickyCTA />
           <FloatingWhatsApp />
           <CookieConsent />
         </StatsigClientProvider>
