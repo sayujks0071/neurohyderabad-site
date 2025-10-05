@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useStatsigClient } from '@statsig/react-bindings';
+import { useExperiment } from '@statsig/react-bindings';
 
 interface ReassuranceMicrocopyProps {
   className?: string;
@@ -12,15 +12,12 @@ export default function ReassuranceMicrocopy({
   className = '', 
   serviceType = 'spine' 
 }: ReassuranceMicrocopyProps) {
-  const client = useStatsigClient();
-  
   // A/B test for reassurance microcopy
-  const variant = client?.getExperiment('exp_reassurance_microcopy', { 
-    userID: 'anon' 
-  })?.get('variant', 'control');
+  const { value: variant } = useExperiment('exp_reassurance_microcopy');
 
   const getMicrocopy = () => {
-    switch (variant) {
+    const variantValue = String(variant || 'control');
+    switch (variantValue) {
       case 'treatment':
         return "Minimally invasive options first—surgery only when needed";
       case 'control':

@@ -1,22 +1,19 @@
 'use client';
 
 import React from 'react';
-import { useStatsigClient } from '@statsig/react-bindings';
+import { useExperiment } from '@statsig/react-bindings';
 
 interface TrustStripProps {
   className?: string;
 }
 
 export default function TrustStrip({ className = '' }: TrustStripProps) {
-  const client = useStatsigClient();
-  
   // A/B test for trust strip
-  const variant = client?.getExperiment('exp_trust_strip', { 
-    userID: 'anon' 
-  })?.get('variant', 'control');
+  const { value: variant } = useExperiment('exp_trust_strip');
 
   const getTrustElements = () => {
-    switch (variant) {
+    const variantValue = String(variant || 'control');
+    switch (variantValue) {
       case 'treatment':
         return [
           { icon: '🏥', text: 'Yashoda Hospital Association' },

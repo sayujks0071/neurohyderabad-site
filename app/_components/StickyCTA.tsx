@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useStatsigClient } from '@statsig/react-bindings';
+import { useExperiment } from '@statsig/react-bindings';
 import StandardCTA from './StandardCTA';
 
 interface StickyCTAProps {
@@ -9,13 +9,10 @@ interface StickyCTAProps {
 }
 
 export default function StickyCTA({ className = '' }: StickyCTAProps) {
-  const client = useStatsigClient();
   const [isVisible, setIsVisible] = useState(false);
   
   // A/B test for sticky CTA
-  const variant = client?.getExperiment('exp_sticky_cta', { 
-    userID: 'anon' 
-  })?.get('variant', 'control');
+  const { value: variant } = useExperiment('exp_sticky_cta');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,7 +32,8 @@ export default function StickyCTA({ className = '' }: StickyCTAProps) {
   }, []);
 
   // Only show for treatment variant
-  if (variant !== 'treatment' || !isVisible) {
+  const variantValue = String(variant || 'control');
+  if (variantValue !== 'treatment' || !isVisible) {
     return null;
   }
 
