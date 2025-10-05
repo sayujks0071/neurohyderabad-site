@@ -140,7 +140,7 @@ export default function EndoscopicDiscectomyStoryPage() {
               <h3 className="text-lg font-bold text-blue-900 mb-4">Chief Concern</h3>
               <p className="text-blue-800">
                 A mid-40s office professional with 6 weeks of severe left leg pain, numbness in foot, and night pain. 
-                Unable to sit >10 minutes despite pain meds and physiotherapy.
+                Unable to sit &gt;10 minutes despite pain meds and physiotherapy.
               </p>
             </div>
 
