@@ -55,6 +55,22 @@ const AREAS = {
     description:
       'Patients from Secunderabad can reach Malakpet quickly for OPD or emergency consultations. Same-day discharge options are available for endoscopic spine cases.',
   },
+  'kondapur': {
+    name: 'Kondapur',
+    travelTime: '35–45 minutes by car (14 km via PV Narasimha Rao Expressway)',
+    metro: 'Metro: Kondapur → Ameerpet → Malakpet (≈40 minutes)',
+    cab: 'Cab/Auto: Take PVNR Expressway; request drop at Yashoda Hospital OPD Block.',
+    description:
+      'Kondapur residents can easily reach Dr. Sayuj\'s neurosurgery consultations at Yashoda Hospital Malakpet. The expressway provides a smooth route during off-peak hours.',
+  },
+  'malakpet': {
+    name: 'Malakpet',
+    travelTime: '5–10 minutes by car (2 km via local roads)',
+    metro: 'Metro: Malakpet station is 500m from Yashoda Hospital',
+    cab: 'Cab/Auto: Very short distance; ask for Yashoda Hospital OPD Block.',
+    description:
+      'Malakpet residents have the most convenient access to Dr. Sayuj\'s neurosurgery consultations at Yashoda Hospital. The hospital is within walking distance from the metro station.',
+  },
 } as const;
 
 type AreaKey = keyof typeof AREAS;
