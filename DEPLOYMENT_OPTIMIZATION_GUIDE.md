@@ -27,79 +27,25 @@
 
 ### **1. Compression Setup**
 
-#### **Vercel Configuration**
-Add to `vercel.json`:
-```json
-{
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "Content-Encoding",
-          "value": "br, gzip"
-        }
-      ]
-    }
-  ]
-}
-```
+#### **✅ Already Configured**
+Your `next.config.mjs` already has `compress: true` which automatically enables Gzip and Brotli in Vercel/Next.js.
 
-#### **Next.js Configuration**
-Update `next.config.mjs`:
-```javascript
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  compress: true,
-  poweredByHeader: false,
-  generateEtags: true,
-  // ... existing config
-};
-```
+#### **⚠️ Important: Don't Override**
+- **DO NOT** set `Content-Encoding` headers manually in `vercel.json`
+- **DO NOT** add compression headers - this will cause double compression or corrupt responses
+- **Let Vercel/Next.js handle compression automatically** with your existing `compress: true` setting
 
 ### **2. Cache Headers Optimization**
 
-#### **Static Assets Caching**
-```json
-{
-  "headers": [
-    {
-      "source": "/_next/static/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/(.*\\.(jpg|jpeg|png|gif|ico|svg|webp|avif))",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    }
-  ]
-}
-```
+#### **✅ Already Configured**
+Your existing Next.js `headers()` function already sets sensible defaults (s-maxage, stale-while-revalidate) for HTML/API routes.
 
-#### **HTML Caching**
-```json
-{
-  "headers": [
-    {
-      "source": "/((?!_next/static).*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, s-maxage=3600, max-age=600, stale-while-revalidate=86400"
-        }
-      ]
-    }
-  ]
-}
+#### **Focus on Static Assets**
+Only need to verify immutable caching for static assets:
+```bash
+# Check static asset caching
+curl -sI https://www.drsayuj.com/_next/static/chunks/main.js | grep -i "cache-control"
+# Expect: Cache-Control: public, max-age=31536000, immutable
 ```
 
 ### **3. Image Optimization**

@@ -34,10 +34,11 @@ check_headers() {
             if [[ "$content_encoding" == *"br"* ]]; then
                 echo "   🎯 Brotli compression detected!"
             elif [[ "$content_encoding" == *"gzip"* ]]; then
-                echo "   ⚠️  Gzip compression detected (Brotli preferred)"
+                echo "   ✅ Gzip compression detected"
             fi
         else
             echo "❌ No content encoding header found"
+            echo "   ⚠️  Check that compress: true is set in next.config.mjs"
         fi
         
         # Check cache headers

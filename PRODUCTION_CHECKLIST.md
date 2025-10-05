@@ -28,8 +28,8 @@
 ## ⚠️ **Optimization Opportunities**
 
 ### **Performance Improvements**
-- ⚠️ **Compression**: Enable Brotli/Gzip compression for better performance
-- ⚠️ **Caching**: Optimize cache headers for static assets (currently suboptimal)
+- ✅ **Compression**: Already enabled via `compress: true` in next.config.mjs
+- ⚠️ **Static Caching**: Verify immutable cache headers for static assets
 - ⚠️ **Images**: Convert JPEG images to WebP/AVIF for faster loading
 - ⚠️ **Deployment**: New neighbourhood pages need to be deployed
 
@@ -67,11 +67,15 @@ curl -I https://www.drsayuj.com       # 200
 # Deployment verification
 ./scripts/verify-deployment.sh        # comprehensive deployment check
 ./scripts/verify-analytics.js         # analytics tracking verification
+./scripts/verify-compression.sh       # compression and caching verification
 
-# Compression check (Brotli/Gzip verification)
+# Quick compression check
 curl -sI https://www.drsayuj.com/ | grep -i "content-encoding"
+# Expect: content-encoding: br (or gzip)
 
-# Cache headers verification
+# Static asset caching check
+curl -sI https://www.drsayuj.com/_next/static/chunks/main.js | grep -i "cache-control"
+# Expect: Cache-Control: public, max-age=31536000, immutable
 curl -sI https://www.drsayuj.com/_next/static/ | grep -i "cache-control"
 
 # Test script
