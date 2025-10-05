@@ -74,6 +74,11 @@ export function track(eventName: string, props: EventProps = {}) {
       (window as any).Statsig.logEvent(eventName, undefined, enrichedProps);
     }
     
+    // Log to GA4 (when available)
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag('event', eventName, enrichedProps);
+    }
+    
     // Optional: Log to console in development
     if (process.env.NODE_ENV === 'development') {
       console.log('Analytics Event:', eventName, enrichedProps);

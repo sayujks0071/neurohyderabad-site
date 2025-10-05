@@ -10,10 +10,8 @@ export default function StatsigAnalytics() {
   const client = useStatsigClient();
 
   useEffect(() => {
-    // Only initialize if Statsig is properly configured
-    if (!client) {
-      return;
-    }
+    // Initialize analytics regardless of Statsig client availability
+    // This allows GA4 tracking to work even without Statsig
     // Track page views
     if (pathname) {
       const pageType = getPageType(pathname);

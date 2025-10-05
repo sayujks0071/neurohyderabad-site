@@ -10,6 +10,7 @@ import GoogleAnalytics from "../src/components/GoogleAnalytics";
 import WebVitals from "../src/components/WebVitals";
 import StatsigClientProvider from "./providers/statsig-provider";
 import StatsigSessionReplay from "../src/components/StatsigSessionReplay";
+import StatsigAnalytics from "../src/components/StatsigAnalytics";
 import SEOOptimizer from "../src/components/SEOOptimizer";
 import FloatingWhatsApp from "../src/components/FloatingWhatsApp";
 import CookieConsent from "../src/components/CookieConsent";
@@ -111,6 +112,7 @@ export default function RootLayout({
         <StatsigClientProvider>
           <GoogleAnalytics />
           <WebVitals />
+          <StatsigAnalytics />
           <StatsigSessionReplay />
           <SEOOptimizer pageType="home" pageSlug="/" />
           <WebsiteSchema />
