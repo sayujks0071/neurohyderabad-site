@@ -59,10 +59,53 @@ export default function StatsigAnalytics() {
     // Track performance
     trackWebVitals();
 
+    // Track scroll depth
+    const trackScrollDepth = () => {
+      let maxScrollDepth = 0;
+      let scrollDepthTracked = new Set<number>();
+
+      const handleScroll = () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercentage = Math.round((scrollTop / documentHeight) * 100);
+        
+        // Track milestone scroll depths
+        const milestones = [25, 50, 75, 90, 100];
+        milestones.forEach(milestone => {
+          if (scrollPercentage >= milestone && !scrollDepthTracked.has(milestone)) {
+            scrollDepthTracked.add(milestone);
+            analytics.scrollDepth(pathname, milestone);
+          }
+        });
+
+        // Update max scroll depth
+        if (scrollPercentage > maxScrollDepth) {
+          maxScrollDepth = scrollPercentage;
+        }
+      };
+
+      // Throttle scroll events
+      let scrollTimeout: NodeJS.Timeout;
+      const throttledScroll = () => {
+        if (scrollTimeout) clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(handleScroll, 100);
+      };
+
+      window.addEventListener('scroll', throttledScroll, { passive: true });
+
+      return () => {
+        window.removeEventListener('scroll', throttledScroll);
+        if (scrollTimeout) clearTimeout(scrollTimeout);
+      };
+    };
+
+    const scrollCleanup = trackScrollDepth();
+
     // Cleanup
     return () => {
       window.removeEventListener('error', handleError);
       window.removeEventListener('unhandledrejection', handleUnhandledRejection);
+      scrollCleanup();
     };
   }, [pathname, client]);
 

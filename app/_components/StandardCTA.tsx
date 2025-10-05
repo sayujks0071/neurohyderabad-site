@@ -1,5 +1,9 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { analytics } from '@/src/lib/analytics';
 
 interface StandardCTAProps {
   className?: string;
@@ -7,8 +11,33 @@ interface StandardCTAProps {
 }
 
 export default function StandardCTA({ className = '', variant = 'default' }: StandardCTAProps) {
+  const pathname = usePathname();
   const isCompact = variant === 'compact';
   const isStacked = variant === 'stacked';
+
+  const handleCTAClick = (ctaLabel: string, ctaType: 'phone' | 'whatsapp' | 'appointment') => {
+    switch (ctaType) {
+      case 'phone':
+        analytics.phoneClick(pathname, 'main');
+        break;
+      case 'whatsapp':
+        analytics.whatsAppClick(pathname);
+        break;
+      case 'appointment':
+        analytics.appointmentStart(pathname, getServiceOrCondition(pathname));
+        break;
+    }
+  };
+
+  const getServiceOrCondition = (pathname: string): string | undefined => {
+    if (pathname.startsWith('/services/')) {
+      return pathname.split('/')[2]?.replace(/-/g, '_');
+    }
+    if (pathname.startsWith('/conditions/')) {
+      return pathname.split('/')[2]?.replace(/-/g, '_');
+    }
+    return undefined;
+  };
   
   const buttonClasses = isCompact 
     ? "px-4 py-2 text-sm" 
@@ -22,6 +51,7 @@ export default function StandardCTA({ className = '', variant = 'default' }: Sta
     <div className={`${containerClasses} ${className}`}>
       <Link 
         href="tel:+919778280044"
+        onClick={() => handleCTAClick('Call OPD', 'phone')}
         className={`bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-colors duration-200 ${buttonClasses} flex items-center justify-center`}
         aria-label="Call OPD for appointment"
       >
@@ -33,6 +63,7 @@ export default function StandardCTA({ className = '', variant = 'default' }: Sta
       
       <Link 
         href="https://wa.me/919778280044"
+        onClick={() => handleCTAClick('WhatsApp', 'whatsapp')}
         target="_blank"
         rel="noopener noreferrer"
         className={`bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition-colors duration-200 ${buttonClasses} flex items-center justify-center`}
@@ -46,6 +77,7 @@ export default function StandardCTA({ className = '', variant = 'default' }: Sta
       
       <Link 
         href="/appointments"
+        onClick={() => handleCTAClick('Book Tele-Consult', 'appointment')}
         className={`bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors duration-200 ${buttonClasses} flex items-center justify-center`}
         aria-label="Book teleconsultation appointment"
       >
