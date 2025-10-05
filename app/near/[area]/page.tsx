@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import SchemaScript from '@/app/_schema/Script';
 import NAP from '@/app/_components/NAP';
 import StandardCTA from '@/app/_components/StandardCTA';
+import MapCard from '@/app/_components/MapCard';
 import { CLINIC } from '@/app/_lib/clinic';
 import { Metadata } from 'next';
 
@@ -60,7 +61,7 @@ type AreaKey = keyof typeof AREAS;
 
 const AREA_LIST = Object.keys(AREAS) as AreaKey[];
 
-const MAP_URL = 'https://maps.google.com/?q=Yashoda+Hospital+Malakpet';
+const MAP_EMBED = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3814.258094969931!2d78.49575477699536!3d17.37830340220051!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb99ac8416ae97%3A0x8ac1f3f5da2b5b75!2sYashoda%20Hospitals%20Malakpet!5e0!3m2!1sen!2sin!4v1707040000000!5m2!1sen!2sin';
 
 export function generateStaticParams() {
   return AREA_LIST.map((area) => ({ area }));
@@ -120,7 +121,7 @@ export default async function AreaPage({ params }: { params: Promise<{ area: str
       latitude: CLINIC.geo.lat,
       longitude: CLINIC.geo.lng,
     },
-    hasMap: MAP_URL,
+    hasMap: MAP_EMBED,
   };
 
   const breadcrumbSchema = {
@@ -215,12 +216,8 @@ export default async function AreaPage({ params }: { params: Promise<{ area: str
 
       <section>
         <h2>Directions</h2>
-        <p>Set your navigation to “Yashoda Hospital Malakpet OPD Block”. You can also open Google Maps below for live traffic updates.</p>
-        <p>
-          <a className="text-emerald-700 underline" href={MAP_URL} target="_blank" rel="noopener">
-            Open directions in Google Maps
-          </a>
-        </p>
+        <p>Set your navigation to “Yashoda Hospital Malakpet OPD Block”. Use the map below for live traffic updates.</p>
+        <MapCard area={data.name} mapUrl={MAP_EMBED} />
       </section>
 
       <NAP />
