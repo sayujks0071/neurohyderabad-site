@@ -9,5 +9,5 @@ export default function MedicalReviewNotice({
   lastReviewed = 'October 1, 2025',
   className = '',
 }: MedicalReviewNoticeProps) {
-  return <ReviewedBy date={lastReviewed} className={`mb-8 ${className}`} />;
+  return <ReviewedBy lastReviewed={lastReviewed} className={`mb-8 ${className}`} />;
 }

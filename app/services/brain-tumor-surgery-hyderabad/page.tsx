@@ -104,7 +104,7 @@ export default function BrainTumorSurgeryPage() {
           </section>
 
           <div className="prose max-w-none">
-            <ReviewedBy date="October 1, 2025" className="mb-8" />
+            <ReviewedBy lastReviewed="2025-01-15" className="mb-8" />
 
 
             <section className="mb-8">
@@ -514,6 +514,9 @@ export default function BrainTumorSurgeryPage() {
             })
           }}
         />
+        
+        <ReviewedBy lastReviewed="2025-01-15" />
+        <NAP />
       </main>
     </>
   );
