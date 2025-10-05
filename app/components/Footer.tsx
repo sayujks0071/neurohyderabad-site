@@ -71,16 +71,16 @@ export default function Footer() {
               <Link href="/conditions/" className="block text-gray-300 hover:text-white transition-colors">
                 All Conditions
               </Link>
-              <Link href="/conditions/sciatica-treatment" className="block text-gray-300 hover:text-white transition-colors">
+              <Link href="/conditions/sciatica-treatment-hyderabad" className="block text-gray-300 hover:text-white transition-colors">
                 Sciatica Treatment
               </Link>
-              <Link href="/conditions/lumbar-spinal-stenosis-treatment" className="block text-gray-300 hover:text-white transition-colors">
+              <Link href="/conditions/spinal-stenosis-treatment-hyderabad" className="block text-gray-300 hover:text-white transition-colors">
                 Lumbar Spinal Stenosis Treatment
               </Link>
-              <Link href="/conditions/trigeminal-neuralgia-treatment" className="block text-gray-300 hover:text-white transition-colors">
+              <Link href="/conditions/trigeminal-neuralgia-treatment-hyderabad" className="block text-gray-300 hover:text-white transition-colors">
                 Trigeminal Neuralgia Treatment
               </Link>
-              <Link href="/conditions/cervical-radiculopathy-treatment" className="block text-gray-300 hover:text-white transition-colors">
+              <Link href="/conditions/cervical-radiculopathy-treatment-hyderabad" className="block text-gray-300 hover:text-white transition-colors">
                 Cervical Radiculopathy Treatment
               </Link>
             </nav>
