@@ -213,10 +213,10 @@ export default function ServicesPage() {
             <div className="bg-blue-50 p-6 rounded-lg">
               <h3 className="text-xl font-semibold text-blue-700 mb-4">Common Conditions We Treat</h3>
               <ul className="space-y-2 text-gray-700">
-                <li>• <Link href="/conditions/sciatica-treatment/" className="text-blue-600 hover:underline">Sciatica and leg pain</Link></li>
-                <li>• <Link href="/conditions/spinal-stenosis-treatment-hyderabad/" className="text-blue-600 hover:underline">Spinal stenosis</Link></li>
-                <li>• <Link href="/conditions/cervical-radiculopathy-treatment" className="text-blue-600 hover:underline">Cervical radiculopathy</Link></li>
-                <li>• <Link href="/conditions/trigeminal-neuralgia-treatment" className="text-blue-600 hover:underline">Trigeminal neuralgia</Link></li>
+                <li>• <Link href="/conditions/sciatica-treatment-hyderabad" className="text-blue-600 hover:underline">Sciatica and leg pain</Link></li>
+                <li>• <Link href="/conditions/spinal-stenosis-treatment-hyderabad" className="text-blue-600 hover:underline">Spinal stenosis</Link></li>
+                <li>• <Link href="/conditions/cervical-radiculopathy-treatment-hyderabad" className="text-blue-600 hover:underline">Cervical radiculopathy</Link></li>
+                <li>• <Link href="/conditions/trigeminal-neuralgia-treatment-hyderabad" className="text-blue-600 hover:underline">Trigeminal neuralgia</Link></li>
                 <li>• Herniated discs and nerve compression</li>
                 <li>• Drug-resistant epilepsy</li>
               </ul>

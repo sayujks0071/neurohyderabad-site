@@ -130,16 +130,6 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: '/conditions/cervical-radiculopathy-treatment-hyderabad',
-        destination: '/conditions/cervical-radiculopathy-treatment',
-        permanent: true,
-      },
-      {
-        source: '/conditions/cervical-radiculopathy-treatment-hyderabad/',
-        destination: '/conditions/cervical-radiculopathy-treatment',
-        permanent: true,
-      },
-      {
         source: '/:path((?!_next|api|images|favicon\\.ico|robots\\.txt|sitemap\\.xml|site\\.webmanifest).+)/',
         destination: '/:path',
         permanent: true,
