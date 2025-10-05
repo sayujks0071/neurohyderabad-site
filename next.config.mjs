@@ -212,4 +212,4 @@ const nextConfig = {
   }
 };
 
-export default nextConfig;// Force deployment Fri Oct  3 12:33:37 IST 2025
+export default nextConfig;// Force deployment Sun Oct  5 11:15:00 IST 2025
