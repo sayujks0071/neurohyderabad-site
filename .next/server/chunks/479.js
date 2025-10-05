@@ -1,0 +1,1 @@
+"use strict";exports.id=479,exports.ids=[479],exports.modules={20479:(a,b,c)=>{c.d(b,{parseJsonLd:()=>d});function d(a){let b=a.split(/\n(?=\s*\{)/),c=[];for(let a of b)try{let b=JSON.parse(a);b&&"object"==typeof b&&c.push(b)}catch{}return c}}};

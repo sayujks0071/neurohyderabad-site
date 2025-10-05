@@ -1,0 +1,503 @@
+{
+  "pages": {
+    "/_not-found/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/app/_not-found/page-33375c96fdde3526.js"
+    ],
+    "/api/auth/google/route": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/app/api/auth/google/route-33375c96fdde3526.js"
+    ],
+    "/api/drafts/content/route": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/app/api/drafts/content/route-33375c96fdde3526.js"
+    ],
+    "/not-found": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/2619-3c9e02e22d10480a.js",
+      "static/chunks/app/not-found-272f124ce06bbc8f.js"
+    ],
+    "/layout": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/css/5ea701f9c2d02db6.css",
+      "static/chunks/2619-3c9e02e22d10480a.js",
+      "static/chunks/9634-4d156505cced8c76.js",
+      "static/chunks/1356-a207716ea5771e34.js",
+      "static/chunks/app/layout-5bcff52f4646002e.js"
+    ],
+    "/api/health/route": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/app/api/health/route-33375c96fdde3526.js"
+    ],
+    "/api/drafts/list/route": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/app/api/drafts/list/route-33375c96fdde3526.js"
+    ],
+    "/api/revalidate/route": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/app/api/revalidate/route-33375c96fdde3526.js"
+    ],
+    "/api/wp-proxy/route": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/app/api/wp-proxy/route-33375c96fdde3526.js"
+    ],
+    "/api/teleconsultation/route": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/app/api/teleconsultation/route-33375c96fdde3526.js"
+    ],
+    "/robots.txt/route": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/app/robots.txt/route-33375c96fdde3526.js"
+    ],
+    "/sitemap.xml/route": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/app/sitemap.xml/route-33375c96fdde3526.js"
+    ],
+    "/auth/callback/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/app/auth/callback/page-e6d5df987bb7c42c.js"
+    ],
+    "/appointments/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/8651-283e698772817efe.js",
+      "static/chunks/app/appointments/page-fdab2c53cd9d85df.js"
+    ],
+    "/about/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/app/about/page-33375c96fdde3526.js"
+    ],
+    "/blog/endoscopic-discectomy-cost-hyderabad/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/2619-3c9e02e22d10480a.js",
+      "static/chunks/app/blog/endoscopic-discectomy-cost-hyderabad/page-bbf4c9c70ff93bbe.js"
+    ],
+    "/best-neurosurgeon-in-hyderabad/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/2619-3c9e02e22d10480a.js",
+      "static/chunks/9634-4d156505cced8c76.js",
+      "static/chunks/app/best-neurosurgeon-in-hyderabad/page-d25b5af98973f95d.js"
+    ],
+    "/blog/day-care-endoscopic-spine-surgery-eligibility/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/2619-3c9e02e22d10480a.js",
+      "static/chunks/app/blog/day-care-endoscopic-spine-surgery-eligibility/page-bbf4c9c70ff93bbe.js"
+    ],
+    "/blog/endoscopic-spine-surgery-cost-hyderabad/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/app/blog/endoscopic-spine-surgery-cost-hyderabad/page-33375c96fdde3526.js"
+    ],
+    "/blog/return-to-work-after-endoscopic-discectomy-hyderabad/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/app/blog/return-to-work-after-endoscopic-discectomy-hyderabad/page-33375c96fdde3526.js"
+    ],
+    "/conditions/sciatica-treatment-hyderabad/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/2619-3c9e02e22d10480a.js",
+      "static/chunks/app/conditions/sciatica-treatment-hyderabad/page-272f124ce06bbc8f.js"
+    ],
+    "/conditions/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/2619-3c9e02e22d10480a.js",
+      "static/chunks/app/conditions/page-272f124ce06bbc8f.js"
+    ],
+    "/blog/endoscopic-vs-microdiscectomy-hyderabad/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/2619-3c9e02e22d10480a.js",
+      "static/chunks/app/blog/endoscopic-vs-microdiscectomy-hyderabad/page-bbf4c9c70ff93bbe.js"
+    ],
+    "/blog/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/2619-3c9e02e22d10480a.js",
+      "static/chunks/1356-a207716ea5771e34.js",
+      "static/chunks/app/blog/page-2b9690562184eaab.js"
+    ],
+    "/conditions/[slug]/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/app/conditions/[slug]/page-33375c96fdde3526.js"
+    ],
+    "/conditions/spinal-stenosis-treatment-hyderabad/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/2619-3c9e02e22d10480a.js",
+      "static/chunks/app/conditions/spinal-stenosis-treatment-hyderabad/page-272f124ce06bbc8f.js"
+    ],
+    "/blog/mvd-vs-radiosurgery-trigeminal-neuralgia/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/2619-3c9e02e22d10480a.js",
+      "static/chunks/app/blog/mvd-vs-radiosurgery-trigeminal-neuralgia/page-bbf4c9c70ff93bbe.js"
+    ],
+    "/contact/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/2619-3c9e02e22d10480a.js",
+      "static/chunks/app/contact/page-272f124ce06bbc8f.js"
+    ],
+    "/disclaimer/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/app/disclaimer/page-33375c96fdde3526.js"
+    ],
+    "/drafts/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/4979-ba4b61aa5b257ccf.js",
+      "static/chunks/app/drafts/page-7afe1e24bcd1bb32.js"
+    ],
+    "/conditions/slip-disc-treatment-hyderabad/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/2619-3c9e02e22d10480a.js",
+      "static/chunks/app/conditions/slip-disc-treatment-hyderabad/page-272f124ce06bbc8f.js"
+    ],
+    "/cookies/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/app/cookies/page-33375c96fdde3526.js"
+    ],
+    "/conditions/trigeminal-neuralgia-treatment-hyderabad/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/2619-3c9e02e22d10480a.js",
+      "static/chunks/app/conditions/trigeminal-neuralgia-treatment-hyderabad/page-272f124ce06bbc8f.js"
+    ],
+    "/disease-guides/degenerative-disc-disease/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/2619-3c9e02e22d10480a.js",
+      "static/chunks/app/disease-guides/degenerative-disc-disease/page-272f124ce06bbc8f.js"
+    ],
+    "/editorial-policy/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/app/editorial-policy/page-33375c96fdde3526.js"
+    ],
+    "/locations/banjara-hills/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/2619-3c9e02e22d10480a.js",
+      "static/chunks/app/locations/banjara-hills/page-272f124ce06bbc8f.js"
+    ],
+    "/endoscopic-spine-surgery-hyderabad/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/app/endoscopic-spine-surgery-hyderabad/page-33375c96fdde3526.js"
+    ],
+    "/locations/secunderabad/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/2619-3c9e02e22d10480a.js",
+      "static/chunks/app/locations/secunderabad/page-272f124ce06bbc8f.js"
+    ],
+    "/locations/hitech-city/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/2619-3c9e02e22d10480a.js",
+      "static/chunks/app/locations/hitech-city/page-272f124ce06bbc8f.js"
+    ],
+    "/locations/malakpet/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/2619-3c9e02e22d10480a.js",
+      "static/chunks/app/locations/malakpet/page-272f124ce06bbc8f.js"
+    ],
+    "/locations/lb-nagar/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/2619-3c9e02e22d10480a.js",
+      "static/chunks/app/locations/lb-nagar/page-272f124ce06bbc8f.js"
+    ],
+    "/disease-guides/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/2619-3c9e02e22d10480a.js",
+      "static/chunks/app/disease-guides/page-272f124ce06bbc8f.js"
+    ],
+    "/emergency-rehabilitation/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/2619-3c9e02e22d10480a.js",
+      "static/chunks/app/emergency-rehabilitation/page-272f124ce06bbc8f.js"
+    ],
+    "/medical-disclaimer/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/app/medical-disclaimer/page-33375c96fdde3526.js"
+    ],
+    "/neurosurgeon-hitech-city/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/app/neurosurgeon-hitech-city/page-33375c96fdde3526.js"
+    ],
+    "/neurosurgeon-banjara-hills/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/app/neurosurgeon-banjara-hills/page-33375c96fdde3526.js"
+    ],
+    "/neurosurgeon-gachibowli/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/app/neurosurgeon-gachibowli/page-33375c96fdde3526.js"
+    ],
+    "/neurosurgeon-hyderabad/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/app/neurosurgeon-hyderabad/page-33375c96fdde3526.js"
+    ],
+    "/neurosurgeon-jubilee-hills/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/app/neurosurgeon-jubilee-hills/page-33375c96fdde3526.js"
+    ],
+    "/neurosurgeon-secunderabad/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/app/neurosurgeon-secunderabad/page-33375c96fdde3526.js"
+    ],
+    "/patient-stories/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/2619-3c9e02e22d10480a.js",
+      "static/chunks/app/patient-stories/page-bbf4c9c70ff93bbe.js"
+    ],
+    "/patient-stories/[slug]/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/2619-3c9e02e22d10480a.js",
+      "static/chunks/app/patient-stories/[slug]/page-272f124ce06bbc8f.js"
+    ],
+    "/privacy/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/app/privacy/page-33375c96fdde3526.js"
+    ],
+    "/services/[slug]/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/app/services/[slug]/page-33375c96fdde3526.js"
+    ],
+    "/services/endoscopic-discectomy-hyderabad/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/2619-3c9e02e22d10480a.js",
+      "static/chunks/app/services/endoscopic-discectomy-hyderabad/page-272f124ce06bbc8f.js"
+    ],
+    "/services/epilepsy-surgery-hyderabad/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/2619-3c9e02e22d10480a.js",
+      "static/chunks/8651-283e698772817efe.js",
+      "static/chunks/app/services/epilepsy-surgery-hyderabad/page-31917f6d59e148c0.js"
+    ],
+    "/terms/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/app/terms/page-33375c96fdde3526.js"
+    ],
+    "/services/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/2619-3c9e02e22d10480a.js",
+      "static/chunks/app/services/page-272f124ce06bbc8f.js"
+    ],
+    "/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/2619-3c9e02e22d10480a.js",
+      "static/chunks/9634-4d156505cced8c76.js",
+      "static/chunks/app/page-d45148e895b78b5d.js"
+    ],
+    "/services/brain-tumor-surgery-hyderabad/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/2619-3c9e02e22d10480a.js",
+      "static/chunks/8651-283e698772817efe.js",
+      "static/chunks/app/services/brain-tumor-surgery-hyderabad/page-b668f27777dd07f4.js"
+    ],
+    "/technology-facilities/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/2619-3c9e02e22d10480a.js",
+      "static/chunks/app/technology-facilities/page-272f124ce06bbc8f.js"
+    ],
+    "/services/minimally-invasive-spine-surgery/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/2619-3c9e02e22d10480a.js",
+      "static/chunks/8651-283e698772817efe.js",
+      "static/chunks/app/services/minimally-invasive-spine-surgery/page-31917f6d59e148c0.js"
+    ],
+    "/services/peripheral-nerve-surgery-hyderabad/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/2619-3c9e02e22d10480a.js",
+      "static/chunks/app/services/peripheral-nerve-surgery-hyderabad/page-272f124ce06bbc8f.js"
+    ],
+    "/services/spinal-fusion-surgery-hyderabad/page": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/2619-3c9e02e22d10480a.js",
+      "static/chunks/app/services/spinal-fusion-surgery-hyderabad/page-272f124ce06bbc8f.js"
+    ],
+    "/api/og/route": [
+      "static/chunks/webpack-bf5c18087210ff97.js",
+      "static/chunks/4bd1b696-f785427dddbba9fb.js",
+      "static/chunks/1255-1ba95d892eb26910.js",
+      "static/chunks/main-app-73cda51ebdd72873.js",
+      "static/chunks/app/api/og/route-33375c96fdde3526.js"
+    ]
+  }
+}
