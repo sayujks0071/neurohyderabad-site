@@ -16,7 +16,6 @@ export default function ReassuranceMicrocopy({
   
   // A/B test for reassurance microcopy
   const variant = client?.getExperiment('exp_reassurance_microcopy', { 
-    serviceType,
     userID: 'anon' 
   })?.get('variant', 'control');
 
