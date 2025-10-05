@@ -6,6 +6,7 @@ import TeleconsultationForm from '@/components/TeleconsultationForm';
 import { patientStories } from '../../../src/content/stories';
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import NAP from '@/app/_components/NAP';
+import MedicalCitations from '@/app/_components/MedicalCitations';
 import { makeMetadata } from '@/app/_lib/meta';
 
 const baseMetadata = makeMetadata({
@@ -259,7 +260,8 @@ export default function EpilepsySurgeryPage() {
         </section>
 
         <section className="mt-12 space-y-6">
-          <ReviewedBy />
+          <ReviewedBy lastReviewed="2025-01-15" />
+          <MedicalCitations />
           <NAP />
         </section>
       </div>

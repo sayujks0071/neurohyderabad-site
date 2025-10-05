@@ -10,6 +10,7 @@ import TeleconsultationForm from "@/components/TeleconsultationForm";
 import { patientStories } from "../../../src/content/stories";
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import NAP from '@/app/_components/NAP';
+import MedicalCitations from '@/app/_components/MedicalCitations';
 import { makeMetadata } from '@/app/_lib/meta';
 
 const brainStory = patientStories.find((story) => story.tags.includes("brain"));
@@ -516,6 +517,7 @@ export default function BrainTumorSurgeryPage() {
         />
         
         <ReviewedBy lastReviewed="2025-01-15" />
+        <MedicalCitations />
         <NAP />
       </main>
     </>
