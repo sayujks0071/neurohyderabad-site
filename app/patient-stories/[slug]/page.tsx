@@ -8,9 +8,9 @@ import ReviewedBy from '@/app/_components/ReviewedBy';
 import SchemaScript from '@/app/_components/SchemaScript';
 
 interface PageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateStaticParams() {
