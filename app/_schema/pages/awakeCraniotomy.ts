@@ -4,6 +4,33 @@ import { physician, breadcrumb, faq } from '@/app/_schema/builders';
 export function awakeCraniotomySchemas(url: string) {
   const today = new Date().toISOString().slice(0, 10);
 
+  const medicalWebPage = {
+    '@context': 'https://schema.org',
+    '@type': 'MedicalWebPage',
+    '@id': `${url}#medical`,
+    url,
+    name: 'Awake Craniotomy Guide Hyderabad | Dr. Sayuj',
+    description: 'Why awake brain surgery is chosen, mapping process, recovery, and FAQs for Hyderabad patients.',
+    reviewedBy: { '@id': 'https://www.drsayuj.com/#physician' },
+    lastReviewed: today,
+    breadcrumb: { '@id': `${url}#breadcrumb` },
+    mainEntity: [
+      {
+        '@type': 'MedicalProcedure',
+        '@id': `${url}#procedure`,
+        name: 'Awake Craniotomy',
+        procedureType: 'Surgical',
+        bodyLocation: 'Brain',
+        indication: [
+          { '@type': 'MedicalCondition', name: 'Brain Tumors' },
+          { '@type': 'MedicalCondition', name: 'Epilepsy' },
+          { '@type': 'MedicalCondition', name: 'Arteriovenous Malformations' }
+        ],
+        followup: 'Most patients go home in 3–4 days and begin light activity once fatigue settles.'
+      }
+    ]
+  };
+
   const blog = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
@@ -22,11 +49,16 @@ export function awakeCraniotomySchemas(url: string) {
     url,
   };
 
-  const crumbs = breadcrumb([
-    { name: 'Home', url: `${CLINIC.site}/` },
-    { name: 'Blog', url: `${CLINIC.site}/blog` },
-    { name: 'Awake Craniotomy', url },
-  ]);
+  const crumbs = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    '@id': `${url}#breadcrumb`,
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${CLINIC.site}/` },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: `${CLINIC.site}/blog` },
+      { '@type': 'ListItem', position: 3, name: 'Awake Craniotomy', item: url }
+    ]
+  };
 
   const faqs = faq([
     { q: 'Why keep the patient awake?', a: 'It helps protect speech and movement areas by checking function during surgery.' },
@@ -34,5 +66,5 @@ export function awakeCraniotomySchemas(url: string) {
     { q: 'How long is hospital stay?', a: 'Typically 2–4 days, depending on recovery and pathology.' },
   ]);
 
-  return [blog, crumbs, faqs];
+  return [medicalWebPage, blog, crumbs, faqs];
 }

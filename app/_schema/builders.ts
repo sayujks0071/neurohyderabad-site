@@ -2,11 +2,27 @@ import { CLINIC } from '@/app/_lib/clinic';
 
 export const physician = {
   '@type': 'Physician',
+  '@id': 'https://www.drsayuj.com/#physician',
   name: 'Dr. Sayuj Krishnan S',
   medicalSpecialty: ['Neurosurgery', 'SpineSurgery'],
-  affiliation: { '@type': 'Hospital', name: 'Yashoda Hospital, Malakpet' },
+  affiliation: { 
+    '@type': 'Hospital', 
+    name: 'Yashoda Hospital, Malakpet',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Yashoda Hospital, Room 317, OPD Block',
+      addressLocality: 'Malakpet',
+      addressRegion: 'Telangana',
+      postalCode: '500036',
+      addressCountry: 'IN'
+    }
+  },
   telephone: CLINIC.phoneHuman,
   url: CLINIC.site,
+  sameAs: [
+    'https://www.yashodahospitals.com/doctor/dr-sayuj-krishnan/',
+    'https://www.linkedin.com/in/dr-sayuj-krishnan'
+  ]
 };
 
 export function breadcrumb(items: { name: string; url: string }[]) {

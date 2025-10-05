@@ -7,11 +7,28 @@ export function spinalFusionSchemas(url: string) {
   const medicalWebPage = {
     '@context': 'https://schema.org',
     '@type': 'MedicalWebPage',
+    '@id': `${url}#medical`,
     url,
-    name: 'Spinal Fusion Surgery (TLIF/ACDF)',
-    about: { '@type': 'MedicalProcedure', name: 'Spinal Fusion' },
-    reviewedBy: physician,
+    name: 'Spinal Fusion Surgery in Hyderabad | TLIF & ACDF',
+    description: 'TLIF and ACDF for instability, recovery timelines, and insurance support with Dr. Sayuj Krishnan.',
+    reviewedBy: { '@id': 'https://www.drsayuj.com/#physician' },
     lastReviewed: today,
+    breadcrumb: { '@id': `${url}#breadcrumb` },
+    mainEntity: [
+      {
+        '@type': 'MedicalProcedure',
+        '@id': `${url}#procedure`,
+        name: 'Spinal Fusion Surgery',
+        procedureType: 'Surgical',
+        bodyLocation: 'Spine',
+        indication: [
+          { '@type': 'MedicalCondition', name: 'Spondylolisthesis' },
+          { '@type': 'MedicalCondition', name: 'Spinal Instability' },
+          { '@type': 'MedicalCondition', name: 'Degenerative Disc Disease' }
+        ],
+        followup: 'Physiotherapy and imaging review at 6 weeks.'
+      }
+    ]
   };
 
   const tlif = {
@@ -32,11 +49,16 @@ export function spinalFusionSchemas(url: string) {
     url: `${url}#acdf`,
   };
 
-  const crumbs = breadcrumb([
-    { name: 'Home', url: `${CLINIC.site}/` },
-    { name: 'Services', url: `${CLINIC.site}/services` },
-    { name: 'Spinal Fusion', url },
-  ]);
+  const crumbs = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    '@id': `${url}#breadcrumb`,
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${CLINIC.site}/` },
+      { '@type': 'ListItem', position: 2, name: 'Services', item: `${CLINIC.site}/services` },
+      { '@type': 'ListItem', position: 3, name: 'Spinal Fusion', item: url }
+    ]
+  };
 
   const faqs = faq([
     {

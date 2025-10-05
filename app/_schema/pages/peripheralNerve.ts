@@ -7,11 +7,28 @@ export function peripheralNerveSchemas(url: string) {
   const medicalWebPage = {
     '@context': 'https://schema.org',
     '@type': 'MedicalWebPage',
+    '@id': `${url}#medical`,
     url,
-    name: 'Peripheral Nerve Surgery',
-    about: { '@type': 'MedicalSpecialty', name: 'Peripheral nerve surgery' },
-    reviewedBy: physician,
+    name: 'Peripheral Nerve Surgery Hyderabad | Carpal & Ulnar',
+    description: 'Day-care carpal tunnel, ulnar decompression, and nerve repair by Dr. Sayuj Krishnan at Yashoda Hospital Malakpet.',
+    reviewedBy: { '@id': 'https://www.drsayuj.com/#physician' },
     lastReviewed: today,
+    breadcrumb: { '@id': `${url}#breadcrumb` },
+    mainEntity: [
+      {
+        '@type': 'MedicalProcedure',
+        '@id': `${url}#procedure`,
+        name: 'Peripheral Nerve Surgery',
+        procedureType: 'Surgical',
+        bodyLocation: 'Peripheral nerves',
+        indication: [
+          { '@type': 'MedicalCondition', name: 'Carpal Tunnel Syndrome' },
+          { '@type': 'MedicalCondition', name: 'Cubital Tunnel Syndrome' },
+          { '@type': 'MedicalCondition', name: 'Peripheral Nerve Compression' }
+        ],
+        followup: 'Hand therapy and ergonomic coaching are built into every recovery plan.'
+      }
+    ]
   };
 
   const carpal = {
@@ -32,11 +49,16 @@ export function peripheralNerveSchemas(url: string) {
     url: `${url}#ulnar-nerve`,
   };
 
-  const crumbs = breadcrumb([
-    { name: 'Home', url: `${CLINIC.site}/` },
-    { name: 'Services', url: `${CLINIC.site}/services` },
-    { name: 'Peripheral Nerve Surgery', url },
-  ]);
+  const crumbs = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    '@id': `${url}#breadcrumb`,
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${CLINIC.site}/` },
+      { '@type': 'ListItem', position: 2, name: 'Services', item: `${CLINIC.site}/services` },
+      { '@type': 'ListItem', position: 3, name: 'Peripheral Nerve Surgery', item: url }
+    ]
+  };
 
   const faqs = faq([
     {
