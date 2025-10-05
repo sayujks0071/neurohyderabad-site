@@ -6,8 +6,8 @@ import NAP from '@/app/_components/NAP';
 import SmartImage from '@/components/SmartImage';
 
 export const metadata = makeMetadata({
-  title: 'Spinal Fusion Surgery in Hyderabad',
-  description: 'TLIF/ACDF indications, risks, recovery timelines, and candidacy.',
+  title: 'Spinal Fusion Surgery in Hyderabad | TLIF & ACDF',
+  description: 'TLIF and ACDF for instability, recovery timelines, and insurance support with Dr. Sayuj Krishnan.',
   canonicalPath: '/services/spinal-fusion',
 });
 

@@ -6,8 +6,8 @@ import NAP from '@/app/_components/NAP';
 import SmartImage from '@/components/SmartImage';
 
 export const metadata = makeMetadata({
-  title: 'Awake Craniotomy: Patient Guide (Hyderabad)',
-  description: 'Why it’s done, safety, what to expect, recovery, and FAQs.',
+  title: 'Awake Craniotomy Guide Hyderabad | Dr. Sayuj',
+  description: 'Why awake brain surgery is chosen, mapping process, recovery, and FAQs for Hyderabad patients.',
   canonicalPath: '/blog/awake-craniotomy-guide',
 });
 

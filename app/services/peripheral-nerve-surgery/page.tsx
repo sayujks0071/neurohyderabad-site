@@ -6,8 +6,8 @@ import NAP from '@/app/_components/NAP';
 import SmartImage from '@/components/SmartImage';
 
 export const metadata = makeMetadata({
-  title: 'Peripheral Nerve Surgery in Hyderabad',
-  description: 'Carpal tunnel, ulnar nerve decompression—candidacy, recovery, and outcomes.',
+  title: 'Peripheral Nerve Surgery Hyderabad | Carpal & Ulnar',
+  description: 'Day-care carpal tunnel, ulnar decompression, and nerve repair by Dr. Sayuj Krishnan at Yashoda Hospital Malakpet.',
   canonicalPath: '/services/peripheral-nerve-surgery',
 });
 
