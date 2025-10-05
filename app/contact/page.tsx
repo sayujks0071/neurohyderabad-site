@@ -24,8 +24,8 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  const { telephone, email, streetAddress, addressLocality, addressRegion, postalCode } = CLINIC_INFO;
-  const telephoneHref = `tel:${telephone.replace(/[^\\d+]/g, "")}`;
+  const { telephone, rawTelephone, email, streetAddress, addressLocality, addressRegion, postalCode } = CLINIC_INFO;
+  const telephoneHref = `tel:${rawTelephone}`;
 
   return (
     <>

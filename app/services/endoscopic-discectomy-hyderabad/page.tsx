@@ -1,22 +1,22 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { SITE_URL } from '../../../src/lib/seo';
-import MedicalReviewNotice from '../../../src/components/MedicalReviewNotice';
+import ReviewedBy from '@/app/_components/ReviewedBy';
+import NAP from '@/app/_components/NAP';
+import { makeMetadata } from '@/app/_lib/meta';
+
+const baseMetadata = makeMetadata({
+  title: 'Endoscopic Discectomy in Hyderabad | Minimally Invasive Disc Surgery',
+  description: 'Expert endoscopic discectomy for herniated discs in Hyderabad. Same-day surgery, faster recovery, less pain.',
+  canonicalPath: '/services/endoscopic-discectomy-hyderabad',
+});
 
 export const metadata: Metadata = {
-  title: 'Endoscopic Discectomy in Hyderabad | Minimally Invasive Disc Surgery',
-  description: 'Expert endoscopic discectomy for herniated discs in Hyderabad. Same-day surgery, faster recovery, less pain. Book consultation with Dr. Sayuj Krishnan.',
-  alternates: {
-    canonical: `${SITE_URL}/services/endoscopic-discectomy-hyderabad/`,
-    languages: {
-      'en-IN': `${SITE_URL}/services/endoscopic-discectomy-hyderabad/`,
-      'x-default': `${SITE_URL}/services/endoscopic-discectomy-hyderabad/`
-    }
-  },
+  ...baseMetadata,
   openGraph: {
-    title: 'Endoscopic Discectomy in Hyderabad | Minimally Invasive Disc Surgery',
-    description: 'Expert endoscopic discectomy for herniated discs in Hyderabad. Same-day surgery, faster recovery, less pain. Book consultation with Dr. Sayuj Krishnan.',
-    url: `${SITE_URL}/services/endoscopic-discectomy-hyderabad/`,
+    title: baseMetadata.title,
+    description: baseMetadata.description,
+    url: `${SITE_URL}/services/endoscopic-discectomy-hyderabad`,
     siteName: 'Dr. Sayuj Krishnan - Neurosurgeon in Hyderabad',
     images: [
       {
@@ -31,8 +31,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Endoscopic Discectomy in Hyderabad | Minimally Invasive Disc Surgery',
-    description: 'Expert endoscopic discectomy for herniated discs in Hyderabad. Same-day surgery, faster recovery, less pain. Book consultation with Dr. Sayuj Krishnan.',
+    title: baseMetadata.title,
+    description: baseMetadata.description,
     images: [`${SITE_URL}/api/og?title=Endoscopic%20Discectomy%20in%20Hyderabad&subtitle=Minimally%20Invasive%20Disc%20Surgery`],
   },
 };
@@ -54,9 +54,6 @@ export default function EndoscopicDiscectomyPage() {
             <a href="/appointments" className="text-blue-600 hover:underline ml-2">Appointments</a>
           </p>
         </section>
-
-        <MedicalReviewNotice />
-
         <section className="mb-12">
           <h2 className="text-3xl font-bold text-blue-800 mb-6">What is Endoscopic Discectomy?</h2>
           <div className="prose max-w-none">
@@ -242,6 +239,11 @@ export default function EndoscopicDiscectomyPage() {
               All Spine Services
             </Link>
           </div>
+        </section>
+
+        <section className="mt-12 space-y-6">
+          <ReviewedBy />
+          <NAP />
         </section>
       </div>
     </div>

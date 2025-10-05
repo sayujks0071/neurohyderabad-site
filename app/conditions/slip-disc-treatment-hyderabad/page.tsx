@@ -1,14 +1,29 @@
 import React from "react";
 import Link from "next/link";
+import type { Metadata } from 'next';
 import MedicalWebPageSchema from "../../components/schemas/MedicalWebPageSchema";
 import FAQPageSchema from "../../components/schemas/FAQPageSchema";
 import BreadcrumbSchema from "../../components/schemas/BreadcrumbSchema";
 import { SITE_URL } from "../../../src/lib/seo";
+import ReviewedBy from '@/app/_components/ReviewedBy';
+import NAP from '@/app/_components/NAP';
+import { makeMetadata } from '@/app/_lib/meta';
 
-export const metadata = {
+const baseMetadata = makeMetadata({
   title: "Slip Disc Treatment in Hyderabad | Endoscopic Discectomy | Dr. Sayuj Krishnan",
-  description: "Expert slip disc treatment in Hyderabad with endoscopic discectomy. Same-day discharge, minimal pain, faster recovery. Book consultation with Dr. Sayuj Krishnan.",
-  keywords: "slip disc treatment hyderabad, herniated disc, endoscopic discectomy, spine surgery, dr sayuj krishnan",
+  description: "Minimally invasive endoscopic discectomy, rehab, and conservative care plans for slip disc patients in Hyderabad.",
+  canonicalPath: '/conditions/slip-disc-treatment-hyderabad',
+});
+
+export const metadata: Metadata = {
+  ...baseMetadata,
+  keywords: [
+    "slip disc treatment hyderabad",
+    "herniated disc",
+    "endoscopic discectomy",
+    "spine surgery",
+    "dr sayuj krishnan",
+  ],
   alternates: {
     canonical: `${SITE_URL}/conditions/slip-disc-treatment-hyderabad/`,
   },
@@ -247,17 +262,22 @@ export default function SlipDiscTreatmentPage() {
       <section id="faqs" className="mb-12">
         <h2 className="text-2xl font-semibold mb-6 text-blue-700">Frequently Asked Questions</h2>
         <div className="space-y-4">
-          {FAQ.map(({ q, a }, index) => (
-            <div key={index} className="bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-lg font-semibold mb-3 text-blue-700">{q}</h3>
-              <p className="text-gray-700">{a}</p>
-            </div>
-          ))}
+      {FAQ.map(({ q, a }, index) => (
+        <div key={index} className="bg-white p-6 rounded-lg shadow-md">
+          <h3 className="text-lg font-semibold mb-3 text-blue-700">{q}</h3>
+          <p className="text-gray-700">{a}</p>
         </div>
-      </section>
+      ))}
+    </div>
+  </section>
 
-      {/* Schema Markup */}
-      <MedicalWebPageSchema
+  <section className="mb-12 space-y-6">
+    <ReviewedBy />
+    <NAP />
+  </section>
+
+  {/* Schema Markup */}
+  <MedicalWebPageSchema
         title="Slip Disc Treatment in Hyderabad | Endoscopic Discectomy"
         description="Expert slip disc treatment in Hyderabad with endoscopic discectomy. Same-day discharge, minimal pain, faster recovery. Book consultation with Dr. Sayuj Krishnan."
         pageSlug="/conditions/slip-disc-treatment-hyderabad/"

@@ -2,24 +2,35 @@ import { SITE_URL } from "../../../src/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Breadcrumbs from "../../components/Breadcrumbs";
+import ReviewedBy from '@/app/_components/ReviewedBy';
+import NAP from '@/app/_components/NAP';
+import { makeMetadata } from '@/app/_lib/meta';
+
+const baseMetadata = makeMetadata({
+  title: 'Endoscopic vs Microdiscectomy in Hyderabad | Which is Right for You?',
+  description: 'Compare incision size, recovery, and candidacy for endoscopic discectomy versus microdiscectomy in Hyderabad.',
+  canonicalPath: '/blog/endoscopic-vs-microdiscectomy-hyderabad',
+});
 
 export const metadata: Metadata = {
-  title: "Endoscopic vs Microdiscectomy in Hyderabad | Which is Right for You?",
-  description: "Compare endoscopic and microdiscectomy techniques for herniated disc surgery—incision size, recovery, eligibility, and outcomes to help you decide.",
+  ...baseMetadata,
   alternates: {
     canonical: `${SITE_URL}/blog/endoscopic-vs-microdiscectomy-hyderabad/`,
     languages: {
       'en-IN': `${SITE_URL}/blog/endoscopic-vs-microdiscectomy-hyderabad/`,
-      'x-default': `${SITE_URL}/blog/endoscopic-vs-microdiscectomy-hyderabad/`
-    }
+      'x-default': `${SITE_URL}/blog/endoscopic-vs-microdiscectomy-hyderabad/`,
+    },
   },
   openGraph: {
+    title: baseMetadata.title,
+    description: baseMetadata.description,
+    url: `${SITE_URL}/blog/endoscopic-vs-microdiscectomy-hyderabad/`,
     images: [
       {
-        url: `${SITE_URL}/api/og?title=${encodeURIComponent("Endoscopic vs Microdiscectomy")}&subtitle=${encodeURIComponent("Which is Right for You?")}`,
+        url: `${SITE_URL}/api/og?title=${encodeURIComponent('Endoscopic vs Microdiscectomy')}&subtitle=${encodeURIComponent('Which is Right for You?')}`,
         width: 1200,
         height: 630,
-        alt: "Endoscopic vs Microdiscectomy — Dr Sayuj Krishnan",
+        alt: 'Endoscopic vs Microdiscectomy — Dr Sayuj Krishnan',
       },
     ],
   },
@@ -444,6 +455,11 @@ export default function EndoscopicVsMicrodiscectomyPage() {
               <p className="text-sm text-gray-600">
                 This comparison is educational and not a substitute for personalized medical advice. The best surgical approach depends on individual anatomy, pathology, and clinical factors determined during consultation and MRI review.
               </p>
+            </section>
+
+            <section className="mb-8 space-y-4">
+              <ReviewedBy />
+              <NAP />
             </section>
           </div>
         </article>

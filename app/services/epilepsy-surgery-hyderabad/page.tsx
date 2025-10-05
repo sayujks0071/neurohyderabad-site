@@ -1,25 +1,25 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { SITE_URL } from '../../../src/lib/seo';
-import MedicalReviewNotice from '../../../src/components/MedicalReviewNotice';
 import OutcomeMetricsSection from '@/components/OutcomeMetricsSection';
 import TeleconsultationForm from '@/components/TeleconsultationForm';
 import { patientStories } from '../../../src/content/stories';
+import ReviewedBy from '@/app/_components/ReviewedBy';
+import NAP from '@/app/_components/NAP';
+import { makeMetadata } from '@/app/_lib/meta';
 
-export const metadata: Metadata = {
+const baseMetadata = makeMetadata({
   title: 'Epilepsy Surgery in Hyderabad | Drug-Resistant Epilepsy Treatment',
   description: 'Expert epilepsy surgery for drug-resistant epilepsy in Hyderabad. LITT, resection surgery, VNS. Comprehensive evaluation and advanced techniques.',
-  alternates: {
-    canonical: `${SITE_URL}/services/epilepsy-surgery-hyderabad/`,
-    languages: {
-      'en-IN': `${SITE_URL}/services/epilepsy-surgery-hyderabad/`,
-      'x-default': `${SITE_URL}/services/epilepsy-surgery-hyderabad/`
-    }
-  },
+  canonicalPath: '/services/epilepsy-surgery-hyderabad',
+});
+
+export const metadata: Metadata = {
+  ...baseMetadata,
   openGraph: {
-    title: 'Epilepsy Surgery in Hyderabad | Drug-Resistant Epilepsy Treatment',
-    description: 'Expert epilepsy surgery for drug-resistant epilepsy in Hyderabad. LITT, resection surgery, VNS. Comprehensive evaluation and advanced techniques.',
-    url: `${SITE_URL}/services/epilepsy-surgery-hyderabad/`,
+    title: baseMetadata.title,
+    description: baseMetadata.description,
+    url: `${SITE_URL}/services/epilepsy-surgery-hyderabad`,
     siteName: 'Dr. Sayuj Krishnan - Neurosurgeon in Hyderabad',
     images: [
       {
@@ -34,8 +34,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Epilepsy Surgery in Hyderabad | Drug-Resistant Epilepsy Treatment',
-    description: 'Expert epilepsy surgery for drug-resistant epilepsy in Hyderabad. LITT, resection surgery, VNS. Comprehensive evaluation and advanced techniques.',
+    title: baseMetadata.title,
+    description: baseMetadata.description,
     images: [`${SITE_URL}/api/og?title=Epilepsy%20Surgery%20in%20Hyderabad&subtitle=Drug-Resistant%20Epilepsy%20Treatment`],
   },
 };
@@ -82,9 +82,6 @@ export default function EpilepsySurgeryPage() {
             <a href="/appointments" className="text-blue-600 hover:underline ml-2">Appointments</a>
           </p>
         </section>
-
-        <MedicalReviewNotice />
-
         <section className="mb-12">
           <h2 className="text-3xl font-bold text-blue-800 mb-6">When is Epilepsy Surgery Considered?</h2>
           <div className="prose max-w-none">
@@ -259,6 +256,11 @@ export default function EpilepsySurgeryPage() {
               Brain Surgery Services
             </Link>
           </div>
+        </section>
+
+        <section className="mt-12 space-y-6">
+          <ReviewedBy />
+          <NAP />
         </section>
       </div>
     </div>

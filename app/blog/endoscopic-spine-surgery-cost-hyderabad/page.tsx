@@ -1,9 +1,17 @@
 import { Metadata } from 'next'
 import { JsonLd } from '../../../src/lib/seo/jsonld'
+import ReviewedBy from '@/app/_components/ReviewedBy'
+import NAP from '@/app/_components/NAP'
+import { makeMetadata } from '@/app/_lib/meta'
+
+const baseMetadata = makeMetadata({
+  title: 'Endoscopic Spine Surgery Cost in Hyderabad | What Affects Price',
+  description: 'Cost drivers, insurance nuances, and day-care eligibility for endoscopic spine surgery in Hyderabad.',
+  canonicalPath: '/blog/endoscopic-spine-surgery-cost-hyderabad',
+})
 
 export const metadata: Metadata = {
-  title: 'Endoscopic Spine Surgery Cost in Hyderabad | What Affects Price',
-  description: 'Transparent overview of endoscopic spine surgery costs in Hyderabad—what affects price, insurance, day-care eligibility, and recovery planning. Book a consultation.',
+  ...baseMetadata,
   keywords: [
     'endoscopic spine surgery cost hyderabad',
     'spine surgery price hyderabad',
@@ -13,8 +21,8 @@ export const metadata: Metadata = {
     'day care spine surgery hyderabad'
   ],
   openGraph: {
-    title: 'Endoscopic Spine Surgery Cost in Hyderabad | What Affects Price',
-    description: 'Transparent overview of endoscopic spine surgery costs in Hyderabad—what affects price, insurance, day-care eligibility, and recovery planning.',
+    title: baseMetadata.title,
+    description: baseMetadata.description,
     url: 'https://www.drsayuj.com/blog/endoscopic-spine-surgery-cost-hyderabad/',
     type: 'article',
     publishedTime: '2025-09-30T00:00:00.000Z',
@@ -365,6 +373,11 @@ export default function EndoscopicSpineSurgeryCostPage() {
                 Medical information here is educational and not a substitute for clinical evaluation. Costs are individualized after consultation, imaging review, and policy verification. No outcome is guaranteed.
               </p>
             </div>
+          </section>
+
+          <section className="mt-8 space-y-4">
+            <ReviewedBy />
+            <NAP />
           </section>
         </div>
       </article>

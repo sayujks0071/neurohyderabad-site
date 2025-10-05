@@ -1,23 +1,32 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { SITE_URL } from '../../../src/lib/seo';
-import MedicalReviewNotice from '../../../src/components/MedicalReviewNotice';
+import ReviewedBy from '@/app/_components/ReviewedBy';
+import NAP from '@/app/_components/NAP';
+import { makeMetadata } from '@/app/_lib/meta';
+
+const baseMetadata = makeMetadata({
+  title: 'Spinal Fusion Surgery in Hyderabad | TLIF, PLIF, ALIF, ACDF',
+  description: 'Fusion options for instability, spondylolisthesis, and deformity with Dr. Sayuj Krishnan in Hyderabad.',
+  canonicalPath: '/services/spinal-fusion-surgery-hyderabad',
+});
 
 export const metadata: Metadata = {
-  title: 'Spinal Fusion Surgery in Hyderabad | TLIF, PLIF, ALIF, ACDF',
-  description: 'Expert spinal fusion in Hyderabad. TLIF, PLIF, ALIF, ACDF for instability, spondylolisthesis, deformity. When to choose fusion vs motion‑preserving options.',
-  keywords: 'spinal fusion hyderabad, TLIF hyderabad, PLIF hyderabad, ALIF hyderabad, ACDF hyderabad, cervical fusion hyderabad, lumbar fusion cost hyderabad, spine fusion surgeon hyderabad',
-  alternates: {
-    canonical: `${SITE_URL}/services/spinal-fusion-surgery-hyderabad/`,
-    languages: {
-      'en-IN': `${SITE_URL}/services/spinal-fusion-surgery-hyderabad/`,
-      'x-default': `${SITE_URL}/services/spinal-fusion-surgery-hyderabad/`
-    }
-  },
+  ...baseMetadata,
+  keywords: [
+    'spinal fusion hyderabad',
+    'TLIF hyderabad',
+    'PLIF hyderabad',
+    'ALIF hyderabad',
+    'ACDF hyderabad',
+    'cervical fusion hyderabad',
+    'lumbar fusion cost hyderabad',
+    'spine fusion surgeon hyderabad',
+  ],
   openGraph: {
     title: 'Spinal Fusion Surgery in Hyderabad | Dr. Sayuj Krishnan',
     description: 'Expert spinal fusion surgery including TLIF, PLIF, ALIF, and ACDF procedures for spinal instability and deformity in Hyderabad.',
-    url: `${SITE_URL}/services/spinal-fusion-surgery-hyderabad/`,
+    url: `${SITE_URL}/services/spinal-fusion-surgery-hyderabad`,
     siteName: 'Dr. Sayuj Krishnan - Neurosurgeon in Hyderabad',
     images: [
       {
@@ -700,7 +709,10 @@ export default function SpinalFusionSurgeryPage() {
           </div>
         </section>
 
-        <MedicalReviewNotice />
+        <section className="mb-12 space-y-6">
+          <ReviewedBy />
+          <NAP />
+        </section>
       </div>
 
       {/* Structured Data */}

@@ -1,9 +1,17 @@
 import { Metadata } from 'next'
 import { JsonLd } from '../../../src/lib/seo/jsonld'
+import ReviewedBy from '@/app/_components/ReviewedBy'
+import NAP from '@/app/_components/NAP'
+import { makeMetadata } from '@/app/_lib/meta'
+
+const baseMetadata = makeMetadata({
+  title: 'Return to Work After Endoscopic Discectomy in Hyderabad',
+  description: 'Week-by-week recovery timelines, activity progression, and workplace planning after endoscopic discectomy in Hyderabad.',
+  canonicalPath: '/blog/return-to-work-after-endoscopic-discectomy-hyderabad',
+})
 
 export const metadata: Metadata = {
-  title: 'Return to Work After Endoscopic Discectomy in Hyderabad',
-  description: 'Week‑by‑week recovery after endoscopic discectomy in Hyderabad. Desk vs manual timelines, red flags, and safe activity progressions. Book a consultation.',
+  ...baseMetadata,
   keywords: [
     'return to work after endoscopic discectomy hyderabad',
     'endoscopic discectomy recovery hyderabad',
@@ -13,8 +21,8 @@ export const metadata: Metadata = {
     'spine surgery return to work'
   ],
   openGraph: {
-    title: 'Return to Work After Endoscopic Discectomy in Hyderabad',
-    description: 'Week‑by‑week recovery after endoscopic discectomy in Hyderabad. Desk vs manual timelines, red flags, and safe activity progressions.',
+    title: baseMetadata.title,
+    description: baseMetadata.description,
     url: 'https://www.drsayuj.com/blog/return-to-work-after-endoscopic-discectomy-hyderabad/',
     type: 'article',
     publishedTime: '2025-10-01T00:00:00.000Z',
@@ -372,6 +380,11 @@ export default function ReturnToWorkAfterEndoscopicDiscectomyPage() {
                   Last medically reviewed: October 1, 2025 by Dr Sayuj Krishnan
                 </p>
               </div>
+            </section>
+
+            <section className="mt-8 space-y-4">
+              <ReviewedBy />
+              <NAP />
             </section>
           </div>
         </article>

@@ -1,8 +1,6 @@
 import { SITE_URL } from "../../../src/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { HeroCTA } from "../../../src/components/Experiments";
-import SocialProofBand from "../../../src/components/Experiments/SocialProofBand";
 import { analytics } from "../../../src/lib/analytics";
 import ScrollDepthTracker from "../../../src/components/ScrollDepthTracker";
 import Breadcrumbs from "../../components/Breadcrumbs";
@@ -10,35 +8,41 @@ import RelatedContent from "../../components/RelatedContent";
 import OutcomeMetricsSection from "@/components/OutcomeMetricsSection";
 import TeleconsultationForm from "@/components/TeleconsultationForm";
 import { patientStories } from "../../../src/content/stories";
+import ReviewedBy from '@/app/_components/ReviewedBy';
+import NAP from '@/app/_components/NAP';
+import { makeMetadata } from '@/app/_lib/meta';
 
 const brainStory = patientStories.find((story) => story.tags.includes("brain"));
 
+const baseMetadata = makeMetadata({
+  title: 'Brain Tumor Surgery in Hyderabad | Microsurgery & Radiosurgery Care',
+  description: 'Brain tumor surgery with neuronavigation and neuromonitoring in Hyderabad. Risks, recovery, and alternatives explained.',
+  canonicalPath: '/services/brain-tumor-surgery-hyderabad',
+});
+
 export const metadata: Metadata = {
-  title: "Brain Tumor Surgery in Hyderabad | Microsurgery & Radiosurgery Care",
-  description: "Brain tumor surgery with neuronavigation and neuromonitoring in Hyderabad. Risks, recovery, and alternatives explained.",
-  alternates: {
-    canonical: `${SITE_URL}/services/brain-tumor-surgery-hyderabad/`,
-    languages: {
-      'en-IN': `${SITE_URL}/services/brain-tumor-surgery-hyderabad/`,
-      'x-default': `${SITE_URL}/services/brain-tumor-surgery-hyderabad/`
-    }
-  },
+  ...baseMetadata,
   openGraph: {
+    title: baseMetadata.title,
+    description: baseMetadata.description,
+    url: `${SITE_URL}/services/brain-tumor-surgery-hyderabad`,
     images: [
       {
-        url: `${SITE_URL}/api/og?title=${encodeURIComponent("Brain Tumor Surgery in Hyderabad")}&subtitle=${encodeURIComponent("Microsurgery & Radiosurgery")}`,
+        url: `${SITE_URL}/api/og?title=${encodeURIComponent('Brain Tumor Surgery in Hyderabad')}&subtitle=${encodeURIComponent('Microsurgery & Radiosurgery')}`,
         width: 1200,
         height: 630,
-        alt: "Brain Tumor Surgery — Dr Sayuj Krishnan",
+        alt: 'Brain Tumor Surgery — Dr Sayuj Krishnan',
       },
     ],
   },
   twitter: {
-    card: "summary_large_image",
+    card: 'summary_large_image',
+    title: baseMetadata.title,
+    description: baseMetadata.description,
     images: [
       {
-        url: `${SITE_URL}/api/og?title=${encodeURIComponent("Brain Tumor Surgery in Hyderabad")}&subtitle=${encodeURIComponent("Microsurgery & Radiosurgery")}`,
-        alt: "Brain Tumor Surgery — Dr Sayuj Krishnan",
+        url: `${SITE_URL}/api/og?title=${encodeURIComponent('Brain Tumor Surgery in Hyderabad')}&subtitle=${encodeURIComponent('Microsurgery & Radiosurgery')}`,
+        alt: 'Brain Tumor Surgery — Dr Sayuj Krishnan',
       },
     ],
   },
@@ -100,13 +104,7 @@ export default function BrainTumorSurgeryPage() {
           </section>
 
           <div className="prose max-w-none">
-            {/* Medical Review Notice */}
-            <div className="bg-blue-50 p-4 rounded-lg mb-8">
-              <p className="text-sm text-gray-700">
-                <strong>Medically reviewed by Dr Sayuj Krishnan</strong> — MBBS, DNB Neurosurgery (Direct 6 years), Fellowship in Minimally Invasive and Advanced Spine Surgery<br/>
-                <strong>Last reviewed:</strong> October 1, 2025
-              </p>
-            </div>
+            <ReviewedBy date="October 1, 2025" className="mb-8" />
 
 
             <section className="mb-8">
@@ -418,6 +416,11 @@ export default function BrainTumorSurgeryPage() {
 
             <section className="mb-8">
               <TeleconsultationForm pageSlug="/services/brain-tumor-surgery-hyderabad" service="Brain Tumor Surgery" />
+            </section>
+
+            <section className="mb-8">
+              <h2>Clinic details</h2>
+              <NAP />
             </section>
 
             <section className="mb-8">

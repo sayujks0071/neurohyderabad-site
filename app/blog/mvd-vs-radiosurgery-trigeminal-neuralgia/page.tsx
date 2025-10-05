@@ -2,24 +2,35 @@ import { SITE_URL } from "../../../src/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Breadcrumbs from "../../components/Breadcrumbs";
+import ReviewedBy from '@/app/_components/ReviewedBy';
+import NAP from '@/app/_components/NAP';
+import { makeMetadata } from '@/app/_lib/meta';
+
+const baseMetadata = makeMetadata({
+  title: 'MVD vs Radiosurgery vs Percutaneous for Trigeminal Neuralgia | Which is Best?',
+  description: 'Side-by-side comparison of microvascular decompression, Gamma Knife radiosurgery, and percutaneous procedures for trigeminal neuralgia.',
+  canonicalPath: '/blog/mvd-vs-radiosurgery-trigeminal-neuralgia',
+});
 
 export const metadata: Metadata = {
-  title: "MVD vs Radiosurgery vs Percutaneous for Trigeminal Neuralgia | Which is Best?",
-  description: "Compare Microvascular Decompression (MVD), Gamma Knife Radiosurgery, and Percutaneous procedures for trigeminal neuralgia—success rates, invasiveness, and how to choose.",
+  ...baseMetadata,
   alternates: {
     canonical: `${SITE_URL}/blog/mvd-vs-radiosurgery-trigeminal-neuralgia/`,
     languages: {
       'en-IN': `${SITE_URL}/blog/mvd-vs-radiosurgery-trigeminal-neuralgia/`,
-      'x-default': `${SITE_URL}/blog/mvd-vs-radiosurgery-trigeminal-neuralgia/`
-    }
+      'x-default': `${SITE_URL}/blog/mvd-vs-radiosurgery-trigeminal-neuralgia/`,
+    },
   },
   openGraph: {
+    title: baseMetadata.title,
+    description: baseMetadata.description,
+    url: `${SITE_URL}/blog/mvd-vs-radiosurgery-trigeminal-neuralgia/`,
     images: [
       {
-        url: `${SITE_URL}/api/og?title=${encodeURIComponent("MVD vs Radiosurgery for Trigeminal Neuralgia")}&subtitle=${encodeURIComponent("Which is Best?")}`,
+        url: `${SITE_URL}/api/og?title=${encodeURIComponent('MVD vs Radiosurgery for Trigeminal Neuralgia')}&subtitle=${encodeURIComponent('Which is Best?')}`,
         width: 1200,
         height: 630,
-        alt: "Trigeminal Neuralgia Treatment Comparison — Dr Sayuj Krishnan",
+        alt: 'Trigeminal Neuralgia Treatment Comparison — Dr Sayuj Krishnan',
       },
     ],
   },
@@ -426,6 +437,11 @@ export default function MVDvsRadiosurgeryPage() {
               <p className="text-sm text-gray-600">
                 Treatment selection depends on individual medical history, MRI findings, prior treatments, age, comorbidities, and patient preferences. This comparison is educational and not a substitute for personalized medical advice. Outcomes vary; no procedure guarantees 100% success or zero recurrence.
               </p>
+            </section>
+
+            <section className="mb-8 space-y-4">
+              <ReviewedBy />
+              <NAP />
             </section>
           </div>
         </article>

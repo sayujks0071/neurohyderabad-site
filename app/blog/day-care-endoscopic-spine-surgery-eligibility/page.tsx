@@ -2,24 +2,35 @@ import { SITE_URL } from "../../../src/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Breadcrumbs from "../../components/Breadcrumbs";
+import ReviewedBy from '@/app/_components/ReviewedBy';
+import NAP from '@/app/_components/NAP';
+import { makeMetadata } from '@/app/_lib/meta';
+
+const baseMetadata = makeMetadata({
+  title: 'Day-Care Spine Surgery Eligibility | When Can You Go Home Same Day?',
+  description: 'Criteria, safety protocols, and planning tips for same-day endoscopic spine surgery discharge in Hyderabad.',
+  canonicalPath: '/blog/day-care-endoscopic-spine-surgery-eligibility',
+});
 
 export const metadata: Metadata = {
-  title: "Day-Care Spine Surgery Eligibility | When Can You Go Home Same Day?",
-  description: "Learn which spine surgeries qualify for same-day discharge, medical criteria for day-care eligibility, and what to expect when planning outpatient endoscopic spine surgery.",
+  ...baseMetadata,
   alternates: {
     canonical: `${SITE_URL}/blog/day-care-endoscopic-spine-surgery-eligibility/`,
     languages: {
       'en-IN': `${SITE_URL}/blog/day-care-endoscopic-spine-surgery-eligibility/`,
-      'x-default': `${SITE_URL}/blog/day-care-endoscopic-spine-surgery-eligibility/`
-    }
+      'x-default': `${SITE_URL}/blog/day-care-endoscopic-spine-surgery-eligibility/`,
+    },
   },
   openGraph: {
+    title: baseMetadata.title,
+    description: baseMetadata.description,
+    url: `${SITE_URL}/blog/day-care-endoscopic-spine-surgery-eligibility/`,
     images: [
       {
-        url: `${SITE_URL}/api/og?title=${encodeURIComponent("Day-Care Spine Surgery Eligibility")}&subtitle=${encodeURIComponent("When Can You Go Home Same Day?")}`,
+        url: `${SITE_URL}/api/og?title=${encodeURIComponent('Day-Care Spine Surgery Eligibility')}&subtitle=${encodeURIComponent('When Can You Go Home Same Day?')}`,
         width: 1200,
         height: 630,
-        alt: "Day-Care Spine Surgery — Dr Sayuj Krishnan",
+        alt: 'Day-Care Spine Surgery — Dr Sayuj Krishnan',
       },
     ],
   },
@@ -414,6 +425,11 @@ export default function DayCareEligibilityPage() {
               <p className="text-sm text-gray-600">
                 Day-care eligibility is determined on a case-by-case basis after clinical evaluation, MRI review, and discussion of home support. This information is educational and not a guarantee of day-care suitability. Final decisions are made by the surgical team based on your individual medical and surgical factors.
               </p>
+            </section>
+
+            <section className="mb-8 space-y-4">
+              <ReviewedBy />
+              <NAP />
             </section>
           </div>
         </article>

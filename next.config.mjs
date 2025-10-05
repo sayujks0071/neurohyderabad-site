@@ -167,6 +167,7 @@ const nextConfig = {
           { key: "Strict-Transport-Security", value: "max-age=31536000; includeSubDomains; preload" },
           // Safari optimization: Help with content decoding
           { key: "Content-Type", value: "text/html; charset=utf-8" },
+          { key: "Cache-Control", value: "public, s-maxage=3600, max-age=600, stale-while-revalidate=86400" },
         ]
       },
       {
@@ -204,7 +205,7 @@ const nextConfig = {
       {
         source: "/:all*(svg|jpg|jpeg|png|gif|webp|avif|ico|js|css|woff2)",
         headers: [
-          { key: "Cache-Control", value: "public, max-age=0, s-maxage=31536000, immutable" }
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" }
         ]
       },
     ];

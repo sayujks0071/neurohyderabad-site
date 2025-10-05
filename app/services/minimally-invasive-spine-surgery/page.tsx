@@ -1,25 +1,25 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { SITE_URL } from '../../../src/lib/seo';
-import MedicalReviewNotice from '../../../src/components/MedicalReviewNotice';
 import OutcomeMetricsSection from '@/components/OutcomeMetricsSection';
 import TeleconsultationForm from '@/components/TeleconsultationForm';
 import { patientStories } from '../../../src/content/stories';
+import ReviewedBy from '@/app/_components/ReviewedBy';
+import NAP from '@/app/_components/NAP';
+import { makeMetadata } from '@/app/_lib/meta';
 
-export const metadata: Metadata = {
+const baseMetadata = makeMetadata({
   title: 'Minimally Invasive Spine Surgery in Hyderabad | Endoscopic Procedures',
   description: 'Expert minimally invasive spine surgery including endoscopic discectomy, foraminotomy, and ULBD in Hyderabad. Faster recovery, less pain.',
-  alternates: {
-    canonical: `${SITE_URL}/services/minimally-invasive-spine-surgery/`,
-    languages: {
-      'en-IN': `${SITE_URL}/services/minimally-invasive-spine-surgery/`,
-      'x-default': `${SITE_URL}/services/minimally-invasive-spine-surgery/`
-    }
-  },
+  canonicalPath: '/services/minimally-invasive-spine-surgery',
+});
+
+export const metadata: Metadata = {
+  ...baseMetadata,
   openGraph: {
-    title: 'Minimally Invasive Spine Surgery in Hyderabad | Endoscopic Procedures',
-    description: 'Expert minimally invasive spine surgery including endoscopic discectomy, foraminotomy, and ULBD in Hyderabad. Faster recovery, less pain.',
-    url: `${SITE_URL}/services/minimally-invasive-spine-surgery/`,
+    title: baseMetadata.title,
+    description: baseMetadata.description,
+    url: `${SITE_URL}/services/minimally-invasive-spine-surgery`,
     siteName: 'Dr. Sayuj Krishnan - Neurosurgeon in Hyderabad',
     images: [
       {
@@ -34,8 +34,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Minimally Invasive Spine Surgery in Hyderabad | Endoscopic Procedures',
-    description: 'Expert minimally invasive spine surgery including endoscopic discectomy, foraminotomy, and ULBD in Hyderabad. Faster recovery, less pain.',
+    title: baseMetadata.title,
+    description: baseMetadata.description,
     images: [`${SITE_URL}/api/og?title=Minimally%20Invasive%20Spine%20Surgery&subtitle=Endoscopic%20Procedures%20in%20Hyderabad`],
   },
 };
@@ -88,9 +88,6 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
             <a href="/appointments" className="text-blue-600 hover:underline ml-2">Appointments</a>
           </p>
         </section>
-
-        <MedicalReviewNotice />
-
         <section className="mb-12">
           <h2 className="text-3xl font-bold text-blue-800 mb-6">What is Minimally Invasive Spine Surgery?</h2>
           <div className="prose max-w-none">
@@ -266,6 +263,11 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
               About Dr Sayuj
             </Link>
           </div>
+        </section>
+
+        <section className="mt-12 space-y-6">
+          <ReviewedBy />
+          <NAP />
         </section>
       </div>
     </div>

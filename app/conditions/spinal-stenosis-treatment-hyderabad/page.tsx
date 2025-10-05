@@ -1,17 +1,24 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { SITE_URL } from '../../../src/lib/seo';
-import MedicalReviewNotice from '../../../src/components/MedicalReviewNotice';
+import ReviewedBy from '@/app/_components/ReviewedBy';
+import NAP from '@/app/_components/NAP';
+import { makeMetadata } from '@/app/_lib/meta';
+
+const baseMetadata = makeMetadata({
+  title: 'Spinal Stenosis Treatment in Hyderabad | Expert Care & Surgery',
+  description: 'Conservative care, injections, and endoscopic ULBD decompression for spinal stenosis in Hyderabad.',
+  canonicalPath: '/conditions/spinal-stenosis-treatment-hyderabad',
+});
 
 export const metadata: Metadata = {
-  title: 'Spinal Stenosis Treatment in Hyderabad | Expert Care & Surgery',
-  description: 'Expert spinal stenosis treatment in Hyderabad. Conservative care, injections, and endoscopic ULBD surgery. Book consultation with Dr. Sayuj Krishnan.',
+  ...baseMetadata,
   alternates: {
     canonical: `${SITE_URL}/conditions/spinal-stenosis-treatment-hyderabad/`,
     languages: {
       'en-IN': `${SITE_URL}/conditions/spinal-stenosis-treatment-hyderabad/`,
-      'x-default': `${SITE_URL}/conditions/spinal-stenosis-treatment-hyderabad/`
-    }
+      'x-default': `${SITE_URL}/conditions/spinal-stenosis-treatment-hyderabad/`,
+    },
   },
 };
 
@@ -32,9 +39,6 @@ export default function SpinalStenosisTreatmentPage() {
             <a href="/appointments" className="text-blue-600 hover:underline ml-2">Appointments</a>
           </p>
         </section>
-
-        <MedicalReviewNotice />
-
         <section className="mb-12">
           <h2 className="text-3xl font-bold text-blue-800 mb-6">What is Spinal Stenosis?</h2>
           <div className="prose max-w-none">
@@ -94,6 +98,11 @@ export default function SpinalStenosisTreatmentPage() {
               Minimally Invasive Surgery
             </Link>
           </div>
+        </section>
+
+        <section className="mt-12 space-y-6">
+          <ReviewedBy />
+          <NAP />
         </section>
       </div>
     </div>

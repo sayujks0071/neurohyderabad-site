@@ -2,24 +2,35 @@ import { SITE_URL } from "../../../src/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Breadcrumbs from "../../components/Breadcrumbs";
+import ReviewedBy from '@/app/_components/ReviewedBy';
+import NAP from '@/app/_components/NAP';
+import { makeMetadata } from '@/app/_lib/meta';
+
+const baseMetadata = makeMetadata({
+  title: 'Endoscopic Discectomy Cost in Hyderabad | What to Expect',
+  description: 'Breakdown of day-care eligibility, insurance coverage, and cost drivers for endoscopic discectomy in Hyderabad.',
+  canonicalPath: '/blog/endoscopic-discectomy-cost-hyderabad',
+});
 
 export const metadata: Metadata = {
-  title: "Endoscopic Discectomy Cost in Hyderabad | What to Expect",
-  description: "Understand endoscopic discectomy costs in Hyderabad—what's included, day-care eligibility, insurance and pre-auth tips, and how we provide written estimates.",
+  ...baseMetadata,
   alternates: {
     canonical: `${SITE_URL}/blog/endoscopic-discectomy-cost-hyderabad/`,
     languages: {
       'en-IN': `${SITE_URL}/blog/endoscopic-discectomy-cost-hyderabad/`,
-      'x-default': `${SITE_URL}/blog/endoscopic-discectomy-cost-hyderabad/`
-    }
+      'x-default': `${SITE_URL}/blog/endoscopic-discectomy-cost-hyderabad/`,
+    },
   },
   openGraph: {
+    title: baseMetadata.title,
+    description: baseMetadata.description,
+    url: `${SITE_URL}/blog/endoscopic-discectomy-cost-hyderabad/`,
     images: [
       {
-        url: `${SITE_URL}/api/og?title=${encodeURIComponent("Endoscopic Discectomy Cost in Hyderabad")}&subtitle=${encodeURIComponent("What to Expect")}`,
+        url: `${SITE_URL}/api/og?title=${encodeURIComponent('Endoscopic Discectomy Cost in Hyderabad')}&subtitle=${encodeURIComponent('What to Expect')}`,
         width: 1200,
         height: 630,
-        alt: "Endoscopic Discectomy Cost — Dr Sayuj Krishnan",
+        alt: 'Endoscopic Discectomy Cost — Dr Sayuj Krishnan',
       },
     ],
   },
@@ -316,6 +327,11 @@ export default function EndoscopicDiscectomyCostPage() {
               <p className="text-sm text-gray-600">
                 Cost estimates are indicative and may vary based on individual medical needs, room category, insurance coverage, and hospital pricing policies. Final costs are confirmed after clinical evaluation and insurance verification. This information is educational and not a substitute for personalized medical or financial advice.
               </p>
+            </section>
+
+            <section className="mb-8 space-y-4">
+              <ReviewedBy />
+              <NAP />
             </section>
           </div>
         </article>

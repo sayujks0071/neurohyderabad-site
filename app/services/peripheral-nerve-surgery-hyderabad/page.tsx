@@ -1,23 +1,30 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { SITE_URL } from '../../../src/lib/seo';
-import MedicalReviewNotice from '../../../src/components/MedicalReviewNotice';
+import ReviewedBy from '@/app/_components/ReviewedBy';
+import NAP from '@/app/_components/NAP';
+import { makeMetadata } from '@/app/_lib/meta';
+
+const baseMetadata = makeMetadata({
+  title: 'Peripheral Nerve Surgery in Hyderabad | Carpal Tunnel, Ulnar, Peroneal',
+  description: 'Carpal tunnel release, ulnar nerve decompression, nerve tumor surgery, and nerve repair options in Hyderabad.',
+  canonicalPath: '/services/peripheral-nerve-surgery-hyderabad',
+});
 
 export const metadata: Metadata = {
-  title: 'Peripheral Nerve Surgery in Hyderabad | Carpal Tunnel, Ulnar, Peroneal',
-  description: 'Expert peripheral nerve surgery in Hyderabad. Carpal tunnel release, ulnar nerve decompression, peroneal nerve, nerve tumors, repair/grafting. Book consultation.',
-  keywords: 'peripheral nerve surgery hyderabad, carpal tunnel surgeon hyderabad, ulnar nerve decompression hyderabad, peroneal nerve decompression hyderabad, nerve tumor surgeon hyderabad, nerve repair surgery hyderabad',
-  alternates: {
-    canonical: `${SITE_URL}/services/peripheral-nerve-surgery-hyderabad/`,
-    languages: {
-      'en-IN': `${SITE_URL}/services/peripheral-nerve-surgery-hyderabad/`,
-      'x-default': `${SITE_URL}/services/peripheral-nerve-surgery-hyderabad/`
-    }
-  },
+  ...baseMetadata,
+  keywords: [
+    'peripheral nerve surgery hyderabad',
+    'carpal tunnel surgeon hyderabad',
+    'ulnar nerve decompression hyderabad',
+    'peroneal nerve decompression hyderabad',
+    'nerve tumor surgeon hyderabad',
+    'nerve repair surgery hyderabad',
+  ],
   openGraph: {
     title: 'Peripheral Nerve Surgery in Hyderabad | Dr. Sayuj Krishnan',
     description: 'Expert peripheral nerve surgery including carpal tunnel release, ulnar nerve decompression, and nerve tumor removal in Hyderabad.',
-    url: `${SITE_URL}/services/peripheral-nerve-surgery-hyderabad/`,
+    url: `${SITE_URL}/services/peripheral-nerve-surgery-hyderabad`,
     siteName: 'Dr. Sayuj Krishnan - Neurosurgeon in Hyderabad',
     images: [
       {
@@ -599,7 +606,10 @@ export default function PeripheralNerveSurgeryPage() {
           </div>
         </section>
 
-        <MedicalReviewNotice />
+        <section className="mb-12 space-y-6">
+          <ReviewedBy />
+          <NAP />
+        </section>
       </div>
 
       {/* Structured Data */}

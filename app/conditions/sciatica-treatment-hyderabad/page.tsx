@@ -1,17 +1,24 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { SITE_URL } from '../../../src/lib/seo';
-import MedicalReviewNotice from '../../../src/components/MedicalReviewNotice';
+import ReviewedBy from '@/app/_components/ReviewedBy';
+import NAP from '@/app/_components/NAP';
+import { makeMetadata } from '@/app/_lib/meta';
+
+const baseMetadata = makeMetadata({
+  title: 'Sciatica Treatment in Hyderabad | Expert Pain Relief & Surgery',
+  description: 'Conservative care, injections, and endoscopic surgery for sciatica tailored by Dr. Sayuj Krishnan in Hyderabad.',
+  canonicalPath: '/conditions/sciatica-treatment-hyderabad',
+});
 
 export const metadata: Metadata = {
-  title: 'Sciatica Treatment in Hyderabad | Expert Pain Relief & Surgery',
-  description: 'Expert sciatica treatment in Hyderabad. Conservative care, injections, and endoscopic surgery. Book consultation with Dr. Sayuj Krishnan.',
+  ...baseMetadata,
   alternates: {
     canonical: `${SITE_URL}/conditions/sciatica-treatment-hyderabad/`,
     languages: {
       'en-IN': `${SITE_URL}/conditions/sciatica-treatment-hyderabad/`,
-      'x-default': `${SITE_URL}/conditions/sciatica-treatment-hyderabad/`
-    }
+      'x-default': `${SITE_URL}/conditions/sciatica-treatment-hyderabad/`,
+    },
   },
 };
 
@@ -46,9 +53,6 @@ export default function SciaticaTreatmentPage() {
             </div>
           </div>
         </section>
-
-        <MedicalReviewNotice />
-
         <section className="mb-12">
           <h2 className="text-3xl font-bold text-blue-800 mb-6">What is Sciatica?</h2>
           <div className="prose max-w-none">
@@ -108,6 +112,11 @@ export default function SciaticaTreatmentPage() {
               Endoscopic Surgery
             </Link>
           </div>
+        </section>
+
+        <section className="mt-12 space-y-6">
+          <ReviewedBy />
+          <NAP />
         </section>
       </div>
     </div>
