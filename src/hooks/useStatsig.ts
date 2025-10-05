@@ -10,8 +10,11 @@ import { analytics } from '../lib/analytics';
 export const useStatsig = () => {
   const client = useStatsigClient();
 
+  // Return safe fallbacks if Statsig is not available
+  const safeLogEvent = client?.logEvent ? client.logEvent.bind(client) : () => {};
+
   return {
-    logEvent: client?.logEvent.bind(client),
+    logEvent: safeLogEvent,
     trackAppointmentBooking: (data: any) => analytics.appointmentSuccess(data.pageSlug, data.serviceOrCondition),
     trackServiceInquiry: (data: any) => analytics.appointmentStart(data.pageSlug, data.serviceOrCondition),
     trackContactForm: (data: any) => analytics.appointmentSubmit(data.pageSlug, data.errorCount),

@@ -8,6 +8,11 @@ import { analytics } from '../lib/analytics';
 export default function StatsigAnalytics() {
   const pathname = usePathname();
   const client = useStatsigClient();
+  
+  // Only initialize if Statsig is properly configured
+  if (!client) {
+    return null;
+  }
 
   useEffect(() => {
     // Track page views
