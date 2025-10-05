@@ -3,6 +3,7 @@ import SchemaScript from '@/app/_schema/Script';
 import { spinalFusionSchemas } from '@/app/_schema/pages/spinalFusion';
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import NAP from '@/app/_components/NAP';
+import MedicalCitations from '@/app/_components/MedicalCitations';
 import SmartImage from '@/components/SmartImage';
 
 export const metadata = makeMetadata({
@@ -140,7 +141,8 @@ export default function Page() {
         </div>
       </dl>
 
-      <ReviewedBy />
+      <ReviewedBy lastReviewed="2025-01-15" />
+      <MedicalCitations />
       <NAP />
 
       {schemas.map((schema, index) => (

@@ -6,11 +6,12 @@ import TeleconsultationForm from '@/components/TeleconsultationForm';
 import { patientStories } from '../../../src/content/stories';
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import NAP from '@/app/_components/NAP';
+import MedicalCitations from '@/app/_components/MedicalCitations';
 import { makeMetadata } from '@/app/_lib/meta';
 
 const baseMetadata = makeMetadata({
-  title: 'Minimally Invasive Spine Surgery in Hyderabad | Endoscopic Procedures',
-  description: 'Expert minimally invasive spine surgery including endoscopic discectomy, foraminotomy, and ULBD in Hyderabad. Faster recovery, less pain.',
+  title: 'Endoscopic Spine Surgery Hyderabad | MISS',
+  description: 'Day-care endoscopic discectomy, foraminotomy, and ULBD with Dr Sayuj Krishnan at Yashoda Hospital Malakpet.',
   canonicalPath: '/services/minimally-invasive-spine-surgery',
 });
 
@@ -266,7 +267,8 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
         </section>
 
         <section className="mt-12 space-y-6">
-          <ReviewedBy />
+          <ReviewedBy lastReviewed="2025-01-15" />
+          <MedicalCitations />
           <NAP />
         </section>
       </div>
