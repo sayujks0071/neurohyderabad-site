@@ -1,6 +1,0 @@
-User-Agent: *
-Allow: /
-Disallow: /drafts/
-Disallow: /api/
-
-Sitemap: https://www.drsayuj.com/sitemap.xml
