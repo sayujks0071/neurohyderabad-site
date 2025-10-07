@@ -9,6 +9,13 @@ export const metadata: Metadata = {
   title: 'Endoscopic ULBD for Lumbar Stenosis — Case Story (Hyderabad)',
   description: 'De-identified case: walking distance and leg pain improved after endoscopic ULBD for stenosis in Hyderabad. Recovery timeline and outcomes.',
   keywords: 'endoscopic ULBD, lumbar stenosis, spinal decompression, walking distance, Hyderabad, case study',
+  alternates: {
+    canonical: 'https://www.drsayuj.com/stories/endoscopic-ulbd-stenosis-hyderabad',
+    languages: {
+      'en-IN': 'https://www.drsayuj.com/stories/endoscopic-ulbd-stenosis-hyderabad',
+      'x-default': 'https://www.drsayuj.com/stories/endoscopic-ulbd-stenosis-hyderabad',
+    },
+  },
   openGraph: {
     title: 'Endoscopic ULBD for Lumbar Stenosis — Case Story (Hyderabad)',
     description: 'De-identified case: walking distance and leg pain improved after endoscopic ULBD for stenosis in Hyderabad. Recovery timeline and outcomes.',

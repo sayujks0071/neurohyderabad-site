@@ -91,6 +91,33 @@ export default function AppointmentsPage() {
               <li>Payment + consultation link shared over WhatsApp/email.</li>
             </ol>
           </div>
+
+          <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+            <h2 className="text-xl font-semibold text-gray-800 mb-4">Travel Information</h2>
+            <p className="text-sm text-gray-700 mb-4">
+              Find directions and travel times from your area:
+            </p>
+            <div className="space-y-3">
+              <a 
+                href="/locations/brain-spine-surgeon-jubilee-hills"
+                className="block text-sm text-blue-600 hover:text-blue-700 font-medium"
+              >
+                → From Jubilee Hills (15-20 min)
+              </a>
+              <a 
+                href="/locations/brain-spine-surgeon-banjara-hills"
+                className="block text-sm text-blue-600 hover:text-blue-700 font-medium"
+              >
+                → From Banjara Hills (20-25 min)
+              </a>
+              <a 
+                href="/locations/brain-spine-surgeon-hitec-city"
+                className="block text-sm text-blue-600 hover:text-blue-700 font-medium"
+              >
+                → From HITEC City (25-30 min)
+              </a>
+            </div>
+          </div>
         </aside>
       </section>
     </main>

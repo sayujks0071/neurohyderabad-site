@@ -7,29 +7,49 @@ export default function Footer() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Contact Information */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Contact Information</h3>
-            <div className="space-y-2">
-              <p>
-                <strong>Call:</strong>{" "}
-                <a 
-                  href="tel:+919778280044" 
-                  className="text-blue-300 hover:text-blue-200 transition-colors"
-                >
-                  +91-9778280044
-                </a>
+            <h3 className="text-lg font-semibold mb-4">Clinic Details</h3>
+            <div className="space-y-3 text-gray-200">
+              <p className="font-semibold text-white">
+                Dr. Sayuj Krishnan, Neurosurgeon
+              </p>
+              <p className="text-sm leading-6">
+                Room 317, OPD Block, Yashoda Hospital, Malakpet, Hyderabad, Telangana 500036
               </p>
               <p>
-                <strong>Email:</strong>{" "}
-                <a 
-                  href="mailto:neurospinehyd@drsayuj.com" 
+                <a
+                  href="tel:+919778280044"
+                  className="text-blue-300 hover:text-blue-200 transition-colors"
+                >
+                  +91 9778280044
+                </a>{" "}
+                ·{" "}
+                <a
+                  href="mailto:neurospinehyd@drsayuj.com"
                   className="text-blue-300 hover:text-blue-200 transition-colors"
                 >
                   neurospinehyd@drsayuj.com
                 </a>
               </p>
-              <p className="text-sm text-gray-300">
-                <strong>Address:</strong> Room No 317, OPD Block, Yashoda Hospital, Malakpet, Hyderabad, Telangana 500036
-              </p>
+              <div className="flex flex-wrap gap-3">
+                <a
+                  href="https://www.drsayuj.com/appointments?utm_source=site&utm_medium=cta&utm_campaign=footer_nap"
+                  className="rounded-full bg-blue-500 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-600"
+                >
+                  Book Consultation
+                </a>
+                <a
+                  href="https://wa.me/919778280044"
+                  className="rounded-full border border-blue-400 px-4 py-2 text-sm font-semibold text-blue-100 hover:bg-blue-800"
+                >
+                  WhatsApp
+                </a>
+                <a
+                  href="/locations/neurosurgeon-hyderabad?utm_source=site&utm_medium=cta&utm_campaign=footer_nap"
+                  className="rounded-full border border-gray-500 px-4 py-2 text-sm font-semibold text-gray-100 hover:bg-gray-800"
+                >
+                  Get Directions
+                </a>
+              </div>
             </div>
           </div>
 
@@ -37,29 +57,23 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">Services</h3>
             <nav className="space-y-2">
-              <Link href="/services/" className="block text-gray-300 hover:text-white transition-colors">
-                All Services
-              </Link>
-              <Link href="/services/minimally-invasive-spine-surgery/" className="block text-gray-300 hover:text-white transition-colors">
+              <Link href="/services/minimally-invasive-spine-surgery" className="block text-gray-300 hover:text-white transition-colors">
                 Minimally Invasive Spine Surgery
               </Link>
-              <Link href="/services/endoscopic-discectomy-hyderabad/" className="block text-gray-300 hover:text-white transition-colors">
+              <Link href="/services/endoscopic-discectomy-hyderabad" className="block text-gray-300 hover:text-white transition-colors">
                 Endoscopic Discectomy
               </Link>
-              <Link href="/services/endoscopic-foraminotomy-hyderabad/" className="block text-gray-300 hover:text-white transition-colors">
-                Endoscopic Foraminotomy
-              </Link>
-              <Link href="/services/endoscopic-ulbd-hyderabad/" className="block text-gray-300 hover:text-white transition-colors">
-                Endoscopic ULBD
-              </Link>
-              <Link href="/services/brain-tumor-surgery-hyderabad/" className="block text-gray-300 hover:text-white transition-colors">
+              <Link href="/services/brain-tumor-surgery-hyderabad" className="block text-gray-300 hover:text-white transition-colors">
                 Brain Tumor Surgery
               </Link>
-              <Link href="/services/microvascular-decompression" className="block text-gray-300 hover:text-white transition-colors">
-                Microvascular Decompression
+              <Link href="/services/spinal-fusion-surgery-hyderabad" className="block text-gray-300 hover:text-white transition-colors">
+                Spinal Fusion Surgery
               </Link>
-              <Link href="/services/radiosurgery-gamma-knife" className="block text-gray-300 hover:text-white transition-colors">
-                Radiosurgery (Gamma Knife)
+              <Link href="/services/epilepsy-surgery-hyderabad" className="block text-gray-300 hover:text-white transition-colors">
+                Epilepsy Surgery
+              </Link>
+              <Link href="/services/peripheral-nerve-surgery-hyderabad" className="block text-gray-300 hover:text-white transition-colors">
+                Peripheral Nerve Surgery
               </Link>
             </nav>
           </div>
@@ -70,6 +84,9 @@ export default function Footer() {
             <nav className="space-y-2">
               <Link href="/conditions/" className="block text-gray-300 hover:text-white transition-colors">
                 All Conditions
+              </Link>
+              <Link href="/conditions/brain-tumor-surgery-hyderabad" className="block text-gray-300 hover:text-white transition-colors">
+                Brain Tumor Surgery
               </Link>
               <Link href="/conditions/sciatica-treatment-hyderabad" className="block text-gray-300 hover:text-white transition-colors">
                 Sciatica Treatment
@@ -104,6 +121,24 @@ export default function Footer() {
               </Link>
               <Link href="/contact" className="block text-gray-300 hover:text-white transition-colors">
                 Contact
+              </Link>
+              <Link href="/locations" className="block text-gray-300 hover:text-white transition-colors">
+                Clinic Locations
+              </Link>
+              <Link href="/symptoms/signs-of-brain-tumor" className="block text-gray-300 hover:text-white transition-colors">
+                Signs of Brain Tumor
+              </Link>
+              <Link href="/symptoms/pain-on-top-of-head-causes" className="block text-gray-300 hover:text-white transition-colors">
+                Pain on Top of Head Causes
+              </Link>
+              <Link href="/locations/brain-spine-surgeon-jubilee-hills" className="block text-gray-300 hover:text-white transition-colors">
+                Near Jubilee Hills
+              </Link>
+              <Link href="/locations/brain-spine-surgeon-banjara-hills" className="block text-gray-300 hover:text-white transition-colors">
+                Near Banjara Hills
+              </Link>
+              <Link href="/locations/brain-spine-surgeon-hitec-city" className="block text-gray-300 hover:text-white transition-colors">
+                Near HITEC City
               </Link>
             </nav>
           </div>

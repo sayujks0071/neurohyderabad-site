@@ -9,6 +9,13 @@ export const metadata: Metadata = {
   title: 'Same-Day Endoscopic Discectomy in Hyderabad — Case Story',
   description: 'De-identified story: severe sciatica treated with endoscopic discectomy and same-day discharge in Hyderabad. Recovery timeline and outcomes.',
   keywords: 'endoscopic discectomy, same-day surgery, sciatica treatment, lumbar spine, Hyderabad, case study',
+  alternates: {
+    canonical: 'https://www.drsayuj.com/stories/endoscopic-discectomy-same-day-hyderabad',
+    languages: {
+      'en-IN': 'https://www.drsayuj.com/stories/endoscopic-discectomy-same-day-hyderabad',
+      'x-default': 'https://www.drsayuj.com/stories/endoscopic-discectomy-same-day-hyderabad',
+    },
+  },
   openGraph: {
     title: 'Same-Day Endoscopic Discectomy in Hyderabad — Case Story',
     description: 'De-identified story: severe sciatica treated with endoscopic discectomy and same-day discharge in Hyderabad. Recovery timeline and outcomes.',

@@ -582,6 +582,28 @@ export default function PeripheralNerveSurgeryPage() {
           </div>
         </section>
 
+        {/* Patient Success Story */}
+        <section className="mb-12">
+          <h2 className="text-3xl font-bold text-blue-800 mb-6">Patient Success Story</h2>
+          <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+            <h3 className="text-xl font-semibold mb-3 text-blue-700">
+              <Link href="/stories/mvd-trigeminal-neuralgia-hyderabad" className="hover:text-blue-600">
+                MVD for Trigeminal Neuralgia — Case Story (Hyderabad)
+              </Link>
+            </h3>
+            <p className="text-gray-700 mb-4">
+              Read about a de-identified patient who experienced severe facial pain and was successfully treated with 
+              microvascular decompression (MVD), achieving lasting pain relief and improved quality of life.
+            </p>
+            <Link 
+              href="/stories/mvd-trigeminal-neuralgia-hyderabad"
+              className="text-blue-600 hover:text-blue-700 font-medium"
+            >
+              Read the full story →
+            </Link>
+          </div>
+        </section>
+
         {/* CTA Section */}
         <section className="text-center bg-blue-600 text-white rounded-lg p-8">
           <h2 className="text-3xl font-bold mb-4">Schedule Your Peripheral Nerve Consultation</h2>

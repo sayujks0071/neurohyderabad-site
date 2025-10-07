@@ -9,6 +9,13 @@ export const metadata: Metadata = {
   title: 'Brain & Spine Surgeon near Jubilee Hills, Hyderabad',
   description: 'Advanced brain and spine care near Jubilee Hills, Hyderabad. Directions to Yashoda Hospital, Malakpet. Parking, timings, and appointment info.',
   keywords: 'brain surgeon Jubilee Hills, spine surgeon Jubilee Hills, neurosurgeon near Jubilee Hills, Yashoda Hospital Malakpet, Hyderabad',
+  alternates: {
+    canonical: 'https://www.drsayuj.com/locations/brain-spine-surgeon-jubilee-hills',
+    languages: {
+      'en-IN': 'https://www.drsayuj.com/locations/brain-spine-surgeon-jubilee-hills',
+      'x-default': 'https://www.drsayuj.com/locations/brain-spine-surgeon-jubilee-hills',
+    },
+  },
   openGraph: {
     title: 'Brain & Spine Surgeon near Jubilee Hills, Hyderabad',
     description: 'Advanced brain and spine care near Jubilee Hills, Hyderabad. Directions to Yashoda Hospital, Malakpet. Parking, timings, and appointment info.',

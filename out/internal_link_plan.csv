@@ -1,0 +1,13 @@
+source_path,target_path,anchor_text,notes
+/app/services/minimally-invasive-spine-surgery/page.tsx,/app/conditions/cervical-radiculopathy-treatment-hyderabad/page.tsx,"cervical radiculopathy symptoms","Add in the 'Conditions We Treat' list."
+/app/services/minimally-invasive-spine-surgery/page.tsx,/app/conditions/trigeminal-neuralgia-treatment-hyderabad/page.tsx,"trigeminal neuralgia surgery","Include under the trigeminal neuralgia care teaser."
+/app/services/brain-tumor-surgery-hyderabad/page.tsx,/app/conditions/brain-tumor-surgery-hyderabad/page.tsx,"brain tumour clinic in Hyderabad","Link near the recovery timeline."
+/app/services/brain-tumor-surgery-hyderabad/page.tsx,/app/symptoms/signs-of-brain-tumor/page.tsx,"signs of brain tumour","Add within the 'Symptoms & Warning Signs' section."
+/app/conditions/sciatica-treatment-hyderabad/page.tsx,/app/symptoms/pain-on-top-of-head-causes/page.tsx,"pain on top of head","Place in the differential diagnosis section."
+/app/conditions/spinal-stenosis-treatment-hyderabad/page.tsx,/app/conditions/cervical-radiculopathy-treatment-hyderabad/page.tsx,"cervical radiculopathy treatment","Insert in treatment alternatives paragraph."
+/app/conditions/trigeminal-neuralgia-treatment-hyderabad/page.tsx,/app/patient-stories,trigeminal neuralgia recovery story,"Use Related Content block referencing patient story tag brain."
+/app/conditions/brain-tumor-surgery-hyderabad/page.tsx,/app/appointments/page.tsx,"book neurosurgery consultation","Button CTA near LocalNAP."
+/app/symptoms/signs-of-brain-tumor/page.tsx,/app/services/brain-tumor-surgery-hyderabad/page.tsx,"brain tumour surgery options","Include after diagnostic workflow."
+/app/symptoms/pain-on-top-of-head-causes/page.tsx,/app/locations/neurosurgeon-hyderabad/page.tsx,"neurosurgeon in Hyderabad","Add to 'When to see a specialist' section."
+/app/components/Header.tsx,/app/patient-stories/page.tsx,"Patient Stories","Ensure header nav includes patient stories link."
+/app/components/Header.tsx,/app/locations/page.tsx,"Locations","Add to navigation drop-down next to Appointments."

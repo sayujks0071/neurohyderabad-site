@@ -9,6 +9,13 @@ export const metadata: Metadata = {
   title: 'MVD for Trigeminal Neuralgia — Case Story (Hyderabad)',
   description: 'De-identified story: severe facial pain relieved after microvascular decompression in Hyderabad. Recovery and durability of pain relief.',
   keywords: 'MVD, microvascular decompression, trigeminal neuralgia, facial pain, brain surgery, Hyderabad, case study',
+  alternates: {
+    canonical: 'https://www.drsayuj.com/stories/mvd-trigeminal-neuralgia-hyderabad',
+    languages: {
+      'en-IN': 'https://www.drsayuj.com/stories/mvd-trigeminal-neuralgia-hyderabad',
+      'x-default': 'https://www.drsayuj.com/stories/mvd-trigeminal-neuralgia-hyderabad',
+    },
+  },
   openGraph: {
     title: 'MVD for Trigeminal Neuralgia — Case Story (Hyderabad)',
     description: 'De-identified story: severe facial pain relieved after microvascular decompression in Hyderabad. Recovery and durability of pain relief.',

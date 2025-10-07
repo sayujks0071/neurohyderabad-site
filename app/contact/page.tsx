@@ -1,5 +1,6 @@
 import { SITE_URL } from "../../src/lib/seo";
 import type { Metadata } from "next";
+import Link from "next/link";
 import Breadcrumbs from "../components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
 import MapEmbed from "@/components/MapEmbed";
@@ -118,6 +119,36 @@ export default function ContactPage() {
                 Emergency: {telephone}
               </a>
             </div>
+          </div>
+        </div>
+
+        <div className="bg-white p-8 rounded-lg shadow-md mb-8">
+          <h2 className="text-2xl font-semibold mb-6 text-blue-700">Convenient Locations</h2>
+          <p className="text-gray-600 mb-6">
+            Dr. Sayuj Krishnan serves patients from across Hyderabad. Find travel information and directions from your area:
+          </p>
+          <div className="grid md:grid-cols-3 gap-4">
+            <Link 
+              href="/locations/brain-spine-surgeon-jubilee-hills"
+              className="block bg-blue-50 border border-blue-200 rounded-lg p-4 hover:bg-blue-100 transition-colors"
+            >
+              <h3 className="font-semibold text-blue-700 mb-2">Near Jubilee Hills</h3>
+              <p className="text-sm text-gray-600">Travel time: 15-20 minutes</p>
+            </Link>
+            <Link 
+              href="/locations/brain-spine-surgeon-banjara-hills"
+              className="block bg-blue-50 border border-blue-200 rounded-lg p-4 hover:bg-blue-100 transition-colors"
+            >
+              <h3 className="font-semibold text-blue-700 mb-2">Near Banjara Hills</h3>
+              <p className="text-sm text-gray-600">Travel time: 20-25 minutes</p>
+            </Link>
+            <Link 
+              href="/locations/brain-spine-surgeon-hitec-city"
+              className="block bg-blue-50 border border-blue-200 rounded-lg p-4 hover:bg-blue-100 transition-colors"
+            >
+              <h3 className="font-semibold text-blue-700 mb-2">Near HITEC City</h3>
+              <p className="text-sm text-gray-600">Travel time: 25-30 minutes</p>
+            </Link>
           </div>
         </div>
 

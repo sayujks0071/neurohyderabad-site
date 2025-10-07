@@ -1,278 +1,481 @@
-import { Metadata } from 'next';
-import Link from 'next/link';
-import { SITE_URL } from '../../../src/lib/seo';
-import ReviewedBy from '@/app/_components/ReviewedBy';
-import NAP from '@/app/_components/NAP';
-import { makeMetadata } from '@/app/_lib/meta';
+import type { Metadata } from "next";
+import Link from "next/link";
+import SchemaScript from "@/app/_components/SchemaScript";
+import LocalNAP from "@/app/_components/LocalNAP";
+import YMYLAttribution from "@/app/_components/YMYLAttribution";
+import { SITE_URL } from "@/src/lib/seo";
 
-const baseMetadata = makeMetadata({
-  title: 'Trigeminal Neuralgia Treatment in Hyderabad | MVD & Radiosurgery',
-  description: 'Medication, microvascular decompression, radiosurgery, and percutaneous procedures for trigeminal neuralgia in Hyderabad.',
-  canonicalPath: '/conditions/trigeminal-neuralgia-treatment-hyderabad',
-});
+const CANONICAL = `${SITE_URL}/conditions/trigeminal-neuralgia-treatment-hyderabad`;
+
+const schemaData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "MedicalWebPage",
+    name: "Trigeminal Neuralgia Treatment in Hyderabad",
+    description:
+      "Explore medicines, microvascular decompression, radiosurgery and percutaneous options for trigeminal neuralgia in Hyderabad with Dr. Sayuj Krishnan.",
+    url: CANONICAL,
+    inLanguage: "en-IN",
+    isPartOf: {
+      "@type": "WebSite",
+      name: "Dr. Sayuj Krishnan — Brain & Spine Clinic",
+      url: SITE_URL,
+    },
+    about: {
+      "@type": "MedicalCondition",
+      name: "Trigeminal Neuralgia",
+      alternateName: "TN",
+      medicalSpecialty: "Neurosurgery",
+      signOrSymptom: [
+        "Electric shock-like facial pain",
+        "Trigger-based pain episodes",
+        "Facial hypersensitivity",
+      ],
+      possibleTreatment: [
+        "Carbamazepine therapy",
+        "Microvascular decompression",
+        "Gamma Knife radiosurgery",
+        "Percutaneous rhizotomy",
+      ],
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "Is trigeminal neuralgia curable?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Many people achieve long-term relief with procedures like microvascular decompression or radiosurgery. Recurrence is possible, so regular follow-up is important.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How long does Gamma Knife radiosurgery take to work?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Pain relief usually develops progressively over two to eight weeks after radiosurgery. Medication tapering begins once sustained improvement is confirmed.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What are the risks of microvascular decompression?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Complication rates are low in experienced hands but include hearing changes, facial numbness, or cerebrospinal fluid leak. Comprehensive monitoring reduces these risks.",
+        },
+      },
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: `${SITE_URL}/`,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Conditions",
+        item: `${SITE_URL}/conditions`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "Trigeminal Neuralgia Treatment Hyderabad",
+        item: CANONICAL,
+      },
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Physician",
+    name: "Dr. Sayuj Krishnan",
+    medicalSpecialty: "Neurosurgery",
+    url: SITE_URL,
+    sameAs: [],
+    telephone: "+91 9778280044",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Room 317, OPD Block, Yashoda Hospital, Malakpet",
+      addressLocality: "Hyderabad",
+      addressRegion: "Telangana",
+      postalCode: "500036",
+      addressCountry: "IN",
+    },
+    affiliation: {
+      "@type": "MedicalClinic",
+      name: "Yashoda Hospital Malakpet",
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "MedicalClinic",
+    name: "Dr. Sayuj Krishnan - Brain & Spine Clinic",
+    url: SITE_URL,
+    areaServed: "Hyderabad",
+    telephone: "+91 9778280044",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Room 317, OPD Block, Yashoda Hospital, Malakpet",
+      addressLocality: "Hyderabad",
+      addressRegion: "Telangana",
+      postalCode: "500036",
+      addressCountry: "IN",
+    },
+  },
+] as const;
+
+const faqItems = [
+  {
+    question: "Is trigeminal neuralgia curable?",
+    answer:
+      "Many patients achieve sustained pain relief with procedures such as microvascular decompression or radiosurgery. Recurrence can happen, so structured follow-up remains important.",
+  },
+  {
+    question: "How long does Gamma Knife radiosurgery take to work?",
+    answer:
+      "Relief is gradual. Most people notice improvement two to eight weeks after treatment, and medicines are tapered only when symptoms remain controlled.",
+  },
+  {
+    question: "What are the risks of MVD?",
+    answer:
+      "Serious complications are uncommon, particularly with neuromonitoring. Potential risks include hearing changes, facial numbness, or cerebrospinal fluid leak, all discussed before surgery.",
+  },
+  {
+    question: "Can trigeminal neuralgia return after treatment?",
+    answer:
+      "Yes, especially years later. Recurrence does not rule out further treatment—repeat MVD, radiosurgery, or percutaneous options can still help.",
+  },
+  {
+    question: "Is medication enough for everyone?",
+    answer:
+      "Medicines control pain for many people, but side effects or breakthrough pain may prompt procedures. We decide together based on symptom control and MRI findings.",
+  },
+] as const;
+
+const references = [
+  {
+    label: "American Association of Neurological Surgeons (AANS) — Trigeminal Neuralgia",
+    url: "https://www.aans.org/patients/conditions-treatments/trigeminal-neuralgia/",
+  },
+  {
+    label: "National Institute of Neurological Disorders and Stroke (NINDS) — Trigeminal Neuralgia Information Page",
+    url: "https://www.ninds.nih.gov/health-information/disorders/trigeminal-neuralgia",
+  },
+  {
+    label: "National Institute for Health and Care Excellence (NICE) — Guideline NG173: Neuropathic pain in adults",
+    url: "https://www.nice.org.uk/guidance/ng173",
+  },
+] as const;
 
 export const metadata: Metadata = {
-  ...baseMetadata,
+  title: "Trigeminal Neuralgia Treatment Hyderabad — Facial Pain Care",
+  description:
+    "Relief options including medicines, microvascular decompression, stereotactic radiosurgery and percutaneous procedures delivered in Hyderabad by Dr. Sayuj Krishnan.",
   alternates: {
-    canonical: `${SITE_URL}/conditions/trigeminal-neuralgia-treatment-hyderabad/`,
+    canonical: CANONICAL,
     languages: {
-      'en-IN': `${SITE_URL}/conditions/trigeminal-neuralgia-treatment-hyderabad/`,
-      'x-default': `${SITE_URL}/conditions/trigeminal-neuralgia-treatment-hyderabad/`,
+      "en-IN": CANONICAL,
+      "x-default": CANONICAL,
     },
   },
   openGraph: {
-    title: baseMetadata.title,
-    description: baseMetadata.description,
-    url: `${SITE_URL}/conditions/trigeminal-neuralgia-treatment-hyderabad`,
-    siteName: 'Dr. Sayuj Krishnan - Neurosurgeon in Hyderabad',
-    images: [
-      {
-        url: `${SITE_URL}/api/og?title=Trigeminal%20Neuralgia%20Treatment&subtitle=MVD%20%26%20Radiosurgery%20in%20Hyderabad`,
-        width: 1200,
-        height: 630,
-        alt: 'Trigeminal Neuralgia Treatment - Dr. Sayuj Krishnan',
-      },
-    ],
-    locale: 'en_IN',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: baseMetadata.title,
-    description: baseMetadata.description,
-    images: [`${SITE_URL}/api/og?title=Trigeminal%20Neuralgia%20Treatment&subtitle=MVD%20%26%20Radiosurgery%20in%20Hyderabad`],
+    title: "Trigeminal Neuralgia Treatment in Hyderabad",
+    description:
+      "Personalised pathways for facial pain relief including MVD, radiosurgery and percutaneous procedures with Dr. Sayuj Krishnan.",
+    url: CANONICAL,
+    type: "article",
   },
 };
 
 export default function TrigeminalNeuralgiaTreatmentPage() {
-  const treatments = [
-    {
-      title: 'Medical Therapy',
-      description: 'First-line treatment with anti-seizure medications to control nerve pain.',
-      benefits: ['Non-invasive', 'Effective for many patients', 'Adjustable dosing', 'Minimal side effects'],
-      success: '60-70% of patients'
-    },
-    {
-      title: 'Microvascular Decompression (MVD)',
-      description: 'Surgical procedure to separate blood vessels compressing the trigeminal nerve.',
-      benefits: ['High success rate', 'Long-lasting relief', 'Preserves nerve function', 'Addresses root cause'],
-      success: '80-90% success rate'
-    },
-    {
-      title: 'Radiosurgery (Gamma Knife)',
-      description: 'Non-invasive treatment using focused radiation to target the trigeminal nerve.',
-      benefits: ['No incision required', 'Outpatient procedure', 'Minimal recovery time', 'Low complication rate'],
-      success: '70-80% success rate'
-    },
-    {
-      title: 'Percutaneous Procedures',
-      description: 'Minimally invasive procedures including glycerol injection and balloon compression.',
-      benefits: ['Quick procedure', 'Minimal hospital stay', 'Effective pain relief', 'Suitable for elderly'],
-      success: '60-80% success rate'
-    }
-  ];
-
   return (
-    <div className="min-h-screen bg-white">
-      <div className="container mx-auto px-4 py-16">
-        <header className="text-center mb-8">
-          <h1 className="text-4xl font-bold mb-4">Trigeminal Neuralgia Treatment in Hyderabad</h1>
-          <p className="text-lg text-gray-600">Expert treatment for severe facial pain with advanced surgical techniques</p>
-        </header>
-
-        <section className="bg-blue-50 p-6 rounded-lg mb-8">
-          <p className="text-center">
-            <strong>Contact:</strong>
-            <a href="tel:+919778280044" className="text-blue-600 hover:underline ml-2">+91-9778280044</a> •
-            <a href="mailto:neurospinehyd@drsayuj.com" className="text-blue-600 hover:underline ml-2">neurospinehyd@drsayuj.com</a> •
-            <a href="/appointments" className="text-blue-600 hover:underline ml-2">Appointments</a>
+    <main className="bg-white">
+      <SchemaScript id="tn-jsonld" data={schemaData} />
+      <section className="bg-blue-50 py-12">
+        <div className="mx-auto max-w-5xl px-4">
+          <p className="text-sm font-semibold uppercase tracking-wide text-blue-700">
+            Facial Pain Clinic · Hyderabad
           </p>
-          <div className="mt-4 text-center">
-            <p className="text-sm text-gray-600 mb-2">Related Services:</p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Link href="/services/brain-tumor-surgery-hyderabad" className="text-blue-600 hover:text-blue-800 text-sm">
-                Brain Tumor Surgery
-              </Link>
-              <Link href="/services/peripheral-nerve-surgery-hyderabad" className="text-blue-600 hover:text-blue-800 text-sm">
-                Peripheral Nerve Surgery
-              </Link>
-              <Link href="/services/epilepsy-surgery-hyderabad" className="text-blue-600 hover:text-blue-800 text-sm">
-                Epilepsy Surgery
-              </Link>
-            </div>
-          </div>
-        </section>
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold text-blue-800 mb-6">What is Trigeminal Neuralgia?</h2>
-          <div className="prose max-w-none">
-            <p className="text-lg text-gray-700 mb-6">
-              Trigeminal neuralgia is a chronic pain condition affecting the trigeminal nerve, which carries sensation from your face to your brain. 
-              It causes severe, electric shock-like facial pain that can be triggered by simple activities like eating, talking, or even a light touch.
-            </p>
-            <p className="text-gray-700 mb-6">
-              Dr. Sayuj Krishnan specializes in the comprehensive treatment of trigeminal neuralgia, offering both medical and surgical options 
-              tailored to each patient's specific needs and condition severity.
-            </p>
-          </div>
-        </section>
-
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold text-blue-800 mb-6">Symptoms and Diagnosis</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-white p-6 rounded-lg shadow-sm border">
-              <h3 className="text-lg font-semibold mb-3 text-blue-700">Common Symptoms</h3>
-              <ul className="space-y-2 text-gray-700">
-                <li>• Severe, electric shock-like facial pain</li>
-                <li>• Pain triggered by light touch or wind</li>
-                <li>• Pain in jaw, cheek, or forehead</li>
-                <li>• Difficulty eating or speaking</li>
-                <li>• Pain-free periods between attacks</li>
-              </ul>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-sm border">
-              <h3 className="text-lg font-semibold mb-3 text-blue-700">Diagnostic Process</h3>
-              <ul className="space-y-2 text-gray-700">
-                <li>• Detailed medical history</li>
-                <li>• Neurological examination</li>
-                <li>• MRI brain with special sequences</li>
-                <li>• Response to medication trial</li>
-                <li>• Rule out other conditions</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold text-blue-800 mb-6">Treatment Options</h2>
-          <div className="space-y-8">
-            {treatments.map((treatment, index) => (
-              <div key={index} className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-                <h3 className="text-2xl font-semibold text-blue-700 mb-3">{treatment.title}</h3>
-                <p className="text-gray-600 mb-4">{treatment.description}</p>
-                
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <h4 className="font-semibold text-gray-700 mb-2">Benefits:</h4>
-                    <ul className="space-y-1">
-                      {treatment.benefits.map((benefit, idx) => (
-                        <li key={idx} className="text-sm text-gray-600">• {benefit}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-700 mb-2">Success Rate:</h4>
-                    <p className="text-sm text-gray-600">{treatment.success}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold text-blue-800 mb-6">Treatment Decision Process</h2>
-          <div className="space-y-6">
-            <div className="flex items-start">
-              <div className="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-4 mt-1">1</div>
-              <div>
-                <h3 className="font-semibold text-lg text-blue-700">Medical Therapy First</h3>
-                <p className="text-gray-700">Start with anti-seizure medications like carbamazepine or oxcarbazepine to control pain.</p>
-              </div>
-            </div>
-            <div className="flex items-start">
-              <div className="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-4 mt-1">2</div>
-              <div>
-                <h3 className="font-semibold text-lg text-blue-700">Surgical Evaluation</h3>
-                <p className="text-gray-700">If medications fail or cause side effects, consider surgical options based on MRI findings.</p>
-              </div>
-            </div>
-            <div className="flex items-start">
-              <div className="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-4 mt-1">3</div>
-              <div>
-                <h3 className="font-semibold text-lg text-blue-700">Personalized Approach</h3>
-                <p className="text-gray-700">Choose the best treatment based on age, health, pain severity, and patient preferences.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold text-blue-800 mb-6">Recovery and Outcomes</h2>
-          <div className="bg-white p-8 rounded-lg shadow-sm border">
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="text-center">
-                <div className="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl font-bold text-green-600">80%</span>
-                </div>
-                <h3 className="font-semibold text-green-700 mb-2">MVD Success</h3>
-                <p className="text-sm text-gray-600">Long-term pain relief with microvascular decompression</p>
-              </div>
-              <div className="text-center">
-                <div className="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl font-bold text-blue-600">75%</span>
-                </div>
-                <h3 className="font-semibold text-blue-700 mb-2">Radiosurgery Success</h3>
-                <p className="text-sm text-gray-600">Significant pain reduction with Gamma Knife</p>
-              </div>
-              <div className="text-center">
-                <div className="bg-purple-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl font-bold text-purple-600">65%</span>
-                </div>
-                <h3 className="font-semibold text-purple-700 mb-2">Medical Therapy</h3>
-                <p className="text-sm text-gray-600">Effective pain control with medications</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold text-blue-800 mb-6">Frequently Asked Questions</h2>
-          <div className="space-y-6">
-            <div className="bg-gray-50 p-6 rounded-lg">
-              <h3 className="text-xl font-semibold mb-3 text-blue-700">What causes trigeminal neuralgia?</h3>
-              <p className="text-gray-700">Most commonly caused by blood vessels compressing the trigeminal nerve, but can also result from multiple sclerosis, tumors, or nerve damage.</p>
-            </div>
-            <div className="bg-gray-50 p-6 rounded-lg">
-              <h3 className="text-xl font-semibold mb-3 text-blue-700">Is trigeminal neuralgia curable?</h3>
-              <p className="text-gray-700">While not always curable, most patients achieve significant pain relief with appropriate treatment. MVD offers the best chance for long-term cure.</p>
-            </div>
-            <div className="bg-gray-50 p-6 rounded-lg">
-              <h3 className="text-xl font-semibold mb-3 text-blue-700">What's the best treatment for me?</h3>
-              <p className="text-gray-700">Treatment choice depends on your age, overall health, pain severity, and MRI findings. We'll discuss all options and help you decide.</p>
-            </div>
-            <div className="bg-gray-50 p-6 rounded-lg">
-              <h3 className="text-xl font-semibold mb-3 text-blue-700">How long does pain relief last?</h3>
-              <p className="text-gray-700">MVD provides the longest-lasting relief (often years to decades). Radiosurgery and medications may require periodic adjustments or repeat treatments.</p>
-            </div>
-          </div>
-        </section>
-
-        <section className="bg-blue-50 p-8 rounded-lg text-center">
-          <h2 className="text-2xl font-bold text-blue-800 mb-4">Ready to Discuss Your Treatment Options?</h2>
-          <p className="text-gray-600 mb-6">
-            Dr. Sayuj Krishnan provides expert evaluation and personalized treatment plans for trigeminal neuralgia.
+          <h1 className="mt-4 text-3xl font-bold text-gray-900 md:text-4xl">
+            Trigeminal Neuralgia Treatment in Hyderabad
+          </h1>
+          <p className="mt-4 text-lg text-gray-700">
+            Fellowship-trained neurosurgeon Dr. Sayuj Krishnan offers the full
+            spectrum of trigeminal neuralgia care—from medication optimisation to
+            microvascular decompression (MVD), Gamma Knife radiosurgery, and
+            percutaneous procedures—at Yashoda Hospital, Malakpet.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link 
-              href="/appointments/"
-              className="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-colors"
+          <div className="mt-6 flex flex-wrap gap-3">
+            <a
+              href="https://www.drsayuj.com/appointments?utm_source=seo&utm_medium=page&utm_campaign=tn_condition"
+              className="rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow hover:bg-blue-700"
             >
               Book Consultation
-            </Link>
-            <Link 
-              href="/conditions/"
-              className="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-full hover:bg-blue-600 hover:text-white transition-colors"
+            </a>
+            <a
+              href="https://wa.me/919778280044"
+              className="rounded-full border border-blue-600 px-6 py-3 text-sm font-semibold text-blue-600 hover:bg-blue-50"
             >
-              All Conditions
-            </Link>
+              WhatsApp Care Team
+            </a>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="mt-12 space-y-6">
-          <ReviewedBy />
-          <NAP />
-        </section>
-      </div>
-    </div>
+      <section className="mx-auto max-w-5xl px-4 py-12">
+        <div className="grid gap-8 md:grid-cols-2">
+          <div>
+            <h2 className="text-2xl font-semibold text-gray-900">
+              Understanding Trigeminal Neuralgia
+            </h2>
+            <p className="mt-4 text-gray-700">
+              Trigeminal neuralgia (TN) causes sudden, electric shock-like facial
+              pain. Attacks may last seconds, cluster throughout the day, and be
+              triggered by seemingly harmless activities such as brushing teeth,
+              eating, smiling, or feeling a gust of wind. Most classical cases
+              occur when a blood vessel compresses the trigeminal nerve at the
+              brainstem. Secondary TN can stem from multiple sclerosis, tumours,
+              or facial trauma, making specialist evaluation vital.
+            </p>
+            <p className="mt-4 text-gray-700">
+              Early consultation allows us to separate classical TN from
+              conditions that mimic it—atypical facial pain, cluster headache,
+              dental issues, or sinus pathology. Getting the diagnosis right
+              ensures we choose the safest path forward.
+            </p>
+          </div>
+          <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+            <h3 className="text-lg font-semibold text-blue-700">
+              Common Symptoms &amp; Triggers
+            </h3>
+            <ul className="mt-4 space-y-2 text-gray-700">
+              <li>• Shock-like, stabbing facial pain lasting seconds to minutes</li>
+              <li>• Pain typically restricted to one side (cheek, jaw, or forehead)</li>
+              <li>• Triggers include touch, chewing, speaking, shaving, or wind</li>
+              <li>• Anxiety about daily activities due to fear of triggering attacks</li>
+              <li>• Background aching between episodes in mixed variants</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-12 rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+          <h3 className="text-lg font-semibold text-blue-700">
+            Our Diagnostic Workflow
+          </h3>
+          <ol className="mt-4 list-decimal space-y-3 pl-6 text-gray-700">
+            <li>
+              Detailed history and neurological examination, mapping trigger
+              zones and assessing cranial nerve function.
+            </li>
+            <li>
+              High-resolution MRI brain with CISS/FIESTA sequences to visualise
+              vascular compression, demyelination, or masses.
+            </li>
+            <li>
+              MR angiography or CT angiography when vascular anatomy needs
+              further definition.
+            </li>
+            <li>
+              Dental or ENT consultation when symptoms suggest peripheral causes.
+            </li>
+            <li>
+              Facial pain board review to align medical and surgical plans.
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section className="bg-gray-50 py-12">
+        <div className="mx-auto max-w-5xl px-4">
+          <h2 className="text-2xl font-semibold text-gray-900">
+            Treatment Pathways We Offer
+          </h2>
+          <div className="mt-8 grid gap-6 md:grid-cols-2">
+            <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+              <h3 className="text-lg font-semibold text-blue-700">
+                1. Medication Optimisation
+              </h3>
+              <p className="mt-3 text-gray-700">
+                Carbamazepine and oxcarbazepine remain first-line. Alternatives
+                such as gabapentin, baclofen, or lamotrigine are introduced if
+                side effects emerge or control wanes. We monitor sodium levels,
+                liver function, and blood counts to keep therapy safe.
+              </p>
+            </div>
+            <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+              <h3 className="text-lg font-semibold text-blue-700">
+                2. Microvascular Decompression (MVD)
+              </h3>
+              <p className="mt-3 text-gray-700">
+                Through a small craniectomy, the compressing vessel is separated
+                from the trigeminal nerve with a Teflon pad. With neuronavigation
+                and neuromonitoring, MVD delivers the highest chance of durable
+                pain freedom—over 70% at ten years in specialty centres.
+              </p>
+            </div>
+            <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+              <h3 className="text-lg font-semibold text-blue-700">
+                3. Gamma Knife Radiosurgery
+              </h3>
+              <p className="mt-3 text-gray-700">
+                Outpatient stereotactic radiosurgery is ideal for patients who
+                prefer a non-open option or have comorbidities. Relief typically
+                builds over several weeks; dosing is planned to preserve normal
+                sensation.
+              </p>
+            </div>
+            <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+              <h3 className="text-lg font-semibold text-blue-700">
+                4. Percutaneous Procedures
+              </h3>
+              <p className="mt-3 text-gray-700">
+                Balloon compression, radiofrequency rhizotomy, or glycerol
+                rhizolysis provide rapid relief, often as day-care procedures.
+                They are useful for recurrence after MVD or when immediate pain
+                control is required.
+              </p>
+            </div>
+            <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm md:col-span-2">
+              <h3 className="text-lg font-semibold text-blue-700">
+                5. Managing Secondary TN
+              </h3>
+              <p className="mt-3 text-gray-700">
+                When MRI shows a tumour, aneurysm, or demyelinating plaque, the
+                care plan focuses on that underlying cause. Our team coordinates
+                neurology, oncology, and rehabilitation inputs so every aspect is
+                covered.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-5xl px-4 py-12">
+        <h2 className="text-2xl font-semibold text-gray-900">
+          Recovery &amp; Long-Term Follow-up
+        </h2>
+        <div className="mt-6 grid gap-6 md:grid-cols-3">
+          <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+            <h3 className="font-semibold text-blue-700">After MVD</h3>
+            <p className="mt-2 text-gray-700">
+              ICU monitoring for 24 hours and discharge by day three for most
+              patients. Desk work often resumes in about two weeks; heavy lifting
+              waits four to six weeks.
+            </p>
+          </div>
+          <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+            <h3 className="font-semibold text-blue-700">After Radiosurgery</h3>
+            <p className="mt-2 text-gray-700">
+              Same-day discharge with follow-up at six weeks and three months.
+              Medication taper starts once durable relief is confirmed.
+            </p>
+          </div>
+          <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+            <h3 className="font-semibold text-blue-700">After Percutaneous Care</h3>
+            <p className="mt-2 text-gray-700">
+              Day-care procedure with transient numbness expected. Review within
+              a week ensures sensation is settling and pain remains controlled.
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-8 rounded-lg border border-red-100 bg-red-50 p-6">
+          <h3 className="text-lg font-semibold text-red-700">
+            When to Seek Urgent Attention
+          </h3>
+          <ul className="mt-4 space-y-2 text-gray-700">
+            <li>• Severe pain despite medication titration</li>
+            <li>• Medication side effects such as imbalance or allergic rash</li>
+            <li>• Facial numbness, double vision, or weakness</li>
+            <li>• Pain switching sides or becoming constant and burning</li>
+          </ul>
+        </div>
+
+        <div className="mt-8 rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+          <h3 className="text-lg font-semibold text-blue-700">
+            Related Resources
+          </h3>
+          <ul className="mt-4 space-y-2 text-gray-700">
+            <li>
+              <Link
+                href="/services/minimally-invasive-spine-surgery"
+                className="text-blue-700 underline"
+              >
+                Minimally Invasive Spine Surgery Services
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/patient-stories"
+                className="text-blue-700 underline"
+              >
+                Patient Stories — Facial Pain &amp; Neurosurgery Outcomes
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/appointments"
+                className="text-blue-700 underline"
+              >
+                Book an Appointment
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section className="bg-gray-50 py-12">
+        <div className="mx-auto max-w-5xl px-4">
+          <h2 className="text-2xl font-semibold text-gray-900">
+            Frequently Asked Questions
+          </h2>
+          <div className="mt-6 space-y-4">
+            {faqItems.map((item) => (
+              <details
+                key={item.question}
+                className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm"
+              >
+                <summary className="cursor-pointer text-lg font-semibold text-blue-700">
+                  {item.question}
+                </summary>
+                <p className="mt-3 text-gray-700">{item.answer}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-5xl px-4 py-12">
+        <LocalNAP />
+        <div className="mt-8">
+          <YMYLAttribution lastReviewed="2025-02-14" />
+        </div>
+        <div className="mt-8 rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+          <h2 className="text-lg font-semibold text-gray-900">Key References</h2>
+          <ul className="mt-4 list-disc space-y-2 pl-6 text-gray-700">
+            {references.map((ref) => (
+              <li key={ref.url}>
+                <a
+                  href={ref.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-700 underline"
+                >
+                  {ref.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    </main>
   );
 }

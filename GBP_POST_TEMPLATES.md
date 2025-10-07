@@ -1,208 +1,268 @@
-# 📱 Google Business Profile Post Templates
+# Google Business Profile Post Templates
 
-## 🎯 **Weekly Post Strategy**
+## Post 1: Same-day Endoscopic Discectomy Story
+**Type:** Patient Success Story  
+**Schedule:** Week 1, Day 1
 
-### **Post 1: Service Highlight**
+### Content:
 ```
-🏥 Minimally Invasive Spine Surgery at Yashoda Hospital Malakpet
+🏥 **Same-Day Endoscopic Discectomy Success Story**
 
-Dr. Sayuj Krishnan specializes in endoscopic spine procedures that allow patients to return home the same day. Our advanced techniques reduce recovery time and minimize discomfort.
+A patient with severe sciatica achieved same-day discharge after endoscopic discectomy at Yashoda Hospital, Malakpet. 
 
-✅ Endoscopic Discectomy
-✅ Spinal Fusion (TLIF/ACDF)  
-✅ Foraminotomy
-✅ ULBD
+✅ Quick relief from leg pain
+✅ Minimal muscle disruption  
+✅ Early return to work
+✅ No complications
 
-📍 Location: Yashoda Hospital, Room 317, OPD Block, Malakpet
-📞 Book Consultation: https://www.drsayuj.com/appointments?utm_source=gbp&utm_medium=post&utm_campaign=spine
+Read the full de-identified case story and learn about recovery timelines: [Link to story]
 
-#NeurosurgeonHyderabad #SpineSurgery #MinimallyInvasive
-```
+**Dr. Sayuj Krishnan** | Neurosurgeon | Yashoda Hospital, Malakpet
+📞 +91-9778280044 | Book consultation: [Appointment link with UTM]
 
-### **Post 2: Patient Education**
-```
-🧠 Understanding Brain Tumor Surgery: What to Expect
-
-Brain tumor surgery has evolved significantly with modern techniques like awake craniotomy and neuronavigation. Dr. Sayuj Krishnan explains the process and recovery timeline.
-
-Key Points:
-• Pre-surgical planning with advanced imaging
-• Awake craniotomy for tumors near speech/motor areas
-• Minimally invasive approaches when possible
-• Comprehensive post-operative care
-
-📞 Teleconsult Available: https://www.drsayuj.com/appointments?utm_source=gbp&utm_medium=post&utm_campaign=brain
-
-#BrainTumorSurgery #AwakeCraniotomy #HyderabadNeurosurgeon
+#EndoscopicDiscectomy #SpineSurgery #Hyderabad #SameDaySurgery #SciaticaTreatment
 ```
 
-### **Post 3: Location & Accessibility**
+### UTM Parameters:
+- `utm_source=gbp`
+- `utm_medium=post`
+- `utm_campaign=same_day_discectomy_story`
+- `utm_content=patient_story`
+
+---
+
+## Post 2: Care Near Jubilee Hills
+**Type:** Location-Based Service  
+**Schedule:** Week 1, Day 3
+
+### Content:
 ```
-🚇 Easy Access from HITEC City & IT Corridor
+📍 **Advanced Brain & Spine Care Near Jubilee Hills**
 
-Planning your visit to Yashoda Hospital Malakpet? Here's the most convenient route:
+Convenient access to expert neurosurgical care from Jubilee Hills area:
 
-🚗 By Car: 40-55 minutes via PV Narasimha Rao Expressway
-🚇 By Metro: HITEC City → Ameerpet → Malakpet (≈45 minutes)
-🅿️ Parking: Available at OPD Block entrance
+🚗 **Travel Time:** 15-20 minutes to Yashoda Hospital, Malakpet
+🚇 **Metro:** Nearest station - Malakpet (5 min walk)
+🅿️ **Parking:** Free parking available
+⏰ **Timings:** Mon-Sat 9 AM - 6 PM
 
-Early morning slots help avoid peak traffic. Teleconsultation available for initial evaluation.
+**Services Available:**
+• Endoscopic spine surgery
+• Brain tumor surgery  
+• Peripheral nerve surgery
+• Emergency consultations
 
-📍 Yashoda Hospital, Room 317, OPD Block, Malakpet
-📞 Book Appointment: https://www.drsayuj.com/appointments?utm_source=gbp&utm_medium=post&utm_campaign=location
+Get directions and travel info: [Link to Jubilee Hills location page]
 
-#HITECCity #Malakpet #EasyAccess #NeurosurgeonHyderabad
-```
+**Dr. Sayuj Krishnan** | Neurosurgeon
+📞 +91-9778280044 | Book: [Appointment link with UTM]
 
-### **Post 4: Success Story/Testimonial**
-```
-💪 Patient Success: Day-Care Endoscopic Discectomy
-
-"Had my slip disc treated with endoscopic surgery at Yashoda Hospital Malakpet. Dr. Sayuj's team made the entire process smooth, and I was back home the same day. Recovery was much faster than expected!" - Patient from Jubilee Hills
-
-Our day-care endoscopic procedures offer:
-✅ Same-day discharge
-✅ Minimal scarring
-✅ Faster recovery
-✅ Reduced hospital stay
-
-📞 Consultation: https://www.drsayuj.com/appointments?utm_source=gbp&utm_medium=post&utm_campaign=success
-
-#PatientSuccess #EndoscopicSurgery #DayCare #JubileeHills
-```
-
-### **Post 5: Emergency/Urgent Care**
-```
-🚨 Emergency Neurosurgery Services Available
-
-For urgent brain and spine conditions, Dr. Sayuj Krishnan provides emergency consultation at Yashoda Hospital Malakpet.
-
-Emergency Conditions:
-• Traumatic brain injury
-• Spinal cord compression
-• Acute disc herniation with neurological deficit
-• Brain hemorrhage
-
-📍 Yashoda Hospital, Room 317, OPD Block, Malakpet
-📞 Emergency: +91 9778280044
-🌐 Website: https://www.drsayuj.com
-
-#EmergencyNeurosurgery #TraumaCare #Hyderabad #YashodaHospital
+#JubileeHills #BrainSurgery #SpineSurgery #Hyderabad #Neurosurgeon
 ```
 
-## 📅 **Monthly Post Schedule**
+### UTM Parameters:
+- `utm_source=gbp`
+- `utm_medium=post`
+- `utm_campaign=location_jubilee_hills`
+- `utm_content=travel_info`
 
-### **Week 1: Service Focus**
-- Highlight specific procedures (spine/brain/nerve)
-- Include patient benefits and outcomes
-- Add UTM-tracked appointment link
+---
 
-### **Week 2: Educational Content**
-- Explain medical conditions and treatments
-- Share recovery timelines and expectations
-- Include teleconsult option
+## Post 3: MVD Story with "When to Consider Surgery" Angle
+**Type:** Educational + Patient Story  
+**Schedule:** Week 1, Day 5
 
-### **Week 3: Location & Accessibility**
-- Focus on different areas (Banjara Hills, HITEC City, etc.)
-- Provide travel directions and tips
-- Highlight parking and metro access
-
-### **Week 4: Patient Stories/Updates**
-- Share success stories (anonymized)
-- Update on new services or techniques
-- Seasonal health tips
-
-## 🎯 **UTM Tracking Strategy**
-
-### **UTM Parameters for Posts:**
+### Content:
 ```
-utm_source=gbp
-utm_medium=post
-utm_campaign=[campaign_name]
+🧠 **When to Consider Surgery for Trigeminal Neuralgia?**
+
+Trigeminal neuralgia causes severe facial pain that can be debilitating. Here's when surgery may be considered:
+
+**Surgery is typically recommended when:**
+• Medications no longer provide relief
+• Pain interferes with daily activities
+• Quality of life is significantly impacted
+• Patient prefers a permanent solution
+
+**Microvascular Decompression (MVD) Success:**
+Read about a patient who achieved lasting pain relief after MVD surgery: [Link to MVD story]
+
+**Key Benefits:**
+✅ 85-90% success rate for appropriate candidates
+✅ Permanent pain relief in most cases
+✅ Improved quality of life
+✅ No ongoing medication dependency
+
+**Dr. Sayuj Krishnan** | Neurosurgeon | Yashoda Hospital, Malakpet
+📞 +91-9778280044 | Consultation: [Appointment link with UTM]
+
+#TrigeminalNeuralgia #MVDSurgery #BrainSurgery #Hyderabad #PainRelief
 ```
 
-### **Campaign Names:**
-- `spine` - Spine surgery posts
-- `brain` - Brain surgery posts
-- `location` - Location/accessibility posts
-- `success` - Patient success stories
-- `emergency` - Emergency services
-- `teleconsult` - Teleconsultation posts
+### UTM Parameters:
+- `utm_source=gbp`
+- `utm_medium=post`
+- `utm_campaign=mvd_educational`
+- `utm_content=when_to_consider_surgery`
 
-## 📊 **Post Performance Metrics**
+---
 
-### **Track These KPIs:**
-1. **Views** - How many people saw the post
-2. **Clicks** - Clicks on appointment links
-3. **Calls** - Direct calls from posts
-4. **Direction Requests** - Navigation requests
-5. **Website Visits** - Traffic from GBP posts
+## Post 4: Health Tip - Spine Care
+**Type:** Health Education  
+**Schedule:** Week 2, Day 2
 
-### **Monthly Review:**
-- Which post types perform best?
-- What time of day gets most engagement?
-- Which UTM campaigns drive most appointments?
-- How do posts affect overall GBP visibility?
+### Content:
+```
+💡 **Daily Spine Health Tips**
 
-## 🔄 **Content Rotation**
+Protect your spine with these simple daily habits:
 
-### **Service Posts (Rotate Monthly):**
-- Minimally Invasive Spine Surgery
-- Brain Tumor Surgery
-- Peripheral Nerve Surgery
-- Epilepsy Surgery
-- Awake Craniotomy
-- Spinal Fusion
+**At Work:**
+• Adjust chair height so feet rest flat
+• Keep computer screen at eye level
+• Take breaks every 30 minutes
+• Use lumbar support
 
-### **Location Posts (Rotate Weekly):**
-- Banjara Hills access
-- Jubilee Hills access
-- HITEC City access
-- Gachibowli access
-- Secunderabad access
-- Kondapur access
-- Malakpet local
+**At Home:**
+• Sleep on a supportive mattress
+• Lift with your legs, not your back
+• Maintain good posture while sitting
+• Stay active with low-impact exercises
 
-### **Educational Posts (Rotate Bi-weekly):**
-- Understanding slip disc
-- Brain tumor symptoms
-- Recovery timelines
-- Pre-surgery preparation
-- Post-surgery care
-- When to seek help
+**Warning Signs to Watch:**
+• Persistent back or neck pain
+• Numbness or tingling in arms/legs
+• Weakness in limbs
+• Difficulty walking
 
-## 📱 **Posting Best Practices**
+Early intervention can prevent serious spine problems. Don't ignore persistent symptoms.
 
-### **Timing:**
-- **Best Days**: Tuesday-Thursday
-- **Best Times**: 10 AM - 2 PM, 6 PM - 8 PM
-- **Frequency**: 2-3 posts per week
+**Dr. Sayuj Krishnan** | Spine Specialist
+📞 +91-9778280044 | Consultation: [Appointment link with UTM]
 
-### **Content Guidelines:**
-- Keep posts under 150 words
-- Use 2-3 relevant hashtags
-- Include clear call-to-action
-- Add location tag
-- Use high-quality images when possible
+#SpineHealth #BackPain #Prevention #Hyderabad #Neurosurgeon
+```
 
-### **Engagement:**
-- Respond to comments within 24 hours
-- Like and acknowledge reviews
-- Share relevant updates
-- Encourage patient reviews
+### UTM Parameters:
+- `utm_source=gbp`
+- `utm_medium=post`
+- `utm_campaign=spine_health_tips`
+- `utm_content=prevention_tips`
 
-## 🎯 **Success Metrics**
+---
 
-### **Monthly Goals:**
-- 20+ post views per post
-- 5+ appointment clicks per post
-- 2+ new reviews per month
-- 10% increase in GBP profile views
-- 15% increase in direction requests
+## Post 5: Technology & Facilities
+**Type:** Service Highlight  
+**Schedule:** Week 2, Day 4
 
-### **Quarterly Goals:**
-- 50+ total reviews
-- 4.5+ average rating
-- 100+ monthly profile views
-- 25+ monthly direction requests
-- 10+ monthly website clicks
+### Content:
+```
+🔬 **Advanced Technology for Better Outcomes**
+
+At Yashoda Hospital, Malakpet, we use cutting-edge technology for brain and spine surgery:
+
+**Imaging Technology:**
+• High-resolution MRI with 3D reconstruction
+• Intraoperative navigation systems
+• Real-time imaging during surgery
+
+**Surgical Equipment:**
+• Endoscopic systems for minimally invasive procedures
+• Microsurgical instruments for precision
+• Advanced monitoring systems
+
+**Why Technology Matters:**
+✅ More precise procedures
+✅ Faster recovery times
+✅ Reduced complications
+✅ Better long-term outcomes
+
+Learn about our technology and facilities: [Link to technology page]
+
+**Dr. Sayuj Krishnan** | Neurosurgeon
+📞 +91-9778280044 | Book consultation: [Appointment link with UTM]
+
+#AdvancedTechnology #MinimallyInvasive #BrainSurgery #SpineSurgery #Hyderabad
+```
+
+### UTM Parameters:
+- `utm_source=gbp`
+- `utm_medium=post`
+- `utm_campaign=technology_highlight`
+- `utm_content=facilities_showcase`
+
+---
+
+## Post 6: Q&A Format
+**Type:** Q&A  
+**Schedule:** Week 3, Day 1
+
+### Content:
+```
+❓ **Frequently Asked Questions**
+
+**Q: How long does endoscopic spine surgery take?**
+A: Most endoscopic procedures take 45-90 minutes, depending on complexity.
+
+**Q: When can I return to work after spine surgery?**
+A: Desk work often resumes within 1-2 weeks. Manual labor may require 4-6 weeks.
+
+**Q: Is endoscopic surgery always better than open surgery?**
+A: Not always. We choose the safest approach for your specific condition.
+
+**Q: What's the success rate of endoscopic discectomy?**
+A: 85-90% success rate for appropriately selected patients.
+
+**Q: Do you accept insurance?**
+A: Yes, we work with most major insurance providers. Call for verification.
+
+Have more questions? Book a consultation to discuss your specific case.
+
+**Dr. Sayuj Krishnan** | Neurosurgeon
+📞 +91-9778280044 | Consultation: [Appointment link with UTM]
+
+#FAQ #SpineSurgery #EndoscopicSurgery #Hyderabad #Neurosurgeon
+```
+
+### UTM Parameters:
+- `utm_source=gbp`
+- `utm_medium=post`
+- `utm_campaign=faq_engagement`
+- `utm_content=common_questions`
+
+---
+
+## Posting Schedule & Best Practices
+
+### Weekly Schedule:
+- **Week 1:** Patient stories + Location info
+- **Week 2:** Health tips + Technology highlights  
+- **Week 3:** Q&A + Educational content
+- **Week 4:** Repeat high-performing posts
+
+### Best Practices:
+1. **Post Timing:** 9-11 AM or 2-4 PM for maximum engagement
+2. **Visual Content:** Include relevant images when possible
+3. **Call-to-Action:** Always include phone number and appointment link
+4. **UTM Tracking:** Use consistent UTM parameters for analytics
+5. **Engagement:** Respond to comments within 24 hours
+6. **Consistency:** Post 2-3 times per week
+
+### UTM Tracking Setup:
+All appointment links should include:
+- `utm_source=gbp`
+- `utm_medium=post`
+- `utm_campaign=[campaign_name]`
+- `utm_content=[content_type]`
+
+### Analytics to Monitor:
+- Post views and engagement
+- Click-through rates to appointment links
+- Phone call conversions from posts
+- UTM-tagged traffic in GA4
+
+### Content Rotation:
+- Rotate between patient stories, educational content, and service highlights
+- Repurpose high-performing posts with slight variations
+- Keep content fresh and relevant to local audience
+- Include seasonal health tips when appropriate

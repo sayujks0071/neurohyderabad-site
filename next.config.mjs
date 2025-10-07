@@ -54,25 +54,17 @@ const nextConfig = {
         destination: 'https://www.drsayuj.com/$1',
         permanent: true,
       },
-      // Brain tumor surgery redirects
+      // Existing service consolidation
       {
         source: '/brain-tumor-surgery-hyderabad',
         destination: '/services/brain-tumor-surgery-hyderabad',
         permanent: true,
       },
-      // Trigeminal neuralgia redirects
-      {
-        source: '/conditions/trigeminal-neuralgia',
-        destination: '/conditions/trigeminal-neuralgia-treatment',
-        permanent: true,
-      },
-      // Slip disc redirects
       {
         source: '/slip-disc-treatment-hyderabad',
         destination: '/conditions/slip-disc-treatment-hyderabad',
         permanent: true,
       },
-      // Consolidate specific endoscopic procedures to main MISS page
       {
         source: '/services/endoscopic-foraminotomy-hyderabad',
         destination: '/services/minimally-invasive-spine-surgery',
@@ -93,50 +85,105 @@ const nextConfig = {
         destination: '/services/minimally-invasive-spine-surgery',
         permanent: true,
       },
-      // Redirect MVD and radiosurgery to trigeminal neuralgia page
+      // Updated neurosurgery redirects
       {
         source: '/services/microvascular-decompression-mvd-hyderabad',
-        destination: '/services/microvascular-decompression',
+        destination: '/conditions/trigeminal-neuralgia-treatment-hyderabad',
         permanent: true,
       },
       {
         source: '/services/radiosurgery-gamma-knife-hyderabad',
-        destination: '/services/radiosurgery-gamma-knife',
+        destination: '/conditions/trigeminal-neuralgia-treatment-hyderabad',
+        permanent: true,
+      },
+      {
+        source: '/services/microvascular-decompression',
+        destination: '/conditions/trigeminal-neuralgia-treatment-hyderabad',
         permanent: true,
       },
       {
         source: '/services/microvascular-decompression/',
-        destination: '/services/microvascular-decompression',
+        destination: '/conditions/trigeminal-neuralgia-treatment-hyderabad',
+        permanent: true,
+      },
+      {
+        source: '/services/radiosurgery-gamma-knife',
+        destination: '/conditions/trigeminal-neuralgia-treatment-hyderabad',
         permanent: true,
       },
       {
         source: '/services/radiosurgery-gamma-knife/',
-        destination: '/services/radiosurgery-gamma-knife',
+        destination: '/conditions/trigeminal-neuralgia-treatment-hyderabad',
+        permanent: true,
+      },
+      {
+        source: '/conditions/trigeminal-neuralgia',
+        destination: '/conditions/trigeminal-neuralgia-treatment-hyderabad',
+        permanent: true,
+      },
+      {
+        source: '/conditions/trigeminal-neuralgia-treatment',
+        destination: '/conditions/trigeminal-neuralgia-treatment-hyderabad',
         permanent: true,
       },
       {
         source: '/conditions/trigeminal-neuralgia-treatment/',
-        destination: '/conditions/trigeminal-neuralgia-treatment',
+        destination: '/conditions/trigeminal-neuralgia-treatment-hyderabad',
         permanent: true,
       },
       {
-        source: '/conditions/lumbar-spinal-stenosis/',
+        source: '/conditions/brain-tumor-surgery',
+        destination: '/conditions/brain-tumor-surgery-hyderabad',
+        permanent: true,
+      },
+      {
+        source: '/conditions/cervical-radiculopathy',
+        destination: '/conditions/cervical-radiculopathy-treatment-hyderabad',
+        permanent: true,
+      },
+      {
+        source: '/conditions/cervical-radiculopathy-treatment',
+        destination: '/conditions/cervical-radiculopathy-treatment-hyderabad',
+        permanent: true,
+      },
+      {
+        source: '/conditions/cervical-radiculopathy-treatment/',
+        destination: '/conditions/cervical-radiculopathy-treatment-hyderabad',
+        permanent: true,
+      },
+      {
+        source: '/conditions/lumbar-spinal-stenosis',
         destination: '/conditions/lumbar-spinal-stenosis-treatment',
         permanent: true,
       },
       {
-        source: '/conditions/cervical-radiculopathy/',
-        destination: '/conditions/cervical-radiculopathy-treatment',
+        source: '/conditions/lumbar-spinal-stenosis-treatment',
+        destination: '/services/minimally-invasive-spine-surgery',
+        permanent: true,
+      },
+      {
+        source: '/conditions/sciatica',
+        destination: '/conditions/sciatica-treatment',
+        permanent: true,
+      },
+      {
+        source: '/conditions/sciatica-treatment',
+        destination: '/services/endoscopic-discectomy-hyderabad',
+        permanent: true,
+      },
+      {
+        source: '/conditions/pain-on-top-of-head',
+        destination: '/symptoms/pain-on-top-of-head-causes',
+        permanent: true,
+      },
+      {
+        source: '/conditions/signs-of-brain-tumor',
+        destination: '/symptoms/signs-of-brain-tumor',
         permanent: true,
       },
       {
         source: '/:path((?!_next|api|images|favicon\\.ico|robots\\.txt|sitemap\\.xml|site\\.webmanifest).+)/',
         destination: '/:path',
-        permanent: true,
-      },
-      {
-        source: '/conditions/sciatica/',
-        destination: '/conditions/sciatica-treatment',
         permanent: true,
       },
     ];

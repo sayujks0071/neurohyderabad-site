@@ -82,18 +82,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/services/microvascular-decompression/`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/services/radiosurgery-gamma-knife/`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
       url: `${baseUrl}/conditions/`,
       lastModified: now,
       changeFrequency: 'weekly',
@@ -112,13 +100,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/conditions/trigeminal-neuralgia-treatment/`,
+      url: `${baseUrl}/conditions/brain-tumor-surgery-hyderabad`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/conditions/trigeminal-neuralgia-treatment-hyderabad`,
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/conditions/cervical-radiculopathy-treatment/`,
+      url: `${baseUrl}/conditions/cervical-radiculopathy-treatment-hyderabad`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/symptoms/signs-of-brain-tumor`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.75,
+    },
+    {
+      url: `${baseUrl}/symptoms/pain-on-top-of-head-causes`,
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.8,

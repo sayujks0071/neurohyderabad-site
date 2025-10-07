@@ -245,6 +245,44 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
           </div>
         </section>
 
+        <section className="mb-12">
+          <h2 className="text-3xl font-bold text-blue-800 mb-6">Patient Success Stories</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+              <h3 className="text-xl font-semibold mb-3 text-blue-700">
+                <Link href="/stories/endoscopic-discectomy-same-day-hyderabad" className="hover:text-blue-600">
+                  Same-Day Endoscopic Discectomy
+                </Link>
+              </h3>
+              <p className="text-gray-700 mb-4">
+                Read about a patient who achieved same-day discharge after endoscopic discectomy for severe sciatica.
+              </p>
+              <Link 
+                href="/stories/endoscopic-discectomy-same-day-hyderabad"
+                className="text-blue-600 hover:text-blue-700 font-medium"
+              >
+                Read story →
+              </Link>
+            </div>
+            <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+              <h3 className="text-xl font-semibold mb-3 text-blue-700">
+                <Link href="/stories/endoscopic-ulbd-stenosis-hyderabad" className="hover:text-blue-600">
+                  Endoscopic ULBD for Lumbar Stenosis
+                </Link>
+              </h3>
+              <p className="text-gray-700 mb-4">
+                Learn how endoscopic ULBD improved walking distance and leg pain for a patient with spinal stenosis.
+              </p>
+              <Link 
+                href="/stories/endoscopic-ulbd-stenosis-hyderabad"
+                className="text-blue-600 hover:text-blue-700 font-medium"
+              >
+                Read story →
+              </Link>
+            </div>
+          </div>
+        </section>
+
         <section className="bg-blue-50 p-8 rounded-lg text-center">
           <h2 className="text-2xl font-bold text-blue-800 mb-4">Ready to Discuss Your Treatment Options?</h2>
           <p className="text-gray-600 mb-6">

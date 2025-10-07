@@ -12,7 +12,7 @@ import { analytics } from "../src/lib/analytics";
 
 export const metadata = {
   title: 'Neurosurgeon in Hyderabad | Endoscopic Spine Surgeon',
-  description: 'Expert neurosurgeon Dr. Sayuj Krishnan in Hyderabad. Specializing in endoscopic spine surgery, brain tumor surgery & epilepsy treatment. Same-day discharge. Book consultation.',
+  description: 'Expert neurosurgeon in Hyderabad for endoscopic spine, brain tumor and epilepsy care. Same-day discharge options. Book a consultation at Yashoda Malakpet.',
   alternates: {
     canonical: `${SITE_URL}/`,
     languages: {
