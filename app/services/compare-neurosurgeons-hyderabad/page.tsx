@@ -1,11 +1,13 @@
 import { Metadata } from 'next';
-import { generateMetadata } from '@/app/_lib/metadata';
-import { JsonLd } from '@/components/JsonLd';
-import { SmartImage } from '@/components/SmartImage';
-import { MedicalReviewNotice } from '@/app/_components/MedicalReviewNotice';
-import { CTAButton } from '@/app/_components/CTAButton';
+import { makeMetadata } from '@/app/_lib/meta';
+import SchemaScript from '@/app/_schema/Script';
+import ReviewedBy from '@/app/_components/ReviewedBy';
+import NAP from '@/app/_components/NAP';
+import MedicalCitations from '@/app/_components/MedicalCitations';
+import SmartImage from '@/components/SmartImage';
+import Link from 'next/link';
 
-export const metadata: Metadata = generateMetadata({
+export const metadata: Metadata = makeMetadata({
   title: 'Best Neurosurgeon in Hyderabad: Compare Dr. Sayuj vs Apollo, KIMS, Yashoda',
   description: 'Compare the best neurosurgeons in Hyderabad. Dr. Sayuj Krishnan vs Apollo, KIMS, Yashoda hospitals. Expert comparison of experience, techniques, and patient outcomes for brain and spine surgery.',
   keywords: 'best neurosurgeon hyderabad, apollo neurosurgeon, kims neurosurgeon, yashoda neurosurgeon, compare neurosurgeons hyderabad, dr sayuj vs apollo, brain surgeon hyderabad comparison',
@@ -155,7 +157,11 @@ export default function CompareNeurosurgeonsPage() {
           </div>
         </section>
 
-        <MedicalReviewNotice />
+        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-8">
+          <p className="text-sm text-yellow-800">
+            <strong>Medical Disclaimer:</strong> This content is for informational purposes only and should not be considered medical advice. Please consult with Dr. Sayuj Krishnan for personalized medical guidance.
+          </p>
+        </div>
 
         {/* Comparison Table */}
         <section className="mb-16">
@@ -381,23 +387,27 @@ export default function CompareNeurosurgeonsPage() {
             and learn how minimally invasive techniques can benefit your recovery.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <CTAButton 
+            <Link 
               href="/appointments" 
-              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold"
+              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold text-center transition-colors"
             >
               Book Consultation
-            </CTAButton>
-            <CTAButton 
+            </Link>
+            <Link 
               href="/contact" 
-              className="bg-white hover:bg-gray-50 text-blue-600 border-2 border-blue-600 px-8 py-3 rounded-lg font-semibold"
+              className="bg-white hover:bg-gray-50 text-blue-600 border-2 border-blue-600 px-8 py-3 rounded-lg font-semibold text-center transition-colors"
             >
               Get Second Opinion
-            </CTAButton>
+            </Link>
           </div>
         </section>
       </div>
       
-      <JsonLd data={structuredData} />
+      <NAP />
+      <ReviewedBy />
+      <MedicalCitations />
+      
+      <SchemaScript data={structuredData} />
     </main>
   );
 }
