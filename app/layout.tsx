@@ -8,9 +8,10 @@ import PhysicianSchema from "./components/schemas/PhysicianSchema";
 import HospitalSchema from "./components/schemas/HospitalSchema";
 import GoogleAnalytics from "../src/components/GoogleAnalytics";
 import WebVitals from "../src/components/WebVitals";
-import StatsigClientProvider from "./providers/statsig-provider";
+import MyStatsig from "./my-statsig";
 import StatsigSessionReplay from "../src/components/StatsigSessionReplay";
 import StatsigAnalytics from "../src/components/StatsigAnalytics";
+import PhoneClickTracker from "../src/components/PhoneClickTracker";
 import SEOOptimizer from "../src/components/SEOOptimizer";
 import FloatingWhatsApp from "../src/components/FloatingWhatsApp";
 import CookieConsent from "../src/components/CookieConsent";
@@ -111,11 +112,12 @@ export default function RootLayout({
             <Script src="https://accounts.google.com/gsi/client" strategy="afterInteractive" />
           </head>
       <body className={`${inter.variable} antialiased`}>
-        <StatsigClientProvider>
+        <MyStatsig>
           <GoogleAnalytics />
           <WebVitals />
           <StatsigAnalytics />
           <StatsigSessionReplay />
+          <PhoneClickTracker />
           <SEOOptimizer pageType="home" pageSlug="/" />
           <WebsiteSchema />
           <PhysicianSchema />
@@ -135,7 +137,7 @@ export default function RootLayout({
           <StickyCTA />
           <FloatingWhatsApp />
           <CookieConsent />
-        </StatsigClientProvider>
+        </MyStatsig>
       </body>
     </html>
   );

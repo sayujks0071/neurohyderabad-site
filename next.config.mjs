@@ -16,6 +16,7 @@ const nextConfig = {
   
   // Configure images for dynamic OG generation and local images
   images: {
+    formats: ['image/avif', 'image/webp'],
     remotePatterns: [
       {
         protocol: 'https',

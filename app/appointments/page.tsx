@@ -2,6 +2,7 @@ import { SITE_URL } from "../../src/lib/seo";
 import type { Metadata } from "next";
 import TeleconsultationForm from "@/components/TeleconsultationForm";
 import AppointmentFormTracker from "../../src/components/AppointmentFormTracker";
+import PhoneClickTracker from "../../src/components/PhoneClickTracker";
 
 export const metadata: Metadata = {
   title: "Book an Appointment | Dr Sayuj Krishnan",
@@ -44,6 +45,7 @@ export default function AppointmentsPage() {
           <TeleconsultationForm pageSlug="/appointments" />
           <div className="hidden" aria-hidden>
             <AppointmentFormTracker pageSlug="/appointments" />
+            <PhoneClickTracker />
           </div>
         </div>
 

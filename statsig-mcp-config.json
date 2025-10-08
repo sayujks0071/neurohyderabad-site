@@ -1,0 +1,41 @@
+{
+  "mcpServers": {
+    "statsig-local": {
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "https://api.statsig.com/v1/mcp",
+        "--header",
+        "statsig-api-key:${AUTH_TOKEN}"
+      ],
+      "env": {
+        "AUTH_TOKEN": "console-YOUR-API-KEY"
+      }
+    }
+  },
+  "website": {
+    "domain": "www.drsayuj.com",
+    "project": "neurosurgery-nextjs-site",
+    "environment": "production",
+    "features": {
+      "analytics": true,
+      "sessionReplay": true,
+      "experiments": true,
+      "featureFlags": true
+    },
+    "tracking": {
+      "pageViews": true,
+      "userInteractions": true,
+      "performanceMetrics": true,
+      "errorTracking": true,
+      "customEvents": true
+    },
+    "medicalPractice": {
+      "appointmentTracking": true,
+      "serviceInquiries": true,
+      "contactFormTracking": true,
+      "phoneCallTracking": true,
+      "patientJourney": true
+    }
+  }
+}

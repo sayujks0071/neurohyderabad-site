@@ -5,6 +5,10 @@ import LocalNAP from "@/app/_components/LocalNAP";
 import YMYLAttribution from "@/app/_components/YMYLAttribution";
 import { SITE_URL } from "@/src/lib/seo";
 
+// Static generation with 24-hour revalidation
+export const revalidate = 86400;
+export const dynamic = 'error';
+
 const CANONICAL = `${SITE_URL}/conditions/cervical-radiculopathy-treatment-hyderabad`;
 
 const schemaData = [

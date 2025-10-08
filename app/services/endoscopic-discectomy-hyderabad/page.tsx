@@ -5,6 +5,7 @@ import ReviewedBy from '@/app/_components/ReviewedBy';
 import NAP from '@/app/_components/NAP';
 import MedicalCitations from '@/app/_components/MedicalCitations';
 import { makeMetadata } from '@/app/_lib/meta';
+import ServicePageTracker from '../../../src/components/ServicePageTracker';
 
 const baseMetadata = makeMetadata({
   title: 'Endoscopic Discectomy in Hyderabad | Minimally Invasive Disc Surgery',
@@ -268,6 +269,9 @@ export default function EndoscopicDiscectomyPage() {
           <MedicalCitations />
           <NAP />
         </section>
+
+        {/* Service Page Tracking */}
+        <ServicePageTracker service="endoscopic-discectomy" />
       </div>
     </div>
   );

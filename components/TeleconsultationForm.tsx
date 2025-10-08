@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import { useStatsigEvents } from '../src/lib/statsig-events';
 
 interface TeleconsultationFormProps {
   pageSlug: string;
@@ -35,6 +36,7 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
     message: '',
   });
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const { logAppointmentBooking, logContactFormSubmit } = useStatsigEvents();
 
   const subject = useMemo(() => {
     const base = service ? `${service} enquiry` : 'Appointment enquiry';
@@ -86,11 +88,16 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
     setStatus('submitting');
 
     try {
+      // Log Statsig events
+      logAppointmentBooking('appointment_form', service || 'general');
+      logContactFormSubmit('appointment_request', true);
+      
       window.location.href = mailtoHref;
       setStatus('success');
       setFormState(initialState);
     } catch (error) {
       console.error(error);
+      logContactFormSubmit('appointment_request', false);
       setStatus('error');
     }
   };

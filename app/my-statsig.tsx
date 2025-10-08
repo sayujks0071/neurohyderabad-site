@@ -1,31 +1,25 @@
 "use client";
 
 import React from "react";
-import { StatsigProvider, useClientAsyncInit } from '@statsig/react-bindings';
-import { StatsigAutoCapturePlugin } from '@statsig/web-analytics';
-import { StatsigSessionReplayPlugin } from '@statsig/session-replay';
+import { LogLevel, StatsigProvider } from "@statsig/react-bindings";
 
 export default function MyStatsig({ children }: { children: React.ReactNode }) {
-  const { client } = useClientAsyncInit(
-    "client-6rsFaE0Of4SIMTVQ5J4l560K8ciY7v4wkWTXqPjD5RP",
-    { 
-      userID: 'anonymous', // You can customize this based on user authentication
-      custom: {
-        medicalSpecialty: 'neurosurgery',
-        location: 'hyderabad',
-        practiceType: 'private'
-      }
-    }, 
-    { 
-      plugins: [ 
-        new StatsigAutoCapturePlugin(), 
-        new StatsigSessionReplayPlugin() 
-      ] 
-    },
-  );
+  const id = "a-user";
+
+  const user = {
+    userID: id,
+    // Optional additional fields:
+    // email: 'user@example.com',
+    // customIDs: { internalID: 'internal-123' },
+    // custom: { plan: 'premium' }
+  };
 
   return (
-    <StatsigProvider client={client} loadingComponent={<div>Loading...</div>}>
+    <StatsigProvider
+      sdkKey={process.env.NEXT_PUBLIC_STATSIG_CLIENT_KEY!}
+      user={user}
+      options={{ logLevel: LogLevel.Debug }}
+    >
       {children}
     </StatsigProvider>
   );

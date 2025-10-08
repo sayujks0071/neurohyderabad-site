@@ -4,6 +4,7 @@ import StandardCTA from '@/app/_components/StandardCTA';
 import NAP from '@/app/_components/NAP';
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import SchemaScript from '@/app/_components/SchemaScript';
+import LocationPageTracker from '../../../src/components/LocationPageTracker';
 
 export const metadata: Metadata = {
   title: 'Brain & Spine Surgeon near Banjara Hills, Hyderabad',
@@ -314,6 +315,9 @@ export default function BanjaraHillsLocationPage() {
           <ReviewedBy lastReviewed="2025-01-15" />
         </div>
       </section>
+
+      {/* Location Page Tracking */}
+      <LocationPageTracker location="banjara-hills" />
     </div>
   );
 }
