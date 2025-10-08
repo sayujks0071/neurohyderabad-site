@@ -6,16 +6,16 @@ export const metadata: Metadata = {
   title: 'Neurological Conditions Treated | Dr. Sayuj Krishnan',
   description: 'Expert treatment for neurological conditions including trigeminal neuralgia, brain tumors, epilepsy, and spine disorders in Hyderabad.',
   alternates: {
-    canonical: `${SITE_URL}/conditions/`,
+    canonical: `${SITE_URL}/conditions`,
     languages: {
-      'en-IN': `${SITE_URL}/conditions/`,
-      'x-default': `${SITE_URL}/conditions/`
+      'en-IN': `${SITE_URL}/conditions`,
+      'x-default': `${SITE_URL}/conditions`
     }
   },
   openGraph: {
     title: 'Neurological Conditions Treated | Dr. Sayuj Krishnan',
     description: 'Expert treatment for neurological conditions including trigeminal neuralgia, brain tumors, epilepsy, and spine disorders in Hyderabad.',
-    url: `${SITE_URL}/conditions/`,
+    url: `${SITE_URL}/conditions`,
     siteName: 'Dr. Sayuj Krishnan - Neurosurgeon in Hyderabad',
     images: [
       {
@@ -41,25 +41,25 @@ export default function ConditionsPage() {
     {
       title: 'Trigeminal Neuralgia',
       description: 'Severe facial pain condition treated with advanced surgical techniques including microvascular decompression.',
-      href: '/conditions/trigeminal-neuralgia-treatment',
+      href: '/conditions/trigeminal-neuralgia-treatment-hyderabad',
       symptoms: ['Severe facial pain', 'Electric shock-like sensations', 'Pain triggered by touch', 'Difficulty eating/speaking']
     },
     {
       title: 'Brain Tumors',
       description: 'Comprehensive treatment for benign and malignant brain tumors using advanced surgical techniques.',
-      href: '/services/brain-tumor-surgery-hyderabad/',
+      href: '/conditions/brain-tumor-surgery-hyderabad',
       symptoms: ['Headaches', 'Seizures', 'Memory problems', 'Personality changes', 'Vision problems']
     },
     {
-      title: 'Epilepsy',
-      description: 'Surgical treatment for drug-resistant epilepsy with advanced techniques and comprehensive evaluation.',
-      href: '/services/epilepsy-surgery',
-      symptoms: ['Recurrent seizures', 'Loss of consciousness', 'Uncontrolled movements', 'Memory loss']
+      title: 'Cervical Radiculopathy',
+      description: 'Neck and arm pain caused by nerve compression, treated with minimally invasive techniques.',
+      href: '/conditions/cervical-radiculopathy-treatment-hyderabad',
+      symptoms: ['Neck pain', 'Arm pain', 'Numbness in hands', 'Weakness in arms', 'Tingling sensations']
     },
     {
       title: 'Spine Disorders',
       description: 'Minimally invasive treatment for herniated discs, spinal stenosis, and other spine conditions.',
-      href: '/services/minimally-invasive-spine-surgery/',
+      href: '/services/minimally-invasive-spine-surgery',
       symptoms: ['Back pain', 'Neck pain', 'Numbness/tingling', 'Weakness in limbs', 'Difficulty walking']
     }
   ];
@@ -132,13 +132,13 @@ export default function ConditionsPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 
-              href="/appointments/"
+              href="/appointments"
               className="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-colors"
             >
               Book Consultation
             </Link>
             <Link 
-              href="/contact/"
+              href="/contact"
               className="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-full hover:bg-blue-600 hover:text-white transition-colors"
             >
               Contact Us

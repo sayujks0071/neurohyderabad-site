@@ -4,14 +4,31 @@ import React from "react";
 import { LogLevel, StatsigProvider } from "@statsig/react-bindings";
 
 export default function MyStatsig({ children }: { children: React.ReactNode }) {
-  const id = "a-user";
+  // Generate a randomized user ID for better analytics
+  const generateUserId = () => {
+    if (typeof window !== 'undefined') {
+      // Try to get existing user ID from localStorage
+      let userId = localStorage.getItem('statsig-user-id');
+      if (!userId) {
+        // Generate new random user ID
+        userId = `user_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+        localStorage.setItem('statsig-user-id', userId);
+      }
+      return userId;
+    }
+    // Fallback for SSR
+    return `ssr_user_${Date.now()}`;
+  };
+
+  const id = generateUserId();
 
   const user = {
     userID: id,
-    // Optional additional fields:
-    // email: 'user@example.com',
-    // customIDs: { internalID: 'internal-123' },
-    // custom: { plan: 'premium' }
+    custom: {
+      session_id: typeof window !== 'undefined' ? Date.now().toString() : 'ssr',
+      user_agent: typeof window !== 'undefined' ? window.navigator.userAgent : 'ssr',
+      timestamp: new Date().toISOString(),
+    }
   };
 
   return (

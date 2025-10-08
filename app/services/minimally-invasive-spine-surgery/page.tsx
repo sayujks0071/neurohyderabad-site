@@ -246,6 +246,52 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
         </section>
 
         <section className="mb-12">
+          <h2 className="text-3xl font-bold text-blue-800 mb-6">Related Conditions & Symptoms</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="bg-white p-6 rounded-lg shadow-sm border">
+              <h3 className="text-xl font-semibold text-blue-700 mb-3">Conditions We Treat</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link href="/conditions/cervical-radiculopathy-treatment-hyderabad" className="text-blue-600 hover:text-blue-800 hover:underline">
+                    Cervical Radiculopathy Treatment
+                  </Link>
+                  <span className="text-gray-600 text-sm ml-2">- Neck and arm pain from nerve compression</span>
+                </li>
+                <li>
+                  <Link href="/conditions/trigeminal-neuralgia-treatment-hyderabad" className="text-blue-600 hover:text-blue-800 hover:underline">
+                    Trigeminal Neuralgia Treatment
+                  </Link>
+                  <span className="text-gray-600 text-sm ml-2">- Severe facial pain management</span>
+                </li>
+                <li>
+                  <Link href="/conditions/brain-tumor-surgery-hyderabad" className="text-blue-600 hover:text-blue-800 hover:underline">
+                    Brain Tumor Surgery
+                  </Link>
+                  <span className="text-gray-600 text-sm ml-2">- Advanced brain tumor treatment</span>
+                </li>
+              </ul>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-sm border">
+              <h3 className="text-xl font-semibold text-blue-700 mb-3">Common Symptoms</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link href="/symptoms/signs-of-brain-tumor" className="text-blue-600 hover:text-blue-800 hover:underline">
+                    Signs of Brain Tumor
+                  </Link>
+                  <span className="text-gray-600 text-sm ml-2">- Early warning signs to watch for</span>
+                </li>
+                <li>
+                  <Link href="/symptoms/pain-on-top-of-head-causes" className="text-blue-600 hover:text-blue-800 hover:underline">
+                    Head Pain Causes
+                  </Link>
+                  <span className="text-gray-600 text-sm ml-2">- Understanding different types of head pain</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section className="mb-12">
           <h2 className="text-3xl font-bold text-blue-800 mb-6">Patient Success Stories</h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">

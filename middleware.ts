@@ -22,8 +22,10 @@ export function middleware(req: NextRequest) {
     return NextResponse.redirect(url, 308)
   }
 
-  // Protect drafts route - redirect to home if accessed publicly
-  if (req.nextUrl.pathname.startsWith('/drafts')) {
+  // Protect drafts and test routes - redirect to home if accessed publicly
+  if (req.nextUrl.pathname.startsWith('/drafts') || 
+      req.nextUrl.pathname.startsWith('/statsig-test') ||
+      req.nextUrl.pathname.startsWith('/simple-statsig-test')) {
     // Check for admin access key in environment
     const adminKey = process.env.ADMIN_ACCESS_KEY || 'admin123'; // Default key for development
     
