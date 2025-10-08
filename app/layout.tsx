@@ -18,6 +18,7 @@ import TrustStrip from "./_components/TrustStrip";
 import StickyCTA from "./_components/StickyCTA";
 import Script from "next/script";
 import { SITE_URL } from "../src/lib/seo";
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -135,6 +136,7 @@ export default function RootLayout({
           <StickyCTA />
           <FloatingWhatsApp />
           <CookieConsent />
+          <Analytics />
         </StatsigClientProvider>
       </body>
     </html>
