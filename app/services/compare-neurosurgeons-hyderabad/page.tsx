@@ -10,7 +10,6 @@ import Link from 'next/link';
 export const metadata: Metadata = makeMetadata({
   title: 'Best Neurosurgeon in Hyderabad: Compare Dr. Sayuj vs Apollo, KIMS, Yashoda',
   description: 'Compare the best neurosurgeons in Hyderabad. Dr. Sayuj Krishnan vs Apollo, KIMS, Yashoda hospitals. Expert comparison of experience, techniques, and patient outcomes for brain and spine surgery.',
-  keywords: 'best neurosurgeon hyderabad, apollo neurosurgeon, kims neurosurgeon, yashoda neurosurgeon, compare neurosurgeons hyderabad, dr sayuj vs apollo, brain surgeon hyderabad comparison',
   canonicalPath: '/services/compare-neurosurgeons-hyderabad',
 });
 
