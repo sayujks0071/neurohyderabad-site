@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Enable compression
+  // Enable compression with Brotli and gzip
   compress: true,
+  poweredByHeader: false,
   
   // Consistent trailing slash behavior - disabled for API routes
   trailingSlash: false,
@@ -206,6 +207,8 @@ const nextConfig = {
           // Safari optimization: Help with content decoding
           { key: "Content-Type", value: "text/html; charset=utf-8" },
           { key: "Cache-Control", value: "public, s-maxage=3600, max-age=600, stale-while-revalidate=86400" },
+          // Compression headers
+          { key: "Vary", value: "Accept-Encoding" },
         ]
       },
       {

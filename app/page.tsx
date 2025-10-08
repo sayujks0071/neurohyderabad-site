@@ -9,6 +9,8 @@ import SEODashboard from "../src/components/SEODashboard";
 import SEOAuditDashboard from "../src/components/SEOAuditDashboard";
 import GoogleOAuth from "../src/components/GoogleOAuth";
 import { analytics } from "../src/lib/analytics";
+import DoctorCard from "./_components/DoctorCard";
+import TrustSignals from "./_components/TrustSignals";
 
 export const metadata = {
   title: 'Neurosurgeon in Hyderabad | Endoscopic Spine Surgeon',
@@ -34,16 +36,23 @@ export default function Home() {
       {/* Hero Section */}
       <header className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Best Neurosurgeon in Hyderabad — Brain & Spine Surgery
-            </h1>
-            <p className="text-xl md:text-2xl mb-8">
-              Dr Sayuj Krishnan — Leading Expert in Minimally Invasive Neurosurgery
-              <br />
-              Specializing in Endoscopic Spine Surgery, Brain Tumor Surgery & Epilepsy Treatment
-            </p>
-            <HeroCTA />
+          <div className="max-w-6xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div className="text-center lg:text-left">
+                <h1 className="text-4xl md:text-6xl font-bold mb-6">
+                  Best Neurosurgeon in Hyderabad — Brain & Spine Surgery
+                </h1>
+                <p className="text-xl md:text-2xl mb-8">
+                  Dr Sayuj Krishnan — Leading Expert in Minimally Invasive Neurosurgery
+                  <br />
+                  Specializing in Endoscopic Spine Surgery, Brain Tumor Surgery & Epilepsy Treatment
+                </p>
+                <HeroCTA />
+              </div>
+              <div className="flex justify-center">
+                <DoctorCard />
+              </div>
+            </div>
           </div>
         </div>
       </header>
@@ -51,6 +60,14 @@ export default function Home() {
       {/* Social Proof Section */}
       <SocialProofBand />
 
+      {/* Trust Signals */}
+      <section className="py-8 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <TrustSignals />
+          </div>
+        </div>
+      </section>
 
       {/* Minimally Invasive Spine Surgery (MISS) */}
       <section className="py-16 bg-gray-50">
