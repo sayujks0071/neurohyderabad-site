@@ -37,7 +37,13 @@ function makeRequest(url) {
   return new Promise((resolve, reject) => {
     const startTime = Date.now();
     
-    https.get(url, (res) => {
+    const options = {
+      headers: {
+        'Accept-Encoding': 'gzip, br'
+      }
+    };
+    
+    https.get(url, options, (res) => {
       let data = '';
       
       res.on('data', (chunk) => {
@@ -64,10 +70,10 @@ function makeRequest(url) {
 
 function checkCompression(headers) {
   const encoding = headers['content-encoding'];
-  if (encoding === 'br' || encoding === 'gzip') {
+  if (encoding && (encoding.includes('br') || encoding.includes('gzip'))) {
     return { status: 'good', encoding };
   }
-  return { status: 'warning', encoding: 'none' };
+  return { status: 'warning', encoding: encoding || 'none' };
 }
 
 function checkCacheHeaders(headers) {
