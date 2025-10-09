@@ -1,0 +1,3 @@
+Cache invalidation trigger - $(date)
+Deployment timestamp: $(date +%s)
+Force fresh deployment to clear compression header cache
