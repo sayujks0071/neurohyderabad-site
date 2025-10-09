@@ -256,4 +256,4 @@ const nextConfig = {
   }
 };
 
-export default nextConfig;// Force deployment Sun Oct  5 11:15:00 IST 2025
+export default nextConfig;// Force deployment Thu Oct  9 11:50:00 IST 2025 - Fix double compression
