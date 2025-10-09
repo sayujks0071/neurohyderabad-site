@@ -16,9 +16,6 @@ const nextConfig = {
     ppr: false,
   },
   
-  // External packages for APM
-  serverExternalPackages: ['@middleware.io/agent-apm-nextjs'],
-  
   // Configure images for dynamic OG generation and local images
   images: {
     formats: ['image/avif', 'image/webp'],
