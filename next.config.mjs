@@ -257,4 +257,4 @@ const nextConfig = {
   }
 };
 
-export default nextConfig;// DEPLOYMENT FIX: Thu Oct  9 22:00:00 IST 2025 - Force deployment from main branch
+export default nextConfig;// COMPRESSION FIX: Thu Oct  9 22:30:00 IST 2025 - Disable Next.js compression to fix Chrome ERR_CONTENT_DECODING_FAILED
