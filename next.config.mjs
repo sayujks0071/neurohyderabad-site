@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Let Vercel handle compression automatically (disable Next.js compression to avoid double compression)
-  compress: false,
+  // Re-enable framework compression to match Vercel edge headers
+  compress: true,
   poweredByHeader: false,
   
   // Consistent trailing slash behavior - disabled for API routes
@@ -256,4 +256,4 @@ const nextConfig = {
   }
 };
 
-export default nextConfig;// Force deployment Thu Oct  9 11:50:00 IST 2025 - Fix double compression
+export default nextConfig;// Force deployment Thu Oct  9 19:25:00 IST 2025 - Re-enable compression to match headers
