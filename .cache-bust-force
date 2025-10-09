@@ -1,0 +1,5 @@
+FORCE CACHE CLEAR - $(date)
+This file forces Vercel to completely rebuild and clear all caches
+Deployment timestamp: $(date +%s)
+Compression fix: compress: true in next.config.mjs
+Expected result: x-vercel-cache: MISS, proper compression headers
