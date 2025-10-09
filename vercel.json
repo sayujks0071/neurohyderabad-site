@@ -54,6 +54,10 @@
         {
           "key": "Vary",
           "value": "Accept-Encoding"
+        },
+        {
+          "key": "Content-Encoding",
+          "value": "gzip"
         }
       ]
     },
