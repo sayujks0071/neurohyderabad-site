@@ -1,14 +1,15 @@
 import Link from "next/link";
-import FAQPageSchema from "./components/schemas/FAQPageSchema";
-import BreadcrumbSchema from "./components/schemas/BreadcrumbSchema";
-import { SITE_URL } from "../src/lib/seo";
-import { HeroCTA, StickyCTA } from "../src/components/Experiments";
-import SocialProofBand from "../src/components/Experiments/SocialProofBand";
-import ScrollDepthTracker from "../src/components/ScrollDepthTracker";
-import SEODashboard from "../src/components/SEODashboard";
-import SEOAuditDashboard from "../src/components/SEOAuditDashboard";
-import GoogleOAuth from "../src/components/GoogleOAuth";
-import { analytics } from "../src/lib/analytics";
+// Temporarily commenting out problematic imports
+// import FAQPageSchema from "./components/schemas/FAQPageSchema";
+// import BreadcrumbSchema from "./components/schemas/BreadcrumbSchema";
+// import { SITE_URL } from "../src/lib/seo";
+// import { HeroCTA, StickyCTA } from "../src/components/Experiments";
+// import SocialProofBand from "../src/components/Experiments/SocialProofBand";
+// import ScrollDepthTracker from "../src/components/ScrollDepthTracker";
+// import SEODashboard from "../src/components/SEODashboard";
+// import SEOAuditDashboard from "../src/components/SEOAuditDashboard";
+// import GoogleOAuth from "../src/components/GoogleOAuth";
+// import { analytics } from "../src/lib/analytics";
 import DoctorCard from "./_components/DoctorCard";
 import TrustSignals from "./_components/TrustSignals";
 
@@ -16,7 +17,7 @@ export const metadata = {
   title: 'Neurosurgeon in Hyderabad | Endoscopic Spine Surgeon',
   description: 'Expert neurosurgeon in Hyderabad for endoscopic spine, brain tumor and epilepsy care. Same-day discharge options. Book a consultation at Yashoda Malakpet.',
   alternates: {
-    canonical: `${SITE_URL}/`,
+    canonical: 'https://www.drsayuj.com/',
     languages: {
       'en-IN': 'https://www.drsayuj.com/',
       'x-default': 'https://www.drsayuj.com/'
@@ -31,7 +32,7 @@ export default function Home() {
 
   return (
     <>
-      <ScrollDepthTracker pageSlug="/" />
+      {/* <ScrollDepthTracker pageSlug="/" /> */}
       <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <header className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20">
@@ -47,7 +48,21 @@ export default function Home() {
                   <br />
                   Specializing in Endoscopic Spine Surgery, Brain Tumor Surgery & Epilepsy Treatment
                 </p>
-                <HeroCTA />
+                {/* <HeroCTA /> */}
+                <div className="space-y-4">
+                  <Link 
+                    href="/appointments" 
+                    className="bg-white text-blue-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-colors inline-block"
+                  >
+                    Book Consultation
+                  </Link>
+                  <a 
+                    href="tel:+919778280044" 
+                    className="bg-green-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-green-700 transition-colors inline-block ml-4"
+                  >
+                    Call Now: +91 97782 80044
+                  </a>
+                </div>
               </div>
               <div className="flex justify-center">
                 <DoctorCard />
@@ -58,7 +73,7 @@ export default function Home() {
       </header>
 
       {/* Social Proof Section */}
-      <SocialProofBand />
+      {/* <SocialProofBand /> */}
 
       {/* Trust Signals */}
       <section className="py-8 bg-white">
@@ -697,23 +712,23 @@ export default function Home() {
       </footer>
 
       {/* FAQPage Schema */}
-      <FAQPageSchema />
+      {/* <FAQPageSchema />
       <BreadcrumbSchema items={[
         { name: "Home", path: "/" }
-      ]} />
+      ]} /> */}
       
       {/* Sticky CTA for mobile */}
-      <StickyCTA />
+      {/* <StickyCTA /> */}
       
       {/* SEO Dashboard - only in development */}
-      {process.env.NODE_ENV === 'development' && (
+      {/* {process.env.NODE_ENV === 'development' && (
         <SEODashboard pageType="home" pageSlug="/" />
-      )}
+      )} */}
       
       {/* SEO Audit Dashboard - only in development */}
-      {process.env.NODE_ENV === 'development' && (
+      {/* {process.env.NODE_ENV === 'development' && (
         <SEOAuditDashboard pageType="home" pageSlug="/" />
-      )}
+      )} */}
     </div>
     </>
   );
