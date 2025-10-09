@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Re-enable framework compression to match Vercel edge headers
-  compress: true,
+  // Let Vercel handle compression at edge level to avoid header/body mismatch
+  compress: false,
   poweredByHeader: false,
   
   // Consistent trailing slash behavior - disabled for API routes
@@ -256,4 +256,4 @@ const nextConfig = {
   }
 };
 
-export default nextConfig;// Force deployment Thu Oct  9 19:25:00 IST 2025 - Re-enable compression to match headers
+export default nextConfig;// Force deployment Thu Oct  9 20:00:00 IST 2025 - Let Vercel handle compression at edge
