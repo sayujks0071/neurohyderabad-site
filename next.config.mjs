@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Enable Next.js compression to match Vercel's advertised headers
-  compress: true,
+  // CRITICAL FIX: Disable Next.js compression to let Vercel handle it properly
+  // This should resolve the header/body mismatch issue
+  compress: false,
   poweredByHeader: false,
   
   // Consistent trailing slash behavior - disabled for API routes
@@ -256,4 +257,4 @@ const nextConfig = {
   }
 };
 
-export default nextConfig;// Force deployment Thu Oct  9 20:10:00 IST 2025 - Enable compression to match headers
+export default nextConfig;// CRITICAL FIX: Force deployment Thu Oct  9 20:30:00 IST 2025 - Compression header/body mismatch fix
