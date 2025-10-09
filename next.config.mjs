@@ -257,4 +257,4 @@ const nextConfig = {
   }
 };
 
-export default nextConfig;// FORCE REDEPLOY: Thu Oct  9 21:15:00 IST 2025 - Clear cache and deploy compression fix
+export default nextConfig;// WEBHOOK FIXED: Thu Oct  9 21:30:00 IST 2025 - Automatic deployment restored
