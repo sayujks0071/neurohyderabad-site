@@ -257,4 +257,4 @@ const nextConfig = {
   }
 };
 
-export default nextConfig;// WEBHOOK FIXED: Thu Oct  9 21:30:00 IST 2025 - Automatic deployment restored
+export default nextConfig;// DEPLOYMENT FIX: Thu Oct  9 22:00:00 IST 2025 - Force deployment from main branch
