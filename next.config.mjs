@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Enable compression with Brotli and gzip
-  compress: true,
+  // Let Vercel handle compression automatically (disable Next.js compression to avoid double compression)
+  compress: false,
   poweredByHeader: false,
   
   // Consistent trailing slash behavior - disabled for API routes
@@ -14,6 +14,9 @@ const nextConfig = {
     // Enable partial pre-rendering for better performance
     ppr: false,
   },
+  
+  // External packages for APM
+  serverExternalPackages: ['@middleware.io/agent-apm-nextjs'],
   
   // Configure images for dynamic OG generation and local images
   images: {
