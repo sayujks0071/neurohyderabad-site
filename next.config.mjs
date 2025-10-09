@@ -257,4 +257,4 @@ const nextConfig = {
   }
 };
 
-export default nextConfig;// PRODUCTION DEPLOYMENT: Thu Oct  9 21:00:00 IST 2025 - Compression fix deployed to main branch
+export default nextConfig;// FORCE REDEPLOY: Thu Oct  9 21:15:00 IST 2025 - Clear cache and deploy compression fix
