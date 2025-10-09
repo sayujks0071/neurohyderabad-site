@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // CRITICAL FIX: Disable Next.js compression to let Vercel handle it properly
-  // This should resolve the header/body mismatch issue
-  compress: false,
+  // CRITICAL FIX: Re-enable Next.js compression to match Vercel's automatic headers
+  // Vercel automatically adds content-encoding: gzip, br, so we need to compress the body
+  compress: true,
   poweredByHeader: false,
   
   // Consistent trailing slash behavior - disabled for API routes
