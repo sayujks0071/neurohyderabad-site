@@ -12,6 +12,15 @@ type VideoItem = {
 const videos: VideoItem[] = [
   {
     id: 'vqqAHzwZPYw',
+    title: 'Brain Tumor Surgery & Awake Craniotomy',
+    description:
+      'Advanced brain tumor surgery techniques including neuronavigation and awake craniotomy procedures performed by Dr. Sayuj Krishnan in Hyderabad.',
+    duration: '5:06',
+    focus: 'Brain tumor surgery',
+    source: 'Dr. Sayuj Krishnan - Neurosurgeon'
+  },
+  {
+    id: 'dwQOFaVyYu8',
     title: 'Endoscopic Spine Surgery with Dr. Sayuj Krishnan',
     description:
       'Dr. Sayuj Krishnan demonstrates the full endoscopic discectomy procedure, patient positioning, and post-operative mobilization protocol used at Yashoda Hospital, Malakpet.',
@@ -20,12 +29,12 @@ const videos: VideoItem[] = [
     source: 'Dr. Sayuj Krishnan - Neurosurgeon'
   },
   {
-    id: 'dwQOFaVyYu8',
-    title: 'Brain Tumor Surgery & Awake Craniotomy',
+    id: 'brpiquTwE5c',
+    title: 'Sciatica Patient Education - Understanding Your Condition',
     description:
-      'Advanced brain tumor surgery techniques including neuronavigation and awake craniotomy procedures performed by Dr. Sayuj Krishnan in Hyderabad.',
-    duration: '5:06',
-    focus: 'Brain tumor surgery',
+      'Comprehensive patient education about sciatica symptoms, causes, and treatment options. Learn about conservative management and when surgery may be recommended.',
+    duration: '6:30',
+    focus: 'Sciatica education',
     source: 'Dr. Sayuj Krishnan - Neurosurgeon'
   },
   {
