@@ -36,15 +36,6 @@ const videos: VideoItem[] = [
     duration: '6:30',
     focus: 'Sciatica education',
     source: 'Dr. Sayuj Krishnan - Neurosurgeon'
-  },
-  {
-    id: '1H25BsAg9Ho',
-    title: 'Patient Recovery Journey After Endoscopic Spine Surgery',
-    description:
-      'A patient chronicles their recovery milestones from day zero to six weeks, highlighting the rehabilitation plan and real-world activity goals after endoscopic spine surgery.',
-    duration: '3:48',
-    focus: 'Patient recovery journey',
-    source: 'Dr. Sayuj Krishnan - Neurosurgeon'
   }
 ];
 
