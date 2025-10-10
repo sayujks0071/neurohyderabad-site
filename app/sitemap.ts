@@ -5,7 +5,7 @@ import { patientStories } from '../src/content/stories';
 export const revalidate = 3600;
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://www.drsayuj.com';
+  const baseUrl = 'https://www.drsayuj.info';
   const now = new Date();
   
   const entries: MetadataRoute.Sitemap = [

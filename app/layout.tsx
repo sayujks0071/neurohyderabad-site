@@ -28,12 +28,23 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Neurosurgeon in Hyderabad | Endoscopic Spine Surgeon",
-  description: "Endoscopic discectomy, foraminotomy, and minimally invasive spine surgery in Hyderabad. Same-day mobilization. Book a consultation.",
-  keywords: "neurosurgeon hyderabad, brain surgeon, spine specialist, brain tumor surgery, spine surgery, dr sayuj krishnan",
-  authors: [{ name: "Dr. Sayuj Krishnan" }],
+  title: "Dr. Sayuj Krishnan | Best Neurosurgeon in Hyderabad | Brain & Spine Surgery",
+  description: "Expert neurosurgeon in Hyderabad specializing in minimally invasive brain & spine surgery. 15+ years experience. Book consultation at Yashoda Hospital.",
+  keywords: "neurosurgeon hyderabad, brain surgeon hyderabad, spine specialist hyderabad, brain tumor surgery hyderabad, spine surgery hyderabad, dr sayuj krishnan, endoscopic spine surgery, minimally invasive neurosurgery, yashoda hospital neurosurgeon, best neurosurgeon hyderabad",
+  authors: [{ name: "Dr. Sayuj Krishnan", url: SITE_URL }],
   creator: "Dr. Sayuj Krishnan",
   publisher: "Dr. Sayuj Krishnan",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   alternates: {
     canonical: SITE_URL,
     languages: {
@@ -42,10 +53,10 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Dr. Sayuj Krishnan | Full Endoscopic Spine Surgeon in Hyderabad",
-    description: "Expert neurosurgeon in Hyderabad specializing in minimally invasive brain & spine surgery",
+    title: "Dr. Sayuj Krishnan | Best Neurosurgeon in Hyderabad | Brain & Spine Surgery",
+    description: "Expert neurosurgeon in Hyderabad specializing in minimally invasive brain & spine surgery. 15+ years experience. Book consultation at Yashoda Hospital.",
     url: SITE_URL,
-    siteName: "Dr. Sayuj — Brain & Spine Care",
+    siteName: "Dr. Sayuj Krishnan — Brain & Spine Care",
     locale: "en_IN",
     type: "website",
     images: [
@@ -53,17 +64,18 @@ export const metadata: Metadata = {
         url: "/images/og-default.jpg",
         width: 1200,
         height: 630,
-        alt: "Dr. Sayuj Krishnan — Neurosurgeon in Hyderabad",
+        alt: "Dr. Sayuj Krishnan — Best Neurosurgeon in Hyderabad",
+        type: "image/jpeg",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dr. Sayuj Krishnan | Full Endoscopic Spine Surgeon in Hyderabad",
-    description: "Expert neurosurgeon specializing in minimally invasive brain & spine surgery",
+    title: "Dr. Sayuj Krishnan | Best Neurosurgeon in Hyderabad",
+    description: "Expert neurosurgeon specializing in minimally invasive brain & spine surgery. 15+ years experience.",
     images: ["/images/og-default.jpg"],
-    site: "@drsayuj",
-    creator: "@drsayuj",
+    creator: "@drsayujkrishnan",
+    site: "@drsayujkrishnan",
   },
   robots: {
     index: true,

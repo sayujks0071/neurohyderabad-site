@@ -1,5 +1,5 @@
 // Canonical host (enforced via middleware)
-export const SITE_URL = "https://www.drsayuj.com";
+export const SITE_URL = "https://www.drsayuj.info";
 export const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "neurospinehyd@drsayuj.com";
 
 // Helper: Build stable @id values for entities on a page
