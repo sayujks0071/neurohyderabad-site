@@ -1,7 +1,6 @@
 import Link from "next/link";
 import ExpandedFAQ from "../src/components/ExpandedFAQ";
 import PatientEducationVideos from "./_components/PatientEducationVideos";
-import CostEstimator from "./_components/CostEstimator";
 import RecoveryTimeline from "./_components/RecoveryTimeline";
 import LocalReputationPanel from "./_components/LocalReputationPanel";
 import FAQStructuredData from "./_components/FAQPageSchema";
@@ -56,7 +55,7 @@ const HOME_FAQS = [
     question: "How much does minimally invasive spine surgery cost with insurance?",
     answer: [
       "Endoscopic discectomy packages typically range from INR 95,000 to 1,35,000 for self-pay patients including surgeon fees, OT charges, implants, and follow-up visits.",
-      "Cashless insurance approvals reduce out-of-pocket expense by roughly 12–18% once pre-authorisation is cleared—use the interactive estimator above for a personalised quote."
+      "Cashless insurance approvals reduce out-of-pocket expense by roughly 12–18% once pre-authorisation is cleared. Contact us for a personalized quote based on your specific procedure and insurance coverage."
     ].join("\n"),
     category: "Costs & Insurance"
   },
@@ -290,7 +289,6 @@ export default function Home() {
         </div>
       </section>
 
-      <CostEstimator />
       <RecoveryTimeline />
 
       {/* Trigeminal Neuralgia Care */}
