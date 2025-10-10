@@ -1,7 +1,4 @@
-'use client';
-
 import Image from 'next/image';
-import { useState } from 'react';
 
 type VideoItem = {
   id: string;
@@ -43,7 +40,6 @@ const videos: VideoItem[] = [
 ];
 
 export default function PatientEducationVideos() {
-  const [activeVideo, setActiveVideo] = useState<string | null>(null);
 
   return (
     <section className="py-16 bg-white">
@@ -73,71 +69,56 @@ export default function PatientEducationVideos() {
           </div>
 
           <div className="grid gap-8 md:grid-cols-3">
-            {videos.map((video) => {
-              const isActive = activeVideo === video.id;
-              return (
-                <article
-                  key={video.id}
-                  className="bg-gray-50 rounded-2xl shadow-lg overflow-hidden border border-gray-100 flex flex-col"
-                >
-                  <div className="relative aspect-video bg-gray-200">
-                    {isActive ? (
-                      <iframe
-                        src={`https://www.youtube.com/embed/${video.id}?rel=0&modestbranding=1&autoplay=1`}
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        title={video.title}
-                        className="absolute inset-0 h-full w-full rounded-t-2xl"
-                        loading="lazy"
-                      />
-                    ) : (
-                      <>
-                        <Image
-                          src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`}
-                          alt={video.title}
-                          fill
-                          className="object-cover rounded-t-2xl"
-                          sizes="(min-width: 1024px) 360px, (min-width: 768px) 33vw, 100vw"
-                          priority={false}
-                        />
-                        <button
-                          type="button"
-                          onClick={() => setActiveVideo(video.id)}
-                          className="absolute inset-0 flex items-center justify-center bg-black/40 text-white"
-                          aria-label={`Play ${video.title}`}
-                        >
-                          <span className="inline-flex items-center justify-center h-16 w-16 bg-white/90 text-blue-600 rounded-full shadow-xl">
-                            ▶
-                          </span>
-                        </button>
-                      </>
-                    )}
+            {videos.map((video) => (
+              <article
+                key={video.id}
+                className="bg-gray-50 rounded-2xl shadow-lg overflow-hidden border border-gray-100 flex flex-col"
+              >
+                <div className="relative aspect-video bg-gray-200">
+                  <Image
+                    src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`}
+                    alt={video.title}
+                    fill
+                    className="object-cover rounded-t-2xl"
+                    sizes="(min-width: 1024px) 360px, (min-width: 768px) 33vw, 100vw"
+                    priority={false}
+                  />
+                  <a
+                    href={`https://www.youtube.com/watch?v=${video.id}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute inset-0 flex items-center justify-center bg-black/40 text-white hover:bg-black/50 transition-colors"
+                    aria-label={`Play ${video.title}`}
+                  >
+                    <span className="inline-flex items-center justify-center h-16 w-16 bg-white/90 text-blue-600 rounded-full shadow-xl">
+                      ▶
+                    </span>
+                  </a>
+                </div>
+                <div className="p-6 flex flex-col flex-1">
+                  <div className="flex items-center text-sm text-blue-600 font-medium mb-2">
+                    <span>{video.focus}</span>
+                    <span className="mx-2 text-gray-400">•</span>
+                    <span>{video.duration}</span>
                   </div>
-                  <div className="p-6 flex flex-col flex-1">
-                    <div className="flex items-center text-sm text-blue-600 font-medium mb-2">
-                      <span>{video.focus}</span>
-                      <span className="mx-2 text-gray-400">•</span>
-                      <span>{video.duration}</span>
-                    </div>
-                    <h3 className="text-xl font-semibold text-blue-900 leading-snug">
-                      {video.title}
-                    </h3>
-                    <p className="text-gray-600 mt-3 flex-1">{video.description}</p>
-                    <div className="mt-4 flex items-center justify-between text-sm text-gray-500">
-                      <span>Source: {video.source}</span>
-                      <a
-                        href={`https://www.youtube.com/watch?v=${video.id}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-600 hover:text-blue-800 font-semibold"
-                      >
-                        Watch on YouTube →
-                      </a>
-                    </div>
+                  <h3 className="text-xl font-semibold text-blue-900 leading-snug">
+                    {video.title}
+                  </h3>
+                  <p className="text-gray-600 mt-3 flex-1">{video.description}</p>
+                  <div className="mt-4 flex items-center justify-between text-sm text-gray-500">
+                    <span>Source: {video.source}</span>
+                    <a
+                      href={`https://www.youtube.com/watch?v=${video.id}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:text-blue-800 font-semibold"
+                    >
+                      Watch on YouTube →
+                    </a>
                   </div>
-                </article>
-              );
-            })}
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </div>
