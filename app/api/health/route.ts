@@ -1,7 +1,12 @@
 export async function GET() {
-  return new Response('ok', { 
+  return new Response(JSON.stringify({ 
+    ok: true, 
+    at: new Date().toISOString(),
+    status: 'healthy',
+    version: '1.0.0'
+  }), {
     headers: { 
-      'content-type': 'text/plain' 
+      'content-type': 'application/json' 
     } 
   });
 }
