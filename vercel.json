@@ -15,7 +15,13 @@
     {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "drsayuj.com" }],
-      "destination": "https://www.drsayuj.com/:path*",
+      "destination": "https://www.drsayuj.info/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.drsayuj.com" }],
+      "destination": "https://www.drsayuj.info/:path*",
       "permanent": true
     }
   ],

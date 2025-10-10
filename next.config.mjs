@@ -50,11 +50,18 @@ const nextConfig = {
   // 301 redirects for legacy URLs to consolidate duplicate content
   async redirects() {
     return [
-      // CRITICAL: Apex domain redirect to www (single hop 301)
+      // OLD DOMAIN REDIRECT: Redirect old domain to new working domain
       {
         source: '/((?!api|_next|images|favicon.ico|robots.txt|sitemap.xml|site.webmanifest).*)',
         has: [{ type: 'host', value: 'drsayuj.com' }],
-        destination: 'https://www.drsayuj.com/$1',
+        destination: 'https://www.drsayuj.info/$1',
+        permanent: true,
+      },
+      // OLD WWW DOMAIN REDIRECT: Redirect old www domain to new working domain
+      {
+        source: '/((?!api|_next|images|favicon.ico|robots.txt|sitemap.xml|site.webmanifest).*)',
+        has: [{ type: 'host', value: 'www.drsayuj.com' }],
+        destination: 'https://www.drsayuj.info/$1',
         permanent: true,
       },
       // NEW DOMAIN: Apex drsayuj.info redirect to www (single hop 301)
