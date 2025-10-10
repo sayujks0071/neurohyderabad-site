@@ -1,23 +1,16 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Script from "next/script";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import WebsiteSchema from "./components/schemas/WebsiteSchema";
 import PhysicianSchema from "./components/schemas/PhysicianSchema";
 import HospitalSchema from "./components/schemas/HospitalSchema";
-import GoogleAnalytics from "../src/components/GoogleAnalytics";
-import WebVitals from "../src/components/WebVitals";
 import MyStatsig from "./my-statsig";
-import StatsigSessionReplay from "../src/components/StatsigSessionReplay";
-import StatsigAnalytics from "../src/components/StatsigAnalytics";
-import PhoneClickTracker from "../src/components/PhoneClickTracker";
-import SEOOptimizer from "../src/components/SEOOptimizer";
-import FloatingWhatsApp from "../src/components/FloatingWhatsApp";
-import CookieConsent from "../src/components/CookieConsent";
 import TrustStrip from "./_components/TrustStrip";
 import StickyCTA from "./_components/StickyCTA";
-import Script from "next/script";
+import ClientAnalytics from "./_components/ClientAnalytics";
 import { SITE_URL } from "../src/lib/seo";
 
 const inter = Inter({
@@ -109,16 +102,11 @@ export default function RootLayout({
             <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
             <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
             <link rel="preconnect" href="https://accounts.google.com" crossOrigin="anonymous" />
-            <Script src="https://accounts.google.com/gsi/client" strategy="afterInteractive" />
+            <Script src="https://accounts.google.com/gsi/client" strategy="lazyOnload" />
           </head>
       <body className={`${inter.variable} antialiased`}>
         <MyStatsig>
-          <GoogleAnalytics />
-          <WebVitals />
-          <StatsigAnalytics />
-          <StatsigSessionReplay />
-          <PhoneClickTracker />
-          <SEOOptimizer pageType="home" pageSlug="/" />
+          <ClientAnalytics />
           <WebsiteSchema />
           <PhysicianSchema />
           <HospitalSchema />
@@ -135,8 +123,6 @@ export default function RootLayout({
           </div>
           <Footer />
           <StickyCTA />
-          <FloatingWhatsApp />
-          <CookieConsent />
         </MyStatsig>
       </body>
     </html>

@@ -1,8 +1,13 @@
 import Link from "next/link";
+import ExpandedFAQ from "../src/components/ExpandedFAQ";
+import PatientEducationVideos from "./_components/PatientEducationVideos";
+import CostEstimator from "./_components/CostEstimator";
+import RecoveryTimeline from "./_components/RecoveryTimeline";
+import LocalReputationPanel from "./_components/LocalReputationPanel";
+import FAQStructuredData from "./_components/FAQPageSchema";
+import { SITE_URL } from "../src/lib/seo";
 // Temporarily commenting out problematic imports
-// import FAQPageSchema from "./components/schemas/FAQPageSchema";
 // import BreadcrumbSchema from "./components/schemas/BreadcrumbSchema";
-// import { SITE_URL } from "../src/lib/seo";
 // import { HeroCTA, StickyCTA } from "../src/components/Experiments";
 // import SocialProofBand from "../src/components/Experiments/SocialProofBand";
 // import ScrollDepthTracker from "../src/components/ScrollDepthTracker";
@@ -27,6 +32,75 @@ export const metadata = {
 
 // ISR: Revalidate every 6 hours
 export const revalidate = 21600;
+
+const HOME_FAQS = [
+  {
+    question: "How do I know if I'm a candidate for endoscopic spine surgery?",
+    answer: [
+      "Candidates usually have leg-dominant pain from a herniated disc or lumbar stenosis that has not responded to six weeks of supervised physiotherapy and medication.",
+      "During consultation we review MRI scans, complete a focused neurological exam, and discuss work or sport demands before confirming the suitability of an endoscopic approach."
+    ].join("\n"),
+    category: "Procedures",
+    emphasis: "80% of MISS patients walk out on the same day"
+  },
+  {
+    question: "What recovery milestones should I expect after minimally invasive surgery?",
+    answer: [
+      "Day 0: walk within three hours with physiotherapy support. Week 2: return to desk work once wound inspection is clear.",
+      "We schedule tele-follow ups at 48 hours, seven days, and 30 days, and the eight-week recovery roadmap below outlines each phase in detail."
+    ].join("\n"),
+    category: "Recovery",
+    emphasis: "Structured 8-week rehabilitation with tele-support"
+  },
+  {
+    question: "How much does minimally invasive spine surgery cost with insurance?",
+    answer: [
+      "Endoscopic discectomy packages typically range from INR 95,000 to 1,35,000 for self-pay patients including surgeon fees, OT charges, implants, and follow-up visits.",
+      "Cashless insurance approvals reduce out-of-pocket expense by roughly 12–18% once pre-authorisation is cleared—use the interactive estimator above for a personalised quote."
+    ].join("\n"),
+    category: "Costs & Insurance"
+  },
+  {
+    question: "What documents do you provide for insurance or corporate approvals?",
+    answer: [
+      "Our coordination team issues a detailed medical estimate, necessity letter, implant invoice, and operative summary aligned to TPA requirements.",
+      "Corporate employees also receive stamped medical leave summaries and fit-to-work certificates tailored to HR policies."
+    ].join("\n"),
+    category: "Costs & Insurance"
+  },
+  {
+    question: "Do you offer teleconsultations for patients outside Hyderabad?",
+    answer: [
+      "Yes. We provide secure video consultations for second opinions and post-operative reviews—share MRI scans via our encrypted portal or WhatsApp before the call.",
+      "International patients receive assistance with itinerary planning, visa documentation, and extended follow-up scheduling."
+    ].join("\n"),
+    category: "Access & Logistics"
+  },
+  {
+    question: "When can I travel or return to the gym after surgery?",
+    answer: [
+      "Short domestic travel is generally safe after 7–10 days once pain is controlled and the wound has healed.",
+      "Gym and strength training resume after week six with progressive loading, while high-impact sports restart after clearance during the week-eight review."
+    ].join("\n"),
+    category: "Recovery"
+  },
+  {
+    question: "How do you manage pain after endoscopic procedures?",
+    answer: [
+      "We combine regional anaesthesia, targeted oral medication, and physiotherapy-led movement drills to keep discomfort below three on ten.",
+      "Patients receive breathing routines, cold-therapy guidance, and mindfulness resources with a 24/7 helpline for escalations."
+    ].join("\n"),
+    category: "Comfort & Support"
+  },
+  {
+    question: "Can I get a second opinion using my existing MRI scans?",
+    answer: [
+      "Absolutely. Upload your DICOM files to our portal or bring the CD to clinic—we review images during consult and explain every treatment path in plain language.",
+      "You leave with a written care summary covering conservative care, surgical options, and red-flag symptoms that require urgent attention."
+    ].join("\n"),
+    category: "Access & Logistics"
+  }
+];
 
 export default function Home() {
 
@@ -83,6 +157,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <PatientEducationVideos />
 
       {/* Minimally Invasive Spine Surgery (MISS) */}
       <section className="py-16 bg-gray-50">
@@ -213,6 +289,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <CostEstimator />
+      <RecoveryTimeline />
 
       {/* Trigeminal Neuralgia Care */}
       <section className="py-16 bg-gray-50">
@@ -507,48 +586,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FAQs Section */}
-      <section id="faqs" className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
-            <div className="space-y-6">
-              <div className="bg-white p-6 rounded-lg shadow-md">
-                <h3 className="text-xl font-semibold mb-3 text-blue-700">Is minimally invasive spine surgery right for me?</h3>
-                <p className="text-gray-700">
-                  Patients with leg pain from a herniated disc or stenosis who don't improve with 
-                  medicines and physiotherapy may benefit. Dr. Krishnan will evaluate your condition 
-                  and recommend the best treatment approach.
-                </p>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow-md">
-                <h3 className="text-xl font-semibold mb-3 text-blue-700">How soon can I walk after endoscopic discectomy?</h3>
-                <p className="text-gray-700">
-                  Most patients walk the same day; return to desk work is often within 1–2 weeks, depending 
-                  on recovery and job demands. Physical jobs may require 4-8 weeks with a graded return plan. 
-                  Dr. Krishnan provides personalized recovery guidelines for each patient.
-                </p>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow-md">
-                <h3 className="text-xl font-semibold mb-3 text-blue-700">What makes Dr Sayuj Krishnan the best neurosurgeon in Hyderabad?</h3>
-                <p className="text-gray-700">
-                  Dr. Krishnan combines 15+ years of experience with advanced training in Germany, state-of-the-art 
-                  minimally invasive techniques, and a patient-centered approach. His expertise in endoscopic spine 
-                  surgery, brain tumor surgery, and epilepsy treatment makes him a leading choice for neurosurgical care.
-                </p>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow-md">
-                <h3 className="text-xl font-semibold mb-3 text-blue-700">Do you accept insurance for neurosurgical procedures?</h3>
-                <p className="text-gray-700">
-                  Yes, we work with most major insurance providers and TPAs. Our team will help you understand 
-                  your coverage and provide transparent cost estimates. We also offer flexible payment options 
-                  to make quality neurosurgical care accessible.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <ExpandedFAQ faqs={HOME_FAQS} className="bg-gray-50" />
+      <FAQStructuredData
+        faqs={HOME_FAQS.map(({ question, answer }) => ({ question, answer }))}
+        pageUrl={SITE_URL}
+      />
+      <LocalReputationPanel />
 
       {/* Disease Guides Section */}
       <section className="py-16 bg-gray-50">

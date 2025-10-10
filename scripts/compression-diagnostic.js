@@ -144,3 +144,11 @@ if (require.main === module) {
 }
 
 module.exports = { getWebsiteDiagnostics, analyzeCompressionIssue };
+
+
+
+
+
+
+
+
