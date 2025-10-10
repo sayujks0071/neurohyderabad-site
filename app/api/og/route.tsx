@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import type { NextRequest } from "next/server";
 
-export const runtime = "edge";
+// export const runtime = "edge"; // Commented out to use Node.js runtime
 
 const DEFAULT_BRAND = "#0ea5e9"; // Update to your brand color if needed
 const TEXT = "#0B1220";
