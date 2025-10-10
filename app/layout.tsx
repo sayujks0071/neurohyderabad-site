@@ -34,17 +34,6 @@ export const metadata: Metadata = {
   authors: [{ name: "Dr. Sayuj Krishnan", url: SITE_URL }],
   creator: "Dr. Sayuj Krishnan",
   publisher: "Dr. Sayuj Krishnan",
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
   alternates: {
     canonical: SITE_URL,
     languages: {
