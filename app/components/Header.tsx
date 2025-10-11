@@ -1,4 +1,4 @@
-import Image from "next/image";
+import OptimizedImage from "../_components/OptimizedImage";
 import Link from "next/link";
 
 export default function Header() {
@@ -6,13 +6,14 @@ export default function Header() {
     <header className="border-b bg-white">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-3">
-          <Image
+          <OptimizedImage
             src="/images/logo.png"
             alt="Dr Sayuj Krishnan - Brain & Spine Surgeon"
             width={120}
             height={80}
             className="h-12 w-auto"
             priority
+            quality={95}
           />
           <span className="font-semibold text-gray-900">Dr Sayuj Krishnan</span>
           <span className="sr-only">Homepage</span>
@@ -28,11 +29,12 @@ export default function Header() {
           <Link href="/patient-stories" className="text-gray-600 hover:text-blue-600">Patient Stories</Link>
           <Link href="/blog" className="text-gray-600 hover:text-blue-600">Blog</Link>
           <Link href="/appointments" className="text-gray-600 hover:text-blue-600">Appointments</Link>
+          <Link href="/ai-chat" className="text-gray-600 hover:text-blue-600">🤖 AI Chat</Link>
           <Link 
-            href="/appointments"
-            className="rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+            href="/ai-chat"
+            className="rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-2 text-sm font-semibold text-white hover:from-blue-700 hover:to-purple-700"
           >
-            Book Consultation
+            Chat & Book
           </Link>
         </nav>
       </div>

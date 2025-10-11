@@ -5,7 +5,7 @@ import { patientStories } from '../src/content/stories';
 export const revalidate = 3600;
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://www.drsayuj.com';
+  const baseUrl = 'https://www.drsayuj.info';
   const now = new Date();
   
   const entries: MetadataRoute.Sitemap = [
@@ -46,6 +46,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.9,
     },
+    {
+      url: `${baseUrl}/services/spinal-fusion-surgery-hyderabad`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
     // Condition pages (new high-intent pages)
     {
       url: `${baseUrl}/conditions/brain-tumor-surgery-hyderabad`,
@@ -61,6 +67,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/conditions/cervical-radiculopathy-treatment-hyderabad`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/conditions/sciatica-treatment-hyderabad`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/conditions/slip-disc-treatment-hyderabad`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/conditions/spinal-stenosis-treatment-hyderabad`,
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.8,
@@ -122,6 +146,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.8,
     },
+    {
+      url: `${baseUrl}/blog/sciatica-pain-management-hyderabad`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/blog/spine-health-maintenance-hyderabad`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/blog/spine-surgery-recovery-timeline-hyderabad`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
     // Core pages
     {
       url: `${baseUrl}/patient-stories`,
@@ -136,6 +178,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: `${baseUrl}/ai-chat`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/about`,
       lastModified: now,
       changeFrequency: 'monthly',
@@ -143,6 +191,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/contact`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/technology-facilities`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/emergency-rehabilitation`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/disease-guides`,
       lastModified: now,
       changeFrequency: 'monthly',
       priority: 0.6,
