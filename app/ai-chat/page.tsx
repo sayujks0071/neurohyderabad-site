@@ -1,6 +1,6 @@
 import { SITE_URL } from "../../src/lib/seo";
 import type { Metadata } from "next";
-import AIBookingAgent from "../_components/AIBookingAgent";
+import OpenAIAgentsBooking from "../_components/OpenAIAgentsBooking";
 import AppointmentFormTracker from "../../src/components/AppointmentFormTracker";
 import PhoneClickTracker from "../../src/components/PhoneClickTracker";
 
@@ -73,7 +73,7 @@ export default function AIChatPage() {
       </div>
 
       {/* AI Chat Interface */}
-      <AIBookingAgent pageSlug="/ai-chat" service="ai_chat" />
+      <OpenAIAgentsBooking pageSlug="/ai-chat" service="ai_chat" />
 
       {/* Emergency Contact Section */}
       <div className="mt-16 bg-red-50 border border-red-200 rounded-2xl p-8">

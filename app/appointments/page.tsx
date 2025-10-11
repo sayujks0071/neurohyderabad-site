@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import TeleconsultationForm from "@/components/TeleconsultationForm";
 import AppointmentFormTracker from "../../src/components/AppointmentFormTracker";
 import PhoneClickTracker from "../../src/components/PhoneClickTracker";
-import AIBookingAgent from "../_components/AIBookingAgent";
+import OpenAIAgentsBooking from "../_components/OpenAIAgentsBooking";
 
 export const metadata: Metadata = {
   title: "Book an Appointment | Dr Sayuj Krishnan",
@@ -51,7 +51,7 @@ export default function AppointmentsPage() {
             detect emergencies, and guide you through the booking process naturally.
           </p>
         </div>
-        <AIBookingAgent pageSlug="/appointments" service="general" />
+        <OpenAIAgentsBooking pageSlug="/appointments" service="general" />
       </section>
 
       {/* Divider */}
