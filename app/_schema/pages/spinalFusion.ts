@@ -11,7 +11,7 @@ export function spinalFusionSchemas(url: string) {
     url,
     name: 'Spinal Fusion Surgery in Hyderabad | TLIF & ACDF',
     description: 'TLIF and ACDF for instability, recovery timelines, and insurance support with Dr. Sayuj Krishnan.',
-    reviewedBy: { '@id': 'https://www.drsayuj.com/#physician' },
+    reviewedBy: { '@id': 'https://www.drsayuj.info/#physician' },
     lastReviewed: today,
     breadcrumb: { '@id': `${url}#breadcrumb` },
     mainEntity: [

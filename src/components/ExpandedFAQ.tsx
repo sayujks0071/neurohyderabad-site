@@ -1,3 +1,5 @@
+import FAQSchema from "../../app/components/schemas/FAQSchema";
+
 interface FAQItem {
   question: string;
   answer: string;
@@ -192,6 +194,14 @@ export default function ExpandedFAQ({
 
   return (
     <section className={`py-16 ${className}`}>
+      {/* FAQ Schema for SEO */}
+      <FAQSchema 
+        faqs={faqs.map(faq => ({
+          question: faq.question,
+          answer: faq.answer
+        }))}
+        pageTitle={title}
+      />
       <div className="container mx-auto px-4">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12 text-blue-800">

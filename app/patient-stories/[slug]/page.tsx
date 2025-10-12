@@ -57,19 +57,19 @@ export default async function PatientStoryPage({ params }: PageProps) {
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://www.drsayuj.com/"
+        "item": "https://www.drsayuj.info/"
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "Patient Stories",
-        "item": "https://www.drsayuj.com/patient-stories"
+        "item": "https://www.drsayuj.info/patient-stories"
       },
       {
         "@type": "ListItem",
         "position": 3,
         "name": story.title,
-        "item": `https://www.drsayuj.com/patient-stories/${story.slug}`
+        "item": `https://www.drsayuj.info/patient-stories/${story.slug}`
       }
     ]
   };
@@ -82,18 +82,18 @@ export default async function PatientStoryPage({ params }: PageProps) {
     "author": {
       "@type": "Person",
       "name": "Dr. Sayuj Krishnan",
-      "url": "https://www.drsayuj.com"
+      "url": "https://www.drsayuj.info"
     },
     "publisher": {
       "@type": "Organization",
       "name": "Dr. Sayuj Krishnan - Neurosurgeon",
-      "url": "https://www.drsayuj.com"
+      "url": "https://www.drsayuj.info"
     },
     "datePublished": story.date,
     "dateModified": story.date,
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": `https://www.drsayuj.com/patient-stories/${story.slug}`
+      "@id": `https://www.drsayuj.info/patient-stories/${story.slug}`
     }
   };
 

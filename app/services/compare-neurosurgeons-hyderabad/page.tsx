@@ -113,7 +113,7 @@ export default function CompareNeurosurgeonsPage() {
     "@type": "WebPage",
     "name": "Best Neurosurgeon in Hyderabad: Compare Dr. Sayuj vs Apollo, KIMS, Yashoda",
     "description": "Compare the best neurosurgeons in Hyderabad. Expert comparison of experience, techniques, and patient outcomes for brain and spine surgery.",
-    "url": "https://www.drsayuj.com/services/compare-neurosurgeons-hyderabad",
+    "url": "https://www.drsayuj.info/services/compare-neurosurgeons-hyderabad",
     "mainEntity": {
       "@type": "ItemList",
       "itemListElement": comparisonData.map((neurosurgeon, index) => ({

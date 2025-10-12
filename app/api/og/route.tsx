@@ -90,7 +90,7 @@ export async function GET(req: NextRequest) {
     searchParams.get("subtitle") || "Neurosurgeon • Hyderabad, India";
   const BRAND = normalizeBrand(searchParams.get("brand"));
   const showLogo = parseBool(searchParams.get("logo"), true);
-  const domain = searchParams.get("domain") || "drsayuj.com";
+  const domain = searchParams.get("domain") || "drsayuj.info";
 
   // Load fonts (best effort)
   await loadInterFonts();

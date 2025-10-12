@@ -11,10 +11,10 @@ export const metadata: Metadata = {
   description: 'Advanced brain and spine care near Banjara Hills, Hyderabad. Directions to Yashoda Hospital, Malakpet. Parking, timings, and appointment info.',
   keywords: 'brain surgeon Banjara Hills, spine surgeon Banjara Hills, neurosurgeon near Banjara Hills, Yashoda Hospital Malakpet, Hyderabad',
   alternates: {
-    canonical: 'https://www.drsayuj.com/locations/brain-spine-surgeon-banjara-hills',
+    canonical: 'https://www.drsayuj.info/locations/brain-spine-surgeon-banjara-hills',
     languages: {
-      'en-IN': 'https://www.drsayuj.com/locations/brain-spine-surgeon-banjara-hills',
-      'x-default': 'https://www.drsayuj.com/locations/brain-spine-surgeon-banjara-hills',
+      'en-IN': 'https://www.drsayuj.info/locations/brain-spine-surgeon-banjara-hills',
+      'x-default': 'https://www.drsayuj.info/locations/brain-spine-surgeon-banjara-hills',
     },
   },
   openGraph: {
@@ -28,8 +28,8 @@ const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "Dr. Sayuj Krishnan - Neurosurgeon",
-  "image": "https://www.drsayuj.com/images/og-default.jpg",
-  "url": "https://www.drsayuj.com/locations/brain-spine-surgeon-banjara-hills",
+  "image": "https://www.drsayuj.info/images/og-default.jpg",
+  "url": "https://www.drsayuj.info/locations/brain-spine-surgeon-banjara-hills",
   "telephone": "+919778280044",
   "address": {
     "@type": "PostalAddress",

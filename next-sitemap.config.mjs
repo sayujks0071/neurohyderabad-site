@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 export default {
-  siteUrl: "https://www.drsayuj.com",
+  siteUrl: "https://www.drsayuj.info",
   generateRobotsTxt: true,
   robotsTxtOptions: {
     policies: [{ userAgent: "*", allow: "/" }],

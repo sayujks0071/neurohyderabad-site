@@ -14,7 +14,7 @@ export const metadata: Metadata = makeMetadata({
 });
 
 export default function KIMSSpineSurgerySecondOpinionPage() {
-  const url = 'https://www.drsayuj.com/services/kims-spine-surgery-second-opinion';
+  const url = 'https://www.drsayuj.info/services/kims-spine-surgery-second-opinion';
   
   const schemas = [
     {
@@ -24,8 +24,8 @@ export default function KIMSSpineSurgerySecondOpinionPage() {
       url,
       name: 'KIMS Spine Surgery Second Opinion | Dr. Sayuj Krishnan Expert Review',
       description: 'Get a second opinion on KIMS spine surgery recommendations from Dr. Sayuj Krishnan. Expert review of surgical plans, alternative treatments, and minimally invasive options.',
-      author: { '@id': 'https://www.drsayuj.com/#physician' },
-      publisher: { '@id': 'https://www.drsayuj.com/#physician' },
+      author: { '@id': 'https://www.drsayuj.info/#physician' },
+      publisher: { '@id': 'https://www.drsayuj.info/#physician' },
       datePublished: '2025-01-15',
       dateModified: '2025-01-15',
       mainEntityOfPage: url,
@@ -36,8 +36,8 @@ export default function KIMSSpineSurgerySecondOpinionPage() {
       '@type': 'BreadcrumbList',
       '@id': `${url}#breadcrumb`,
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.drsayuj.com/' },
-        { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://www.drsayuj.com/services' },
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.drsayuj.info/' },
+        { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://www.drsayuj.info/services' },
         { '@type': 'ListItem', position: 3, name: 'KIMS Spine Surgery Second Opinion', item: url }
       ]
     }

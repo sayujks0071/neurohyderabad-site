@@ -224,7 +224,7 @@ export default function CervicalRadiculopathyTreatmentPage() {
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <a
-              href="https://www.drsayuj.com/appointments?utm_source=seo&utm_medium=page&utm_campaign=cervical_radiculopathy"
+              href="https://www.drsayuj.info/appointments?utm_source=seo&utm_medium=page&utm_campaign=cervical_radiculopathy"
               className="rounded-full bg-blue-500 px-6 py-3 text-sm font-semibold text-white shadow hover:bg-blue-600"
             >
               Book Neuro Spine Evaluation

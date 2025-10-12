@@ -9,7 +9,7 @@ export const metadata = {
   title: "Neurosurgeon in Secunderabad, Hyderabad | Endoscopic Spine | Dr. Sayuj Krishnan",
   description:
     "Consult Dr. Sayuj Krishnan near Secunderabad, Hyderabad for endoscopic spine & minimally invasive brain surgery. OPD timings, parking, directions, WhatsApp booking, and FAQs.",
-  alternates: { canonical: "https://www.drsayuj.com/neurosurgeon-secunderabad" },
+  alternates: { canonical: "https://www.drsayuj.info/neurosurgeon-secunderabad" },
 };
 
 const FAQ = [
@@ -23,8 +23,8 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.drsayuj.com/" },
-      { "@type": "ListItem", position: 2, name: "Neurosurgeon in Secunderabad", item: "https://www.drsayuj.com/neurosurgeon-secunderabad" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.drsayuj.info/" },
+      { "@type": "ListItem", position: 2, name: "Neurosurgeon in Secunderabad", item: "https://www.drsayuj.info/neurosurgeon-secunderabad" },
     ],
   };
 

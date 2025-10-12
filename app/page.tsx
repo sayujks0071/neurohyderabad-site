@@ -18,15 +18,42 @@ import DoctorCard from "./_components/DoctorCard";
 import TrustSignals from "./_components/TrustSignals";
 
 export const metadata = {
-  title: 'Neurosurgeon in Hyderabad | Endoscopic Spine Surgeon',
-  description: 'Expert neurosurgeon in Hyderabad for endoscopic spine, brain tumor and epilepsy care. Same-day discharge options. Book a consultation at Yashoda Malakpet.',
+  title: 'Best Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan | Brain & Spine Surgery',
+  description: 'Dr. Sayuj Krishnan is the best neurosurgeon in Hyderabad specializing in endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures. Same-day discharge available at Yashoda Hospital Malakpet. Book consultation now.',
+  keywords: [
+    'best neurosurgeon hyderabad',
+    'dr sayuj krishnan',
+    'endoscopic spine surgery hyderabad',
+    'brain tumor surgery hyderabad',
+    'minimally invasive spine surgery',
+    'yashoda hospital malakpet',
+    'spine specialist hyderabad',
+    'brain surgeon hyderabad'
+  ],
   alternates: {
-    canonical: 'https://www.drsayuj.com/',
+    canonical: 'https://www.drsayuj.info/',
     languages: {
-      'en-IN': 'https://www.drsayuj.com/',
-      'x-default': 'https://www.drsayuj.com/'
+      'en-IN': 'https://www.drsayuj.info/',
+      'x-default': 'https://www.drsayuj.info/'
     }
   },
+  openGraph: {
+    title: 'Dr. Sayuj Krishnan | Best Neurosurgeon in Hyderabad | Brain & Spine Surgery',
+    description: 'Expert neurosurgeon Dr. Sayuj Krishnan in Hyderabad specializing in endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures. Same-day discharge available.',
+    images: [
+      {
+        url: 'https://www.drsayuj.info/images/og-default.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Dr. Sayuj Krishnan - Best Neurosurgeon in Hyderabad'
+      }
+    ]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Dr. Sayuj Krishnan | Best Neurosurgeon in Hyderabad',
+    description: 'Expert neurosurgeon specializing in endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures in Hyderabad.'
+  }
 };
 
 // ISR: Revalidate every 6 hours
@@ -114,7 +141,7 @@ export default function Home() {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="text-center lg:text-left">
                 <h1 className="text-4xl md:text-6xl font-bold mb-6">
-                  Best Neurosurgeon in Hyderabad — Brain & Spine Surgery
+                  Dr. Sayuj Krishnan — Best Neurosurgeon in Hyderabad | Brain & Spine Surgery Expert
                 </h1>
                 <p className="text-xl md:text-2xl mb-8">
                   Dr Sayuj Krishnan — Leading Expert in Minimally Invasive Neurosurgery
@@ -774,3 +801,4 @@ export default function Home() {
     </>
   );
 }
+

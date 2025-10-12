@@ -12,7 +12,7 @@ export const metadata = makeMetadata({
 });
 
 export default function Page() {
-  const url = 'https://www.drsayuj.com/blog/awake-craniotomy-guide';
+  const url = 'https://www.drsayuj.info/blog/awake-craniotomy-guide';
   const schemas = awakeCraniotomySchemas(url);
 
   return (

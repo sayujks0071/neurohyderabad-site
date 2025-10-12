@@ -219,7 +219,7 @@ export default function TrigeminalNeuralgiaTreatmentPage() {
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <a
-              href="https://www.drsayuj.com/appointments?utm_source=seo&utm_medium=page&utm_campaign=tn_condition"
+              href="https://www.drsayuj.info/appointments?utm_source=seo&utm_medium=page&utm_campaign=tn_condition"
               className="rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow hover:bg-blue-700"
             >
               Book Consultation

@@ -10,10 +10,10 @@ export const metadata: Metadata = {
   description: 'Expert neurosurgeon near Manikonda, Hyderabad. Dr. Sayuj Krishnan provides advanced brain and spine surgery with minimally invasive techniques. Book consultation today.',
   keywords: 'neurosurgeon Manikonda, brain surgeon Manikonda, spine surgeon Manikonda, neurosurgeon near Manikonda, back pain doctor Manikonda, slip disc treatment Manikonda',
   alternates: {
-    canonical: 'https://www.drsayuj.com/locations/neurosurgeon-manikonda',
+    canonical: 'https://www.drsayuj.info/locations/neurosurgeon-manikonda',
     languages: {
-      'en-IN': 'https://www.drsayuj.com/locations/neurosurgeon-manikonda',
-      'x-default': 'https://www.drsayuj.com/locations/neurosurgeon-manikonda',
+      'en-IN': 'https://www.drsayuj.info/locations/neurosurgeon-manikonda',
+      'x-default': 'https://www.drsayuj.info/locations/neurosurgeon-manikonda',
     },
   },
   openGraph: {
@@ -27,8 +27,8 @@ const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "Dr. Sayuj Krishnan - Neurosurgeon",
-  "image": "https://www.drsayuj.com/images/og-default.jpg",
-  "url": "https://www.drsayuj.com/locations/neurosurgeon-manikonda",
+  "image": "https://www.drsayuj.info/images/og-default.jpg",
+  "url": "https://www.drsayuj.info/locations/neurosurgeon-manikonda",
   "telephone": "+919778280044",
   "address": {
     "@type": "PostalAddress",

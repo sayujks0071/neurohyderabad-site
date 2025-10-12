@@ -5,7 +5,7 @@ export const metadata = {
   title: "Best Neurosurgeon in Hyderabad | Endoscopic Spine Surgery | Dr. Sayuj Krishnan",
   description:
     "Consult Dr. Sayuj Krishnan, neurosurgeon in Hyderabad specializing in full endoscopic spine & minimally invasive brain surgery. OPD timings, directions, FAQs, and WhatsApp booking.",
-  alternates: { canonical: "https://www.drsayuj.com/neurosurgeon-hyderabad" },
+  alternates: { canonical: "https://www.drsayuj.info/neurosurgeon-hyderabad" },
 };
 
 const FAQ = [
@@ -45,8 +45,8 @@ export default function Page() {
       "Endoscopic Spine Surgery",
       "Minimally Invasive Brain Surgery",
     ],
-    url: "https://www.drsayuj.com",
-    image: "https://www.drsayuj.com/images/dr-sayuj.jpg",
+    url: "https://www.drsayuj.info",
+    image: "https://www.drsayuj.info/images/dr-sayuj.jpg",
     telephone: "+919778280044",
     areaServed: ["Hyderabad", "Telangana", "India"],
     sameAs: [
@@ -70,8 +70,8 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.drsayuj.com/" },
-      { "@type": "ListItem", position: 2, name: "Neurosurgeon in Hyderabad", item: "https://www.drsayuj.com/neurosurgeon-hyderabad" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.drsayuj.info/" },
+      { "@type": "ListItem", position: 2, name: "Neurosurgeon in Hyderabad", item: "https://www.drsayuj.info/neurosurgeon-hyderabad" },
     ],
   };
 

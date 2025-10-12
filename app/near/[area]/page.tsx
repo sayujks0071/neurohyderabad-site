@@ -113,7 +113,7 @@ export default async function AreaPage({ params }: { params: Promise<{ area: str
     notFound();
   }
 
-  const pageUrl = `https://www.drsayuj.com/near/${area}`;
+  const pageUrl = `https://www.drsayuj.info/near/${area}`;
 
   const clinicSchema = {
     '@context': 'https://schema.org',
@@ -145,8 +145,8 @@ export default async function AreaPage({ params }: { params: Promise<{ area: str
     '@type': 'BreadcrumbList',
     '@id': `${pageUrl}#breadcrumb`,
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.drsayuj.com/' },
-      { '@type': 'ListItem', position: 2, name: 'Neighbourhoods', item: 'https://www.drsayuj.com/near' },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.drsayuj.info/' },
+      { '@type': 'ListItem', position: 2, name: 'Neighbourhoods', item: 'https://www.drsayuj.info/near' },
       { '@type': 'ListItem', position: 3, name: data.name, item: pageUrl },
     ],
   };

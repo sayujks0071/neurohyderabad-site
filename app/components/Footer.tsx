@@ -32,7 +32,7 @@ export default function Footer() {
               </p>
               <div className="flex flex-wrap gap-3">
                 <a
-                  href="https://www.drsayuj.com/appointments?utm_source=site&utm_medium=cta&utm_campaign=footer_nap"
+                  href="https://www.drsayuj.info/appointments?utm_source=site&utm_medium=cta&utm_campaign=footer_nap"
                   className="rounded-full bg-blue-500 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-600"
                 >
                   Book Consultation

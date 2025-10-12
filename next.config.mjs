@@ -8,12 +8,23 @@ const nextConfig = {
   // Consistent trailing slash behavior - disabled for API routes
   trailingSlash: false,
   
-  // Safari optimization: Reduce hydration payload
+  // Performance optimizations
   experimental: {
     // Reduce hydration data size for Safari compatibility
     optimizePackageImports: ['@/components', '@/lib'],
     // Enable partial pre-rendering for better performance
     ppr: false,
+    // Optimize server components
+    serverComponentsExternalPackages: ['@openai/agents'],
+    // Enable turbo mode for faster builds
+    turbo: {
+      rules: {
+        '*.svg': {
+          loaders: ['@svgr/webpack'],
+          as: '*.js',
+        },
+      },
+    },
   },
   
   // Configure images for dynamic OG generation and local images
@@ -50,11 +61,17 @@ const nextConfig = {
   // 301 redirects for legacy URLs to consolidate duplicate content
   async redirects() {
     return [
-      // CRITICAL: Apex domain redirect to www (single hop 301)
+      // CRITICAL: Domain redirects to actual domain (www.drsayuj.info)
       {
         source: '/((?!api|_next|images|favicon.ico|robots.txt|sitemap.xml|site.webmanifest).*)',
         has: [{ type: 'host', value: 'drsayuj.com' }],
-        destination: 'https://www.drsayuj.com/$1',
+        destination: 'https://www.drsayuj.info/$1',
+        permanent: true,
+      },
+      {
+        source: '/((?!api|_next|images|favicon.ico|robots.txt|sitemap.xml|site.webmanifest).*)',
+        has: [{ type: 'host', value: 'www.drsayuj.com' }],
+        destination: 'https://www.drsayuj.info/$1',
         permanent: true,
       },
       // Existing service consolidation
@@ -208,6 +225,8 @@ const nextConfig = {
           // Safari optimization: Help with content decoding
           { key: "Content-Type", value: "text/html; charset=utf-8" },
           { key: "Cache-Control", value: "public, s-maxage=3600, max-age=600, stale-while-revalidate=86400" },
+          // Performance hints
+          { key: "X-DNS-Prefetch-Control", value: "on" },
           // Compression headers
           { key: "Vary", value: "Accept-Encoding" },
         ]

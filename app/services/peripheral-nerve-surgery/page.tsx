@@ -13,7 +13,7 @@ export const metadata = makeMetadata({
 });
 
 export default function Page() {
-  const url = 'https://www.drsayuj.com/services/peripheral-nerve-surgery';
+  const url = 'https://www.drsayuj.info/services/peripheral-nerve-surgery';
   const schemas = peripheralNerveSchemas(url);
 
   return (

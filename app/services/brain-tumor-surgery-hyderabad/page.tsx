@@ -444,7 +444,7 @@ export default function BrainTumorSurgeryPage() {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "MedicalWebPage",
-              "mainEntityOfPage": "https://www.drsayuj.com/services/brain-tumor-surgery-hyderabad",
+              "mainEntityOfPage": "https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad",
               "name": "Brain Tumor Surgery in Hyderabad | Microsurgery & Radiosurgery",
               "description": "Neuronavigation-guided brain tumor surgery with neuromonitoring and multidisciplinary care in Hyderabad. When surgery is recommended, risks, recovery, and alternatives.",
               "medicalSpecialty": "Neurosurgery",

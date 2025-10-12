@@ -10,10 +10,10 @@ export const metadata: Metadata = {
   description: 'Expert neurosurgeon near Kukatpally, Hyderabad. Dr. Sayuj Krishnan provides advanced brain and spine surgery with minimally invasive techniques. Book consultation today.',
   keywords: 'neurosurgeon Kukatpally, brain surgeon Kukatpally, spine surgeon Kukatpally, neurosurgeon near Kukatpally, back pain doctor Kukatpally, slip disc treatment Kukatpally',
   alternates: {
-    canonical: 'https://www.drsayuj.com/locations/neurosurgeon-kukatpally',
+    canonical: 'https://www.drsayuj.info/locations/neurosurgeon-kukatpally',
     languages: {
-      'en-IN': 'https://www.drsayuj.com/locations/neurosurgeon-kukatpally',
-      'x-default': 'https://www.drsayuj.com/locations/neurosurgeon-kukatpally',
+      'en-IN': 'https://www.drsayuj.info/locations/neurosurgeon-kukatpally',
+      'x-default': 'https://www.drsayuj.info/locations/neurosurgeon-kukatpally',
     },
   },
   openGraph: {
@@ -27,8 +27,8 @@ const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "Dr. Sayuj Krishnan - Neurosurgeon",
-  "image": "https://www.drsayuj.com/images/og-default.jpg",
-  "url": "https://www.drsayuj.com/locations/neurosurgeon-kukatpally",
+  "image": "https://www.drsayuj.info/images/og-default.jpg",
+  "url": "https://www.drsayuj.info/locations/neurosurgeon-kukatpally",
   "telephone": "+919778280044",
   "address": {
     "@type": "PostalAddress",

@@ -4,10 +4,10 @@ export function OrgJsonLd() {
   const data = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    '@id': 'https://www.drsayuj.com/#org',
+    '@id': 'https://www.drsayuj.info/#org',
     name: 'Dr. Sayuj Krishnan — Brain & Spine Surgeon',
-    url: 'https://www.drsayuj.com',
-    logo: 'https://www.drsayuj.com/images/logo.png',
+    url: 'https://www.drsayuj.info',
+    logo: 'https://www.drsayuj.info/images/logo.png',
     sameAs: [
       'https://www.instagram.com/TheSpineDoc/',
       'https://www.youtube.com/@drsayujneurohyd',
@@ -32,10 +32,10 @@ export function PhysicianJsonLd() {
   const data = {
     '@context': 'https://schema.org',
     '@type': 'Physician',
-    '@id': 'https://www.drsayuj.com/#physician',
+    '@id': 'https://www.drsayuj.info/#physician',
     name: 'Dr Sayuj Krishnan',
-    url: 'https://www.drsayuj.com',
-    image: 'https://www.drsayuj.com/images/profile.jpg',
+    url: 'https://www.drsayuj.info',
+    image: 'https://www.drsayuj.info/images/profile.jpg',
     medicalSpecialty: ['Neurosurgery','SpineSurgery','EndoscopicSpineSurgery'],
     address: { 
       '@type': 'PostalAddress', 
@@ -68,7 +68,7 @@ export function HospitalJsonLd() {
   const data = {
     '@context': 'https://schema.org',
     '@type': 'Hospital',
-    '@id': 'https://www.drsayuj.com/#hospital',
+    '@id': 'https://www.drsayuj.info/#hospital',
     name: 'Yashoda Hospitals - Malakpet',
     url: 'https://www.yashodahospitals.com',
     address: {

@@ -13,7 +13,7 @@ export const metadata = makeMetadata({
 });
 
 export default function Page() {
-  const url = 'https://www.drsayuj.com/blog/day-care-spine-surgery-insurance-hyderabad';
+  const url = 'https://www.drsayuj.info/blog/day-care-spine-surgery-insurance-hyderabad';
   
   const schemas = [
     {
@@ -23,8 +23,8 @@ export default function Page() {
       url,
       name: 'Day-Care Spine Surgery Insurance Hyderabad | Coverage Guide',
       description: 'Day-care spine surgery insurance coverage, pre-authorization, and cashless treatment options with Dr. Sayuj Krishnan at Yashoda Hospital Malakpet.',
-      author: { '@id': 'https://www.drsayuj.com/#physician' },
-      publisher: { '@id': 'https://www.drsayuj.com/#physician' },
+      author: { '@id': 'https://www.drsayuj.info/#physician' },
+      publisher: { '@id': 'https://www.drsayuj.info/#physician' },
       datePublished: '2025-01-15',
       dateModified: '2025-01-15',
       mainEntityOfPage: url,
@@ -35,8 +35,8 @@ export default function Page() {
       '@type': 'BreadcrumbList',
       '@id': `${url}#breadcrumb`,
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.drsayuj.com/' },
-        { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://www.drsayuj.com/blog' },
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.drsayuj.info/' },
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://www.drsayuj.info/blog' },
         { '@type': 'ListItem', position: 3, name: 'Day-Care Spine Surgery Insurance', item: url }
       ]
     }

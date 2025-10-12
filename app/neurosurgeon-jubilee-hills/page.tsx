@@ -5,11 +5,11 @@ export const metadata = {
   description:
     "Leading neurosurgeon Dr. Sayuj Krishnan serving Jubilee Hills, Hyderabad. Expert in endoscopic spine surgery, brain tumor surgery & epilepsy treatment. 15+ years experience. Book consultation.",
   keywords: "neurosurgeon jubilee hills, brain surgeon jubilee hills, spine specialist jubilee hills, endoscopic spine surgery jubilee hills, dr sayuj krishnan jubilee hills",
-  alternates: { canonical: "https://www.drsayuj.com/neurosurgeon-jubilee-hills" },
+  alternates: { canonical: "https://www.drsayuj.info/neurosurgeon-jubilee-hills" },
   openGraph: {
     title: "Best Neurosurgeon in Jubilee Hills, Hyderabad | Dr. Sayuj Krishnan",
     description: "Expert neurosurgeon serving Jubilee Hills with endoscopic spine surgery and minimally invasive brain surgery. 15+ years experience.",
-    url: "https://www.drsayuj.com/neurosurgeon-jubilee-hills",
+    url: "https://www.drsayuj.info/neurosurgeon-jubilee-hills",
     type: "website",
   },
 };
@@ -25,8 +25,8 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.drsayuj.com/" },
-      { "@type": "ListItem", position: 2, name: "Neurosurgeon in Jubilee Hills", item: "https://www.drsayuj.com/neurosurgeon-jubilee-hills" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.drsayuj.info/" },
+      { "@type": "ListItem", position: 2, name: "Neurosurgeon in Jubilee Hills", item: "https://www.drsayuj.info/neurosurgeon-jubilee-hills" },
     ],
   };
 

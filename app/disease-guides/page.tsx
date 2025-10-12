@@ -57,7 +57,7 @@ const diseaseGuides = [
     treatments: ['Physical therapy', 'Epidural injections', 'Endoscopic decompression', 'Laminectomy'],
     severity: 'Moderate to Severe',
     recovery: '2-4 months',
-    link: '/disease-guides/spinal-stenosis'
+    link: '/conditions/spinal-stenosis-treatment-hyderabad'
   },
   {
     id: 'trigeminal-neuralgia',
@@ -69,7 +69,7 @@ const diseaseGuides = [
     treatments: ['Medication', 'Microvascular decompression', 'Gamma Knife radiosurgery', 'Percutaneous procedures'],
     severity: 'Severe',
     recovery: '1-3 months',
-    link: '/disease-guides/trigeminal-neuralgia'
+    link: '/conditions/trigeminal-neuralgia-treatment-hyderabad'
   },
   {
     id: 'epilepsy',
@@ -81,7 +81,7 @@ const diseaseGuides = [
     treatments: ['Anti-epileptic drugs', 'Vagus nerve stimulation', 'Epilepsy surgery', 'Ketogenic diet'],
     severity: 'Moderate to Severe',
     recovery: '6-12 months',
-    link: '/disease-guides/epilepsy'
+    link: '/services/epilepsy-surgery-hyderabad'
   },
   {
     id: 'herniated-disc',
@@ -93,7 +93,7 @@ const diseaseGuides = [
     treatments: ['Rest and medication', 'Physical therapy', 'Endoscopic discectomy', 'Microdiscectomy'],
     severity: 'Moderate to Severe',
     recovery: '2-6 weeks',
-    link: '/disease-guides/herniated-disc'
+    link: '/conditions/slip-disc-treatment-hyderabad'
   },
   {
     id: 'cervical-radiculopathy',
@@ -105,7 +105,7 @@ const diseaseGuides = [
     treatments: ['Physical therapy', 'Cervical traction', 'Endoscopic foraminotomy', 'Cervical fusion'],
     severity: 'Moderate to Severe',
     recovery: '4-8 weeks',
-    link: '/disease-guides/cervical-radiculopathy'
+    link: '/conditions/cervical-radiculopathy-treatment-hyderabad'
   },
   {
     id: 'brain-tumors',
@@ -117,7 +117,7 @@ const diseaseGuides = [
     treatments: ['Surgery', 'Radiation therapy', 'Chemotherapy', 'Targeted therapy'],
     severity: 'Severe',
     recovery: '3-12 months',
-    link: '/disease-guides/brain-tumors'
+    link: '/conditions/brain-tumor-surgery-hyderabad'
   },
   {
     id: 'sciatica',
@@ -129,7 +129,7 @@ const diseaseGuides = [
     treatments: ['Physical therapy', 'Epidural injections', 'Endoscopic discectomy', 'Microdiscectomy'],
     severity: 'Moderate to Severe',
     recovery: '4-8 weeks',
-    link: '/disease-guides/sciatica'
+    link: '/conditions/sciatica-treatment-hyderabad'
   }
 ];
 

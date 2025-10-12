@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: baseMetadata.title,
     description: baseMetadata.description,
-    url: 'https://www.drsayuj.com/blog/endoscopic-spine-surgery-cost-hyderabad/',
+    url: 'https://www.drsayuj.info/blog/endoscopic-spine-surgery-cost-hyderabad/',
     type: 'article',
     publishedTime: '2025-09-30T00:00:00.000Z',
     modifiedTime: '2025-09-30T00:00:00.000Z',
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     tags: ['endoscopic spine surgery', 'cost', 'hyderabad', 'insurance', 'day care']
   },
   alternates: {
-    canonical: 'https://www.drsayuj.com/blog/endoscopic-spine-surgery-cost-hyderabad/'
+    canonical: 'https://www.drsayuj.info/blog/endoscopic-spine-surgery-cost-hyderabad/'
   }
 }
 
@@ -41,12 +41,12 @@ const blogPostingSchema = {
   "@type": "BlogPosting",
   "headline": "Endoscopic Spine Surgery Cost in Hyderabad: What Affects Your Final Bill",
   "description": "Transparent overview of endoscopic spine surgery costs in Hyderabad—what affects price, insurance, day-care eligibility, and recovery planning.",
-  "mainEntityOfPage": "https://www.drsayuj.com/blog/endoscopic-spine-surgery-cost-hyderabad/",
-  "url": "https://www.drsayuj.com/blog/endoscopic-spine-surgery-cost-hyderabad/",
+  "mainEntityOfPage": "https://www.drsayuj.info/blog/endoscopic-spine-surgery-cost-hyderabad/",
+  "url": "https://www.drsayuj.info/blog/endoscopic-spine-surgery-cost-hyderabad/",
   "datePublished": "2025-09-30",
   "dateModified": "2025-09-30",
-  "author": { "@id": "https://www.drsayuj.com/#physician" },
-  "publisher": { "@id": "https://www.drsayuj.com/#hospital" },
+  "author": { "@id": "https://www.drsayuj.info/#physician" },
+  "publisher": { "@id": "https://www.drsayuj.info/#hospital" },
   "articleSection": "Spine Surgery",
   "wordCount": "1150",
   "citation": [

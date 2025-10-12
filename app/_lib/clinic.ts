@@ -11,6 +11,6 @@ export const CLINIC = {
   region: 'Telangana',
   postalCode: '500036',
   country: 'IN',
-  site: 'https://www.drsayuj.com',
+  site: 'https://www.drsayuj.info',
   geo: { lat: 17.377, lng: 78.498 }, // approx; adjust if needed
 };

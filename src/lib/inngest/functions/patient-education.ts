@@ -307,7 +307,7 @@ export const patientFeedbackCollection = inngest.createFunction(
           serviceType,
           appointmentDate,
           questions: feedbackRequest.questions,
-          feedbackLink: `https://www.drsayuj.com/feedback?patient=${patientId}&service=${serviceType}`
+          feedbackLink: `https://www.drsayuj.info/feedback?patient=${patientId}&service=${serviceType}`
         }
       };
 

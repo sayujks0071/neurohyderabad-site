@@ -69,7 +69,7 @@ Location: Yashoda Hospital, Malakpet, Hyderabad
             </div>
             
             <div style="text-align: center; margin: 30px 0;">
-              <a href="https://www.drsayuj.com/appointments" 
+              <a href="https://www.drsayuj.info/appointments" 
                  style="background: #3b82f6; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
                 Book Your Consultation
               </a>
@@ -190,7 +190,7 @@ Emergency Contact: +91-9778280044
             </div>
             
             <div style="text-align: center; margin: 30px 0;">
-              <a href="https://www.drsayuj.com/contact" 
+              <a href="https://www.drsayuj.info/contact" 
                  style="background: #3b82f6; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
                 Contact Us
               </a>
@@ -299,7 +299,7 @@ Emergency Contact: +91-9778280044
             </div>
             
             <div style="text-align: center; margin: 30px 0;">
-              <a href="https://www.drsayuj.com/contact" 
+              <a href="https://www.drsayuj.info/contact" 
                  style="background: #3b82f6; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
                 Contact Us
               </a>

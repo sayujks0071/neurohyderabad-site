@@ -14,7 +14,7 @@ export const metadata: Metadata = makeMetadata({
 });
 
 export default function DrSayujVsApolloNeuroICUPage() {
-  const url = 'https://www.drsayuj.com/services/dr-sayuj-vs-apollo-neuro-icu';
+  const url = 'https://www.drsayuj.info/services/dr-sayuj-vs-apollo-neuro-icu';
   
   const schemas = [
     {
@@ -24,8 +24,8 @@ export default function DrSayujVsApolloNeuroICUPage() {
       url,
       name: 'Dr. Sayuj vs Apollo Neuro ICU: Expert Comparison for Brain & Spine Surgery',
       description: 'Compare Dr. Sayuj Krishnan with Apollo Neuro ICU for brain and spine surgery. Expert analysis of techniques, outcomes, and patient care approaches in Hyderabad.',
-      author: { '@id': 'https://www.drsayuj.com/#physician' },
-      publisher: { '@id': 'https://www.drsayuj.com/#physician' },
+      author: { '@id': 'https://www.drsayuj.info/#physician' },
+      publisher: { '@id': 'https://www.drsayuj.info/#physician' },
       datePublished: '2025-01-15',
       dateModified: '2025-01-15',
       mainEntityOfPage: url,
@@ -36,8 +36,8 @@ export default function DrSayujVsApolloNeuroICUPage() {
       '@type': 'BreadcrumbList',
       '@id': `${url}#breadcrumb`,
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.drsayuj.com/' },
-        { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://www.drsayuj.com/services' },
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.drsayuj.info/' },
+        { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://www.drsayuj.info/services' },
         { '@type': 'ListItem', position: 3, name: 'Dr. Sayuj vs Apollo Neuro ICU', item: url }
       ]
     }

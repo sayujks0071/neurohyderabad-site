@@ -10,10 +10,10 @@ export const metadata: Metadata = {
   description: 'De-identified story: severe sciatica treated with endoscopic discectomy and same-day discharge in Hyderabad. Recovery timeline and outcomes.',
   keywords: 'endoscopic discectomy, same-day surgery, sciatica treatment, lumbar spine, Hyderabad, case study',
   alternates: {
-    canonical: 'https://www.drsayuj.com/stories/endoscopic-discectomy-same-day-hyderabad',
+    canonical: 'https://www.drsayuj.info/stories/endoscopic-discectomy-same-day-hyderabad',
     languages: {
-      'en-IN': 'https://www.drsayuj.com/stories/endoscopic-discectomy-same-day-hyderabad',
-      'x-default': 'https://www.drsayuj.com/stories/endoscopic-discectomy-same-day-hyderabad',
+      'en-IN': 'https://www.drsayuj.info/stories/endoscopic-discectomy-same-day-hyderabad',
+      'x-default': 'https://www.drsayuj.info/stories/endoscopic-discectomy-same-day-hyderabad',
     },
   },
   openGraph: {
@@ -31,19 +31,19 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.drsayuj.com/"
+      "item": "https://www.drsayuj.info/"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Patient Stories",
-      "item": "https://www.drsayuj.com/patient-stories"
+      "item": "https://www.drsayuj.info/patient-stories"
     },
     {
       "@type": "ListItem",
       "position": 3,
       "name": "Same-Day Endoscopic Discectomy",
-      "item": "https://www.drsayuj.com/stories/endoscopic-discectomy-same-day-hyderabad"
+      "item": "https://www.drsayuj.info/stories/endoscopic-discectomy-same-day-hyderabad"
     }
   ]
 };
@@ -52,7 +52,7 @@ const medicalWebPageSchema = {
   "@context": "https://schema.org",
   "@type": "MedicalWebPage",
   "name": "Same-Day Endoscopic Discectomy in Hyderabad — Case Story",
-  "url": "https://www.drsayuj.com/stories/endoscopic-discectomy-same-day-hyderabad",
+  "url": "https://www.drsayuj.info/stories/endoscopic-discectomy-same-day-hyderabad",
   "datePublished": "2025-01-15",
   "dateModified": "2025-01-15",
   "about": {
@@ -62,7 +62,7 @@ const medicalWebPageSchema = {
   "publisher": {
     "@type": "Organization",
     "name": "Dr. Sayuj Krishnan - Neurosurgeon",
-    "url": "https://www.drsayuj.com"
+    "url": "https://www.drsayuj.info"
   },
   "reviewedBy": {
     "@type": "Physician",

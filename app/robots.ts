@@ -10,7 +10,7 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/drafts/', '/api/'],
     },
-    sitemap: 'https://www.drsayuj.com/sitemap.xml',
+    sitemap: 'https://www.drsayuj.info/sitemap.xml',
   };
 }
 

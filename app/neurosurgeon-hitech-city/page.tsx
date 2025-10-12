@@ -9,7 +9,7 @@ export const metadata = {
   title: "Neurosurgeon in Hitech City, Hyderabad | Endoscopic Spine | Dr. Sayuj Krishnan",
   description:
     "Consult Dr. Sayuj Krishnan near Hitech City, Hyderabad for endoscopic spine & minimally invasive brain surgery. OPD timings, parking, directions, WhatsApp booking, and FAQs.",
-  alternates: { canonical: "https://www.drsayuj.com/neurosurgeon-hitech-city" },
+  alternates: { canonical: "https://www.drsayuj.info/neurosurgeon-hitech-city" },
 };
 
 const FAQ = [
@@ -23,8 +23,8 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.drsayuj.com/" },
-      { "@type": "ListItem", position: 2, name: "Neurosurgeon in Hitech City", item: "https://www.drsayuj.com/neurosurgeon-hitech-city" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.drsayuj.info/" },
+      { "@type": "ListItem", position: 2, name: "Neurosurgeon in Hitech City", item: "https://www.drsayuj.info/neurosurgeon-hitech-city" },
     ],
   };
 

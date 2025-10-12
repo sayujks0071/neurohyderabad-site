@@ -137,7 +137,7 @@ export default function PeripheralNerveSurgeryPage() {
     "@type": "MedicalWebPage",
     "name": "Peripheral Nerve Surgery in Hyderabad",
     "description": "Expert peripheral nerve surgery including carpal tunnel release, ulnar nerve decompression, and nerve tumor removal in Hyderabad.",
-    "url": "https://www.drsayuj.com/services/peripheral-nerve-surgery-hyderabad/",
+    "url": "https://www.drsayuj.info/services/peripheral-nerve-surgery-hyderabad/",
     "mainEntity": {
       "@type": "MedicalBusiness",
       "name": "Dr. Sayuj Krishnan - Peripheral Nerve Surgery",
@@ -167,7 +167,7 @@ export default function PeripheralNerveSurgeryPage() {
       },
       "telephone": "+91-9778280044",
       "email": "neurospinehyd@drsayuj.com",
-      "url": "https://www.drsayuj.com"
+      "url": "https://www.drsayuj.info"
     },
     "breadcrumb": {
       "@type": "BreadcrumbList",
@@ -176,19 +176,19 @@ export default function PeripheralNerveSurgeryPage() {
           "@type": "ListItem",
           "position": 1,
           "name": "Home",
-          "item": "https://www.drsayuj.com/"
+          "item": "https://www.drsayuj.info/"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "Services",
-          "item": "https://www.drsayuj.com/services/"
+          "item": "https://www.drsayuj.info/services/"
         },
         {
           "@type": "ListItem",
           "position": 3,
           "name": "Peripheral Nerve Surgery",
-          "item": "https://www.drsayuj.com/services/peripheral-nerve-surgery-hyderabad/"
+          "item": "https://www.drsayuj.info/services/peripheral-nerve-surgery-hyderabad/"
         }
       ]
     },

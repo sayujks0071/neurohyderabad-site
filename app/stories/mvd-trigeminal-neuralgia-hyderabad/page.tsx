@@ -10,10 +10,10 @@ export const metadata: Metadata = {
   description: 'De-identified story: severe facial pain relieved after microvascular decompression in Hyderabad. Recovery and durability of pain relief.',
   keywords: 'MVD, microvascular decompression, trigeminal neuralgia, facial pain, brain surgery, Hyderabad, case study',
   alternates: {
-    canonical: 'https://www.drsayuj.com/stories/mvd-trigeminal-neuralgia-hyderabad',
+    canonical: 'https://www.drsayuj.info/stories/mvd-trigeminal-neuralgia-hyderabad',
     languages: {
-      'en-IN': 'https://www.drsayuj.com/stories/mvd-trigeminal-neuralgia-hyderabad',
-      'x-default': 'https://www.drsayuj.com/stories/mvd-trigeminal-neuralgia-hyderabad',
+      'en-IN': 'https://www.drsayuj.info/stories/mvd-trigeminal-neuralgia-hyderabad',
+      'x-default': 'https://www.drsayuj.info/stories/mvd-trigeminal-neuralgia-hyderabad',
     },
   },
   openGraph: {
@@ -31,19 +31,19 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.drsayuj.com/"
+      "item": "https://www.drsayuj.info/"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Patient Stories",
-      "item": "https://www.drsayuj.com/patient-stories"
+      "item": "https://www.drsayuj.info/patient-stories"
     },
     {
       "@type": "ListItem",
       "position": 3,
       "name": "MVD for Trigeminal Neuralgia",
-      "item": "https://www.drsayuj.com/stories/mvd-trigeminal-neuralgia-hyderabad"
+      "item": "https://www.drsayuj.info/stories/mvd-trigeminal-neuralgia-hyderabad"
     }
   ]
 };
@@ -52,7 +52,7 @@ const medicalWebPageSchema = {
   "@context": "https://schema.org",
   "@type": "MedicalWebPage",
   "name": "MVD for Trigeminal Neuralgia — Case Story (Hyderabad)",
-  "url": "https://www.drsayuj.com/stories/mvd-trigeminal-neuralgia-hyderabad",
+  "url": "https://www.drsayuj.info/stories/mvd-trigeminal-neuralgia-hyderabad",
   "datePublished": "2025-01-15",
   "dateModified": "2025-01-15",
   "about": {

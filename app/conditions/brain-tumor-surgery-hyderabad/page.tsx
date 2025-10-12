@@ -221,7 +221,7 @@ export default function BrainTumorSurgeryConditionPage() {
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <a
-              href="https://www.drsayuj.com/appointments?utm_source=seo&utm_medium=page&utm_campaign=brain_tumor_condition"
+              href="https://www.drsayuj.info/appointments?utm_source=seo&utm_medium=page&utm_campaign=brain_tumor_condition"
               className="rounded-full bg-blue-500 px-6 py-3 text-sm font-semibold text-white shadow hover:bg-blue-600"
             >
               Request Surgical Opinion

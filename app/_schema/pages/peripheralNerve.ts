@@ -11,7 +11,7 @@ export function peripheralNerveSchemas(url: string) {
     url,
     name: 'Peripheral Nerve Surgery Hyderabad | Carpal & Ulnar',
     description: 'Day-care carpal tunnel, ulnar decompression, and nerve repair by Dr. Sayuj Krishnan at Yashoda Hospital Malakpet.',
-    reviewedBy: { '@id': 'https://www.drsayuj.com/#physician' },
+    reviewedBy: { '@id': 'https://www.drsayuj.info/#physician' },
     lastReviewed: today,
     breadcrumb: { '@id': `${url}#breadcrumb` },
     mainEntity: [

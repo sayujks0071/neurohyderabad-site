@@ -28,12 +28,12 @@ export default function SitewideSchemas() {
     potentialAction: [
       {
         "@type": "SearchAction",
-        target: "https://www.drsayuj.com/search?q={search_term_string}",
+        target: `${SITE_URL}/search?q={search_term_string}`,
         "query-input": "required name=search_term_string"
       },
       {
         "@type": "ScheduleAction",
-        target: "https://www.drsayuj.com/appointments",
+        target: `${SITE_URL}/appointments`,
         name: "Book an appointment"
       }
     ]
@@ -101,7 +101,7 @@ export default function SitewideSchemas() {
     "@type": "ReserveAction",
     "target": {
       "@type": "EntryPoint",
-      "urlTemplate": "https://www.drsayuj.com/appointments",
+      "urlTemplate": `${SITE_URL}/appointments`,
       "inLanguage": "en-IN"
     }
   };

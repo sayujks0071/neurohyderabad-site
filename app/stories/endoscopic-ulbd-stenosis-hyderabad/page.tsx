@@ -10,10 +10,10 @@ export const metadata: Metadata = {
   description: 'De-identified case: walking distance and leg pain improved after endoscopic ULBD for stenosis in Hyderabad. Recovery timeline and outcomes.',
   keywords: 'endoscopic ULBD, lumbar stenosis, spinal decompression, walking distance, Hyderabad, case study',
   alternates: {
-    canonical: 'https://www.drsayuj.com/stories/endoscopic-ulbd-stenosis-hyderabad',
+    canonical: 'https://www.drsayuj.info/stories/endoscopic-ulbd-stenosis-hyderabad',
     languages: {
-      'en-IN': 'https://www.drsayuj.com/stories/endoscopic-ulbd-stenosis-hyderabad',
-      'x-default': 'https://www.drsayuj.com/stories/endoscopic-ulbd-stenosis-hyderabad',
+      'en-IN': 'https://www.drsayuj.info/stories/endoscopic-ulbd-stenosis-hyderabad',
+      'x-default': 'https://www.drsayuj.info/stories/endoscopic-ulbd-stenosis-hyderabad',
     },
   },
   openGraph: {
@@ -31,19 +31,19 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.drsayuj.com/"
+      "item": "https://www.drsayuj.info/"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Patient Stories",
-      "item": "https://www.drsayuj.com/patient-stories"
+      "item": "https://www.drsayuj.info/patient-stories"
     },
     {
       "@type": "ListItem",
       "position": 3,
       "name": "Endoscopic ULBD for Stenosis",
-      "item": "https://www.drsayuj.com/stories/endoscopic-ulbd-stenosis-hyderabad"
+      "item": "https://www.drsayuj.info/stories/endoscopic-ulbd-stenosis-hyderabad"
     }
   ]
 };
@@ -52,7 +52,7 @@ const medicalWebPageSchema = {
   "@context": "https://schema.org",
   "@type": "MedicalWebPage",
   "name": "Endoscopic ULBD for Lumbar Stenosis — Case Story (Hyderabad)",
-  "url": "https://www.drsayuj.com/stories/endoscopic-ulbd-stenosis-hyderabad",
+  "url": "https://www.drsayuj.info/stories/endoscopic-ulbd-stenosis-hyderabad",
   "datePublished": "2025-01-15",
   "dateModified": "2025-01-15",
   "about": {

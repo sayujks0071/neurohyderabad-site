@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import OptimizedImage from './OptimizedImage';
 
 type VideoItem = {
   id: string;
@@ -74,15 +74,16 @@ export default function PatientEducationVideos() {
                 key={video.id}
                 className="bg-gray-50 rounded-2xl shadow-lg overflow-hidden border border-gray-100 flex flex-col"
               >
-                <div className="relative aspect-video bg-gray-200">
-                  <Image
-                    src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`}
-                    alt={video.title}
-                    fill
-                    className="object-cover rounded-t-2xl"
-                    sizes="(min-width: 1024px) 360px, (min-width: 768px) 33vw, 100vw"
-                    priority={false}
-                  />
+                        <div className="relative aspect-video bg-gray-200">
+                          <OptimizedImage
+                            src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`}
+                            alt={video.title}
+                            fill
+                            className="object-cover rounded-t-2xl"
+                            sizes="(min-width: 1024px) 360px, (min-width: 768px) 33vw, 100vw"
+                            priority={false}
+                            quality={90}
+                          />
                   <a
                     href={`https://www.youtube.com/watch?v=${video.id}`}
                     target="_blank"

@@ -17,16 +17,42 @@ const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
+  preload: true,
+  fallback: ['system-ui', 'arial'],
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Neurosurgeon in Hyderabad | Endoscopic Spine Surgeon",
-  description: "Endoscopic discectomy, foraminotomy, and minimally invasive spine surgery in Hyderabad. Same-day mobilization. Book a consultation.",
-  keywords: "neurosurgeon hyderabad, brain surgeon, spine specialist, brain tumor surgery, spine surgery, dr sayuj krishnan",
-  authors: [{ name: "Dr. Sayuj Krishnan" }],
+  title: {
+    default: "Dr. Sayuj Krishnan | Best Neurosurgeon in Hyderabad | Brain & Spine Surgery",
+    template: "%s | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad"
+  },
+  description: "Expert neurosurgeon Dr. Sayuj Krishnan in Hyderabad specializing in endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures. Same-day discharge available. Book consultation at Yashoda Hospital Malakpet.",
+  keywords: [
+    "neurosurgeon hyderabad",
+    "brain surgeon hyderabad", 
+    "spine specialist hyderabad",
+    "endoscopic spine surgery hyderabad",
+    "brain tumor surgery hyderabad",
+    "minimally invasive spine surgery",
+    "dr sayuj krishnan",
+    "yashoda hospital malakpet",
+    "slip disc treatment hyderabad",
+    "sciatica treatment hyderabad",
+    "trigeminal neuralgia treatment",
+    "epilepsy surgery hyderabad",
+    "spine surgery hyderabad",
+    "neurosurgery hyderabad",
+    "best neurosurgeon hyderabad"
+  ],
+  authors: [{ name: "Dr. Sayuj Krishnan", url: SITE_URL }],
   creator: "Dr. Sayuj Krishnan",
   publisher: "Dr. Sayuj Krishnan",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   alternates: {
     canonical: SITE_URL,
     languages: {
@@ -35,10 +61,10 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Dr. Sayuj Krishnan | Full Endoscopic Spine Surgeon in Hyderabad",
-    description: "Expert neurosurgeon in Hyderabad specializing in minimally invasive brain & spine surgery",
+    title: "Dr. Sayuj Krishnan | Best Neurosurgeon in Hyderabad | Brain & Spine Surgery",
+    description: "Expert neurosurgeon Dr. Sayuj Krishnan in Hyderabad specializing in endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures. Same-day discharge available.",
     url: SITE_URL,
-    siteName: "Dr. Sayuj — Brain & Spine Care",
+    siteName: "Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
     locale: "en_IN",
     type: "website",
     images: [
@@ -46,14 +72,15 @@ export const metadata: Metadata = {
         url: "/images/og-default.jpg",
         width: 1200,
         height: 630,
-        alt: "Dr. Sayuj Krishnan — Neurosurgeon in Hyderabad",
+        alt: "Dr. Sayuj Krishnan — Best Neurosurgeon in Hyderabad",
+        type: "image/jpeg",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dr. Sayuj Krishnan | Full Endoscopic Spine Surgeon in Hyderabad",
-    description: "Expert neurosurgeon specializing in minimally invasive brain & spine surgery",
+    title: "Dr. Sayuj Krishnan | Best Neurosurgeon in Hyderabad",
+    description: "Expert neurosurgeon specializing in endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures in Hyderabad.",
     images: ["/images/og-default.jpg"],
     site: "@drsayuj",
     creator: "@drsayuj",
@@ -61,9 +88,11 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    nocache: false,
     googleBot: {
       index: true,
       follow: true,
+      noimageindex: false,
       "max-video-preview": -1,
       "max-image-preview": "large",
       "max-snippet": -1,
@@ -82,8 +111,10 @@ export const metadata: Metadata = {
     apple: [
       { url: "/apple-touch-icon.png", sizes: "180x180" },
     ],
+    shortcut: "/favicon.ico",
   },
   manifest: "/site.webmanifest",
+  category: "medical",
 };
 
 export const viewport: Viewport = {
@@ -98,10 +129,29 @@ export default function RootLayout({
   return (
         <html lang="en">
           <head>
+            {/* Critical resource hints for performance */}
             <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
             <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
             <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
             <link rel="preconnect" href="https://accounts.google.com" crossOrigin="anonymous" />
+            <link rel="preconnect" href="https://i.ytimg.com" crossOrigin="anonymous" />
+            
+            {/* Preload critical resources with fetchpriority */}
+            <link rel="preload" href="/images/logo.png" as="image" type="image/png" fetchPriority="high" />
+            <link rel="preload" href="/images/og-default.jpg" as="image" type="image/jpeg" fetchPriority="high" />
+            
+            {/* DNS prefetch for external domains */}
+            <link rel="dns-prefetch" href="//www.youtube.com" />
+            <link rel="dns-prefetch" href="//wa.me" />
+            <link rel="dns-prefetch" href="//www.google-analytics.com" />
+            <link rel="dns-prefetch" href="//www.googletagmanager.com" />
+            
+            {/* Additional performance hints */}
+            <meta name="format-detection" content="telephone=no" />
+            <meta name="mobile-web-app-capable" content="yes" />
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+            <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+            
             <Script src="https://accounts.google.com/gsi/client" strategy="lazyOnload" />
           </head>
       <body className={`${inter.variable} antialiased`}>

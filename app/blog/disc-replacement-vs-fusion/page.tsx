@@ -13,7 +13,7 @@ export const metadata = makeMetadata({
 });
 
 export default function Page() {
-  const url = 'https://www.drsayuj.com/blog/disc-replacement-vs-fusion';
+  const url = 'https://www.drsayuj.info/blog/disc-replacement-vs-fusion';
   
   const schemas = [
     {
@@ -23,8 +23,8 @@ export default function Page() {
       url,
       name: 'Disc Replacement vs Fusion Hyderabad',
       description: 'Compare disc replacement vs spinal fusion: benefits, risks, recovery, and candidacy with Dr. Sayuj Krishnan in Hyderabad.',
-      author: { '@id': 'https://www.drsayuj.com/#physician' },
-      publisher: { '@id': 'https://www.drsayuj.com/#physician' },
+      author: { '@id': 'https://www.drsayuj.info/#physician' },
+      publisher: { '@id': 'https://www.drsayuj.info/#physician' },
       datePublished: '2025-01-15',
       dateModified: '2025-01-15',
       mainEntityOfPage: url,
@@ -35,8 +35,8 @@ export default function Page() {
       '@type': 'BreadcrumbList',
       '@id': `${url}#breadcrumb`,
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.drsayuj.com/' },
-        { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://www.drsayuj.com/blog' },
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.drsayuj.info/' },
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://www.drsayuj.info/blog' },
         { '@type': 'ListItem', position: 3, name: 'Disc Replacement vs Fusion', item: url }
       ]
     }

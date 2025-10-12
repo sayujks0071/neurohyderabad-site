@@ -1,5 +1,5 @@
 const BOOK_URL =
-  "https://www.drsayuj.com/appointments?utm_source=site&utm_medium=cta&utm_campaign=nap_block";
+  "https://www.drsayuj.info/appointments?utm_source=site&utm_medium=cta&utm_campaign=nap_block";
 const WHATSAPP_URL = "https://wa.me/919778280044";
 const DIRECTIONS_URL =
   "/locations/neurosurgeon-hyderabad?utm_source=site&utm_medium=cta&utm_campaign=nap_block";

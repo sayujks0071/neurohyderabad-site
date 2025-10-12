@@ -14,7 +14,7 @@ export const metadata: Metadata = makeMetadata({
 });
 
 export default function NeurosurgeonNearKondapurFAQPage() {
-  const url = 'https://www.drsayuj.com/locations/neurosurgeon-near-kondapur-faq';
+  const url = 'https://www.drsayuj.info/locations/neurosurgeon-near-kondapur-faq';
   
   const schemas = [
     {
@@ -24,8 +24,8 @@ export default function NeurosurgeonNearKondapurFAQPage() {
       url,
       name: 'Neurosurgeon Near Kondapur FAQ | Dr. Sayuj Krishnan',
       description: 'Frequently asked questions about finding a neurosurgeon near Kondapur, Hyderabad. Expert answers from Dr. Sayuj Krishnan about brain and spine surgery options.',
-      author: { '@id': 'https://www.drsayuj.com/#physician' },
-      publisher: { '@id': 'https://www.drsayuj.com/#physician' },
+      author: { '@id': 'https://www.drsayuj.info/#physician' },
+      publisher: { '@id': 'https://www.drsayuj.info/#physician' },
       datePublished: '2025-01-15',
       dateModified: '2025-01-15',
       mainEntityOfPage: url,
@@ -36,8 +36,8 @@ export default function NeurosurgeonNearKondapurFAQPage() {
       '@type': 'BreadcrumbList',
       '@id': `${url}#breadcrumb`,
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.drsayuj.com/' },
-        { '@type': 'ListItem', position: 2, name: 'Locations', item: 'https://www.drsayuj.com/locations' },
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.drsayuj.info/' },
+        { '@type': 'ListItem', position: 2, name: 'Locations', item: 'https://www.drsayuj.info/locations' },
         { '@type': 'ListItem', position: 3, name: 'Neurosurgeon Near Kondapur FAQ', item: url }
       ]
     }
@@ -66,7 +66,7 @@ export default function NeurosurgeonNearKondapurFAQPage() {
     },
     {
       question: "How do I book an appointment with a neurosurgeon near Kondapur?",
-      answer: "You can book online at drsayuj.com/appointments, call +91 97782 80044, or visit Yashoda Hospital Malakpet. Dr. Sayuj offers flexible appointment timings and same-day consultations for urgent cases."
+      answer: "You can book online at www.drsayuj.info/appointments, call +91 97782 80044, or visit Yashoda Hospital Malakpet. Dr. Sayuj offers flexible appointment timings and same-day consultations for urgent cases."
     }
   ];
 

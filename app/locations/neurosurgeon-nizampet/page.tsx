@@ -10,10 +10,10 @@ export const metadata: Metadata = {
   description: 'Expert neurosurgeon near Nizampet, Hyderabad. Dr. Sayuj Krishnan provides advanced brain and spine surgery with minimally invasive techniques. Book consultation today.',
   keywords: 'neurosurgeon Nizampet, brain surgeon Nizampet, spine surgeon Nizampet, neurosurgeon near Nizampet, back pain doctor Nizampet, slip disc treatment Nizampet',
   alternates: {
-    canonical: 'https://www.drsayuj.com/locations/neurosurgeon-nizampet',
+    canonical: 'https://www.drsayuj.info/locations/neurosurgeon-nizampet',
     languages: {
-      'en-IN': 'https://www.drsayuj.com/locations/neurosurgeon-nizampet',
-      'x-default': 'https://www.drsayuj.com/locations/neurosurgeon-nizampet',
+      'en-IN': 'https://www.drsayuj.info/locations/neurosurgeon-nizampet',
+      'x-default': 'https://www.drsayuj.info/locations/neurosurgeon-nizampet',
     },
   },
   openGraph: {
@@ -27,8 +27,8 @@ const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "Dr. Sayuj Krishnan - Neurosurgeon",
-  "image": "https://www.drsayuj.com/images/og-default.jpg",
-  "url": "https://www.drsayuj.com/locations/neurosurgeon-nizampet",
+  "image": "https://www.drsayuj.info/images/og-default.jpg",
+  "url": "https://www.drsayuj.info/locations/neurosurgeon-nizampet",
   "telephone": "+919778280044",
   "address": {
     "@type": "PostalAddress",

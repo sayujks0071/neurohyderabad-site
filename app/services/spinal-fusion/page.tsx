@@ -13,7 +13,7 @@ export const metadata = makeMetadata({
 });
 
 export default function Page() {
-  const url = 'https://www.drsayuj.com/services/spinal-fusion';
+  const url = 'https://www.drsayuj.info/services/spinal-fusion';
   const schemas = spinalFusionSchemas(url);
 
   return (

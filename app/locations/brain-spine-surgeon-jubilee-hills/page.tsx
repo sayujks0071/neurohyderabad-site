@@ -10,10 +10,10 @@ export const metadata: Metadata = {
   description: 'Advanced brain and spine care near Jubilee Hills, Hyderabad. Directions to Yashoda Hospital, Malakpet. Parking, timings, and appointment info.',
   keywords: 'brain surgeon Jubilee Hills, spine surgeon Jubilee Hills, neurosurgeon near Jubilee Hills, Yashoda Hospital Malakpet, Hyderabad',
   alternates: {
-    canonical: 'https://www.drsayuj.com/locations/brain-spine-surgeon-jubilee-hills',
+    canonical: 'https://www.drsayuj.info/locations/brain-spine-surgeon-jubilee-hills',
     languages: {
-      'en-IN': 'https://www.drsayuj.com/locations/brain-spine-surgeon-jubilee-hills',
-      'x-default': 'https://www.drsayuj.com/locations/brain-spine-surgeon-jubilee-hills',
+      'en-IN': 'https://www.drsayuj.info/locations/brain-spine-surgeon-jubilee-hills',
+      'x-default': 'https://www.drsayuj.info/locations/brain-spine-surgeon-jubilee-hills',
     },
   },
   openGraph: {
@@ -27,8 +27,8 @@ const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "Dr. Sayuj Krishnan - Neurosurgeon",
-  "image": "https://www.drsayuj.com/images/og-default.jpg",
-  "url": "https://www.drsayuj.com/locations/brain-spine-surgeon-jubilee-hills",
+  "image": "https://www.drsayuj.info/images/og-default.jpg",
+  "url": "https://www.drsayuj.info/locations/brain-spine-surgeon-jubilee-hills",
   "telephone": "+919778280044",
   "address": {
     "@type": "PostalAddress",

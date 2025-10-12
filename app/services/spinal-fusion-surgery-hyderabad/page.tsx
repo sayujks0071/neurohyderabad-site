@@ -172,7 +172,7 @@ export default function SpinalFusionSurgeryPage() {
     "@type": "MedicalWebPage",
     "name": "Spinal Fusion Surgery in Hyderabad",
     "description": "Expert spinal fusion surgery including TLIF, PLIF, ALIF, and ACDF procedures for spinal instability and deformity in Hyderabad.",
-    "url": "https://www.drsayuj.com/services/spinal-fusion-surgery-hyderabad/",
+    "url": "https://www.drsayuj.info/services/spinal-fusion-surgery-hyderabad/",
     "mainEntity": {
       "@type": "MedicalBusiness",
       "name": "Dr. Sayuj Krishnan - Spinal Fusion Surgery",
@@ -202,7 +202,7 @@ export default function SpinalFusionSurgeryPage() {
       },
       "telephone": "+91-9778280044",
       "email": "neurospinehyd@drsayuj.com",
-      "url": "https://www.drsayuj.com"
+      "url": "https://www.drsayuj.info"
     },
     "breadcrumb": {
       "@type": "BreadcrumbList",
@@ -211,19 +211,19 @@ export default function SpinalFusionSurgeryPage() {
           "@type": "ListItem",
           "position": 1,
           "name": "Home",
-          "item": "https://www.drsayuj.com/"
+          "item": "https://www.drsayuj.info/"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "Services",
-          "item": "https://www.drsayuj.com/services/"
+          "item": "https://www.drsayuj.info/services/"
         },
         {
           "@type": "ListItem",
           "position": 3,
           "name": "Spinal Fusion Surgery",
-          "item": "https://www.drsayuj.com/services/spinal-fusion-surgery-hyderabad/"
+          "item": "https://www.drsayuj.info/services/spinal-fusion-surgery-hyderabad/"
         }
       ]
     },

@@ -183,6 +183,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.9,
     },
+    // Best neurosurgeon page
+    {
+      url: `${baseUrl}/best-neurosurgeon-in-hyderabad`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.95,
+    },
     {
       url: `${baseUrl}/about`,
       lastModified: now,

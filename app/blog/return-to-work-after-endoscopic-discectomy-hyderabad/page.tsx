@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: baseMetadata.title,
     description: baseMetadata.description,
-    url: 'https://www.drsayuj.com/blog/return-to-work-after-endoscopic-discectomy-hyderabad/',
+    url: 'https://www.drsayuj.info/blog/return-to-work-after-endoscopic-discectomy-hyderabad/',
     type: 'article',
     publishedTime: '2025-10-01T00:00:00.000Z',
     modifiedTime: '2025-10-01T00:00:00.000Z',
@@ -33,10 +33,10 @@ export const metadata: Metadata = {
     tags: ['endoscopic discectomy', 'recovery', 'return to work', 'hyderabad', 'rehabilitation']
   },
   alternates: {
-    canonical: 'https://www.drsayuj.com/blog/return-to-work-after-endoscopic-discectomy-hyderabad/',
+    canonical: 'https://www.drsayuj.info/blog/return-to-work-after-endoscopic-discectomy-hyderabad/',
     languages: {
-      'en-IN': 'https://www.drsayuj.com/blog/return-to-work-after-endoscopic-discectomy-hyderabad/',
-      'x-default': 'https://www.drsayuj.com/blog/return-to-work-after-endoscopic-discectomy-hyderabad/'
+      'en-IN': 'https://www.drsayuj.info/blog/return-to-work-after-endoscopic-discectomy-hyderabad/',
+      'x-default': 'https://www.drsayuj.info/blog/return-to-work-after-endoscopic-discectomy-hyderabad/'
     }
   }
 }
@@ -46,12 +46,12 @@ const blogPostingSchema = {
   "@type": "BlogPosting",
   "headline": "Return to Work After Endoscopic Discectomy in Hyderabad: A Practical Guide",
   "description": "Week‑by‑week recovery, desk vs manual timelines, red flags, and safe progressions after endoscopic discectomy in Hyderabad.",
-  "mainEntityOfPage": "https://www.drsayuj.com/blog/return-to-work-after-endoscopic-discectomy-hyderabad/",
-  "url": "https://www.drsayuj.com/blog/return-to-work-after-endoscopic-discectomy-hyderabad/",
+  "mainEntityOfPage": "https://www.drsayuj.info/blog/return-to-work-after-endoscopic-discectomy-hyderabad/",
+  "url": "https://www.drsayuj.info/blog/return-to-work-after-endoscopic-discectomy-hyderabad/",
   "datePublished": "2025-10-01",
   "dateModified": "2025-10-01",
-  "author": { "@id": "https://www.drsayuj.com/#physician" },
-  "publisher": { "@id": "https://www.drsayuj.com/#hospital" },
+  "author": { "@id": "https://www.drsayuj.info/#physician" },
+  "publisher": { "@id": "https://www.drsayuj.info/#hospital" },
   "articleSection": "Spine Surgery",
   "wordCount": "1200",
   "citation": [
