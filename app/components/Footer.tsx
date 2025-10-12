@@ -44,7 +44,7 @@ export default function Footer() {
                   WhatsApp
                 </a>
                 <a
-                  href="/locations/neurosurgeon-hyderabad?utm_source=site&utm_medium=cta&utm_campaign=footer_nap"
+                  href="https://www.drsayuj.info/locations?utm_source=site&utm_medium=cta&utm_campaign=footer_nap"
                   className="rounded-full border border-gray-500 px-4 py-2 text-sm font-semibold text-gray-100 hover:bg-gray-800"
                 >
                   Get Directions

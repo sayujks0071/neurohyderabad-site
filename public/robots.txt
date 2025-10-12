@@ -1,38 +1,9 @@
+# *
 User-agent: *
 Allow: /
 
-# Disallow admin and draft content
-Disallow: /drafts/
-Disallow: /api/
-Disallow: /_next/
-Disallow: /admin/
+# Host
+Host: https://www.drsayuj.info
 
-# Allow important pages
-Allow: /services/
-Allow: /conditions/
-Allow: /locations/
-Allow: /blog/
-Allow: /patient-stories/
-Allow: /appointments/
-Allow: /ai-chat/
-
-# Sitemap location
+# Sitemaps
 Sitemap: https://www.drsayuj.info/sitemap.xml
-
-# Crawl delay for respectful crawling
-Crawl-delay: 1
-
-# Specific bot instructions
-User-agent: Googlebot
-Allow: /
-Crawl-delay: 0
-
-User-agent: Bingbot
-Allow: /
-Crawl-delay: 1
-
-User-agent: facebookexternalhit
-Allow: /
-
-User-agent: Twitterbot
-Allow: /

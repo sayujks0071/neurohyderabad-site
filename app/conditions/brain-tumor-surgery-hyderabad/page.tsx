@@ -197,6 +197,26 @@ export const metadata: Metadata = {
       "Advanced neurosurgical care including awake craniotomy, endoscopic techniques, and multidisciplinary tumour board support.",
     url: CANONICAL,
     type: "article",
+    images: [
+      {
+        url: `${SITE_URL}/images/og-default.jpg`,
+        width: 1200,
+        height: 630,
+        alt: "Brain Tumor Surgery — Dr Sayuj Krishnan",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Brain Tumor Surgery in Hyderabad",
+    description:
+      "Advanced neurosurgical care including awake craniotomy, endoscopic techniques, and multidisciplinary tumour board support.",
+    images: [
+      {
+        url: `${SITE_URL}/images/og-default.jpg`,
+        alt: "Brain Tumor Surgery — Dr Sayuj Krishnan",
+      },
+    ],
   },
 };
 

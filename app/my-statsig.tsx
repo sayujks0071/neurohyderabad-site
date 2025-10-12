@@ -1,41 +1,77 @@
 "use client";
 
-import React from "react";
-import { LogLevel, StatsigProvider } from "@statsig/react-bindings";
+import React, { useEffect, useMemo, useState } from "react";
+
+type StatsigModule = typeof import("@statsig/react-bindings");
 
 export default function MyStatsig({ children }: { children: React.ReactNode }) {
-  // Generate a randomized user ID for better analytics
-  const generateUserId = () => {
-    if (typeof window !== 'undefined') {
-      // Try to get existing user ID from localStorage
-      let userId = localStorage.getItem('statsig-user-id');
-      if (!userId) {
-        // Generate new random user ID
-        userId = `user_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-        localStorage.setItem('statsig-user-id', userId);
-      }
-      return userId;
-    }
-    // Fallback for SSR
-    return `ssr_user_${Date.now()}`;
-  };
+  const [statsig, setStatsig] = useState<StatsigModule | null>(null);
 
-  const id = generateUserId();
+  useEffect(() => {
+    let mounted = true;
 
-  const user = {
-    userID: id,
-    custom: {
-      session_id: typeof window !== 'undefined' ? Date.now().toString() : 'ssr',
-      user_agent: typeof window !== 'undefined' ? window.navigator.userAgent : 'ssr',
-      timestamp: new Date().toISOString(),
+    if (!process.env.NEXT_PUBLIC_STATSIG_CLIENT_KEY) {
+      return () => {
+        mounted = false;
+      };
     }
-  };
+
+    import("@statsig/react-bindings")
+      .then((module) => {
+        if (mounted) {
+          setStatsig(module);
+        }
+      })
+      .catch((error) => {
+        if (process.env.NODE_ENV !== "production") {
+          console.warn("Failed to load Statsig provider", error);
+        }
+      });
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  const user = useMemo(() => {
+    if (typeof window === "undefined") {
+      return {
+        userID: `ssr_user_${Date.now()}`,
+        custom: {
+          session_id: "ssr",
+          user_agent: "ssr",
+          timestamp: new Date().toISOString(),
+        },
+      };
+    }
+
+    let userId = localStorage.getItem("statsig-user-id");
+    if (!userId) {
+      userId = `user_${Date.now()}_${Math.random().toString(36).slice(2, 11)}`;
+      localStorage.setItem("statsig-user-id", userId);
+    }
+
+    return {
+      userID: userId,
+      custom: {
+        session_id: Date.now().toString(),
+        user_agent: window.navigator.userAgent,
+        timestamp: new Date().toISOString(),
+      },
+    };
+  }, []);
+
+  if (!process.env.NEXT_PUBLIC_STATSIG_CLIENT_KEY || !statsig) {
+    return <>{children}</>;
+  }
+
+  const { StatsigProvider, LogLevel } = statsig;
 
   return (
     <StatsigProvider
-      sdkKey={process.env.NEXT_PUBLIC_STATSIG_CLIENT_KEY!}
+      sdkKey={process.env.NEXT_PUBLIC_STATSIG_CLIENT_KEY}
       user={user}
-      options={{ logLevel: LogLevel.Debug }}
+      options={{ logLevel: LogLevel.Error }}
     >
       {children}
     </StatsigProvider>
