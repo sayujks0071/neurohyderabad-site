@@ -14,15 +14,17 @@ const nextConfig = {
     optimizePackageImports: ['@/components', '@/lib'],
     // Enable partial pre-rendering for better performance
     ppr: false,
-    // Optimize server components
-    serverComponentsExternalPackages: ['@openai/agents'],
-    // Enable turbo mode for faster builds
-    turbo: {
-      rules: {
-        '*.svg': {
-          loaders: ['@svgr/webpack'],
-          as: '*.js',
-        },
+  },
+  
+  // Server external packages (moved from experimental)
+  serverExternalPackages: ['@openai/agents'],
+  
+  // Turbopack configuration (moved from experimental)
+  turbopack: {
+    rules: {
+      '*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js',
       },
     },
   },
