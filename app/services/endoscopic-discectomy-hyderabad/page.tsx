@@ -8,8 +8,8 @@ import { makeMetadata } from '@/app/_lib/meta';
 import ServicePageTracker from '../../../src/components/ServicePageTracker';
 
 const baseMetadata = makeMetadata({
-  title: 'Endoscopic Discectomy in Hyderabad | Minimally Invasive Disc Surgery',
-  description: 'Expert endoscopic discectomy for herniated discs in Hyderabad. Same-day surgery, faster recovery, less pain.',
+  title: 'Endoscopic Discectomy Hyderabad | Dr. Sayuj Krishnan',
+  description: 'Expert endoscopic discectomy for herniated discs in Hyderabad. Same-day surgery, faster recovery, less pain with Dr. Sayuj Krishnan.',
   canonicalPath: '/services/endoscopic-discectomy-hyderabad',
 });
 

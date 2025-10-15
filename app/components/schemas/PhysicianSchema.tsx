@@ -38,17 +38,30 @@ export default function PhysicianSchema() {
           {
             "@type": "EducationalOccupationalCredential",
             "credentialCategory": "degree",
-            "educationalLevel": "MBBS"
+            "educationalLevel": "MBBS",
+            "recognizedBy": {
+              "@type": "Organization",
+              "name": "Medical Council of India"
+            }
           },
           {
             "@type": "EducationalOccupationalCredential",
             "credentialCategory": "degree",
-            "educationalLevel": "DNB Neurosurgery"
+            "educationalLevel": "DNB Neurosurgery",
+            "recognizedBy": {
+              "@type": "Organization",
+              "name": "National Board of Examinations"
+            }
           },
           {
             "@type": "EducationalOccupationalCredential",
             "credentialCategory": "certification",
             "educationalLevel": "Fellowship in Minimally Invasive Spine Surgery"
+          },
+          {
+            "@type": "EducationalOccupationalCredential",
+            "credentialCategory": "certification",
+            "educationalLevel": "Advanced Endoscopic Spine Surgery Training"
           }
         ],
         "memberOf": [

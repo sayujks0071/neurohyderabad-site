@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   title: 'Patient Success Stories | Neurosurgery & Spine Surgery Hyderabad',
   description: 'Real patient stories of successful neurosurgery and spine surgery outcomes at Yashoda Hospital Malakpet with Dr. Sayuj Krishnan.',
   keywords: 'patient stories, neurosurgery success, spine surgery outcomes, brain surgery recovery, Hyderabad',
+  alternates: {
+    canonical: 'https://www.drsayuj.info/patient-stories',
+  },
   openGraph: {
     title: 'Patient Success Stories | Dr. Sayuj Krishnan',
     description: 'Real patient stories of successful neurosurgery and spine surgery outcomes in Hyderabad.',

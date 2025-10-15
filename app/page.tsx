@@ -20,8 +20,8 @@ import TrustSignals from "./_components/TrustSignals";
 const HOME_CANONICAL = SITE_URL.endsWith("/") ? SITE_URL : `${SITE_URL}/`;
 
 export const metadata = {
-  title: 'Best Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan | Brain & Spine Surgery',
-  description: 'Dr. Sayuj Krishnan is the best neurosurgeon in Hyderabad specializing in endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures. Same-day discharge available at Yashoda Hospital Malakpet. Book consultation now.',
+  title: 'Best Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan',
+  description: 'Dr. Sayuj Krishnan is the best neurosurgeon in Hyderabad specializing in endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures. Same-day discharge at Yashoda Hospital Malakpet.',
   keywords: [
     'best neurosurgeon hyderabad',
     'dr sayuj krishnan',
@@ -146,9 +146,9 @@ export default function Home() {
                   Dr. Sayuj Krishnan — Best Neurosurgeon in Hyderabad | Brain & Spine Surgery Expert
                 </h1>
                 <p className="text-xl md:text-2xl mb-8">
-                  Dr Sayuj Krishnan — Leading Expert in Minimally Invasive Neurosurgery
+                  Dr Sayuj Krishnan — Leading Expert in <Link href="/services/minimally-invasive-spine-surgery" className="underline hover:text-blue-200">Minimally Invasive Neurosurgery</Link>
                   <br />
-                  Specializing in Endoscopic Spine Surgery, Brain Tumor Surgery & Epilepsy Treatment
+                  Specializing in <Link href="/services/endoscopic-discectomy-hyderabad" className="underline hover:text-blue-200">Endoscopic Spine Surgery</Link>, <Link href="/services/brain-tumor-surgery-hyderabad" className="underline hover:text-blue-200">Brain Tumor Surgery</Link> & <Link href="/services/epilepsy-surgery-hyderabad" className="underline hover:text-blue-200">Epilepsy Treatment</Link>
                 </p>
                 {/* <HeroCTA /> */}
                 <div className="space-y-4">
@@ -192,7 +192,9 @@ export default function Home() {
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-12">Endoscopic Spine Surgery & Minimally Invasive Procedures (MISS)</h2>
+            <h2 className="text-3xl font-bold text-center mb-12">
+              <Link href="/services/minimally-invasive-spine-surgery" className="hover:text-blue-600">Endoscopic Spine Surgery</Link> & Minimally Invasive Procedures (MISS)
+            </h2>
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
                   <div className="mb-6">

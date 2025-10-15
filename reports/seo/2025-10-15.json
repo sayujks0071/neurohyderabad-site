@@ -1,0 +1,2010 @@
+{
+  "timestamp": "2025-10-15T19:06:34.306Z",
+  "site": "https://www.drsayuj.info",
+  "pages": [
+    {
+      "url": "https://www.drsayuj.info",
+      "statusCode": 200,
+      "size": 201811,
+      "issues": [
+        "Title too long (over 60 characters)",
+        "Meta description too long (over 160 characters)"
+      ],
+      "recommendations": [],
+      "metrics": {
+        "title": {
+          "text": "Best Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan | Brain & Spine Surgery",
+          "length": 75,
+          "hasKeyword": true,
+          "position": "good"
+        },
+        "metaDescription": {
+          "text": "Dr. Sayuj Krishnan is the best neurosurgeon in Hyderabad specializing in endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures. Same-day discharge available at Yashoda Hospital Malakpet. Book consultation now.",
+          "length": 236,
+          "hasKeyword": true
+        },
+        "headings": {
+          "h1Count": 1,
+          "h2Count": 14,
+          "h3Count": 41,
+          "h1Text": "Dr. Sayuj Krishnan — Best Neurosurgeon in Hyderabad | Brain & Spine Surgery Expert"
+        },
+        "canonical": "https://www.drsayuj.info",
+        "images": {
+          "total": 4,
+          "withoutAlt": 0,
+          "withoutAltPercentage": "0.0"
+        },
+        "links": {
+          "total": 88,
+          "internal": 64,
+          "internalPercentage": "72.7"
+        },
+        "schema": {
+          "count": 5,
+          "types": [
+            "WebSite",
+            "Hospital",
+            "FAQPage",
+            "FAQPage"
+          ]
+        },
+        "content": {
+          "wordCount": 7564,
+          "hasKeywordInFirst100": true
+        }
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/services/minimally-invasive-spine-surgery",
+      "statusCode": 200,
+      "size": 97563,
+      "issues": [
+        "Title too long (over 60 characters)",
+        "Meta description too short (under 120 characters)"
+      ],
+      "recommendations": [],
+      "metrics": {
+        "title": {
+          "text": "Endoscopic Spine Surgery Hyderabad | MISS | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+          "length": 87,
+          "hasKeyword": true,
+          "position": "good"
+        },
+        "metaDescription": {
+          "text": "Day-care endoscopic discectomy, foraminotomy, and ULBD with Dr Sayuj Krishnan at Yashoda Hospital Malakpet.",
+          "length": 107,
+          "hasKeyword": false
+        },
+        "headings": {
+          "h1Count": 1,
+          "h2Count": 10,
+          "h3Count": 21,
+          "h1Text": "Minimally Invasive Spine Surgery"
+        },
+        "canonical": "https://www.drsayuj.info/services/minimally-invasive-spine-surgery",
+        "images": {
+          "total": 1,
+          "withoutAlt": 0,
+          "withoutAltPercentage": "0.0"
+        },
+        "links": {
+          "total": 62,
+          "internal": 54,
+          "internalPercentage": "87.1"
+        },
+        "schema": {
+          "count": 3,
+          "types": [
+            "WebSite",
+            "Hospital"
+          ]
+        },
+        "content": {
+          "wordCount": 2458,
+          "hasKeywordInFirst100": true
+        }
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/services/endoscopic-discectomy-hyderabad",
+      "statusCode": 200,
+      "size": 83764,
+      "issues": [
+        "Title too long (over 60 characters)",
+        "Meta description too short (under 120 characters)"
+      ],
+      "recommendations": [],
+      "metrics": {
+        "title": {
+          "text": "Endoscopic Discectomy in Hyderabad | Minimally Invasive Dis… | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+          "length": 106,
+          "hasKeyword": true,
+          "position": "good"
+        },
+        "metaDescription": {
+          "text": "Expert endoscopic discectomy for herniated discs in Hyderabad. Same-day surgery, faster recovery, less pain.",
+          "length": 108,
+          "hasKeyword": true
+        },
+        "headings": {
+          "h1Count": 1,
+          "h2Count": 8,
+          "h3Count": 23,
+          "h1Text": "Endoscopic Discectomy in Hyderabad"
+        },
+        "canonical": "https://www.drsayuj.info/services/endoscopic-discectomy-hyderabad",
+        "images": {
+          "total": 1,
+          "withoutAlt": 0,
+          "withoutAltPercentage": "0.0"
+        },
+        "links": {
+          "total": 54,
+          "internal": 46,
+          "internalPercentage": "85.2"
+        },
+        "schema": {
+          "count": 3,
+          "types": [
+            "WebSite",
+            "Hospital"
+          ]
+        },
+        "content": {
+          "wordCount": 2108,
+          "hasKeywordInFirst100": true
+        }
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad",
+      "statusCode": 200,
+      "size": 118184,
+      "issues": [
+        "Title too long (over 60 characters)",
+        "Meta description too short (under 120 characters)"
+      ],
+      "recommendations": [],
+      "metrics": {
+        "title": {
+          "text": "Brain Tumor Surgery in Hyderabad | Microsurgery & Radiosurg… | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+          "length": 106,
+          "hasKeyword": true,
+          "position": "good"
+        },
+        "metaDescription": {
+          "text": "Brain tumor surgery with neuronavigation and neuromonitoring in Hyderabad. Risks, recovery, and alternatives explained.",
+          "length": 119,
+          "hasKeyword": true
+        },
+        "headings": {
+          "h1Count": 1,
+          "h2Count": 15,
+          "h3Count": 32,
+          "h1Text": "Brain Tumor Surgery in Hyderabad"
+        },
+        "canonical": "https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad",
+        "images": {
+          "total": 1,
+          "withoutAlt": 0,
+          "withoutAltPercentage": "0.0"
+        },
+        "links": {
+          "total": 60,
+          "internal": 50,
+          "internalPercentage": "83.3"
+        },
+        "schema": {
+          "count": 4,
+          "types": [
+            "WebSite",
+            "Hospital",
+            "MedicalWebPage"
+          ]
+        },
+        "content": {
+          "wordCount": 3840,
+          "hasKeywordInFirst100": true
+        }
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/services/epilepsy-surgery-hyderabad",
+      "statusCode": 200,
+      "size": 91819,
+      "issues": [
+        "Title too long (over 60 characters)"
+      ],
+      "recommendations": [],
+      "metrics": {
+        "title": {
+          "text": "Epilepsy Surgery in Hyderabad | Drug-Resistant Epilepsy Tre… | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+          "length": 106,
+          "hasKeyword": true,
+          "position": "good"
+        },
+        "metaDescription": {
+          "text": "Expert epilepsy surgery for drug-resistant epilepsy in Hyderabad. LITT, resection surgery, VNS. Comprehensive evaluation and advanced techniques.",
+          "length": 145,
+          "hasKeyword": true
+        },
+        "headings": {
+          "h1Count": 1,
+          "h2Count": 8,
+          "h3Count": 18,
+          "h1Text": "Epilepsy Surgery in Hyderabad"
+        },
+        "canonical": "https://www.drsayuj.info/services/epilepsy-surgery-hyderabad",
+        "images": {
+          "total": 1,
+          "withoutAlt": 0,
+          "withoutAltPercentage": "0.0"
+        },
+        "links": {
+          "total": 53,
+          "internal": 45,
+          "internalPercentage": "84.9"
+        },
+        "schema": {
+          "count": 3,
+          "types": [
+            "WebSite",
+            "Hospital"
+          ]
+        },
+        "content": {
+          "wordCount": 2345,
+          "hasKeywordInFirst100": true
+        }
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/services/peripheral-nerve-surgery-hyderabad",
+      "statusCode": 200,
+      "size": 135892,
+      "issues": [
+        "Title too long (over 60 characters)",
+        "Meta description too short (under 120 characters)"
+      ],
+      "recommendations": [],
+      "metrics": {
+        "title": {
+          "text": "Peripheral Nerve Surgery in Hyderabad | Carpal Tunnel, Ulna… | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+          "length": 106,
+          "hasKeyword": true,
+          "position": "good"
+        },
+        "metaDescription": {
+          "text": "Carpal tunnel release, ulnar nerve decompression, nerve tumor surgery, and nerve repair options in Hyderabad.",
+          "length": 109,
+          "hasKeyword": true
+        },
+        "headings": {
+          "h1Count": 1,
+          "h2Count": 11,
+          "h3Count": 31,
+          "h1Text": "Peripheral Nerve Surgery in Hyderabad"
+        },
+        "canonical": "https://www.drsayuj.info/services/peripheral-nerve-surgery-hyderabad",
+        "images": {
+          "total": 1,
+          "withoutAlt": 0,
+          "withoutAltPercentage": "0.0"
+        },
+        "links": {
+          "total": 51,
+          "internal": 44,
+          "internalPercentage": "86.3"
+        },
+        "schema": {
+          "count": 4,
+          "types": [
+            "WebSite",
+            "Hospital",
+            "MedicalWebPage"
+          ]
+        },
+        "content": {
+          "wordCount": 3646,
+          "hasKeywordInFirst100": true
+        }
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/services/spinal-fusion-surgery-hyderabad",
+      "statusCode": 200,
+      "size": 143610,
+      "issues": [
+        "Title too long (over 60 characters)",
+        "Meta description too short (under 120 characters)"
+      ],
+      "recommendations": [],
+      "metrics": {
+        "title": {
+          "text": "Spinal Fusion Surgery in Hyderabad | TLIF, PLIF, ALIF, ACDF | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+          "length": 105,
+          "hasKeyword": true,
+          "position": "good"
+        },
+        "metaDescription": {
+          "text": "Fusion options for instability, spondylolisthesis, and deformity with Dr. Sayuj Krishnan in Hyderabad.",
+          "length": 102,
+          "hasKeyword": true
+        },
+        "headings": {
+          "h1Count": 1,
+          "h2Count": 11,
+          "h3Count": 34,
+          "h1Text": "Spinal Fusion Surgery in Hyderabad"
+        },
+        "canonical": "https://www.drsayuj.info/services/spinal-fusion-surgery-hyderabad",
+        "images": {
+          "total": 1,
+          "withoutAlt": 0,
+          "withoutAltPercentage": "0.0"
+        },
+        "links": {
+          "total": 49,
+          "internal": 43,
+          "internalPercentage": "87.8"
+        },
+        "schema": {
+          "count": 4,
+          "types": [
+            "WebSite",
+            "Hospital",
+            "MedicalWebPage"
+          ]
+        },
+        "content": {
+          "wordCount": 4044,
+          "hasKeywordInFirst100": true
+        }
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/conditions/brain-tumor-surgery-hyderabad",
+      "statusCode": 200,
+      "size": 90696,
+      "issues": [
+        "Title too long (over 60 characters)",
+        "Meta description too long (over 160 characters)"
+      ],
+      "recommendations": [],
+      "metrics": {
+        "title": {
+          "text": "Brain Tumor Surgery Hyderabad — Microsurgical & Radiosurgery Care | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+          "length": 111,
+          "hasKeyword": true,
+          "position": "good"
+        },
+        "metaDescription": {
+          "text": "Comprehensive brain tumour evaluation, neuronavigation-guided microsurgery, radiosurgery, and rehabilitation with Dr. Sayuj Krishnan at Yashoda Hospital, Hyderabad.",
+          "length": 164,
+          "hasKeyword": true
+        },
+        "headings": {
+          "h1Count": 1,
+          "h2Count": 8,
+          "h3Count": 15,
+          "h1Text": "Brain Tumor Surgery in Hyderabad"
+        },
+        "canonical": "https://www.drsayuj.info/conditions/brain-tumor-surgery-hyderabad",
+        "images": {
+          "total": 1,
+          "withoutAlt": 0,
+          "withoutAltPercentage": "0.0"
+        },
+        "links": {
+          "total": 57,
+          "internal": 46,
+          "internalPercentage": "80.7"
+        },
+        "schema": {
+          "count": 4,
+          "types": [
+            "WebSite",
+            "Hospital"
+          ]
+        },
+        "content": {
+          "wordCount": 2752,
+          "hasKeywordInFirst100": true
+        }
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/conditions/trigeminal-neuralgia-treatment-hyderabad",
+      "statusCode": 200,
+      "size": 90761,
+      "issues": [
+        "Title too long (over 60 characters)",
+        "Meta description too long (over 160 characters)"
+      ],
+      "recommendations": [],
+      "metrics": {
+        "title": {
+          "text": "Trigeminal Neuralgia Treatment Hyderabad — Facial Pain Care | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+          "length": 105,
+          "hasKeyword": true,
+          "position": "good"
+        },
+        "metaDescription": {
+          "text": "Relief options including medicines, microvascular decompression, stereotactic radiosurgery and percutaneous procedures delivered in Hyderabad by Dr. Sayuj Krishnan.",
+          "length": 164,
+          "hasKeyword": true
+        },
+        "headings": {
+          "h1Count": 1,
+          "h2Count": 6,
+          "h3Count": 16,
+          "h1Text": "Trigeminal Neuralgia Treatment in Hyderabad"
+        },
+        "canonical": "https://www.drsayuj.info/conditions/trigeminal-neuralgia-treatment-hyderabad",
+        "images": {
+          "total": 1,
+          "withoutAlt": 0,
+          "withoutAltPercentage": "0.0"
+        },
+        "links": {
+          "total": 58,
+          "internal": 47,
+          "internalPercentage": "81.0"
+        },
+        "schema": {
+          "count": 4,
+          "types": [
+            "WebSite",
+            "Hospital"
+          ]
+        },
+        "content": {
+          "wordCount": 2898,
+          "hasKeywordInFirst100": true
+        }
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/conditions/cervical-radiculopathy-treatment-hyderabad",
+      "statusCode": 200,
+      "size": 88183,
+      "issues": [
+        "Title too long (over 60 characters)"
+      ],
+      "recommendations": [],
+      "metrics": {
+        "title": {
+          "text": "Cervical Radiculopathy Treatment Hyderabad — Neck & Arm Pain Relief | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+          "length": 113,
+          "hasKeyword": true,
+          "position": "good"
+        },
+        "metaDescription": {
+          "text": "Comprehensive evaluation, conservative therapy, and minimally invasive surgery for cervical radiculopathy with Dr. Sayuj Krishnan at Yashoda Hospital, Malakpet.",
+          "length": 160,
+          "hasKeyword": false
+        },
+        "headings": {
+          "h1Count": 1,
+          "h2Count": 7,
+          "h3Count": 14,
+          "h1Text": "Cervical Radiculopathy Treatment in Hyderabad"
+        },
+        "canonical": "https://www.drsayuj.info/conditions/cervical-radiculopathy-treatment-hyderabad",
+        "images": {
+          "total": 1,
+          "withoutAlt": 0,
+          "withoutAltPercentage": "0.0"
+        },
+        "links": {
+          "total": 57,
+          "internal": 46,
+          "internalPercentage": "80.7"
+        },
+        "schema": {
+          "count": 4,
+          "types": [
+            "WebSite",
+            "Hospital"
+          ]
+        },
+        "content": {
+          "wordCount": 2561,
+          "hasKeywordInFirst100": true
+        }
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/conditions/sciatica-treatment-hyderabad",
+      "statusCode": 200,
+      "size": 66379,
+      "issues": [
+        "Title too long (over 60 characters)",
+        "Meta description too short (under 120 characters)",
+        "Canonical URL mismatch"
+      ],
+      "recommendations": [],
+      "metrics": {
+        "title": {
+          "text": "Sciatica Treatment in Hyderabad | Expert Pain Relief & Surg… | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+          "length": 106,
+          "hasKeyword": true,
+          "position": "good"
+        },
+        "metaDescription": {
+          "text": "Conservative care, injections, and endoscopic surgery for sciatica tailored by Dr. Sayuj Krishnan in Hyderabad.",
+          "length": 111,
+          "hasKeyword": true
+        },
+        "headings": {
+          "h1Count": 1,
+          "h2Count": 3,
+          "h3Count": 6,
+          "h1Text": "Sciatica Treatment in Hyderabad"
+        },
+        "canonical": "https://www.drsayuj.info/conditions/sciatica-treatment-hyderabad/",
+        "images": {
+          "total": 1,
+          "withoutAlt": 0,
+          "withoutAltPercentage": "0.0"
+        },
+        "links": {
+          "total": 55,
+          "internal": 47,
+          "internalPercentage": "85.5"
+        },
+        "schema": {
+          "count": 3,
+          "types": [
+            "WebSite",
+            "Hospital"
+          ]
+        },
+        "content": {
+          "wordCount": 1301,
+          "hasKeywordInFirst100": true
+        }
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/conditions/slip-disc-treatment-hyderabad",
+      "statusCode": 200,
+      "size": 89541,
+      "issues": [
+        "Title too long (over 60 characters)",
+        "Meta description too short (under 120 characters)",
+        "Canonical URL mismatch"
+      ],
+      "recommendations": [],
+      "metrics": {
+        "title": {
+          "text": "Slip Disc Treatment in Hyderabad | Endoscopic Discectomy |… | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+          "length": 105,
+          "hasKeyword": true,
+          "position": "good"
+        },
+        "metaDescription": {
+          "text": "Minimally invasive endoscopic discectomy, rehab, and conservative care plans for slip disc patients in Hyderabad.",
+          "length": 113,
+          "hasKeyword": true
+        },
+        "headings": {
+          "h1Count": 1,
+          "h2Count": 6,
+          "h3Count": 16,
+          "h1Text": "Slip Disc Treatment in Hyderabad | Endoscopic Discectomy"
+        },
+        "canonical": "https://www.drsayuj.info/conditions/slip-disc-treatment-hyderabad/",
+        "images": {
+          "total": 1,
+          "withoutAlt": 0,
+          "withoutAltPercentage": "0.0"
+        },
+        "links": {
+          "total": 49,
+          "internal": 42,
+          "internalPercentage": "85.7"
+        },
+        "schema": {
+          "count": 6,
+          "types": [
+            "WebSite",
+            "Hospital",
+            "MedicalWebPage",
+            "FAQPage",
+            "BreadcrumbList"
+          ]
+        },
+        "content": {
+          "wordCount": 2696,
+          "hasKeywordInFirst100": true
+        }
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/conditions/spinal-stenosis-treatment-hyderabad",
+      "statusCode": 200,
+      "size": 65078,
+      "issues": [
+        "Title too long (over 60 characters)",
+        "Meta description too short (under 120 characters)",
+        "Canonical URL mismatch"
+      ],
+      "recommendations": [],
+      "metrics": {
+        "title": {
+          "text": "Spinal Stenosis Treatment in Hyderabad | Expert Care & Surg… | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+          "length": 106,
+          "hasKeyword": true,
+          "position": "good"
+        },
+        "metaDescription": {
+          "text": "Conservative care, injections, and endoscopic ULBD decompression for spinal stenosis in Hyderabad.",
+          "length": 98,
+          "hasKeyword": true
+        },
+        "headings": {
+          "h1Count": 1,
+          "h2Count": 3,
+          "h3Count": 6,
+          "h1Text": "Spinal Stenosis Treatment in Hyderabad"
+        },
+        "canonical": "https://www.drsayuj.info/conditions/spinal-stenosis-treatment-hyderabad/",
+        "images": {
+          "total": 1,
+          "withoutAlt": 0,
+          "withoutAltPercentage": "0.0"
+        },
+        "links": {
+          "total": 52,
+          "internal": 44,
+          "internalPercentage": "84.6"
+        },
+        "schema": {
+          "count": 3,
+          "types": [
+            "WebSite",
+            "Hospital"
+          ]
+        },
+        "content": {
+          "wordCount": 1262,
+          "hasKeywordInFirst100": true
+        }
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/symptoms/signs-of-brain-tumor",
+      "statusCode": 200,
+      "size": 82878,
+      "issues": [
+        "Title too long (over 60 characters)"
+      ],
+      "recommendations": [],
+      "metrics": {
+        "title": {
+          "text": "Signs of Brain Tumor — When to Seek a Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+          "length": 109,
+          "hasKeyword": true,
+          "position": "good"
+        },
+        "metaDescription": {
+          "text": "Understand early warning signs, emergency red flags, and the diagnostic pathway for suspected brain tumours with Dr. Sayuj Krishnan in Hyderabad.",
+          "length": 145,
+          "hasKeyword": true
+        },
+        "headings": {
+          "h1Count": 1,
+          "h2Count": 6,
+          "h3Count": 8,
+          "h1Text": "Signs of a Brain Tumor"
+        },
+        "canonical": "https://www.drsayuj.info/symptoms/signs-of-brain-tumor",
+        "images": {
+          "total": 1,
+          "withoutAlt": 0,
+          "withoutAltPercentage": "0.0"
+        },
+        "links": {
+          "total": 55,
+          "internal": 45,
+          "internalPercentage": "81.8"
+        },
+        "schema": {
+          "count": 4,
+          "types": [
+            "WebSite",
+            "Hospital"
+          ]
+        },
+        "content": {
+          "wordCount": 2499,
+          "hasKeywordInFirst100": true
+        }
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/symptoms/pain-on-top-of-head-causes",
+      "statusCode": 200,
+      "size": 89373,
+      "issues": [
+        "Title too long (over 60 characters)"
+      ],
+      "recommendations": [],
+      "metrics": {
+        "title": {
+          "text": "Pain on Top of Head Causes — Vertex Headache Guide Hyderabad | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+          "length": 106,
+          "hasKeyword": true,
+          "position": "good"
+        },
+        "metaDescription": {
+          "text": "Explore posture, migraine, cervicogenic, and occipital neuralgia causes of vertex headaches, plus red flags needing neurosurgical review in Hyderabad.",
+          "length": 150,
+          "hasKeyword": true
+        },
+        "headings": {
+          "h1Count": 1,
+          "h2Count": 8,
+          "h3Count": 16,
+          "h1Text": "Pain on Top of the Head — Causes & Next Steps"
+        },
+        "canonical": "https://www.drsayuj.info/symptoms/pain-on-top-of-head-causes",
+        "images": {
+          "total": 1,
+          "withoutAlt": 0,
+          "withoutAltPercentage": "0.0"
+        },
+        "links": {
+          "total": 55,
+          "internal": 45,
+          "internalPercentage": "81.8"
+        },
+        "schema": {
+          "count": 4,
+          "types": [
+            "WebSite",
+            "Hospital"
+          ]
+        },
+        "content": {
+          "wordCount": 2823,
+          "hasKeywordInFirst100": true
+        }
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/locations",
+      "statusCode": 200,
+      "size": 65641,
+      "issues": [
+        "Title too long (over 60 characters)"
+      ],
+      "recommendations": [],
+      "metrics": {
+        "title": {
+          "text": "Neurosurgeon Locations in Hyderabad | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+          "length": 102,
+          "hasKeyword": true,
+          "position": "good"
+        },
+        "metaDescription": {
+          "text": "Expert neurosurgeon Dr. Sayuj Krishnan serves patients across Hyderabad including Banjara Hills, Hitec City, Jubilee Hills, and Malakpet. Book consultation.",
+          "length": 156,
+          "hasKeyword": true
+        },
+        "headings": {
+          "h1Count": 1,
+          "h2Count": 5,
+          "h3Count": 8,
+          "h1Text": "Neurosurgeon Locations in Hyderabad"
+        },
+        "canonical": "https://www.drsayuj.info/locations",
+        "images": {
+          "total": 1,
+          "withoutAlt": 0,
+          "withoutAltPercentage": "0.0"
+        },
+        "links": {
+          "total": 54,
+          "internal": 47,
+          "internalPercentage": "87.0"
+        },
+        "schema": {
+          "count": 4,
+          "types": [
+            "WebSite",
+            "Hospital"
+          ]
+        },
+        "content": {
+          "wordCount": 1344,
+          "hasKeywordInFirst100": true
+        }
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/locations/brain-spine-surgeon-banjara-hills",
+      "statusCode": 200,
+      "size": 85745,
+      "issues": [
+        "Title too long (over 60 characters)"
+      ],
+      "recommendations": [],
+      "metrics": {
+        "title": {
+          "text": "Brain & Spine Surgeon near Banjara Hills, Hyderabad | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+          "length": 97,
+          "hasKeyword": true,
+          "position": "good"
+        },
+        "metaDescription": {
+          "text": "Advanced brain and spine care near Banjara Hills, Hyderabad. Directions to Yashoda Hospital, Malakpet. Parking, timings, and appointment info.",
+          "length": 142,
+          "hasKeyword": true
+        },
+        "headings": {
+          "h1Count": 1,
+          "h2Count": 8,
+          "h3Count": 17,
+          "h1Text": "Brain & Spine Surgeon near Banjara Hills, Hyderabad"
+        },
+        "canonical": "https://www.drsayuj.info/locations/brain-spine-surgeon-banjara-hills",
+        "images": {
+          "total": 1,
+          "withoutAlt": 0,
+          "withoutAltPercentage": "0.0"
+        },
+        "links": {
+          "total": 57,
+          "internal": 46,
+          "internalPercentage": "80.7"
+        },
+        "schema": {
+          "count": 5,
+          "types": [
+            "WebSite",
+            "Hospital",
+            "LocalBusiness",
+            "FAQPage"
+          ]
+        },
+        "content": {
+          "wordCount": 1873,
+          "hasKeywordInFirst100": true
+        }
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/locations/brain-spine-surgeon-hitec-city",
+      "statusCode": 200,
+      "size": 84199,
+      "issues": [
+        "Title too long (over 60 characters)"
+      ],
+      "recommendations": [],
+      "metrics": {
+        "title": {
+          "text": "Brain & Spine Surgeon near HITEC City, Hyderabad | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+          "length": 94,
+          "hasKeyword": true,
+          "position": "good"
+        },
+        "metaDescription": {
+          "text": "Advanced brain and spine care near HITEC City, Hyderabad. Directions to Yashoda Hospital, Malakpet. Parking, timings, and appointment info.",
+          "length": 139,
+          "hasKeyword": true
+        },
+        "headings": {
+          "h1Count": 1,
+          "h2Count": 8,
+          "h3Count": 17,
+          "h1Text": "Brain & Spine Surgeon near HITEC City, Hyderabad"
+        },
+        "canonical": "https://www.drsayuj.info/locations/brain-spine-surgeon-hitec-city",
+        "images": {
+          "total": 1,
+          "withoutAlt": 0,
+          "withoutAltPercentage": "0.0"
+        },
+        "links": {
+          "total": 57,
+          "internal": 46,
+          "internalPercentage": "80.7"
+        },
+        "schema": {
+          "count": 5,
+          "types": [
+            "WebSite",
+            "Hospital",
+            "LocalBusiness",
+            "FAQPage"
+          ]
+        },
+        "content": {
+          "wordCount": 1860,
+          "hasKeywordInFirst100": true
+        }
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/locations/brain-spine-surgeon-jubilee-hills",
+      "statusCode": 200,
+      "size": 84479,
+      "issues": [
+        "Title too long (over 60 characters)"
+      ],
+      "recommendations": [],
+      "metrics": {
+        "title": {
+          "text": "Brain & Spine Surgeon near Jubilee Hills, Hyderabad | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+          "length": 97,
+          "hasKeyword": true,
+          "position": "good"
+        },
+        "metaDescription": {
+          "text": "Advanced brain and spine care near Jubilee Hills, Hyderabad. Directions to Yashoda Hospital, Malakpet. Parking, timings, and appointment info.",
+          "length": 142,
+          "hasKeyword": true
+        },
+        "headings": {
+          "h1Count": 1,
+          "h2Count": 8,
+          "h3Count": 17,
+          "h1Text": "Brain & Spine Surgeon near Jubilee Hills, Hyderabad"
+        },
+        "canonical": "https://www.drsayuj.info/locations/brain-spine-surgeon-jubilee-hills",
+        "images": {
+          "total": 1,
+          "withoutAlt": 0,
+          "withoutAltPercentage": "0.0"
+        },
+        "links": {
+          "total": 57,
+          "internal": 46,
+          "internalPercentage": "80.7"
+        },
+        "schema": {
+          "count": 5,
+          "types": [
+            "WebSite",
+            "Hospital",
+            "LocalBusiness",
+            "FAQPage"
+          ]
+        },
+        "content": {
+          "wordCount": 1892,
+          "hasKeywordInFirst100": true
+        }
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/blog/endoscopic-spine-surgery-cost-hyderabad",
+      "statusCode": 200,
+      "size": 90446,
+      "issues": [
+        "Title too long (over 60 characters)",
+        "Meta description too short (under 120 characters)",
+        "Canonical URL mismatch"
+      ],
+      "recommendations": [],
+      "metrics": {
+        "title": {
+          "text": "Endoscopic Spine Surgery Cost in Hyderabad | What Affects P… | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+          "length": 106,
+          "hasKeyword": true,
+          "position": "good"
+        },
+        "metaDescription": {
+          "text": "Cost drivers, insurance nuances, and day-care eligibility for endoscopic spine surgery in Hyderabad.",
+          "length": 100,
+          "hasKeyword": true
+        },
+        "headings": {
+          "h1Count": 1,
+          "h2Count": 13,
+          "h3Count": 15,
+          "h1Text": "Endoscopic Spine Surgery Cost in Hyderabad: What Affects Your Final Bill"
+        },
+        "canonical": "https://www.drsayuj.info/blog/endoscopic-spine-surgery-cost-hyderabad/",
+        "images": {
+          "total": 1,
+          "withoutAlt": 0,
+          "withoutAltPercentage": "0.0"
+        },
+        "links": {
+          "total": 56,
+          "internal": 46,
+          "internalPercentage": "82.1"
+        },
+        "schema": {
+          "count": 5,
+          "types": [
+            "WebSite",
+            "Hospital",
+            "BlogPosting",
+            "FAQPage"
+          ]
+        },
+        "content": {
+          "wordCount": 2902,
+          "hasKeywordInFirst100": true
+        }
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/blog/return-to-work-after-endoscopic-discectomy-hyderabad",
+      "statusCode": 200,
+      "size": 90526,
+      "issues": [
+        "Title too long (over 60 characters)",
+        "Meta description too short (under 120 characters)",
+        "Canonical URL mismatch"
+      ],
+      "recommendations": [],
+      "metrics": {
+        "title": {
+          "text": "Return to Work After Endoscopic Discectomy in Hyderabad | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+          "length": 101,
+          "hasKeyword": true,
+          "position": "good"
+        },
+        "metaDescription": {
+          "text": "Week-by-week recovery timelines, activity progression, and workplace planning after endoscopic discectomy in Hyderabad.",
+          "length": 119,
+          "hasKeyword": true
+        },
+        "headings": {
+          "h1Count": 1,
+          "h2Count": 12,
+          "h3Count": 23,
+          "h1Text": "Return to Work After Endoscopic Discectomy in Hyderabad: A Practical Guide"
+        },
+        "canonical": "https://www.drsayuj.info/blog/return-to-work-after-endoscopic-discectomy-hyderabad/",
+        "images": {
+          "total": 1,
+          "withoutAlt": 0,
+          "withoutAltPercentage": "0.0"
+        },
+        "links": {
+          "total": 58,
+          "internal": 48,
+          "internalPercentage": "82.8"
+        },
+        "schema": {
+          "count": 5,
+          "types": [
+            "WebSite",
+            "Hospital",
+            "BlogPosting",
+            "FAQPage"
+          ]
+        },
+        "content": {
+          "wordCount": 2394,
+          "hasKeywordInFirst100": true
+        }
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/blog/endoscopic-vs-microdiscectomy-hyderabad",
+      "statusCode": 200,
+      "size": 108196,
+      "issues": [
+        "Title too long (over 60 characters)",
+        "Meta description too short (under 120 characters)",
+        "Canonical URL mismatch"
+      ],
+      "recommendations": [],
+      "metrics": {
+        "title": {
+          "text": "Endoscopic vs Microdiscectomy in Hyderabad | Which is Right… | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+          "length": 106,
+          "hasKeyword": true,
+          "position": "good"
+        },
+        "metaDescription": {
+          "text": "Compare incision size, recovery, and candidacy for endoscopic discectomy versus microdiscectomy in Hyderabad.",
+          "length": 109,
+          "hasKeyword": true
+        },
+        "headings": {
+          "h1Count": 1,
+          "h2Count": 10,
+          "h3Count": 18,
+          "h1Text": "Endoscopic vs Microdiscectomy: Choosing the Right Approach for Your Herniated Disc"
+        },
+        "canonical": "https://www.drsayuj.info/blog/endoscopic-vs-microdiscectomy-hyderabad/",
+        "images": {
+          "total": 1,
+          "withoutAlt": 0,
+          "withoutAltPercentage": "0.0"
+        },
+        "links": {
+          "total": 52,
+          "internal": 46,
+          "internalPercentage": "88.5"
+        },
+        "schema": {
+          "count": 5,
+          "types": [
+            "WebSite",
+            "Hospital",
+            "BlogPosting",
+            "FAQPage"
+          ]
+        },
+        "content": {
+          "wordCount": 3464,
+          "hasKeywordInFirst100": true
+        }
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/blog/sciatica-pain-management-hyderabad",
+      "statusCode": 200,
+      "size": 71491,
+      "issues": [
+        "Title too long (over 60 characters)"
+      ],
+      "recommendations": [],
+      "metrics": {
+        "title": {
+          "text": "Sciatica Pain Management in Hyderabad | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+          "length": 104,
+          "hasKeyword": true,
+          "position": "good"
+        },
+        "metaDescription": {
+          "text": "Comprehensive guide to sciatica pain management in Hyderabad. Learn about conservative treatments, when surgery is needed, and recovery expectations.",
+          "length": 149,
+          "hasKeyword": true
+        },
+        "headings": {
+          "h1Count": 1,
+          "h2Count": 7,
+          "h3Count": 17,
+          "h1Text": "Sciatica Pain Management in Hyderabad: Complete Treatment Guide"
+        },
+        "canonical": "https://www.drsayuj.info/blog/sciatica-pain-management-hyderabad",
+        "images": {
+          "total": 1,
+          "withoutAlt": 0,
+          "withoutAltPercentage": "0.0"
+        },
+        "links": {
+          "total": 47,
+          "internal": 42,
+          "internalPercentage": "89.4"
+        },
+        "schema": {
+          "count": 3,
+          "types": [
+            "WebSite",
+            "Hospital"
+          ]
+        },
+        "content": {
+          "wordCount": 1976,
+          "hasKeywordInFirst100": true
+        }
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/blog/spine-health-maintenance-hyderabad",
+      "statusCode": 200,
+      "size": 79453,
+      "issues": [
+        "Title too long (over 60 characters)"
+      ],
+      "recommendations": [],
+      "metrics": {
+        "title": {
+          "text": "Spine Health Maintenance in Hyderabad | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+          "length": 104,
+          "hasKeyword": true,
+          "position": "good"
+        },
+        "metaDescription": {
+          "text": "Complete guide to maintaining spine health in Hyderabad. Learn exercises, lifestyle tips, and preventive measures for a healthy spine.",
+          "length": 134,
+          "hasKeyword": true
+        },
+        "headings": {
+          "h1Count": 1,
+          "h2Count": 8,
+          "h3Count": 16,
+          "h1Text": "Spine Health Maintenance in Hyderabad: Your Complete Guide"
+        },
+        "canonical": "https://www.drsayuj.info/blog/spine-health-maintenance-hyderabad",
+        "images": {
+          "total": 1,
+          "withoutAlt": 0,
+          "withoutAltPercentage": "0.0"
+        },
+        "links": {
+          "total": 47,
+          "internal": 42,
+          "internalPercentage": "89.4"
+        },
+        "schema": {
+          "count": 3,
+          "types": [
+            "WebSite",
+            "Hospital"
+          ]
+        },
+        "content": {
+          "wordCount": 2408,
+          "hasKeywordInFirst100": true
+        }
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/blog/spine-surgery-recovery-timeline-hyderabad",
+      "statusCode": 200,
+      "size": 79632,
+      "issues": [
+        "Title too long (over 60 characters)"
+      ],
+      "recommendations": [],
+      "metrics": {
+        "title": {
+          "text": "Spine Surgery Recovery Timeline in Hyderabad | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+          "length": 111,
+          "hasKeyword": true,
+          "position": "good"
+        },
+        "metaDescription": {
+          "text": "Complete guide to spine surgery recovery timeline in Hyderabad. Learn what to expect after endoscopic spine surgery and recovery milestones.",
+          "length": 140,
+          "hasKeyword": true
+        },
+        "headings": {
+          "h1Count": 1,
+          "h2Count": 10,
+          "h3Count": 26,
+          "h1Text": "Spine Surgery Recovery Timeline in Hyderabad: What to Expect"
+        },
+        "canonical": "https://www.drsayuj.info/blog/spine-surgery-recovery-timeline-hyderabad",
+        "images": {
+          "total": 1,
+          "withoutAlt": 0,
+          "withoutAltPercentage": "0.0"
+        },
+        "links": {
+          "total": 47,
+          "internal": 42,
+          "internalPercentage": "89.4"
+        },
+        "schema": {
+          "count": 3,
+          "types": [
+            "WebSite",
+            "Hospital"
+          ]
+        },
+        "content": {
+          "wordCount": 2385,
+          "hasKeywordInFirst100": true
+        }
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/patient-stories",
+      "statusCode": 200,
+      "size": 74620,
+      "issues": [
+        "Title too long (over 60 characters)",
+        "Missing canonical URL"
+      ],
+      "recommendations": [],
+      "metrics": {
+        "title": {
+          "text": "Patient Success Stories | Neurosurgery & Spine Surgery Hyderabad | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+          "length": 110,
+          "hasKeyword": true,
+          "position": "good"
+        },
+        "metaDescription": {
+          "text": "Real patient stories of successful neurosurgery and spine surgery outcomes at Yashoda Hospital Malakpet with Dr. Sayuj Krishnan.",
+          "length": 128,
+          "hasKeyword": true
+        },
+        "headings": {
+          "h1Count": 1,
+          "h2Count": 1,
+          "h3Count": 8,
+          "h1Text": "Patient Success Stories"
+        },
+        "images": {
+          "total": 1,
+          "withoutAlt": 0,
+          "withoutAltPercentage": "0.0"
+        },
+        "links": {
+          "total": 54,
+          "internal": 46,
+          "internalPercentage": "85.2"
+        },
+        "schema": {
+          "count": 3,
+          "types": [
+            "WebSite",
+            "Hospital"
+          ]
+        },
+        "content": {
+          "wordCount": 1645,
+          "hasKeywordInFirst100": true
+        }
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/appointments",
+      "statusCode": 200,
+      "size": 68268,
+      "issues": [
+        "Title too long (over 60 characters)"
+      ],
+      "recommendations": [],
+      "metrics": {
+        "title": {
+          "text": "Book an Appointment | Dr Sayuj Krishnan | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+          "length": 85,
+          "hasKeyword": true,
+          "position": "good"
+        },
+        "metaDescription": {
+          "text": "Schedule a consultation with Dr Sayuj Krishnan, leading neurosurgeon in Hyderabad. Expert treatment for brain and spine conditions.",
+          "length": 131,
+          "hasKeyword": true
+        },
+        "headings": {
+          "h1Count": 1,
+          "h2Count": 5,
+          "h3Count": 5,
+          "h1Text": "Book an Appointment with Dr. Sayuj Krishnan"
+        },
+        "canonical": "https://www.drsayuj.info/appointments",
+        "images": {
+          "total": 1,
+          "withoutAlt": 0,
+          "withoutAltPercentage": "0.0"
+        },
+        "links": {
+          "total": 51,
+          "internal": 44,
+          "internalPercentage": "86.3"
+        },
+        "schema": {
+          "count": 3,
+          "types": [
+            "WebSite",
+            "Hospital"
+          ]
+        },
+        "content": {
+          "wordCount": 1279,
+          "hasKeywordInFirst100": true
+        }
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/ai-chat",
+      "statusCode": 200,
+      "size": 69158,
+      "issues": [
+        "Title too long (over 60 characters)"
+      ],
+      "recommendations": [],
+      "metrics": {
+        "title": {
+          "text": "AI Chat Assistant | Book Appointment with Dr Sayuj Krishnan | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+          "length": 105,
+          "hasKeyword": true,
+          "position": "good"
+        },
+        "metaDescription": {
+          "text": "Chat with our AI assistant to book an appointment with Dr Sayuj Krishnan. Get instant help with symptoms, emergency detection, and appointment scheduling.",
+          "length": 154,
+          "hasKeyword": false
+        },
+        "headings": {
+          "h1Count": 1,
+          "h2Count": 3,
+          "h3Count": 14,
+          "h1Text": "🤖 AI Chat Assistant"
+        },
+        "canonical": "https://www.drsayuj.info/ai-chat",
+        "images": {
+          "total": 1,
+          "withoutAlt": 0,
+          "withoutAltPercentage": "0.0"
+        },
+        "links": {
+          "total": 48,
+          "internal": 42,
+          "internalPercentage": "87.5"
+        },
+        "schema": {
+          "count": 3,
+          "types": [
+            "WebSite",
+            "Hospital"
+          ]
+        },
+        "content": {
+          "wordCount": 1407,
+          "hasKeywordInFirst100": true
+        }
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/best-neurosurgeon-in-hyderabad",
+      "statusCode": 200,
+      "size": 100459,
+      "issues": [
+        "Title too long (over 60 characters)",
+        "Canonical URL mismatch"
+      ],
+      "recommendations": [],
+      "metrics": {
+        "title": {
+          "text": "Best Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+          "length": 97,
+          "hasKeyword": true,
+          "position": "good"
+        },
+        "metaDescription": {
+          "text": "Evidence-based brain and spine care in Hyderabad. Endoscopic spine, brain tumor, trigeminal neuralgia, epilepsy treatment. Book a consultation.",
+          "length": 143,
+          "hasKeyword": true
+        },
+        "headings": {
+          "h1Count": 1,
+          "h2Count": 10,
+          "h3Count": 26,
+          "h1Text": "Best Neurosurgeon in Hyderabad — Evidence-Based Brain & Spine Care"
+        },
+        "canonical": "https://www.drsayuj.info/best-neurosurgeon-in-hyderabad/",
+        "images": {
+          "total": 2,
+          "withoutAlt": 0,
+          "withoutAltPercentage": "0.0"
+        },
+        "links": {
+          "total": 57,
+          "internal": 47,
+          "internalPercentage": "82.5"
+        },
+        "schema": {
+          "count": 4,
+          "types": [
+            "WebSite",
+            "Hospital"
+          ]
+        },
+        "content": {
+          "wordCount": 2672,
+          "hasKeywordInFirst100": true
+        }
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/about",
+      "statusCode": 200,
+      "size": 66621,
+      "issues": [
+        "Title too long (over 60 characters)",
+        "Meta description too long (over 160 characters)"
+      ],
+      "recommendations": [],
+      "metrics": {
+        "title": {
+          "text": "About Dr Sayuj Krishnan | Leading Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+          "length": 105,
+          "hasKeyword": true,
+          "position": "good"
+        },
+        "metaDescription": {
+          "text": "Dr Sayuj Krishnan is a highly experienced neurosurgeon with 15 years of expertise in minimally invasive brain and spine surgery in Hyderabad. MBBS, DNB Neurosurgery, Fellowship in MISS.",
+          "length": 185,
+          "hasKeyword": true
+        },
+        "headings": {
+          "h1Count": 1,
+          "h2Count": 6,
+          "h3Count": 12,
+          "h1Text": "About Dr Sayuj Krishnan"
+        },
+        "canonical": "https://www.drsayuj.info/about",
+        "images": {
+          "total": 1,
+          "withoutAlt": 0,
+          "withoutAltPercentage": "0.0"
+        },
+        "links": {
+          "total": 49,
+          "internal": 42,
+          "internalPercentage": "85.7"
+        },
+        "schema": {
+          "count": 3,
+          "types": [
+            "WebSite",
+            "Hospital"
+          ]
+        },
+        "content": {
+          "wordCount": 1403,
+          "hasKeywordInFirst100": true
+        }
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/contact",
+      "statusCode": 200,
+      "size": 68699,
+      "issues": [
+        "Title too long (over 60 characters)"
+      ],
+      "recommendations": [],
+      "metrics": {
+        "title": {
+          "text": "Contact Dr Sayuj Krishnan | Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+          "length": 99,
+          "hasKeyword": true,
+          "position": "good"
+        },
+        "metaDescription": {
+          "text": "Contact Dr Sayuj Krishnan for neurosurgical consultations. Phone: +91 9778280044, Email: neurospinehyd@drsayuj.com. Located at Yashoda Hospital, Malakpet.",
+          "length": 154,
+          "hasKeyword": false
+        },
+        "headings": {
+          "h1Count": 1,
+          "h2Count": 5,
+          "h3Count": 12,
+          "h1Text": "Contact Dr Sayuj Krishnan"
+        },
+        "canonical": "https://www.drsayuj.info/contact",
+        "images": {
+          "total": 1,
+          "withoutAlt": 0,
+          "withoutAltPercentage": "0.0"
+        },
+        "links": {
+          "total": 53,
+          "internal": 46,
+          "internalPercentage": "86.8"
+        },
+        "schema": {
+          "count": 4,
+          "types": [
+            "WebSite",
+            "Hospital",
+            "MedicalClinic"
+          ]
+        },
+        "content": {
+          "wordCount": 1303,
+          "hasKeywordInFirst100": true
+        }
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/technology-facilities",
+      "statusCode": 200,
+      "size": 130560,
+      "issues": [
+        "Title too long (over 60 characters)",
+        "Meta description too long (over 160 characters)",
+        "Canonical URL mismatch"
+      ],
+      "recommendations": [],
+      "metrics": {
+        "title": {
+          "text": "Advanced Technology & Facilities | Dr. Sayuj Krishnan | State-of-the-Art Neurosurgery Equipment | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+          "length": 141,
+          "hasKeyword": true,
+          "position": "good"
+        },
+        "metaDescription": {
+          "text": "Explore our cutting-edge neurosurgery technology including 3T MRI, neuronavigation, endoscopic systems, intraoperative monitoring, and AI-assisted surgical planning in Hyderabad.",
+          "length": 178,
+          "hasKeyword": true
+        },
+        "headings": {
+          "h1Count": 1,
+          "h2Count": 8,
+          "h3Count": 27,
+          "h1Text": "Advanced Technology & Facilities"
+        },
+        "canonical": "https://www.drsayuj.info/technology-facilities/",
+        "images": {
+          "total": 1,
+          "withoutAlt": 0,
+          "withoutAltPercentage": "0.0"
+        },
+        "links": {
+          "total": 47,
+          "internal": 43,
+          "internalPercentage": "91.5"
+        },
+        "schema": {
+          "count": 4,
+          "types": [
+            "WebSite",
+            "Hospital",
+            "MedicalWebPage"
+          ]
+        },
+        "content": {
+          "wordCount": 3018,
+          "hasKeywordInFirst100": true
+        }
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/emergency-rehabilitation",
+      "statusCode": 200,
+      "size": 115442,
+      "issues": [
+        "Title too long (over 60 characters)",
+        "Meta description too long (over 160 characters)",
+        "Canonical URL mismatch"
+      ],
+      "recommendations": [],
+      "metrics": {
+        "title": {
+          "text": "Emergency Neurosurgery & Rehabilitation Services | Dr. Sayuj Krishnan | 24/7 Care | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+          "length": 127,
+          "hasKeyword": true,
+          "position": "good"
+        },
+        "metaDescription": {
+          "text": "24/7 emergency neurosurgical consultation, hotline support, and comprehensive rehabilitation partnerships in Hyderabad. Immediate care for brain and spine emergencies.",
+          "length": 167,
+          "hasKeyword": true
+        },
+        "headings": {
+          "h1Count": 1,
+          "h2Count": 7,
+          "h3Count": 22,
+          "h1Text": "Emergency & Rehabilitation Services"
+        },
+        "canonical": "https://www.drsayuj.info/emergency-rehabilitation/",
+        "images": {
+          "total": 1,
+          "withoutAlt": 0,
+          "withoutAltPercentage": "0.0"
+        },
+        "links": {
+          "total": 50,
+          "internal": 43,
+          "internalPercentage": "86.0"
+        },
+        "schema": {
+          "count": 5,
+          "types": [
+            "WebSite",
+            "Hospital",
+            "MedicalClinic",
+            "MedicalWebPage"
+          ]
+        },
+        "content": {
+          "wordCount": 2571,
+          "hasKeywordInFirst100": true
+        }
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/disease-guides",
+      "statusCode": 200,
+      "size": 114329,
+      "issues": [
+        "Title too long (over 60 characters)",
+        "Meta description too long (over 160 characters)",
+        "Canonical URL mismatch"
+      ],
+      "recommendations": [],
+      "metrics": {
+        "title": {
+          "text": "Disease Guides & Medical Conditions | Dr. Sayuj Krishnan | Comprehensive Health Information | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+          "length": 137,
+          "hasKeyword": true,
+          "position": "good"
+        },
+        "metaDescription": {
+          "text": "Comprehensive disease guides for degenerative disc disease, spinal stenosis, trigeminal neuralgia, epilepsy, herniated disc, and other neurological conditions. Expert medical information.",
+          "length": 187,
+          "hasKeyword": false
+        },
+        "headings": {
+          "h1Count": 1,
+          "h2Count": 4,
+          "h3Count": 20,
+          "h1Text": "Disease Guides & Medical Conditions"
+        },
+        "canonical": "https://www.drsayuj.info/disease-guides/",
+        "images": {
+          "total": 1,
+          "withoutAlt": 0,
+          "withoutAltPercentage": "0.0"
+        },
+        "links": {
+          "total": 55,
+          "internal": 51,
+          "internalPercentage": "92.7"
+        },
+        "schema": {
+          "count": 4,
+          "types": [
+            "WebSite",
+            "Hospital",
+            "MedicalWebPage"
+          ]
+        },
+        "content": {
+          "wordCount": 3107,
+          "hasKeywordInFirst100": true
+        }
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/patient-stories/minimal-invasive-meningioma-resection",
+      "statusCode": 200,
+      "size": 75032,
+      "issues": [
+        "Title too long (over 60 characters)",
+        "Meta description too long (over 160 characters)"
+      ],
+      "recommendations": [],
+      "metrics": {
+        "title": {
+          "text": "Back to Work After Meningioma Surgery | Patient Success Story | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+          "length": 128,
+          "hasKeyword": true,
+          "position": "good"
+        },
+        "metaDescription": {
+          "text": "A 39-year-old teacher with progressive word-finding difficulty underwent awake craniotomy with mapping. She returned to the classroom in four weeks with no residual tumour on follow-up MRI. Read the complete patient story of S.K. who underwent Neuronavigation-guided meningioma resection in Hyderabad.",
+          "length": 301,
+          "hasKeyword": true
+        },
+        "headings": {
+          "h1Count": 1,
+          "h2Count": 4,
+          "h3Count": 10,
+          "h1Text": "Back to Work After Meningioma Surgery"
+        },
+        "canonical": "https://www.drsayuj.info/patient-stories/minimal-invasive-meningioma-resection",
+        "images": {
+          "total": 1,
+          "withoutAlt": 0,
+          "withoutAltPercentage": "0.0"
+        },
+        "links": {
+          "total": 54,
+          "internal": 46,
+          "internalPercentage": "85.2"
+        },
+        "schema": {
+          "count": 5,
+          "types": [
+            "WebSite",
+            "Hospital",
+            "BreadcrumbList",
+            "Article"
+          ]
+        },
+        "content": {
+          "wordCount": 1504,
+          "hasKeywordInFirst100": true
+        }
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/patient-stories/lumbar-miss-tlif-recovery",
+      "statusCode": 200,
+      "size": 74750,
+      "issues": [
+        "Title too long (over 60 characters)",
+        "Meta description too long (over 160 characters)"
+      ],
+      "recommendations": [],
+      "metrics": {
+        "title": {
+          "text": "Walking Pain-Free After TLIF | Patient Success Story | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+          "length": 119,
+          "hasKeyword": true,
+          "position": "good"
+        },
+        "metaDescription": {
+          "text": "A 52-year-old operations manager with refractory spondylolisthesis pain underwent single-level TLIF with navigation. She resumed desk work in three weeks and remains symptom-free at 12-month review. Read the complete patient story of R.M. who underwent Minimally invasive TLIF at L4-L5 in Hyderabad.",
+          "length": 299,
+          "hasKeyword": true
+        },
+        "headings": {
+          "h1Count": 1,
+          "h2Count": 4,
+          "h3Count": 10,
+          "h1Text": "Walking Pain-Free After TLIF"
+        },
+        "canonical": "https://www.drsayuj.info/patient-stories/lumbar-miss-tlif-recovery",
+        "images": {
+          "total": 1,
+          "withoutAlt": 0,
+          "withoutAltPercentage": "0.0"
+        },
+        "links": {
+          "total": 54,
+          "internal": 46,
+          "internalPercentage": "85.2"
+        },
+        "schema": {
+          "count": 5,
+          "types": [
+            "WebSite",
+            "Hospital",
+            "BreadcrumbList",
+            "Article"
+          ]
+        },
+        "content": {
+          "wordCount": 1503,
+          "hasKeywordInFirst100": true
+        }
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/patient-stories/temporal-lobe-epilepsy-control",
+      "statusCode": 200,
+      "size": 74941,
+      "issues": [
+        "Title too long (over 60 characters)",
+        "Meta description too long (over 160 characters)"
+      ],
+      "recommendations": [],
+      "metrics": {
+        "title": {
+          "text": "Seizure-Free After Epilepsy Surgery | Patient Success Story | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+          "length": 126,
+          "hasKeyword": true,
+          "position": "good"
+        },
+        "metaDescription": {
+          "text": "A 27-year-old software engineer with weekly seizures despite triple therapy underwent comprehensive evaluation followed by resection. He is seizure-free and back to work, tapering medication under supervision. Read the complete patient story of A.D. who underwent Anterior temporal lobectomy with amygdalohippocampectomy in Hyderabad.",
+          "length": 334,
+          "hasKeyword": true
+        },
+        "headings": {
+          "h1Count": 1,
+          "h2Count": 4,
+          "h3Count": 10,
+          "h1Text": "Seizure-Free After Epilepsy Surgery"
+        },
+        "canonical": "https://www.drsayuj.info/patient-stories/temporal-lobe-epilepsy-control",
+        "images": {
+          "total": 1,
+          "withoutAlt": 0,
+          "withoutAltPercentage": "0.0"
+        },
+        "links": {
+          "total": 54,
+          "internal": 46,
+          "internalPercentage": "85.2"
+        },
+        "schema": {
+          "count": 5,
+          "types": [
+            "WebSite",
+            "Hospital",
+            "BreadcrumbList",
+            "Article"
+          ]
+        },
+        "content": {
+          "wordCount": 1499,
+          "hasKeywordInFirst100": true
+        }
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/patient-stories/carpal-tunnel-day-care-success",
+      "statusCode": 200,
+      "size": 74547,
+      "issues": [
+        "Title too long (over 60 characters)",
+        "Meta description too long (over 160 characters)"
+      ],
+      "recommendations": [],
+      "metrics": {
+        "title": {
+          "text": "Grip Strength Back After Carpal Tunnel Release | Patient Success Story | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+          "length": 137,
+          "hasKeyword": true,
+          "position": "good"
+        },
+        "metaDescription": {
+          "text": "A 44-year-old designer with severe median nerve compression underwent day-care release. Strength training and ergonomic coaching restored productivity in two weeks. Read the complete patient story of N.P. who underwent Mini-open carpal tunnel release in Hyderabad.",
+          "length": 264,
+          "hasKeyword": true
+        },
+        "headings": {
+          "h1Count": 1,
+          "h2Count": 4,
+          "h3Count": 10,
+          "h1Text": "Grip Strength Back After Carpal Tunnel Release"
+        },
+        "canonical": "https://www.drsayuj.info/patient-stories/carpal-tunnel-day-care-success",
+        "images": {
+          "total": 1,
+          "withoutAlt": 0,
+          "withoutAltPercentage": "0.0"
+        },
+        "links": {
+          "total": 54,
+          "internal": 46,
+          "internalPercentage": "85.2"
+        },
+        "schema": {
+          "count": 5,
+          "types": [
+            "WebSite",
+            "Hospital",
+            "BreadcrumbList",
+            "Article"
+          ]
+        },
+        "content": {
+          "wordCount": 1484,
+          "hasKeywordInFirst100": true
+        }
+      }
+    }
+  ],
+  "summary": {
+    "totalPages": 38,
+    "issues": [
+      {
+        "issue": "Title too long (over 60 characters)",
+        "count": 38,
+        "percentage": "100.0"
+      },
+      {
+        "issue": "Meta description too long (over 160 characters)",
+        "count": 11,
+        "percentage": "28.9"
+      },
+      {
+        "issue": "Meta description too short (under 120 characters)",
+        "count": 11,
+        "percentage": "28.9"
+      },
+      {
+        "issue": "Canonical URL mismatch",
+        "count": 10,
+        "percentage": "26.3"
+      },
+      {
+        "issue": "Missing canonical URL",
+        "count": 1,
+        "percentage": "2.6"
+      }
+    ],
+    "recommendations": [
+      "Add canonical URLs to all pages"
+    ],
+    "scores": {
+      "seo": 81,
+      "performance": 85,
+      "accessibility": 90,
+      "bestPractices": 88
+    }
+  }
+}

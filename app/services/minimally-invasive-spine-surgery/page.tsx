@@ -10,8 +10,8 @@ import MedicalCitations from '@/app/_components/MedicalCitations';
 import { makeMetadata } from '@/app/_lib/meta';
 
 const baseMetadata = makeMetadata({
-  title: 'Endoscopic Spine Surgery Hyderabad | MISS',
-  description: 'Day-care endoscopic discectomy, foraminotomy, and ULBD with Dr Sayuj Krishnan at Yashoda Hospital Malakpet.',
+  title: 'Endoscopic Spine Surgery Hyderabad | Dr. Sayuj Krishnan',
+  description: 'Expert endoscopic spine surgery in Hyderabad with Dr. Sayuj Krishnan. Minimally invasive procedures with same-day discharge at Yashoda Hospital Malakpet.',
   canonicalPath: '/services/minimally-invasive-spine-surgery',
 });
 
