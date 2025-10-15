@@ -1,0 +1,512 @@
+{
+  "generatedAt": "2025-10-15T19:11:05Z",
+  "robots": {
+    "disallow": [
+      "/drafts/",
+      "/api/"
+    ]
+  },
+  "sitemap": {
+    "status": 200,
+    "urlCount": 0
+  },
+  "pagesCrawled": 1,
+  "pages": [
+    {
+      "url": "https://www.drsayuj.info",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "title": "Best Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan | Brain & Spine Surgery",
+      "meta_description": "Dr. Sayuj Krishnan is the best neurosurgeon in Hyderabad specializing in endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures. Same-day discharge available at Yashoda Hospital Malakpet. Book consultation now.",
+      "meta_robots": "index, follow",
+      "canonical": "https://www.drsayuj.info",
+      "h1": [
+        "Dr. Sayuj Krishnan \u2014 Best Neurosurgeon in Hyderabad | Brain & Spine Surgery Expert"
+      ],
+      "h2": [
+        "Watch How We Plan & Deliver Neurosurgical Care",
+        "Endoscopic Spine Surgery & Minimally Invasive Procedures (MISS)",
+        "Brain Tumor Surgery",
+        "What Your First Eight Weeks Look Like After Minimally Invasive Spine Surgery",
+        "Trigeminal Neuralgia Care",
+        "Epilepsy Surgery",
+        "Why Choose Dr Sayuj Krishnan",
+        "24/7 Emergency Neurosurgical Care",
+        "Areas We Serve in Hyderabad",
+        "References & Sources",
+        "Frequently Asked Questions",
+        "Trusted by Patients Across Hyderabad",
+        "Comprehensive Disease Guides",
+        "Book an Appointment"
+      ],
+      "h3": [
+        "Dr. Sayuj Krishnan",
+        "Brain Tumor Surgery & Awake Craniotomy",
+        "Endoscopic Spine Surgery with Dr. Sayuj Krishnan",
+        "Sciatica Patient Education - Understanding Your Condition",
+        "Minimally Invasive Spine Surgery",
+        "Who Benefits from MISS?",
+        "Brain Tumor Surgery",
+        "Advanced Microsurgical Techniques",
+        "Mobilise within 3 hours of surgery",
+        "At-home recovery & remote monitoring",
+        "Return to desk duties",
+        "Functional strength & cardio",
+        "Graduated return to full activity",
+        "Remote Care Support",
+        "Symptoms of Trigeminal Neuralgia",
+        "Comprehensive Epilepsy Evaluation",
+        "Exceptional Training",
+        "15+ Years Experience",
+        "Advanced Technology",
+        "Emergency Hotline",
+        "Rapid Response",
+        "Hospital Partnership",
+        "Hospital Location",
+        "Medical Guidelines",
+        "Research & Evidence",
+        "Procedures",
+        "Recovery",
+        "Costs & Insurance",
+        "Access & Logistics",
+        "Comfort & Support",
+        "Why Patients Choose Dr. Sayuj Krishnan",
+        "Degenerative Disc Disease",
+        "Spinal Stenosis",
+        "Trigeminal Neuralgia",
+        "Epilepsy",
+        "Contact Information",
+        "Why Choose Dr Sayuj Krishnan?",
+        "Clinic Details",
+        "Services",
+        "Conditions",
+        "Quick Links"
+      ],
+      "internal_links": [
+        "https://www.drsayuj.info/",
+        "https://www.drsayuj.info/about",
+        "https://www.drsayuj.info/ai-chat",
+        "https://www.drsayuj.info/appointments",
+        "https://www.drsayuj.info/appointments?utm_source=site&utm_medium=cta&utm_campaign=footer_nap",
+        "https://www.drsayuj.info/blog",
+        "https://www.drsayuj.info/conditions",
+        "https://www.drsayuj.info/conditions/brain-tumor-surgery-hyderabad",
+        "https://www.drsayuj.info/conditions/cervical-radiculopathy-treatment-hyderabad",
+        "https://www.drsayuj.info/conditions/sciatica-treatment-hyderabad",
+        "https://www.drsayuj.info/conditions/slip-disc-treatment-hyderabad",
+        "https://www.drsayuj.info/conditions/spinal-stenosis-treatment-hyderabad",
+        "https://www.drsayuj.info/conditions/trigeminal-neuralgia-treatment-hyderabad",
+        "https://www.drsayuj.info/contact",
+        "https://www.drsayuj.info/cookies",
+        "https://www.drsayuj.info/disclaimer",
+        "https://www.drsayuj.info/disease-guides",
+        "https://www.drsayuj.info/disease-guides/degenerative-disc-disease",
+        "https://www.drsayuj.info/emergency-rehabilitation",
+        "https://www.drsayuj.info/locations",
+        "https://www.drsayuj.info/locations/brain-spine-surgeon-banjara-hills",
+        "https://www.drsayuj.info/locations/brain-spine-surgeon-hitec-city",
+        "https://www.drsayuj.info/locations/brain-spine-surgeon-jubilee-hills",
+        "https://www.drsayuj.info/locations?utm_source=site&utm_medium=cta&utm_campaign=footer_nap",
+        "https://www.drsayuj.info/patient-stories",
+        "https://www.drsayuj.info/privacy",
+        "https://www.drsayuj.info/services",
+        "https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad",
+        "https://www.drsayuj.info/services/endoscopic-discectomy-hyderabad",
+        "https://www.drsayuj.info/services/epilepsy-surgery-hyderabad",
+        "https://www.drsayuj.info/services/minimally-invasive-spine-surgery",
+        "https://www.drsayuj.info/services/peripheral-nerve-surgery-hyderabad",
+        "https://www.drsayuj.info/services/spinal-fusion-surgery-hyderabad",
+        "https://www.drsayuj.info/symptoms/pain-on-top-of-head-causes",
+        "https://www.drsayuj.info/symptoms/signs-of-brain-tumor",
+        "https://www.drsayuj.info/technology-facilities",
+        "https://www.drsayuj.info/terms"
+      ],
+      "external_links": [
+        "https://wa.me/919778280044",
+        "https://www.aans.org/patients/conditions-and-treatments",
+        "https://www.cancer.gov/types/brain/patient/brain-treatment-pdq",
+        "https://www.epilepsy.com/treatment/surgery",
+        "https://www.google.com/search?q=dr+sayuj+krishnan+neurosurgeon+hyderabad",
+        "https://www.mayoclinic.org/diseases-conditions/trigeminal-neuralgia/diagnosis-treatment/drc-20353347",
+        "https://www.nhs.uk/conditions/brain-tumours/treatment/",
+        "https://www.ninds.nih.gov/health-information/disorders",
+        "https://www.youtube.com/results?search_query=endoscopic+spine+surgery",
+        "https://www.youtube.com/watch?v=brpiquTwE5c",
+        "https://www.youtube.com/watch?v=dwQOFaVyYu8",
+        "https://www.youtube.com/watch?v=vqqAHzwZPYw"
+      ],
+      "images_missing_alt": [],
+      "structured_data": [
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": "https://www.drsayuj.info/#website",
+          "url": "https://www.drsayuj.info",
+          "name": "Dr Sayuj Krishnan - Neurosurgeon in Hyderabad",
+          "description": "Expert neurosurgeon in Hyderabad specializing in minimally invasive brain & spine surgery",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://www.drsayuj.info/search?q={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Physician",
+              "@id": "https://www.drsayuj.info/#physician",
+              "name": "Dr Sayuj Krishnan",
+              "alternateName": "Dr Sayuj",
+              "description": "Expert neurosurgeon in Hyderabad specializing in endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures",
+              "url": "https://www.drsayuj.info",
+              "image": "https://www.drsayuj.info/images/dr-sayuj-krishnan.jpg",
+              "telephone": "+919778280044",
+              "email": "neurospinehyd@drsayuj.com",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Room No 317, OPD Block",
+                "addressLocality": "Malakpet",
+                "addressRegion": "Telangana",
+                "postalCode": "500036",
+                "addressCountry": "IN"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 17.385,
+                "longitude": 78.4867
+              },
+              "medicalSpecialty": [
+                "Neurosurgery",
+                "Spine Surgery",
+                "Brain Surgery",
+                "Endoscopic Surgery",
+                "Minimally Invasive Surgery"
+              ],
+              "hasCredential": [
+                {
+                  "@type": "EducationalOccupationalCredential",
+                  "credentialCategory": "degree",
+                  "educationalLevel": "MBBS"
+                },
+                {
+                  "@type": "EducationalOccupationalCredential",
+                  "credentialCategory": "degree",
+                  "educationalLevel": "DNB Neurosurgery"
+                },
+                {
+                  "@type": "EducationalOccupationalCredential",
+                  "credentialCategory": "certification",
+                  "educationalLevel": "Fellowship in Minimally Invasive Spine Surgery"
+                }
+              ],
+              "memberOf": [
+                {
+                  "@type": "Organization",
+                  "name": "Neurological Society of India"
+                },
+                {
+                  "@type": "Organization",
+                  "name": "Association of Spine Surgeons of India"
+                }
+              ],
+              "worksFor": {
+                "@type": "Hospital",
+                "name": "Yashoda Hospital",
+                "address": {
+                  "@type": "PostalAddress",
+                  "streetAddress": "Malakpet",
+                  "addressLocality": "Hyderabad",
+                  "addressRegion": "Telangana",
+                  "addressCountry": "IN"
+                }
+              },
+              "availableService": [
+                {
+                  "@type": "MedicalService",
+                  "name": "Endoscopic Spine Surgery",
+                  "description": "Minimally invasive spine surgery using endoscopic techniques",
+                  "url": "https://www.drsayuj.info/services/minimally-invasive-spine-surgery"
+                },
+                {
+                  "@type": "MedicalService",
+                  "name": "Brain Tumor Surgery",
+                  "description": "Advanced brain tumor surgery with neuronavigation",
+                  "url": "https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad"
+                },
+                {
+                  "@type": "MedicalService",
+                  "name": "Epilepsy Surgery",
+                  "description": "Surgical treatment for drug-resistant epilepsy",
+                  "url": "https://www.drsayuj.info/services/epilepsy-surgery"
+                },
+                {
+                  "@type": "MedicalService",
+                  "name": "Trigeminal Neuralgia Treatment",
+                  "description": "Advanced treatment for trigeminal neuralgia including microvascular decompression",
+                  "url": "https://www.drsayuj.info/conditions/trigeminal-neuralgia-treatment"
+                }
+              ],
+              "sameAs": [
+                "https://g.co/kgs/9366939683880052414",
+                "https://www.google.com/maps/place/Dr+Sayuj+Krishnan",
+                "https://www.yashodahospitals.com/doctor/dr-sayuj-krishnan/",
+                "https://www.linkedin.com/in/dr-sayuj-krishnan",
+                "https://www.researchgate.net/profile/Dr-Sayuj-Krishnan"
+              ]
+            },
+            {
+              "@type": "LocalBusiness",
+              "@id": "https://www.drsayuj.info/#localbusiness",
+              "name": "Dr Sayuj Krishnan - Neurosurgeon in Hyderabad",
+              "description": "Expert neurosurgeon specializing in endoscopic spine surgery and brain surgery in Hyderabad",
+              "url": "https://www.drsayuj.info",
+              "telephone": "+919778280044",
+              "email": "neurospinehyd@drsayuj.com",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Room No 317, OPD Block",
+                "addressLocality": "Malakpet",
+                "addressRegion": "Telangana",
+                "postalCode": "500036",
+                "addressCountry": "IN"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 17.385,
+                "longitude": 78.4867
+              },
+              "openingHours": [
+                "Mo-Fr 09:00-17:00",
+                "Sa 09:00-13:00"
+              ],
+              "priceRange": "$$",
+              "currenciesAccepted": "INR",
+              "paymentAccepted": "Cash, Credit Card, Insurance, UPI",
+              "areaServed": [
+                {
+                  "@type": "City",
+                  "name": "Hyderabad",
+                  "containedInPlace": {
+                    "@type": "State",
+                    "name": "Telangana"
+                  }
+                },
+                {
+                  "@type": "City",
+                  "name": "Secunderabad",
+                  "containedInPlace": {
+                    "@type": "State",
+                    "name": "Telangana"
+                  }
+                },
+                {
+                  "@type": "Place",
+                  "name": "Banjara Hills",
+                  "containedInPlace": {
+                    "@type": "City",
+                    "name": "Hyderabad"
+                  }
+                },
+                {
+                  "@type": "Place",
+                  "name": "Hi-Tech City",
+                  "containedInPlace": {
+                    "@type": "City",
+                    "name": "Hyderabad"
+                  }
+                },
+                {
+                  "@type": "Place",
+                  "name": "LB Nagar",
+                  "containedInPlace": {
+                    "@type": "City",
+                    "name": "Hyderabad"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Hospital",
+          "@id": "https://www.drsayuj.info/#hospital",
+          "name": "Yashoda Hospital, Malakpet",
+          "url": "https://www.yashodahospitals.com/malakpet/",
+          "telephone": "+91-40-6769 9999",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Nalgonda X Roads",
+            "addressLocality": "Malakpet",
+            "addressRegion": "Hyderabad",
+            "postalCode": "500036",
+            "addressCountry": "IN"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "17.3750",
+            "longitude": "78.5147"
+          },
+          "department": {
+            "@type": "MedicalSpecialty",
+            "name": "Department of Neurosurgery",
+            "availableService": [
+              "Brain Surgery",
+              "Spine Surgery",
+              "Minimally Invasive Neurosurgery"
+            ]
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "How do I know if I'm a candidate for endoscopic spine surgery?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Candidates usually have leg-dominant pain from a herniated disc or lumbar stenosis that has not responded to six weeks of supervised physiotherapy and medication.\nDuring consultation we review MRI scans, complete a focused neurological exam, and discuss work or sport demands before confirming the suitability of an endoscopic approach."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What recovery milestones should I expect after minimally invasive surgery?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Day 0: walk within three hours with physiotherapy support. Week 2: return to desk work once wound inspection is clear.\nWe schedule tele-follow ups at 48 hours, seven days, and 30 days, and the eight-week recovery roadmap below outlines each phase in detail."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How much does minimally invasive spine surgery cost with insurance?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Endoscopic discectomy packages typically range from INR 95,000 to 1,35,000 for self-pay patients including surgeon fees, OT charges, implants, and follow-up visits.\nCashless insurance approvals reduce out-of-pocket expense by roughly 12\u201318% once pre-authorisation is cleared. Contact us for a personalized quote based on your specific procedure and insurance coverage."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What documents do you provide for insurance or corporate approvals?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Our coordination team issues a detailed medical estimate, necessity letter, implant invoice, and operative summary aligned to TPA requirements.\nCorporate employees also receive stamped medical leave summaries and fit-to-work certificates tailored to HR policies."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Do you offer teleconsultations for patients outside Hyderabad?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. We provide secure video consultations for second opinions and post-operative reviews\u2014share MRI scans via our encrypted portal or WhatsApp before the call.\nInternational patients receive assistance with itinerary planning, visa documentation, and extended follow-up scheduling."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "When can I travel or return to the gym after surgery?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Short domestic travel is generally safe after 7\u201310 days once pain is controlled and the wound has healed.\nGym and strength training resume after week six with progressive loading, while high-impact sports restart after clearance during the week-eight review."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do you manage pain after endoscopic procedures?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "We combine regional anaesthesia, targeted oral medication, and physiotherapy-led movement drills to keep discomfort below three on ten.\nPatients receive breathing routines, cold-therapy guidance, and mindfulness resources with a 24/7 helpline for escalations."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I get a second opinion using my existing MRI scans?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Absolutely. Upload your DICOM files to our portal or bring the CD to clinic\u2014we review images during consult and explain every treatment path in plain language.\nYou leave with a written care summary covering conservative care, surgical options, and red-flag symptoms that require urgent attention."
+              }
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "@id": "https://www.drsayuj.info#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "How do I know if I'm a candidate for endoscopic spine surgery?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Candidates usually have leg-dominant pain from a herniated disc or lumbar stenosis that has not responded to six weeks of supervised physiotherapy and medication.\nDuring consultation we review MRI scans, complete a focused neurological exam, and discuss work or sport demands before confirming the suitability of an endoscopic approach."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What recovery milestones should I expect after minimally invasive surgery?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Day 0: walk within three hours with physiotherapy support. Week 2: return to desk work once wound inspection is clear.\nWe schedule tele-follow ups at 48 hours, seven days, and 30 days, and the eight-week recovery roadmap below outlines each phase in detail."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How much does minimally invasive spine surgery cost with insurance?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Endoscopic discectomy packages typically range from INR 95,000 to 1,35,000 for self-pay patients including surgeon fees, OT charges, implants, and follow-up visits.\nCashless insurance approvals reduce out-of-pocket expense by roughly 12\u201318% once pre-authorisation is cleared. Contact us for a personalized quote based on your specific procedure and insurance coverage."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What documents do you provide for insurance or corporate approvals?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Our coordination team issues a detailed medical estimate, necessity letter, implant invoice, and operative summary aligned to TPA requirements.\nCorporate employees also receive stamped medical leave summaries and fit-to-work certificates tailored to HR policies."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Do you offer teleconsultations for patients outside Hyderabad?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. We provide secure video consultations for second opinions and post-operative reviews\u2014share MRI scans via our encrypted portal or WhatsApp before the call.\nInternational patients receive assistance with itinerary planning, visa documentation, and extended follow-up scheduling."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "When can I travel or return to the gym after surgery?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Short domestic travel is generally safe after 7\u201310 days once pain is controlled and the wound has healed.\nGym and strength training resume after week six with progressive loading, while high-impact sports restart after clearance during the week-eight review."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do you manage pain after endoscopic procedures?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "We combine regional anaesthesia, targeted oral medication, and physiotherapy-led movement drills to keep discomfort below three on ten.\nPatients receive breathing routines, cold-therapy guidance, and mindfulness resources with a 24/7 helpline for escalations."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I get a second opinion using my existing MRI scans?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Absolutely. Upload your DICOM files to our portal or bring the CD to clinic\u2014we review images during consult and explain every treatment path in plain language.\nYou leave with a written care summary covering conservative care, surgical options, and red-flag symptoms that require urgent attention."
+              }
+            }
+          ]
+        }
+      ],
+      "word_count": 1,
+      "issues": [
+        "Low word count (1)"
+      ]
+    }
+  ]
+}
