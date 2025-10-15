@@ -76,3 +76,60 @@ p, li, span, div {
 .text-blue-800 {
   color: #1e40af !important;
 }
+
+/* Fix green button contrast issues - use darker green for better contrast */
+.bg-green-600 {
+  background-color: #15803d !important; /* Darker green for better contrast with white text */
+}
+
+.bg-green-500 {
+  background-color: #16a34a !important; /* Darker green for better contrast with white text */
+}
+
+.hover\:bg-green-700:hover {
+  background-color: #14532d !important; /* Even darker for hover state */
+}
+
+.hover\:bg-green-600:hover {
+  background-color: #15803d !important; /* Darker green for hover state */
+}
+
+/* Ensure footer text has proper contrast */
+.bg-gray-900 {
+  background-color: #111827 !important; /* Darker background for better contrast */
+}
+
+.text-gray-200 {
+  color: #e5e7eb !important; /* Lighter text for better contrast on dark background */
+}
+
+.text-gray-300 {
+  color: #d1d5db !important; /* Lighter text for better contrast on dark background */
+}
+
+.text-gray-400 {
+  color: #9ca3af !important; /* Lighter text for better contrast on dark background */
+}
+
+/* Ensure white text on dark backgrounds has sufficient contrast */
+.text-white {
+  color: #ffffff !important;
+}
+
+/* Fix blue text contrast on dark backgrounds */
+.text-blue-300 {
+  color: #93c5fd !important; /* Lighter blue for better contrast on dark background */
+}
+
+.text-blue-100 {
+  color: #dbeafe !important; /* Lighter blue for better contrast on dark background */
+}
+
+/* Fix border colors for better contrast */
+.border-blue-400 {
+  border-color: #60a5fa !important;
+}
+
+.border-gray-500 {
+  border-color: #6b7280 !important;
+}
