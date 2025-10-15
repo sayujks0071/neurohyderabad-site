@@ -188,7 +188,7 @@ export default function ServicesPage() {
                     Comprehensive surgical treatment for drug-resistant epilepsy including LITT, resection surgery, 
                     and VNS. Our multidisciplinary approach ensures optimal outcomes for patients with uncontrolled seizures.
                   </p>
-                  <Link href="/services/epilepsy-surgery" className="text-blue-600 hover:underline">
+                  <Link href="/services/epilepsy-surgery-hyderabad" className="text-blue-600 hover:underline">
                     Learn more about Epilepsy Surgery →
                   </Link>
                 </div>
