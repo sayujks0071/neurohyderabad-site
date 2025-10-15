@@ -21,7 +21,7 @@ const HOME_CANONICAL = SITE_URL.endsWith("/") ? SITE_URL : `${SITE_URL}/`;
 
 export const metadata = {
   title: 'Best Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan',
-  description: 'Dr. Sayuj Krishnan is the best neurosurgeon in Hyderabad specializing in endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures. Same-day discharge at Yashoda Hospital Malakpet.',
+  description: 'Best neurosurgeon in Hyderabad specializing in endoscopic spine surgery, brain tumor surgery & minimally invasive procedures. Same-day discharge at Yashoda Hospital.',
   keywords: [
     'best neurosurgeon hyderabad',
     'dr sayuj krishnan',
@@ -41,7 +41,7 @@ export const metadata = {
   },
   openGraph: {
     title: 'Dr. Sayuj Krishnan | Best Neurosurgeon in Hyderabad | Brain & Spine Surgery',
-    description: 'Expert neurosurgeon Dr. Sayuj Krishnan in Hyderabad specializing in endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures. Same-day discharge available.',
+    description: 'Best neurosurgeon in Hyderabad specializing in endoscopic spine surgery, brain tumor surgery & minimally invasive procedures. Same-day discharge at Yashoda Hospital.',
     url: HOME_CANONICAL,
     siteName: 'Dr. Sayuj Krishnan - Neurosurgeon Hyderabad',
     locale: 'en_IN',
