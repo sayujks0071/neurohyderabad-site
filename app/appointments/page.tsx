@@ -12,12 +12,19 @@ export const metadata: Metadata = {
     canonical: "/appointments",
   },
   openGraph: {
+    title: "Book an Appointment | Dr Sayuj Krishnan",
+    description: "Schedule a consultation with Dr Sayuj Krishnan, leading neurosurgeon in Hyderabad. Expert treatment for brain and spine conditions.",
+    url: `${SITE_URL}/appointments`,
+    siteName: 'Dr. Sayuj Krishnan - Neurosurgeon Hyderabad',
+    locale: 'en_IN',
+    type: 'website',
     images: [
       {
         url: `${SITE_URL}/api/og?title=${encodeURIComponent("Book an Appointment | Dr Sayuj Krishnan")}&subtitle=${encodeURIComponent("Consultations in Hyderabad")}`,
         width: 1200,
         height: 630,
         alt: "Book an Appointment — Dr Sayuj Krishnan",
+        type: 'image/jpeg'
       },
     ],
   },

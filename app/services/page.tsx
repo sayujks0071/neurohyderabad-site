@@ -24,6 +24,7 @@ export const metadata: Metadata = {
         width: 1200,
         height: 630,
         alt: 'Neurosurgical Services - Dr. Sayuj Krishnan',
+        type: 'image/jpeg'
       },
     ],
     locale: 'en_IN',

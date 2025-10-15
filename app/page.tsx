@@ -42,12 +42,17 @@ export const metadata = {
   openGraph: {
     title: 'Dr. Sayuj Krishnan | Best Neurosurgeon in Hyderabad | Brain & Spine Surgery',
     description: 'Expert neurosurgeon Dr. Sayuj Krishnan in Hyderabad specializing in endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures. Same-day discharge available.',
+    url: HOME_CANONICAL,
+    siteName: 'Dr. Sayuj Krishnan - Neurosurgeon Hyderabad',
+    locale: 'en_IN',
+    type: 'website',
     images: [
       {
         url: 'https://www.drsayuj.info/images/og-default.jpg',
         width: 1200,
         height: 630,
-        alt: 'Dr. Sayuj Krishnan - Best Neurosurgeon in Hyderabad'
+        alt: 'Dr. Sayuj Krishnan - Best Neurosurgeon in Hyderabad',
+        type: 'image/jpeg'
       }
     ]
   },

@@ -41,6 +41,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: story.summary,
       type: 'article',
       url: `https://www.drsayuj.info/patient-stories/${story.slug}`,
+      siteName: 'Dr. Sayuj Krishnan - Neurosurgeon Hyderabad',
+      locale: 'en_IN',
+      images: [
+        {
+          url: `https://www.drsayuj.info/api/og?title=${encodeURIComponent(story.title)}&subtitle=${encodeURIComponent('Patient Success Story')}`,
+          width: 1200,
+          height: 630,
+          alt: `${story.title} - Patient Success Story`,
+          type: 'image/jpeg'
+        }
+      ],
     },
   };
 }

@@ -14,12 +14,19 @@ export const metadata: Metadata = {
     canonical: "/blog",
   },
   openGraph: {
+    title: "Blog | Dr Sayuj Krishnan - Neurosurgery Insights",
+    description: "Latest insights, research, and updates in neurosurgery from Dr Sayuj Krishnan. Expert articles on brain and spine conditions, treatments, and innovations.",
+    url: `${SITE_URL}/blog`,
+    siteName: 'Dr. Sayuj Krishnan - Neurosurgeon Hyderabad',
+    locale: 'en_IN',
+    type: 'website',
     images: [
       {
         url: `${SITE_URL}/api/og?title=${encodeURIComponent("Neurosurgery Blog")}&subtitle=${encodeURIComponent("Expert insights & research")}`,
         width: 1200,
         height: 630,
         alt: "Neurosurgery Blog — Dr Sayuj Krishnan",
+        type: 'image/jpeg'
       },
     ],
   },

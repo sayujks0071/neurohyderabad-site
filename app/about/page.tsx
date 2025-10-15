@@ -6,12 +6,19 @@ export const metadata: Metadata = {
   description: "Dr Sayuj Krishnan is a highly experienced neurosurgeon with 15 years of expertise in minimally invasive brain and spine surgery in Hyderabad. MBBS, DNB Neurosurgery, Fellowship in MISS.",
   alternates: { canonical: "/about" },
   openGraph: {
+    title: "About Dr Sayuj Krishnan | Leading Neurosurgeon in Hyderabad",
+    description: "Dr Sayuj Krishnan is a highly experienced neurosurgeon with 15 years of expertise in minimally invasive brain and spine surgery in Hyderabad. MBBS, DNB Neurosurgery, Fellowship in MISS.",
+    url: `${SITE_URL}/about`,
+    siteName: 'Dr. Sayuj Krishnan - Neurosurgeon Hyderabad',
+    locale: 'en_IN',
+    type: 'profile',
     images: [
       {
         url: `${SITE_URL}/api/og?title=${encodeURIComponent("About Dr Sayuj Krishnan")}&subtitle=${encodeURIComponent("15 years of neurosurgical expertise")}`,
         width: 1200,
         height: 630,
         alt: "About Dr Sayuj Krishnan — Neurosurgeon in Hyderabad",
+        type: 'image/jpeg'
       },
     ],
   },
