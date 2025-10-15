@@ -133,3 +133,61 @@ p, li, span, div {
 .border-gray-500 {
   border-color: #6b7280 !important;
 }
+
+/* Fix emerald text contrast on dark backgrounds */
+.text-emerald-300 {
+  color: #6ee7b7 !important; /* Lighter emerald for better contrast on dark backgrounds */
+}
+
+.text-emerald-400 {
+  color: #34d399 !important; /* Lighter emerald for better contrast on dark backgrounds */
+}
+
+/* Fix slate text contrast on dark backgrounds */
+.text-slate-300 {
+  color: #cbd5e1 !important; /* Lighter slate for better contrast on dark backgrounds */
+}
+
+.text-slate-400 {
+  color: #94a3b8 !important; /* Lighter slate for better contrast on dark backgrounds */
+}
+
+.text-slate-100 {
+  color: #f1f5f9 !important; /* Lighter slate for better contrast on dark backgrounds */
+}
+
+/* Fix dark background sections for better contrast */
+.bg-slate-900 {
+  background-color: #0f172a !important; /* Darker slate for better contrast */
+}
+
+.bg-slate-800 {
+  background-color: #1e293b !important; /* Darker slate for better contrast */
+}
+
+/* Fix orange text contrast */
+.text-orange-600 {
+  color: #ea580c !important; /* Darker orange for better contrast */
+}
+
+.hover\:text-orange-800:hover {
+  color: #9a3412 !important; /* Darker orange for hover state */
+}
+
+/* Fix green text contrast */
+.text-green-600 {
+  color: #16a34a !important; /* Darker green for better contrast */
+}
+
+.hover\:text-green-800:hover {
+  color: #166534 !important; /* Darker green for hover state */
+}
+
+/* Fix blue button contrast */
+.bg-blue-500 {
+  background-color: #3b82f6 !important; /* Darker blue for better contrast with white text */
+}
+
+.hover\:bg-blue-600:hover {
+  background-color: #2563eb !important; /* Darker blue for hover state */
+}
