@@ -281,7 +281,7 @@ export function GlobalStructuredData() {
         "@id": `${SITE_URL}/#organization`,
         "name": "Dr Sayuj Krishnan - Neurosurgeon",
         "url": `${SITE_URL}`,
-        "logo": `${SITE_URL}/images/logo.png`,
+        "logo": `${SITE_URL}/images/logo-optimized.png`,
         "contactPoint": {
           "@type": "ContactPoint",
           "telephone": "+919778280044",

@@ -22,8 +22,8 @@ const nextConfig = {
   webpack: (config, { dev, isServer }) => {
     // Optimize for production builds
     if (!dev && !isServer) {
-      // Enable modern JavaScript features
-      config.target = ['web', 'es2020'];
+      // Enable modern JavaScript features - target modern browsers
+      config.target = ['web', 'es2022'];
       
       // Optimize bundle splitting
       config.optimization.splitChunks = {
@@ -47,6 +47,15 @@ const nextConfig = {
             reuseExistingChunk: true,
           },
         },
+      };
+      
+      // Reduce polyfills for modern browsers
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        // Remove unnecessary polyfills for modern browsers
+        fs: false,
+        net: false,
+        tls: false,
       };
     }
     
