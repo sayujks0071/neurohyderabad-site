@@ -20,6 +20,9 @@ import TrustSignals from "./_components/TrustSignals";
 export const metadata = {
   title: 'Best Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan | Brain & Spine Surgery',
   description: 'Dr. Sayuj Krishnan is the best neurosurgeon in Hyderabad specializing in endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures. Same-day discharge available at Yashoda Hospital Malakpet. Book consultation now.',
+  alternates: {
+    canonical: SITE_URL,
+  },
   keywords: [
     'best neurosurgeon hyderabad',
     'dr sayuj krishnan',

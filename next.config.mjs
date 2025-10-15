@@ -76,6 +76,12 @@ const nextConfig = {
         destination: 'https://www.drsayuj.info/$1',
         permanent: true,
       },
+      // CRITICAL: Fix 404 redirect for epilepsy surgery
+      {
+        source: '/services/epilepsy-surgery',
+        destination: '/services/epilepsy-surgery-hyderabad',
+        permanent: true,
+      },
       // Existing service consolidation
       {
         source: '/brain-tumor-surgery-hyderabad',

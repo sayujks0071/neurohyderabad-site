@@ -33,10 +33,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: `${story.title} | Patient Success Story | Dr. Sayuj Krishnan`,
     description: `${story.summary} Read the complete patient story of ${story.patientInitials} who underwent ${story.procedure} in Hyderabad.`,
     keywords: `${story.procedure}, ${story.condition}, patient story, neurosurgery, spine surgery, Hyderabad, Dr. Sayuj Krishnan`,
+    alternates: {
+      canonical: `https://www.drsayuj.info/patient-stories/${story.slug}`,
+    },
     openGraph: {
       title: `${story.title} | Patient Success Story`,
       description: story.summary,
       type: 'article',
+      url: `https://www.drsayuj.info/patient-stories/${story.slug}`,
     },
   };
 }
