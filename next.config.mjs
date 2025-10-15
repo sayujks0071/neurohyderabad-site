@@ -268,13 +268,22 @@ const nextConfig = {
       {
         source: "/images/:path*",
         headers: [
-          { key: "Cache-Control", value: "public, max-age=31536000, immutable" }
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+          { key: "Expires", value: "Thu, 31 Dec 2025 23:59:59 GMT" }
         ]
       },
       {
         source: "/:all*(svg|jpg|jpeg|png|gif|webp|avif|ico|js|css|woff2)",
         headers: [
-          { key: "Cache-Control", value: "public, max-age=31536000, immutable" }
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+          { key: "Expires", value: "Thu, 31 Dec 2025 23:59:59 GMT" }
+        ]
+      },
+      {
+        source: "/_next/image/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+          { key: "Expires", value: "Thu, 31 Dec 2025 23:59:59 GMT" }
         ]
       },
     ];
