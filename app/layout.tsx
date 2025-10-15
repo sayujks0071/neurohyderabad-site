@@ -136,7 +136,9 @@ export default function RootLayout({
             <link rel="preconnect" href="https://i.ytimg.com" crossOrigin="anonymous" />
             
             {/* Preload critical resources with fetchpriority */}
-            <link rel="preload" href="/images/logo.png" as="image" type="image/png" fetchPriority="high" />
+            <link rel="preload" href="/images/logo.avif" as="image" type="image/avif" fetchPriority="high" />
+            <link rel="preload" href="/images/logo.webp" as="image" type="image/webp" fetchPriority="high" />
+            <link rel="preload" href="/images/logo-optimized.png" as="image" type="image/png" fetchPriority="high" />
             <link rel="preload" href="/images/og-default.jpg" as="image" type="image/jpeg" fetchPriority="high" />
             
             {/* DNS prefetch for external domains */}

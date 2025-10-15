@@ -14,6 +14,43 @@ const nextConfig = {
     optimizePackageImports: ['@/components', '@/lib'],
     // Enable partial pre-rendering for better performance
     ppr: false,
+    // Enable modern JavaScript features
+    esmExternals: true,
+  },
+  
+  // Webpack optimizations for better performance
+  webpack: (config, { dev, isServer }) => {
+    // Optimize for production builds
+    if (!dev && !isServer) {
+      // Enable modern JavaScript features
+      config.target = ['web', 'es2020'];
+      
+      // Optimize bundle splitting
+      config.optimization.splitChunks = {
+        chunks: 'all',
+        cacheGroups: {
+          default: {
+            minChunks: 2,
+            priority: -20,
+            reuseExistingChunk: true,
+          },
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendors',
+            priority: -10,
+            chunks: 'all',
+          },
+          common: {
+            name: 'common',
+            minChunks: 2,
+            priority: -5,
+            reuseExistingChunk: true,
+          },
+        },
+      };
+    }
+    
+    return config;
   },
   
   // Server external packages (moved from experimental)
@@ -32,6 +69,11 @@ const nextConfig = {
   // Configure images for dynamic OG generation and local images
   images: {
     formats: ['image/avif', 'image/webp'],
+    // Enable modern image formats with fallbacks
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    // Enable responsive images
+    minimumCacheTTL: 31536000, // 1 year
     remotePatterns: [
       {
         protocol: 'https',
