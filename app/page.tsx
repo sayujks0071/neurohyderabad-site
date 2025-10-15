@@ -340,7 +340,7 @@ export default function Home() {
                   including microvascular decompression (MVD) and radiosurgery.
                 </p>
                 <div className="bg-white p-6 rounded-lg shadow-md mb-6">
-                  <h4 className="font-semibold text-blue-700 mb-3">Treatment Options:</h4>
+                  <h3 className="font-semibold text-blue-700 mb-3">Treatment Options:</h3>
                   <ul className="space-y-2 text-gray-700">
                     <li>• Medical therapy (first-line treatment)</li>
                     <li>• Microvascular decompression (MVD)</li>
@@ -416,7 +416,7 @@ export default function Home() {
                   and vagus nerve stimulation (VNS), he helps patients achieve better seizure control.
                 </p>
                 <div className="bg-blue-50 p-6 rounded-lg mb-6">
-                  <h4 className="font-semibold text-blue-800 mb-3">Surgical Options:</h4>
+                  <h3 className="font-semibold text-blue-800 mb-3">Surgical Options:</h3>
                   <ul className="space-y-2 text-blue-700">
                     <li>• Temporal lobectomy</li>
                     <li>• Laser interstitial thermal therapy (LITT)</li>
@@ -549,7 +549,7 @@ export default function Home() {
                 </p>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="bg-white p-4 rounded-lg shadow-md">
-                    <h4 className="font-semibold text-blue-700 mb-2">Central Hyderabad</h4>
+                    <h3 className="font-semibold text-blue-700 mb-2">Central Hyderabad</h3>
                     <ul className="text-sm text-gray-600 space-y-1">
                       <li>• Jubilee Hills</li>
                       <li>• Banjara Hills</li>
@@ -558,7 +558,7 @@ export default function Home() {
                     </ul>
                   </div>
                   <div className="bg-white p-4 rounded-lg shadow-md">
-                    <h4 className="font-semibold text-blue-700 mb-2">Other Areas</h4>
+                    <h3 className="font-semibold text-blue-700 mb-2">Other Areas</h3>
                     <ul className="text-sm text-gray-600 space-y-1">
                       <li>• Madhapur</li>
                       <li>• Kondapur</li>
@@ -572,7 +572,7 @@ export default function Home() {
                 <h3 className="text-xl font-semibold mb-4 text-blue-700">Hospital Location</h3>
                 <div className="space-y-4">
                   <div>
-                    <h4 className="font-semibold text-gray-800">Yashoda Hospital</h4>
+                    <h3 className="font-semibold text-gray-800">Yashoda Hospital</h3>
                     <p className="text-gray-600">
                       Room No 317, OPD Block<br />
                       Malakpet, Hyderabad<br />
@@ -580,7 +580,7 @@ export default function Home() {
                     </p>
                   </div>
                   <div className="pt-4 border-t">
-                    <h4 className="font-semibold text-gray-800 mb-2">Contact Information</h4>
+                    <h3 className="font-semibold text-gray-800 mb-2">Contact Information</h3>
                     <p className="text-gray-600">
                       <strong>Phone:</strong> +91 9778280044<br />
                       <strong>Email:</strong> neurospinehyd@drsayuj.com

@@ -5,12 +5,12 @@ export default function DoctorCard() {
   return (
     <div className="bg-white rounded-xl shadow-lg p-6 max-w-md mx-auto">
       <div className="text-center">
-        {/* Doctor Photo Placeholder */}
-        <div className="w-32 h-32 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full mx-auto mb-4 flex items-center justify-center">
+        {/* Doctor Photo - Optimized for LCP */}
+        <div className="w-32 h-32 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full mx-auto mb-4 flex items-center justify-center relative overflow-hidden">
           <div className="text-4xl text-blue-600">👨‍⚕️</div>
         </div>
         
-        <h3 className="text-2xl font-bold text-blue-800 mb-2">Dr. Sayuj Krishnan</h3>
+        <h2 className="text-2xl font-bold text-blue-800 mb-2">Dr. Sayuj Krishnan</h2>
         <p className="text-lg text-blue-600 mb-3">Neurosurgeon & Spine Surgeon</p>
         
         <div className="space-y-2 text-sm text-gray-600 mb-4">
