@@ -272,6 +272,39 @@ const nextConfig = {
           { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
           // HSTS for security (after redirects are confirmed)
           { key: "Strict-Transport-Security", value: "max-age=31536000; includeSubDomains; preload" },
+          
+          // Content Security Policy (CSP) - High Security
+          { 
+            key: "Content-Security-Policy", 
+            value: [
+              "default-src 'self'",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://statsig.com https://api.statsig.com https://cdn.statsig.com",
+              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+              "font-src 'self' https://fonts.gstatic.com",
+              "img-src 'self' data: https: blob:",
+              "media-src 'self' https:",
+              "object-src 'none'",
+              "base-uri 'self'",
+              "form-action 'self'",
+              "frame-ancestors 'self'",
+              "connect-src 'self' https://www.google-analytics.com https://statsig.com https://api.statsig.com https://cdn.statsig.com https://api.whatsapp.com https://wa.me",
+              "frame-src 'self' https://www.youtube.com",
+              "worker-src 'self' blob:",
+              "manifest-src 'self'",
+              "require-trusted-types-for 'script'",
+              "trusted-types default"
+            ].join("; ")
+          },
+          
+          // Cross-Origin-Opener-Policy (COOP) - High Security
+          { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
+          
+          // Cross-Origin-Embedder-Policy (COEP) - Enhanced Security
+          { key: "Cross-Origin-Embedder-Policy", value: "require-corp" },
+          
+          // Cross-Origin-Resource-Policy (CORP) - Enhanced Security
+          { key: "Cross-Origin-Resource-Policy", value: "same-origin" },
+          
           // Safari optimization: Help with content decoding
           { key: "Content-Type", value: "text/html; charset=utf-8" },
           { key: "Cache-Control", value: "public, s-maxage=3600, max-age=600, stale-while-revalidate=86400" },
@@ -284,48 +317,69 @@ const nextConfig = {
       {
         source: "/api/:path*",
         headers: [
-          { key: "Cache-Control", value: "public, max-age=3600, s-maxage=3600" }
+          { key: "Cache-Control", value: "public, max-age=3600, s-maxage=3600" },
+          // API Security Headers
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "X-Frame-Options", value: "DENY" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          // API-specific CSP
+          { 
+            key: "Content-Security-Policy", 
+            value: "default-src 'self'; script-src 'none'; style-src 'none'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
+          }
         ]
       },
       {
         source: "/_next/static/css/:path*",
         headers: [
           { key: "Content-Type", value: "text/css; charset=utf-8" },
-          { key: "Cache-Control", value: "public, max-age=31536000, immutable" }
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "Cross-Origin-Resource-Policy", value: "cross-origin" }
         ]
       },
       {
         source: "/_next/static/js/:path*",
         headers: [
           { key: "Content-Type", value: "application/javascript; charset=utf-8" },
-          { key: "Cache-Control", value: "public, max-age=31536000, immutable" }
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "Cross-Origin-Resource-Policy", value: "cross-origin" }
         ]
       },
       {
         source: "/_next/static/:path*",
         headers: [
-          { key: "Cache-Control", value: "public, max-age=31536000, immutable" }
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "Cross-Origin-Resource-Policy", value: "cross-origin" }
         ]
       },
       {
         source: "/images/:path*",
         headers: [
           { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
-          { key: "Expires", value: "Thu, 31 Dec 2025 23:59:59 GMT" }
+          { key: "Expires", value: "Thu, 31 Dec 2025 23:59:59 GMT" },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "Cross-Origin-Resource-Policy", value: "cross-origin" }
         ]
       },
       {
         source: "/:all*(svg|jpg|jpeg|png|gif|webp|avif|ico|js|css|woff2)",
         headers: [
           { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
-          { key: "Expires", value: "Thu, 31 Dec 2025 23:59:59 GMT" }
+          { key: "Expires", value: "Thu, 31 Dec 2025 23:59:59 GMT" },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "Cross-Origin-Resource-Policy", value: "cross-origin" }
         ]
       },
       {
         source: "/_next/image/:path*",
         headers: [
           { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
-          { key: "Expires", value: "Thu, 31 Dec 2025 23:59:59 GMT" }
+          { key: "Expires", value: "Thu, 31 Dec 2025 23:59:59 GMT" },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "Cross-Origin-Resource-Policy", value: "cross-origin" }
         ]
       },
     ];
