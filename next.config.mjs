@@ -408,6 +408,49 @@ const nextConfig = {
       },
     ];
   }
+
+  // Performance optimizations
+  experimental: {
+    optimizeCss: true,
+    optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
+  },
+  
+  // Webpack optimizations
+  webpack: (config, { dev, isServer }) => {
+    if (!dev && !isServer) {
+      // Optimize for production
+      config.optimization.splitChunks = {
+        chunks: 'all',
+        cacheGroups: {
+          vendor: {
+            test: /[\/]node_modules[\/]/,
+            name: 'vendors',
+            chunks: 'all',
+            maxSize: 200000,
+          },
+          common: {
+            name: 'common',
+            minChunks: 2,
+            chunks: 'all',
+            maxSize: 100000,
+          },
+          analytics: {
+            test: /[\/]node_modules[\/](statsig|analytics)[\/]/,
+            name: 'analytics',
+            chunks: 'all',
+            maxSize: 50000,
+          },
+          ui: {
+            test: /[\/]node_modules[\/](@radix-ui|lucide-react)[\/]/,
+            name: 'ui',
+            chunks: 'all',
+            maxSize: 100000,
+          }
+        }
+      };
+    }
+    return config;
+  },
 };
 
 export default nextConfig;// COMPRESSION FIX: Thu Oct  9 22:30:00 IST 2025 - Disable Next.js compression to fix Chrome ERR_CONTENT_DECODING_FAILED

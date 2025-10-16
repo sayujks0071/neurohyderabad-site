@@ -1,4 +1,5 @@
 import { patientStories } from "../content/stories";
+import { CONDITION_RESOURCES } from "./conditionsIndex";
 
 export interface SearchItem {
   title: string;
@@ -18,9 +19,9 @@ const CORE_PAGES: SearchItem[] = [
     tags: ["profile", "experience", "credentials", "education"],
   },
   {
-    title: "Neurological Conditions Treated",
+    title: "Neurological Conditions A–Z",
     description:
-      "Overview of brain, spine, and nerve disorders managed at Yashoda Hospital with minimally invasive options.",
+      "Browse the A–Z index of brain, spine, and nerve disorders treated by Dr. Sayuj Krishnan with links to detailed care pathways.",
     href: "/conditions",
     category: "Conditions & Treatments",
     tags: ["conditions", "neurology", "spine", "brain"],
@@ -123,56 +124,19 @@ const CORE_PAGES: SearchItem[] = [
   },
 ];
 
-const CONDITION_PAGES: SearchItem[] = [
-  {
-    title: "Trigeminal Neuralgia Treatment",
-    description:
-      "Pain relief strategies and microvascular decompression options for trigeminal neuralgia.",
-    href: "/conditions/trigeminal-neuralgia-treatment-hyderabad",
+const CONDITION_INDEX_ITEMS: SearchItem[] = CONDITION_RESOURCES.map(
+  (condition) => ({
+    title: condition.name,
+    description: condition.summary,
+    href: `/conditions/a-z/${condition.slug}`,
     category: "Conditions & Treatments",
-    tags: ["facial pain", "mvd", "nerve"],
-  },
-  {
-    title: "Cervical Radiculopathy Care",
-    description:
-      "Evaluation and minimally invasive procedures for nerve compression causing arm pain and numbness.",
-    href: "/conditions/cervical-radiculopathy-treatment-hyderabad",
-    category: "Conditions & Treatments",
-    tags: ["neck pain", "nerve root", "cervical spine"],
-  },
-  {
-    title: "Sciatica & Lumbar Disc Herniation",
-    description:
-      "Diagnosis and treatment of sciatica, including endoscopic discectomy and rehabilitation protocol.",
-    href: "/conditions/sciatica-treatment-hyderabad",
-    category: "Conditions & Treatments",
-    tags: ["sciatica", "lumbar", "disc herniation"],
-  },
-  {
-    title: "Lumbar Spinal Stenosis",
-    description:
-      "Conservative care and minimally invasive ULBD decompression for lumbar spinal stenosis.",
-    href: "/conditions/spinal-stenosis-treatment-hyderabad",
-    category: "Conditions & Treatments",
-    tags: ["stenosis", "lumbar spine", "narrowing"],
-  },
-  {
-    title: "Brain Tumor Warning Signs",
-    description:
-      "Early symptoms of brain tumors, evaluation pathways, and when to seek urgent care.",
-    href: "/symptoms/signs-of-brain-tumor",
-    category: "Patient Resources",
-    tags: ["symptoms", "brain tumor", "warning signs"],
-  },
-  {
-    title: "Pain on Top of Head Causes",
-    description:
-      "Comprehensive look at neurological reasons for vertex headaches and when to consult a neurosurgeon.",
-    href: "/symptoms/pain-on-top-of-head-causes",
-    category: "Patient Resources",
-    tags: ["headache", "symptoms", "pain"],
-  },
-];
+    tags: [
+      ...condition.keywords,
+      ...(condition.symptomHighlights ?? []),
+      ...(condition.treatmentHighlights ?? []),
+    ],
+  }),
+);
 
 const PATIENT_STORY_ITEMS: SearchItem[] = patientStories.map((story) => ({
   title: story.title,
@@ -184,7 +148,7 @@ const PATIENT_STORY_ITEMS: SearchItem[] = patientStories.map((story) => ({
 
 export const SEARCH_INDEX: SearchItem[] = [
   ...CORE_PAGES,
-  ...CONDITION_PAGES,
+  ...CONDITION_INDEX_ITEMS,
   ...PATIENT_STORY_ITEMS,
 ];
 
