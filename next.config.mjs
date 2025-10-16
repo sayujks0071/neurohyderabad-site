@@ -14,8 +14,6 @@ const nextConfig = {
     optimizePackageImports: ['@/components', '@/lib'],
     // Enable partial pre-rendering for better performance
     ppr: false,
-    // Enable modern JavaScript features
-    esmExternals: true,
   },
   
   // Webpack optimizations for better performance
@@ -81,7 +79,7 @@ const nextConfig = {
     return config;
   },
   
-  // Server external packages (moved from experimental)
+  // Server external packages (moved from experimental.serverComponentsExternalPackages)
   serverExternalPackages: ['@openai/agents'],
   
   // Turbopack configuration (moved from experimental)
