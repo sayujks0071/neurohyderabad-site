@@ -25,9 +25,11 @@ const nextConfig = {
       // Enable modern JavaScript features - target modern browsers
       config.target = ['web', 'es2022'];
       
-      // Optimize bundle splitting
+      // Optimize bundle splitting for better performance
       config.optimization.splitChunks = {
         chunks: 'all',
+        maxInitialRequests: 20,
+        maxAsyncRequests: 20,
         cacheGroups: {
           default: {
             minChunks: 2,
@@ -39,12 +41,29 @@ const nextConfig = {
             name: 'vendors',
             priority: -10,
             chunks: 'all',
+            maxSize: 200000, // 200KB max chunk size
           },
           common: {
             name: 'common',
             minChunks: 2,
             priority: -5,
             reuseExistingChunk: true,
+            maxSize: 100000, // 100KB max chunk size
+          },
+          // Split analytics into separate chunks
+          analytics: {
+            test: /[\\/]node_modules[\\/](statsig|@google-analytics|gtag)[\\/]/,
+            name: 'analytics',
+            priority: 10,
+            chunks: 'async',
+          },
+          // Split UI components
+          ui: {
+            test: /[\\/]src[\\/]components[\\/]/,
+            name: 'ui',
+            priority: 5,
+            chunks: 'all',
+            maxSize: 150000, // 150KB max chunk size
           },
         },
       };
