@@ -319,8 +319,7 @@ const nextConfig = {
               "frame-src 'self' https://www.youtube.com",
               "worker-src 'self' blob:",
               "manifest-src 'self'",
-              "require-trusted-types-for 'script'",
-              "trusted-types default"
+              "trusted-types nextjs#bundler default"
             ].join("; ")
           },
           
