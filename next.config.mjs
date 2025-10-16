@@ -316,8 +316,7 @@ const nextConfig = {
               "connect-src 'self' https://www.google-analytics.com https://statsig.com https://api.statsig.com https://cdn.statsig.com https://api.whatsapp.com https://wa.me",
               "frame-src 'self' https://www.youtube.com",
               "worker-src 'self' blob:",
-              "manifest-src 'self'",
-              "trusted-types nextjs#bundler default"
+              "manifest-src 'self'"
             ].join("; ")
           },
           

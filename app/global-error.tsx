@@ -9,6 +9,11 @@ export default function GlobalError({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  if (typeof window !== "undefined") {
+    // eslint-disable-next-line no-console
+    console.error("Global app error boundary caught:", error);
+  }
+
   return (
     <html lang="en">
       <head>
