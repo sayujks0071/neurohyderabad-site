@@ -78,7 +78,8 @@ function DeferredAnalytics() {
       <StatsigAnalytics />
       <StatsigSessionReplay />
       <PhoneClickTracker />
-      <SEOOptimizer pageType="home" pageSlug="/" />
+      {/* Temporarily disabled SEOOptimizer to fix runtime error */}
+      {/* <SEOOptimizer pageType="home" pageSlug="/" /> */}
       <FloatingWhatsApp />
       <CookieConsent />
     </>
