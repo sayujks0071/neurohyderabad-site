@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { analytics } from '@/src/lib/analytics';
@@ -11,11 +11,18 @@ interface StandardCTAProps {
 }
 
 export default function StandardCTA({ className = '', variant = 'default' }: StandardCTAProps) {
+  const [isClient, setIsClient] = useState(false);
   const pathname = usePathname();
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
   const isCompact = variant === 'compact';
   const isStacked = variant === 'stacked';
 
   const handleCTAClick = (ctaLabel: string, ctaType: 'phone' | 'whatsapp' | 'appointment') => {
+    if (!isClient) return; // Only track on client side
+    
     switch (ctaType) {
       case 'phone':
         analytics.phoneClick(pathname, 'main');

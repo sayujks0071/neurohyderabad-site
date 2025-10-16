@@ -10,11 +10,14 @@ interface StickyCTAProps {
 
 export default function StickyCTA({ className = '' }: StickyCTAProps) {
   const [isVisible, setIsVisible] = useState(false);
+  const [isClient, setIsClient] = useState(false);
   
   // A/B test for sticky CTA
   const { value: variant } = useExperiment('exp_sticky_cta');
 
   useEffect(() => {
+    setIsClient(true);
+    
     const handleScroll = () => {
       const scrollTop = window.scrollY;
       const windowHeight = window.innerHeight;
@@ -31,9 +34,9 @@ export default function StickyCTA({ className = '' }: StickyCTAProps) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Only show for treatment variant
-  const variantValue = String(variant || 'control');
-  if (variantValue !== 'treatment' || !isVisible) {
+  // Only show for treatment variant, but always return null during SSR to prevent hydration mismatch
+  const variantValue = isClient ? String(variant || 'control') : 'control';
+  if (variantValue !== 'treatment' || !isVisible || !isClient) {
     return null;
   }
 

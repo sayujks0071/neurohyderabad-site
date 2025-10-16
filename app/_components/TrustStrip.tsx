@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useExperiment } from '@statsig/react-bindings';
 
 interface TrustStripProps {
@@ -8,11 +8,18 @@ interface TrustStripProps {
 }
 
 export default function TrustStrip({ className = '' }: TrustStripProps) {
+  const [isClient, setIsClient] = useState(false);
+  
   // A/B test for trust strip
   const { value: variant } = useExperiment('exp_trust_strip');
 
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   const getTrustElements = () => {
-    const variantValue = String(variant || 'control');
+    // Always use control variant during SSR to prevent hydration mismatch
+    const variantValue = isClient ? String(variant || 'control') : 'control';
     switch (variantValue) {
       case 'treatment':
         return [
