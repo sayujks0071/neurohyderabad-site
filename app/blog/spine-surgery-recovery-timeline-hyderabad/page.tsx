@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { SITE_URL } from "../../../src/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Spine Surgery Recovery Timeline in Hyderabad | Dr. Sayuj Krishnan",
+  title: "Spine Surgery Recovery Timeline | Dr. Sayuj Krishnan",
   description: "Complete guide to spine surgery recovery timeline in Hyderabad. Learn what to expect after endoscopic spine surgery and recovery milestones.",
   keywords: "spine surgery recovery hyderabad, endoscopic surgery recovery, spine surgery timeline, post-operative care",
   alternates: {

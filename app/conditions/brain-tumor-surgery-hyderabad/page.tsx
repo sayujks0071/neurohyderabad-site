@@ -181,7 +181,7 @@ const references = [
 ] as const;
 
 export const metadata: Metadata = {
-  title: "Brain Tumor Surgery Hyderabad — Microsurgical & Radiosurgery Care",
+  title: "Brain Tumor Surgery Hyderabad | Dr. Sayuj Krishnan",
   description:
     "Comprehensive brain tumour evaluation, neuronavigation-guided microsurgery, radiosurgery, and rehabilitation with Dr. Sayuj Krishnan at Yashoda Hospital, Hyderabad.",
   alternates: {

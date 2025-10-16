@@ -2,12 +2,12 @@ import { SITE_URL } from "../../src/lib/seo";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About Dr Sayuj Krishnan | Leading Neurosurgeon in Hyderabad",
-  description: "Dr Sayuj Krishnan is a highly experienced neurosurgeon with 15 years of expertise in minimally invasive brain and spine surgery in Hyderabad. MBBS, DNB Neurosurgery, Fellowship in MISS.",
+  title: "About Dr Sayuj Krishnan | Neurosurgeon Hyderabad",
+  description: "Dr Sayuj Krishnan is a highly experienced neurosurgeon with 15 years of expertise in minimally invasive brain and spine surgery in Hyderabad.",
   alternates: { canonical: "/about" },
   openGraph: {
-    title: "About Dr Sayuj Krishnan | Leading Neurosurgeon in Hyderabad",
-    description: "Dr Sayuj Krishnan is a highly experienced neurosurgeon with 15 years of expertise in minimally invasive brain and spine surgery in Hyderabad. MBBS, DNB Neurosurgery, Fellowship in MISS.",
+    title: "About Dr Sayuj Krishnan | Neurosurgeon Hyderabad",
+    description: "Dr Sayuj Krishnan is a highly experienced neurosurgeon with 15 years of expertise in minimally invasive brain and spine surgery in Hyderabad.",
     url: `${SITE_URL}/about`,
     siteName: 'Dr. Sayuj Krishnan - Neurosurgeon Hyderabad',
     locale: 'en_IN',
