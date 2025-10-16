@@ -30,8 +30,12 @@ const PhoneClickTracker = dynamic(
   { ssr: false, loading: () => null }
 );
 
-const SEOOptimizer = dynamic(
-  () => import("../../src/components/SEOOptimizer"),
+// Wrap SEO optimizer to guarantee props are preserved and avoid hydration mismatch
+const SEOOptimizerWrapper = dynamic(
+  () =>
+    import("../../src/components/SEOOptimizer").then((module) => ({
+      default: module.default,
+    })),
   { ssr: false, loading: () => null }
 );
 
@@ -78,8 +82,7 @@ function DeferredAnalytics() {
       <StatsigAnalytics />
       <StatsigSessionReplay />
       <PhoneClickTracker />
-      {/* Temporarily disabled SEOOptimizer to fix runtime error */}
-      {/* <SEOOptimizer pageType="home" pageSlug="/" /> */}
+      <SEOOptimizerWrapper pageType="home" pageSlug="/" />
       <FloatingWhatsApp />
       <CookieConsent />
     </>

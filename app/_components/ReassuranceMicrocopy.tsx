@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useExperiment } from '@statsig/react-bindings';
+import { useSafeExperiment } from '@/src/hooks/useSafeExperiment';
 
 interface ReassuranceMicrocopyProps {
   className?: string;
@@ -12,12 +12,10 @@ export default function ReassuranceMicrocopy({
   className = '', 
   serviceType = 'spine' 
 }: ReassuranceMicrocopyProps) {
-  // A/B test for reassurance microcopy
-  const { value: variant } = useExperiment('exp_reassurance_microcopy');
+  const variant = useSafeExperiment<string>('exp_reassurance_microcopy', 'control');
 
   const getMicrocopy = () => {
-    const variantValue = String(variant || 'control');
-    switch (variantValue) {
+    switch (variant) {
       case 'treatment':
         return "Minimally invasive options first—surgery only when needed";
       case 'control':

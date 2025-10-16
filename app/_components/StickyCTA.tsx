@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useExperiment } from '@statsig/react-bindings';
+import { useSafeExperiment } from '@/src/hooks/useSafeExperiment';
 import StandardCTA from './StandardCTA';
 
 interface StickyCTAProps {
@@ -11,9 +11,7 @@ interface StickyCTAProps {
 export default function StickyCTA({ className = '' }: StickyCTAProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [isClient, setIsClient] = useState(false);
-  
-  // A/B test for sticky CTA
-  const { value: variant } = useExperiment('exp_sticky_cta');
+  const variant = useSafeExperiment<string>('exp_sticky_cta', 'control');
 
   useEffect(() => {
     setIsClient(true);
@@ -35,7 +33,7 @@ export default function StickyCTA({ className = '' }: StickyCTAProps) {
   }, []);
 
   // Only show for treatment variant, but always return null during SSR to prevent hydration mismatch
-  const variantValue = isClient ? String(variant || 'control') : 'control';
+  const variantValue = isClient ? variant : 'control';
   if (variantValue !== 'treatment' || !isVisible || !isClient) {
     return null;
   }

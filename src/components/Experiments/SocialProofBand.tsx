@@ -1,18 +1,15 @@
 "use client";
-import { useExperiment } from '@statsig/react-bindings';
+import { useSafeExperiment } from '@/src/hooks/useSafeExperiment';
 
 interface SocialProofBandProps {
   className?: string;
 }
 
 export default function SocialProofBand({ className = "" }: SocialProofBandProps) {
-  const { value: socialProofVariant } = useExperiment('exp_social_proof_band');
-  
-  if (!socialProofVariant) return null;
+  const socialProofVariant = useSafeExperiment<string>('exp_social_proof_band', 'default');
 
   const getSocialProofContent = () => {
-    const variant = String(socialProofVariant || 'default');
-    switch (variant) {
+    switch (socialProofVariant) {
       case 'variant_b':
         return {
           title: "Trusted by 1000+ Patients",

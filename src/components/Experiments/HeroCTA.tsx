@@ -1,5 +1,5 @@
 "use client";
-import { useExperiment } from '@statsig/react-bindings';
+import { useSafeExperiment } from '@/src/hooks/useSafeExperiment';
 import { analytics } from '../../lib/analytics';
 
 interface HeroCTAProps {
@@ -8,19 +8,18 @@ interface HeroCTAProps {
 }
 
 export default function HeroCTA({ className = "", href = "/appointments/" }: HeroCTAProps) {
-  const { value: ctaVariant } = useExperiment('exp_hero_cta_copy');
+  const ctaVariant = useSafeExperiment<string>('exp_hero_cta_copy', 'default');
   
   const handleClick = () => {
     analytics.track('CTA_Click', {
-      cta_label: String(ctaVariant || 'default'),
+      cta_label: ctaVariant,
       cta_location: 'hero',
       page_type: 'home'
     });
   };
 
   const getCTAText = () => {
-    const variant = String(ctaVariant || 'default');
-    switch (variant) {
+    switch (ctaVariant) {
       case 'variant_b':
         return 'Schedule Consultation';
       case 'variant_c':
