@@ -252,3 +252,4 @@ export default function ServicePage() {
 4. Test the changes using the validation commands
 
 **Remember:** These fixes are critical for SEO performance and should be implemented immediately!
+

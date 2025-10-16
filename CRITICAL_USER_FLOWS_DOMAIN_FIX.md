@@ -169,3 +169,6 @@ const domain = searchParams.get("domain") || "drsayuj.info"; // Fixed
 **All critical user flows are now properly configured with the correct domain!** ✅
 
 
+
+
+

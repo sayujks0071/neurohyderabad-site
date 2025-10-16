@@ -241,3 +241,4 @@ If you need help implementing these fixes:
 4. Use the validation commands to test
 
 **Remember:** These fixes are critical for SEO performance and should be implemented as soon as possible!
+
