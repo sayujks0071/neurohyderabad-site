@@ -1,0 +1,46 @@
+{
+  "timestamp": "2025-10-16T17:42:07.125Z",
+  "site": "https://www.drsayuj.info",
+  "discovery": {},
+  "onPage": {
+    "totalPages": 6,
+    "pagesWithIssues": 6,
+    "commonIssues": {
+      "Meta description too long": 2,
+      "Title too long": 5
+    },
+    "titleAnalysis": {
+      "missing": 0,
+      "tooLong": 5,
+      "tooShort": 0,
+      "averageLength": 90
+    },
+    "metaDescriptionAnalysis": {
+      "missing": 0,
+      "tooLong": 2,
+      "tooShort": 0,
+      "averageLength": 154
+    },
+    "headingAnalysis": {
+      "missingH1": 0,
+      "multipleH1": 0,
+      "averageH2Count": 8
+    },
+    "canonicalAnalysis": {
+      "missing": 0,
+      "selfReferencing": 5
+    },
+    "imageAnalysis": {
+      "totalImages": 9,
+      "imagesWithoutAlt": 0,
+      "averageImagesPerPage": 2
+    },
+    "contentAnalysis": {
+      "averageWordCount": 2743,
+      "thinContent": 0
+    }
+  },
+  "technical": {},
+  "local": {},
+  "recommendations": []
+}
