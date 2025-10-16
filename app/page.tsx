@@ -3,7 +3,6 @@ import ExpandedFAQ from "../src/components/ExpandedFAQ";
 import PatientEducationVideos from "./_components/PatientEducationVideos";
 import RecoveryTimeline from "./_components/RecoveryTimeline";
 import LocalReputationPanel from "./_components/LocalReputationPanel";
-import FAQStructuredData from "./_components/FAQPageSchema";
 import { SITE_URL } from "../src/lib/seo";
 // Temporarily commenting out problematic imports
 // import BreadcrumbSchema from "./components/schemas/BreadcrumbSchema";
@@ -623,10 +622,6 @@ export default function Home() {
       </section>
 
       <ExpandedFAQ faqs={HOME_FAQS} className="bg-gray-50" />
-      <FAQStructuredData
-        faqs={HOME_FAQS.map(({ question, answer }) => ({ question, answer }))}
-        pageUrl={SITE_URL}
-      />
       <LocalReputationPanel />
 
       {/* Disease Guides Section */}
