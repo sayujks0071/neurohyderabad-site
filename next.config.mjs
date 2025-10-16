@@ -407,11 +407,10 @@ const nextConfig = {
         ]
       },
     ];
-  }
+  },
 
   // Performance optimizations
   experimental: {
-    optimizeCss: true,
     optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
   },
   
@@ -450,7 +449,7 @@ const nextConfig = {
       };
     }
     return config;
-  },
+  }
 };
 
 export default nextConfig;// COMPRESSION FIX: Thu Oct  9 22:30:00 IST 2025 - Disable Next.js compression to fix Chrome ERR_CONTENT_DECODING_FAILED

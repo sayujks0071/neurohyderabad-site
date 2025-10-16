@@ -17,8 +17,10 @@ export default function PerformanceMonitor() {
       // FID monitoring
       const fidObserver = new PerformanceObserver((list) => {
         const entries = list.getEntries();
-        entries.forEach((entry) => {
-          console.log('FID:', entry.processingStart - entry.startTime);
+        entries.forEach((entry: any) => {
+          if (entry.processingStart) {
+            console.log('FID:', entry.processingStart - entry.startTime);
+          }
         });
       });
       fidObserver.observe({ entryTypes: ['first-input'] });
@@ -27,7 +29,7 @@ export default function PerformanceMonitor() {
       let clsValue = 0;
       const clsObserver = new PerformanceObserver((list) => {
         const entries = list.getEntries();
-        entries.forEach((entry) => {
+        entries.forEach((entry: any) => {
           if (!entry.hadRecentInput) {
             clsValue += entry.value;
             console.log('CLS:', clsValue);
