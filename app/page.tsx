@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import Link from "next/link";
 import ExpandedFAQ from "../src/components/ExpandedFAQ";
 import PatientEducationVideos from "./_components/PatientEducationVideos";
@@ -135,13 +136,27 @@ const HOME_FAQS = [
 ];
 
 export default function Home() {
+  const heroStyles: CSSProperties = {
+    background: "linear-gradient(90deg, #2563eb 0%, #1e3a8a 100%)",
+    color: "#f8fafc",
+    paddingTop: "80px",
+    paddingBottom: "80px",
+  };
+
+  const heroLeadStyles: CSSProperties = {
+    color: "rgba(226, 238, 255, 0.96)",
+    fontWeight: 500,
+    lineHeight: 1.55,
+    maxWidth: "40rem",
+    margin: "0 auto 1.5rem auto",
+  };
 
   return (
     <>
       {/* <ScrollDepthTracker pageSlug="/" /> */}
       <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <header className="home-hero bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20">
+      <header className="home-hero bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20" style={heroStyles}>
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -152,9 +167,9 @@ export default function Home() {
                     Best Neurosurgeon in Hyderabad
                   </span>
                 </h1>
-                <p className="home-hero__lead text-xl md:text-2xl mb-6">
-                  Leading expert in minimally invasive brain & spine surgery, specialising in endoscopic spine procedures,
-                  advanced brain tumour resection, and comprehensive epilepsy care.
+                <p className="home-hero__lead text-xl md:text-2xl mb-6" style={heroLeadStyles}>
+                  Leading expert in minimally invasive brain & spine surgery. Specialising in endoscopic spine procedures,
+                  advanced brain tumour resection, and comprehensive epilepsy care with same-day discharge protocols.
                 </p>
                 {/* <HeroCTA /> */}
                 <div className="space-y-4">
