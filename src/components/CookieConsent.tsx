@@ -42,10 +42,10 @@ export default function CookieConsent() {
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div className="flex-1">
             <h3 className="font-semibold text-gray-900 mb-2">We use cookies to improve your experience</h3>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-800">
               We use essential cookies for website functionality and analytics cookies to understand how you use our site. 
               By continuing to use our website, you consent to our use of cookies. 
-              <a href="/cookies" className="text-blue-600 hover:underline ml-1">Learn more about our cookie policy</a>
+              <a href="/cookies" className="text-blue-800 hover:text-blue-900 underline ml-1 font-medium">Learn more about our cookie policy</a>
             </p>
           </div>
           <div className="flex gap-3">

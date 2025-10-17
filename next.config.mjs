@@ -304,7 +304,8 @@ const nextConfig = {
             key: "Content-Security-Policy", 
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://statsig.com https://api.statsig.com https://cdn.statsig.com",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://statsig.com https://api.statsig.com https://cdn.statsig.com https://accounts.google.com",
+              "connect-src 'self' https://www.google-analytics.com https://statsig.com https://api.statsig.com https://cdn.statsig.com https://featureassets.org https://prodregistryv2.org https://statsigapi.net https://cloudflare-dns.com",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
               "img-src 'self' data: https: blob:",
@@ -312,8 +313,9 @@ const nextConfig = {
               "object-src 'none'",
               "base-uri 'self'",
               "form-action 'self'",
+              "require-trusted-types-for 'script'",
+              "trusted-types nextjs#bundler default",
               "frame-ancestors 'self'",
-              "connect-src 'self' https://www.google-analytics.com https://statsig.com https://api.statsig.com https://cdn.statsig.com https://api.whatsapp.com https://wa.me",
               "frame-src 'self' https://www.youtube.com",
               "worker-src 'self' blob:",
               "manifest-src 'self'"
