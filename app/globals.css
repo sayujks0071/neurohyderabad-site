@@ -24,37 +24,6 @@ h1, h2, h3, h4, h5, h6 {
   color: #111827 !important; /* text-gray-900 - darker for better contrast */
 }
 
-/* Ensure body text has proper contrast */
-p, li, span, div {
-  color: #1f2937 !important; /* text-gray-800 - darker for better contrast */
-}
-
-/* Ensure breadcrumbs are readable */
-.text-gray-600 {
-  color: #374151 !important; /* text-gray-700 - darker for better contrast */
-}
-
-.text-gray-900 {
-  color: #111827 !important;
-}
-
-.text-gray-700 {
-  color: #374151 !important;
-}
-
-/* Ensure proper contrast for all text elements */
-.text-gray-800 {
-  color: #1f2937 !important;
-}
-
-.text-gray-500 {
-  color: #6b7280 !important;
-}
-
-.text-gray-400 {
-  color: #9ca3af !important;
-}
-
 /* Force light backgrounds */
 .bg-white {
   background-color: #ffffff !important;
@@ -190,4 +159,27 @@ p, li, span, div {
 
 .hover\:bg-blue-600:hover {
   background-color: #2563eb !important; /* Darker blue for hover state */
+}
+
+.home-hero__title {
+  color: #f8fafc !important;
+}
+
+.home-hero__subtitle {
+  color: #dbeafe !important;
+  font-weight: 600 !important;
+}
+
+.home-hero__lead {
+  color: rgba(226, 238, 255, 0.95) !important;
+  font-weight: 500;
+  line-height: 1.6;
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+@media (min-width: 1024px) {
+  .home-hero__lead {
+    margin-left: 0;
+  }
 }

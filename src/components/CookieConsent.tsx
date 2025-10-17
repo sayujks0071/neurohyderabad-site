@@ -19,6 +19,9 @@ export default function CookieConsent() {
   const handleAccept = () => {
     localStorage.setItem('cookie-consent', 'accepted');
     setShowBanner(false);
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('cookie-consent-change', { detail: 'accepted' }));
+    }
     analytics.track('Cookie_Consent_Accepted', {
       consent_type: 'all_cookies'
     });
@@ -27,6 +30,9 @@ export default function CookieConsent() {
   const handleDecline = () => {
     localStorage.setItem('cookie-consent', 'declined');
     setShowBanner(false);
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('cookie-consent-change', { detail: 'declined' }));
+    }
     analytics.track('Cookie_Consent_Declined', {
       consent_type: 'all_cookies'
     });

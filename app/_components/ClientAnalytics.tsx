@@ -3,18 +3,21 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 
-// Lazy load analytics components with SSR disabled and deferred loading
-const GoogleAnalytics = dynamic(
-  () => import("../../src/components/GoogleAnalytics"),
-  { ssr: false }
-);
-
 const WebVitals = dynamic(
   () => import("../../src/components/WebVitals"),
   { ssr: false }
 );
 
-// Defer non-critical analytics until after page load
+const CookieConsent = dynamic(
+  () => import("../../src/components/CookieConsent"),
+  { ssr: false }
+);
+
+const GoogleAnalytics = dynamic(
+  () => import("../../src/components/GoogleAnalytics"),
+  { ssr: false, loading: () => null }
+);
+
 const StatsigAnalytics = dynamic(
   () => import("../../src/components/StatsigAnalytics"),
   { ssr: false, loading: () => null }
@@ -30,7 +33,6 @@ const PhoneClickTracker = dynamic(
   { ssr: false, loading: () => null }
 );
 
-// Wrap SEO optimizer to guarantee props are preserved and avoid hydration mismatch
 const SEOOptimizerWrapper = dynamic(
   () =>
     import("../../src/components/SEOOptimizer").then((module) => ({
@@ -44,47 +46,81 @@ const FloatingWhatsApp = dynamic(
   { ssr: false, loading: () => null }
 );
 
-const CookieConsent = dynamic(
-  () => import("../../src/components/CookieConsent"),
-  { ssr: false, loading: () => null }
-);
-
 export default function ClientAnalytics() {
-  return (
-    <>
-      {/* Critical analytics - load immediately */}
-      <GoogleAnalytics />
-      <WebVitals />
-      
-      {/* Non-critical analytics - defer until after page load */}
-      <DeferredAnalytics />
-    </>
-  );
-}
-
-// Defer non-critical analytics to reduce main-thread blocking
-function DeferredAnalytics() {
+  const [enableAnalytics, setEnableAnalytics] = React.useState(false);
   const [shouldLoad, setShouldLoad] = React.useState(false);
 
   React.useEffect(() => {
-    // Defer loading until after page is fully loaded
-    const timer = setTimeout(() => {
-      setShouldLoad(true);
-    }, 1000); // 1 second delay
+    if (typeof window === "undefined") return;
 
-    return () => clearTimeout(timer);
+    const hasConsent = () => localStorage.getItem("cookie-consent") === "accepted";
+    if (hasConsent()) {
+      setEnableAnalytics(true);
+    }
+
+    const handler = (event: Event) => {
+      const detail = (event as CustomEvent<string>).detail;
+      setEnableAnalytics(detail === "accepted");
+    };
+
+    window.addEventListener("cookie-consent-change", handler);
+    return () => window.removeEventListener("cookie-consent-change", handler);
   }, []);
 
-  if (!shouldLoad) return null;
+  React.useEffect(() => {
+    if (!enableAnalytics) {
+      setShouldLoad(false);
+      return;
+    }
+
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    let idleHandle: number | null = null;
+    let timeoutHandle: number | null = null;
+
+    const enable = () => setShouldLoad(true);
+
+    const win = window as typeof window & {
+      requestIdleCallback?: (
+        callback: IdleRequestCallback,
+        options?: IdleRequestOptions
+      ) => number;
+      cancelIdleCallback?: (handle: number) => void;
+    };
+
+    if (win.requestIdleCallback) {
+      idleHandle = win.requestIdleCallback(enable, { timeout: 1500 });
+      return () => {
+        if (idleHandle !== null && win.cancelIdleCallback) {
+          win.cancelIdleCallback(idleHandle);
+        }
+      };
+    }
+
+    timeoutHandle = window.setTimeout(enable, 800);
+    return () => {
+      if (timeoutHandle !== null) {
+        clearTimeout(timeoutHandle);
+      }
+    };
+  }, [enableAnalytics]);
 
   return (
     <>
-      <StatsigAnalytics />
-      <StatsigSessionReplay />
-      <PhoneClickTracker />
-      <SEOOptimizerWrapper pageType="home" pageSlug="/" />
-      <FloatingWhatsApp />
       <CookieConsent />
+      <WebVitals />
+      {shouldLoad && (
+        <>
+          <GoogleAnalytics />
+          <StatsigAnalytics />
+          <StatsigSessionReplay />
+          <PhoneClickTracker />
+          <SEOOptimizerWrapper pageType="home" pageSlug="/" />
+          <FloatingWhatsApp />
+        </>
+      )}
     </>
   );
 }

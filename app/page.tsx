@@ -141,20 +141,20 @@ export default function Home() {
       {/* <ScrollDepthTracker pageSlug="/" /> */}
       <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <header className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20">
+      <header className="home-hero bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="text-center lg:text-left">
-                <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                <h1 className="home-hero__title text-4xl md:text-6xl font-bold mb-6 leading-tight">
                   Dr. Sayuj Krishnan
-                  <br />
-                  <span className="text-3xl md:text-5xl text-blue-600">Best Neurosurgeon in Hyderabad</span>
+                  <span className="home-hero__subtitle block text-3xl md:text-5xl text-blue-100">
+                    Best Neurosurgeon in Hyderabad
+                  </span>
                 </h1>
-                <p className="text-xl md:text-2xl mb-8">
-                  Leading Expert in Minimally Invasive Neurosurgery
-                  <br />
-                  Specializing in Endoscopic Spine Surgery, Brain Tumor Surgery & Epilepsy Treatment
+                <p className="home-hero__lead text-xl md:text-2xl mb-6">
+                  Leading expert in minimally invasive brain & spine surgery, specialising in endoscopic spine procedures,
+                  advanced brain tumour resection, and comprehensive epilepsy care.
                 </p>
                 {/* <HeroCTA /> */}
                 <div className="space-y-4">
