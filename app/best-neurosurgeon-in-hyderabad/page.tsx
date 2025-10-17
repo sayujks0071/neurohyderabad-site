@@ -2,8 +2,8 @@ import { SITE_URL } from "../../src/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import SmartImage from '@/components/SmartImage';
-import { HeroCTA } from "../../src/components/Experiments";
-import SocialProofBand from "../../src/components/Experiments/SocialProofBand";
+// import { HeroCTA } from "../../src/components/Experiments";
+// import SocialProofBand from "../../src/components/Experiments/SocialProofBand";
 import { analytics } from "../../src/lib/analytics";
 import ScrollDepthTracker from "../../src/components/ScrollDepthTracker";
 
@@ -64,13 +64,43 @@ export default function BestNeurosurgeonPage() {
                 <br />
                 Specializing in Endoscopic Spine Surgery, Brain Tumor Surgery & Epilepsy Treatment
               </p>
-              <HeroCTA />
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link 
+                  href="/appointments" 
+                  className="bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-blue-700 transition-colors text-center"
+                >
+                  Book Consultation
+                </Link>
+                <Link 
+                  href="/services" 
+                  className="border-2 border-blue-600 text-blue-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-blue-50 transition-colors text-center"
+                >
+                  View Services
+                </Link>
+              </div>
             </div>
           </div>
         </header>
 
         {/* Social Proof Section */}
-        <SocialProofBand />
+        <section className="bg-gray-50 border-t border-b border-gray-200 py-8">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="flex flex-wrap items-center justify-center gap-8 text-sm text-gray-700">
+              <div className="flex items-center gap-2">
+                <span className="text-lg" aria-hidden>🏥</span>
+                <span>Yashoda Hospital Affiliation</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-lg" aria-hidden>🎓</span>
+                <span>15+ Years Neurosurgical Experience</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-lg" aria-hidden>🔬</span>
+                <span>Neuronavigation & Intraoperative Monitoring</span>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Introduction */}
         <section className="py-16 bg-gray-50">
@@ -385,9 +415,12 @@ export default function BestNeurosurgeonPage() {
               Book a consultation at Yashoda Hospitals – Malakpet. Bring your MRI and medication list 
               for a safe, stepwise plan.
             </p>
-            <HeroCTA 
-              className="bg-white text-blue-800 hover:bg-blue-100"
-            />
+            <Link 
+              href="/appointments" 
+              className="bg-white text-blue-800 hover:bg-blue-100 px-8 py-4 rounded-full text-lg font-semibold transition-colors inline-block"
+            >
+              Book Consultation
+            </Link>
           </div>
         </section>
 
