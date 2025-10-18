@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { SITE_URL } from "../../../src/lib/seo";
 
 export const metadata: Metadata = {
@@ -98,7 +99,7 @@ export default function SciaticaPainManagementPage() {
 
               <h3 className="text-2xl font-semibold text-blue-700 mb-4">Endoscopic Discectomy</h3>
               <p className="mb-4">
-                Dr. Sayuj Krishnan specializes in endoscopic discectomy, a minimally invasive procedure that removes the herniated disc material compressing the sciatic nerve. This procedure offers:
+                Dr. Sayuj Krishnan specializes in endoscopic discectomy, a minimally invasive procedure that removes the herniated disc material compressing the sciatic nerve. <Link href="/services/endoscopic-spine-surgery-hyderabad/" className="text-blue-600 hover:underline">In severe cases, an endoscopic spine surgery in Hyderabad may be the fastest path to relief.</Link> This procedure offers:
               </p>
               <ul className="mb-6 space-y-2">
                 <li>• 6-8mm incision (much smaller than traditional surgery)</li>

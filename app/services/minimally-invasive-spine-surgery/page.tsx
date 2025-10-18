@@ -158,7 +158,7 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
             </p>
             <p className="text-gray-700 mb-6">
               Dr. Sayuj Krishnan specializes in endoscopic spine procedures, offering patients the benefits of modern surgical techniques 
-              with reduced trauma and quicker return to daily activities.
+              with reduced trauma and quicker return to daily activities. <Link href="/services/endoscopic-spine-surgery-hyderabad/" className="text-blue-600 hover:underline">Learn more about our local patient journey for endoscopic spine surgery in Hyderabad.</Link>
             </p>
           </div>
         </section>

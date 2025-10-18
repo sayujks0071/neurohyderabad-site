@@ -190,6 +190,13 @@ export default function ServicesPage() {
               <h3 className="text-2xl font-semibold text-blue-700 mb-4">Brain Surgery Services</h3>
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
+                  <h4 className="font-semibold text-gray-700 mb-3">Brain Tumor Surgery</h4>
+                  <p className="text-gray-600 mb-4">
+                    Advanced neuronavigation-guided microsurgery for brain tumors with comprehensive multidisciplinary care. 
+                    <Link href="/services/brain-tumor-surgery-hyderabad/" className="text-blue-600 hover:underline"> Dr. Sayuj provides expert consultations for brain tumor surgery in Hyderabad at Yashoda Hospital, Malakpet.</Link>
+                  </p>
+                </div>
+                <div>
                   <h4 className="font-semibold text-gray-700 mb-3">Epilepsy Surgery</h4>
                   <p className="text-gray-600 mb-4">
                     Comprehensive surgical treatment for drug-resistant epilepsy including LITT, resection surgery, 
