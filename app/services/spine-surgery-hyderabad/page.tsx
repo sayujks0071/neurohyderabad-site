@@ -12,9 +12,9 @@ import { buildLocalServiceSchema } from '@/src/lib/schema/localService';
 const SERVICE_SLUG = 'spine-surgery-hyderabad';
 
 const baseMetadata = makeMetadata({
-  title: 'Spine Surgery in Hyderabad | Minimally Invasive & Complex Care',
+  title: 'Expert Spine Surgery in Hyderabad | Dr. Sayuj | Yashoda Malakpet',
   description:
-    'Comprehensive spine surgery in Hyderabad covering minimally invasive, endoscopic, and complex reconstruction procedures at Yashoda Hospital Malakpet.',
+    'Get relief from back pain. Dr. Sayuj offers advanced, minimally-invasive spine surgery at Yashoda Hospital, Malakpet. Expert care for patients in Hyderabad.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
 });
 
@@ -56,63 +56,6 @@ const schema = buildLocalServiceSchema({
     'Full-spectrum spine surgery including minimally invasive, endoscopic and complex reconstruction care delivered at Yashoda Hospital, Malakpet by Dr. Sayuj Krishnan.',
 });
 
-const localAreas = [
-  'Somajiguda & Begumpet – 15 mins via NH65',
-  'HITEC City & Gachibowli – 30 mins via PV Narasimha Rao Expressway',
-  'Uppal & LB Nagar – 20 mins via Inner Ring Road',
-  'Secunderabad Cantonment – 25 mins via Tank Bund',
-];
-
-const procedureHighlights = [
-  {
-    title: 'Minimally Invasive Spine Surgery (MISS)',
-    details: [
-      'Endoscopic discectomy for sciatica and slip disc',
-      'Tubular decompression for lumbar canal stenosis',
-      'Percutaneous stabilization for traumatic fractures',
-    ],
-  },
-  {
-    title: 'Comprehensive Deformity & Reconstruction',
-    details: [
-      'Spondylolisthesis reduction with TLIF / PLIF',
-      'Kyphosis and scoliosis correction',
-      'Revision surgeries for failed back syndrome',
-    ],
-  },
-  {
-    title: 'Day-Care & Enhanced Recovery',
-    details: [
-      'Same-day discharge for select endoscopic cases',
-      'Physiotherapy-led mobilisation pathways',
-      'Return-to-work planning for desk and manual roles',
-    ],
-  },
-];
-
-const indications = [
-  {
-    condition: 'Lumbar & Cervical Disc Herniation',
-    description:
-      'Severe radiating leg or arm pain with numbness or weakness that persists despite medication and physiotherapy.',
-  },
-  {
-    condition: 'Spinal Canal Stenosis',
-    description:
-      'Neurogenic claudication causing walking intolerance, typically relieved by forward bending or sitting.',
-  },
-  {
-    condition: 'Spinal Instability & Spondylolisthesis',
-    description:
-      'Abnormal vertebral movement producing mechanical back pain and nerve compression requiring stabilization.',
-  },
-  {
-    condition: 'Spinal Deformity & Failed Back Surgery',
-    description:
-      'Progressive deformity, prior instrumentation failure, or recurrent symptoms after earlier surgery.',
-  },
-];
-
 const faqs = [
   {
     question: 'How do I know if I need spine surgery instead of physiotherapy?',
@@ -150,12 +93,12 @@ export default function SpineSurgeryHyderabadPage() {
               Comprehensive Spine Surgery
             </p>
             <h1 className="text-4xl md:text-5xl font-bold text-blue-900 leading-tight mb-6">
-              Spine Surgery in Hyderabad at Yashoda Hospital, Malakpet
+              Advanced Spine Surgery in Hyderabad
             </h1>
             <p className="text-lg text-gray-700 mb-6">
-              Dr. Sayuj Krishnan offers complete spine solutions in Hyderabad—from full endoscopic procedures to complex fusion
-              reconstruction—delivering rapid relief while preserving mobility. Every plan is individualised and backed by
-              dedicated physiotherapy and rehabilitation teams.
+              Living with chronic back or neck pain can affect every part of your life. At Yashoda Hospital, Malakpet, Dr. Sayuj
+              Krishnan delivers advanced spine surgery solutions for slipped discs, stenosis, instability, and deformity with a
+              strong focus on minimally invasive techniques.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
@@ -173,84 +116,90 @@ export default function SpineSurgeryHyderabadPage() {
             </div>
           </div>
           <div className="bg-blue-50 border border-blue-100 rounded-2xl p-6 shadow-sm">
-            <h2 className="text-xl font-semibold text-blue-800 mb-4">
-              Why Hyderabad Patients Choose Dr. Sayuj
-            </h2>
+            <h2 className="text-xl font-semibold text-blue-800 mb-4">What Sets Malakpet Care Apart</h2>
             <ul className="space-y-3 text-gray-700">
-              <li>• Fellowship-trained spine surgeon with advanced endoscopic credentials</li>
-              <li>• Same-day MRI review and treatment planning for acute cases</li>
-              <li>• Dedicated MISS OT at Yashoda Hospital with neuromonitoring support</li>
-              <li>• Integrated rehab protocols and return-to-work counselling</li>
+              <li>• Fellowship-trained spine surgeon with advanced endoscopic expertise</li>
+              <li>• On-site imaging and day-care MISS OT within Yashoda Hospital, Malakpet</li>
+              <li>• Dedicated physiotherapy and return-to-work planning for Hyderabad&rsquo;s workforce</li>
+              <li>• Personalised counselling for patients and family members at every step</li>
             </ul>
           </div>
         </header>
 
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-blue-900 mb-6">Procedures Available in Hyderabad</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {procedureHighlights.map((item) => (
-              <div key={item.title} className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
-                <h3 className="text-lg font-semibold text-blue-700 mb-3">{item.title}</h3>
-                <ul className="space-y-2 text-sm text-gray-700">
-                  {item.details.map((detail) => (
-                    <li key={detail}>• {detail}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
+          <h2 className="text-3xl font-bold text-blue-900 mb-6">Conditions We Treat with Spine Surgery</h2>
+          <p className="text-gray-700 mb-4">
+            Surgery is typically considered when targeted physiotherapy, medication, and pain procedures fail to control symptoms
+            or when neurological deficits threaten long-term function. We routinely help Hyderabad patients dealing with:
+          </p>
+          <ul className="grid md:grid-cols-2 gap-4 text-sm text-gray-700">
+            <li className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+              <strong className="text-blue-800">Lumbar &amp; Cervical Disc Herniation:</strong> Persistent arm/leg pain, numbness,
+              or weakness due to nerve compression.
+            </li>
+            <li className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+              <strong className="text-blue-800">Spinal Canal Stenosis:</strong> Walking intolerance and heaviness relieved by
+              rest, often seen in older adults.
+            </li>
+            <li className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+              <strong className="text-blue-800">Spondylolisthesis:</strong> Slippage causing mechanical back pain or nerve
+              symptoms that require stabilization.
+            </li>
+            <li className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+              <strong className="text-blue-800">Spine Tumors &amp; Infections:</strong> Lesions requiring biopsy, decompression, or
+              stabilization for spinal cord protection.
+            </li>
+          </ul>
         </section>
 
         <section className="mb-16 grid md:grid-cols-2 gap-10">
           <div>
-            <h2 className="text-3xl font-bold text-blue-900 mb-4">Who Needs Spine Surgery?</h2>
+            <h2 className="text-3xl font-bold text-blue-900 mb-4">What to Expect at Yashoda Hospital, Malakpet</h2>
             <p className="text-gray-700 mb-6">
-              Most patients across Hyderabad start with structured physiotherapy and pain management. When symptoms persist or
-              neurological deficits develop, surgical decompression or stabilization becomes the safest way to protect the
-              spinal cord and nerves. During consultation, Dr. Sayuj reviews MRI imaging personally, demonstrates the pathology,
-              and explains the least invasive option that can deliver durable relief.
+              Every patient meets Dr. Sayuj personally for a detailed review of symptoms, neurological exam, and imaging studies.
+              When conservative therapy fails or weakness progresses, surgical decompression or stabilization provides durable
+              protection for the spinal cord and nerves. Whenever possible, full endoscopic or tubular approaches are used to
+              minimise tissue disruption.
             </p>
             <p className="text-gray-700">
-              Whenever possible we favour full endoscopic or tubular approaches. When the spine is unstable or deformity is
-              present, advanced fusion constructs with navigation-guided screw placement ensure accurate alignment and
-              long-term stability.
+              For unstable or deformity cases, navigation-guided fusion constructs ensure precise alignment and long-term
+              stability. Our care team in Malakpet coordinates physiotherapy, pain management, and return-to-work planning for
+              office professionals and manual workers alike.
             </p>
           </div>
           <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
-            <h3 className="text-xl font-semibold text-blue-800 mb-4">Common Indications We Treat</h3>
-            <div className="space-y-4">
-              {indications.map((item) => (
-                <div key={item.condition}>
-                  <h4 className="font-semibold text-gray-800">{item.condition}</h4>
-                  <p className="text-sm text-gray-600">{item.description}</p>
-                </div>
-              ))}
-            </div>
+            <h3 className="text-xl font-semibold text-blue-800 mb-4">The Consultation Pathway</h3>
+            <ol className="space-y-3 text-sm text-gray-700 list-decimal list-inside">
+              <li>Bring MRI/CT scans to your first visit for an on-the-spot review.</li>
+              <li>Receive a detailed explanation of the pathology and all treatment options.</li>
+              <li>Discuss minimally invasive or fusion approaches tailored to your lifestyle.</li>
+              <li>Plan post-operative milestones with structured physiotherapy support.</li>
+            </ol>
           </div>
         </section>
 
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-blue-900 mb-4">Serving Patients Across Hyderabad & Telangana</h2>
+          <h2 className="text-3xl font-bold text-blue-900 mb-4">Serving Patients Across Hyderabad</h2>
           <p className="text-gray-700 mb-6">
-            Located at Yashoda Hospital, Malakpet, our spine surgery program welcomes patients from across the twin cities and
-            neighbouring districts. Travel coordination, medical visa letters, and post-operative teleconsults are available on
-            request.
+            Our Malakpet location is convenient for patients travelling from Dilsukhnagar, LB Nagar, Charminar, and Koti. We
+            assist with corporate and insurance approvals, travel planning for families, and tele-follow-ups for those who cannot
+            attend frequent in-person visits.
           </p>
           <div className="grid md:grid-cols-2 gap-6">
             <div className="bg-blue-50 border border-blue-100 rounded-xl p-6">
-              <h3 className="text-lg font-semibold text-blue-800 mb-3">Travel Times</h3>
+              <h3 className="text-lg font-semibold text-blue-800 mb-3">Pre-Visit Preparation</h3>
               <ul className="space-y-2 text-sm text-blue-900">
-                {localAreas.map((area) => (
-                  <li key={area}>• {area}</li>
-                ))}
+                <li>• Bring MRI/CT scans and prior medical reports for review</li>
+                <li>• Inform us of blood thinners, diabetes, or other comorbidities</li>
+                <li>• Coordinate ahead for insurance or corporate cashless paperwork</li>
               </ul>
             </div>
             <div className="bg-white border border-gray-200 rounded-xl p-6">
-              <h3 className="text-lg font-semibold text-blue-800 mb-3">Pre-Visit Preparation</h3>
+              <h3 className="text-lg font-semibold text-blue-800 mb-3">Post-Operative Support</h3>
               <ul className="space-y-2 text-sm text-gray-700">
-                <li>• Carry MRI/CT scans (digital or films) and prior surgical notes</li>
-                <li>• Share comorbidity records (diabetes, hypertension) for anaesthesia planning</li>
-                <li>• Corporate and insurance patients receive cashless assistance for approvals</li>
+                <li>• Structured physiotherapy at Yashoda Hospital and partner clinics</li>
+                <li>• Teleconsults for progress tracking after discharge</li>
+                <li>• Return-to-work guidance tailored to desk or manual roles</li>
               </ul>
             </div>
           </div>
