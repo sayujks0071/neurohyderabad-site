@@ -1,5 +1,6 @@
 import { SITE_URL } from "../../src/lib/seo";
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "About Dr Sayuj Krishnan | Neurosurgeon Hyderabad",
@@ -78,6 +79,10 @@ export default function AboutPage() {
                 <li>Spinal stenosis decompression</li>
                 <li>Complex spine reconstruction</li>
               </ul>
+              <p className="text-gray-600 mt-4">
+                Dr. Sayuj is <Link href="/services/spine-surgery-hyderabad/" className="text-blue-600 hover:underline">a specialist in minimally invasive spine surgery in Hyderabad</Link>, 
+                offering advanced endoscopic techniques for faster recovery and better outcomes.
+              </p>
             </div>
           </div>
         </div>
