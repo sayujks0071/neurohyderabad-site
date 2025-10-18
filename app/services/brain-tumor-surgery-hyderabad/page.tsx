@@ -12,9 +12,9 @@ import { buildLocalServiceSchema } from '@/src/lib/schema/localService';
 const SERVICE_SLUG = 'brain-tumor-surgery-hyderabad';
 
 const baseMetadata = makeMetadata({
-  title: 'Brain Tumor Surgery in Hyderabad | Neuronavigation & Advanced Care',
+  title: 'Brain Tumor Surgery in Hyderabad | Dr. Sayuj | Yashoda Malakpet',
   description:
-    'Comprehensive brain tumor surgery in Hyderabad with neuronavigation, neuromonitoring, and multidisciplinary oncology support at Yashoda Hospital Malakpet.',
+    'Expert care for brain tumor surgery in Hyderabad. Dr. Sayuj uses advanced microsurgery & neuronavigation at Yashoda Hospital, Malakpet. Schedule a consultation.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
 });
 
@@ -124,12 +124,12 @@ export default function BrainTumorSurgeryHyderabadPage() {
           <div>
             <p className="text-sm font-medium uppercase tracking-wide text-blue-600 mb-3">Neurosurgical Oncology</p>
             <h1 className="text-4xl md:text-5xl font-bold text-blue-900 leading-tight mb-6">
-              Brain Tumor Surgery in Hyderabad with Neuronavigation Precision
+              Advanced Brain Tumor Surgery in Hyderabad
             </h1>
             <p className="text-lg text-gray-700 mb-6">
-              Dr. Sayuj Krishnan leads a dedicated brain tumor program at Yashoda Hospital Malakpet, combining meticulous
-              microsurgical technique with advanced mapping and multidisciplinary oncology care. Every case is reviewed with a
-              tumour board to ensure the safest, most effective treatment plan.
+              A brain tumor diagnosis demands expert surgical guidance. At Yashoda Hospital, Malakpet, Dr. Sayuj Krishnan provides
+              compassionate, cutting-edge care using microsurgery, neuronavigation, and a full multidisciplinary team to deliver
+              the safest possible outcomes for patients across Hyderabad.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
@@ -147,50 +147,64 @@ export default function BrainTumorSurgeryHyderabadPage() {
             </div>
           </div>
           <div className="bg-blue-50 border border-blue-100 rounded-2xl p-6 shadow-sm">
-            <h2 className="text-xl font-semibold text-blue-800 mb-4">
-              What to Expect During Tumor Surgery Planning
-            </h2>
-            <ol className="space-y-3 text-gray-700 list-decimal list-inside">
-              <li>Comprehensive MRI / functional imaging review with family briefing.</li>
-              <li>Personalised plan outlining extent of resection, risks, and rehabilitation goals.</li>
-              <li>Pre-anaesthesia and neuropsychological assessment for eloquent cortex tumors.</li>
-              <li>Coordinated ICU and ward stay with daily updates from the neurosurgical team.</li>
-            </ol>
+            <h2 className="text-xl font-semibold text-blue-800 mb-4">Why Malakpet Patients Trust Our Team</h2>
+            <ul className="space-y-3 text-gray-700">
+              <li>• High-powered microsurgery protecting eloquent brain regions</li>
+              <li>• Advanced neuronavigation and neuromonitoring suites in Yashoda Malakpet</li>
+              <li>• Integrated tumour board with oncology, radiology, and pathology support</li>
+              <li>• Dedicated counselling for families throughout diagnosis and recovery</li>
+            </ul>
           </div>
         </header>
 
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-blue-900 mb-6">Advanced Surgical Techniques in Hyderabad</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {treatmentHighlights.map((item) => (
-              <div key={item.title} className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
-                <h3 className="text-lg font-semibold text-blue-700 mb-3">{item.title}</h3>
-                <p className="text-sm text-gray-700">{item.description}</p>
-              </div>
-            ))}
-          </div>
+          <h2 className="text-3xl font-bold text-blue-900 mb-6">Types of Brain Tumors We Treat</h2>
+          <p className="text-gray-700 mb-4">
+            We routinely manage tumours ranging from benign meningiomas to high-grade gliomas. Each plan balances maximal safe
+            resection with protection of critical structures.
+          </p>
+          <ul className="grid md:grid-cols-2 gap-4 text-sm text-gray-700">
+            <li className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+              <strong className="text-blue-800">Gliomas &amp; Glioblastoma:</strong> Customized planning with adjuvant oncology
+              coordination.
+            </li>
+            <li className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+              <strong className="text-blue-800">Meningiomas &amp; Skull Base Tumors:</strong> Precision microsurgery preserving
+              cranial nerve function.
+            </li>
+            <li className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+              <strong className="text-blue-800">Pituitary &amp; Sellar Lesions:</strong> Endoscopic and minimally invasive
+              approaches when appropriate.
+            </li>
+            <li className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+              <strong className="text-blue-800">Metastatic &amp; Pediatric Tumors:</strong> Integrated care with oncology and
+              rehabilitation services.
+            </li>
+          </ul>
         </section>
 
         <section className="mb-16 grid md:grid-cols-2 gap-10">
           <div>
-            <h2 className="text-3xl font-bold text-blue-900 mb-4">Tumor Types We Manage</h2>
-            <p className="text-gray-700 mb-4">
-              From benign meningiomas to high-grade gliomas, each tumour requires a tailored approach. The goal is maximal safe
-              resection while preserving neurological function, followed by adjuvant therapy when indicated.
+            <h2 className="text-3xl font-bold text-blue-900 mb-4">What to Expect at Yashoda Hospital, Malakpet</h2>
+            <p className="text-gray-700 mb-6">
+              Your journey begins with a comprehensive review of symptoms, imaging, and medical history. When surgery is advised,
+              Dr. Sayuj details the planned approach—whether a craniotomy, endoscopic skull base procedure, or biopsy—and
+              explains how neuronavigation and neuromonitoring enhance safety.
             </p>
-            <ul className="space-y-2 text-sm text-gray-700">
-              {tumorTypes.map((type) => (
-                <li key={type}>• {type}</li>
-              ))}
-            </ul>
+            <p className="text-gray-700">
+              Post-operatively, patients recover in the neuro ICU with close neurosurgical supervision. Our Malakpet team coordinates
+              adjuvant therapy planning, rehabilitation, and teleconsults to keep patients and families informed every step of the
+              way.
+            </p>
           </div>
           <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
-            <h3 className="text-xl font-semibold text-blue-800 mb-3">Support for Patients & Families</h3>
-            <ul className="space-y-2 text-sm text-gray-700">
-              {patientSupport.map((support) => (
-                <li key={support}>• {support}</li>
-              ))}
-            </ul>
+            <h3 className="text-xl font-semibold text-blue-800 mb-3">The Consultation Pathway</h3>
+            <ol className="space-y-3 text-sm text-gray-700 list-decimal list-inside">
+              <li>Bring MRI/CT scans and prior reports for a detailed review.</li>
+              <li>Receive an explanation of surgical strategy and potential risks.</li>
+              <li>Meet the oncology and rehabilitation teams when required.</li>
+              <li>Plan post-operative visits and tele-follow-ups before discharge.</li>
+            </ol>
           </div>
         </section>
 
