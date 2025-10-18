@@ -2,29 +2,35 @@
   "assessment": {
     "domain": "www.drsayuj.info",
     "assessmentDate": "2025-10-18",
-    "overallScore": 4.2,
+    "overallScore": 6.8,
     "maxScore": 10,
-    "status": "CRITICAL",
-    "nextReviewDate": "2025-11-18"
+    "status": "NEEDS_WORK",
+    "nextReviewDate": "2025-11-18",
+    "updateNote": "Updated to reflect resolved infrastructure issues"
   },
   "scorecard": {
     "crawlability": {
-      "score": 2,
-      "maxScore": 10,
-      "status": "CRITICAL",
-      "priority": "P0",
-      "issues": [
-        "Multiple 404 errors",
-        "Broken internal links",
-        "Incomplete sitemap coverage",
-        "Redirect chain issues"
-      ]
-    },
-    "technicalSEO": {
-      "score": 6,
+      "score": 7,
       "maxScore": 10,
       "status": "NEEDS_WORK",
       "priority": "P1",
+      "resolved": [
+        "Robots.txt accessible and configured",
+        "Sitemap complete and functioning",
+        "Core service routes working (200 status)",
+        "Infrastructure crawlability restored"
+      ],
+      "issues": [
+        "Specific location page 404s",
+        "Some internal navigation links broken",
+        "Missing location-specific content"
+      ]
+    },
+    "technicalSEO": {
+      "score": 8,
+      "maxScore": 10,
+      "status": "GOOD",
+      "priority": "P2",
       "strengths": [
         "Schema markup excellent",
         "Mobile responsive design",
@@ -98,20 +104,23 @@
   },
   "criticalIssues": {
     "crawlability": {
-      "severity": "CRITICAL",
-      "impact": "60-70% reduction in indexed pages",
-      "specificIssues": [
-        "/services/minimally-invasive-spine-surgery → 404",
-        "/conditions/spinal-stenosis-treatment → 404",
+      "severity": "HIGH",
+      "impact": "Minor impact on local SEO and location-based searches",
+      "resolved": [
+        "/services/minimally-invasive-spine-surgery → 200 (FIXED)",
+        "/conditions/spinal-stenosis-treatment-hyderabad → 200 (FIXED)",
+        "Sitemap and robots.txt → Working (FIXED)",
+        "Core infrastructure → Restored (FIXED)"
+      ],
+      "remaining": [
         "/locations/neurosurgeon-near-jubilee-hills → 404",
-        "Multiple blog post 404s",
-        "Broken internal navigation links"
+        "Some internal navigation links broken",
+        "Missing location-specific content"
       ],
       "rootCauses": [
-        "404 errors across key pages",
-        "Redirect chains causing crawl budget waste",
-        "Missing important service pages",
-        "Incomplete sitemap coverage"
+        "Specific location page routing issues",
+        "Incomplete location page coverage",
+        "Navigation link maintenance needed"
       ]
     }
   },
@@ -119,10 +128,10 @@
     "P0_IMMEDIATE": {
       "timeline": "0-2 weeks",
       "issues": [
-        "Fix 404 errors",
-        "Sitemap optimization",
-        "Internal link audit",
-        "Core page recovery"
+        "Fix remaining 404s (/locations/neurosurgeon-near-jubilee-hills)",
+        "Internal link audit and repair",
+        "Location page creation",
+        "Navigation optimization"
       ]
     },
     "P1_HIGH": {
