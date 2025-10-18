@@ -139,11 +139,6 @@ export default function RootLayout({
             <link rel="preconnect" href="https://accounts.google.com" crossOrigin="anonymous" />
             <link rel="preconnect" href="https://i.ytimg.com" crossOrigin="anonymous" />
             
-            {/* Preload critical resources with fetchpriority - only AVIF for best compression */}
-            <link rel="preload" href="/images/logo.avif" as="image" type="image/avif" fetchPriority="high" />
-            <link rel="preload" href="/images/logo.webp" as="image" type="image/webp" />
-            <link rel="preload" href="/images/og-default.jpg" as="image" type="image/jpeg" />
-            
             {/* DNS prefetch for external domains */}
             <link rel="dns-prefetch" href="//www.youtube.com" />
             <link rel="dns-prefetch" href="//www.google-analytics.com" />

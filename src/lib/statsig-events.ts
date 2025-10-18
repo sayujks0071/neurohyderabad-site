@@ -1,21 +1,29 @@
-import { useStatsigClient } from '@statsig/react-bindings';
+const getStatsig = () => {
+  if (typeof window === 'undefined') return null;
+  const possibleClient = (window as any).Statsig || (window as any).statsig;
+  return typeof possibleClient?.logEvent === 'function' ? possibleClient : null;
+};
+
+const logWithFallback = (eventName: string, properties?: Record<string, any>) => {
+  try {
+    const statsigClient = getStatsig();
+    if (statsigClient) {
+      statsigClient.logEvent(eventName, undefined, properties || {});
+      if (process.env.NODE_ENV !== 'production') {
+        console.log(`📊 Statsig Event: ${eventName}`, properties);
+      }
+    } else if (process.env.NODE_ENV !== 'production') {
+      console.debug('Statsig client not available; skipping event:', eventName);
+    }
+  } catch (error) {
+    console.warn('Error logging Statsig event:', error);
+  }
+};
 
 // Statsig event logging utility for medical practice
 export const useStatsigEvents = () => {
-  const client = useStatsigClient();
-
   const logEvent = (eventName: string, properties?: Record<string, any>) => {
-    if (client && typeof client.logEvent === 'function') {
-      try {
-        // Use the client's logEvent method with proper typing
-        (client as any).logEvent(eventName, properties || {});
-        console.log(`📊 Statsig Event: ${eventName}`, properties);
-      } catch (error) {
-        console.warn('Error logging Statsig event:', error);
-      }
-    } else {
-      console.warn('Statsig client not available');
-    }
+    logWithFallback(eventName, properties);
   };
 
   return {
@@ -72,10 +80,5 @@ export const useStatsigEvents = () => {
 
 // Non-hook version for use outside React components
 export const logStatsigEvent = (eventName: string, properties?: Record<string, any>) => {
-  if (typeof window !== 'undefined' && (window as any).statsig) {
-    (window as any).statsig.logEvent(eventName, properties || {});
-    console.log(`📊 Statsig Event: ${eventName}`, properties);
-  } else {
-    console.warn('Statsig not available for event logging');
-  }
+  logWithFallback(eventName, properties);
 };

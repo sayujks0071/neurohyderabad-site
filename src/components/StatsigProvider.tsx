@@ -1,6 +1,5 @@
 'use client';
 
-import { StatsigProvider as StatsigProviderBase } from '@statsig/react-bindings';
 import { ReactNode, useEffect, useState } from 'react';
 
 interface StatsigProviderProps {
@@ -8,7 +7,6 @@ interface StatsigProviderProps {
 }
 
 export default function StatsigProvider({ children }: StatsigProviderProps) {
-  const [isInitialized, setIsInitialized] = useState(false);
   const [hasConsent, setHasConsent] = useState(false);
 
   useEffect(() => {
@@ -18,14 +16,6 @@ export default function StatsigProvider({ children }: StatsigProviderProps) {
       setHasConsent(true);
     }
   }, []);
-
-  useEffect(() => {
-    if (hasConsent && !isInitialized) {
-      // Mark as initialized - the actual Statsig initialization will be handled by the React bindings
-      setIsInitialized(true);
-    }
-  }, [hasConsent, isInitialized]);
-
   // Show consent banner if no consent given
   if (!hasConsent) {
     return (
@@ -34,11 +24,6 @@ export default function StatsigProvider({ children }: StatsigProviderProps) {
         <ConsentBanner onConsent={() => setHasConsent(true)} />
       </>
     );
-  }
-
-  // Only render Statsig provider after initialization
-  if (!isInitialized) {
-    return <>{children}</>;
   }
 
   return <>{children}</>;
