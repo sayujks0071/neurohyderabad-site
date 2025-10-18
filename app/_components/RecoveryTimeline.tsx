@@ -48,46 +48,46 @@ const milestones = [
 
 export default function RecoveryTimeline() {
   return (
-    <section className="py-16 bg-slate-900 text-slate-100">
+    <section className="py-16 bg-slate-950 text-slate-50">
       <div className="container mx-auto px-4">
         <div className="max-w-5xl mx-auto">
-          <span className="text-sm uppercase tracking-wide text-emerald-300 font-semibold">
+          <span className="text-sm uppercase tracking-wide text-emerald-200 font-semibold">
             Recovery Roadmap
           </span>
-          <h2 className="text-3xl font-bold mt-3 text-white">
+          <h2 className="text-3xl font-bold mt-3 text-slate-50">
             What Your First Eight Weeks Look Like After Minimally Invasive Spine Surgery
           </h2>
-          <p className="text-slate-300 mt-4 max-w-3xl">
+          <p className="text-slate-200 mt-4 max-w-3xl">
             Every patient receives a personalised rehab manual, tele-follow up schedule, and physiotherapy support.
             Use this timeline to set expectations and prepare your support system.
           </p>
 
           <div className="mt-10 relative">
             <div className="absolute left-4 top-0 bottom-0 hidden lg:block">
-              <span className="block h-full w-0.5 bg-gradient-to-b from-emerald-300 via-blue-500 to-blue-900" />
+              <span className="block h-full w-0.5 bg-gradient-to-b from-emerald-200 via-blue-400 to-blue-900" />
             </div>
 
             <div className="space-y-8">
               {milestones.map((milestone, index) => (
                 <div
                   key={milestone.phase}
-                  className="lg:pl-16 bg-slate-800/60 border border-slate-700 rounded-2xl p-6 shadow-xl"
+                  className="lg:pl-16 bg-slate-900 border border-slate-700 rounded-2xl p-6 shadow-xl"
                 >
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-                    <span className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-400/10 text-emerald-200 text-sm font-semibold">
+                    <span className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-200 text-sm font-semibold">
                       {milestone.phase}
                     </span>
-                    <span className="text-sm text-slate-400">
+                    <span className="text-sm text-slate-300">
                       Milestone {index + 1} of {milestones.length}
                     </span>
                   </div>
-                  <h3 className="text-2xl font-semibold mt-4 text-white">
+                  <h3 className="text-2xl font-semibold mt-4 text-slate-50">
                     {milestone.title}
                   </h3>
                   <ul className="mt-4 space-y-3 text-sm text-slate-200">
                     {milestone.highlights.map((item) => (
                       <li key={item} className="flex items-start gap-2">
-                        <span className="text-emerald-300 mt-1">✓</span>
+                        <span className="text-emerald-200 mt-1">✓</span>
                         <span>{item}</span>
                       </li>
                     ))}
@@ -97,12 +97,12 @@ export default function RecoveryTimeline() {
             </div>
           </div>
 
-          <div className="mt-10 bg-slate-800 border border-slate-700 rounded-2xl p-6">
-            <h3 className="text-xl font-semibold text-white">
+          <div className="mt-10 bg-slate-900 border border-slate-700 rounded-2xl p-6">
+            <h3 className="text-xl font-semibold text-slate-50">
               Remote Care Support
             </h3>
-            <p className="text-slate-300 mt-3">
-              WhatsApp helpline (<a href="https://wa.me/919778280044" className="text-emerald-300 underline">
+            <p className="text-slate-200 mt-3">
+              WhatsApp helpline (<a href="https://wa.me/919778280044" className="text-emerald-200 underline hover:text-emerald-100">
                 +91 97782 80044
               </a>) is staffed 24/7 for wound photos, medication clarifications, and physiotherapy escalations.
               International patients receive additional telehealth touchpoints for travel clearance.

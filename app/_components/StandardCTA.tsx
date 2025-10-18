@@ -2,8 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { analytics } from '@/src/lib/analytics';
 
 interface StandardCTAProps {
   className?: string;
@@ -12,38 +10,24 @@ interface StandardCTAProps {
 
 export default function StandardCTA({ className = '', variant = 'default' }: StandardCTAProps) {
   const [isClient, setIsClient] = useState(false);
-  const pathname = usePathname();
 
   useEffect(() => {
     setIsClient(true);
   }, []);
+  
   const isCompact = variant === 'compact';
   const isStacked = variant === 'stacked';
 
   const handleCTAClick = (ctaLabel: string, ctaType: 'phone' | 'whatsapp' | 'appointment') => {
     if (!isClient) return; // Only track on client side
     
-    switch (ctaType) {
-      case 'phone':
-        analytics.phoneClick(pathname, 'main');
-        break;
-      case 'whatsapp':
-        analytics.whatsAppClick(pathname);
-        break;
-      case 'appointment':
-        analytics.appointmentStart(pathname, getServiceOrCondition(pathname));
-        break;
+    // Simple analytics tracking without pathname dependency
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', ctaType, {
+        event_category: 'engagement',
+        event_label: ctaLabel,
+      });
     }
-  };
-
-  const getServiceOrCondition = (pathname: string): string | undefined => {
-    if (pathname.startsWith('/services/')) {
-      return pathname.split('/')[2]?.replace(/-/g, '_');
-    }
-    if (pathname.startsWith('/conditions/')) {
-      return pathname.split('/')[2]?.replace(/-/g, '_');
-    }
-    return undefined;
   };
   
   const buttonClasses = isCompact 

@@ -18,29 +18,6 @@ const GoogleAnalytics = dynamic(
   { ssr: false, loading: () => null }
 );
 
-const StatsigAnalytics = dynamic(
-  () => import("../../src/components/StatsigAnalytics"),
-  { ssr: false, loading: () => null }
-);
-
-const StatsigSessionReplay = dynamic(
-  () => import("../../src/components/StatsigSessionReplay"),
-  { ssr: false, loading: () => null }
-);
-
-const PhoneClickTracker = dynamic(
-  () => import("../../src/components/PhoneClickTracker"),
-  { ssr: false, loading: () => null }
-);
-
-const SEOOptimizerWrapper = dynamic(
-  () =>
-    import("../../src/components/SEOOptimizer").then((module) => ({
-      default: module.default,
-    })),
-  { ssr: false, loading: () => null }
-);
-
 const FloatingWhatsApp = dynamic(
   () => import("../../src/components/FloatingWhatsApp"),
   { ssr: false, loading: () => null }
@@ -91,7 +68,7 @@ export default function ClientAnalytics() {
     };
 
     if (win.requestIdleCallback) {
-      idleHandle = win.requestIdleCallback(enable, { timeout: 1500 });
+      idleHandle = win.requestIdleCallback(enable, { timeout: 1200 });
       return () => {
         if (idleHandle !== null && win.cancelIdleCallback) {
           win.cancelIdleCallback(idleHandle);
@@ -99,7 +76,7 @@ export default function ClientAnalytics() {
       };
     }
 
-    timeoutHandle = window.setTimeout(enable, 800);
+    timeoutHandle = window.setTimeout(enable, 600);
     return () => {
       if (timeoutHandle !== null) {
         clearTimeout(timeoutHandle);
@@ -110,14 +87,10 @@ export default function ClientAnalytics() {
   return (
     <>
       <CookieConsent />
-      <WebVitals />
       {shouldLoad && (
         <>
+          <WebVitals />
           <GoogleAnalytics />
-          <StatsigAnalytics />
-          <StatsigSessionReplay />
-          <PhoneClickTracker />
-          <SEOOptimizerWrapper pageType="home" pageSlug="/" />
           <FloatingWhatsApp />
         </>
       )}

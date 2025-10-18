@@ -7,10 +7,10 @@ import Footer from "./components/Footer";
 import WebsiteSchema from "./components/schemas/WebsiteSchema";
 import PhysicianSchema from "./components/schemas/PhysicianSchema";
 import HospitalSchema from "./components/schemas/HospitalSchema";
-import MyStatsig from "./my-statsig";
 import TrustStrip from "./_components/TrustStrip";
-import StickyCTA from "./_components/StickyCTA";
 import ClientAnalytics from "./_components/ClientAnalytics";
+import StickyCTA from "./_components/StickyCTA";
+import ClientOnlyWrapper from "./_components/ClientOnlyWrapper";
 import { SITE_URL } from "../src/lib/seo";
 
 const inter = Inter({
@@ -162,25 +162,27 @@ export default function RootLayout({
             <Script src="https://accounts.google.com/gsi/client" strategy="lazyOnload" />
           </head>
       <body className={`${inter.variable} antialiased`}>
-        <MyStatsig>
+        <ClientOnlyWrapper>
           <ClientAnalytics />
-          <WebsiteSchema />
-          <PhysicianSchema />
-          <HospitalSchema />
-          <a
-            href="#main-content"
-            className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-1/2 focus:-translate-x-1/2 bg-blue-600 text-white px-4 py-2 rounded-md shadow-lg"
-          >
-            Skip to content
-          </a>
-          <Header />
-          <TrustStrip />
-          <div id="main-content" tabIndex={-1}>
-            {children}
-          </div>
-          <Footer />
+        </ClientOnlyWrapper>
+        <WebsiteSchema />
+        <PhysicianSchema />
+        <HospitalSchema />
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-1/2 focus:-translate-x-1/2 bg-blue-600 text-white px-4 py-2 rounded-md shadow-lg"
+        >
+          Skip to content
+        </a>
+        <Header />
+        <TrustStrip />
+        <div id="main-content" tabIndex={-1}>
+          {children}
+        </div>
+        <Footer />
+        <ClientOnlyWrapper>
           <StickyCTA />
-        </MyStatsig>
+        </ClientOnlyWrapper>
       </body>
     </html>
   );

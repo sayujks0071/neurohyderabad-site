@@ -14,7 +14,7 @@ import { SITE_URL } from "../src/lib/seo";
 // import SEOAuditDashboard from "../src/components/SEOAuditDashboard";
 // import GoogleOAuth from "../src/components/GoogleOAuth";
 // import { analytics } from "../src/lib/analytics";
-import DoctorCard from "./_components/DoctorCard";
+import DoctorCardLazy from "./_components/DoctorCardLazy";
 import TrustSignals from "./_components/TrustSignals";
 
 const HOME_CANONICAL = SITE_URL.endsWith("/") ? SITE_URL : `${SITE_URL}/`;
@@ -188,7 +188,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="flex justify-center">
-                <DoctorCard />
+                <DoctorCardLazy />
               </div>
             </div>
           </div>

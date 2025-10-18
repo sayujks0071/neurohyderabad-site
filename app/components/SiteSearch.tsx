@@ -1,30 +1,50 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { searchContent, type SearchItem } from "@/src/data/searchIndex";
+import type { SearchItem } from "@/src/data/searchIndex";
 
 export default function SiteSearch() {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [activeIndex, setActiveIndex] = useState(0);
+  const [results, setResults] = useState<SearchItem[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [searchFn, setSearchFn] = useState<
+    ((term: string, limit?: number) => SearchItem[]) | null
+  >(null);
+  const searchModulePromiseRef =
+    useRef<Promise<typeof import("@/src/data/searchIndex")> | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
 
-  const results = useMemo(() => searchContent(query, 8), [query]);
+  const ensureSearchFn = useCallback(async () => {
+    if (searchFn) {
+      return searchFn;
+    }
 
-  const openSearch = useCallback(() => setIsOpen(true), []);
+    if (!searchModulePromiseRef.current) {
+      searchModulePromiseRef.current = import("@/src/data/searchIndex");
+    }
+
+    const mod = await searchModulePromiseRef.current;
+    setSearchFn(() => mod.searchContent);
+    return mod.searchContent;
+  }, [searchFn]);
 
   const closeSearch = useCallback(() => {
     setIsOpen(false);
     setQuery("");
     setActiveIndex(0);
+    setResults([]);
+    setIsLoading(false);
   }, []);
 
   const handleSelect = useCallback(
     (item: SearchItem) => {
       closeSearch();
+      // Start navigation once the dialog closes to keep focus handling simple
       router.push(item.href);
     },
     [closeSearch, router],
@@ -55,10 +75,43 @@ export default function SiteSearch() {
   }, [activeIndex]);
 
   useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    if (!searchFn) {
+      let isCurrent = true;
+      setIsLoading(true);
+
+      ensureSearchFn()
+        .then((fn) => {
+          if (!isCurrent) {
+            return;
+          }
+          setResults(fn(query, 8));
+          setIsLoading(false);
+        })
+        .catch(() => {
+          if (isCurrent) {
+            setIsLoading(false);
+            setResults([]);
+          }
+        });
+
+      return () => {
+        isCurrent = false;
+      };
+    }
+
+    setResults(searchFn(query, 8));
+  }, [ensureSearchFn, isOpen, query, searchFn]);
+
+  useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
         event.preventDefault();
         setIsOpen((prev) => !prev);
+        void ensureSearchFn();
       }
 
       if (!isOpen) {
@@ -93,17 +146,32 @@ export default function SiteSearch() {
     window.addEventListener("keydown", handleKeyDown);
 
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [activeIndex, closeSearch, handleSelect, isOpen, results, scrollActiveResultIntoView]);
+  }, [activeIndex, closeSearch, ensureSearchFn, handleSelect, isOpen, results, scrollActiveResultIntoView]);
 
   useEffect(() => {
     setActiveIndex(0);
   }, [query]);
+
+  useEffect(() => {
+    if (results.length === 0) {
+      setActiveIndex(0);
+      return;
+    }
+
+    setActiveIndex((prev) => Math.min(prev, results.length - 1));
+  }, [results.length]);
+
+  const prefetchSearch = useCallback(() => {
+    void ensureSearchFn();
+  }, [ensureSearchFn]);
 
   return (
     <>
       <button
         type="button"
         onClick={() => setIsOpen(true)}
+        onMouseEnter={prefetchSearch}
+        onFocus={prefetchSearch}
         className="flex items-center gap-2 rounded-full border border-gray-200 px-3 py-1.5 text-sm text-gray-600 transition hover:border-blue-300 hover:text-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
         aria-label="Search site (Cmd/Ctrl + K)"
       >
@@ -146,7 +214,11 @@ export default function SiteSearch() {
               ref={resultsRef}
               className="max-h-80 overflow-y-auto px-2 py-3 sm:px-3"
             >
-              {results.length === 0 ? (
+              {isLoading ? (
+                <p className="px-4 py-8 text-center text-sm text-gray-500">
+                  Loading search suggestions…
+                </p>
+              ) : results.length === 0 ? (
                 <p className="px-4 py-8 text-center text-sm text-gray-500">
                   No results found. Try a broader term like{" "}
                   <strong>spine</strong> or <strong>epilepsy</strong>.

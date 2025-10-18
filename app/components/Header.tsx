@@ -1,6 +1,3 @@
-"use client";
-
-import { useState } from "react";
 import Link from "next/link";
 import OptimizedImage from "../_components/OptimizedImage";
 import SiteSearch from "./SiteSearch";
@@ -88,21 +85,21 @@ const NAV_SECTIONS: NavSection[] = [
 ];
 
 export default function Header() {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [activeMenu, setActiveMenu] = useState<number | null>(null);
-
   return (
     <header className="relative border-b bg-white">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-4">
         <Link href="/" className="flex items-center gap-3">
           <OptimizedImage
-            src="/images/logo-optimized.png"
+            src="/images/logo.svg"
             alt="Dr Sayuj Krishnan - Brain & Spine Surgeon"
-            width={120}
-            height={80}
+            width={140}
+            height={56}
             className="h-12 w-auto"
             priority
             quality={85}
+            sizes="120px"
+            fetchPriority="high"
+            placeholder="empty"
           />
           <span className="font-semibold text-gray-900">Dr Sayuj Krishnan</span>
           <span className="sr-only">Homepage</span>
@@ -110,76 +107,91 @@ export default function Header() {
 
         <div className="flex items-center gap-3 md:hidden">
           <SiteSearch />
-          <button
-            type="button"
-            onClick={() => setMobileOpen((prev) => !prev)}
-            className="inline-flex items-center justify-center rounded-full border border-gray-200 p-2 text-gray-600 transition hover:border-blue-300 hover:text-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
-            aria-label="Toggle primary navigation"
-            aria-expanded={mobileOpen}
-          >
-            <MenuIcon className="h-5 w-5" />
-          </button>
+          <details className="relative">
+            <summary
+              className="inline-flex cursor-pointer items-center justify-center rounded-full border border-gray-200 p-2 text-gray-600 transition hover:border-blue-300 hover:text-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
+            >
+              <span className="sr-only">Toggle primary navigation</span>
+              <MenuIcon className="h-5 w-5" />
+            </summary>
+            <div className="absolute right-0 z-30 mt-3 max-h-[70vh] w-72 overflow-y-auto rounded-2xl border border-gray-100 bg-white p-4 shadow-2xl">
+              {NAV_SECTIONS.map((section, index) => (
+                <div key={section.title} className="space-y-3">
+                  <div>
+                    <p className="text-sm font-semibold text-gray-900">
+                      {section.title}
+                    </p>
+                    <p className="text-xs text-gray-500">{section.description}</p>
+                  </div>
+                  <ul className="space-y-2">
+                    {section.links.map((link) => (
+                      <li key={link.href}>
+                        <Link
+                          href={link.href}
+                          className="block rounded-lg border border-gray-200 px-3 py-2 text-sm text-gray-700 transition hover:border-blue-300 hover:text-blue-600"
+                        >
+                          {link.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                  {index !== NAV_SECTIONS.length - 1 && (
+                    <hr className="border-gray-100" />
+                  )}
+                </div>
+              ))}
+              <div className="flex flex-col gap-3 pt-2">
+                <Link
+                  href="/appointments"
+                  className="rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-2 text-center text-sm font-semibold text-white transition hover:from-blue-700 hover:to-purple-700"
+                >
+                  Book Consultation
+                </Link>
+                <Link
+                  href="/ai-chat"
+                  className="rounded-full border border-blue-200 px-4 py-2 text-center text-sm font-semibold text-blue-600 transition hover:border-blue-300 hover:bg-blue-50"
+                >
+                  Chat with Care Team
+                </Link>
+              </div>
+            </div>
+          </details>
         </div>
 
         <nav className="hidden flex-1 items-center justify-end gap-6 md:flex">
-          {NAV_SECTIONS.map((section, index) => {
-            const isOpen = activeMenu === index;
-            return (
-              <div
-                key={section.title}
-                className="relative"
-                onMouseEnter={() => setActiveMenu(index)}
-                onMouseLeave={() => setActiveMenu(null)}
-                onFocus={() => setActiveMenu(index)}
-                onBlur={(event) => {
-                  if (!event.currentTarget.contains(event.relatedTarget)) {
-                    setActiveMenu(null);
-                  }
-                }}
+          {NAV_SECTIONS.map((section) => (
+            <details key={section.title} className="group relative">
+              <summary
+                className="flex cursor-pointer items-center gap-1 rounded-full px-3 py-2 text-sm font-medium text-gray-700 transition hover:text-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
               >
-                <button
-                  type="button"
-                  className="flex items-center gap-1 rounded-full px-3 py-2 text-sm font-medium text-gray-700 transition hover:text-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
-                  aria-expanded={isOpen}
-                  onClick={() =>
-                    setActiveMenu(isOpen ? null : index)
-                  }
-                >
+                {section.title}
+                <ChevronDownIcon className="h-4 w-4 text-gray-400 transition group-open:rotate-180 group-hover:text-blue-600" />
+              </summary>
+              <div className="absolute right-0 top-full z-40 mt-3 hidden w-72 rounded-2xl border border-gray-100 bg-white p-4 shadow-2xl group-open:block group-hover:block group-focus-within:block">
+                <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-blue-600">
                   {section.title}
-                  <ChevronDownIcon
-                    className={`h-4 w-4 transition ${
-                      isOpen ? "rotate-180 text-blue-600" : "text-gray-400"
-                    }`}
-                  />
-                </button>
-                {isOpen && (
-                  <div className="absolute right-0 top-full z-40 mt-3 w-72 rounded-2xl border border-gray-100 bg-white p-4 shadow-2xl">
-                    <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-blue-600">
-                      {section.title}
-                    </p>
-                    <p className="mb-4 text-sm text-gray-600">
-                      {section.description}
-                    </p>
-                    <ul className="space-y-2">
-                      {section.links.map((link) => (
-                        <li key={link.href}>
-                          <Link
-                            href={link.href}
-                            className="flex items-center justify-between rounded-lg px-3 py-2 text-sm text-gray-700 transition hover:bg-blue-50 hover:text-blue-700"
-                          >
-                            {link.label}
-                            <span aria-hidden className="text-gray-300">
-                              →
-                            </span>
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
+                </p>
+                <p className="mb-4 text-sm text-gray-600">
+                  {section.description}
+                </p>
+                <ul className="space-y-2">
+                  {section.links.map((link) => (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        className="flex items-center justify-between rounded-lg px-3 py-2 text-sm text-gray-700 transition hover:bg-blue-50 hover:text-blue-700"
+                      >
+                        {link.label}
+                        <span aria-hidden className="text-gray-300">
+                          →
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            );
-          })}
+            </details>
+          ))}
           <SiteSearch />
           <Link
             href="/appointments"
@@ -189,52 +201,6 @@ export default function Header() {
           </Link>
         </nav>
       </div>
-
-      {mobileOpen && (
-        <div className="absolute inset-x-0 top-full z-30 border-b border-gray-100 bg-white shadow-lg md:hidden">
-          <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-6">
-            {NAV_SECTIONS.map((section) => (
-              <div key={section.title} className="space-y-3">
-                <div>
-                  <p className="text-sm font-semibold text-gray-900">
-                    {section.title}
-                  </p>
-                  <p className="text-xs text-gray-500">{section.description}</p>
-                </div>
-                <ul className="space-y-2">
-                  {section.links.map((link) => (
-                    <li key={link.href}>
-                      <Link
-                        href={link.href}
-                        className="block rounded-lg border border-gray-200 px-3 py-2 text-sm text-gray-700 transition hover:border-blue-300 hover:text-blue-600"
-                        onClick={() => setMobileOpen(false)}
-                      >
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-            <div className="flex flex-col gap-3">
-              <Link
-                href="/appointments"
-                className="rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-2 text-center text-sm font-semibold text-white transition hover:from-blue-700 hover:to-purple-700"
-                onClick={() => setMobileOpen(false)}
-              >
-                Book Consultation
-              </Link>
-              <Link
-                href="/ai-chat"
-                className="rounded-full border border-blue-200 px-4 py-2 text-center text-sm font-semibold text-blue-600 transition hover:border-blue-300 hover:bg-blue-50"
-                onClick={() => setMobileOpen(false)}
-              >
-                Chat with Care Team
-              </Link>
-            </div>
-          </div>
-        </div>
-      )}
     </header>
   );
 }
