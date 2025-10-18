@@ -12,9 +12,9 @@ import { buildLocalServiceSchema } from '@/src/lib/schema/localService';
 const SERVICE_SLUG = 'endoscopic-spine-surgery-hyderabad';
 
 const baseMetadata = makeMetadata({
-  title: 'Endoscopic Spine Surgery in Hyderabad | Day-Care MISS Program',
+  title: 'Endoscopic Spine Surgery in Hyderabad | Dr. Sayuj | Yashoda Malakpet',
   description:
-    'Full endoscopic spine surgery in Hyderabad for sciatica, lumbar canal stenosis, and cervical disc prolapse with same-day discharge protocols.',
+    'Minimally invasive endoscopic spine surgery in Hyderabad. Dr. Sayuj performs "keyhole" procedures at Yashoda Hospital, Malakpet. Get rapid relief today.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
 });
 
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Endoscopic Spine Surgery in Hyderabad | Dr. Sayuj Krishnan',
     description:
-      'Dedicated endoscopic spine surgery suite in Hyderabad providing transforaminal and interlaminar approaches with rapid recovery.',
+      'Minimally invasive “keyhole” spine surgery in Hyderabad with rapid recovery, performed by Dr. Sayuj at Yashoda Hospital Malakpet.',
     url: `${SITE_URL}/services/${SERVICE_SLUG}`,
     siteName: 'Dr. Sayuj Krishnan - Neurosurgeon Hyderabad',
     locale: 'en_IN',
@@ -52,56 +52,31 @@ const schema = buildLocalServiceSchema({
   slug: SERVICE_SLUG,
   name: 'Full Endoscopic Spine Surgery in Hyderabad',
   description:
-    'Transforaminal and interlaminar full endoscopic spine surgery program at Yashoda Hospital Malakpet with day-care discharge and rapid recovery.',
+    'Ultra-minimally invasive endoscopic spine surgery program at Yashoda Hospital Malakpet delivering keyhole decompression with day-care discharge.',
 });
 
-const techniques = [
-  {
-    title: 'Transforaminal Endoscopic Discectomy (TESSYS)',
-    description:
-      'Lateral approach under local anaesthesia for lumbar slip disc with leg pain. Suitable for L4-L5 and L5-S1 herniations.',
-  },
-  {
-    title: 'Interlaminar Endoscopic Decompression (ILESSYS)',
-    description:
-      'Posterior approach for central and lateral recess stenosis with ligamentum flavum hypertrophy causing claudication.',
-  },
-  {
-    title: 'Cervical Endoscopic Discectomy',
-    description:
-      'Anterior or posterior endoscopic removal of cervical disc fragments compressing nerve roots or spinal cord.',
-  },
-];
-
-const programHighlights = [
-  'Dedicated MISS OT with 4K endoscopic tower and neuromonitoring support',
-  'Average incision 8-10 mm with cosmetic closure and minimal blood loss',
-  'Same-day mobilisation and discharge for most discectomy and stenosis cases',
-  'Structured physiotherapy and return-to-work guidance for tech and manual professions',
-];
-
-const eligibilityChecklist = [
-  'MRI-confirmed disc herniation or foraminal stenosis correlating with symptoms',
-  'Failure of 6-8 weeks of guided physiotherapy and medical therapy',
-  'No major spinal instability or high-grade spondylolisthesis',
-  'No severe comorbidities that contraindicate day-care anaesthesia',
+const conditions = [
+  'Lumbar disc herniation causing sciatica or leg weakness',
+  'Foraminal stenosis with nerve compression',
+  'Cervical disc prolapse with arm pain or numbness',
+  'Synovial cysts and focal nerve root compression',
 ];
 
 const faqs = [
   {
-    question: 'Is endoscopic spine surgery painful?',
+    question: 'How is this different from other minimally invasive spine surgeries?',
     answer:
-      'Most lumbar procedures are performed under spinal anaesthesia with conscious sedation. Patients feel pressure but not pain during the procedure and are able to walk within 2-3 hours.',
+      'Endoscopic surgery uses a high-definition camera through a “keyhole” incision that is typically less than 1 cm. This approach preserves muscle, reduces postoperative pain, and speeds recovery compared to tubular or open techniques.',
   },
   {
-    question: 'When can I return to office work or driving?',
+    question: 'Is Yashoda Hospital, Malakpet easy to reach for day-care surgery?',
     answer:
-      'Desk professionals typically resume remote work in 5-7 days and office visits in 10-14 days. Driving is usually allowed after 2 weeks once leg strength and reflexes stabilise.',
+      'Yes. The hospital is centrally located in Malakpet, making it convenient for patients travelling from Dilsukhnagar, LB Nagar, Charminar, Koti, and other parts of Hyderabad. Parking and attendant lounges are available on-site.',
   },
   {
-    question: 'What if my insurance needs admission for approval?',
+    question: 'Why choose Dr. Sayuj for this “keyhole” procedure?',
     answer:
-      'We coordinate with TPA teams to secure cashless approval. If overnight observation is mandated, a short stay suite is arranged while following the enhanced recovery protocol.',
+      'Endoscopic spine surgery is a specialised skill. Dr. Sayuj has focused training in full endoscopic techniques and performs them regularly at Yashoda Hospital, ensuring precision, safety, and consistent patient outcomes.',
   },
 ];
 
@@ -120,101 +95,99 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
 
         <header className="grid md:grid-cols-2 gap-10 items-start mb-16">
           <div>
-            <p className="text-sm font-medium uppercase tracking-wide text-blue-600 mb-3">Day-Care MISS Program</p>
+            <p className="text-sm font-medium uppercase tracking-wide text-blue-600 mb-3">Ultra-MINIMALLY INVASIVE CARE</p>
             <h1 className="text-4xl md:text-5xl font-bold text-blue-900 leading-tight mb-6">
-              Endoscopic Spine Surgery in Hyderabad with Day-Care Recovery
+              Advanced Endoscopic Spine Surgery in Hyderabad
             </h1>
             <p className="text-lg text-gray-700 mb-6">
-              Dr. Sayuj Krishnan&apos;s full endoscopic spine program at Yashoda Hospital Malakpet delivers rapid relief for disc
-              herniation and spinal stenosis with minimal tissue trauma. Patients walk within hours and return home the same day in
-              most cases.
+              Endoscopic—or “keyhole”—spine surgery provides fast, lasting relief from slip disc, sciatica, and foraminal stenosis
+              with almost no muscle disruption. Performed by Dr. Sayuj at Yashoda Hospital, Malakpet, this approach helps you walk
+              the same day and return to normal life sooner.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
                 href="/appointments/"
                 className="inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3 text-white font-semibold hover:bg-blue-700 transition-colors"
               >
-                Check Day-Care Eligibility
+                Book an Endoscopic Consult
               </Link>
               <Link
                 href="/blog/day-care-endoscopic-spine-surgery-eligibility/"
                 className="inline-flex items-center justify-center rounded-full border border-blue-200 px-6 py-3 text-blue-700 font-semibold hover:border-blue-400 hover:text-blue-900 transition-colors"
               >
-                Learn About the Protocol
+                Learn About Day-Care MISS
               </Link>
             </div>
           </div>
           <div className="bg-blue-50 border border-blue-100 rounded-2xl p-6 shadow-sm">
-            <h2 className="text-xl font-semibold text-blue-800 mb-4">
-              What Makes Our Endoscopic Program Different?
-            </h2>
-            <ul className="space-y-2 text-gray-700">
-              {programHighlights.map((highlight) => (
-                <li key={highlight}>• {highlight}</li>
-              ))}
+            <h2 className="text-xl font-semibold text-blue-800 mb-4">Why Choose Malakpet for “Keyhole” Surgery?</h2>
+            <ul className="space-y-3 text-gray-700">
+              <li>• Consultant-led programme with advanced endoscopic training</li>
+              <li>• Dedicated 4K endoscopic tower and neuromonitoring in Yashoda Malakpet</li>
+              <li>• Most patients walk within hours and often go home the same evening</li>
+              <li>• Post-operative physiotherapy and return-to-work planning in the same campus</li>
             </ul>
           </div>
         </header>
 
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-blue-900 mb-6">Endoscopic Techniques Offered in Hyderabad</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {techniques.map((item) => (
-              <div key={item.title} className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
-                <h3 className="text-lg font-semibold text-blue-700 mb-3">{item.title}</h3>
-                <p className="text-sm text-gray-700">{item.description}</p>
-              </div>
+          <h2 className="text-3xl font-bold text-blue-900 mb-6">Conditions Treated with Endoscopic Surgery</h2>
+          <p className="text-gray-700 mb-4">
+            Endoscopic surgery is recommended when nerve compression is localised and the spine remains stable. It allows precise
+            removal of the offending disc or tissue without wider muscle detachment or bone removal.
+          </p>
+          <ul className="grid md:grid-cols-2 gap-4 text-sm text-gray-700">
+            {conditions.map((condition) => (
+              <li key={condition} className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">• {condition}</li>
             ))}
-          </div>
+          </ul>
         </section>
 
         <section className="mb-16 grid md:grid-cols-2 gap-10">
           <div>
-            <h2 className="text-3xl font-bold text-blue-900 mb-4">Who Qualifies for Endoscopic Spine Surgery?</h2>
-            <p className="text-gray-700 mb-4">
-              Endoscopic surgery suits patients with isolated nerve compression without significant instability. Careful patient
-              selection ensures dependable outcomes and helps avoid unnecessary fusion procedures.
+            <h2 className="text-3xl font-bold text-blue-900 mb-4">What to Expect at Yashoda Hospital, Malakpet</h2>
+            <p className="text-gray-700 mb-6">
+              After reviewing your MRI, Dr. Sayuj confirms whether a “keyhole” decompression will relieve the nerve pressure. The
+              procedure is typically performed under spinal anaesthesia, and patients begin walking within hours. Because muscles are
+              not stripped away, discomfort is markedly lower than with conventional surgery.
             </p>
-            <ul className="space-y-2 text-sm text-gray-700">
-              {eligibilityChecklist.map((item) => (
-                <li key={item}>• {item}</li>
-              ))}
-            </ul>
+            <p className="text-gray-700">
+              Before discharge you receive a written plan covering wound care, physiotherapy milestones, and the timeline for driving,
+              office work, and more strenuous activity. Follow-ups happen in our Malakpet clinic or via teleconsult to track your
+              recovery closely.
+            </p>
           </div>
           <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
-            <h3 className="text-xl font-semibold text-blue-800 mb-3">Common Conditions Treated</h3>
-            <ul className="space-y-2 text-sm text-gray-700">
-              <li>• Lumbar disc prolapse causing sciatica</li>
-              <li>• Recurrent disc herniation after prior surgery</li>
-              <li>• Foraminal stenosis with leg pain and numbness</li>
-              <li>• Cervical disc prolapse with arm radiculopathy</li>
-            </ul>
-            <Link href="/blog/endoscopic-vs-microdiscectomy-hyderabad/" className="text-blue-600 hover:underline text-sm">
-              Compare Endoscopic & Microdiscectomy →
-            </Link>
+            <h3 className="text-xl font-semibold text-blue-800 mb-3">Patient Journey</h3>
+            <ol className="space-y-3 text-sm text-gray-700 list-decimal list-inside">
+              <li>Consult in Malakpet with MRI/CT scans for eligibility assessment.</li>
+              <li>Undergo day-care surgery through a 1 cm incision with minimal blood loss.</li>
+              <li>Walk with assistance within 2-3 hours and discharge the same evening or next morning.</li>
+              <li>Follow personalised rehab and return-to-work guidelines shared before discharge.</li>
+            </ol>
           </div>
         </section>
 
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-blue-900 mb-4">Serving Patients Across the Twin Cities</h2>
+          <h2 className="text-3xl font-bold text-blue-900 mb-4">Serving Patients Across Hyderabad</h2>
           <p className="text-gray-700 mb-6">
-            Hyderabad&apos;s tech workforce, logistics teams, and manual labourers benefit from the rapid recovery offered by endoscopic
-            spine surgery. We support patients travelling from Jubilee Hills, Gachibowli, Uppal, and Kukatpally with streamlined
-            scheduling and tele-follow-ups.
+            Our Malakpet location is convenient for patients travelling from Dilsukhnagar, LB Nagar, Charminar, Koti, and other
+            neighbourhoods. We help with corporate approvals, insurance paperwork, and travel coordination for families who support
+            you during the procedure.
           </p>
           <div className="grid md:grid-cols-2 gap-6">
             <div className="bg-blue-50 border border-blue-100 rounded-xl p-6">
               <h3 className="text-lg font-semibold text-blue-800 mb-3">Pre-Surgery Preparation</h3>
               <ul className="space-y-2 text-sm text-blue-900">
-                <li>• Bring MRI/CT scans and prior spine surgery notes if any</li>
+                <li>• Bring MRI/CT scans and prior reports for review</li>
                 <li>• Inform us about blood thinners, diabetes medications, or cardiac history</li>
-                <li>• Arrange an attendant for the ride home post day-care discharge</li>
+                <li>• Arrange an attendant to accompany you home after day-care discharge</li>
               </ul>
             </div>
             <div className="bg-white border border-gray-200 rounded-xl p-6">
               <h3 className="text-lg font-semibold text-blue-800 mb-3">Post-Surgery Care</h3>
               <ul className="space-y-2 text-sm text-gray-700">
-                <li>• First dressing change at 48 hours</li>
+                <li>• First dressing change at 48 hours in the Malakpet clinic</li>
                 <li>• Physiotherapy-guided exercises begin Day 2</li>
                 <li>• Follow-up visit in 7-10 days with wound inspection and rehab plan</li>
               </ul>
