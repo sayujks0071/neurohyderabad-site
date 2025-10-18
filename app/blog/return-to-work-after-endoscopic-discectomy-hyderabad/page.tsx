@@ -1,5 +1,5 @@
-import Link from 'next/link'
 import { Metadata } from 'next'
+import Link from 'next/link'
 import { JsonLd } from '../../../src/lib/seo/jsonld'
 import ReviewedBy from '@/app/_components/ReviewedBy'
 import NAP from '@/app/_components/NAP'
@@ -297,33 +297,33 @@ export default function ReturnToWorkAfterEndoscopicDiscectomyPage() {
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="border rounded-lg p-4">
                   <h3 className="font-semibold mb-2">
-                    <a href="/services/endoscopic-discectomy-hyderabad/" className="text-blue-600 hover:text-blue-800">
+                    <Link href="/services/endoscopic-discectomy-hyderabad/" className="text-blue-600 hover:text-blue-800">
                       Endoscopic Discectomy
-                    </a>
+                    </Link>
                   </h3>
                   <p className="text-sm text-gray-600">Minimally invasive treatment for herniated discs</p>
                 </div>
                 <div className="border rounded-lg p-4">
                   <h3 className="font-semibold mb-2">
-                    <a href="/services/minimally-invasive-spine-surgery/" className="text-blue-600 hover:text-blue-800">
+                    <Link href="/services/minimally-invasive-spine-surgery/" className="text-blue-600 hover:text-blue-800">
                       Minimally Invasive Spine Surgery
-                    </a>
+                    </Link>
                   </h3>
                   <p className="text-sm text-gray-600">Comprehensive MISS techniques and recovery planning</p>
                 </div>
                 <div className="border rounded-lg p-4">
                   <h3 className="font-semibold mb-2">
-                    <a href="/conditions/sciatica-treatment-hyderabad/" className="text-blue-600 hover:text-blue-800">
+                    <Link href="/conditions/sciatica-treatment-hyderabad/" className="text-blue-600 hover:text-blue-800">
                       Sciatica Treatment
-                    </a>
+                    </Link>
                   </h3>
                   <p className="text-sm text-gray-600">Conservative to surgical treatment options</p>
                 </div>
                 <div className="border rounded-lg p-4">
                   <h3 className="font-semibold mb-2">
-                    <a href="/appointments/" className="text-blue-600 hover:text-blue-800">
+                    <Link href="/appointments/" className="text-blue-600 hover:text-blue-800">
                       Book Consultation
-                    </a>
+                    </Link>
                   </h3>
                   <p className="text-sm text-gray-600">Schedule your personalized recovery plan</p>
                 </div>
@@ -336,12 +336,12 @@ export default function ReturnToWorkAfterEndoscopicDiscectomyPage() {
                 <p className="text-lg text-blue-800 mb-4">
                   Book a consultation at Yashoda Hospitals – Malakpet. Bring your MRI and job details; we'll tailor an RTW plan that fits your role.
                 </p>
-                <a 
+                <Link 
                   href="/appointments/" 
                   className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium"
                 >
                   Schedule Consultation
-                </a>
+                </Link>
               </div>
             </section>
 

@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import Link from 'next/link'
 import { JsonLd } from '../../../src/lib/seo/jsonld'
 import ReviewedBy from '@/app/_components/ReviewedBy'
 import NAP from '@/app/_components/NAP'
@@ -297,17 +298,17 @@ export default function EndoscopicSpineSurgeryCostPage() {
             <div className="grid md:grid-cols-2 gap-4">
               <div className="border rounded-lg p-4">
                 <h3 className="font-semibold mb-2">
-                  <a href="/services/minimally-invasive-spine-surgery/" className="text-blue-600 hover:text-blue-800">
+                  <Link href="/services/minimally-invasive-spine-surgery/" className="text-blue-600 hover:text-blue-800">
                     Endoscopic Foraminotomy
-                  </a>
+                  </Link>
                 </h3>
                 <p className="text-sm text-gray-600">Minimally invasive nerve decompression for foraminal stenosis</p>
               </div>
               <div className="border rounded-lg p-4">
                 <h3 className="font-semibold mb-2">
-                  <a href="/services/minimally-invasive-spine-surgery/" className="text-blue-600 hover:text-blue-800">
+                  <Link href="/services/minimally-invasive-spine-surgery/" className="text-blue-600 hover:text-blue-800">
                     Minimally Invasive Spine Surgery
-                  </a>
+                  </Link>
                 </h3>
                 <p className="text-sm text-gray-600">Advanced techniques for faster recovery</p>
               </div>
@@ -321,17 +322,17 @@ export default function EndoscopicSpineSurgeryCostPage() {
             <div className="grid md:grid-cols-2 gap-4">
               <div className="border rounded-lg p-4">
                 <h3 className="font-semibold mb-2">
-                  <a href="/conditions/spinal-stenosis-treatment-hyderabad/" className="text-blue-600 hover:text-blue-800">
+                  <Link href="/conditions/spinal-stenosis-treatment-hyderabad/" className="text-blue-600 hover:text-blue-800">
                     Spinal Stenosis Treatment
-                  </a>
+                  </Link>
                 </h3>
                 <p className="text-sm text-gray-600">Comprehensive treatment options for spinal canal narrowing</p>
               </div>
               <div className="border rounded-lg p-4">
                 <h3 className="font-semibold mb-2">
-                  <a href="/conditions/slip-disc-treatment-hyderabad/" className="text-blue-600 hover:text-blue-800">
+                  <Link href="/conditions/slip-disc-treatment-hyderabad/" className="text-blue-600 hover:text-blue-800">
                     Slip Disc Treatment
-                  </a>
+                  </Link>
                 </h3>
                 <p className="text-sm text-gray-600">Advanced treatment for herniated discs</p>
               </div>
