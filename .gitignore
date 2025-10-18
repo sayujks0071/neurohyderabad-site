@@ -45,3 +45,11 @@ coverage/
 # Temporary folders
 tmp/
 temp/
+
+# Internal documentation (not for public deployment)
+docs/internal/
+*.md
+*.json
+*.patch
+*.sh
+*.png
