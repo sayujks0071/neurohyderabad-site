@@ -47,10 +47,16 @@ export default function ServicesPage() {
       features: ['Neuronavigation', 'Neuromonitoring', 'Awake craniotomy', 'Multidisciplinary care']
     },
     {
-      title: 'Endoscopic Spine Surgery',
-      description: 'Minimally invasive spine procedures using advanced endoscopic techniques for faster recovery.',
-      href: '/services/minimally-invasive-spine-surgery/',
-      features: ['Discectomy', 'Foraminotomy', 'ULBD', 'Cervical procedures']
+      title: 'Endoscopic Spine Surgery (Day-Care MISS)',
+      description: 'Full endoscopic discectomy and decompression with same-day discharge protocols in Hyderabad.',
+      href: '/services/endoscopic-spine-surgery-hyderabad/',
+      features: ['Transforaminal discectomy', 'Interlaminar decompression', 'Cervical endoscopic procedures', 'Enhanced recovery']
+    },
+    {
+      title: 'Comprehensive Spine Surgery',
+      description: 'Stabilisation, deformity correction, and complex revision spine surgery programmes.',
+      href: '/services/spine-surgery-hyderabad/',
+      features: ['MISS fusion', 'Deformity correction', 'Revision surgery', 'Navigation-guided fixation']
     },
     {
       title: 'Epilepsy Surgery',
