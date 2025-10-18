@@ -73,8 +73,68 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
     }
   ];
 
+  const faqs = [
+    {
+      question: 'What is Minimally Invasive Spine Surgery?',
+      answer:
+        'Minimally invasive spine surgery (MISS) uses smaller incisions and endoscopic or microscopic instruments to reach the spine while gently moving muscles instead of cutting them. This approach reduces tissue trauma, pain, and blood loss compared to traditional open surgery.'
+    },
+    {
+      question: 'What conditions can be treated with Minimally Invasive Spine Surgery?',
+      answer:
+        'MISS is recommended when conservative treatments no longer control symptoms from conditions such as herniated discs, spinal stenosis, foraminal stenosis, spinal deformities like scoliosis, and spondylolisthesis. The specific technique is chosen based on the level and nature of the pathology.'
+    },
+    {
+      question: 'What are the core patient benefits of choosing Minimally Invasive Spine Surgery?',
+      answer:
+        'Patients typically experience less postoperative pain, reduced blood loss, minimal scarring, and faster recovery because the muscles and supporting tissues are preserved. Many MISS procedures allow a shorter hospital stay and an earlier return to normal activity.'
+    },
+    {
+      question: 'How long does endoscopic spine surgery take?',
+      answer:
+        'Most endoscopic spine procedures take 1-3 hours depending on the complexity. Endoscopic discectomy typically takes 60-90 minutes, while more complex procedures like endoscopic ULBD may take 2-3 hours. The shorter operative time contributes to faster recovery.'
+    },
+    {
+      question: 'What is the success rate of minimally invasive spine surgery?',
+      answer:
+        'Endoscopic spine surgery has success rates of 85-95% for appropriate candidates. Success depends on proper patient selection, accurate diagnosis, and surgeon experience. Dr. Sayuj Krishnan has performed over 500 endoscopic procedures with excellent outcomes.'
+    },
+    {
+      question: 'When can I return to work after endoscopic spine surgery?',
+      answer:
+        'Most patients can return to desk work within 1-2 weeks after endoscopic spine surgery. Manual labor may require 4-6 weeks. Recovery time varies based on the specific procedure, your overall health, and the physical demands of your job.'
+    },
+    {
+      question: 'Is endoscopic spine surgery covered by insurance?',
+      answer:
+        'Yes, endoscopic spine surgery is typically covered by most insurance plans when medically necessary. We provide detailed medical estimates and work with insurance companies for pre-authorization. Cashless insurance approvals are available at Yashoda Hospital.'
+    },
+    {
+      question: 'What are the risks of minimally invasive spine surgery?',
+      answer:
+        'Endoscopic spine surgery has lower risks compared to open surgery, including reduced infection risk, less blood loss, and minimal muscle damage. Potential risks include nerve injury, bleeding, or infection, but these are significantly lower than traditional open procedures.'
+    }
+  ];
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map((faq) => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  };
+
   return (
     <div className="min-h-screen bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <div className="container mx-auto px-4 py-16">
         <header className="text-center mb-8">
           <h1 className="text-4xl font-bold mb-4">Minimally Invasive Spine Surgery</h1>
@@ -196,6 +256,18 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
 
         <section className="mb-12">
           <TeleconsultationForm pageSlug="/services/minimally-invasive-spine-surgery" service="Minimally Invasive Spine Surgery" />
+        </section>
+
+        <section className="mb-12">
+          <h2 className="text-3xl font-bold text-blue-800 mb-6">Frequently Asked Questions</h2>
+          <div className="space-y-6">
+            {faqs.map((faq) => (
+              <article key={faq.question} className="bg-white border border-blue-100 rounded-lg p-6 shadow-sm">
+                <h3 className="text-xl font-semibold text-blue-700 mb-3">{faq.question}</h3>
+                <p className="text-gray-700">{faq.answer}</p>
+              </article>
+            ))}
+          </div>
         </section>
 
         <section className="mb-12">
