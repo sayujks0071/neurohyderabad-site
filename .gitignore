@@ -53,3 +53,7 @@ docs/internal/
 *.patch
 *.sh
 *.png
+
+# Generated sitemap/robots outputs
+public/sitemap*.xml
+public/robots.txt

@@ -140,6 +140,12 @@ const nextConfig = {
       },
       {
         source: '/((?!api|_next|images|favicon.ico|robots.txt|sitemap.xml|site.webmanifest).*)',
+        has: [{ type: 'host', value: 'drsayuj.info' }],
+        destination: 'https://www.drsayuj.info/$1',
+        permanent: true,
+      },
+      {
+        source: '/((?!api|_next|images|favicon.ico|robots.txt|sitemap.xml|site.webmanifest).*)',
         has: [{ type: 'host', value: 'www.drsayuj.com' }],
         destination: 'https://www.drsayuj.info/$1',
         permanent: true,
