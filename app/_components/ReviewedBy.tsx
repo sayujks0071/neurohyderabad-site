@@ -16,7 +16,17 @@ export default function ReviewedBy({ lastReviewed = '2025-01-15', className = ''
         </div>
         <div className="ml-3">
           <p className="text-sm text-blue-700">
-            <strong>Reviewed by Dr. Sayuj Krishnan S</strong> – Last reviewed {lastReviewed}
+            <strong>
+              Medically reviewed by{" "}
+              <a
+                href="/about-dr-sayuj"
+                rel="author"
+                className="underline decoration-blue-300 hover:text-blue-900 transition-colors"
+              >
+                Dr. Sayuj Krishnan S
+              </a>
+            </strong>{" "}
+            – Last reviewed {lastReviewed}
           </p>
           <p className="text-xs text-blue-600 mt-1">
             This information is for educational purposes only and should not replace professional medical advice. 
