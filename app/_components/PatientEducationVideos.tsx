@@ -1,3 +1,6 @@
+'use client';
+
+import { useState, useEffect, useRef } from 'react';
 import OptimizedImage from './OptimizedImage';
 
 type VideoItem = {
@@ -40,9 +43,29 @@ const videos: VideoItem[] = [
 ];
 
 export default function PatientEducationVideos() {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <section className="py-16 bg-white">
+    <section ref={sectionRef} className="py-16 bg-white">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-4">
@@ -69,7 +92,7 @@ export default function PatientEducationVideos() {
           </div>
 
           <div className="grid gap-8 md:grid-cols-3">
-            {videos.map((video) => (
+            {isVisible && videos.map((video) => (
               <article
                 key={video.id}
                 className="bg-gray-50 rounded-2xl shadow-lg overflow-hidden border border-gray-100 flex flex-col"

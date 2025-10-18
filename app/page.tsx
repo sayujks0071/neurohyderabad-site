@@ -1,9 +1,9 @@
 import type { CSSProperties } from "react";
 import Link from "next/link";
 import ExpandedFAQ from "../src/components/ExpandedFAQ";
-import PatientEducationVideos from "./_components/PatientEducationVideos";
-import RecoveryTimeline from "./_components/RecoveryTimeline";
-import LocalReputationPanel from "./_components/LocalReputationPanel";
+import LazyVideoSection from "./_components/LazyVideoSection";
+import LazyRecoveryTimeline from "./_components/LazyRecoveryTimeline";
+import LazyReputationPanel from "./_components/LazyReputationPanel";
 import { SITE_URL } from "../src/lib/seo";
 // Temporarily commenting out problematic imports
 // import BreadcrumbSchema from "./components/schemas/BreadcrumbSchema";
@@ -207,7 +207,8 @@ export default function Home() {
         </div>
       </section>
 
-      <PatientEducationVideos />
+      {/* Lazy load video section - only loads when user scrolls */}
+      <LazyVideoSection />
 
       {/* Minimally Invasive Spine Surgery (MISS) */}
       <section className="py-16 bg-gray-50">
@@ -341,7 +342,8 @@ export default function Home() {
         </div>
       </section>
 
-      <RecoveryTimeline />
+      {/* Lazy load recovery timeline - only loads when user scrolls */}
+      <LazyRecoveryTimeline />
 
       {/* Trigeminal Neuralgia Care */}
       <section className="py-16 bg-gray-50">
@@ -637,7 +639,8 @@ export default function Home() {
       </section>
 
       <ExpandedFAQ faqs={HOME_FAQS} className="bg-gray-50" />
-      <LocalReputationPanel />
+      {/* Lazy load reputation panel - only loads when user scrolls */}
+      <LazyReputationPanel />
 
       {/* Disease Guides Section */}
       <section className="py-16 bg-gray-50">
