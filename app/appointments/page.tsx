@@ -1,6 +1,6 @@
 import { SITE_URL } from "../../src/lib/seo";
 import type { Metadata } from "next";
-import TeleconsultationForm from "@/components/TeleconsultationForm";
+import AppointmentFormExperience from "./_components/advanced-form/AppointmentFormExperience";
 import AppointmentFormTracker from "../../src/components/AppointmentFormTracker";
 import PhoneClickTracker from "../../src/components/PhoneClickTracker";
 import OpenAIAgentsBooking from "../_components/OpenAIAgentsBooking";
@@ -79,7 +79,7 @@ export default function AppointmentsPage() {
         
         <div className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-6">
-            <TeleconsultationForm pageSlug="/appointments" />
+            <AppointmentFormExperience />
             <div className="hidden" aria-hidden>
               <AppointmentFormTracker pageSlug="/appointments" />
               <PhoneClickTracker />
