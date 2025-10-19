@@ -6,12 +6,16 @@ const nextConfig = {
   // Consistent trailing slash behavior - disabled for API routes
   trailingSlash: false,
   
-  // Safari optimization: Reduce hydration payload
+  // Performance optimizations
   experimental: {
     // Reduce hydration data size for Safari compatibility
     optimizePackageImports: ['@/components', '@/lib'],
     // Enable partial pre-rendering for better performance
     ppr: false,
+    // Enable optimized CSS loading
+    optimizeCss: true,
+    // Enable server components optimization
+    serverComponentsExternalPackages: ['sharp'],
   },
   
   // Configure images for dynamic OG generation and local images
@@ -42,6 +46,11 @@ const nextConfig = {
     unoptimized: false,
     // Configure domains for external images if needed
     domains: [],
+    // Performance optimizations
+    formats: ['image/webp', 'image/avif'],
+    minimumCacheTTL: 31536000, // 1 year
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
   
   // 301 redirects for legacy URLs to consolidate duplicate content

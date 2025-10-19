@@ -1,5 +1,6 @@
 import { SITE_URL, webPageJsonLd, physicianJsonLd, breadcrumbJsonLd, itemListJsonLd } from "../../src/lib/seo";
 import type { Metadata } from "next";
+import AppointmentFormExperience from "./_components/advanced-form/AppointmentFormExperience";
 
 export const metadata: Metadata = {
   title: "Book an Appointment | Dr Sayuj Krishnan",
