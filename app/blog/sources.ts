@@ -168,6 +168,16 @@ export const BLOG_SOURCES: Record<string, SourceEntry[]> = {
       href: "https://www.ninds.nih.gov/health-information/disorders/sciatica",
     },
   ],
+  "brain-spine-surgeon-banjara-hills": [
+    {
+      label: "Yashoda Hospital – Official Website and Location Information",
+      href: "https://www.yashodahospitals.com/",
+    },
+    {
+      label: "Hyderabad Medical Tourism – Healthcare Infrastructure",
+      href: "https://www.hyderabad.gov.in/",
+    },
+  ],
 };
 
 export function getBlogSources(slug: string): SourceEntry[] {

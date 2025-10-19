@@ -3,9 +3,12 @@ import Link from 'next/link';
 import StandardCTA from '@/app/_components/StandardCTA';
 import NAP from '@/app/_components/NAP';
 import ReviewedBy from '@/app/_components/ReviewedBy';
+import AuthorByline from '@/app/_components/AuthorByline';
+import SourceList from '@/app/_components/SourceList';
 import SchemaScript from '@/app/_components/SchemaScript';
 import LocationPageTracker from '../../../src/components/LocationPageTracker';
 import { SITE_URL } from '@/src/lib/seo';
+import { sources } from '../../blog/sources';
 
 export const metadata: Metadata = {
   title: 'Brain & Spine Surgeon near Banjara Hills, Hyderabad',
@@ -333,6 +336,13 @@ export default function BanjaraHillsLocationPage() {
       {/* Review Notice */}
       <section className="py-8">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <AuthorByline 
+            publishedOn="2025-01-15"
+            updatedOn="2025-10-19"
+          />
+          
+          <SourceList sources={sources['brain-spine-surgeon-banjara-hills'] || []} />
+          
           <ReviewedBy lastReviewed="2025-01-15" />
         </div>
       </section>
