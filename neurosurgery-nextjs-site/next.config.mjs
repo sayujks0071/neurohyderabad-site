@@ -36,8 +36,8 @@ const nextConfig = {
     ],
     // Allow query strings for dynamic OG images
     dangerouslyAllowSVG: true,
-    contentDispositionType: 'attachment',
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    contentDispositionType: 'inline',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none';",
     // Allow local images with query strings (for OG images)
     unoptimized: false,
     // Configure domains for external images if needed
