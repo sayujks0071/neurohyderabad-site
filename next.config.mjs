@@ -14,9 +14,9 @@ const nextConfig = {
     ppr: false,
     // Enable optimized CSS loading
     optimizeCss: true,
-    // Enable server components optimization
-    serverComponentsExternalPackages: ['sharp'],
   },
+  // Server external packages (moved from experimental)
+  serverExternalPackages: ['sharp'],
   
   // Configure images for dynamic OG generation and local images
   images: {
