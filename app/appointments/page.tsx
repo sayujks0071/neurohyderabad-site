@@ -1,6 +1,6 @@
 import { SITE_URL } from "../../src/lib/seo";
 import type { Metadata } from "next";
-import AppointmentFormExperience from "./_components/advanced-form/AppointmentFormExperience";
+import { AppointmentFormExperience } from "@/packages/appointment-form";
 import AppointmentFormTracker from "../../src/components/AppointmentFormTracker";
 import PhoneClickTracker from "../../src/components/PhoneClickTracker";
 import OpenAIAgentsBooking from "../_components/OpenAIAgentsBooking";

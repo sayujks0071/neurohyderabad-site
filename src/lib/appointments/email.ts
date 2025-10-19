@@ -1,4 +1,4 @@
-import type { BookingData, EmailResult } from "./types";
+import type { BookingData, EmailResult } from "@/packages/appointment-form/types";
 
 const SIMULATED_FAILURE_RATE = 0.1;
 

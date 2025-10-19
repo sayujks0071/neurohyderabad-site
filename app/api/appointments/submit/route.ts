@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { generateBookingConfirmation } from "@/src/lib/appointments/gemini";
 import { sendConfirmationEmail } from "@/src/lib/appointments/email";
-import type { BookingData } from "@/src/lib/appointments/types";
+import type { BookingData } from "@/packages/appointment-form/types";
 
 const ALLOWED_GENDERS = new Set(["male", "female", "other"]);
 

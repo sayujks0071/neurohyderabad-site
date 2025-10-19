@@ -1,5 +1,5 @@
 import { GoogleGenAI } from "@google/genai";
-import type { BookingData } from "./types";
+import type { BookingData } from "@/packages/appointment-form/types";
 
 const MODEL_NAME = "gemini-2.5-flash";
 
