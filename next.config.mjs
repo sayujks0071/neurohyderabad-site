@@ -120,8 +120,6 @@ const nextConfig = {
           { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
           // HSTS for security (after redirects are confirmed)
           { key: "Strict-Transport-Security", value: "max-age=31536000; includeSubDomains; preload" },
-          // Safari optimization: Help with content decoding
-          { key: "Content-Type", value: "text/html; charset=utf-8" },
         ]
       },
       {

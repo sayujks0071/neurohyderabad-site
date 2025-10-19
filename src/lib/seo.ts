@@ -194,8 +194,8 @@ export function itemListJsonLd({ name, items, id, order }: ItemListJsonLdProps) 
 export const ORGANIZATION_LOGO = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  logo: `${SITE_URL}/images/logo-512x512.png`,
-  image: `${SITE_URL}/images/logo-512x512.png`,
+  logo: `${SITE_URL}/images/logo.png`,
+  image: `${SITE_URL}/images/logo.png`,
   url: SITE_URL,
   sameAs: [
     "https://g.co/kgs/9366939683880052414",
