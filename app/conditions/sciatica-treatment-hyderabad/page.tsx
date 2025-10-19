@@ -1,8 +1,11 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { SITE_URL } from '../../../src/lib/seo';
+import AuthorByline from '@/app/_components/AuthorByline';
+import SourceList from '@/app/_components/SourceList';
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import NAP from '@/app/_components/NAP';
+import { SITE_URL } from '../../../src/lib/seo';
+import { sources } from '../../blog/sources';
 import { makeMetadata } from '@/app/_lib/meta';
 
 const baseMetadata = makeMetadata({
@@ -115,6 +118,13 @@ export default function SciaticaTreatmentPage() {
         </section>
 
         <section className="mt-12 space-y-6">
+          <AuthorByline 
+            publishedOn="2025-02-15"
+            updatedOn="2025-10-19"
+          />
+          
+          <SourceList sources={sources['sciatica-treatment-hyderabad'] || []} />
+          
           <ReviewedBy />
           <NAP />
         </section>

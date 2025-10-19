@@ -8,6 +8,9 @@ import { SITE_URL } from "../../../src/lib/seo";
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import NAP from '@/app/_components/NAP';
 import { makeMetadata } from '@/app/_lib/meta';
+import AuthorByline from '@/app/_components/AuthorByline';
+import SourceList from '@/app/_components/SourceList';
+import { sources } from '../../blog/sources';
 
 const baseMetadata = makeMetadata({
   title: "Slip Disc Treatment in Hyderabad | Endoscopic Discectomy | Dr. Sayuj Krishnan",
@@ -288,6 +291,15 @@ export default function SlipDiscTreatmentPage() {
       
       <FAQPageSchema />
       <BreadcrumbSchema items={breadcrumbs} />
-    </main>
+    
+      <AuthorByline 
+        publishedOn="2025-02-15"
+        updatedOn="2025-10-19"
+      />
+      
+      <SourceList sources={sources['slip-disc-treatment-hyderabad'] || []} />
+      
+      <ReviewedBy />
+</main>
   );
 }

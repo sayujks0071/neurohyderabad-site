@@ -8,6 +8,9 @@ import MapEmbed from '@/components/MapEmbed';
 import { makeMetadata } from '@/app/_lib/meta';
 import { SITE_URL } from '@/src/lib/seo';
 import { buildLocalServiceSchema } from '@/src/lib/schema/localService';
+import AuthorByline from '@/app/_components/AuthorByline';
+import SourceList from '@/app/_components/SourceList';
+import { getServiceSources } from '../sources';
 
 const SERVICE_SLUG = 'brain-tumor-surgery-hyderabad';
 
@@ -54,6 +57,8 @@ const schema = buildLocalServiceSchema({
   description:
     'Neuronavigation-guided brain tumor surgery with neuromonitoring, awake craniotomy, and integrated oncology care at Yashoda Hospital Malakpet.',
 });
+
+const ARTICLE_SOURCES = getServiceSources(SERVICE_SLUG);
 
 const treatmentHighlights = [
   {
@@ -126,6 +131,11 @@ export default function BrainTumorSurgeryHyderabadPage() {
             <h1 className="text-4xl md:text-5xl font-bold text-blue-900 leading-tight mb-6">
               Advanced Brain Tumor Surgery in Hyderabad
             </h1>
+            <AuthorByline
+              publishedOn="2025-09-04"
+              updatedOn="2025-10-19"
+              className="mb-6"
+            />
             <p className="text-lg text-gray-700 mb-6">
               A brain tumor diagnosis demands expert surgical guidance. At Yashoda Hospital, Malakpet, Dr. Sayuj Krishnan provides
               compassionate, cutting-edge care using microsurgery, neuronavigation, and a full multidisciplinary team to deliver
@@ -268,7 +278,8 @@ export default function BrainTumorSurgeryHyderabadPage() {
           </div>
         </section>
 
-        <ReviewedBy lastReviewed="2025-10-01" />
+        <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
+        <ReviewedBy lastReviewed="2025-10-19" />
       </main>
     </>
   );

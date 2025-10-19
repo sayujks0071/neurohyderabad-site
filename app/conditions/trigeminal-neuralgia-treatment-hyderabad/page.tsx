@@ -4,6 +4,10 @@ import SchemaScript from "@/app/_components/SchemaScript";
 import LocalNAP from "@/app/_components/LocalNAP";
 import YMYLAttribution from "@/app/_components/YMYLAttribution";
 import { SITE_URL } from "@/src/lib/seo";
+import AuthorByline from '@/app/_components/AuthorByline';
+import SourceList from '@/app/_components/SourceList';
+import ReviewedBy from '@/app/_components/ReviewedBy';
+import { sources } from '../../blog/sources';
 
 // Static generation with 24-hour revalidation
 export const revalidate = 86400;
@@ -480,6 +484,15 @@ export default function TrigeminalNeuralgiaTreatmentPage() {
           </ul>
         </div>
       </section>
-    </main>
+    
+      <AuthorByline 
+        publishedOn="2025-02-15"
+        updatedOn="2025-10-19"
+      />
+      
+      <SourceList sources={sources['trigeminal-neuralgia-treatment-hyderabad'] || []} />
+      
+      <ReviewedBy />
+</main>
   );
 }

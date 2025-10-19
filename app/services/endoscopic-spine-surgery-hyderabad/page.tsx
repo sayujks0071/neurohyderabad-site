@@ -8,6 +8,9 @@ import MapEmbed from '@/components/MapEmbed';
 import { makeMetadata } from '@/app/_lib/meta';
 import { SITE_URL } from '@/src/lib/seo';
 import { buildLocalServiceSchema } from '@/src/lib/schema/localService';
+import AuthorByline from '@/app/_components/AuthorByline';
+import SourceList from '@/app/_components/SourceList';
+import { getServiceSources } from '../sources';
 
 const SERVICE_SLUG = 'endoscopic-spine-surgery-hyderabad';
 
@@ -55,6 +58,8 @@ const schema = buildLocalServiceSchema({
     'Ultra-minimally invasive endoscopic spine surgery program at Yashoda Hospital Malakpet delivering keyhole decompression with day-care discharge.',
 });
 
+const ARTICLE_SOURCES = getServiceSources(SERVICE_SLUG);
+
 const conditions = [
   'Lumbar disc herniation causing sciatica or leg weakness',
   'Foraminal stenosis with nerve compression',
@@ -99,6 +104,11 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
             <h1 className="text-4xl md:text-5xl font-bold text-blue-900 leading-tight mb-6">
               Advanced Endoscopic Spine Surgery in Hyderabad
             </h1>
+            <AuthorByline
+              publishedOn="2025-09-05"
+              updatedOn="2025-10-19"
+              className="mb-6"
+            />
             <p className="text-lg text-gray-700 mb-6">
               Endoscopic—or “keyhole”—spine surgery provides fast, lasting relief from slip disc, sciatica, and foraminal stenosis
               with almost no muscle disruption. Performed by Dr. Sayuj at Yashoda Hospital, Malakpet, this approach helps you walk
@@ -225,7 +235,8 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
           </div>
         </section>
 
-        <ReviewedBy lastReviewed="2025-10-01" />
+        <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
+        <ReviewedBy lastReviewed="2025-10-19" />
       </main>
     </>
   );

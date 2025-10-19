@@ -8,6 +8,9 @@ import MapEmbed from '@/components/MapEmbed';
 import { makeMetadata } from '@/app/_lib/meta';
 import { SITE_URL } from '@/src/lib/seo';
 import { buildLocalServiceSchema } from '@/src/lib/schema/localService';
+import AuthorByline from '@/app/_components/AuthorByline';
+import SourceList from '@/app/_components/SourceList';
+import { getServiceSources } from '../sources';
 
 const SERVICE_SLUG = 'spine-surgery-hyderabad';
 
@@ -56,6 +59,8 @@ const schema = buildLocalServiceSchema({
     'Full-spectrum spine surgery including minimally invasive, endoscopic and complex reconstruction care delivered at Yashoda Hospital, Malakpet by Dr. Sayuj Krishnan.',
 });
 
+const ARTICLE_SOURCES = getServiceSources(SERVICE_SLUG);
+
 const faqs = [
   {
     question: 'How do I know if I need spine surgery instead of physiotherapy?',
@@ -95,6 +100,11 @@ export default function SpineSurgeryHyderabadPage() {
             <h1 className="text-4xl md:text-5xl font-bold text-blue-900 leading-tight mb-6">
               Advanced Spine Surgery in Hyderabad
             </h1>
+            <AuthorByline
+              publishedOn="2025-09-08"
+              updatedOn="2025-10-19"
+              className="mb-6"
+            />
             <p className="text-lg text-gray-700 mb-6">
               Living with chronic back or neck pain can affect every part of your life. At Yashoda Hospital, Malakpet, Dr. Sayuj
               Krishnan delivers advanced spine surgery solutions for slipped discs, stenosis, instability, and deformity with a
@@ -236,7 +246,8 @@ export default function SpineSurgeryHyderabadPage() {
           </div>
         </section>
 
-        <ReviewedBy lastReviewed="2025-10-01" />
+        <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
+        <ReviewedBy lastReviewed="2025-10-19" />
       </main>
     </>
   );

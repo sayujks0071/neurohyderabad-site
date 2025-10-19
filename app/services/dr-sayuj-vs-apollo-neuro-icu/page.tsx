@@ -3,15 +3,19 @@ import { makeMetadata } from '@/app/_lib/meta';
 import SchemaScript from '@/app/_schema/Script';
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import NAP from '@/app/_components/NAP';
-import MedicalCitations from '@/app/_components/MedicalCitations';
 import SmartImage from '@/components/SmartImage';
 import Link from 'next/link';
+import AuthorByline from '@/app/_components/AuthorByline';
+import SourceList from '@/app/_components/SourceList';
+import { getServiceSources } from '../sources';
 
 export const metadata: Metadata = makeMetadata({
   title: 'Dr. Sayuj vs Apollo Neuro ICU: Expert Comparison for Brain & Spine Surgery',
   description: 'Compare Dr. Sayuj Krishnan with Apollo Neuro ICU for brain and spine surgery. Expert analysis of techniques, outcomes, and patient care approaches in Hyderabad.',
   canonicalPath: '/services/dr-sayuj-vs-apollo-neuro-icu',
 });
+
+const ARTICLE_SOURCES = getServiceSources('dr-sayuj-vs-apollo-neuro-icu');
 
 export default function DrSayujVsApolloNeuroICUPage() {
   const url = 'https://www.drsayuj.info/services/dr-sayuj-vs-apollo-neuro-icu';
@@ -27,7 +31,7 @@ export default function DrSayujVsApolloNeuroICUPage() {
       author: { '@id': 'https://www.drsayuj.info/#physician' },
       publisher: { '@id': 'https://www.drsayuj.info/#physician' },
       datePublished: '2025-01-15',
-      dateModified: '2025-01-15',
+      dateModified: '2025-10-19',
       mainEntityOfPage: url,
       breadcrumb: { '@id': `${url}#breadcrumb` }
     },
@@ -46,6 +50,11 @@ export default function DrSayujVsApolloNeuroICUPage() {
   return (
     <main id="main" className="prose">
       <h1>Dr. Sayuj vs Apollo Neuro ICU: Expert Comparison for Brain & Spine Surgery</h1>
+      <AuthorByline
+        publishedOn="2025-09-11"
+        updatedOn="2025-10-19"
+        className="mb-6"
+      />
 
       <section className="not-prose mb-10 rounded-xl border border-blue-100 bg-blue-50 p-6 text-sm leading-6">
         <h2 className="mb-2 text-base font-semibold text-blue-900">Comparison overview</h2>
@@ -263,9 +272,9 @@ export default function DrSayujVsApolloNeuroICUPage() {
         </div>
       </div>
 
+      <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
       <NAP />
-      <ReviewedBy />
-      <MedicalCitations />
+      <ReviewedBy lastReviewed="2025-10-19" />
 
       {schemas.map((schema, index) => (
         <SchemaScript key={index} data={schema} />

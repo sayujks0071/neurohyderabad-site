@@ -6,8 +6,10 @@ import TeleconsultationForm from '@/components/TeleconsultationForm';
 import { patientStories } from '../../../src/content/stories';
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import NAP from '@/app/_components/NAP';
-import MedicalCitations from '@/app/_components/MedicalCitations';
 import { makeMetadata } from '@/app/_lib/meta';
+import AuthorByline from '@/app/_components/AuthorByline';
+import SourceList from '@/app/_components/SourceList';
+import { getServiceSources } from '../sources';
 
 const baseMetadata = makeMetadata({
   title: 'Epilepsy Surgery in Hyderabad | Drug-Resistant Epilepsy Treatment',
@@ -45,6 +47,8 @@ const epilepsyStories = patientStories
   .filter((story) => story.tags.includes('epilepsy'))
   .slice(0, 1);
 
+const ARTICLE_SOURCES = getServiceSources('epilepsy-surgery-hyderabad');
+
 export default function EpilepsySurgeryPage() {
   const procedures = [
     {
@@ -72,6 +76,11 @@ export default function EpilepsySurgeryPage() {
       <div className="container mx-auto px-4 py-16">
         <header className="text-center mb-8">
           <h1 className="text-4xl font-bold mb-4">Epilepsy Surgery in Hyderabad</h1>
+          <AuthorByline
+            publishedOn="2025-09-06"
+            updatedOn="2025-10-19"
+            className="justify-center mb-4"
+          />
           <p className="text-lg text-gray-600">Advanced surgical treatment for drug-resistant epilepsy</p>
         </header>
 
@@ -259,9 +268,10 @@ export default function EpilepsySurgeryPage() {
           </div>
         </section>
 
+        <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
+
         <section className="mt-12 space-y-6">
-          <ReviewedBy lastReviewed="2025-01-15" />
-          <MedicalCitations />
+          <ReviewedBy lastReviewed="2025-10-19" />
           <NAP />
         </section>
       </div>

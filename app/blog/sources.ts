@@ -148,6 +148,26 @@ export const BLOG_SOURCES: Record<string, SourceEntry[]> = {
       href: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6029347/",
     },
   ],
+  "cervical-radiculopathy-treatment-hyderabad": [
+    {
+      label: "American Academy of Orthopaedic Surgeons – Cervical Radiculopathy (Pinched Nerve)",
+      href: "https://orthoinfo.aaos.org/en/diseases--conditions/cervical-radiculopathy-pinched-nerve/",
+    },
+    {
+      label: "National Institute of Neurological Disorders and Stroke – Cervical Radiculopathy Information",
+      href: "https://www.ninds.nih.gov/health-information/disorders/cervical-radiculopathy",
+    },
+  ],
+  "sciatica-treatment-hyderabad": [
+    {
+      label: "American Academy of Orthopaedic Surgeons – Sciatica (Lumbar Radiculopathy)",
+      href: "https://orthoinfo.aaos.org/en/diseases--conditions/sciatica-lumbar-radiculopathy/",
+    },
+    {
+      label: "National Institute of Neurological Disorders and Stroke – Sciatica Information",
+      href: "https://www.ninds.nih.gov/health-information/disorders/sciatica",
+    },
+  ],
 };
 
 export function getBlogSources(slug: string): SourceEntry[] {

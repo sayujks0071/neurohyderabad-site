@@ -3,15 +3,19 @@ import { makeMetadata } from '@/app/_lib/meta';
 import SchemaScript from '@/app/_schema/Script';
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import NAP from '@/app/_components/NAP';
-import MedicalCitations from '@/app/_components/MedicalCitations';
 import SmartImage from '@/components/SmartImage';
 import Link from 'next/link';
+import AuthorByline from '@/app/_components/AuthorByline';
+import SourceList from '@/app/_components/SourceList';
+import { getServiceSources } from '../sources';
 
 export const metadata: Metadata = makeMetadata({
   title: 'KIMS Spine Surgery Second Opinion | Dr. Sayuj Krishnan Expert Review',
   description: 'Get a second opinion on KIMS spine surgery recommendations from Dr. Sayuj Krishnan. Expert review of surgical plans, alternative treatments, and minimally invasive options.',
   canonicalPath: '/services/kims-spine-surgery-second-opinion',
 });
+
+const ARTICLE_SOURCES = getServiceSources('kims-spine-surgery-second-opinion');
 
 export default function KIMSSpineSurgerySecondOpinionPage() {
   const url = 'https://www.drsayuj.info/services/kims-spine-surgery-second-opinion';
@@ -27,7 +31,7 @@ export default function KIMSSpineSurgerySecondOpinionPage() {
       author: { '@id': 'https://www.drsayuj.info/#physician' },
       publisher: { '@id': 'https://www.drsayuj.info/#physician' },
       datePublished: '2025-01-15',
-      dateModified: '2025-01-15',
+      dateModified: '2025-10-19',
       mainEntityOfPage: url,
       breadcrumb: { '@id': `${url}#breadcrumb` }
     },
@@ -46,6 +50,11 @@ export default function KIMSSpineSurgerySecondOpinionPage() {
   return (
     <main id="main" className="prose">
       <h1>KIMS Spine Surgery Second Opinion | Dr. Sayuj Krishnan Expert Review</h1>
+      <AuthorByline
+        publishedOn="2025-09-11"
+        updatedOn="2025-10-19"
+        className="mb-6"
+      />
 
       <section className="not-prose mb-10 rounded-xl border border-blue-100 bg-blue-50 p-6 text-sm leading-6">
         <h2 className="mb-2 text-base font-semibold text-blue-900">Second opinion overview</h2>
@@ -278,9 +287,9 @@ export default function KIMSSpineSurgerySecondOpinionPage() {
         </div>
       </div>
 
+      <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
       <NAP />
-      <ReviewedBy />
-      <MedicalCitations />
+      <ReviewedBy lastReviewed="2025-10-19" />
 
       {schemas.map((schema, index) => (
         <SchemaScript key={index} data={schema} />

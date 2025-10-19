@@ -4,6 +4,9 @@ import { SITE_URL } from '../../../src/lib/seo';
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import NAP from '@/app/_components/NAP';
 import { makeMetadata } from '@/app/_lib/meta';
+import AuthorByline from '@/app/_components/AuthorByline';
+import SourceList from '@/app/_components/SourceList';
+import { getServiceSources } from '../sources';
 
 const baseMetadata = makeMetadata({
   title: 'Spinal Fusion Surgery in Hyderabad | TLIF, PLIF, ALIF, ACDF',
@@ -40,6 +43,8 @@ export const metadata: Metadata = {
     type: 'website',
   },
 };
+
+const ARTICLE_SOURCES = getServiceSources('spinal-fusion-surgery-hyderabad');
 
 const fusionTechniques = [
   {
@@ -255,6 +260,11 @@ export default function SpinalFusionSurgeryPage() {
           <h1 className="text-4xl md:text-5xl font-bold text-blue-800 mb-6">
             Spinal Fusion Surgery in Hyderabad
           </h1>
+          <AuthorByline
+            publishedOn="2025-09-09"
+            updatedOn="2025-10-19"
+            className="justify-center mb-6"
+          />
           <p className="text-xl text-gray-700 mb-8 max-w-4xl mx-auto">
             Expert spinal fusion surgery for spinal instability, spondylolisthesis, recurrent disc herniation, 
             and spinal deformity. Advanced techniques including TLIF, PLIF, ALIF, and ACDF procedures.
@@ -709,8 +719,10 @@ export default function SpinalFusionSurgeryPage() {
           </div>
         </section>
 
+        <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
+
         <section className="mb-12 space-y-6">
-          <ReviewedBy />
+          <ReviewedBy lastReviewed="2025-10-19" />
           <NAP />
         </section>
       </div>

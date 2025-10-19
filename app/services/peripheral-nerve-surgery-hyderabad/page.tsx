@@ -4,6 +4,9 @@ import { SITE_URL } from '../../../src/lib/seo';
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import NAP from '@/app/_components/NAP';
 import { makeMetadata } from '@/app/_lib/meta';
+import AuthorByline from '@/app/_components/AuthorByline';
+import SourceList from '@/app/_components/SourceList';
+import { getServiceSources } from '../sources';
 
 const baseMetadata = makeMetadata({
   title: 'Peripheral Nerve Surgery in Hyderabad | Carpal Tunnel, Ulnar, Peroneal',
@@ -38,6 +41,8 @@ export const metadata: Metadata = {
     type: 'website',
   },
 };
+
+const ARTICLE_SOURCES = getServiceSources('peripheral-nerve-surgery-hyderabad');
 
 const procedures = [
   {
@@ -220,6 +225,11 @@ export default function PeripheralNerveSurgeryPage() {
           <h1 className="text-4xl md:text-5xl font-bold text-blue-800 mb-6">
             Peripheral Nerve Surgery in Hyderabad
           </h1>
+          <AuthorByline
+            publishedOn="2025-09-03"
+            updatedOn="2025-10-19"
+            className="justify-center mb-6"
+          />
           <p className="text-xl text-gray-700 mb-8 max-w-4xl mx-auto">
             Expert peripheral nerve surgery for carpal tunnel syndrome, ulnar nerve compression, 
             peroneal neuropathy, nerve tumors, and traumatic nerve injuries. Advanced microsurgical 
@@ -628,8 +638,10 @@ export default function PeripheralNerveSurgeryPage() {
           </div>
         </section>
 
+        <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
+
         <section className="mb-12 space-y-6">
-          <ReviewedBy />
+          <ReviewedBy lastReviewed="2025-10-19" />
           <NAP />
         </section>
       </div>

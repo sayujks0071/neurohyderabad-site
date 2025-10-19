@@ -3,15 +3,19 @@ import { makeMetadata } from '@/app/_lib/meta';
 import SchemaScript from '@/app/_schema/Script';
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import NAP from '@/app/_components/NAP';
-import MedicalCitations from '@/app/_components/MedicalCitations';
 import SmartImage from '@/components/SmartImage';
 import Link from 'next/link';
+import AuthorByline from '@/app/_components/AuthorByline';
+import SourceList from '@/app/_components/SourceList';
+import { getServiceSources } from '../sources';
 
 export const metadata: Metadata = makeMetadata({
   title: 'Best Neurosurgeon in Hyderabad: Compare Dr. Sayuj vs Apollo, KIMS, Yashoda',
   description: 'Compare the best neurosurgeons in Hyderabad. Dr. Sayuj Krishnan vs Apollo, KIMS, Yashoda hospitals. Expert comparison of experience, techniques, and patient outcomes for brain and spine surgery.',
   canonicalPath: '/services/compare-neurosurgeons-hyderabad',
 });
+
+const ARTICLE_SOURCES = getServiceSources('compare-neurosurgeons-hyderabad');
 
 const comparisonData = [
   {
@@ -143,6 +147,11 @@ export default function CompareNeurosurgeonsPage() {
           <h1 className="text-4xl md:text-5xl font-bold text-blue-800 mb-6">
             Best Neurosurgeon in Hyderabad: Compare Your Options
           </h1>
+          <AuthorByline
+            publishedOn="2025-09-13"
+            updatedOn="2025-10-19"
+            className="justify-center mb-6"
+          />
           <p className="text-xl text-gray-700 mb-8 max-w-4xl mx-auto">
             Expert comparison of leading neurosurgeons in Hyderabad. Compare Dr. Sayuj Krishnan with 
             Apollo, KIMS, and Yashoda hospitals for brain and spine surgery expertise, techniques, and outcomes.
@@ -402,9 +411,9 @@ export default function CompareNeurosurgeonsPage() {
         </section>
       </div>
       
+      <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
       <NAP />
-      <ReviewedBy />
-      <MedicalCitations />
+      <ReviewedBy lastReviewed="2025-10-19" />
       
       <SchemaScript data={structuredData} />
     </main>

@@ -3,9 +3,11 @@ import Link from 'next/link';
 import { SITE_URL } from '../../../src/lib/seo';
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import NAP from '@/app/_components/NAP';
-import MedicalCitations from '@/app/_components/MedicalCitations';
 import { makeMetadata } from '@/app/_lib/meta';
 import ServicePageTracker from '../../../src/components/ServicePageTracker';
+import AuthorByline from '@/app/_components/AuthorByline';
+import SourceList from '@/app/_components/SourceList';
+import { getServiceSources } from '../sources';
 
 const baseMetadata = makeMetadata({
   title: 'Endoscopic Discectomy Hyderabad | Dr. Sayuj Krishnan',
@@ -39,13 +41,20 @@ export const metadata: Metadata = {
   },
 };
 
+const ARTICLE_SOURCES = getServiceSources('endoscopic-discectomy-hyderabad');
+
 export default function EndoscopicDiscectomyPage() {
   return (
     <div className="min-h-screen bg-white">
       <div className="container mx-auto px-4 py-16">
         <header className="text-center mb-8">
-          <h1 className="text-4xl font-bold mb-4">Endoscopic Discectomy in Hyderabad</h1>
-          <p className="text-lg text-gray-600">Minimally invasive disc surgery for faster recovery and less pain</p>
+          <h1 className="text-4xl font-bold mb-3">Endoscopic Discectomy in Hyderabad</h1>
+          <AuthorByline
+            publishedOn="2025-09-12"
+            updatedOn="2025-10-19"
+            className="justify-center"
+          />
+          <p className="text-lg text-gray-600 mt-4">Minimally invasive disc surgery for faster recovery and less pain</p>
         </header>
 
         <section className="bg-blue-50 p-6 rounded-lg mb-8">
@@ -264,9 +273,10 @@ export default function EndoscopicDiscectomyPage() {
           </div>
         </section>
 
+        <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
+
         <section className="mt-12 space-y-6">
-          <ReviewedBy lastReviewed="2025-01-15" />
-          <MedicalCitations />
+          <ReviewedBy lastReviewed="2025-10-19" />
           <NAP />
         </section>
 

@@ -6,8 +6,10 @@ import TeleconsultationForm from '@/components/TeleconsultationForm';
 import { patientStories } from '../../../src/content/stories';
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import NAP from '@/app/_components/NAP';
-import MedicalCitations from '@/app/_components/MedicalCitations';
 import { makeMetadata } from '@/app/_lib/meta';
+import AuthorByline from '@/app/_components/AuthorByline';
+import SourceList from '@/app/_components/SourceList';
+import { getServiceSources } from '../sources';
 
 const baseMetadata = makeMetadata({
   title: 'Endoscopic Spine Surgery Hyderabad | Dr. Sayuj Krishnan',
@@ -44,6 +46,8 @@ export const metadata: Metadata = {
 const spineStoryHighlights = patientStories
   .filter((story) => story.tags.includes('spine') || story.tags.includes('endoscopic'))
   .slice(0, 2);
+
+const ARTICLE_SOURCES = getServiceSources('minimally-invasive-spine-surgery');
 
 export default function MinimallyInvasiveSpineSurgeryPage() {
   const procedures = [
@@ -138,6 +142,11 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
       <div className="container mx-auto px-4 py-16">
         <header className="text-center mb-8">
           <h1 className="text-4xl font-bold mb-4">Minimally Invasive Spine Surgery</h1>
+          <AuthorByline
+            publishedOn="2025-09-10"
+            updatedOn="2025-10-19"
+            className="justify-center mb-4"
+          />
           <p className="text-lg text-gray-600">Advanced endoscopic techniques for faster recovery and better outcomes</p>
         </header>
 
@@ -422,9 +431,10 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
           </div>
         </section>
 
+        <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
+
         <section className="mt-12 space-y-6">
-          <ReviewedBy lastReviewed="2025-01-15" />
-          <MedicalCitations />
+          <ReviewedBy lastReviewed="2025-10-19" />
           <NAP />
         </section>
       </div>
