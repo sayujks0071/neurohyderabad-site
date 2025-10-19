@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE_URL } from "../../../src/lib/seo";
+import AuthorByline from '@/app/_components/AuthorByline';
+import SourceList from '@/app/_components/SourceList';
+import ReviewedBy from '@/app/_components/ReviewedBy';
+import NAP from '@/app/_components/NAP';
+import { sources } from '../sources';
 
 export const metadata: Metadata = {
   title: "Sciatica Pain Management in Hyderabad | Dr. Sayuj Krishnan",
@@ -214,7 +219,19 @@ export default function SciaticaPainManagementPage() {
                 </a>
               </div>
             </section>
-          </article>
+          
+      <AuthorByline 
+        
+        
+        publishedOn="2025-01-15"
+        updatedOn="2025-10-19"
+      />
+      
+      <SourceList sources={sources['sciatica-pain-management-hyderabad']} />
+      
+      <NAP />
+      <ReviewedBy />
+</article>
         </div>
       </div>
     </div>

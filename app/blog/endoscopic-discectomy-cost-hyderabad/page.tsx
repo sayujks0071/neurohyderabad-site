@@ -5,6 +5,9 @@ import Breadcrumbs from "../../components/Breadcrumbs";
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import NAP from '@/app/_components/NAP';
 import { makeMetadata } from '@/app/_lib/meta';
+import AuthorByline from '@/app/_components/AuthorByline';
+import SourceList from '@/app/_components/SourceList';
+import { getBlogSources } from '../sources';
 
 const baseMetadata = makeMetadata({
   title: 'Endoscopic Discectomy Cost in Hyderabad | What to Expect',
@@ -38,6 +41,8 @@ export const metadata: Metadata = {
 
 export const revalidate = 86400; // ISR: Revalidate every 24 hours
 
+const ARTICLE_SOURCES = getBlogSources("endoscopic-discectomy-cost-hyderabad");
+
 export default function EndoscopicDiscectomyCostPage() {
   return (
     <>
@@ -52,11 +57,11 @@ export default function EndoscopicDiscectomyCostPage() {
         <article className="max-w-4xl mx-auto">
           <header className="mb-8">
             <h1 className="text-4xl font-bold mb-4">Endoscopic Discectomy Cost in Hyderabad: What Affects Your Estimate?</h1>
-            <div className="text-sm text-gray-600 mb-4">
-              <span>Published: October 2, 2025</span>
-              <span className="mx-2">•</span>
-              <span>Last reviewed by Dr Sayuj Krishnan</span>
-            </div>
+            <AuthorByline
+              publishedOn="2025-10-02"
+              updatedOn="2025-10-19"
+              className="mb-4"
+            />
           </header>
 
           <div className="prose max-w-none">
@@ -330,7 +335,8 @@ export default function EndoscopicDiscectomyCostPage() {
             </section>
 
             <section className="mb-8 space-y-4">
-              <ReviewedBy />
+              <SourceList sources={ARTICLE_SOURCES} />
+              <ReviewedBy lastReviewed="2025-10-19" />
               <NAP />
             </section>
           </div>
@@ -357,7 +363,7 @@ export default function EndoscopicDiscectomyCostPage() {
               "url": SITE_URL
             },
             "datePublished": "2025-10-02",
-            "dateModified": "2025-10-02",
+            "dateModified": "2025-10-19",
             "mainEntityOfPage": {
               "@type": "WebPage",
               "@id": `${SITE_URL}/blog/endoscopic-discectomy-cost-hyderabad/`

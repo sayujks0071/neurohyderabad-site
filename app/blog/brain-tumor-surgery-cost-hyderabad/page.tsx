@@ -1,10 +1,13 @@
 import { makeMetadata } from '@/app/_lib/meta';
 import SchemaScript from '@/app/_schema/Script';
 import ReviewedBy from '@/app/_components/ReviewedBy';
+import AuthorByline from '@/app/_components/AuthorByline';
+import SourceList from '@/app/_components/SourceList';
 import NAP from '@/app/_components/NAP';
 import MedicalCitations from '@/app/_components/MedicalCitations';
 import SmartImage from '@/components/SmartImage';
 import Link from 'next/link';
+import { sources } from '../sources';
 
 export const metadata = makeMetadata({
   title: 'Brain Tumor Surgery Cost Hyderabad | Transparent Pricing',
@@ -26,7 +29,7 @@ export default function Page() {
       author: { '@id': 'https://www.drsayuj.info/#physician' },
       publisher: { '@id': 'https://www.drsayuj.info/#physician' },
       datePublished: '2025-01-15',
-      dateModified: '2025-01-15',
+      dateModified: '2025-10-19',
       mainEntityOfPage: url,
       breadcrumb: { '@id': `${url}#breadcrumb` }
     },
@@ -235,6 +238,13 @@ export default function Page() {
         </div>
       </div>
 
+      <AuthorByline 
+        publishedOn="2025-01-15"
+        updatedOn="2025-10-19"
+      />
+      
+      <SourceList sources={sources['brain-tumor-surgery-cost-hyderabad']} />
+      
       <NAP />
       <ReviewedBy />
       <MedicalCitations />

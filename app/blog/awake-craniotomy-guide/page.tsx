@@ -4,6 +4,9 @@ import { awakeCraniotomySchemas } from '@/app/_schema/pages/awakeCraniotomy';
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import NAP from '@/app/_components/NAP';
 import SmartImage from '@/components/SmartImage';
+import AuthorByline from '@/app/_components/AuthorByline';
+import SourceList from '@/app/_components/SourceList';
+import { sources } from '../sources';
 
 export const metadata = makeMetadata({
   title: 'Awake Craniotomy Guide Hyderabad | Dr. Sayuj',
@@ -133,6 +136,18 @@ export default function Page() {
       {schemas.map((schema, index) => (
         <SchemaScript key={index} data={schema} />
       ))}
-    </main>
+    
+      <AuthorByline 
+        
+        
+        publishedOn="2025-01-15"
+        updatedOn="2025-10-19"
+      />
+      
+      <SourceList sources={sources['awake-craniotomy-guide']} />
+      
+      <NAP />
+      <ReviewedBy />
+</main>
   );
 }

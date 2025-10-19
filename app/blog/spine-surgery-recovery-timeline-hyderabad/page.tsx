@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
 import { SITE_URL } from "../../../src/lib/seo";
+import AuthorByline from '@/app/_components/AuthorByline';
+import SourceList from '@/app/_components/SourceList';
+import ReviewedBy from '@/app/_components/ReviewedBy';
+import NAP from '@/app/_components/NAP';
+import { sources } from '../sources';
 
 export const metadata: Metadata = {
   title: "Spine Surgery Recovery Timeline | Dr. Sayuj Krishnan",
@@ -298,6 +303,16 @@ export default function SpineSurgeryRecoveryTimelinePage() {
               </div>
             </section>
           </article>
+          
+          <AuthorByline 
+            publishedOn="2025-03-15"
+            updatedOn="2025-10-19"
+          />
+          
+          <SourceList sources={sources['spine-surgery-recovery-timeline-hyderabad']} />
+          
+          <NAP />
+          <ReviewedBy />
         </div>
       </div>
     </div>

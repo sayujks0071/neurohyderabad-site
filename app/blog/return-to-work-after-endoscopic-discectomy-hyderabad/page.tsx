@@ -4,6 +4,9 @@ import { JsonLd } from '../../../src/lib/seo/jsonld'
 import ReviewedBy from '@/app/_components/ReviewedBy'
 import NAP from '@/app/_components/NAP'
 import { makeMetadata } from '@/app/_lib/meta'
+import AuthorByline from '@/app/_components/AuthorByline';
+import SourceList from '@/app/_components/SourceList';
+import { sources } from '../sources';
 
 const baseMetadata = makeMetadata({
   title: 'Return to Work After Endoscopic Discectomy in Hyderabad',
@@ -388,7 +391,19 @@ export default function ReturnToWorkAfterEndoscopicDiscectomyPage() {
               <NAP />
             </section>
           </div>
-        </article>
+        
+      <AuthorByline 
+        
+        
+        publishedOn="2025-01-15"
+        updatedOn="2025-10-19"
+      />
+      
+      <SourceList sources={sources['return-to-work-after-endoscopic-discectomy-hyderabad']} />
+      
+      <NAP />
+      <ReviewedBy />
+</article>
       </div>
     </>
   )

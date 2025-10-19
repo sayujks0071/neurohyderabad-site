@@ -1,11 +1,27 @@
-import React from 'react';
+import Link from "next/link";
 
 interface ReviewedByProps {
   lastReviewed?: string;
+  reviewerName?: string;
+  reviewerTitle?: string;
   className?: string;
 }
 
-export default function ReviewedBy({ lastReviewed = '2025-01-15', className = '' }: ReviewedByProps) {
+const DEFAULT_NAME = "Dr. Sayuj Krishnan";
+const DEFAULT_TITLE = "Consultant Neurosurgeon, Yashoda Hospital Malakpet";
+
+export default function ReviewedBy({
+  lastReviewed = "2025-10-19",
+  reviewerName = DEFAULT_NAME,
+  reviewerTitle = DEFAULT_TITLE,
+  className = "",
+}: ReviewedByProps) {
+  const formattedDate = new Date(lastReviewed).toLocaleDateString("en-IN", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
   return (
     <div className={`bg-blue-50 border-l-4 border-blue-400 p-4 my-6 ${className}`}>
       <div className="flex items-start">
@@ -15,20 +31,21 @@ export default function ReviewedBy({ lastReviewed = '2025-01-15', className = ''
           </svg>
         </div>
         <div className="ml-3">
-          <p className="text-sm text-blue-700">
-            <strong>
-              Medically reviewed by{" "}
-              <a
-                href="/about-dr-sayuj"
-                rel="author"
-                className="underline decoration-blue-300 hover:text-blue-900 transition-colors"
-              >
-                Dr. Sayuj Krishnan S
-              </a>
-            </strong>{" "}
-            – Last reviewed {lastReviewed}
+          <p className="text-sm text-blue-700 leading-relaxed">
+            <strong>Medically reviewed by </strong>
+            <Link
+              href="/about"
+              rel="author"
+              className="font-semibold underline decoration-blue-300 hover:text-blue-900 transition-colors"
+            >
+              {reviewerName}
+            </Link>
+            <span className="block text-xs text-blue-600 mt-1">{reviewerTitle}</span>
+            <span className="block text-xs text-blue-600 mt-1">
+              Last reviewed {formattedDate}
+            </span>
           </p>
-          <p className="text-xs text-blue-600 mt-1">
+          <p className="text-xs text-blue-600 mt-3">
             This information is for educational purposes only and should not replace professional medical advice. 
             Please consult with Dr. Sayuj for personalized medical guidance.
           </p>

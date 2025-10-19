@@ -5,6 +5,9 @@ import NAP from '@/app/_components/NAP';
 import MedicalCitations from '@/app/_components/MedicalCitations';
 import SmartImage from '@/components/SmartImage';
 import Link from 'next/link';
+import AuthorByline from '@/app/_components/AuthorByline';
+import SourceList from '@/app/_components/SourceList';
+import { sources } from '../sources';
 
 export const metadata = makeMetadata({
   title: 'Day-Care Spine Surgery Insurance Hyderabad | Coverage Guide',
@@ -296,6 +299,18 @@ export default function Page() {
       {schemas.map((schema, index) => (
         <SchemaScript key={index} data={schema} />
       ))}
-    </main>
+    
+      <AuthorByline 
+        
+        
+        publishedOn="2025-01-15"
+        updatedOn="2025-10-19"
+      />
+      
+      <SourceList sources={sources['day-care-spine-surgery-insurance-hyderabad']} />
+      
+      <NAP />
+      <ReviewedBy />
+</main>
   );
 }
