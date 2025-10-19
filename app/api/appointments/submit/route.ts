@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { generateBookingConfirmation } from "@/src/lib/appointments/gemini";
 import { sendConfirmationEmail } from "@/src/lib/appointments/email";
+import { buildWebhookPayload, notifyAppointmentWebhooks } from "@/src/lib/appointments/webhooks";
 import type { BookingData } from "@/packages/appointment-form/types";
 
 const ALLOWED_GENDERS = new Set(["male", "female", "other"]);
@@ -67,6 +68,16 @@ export async function POST(request: Request) {
 
     const { message, usedAI } = await generateBookingConfirmation(booking);
     const emailResult = await sendConfirmationEmail(booking, message);
+
+    void notifyAppointmentWebhooks(
+      buildWebhookPayload({
+        booking,
+        confirmationMessage: message,
+        emailResult,
+        usedAI,
+        source: request.headers.get("x-booking-source"),
+      })
+    );
 
     return NextResponse.json({
       booking,

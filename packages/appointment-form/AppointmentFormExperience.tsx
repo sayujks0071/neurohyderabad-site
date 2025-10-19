@@ -13,9 +13,13 @@ type ViewState = "form" | "confirmation";
 
 interface AppointmentFormContentProps {
   apiEndpoint: string;
+  bookingSource: string;
 }
 
-function AppointmentFormContent({ apiEndpoint }: AppointmentFormContentProps) {
+function AppointmentFormContent({
+  apiEndpoint,
+  bookingSource,
+}: AppointmentFormContentProps) {
   const [view, setView] = useState<ViewState>("form");
   const [bookingData, setBookingData] = useState<BookingData | null>(null);
   const [confirmationMessage, setConfirmationMessage] = useState("");
@@ -29,6 +33,7 @@ function AppointmentFormContent({ apiEndpoint }: AppointmentFormContentProps) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "x-booking-source": bookingSource,
         },
         body: JSON.stringify(data),
       });
@@ -103,14 +108,19 @@ function AppointmentFormContent({ apiEndpoint }: AppointmentFormContentProps) {
 
 interface AppointmentFormExperienceProps {
   apiEndpoint?: string;
+  bookingSource?: string;
 }
 
 export default function AppointmentFormExperience({
   apiEndpoint = "/api/appointments/submit",
+  bookingSource = "website",
 }: AppointmentFormExperienceProps) {
   return (
     <ToastProvider>
-      <AppointmentFormContent apiEndpoint={apiEndpoint} />
+      <AppointmentFormContent
+        apiEndpoint={apiEndpoint}
+        bookingSource={bookingSource}
+      />
     </ToastProvider>
   );
 }
