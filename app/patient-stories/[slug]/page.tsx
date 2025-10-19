@@ -1,11 +1,13 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { patientStories, PatientStory } from '@/src/content/stories';
+import { patientStories } from '@/src/content/stories';
 import StandardCTA from '@/app/_components/StandardCTA';
 import NAP from '@/app/_components/NAP';
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import SchemaScript from '@/app/_components/SchemaScript';
+import { makeMetadata } from '@/app/_lib/meta';
+import { SITE_URL } from '@/src/lib/seo';
 
 interface PageProps {
   params: Promise<{
@@ -29,23 +31,36 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  return {
+  const canonicalPath = `/patient-stories/${story.slug}`;
+  const baseMeta = makeMetadata({
     title: `${story.title} | Patient Success Story | Dr. Sayuj Krishnan`,
     description: `${story.summary} Read the complete patient story of ${story.patientInitials} who underwent ${story.procedure} in Hyderabad.`,
-    keywords: `${story.procedure}, ${story.condition}, patient story, neurosurgery, spine surgery, Hyderabad, Dr. Sayuj Krishnan`,
-    alternates: {
-      canonical: `https://www.drsayuj.info/patient-stories/${story.slug}`,
-    },
+    canonicalPath,
+  });
+
+  const canonicalUrl = `${SITE_URL}${canonicalPath}`;
+
+  return {
+    ...baseMeta,
+    keywords: [
+      story.procedure,
+      story.condition,
+      "patient story",
+      "neurosurgery",
+      "spine surgery",
+      "Hyderabad",
+      "Dr. Sayuj Krishnan",
+    ],
     openGraph: {
-      title: `${story.title} | Patient Success Story`,
+      title: `${story.title} | Patient Success Story | Dr. Sayuj Krishnan`,
       description: story.summary,
       type: 'article',
-      url: `https://www.drsayuj.info/patient-stories/${story.slug}`,
+      url: canonicalUrl,
       siteName: 'Dr. Sayuj Krishnan - Neurosurgeon Hyderabad',
       locale: 'en_IN',
       images: [
         {
-          url: `https://www.drsayuj.info/api/og?title=${encodeURIComponent(story.title)}&subtitle=${encodeURIComponent('Patient Success Story')}`,
+          url: `${SITE_URL}/api/og?title=${encodeURIComponent(story.title)}&subtitle=${encodeURIComponent('Patient Success Story')}`,
           width: 1200,
           height: 630,
           alt: `${story.title} - Patient Success Story`,
@@ -64,6 +79,8 @@ export default async function PatientStoryPage({ params }: PageProps) {
     notFound();
   }
 
+  const storyUrl = `${SITE_URL}/patient-stories/${story.slug}`;
+
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -72,19 +89,19 @@ export default async function PatientStoryPage({ params }: PageProps) {
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://www.drsayuj.info/"
+        "item": SITE_URL
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "Patient Stories",
-        "item": "https://www.drsayuj.info/patient-stories"
+        "item": `${SITE_URL}/patient-stories`
       },
       {
         "@type": "ListItem",
         "position": 3,
         "name": story.title,
-        "item": `https://www.drsayuj.info/patient-stories/${story.slug}`
+        "item": storyUrl
       }
     ]
   };
@@ -97,18 +114,18 @@ export default async function PatientStoryPage({ params }: PageProps) {
     "author": {
       "@type": "Person",
       "name": "Dr. Sayuj Krishnan",
-      "url": "https://www.drsayuj.info"
+      "url": SITE_URL
     },
     "publisher": {
       "@type": "Organization",
       "name": "Dr. Sayuj Krishnan - Neurosurgeon",
-      "url": "https://www.drsayuj.info"
+      "url": SITE_URL
     },
     "datePublished": story.date,
     "dateModified": story.date,
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": `https://www.drsayuj.info/patient-stories/${story.slug}`
+      "@id": storyUrl
     }
   };
 

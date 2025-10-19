@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://www.drsayuj.com
+Host: https://www.drsayuj.info
 
 # Sitemaps
-Sitemap: https://www.drsayuj.com/sitemap.xml
+Sitemap: https://www.drsayuj.info/sitemap.xml
