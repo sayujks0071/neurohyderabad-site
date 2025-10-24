@@ -11,7 +11,7 @@ export default function PhysicianSchema() {
         "alternateName": "Dr Sayuj",
         "description": "Premier neurosurgeon with 15+ years of experience specializing in minimally invasive brain & spine surgery, awake brain surgery, and robotic neurosurgery. Fellowship-trained with German training in endoscopic spine surgery.",
         "url": SITE_URL,
-        "image": `${SITE_URL}/images/dr-sayuj-krishnan.jpg`,
+        "image": `${SITE_URL}/images/og-default.jpg`,
         "telephone": "+919778280044",
         "email": "neurospinehyd@drsayuj.com",
         "additionalProperty": [
