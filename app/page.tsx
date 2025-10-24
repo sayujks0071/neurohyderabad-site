@@ -20,17 +20,21 @@ import TrustSignals from "./_components/TrustSignals";
 const HOME_CANONICAL = SITE_URL.endsWith("/") ? SITE_URL : `${SITE_URL}/`;
 
 export const metadata = {
-  title: 'Best Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan',
-  description: 'Best neurosurgeon in Hyderabad specializing in endoscopic spine surgery, brain tumor surgery & minimally invasive procedures. Same-day discharge at Yashoda Hospital.',
+  title: 'Dr. Sayuj Krishnan | Premier Neurosurgeon in Hyderabad | Minimally Invasive Brain & Spine Surgery',
+  description: 'Leading expert in minimally invasive brain & spine surgery. Specializing in endoscopic spine procedures, awake brain surgery, and robotic neurosurgery with same-day discharge protocols. 15+ years experience with German training.',
   keywords: [
     'best neurosurgeon hyderabad',
     'dr sayuj krishnan',
     'endoscopic spine surgery hyderabad',
-    'brain tumor surgery hyderabad',
     'minimally invasive spine surgery',
-    'yashoda hospital malakpet',
+    'awake brain surgery hyderabad',
+    'ROSA DBS hyderabad',
+    'brain tumor surgery hyderabad',
     'spine specialist hyderabad',
-    'brain surgeon hyderabad'
+    'robotic neurosurgery hyderabad',
+    'same day spine surgery',
+    'yashoda hospital malakpet',
+    'german trained neurosurgeon'
   ],
   alternates: {
     canonical: HOME_CANONICAL,
@@ -40,10 +44,10 @@ export const metadata = {
     }
   },
   openGraph: {
-    title: 'Dr. Sayuj Krishnan | Best Neurosurgeon in Hyderabad | Brain & Spine Surgery',
-    description: 'Best neurosurgeon in Hyderabad specializing in endoscopic spine surgery, brain tumor surgery & minimally invasive procedures. Same-day discharge at Yashoda Hospital.',
+    title: 'Dr. Sayuj Krishnan | Premier Neurosurgeon in Hyderabad | Minimally Invasive Brain & Spine Surgery',
+    description: 'Leading expert in minimally invasive brain & spine surgery. Specializing in endoscopic spine procedures, awake brain surgery, and robotic neurosurgery with same-day discharge protocols.',
     url: HOME_CANONICAL,
-    siteName: 'Dr. Sayuj Krishnan - Neurosurgeon Hyderabad',
+    siteName: 'Dr. Sayuj Krishnan - Premier Neurosurgeon Hyderabad',
     locale: 'en_IN',
     type: 'website',
     images: [
@@ -51,15 +55,15 @@ export const metadata = {
         url: 'https://www.drsayuj.info/images/og-default.jpg',
         width: 1200,
         height: 630,
-        alt: 'Dr. Sayuj Krishnan - Best Neurosurgeon in Hyderabad',
+        alt: 'Dr. Sayuj Krishnan - Premier Neurosurgeon in Hyderabad',
         type: 'image/jpeg'
       }
     ]
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Dr. Sayuj Krishnan | Best Neurosurgeon in Hyderabad',
-    description: 'Expert neurosurgeon specializing in endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures in Hyderabad.'
+    title: 'Dr. Sayuj Krishnan | Premier Neurosurgeon in Hyderabad',
+    description: 'Leading expert in minimally invasive brain & spine surgery with German training and 15+ years experience.'
   }
 };
 
@@ -164,12 +168,13 @@ export default function Home() {
                 <h1 className="home-hero__title text-4xl md:text-6xl font-bold mb-6 leading-tight">
                   Dr. Sayuj Krishnan
                   <span className="home-hero__subtitle block text-3xl md:text-5xl text-blue-100">
-                    Best Neurosurgeon in Hyderabad
+                    Premier Neurosurgeon in Hyderabad
                   </span>
                 </h1>
                 <p className="home-hero__lead text-xl md:text-2xl mb-6" style={heroLeadStyles}>
-                  Leading expert in minimally invasive brain & spine surgery. Specialising in endoscopic spine procedures,
-                  advanced brain tumour resection, and comprehensive epilepsy care with same-day discharge protocols.
+                  Advanced brain & spine care that combines pioneering technique with compassionate recovery. 
+                  Specializing in minimally invasive endoscopic spine surgery, awake brain surgery, and robotic neurosurgery 
+                  with same-day discharge protocols.
                 </p>
                 {/* <HeroCTA /> */}
                 <div className="space-y-4">

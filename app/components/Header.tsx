@@ -20,11 +20,22 @@ const NAV_SECTIONS: NavSection[] = [
       "Training, hospital affiliations, and surgical technology that support every procedure.",
     links: [
       { label: "About Dr. Sayuj", href: "/about" },
-      { label: "Technology & Facilities", href: "/technology-facilities" },
+      { label: "Technology & Innovation", href: "/technology-innovation" },
       {
         label: "Why Patients Choose Us",
         href: "/best-neurosurgeon-in-hyderabad",
       },
+    ],
+  },
+  {
+    title: "Specializations",
+    description:
+      "Expert neurosurgical care across brain, spine, and pediatric specialties with advanced techniques.",
+    links: [
+      { label: "Spine Surgery", href: "/spine-surgery" },
+      { label: "Brain Surgery", href: "/brain-surgery" },
+      { label: "Pediatric Neurosurgery", href: "/pediatric-neurosurgery" },
+      { label: "Technology & Innovation", href: "/technology-innovation" },
     ],
   },
   {
@@ -67,7 +78,7 @@ const NAV_SECTIONS: NavSection[] = [
       { label: "Research Highlights", href: "/research" },
       {
         label: "Technology & Innovation",
-        href: "/technology-facilities",
+        href: "/technology-innovation",
       },
     ],
   },

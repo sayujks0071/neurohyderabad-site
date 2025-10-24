@@ -9,7 +9,7 @@ export default function PhysicianSchema() {
         "@id": `${SITE_URL}/#physician`,
         "name": "Dr Sayuj Krishnan",
         "alternateName": "Dr Sayuj",
-        "description": "Consultant Neurosurgeon and Spine Surgeon specializing in minimally invasive brain surgery and full endoscopic spine surgery with 9 years of experience. Fellowship-trained in Minimally Invasive & Complex Spine Surgery with advanced training in Germany.",
+        "description": "Premier neurosurgeon with 15+ years of experience specializing in minimally invasive brain & spine surgery, awake brain surgery, and robotic neurosurgery. Fellowship-trained with German training in endoscopic spine surgery.",
         "url": SITE_URL,
         "image": `${SITE_URL}/images/dr-sayuj-krishnan.jpg`,
         "telephone": "+919778280044",
@@ -18,7 +18,7 @@ export default function PhysicianSchema() {
           {
             "@type": "PropertyValue",
             "name": "Years of Experience",
-            "value": "9"
+            "value": "15+"
           },
           {
             "@type": "PropertyValue",
@@ -33,7 +33,7 @@ export default function PhysicianSchema() {
           {
             "@type": "PropertyValue",
             "name": "Specialization",
-            "value": "Endoscopic Spine Surgery, Brain Tumor Surgery, Epilepsy Surgery"
+            "value": "Minimally Invasive Spine Surgery, Awake Brain Surgery, ROSA DBS, Endoscopic Spine Surgery"
           }
         ],
         "address": {
@@ -54,7 +54,10 @@ export default function PhysicianSchema() {
           "Spine Surgery",
           "Brain Surgery",
           "Endoscopic Surgery",
-          "Minimally Invasive Surgery"
+          "Minimally Invasive Surgery",
+          "Awake Brain Surgery",
+          "Robotic Neurosurgery",
+          "Pediatric Neurosurgery"
         ],
         "hasCredential": [
           {
@@ -147,33 +150,33 @@ export default function PhysicianSchema() {
         "availableService": [
           {
             "@type": "MedicalService",
-            "name": "Endoscopic Spine Surgery",
-            "description": "Full endoscopic spine surgery across cervical, thoracic, and lumbar pathologies including transforaminal and interlaminar approaches.",
-            "url": `${SITE_URL}/services/minimally-invasive-spine-surgery`
+            "name": "Minimally Invasive Spine Surgery",
+            "description": "Advanced endoscopic spine surgery with same-day discharge protocols for faster recovery and better outcomes.",
+            "url": `${SITE_URL}/spine-surgery`
           },
           {
             "@type": "MedicalService",
-            "name": "Brain Tumor Surgery",
-            "description": "Advanced brain tumor surgery with neuronavigation",
-            "url": `${SITE_URL}/services/brain-tumor-surgery-hyderabad`
+            "name": "Awake Brain Surgery",
+            "description": "Advanced brain surgery with awake procedures, neuronavigation, and intraoperative monitoring for optimal outcomes.",
+            "url": `${SITE_URL}/brain-surgery`
+          },
+          {
+            "@type": "MedicalService",
+            "name": "Pediatric Neurosurgery",
+            "description": "Specialized neurosurgical care for children with brain and spine conditions with compassionate, family-centered approach.",
+            "url": `${SITE_URL}/pediatric-neurosurgery`
+          },
+          {
+            "@type": "MedicalService",
+            "name": "ROSA DBS",
+            "description": "Robotic-assisted deep brain stimulation for movement disorders with sub-millimeter precision electrode placement.",
+            "url": `${SITE_URL}/brain-surgery`
           },
           {
             "@type": "MedicalService",
             "name": "Epilepsy Surgery",
-            "description": "Surgical treatment for drug-resistant epilepsy",
-            "url": `${SITE_URL}/services/epilepsy-surgery`
-          },
-          {
-            "@type": "MedicalService",
-            "name": "Trigeminal Neuralgia Treatment",
-            "description": "Advanced treatment for trigeminal neuralgia including microvascular decompression",
-            "url": `${SITE_URL}/conditions/trigeminal-neuralgia-treatment`
-          },
-          {
-            "@type": "MedicalService",
-            "name": "Robotic Endoport Evacuation",
-            "description": "Robotic endoport assisted evacuation for spontaneous intracerebral haemorrhage and complex brain lesions.",
-            "url": `${SITE_URL}/services/brain-tumor-surgery-hyderabad`
+            "description": "Surgical treatment for drug-resistant epilepsy with comprehensive evaluation and advanced techniques.",
+            "url": `${SITE_URL}/brain-surgery`
           }
         ],
         "sameAs": [

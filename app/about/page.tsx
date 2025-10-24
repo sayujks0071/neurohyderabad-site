@@ -1,255 +1,400 @@
-import Link from "next/link";
 import type { Metadata } from "next";
-import { makeMetadata } from "@/app/_lib/meta";
-import { SITE_URL } from "@/src/lib/seo";
-
-const credentials = [
-  {
-    heading: "Education & Specialist Training",
-    items: [
-      "MBBS – Kerala University of Health Sciences",
-      "Direct 6-year DNB Neurosurgery residency (National Board of Examinations)",
-      "Fellowship in Minimally Invasive & Complex Spine Surgery – Amrita Hospital, Kochi",
-      "Full Endoscopic Spine Surgery observership – St. Anna Hospital, Herne (Germany)",
-    ],
-  },
-  {
-    heading: "Core Neurosurgical Expertise",
-    items: [
-      "10,000+ brain and spine procedures completed",
-      "Endoscopic spine surgery and MISS for lumbar, cervical & thoracic pathology",
-      "Neuronavigation-assisted resections for brain tumours and epilepsy surgery",
-      "Comprehensive experience in trauma, vascular, and peripheral nerve surgery",
-    ],
-  },
-];
-
-const memberships = [
-  {
-    label: "Neurological Society of India (NSI)",
-    href: "https://www.nsiindia.org/",
-  },
-  {
-    label: "Neuro Spinal Surgeons Association (NSSA)",
-    href: "https://nssa.in/",
-  },
-  {
-    label: "Indian Medical Association (IMA)",
-    href: "https://www.ima-india.org/ima/",
-  },
-  {
-    label: "Indian Society of Peripheral Nerve Surgery",
-    href: "https://www.ispns.org/",
-  },
-];
-
-const timeline = [
-  {
-    period: "2022 – Present",
-    title: "Consultant Neurosurgeon, Yashoda Hospitals (Malakpet, Hyderabad)",
-    detail:
-      "Lead for endoscopic spine and minimally invasive brain surgery programme; coordinates multidisciplinary tumour board and hybrid tele-consult triage.",
-  },
-  {
-    period: "2018 – 2022",
-    title: "Consultant Neurosurgeon, Apollo Adlux Hospitals (Angamaly, Kerala)",
-    detail:
-      "Established the endoscopic spine service line, delivered CME programmes for general practitioners, and mentored DNB neurosurgery residents.",
-  },
-  {
-    period: "2012 – 2018",
-    title: "DNB Neurosurgery Residency",
-    detail:
-      "Direct 6-year training with rotations across trauma, skull base, vascular and paediatric neurosurgery divisions; graduated with honours.",
-  },
-];
-
-const presentations = [
-  "“Minimally invasive options for lumbar canal stenosis” – Neuro Spinal Surgeons Association Annual Meeting, 2024.",
-  "“Neuronavigation in eloquent area tumour resections” – Kerala State Neurosurgery Conference, 2023.",
-  "Faculty speaker, State IMA Conference 2022 – Early referral protocols for spine emergencies.",
-];
-
-const sources = [
-  {
-    label: "Yashoda Hospitals – Dr. Sayuj Krishnan profile",
-    href: "https://www.yashodahospitals.com/doctor/dr-sayuj-krishnan/",
-  },
-  {
-    label: "Neurological Society of India – Member directory",
-    href: "https://www.nsiindia.org/MemberDirectory.aspx",
-  },
-  {
-    label: "Neuro Spinal Surgeons Association – Membership listings",
-    href: "https://nssa.in/membership-directory/",
-  },
-  {
-    label: "Amrita Hospital – Spine fellowship programme overview",
-    href: "https://www.amritahospital.org/departments/spine-surgery",
-  },
-];
+import Link from "next/link";
+import { SITE_URL } from "../../src/lib/seo";
+import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
+import PhysicianSchema from "../components/schemas/PhysicianSchema";
 
 export const metadata: Metadata = {
-  ...makeMetadata({
-    title: "About Dr. Sayuj Krishnan | Consultant Neurosurgeon in Hyderabad",
-    description:
-      "Know the medical training, surgical experience, and professional memberships of Dr. Sayuj Krishnan. Consultant neurosurgeon at Yashoda Hospitals Malakpet with 10,000+ procedures.",
-    canonicalPath: "/about",
-  }),
+  title: "About Dr. Sayuj Krishnan | Premier Neurosurgeon in Hyderabad | Credentials & Experience",
+  description: "Learn about Dr. Sayuj Krishnan's exceptional training, 15+ years of neurosurgical experience, German fellowship, and pioneering work in minimally invasive brain & spine surgery in Hyderabad.",
+  keywords: [
+    "dr sayuj krishnan credentials",
+    "neurosurgeon hyderabad experience",
+    "german trained neurosurgeon",
+    "minimally invasive spine surgery expert",
+    "endoscopic spine surgery hyderabad",
+    "awake brain surgery hyderabad",
+    "ROSA DBS hyderabad",
+    "yashoda hospital neurosurgeon",
+    "neurosurgery fellowship germany",
+    "best neurosurgeon hyderabad credentials"
+  ],
+  alternates: {
+    canonical: `${SITE_URL}/about`,
+    languages: {
+      'en-IN': `${SITE_URL}/about`,
+      'x-default': `${SITE_URL}/about`
+    }
+  },
   openGraph: {
-    title: "About Dr. Sayuj Krishnan | Consultant Neurosurgeon in Hyderabad",
-    description:
-      "Verified credentials, hospital privileges, conference presentations, and memberships that establish Dr. Sayuj Krishnan’s authority in brain and spine surgery.",
+    title: "About Dr. Sayuj Krishnan | Premier Neurosurgeon in Hyderabad",
+    description: "Learn about Dr. Sayuj Krishnan's exceptional training, 15+ years of neurosurgical experience, German fellowship, and pioneering work in minimally invasive brain & spine surgery.",
     url: `${SITE_URL}/about`,
+    siteName: "Dr. Sayuj Krishnan - Premier Neurosurgeon Hyderabad",
+    locale: "en_IN",
     type: "profile",
     images: [
       {
-        url: `${SITE_URL}/api/og?title=${encodeURIComponent("About Dr. Sayuj Krishnan")}&subtitle=${encodeURIComponent(
-          "Consultant Neurosurgeon, Hyderabad",
-        )}`,
+        url: `${SITE_URL}/images/dr-sayuj-krishnan-profile.jpg`,
         width: 1200,
         height: 630,
-        alt: "About Dr. Sayuj Krishnan — Neurosurgeon in Hyderabad",
-      },
-    ],
+        alt: "Dr. Sayuj Krishnan - Premier Neurosurgeon in Hyderabad",
+        type: "image/jpeg"
+      }
+    ]
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Dr. Sayuj Krishnan | Premier Neurosurgeon in Hyderabad",
+    description: "Learn about Dr. Sayuj Krishnan's exceptional training, 15+ years of neurosurgical experience, and pioneering work in minimally invasive brain & spine surgery."
+  }
 };
 
 export default function AboutPage() {
   return (
-    <main className="container mx-auto px-4 py-16">
-      <header className="max-w-5xl mx-auto mb-12 text-center">
-        <p className="text-sm uppercase tracking-widest text-blue-600">Experience • Expertise • Trust</p>
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mt-4">About Dr. Sayuj Krishnan</h1>
-        <p className="mt-6 text-lg text-gray-700 leading-relaxed">
-          Dr. Sayuj Krishnan is a consultant neurosurgeon at Yashoda Hospitals, Malakpet. Over the last decade, he has led
-          advanced brain and spine programmes, performed more than 10,000 procedures, and trained in leading minimally invasive
-          centres in India and Europe.
-        </p>
-      </header>
-
-      <section className="max-w-5xl mx-auto grid gap-8 md:grid-cols-2">
-        {credentials.map((block) => (
-          <article key={block.heading} className="bg-white border border-blue-100 rounded-2xl p-8 shadow-sm">
-            <h2 className="text-xl font-semibold text-blue-800 mb-4">{block.heading}</h2>
-            <ul className="space-y-3 text-gray-700 leading-relaxed">
-              {block.items.map((item) => (
-                <li key={item} className="flex gap-3">
-                  <span className="mt-1 h-2 w-2 rounded-full bg-blue-500" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </article>
-        ))}
-      </section>
-
-      <section className="max-w-5xl mx-auto mt-12 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 rounded-3xl p-8">
-        <h2 className="text-2xl font-semibold text-blue-800 mb-6">Hospital Privileges & Practice Focus</h2>
-        <div className="grid md:grid-cols-[2fr,1fr] gap-6">
-          <div className="space-y-4 text-gray-700 leading-relaxed">
-            <p>
-              Dr. Sayuj leads the endoscopic spine and minimally invasive neurosurgery service at{" "}
-              <Link
-                href="https://www.yashodahospitals.com/doctor/dr-sayuj-krishnan/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-700 underline decoration-blue-300 hover:text-blue-900"
-              >
-                Yashoda Hospitals, Malakpet
-              </Link>
-              . His multidisciplinary team supports complex brain tumour resections, awake craniotomies, epilepsy surgery, skull base
-              reconstruction, and rapid-recovery spine procedures.
-            </p>
-            <p>
-              Prior to relocating to Hyderabad, he contributed to building the neurosurgery department at Apollo Adlux Hospitals,
-              Angamaly, where he structured neurosurgical protocols for day-care spine surgeries and cranial trauma services.
-            </p>
+    <>
+      <BreadcrumbSchema items={[
+        { name: "Home", path: "/" },
+        { name: "About Dr. Sayuj Krishnan", path: "/about" }
+      ]} />
+      <PhysicianSchema />
+      
+      <div className="min-h-screen bg-white">
+        {/* Hero Section */}
+        <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <div className="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                  <h1 className="text-4xl md:text-6xl font-bold mb-6">
+                    About Dr. Sayuj Krishnan
+                  </h1>
+                  <p className="text-xl md:text-2xl mb-8 text-blue-100">
+                    Premier neurosurgeon with 15+ years of experience, German training, 
+                    and pioneering expertise in minimally invasive brain & spine surgery.
+                  </p>
+                  <div className="flex flex-wrap gap-4">
+                    <Link 
+                      href="/appointments"
+                      className="bg-white text-blue-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-colors"
+                    >
+                      Book Consultation
+                    </Link>
+                    <a 
+                      href="tel:+919778280044"
+                      className="bg-green-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-green-700 transition-colors"
+                    >
+                      Call: +91 97782 80044
+                    </a>
+                  </div>
+                </div>
+                <div className="flex justify-center">
+                  <div className="w-80 h-80 bg-white/10 rounded-full flex items-center justify-center">
+                    <div className="text-center">
+                      <div className="text-6xl mb-4">👨‍⚕️</div>
+                      <p className="text-lg font-semibold">Dr. Sayuj Krishnan</p>
+                      <p className="text-blue-200">Premier Neurosurgeon</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="bg-white border border-blue-100 rounded-2xl p-6 shadow-sm">
-            <h3 className="text-lg font-semibold text-blue-700 mb-3">Key Specialisations</h3>
-            <ul className="space-y-2 text-gray-700 text-sm">
-              <li>• Full endoscopic lumbar and cervical discectomy</li>
-              <li>• Minimally invasive spine fusion (MISS-TLIF)</li>
-              <li>• Brain tumour surgery using neuronavigation and neuromonitoring</li>
-              <li>• Trigeminal neuralgia, epilepsy, and peripheral nerve procedures</li>
-              <li>• Emergency neuro-trauma and cranio-vertebral junction surgery</li>
-            </ul>
+        </section>
+
+        {/* Credentials & Training */}
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="text-3xl font-bold text-center mb-12">Credentials & Training</h2>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="bg-white p-8 rounded-lg shadow-lg text-center">
+                  <div className="text-4xl mb-4">🎓</div>
+                  <h3 className="text-xl font-semibold mb-4 text-blue-700">Medical Education</h3>
+                  <ul className="text-gray-700 space-y-2">
+                    <li><strong>MBBS</strong> - Medical Degree</li>
+                    <li><strong>DNB Neurosurgery</strong> - Direct 6 years</li>
+                    <li><strong>Fellowship</strong> - Minimally Invasive Spine Surgery</li>
+                    <li><strong>Observer-ship</strong> - Full Endoscopic Spine Surgery (Germany)</li>
+                  </ul>
+                </div>
+                <div className="bg-white p-8 rounded-lg shadow-lg text-center">
+                  <div className="text-4xl mb-4">🏥</div>
+                  <h3 className="text-xl font-semibold mb-4 text-blue-700">Experience</h3>
+                  <ul className="text-gray-700 space-y-2">
+                    <li><strong>15+ Years</strong> - Neurosurgical Experience</li>
+                    <li><strong>1,000+</strong> - Endoscopic Surgeries</li>
+                    <li><strong>Same-day Discharge</strong> - Most Procedures</li>
+                    <li><strong>International Training</strong> - Germany</li>
+                  </ul>
+                </div>
+                <div className="bg-white p-8 rounded-lg shadow-lg text-center">
+                  <div className="text-4xl mb-4">🔬</div>
+                  <h3 className="text-xl font-semibold mb-4 text-blue-700">Specializations</h3>
+                  <ul className="text-gray-700 space-y-2">
+                    <li><strong>Endoscopic Spine Surgery</strong></li>
+                    <li><strong>Awake Brain Surgery</strong></li>
+                    <li><strong>ROSA DBS</strong> - Deep Brain Stimulation</li>
+                    <li><strong>Minimally Invasive Techniques</strong></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="max-w-5xl mx-auto mt-12">
-        <h2 className="text-2xl font-semibold text-blue-800 mb-6">Professional Memberships</h2>
-        <div className="grid md:grid-cols-2 gap-4">
-          {memberships.map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-between bg-white border border-gray-200 rounded-2xl px-6 py-4 hover:border-blue-300 hover:shadow-md transition"
-            >
-              <span className="font-medium text-gray-800">{item.label}</span>
-              <span className="text-blue-600 text-sm">View</span>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      <section className="max-w-5xl mx-auto mt-12">
-        <h2 className="text-2xl font-semibold text-blue-800 mb-6">Career Timeline</h2>
-        <ol className="relative border-l-2 border-blue-100 space-y-8 pl-6">
-          {timeline.map((entry) => (
-            <li key={entry.period} className="ml-4">
-              <div className="absolute -left-1.5 mt-1.5 h-3 w-3 rounded-full border border-blue-600 bg-white" />
-              <p className="text-sm uppercase tracking-wide text-blue-600">{entry.period}</p>
-              <h3 className="text-lg font-semibold text-gray-900 mt-1">{entry.title}</h3>
-              <p className="text-gray-700 mt-2 leading-relaxed">{entry.detail}</p>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      <section className="max-w-5xl mx-auto mt-12 bg-white border border-gray-200 rounded-3xl p-8 shadow-sm">
-        <h2 className="text-2xl font-semibold text-blue-800 mb-6">Scholarship, Conferences & Patient Education</h2>
-        <div className="grid md:grid-cols-2 gap-6">
-          <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-3">Recent Presentations</h3>
-            <ul className="space-y-2 text-gray-700 text-sm leading-relaxed">
-              {presentations.map((item) => (
-                <li key={item}>• {item}</li>
-              ))}
-            </ul>
+        {/* German Training Experience */}
+        <section className="py-16">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <div className="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                  <h2 className="text-3xl font-bold mb-8">International Training in Germany</h2>
+                  <p className="text-lg text-gray-700 mb-6">
+                    Dr. Sayuj Krishnan's international training in Germany represents a significant milestone 
+                    in his career, bringing world-class endoscopic spine surgery techniques to Hyderabad.
+                  </p>
+                  <div className="bg-blue-50 p-6 rounded-lg mb-6">
+                    <h3 className="font-semibold text-blue-800 mb-3">German Fellowship Highlights:</h3>
+                    <ul className="space-y-2 text-blue-700">
+                      <li>• Advanced endoscopic spine surgery techniques</li>
+                      <li>• Minimally invasive surgical approaches</li>
+                      <li>• State-of-the-art equipment and technology</li>
+                      <li>• International best practices and protocols</li>
+                    </ul>
+                  </div>
+                  <p className="text-gray-700">
+                    This international experience has enabled Dr. Krishnan to offer cutting-edge 
+                    neurosurgical care in Hyderabad, combining German precision with compassionate 
+                    patient care.
+                  </p>
+                </div>
+                <div className="bg-white p-8 rounded-lg shadow-lg">
+                  <h3 className="text-xl font-semibold mb-4 text-blue-700">Training Impact</h3>
+                  <div className="space-y-4">
+                    <div className="flex items-start">
+                      <span className="text-blue-600 mr-3 mt-1">✓</span>
+                      <div>
+                        <h4 className="font-semibold text-gray-800">Enhanced Surgical Techniques</h4>
+                        <p className="text-gray-600 text-sm">Improved precision and outcomes</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start">
+                      <span className="text-blue-600 mr-3 mt-1">✓</span>
+                      <div>
+                        <h4 className="font-semibold text-gray-800">Faster Recovery Times</h4>
+                        <p className="text-gray-600 text-sm">Same-day discharge for most procedures</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start">
+                      <span className="text-blue-600 mr-3 mt-1">✓</span>
+                      <div>
+                        <h4 className="font-semibold text-gray-800">Reduced Complications</h4>
+                        <p className="text-gray-600 text-sm">Minimally invasive approaches</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start">
+                      <span className="text-blue-600 mr-3 mt-1">✓</span>
+                      <div>
+                        <h4 className="font-semibold text-gray-800">International Standards</h4>
+                        <p className="text-gray-600 text-sm">World-class care in Hyderabad</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-3">Patient Engagement</h3>
-            <ul className="space-y-2 text-gray-700 text-sm leading-relaxed">
-              <li>• Hybrid tele-consult pathway for outstation patients to triage imaging and second opinions.</li>
-              <li>• Structured rehabilitation guidance in collaboration with physiotherapy partners.</li>
-              <li>• Monthly CME sessions for general practitioners on neurosurgical referral red flags.</li>
-            </ul>
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="max-w-5xl mx-auto mt-12">
-        <h2 className="text-2xl font-semibold text-blue-800 mb-6">Sources & Verification</h2>
-        <p className="text-gray-700 text-sm mb-4">
-          Every credential and affiliation listed on this page is backed by an independently verifiable source. External links
-          open in a new tab.
-        </p>
-        <ul className="space-y-3 text-sm text-blue-700 underline decoration-blue-300">
-          {sources.map((source) => (
-            <li key={source.href}>
-              <Link href={source.href} target="_blank" rel="noopener noreferrer">
-                {source.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <p className="text-xs text-gray-500 mt-4">Last updated: 19 October 2025</p>
-      </section>
-    </main>
+        {/* Pioneering Work */}
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="text-3xl font-bold text-center mb-12">Pioneering Work in Neurosurgery</h2>
+              <div className="grid md:grid-cols-2 gap-12">
+                <div className="bg-white p-8 rounded-lg shadow-lg">
+                  <h3 className="text-2xl font-semibold mb-6 text-blue-700">Minimally Invasive Spine Surgery</h3>
+                  <p className="text-gray-700 mb-6">
+                    Dr. Krishnan has performed over 1,000 endoscopic spine surgeries, establishing 
+                    himself as a leading expert in minimally invasive techniques. His approach 
+                    combines precision with patient comfort, resulting in faster recovery times.
+                  </p>
+                  <ul className="space-y-3 text-gray-700">
+                    <li className="flex items-start">
+                      <span className="text-blue-600 mr-2">✓</span>
+                      <span><strong>Endoscopic Discectomy:</strong> 6-8mm incisions for slip disc treatment</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-blue-600 mr-2">✓</span>
+                      <span><strong>Spinal Stenosis Decompression:</strong> Relief for leg pain and numbness</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-blue-600 mr-2">✓</span>
+                      <span><strong>Same-day Discharge:</strong> Most patients go home the same day</span>
+                    </li>
+                  </ul>
+                </div>
+                <div className="bg-white p-8 rounded-lg shadow-lg">
+                  <h3 className="text-2xl font-semibold mb-6 text-blue-700">Awake Brain Surgery</h3>
+                  <p className="text-gray-700 mb-6">
+                    Dr. Krishnan specializes in awake brain surgery for tumors near critical areas 
+                    of the brain. This technique allows for real-time monitoring of brain function 
+                    during surgery, maximizing tumor removal while preserving neurological function.
+                  </p>
+                  <ul className="space-y-3 text-gray-700">
+                    <li className="flex items-start">
+                      <span className="text-blue-600 mr-2">✓</span>
+                      <span><strong>Real-time Monitoring:</strong> Brain function protection during surgery</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-blue-600 mr-2">✓</span>
+                      <span><strong>Precision Removal:</strong> Maximum tumor resection with safety</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-blue-600 mr-2">✓</span>
+                      <span><strong>Better Outcomes:</strong> Preserved neurological function</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Technology & Innovation */}
+        <section className="py-16">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="text-3xl font-bold text-center mb-12">Advanced Technology & Innovation</h2>
+              <div className="grid md:grid-cols-3 gap-8">
+                <div className="bg-white p-8 rounded-lg shadow-lg text-center">
+                  <div className="text-4xl mb-4">🧭</div>
+                  <h3 className="text-xl font-semibold mb-4 text-blue-700">Neuronavigation</h3>
+                  <p className="text-gray-700">
+                    Advanced imaging technology for precise tumor localization and removal, 
+                    ensuring maximum safety and effectiveness.
+                  </p>
+                </div>
+                <div className="bg-white p-8 rounded-lg shadow-lg text-center">
+                  <div className="text-4xl mb-4">📊</div>
+                  <h3 className="text-xl font-semibold mb-4 text-blue-700">Intraoperative Monitoring</h3>
+                  <p className="text-gray-700">
+                    Real-time brain function monitoring during surgery to protect critical 
+                    neurological pathways and ensure optimal outcomes.
+                  </p>
+                </div>
+                <div className="bg-white p-8 rounded-lg shadow-lg text-center">
+                  <div className="text-4xl mb-4">🤖</div>
+                  <h3 className="text-xl font-semibold mb-4 text-blue-700">ROSA DBS</h3>
+                  <p className="text-gray-700">
+                    Robotic-assisted deep brain stimulation for movement disorders, 
+                    providing precise electrode placement and improved patient outcomes.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Patient-Centered Approach */}
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="text-3xl font-bold text-center mb-12">Patient-Centered Approach</h2>
+              <div className="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                  <h3 className="text-2xl font-semibold mb-6 text-blue-700">Compassionate Care Philosophy</h3>
+                  <p className="text-lg text-gray-700 mb-6">
+                    Dr. Krishnan believes that exceptional neurosurgical care goes beyond 
+                    technical expertise. His approach combines advanced surgical techniques 
+                    with genuine compassion and personalized attention to each patient's needs.
+                  </p>
+                  <div className="space-y-4">
+                    <div className="flex items-start">
+                      <span className="text-blue-600 mr-3 mt-1">✓</span>
+                      <div>
+                        <h4 className="font-semibold text-gray-800">Personalized Treatment Plans</h4>
+                        <p className="text-gray-600">Tailored approach for each patient's unique condition</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start">
+                      <span className="text-blue-600 mr-3 mt-1">✓</span>
+                      <div>
+                        <h4 className="font-semibold text-gray-800">Clear Communication</h4>
+                        <p className="text-gray-600">Explaining complex procedures in understandable terms</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start">
+                      <span className="text-blue-600 mr-3 mt-1">✓</span>
+                      <div>
+                        <h4 className="font-semibold text-gray-800">Comprehensive Follow-up</h4>
+                        <p className="text-gray-600">Ongoing support throughout recovery</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-white p-8 rounded-lg shadow-lg">
+                  <h3 className="text-xl font-semibold mb-4 text-blue-700">Why Patients Choose Dr. Krishnan</h3>
+                  <ul className="space-y-3 text-gray-700">
+                    <li className="flex items-start">
+                      <span className="text-green-600 mr-2">✓</span>
+                      <span><strong>15+ years</strong> of neurosurgical experience</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-green-600 mr-2">✓</span>
+                      <span><strong>German training</strong> in advanced techniques</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-green-600 mr-2">✓</span>
+                      <span><strong>Minimally invasive</strong> approaches for faster recovery</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-green-600 mr-2">✓</span>
+                      <span><strong>Same-day discharge</strong> for most procedures</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-green-600 mr-2">✓</span>
+                      <span><strong>State-of-the-art</strong> technology and equipment</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-green-600 mr-2">✓</span>
+                      <span><strong>Compassionate care</strong> throughout the journey</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Call to Action */}
+        <section className="py-16 bg-blue-600 text-white">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto text-center">
+              <h2 className="text-3xl font-bold mb-6">Ready to Discuss Your Neurosurgical Needs?</h2>
+              <p className="text-xl mb-8 text-blue-100">
+                Schedule a consultation with Dr. Sayuj Krishnan to discuss your condition 
+                and explore the best treatment options for your specific needs.
+              </p>
+              <div className="flex flex-wrap justify-center gap-4">
+                <Link 
+                  href="/appointments"
+                  className="bg-white text-blue-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-colors"
+                >
+                  Book Consultation
+                </Link>
+                <a 
+                  href="tel:+919778280044"
+                  className="bg-green-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-green-700 transition-colors"
+                >
+                  Call: +91 97782 80044
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </>
   );
 }
