@@ -35,7 +35,7 @@ export function PhysicianJsonLd() {
     '@id': 'https://www.drsayuj.info/#physician',
     name: 'Dr Sayuj Krishnan',
     url: 'https://www.drsayuj.info',
-    image: 'https://www.drsayuj.info/images/profile.jpg',
+    image: 'https://www.drsayuj.info/images/og-default.jpg',
     medicalSpecialty: ['Neurosurgery','SpineSurgery','EndoscopicSpineSurgery'],
     address: { 
       '@type': 'PostalAddress', 

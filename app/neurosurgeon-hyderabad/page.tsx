@@ -46,7 +46,7 @@ export default function Page() {
       "Minimally Invasive Brain Surgery",
     ],
     url: "https://www.drsayuj.info",
-    image: "https://www.drsayuj.info/images/dr-sayuj.jpg",
+    image: "https://www.drsayuj.info/images/og-default.jpg",
     telephone: "+919778280044",
     areaServed: ["Hyderabad", "Telangana", "India"],
     sameAs: [

@@ -26,7 +26,6 @@ export const IMAGE_OPTIMIZATION_CONFIG = {
   // Critical images that should load immediately
   criticalImages: [
     '/images/logo-optimized.png',
-    '/images/hero-bg.jpg',
     '/images/og-default.jpg'
   ]
 };
