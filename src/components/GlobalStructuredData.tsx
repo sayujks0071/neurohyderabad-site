@@ -40,7 +40,7 @@ export function GlobalStructuredData() {
         "alternateName": "Dr Sayuj",
         "description": "Expert neurosurgeon in Hyderabad specializing in endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures",
         "url": `${url}`,
-        "image": `${SITE_URL}/images/dr-sayuj-krishnan.jpg`,
+        "image": `${SITE_URL}/images/og-default.jpg`,
         "telephone": telephone.replace(/-/g, ""),
         "email": email,
         "address": {
