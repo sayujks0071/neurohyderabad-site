@@ -29,7 +29,7 @@
     "react-dom": "19.1.0",
     "react-hook-form": "^7.52.2",
     "react-markdown": "^10.1.0",
-    "resend": "^6.2.0",
+    "resend": "^6.2.2",
     "web-vitals": "^5.1.0",
     "yup": "^1.4.0"
   },

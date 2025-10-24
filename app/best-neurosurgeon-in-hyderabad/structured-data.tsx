@@ -11,7 +11,7 @@ export function BestNeurosurgeonStructuredData() {
         "alternateName": "Dr Sayuj",
         "description": "Best neurosurgeon in Hyderabad specializing in endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures",
         "url": `${SITE_URL}`,
-        "image": `${SITE_URL}/images/dr-sayuj-krishnan.jpg`,
+        "image": `${SITE_URL}/images/og-default.jpg`,
         "telephone": "+919778280044",
         "email": "neurospinehyd@drsayuj.com",
         "address": {
