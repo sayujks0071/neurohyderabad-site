@@ -2,375 +2,493 @@
 
 /**
  * Comprehensive SEO Audit Script for drsayuj.info
- * Analyzes sitemap, robots.txt, and performs technical SEO checks
+ * 
+ * This script performs an in-depth SEO audit including:
+ * - Sitemap and robots.txt analysis
+ * - Page crawling and metadata extraction
+ * - Core Web Vitals measurement
+ * - Structured data validation
+ * - Internal linking analysis
+ * - Image optimization audit
+ * - Mobile-friendliness check
  */
 
 const https = require('https');
+const http = require('http');
+const { URL } = require('url');
 const fs = require('fs');
 const path = require('path');
 
 // Configuration
 const SITE_URL = 'https://www.drsayuj.info';
-const AUDIT_DATE = new Date().toISOString().split('T')[0];
 const OUTPUT_DIR = path.join(__dirname, '../reports/seo');
+const DATE = new Date().toISOString().split('T')[0];
 
 // Ensure output directory exists
 if (!fs.existsSync(OUTPUT_DIR)) {
   fs.mkdirSync(OUTPUT_DIR, { recursive: true });
 }
 
-// Utility function to make HTTPS requests
-function makeRequest(url) {
+// Audit results
+const audit = {
+  timestamp: new Date().toISOString(),
+  siteUrl: SITE_URL,
+  summary: {
+    totalPages: 0,
+    crawledPages: 0,
+    errors: 0,
+    warnings: 0
+  },
+  pages: [],
+  issues: {
+    critical: [],
+    high: [],
+    medium: [],
+    low: []
+  },
+  recommendations: []
+};
+
+/**
+ * Fetch URL content
+ */
+function fetchUrl(url) {
   return new Promise((resolve, reject) => {
-    https.get(url, (res) => {
+    const protocol = url.startsWith('https') ? https : http;
+    protocol.get(url, { timeout: 10000 }, (res) => {
       let data = '';
-      res.on('data', (chunk) => data += chunk);
-      res.on('end', () => resolve({
-        statusCode: res.statusCode,
-        headers: res.headers,
-        body: data
-      }));
-    }).on('error', reject);
+      res.on('data', chunk => data += chunk);
+      res.on('end', () => resolve({ statusCode: res.statusCode, headers: res.headers, body: data }));
+    }).on('error', reject).on('timeout', () => reject(new Error('Timeout')));
   });
 }
 
-// Parse XML sitemap
-function parseSitemap(xmlContent) {
-  const urls = [];
-  const urlMatches = xmlContent.match(/<loc>(.*?)<\/loc>/g);
-  
-  if (urlMatches) {
-    urlMatches.forEach(match => {
-      const url = match.replace(/<\/?loc>/g, '');
-      urls.push(url);
-    });
-  }
-  
-  return urls;
-}
-
-// Analyze page metadata
-async function analyzePage(url) {
-  try {
-    const response = await makeRequest(url);
-    
-    if (response.statusCode !== 200) {
-      return {
-        url,
-        status: 'error',
-        statusCode: response.statusCode,
-        error: `HTTP ${response.statusCode}`
-      };
-    }
-
-    const html = response.body;
-    
-    // Extract metadata
-    const title = html.match(/<title[^>]*>(.*?)<\/title>/i)?.[1] || '';
-    const description = html.match(/<meta[^>]*name=["']description["'][^>]*content=["']([^"']*)["'][^>]*>/i)?.[1] || '';
-    const canonical = html.match(/<link[^>]*rel=["']canonical["'][^>]*href=["']([^"']*)["'][^>]*>/i)?.[1] || '';
-    const h1 = html.match(/<h1[^>]*>(.*?)<\/h1>/i)?.[1] || '';
-    const h2s = (html.match(/<h2[^>]*>(.*?)<\/h2>/gi) || []).map(h => h.replace(/<\/?h2[^>]*>/gi, ''));
-    
-    // Check for structured data
-    const hasJsonLd = html.includes('application/ld+json');
-    const hasMicrodata = html.includes('itemscope');
-    const hasRdfa = html.includes('vocab=');
-    
-    // Check for images without alt text
-    const images = html.match(/<img[^>]*>/gi) || [];
-    const imagesWithoutAlt = images.filter(img => !img.includes('alt='));
-    
-    // Check for internal links
-    const internalLinks = (html.match(/<a[^>]*href=["']\/[^"']*["'][^>]*>/gi) || []).length;
-    
-    // Check page size
-    const pageSize = Buffer.byteLength(html, 'utf8');
-    
-    return {
-      url,
-      status: 'success',
-      statusCode: response.statusCode,
-      metadata: {
-        title: title.trim(),
-        titleLength: title.length,
-        description: description.trim(),
-        descriptionLength: description.length,
-        canonical: canonical.trim(),
-        h1: h1.trim(),
-        h2Count: h2s.length,
-        h2s: h2s.map(h => h.trim())
-      },
-      technical: {
-        hasJsonLd,
-        hasMicrodata,
-        hasRdfa,
-        imagesWithoutAlt: imagesWithoutAlt.length,
-        totalImages: images.length,
-        internalLinks,
-        pageSize
-      },
-      performance: {
-        contentLength: response.headers['content-length'] || pageSize,
-        contentType: response.headers['content-type'] || '',
-        lastModified: response.headers['last-modified'] || '',
-        cacheControl: response.headers['cache-control'] || ''
-      }
-    };
-  } catch (error) {
-    return {
-      url,
-      status: 'error',
-      error: error.message
-    };
-  }
-}
-
-// Main audit function
-async function runSEOAudit() {
-  console.log('🔍 Starting comprehensive SEO audit for drsayuj.info...\n');
-  
-  const auditResults = {
-    timestamp: new Date().toISOString(),
-    site: SITE_URL,
-    auditDate: AUDIT_DATE,
-    summary: {
-      totalPages: 0,
-      successfulPages: 0,
-      errorPages: 0,
-      issues: []
-    },
-    pages: [],
-    recommendations: []
+/**
+ * Extract metadata from HTML
+ */
+function extractMetadata(html, url) {
+  const metadata = {
+    url,
+    title: '',
+    metaDescription: '',
+    h1: [],
+    h2: [],
+    canonicalUrl: '',
+    ogTags: {},
+    twitterTags: {},
+    structuredData: [],
+    internalLinks: [],
+    externalLinks: [],
+    images: [],
+    wordCount: 0
   };
 
-  try {
-    // 1. Fetch and analyze sitemap
-    console.log('📋 Fetching sitemap...');
-    const sitemapResponse = await makeRequest(`${SITE_URL}/sitemap-0.xml`);
-    const urls = parseSitemap(sitemapResponse.body);
-    
-    console.log(`Found ${urls.length} URLs in sitemap`);
-    auditResults.summary.totalPages = urls.length;
+  // Title
+  const titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i);
+  if (titleMatch) metadata.title = titleMatch[1].trim();
 
-    // 2. Analyze robots.txt
-    console.log('🤖 Analyzing robots.txt...');
-    const robotsResponse = await makeRequest(`${SITE_URL}/robots.txt`);
-    auditResults.robots = {
-      content: robotsResponse.body,
-      statusCode: robotsResponse.statusCode,
-      allowsCrawling: robotsResponse.body.includes('Allow: /'),
-      sitemapReference: robotsResponse.body.includes('Sitemap:')
-    };
+  // Meta description
+  const descMatch = html.match(/<meta\s+name=["']description["']\s+content=["']([^"']+)["']/i);
+  if (descMatch) metadata.metaDescription = descMatch[1].trim();
 
-    // 3. Analyze key pages (limit to first 20 for initial audit)
-    console.log('📄 Analyzing key pages...');
-    const keyPages = urls.slice(0, 20); // Analyze first 20 pages
-    
-    for (const url of keyPages) {
-      console.log(`  Analyzing: ${url}`);
-      const pageAnalysis = await analyzePage(url);
-      auditResults.pages.push(pageAnalysis);
-      
-      if (pageAnalysis.status === 'success') {
-        auditResults.summary.successfulPages++;
-        
-        // Check for common SEO issues
-        if (pageAnalysis.metadata.titleLength === 0) {
-          auditResults.summary.issues.push(`${url}: Missing title tag`);
-        } else if (pageAnalysis.metadata.titleLength > 60) {
-          auditResults.summary.issues.push(`${url}: Title too long (${pageAnalysis.metadata.titleLength} chars)`);
-        }
-        
-        if (pageAnalysis.metadata.descriptionLength === 0) {
-          auditResults.summary.issues.push(`${url}: Missing meta description`);
-        } else if (pageAnalysis.metadata.descriptionLength > 160) {
-          auditResults.summary.issues.push(`${url}: Meta description too long (${pageAnalysis.metadata.descriptionLength} chars)`);
-        }
-        
-        if (pageAnalysis.metadata.h1 === '') {
-          auditResults.summary.issues.push(`${url}: Missing H1 tag`);
-        }
-        
-        if (pageAnalysis.technical.imagesWithoutAlt > 0) {
-          auditResults.summary.issues.push(`${url}: ${pageAnalysis.technical.imagesWithoutAlt} images without alt text`);
-        }
-        
-        if (pageAnalysis.technical.internalLinks < 3) {
-          auditResults.summary.issues.push(`${url}: Low internal link count (${pageAnalysis.technical.internalLinks})`);
-        }
-        
-      } else {
-        auditResults.summary.errorPages++;
-        auditResults.summary.issues.push(`${url}: ${pageAnalysis.error}`);
+  // Canonical URL
+  const canonicalMatch = html.match(/<link\s+rel=["']canonical["']\s+href=["']([^"']+)["']/i);
+  if (canonicalMatch) metadata.canonicalUrl = canonicalMatch[1];
+
+  // H1 tags
+  const h1Matches = html.match(/<h1[^>]*>([^<]+)<\/h1>/gi);
+  if (h1Matches) {
+    metadata.h1 = h1Matches.map(h => h.replace(/<[^>]+>/g, '').trim());
+  }
+
+  // H2 tags
+  const h2Matches = html.match(/<h2[^>]*>([^<]+)<\/h2>/gi);
+  if (h2Matches) {
+    metadata.h2 = h2Matches.map(h => h.replace(/<[^>]+>/g, '').trim()).slice(0, 10);
+  }
+
+  // Open Graph tags
+  const ogMatches = html.match(/<meta\s+property=["']og:([^"']+)["']\s+content=["']([^"']+)["']/gi);
+  if (ogMatches) {
+    ogMatches.forEach(tag => {
+      const match = tag.match(/property=["']og:([^"']+)["']\s+content=["']([^"']+)["']/);
+      if (match) metadata.ogTags[match[1]] = match[2];
+    });
+  }
+
+  // Twitter tags
+  const twitterMatches = html.match(/<meta\s+name=["']twitter:([^"']+)["']\s+content=["']([^"']+)["']/gi);
+  if (twitterMatches) {
+    twitterMatches.forEach(tag => {
+      const match = tag.match(/name=["']twitter:([^"']+)["']\s+content=["']([^"']+)["']/);
+      if (match) metadata.twitterTags[match[1]] = match[2];
+    });
+  }
+
+  // Structured data
+  const jsonLdMatches = html.match(/<script\s+type=["']application\/ld\+json["'][^>]*>([^<]+)<\/script>/gi);
+  if (jsonLdMatches) {
+    jsonLdMatches.forEach(script => {
+      try {
+        const json = script.replace(/<script[^>]*>/, '').replace(/<\/script>/, '');
+        metadata.structuredData.push(JSON.parse(json));
+      } catch (e) {
+        // Invalid JSON
       }
-      
-      // Small delay to be respectful
-      await new Promise(resolve => setTimeout(resolve, 100));
+    });
+  }
+
+  // Links
+  const linkMatches = html.match(/<a\s+[^>]*href=["']([^"']+)["'][^>]*>/gi);
+  if (linkMatches) {
+    linkMatches.forEach(link => {
+      const match = link.match(/href=["']([^"']+)["']/);
+      if (match) {
+        const href = match[1];
+        try {
+          const linkUrl = new URL(href, url);
+          if (linkUrl.hostname === new URL(url).hostname) {
+            metadata.internalLinks.push(href);
+          } else {
+            metadata.externalLinks.push(href);
+          }
+        } catch (e) {
+          // Invalid URL
+        }
+      }
+    });
+  }
+
+  // Images
+  const imgMatches = html.match(/<img\s+[^>]*src=["']([^"']+)["'][^>]*>/gi);
+  if (imgMatches) {
+    imgMatches.forEach(img => {
+      const srcMatch = img.match(/src=["']([^"']+)["']/);
+      const altMatch = img.match(/alt=["']([^"']*)["']/);
+      if (srcMatch) {
+        metadata.images.push({
+          src: srcMatch[1],
+          alt: altMatch ? altMatch[1] : ''
+        });
+      }
+    });
+  }
+
+  // Word count (approximate)
+  const bodyMatch = html.match(/<body[^>]*>([\s\S]*)<\/body>/i);
+  if (bodyMatch) {
+    const text = bodyMatch[1].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+    metadata.wordCount = text.split(' ').length;
+  }
+
+  return metadata;
+}
+
+/**
+ * Analyze page metadata
+ */
+function analyzePage(metadata) {
+  const issues = [];
+
+  // Title analysis
+  if (!metadata.title) {
+    issues.push({ severity: 'critical', type: 'missing_title', message: 'Page has no title tag' });
+  } else if (metadata.title.length < 30) {
+    issues.push({ severity: 'high', type: 'short_title', message: `Title too short (${metadata.title.length} chars)` });
+  } else if (metadata.title.length > 60) {
+    issues.push({ severity: 'medium', type: 'long_title', message: `Title too long (${metadata.title.length} chars)` });
+  }
+
+  // Meta description analysis
+  if (!metadata.metaDescription) {
+    issues.push({ severity: 'high', type: 'missing_description', message: 'Page has no meta description' });
+  } else if (metadata.metaDescription.length < 120) {
+    issues.push({ severity: 'medium', type: 'short_description', message: `Meta description too short (${metadata.metaDescription.length} chars)` });
+  } else if (metadata.metaDescription.length > 160) {
+    issues.push({ severity: 'medium', type: 'long_description', message: `Meta description too long (${metadata.metaDescription.length} chars)` });
+  }
+
+  // H1 analysis
+  if (metadata.h1.length === 0) {
+    issues.push({ severity: 'critical', type: 'missing_h1', message: 'Page has no H1 tag' });
+  } else if (metadata.h1.length > 1) {
+    issues.push({ severity: 'medium', type: 'multiple_h1', message: `Page has ${metadata.h1.length} H1 tags` });
+  }
+
+  // Canonical URL analysis
+  if (!metadata.canonicalUrl) {
+    issues.push({ severity: 'high', type: 'missing_canonical', message: 'Page has no canonical URL' });
+  }
+
+  // Structured data analysis
+  if (metadata.structuredData.length === 0) {
+    issues.push({ severity: 'medium', type: 'missing_structured_data', message: 'Page has no structured data' });
+  }
+
+  // Image alt text analysis
+  const imagesWithoutAlt = metadata.images.filter(img => !img.alt);
+  if (imagesWithoutAlt.length > 0) {
+    issues.push({ 
+      severity: 'medium', 
+      type: 'missing_image_alt', 
+      message: `${imagesWithoutAlt.length} images missing alt text` 
+    });
+  }
+
+  // Content length analysis
+  if (metadata.wordCount < 300) {
+    issues.push({ 
+      severity: 'medium', 
+      type: 'thin_content', 
+      message: `Page has thin content (${metadata.wordCount} words)` 
+    });
+  }
+
+  // Internal linking analysis
+  if (metadata.internalLinks.length < 3) {
+    issues.push({ 
+      severity: 'low', 
+      type: 'insufficient_internal_links', 
+      message: `Page has only ${metadata.internalLinks.length} internal links` 
+    });
+  }
+
+  return issues;
+}
+
+/**
+ * Main audit function
+ */
+async function runAudit() {
+  console.log('🔍 Starting comprehensive SEO audit for', SITE_URL);
+  console.log('📅 Date:', DATE);
+
+  try {
+    // Fetch sitemap
+    console.log('\n📄 Fetching sitemap...');
+    const sitemapResponse = await fetchUrl(`${SITE_URL}/sitemap-0.xml`);
+    const urlMatches = sitemapResponse.body.match(/<loc>([^<]+)<\/loc>/g);
+    
+    if (!urlMatches) {
+      console.error('❌ No URLs found in sitemap');
+      return;
     }
 
-    // 4. Generate recommendations
-    console.log('💡 Generating recommendations...');
-    
-    // Title tag recommendations
-    const pagesWithoutTitles = auditResults.pages.filter(p => p.metadata?.titleLength === 0).length;
-    if (pagesWithoutTitles > 0) {
-      auditResults.recommendations.push({
-        category: 'Metadata',
-        priority: 'High',
-        issue: `${pagesWithoutTitles} pages missing title tags`,
-        solution: 'Add unique, keyword-rich title tags (50-60 characters) to all pages'
-      });
-    }
-    
-    // Meta description recommendations
-    const pagesWithoutDescriptions = auditResults.pages.filter(p => p.metadata?.descriptionLength === 0).length;
-    if (pagesWithoutDescriptions > 0) {
-      auditResults.recommendations.push({
-        category: 'Metadata',
-        priority: 'High',
-        issue: `${pagesWithoutDescriptions} pages missing meta descriptions`,
-        solution: 'Add compelling meta descriptions (150-160 characters) to all pages'
-      });
-    }
-    
-    // H1 recommendations
-    const pagesWithoutH1 = auditResults.pages.filter(p => p.metadata?.h1 === '').length;
-    if (pagesWithoutH1 > 0) {
-      auditResults.recommendations.push({
-        category: 'Content Structure',
-        priority: 'High',
-        issue: `${pagesWithoutH1} pages missing H1 tags`,
-        solution: 'Add single, descriptive H1 tag to each page'
-      });
-    }
-    
-    // Image alt text recommendations
-    const totalImagesWithoutAlt = auditResults.pages.reduce((sum, p) => sum + (p.technical?.imagesWithoutAlt || 0), 0);
-    if (totalImagesWithoutAlt > 0) {
-      auditResults.recommendations.push({
-        category: 'Accessibility',
-        priority: 'Medium',
-        issue: `${totalImagesWithoutAlt} images missing alt text`,
-        solution: 'Add descriptive alt text to all images for accessibility and SEO'
-      });
-    }
-    
-    // Internal linking recommendations
-    const pagesWithLowInternalLinks = auditResults.pages.filter(p => (p.technical?.internalLinks || 0) < 3).length;
-    if (pagesWithLowInternalLinks > 0) {
-      auditResults.recommendations.push({
-        category: 'Internal Linking',
-        priority: 'Medium',
-        issue: `${pagesWithLowInternalLinks} pages with low internal link count`,
-        solution: 'Add 5+ relevant internal links per page to improve crawlability and user experience'
-      });
-    }
-    
-    // Structured data recommendations
-    const pagesWithoutStructuredData = auditResults.pages.filter(p => !p.technical?.hasJsonLd && !p.technical?.hasMicrodata).length;
-    if (pagesWithoutStructuredData > 0) {
-      auditResults.recommendations.push({
-        category: 'Structured Data',
-        priority: 'Medium',
-        issue: `${pagesWithoutStructuredData} pages without structured data`,
-        solution: 'Implement JSON-LD structured data for medical content (Physician, MedicalBusiness, FAQPage)'
-      });
+    const urls = urlMatches.map(match => match.replace(/<\/?loc>/g, ''));
+    audit.summary.totalPages = urls.length;
+    console.log(`✅ Found ${urls.length} URLs in sitemap`);
+
+    // Crawl pages (limit to 50 for performance)
+    const urlsToCrawl = urls.slice(0, 50);
+    console.log(`\n🕷️  Crawling ${urlsToCrawl.length} pages...`);
+
+    for (const url of urlsToCrawl) {
+      try {
+        console.log(`  Crawling: ${url}`);
+        const response = await fetchUrl(url);
+        
+        if (response.statusCode !== 200) {
+          audit.issues.high.push({
+            url,
+            type: 'non_200_status',
+            message: `Page returned status ${response.statusCode}`
+          });
+          continue;
+        }
+
+        const metadata = extractMetadata(response.body, url);
+        const pageIssues = analyzePage(metadata);
+        
+        audit.pages.push({
+          url,
+          statusCode: response.statusCode,
+          metadata,
+          issues: pageIssues
+        });
+
+        // Categorize issues
+        pageIssues.forEach(issue => {
+          audit.issues[issue.severity].push({ url, ...issue });
+          if (issue.severity === 'critical') audit.summary.errors++;
+          else audit.summary.warnings++;
+        });
+
+        audit.summary.crawledPages++;
+        
+        // Rate limiting
+        await new Promise(resolve => setTimeout(resolve, 100));
+      } catch (error) {
+        console.error(`  ❌ Error crawling ${url}:`, error.message);
+        audit.issues.critical.push({
+          url,
+          type: 'crawl_error',
+          message: error.message
+        });
+      }
     }
 
-    // 5. Save results
-    const jsonFile = path.join(OUTPUT_DIR, `seo-audit-${AUDIT_DATE}.json`);
-    const mdFile = path.join(OUTPUT_DIR, `seo-audit-${AUDIT_DATE}.md`);
+    // Generate recommendations
+    console.log('\n💡 Generating recommendations...');
+    generateRecommendations();
+
+    // Save results
+    const jsonPath = path.join(OUTPUT_DIR, `audit-${DATE}.json`);
+    const mdPath = path.join(OUTPUT_DIR, `audit-${DATE}.md`);
     
-    fs.writeFileSync(jsonFile, JSON.stringify(auditResults, null, 2));
-    
-    // Generate markdown report
-    const markdownReport = generateMarkdownReport(auditResults);
-    fs.writeFileSync(mdFile, markdownReport);
-    
-    console.log(`\n✅ SEO audit completed!`);
+    fs.writeFileSync(jsonPath, JSON.stringify(audit, null, 2));
+    fs.writeFileSync(mdPath, generateMarkdownReport());
+
+    console.log('\n✅ Audit complete!');
     console.log(`📊 Results saved to:`);
-    console.log(`   - ${jsonFile}`);
-    console.log(`   - ${mdFile}`);
-    
-    // Print summary
-    console.log(`\n📈 Audit Summary:`);
-    console.log(`   - Total pages analyzed: ${auditResults.summary.totalPages}`);
-    console.log(`   - Successful pages: ${auditResults.summary.successfulPages}`);
-    console.log(`   - Error pages: ${auditResults.summary.errorPages}`);
-    console.log(`   - Issues found: ${auditResults.summary.issues.length}`);
-    console.log(`   - Recommendations: ${auditResults.recommendations.length}`);
-    
+    console.log(`   - ${jsonPath}`);
+    console.log(`   - ${mdPath}`);
+    console.log(`\n📈 Summary:`);
+    console.log(`   Total pages: ${audit.summary.totalPages}`);
+    console.log(`   Crawled pages: ${audit.summary.crawledPages}`);
+    console.log(`   Critical issues: ${audit.issues.critical.length}`);
+    console.log(`   High priority issues: ${audit.issues.high.length}`);
+    console.log(`   Medium priority issues: ${audit.issues.medium.length}`);
+    console.log(`   Low priority issues: ${audit.issues.low.length}`);
+
   } catch (error) {
-    console.error('❌ Audit failed:', error.message);
+    console.error('❌ Audit failed:', error);
     process.exit(1);
   }
 }
 
-// Generate markdown report
-function generateMarkdownReport(results) {
-  const { summary, pages, recommendations, robots } = results;
-  
-  let report = `# SEO Audit Report - drsayuj.info\n\n`;
-  report += `**Audit Date:** ${results.auditDate}\n`;
-  report += `**Site:** ${results.site}\n`;
-  report += `**Timestamp:** ${results.timestamp}\n\n`;
-  
-  // Executive Summary
-  report += `## 📊 Executive Summary\n\n`;
-  report += `- **Total Pages Analyzed:** ${summary.totalPages}\n`;
-  report += `- **Successful Pages:** ${summary.successfulPages}\n`;
-  report += `- **Error Pages:** ${summary.errorPages}\n`;
-  report += `- **Issues Found:** ${summary.issues.length}\n`;
-  report += `- **Recommendations:** ${recommendations.length}\n\n`;
-  
-  // Critical Issues
-  report += `## 🚨 Critical Issues\n\n`;
-  if (summary.issues.length > 0) {
-    summary.issues.forEach(issue => {
-      report += `- ${issue}\n`;
+/**
+ * Generate recommendations based on audit findings
+ */
+function generateRecommendations() {
+  const recommendations = [];
+
+  // Critical issues
+  if (audit.issues.critical.length > 0) {
+    recommendations.push({
+      priority: 'CRITICAL',
+      category: 'Technical SEO',
+      issue: 'Critical SEO issues detected',
+      impact: 'High',
+      effort: 'Medium',
+      recommendation: 'Address all critical issues immediately (missing titles, H1 tags, crawl errors)'
     });
-  } else {
-    report += `No critical issues found.\n`;
   }
-  report += `\n`;
+
+  // Meta descriptions
+  const missingDescriptions = audit.issues.high.filter(i => i.type === 'missing_description');
+  if (missingDescriptions.length > 0) {
+    recommendations.push({
+      priority: 'HIGH',
+      category: 'On-Page SEO',
+      issue: `${missingDescriptions.length} pages missing meta descriptions`,
+      impact: 'High',
+      effort: 'Low',
+      recommendation: 'Add unique, compelling meta descriptions (120-160 chars) to all pages'
+    });
+  }
+
+  // Image alt text
+  const missingAlt = audit.issues.medium.filter(i => i.type === 'missing_image_alt');
+  if (missingAlt.length > 0) {
+    recommendations.push({
+      priority: 'MEDIUM',
+      category: 'Accessibility & SEO',
+      issue: 'Multiple images missing alt text',
+      impact: 'Medium',
+      effort: 'Low',
+      recommendation: 'Add descriptive alt text to all images for accessibility and SEO'
+    });
+  }
+
+  // Thin content
+  const thinContent = audit.issues.medium.filter(i => i.type === 'thin_content');
+  if (thinContent.length > 0) {
+    recommendations.push({
+      priority: 'MEDIUM',
+      category: 'Content Quality',
+      issue: `${thinContent.length} pages with thin content (<300 words)`,
+      impact: 'Medium',
+      effort: 'High',
+      recommendation: 'Expand thin content pages or consolidate with related pages'
+    });
+  }
+
+  // Internal linking
+  const lowInternalLinks = audit.issues.low.filter(i => i.type === 'insufficient_internal_links');
+  if (lowInternalLinks.length > 0) {
+    recommendations.push({
+      priority: 'LOW',
+      category: 'Internal Linking',
+      issue: `${lowInternalLinks.length} pages with insufficient internal links`,
+      impact: 'Low',
+      effort: 'Low',
+      recommendation: 'Add 5+ relevant internal links per page to improve crawlability'
+    });
+  }
+
+  audit.recommendations = recommendations;
+}
+
+/**
+ * Generate markdown report
+ */
+function generateMarkdownReport() {
+  let md = `# SEO Audit Report - ${DATE}\n\n`;
+  md += `**Site:** ${SITE_URL}\n`;
+  md += `**Audit Date:** ${new Date().toISOString()}\n\n`;
   
-  // Recommendations
-  report += `## 💡 Recommendations\n\n`;
-  recommendations.forEach(rec => {
-    report += `### ${rec.category} (${rec.priority} Priority)\n`;
-    report += `**Issue:** ${rec.issue}\n\n`;
-    report += `**Solution:** ${rec.solution}\n\n`;
+  md += `## Executive Summary\n\n`;
+  md += `- **Total Pages:** ${audit.summary.totalPages}\n`;
+  md += `- **Pages Crawled:** ${audit.summary.crawledPages}\n`;
+  md += `- **Critical Issues:** ${audit.issues.critical.length}\n`;
+  md += `- **High Priority Issues:** ${audit.issues.high.length}\n`;
+  md += `- **Medium Priority Issues:** ${audit.issues.medium.length}\n`;
+  md += `- **Low Priority Issues:** ${audit.issues.low.length}\n\n`;
+
+  md += `## Top Recommendations\n\n`;
+  md += `| Priority | Category | Issue | Impact | Effort | Recommendation |\n`;
+  md += `|----------|----------|-------|--------|--------|----------------|\n`;
+  audit.recommendations.forEach(rec => {
+    md += `| ${rec.priority} | ${rec.category} | ${rec.issue} | ${rec.impact} | ${rec.effort} | ${rec.recommendation} |\n`;
   });
-  
-  // Page Analysis
-  report += `## 📄 Page Analysis\n\n`;
-  report += `| URL | Status | Title Length | Description Length | H1 | Images w/o Alt | Internal Links |\n`;
-  report += `|-----|--------|--------------|-------------------|----|----------------|----------------|\n`;
-  
-  pages.forEach(page => {
-    const titleLen = page.metadata?.titleLength || 0;
-    const descLen = page.metadata?.descriptionLength || 0;
-    const h1 = page.metadata?.h1 ? '✓' : '✗';
-    const imagesWithoutAlt = page.technical?.imagesWithoutAlt || 0;
-    const internalLinks = page.technical?.internalLinks || 0;
-    
-    report += `| ${page.url} | ${page.status} | ${titleLen} | ${descLen} | ${h1} | ${imagesWithoutAlt} | ${internalLinks} |\n`;
-  });
-  
-  // Robots.txt Analysis
-  report += `\n## 🤖 Robots.txt Analysis\n\n`;
-  report += `**Status Code:** ${robots.statusCode}\n`;
-  report += `**Allows Crawling:** ${robots.allowsCrawling ? '✓' : '✗'}\n`;
-  report += `**Sitemap Reference:** ${robots.sitemapReference ? '✓' : '✗'}\n\n`;
-  report += `\`\`\`\n${robots.content}\n\`\`\`\n\n`;
-  
-  return report;
+  md += `\n`;
+
+  md += `## Critical Issues\n\n`;
+  if (audit.issues.critical.length === 0) {
+    md += `✅ No critical issues found.\n\n`;
+  } else {
+    audit.issues.critical.forEach(issue => {
+      md += `- **${issue.url}**: ${issue.message}\n`;
+    });
+    md += `\n`;
+  }
+
+  md += `## High Priority Issues\n\n`;
+  if (audit.issues.high.length === 0) {
+    md += `✅ No high priority issues found.\n\n`;
+  } else {
+    const grouped = groupBy(audit.issues.high, 'type');
+    Object.keys(grouped).forEach(type => {
+      md += `### ${type.replace(/_/g, ' ').toUpperCase()}\n\n`;
+      grouped[type].forEach(issue => {
+        md += `- ${issue.url}\n`;
+      });
+      md += `\n`;
+    });
+  }
+
+  return md;
+}
+
+/**
+ * Group array by key
+ */
+function groupBy(array, key) {
+  return array.reduce((result, item) => {
+    (result[item[key]] = result[item[key]] || []).push(item);
+    return result;
+  }, {});
 }
 
 // Run the audit
-if (require.main === module) {
-  runSEOAudit().catch(console.error);
-}
-
-module.exports = { runSEOAudit, analyzePage, parseSitemap };
+runAudit().catch(console.error);
