@@ -2,6 +2,14 @@
 
 import { useState } from 'react';
 
+// Add robots meta tag to prevent indexing
+export const metadata = {
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
+
 export default function EmailTestPage() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<string>('');
@@ -169,3 +177,4 @@ export default function EmailTestPage() {
     </div>
   );
 }
+

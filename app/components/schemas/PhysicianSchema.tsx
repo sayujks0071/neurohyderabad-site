@@ -1,6 +1,63 @@
 import { SITE_URL } from '../../../src/lib/seo';
 
 export default function PhysicianSchema() {
+  const serviceOffers = [
+    {
+      name: "Spine Surgery",
+      description:
+        "Comprehensive spine care with minimally invasive, endoscopic, and fusion techniques tailored to each patient.",
+      url: `${SITE_URL}/spine-surgery`,
+    },
+    {
+      name: "Brain Surgery",
+      description:
+        "Advanced brain tumor, epilepsy, and functional neurosurgery with awake protocols and neuronavigation.",
+      url: `${SITE_URL}/brain-surgery`,
+    },
+    {
+      name: "Pediatric Neurosurgery",
+      description:
+        "Specialised neurosurgical care for children with brain and spine conditions delivered in a family-centred setting.",
+      url: `${SITE_URL}/pediatric-neurosurgery`,
+    },
+    {
+      name: "Minimally Invasive Spine Surgery",
+      description:
+        "Advanced endoscopic and keyhole spine procedures that reduce pain, blood loss, and hospital stay.",
+      url: `${SITE_URL}/services/minimally-invasive-spine-surgery`,
+    },
+    {
+      name: "Endoscopic Discectomy",
+      description:
+        "Targeted removal of herniated disc material through a 7 mm working channel for rapid recovery.",
+      url: `${SITE_URL}/services/endoscopic-discectomy-hyderabad`,
+    },
+    {
+      name: "Brain Tumor Surgery",
+      description:
+        "Microsurgical and endoscopic tumor removal using neuronavigation and intraoperative monitoring.",
+      url: `${SITE_URL}/services/brain-tumor-surgery-hyderabad`,
+    },
+    {
+      name: "Epilepsy Surgery",
+      description:
+        "Comprehensive evaluation and surgical treatment pathways for drug-resistant epilepsy.",
+      url: `${SITE_URL}/services/epilepsy-surgery-hyderabad`,
+    },
+    {
+      name: "Spinal Fusion Surgery",
+      description:
+        "Stabilisation procedures for instability and spondylolisthesis with minimally invasive techniques.",
+      url: `${SITE_URL}/services/spinal-fusion-surgery-hyderabad`,
+    },
+    {
+      name: "Peripheral Nerve Surgery",
+      description:
+        "Microsurgical decompression and repair for peripheral nerve entrapments and injuries.",
+      url: `${SITE_URL}/services/peripheral-nerve-surgery-hyderabad`,
+    },
+  ];
+
   const schema = {
     "@context": "https://schema.org",
     "@graph": [
@@ -36,6 +93,12 @@ export default function PhysicianSchema() {
             "value": "Minimally Invasive Spine Surgery, Awake Brain Surgery, ROSA DBS, Endoscopic Spine Surgery"
           }
         ],
+        "medicalSpecialty": [
+          "Neurosurgery",
+          "Spine Surgery",
+          "Brain Surgery",
+          "Pediatric Neurosurgery"
+        ],
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Room No 317, OPD Block",
@@ -49,15 +112,25 @@ export default function PhysicianSchema() {
           "latitude": 17.3850,
           "longitude": 78.4867
         },
-        "medicalSpecialty": [
-          "Neurosurgery",
-          "Spine Surgery",
-          "Brain Surgery",
-          "Endoscopic Surgery",
-          "Minimally Invasive Surgery",
-          "Awake Brain Surgery",
-          "Robotic Neurosurgery",
-          "Pediatric Neurosurgery"
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "09:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Saturday"],
+            "opens": "09:00",
+            "closes": "13:00"
+          }
         ],
         "hasCredential": [
           {
@@ -136,6 +209,64 @@ export default function PhysicianSchema() {
             "sameAs": "https://www.nssa.org.in"
           }
         ],
+        "hospitalAffiliation": {
+          "@type": "Hospital",
+          "name": "Yashoda Hospital, Malakpet",
+          "url": "https://www.yashodahospitals.com/malakpet/",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Nalgonda X Roads, Malakpet",
+            "addressLocality": "Hyderabad",
+            "addressRegion": "Telangana",
+            "postalCode": "500036",
+            "addressCountry": "IN"
+          }
+        },
+        "knowsAbout": [
+          "Endoscopic Discectomy",
+          "Minimally Invasive Spine Surgery",
+          "Awake Brain Surgery",
+          "Brain Tumor Surgery",
+          "Epilepsy Surgery",
+          "Deep Brain Stimulation",
+          "Spinal Fusion",
+          "Peripheral Nerve Surgery"
+        ],
+        "areaServed": {
+          "@type": "AdministrativeArea",
+          "name": "Hyderabad, Telangana, India"
+        },
+        "availableService": [
+          ...serviceOffers.map((service) => ({
+            "@type": "MedicalService",
+            "name": service.name,
+            "description": service.description,
+            "url": service.url
+          }))
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Neurosurgery & Spine Services",
+          "itemListElement": serviceOffers.map((service) => ({
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalProcedure",
+              "name": service.name,
+              "description": service.description,
+              "url": service.url
+            },
+            "availability": "https://schema.org/InStock",
+            "potentialAction": {
+              "@type": "ReserveAction",
+              "target": `${SITE_URL}/appointments`
+            }
+          }))
+        },
+        "potentialAction": {
+          "@type": "ReserveAction",
+          "name": "Book Appointment",
+          "target": `${SITE_URL}/appointments`
+        },
         "worksFor": {
           "@type": "Hospital",
           "name": "Yashoda Hospital",
@@ -147,38 +278,6 @@ export default function PhysicianSchema() {
             "addressCountry": "IN"
           }
         },
-        "availableService": [
-          {
-            "@type": "MedicalService",
-            "name": "Minimally Invasive Spine Surgery",
-            "description": "Advanced endoscopic spine surgery with same-day discharge protocols for faster recovery and better outcomes.",
-            "url": `${SITE_URL}/spine-surgery`
-          },
-          {
-            "@type": "MedicalService",
-            "name": "Awake Brain Surgery",
-            "description": "Advanced brain surgery with awake procedures, neuronavigation, and intraoperative monitoring for optimal outcomes.",
-            "url": `${SITE_URL}/brain-surgery`
-          },
-          {
-            "@type": "MedicalService",
-            "name": "Pediatric Neurosurgery",
-            "description": "Specialized neurosurgical care for children with brain and spine conditions with compassionate, family-centered approach.",
-            "url": `${SITE_URL}/pediatric-neurosurgery`
-          },
-          {
-            "@type": "MedicalService",
-            "name": "ROSA DBS",
-            "description": "Robotic-assisted deep brain stimulation for movement disorders with sub-millimeter precision electrode placement.",
-            "url": `${SITE_URL}/brain-surgery`
-          },
-          {
-            "@type": "MedicalService",
-            "name": "Epilepsy Surgery",
-            "description": "Surgical treatment for drug-resistant epilepsy with comprehensive evaluation and advanced techniques.",
-            "url": `${SITE_URL}/brain-surgery`
-          }
-        ],
         "sameAs": [
           "https://g.co/kgs/9366939683880052414",
           "https://www.google.com/maps/place/Dr+Sayuj+Krishnan",

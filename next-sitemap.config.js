@@ -20,6 +20,7 @@ module.exports = {
           "/test-compression",
           "/test-inngest",
           "/test-error",
+          "/email-test",
         ]
       }
     ],
@@ -37,6 +38,7 @@ module.exports = {
     "/simple-statsig-test",
     "/statsig-test",
     "/test-*",
+    "/email-test",
   ],
   changefreq: "weekly",
   priority: 0.7,

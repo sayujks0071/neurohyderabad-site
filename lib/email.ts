@@ -226,3 +226,4 @@ export const sendTestEmail = async () => {
     return { success: false, error: error instanceof Error ? error.message : 'Unknown error' };
   }
 };
+

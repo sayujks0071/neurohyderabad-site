@@ -15,7 +15,8 @@ const DISALLOW_PATHS = [
   '/statsig-test',
   '/test-compression',
   '/test-inngest',
-  '/test-error'
+  '/test-error',
+  '/email-test'
 ];
 
 export default function robots(): MetadataRoute.Robots {
