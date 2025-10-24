@@ -35,10 +35,10 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: `${SITE_URL}/images/pediatric-neurosurgery-hyderabad.jpg`,
+        url: `${SITE_URL}/images/og-default.jpg`,
         width: 1200,
         height: 630,
-        alt: "Pediatric Neurosurgery in Hyderabad - Children's Brain & Spine Surgery",
+        alt: "Pediatric Neurosurgery in Hyderabad - Children's Brain & Spine Surgery - Dr. Sayuj Krishnan",
         type: "image/jpeg"
       }
     ]

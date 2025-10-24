@@ -35,10 +35,10 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: `${SITE_URL}/images/technology-innovation-neurosurgery.jpg`,
+        url: `${SITE_URL}/images/og-default.jpg`,
         width: 1200,
         height: 630,
-        alt: "Advanced Neurosurgical Technology and Innovation",
+        alt: "Advanced Neurosurgical Technology and Innovation - Dr. Sayuj Krishnan",
         type: "image/jpeg"
       }
     ]

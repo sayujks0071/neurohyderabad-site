@@ -35,10 +35,10 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: `${SITE_URL}/images/spine-surgery-hyderabad.jpg`,
+        url: `${SITE_URL}/images/og-default.jpg`,
         width: 1200,
         height: 630,
-        alt: "Minimally Invasive Spine Surgery in Hyderabad",
+        alt: "Minimally Invasive Spine Surgery in Hyderabad - Dr. Sayuj Krishnan",
         type: "image/jpeg"
       }
     ]

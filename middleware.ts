@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-const WWW_HOST = 'www.drsayuj.com'
-const APEX_HOST = 'drsayuj.com'
+const WWW_HOST = 'www.drsayuj.info'
+const APEX_HOST = 'drsayuj.info'
 
 export function middleware(req: NextRequest) {
   const url = req.nextUrl.clone()

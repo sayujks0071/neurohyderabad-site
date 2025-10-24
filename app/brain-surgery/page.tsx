@@ -35,10 +35,10 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: `${SITE_URL}/images/brain-surgery-hyderabad.jpg`,
+        url: `${SITE_URL}/images/og-default.jpg`,
         width: 1200,
         height: 630,
-        alt: "Brain Surgery in Hyderabad - Awake Brain Surgery & Brain Tumor Surgery",
+        alt: "Brain Surgery in Hyderabad - Awake Brain Surgery & Brain Tumor Surgery - Dr. Sayuj Krishnan",
         type: "image/jpeg"
       }
     ]

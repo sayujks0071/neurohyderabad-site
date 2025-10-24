@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE_URL } from "../../src/lib/seo";
 import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
-import PhysicianSchema from "../components/schemas/PhysicianSchema";
 
 export const metadata: Metadata = {
   title: "About Dr. Sayuj Krishnan | Premier Neurosurgeon in Hyderabad | Credentials & Experience",
@@ -35,7 +34,7 @@ export const metadata: Metadata = {
     type: "profile",
     images: [
       {
-        url: `${SITE_URL}/images/dr-sayuj-krishnan-profile.jpg`,
+        url: `${SITE_URL}/images/og-default.jpg`,
         width: 1200,
         height: 630,
         alt: "Dr. Sayuj Krishnan - Premier Neurosurgeon in Hyderabad",
@@ -57,7 +56,6 @@ export default function AboutPage() {
         { name: "Home", path: "/" },
         { name: "About Dr. Sayuj Krishnan", path: "/about" }
       ]} />
-      <PhysicianSchema />
       
       <div className="min-h-screen bg-white">
         {/* Hero Section */}
