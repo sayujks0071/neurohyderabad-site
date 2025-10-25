@@ -112,10 +112,46 @@ const faqs = [
   },
 ];
 
+// Google Business Profile JSON-LD for Brain Tumor Surgery
+const gbpSchema = {
+  "@context": "https://schema.org",
+  "@type": "MedicalBusiness",
+  "name": "Brain Tumor Surgery | Dr. Sayuj Krishnan",
+  "url": "https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad/?utm_source=google&utm_medium=organic&utm_campaign=gbp_brain_tumor_surgery_hyderabad",
+  "image": "https://www.drsayuj.info/images/og-default.jpg",
+  "description": "Microsurgical and awake brain tumor surgery by Dr. Sayuj Krishnan, Yashoda Hospital Hyderabad. Expert in glioma, meningioma, and skull base tumor management with neuronavigation.",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad/"
+  },
+  "medicalSpecialty": "Neurosurgery",
+  "areaServed": {
+    "@type": "AdministrativeArea",
+    "name": "Hyderabad, Telangana, India"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Room No. 317, OPD Block, Yashoda Hospital, Malakpet",
+    "addressLocality": "Hyderabad",
+    "addressRegion": "Telangana",
+    "postalCode": "500036",
+    "addressCountry": "IN"
+  },
+  "openingHours": "Mo-Sa 10:00-17:00",
+  "telephone": "+91-97782-80044",
+  "priceRange": "₹₹",
+  "sameAs": [
+    "https://www.instagram.com/drsayujneurohyd",
+    "https://www.linkedin.com/in/drsayujkrishnan",
+    "https://www.youtube.com/@drsayujneurohyd"
+  ]
+};
+
 export default function BrainTumorSurgeryHyderabadPage() {
   return (
     <>
       <JsonLd data={schema} />
+      <JsonLd data={gbpSchema} />
       <main className="container mx-auto px-4 py-16">
         <Breadcrumbs
           items={[

@@ -621,11 +621,12 @@ const CTA_LINKS = [
 ];
 
 type GenerateMetadataProps = {
-  params: { procedure: string };
+  params: Promise<{ procedure: string }>;
 };
 
-export function generateMetadata({ params }: GenerateMetadataProps): Metadata {
-  const key = params.procedure as ProcedureKey;
+export async function generateMetadata({ params }: GenerateMetadataProps): Promise<Metadata> {
+  const { procedure } = await params;
+  const key = procedure as ProcedureKey;
   const entry = PROCEDURE_CONTENT[key];
 
   if (!entry) {
@@ -659,8 +660,9 @@ export function generateMetadata({ params }: GenerateMetadataProps): Metadata {
   };
 }
 
-export default function ProcedurePage({ params }: { params: { procedure: string } }) {
-  const key = params.procedure as ProcedureKey;
+export default async function ProcedurePage({ params }: { params: Promise<{ procedure: string }> }) {
+  const { procedure } = await params;
+  const key = procedure as ProcedureKey;
   const entry = PROCEDURE_CONTENT[key];
 
   if (!entry) {

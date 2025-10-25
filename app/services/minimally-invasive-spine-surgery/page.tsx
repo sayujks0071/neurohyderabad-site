@@ -10,6 +10,7 @@ import { makeMetadata } from '@/app/_lib/meta';
 import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import { getServiceSources } from '../sources';
+import JsonLd from '@/components/JsonLd';
 
 const baseMetadata = makeMetadata({
   title: 'Endoscopic Spine Surgery Hyderabad | Dr. Sayuj Krishnan',
@@ -48,6 +49,41 @@ const spineStoryHighlights = patientStories
   .slice(0, 2);
 
 const ARTICLE_SOURCES = getServiceSources('minimally-invasive-spine-surgery');
+
+// Google Business Profile JSON-LD for Minimally Invasive Spine Surgery
+const gbpSchema = {
+  "@context": "https://schema.org",
+  "@type": "MedicalBusiness",
+  "name": "Minimally Invasive Spine Surgery | Dr. Sayuj Krishnan",
+  "url": "https://www.drsayuj.info/services/minimally-invasive-spine-surgery/?utm_source=google&utm_medium=organic&utm_campaign=gbp_minimally_invasive_spine_surgery",
+  "image": "https://www.drsayuj.info/images/og-default.jpg",
+  "description": "Minimally invasive spine surgery for lumbar and cervical conditions by Dr. Sayuj Krishnan. Less blood loss, faster recovery, and shorter hospital stay at Yashoda Hospital, Hyderabad.",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.drsayuj.info/services/minimally-invasive-spine-surgery/"
+  },
+  "medicalSpecialty": "Minimally Invasive Spine Surgery",
+  "areaServed": {
+    "@type": "AdministrativeArea",
+    "name": "Hyderabad, Telangana, India"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Room No. 317, OPD Block, Yashoda Hospital, Malakpet",
+    "addressLocality": "Hyderabad",
+    "addressRegion": "Telangana",
+    "postalCode": "500036",
+    "addressCountry": "IN"
+  },
+  "openingHours": "Mo-Sa 10:00-17:00",
+  "telephone": "+91-97782-80044",
+  "priceRange": "₹₹",
+  "sameAs": [
+    "https://www.instagram.com/drsayujneurohyd",
+    "https://www.linkedin.com/in/drsayujkrishnan",
+    "https://www.youtube.com/@drsayujneurohyd"
+  ]
+};
 
 export default function MinimallyInvasiveSpineSurgeryPage() {
   const procedures = [
@@ -134,11 +170,13 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
+    <>
+      <JsonLd data={gbpSchema} />
+      <div className="min-h-screen bg-white">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
       <div className="container mx-auto px-4 py-16">
         <header className="text-center mb-8">
           <h1 className="text-4xl font-bold mb-4">Minimally Invasive Spine Surgery</h1>
@@ -439,5 +477,6 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
         </section>
       </div>
     </div>
+    </>
   );
 }
