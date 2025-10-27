@@ -57,6 +57,9 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">Services</h3>
             <nav className="space-y-2 text-sm">
+              <Link href="/specializations" className="block text-gray-300 hover:text-gray-100 transition-colors">
+                Specializations Overview
+              </Link>
               <Link href="/services/minimally-invasive-spine-surgery" className="block text-gray-300 hover:text-gray-100 transition-colors">
                 Minimally Invasive Spine Surgery
               </Link>

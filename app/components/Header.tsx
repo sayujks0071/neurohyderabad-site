@@ -32,6 +32,7 @@ const NAV_SECTIONS: NavSection[] = [
     description:
       "Expert neurosurgical care across brain, spine, and pediatric specialties with advanced techniques.",
     links: [
+      { label: "Specializations Overview", href: "/specializations" },
       { label: "Spine Surgery", href: "/spine-surgery" },
       { label: "Brain Surgery", href: "/brain-surgery" },
       { label: "Pediatric Neurosurgery", href: "/pediatric-neurosurgery" },

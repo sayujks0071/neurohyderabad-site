@@ -27,6 +27,14 @@ const CORE_PAGES: SearchItem[] = [
     tags: ["conditions", "neurology", "spine", "brain"],
   },
   {
+    title: "Neurosurgical Specializations",
+    description:
+      "Overview of Dr. Sayuj Krishnan's specialised programmes across brain, spine, pediatric, and functional neurosurgery.",
+    href: "/specializations",
+    category: "Conditions & Treatments",
+    tags: ["specializations", "brain surgery", "spine surgery", "epilepsy"],
+  },
+  {
     title: "Endoscopic & Minimally Invasive Spine Surgery",
     description:
       "Comprehensive guide to minimally invasive spine procedures including indications, recovery, and outcomes.",
