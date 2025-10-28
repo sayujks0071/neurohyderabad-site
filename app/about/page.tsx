@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { SITE_URL } from "../../src/lib/seo";
 import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
 
@@ -87,11 +88,22 @@ export default function AboutPage() {
                   </div>
                 </div>
                 <div className="flex justify-center">
-                  <div className="w-80 h-80 bg-white/10 rounded-full flex items-center justify-center">
-                    <div className="text-center">
-                      <div className="text-6xl mb-4">👨‍⚕️</div>
-                      <p className="text-lg font-semibold">Dr. Sayuj Krishnan</p>
-                      <p className="text-blue-200">Premier Neurosurgeon</p>
+                  <div className="relative">
+                    <div className="w-80 h-80 rounded-2xl overflow-hidden shadow-2xl">
+                      <Image
+                        src="/images/dr-sayuj-krishnan-portrait.jpg"
+                        alt="Dr. Sayuj Krishnan - Premier Neurosurgeon in Hyderabad with German Training"
+                        width={320}
+                        height={320}
+                        className="object-cover w-full h-full"
+                        priority
+                        quality={95}
+                        sizes="(max-width: 768px) 280px, 320px"
+                      />
+                    </div>
+                    <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 bg-white/95 backdrop-blur-sm rounded-lg px-4 py-2 shadow-lg">
+                      <p className="text-lg font-semibold text-blue-800">Dr. Sayuj Krishnan</p>
+                      <p className="text-blue-600 text-sm">Premier Neurosurgeon</p>
                     </div>
                   </div>
                 </div>
@@ -141,16 +153,27 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* German Training Experience */}
-        <section className="py-16">
+        {/* German Training Experience - Key Differentiator */}
+        <section className="py-16 bg-gradient-to-r from-blue-50 to-indigo-50">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
+              <div className="text-center mb-12">
+                <div className="inline-flex items-center bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+                  🇩🇪 International Credential
+                </div>
+                <h2 className="text-4xl font-bold mb-6">German-Trained Excellence</h2>
+                <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+                  Dr. Sayuj Krishnan's <strong>Observership in Full Endoscopic Spine Surgery (Germany)</strong> 
+                  represents the highest level of specialized training available in this advanced field.
+                </p>
+              </div>
               <div className="grid lg:grid-cols-2 gap-12 items-center">
                 <div>
-                  <h2 className="text-3xl font-bold mb-8">International Training in Germany</h2>
+                  <h3 className="text-2xl font-bold mb-6 text-blue-800">Why German Training Matters</h3>
                   <p className="text-lg text-gray-700 mb-6">
-                    Dr. Sayuj Krishnan's international training in Germany represents a significant milestone 
-                    in his career, bringing world-class endoscopic spine surgery techniques to Hyderabad.
+                    Germany is globally recognized as the birthplace and leader in endoscopic spine surgery technology. 
+                    Dr. Krishnan's hands-on training there provides him with cutting-edge techniques and protocols 
+                    that set him apart from other neurosurgeons in Hyderabad.
                   </p>
                   <div className="bg-blue-50 p-6 rounded-lg mb-6">
                     <h3 className="font-semibold text-blue-800 mb-3">German Fellowship Highlights:</h3>

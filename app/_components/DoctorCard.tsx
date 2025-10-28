@@ -5,9 +5,18 @@ export default function DoctorCard() {
   return (
     <div className="bg-white rounded-xl shadow-lg p-6 max-w-md mx-auto">
       <div className="text-center">
-        {/* Doctor Photo - Optimized for LCP */}
-        <div className="w-32 h-32 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full mx-auto mb-4 flex items-center justify-center relative overflow-hidden">
-          <div className="text-4xl text-blue-600">👨‍⚕️</div>
+        {/* Doctor Photo - Professional Portrait */}
+        <div className="w-32 h-32 rounded-full mx-auto mb-4 relative overflow-hidden shadow-lg">
+          <Image
+            src="/images/dr-sayuj-krishnan-portrait.jpg"
+            alt="Dr. Sayuj Krishnan - Premier Neurosurgeon in Hyderabad"
+            width={128}
+            height={128}
+            className="object-cover w-full h-full"
+            priority
+            quality={90}
+            sizes="128px"
+          />
         </div>
         
         <h2 className="text-2xl font-bold text-blue-800 mb-2">Dr. Sayuj Krishnan</h2>

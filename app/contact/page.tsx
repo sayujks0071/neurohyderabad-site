@@ -1,6 +1,7 @@
 import { SITE_URL } from "../../src/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import Breadcrumbs from "../components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
 import MapEmbed from "@/components/MapEmbed";
@@ -45,7 +46,27 @@ export default function ContactPage() {
         ]}
       />
       <main className="container mx-auto px-4 py-16">
-        <h1 className="text-4xl font-bold text-center mb-8">Contact Dr Sayuj Krishnan</h1>
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold mb-8">Contact Dr Sayuj Krishnan</h1>
+          <div className="flex justify-center mb-6">
+            <div className="w-32 h-32 rounded-full overflow-hidden shadow-lg">
+              <Image
+                src="/images/dr-sayuj-krishnan-portrait.jpg"
+                alt="Dr. Sayuj Krishnan - Premier Neurosurgeon in Hyderabad"
+                width={128}
+                height={128}
+                className="object-cover w-full h-full"
+                priority
+                quality={90}
+                sizes="128px"
+              />
+            </div>
+          </div>
+          <p className="text-xl text-gray-700 max-w-2xl mx-auto">
+            Ready to discuss your neurosurgical needs? Dr. Krishnan is available for consultations 
+            and emergency cases. Contact us today for expert care.
+          </p>
+        </div>
       
       <div className="max-w-4xl mx-auto">
         <div className="grid md:grid-cols-2 gap-8 mb-12">
