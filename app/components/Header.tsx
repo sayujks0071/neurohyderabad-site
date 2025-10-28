@@ -155,6 +155,7 @@ export default function Header() {
               <div className="flex flex-col gap-3 pt-2">
                 <Link
                   href="/appointments"
+                  aria-label="Book a clinic consultation from the mobile menu"
                   className="rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-2 text-center text-sm font-semibold text-white transition hover:from-blue-700 hover:to-purple-700"
                 >
                   Book Consultation
@@ -207,6 +208,7 @@ export default function Header() {
           <SiteSearch />
           <Link
             href="/appointments"
+            aria-label="Book a consultation via the primary navigation"
             className="rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-2 text-sm font-semibold text-white outline-offset-2 transition hover:from-blue-700 hover:to-purple-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500"
           >
             Book Consultation

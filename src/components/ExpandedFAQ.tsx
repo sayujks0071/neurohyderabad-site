@@ -233,7 +233,7 @@ export default function ExpandedFAQ({
                               {faq.question}
                             </span>
                             {faq.emphasis && (
-                              <span className="text-sm text-emerald-600 font-medium">
+                              <span className="text-sm text-emerald-700 font-medium">
                                 {faq.emphasis}
                               </span>
                             )}

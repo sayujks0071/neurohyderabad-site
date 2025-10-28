@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Script from "next/script";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import WebsiteSchema from "./components/schemas/WebsiteSchema";
@@ -130,13 +129,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-        <html lang="en">
-          <head>
+    <html lang="en">
+      <head>
             {/* Critical resource hints for performance */}
             <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
             <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
             <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
-            <link rel="preconnect" href="https://accounts.google.com" crossOrigin="anonymous" />
             <link rel="preconnect" href="https://i.ytimg.com" crossOrigin="anonymous" />
             
             {/* DNS prefetch for external domains */}
@@ -145,17 +143,13 @@ export default function RootLayout({
             <link rel="dns-prefetch" href="//www.googletagmanager.com" />
             <link rel="dns-prefetch" href="//statsig.com" />
             <link rel="dns-prefetch" href="//wa.me" />
-            <link rel="dns-prefetch" href="//www.google-analytics.com" />
-            <link rel="dns-prefetch" href="//www.googletagmanager.com" />
             
             {/* Additional performance hints */}
             <meta name="format-detection" content="telephone=no" />
             <meta name="mobile-web-app-capable" content="yes" />
             <meta name="apple-mobile-web-app-capable" content="yes" />
             <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-            
-            <Script src="https://accounts.google.com/gsi/client" strategy="lazyOnload" />
-          </head>
+      </head>
       <body className={`${inter.variable} antialiased`}>
         <ClientOnlyWrapper>
           <ClientAnalytics />
@@ -171,9 +165,9 @@ export default function RootLayout({
         </a>
         <Header />
         <TrustStrip />
-        <div id="main-content" tabIndex={-1}>
+        <main id="main-content" tabIndex={-1} role="main">
           {children}
-        </div>
+        </main>
         <Footer />
         <ClientOnlyWrapper>
           <StickyCTA />

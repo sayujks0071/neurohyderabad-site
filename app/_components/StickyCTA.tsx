@@ -13,19 +13,46 @@ export default function StickyCTA({ className = '' }: StickyCTAProps) {
 
   useEffect(() => {
     setIsClient(true);
-    
-    const handleScroll = () => {
+
+    let animationFrame = 0;
+    let lastVisibility = false;
+
+    const evaluate = () => {
+      animationFrame = 0;
+      const { scrollHeight } = document.documentElement;
       const scrollTop = window.scrollY;
-      const windowHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
-      const threshold = window.innerWidth < 768 ? 0.45 : 0.7;
-      const shouldShow = scrollTop > (documentHeight - windowHeight) * threshold;
-      setIsVisible(shouldShow);
+      const viewportHeight = window.innerHeight;
+      const mediaQuery = typeof window.matchMedia === "function"
+        ? window.matchMedia("(max-width: 767px)")
+        : null;
+      const isCompactViewport = mediaQuery ? mediaQuery.matches : window.innerWidth < 768;
+      const threshold = isCompactViewport ? 0.45 : 0.7;
+      const shouldShow = scrollTop > (scrollHeight - viewportHeight) * threshold;
+
+      if (shouldShow !== lastVisibility) {
+        lastVisibility = shouldShow;
+        setIsVisible(shouldShow);
+      }
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    const requestEvaluation = () => {
+      if (animationFrame) {
+        return;
+      }
+      animationFrame = window.requestAnimationFrame(evaluate);
+    };
+
+    window.addEventListener('scroll', requestEvaluation, { passive: true });
+    window.addEventListener('resize', requestEvaluation);
+    requestEvaluation();
+
+    return () => {
+      window.removeEventListener('scroll', requestEvaluation);
+      window.removeEventListener('resize', requestEvaluation);
+      if (animationFrame) {
+        window.cancelAnimationFrame(animationFrame);
+      }
+    };
   }, []);
 
   // Don't render during SSR to prevent hydration mismatch

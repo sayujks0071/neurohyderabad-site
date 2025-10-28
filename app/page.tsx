@@ -180,6 +180,7 @@ export default function Home() {
                 <div className="space-y-4">
                   <Link 
                     href="/appointments" 
+                    aria-label="Book an in-clinic consultation with Dr. Sayuj"
                     className="bg-white text-blue-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-colors inline-block"
                   >
                     Book Consultation
@@ -295,7 +296,7 @@ export default function Home() {
                       <div className="text-center">
                         <div className="text-4xl mb-2">🧠</div>
                         <h3 className="text-xl font-semibold text-green-800">Brain Tumor Surgery</h3>
-                        <p className="text-green-600">Microsurgical Techniques</p>
+                        <p className="text-green-700">Microsurgical Techniques</p>
                       </div>
                     </div>
                   </div>
@@ -534,7 +535,7 @@ export default function Home() {
                 </p>
                 <Link 
                   href="/emergency-rehabilitation"
-                  className="text-orange-600 hover:text-orange-800 font-medium"
+                  className="text-orange-700 hover:text-orange-900 font-medium"
                 >
                   Emergency Conditions →
                 </Link>
@@ -547,7 +548,7 @@ export default function Home() {
                 </p>
                 <Link 
                   href="/emergency-rehabilitation"
-                  className="text-green-600 hover:text-green-800 font-medium"
+                  className="text-green-700 hover:text-green-900 font-medium"
                 >
                   Rehabilitation Services →
                 </Link>
