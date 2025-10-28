@@ -19,6 +19,14 @@ const CORE_PAGES: SearchItem[] = [
     tags: ["profile", "experience", "credentials", "education"],
   },
   {
+    title: "German Training Certificate",
+    description:
+      "Dr. Sayuj Krishnan's official German training certificate in Full Endoscopic Spine Surgery. View the international credential that sets him apart from other neurosurgeons.",
+    href: "/german-training",
+    category: "Credentials",
+    tags: ["german training", "certificate", "endoscopic surgery", "international", "credentials"],
+  },
+  {
     title: "Neurological Conditions A–Z",
     description:
       "Browse the A–Z index of brain, spine, and nerve disorders treated by Dr. Sayuj Krishnan with links to detailed care pathways.",

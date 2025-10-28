@@ -21,6 +21,7 @@ const CORE_ROUTES: RouteConfig[] = [
   { path: "/", priority: 1.0, changeFrequency: "daily" },
   { path: "/specializations", priority: 0.85, changeFrequency: "weekly" },
   { path: "/about", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/german-training", priority: 0.85, changeFrequency: "monthly" },
   { path: "/appointments", priority: 0.9, changeFrequency: "weekly" },
   { path: "/contact", priority: 0.8, changeFrequency: "weekly" },
   { path: "/ai-chat", priority: 0.6, changeFrequency: "weekly" },

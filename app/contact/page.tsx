@@ -46,26 +46,34 @@ export default function ContactPage() {
         ]}
       />
       <main className="container mx-auto px-4 py-16">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-8">Contact Dr Sayuj Krishnan</h1>
-          <div className="flex justify-center mb-6">
-            <div className="w-32 h-32 rounded-full overflow-hidden shadow-lg">
-              <Image
-                src="/images/dr-sayuj-krishnan-portrait.jpg"
-                alt="Dr. Sayuj Krishnan - Premier Neurosurgeon in Hyderabad"
-                width={128}
-                height={128}
-                className="object-cover w-full h-full"
-                priority
-                quality={90}
-                sizes="128px"
-              />
+        <div className="max-w-5xl mx-auto mb-12">
+          <div className="grid gap-10 md:grid-cols-[minmax(0,320px),1fr] items-center">
+            <figure className="flex flex-col items-center">
+              <div className="w-48 h-48 md:w-56 md:h-56 rounded-3xl overflow-hidden shadow-2xl ring-4 ring-blue-100">
+                <Image
+                  src="/images/dr-sayuj-krishnan-portrait.jpg"
+                  alt="Dr. Sayuj Krishnan — Consultant Neurosurgeon & Spine Surgeon"
+                  width={320}
+                  height={320}
+                  className="object-cover w-full h-full"
+                  priority
+                  quality={95}
+                  sizes="(max-width: 768px) 192px, 320px"
+                />
+              </div>
+              <figcaption className="mt-4 text-center">
+                <p className="text-lg font-semibold text-blue-800">Dr. Sayuj Krishnan</p>
+                <p className="text-sm text-blue-600">Consultant Brain & Spine Surgeon • Yashoda Hospital, Malakpet</p>
+              </figcaption>
+            </figure>
+            <div className="text-center md:text-left">
+              <h1 className="text-4xl font-bold mb-6">Contact Dr Sayuj Krishnan</h1>
+              <p className="text-xl text-gray-700">
+                Reach the neurosurgical care team directly for consultations, second opinions, or urgent support. 
+                We prioritise rapid access for complex spine and brain conditions and coordinate admission at Yashoda Hospital, Malakpet.
+              </p>
             </div>
           </div>
-          <p className="text-xl text-gray-700 max-w-2xl mx-auto">
-            Ready to discuss your neurosurgical needs? Dr. Krishnan is available for consultations 
-            and emergency cases. Contact us today for expert care.
-          </p>
         </div>
       
       <div className="max-w-4xl mx-auto">

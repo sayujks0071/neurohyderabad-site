@@ -20,6 +20,7 @@ const NAV_SECTIONS: NavSection[] = [
       "Training, hospital affiliations, and surgical technology that support every procedure.",
     links: [
       { label: "About Dr. Sayuj", href: "/about" },
+      { label: "German Training", href: "/german-training" },
       { label: "Technology & Innovation", href: "/technology-innovation" },
       {
         label: "Why Patients Choose Us",
