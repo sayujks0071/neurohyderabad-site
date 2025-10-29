@@ -14,6 +14,8 @@ const nextConfig = {
     ppr: false,
     // Enable optimized CSS loading
     optimizeCss: true,
+    // Enable webpack bundle analyzer in development
+    bundlePagesRouterDependencies: true,
   },
   // Server external packages (moved from experimental)
   serverExternalPackages: ['sharp'],

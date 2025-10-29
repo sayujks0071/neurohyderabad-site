@@ -1,0 +1,92 @@
+name: Performance Monitoring
+
+on:
+  schedule:
+    # Run daily at 6 AM UTC (11:30 AM IST)
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to test'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+        - production
+        - staging
+
+jobs:
+  performance-check:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Run performance check
+      env:
+        PAGESPEED_API_KEY: ${{ secrets.PAGESPEED_API_KEY }}
+      run: |
+        node scripts/performance-check.js
+        
+    - name: Upload performance report
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: performance-report
+        path: reports/performance/
+        retention-days: 30
+        
+    - name: Comment on PR (if applicable)
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const fs = require('fs');
+          const path = require('path');
+          
+          try {
+            const reportPath = path.join('reports', 'performance');
+            const files = fs.readdirSync(reportPath);
+            const latestReport = files
+              .filter(f => f.endsWith('.json'))
+              .sort()
+              .pop();
+              
+            if (latestReport) {
+              const report = JSON.parse(fs.readFileSync(path.join(reportPath, latestReport), 'utf8'));
+              const score = Math.round((report.score || 0) * 100);
+              const status = report.passed ? '✅' : '❌';
+              
+              const comment = `## Performance Check Results ${status}
+              
+              **Performance Score:** ${score}/100
+              
+              **Core Web Vitals:**
+              - LCP: ${report.metrics?.lcp ? Math.round(report.metrics.lcp) + 'ms' : 'N/A'}
+              - FCP: ${report.metrics?.fcp ? Math.round(report.metrics.fcp) + 'ms' : 'N/A'}
+              - TBT: ${report.metrics?.tbt ? Math.round(report.metrics.tbt) + 'ms' : 'N/A'}
+              - SI: ${report.metrics?.si ? Math.round(report.metrics.si) + 'ms' : 'N/A'}
+              
+              ${report.passed ? 'All metrics are within acceptable thresholds.' : 'Some metrics exceed recommended thresholds. Consider optimization.'}
+              `;
+              
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: comment
+              });
+            }
+          } catch (error) {
+            console.log('Could not generate performance comment:', error.message);
+          }

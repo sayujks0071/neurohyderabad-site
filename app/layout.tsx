@@ -131,18 +131,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-            {/* Critical resource hints for performance */}
+            {/* Critical resource hints for performance - only essential ones */}
             <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
             <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-            <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
-            <link rel="preconnect" href="https://i.ytimg.com" crossOrigin="anonymous" />
             
-            {/* DNS prefetch for external domains */}
-            <link rel="dns-prefetch" href="//www.youtube.com" />
-            <link rel="dns-prefetch" href="//www.google-analytics.com" />
+            {/* DNS prefetch for external domains - only critical ones */}
             <link rel="dns-prefetch" href="//www.googletagmanager.com" />
-            <link rel="dns-prefetch" href="//statsig.com" />
-            <link rel="dns-prefetch" href="//wa.me" />
             
             {/* Additional performance hints */}
             <meta name="format-detection" content="telephone=no" />
