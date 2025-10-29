@@ -16,6 +16,7 @@ import { SITE_URL } from "../src/lib/seo";
 // import { analytics } from "../src/lib/analytics";
 import DoctorCardLazy from "./_components/DoctorCardLazy";
 import TrustSignals from "./_components/TrustSignals";
+import { mediaPublications } from "../src/content/media";
 
 const HOME_CANONICAL = SITE_URL.endsWith("/") ? SITE_URL : `${SITE_URL}/`;
 
@@ -209,6 +210,60 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <TrustSignals />
+          </div>
+        </div>
+      </section>
+
+      {/* Media Publications Section */}
+      <section className="py-16 bg-blue-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold text-center mb-12">
+              Expert Insights & Media Coverage
+            </h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {mediaPublications.filter(pub => pub.featured).slice(0, 3).map((publication) => (
+                <div key={publication.id} className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+                  <div className="mb-4">
+                    <span className="inline-block bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">
+                      {publication.type.replace('-', ' ').toUpperCase()}
+                    </span>
+                    <span className="ml-2 text-sm text-gray-500">
+                      {publication.date}
+                    </span>
+                  </div>
+                  
+                  <h3 className="text-lg font-bold text-gray-900 mb-3">
+                    {publication.title}
+                  </h3>
+                  
+                  <p className="text-gray-600 text-sm mb-3">
+                    <strong>{publication.publication}</strong>
+                  </p>
+                  
+                  <p className="text-gray-700 text-sm mb-4">
+                    {publication.description}
+                  </p>
+                  
+                  <a 
+                    href={publication.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm"
+                  >
+                    Read Article →
+                  </a>
+                </div>
+              ))}
+            </div>
+            <div className="text-center mt-8">
+              <Link 
+                href="/media" 
+                className="inline-flex items-center bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                View All Publications
+              </Link>
+            </div>
           </div>
         </div>
       </section>

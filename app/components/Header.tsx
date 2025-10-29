@@ -78,6 +78,7 @@ const NAV_SECTIONS: NavSection[] = [
       "Innovation, conference presentations, and academic collaborations that inform our protocols.",
     links: [
       { label: "Research Highlights", href: "/research" },
+      { label: "Media Publications", href: "/media" },
       {
         label: "Technology & Innovation",
         href: "/technology-innovation",

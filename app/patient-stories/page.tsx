@@ -43,6 +43,19 @@ export default function PatientStoriesPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {patientStories.map((story) => (
               <div key={story.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                {/* If story has a videoUrl, embed YouTube above content */}
+                {story.videoUrl ? (
+                  <div className="aspect-video w-full bg-black">
+                    <iframe
+                      className="w-full h-full"
+                      src={story.videoUrl.replace('youtu.be/', 'www.youtube.com/embed/').replace('watch?v=', 'embed/').split('&')[0]}
+                      title={story.title}
+                      loading="lazy"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                    />
+                  </div>
+                ) : null}
                 <div className="p-6">
                   <div className="mb-4">
                     <span className="inline-block bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">
@@ -74,17 +87,33 @@ export default function PatientStoriesPage() {
                     </ul>
                   </div>
                   
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-500">
-                      — {story.patientInitials}
-                    </span>
-                    <Link 
-                      href={`/patient-stories/${story.slug}`}
-                      className="text-blue-600 hover:text-blue-800 font-medium text-sm"
-                    >
-                      Read Full Story →
-                    </Link>
-                  </div>
+                  {!story.videoUrl ? (
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-gray-500">
+                        — {story.patientInitials}
+                      </span>
+                      <Link 
+                        href={`/patient-stories/${story.slug}`}
+                        className="text-blue-600 hover:text-blue-800 font-medium text-sm"
+                      >
+                        Read Full Story →
+                      </Link>
+                    </div>
+                  ) : (
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-gray-500">
+                        — Video Testimonial
+                      </span>
+                      <a 
+                        href={story.videoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600 hover:text-blue-800 font-medium text-sm"
+                      >
+                        Watch on YouTube →
+                      </a>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
