@@ -188,12 +188,17 @@ export default function RootLayout({
                 .text-blue-100{color:#dbeafe}
                 .bg-green-600{background-color:#16a34a}
                 .hover\\:bg-green-700:hover{background-color:#15803d}
+                /* Critical image optimization */
+                img{max-width:100%;height:auto}
+                .object-cover{object-fit:cover}
+                .rounded-full{border-radius:9999px}
               `
             }} />
             
-            {/* Preload critical resources */}
+            {/* Preload critical resources for fastest LCP */}
             <link rel="preload" href="https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-            <link rel="preload" href="/images/dr-sayuj-krishnan-portrait.jpg" as="image" />
+            <link rel="preload" href="/images/dr-sayuj-krishnan-portrait.jpg" as="image" fetchPriority="high" />
+            <link rel="preload" href="/images/dr-sayuj-krishnan-portrait.jpg?w=256&q=85" as="image" fetchPriority="high" />
             
             {/* Critical resource hints for performance - only essential ones */}
             <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />

@@ -46,5 +46,29 @@
       }
     },
     "crux": {}
+  },
+  {
+    "timestamp": "2025-10-29T18:17:38.407Z",
+    "url": "https://www.drsayuj.info",
+    "performance": {
+      "score": 95,
+      "metrics": {
+        "fcp": 1051,
+        "lcp": 2701,
+        "si": 3465.2453420076395,
+        "tbt": 18,
+        "tti": 2701,
+        "cls": 0.0004442408695150614
+      },
+      "displayValues": {
+        "fcp": "1.1 s",
+        "lcp": "2.7 s",
+        "si": "3.5 s",
+        "tbt": "20 ms",
+        "tti": "2.7 s",
+        "cls": "0"
+      }
+    },
+    "crux": {}
   }
 ]

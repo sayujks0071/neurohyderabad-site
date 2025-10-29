@@ -14,9 +14,11 @@ export default function DoctorCard() {
             height={128}
             className="object-cover w-full h-full rounded-full"
             priority
-            quality={85}
+            quality={90}
             sizes="128px"
             placeholder="blur"
+            loading="eager"
+            fetchPriority="high"
           />
         </div>
         
