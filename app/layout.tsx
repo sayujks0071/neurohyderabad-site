@@ -70,7 +70,7 @@ export const metadata: Metadata = {
         url: "/images/og-default.jpg",
         width: 1200,
         height: 630,
-        alt: "Dr. Sayuj Krishnan — Best Neurosurgeon in Hyderabad",
+        alt: "Dr Sayuj — Neurosurgeon • Endoscopic Spine Surgery",
         type: "image/jpeg",
       },
     ],
@@ -101,15 +101,16 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon.ico", type: "image/x-icon", sizes: "16x16" },
-      { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
+      { url: "/favicon.ico", type: "image/x-icon" },
       { url: "/favicon-16x16.png", type: "image/png", sizes: "16x16" },
-      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
+      { url: "/favicon-48x48.png", type: "image/png", sizes: "48x48" },
+      { url: "/favicon-192x192.png", type: "image/png", sizes: "192x192" },
+      { url: "/favicon-512x512.png", type: "image/png", sizes: "512x512" },
+      { url: "/icon.svg", type: "image/svg+xml" },
     ],
-    apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180" },
-    ],
-    shortcut: "/favicon.ico",
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+    shortcut: ["/favicon.ico"],
   },
   manifest: "/site.webmanifest",
   category: "medical",
@@ -120,7 +121,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
-  themeColor: "#2563eb",
+  themeColor: "#0B2E4E",
 };
 
 export default function RootLayout({
@@ -145,7 +146,7 @@ export default function RootLayout({
                 @media (min-width:1280px){.container{max-width:1280px}}
                 @media (min-width:1536px){.container{max-width:1536px}}
                 .home-hero{background:linear-gradient(90deg,#2563eb 0%,#1e3a8a 100%);color:#f8fafc;padding-top:80px;padding-bottom:80px}
-                .home-hero__title{font-size:2.25rem;font-weight:700;margin-bottom:1.5rem;line-height:1.1}
+                .home-hero__title{font-size:2.25rem;font-weight:700;margin-bottom:1.5rem;line-height:1.1;color:#f8fafc}
                 .home-hero__subtitle{display:block;font-size:1.875rem;color:#dbeafe}
                 .home-hero__lead{color:rgba(226,238,255,0.96);font-weight:500;line-height:1.55;max-width:40rem;margin:0 auto 1.5rem auto}
                 .bg-white{background-color:#ffffff}
@@ -197,11 +198,9 @@ export default function RootLayout({
             
             {/* Preload critical resources for fastest LCP */}
             <link rel="preload" href="https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-            <link rel="preload" href="/images/dr-sayuj-krishnan-portrait.jpg" as="image" fetchPriority="high" />
-            <link rel="preload" href="/images/dr-sayuj-krishnan-portrait.jpg?w=256&q=85" as="image" fetchPriority="high" />
             
             {/* Critical resource hints for performance - only essential ones */}
-            <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
+            <link rel="preconnect" href="https://fonts.googleapis.com" />
             <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
             
             {/* DNS prefetch for external domains - only critical ones */}

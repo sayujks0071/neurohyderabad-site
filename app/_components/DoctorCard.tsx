@@ -13,12 +13,11 @@ export default function DoctorCard() {
             width={128}
             height={128}
             className="object-cover w-full h-full rounded-full"
-            priority
-            quality={90}
+            quality={75}
             sizes="128px"
             placeholder="blur"
-            loading="eager"
-            fetchPriority="high"
+            loading="lazy"
+            decoding="async"
           />
         </div>
         

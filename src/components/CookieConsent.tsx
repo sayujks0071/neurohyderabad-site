@@ -1,4 +1,5 @@
 "use client";
+import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { analytics } from '../lib/analytics';
 
@@ -51,7 +52,7 @@ export default function CookieConsent() {
             <p className="text-sm text-gray-800">
               We use essential cookies for website functionality and analytics cookies to understand how you use our site. 
               By continuing to use our website, you consent to our use of cookies. 
-              <a href="/cookies" className="text-blue-800 hover:text-blue-900 underline ml-1 font-medium">Learn more about our cookie policy</a>
+              <Link href="/cookies" className="text-blue-800 hover:text-blue-900 underline ml-1 font-medium">Learn more about our cookie policy</Link>
             </p>
           </div>
           <div className="flex gap-3">

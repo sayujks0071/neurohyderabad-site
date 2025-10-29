@@ -70,5 +70,125 @@
       }
     },
     "crux": {}
+  },
+  {
+    "timestamp": "2025-10-29T18:21:21.394Z",
+    "url": "https://www.drsayuj.info",
+    "performance": {
+      "score": 96,
+      "metrics": {
+        "fcp": 1051,
+        "lcp": 2401,
+        "si": 4041.4942178850156,
+        "tbt": 11,
+        "tti": 9535.600000000002,
+        "cls": 0.0008884817390301228
+      },
+      "displayValues": {
+        "fcp": "1.1 s",
+        "lcp": "2.4 s",
+        "si": "4.0 s",
+        "tbt": "10 ms",
+        "tti": "9.5 s",
+        "cls": "0.001"
+      }
+    },
+    "crux": {}
+  },
+  {
+    "timestamp": "2025-10-29T18:56:05.598Z",
+    "url": "https://www.drsayuj.info",
+    "performance": {
+      "score": 67,
+      "metrics": {
+        "fcp": 1511.794652475878,
+        "lcp": 16020.442647966162,
+        "si": 7789.2157961482135,
+        "tbt": 56,
+        "tti": 16027.953864544135,
+        "cls": 0
+      },
+      "displayValues": {
+        "fcp": "1.5 s",
+        "lcp": "16.0 s",
+        "si": "7.8 s",
+        "tbt": "60 ms",
+        "tti": "16.0 s",
+        "cls": "0"
+      }
+    },
+    "crux": {}
+  },
+  {
+    "timestamp": "2025-10-29T19:03:49.729Z",
+    "url": "https://www.drsayuj.info",
+    "performance": {
+      "score": 75,
+      "metrics": {
+        "fcp": 1051,
+        "lcp": 15751,
+        "si": 2332.358160050869,
+        "tbt": 30,
+        "tti": 15751,
+        "cls": 0.0004442408695150614
+      },
+      "displayValues": {
+        "fcp": "1.1 s",
+        "lcp": "15.8 s",
+        "si": "2.3 s",
+        "tbt": "30 ms",
+        "tti": "15.8 s",
+        "cls": "0"
+      }
+    },
+    "crux": {}
+  },
+  {
+    "timestamp": "2025-10-29T19:07:35.544Z",
+    "url": "https://www.drsayuj.info",
+    "performance": {
+      "score": 66,
+      "metrics": {
+        "fcp": 1510,
+        "lcp": 16227,
+        "si": 8049.638491566417,
+        "tbt": 76,
+        "tti": 16227,
+        "cls": 0
+      },
+      "displayValues": {
+        "fcp": "1.5 s",
+        "lcp": "16.2 s",
+        "si": "8.0 s",
+        "tbt": "80 ms",
+        "tti": "16.2 s",
+        "cls": "0"
+      }
+    },
+    "crux": {}
+  },
+  {
+    "timestamp": "2025-10-29T19:13:28.770Z",
+    "url": "https://www.drsayuj.info",
+    "performance": {
+      "score": 65,
+      "metrics": {
+        "fcp": 1737,
+        "lcp": 16214,
+        "si": 9549.713997239816,
+        "tbt": 52,
+        "tti": 16214,
+        "cls": 0
+      },
+      "displayValues": {
+        "fcp": "1.7 s",
+        "lcp": "16.2 s",
+        "si": "9.5 s",
+        "tbt": "50 ms",
+        "tti": "16.2 s",
+        "cls": "0"
+      }
+    },
+    "crux": {}
   }
 ]

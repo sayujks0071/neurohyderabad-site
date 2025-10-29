@@ -7,7 +7,7 @@ export function OrgJsonLd() {
     '@id': 'https://www.drsayuj.info/#org',
     name: 'Dr. Sayuj Krishnan — Brain & Spine Surgeon',
     url: 'https://www.drsayuj.info',
-    logo: 'https://www.drsayuj.info/images/logo-optimized.png',
+    logo: 'https://www.drsayuj.info/images/logo.png',
     sameAs: [
       'https://www.instagram.com/TheSpineDoc/',
       'https://www.youtube.com/@drsayujneurohyd',
@@ -104,4 +104,3 @@ export function HospitalJsonLd() {
   }
   return <Script id="hospital-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
 }
-

@@ -3,12 +3,19 @@ import type { NextRequest } from "next/server";
 
 // export const runtime = "edge"; // Commented out to use Node.js runtime
 
-const DEFAULT_BRAND = "#0ea5e9"; // Update to your brand color if needed
+const DEFAULT_BRAND = "#0FA3B1"; // Brand teal accent
 const TEXT = "#0B1220";
 const SUBTEXT = "#334155";
 const WHITE = "#ffffff";
 const BORDER = "#E2E8F0";
-const LOGO_URL = "/images/logo-optimized.png";
+const PRECISION_ICON_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <rect width="200" height="200" rx="44" fill="#0B2E4E" />
+  <path d="M86 24 C46 24 46 90 86 112 C126 134 126 198 86 198" stroke="#FFFFFF" stroke-width="20" stroke-linecap="round" fill="none" />
+  <path d="M114 24 C154 24 154 90 114 112 C74 134 74 198 114 198" stroke="#FFFFFF" stroke-width="20" stroke-linecap="round" fill="none" />
+  <line x1="86" y1="112" x2="114" y2="112" stroke="#FFFFFF" stroke-width="12" stroke-linecap="round" />
+</svg>`;
+
+const LOGO_DATA_URL = `data:image/svg+xml;base64,${Buffer.from(PRECISION_ICON_SVG).toString('base64')}`;
 
 let interLoaded: Promise<void> | null = null;
 let inter600: ArrayBuffer | null = null;
@@ -95,9 +102,6 @@ export async function GET(req: NextRequest) {
   // Load fonts (best effort)
   await loadInterFonts();
 
-  // Skip logo loading for now to avoid edge runtime issues
-  let logoDataUrl: string | null = null;
-
   const titleSize = computeTitleSize(title);
 
   return new ImageResponse(
@@ -141,56 +145,30 @@ export async function GET(req: NextRequest) {
             }}
           >
             {/* Logo area */}
-            {showLogo &&
-              (logoDataUrl ? (
-                <div
-                  style={{
-                    width: "120px",
-                    height: "120px",
-                    borderRadius: "9999px",
-                    overflow: "hidden",
-                    background: "#ffffff",
-                    border: `3px solid ${BRAND}`,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={logoDataUrl}
-                    alt="Dr Sayuj Krishnan logo"
-                    width={120}
-                    height={120}
-                    style={{ objectFit: "contain" }}
-                  />
-                </div>
-              ) : (
-                <div
-                  style={{
-                    width: "120px",
-                    height: "120px",
-                    borderRadius: "9999px",
-                    background: "#e6f4fb",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    border: `3px solid ${BRAND}`,
-                  }}
-                >
-                  <div
-                    style={{
-                      fontSize: 48,
-                      fontWeight: 800,
-                      color: BRAND,
-                      fontFamily:
-                        "Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, Apple Color Emoji, Segoe UI Emoji",
-                    }}
-                  >
-                    SK
-                  </div>
-                </div>
-              ))}
+            {showLogo && (
+              <div
+                style={{
+                  width: "140px",
+                  height: "140px",
+                  borderRadius: "36px",
+                  background: "#0B2E4E",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  border: `4px solid ${BRAND}`,
+                  boxShadow: "0 18px 36px rgba(11, 46, 78, 0.22)",
+                }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={LOGO_DATA_URL}
+                  alt="Dr Sayuj brand icon"
+                  width={120}
+                  height={120}
+                  style={{ objectFit: "contain" }}
+                />
+              </div>
+            )}
             {/* Titles */}
             <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
               <div

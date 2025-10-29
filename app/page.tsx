@@ -159,15 +159,15 @@ export default function Home() {
     <>
       {/* <ScrollDepthTracker pageSlug="/" /> */}
       <div className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <header className="home-hero bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20" style={heroStyles}>
+      {/* Hero Section - LCP Optimized */}
+      <header className="home-hero text-white py-20" style={heroStyles}>
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="text-center lg:text-left">
-                <h1 className="home-hero__title text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                <h1 className="home-hero__title text-4xl md:text-6xl font-bold mb-6 leading-tight" style={{ color: '#f8fafc', marginBottom: '1.5rem' }}>
                   Dr. Sayuj Krishnan
-                  <span className="home-hero__subtitle block text-3xl md:text-5xl text-blue-100">
+                  <span className="home-hero__subtitle block text-3xl md:text-5xl" style={{ color: '#dbeafe' }}>
                     Premier Neurosurgeon in Hyderabad
                   </span>
                 </h1>

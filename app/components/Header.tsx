@@ -101,21 +101,20 @@ export default function Header() {
   return (
     <header className="relative border-b bg-white">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-4">
-        <Link href="/" className="flex items-center gap-3">
+        <Link href="/" className="flex items-center gap-3" aria-label="Dr Sayuj — Neurosurgeon and Endoscopic Spine Surgery homepage">
           <OptimizedImage
             src="/images/logo.svg"
-            alt="Dr Sayuj Krishnan - Brain & Spine Surgeon"
-            width={140}
-            height={56}
+            alt="Dr Sayuj — Neurosurgeon and Endoscopic Spine Surgery"
+            width={180}
+            height={68}
             className="h-12 w-auto"
             priority
-            quality={85}
-            sizes="120px"
+            quality={90}
+            sizes="(max-width: 768px) 140px, 180px"
             fetchPriority="high"
             placeholder="empty"
           />
-          <span className="font-semibold text-gray-900">Dr Sayuj Krishnan</span>
-          <span className="sr-only">Homepage</span>
+          <span className="sr-only">Dr Sayuj — Neurosurgeon and Endoscopic Spine Surgery</span>
         </Link>
 
         <div className="flex items-center gap-3 md:hidden">

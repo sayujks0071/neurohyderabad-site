@@ -136,12 +136,12 @@ export default function ContactPage() {
               <p className="text-gray-600 mb-4">
                 For consultations and appointments, please call us directly or use our online booking system.
               </p>
-              <a 
+              <Link 
                 href="/appointments"
                 className="inline-block bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition-colors"
               >
                 Book Appointment
-              </a>
+              </Link>
             </div>
             <div>
               <h3 className="font-semibold text-lg mb-3">Emergency Contact</h3>
