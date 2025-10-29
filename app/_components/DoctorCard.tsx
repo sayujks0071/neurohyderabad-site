@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import Link from 'next/link';
+import OptimizedImage from './OptimizedImage';
 
 export default function DoctorCard() {
   return (
@@ -7,15 +7,16 @@ export default function DoctorCard() {
       <div className="text-center">
         {/* Doctor Photo - Professional Portrait */}
         <div className="w-32 h-32 rounded-full mx-auto mb-4 relative overflow-hidden shadow-lg">
-          <Image
+          <OptimizedImage
             src="/images/dr-sayuj-krishnan-portrait.jpg"
             alt="Dr. Sayuj Krishnan - Premier Neurosurgeon in Hyderabad"
             width={128}
             height={128}
-            className="object-cover w-full h-full"
+            className="object-cover w-full h-full rounded-full"
             priority
-            quality={90}
+            quality={85}
             sizes="128px"
+            placeholder="blur"
           />
         </div>
         

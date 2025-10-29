@@ -56,6 +56,7 @@ export default function ClientAnalytics() {
 
     let idleHandle: number | null = null;
     let timeoutHandle: number | null = null;
+    let interactionHandle: number | null = null;
 
     const enable = () => setShouldLoad(true);
 
@@ -67,19 +68,54 @@ export default function ClientAnalytics() {
       cancelIdleCallback?: (handle: number) => void;
     };
 
-    if (win.requestIdleCallback) {
-      idleHandle = win.requestIdleCallback(enable, { timeout: 1200 });
-      return () => {
-        if (idleHandle !== null && win.cancelIdleCallback) {
-          win.cancelIdleCallback(idleHandle);
+    // Try multiple strategies for optimal loading
+    const strategies = [
+      // Strategy 1: Idle callback (preferred)
+      () => {
+        if (win.requestIdleCallback) {
+          idleHandle = win.requestIdleCallback(enable, { timeout: 800 });
+          return true;
         }
-      };
+        return false;
+      },
+      // Strategy 2: User interaction
+      () => {
+        const handleInteraction = () => {
+          enable();
+          document.removeEventListener('mousedown', handleInteraction);
+          document.removeEventListener('touchstart', handleInteraction);
+          document.removeEventListener('keydown', handleInteraction);
+        };
+        
+        document.addEventListener('mousedown', handleInteraction, { passive: true });
+        document.addEventListener('touchstart', handleInteraction, { passive: true });
+        document.addEventListener('keydown', handleInteraction, { passive: true });
+        
+        // Fallback timeout
+        interactionHandle = window.setTimeout(enable, 2000);
+        return true;
+      },
+      // Strategy 3: Timeout fallback
+      () => {
+        timeoutHandle = window.setTimeout(enable, 1000);
+        return true;
+      }
+    ];
+
+    // Try strategies in order
+    for (const strategy of strategies) {
+      if (strategy()) break;
     }
 
-    timeoutHandle = window.setTimeout(enable, 600);
     return () => {
+      if (idleHandle !== null && win.cancelIdleCallback) {
+        win.cancelIdleCallback(idleHandle);
+      }
       if (timeoutHandle !== null) {
         clearTimeout(timeoutHandle);
+      }
+      if (interactionHandle !== null) {
+        clearTimeout(interactionHandle);
       }
     };
   }, [enableAnalytics]);

@@ -1,6 +1,50 @@
-{
-  "timestamp": "2025-10-29T16:11:48.296Z",
-  "url": "https://www.drsayuj.info",
-  "passed": false,
-  "metrics": null
-}
+[
+  {
+    "timestamp": "2025-10-29T18:04:42.291Z",
+    "url": "https://www.drsayuj.info",
+    "performance": {
+      "score": 97,
+      "metrics": {
+        "fcp": 957,
+        "lcp": 1951,
+        "si": 4017.9529920204886,
+        "tbt": 25,
+        "tti": 1951.0000000000002,
+        "cls": 0
+      },
+      "displayValues": {
+        "fcp": "1.0 s",
+        "lcp": "2.0 s",
+        "si": "4.0 s",
+        "tbt": "30 ms",
+        "tti": "2.0 s",
+        "cls": "0"
+      }
+    },
+    "crux": {}
+  },
+  {
+    "timestamp": "2025-10-29T18:08:02.795Z",
+    "url": "https://www.drsayuj.info",
+    "performance": {
+      "score": 96,
+      "metrics": {
+        "fcp": 1584,
+        "lcp": 2292,
+        "si": 3979.935535383139,
+        "tbt": 59,
+        "tti": 2292,
+        "cls": 0
+      },
+      "displayValues": {
+        "fcp": "1.6 s",
+        "lcp": "2.3 s",
+        "si": "4.0 s",
+        "tbt": "60 ms",
+        "tti": "2.3 s",
+        "cls": "0"
+      }
+    },
+    "crux": {}
+  }
+]
