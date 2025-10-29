@@ -4,6 +4,28 @@ export type SourceEntry = {
 };
 
 export const BLOG_SOURCES: Record<string, SourceEntry[]> = {
+  "world-stroke-day-2025-hyderabad-stroke-code": [
+    {
+      label: "World Stroke Organization – Global Stroke Fact Sheet 2023",
+      href: "https://www.world-stroke.org/assets/downloads/WSO_Global_Stroke_Fact_Sheet.pdf",
+    },
+    {
+      label: "World Health Organization India – Stroke",
+      href: "https://www.who.int/india/health-topics/stroke",
+    },
+    {
+      label: "The Lancet Global Health – Stroke Burden in India 1990–2019",
+      href: "https://www.thelancet.com/journals/langlo/article/PIIS2214-109X(22)00067-3/fulltext",
+    },
+    {
+      label: "Indian Stroke Association – Acute Ischaemic Stroke Guidelines 2022",
+      href: "https://journals.sagepub.com/doi/full/10.1177/09731499211021223",
+    },
+    {
+      label: "Indian Council of Medical Research – Stroke Surveillance & Prevention Program",
+      href: "https://main.icmr.nic.in/content/stroke",
+    },
+  ],
   "endoscopic-discectomy-cost-hyderabad": [
     {
       label: "American Association of Neurological Surgeons – Lumbar Disc Herniation",

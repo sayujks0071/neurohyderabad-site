@@ -55,6 +55,14 @@ export default async function BlogPage() {
   // Static blog posts (can be combined with WordPress posts later)
   const staticPosts = [
     {
+      id: 'world-stroke-day-2025-hyderabad-stroke-code',
+      title: 'World Stroke Day 2025: Recognize Stroke Fast, Act Faster',
+      slug: 'world-stroke-day-2025-hyderabad-stroke-code',
+      excerpt: 'World Stroke Day 2025 guide for Hyderabad families—BE-FAST checklist, 108 emergency actions, treatment windows, and Dr Sayuj’s Stroke Code pathway.',
+      date: '2025-10-29',
+      featuredImage: '/images/og-default.jpg'
+    },
+    {
       id: 'endoscopic-discectomy-cost-hyderabad',
       title: 'Endoscopic Discectomy Cost in Hyderabad: Complete Pricing Guide',
       slug: 'endoscopic-discectomy-cost-hyderabad',
