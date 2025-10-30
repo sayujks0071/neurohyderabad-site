@@ -15,6 +15,9 @@ export default function Footer() {
               <p className="text-sm leading-6">
                 Room 317, OPD Block, Yashoda Hospital, Malakpet, Hyderabad, Telangana 500036
               </p>
+              <p className="text-sm text-gray-300">
+                <strong>Landmark:</strong> Near Malakpet Railway Station, opposite Yashoda Out‑Patient Block
+              </p>
               <p>
                 <a
                   href="tel:+919778280044"
@@ -51,6 +54,9 @@ export default function Footer() {
                   Get Directions
                 </a>
               </div>
+              <p className="text-xs text-gray-400 pt-2">
+                For sudden weakness, loss of vision or consciousness, please call emergency services immediately before booking an appointment.
+              </p>
             </div>
           </div>
 

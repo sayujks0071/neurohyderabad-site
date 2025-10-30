@@ -15,9 +15,9 @@ import { getServiceSources } from '../sources';
 const SERVICE_SLUG = 'endoscopic-spine-surgery-hyderabad';
 
 const baseMetadata = makeMetadata({
-  title: 'Endoscopic Spine Surgery in Hyderabad | Dr. Sayuj | Yashoda Malakpet',
+  title: 'Endoscopic Spine Surgery in Hyderabad | Minimally Invasive Procedures – Dr. Sayuj Krishnan',
   description:
-    'Minimally invasive endoscopic spine surgery in Hyderabad. Dr. Sayuj performs "keyhole" procedures at Yashoda Hospital, Malakpet. Get rapid relief today.',
+    'Looking for minimally invasive or endoscopic spine surgery in Hyderabad? Dr. Sayuj Krishnan performs slip disc, spinal stenosis and fusion procedures through tiny incisions for faster recovery. Book a consultation today.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
 });
 
@@ -31,9 +31,9 @@ export const metadata: Metadata = {
     'transforaminal endoscopic spine surgery hyderabad',
   ],
   openGraph: {
-    title: 'Endoscopic Spine Surgery in Hyderabad | Dr. Sayuj Krishnan',
+    title: 'Endoscopic Spine Surgery in Hyderabad | Minimally Invasive Procedures – Dr. Sayuj Krishnan',
     description:
-      'Minimally invasive “keyhole” spine surgery in Hyderabad with rapid recovery, performed by Dr. Sayuj at Yashoda Hospital Malakpet.',
+      'Looking for minimally invasive or endoscopic spine surgery in Hyderabad? Dr. Sayuj Krishnan performs slip disc, spinal stenosis and fusion procedures through tiny incisions for faster recovery.',
     url: `${SITE_URL}/services/${SERVICE_SLUG}`,
     siteName: 'Dr. Sayuj Krishnan - Neurosurgeon Hyderabad',
     locale: 'en_IN',
@@ -138,7 +138,7 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
           <div>
             <p className="text-sm font-medium uppercase tracking-wide text-blue-600 mb-3">Ultra-MINIMALLY INVASIVE CARE</p>
             <h1 className="text-4xl md:text-5xl font-bold text-blue-900 leading-tight mb-6">
-              Advanced Endoscopic Spine Surgery in Hyderabad
+              Endoscopic Spine Surgery in Hyderabad
             </h1>
             <AuthorByline
               publishedOn="2025-09-05"
@@ -175,6 +175,48 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
             </ul>
           </div>
         </header>
+
+      {/* FAQPage JSON-LD for this page */}
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "When should I see a neurosurgeon for back pain?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "If you have persistent back or leg pain, numbness or weakness that isn’t improving with rest and physiotherapy, or if you experience loss of bowel or bladder control, consult a neurosurgeon. Early evaluation in Hyderabad can prevent nerve damage and may allow for minimally invasive treatment."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is endoscopic spine surgery painful?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Endoscopic spine surgery uses tiny incisions and causes less tissue disruption than traditional open surgery. Most patients report manageable discomfort controlled with oral pain medication and are able to walk the same day."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How soon can I walk after endoscopic disc surgery?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Patients typically begin walking within a few hours of endoscopic discectomy. Many return to desk work within 1–2 weeks, while heavy labour may require 4–8 weeks of graded recovery."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is the success rate of endoscopic discectomy?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "For appropriately selected patients, endoscopic discectomy has a high success rate (around 85–95%) in relieving leg pain and numbness. Success depends on proper diagnosis, surgeon experience and adherence to post‑operative care instructions."
+              }
+            }
+          ]
+        }}
+      />
 
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-blue-900 mb-6">Conditions Treated with Endoscopic Surgery</h2>

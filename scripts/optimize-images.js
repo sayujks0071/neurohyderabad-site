@@ -38,6 +38,14 @@ async function optimizeImages() {
         { format: 'avif', quality: 80, suffix: '.avif' },
         { format: 'jpeg', quality: 90, suffix: '-optimized.jpg' }
       ]
+    },
+    {
+      input: path.join(imagesDir, 'dr-sayuj-krishnan-portrait.jpg'),
+      outputs: [
+        { format: 'webp', quality: 85, suffix: '.webp' },
+        { format: 'avif', quality: 80, suffix: '.avif' },
+        { format: 'jpeg', quality: 90, suffix: '-optimized.jpg' }
+      ]
     }
   ];
   

@@ -5,8 +5,8 @@ import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
 import { serviceJsonLd } from "../../src/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Spine Surgery Hyderabad | Minimally Invasive Endoscopic Spine Surgery | Dr. Sayuj Krishnan",
-  description: "Expert spine surgery in Hyderabad with Dr. Sayuj Krishnan. Specializing in minimally invasive endoscopic spine surgery, same-day discharge, and faster recovery. 1,000+ successful procedures.",
+  title: "Endoscopic Spine Surgery in Hyderabad | Minimally Invasive Procedures – Dr. Sayuj Krishnan",
+  description: "Looking for minimally invasive or endoscopic spine surgery in Hyderabad? Dr. Sayuj Krishnan performs slip disc, spinal stenosis and fusion procedures through tiny incisions for faster recovery. Book a consultation today.",
   keywords: [
     "spine surgery hyderabad",
     "endoscopic spine surgery hyderabad",
@@ -27,8 +27,8 @@ export const metadata: Metadata = {
     }
   },
   openGraph: {
-    title: "Spine Surgery Hyderabad | Minimally Invasive Endoscopic Spine Surgery",
-    description: "Expert spine surgery in Hyderabad with Dr. Sayuj Krishnan. Specializing in minimally invasive endoscopic spine surgery, same-day discharge, and faster recovery.",
+    title: "Endoscopic Spine Surgery in Hyderabad | Minimally Invasive Procedures – Dr. Sayuj Krishnan",
+    description: "Looking for minimally invasive or endoscopic spine surgery in Hyderabad? Dr. Sayuj Krishnan performs slip disc, spinal stenosis and fusion procedures through tiny incisions for faster recovery.",
     url: `${SITE_URL}/spine-surgery`,
     siteName: "Dr. Sayuj Krishnan - Premier Neurosurgeon Hyderabad",
     locale: "en_IN",
@@ -77,7 +77,7 @@ export default function SpineSurgeryPage() {
               <div className="grid lg:grid-cols-2 gap-12 items-center">
                 <div>
                   <h1 className="text-4xl md:text-6xl font-bold mb-6">
-                    Minimally Invasive Spine Surgery
+                    Endoscopic Spine Surgery in Hyderabad
                   </h1>
                   <p className="text-xl md:text-2xl mb-8 text-blue-100">
                     Advanced endoscopic techniques for faster recovery, same-day discharge, 

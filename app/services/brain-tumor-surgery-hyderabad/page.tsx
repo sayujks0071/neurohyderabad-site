@@ -15,9 +15,9 @@ import { getServiceSources } from '../sources';
 const SERVICE_SLUG = 'brain-tumor-surgery-hyderabad';
 
 const baseMetadata = makeMetadata({
-  title: 'Brain Tumor Surgery in Hyderabad | Dr. Sayuj | Yashoda Malakpet',
+  title: 'Brain Tumor Surgery in Hyderabad | Advanced Neurosurgical Oncology – Dr. Sayuj Krishnan',
   description:
-    'Expert care for brain tumor surgery in Hyderabad. Dr. Sayuj uses advanced microsurgery & neuronavigation at Yashoda Hospital, Malakpet. Schedule a consultation.',
+    'Facing a brain tumour diagnosis? At Yashoda Hospital, Malakpet, Dr. Sayuj Krishnan offers advanced brain tumour surgery in Hyderabad using neuronavigation and microsurgical techniques to maximise safety and recovery.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
 });
 
@@ -31,9 +31,9 @@ export const metadata: Metadata = {
     'yashoda hospital brain tumor specialist',
   ],
   openGraph: {
-    title: 'Brain Tumor Surgery in Hyderabad | Dr. Sayuj Krishnan',
+    title: 'Brain Tumor Surgery in Hyderabad | Advanced Neurosurgical Oncology – Dr. Sayuj Krishnan',
     description:
-      'Advanced brain tumor surgery program in Hyderabad offering neuronavigation-guided microsurgery, awake craniotomy, and multidisciplinary oncology pathways.',
+      'At Yashoda Hospital, Malakpet, Dr. Sayuj Krishnan offers advanced brain tumour surgery in Hyderabad using neuronavigation and microsurgical techniques to maximise safety and recovery.',
     url: `${SITE_URL}/services/${SERVICE_SLUG}`,
     siteName: 'Dr. Sayuj Krishnan - Neurosurgeon Hyderabad',
     locale: 'en_IN',
@@ -202,6 +202,32 @@ export default function BrainTumorSurgeryHyderabadPage() {
             </ul>
           </div>
         </header>
+
+      {/* FAQPage JSON-LD for this page */}
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Are all brain tumours treated with open surgery?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Not every brain tumour needs open surgery. Depending on its type, size and location, options such as stereotactic biopsy, radiosurgery or endoscopic approaches may be appropriate. Dr. Sayuj Krishnan tailors the plan for each patient in Hyderabad after reviewing scans and discussing risks."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How quickly can brain tumour surgery be scheduled?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Urgent cases with progressive neurological deficits are prioritised within 48–72 hours. Elective cases are usually scheduled within a week after multidisciplinary review and pre‑anaesthesia evaluation."
+              }
+            }
+          ]
+        }}
+      />
 
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-blue-900 mb-6">Types of Brain Tumors We Treat</h2>

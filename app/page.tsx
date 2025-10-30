@@ -21,8 +21,8 @@ import { mediaPublications } from "../src/content/media";
 const HOME_CANONICAL = SITE_URL.endsWith("/") ? SITE_URL : `${SITE_URL}/`;
 
 export const metadata = {
-  title: 'Dr. Sayuj Krishnan | Premier Neurosurgeon in Hyderabad | Minimally Invasive Brain & Spine Surgery',
-  description: 'Leading expert in minimally invasive brain & spine surgery. Specializing in endoscopic spine procedures, awake brain surgery, and robotic neurosurgery with same-day discharge protocols. 15+ years experience with German training.',
+  title: 'Best Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan – Minimally Invasive Brain & Spine Surgery',
+  description: 'Consult Dr. Sayuj Krishnan, an experienced neurosurgeon and spine surgeon in Hyderabad. He offers minimally invasive brain and spine procedures with compassionate care at Yashoda Hospital, Malakpet.',
   keywords: [
     'best neurosurgeon hyderabad',
     'dr sayuj krishnan',
@@ -45,10 +45,10 @@ export const metadata = {
     }
   },
   openGraph: {
-    title: 'Dr. Sayuj Krishnan | Premier Neurosurgeon in Hyderabad | Minimally Invasive Brain & Spine Surgery',
-    description: 'Leading expert in minimally invasive brain & spine surgery. Specializing in endoscopic spine procedures, awake brain surgery, and robotic neurosurgery with same-day discharge protocols.',
+    title: 'Best Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan – Minimally Invasive Brain & Spine Surgery',
+    description: 'Consult Dr. Sayuj Krishnan, an experienced neurosurgeon and spine surgeon in Hyderabad. He offers minimally invasive brain and spine procedures with compassionate care at Yashoda Hospital, Malakpet.',
     url: HOME_CANONICAL,
-    siteName: 'Dr. Sayuj Krishnan - Premier Neurosurgeon Hyderabad',
+    siteName: 'Dr. Sayuj Krishnan - Neurosurgeon Hyderabad',
     locale: 'en_IN',
     type: 'website',
     images: [
@@ -63,8 +63,8 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Dr. Sayuj Krishnan | Premier Neurosurgeon in Hyderabad',
-    description: 'Leading expert in minimally invasive brain & spine surgery with German training and 15+ years experience.'
+    title: 'Best Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan',
+    description: 'Minimally invasive brain and spine procedures with compassionate care at Yashoda Hospital, Malakpet.'
   }
 };
 
@@ -167,15 +167,13 @@ export default function Home() {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="text-center lg:text-left">
                 <h1 className="home-hero__title text-4xl md:text-6xl font-bold mb-6 leading-tight" style={{ color: '#f8fafc', marginBottom: '1.5rem' }}>
-                  Dr. Sayuj Krishnan
+                  Best Neurosurgeon & Spine Surgeon in Hyderabad
                   <span className="home-hero__subtitle block text-3xl md:text-5xl" style={{ color: '#dbeafe' }}>
-                    Premier Neurosurgeon in Hyderabad
+                    Dr. Sayuj Krishnan — Yashoda Hospital, Malakpet
                   </span>
                 </h1>
                 <p className="home-hero__lead text-xl md:text-2xl mb-6" style={heroLeadStyles}>
-                  Advanced brain & spine care that combines pioneering technique with compassionate recovery. 
-                  Specializing in minimally invasive endoscopic spine surgery, awake brain surgery, and robotic neurosurgery 
-                  with same-day discharge protocols.
+                  Experiencing headaches, leg pain or numbness can be frightening. At Yashoda Hospital in Hyderabad, Dr. Sayuj Krishnan provides advanced neurosurgical and spine care with a focus on minimally invasive techniques. From endoscopic spine surgery to awake brain procedures, his goal is to relieve pressure on nerves while helping you get back to daily life quickly. Call our clinic if you’re noticing weakness, balance problems or persistent pain – early evaluation often leads to better recovery.
                 </p>
                 {/* <HeroCTA /> */}
                 <div className="space-y-4">
@@ -321,6 +319,10 @@ export default function Home() {
                   <div className="mt-4">
                     <Link href="/conditions/slip-disc-treatment-hyderabad/" className="text-blue-600 hover:underline mr-4">Slip Disc Treatment</Link>
                     <Link href="/conditions/spinal-stenosis-treatment-hyderabad/" className="text-blue-600 hover:underline">Spinal Stenosis</Link>
+                    <div className="mt-3 text-sm">
+                      <Link href="/blog/does-endoscopic-spine-surgery-work-for-sciatica-hyderabad/" className="text-blue-700 hover:underline mr-4">Does Endoscopic Spine Surgery Work for Sciatica?</Link>
+                      <Link href="/blog/when-to-worry-about-back-pain-neurosurgeon-hyderabad/" className="text-blue-700 hover:underline">When to Worry About Back Pain</Link>
+                    </div>
                   </div>
                 </div>
               </div>

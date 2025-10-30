@@ -112,6 +112,20 @@ export default function AboutPage() {
           </div>
         </section>
 
+        {/* About Dr. Sayuj Krishnan - Improved Section */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <div className="bg-blue-50 border-l-4 border-blue-600 p-8 rounded-lg">
+                <h2 className="text-2xl font-bold text-blue-900 mb-4">About Dr. Sayuj Krishnan</h2>
+                <p className="text-lg text-gray-700 leading-relaxed">
+                  Dr. Sayuj Krishnan is a consultant neurosurgeon and spine surgeon serving patients across Hyderabad. After completing his MBBS and DNB in neurosurgery, he obtained fellowship training in minimally invasive and endoscopic spine surgery in Germany. Over the past 15 years he has performed hundreds of procedures ranging from simple endoscopic discectomy to complex brain tumour resections. He is affiliated with Yashoda Hospital, Malakpet, where he is known for blending advanced technology with compassionate care. Patients appreciate his clear explanations and focus on safe recovery without unnecessary interventions.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Credentials & Training */}
         <section className="py-16 bg-gray-50">
           <div className="container mx-auto px-4">
