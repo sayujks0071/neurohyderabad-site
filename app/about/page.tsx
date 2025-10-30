@@ -4,6 +4,9 @@ import Image from "next/image";
 import { SITE_URL } from "../../src/lib/seo";
 import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
 
+// Ensure page is statically generated
+export const revalidate = 3600; // Revalidate every hour
+
 export const metadata: Metadata = {
   title: "About Dr. Sayuj Krishnan | Premier Neurosurgeon in Hyderabad | Credentials & Experience",
   description: "Learn about Dr. Sayuj Krishnan's exceptional training, 15+ years of neurosurgical experience, German fellowship, and pioneering work in minimally invasive brain & spine surgery in Hyderabad.",

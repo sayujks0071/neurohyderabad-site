@@ -15,6 +15,9 @@ import { getServiceSources } from '../sources';
 
 const SERVICE_SLUG = 'endoscopic-spine-surgery-hyderabad';
 
+// Ensure page is statically generated
+export const revalidate = 3600; // Revalidate every hour
+
 const baseMetadata = makeMetadata({
   title: 'Endoscopic Spine Surgery in Hyderabad | Minimally Invasive Procedures – Dr. Sayuj Krishnan',
   description:

@@ -19,7 +19,22 @@ export const metadata: Metadata = {
   },
 };
 
+// Ensure page is statically generated
+export const revalidate = 3600; // Revalidate every hour
+
 export default function PatientStoriesPage() {
+  // Safety check - ensure patientStories exists
+  if (!patientStories || patientStories.length === 0) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">Patient Stories</h1>
+          <p className="text-gray-600">Content is being updated. Please check back soon.</p>
+          <Link href="/" className="text-blue-600 hover:underline mt-4 inline-block">Return to Home</Link>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
