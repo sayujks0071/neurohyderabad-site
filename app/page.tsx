@@ -16,6 +16,10 @@ import { SITE_URL } from "../src/lib/seo";
 // import { analytics } from "../src/lib/analytics";
 import DoctorCardLazy from "./_components/DoctorCardLazy";
 import TrustSignals from "./_components/TrustSignals";
+import TrustBridgeTracker from "./_components/TrustBridgeTracker";
+import TrustSignalViewportTracker from "./_components/TrustSignalViewportTracker";
+import UserJourneyTracker from "./_components/UserJourneyTracker";
+import TrustBridgeLink from "./_components/TrustBridgeLink";
 import { mediaPublications } from "../src/content/media";
 
 const HOME_CANONICAL = SITE_URL.endsWith("/") ? SITE_URL : `${SITE_URL}/`;
@@ -159,6 +163,9 @@ export default function Home() {
   return (
     <>
       {/* <ScrollDepthTracker pageSlug="/" /> */}
+      <TrustBridgeTracker />
+      <TrustSignalViewportTracker />
+      <UserJourneyTracker />
       <div className="min-h-screen bg-white">
       {/* Hero Section - LCP Optimized */}
       <header className="home-hero text-white py-20" style={heroStyles}>
@@ -346,9 +353,10 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="grid md:grid-cols-2 gap-8">
-              <Link 
+              <TrustBridgeLink 
                 href="/about"
                 className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow group"
+                eventLabel="homepage_trust_bridge_about"
               >
                 <h3 className="text-2xl font-bold text-blue-900 mb-4 group-hover:text-blue-700">
                   Meet Dr. Sayuj Krishnan
@@ -373,11 +381,12 @@ export default function Home() {
                 <span className="text-blue-600 font-semibold group-hover:text-blue-800">
                   Learn More About Dr. Sayuj →
                 </span>
-              </Link>
+              </TrustBridgeLink>
               
-              <Link 
+              <TrustBridgeLink 
                 href="/patient-stories"
                 className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow group"
+                eventLabel="homepage_trust_bridge_patient_stories"
               >
                 <h3 className="text-2xl font-bold text-blue-900 mb-4 group-hover:text-blue-700">
                   Patient Success Stories
@@ -402,7 +411,7 @@ export default function Home() {
                 <span className="text-blue-600 font-semibold group-hover:text-blue-800">
                   Read All Patient Stories →
                 </span>
-              </Link>
+              </TrustBridgeLink>
             </div>
           </div>
         </div>

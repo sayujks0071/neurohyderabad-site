@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { patientStories } from '@/src/content/stories';
@@ -24,18 +25,14 @@ export default function TrustProof({ serviceType = 'all', className = '' }: Trus
         return true;
       }).slice(0, 2);
 
-  // Track TrustProof component view (on mount)
-  if (typeof window !== 'undefined') {
-    // Use useEffect equivalent behavior for tracking
-    setTimeout(() => {
-      analytics.track('Trust_Signal_View', {
-        page_slug: pathname || '/',
-        trust_signal_type: 'trust_proof_component',
-        service_type: serviceType,
-        stories_count: relevantStories.length
-      });
-    }, 0);
-  }
+  // Track TrustProof component view (on mount) - use useEffect for proper client-side behavior
+  useEffect(() => {
+    analytics.trustSignalView(
+      pathname || '/',
+      'trust_proof_component',
+      serviceType
+    );
+  }, [pathname, serviceType]);
 
   return (
     <section className={`bg-white border-2 border-blue-100 rounded-xl p-6 shadow-sm ${className}`}>
@@ -49,12 +46,13 @@ export default function TrustProof({ serviceType = 'all', className = '' }: Trus
             href="/about" 
             className="flex-1 group"
             onClick={() => {
-              analytics.track('Trust_Signal_Click', {
-                page_slug: pathname || '/',
-                trust_signal_type: 'about_credentials',
-                service_type: serviceType,
-                signal_location: 'trust_proof_component'
-              });
+              analytics.trustSignalClick(
+                pathname || '/',
+                'about_credentials',
+                '/about',
+                serviceType
+              );
+              analytics.trustPathwayStart(pathname || '/', 'service_page_trust_proof');
             }}
           >
             <div className="flex items-center justify-between p-3 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-colors">
@@ -76,14 +74,21 @@ export default function TrustProof({ serviceType = 'all', className = '' }: Trus
                 href={`/patient-stories/${story.slug}`}
                 className="block p-3 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-colors group"
                 onClick={() => {
-                  analytics.track('Trust_Signal_Click', {
+                  analytics.trustSignalClick(
+                    pathname || '/',
+                    'patient_story',
+                    `/patient-stories/${story.slug}`,
+                    serviceType
+                  );
+                  analytics.track('Patient_Story_Click', {
                     page_slug: pathname || '/',
-                    trust_signal_type: 'patient_story',
-                    service_type: serviceType,
                     story_id: story.id,
                     story_slug: story.slug,
-                    signal_location: 'trust_proof_component'
+                    story_procedure: story.procedure,
+                    service_type: serviceType,
+                    source: 'trust_proof_component'
                   });
+                  analytics.trustPathwayStart(pathname || '/', 'service_page_trust_proof');
                 }}
               >
                 <div className="flex items-start justify-between">
@@ -109,12 +114,13 @@ export default function TrustProof({ serviceType = 'all', className = '' }: Trus
             href="/patient-stories"
             className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm"
             onClick={() => {
-              analytics.track('Trust_Signal_Click', {
-                page_slug: pathname || '/',
-                trust_signal_type: 'all_patient_stories',
-                service_type: serviceType,
-                signal_location: 'trust_proof_component'
-              });
+              analytics.trustSignalClick(
+                pathname || '/',
+                'all_patient_stories',
+                '/patient-stories',
+                serviceType
+              );
+              analytics.trustPathwayStart(pathname || '/', 'service_page_trust_proof');
             }}
           >
             View all patient stories →

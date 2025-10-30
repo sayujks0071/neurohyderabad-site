@@ -126,6 +126,8 @@ export const viewport: Viewport = {
 
 import EngagementTracker from './_components/EngagementTracker';
 import ExitIntentHandler from './_components/ExitIntentHandler';
+import ConversionFunnelTracker from './_components/ConversionFunnelTracker';
+import TrustSignalViewportTracker from './_components/TrustSignalViewportTracker';
 
 export default function RootLayout({
   children,
@@ -220,6 +222,8 @@ export default function RootLayout({
           <ClientAnalytics />
           <EngagementTracker trackTime={true} trackMilestones={true} />
           <ExitIntentHandler showOffer={false} />
+          <ConversionFunnelTracker />
+          <TrustSignalViewportTracker />
         </ClientOnlyWrapper>
         <WebsiteSchema />
         <PhysicianSchema />
