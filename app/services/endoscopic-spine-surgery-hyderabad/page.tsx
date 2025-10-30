@@ -19,25 +19,32 @@ const SERVICE_SLUG = 'endoscopic-spine-surgery-hyderabad';
 export const revalidate = 3600; // Revalidate every hour
 
 const baseMetadata = makeMetadata({
-  title: 'Endoscopic Spine Surgery in Hyderabad | Minimally Invasive Procedures – Dr. Sayuj Krishnan',
+  title: 'Endoscopic Spine Surgery in Hyderabad | Minimally Invasive Keyhole Surgery – Dr. Sayuj Krishnan',
   description:
-    'Looking for minimally invasive or endoscopic spine surgery in Hyderabad? Dr. Sayuj Krishnan performs slip disc, spinal stenosis and fusion procedures through tiny incisions for faster recovery. Book a consultation today.',
+    'Endoscopic spine surgery in Hyderabad at Yashoda Hospital Malakpet. Dr. Sayuj Krishnan offers minimally invasive keyhole spine surgery for slip disc, sciatica, and spinal stenosis. Same-day discharge, faster recovery. Book consultation today.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
 });
 
 export const metadata: Metadata = {
   ...baseMetadata,
   keywords: [
+    'endoscopic spine surgery',
     'endoscopic spine surgery hyderabad',
+    'minimally invasive spine surgery',
+    'keyhole spine surgery cost at malakpet yashoda',
+    'keyhole spine surgery',
+    'endoscopic discectomy hyderabad',
     'full endoscopic discectomy hyderabad',
     'day care spine surgery hyderabad',
     'miss spine surgery hyderabad',
     'transforaminal endoscopic spine surgery hyderabad',
+    'yashoda hospital endoscopic spine surgery',
+    'spine surgery hyderabad',
   ],
   openGraph: {
-    title: 'Endoscopic Spine Surgery in Hyderabad | Minimally Invasive Procedures – Dr. Sayuj Krishnan',
+    title: 'Endoscopic Spine Surgery in Hyderabad | Minimally Invasive Keyhole Surgery',
     description:
-      'Looking for minimally invasive or endoscopic spine surgery in Hyderabad? Dr. Sayuj Krishnan performs slip disc, spinal stenosis and fusion procedures through tiny incisions for faster recovery.',
+      'Endoscopic spine surgery in Hyderabad at Yashoda Hospital Malakpet. Minimally invasive keyhole surgery for slip disc, sciatica, and spinal stenosis. Same-day discharge available.',
     url: `${SITE_URL}/services/${SERVICE_SLUG}`,
     siteName: 'Dr. Sayuj Krishnan - Neurosurgeon Hyderabad',
     locale: 'en_IN',
@@ -142,7 +149,7 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
           <div>
             <p className="text-sm font-medium uppercase tracking-wide text-blue-600 mb-3">Ultra-MINIMALLY INVASIVE CARE</p>
             <h1 className="text-4xl md:text-5xl font-bold text-blue-900 leading-tight mb-6">
-              Endoscopic Spine Surgery in Hyderabad
+              Endoscopic Spine Surgery in Hyderabad | Minimally Invasive Keyhole Surgery
             </h1>
             <AuthorByline
               publishedOn="2025-09-05"
@@ -285,6 +292,32 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
                 <li>• Follow-up visit in 7-10 days with wound inspection and rehab plan</li>
               </ul>
             </div>
+          </div>
+        </section>
+
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-blue-900 mb-6">Keyhole Spine Surgery Cost at Malakpet Yashoda Hospital</h2>
+          <div className="bg-blue-50 border border-blue-100 rounded-xl p-6 mb-8">
+            <p className="text-gray-700 mb-4">
+              Endoscopic spine surgery (keyhole surgery) at Yashoda Hospital Malakpet offers an affordable, high-quality alternative to traditional open spine surgery. Our transparent pricing includes surgeon fees, hospital charges, implants, and follow-up consultations.
+            </p>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-white rounded-lg p-4">
+                <h3 className="font-semibold text-blue-800 mb-2">Endoscopic Discectomy</h3>
+                <p className="text-sm text-gray-600 mb-2">For slip disc and sciatica</p>
+                <p className="text-lg font-bold text-blue-900">INR 95,000 - 1,35,000</p>
+                <p className="text-xs text-gray-500 mt-1">Self-pay package (varies by case complexity)</p>
+              </div>
+              <div className="bg-white rounded-lg p-4">
+                <h3 className="font-semibold text-blue-800 mb-2">Insurance Coverage</h3>
+                <p className="text-sm text-gray-600 mb-2">Most insurance plans accepted</p>
+                <p className="text-sm text-gray-700">We help with pre-authorization and claim processing. Cashless treatment available for eligible insurance policies.</p>
+              </div>
+            </div>
+            <p className="text-sm text-gray-600 mt-4">
+              <strong>Note:</strong> Final cost depends on case complexity, type of procedure, and insurance coverage. 
+              Contact our clinic for a personalized cost estimate after reviewing your MRI scans.
+            </p>
           </div>
         </section>
 

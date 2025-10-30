@@ -3,8 +3,17 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Neurosurgeon in Malakpet, Hyderabad | Dr Sayuj Krishnan - Yashoda Hospital",
-  description: "Expert neurosurgeon Dr Sayuj Krishnan at Yashoda Hospital, Malakpet. Specializing in endoscopic spine surgery and brain surgery. Easy access from Dilsukhnagar, Kothapet.",
+  title: "Best Spine Surgeon in Yashoda Hospital Malakpet | Dr Sayuj Krishnan - Neurosurgeon",
+  description: "Dr Sayuj Krishnan is the best spine surgeon in Yashoda Hospital Malakpet, Hyderabad. Expert neurosurgeon and spine specialist offering endoscopic spine surgery, minimally invasive procedures, and brain surgery. Easy access from Dilsukhnagar, Kothapet, LB Nagar.",
+  keywords: [
+    'best spine surgeon in yashoda hospital',
+    'spine surgeon in yashoda hospital hyderabad',
+    'yashoda hospital malakpet spine surgeon',
+    'yashoda hospital spine surgeon',
+    'best spine surgeon in yashoda hospital malakpet',
+    'neurosurgeon in malakpet',
+    'spine specialist in yashoda hospital',
+  ],
   alternates: {
     canonical: `${SITE_URL}/locations/malakpet/`,
   },
@@ -14,7 +23,7 @@ export default function MalakpetLocationPage() {
   return (
     <main className="container mx-auto px-4 py-16">
       <article className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8 text-center">Neurosurgeon in Malakpet, Hyderabad</h1>
+        <h1 className="text-4xl font-bold mb-8 text-center">Best Spine Surgeon in Yashoda Hospital Malakpet, Hyderabad</h1>
         
         <section className="mb-8 bg-blue-50 p-6 rounded-lg">
           <h2 className="text-2xl font-semibold mb-4">Yashoda Hospital, Malakpet</h2>
