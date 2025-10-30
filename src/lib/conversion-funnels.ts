@@ -195,6 +195,119 @@ export const CONVERSION_FUNNELS = {
     ]
   },
 
+  // Trust Pathway Funnel
+  trust_pathway_funnel: {
+    name: "Trust Pathway Funnel",
+    description: "Track user journey through trust-building elements (About, Patient Stories)",
+    steps: [
+      {
+        id: "service_page_view",
+        name: "Service Page View",
+        event: "Page_View",
+        description: "User views a service page (e.g., Brain Tumor Surgery)",
+        filters: {
+          page_type: ["service"]
+        },
+        required_properties: ["page_slug", "service_type"]
+      },
+      {
+        id: "trust_signal_view",
+        name: "Trust Signal View",
+        event: "Trust_Signal_View",
+        description: "User sees TrustProof component or trust signals",
+        filters: {},
+        required_properties: ["trust_signal_type", "service_type"]
+      },
+      {
+        id: "trust_signal_click",
+        name: "Trust Signal Click",
+        event: "Trust_Signal_Click",
+        description: "User clicks on trust signal (About link, Patient Story, etc.)",
+        filters: {},
+        required_properties: ["trust_signal_type", "destination"]
+      },
+      {
+        id: "about_page_view",
+        name: "About Page View",
+        event: "Page_View",
+        description: "User views About page",
+        filters: {
+          page_slug: ["/about"]
+        },
+        required_properties: ["page_slug"]
+      },
+      {
+        id: "patient_stories_view",
+        name: "Patient Stories View",
+        event: "Page_View",
+        description: "User views Patient Stories page or individual story",
+        filters: {
+          page_type: ["patient_stories"]
+        },
+        required_properties: ["page_slug"]
+      },
+      {
+        id: "trust_pathway_complete",
+        name: "Trust Pathway Complete",
+        event: "Trust_Pathway_Complete",
+        description: "User completes trust pathway (views About or Patient Stories)",
+        filters: {},
+        required_properties: ["pathway_type", "time_spent_seconds"]
+      },
+      {
+        id: "conversion_after_trust",
+        name: "Conversion After Trust",
+        event: "Appointment_Start",
+        description: "User starts appointment booking after viewing trust signals",
+        filters: {},
+        required_properties: ["page_slug", "form_type"]
+      }
+    ],
+    segments: [
+      {
+        name: "Service Type",
+        property: "service_type",
+        values: ["spine", "brain", "epilepsy", "all"]
+      },
+      {
+        name: "Trust Signal Type",
+        property: "trust_signal_type",
+        values: ["about_credentials", "patient_story", "all_patient_stories", "trust_proof_component"]
+      },
+      {
+        name: "Pathway Type",
+        property: "pathway_type",
+        values: ["about", "patient_stories"]
+      }
+    ],
+    kpis: [
+      {
+        name: "Trust Signal Engagement Rate",
+        calculation: "trust_signal_click / trust_signal_view",
+        target: 0.25,
+        description: "Percentage of users who click trust signals after viewing"
+      },
+      {
+        name: "Trust Pathway Completion Rate",
+        calculation: "trust_pathway_complete / trust_signal_click",
+        target: 0.60,
+        description: "Percentage of users who complete trust pathway after clicking"
+      },
+      {
+        name: "Conversion After Trust Rate",
+        calculation: "conversion_after_trust / trust_pathway_complete",
+        target: 0.15,
+        description: "Percentage of users who convert after completing trust pathway"
+      },
+      {
+        name: "Overall Trust-to-Conversion Rate",
+        calculation: "conversion_after_trust / service_page_view",
+        target: 0.05,
+        description: "Percentage of service page visitors who convert after trust pathway"
+      }
+    ]
+  },
+
   // Local SEO Funnel
   local_seo_funnel: {
     name: "Local SEO Funnel",

@@ -124,6 +124,9 @@ export const viewport: Viewport = {
   themeColor: "#0B2E4E",
 };
 
+import EngagementTracker from './_components/EngagementTracker';
+import ExitIntentHandler from './_components/ExitIntentHandler';
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -215,6 +218,8 @@ export default function RootLayout({
       <body className={`${inter.variable} antialiased`}>
         <ClientOnlyWrapper>
           <ClientAnalytics />
+          <EngagementTracker trackTime={true} trackMilestones={true} />
+          <ExitIntentHandler showOffer={false} />
         </ClientOnlyWrapper>
         <WebsiteSchema />
         <PhysicianSchema />

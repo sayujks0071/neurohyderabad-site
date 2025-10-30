@@ -203,6 +203,55 @@ export const analytics = {
       page_slug: pageSlug,
       depth_percentage: depth
     });
+  },
+
+  // Trust signal tracking
+  trustSignalView: (pageSlug: string, signalType: string, serviceType?: string) => {
+    track('Trust_Signal_View', {
+      page_slug: pageSlug,
+      trust_signal_type: signalType,
+      service_type: serviceType
+    });
+  },
+
+  trustSignalClick: (pageSlug: string, signalType: string, destination: string, serviceType?: string) => {
+    track('Trust_Signal_Click', {
+      page_slug: pageSlug,
+      trust_signal_type: signalType,
+      destination: destination,
+      service_type: serviceType
+    });
+  },
+
+  // Trust pathway funnel tracking
+  trustPathwayStart: (pageSlug: string, entryPoint: string) => {
+    track('Trust_Pathway_Start', {
+      page_slug: pageSlug,
+      entry_point: entryPoint
+    });
+  },
+
+  trustPathwayComplete: (pageSlug: string, pathwayType: 'about' | 'patient_stories', timeSpent: number) => {
+    track('Trust_Pathway_Complete', {
+      page_slug: pageSlug,
+      pathway_type: pathwayType,
+      time_spent_seconds: timeSpent
+    });
+  },
+
+  // Engagement events
+  timeOnPage: (pageSlug: string, seconds: number) => {
+    track('Time_On_Page', {
+      page_slug: pageSlug,
+      seconds: seconds
+    });
+  },
+
+  exitIntent: (pageSlug: string, exitPoint: string) => {
+    track('Exit_Intent', {
+      page_slug: pageSlug,
+      exit_point: exitPoint
+    });
   }
 };
 
