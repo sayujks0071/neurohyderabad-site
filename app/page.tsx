@@ -341,6 +341,73 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Trust Bridge Section - Connect Services to Credentials */}
+      <section className="py-16 bg-gradient-to-r from-blue-50 to-indigo-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-8">
+              <Link 
+                href="/about"
+                className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow group"
+              >
+                <h3 className="text-2xl font-bold text-blue-900 mb-4 group-hover:text-blue-700">
+                  Meet Dr. Sayuj Krishnan
+                </h3>
+                <p className="text-gray-700 mb-4">
+                  Learn about 15+ years of neurosurgical experience, German fellowship training, and his approach to compassionate, minimally invasive care.
+                </p>
+                <ul className="space-y-2 text-gray-600 mb-4">
+                  <li className="flex items-start">
+                    <span className="text-blue-600 mr-2">✓</span>
+                    <span>MBBS, DNB Neurosurgery • Fellowship in Minimally Invasive Spine Surgery</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-blue-600 mr-2">✓</span>
+                    <span>Observer-ship in Full Endoscopic Spine Surgery (Germany)</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-blue-600 mr-2">✓</span>
+                    <span>Affiliated with Yashoda Hospital, Malakpet</span>
+                  </li>
+                </ul>
+                <span className="text-blue-600 font-semibold group-hover:text-blue-800">
+                  Learn More About Dr. Sayuj →
+                </span>
+              </Link>
+              
+              <Link 
+                href="/patient-stories"
+                className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow group"
+              >
+                <h3 className="text-2xl font-bold text-blue-900 mb-4 group-hover:text-blue-700">
+                  Patient Success Stories
+                </h3>
+                <p className="text-gray-700 mb-4">
+                  Read real stories from patients who have successfully undergone neurosurgery and spine surgery with Dr. Sayuj Krishnan.
+                </p>
+                <div className="space-y-3 mb-4">
+                  <div className="border-l-4 border-green-500 pl-4">
+                    <p className="text-gray-700 italic text-sm">
+                      "I was speaking normally the next day and felt safe throughout the awake mapping."
+                    </p>
+                    <p className="text-xs text-gray-500 mt-1">— Patient with Meningioma Surgery</p>
+                  </div>
+                  <div className="border-l-4 border-blue-500 pl-4">
+                    <p className="text-gray-700 italic text-sm">
+                      "I could stand straight the very next morning and walked the corridor with the physio."
+                    </p>
+                    <p className="text-xs text-gray-500 mt-1">— Patient after TLIF Spine Surgery</p>
+                  </div>
+                </div>
+                <span className="text-blue-600 font-semibold group-hover:text-blue-800">
+                  Read All Patient Stories →
+                </span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Brain Tumor Surgery */}
       <section className="py-16">
         <div className="container mx-auto px-4">

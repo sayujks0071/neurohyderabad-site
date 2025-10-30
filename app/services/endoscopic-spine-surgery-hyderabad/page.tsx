@@ -10,6 +10,7 @@ import { SITE_URL } from '@/src/lib/seo';
 import { buildLocalServiceSchema } from '@/src/lib/schema/localService';
 import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
+import TrustProof from '@/app/_components/TrustProof';
 import { getServiceSources } from '../sources';
 
 const SERVICE_SLUG = 'endoscopic-spine-surgery-hyderabad';
@@ -158,13 +159,14 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
                 Book an Endoscopic Consult
               </Link>
               <Link
-                href="/blog/day-care-endoscopic-spine-surgery-eligibility/"
+                href="/about"
                 className="inline-flex items-center justify-center rounded-full border border-blue-200 px-6 py-3 text-blue-700 font-semibold hover:border-blue-400 hover:text-blue-900 transition-colors"
               >
-                Learn About Day-Care MISS
+                About Dr. Sayuj
               </Link>
             </div>
           </div>
+          <TrustProof serviceType="spine" className="mb-6" />
           <div className="bg-blue-50 border border-blue-100 rounded-2xl p-6 shadow-sm">
             <h2 className="text-xl font-semibold text-blue-800 mb-4">Why Choose Malakpet for “Keyhole” Surgery?</h2>
             <ul className="space-y-3 text-gray-700">
