@@ -11,7 +11,8 @@
     "check:schemas": "ts-node scripts/check-schemas.ts",
     "check:lighthouse": "ts-node scripts/check-lighthouse.ts",
     "lhci": "lhci autorun",
-    "seo:lh": "lhci autorun --collect.url=https://www.drsayuj.com --upload.target=temporary-public-storage"
+    "seo:lh": "lhci autorun --collect.url=https://www.drsayuj.com --upload.target=temporary-public-storage",
+    "verify:deployment": "node scripts/verify-deployment.js"
   },
   "dependencies": {
     "@google/genai": "^0.6.0",
