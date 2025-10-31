@@ -201,13 +201,6 @@ export default function RootLayout({
               `
             }} />
             
-            {/* Preload critical resources for fastest LCP */}
-            <link rel="preload" href="https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-            
-            {/* Critical resource hints for performance - only essential ones */}
-            <link rel="preconnect" href="https://fonts.googleapis.com" />
-            <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-            
             {/* DNS prefetch for external domains - only critical ones */}
             <link rel="dns-prefetch" href="//www.googletagmanager.com" />
             

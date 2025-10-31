@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { SITE_URL } from "../../../src/lib/seo";
 import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
@@ -288,12 +289,12 @@ export default function SpineSurgeryRecoveryTimelinePage() {
                 Dr. Sayuj Krishnan provides comprehensive post-operative care to ensure optimal recovery after spine surgery. Our team guides you through every phase of recovery, from immediate post-surgery care to long-term spine health maintenance. With advanced minimally invasive techniques and personalized recovery plans, we help you return to your active lifestyle as quickly and safely as possible.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <a
+                <Link
                   href="/appointments"
                   className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors text-center"
                 >
                   Schedule Recovery Consultation
-                </a>
+                </Link>
                 <a
                   href="tel:+919778280044"
                   className="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors text-center"
