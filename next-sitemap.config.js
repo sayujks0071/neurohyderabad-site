@@ -4,12 +4,13 @@ module.exports = {
   generateRobotsTxt: true,
   robotsTxtOptions: {
     policies: [
-      { 
-        userAgent: "*", 
+      {
+        userAgent: "*",
         allow: "/",
         disallow: [
           "/api/",
-          "/auth/",
+          "/admin",
+          "/admin/",
           "/drafts",
           "/drafts/",
           "/cache-test-new",
@@ -21,12 +22,15 @@ module.exports = {
           "/test-inngest",
           "/test-error",
           "/email-test",
-        ]
-      }
+        ],
+      },
     ],
+    additionalSitemaps: ["https://www.drsayuj.info/sitemap.xml"],
   },
   exclude: [
     "/api/*",
+    "/admin",
+    "/admin/*",
     "/auth/*",
     "/404",
     "/500",
@@ -43,42 +47,39 @@ module.exports = {
   changefreq: "weekly",
   priority: 0.7,
   sitemapBaseFileName: "sitemap",
-  // Add dynamic priority based on page type
   transform: async (config, path) => {
-    // High priority pages
-    if (path === '/' || 
-        path.includes('/spine-surgery') ||
-        path.includes('/brain-surgery') ||
-        path.includes('/about')) {
+    if (
+      path === "/" ||
+      path.includes("/spine-surgery") ||
+      path.includes("/brain-surgery") ||
+      path.includes("/about")
+    ) {
       return {
         loc: path,
-        changefreq: 'daily',
+        changefreq: "daily",
         priority: 1.0,
         lastmod: new Date().toISOString(),
       };
     }
-    
-    // Medium-high priority (service and condition pages)
-    if (path.includes('/services/') || path.includes('/conditions/')) {
+
+    if (path.includes("/services/") || path.includes("/conditions/")) {
       return {
         loc: path,
-        changefreq: 'weekly',
+        changefreq: "weekly",
         priority: 0.8,
         lastmod: new Date().toISOString(),
       };
     }
-    
-    // Medium priority (blog posts and locations)
-    if (path.includes('/blog/') || path.includes('/locations/')) {
+
+    if (path.includes("/blog/") || path.includes("/locations/")) {
       return {
         loc: path,
-        changefreq: 'weekly',
+        changefreq: "weekly",
         priority: 0.7,
         lastmod: new Date().toISOString(),
       };
     }
-    
-    // Default
+
     return {
       loc: path,
       changefreq: config.changefreq,

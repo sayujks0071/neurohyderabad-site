@@ -5,6 +5,7 @@ import LazyVideoSection from "./_components/LazyVideoSection";
 import LazyRecoveryTimeline from "./_components/LazyRecoveryTimeline";
 import LazyReputationPanel from "./_components/LazyReputationPanel";
 import { SITE_URL } from "../src/lib/seo";
+import SeoPhysicianJsonLd from "../components/SeoPhysicianJsonLd";
 // Temporarily commenting out problematic imports
 // import BreadcrumbSchema from "./components/schemas/BreadcrumbSchema";
 // import { HeroCTA, StickyCTA } from "../src/components/Experiments";
@@ -171,6 +172,7 @@ export default function Home() {
 
   return (
     <>
+      <SeoPhysicianJsonLd />
       {/* <ScrollDepthTracker pageSlug="/" /> */}
       <TrustBridgeTracker />
       <TrustSignalViewportTracker />

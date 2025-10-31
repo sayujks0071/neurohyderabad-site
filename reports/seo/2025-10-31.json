@@ -1,0 +1,33 @@
+{
+  "generatedAt": "2025-10-31T06:19:49.128Z",
+  "totals": {
+    "pageCount": 218
+  },
+  "samples": [
+    "app/global-error.tsx",
+    "app/layout.tsx",
+    "app/my-statsig.tsx",
+    "app/not-found.tsx",
+    "app/page.tsx",
+    "app/robots.ts",
+    "app/simple-statsig-test.tsx",
+    "app/sitemap.ts",
+    "app/_lib/clinic.ts",
+    "app/_lib/meta.ts",
+    "app/_lib/schema.ts",
+    "app/_components/AIBookingAgent.tsx",
+    "app/_components/AuthorByline.tsx",
+    "app/_components/ClientAnalytics.tsx",
+    "app/_components/ClientOnlyWrapper.tsx",
+    "app/_components/ConversionFunnelTracker.tsx",
+    "app/_components/DoctorCard.tsx",
+    "app/_components/DoctorCardLazy.tsx",
+    "app/_components/EngagementTracker.tsx",
+    "app/_components/ExitIntentHandler.tsx",
+    "app/_components/FAQPageSchema.tsx",
+    "app/_components/LazyImage.tsx",
+    "app/_components/LazyRecoveryTimeline.tsx",
+    "app/_components/LazyReputationPanel.tsx",
+    "app/_components/LazyVideoSection.tsx"
+  ]
+}

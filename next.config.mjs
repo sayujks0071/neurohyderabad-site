@@ -59,8 +59,14 @@ const nextConfig = {
       // CRITICAL: Apex domain redirect to www (single hop 301)
       {
         source: '/((?!api|_next|images|favicon.ico|robots.txt|sitemap.xml|site.webmanifest).*)',
+        has: [{ type: 'host', value: 'drsayuj.info' }],
+        destination: 'https://www.drsayuj.info/$1',
+        permanent: true,
+      },
+      {
+        source: '/((?!api|_next|images|favicon.ico|robots.txt|sitemap.xml|site.webmanifest).*)',
         has: [{ type: 'host', value: 'drsayuj.com' }],
-        destination: 'https://www.drsayuj.com/$1',
+        destination: 'https://www.drsayuj.info/$1',
         permanent: true,
       },
       // Brain tumor surgery redirects
@@ -119,6 +125,15 @@ const nextConfig = {
   // Security and SEO-friendly defaults with caching
   async headers() {
     return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=600, s-maxage=31536000, stale-while-revalidate=86400',
+          },
+        ],
+      },
       {
         source: "/((?!_next|api|images|favicon.ico|robots.txt|sitemap.xml|site.webmanifest).*)",
         headers: [
