@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import type { ConditionResource } from "@/src/data/conditionsIndex";
 
