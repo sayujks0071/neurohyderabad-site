@@ -56,11 +56,17 @@ const nextConfig = {
   // 301 redirects for legacy URLs to consolidate duplicate content
   async redirects() {
     return [
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'drsayuj.info' }],
+        destination: 'https://www.drsayuj.info/:path*',
+        permanent: true,
+      },
       // CRITICAL: Apex domain redirect to www (single hop 301)
       {
         source: '/((?!api|_next|images|favicon.ico|robots.txt|sitemap.xml|site.webmanifest).*)',
         has: [{ type: 'host', value: 'drsayuj.com' }],
-        destination: 'https://www.drsayuj.com/$1',
+        destination: 'https://www.drsayuj.info/$1',
         permanent: true,
       },
       // Brain tumor surgery redirects
@@ -122,6 +128,7 @@ const nextConfig = {
       {
         source: "/((?!_next|api|images|favicon.ico|robots.txt|sitemap.xml|site.webmanifest).*)",
         headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
           // Security headers
           { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },

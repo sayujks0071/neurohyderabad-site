@@ -4,14 +4,15 @@ module.exports = {
   generateRobotsTxt: true,
   robotsTxtOptions: {
     policies: [
-      { 
-        userAgent: "*", 
+      {
+        userAgent: "*",
         allow: "/",
         disallow: [
           "/api/",
           "/auth/",
           "/drafts",
           "/drafts/",
+          "/admin/",
           "/cache-test-new",
           "/force-cache-clear",
           "/force-redeploy-test",
@@ -21,8 +22,8 @@ module.exports = {
           "/test-inngest",
           "/test-error",
           "/email-test",
-        ]
-      }
+        ],
+      },
     ],
   },
   exclude: [
@@ -32,6 +33,7 @@ module.exports = {
     "/500",
     "/drafts",
     "/drafts/*",
+    "/admin/*",
     "/cache-test-new",
     "/force-cache-clear",
     "/force-redeploy-test",

@@ -52,6 +52,7 @@ docs/internal/
 *.patch
 *.sh
 *.png
+!public/og-default.png
 
 # Ignore specific JSON files (but not essential config files)
 lighthouse-audit*.json

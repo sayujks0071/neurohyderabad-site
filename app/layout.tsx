@@ -11,6 +11,7 @@ import ClientAnalytics from "./_components/ClientAnalytics";
 import StickyCTA from "./_components/StickyCTA";
 import ClientOnlyWrapper from "./_components/ClientOnlyWrapper";
 import { SITE_URL } from "../src/lib/seo";
+import DefaultSeoClient from "./_components/DefaultSeoClient";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -218,6 +219,7 @@ export default function RootLayout({
             <meta name="apple-mobile-web-app-status-bar-style" content="default" />
       </head>
       <body className={`${inter.variable} antialiased`}>
+        <DefaultSeoClient />
         <ClientOnlyWrapper>
           <ClientAnalytics />
           <EngagementTracker trackTime={true} trackMilestones={true} />
