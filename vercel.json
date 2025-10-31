@@ -13,6 +13,12 @@
       "destination": "https://www.drsayuj.com/:path*",
       "permanent": true
     },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "drsayuj.info" }],
+      "destination": "https://www.drsayuj.info/:path*",
+      "permanent": true
+    },
     { "source": "/brain-tumor-surgery-hyderabad", "destination": "/services/brain-tumor-surgery-hyderabad", "permanent": true },
     { "source": "/endoscopic-spine-surgery-hyderabad", "destination": "/services/endoscopic-spine-surgery-hyderabad", "permanent": true },
     { "source": "/slip-disc-treatment-hyderabad", "destination": "/conditions/slip-disc-treatment-hyderabad", "permanent": true }
