@@ -21,6 +21,7 @@ import TrustSignalViewportTracker from "./_components/TrustSignalViewportTracker
 import UserJourneyTracker from "./_components/UserJourneyTracker";
 import TrustBridgeLink from "./_components/TrustBridgeLink";
 import { mediaPublications } from "../src/content/media";
+import SeoPhysicianJsonLd from "@/components/SeoPhysicianJsonLd";
 
 const HOME_CANONICAL = SITE_URL.endsWith("/") ? SITE_URL : `${SITE_URL}/`;
 
@@ -970,6 +971,9 @@ export default function Home() {
       {/* {process.env.NODE_ENV === 'development' && (
         <SEOAuditDashboard pageType="home" pageSlug="/" />
       )} */}
+      
+      {/* Simplified Physician JSON-LD for homepage SEO */}
+      <SeoPhysicianJsonLd />
     </div>
     </>
   );
