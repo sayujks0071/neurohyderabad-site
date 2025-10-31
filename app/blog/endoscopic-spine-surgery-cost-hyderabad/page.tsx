@@ -289,12 +289,12 @@ export default function EndoscopicSpineSurgeryCostPage() {
               <p className="text-blue-800">
                 <strong>Ready to discuss your case?</strong> Book a consultation to get a personalized cost estimate and treatment plan.
               </p>
-              <a 
-                href="/appointments/" 
+              <Link 
+                href="/appointments" 
                 className="inline-block mt-3 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
               >
                 Schedule Consultation
-              </a>
+              </Link>
             </div>
           </section>
 

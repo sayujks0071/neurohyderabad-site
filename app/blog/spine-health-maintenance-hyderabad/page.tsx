@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { SITE_URL } from "../../../src/lib/seo";
 import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
@@ -278,12 +279,12 @@ export default function SpineHealthMaintenancePage() {
                 Maintaining spine health is an investment in your future well-being. Dr. Sayuj Krishnan provides comprehensive spine health guidance and treatment in Hyderabad. Whether you're looking to prevent spine problems or address existing issues, we're here to help you achieve optimal spinal health.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <a
+                <Link
                   href="/appointments"
                   className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors text-center"
                 >
                   Schedule Spine Health Checkup
-                </a>
+                </Link>
                 <a
                   href="tel:+919778280044"
                   className="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors text-center"

@@ -1,6 +1,7 @@
 import { SITE_URL } from "../../src/lib/seo";
 import type { Metadata } from "next";
 import OpenAIAgentsBooking from "../_components/OpenAIAgentsBooking";
+import Link from "next/link";
 import AppointmentFormTracker from "../../src/components/AppointmentFormTracker";
 import PhoneClickTracker from "../../src/components/PhoneClickTracker";
 
@@ -91,12 +92,12 @@ export default function AIChatPage() {
             >
               Emergency Hotline: +91-9778280044
             </a>
-            <a 
+            <Link 
               href="/emergency-rehabilitation"
               className="bg-white text-red-600 border border-red-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-red-50 transition-colors"
             >
               Emergency Information
-            </a>
+            </Link>
           </div>
         </div>
       </div>

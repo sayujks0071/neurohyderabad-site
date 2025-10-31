@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Medical Disclaimer | Dr Sayuj Krishnan",
@@ -93,7 +94,7 @@ export default function MedicalDisclaimerPage() {
                 <ul className="space-y-2">
                   <li><strong>Phone:</strong> <a href="tel:+919778280044" className="text-blue-600 hover:underline">+91 9778280044</a></li>
                   <li><strong>Email:</strong> <a href="mailto:neurospinehyd@drsayuj.com" className="text-blue-600 hover:underline">neurospinehyd@drsayuj.com</a></li>
-                  <li><strong>Appointments:</strong> <a href="/appointments" className="text-blue-600 hover:underline">Book Online</a></li>
+                  <li><strong>Appointments:</strong> <Link href="/appointments" className="text-blue-600 hover:underline">Book Online</Link></li>
                 </ul>
               </div>
             </section>
