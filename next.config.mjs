@@ -59,8 +59,21 @@ const nextConfig = {
       // CRITICAL: Apex domain redirect to www (single hop 301)
       {
         source: '/((?!api|_next|images|favicon.ico|robots.txt|sitemap.xml|site.webmanifest).*)',
+        has: [{ type: 'host', value: 'drsayuj.info' }],
+        destination: 'https://www.drsayuj.info/$1',
+        permanent: true,
+      },
+      // Legacy .com domain redirect to .info
+      {
+        source: '/:path*',
         has: [{ type: 'host', value: 'drsayuj.com' }],
-        destination: 'https://www.drsayuj.com/$1',
+        destination: 'https://www.drsayuj.info/:path*',
+        permanent: true,
+      },
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.drsayuj.com' }],
+        destination: 'https://www.drsayuj.info/:path*',
         permanent: true,
       },
       // Brain tumor surgery redirects
