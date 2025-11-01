@@ -1,3 +1,5 @@
+import React from 'react';
+
 export default function SeoDoctorJsonLd() {
   const data = {
     '@context': 'https://schema.org',
