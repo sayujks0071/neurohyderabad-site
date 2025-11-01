@@ -163,7 +163,7 @@ export default function Footer() {
                 MBBS, DNB Neurosurgery (Direct 6 years) | Fellowship in Minimally Invasive and Advanced Spine Surgery
               </p>
             </div>
-            <nav className="flex space-x-6 text-sm">
+            <nav className="flex flex-wrap justify-center gap-4 md:gap-6 text-sm">
               <Link href="/privacy" className="text-gray-400 hover:text-gray-200 transition-colors">
                 Privacy Policy
               </Link>
@@ -175,6 +175,12 @@ export default function Footer() {
               </Link>
               <Link href="/disclaimer" className="text-gray-400 hover:text-gray-200 transition-colors">
                 Medical Disclaimer
+              </Link>
+              <Link href="/content-integrity" className="text-gray-400 hover:text-gray-200 transition-colors">
+                Content Integrity
+              </Link>
+              <Link href="/editorial-policy" className="text-gray-400 hover:text-gray-200 transition-colors">
+                Editorial Policy
               </Link>
             </nav>
           </div>

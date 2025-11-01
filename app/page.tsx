@@ -386,6 +386,10 @@ export default function Home() {
                     <span className="text-blue-600 mr-2">✓</span>
                     <span>Affiliated with Yashoda Hospital, Malakpet</span>
                   </li>
+                  <li className="flex items-start">
+                    <span className="text-blue-600 mr-2">✓</span>
+                    <span>Member: Neurological Society of India (NSI), Congress of Neurological Surgeons (CNS)</span>
+                  </li>
                 </ul>
                 <span className="text-blue-600 font-semibold group-hover:text-blue-800">
                   Learn More About Dr. Sayuj →
