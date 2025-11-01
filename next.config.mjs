@@ -63,6 +63,13 @@ const nextConfig = {
         destination: 'https://www.drsayuj.com/$1',
         permanent: true,
       },
+      // CRITICAL: Apex domain redirect for drsayuj.info to www (single hop 301)
+      {
+        source: '/((?!api|_next|images|favicon.ico|robots.txt|sitemap.xml|site.webmanifest).*)',
+        has: [{ type: 'host', value: 'drsayuj.info' }],
+        destination: 'https://www.drsayuj.info/$1',
+        permanent: true,
+      },
       // Brain tumor surgery redirects
       {
         source: '/brain-tumor-surgery-hyderabad',
