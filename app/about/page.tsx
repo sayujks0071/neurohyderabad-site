@@ -134,7 +134,7 @@ export default function AboutPage() {
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <h2 className="text-3xl font-bold text-center mb-12">Credentials & Training</h2>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div className="bg-white p-8 rounded-lg shadow-lg text-center">
                   <div className="text-4xl mb-4">🎓</div>
                   <h3 className="text-xl font-semibold mb-4 text-blue-700">Medical Education</h3>
@@ -163,6 +163,15 @@ export default function AboutPage() {
                     <li><strong>Awake Brain Surgery</strong></li>
                     <li><strong>ROSA DBS</strong> - Deep Brain Stimulation</li>
                     <li><strong>Minimally Invasive Techniques</strong></li>
+                  </ul>
+                </div>
+                <div className="bg-white p-8 rounded-lg shadow-lg text-center">
+                  <div className="text-4xl mb-4">🏅</div>
+                  <h3 className="text-xl font-semibold mb-4 text-blue-700">Professional Memberships</h3>
+                  <ul className="text-gray-700 space-y-2 text-sm">
+                    <li><strong>NSI</strong> - Neurological Society of India</li>
+                    <li><strong>CNS</strong> - Congress of Neurological Surgeons</li>
+                    <li><strong>WFNS</strong> - World Federation of Neurosurgical Societies</li>
                   </ul>
                 </div>
               </div>

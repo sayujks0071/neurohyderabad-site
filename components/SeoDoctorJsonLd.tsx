@@ -113,6 +113,37 @@ export default function SeoDoctorJsonLd() {
         name: 'Observership in Full Endoscopic Spine Surgery, Germany',
       },
     ],
+    memberOf: [
+      {
+        '@type': 'Organization',
+        name: 'Neurological Society of India (NSI)',
+        url: 'https://www.neurologyindia.com',
+      },
+      {
+        '@type': 'Organization',
+        name: 'Congress of Neurological Surgeons (CNS)',
+      },
+      {
+        '@type': 'Organization',
+        name: 'World Federation of Neurosurgical Societies (WFNS)',
+      },
+    ],
+    award: [
+      'German Fellowship in Full Endoscopic Spine Surgery',
+      'DNB Neurosurgery - Direct 6 Year Programme',
+    ],
+    knowsAbout: [
+      'Endoscopic Spine Surgery',
+      'Minimally Invasive Neurosurgery',
+      'Brain Tumor Surgery',
+      'Awake Craniotomy',
+      'Trigeminal Neuralgia Treatment',
+      'Epilepsy Surgery',
+      'Deep Brain Stimulation',
+      'Spinal Stenosis Treatment',
+      'Herniated Disc Treatment',
+      'Neurotrauma Care',
+    ],
   };
 
   const clinicData = {
