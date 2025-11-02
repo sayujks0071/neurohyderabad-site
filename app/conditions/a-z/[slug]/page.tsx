@@ -39,6 +39,10 @@ export async function generateMetadata({ params }: PageParams): Promise<Metadata
   return {
     title: `${condition.name} Treatment | Dr. Sayuj Krishnan`,
     description: `${condition.summary} Expert treatment by Dr. Sayuj Krishnan in Hyderabad. Learn about symptoms, treatment options, and recovery.`,
+    robots: {
+      index: false,
+      follow: true,
+    },
     alternates: {
       canonical: `${SITE_URL}${condition.primaryPath}`,
     },

@@ -140,11 +140,8 @@ function getConditionRoutes(): RouteConfig[] {
       });
     }
 
-    conditionPaths.set(`/conditions/a-z/${condition.slug}`, {
-      path: `/conditions/a-z/${condition.slug}`,
-      priority: 0.65,
-      changeFrequency: "monthly",
-    });
+    // Note: /conditions/a-z/ stub pages are excluded from sitemap as they have noindex
+    // and canonical tags pointing to primary paths
   }
 
   return Array.from(conditionPaths.values());

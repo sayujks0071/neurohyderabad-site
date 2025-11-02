@@ -1,4 +1,13 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Test Routes | Internal Testing',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default function TestRoutesPage() {
   return (

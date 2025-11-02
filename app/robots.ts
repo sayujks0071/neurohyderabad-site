@@ -13,10 +13,15 @@ const DISALLOW_PATHS = [
   '/force-redeploy-test',
   '/simple-statsig-test',
   '/statsig-test',
+  '/statsig-test/',
   '/test-compression',
   '/test-inngest',
+  '/test-routes',
+  '/test-routes/',
   '/test-error',
-  '/email-test'
+  '/email-test',
+  '/utm-links',
+  '/utm-links/'
 ];
 
 export default function robots(): MetadataRoute.Robots {
