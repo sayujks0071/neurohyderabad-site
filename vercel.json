@@ -78,5 +78,11 @@
         }
       ]
     }
+  ],
+  "crons": [
+    {
+      "path": "/api/cron/reindex-rag",
+      "schedule": "0 1 * * *"
+    }
   ]
 }
