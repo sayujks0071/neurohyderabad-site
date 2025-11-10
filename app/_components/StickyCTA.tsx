@@ -61,7 +61,11 @@ export default function StickyCTA({ className = '' }: StickyCTAProps) {
   }
 
   return (
-    <div className={`fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-50 p-4 ${className}`}>
+    <div 
+      className={`fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-50 p-4 ${className}`}
+      role="region"
+      aria-label="Quick contact options"
+    >
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between gap-4">
           <div className="flex-1">
@@ -72,11 +76,11 @@ export default function StickyCTA({ className = '' }: StickyCTAProps) {
               Call or WhatsApp the care team for urgent appointments.
             </p>
           </div>
-          <div className="ml-4 flex flex-wrap gap-3">
+          <div className="ml-4 flex flex-wrap gap-3" role="group" aria-label="Contact actions">
             <Link 
               href="tel:+919778280044"
-              className="bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-colors duration-200 px-4 py-2 text-sm flex items-center justify-center"
-              aria-label="Call OPD for appointment"
+              className="bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-colors duration-200 px-4 py-2 text-sm flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+              aria-label="Call OPD for appointment at +91 9778280044"
             >
               <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -88,7 +92,7 @@ export default function StickyCTA({ className = '' }: StickyCTAProps) {
               href="https://wa.me/919778280044"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition-colors duration-200 px-4 py-2 text-sm flex items-center justify-center"
+              className="bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition-colors duration-200 px-4 py-2 text-sm flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
               aria-label="WhatsApp for appointment"
             >
               <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
@@ -99,7 +103,7 @@ export default function StickyCTA({ className = '' }: StickyCTAProps) {
             
             <Link 
               href="/appointments"
-              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors duration-200 px-4 py-2 text-sm flex items-center justify-center"
+              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors duration-200 px-4 py-2 text-sm flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
               aria-label="Book teleconsultation appointment"
             >
               <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
