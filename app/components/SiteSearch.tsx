@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { SearchItem } from "@/src/data/searchIndex";
 
@@ -17,7 +17,12 @@ export default function SiteSearch() {
   const searchModulePromiseRef =
     useRef<Promise<typeof import("@/src/data/searchIndex")> | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const resultsRef = useRef<HTMLDivElement>(null);
+  const baseId = useId();
+  const dialogId = `${baseId}-dialog`;
+  const headingId = `${baseId}-heading`;
+  const instructionsId = `${baseId}-instructions`;
+  const listboxId = `${baseId}-listbox`;
+  const statusId = `${baseId}-status`;
 
   const ensureSearchFn = useCallback(async () => {
     if (searchFn) {
@@ -63,16 +68,15 @@ export default function SiteSearch() {
   }, [isOpen]);
 
   const scrollActiveResultIntoView = useCallback(() => {
-    const container = resultsRef.current;
-    if (!container) return;
-
-    const active = container.querySelector<HTMLDivElement>(
-      `[data-index="${activeIndex}"]`,
-    );
+    if (!results[activeIndex]) {
+      return;
+    }
+    const optionId = `${listboxId}-option-${activeIndex}`;
+    const active = document.getElementById(optionId);
     if (active) {
       active.scrollIntoView({ block: "nearest" });
     }
-  }, [activeIndex]);
+  }, [activeIndex, listboxId, results]);
 
   useEffect(() => {
     if (!isOpen) {
@@ -165,6 +169,23 @@ export default function SiteSearch() {
     void ensureSearchFn();
   }, [ensureSearchFn]);
 
+  const activeOptionId =
+    results.length > 0 && results[activeIndex]
+      ? `${listboxId}-option-${activeIndex}`
+      : undefined;
+  const isListboxOpen = results.length > 0;
+  const describedByIds =
+    isLoading || query
+      ? `${instructionsId} ${statusId}`
+      : instructionsId;
+  const liveStatusMessage = isLoading
+    ? "Loading search suggestions"
+    : results.length > 0
+    ? `${results.length} result${results.length === 1 ? "" : "s"} available`
+    : query
+    ? `No results found for ${query}`
+    : "Start typing to search the site";
+
   return (
     <>
       <button
@@ -174,6 +195,9 @@ export default function SiteSearch() {
         onFocus={prefetchSearch}
         className="flex items-center gap-2 rounded-full border border-gray-200 px-3 py-1.5 text-sm text-gray-600 transition hover:border-blue-300 hover:text-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
         aria-label="Search site (Cmd/Ctrl + K)"
+        aria-haspopup="dialog"
+        aria-expanded={isOpen}
+        aria-controls={dialogId}
       >
         <SearchIcon />
         <span className="hidden sm:inline">Search</span>
@@ -182,96 +206,125 @@ export default function SiteSearch() {
         </span>
       </button>
 
-      {isOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-start justify-center bg-black/50 px-4 py-16 backdrop-blur-sm sm:py-24"
-          role="dialog"
-          aria-modal="true"
-        >
-          <div className="w-full max-w-2xl rounded-2xl bg-white shadow-2xl ring-1 ring-black/10">
-            <div className="flex items-center gap-3 border-b border-gray-200 px-5 py-4">
-              <SearchIcon className="h-5 w-5 text-gray-400" />
-              <input
-                ref={inputRef}
-                type="search"
-                placeholder="Search conditions, treatments, or resources"
-                className="w-full border-none text-base text-gray-900 placeholder:text-gray-400 focus:outline-none"
-                value={query}
-                onChange={(event) => setQuery(event.target.value)}
-                autoCapitalize="none"
-                spellCheck={false}
-              />
-              <button
-                type="button"
-                onClick={closeSearch}
-                className="rounded-full border border-gray-200 px-2 py-1 text-xs text-gray-500 transition hover:border-gray-300 hover:text-gray-700"
+        {isOpen && (
+          <div
+            id={dialogId}
+            className="fixed inset-0 z-50 flex items-start justify-center bg-black/50 px-4 py-16 backdrop-blur-sm sm:py-24"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={headingId}
+            aria-describedby={describedByIds}
+          >
+            <div className="w-full max-w-2xl rounded-2xl bg-white shadow-2xl ring-1 ring-black/10">
+              <h2 id={headingId} className="sr-only">
+                Search the site
+              </h2>
+              <p id={instructionsId} className="sr-only">
+                Type to search and use the up and down arrow keys to review results, then press Enter to open a page. Press Escape to close search.
+              </p>
+              <div className="flex items-center gap-3 border-b border-gray-200 px-5 py-4">
+                <SearchIcon className="h-5 w-5 text-gray-400" />
+                <input
+                  ref={inputRef}
+                  type="search"
+                  placeholder="Search conditions, treatments, or resources"
+                  className="w-full border-none text-base text-gray-900 placeholder:text-gray-400 focus:outline-none"
+                  value={query}
+                  onChange={(event) => setQuery(event.target.value)}
+                  autoCapitalize="none"
+                  spellCheck={false}
+                  role="combobox"
+                  aria-autocomplete="list"
+                  aria-controls={listboxId}
+                  aria-expanded={isListboxOpen}
+                  aria-activedescendant={activeOptionId}
+                  aria-describedby={describedByIds}
+                />
+                <button
+                  type="button"
+                  onClick={closeSearch}
+                  className="rounded-full border border-gray-200 px-2 py-1 text-xs text-gray-500 transition hover:border-gray-300 hover:text-gray-700"
+                >
+                  Esc
+                </button>
+              </div>
+
+              <div
+                className="max-h-80 overflow-y-auto px-2 py-3 sm:px-3"
+                aria-busy={isLoading}
               >
-                Esc
-              </button>
-            </div>
+                {isLoading ? (
+                  <p className="px-4 py-8 text-center text-sm text-gray-500">
+                    Loading search suggestions…
+                  </p>
+                ) : isListboxOpen ? (
+                  <ul
+                    id={listboxId}
+                    role="listbox"
+                    aria-label="Search suggestions"
+                    className="space-y-2"
+                  >
+                    {results.map((item, index) => {
+                      const isActive = index === activeIndex;
+                      const optionId = `${listboxId}-option-${index}`;
+                      return (
+                        <li
+                          key={`${item.href}-${index}`}
+                          id={optionId}
+                          role="option"
+                          data-index={index}
+                          aria-selected={isActive}
+                          tabIndex={-1}
+                          className={`group rounded-xl px-3 py-3 transition ${
+                            isActive
+                              ? "bg-blue-50 ring-1 ring-inset ring-blue-200"
+                              : "hover:bg-gray-50"
+                          }`}
+                          onMouseDown={(event) => {
+                            event.preventDefault();
+                            handleSelect(item);
+                          }}
+                          onMouseEnter={() => setActiveIndex(index)}
+                        >
+                          <span className="text-sm font-semibold text-gray-900">
+                            {item.title}
+                          </span>
+                          <span className="text-xs uppercase tracking-wide text-blue-600">
+                            {item.category}
+                          </span>
+                          <span className="text-sm text-gray-600">
+                            {item.description}
+                          </span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                ) : (
+                  <p className="px-4 py-8 text-center text-sm text-gray-500">
+                    No results found. Try a broader term like{" "}
+                    <strong>spine</strong> or <strong>epilepsy</strong>.
+                  </p>
+                )}
+              </div>
+              <div id={statusId} role="status" aria-live="polite" className="sr-only">
+                {liveStatusMessage}
+              </div>
 
-            <div
-              ref={resultsRef}
-              className="max-h-80 overflow-y-auto px-2 py-3 sm:px-3"
-            >
-              {isLoading ? (
-                <p className="px-4 py-8 text-center text-sm text-gray-500">
-                  Loading search suggestions…
-                </p>
-              ) : results.length === 0 ? (
-                <p className="px-4 py-8 text-center text-sm text-gray-500">
-                  No results found. Try a broader term like{" "}
-                  <strong>spine</strong> or <strong>epilepsy</strong>.
-                </p>
-              ) : (
-                results.map((item, index) => {
-                  const isActive = index === activeIndex;
-                  return (
-                    <div
-                      key={`${item.href}-${index}`}
-                      data-index={index}
-                      className={`group rounded-xl px-3 py-3 transition ${
-                        isActive
-                          ? "bg-blue-50 ring-1 ring-inset ring-blue-200"
-                          : "hover:bg-gray-50"
-                      }`}
-                    >
-                      <button
-                        type="button"
-                        onClick={() => handleSelect(item)}
-                        className="flex w-full flex-col gap-1 text-left"
-                      >
-                        <span className="text-sm font-semibold text-gray-900">
-                          {item.title}
-                        </span>
-                        <span className="text-xs uppercase tracking-wide text-blue-600">
-                          {item.category}
-                        </span>
-                        <span className="text-sm text-gray-600">
-                          {item.description}
-                        </span>
-                      </button>
-                    </div>
-                  );
-                })
-              )}
-            </div>
-
-            <div className="flex items-center justify-between border-t border-gray-100 px-4 py-3 text-xs text-gray-500">
-              <span>Press Enter to open the highlighted result</span>
-              <span className="hidden sm:flex items-center gap-2">
-                <kbd className="rounded border border-gray-300 bg-gray-100 px-1.5 py-0.5">
-                  ↑
-                </kbd>
-                <kbd className="rounded border border-gray-300 bg-gray-100 px-1.5 py-0.5">
-                  ↓
-                </kbd>
-                navigate
-              </span>
+              <div className="flex items-center justify-between border-t border-gray-100 px-4 py-3 text-xs text-gray-500">
+                <span>Press Enter to open the highlighted result</span>
+                <span className="hidden sm:flex items-center gap-2">
+                  <kbd className="rounded border border-gray-300 bg-gray-100 px-1.5 py-0.5">
+                    ↑
+                  </kbd>
+                  <kbd className="rounded border border-gray-300 bg-gray-100 px-1.5 py-0.5">
+                    ↓
+                  </kbd>
+                  navigate
+                </span>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
     </>
   );
 }

@@ -7,7 +7,9 @@ export default function Footer() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Contact Information */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Clinic Details</h3>
+            <h3 className="text-lg font-semibold mb-4" id="footer-clinic-heading">
+              Clinic Details
+            </h3>
             <div className="space-y-3 text-gray-200">
               <p className="font-semibold text-gray-100">
                 Dr. Sayuj Krishnan, Neurosurgeon
@@ -62,8 +64,10 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Services</h3>
-            <nav className="space-y-2 text-sm">
+            <h3 className="text-lg font-semibold mb-4" id="footer-services-heading">
+              Services
+            </h3>
+            <nav className="space-y-2 text-sm" aria-labelledby="footer-services-heading">
               <Link href="/specializations" className="block text-gray-300 hover:text-gray-100 transition-colors">
                 Specializations Overview
               </Link>
@@ -90,8 +94,10 @@ export default function Footer() {
 
           {/* Conditions */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Conditions</h3>
-            <nav className="space-y-2 text-sm">
+            <h3 className="text-lg font-semibold mb-4" id="footer-conditions-heading">
+              Conditions
+            </h3>
+            <nav className="space-y-2 text-sm" aria-labelledby="footer-conditions-heading">
               <Link href="/conditions/" className="block text-gray-300 hover:text-gray-100 transition-colors">
                 All Conditions
               </Link>
@@ -115,8 +121,10 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
-            <nav className="space-y-2 text-sm">
+            <h3 className="text-lg font-semibold mb-4" id="footer-quick-links-heading">
+              Quick Links
+            </h3>
+            <nav className="space-y-2 text-sm" aria-labelledby="footer-quick-links-heading">
               <Link href="/about" className="block text-gray-300 hover:text-gray-100 transition-colors">
                 About Dr. Sayuj
               </Link>
@@ -163,7 +171,10 @@ export default function Footer() {
                 MBBS, DNB Neurosurgery (Direct 6 years) | Fellowship in Minimally Invasive and Advanced Spine Surgery
               </p>
             </div>
-            <nav className="flex flex-wrap justify-center gap-4 md:gap-6 text-sm">
+            <nav
+              className="flex flex-wrap justify-center gap-4 md:gap-6 text-sm"
+              aria-label="Regulatory and policy links"
+            >
               <Link href="/privacy" className="text-gray-400 hover:text-gray-200 transition-colors">
                 Privacy Policy
               </Link>
