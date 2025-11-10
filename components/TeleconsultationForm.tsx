@@ -103,7 +103,12 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 rounded-2xl border border-blue-100 bg-white p-6 shadow-sm">
+    <form 
+      onSubmit={handleSubmit} 
+      className="space-y-6 rounded-2xl border border-blue-100 bg-white p-6 shadow-sm"
+      aria-label="Appointment request form"
+      noValidate
+    >
       <fieldset className="space-y-4" aria-describedby="teleconsultation-description">
         <legend className="text-lg font-semibold text-blue-800">Tell us about your concern</legend>
         <p id="teleconsultation-description" className="text-sm text-blue-600">
@@ -122,8 +127,15 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
             className={`w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.name ? 'border-red-500' : 'border-gray-300'}`}
             autoComplete="name"
             required
+            aria-required="true"
+            aria-invalid={errors.name ? 'true' : 'false'}
+            aria-describedby={errors.name ? 'tele-name-error' : undefined}
           />
-          {errors.name && <p className="mt-1 text-xs text-red-600">{errors.name}</p>}
+          {errors.name && (
+            <p id="tele-name-error" className="mt-1 text-xs text-red-600" role="alert">
+              {errors.name}
+            </p>
+          )}
         </div>
 
         <div className="grid gap-4 md:grid-cols-2">
@@ -139,8 +151,15 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
               className={`w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.phone ? 'border-red-500' : 'border-gray-300'}`}
               autoComplete="tel"
               required
+              aria-required="true"
+              aria-invalid={errors.phone ? 'true' : 'false'}
+              aria-describedby={errors.phone ? 'tele-phone-error' : undefined}
             />
-            {errors.phone && <p className="mt-1 text-xs text-red-600">{errors.phone}</p>}
+            {errors.phone && (
+              <p id="tele-phone-error" className="mt-1 text-xs text-red-600" role="alert">
+                {errors.phone}
+              </p>
+            )}
           </div>
           <div>
             <label htmlFor="tele-email" className="mb-2 block text-sm font-medium text-gray-700">
@@ -154,8 +173,14 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
               onChange={handleChange('email')}
               className={`w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
               autoComplete="email"
+              aria-invalid={errors.email ? 'true' : 'false'}
+              aria-describedby={errors.email ? 'tele-email-error' : undefined}
             />
-            {errors.email && <p className="mt-1 text-xs text-red-600">{errors.email}</p>}
+            {errors.email && (
+              <p id="tele-email-error" className="mt-1 text-xs text-red-600" role="alert">
+                {errors.email}
+              </p>
+            )}
           </div>
         </div>
 
@@ -171,8 +196,15 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
             className={`w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.condition ? 'border-red-500' : 'border-gray-300'}`}
             placeholder="Example: Cervical disc herniation with arm pain"
             required
+            aria-required="true"
+            aria-invalid={errors.condition ? 'true' : 'false'}
+            aria-describedby={errors.condition ? 'tele-condition-error' : undefined}
           />
-          {errors.condition && <p className="mt-1 text-xs text-red-600">{errors.condition}</p>}
+          {errors.condition && (
+            <p id="tele-condition-error" className="mt-1 text-xs text-red-600" role="alert">
+              {errors.condition}
+            </p>
+          )}
         </div>
 
         <div>
@@ -188,16 +220,24 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
             className={`w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.message ? 'border-red-500' : 'border-gray-300'}`}
             placeholder="Share MRI findings, previous surgeries, or questions you want to cover."
             required
+            aria-required="true"
+            aria-invalid={errors.message ? 'true' : 'false'}
+            aria-describedby={errors.message ? 'tele-message-error' : undefined}
           />
-          {errors.message && <p className="mt-1 text-xs text-red-600">{errors.message}</p>}
+          {errors.message && (
+            <p id="tele-message-error" className="mt-1 text-xs text-red-600" role="alert">
+              {errors.message}
+            </p>
+          )}
         </div>
       </fieldset>
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <button
           type="submit"
-          className="inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          className="inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
           disabled={status === 'submitting'}
+          aria-label={status === 'submitting' ? 'Submitting appointment request' : 'Submit appointment request'}
         >
           {status === 'submitting' ? 'Preparing email…' : 'Send appointment request'}
         </button>
@@ -206,16 +246,20 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
         </p>
       </div>
 
-      {status === 'success' && (
-        <p className="text-sm font-medium text-green-600" role="status">
-          Email draft opened in your mail app. Please review and send to confirm the request.
-        </p>
-      )}
-      {status === 'error' && (
-        <p className="text-sm font-medium text-red-600" role="alert">
-          Something went wrong while preparing the email. Please call us directly at +91 9778280044.
-        </p>
-      )}
+      <div role="status" aria-live="polite" aria-atomic="true">
+        {status === 'success' && (
+          <p className="text-sm font-medium text-green-600">
+            Email draft opened in your mail app. Please review and send to confirm the request.
+          </p>
+        )}
+      </div>
+      <div role="alert" aria-live="assertive" aria-atomic="true">
+        {status === 'error' && (
+          <p className="text-sm font-medium text-red-600">
+            Something went wrong while preparing the email. Please call us directly at +91 9778280044.
+          </p>
+        )}
+      </div>
     </form>
   );
 }

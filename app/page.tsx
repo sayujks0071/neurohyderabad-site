@@ -177,7 +177,7 @@ export default function Home() {
       <UserJourneyTracker />
       <div className="min-h-screen bg-white">
       {/* Hero Section - LCP Optimized */}
-      <header className="home-hero text-white py-20" style={heroStyles}>
+      <section className="home-hero text-white py-20" style={heroStyles} aria-label="Hero section">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -202,6 +202,7 @@ export default function Home() {
                   </Link>
                   <a 
                     href="tel:+919778280044" 
+                    aria-label="Call clinic at +91 97782 80044"
                     className="bg-green-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-green-700 transition-colors inline-block ml-4"
                   >
                     Call Now: +91 97782 80044
@@ -214,13 +215,13 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </header>
+      </section>
 
       {/* Social Proof Section */}
       {/* <SocialProofBand /> */}
 
       {/* Trust Signals */}
-      <section className="py-8 bg-white">
+      <section className="py-8 bg-white" aria-label="Trust signals">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <TrustSignals />
@@ -229,7 +230,7 @@ export default function Home() {
       </section>
 
       {/* Media Publications Section */}
-      <section className="py-16 bg-blue-50">
+      <section className="py-16 bg-blue-50" aria-label="Media publications">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-12">
@@ -264,6 +265,7 @@ export default function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm"
+                    aria-label={`Read article: ${publication.title}`}
                   >
                     Read Article →
                   </a>
@@ -274,6 +276,7 @@ export default function Home() {
               <Link 
                 href="/media" 
                 className="inline-flex items-center bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+                aria-label="View all media publications"
               >
                 View All Publications
               </Link>
@@ -286,10 +289,10 @@ export default function Home() {
       <LazyVideoSection />
 
       {/* Minimally Invasive Spine Surgery (MISS) */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-gray-50" aria-labelledby="miss-heading">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-12">
+            <h2 id="miss-heading" className="text-3xl font-bold text-center mb-12">
               <Link href="/services/minimally-invasive-spine-surgery" className="hover:text-blue-600">Endoscopic Spine Surgery</Link> & Minimally Invasive Procedures (MISS)
             </h2>
             <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -297,7 +300,7 @@ export default function Home() {
                   <div className="mb-6">
                     <div className="w-full h-64 bg-gradient-to-r from-blue-100 to-blue-200 rounded-lg shadow-lg flex items-center justify-center">
                       <div className="text-center">
-                        <div className="text-4xl mb-2">🏥</div>
+                        <div className="text-4xl mb-2" aria-hidden="true">🏥</div>
                         <h3 className="text-xl font-semibold text-blue-800">Minimally Invasive Spine Surgery</h3>
                         <p className="text-blue-600">Endoscopic Discectomy Technique</p>
                       </div>
@@ -329,17 +332,18 @@ export default function Home() {
                   <Link 
                     href="/services/minimally-invasive-spine-surgery"
                     className="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition-colors"
+                    aria-label="Learn more about minimally invasive spine surgery"
                   >
                     Learn More About MISS →
                   </Link>
-                  <div className="mt-4">
+                  <nav className="mt-4" aria-label="Related conditions and articles">
                     <Link href="/conditions/slip-disc-treatment-hyderabad/" className="text-blue-600 hover:underline mr-4">Slip Disc Treatment</Link>
                     <Link href="/conditions/spinal-stenosis-treatment-hyderabad/" className="text-blue-600 hover:underline">Spinal Stenosis</Link>
                     <div className="mt-3 text-sm">
                       <Link href="/blog/does-endoscopic-spine-surgery-work-for-sciatica-hyderabad/" className="text-blue-700 hover:underline mr-4">Does Endoscopic Spine Surgery Work for Sciatica?</Link>
                       <Link href="/blog/when-to-worry-about-back-pain-neurosurgeon-hyderabad/" className="text-blue-700 hover:underline">When to Worry About Back Pain</Link>
                     </div>
-                  </div>
+                  </nav>
                 </div>
               </div>
               <div className="bg-white p-8 rounded-lg shadow-lg">
@@ -431,16 +435,16 @@ export default function Home() {
       </section>
 
       {/* Brain Tumor Surgery */}
-      <section className="py-16">
+      <section className="py-16" aria-labelledby="brain-tumor-heading">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-12">Brain Tumor Surgery</h2>
+            <h2 id="brain-tumor-heading" className="text-3xl font-bold text-center mb-12">Brain Tumor Surgery</h2>
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div className="bg-white p-8 rounded-lg shadow-lg">
                   <div className="mb-6">
                     <div className="w-full h-64 bg-gradient-to-r from-green-100 to-green-200 rounded-lg shadow-lg flex items-center justify-center">
                       <div className="text-center">
-                        <div className="text-4xl mb-2">🧠</div>
+                        <div className="text-4xl mb-2" aria-hidden="true">🧠</div>
                         <h3 className="text-xl font-semibold text-green-800">Brain Tumor Surgery</h3>
                         <p className="text-green-700">Microsurgical Techniques</p>
                       </div>
@@ -480,13 +484,14 @@ export default function Home() {
                   <Link 
                     href="/services/brain-tumor-surgery-hyderabad"
                     className="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition-colors"
+                    aria-label="Learn more about brain tumor surgery"
                   >
                     Learn More About Brain Tumor Surgery →
                   </Link>
-                  <div className="mt-4">
+                  <nav className="mt-4" aria-label="Related services">
                     <Link href="/services/epilepsy-surgery-hyderabad/" className="text-blue-600 hover:underline mr-4">Epilepsy Surgery</Link>
                     <Link href="/conditions/trigeminal-neuralgia-treatment-hyderabad/" className="text-blue-600 hover:underline">Trigeminal Neuralgia</Link>
-                  </div>
+                  </nav>
                 </div>
               </div>
             </div>
@@ -498,10 +503,10 @@ export default function Home() {
       <LazyRecoveryTimeline />
 
       {/* Trigeminal Neuralgia Care */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-gray-50" aria-labelledby="trigeminal-heading">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-12">Trigeminal Neuralgia Care</h2>
+            <h2 id="trigeminal-heading" className="text-3xl font-bold text-center mb-12">Trigeminal Neuralgia Care</h2>
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
                 <p className="text-lg text-gray-700 mb-6">
@@ -522,6 +527,7 @@ export default function Home() {
                   <Link 
                     href="/conditions/trigeminal-neuralgia-treatment-hyderabad"
                     className="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition-colors"
+                    aria-label="Learn more about trigeminal neuralgia treatment"
                   >
                     Learn More About Trigeminal Neuralgia →
                   </Link>
@@ -560,10 +566,10 @@ export default function Home() {
       </section>
 
       {/* Epilepsy Surgery */}
-      <section className="py-16">
+      <section className="py-16" aria-labelledby="epilepsy-heading">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-12">Epilepsy Surgery</h2>
+            <h2 id="epilepsy-heading" className="text-3xl font-bold text-center mb-12">Epilepsy Surgery</h2>
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div className="bg-white p-8 rounded-lg shadow-lg">
                 <h3 className="text-xl font-semibold mb-4 text-blue-700">Comprehensive Epilepsy Evaluation</h3>
@@ -599,6 +605,7 @@ export default function Home() {
                   <Link 
                     href="/services/epilepsy-surgery-hyderabad"
                     className="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition-colors"
+                    aria-label="Learn more about epilepsy surgery"
                   >
                     Learn More About Epilepsy Surgery →
                   </Link>
@@ -610,13 +617,13 @@ export default function Home() {
       </section>
 
       {/* Why Choose Dr. Sayuj */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-gray-50" aria-labelledby="why-choose-heading">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-12">Why Choose Dr Sayuj Krishnan</h2>
+            <h2 id="why-choose-heading" className="text-3xl font-bold text-center mb-12">Why Choose Dr Sayuj Krishnan</h2>
             <div className="grid md:grid-cols-3 gap-8">
               <div className="bg-white p-8 rounded-lg shadow-lg text-center">
-                <div className="text-4xl mb-4">🎓</div>
+                <div className="text-4xl mb-4" aria-hidden="true">🎓</div>
                 <h3 className="text-xl font-semibold mb-4 text-blue-700">Exceptional Training</h3>
                 <p className="text-gray-700">
                   MBBS, DNB Neurosurgery (Direct 6 years), Fellowship in Minimally Invasive and 
@@ -624,7 +631,7 @@ export default function Home() {
                 </p>
               </div>
               <div className="bg-white p-8 rounded-lg shadow-lg text-center">
-                <div className="text-4xl mb-4">🏥</div>
+                <div className="text-4xl mb-4" aria-hidden="true">🏥</div>
                 <h3 className="text-xl font-semibold mb-4 text-blue-700">15+ Years Experience</h3>
                 <p className="text-gray-700">
                   Successfully treated thousands of patients with various neurological conditions, 
@@ -632,7 +639,7 @@ export default function Home() {
                 </p>
               </div>
               <div className="bg-white p-8 rounded-lg shadow-lg text-center">
-                <div className="text-4xl mb-4">🔬</div>
+                <div className="text-4xl mb-4" aria-hidden="true">🔬</div>
                 <h3 className="text-xl font-semibold mb-4 text-blue-700">Advanced Technology</h3>
                 <p className="text-gray-700 mb-4">
                   State-of-the-art equipment including neuronavigation, intraoperative monitoring, 
@@ -641,6 +648,7 @@ export default function Home() {
                 <Link 
                   href="/technology-facilities"
                   className="text-blue-600 hover:text-blue-800 font-medium"
+                  aria-label="Explore our technology and facilities"
                 >
                   Explore Our Technology →
                 </Link>
@@ -651,30 +659,31 @@ export default function Home() {
       </section>
 
       {/* Emergency Services */}
-      <section className="py-16 bg-red-50">
+      <section className="py-16 bg-red-50" aria-labelledby="emergency-heading">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-red-800 mb-4">24/7 Emergency Neurosurgical Care</h2>
+              <h2 id="emergency-heading" className="text-3xl font-bold text-red-800 mb-4">24/7 Emergency Neurosurgical Care</h2>
               <p className="text-lg text-red-700">
                 Immediate access to expert neurosurgical consultation for brain and spine emergencies
               </p>
             </div>
             <div className="grid md:grid-cols-3 gap-8">
               <div className="bg-white rounded-lg shadow-lg p-6 text-center border-l-4 border-red-500">
-                <div className="text-4xl mb-4">🚨</div>
+                <div className="text-4xl mb-4" aria-hidden="true">🚨</div>
                 <h3 className="text-xl font-semibold text-red-700 mb-3">Emergency Hotline</h3>
                 <p className="text-2xl font-bold text-red-600 mb-2">+91-9778280044</p>
                 <p className="text-gray-600 mb-4">Available 24/7 for urgent consultations</p>
                 <Link 
                   href="/emergency-rehabilitation"
                   className="text-red-600 hover:text-red-800 font-medium"
+                  aria-label="Learn more about emergency care"
                 >
                   Learn More About Emergency Care →
                 </Link>
               </div>
               <div className="bg-white rounded-lg shadow-lg p-6 text-center border-l-4 border-orange-500">
-                <div className="text-4xl mb-4">⚡</div>
+                <div className="text-4xl mb-4" aria-hidden="true">⚡</div>
                 <h3 className="text-xl font-semibold text-orange-700 mb-3">Rapid Response</h3>
                 <p className="text-gray-600 mb-4">
                   Immediate triage and assessment for traumatic brain injuries, spinal cord injuries, and stroke
@@ -682,12 +691,13 @@ export default function Home() {
                 <Link 
                   href="/emergency-rehabilitation"
                   className="text-orange-700 hover:text-orange-900 font-medium"
+                  aria-label="Learn about emergency conditions"
                 >
                   Emergency Conditions →
                 </Link>
               </div>
               <div className="bg-white rounded-lg shadow-lg p-6 text-center border-l-4 border-green-500">
-                <div className="text-4xl mb-4">🏥</div>
+                <div className="text-4xl mb-4" aria-hidden="true">🏥</div>
                 <h3 className="text-xl font-semibold text-green-700 mb-3">Hospital Partnership</h3>
                 <p className="text-gray-600 mb-4">
                   Coordinated care with Yashoda Hospital emergency department for seamless patient care
@@ -695,6 +705,7 @@ export default function Home() {
                 <Link 
                   href="/emergency-rehabilitation"
                   className="text-green-700 hover:text-green-900 font-medium"
+                  aria-label="Learn about rehabilitation services"
                 >
                   Rehabilitation Services →
                 </Link>
@@ -705,10 +716,10 @@ export default function Home() {
       </section>
 
       {/* Areas We Serve in Hyderabad */}
-      <section className="py-16">
+      <section className="py-16" aria-labelledby="locations-heading">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-12">Spine Specialist & Neurosurgeon Near You in Hyderabad</h2>
+            <h2 id="locations-heading" className="text-3xl font-bold text-center mb-12">Spine Specialist & Neurosurgeon Near You in Hyderabad</h2>
             <div className="grid md:grid-cols-2 gap-12">
               <div>
                 <p className="text-lg text-gray-700 mb-6">
@@ -807,7 +818,7 @@ export default function Home() {
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               <div className="bg-white rounded-lg shadow-lg p-6 text-center">
-                <div className="text-4xl mb-4">🦴</div>
+                <div className="text-4xl mb-4" aria-hidden="true">🦴</div>
                 <h3 className="text-lg font-semibold text-blue-700 mb-3">Degenerative Disc Disease</h3>
                 <p className="text-gray-600 text-sm mb-4">Age-related wear and tear of spinal discs</p>
                 <Link 
@@ -818,7 +829,7 @@ export default function Home() {
                 </Link>
               </div>
               <div className="bg-white rounded-lg shadow-lg p-6 text-center">
-                <div className="text-4xl mb-4">🔗</div>
+                <div className="text-4xl mb-4" aria-hidden="true">🔗</div>
                 <h3 className="text-lg font-semibold text-blue-700 mb-3">Spinal Stenosis</h3>
                 <p className="text-gray-600 text-sm mb-4">Narrowing of spinal canal causing nerve compression</p>
                 <Link 
@@ -829,7 +840,7 @@ export default function Home() {
                 </Link>
               </div>
               <div className="bg-white rounded-lg shadow-lg p-6 text-center">
-                <div className="text-4xl mb-4">😣</div>
+                <div className="text-4xl mb-4" aria-hidden="true">😣</div>
                 <h3 className="text-lg font-semibold text-blue-700 mb-3">Trigeminal Neuralgia</h3>
                 <p className="text-gray-600 text-sm mb-4">Severe facial pain from nerve compression</p>
                 <Link 
@@ -840,7 +851,7 @@ export default function Home() {
                 </Link>
               </div>
               <div className="bg-white rounded-lg shadow-lg p-6 text-center">
-                <div className="text-4xl mb-4">🧠</div>
+                <div className="text-4xl mb-4" aria-hidden="true">🧠</div>
                 <h3 className="text-lg font-semibold text-blue-700 mb-3">Epilepsy</h3>
                 <p className="text-gray-600 text-sm mb-4">Neurological disorder causing recurrent seizures</p>
                 <Link 
@@ -864,23 +875,31 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="appointment" className="py-16">
+      <section id="appointment" className="py-16" aria-labelledby="appointment-heading">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-12">Book an Appointment</h2>
+            <h2 id="appointment-heading" className="text-3xl font-bold text-center mb-12">Book an Appointment</h2>
             <div className="grid md:grid-cols-2 gap-12">
               <div className="bg-white p-8 rounded-lg shadow-lg">
                 <h3 className="text-2xl font-semibold mb-6 text-blue-700">Contact Information</h3>
                 <div className="space-y-6">
                   <div>
                     <h4 className="font-semibold text-gray-800 mb-2">Phone</h4>
-                    <a href="tel:+919778280044" className="text-blue-600 text-lg hover:underline">
+                    <a 
+                      href="tel:+919778280044" 
+                      className="text-blue-600 text-lg hover:underline"
+                      aria-label="Call clinic at +91 9778280044"
+                    >
                       +91 9778280044
                     </a>
                   </div>
                   <div>
                     <h4 className="font-semibold text-gray-800 mb-2">Email</h4>
-                    <a href="mailto:neurospinehyd@drsayuj.com" className="text-blue-600 hover:underline">
+                    <a 
+                      href="mailto:neurospinehyd@drsayuj.com" 
+                      className="text-blue-600 hover:underline"
+                      aria-label="Email clinic at neurospinehyd@drsayuj.com"
+                    >
                       neurospinehyd@drsayuj.com
                     </a>
                   </div>
@@ -931,6 +950,7 @@ export default function Home() {
                   <Link 
                     href="/appointments"
                     className="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-colors text-lg font-semibold inline-block"
+                    aria-label="Book your consultation appointment"
                   >
                     Book Your Consultation
                   </Link>
@@ -938,7 +958,11 @@ export default function Home() {
                     {/* Google OAuth for patient verification - temporarily disabled for build */}
                     <div className="text-center">
                       <p className="text-sm text-blue-700 mb-2">Verified patients can access priority booking</p>
-                      <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+                      <button 
+                        className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                        aria-label="Verify with Google for priority booking (coming soon)"
+                        disabled
+                      >
                         Verify with Google (Coming Soon)
                       </button>
                     </div>
@@ -949,12 +973,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-800 text-white py-8">
-        <div className="container mx-auto px-4 text-center">
-          <p>&copy; {new Date().getFullYear()} Dr Sayuj Krishnan. All rights reserved.</p>
-        </div>
-      </footer>
 
       {/* FAQPage Schema */}
       {/* <FAQPageSchema />

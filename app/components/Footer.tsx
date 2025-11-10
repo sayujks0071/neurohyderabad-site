@@ -2,12 +2,12 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-950 text-gray-100">
+    <footer className="bg-gray-950 text-gray-100" role="contentinfo">
       <div className="container mx-auto px-4 py-12">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Contact Information */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Clinic Details</h3>
+            <h2 className="text-lg font-semibold mb-4">Clinic Details</h2>
             <div className="space-y-3 text-gray-200">
               <p className="font-semibold text-gray-100">
                 Dr. Sayuj Krishnan, Neurosurgeon
@@ -22,6 +22,7 @@ export default function Footer() {
                 <a
                   href="tel:+919778280044"
                   className="text-blue-200 hover:text-blue-100 transition-colors"
+                  aria-label="Call clinic at +91 9778280044"
                 >
                   +91 9778280044
                 </a>{" "}
@@ -29,6 +30,7 @@ export default function Footer() {
                 <a
                   href="mailto:neurospinehyd@drsayuj.com"
                   className="text-blue-200 hover:text-blue-100 transition-colors"
+                  aria-label="Email clinic at neurospinehyd@drsayuj.com"
                 >
                   neurospinehyd@drsayuj.com
                 </a>
@@ -44,12 +46,16 @@ export default function Footer() {
                 <a
                   href="https://wa.me/919778280044"
                   className="rounded-full border border-blue-300 px-4 py-2 text-sm font-semibold text-blue-100 hover:bg-blue-900"
+                  aria-label="Contact via WhatsApp"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   WhatsApp
                 </a>
                 <a
                   href="https://www.drsayuj.info/locations?utm_source=site&utm_medium=cta&utm_campaign=footer_nap"
                   className="rounded-full border border-gray-500 px-4 py-2 text-sm font-semibold text-gray-100 hover:bg-gray-800"
+                  aria-label="Get directions to clinic"
                 >
                   Get Directions
                 </a>
@@ -62,8 +68,8 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Services</h3>
-            <nav className="space-y-2 text-sm">
+            <h2 className="text-lg font-semibold mb-4">Services</h2>
+            <nav className="space-y-2 text-sm" aria-label="Services navigation">
               <Link href="/specializations" className="block text-gray-300 hover:text-gray-100 transition-colors">
                 Specializations Overview
               </Link>
@@ -90,8 +96,8 @@ export default function Footer() {
 
           {/* Conditions */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Conditions</h3>
-            <nav className="space-y-2 text-sm">
+            <h2 className="text-lg font-semibold mb-4">Conditions</h2>
+            <nav className="space-y-2 text-sm" aria-label="Conditions navigation">
               <Link href="/conditions/" className="block text-gray-300 hover:text-gray-100 transition-colors">
                 All Conditions
               </Link>
@@ -115,8 +121,8 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
-            <nav className="space-y-2 text-sm">
+            <h2 className="text-lg font-semibold mb-4">Quick Links</h2>
+            <nav className="space-y-2 text-sm" aria-label="Quick links navigation">
               <Link href="/about" className="block text-gray-300 hover:text-gray-100 transition-colors">
                 About Dr. Sayuj
               </Link>
@@ -163,7 +169,10 @@ export default function Footer() {
                 MBBS, DNB Neurosurgery (Direct 6 years) | Fellowship in Minimally Invasive and Advanced Spine Surgery
               </p>
             </div>
-            <nav className="flex flex-wrap justify-center gap-4 md:gap-6 text-sm">
+            <nav 
+              className="flex flex-wrap justify-center gap-4 md:gap-6 text-sm"
+              aria-label="Legal and policy links"
+            >
               <Link href="/privacy" className="text-gray-400 hover:text-gray-200 transition-colors">
                 Privacy Policy
               </Link>

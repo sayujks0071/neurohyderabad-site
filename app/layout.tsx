@@ -230,13 +230,14 @@ export default function RootLayout({
         <HospitalSchema />
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-1/2 focus:-translate-x-1/2 bg-blue-600 text-white px-4 py-2 rounded-md shadow-lg"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-1/2 focus:-translate-x-1/2 bg-blue-600 text-white px-4 py-2 rounded-md shadow-lg z-50 focus:z-50"
+          aria-label="Skip to main content"
         >
           Skip to content
         </a>
         <Header />
         <TrustStrip />
-        <main id="main-content" tabIndex={-1} role="main">
+        <main id="main-content" tabIndex={-1} role="main" aria-label="Main content">
           {children}
         </main>
         <Footer />
