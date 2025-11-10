@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { SearchItem } from "@/src/data/searchIndex";
 
@@ -14,10 +14,17 @@ export default function SiteSearch() {
   const [searchFn, setSearchFn] = useState<
     ((term: string, limit?: number) => SearchItem[]) | null
   >(null);
-  const searchModulePromiseRef =
-    useRef<Promise<typeof import("@/src/data/searchIndex")> | null>(null);
+  const searchModulePromiseRef = useRef<Promise<
+    typeof import("@/src/data/searchIndex")
+  > | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const resultsRef = useRef<HTMLDivElement>(null);
+  const resultsRef = useRef<HTMLUListElement>(null);
+  const baseId = useId();
+  const dialogId = `${baseId}-dialog`;
+  const dialogTitleId = `${baseId}-title`;
+  const helperTextId = `${baseId}-helper`;
+  const resultsListId = `${baseId}-results`;
+  const statusMessageId = `${baseId}-status`;
 
   const ensureSearchFn = useCallback(async () => {
     if (searchFn) {
@@ -66,7 +73,7 @@ export default function SiteSearch() {
     const container = resultsRef.current;
     if (!container) return;
 
-    const active = container.querySelector<HTMLDivElement>(
+    const active = container.querySelector<HTMLElement>(
       `[data-index="${activeIndex}"]`,
     );
     if (active) {
@@ -146,7 +153,15 @@ export default function SiteSearch() {
     window.addEventListener("keydown", handleKeyDown);
 
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [activeIndex, closeSearch, ensureSearchFn, handleSelect, isOpen, results, scrollActiveResultIntoView]);
+  }, [
+    activeIndex,
+    closeSearch,
+    ensureSearchFn,
+    handleSelect,
+    isOpen,
+    results,
+    scrollActiveResultIntoView,
+  ]);
 
   useEffect(() => {
     setActiveIndex(0);
@@ -165,6 +180,11 @@ export default function SiteSearch() {
     void ensureSearchFn();
   }, [ensureSearchFn]);
 
+  const activeOptionId =
+    isOpen && results[activeIndex]
+      ? `${resultsListId}-option-${activeIndex}`
+      : undefined;
+
   return (
     <>
       <button
@@ -174,6 +194,9 @@ export default function SiteSearch() {
         onFocus={prefetchSearch}
         className="flex items-center gap-2 rounded-full border border-gray-200 px-3 py-1.5 text-sm text-gray-600 transition hover:border-blue-300 hover:text-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
         aria-label="Search site (Cmd/Ctrl + K)"
+        aria-haspopup="dialog"
+        aria-expanded={isOpen}
+        aria-controls={dialogId}
       >
         <SearchIcon />
         <span className="hidden sm:inline">Search</span>
@@ -187,8 +210,18 @@ export default function SiteSearch() {
           className="fixed inset-0 z-50 flex items-start justify-center bg-black/50 px-4 py-16 backdrop-blur-sm sm:py-24"
           role="dialog"
           aria-modal="true"
+          aria-labelledby={dialogTitleId}
+          aria-describedby={helperTextId}
+          id={dialogId}
         >
           <div className="w-full max-w-2xl rounded-2xl bg-white shadow-2xl ring-1 ring-black/10">
+            <h2 id={dialogTitleId} className="sr-only">
+              Search the Dr. Sayuj knowledge base
+            </h2>
+            <p id={helperTextId} className="sr-only">
+              Type to search. Use the up and down arrow keys to move through
+              suggestions and press Enter to open a result.
+            </p>
             <div className="flex items-center gap-3 border-b border-gray-200 px-5 py-4">
               <SearchIcon className="h-5 w-5 text-gray-400" />
               <input
@@ -200,6 +233,13 @@ export default function SiteSearch() {
                 onChange={(event) => setQuery(event.target.value)}
                 autoCapitalize="none"
                 spellCheck={false}
+                role="combobox"
+                aria-autocomplete="list"
+                aria-haspopup="listbox"
+                aria-controls={resultsListId}
+                aria-expanded={results.length > 0}
+                aria-activedescendant={activeOptionId}
+                aria-describedby={`${helperTextId} ${statusMessageId}`}
               />
               <button
                 type="button"
@@ -211,49 +251,79 @@ export default function SiteSearch() {
             </div>
 
             <div
-              ref={resultsRef}
               className="max-h-80 overflow-y-auto px-2 py-3 sm:px-3"
+              role="presentation"
             >
+              <div
+                id={statusMessageId}
+                role="status"
+                aria-live="polite"
+                className="sr-only"
+              >
+                {isLoading
+                  ? "Loading search suggestions"
+                  : results.length === 0
+                    ? "No results"
+                    : `${results.length} results available`}
+              </div>
               {isLoading ? (
-                <p className="px-4 py-8 text-center text-sm text-gray-500">
+                <p
+                  className="px-4 py-8 text-center text-sm text-gray-500"
+                  aria-hidden="true"
+                >
                   Loading search suggestions…
                 </p>
               ) : results.length === 0 ? (
-                <p className="px-4 py-8 text-center text-sm text-gray-500">
+                <p
+                  className="px-4 py-8 text-center text-sm text-gray-500"
+                  aria-hidden="true"
+                >
                   No results found. Try a broader term like{" "}
                   <strong>spine</strong> or <strong>epilepsy</strong>.
                 </p>
               ) : (
-                results.map((item, index) => {
-                  const isActive = index === activeIndex;
-                  return (
-                    <div
-                      key={`${item.href}-${index}`}
-                      data-index={index}
-                      className={`group rounded-xl px-3 py-3 transition ${
-                        isActive
-                          ? "bg-blue-50 ring-1 ring-inset ring-blue-200"
-                          : "hover:bg-gray-50"
-                      }`}
-                    >
-                      <button
-                        type="button"
-                        onClick={() => handleSelect(item)}
-                        className="flex w-full flex-col gap-1 text-left"
+                <ul
+                  ref={resultsRef}
+                  id={resultsListId}
+                  role="listbox"
+                  aria-label="Search suggestions"
+                  aria-busy={isLoading}
+                  className="space-y-2"
+                >
+                  {results.map((item, index) => {
+                    const isActive = index === activeIndex;
+                    return (
+                      <li
+                        key={`${item.href}-${index}`}
+                        id={`${resultsListId}-option-${index}`}
+                        data-index={index}
+                        role="option"
+                        aria-selected={isActive}
+                        className={`group rounded-xl transition ${
+                          isActive
+                            ? "bg-blue-50 ring-1 ring-inset ring-blue-200"
+                            : "hover:bg-gray-50"
+                        }`}
                       >
-                        <span className="text-sm font-semibold text-gray-900">
-                          {item.title}
-                        </span>
-                        <span className="text-xs uppercase tracking-wide text-blue-600">
-                          {item.category}
-                        </span>
-                        <span className="text-sm text-gray-600">
-                          {item.description}
-                        </span>
-                      </button>
-                    </div>
-                  );
-                })
+                        <button
+                          type="button"
+                          onClick={() => handleSelect(item)}
+                          className="flex w-full flex-col gap-1 px-3 py-3 text-left"
+                        >
+                          <span className="text-sm font-semibold text-gray-900">
+                            {item.title}
+                          </span>
+                          <span className="text-xs uppercase tracking-wide text-blue-600">
+                            {item.category}
+                          </span>
+                          <span className="text-sm text-gray-600">
+                            {item.description}
+                          </span>
+                        </button>
+                      </li>
+                    );
+                  })}
+                </ul>
               )}
             </div>
 
