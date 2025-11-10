@@ -236,7 +236,7 @@ export default function RootLayout({
         </a>
         <Header />
         <TrustStrip />
-        <main id="main-content" tabIndex={-1} role="main">
+        <main id="main-content" tabIndex={-1}>
           {children}
         </main>
         <Footer />

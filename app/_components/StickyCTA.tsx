@@ -61,7 +61,11 @@ export default function StickyCTA({ className = '' }: StickyCTAProps) {
   }
 
   return (
-    <div className={`fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-50 p-4 ${className}`}>
+    <aside 
+      className={`fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-50 p-4 ${className}`}
+      role="complementary"
+      aria-label="Quick contact options"
+    >
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between gap-4">
           <div className="flex-1">

@@ -44,15 +44,15 @@ export const metadata: Metadata = {
 export default function AppointmentsPage() {
   return (
     <main className="container mx-auto px-4 py-16">
-      <h1 className="text-4xl font-bold text-center mb-6">Book an Appointment with Dr. Sayuj Krishnan</h1>
+      <h1 id="page-title" className="text-4xl font-bold text-center mb-6">Book an Appointment with Dr. Sayuj Krishnan</h1>
       <p className="text-lg text-gray-600 text-center max-w-2xl mx-auto mb-12">
         Choose your preferred booking method. Our AI assistant can help you book instantly, or use the traditional form below.
       </p>
 
       {/* AI Booking Agent Section */}
-      <section className="mb-16">
+      <section className="mb-16" aria-labelledby="ai-booking-heading">
         <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold text-blue-800 mb-4">🤖 AI-Powered Booking Assistant</h2>
+          <h2 id="ai-booking-heading" className="text-2xl font-bold text-blue-800 mb-4">🤖 AI-Powered Booking Assistant</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Chat with our intelligent assistant to book your appointment. It can understand your symptoms, 
             detect emergencies, and guide you through the booking process naturally.
@@ -62,16 +62,16 @@ export default function AppointmentsPage() {
       </section>
 
       {/* Divider */}
-      <div className="flex items-center my-12">
+      <div className="flex items-center my-12" role="separator" aria-label="Alternative booking method">
         <div className="flex-1 border-t border-gray-300"></div>
         <div className="px-4 text-gray-500">OR</div>
         <div className="flex-1 border-t border-gray-300"></div>
       </div>
 
       {/* Traditional Form Section */}
-      <section>
+      <section aria-labelledby="form-booking-heading">
         <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold text-blue-800 mb-4">📝 Traditional Appointment Form</h2>
+          <h2 id="form-booking-heading" className="text-2xl font-bold text-blue-800 mb-4">📝 Traditional Appointment Form</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Prefer to fill out a form? Use our detailed appointment request form below.
           </p>
@@ -86,9 +86,9 @@ export default function AppointmentsPage() {
             </div>
           </div>
 
-          <aside className="space-y-6">
-            <div className="bg-blue-50 border border-blue-100 rounded-2xl p-6">
-              <h2 className="text-xl font-semibold text-blue-800 mb-4">Clinic Contact</h2>
+          <aside className="space-y-6" role="complementary" aria-label="Additional appointment information">
+            <div className="bg-blue-50 border border-blue-100 rounded-2xl p-6" role="region" aria-labelledby="clinic-contact-heading">
+              <h3 id="clinic-contact-heading" className="text-xl font-semibold text-blue-800 mb-4">Clinic Contact</h3>
               <dl className="text-sm text-blue-900 space-y-3">
                 <div>
                   <dt className="font-semibold text-blue-700">Phone</dt>
@@ -108,8 +108,8 @@ export default function AppointmentsPage() {
               </dl>
             </div>
 
-            <div className="bg-gray-50 border border-gray-200 rounded-2xl p-6">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">What happens next?</h2>
+            <div className="bg-gray-50 border border-gray-200 rounded-2xl p-6" role="region" aria-labelledby="next-steps-heading">
+              <h3 id="next-steps-heading" className="text-xl font-semibold text-gray-800 mb-4">What happens next?</h3>
               <ol className="list-decimal pl-5 text-sm text-gray-700 space-y-2">
                 <li>Clinical coordinator reviews your details & reports.</li>
                 <li>We call to confirm slot (teleconsult or in-person).</li>
@@ -117,12 +117,12 @@ export default function AppointmentsPage() {
               </ol>
             </div>
 
-            <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">Travel Information</h2>
+            <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm" role="region" aria-labelledby="travel-info-heading">
+              <h3 id="travel-info-heading" className="text-xl font-semibold text-gray-800 mb-4">Travel Information</h3>
               <p className="text-sm text-gray-700 mb-4">
                 Find directions and travel times from your area:
               </p>
-              <div className="space-y-3">
+              <nav className="space-y-3" aria-label="Directions from different areas">
                 <a 
                   href="/locations/brain-spine-surgeon-jubilee-hills"
                   className="block text-sm text-blue-600 hover:text-blue-700 font-medium"

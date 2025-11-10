@@ -103,7 +103,7 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 rounded-2xl border border-blue-100 bg-white p-6 shadow-sm">
+    <form onSubmit={handleSubmit} className="space-y-6 rounded-2xl border border-blue-100 bg-white p-6 shadow-sm" aria-label="Appointment request form">
       <fieldset className="space-y-4" aria-describedby="teleconsultation-description">
         <legend className="text-lg font-semibold text-blue-800">Tell us about your concern</legend>
         <p id="teleconsultation-description" className="text-sm text-blue-600">
@@ -123,7 +123,7 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
             autoComplete="name"
             required
           />
-          {errors.name && <p className="mt-1 text-xs text-red-600">{errors.name}</p>}
+          {errors.name && <p className="mt-1 text-xs text-red-600" role="alert" aria-live="polite">{errors.name}</p>}
         </div>
 
         <div className="grid gap-4 md:grid-cols-2">
@@ -140,7 +140,7 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
               autoComplete="tel"
               required
             />
-            {errors.phone && <p className="mt-1 text-xs text-red-600">{errors.phone}</p>}
+            {errors.phone && <p className="mt-1 text-xs text-red-600" role="alert" aria-live="polite">{errors.phone}</p>}
           </div>
           <div>
             <label htmlFor="tele-email" className="mb-2 block text-sm font-medium text-gray-700">
@@ -155,7 +155,7 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
               className={`w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
               autoComplete="email"
             />
-            {errors.email && <p className="mt-1 text-xs text-red-600">{errors.email}</p>}
+            {errors.email && <p className="mt-1 text-xs text-red-600" role="alert" aria-live="polite">{errors.email}</p>}
           </div>
         </div>
 
@@ -172,7 +172,7 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
             placeholder="Example: Cervical disc herniation with arm pain"
             required
           />
-          {errors.condition && <p className="mt-1 text-xs text-red-600">{errors.condition}</p>}
+          {errors.condition && <p className="mt-1 text-xs text-red-600" role="alert" aria-live="polite">{errors.condition}</p>}
         </div>
 
         <div>
@@ -189,7 +189,7 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
             placeholder="Share MRI findings, previous surgeries, or questions you want to cover."
             required
           />
-          {errors.message && <p className="mt-1 text-xs text-red-600">{errors.message}</p>}
+          {errors.message && <p className="mt-1 text-xs text-red-600" role="alert" aria-live="polite">{errors.message}</p>}
         </div>
       </fieldset>
 
@@ -198,6 +198,7 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
           type="submit"
           className="inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           disabled={status === 'submitting'}
+          aria-busy={status === 'submitting'}
         >
           {status === 'submitting' ? 'Preparing email…' : 'Send appointment request'}
         </button>
@@ -207,12 +208,12 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
       </div>
 
       {status === 'success' && (
-        <p className="text-sm font-medium text-green-600" role="status">
+        <p className="text-sm font-medium text-green-600" role="status" aria-live="polite">
           Email draft opened in your mail app. Please review and send to confirm the request.
         </p>
       )}
       {status === 'error' && (
-        <p className="text-sm font-medium text-red-600" role="alert">
+        <p className="text-sm font-medium text-red-600" role="alert" aria-live="assertive">
           Something went wrong while preparing the email. Please call us directly at +91 9778280044.
         </p>
       )}

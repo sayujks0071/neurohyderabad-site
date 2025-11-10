@@ -177,12 +177,12 @@ export default function Home() {
       <UserJourneyTracker />
       <div className="min-h-screen bg-white">
       {/* Hero Section - LCP Optimized */}
-      <header className="home-hero text-white py-20" style={heroStyles}>
+      <section className="home-hero text-white py-20" style={heroStyles} aria-labelledby="hero-heading">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="text-center lg:text-left">
-                <h1 className="home-hero__title text-4xl md:text-6xl font-bold mb-6 leading-tight" style={{ color: '#f8fafc', marginBottom: '1.5rem' }}>
+                <h1 id="hero-heading" className="home-hero__title text-4xl md:text-6xl font-bold mb-6 leading-tight" style={{ color: '#f8fafc', marginBottom: '1.5rem' }}>
                   Dr. Sayuj Krishnan — Best Spine Surgeon in Yashoda Hospital, Hyderabad
                   <span className="home-hero__subtitle block text-3xl md:text-5xl" style={{ color: '#dbeafe' }}>
                     Expert Neurosurgeon & Spine Specialist Near You
@@ -214,13 +214,13 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </header>
+      </section>
 
       {/* Social Proof Section */}
       {/* <SocialProofBand /> */}
 
       {/* Trust Signals */}
-      <section className="py-8 bg-white">
+      <section className="py-8 bg-white" aria-labelledby="trust-signals-heading">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <TrustSignals />
@@ -229,10 +229,10 @@ export default function Home() {
       </section>
 
       {/* Media Publications Section */}
-      <section className="py-16 bg-blue-50">
+      <section className="py-16 bg-blue-50" aria-labelledby="media-publications-heading">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-12">
+            <h2 id="media-publications-heading" className="text-3xl font-bold text-center mb-12">
               Expert Insights & Media Coverage
             </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -286,10 +286,10 @@ export default function Home() {
       <LazyVideoSection />
 
       {/* Minimally Invasive Spine Surgery (MISS) */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-gray-50" aria-labelledby="miss-heading">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-12">
+            <h2 id="miss-heading" className="text-3xl font-bold text-center mb-12">
               <Link href="/services/minimally-invasive-spine-surgery" className="hover:text-blue-600">Endoscopic Spine Surgery</Link> & Minimally Invasive Procedures (MISS)
             </h2>
             <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -358,7 +358,7 @@ export default function Home() {
       </section>
 
       {/* Trust Bridge Section - Connect Services to Credentials */}
-      <section className="py-16 bg-gradient-to-r from-blue-50 to-indigo-50">
+      <section className="py-16 bg-gradient-to-r from-blue-50 to-indigo-50" aria-labelledby="about-doctor-heading">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="grid md:grid-cols-2 gap-8">
@@ -431,10 +431,10 @@ export default function Home() {
       </section>
 
       {/* Brain Tumor Surgery */}
-      <section className="py-16">
+      <section className="py-16" aria-labelledby="brain-tumor-heading">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-12">Brain Tumor Surgery</h2>
+            <h2 id="brain-tumor-heading" className="text-3xl font-bold text-center mb-12">Brain Tumor Surgery</h2>
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div className="bg-white p-8 rounded-lg shadow-lg">
                   <div className="mb-6">
@@ -498,10 +498,10 @@ export default function Home() {
       <LazyRecoveryTimeline />
 
       {/* Trigeminal Neuralgia Care */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-gray-50" aria-labelledby="trigeminal-neuralgia-heading">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-12">Trigeminal Neuralgia Care</h2>
+            <h2 id="trigeminal-neuralgia-heading" className="text-3xl font-bold text-center mb-12">Trigeminal Neuralgia Care</h2>
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
                 <p className="text-lg text-gray-700 mb-6">
@@ -560,10 +560,10 @@ export default function Home() {
       </section>
 
       {/* Epilepsy Surgery */}
-      <section className="py-16">
+      <section className="py-16" aria-labelledby="epilepsy-surgery-heading">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-12">Epilepsy Surgery</h2>
+            <h2 id="epilepsy-surgery-heading" className="text-3xl font-bold text-center mb-12">Epilepsy Surgery</h2>
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div className="bg-white p-8 rounded-lg shadow-lg">
                 <h3 className="text-xl font-semibold mb-4 text-blue-700">Comprehensive Epilepsy Evaluation</h3>
@@ -610,10 +610,10 @@ export default function Home() {
       </section>
 
       {/* Why Choose Dr. Sayuj */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-gray-50" aria-labelledby="why-choose-heading">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-12">Why Choose Dr Sayuj Krishnan</h2>
+            <h2 id="why-choose-heading" className="text-3xl font-bold text-center mb-12">Why Choose Dr Sayuj Krishnan</h2>
             <div className="grid md:grid-cols-3 gap-8">
               <div className="bg-white p-8 rounded-lg shadow-lg text-center">
                 <div className="text-4xl mb-4">🎓</div>
@@ -651,11 +651,11 @@ export default function Home() {
       </section>
 
       {/* Emergency Services */}
-      <section className="py-16 bg-red-50">
+      <section className="py-16 bg-red-50" aria-labelledby="emergency-services-heading">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-red-800 mb-4">24/7 Emergency Neurosurgical Care</h2>
+              <h2 id="emergency-services-heading" className="text-3xl font-bold text-red-800 mb-4">24/7 Emergency Neurosurgical Care</h2>
               <p className="text-lg text-red-700">
                 Immediate access to expert neurosurgical consultation for brain and spine emergencies
               </p>
@@ -705,10 +705,10 @@ export default function Home() {
       </section>
 
       {/* Areas We Serve in Hyderabad */}
-      <section className="py-16">
+      <section className="py-16" aria-labelledby="areas-served-heading">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-12">Spine Specialist & Neurosurgeon Near You in Hyderabad</h2>
+            <h2 id="areas-served-heading" className="text-3xl font-bold text-center mb-12">Spine Specialist & Neurosurgeon Near You in Hyderabad</h2>
             <div className="grid md:grid-cols-2 gap-12">
               <div>
                 <p className="text-lg text-gray-700 mb-6">
@@ -765,10 +765,10 @@ export default function Home() {
       </section>
 
       {/* Authoritative Citations */}
-      <section className="py-12 bg-white">
+      <section className="py-12 bg-white" aria-labelledby="references-heading">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl font-bold text-center mb-8">References & Sources</h2>
+            <h2 id="references-heading" className="text-2xl font-bold text-center mb-8">References & Sources</h2>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="bg-gray-50 p-6 rounded-lg">
                 <h3 className="font-semibold text-blue-700 mb-3">Medical Guidelines</h3>
@@ -796,11 +796,11 @@ export default function Home() {
       <LazyReputationPanel />
 
       {/* Disease Guides Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-gray-50" aria-labelledby="disease-guides-heading">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-blue-800 mb-4">Comprehensive Disease Guides</h2>
+              <h2 id="disease-guides-heading" className="text-3xl font-bold text-blue-800 mb-4">Comprehensive Disease Guides</h2>
               <p className="text-lg text-gray-700">
                 Expert information about neurological and spinal conditions, their symptoms, causes, and treatment options
               </p>
@@ -864,10 +864,10 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="appointment" className="py-16">
+      <section id="appointment" className="py-16" aria-labelledby="appointment-heading">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-12">Book an Appointment</h2>
+            <h2 id="appointment-heading" className="text-3xl font-bold text-center mb-12">Book an Appointment</h2>
             <div className="grid md:grid-cols-2 gap-12">
               <div className="bg-white p-8 rounded-lg shadow-lg">
                 <h3 className="text-2xl font-semibold mb-6 text-blue-700">Contact Information</h3>
