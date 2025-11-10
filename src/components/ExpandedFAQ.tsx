@@ -193,7 +193,7 @@ export default function ExpandedFAQ({
   }, {});
 
   return (
-    <section className={`py-16 ${className}`}>
+    <section className={`py-16 ${className}`} aria-labelledby="faq-section-title">
       {/* FAQ Schema for SEO */}
       <FAQSchema 
         faqs={faqs.map(faq => ({
@@ -204,16 +204,19 @@ export default function ExpandedFAQ({
       />
       <div className="container mx-auto px-4">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12 text-blue-800">
+          <h2 
+            id="faq-section-title"
+            className="text-3xl font-bold text-center mb-12 text-blue-800"
+          >
             {title}
           </h2>
-          <div className="space-y-12">
+          <div className="space-y-12" role="list" aria-label="Frequently asked questions">
             {Object.entries(groupedByCategory).map(([category, items]) => (
               <div key={category} className="space-y-4">
                 <h3 className="text-xl font-semibold text-blue-700">
                   {category}
                 </h3>
-                <div className="space-y-4">
+                <div className="space-y-4" role="group" aria-label={`${category} questions`}>
                   {items.map((faq, index) => {
                     const faqId = faq.question
                       .toLowerCase()
@@ -226,10 +229,18 @@ export default function ExpandedFAQ({
                         data-faq-item
                         data-faq-id={faqId}
                         className="group bg-white rounded-lg shadow-md border border-gray-200 transition-shadow hover:shadow-lg"
+                        aria-expanded="false"
                       >
-                        <summary className="flex items-start justify-between px-6 py-4 text-left cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-lg">
+                        <summary 
+                          className="flex items-start justify-between px-6 py-4 text-left cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-lg"
+                          aria-expanded="false"
+                          aria-controls={`faq-answer-${faqId}-${index}`}
+                        >
                           <div className="pr-6">
-                            <span className="font-semibold text-lg text-blue-900 block">
+                            <span 
+                              id={`faq-question-${faqId}-${index}`}
+                              className="font-semibold text-lg text-blue-900 block"
+                            >
                               {faq.question}
                             </span>
                             {faq.emphasis && (
@@ -241,11 +252,17 @@ export default function ExpandedFAQ({
                           <span
                             aria-hidden="true"
                             className="ml-4 inline-flex h-8 w-8 items-center justify-center rounded-full bg-blue-100 text-blue-600 transition-transform duration-200 group-open:rotate-45"
+                            aria-label="Toggle answer"
                           >
                             +
                           </span>
                         </summary>
-                        <div className="px-6 pb-5 text-gray-700 leading-relaxed space-y-3 border-t border-gray-100">
+                        <div 
+                          id={`faq-answer-${faqId}-${index}`}
+                          className="px-6 pb-5 text-gray-700 leading-relaxed space-y-3 border-t border-gray-100"
+                          role="region"
+                          aria-labelledby={`faq-question-${faqId}-${index}`}
+                        >
                           {faq.answer.split('\n').map((paragraph, paragraphIndex) => (
                             <p key={paragraphIndex}>{paragraph}</p>
                           ))}
