@@ -50,10 +50,19 @@ export function buildMedicalOrganizationSchema(input: MedicalOrganizationInput) 
           ...geo,
         }
       : undefined,
-    openingHoursSpecification: openingHours.map((spec) => ({
-      '@type': 'OpeningHoursSpecification',
-      opens: spec.split('-')[0],
-      closes: spec.split('-')[1],
-    })),
+    openingHoursSpecification: openingHours
+      .map((spec) => {
+        const parts = spec.split('-');
+        if (parts.length !== 2) {
+          // Optionally, log a warning here if desired
+          return null;
+        }
+        return {
+          '@type': 'OpeningHoursSpecification',
+          opens: parts[0],
+          closes: parts[1],
+        };
+      })
+      .filter(Boolean),
   };
 }
