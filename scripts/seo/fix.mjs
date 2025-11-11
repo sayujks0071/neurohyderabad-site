@@ -118,9 +118,9 @@ async function ensureLayoutCanonical() {
     let content = await fs.readFile(layoutPath, 'utf8');
     if (!/<link\s+rel="canonical"/i.test(content)) {
       content = content.replace(
-        /<head>\s*(\{[^}]+\}\s*)?/,
+        /<head[^>]*>/i,
         (match) =>
-          `${match}\n            <link rel="canonical" href="https://www.drsayuj.info" />`
+          `${match}\n    <link rel="canonical" href="https://www.drsayuj.info" />`
       );
       await fs.writeFile(layoutPath, content, 'utf8');
       console.log('Injected canonical hint into app/layout.tsx');
