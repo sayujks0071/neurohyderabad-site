@@ -11,6 +11,7 @@ import { buildLocalServiceSchema } from '@/src/lib/schema/localService';
 import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import TrustProof from '@/app/_components/TrustProof';
+import RelatedLinks from '@/components/RelatedLinks';
 import { getServiceSources } from '../sources';
 
 const SERVICE_SLUG = 'endoscopic-spine-surgery-hyderabad';
@@ -351,6 +352,7 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
           </div>
         </section>
 
+        <RelatedLinks currentPath="/services/endoscopic-spine-surgery-hyderabad" />
         <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
         <ReviewedBy lastReviewed="2025-10-19" />
       </main>

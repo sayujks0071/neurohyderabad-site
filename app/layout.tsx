@@ -128,6 +128,9 @@ import EngagementTracker from './_components/EngagementTracker';
 import ExitIntentHandler from './_components/ExitIntentHandler';
 import ConversionFunnelTracker from './_components/ConversionFunnelTracker';
 import TrustSignalViewportTracker from './_components/TrustSignalViewportTracker';
+import AuthorBox from '@/components/AuthorBox';
+import LastReviewed from '@/components/LastReviewed';
+import MedicalDisclaimer from '@/components/MedicalDisclaimer';
 
 export default function RootLayout({
   children,
@@ -203,10 +206,12 @@ export default function RootLayout({
             
             {/* Preload critical resources for fastest LCP */}
             <link rel="preload" href="https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+            <link rel="preload" as="image" href="/images/og-default-optimized.jpg" imagesrcset="/images/og-default-optimized.jpg 1x, /images/og-default.jpg 2x" />
             
             {/* Critical resource hints for performance - only essential ones */}
             <link rel="preconnect" href="https://fonts.googleapis.com" />
             <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+            <link rel="canonical" href="https://www.drsayuj.info" />
             
             {/* DNS prefetch for external domains - only critical ones */}
             <link rel="dns-prefetch" href="//www.googletagmanager.com" />
@@ -239,6 +244,11 @@ export default function RootLayout({
         <TrustStrip />
         <main id="main-content" tabIndex={-1} role="main">
           {children}
+          <div className="container mx-auto mt-16 space-y-8 px-4 pb-12">
+            <AuthorBox />
+            <LastReviewed date="2025-09-15" />
+            <MedicalDisclaimer />
+          </div>
         </main>
         <Footer />
         <ClientOnlyWrapper>

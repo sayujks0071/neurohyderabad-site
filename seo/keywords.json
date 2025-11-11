@@ -1,0 +1,37 @@
+[
+  {
+    "primary": "endoscopic spine surgery hyderabad",
+    "secondary": ["minimally invasive spine surgery", "awake spine surgery"],
+    "intent": "transactional",
+    "geo": "Hyderabad",
+    "targetUrl": "/services/endoscopic-spine-surgery-hyderabad"
+  },
+  {
+    "primary": "best neurosurgeon in hyderabad",
+    "secondary": ["top brain surgeon hyderabad", "neurosurgery specialist hyderabad"],
+    "intent": "commercial",
+    "geo": "Hyderabad",
+    "targetUrl": "/best-neurosurgeon-in-hyderabad"
+  },
+  {
+    "primary": "awake brain surgery hyderabad",
+    "secondary": ["awake craniotomy hyderabad", "brain tumor surgery hyderabad"],
+    "intent": "transactional",
+    "geo": "Hyderabad",
+    "targetUrl": "/services/awake-brain-surgery-hyderabad"
+  },
+  {
+    "primary": "sciatica treatment hyderabad",
+    "secondary": ["sciatica specialist hyderabad", "leg pain treatment hyderabad"],
+    "intent": "transactional",
+    "geo": "Hyderabad",
+    "targetUrl": "/conditions/sciatica-treatment-hyderabad"
+  },
+  {
+    "primary": "brain tumor surgeon hyderabad",
+    "secondary": ["brain tumor specialist hyderabad", "neuro-oncology hyderabad"],
+    "intent": "transactional",
+    "geo": "Hyderabad",
+    "targetUrl": "/services/brain-tumor-surgery-hyderabad"
+  }
+]

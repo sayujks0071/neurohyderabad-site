@@ -1,0 +1,42 @@
+name: Daily SEO Audit (08:00 IST)
+on:
+  schedule:
+    - cron: "30 2 * * *"
+  workflow_dispatch: {}
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: npm ci
+      - run: npm run build
+      - run: npm run lhci:autorun || true
+      - name: Generate audit & apply trivial fixes
+        run: |
+          node ./scripts/seo/audit.mjs
+          node ./scripts/seo/fix.mjs || true
+      - name: Commit changes
+        run: |
+          BRANCH="seo/daily-$(date -u +'%Y-%m-%d')"
+          git checkout -B "$BRANCH"
+          git add -A
+          git -c user.name='seo-bot' -c user.email='seo-bot@users.noreply.github.com' commit -m "chore(seo): daily audit & trivial fixes" || true
+          git push -u origin "$BRANCH" || true
+      - name: Open/Update PR
+        uses: peter-evans/create-pull-request@v6
+        with:
+          title: "chore(seo): daily audit & trivial fixes (08:00 IST)"
+          branch: ${{ github.ref_name }}
+          base: main
+          body: |
+            Automated daily audit + trivial fixes.
+            - LHCI reports in /seo/reports/lhci
+            - Full markdown audit in /seo/reports
+          draft: false

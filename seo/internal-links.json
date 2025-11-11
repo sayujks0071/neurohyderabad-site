@@ -1,0 +1,38 @@
+[
+  {
+    "url": "/services/endoscopic-spine-surgery-hyderabad",
+    "linkTo": [
+      "/conditions/sciatica-treatment-hyderabad",
+      "/appointments",
+      "/stories/fast-recovery-after-endoscopic-spine-surgery"
+    ],
+    "linkFrom": [
+      "/best-neurosurgeon-in-hyderabad",
+      "/services/minimally-invasive-spine-surgery"
+    ]
+  },
+  {
+    "url": "/best-neurosurgeon-in-hyderabad",
+    "linkTo": [
+      "/appointments",
+      "/locations",
+      "/research/awake-brain-surgery-outcomes"
+    ],
+    "linkFrom": [
+      "/",
+      "/stories/patient-testimonials"
+    ]
+  },
+  {
+    "url": "/conditions/sciatica-treatment-hyderabad",
+    "linkTo": [
+      "/services/endoscopic-spine-surgery-hyderabad",
+      "/appointments",
+      "/conditions/spinal-stenosis-treatment-hyderabad"
+    ],
+    "linkFrom": [
+      "/stories/sciatica-relief",
+      "/best-neurosurgeon-in-hyderabad"
+    ]
+  }
+]

@@ -1,0 +1,31 @@
+[
+  {
+    "cluster": "Spine Surgery Hyderabad",
+    "pillar": "/services/endoscopic-spine-surgery-hyderabad",
+    "supporting": [
+      "/services/minimally-invasive-spine-surgery",
+      "/conditions/sciatica-treatment-hyderabad",
+      "/conditions/spinal-stenosis-treatment-hyderabad",
+      "/services/percutaneous-endoscopic-discectomy"
+    ]
+  },
+  {
+    "cluster": "Brain Tumor & Cranial",
+    "pillar": "/services/brain-tumor-surgery-hyderabad",
+    "supporting": [
+      "/conditions/brain-tumor-surgery-hyderabad",
+      "/stories/brain-tumor-recovery",
+      "/research/awake-brain-surgery-outcomes"
+    ]
+  },
+  {
+    "cluster": "Comprehensive Neurosurgery",
+    "pillar": "/best-neurosurgeon-in-hyderabad",
+    "supporting": [
+      "/about",
+      "/locations",
+      "/appointments",
+      "/patient-stories"
+    ]
+  }
+]

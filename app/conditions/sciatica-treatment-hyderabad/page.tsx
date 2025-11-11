@@ -4,6 +4,7 @@ import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import NAP from '@/app/_components/NAP';
+import RelatedLinks from '@/components/RelatedLinks';
 import { SITE_URL } from '../../../src/lib/seo';
 import { sources } from '../../blog/sources';
 import { makeMetadata } from '@/app/_lib/meta';
@@ -118,11 +119,13 @@ export default function SciaticaTreatmentPage() {
         </section>
 
         <section className="mt-12 space-y-6">
-          <AuthorByline 
+          <AuthorByline
             publishedOn="2025-02-15"
             updatedOn="2025-10-19"
           />
-          
+
+          <RelatedLinks currentPath="/conditions/sciatica-treatment-hyderabad" />
+
           <SourceList sources={sources['sciatica-treatment-hyderabad'] || []} />
           
           <ReviewedBy />
