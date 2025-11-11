@@ -128,9 +128,7 @@ import EngagementTracker from './_components/EngagementTracker';
 import ExitIntentHandler from './_components/ExitIntentHandler';
 import ConversionFunnelTracker from './_components/ConversionFunnelTracker';
 import TrustSignalViewportTracker from './_components/TrustSignalViewportTracker';
-import AuthorBox from '@/components/AuthorBox';
-import LastReviewed from '@/components/LastReviewed';
-import MedicalDisclaimer from '@/components/MedicalDisclaimer';
+import ConditionalEEATWrapper from './_components/ConditionalEEATWrapper';
 
 export default function RootLayout({
   children,
@@ -244,11 +242,7 @@ export default function RootLayout({
         <TrustStrip />
         <main id="main-content" tabIndex={-1} role="main">
           {children}
-          <div className="container mx-auto mt-16 space-y-8 px-4 pb-12">
-            <AuthorBox />
-            <LastReviewed date="2025-09-15" />
-            <MedicalDisclaimer />
-          </div>
+          <ConditionalEEATWrapper />
         </main>
         <Footer />
         <ClientOnlyWrapper>
