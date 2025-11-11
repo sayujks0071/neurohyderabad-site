@@ -50,10 +50,20 @@ export function buildLocalBusinessSchema(input: LocalBusinessInput) {
           ...geo,
         }
       : undefined,
-    openingHoursSpecification: openingHours.map((range) => ({
-      '@type': 'OpeningHoursSpecification',
-      opens: range.split('-')[0],
-      closes: range.split('-')[1],
-    })),
+    openingHoursSpecification: openingHours
+      .map((range) => {
+        const hyphenCount = (range.match(/-/g) || []).length;
+        if (hyphenCount !== 1) {
+          // Invalid format, skip this entry or set opens/closes to undefined
+          return undefined;
+        }
+        const [opens, closes] = range.split('-');
+        return {
+          '@type': 'OpeningHoursSpecification',
+          opens,
+          closes,
+        };
+      })
+      .filter(Boolean),
   };
 }
