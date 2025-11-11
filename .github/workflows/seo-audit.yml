@@ -23,17 +23,19 @@ jobs:
           node ./scripts/seo/audit.mjs
           node ./scripts/seo/fix.mjs || true
       - name: Commit changes
+        id: commit
         run: |
           BRANCH="seo/daily-$(date -u +'%Y-%m-%d')"
           git checkout -B "$BRANCH"
           git add -A
           git -c user.name='seo-bot' -c user.email='seo-bot@users.noreply.github.com' commit -m "chore(seo): daily audit & trivial fixes" || true
           git push -u origin "$BRANCH" || true
+          echo "branch-name=$BRANCH" >> $GITHUB_OUTPUT
       - name: Open/Update PR
         uses: peter-evans/create-pull-request@v6
         with:
           title: "chore(seo): daily audit & trivial fixes (08:00 IST)"
-          branch: ${{ github.ref_name }}
+          branch: ${{ steps.commit.outputs.branch-name }}
           base: main
           body: |
             Automated daily audit + trivial fixes.
