@@ -211,7 +211,7 @@ export default function RootLayout({
             {/* Critical resource hints for performance - only essential ones */}
             <link rel="preconnect" href="https://fonts.googleapis.com" />
             <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-            <link rel="canonical" href="https://www.drsayuj.info" />
+            
             
             {/* DNS prefetch for external domains - only critical ones */}
             <link rel="dns-prefetch" href="//www.googletagmanager.com" />
