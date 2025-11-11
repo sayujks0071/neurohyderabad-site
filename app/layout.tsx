@@ -206,7 +206,7 @@ export default function RootLayout({
             
             {/* Preload critical resources for fastest LCP */}
             <link rel="preload" href="https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-            <link rel="preload" as="image" href="/images/og-default-optimized.jpg" imagesrcset="/images/og-default-optimized.jpg 1x, /images/og-default.jpg 2x" />
+            <link rel="preload" as="image" href="/images/og-default-optimized.jpg" imageSrcset="/images/og-default-optimized.jpg 1x, /images/og-default.jpg 2x" />
             
             {/* Critical resource hints for performance - only essential ones */}
             <link rel="preconnect" href="https://fonts.googleapis.com" />
