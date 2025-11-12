@@ -180,6 +180,8 @@ export async function POST(request: NextRequest) {
       );
     }
     
+    // Note: Empty response errors are now handled with a fallback in file-search.ts
+    // This case should rarely occur now, but we keep it for safety
     if (errorMessage.includes('Empty response')) {
       return NextResponse.json(
         {
