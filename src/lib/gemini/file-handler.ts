@@ -104,8 +104,19 @@ export async function uploadFileToGemini(
     );
 
     if (!response.ok) {
-      const error = await response.json().catch(() => ({}));
-      throw new Error(`Upload failed: ${response.status} - ${JSON.stringify(error)}`);
+      const errorText = await response.text();
+      let errorData;
+      try {
+        errorData = JSON.parse(errorText);
+      } catch {
+        errorData = { raw: errorText };
+      }
+      console.error('Gemini upload error:', {
+        status: response.status,
+        statusText: response.statusText,
+        error: errorData,
+      });
+      throw new Error(`Upload failed: ${response.status} - ${JSON.stringify(errorData)}`);
     }
 
     const result = await response.json();
