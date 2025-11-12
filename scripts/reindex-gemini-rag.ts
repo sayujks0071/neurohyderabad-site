@@ -254,4 +254,5 @@ if (require.main === module) {
   });
 }
 
-export { reindex, ReindexConfig };
+export { reindex };
+export type { ReindexConfig };
