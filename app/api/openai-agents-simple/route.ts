@@ -1,8 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
+  let body: any = null;
+  
   try {
-    const body = await request.json();
+    body = await request.json();
     
     if (!body.message) {
       return NextResponse.json(
@@ -185,7 +187,7 @@ Never provide medical diagnosis or treatment advice.`
     console.error('Full error details:', {
       message: errorMessage,
       stack: errorStack,
-      userMessage: body?.message,
+      userMessage: body?.message || 'Unknown',
     });
     
     // Provide more specific error messages
