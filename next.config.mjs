@@ -70,6 +70,13 @@ const nextConfig = {
         destination: 'https://www.drsayuj.info/$1',
         permanent: true,
       },
+      // CRITICAL: Brand entity consolidation - redirect odoo.com domain to drsayuj.info
+      {
+        source: '/(.*)',
+        has: [{ type: 'host', value: 'neurosurgeon-hyderabad.odoo.com' }],
+        destination: 'https://www.drsayuj.info/$1',
+        permanent: true,
+      },
       // Brain tumor surgery redirects
       {
         source: '/brain-tumor-surgery-hyderabad',

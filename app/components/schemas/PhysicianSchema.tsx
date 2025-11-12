@@ -279,19 +279,14 @@ export default function PhysicianSchema() {
           }
         },
         "sameAs": [
+          "https://www.yashodahospitals.com/doctor/dr-sayuj-krishnan/",
+          "https://www.practo.com/hyderabad/doctor/dr-sayuj-krishnan-neurosurgeon",
           "https://g.co/kgs/9366939683880052414",
           "https://www.google.com/maps/place/Dr+Sayuj+Krishnan",
-          "https://www.yashodahospitals.com/doctor/dr-sayuj-krishnan/",
+          "https://www.justdial.com/Hyderabad/Dr-Sayuj-Krishnan-Neurosurgeon",
           "https://www.linkedin.com/in/dr-sayuj-krishnan",
           "https://www.researchgate.net/profile/Dr-Sayuj-Krishnan",
-          "https://www.linkedin.com/posts/dr-sayuj-krishnan-s-275baa66_had-the-privilege-of-demonstrating-full-endoscopic-activity-7379487709532209152-ngkQ",
-          "https://www.linkedin.com/posts/dr-sayuj-krishnan-s-275baa66_recent-talk-on-full-endoscopic-spine-surgery-activity-7028204194725597184-rcmt",
-          "https://www.yashodahospitals.com/events/cervical-spine-boot-camp-cadaveric-workshop/",
-          "https://www.researchgate.net/publication/389909423_Consciousness_Information_And_Emergent_Spacetime_Biological_Counter-Curvature_and_Cross-_Domain_Clues_for_a_Mind-_Geometry_Coupling",
-          "https://www.practo.com/hyderabad/doctor/dr-sayuj-krishnan-neurosurgeon",
-          "https://www.1mg.com/doctors/dr-sayuj-krishnan-123456",
-          "https://www.apollohospitals.com/doctors/dr-sayuj-krishnan",
-          "https://www.medifee.com/doctors/dr-sayuj-krishnan-hyderabad"
+          "https://www.yashodahospitals.com/events/cervical-spine-boot-camp-cadaveric-workshop/"
         ]
       },
       {
