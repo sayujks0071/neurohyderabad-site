@@ -20,20 +20,26 @@ export const runtime = 'nodejs';
 export const maxDuration = 60; // 60 seconds for complex searches
 
 export async function POST(request: NextRequest) {
+  let query: string | undefined;
+  let searchType: string = 'standard';
+  
   try {
     const body = await request.json();
     const {
-      query,
+      query: queryParam,
       fileUris,
       category,
       tags,
       conditions,
       temperature,
-      searchType = 'standard',
+      searchType: searchTypeParam = 'standard',
       ...options
     } = body;
+    
+    query = queryParam;
+    searchType = searchTypeParam;
 
-    if (!query) {
+    if (!query || !query.trim()) {
       return NextResponse.json(
         { error: 'Query parameter is required' },
         { status: 400 }
