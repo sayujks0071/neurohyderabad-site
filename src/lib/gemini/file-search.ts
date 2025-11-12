@@ -61,6 +61,11 @@ Please provide:
 
     // Extract text from response with fallback logic
     let text: string | undefined;
+    
+    // Log response structure for debugging
+    console.log('[Gemini Search] Response type:', typeof response);
+    console.log('[Gemini Search] Response keys:', Object.keys(response || {}));
+    
     const responseText = (response as { text?: unknown }).text;
 
     if (typeof responseText === 'function') {
@@ -72,10 +77,23 @@ Please provide:
         .flatMap((it: any) => it?.content ?? [])
         .map((it: any) => it?.text)
         .find((segment: unknown): segment is string => typeof segment === 'string') ?? undefined;
+    } else if (response && typeof response === 'object') {
+      // Try additional response structures
+      const anyResponse = response as any;
+      if (anyResponse.response?.text) {
+        text = typeof anyResponse.response.text === 'function' 
+          ? anyResponse.response.text() 
+          : anyResponse.response.text;
+      } else if (anyResponse.candidates?.[0]?.content?.parts?.[0]?.text) {
+        text = anyResponse.candidates[0].content.parts[0].text;
+      } else if (anyResponse.text) {
+        text = typeof anyResponse.text === 'function' ? anyResponse.text() : anyResponse.text;
+      }
     }
 
     if (!text || !text.trim()) {
-      throw new Error('Empty response from Gemini');
+      console.error('[Gemini Search] Empty response. Full response:', JSON.stringify(response, null, 2));
+      throw new Error('Empty response from Gemini API. Please check API key and model availability.');
     }
 
     return {
@@ -89,9 +107,20 @@ Please provide:
     };
   } catch (error) {
     console.error('Error searching files with Gemini:', error);
-    throw new Error(
-      `Failed to search files: ${error instanceof Error ? error.message : 'Unknown error'}`
-    );
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    const errorStack = error instanceof Error ? error.stack : undefined;
+    
+    // Provide more helpful error messages
+    if (errorMessage.includes('API key') || errorMessage.includes('401') || errorMessage.includes('403')) {
+      throw new Error('Gemini API key is invalid or missing. Please check your GEMINI_API_KEY environment variable.');
+    }
+    
+    if (errorMessage.includes('404') || errorMessage.includes('model')) {
+      throw new Error('Gemini model not found. Please check the model name (gemini-2.5-flash).');
+    }
+    
+    console.error('[Gemini Search] Full error details:', { errorMessage, errorStack });
+    throw new Error(`Failed to search files: ${errorMessage}`);
   }
 }
 
