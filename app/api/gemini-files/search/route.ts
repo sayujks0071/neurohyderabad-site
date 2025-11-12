@@ -151,10 +151,33 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     console.error('Error searching files:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    
+    // Provide more specific error messages
+    if (errorMessage.includes('API key')) {
+      return NextResponse.json(
+        {
+          error: 'Gemini API key not configured',
+          details: 'Please configure GEMINI_API_KEY environment variable',
+        },
+        { status: 500 }
+      );
+    }
+    
+    if (errorMessage.includes('Empty response')) {
+      return NextResponse.json(
+        {
+          error: 'No results found',
+          details: 'The search did not return any results. Try a different query or ensure files are uploaded.',
+        },
+        { status: 404 }
+      );
+    }
+    
     return NextResponse.json(
       {
         error: 'Failed to search files',
-        details: error instanceof Error ? error.message : 'Unknown error',
+        details: errorMessage,
       },
       { status: 500 }
     );
