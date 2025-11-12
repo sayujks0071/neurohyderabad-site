@@ -272,8 +272,9 @@ export default function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm"
+                    aria-label={`Read article: ${publication.title}`}
                   >
-                    Read Article →
+                    Read: {publication.title.length > 50 ? publication.title.substring(0, 50) + '...' : publication.title} →
                   </a>
                 </div>
               ))}
@@ -283,7 +284,7 @@ export default function Home() {
                 href="/media" 
                 className="inline-flex items-center bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
               >
-                View All Publications
+                View All Media Publications
               </Link>
             </div>
           </div>
@@ -820,7 +821,7 @@ export default function Home() {
                   href="/disease-guides/degenerative-disc-disease"
                   className="text-blue-600 hover:text-blue-800 font-medium"
                 >
-                  Learn More →
+                  Learn More About Degenerative Disc Disease →
                 </Link>
               </div>
               <div className="bg-white rounded-lg shadow-lg p-6 text-center">
@@ -831,7 +832,7 @@ export default function Home() {
                   href="/disease-guides"
                   className="text-blue-600 hover:text-blue-800 font-medium"
                 >
-                  Learn More →
+                  Learn More About Spinal Stenosis →
                 </Link>
               </div>
               <div className="bg-white rounded-lg shadow-lg p-6 text-center">
@@ -839,10 +840,10 @@ export default function Home() {
                 <h3 className="text-lg font-semibold text-blue-700 mb-3">Trigeminal Neuralgia</h3>
                 <p className="text-gray-600 text-sm mb-4">Severe facial pain from nerve compression</p>
                 <Link 
-                  href="/disease-guides"
+                  href="/conditions/trigeminal-neuralgia-treatment-hyderabad"
                   className="text-blue-600 hover:text-blue-800 font-medium"
                 >
-                  Learn More →
+                  Learn More About Trigeminal Neuralgia Treatment →
                 </Link>
               </div>
               <div className="bg-white rounded-lg shadow-lg p-6 text-center">
@@ -850,10 +851,10 @@ export default function Home() {
                 <h3 className="text-lg font-semibold text-blue-700 mb-3">Epilepsy</h3>
                 <p className="text-gray-600 text-sm mb-4">Neurological disorder causing recurrent seizures</p>
                 <Link 
-                  href="/disease-guides"
+                  href="/services/epilepsy-surgery-hyderabad"
                   className="text-blue-600 hover:text-blue-800 font-medium"
                 >
-                  Learn More →
+                  Learn More About Epilepsy Surgery →
                 </Link>
               </div>
             </div>
@@ -862,7 +863,7 @@ export default function Home() {
                 href="/disease-guides"
                 className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
               >
-                View All Disease Guides
+                Explore All Disease & Symptom Guides
               </Link>
             </div>
           </div>

@@ -74,10 +74,10 @@ export default function Footer() {
               aria-labelledby="footer-services-heading"
             >
               <Link 
-                href="/specializations" 
+                href="/services" 
                 className="block text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
-                Specializations Overview
+                All Treatments & Services
               </Link>
               <Link 
                 href="/services/minimally-invasive-spine-surgery" 

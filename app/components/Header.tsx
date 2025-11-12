@@ -29,24 +29,14 @@ const NAV_SECTIONS: NavSection[] = [
     ],
   },
   {
-    title: "Specializations",
+    title: "Conditions & Treatments",
     description:
-      "Expert neurosurgical care across brain, spine, and pediatric specialties with advanced techniques.",
+      "Comprehensive neurosurgical services and treatment pathways for brain, spine, and neurological conditions.",
     links: [
-      { label: "Specializations Overview", href: "/specializations" },
+      { label: "All Treatments & Services", href: "/services" },
       { label: "Spine Surgery", href: "/spine-surgery" },
       { label: "Brain Surgery", href: "/brain-surgery" },
       { label: "Pediatric Neurosurgery", href: "/pediatric-neurosurgery" },
-      { label: "Technology & Innovation", href: "/technology-innovation" },
-    ],
-  },
-  {
-    title: "Conditions & Treatments",
-    description:
-      "Guides to brain, spine, and epilepsy care pathways with minimally invasive options.",
-    links: [
-      { label: "Conditions Overview", href: "/conditions" },
-      { label: "All Treatments", href: "/services" },
       {
         label: "Minimally Invasive Spine Surgery",
         href: "/services/minimally-invasive-spine-surgery",
@@ -59,12 +49,13 @@ const NAV_SECTIONS: NavSection[] = [
         label: "Epilepsy Surgery",
         href: "/services/epilepsy-surgery-hyderabad",
       },
+      { label: "Conditions A-Z", href: "/conditions" },
     ],
   },
   {
-    title: "Patient Resources",
+    title: "Patient Education",
     description:
-      "Education, recovery stories, and preparation checklists for every stage of care.",
+      "Educational resources, disease guides, recovery stories, and preparation checklists for every stage of care.",
     links: [
       { label: "Medical Knowledge Base", href: "/knowledge-base" },
       { label: "Disease & Symptom Guides", href: "/disease-guides" },
