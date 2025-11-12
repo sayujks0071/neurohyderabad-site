@@ -20,11 +20,6 @@ export async function searchFiles(
 ): Promise<FileSearchResponse> {
   const genAI = getGeminiClient();
 
-  // Use gemini-2.0-flash-exp for file search (supports multimodal and file context)
-  const model = genAI.getGenerativeModel({
-    model: 'gemini-2.0-flash-exp',
-  });
-
   try {
     const { query: searchQuery, fileUris = [], temperature = 0.7 } = query;
 
@@ -54,16 +49,28 @@ Please provide:
       });
     }
 
-    const result = await model.generateContent({
+    // Use gemini-2.0-flash-exp for file search (supports multimodal and file context)
+    const result = await genAI.models.generateContent({
+      model: 'gemini-2.0-flash-exp',
       contents: [{ role: 'user', parts: requestParts }],
-      generationConfig: {
+      config: {
         temperature,
         maxOutputTokens: 2048,
       },
     });
 
-    const response = result.response;
-    const text = response.text();
+    // Extract text from response
+    let text = '';
+    if (typeof result.text === 'function') {
+      text = result.text();
+    } else if (typeof result.text === 'string') {
+      text = result.text;
+    } else if ('output' in result && Array.isArray(result.output)) {
+      text = result.output
+        .flatMap((it: any) => it?.content ?? [])
+        .map((it: any) => it?.text)
+        .find((segment: unknown): segment is string => typeof segment === 'string') ?? '';
+    }
 
     return {
       answer: text,
