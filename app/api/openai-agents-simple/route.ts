@@ -13,6 +13,7 @@ export async function POST(request: NextRequest) {
 
     // Check if OpenAI API key is configured
     if (!process.env.OPENAI_API_KEY) {
+      console.error('OpenAI API key not configured');
       return NextResponse.json(
         { 
           error: 'OpenAI API key not configured',
@@ -20,6 +21,34 @@ export async function POST(request: NextRequest) {
         },
         { status: 500 }
       );
+    }
+
+    // Get relevant context from Gemini File API (non-blocking)
+    let geminiContext = '';
+    try {
+      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 
+                     (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 
+                     'http://localhost:3000');
+      
+      const geminiResponse = await fetch(`${baseUrl}/api/gemini-files/search`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          query: body.message,
+          searchType: 'medical',
+          maxResults: 2,
+        })
+      });
+      
+      if (geminiResponse.ok) {
+        const geminiData = await geminiResponse.json();
+        if (geminiData.answer) {
+          geminiContext = `\n\nRELEVANT MEDICAL INFORMATION FROM OUR DOCUMENTS:\n${geminiData.answer.substring(0, 500)}\n`;
+        }
+      }
+    } catch (error) {
+      console.error('Gemini context error (non-fatal):', error);
+      // Continue without context if Gemini fails
     }
 
     // Emergency detection keywords
@@ -57,8 +86,10 @@ Key information about Dr. Sayuj Krishnan:
 - Hours: Mon–Sat 10:00–13:00 & 17:00–19:30 IST; Sun closed
 - Specializes in: Endoscopic spine surgery, brain tumor surgery, epilepsy surgery, trigeminal neuralgia treatment
 
+${geminiContext ? `\nIMPORTANT: Use the following document-backed information when answering questions. This information comes from our medical documents:${geminiContext}\n\nWhen referencing this information, mention that it's based on our medical documents.` : ''}
+
 Your capabilities:
-1. Help patients book appointments
+1. Help patients book appointments - When a patient wants to book, be helpful and guide them through the process. Ask for their name, preferred date/time, and contact information.
 2. Provide information about neurosurgical conditions
 3. Answer questions about procedures and treatments
 4. Provide contact information and location details
@@ -72,6 +103,8 @@ For booking appointments, collect:
 - Appointment type (new consultation, follow-up, second opinion)
 - Preferred date/time
 - Brief description of concern
+
+When a patient says they want to book an appointment, respond enthusiastically and helpfully. Guide them through the booking process step by step.
 
 For information requests, provide accurate details about:
 - Clinic hours and location
@@ -145,10 +178,32 @@ Never provide medical diagnosis or treatment advice.`
 
   } catch (error) {
     console.error('Error processing OpenAI agents request:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    const errorStack = error instanceof Error ? error.stack : undefined;
+    
+    // Log full error details for debugging
+    console.error('Full error details:', {
+      message: errorMessage,
+      stack: errorStack,
+      userMessage: body?.message,
+    });
+    
+    // Provide more specific error messages
+    if (errorMessage.includes('API key') || errorMessage.includes('401') || errorMessage.includes('403')) {
+      return NextResponse.json(
+        { 
+          error: 'OpenAI API key issue',
+          response: "I apologize, but the AI service is not currently available. Please call us directly at +91-9778280044 for immediate assistance."
+        },
+        { status: 500 }
+      );
+    }
+    
     return NextResponse.json(
       { 
         error: 'Internal server error',
-        response: "I apologize, but I'm having trouble processing your request right now. Please call us directly at +91-9778280044 for immediate assistance."
+        response: "I apologize, but I'm having trouble processing your request right now. Please call us directly at +91-9778280044 for immediate assistance.",
+        details: process.env.NODE_ENV === 'development' ? errorMessage : undefined
       },
       { status: 500 }
     );
