@@ -20,7 +20,9 @@ export const metadata: Metadata = {
     "ROSA DBS hyderabad",
     "yashoda hospital neurosurgeon",
     "neurosurgery fellowship germany",
-    "best neurosurgeon hyderabad credentials"
+    "best neurosurgeon hyderabad credentials",
+    "AO Spine member hyderabad",
+    "AO Spine neurosurgeon"
   ],
   alternates: {
     canonical: `${SITE_URL}/about`,
@@ -169,6 +171,7 @@ export default function AboutPage() {
                   <div className="text-4xl mb-4">🏅</div>
                   <h3 className="text-xl font-semibold mb-4 text-blue-700">Professional Memberships</h3>
                   <ul className="text-gray-700 space-y-2 text-sm">
+                    <li><strong>AO Spine</strong> - International Member</li>
                     <li><strong>NSI</strong> - Neurological Society of India</li>
                     <li><strong>CNS</strong> - Congress of Neurological Surgeons</li>
                     <li><strong>WFNS</strong> - World Federation of Neurosurgical Societies</li>

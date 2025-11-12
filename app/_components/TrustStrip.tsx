@@ -7,6 +7,7 @@ interface TrustStripProps {
 const TRUST_POINTS = [
   { icon: '🏥', text: 'Yashoda Hospital Affiliation' },
   { icon: '🎓', text: '9+ Years Neurosurgical Experience' },
+  { icon: '🏅', text: 'AO Spine International Member' },
   { icon: '🔬', text: 'Neuronavigation & Intraoperative Monitoring' },
 ];
 

@@ -89,6 +89,10 @@ export function GlobalStructuredData() {
         "memberOf": [
           {
             "@type": "Organization",
+            "name": "AO Spine"
+          },
+          {
+            "@type": "Organization",
             "name": "Neurological Society of India"
           },
           {

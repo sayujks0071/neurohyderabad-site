@@ -56,7 +56,7 @@ export default function ContentIntegrityPage() {
                 </li>
                 <li className="flex items-start">
                   <span className="text-blue-600 mr-2">✓</span>
-                  <span><strong>Professional Memberships:</strong> Neurological Society of India (NSI), Congress of Neurological Surgeons (CNS)</span>
+                  <span><strong>Professional Memberships:</strong> AO Spine (International Member), Neurological Society of India (NSI), Congress of Neurological Surgeons (CNS)</span>
                 </li>
               </ul>
             </div>

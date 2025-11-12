@@ -58,7 +58,7 @@ export default function TrustProof({ serviceType = 'all', className = '' }: Trus
             <div className="flex items-center justify-between p-3 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-colors">
               <div>
                 <h4 className="font-semibold text-gray-900 group-hover:text-blue-700">Meet Dr. Sayuj Krishnan</h4>
-                <p className="text-sm text-gray-600">9+ years experience • German training • MBBS, DNB Neurosurgery</p>
+                <p className="text-sm text-gray-600">9+ years experience • AO Spine Member • German training • MBBS, DNB Neurosurgery</p>
               </div>
               <span className="text-blue-600 ml-3">→</span>
             </div>

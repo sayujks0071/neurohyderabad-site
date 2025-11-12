@@ -388,7 +388,7 @@ export default function Home() {
                   </li>
                   <li className="flex items-start">
                     <span className="text-blue-600 mr-2">✓</span>
-                    <span>Member: Neurological Society of India (NSI), Congress of Neurological Surgeons (CNS)</span>
+                    <span>Member: AO Spine (International), Neurological Society of India (NSI), Congress of Neurological Surgeons (CNS)</span>
                   </li>
                 </ul>
                 <span className="text-blue-600 font-semibold group-hover:text-blue-800">
