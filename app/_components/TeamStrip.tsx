@@ -12,7 +12,7 @@ export default function TeamStrip() {
           </div>
           <h4 className="text-sm font-semibold text-gray-800">Dr. Sayuj Krishnan</h4>
           <p className="text-xs text-gray-600">Neurosurgeon</p>
-          <p className="text-xs text-gray-500">15+ years</p>
+          <p className="text-xs text-gray-500">9+ years</p>
         </div>
         
         <div className="text-center">

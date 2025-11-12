@@ -21,7 +21,7 @@ const comparisonData = [
   {
     name: "Dr. Sayuj Krishnan",
     hospital: "Independent Practice",
-    experience: "15+ years",
+    experience: "9+ years",
     specializations: ["Endoscopic Spine Surgery", "Minimally Invasive Brain Surgery", "Peripheral Nerve Surgery"],
     techniques: ["Endoscopic Discectomy", "TLIF/ACDF", "Microvascular Decompression", "Gamma Knife Radiosurgery"],
     advantages: [
@@ -91,7 +91,7 @@ const comparisonData = [
 const faqs = [
   {
     question: "How do I choose the best neurosurgeon in Hyderabad?",
-    answer: "Consider factors like experience, specialization in your condition, surgical techniques used, patient outcomes, and personalized care approach. Dr. Sayuj Krishnan specializes in minimally invasive techniques with 15+ years of experience."
+    answer: "Consider factors like experience, specialization in your condition, surgical techniques used, patient outcomes, and personalized care approach. Dr. Sayuj Krishnan specializes in minimally invasive techniques with over 9 years of experience."
   },
   {
     question: "What makes Dr. Sayuj different from Apollo or KIMS neurosurgeons?",

@@ -26,7 +26,7 @@ export default function FAQPageSchema() {
         "name": "What makes Dr Sayuj Krishnan the best neurosurgeon in Hyderabad?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Dr. Krishnan combines 15+ years of experience with advanced training in Germany, state-of-the-art minimally invasive techniques, and a patient-centered approach. His expertise in endoscopic spine surgery, brain tumor surgery, and epilepsy treatment makes him a leading choice for neurosurgical care."
+          "text": "Dr. Krishnan combines over 9 years of experience with advanced training in Germany, state-of-the-art minimally invasive techniques, and a patient-centered approach. His expertise in endoscopic spine surgery, brain tumor surgery, and epilepsy treatment makes him a leading choice for neurosurgical care."
         }
       },
       {

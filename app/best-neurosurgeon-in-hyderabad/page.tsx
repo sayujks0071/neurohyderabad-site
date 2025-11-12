@@ -92,7 +92,7 @@ export default function BestNeurosurgeonPage() {
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-lg" aria-hidden>🎓</span>
-                <span>15+ Years Neurosurgical Experience</span>
+                <span>9+ Years Neurosurgical Experience</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-lg" aria-hidden>🔬</span>
@@ -143,7 +143,7 @@ export default function BestNeurosurgeonPage() {
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-blue-700 mb-2">15+ Years Experience</h3>
+                    <h3 className="text-xl font-semibold text-blue-700 mb-2">9+ Years Experience</h3>
                     <p className="text-gray-700">
                       Across brain and spine procedures with a focus on patient safety and optimal outcomes
                     </p>

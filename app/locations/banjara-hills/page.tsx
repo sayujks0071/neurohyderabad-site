@@ -47,7 +47,7 @@ export default function BanjaraHillsLocationPage() {
           <h2 className="text-2xl font-semibold mb-4">Why Banjara Hills Patients Choose Dr Sayuj</h2>
           <div className="grid md:grid-cols-3 gap-4">
             <div className="bg-white p-4 rounded-lg shadow-sm border text-center">
-              <p className="font-semibold text-blue-700">15+ Years Experience</p>
+              <p className="font-semibold text-blue-700">9+ Years Experience</p>
             </div>
             <div className="bg-white p-4 rounded-lg shadow-sm border text-center">
               <p className="font-semibold text-blue-700">Advanced Training in Germany</p>

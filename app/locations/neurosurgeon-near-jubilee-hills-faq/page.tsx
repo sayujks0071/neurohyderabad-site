@@ -46,7 +46,7 @@ export default function NeurosurgeonNearJubileeHillsFAQPage() {
   const faqs = [
     {
       question: "Who is the best neurosurgeon near Jubilee Hills?",
-      answer: "Dr. Sayuj Krishnan is a leading neurosurgeon accessible from Jubilee Hills, specializing in minimally invasive brain and spine surgery. With 15+ years of experience and advanced training in Germany, he offers endoscopic spine surgery with same-day discharge options."
+      answer: "Dr. Sayuj Krishnan is a leading neurosurgeon accessible from Jubilee Hills, specializing in minimally invasive brain and spine surgery. With over 9 years of experience and advanced training in Germany, he offers endoscopic spine surgery with same-day discharge options."
     },
     {
       question: "How far is Dr. Sayuj's clinic from Jubilee Hills?",

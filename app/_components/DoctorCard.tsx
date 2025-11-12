@@ -25,7 +25,7 @@ export default function DoctorCard() {
         <p className="text-lg text-blue-600 mb-3">Neurosurgeon & Spine Surgeon</p>
         
         <div className="space-y-2 text-sm text-gray-600 mb-4">
-          <p>• 15+ Years Experience</p>
+          <p>• 9+ Years Experience</p>
           <p>• MBBS, DNB Neurosurgery</p>
           <p>• Fellowship in Minimally Invasive Surgery</p>
           <p>• Advanced Training in Germany</p>

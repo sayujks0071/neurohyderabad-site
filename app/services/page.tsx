@@ -99,7 +99,7 @@ export default function ServicesPage() {
               utilizing advanced technology and evidence-based approaches.
             </p>
             <p className="text-gray-700 mb-6">
-              With over 15 years of experience and specialized training in endoscopic spine surgery, Dr. Sayuj provides 
+              With over 9 years of experience and specialized training in endoscopic spine surgery, Dr. Sayuj provides 
               personalized treatment plans tailored to each patient's specific needs and condition severity.
             </p>
           </div>

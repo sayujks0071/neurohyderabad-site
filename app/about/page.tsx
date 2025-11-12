@@ -9,7 +9,7 @@ export const revalidate = 3600; // Revalidate every hour
 
 export const metadata: Metadata = {
   title: "About Dr. Sayuj Krishnan | Premier Neurosurgeon in Hyderabad | Credentials & Experience",
-  description: "Learn about Dr. Sayuj Krishnan's exceptional training, 15+ years of neurosurgical experience, German fellowship, and pioneering work in minimally invasive brain & spine surgery in Hyderabad.",
+  description: "Learn about Dr. Sayuj Krishnan's exceptional training, over 9 years of neurosurgical experience, German fellowship, and pioneering work in minimally invasive brain & spine surgery in Hyderabad.",
   keywords: [
     "dr sayuj krishnan credentials",
     "neurosurgeon hyderabad experience",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "About Dr. Sayuj Krishnan | Premier Neurosurgeon in Hyderabad",
-    description: "Learn about Dr. Sayuj Krishnan's exceptional training, 15+ years of neurosurgical experience, German fellowship, and pioneering work in minimally invasive brain & spine surgery.",
+    description: "Learn about Dr. Sayuj Krishnan's exceptional training, over 9 years of neurosurgical experience, German fellowship, and pioneering work in minimally invasive brain & spine surgery.",
     url: `${SITE_URL}/about`,
     siteName: "Dr. Sayuj Krishnan - Premier Neurosurgeon Hyderabad",
     locale: "en_IN",
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "About Dr. Sayuj Krishnan | Premier Neurosurgeon in Hyderabad",
-    description: "Learn about Dr. Sayuj Krishnan's exceptional training, 15+ years of neurosurgical experience, and pioneering work in minimally invasive brain & spine surgery."
+    description: "Learn about Dr. Sayuj Krishnan's exceptional training, over 9 years of neurosurgical experience, and pioneering work in minimally invasive brain & spine surgery."
   }
 };
 
@@ -72,7 +72,7 @@ export default function AboutPage() {
                     About Dr. Sayuj Krishnan
                   </h1>
                   <p className="text-xl md:text-2xl mb-8 text-blue-100">
-                    Premier neurosurgeon with 15+ years of experience, German training, 
+                    Premier neurosurgeon with over 9 years of experience, German training, 
                     and pioneering expertise in minimally invasive brain & spine surgery.
                   </p>
                   <div className="flex flex-wrap gap-4">
@@ -122,7 +122,7 @@ export default function AboutPage() {
               <div className="bg-blue-50 border-l-4 border-blue-600 p-8 rounded-lg">
                 <h2 className="text-2xl font-bold text-blue-900 mb-4">About Dr. Sayuj Krishnan</h2>
                 <p className="text-lg text-gray-700 leading-relaxed">
-                  Dr. Sayuj Krishnan is a consultant neurosurgeon and spine surgeon serving patients across Hyderabad. After completing his MBBS and DNB in neurosurgery, he obtained fellowship training in minimally invasive and endoscopic spine surgery in Germany. Over the past 15 years he has performed hundreds of procedures ranging from simple endoscopic discectomy to complex brain tumour resections. He is affiliated with Yashoda Hospital, Malakpet, where he is known for blending advanced technology with compassionate care. Patients appreciate his clear explanations and focus on safe recovery without unnecessary interventions.
+                  Dr. Sayuj Krishnan is a consultant neurosurgeon and spine surgeon serving patients across Hyderabad. After completing his MBBS and DNB in neurosurgery, he obtained fellowship training in minimally invasive and endoscopic spine surgery in Germany. Over the past 9 years he has performed hundreds of procedures ranging from simple endoscopic discectomy to complex brain tumour resections. He is affiliated with Yashoda Hospital, Malakpet, where he is known for blending advanced technology with compassionate care. Patients appreciate his clear explanations and focus on safe recovery without unnecessary interventions.
                 </p>
               </div>
             </div>
@@ -149,7 +149,7 @@ export default function AboutPage() {
                   <div className="text-4xl mb-4">🏥</div>
                   <h3 className="text-xl font-semibold mb-4 text-blue-700">Experience</h3>
                   <ul className="text-gray-700 space-y-2">
-                    <li><strong>15+ Years</strong> - Neurosurgical Experience</li>
+                    <li><strong>9+ Years</strong> - Neurosurgical Experience</li>
                     <li><strong>1,000+</strong> - Endoscopic Surgeries</li>
                     <li><strong>Same-day Discharge</strong> - Most Procedures</li>
                     <li><strong>International Training</strong> - Germany</li>
@@ -395,7 +395,7 @@ export default function AboutPage() {
                   <ul className="space-y-3 text-gray-700">
                     <li className="flex items-start">
                       <span className="text-green-600 mr-2">✓</span>
-                      <span><strong>15+ years</strong> of neurosurgical experience</span>
+                      <span><strong>Over 9 years</strong> of neurosurgical experience</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-green-600 mr-2">✓</span>

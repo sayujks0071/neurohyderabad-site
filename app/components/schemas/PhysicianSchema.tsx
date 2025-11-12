@@ -66,7 +66,7 @@ export default function PhysicianSchema() {
         "@id": `${SITE_URL}/#physician`,
         "name": "Dr Sayuj Krishnan",
         "alternateName": "Dr Sayuj",
-        "description": "Premier neurosurgeon with 15+ years of experience specializing in minimally invasive brain & spine surgery, awake brain surgery, and robotic neurosurgery. Fellowship-trained with German training in endoscopic spine surgery.",
+        "description": "Premier neurosurgeon with over 9 years of experience specializing in minimally invasive brain & spine surgery, awake brain surgery, and robotic neurosurgery. Fellowship-trained with German training in endoscopic spine surgery.",
         "url": SITE_URL,
         "image": `${SITE_URL}/images/og-default.jpg`,
         "telephone": "+919778280044",
@@ -75,7 +75,7 @@ export default function PhysicianSchema() {
           {
             "@type": "PropertyValue",
             "name": "Years of Experience",
-            "value": "15+"
+            "value": "9+"
           },
           {
             "@type": "PropertyValue",

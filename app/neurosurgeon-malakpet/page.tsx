@@ -86,7 +86,7 @@ export default function MalakpetNeurosurgeonPage() {
             Neurosurgeon in Malakpet, Hyderabad
           </h1>
           <p className="mt-4 text-xl text-blue-50">
-            Dr. Sayuj Krishnan – Your Local Neurosurgeon at Yashoda Hospital Malakpet. Full Endoscopic Spine Surgery • Brain Tumor Surgery • 24/7 Emergency Care • 15+ Years Experience
+            Dr. Sayuj Krishnan – Your Local Neurosurgeon at Yashoda Hospital Malakpet. Full Endoscopic Spine Surgery • Brain Tumor Surgery • 24/7 Emergency Care • 9+ Years Experience
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <a href="https://wa.me/919778280044" className="rounded-full bg-green-500 px-6 py-3 text-sm font-semibold text-white hover:bg-green-600">
@@ -125,7 +125,7 @@ export default function MalakpetNeurosurgeonPage() {
               <h3 className="font-semibold text-blue-800">Why Choose Our Malakpet Clinic:</h3>
               <ul className="mt-3 space-y-2 text-blue-900">
                 <li>✓ <strong>Centrally located</strong> at Yashoda Hospital Malakpet</li>
-                <li>✓ <strong>15+ years</strong> neurosurgical experience</li>
+                <li>✓ <strong>9+ years</strong> neurosurgical experience</li>
                 <li>✓ <strong>German fellowship</strong> in endoscopic spine surgery</li>
                 <li>✓ <strong>Same-day discharge</strong> for most spine procedures</li>
                 <li>✓ <strong>24/7 emergency</strong> neurosurgical care</li>

@@ -93,7 +93,7 @@ export default function DisclaimerPage() {
               <li>DNB Neurosurgery (Direct 6 years)</li>
               <li>Fellowship in Minimally Invasive and Advanced Spine Surgery</li>
               <li>Observer-ship in Full Endoscopic Spine Surgery (Germany)</li>
-              <li>15+ years of experience in neurosurgery</li>
+              <li>Over 9 years of experience in neurosurgery</li>
             </ul>
           </section>
         </div>

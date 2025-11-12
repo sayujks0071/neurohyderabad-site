@@ -411,7 +411,7 @@ export default function PediatricNeurosurgeryPage() {
                     <li className="flex items-start">
                       <span className="text-blue-600 mr-3 mt-1">✓</span>
                       <div>
-                        <h4 className="font-semibold text-gray-800">15+ Years Experience</h4>
+                        <h4 className="font-semibold text-gray-800">9+ Years Experience</h4>
                         <p className="text-gray-600">Comprehensive neurosurgical expertise</p>
                       </div>
                     </li>

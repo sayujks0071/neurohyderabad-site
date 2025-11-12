@@ -30,7 +30,7 @@ const trustIndicators = [
   },
   {
     icon: '📋',
-    title: '15+ Years Experience',
+    title: '9+ Years Experience',
     description: 'Extensive experience in neurosurgery and spine surgery'
   },
   {

@@ -180,7 +180,7 @@ export default function SciaticaPainManagementPage() {
                 <div>
                   <h3 className="text-xl font-semibold text-blue-700 mb-4">Expertise & Experience</h3>
                   <ul className="space-y-2">
-                    <li>• 15+ years of neurosurgical experience</li>
+                    <li>• Over 9 years of neurosurgical experience</li>
                     <li>• Fellowship in minimally invasive spine surgery</li>
                     <li>• Advanced training in Germany</li>
                     <li>• Specialized in endoscopic procedures</li>

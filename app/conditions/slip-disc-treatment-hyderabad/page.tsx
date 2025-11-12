@@ -196,7 +196,7 @@ export default function SlipDiscTreatmentPage() {
             <ul className="space-y-3 text-gray-700">
               <li className="flex items-start">
                 <span className="text-green-600 mr-2 mt-1">✓</span>
-                <span>15+ years of neurosurgical experience</span>
+                <span>Over 9 years of neurosurgical experience</span>
               </li>
               <li className="flex items-start">
                 <span className="text-green-600 mr-2 mt-1">✓</span>

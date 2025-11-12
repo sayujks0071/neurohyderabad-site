@@ -38,7 +38,7 @@ export default function ContentIntegrityPage() {
                 <Link href="/about" className="text-blue-600 font-semibold hover:underline">
                   Dr. Sayuj Krishnan, MBBS, DNB Neurosurgery
                 </Link>
-                , a board-certified neurosurgeon with over 15 years of clinical experience 
+                , a board-certified neurosurgeon with over 9 years of clinical experience 
                 in brain and spine surgery.
               </p>
               <ul className="space-y-3 text-gray-700">
@@ -328,4 +328,3 @@ export default function ContentIntegrityPage() {
     </div>
   );
 }
-

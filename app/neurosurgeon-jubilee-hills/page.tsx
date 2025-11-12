@@ -5,12 +5,12 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Best Neurosurgeon in Jubilee Hills, Hyderabad | Dr. Sayuj Krishnan | Full Endoscopic Spine Surgery & Daycare Spine Procedures",
   description:
-    "Leading neurosurgeon Dr. Sayuj Krishnan serving Jubilee Hills, Hyderabad. Expert in endoscopic spine surgery, brain tumor surgery, trigeminal neuralgia treatment & emergency neurotrauma care. 15+ years experience. Easy access from Jubilee Hills Check Post, Road No. 36, Film Nagar. Book consultation today.",
+    "Leading neurosurgeon Dr. Sayuj Krishnan serving Jubilee Hills, Hyderabad. Expert in endoscopic spine surgery, brain tumor surgery, trigeminal neuralgia treatment & emergency neurotrauma care. 9+ years experience. Easy access from Jubilee Hills Check Post, Road No. 36, Film Nagar. Book consultation today.",
   keywords: "neurosurgeon jubilee hills, brain surgeon jubilee hills, spine specialist jubilee hills, endoscopic spine surgery jubilee hills, dr sayuj krishnan jubilee hills, best neurosurgeon near jubilee hills, spine surgeon near me jubilee hills",
   alternates: { canonical: "https://www.drsayuj.info/neurosurgeon-jubilee-hills" },
   openGraph: {
     title: "Best Neurosurgeon in Jubilee Hills, Hyderabad | Dr. Sayuj Krishnan",
-    description: "Expert neurosurgeon serving Jubilee Hills with endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures. 15+ years experience.",
+    description: "Expert neurosurgeon serving Jubilee Hills with endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures. 9+ years experience.",
     url: "https://www.drsayuj.info/neurosurgeon-jubilee-hills",
     type: "website",
   },
@@ -85,7 +85,7 @@ export default function JubileeHillsNeurosurgeonPage() {
           </h1>
           <p className="mt-4 text-xl text-blue-50">
             Dr. Sayuj Krishnan – Fellowship-Trained Neurosurgeon & Spine Surgeon serving Jubilee Hills residents. 
-            Full Endoscopic Spine Surgery • Brain Tumor Surgery • Daycare Procedures • 15+ Years Experience
+            Full Endoscopic Spine Surgery • Brain Tumor Surgery • Daycare Procedures • 9+ Years Experience
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <a href="https://wa.me/919778280044" className="rounded-full bg-green-500 px-6 py-3 text-sm font-semibold text-white hover:bg-green-600">
@@ -121,7 +121,7 @@ export default function JubileeHillsNeurosurgeonPage() {
             <div className="mt-6 rounded-lg border border-blue-200 bg-blue-50 p-6">
               <h3 className="font-semibold text-blue-800">Why Jubilee Hills Patients Choose Dr. Sayuj:</h3>
               <ul className="mt-3 space-y-2 text-blue-900">
-                <li>✓ <strong>15+ years</strong> neurosurgical experience</li>
+                <li>✓ <strong>9+ years</strong> neurosurgical experience</li>
                 <li>✓ <strong>German fellowship</strong> in endoscopic spine surgery</li>
                 <li>✓ <strong>Same-day discharge</strong> for most spine procedures</li>
                 <li>✓ <strong>24/7 emergency</strong> neurosurgical care</li>

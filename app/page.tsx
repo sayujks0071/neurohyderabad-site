@@ -189,7 +189,7 @@ export default function Home() {
                   </span>
                 </h1>
                 <p className="home-hero__lead text-xl md:text-2xl mb-6" style={heroLeadStyles}>
-                  Looking for the best spine surgeon in Yashoda Hospital, Hyderabad? Dr. Sayuj Krishnan is a leading neurosurgeon and spine specialist at Yashoda Hospital Malakpet, offering endoscopic spine surgery, minimally invasive procedures, and advanced brain surgery. With 15+ years of experience and German training, Dr. Sayuj provides expert care for back pain, neck pain, sciatica, brain tumors, and spinal conditions. Easily accessible from Dilsukhnagar, LB Nagar, Charminar, and surrounding areas. Book your consultation today.
+                  Looking for the best spine surgeon in Yashoda Hospital, Hyderabad? Dr. Sayuj Krishnan is a leading neurosurgeon and spine specialist at Yashoda Hospital Malakpet, offering endoscopic spine surgery, minimally invasive procedures, and advanced brain surgery. With over 9 years of experience and German training, Dr. Sayuj provides expert care for back pain, neck pain, sciatica, brain tumors, and spinal conditions. Easily accessible from Dilsukhnagar, LB Nagar, Charminar, and surrounding areas. Book your consultation today.
                 </p>
                 {/* <HeroCTA /> */}
                 <div className="space-y-4">
@@ -371,7 +371,7 @@ export default function Home() {
                   Meet Dr. Sayuj Krishnan
                 </h3>
                 <p className="text-gray-700 mb-4">
-                  Learn about 15+ years of neurosurgical experience, German fellowship training, and his approach to compassionate, minimally invasive care.
+                  Learn about over 9 years of neurosurgical experience, German fellowship training, and his approach to compassionate, minimally invasive care.
                 </p>
                 <ul className="space-y-2 text-gray-600 mb-4">
                   <li className="flex items-start">
@@ -625,7 +625,7 @@ export default function Home() {
               </div>
               <div className="bg-white p-8 rounded-lg shadow-lg text-center">
                 <div className="text-4xl mb-4">🏥</div>
-                <h3 className="text-xl font-semibold mb-4 text-blue-700">15+ Years Experience</h3>
+                <h3 className="text-xl font-semibold mb-4 text-blue-700">9+ Years Experience</h3>
                 <p className="text-gray-700">
                   Successfully treated thousands of patients with various neurological conditions, 
                   always prioritizing patient safety and optimal outcomes.
@@ -908,7 +908,7 @@ export default function Home() {
                 <ul className="space-y-4 text-blue-700">
                   <li className="flex items-start">
                     <span className="text-blue-600 mr-3 mt-1">✓</span>
-                    <span>15+ years of neurosurgical experience</span>
+                    <span>Over 9 years of neurosurgical experience</span>
                   </li>
                   <li className="flex items-start">
                     <span className="text-blue-600 mr-3 mt-1">✓</span>
