@@ -5,6 +5,8 @@ import LazyVideoSection from "./_components/LazyVideoSection";
 import LazyRecoveryTimeline from "./_components/LazyRecoveryTimeline";
 import LazyReputationPanel from "./_components/LazyReputationPanel";
 import { SITE_URL } from "../src/lib/seo";
+import JsonLd from "@/components/JsonLd";
+import { getMedicalClinicSchema } from "../src/lib/clinic";
 // Temporarily commenting out problematic imports
 // import BreadcrumbSchema from "./components/schemas/BreadcrumbSchema";
 // import { HeroCTA, StickyCTA } from "../src/components/Experiments";
@@ -25,8 +27,8 @@ import { mediaPublications } from "../src/content/media";
 const HOME_CANONICAL = SITE_URL.endsWith("/") ? SITE_URL : `${SITE_URL}/`;
 
 export const metadata = {
-  title: 'Dr. Sayuj Krishnan | Best Spine Surgeon in Yashoda Hospital Hyderabad | Neurosurgeon Near Me',
-  description: 'Dr. Sayuj Krishnan is the best spine surgeon in Yashoda Hospital, Hyderabad. Expert neurosurgeon and spine specialist offering endoscopic spine surgery, minimally invasive procedures, and brain surgery at Yashoda Hospital Malakpet. Book consultation near you.',
+  title: 'Dr. Sayuj Krishnan | Premier Neurosurgeon & Spine Surgeon | Yashoda Hospital Hyderabad',
+  description: 'Dr. Sayuj Krishnan is a premier neurosurgeon and spine surgeon at Yashoda Hospital, Hyderabad. German-trained expert in endoscopic spine surgery, minimally invasive procedures, and advanced brain surgery. Over 9 years of experience with pioneering work in Full Endoscopic Spine Surgeries.',
   keywords: [
     'dr sayuj krishnan',
     'best spine surgeon in yashoda hospital',
@@ -169,8 +171,11 @@ export default function Home() {
     margin: "0 auto 1.5rem auto",
   };
 
+  const clinicSchema = getMedicalClinicSchema();
+
   return (
     <>
+      <JsonLd data={clinicSchema} />
       {/* <ScrollDepthTracker pageSlug="/" /> */}
       <TrustBridgeTracker />
       <TrustSignalViewportTracker />
@@ -183,13 +188,13 @@ export default function Home() {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="text-center lg:text-left">
                 <h1 className="home-hero__title text-4xl md:text-6xl font-bold mb-6 leading-tight" style={{ color: '#f8fafc', marginBottom: '1.5rem' }}>
-                  Dr. Sayuj Krishnan — Best Spine Surgeon in Yashoda Hospital, Hyderabad
+                  Dr. Sayuj Krishnan — Premier Neurosurgeon & Spine Surgeon
                   <span className="home-hero__subtitle block text-3xl md:text-5xl" style={{ color: '#dbeafe' }}>
-                    Expert Neurosurgeon & Spine Specialist Near You
+                    German-Trained Expert in Endoscopic Spine Surgery | Yashoda Hospital, Hyderabad
                   </span>
                 </h1>
                 <p className="home-hero__lead text-xl md:text-2xl mb-6" style={heroLeadStyles}>
-                  Looking for the best spine surgeon in Yashoda Hospital, Hyderabad? Dr. Sayuj Krishnan is a leading neurosurgeon and spine specialist at Yashoda Hospital Malakpet, offering endoscopic spine surgery, minimally invasive procedures, and advanced brain surgery. With over 9 years of experience and German training, Dr. Sayuj provides expert care for back pain, neck pain, sciatica, brain tumors, and spinal conditions. Easily accessible from Dilsukhnagar, LB Nagar, Charminar, and surrounding areas. Book your consultation today.
+                  Dr. Sayuj Krishnan is a premier neurosurgeon and spine surgeon at Yashoda Hospital Malakpet, specializing in endoscopic spine surgery, minimally invasive procedures, and advanced brain surgery. With over 9 years of experience and German fellowship training in Full Endoscopic Spine Surgery, Dr. Sayuj provides expert care for back pain, neck pain, sciatica, brain tumors, and spinal conditions. Book your consultation today.
                 </p>
                 {/* <HeroCTA /> */}
                 <div className="space-y-4">

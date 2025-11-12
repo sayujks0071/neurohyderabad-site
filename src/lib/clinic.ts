@@ -67,5 +67,11 @@ export function getMedicalClinicSchema({ includeContext = true }: ClinicSchemaOp
       opens,
       closes,
     })),
+    sameAs: [
+      'https://www.yashodahospitals.com/doctor/dr-sayuj-krishnan/',
+      'https://www.practo.com/hyderabad/doctor/dr-sayuj-krishnan-neurosurgeon',
+      'https://g.co/kgs/9366939683880052414',
+      'https://www.google.com/maps/place/Dr+Sayuj+Krishnan',
+    ],
   };
 }
