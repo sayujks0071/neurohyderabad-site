@@ -227,7 +227,7 @@ export const emailTemplates = {
         </div>
       `,
     };
-  }),
+  })
 };
 
 // Email sending functions
