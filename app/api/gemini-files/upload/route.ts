@@ -8,8 +8,8 @@ import {
   uploadFileBufferToGemini,
   validateFile,
   waitForFileActive,
-} from '@/lib/gemini/file-handler';
-import { GeminiFileMetadata } from '@/lib/gemini/types';
+} from '@/src/lib/gemini/file-handler';
+import { GeminiFileMetadata } from '@/src/lib/gemini/types';
 
 export const runtime = 'nodejs';
 export const maxDuration = 60; // 60 seconds for file upload

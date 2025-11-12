@@ -12,9 +12,9 @@ import {
   summarizeDocument,
   compareDocuments,
   validateClaim,
-} from '@/lib/gemini/file-search';
-import { listGeminiFiles } from '@/lib/gemini/file-handler';
-import { MedicalFileSearchQuery } from '@/lib/gemini/types';
+} from '@/src/lib/gemini/file-search';
+import { listGeminiFiles } from '@/src/lib/gemini/file-handler';
+import { MedicalFileSearchQuery } from '@/src/lib/gemini/types';
 
 export const runtime = 'nodejs';
 export const maxDuration = 60; // 60 seconds for complex searches

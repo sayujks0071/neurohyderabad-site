@@ -5,7 +5,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { getGeminiFile, deleteGeminiFile } from '@/lib/gemini/file-handler';
+import { getGeminiFile, deleteGeminiFile } from '@/src/lib/gemini/file-handler';
 
 export const runtime = 'nodejs';
 export const maxDuration = 30;
