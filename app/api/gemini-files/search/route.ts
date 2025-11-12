@@ -61,14 +61,10 @@ export async function POST(request: NextRequest) {
       }
 
       case 'patient-education': {
-        if (!options.condition) {
-          return NextResponse.json(
-            { error: 'Condition is required for patient education' },
-            { status: 400 }
-          );
-        }
+        // Use query as condition if condition not provided
+        const condition = options.condition || query;
         const educationContent = await generatePatientEducation(
-          options.condition,
+          condition,
           fileUris || []
         );
         result = { answer: educationContent, usedFiles: fileUris || [] };
