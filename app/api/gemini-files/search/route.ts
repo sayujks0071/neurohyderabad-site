@@ -152,13 +152,23 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Error searching files:', error);
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    const errorStack = error instanceof Error ? error.stack : undefined;
+    
+    // Log full error details for debugging
+    console.error('Full error details:', {
+      message: errorMessage,
+      stack: errorStack,
+      searchType,
+      query,
+    });
     
     // Provide more specific error messages
-    if (errorMessage.includes('API key')) {
+    if (errorMessage.includes('API key') || errorMessage.includes('invalid') || errorMessage.includes('missing')) {
       return NextResponse.json(
         {
           error: 'Gemini API key not configured',
-          details: 'Please configure GEMINI_API_KEY environment variable',
+          details: 'Please configure GEMINI_API_KEY environment variable in Vercel settings.',
+          message: errorMessage,
         },
         { status: 500 }
       );
@@ -169,8 +179,20 @@ export async function POST(request: NextRequest) {
         {
           error: 'No results found',
           details: 'The search did not return any results. Try a different query or ensure files are uploaded.',
+          message: errorMessage,
         },
         { status: 404 }
+      );
+    }
+    
+    if (errorMessage.includes('model') || errorMessage.includes('404')) {
+      return NextResponse.json(
+        {
+          error: 'Gemini model not available',
+          details: 'The requested model is not available. Please check the model name.',
+          message: errorMessage,
+        },
+        { status: 500 }
       );
     }
     
@@ -178,6 +200,7 @@ export async function POST(request: NextRequest) {
       {
         error: 'Failed to search files',
         details: errorMessage,
+        message: errorMessage,
       },
       { status: 500 }
     );
