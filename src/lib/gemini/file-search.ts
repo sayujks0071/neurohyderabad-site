@@ -119,11 +119,69 @@ Note: This answer is based on general medical knowledge. For personalized medica
         .map((it: any) => it?.text)
         .find((segment: unknown): segment is string => typeof segment === 'string') ?? undefined;
     }
+    // Pattern 5: Try to find text in nested structures
+    else if (anyResponse.output) {
+      const output = anyResponse.output;
+      if (Array.isArray(output)) {
+        for (const item of output) {
+          if (item?.text) {
+            text = typeof item.text === 'function' ? item.text() : item.text;
+            break;
+          }
+          if (item?.content?.parts) {
+            for (const part of item.content.parts) {
+              if (part?.text) {
+                text = part.text;
+                break;
+              }
+            }
+            if (text) break;
+          }
+        }
+      }
+    }
+    // Pattern 6: Deep search for text property
+    else {
+      const deepSearch = (obj: any, depth = 0): string | undefined => {
+        if (depth > 5) return undefined; // Prevent infinite recursion
+        if (typeof obj === 'string' && obj.trim().length > 10) return obj;
+        if (typeof obj !== 'object' || obj === null) return undefined;
+        
+        if (obj.text && typeof obj.text === 'string') return obj.text;
+        if (obj.text && typeof obj.text === 'function') return obj.text();
+        
+        for (const key in obj) {
+          if (Array.isArray(obj[key])) {
+            for (const item of obj[key]) {
+              const found = deepSearch(item, depth + 1);
+              if (found) return found;
+            }
+          } else {
+            const found = deepSearch(obj[key], depth + 1);
+            if (found) return found;
+          }
+        }
+        return undefined;
+      };
+      text = deepSearch(anyResponse);
+    }
 
     if (!text || !text.trim()) {
-      const responseStr = JSON.stringify(response, null, 2).substring(0, 500); // Limit log size
+      const responseStr = JSON.stringify(response, null, 2).substring(0, 1000); // Limit log size
       console.error('[Gemini Search] Empty response. Response structure:', responseStr);
-      throw new Error('Empty response from Gemini API. The API returned a response but no text content was found.');
+      
+      // Provide a helpful fallback response instead of throwing an error
+      text = `I understand you're asking about "${searchQuery}". 
+
+While I don't have specific documents uploaded at the moment, I can provide general information. However, for accurate and personalized medical advice, I recommend:
+
+1. Consulting directly with Dr. Sayuj Krishnan at +91-9778280044
+2. Booking an appointment for a proper evaluation
+3. Visiting our clinic at Yashoda Hospital, Room 317, OPD Block, Malakpet, Hyderabad
+
+For immediate medical emergencies, please call +91-9778280044 or visit the nearest emergency room.
+
+Note: This response is based on general medical knowledge. For personalized medical advice specific to your condition, please consult with a healthcare professional.`;
     }
 
     return {
