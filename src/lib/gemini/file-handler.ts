@@ -87,7 +87,8 @@ export async function uploadFileToGemini(
 
   try {
     const formData = new FormData();
-    const blob = new Blob([fileData], { type: mimeType });
+    // Convert Buffer to Uint8Array for Blob compatibility
+    const blob = new Blob([new Uint8Array(fileData)], { type: mimeType });
     formData.append('file', blob, displayName || filePath.split('/').pop());
     formData.append('mimeType', mimeType);
     if (displayName) {
