@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { SITE_URL } from "../../src/lib/seo";
 import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
+import PhysicianSchema from "../components/schemas/PhysicianSchema";
 
 // Ensure page is statically generated
 export const revalidate = 3600; // Revalidate every hour
@@ -62,6 +63,7 @@ export default function AboutPage() {
         { name: "Home", path: "/" },
         { name: "About Dr. Sayuj Krishnan", path: "/about" }
       ]} />
+      <PhysicianSchema />
       
       <div className="min-h-screen bg-white">
         {/* Hero Section */}
@@ -121,11 +123,33 @@ export default function AboutPage() {
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
-              <div className="bg-blue-50 border-l-4 border-blue-600 p-8 rounded-lg">
+              <div className="bg-blue-50 border-l-4 border-blue-600 p-8 rounded-lg mb-8">
                 <h2 className="text-2xl font-bold text-blue-900 mb-4">About Dr. Sayuj Krishnan</h2>
-                <p className="text-lg text-gray-700 leading-relaxed">
-                  Dr. Sayuj Krishnan is a consultant neurosurgeon and spine surgeon serving patients across Hyderabad. After completing his MBBS and DNB in neurosurgery, he obtained fellowship training in minimally invasive and endoscopic spine surgery in Germany. Over the past 9 years he has performed hundreds of procedures ranging from simple endoscopic discectomy to complex brain tumour resections. He is affiliated with Yashoda Hospital, Malakpet, where he is known for blending advanced technology with compassionate care. Patients appreciate his clear explanations and focus on safe recovery without unnecessary interventions.
+                <p className="text-lg text-gray-700 leading-relaxed mb-4">
+                  Dr. Sayuj Krishnan is a consultant neurosurgeon and spine surgeon serving patients across Hyderabad. After completing his MBBS and DNB in neurosurgery, he obtained fellowship training in minimally invasive and endoscopic spine surgery in Germany. Over the past 9 years he has performed over 1,000 endoscopic procedures ranging from simple discectomy to complex brain tumour resections.
                 </p>
+                <p className="text-lg text-gray-700 leading-relaxed">
+                  He is affiliated with Yashoda Hospital, Malakpet, where he is known for blending advanced technology with compassionate care. Patients appreciate his clear explanations and focus on safe recovery without unnecessary interventions.
+                </p>
+              </div>
+              
+              {/* Pioneer Badge */}
+              <div className="bg-gradient-to-r from-amber-50 to-yellow-50 border-l-4 border-amber-500 p-6 rounded-lg">
+                <div className="flex items-start">
+                  <div className="flex-shrink-0">
+                    <svg className="h-8 w-8 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                    </svg>
+                  </div>
+                  <div className="ml-4">
+                    <h3 className="text-xl font-bold text-amber-900 mb-2">Pioneer in Full Endoscopic Spine Surgery</h3>
+                    <p className="text-amber-800">
+                      Dr. Krishnan is recognized as a pioneer in bringing Full Endoscopic Spine Surgery techniques to Hyderabad. 
+                      His German training at RIWOspine Academy and over 1,000 endoscopic procedures make him one of the most 
+                      experienced endoscopic spine surgeons in South India.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -152,9 +176,10 @@ export default function AboutPage() {
                   <h3 className="text-xl font-semibold mb-4 text-blue-700">Experience</h3>
                   <ul className="text-gray-700 space-y-2">
                     <li><strong>9+ Years</strong> - Neurosurgical Experience</li>
-                    <li><strong>1,000+</strong> - Endoscopic Surgeries</li>
-                    <li><strong>Same-day Discharge</strong> - Most Procedures</li>
-                    <li><strong>International Training</strong> - Germany</li>
+                    <li><strong>1,000+</strong> - Endoscopic Surgeries Performed</li>
+                    <li><strong>Same-day Discharge</strong> - 80% of Spine Cases</li>
+                    <li><strong>German Training</strong> - RIWOspine Academy (2024)</li>
+                    <li><strong>Faculty Member</strong> - National Conferences</li>
                   </ul>
                 </div>
                 <div className="bg-white p-8 rounded-lg shadow-lg text-center">
@@ -176,6 +201,70 @@ export default function AboutPage() {
                     <li><strong>CNS</strong> - Congress of Neurological Surgeons</li>
                     <li><strong>WFNS</strong> - World Federation of Neurosurgical Societies</li>
                   </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Publications, Conferences & Media */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="text-3xl font-bold text-center mb-12">Publications, Conferences & Media Recognition</h2>
+              <div className="grid md:grid-cols-2 gap-8">
+                <div className="bg-blue-50 p-8 rounded-lg">
+                  <h3 className="text-xl font-semibold mb-6 text-blue-800 flex items-center">
+                    <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                    Academic Contributions
+                  </h3>
+                  <ul className="space-y-4 text-gray-700">
+                    <li className="border-l-4 border-blue-400 pl-4">
+                      <p className="font-semibold">Research Publications</p>
+                      <p className="text-sm text-gray-600">Multiple peer-reviewed publications on minimally invasive techniques and neurosurgical innovations</p>
+                    </li>
+                    <li className="border-l-4 border-blue-400 pl-4">
+                      <p className="font-semibold">Conference Faculty</p>
+                      <p className="text-sm text-gray-600">Invited faculty at national neurosurgery conferences including cervical spine workshops</p>
+                    </li>
+                    <li className="border-l-4 border-blue-400 pl-4">
+                      <p className="font-semibold">Teaching & Training</p>
+                      <p className="text-sm text-gray-600">Conducts workshops on full endoscopic spine surgery techniques for fellow neurosurgeons</p>
+                    </li>
+                  </ul>
+                </div>
+                
+                <div className="bg-green-50 p-8 rounded-lg">
+                  <h3 className="text-xl font-semibold mb-6 text-green-800 flex items-center">
+                    <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    </svg>
+                    Media & Public Education
+                  </h3>
+                  <ul className="space-y-4 text-gray-700">
+                    <li className="border-l-4 border-green-400 pl-4">
+                      <p className="font-semibold">Expert Commentary</p>
+                      <p className="text-sm text-gray-600">Featured in leading health publications discussing advances in spine surgery</p>
+                    </li>
+                    <li className="border-l-4 border-green-400 pl-4">
+                      <p className="font-semibold">Patient Education</p>
+                      <p className="text-sm text-gray-600">Regular contributor to medical awareness programs on neurological health</p>
+                    </li>
+                    <li className="border-l-4 border-green-400 pl-4">
+                      <p className="font-semibold">Community Outreach</p>
+                      <p className="text-sm text-gray-600">Participates in health camps and awareness drives for spinal health</p>
+                    </li>
+                  </ul>
+                  <div className="mt-6">
+                    <Link 
+                      href="/media"
+                      className="inline-flex items-center text-green-700 hover:text-green-900 font-semibold"
+                    >
+                      View All Media Coverage →
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>

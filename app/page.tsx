@@ -21,12 +21,15 @@ import TrustSignalViewportTracker from "./_components/TrustSignalViewportTracker
 import UserJourneyTracker from "./_components/UserJourneyTracker";
 import TrustBridgeLink from "./_components/TrustBridgeLink";
 import { mediaPublications } from "../src/content/media";
+import PhysicianSchema from "./components/schemas/PhysicianSchema";
+import MedicalClinicSchema from "./components/schemas/MedicalClinicSchema";
+import WebsiteSchema from "./components/schemas/WebsiteSchema";
 
 const HOME_CANONICAL = SITE_URL.endsWith("/") ? SITE_URL : `${SITE_URL}/`;
 
 export const metadata = {
-  title: 'Dr. Sayuj Krishnan | Best Spine Surgeon in Yashoda Hospital Hyderabad | Neurosurgeon Near Me',
-  description: 'Dr. Sayuj Krishnan is the best spine surgeon in Yashoda Hospital, Hyderabad. Expert neurosurgeon and spine specialist offering endoscopic spine surgery, minimally invasive procedures, and brain surgery at Yashoda Hospital Malakpet. Book consultation near you.',
+  title: 'Dr. Sayuj Krishnan | Neurosurgeon & Endoscopic Spine Surgeon in Hyderabad',
+  description: 'Dr. Sayuj Krishnan is a German-trained neurosurgeon specializing in minimally invasive spine surgery, awake brain surgery, and ROSA robotic DBS at Yashoda Hospital, Hyderabad. Over 1,000 endoscopic procedures with same-day discharge.',
   keywords: [
     'dr sayuj krishnan',
     'best spine surgeon in yashoda hospital',
@@ -58,8 +61,8 @@ export const metadata = {
     }
   },
   openGraph: {
-    title: 'Dr. Sayuj Krishnan | Best Spine Surgeon in Yashoda Hospital Hyderabad',
-    description: 'Dr. Sayuj Krishnan is the best spine surgeon in Yashoda Hospital, Hyderabad. Expert neurosurgeon offering endoscopic spine surgery and minimally invasive procedures at Yashoda Hospital Malakpet.',
+    title: 'Dr. Sayuj Krishnan | German-Trained Neurosurgeon in Hyderabad',
+    description: 'German-trained neurosurgeon specializing in minimally invasive spine surgery, awake brain surgery, and robotic DBS. Over 1,000 endoscopic procedures performed.',
     url: HOME_CANONICAL,
     siteName: 'Dr. Sayuj Krishnan - Neurosurgeon Hyderabad',
     locale: 'en_IN',
@@ -76,8 +79,8 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Dr. Sayuj Krishnan | Best Spine Surgeon in Yashoda Hospital Hyderabad',
-    description: 'Best spine surgeon in Yashoda Hospital, Hyderabad. Expert neurosurgeon offering endoscopic spine surgery at Yashoda Hospital Malakpet.'
+    title: 'Dr. Sayuj Krishnan | German-Trained Neurosurgeon in Hyderabad',
+    description: 'German-trained neurosurgeon specializing in minimally invasive spine & brain surgery. Over 1,000 endoscopic procedures.'
   }
 };
 
@@ -171,6 +174,11 @@ export default function Home() {
 
   return (
     <>
+      {/* Schema Markup for E-E-A-T */}
+      <PhysicianSchema />
+      <MedicalClinicSchema />
+      <WebsiteSchema />
+      
       {/* <ScrollDepthTracker pageSlug="/" /> */}
       <TrustBridgeTracker />
       <TrustSignalViewportTracker />
@@ -189,7 +197,7 @@ export default function Home() {
                   </span>
                 </h1>
                 <p className="home-hero__lead text-xl md:text-2xl mb-6" style={heroLeadStyles}>
-                  Looking for the best spine surgeon in Yashoda Hospital, Hyderabad? Dr. Sayuj Krishnan is a leading neurosurgeon and spine specialist at Yashoda Hospital Malakpet, offering endoscopic spine surgery, minimally invasive procedures, and advanced brain surgery. With over 9 years of experience and German training, Dr. Sayuj provides expert care for back pain, neck pain, sciatica, brain tumors, and spinal conditions. Easily accessible from Dilsukhnagar, LB Nagar, Charminar, and surrounding areas. Book your consultation today.
+                  German-trained neurosurgeon specializing in minimally invasive spine surgery, awake brain surgery, and ROSA robotic deep brain stimulation. With over 1,000 endoscopic procedures and advanced fellowship training, Dr. Sayuj combines cutting-edge technology with compassionate care at Yashoda Hospital, Malakpet.
                 </p>
                 {/* <HeroCTA /> */}
                 <div className="space-y-4">

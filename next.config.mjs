@@ -70,6 +70,19 @@ const nextConfig = {
         destination: 'https://www.drsayuj.info/$1',
         permanent: true,
       },
+      // SITE ARCHITECTURE CONSOLIDATION: Reduce 5 hub pages to 2
+      // Redirect /specializations to /services (consolidate "what we do")
+      {
+        source: '/specializations',
+        destination: '/services',
+        permanent: true,
+      },
+      // Redirect /disease-guides to /conditions (consolidate medical info)
+      {
+        source: '/disease-guides/:path*',
+        destination: '/conditions/:path*',
+        permanent: true,
+      },
       // Brain tumor surgery redirects
       {
         source: '/brain-tumor-surgery-hyderabad',
