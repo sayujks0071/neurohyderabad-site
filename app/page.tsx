@@ -267,7 +267,7 @@ export default function Home() {
                     rel="noopener noreferrer"
                     className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm"
                   >
-                    Read Article →
+                    Read: {publication.title} →
                   </a>
                 </div>
               ))}
@@ -277,7 +277,7 @@ export default function Home() {
                 href="/media" 
                 className="inline-flex items-center bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
               >
-                View All Publications
+                View All Media Publications & Expert Insights
               </Link>
             </div>
           </div>
@@ -332,7 +332,7 @@ export default function Home() {
                     href="/services/minimally-invasive-spine-surgery"
                     className="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition-colors"
                   >
-                    Learn More About MISS →
+                    Learn More About Minimally Invasive Spine Surgery →
                   </Link>
                   <div className="mt-4">
                     <Link href="/conditions/slip-disc-treatment-hyderabad/" className="text-blue-600 hover:underline mr-4">Slip Disc Treatment</Link>
@@ -394,7 +394,7 @@ export default function Home() {
                   </li>
                 </ul>
                 <span className="text-blue-600 font-semibold group-hover:text-blue-800">
-                  Learn More About Dr. Sayuj →
+                  Learn More About Dr. Sayuj Krishnan's Credentials & Experience →
                 </span>
               </TrustBridgeLink>
               
@@ -424,7 +424,7 @@ export default function Home() {
                   </div>
                 </div>
                 <span className="text-blue-600 font-semibold group-hover:text-blue-800">
-                  Read All Patient Stories →
+                  Read All Patient Success Stories & Testimonials →
                 </span>
               </TrustBridgeLink>
             </div>
@@ -483,7 +483,7 @@ export default function Home() {
                     href="/services/brain-tumor-surgery-hyderabad"
                     className="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition-colors"
                   >
-                    Learn More About Brain Tumor Surgery →
+                    Learn More About Advanced Brain Tumor Surgery →
                   </Link>
                   <div className="mt-4">
                     <Link href="/services/epilepsy-surgery-hyderabad/" className="text-blue-600 hover:underline mr-4">Epilepsy Surgery</Link>
@@ -602,7 +602,7 @@ export default function Home() {
                     href="/services/epilepsy-surgery-hyderabad"
                     className="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition-colors"
                   >
-                    Learn More About Epilepsy Surgery →
+                    Learn More About Epilepsy Surgery & Seizure Treatment →
                   </Link>
                 </div>
               </div>
@@ -672,7 +672,7 @@ export default function Home() {
                   href="/emergency-rehabilitation"
                   className="text-red-600 hover:text-red-800 font-medium"
                 >
-                  Learn More About Emergency Care →
+                  Learn About 24/7 Emergency Neurosurgical Care →
                 </Link>
               </div>
               <div className="bg-white rounded-lg shadow-lg p-6 text-center border-l-4 border-orange-500">
@@ -817,7 +817,7 @@ export default function Home() {
                   href="/disease-guides/degenerative-disc-disease"
                   className="text-blue-600 hover:text-blue-800 font-medium"
                 >
-                  Learn More →
+                  Learn About Degenerative Disc Disease →
                 </Link>
               </div>
               <div className="bg-white rounded-lg shadow-lg p-6 text-center">
@@ -828,7 +828,7 @@ export default function Home() {
                   href="/disease-guides"
                   className="text-blue-600 hover:text-blue-800 font-medium"
                 >
-                  Learn More →
+                  Learn About Spinal Stenosis Treatment →
                 </Link>
               </div>
               <div className="bg-white rounded-lg shadow-lg p-6 text-center">
@@ -836,10 +836,10 @@ export default function Home() {
                 <h3 className="text-lg font-semibold text-blue-700 mb-3">Trigeminal Neuralgia</h3>
                 <p className="text-gray-600 text-sm mb-4">Severe facial pain from nerve compression</p>
                 <Link 
-                  href="/disease-guides"
+                  href="/conditions/trigeminal-neuralgia-treatment-hyderabad"
                   className="text-blue-600 hover:text-blue-800 font-medium"
                 >
-                  Learn More →
+                  Learn About Trigeminal Neuralgia Treatment →
                 </Link>
               </div>
               <div className="bg-white rounded-lg shadow-lg p-6 text-center">
@@ -847,10 +847,10 @@ export default function Home() {
                 <h3 className="text-lg font-semibold text-blue-700 mb-3">Epilepsy</h3>
                 <p className="text-gray-600 text-sm mb-4">Neurological disorder causing recurrent seizures</p>
                 <Link 
-                  href="/disease-guides"
+                  href="/services/epilepsy-surgery-hyderabad"
                   className="text-blue-600 hover:text-blue-800 font-medium"
                 >
-                  Learn More →
+                  Learn About Epilepsy Surgery & Treatment →
                 </Link>
               </div>
             </div>
@@ -859,7 +859,7 @@ export default function Home() {
                 href="/disease-guides"
                 className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
               >
-                View All Disease Guides
+                View All Comprehensive Disease Guides
               </Link>
             </div>
           </div>
