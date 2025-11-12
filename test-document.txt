@@ -1,0 +1,16 @@
+Medical Test Document
+
+This is a test document for the Gemini File API integration.
+
+Patient Information:
+- Condition: Test condition
+- Treatment: Test treatment protocol
+- Follow-up: Regular monitoring recommended
+
+This document is used to verify that the file upload and search functionality is working correctly with the Google Gemini File API.
+
+Key Points:
+1. File upload should process successfully
+2. File should be searchable after processing
+3. Search results should return relevant content
+

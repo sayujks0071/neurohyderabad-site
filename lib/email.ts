@@ -133,6 +133,100 @@ export const emailTemplates = {
         </div>
       </div>
     `
+  }),
+
+  preAppointmentBriefing: (data: {
+    patientName: string;
+    condition: string;
+    procedureType: string;
+    appointmentDate?: string;
+    briefingContent: string;
+    sections?: {
+      preparation?: string;
+      whatToExpect?: string;
+      recovery?: string;
+      questionsToAsk?: string;
+    };
+    sources?: string[];
+  }) => {
+    const {
+      patientName,
+      condition,
+      procedureType,
+      appointmentDate,
+      briefingContent,
+      sections,
+      sources,
+    } = data;
+
+    const renderSection = (title: string, content?: string) =>
+      content
+        ? `
+        <div style="padding: 16px; border-radius: 8px; background: #f8fafc; margin-bottom: 16px;">
+          <h3 style="margin: 0 0 8px; color: #1e40af;">${title}</h3>
+          <p style="margin: 0; color: #334155; white-space: pre-wrap;">${content}</p>
+        </div>
+      `
+        : '';
+
+    return {
+      subject: `Pre-Appointment Briefing - ${procedureType} (${condition})`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 640px; margin: 0 auto; color: #0f172a;">
+          <div style="text-align: center; margin-bottom: 24px;">
+            <h1 style="margin: 0; color: #2563eb;">Dr. Sayuj Krishnan</h1>
+            <p style="margin: 4px 0; color: #475569;">Neurosurgeon • Hyderabad</p>
+          </div>
+
+          <div style="background: #e0f2fe; padding: 20px; border-radius: 12px; margin-bottom: 20px;">
+            <p style="margin: 0; color: #0f172a;">Hi ${patientName || 'there'},</p>
+            <p style="margin: 8px 0 0; color: #0f172a;">
+              Here is your personalized briefing to help you prepare for your upcoming ${procedureType.toLowerCase()}.
+            </p>
+            ${
+              appointmentDate
+                ? `<p style="margin: 8px 0 0; color: #0f172a;"><strong>Appointment:</strong> ${appointmentDate}</p>`
+                : ''
+            }
+          </div>
+
+          ${renderSection('How to Prepare', sections?.preparation)}
+          ${renderSection('What to Expect', sections?.whatToExpect)}
+          ${renderSection('Recovery Tips', sections?.recovery)}
+          ${renderSection('Questions to Ask Your Surgeon', sections?.questionsToAsk)}
+
+          <div style="padding: 20px; background: #fefce8; border-radius: 12px; border: 1px solid #fde68a; margin-bottom: 20px;">
+            <h3 style="margin: 0 0 8px; color: #92400e;">Important</h3>
+            <p style="margin: 0; color: #7c2d12;">
+              This information is sourced directly from Dr. Sayuj's verified medical documents to make sure you receive accurate, evidence-based guidance.
+            </p>
+          </div>
+
+          <div style="padding: 20px; background: #f8fafc; border-radius: 12px; margin-bottom: 20px;">
+            <h3 style="margin: 0 0 12px; color: #1e40af;">Full Briefing</h3>
+            <div style="color: #0f172a;">${briefingContent}</div>
+          </div>
+
+          ${
+            sources && sources.length
+              ? `
+            <div style="padding: 16px; background: #f1f5f9; border-radius: 8px; margin-bottom: 20px;">
+              <h4 style="margin: 0 0 8px; color: #1e293b;">Sources</h4>
+              <ul style="margin: 0; padding-left: 18px; color: #334155;">
+                ${sources.map((source) => `<li>${source}</li>`).join('')}
+              </ul>
+            </div>
+          `
+              : ''
+          }
+
+          <div style="text-align: center; color: #475569; font-size: 14px;">
+            <p style="margin: 0;">Questions? Call +91 9778280044 or email neurospinehyd@drsayuj.com</p>
+            <p style="margin: 8px 0 0;">Yashoda Hospital, Malakpet, Hyderabad</p>
+          </div>
+        </div>
+      `,
+    };
   })
 };
 
@@ -203,6 +297,50 @@ export const sendAppointmentRequestEmail = async (data: {
   }
 };
 
+export const sendPreAppointmentBriefingEmail = async (data: {
+  patientEmail: string;
+  patientName: string;
+  condition: string;
+  procedureType: string;
+  appointmentDate?: string;
+  briefingContent: string;
+  sections?: {
+    preparation?: string;
+    whatToExpect?: string;
+    recovery?: string;
+    questionsToAsk?: string;
+  };
+  sources?: string[];
+}) => {
+  try {
+    const template = emailTemplates.preAppointmentBriefing({
+      patientName: data.patientName,
+      condition: data.condition,
+      procedureType: data.procedureType,
+      appointmentDate: data.appointmentDate,
+      briefingContent: data.briefingContent,
+      sections: data.sections,
+      sources: data.sources,
+    });
+
+    const result = await resend.emails.send({
+      from: FROM_EMAIL,
+      to: data.patientEmail,
+      bcc: ADMIN_EMAIL,
+      subject: template.subject,
+      html: template.html,
+    });
+
+    return { success: true, messageId: result.data?.id };
+  } catch (error) {
+    console.error('Error sending pre-appointment briefing email:', error);
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Unknown error',
+    };
+  }
+};
+
 // Test email function
 export const sendTestEmail = async () => {
   try {
@@ -226,4 +364,3 @@ export const sendTestEmail = async () => {
     return { success: false, error: error instanceof Error ? error.message : 'Unknown error' };
   }
 };
-

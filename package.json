@@ -15,7 +15,8 @@
     "seo:audit": "node scripts/seo/audit.mjs",
     "seo:report": "node scripts/seo/report.mjs",
     "seo:all": "npm run seo:audit && npm run seo:report",
-    "verify:deployment": "node scripts/verify-deployment.js"
+    "verify:deployment": "node scripts/verify-deployment.js",
+    "reindex:gemini": "ts-node scripts/reindex-gemini-rag.ts"
   },
   "dependencies": {
     "@google/genai": "^0.6.0",

@@ -1,3 +1,19 @@
+/**
+ * Enhanced Chatbot Integration Example
+ * 
+ * This shows how to integrate Gemini File API with your existing OpenAI chatbot
+ * to provide document-backed answers.
+ */
+
+// ============================================================================
+// ENHANCED CHATBOT WITH GEMINI CONTEXT
+// ============================================================================
+
+/**
+ * Enhanced version of app/api/openai-chat/route.ts
+ * with Gemini File API integration
+ */
+
 import { NextRequest, NextResponse } from 'next/server';
 
 interface ChatRequest {
@@ -33,15 +49,15 @@ export async function POST(request: NextRequest) {
     }
 
     // ========================================================================
-    // Get relevant context from Gemini File API
+    // NEW: Get relevant context from Gemini File API
     // ========================================================================
     let geminiContext = '';
     let geminiSources: any[] = [];
     
     try {
       const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 
-                     (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 
-                     'http://localhost:3000');
+                     process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 
+                     'http://localhost:3000';
       
       const geminiResponse = await fetch(`${baseUrl}/api/gemini-files/search`, {
         method: 'POST',
@@ -137,7 +153,7 @@ Always be professional, empathetic, and prioritize patient safety. If you're uns
       pageSlug: body.pageSlug,
       service: body.service,
       userMessage: body.message,
-      aiResponse: aiResponse.substring(0, 100) + '...', // Log first 100 chars for privacy
+      aiResponse: aiResponse.substring(0, 100) + '...',
       geminiContextUsed: !!geminiContext,
       geminiSources: geminiSources.length
     });
@@ -161,18 +177,36 @@ Always be professional, empathetic, and prioritize patient safety. If you're uns
   }
 }
 
-export async function GET() {
-  return NextResponse.json({
-    message: 'OpenAI Chat API is running',
-    version: '1.0.0',
-    features: [
-      'GPT-4 powered responses',
-      'Medical appointment booking',
-      'Emergency detection',
-      'Conversation history',
-      'Context-aware responses',
-      'Document-backed answers (Gemini File API)',
-      'Source citations'
-    ]
-  });
-}
+// ============================================================================
+// USAGE INSTRUCTIONS
+// ============================================================================
+
+/**
+ * To integrate this enhanced chatbot:
+ * 
+ * 1. Replace the content of app/api/openai-chat/route.ts with this code
+ * 
+ * 2. Make sure GEMINI_API_KEY is set in .env.local
+ * 
+ * 3. Test with a medical question:
+ *    curl -X POST http://localhost:3000/api/openai-chat \
+ *      -H "Content-Type: application/json" \
+ *      -d '{
+ *        "message": "What are the treatment options for brain tumors?",
+ *        "pageSlug": "test",
+ *        "conversationHistory": []
+ *      }'
+ * 
+ * 4. The chatbot will now:
+ *    - Search your medical documents via Gemini
+ *    - Include relevant context in the OpenAI prompt
+ *    - Provide source citations
+ *    - Give more accurate, document-backed answers
+ * 
+ * Benefits:
+ * ✅ More accurate answers backed by your documents
+ * ✅ Source citations for transparency
+ * ✅ Reduced hallucinations
+ * ✅ Up-to-date information from your documents
+ */
+
