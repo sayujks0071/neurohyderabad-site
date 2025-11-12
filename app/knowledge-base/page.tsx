@@ -44,14 +44,17 @@ export default function KnowledgeBasePage() {
       });
 
       if (!response.ok) {
-        throw new Error(`Search failed: ${response.status}`);
+        const errorData = await response.json().catch(() => ({}));
+        const errorMsg = errorData.details || errorData.message || errorData.error || `Search failed: ${response.status}`;
+        throw new Error(errorMsg);
       }
 
       const data = await response.json();
       setResults([data]);
     } catch (err) {
       console.error('Search error:', err);
-      setError(err instanceof Error ? err.message : 'Failed to search knowledge base');
+      const errorMessage = err instanceof Error ? err.message : 'Failed to search knowledge base';
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
