@@ -3,7 +3,7 @@
  * Implements semantic search and Q&A over uploaded documents
  */
 
-import { GoogleGenerativeAI } from '@google/genai';
+import { GoogleGenAI } from '@google/genai';
 import {
   FileSearchQuery,
   FileSearchResponse,
