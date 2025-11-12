@@ -3,7 +3,7 @@
  * Handles file upload, management, and retrieval operations
  */
 
-import { GoogleGenerativeAI, GoogleAIFileManager } from '@google/genai';
+import { GoogleGenAI } from '@google/genai';
 import {
   GeminiFileMetadata,
   GeminiFileUploadResponse,
@@ -14,9 +14,9 @@ import {
 } from './types';
 
 /**
- * Initialize Gemini API with proper key handling
+ * Initialize Gemini API client
  */
-export function getGeminiFileManager(): GoogleAIFileManager {
+export function getGeminiClient(): GoogleGenAI {
   const apiKey =
     process.env.GEMINI_API_KEY ||
     process.env.GOOGLE_GENAI_API_KEY ||
@@ -29,26 +29,14 @@ export function getGeminiFileManager(): GoogleAIFileManager {
     );
   }
 
-  return new GoogleAIFileManager(apiKey);
+  return new GoogleGenAI({ apiKey });
 }
 
 /**
- * Initialize GoogleGenerativeAI client
+ * Initialize Gemini API with proper key handling (alias for getGeminiClient)
  */
-export function getGeminiClient(): GoogleGenerativeAI {
-  const apiKey =
-    process.env.GEMINI_API_KEY ||
-    process.env.GOOGLE_GENAI_API_KEY ||
-    process.env.GENAI_API_KEY ||
-    process.env.API_KEY;
-
-  if (!apiKey) {
-    throw new Error(
-      'Gemini API key not found. Set GEMINI_API_KEY or GOOGLE_GENAI_API_KEY environment variable.'
-    );
-  }
-
-  return new GoogleGenerativeAI(apiKey);
+export function getGeminiFileManager(): GoogleGenAI {
+  return getGeminiClient();
 }
 
 /**
@@ -77,22 +65,50 @@ export function validateFile(
 }
 
 /**
- * Upload file to Gemini File API
+ * Upload file to Gemini File API using REST API
  */
 export async function uploadFileToGemini(
   filePath: string,
   mimeType: string,
   displayName?: string
 ): Promise<GeminiFileMetadata> {
-  const fileManager = getGeminiFileManager();
+  const apiKey =
+    process.env.GEMINI_API_KEY ||
+    process.env.GOOGLE_GENAI_API_KEY ||
+    process.env.GENAI_API_KEY ||
+    process.env.API_KEY;
+
+  if (!apiKey) {
+    throw new Error('Gemini API key not found');
+  }
+
+  const fs = await import('fs/promises');
+  const fileData = await fs.readFile(filePath);
 
   try {
-    const uploadResult = await fileManager.uploadFile(filePath, {
-      mimeType,
-      displayName: displayName || filePath.split('/').pop(),
-    });
+    const formData = new FormData();
+    const blob = new Blob([fileData], { type: mimeType });
+    formData.append('file', blob, displayName || filePath.split('/').pop());
+    formData.append('mimeType', mimeType);
+    if (displayName) {
+      formData.append('displayName', displayName);
+    }
 
-    return uploadResult.file as GeminiFileMetadata;
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/upload/v1beta/files?key=${apiKey}`,
+      {
+        method: 'POST',
+        body: formData,
+      }
+    );
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({}));
+      throw new Error(`Upload failed: ${response.status} - ${JSON.stringify(error)}`);
+    }
+
+    const result = await response.json();
+    return result.file as GeminiFileMetadata;
   } catch (error) {
     console.error('Error uploading file to Gemini:', error);
     throw new Error(
@@ -137,23 +153,39 @@ export async function uploadFileBufferToGemini(
 }
 
 /**
- * List all uploaded files
+ * List all uploaded files using REST API
  */
 export async function listGeminiFiles(
   pageSize?: number,
   pageToken?: string
 ): Promise<GeminiFileListResponse> {
-  const fileManager = getGeminiFileManager();
+  const apiKey =
+    process.env.GEMINI_API_KEY ||
+    process.env.GOOGLE_GENAI_API_KEY ||
+    process.env.GENAI_API_KEY ||
+    process.env.API_KEY;
+
+  if (!apiKey) {
+    throw new Error('Gemini API key not found');
+  }
 
   try {
-    const listResult = await fileManager.listFiles({
-      pageSize,
-      pageToken,
-    });
+    const params = new URLSearchParams();
+    if (pageSize) params.append('pageSize', pageSize.toString());
+    if (pageToken) params.append('pageToken', pageToken);
 
+    const url = `https://generativelanguage.googleapis.com/v1beta/files?key=${apiKey}&${params.toString()}`;
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({}));
+      throw new Error(`List failed: ${response.status} - ${JSON.stringify(error)}`);
+    }
+
+    const result = await response.json();
     return {
-      files: (listResult.files || []) as GeminiFileMetadata[],
-      nextPageToken: listResult.nextPageToken,
+      files: (result.files || []) as GeminiFileMetadata[],
+      nextPageToken: result.nextPageToken,
     };
   } catch (error) {
     console.error('Error listing Gemini files:', error);
@@ -164,15 +196,31 @@ export async function listGeminiFiles(
 }
 
 /**
- * Get file metadata by name
+ * Get file metadata by name using REST API
  */
 export async function getGeminiFile(
   fileName: string
 ): Promise<GeminiFileMetadata> {
-  const fileManager = getGeminiFileManager();
+  const apiKey =
+    process.env.GEMINI_API_KEY ||
+    process.env.GOOGLE_GENAI_API_KEY ||
+    process.env.GENAI_API_KEY ||
+    process.env.API_KEY;
+
+  if (!apiKey) {
+    throw new Error('Gemini API key not found');
+  }
 
   try {
-    const file = await fileManager.getFile(fileName);
+    const url = `https://generativelanguage.googleapis.com/v1beta/${fileName}?key=${apiKey}`;
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({}));
+      throw new Error(`Get file failed: ${response.status} - ${JSON.stringify(error)}`);
+    }
+
+    const file = await response.json();
     return file as GeminiFileMetadata;
   } catch (error) {
     console.error('Error getting Gemini file:', error);
@@ -183,13 +231,29 @@ export async function getGeminiFile(
 }
 
 /**
- * Delete file from Gemini
+ * Delete file from Gemini using REST API
  */
 export async function deleteGeminiFile(fileName: string): Promise<void> {
-  const fileManager = getGeminiFileManager();
+  const apiKey =
+    process.env.GEMINI_API_KEY ||
+    process.env.GOOGLE_GENAI_API_KEY ||
+    process.env.GENAI_API_KEY ||
+    process.env.API_KEY;
+
+  if (!apiKey) {
+    throw new Error('Gemini API key not found');
+  }
 
   try {
-    await fileManager.deleteFile(fileName);
+    const url = `https://generativelanguage.googleapis.com/v1beta/${fileName}?key=${apiKey}`;
+    const response = await fetch(url, {
+      method: 'DELETE',
+    });
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({}));
+      throw new Error(`Delete failed: ${response.status} - ${JSON.stringify(error)}`);
+    }
   } catch (error) {
     console.error('Error deleting Gemini file:', error);
     throw new Error(
