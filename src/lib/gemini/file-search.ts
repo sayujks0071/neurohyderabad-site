@@ -62,50 +62,68 @@ Note: This answer is based on general medical knowledge. For personalized medica
     }
 
     // Use gemini-2.5-flash for file search
-    const response = await genAI.models.generateContent({
-      model: 'gemini-2.5-flash',
-      contents: [{ role: 'user', parts: requestParts }],
-      config: {
-        temperature,
-        maxOutputTokens: 2048,
-      },
-    });
+    let response: any;
+    try {
+      response = await genAI.models.generateContent({
+        model: 'gemini-2.5-flash',
+        contents: [{ role: 'user', parts: requestParts }],
+        config: {
+          temperature,
+          maxOutputTokens: 2048,
+        },
+      });
+    } catch (apiError) {
+      console.error('[Gemini Search] API call failed:', apiError);
+      const errorMsg = apiError instanceof Error ? apiError.message : String(apiError);
+      if (errorMsg.includes('401') || errorMsg.includes('403') || errorMsg.includes('API key')) {
+        throw new Error('Gemini API key is invalid or missing. Please check your GEMINI_API_KEY environment variable.');
+      }
+      if (errorMsg.includes('404') || errorMsg.includes('model')) {
+        throw new Error('Gemini model "gemini-2.5-flash" not found. Please check the model name.');
+      }
+      throw new Error(`Gemini API call failed: ${errorMsg}`);
+    }
 
     // Extract text from response with fallback logic
     let text: string | undefined;
     
-    // Log response structure for debugging
-    console.log('[Gemini Search] Response type:', typeof response);
-    console.log('[Gemini Search] Response keys:', Object.keys(response || {}));
+    // Log response structure for debugging (only in development)
+    if (process.env.NODE_ENV === 'development') {
+      console.log('[Gemini Search] Response type:', typeof response);
+      console.log('[Gemini Search] Response keys:', Object.keys(response || {}));
+    }
     
-    const responseText = (response as { text?: unknown }).text;
-
-    if (typeof responseText === 'function') {
-      text = (responseText as () => string)();
-    } else if (typeof responseText === 'string') {
-      text = responseText;
-    } else if ('output' in response && Array.isArray(response.output)) {
-      text = response.output
+    // Try multiple response extraction patterns
+    const anyResponse = response as any;
+    
+    // Pattern 1: Direct text property (function or string)
+    if (anyResponse.text) {
+      text = typeof anyResponse.text === 'function' 
+        ? anyResponse.text() 
+        : anyResponse.text;
+    }
+    // Pattern 2: response.text
+    else if (anyResponse.response?.text) {
+      text = typeof anyResponse.response.text === 'function' 
+        ? anyResponse.response.text() 
+        : anyResponse.response.text;
+    }
+    // Pattern 3: candidates[0].content.parts[0].text (standard Gemini API structure)
+    else if (anyResponse.candidates?.[0]?.content?.parts?.[0]?.text) {
+      text = anyResponse.candidates[0].content.parts[0].text;
+    }
+    // Pattern 4: output array structure
+    else if (Array.isArray(anyResponse.output)) {
+      text = anyResponse.output
         .flatMap((it: any) => it?.content ?? [])
         .map((it: any) => it?.text)
         .find((segment: unknown): segment is string => typeof segment === 'string') ?? undefined;
-    } else if (response && typeof response === 'object') {
-      // Try additional response structures
-      const anyResponse = response as any;
-      if (anyResponse.response?.text) {
-        text = typeof anyResponse.response.text === 'function' 
-          ? anyResponse.response.text() 
-          : anyResponse.response.text;
-      } else if (anyResponse.candidates?.[0]?.content?.parts?.[0]?.text) {
-        text = anyResponse.candidates[0].content.parts[0].text;
-      } else if (anyResponse.text) {
-        text = typeof anyResponse.text === 'function' ? anyResponse.text() : anyResponse.text;
-      }
     }
 
     if (!text || !text.trim()) {
-      console.error('[Gemini Search] Empty response. Full response:', JSON.stringify(response, null, 2));
-      throw new Error('Empty response from Gemini API. Please check API key and model availability.');
+      const responseStr = JSON.stringify(response, null, 2).substring(0, 500); // Limit log size
+      console.error('[Gemini Search] Empty response. Response structure:', responseStr);
+      throw new Error('Empty response from Gemini API. The API returned a response but no text content was found.');
     }
 
     return {
