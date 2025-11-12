@@ -24,7 +24,9 @@ export async function searchFiles(
     const { query: searchQuery, fileUris = [], temperature = 0.7 } = query;
 
     // If no specific files provided, this will search across context
-    const prompt = `Answer the following question based on the provided documents.
+    // For now, provide general knowledge answer with a note about document availability
+    const prompt = fileUris.length > 0
+      ? `Answer the following question based on the provided documents.
 If the information is not available in the documents, say so clearly.
 
 Question: ${searchQuery}
@@ -32,7 +34,17 @@ Question: ${searchQuery}
 Please provide:
 1. A direct answer
 2. Supporting evidence from the documents (with references)
-3. Confidence level (high/medium/low)`;
+3. Confidence level (high/medium/low)`
+      : `Answer the following medical question. Since no specific documents are currently uploaded, provide general medical information with appropriate disclaimers.
+
+Question: ${searchQuery}
+
+Please provide:
+1. A direct answer based on general medical knowledge
+2. Important medical disclaimers
+3. Recommendation to consult with a healthcare professional
+
+Note: This answer is based on general medical knowledge. For personalized medical advice, please consult with Dr. Sayuj Krishnan at +91-9778280044.`;
 
     // Build the request with file context
     const requestParts: any[] = [{ text: prompt }];
