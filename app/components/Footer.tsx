@@ -166,6 +166,12 @@ export default function Footer() {
                 Book Appointment
               </Link>
               <Link 
+                href="/knowledge-base" 
+                className="block text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+              >
+                Medical Knowledge Base
+              </Link>
+              <Link 
                 href="/blog" 
                 className="block text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >

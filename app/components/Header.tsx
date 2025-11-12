@@ -66,6 +66,7 @@ const NAV_SECTIONS: NavSection[] = [
     description:
       "Education, recovery stories, and preparation checklists for every stage of care.",
     links: [
+      { label: "Medical Knowledge Base", href: "/knowledge-base" },
       { label: "Disease & Symptom Guides", href: "/disease-guides" },
       { label: "Patient Stories", href: "/patient-stories" },
       { label: "Neurosurgery Blog", href: "/blog" },

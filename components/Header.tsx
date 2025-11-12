@@ -97,6 +97,12 @@ export default function Header() {
             About
           </Link>
           <Link 
+            href="/knowledge-base" 
+            className="text-gray-600 hover:text-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
+          >
+            Knowledge Base
+          </Link>
+          <Link 
             href="/contact" 
             className="text-gray-600 hover:text-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
           >
