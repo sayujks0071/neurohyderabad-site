@@ -150,8 +150,12 @@ export function GlobalStructuredData() {
           }
         ],
         "sameAs": [
+          "https://www.yashodahospitals.com/doctor/dr-sayuj-krishnan/",
+          "https://www.practo.com/hyderabad/doctor/dr-sayuj-krishnan-neurosurgeon",
+          "https://www.justdial.com/Hyderabad/Dr-Sayuj-Krishnan-Neurosurgeon-Malakpet",
           "https://www.linkedin.com/in/dr-sayuj-krishnan",
-          "https://www.researchgate.net/profile/Dr-Sayuj-Krishnan"
+          "https://www.researchgate.net/profile/Dr-Sayuj-Krishnan",
+          "https://g.co/kgs/9366939683880052414"
         ]
       },
       {
