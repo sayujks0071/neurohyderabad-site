@@ -3,7 +3,7 @@
  * Implements semantic search and Q&A over uploaded documents
  */
 
-import { GoogleGenerativeAI } from '@google/genai';
+import { GoogleGenAI } from '@google/genai';
 import {
   FileSearchQuery,
   FileSearchResponse,
@@ -19,11 +19,6 @@ export async function searchFiles(
   query: FileSearchQuery
 ): Promise<FileSearchResponse> {
   const genAI = getGeminiClient();
-
-  // Use gemini-2.5-flash for file search
-  const model = genAI.getGenerativeModel({
-    model: 'gemini-2.5-flash',
-  });
 
   try {
     const { query: searchQuery, fileUris = [], temperature = 0.7 } = query;
@@ -54,16 +49,34 @@ Please provide:
       });
     }
 
-    const result = await model.generateContent({
+    // Use gemini-2.5-flash for file search
+    const response = await genAI.models.generateContent({
+      model: 'gemini-2.5-flash',
       contents: [{ role: 'user', parts: requestParts }],
-      generationConfig: {
+      config: {
         temperature,
         maxOutputTokens: 2048,
       },
     });
 
-    const response = result.response;
-    const text = response.text();
+    // Extract text from response with fallback logic
+    let text: string | undefined;
+    const responseText = (response as { text?: unknown }).text;
+
+    if (typeof responseText === 'function') {
+      text = (responseText as () => string)();
+    } else if (typeof responseText === 'string') {
+      text = responseText;
+    } else if ('output' in response && Array.isArray(response.output)) {
+      text = response.output
+        .flatMap((it: any) => it?.content ?? [])
+        .map((it: any) => it?.text)
+        .find((segment: unknown): segment is string => typeof segment === 'string') ?? undefined;
+    }
+
+    if (!text || !text.trim()) {
+      throw new Error('Empty response from Gemini');
+    }
 
     return {
       answer: text,
