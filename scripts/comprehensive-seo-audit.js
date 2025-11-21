@@ -28,8 +28,25 @@ const auditResults = {
   recommendations: []
 };
 
+// Request cache for performance
+const requestCache = new Map();
+
+// HTTP agent for connection pooling
+const httpsAgent = new https.Agent({
+  keepAlive: true,
+  maxSockets: CONCURRENT_REQUESTS,
+  maxFreeSockets: 2,
+  timeout: 10000,
+  scheduling: 'lifo'
+});
+
 // Utility functions
 function makeRequest(url) {
+  // Check cache first
+  if (requestCache.has(url)) {
+    return Promise.resolve(requestCache.get(url));
+  }
+
   return new Promise((resolve, reject) => {
     const urlObj = new URL(url);
     const options = {
@@ -37,6 +54,7 @@ function makeRequest(url) {
       port: 443,
       path: urlObj.pathname + urlObj.search,
       method: 'GET',
+      agent: httpsAgent,
       headers: {
         'User-Agent': 'SEO-Audit-Bot/1.0',
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
@@ -47,16 +65,20 @@ function makeRequest(url) {
     };
 
     const req = https.request(options, (res) => {
-      let data = '';
-      res.on('data', (chunk) => data += chunk);
+      const chunks = [];
+      res.on('data', (chunk) => chunks.push(chunk));
       res.on('end', () => {
-        resolve({
+        const body = Buffer.concat(chunks).toString('utf8');
+        const result = {
           url,
           statusCode: res.statusCode,
           headers: res.headers,
-          body: data,
-          size: data.length
-        });
+          body,
+          size: body.length
+        };
+        // Cache the result
+        requestCache.set(url, result);
+        resolve(result);
       });
     });
 
@@ -153,91 +175,100 @@ async function analyzePage(url) {
   }
 }
 
-// HTML parsing functions
+// Pre-compiled regex patterns for performance
+const REGEX_PATTERNS = {
+  title: /<title[^>]*>(.*?)<\/title>/i,
+  metaDescription: /<meta[^>]*name=["']description["'][^>]*content=["']([^"']*)["']/i,
+  h1: /<h1[^>]*>(.*?)<\/h1>/gi,
+  h2: /<h2[^>]*>(.*?)<\/h2>/gi,
+  canonical: /<link[^>]*rel=["']canonical["'][^>]*href=["']([^"']*)["']/i,
+  internalLinks: /<a[^>]*href=["']([^"']*)["'][^>]*>/gi,
+  images: /<img[^>]*>/gi,
+  structuredData: /<script[^>]*type=["']application\/ld\+json["'][^>]*>(.*?)<\/script>/gi,
+  tags: /<[^>]*>/g,
+  whitespace: /\s+/g
+};
+
+// HTML parsing functions with optimized regex
 function extractTitle(html) {
-  const match = html.match(/<title[^>]*>(.*?)<\/title>/i);
+  const match = html.match(REGEX_PATTERNS.title);
   return match ? match[1].trim() : null;
 }
 
 function extractMetaDescription(html) {
-  const match = html.match(/<meta[^>]*name=["']description["'][^>]*content=["']([^"']*)["']/i);
+  const match = html.match(REGEX_PATTERNS.metaDescription);
   return match ? match[1].trim() : null;
 }
 
 function extractH1Tags(html) {
-  const matches = html.match(/<h1[^>]*>(.*?)<\/h1>/gi);
-  return matches ? matches.map(m => m.replace(/<[^>]*>/g, '').trim()) : [];
+  const matches = html.match(REGEX_PATTERNS.h1);
+  return matches ? matches.map(m => m.replace(REGEX_PATTERNS.tags, '').trim()) : [];
 }
 
 function extractH2Tags(html) {
-  const matches = html.match(/<h2[^>]*>(.*?)<\/h2>/gi);
-  return matches ? matches.map(m => m.replace(/<[^>]*>/g, '').trim()) : [];
+  const matches = html.match(REGEX_PATTERNS.h2);
+  return matches ? matches.slice(0, 10).map(m => m.replace(REGEX_PATTERNS.tags, '').trim()) : [];
 }
 
 function extractCanonical(html) {
-  const match = html.match(/<link[^>]*rel=["']canonical["'][^>]*href=["']([^"']*)["']/i);
+  const match = html.match(REGEX_PATTERNS.canonical);
   return match ? match[1].trim() : null;
 }
 
 function extractInternalLinks(html) {
-  const matches = html.match(/<a[^>]*href=["']([^"']*)["'][^>]*>/gi);
-  if (!matches) return [];
+  const linksSet = new Set();
+  let match;
+  REGEX_PATTERNS.internalLinks.lastIndex = 0;
+  let count = 0;
   
-  const links = [];
-  matches.forEach(match => {
-    const hrefMatch = match.match(/href=["']([^"']*)["']/i);
-    if (hrefMatch) {
-      const href = hrefMatch[1];
-      if (href.startsWith('/') || href.startsWith(SITE_URL)) {
-        links.push(href);
-      }
+  while ((match = REGEX_PATTERNS.internalLinks.exec(html)) !== null && count++ < 200) {
+    const href = match[1];
+    if (href.startsWith('/') || href.startsWith(SITE_URL)) {
+      linksSet.add(href);
     }
-  });
+  }
   
-  return [...new Set(links)]; // Remove duplicates
+  return Array.from(linksSet);
 }
 
 function extractImages(html) {
-  const matches = html.match(/<img[^>]*>/gi);
+  const matches = html.match(REGEX_PATTERNS.images);
   if (!matches) return [];
   
-  const images = [];
-  matches.forEach(match => {
+  return matches.slice(0, 50).map(match => {
     const srcMatch = match.match(/src=["']([^"']*)["']/i);
     const altMatch = match.match(/alt=["']([^"']*)["']/i);
     
-    images.push({
+    return {
       src: srcMatch ? srcMatch[1] : null,
       alt: altMatch ? altMatch[1] : null,
       hasAlt: !!altMatch
-    });
+    };
   });
-  
-  return images;
 }
 
 function extractStructuredData(html) {
-  const matches = html.match(/<script[^>]*type=["']application\/ld\+json["'][^>]*>(.*?)<\/script>/gi);
-  if (!matches) return [];
-  
   const structuredData = [];
-  matches.forEach(match => {
-    const jsonMatch = match.match(/<script[^>]*>(.*?)<\/script>/i);
-    if (jsonMatch) {
-      try {
-        const data = JSON.parse(jsonMatch[1]);
-        structuredData.push(data);
-      } catch (e) {
-        // Invalid JSON
-      }
+  let match;
+  REGEX_PATTERNS.structuredData.lastIndex = 0;
+  let count = 0;
+  
+  while ((match = REGEX_PATTERNS.structuredData.exec(html)) !== null && count++ < 5) {
+    try {
+      structuredData.push(JSON.parse(match[1]));
+    } catch (e) {
+      // Invalid JSON - skip
     }
-  });
+  }
   
   return structuredData;
 }
 
 function countWords(html) {
-  const text = html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+  const text = html
+    .replace(REGEX_PATTERNS.tags, ' ')
+    .replace(REGEX_PATTERNS.whitespace, ' ')
+    .trim();
   return text.split(' ').filter(word => word.length > 0).length;
 }
 
