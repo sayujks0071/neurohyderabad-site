@@ -1,0 +1,40 @@
+{
+  "timestamp": "2025-11-21T19:51:09.866Z",
+  "results": [
+    {
+      "url": "https://www.drsayuj.com/",
+      "error": "getaddrinfo ENOTFOUND www.drsayuj.com",
+      "healthy": false
+    },
+    {
+      "url": "https://www.drsayuj.com/services/endoscopic-discectomy-hyderabad",
+      "error": "getaddrinfo ENOTFOUND www.drsayuj.com",
+      "healthy": false
+    },
+    {
+      "url": "https://www.drsayuj.com/stories/endoscopic-discectomy-same-day-hyderabad",
+      "error": "getaddrinfo ENOTFOUND www.drsayuj.com",
+      "healthy": false
+    },
+    {
+      "url": "https://www.drsayuj.com/locations/brain-spine-surgeon-jubilee-hills",
+      "error": "getaddrinfo ENOTFOUND www.drsayuj.com",
+      "healthy": false
+    },
+    {
+      "url": "https://www.drsayuj.com/patient-stories",
+      "error": "getaddrinfo ENOTFOUND www.drsayuj.com",
+      "healthy": false
+    },
+    {
+      "url": "https://www.drsayuj.com/appointments",
+      "error": "getaddrinfo ENOTFOUND www.drsayuj.com",
+      "healthy": false
+    }
+  ],
+  "summary": {
+    "totalPages": 6,
+    "healthyPages": 0,
+    "avgResponseTime": 0
+  }
+}
