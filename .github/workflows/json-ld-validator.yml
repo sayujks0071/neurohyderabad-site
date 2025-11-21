@@ -1,0 +1,167 @@
+name: JSON-LD Schema Validator
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    # Run daily at 4 AM UTC (9:30 AM IST)
+    - cron: '0 4 * * *'
+  workflow_dispatch:
+
+jobs:
+  validate-schema:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install schema validator
+        run: |
+          npm install -g schema-dts
+          npm install -g ajv-cli
+
+      - name: Create validation script
+        run: |
+          cat > validate-schema.js << 'EOF'
+          const https = require('https');
+          const http = require('http');
+          
+          const urls = [
+            'https://neurohyderabad.org',
+            'https://neurohyderabad.org/about',
+            'https://neurohyderabad.org/treatments',
+            'https://neurohyderabad.org/treatments/brain-tumor-surgery',
+            'https://neurohyderabad.org/treatments/spine-surgery'
+          ];
+          
+          async function validatePage(url) {
+            return new Promise((resolve, reject) => {
+              const client = url.startsWith('https') ? https : http;
+              
+              client.get(url, (res) => {
+                let data = '';
+                res.on('data', chunk => data += chunk);
+                res.on('end', () => {
+                  const schemas = [];
+                  const regex = /<script type="application\/ld\+json">(.*?)<\/script>/gs;
+                  let match;
+                  
+                  while ((match = regex.exec(data)) !== null) {
+                    try {
+                      const schema = JSON.parse(match[1]);
+                      schemas.push(schema);
+                    } catch (e) {
+                      console.error(`Invalid JSON-LD on ${url}:`, e.message);
+                    }
+                  }
+                  
+                  resolve({ url, schemas, count: schemas.length });
+                });
+              }).on('error', reject);
+            });
+          }
+          
+          async function main() {
+            console.log('\n🔍 Starting JSON-LD Schema Validation\n');
+            const results = [];
+            let hasErrors = false;
+            
+            for (const url of urls) {
+              try {
+                const result = await validatePage(url);
+                results.push(result);
+                
+                if (result.count === 0) {
+                  console.log(`⚠️  ${url}: No JSON-LD schemas found`);
+                  hasErrors = true;
+                } else {
+                  console.log(`✅ ${url}: ${result.count} schema(s) found`);
+                  result.schemas.forEach((schema, i) => {
+                    console.log(`   Schema ${i + 1}: @type = ${schema['@type'] || 'Unknown'}`);
+                    
+                    // Validate required fields
+                    if (schema['@type'] === 'WebPage' || schema['@type'] === 'MedicalWebPage') {
+                      if (!schema.name) console.log(`      ⚠️  Missing 'name' field`);
+                      if (!schema.description) console.log(`      ⚠️  Missing 'description' field`);
+                    }
+                    
+                    if (schema['@type'] === 'Person' || schema['@type'] === 'Physician') {
+                      if (!schema.name) console.log(`      ⚠️  Missing 'name' field`);
+                      if (!schema.jobTitle) console.log(`      ⚠️  Missing 'jobTitle' field`);
+                    }
+                    
+                    if (schema['@type'] === 'Organization' || schema['@type'] === 'MedicalOrganization') {
+                      if (!schema.name) console.log(`      ⚠️  Missing 'name' field`);
+                      if (!schema.address) console.log(`      ⚠️  Missing 'address' field`);
+                    }
+                  });
+                }
+              } catch (error) {
+                console.error(`❌ ${url}: Error - ${error.message}`);
+                hasErrors = true;
+              }
+            }
+            
+            // Generate summary
+            console.log('\n' + '='.repeat(60));
+            console.log('📊 Summary:');
+            console.log('='.repeat(60));
+            console.log(`Total pages checked: ${results.length}`);
+            console.log(`Total schemas found: ${results.reduce((sum, r) => sum + r.count, 0)}`);
+            
+            if (hasErrors) {
+              console.log('\n⚠️  Some issues were found. Please review the output above.');
+              process.exit(1);
+            } else {
+              console.log('\n✅ All JSON-LD schemas are valid!');
+            }
+          }
+          
+          main().catch(console.error);
+          EOF
+
+      - name: Run validation
+        id: validate
+        run: node validate-schema.js || echo "validation_failed=true" >> $GITHUB_OUTPUT
+
+      - name: Create issue if validation fails
+        if: steps.validate.outputs.validation_failed == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issueBody = `## ⚠️ JSON-LD Schema Validation Failed\n\n` +
+              `The JSON-LD schema validation detected issues on one or more pages.\n\n` +
+              `**Action Required**: Please review the validation report and fix any issues.\n\n` +
+              `[View full report](${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID})`;
+            
+            // Check for existing open issue
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'json-ld-validation'
+            });
+            
+            if (issues.data.length > 0) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issues.data[0].number,
+                body: `## 🔄 Updated Report\n\n${issueBody}`
+              });
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: `⚠️ JSON-LD Schema Validation Failed - ${new Date().toISOString().split('T')[0]}`,
+                body: issueBody,
+                labels: ['json-ld-validation', 'bug', 'seo']
+              });
+            }
