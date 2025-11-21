@@ -165,3 +165,12 @@ jobs:
                 labels: ['json-ld-validation', 'bug', 'seo']
               });
             }
+
+- name: Write validation summary
+    run: echo "JSON-LD validation completed" > json-ld-validation-report.txt
+  - name: Upload JSON-LD validation report
+    if: always()
+    uses: actions/upload-artifact@v4
+    with:
+      name: json-ld-validation-report
+      path: json-ld-validation-report.txt
