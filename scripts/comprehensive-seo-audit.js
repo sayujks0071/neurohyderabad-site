@@ -37,7 +37,7 @@ const httpsAgent = new https.Agent({
   maxSockets: CONCURRENT_REQUESTS,
   maxFreeSockets: 2,
   timeout: 10000,
-  scheduling: 'lifo'
+  scheduling: 'fifo' // Use FIFO for predictable request ordering
 });
 
 // Utility functions
@@ -221,12 +221,30 @@ function extractInternalLinks(html) {
   REGEX_PATTERNS.internalLinks.lastIndex = 0;
   let count = 0;
   
+  // Pre-compile the hostname check for better performance
+  const siteUrl = new URL(SITE_URL);
+  const siteHostname = siteUrl.hostname;
+  const siteOrigin = siteUrl.origin;
+  
   while ((match = REGEX_PATTERNS.internalLinks.exec(html)) !== null && count++ < 200) {
     const href = match[1];
-    if (href.startsWith('/') || href.startsWith(SITE_URL)) {
-      linksSet.add(href);
+    try {
+      // Quick check for relative URLs first
+      if (href.startsWith('/') && !href.startsWith('//')) {
+        linksSet.add(href);
+      } else {
+        // Full URL parsing for absolute URLs
+        const linkUrl = new URL(href, SITE_URL);
+        // Verify the full origin matches, not just a prefix
+        if (linkUrl.hostname === siteHostname && linkUrl.origin === siteOrigin) {
+          linksSet.add(href);
+        }
+      }
+    } catch (e) {
+      // Invalid URL - skip
     }
   }
+  REGEX_PATTERNS.internalLinks.lastIndex = 0; // Reset for next use
   
   return Array.from(linksSet);
 }

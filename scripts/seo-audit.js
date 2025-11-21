@@ -86,6 +86,7 @@ function fetchUrl(url) {
 }
 
 // Pre-compiled regex patterns for better performance
+// Note: Using non-global patterns where appropriate to avoid state issues
 const REGEX_PATTERNS = {
   title: /<title[^>]*>([^<]+)<\/title>/i,
   metaDescription: /<meta\s+name=["']description["']\s+content=["']([^"']+)["']/i,
@@ -101,6 +102,18 @@ const REGEX_PATTERNS = {
   tags: /<[^>]+>/g,
   whitespace: /\s+/g
 };
+
+// Helper function to safely reset and use global regex patterns
+function matchAllWithLimit(html, pattern, limit) {
+  const matches = [];
+  pattern.lastIndex = 0;
+  let match;
+  while ((match = pattern.exec(html)) !== null && matches.length < limit) {
+    matches.push(match);
+  }
+  pattern.lastIndex = 0; // Reset for next use
+  return matches;
+}
 
 /**
  * Extract metadata from HTML with optimized regex caching
@@ -147,67 +160,57 @@ function extractMetadata(html, url) {
   }
 
   // Open Graph tags
-  let ogMatch;
-  REGEX_PATTERNS.ogTags.lastIndex = 0; // Reset regex state
-  while ((ogMatch = REGEX_PATTERNS.ogTags.exec(html)) !== null) {
-    metadata.ogTags[ogMatch[1]] = ogMatch[2];
-    if (Object.keys(metadata.ogTags).length >= 10) break; // Limit for performance
-  }
+  const ogMatches = matchAllWithLimit(html, REGEX_PATTERNS.ogTags, 10);
+  ogMatches.forEach(match => {
+    metadata.ogTags[match[1]] = match[2];
+  });
 
   // Twitter tags
-  let twitterMatch;
-  REGEX_PATTERNS.twitterTags.lastIndex = 0; // Reset regex state
-  while ((twitterMatch = REGEX_PATTERNS.twitterTags.exec(html)) !== null) {
-    metadata.twitterTags[twitterMatch[1]] = twitterMatch[2];
-    if (Object.keys(metadata.twitterTags).length >= 10) break; // Limit for performance
-  }
+  const twitterMatches = matchAllWithLimit(html, REGEX_PATTERNS.twitterTags, 10);
+  twitterMatches.forEach(match => {
+    metadata.twitterTags[match[1]] = match[2];
+  });
 
   // Structured data
-  let jsonLdMatch;
-  REGEX_PATTERNS.jsonLd.lastIndex = 0; // Reset regex state
-  while ((jsonLdMatch = REGEX_PATTERNS.jsonLd.exec(html)) !== null) {
+  const jsonLdMatches = matchAllWithLimit(html, REGEX_PATTERNS.jsonLd, 5);
+  jsonLdMatches.forEach(match => {
     try {
-      metadata.structuredData.push(JSON.parse(jsonLdMatch[1]));
-      if (metadata.structuredData.length >= 5) break; // Limit for performance
+      metadata.structuredData.push(JSON.parse(match[1]));
     } catch (e) {
       // Invalid JSON - skip
     }
-  }
+  });
 
   // Links - optimized with Set for deduplication
   const internalLinksSet = new Set();
   const externalLinksSet = new Set();
   const baseUrl = new URL(url);
   
-  let linkMatch;
-  REGEX_PATTERNS.links.lastIndex = 0; // Reset regex state
-  let linkCount = 0;
-  while ((linkMatch = REGEX_PATTERNS.links.exec(html)) !== null && linkCount++ < 200) {
+  const linkMatches = matchAllWithLimit(html, REGEX_PATTERNS.links, 200);
+  linkMatches.forEach(match => {
     try {
-      const linkUrl = new URL(linkMatch[1], url);
+      const linkUrl = new URL(match[1], url);
       if (linkUrl.hostname === baseUrl.hostname) {
-        internalLinksSet.add(linkMatch[1]);
+        internalLinksSet.add(match[1]);
       } else {
-        externalLinksSet.add(linkMatch[1]);
+        externalLinksSet.add(match[1]);
       }
     } catch (e) {
       // Invalid URL - skip
     }
-  }
+  });
   metadata.internalLinks = Array.from(internalLinksSet);
   metadata.externalLinks = Array.from(externalLinksSet);
 
   // Images
-  let imgMatch;
-  REGEX_PATTERNS.images.lastIndex = 0; // Reset regex state
-  let imgCount = 0;
-  while ((imgMatch = REGEX_PATTERNS.images.exec(html)) !== null && imgCount++ < 50) {
-    const altMatch = imgMatch[0].match(/alt=["']([^"']*)["']/);
+  const imgMatches = matchAllWithLimit(html, REGEX_PATTERNS.images, 50);
+  imgMatches.forEach(match => {
+    const altMatch = match[0].match(/alt=["']([^"']*)["']/);
     metadata.images.push({
-      src: imgMatch[1],
+      src: match[1],
       alt: altMatch ? altMatch[1] : ''
     });
-  }
+  });
 
   // Word count (approximate) - optimized
   const bodyMatch = html.match(REGEX_PATTERNS.body);

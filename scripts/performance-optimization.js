@@ -156,8 +156,11 @@ function implementCriticalFixes() {
     } else {
       const nextConfig = fs.readFileSync(nextConfigPath, 'utf8');
       
-      // Add performance optimizations if not already present
-      if (!nextConfig.includes('experimental.optimizeCss') && !nextConfig.includes('optimizePackageImports')) {
+      // More specific check using regex to avoid false positives
+      const hasOptimizeCss = /experimental\s*:\s*\{[^}]*optimizeCss\s*:\s*true/s.test(nextConfig);
+      const hasOptimizePackageImports = /optimizePackageImports\s*:\s*\[/s.test(nextConfig);
+      
+      if (!hasOptimizeCss && !hasOptimizePackageImports) {
         console.log('ℹ️  Performance optimizations not yet implemented in next.config.mjs');
         implemented.push({
           id: 'next-config-optimization-suggestion',

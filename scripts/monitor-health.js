@@ -240,9 +240,11 @@ async function main() {
     fs.mkdirSync(reportsDir, { recursive: true });
   }
   
-  const avgResponseTime = results
-    .filter(r => !r.error)
-    .reduce((sum, r) => sum + r.responseTime, 0) / results.filter(r => !r.error).length;
+  // Filter once and reuse
+  const validResults = results.filter(r => !r.error);
+  const avgResponseTime = validResults.length > 0
+    ? Math.round(validResults.reduce((sum, r) => sum + r.responseTime, 0) / validResults.length)
+    : 0;
   
   fs.writeFileSync(reportFile, JSON.stringify({
     timestamp,
@@ -250,7 +252,7 @@ async function main() {
     summary: {
       totalPages: results.length,
       healthyPages: results.filter(r => r.healthy).length,
-      avgResponseTime: Math.round(avgResponseTime)
+      avgResponseTime
     }
   }, null, 2));
   
