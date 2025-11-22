@@ -1,5 +1,6 @@
 import { SITE_URL } from "../../src/lib/seo";
 import { getPosts } from "../../src/lib/wordpress";
+import { getAllBlogPosts } from "../../src/lib/blog";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
@@ -52,7 +53,26 @@ function extractTitleFromContent(content: string, fallbackTitle: string): string
 }
 
 export default async function BlogPage() {
-  // Static blog posts (can be combined with WordPress posts later)
+  // Load blog posts from new content system
+  let mdxPosts: any[] = [];
+  try {
+    const posts = await getAllBlogPosts();
+    mdxPosts = posts.map(post => ({
+      id: post.slug,
+      title: post.title,
+      slug: post.slug,
+      excerpt: post.excerpt,
+      date: post.publishedAt,
+      featuredImage: post.heroImage || '/images/og-default.jpg',
+      category: post.category,
+      tags: post.tags,
+      featured: post.featured,
+    }));
+  } catch (error) {
+    console.error('Error loading MDX blog posts:', error);
+  }
+
+  // Static blog posts (legacy, can be combined with WordPress posts later)
   const staticPosts = [
     {
       id: 'world-stroke-day-2025-hyderabad-stroke-code',
@@ -131,8 +151,15 @@ export default async function BlogPage() {
     console.log('WordPress posts not available, using static posts');
   }
 
-  // Combine static and WordPress posts
-  const allPosts = [...staticPosts, ...(wordpressPosts || [])];
+  // Combine all posts: MDX (new system) first, then static, then WordPress
+  const allPosts = [...mdxPosts, ...staticPosts, ...(wordpressPosts || [])];
+  
+  // Sort by date (newest first)
+  allPosts.sort((a, b) => {
+    const dateA = new Date(a.date || 0).getTime();
+    const dateB = new Date(b.date || 0).getTime();
+    return dateB - dateA;
+  });
 
   return (
     <main className="container mx-auto px-4 py-16">

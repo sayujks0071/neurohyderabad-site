@@ -15,7 +15,11 @@
     "seo:report": "node scripts/seo/report.mjs",
     "seo:all": "npm run seo:audit && npm run seo:report",
     "verify:deployment": "node scripts/verify-deployment.js",
-    "reindex:gemini": "ts-node scripts/reindex-gemini-rag.ts"
+    "reindex:gemini": "ts-node scripts/reindex-gemini-rag.ts",
+    "new:blog": "ts-node scripts/new-blog.ts",
+    "normalize:blog": "ts-node scripts/normalize-blog-metadata.ts",
+    "blog:auto-publish": "ts-node scripts/auto-blog-scheduler.ts",
+    "blog:generate-today": "ts-node scripts/auto-blog-scheduler.ts --generate-today"
   },
   "dependencies": {
     "@google/genai": "^0.6.0",
@@ -45,6 +49,7 @@
     "@types/react-dom": "^19",
     "eslint-config-next": "^15.5.4",
     "eslint-plugin-jsx-a11y": "^6.8.0",
+    "gray-matter": "^4.0.3",
     "lighthouse": "^13.0.1",
     "linkinator": "^6.1.4",
     "next-seo": "^6.0.0",
