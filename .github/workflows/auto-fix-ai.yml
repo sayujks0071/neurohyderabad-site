@@ -226,7 +226,7 @@ jobs:
           } catch (error) {
             console.error('Failed to read aggregated report:', error.message);
             fs.writeFileSync('fixes.patch', '# No fixes needed - could not read report');
-            fs.writeFileSync('autofix-debug/error.txt', `Failed to read aggregated report: ${error.message}`);
+            fs.writeFileSync('autofix-debug/error.txt', 'Failed to read aggregated report: ' + error.message);
             process.exit(0);
           }
           
@@ -311,7 +311,7 @@ jobs:
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${apiKey}`,
+                  'Authorization': 'Bearer ' + apiKey,
                   'Content-Length': data.length
                 }
               };
@@ -330,9 +330,9 @@ jobs:
                 console.log('AI response saved to autofix-debug/ai-response.txt');
                 
                 if (res.statusCode !== 200) {
-                  console.error(`API request failed with status ${res.statusCode}:`, body);
+                  console.error('API request failed with status ' + res.statusCode + ':', body);
                   fs.writeFileSync('fixes.patch', '# No fixes generated - API request failed');
-                  fs.writeFileSync('autofix-debug/error.txt', `API request failed with status ${res.statusCode}:\n${body}`);
+                  fs.writeFileSync('autofix-debug/error.txt', 'API request failed with status ' + res.statusCode + ':\n' + body);
                   resolve();
                   return;
                 }
@@ -343,7 +343,7 @@ jobs:
                   console.error('OpenAI API Error:', response.error.message);
                   console.error('Error type:', response.error.type);
                   fs.writeFileSync('fixes.patch', '# No fixes generated - OpenAI API error');
-                  fs.writeFileSync('autofix-debug/error.txt', `OpenAI API Error: ${response.error.message}\nType: ${response.error.type}`);
+                  fs.writeFileSync('autofix-debug/error.txt', 'OpenAI API Error: ' + response.error.message + '\nType: ' + response.error.type);
                   resolve();
                   return;
                 }
@@ -351,7 +351,7 @@ jobs:
                 if (!response.choices || !response.choices[0] || !response.choices[0].message) {
                   console.error('Invalid API response structure:', JSON.stringify(response, null, 2));
                   fs.writeFileSync('fixes.patch', '# No fixes generated - invalid API response');
-                  fs.writeFileSync('autofix-debug/error.txt', `Invalid API response structure:\n${JSON.stringify(response, null, 2)}`);
+                  fs.writeFileSync('autofix-debug/error.txt', 'Invalid API response structure:\n' + JSON.stringify(response, null, 2));
                   resolve();
                   return;
                 }
@@ -384,7 +384,7 @@ jobs:
                 console.error('Error parsing OpenAI response:', error.message);
                 console.error('Response body:', body.substring(0, 500));
                 fs.writeFileSync('fixes.patch', '# No fixes generated - parsing error');
-                fs.writeFileSync('autofix-debug/error.txt', `Parsing error: ${error.message}\n\nResponse body (first 500 chars):\n${body.substring(0, 500)}`);
+                fs.writeFileSync('autofix-debug/error.txt', 'Parsing error: ' + error.message + '\n\nResponse body (first 500 chars):\n' + body.substring(0, 500));
                 resolve();
               }
                 });
@@ -394,7 +394,7 @@ jobs:
                 console.error('Request error:', error.message);
                 console.error('Error code:', error.code);
                 fs.writeFileSync('fixes.patch', '# No fixes generated - network error');
-                fs.writeFileSync('autofix-debug/error.txt', `Network error: ${error.message}\nError code: ${error.code}`);
+                fs.writeFileSync('autofix-debug/error.txt', 'Network error: ' + error.message + '\nError code: ' + error.code);
                 resolve();
               });
               
@@ -413,7 +413,7 @@ jobs:
             }).catch((error) => {
               console.error('Unexpected error:', error);
               fs.writeFileSync('fixes.patch', '# No fixes generated - unexpected error');
-              fs.writeFileSync('autofix-debug/error.txt', `Unexpected error: ${error.message}\n${error.stack || ''}`);
+              fs.writeFileSync('autofix-debug/error.txt', 'Unexpected error: ' + error.message + '\n' + (error.stack || ''));
               process.exit(0);
             });
           }
