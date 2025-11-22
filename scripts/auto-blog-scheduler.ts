@@ -35,7 +35,7 @@ const BLOG_TOPICS: ScheduledBlogTopic[] = [
     focus:
       "Explain in simple language how full-endoscopic lumbar discectomy and other full-endoscopic techniques work, what has changed in recent years, and why many patients can now go home the same day. Emphasise small incisions, less muscle damage, and faster mobility, but also explain limitations and who may still need traditional surgery.",
     riskLevel: "low",
-    scheduledDate: "2025-02-01",
+    scheduledDate: "2024-11-25",
     useAI: true,
   },
   {
@@ -47,7 +47,7 @@ const BLOG_TOPICS: ScheduledBlogTopic[] = [
     focus:
       "Public awareness article on day-care spine surgery. Explain what 'day-care' means in practical terms, how anaesthesia, pain control, and minimally invasive techniques make it possible, and which patients are usually selected. Emphasise strict selection criteria, safety checks, and when an overnight stay is still better.",
     riskLevel: "low",
-    scheduledDate: "2025-02-04",
+    scheduledDate: "2024-11-26",
     useAI: true,
   },
   {
@@ -59,7 +59,7 @@ const BLOG_TOPICS: ScheduledBlogTopic[] = [
     focus:
       "Public awareness on red-flag back pain symptoms: new or worsening leg weakness, loss of bladder or bowel control, fever with back pain, history of cancer, major trauma. Explain in plain language why these symptoms need urgent evaluation and how early diagnosis can prevent permanent damage.",
     riskLevel: "low",
-    scheduledDate: "2025-02-07",
+    scheduledDate: "2024-11-27",
     useAI: true,
   },
   {
@@ -71,7 +71,7 @@ const BLOG_TOPICS: ScheduledBlogTopic[] = [
     focus:
       "Explain how percutaneous screws, tubular retractors, and navigation have changed spine stabilisation surgery. Focus on what has actually improved for patients (less blood loss, smaller incision, faster mobilisation) and why the decision to stabilise is still a serious one requiring careful imaging and planning.",
     riskLevel: "medium",
-    scheduledDate: "2025-02-10",
+    scheduledDate: "2024-11-28",
     useAI: true,
   },
   {
@@ -83,7 +83,7 @@ const BLOG_TOPICS: ScheduledBlogTopic[] = [
     focus:
       "Public explainer on awake craniotomy for brain tumours and epilepsy. Describe, in non-scary language, how modern monitoring, mapping, and anaesthesia make it possible to keep a patient comfortable while testing speech or movement during surgery. Focus on safety, Team preparation, and how this approach protects critical brain functions.",
     riskLevel: "medium",
-    scheduledDate: "2025-02-13",
+    scheduledDate: "2024-11-29",
     useAI: true,
   },
   {
@@ -95,7 +95,7 @@ const BLOG_TOPICS: ScheduledBlogTopic[] = [
     focus:
       "Explain modern tools like neuronavigation, intraoperative monitoring, and better imaging. Focus on how these help surgeons plan safer approaches, remove more tumour when possible, and protect important areas. Avoid technical device names; keep it conceptual and patient-friendly.",
     riskLevel: "medium",
-    scheduledDate: "2025-02-16",
+    scheduledDate: "2024-12-02",
     useAI: true,
   },
   {
@@ -107,7 +107,7 @@ const BLOG_TOPICS: ScheduledBlogTopic[] = [
     focus:
       "Comprehensive guide to sciatica for the public. Explain what sciatica is, common causes like slipped disc, when it improves with rest and physiotherapy, and when modern minimally invasive or full-endoscopic surgery may be discussed. Emphasise that not every sciatica case needs surgery.",
     riskLevel: "low",
-    scheduledDate: "2025-02-19",
+    scheduledDate: "2024-12-03",
     useAI: true,
   },
   {
@@ -119,7 +119,7 @@ const BLOG_TOPICS: ScheduledBlogTopic[] = [
     focus:
       "Public awareness on cervical disc problems and cervical myelopathy. Describe warning signs like hand clumsiness, gait imbalance, and progressive weakness. Explain how early diagnosis and modern surgical options (including minimally invasive approaches) can help, while stressing that not all neck pain is serious.",
     riskLevel: "medium",
-    scheduledDate: "2025-02-22",
+    scheduledDate: "2024-12-04",
     useAI: true,
   },
   {
@@ -131,7 +131,7 @@ const BLOG_TOPICS: ScheduledBlogTopic[] = [
     focus:
       "Explain, in simple language, how modern spine surgery and bracing are used for traumatic spine fractures. Mention minimally invasive stabilisation, cement injections (without brand names), bracing, and rehab. Emphasise red-flag symptoms like weakness and bladder/bowel issues that need emergency care.",
     riskLevel: "medium",
-    scheduledDate: "2025-02-25",
+    scheduledDate: "2024-12-05",
     useAI: true,
   },
   {
@@ -143,7 +143,7 @@ const BLOG_TOPICS: ScheduledBlogTopic[] = [
     focus:
       "Public guide on headache red-flags: sudden severe 'worst headache', headache with vomiting and neck stiffness, headache with weakness or confusion, headaches after injury. Explain when a simple headache can be watched, when to see a doctor, and when to rush to emergency care. Keep it balanced and non-alarming.",
     riskLevel: "low",
-    scheduledDate: "2025-02-28",
+    scheduledDate: "2024-12-06",
     useAI: true,
   },
 ];
