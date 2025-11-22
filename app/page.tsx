@@ -4,6 +4,9 @@ import LazyVideoSection from "./_components/LazyVideoSection";
 import LazyRecoveryTimeline from "./_components/LazyRecoveryTimeline";
 import LazyReputationPanel from "./_components/LazyReputationPanel";
 import { SITE_URL } from "../src/lib/seo";
+import Section from "./components/primitives/Section";
+import PageHeader from "./components/primitives/PageHeader";
+import StatCard from "./components/primitives/StatCard";
 // Temporarily commenting out problematic imports
 // import BreadcrumbSchema from "./components/schemas/BreadcrumbSchema";
 // import { HeroCTA, StickyCTA } from "../src/components/Experiments";
@@ -613,45 +616,38 @@ export default function Home() {
       </section>
 
       {/* Why Choose Dr. Sayuj */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-12">Why Choose Dr Sayuj Krishnan</h2>
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="bg-white p-8 rounded-lg shadow-lg text-center">
-                <div className="text-4xl mb-4">🎓</div>
-                <h3 className="text-xl font-semibold mb-4 text-blue-700">Exceptional Training</h3>
-                <p className="text-gray-700">
-                  MBBS, DNB Neurosurgery (Direct 6 years), Fellowship in Minimally Invasive and 
-                  Advanced Spine Surgery, Observer-ship in Full Endoscopic Spine Surgery (Germany)
-                </p>
-              </div>
-              <div className="bg-white p-8 rounded-lg shadow-lg text-center">
-                <div className="text-4xl mb-4">🏥</div>
-                <h3 className="text-xl font-semibold mb-4 text-blue-700">9+ Years Experience</h3>
-                <p className="text-gray-700">
-                  Successfully treated thousands of patients with various neurological conditions, 
-                  always prioritizing patient safety and optimal outcomes.
-                </p>
-              </div>
-              <div className="bg-white p-8 rounded-lg shadow-lg text-center">
-                <div className="text-4xl mb-4">🔬</div>
-                <h3 className="text-xl font-semibold mb-4 text-blue-700">Advanced Technology</h3>
-                <p className="text-gray-700 mb-4">
-                  State-of-the-art equipment including neuronavigation, intraoperative monitoring, 
-                  and minimally invasive surgical techniques.
-                </p>
-                <Link 
-                  href="/technology-facilities"
-                  className="text-blue-600 hover:text-blue-800 font-medium"
-                >
-                  Explore Our Technology →
-                </Link>
-              </div>
-            </div>
-          </div>
+      <Section variant="gray" spacing="normal">
+        <PageHeader
+          title="Why Choose Dr Sayuj Krishnan"
+          align="center"
+        />
+        <div className="grid md:grid-cols-3 gap-8">
+          <StatCard
+            icon="🎓"
+            title="Exceptional Training"
+            description="MBBS, DNB Neurosurgery (Direct 6 years), Fellowship in Minimally Invasive and Advanced Spine Surgery, Observer-ship in Full Endoscopic Spine Surgery (Germany)"
+          />
+          <StatCard
+            icon="🏥"
+            title="9+ Years Experience"
+            description="Successfully treated thousands of patients with various neurological conditions, always prioritizing patient safety and optimal outcomes."
+          />
+          <StatCard
+            icon="🔬"
+            title="Advanced Technology"
+          >
+            <p className="text-gray-700 mb-4">
+              State-of-the-art equipment including neuronavigation, intraoperative monitoring, and minimally invasive surgical techniques.
+            </p>
+            <Link
+              href="/technology-facilities"
+              className="text-blue-600 hover:text-blue-800 font-medium transition-colors"
+            >
+              Explore Our Technology →
+            </Link>
+          </StatCard>
         </div>
-      </section>
+      </Section>
 
       {/* Emergency Services */}
       <section className="py-16 bg-red-50">

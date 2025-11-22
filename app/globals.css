@@ -201,6 +201,23 @@ button:focus,
   border-color: var(--color-primary-500);
 }
 
+/* Hero CTA Micro-interactions */
+.home-hero a,
+.home-hero button {
+  transition: all 0.3s ease-out;
+}
+
+.home-hero a:hover,
+.home-hero button:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.home-hero a:active,
+.home-hero button:active {
+  transform: translateY(0) scale(0.98);
+}
+
 /* Reduced Motion Support (Accessibility) */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -210,9 +227,11 @@ button:focus,
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  
+
   .card:hover,
-  button:hover {
+  button:hover,
+  .home-hero a:hover,
+  .home-hero button:hover {
     transform: none;
   }
 }
