@@ -31,10 +31,8 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          # GitHub CLI is pre-installed on GitHub Actions runners
-          # Just authenticate with the token
-          echo "$GH_TOKEN" | gh auth login --with-token
-          gh auth status
+          # GitHub CLI is pre-installed and will use GH_TOKEN automatically
+            gh --version
 
       - name: Fetch workflow runs (last 24 hours)
         id: fetch_runs
