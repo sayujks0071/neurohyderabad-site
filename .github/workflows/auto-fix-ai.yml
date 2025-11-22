@@ -266,123 +266,131 @@ Return ONLY valid git diff format. Be surgical - only change what's necessary.`;
             if (patches.length > 0) {
               fs.writeFileSync('fixes.patch', patches.join('\n'));
               console.log('Generated fallback fixes');
+              process.exit(0);
             } else {
               console.log('No fixable issues detected');
               fs.writeFileSync('fixes.patch', '# No fixes needed - no actionable issues found');
               process.exit(0);
             }
-            return;
+          } else {
+            // Call OpenAI API using Promise to ensure we wait for completion
+            new Promise((resolve, reject) => {
+              const data = JSON.stringify({
+                model: 'gpt-4o-mini',
+                messages: [
+                  {
+                    role: 'system',
+                    content: 'You are an expert web developer who generates precise git patches to fix web issues. Return only valid git diff format.'
+                  },
+                  {
+                    role: 'user',
+                    content: prompt
+                  }
+                ],
+                temperature: 0.3,
+                max_tokens: 4000
+              });
+              
+              const options = {
+                hostname: 'api.openai.com',
+                port: 443,
+                path: '/v1/chat/completions',
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${apiKey}`,
+                  'Content-Length': data.length
+                }
+              };
+              
+              const req = https.request(options, (res) => {
+                let body = '';
+                
+                res.on('data', (chunk) => {
+                  body += chunk;
+                });
+                
+                res.on('end', () => {
+                  try {
+                    if (res.statusCode !== 200) {
+                      console.error(`API request failed with status ${res.statusCode}:`, body);
+                      fs.writeFileSync('fixes.patch', '# No fixes generated - API request failed');
+                      resolve();
+                      return;
+                    }
+                    
+                    const response = JSON.parse(body);
+                    
+                    if (response.error) {
+                      console.error('OpenAI API Error:', response.error.message);
+                      console.error('Error type:', response.error.type);
+                      fs.writeFileSync('fixes.patch', '# No fixes generated - OpenAI API error');
+                      resolve();
+                      return;
+                    }
+                    
+                    if (!response.choices || !response.choices[0] || !response.choices[0].message) {
+                      console.error('Invalid API response structure:', JSON.stringify(response, null, 2));
+                      fs.writeFileSync('fixes.patch', '# No fixes generated - invalid API response');
+                      resolve();
+                      return;
+                    }
+                    
+                    const content = response.choices[0].message.content;
+                    
+                    if (!content || content.trim().length === 0) {
+                      console.error('Empty response from OpenAI API');
+                      fs.writeFileSync('fixes.patch', '# No fixes generated - empty API response');
+                      resolve();
+                      return;
+                    }
+                    
+                    // Extract patch from markdown code blocks if present
+                    let patch = content;
+                    const codeBlockMatch = content.match(/```(?:diff|patch)?\n([\s\S]*?)```/);
+                    if (codeBlockMatch) {
+                      patch = codeBlockMatch[1];
+                    }
+                    
+                    fs.writeFileSync('fixes.patch', patch);
+                    console.log('AI-generated patch saved');
+                    console.log('Patch preview:');
+                    console.log(patch.substring(0, 500));
+                    resolve();
+                    
+                  } catch (error) {
+                    console.error('Error parsing OpenAI response:', error.message);
+                    console.error('Response body:', body.substring(0, 500));
+                    fs.writeFileSync('fixes.patch', '# No fixes generated - parsing error');
+                    resolve();
+                  }
+                });
+              });
+              
+              req.on('error', (error) => {
+                console.error('Request error:', error.message);
+                console.error('Error code:', error.code);
+                fs.writeFileSync('fixes.patch', '# No fixes generated - network error');
+                resolve();
+              });
+              
+              req.setTimeout(60000, () => {
+                console.error('Request timeout after 60 seconds');
+                req.destroy();
+                fs.writeFileSync('fixes.patch', '# No fixes generated - request timeout');
+                resolve();
+              });
+              
+              req.write(data);
+              req.end();
+            }).then(() => {
+              process.exit(0);
+            }).catch((error) => {
+              console.error('Unexpected error:', error);
+              fs.writeFileSync('fixes.patch', '# No fixes generated - unexpected error');
+              process.exit(0);
+            });
           }
-          
-          // Call OpenAI API
-          const data = JSON.stringify({
-            model: 'gpt-4o-mini',
-            messages: [
-              {
-                role: 'system',
-                content: 'You are an expert web developer who generates precise git patches to fix web issues. Return only valid git diff format.'
-              },
-              {
-                role: 'user',
-                content: prompt
-              }
-            ],
-            temperature: 0.3,
-            max_tokens: 4000
-          });
-          
-          const options = {
-            hostname: 'api.openai.com',
-            port: 443,
-            path: '/v1/chat/completions',
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${apiKey}`,
-              'Content-Length': data.length
-            }
-          };
-          
-          const req = https.request(options, (res) => {
-            let body = '';
-            
-            res.on('data', (chunk) => {
-              body += chunk;
-            });
-            
-            res.on('end', () => {
-              try {
-                if (res.statusCode !== 200) {
-                  console.error(`API request failed with status ${res.statusCode}:`, body);
-                  // Fallback to empty patch instead of failing
-                  fs.writeFileSync('fixes.patch', '# No fixes generated - API request failed');
-                  process.exit(0);
-                }
-                
-                const response = JSON.parse(body);
-                
-                if (response.error) {
-                  console.error('OpenAI API Error:', response.error.message);
-                  console.error('Error type:', response.error.type);
-                  // Fallback to empty patch instead of failing
-                  fs.writeFileSync('fixes.patch', '# No fixes generated - OpenAI API error');
-                  process.exit(0);
-                }
-                
-                if (!response.choices || !response.choices[0] || !response.choices[0].message) {
-                  console.error('Invalid API response structure:', JSON.stringify(response, null, 2));
-                  fs.writeFileSync('fixes.patch', '# No fixes generated - invalid API response');
-                  process.exit(0);
-                }
-                
-                const content = response.choices[0].message.content;
-                
-                if (!content || content.trim().length === 0) {
-                  console.error('Empty response from OpenAI API');
-                  fs.writeFileSync('fixes.patch', '# No fixes generated - empty API response');
-                  process.exit(0);
-                }
-                
-                // Extract patch from markdown code blocks if present
-                let patch = content;
-                const codeBlockMatch = content.match(/```(?:diff|patch)?\n([\s\S]*?)```/);
-                if (codeBlockMatch) {
-                  patch = codeBlockMatch[1];
-                }
-                
-                fs.writeFileSync('fixes.patch', patch);
-                console.log('AI-generated patch saved');
-                console.log('Patch preview:');
-                console.log(patch.substring(0, 500));
-                
-              } catch (error) {
-                console.error('Error parsing OpenAI response:', error.message);
-                console.error('Response body:', body.substring(0, 500));
-                // Fallback to empty patch instead of failing
-                fs.writeFileSync('fixes.patch', '# No fixes generated - parsing error');
-                process.exit(0);
-              }
-            });
-          });
-          
-          req.on('error', (error) => {
-            console.error('Request error:', error.message);
-            console.error('Error code:', error.code);
-            // Fallback to empty patch instead of failing
-            fs.writeFileSync('fixes.patch', '# No fixes generated - network error');
-            process.exit(0);
-          });
-          
-          req.setTimeout(60000, () => {
-            console.error('Request timeout after 60 seconds');
-            req.destroy();
-            // Fallback to empty patch instead of failing
-            fs.writeFileSync('fixes.patch', '# No fixes generated - request timeout');
-            process.exit(0);
-          });
-          
-          req.write(data);
-          req.end();
           EOF
           
           node generate-fixes.js
