@@ -1,4 +1,3 @@
-import type { CSSProperties } from "react";
 import Link from "next/link";
 import ExpandedFAQ from "../src/components/ExpandedFAQ";
 import LazyVideoSection from "./_components/LazyVideoSection";
@@ -157,21 +156,6 @@ const HOME_FAQS = [
 ];
 
 export default function Home() {
-  const heroStyles: CSSProperties = {
-    background: "linear-gradient(90deg, #2563eb 0%, #1e3a8a 100%)",
-    color: "#f8fafc",
-    paddingTop: "80px",
-    paddingBottom: "80px",
-  };
-
-  const heroLeadStyles: CSSProperties = {
-    color: "rgba(226, 238, 255, 0.96)",
-    fontWeight: 500,
-    lineHeight: 1.55,
-    maxWidth: "40rem",
-    margin: "0 auto 1.5rem auto",
-  };
-
   return (
     <>
       {/* Schema Markup for E-E-A-T */}
@@ -185,18 +169,18 @@ export default function Home() {
       <UserJourneyTracker />
       <div className="min-h-screen bg-white">
       {/* Hero Section - LCP Optimized */}
-      <header className="home-hero text-white py-20" style={heroStyles}>
+      <header className="home-hero text-white">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="text-center lg:text-left">
-                <h1 className="home-hero__title text-4xl md:text-6xl font-bold mb-6 leading-tight" style={{ color: '#f8fafc', marginBottom: '1.5rem' }}>
+                <h1 className="home-hero__title text-4xl md:text-6xl font-bold leading-tight">
                   Advanced Brain & Spine Care from a Pioneering Surgeon
-                  <span className="home-hero__subtitle block text-3xl md:text-5xl" style={{ color: '#dbeafe' }}>
+                  <span className="home-hero__subtitle block text-3xl md:text-5xl">
                     Dr. Sayuj Krishnan — German-Trained Neurosurgeon in Hyderabad
                   </span>
                 </h1>
-                <p className="home-hero__lead text-xl md:text-2xl mb-6" style={heroLeadStyles}>
+                <p className="home-hero__lead text-xl md:text-2xl">
                   German-trained neurosurgeon specializing in minimally invasive spine surgery, awake brain surgery, and ROSA robotic deep brain stimulation. With over 1,000 endoscopic procedures and advanced fellowship training, Dr. Sayuj combines cutting-edge technology with compassionate care at Yashoda Hospital, Malakpet.
                 </p>
                 {/* <HeroCTA /> */}

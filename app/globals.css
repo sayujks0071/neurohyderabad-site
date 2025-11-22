@@ -1,193 +1,358 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap');
 
 :root {
+  /* Legacy variables for backward compatibility */
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #212B36;
+  
+  /* ============================================
+     DESIGN SYSTEM TOKENS - Grade 1 Enhancement
+     ============================================ */
+  
+  /* Font Families */
+  --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-secondary: 'Merriweather', Georgia, serif;
+  
+  /* Type Scale (Major Third - 1.250) */
+  --text-xs: 0.8rem;     /* 12.8px */
+  --text-sm: 1rem;       /* 16px - Base */
+  --text-md: 1.25rem;    /* 20px */
+  --text-lg: 1.563rem;   /* 25px */
+  --text-xl: 1.953rem;   /* 31.25px */
+  --text-2xl: 2.441rem;  /* 39.06px */
+  --text-3xl: 3.052rem;  /* 48.83px */
+  
+  /* Font Weights */
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  
+  /* Primary Brand Palette - Clinical Blue */
+  --color-primary-50: #E3F2FD;
+  --color-primary-100: #BBDEFB;
+  --color-primary-500: #005EB8; /* Main - WCAG 5.6:1 (AA Pass) */
+  --color-primary-700: #003A70; /* Dark/Hover - WCAG 9.7:1 (AAA Pass) */
+  
+  /* Secondary - Surgical Teal */
+  --color-secondary-500: #009688;
+  
+  /* Accent - Vitality Cyan (decorative only) */
+  --color-accent-500: #00A3E0;
+  
+  /* Neutral & Surface Palette */
+  --color-surface: #FFFFFF;        /* Pure White */
+  --color-background: #F4F6F8;     /* Cloud Gray - Page background */
+  --color-text-primary: #212B36;   /* Deep Slate - Primary body text */
+  --color-text-secondary: #637381; /* Muted Gray - Metadata */
+  --color-border: #DFE3E8;         /* Line Gray */
+  
+  /* Functional Status Palette */
+  --color-success: #2E7D32;  /* Emerald */
+  --color-warning: #FF9800;   /* Amber */
+  --color-error: #D32F2F;     /* Crimson */
+  --color-info: #0288D1;      /* Sky Blue */
+  
+  /* 8-Point Grid System */
+  --space-1: 4px;   /* Minimal separation */
+  --space-2: 8px;   /* Related elements (icon + text) */
+  --space-4: 16px;  /* Standard component padding */
+  --space-6: 24px;  /* Card gutter */
+  --space-8: 32px;  /* Section separation - Mobile */
+  --space-16: 64px; /* Section separation - Desktop */
+  
+  /* Shadows & Elevation */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  
+  /* Touch Targets (Accessibility) */
+  --touch-target-min: 44px;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-primary);
+  --font-serif: var(--font-secondary);
 }
 
-/* Force light mode for better readability and consistency */
+/* ============================================
+   BASE STYLES - Clinical Precision
+   ============================================ */
+
 body {
-  background: #ffffff !important;
-  color: #171717 !important;
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-background) !important;
+  color: var(--color-text-primary) !important;
+  font-family: var(--font-primary);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* Typography Hierarchy */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-text-primary) !important;
+  font-family: var(--font-primary);
+  font-weight: var(--font-bold);
+  line-height: var(--typography-line-height-tight, 1.2);
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(2.25rem, 5vw, 3.052rem); /* 36px - 48.83px */
+  font-weight: var(--font-bold);
+}
+
+h2 {
+  font-size: clamp(1.75rem, 4vw, 2.441rem); /* 28px - 39.06px */
+  font-weight: var(--font-semibold);
+}
+
+h3 {
+  font-size: clamp(1.25rem, 3vw, 1.563rem); /* 20px - 25px */
+  font-weight: var(--font-medium);
+}
+
+/* Body Text */
+p {
+  font-family: var(--font-secondary);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--color-text-primary);
+}
+
+/* Links */
+a {
+  color: var(--color-primary-500);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--color-primary-700);
+}
+
+a:focus {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Buttons - Clinical Blue Primary */
+button,
+.btn-primary {
+  background-color: var(--color-primary-500);
+  color: white;
+  font-family: var(--font-primary);
+  font-weight: var(--font-semibold);
+  font-size: var(--text-sm);
+  padding: var(--space-4) var(--space-8);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: var(--touch-target-min);
+  min-width: var(--touch-target-min);
+}
+
+button:hover,
+.btn-primary:hover {
+  background-color: var(--color-primary-700);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+button:focus,
+.btn-primary:focus {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+/* Secondary/Ghost Buttons */
+.btn-secondary,
+.btn-ghost {
+  background-color: transparent;
+  color: var(--color-primary-500);
+  border: 2px solid var(--color-primary-500);
+}
+
+.btn-secondary:hover,
+.btn-ghost:hover {
+  background-color: var(--color-primary-50);
+  border-color: var(--color-primary-700);
+}
+
+/* Cards - Modular Pattern */
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  border-color: var(--color-primary-500);
+}
+
+/* Reduced Motion Support (Accessibility) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .card:hover,
+  button:hover {
+    transform: none;
+  }
+}
+
+/* Details/Summary Styling */
 details > summary {
   list-style: none;
+  cursor: pointer;
+  min-height: var(--touch-target-min);
+  padding: var(--space-2);
 }
 
 details > summary::-webkit-details-marker {
   display: none;
 }
 
-/* Ensure headings have proper contrast */
-h1, h2, h3, h4, h5, h6 {
-  color: #111827 !important; /* text-gray-900 - darker for better contrast */
+details > summary::marker {
+  display: none;
 }
 
-/* Force light backgrounds */
-.bg-white {
-  background-color: #ffffff !important;
+/* Form Elements */
+input,
+textarea,
+select {
+  font-family: var(--font-primary);
+  font-size: var(--text-sm); /* Minimum 16px to prevent iOS zoom */
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  min-height: var(--touch-target-min);
 }
 
-.bg-gray-50 {
-  background-color: #f9fafb !important;
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+  border-color: var(--color-primary-500);
 }
 
-.bg-gray-100 {
-  background-color: #f3f4f6 !important;
-}
-
-/* Ensure links are visible */
-.text-blue-600 {
-  color: #2563eb !important;
-}
-
-.text-blue-800 {
-  color: #1e40af !important;
-}
-
-/* Fix green button contrast issues - use darker green for better contrast */
-.bg-green-600 {
-  background-color: #15803d !important; /* Darker green for better contrast with white text */
-}
-
-.bg-green-500 {
-  background-color: #16a34a !important; /* Darker green for better contrast with white text */
-}
-
-.hover\:bg-green-700:hover {
-  background-color: #14532d !important; /* Even darker for hover state */
-}
-
-.hover\:bg-green-600:hover {
-  background-color: #15803d !important; /* Darker green for hover state */
-}
-
-/* Ensure footer text has proper contrast */
-.bg-gray-900 {
-  background-color: #111827 !important; /* Darker background for better contrast */
-}
-
-.text-gray-200 {
-  color: #e5e7eb !important; /* Lighter text for better contrast on dark background */
-}
-
-.text-gray-300 {
-  color: #d1d5db !important; /* Lighter text for better contrast on dark background */
-}
-
-.text-gray-400 {
-  color: #9ca3af !important; /* Lighter text for better contrast on dark background */
-}
-
-/* Ensure white text on dark backgrounds has sufficient contrast */
-.text-white {
-  color: #ffffff !important;
-}
-
-/* Fix blue text contrast on dark backgrounds */
-.text-blue-300 {
-  color: #93c5fd !important; /* Lighter blue for better contrast on dark background */
-}
-
-.text-blue-100 {
-  color: #dbeafe !important; /* Lighter blue for better contrast on dark background */
-}
-
-/* Fix border colors for better contrast */
-.border-blue-400 {
-  border-color: #60a5fa !important;
-}
-
-.border-gray-500 {
-  border-color: #6b7280 !important;
-}
-
-/* Fix emerald text contrast on dark backgrounds */
-.text-emerald-300 {
-  color: #6ee7b7 !important; /* Lighter emerald for better contrast on dark backgrounds */
-}
-
-.text-emerald-400 {
-  color: #34d399 !important; /* Lighter emerald for better contrast on dark backgrounds */
-}
-
-/* Fix slate text contrast on dark backgrounds */
-.text-slate-300 {
-  color: #cbd5e1 !important; /* Lighter slate for better contrast on dark backgrounds */
-}
-
-.text-slate-400 {
-  color: #94a3b8 !important; /* Lighter slate for better contrast on dark backgrounds */
-}
-
-.text-slate-100 {
-  color: #f1f5f9 !important; /* Lighter slate for better contrast on dark backgrounds */
-}
-
-/* Fix dark background sections for better contrast */
-.bg-slate-900 {
-  background-color: #0f172a !important; /* Darker slate for better contrast */
-}
-
-.bg-slate-800 {
-  background-color: #1e293b !important; /* Darker slate for better contrast */
-}
-
-/* Fix orange text contrast */
-.text-orange-600 {
-  color: #ea580c !important; /* Darker orange for better contrast */
-}
-
-.hover\:text-orange-800:hover {
-  color: #9a3412 !important; /* Darker orange for hover state */
-}
-
-/* Fix green text contrast */
-.text-green-600 {
-  color: #16a34a !important; /* Darker green for better contrast */
-}
-
-.hover\:text-green-800:hover {
-  color: #166534 !important; /* Darker green for hover state */
-}
-
-/* Fix blue button contrast */
-.bg-blue-500 {
-  background-color: #3b82f6 !important; /* Darker blue for better contrast with white text */
-}
-
-.hover\:bg-blue-600:hover {
-  background-color: #2563eb !important; /* Darker blue for hover state */
+/* Hero Section Styles */
+.home-hero {
+  background: linear-gradient(90deg, #2563eb 0%, #1e3a8a 100%);
+  color: #f8fafc;
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-16);
 }
 
 .home-hero__title {
   color: #f8fafc !important;
+  font-family: var(--font-primary);
+  font-weight: var(--font-bold);
+  margin-bottom: var(--space-6);
 }
 
 .home-hero__subtitle {
   color: #dbeafe !important;
-  font-weight: 600 !important;
+  font-weight: var(--font-semibold) !important;
 }
 
 .home-hero__lead {
-  color: rgba(226, 238, 255, 0.95) !important;
-  font-weight: 500;
-  line-height: 1.6;
+  color: rgba(226, 238, 255, 0.96) !important;
+  font-weight: var(--font-medium);
+  line-height: 1.55;
   max-width: 40rem;
-  margin: 0 auto;
+  margin: 0 auto var(--space-6) auto;
 }
 
 @media (min-width: 1024px) {
   .home-hero__lead {
     margin-left: 0;
   }
+}
+
+/* Utility Classes */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 var(--space-8);
+  }
+}
+
+/* Section Spacing */
+.section {
+  padding: var(--space-16) var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: var(--space-16) var(--space-8);
+  }
+}
+
+/* Grid System - Card Layout */
+.grid-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .grid-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Sticky Navigation */
+.sticky-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Accessibility - Skip Link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--color-primary-500);
+  color: white;
+  padding: var(--space-4);
+  text-decoration: none;
+  z-index: 10000;
+}
+
+.skip-link:focus {
+  top: 0;
 }
