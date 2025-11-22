@@ -57,7 +57,7 @@ jobs:
 
       - name: Upload spell check report
         uses: actions/upload-artifact@v4
-        if: failure()
+     if: always()
         with:
           name: spell-check-report
           path: spell-check-report.txt
