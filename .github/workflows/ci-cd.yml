@@ -113,11 +113,9 @@ jobs:
           urls: |
             http://localhost:3000
           configPath: '.lighthouserc.json'
-          uploadArtifacts: true
-          temporaryPublicStorage: true
-
   # Deploy to Vercel (Production)
   deploy-production:
+      continue-on-error: true  # Allow workflow to continue if Vercel secrets are not configured
     runs-on: ubuntu-latest
     needs: [lint-and-typecheck, build-and-test, security-audit]
     if: github.ref == 'refs/heads/main'
@@ -136,6 +134,7 @@ jobs:
 
   # Deploy to Vercel (Preview)
   deploy-preview:
+      continue-on-error: true  # Allow workflow to continue if Vercel secrets are not configured
     runs-on: ubuntu-latest
     needs: [lint-and-typecheck, build-and-test]
     if: github.event_name == 'pull_request'
