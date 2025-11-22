@@ -47,6 +47,8 @@ jobs:
 
       - name: Aggregate all reports
         id: aggregate
+        timeout-minutes: 5
+        continue-on-error: false
         run: |
           cat > aggregate-reports.js << 'EOF'
           const fs = require('fs');
@@ -157,6 +159,8 @@ jobs:
       - name: Generate AI fixes
         id: ai_fix
         if: success()
+        timeout-minutes: 5
+        continue-on-error: true
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
@@ -319,6 +323,8 @@ Return ONLY valid git diff format. Be surgical - only change what's necessary.`;
       - name: Validate patch
         id: validate
         if: success()
+        timeout-minutes: 2
+        continue-on-error: true
         run: |
           if [ ! -f fixes.patch ]; then
             echo "No patch file generated"
@@ -346,6 +352,8 @@ Return ONLY valid git diff format. Be surgical - only change what's necessary.`;
 
       - name: Apply fixes
         if: steps.validate.outputs.has_fixes == 'true' && steps.validate.outputs.patch_valid == 'true'
+        timeout-minutes: 2
+        continue-on-error: true
         run: |
           git config user.name "Auto-Fix Bot"
           git config user.email "autofix@neurohyderabad.org"
@@ -358,6 +366,8 @@ Return ONLY valid git diff format. Be surgical - only change what's necessary.`;
 
       - name: Create Pull Request
         if: steps.validate.outputs.has_fixes == 'true'
+        timeout-minutes: 3
+        continue-on-error: true
         uses: peter-evans/create-pull-request@v6
         with:
           commit-message: 'chore: auto-fix SEO, performance, and accessibility issues'

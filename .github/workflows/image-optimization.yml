@@ -208,9 +208,10 @@ jobs:
               body: comment
             });
 
-- name: Upload image optimization summary
-    if: always()
-    uses: actions/upload-artifact@v4
+      - name: Upload image optimization summary
+        if: always()
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
     with:
       name: image-optimization-summary
       path: optimization-summary.txt
