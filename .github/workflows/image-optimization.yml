@@ -183,8 +183,8 @@ jobs:
             - Better Core Web Vitals scores
             
             Please review and merge if the changes look good.
-          branch: automated-image-optimization
-          delete-branch: true
+              branch: automated-image-optimization
+              delete-branch: true
 
       - name: Comment optimization summary
         if: github.event_name == 'pull_request'
