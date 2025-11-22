@@ -150,6 +150,8 @@ jobs:
           
           if (totalIssues === 0) {
             console.log('No issues found to fix');
+            // Create empty file to indicate no fixes needed
+            fs.writeFileSync('fixes.patch', '# No fixes needed - all checks passed');
             process.exit(0);
           }
           EOF
@@ -322,7 +324,7 @@ Return ONLY valid git diff format. Be surgical - only change what's necessary.`;
 
       - name: Validate patch
         id: validate
-        if: success()
+        if: always()
         timeout-minutes: 2
         continue-on-error: true
         run: |
@@ -332,8 +334,15 @@ Return ONLY valid git diff format. Be surgical - only change what's necessary.`;
             exit 0
           fi
           
-          if [ ! -s fixes.patch ]; then
-            echo "Patch file is empty"
+          # Check if patch is just a comment (no fixes needed)
+          if grep -q "^# No fixes needed" fixes.patch; then
+            echo "No fixes needed - all checks passed"
+            echo "has_fixes=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          if [ ! -s fixes.patch ] || [ "$(wc -c < fixes.patch)" -lt 50 ]; then
+            echo "Patch file is empty or too small"
             echo "has_fixes=false" >> $GITHUB_OUTPUT
             exit 0
           fi
