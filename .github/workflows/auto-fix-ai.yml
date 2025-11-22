@@ -237,9 +237,9 @@ Audit Results:
 - Image issues: ${report.summary.images}
 
 Detailed Issues:
-${'```'}json
+` + '```' + `json
 ${detailsJson}
-${'```'}
+` + '```' + `
 
 Generate a git patch file that fixes these issues. Focus on:
 1. Adding missing alt tags to images
