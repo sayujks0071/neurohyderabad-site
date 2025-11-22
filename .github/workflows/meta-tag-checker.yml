@@ -1,0 +1,170 @@
+name: Meta Tag Checker
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    # Run weekly on Wednesday at 3 AM UTC (8:30 AM IST)
+    - cron: '0 3 * * 3'
+  workflow_dispatch:
+
+jobs:
+  check-meta-tags:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Create meta tag checker
+        run: |
+          cat > check-meta-tags.js << 'EOF'
+          const https = require('https');
+          const cheerio = require('cheerio');
+          
+          const urls = [
+            'https://neurohyderabad.org',
+            'https://neurohyderabad.org/about',
+            'https://neurohyderabad.org/treatments',
+            'https://neurohyderabad.org/contact'
+          ];
+          
+          async function checkMetaTags(url) {
+            return new Promise((resolve, reject) => {
+              https.get(url, (res) => {
+                let data = '';
+                res.on('data', chunk => data += chunk);
+                res.on('end', () => {
+                  const issues = [];
+                  
+                  // Check title
+                  const titleMatch = data.match(/<title>(.*?)<\/title>/i);
+                  const title = titleMatch ? titleMatch[1] : '';
+                  
+                  if (!title) {
+                    issues.push('Missing <title> tag');
+                  } else if (title.length < 30) {
+                    issues.push(`Title too short (${title.length} chars, min 30)`);
+                  } else if (title.length > 60) {
+                    issues.push(`Title too long (${title.length} chars, max 60)`);
+                  }
+                  
+                  // Check description
+                  const descMatch = data.match(/<meta name="description" content="(.*?)"\/?>/i);
+                  const description = descMatch ? descMatch[1] : '';
+                  
+                  if (!description) {
+                    issues.push('Missing meta description');
+                  } else if (description.length < 120) {
+                    issues.push(`Description too short (${description.length} chars, min 120)`);
+                  } else if (description.length > 160) {
+                    issues.push(`Description too long (${description.length} chars, max 160)`);
+                  }
+                  
+                  // Check OG tags
+                  if (!data.match(/<meta property="og:title"/i)) {
+                    issues.push('Missing og:title');
+                  }
+                  if (!data.match(/<meta property="og:description"/i)) {
+                    issues.push('Missing og:description');
+                  }
+                  if (!data.match(/<meta property="og:image"/i)) {
+                    issues.push('Missing og:image');
+                  }
+                  if (!data.match(/<meta property="og:url"/i)) {
+                    issues.push('Missing og:url');
+                  }
+                  
+                  // Check Twitter Card
+                  if (!data.match(/<meta name="twitter:card"/i)) {
+                    issues.push('Missing twitter:card');
+                  }
+                  
+                  // Check canonical
+                  if (!data.match(/<link rel="canonical"/i)) {
+                    issues.push('Missing canonical tag');
+                  }
+                  
+                  resolve({ url, title, description, issues });
+                });
+              }).on('error', reject);
+            });
+          }
+          
+          async function main() {
+            console.log('\n🏷️  Starting Meta Tag Check\n');
+            const results = [];
+            let hasIssues = false;
+            
+            for (const url of urls) {
+              try {
+                const result = await checkMetaTags(url);
+                results.push(result);
+                
+                if (result.issues.length === 0) {
+                  console.log(`✅ ${url}`);
+                  console.log(`   Title: ${result.title}`);
+                  console.log(`   Desc: ${result.description.substring(0, 60)}...`);
+                } else {
+                  console.log(`⚠️  ${url}`);
+                  result.issues.forEach(issue => {
+                    console.log(`   - ${issue}`);
+                  });
+                  hasIssues = true;
+                }
+                console.log('');
+              } catch (error) {
+                console.error(`❌ ${url}: ${error.message}`);
+                hasIssues = true;
+              }
+            }
+            
+            if (hasIssues) {
+              console.log('⚠️  Some meta tag issues found.');
+              process.exit(1);
+            } else {
+              console.log('✅ All meta tags are properly configured!');
+            }
+          }
+          
+          main().catch(console.error);
+          EOF
+
+      - name: Install dependencies
+        run: npm install cheerio
+
+      - name: Run meta tag check
+        id: check
+        run: node check-meta-tags.js || echo "check_failed=true" >> $GITHUB_OUTPUT
+
+- name: Write meta tag report
+        run: echo "Meta tag check completed" > meta-tag-report.txt
+
+      - name: Upload meta tag report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: meta-tag-report
+          path: meta-tag-report.txt
+
+      - name: Comment on PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const status = '${{ steps.check.outputs.check_failed }}' === 'true' ? '❌ Failed' : '✅ Passed';
+            const comment = `## 🏷️ Meta Tag Check: ${status}\n\n` +
+              `[View full report](${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID})`;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });

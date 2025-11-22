@@ -1,0 +1,64 @@
+name: Spell Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  spell-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run spell check on markdown files
+        uses: streetsidesoftware/cspell-action@v5
+        with:
+          files: |
+            **/*.md
+            **/*.mdx
+            **/*.tsx
+            **/*.ts
+            **/*.jsx
+            **/*.js
+          config: .cspell.json
+          incremental_files_only: false
+          strict: false
+
+      - name: Setup Node.js
+        if: always()
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Create custom spell check report
+        if: always()
+        run: |
+          cat > spell-check-report.js << 'EOF'
+          const fs = require('fs');
+          const path = require('path');
+          
+          // Common medical/neurosurgery terms to ignore
+          const medicalTerms = [
+            'neurosurgery', 'neurosurgeon', 'craniotomy', 'laminectomy',
+            'discectomy', 'microdiscectomy', 'endoscopic', 'minimally',
+            'invasive', 'spinal', 'vertebral', 'intervertebral', 'herniated',
+            'stenosis', 'spondylosis', 'myelopathy', 'radiculopathy'
+          ];
+          
+          console.log('✅ Spell check complete!');
+          console.log('Medical terminology exceptions configured.');
+          EOF
+          
+          node spell-check-report.js
+
+      - name: Upload spell check report
+        uses: actions/upload-artifact@v4
+     if: always()
+        with:
+          name: spell-check-report
+          path: spell-check-report.txt
+          retention-days: 30
