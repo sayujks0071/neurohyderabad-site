@@ -273,11 +273,16 @@ jobs:
             
             if (patches.length > 0) {
               fs.writeFileSync('fixes.patch', patches.join('\n'));
+              fs.writeFileSync('autofix-debug/prompt.txt', 'Fallback mode: No OpenAI API key provided\n\n' + prompt);
+              fs.writeFileSync('autofix-debug/ai-response.txt', 'Fallback mode: Using rule-based fixes');
+              fs.writeFileSync('autofix-debug/patch.diff', patches.join('\n'));
               console.log('Generated fallback fixes');
               process.exit(0);
             } else {
               console.log('No fixable issues detected');
               fs.writeFileSync('fixes.patch', '# No fixes needed - no actionable issues found');
+              fs.writeFileSync('autofix-debug/prompt.txt', 'No fixable issues detected\n\n' + prompt);
+              fs.writeFileSync('autofix-debug/ai-response.txt', 'No fixable issues detected - skipped AI call');
               process.exit(0);
             }
           } else {
@@ -389,6 +394,7 @@ jobs:
                 console.error('Request error:', error.message);
                 console.error('Error code:', error.code);
                 fs.writeFileSync('fixes.patch', '# No fixes generated - network error');
+                fs.writeFileSync('autofix-debug/error.txt', `Network error: ${error.message}\nError code: ${error.code}`);
                 resolve();
               });
               
@@ -396,6 +402,7 @@ jobs:
                 console.error('Request timeout after 60 seconds');
                 req.destroy();
                 fs.writeFileSync('fixes.patch', '# No fixes generated - request timeout');
+                fs.writeFileSync('autofix-debug/error.txt', 'Request timeout after 60 seconds');
                 resolve();
               });
               
@@ -406,6 +413,7 @@ jobs:
             }).catch((error) => {
               console.error('Unexpected error:', error);
               fs.writeFileSync('fixes.patch', '# No fixes generated - unexpected error');
+              fs.writeFileSync('autofix-debug/error.txt', `Unexpected error: ${error.message}\n${error.stack || ''}`);
               process.exit(0);
             });
           }
