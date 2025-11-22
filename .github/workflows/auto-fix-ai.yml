@@ -204,10 +204,15 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
+          # Create artifacts directory for debugging
+          mkdir -p autofix-debug
+          
           # Check if report file exists
           if [ ! -f aggregated-report.json ]; then
             echo "No aggregated report found - creating empty patch"
             echo "# No fixes needed - no report available" > fixes.patch
+            echo "# No fixes needed - no report available" > autofix-debug/prompt.txt
+            echo "# No fixes needed - no report available" > autofix-debug/ai-response.txt
             exit 0
           fi
           
@@ -221,11 +226,14 @@ jobs:
           } catch (error) {
             console.error('Failed to read aggregated report:', error.message);
             fs.writeFileSync('fixes.patch', '# No fixes needed - could not read report');
+            fs.writeFileSync('autofix-debug/error.txt', `Failed to read aggregated report: ${error.message}`);
             process.exit(0);
           }
           
           // Create a concise prompt with properly escaped JSON
           const detailsJson = JSON.stringify(report.details, null, 2).replace(/`/g, '\\`').replace(/\$/g, '\\$');
+          
+          // Save prompt snapshot for debugging
           const prompt = 'You are a Next.js web development expert. Review these audit results and generate ONLY the code changes needed to fix them.\n\n' +
             'Audit Results:\n' +
             '- Lighthouse issues: ' + report.summary.lighthouse + '\n' +
@@ -245,6 +253,10 @@ jobs:
             '4. Fixing broken internal links\n' +
             '5. Improving accessibility (ARIA labels, contrast)\n\n' +
             'Return ONLY valid git diff format. Be surgical - only change what\'s necessary.';
+          
+          // Save prompt to debug artifact
+          fs.writeFileSync('autofix-debug/prompt.txt', prompt);
+          console.log('Prompt saved to autofix-debug/prompt.txt');
           
           const apiKey = process.env.OPENAI_API_KEY;
           
@@ -306,60 +318,70 @@ jobs:
                   body += chunk;
                 });
                 
-                res.on('end', () => {
-                  try {
-                    if (res.statusCode !== 200) {
-                      console.error(`API request failed with status ${res.statusCode}:`, body);
-                      fs.writeFileSync('fixes.patch', '# No fixes generated - API request failed');
-                      resolve();
-                      return;
-                    }
+            res.on('end', () => {
+              try {
+                // Save full AI response to debug artifact
+                fs.writeFileSync('autofix-debug/ai-response.txt', body);
+                console.log('AI response saved to autofix-debug/ai-response.txt');
+                
+                if (res.statusCode !== 200) {
+                  console.error(`API request failed with status ${res.statusCode}:`, body);
+                  fs.writeFileSync('fixes.patch', '# No fixes generated - API request failed');
+                  fs.writeFileSync('autofix-debug/error.txt', `API request failed with status ${res.statusCode}:\n${body}`);
+                  resolve();
+                  return;
+                }
+                
+                const response = JSON.parse(body);
+                
+                if (response.error) {
+                  console.error('OpenAI API Error:', response.error.message);
+                  console.error('Error type:', response.error.type);
+                  fs.writeFileSync('fixes.patch', '# No fixes generated - OpenAI API error');
+                  fs.writeFileSync('autofix-debug/error.txt', `OpenAI API Error: ${response.error.message}\nType: ${response.error.type}`);
+                  resolve();
+                  return;
+                }
+                
+                if (!response.choices || !response.choices[0] || !response.choices[0].message) {
+                  console.error('Invalid API response structure:', JSON.stringify(response, null, 2));
+                  fs.writeFileSync('fixes.patch', '# No fixes generated - invalid API response');
+                  fs.writeFileSync('autofix-debug/error.txt', `Invalid API response structure:\n${JSON.stringify(response, null, 2)}`);
+                  resolve();
+                  return;
+                }
+                
+                const content = response.choices[0].message.content;
+                
+                if (!content || content.trim().length === 0) {
+                  console.error('Empty response from OpenAI API');
+                  fs.writeFileSync('fixes.patch', '# No fixes generated - empty API response');
+                  fs.writeFileSync('autofix-debug/error.txt', 'Empty response from OpenAI API');
+                  resolve();
+                  return;
+                }
+                
+                // Extract patch from markdown code blocks if present
+                let patch = content;
+                const codeBlockMatch = content.match(/```(?:diff|patch)?\n([\s\S]*?)```/);
+                if (codeBlockMatch) {
+                  patch = codeBlockMatch[1];
+                }
+                
+                fs.writeFileSync('fixes.patch', patch);
+                fs.writeFileSync('autofix-debug/patch.diff', patch);
+                console.log('AI-generated patch saved');
+                console.log('Patch preview:');
+                console.log(patch.substring(0, 500));
+                resolve();
                     
-                    const response = JSON.parse(body);
-                    
-                    if (response.error) {
-                      console.error('OpenAI API Error:', response.error.message);
-                      console.error('Error type:', response.error.type);
-                      fs.writeFileSync('fixes.patch', '# No fixes generated - OpenAI API error');
-                      resolve();
-                      return;
-                    }
-                    
-                    if (!response.choices || !response.choices[0] || !response.choices[0].message) {
-                      console.error('Invalid API response structure:', JSON.stringify(response, null, 2));
-                      fs.writeFileSync('fixes.patch', '# No fixes generated - invalid API response');
-                      resolve();
-                      return;
-                    }
-                    
-                    const content = response.choices[0].message.content;
-                    
-                    if (!content || content.trim().length === 0) {
-                      console.error('Empty response from OpenAI API');
-                      fs.writeFileSync('fixes.patch', '# No fixes generated - empty API response');
-                      resolve();
-                      return;
-                    }
-                    
-                    // Extract patch from markdown code blocks if present
-                    let patch = content;
-                    const codeBlockMatch = content.match(/```(?:diff|patch)?\n([\s\S]*?)```/);
-                    if (codeBlockMatch) {
-                      patch = codeBlockMatch[1];
-                    }
-                    
-                    fs.writeFileSync('fixes.patch', patch);
-                    console.log('AI-generated patch saved');
-                    console.log('Patch preview:');
-                    console.log(patch.substring(0, 500));
-                    resolve();
-                    
-                  } catch (error) {
-                    console.error('Error parsing OpenAI response:', error.message);
-                    console.error('Response body:', body.substring(0, 500));
-                    fs.writeFileSync('fixes.patch', '# No fixes generated - parsing error');
-                    resolve();
-                  }
+              } catch (error) {
+                console.error('Error parsing OpenAI response:', error.message);
+                console.error('Response body:', body.substring(0, 500));
+                fs.writeFileSync('fixes.patch', '# No fixes generated - parsing error');
+                fs.writeFileSync('autofix-debug/error.txt', `Parsing error: ${error.message}\n\nResponse body (first 500 chars):\n${body.substring(0, 500)}`);
+                resolve();
+              }
                 });
               });
               
@@ -390,6 +412,17 @@ jobs:
           EOF
           
           node generate-fixes.js
+
+      - name: Upload Auto-Fix debug artifacts
+        if: always()
+        timeout-minutes: 2
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: autofix-debug
+          path: autofix-debug/
+          retention-days: 30
+          if-no-files-found: ignore
 
       - name: Validate patch
         id: validate
