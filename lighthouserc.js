@@ -4,7 +4,8 @@ module.exports = {
     collect: {
       // Start your Next app locally in CI:
       startServerCommand: "npm run build && npm start",
-      startServerReadyPattern: "started server on",
+      startServerReadyPattern: "Ready in|started server on|Local:",
+      startServerReadyTimeout: 120000,
       url: [
         "http://localhost:3000/",
         // add key service pages you promote from drafts:
@@ -12,7 +13,10 @@ module.exports = {
         "http://localhost:3000/awake-brain-surgery-hyderabad"
       ],
       numberOfRuns: 2,
-      settings: { budgetsPath: "budgets.json" }
+      settings: { 
+        budgetsPath: "budgets.json",
+        chromeFlags: "--no-sandbox --headless"
+      }
     },
     assert: {
       preset: "lighthouse:recommended",

@@ -13,77 +13,72 @@ on:
 jobs:
   lighthouse:
     runs-on: ubuntu-latest
+    
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        submodules: false  # Skip submodules to avoid the error
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Run Lighthouse CI
+      run: npx lhci autorun --config=./lighthouserc.js
+    
+    - name: Upload Lighthouse results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: lighthouse-results
+        path: .lighthouseci/
+        retention-days: 7
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build site
-        run: npm run build
-        env:
-          NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: ${{ secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID }}
-
-      - name: Run Lighthouse CI
-        uses: treosh/lighthouse-ci-action@v11
-        with:
-          urls: |
-            https://neurohyderabad.org
-            https://neurohyderabad.org/treatments
-            https://neurohyderabad.org/about
-          uploadArtifacts: true
-          temporaryPublicStorage: true
-
-      - name: Upload Lighthouse reports
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: lighthouse-reports
-          path: .lighthouseci
-          retention-days: 30
-
-      - name: Comment on PR (if applicable)
-        if: github.event_name == 'pull_request'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const fs = require('fs');
-            const path = require('path');
-            
-            try {
-              const reportPath = '.lighthouseci';
-              const files = fs.readdirSync(reportPath);
-              const latestReport = files
-                .filter(f => f.endsWith('.json'))
-                .sort()
-                .pop();
-              
-              if (latestReport) {
-                const report = JSON.parse(fs.readFileSync(path.join(reportPath, latestReport), 'utf8'));
-                const categories = report.categories;
-                
-                const scores = Object.entries(categories).map(([key, value]) => {
-                  const score = Math.round(value.score * 100);
-                  const emoji = score >= 90 ? '🟢' : score >= 50 ? '🟡' : '🔴';
-                  return `${emoji} **${value.title}**: ${score}/100`;
-                }).join('\n');
-                
-                const comment = `## 🔦 Lighthouse CI Results\n\n${scores}\n\n[View full report](${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID})`;
-                
-                github.rest.issues.createComment({
-                  issue_number: context.issue.number,
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  body: comment
-                });
-              }
-            } catch (error) {
-              console.log('Could not post comment:', error.message);
+    - name: Comment on PR (if applicable)
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const fs = require('fs');
+          const path = require('path');
+          
+          try {
+            const reportPath = '.lighthouseci';
+            if (!fs.existsSync(reportPath)) {
+              console.log('No lighthouse reports found');
+              return;
             }
+            const files = fs.readdirSync(reportPath);
+            const latestReport = files
+              .filter(f => f.endsWith('.json'))
+              .sort()
+              .pop();
+            
+            if (latestReport) {
+              const report = JSON.parse(fs.readFileSync(path.join(reportPath, latestReport), 'utf8'));
+              const categories = report.categories;
+              
+              const scores = Object.entries(categories).map(([key, value]) => {
+                const score = Math.round(value.score * 100);
+                const emoji = score >= 90 ? '🟢' : score >= 50 ? '🟡' : '🔴';
+                return `${emoji} **${value.title}**: ${score}/100`;
+              }).join('\n');
+              
+              const comment = `## 🔦 Lighthouse CI Results\n\n${scores}\n\n[View full report](${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID})`;
+              
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: comment
+              });
+            }
+          } catch (error) {
+            console.log('Could not post comment:', error.message);
+          }
