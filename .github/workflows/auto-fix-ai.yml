@@ -22,7 +22,13 @@ permissions:
 
 jobs:
   autofix:
-    if: github.event.workflow_run.conclusion == 'failure' || github.event_name == 'workflow_dispatch'
+    # Run on workflow failures OR manual dispatch OR when workflows complete (to check for issues)
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run && (
+        github.event.workflow_run.conclusion == 'failure' ||
+        github.event.workflow_run.conclusion == 'success'
+      ))
     runs-on: ubuntu-latest
     
     steps:
@@ -33,12 +39,17 @@ jobs:
           submodules: false
 
       - name: Download workflow artifacts
+        if: github.event.workflow_run != null
         uses: dawidd6/action-download-artifact@v3
         continue-on-error: true
         with:
           workflow: ${{ github.event.workflow_run.workflow_id }}
           run_id: ${{ github.event.workflow_run.id }}
           path: artifacts
+
+      - name: Create empty artifacts directory (if manual trigger)
+        if: github.event.workflow_run == null
+        run: mkdir -p artifacts && echo "Manual trigger - no artifacts to download" > artifacts/manual-trigger.txt
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -48,7 +59,7 @@ jobs:
       - name: Aggregate all reports
         id: aggregate
         timeout-minutes: 5
-        continue-on-error: false
+        continue-on-error: true
         run: |
           cat > aggregate-reports.js << 'EOF'
           const fs = require('fs');
@@ -84,6 +95,33 @@ jobs:
           const artifactFiles = findFiles('artifacts');
           
           console.log('Found', artifactFiles.length, 'artifact files');
+          
+          if (artifactFiles.length === 0) {
+            console.log('No artifacts found - creating empty report');
+            const emptyReport = {
+              summary: {
+                lighthouse: 0,
+                brokenLinks: 0,
+                schema: 0,
+                metaTags: 0,
+                accessibility: 0,
+                images: 0,
+                spelling: 0
+              },
+              details: {
+                lighthouse: [],
+                brokenLinks: [],
+                schema: [],
+                metaTags: [],
+                accessibility: [],
+                images: [],
+                spelling: []
+              }
+            };
+            fs.writeFileSync('aggregated-report.json', JSON.stringify(emptyReport, null, 2));
+            fs.writeFileSync('fixes.patch', '# No fixes needed - no artifacts found');
+            process.exit(0);
+          }
           
           artifactFiles.forEach(file => {
             try {
@@ -160,17 +198,31 @@ jobs:
 
       - name: Generate AI fixes
         id: ai_fix
-        if: success()
+        if: always()
         timeout-minutes: 5
         continue-on-error: true
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
+          # Check if report file exists
+          if [ ! -f aggregated-report.json ]; then
+            echo "No aggregated report found - creating empty patch"
+            echo "# No fixes needed - no report available" > fixes.patch
+            exit 0
+          fi
+          
           cat > generate-fixes.js << 'EOF'
           const fs = require('fs');
           const https = require('https');
           
-          const report = JSON.parse(fs.readFileSync('aggregated-report.json', 'utf8'));
+          let report;
+          try {
+            report = JSON.parse(fs.readFileSync('aggregated-report.json', 'utf8'));
+          } catch (error) {
+            console.error('Failed to read aggregated report:', error.message);
+            fs.writeFileSync('fixes.patch', '# No fixes needed - could not read report');
+            process.exit(0);
+          }
           
           // Create a concise prompt with properly escaped JSON
           const detailsJson = JSON.stringify(report.details, null, 2).replace(/`/g, '\\`').replace(/\$/g, '\\$');
@@ -216,7 +268,8 @@ Return ONLY valid git diff format. Be surgical - only change what's necessary.`;
               console.log('Generated fallback fixes');
             } else {
               console.log('No fixable issues detected');
-              process.exit(1);
+              fs.writeFileSync('fixes.patch', '# No fixes needed - no actionable issues found');
+              process.exit(0);
             }
             return;
           }
@@ -261,7 +314,9 @@ Return ONLY valid git diff format. Be surgical - only change what's necessary.`;
               try {
                 if (res.statusCode !== 200) {
                   console.error(`API request failed with status ${res.statusCode}:`, body);
-                  process.exit(1);
+                  // Fallback to empty patch instead of failing
+                  fs.writeFileSync('fixes.patch', '# No fixes generated - API request failed');
+                  process.exit(0);
                 }
                 
                 const response = JSON.parse(body);
@@ -269,19 +324,23 @@ Return ONLY valid git diff format. Be surgical - only change what's necessary.`;
                 if (response.error) {
                   console.error('OpenAI API Error:', response.error.message);
                   console.error('Error type:', response.error.type);
-                  process.exit(1);
+                  // Fallback to empty patch instead of failing
+                  fs.writeFileSync('fixes.patch', '# No fixes generated - OpenAI API error');
+                  process.exit(0);
                 }
                 
                 if (!response.choices || !response.choices[0] || !response.choices[0].message) {
                   console.error('Invalid API response structure:', JSON.stringify(response, null, 2));
-                  process.exit(1);
+                  fs.writeFileSync('fixes.patch', '# No fixes generated - invalid API response');
+                  process.exit(0);
                 }
                 
                 const content = response.choices[0].message.content;
                 
                 if (!content || content.trim().length === 0) {
                   console.error('Empty response from OpenAI API');
-                  process.exit(1);
+                  fs.writeFileSync('fixes.patch', '# No fixes generated - empty API response');
+                  process.exit(0);
                 }
                 
                 // Extract patch from markdown code blocks if present
@@ -299,7 +358,9 @@ Return ONLY valid git diff format. Be surgical - only change what's necessary.`;
               } catch (error) {
                 console.error('Error parsing OpenAI response:', error.message);
                 console.error('Response body:', body.substring(0, 500));
-                process.exit(1);
+                // Fallback to empty patch instead of failing
+                fs.writeFileSync('fixes.patch', '# No fixes generated - parsing error');
+                process.exit(0);
               }
             });
           });
@@ -307,13 +368,17 @@ Return ONLY valid git diff format. Be surgical - only change what's necessary.`;
           req.on('error', (error) => {
             console.error('Request error:', error.message);
             console.error('Error code:', error.code);
-            process.exit(1);
+            // Fallback to empty patch instead of failing
+            fs.writeFileSync('fixes.patch', '# No fixes generated - network error');
+            process.exit(0);
           });
           
           req.setTimeout(60000, () => {
             console.error('Request timeout after 60 seconds');
             req.destroy();
-            process.exit(1);
+            // Fallback to empty patch instead of failing
+            fs.writeFileSync('fixes.patch', '# No fixes generated - request timeout');
+            process.exit(0);
           });
           
           req.write(data);
