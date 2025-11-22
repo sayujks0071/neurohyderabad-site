@@ -226,30 +226,25 @@ jobs:
           
           // Create a concise prompt with properly escaped JSON
           const detailsJson = JSON.stringify(report.details, null, 2).replace(/`/g, '\\`').replace(/\$/g, '\\$');
-          const prompt = `You are a Next.js web development expert. Review these audit results and generate ONLY the code changes needed to fix them.
-
-Audit Results:
-- Lighthouse issues: ${report.summary.lighthouse}
-- Broken links: ${report.summary.brokenLinks}
-- Schema issues: ${report.summary.schema}
-- Meta tag issues: ${report.summary.metaTags}
-- Accessibility issues: ${report.summary.accessibility}
-- Image issues: ${report.summary.images}
-
-Detailed Issues:
-` + '```' + `json
-${detailsJson}
-` + '```' + `
-Generate a git patch file that fixes these issues. Focus on:
-1. Adding missing alt tags to images
-2. Fixing meta descriptions that are too short/long
-3. Correcting JSON-LD schema errors
-4. Fixing broken internal links
-5. Improving accessibility (ARIA labels, contrast)
-
-Return ONLY valid git diff format. Be surgical - only change what's necessary.`;
-          
-          const apiKey = process.env.OPENAI_API_KEY;
+const prompt = 'You are a Next.js web development expert. Review these audit results and generate ONLY the code changes needed to fix them.\n' +
+'Audit Results:\n' +
+'- Lighthouse issues: ' + report.summary.lighthouse + '\n' +
+'- Broken links: ' + report.summary.brokenLinks + '\n' +
+'- Schema issues: ' + report.summary.schema + '\n' +
+'- Meta tag issues: ' + report.summary.metaTags + '\n' +
+'- Accessibility issues: ' + report.summary.accessibility + '\n' +
+'- Image issues: ' + report.summary.images + '\n' +
+'Detailed Issues:\n' +
+'```json\n' +
+detailsJson + '\n' +
+'```\n' +
+'Generate a git patch file that fixes these issues. Focus on:\n' +
+'1. Adding missing alt tags to images\n' +
+'2. Fixing meta descriptions that are too short/long\n' +
+'3. Correcting JSON-LD schema errors\n' +
+'4. Fixing broken internal links\n' +
+'5. Improving accessibility (ARIA labels, contrast)\n' +
+'Return ONLY valid git diff format. Be surgical - only change what\'s necessary.';          const apiKey = process.env.OPENAI_API_KEY;
           
           if (!apiKey || apiKey === '') {
             console.log('No OpenAI API key provided, using fallback fixes');
