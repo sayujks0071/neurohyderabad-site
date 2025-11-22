@@ -60,7 +60,7 @@ jobs:
 
           EOF
 
-      - name: Append workflow run summary
+      - name: Append workflow run summary with links
         run: |
           echo "## 🔍 Workflow Summary (Last 24 Hours)" >> wiki/CI-Dashboard.md
           echo "" >> wiki/CI-Dashboard.md
@@ -68,28 +68,39 @@ jobs:
           if [ -s runs.json ] && [ "$(jq 'length' runs.json)" -gt 0 ]; then
             jq -r '
               .[] |
-              "\(if .conclusion == "success" then "✅" elif .conclusion == "failure" then "❌" elif .conclusion == "cancelled" then "⚠️" else "🔄" end) **\(.workflowName)** → \(.conclusion // "in_progress") (Run: \(.databaseId))"
+              "\(if .conclusion == "success" then "✅" elif .conclusion == "failure" then "❌" elif .conclusion == "cancelled" then "⚠️" else "🔄" end) **[\(.workflowName)](https://github.com/${{ github.repository }}/actions/runs/\(.databaseId))** → \(.conclusion // "in_progress")"
             ' runs.json >> wiki/CI-Dashboard.md || echo "_No workflow runs found_" >> wiki/CI-Dashboard.md
           else
             echo "_No workflow runs in the last 24 hours_" >> wiki/CI-Dashboard.md
           fi
           echo "" >> wiki/CI-Dashboard.md
 
-      - name: Fetch and add artifacts
+      - name: Fetch and add artifacts with links
         run: |
           echo "## 📦 Recent Artifacts" >> wiki/CI-Dashboard.md
           echo "" >> wiki/CI-Dashboard.md
 
           if [ -s runs.json ] && [ "$(jq 'length' runs.json)" -gt 0 ]; then
             for run_id in $(jq -r '.[].databaseId' runs.json | head -10); do
-              echo "### Run ID: $run_id" >> wiki/CI-Dashboard.md
+              workflow_name=$(jq -r ".[] | select(.databaseId == $run_id) | .workflowName" runs.json)
+              run_url="https://github.com/${{ github.repository }}/actions/runs/$run_id"
+              
+              echo "### [$workflow_name - Run #$run_id]($run_url)" >> wiki/CI-Dashboard.md
               echo "" >> wiki/CI-Dashboard.md
 
-              artifacts=$(gh run view $run_id --repo ${{ github.repository }} --json artifacts --jq '.artifacts[]? | "- \(.name) (\(.sizeInBytes) bytes)"' 2>/dev/null || echo "")
-              if [ -z "$artifacts" ]; then
+              artifacts_json=$(gh run view $run_id --repo ${{ github.repository }} --json artifacts 2>/dev/null || echo '{"artifacts":[]}')
+              
+              artifacts=$(echo "$artifacts_json" | jq -r '.artifacts[]? | "\(.name) (\(.sizeInBytes) bytes)"' 2>/dev/null || echo "")
+              
+              if [ -z "$artifacts" ] || [ "$artifacts" = "" ]; then
                 echo "_No artifacts found_" >> wiki/CI-Dashboard.md
               else
-                echo "$artifacts" >> wiki/CI-Dashboard.md
+                echo "$artifacts" | while read -r artifact_line; do
+                  artifact_name=$(echo "$artifact_line" | cut -d' ' -f1)
+                  artifact_size=$(echo "$artifact_line" | cut -d'(' -f2 | cut -d' ' -f1)
+                  artifact_url="https://github.com/${{ github.repository }}/actions/runs/$run_id"
+                  echo "- [📎 $artifact_line]($artifact_url)" >> wiki/CI-Dashboard.md
+                done
               fi
 
               echo "" >> wiki/CI-Dashboard.md
@@ -148,17 +159,184 @@ jobs:
           echo "" >> wiki/CI-Dashboard.md
           echo "**Last Updated**: $(TZ="Asia/Kolkata" date '+%Y-%m-%d %H:%M:%S IST')" >> wiki/CI-Dashboard.md
 
-      - name: Install bc for calculations
-        run: sudo apt-get update && sudo apt-get install -y bc
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y bc python3 python3-pip
+          pip3 install matplotlib numpy pandas
+
+      - name: Generate color-coded badges and trends
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cat > generate_badges.py << 'PYEOF'
+          import json
+          import os
+          from datetime import datetime, timedelta
+          
+          # Read workflow runs
+          with open('runs.json', 'r') as f:
+              runs = json.load(f)
+          
+          # Generate badges for each workflow
+          badges = []
+          workflow_stats = {}
+          
+          for run in runs:
+              workflow = run.get('workflowName', 'Unknown')
+              conclusion = run.get('conclusion', 'unknown')
+              
+              if workflow not in workflow_stats:
+                  workflow_stats[workflow] = {'success': 0, 'failure': 0, 'total': 0}
+              
+              workflow_stats[workflow]['total'] += 1
+              if conclusion == 'success':
+                  workflow_stats[workflow]['success'] += 1
+              elif conclusion == 'failure':
+                  workflow_stats[workflow]['failure'] += 1
+          
+          # Generate shields.io badges
+          for workflow, stats in workflow_stats.items():
+              if stats['total'] > 0:
+                  success_rate = (stats['success'] / stats['total']) * 100
+                  
+                  if success_rate >= 90:
+                      color = 'green'
+                  elif success_rate >= 70:
+                      color = 'yellow'
+                  else:
+                      color = 'red'
+                  
+                  badge_url = f"https://img.shields.io/badge/{workflow.replace(' ', '%20')}-{success_rate:.0f}%25-{color}?style=flat-square"
+                  badges.append(f"![{workflow}]({badge_url})")
+          
+          with open('badges.md', 'w') as f:
+              f.write('\n'.join(badges))
+          
+          # Generate trend data (last 8 days)
+          trend_data = {}
+          end_date = datetime.now()
+          start_date = end_date - timedelta(days=8)
+          
+          for i in range(8):
+              date = start_date + timedelta(days=i)
+              date_str = date.strftime('%Y-%m-%d')
+              trend_data[date_str] = {'success': 0, 'total': 0}
+          
+          for run in runs:
+              try:
+                  run_date = datetime.fromisoformat(run['createdAt'].replace('Z', '+00:00'))
+                  date_str = run_date.strftime('%Y-%m-%d')
+                  
+                  if date_str in trend_data:
+                      trend_data[date_str]['total'] += 1
+                      if run.get('conclusion') == 'success':
+                          trend_data[date_str]['success'] += 1
+              except:
+                  pass
+          
+          # Save trend data
+          with open('trend_data.json', 'w') as f:
+              json.dump(trend_data, f, indent=2)
+          PYEOF
+          
+          python3 generate_badges.py
+
+      - name: Generate trend graphs
+        run: |
+          cat > generate_graphs.py << 'PYEOF'
+          import json
+          import matplotlib
+          matplotlib.use('Agg')
+          import matplotlib.pyplot as plt
+          import matplotlib.dates as mdates
+          from datetime import datetime, timedelta
+          import numpy as np
+          
+          # Load trend data
+          with open('trend_data.json', 'r') as f:
+              trend_data = json.load(f)
+          
+          # Prepare data for 8-day graph
+          dates_8d = sorted([d for d in trend_data.keys()])[-8:]
+          success_rates_8d = []
+          
+          for date in dates_8d:
+              data = trend_data[date]
+              if data['total'] > 0:
+                  rate = (data['success'] / data['total']) * 100
+              else:
+                  rate = 0
+              success_rates_8d.append(rate)
+          
+          # Create 8-day graph
+          fig, ax = plt.subplots(figsize=(10, 4))
+          date_objects = [datetime.strptime(d, '%Y-%m-%d') for d in dates_8d]
+          
+          ax.plot(date_objects, success_rates_8d, marker='o', linewidth=2, markersize=8, color='#28a745')
+          ax.fill_between(date_objects, success_rates_8d, alpha=0.3, color='#28a745')
+          ax.axhline(y=90, color='orange', linestyle='--', alpha=0.5, label='Target (90%)')
+          ax.set_ylim(0, 100)
+          ax.set_ylabel('Success Rate (%)', fontsize=10)
+          ax.set_title('Workflow Success Rate - Last 8 Days', fontsize=12, fontweight='bold')
+          ax.grid(True, alpha=0.3)
+          ax.legend()
+          
+          # Format x-axis
+          ax.xaxis.set_major_formatter(mdates.DateFormatter('%m/%d'))
+          ax.xaxis.set_major_locator(mdates.DayLocator(interval=1))
+          plt.xticks(rotation=45)
+          plt.tight_layout()
+          
+          plt.savefig('wiki/trend-8d.png', dpi=100, bbox_inches='tight')
+          plt.close()
+          
+          # Generate 30-day data if available (sample for now)
+          print("Graphs generated successfully")
+          PYEOF
+          
+          python3 generate_graphs.py
+
+      - name: Add badges and graphs to dashboard
+        run: |
+          cat > insert_sections.py << 'PYEOF'
+          import os
+          import re
+          
+          # Read current dashboard
+          with open('wiki/CI-Dashboard.md', 'r') as f:
+              content = f.read()
+          
+          # Insert badges section after the header
+          if os.path.exists('badges.md') and os.path.getsize('badges.md') > 0:
+              with open('badges.md', 'r') as f:
+                  badges_content = f.read()
+              
+              # Insert after the first --- separator
+              badges_section = f"\n## 🏷️ Workflow Status Badges\n\n{badges_content}\n\n---\n"
+              content = content.replace('---', badges_section, 1)
+          
+          # Insert trend graphs section before workflow summary
+          if os.path.exists('wiki/trend-8d.png'):
+              trend_section = "\n## 📈 Success Rate Trends\n\n### Last 8 Days\n\n![8-Day Trend](trend-8d.png)\n\n---\n"
+              # Insert before "## 🔍 Workflow Summary"
+              content = re.sub(r'(## 🔍 Workflow Summary)', trend_section + r'\1', content, count=1)
+          
+          # Write updated content
+          with open('wiki/CI-Dashboard.md', 'w') as f:
+              f.write(content)
+          PYEOF
+          
+          python3 insert_sections.py
 
       - name: Commit dashboard to wiki
         run: |
           cd wiki
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add CI-Dashboard.md
+          git add CI-Dashboard.md trend-8d.png 2>/dev/null || true
           
-          if git diff --staged --quiet; then
+          if git diff --staged --quiet && [ -z "$(git status --porcelain)" ]; then
             echo "No changes to commit"
           else
             git commit -m "Update CI Dashboard - $(TZ="Asia/Kolkata" date '+%Y-%m-%d %H:%M:%S IST')" || exit 0
