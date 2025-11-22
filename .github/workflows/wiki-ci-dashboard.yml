@@ -1,0 +1,167 @@
+name: CI Intelligence Dashboard (Wiki)
+
+on:
+  schedule:
+    - cron: "30 0 * * *" # 6:00 AM IST (12:00 AM UTC)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+  pull-requests: read
+
+jobs:
+  build-dashboard:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout main repo
+        uses: actions/checkout@v4
+        with:
+          submodules: false
+
+      - name: Checkout Wiki
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository }}.wiki
+          path: wiki
+          submodules: false
+
+      - name: Setup GitHub CLI
+        run: |
+          type -p curl >/dev/null || (apt update && apt install curl -y)
+          curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+          chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
+          echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+          apt update && apt install gh -y
+
+      - name: Authenticate GitHub CLI
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh auth login --with-token <<< "$GH_TOKEN"
+
+      - name: Fetch workflow runs (last 24 hours)
+        id: fetch_runs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh run list --limit 100 --json conclusion,createdAt,displayTitle,databaseId,workflowName \
+            --repo ${{ github.repository }} \
+            --jq '[.[] | select((.createdAt | fromdateiso8601) >= (now - 86400))]' > runs.json || echo "[]" > runs.json
+
+      - name: Initialize dashboard file
+        run: |
+          cat > wiki/CI-Dashboard.md << 'EOF'
+          # 🧠 CI Intelligence Dashboard
+
+          Updated: **$(TZ="Asia/Kolkata" date '+%Y-%m-%d %H:%M:%S IST')**
+
+          ---
+
+          EOF
+
+      - name: Append workflow run summary
+        run: |
+          echo "## 🔍 Workflow Summary (Last 24 Hours)" >> wiki/CI-Dashboard.md
+          echo "" >> wiki/CI-Dashboard.md
+          
+          if [ -s runs.json ] && [ "$(jq 'length' runs.json)" -gt 0 ]; then
+            jq -r '
+              .[] |
+              "\(if .conclusion == "success" then "✅" elif .conclusion == "failure" then "❌" elif .conclusion == "cancelled" then "⚠️" else "🔄" end) **\(.workflowName)** → \(.conclusion // "in_progress") (Run: \(.databaseId))"
+            ' runs.json >> wiki/CI-Dashboard.md || echo "_No workflow runs found_" >> wiki/CI-Dashboard.md
+          else
+            echo "_No workflow runs in the last 24 hours_" >> wiki/CI-Dashboard.md
+          fi
+          echo "" >> wiki/CI-Dashboard.md
+
+      - name: Fetch and add artifacts
+        run: |
+          echo "## 📦 Recent Artifacts" >> wiki/CI-Dashboard.md
+          echo "" >> wiki/CI-Dashboard.md
+
+          if [ -s runs.json ] && [ "$(jq 'length' runs.json)" -gt 0 ]; then
+            for run_id in $(jq -r '.[].databaseId' runs.json | head -10); do
+              echo "### Run ID: $run_id" >> wiki/CI-Dashboard.md
+              echo "" >> wiki/CI-Dashboard.md
+
+              artifacts=$(gh run view $run_id --repo ${{ github.repository }} --json artifacts --jq '.artifacts[]? | "- \(.name) (\(.sizeInBytes) bytes)"' 2>/dev/null || echo "")
+              if [ -z "$artifacts" ]; then
+                echo "_No artifacts found_" >> wiki/CI-Dashboard.md
+              else
+                echo "$artifacts" >> wiki/CI-Dashboard.md
+              fi
+
+              echo "" >> wiki/CI-Dashboard.md
+            done
+          else
+            echo "_No artifacts available_" >> wiki/CI-Dashboard.md
+          fi
+
+      - name: Append auto-fix PRs
+        run: |
+          echo "## 🤖 Auto-Fix PR Bot Activity" >> wiki/CI-Dashboard.md
+          echo "" >> wiki/CI-Dashboard.md
+
+          prs=$(gh pr list \
+            --author "app/github-actions" \
+            --state open \
+            --limit 20 \
+            --json title,number,createdAt,labels \
+            --jq '.[] | "- PR #\(.number): \(.title) • Created: \(.createdAt) • Labels: \(.labels | map(.name) | join(", "))"' 2>/dev/null || echo "")
+          
+          if [ -z "$prs" ]; then
+            echo "_No open auto-fix PRs_" >> wiki/CI-Dashboard.md
+          else
+            echo "$prs" >> wiki/CI-Dashboard.md
+          fi
+          echo "" >> wiki/CI-Dashboard.md
+
+      - name: Append workflow health status
+        run: |
+          echo "## 📊 Workflow Health Status" >> wiki/CI-Dashboard.md
+          echo "" >> wiki/CI-Dashboard.md
+          
+          if [ -s runs.json ] && [ "$(jq 'length' runs.json)" -gt 0 ]; then
+            success_count=$(jq '[.[] | select(.conclusion == "success")] | length' runs.json)
+            failure_count=$(jq '[.[] | select(.conclusion == "failure")] | length' runs.json)
+            total_count=$(jq 'length' runs.json)
+            
+            echo "- **Total Runs**: $total_count" >> wiki/CI-Dashboard.md
+            echo "- **✅ Successful**: $success_count" >> wiki/CI-Dashboard.md
+            echo "- **❌ Failed**: $failure_count" >> wiki/CI-Dashboard.md
+            
+            if [ "$total_count" -gt 0 ]; then
+              success_rate=$(echo "scale=1; $success_count * 100 / $total_count" | bc)
+              echo "- **Success Rate**: ${success_rate}%" >> wiki/CI-Dashboard.md
+            fi
+          else
+            echo "_No workflow data available_" >> wiki/CI-Dashboard.md
+          fi
+          echo "" >> wiki/CI-Dashboard.md
+
+      - name: Append footer
+        run: |
+          echo "---" >> wiki/CI-Dashboard.md
+          echo "" >> wiki/CI-Dashboard.md
+          echo "_CI Dashboard auto-generated by GitHub Actions • [View Workflows](https://github.com/${{ github.repository }}/actions)_" >> wiki/CI-Dashboard.md
+          echo "" >> wiki/CI-Dashboard.md
+          echo "**Last Updated**: $(TZ="Asia/Kolkata" date '+%Y-%m-%d %H:%M:%S IST')" >> wiki/CI-Dashboard.md
+
+      - name: Install bc for calculations
+        run: sudo apt-get update && sudo apt-get install -y bc
+
+      - name: Commit dashboard to wiki
+        run: |
+          cd wiki
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add CI-Dashboard.md
+          
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update CI Dashboard - $(TZ="Asia/Kolkata" date '+%Y-%m-%d %H:%M:%S IST')" || exit 0
+            git push || echo "Wiki push failed (may not have wiki enabled)"
+          fi
+
