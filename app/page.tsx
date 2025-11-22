@@ -184,19 +184,29 @@ export default function Home() {
                   German-trained neurosurgeon specializing in minimally invasive spine surgery, awake brain surgery, and ROSA robotic deep brain stimulation. With over 1,000 endoscopic procedures and advanced fellowship training, Dr. Sayuj combines cutting-edge technology with compassionate care at Yashoda Hospital, Malakpet.
                 </p>
                 {/* <HeroCTA /> */}
-                <div className="space-y-4">
-                  <Link 
-                    href="/appointments" 
+                <div className="flex flex-col sm:flex-row gap-4 mt-8">
+                  <Link
+                    href="/appointments"
                     aria-label="Book an in-clinic consultation with Dr. Sayuj"
-                    className="bg-white text-blue-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-colors inline-block"
+                    className="bg-white text-blue-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center justify-center"
                   >
-                    Book Consultation
+                    📅 Book Consultation
                   </Link>
-                  <a 
-                    href="tel:+919778280044" 
-                    className="bg-green-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-green-700 transition-colors inline-block ml-4"
+                  <a
+                    href="https://wa.me/919778280044?text=Hi%20Dr.%20Sayuj,%20I%20would%20like%20to%20book%20a%20consultation"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="WhatsApp Dr. Sayuj for consultation"
+                    className="bg-green-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-green-700 transition-colors inline-flex items-center justify-center"
                   >
-                    Call Now: +91 97782 80044
+                    💬 WhatsApp Now
+                  </a>
+                  <a
+                    href="tel:+919778280044"
+                    aria-label="Call Dr. Sayuj at +91 97782 80044"
+                    className="bg-blue-700 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-blue-800 transition-colors inline-flex items-center justify-center"
+                  >
+                    📞 Call Now
                   </a>
                 </div>
               </div>
@@ -657,11 +667,27 @@ export default function Home() {
               <div className="bg-white rounded-lg shadow-lg p-6 text-center border-l-4 border-red-500">
                 <div className="text-4xl mb-4">🚨</div>
                 <h3 className="text-xl font-semibold text-red-700 mb-3">Emergency Hotline</h3>
-                <p className="text-2xl font-bold text-red-600 mb-2">+91-9778280044</p>
+                <p className="text-2xl font-bold text-red-600 mb-4">+91-9778280044</p>
                 <p className="text-gray-600 mb-4">Available 24/7 for urgent consultations</p>
-                <Link 
+                <div className="flex flex-col gap-3">
+                  <a
+                    href="https://wa.me/919778280044?text=EMERGENCY:%20I%20need%20urgent%20neurosurgical%20consultation"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors inline-flex items-center justify-center"
+                  >
+                    💬 WhatsApp Emergency
+                  </a>
+                  <a
+                    href="tel:+919778280044"
+                    className="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors inline-flex items-center justify-center"
+                  >
+                    📞 Call Now
+                  </a>
+                </div>
+                <Link
                   href="/emergency-rehabilitation"
-                  className="text-red-600 hover:text-red-800 font-medium"
+                  className="text-red-600 hover:text-red-800 font-medium text-sm mt-4 inline-block"
                 >
                   Learn More About Emergency Care →
                 </Link>
@@ -864,10 +890,23 @@ export default function Home() {
                 <h3 className="text-2xl font-semibold mb-6 text-blue-700">Contact Information</h3>
                 <div className="space-y-6">
                   <div>
-                    <h4 className="font-semibold text-gray-800 mb-2">Phone</h4>
-                    <a href="tel:+919778280044" className="text-blue-600 text-lg hover:underline">
-                      +91 9778280044
-                    </a>
+                    <h4 className="font-semibold text-gray-800 mb-3">Quick Contact</h4>
+                    <div className="flex flex-col gap-3">
+                      <a
+                        href="https://wa.me/919778280044?text=Hi%20Dr.%20Sayuj,%20I%20would%20like%20to%20book%20a%20consultation"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors inline-flex items-center justify-center"
+                      >
+                        💬 WhatsApp: +91 9778280044
+                      </a>
+                      <a
+                        href="tel:+919778280044"
+                        className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors inline-flex items-center justify-center"
+                      >
+                        📞 Call: +91 9778280044
+                      </a>
+                    </div>
                   </div>
                   <div>
                     <h4 className="font-semibold text-gray-800 mb-2">Email</h4>
