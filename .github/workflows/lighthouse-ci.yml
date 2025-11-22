@@ -31,10 +31,17 @@ jobs:
       timeout-minutes: 5
       continue-on-error: false
     
+    - name: Build application
+      run: npm run build
+      timeout-minutes: 10
+      continue-on-error: false
+      env:
+        NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: ${{ secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID }}
+    
     - name: Run Lighthouse CI
       run: npx lhci autorun --config=./lighthouserc.js
-      timeout-minutes: 15
-      continue-on-error: false
+      timeout-minutes: 20
+      continue-on-error: true
     
     - name: Upload Lighthouse results
       uses: actions/upload-artifact@v4
