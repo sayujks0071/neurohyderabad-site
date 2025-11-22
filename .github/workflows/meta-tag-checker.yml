@@ -143,13 +143,17 @@ jobs:
 
       - name: Run meta tag check
         id: check
+        timeout-minutes: 10
+        continue-on-error: true
         run: node check-meta-tags.js || echo "check_failed=true" >> $GITHUB_OUTPUT
 
-- name: Write meta tag report
+      - name: Write meta tag report
+        timeout-minutes: 1
         run: echo "Meta tag check completed" > meta-tag-report.txt
 
       - name: Upload meta tag report
         if: always()
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: meta-tag-report
@@ -157,6 +161,8 @@ jobs:
 
       - name: Comment on PR
         if: github.event_name == 'pull_request'
+        continue-on-error: true
+        timeout-minutes: 2
         uses: actions/github-script@v7
         with:
           script: |

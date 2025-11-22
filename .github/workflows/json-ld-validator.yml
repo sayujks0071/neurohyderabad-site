@@ -25,11 +25,14 @@ jobs:
           node-version: '18'
 
       - name: Install schema validator
+        timeout-minutes: 3
+        continue-on-error: false
         run: |
           npm install -g schema-dts
           npm install -g ajv-cli
 
       - name: Create validation script
+        timeout-minutes: 1
         run: |
           cat > validate-schema.js << 'EOF'
           const https = require('https');
@@ -131,10 +134,14 @@ jobs:
 
       - name: Run validation
         id: validate
+        timeout-minutes: 10
+        continue-on-error: true
         run: node validate-schema.js || echo "validation_failed=true" >> $GITHUB_OUTPUT
 
       - name: Create issue if validation fails
         if: steps.validate.outputs.validation_failed == 'true'
+        continue-on-error: true
+        timeout-minutes: 2
         uses: actions/github-script@v7
         with:
           script: |

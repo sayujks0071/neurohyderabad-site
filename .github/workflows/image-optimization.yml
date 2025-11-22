@@ -28,9 +28,13 @@ jobs:
           node-version: '18'
 
       - name: Install sharp for image optimization
+        timeout-minutes: 3
+        continue-on-error: false
         run: npm install sharp
 
       - name: Optimize images
+        timeout-minutes: 15
+        continue-on-error: true
         run: |
           cat > optimize-images.js << 'EOF'
           const sharp = require('sharp');
