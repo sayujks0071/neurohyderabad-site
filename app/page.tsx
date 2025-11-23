@@ -23,6 +23,9 @@ import { mediaPublications } from "../src/content/media";
 import PhysicianSchema from "./components/schemas/PhysicianSchema";
 import MedicalClinicSchema from "./components/schemas/MedicalClinicSchema";
 import WebsiteSchema from "./components/schemas/WebsiteSchema";
+import Button from "./_components/Button";
+import Card from "./_components/Card";
+import Section from "./_components/Section";
 
 const HOME_CANONICAL = SITE_URL.endsWith("/") ? SITE_URL : `${SITE_URL}/`;
 
@@ -162,602 +165,570 @@ export default function Home() {
       <PhysicianSchema />
       <MedicalClinicSchema />
       <WebsiteSchema />
-      
+
       {/* <ScrollDepthTracker pageSlug="/" /> */}
       <TrustBridgeTracker />
       <TrustSignalViewportTracker />
       <UserJourneyTracker />
       <div className="min-h-screen bg-white">
-      {/* Hero Section - LCP Optimized */}
-      <header className="home-hero text-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div className="text-center lg:text-left">
-                <h1 className="home-hero__title text-4xl md:text-6xl font-bold leading-tight">
-                  Advanced Brain & Spine Care from a Pioneering Surgeon
-                  <span className="home-hero__subtitle block text-3xl md:text-5xl">
-                    Dr. Sayuj Krishnan — German-Trained Neurosurgeon in Hyderabad
+        {/* Hero Section - LCP Optimized */}
+        <header className="home-hero text-white">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <div className="grid lg:grid-cols-2 gap-12 items-center">
+                <div className="text-center lg:text-left">
+                  <h1 className="home-hero__title text-4xl md:text-6xl font-bold leading-tight">
+                    Advanced Brain & Spine Care from a Pioneering Surgeon
+                    <span className="home-hero__subtitle block text-3xl md:text-5xl">
+                      Dr. Sayuj Krishnan — German-Trained Neurosurgeon in Hyderabad
+                    </span>
+                  </h1>
+                  <p className="home-hero__lead text-xl md:text-2xl">
+                    German-trained neurosurgeon specializing in minimally invasive spine surgery, awake brain surgery, and ROSA robotic deep brain stimulation. With over 1,000 endoscopic procedures and advanced fellowship training, Dr. Sayuj combines cutting-edge technology with compassionate care at Yashoda Hospital, Malakpet.
+                  </p>
+                  {/* <HeroCTA /> */}
+                  <div className="space-y-4">
+                    <Button
+                      href="/appointments"
+                      variant="primary"
+                      size="lg"
+                      className="rounded-full text-lg"
+                      aria-label="Book an in-clinic consultation with Dr. Sayuj"
+                    >
+                      Book Consultation
+                    </Button>
+                    <Button
+                      href="tel:+919778280044"
+                      variant="secondary"
+                      size="lg"
+                      className="rounded-full text-lg bg-green-600 hover:bg-green-700 ml-4"
+                    >
+                      Call Now: +91 97782 80044
+                    </Button>
+                  </div>
+                </div>
+                <div className="flex justify-center">
+                  <DoctorCardLazy />
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        {/* Social Proof Section */}
+        {/* <SocialProofBand /> */}
+
+        {/* Trust Signals */}
+        <Section className="py-8">
+          <TrustSignals />
+        </Section>
+
+        {/* Media Publications Section */}
+        <Section background="blue" className="py-16">
+          <h2 className="text-3xl font-bold text-center mb-12">
+            Expert Insights & Media Coverage
+          </h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {mediaPublications.filter(pub => pub.featured).slice(0, 3).map((publication) => (
+              <Card key={publication.id} hover={true} className="h-full">
+                <div className="mb-4">
+                  <span className="inline-block bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">
+                    {publication.type.replace('-', ' ').toUpperCase()}
                   </span>
-                </h1>
-                <p className="home-hero__lead text-xl md:text-2xl">
-                  German-trained neurosurgeon specializing in minimally invasive spine surgery, awake brain surgery, and ROSA robotic deep brain stimulation. With over 1,000 endoscopic procedures and advanced fellowship training, Dr. Sayuj combines cutting-edge technology with compassionate care at Yashoda Hospital, Malakpet.
-                </p>
-                {/* <HeroCTA /> */}
-                <div className="space-y-4">
-                  <Link 
-                    href="/appointments" 
-                    aria-label="Book an in-clinic consultation with Dr. Sayuj"
-                    className="bg-white text-blue-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-colors inline-block"
-                  >
-                    Book Consultation
-                  </Link>
-                  <a 
-                    href="tel:+919778280044" 
-                    className="bg-green-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-green-700 transition-colors inline-block ml-4"
-                  >
-                    Call Now: +91 97782 80044
-                  </a>
+                  <span className="ml-2 text-sm text-gray-500">
+                    {publication.date}
+                  </span>
                 </div>
-              </div>
-              <div className="flex justify-center">
-                <DoctorCardLazy />
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
 
-      {/* Social Proof Section */}
-      {/* <SocialProofBand /> */}
-
-      {/* Trust Signals */}
-      <section className="py-8 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <TrustSignals />
-          </div>
-        </div>
-      </section>
-
-      {/* Media Publications Section */}
-      <section className="py-16 bg-blue-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-12">
-              Expert Insights & Media Coverage
-            </h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {mediaPublications.filter(pub => pub.featured).slice(0, 3).map((publication) => (
-                <div key={publication.id} className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                  <div className="mb-4">
-                    <span className="inline-block bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">
-                      {publication.type.replace('-', ' ').toUpperCase()}
-                    </span>
-                    <span className="ml-2 text-sm text-gray-500">
-                      {publication.date}
-                    </span>
-                  </div>
-                  
-                  <h3 className="text-lg font-bold text-gray-900 mb-3">
-                    {publication.title}
-                  </h3>
-                  
-                  <p className="text-gray-600 text-sm mb-3">
-                    <strong>{publication.publication}</strong>
-                  </p>
-                  
-                  <p className="text-gray-700 text-sm mb-4">
-                    {publication.description}
-                  </p>
-                  
-                  <a 
-                    href={publication.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm"
-                    aria-label={`Read article: ${publication.title}`}
-                  >
-                    Read: {publication.title.length > 50 ? publication.title.substring(0, 50) + '...' : publication.title} →
-                  </a>
-                </div>
-              ))}
-            </div>
-            <div className="text-center mt-8">
-              <Link 
-                href="/media" 
-                className="inline-flex items-center bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
-              >
-                View All Media Publications
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Lazy load video section - only loads when user scrolls */}
-      <LazyVideoSection />
-
-      {/* Minimally Invasive Spine Surgery (MISS) */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-12">
-              <Link href="/services/minimally-invasive-spine-surgery" className="hover:text-blue-600">Endoscopic Spine Surgery</Link> & Minimally Invasive Procedures (MISS)
-            </h2>
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div>
-                  <div className="mb-6">
-                    <div className="w-full h-64 bg-gradient-to-r from-blue-100 to-blue-200 rounded-lg shadow-lg flex items-center justify-center">
-                      <div className="text-center">
-                        <div className="text-4xl mb-2">🏥</div>
-                        <h3 className="text-xl font-semibold text-blue-800">Minimally Invasive Spine Surgery</h3>
-                        <p className="text-blue-600">Endoscopic Discectomy Technique</p>
-                      </div>
-                    </div>
-                  </div>
-                <p className="text-lg text-gray-700 mb-6">
-                  Dr Sayuj Krishnan uses advanced minimally invasive spine surgery techniques. 
-                  These methods help patients recover faster with less pain and smaller scars.
-                </p>
-                <ul className="space-y-3 text-gray-700">
-                  <li className="flex items-start">
-                    <span className="text-blue-600 mr-2">✓</span>
-                    <span><strong>Endoscopic Discectomy:</strong> Tiny 6-8mm incision for slip disc treatment</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-blue-600 mr-2">✓</span>
-                    <span><strong>Spinal Stenosis Decompression:</strong> Relief for leg pain and numbness</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-blue-600 mr-2">✓</span>
-                    <span><strong>Same-day Discharge:</strong> Most patients go home the same day</span>
-          </li>
-                  <li className="flex items-start">
-                    <span className="text-blue-600 mr-2">✓</span>
-                    <span><strong>Faster Recovery:</strong> Return to work in 1-3 weeks for desk jobs</span>
-          </li>
-                </ul>
-                <div className="mt-8">
-                  <Link 
-                    href="/services/minimally-invasive-spine-surgery"
-                    className="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition-colors"
-                  >
-                    Learn More About MISS →
-                  </Link>
-                  <div className="mt-4">
-                    <Link href="/conditions/slip-disc-treatment-hyderabad/" className="text-blue-600 hover:underline mr-4">Slip Disc Treatment</Link>
-                    <Link href="/conditions/spinal-stenosis-treatment-hyderabad/" className="text-blue-600 hover:underline">Spinal Stenosis</Link>
-                    <div className="mt-3 text-sm">
-                      <Link href="/blog/does-endoscopic-spine-surgery-work-for-sciatica-hyderabad/" className="text-blue-700 hover:underline mr-4">Does Endoscopic Spine Surgery Work for Sciatica?</Link>
-                      <Link href="/blog/when-to-worry-about-back-pain-neurosurgeon-hyderabad/" className="text-blue-700 hover:underline">When to Worry About Back Pain</Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="bg-white p-8 rounded-lg shadow-lg">
-                <h3 className="text-xl font-semibold mb-4 text-blue-700">Who Benefits from MISS?</h3>
-                <ul className="space-y-2 text-gray-600">
-                  <li>• <Link href="/conditions/slip-disc-treatment-hyderabad/" className="text-blue-600 hover:underline">Patients with herniated discs (slip disc)</Link></li>
-                  <li>• <Link href="/conditions/spinal-stenosis-treatment-hyderabad/" className="text-blue-600 hover:underline">Spinal stenosis causing leg pain</Link></li>
-                  <li>• <Link href="/conditions/sciatica-treatment-hyderabad/" className="text-blue-600 hover:underline">Sciatica not improving with conservative treatment</Link></li>
-                  <li>• Recurrent disc herniations</li>
-                  <li>• Foraminal stenosis</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Trust Bridge Section - Connect Services to Credentials */}
-      <section className="py-16 bg-gradient-to-r from-blue-50 to-indigo-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-8">
-              <TrustBridgeLink 
-                href="/about"
-                className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow group"
-                eventLabel="homepage_trust_bridge_about"
-              >
-                <h3 className="text-2xl font-bold text-blue-900 mb-4 group-hover:text-blue-700">
-                  Meet Dr. Sayuj Krishnan
+                <h3 className="text-lg font-bold text-gray-900 mb-3">
+                  {publication.title}
                 </h3>
-                <p className="text-gray-700 mb-4">
-                  Learn about over 9 years of neurosurgical experience, German fellowship training, and his approach to compassionate, minimally invasive care.
-                </p>
-                <ul className="space-y-2 text-gray-600 mb-4">
-                  <li className="flex items-start">
-                    <span className="text-blue-600 mr-2">✓</span>
-                    <span>MBBS, DNB Neurosurgery • Fellowship in Minimally Invasive Spine Surgery</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-blue-600 mr-2">✓</span>
-                    <span>Observer-ship in Full Endoscopic Spine Surgery (Germany)</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-blue-600 mr-2">✓</span>
-                    <span>Affiliated with Yashoda Hospital, Malakpet</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-blue-600 mr-2">✓</span>
-                    <span>Member: AO Spine (International), Neurological Society of India (NSI), Congress of Neurological Surgeons (CNS)</span>
-                  </li>
-                </ul>
-                <span className="text-blue-600 font-semibold group-hover:text-blue-800">
-                  Learn More About Dr. Sayuj →
-                </span>
-              </TrustBridgeLink>
-              
-              <TrustBridgeLink 
-                href="/patient-stories"
-                className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow group"
-                eventLabel="homepage_trust_bridge_patient_stories"
-              >
-                <h3 className="text-2xl font-bold text-blue-900 mb-4 group-hover:text-blue-700">
-                  Patient Success Stories
-                </h3>
-                <p className="text-gray-700 mb-4">
-                  Read real stories from patients who have successfully undergone neurosurgery and spine surgery with Dr. Sayuj Krishnan.
-                </p>
-                <div className="space-y-3 mb-4">
-                  <div className="border-l-4 border-green-500 pl-4">
-                    <p className="text-gray-700 italic text-sm">
-                      "I was speaking normally the next day and felt safe throughout the awake mapping."
-                    </p>
-                    <p className="text-xs text-gray-500 mt-1">— Patient with Meningioma Surgery</p>
-                  </div>
-                  <div className="border-l-4 border-blue-500 pl-4">
-                    <p className="text-gray-700 italic text-sm">
-                      "I could stand straight the very next morning and walked the corridor with the physio."
-                    </p>
-                    <p className="text-xs text-gray-500 mt-1">— Patient after TLIF Spine Surgery</p>
-                  </div>
-                </div>
-                <span className="text-blue-600 font-semibold group-hover:text-blue-800">
-                  Read All Patient Stories →
-                </span>
-              </TrustBridgeLink>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Brain Tumor Surgery */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-12">Brain Tumor Surgery</h2>
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div className="bg-white p-8 rounded-lg shadow-lg">
-                  <div className="mb-6">
-                    <div className="w-full h-64 bg-gradient-to-r from-green-100 to-green-200 rounded-lg shadow-lg flex items-center justify-center">
-                      <div className="text-center">
-                        <div className="text-4xl mb-2">🧠</div>
-                        <h3 className="text-xl font-semibold text-green-800">Brain Tumor Surgery</h3>
-                        <p className="text-green-700">Microsurgical Techniques</p>
-                      </div>
-                    </div>
-                  </div>
-                <h3 className="text-xl font-semibold mb-4 text-blue-700">Advanced Microsurgical Techniques</h3>
-                <ul className="space-y-3 text-gray-700">
-                  <li className="flex items-start">
-                    <span className="text-blue-600 mr-2">✓</span>
-                    <span><strong>Neuronavigation:</strong> Precise tumor localization and removal</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-blue-600 mr-2">✓</span>
-                    <span><strong>Intraoperative Monitoring:</strong> Real-time brain function protection</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-blue-600 mr-2">✓</span>
-                    <span><strong>Awake Craniotomy:</strong> For tumors near speech/motor areas</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-blue-600 mr-2">✓</span>
-                    <span><strong>Minimal Access:</strong> Smaller incisions, faster recovery</span>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <p className="text-lg text-gray-700 mb-6">
-                  Dr Sayuj Krishnan performs advanced brain tumor surgery. He uses the latest 
-                  microsurgical techniques, neuronavigation, and monitoring to safely remove tumors 
-                  while protecting brain function.
+                <p className="text-gray-600 text-sm mb-3">
+                  <strong>{publication.publication}</strong>
                 </p>
-                <p className="text-gray-700 mb-6">
-                  Dr. Krishnan has extensive experience with both benign and malignant brain tumors. 
-                  He works with oncologists, radiologists, and rehabilitation specialists to provide complete care.
-                </p>
-                <div className="mt-8">
-                  <Link 
-                    href="/services/brain-tumor-surgery-hyderabad"
-                    className="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition-colors"
-                  >
-                    Learn More About Brain Tumor Surgery →
-                  </Link>
-                  <div className="mt-4">
-                    <Link href="/services/epilepsy-surgery-hyderabad/" className="text-blue-600 hover:underline mr-4">Epilepsy Surgery</Link>
-                    <Link href="/conditions/trigeminal-neuralgia-treatment-hyderabad/" className="text-blue-600 hover:underline">Trigeminal Neuralgia</Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Lazy load recovery timeline - only loads when user scrolls */}
-      <LazyRecoveryTimeline />
+                <p className="text-gray-700 text-sm mb-4">
+                  {publication.description}
+                </p>
 
-      {/* Trigeminal Neuralgia Care */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-12">Trigeminal Neuralgia Care</h2>
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div>
-                <p className="text-lg text-gray-700 mb-6">
-                  Trigeminal neuralgia causes severe facial pain that can be debilitating. Dr Sayuj Krishnan 
-                  offers comprehensive treatment options from medical therapy to advanced surgical procedures 
-                  including microvascular decompression (MVD) and radiosurgery.
-                </p>
-                <div className="bg-white p-6 rounded-lg shadow-md mb-6">
-                  <h3 className="font-semibold text-blue-700 mb-3">Treatment Options:</h3>
-                  <ul className="space-y-2 text-gray-700">
-                    <li>• Medical therapy (first-line treatment)</li>
-                    <li>• Microvascular decompression (MVD)</li>
-                    <li>• Gamma Knife radiosurgery</li>
-                    <li>• Percutaneous procedures</li>
-                  </ul>
-                </div>
-                <div className="mt-8">
-                  <Link 
-                    href="/conditions/trigeminal-neuralgia-treatment-hyderabad"
-                    className="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition-colors"
-                  >
-                    Learn More About Trigeminal Neuralgia →
-                  </Link>
-                </div>
-              </div>
-              <div className="bg-white p-8 rounded-lg shadow-lg">
-                <h3 className="text-xl font-semibold mb-4 text-blue-700">Symptoms of Trigeminal Neuralgia</h3>
-                <ul className="space-y-3 text-gray-700">
-                  <li className="flex items-start">
-                    <span className="text-red-500 mr-2">•</span>
-                    <span>Severe, electric shock-like facial pain</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-red-500 mr-2">•</span>
-                    <span>Pain triggered by light touch, eating, or talking</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-red-500 mr-2">•</span>
-                    <span>Brief episodes lasting seconds to minutes</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-red-500 mr-2">•</span>
-                    <span>Pain in jaw, cheek, or forehead areas</span>
-                  </li>
-                </ul>
-                <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-                  <p className="text-sm text-blue-800">
-                    <strong>Don't suffer in silence.</strong> Early diagnosis and treatment can provide 
-                    significant relief and improve your quality of life.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Epilepsy Surgery */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-12">Epilepsy Surgery</h2>
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div className="bg-white p-8 rounded-lg shadow-lg">
-                <h3 className="text-xl font-semibold mb-4 text-blue-700">Comprehensive Epilepsy Evaluation</h3>
-                <p className="text-gray-700 mb-4">
-                  For patients with drug-resistant epilepsy, surgical treatment can offer the best 
-                  chance for seizure freedom. Dr. Krishnan provides comprehensive evaluation including:
-                </p>
-                <ul className="space-y-2 text-gray-700">
-                  <li>• Video-EEG monitoring</li>
-                  <li>• Advanced brain imaging (MRI, PET)</li>
-                  <li>• Neuropsychological testing</li>
-                  <li>• Wada test when indicated</li>
-                  <li>• Invasive monitoring (SEEG)</li>
-                </ul>
-              </div>
-              <div>
-                <p className="text-lg text-gray-700 mb-6">
-                  Dr Sayuj Krishnan specializes in epilepsy surgery for patients who don't respond 
-                  to medications. With advanced techniques including laser ablation, resection surgery, 
-                  and vagus nerve stimulation (VNS), he helps patients achieve better seizure control.
-                </p>
-                <div className="bg-blue-50 p-6 rounded-lg mb-6">
-                  <h3 className="font-semibold text-blue-800 mb-3">Surgical Options:</h3>
-                  <ul className="space-y-2 text-blue-700">
-                    <li>• Temporal lobectomy</li>
-                    <li>• Laser interstitial thermal therapy (LITT)</li>
-                    <li>• Vagus nerve stimulation (VNS)</li>
-                    <li>• Corpus callosotomy</li>
-                    <li>• Multiple subpial transection</li>
-                  </ul>
-                </div>
-                <div className="mt-8">
-                  <Link 
-                    href="/services/epilepsy-surgery-hyderabad"
-                    className="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition-colors"
-                  >
-                    Learn More About Epilepsy Surgery →
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Why Choose Dr. Sayuj */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-12">Why Choose Dr Sayuj Krishnan</h2>
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="bg-white p-8 rounded-lg shadow-lg text-center">
-                <div className="text-4xl mb-4">🎓</div>
-                <h3 className="text-xl font-semibold mb-4 text-blue-700">Exceptional Training</h3>
-                <p className="text-gray-700">
-                  MBBS, DNB Neurosurgery (Direct 6 years), Fellowship in Minimally Invasive and 
-                  Advanced Spine Surgery, Observer-ship in Full Endoscopic Spine Surgery (Germany)
-                </p>
-              </div>
-              <div className="bg-white p-8 rounded-lg shadow-lg text-center">
-                <div className="text-4xl mb-4">🏥</div>
-                <h3 className="text-xl font-semibold mb-4 text-blue-700">9+ Years Experience</h3>
-                <p className="text-gray-700">
-                  Successfully treated thousands of patients with various neurological conditions, 
-                  always prioritizing patient safety and optimal outcomes.
-                </p>
-              </div>
-              <div className="bg-white p-8 rounded-lg shadow-lg text-center">
-                <div className="text-4xl mb-4">🔬</div>
-                <h3 className="text-xl font-semibold mb-4 text-blue-700">Advanced Technology</h3>
-                <p className="text-gray-700 mb-4">
-                  State-of-the-art equipment including neuronavigation, intraoperative monitoring, 
-                  and minimally invasive surgical techniques.
-                </p>
-                <Link 
-                  href="/technology-facilities"
-                  className="text-blue-600 hover:text-blue-800 font-medium"
+                <a
+                  href={publication.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm"
+                  aria-label={`Read article: ${publication.title}`}
                 >
-                  Explore Our Technology →
-                </Link>
-              </div>
-            </div>
+                  Read: {publication.title.length > 50 ? publication.title.substring(0, 50) + '...' : publication.title} →
+                </a>
+              </Card>
+            ))}
           </div>
-        </div>
-      </section>
+          <div className="text-center mt-8">
+            <Button
+              href="/media"
+              variant="primary"
+              className="rounded-lg"
+            >
+              View All Media Publications
+            </Button>
+          </div>
+        </Section>
 
-      {/* Emergency Services */}
-      <section className="py-16 bg-red-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-red-800 mb-4">24/7 Emergency Neurosurgical Care</h2>
-              <p className="text-lg text-red-700">
-                Immediate access to expert neurosurgical consultation for brain and spine emergencies
+        {/* Lazy load video section - only loads when user scrolls */}
+        <LazyVideoSection />
+
+        {/* Minimally Invasive Spine Surgery (MISS) */}
+        <Section background="gray" className="py-16">
+          <h2 className="text-3xl font-bold text-center mb-12">
+            <Link href="/services/minimally-invasive-spine-surgery" className="hover:text-blue-600">Endoscopic Spine Surgery</Link> & Minimally Invasive Procedures (MISS)
+          </h2>
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <div className="mb-6">
+                <div className="w-full h-64 bg-gradient-to-r from-blue-100 to-blue-200 rounded-lg shadow-lg flex items-center justify-center">
+                  <div className="text-center">
+                    <div className="text-4xl mb-2">🏥</div>
+                    <h3 className="text-xl font-semibold text-blue-800">Minimally Invasive Spine Surgery</h3>
+                    <p className="text-blue-600">Endoscopic Discectomy Technique</p>
+                  </div>
+                </div>
+              </div>
+              <p className="text-lg text-gray-700 mb-6">
+                Dr Sayuj Krishnan uses advanced minimally invasive spine surgery techniques.
+                These methods help patients recover faster with less pain and smaller scars.
               </p>
-            </div>
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="bg-white rounded-lg shadow-lg p-6 text-center border-l-4 border-red-500">
-                <div className="text-4xl mb-4">🚨</div>
-                <h3 className="text-xl font-semibold text-red-700 mb-3">Emergency Hotline</h3>
-                <p className="text-2xl font-bold text-red-600 mb-2">+91-9778280044</p>
-                <p className="text-gray-600 mb-4">Available 24/7 for urgent consultations</p>
-                <Link 
-                  href="/emergency-rehabilitation"
-                  className="text-red-600 hover:text-red-800 font-medium"
+              <ul className="space-y-3 text-gray-700">
+                <li className="flex items-start">
+                  <span className="text-blue-600 mr-2">✓</span>
+                  <span><strong>Endoscopic Discectomy:</strong> Tiny 6-8mm incision for slip disc treatment</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-blue-600 mr-2">✓</span>
+                  <span><strong>Spinal Stenosis Decompression:</strong> Relief for leg pain and numbness</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-blue-600 mr-2">✓</span>
+                  <span><strong>Same-day Discharge:</strong> Most patients go home the same day</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-blue-600 mr-2">✓</span>
+                  <span><strong>Faster Recovery:</strong> Return to work in 1-3 weeks for desk jobs</span>
+                </li>
+              </ul>
+              <div className="mt-8">
+                <Button
+                  href="/services/minimally-invasive-spine-surgery"
+                  variant="primary"
+                  className="rounded-full"
                 >
-                  Learn More About Emergency Care →
-                </Link>
-              </div>
-              <div className="bg-white rounded-lg shadow-lg p-6 text-center border-l-4 border-orange-500">
-                <div className="text-4xl mb-4">⚡</div>
-                <h3 className="text-xl font-semibold text-orange-700 mb-3">Rapid Response</h3>
-                <p className="text-gray-600 mb-4">
-                  Immediate triage and assessment for traumatic brain injuries, spinal cord injuries, and stroke
-                </p>
-                <Link 
-                  href="/emergency-rehabilitation"
-                  className="text-orange-700 hover:text-orange-900 font-medium"
-                >
-                  Emergency Conditions →
-                </Link>
-              </div>
-              <div className="bg-white rounded-lg shadow-lg p-6 text-center border-l-4 border-green-500">
-                <div className="text-4xl mb-4">🏥</div>
-                <h3 className="text-xl font-semibold text-green-700 mb-3">Hospital Partnership</h3>
-                <p className="text-gray-600 mb-4">
-                  Coordinated care with Yashoda Hospital emergency department for seamless patient care
-                </p>
-                <Link 
-                  href="/emergency-rehabilitation"
-                  className="text-green-700 hover:text-green-900 font-medium"
-                >
-                  Rehabilitation Services →
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Areas We Serve in Hyderabad */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-12">Spine Specialist & Neurosurgeon Near You in Hyderabad</h2>
-            <div className="grid md:grid-cols-2 gap-12">
-              <div>
-                <p className="text-lg text-gray-700 mb-6">
-                  Dr. Sayuj Krishnan provides expert neurosurgical care at Yashoda Hospital, Malakpet, serving patients across Hyderabad and throughout Telangana. 
-                  As a pioneering endoscopic spine surgeon, Dr. Krishnan specializes in advanced, minimally invasive procedures that enable faster recovery 
-                  and same-day discharge for most patients. Our Malakpet location is conveniently accessible for patients throughout the region.
-                </p>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-white p-4 rounded-lg shadow-md">
-                    <h3 className="font-semibold text-blue-700 mb-2">Central Hyderabad</h3>
-                    <ul className="text-sm text-gray-600 space-y-1">
-                      <li>• Jubilee Hills</li>
-                      <li>• Banjara Hills</li>
-                      <li>• Hi-Tech City</li>
-                      <li>• Gachibowli</li>
-                    </ul>
-                  </div>
-                  <div className="bg-white p-4 rounded-lg shadow-md">
-                    <h3 className="font-semibold text-blue-700 mb-2">Other Areas</h3>
-                    <ul className="text-sm text-gray-600 space-y-1">
-                      <li>• Madhapur</li>
-                      <li>• Kondapur</li>
-                      <li>• Malakpet</li>
-                      <li>• Secunderabad</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div className="bg-white p-8 rounded-lg shadow-lg">
-                <h3 className="text-xl font-semibold mb-4 text-blue-700">Hospital Location</h3>
-                <div className="space-y-4">
-                  <div>
-                    <h3 className="font-semibold text-gray-800">Yashoda Hospital</h3>
-                    <p className="text-gray-600">
-                      Room No 317, OPD Block<br />
-                      Malakpet, Hyderabad<br />
-                      Telangana 500036
-                    </p>
-                  </div>
-                  <div className="pt-4 border-t">
-                    <h3 className="font-semibold text-gray-800 mb-2">Contact Information</h3>
-                    <p className="text-gray-600">
-                      <strong>Phone:</strong> +91 9778280044<br />
-                      <strong>Email:</strong> neurospinehyd@drsayuj.com
-                    </p>
+                  Learn More About MISS →
+                </Button>
+                <div className="mt-4">
+                  <Link href="/conditions/slip-disc-treatment-hyderabad/" className="text-blue-600 hover:underline mr-4">Slip Disc Treatment</Link>
+                  <Link href="/conditions/spinal-stenosis-treatment-hyderabad/" className="text-blue-600 hover:underline">Spinal Stenosis</Link>
+                  <div className="mt-3 text-sm">
+                    <Link href="/blog/does-endoscopic-spine-surgery-work-for-sciatica-hyderabad/" className="text-blue-700 hover:underline mr-4">Does Endoscopic Spine Surgery Work for Sciatica?</Link>
+                    <Link href="/blog/when-to-worry-about-back-pain-neurosurgeon-hyderabad/" className="text-blue-700 hover:underline">When to Worry About Back Pain</Link>
                   </div>
                 </div>
               </div>
             </div>
+            <Card padding="lg" className="shadow-lg">
+              <h3 className="text-xl font-semibold mb-4 text-blue-700">Who Benefits from MISS?</h3>
+              <ul className="space-y-2 text-gray-600">
+                <li>• <Link href="/conditions/slip-disc-treatment-hyderabad/" className="text-blue-600 hover:underline">Patients with herniated discs (slip disc)</Link></li>
+                <li>• <Link href="/conditions/spinal-stenosis-treatment-hyderabad/" className="text-blue-600 hover:underline">Spinal stenosis causing leg pain</Link></li>
+                <li>• <Link href="/conditions/sciatica-treatment-hyderabad/" className="text-blue-600 hover:underline">Sciatica not improving with conservative treatment</Link></li>
+                <li>• Recurrent disc herniations</li>
+                <li>• Foraminal stenosis</li>
+              </ul>
+            </Card>
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* Authoritative Citations */}
-      <section className="py-12 bg-white">
-        <div className="container mx-auto px-4">
+        {/* Trust Bridge Section - Connect Services to Credentials */}
+        <Section background="blue" className="py-16 bg-gradient-to-r from-blue-50 to-indigo-50">
+          <div className="grid md:grid-cols-2 gap-8">
+            <TrustBridgeLink
+              href="/about"
+              className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow group"
+              eventLabel="homepage_trust_bridge_about"
+            >
+              <h3 className="text-2xl font-bold text-blue-900 mb-4 group-hover:text-blue-700">
+                Meet Dr. Sayuj Krishnan
+              </h3>
+              <p className="text-gray-700 mb-4">
+                Learn about over 9 years of neurosurgical experience, German fellowship training, and his approach to compassionate, minimally invasive care.
+              </p>
+              <ul className="space-y-2 text-gray-600 mb-4">
+                <li className="flex items-start">
+                  <span className="text-blue-600 mr-2">✓</span>
+                  <span>MBBS, DNB Neurosurgery • Fellowship in Minimally Invasive Spine Surgery</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-blue-600 mr-2">✓</span>
+                  <span>Observer-ship in Full Endoscopic Spine Surgery (Germany)</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-blue-600 mr-2">✓</span>
+                  <span>Affiliated with Yashoda Hospital, Malakpet</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-blue-600 mr-2">✓</span>
+                  <span>Member: AO Spine (International), Neurological Society of India (NSI), Congress of Neurological Surgeons (CNS)</span>
+                </li>
+              </ul>
+              <span className="text-blue-600 font-semibold group-hover:text-blue-800">
+                Learn More About Dr. Sayuj →
+              </span>
+            </TrustBridgeLink>
+
+            <TrustBridgeLink
+              href="/patient-stories"
+              className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow group"
+              eventLabel="homepage_trust_bridge_patient_stories"
+            >
+              <h3 className="text-2xl font-bold text-blue-900 mb-4 group-hover:text-blue-700">
+                Patient Success Stories
+              </h3>
+              <p className="text-gray-700 mb-4">
+                Read real stories from patients who have successfully undergone neurosurgery and spine surgery with Dr. Sayuj Krishnan.
+              </p>
+              <div className="space-y-3 mb-4">
+                <div className="border-l-4 border-green-500 pl-4">
+                  <p className="text-gray-700 italic text-sm">
+                    "I was speaking normally the next day and felt safe throughout the awake mapping."
+                  </p>
+                  <p className="text-xs text-gray-500 mt-1">— Patient with Meningioma Surgery</p>
+                </div>
+                <div className="border-l-4 border-blue-500 pl-4">
+                  <p className="text-gray-700 italic text-sm">
+                    "I could stand straight the very next morning and walked the corridor with the physio."
+                  </p>
+                  <p className="text-xs text-gray-500 mt-1">— Patient after TLIF Spine Surgery</p>
+                </div>
+              </div>
+              <span className="text-blue-600 font-semibold group-hover:text-blue-800">
+                Read All Patient Stories →
+              </span>
+            </TrustBridgeLink>
+          </div>
+        </Section>
+
+        {/* Brain Tumor Surgery */}
+        <Section className="py-16">
+          <h2 className="text-3xl font-bold text-center mb-12">Brain Tumor Surgery</h2>
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <Card padding="lg" className="shadow-lg">
+              <div className="mb-6">
+                <div className="w-full h-64 bg-gradient-to-r from-green-100 to-green-200 rounded-lg shadow-lg flex items-center justify-center">
+                  <div className="text-center">
+                    <div className="text-4xl mb-2">🧠</div>
+                    <h3 className="text-xl font-semibold text-green-800">Brain Tumor Surgery</h3>
+                    <p className="text-green-700">Microsurgical Techniques</p>
+                  </div>
+                </div>
+              </div>
+              <h3 className="text-xl font-semibold mb-4 text-blue-700">Advanced Microsurgical Techniques</h3>
+              <ul className="space-y-3 text-gray-700">
+                <li className="flex items-start">
+                  <span className="text-blue-600 mr-2">✓</span>
+                  <span><strong>Neuronavigation:</strong> Precise tumor localization and removal</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-blue-600 mr-2">✓</span>
+                  <span><strong>Intraoperative Monitoring:</strong> Real-time brain function protection</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-blue-600 mr-2">✓</span>
+                  <span><strong>Awake Craniotomy:</strong> For tumors near speech/motor areas</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-blue-600 mr-2">✓</span>
+                  <span><strong>Minimal Access:</strong> Smaller incisions, faster recovery</span>
+                </li>
+              </ul>
+            </Card>
+            <div>
+              <p className="text-lg text-gray-700 mb-6">
+                Dr Sayuj Krishnan performs advanced brain tumor surgery. He uses the latest
+                microsurgical techniques, neuronavigation, and monitoring to safely remove tumors
+                while protecting brain function.
+              </p>
+              <p className="text-gray-700 mb-6">
+                Dr. Krishnan has extensive experience with both benign and malignant brain tumors.
+                He works with oncologists, radiologists, and rehabilitation specialists to provide complete care.
+              </p>
+              <div className="mt-8">
+                <Button
+                  href="/services/brain-tumor-surgery-hyderabad"
+                  variant="primary"
+                  className="rounded-full"
+                >
+                  Learn More About Brain Tumor Surgery →
+                </Button>
+                <div className="mt-4">
+                  <Link href="/services/epilepsy-surgery-hyderabad/" className="text-blue-600 hover:underline mr-4">Epilepsy Surgery</Link>
+                  <Link href="/conditions/trigeminal-neuralgia-treatment-hyderabad/" className="text-blue-600 hover:underline">Trigeminal Neuralgia</Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Section>
+
+        {/* Lazy load recovery timeline - only loads when user scrolls */}
+        <LazyRecoveryTimeline />
+
+        {/* Trigeminal Neuralgia Care */}
+        <Section background="gray" className="py-16">
+          <h2 className="text-3xl font-bold text-center mb-12">Trigeminal Neuralgia Care</h2>
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <p className="text-lg text-gray-700 mb-6">
+                Trigeminal neuralgia causes severe facial pain that can be debilitating. Dr Sayuj Krishnan
+                offers comprehensive treatment options from medical therapy to advanced surgical procedures
+                including microvascular decompression (MVD) and radiosurgery.
+              </p>
+              <Card padding="md" className="mb-6 shadow-md">
+                <h3 className="font-semibold text-blue-700 mb-3">Treatment Options:</h3>
+                <ul className="space-y-2 text-gray-700">
+                  <li>• Medical therapy (first-line treatment)</li>
+                  <li>• Microvascular decompression (MVD)</li>
+                  <li>• Gamma Knife radiosurgery</li>
+                  <li>• Percutaneous procedures</li>
+                </ul>
+              </Card>
+              <div className="mt-8">
+                <Button
+                  href="/conditions/trigeminal-neuralgia-treatment-hyderabad"
+                  variant="primary"
+                  className="rounded-full"
+                >
+                  Learn More About Trigeminal Neuralgia →
+                </Button>
+              </div>
+            </div>
+            <Card padding="lg" className="shadow-lg">
+              <h3 className="text-xl font-semibold mb-4 text-blue-700">Symptoms of Trigeminal Neuralgia</h3>
+              <ul className="space-y-3 text-gray-700">
+                <li className="flex items-start">
+                  <span className="text-red-500 mr-2">•</span>
+                  <span>Severe, electric shock-like facial pain</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-red-500 mr-2">•</span>
+                  <span>Pain triggered by light touch, eating, or talking</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-red-500 mr-2">•</span>
+                  <span>Brief episodes lasting seconds to minutes</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-red-500 mr-2">•</span>
+                  <span>Pain in jaw, cheek, or forehead areas</span>
+                </li>
+              </ul>
+              <div className="mt-6 p-4 bg-blue-50 rounded-lg">
+                <p className="text-sm text-blue-800">
+                  <strong>Don't suffer in silence.</strong> Early diagnosis and treatment can provide
+                  significant relief and improve your quality of life.
+                </p>
+              </div>
+            </Card>
+          </div>
+        </Section>
+
+        {/* Epilepsy Surgery */}
+        <Section className="py-16">
+          <h2 className="text-3xl font-bold text-center mb-12">Epilepsy Surgery</h2>
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <Card padding="lg" className="shadow-lg">
+              <h3 className="text-xl font-semibold mb-4 text-blue-700">Comprehensive Epilepsy Evaluation</h3>
+              <p className="text-gray-700 mb-4">
+                For patients with drug-resistant epilepsy, surgical treatment can offer the best
+                chance for seizure freedom. Dr. Krishnan provides comprehensive evaluation including:
+              </p>
+              <ul className="space-y-2 text-gray-700">
+                <li>• Video-EEG monitoring</li>
+                <li>• Advanced brain imaging (MRI, PET)</li>
+                <li>• Neuropsychological testing</li>
+                <li>• Wada test when indicated</li>
+                <li>• Invasive monitoring (SEEG)</li>
+              </ul>
+            </Card>
+            <div>
+              <p className="text-lg text-gray-700 mb-6">
+                Dr Sayuj Krishnan specializes in epilepsy surgery for patients who don't respond
+                to medications. With advanced techniques including laser ablation, resection surgery,
+                and vagus nerve stimulation (VNS), he helps patients achieve better seizure control.
+              </p>
+              <div className="bg-blue-50 p-6 rounded-lg mb-6">
+                <h3 className="font-semibold text-blue-800 mb-3">Surgical Options:</h3>
+                <ul className="space-y-2 text-blue-700">
+                  <li>• Temporal lobectomy</li>
+                  <li>• Laser interstitial thermal therapy (LITT)</li>
+                  <li>• Vagus nerve stimulation (VNS)</li>
+                  <li>• Corpus callosotomy</li>
+                  <li>• Multiple subpial transection</li>
+                </ul>
+              </div>
+              <div className="mt-8">
+                <Button
+                  href="/services/epilepsy-surgery-hyderabad"
+                  variant="primary"
+                  className="rounded-full"
+                >
+                  Learn More About Epilepsy Surgery →
+                </Button>
+              </div>
+            </div>
+          </div>
+        </Section>
+
+        {/* Why Choose Dr. Sayuj */}
+        <Section background="gray" className="py-16">
+          <h2 className="text-3xl font-bold text-center mb-12">Why Choose Dr Sayuj Krishnan</h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            <Card padding="lg" className="shadow-lg text-center">
+              <div className="text-4xl mb-4">🎓</div>
+              <h3 className="text-xl font-semibold mb-4 text-blue-700">Exceptional Training</h3>
+              <p className="text-gray-700">
+                MBBS, DNB Neurosurgery (Direct 6 years), Fellowship in Minimally Invasive and
+                Advanced Spine Surgery, Observer-ship in Full Endoscopic Spine Surgery (Germany)
+              </p>
+            </Card>
+            <Card padding="lg" className="shadow-lg text-center">
+              <div className="text-4xl mb-4">🏥</div>
+              <h3 className="text-xl font-semibold mb-4 text-blue-700">9+ Years Experience</h3>
+              <p className="text-gray-700">
+                Successfully treated thousands of patients with various neurological conditions,
+                always prioritizing patient safety and optimal outcomes.
+              </p>
+            </Card>
+            <Card padding="lg" className="shadow-lg text-center">
+              <div className="text-4xl mb-4">🔬</div>
+              <h3 className="text-xl font-semibold mb-4 text-blue-700">Advanced Technology</h3>
+              <p className="text-gray-700 mb-4">
+                State-of-the-art equipment including neuronavigation, intraoperative monitoring,
+                and minimally invasive surgical techniques.
+              </p>
+              <Link
+                href="/technology-facilities"
+                className="text-blue-600 hover:text-blue-800 font-medium"
+              >
+                Explore Our Technology →
+              </Link>
+            </Card>
+          </div>
+        </Section>
+
+        {/* Emergency Services */}
+        <Section background="none" className="py-16 bg-red-50">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-red-800 mb-4">24/7 Emergency Neurosurgical Care</h2>
+            <p className="text-lg text-red-700">
+              Immediate access to expert neurosurgical consultation for brain and spine emergencies
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            <Card className="text-center border-l-4 border-red-500 shadow-lg">
+              <div className="text-4xl mb-4">🚨</div>
+              <h3 className="text-xl font-semibold text-red-700 mb-3">Emergency Hotline</h3>
+              <p className="text-2xl font-bold text-red-600 mb-2">+91-9778280044</p>
+              <p className="text-gray-600 mb-4">Available 24/7 for urgent consultations</p>
+              <Link
+                href="/emergency-rehabilitation"
+                className="text-red-600 hover:text-red-800 font-medium"
+              >
+                Learn More About Emergency Care →
+              </Link>
+            </Card>
+            <Card className="text-center border-l-4 border-orange-500 shadow-lg">
+              <div className="text-4xl mb-4">⚡</div>
+              <h3 className="text-xl font-semibold text-orange-700 mb-3">Rapid Response</h3>
+              <p className="text-gray-600 mb-4">
+                Immediate triage and assessment for traumatic brain injuries, spinal cord injuries, and stroke
+              </p>
+              <Link
+                href="/emergency-rehabilitation"
+                className="text-orange-700 hover:text-orange-900 font-medium"
+              >
+                Emergency Conditions →
+              </Link>
+            </Card>
+            <Card className="text-center border-l-4 border-green-500 shadow-lg">
+              <div className="text-4xl mb-4">🏥</div>
+              <h3 className="text-xl font-semibold text-green-700 mb-3">Hospital Partnership</h3>
+              <p className="text-gray-600 mb-4">
+                Coordinated care with Yashoda Hospital emergency department for seamless patient care
+              </p>
+              <Link
+                href="/emergency-rehabilitation"
+                className="text-green-700 hover:text-green-900 font-medium"
+              >
+                Rehabilitation Services →
+              </Link>
+            </Card>
+          </div>
+        </Section>
+
+        {/* Areas We Serve in Hyderabad */}
+        <Section className="py-16">
+          <h2 className="text-3xl font-bold text-center mb-12">Spine Specialist & Neurosurgeon Near You in Hyderabad</h2>
+          <div className="grid md:grid-cols-2 gap-12">
+            <div>
+              <p className="text-lg text-gray-700 mb-6">
+                Dr. Sayuj Krishnan provides expert neurosurgical care at Yashoda Hospital, Malakpet, serving patients across Hyderabad and throughout Telangana.
+                As a pioneering endoscopic spine surgeon, Dr. Krishnan specializes in advanced, minimally invasive procedures that enable faster recovery
+                and same-day discharge for most patients. Our Malakpet location is conveniently accessible for patients throughout the region.
+              </p>
+              <div className="grid grid-cols-2 gap-4">
+                <Card padding="sm" className="shadow-md">
+                  <h3 className="font-semibold text-blue-700 mb-2">Central Hyderabad</h3>
+                  <ul className="text-sm text-gray-600 space-y-1">
+                    <li>• Jubilee Hills</li>
+                    <li>• Banjara Hills</li>
+                    <li>• Hi-Tech City</li>
+                    <li>• Gachibowli</li>
+                  </ul>
+                </Card>
+                <Card padding="sm" className="shadow-md">
+                  <h3 className="font-semibold text-blue-700 mb-2">Other Areas</h3>
+                  <ul className="text-sm text-gray-600 space-y-1">
+                    <li>• Madhapur</li>
+                    <li>• Kondapur</li>
+                    <li>• Malakpet</li>
+                    <li>• Secunderabad</li>
+                  </ul>
+                </Card>
+              </div>
+            </div>
+            <Card padding="lg" className="shadow-lg">
+              <h3 className="text-xl font-semibold mb-4 text-blue-700">Hospital Location</h3>
+              <div className="space-y-4">
+                <div>
+                  <h3 className="font-semibold text-gray-800">Yashoda Hospital</h3>
+                  <p className="text-gray-600">
+                    Room No 317, OPD Block<br />
+                    Malakpet, Hyderabad<br />
+                    Telangana 500036
+                  </p>
+                </div>
+                <div className="pt-4 border-t">
+                  <h3 className="font-semibold text-gray-800 mb-2">Contact Information</h3>
+                  <p className="text-gray-600">
+                    <strong>Phone:</strong> +91 9778280044<br />
+                    <strong>Email:</strong> neurospinehyd@drsayuj.com
+                  </p>
+                </div>
+              </div>
+            </Card>
+          </div>
+        </Section>
+
+        {/* Authoritative Citations */}
+        <Section background="white" className="py-12">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl font-bold text-center mb-8">References & Sources</h2>
             <div className="grid md:grid-cols-2 gap-6">
@@ -779,88 +750,83 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </Section>
 
-      <ExpandedFAQ faqs={HOME_FAQS} className="bg-gray-50" />
-      {/* Lazy load reputation panel - only loads when user scrolls */}
-      <LazyReputationPanel />
+        <ExpandedFAQ faqs={HOME_FAQS} className="bg-gray-50" />
+        {/* Lazy load reputation panel - only loads when user scrolls */}
+        <LazyReputationPanel />
 
-      {/* Disease Guides Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-blue-800 mb-4">Comprehensive Disease Guides</h2>
-              <p className="text-lg text-gray-700">
-                Expert information about neurological and spinal conditions, their symptoms, causes, and treatment options
-              </p>
-            </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div className="bg-white rounded-lg shadow-lg p-6 text-center">
-                <div className="text-4xl mb-4">🦴</div>
-                <h3 className="text-lg font-semibold text-blue-700 mb-3">Degenerative Disc Disease</h3>
-                <p className="text-gray-600 text-sm mb-4">Age-related wear and tear of spinal discs</p>
-                <Link 
-                  href="/disease-guides/degenerative-disc-disease"
-                  className="text-blue-600 hover:text-blue-800 font-medium"
-                >
-                  Learn More About Degenerative Disc Disease →
-                </Link>
-              </div>
-              <div className="bg-white rounded-lg shadow-lg p-6 text-center">
-                <div className="text-4xl mb-4">🔗</div>
-                <h3 className="text-lg font-semibold text-blue-700 mb-3">Spinal Stenosis</h3>
-                <p className="text-gray-600 text-sm mb-4">Narrowing of spinal canal causing nerve compression</p>
-                <Link 
-                  href="/disease-guides"
-                  className="text-blue-600 hover:text-blue-800 font-medium"
-                >
-                  Learn More About Spinal Stenosis →
-                </Link>
-              </div>
-              <div className="bg-white rounded-lg shadow-lg p-6 text-center">
-                <div className="text-4xl mb-4">😣</div>
-                <h3 className="text-lg font-semibold text-blue-700 mb-3">Trigeminal Neuralgia</h3>
-                <p className="text-gray-600 text-sm mb-4">Severe facial pain from nerve compression</p>
-                <Link 
-                  href="/conditions/trigeminal-neuralgia-treatment-hyderabad"
-                  className="text-blue-600 hover:text-blue-800 font-medium"
-                >
-                  Learn More About Trigeminal Neuralgia Treatment →
-                </Link>
-              </div>
-              <div className="bg-white rounded-lg shadow-lg p-6 text-center">
-                <div className="text-4xl mb-4">🧠</div>
-                <h3 className="text-lg font-semibold text-blue-700 mb-3">Epilepsy</h3>
-                <p className="text-gray-600 text-sm mb-4">Neurological disorder causing recurrent seizures</p>
-                <Link 
-                  href="/services/epilepsy-surgery-hyderabad"
-                  className="text-blue-600 hover:text-blue-800 font-medium"
-                >
-                  Learn More About Epilepsy Surgery →
-                </Link>
-              </div>
-            </div>
-            <div className="text-center mt-8">
-              <Link 
-                href="/disease-guides"
-                className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
-              >
-                Explore All Disease & Symptom Guides
-              </Link>
-            </div>
+        {/* Disease Guides Section */}
+        <Section background="gray" className="py-16">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-blue-800 mb-4">Comprehensive Disease Guides</h2>
+            <p className="text-lg text-gray-700">
+              Expert information about neurological and spinal conditions, their symptoms, causes, and treatment options
+            </p>
           </div>
-        </div>
-      </section>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <Card padding="md" className="text-center shadow-lg">
+              <div className="text-4xl mb-4">🦴</div>
+              <h3 className="text-lg font-semibold text-blue-700 mb-3">Degenerative Disc Disease</h3>
+              <p className="text-gray-600 text-sm mb-4">Age-related wear and tear of spinal discs</p>
+              <Link
+                href="/disease-guides/degenerative-disc-disease"
+                className="text-blue-600 hover:text-blue-800 font-medium"
+              >
+                Learn More About Degenerative Disc Disease →
+              </Link>
+            </Card>
+            <Card padding="md" className="text-center shadow-lg">
+              <div className="text-4xl mb-4">🔗</div>
+              <h3 className="text-lg font-semibold text-blue-700 mb-3">Spinal Stenosis</h3>
+              <p className="text-gray-600 text-sm mb-4">Narrowing of spinal canal causing nerve compression</p>
+              <Link
+                href="/disease-guides"
+                className="text-blue-600 hover:text-blue-800 font-medium"
+              >
+                Learn More About Spinal Stenosis →
+              </Link>
+            </Card>
+            <Card padding="md" className="text-center shadow-lg">
+              <div className="text-4xl mb-4">😣</div>
+              <h3 className="text-lg font-semibold text-blue-700 mb-3">Trigeminal Neuralgia</h3>
+              <p className="text-gray-600 text-sm mb-4">Severe facial pain from nerve compression</p>
+              <Link
+                href="/conditions/trigeminal-neuralgia-treatment-hyderabad"
+                className="text-blue-600 hover:text-blue-800 font-medium"
+              >
+                Learn More About Trigeminal Neuralgia Treatment →
+              </Link>
+            </Card>
+            <Card padding="md" className="text-center shadow-lg">
+              <div className="text-4xl mb-4">🧠</div>
+              <h3 className="text-lg font-semibold text-blue-700 mb-3">Epilepsy</h3>
+              <p className="text-gray-600 text-sm mb-4">Neurological disorder causing recurrent seizures</p>
+              <Link
+                href="/services/epilepsy-surgery-hyderabad"
+                className="text-blue-600 hover:text-blue-800 font-medium"
+              >
+                Learn More About Epilepsy Surgery →
+              </Link>
+            </Card>
+          </div>
+          <div className="text-center mt-8">
+            <Button
+              href="/disease-guides"
+              variant="primary"
+              className="px-8 py-3 rounded-lg"
+            >
+              Explore All Disease & Symptom Guides
+            </Button>
+          </div>
+        </Section>
 
-      {/* Contact Section */}
-      <section id="appointment" className="py-16">
-        <div className="container mx-auto px-4">
+        {/* Contact Section */}
+        <Section id="appointment" className="py-16">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-12">Book an Appointment</h2>
             <div className="grid md:grid-cols-2 gap-12">
-              <div className="bg-white p-8 rounded-lg shadow-lg">
+              <Card padding="lg" className="shadow-lg">
                 <h3 className="text-2xl font-semibold mb-6 text-blue-700">Contact Information</h3>
                 <div className="space-y-6">
                   <div>
@@ -885,15 +851,15 @@ export default function Home() {
                     </p>
                   </div>
                 </div>
-              </div>
-              
+              </Card>
+
               {/* Concluding Paragraph */}
-              <div className="bg-white p-8 rounded-lg border border-gray-200 mb-8">
+              <Card padding="lg" className="border border-gray-200 mb-8 shadow-none">
                 <p className="text-lg text-gray-700 leading-relaxed">
                   If you're facing persistent neck or back pain, sciatica, or a diagnosed brain or spine condition, we'll help you understand safe options step by step. Book a consultation at Yashoda Hospitals – Malakpet to review your MRI, get a clear plan, and know what to expect in recovery.
                 </p>
-              </div>
-              
+              </Card>
+
               <div className="bg-blue-50 p-8 rounded-lg">
                 <h3 className="text-2xl font-semibold mb-6 text-blue-800">Why Choose Dr Sayuj Krishnan?</h3>
                 <ul className="space-y-4 text-blue-700">
@@ -919,53 +885,53 @@ export default function Home() {
                   </li>
                 </ul>
                 <div className="mt-8 space-y-4">
-                  <Link 
+                  <Button
                     href="/appointments"
-                    className="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-colors text-lg font-semibold inline-block"
+                    variant="primary"
+                    className="px-8 py-3 rounded-full text-lg font-semibold inline-block"
                   >
                     Book Your Consultation
-                  </Link>
-                  
-                    {/* Google OAuth for patient verification - temporarily disabled for build */}
-                    <div className="text-center">
-                      <p className="text-sm text-blue-700 mb-2">Verified patients can access priority booking</p>
-                      <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
-                        Verify with Google (Coming Soon)
-                      </button>
-                    </div>
+                  </Button>
+
+                  {/* Google OAuth for patient verification - temporarily disabled for build */}
+                  <div className="text-center">
+                    <p className="text-sm text-blue-700 mb-2">Verified patients can access priority booking</p>
+                    <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+                      Verify with Google (Coming Soon)
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </Section>
 
-      {/* Footer */}
-      <footer className="bg-gray-800 text-white py-8">
-        <div className="container mx-auto px-4 text-center">
-          <p>&copy; {new Date().getFullYear()} Dr Sayuj Krishnan. All rights reserved.</p>
-        </div>
-      </footer>
+        {/* Footer */}
+        <footer className="bg-gray-800 text-white py-8">
+          <div className="container mx-auto px-4 text-center">
+            <p>&copy; {new Date().getFullYear()} Dr Sayuj Krishnan. All rights reserved.</p>
+          </div>
+        </footer>
 
-      {/* FAQPage Schema */}
-      {/* <FAQPageSchema />
+        {/* FAQPage Schema */}
+        {/* <FAQPageSchema />
       <BreadcrumbSchema items={[
         { name: "Home", path: "/" }
       ]} /> */}
-      
-      {/* Sticky CTA for mobile */}
-      {/* <StickyCTA /> */}
-      
-      {/* SEO Dashboard - only in development */}
-      {/* {process.env.NODE_ENV === 'development' && (
+
+        {/* Sticky CTA for mobile */}
+        {/* <StickyCTA /> */}
+
+        {/* SEO Dashboard - only in development */}
+        {/* {process.env.NODE_ENV === 'development' && (
         <SEODashboard pageType="home" pageSlug="/" />
       )} */}
-      
-      {/* SEO Audit Dashboard - only in development */}
-      {/* {process.env.NODE_ENV === 'development' && (
+
+        {/* SEO Audit Dashboard - only in development */}
+        {/* {process.env.NODE_ENV === 'development' && (
         <SEOAuditDashboard pageType="home" pageSlug="/" />
       )} */}
-    </div>
+      </div>
     </>
   );
 }
