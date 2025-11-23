@@ -7,6 +7,9 @@ import {
   groupConditionsByLetter,
 } from "@/src/data/conditionsIndex";
 import { SITE_URL } from "@/src/lib/seo";
+import Section from "../_components/Section";
+import Card from "../_components/Card";
+import Button from "../_components/Button";
 
 export const metadata: Metadata = {
   title: "Neurological Conditions A–Z | Dr. Sayuj Krishnan",
@@ -54,14 +57,14 @@ export default function ConditionsPage() {
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-5xl px-6 py-8">
-        <BreadcrumbNavigation 
+        <BreadcrumbNavigation
           items={[
             { label: "Conditions" }
-          ]} 
+          ]}
         />
       </div>
-      <section className="bg-gradient-to-r from-blue-50 to-indigo-100 py-16">
-        <div className="mx-auto max-w-5xl px-6">
+      <Section background="none" className="bg-gradient-to-r from-blue-50 to-indigo-100 py-16">
+        <div className="mx-auto max-w-5xl">
           <p className="text-sm uppercase tracking-wide text-blue-600">
             Conditions & Treatments
           </p>
@@ -85,41 +88,47 @@ export default function ConditionsPage() {
             ))}
           </div>
         </div>
-      </section>
+      </Section>
 
-      <div className="mx-auto max-w-5xl px-6 py-14">
-        <ConditionsExplorer conditions={CONDITION_RESOURCES} />
+      <Section background="white" className="py-14">
+        <div className="mx-auto max-w-5xl">
+          <ConditionsExplorer conditions={CONDITION_RESOURCES} />
 
-        <section className="mt-16 rounded-3xl bg-blue-50 p-8">
-          <h2 className="text-2xl font-semibold text-blue-900">
-            Need Help Identifying a Condition?
-          </h2>
-          <p className="mt-2 text-blue-800">
-            Call or message our coordination team for triage. We review imaging,
-            organise second opinions, and help plan the next steps in your care.
-          </p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Link
-              href="tel:+919778280044"
-              className="rounded-full bg-blue-600 px-5 py-2 text-sm font-semibold text-white transition hover:bg-blue-700"
-            >
-              Call +91 97782 80044
-            </Link>
-            <Link
-              href="https://wa.me/919778280044"
-              className="rounded-full border border-blue-200 px-5 py-2 text-sm font-semibold text-blue-600 transition hover:border-blue-300 hover:bg-blue-50"
-            >
-              WhatsApp the Care Team
-            </Link>
-            <Link
-              href="/appointments"
-              className="rounded-full border border-blue-200 px-5 py-2 text-sm font-semibold text-blue-600 transition hover:border-blue-300 hover:bg-blue-50"
-            >
-              Book Consultation
-            </Link>
+          <div className="mt-16">
+            <Card padding="lg" className="bg-blue-50 shadow-none">
+              <h2 className="text-2xl font-semibold text-blue-900">
+                Need Help Identifying a Condition?
+              </h2>
+              <p className="mt-2 text-blue-800">
+                Call or message our coordination team for triage. We review imaging,
+                organise second opinions, and help plan the next steps in your care.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Button
+                  href="tel:+919778280044"
+                  className="bg-blue-600 text-white hover:bg-blue-700 border-none"
+                >
+                  Call +91 97782 80044
+                </Button>
+                <Button
+                  href="https://wa.me/919778280044"
+                  variant="outline"
+                  className="bg-transparent border-blue-200 text-blue-600 hover:bg-blue-50 hover:border-blue-300"
+                >
+                  WhatsApp the Care Team
+                </Button>
+                <Button
+                  href="/appointments"
+                  variant="outline"
+                  className="bg-transparent border-blue-200 text-blue-600 hover:bg-blue-50 hover:border-blue-300"
+                >
+                  Book Consultation
+                </Button>
+              </div>
+            </Card>
           </div>
-        </section>
-      </div>
+        </div>
+      </Section>
     </div>
   );
 }
