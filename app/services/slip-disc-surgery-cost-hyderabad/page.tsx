@@ -86,9 +86,9 @@ export default function SlipDiscSurgeryCostPage() {
     <>
       <BreadcrumbSchema
         items={[
-          { name: 'Home', url: `${SITE_URL}/` },
-          { name: 'Services', url: `${SITE_URL}/services` },
-          { name: 'Slip Disc Surgery Cost Hyderabad', url: pageUrl },
+          { name: 'Home', path: '/' },
+          { name: 'Services', path: '/services' },
+          { name: 'Slip Disc Surgery Cost Hyderabad', path: '/services/slip-disc-surgery-cost-hyderabad' },
         ]}
       />
       <FAQPageSchema faqs={faqs} pageUrl={pageUrl} />
