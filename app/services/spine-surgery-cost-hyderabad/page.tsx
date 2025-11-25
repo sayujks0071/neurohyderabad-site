@@ -113,9 +113,9 @@ export default function SpineSurgeryCostPage() {
     <>
       <BreadcrumbSchema
         items={[
-          { name: 'Home', url: `${SITE_URL}/` },
-          { name: 'Services', url: `${SITE_URL}/services` },
-          { name: 'Spine Surgery Cost Hyderabad', url: pageUrl },
+          { name: 'Home', path: '/' },
+          { name: 'Services', path: '/services' },
+          { name: 'Spine Surgery Cost Hyderabad', path: '/services/spine-surgery-cost-hyderabad' },
         ]}
       />
       <FAQPageSchema faqs={faqs} pageUrl={pageUrl} />
