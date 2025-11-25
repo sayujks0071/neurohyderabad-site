@@ -134,6 +134,26 @@ const SERVICE_SOURCES: Record<string, ServiceSource[]> = {
       href: "https://www.facs.org/for-patients/the-day-of-your-surgery/the-second-opinion/",
     },
   ],
+  "spine-surgery-cost-hyderabad": [
+    {
+      label: "National Health Service (UK) – Understanding Healthcare Costs",
+      href: "https://www.nhs.uk/using-the-nhs/about-the-nhs/understanding-the-cost-of-healthcare/",
+    },
+    {
+      label: "American Academy of Orthopaedic Surgeons – Understanding Your Surgery Costs",
+      href: "https://orthoinfo.aaos.org/en/treatment/understanding-your-surgery-costs/",
+    },
+  ],
+  "slip-disc-surgery-cost-hyderabad": [
+    {
+      label: "Mayo Clinic – Herniated Disc Treatment Costs",
+      href: "https://www.mayoclinic.org/diseases-conditions/herniated-disk/diagnosis-treatment/drc-20354101",
+    },
+    {
+      label: "American Association of Neurological Surgeons – Understanding Neurosurgical Costs",
+      href: "https://www.aans.org/en/Patients/Neurosurgical-Conditions-and-Treatments",
+    },
+  ],
 };
 
 export function getServiceSources(slug: string): ServiceSource[] {

@@ -4,6 +4,7 @@ import { patientStories } from '@/src/content/stories';
 import StandardCTA from '@/app/_components/StandardCTA';
 import NAP from '@/app/_components/NAP';
 import ReviewedBy from '@/app/_components/ReviewedBy';
+import VideoObjectSchema from '@/app/components/schemas/VideoObjectSchema';
 
 export const metadata: Metadata = {
   title: 'Patient Success Stories | Neurosurgery & Spine Surgery Hyderabad',
@@ -56,21 +57,41 @@ export default function PatientStoriesPage() {
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {patientStories.map((story) => (
-              <div key={story.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                {/* If story has a videoUrl, embed YouTube above content */}
-                {story.videoUrl ? (
-                  <div className="aspect-video w-full bg-black">
-                    <iframe
-                      className="w-full h-full"
-                      src={story.videoUrl.replace('youtu.be/', 'www.youtube.com/embed/').replace('watch?v=', 'embed/').split('&')[0]}
+            {patientStories.map((story) => {
+              // Extract video ID for schema
+              const getVideoId = (url?: string) => {
+                if (!url) return null;
+                const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\s]+)/);
+                return match ? match[1] : null;
+              };
+              
+              const videoId = story.videoUrl ? getVideoId(story.videoUrl) : null;
+              
+              return (
+                <div key={story.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                  {/* VideoObject Schema for videos */}
+                  {videoId && (
+                    <VideoObjectSchema
+                      videoId={videoId}
                       title={story.title}
-                      loading="lazy"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      allowFullScreen
+                      description={story.summary}
+                      uploadDate={story.date}
                     />
-                  </div>
-                ) : null}
+                  )}
+                  
+                  {/* If story has a videoUrl, embed YouTube above content */}
+                  {story.videoUrl ? (
+                    <div className="aspect-video w-full bg-black">
+                      <iframe
+                        className="w-full h-full"
+                        src={story.videoUrl.replace('youtu.be/', 'www.youtube.com/embed/').replace('watch?v=', 'embed/').split('&')[0]}
+                        title={story.title}
+                        loading="lazy"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                      />
+                    </div>
+                  ) : null}
                 <div className="p-6">
                   <div className="mb-4">
                     <span className="inline-block bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">
@@ -130,8 +151,9 @@ export default function PatientStoriesPage() {
                     </div>
                   )}
                 </div>
-              </div>
-            ))}
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>

@@ -12,6 +12,16 @@ export interface MediaPublication {
 
 export const mediaPublications: MediaPublication[] = [
   {
+    id: 'socialpost-health-2025-11',
+    title: 'What causes Neurological Disorders | Spine Health | Brain Health',
+    publication: 'Socialpost Health Podcast',
+    url: 'https://www.youtube.com/watch?v=N6_M_nZ0Zs8',
+    date: '2025-11-25',
+    type: 'interview',
+    description: 'Dr. Sayuj Krishnan discusses the causes of neurological disorders, spine health, and brain health in this comprehensive podcast interview, sharing expert insights on prevention, diagnosis, and treatment.',
+    featured: true
+  },
+  {
     id: 'nie-2024-02',
     title: 'Minimally Invasive Spine Surgery is Empowering Aging Indians',
     publication: 'The New Indian Express',

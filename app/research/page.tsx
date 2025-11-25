@@ -148,6 +148,36 @@ export default function ResearchPage() {
       </section>
 
       <div className="mx-auto max-w-5xl space-y-16 px-6 py-16">
+        {/* E-E-A-T Statistics Section */}
+        <section className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-8 text-white">
+          <h2 className="text-3xl font-bold mb-6 text-center">Clinical Experience & Outcomes</h2>
+          <p className="text-center text-blue-100 mb-8 max-w-2xl mx-auto">
+            Quantifiable expertise and outcomes demonstrating Dr. Sayuj Krishnan's experience, expertise, authoritativeness, and trustworthiness in neurosurgery.
+          </p>
+          <div className="grid md:grid-cols-4 gap-6">
+            <div className="text-center bg-white/10 rounded-lg p-6 backdrop-blur-sm">
+              <div className="text-4xl font-bold mb-2">1000+</div>
+              <div className="text-blue-100 text-sm">Endoscopic Procedures Performed</div>
+              <div className="text-blue-200 text-xs mt-2">Experience</div>
+            </div>
+            <div className="text-center bg-white/10 rounded-lg p-6 backdrop-blur-sm">
+              <div className="text-4xl font-bold mb-2">9+</div>
+              <div className="text-blue-100 text-sm">Years Neurosurgery Experience</div>
+              <div className="text-blue-200 text-xs mt-2">Expertise</div>
+            </div>
+            <div className="text-center bg-white/10 rounded-lg p-6 backdrop-blur-sm">
+              <div className="text-4xl font-bold mb-2">85-90%</div>
+              <div className="text-blue-100 text-sm">Success Rate (Endoscopic Disc)</div>
+              <div className="text-blue-200 text-xs mt-2">Authoritativeness</div>
+            </div>
+            <div className="text-center bg-white/10 rounded-lg p-6 backdrop-blur-sm">
+              <div className="text-4xl font-bold mb-2">80%+</div>
+              <div className="text-blue-100 text-sm">Same-Day Discharge Rate</div>
+              <div className="text-blue-200 text-xs mt-2">Trustworthiness</div>
+            </div>
+          </div>
+        </section>
+
         <section>
           <h2 className="text-2xl font-semibold text-gray-900">
             Current Clinical Initiatives

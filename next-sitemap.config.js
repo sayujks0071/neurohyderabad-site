@@ -24,7 +24,11 @@ module.exports = {
         ]
       }
     ],
-    additionalSitemaps: ['https://www.drsayuj.info/sitemap.xml'],
+    additionalSitemaps: [
+      'https://www.drsayuj.info/sitemap.xml',
+      'https://www.drsayuj.info/sitemap-images.xml',
+      'https://www.drsayuj.info/sitemap-videos.xml'
+    ],
   },
   exclude: [
     "/api/*",

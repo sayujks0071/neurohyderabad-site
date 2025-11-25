@@ -1,4 +1,5 @@
 import Link from "next/link";
+import NewsletterSignup from "./NewsletterSignup";
 
 export default function Footer() {
   return (
@@ -229,8 +230,15 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom Section */}
+        {/* Newsletter Signup */}
         <div className="border-t border-gray-800 mt-8 pt-8">
+          <div className="max-w-md mx-auto mb-8">
+            <NewsletterSignup variant="card" />
+          </div>
+        </div>
+
+        {/* Bottom Section */}
+        <div className="border-t border-gray-800 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-sm text-gray-400 mb-4 md:mb-0">
               <p>© 2024 Dr Sayuj Krishnan. All rights reserved.</p>

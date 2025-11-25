@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Merriweather } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -8,6 +8,7 @@ import PhysicianSchema from "./components/schemas/PhysicianSchema";
 import HospitalSchema from "./components/schemas/HospitalSchema";
 import TrustStrip from "./_components/TrustStrip";
 import ClientAnalytics from "./_components/ClientAnalytics";
+import PrivacyFriendlyAnalytics from "./components/PrivacyFriendlyAnalytics";
 import StickyCTA from "./_components/StickyCTA";
 import ClientOnlyWrapper from "./_components/ClientOnlyWrapper";
 import { SITE_URL } from "../src/lib/seo";
@@ -18,6 +19,15 @@ const inter = Inter({
   display: "swap",
   preload: true,
   fallback: ['system-ui', 'arial'],
+  weight: ['400', '500', '600', '700'],
+});
+
+const merriweather = Merriweather({
+  subsets: ["latin"],
+  variable: "--font-merriweather",
+  display: "swap",
+  weight: ['400', '700'],
+  fallback: ['Georgia', 'serif'],
 });
 
 export const metadata: Metadata = {
@@ -217,9 +227,10 @@ export default function RootLayout({
             <meta name="apple-mobile-web-app-capable" content="yes" />
             <meta name="apple-mobile-web-app-status-bar-style" content="default" />
       </head>
-      <body className={`${inter.variable} antialiased`}>
+      <body className={`${inter.variable} ${merriweather.variable} antialiased`}>
         <ClientOnlyWrapper>
           <ClientAnalytics />
+          <PrivacyFriendlyAnalytics />
           <EngagementTracker trackTime={true} trackMilestones={true} />
           <ExitIntentHandler showOffer={false} />
           <ConversionFunnelTracker />

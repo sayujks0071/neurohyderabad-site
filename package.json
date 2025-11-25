@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
+    "postbuild": "next-sitemap && node scripts/generate-image-sitemap.js && node scripts/generate-video-sitemap.js",
     "start": "next start",
     "promote:draft": "ts-node scripts/promote-draft.ts",
     "check:schemas": "ts-node scripts/check-schemas.ts",

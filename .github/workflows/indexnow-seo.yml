@@ -1,0 +1,105 @@
+name: IndexNow SEO Submission
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'app/**'
+      - 'src/**'
+      - 'public/**'
+      - 'app/sitemap.ts'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  submit-indexnow:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build sitemap
+        run: npm run build
+        env:
+          NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: ${{ secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID }}
+
+      - name: Extract URLs from sitemap
+        id: extract-urls
+        run: |
+          # IndexNow supports up to 10,000 URLs per submission
+          # We'll submit the most important pages
+          
+          # Use known important pages (sitemap.xml is generated at build time)
+          node -e "
+            const importantUrls = [
+              'https://www.drsayuj.info/',
+              'https://www.drsayuj.info/about',
+              'https://www.drsayuj.info/appointments',
+              'https://www.drsayuj.info/contact',
+              'https://www.drsayuj.info/services',
+              'https://www.drsayuj.info/conditions',
+              'https://www.drsayuj.info/blog'
+            ];
+            console.log(JSON.stringify(importantUrls));
+          " > urls.json
+          
+          echo "urls<<EOF" >> $GITHUB_OUTPUT
+          cat urls.json >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+        continue-on-error: true
+
+      - name: Submit to IndexNow
+        env:
+          INDEXNOW_API_KEY: ${{ secrets.INDEXNOW_API_KEY }}
+        run: |
+          # IndexNow API endpoint
+          INDEXNOW_ENDPOINT="https://api.indexnow.org/indexnow"
+          
+          # Generate API key if not set (use hostname as key)
+          if [ -z "$INDEXNOW_API_KEY" ]; then
+            INDEXNOW_API_KEY="drsayuj.info"
+          fi
+          
+          # Get URLs from previous step or use default
+          if [ -f "urls.json" ]; then
+            URLS=$(cat urls.json)
+          else
+            URLS='["https://www.drsayuj.info/","https://www.drsayuj.info/about","https://www.drsayuj.info/appointments"]'
+          fi
+          
+          # Submit to IndexNow
+          curl -X POST "$INDEXNOW_ENDPOINT" \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"host\": \"www.drsayuj.info\",
+              \"key\": \"$INDEXNOW_API_KEY\",
+              \"urlList\": $URLS
+            }" || echo "IndexNow submission failed (non-critical)"
+          
+          echo "✅ IndexNow submission completed"
+
+      - name: Submit sitemap to search engines
+        run: |
+          # Submit sitemap to Google
+          curl -X POST "https://www.google.com/ping?sitemap=https://www.drsayuj.info/sitemap.xml" || echo "Google ping failed"
+          
+          # Submit sitemap to Bing
+          curl -X POST "https://www.bing.com/ping?sitemap=https://www.drsayuj.info/sitemap.xml" || echo "Bing ping failed"
+          
+          echo "✅ Sitemap submitted to search engines"
+

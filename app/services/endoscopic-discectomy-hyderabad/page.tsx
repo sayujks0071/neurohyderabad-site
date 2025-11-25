@@ -209,8 +209,26 @@ export default function EndoscopicDiscectomyPage() {
           </div>
         </section>
 
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold text-blue-800 mb-6">Frequently Asked Questions</h2>
+            <section className="mb-12">
+              <h2 className="text-3xl font-bold text-blue-800 mb-6">Related Information</h2>
+              <div className="grid md:grid-cols-3 gap-4 mb-8">
+                <Link href="/services/slip-disc-surgery-cost-hyderabad" className="bg-blue-50 border border-blue-200 rounded-lg p-4 hover:bg-blue-100 transition">
+                  <h3 className="font-semibold text-blue-700 mb-2">Surgery Cost Guide</h3>
+                  <p className="text-sm text-gray-600">Learn about endoscopic discectomy costs and insurance coverage</p>
+                </Link>
+                <Link href="/conditions/slip-disc-treatment-hyderabad" className="bg-blue-50 border border-blue-200 rounded-lg p-4 hover:bg-blue-100 transition">
+                  <h3 className="font-semibold text-blue-700 mb-2">Slip Disc Treatment</h3>
+                  <p className="text-sm text-gray-600">Comprehensive guide to herniated disc treatment options</p>
+                </Link>
+                <Link href="/conditions/sciatica-treatment-hyderabad" className="bg-blue-50 border border-blue-200 rounded-lg p-4 hover:bg-blue-100 transition">
+                  <h3 className="font-semibold text-blue-700 mb-2">Sciatica Treatment</h3>
+                  <p className="text-sm text-gray-600">Understanding sciatica causes and treatment</p>
+                </Link>
+              </div>
+            </section>
+
+            <section className="mb-12">
+              <h2 className="text-3xl font-bold text-blue-800 mb-6">Frequently Asked Questions</h2>
           <div className="space-y-6">
             <div className="bg-gray-50 p-6 rounded-lg">
               <h3 className="text-xl font-semibold mb-3 text-blue-700">How long does the surgery take?</h3>
@@ -283,6 +301,51 @@ export default function EndoscopicDiscectomyPage() {
         {/* Service Page Tracking */}
         <ServicePageTracker service="endoscopic-discectomy" />
       </div>
+      
+      {/* FAQ Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "How long does endoscopic discectomy surgery take?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Endoscopic discectomy typically takes 45-90 minutes depending on the complexity of the case. The procedure is performed under general anesthesia and uses a small endoscope to remove the herniated disc material through a tiny 8-10mm incision."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is the recovery time after endoscopic discectomy?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Most patients can return to desk work within 1-2 weeks after endoscopic discectomy. Physical jobs may require 4-8 weeks. The procedure allows for same-day or 1-night hospital stay, with most patients walking the same day. Full recovery typically takes 4-6 weeks."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is endoscopic discectomy better than open surgery?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Endoscopic discectomy offers several advantages over traditional open surgery: smaller incision (8-10mm vs 3-4cm), less muscle damage, reduced blood loss, lower infection risk, faster recovery, and same-day discharge. Success rates are comparable (85-90%) with less post-operative pain."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What are the risks of endoscopic discectomy?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Endoscopic discectomy is generally safe with low complication rates. Potential risks include infection (<1%), nerve injury (<1%), dural tear (<2%), and recurrence (5-10%). Dr. Sayuj Krishnan's experience with 1000+ endoscopic procedures results in excellent safety outcomes."
+                }
+              }
+            ]
+          })
+        }}
+      />
     </div>
   );
 }

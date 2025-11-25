@@ -30,8 +30,8 @@ import Section from "./_components/Section";
 const HOME_CANONICAL = SITE_URL.endsWith("/") ? SITE_URL : `${SITE_URL}/`;
 
 export const metadata = {
-  title: 'Dr. Sayuj Krishnan | Expert Neurosurgeon & Spine Surgeon in Hyderabad',
-  description: 'Dr. Sayuj Krishnan is a German-trained neurosurgeon specializing in minimally invasive spine surgery, awake brain surgery, and ROSA robotic DBS at Yashoda Hospital, Hyderabad. Over 1,000 endoscopic procedures with same-day discharge.',
+  title: 'Dr. Sayuj Krishnan | Best Neurosurgeon in Hyderabad | Expert Spine Surgeon',
+  description: 'Dr. Sayuj Krishnan is a German-trained neurosurgeon and best spine surgeon in Hyderabad, specializing in minimally invasive spine surgery, awake brain surgery, and ROSA robotic DBS at Yashoda Hospital, Hyderabad. Over 1,000 endoscopic procedures with same-day discharge.',
   keywords: [
     'dr sayuj krishnan',
     'best spine surgeon in yashoda hospital',
@@ -257,9 +257,9 @@ export default function Home() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm"
-                  aria-label={`Read article: ${publication.title}`}
+                  aria-label={publication.type === 'interview' ? `Watch interview: ${publication.title}` : `Read article: ${publication.title}`}
                 >
-                  Read: {publication.title.length > 50 ? publication.title.substring(0, 50) + '...' : publication.title} →
+                  {publication.type === 'interview' ? 'Watch Interview →' : `Read: ${publication.title.length > 50 ? publication.title.substring(0, 50) + '...' : publication.title} →`}
                 </a>
               </Card>
             ))}
