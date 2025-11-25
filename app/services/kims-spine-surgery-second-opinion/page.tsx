@@ -65,7 +65,7 @@ export default function KIMSSpineSurgerySecondOpinionPage() {
         items={[
           { name: 'Home', url: 'https://www.drsayuj.info/' },
           { name: 'Services', url: 'https://www.drsayuj.info/services' },
-          { name: 'KIMS Spine Surgery Second Opinion', url },
+          { name: 'KIMS Spine Surgery Second Opinion', path: '/services/kims-spine-surgery-second-opinion' },
         ]}
       />
       <FAQPageSchema faqs={faqs} pageUrl={url} />
