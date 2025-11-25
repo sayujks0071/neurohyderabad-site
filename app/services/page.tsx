@@ -131,6 +131,31 @@ export default function ServicesPage() {
         </section>
 
         <section className="mb-16">
+          <h2 className="text-3xl font-bold text-blue-800 mb-4">Related Conditions</h2>
+          <p className="text-gray-700 mb-4">
+            Explore detailed condition guides linked to each service so you can understand symptoms, diagnostics, and treatment pathways.
+          </p>
+          <div className="grid md:grid-cols-2 gap-4">
+            <Link href="/conditions/brain-tumor-surgery-hyderabad" className="block rounded-lg border p-4 hover:border-blue-300">
+              <h3 className="font-semibold text-blue-700">Brain Tumor Surgery</h3>
+              <p className="text-sm text-gray-600">Safe resection with awake mapping and neuronavigation.</p>
+            </Link>
+            <Link href="/conditions/sciatica-treatment-hyderabad" className="block rounded-lg border p-4 hover:border-blue-300">
+              <h3 className="font-semibold text-blue-700">Sciatica & Slip Disc</h3>
+              <p className="text-sm text-gray-600">Endoscopic discectomy and MISS options for leg-dominant pain.</p>
+            </Link>
+            <Link href="/conditions/spinal-stenosis-treatment-hyderabad" className="block rounded-lg border p-4 hover:border-blue-300">
+              <h3 className="font-semibold text-blue-700">Spinal Stenosis</h3>
+              <p className="text-sm text-gray-600">ULBD/endoscopic decompression with stability preservation.</p>
+            </Link>
+            <Link href="/conditions/trigeminal-neuralgia-treatment-hyderabad" className="block rounded-lg border p-4 hover:border-blue-300">
+              <h3 className="font-semibold text-blue-700">Trigeminal Neuralgia</h3>
+              <p className="text-sm text-gray-600">Microvascular decompression and radiosurgery options.</p>
+            </Link>
+          </div>
+        </section>
+
+        <section className="mb-16">
           <h2 className="text-3xl font-bold text-blue-800 mb-8">Detailed Service Overview</h2>
           
           <div className="space-y-12">

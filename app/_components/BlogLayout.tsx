@@ -21,6 +21,7 @@ import SourceList from '@/app/_components/SourceList';
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import NAP from '@/app/_components/NAP';
 import StandardCTA from '@/app/_components/StandardCTA';
+import RelatedContent from '@/app/_components/RelatedContent';
 import type { BlogPost, CTAType } from '@/src/types/blog';
 import { SITE_URL } from '@/src/lib/seo';
 
@@ -294,32 +295,10 @@ export default function BlogLayout({ post, content, className = '' }: BlogLayout
             </ReactMarkdown>
           </div>
 
-          {/* Related Links */}
-          {(post.relatedConditions?.length || post.relatedTreatments?.length) && (
-            <section className="mb-8 bg-blue-50 p-6 rounded-lg">
-              <h2 className="text-2xl font-semibold mb-4 text-blue-800">Related Content</h2>
-              <div className="space-y-2">
-                {post.relatedConditions?.map((conditionSlug) => (
-                  <Link
-                    key={conditionSlug}
-                    href={`/conditions/${conditionSlug}`}
-                    className="block text-blue-600 hover:text-blue-800 underline"
-                  >
-                    Learn about {conditionSlug.replace(/-/g, ' ')}
-                  </Link>
-                ))}
-                {post.relatedTreatments?.map((treatmentSlug) => (
-                  <Link
-                    key={treatmentSlug}
-                    href={`/services/${treatmentSlug}`}
-                    className="block text-blue-600 hover:text-blue-800 underline"
-                  >
-                    Learn about {treatmentSlug.replace(/-/g, ' ')}
-                  </Link>
-                ))}
-              </div>
-            </section>
-          )}
+          <RelatedContent
+            relatedConditions={post.relatedConditions}
+            relatedTreatments={post.relatedTreatments}
+          />
 
           {/* CTA Section */}
           <section className="mb-8 bg-blue-50 p-6 rounded-lg text-center">
@@ -378,4 +357,3 @@ export default function BlogLayout({ post, content, className = '' }: BlogLayout
     </>
   );
 }
-

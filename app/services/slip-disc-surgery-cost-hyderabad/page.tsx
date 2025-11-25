@@ -7,6 +7,8 @@ import NAP from '@/app/_components/NAP';
 import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import { getServiceSources } from '../sources';
+import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
+import FAQPageSchema from '@/app/_components/FAQPageSchema';
 
 const baseMetadata = makeMetadata({
   title: 'Slip Disc Surgery Cost in Hyderabad | Endoscopic Discectomy Price 2025',
@@ -75,8 +77,21 @@ const faqSchema = {
 };
 
 export default function SlipDiscSurgeryCostPage() {
+  const pageUrl = `${SITE_URL}/services/slip-disc-surgery-cost-hyderabad`;
+  const faqs = faqSchema.mainEntity.map((item: any) => ({
+    question: item.name,
+    answer: item.acceptedAnswer.text,
+  }));
   return (
     <>
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', url: `${SITE_URL}/` },
+          { name: 'Services', url: `${SITE_URL}/services` },
+          { name: 'Slip Disc Surgery Cost Hyderabad', url: pageUrl },
+        ]}
+      />
+      <FAQPageSchema faqs={faqs} pageUrl={pageUrl} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
@@ -243,4 +258,3 @@ export default function SlipDiscSurgeryCostPage() {
     </>
   );
 }
-

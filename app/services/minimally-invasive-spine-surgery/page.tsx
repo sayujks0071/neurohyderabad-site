@@ -11,6 +11,8 @@ import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import { getServiceSources } from '../sources';
 import JsonLd from '@/components/JsonLd';
+import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
+import FAQPageSchema from '@/app/_components/FAQPageSchema';
 
 const baseMetadata = makeMetadata({
   title: 'Endoscopic Spine Surgery Hyderabad | Dr. Sayuj Krishnan',
@@ -172,6 +174,14 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
   return (
     <>
       <JsonLd data={gbpSchema} />
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', url: `${SITE_URL}/` },
+          { name: 'Services', url: `${SITE_URL}/services` },
+          { name: 'Minimally Invasive Spine Surgery', url: `${SITE_URL}/services/minimally-invasive-spine-surgery` },
+        ]}
+      />
+      <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/minimally-invasive-spine-surgery`} />
       <div className="min-h-screen bg-white">
         <script
           type="application/ld+json"

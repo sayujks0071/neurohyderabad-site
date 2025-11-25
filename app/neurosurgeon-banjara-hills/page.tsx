@@ -10,6 +10,17 @@ export const metadata = {
   description:
     "Consult Dr. Sayuj Krishnan near Banjara Hills, Hyderabad for endoscopic spine & minimally invasive brain surgery. OPD timings, parking, directions, WhatsApp booking, and FAQs.",
   alternates: { canonical: "https://www.drsayuj.info/neurosurgeon-banjara-hills" },
+  openGraph: {
+    title: "Neurosurgeon in Banjara Hills, Hyderabad | Endoscopic Spine | Dr. Sayuj Krishnan",
+    description: "Consult Dr. Sayuj Krishnan near Banjara Hills for endoscopic spine & minimally invasive brain surgery. OPD timings, parking, directions, WhatsApp booking, and FAQs.",
+    url: "https://www.drsayuj.info/neurosurgeon-banjara-hills",
+    type: "article",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Neurosurgeon in Banjara Hills, Hyderabad",
+    description: "Endoscopic spine and brain surgery consultations for Banjara Hills patients — book via WhatsApp or call.",
+  },
 };
 
 const FAQ = [
@@ -40,15 +51,49 @@ export default function Page() {
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            "name": "Dr Sayuj Krishnan - Neurosurgeon near Banjara Hills",
+            "image": "https://www.drsayuj.info/images/og-default.jpg",
+            "url": "https://www.drsayuj.info/neurosurgeon-banjara-hills",
+            "telephone": "+919778280044",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Room No 317, OPD Block, Yashoda Hospital, Malakpet",
+              "addressLocality": "Hyderabad",
+              "addressRegion": "Telangana",
+              "postalCode": "500036",
+              "addressCountry": "IN"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 17.385,
+              "longitude": 78.4867
+            },
+            "areaServed": {
+              "@type": "City",
+              "name": "Banjara Hills"
+            },
+            "availableService": [
+              { "@type": "MedicalProcedure", "name": "Endoscopic Spine Surgery" },
+              { "@type": "MedicalProcedure", "name": "Awake Brain Surgery" }
+            ]
+          })
+        }}
+      />
       <h1 className="text-3xl md:text-4xl font-bold">Neurosurgeon in Banjara Hills, Hyderabad</h1>
       <p className="mt-4 text-lg">
         Serving patients from <strong>Banjara Hills</strong> and nearby localities. OPD at Yashoda Hospitals (Malakpet) with endoscopic spine expertise.
       </p>
 
       <div className="mt-6 flex flex-wrap gap-3">
-        <a href="https://wa.me/919778280044" className="rounded-2xl px-6 py-3 bg-green-600 text-white">WhatsApp Booking</a>
-        <a href="tel:+919778280044" className="rounded-2xl px-6 py-3 border">Call: +91-9778280044</a>
-        <a href="https://maps.google.com/?q=Yashoda+Hospitals+Malakpet+Hyderabad" className="rounded-2xl px-6 py-3 border">Directions</a>
+        <a href="https://wa.me/919778280044" className="rounded-2xl px-6 py-3 bg-green-600 text-white" aria-label="WhatsApp booking for Banjara Hills patients">WhatsApp Booking</a>
+        <a href="tel:+919778280044" className="rounded-2xl px-6 py-3 border" aria-label="Call +91 9778280044">Call: +91-9778280044</a>
+        <a href="https://maps.google.com/?q=Yashoda+Hospitals+Malakpet+Hyderabad" className="rounded-2xl px-6 py-3 border" aria-label="Directions to Yashoda Hospital Malakpet">Directions</a>
       </div>
 
       <section className="grid md:grid-cols-2 gap-8 mt-10">

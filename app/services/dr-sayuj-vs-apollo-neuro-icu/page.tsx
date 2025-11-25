@@ -8,6 +8,8 @@ import Link from 'next/link';
 import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import { getServiceSources } from '../sources';
+import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
+import FAQPageSchema from '@/app/_components/FAQPageSchema';
 
 export const metadata: Metadata = makeMetadata({
   title: 'Dr. Sayuj vs Apollo Neuro ICU: Expert Comparison for Brain & Spine Surgery',
@@ -19,6 +21,16 @@ const ARTICLE_SOURCES = getServiceSources('dr-sayuj-vs-apollo-neuro-icu');
 
 export default function DrSayujVsApolloNeuroICUPage() {
   const url = 'https://www.drsayuj.info/services/dr-sayuj-vs-apollo-neuro-icu';
+  const faqs = [
+    {
+      question: 'Why compare Dr. Sayuj with Apollo Neuro ICU?',
+      answer: 'Patients want to understand surgeon-led minimally invasive options versus ICU-based team care and continuity after discharge.',
+    },
+    {
+      question: 'Can I transfer care mid-treatment?',
+      answer: 'Yes. We review your imaging and clinical status, then coordinate a safe transfer plan when appropriate.',
+    },
+  ];
   
   const schemas = [
     {
@@ -49,6 +61,14 @@ export default function DrSayujVsApolloNeuroICUPage() {
 
   return (
     <main id="main" className="prose">
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', url: 'https://www.drsayuj.info/' },
+          { name: 'Services', url: 'https://www.drsayuj.info/services' },
+          { name: 'Dr. Sayuj vs Apollo Neuro ICU', url },
+        ]}
+      />
+      <FAQPageSchema faqs={faqs} pageUrl={url} />
       <h1>Dr. Sayuj vs Apollo Neuro ICU: Expert Comparison for Brain & Spine Surgery</h1>
       <AuthorByline
         publishedOn="2025-09-11"

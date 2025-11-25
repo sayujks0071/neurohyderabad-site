@@ -7,6 +7,8 @@ import NAP from '@/app/_components/NAP';
 import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import { getServiceSources } from '../sources';
+import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
+import FAQPageSchema from '@/app/_components/FAQPageSchema';
 
 const baseMetadata = makeMetadata({
   title: 'Spine Surgery Cost in Hyderabad | Price Guide & Insurance 2025',
@@ -75,6 +77,11 @@ const faqSchema = {
 };
 
 export default function SpineSurgeryCostPage() {
+  const pageUrl = `${SITE_URL}/services/spine-surgery-cost-hyderabad`;
+  const faqs = faqSchema.mainEntity.map((item: any) => ({
+    question: item.name,
+    answer: item.acceptedAnswer.text,
+  }));
   const procedures = [
     {
       name: 'Endoscopic Discectomy',
@@ -104,6 +111,14 @@ export default function SpineSurgeryCostPage() {
 
   return (
     <>
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', url: `${SITE_URL}/` },
+          { name: 'Services', url: `${SITE_URL}/services` },
+          { name: 'Spine Surgery Cost Hyderabad', url: pageUrl },
+        ]}
+      />
+      <FAQPageSchema faqs={faqs} pageUrl={pageUrl} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
@@ -258,4 +273,3 @@ export default function SpineSurgeryCostPage() {
     </>
   );
 }
-
