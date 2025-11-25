@@ -3,6 +3,7 @@ module.exports = {
   siteUrl: "https://www.drsayuj.info",
   generateRobotsTxt: false, // Robots.txt served via app/robots.ts
   generateIndexSitemap: false, // single sitemap for simplicity
+  outDir: "public/generated-sitemaps",
   robotsTxtOptions: {
     policies: [
       { 
