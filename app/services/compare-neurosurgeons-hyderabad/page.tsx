@@ -156,9 +156,9 @@ export default function CompareNeurosurgeonsPage() {
     <main className="container mx-auto px-4 py-16">
       <BreadcrumbSchema
         items={[
-          { name: 'Home', url: 'https://www.drsayuj.info/' },
-          { name: 'Services', url: 'https://www.drsayuj.info/services' },
-          { name: 'Compare Neurosurgeons Hyderabad', url: pageUrl },
+          { name: 'Home', path: '/' },
+          { name: 'Services', path: '/services' },
+          { name: 'Compare Neurosurgeons Hyderabad', path: '/services/compare-neurosurgeons-hyderabad' },
         ]}
       />
       <FAQPageSchema faqs={faqs} pageUrl={pageUrl} />
