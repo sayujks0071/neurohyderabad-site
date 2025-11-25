@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: baseMetadata.title,
     description: baseMetadata.description,
-    path: '/services/minimally-invasive-spine-surgery',
+    url: `${SITE_URL}/services/minimally-invasive-spine-surgery`,
     siteName: 'Dr. Sayuj Krishnan - Neurosurgeon in Hyderabad',
     images: [
       {
@@ -176,9 +176,9 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
       <JsonLd data={gbpSchema} />
       <BreadcrumbSchema
         items={[
-          { name: 'Home', url: `${SITE_URL}/` },
-          { name: 'Services', url: `${SITE_URL}/services` },
-          { name: 'Minimally Invasive Spine Surgery', path: '/services/minimally-invasive-spine-surgery' },
+          { name: 'Home', path: '/' },
+          { name: 'Services', path: '/services' },
+          { name: 'Minimally Invasive Spine Surgery', url: `${SITE_URL}/services/minimally-invasive-spine-surgery` },
         ]}
       />
       <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/minimally-invasive-spine-surgery`} />
