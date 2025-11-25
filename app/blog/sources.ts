@@ -200,6 +200,20 @@ export const BLOG_SOURCES: Record<string, SourceEntry[]> = {
       href: "https://www.hyderabad.gov.in/",
     },
   ],
+  "endoscopic-cervical-spine-surgery-hyderabad": [
+    {
+      label: "North American Spine Society – Coverage policy recommendations for endoscopic cervical procedures",
+      href: "https://www.spine.org/PolicyPractice/CoverageRecommendations",
+    },
+    {
+      label: "National Health Service (UK) – Cervical radiculopathy and neck pain treatment",
+      href: "https://www.nhs.uk/conditions/neck-pain-and-stiff-neck/",
+    },
+    {
+      label: "Journal of Spine Surgery – Outcomes of endoscopic cervical foraminotomy",
+      href: "https://jss.amegroups.org/article/view/4826/html",
+    },
+  ],
 };
 
 export function getBlogSources(slug: string): SourceEntry[] {
