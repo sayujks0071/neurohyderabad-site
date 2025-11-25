@@ -54,7 +54,7 @@ export default function DrSayujVsApolloNeuroICUPage() {
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.drsayuj.info/' },
         { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://www.drsayuj.info/services' },
-        { '@type': 'ListItem', position: 3, name: 'Dr. Sayuj vs Apollo Neuro ICU', item: path: '/services/dr-sayuj-vs-apollo-neuro-icu' }
+        { '@type': 'ListItem', position: 3, name: 'Dr. Sayuj vs Apollo Neuro ICU', item: url }/services/dr-sayuj-vs-apollo-neuro-icu' }
       ]
     }
   ];
