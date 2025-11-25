@@ -1,7 +1,7 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
   siteUrl: "https://www.drsayuj.info",
-  generateRobotsTxt: true,
+  generateRobotsTxt: false, // Robots.txt served via app/robots.ts
   robotsTxtOptions: {
     policies: [
       { 
@@ -23,11 +23,6 @@ module.exports = {
           "/email-test",
         ]
       }
-    ],
-    additionalSitemaps: [
-      'https://www.drsayuj.info/sitemap.xml',
-      'https://www.drsayuj.info/sitemap-images.xml',
-      'https://www.drsayuj.info/sitemap-videos.xml'
     ],
   },
   exclude: [

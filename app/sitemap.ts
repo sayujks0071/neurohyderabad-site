@@ -97,6 +97,7 @@ const BLOG_ROUTES: RouteConfig[] = [
   { path: "/blog/spinal-fusion-cost-hyderabad", priority: 0.7 },
   { path: "/blog/spine-health-maintenance-hyderabad", priority: 0.7 },
   { path: "/blog/spine-surgery-recovery-timeline-hyderabad", priority: 0.7 },
+  { path: "/blog/endoscopic-cervical-spine-surgery-hyderabad", priority: 0.7 },
 ];
 
 const LOCATION_ROUTES: RouteConfig[] = [

@@ -36,8 +36,8 @@ export default function Page() {
     <main id="main" className="prose">
       <BreadcrumbSchema
         items={[
-          { name: 'Home', url: 'https://www.drsayuj.info/' },
-          { name: 'Services', url: 'https://www.drsayuj.info/services' },
+          { name: 'Home', path: '/' },
+          { name: 'Services', path: '/services' },
           { name: 'Peripheral Nerve Surgery', path: '/services/peripheral-nerve-surgery' },
         ]}
       />
