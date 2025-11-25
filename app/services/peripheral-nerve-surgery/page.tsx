@@ -38,7 +38,7 @@ export default function Page() {
         items={[
           { name: 'Home', url: 'https://www.drsayuj.info/' },
           { name: 'Services', url: 'https://www.drsayuj.info/services' },
-          { name: 'Peripheral Nerve Surgery', url: url },
+          { name: 'Peripheral Nerve Surgery', path: '/services/peripheral-nerve-surgery' },
         ]}
       />
       <FAQPageSchema faqs={faqs} pageUrl={url} />
