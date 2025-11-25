@@ -54,9 +54,11 @@ export default function PrivacyFriendlyAnalytics() {
       return; // Use privacy-friendly option if available
     }
 
+    const FALLBACK_GA_ID = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || 'G-MMLQCFN4ZJ';
+
     // Only load GA if no privacy-friendly option is configured
-    const gaId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
-    if (!gaId || gaId === 'G-XXXXXXXXXX') return;
+    const gaId = FALLBACK_GA_ID;
+    if (!gaId) return;
 
     // Load gtag
     const script1 = document.createElement('script');
@@ -86,6 +88,5 @@ export default function PrivacyFriendlyAnalytics() {
 
   return null; // This component doesn't render anything
 }
-
 
 

@@ -9,6 +9,11 @@ on:
       - 'public/**'
       - 'app/sitemap.ts'
   workflow_dispatch:
+  workflow_run:
+    workflows: ["Blog Publisher"]
+    branches: [main]
+    types:
+      - completed
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -36,27 +41,40 @@ jobs:
       - name: Build sitemap
         run: npm run build
         env:
-          NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: ${{ secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID }}
+          NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: ${{ secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID && secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || 'G-MMLQCFN4ZJ' }}
 
       - name: Extract URLs from sitemap
         id: extract-urls
         run: |
-          # IndexNow supports up to 10,000 URLs per submission
-          # We'll submit the most important pages
-          
-          # Use known important pages (sitemap.xml is generated at build time)
-          node -e "
-            const importantUrls = [
-              'https://www.drsayuj.info/',
-              'https://www.drsayuj.info/about',
-              'https://www.drsayuj.info/appointments',
-              'https://www.drsayuj.info/contact',
-              'https://www.drsayuj.info/services',
-              'https://www.drsayuj.info/conditions',
-              'https://www.drsayuj.info/blog'
-            ];
-            console.log(JSON.stringify(importantUrls));
-          " > urls.json
+          # Parse generated sitemap.xml and collect URLs (cap at 9,000 to stay under IndexNow limits)
+          node <<'EOF'
+          const fs = require('fs');
+          const path = require('path');
+          const sitemapPath = path.join(process.cwd(), 'public', 'sitemap.xml');
+          const fallback = [
+            'https://www.drsayuj.info/',
+            'https://www.drsayuj.info/about',
+            'https://www.drsayuj.info/appointments',
+            'https://www.drsayuj.info/services',
+            'https://www.drsayuj.info/conditions',
+            'https://www.drsayuj.info/blog'
+          ];
+
+          let urls = [];
+          try {
+            const xml = fs.readFileSync(sitemapPath, 'utf8');
+            const matches = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)];
+            urls = matches.map(m => m[1].trim()).filter(Boolean);
+          } catch (err) {
+            console.warn('⚠️  Could not read sitemap.xml, using fallback URLs.', err.message);
+            urls = fallback;
+          }
+
+          // Deduplicate and cap
+          const unique = Array.from(new Set(urls)).slice(0, 9000);
+          fs.writeFileSync('urls.json', JSON.stringify(unique, null, 2));
+          console.log(`Collected ${unique.length} URLs for IndexNow ping`);
+          EOF
           
           echo "urls<<EOF" >> $GITHUB_OUTPUT
           cat urls.json >> $GITHUB_OUTPUT
@@ -102,4 +120,3 @@ jobs:
           curl -X POST "https://www.bing.com/ping?sitemap=https://www.drsayuj.info/sitemap.xml" || echo "Bing ping failed"
           
           echo "✅ Sitemap submitted to search engines"
-

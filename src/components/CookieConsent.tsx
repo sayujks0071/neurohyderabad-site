@@ -8,8 +8,8 @@ export default function CookieConsent() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Check if user has already consented
-    const consent = localStorage.getItem('cookie-consent');
+    // Check if user has already consented (accept legacy key for backward compatibility)
+    const consent = localStorage.getItem('analytics-consent') || localStorage.getItem('cookie-consent');
     if (!consent) {
       setShowBanner(true);
       // Show banner after a short delay for better UX
@@ -17,23 +17,26 @@ export default function CookieConsent() {
     }
   }, []);
 
-  const handleAccept = () => {
-    localStorage.setItem('cookie-consent', 'accepted');
-    setShowBanner(false);
+  const persistConsent = (value: 'accepted' | 'declined') => {
+    // Keep both keys in sync so legacy readers continue to work
+    localStorage.setItem('analytics-consent', value === 'accepted' ? 'true' : 'false');
+    localStorage.setItem('cookie-consent', value);
     if (typeof window !== 'undefined') {
-      window.dispatchEvent(new CustomEvent('cookie-consent-change', { detail: 'accepted' }));
+      window.dispatchEvent(new CustomEvent('cookie-consent-change', { detail: value }));
     }
+  };
+
+  const handleAccept = () => {
+    persistConsent('accepted');
+    setShowBanner(false);
     analytics.track('Cookie_Consent_Accepted', {
       consent_type: 'all_cookies'
     });
   };
 
   const handleDecline = () => {
-    localStorage.setItem('cookie-consent', 'declined');
+    persistConsent('declined');
     setShowBanner(false);
-    if (typeof window !== 'undefined') {
-      window.dispatchEvent(new CustomEvent('cookie-consent-change', { detail: 'declined' }));
-    }
     analytics.track('Cookie_Consent_Declined', {
       consent_type: 'all_cookies'
     });

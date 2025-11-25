@@ -26,6 +26,7 @@ import WebsiteSchema from "./components/schemas/WebsiteSchema";
 import Button from "./_components/Button";
 import Card from "./_components/Card";
 import Section from "./_components/Section";
+import FAQPageSchema from "./_components/FAQPageSchema";
 
 const HOME_CANONICAL = SITE_URL.endsWith("/") ? SITE_URL : `${SITE_URL}/`;
 
@@ -165,6 +166,7 @@ export default function Home() {
       <PhysicianSchema />
       <MedicalClinicSchema />
       <WebsiteSchema />
+      <FAQPageSchema faqs={HOME_FAQS} pageUrl={HOME_CANONICAL} />
 
       {/* <ScrollDepthTracker pageSlug="/" /> */}
       <TrustBridgeTracker />

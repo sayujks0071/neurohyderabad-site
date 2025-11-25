@@ -44,7 +44,7 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: ${{ secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID }}
+          NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: ${{ secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID && secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || 'G-MMLQCFN4ZJ' }}
 
       - name: Check Performance Budget
         run: node scripts/check-budget.js

@@ -9,7 +9,28 @@ export const metadata = {
   title: "Neurosurgeon in Hitech City, Hyderabad | Endoscopic Spine | Dr. Sayuj Krishnan",
   description:
     "Consult Dr. Sayuj Krishnan near Hitech City, Hyderabad for endoscopic spine & minimally invasive brain surgery. OPD timings, parking, directions, WhatsApp booking, and FAQs.",
+  keywords: [
+    "neurosurgeon hitech city",
+    "brain surgeon hitech city",
+    "spine surgeon hitech city",
+    "endoscopic spine surgery hyderabad",
+    "minimally invasive spine surgery hyderabad",
+    "neurosurgeon near cyber towers"
+  ],
   alternates: { canonical: "https://www.drsayuj.info/neurosurgeon-hitech-city" },
+  openGraph: {
+    title: "Neurosurgeon in Hitech City, Hyderabad | Endoscopic Spine | Dr. Sayuj Krishnan",
+    description:
+      "Consult Dr. Sayuj Krishnan near Hitech City for endoscopic spine and minimally invasive brain surgery with OPD timings, parking, directions, and WhatsApp booking.",
+    url: "https://www.drsayuj.info/neurosurgeon-hitech-city",
+    type: "article",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Neurosurgeon in Hitech City, Hyderabad | Endoscopic Spine",
+    description:
+      "Endoscopic spine and brain surgery consultations for Hitech City patients — book via WhatsApp or call.",
+  },
 };
 
 const FAQ = [
@@ -93,8 +114,54 @@ export default function Page() {
         </div>
       </section>
 
+      <section className="mt-12">
+        <h2 className="text-2xl font-semibold">Popular services for Hitech City patients</h2>
+        <ul className="mt-4 space-y-2 list-disc list-inside">
+          <li><a className="text-blue-700 hover:underline" href="/services/endoscopic-spine-surgery-hyderabad/">Endoscopic Spine Surgery (same-day discharge)</a></li>
+          <li><a className="text-blue-700 hover:underline" href="/services/brain-tumor-surgery-hyderabad/">Brain Tumor Surgery with neuronavigation</a></li>
+          <li><a className="text-blue-700 hover:underline" href="/services/epilepsy-surgery-hyderabad/">Epilepsy Surgery programme</a></li>
+          <li><a className="text-blue-700 hover:underline" href="/services/spine-surgery-hyderabad/">Comprehensive Spine Surgery & fusion options</a></li>
+        </ul>
+      </section>
+
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            "name": "Dr Sayuj Krishnan - Neurosurgeon near Hitech City",
+            "image": "https://www.drsayuj.info/images/og-default.jpg",
+            "url": "https://www.drsayuj.info/neurosurgeon-hitech-city",
+            "telephone": "+919778280044",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Room No 317, OPD Block, Yashoda Hospital, Malakpet",
+              "addressLocality": "Hyderabad",
+              "addressRegion": "Telangana",
+              "postalCode": "500036",
+              "addressCountry": "IN"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 17.385,
+              "longitude": 78.4867
+            },
+            "areaServed": {
+              "@type": "City",
+              "name": "Hyderabad",
+              "containsPlace": { "@type": "Place", "name": "Hitech City" }
+            },
+            "availableService": [
+              { "@type": "MedicalProcedure", "name": "Endoscopic Spine Surgery" },
+              { "@type": "MedicalProcedure", "name": "Awake Brain Surgery" },
+              { "@type": "MedicalProcedure", "name": "Spine Fusion" }
+            ]
+          })
+        }}
+      />
     </main>
   );
 }

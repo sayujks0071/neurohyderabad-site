@@ -95,6 +95,17 @@ jobs:
             npm run new:blog -- $CMD_ARGS
           fi
 
+      - name: Lint generated content
+        run: npx next lint
+
+      - name: Type check
+        run: npx tsc --noEmit
+
+      - name: Build to validate
+        env:
+          NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: ${{ secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID && secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || 'G-MMLQCFN4ZJ' }}
+        run: npm run build
+
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         with:

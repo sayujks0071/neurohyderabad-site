@@ -13,6 +13,11 @@ const CookieConsent = dynamic(
   { ssr: false }
 );
 
+const StatsigAnalytics = dynamic(
+  () => import("../../src/components/StatsigAnalytics"),
+  { ssr: false, loading: () => null }
+);
+
 const GoogleAnalytics = dynamic(
   () => import("../../src/components/GoogleAnalytics"),
   { ssr: false, loading: () => null }
@@ -30,14 +35,19 @@ export default function ClientAnalytics() {
   React.useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const hasConsent = () => localStorage.getItem("cookie-consent") === "accepted";
+    const hasConsent = () => {
+      const analyticsConsent = localStorage.getItem("analytics-consent");
+      // Accept legacy key for backward compatibility
+      const legacyConsent = localStorage.getItem("cookie-consent");
+      return analyticsConsent === "true" || legacyConsent === "accepted";
+    };
     if (hasConsent()) {
       setEnableAnalytics(true);
     }
 
     const handler = (event: Event) => {
       const detail = (event as CustomEvent<string>).detail;
-      setEnableAnalytics(detail === "accepted");
+      setEnableAnalytics(detail === "accepted" || detail === "true");
     };
 
     window.addEventListener("cookie-consent-change", handler);
@@ -126,6 +136,7 @@ export default function ClientAnalytics() {
       {shouldLoad && (
         <>
           <WebVitals />
+          <StatsigAnalytics />
           <GoogleAnalytics />
           <FloatingWhatsApp />
         </>

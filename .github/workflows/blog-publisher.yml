@@ -37,6 +37,17 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: npm run blog:auto-publish
 
+      - name: Lint published content
+        run: npx next lint
+
+      - name: Type check
+        run: npx tsc --noEmit
+
+      - name: Build to validate
+        env:
+          NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: ${{ secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID && secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || 'G-MMLQCFN4ZJ' }}
+        run: npm run build
+
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         with:

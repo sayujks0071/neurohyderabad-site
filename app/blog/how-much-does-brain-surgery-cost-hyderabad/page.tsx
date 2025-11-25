@@ -231,7 +231,6 @@ export default function HowMuchDoesBrainSurgeryCostPage() {
           <NAP />
         </div>
       </div>
-      <FAQPageSchema faqs={faqs} />
     </>
   );
 }
