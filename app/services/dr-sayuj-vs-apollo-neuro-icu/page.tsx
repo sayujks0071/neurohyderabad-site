@@ -54,7 +54,7 @@ export default function DrSayujVsApolloNeuroICUPage() {
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.drsayuj.info/' },
         { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://www.drsayuj.info/services' },
-        { '@type': 'ListItem', position: 3, name: 'Dr. Sayuj vs Apollo Neuro ICU', item: url }
+        { '@type': 'ListItem', position: 3, name: 'Dr. Sayuj vs Apollo Neuro ICU', item: path: '/services/dr-sayuj-vs-apollo-neuro-icu' }
       ]
     }
   ];
@@ -63,9 +63,9 @@ export default function DrSayujVsApolloNeuroICUPage() {
     <main id="main" className="prose">
       <BreadcrumbSchema
         items={[
-          { name: 'Home', url: 'https://www.drsayuj.info/' },
-          { name: 'Services', url: 'https://www.drsayuj.info/services' },
-          { name: 'Dr. Sayuj vs Apollo Neuro ICU', url },
+          { name: 'Home', path: '/' },
+          { name: 'Services', path: '/services' },
+          { name: 'Dr. Sayuj vs Apollo Neuro ICU', path: '/services/dr-sayuj-vs-apollo-neuro-icu' },
         ]}
       />
       <FAQPageSchema faqs={faqs} pageUrl={url} />
