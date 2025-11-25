@@ -178,7 +178,7 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
         items={[
           { name: 'Home', path: '/' },
           { name: 'Services', path: '/services' },
-          { name: 'Minimally Invasive Spine Surgery', url: `${SITE_URL}/services/minimally-invasive-spine-surgery` },
+          { name: 'Minimally Invasive Spine Surgery', path: '/services/minimally-invasive-spine-surgery' },
         ]}
       />
       <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/minimally-invasive-spine-surgery`} />
