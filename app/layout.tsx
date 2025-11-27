@@ -11,6 +11,7 @@ import ClientAnalytics from "./_components/ClientAnalytics";
 import PrivacyFriendlyAnalytics from "./components/PrivacyFriendlyAnalytics";
 import StickyCTA from "./_components/StickyCTA";
 import ClientOnlyWrapper from "./_components/ClientOnlyWrapper";
+import HypertuneProvider from "./providers/hypertune-provider";
 import { SITE_URL } from "../src/lib/seo";
 
 const inter = Inter({
@@ -249,9 +250,11 @@ export default function RootLayout({
         </a>
         <Header />
         <TrustStrip />
-        <main id="main-content" tabIndex={-1} role="main">
-          {children}
-        </main>
+        <HypertuneProvider>
+          <main id="main-content" tabIndex={-1} role="main">
+            {children}
+          </main>
+        </HypertuneProvider>
         <Footer />
         <ClientOnlyWrapper>
           <StickyCTA />

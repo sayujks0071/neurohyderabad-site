@@ -64,3 +64,4 @@ budgets.json
 # Generated sitemap/robots outputs
 public/sitemap*.xml
 public/robots.txt
+.vercel

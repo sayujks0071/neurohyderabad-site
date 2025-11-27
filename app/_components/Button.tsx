@@ -8,6 +8,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   fullWidth?: boolean;
   className?: string;
   children: React.ReactNode;
+  target?: string;
+  rel?: string;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -17,6 +19,9 @@ const Button: React.FC<ButtonProps> = ({
   fullWidth = false,
   className = '',
   children,
+  target,
+  rel,
+  onClick,
   ...props
 }) => {
   const baseStyles = 'inline-flex items-center justify-center font-semibold transition-all duration-200 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
@@ -39,14 +44,21 @@ const Button: React.FC<ButtonProps> = ({
 
   if (href) {
     return (
-      <Link href={href} className={combinedClasses} aria-label={props['aria-label']}>
+      <Link 
+        href={href} 
+        className={combinedClasses} 
+        aria-label={props['aria-label']} 
+        target={target} 
+        rel={rel}
+        onClick={onClick}
+      >
         {children}
       </Link>
     );
   }
 
   return (
-    <button className={combinedClasses} {...props}>
+    <button className={combinedClasses} onClick={onClick} {...props}>
       {children}
     </button>
   );

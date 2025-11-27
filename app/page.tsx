@@ -27,6 +27,7 @@ import Button from "./_components/Button";
 import Card from "./_components/Card";
 import Section from "./_components/Section";
 import FAQPageSchema from "./_components/FAQPageSchema";
+import HeroCTAButtons from "./_components/HeroCTAButtons";
 
 const HOME_CANONICAL = SITE_URL.endsWith("/") ? SITE_URL : `${SITE_URL}/`;
 
@@ -189,25 +190,7 @@ export default function Home() {
                     German-trained neurosurgeon specializing in minimally invasive spine surgery, awake brain surgery, and ROSA robotic deep brain stimulation. With over 1,000 endoscopic procedures and advanced fellowship training, Dr. Sayuj combines cutting-edge technology with compassionate care at Yashoda Hospital, Malakpet.
                   </p>
                   {/* <HeroCTA /> */}
-                  <div className="space-y-4">
-                    <Button
-                      href="/appointments"
-                      variant="primary"
-                      size="lg"
-                      className="rounded-full text-lg"
-                      aria-label="Book an in-clinic consultation with Dr. Sayuj"
-                    >
-                      Book Consultation
-                    </Button>
-                    <Button
-                      href="tel:+919778280044"
-                      variant="secondary"
-                      size="lg"
-                      className="rounded-full text-lg bg-green-600 hover:bg-green-700 ml-4"
-                    >
-                      Call Now: +91 97782 80044
-                    </Button>
-                  </div>
+                  <HeroCTAButtons />
                 </div>
                 <div className="flex justify-center">
                   <DoctorCardLazy />
