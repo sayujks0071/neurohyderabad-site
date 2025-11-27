@@ -2,12 +2,12 @@
 module.exports = {
   siteUrl: "https://www.drsayuj.info",
   generateRobotsTxt: false, // Robots.txt served via app/robots.ts
-  generateIndexSitemap: false, // single sitemap for simplicity
-  outDir: "public/generated-sitemaps",
+  generateIndexSitemap: false, // CRITICAL: Disable index generation - single sitemap.xml with all URLs
+  outDir: "public", // Output directly to public/ for static serving
   robotsTxtOptions: {
     policies: [
-      { 
-        userAgent: "*", 
+      {
+        userAgent: "*",
         allow: "/",
         disallow: [
           "/api/",
@@ -48,10 +48,10 @@ module.exports = {
   // Add dynamic priority based on page type
   transform: async (config, path) => {
     // High priority pages
-    if (path === '/' || 
-        path.includes('/spine-surgery') ||
-        path.includes('/brain-surgery') ||
-        path.includes('/about')) {
+    if (path === '/' ||
+      path.includes('/spine-surgery') ||
+      path.includes('/brain-surgery') ||
+      path.includes('/about')) {
       return {
         loc: path,
         changefreq: 'daily',
@@ -59,7 +59,7 @@ module.exports = {
         lastmod: new Date().toISOString(),
       };
     }
-    
+
     // Medium-high priority (service and condition pages)
     if (path.includes('/services/') || path.includes('/conditions/')) {
       return {
@@ -69,7 +69,7 @@ module.exports = {
         lastmod: new Date().toISOString(),
       };
     }
-    
+
     // Medium priority (blog posts and locations)
     if (path.includes('/blog/') || path.includes('/locations/')) {
       return {
@@ -79,7 +79,7 @@ module.exports = {
         lastmod: new Date().toISOString(),
       };
     }
-    
+
     // Default
     return {
       loc: path,

@@ -4,10 +4,18 @@
   "devCommand": "npm run dev",
   "installCommand": "npm install",
   "framework": "nextjs",
-  "regions": ["bom1"],
+  "regions": [
+    "bom1"
+  ],
   "rewrites": [
-    { "source": "/wp-json/:path*", "destination": "https://api.drsayuj.com/wp-json/:path*" },
-    { "source": "/media/:path*", "destination": "https://api.drsayuj.com/wp-content/uploads/:path*" }
+    {
+      "source": "/wp-json/:path*",
+      "destination": "https://api.drsayuj.com/wp-json/:path*"
+    },
+    {
+      "source": "/media/:path*",
+      "destination": "https://api.drsayuj.com/wp-content/uploads/:path*"
+    }
   ],
   "headers": [
     {
