@@ -31,8 +31,8 @@ import FAQPageSchema from "./_components/FAQPageSchema";
 const HOME_CANONICAL = SITE_URL.endsWith("/") ? SITE_URL : `${SITE_URL}/`;
 
 export const metadata = {
-  title: 'Dr. Sayuj Krishnan | Best Neurosurgeon in Hyderabad | Expert Spine Surgeon',
-  description: 'Dr. Sayuj Krishnan is a German-trained neurosurgeon and best spine surgeon in Hyderabad, specializing in minimally invasive spine surgery, awake brain surgery, and ROSA robotic DBS at Yashoda Hospital, Hyderabad. Over 1,000 endoscopic procedures with same-day discharge.',
+  title: 'Dr. Sayuj Krishnan | Best Neurosurgeon Hyderabad',
+  description: 'German-trained neurosurgeon in Hyderabad for minimally invasive spine and awake brain surgery. 1,000+ endoscopic procedures with same-day discharge at Yashoda Hospital, Malakpet.',
   keywords: [
     'dr sayuj krishnan',
     'best spine surgeon in yashoda hospital',

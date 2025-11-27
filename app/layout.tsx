@@ -33,10 +33,11 @@ const merriweather = Merriweather({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Dr. Sayuj Krishnan | Best Neurosurgeon in Hyderabad | Brain & Spine Surgery",
-    template: "%s | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad"
+    default: "Dr. Sayuj Krishnan | Neurosurgeon Hyderabad",
+    template: "%s | Dr. Sayuj"
   },
-  description: "Expert neurosurgeon Dr. Sayuj Krishnan in Hyderabad specializing in endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures. Same-day discharge available. Book consultation at Yashoda Hospital Malakpet.",
+  description:
+    "German-trained neurosurgeon in Hyderabad for minimally invasive spine and brain surgery with same-day discharge at Yashoda Hospital, Malakpet.",
   keywords: [
     "neurosurgeon hyderabad",
     "brain surgeon hyderabad", 
