@@ -62,5 +62,11 @@
     "ts-node": "^10.9.2",
     "typescript": "^5",
     "vercel": "^48.10.10"
+  },
+  "overrides": {
+    "esbuild": "^0.25.12",
+    "path-to-regexp": "^6.3.0",
+    "undici": "^5.28.7",
+    "tmp": "^0.2.4"
   }
 }
