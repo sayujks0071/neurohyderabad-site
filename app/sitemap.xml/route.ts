@@ -27,7 +27,7 @@ export async function GET() {
     if (!sitemapContent) {
       throw new Error("Sitemap file not found in any expected location");
     }
-    
+
     // CRITICAL FIX: Ensure the urlset opening tag is on a single line with no line breaks
     // Google Search Console requires the opening tag to be properly formatted
     // Replace any malformed opening tags with a clean single-line version
@@ -76,11 +76,11 @@ export async function GET() {
 </urlset>`;
 
     return new NextResponse(fallbackXml, {
-      status: 200,
-      headers: {
-        "Content-Type": "application/xml; charset=utf-8",
-        "Cache-Control": "public, max-age=3600, s-maxage=3600",
-      },
-    });
-  }
+    status: 200,
+    headers: {
+      "Content-Type": "application/xml; charset=utf-8",
+      "Cache-Control": "public, max-age=3600, s-maxage=3600",
+    },
+  });
+}
 }
