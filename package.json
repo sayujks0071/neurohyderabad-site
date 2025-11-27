@@ -16,6 +16,7 @@
     "seo:report": "node scripts/seo/report.mjs",
     "seo:all": "npm run seo:audit && npm run seo:report",
     "verify:deployment": "node scripts/verify-deployment.js",
+    "check:sitemap": "node scripts/check-sitemap.js",
     "reindex:gemini": "ts-node scripts/reindex-gemini-rag.ts",
     "new:blog": "ts-node scripts/new-blog.ts",
     "normalize:blog": "ts-node scripts/normalize-blog-metadata.ts",
