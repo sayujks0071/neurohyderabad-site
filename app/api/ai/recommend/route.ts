@@ -62,7 +62,7 @@ Return ONLY a JSON array of slugs (e.g., ["slug1", "slug2", "slug3"]) for the ${
     let recommendedSlugs: string[] = [];
     try {
       // Try to extract JSON array from response
-      const jsonMatch = text.match(/\[.*?\]/s);
+      const jsonMatch = text.match(/\[[\s\S]*?\]/);
       if (jsonMatch) {
         recommendedSlugs = JSON.parse(jsonMatch[0]);
       }

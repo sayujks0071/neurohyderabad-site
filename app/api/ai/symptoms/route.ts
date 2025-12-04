@@ -60,7 +60,7 @@ Response:`,
     // Parse the AI response
     let analysis;
     try {
-      const jsonMatch = text.match(/\{[\s\S]*\}/);
+      const jsonMatch = text.match(/\{[\s\S]*?\}/);
       if (jsonMatch) {
         analysis = JSON.parse(jsonMatch[0]);
       } else {
