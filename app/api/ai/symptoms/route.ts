@@ -54,7 +54,6 @@ Format your response as JSON with the following structure:
 }
 
 Response:`,
-      maxTokens: 400,
       temperature: 0.3,
     });
 

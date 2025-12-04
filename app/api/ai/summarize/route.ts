@@ -34,7 +34,6 @@ export async function POST(request: NextRequest) {
 ${content}
 
 Summary:`,
-      maxTokens: Math.min(maxLength * 2, 500),
       temperature: 0.3, // Lower temperature for more factual summaries
     });
 

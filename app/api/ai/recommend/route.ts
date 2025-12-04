@@ -55,7 +55,6 @@ Available Blog Posts:
 ${JSON.stringify(postsSummary, null, 2)}
 
 Return ONLY a JSON array of slugs (e.g., ["slug1", "slug2", "slug3"]) for the ${limit} most relevant posts. Do not include any other text.`,
-      maxTokens: 200,
       temperature: 0.3,
     });
 

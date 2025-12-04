@@ -51,7 +51,6 @@ Available Blog Posts:
 ${JSON.stringify(postsSummary, null, 2)}
 
 Return ONLY a JSON array of slugs (e.g., ["slug1", "slug2", "slug3"]) for the ${limit} most relevant posts, ordered by relevance. Do not include any other text.`,
-      maxTokens: 300,
       temperature: 0.2, // Lower temperature for more consistent search results
     });
 
