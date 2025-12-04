@@ -111,7 +111,7 @@ Always be professional, empathetic, and prioritize patient safety. If you're uns
     });
 
     // Return streaming response
-    return result.toDataStreamResponse({
+    return result.toTextStreamResponse({
       headers: {
         'X-Sources': geminiSources.length > 0 ? JSON.stringify(geminiSources) : '',
       },
