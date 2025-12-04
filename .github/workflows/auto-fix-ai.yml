@@ -40,7 +40,7 @@ jobs:
 
       - name: Download workflow artifacts
         if: github.event.workflow_run != null
-        uses: dawidd6/action-download-artifact@v3
+        uses: dawidd6/action-download-artifact@v6
         continue-on-error: true
         with:
           workflow: ${{ github.event.workflow_run.workflow_id }}
