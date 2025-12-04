@@ -57,7 +57,7 @@ Return ONLY a JSON array of slugs (e.g., ["slug1", "slug2", "slug3"]) for the ${
     // Parse the AI response
     let relevantSlugs: string[] = [];
     try {
-      const jsonMatch = text.match(/\[.*?\]/s);
+      const jsonMatch = text.match(/\[[\s\S]*?\]/);
       if (jsonMatch) {
         relevantSlugs = JSON.parse(jsonMatch[0]);
       }
