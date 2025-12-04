@@ -1,6 +1,5 @@
 'use client';
 
-import { useChat } from '@ai-sdk/react';
 import { useState, useRef, useEffect } from 'react';
 import { useStatsigEvents } from '../../src/lib/statsig-events';
 
@@ -8,6 +7,12 @@ interface AIStreamingChatProps {
   pageSlug: string;
   service?: string;
   initialMessage?: string;
+}
+
+interface Message {
+  id: string;
+  role: 'user' | 'assistant';
+  content: string;
 }
 
 /**
@@ -25,56 +30,18 @@ export default function AIStreamingChat({
   initialMessage = "Hello! I'm Dr. Sayuj's AI assistant. I can help you book appointments, answer questions about neurosurgical conditions, and provide information about our clinic. How can I assist you today?"
 }: AIStreamingChatProps) {
   const [showEmergencyAlert, setShowEmergencyAlert] = useState(false);
+  const [input, setInput] = useState('');
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      id: 'initial',
+      role: 'assistant',
+      content: initialMessage,
+    },
+  ]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { logAppointmentBooking, logContactFormSubmit } = useStatsigEvents();
-
-  // Use AI SDK's useChat hook for streaming
-  const {
-    messages,
-    input,
-    handleInputChange,
-    handleSubmit,
-    isLoading,
-    error,
-  } = useChat({
-    api: '/api/ai/chat',
-    initialMessages: [
-      {
-        id: 'initial',
-        role: 'assistant',
-        content: initialMessage,
-      },
-    ],
-    body: {
-      pageSlug,
-      service,
-    },
-    onResponse: (response) => {
-      // Check for emergency indicators in response headers
-      const sources = response.headers.get('X-Sources');
-      if (sources) {
-        // Could parse sources if needed
-      }
-    },
-    onFinish: (message) => {
-      // Log successful interaction
-      logContactFormSubmit('ai_streaming_chat', true);
-      
-      // Check for emergency keywords in response
-      const emergencyKeywords = ['emergency', 'urgent', 'immediately', 'call', 'stroke', 'seizure'];
-      const hasEmergency = emergencyKeywords.some(keyword => 
-        message.content.toLowerCase().includes(keyword)
-      );
-      
-      if (hasEmergency) {
-        setShowEmergencyAlert(true);
-      }
-    },
-    onError: (error) => {
-      console.error('Chat error:', error);
-      logContactFormSubmit('ai_streaming_chat', false);
-    },
-  });
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -84,13 +51,116 @@ export default function AIStreamingChat({
     scrollToBottom();
   }, [messages]);
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    
+  const sendMessage = async (content: string) => {
+    if (!content.trim() || isLoading) return;
+
+    const userMessage: Message = {
+      id: Date.now().toString(),
+      role: 'user',
+      content: content.trim(),
+    };
+
+    setMessages(prev => [...prev, userMessage]);
+    setInput('');
+    setIsLoading(true);
+    setError(null);
+
     // Log user interaction
     logAppointmentBooking('ai_streaming_interaction', service || 'general');
-    
-    handleSubmit(e);
+
+    try {
+      const response = await fetch('/api/ai/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: content.trim(),
+          conversationHistory: messages.slice(-10).map(m => ({
+            type: m.role,
+            content: m.content,
+          })),
+          pageSlug,
+          service,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to get AI response');
+      }
+
+      // Handle streaming response
+      const reader = response.body?.getReader();
+      const decoder = new TextDecoder();
+      
+      if (!reader) {
+        throw new Error('No response body');
+      }
+
+      const assistantMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        role: 'assistant',
+        content: '',
+      };
+
+      setMessages(prev => [...prev, assistantMessage]);
+
+      let fullContent = '';
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        const chunk = decoder.decode(value, { stream: true });
+        const lines = chunk.split('\n');
+        
+        for (const line of lines) {
+          if (line.startsWith('0:')) {
+            const text = line.slice(2);
+            fullContent += text;
+            setMessages(prev => {
+              const updated = [...prev];
+              const lastMsg = updated[updated.length - 1];
+              if (lastMsg && lastMsg.role === 'assistant') {
+                lastMsg.content = fullContent;
+              }
+              return updated;
+            });
+          }
+        }
+      }
+
+      // Check for emergency keywords
+      const emergencyKeywords = ['emergency', 'urgent', 'immediately', 'call', 'stroke', 'seizure'];
+      const hasEmergency = emergencyKeywords.some(keyword => 
+        fullContent.toLowerCase().includes(keyword)
+      );
+      
+      if (hasEmergency) {
+        setShowEmergencyAlert(true);
+      }
+
+      logContactFormSubmit('ai_streaming_chat', true);
+    } catch (err) {
+      console.error('Chat error:', err);
+      setError(err instanceof Error ? err : new Error('Failed to send message'));
+      logContactFormSubmit('ai_streaming_chat', false);
+      
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        role: 'assistant',
+        content: "I'm having trouble right now. Please call +91-9778280044 for immediate assistance.",
+      };
+      setMessages(prev => [...prev, errorMessage]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInput(e.target.value);
+  };
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    await sendMessage(input);
   };
 
   const quickActions = [
@@ -186,22 +256,9 @@ export default function AIStreamingChat({
               {quickActions.map((action, index) => (
                 <button
                   key={index}
-                  onClick={() => {
-                    // Set input value and submit
-                    const syntheticEvent = {
-                      preventDefault: () => {},
-                      target: { value: action }
-                    } as any;
-                    handleInputChange({ target: { value: action } } as any);
-                    setTimeout(() => {
-                      const form = document.querySelector('form');
-                      if (form) {
-                        const submitEvent = new Event('submit', { bubbles: true, cancelable: true });
-                        form.dispatchEvent(submitEvent);
-                      }
-                    }, 100);
-                  }}
-                  className="text-xs bg-blue-50 text-blue-700 px-3 py-1 rounded-full hover:bg-blue-100 transition-colors"
+                  onClick={() => sendMessage(action)}
+                  disabled={isLoading}
+                  className="text-xs bg-blue-50 text-blue-700 px-3 py-1 rounded-full hover:bg-blue-100 transition-colors disabled:opacity-50"
                 >
                   {action}
                 </button>
@@ -263,4 +320,3 @@ export default function AIStreamingChat({
     </div>
   );
 }
-

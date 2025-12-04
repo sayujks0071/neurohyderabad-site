@@ -107,7 +107,6 @@ Always be professional, empathetic, and prioritize patient safety. If you're uns
     const result = streamText({
       model: openai('gpt-4o-mini'),
       messages,
-      maxTokens: 500,
       temperature: 0.7,
     });
 
