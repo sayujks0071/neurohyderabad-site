@@ -41,12 +41,30 @@ module.exports = {
     "/statsig-test",
     "/test-*",
     "/email-test",
+    // Exclude blog posts with forbidden keywords (handled in transform, but added here for clarity)
+    "/blog/*example*",
+    "/blog/*test*",
+    "/blog/*draft*",
+    "/blog/*sample*",
+    "/blog/*template*",
+    "/blog/*placeholder*",
   ],
   changefreq: "weekly",
   priority: 0.7,
   sitemapBaseFileName: "sitemap",
   // Add dynamic priority based on page type
   transform: async (config, path) => {
+    // CRITICAL: Exclude paths with forbidden keywords (example, test, draft, etc.)
+    // This prevents example/test/draft content from being indexed by search engines
+    const FORBIDDEN_KEYWORDS = ['example', 'test', 'draft', 'sample', 'template', 'placeholder'];
+    const lowerPath = path.toLowerCase();
+    const hasForbiddenKeyword = FORBIDDEN_KEYWORDS.some(keyword => lowerPath.includes(keyword));
+    
+    if (hasForbiddenKeyword) {
+      // Return null to exclude this path from the sitemap
+      return null;
+    }
+
     // High priority pages
     if (path === '/' ||
       path.includes('/spine-surgery') ||

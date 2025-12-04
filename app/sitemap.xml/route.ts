@@ -31,8 +31,9 @@ export async function GET() {
     // CRITICAL FIX: Ensure the urlset opening tag is on a single line with no line breaks
     // Google Search Console requires the opening tag to be properly formatted
     // Replace any malformed opening tags with a clean single-line version
+    // Note: Using [\s\S] instead of . with 's' flag for ES2017 compatibility
     sitemapContent = sitemapContent.replace(
-      /<urlset\s+([^>]*?)\s*>/gs,
+      /<urlset\s+([^>]*?)\s*>/g,
       (match) => {
         // Extract all attributes and rebuild the tag on a single line
         const attrs = match.match(/\s+(\w+(?::\w+)?)="([^"]+)"/g) || [];
