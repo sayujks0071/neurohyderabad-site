@@ -22,6 +22,8 @@ import ReviewedBy from '@/app/_components/ReviewedBy';
 import NAP from '@/app/_components/NAP';
 import StandardCTA from '@/app/_components/StandardCTA';
 import RelatedContent from '@/app/_components/RelatedContent';
+import ArticleSummarizer from '@/app/_components/ArticleSummarizer';
+import ContentRecommendations from '@/app/_components/ContentRecommendations';
 import type { BlogPost, CTAType } from '@/src/types/blog';
 import { SITE_URL } from '@/src/lib/seo';
 
@@ -227,6 +229,11 @@ export default function BlogLayout({ post, content, className = '' }: BlogLayout
             )}
           </header>
 
+          {/* Article Summarizer */}
+          <div className="mb-6">
+            <ArticleSummarizer content={content} maxLength={200} />
+          </div>
+
           {/* Content */}
           <div className="prose max-w-none mb-8">
             <ReactMarkdown
@@ -299,6 +306,11 @@ export default function BlogLayout({ post, content, className = '' }: BlogLayout
             relatedConditions={post.relatedConditions}
             relatedTreatments={post.relatedTreatments}
           />
+
+          {/* AI-Powered Content Recommendations */}
+          <div className="mb-8">
+            <ContentRecommendations currentSlug={post.slug} limit={3} />
+          </div>
 
           {/* CTA Section */}
           <section className="mb-8 bg-blue-50 p-6 rounded-lg text-center">

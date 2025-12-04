@@ -28,6 +28,7 @@
     "hypertune:check-schema": "./scripts/check-hypertune-schema.sh"
   },
   "dependencies": {
+    "@ai-sdk/openai": "^2.0.77",
     "@flags-sdk/hypertune": "^0.3.2",
     "@google/genai": "^0.6.0",
     "@hookform/resolvers": "^3.6.0",
@@ -37,6 +38,7 @@
     "@statsig/web-analytics": "^3.25.5",
     "@vercel/edge-config": "^1.4.3",
     "@vercel/og": "^0.8.5",
+    "ai": "^5.0.106",
     "critters": "^0.0.23",
     "flags": "^4.0.2",
     "hypertune": "^2.10.1",
