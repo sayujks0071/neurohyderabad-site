@@ -70,7 +70,7 @@ export default function PhysicianSchema() {
         "url": SITE_URL,
         "image": `${SITE_URL}/images/og-default.jpg`,
         "telephone": "+919778280044",
-        "email": "neurospinehyd@drsayuj.com",
+        "email": "hellodr@drsayuj.info",
         "additionalProperty": [
           {
             "@type": "PropertyValue",
@@ -306,7 +306,7 @@ export default function PhysicianSchema() {
         "description": "Expert neurosurgeon specializing in endoscopic spine surgery and brain surgery in Hyderabad",
         "url": SITE_URL,
         "telephone": "+919778280044",
-        "email": "neurospinehyd@drsayuj.com",
+        "email": "hellodr@drsayuj.info",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Room No 317, OPD Block",

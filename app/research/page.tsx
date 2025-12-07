@@ -208,7 +208,7 @@ export default function ResearchPage() {
           <p className="mt-2 text-gray-600">
             Selected papers and manuscripts authored or co-authored by Dr.
             Sayuj Krishnan. Full-text copies are available on request for
-            academic peers via <a href="mailto:neurospinehyd@drsayuj.com" className="text-blue-600 hover:underline">neurospinehyd@drsayuj.com</a>
+            academic peers via <a href="mailto:hellodr@drsayuj.info" className="text-blue-600 hover:underline">hellodr@drsayuj.info</a>
           </p>
           <div className="mt-6 space-y-6">
             {publicationHighlights.map((publication) => (
@@ -234,7 +234,7 @@ export default function ResearchPage() {
             <h3 className="text-lg font-semibold text-blue-900 mb-2">Request Full Publications</h3>
             <p className="text-gray-700 text-sm">
               Full-text articles and manuscripts are available to academic peers, medical professionals, and researchers. 
-              Please contact us at <a href="mailto:neurospinehyd@drsayuj.com" className="text-blue-600 font-semibold hover:underline">neurospinehyd@drsayuj.com</a> with your affiliation and institutional email.
+              Please contact us at <a href="mailto:hellodr@drsayuj.info" className="text-blue-600 font-semibold hover:underline">hellodr@drsayuj.info</a> with your affiliation and institutional email.
             </p>
           </div>
         </section>
@@ -274,7 +274,7 @@ export default function ResearchPage() {
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
-              href="mailto:neurospinehyd@drsayuj.com?subject=Research%20Collaboration%20Enquiry"
+              href="mailto:hellodr@drsayuj.info?subject=Research%20Collaboration%20Enquiry"
               className="rounded-full bg-blue-600 px-5 py-2 text-sm font-semibold text-white transition hover:bg-blue-700"
             >
               Email the Research Desk

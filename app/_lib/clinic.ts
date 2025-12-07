@@ -3,7 +3,7 @@ export const CLINIC = {
   opdrm: 'Room 317, OPD Block',
   phone: '+919778280044',
   phoneHuman: '+91 9778280044',
-  email: 'neurospinehyd@drsayuj.com',
+  email: 'hellodr@drsayuj.info',
   addr: 'Yashoda Hospital, Malakpet, Hyderabad, Telangana 500036',
   street: 'Yashoda Hospital, Room 317, OPD Block',
   locality: 'Malakpet',

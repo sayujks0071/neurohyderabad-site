@@ -28,7 +28,7 @@ export default function LBNagarLocationPage() {
             <p><strong>Yashoda Hospital, Malakpet</strong></p>
             <p>Room No 317, OPD Block, Nalgonda X Roads, Malakpet, Hyderabad 500036</p>
             <p><strong>Phone:</strong> <a href="tel:+919778280044" className="text-blue-600 hover:underline">+91-9778280044</a></p>
-            <p><strong>Email:</strong> <a href="mailto:neurospinehyd@drsayuj.com" className="text-blue-600 hover:underline">neurospinehyd@drsayuj.com</a></p>
+            <p><strong>Email:</strong> <a href="mailto:hellodr@drsayuj.info" className="text-blue-600 hover:underline">hellodr@drsayuj.info</a></p>
             <p><strong>From LB Nagar:</strong> ~4 km, 10-15 minutes</p>
           </div>
         </section>
@@ -93,7 +93,7 @@ export default function LBNagarLocationPage() {
               "name": "LB Nagar, Hyderabad"
             },
             "telephone": "+919778280044",
-            "email": "neurospinehyd@drsayuj.com"
+            "email": "hellodr@drsayuj.info"
           })
         }}
       />

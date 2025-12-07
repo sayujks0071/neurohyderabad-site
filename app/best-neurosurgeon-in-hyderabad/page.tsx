@@ -403,7 +403,7 @@ export default function BestNeurosurgeonPage() {
                   Share Imaging & Symptoms
                 </h3>
                 <p className="text-gray-700">
-                  Upload your MRI/CT and a short symptom summary to neurospinehyd@drsayuj.com or WhatsApp. 
+                  Upload your MRI/CT and a short symptom summary to hellodr@drsayuj.info or WhatsApp. 
                   This helps confirm if an endoscopic or conservative path is safest.
                 </p>
               </div>
@@ -658,7 +658,7 @@ export default function BestNeurosurgeonPage() {
                     "position": 1,
                     "name": "Share imaging & symptoms",
                     "url": `${SITE_URL}/best-neurosurgeon-in-hyderabad/#step-share-imaging`,
-                    "text": "Upload MRI/CT and a short symptom summary to neurospinehyd@drsayuj.com or WhatsApp to confirm eligibility for an endoscopic or conservative path."
+                    "text": "Upload MRI/CT and a short symptom summary to hellodr@drsayuj.info or WhatsApp to confirm eligibility for an endoscopic or conservative path."
                   },
                   {
                     "@type": "HowToStep",

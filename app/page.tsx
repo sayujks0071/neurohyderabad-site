@@ -704,7 +704,7 @@ export default function Home() {
                   <h3 className="font-semibold text-gray-800 mb-2">Contact Information</h3>
                   <p className="text-gray-600">
                     <strong>Phone:</strong> +91 9778280044<br />
-                    <strong>Email:</strong> neurospinehyd@drsayuj.com
+                    <strong>Email:</strong> hellodr@drsayuj.info
                   </p>
                 </div>
               </div>
@@ -822,8 +822,8 @@ export default function Home() {
                   </div>
                   <div>
                     <h4 className="font-semibold text-gray-800 mb-2">Email</h4>
-                    <a href="mailto:neurospinehyd@drsayuj.com" className="text-blue-600 hover:underline">
-                      neurospinehyd@drsayuj.com
+                    <a href="mailto:hellodr@drsayuj.info" className="text-blue-600 hover:underline">
+                      hellodr@drsayuj.info
                     </a>
                   </div>
                   <div>

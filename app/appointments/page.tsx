@@ -96,7 +96,7 @@ export default function AppointmentsPage() {
                 </div>
                 <div>
                   <dt className="font-semibold text-blue-700">Email</dt>
-                  <dd><a href="mailto:neurospinehyd@drsayuj.com" className="underline">neurospinehyd@drsayuj.com</a></dd>
+                  <dd><a href="mailto:hellodr@drsayuj.info" className="underline">hellodr@drsayuj.info</a></dd>
                 </div>
                 <div>
                   <dt className="font-semibold text-blue-700">Location</dt>

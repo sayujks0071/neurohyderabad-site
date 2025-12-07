@@ -38,7 +38,7 @@ export default function SciaticaTreatmentPage() {
           <p className="text-center">
             <strong>Contact:</strong>
             <a href="tel:+919778280044" className="text-blue-600 hover:underline ml-2">+91-9778280044</a> •
-            <a href="mailto:neurospinehyd@drsayuj.com" className="text-blue-600 hover:underline ml-2">neurospinehyd@drsayuj.com</a> •
+            <a href="mailto:hellodr@drsayuj.info" className="text-blue-600 hover:underline ml-2">hellodr@drsayuj.info</a> •
             <Link href="/appointments" className="text-blue-600 hover:underline ml-2">Appointments</Link>
           </p>
           <div className="mt-4 text-center">

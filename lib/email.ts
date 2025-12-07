@@ -4,9 +4,9 @@ import { Resend } from 'resend';
 const resend = new Resend(process.env.RESEND_API_KEY || 're_YJVHwSAs_PxKJHrCFidkmuFAkvNuQL1by');
 
 // Email configuration
-const FROM_EMAIL = 'Dr. Sayuj Krishnan <noreply@drsayuj.info>';
-const TO_EMAIL = 'dr.sayujkrishnan@gmail.com';
-const ADMIN_EMAIL = 'neurospinehyd@drsayuj.com';
+const FROM_EMAIL = 'Dr. Sayuj Krishnan <hellodr@drsayuj.info>';
+const TO_EMAIL = 'hellodr@drsayuj.info';
+const ADMIN_EMAIL = 'hellodr@drsayuj.info';
 
 // Email templates
 export const emailTemplates = {
@@ -128,7 +128,7 @@ export const emailTemplates = {
         <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0; color: #64748b; font-size: 14px; text-align: center;">
           <p>Dr. Sayuj Krishnan - Neurosurgeon</p>
           <p>Yashoda Hospital, Malakpet, Hyderabad</p>
-          <p>Phone: +91 9778280044 | Email: neurospinehyd@drsayuj.com</p>
+          <p>Phone: +91 9778280044 | Email: hellodr@drsayuj.info</p>
           <p><a href="https://www.drsayuj.info">www.drsayuj.info</a></p>
         </div>
       </div>
@@ -167,7 +167,7 @@ export const emailTemplates = {
         <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0; color: #64748b; font-size: 14px; text-align: center;">
           <p>Dr. Sayuj Krishnan - Neurosurgeon</p>
           <p>Yashoda Hospital, Malakpet, Hyderabad</p>
-          <p>Phone: +91 9778280044 | Email: neurospinehyd@drsayuj.com</p>
+          <p>Phone: +91 9778280044 | Email: hellodr@drsayuj.info</p>
           <p><a href="https://www.drsayuj.info">www.drsayuj.info</a></p>
           <p style="margin-top: 20px; font-size: 12px;">
             <a href="https://www.drsayuj.info/newsletter/unsubscribe?email=${encodeURIComponent(data.email)}">Unsubscribe</a>
@@ -263,7 +263,7 @@ export const emailTemplates = {
           }
 
           <div style="text-align: center; color: #475569; font-size: 14px;">
-            <p style="margin: 0;">Questions? Call +91 9778280044 or email neurospinehyd@drsayuj.com</p>
+            <p style="margin: 0;">Questions? Call +91 9778280044 or email hellodr@drsayuj.info</p>
             <p style="margin: 8px 0 0;">Yashoda Hospital, Malakpet, Hyderabad</p>
           </div>
         </div>

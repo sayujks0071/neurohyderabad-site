@@ -28,7 +28,7 @@ export default function SeoDoctorJsonLd() {
       addressCountry: 'IN',
     },
     telephone: '+91-9778280044',
-    email: 'neurospinehyd@drsayuj.com',
+    email: 'hellodr@drsayuj.info',
     url: 'https://www.drsayuj.info/',
     image: 'https://www.drsayuj.info/images/og-default.jpg',
     priceRange: '₹₹₹',
@@ -170,7 +170,7 @@ export default function SeoDoctorJsonLd() {
       longitude: 78.5147,
     },
     telephone: '+91-9778280044',
-    email: 'neurospinehyd@drsayuj.com',
+    email: 'hellodr@drsayuj.info',
     openingHoursSpecification: [
       {
         '@type': 'OpeningHoursSpecification',

@@ -245,7 +245,7 @@ Insurance: ${bookingData.insurance || 'Not specified'}
 
 This booking was created through our AI chat assistant.`;
 
-      const mailtoHref = `mailto:neurospinehyd@drsayuj.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      const mailtoHref = `mailto:hellodr@drsayuj.info?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
       window.location.href = mailtoHref;
 
     } catch (error) {

@@ -138,6 +138,7 @@ export default function ClientAnalytics() {
           <WebVitals />
           <StatsigAnalytics />
           <GoogleAnalytics />
+          <GoogleAds />
           <FloatingWhatsApp />
         </>
       )}

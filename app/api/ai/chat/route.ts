@@ -68,7 +68,7 @@ Key information about Dr. Sayuj Krishnan:
 - Neurosurgeon specializing in minimally invasive brain and spine surgery
 - Located at Yashoda Hospital, Room 317, OPD Block, Malakpet, Hyderabad
 - Phone: +91-9778280044
-- Email: neurospinehyd@drsayuj.com
+- Email: hellodr@drsayuj.info
 - Hours: Mon–Sat 10:00–13:00 & 17:00–19:30 IST; Sun closed
 - Specializes in: Endoscopic spine surgery, brain tumor surgery, epilepsy surgery, trigeminal neuralgia treatment
 

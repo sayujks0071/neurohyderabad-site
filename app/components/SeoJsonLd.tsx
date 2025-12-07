@@ -23,7 +23,7 @@ export function OrgJsonLd() {
       addressCountry: 'IN'
     },
     telephone: '+91-9778280044',
-    email: 'neurospinehyd@drsayuj.com'
+    email: 'hellodr@drsayuj.info'
   }
   return <Script id="org-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
 }
@@ -47,7 +47,7 @@ export function PhysicianJsonLd() {
     },
     areaServed: 'Hyderabad',
     telephone: '+91-9778280044',
-    email: 'neurospinehyd@drsayuj.com',
+    email: 'hellodr@drsayuj.info',
     credential: 'MBBS, DNB Neurosurgery (Direct 6 years)',
     affiliation: {
       '@type': 'Organization',

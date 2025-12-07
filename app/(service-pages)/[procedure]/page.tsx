@@ -614,7 +614,7 @@ const CTA_LINKS = [
     variant: 'secondary' as const,
   },
   {
-    href: 'mailto:neurospinehyd@drsayuj.com',
+    href: 'mailto:hellodr@drsayuj.info',
     label: 'Email Care Team',
     variant: 'outline' as const,
   },

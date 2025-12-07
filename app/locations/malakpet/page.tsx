@@ -30,7 +30,7 @@ export default function MalakpetLocationPage() {
           <div className="space-y-2 text-gray-700">
             <p><strong>Address:</strong> Room No 317, OPD Block, Yashoda Hospital, Nalgonda X Roads, Malakpet, Hyderabad 500036</p>
             <p><strong>Phone:</strong> <a href="tel:+919778280044" className="text-blue-600 hover:underline">+91-9778280044</a></p>
-            <p><strong>Email:</strong> <a href="mailto:neurospinehyd@drsayuj.com" className="text-blue-600 hover:underline">neurospinehyd@drsayuj.com</a></p>
+            <p><strong>Email:</strong> <a href="mailto:hellodr@drsayuj.info" className="text-blue-600 hover:underline">hellodr@drsayuj.info</a></p>
             <p><strong>Hours:</strong> Mon-Fri: 9 AM - 5 PM, Sat: 9 AM - 1 PM</p>
           </div>
         </section>
@@ -88,7 +88,7 @@ export default function MalakpetLocationPage() {
               "addressCountry": "IN"
             },
             "telephone": "+919778280044",
-            "email": "neurospinehyd@drsayuj.com",
+            "email": "hellodr@drsayuj.info",
             "medicalSpecialty": "Neurosurgery",
             "availableService": [
               {"@type": "MedicalProcedure", "name": "Endoscopic Spine Surgery"},

@@ -29,11 +29,11 @@ export default function Footer() {
                 </a>{" "}
                 ·{" "}
                 <a
-                  href="mailto:neurospinehyd@drsayuj.com"
+                  href="mailto:hellodr@drsayuj.info"
                   className="text-blue-200 hover:text-blue-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
-                  aria-label="Email clinic at neurospinehyd@drsayuj.com"
+                  aria-label="Email clinic at hellodr@drsayuj.info"
                 >
-                  neurospinehyd@drsayuj.com
+                  hellodr@drsayuj.info
                 </a>
               </p>
               <div className="flex flex-wrap gap-3">

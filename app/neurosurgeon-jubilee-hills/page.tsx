@@ -52,7 +52,7 @@ export default function JubileeHillsNeurosurgeonPage() {
     description: "Full endoscopic spine surgery and brain surgery services for Jubilee Hills residents at Yashoda Hospital Malakpet",
     url: "https://www.drsayuj.info/neurosurgeon-jubilee-hills",
     telephone: "+91-9778280044",
-    email: "neurospinehyd@drsayuj.com",
+    email: "hellodr@drsayuj.info",
     address: {
       "@type": "PostalAddress",
       streetAddress: "Room 317, OPD Block, Yashoda Hospital, Malakpet",

@@ -12,7 +12,7 @@ export interface EmailTemplate {
 }
 
 export class EmailService {
-  private static fromEmail = 'Dr. Sayuj Krishnan <neurospinehyd@drsayuj.com>';
+  private static fromEmail = 'Dr. Sayuj Krishnan <hellodr@drsayuj.info>';
 
   // Send welcome email to new patients
   static async sendWelcomeEmail(patientEmail: string, patientName: string, source: string) {
@@ -36,7 +36,7 @@ Emergency Contact: +91-9778280044
 
 Contact Information:
 Phone: +91-9778280044
-Email: neurospinehyd@drsayuj.com
+Email: hellodr@drsayuj.info
 Location: Yashoda Hospital, Malakpet, Hyderabad
 
 © 2025 Dr. Sayuj Krishnan. All rights reserved.`,
@@ -79,7 +79,7 @@ Location: Yashoda Hospital, Malakpet, Hyderabad
           <div style="background: #1f2937; color: white; padding: 20px; text-align: center;">
             <h3 style="margin-top: 0;">Contact Information</h3>
             <p><strong>Phone:</strong> +91-9778280044</p>
-            <p><strong>Email:</strong> neurospinehyd@drsayuj.com</p>
+            <p><strong>Email:</strong> hellodr@drsayuj.info</p>
             <p><strong>Location:</strong> Yashoda Hospital, Malakpet, Hyderabad</p>
             <p style="margin-bottom: 0; font-size: 14px; color: #9ca3af;">
               © 2025 Dr. Sayuj Krishnan. All rights reserved.
@@ -340,7 +340,7 @@ Emergency Contact: +91-9778280044
     severity: string
   ) {
     const emailData: EmailTemplate = {
-      to: 'neurospinehyd@drsayuj.com',
+      to: 'hellodr@drsayuj.info',
       from: this.fromEmail,
       subject: `🚨 EMERGENCY ALERT: ${emergencyType} - ${severity.toUpperCase()}`,
       text: `EMERGENCY ALERT - Dr. Sayuj Krishnan

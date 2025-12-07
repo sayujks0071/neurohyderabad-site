@@ -10,7 +10,7 @@ export default function MedicalClinicSchema() {
     "url": SITE_URL,
     "image": `${SITE_URL}/images/og-default.jpg`,
     "telephone": "+919778280044",
-    "email": "neurospinehyd@drsayuj.com",
+    "email": "hellodr@drsayuj.info",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Room No 317, OPD Block, Yashoda Hospital",

@@ -48,7 +48,7 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
       subject,
       body: `Page: ${pageSlug}\nName: ${formState.name}\nPhone: ${formState.phone}\nEmail: ${formState.email}\nCondition: ${formState.condition}\nMessage: ${formState.message}`,
     });
-    return `mailto:neurospinehyd@drsayuj.com?${params.toString()}`;
+    return `mailto:hellodr@drsayuj.info?${params.toString()}`;
   }, [formState, pageSlug, subject]);
 
   const handleChange = (field: keyof FormState) => (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

@@ -61,7 +61,7 @@ export default function EmergencyRehabilitationStructuredData() {
         "addressCountry": "IN"
       },
       "telephone": "+91-9778280044",
-      "email": "neurospinehyd@drsayuj.com",
+      "email": "hellodr@drsayuj.info",
       "url": "https://www.drsayuj.info",
       "openingHours": "24/7",
       "serviceArea": {

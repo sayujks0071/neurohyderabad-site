@@ -300,8 +300,8 @@ export default function ContentIntegrityPage() {
               <div className="space-y-2">
                 <p className="text-gray-700">
                   <strong>Email:</strong>{" "}
-                  <a href="mailto:neurospinehyd@drsayuj.com" className="text-blue-600 hover:underline">
-                    neurospinehyd@drsayuj.com
+                  <a href="mailto:hellodr@drsayuj.info" className="text-blue-600 hover:underline">
+                    hellodr@drsayuj.info
                   </a>
                 </p>
                 <p className="text-gray-700">
