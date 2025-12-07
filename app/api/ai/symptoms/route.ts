@@ -1,6 +1,6 @@
-import { openai } from '@ai-sdk/openai';
 import { generateText } from 'ai';
 import { NextRequest, NextResponse } from 'next/server';
+import { getAIClient, getGatewayModel, isAIGatewayConfigured } from '@/src/lib/ai/gateway';
 
 /**
  * Smart Symptom Analyzer API using Vercel AI SDK
@@ -19,16 +19,22 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (!process.env.OPENAI_API_KEY) {
+    const hasAIConfig = isAIGatewayConfigured() || process.env.OPENAI_API_KEY;
+    if (!hasAIConfig) {
       return NextResponse.json(
-        { error: 'OpenAI API key not configured' },
+        { error: 'AI Gateway API key or OpenAI API key not configured' },
         { status: 500 }
       );
     }
 
+    const aiClient = getAIClient();
+    const modelName = isAIGatewayConfigured() 
+      ? getGatewayModel('gpt-4o-mini')
+      : 'gpt-4o-mini';
+
     // Use AI SDK to analyze symptoms
     const { text } = await generateText({
-      model: openai('gpt-4o-mini'),
+      model: aiClient(modelName),
       prompt: `You are a medical assistant helping to triage symptoms for a neurosurgery practice. Analyze the following symptoms and provide guidance.
 
 Patient Information:

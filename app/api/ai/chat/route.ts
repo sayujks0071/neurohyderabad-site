@@ -1,6 +1,6 @@
+import { openai } from '@ai-sdk/openai';
 import { streamText } from 'ai';
 import { NextRequest } from 'next/server';
-import { getAIClient, getGatewayModel, isAIGatewayConfigured } from '@/src/lib/ai/gateway';
 
 /**
  * Streaming Chat API using Vercel AI SDK
@@ -17,17 +17,13 @@ export async function POST(request: NextRequest) {
       return new Response('Message is required', { status: 400 });
     }
 
-    // Check if AI Gateway or OpenAI API key is configured
-    const hasAIConfig = isAIGatewayConfigured() || process.env.OPENAI_API_KEY;
-    if (!hasAIConfig) {
+    // Check if OpenAI API key is configured
+    if (!process.env.OPENAI_API_KEY) {
       return new Response(
-        JSON.stringify({ error: 'AI Gateway API key or OpenAI API key not configured' }),
+        JSON.stringify({ error: 'OpenAI API key not configured' }),
         { status: 500, headers: { 'Content-Type': 'application/json' } }
       );
     }
-
-    // Get AI client (Gateway or direct)
-    const aiClient = getAIClient();
 
     // Get relevant context from Gemini File API (optional enhancement)
     let geminiContext = '';
@@ -107,13 +103,9 @@ Always be professional, empathetic, and prioritize patient safety. If you're uns
       { role: 'user' as const, content: message }
     ];
 
-    // Use AI SDK's streamText with AI Gateway or direct provider
-    const modelName = isAIGatewayConfigured() 
-      ? getGatewayModel('gpt-4o-mini')
-      : 'gpt-4o-mini';
-    
+    // Use AI SDK's streamText with direct OpenAI
     const result = streamText({
-      model: aiClient(modelName),
+      model: openai('gpt-4o-mini'),
       messages,
       temperature: 0.7,
     });

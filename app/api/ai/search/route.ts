@@ -1,7 +1,7 @@
-import { openai } from '@ai-sdk/openai';
 import { generateText } from 'ai';
 import { NextRequest, NextResponse } from 'next/server';
 import { getAllBlogPosts } from '@/src/lib/blog';
+import { getAIClient, getGatewayModel, isAIGatewayConfigured } from '@/src/lib/ai/gateway';
 
 /**
  * AI-Powered Search API using Vercel AI SDK
@@ -20,12 +20,18 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (!process.env.OPENAI_API_KEY) {
+    const hasAIConfig = isAIGatewayConfigured() || process.env.OPENAI_API_KEY;
+    if (!hasAIConfig) {
       return NextResponse.json(
-        { error: 'OpenAI API key not configured' },
+        { error: 'AI Gateway API key or OpenAI API key not configured' },
         { status: 500 }
       );
     }
+
+    const aiClient = getAIClient();
+    const modelName = isAIGatewayConfigured() 
+      ? getGatewayModel('gpt-4o-mini')
+      : 'gpt-4o-mini';
 
     // Get all blog posts
     const allPosts = await getAllBlogPosts();
@@ -42,7 +48,7 @@ export async function POST(request: NextRequest) {
 
     // Use AI SDK for semantic search
     const { text } = await generateText({
-      model: openai('gpt-4o-mini'),
+      model: aiClient(modelName),
       prompt: `Given the user's search query, find the most relevant blog posts from the list below. Consider semantic meaning, not just keyword matching.
 
 User Query: "${query}"
