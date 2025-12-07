@@ -5,7 +5,7 @@
  * and recommend appropriate next steps
  */
 
-import { generateObject } from 'ai';
+import { generateObject, jsonSchema } from 'ai';
 import { getAIClient, getGatewayModel, isAIGatewayConfigured } from './gateway';
 
 export interface TriageRequest {
@@ -83,7 +83,7 @@ export async function analyzeTriage(request: TriageRequest): Promise<TriageResul
     
     const { object } = await generateObject({
       model: aiClient(modelName),
-      schema: {
+      schema: jsonSchema({
         type: 'object',
         properties: {
           urgencyLevel: {
@@ -126,7 +126,7 @@ export async function analyzeTriage(request: TriageRequest): Promise<TriageResul
         },
         required: ['urgencyLevel', 'urgencyScore', 'recommendedAction', 'timeToSeekCare', 'riskFactors', 'reasoning'],
         additionalProperties: false
-      },
+      }),
       prompt: `You are a medical triage AI assistant for a neurosurgery practice. Analyze the following patient information and provide a triage assessment.
 
 Patient Information:
