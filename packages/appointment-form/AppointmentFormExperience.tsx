@@ -8,6 +8,7 @@ import Confirmation from "./Confirmation";
 import Faq from "./Faq";
 import LoadingOverlay from "./LoadingOverlay";
 import MapSection from "./MapSection";
+import { trackConversionOnly } from "@/src/lib/google-ads-conversion";
 
 type ViewState = "form" | "confirmation";
 
@@ -46,6 +47,9 @@ function AppointmentFormContent({
       const payload = await response.json();
       setBookingData(payload.booking);
       setConfirmationMessage(payload.confirmationMessage);
+
+      // Track Google Ads conversion for successful appointment booking
+      trackConversionOnly();
 
       if (payload.emailResult?.success) {
         addToast("Confirmation email simulated successfully.", "success");
