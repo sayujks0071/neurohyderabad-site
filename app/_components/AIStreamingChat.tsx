@@ -109,22 +109,16 @@ export default function AIStreamingChat({
         if (done) break;
 
         const chunk = decoder.decode(value, { stream: true });
-        const lines = chunk.split('\n');
+        fullContent += chunk;
         
-        for (const line of lines) {
-          if (line.startsWith('0:')) {
-            const text = line.slice(2);
-            fullContent += text;
-            setMessages(prev => {
-              const updated = [...prev];
-              const lastMsg = updated[updated.length - 1];
-              if (lastMsg && lastMsg.role === 'assistant') {
-                lastMsg.content = fullContent;
-              }
-              return updated;
-            });
+        setMessages(prev => {
+          const updated = [...prev];
+          const lastMsg = updated[updated.length - 1];
+          if (lastMsg && lastMsg.role === 'assistant') {
+            lastMsg.content = fullContent;
           }
-        }
+          return updated;
+        });
       }
 
       // Check for emergency keywords
