@@ -8,8 +8,8 @@
  * - Patient history
  */
 
-import { openai } from '@ai-sdk/openai';
 import { generateText } from 'ai';
+import { getAIClient, getGatewayModel, isAIGatewayConfigured } from './gateway';
 
 export interface FollowUpRequest {
   procedureType: string;
@@ -60,8 +60,13 @@ export async function generateFollowUpCare(
   }
 
   try {
+    const aiClient = getAIClient();
+    const modelName = isAIGatewayConfigured() 
+      ? getGatewayModel('gpt-4o-mini')
+      : 'gpt-4o-mini';
+    
     const { text } = await generateText({
-      model: openai('gpt-4o-mini'),
+      model: aiClient(modelName),
       prompt: `You are an AI assistant helping with post-operative care for neurosurgery patients. Generate personalized follow-up care recommendations.
 
 Patient Information:

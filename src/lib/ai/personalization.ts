@@ -10,8 +10,8 @@
  * - Previous interactions
  */
 
-import { openai } from '@ai-sdk/openai';
 import { generateText } from 'ai';
+import { getAIClient, getGatewayModel, isAIGatewayConfigured } from './gateway';
 
 export interface PersonalizationContext {
   condition?: string;
@@ -56,8 +56,13 @@ export async function personalizeContent(
   }
 
   try {
+    const aiClient = getAIClient();
+    const modelName = isAIGatewayConfigured() 
+      ? getGatewayModel('gpt-4o-mini')
+      : 'gpt-4o-mini';
+    
     const { text } = await generateText({
-      model: openai('gpt-4o-mini'),
+      model: aiClient(modelName),
       prompt: `You are an AI content personalization engine for a neurosurgery practice website (www.drsayuj.info).
 
 User Context:

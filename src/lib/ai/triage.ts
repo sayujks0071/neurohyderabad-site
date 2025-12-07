@@ -5,8 +5,8 @@
  * and recommend appropriate next steps
  */
 
-import { openai } from '@ai-sdk/openai';
 import { generateObject } from 'ai';
+import { getAIClient, getGatewayModel, isAIGatewayConfigured } from './gateway';
 
 export interface TriageRequest {
   symptoms: string[];
@@ -76,8 +76,13 @@ export async function analyzeTriage(request: TriageRequest): Promise<TriageResul
   }
 
   try {
+    const aiClient = getAIClient();
+    const modelName = isAIGatewayConfigured() 
+      ? getGatewayModel('gpt-4o-mini')
+      : 'gpt-4o-mini';
+    
     const { object } = await generateObject({
-      model: openai('gpt-4o-mini'),
+      model: aiClient(modelName),
       schema: {
         type: 'object',
         properties: {

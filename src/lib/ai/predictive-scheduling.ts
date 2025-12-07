@@ -9,8 +9,8 @@
  * - Seasonal patterns
  */
 
-import { openai } from '@ai-sdk/openai';
 import { generateText } from 'ai';
+import { getAIClient, getGatewayModel, isAIGatewayConfigured } from './gateway';
 
 export interface SchedulingRequest {
   preferredDates: string[];
@@ -52,8 +52,13 @@ export async function predictOptimalSlots(
   }
 
   try {
+    const aiClient = getAIClient();
+    const modelName = isAIGatewayConfigured() 
+      ? getGatewayModel('gpt-4o-mini')
+      : 'gpt-4o-mini';
+    
     const { text } = await generateText({
-      model: openai('gpt-4o-mini'),
+      model: aiClient(modelName),
       prompt: `You are an AI scheduling assistant for a neurosurgery practice. Predict optimal appointment slots based on the following information:
 
 Patient Request:
