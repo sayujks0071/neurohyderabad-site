@@ -92,7 +92,15 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
       logAppointmentBooking('appointment_form', service || 'general');
       logContactFormSubmit('appointment_request', true);
       
-      window.location.href = mailtoHref;
+      // Track Google Ads conversion
+      if (typeof window !== 'undefined' && window.gtag_report_conversion) {
+        // Call conversion tracking, which will handle navigation
+        window.gtag_report_conversion(mailtoHref);
+      } else {
+        // Fallback: navigate directly if conversion function not available
+        window.location.href = mailtoHref;
+      }
+      
       setStatus('success');
       setFormState(initialState);
     } catch (error) {

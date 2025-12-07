@@ -2,6 +2,15 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Merriweather } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
+
+// Declare global function for Google Ads conversion tracking
+declare global {
+  interface Window {
+    gtag_report_conversion?: (url?: string) => boolean;
+    dataLayer?: any[];
+    gtag?: (...args: any[]) => void;
+  }
+}
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import WebsiteSchema from "./components/schemas/WebsiteSchema";
@@ -159,6 +168,25 @@ export default function RootLayout({
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'AW-17680191922');
+                `,
+              }}
+            />
+            {/* Event snippet for Contact conversion page */}
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
+  function gtag_report_conversion(url) {
+    var callback = function () {
+      if (typeof(url) != 'undefined') {
+        window.location = url;
+      }
+    };
+    gtag('event', 'conversion', {
+      'send_to': 'AW-17680191922/zBshCJ3e2M0bELKjye5B',
+      'event_callback': callback
+    });
+    return false;
+  }
                 `,
               }}
             />
