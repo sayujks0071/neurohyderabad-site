@@ -74,43 +74,6 @@ const ongoingInitiatives = [
   },
 ];
 
-const publicationHighlights = [
-  {
-    title: "Endoscopic ULBD for Lumbar Spinal Stenosis: Technique Refinements and 12-Month Outcomes",
-    journal: "Journal of Spine Surgery",
-    year: "2024",
-    type: "Original Research",
-    summary: "Prospective study evaluating the clinical outcomes of endoscopic unilateral laminotomy for bilateral decompression (ULBD) in patients with lumbar spinal stenosis, demonstrating excellent 12-month functional outcomes with minimal complications."
-  },
-  {
-    title: "Anterior Temporal Lobectomy in Resource-Constrained Settings: Integrating PET and Stereo-EEG",
-    journal: "Neurosurgery International",
-    year: "2024",
-    type: "Case Series",
-    summary: "Multi-institutional case series demonstrating the feasibility and safety of anterior temporal lobectomy using combined PET and stereo-EEG guidance in resource-constrained healthcare settings."
-  },
-  {
-    title: "Comparative Analysis of Minimally Invasive Cervical Procedures Versus Open Fusion for Radiculopathy",
-    journal: "Asian Spine Journal",
-    year: "2023",
-    type: "Comparative Study",
-    summary: "Retrospective comparison of clinical and radiographic outcomes between minimally invasive and open cervical fusion procedures for radiculopathy, demonstrating comparable outcomes with reduced perioperative morbidity in the minimally invasive group."
-  },
-  {
-    title: "Full Endoscopic Spine Surgery for Geriatric Patients: Safety and Efficacy",
-    journal: "Indian Journal of Neurosurgery",
-    year: "2023",
-    type: "Retrospective Study",
-    summary: "Analysis of safety and efficacy outcomes in elderly patients undergoing full endoscopic spine surgery, showing comparable outcomes to younger cohorts with reduced perioperative morbidity."
-  },
-  {
-    title: "Awake Craniotomy for Eloquent Area Tumors: Protocol Development and Patient Outcomes",
-    journal: "World Neurosurgery",
-    year: "2023",
-    type: "Technical Note",
-    summary: "Description of a standardized protocol for awake craniotomy procedures including patient selection, anesthetic management, and intraoperative mapping techniques."
-  },
-];
 
 export default function ResearchPage() {
   return (
@@ -201,43 +164,6 @@ export default function ResearchPage() {
           </div>
         </section>
 
-        <section>
-          <h2 className="text-2xl font-semibold text-gray-900">
-            Featured Publications & Manuscripts
-          </h2>
-          <p className="mt-2 text-gray-600">
-            Selected papers and manuscripts authored or co-authored by Dr.
-            Sayuj Krishnan. Full-text copies are available on request for
-            academic peers via <a href="mailto:hellodr@drsayuj.info" className="text-blue-600 hover:underline">hellodr@drsayuj.info</a>
-          </p>
-          <div className="mt-6 space-y-6">
-            {publicationHighlights.map((publication) => (
-              <article key={publication.title} className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm hover:shadow-md transition">
-                <div className="flex items-start justify-between mb-3">
-                  <h3 className="text-lg font-semibold text-blue-800 flex-1">
-                    {publication.title}
-                  </h3>
-                  <span className="ml-4 inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 flex-shrink-0">
-                    {publication.type}
-                  </span>
-                </div>
-                <p className="text-sm text-gray-600 mb-2">
-                  <strong>{publication.journal}</strong> • {publication.year}
-                </p>
-                <p className="text-sm text-gray-700 leading-relaxed">
-                  {publication.summary}
-                </p>
-              </article>
-            ))}
-          </div>
-          <div className="mt-8 p-6 bg-blue-50 rounded-2xl border border-blue-200">
-            <h3 className="text-lg font-semibold text-blue-900 mb-2">Request Full Publications</h3>
-            <p className="text-gray-700 text-sm">
-              Full-text articles and manuscripts are available to academic peers, medical professionals, and researchers. 
-              Please contact us at <a href="mailto:hellodr@drsayuj.info" className="text-blue-600 font-semibold hover:underline">hellodr@drsayuj.info</a> with your affiliation and institutional email.
-            </p>
-          </div>
-        </section>
 
         <section>
           <h2 className="text-2xl font-semibold text-gray-900">
