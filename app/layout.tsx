@@ -4,11 +4,11 @@ import Script from "next/script";
 import "./globals.css";
 
 // Declare global function for Google Ads conversion tracking
+// Note: gtag is already declared in src/components/GoogleAnalytics.tsx
 declare global {
   interface Window {
     gtag_report_conversion?: (url?: string) => boolean;
     dataLayer?: any[];
-    gtag?: (...args: any[]) => void;
   }
 }
 import Header from "./components/Header";
