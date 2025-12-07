@@ -65,3 +65,4 @@ budgets.json
 public/sitemap*.xml
 public/robots.txt
 .vercel
+.env*.local
