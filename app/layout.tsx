@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Merriweather } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -242,6 +243,24 @@ export default function RootLayout({
             <meta name="apple-mobile-web-app-status-bar-style" content="default" />
       </head>
       <body className={`${inter.variable} ${merriweather.variable} antialiased`}>
+        {/* Google Ads conversion tag - backup using Next.js Script for reliability */}
+        <Script
+          id="google-ads-conversion"
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=AW-17680191922"
+        />
+        <Script
+          id="google-ads-config"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'AW-17680191922');
+            `,
+          }}
+        />
         <ClientOnlyWrapper>
           <ClientAnalytics />
           <PrivacyFriendlyAnalytics />
