@@ -13,6 +13,20 @@ export const metadata: Metadata = {
     description: "Expert neurosurgeon serving Jubilee Hills with endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures. 9+ years experience.",
     url: "https://www.drsayuj.info/neurosurgeon-jubilee-hills",
     type: "website",
+    images: [
+      {
+        url: "https://www.drsayuj.info/images/og-default.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Dr Sayuj Krishnan - Neurosurgeon for Jubilee Hills patients",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Best Neurosurgeon in Jubilee Hills, Hyderabad | Dr. Sayuj Krishnan",
+    description: "Expert neurosurgeon serving Jubilee Hills with endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures.",
+    images: ["https://www.drsayuj.info/images/og-default.jpg"],
   },
 };
 
@@ -117,6 +131,17 @@ export default function JubileeHillsNeurosurgeonPage() {
               specializes in minimally invasive procedures that enable same-day discharge and rapid return to active life—
               perfect for Jubilee Hills professionals and families seeking world-class care close to home.
             </p>
+            <div className="mt-5 flex flex-wrap gap-3">
+              <Link href="/appointments" className="rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-700 shadow">
+                Book Appointment
+              </Link>
+              <Link href="https://wa.me/919778280044" className="rounded-full bg-green-500 px-6 py-3 text-sm font-semibold text-white hover:bg-green-600">
+                WhatsApp Booking
+              </Link>
+              <Link href="tel:+919778280044" className="rounded-full border border-blue-200 px-6 py-3 text-sm font-semibold text-blue-800 hover:bg-blue-50">
+                Call: +91 97782 80044
+              </Link>
+            </div>
             
             <div className="mt-6 rounded-lg border border-blue-200 bg-blue-50 p-6">
               <h3 className="font-semibold text-blue-800">Why Jubilee Hills Patients Choose Dr. Sayuj:</h3>
