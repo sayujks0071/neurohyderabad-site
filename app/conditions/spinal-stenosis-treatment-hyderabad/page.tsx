@@ -97,6 +97,12 @@ export default function SpinalStenosisTreatmentPage() {
             >
               Minimally Invasive Surgery
             </Link>
+            <Link 
+              href="/services/awake-spine-surgery-hyderabad"
+              className="border-2 border-green-600 text-green-700 px-8 py-3 rounded-full hover:bg-green-600 hover:text-white transition-colors"
+            >
+              Awake Spine Option
+            </Link>
           </div>
         </section>
 
