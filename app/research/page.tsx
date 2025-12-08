@@ -74,10 +74,7 @@ const ongoingInitiatives = [
   },
 ];
 
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
 export default function ResearchPage() {
   return (
     <div className="min-h-screen bg-white">
@@ -167,8 +164,6 @@ export default function ResearchPage() {
           </div>
         </section>
 
-<<<<<<< Updated upstream
-=======
         <section>
           <h2 className="text-2xl font-semibold text-gray-900">
             Research Publications
@@ -197,7 +192,6 @@ export default function ResearchPage() {
             </p>
           </div>
         </section>
->>>>>>> Stashed changes
 
         <section>
           <h2 className="text-2xl font-semibold text-gray-900">

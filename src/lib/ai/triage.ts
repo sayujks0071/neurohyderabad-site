@@ -1,8 +1,5 @@
 /**
  * AI-Powered Patient Triage System
- * 
- * Analyzes patient symptoms and inquiries to determine urgency level
- * and recommend appropriate next steps
  */
 
 import { generateObject, jsonSchema } from 'ai';
@@ -18,9 +15,9 @@ export interface TriageRequest {
 
 export interface TriageResult {
   urgencyLevel: 'emergency' | 'urgent' | 'moderate' | 'routine';
-  urgencyScore: number; // 0-100
+  urgencyScore: number;
   recommendedAction: string;
-  timeToSeekCare: string; // e.g., "immediately", "within 24 hours", "within 1 week"
+  timeToSeekCare: string;
   suggestedSpecialty?: string;
   riskFactors: string[];
   reasoning: string;
@@ -38,26 +35,17 @@ const URGENT_KEYWORDS = [
   'increasing', 'cannot move', 'difficulty walking'
 ];
 
-/**
- * Quick keyword-based triage for immediate emergency detection
- */
 export function quickTriageCheck(description: string): 'emergency' | null {
   const lowerDesc = description.toLowerCase();
-  
   for (const keyword of EMERGENCY_KEYWORDS) {
     if (lowerDesc.includes(keyword)) {
       return 'emergency';
     }
   }
-  
   return null;
 }
 
-/**
- * AI-powered comprehensive triage analysis
- */
 export async function analyzeTriage(request: TriageRequest): Promise<TriageResult> {
-  // Quick emergency check first
   const emergencyCheck = quickTriageCheck(request.description);
   if (emergencyCheck === 'emergency') {
     return {
@@ -71,127 +59,33 @@ export async function analyzeTriage(request: TriageRequest): Promise<TriageResul
   }
 
   if (!process.env.OPENAI_API_KEY) {
-    // Fallback to basic triage
     return basicTriage(request);
   }
 
   try {
     const aiClient = getAIClient();
-    const modelName = isAIGatewayConfigured() 
-      ? getGatewayModel('gpt-4o-mini')
-      : 'gpt-4o-mini';
+    const modelName = isAIGatewayConfigured() ? getGatewayModel('gpt-4o-mini') : 'gpt-4o-mini';
     
     const { object } = await generateObject({
       model: aiClient(modelName),
       schema: jsonSchema({
         type: 'object',
         properties: {
-          urgencyLevel: {
-            type: 'string',
-            enum: ['emergency', 'urgent', 'moderate', 'routine'],
-<<<<<<< Updated upstream
-            description: 'Urgency level based on symptoms and medical history'
-=======
-            description: 'Urgency level based on symptoms and medical history',
->>>>>>> Stashed changes
-          },
-          urgencyScore: {
-            type: 'number',
-            minimum: 0,
-            maximum: 100,
-<<<<<<< Updated upstream
-            description: 'Numerical urgency score (0-100)'
-          },
-          recommendedAction: {
-            type: 'string',
-            description: 'Specific recommended action for the patient'
-          },
-          timeToSeekCare: {
-            type: 'string',
-            description: 'When the patient should seek care (e.g., "immediately", "within 24 hours", "within 1 week")'
-          },
-          suggestedSpecialty: {
-            type: 'string',
-            description: 'Suggested medical specialty if different from neurosurgery'
-=======
-            description: 'Numerical urgency score (0-100)',
-          },
-          recommendedAction: {
-            type: 'string',
-            description: 'Specific recommended action for the patient',
-          },
-          timeToSeekCare: {
-            type: 'string',
-            description:
-              'When the patient should seek care (e.g., "immediately", "within 24 hours", "within 1 week")',
-          },
-          suggestedSpecialty: {
-            type: 'string',
-            description: 'Suggested medical specialty if different from neurosurgery',
->>>>>>> Stashed changes
-          },
-          riskFactors: {
-            type: 'array',
-            items: { type: 'string' },
-<<<<<<< Updated upstream
-            description: 'List of identified risk factors'
-          },
-          reasoning: {
-            type: 'string',
-            description: 'Explanation of the triage decision'
-=======
-            description: 'List of identified risk factors',
-          },
-          reasoning: {
-            type: 'string',
-            description: 'Explanation of the triage decision',
->>>>>>> Stashed changes
-          },
-          followUpQuestions: {
-            type: 'array',
-            items: { type: 'string' },
-<<<<<<< Updated upstream
-            description: 'Suggested follow-up questions to gather more information'
-          }
+          urgencyLevel: { type: 'string', enum: ['emergency', 'urgent', 'moderate', 'routine'], description: 'Urgency level' },
+          urgencyScore: { type: 'number', minimum: 0, maximum: 100, description: 'Urgency score (0-100)' },
+          recommendedAction: { type: 'string', description: 'Recommended action' },
+          timeToSeekCare: { type: 'string', description: 'Time to seek care' },
+          suggestedSpecialty: { type: 'string', description: 'Suggested specialty' },
+          riskFactors: { type: 'array', items: { type: 'string' }, description: 'Risk factors' },
+          reasoning: { type: 'string', description: 'Reasoning' },
+          followUpQuestions: { type: 'array', items: { type: 'string' }, description: 'Follow-up questions' }
         },
         required: ['urgencyLevel', 'urgencyScore', 'recommendedAction', 'timeToSeekCare', 'riskFactors', 'reasoning'],
         additionalProperties: false
-=======
-            description: 'Suggested follow-up questions to gather more information',
-          },
-        },
-        required: [
-          'urgencyLevel',
-          'urgencyScore',
-          'recommendedAction',
-          'timeToSeekCare',
-          'riskFactors',
-          'reasoning',
-        ],
-        additionalProperties: false,
->>>>>>> Stashed changes
       }),
-      prompt: `You are a medical triage AI assistant for a neurosurgery practice. Analyze the following patient information and provide a triage assessment.
-
-Patient Information:
-- Symptoms: ${request.symptoms.join(', ')}
-- Description: ${request.description}
-${request.age ? `- Age: ${request.age}` : ''}
-${request.medicalHistory ? `- Medical History: ${request.medicalHistory}` : ''}
-${request.currentMedications ? `- Current Medications: ${request.currentMedications.join(', ')}` : ''}
-
-Specialties: Neurosurgery (brain and spine), Minimally invasive procedures
-
-Guidelines:
-- EMERGENCY (90-100): Stroke symptoms, seizures, severe trauma, sudden paralysis, loss of consciousness, severe neurological deficits
-- URGENT (70-89): Progressive neurological symptoms, severe pain, new onset significant symptoms, worsening conditions
-- MODERATE (40-69): Chronic conditions with new concerns, moderate pain, follow-up needs
-- ROUTINE (0-39): General inquiries, preventive care, non-urgent consultations
-
-Always prioritize patient safety. When in doubt, recommend higher urgency level.`,
-      temperature: 0.3, // Lower temperature for more consistent medical assessments
+      prompt: `You are a medical triage AI for neurosurgery. Analyze: Symptoms: ${request.symptoms.join(', ')}, Description: ${request.description}`,
+      temperature: 0.3,
     });
-
     return object as TriageResult;
   } catch (error) {
     console.error('AI triage error:', error);
@@ -199,18 +93,12 @@ Always prioritize patient safety. When in doubt, recommend higher urgency level.
   }
 }
 
-/**
- * Basic triage fallback when AI is unavailable
- */
 function basicTriage(request: TriageRequest): TriageResult {
-  const lowerDesc = request.description.toLowerCase();
   const allText = `${request.description} ${request.symptoms.join(' ')}`.toLowerCase();
-  
   let urgencyLevel: TriageResult['urgencyLevel'] = 'routine';
   let urgencyScore = 30;
   let timeToSeekCare = 'within 1 week';
   
-  // Check for urgent keywords
   for (const keyword of URGENT_KEYWORDS) {
     if (allText.includes(keyword)) {
       urgencyLevel = 'urgent';
@@ -220,8 +108,7 @@ function basicTriage(request: TriageRequest): TriageResult {
     }
   }
   
-  // Check for moderate indicators
-  if (request.symptoms.length > 3 || allText.includes('pain') || allText.includes('discomfort')) {
+  if (request.symptoms.length > 3 || allText.includes('pain')) {
     if (urgencyLevel === 'routine') {
       urgencyLevel = 'moderate';
       urgencyScore = 50;
@@ -241,24 +128,12 @@ function basicTriage(request: TriageRequest): TriageResult {
   };
 }
 
-/**
- * Get triage color coding for UI
- */
 export function getTriageColor(urgencyLevel: TriageResult['urgencyLevel']): string {
   switch (urgencyLevel) {
-    case 'emergency':
-      return 'red';
-    case 'urgent':
-      return 'orange';
-    case 'moderate':
-      return 'yellow';
-    case 'routine':
-      return 'green';
-    default:
-      return 'gray';
+    case 'emergency': return 'red';
+    case 'urgent': return 'orange';
+    case 'moderate': return 'yellow';
+    case 'routine': return 'green';
+    default: return 'gray';
   }
 }
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
