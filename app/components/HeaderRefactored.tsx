@@ -37,6 +37,7 @@ const NAV_ITEMS: NavItem[] = [
     href: '/services',
     dropdown: [
       { label: 'Minimally Invasive Spine Surgery', href: '/services/minimally-invasive-spine-surgery' },
+      { label: 'Awake Spine Surgery', href: '/services/awake-spine-surgery-hyderabad' },
       { label: 'Endoscopic Discectomy', href: '/services/endoscopic-discectomy-hyderabad' },
       { label: 'Brain Tumor & Awake Surgery', href: '/services/brain-tumor-surgery-hyderabad' },
       { label: 'ROSA Robotic DBS & Epilepsy', href: '/services/epilepsy-surgery-hyderabad' },
@@ -359,7 +360,6 @@ export default function HeaderRefactored() {
     </>
   );
 }
-
 
 
 

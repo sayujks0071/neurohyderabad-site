@@ -53,6 +53,12 @@ export default function ServicesPage() {
       features: ['Transforaminal discectomy', 'Interlaminar decompression', 'Cervical endoscopic procedures', 'Enhanced recovery']
     },
     {
+      title: 'Awake Spine Surgery (Regional Anaesthesia)',
+      description: 'Endoscopic decompression with spinal/epidural anaesthesia for high-risk or elderly patients to avoid general anaesthesia.',
+      href: '/services/awake-spine-surgery-hyderabad/',
+      features: ['Spinal or epidural blocks', 'Conscious sedation', 'Same-day discharge', 'Ideal for cardiac/pulmonary risk patients']
+    },
+    {
       title: 'Comprehensive Spine Surgery',
       description: 'Stabilisation, deformity correction, and complex revision spine surgery programmes.',
       href: '/services/spine-surgery-hyderabad/',

@@ -154,6 +154,16 @@ const SERVICE_SOURCES: Record<string, ServiceSource[]> = {
       href: "https://www.aans.org/en/Patients/Neurosurgical-Conditions-and-Treatments",
     },
   ],
+  "awake-spine-surgery-hyderabad": [
+    {
+      label: "North American Spine Society – Perioperative Considerations for Spine Surgery",
+      href: "https://www.spine.org/",
+    },
+    {
+      label: "Journal of Spine Surgery – Awake Spine Surgery Review",
+      href: "https://jss.amegroups.org/article/view/6165/html",
+    },
+  ],
 };
 
 export function getServiceSources(slug: string): ServiceSource[] {
