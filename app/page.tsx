@@ -181,16 +181,36 @@ export default function Home() {
               <div className="grid lg:grid-cols-2 gap-12 items-center">
                 <div className="text-center lg:text-left">
                   <h1 className="home-hero__title text-4xl md:text-6xl font-bold leading-tight">
-                    Advanced Brain & Spine Care from a Pioneering Surgeon
+                    Dr. Sayuj Krishnan: German-Trained Neurosurgeon in Hyderabad
                     <span className="home-hero__subtitle block text-3xl md:text-5xl">
-                      Dr. Sayuj Krishnan — German-Trained Neurosurgeon in Hyderabad
+                      Minimally invasive spine, awake brain surgery, and ROSA DBS at Yashoda Hospital, Malakpet.
                     </span>
                   </h1>
                   <p className="home-hero__lead text-xl md:text-2xl">
-                    German-trained neurosurgeon specializing in minimally invasive spine surgery, awake brain surgery, and ROSA robotic deep brain stimulation. With over 1,000 endoscopic procedures and advanced fellowship training, Dr. Sayuj combines cutting-edge technology with compassionate care at Yashoda Hospital, Malakpet.
+                    I personally evaluate every case and perform the surgery—combining full-endoscopic spine techniques, awake mapping for complex brain tumors, and robotic guidance for DBS to deliver safer, faster recoveries.
                   </p>
-                  {/* <HeroCTA /> */}
-                  <HeroCTAButtons />
+                  <div className="mt-6 space-y-4">
+                    <ul className="grid gap-3 text-left md:grid-cols-2">
+                      <li className="flex items-start gap-3 text-lg text-blue-50">
+                        <span aria-hidden className="mt-1">✓</span>
+                        <span>9+ years, 1,000+ full endoscopic spine procedures</span>
+                      </li>
+                      <li className="flex items-start gap-3 text-lg text-blue-50">
+                        <span aria-hidden className="mt-1">✓</span>
+                        <span>80% same-day discharge; awake options for high-risk patients</span>
+                      </li>
+                      <li className="flex items-start gap-3 text-lg text-blue-50 md:col-span-2">
+                        <span aria-hidden className="mt-1">✓</span>
+                        <span>ROSA robotic DBS, neuronavigation, and endoscopic skull-base approaches for precision brain surgery</span>
+                      </li>
+                    </ul>
+                    <div className="space-y-3">
+                      <HeroCTAButtons />
+                      <p className="text-sm text-blue-50">
+                        Call/WhatsApp +91 97782 80044 • Same-day clinic slots at Yashoda Malakpet and secure tele-consults for outstation patients.
+                      </p>
+                    </div>
+                  </div>
                 </div>
                 <div className="flex justify-center">
                   <DoctorCardLazy />

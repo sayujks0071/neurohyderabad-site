@@ -71,6 +71,14 @@ export default function PhysicianSchema() {
         "image": `${SITE_URL}/images/og-default.jpg`,
         "telephone": "+919778280044",
         "email": "hellodr@drsayuj.info",
+        "identifier": [
+          {
+            "@type": "PropertyValue",
+            "propertyID": "TCMC Registration",
+            "value": "47973"
+          }
+        ],
+        "medicalLicense": "TCMC Registration 47973 (Travancore-Cochin Medical Council)",
         "additionalProperty": [
           {
             "@type": "PropertyValue",

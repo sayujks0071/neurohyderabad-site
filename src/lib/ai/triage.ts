@@ -89,12 +89,17 @@ export async function analyzeTriage(request: TriageRequest): Promise<TriageResul
           urgencyLevel: {
             type: 'string',
             enum: ['emergency', 'urgent', 'moderate', 'routine'],
+<<<<<<< Updated upstream
             description: 'Urgency level based on symptoms and medical history'
+=======
+            description: 'Urgency level based on symptoms and medical history',
+>>>>>>> Stashed changes
           },
           urgencyScore: {
             type: 'number',
             minimum: 0,
             maximum: 100,
+<<<<<<< Updated upstream
             description: 'Numerical urgency score (0-100)'
           },
           recommendedAction: {
@@ -108,24 +113,63 @@ export async function analyzeTriage(request: TriageRequest): Promise<TriageResul
           suggestedSpecialty: {
             type: 'string',
             description: 'Suggested medical specialty if different from neurosurgery'
+=======
+            description: 'Numerical urgency score (0-100)',
+          },
+          recommendedAction: {
+            type: 'string',
+            description: 'Specific recommended action for the patient',
+          },
+          timeToSeekCare: {
+            type: 'string',
+            description:
+              'When the patient should seek care (e.g., "immediately", "within 24 hours", "within 1 week")',
+          },
+          suggestedSpecialty: {
+            type: 'string',
+            description: 'Suggested medical specialty if different from neurosurgery',
+>>>>>>> Stashed changes
           },
           riskFactors: {
             type: 'array',
             items: { type: 'string' },
+<<<<<<< Updated upstream
             description: 'List of identified risk factors'
           },
           reasoning: {
             type: 'string',
             description: 'Explanation of the triage decision'
+=======
+            description: 'List of identified risk factors',
+          },
+          reasoning: {
+            type: 'string',
+            description: 'Explanation of the triage decision',
+>>>>>>> Stashed changes
           },
           followUpQuestions: {
             type: 'array',
             items: { type: 'string' },
+<<<<<<< Updated upstream
             description: 'Suggested follow-up questions to gather more information'
           }
         },
         required: ['urgencyLevel', 'urgencyScore', 'recommendedAction', 'timeToSeekCare', 'riskFactors', 'reasoning'],
         additionalProperties: false
+=======
+            description: 'Suggested follow-up questions to gather more information',
+          },
+        },
+        required: [
+          'urgencyLevel',
+          'urgencyScore',
+          'recommendedAction',
+          'timeToSeekCare',
+          'riskFactors',
+          'reasoning',
+        ],
+        additionalProperties: false,
+>>>>>>> Stashed changes
       }),
       prompt: `You are a medical triage AI assistant for a neurosurgery practice. Analyze the following patient information and provide a triage assessment.
 
@@ -214,4 +258,7 @@ export function getTriageColor(urgencyLevel: TriageResult['urgencyLevel']): stri
       return 'gray';
   }
 }
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes

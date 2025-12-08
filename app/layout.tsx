@@ -11,7 +11,7 @@ declare global {
     dataLayer?: any[];
   }
 }
-import Header from "./components/Header";
+import Header from "./components/HeaderRefactored";
 import Footer from "./components/Footer";
 import WebsiteSchema from "./components/schemas/WebsiteSchema";
 import PhysicianSchema from "./components/schemas/PhysicianSchema";

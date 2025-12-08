@@ -196,9 +196,15 @@ jobs:
           
           node aggregate-reports.js
 
+      - name: Skip AI fixes (missing OPENAI_API_KEY)
+        if: ${{ !secrets.OPENAI_API_KEY }}
+        run: |
+          echo "OPENAI_API_KEY not set; skipping AI auto-fix generation."
+          echo "# No fixes generated - missing OPENAI_API_KEY" > fixes.patch
+
       - name: Generate AI fixes
         id: ai_fix
-        if: always()
+        if: secrets.OPENAI_API_KEY != ''
         timeout-minutes: 5
         continue-on-error: true
         env:

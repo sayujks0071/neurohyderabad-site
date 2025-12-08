@@ -12,6 +12,7 @@ concurrency:
 
 jobs:
   publish-scheduled:
+    if: ${{ secrets.OPENAI_API_KEY != '' }}
     runs-on: ubuntu-latest
     permissions:
       contents: write

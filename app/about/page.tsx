@@ -132,6 +132,31 @@ export default function AboutPage() {
               </p>
             </Card>
 
+            <Card padding="lg" className="bg-white border border-green-100 mb-8 shadow-sm">
+              <h3 className="text-xl font-semibold text-green-800 mb-3">Practice timeline & where I consult</h3>
+              <ul className="space-y-2 text-gray-700">
+                <li className="flex gap-2">
+                  <span aria-hidden className="text-green-600 mt-1">•</span>
+                  <span>Previously consultant neurosurgeon at Apollo Hospitals, Kochi with advanced endoscopic exposure.</span>
+                </li>
+                <li className="flex gap-2">
+                  <span aria-hidden className="text-green-600 mt-1">•</span>
+                  <span>Now exclusively practicing in Hyderabad at Yashoda Hospital, Malakpet (Room 317, OPD block) for clinic and surgery.</span>
+                </li>
+                <li className="flex gap-2">
+                  <span aria-hidden className="text-green-600 mt-1">•</span>
+                  <span>Single contact line for all consultations: <strong>+91 97782 80044</strong> (call or WhatsApp).</span>
+                </li>
+                <li className="flex gap-2">
+                  <span aria-hidden className="text-green-600 mt-1">•</span>
+                  <span>Online profiles and maps are updated to Hyderabad to avoid confusion with older Kerala listings.</span>
+                </li>
+              </ul>
+              <p className="text-sm text-gray-600 mt-3">
+                This clarity helps patients and search engines understand that all care is delivered from Hyderabad while retaining the experience gained in Kerala.
+              </p>
+            </Card>
+
             {/* Pioneer Badge */}
             <Card padding="md" className="bg-gradient-to-r from-amber-50 to-yellow-50 border-l-4 border-amber-500 shadow-none">
               <div className="flex items-start">
@@ -154,7 +179,7 @@ export default function AboutPage() {
         </Section>
 
         {/* Credentials & Training */}
-        <Section background="gray" className="py-16">
+        <Section background="gray" className="py-16" id="credentials">
           <h2 className="text-3xl font-bold text-center mb-12">Credentials & Training</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             <Card padding="lg" className="text-center shadow-lg">
@@ -425,7 +450,7 @@ export default function AboutPage() {
         </Section>
 
         {/* Patient-Centered Approach */}
-        <Section background="gray" className="py-16">
+        <Section background="gray" className="py-16" id="philosophy">
           <h2 className="text-3xl font-bold text-center mb-12">Patient-Centered Approach</h2>
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>

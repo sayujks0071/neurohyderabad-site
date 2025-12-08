@@ -74,7 +74,10 @@ const ongoingInitiatives = [
   },
 ];
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 export default function ResearchPage() {
   return (
     <div className="min-h-screen bg-white">
@@ -164,6 +167,37 @@ export default function ResearchPage() {
           </div>
         </section>
 
+<<<<<<< Updated upstream
+=======
+        <section>
+          <h2 className="text-2xl font-semibold text-gray-900">
+            Research Publications
+          </h2>
+          <p className="mt-2 text-gray-600">
+            Peer-reviewed articles and manuscripts are shared directly with
+            clinicians and collaborators. To request specific papers or citation
+            details, email{" "}
+            <a
+              href="mailto:hellodr@drsayuj.info"
+              className="text-blue-600 hover:underline"
+            >
+              hellodr@drsayuj.info
+            </a>{" "}
+            with your affiliation and topic of interest.
+          </p>
+          <div className="mt-6 rounded-2xl border border-blue-200 bg-blue-50 p-6">
+            <h3 className="text-lg font-semibold text-blue-900 mb-2">
+              Request Full Publications
+            </h3>
+            <p className="text-gray-700 text-sm">
+              Full-text articles and conference abstracts are provided on
+              request to medical professionals and research partners. Please
+              reach out with your institutional email and the topic you&apos;d
+              like to review.
+            </p>
+          </div>
+        </section>
+>>>>>>> Stashed changes
 
         <section>
           <h2 className="text-2xl font-semibold text-gray-900">
