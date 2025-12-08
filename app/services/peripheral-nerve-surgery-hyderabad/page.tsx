@@ -7,6 +7,8 @@ import { makeMetadata } from '@/app/_lib/meta';
 import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import { getServiceSources } from '../sources';
+import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
+import FAQPageSchema from '@/app/_components/FAQPageSchema';
 
 const baseMetadata = makeMetadata({
   title: 'Peripheral Nerve Surgery in Hyderabad | Carpal Tunnel, Ulnar, Peroneal',
@@ -219,6 +221,14 @@ export default function PeripheralNerveSurgeryPage() {
 
   return (
     <main className="container mx-auto px-4 py-16">
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', path: '/' },
+          { name: 'Services', path: '/services' },
+          { name: 'Peripheral Nerve Surgery Hyderabad', path: '/services/peripheral-nerve-surgery-hyderabad' },
+        ]}
+      />
+      <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/peripheral-nerve-surgery-hyderabad`} />
       <div className="max-w-6xl mx-auto">
         {/* Header Section */}
         <section className="text-center mb-16">
