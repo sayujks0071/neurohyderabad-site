@@ -206,6 +206,27 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
             <a href="/appointments" className="text-blue-600 hover:underline ml-2">Appointments</a>
           </p>
         </section>
+
+        <section className="mb-10 rounded-lg border border-green-200 bg-green-50 p-6">
+          <h2 className="text-2xl font-semibold text-green-800 mb-3">For high-risk or elderly patients</h2>
+          <p className="text-gray-700 mb-3">
+            If you need to avoid general anaesthesia because of cardiac, lung, or metabolic risks, we offer an <strong>awake endoscopic spine pathway</strong> using spinal/epidural blocks with light sedation.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <Link href="/services/awake-spine-surgery-hyderabad" className="rounded-full bg-green-600 px-5 py-2 text-sm font-semibold text-white hover:bg-green-700">
+              See Awake Spine Surgery
+            </Link>
+            <a
+              href="https://wa.me/919778280044"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full border border-green-300 px-5 py-2 text-sm font-semibold text-green-800 hover:bg-green-100"
+            >
+              Share MRI on WhatsApp
+            </a>
+          </div>
+        </section>
+
         <section className="mb-12">
           <h2 className="text-3xl font-bold text-blue-800 mb-6">What is Minimally Invasive Spine Surgery?</h2>
           <div className="prose max-w-none">

@@ -15,11 +15,20 @@ export const metadata = {
     description: "Consult Dr. Sayuj Krishnan near Banjara Hills for endoscopic spine & minimally invasive brain surgery. OPD timings, parking, directions, WhatsApp booking, and FAQs.",
     url: "https://www.drsayuj.info/neurosurgeon-banjara-hills",
     type: "article",
+    images: [
+      {
+        url: "https://www.drsayuj.info/images/og-default.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Dr Sayuj Krishnan - Neurosurgeon for Banjara Hills patients",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Neurosurgeon in Banjara Hills, Hyderabad",
     description: "Endoscopic spine and brain surgery consultations for Banjara Hills patients — book via WhatsApp or call.",
+    images: ["https://www.drsayuj.info/images/og-default.jpg"],
   },
 };
 
@@ -93,6 +102,7 @@ export default function Page() {
       <div className="mt-6 flex flex-wrap gap-3">
         <a href="https://wa.me/919778280044" className="rounded-2xl px-6 py-3 bg-green-600 text-white" aria-label="WhatsApp booking for Banjara Hills patients">WhatsApp Booking</a>
         <a href="tel:+919778280044" className="rounded-2xl px-6 py-3 border" aria-label="Call +91 9778280044">Call: +91-9778280044</a>
+        <a href="/appointments" className="rounded-2xl px-6 py-3 bg-blue-600 text-white" aria-label="Book an appointment near Banjara Hills">Book Appointment</a>
         <a href="https://maps.google.com/?q=Yashoda+Hospitals+Malakpet+Hyderabad" className="rounded-2xl px-6 py-3 border" aria-label="Directions to Yashoda Hospital Malakpet">Directions</a>
       </div>
 
