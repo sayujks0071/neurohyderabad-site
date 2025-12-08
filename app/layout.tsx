@@ -159,6 +159,9 @@ export default function RootLayout({
   return (
       <html lang="en">
       <head>
+            {/* Bing Webmaster Tools Verification */}
+            <meta name="msvalidate.01" content="13FC1F5CB1F44756BDBFD421C02C29E2" />
+
             {/* Google tag (gtag.js) */}
             <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17680191922"></script>
             <script
