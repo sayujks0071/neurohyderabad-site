@@ -9,6 +9,7 @@ const fs = require('fs');
 const path = require('path');
 
 const BLOG_DIR = 'app/blog';
+const CONTENT_BLOG_DIR = path.join('content', 'blog');
 const FORBIDDEN_KEYWORDS = ['example', 'test', 'draft', 'sample', 'template', 'placeholder'];
 const DRY_RUN = process.argv.includes('--dry-run');
 
@@ -45,10 +46,29 @@ function findExamplePosts() {
         examplePosts.push({
           slug,
           path: postPath,
-          pageFile
+          pageFile,
+          type: 'app'
         });
       }
     }
+  }
+
+  // MDX content posts in content/blog
+  if (fs.existsSync(CONTENT_BLOG_DIR)) {
+    const mdxFiles = fs.readdirSync(CONTENT_BLOG_DIR);
+    mdxFiles.forEach(file => {
+      const isMarkdown = file.endsWith('.mdx') || file.endsWith('.md');
+      if (!isMarkdown) return;
+
+      const slug = path.basename(file, path.extname(file));
+      if (isForbiddenPost(slug)) {
+        examplePosts.push({
+          slug,
+          path: path.join(CONTENT_BLOG_DIR, file),
+          type: 'mdx'
+        });
+      }
+    });
   }
   
   return examplePosts;
@@ -61,8 +81,12 @@ function removePost(post) {
   }
   
   try {
-    // Remove the entire directory
-    fs.rmSync(post.path, { recursive: true, force: true });
+    // Remove the entire directory for legacy posts, or the file for MDX posts
+    if (post.type === 'mdx') {
+      fs.rmSync(post.path, { force: true });
+    } else {
+      fs.rmSync(post.path, { recursive: true, force: true });
+    }
     console.log(`✅ Removed: ${post.path}`);
     return true;
   } catch (error) {
@@ -113,6 +137,7 @@ if (require.main === module) {
 }
 
 module.exports = { findExamplePosts, isForbiddenPost };
+
 
 
 

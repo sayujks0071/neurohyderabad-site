@@ -13,6 +13,17 @@ import { BLOG_DEFAULTS, validateBlogPost } from '@/src/types/blog';
 
 const BLOG_DIR = path.join(process.cwd(), 'content', 'blog');
 
+// Keywords that mark a post as example/test/draft content that should not be shown publicly
+const FORBIDDEN_KEYWORDS = ['example', 'test', 'draft', 'sample', 'template', 'placeholder'];
+
+/**
+ * Check if a blog post slug contains forbidden keywords
+ */
+function isForbiddenPost(slug: string): boolean {
+  const lowerSlug = slug.toLowerCase();
+  return FORBIDDEN_KEYWORDS.some(keyword => lowerSlug.includes(keyword));
+}
+
 /**
  * Parse frontmatter and content from a blog file
  */
@@ -20,13 +31,20 @@ async function parseBlogFile(filePath: string): Promise<BlogPost | null> {
   try {
     const fileContents = await fs.readFile(filePath, 'utf8');
     const { data, content } = matter(fileContents);
+    const derivedSlug = data.slug || path.basename(filePath, path.extname(filePath));
+
+    // Hard block example/test/draft content even if it exists on disk
+    if (isForbiddenPost(derivedSlug)) {
+      console.warn(`Skipping forbidden blog post ${derivedSlug}`);
+      return null;
+    }
     
     // Merge frontmatter with defaults
     const post: BlogPost = {
       ...BLOG_DEFAULTS,
       ...data,
       // Ensure required fields
-      slug: data.slug || path.basename(filePath, path.extname(filePath)),
+      slug: derivedSlug,
       publishedAt: data.publishedAt || new Date().toISOString(),
       tags: data.tags || [],
       sources: data.sources || [],
@@ -67,7 +85,8 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
     const files = await fs.readdir(BLOG_DIR);
     const mdxFiles = files.filter(file => 
       (file.endsWith('.mdx') || file.endsWith('.md')) && 
-      file !== 'README.md' // Exclude README
+      file !== 'README.md' && // Exclude README
+      !isForbiddenPost(path.basename(file, path.extname(file))) // Block example/test/draft slugs
     );
     
     if (mdxFiles.length === 0) {
@@ -75,13 +94,15 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
     }
     
     const posts = await Promise.all(
-      mdxFiles.map(file => 
+      mdxFiles.map(file =>
         parseBlogFile(path.join(BLOG_DIR, file))
       )
     );
-    
-    // Filter out nulls and sort by date
-    const validPosts = posts.filter((post): post is BlogPost => post !== null);
+
+    // Filter out nulls, forbidden posts, and sort by date
+    const validPosts = posts.filter((post): post is BlogPost =>
+      post !== null && !isForbiddenPost(post.slug)
+    );
     
     return validPosts.sort((a, b) => {
       const dateA = new Date(a.publishedAt).getTime();
@@ -106,11 +127,16 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> 
       return null;
     }
     
-    // Skip README
+    // Skip README and forbidden posts
     if (slug === 'README' || slug.toLowerCase() === 'readme') {
       return null;
     }
-    
+
+    // Block forbidden posts
+    if (isForbiddenPost(slug)) {
+      return null;
+    }
+
     // Try .mdx first, then .md
     const extensions = ['.mdx', '.md'];
     
@@ -171,11 +197,16 @@ export async function getBlogPostContent(slug: string): Promise<string | null> {
       return null;
     }
     
-    // Skip README
+    // Skip README and forbidden posts
     if (slug === 'README' || slug.toLowerCase() === 'readme') {
       return null;
     }
-    
+
+    // Block forbidden posts
+    if (isForbiddenPost(slug)) {
+      return null;
+    }
+
     const extensions = ['.mdx', '.md'];
     
     for (const ext of extensions) {
@@ -224,4 +255,3 @@ export async function getAllBlogTags(): Promise<string[]> {
   
   return Array.from(tags).sort();
 }
-
