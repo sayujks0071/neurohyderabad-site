@@ -178,6 +178,14 @@ export default function RootLayout({
             <script
               dangerouslySetInnerHTML={{
                 __html: `
+  gtag('event', 'conversion', {'send_to': 'AW-17680191922/zBshCJ3e2M0bELKjye5B'});
+                `,
+              }}
+            />
+            {/* Event snippet for Contact conversion page */}
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
   function gtag_report_conversion(url) {
     var callback = function () {
       if (typeof(url) != 'undefined') {
