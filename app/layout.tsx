@@ -316,6 +316,19 @@ export default function RootLayout({
             `,
           }}
         />
+        <Script
+          id="thank-you-conversion-tracker"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.addEventListener('load', function() {
+                if (window.location.href.includes('/thank-you')) {
+                  gtag('event', 'conversion', {'send_to': 'AW-17680191922/PjKNCNbWptAbELKjye5B'});
+                }
+              });
+            `,
+          }}
+        />
         <ClientOnlyWrapper>
           <ClientAnalytics />
           <PrivacyFriendlyAnalytics />
