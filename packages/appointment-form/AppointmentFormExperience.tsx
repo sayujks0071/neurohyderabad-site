@@ -61,7 +61,8 @@ function AppointmentFormContent({
         addToast("AI generated a personalised confirmation.", "info");
       }
 
-      setView("confirmation");
+      // Redirect to thank you page after successful submission
+      window.location.href = "/appointments/thank-you";
     } catch (error) {
       console.error("[appointments] Failed to submit booking:", error);
       addToast(
