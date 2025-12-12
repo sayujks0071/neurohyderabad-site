@@ -300,6 +300,22 @@ export default function RootLayout({
             `,
           }}
         />
+        <Script
+          id="conversion-click-tracker"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              document.addEventListener('click', function(e) {
+                if (e.target.closest('a[href*="https://wa.me/"]')) {
+                  gtag('event', 'conversion', {'send_to': 'AW-17680191922/wkGLCIbvptAbELKjye5B'});
+                }
+                if (e.target.closest('a[href*="tel:"]')) {
+                  gtag('event', 'conversion', {'send_to': 'AW-17680191922/-yhfCIPvptAbELKjye5B'});
+                }
+              })
+            `,
+          }}
+        />
         <ClientOnlyWrapper>
           <ClientAnalytics />
           <PrivacyFriendlyAnalytics />
