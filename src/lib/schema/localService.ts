@@ -52,7 +52,7 @@ export function buildLocalServiceSchema({
         provider: {
           '@id': `${SITE_URL}/#physician`,
           '@type': 'Physician',
-          name: 'Dr Sayuj Krishnan',
+          name: 'Dr Sayuj Krishnan S',
         },
         areaServed: areaServed.map((area) => ({
           '@type': 'AdministrativeArea',

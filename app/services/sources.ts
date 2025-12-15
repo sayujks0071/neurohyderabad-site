@@ -164,6 +164,20 @@ const SERVICE_SOURCES: Record<string, ServiceSource[]> = {
       href: "https://jss.amegroups.org/article/view/6165/html",
     },
   ],
+  "rosa-robotic-dbs-hyderabad": [
+    {
+      label: "National Institute of Neurological Disorders and Stroke (NINDS) – Deep Brain Stimulation",
+      href: "https://www.ninds.nih.gov/health-information/treatment/deep-brain-stimulation",
+    },
+    {
+      label: "Parkinson’s Foundation – Deep Brain Stimulation (DBS)",
+      href: "https://www.parkinson.org/living-with-parkinsons/treatment/surgical-treatment-options/deep-brain-stimulation",
+    },
+    {
+      label: "Mayo Clinic – Deep brain stimulation",
+      href: "https://www.mayoclinic.org/tests-procedures/deep-brain-stimulation/about/pac-20384562",
+    },
+  ],
 };
 
 export function getServiceSources(slug: string): ServiceSource[] {

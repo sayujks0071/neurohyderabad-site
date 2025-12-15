@@ -42,7 +42,7 @@ export default function NAP({
             href="tel:+919778280044" 
             className="text-blue-600 hover:text-blue-800 font-medium"
           >
-            +91 9778280044
+            +91 97782 80044
           </a>
         </div>
         {showEmail && (

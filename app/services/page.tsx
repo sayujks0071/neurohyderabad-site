@@ -47,6 +47,12 @@ export default function ServicesPage() {
       features: ['Neuronavigation', 'Neuromonitoring', 'Awake craniotomy', 'Multidisciplinary care']
     },
     {
+      title: 'ROSA Robotic DBS (Functional Neurosurgery)',
+      description: 'Robotic planning and navigation-guided DBS evaluation pathway for Parkinson’s disease and essential tremor.',
+      href: '/services/rosa-robotic-dbs-hyderabad/',
+      features: ['DBS candidacy work-up', 'Precision targeting support', 'Programming follow-ups', 'Multidisciplinary coordination']
+    },
+    {
       title: 'Endoscopic Spine Surgery (Day-Care MISS)',
       description: 'Full endoscopic discectomy and decompression with same-day discharge protocols in Hyderabad.',
       href: '/services/endoscopic-spine-surgery-hyderabad/',
@@ -67,19 +73,19 @@ export default function ServicesPage() {
     {
       title: 'Epilepsy Surgery',
       description: 'Comprehensive surgical treatment for drug-resistant epilepsy with advanced techniques.',
-      href: '/services/epilepsy-surgery',
+      href: '/services/epilepsy-surgery-hyderabad/',
       features: ['LITT', 'Resection surgery', 'VNS', 'Comprehensive evaluation']
     },
     {
       title: 'Microvascular Decompression (MVD)',
       description: 'Microsurgical relief for trigeminal neuralgia and hemifacial spasm while preserving nerve function.',
-      href: '/services/microvascular-decompression',
+      href: '/conditions/trigeminal-neuralgia-treatment-hyderabad/',
       features: ['Retrosigmoid keyhole', 'Neuromonitoring', 'Teflon interposition', 'Facial pain relief']
     },
     {
       title: 'Gamma Knife Radiosurgery',
       description: 'Stereotactic radiosurgery for brain tumours and trigeminal neuralgia with sub-millimetre precision.',
-      href: '/services/radiosurgery-gamma-knife',
+      href: '/conditions/trigeminal-neuralgia-treatment-hyderabad/',
       features: ['Non-incisional', 'High-dose precision', 'Outpatient workflow', 'Rapid recovery']
     }
   ];

@@ -13,7 +13,7 @@ import { getServiceSources } from '../sources';
 const baseMetadata = makeMetadata({
   title: 'Awake Spine Surgery in Hyderabad | Endoscopic & Regional Anaesthesia',
   description:
-    'Awake endoscopic spine surgery by Dr. Sayuj Krishnan for high-risk or elderly patients. Smaller incisions, regional anaesthesia, same-day discharge at Yashoda Hospital, Malakpet.',
+    'Awake endoscopic spine surgery by Dr. Sayuj Krishnan S for high-risk or elderly patients. Smaller incisions, regional anaesthesia, same-day discharge at Yashoda Hospital, Malakpet.',
   canonicalPath: '/services/awake-spine-surgery-hyderabad',
 });
 
@@ -23,13 +23,13 @@ export const metadata: Metadata = {
     title: baseMetadata.title,
     description: baseMetadata.description,
     url: `${SITE_URL}/services/awake-spine-surgery-hyderabad`,
-    siteName: 'Dr. Sayuj Krishnan - Neurosurgeon in Hyderabad',
+    siteName: 'Dr. Sayuj Krishnan S - Neurosurgeon in Hyderabad',
     images: [
       {
         url: `${SITE_URL}/api/og?title=Awake%20Spine%20Surgery&subtitle=Endoscopic%20%7C%20Regional%20Anaesthesia`,
         width: 1200,
         height: 630,
-        alt: 'Awake Spine Surgery in Hyderabad - Dr. Sayuj Krishnan',
+        alt: 'Awake Spine Surgery in Hyderabad - Dr. Sayuj Krishnan S',
       },
     ],
     locale: 'en_IN',
@@ -55,6 +55,26 @@ const FAQS = [
     question: 'What type of anaesthesia is used?',
     answer:
       'We combine spinal or epidural anaesthesia with light conscious sedation. You breathe on your own, feel no pain, and we monitor comfort throughout the case.',
+  },
+  {
+    question: 'Is awake spine surgery painful?',
+    answer:
+      'During surgery, pain is controlled using regional anaesthesia and sedation. After surgery, discomfort is usually lower than open surgery because the endoscopic approach uses a small working channel with minimal muscle disruption.',
+  },
+  {
+    question: 'How soon can I walk and go home?',
+    answer:
+      'Most patients sit up and walk with physiotherapy support within hours. Many endoscopic decompressions/discectomies are day-care procedures with discharge the same day or after one night, depending on medical fitness and distance from the hospital.',
+  },
+  {
+    question: 'How much does awake endoscopic spine surgery cost in Hyderabad?',
+    answer:
+      'Costs depend on the diagnosis (disc vs stenosis), number of levels, and insurance status. For many single-level endoscopic procedures, self-pay packages commonly fall in the ₹95,000–₹2,25,000 range, while complex multi-level or fusion cases cost more. We share a written estimate after reviewing MRI and reports.',
+  },
+  {
+    question: 'Is it covered by insurance?',
+    answer:
+      'Often yes—coverage depends on your policy terms and hospital network. Our coordinator helps with pre-authorisation, cashless documentation, and claim paperwork once the surgical plan is finalised.',
   },
   {
     question: 'Is recovery faster than conventional surgery?',
@@ -103,6 +123,13 @@ export default function AwakeSpineSurgeryPage() {
         and nerve signals to keep the procedure safe and precise.
       </p>
 
+      <h2 className="text-2xl font-semibold text-blue-800">Why patients ask for an “awake” plan</h2>
+      <p>
+        Many patients search for “awake spine surgery” because they are anxious about general anaesthesia or have medical conditions that
+        increase anaesthesia risk. The goal is not to “tough it out awake”, but to use regional anaesthesia and conscious sedation so
+        breathing remains stable and recovery is smoother—especially for older adults and those with cardiac or respiratory concerns.
+      </p>
+
       <div className="grid gap-6 md:grid-cols-2">
         <div className="rounded-lg border border-gray-200 p-5">
           <h3 className="text-lg font-semibold text-blue-800">When we choose an awake plan</h3>
@@ -127,9 +154,13 @@ export default function AwakeSpineSurgeryPage() {
 
       <h2 className="text-2xl font-semibold text-blue-800">Cost and logistics</h2>
       <p>
-        Awake endoscopic procedures typically mirror our minimally invasive spine packages, with savings from shorter hospital stay and reduced
-        medication. Most patients are discharged the same day or after one night. Insurance and cashless options are available; share your MRI
-        and policy details to receive a personalised estimate.
+        Awake endoscopic procedures typically mirror our minimally invasive spine packages, with savings coming from shorter hospital stay and
+        faster return to routine. Most patients are discharged the same day or after one night. Insurance and cashless options are available;
+        share your MRI and policy details to receive a personalised estimate.
+      </p>
+      <p>
+        For a structured overview, see our cost transparency guide:{' '}
+        <Link href="/services/spine-surgery-cost-hyderabad">Spine Surgery Cost in Hyderabad</Link>.
       </p>
 
       <h2 className="text-2xl font-semibold text-blue-800">What to expect after surgery</h2>
@@ -171,7 +202,7 @@ export default function AwakeSpineSurgeryPage() {
       </section>
 
       <SourceList sources={ARTICLE_SOURCES} />
-      <ReviewedBy lastReviewed="2025-10-24" reviewerName="Dr. Sayuj Krishnan" />
+      <ReviewedBy lastReviewed="2025-10-24" reviewerName="Dr. Sayuj Krishnan S" />
       <NAP />
     </main>
   );

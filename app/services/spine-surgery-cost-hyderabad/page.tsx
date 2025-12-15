@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     title: baseMetadata.title,
     description: baseMetadata.description,
     url: `${SITE_URL}/services/spine-surgery-cost-hyderabad`,
-    siteName: 'Dr. Sayuj Krishnan - Neurosurgeon in Hyderabad',
+    siteName: 'Dr. Sayuj Krishnan S - Neurosurgeon in Hyderabad',
     images: [
       {
         url: `${SITE_URL}/api/og?title=Spine%20Surgery%20Cost%20in%20Hyderabad&subtitle=Complete%20Price%20Guide%202025`,
@@ -44,67 +44,63 @@ export const metadata: Metadata = {
 
 const ARTICLE_SOURCES = getServiceSources('spine-surgery-cost-hyderabad') || [];
 
-// FAQ Schema
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "How much does spine surgery cost in Hyderabad?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Spine surgery costs in Hyderabad vary by procedure type. Endoscopic discectomy typically costs ₹2,50,000-4,00,000, while spinal fusion ranges from ₹3,00,000-5,00,000. Minimally invasive procedures often cost less than open surgery due to shorter hospital stays. Costs include surgery, hospital stay, medications, and follow-up care."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Does insurance cover spine surgery in Hyderabad?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, most health insurance plans cover spine surgery in Hyderabad, including endoscopic and minimally invasive procedures. Cashless insurance options are available at Yashoda Hospital. Our team helps with pre-authorization and understanding your coverage. Contact us to verify your insurance eligibility."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What is the cost difference between endoscopic and open spine surgery?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Endoscopic spine surgery typically costs ₹2,50,000-4,00,000, while traditional open surgery ranges from ₹2,00,000-3,50,000. However, endoscopic surgery often results in lower overall costs due to same-day or 1-night discharge, reduced medication needs, and faster return to work. The minimally invasive approach offers better value despite slightly higher initial cost."
-      }
-    }
-  ]
-};
-
 export default function SpineSurgeryCostPage() {
   const pageUrl = `${SITE_URL}/services/spine-surgery-cost-hyderabad`;
-  const faqs = faqSchema.mainEntity.map((item: any) => ({
-    question: item.name,
-    answer: item.acceptedAnswer.text,
-  }));
+  const faqs = [
+    {
+      question: 'How much does spine surgery cost in Hyderabad?',
+      answer:
+        'Costs vary by diagnosis (disc vs stenosis vs instability), number of levels, implant needs, and insurance type. In Hyderabad, single-level minimally invasive procedures are often lower than complex multi-level reconstructions. We share a written estimate after MRI review.',
+    },
+    {
+      question: 'What are realistic self-pay ranges for common spine surgeries?',
+      answer:
+        'As a planning guide: endoscopic discectomy packages are commonly ₹95,000–₹1,35,000; endoscopic stenosis decompression often ₹1,25,000–₹2,25,000; and fusion (TLIF/ACDF) can range ₹2,75,000–₹5,50,000 depending on implants and levels. Final pricing depends on your case and hospital category.',
+    },
+    {
+      question: 'Does insurance cover spine surgery in Hyderabad?',
+      answer:
+        'Often yes, but coverage depends on your policy, waiting periods, network status, and exclusions. Cashless pathways may be possible if your insurer/TPA supports the hospital. Device/implant and consumables coverage varies widely.',
+    },
+    {
+      question: 'What usually increases the bill?',
+      answer:
+        'Multi-level surgery, revision surgery, implants, extended hospital stay, ICU monitoring, advanced navigation/monitoring, and added investigations can increase cost. Complex medical conditions can also require additional optimisation and monitoring.',
+    },
+    {
+      question: 'Is endoscopic surgery always cheaper than open surgery?',
+      answer:
+        'Not always on the “procedure line item”, but it can reduce total cost through shorter stay, fewer opioids, and quicker return to work. The right choice depends on what is safest and most durable for your diagnosis.',
+    },
+    {
+      question: 'How do I get a personalised estimate?',
+      answer:
+        'Share your MRI report/images and a brief symptom summary (duration, leg pain/weakness, walking limit). If you have insurance, share your insurer/TPA and policy details. We then confirm the likely procedure options and provide an itemised estimate.',
+    },
+  ];
   const procedures = [
     {
       name: 'Endoscopic Discectomy',
-      cost: '₹2,50,000 - ₹4,00,000',
-      includes: ['Surgery', '1-night hospital stay', 'Medications', 'Follow-up'],
+      cost: '₹95,000 – ₹1,35,000',
+      includes: ['Surgeon + OT charges', 'Typical day-care/short stay', 'Medications', 'Follow-up plan'],
       notes: 'Same-day discharge possible'
     },
     {
-      name: 'Spinal Fusion (TLIF/ACDF)',
-      cost: '₹3,00,000 - ₹5,00,000',
-      includes: ['Surgery', '2-3 night hospital stay', 'Implants', 'Medications', 'Follow-up'],
-      notes: 'Cost varies by implant type'
+      name: 'Endoscopic Decompression (Stenosis/ULBD)',
+      cost: '₹1,25,000 – ₹2,25,000',
+      includes: ['Surgeon + OT charges', 'Short stay (often 1 night)', 'Medications', 'Follow-up plan'],
+      notes: 'Depends on level count and stenosis complexity'
     },
     {
-      name: 'Minimally Invasive Spine Surgery',
-      cost: '₹2,50,000 - ₹4,50,000',
-      includes: ['Surgery', '1-2 night hospital stay', 'Medications', 'Follow-up'],
-      notes: 'Faster recovery, lower overall cost'
+      name: 'Spinal Fusion (TLIF / ACDF)',
+      cost: '₹2,75,000 – ₹5,50,000',
+      includes: ['Surgery', 'Implants', '2–4 night stay typical', 'Medications', 'Follow-up plan'],
+      notes: 'Range varies mainly by implant system and levels'
     },
     {
       name: 'Open Discectomy',
-      cost: '₹2,00,000 - ₹3,50,000',
-      includes: ['Surgery', '2-3 night hospital stay', 'Medications', 'Follow-up'],
+      cost: '₹1,50,000 – ₹3,50,000',
+      includes: ['Surgery', '2–3 night stay typical', 'Medications', 'Follow-up plan'],
       notes: 'Traditional approach'
     }
   ];
@@ -119,10 +115,6 @@ export default function SpineSurgeryCostPage() {
         ]}
       />
       <FAQPageSchema faqs={faqs} pageUrl={pageUrl} />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
       <div className="min-h-screen bg-white">
         <div className="container mx-auto px-4 py-16">
           <header className="text-center mb-12">
@@ -140,9 +132,21 @@ export default function SpineSurgeryCostPage() {
           <section className="bg-blue-50 p-6 rounded-lg mb-8">
             <p className="text-center">
               <strong>Contact:</strong>
-              <a href="tel:+919778280044" className="text-blue-600 hover:underline ml-2">+91-9778280044</a> •
+              <a href="tel:+919778280044" className="text-blue-600 hover:underline ml-2">+91 97782 80044</a> •
               <a href="mailto:hellodr@drsayuj.info" className="text-blue-600 hover:underline ml-2">hellodr@drsayuj.info</a> •
               <Link href="/appointments" className="text-blue-600 hover:underline ml-2">Appointments</Link>
+            </p>
+          </section>
+
+          <section className="mb-10">
+            <h2 className="text-3xl font-bold text-blue-800 mb-4">How to read these price ranges</h2>
+            <p className="text-gray-700">
+              Prices on this page are meant for planning and transparency, not as a final quote. Your final estimate depends on MRI findings,
+              nerve compression severity, number of spinal levels involved, medical fitness, and whether implants are required.
+            </p>
+            <p className="text-gray-700">
+              If you’re exploring day-care options, see: <Link href="/services/awake-spine-surgery-hyderabad">Awake Spine Surgery in Hyderabad</Link> and{' '}
+              <Link href="/services/endoscopic-spine-surgery-hyderabad">Endoscopic Spine Surgery in Hyderabad</Link>.
             </p>
           </section>
 
@@ -216,7 +220,7 @@ export default function SpineSurgeryCostPage() {
             <div className="mt-6 p-4 bg-white rounded border border-green-200">
               <p className="text-gray-700">
                 <strong>Note:</strong> Our team helps with insurance pre-authorization and understanding your coverage. 
-                Contact us at <a href="tel:+919778280044" className="text-blue-600 hover:underline">+91-9778280044</a> to verify your insurance eligibility.
+                Contact us at <a href="tel:+919778280044" className="text-blue-600 hover:underline">+91 97782 80044</a> to verify your insurance eligibility.
               </p>
             </div>
           </section>
