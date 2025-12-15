@@ -32,7 +32,7 @@ import HeroCTAButtons from "./_components/HeroCTAButtons";
 const HOME_CANONICAL = SITE_URL.endsWith("/") ? SITE_URL : `${SITE_URL}/`;
 
 export const metadata = {
-  title: 'Dr. Sayuj Krishnan | Best Neurosurgeon Hyderabad',
+  title: 'Dr. Sayuj Krishnan S | Best Neurosurgeon Hyderabad',
   description: 'German-trained neurosurgeon in Hyderabad for minimally invasive spine and awake brain surgery. 1,000+ endoscopic procedures with same-day discharge at Yashoda Hospital, Malakpet.',
   keywords: [
     'dr sayuj krishnan',
@@ -65,10 +65,10 @@ export const metadata = {
     }
   },
   openGraph: {
-    title: 'Dr. Sayuj Krishnan | German-Trained Neurosurgeon in Hyderabad',
+    title: 'Dr. Sayuj Krishnan S | German-Trained Neurosurgeon in Hyderabad',
     description: 'German-trained neurosurgeon specializing in minimally invasive spine surgery, awake brain surgery, and robotic DBS. Over 1,000 endoscopic procedures performed.',
     url: HOME_CANONICAL,
-    siteName: 'Dr. Sayuj Krishnan - Neurosurgeon Hyderabad',
+    siteName: 'Dr. Sayuj Krishnan S - Neurosurgeon Hyderabad',
     locale: 'en_IN',
     type: 'website',
     images: [
@@ -83,7 +83,7 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Dr. Sayuj Krishnan | German-Trained Neurosurgeon in Hyderabad',
+    title: 'Dr. Sayuj Krishnan S | German-Trained Neurosurgeon in Hyderabad',
     description: 'German-trained neurosurgeon specializing in minimally invasive spine & brain surgery. Over 1,000 endoscopic procedures.'
   }
 };

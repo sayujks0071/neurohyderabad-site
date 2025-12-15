@@ -7,7 +7,7 @@ export function idFor(canonical: string, fragment: string) {
   // Always ensure canonical has trailing slash in callers if needed
   return `${canonical}#${fragment}`;
 }
-export const CONTACT_PHONE = "+91 9778280044";
+export const CONTACT_PHONE = "+91 97782 80044";
 
 interface ServiceJsonLdProps {
   name: string;
@@ -30,7 +30,7 @@ export function serviceJsonLd({
   url,
   areaServed = "Hyderabad, Telangana, India",
   provider = {
-    name: "Dr Sayuj Krishnan",
+    name: "Dr Sayuj Krishnan S",
     url: SITE_URL,
     sameAs: [
       "https://g.co/kgs/9366939683880052414",
@@ -209,7 +209,11 @@ export function physicianJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "Physician",
-    name: "Dr Sayuj Krishnan",
+    name: "Dr Sayuj Krishnan S",
+    givenName: "Sayuj",
+    familyName: "Krishnan",
+    additionalName: "S",
+    honorificPrefix: "Dr",
     url: SITE_URL,
     medicalSpecialty: ["Neurosurgery", "Brain Surgery", "Spine Surgery"],
     address: {
@@ -217,6 +221,7 @@ export function physicianJsonLd() {
       streetAddress: "Room No 317, OPD Block, Yashoda Hospital, Malakpet",
       addressLocality: "Hyderabad",
       addressRegion: "Telangana",
+      postalCode: "500036",
       addressCountry: "IN"
     },
     telephone: CONTACT_PHONE,
