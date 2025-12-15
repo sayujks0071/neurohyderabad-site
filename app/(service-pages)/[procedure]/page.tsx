@@ -32,7 +32,7 @@ type ProcedurePageContent = {
   };
 };
 
-const BOOK_URL = 'https://www.drsayuj.info/book';
+const BOOK_URL = `${SITE_URL}/appointments/`;
 
 const PROCEDURE_CONTENT: Record<ProcedureKey, ProcedurePageContent> = {
   'endoscopic-discectomy': {

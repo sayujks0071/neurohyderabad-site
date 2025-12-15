@@ -95,6 +95,48 @@ const nextConfig = {
         destination: '/services/brain-tumor-surgery-hyderabad',
         permanent: true,
       },
+      // Legacy short service slugs -> canonical long-tail service pages (prevent 404 link rot)
+      {
+        source: '/services/brain-tumor',
+        destination: '/services/brain-tumor-surgery-hyderabad',
+        permanent: true,
+      },
+      {
+        source: '/services/brain-tumor-surgery',
+        destination: '/services/brain-tumor-surgery-hyderabad',
+        permanent: true,
+      },
+      {
+        source: '/services/epilepsy-surgery',
+        destination: '/services/epilepsy-surgery-hyderabad',
+        permanent: true,
+      },
+      {
+        source: '/services/endoscopic-discectomy',
+        destination: '/services/endoscopic-discectomy-hyderabad',
+        permanent: true,
+      },
+      {
+        source: '/services/awake-spine-surgery',
+        destination: '/services/awake-spine-surgery-hyderabad',
+        permanent: true,
+      },
+      {
+        source: '/services/spine-surgery-cost',
+        destination: '/services/spine-surgery-cost-hyderabad',
+        permanent: true,
+      },
+      {
+        source: '/services/rosa-robotic-dbs',
+        destination: '/services/rosa-robotic-dbs-hyderabad',
+        permanent: true,
+      },
+      // Booking shortcut used in older links/schema
+      {
+        source: '/book',
+        destination: '/appointments',
+        permanent: true,
+      },
       // Trigeminal neuralgia redirects
       {
         source: '/conditions/trigeminal-neuralgia',
