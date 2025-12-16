@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Merriweather } from "next/font/google";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 // Declare global function for Google Ads conversion tracking
@@ -235,6 +236,7 @@ export default function RootLayout({
         <ClientOnlyWrapper>
           <StickyCTA />
         </ClientOnlyWrapper>
+        <Analytics />
       </body>
     </html>
   );
