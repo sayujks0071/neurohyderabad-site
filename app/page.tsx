@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import ExpandedFAQ from "../src/components/ExpandedFAQ";
 import LazyVideoSection from "./_components/LazyVideoSection";
@@ -31,8 +32,10 @@ import HeroCTAButtons from "./_components/HeroCTAButtons";
 
 const HOME_CANONICAL = SITE_URL.endsWith("/") ? SITE_URL : `${SITE_URL}/`;
 
-export const metadata = {
-  title: 'Dr. Sayuj Krishnan S | Best Neurosurgeon Hyderabad',
+export const metadata: Metadata = {
+  title: {
+    absolute: "Dr. Sayuj Krishnan S | Best Neurosurgeon Hyderabad",
+  },
   description: 'German-trained neurosurgeon in Hyderabad for minimally invasive spine and awake brain surgery. 1,000+ endoscopic procedures with same-day discharge at Yashoda Hospital, Malakpet.',
   keywords: [
     'dr sayuj krishnan',
@@ -83,8 +86,9 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Dr. Sayuj Krishnan S | German-Trained Neurosurgeon in Hyderabad',
-    description: 'German-trained neurosurgeon specializing in minimally invasive spine & brain surgery. Over 1,000 endoscopic procedures.'
+    title: 'Dr. Sayuj Krishnan | German-Trained Neurosurgeon in Hyderabad',
+    description: 'German-trained neurosurgeon specializing in minimally invasive spine & brain surgery. Over 1,000 endoscopic procedures.',
+    images: ['https://www.drsayuj.info/images/og-default.jpg']
   }
 };
 
@@ -325,7 +329,7 @@ export default function Home() {
                 <Button
                   href="/services/minimally-invasive-spine-surgery"
                   variant="primary"
-                  className="rounded-full"
+                  className="rounded-full text-[rgba(0,94,184,0.8)]"
                 >
                   Learn More About MISS →
                 </Button>

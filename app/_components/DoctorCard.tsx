@@ -12,7 +12,7 @@ export default function DoctorCard() {
             alt="Dr. Sayuj Krishnan - Premier Neurosurgeon in Hyderabad"
             width={128}
             height={128}
-            className="object-cover w-full h-full rounded-full"
+            className="object-cover w-full h-full rounded-full max-w-[128px]"
             quality={75}
             sizes="128px"
             placeholder="blur"

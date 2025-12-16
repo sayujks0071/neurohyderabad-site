@@ -52,6 +52,7 @@ const Button: React.FC<ButtonProps> = ({
         target={target}
         rel={rel}
         onClick={onClick}
+        style={props.style}
       >
         {children}
       </Link>
