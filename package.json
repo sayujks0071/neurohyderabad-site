@@ -39,6 +39,7 @@
     "@statsig/react-bindings": "^3.25.5",
     "@statsig/session-replay": "^3.25.5",
     "@statsig/web-analytics": "^3.25.5",
+    "@vercel/analytics": "^1.6.1",
     "@vercel/edge-config": "^1.4.3",
     "@vercel/og": "^0.8.5",
     "ai": "^5.0.106",
