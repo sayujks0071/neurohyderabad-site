@@ -23,13 +23,15 @@ export async function POST(request: NextRequest) {
     console.log(`[API] Starting patient search workflow for query: "${query}"`);
 
     // Start the workflow (executes asynchronously)
-    const result = await start(handlePatientSearch, [query, userContext]);
+    // Note: start() returns a Run<T> which executes the workflow
+    // The workflow ID can be viewed in the Workflow DevKit Web UI (npx workflow web)
+    await start(handlePatientSearch, [query, userContext]);
 
     return NextResponse.json({
       message: "Search workflow started successfully",
-      workflowId: result.id,
       query,
       status: "processing",
+      // Workflow execution can be monitored via: npx workflow web
     });
   } catch (error) {
     console.error("[API] Error starting search workflow:", error);

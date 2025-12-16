@@ -1,3 +1,7 @@
+// #region agent log
+import { withWorkflow } from "workflow/next";
+// #endregion
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Enable compression
@@ -199,4 +203,9 @@ const nextConfig = {
   }
 };
 
-export default nextConfig;// Force deployment Fri Oct  3 12:33:37 IST 2025
+// #region agent log
+// Wrap with withWorkflow to enable workflow directives
+const wrappedConfig = withWorkflow(nextConfig);
+// #endregion
+
+export default wrappedConfig;// Force deployment Fri Oct  3 12:33:37 IST 2025

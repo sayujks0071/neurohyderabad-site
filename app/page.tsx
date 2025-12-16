@@ -329,7 +329,7 @@ export default function Home() {
                 <Button
                   href="/services/minimally-invasive-spine-surgery"
                   variant="primary"
-                  className="rounded-full text-[rgba(0,94,184,0.8)]"
+                  className="rounded-full"
                 >
                   Learn More About MISS →
                 </Button>

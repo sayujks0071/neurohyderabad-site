@@ -38,14 +38,16 @@ export async function POST(request: NextRequest) {
     };
 
     // Start the workflow (executes asynchronously)
-    const result = await start(handlePatientEducation, [educationRequest]);
+    // Note: start() returns a Run<T> which executes the workflow
+    // The workflow ID can be viewed in the Workflow DevKit Web UI (npx workflow web)
+    await start(handlePatientEducation, [educationRequest]);
 
     return NextResponse.json({
       message: "Patient education workflow started successfully",
-      workflowId: result.id,
       patientId,
       condition,
       status: "processing",
+      // Workflow execution can be monitored via: npx workflow web
     });
   } catch (error) {
     console.error("[API] Error starting education workflow:", error);
