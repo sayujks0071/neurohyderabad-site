@@ -1,5 +1,6 @@
 // #region agent log
-import { withWorkflow } from "workflow/next";
+import pkg from "workflow/next";
+const { withWorkflow } = pkg;
 // #endregion
 
 /** @type {import('next').NextConfig} */
