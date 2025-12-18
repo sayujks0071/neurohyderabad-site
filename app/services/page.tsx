@@ -81,6 +81,12 @@ export default function ServicesPage() {
       description: 'Stereotactic radiosurgery for brain tumours and trigeminal neuralgia with sub-millimetre precision.',
       href: '/services/radiosurgery-gamma-knife',
       features: ['Non-incisional', 'High-dose precision', 'Outpatient workflow', 'Rapid recovery']
+    },
+    {
+      title: 'Cooled Radiofrequency Ablation',
+      description: 'Advanced cooled RFA for long-lasting chronic pain relief in facet joints, sacroiliac joints, and trigeminal neuralgia.',
+      href: '/services/cooled-radiofrequency-ablation-hyderabad',
+      features: ['12-24 month pain relief', 'Larger lesion creation', 'Outpatient procedure', 'Higher success rates']
     }
   ];
 

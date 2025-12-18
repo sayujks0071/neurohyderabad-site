@@ -164,6 +164,24 @@ const SERVICE_SOURCES: Record<string, ServiceSource[]> = {
       href: "https://jss.amegroups.org/article/view/6165/html",
     },
   ],
+  "cooled-radiofrequency-ablation-hyderabad": [
+    {
+      label: "International Spine Intervention Society – Radiofrequency Neurotomy Guidelines",
+      href: "https://www.spinalinjection.org/",
+    },
+    {
+      label: "American Society of Interventional Pain Physicians – Radiofrequency Ablation",
+      href: "https://www.asipp.org/",
+    },
+    {
+      label: "Pain Medicine Journal – Cooled Radiofrequency Ablation for Chronic Pain",
+      href: "https://academic.oup.com/painmedicine",
+    },
+    {
+      label: "North American Spine Society – Interventional Pain Procedures",
+      href: "https://www.spine.org/ResearchClinicalCare/QualityImprovement/ClinicalGuidelines",
+    },
+  ],
 };
 
 export function getServiceSources(slug: string): ServiceSource[] {

@@ -40,15 +40,21 @@ export default function ArticleSummarizer({
       });
 
       if (!response.ok) {
-        throw new Error('Failed to generate summary');
+        const errorData = await response.json().catch(() => ({}));
+        const errorMessage = errorData.error || errorData.details || `Server error: ${response.status}`;
+        throw new Error(errorMessage);
       }
 
       const data = await response.json();
+      if (!data.summary) {
+        throw new Error('No summary returned from server');
+      }
       setSummary(data.summary);
       setIsExpanded(true);
     } catch (err) {
       console.error('Error generating summary:', err);
-      setError('Failed to generate summary. Please try again.');
+      const errorMessage = err instanceof Error ? err.message : 'Failed to generate summary. Please try again.';
+      setError(errorMessage);
     } finally {
       setIsLoading(false);
     }
