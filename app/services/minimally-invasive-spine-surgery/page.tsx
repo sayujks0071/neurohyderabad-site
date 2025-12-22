@@ -446,7 +446,10 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
           <div className="grid md:grid-cols-2 gap-6">
             <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
               <h3 className="text-xl font-semibold mb-3 text-blue-700">
-                <Link href="/stories/endoscopic-discectomy-same-day-hyderabad" className="hover:text-blue-600">
+                <Link
+                  href="/stories/endoscopic-discectomy-same-day-hyderabad"
+                  className="underline underline-offset-4 decoration-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-sm"
+                >
                   Same-Day Endoscopic Discectomy
                 </Link>
               </h3>
@@ -462,7 +465,10 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
             </div>
             <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
               <h3 className="text-xl font-semibold mb-3 text-blue-700">
-                <Link href="/stories/endoscopic-ulbd-stenosis-hyderabad" className="hover:text-blue-600">
+                <Link
+                  href="/stories/endoscopic-ulbd-stenosis-hyderabad"
+                  className="underline underline-offset-4 decoration-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-sm"
+                >
                   Endoscopic ULBD for Lumbar Stenosis
                 </Link>
               </h3>
