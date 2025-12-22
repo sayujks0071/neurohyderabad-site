@@ -152,6 +152,10 @@ export default function RootLayout({
 }>) {
   return (
       <html lang="en">
+      <head>
+        <link rel="dns-prefetch" href="https://edge.hypertune.com" />
+        <link rel="preconnect" href="https://edge.hypertune.com" crossOrigin="anonymous" />
+      </head>
       <body className={`${inter.variable} ${merriweather.variable} antialiased`}>
         <ClientAnalytics />
         <WebsiteSchema />

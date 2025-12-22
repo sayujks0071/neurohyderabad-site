@@ -22,7 +22,7 @@ export default function Footer() {
               <p>
                 <a
                   href="tel:+919778280044"
-                  className="text-blue-100 hover:text-white underline underline-offset-2 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                  className="inline-flex items-center min-h-[44px] px-1 -mx-1 text-blue-100 hover:text-white underline underline-offset-2 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
                   aria-label="Call clinic at +91 9778280044"
                 >
                   +91 9778280044
@@ -30,7 +30,7 @@ export default function Footer() {
                 ·{" "}
                 <a
                   href="mailto:hellodr@drsayuj.info"
-                  className="text-blue-100 hover:text-white underline underline-offset-2 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                  className="inline-flex items-center min-h-[44px] px-1 -mx-1 text-blue-100 hover:text-white underline underline-offset-2 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
                   aria-label="Email clinic at hellodr@drsayuj.info"
                 >
                   hellodr@drsayuj.info
@@ -40,13 +40,13 @@ export default function Footer() {
                 <a
                   href="https://www.drsayuj.info/appointments?utm_source=site&utm_medium=cta&utm_campaign=footer_nap"
                   aria-label="Book a consultation from the footer contact section"
-                  className="rounded-full bg-blue-700 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950"
+                  className="rounded-full bg-blue-700 px-4 py-3 min-h-[44px] text-sm font-semibold text-white hover:bg-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950"
                 >
                   Book Consultation
                 </a>
                 <a
                   href="https://wa.me/919778280044"
-                  className="rounded-full border border-blue-300 px-4 py-2 text-sm font-semibold text-blue-100 hover:bg-blue-900 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950"
+                  className="rounded-full border border-blue-300 px-4 py-3 min-h-[44px] text-sm font-semibold text-blue-100 hover:bg-blue-900 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950"
                   aria-label="Contact via WhatsApp"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -55,7 +55,7 @@ export default function Footer() {
                 </a>
                 <a
                   href="https://www.drsayuj.info/locations?utm_source=site&utm_medium=cta&utm_campaign=footer_nap"
-                  className="rounded-full border border-gray-500 px-4 py-2 text-sm font-semibold text-gray-100 hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950"
+                  className="rounded-full border border-gray-500 px-4 py-3 min-h-[44px] text-sm font-semibold text-gray-100 hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950"
                   aria-label="Get directions to clinic"
                 >
                   Get Directions
@@ -76,44 +76,43 @@ export default function Footer() {
             >
               <Link 
                 href="/services" 
-                className="block text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                className="flex items-center min-h-[44px] text-gray-200 underline underline-offset-4 decoration-gray-700 decoration-1 hover:text-gray-100 hover:decoration-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 All Treatments & Services
               </Link>
               <Link 
                 href="/services/minimally-invasive-spine-surgery" 
-                className="block text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                className="flex items-center min-h-[44px] text-gray-200 underline underline-offset-4 decoration-gray-700 decoration-1 hover:text-gray-100 hover:decoration-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 Minimally Invasive Spine Surgery
               </Link>
               <Link 
                 href="/services/endoscopic-discectomy-hyderabad" 
-                className="block text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                className="flex items-center min-h-[44px] text-gray-200 underline underline-offset-4 decoration-gray-700 decoration-1 hover:text-gray-100 hover:decoration-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 Endoscopic Discectomy
               </Link>
               <Link 
                 href="/services/brain-tumor-surgery-hyderabad" 
-                className="block text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
-                aria-label="Brain Tumor Surgery (service)"
+                className="flex items-center min-h-[44px] text-gray-200 underline underline-offset-4 decoration-gray-700 decoration-1 hover:text-gray-100 hover:decoration-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 Brain Tumor Surgery
               </Link>
               <Link 
                 href="/services/spinal-fusion-surgery-hyderabad" 
-                className="block text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                className="flex items-center min-h-[44px] text-gray-200 underline underline-offset-4 decoration-gray-700 decoration-1 hover:text-gray-100 hover:decoration-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 Spinal Fusion Surgery
               </Link>
               <Link 
                 href="/services/epilepsy-surgery-hyderabad" 
-                className="block text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                className="flex items-center min-h-[44px] text-gray-200 underline underline-offset-4 decoration-gray-700 decoration-1 hover:text-gray-100 hover:decoration-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 Epilepsy Surgery
               </Link>
               <Link 
                 href="/services/peripheral-nerve-surgery-hyderabad" 
-                className="block text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                className="flex items-center min-h-[44px] text-gray-200 underline underline-offset-4 decoration-gray-700 decoration-1 hover:text-gray-100 hover:decoration-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 Peripheral Nerve Surgery
               </Link>
@@ -129,38 +128,37 @@ export default function Footer() {
             >
               <Link
                 href="/conditions/"
-                className="block text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                className="flex items-center min-h-[44px] text-gray-200 underline underline-offset-4 decoration-gray-700 decoration-1 hover:text-gray-100 hover:decoration-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 All Conditions
               </Link>
               <Link
                 href="/conditions/brain-tumor-surgery-hyderabad"
-                className="block text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
-                aria-label="Brain Tumor Surgery (condition)"
+                className="flex items-center min-h-[44px] text-gray-200 underline underline-offset-4 decoration-gray-700 decoration-1 hover:text-gray-100 hover:decoration-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 Brain Tumor Surgery
               </Link>
               <Link
                 href="/conditions/sciatica-treatment-hyderabad"
-                className="block text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                className="flex items-center min-h-[44px] text-gray-200 underline underline-offset-4 decoration-gray-700 decoration-1 hover:text-gray-100 hover:decoration-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 Sciatica Treatment
               </Link>
               <Link
                 href="/conditions/spinal-stenosis-treatment-hyderabad"
-                className="block text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                className="flex items-center min-h-[44px] text-gray-200 underline underline-offset-4 decoration-gray-700 decoration-1 hover:text-gray-100 hover:decoration-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 Lumbar Spinal Stenosis Treatment
               </Link>
               <Link
                 href="/conditions/trigeminal-neuralgia-treatment-hyderabad"
-                className="block text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                className="flex items-center min-h-[44px] text-gray-200 underline underline-offset-4 decoration-gray-700 decoration-1 hover:text-gray-100 hover:decoration-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 Trigeminal Neuralgia Treatment
               </Link>
               <Link
                 href="/conditions/cervical-radiculopathy-treatment-hyderabad"
-                className="block text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                className="flex items-center min-h-[44px] text-gray-200 underline underline-offset-4 decoration-gray-700 decoration-1 hover:text-gray-100 hover:decoration-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 Cervical Radiculopathy Treatment
               </Link>
@@ -176,73 +174,73 @@ export default function Footer() {
             >
               <Link 
                 href="/about" 
-                className="block text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                className="flex items-center min-h-[44px] text-gray-200 underline underline-offset-4 decoration-gray-700 decoration-1 hover:text-gray-100 hover:decoration-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 About Dr. Sayuj
               </Link>
               <Link 
                 href="/appointments" 
-                className="block text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                className="flex items-center min-h-[44px] text-gray-200 underline underline-offset-4 decoration-gray-700 decoration-1 hover:text-gray-100 hover:decoration-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 Book Appointment
               </Link>
               <Link 
                 href="/knowledge-base" 
-                className="block text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                className="flex items-center min-h-[44px] text-gray-200 underline underline-offset-4 decoration-gray-700 decoration-1 hover:text-gray-100 hover:decoration-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 Medical Knowledge Base
               </Link>
               <Link 
                 href="/blog" 
-                className="block text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                className="flex items-center min-h-[44px] text-gray-200 underline underline-offset-4 decoration-gray-700 decoration-1 hover:text-gray-100 hover:decoration-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 Blog
               </Link>
               <Link 
                 href="/patient-stories" 
-                className="block text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                className="flex items-center min-h-[44px] text-gray-200 underline underline-offset-4 decoration-gray-700 decoration-1 hover:text-gray-100 hover:decoration-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 Patient Stories
               </Link>
               <Link 
                 href="/contact" 
-                className="block text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                className="flex items-center min-h-[44px] text-gray-200 underline underline-offset-4 decoration-gray-700 decoration-1 hover:text-gray-100 hover:decoration-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 Contact
               </Link>
               <Link 
                 href="/locations" 
-                className="block text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                className="flex items-center min-h-[44px] text-gray-200 underline underline-offset-4 decoration-gray-700 decoration-1 hover:text-gray-100 hover:decoration-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 Clinic Locations
               </Link>
               <Link 
                 href="/symptoms/signs-of-brain-tumor" 
-                className="block text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                className="flex items-center min-h-[44px] text-gray-200 underline underline-offset-4 decoration-gray-700 decoration-1 hover:text-gray-100 hover:decoration-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 Signs of Brain Tumor
               </Link>
               <Link 
                 href="/symptoms/pain-on-top-of-head-causes" 
-                className="block text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                className="flex items-center min-h-[44px] text-gray-200 underline underline-offset-4 decoration-gray-700 decoration-1 hover:text-gray-100 hover:decoration-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 Pain on Top of Head Causes
               </Link>
               <Link 
                 href="/locations/brain-spine-surgeon-jubilee-hills" 
-                className="block text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                className="flex items-center min-h-[44px] text-gray-200 underline underline-offset-4 decoration-gray-700 decoration-1 hover:text-gray-100 hover:decoration-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 Near Jubilee Hills
               </Link>
               <Link 
                 href="/locations/brain-spine-surgeon-banjara-hills" 
-                className="block text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                className="flex items-center min-h-[44px] text-gray-200 underline underline-offset-4 decoration-gray-700 decoration-1 hover:text-gray-100 hover:decoration-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 Near Banjara Hills
               </Link>
               <Link 
                 href="/locations/brain-spine-surgeon-hitec-city" 
-                className="block text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                className="flex items-center min-h-[44px] text-gray-200 underline underline-offset-4 decoration-gray-700 decoration-1 hover:text-gray-100 hover:decoration-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 Near HITEC City
               </Link>
@@ -272,37 +270,37 @@ export default function Footer() {
             >
               <Link 
                 href="/privacy" 
-                className="text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                className="inline-flex items-center min-h-[44px] text-gray-200 underline underline-offset-4 decoration-gray-700 decoration-1 hover:text-gray-100 hover:decoration-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 Privacy Policy
               </Link>
               <Link 
                 href="/cookies" 
-                className="text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                className="inline-flex items-center min-h-[44px] text-gray-200 underline underline-offset-4 decoration-gray-700 decoration-1 hover:text-gray-100 hover:decoration-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 Cookie Policy
               </Link>
               <Link 
                 href="/terms" 
-                className="text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                className="inline-flex items-center min-h-[44px] text-gray-200 underline underline-offset-4 decoration-gray-700 decoration-1 hover:text-gray-100 hover:decoration-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 Terms of Service
               </Link>
               <Link 
                 href="/disclaimer" 
-                className="text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                className="inline-flex items-center min-h-[44px] text-gray-200 underline underline-offset-4 decoration-gray-700 decoration-1 hover:text-gray-100 hover:decoration-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 Medical Disclaimer
               </Link>
               <Link 
                 href="/content-integrity" 
-                className="text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                className="inline-flex items-center min-h-[44px] text-gray-200 underline underline-offset-4 decoration-gray-700 decoration-1 hover:text-gray-100 hover:decoration-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 Content Integrity
               </Link>
               <Link 
                 href="/editorial-policy" 
-                className="text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                className="inline-flex items-center min-h-[44px] text-gray-200 underline underline-offset-4 decoration-gray-700 decoration-1 hover:text-gray-100 hover:decoration-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 Editorial Policy
               </Link>

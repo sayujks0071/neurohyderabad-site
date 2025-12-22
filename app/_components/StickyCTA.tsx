@@ -112,9 +112,9 @@ export default function StickyCTA({ className = '' }: StickyCTAProps) {
   }
 
   const buttonToneClasses: Record<CTAIntent, string> = {
-    call: "bg-green-600 hover:bg-green-700 text-white",
-    whatsapp: "bg-green-500 hover:bg-green-600 text-white",
-    appointment: "bg-blue-600 hover:bg-blue-700 text-white",
+    call: "bg-green-700 hover:bg-green-800 text-white",
+    whatsapp: "bg-green-700 hover:bg-green-800 text-white",
+    appointment: "bg-blue-700 hover:bg-blue-800 text-white",
   };
 
   return (
@@ -143,7 +143,7 @@ export default function StickyCTA({ className = '' }: StickyCTAProps) {
                 target={button.target}
                 rel={button.rel}
                 onClick={() => handleCTAClick(button)}
-                className={`${buttonToneClasses[button.intent]} text-white font-semibold rounded-lg transition-colors duration-200 px-4 py-2 text-sm flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2`}
+                className={`${buttonToneClasses[button.intent]} font-semibold rounded-lg transition-colors duration-200 px-4 py-3 min-h-[44px] text-sm flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2`}
                 aria-label={button.ariaLabel || button.label}
               >
                 <CTAIcon intent={button.intent} />

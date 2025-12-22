@@ -169,7 +169,7 @@ export default function HeaderRefactored() {
             <SiteSearch />
             <a
               href="tel:+919778280044"
-              className="text-sm font-semibold text-[var(--color-primary-700)] hover:text-[var(--color-primary-500)] flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)] focus:ring-offset-2 rounded"
+              className="text-sm font-semibold text-[var(--color-primary-700)] hover:text-[var(--color-primary-500)] inline-flex items-center gap-2 min-h-[44px] px-2 -mx-2 underline underline-offset-4 decoration-current focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)] focus:ring-offset-2 rounded"
               aria-label="Call Dr. Sayuj Krishnan's coordinator"
             >
               <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
@@ -181,7 +181,7 @@ export default function HeaderRefactored() {
               href="https://wa.me/919778280044"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm font-semibold text-green-700 hover:text-green-600 flex items-center gap-2 px-3 py-2 border border-green-200 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+              className="text-sm font-semibold text-green-800 hover:text-green-700 inline-flex items-center gap-2 px-3 py-2 min-h-[44px] border border-green-200 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
               aria-label="WhatsApp the care coordinator"
             >
               <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">

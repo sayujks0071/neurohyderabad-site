@@ -11,7 +11,7 @@ import Button from './Button';
 
 function intentTone(intent: CTAIntent) {
   if (intent === 'whatsapp' || intent === 'call') {
-    return 'bg-green-600 hover:bg-green-700 text-white';
+    return 'bg-green-700 hover:bg-green-800 text-white';
   }
   return '';
 }
