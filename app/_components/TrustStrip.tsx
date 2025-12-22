@@ -1,5 +1,3 @@
-'use client';
-
 interface TrustStripProps {
   className?: string;
 }

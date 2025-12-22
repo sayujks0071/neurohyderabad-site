@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Merriweather } from "next/font/google";
-import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
@@ -9,7 +8,7 @@ import "./globals.css";
 declare global {
   interface Window {
     gtag_report_conversion?: (url?: string) => boolean;
-    dataLayer?: any[];
+    dataLayer?: unknown[];
   }
 }
 import Header from "./components/HeaderRefactored";
@@ -19,7 +18,6 @@ import PhysicianSchema from "./components/schemas/PhysicianSchema";
 import HospitalSchema from "./components/schemas/HospitalSchema";
 import TrustStrip from "./_components/TrustStrip";
 import ClientAnalytics from "./_components/ClientAnalytics";
-import PrivacyFriendlyAnalytics from "./components/PrivacyFriendlyAnalytics";
 import StickyCTA from "./_components/StickyCTA";
 import ClientOnlyWrapper from "./_components/ClientOnlyWrapper";
 import HypertuneProvider from "./providers/hypertune-provider";
@@ -147,11 +145,6 @@ export const viewport: Viewport = {
   themeColor: "#0B2E4E",
 };
 
-import EngagementTracker from './_components/EngagementTracker';
-import ExitIntentHandler from './_components/ExitIntentHandler';
-import ConversionFunnelTracker from './_components/ConversionFunnelTracker';
-import TrustSignalViewportTracker from './_components/TrustSignalViewportTracker';
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -160,61 +153,7 @@ export default function RootLayout({
   return (
       <html lang="en">
       <body className={`${inter.variable} ${merriweather.variable} antialiased`}>
-        {/* Google Ads conversion tag - backup using Next.js Script for reliability */}
-        <Script
-          id="google-ads-conversion"
-          strategy="afterInteractive"
-          src="https://www.googletagmanager.com/gtag/js?id=AW-17680191922"
-        />
-        <Script
-          id="google-ads-config"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'AW-17680191922');
-            `,
-          }}
-        />
-        <Script
-          id="conversion-click-tracker"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              document.addEventListener('click', function(e) {
-                if (e.target.closest('a[href*="https://wa.me/"]')) {
-                  gtag('event', 'conversion', {'send_to': 'AW-17680191922/wkGLCIbvptAbELKjye5B'});
-                }
-                if (e.target.closest('a[href*="tel:"]')) {
-                  gtag('event', 'conversion', {'send_to': 'AW-17680191922/-yhfCIPvptAbELKjye5B'});
-                }
-              })
-            `,
-          }}
-        />
-        <Script
-          id="thank-you-conversion-tracker"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.addEventListener('load', function() {
-                if (window.location.href.includes('/thank-you')) {
-                  gtag('event', 'conversion', {'send_to': 'AW-17680191922/PjKNCNbWptAbELKjye5B'});
-                }
-              });
-            `,
-          }}
-        />
-        <ClientOnlyWrapper>
-          <ClientAnalytics />
-          <PrivacyFriendlyAnalytics />
-          <EngagementTracker trackTime={true} trackMilestones={true} />
-          <ExitIntentHandler showOffer={false} />
-          <ConversionFunnelTracker />
-          <TrustSignalViewportTracker />
-        </ClientOnlyWrapper>
+        <ClientAnalytics />
         <WebsiteSchema />
         <PhysicianSchema />
         <HospitalSchema />

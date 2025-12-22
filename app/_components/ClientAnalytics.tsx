@@ -23,8 +23,18 @@ const GoogleAnalytics = dynamic(
   { ssr: false, loading: () => null }
 );
 
+const GoogleAdsConversions = dynamic(
+  () => import("../../src/components/GoogleAdsConversions"),
+  { ssr: false, loading: () => null }
+);
+
 const FloatingWhatsApp = dynamic(
   () => import("../../src/components/FloatingWhatsApp"),
+  { ssr: false, loading: () => null }
+);
+
+const PrivacyFriendlyAnalytics = dynamic(
+  () => import("../components/PrivacyFriendlyAnalytics"),
   { ssr: false, loading: () => null }
 );
 
@@ -133,11 +143,13 @@ export default function ClientAnalytics() {
   return (
     <>
       <CookieConsent />
+      {enableAnalytics && <GoogleAdsConversions />}
       {shouldLoad && (
         <>
           <WebVitals />
           <StatsigAnalytics />
           <GoogleAnalytics />
+          <PrivacyFriendlyAnalytics />
           <FloatingWhatsApp />
         </>
       )}
