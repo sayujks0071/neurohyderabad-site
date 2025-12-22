@@ -290,7 +290,13 @@ export default function Home() {
         {/* Minimally Invasive Spine Surgery (MISS) */}
         <Section background="gray" className="py-16">
           <h2 className="text-3xl font-bold text-center mb-12">
-            <Link href="/services/minimally-invasive-spine-surgery" className="hover:text-blue-600">Endoscopic Spine Surgery</Link> & Minimally Invasive Procedures (MISS)
+            <Link
+              href="/services/minimally-invasive-spine-surgery"
+              className="underline underline-offset-4 decoration-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-sm"
+            >
+              Endoscopic Spine Surgery
+            </Link>{" "}
+            & Minimally Invasive Procedures (MISS)
           </h2>
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
@@ -337,8 +343,18 @@ export default function Home() {
                   <Link href="/conditions/slip-disc-treatment-hyderabad/" className="text-blue-600 hover:underline mr-4">Slip Disc Treatment</Link>
                   <Link href="/conditions/spinal-stenosis-treatment-hyderabad/" className="text-blue-600 hover:underline">Spinal Stenosis</Link>
                   <div className="mt-3 text-sm">
-                    <Link href="/blog/does-endoscopic-spine-surgery-work-for-sciatica-hyderabad/" className="text-blue-700 hover:underline mr-4">Does Endoscopic Spine Surgery Work for Sciatica?</Link>
-                    <Link href="/blog/when-to-worry-about-back-pain-neurosurgeon-hyderabad/" className="text-blue-700 hover:underline">When to Worry About Back Pain</Link>
+                    <Link
+                      href="/blog/does-endoscopic-spine-surgery-work-for-sciatica-hyderabad/"
+                      className="inline-flex items-center min-h-[44px] px-2 -mx-2 text-blue-700 hover:underline mr-4"
+                    >
+                      Does Endoscopic Spine Surgery Work for Sciatica?
+                    </Link>
+                    <Link
+                      href="/blog/when-to-worry-about-back-pain-neurosurgeon-hyderabad/"
+                      className="inline-flex items-center min-h-[44px] px-2 -mx-2 text-blue-700 hover:underline"
+                    >
+                      When to Worry About Back Pain
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -906,13 +922,6 @@ export default function Home() {
             </div>
           </div>
         </Section>
-
-        {/* Footer */}
-        <footer className="bg-gray-800 text-white py-8">
-          <div className="container mx-auto px-4 text-center">
-            <p>&copy; {new Date().getFullYear()} Dr Sayuj Krishnan. All rights reserved.</p>
-          </div>
-        </footer>
 
         {/* FAQPage Schema */}
         {/* <FAQPageSchema />

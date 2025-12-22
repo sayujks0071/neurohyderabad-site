@@ -22,7 +22,7 @@ export default function Footer() {
               <p>
                 <a
                   href="tel:+919778280044"
-                  className="text-blue-200 hover:text-blue-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                  className="text-blue-100 hover:text-white underline underline-offset-2 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
                   aria-label="Call clinic at +91 9778280044"
                 >
                   +91 9778280044
@@ -30,7 +30,7 @@ export default function Footer() {
                 ·{" "}
                 <a
                   href="mailto:hellodr@drsayuj.info"
-                  className="text-blue-200 hover:text-blue-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                  className="text-blue-100 hover:text-white underline underline-offset-2 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
                   aria-label="Email clinic at hellodr@drsayuj.info"
                 >
                   hellodr@drsayuj.info
@@ -61,7 +61,7 @@ export default function Footer() {
                   Get Directions
                 </a>
               </div>
-              <p className="text-xs text-gray-400 pt-2">
+              <p className="text-xs text-gray-300 pt-2">
                 For sudden weakness, loss of vision or consciousness, please call emergency services immediately before booking an appointment.
               </p>
             </div>
@@ -95,6 +95,7 @@ export default function Footer() {
               <Link 
                 href="/services/brain-tumor-surgery-hyderabad" 
                 className="block text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                aria-label="Brain Tumor Surgery (service)"
               >
                 Brain Tumor Surgery
               </Link>
@@ -126,22 +127,41 @@ export default function Footer() {
               className="space-y-2 text-sm"
               aria-labelledby="footer-conditions-heading"
             >
-              <Link href="/conditions/" className="block text-gray-300 hover:text-gray-100 transition-colors">
+              <Link
+                href="/conditions/"
+                className="block text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+              >
                 All Conditions
               </Link>
-              <Link href="/conditions/brain-tumor-surgery-hyderabad" className="block text-gray-300 hover:text-gray-100 transition-colors">
+              <Link
+                href="/conditions/brain-tumor-surgery-hyderabad"
+                className="block text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                aria-label="Brain Tumor Surgery (condition)"
+              >
                 Brain Tumor Surgery
               </Link>
-              <Link href="/conditions/sciatica-treatment-hyderabad" className="block text-gray-300 hover:text-gray-100 transition-colors">
+              <Link
+                href="/conditions/sciatica-treatment-hyderabad"
+                className="block text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+              >
                 Sciatica Treatment
               </Link>
-              <Link href="/conditions/spinal-stenosis-treatment-hyderabad" className="block text-gray-300 hover:text-gray-100 transition-colors">
+              <Link
+                href="/conditions/spinal-stenosis-treatment-hyderabad"
+                className="block text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+              >
                 Lumbar Spinal Stenosis Treatment
               </Link>
-              <Link href="/conditions/trigeminal-neuralgia-treatment-hyderabad" className="block text-gray-300 hover:text-gray-100 transition-colors">
+              <Link
+                href="/conditions/trigeminal-neuralgia-treatment-hyderabad"
+                className="block text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+              >
                 Trigeminal Neuralgia Treatment
               </Link>
-              <Link href="/conditions/cervical-radiculopathy-treatment-hyderabad" className="block text-gray-300 hover:text-gray-100 transition-colors">
+              <Link
+                href="/conditions/cervical-radiculopathy-treatment-hyderabad"
+                className="block text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+              >
                 Cervical Radiculopathy Treatment
               </Link>
             </nav>
@@ -240,7 +260,7 @@ export default function Footer() {
         {/* Bottom Section */}
         <div className="border-t border-gray-800 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="text-sm text-gray-400 mb-4 md:mb-0">
+            <div className="text-sm text-gray-300 mb-4 md:mb-0">
               <p>© 2024 Dr Sayuj Krishnan. All rights reserved.</p>
               <p className="mt-1">
                 MBBS, DNB Neurosurgery (Direct 6 years) | Fellowship in Minimally Invasive and Advanced Spine Surgery
@@ -252,37 +272,37 @@ export default function Footer() {
             >
               <Link 
                 href="/privacy" 
-                className="text-gray-400 hover:text-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                className="text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 Privacy Policy
               </Link>
               <Link 
                 href="/cookies" 
-                className="text-gray-400 hover:text-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                className="text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 Cookie Policy
               </Link>
               <Link 
                 href="/terms" 
-                className="text-gray-400 hover:text-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                className="text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 Terms of Service
               </Link>
               <Link 
                 href="/disclaimer" 
-                className="text-gray-400 hover:text-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                className="text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 Medical Disclaimer
               </Link>
               <Link 
                 href="/content-integrity" 
-                className="text-gray-400 hover:text-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                className="text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 Content Integrity
               </Link>
               <Link 
                 href="/editorial-policy" 
-                className="text-gray-400 hover:text-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+                className="text-gray-300 hover:text-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 Editorial Policy
               </Link>

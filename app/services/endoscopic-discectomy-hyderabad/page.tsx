@@ -253,7 +253,10 @@ export default function EndoscopicDiscectomyPage() {
           <h2 className="text-3xl font-bold text-blue-800 mb-6">Patient Success Story</h2>
           <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
             <h3 className="text-xl font-semibold mb-3 text-blue-700">
-              <Link href="/stories/endoscopic-discectomy-same-day-hyderabad" className="hover:text-blue-600">
+              <Link
+                href="/stories/endoscopic-discectomy-same-day-hyderabad"
+                className="underline underline-offset-4 decoration-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-sm"
+              >
                 Same-Day Endoscopic Discectomy in Hyderabad — Case Story
               </Link>
             </h3>
