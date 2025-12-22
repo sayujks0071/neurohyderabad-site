@@ -140,6 +140,20 @@ a:focus {
   border-radius: 2px;
 }
 
+/* Make in-content links distinguishable beyond color */
+main a {
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+}
+
+main a.btn-primary,
+main a.btn-secondary,
+main a.btn-ghost,
+main a.no-underline {
+  text-decoration: none;
+}
+
 /* Buttons - Clinical Blue Primary */
 button,
 .btn-primary {
