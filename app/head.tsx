@@ -4,44 +4,7 @@ export default function Head() {
       {/* Bing Webmaster Tools Verification */}
       <meta name="msvalidate.01" content="13FC1F5CB1F44756BDBFD421C02C29E2" />
 
-      {/* Google tag (gtag.js) */}
-      <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17680191922" />
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'AW-17680191922');
-          `,
-        }}
-      />
-      {/* Event snippet for Contact conversion page */}
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-gtag('event', 'conversion', {'send_to': 'AW-17680191922/zBshCJ3e2M0bELKjye5B'});
-          `,
-        }}
-      />
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-function gtag_report_conversion(url) {
-  var callback = function () {
-    if (typeof(url) != 'undefined') {
-      window.location = url;
-    }
-  };
-  gtag('event', 'conversion', {
-    'send_to': 'AW-17680191922/zBshCJ3e2M0bELKjye5B',
-    'event_callback': callback
-  });
-  return false;
-}
-          `,
-        }}
-      />
+      {/* Note: Analytics / Ads scripts are loaded client-side after consent. */}
 
       {/* Critical CSS inlined for fastest rendering */}
       <style
@@ -105,22 +68,6 @@ img{max-width:100%;height:auto}
           `,
         }}
       />
-
-      {/* Preload critical resources for fastest LCP */}
-      <link
-        rel="preload"
-        href="https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2"
-        as="font"
-        type="font/woff2"
-        crossOrigin="anonymous"
-      />
-
-      {/* Critical resource hints for performance */}
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-
-      {/* DNS prefetch for external domains */}
-      <link rel="dns-prefetch" href="//www.googletagmanager.com" />
 
       {/* Additional PWA + mobile UX hints */}
       <meta name="format-detection" content="telephone=no" />

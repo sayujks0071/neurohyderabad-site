@@ -213,7 +213,7 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
             If you need to avoid general anaesthesia because of cardiac, lung, or metabolic risks, we offer an <strong>awake endoscopic spine pathway</strong> using spinal/epidural blocks with light sedation.
           </p>
           <div className="flex flex-wrap gap-3">
-            <Link href="/services/awake-spine-surgery-hyderabad" className="rounded-full bg-green-600 px-5 py-2 text-sm font-semibold text-white hover:bg-green-700">
+            <Link href="/services/awake-spine-surgery-hyderabad" className="rounded-full bg-green-700 px-5 py-2 text-sm font-semibold text-white hover:bg-green-800">
               See Awake Spine Surgery
             </Link>
             <a

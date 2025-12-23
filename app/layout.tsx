@@ -3,11 +3,8 @@ import { Inter, Merriweather } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
-// Declare global function for Google Ads conversion tracking
-// Note: gtag is already declared in src/components/GoogleAnalytics.tsx
 declare global {
   interface Window {
-    gtag_report_conversion?: (url?: string) => boolean;
     dataLayer?: unknown[];
   }
 }
@@ -179,7 +176,7 @@ export default function RootLayout({
         <ClientOnlyWrapper>
           <StickyCTA />
         </ClientOnlyWrapper>
-        <Analytics />
+        {process.env.VERCEL ? <Analytics /> : null}
       </body>
     </html>
   );
