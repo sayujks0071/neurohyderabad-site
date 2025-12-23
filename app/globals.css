@@ -82,8 +82,8 @@
    ============================================ */
 
 body {
-  background: var(--color-background) !important;
-  color: var(--color-text-primary) !important;
+  background: var(--color-background);
+  color: var(--color-text-primary);
   font-family: var(--font-primary);
   font-size: var(--text-sm);
   line-height: 1.6;
@@ -93,7 +93,6 @@ body {
 
 /* Typography Hierarchy */
 h1, h2, h3, h4, h5, h6 {
-  color: var(--color-text-primary) !important;
   font-family: var(--font-primary);
   font-weight: var(--font-bold);
   line-height: var(--typography-line-height-tight, 1.2);
@@ -120,38 +119,40 @@ p {
   font-family: var(--font-secondary);
   font-size: var(--text-sm);
   line-height: 1.6;
-  color: var(--color-text-primary);
+  /* Let text color inherit so dark sections (e.g. footer) can theme safely. */
 }
 
-/* Links */
-a {
-  color: var(--color-primary-500);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
+/* Links (base layer so Tailwind utilities can override safely) */
+@layer base {
+  a {
+    color: var(--color-primary-500);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
 
-a:hover {
-  color: var(--color-primary-700);
-}
+  a:hover {
+    color: var(--color-primary-700);
+  }
 
-a:focus {
-  outline: 2px solid var(--color-primary-500);
-  outline-offset: 2px;
-  border-radius: 2px;
-}
+  a:focus {
+    outline: 2px solid var(--color-primary-500);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
 
-/* Make in-content links distinguishable beyond color */
-main a {
-  text-decoration: underline;
-  text-underline-offset: 0.18em;
-  text-decoration-thickness: 1px;
-}
+  /* Make in-content links distinguishable beyond color */
+  main a {
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+    text-decoration-thickness: 1px;
+  }
 
-main a.btn-primary,
-main a.btn-secondary,
-main a.btn-ghost,
-main a.no-underline {
-  text-decoration: none;
+  main a.btn-primary,
+  main a.btn-secondary,
+  main a.btn-ghost,
+  main a.no-underline {
+    text-decoration: none;
+  }
 }
 
 /* Buttons - Clinical Blue Primary */

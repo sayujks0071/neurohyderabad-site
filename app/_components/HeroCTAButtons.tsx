@@ -61,7 +61,9 @@ export default function HeroCTAButtons() {
           size="lg"
           variant={primaryVariant}
           className={primaryClass}
-          aria-label={primary.ariaLabel}
+          aria-label={
+            primary.ariaLabel ? `${primary.label} (${primary.ariaLabel})` : primary.label
+          }
           onClick={() => handleClick(primary)}
         >
           {primary.label}
@@ -73,7 +75,9 @@ export default function HeroCTAButtons() {
           size="lg"
           variant={secondaryVariant}
           className={secondaryClass}
-          aria-label={secondary.ariaLabel}
+          aria-label={
+            secondary.ariaLabel ? `${secondary.label} (${secondary.ariaLabel})` : secondary.label
+          }
           onClick={() => handleClick(secondary)}
         >
           {secondary.label}

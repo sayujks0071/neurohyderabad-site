@@ -39,7 +39,7 @@ export default function Footer() {
               <div className="flex flex-wrap gap-3">
                 <a
                   href="https://www.drsayuj.info/appointments?utm_source=site&utm_medium=cta&utm_campaign=footer_nap"
-                  aria-label="Book a consultation from the footer contact section"
+                  aria-label="Book Consultation (from footer contact section)"
                   className="rounded-full bg-blue-700 px-4 py-3 min-h-[44px] text-sm font-semibold text-white hover:bg-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950"
                 >
                   Book Consultation

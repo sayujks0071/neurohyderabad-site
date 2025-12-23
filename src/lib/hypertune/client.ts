@@ -52,6 +52,13 @@ export function getHypertune() {
  * Useful for ensuring flags are ready before rendering
  */
 export async function waitForHypertune(): Promise<void> {
+  // If there is no token configured, do not attempt remote initialization.
+  // This avoids noisy console errors (and failed network requests) in local/dev environments.
+  const token = getHypertuneToken();
+  if (!token) {
+    return;
+  }
+
   const client = getHypertune();
   if (client && typeof client.initIfNeeded === 'function') {
     try {

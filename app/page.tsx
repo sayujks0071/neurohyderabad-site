@@ -266,7 +266,11 @@ export default function Home() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm"
-                  aria-label={publication.type === 'interview' ? `Watch interview: ${publication.title}` : `Read article: ${publication.title}`}
+                  aria-label={
+                    publication.type === 'interview'
+                      ? `Watch Interview: ${publication.title} (opens in a new tab)`
+                      : `Read: ${publication.title} (opens in a new tab)`
+                  }
                 >
                   {publication.type === 'interview' ? 'Watch Interview →' : `Read: ${publication.title.length > 50 ? publication.title.substring(0, 50) + '...' : publication.title} →`}
                 </a>
