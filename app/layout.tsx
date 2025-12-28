@@ -40,8 +40,8 @@ const merriweather = Merriweather({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Dr. Sayuj Krishnan S | Neurosurgeon Hyderabad",
-    template: "%s | Dr. Sayuj"
+    default: "Neurosurgeon & Endoscopic Spine Specialist Hyderabad | Dr. Sayuj Krishnan S",
+    template: "%s | Dr. Sayuj Krishnan S"
   },
   description:
     "German-trained neurosurgeon in Hyderabad for minimally invasive spine and brain surgery with same-day discharge at Yashoda Hospital, Malakpet.",
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Dr. Sayuj Krishnan S | Best Neurosurgeon in Hyderabad | Brain & Spine Surgery",
+    title: "Neurosurgeon & Endoscopic Spine Specialist Hyderabad | Dr. Sayuj Krishnan S",
     description: "Expert neurosurgeon Dr. Sayuj Krishnan in Hyderabad specializing in endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures. Same-day discharge available.",
     url: SITE_URL,
     siteName: "Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",

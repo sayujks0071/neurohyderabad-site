@@ -38,6 +38,6 @@ export default function robots(): MetadataRoute.Robots {
       'https://www.drsayuj.info/sitemap-images.xml',
       'https://www.drsayuj.info/sitemap-videos.xml',
     ],
-    host: 'https://www.drsayuj.info',
+    host: 'www.drsayuj.info',
   };
 }

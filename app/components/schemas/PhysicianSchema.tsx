@@ -71,6 +71,7 @@ export default function PhysicianSchema() {
         "additionalName": "S",
         "honorificPrefix": "Dr",
         "description": "Premier neurosurgeon with over 9 years of experience specializing in minimally invasive brain & spine surgery, awake brain surgery, and robotic neurosurgery. Fellowship-trained with German training in endoscopic spine surgery.",
+        "disambiguatingDescription": "Hyderabad (India)-based neurosurgeon and spine surgeon at Yashoda Hospital, Malakpet. Not associated with US-based internal medicine physician Dr. Sayuj Paudel.",
         "url": SITE_URL,
         "image": `${SITE_URL}/images/og-default.jpg`,
         "telephone": "+91 97782 80044",
@@ -303,9 +304,10 @@ export default function PhysicianSchema() {
           "https://www.yashodahospitals.com/doctor/dr-sayuj-krishnan/",
           "https://www.practo.com/hyderabad/doctor/dr-sayuj-krishnan-neurosurgeon",
           "https://www.justdial.com/Hyderabad/Dr-Sayuj-Krishnan-Neurosurgeon-Malakpet",
-          "https://www.linkedin.com/in/dr-sayuj-krishnan",
+          "https://in.linkedin.com/in/dr-sayuj-krishnan-s-275baa66",
           "https://g.co/kgs/9366939683880052414",
-          "https://www.google.com/maps/place/Dr+Sayuj+Krishnan"
+          "https://www.google.com/maps/place/Dr+Sayuj+Krishnan",
+          "https://www.youtube.com/channel/UCc-KQY7cjePPy0p49W3SZFQ"
         ]
       },
       {
