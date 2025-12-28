@@ -21,9 +21,7 @@ import TrustSignalViewportTracker from "./_components/TrustSignalViewportTracker
 import UserJourneyTracker from "./_components/UserJourneyTracker";
 import TrustBridgeLink from "./_components/TrustBridgeLink";
 import { mediaPublications } from "../src/content/media";
-import PhysicianSchema from "./components/schemas/PhysicianSchema";
 import MedicalClinicSchema from "./components/schemas/MedicalClinicSchema";
-import WebsiteSchema from "./components/schemas/WebsiteSchema";
 import Button from "./_components/Button";
 import Card from "./_components/Card";
 import Section from "./_components/Section";
@@ -34,7 +32,7 @@ const HOME_CANONICAL = SITE_URL.endsWith("/") ? SITE_URL : `${SITE_URL}/`;
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Dr. Sayuj Krishnan S | Best Neurosurgeon Hyderabad",
+    absolute: "Neurosurgeon & Endoscopic Spine Specialist Hyderabad | Dr. Sayuj Krishnan S",
   },
   description: 'German-trained neurosurgeon in Hyderabad for minimally invasive spine and awake brain surgery. 1,000+ endoscopic procedures with same-day discharge at Yashoda Hospital, Malakpet.',
   keywords: [
@@ -167,10 +165,7 @@ const HOME_FAQS = [
 export default function Home() {
   return (
     <>
-      {/* Schema Markup for E-E-A-T */}
-      <PhysicianSchema />
       <MedicalClinicSchema />
-      <WebsiteSchema />
       <FAQPageSchema faqs={HOME_FAQS} pageUrl={HOME_CANONICAL} />
 
       {/* <ScrollDepthTracker pageSlug="/" /> */}
