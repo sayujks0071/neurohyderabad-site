@@ -4,7 +4,7 @@ export const metadata = {
   title: "Endoscopic Spine Surgery in Hyderabad | Cervical & Lumbar | Dr. Sayuj Krishnan",
   description:
     "Full Endoscopic Spine Surgery (FESS) in Hyderabad for cervical/lumbar disc herniation and foraminal stenosis. Indications, technique, risks, recovery timelines, FAQs, and booking.",
-  alternates: { canonical: "https://www.drsayuj.com/endoscopic-spine-surgery-hyderabad" },
+  alternates: { canonical: "https://www.drsayuj.info/endoscopic-spine-surgery-hyderabad" },
 };
 
 const SECTIONS = [
@@ -56,12 +56,12 @@ export default function Page() {
     name: "Endoscopic Spine Surgery",
     alternateName: "Full Endoscopic Spine Surgery (FESS)",
     bodyLocation: ["Cervical spine", "Lumbar spine"],
-    url: "https://www.drsayuj.com/endoscopic-spine-surgery-hyderabad",
+    url: "https://www.drsayuj.info/endoscopic-spine-surgery-hyderabad",
     medicalSpecialty: "Neurosurgery",
     performer: {
       "@type": "Physician",
       name: "Dr. Sayuj Krishnan",
-      url: "https://www.drsayuj.com",
+      url: "https://www.drsayuj.info",
     },
     areaServed: ["Hyderabad", "Telangana", "India"],
   };
@@ -70,8 +70,8 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.drsayuj.com/" },
-      { "@type": "ListItem", position: 2, name: "Endoscopic Spine Surgery in Hyderabad", item: "https://www.drsayuj.com/endoscopic-spine-surgery-hyderabad" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.drsayuj.info/" },
+      { "@type": "ListItem", position: 2, name: "Endoscopic Spine Surgery in Hyderabad", item: "https://www.drsayuj.info/endoscopic-spine-surgery-hyderabad" },
     ],
   };
 

@@ -1,0 +1,42 @@
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface FAQSchemaProps {
+  faqs: FAQItem[];
+  pageTitle?: string;
+}
+
+export default function FAQSchema({ faqs, pageTitle = "Frequently Asked Questions" }: FAQSchemaProps) {
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(faqSchema, null, 2)
+      }}
+    />
+  );
+}
+
+
+
+
+
+
+
+
+

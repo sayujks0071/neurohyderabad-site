@@ -1,0 +1,327 @@
+name: Auto-Fix AI PR Bot
+
+on:
+  workflow_run:
+    workflows:
+      - "Lighthouse CI"
+      - "Broken Link Checker"
+      - "JSON-LD Schema Validator"
+      - "Meta Tag Checker"
+      - "Accessibility Audit (a11y)"
+      - "Image Optimization"
+      - "Spell Check"
+    types:
+      - completed
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: read
+  issues: read
+
+jobs:
+  autofix:
+    # Run on workflow failures OR manual dispatch OR when workflows complete (to check for issues)
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run && (
+        github.event.workflow_run.conclusion == 'failure' ||
+        github.event.workflow_run.conclusion == 'success'
+      ))
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: false
+
+      - name: Download workflow artifacts
+        if: github.event.workflow_run != null
+        uses: dawidd6/action-download-artifact@v6
+        continue-on-error: true
+        with:
+          workflow: ${{ github.event.workflow_run.workflow_id }}
+          run_id: ${{ github.event.workflow_run.id }}
+          path: artifacts
+
+      - name: Create empty artifacts directory (if manual trigger)
+        if: github.event.workflow_run == null
+        run: mkdir -p artifacts && echo "Manual trigger - no artifacts to download" > artifacts/manual-trigger.txt
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Aggregate all reports
+        id: aggregate
+        timeout-minutes: 5
+        continue-on-error: true
+        run: |
+          cat > aggregate-reports.js << 'EOF'
+          const fs = require('fs');
+          const path = require('path');
+          
+          const issues = {
+            lighthouse: [],
+            brokenLinks: [],
+            schema: [],
+            metaTags: [],
+            accessibility: [],
+            images: [],
+            spelling: []
+          };
+          
+          function findFiles(dir, files = []) {
+            if (!fs.existsSync(dir)) return files;
+            
+            const items = fs.readdirSync(dir);
+            for (const item of items) {
+              const fullPath = path.join(dir, item);
+              const stat = fs.statSync(fullPath);
+              
+              if (stat.isDirectory()) {
+                findFiles(fullPath, files);
+              } else {
+                files.push(fullPath);
+              }
+            }
+            return files;
+          }
+          
+          const artifactFiles = findFiles('artifacts');
+          
+          console.log('Found', artifactFiles.length, 'artifact files');
+          
+          if (artifactFiles.length === 0) {
+            console.log('No artifacts found - creating empty report');
+            const emptyReport = {
+              summary: {
+                lighthouse: 0,
+                brokenLinks: 0,
+                schema: 0,
+                metaTags: 0,
+                accessibility: 0,
+                images: 0,
+                spelling: 0
+              },
+              details: {
+                lighthouse: [],
+                brokenLinks: [],
+                schema: [],
+                metaTags: [],
+                accessibility: [],
+                images: [],
+                spelling: []
+              }
+            };
+            fs.writeFileSync('aggregated-report.json', JSON.stringify(emptyReport, null, 2));
+            fs.writeFileSync('fixes.patch', '# No fixes needed - no artifacts found');
+            process.exit(0);
+          }
+          
+          artifactFiles.forEach(file => {
+            try {
+              const content = fs.readFileSync(file, 'utf8');
+              
+              // Try to parse as JSON
+              try {
+                const json = JSON.parse(content);
+                
+                // Lighthouse reports
+                if (json.categories) {
+                  Object.entries(json.categories).forEach(([key, value]) => {
+                    if (value.score < 0.9) {
+                      issues.lighthouse.push({
+                        category: value.title,
+                        score: Math.round(value.score * 100),
+                        file: file
+                      });
+                    }
+                  });
+                }
+                
+                // Accessibility reports
+                if (json.totalIssues) {
+                  issues.accessibility.push({
+                    total: json.totalIssues,
+                    critical: json.criticalIssues,
+                    categories: json.categories
+                  });
+                }
+                
+              } catch (e) {
+                // Not JSON, check for text patterns
+                if (content.includes('BROKEN') || content.includes('404')) {
+                  const lines = content.split('\n').filter(l => l.includes('http'));
+                  issues.brokenLinks.push(...lines);
+                }
+              }
+            } catch (error) {
+              console.log('Could not read', file);
+            }
+          });
+          
+          const report = {
+            summary: {
+              lighthouse: issues.lighthouse.length,
+              brokenLinks: issues.brokenLinks.length,
+              schema: issues.schema.length,
+              metaTags: issues.metaTags.length,
+              accessibility: issues.accessibility.length,
+              images: issues.images.length,
+              spelling: issues.spelling.length
+            },
+            details: issues
+          };
+          
+          fs.writeFileSync('aggregated-report.json', JSON.stringify(report, null, 2));
+          
+          console.log('\nAggregated Report:');
+          console.log(JSON.stringify(report.summary, null, 2));
+          
+          // Check if there are actionable issues
+          const totalIssues = Object.values(report.summary).reduce((a, b) => a + b, 0);
+          
+          if (totalIssues === 0) {
+            console.log('No issues found to fix');
+            // Create empty file to indicate no fixes needed
+            fs.writeFileSync('fixes.patch', '# No fixes needed - all checks passed');
+            process.exit(0);
+          }
+          EOF
+          
+          node aggregate-reports.js
+
+      - name: Skip AI fixes (missing OPENAI_API_KEY)
+        if: ${{ !secrets.OPENAI_API_KEY }}
+        run: |
+          echo "OPENAI_API_KEY not set; skipping AI auto-fix generation."
+          echo "# No fixes generated - missing OPENAI_API_KEY" > fixes.patch
+
+      - name: Generate AI fixes
+        id: ai_fix
+        if: secrets.OPENAI_API_KEY != ''
+        timeout-minutes: 5
+        continue-on-error: true
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          node .github/scripts/generate-fixes.js
+
+      - name: Upload Auto-Fix debug artifacts
+        if: always()
+        timeout-minutes: 2
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: autofix-debug
+          path: autofix-debug/
+          retention-days: 30
+          if-no-files-found: ignore
+
+      - name: Validate patch
+        id: validate
+        if: always()
+        timeout-minutes: 2
+        continue-on-error: true
+        run: |
+          if [ ! -f fixes.patch ]; then
+            echo "No patch file generated"
+            echo "has_fixes=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          # Check if patch is just a comment (no fixes needed)
+          if grep -q "^# No fixes needed" fixes.patch; then
+            echo "No fixes needed - all checks passed"
+            echo "has_fixes=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          if [ ! -s fixes.patch ] || [ "$(wc -c < fixes.patch)" -lt 50 ]; then
+            echo "Patch file is empty or too small"
+            echo "has_fixes=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          echo "Patch file exists and is non-empty"
+          echo "has_fixes=true" >> $GITHUB_OUTPUT
+          
+          # Try to apply patch in dry-run mode
+          if git apply --check fixes.patch 2>&1; then
+            echo "Patch can be applied cleanly"
+            echo "patch_valid=true" >> $GITHUB_OUTPUT
+          else
+            echo "Patch has conflicts, will create as suggestion"
+            echo "patch_valid=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Apply fixes
+        if: steps.validate.outputs.has_fixes == 'true' && steps.validate.outputs.patch_valid == 'true'
+        timeout-minutes: 2
+        continue-on-error: true
+        run: |
+          git config user.name "Auto-Fix Bot"
+          git config user.email "autofix@neurohyderabad.org"
+          
+          # Apply the patch
+          git apply fixes.patch
+          
+          # Add changed files
+          git add -A
+
+      - name: Create Pull Request
+        if: steps.validate.outputs.has_fixes == 'true'
+        timeout-minutes: 3
+        continue-on-error: true
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: 'chore: auto-fix SEO, performance, and accessibility issues'
+          title: '🤖 Auto-Fix: Automated Code Improvements'
+          body: |
+            ## 🤖 Auto-Fix AI PR Bot
+            
+            This PR was automatically generated to fix issues detected by CI workflows.
+            
+            ### Issues Addressed:
+            
+            🔦 **Lighthouse Performance**: Optimizations for Core Web Vitals  
+            🔗 **Broken Links**: Fixed or updated non-working URLs  
+            📋 **Schema/JSON-LD**: Corrected structured data markup  
+            🏷️ **Meta Tags**: Improved SEO metadata  
+            ♿ **Accessibility**: Enhanced WCAG compliance  
+            🖼️ **Images**: Added missing alt tags and optimized sizing  
+            
+            ### What Changed:
+            
+            The AI analyzed audit reports from:
+            - Lighthouse CI
+            - Broken Link Checker
+            - Schema Validator
+            - Meta Tag Checker
+            - Accessibility Audit
+            - Image Optimization
+            
+            And generated surgical code fixes for the detected issues.
+            
+            ### Review Checklist:
+            
+            - [ ] Changes look correct
+            - [ ] No unintended modifications
+            - [ ] Tests pass
+            - [ ] Lighthouse scores improved
+            
+            ---
+            
+            **Triggered by**: ${{ github.event.workflow_run.name }}  
+            **Run ID**: ${{ github.event.workflow_run.id }}  
+            
+            🔗 [View workflow run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+          branch: autofix/ai-${{ github.run_id }}
+          delete-branch: true
+          labels: autofix,ai,automated
+          assignees: sayujks0071

@@ -13,7 +13,7 @@ export default function TrustSignalsFooter() {
             </p>
             <div className="space-y-2 text-sm">
               <p><strong>Phone:</strong> <a href="tel:+919778280044" className="text-blue-400 hover:underline">+91 9778280044</a></p>
-              <p><strong>Email:</strong> <a href="mailto:neurospinehyd@drsayuj.com" className="text-blue-400 hover:underline">neurospinehyd@drsayuj.com</a></p>
+              <p><strong>Email:</strong> <a href="mailto:hellodr@drsayuj.info" className="text-blue-400 hover:underline">hellodr@drsayuj.info</a></p>
             </div>
           </div>
 
@@ -23,7 +23,7 @@ export default function TrustSignalsFooter() {
             <ul className="space-y-2 text-sm">
               <li><Link href="/services/minimally-invasive-spine-surgery" className="text-gray-300 hover:text-white">Endoscopic Spine Surgery</Link></li>
               <li><Link href="/services/brain-tumor-surgery-hyderabad" className="text-gray-300 hover:text-white">Brain Tumor Surgery</Link></li>
-              <li><Link href="/services/epilepsy-surgery" className="text-gray-300 hover:text-white">Epilepsy Surgery</Link></li>
+              <li><Link href="/services/epilepsy-surgery-hyderabad" className="text-gray-300 hover:text-white">Epilepsy Surgery</Link></li>
               <li><Link href="/conditions/trigeminal-neuralgia-treatment" className="text-gray-300 hover:text-white">Trigeminal Neuralgia</Link></li>
             </ul>
           </div>

@@ -11,7 +11,7 @@ export function awakeCraniotomySchemas(url: string) {
     url,
     name: 'Awake Craniotomy Guide Hyderabad | Dr. Sayuj',
     description: 'Why awake brain surgery is chosen, mapping process, recovery, and FAQs for Hyderabad patients.',
-    reviewedBy: { '@id': 'https://www.drsayuj.com/#physician' },
+    reviewedBy: { '@id': 'https://www.drsayuj.info/#physician' },
     lastReviewed: today,
     breadcrumb: { '@id': `${url}#breadcrumb` },
     mainEntity: [

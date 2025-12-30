@@ -10,125 +10,183 @@ interface SEOOptimizerProps {
 
 export default function SEOOptimizer({ pageType, pageSlug, serviceOrCondition }: SEOOptimizerProps) {
   useEffect(() => {
-    // Track page view with SEO context
+    if (typeof window === 'undefined') {
+      return;
+    }
+
     analytics.pageView(pageSlug, pageType, serviceOrCondition);
 
-    // Track Core Web Vitals
-    const trackWebVitals = () => {
-      // LCP (Largest Contentful Paint)
-      new PerformanceObserver((list) => {
-        const entries = list.getEntries();
-        const lastEntry = entries[entries.length - 1];
-        analytics.coreWebVitals('LCP', lastEntry.startTime, pageSlug);
-      }).observe({ entryTypes: ['largest-contentful-paint'] });
-
-      // FID (First Input Delay)
-      new PerformanceObserver((list) => {
-        const entries = list.getEntries();
-        entries.forEach((entry) => {
-          const fidEntry = entry as any;
-          if (fidEntry.processingStart) {
-            analytics.coreWebVitals('FID', fidEntry.processingStart - fidEntry.startTime, pageSlug);
-          }
-        });
-      }).observe({ entryTypes: ['first-input'] });
-
-      // CLS (Cumulative Layout Shift)
-      let clsValue = 0;
-      new PerformanceObserver((list) => {
-        const entries = list.getEntries();
-        entries.forEach((entry) => {
-          const clsEntry = entry as any;
-          if (!clsEntry.hadRecentInput) {
-            clsValue += clsEntry.value;
-          }
-        });
-        analytics.coreWebVitals('CLS', clsValue, pageSlug);
-      }).observe({ entryTypes: ['layout-shift'] });
-
-      // FCP (First Contentful Paint)
-      new PerformanceObserver((list) => {
-        const entries = list.getEntries();
-        entries.forEach((entry) => {
-          analytics.coreWebVitals('FCP', entry.startTime, pageSlug);
-        });
-      }).observe({ entryTypes: ['paint'] });
-    };
-
-    // Track scroll depth
-    let maxScrollDepth = 0;
-    const trackScrollDepth = () => {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollPercent = Math.round((scrollTop / docHeight) * 100);
-      
-      if (scrollPercent > maxScrollDepth) {
-        maxScrollDepth = scrollPercent;
-        analytics.scrollDepth(pageSlug, scrollPercent);
-      }
-    };
-
-    // Track time on page
     const startTime = Date.now();
-    const trackTimeOnPage = () => {
-      const timeOnPage = Date.now() - startTime;
-      analytics.track('Time_On_Page', {
-        page_slug: pageSlug,
-        page_type: pageType,
-        time_on_page_ms: timeOnPage,
-        service_or_condition: serviceOrCondition
-      });
-    };
+    const cleanupCallbacks: Array<() => void> = [];
 
-    // Initialize tracking
-    trackWebVitals();
-    window.addEventListener('scroll', trackScrollDepth);
-    
-    // Track time on page when user leaves
-    window.addEventListener('beforeunload', trackTimeOnPage);
-    document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'hidden') {
-        trackTimeOnPage();
-      }
-    });
+    const startTracking = () => {
+      const observers: PerformanceObserver[] = [];
 
-    // Track FAQ interactions
-    const faqElements = document.querySelectorAll('details');
-    faqElements.forEach((faq, index) => {
-      faq.addEventListener('toggle', () => {
-        analytics.faqToggle(pageSlug, `faq_${index}`, faq.open);
-      });
-    });
+      if ('PerformanceObserver' in window) {
+        try {
+          const lcpObserver = new PerformanceObserver((list) => {
+            const entries = list.getEntries();
+            const lastEntry = entries[entries.length - 1];
+            if (lastEntry) {
+              analytics.coreWebVitals('LCP', lastEntry.startTime, pageSlug);
+            }
+          });
+          lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
+          observers.push(lcpObserver);
 
-    // Track CTA clicks
-    const ctaElements = document.querySelectorAll('a[href*="/appointments"], a[href*="tel:"], a[href*="wa.me"]');
-    ctaElements.forEach((cta) => {
-      cta.addEventListener('click', (e) => {
-        const href = (e.target as HTMLAnchorElement).href;
-        let ctaType = 'unknown';
-        
-        if (href.includes('/appointments')) {
-          ctaType = 'appointment';
-        } else if (href.includes('tel:')) {
-          ctaType = 'phone';
-        } else if (href.includes('wa.me')) {
-          ctaType = 'whatsapp';
+          const fidObserver = new PerformanceObserver((list) => {
+            list.getEntries().forEach((entry) => {
+              const fidEntry = entry as PerformanceEntry & { processingStart?: number };
+              if (typeof fidEntry.processingStart === 'number') {
+                analytics.coreWebVitals('FID', fidEntry.processingStart - fidEntry.startTime, pageSlug);
+              }
+            });
+          });
+          fidObserver.observe({ entryTypes: ['first-input'] });
+          observers.push(fidObserver);
+
+          let clsValue = 0;
+          const clsObserver = new PerformanceObserver((list) => {
+            list.getEntries().forEach((entry) => {
+              const clsEntry = entry as PerformanceEntry & { hadRecentInput?: boolean; value?: number };
+              if (!clsEntry.hadRecentInput && typeof clsEntry.value === 'number') {
+                clsValue += clsEntry.value;
+              }
+            });
+            analytics.coreWebVitals('CLS', clsValue, pageSlug);
+          });
+          clsObserver.observe({ entryTypes: ['layout-shift'] });
+          observers.push(clsObserver);
+
+          const fcpObserver = new PerformanceObserver((list) => {
+            list.getEntries().forEach((entry) => {
+              analytics.coreWebVitals('FCP', entry.startTime, pageSlug);
+            });
+          });
+          fcpObserver.observe({ entryTypes: ['paint'] });
+          observers.push(fcpObserver);
+        } catch {
+          // Ignore observer errors to avoid breaking hydration
         }
-        
-        analytics.track('CTA_Click', {
+      }
+
+      if (observers.length > 0) {
+        cleanupCallbacks.push(() => observers.forEach((observer) => observer.disconnect()));
+      }
+
+      let maxScrollDepth = 0;
+      const trackScrollDepth = () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        if (docHeight <= 0) {
+          return;
+        }
+        const scrollPercent = Math.round((scrollTop / docHeight) * 100);
+
+        if (scrollPercent > maxScrollDepth) {
+          maxScrollDepth = scrollPercent;
+          analytics.scrollDepth(pageSlug, scrollPercent);
+        }
+      };
+
+      window.addEventListener('scroll', trackScrollDepth, { passive: true });
+      cleanupCallbacks.push(() => window.removeEventListener('scroll', trackScrollDepth));
+
+      const trackTimeOnPage = () => {
+        const timeOnPage = Date.now() - startTime;
+        analytics.track('Time_On_Page', {
           page_slug: pageSlug,
           page_type: pageType,
-          cta_type: ctaType,
-          cta_href: href,
+          time_on_page_ms: timeOnPage,
           service_or_condition: serviceOrCondition
         });
-      });
-    });
+      };
 
-    // Cleanup
+      const beforeUnloadHandler = () => trackTimeOnPage();
+      const visibilityHandler = () => {
+        if (document.visibilityState === 'hidden') {
+          trackTimeOnPage();
+        }
+      };
+
+      window.addEventListener('beforeunload', beforeUnloadHandler);
+      document.addEventListener('visibilitychange', visibilityHandler);
+
+      cleanupCallbacks.push(() => {
+        window.removeEventListener('beforeunload', beforeUnloadHandler);
+        document.removeEventListener('visibilitychange', visibilityHandler);
+        trackTimeOnPage();
+      });
+
+      const faqElements = Array.from(
+        document.querySelectorAll<HTMLDetailsElement>('details[data-faq-item]')
+      );
+
+      faqElements.forEach((faq, index) => {
+        const handler = () => {
+          const faqId = faq.dataset.faqId || `faq_${index}`;
+          analytics.faqToggle(pageSlug, faqId, faq.open);
+        };
+        faq.addEventListener('toggle', handler);
+        cleanupCallbacks.push(() => faq.removeEventListener('toggle', handler));
+      });
+
+      const ctaElements = Array.from(
+        document.querySelectorAll<HTMLAnchorElement>('a[href*="/appointments"], a[href*="tel:"], a[href*="wa.me"]')
+      );
+
+      ctaElements.forEach((cta) => {
+        const handler = () => {
+          const href = cta.href;
+          let ctaType = 'unknown';
+
+          if (href.includes('/appointments')) {
+            ctaType = 'appointment';
+          } else if (href.includes('tel:')) {
+            ctaType = 'phone';
+          } else if (href.includes('wa.me')) {
+            ctaType = 'whatsapp';
+          }
+
+          analytics.track('CTA_Click', {
+            page_slug: pageSlug,
+            page_type: pageType,
+            cta_type: ctaType,
+            cta_href: href,
+            service_or_condition: serviceOrCondition
+          });
+        };
+
+        cta.addEventListener('click', handler);
+        cleanupCallbacks.push(() => cta.removeEventListener('click', handler));
+      });
+    };
+
+    let idleHandle: number | null = null;
+    const idleWindow = window as typeof window & {
+      requestIdleCallback?: (callback: IdleRequestCallback, options?: IdleRequestOptions) => number;
+      cancelIdleCallback?: (handle: number) => void;
+    };
+
+    const scheduleTracking = () => {
+      if (typeof idleWindow.requestIdleCallback === 'function') {
+        idleHandle = idleWindow.requestIdleCallback(startTracking, { timeout: 1500 });
+      } else {
+        idleHandle = window.setTimeout(startTracking, 0);
+      }
+    };
+
+    scheduleTracking();
+
     return () => {
-      window.removeEventListener('scroll', trackScrollDepth);
-      window.removeEventListener('beforeunload', trackTimeOnPage);
+      if (idleHandle !== null) {
+        if (typeof idleWindow.cancelIdleCallback === 'function') {
+          idleWindow.cancelIdleCallback(idleHandle);
+        } else {
+          clearTimeout(idleHandle);
+        }
+      }
+      cleanupCallbacks.forEach((cleanup) => cleanup());
     };
   }, [pageType, pageSlug, serviceOrCondition]);
 

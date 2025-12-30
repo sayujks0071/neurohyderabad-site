@@ -2,7 +2,7 @@ import { CLINIC } from '@/app/_lib/clinic';
 
 export const physician = {
   '@type': 'Physician',
-  '@id': 'https://www.drsayuj.com/#physician',
+  '@id': 'https://www.drsayuj.info/#physician',
   name: 'Dr. Sayuj Krishnan S',
   medicalSpecialty: ['Neurosurgery', 'SpineSurgery'],
   affiliation: { 

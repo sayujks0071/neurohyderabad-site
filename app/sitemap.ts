@@ -1,208 +1,142 @@
 import { MetadataRoute } from 'next';
-import { patientStories } from '../src/content/stories';
 
-// ISR: Revalidate every hour
-export const revalidate = 3600;
+const SITE_URL = 'https://www.drsayuj.info';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://www.drsayuj.com';
-  const now = new Date();
+  const now = new Date().toISOString();
   
-  const entries: MetadataRoute.Sitemap = [
-    {
-      url: baseUrl,
-      lastModified: now,
-      changeFrequency: 'daily',
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/services/`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/services/minimally-invasive-spine-surgery/`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/services/endoscopic-discectomy-hyderabad/`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/services/endoscopic-foraminotomy-hyderabad/`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/services/endoscopic-ulbd-hyderabad/`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/services/endoscopic-cervical-discectomy-hyderabad/`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/services/cervical-foraminotomy-hyderabad/`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/services/brain-tumor-surgery-hyderabad/`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/services/epilepsy-surgery-hyderabad/`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/services/peripheral-nerve-surgery-hyderabad/`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/services/spinal-fusion-surgery-hyderabad/`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/services/microvascular-decompression/`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/services/radiosurgery-gamma-knife/`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/conditions/`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/conditions/sciatica-treatment/`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/conditions/lumbar-spinal-stenosis-treatment/`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/conditions/trigeminal-neuralgia-treatment/`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/conditions/cervical-radiculopathy-treatment/`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/disease-guides/`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/disease-guides/degenerative-disc-disease/`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/technology-facilities/`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/emergency-rehabilitation/`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/blog/`,
-      lastModified: now,
-      changeFrequency: 'daily',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/blog/endoscopic-spine-surgery-cost-hyderabad/`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/blog/return-to-work-after-endoscopic-discectomy-hyderabad/`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/blog/endoscopic-vs-microdiscectomy-hyderabad/`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/patient-stories`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/appointments/`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/about/`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/contact/`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    },
+  const corePages = [
+    { url: '', priority: 1.0, changeFrequency: 'daily' as const },
+    { url: '/about', priority: 1.0, changeFrequency: 'weekly' as const },
+    { url: '/appointments', priority: 0.9, changeFrequency: 'weekly' as const },
+    { url: '/contact', priority: 0.9, changeFrequency: 'weekly' as const },
+    { url: '/services', priority: 0.9, changeFrequency: 'weekly' as const },
+    { url: '/conditions', priority: 0.9, changeFrequency: 'weekly' as const },
+    { url: '/locations', priority: 0.8, changeFrequency: 'weekly' as const },
   ];
 
-  const storyEntries: MetadataRoute.Sitemap = patientStories.map((story) => ({
-    url: `${baseUrl}/patient-stories/${story.slug}`,
-    lastModified: new Date(story.date),
-    changeFrequency: 'monthly',
-    priority: 0.5,
-  }));
+  const servicePages = [
+    '/services/minimally-invasive-spine-surgery',
+    '/services/endoscopic-discectomy-hyderabad',
+    '/services/brain-tumor-surgery-hyderabad',
+    '/services/spinal-fusion-surgery-hyderabad',
+    '/services/epilepsy-surgery-hyderabad',
+    '/services/peripheral-nerve-surgery-hyderabad',
+    '/services/awake-spine-surgery-hyderabad',
+    '/services/spine-surgery-cost-hyderabad',
+    '/services/slip-disc-surgery-cost-hyderabad',
+  ];
 
-  return [...entries, ...storyEntries];
+  const conditionPages = [
+    '/conditions/brain-tumor-surgery-hyderabad',
+    '/conditions/sciatica-treatment-hyderabad',
+    '/conditions/spinal-stenosis-treatment-hyderabad',
+    '/conditions/trigeminal-neuralgia-treatment-hyderabad',
+    '/conditions/cervical-radiculopathy-treatment-hyderabad',
+    '/conditions/slip-disc-treatment-hyderabad',
+  ];
+
+  const locationPages = [
+    '/neurosurgeon-hyderabad',
+    '/neurosurgeon-jubilee-hills',
+    '/neurosurgeon-banjara-hills',
+    '/neurosurgeon-hitech-city',
+    '/neurosurgeon-secunderabad',
+    '/neurosurgeon-gachibowli',
+    '/neurosurgeon-malakpet',
+    '/locations/malakpet',
+    '/locations/lb-nagar',
+    '/locations/brain-spine-surgeon-jubilee-hills',
+    '/locations/brain-spine-surgeon-banjara-hills',
+    '/locations/brain-spine-surgeon-hitec-city',
+  ];
+
+  const resourcePages = [
+    '/knowledge-base',
+    '/blog',
+    '/patient-stories',
+    '/disease-guides',
+    '/research',
+    '/media',
+    '/emergency-rehabilitation',
+    '/technology-facilities',
+    '/best-neurosurgeon-in-hyderabad',
+  ];
+
+  const blogPosts = [
+    '/blog/does-endoscopic-spine-surgery-work-for-sciatica-hyderabad',
+    '/blog/when-to-worry-about-back-pain-neurosurgeon-hyderabad',
+    '/blog/brain-tumor-surgery-cost-hyderabad',
+    '/blog/endoscopic-spine-surgery-cost-hyderabad',
+    '/blog/endoscopic-discectomy-cost-hyderabad',
+    '/blog/spinal-fusion-cost-hyderabad',
+    '/blog/spine-surgery-recovery-timeline-hyderabad',
+    '/blog/awake-craniotomy-guide',
+    '/blog/day-care-spine-surgery-insurance-hyderabad',
+    '/blog/day-care-endoscopic-spine-surgery-eligibility',
+    '/blog/endoscopic-cervical-spine-surgery-hyderabad',
+    '/blog/endoscopic-vs-microdiscectomy-hyderabad',
+    '/blog/return-to-work-after-endoscopic-discectomy-hyderabad',
+    '/blog/mvd-vs-radiosurgery-trigeminal-neuralgia',
+    '/blog/sciatica-pain-management-hyderabad',
+    '/blog/spine-health-maintenance-hyderabad',
+    '/blog/disc-replacement-vs-fusion',
+    '/blog/how-much-does-brain-surgery-cost-hyderabad',
+  ];
+
+  const symptomPages = [
+    '/symptoms/signs-of-brain-tumor',
+    '/symptoms/pain-on-top-of-head-causes',
+  ];
+
+  const legalPages = [
+    '/privacy',
+    '/cookies',
+    '/terms',
+    '/disclaimer',
+    '/medical-disclaimer',
+    '/content-integrity',
+    '/editorial-policy',
+  ];
+
+  const entries: MetadataRoute.Sitemap = [];
+
+  for (const page of corePages) {
+    entries.push({
+      url: `${SITE_URL}${page.url}`,
+      lastModified: now,
+      changeFrequency: page.changeFrequency,
+      priority: page.priority,
+    });
+  }
+
+  for (const page of servicePages) {
+    entries.push({ url: `${SITE_URL}${page}`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 });
+  }
+
+  for (const page of conditionPages) {
+    entries.push({ url: `${SITE_URL}${page}`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 });
+  }
+
+  for (const page of locationPages) {
+    entries.push({ url: `${SITE_URL}${page}`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 });
+  }
+
+  for (const page of resourcePages) {
+    entries.push({ url: `${SITE_URL}${page}`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 });
+  }
+
+  for (const page of blogPosts) {
+    entries.push({ url: `${SITE_URL}${page}`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 });
+  }
+
+  for (const page of symptomPages) {
+    entries.push({ url: `${SITE_URL}${page}`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 });
+  }
+
+  for (const page of legalPages) {
+    entries.push({ url: `${SITE_URL}${page}`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 });
+  }
+
+  return entries;
 }

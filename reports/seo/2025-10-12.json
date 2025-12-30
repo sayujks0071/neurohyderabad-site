@@ -1,0 +1,498 @@
+{
+  "date": "2025-10-12",
+  "pages": {
+    "https://www.drsayuj.info/conditions/brain-tumor-surgery-hyderabad": {
+      "slug": "conditions_brain-tumor-surgery-hyderabad",
+      "html": {
+        "status": 200,
+        "title": "Brain Tumor Surgery Hyderabad \u2014 Microsurgical &amp; Radiosurgery Care | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+        "title_length": 115,
+        "meta_description": "Comprehensive brain tumour evaluation, neuronavigation-guided microsurgery, radiosurgery, and rehabilitation with Dr. Sayuj Krishnan at Yashoda Hospital, Hyderabad.",
+        "meta_description_length": 164,
+        "canonical": "https://www.drsayuj.info/conditions/brain-tumor-surgery-hyderabad",
+        "meta_robots": "index, follow",
+        "og_image": false,
+        "og_title": true,
+        "twitter_card": true,
+        "h1_count": 1,
+        "h2_count": 8,
+        "has_json_ld": true
+      },
+      "mobile": {
+        "scores": {
+          "performance": 75.0,
+          "accessibility": 96.0,
+          "best-practices": 96.0,
+          "seo": 92.0
+        },
+        "metrics": {
+          "lcp": 9.342,
+          "cls": 0,
+          "tti": 9.342,
+          "tbt": 0.034,
+          "si": 1.482,
+          "max_fid": 0.084
+        },
+        "issues": [
+          {
+            "id": "largest-contentful-paint",
+            "title": "Largest Contentful Paint",
+            "score": 0.01,
+            "displayValue": "9.3\u00a0s"
+          },
+          {
+            "id": "unused-javascript",
+            "title": "Reduce unused JavaScript",
+            "score": 0.5,
+            "displayValue": "Est savings of 74\u00a0KiB"
+          }
+        ]
+      },
+      "desktop": {
+        "scores": {
+          "performance": 94.0,
+          "accessibility": 96.0,
+          "best-practices": 96.0,
+          "seo": 92.0
+        },
+        "metrics": {
+          "lcp": 1.581,
+          "cls": 0,
+          "tti": 1.583,
+          "tbt": 0.0,
+          "si": 0.367,
+          "max_fid": 0.03
+        },
+        "issues": [
+          {
+            "id": "largest-contentful-paint",
+            "title": "Largest Contentful Paint",
+            "score": 0.77,
+            "displayValue": "1.6\u00a0s"
+          },
+          {
+            "id": "unused-javascript",
+            "title": "Reduce unused JavaScript",
+            "score": 0.5,
+            "displayValue": "Est savings of 74\u00a0KiB"
+          }
+        ]
+      }
+    },
+    "https://www.drsayuj.info/locations/brain-spine-surgeon-banjara-hills": {
+      "slug": "locations_brain-spine-surgeon-banjara-hills",
+      "html": {
+        "status": 200,
+        "title": "Brain &amp; Spine Surgeon near Banjara Hills, Hyderabad | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+        "title_length": 101,
+        "meta_description": "Advanced brain and spine care near Banjara Hills, Hyderabad. Directions to Yashoda Hospital, Malakpet. Parking, timings, and appointment info.",
+        "meta_description_length": 142,
+        "canonical": "https://www.drsayuj.info/locations/brain-spine-surgeon-banjara-hills",
+        "meta_robots": "index, follow",
+        "og_image": false,
+        "og_title": true,
+        "twitter_card": true,
+        "h1_count": 1,
+        "h2_count": 8,
+        "has_json_ld": true
+      },
+      "mobile": {
+        "scores": {
+          "performance": 71.0,
+          "accessibility": 94.0,
+          "best-practices": 96.0,
+          "seo": 92.0
+        },
+        "metrics": {
+          "lcp": 10.182,
+          "cls": 0,
+          "tti": 10.205,
+          "tbt": 0.055,
+          "si": 5.37,
+          "max_fid": 0.105
+        },
+        "issues": [
+          {
+            "id": "largest-contentful-paint",
+            "title": "Largest Contentful Paint",
+            "score": 0,
+            "displayValue": "10.2\u00a0s"
+          },
+          {
+            "id": "speed-index",
+            "title": "Speed Index",
+            "score": 0.57,
+            "displayValue": "5.4\u00a0s"
+          },
+          {
+            "id": "unused-javascript",
+            "title": "Reduce unused JavaScript",
+            "score": 0.5,
+            "displayValue": "Est savings of 74\u00a0KiB"
+          }
+        ]
+      },
+      "desktop": {
+        "scores": {
+          "performance": 100,
+          "accessibility": 91.0,
+          "best-practices": 96.0,
+          "seo": 92.0
+        },
+        "metrics": {
+          "lcp": 0.507,
+          "cls": 0,
+          "tti": 0.507,
+          "tbt": 0.0,
+          "si": 0.303,
+          "max_fid": 0.025
+        },
+        "issues": [
+          {
+            "id": "unused-javascript",
+            "title": "Reduce unused JavaScript",
+            "score": 0.5,
+            "displayValue": "Est savings of 74\u00a0KiB"
+          }
+        ]
+      }
+    },
+    "https://www.drsayuj.info/": {
+      "slug": "home",
+      "html": {
+        "status": 200,
+        "title": "Best Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan | Brain &amp; Spine Surgery",
+        "title_length": 79,
+        "meta_description": "Dr. Sayuj Krishnan is the best neurosurgeon in Hyderabad specializing in endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures. Same-day discharge available at Yashoda Hospital Malakpet. Book consultation now.",
+        "meta_description_length": 236,
+        "canonical": "https://www.drsayuj.info",
+        "meta_robots": "index, follow",
+        "og_image": true,
+        "og_title": true,
+        "twitter_card": true,
+        "h1_count": 1,
+        "h2_count": 14,
+        "has_json_ld": true
+      },
+      "mobile": {
+        "scores": {
+          "performance": 70.0,
+          "accessibility": 93.0,
+          "best-practices": 96.0,
+          "seo": 92.0
+        },
+        "metrics": {
+          "lcp": 10.219,
+          "cls": 0,
+          "tti": 10.242,
+          "tbt": 0.127,
+          "si": 5.191,
+          "max_fid": 0.164
+        },
+        "issues": [
+          {
+            "id": "largest-contentful-paint",
+            "title": "Largest Contentful Paint",
+            "score": 0,
+            "displayValue": "10.2\u00a0s"
+          },
+          {
+            "id": "speed-index",
+            "title": "Speed Index",
+            "score": 0.6,
+            "displayValue": "5.2\u00a0s"
+          },
+          {
+            "id": "unused-javascript",
+            "title": "Reduce unused JavaScript",
+            "score": 0.5,
+            "displayValue": "Est savings of 74\u00a0KiB"
+          }
+        ]
+      },
+      "desktop": {
+        "scores": {
+          "performance": 94.0,
+          "accessibility": 93.0,
+          "best-practices": 96.0,
+          "seo": 92.0
+        },
+        "metrics": {
+          "lcp": 1.61,
+          "cls": 0,
+          "tti": 1.614,
+          "tbt": 0.0,
+          "si": 1.034,
+          "max_fid": 0.027
+        },
+        "issues": [
+          {
+            "id": "largest-contentful-paint",
+            "title": "Largest Contentful Paint",
+            "score": 0.76,
+            "displayValue": "1.6\u00a0s"
+          },
+          {
+            "id": "unused-javascript",
+            "title": "Reduce unused JavaScript",
+            "score": 0.5,
+            "displayValue": "Est savings of 74\u00a0KiB"
+          }
+        ]
+      }
+    },
+    "https://www.drsayuj.info/services/minimally-invasive-spine-surgery": {
+      "slug": "services_minimally-invasive-spine-surgery",
+      "html": {
+        "status": 200,
+        "title": "Endoscopic Spine Surgery Hyderabad | MISS | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+        "title_length": 87,
+        "meta_description": "Day-care endoscopic discectomy, foraminotomy, and ULBD with Dr Sayuj Krishnan at Yashoda Hospital Malakpet.",
+        "meta_description_length": 107,
+        "canonical": "https://www.drsayuj.info/services/minimally-invasive-spine-surgery",
+        "meta_robots": "index, follow",
+        "og_image": true,
+        "og_title": true,
+        "twitter_card": true,
+        "h1_count": 1,
+        "h2_count": 10,
+        "has_json_ld": true
+      },
+      "mobile": {
+        "scores": {
+          "performance": 75.0,
+          "accessibility": 91.0,
+          "best-practices": 96.0,
+          "seo": 92.0
+        },
+        "metrics": {
+          "lcp": 9.127,
+          "cls": 0,
+          "tti": 9.149,
+          "tbt": 0.022,
+          "si": 1.451,
+          "max_fid": 0.094
+        },
+        "issues": [
+          {
+            "id": "largest-contentful-paint",
+            "title": "Largest Contentful Paint",
+            "score": 0.01,
+            "displayValue": "9.1\u00a0s"
+          },
+          {
+            "id": "unused-javascript",
+            "title": "Reduce unused JavaScript",
+            "score": 0.5,
+            "displayValue": "Est savings of 74\u00a0KiB"
+          }
+        ]
+      },
+      "desktop": {
+        "scores": {
+          "performance": 94.0,
+          "accessibility": 95.0,
+          "best-practices": 96.0,
+          "seo": 92.0
+        },
+        "metrics": {
+          "lcp": 1.602,
+          "cls": 0,
+          "tti": 1.602,
+          "tbt": 0.0,
+          "si": 0.37,
+          "max_fid": 0.023
+        },
+        "issues": [
+          {
+            "id": "largest-contentful-paint",
+            "title": "Largest Contentful Paint",
+            "score": 0.77,
+            "displayValue": "1.6\u00a0s"
+          },
+          {
+            "id": "unused-javascript",
+            "title": "Reduce unused JavaScript",
+            "score": 0.5,
+            "displayValue": "Est savings of 74\u00a0KiB"
+          }
+        ]
+      }
+    },
+    "https://www.drsayuj.info/blog/endoscopic-spine-surgery-cost-hyderabad": {
+      "slug": "blog_endoscopic-spine-surgery-cost-hyderabad",
+      "html": {
+        "status": 200,
+        "title": "Endoscopic Spine Surgery Cost in Hyderabad | What Affects P\u2026 | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+        "title_length": 106,
+        "meta_description": "Cost drivers, insurance nuances, and day-care eligibility for endoscopic spine surgery in Hyderabad.",
+        "meta_description_length": 100,
+        "canonical": "https://www.drsayuj.info/blog/endoscopic-spine-surgery-cost-hyderabad/",
+        "meta_robots": "index, follow",
+        "og_image": false,
+        "og_title": true,
+        "twitter_card": true,
+        "h1_count": 1,
+        "h2_count": 13,
+        "has_json_ld": true
+      },
+      "mobile": {
+        "scores": {
+          "performance": 100,
+          "accessibility": 91.0,
+          "best-practices": 96.0,
+          "seo": 92.0
+        },
+        "metrics": {
+          "lcp": 1.534,
+          "cls": 0,
+          "tti": 6.028,
+          "tbt": 0.017,
+          "si": 0.977,
+          "max_fid": 0.084
+        },
+        "issues": [
+          {
+            "id": "unused-javascript",
+            "title": "Reduce unused JavaScript",
+            "score": 0.5,
+            "displayValue": "Est savings of 74\u00a0KiB"
+          }
+        ]
+      },
+      "desktop": {
+        "scores": {
+          "performance": 100,
+          "accessibility": 94.0,
+          "best-practices": 96.0,
+          "seo": 92.0
+        },
+        "metrics": {
+          "lcp": 0.398,
+          "cls": 0,
+          "tti": 0.398,
+          "tbt": 0.0,
+          "si": 0.307,
+          "max_fid": 0.031
+        },
+        "issues": [
+          {
+            "id": "unused-javascript",
+            "title": "Reduce unused JavaScript",
+            "score": 0.5,
+            "displayValue": "Est savings of 74\u00a0KiB"
+          }
+        ]
+      }
+    },
+    "https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad": {
+      "slug": "services_brain-tumor-surgery-hyderabad",
+      "html": {
+        "status": 200,
+        "title": "Brain Tumor Surgery in Hyderabad | Microsurgery &amp; Radiosurg\u2026 | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+        "title_length": 110,
+        "meta_description": "Brain tumor surgery with neuronavigation and neuromonitoring in Hyderabad. Risks, recovery, and alternatives explained.",
+        "meta_description_length": 119,
+        "canonical": "https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad",
+        "meta_robots": "index, follow",
+        "og_image": true,
+        "og_title": true,
+        "twitter_card": true,
+        "h1_count": 1,
+        "h2_count": 15,
+        "has_json_ld": true
+      },
+      "mobile": {
+        "scores": {
+          "performance": 75.0,
+          "accessibility": 96.0,
+          "best-practices": 96.0,
+          "seo": 92.0
+        },
+        "metrics": {
+          "lcp": 9.33,
+          "cls": 0,
+          "tti": 9.33,
+          "tbt": 0.058,
+          "si": 1.501,
+          "max_fid": 0.108
+        },
+        "issues": [
+          {
+            "id": "largest-contentful-paint",
+            "title": "Largest Contentful Paint",
+            "score": 0.01,
+            "displayValue": "9.3\u00a0s"
+          },
+          {
+            "id": "unused-javascript",
+            "title": "Reduce unused JavaScript",
+            "score": 0.5,
+            "displayValue": "Est savings of 74\u00a0KiB"
+          }
+        ]
+      },
+      "desktop": {
+        "scores": {
+          "performance": 94.0,
+          "accessibility": 96.0,
+          "best-practices": 96.0,
+          "seo": 92.0
+        },
+        "metrics": {
+          "lcp": 1.641,
+          "cls": 0,
+          "tti": 1.641,
+          "tbt": 0.0,
+          "si": 0.397,
+          "max_fid": 0.026
+        },
+        "issues": [
+          {
+            "id": "largest-contentful-paint",
+            "title": "Largest Contentful Paint",
+            "score": 0.75,
+            "displayValue": "1.6\u00a0s"
+          },
+          {
+            "id": "unused-javascript",
+            "title": "Reduce unused JavaScript",
+            "score": 0.5,
+            "displayValue": "Est savings of 74\u00a0KiB"
+          }
+        ]
+      }
+    }
+  },
+  "broken_links": [
+    {
+      "page": "https://www.drsayuj.info/conditions/brain-tumor-surgery-hyderabad",
+      "link": "https://www.drsayuj.info/locations/neurosurgeon-hyderabad?utm_source=site&amp;utm_medium=cta&amp;utm_campaign=nap_block",
+      "status": 404
+    },
+    {
+      "page": "https://www.drsayuj.info/conditions/brain-tumor-surgery-hyderabad",
+      "link": "https://www.drsayuj.info/locations/neurosurgeon-hyderabad?utm_source=site&amp;utm_medium=cta&amp;utm_campaign=footer_nap",
+      "status": 404
+    },
+    {
+      "page": "https://www.drsayuj.info/locations/brain-spine-surgeon-banjara-hills",
+      "link": "https://www.drsayuj.info/locations/neurosurgeon-hyderabad?utm_source=site&amp;utm_medium=cta&amp;utm_campaign=footer_nap",
+      "status": 404
+    },
+    {
+      "page": "https://www.drsayuj.info/blog/endoscopic-spine-surgery-cost-hyderabad",
+      "link": "https://www.drsayuj.info/locations/neurosurgeon-hyderabad?utm_source=site&amp;utm_medium=cta&amp;utm_campaign=footer_nap",
+      "status": 404
+    },
+    {
+      "page": "https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad",
+      "link": "https://www.drsayuj.info/locations/neurosurgeon-hyderabad?utm_source=site&amp;utm_medium=cta&amp;utm_campaign=footer_nap",
+      "status": 404
+    }
+  ],
+  "non_indexable": [],
+  "notes": {
+    "urls_audited": 6
+  }
+}

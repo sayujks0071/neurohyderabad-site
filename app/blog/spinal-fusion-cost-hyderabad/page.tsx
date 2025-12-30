@@ -5,6 +5,9 @@ import NAP from '@/app/_components/NAP';
 import MedicalCitations from '@/app/_components/MedicalCitations';
 import SmartImage from '@/components/SmartImage';
 import Link from 'next/link';
+import AuthorByline from '@/app/_components/AuthorByline';
+import SourceList from '@/app/_components/SourceList';
+import { sources } from '../sources';
 
 export const metadata = makeMetadata({
   title: 'Spinal Fusion Cost Hyderabad | TLIF ACDF',
@@ -13,7 +16,7 @@ export const metadata = makeMetadata({
 });
 
 export default function Page() {
-  const url = 'https://www.drsayuj.com/blog/spinal-fusion-cost-hyderabad';
+  const url = 'https://www.drsayuj.info/blog/spinal-fusion-cost-hyderabad';
   
   const schemas = [
     {
@@ -23,8 +26,8 @@ export default function Page() {
       url,
       name: 'Spinal Fusion Cost Hyderabad | TLIF ACDF',
       description: 'Spinal fusion cost breakdown, insurance coverage, and payment options with Dr. Sayuj Krishnan at Yashoda Hospital Malakpet.',
-      author: { '@id': 'https://www.drsayuj.com/#physician' },
-      publisher: { '@id': 'https://www.drsayuj.com/#physician' },
+      author: { '@id': 'https://www.drsayuj.info/#physician' },
+      publisher: { '@id': 'https://www.drsayuj.info/#physician' },
       datePublished: '2025-01-15',
       dateModified: '2025-01-15',
       mainEntityOfPage: url,
@@ -35,8 +38,8 @@ export default function Page() {
       '@type': 'BreadcrumbList',
       '@id': `${url}#breadcrumb`,
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.drsayuj.com/' },
-        { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://www.drsayuj.com/blog' },
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.drsayuj.info/' },
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://www.drsayuj.info/blog' },
         { '@type': 'ListItem', position: 3, name: 'Spinal Fusion Cost', item: url }
       ]
     }
@@ -229,6 +232,18 @@ export default function Page() {
       {schemas.map((schema, index) => (
         <SchemaScript key={index} data={schema} />
       ))}
-    </main>
+    
+      <AuthorByline 
+        
+        
+        publishedOn="2025-01-15"
+        updatedOn="2025-10-19"
+      />
+      
+      <SourceList sources={sources['spinal-fusion-cost-hyderabad']} />
+      
+      <NAP />
+      <ReviewedBy />
+</main>
   );
 }

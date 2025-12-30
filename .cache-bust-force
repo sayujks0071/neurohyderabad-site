@@ -1,0 +1,7 @@
+FORCE CACHE CLEAR - Thu Oct  9 22:35:05 IST 2025
+This file forces Vercel to completely rebuild and clear all caches
+Deployment timestamp: 1760036905
+Compression fix: compress: false in next.config.mjs - DISABLE DOUBLE COMPRESSION
+Expected result: x-vercel-cache: MISS, content-encoding: br (single compression only)
+
+

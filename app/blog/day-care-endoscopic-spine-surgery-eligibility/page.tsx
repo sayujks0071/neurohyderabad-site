@@ -5,6 +5,9 @@ import Breadcrumbs from "../../components/Breadcrumbs";
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import NAP from '@/app/_components/NAP';
 import { makeMetadata } from '@/app/_lib/meta';
+import AuthorByline from '@/app/_components/AuthorByline';
+import SourceList from '@/app/_components/SourceList';
+import { sources } from '../sources';
 
 const baseMetadata = makeMetadata({
   title: 'Day-Care Spine Surgery Eligibility | When Can You Go Home Same Day?',
@@ -433,7 +436,19 @@ export default function DayCareEligibilityPage() {
             </section>
           </div>
         </article>
-      </main>
+      
+      <AuthorByline 
+        
+        
+        publishedOn="2025-01-15"
+        updatedOn="2025-10-19"
+      />
+      
+      <SourceList sources={sources['day-care-endoscopic-spine-surgery-eligibility']} />
+      
+      <NAP />
+      <ReviewedBy />
+</main>
 
       {/* JSON-LD */}
       <script

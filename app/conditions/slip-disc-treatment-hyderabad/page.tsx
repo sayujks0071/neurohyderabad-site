@@ -8,6 +8,9 @@ import { SITE_URL } from "../../../src/lib/seo";
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import NAP from '@/app/_components/NAP';
 import { makeMetadata } from '@/app/_lib/meta';
+import AuthorByline from '@/app/_components/AuthorByline';
+import SourceList from '@/app/_components/SourceList';
+import { sources } from '../../blog/sources';
 
 const baseMetadata = makeMetadata({
   title: "Slip Disc Treatment in Hyderabad | Endoscopic Discectomy | Dr. Sayuj Krishnan",
@@ -158,6 +161,26 @@ export default function SlipDiscTreatmentPage() {
         </div>
       </section>
 
+      <section className="mb-12 rounded-lg border border-green-200 bg-green-50 p-6">
+        <h2 className="text-2xl font-semibold mb-4 text-green-800">Worried about general anaesthesia?</h2>
+        <p className="text-gray-700 mb-4">
+          For elderly or high-risk patients, Dr. Sayuj offers <strong>awake endoscopic spine surgery</strong> using spinal/epidural blocks with light sedation—minimising anaesthesia risk while keeping the incision tiny.
+        </p>
+        <div className="flex flex-wrap gap-3">
+          <Link href="/services/awake-spine-surgery-hyderabad" className="rounded-full bg-green-600 px-5 py-2 text-sm font-semibold text-white hover:bg-green-700">
+            Explore Awake Spine Surgery
+          </Link>
+          <a
+            href="https://wa.me/919778280044"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-full border border-green-300 px-5 py-2 text-sm font-semibold text-green-800 hover:bg-green-100"
+          >
+            Share MRI on WhatsApp
+          </a>
+        </div>
+      </section>
+
       <section className="mb-12">
         <h2 className="text-2xl font-semibold mb-6 text-blue-700">Candidates for Endoscopic Discectomy</h2>
         <div className="bg-gray-50 p-6 rounded-lg">
@@ -193,7 +216,7 @@ export default function SlipDiscTreatmentPage() {
             <ul className="space-y-3 text-gray-700">
               <li className="flex items-start">
                 <span className="text-green-600 mr-2 mt-1">✓</span>
-                <span>15+ years of neurosurgical experience</span>
+                <span>Over 9 years of neurosurgical experience</span>
               </li>
               <li className="flex items-start">
                 <span className="text-green-600 mr-2 mt-1">✓</span>
@@ -288,6 +311,15 @@ export default function SlipDiscTreatmentPage() {
       
       <FAQPageSchema />
       <BreadcrumbSchema items={breadcrumbs} />
-    </main>
+    
+      <AuthorByline 
+        publishedOn="2025-02-15"
+        updatedOn="2025-10-19"
+      />
+      
+      <SourceList sources={sources['slip-disc-treatment-hyderabad'] || []} />
+      
+      <ReviewedBy />
+</main>
   );
 }

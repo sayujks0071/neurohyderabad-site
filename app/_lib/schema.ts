@@ -49,7 +49,7 @@ export function buildMedicalWebPageSchema({
     name,
     description,
     lastReviewed,
-    reviewedBy: { "@id": "https://www.drsayuj.com/#physician" },
+    reviewedBy: { "@id": "https://www.drsayuj.info/#physician" },
     breadcrumb: {
       "@id": `${url}#breadcrumb`
     }
@@ -112,7 +112,7 @@ export function buildPhysicianSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Physician",
-    "@id": "https://www.drsayuj.com/#physician",
+    "@id": "https://www.drsayuj.info/#physician",
     "name": "Dr. Sayuj Krishnan S",
     "medicalSpecialty": ["Neurosurgery", "SpineSurgery"],
     "affiliation": {
@@ -128,7 +128,7 @@ export function buildPhysicianSchema() {
       }
     },
     "telephone": "+91 9778280044",
-    "url": "https://www.drsayuj.com",
+    "url": "https://www.drsayuj.info",
     "sameAs": [
       "https://www.yashodahospitals.com/doctor/dr-sayuj-krishnan/",
       "https://www.linkedin.com/in/dr-sayuj-krishnan"

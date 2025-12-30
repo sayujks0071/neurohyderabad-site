@@ -1,5 +1,6 @@
 import { SITE_URL } from "../../src/lib/seo";
 import { getPosts } from "../../src/lib/wordpress";
+import { getAllBlogPosts } from "../../src/lib/blog";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
@@ -14,12 +15,19 @@ export const metadata: Metadata = {
     canonical: "/blog",
   },
   openGraph: {
+    title: "Blog | Dr Sayuj Krishnan - Neurosurgery Insights",
+    description: "Latest insights, research, and updates in neurosurgery from Dr Sayuj Krishnan. Expert articles on brain and spine conditions, treatments, and innovations.",
+    url: `${SITE_URL}/blog`,
+    siteName: 'Dr. Sayuj Krishnan - Neurosurgeon Hyderabad',
+    locale: 'en_IN',
+    type: 'website',
     images: [
       {
         url: `${SITE_URL}/api/og?title=${encodeURIComponent("Neurosurgery Blog")}&subtitle=${encodeURIComponent("Expert insights & research")}`,
         width: 1200,
         height: 630,
         alt: "Neurosurgery Blog — Dr Sayuj Krishnan",
+        type: 'image/jpeg'
       },
     ],
   },
@@ -45,8 +53,35 @@ function extractTitleFromContent(content: string, fallbackTitle: string): string
 }
 
 export default async function BlogPage() {
-  // Static blog posts (can be combined with WordPress posts later)
+  // Load blog posts from new content system
+  let mdxPosts: any[] = [];
+  try {
+    const posts = await getAllBlogPosts();
+    mdxPosts = posts.map(post => ({
+      id: post.slug,
+      title: post.title,
+      slug: post.slug,
+      excerpt: post.excerpt,
+      date: post.publishedAt,
+      featuredImage: post.heroImage || '/images/og-default.jpg',
+      category: post.category,
+      tags: post.tags,
+      featured: post.featured,
+    }));
+  } catch (error) {
+    console.error('Error loading MDX blog posts:', error);
+  }
+
+  // Static blog posts (legacy, can be combined with WordPress posts later)
   const staticPosts = [
+    {
+      id: 'world-stroke-day-2025-hyderabad-stroke-code',
+      title: 'World Stroke Day 2025: Recognize Stroke Fast, Act Faster',
+      slug: 'world-stroke-day-2025-hyderabad-stroke-code',
+      excerpt: 'World Stroke Day 2025 guide for Hyderabad families—BE-FAST checklist, 108 emergency actions, treatment windows, and Dr Sayuj’s Stroke Code pathway.',
+      date: '2025-10-29',
+      featuredImage: '/images/og-default.jpg'
+    },
     {
       id: 'endoscopic-discectomy-cost-hyderabad',
       title: 'Endoscopic Discectomy Cost in Hyderabad: Complete Pricing Guide',
@@ -116,8 +151,15 @@ export default async function BlogPage() {
     console.log('WordPress posts not available, using static posts');
   }
 
-  // Combine static and WordPress posts
-  const allPosts = [...staticPosts, ...(wordpressPosts || [])];
+  // Combine all posts: MDX (new system) first, then static, then WordPress
+  const allPosts = [...mdxPosts, ...staticPosts, ...(wordpressPosts || [])];
+  
+  // Sort by date (newest first)
+  allPosts.sort((a, b) => {
+    const dateA = new Date(a.date || 0).getTime();
+    const dateB = new Date(b.date || 0).getTime();
+    return dateB - dateA;
+  });
 
   return (
     <main className="container mx-auto px-4 py-16">

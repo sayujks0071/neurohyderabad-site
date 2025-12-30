@@ -2,12 +2,10 @@
 
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { useStatsigClient } from '@statsig/react-bindings';
 import { analytics } from '../lib/analytics';
 
 export default function StatsigAnalytics() {
   const pathname = usePathname();
-  const client = useStatsigClient();
 
   useEffect(() => {
     // Initialize analytics regardless of Statsig client availability
@@ -105,7 +103,7 @@ export default function StatsigAnalytics() {
       window.removeEventListener('unhandledrejection', handleUnhandledRejection);
       scrollCleanup();
     };
-  }, [pathname, client]);
+  }, [pathname]);
 
   // Helper functions
   function getPageType(pathname: string): string {

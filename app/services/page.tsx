@@ -24,6 +24,7 @@ export const metadata: Metadata = {
         width: 1200,
         height: 630,
         alt: 'Neurosurgical Services - Dr. Sayuj Krishnan',
+        type: 'image/jpeg'
       },
     ],
     locale: 'en_IN',
@@ -46,10 +47,22 @@ export default function ServicesPage() {
       features: ['Neuronavigation', 'Neuromonitoring', 'Awake craniotomy', 'Multidisciplinary care']
     },
     {
-      title: 'Endoscopic Spine Surgery',
-      description: 'Minimally invasive spine procedures using advanced endoscopic techniques for faster recovery.',
-      href: '/services/minimally-invasive-spine-surgery/',
-      features: ['Discectomy', 'Foraminotomy', 'ULBD', 'Cervical procedures']
+      title: 'Endoscopic Spine Surgery (Day-Care MISS)',
+      description: 'Full endoscopic discectomy and decompression with same-day discharge protocols in Hyderabad.',
+      href: '/services/endoscopic-spine-surgery-hyderabad/',
+      features: ['Transforaminal discectomy', 'Interlaminar decompression', 'Cervical endoscopic procedures', 'Enhanced recovery']
+    },
+    {
+      title: 'Awake Spine Surgery (Regional Anaesthesia)',
+      description: 'Endoscopic decompression with spinal/epidural anaesthesia for high-risk or elderly patients to avoid general anaesthesia.',
+      href: '/services/awake-spine-surgery-hyderabad/',
+      features: ['Spinal or epidural blocks', 'Conscious sedation', 'Same-day discharge', 'Ideal for cardiac/pulmonary risk patients']
+    },
+    {
+      title: 'Comprehensive Spine Surgery',
+      description: 'Stabilisation, deformity correction, and complex revision spine surgery programmes.',
+      href: '/services/spine-surgery-hyderabad/',
+      features: ['MISS fusion', 'Deformity correction', 'Revision surgery', 'Navigation-guided fixation']
     },
     {
       title: 'Epilepsy Surgery',
@@ -68,6 +81,12 @@ export default function ServicesPage() {
       description: 'Stereotactic radiosurgery for brain tumours and trigeminal neuralgia with sub-millimetre precision.',
       href: '/services/radiosurgery-gamma-knife',
       features: ['Non-incisional', 'High-dose precision', 'Outpatient workflow', 'Rapid recovery']
+    },
+    {
+      title: 'Cooled Radiofrequency Ablation',
+      description: 'Advanced cooled RFA for long-lasting chronic pain relief in facet joints, sacroiliac joints, and trigeminal neuralgia.',
+      href: '/services/cooled-radiofrequency-ablation-hyderabad',
+      features: ['12-24 month pain relief', 'Larger lesion creation', 'Outpatient procedure', 'Higher success rates']
     }
   ];
 
@@ -92,7 +111,7 @@ export default function ServicesPage() {
               utilizing advanced technology and evidence-based approaches.
             </p>
             <p className="text-gray-700 mb-6">
-              With over 15 years of experience and specialized training in endoscopic spine surgery, Dr. Sayuj provides 
+              With over 9 years of experience and specialized training in endoscopic spine surgery, Dr. Sayuj provides 
               personalized treatment plans tailored to each patient's specific needs and condition severity.
             </p>
           </div>
@@ -120,6 +139,31 @@ export default function ServicesPage() {
                 </Link>
               </div>
             ))}
+          </div>
+        </section>
+
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-blue-800 mb-4">Related Conditions</h2>
+          <p className="text-gray-700 mb-4">
+            Explore detailed condition guides linked to each service so you can understand symptoms, diagnostics, and treatment pathways.
+          </p>
+          <div className="grid md:grid-cols-2 gap-4">
+            <Link href="/conditions/brain-tumor-surgery-hyderabad" className="block rounded-lg border p-4 hover:border-blue-300">
+              <h3 className="font-semibold text-blue-700">Brain Tumor Surgery</h3>
+              <p className="text-sm text-gray-600">Safe resection with awake mapping and neuronavigation.</p>
+            </Link>
+            <Link href="/conditions/sciatica-treatment-hyderabad" className="block rounded-lg border p-4 hover:border-blue-300">
+              <h3 className="font-semibold text-blue-700">Sciatica & Slip Disc</h3>
+              <p className="text-sm text-gray-600">Endoscopic discectomy and MISS options for leg-dominant pain.</p>
+            </Link>
+            <Link href="/conditions/spinal-stenosis-treatment-hyderabad" className="block rounded-lg border p-4 hover:border-blue-300">
+              <h3 className="font-semibold text-blue-700">Spinal Stenosis</h3>
+              <p className="text-sm text-gray-600">ULBD/endoscopic decompression with stability preservation.</p>
+            </Link>
+            <Link href="/conditions/trigeminal-neuralgia-treatment-hyderabad" className="block rounded-lg border p-4 hover:border-blue-300">
+              <h3 className="font-semibold text-blue-700">Trigeminal Neuralgia</h3>
+              <p className="text-sm text-gray-600">Microvascular decompression and radiosurgery options.</p>
+            </Link>
           </div>
         </section>
 
@@ -183,12 +227,19 @@ export default function ServicesPage() {
               <h3 className="text-2xl font-semibold text-blue-700 mb-4">Brain Surgery Services</h3>
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
+                  <h4 className="font-semibold text-gray-700 mb-3">Brain Tumor Surgery</h4>
+                  <p className="text-gray-600 mb-4">
+                    Advanced neuronavigation-guided microsurgery for brain tumors with comprehensive multidisciplinary care. 
+                    <Link href="/services/brain-tumor-surgery-hyderabad/" className="text-blue-600 hover:underline"> Dr. Sayuj provides expert consultations for brain tumor surgery in Hyderabad at Yashoda Hospital, Malakpet.</Link>
+                  </p>
+                </div>
+                <div>
                   <h4 className="font-semibold text-gray-700 mb-3">Epilepsy Surgery</h4>
                   <p className="text-gray-600 mb-4">
                     Comprehensive surgical treatment for drug-resistant epilepsy including LITT, resection surgery, 
                     and VNS. Our multidisciplinary approach ensures optimal outcomes for patients with uncontrolled seizures.
                   </p>
-                  <Link href="/services/epilepsy-surgery" className="text-blue-600 hover:underline">
+                  <Link href="/services/epilepsy-surgery-hyderabad" className="text-blue-600 hover:underline">
                     Learn more about Epilepsy Surgery →
                   </Link>
                 </div>

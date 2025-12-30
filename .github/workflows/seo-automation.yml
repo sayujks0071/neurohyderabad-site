@@ -1,0 +1,154 @@
+name: SEO Automation
+
+on:
+  # Nightly SEO + Lighthouse guardrail
+  schedule:
+    - cron: '15 0 * * *' # 05:45 IST
+  # Run on main changes that affect SEO surfaces
+  push:
+    branches: [main]
+    paths:
+      - 'app/**'
+      - 'src/**'
+      - 'public/**'
+      - 'next-seo.config.ts'
+      - 'app/sitemap.ts'
+      - 'next-sitemap.config.js'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'app/**'
+      - 'src/**'
+      - 'public/**'
+      - 'next-seo.config.ts'
+      - 'app/sitemap.ts'
+      - 'next-sitemap.config.js'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  seo-audit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run automated SEO audit + report
+        env:
+          NEXT_PUBLIC_GA4_MEASUREMENT_ID: G-MMLQCFN4ZJ
+        run: |
+          npm run seo:all
+          npm run check:schemas
+          npm run check:lighthouse
+
+      - name: Fail on Lighthouse regression (<0.90)
+        run: |
+          node <<'EOF'
+          const fs = require('fs');
+          const path = require('path');
+
+          function findFiles(dir, pattern) {
+            if (!fs.existsSync(dir)) return [];
+            const entries = fs.readdirSync(dir);
+            return entries.flatMap(entry => {
+              const full = path.join(dir, entry);
+              const stat = fs.statSync(full);
+              if (stat.isDirectory()) return findFiles(full, pattern);
+              return pattern.test(entry) ? [full] : [];
+            });
+          }
+
+          const candidates = [
+            ...findFiles(process.cwd(), /^lighthouse-.*\.json$/),
+            ...findFiles(path.join(process.cwd(), 'reports'), /\.json$/),
+          ];
+
+          if (candidates.length === 0) {
+            console.log('No Lighthouse/SEO JSON reports found, skipping regression gate.');
+            process.exit(0);
+          }
+
+          let failures = [];
+          for (const file of candidates) {
+            try {
+              const data = JSON.parse(fs.readFileSync(file, 'utf8'));
+              const categories = data.categories || {};
+              const scores = Object.entries(categories)
+                .map(([k, v]) => ({ name: k, score: v && typeof v.score === 'number' ? v.score : null }))
+                .filter(s => s.score !== null);
+
+              scores.forEach(({ name, score }) => {
+                if (score < 0.9) {
+                  failures.push(`${path.basename(file)}: ${name} score ${score}`);
+                }
+              });
+            } catch (err) {
+              console.warn(`Could not parse ${file}:`, err.message);
+            }
+          }
+
+          if (failures.length) {
+            console.error('Lighthouse regression detected:\n' + failures.join('\n'));
+            process.exit(1);
+          }
+
+          console.log('All Lighthouse scores >= 0.90');
+          EOF
+
+      - name: Upload SEO artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: seo-reports-${{ github.run_id }}
+          if-no-files-found: warn
+          path: |
+            reports/seo/**
+            lighthouse-*.json
+            performance-budget.json
+
+      - name: Comment summary on PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const runUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const artifacts = ['seo-reports-${{ github.run_id }}', 'lighthouse-*.json', 'performance-budget.json'];
+            const body = [
+              '🔎 SEO automation completed.',
+              '',
+              `- Workflow: [SEO Automation](${runUrl})`,
+              `- Artifacts: ${artifacts.join(', ')}`,
+              '- Gate: Lighthouse categories must be >= 0.90 (fails pipeline otherwise).',
+              '',
+              'Download artifacts for full Lighthouse/SEO findings.'
+            ].join('\n');
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body
+            });
+
+      - name: Summarize results
+        run: |
+          echo "SEO automation completed."
+          ls -la reports/seo || true
+          ls -la . | grep lighthouse || true

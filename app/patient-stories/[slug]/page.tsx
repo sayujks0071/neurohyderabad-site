@@ -1,11 +1,13 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { patientStories, PatientStory } from '@/src/content/stories';
+import { patientStories } from '@/src/content/stories';
 import StandardCTA from '@/app/_components/StandardCTA';
 import NAP from '@/app/_components/NAP';
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import SchemaScript from '@/app/_components/SchemaScript';
+import { makeMetadata } from '@/app/_lib/meta';
+import { SITE_URL } from '@/src/lib/seo';
 
 interface PageProps {
   params: Promise<{
@@ -29,14 +31,42 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  return {
+  const canonicalPath = `/patient-stories/${story.slug}`;
+  const baseMeta = makeMetadata({
     title: `${story.title} | Patient Success Story | Dr. Sayuj Krishnan`,
     description: `${story.summary} Read the complete patient story of ${story.patientInitials} who underwent ${story.procedure} in Hyderabad.`,
-    keywords: `${story.procedure}, ${story.condition}, patient story, neurosurgery, spine surgery, Hyderabad, Dr. Sayuj Krishnan`,
+    canonicalPath,
+  });
+
+  const canonicalUrl = `${SITE_URL}${canonicalPath}`;
+
+  return {
+    ...baseMeta,
+    keywords: [
+      story.procedure,
+      story.condition,
+      "patient story",
+      "neurosurgery",
+      "spine surgery",
+      "Hyderabad",
+      "Dr. Sayuj Krishnan",
+    ],
     openGraph: {
-      title: `${story.title} | Patient Success Story`,
+      title: `${story.title} | Patient Success Story | Dr. Sayuj Krishnan`,
       description: story.summary,
       type: 'article',
+      url: canonicalUrl,
+      siteName: 'Dr. Sayuj Krishnan - Neurosurgeon Hyderabad',
+      locale: 'en_IN',
+      images: [
+        {
+          url: `${SITE_URL}/api/og?title=${encodeURIComponent(story.title)}&subtitle=${encodeURIComponent('Patient Success Story')}`,
+          width: 1200,
+          height: 630,
+          alt: `${story.title} - Patient Success Story`,
+          type: 'image/jpeg'
+        }
+      ],
     },
   };
 }
@@ -49,6 +79,8 @@ export default async function PatientStoryPage({ params }: PageProps) {
     notFound();
   }
 
+  const storyUrl = `${SITE_URL}/patient-stories/${story.slug}`;
+
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -57,19 +89,19 @@ export default async function PatientStoryPage({ params }: PageProps) {
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://www.drsayuj.com/"
+        "item": SITE_URL
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "Patient Stories",
-        "item": "https://www.drsayuj.com/patient-stories"
+        "item": `${SITE_URL}/patient-stories`
       },
       {
         "@type": "ListItem",
         "position": 3,
         "name": story.title,
-        "item": `https://www.drsayuj.com/patient-stories/${story.slug}`
+        "item": storyUrl
       }
     ]
   };
@@ -82,18 +114,18 @@ export default async function PatientStoryPage({ params }: PageProps) {
     "author": {
       "@type": "Person",
       "name": "Dr. Sayuj Krishnan",
-      "url": "https://www.drsayuj.com"
+      "url": SITE_URL
     },
     "publisher": {
       "@type": "Organization",
       "name": "Dr. Sayuj Krishnan - Neurosurgeon",
-      "url": "https://www.drsayuj.com"
+      "url": SITE_URL
     },
     "datePublished": story.date,
     "dateModified": story.date,
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": `https://www.drsayuj.com/patient-stories/${story.slug}`
+      "@id": storyUrl
     }
   };
 
@@ -106,9 +138,9 @@ export default async function PatientStoryPage({ params }: PageProps) {
       <nav className="bg-gray-50 py-4">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <ol className="flex items-center space-x-2 text-sm text-gray-600">
-            <li><Link href="/" className="hover:text-blue-600">Home</Link></li>
+            <li><Link href="/" className="underline underline-offset-2 decoration-blue-300 hover:text-blue-700 hover:decoration-blue-500">Home</Link></li>
             <li>/</li>
-            <li><Link href="/patient-stories" className="hover:text-blue-600">Patient Stories</Link></li>
+            <li><Link href="/patient-stories" className="underline underline-offset-2 decoration-blue-300 hover:text-blue-700 hover:decoration-blue-500">Patient Stories</Link></li>
             <li>/</li>
             <li className="text-gray-900 font-medium">{story.title}</li>
           </ol>

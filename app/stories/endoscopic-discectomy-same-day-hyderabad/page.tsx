@@ -9,6 +9,13 @@ export const metadata: Metadata = {
   title: 'Same-Day Endoscopic Discectomy in Hyderabad — Case Story',
   description: 'De-identified story: severe sciatica treated with endoscopic discectomy and same-day discharge in Hyderabad. Recovery timeline and outcomes.',
   keywords: 'endoscopic discectomy, same-day surgery, sciatica treatment, lumbar spine, Hyderabad, case study',
+  alternates: {
+    canonical: 'https://www.drsayuj.info/stories/endoscopic-discectomy-same-day-hyderabad',
+    languages: {
+      'en-IN': 'https://www.drsayuj.info/stories/endoscopic-discectomy-same-day-hyderabad',
+      'x-default': 'https://www.drsayuj.info/stories/endoscopic-discectomy-same-day-hyderabad',
+    },
+  },
   openGraph: {
     title: 'Same-Day Endoscopic Discectomy in Hyderabad — Case Story',
     description: 'De-identified story: severe sciatica treated with endoscopic discectomy and same-day discharge in Hyderabad. Recovery timeline and outcomes.',
@@ -24,19 +31,19 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.drsayuj.com/"
+      "item": "https://www.drsayuj.info/"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Patient Stories",
-      "item": "https://www.drsayuj.com/patient-stories"
+      "item": "https://www.drsayuj.info/patient-stories"
     },
     {
       "@type": "ListItem",
       "position": 3,
       "name": "Same-Day Endoscopic Discectomy",
-      "item": "https://www.drsayuj.com/stories/endoscopic-discectomy-same-day-hyderabad"
+      "item": "https://www.drsayuj.info/stories/endoscopic-discectomy-same-day-hyderabad"
     }
   ]
 };
@@ -45,7 +52,7 @@ const medicalWebPageSchema = {
   "@context": "https://schema.org",
   "@type": "MedicalWebPage",
   "name": "Same-Day Endoscopic Discectomy in Hyderabad — Case Story",
-  "url": "https://www.drsayuj.com/stories/endoscopic-discectomy-same-day-hyderabad",
+  "url": "https://www.drsayuj.info/stories/endoscopic-discectomy-same-day-hyderabad",
   "datePublished": "2025-01-15",
   "dateModified": "2025-01-15",
   "about": {
@@ -55,7 +62,7 @@ const medicalWebPageSchema = {
   "publisher": {
     "@type": "Organization",
     "name": "Dr. Sayuj Krishnan - Neurosurgeon",
-    "url": "https://www.drsayuj.com"
+    "url": "https://www.drsayuj.info"
   },
   "reviewedBy": {
     "@type": "Physician",
@@ -102,9 +109,9 @@ export default function EndoscopicDiscectomyStoryPage() {
       <nav className="bg-gray-50 py-4">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <ol className="flex items-center space-x-2 text-sm text-gray-600">
-            <li><Link href="/" className="hover:text-blue-600">Home</Link></li>
+            <li><Link href="/" className="underline underline-offset-2 decoration-blue-300 hover:text-blue-700 hover:decoration-blue-500">Home</Link></li>
             <li>/</li>
-            <li><Link href="/patient-stories" className="hover:text-blue-600">Patient Stories</Link></li>
+            <li><Link href="/patient-stories" className="underline underline-offset-2 decoration-blue-300 hover:text-blue-700 hover:decoration-blue-500">Patient Stories</Link></li>
             <li>/</li>
             <li className="text-gray-900 font-medium">Same-Day Endoscopic Discectomy</li>
           </ol>

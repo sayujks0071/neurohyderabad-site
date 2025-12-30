@@ -4,7 +4,7 @@ export default function EmergencyRehabilitationStructuredData() {
     "@type": "MedicalWebPage",
     "name": "Emergency & Rehabilitation Services",
     "description": "24/7 emergency neurosurgical consultation, hotline support, and comprehensive rehabilitation partnerships in Hyderabad.",
-    "url": "https://www.drsayuj.com/emergency-rehabilitation/",
+    "url": "https://www.drsayuj.info/emergency-rehabilitation/",
     "mainEntity": {
       "@type": "MedicalBusiness",
       "name": "Dr. Sayuj Krishnan - Emergency Neurosurgery & Rehabilitation",
@@ -61,8 +61,8 @@ export default function EmergencyRehabilitationStructuredData() {
         "addressCountry": "IN"
       },
       "telephone": "+91-9778280044",
-      "email": "neurospinehyd@drsayuj.com",
-      "url": "https://www.drsayuj.com",
+      "email": "hellodr@drsayuj.info",
+      "url": "https://www.drsayuj.info",
       "openingHours": "24/7",
       "serviceArea": {
         "@type": "GeoCircle",
@@ -81,13 +81,13 @@ export default function EmergencyRehabilitationStructuredData() {
           "@type": "ListItem",
           "position": 1,
           "name": "Home",
-          "item": "https://www.drsayuj.com/"
+          "item": "https://www.drsayuj.info/"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "Emergency & Rehabilitation",
-          "item": "https://www.drsayuj.com/emergency-rehabilitation/"
+          "item": "https://www.drsayuj.info/emergency-rehabilitation/"
         }
       ]
     },

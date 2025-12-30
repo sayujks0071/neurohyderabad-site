@@ -3,12 +3,15 @@ import Link from 'next/link';
 import { SITE_URL } from '../../../src/lib/seo';
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import NAP from '@/app/_components/NAP';
-import MedicalCitations from '@/app/_components/MedicalCitations';
 import { makeMetadata } from '@/app/_lib/meta';
+import ServicePageTracker from '../../../src/components/ServicePageTracker';
+import AuthorByline from '@/app/_components/AuthorByline';
+import SourceList from '@/app/_components/SourceList';
+import { getServiceSources } from '../sources';
 
 const baseMetadata = makeMetadata({
-  title: 'Endoscopic Discectomy in Hyderabad | Minimally Invasive Disc Surgery',
-  description: 'Expert endoscopic discectomy for herniated discs in Hyderabad. Same-day surgery, faster recovery, less pain.',
+  title: 'Endoscopic Discectomy Hyderabad | Dr. Sayuj Krishnan',
+  description: 'Expert endoscopic discectomy for herniated discs in Hyderabad. Same-day surgery, faster recovery, less pain with Dr. Sayuj Krishnan.',
   canonicalPath: '/services/endoscopic-discectomy-hyderabad',
 });
 
@@ -38,21 +41,28 @@ export const metadata: Metadata = {
   },
 };
 
+const ARTICLE_SOURCES = getServiceSources('endoscopic-discectomy-hyderabad');
+
 export default function EndoscopicDiscectomyPage() {
   return (
     <div className="min-h-screen bg-white">
       <div className="container mx-auto px-4 py-16">
         <header className="text-center mb-8">
-          <h1 className="text-4xl font-bold mb-4">Endoscopic Discectomy in Hyderabad</h1>
-          <p className="text-lg text-gray-600">Minimally invasive disc surgery for faster recovery and less pain</p>
+          <h1 className="text-4xl font-bold mb-3">Endoscopic Discectomy in Hyderabad</h1>
+          <AuthorByline
+            publishedOn="2025-09-12"
+            updatedOn="2025-10-19"
+            className="justify-center"
+          />
+          <p className="text-lg text-gray-600 mt-4">Minimally invasive disc surgery for faster recovery and less pain</p>
         </header>
 
         <section className="bg-blue-50 p-6 rounded-lg mb-8">
           <p className="text-center">
             <strong>Contact:</strong>
             <a href="tel:+919778280044" className="text-blue-600 hover:underline ml-2">+91-9778280044</a> •
-            <a href="mailto:neurospinehyd@drsayuj.com" className="text-blue-600 hover:underline ml-2">neurospinehyd@drsayuj.com</a> •
-            <a href="/appointments" className="text-blue-600 hover:underline ml-2">Appointments</a>
+            <a href="mailto:hellodr@drsayuj.info" className="text-blue-600 hover:underline ml-2">hellodr@drsayuj.info</a> •
+            <Link href="/appointments" className="text-blue-600 hover:underline ml-2">Appointments</Link>
           </p>
         </section>
         <section className="mb-12">
@@ -199,8 +209,26 @@ export default function EndoscopicDiscectomyPage() {
           </div>
         </section>
 
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold text-blue-800 mb-6">Frequently Asked Questions</h2>
+            <section className="mb-12">
+              <h2 className="text-3xl font-bold text-blue-800 mb-6">Related Information</h2>
+              <div className="grid md:grid-cols-3 gap-4 mb-8">
+                <Link href="/services/slip-disc-surgery-cost-hyderabad" className="bg-blue-50 border border-blue-200 rounded-lg p-4 hover:bg-blue-100 transition">
+                  <h3 className="font-semibold text-blue-700 mb-2">Surgery Cost Guide</h3>
+                  <p className="text-sm text-gray-600">Learn about endoscopic discectomy costs and insurance coverage</p>
+                </Link>
+                <Link href="/conditions/slip-disc-treatment-hyderabad" className="bg-blue-50 border border-blue-200 rounded-lg p-4 hover:bg-blue-100 transition">
+                  <h3 className="font-semibold text-blue-700 mb-2">Slip Disc Treatment</h3>
+                  <p className="text-sm text-gray-600">Comprehensive guide to herniated disc treatment options</p>
+                </Link>
+                <Link href="/conditions/sciatica-treatment-hyderabad" className="bg-blue-50 border border-blue-200 rounded-lg p-4 hover:bg-blue-100 transition">
+                  <h3 className="font-semibold text-blue-700 mb-2">Sciatica Treatment</h3>
+                  <p className="text-sm text-gray-600">Understanding sciatica causes and treatment</p>
+                </Link>
+              </div>
+            </section>
+
+            <section className="mb-12">
+              <h2 className="text-3xl font-bold text-blue-800 mb-6">Frequently Asked Questions</h2>
           <div className="space-y-6">
             <div className="bg-gray-50 p-6 rounded-lg">
               <h3 className="text-xl font-semibold mb-3 text-blue-700">How long does the surgery take?</h3>
@@ -218,6 +246,30 @@ export default function EndoscopicDiscectomyPage() {
               <h3 className="text-xl font-semibold mb-3 text-blue-700">Can the disc herniate again?</h3>
               <p className="text-gray-700">There's a 5-10% chance of reherniation, which is similar to traditional discectomy. Proper post-operative care reduces this risk.</p>
             </div>
+          </div>
+        </section>
+
+        <section className="mb-12">
+          <h2 className="text-3xl font-bold text-blue-800 mb-6">Patient Success Story</h2>
+          <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+            <h3 className="text-xl font-semibold mb-3 text-blue-700">
+              <Link
+                href="/stories/endoscopic-discectomy-same-day-hyderabad"
+                className="underline underline-offset-4 decoration-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-sm"
+              >
+                Same-Day Endoscopic Discectomy in Hyderabad — Case Story
+              </Link>
+            </h3>
+            <p className="text-gray-700 mb-4">
+              Read about a de-identified patient who experienced severe sciatica and was successfully treated with endoscopic discectomy, 
+              achieving same-day discharge and quick return to work.
+            </p>
+            <Link 
+              href="/stories/endoscopic-discectomy-same-day-hyderabad"
+              className="text-blue-600 hover:text-blue-700 font-medium"
+            >
+              Read the full story →
+            </Link>
           </div>
         </section>
 
@@ -242,12 +294,61 @@ export default function EndoscopicDiscectomyPage() {
           </div>
         </section>
 
+        <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
+
         <section className="mt-12 space-y-6">
-          <ReviewedBy lastReviewed="2025-01-15" />
-          <MedicalCitations />
+          <ReviewedBy lastReviewed="2025-10-19" />
           <NAP />
         </section>
+
+        {/* Service Page Tracking */}
+        <ServicePageTracker service="endoscopic-discectomy" />
       </div>
+      
+      {/* FAQ Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "How long does endoscopic discectomy surgery take?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Endoscopic discectomy typically takes 45-90 minutes depending on the complexity of the case. The procedure is performed under general anesthesia and uses a small endoscope to remove the herniated disc material through a tiny 8-10mm incision."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is the recovery time after endoscopic discectomy?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Most patients can return to desk work within 1-2 weeks after endoscopic discectomy. Physical jobs may require 4-8 weeks. The procedure allows for same-day or 1-night hospital stay, with most patients walking the same day. Full recovery typically takes 4-6 weeks."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is endoscopic discectomy better than open surgery?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Endoscopic discectomy offers several advantages over traditional open surgery: smaller incision (8-10mm vs 3-4cm), less muscle damage, reduced blood loss, lower infection risk, faster recovery, and same-day discharge. Success rates are comparable (85-90%) with less post-operative pain."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What are the risks of endoscopic discectomy?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Endoscopic discectomy is generally safe with low complication rates. Potential risks include infection (<1%), nerve injury (<1%), dural tear (<2%), and recurrence (5-10%). Dr. Sayuj Krishnan's experience with 1000+ endoscopic procedures results in excellent safety outcomes."
+                }
+              }
+            ]
+          })
+        }}
+      />
     </div>
   );
 }

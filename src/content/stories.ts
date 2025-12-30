@@ -11,6 +11,7 @@ export interface PatientStory {
   outcomes: string[];
   tags: string[];
   date: string;
+  videoUrl?: string; // Optional YouTube URL for video testimonials
 }
 
 export const patientStories: PatientStory[] = [
@@ -28,6 +29,36 @@ export const patientStories: PatientStory[] = [
     outcomes: ['Gross-total resection confirmed on MRI', 'No neurological deficits', 'Returned to teaching within a month'],
     tags: ['brain', 'awake-surgery', 'meningioma'],
     date: '2025-01-12',
+  },
+  {
+    id: 'video-005',
+    slug: 'video-testimonial-1',
+    title: 'Patient Testimonial — Recovery After Spine Treatment',
+    patientInitials: 'Video',
+    procedure: 'Patient Experience',
+    condition: 'Recovery journey',
+    quote: '“A first-hand account of care, recovery, and outcome.”',
+    summary:
+      'A brief testimonial capturing expectations, care experience, and recovery milestones following treatment with Dr. Sayuj.',
+    outcomes: ['Clear explanation of the process', 'Smooth recovery experience'],
+    tags: ['testimonial', 'video'],
+    date: '2025-10-29',
+    videoUrl: 'https://youtu.be/vqqAHzwZPYw?si=aPy69clyracOFAG-'
+  },
+  {
+    id: 'video-006',
+    slug: 'video-testimonial-2',
+    title: 'Patient Testimonial — Neurosurgical Care Experience',
+    patientInitials: 'Video',
+    procedure: 'Patient Experience',
+    condition: 'Recovery journey',
+    quote: '“Professional care and personalized attention throughout.”',
+    summary:
+      'A concise testimonial describing the overall experience, what changed after treatment, and advice to others considering care.',
+    outcomes: ['Professional care', 'Personalized attention'],
+    tags: ['testimonial', 'video'],
+    date: '2025-10-29',
+    videoUrl: 'https://youtu.be/HPhPB5jY0xk?si=H-Vrx9t1eGeph3an'
   },
   {
     id: 'spine-002',

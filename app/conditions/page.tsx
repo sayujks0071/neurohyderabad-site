@@ -1,151 +1,134 @@
-import { Metadata } from 'next';
-import Link from 'next/link';
-import { SITE_URL } from '../../src/lib/seo';
+import Link from "next/link";
+import { Metadata } from "next";
+import ConditionsExplorer from "./ConditionsExplorer";
+import BreadcrumbNavigation from "./BreadcrumbNavigation";
+import {
+  CONDITION_RESOURCES,
+  groupConditionsByLetter,
+} from "@/src/data/conditionsIndex";
+import { SITE_URL } from "@/src/lib/seo";
+import Section from "../_components/Section";
+import Card from "../_components/Card";
+import Button from "../_components/Button";
 
 export const metadata: Metadata = {
-  title: 'Neurological Conditions Treated | Dr. Sayuj Krishnan',
-  description: 'Expert treatment for neurological conditions including trigeminal neuralgia, brain tumors, epilepsy, and spine disorders in Hyderabad.',
+  title: "Neurological Conditions A–Z | Dr. Sayuj Krishnan",
+  description:
+    "Browse an A–Z index of brain, spine, and nerve conditions treated by Dr. Sayuj Krishnan with links to detailed guides and treatment options.",
   alternates: {
-    canonical: `${SITE_URL}/conditions/`,
+    canonical: `${SITE_URL}/conditions`,
     languages: {
-      'en-IN': `${SITE_URL}/conditions/`,
-      'x-default': `${SITE_URL}/conditions/`
-    }
+      "en-IN": `${SITE_URL}/conditions`,
+      "x-default": `${SITE_URL}/conditions`,
+    },
   },
   openGraph: {
-    title: 'Neurological Conditions Treated | Dr. Sayuj Krishnan',
-    description: 'Expert treatment for neurological conditions including trigeminal neuralgia, brain tumors, epilepsy, and spine disorders in Hyderabad.',
-    url: `${SITE_URL}/conditions/`,
-    siteName: 'Dr. Sayuj Krishnan - Neurosurgeon in Hyderabad',
+    title: "Neurological Conditions A–Z | Dr. Sayuj Krishnan",
+    description:
+      "Explore conditions, symptoms, and minimally invasive treatments offered for brain, spine, and epilepsy care.",
+    url: `${SITE_URL}/conditions`,
+    siteName: "Dr. Sayuj Krishnan - Neurosurgeon in Hyderabad",
     images: [
       {
-        url: `${SITE_URL}/api/og?title=Neurological%20Conditions&subtitle=Expert%20Treatment%20in%20Hyderabad`,
+        url: `${SITE_URL}/api/og?title=Conditions%20A%E2%80%93Z&subtitle=Brain%20%26%20Spine%20Care%20Index`,
         width: 1200,
         height: 630,
-        alt: 'Neurological Conditions - Dr. Sayuj Krishnan',
+        alt: "Conditions Index - Dr. Sayuj Krishnan",
       },
     ],
-    locale: 'en_IN',
-    type: 'website',
+    locale: "en_IN",
+    type: "website",
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'Neurological Conditions Treated | Dr. Sayuj Krishnan',
-    description: 'Expert treatment for neurological conditions including trigeminal neuralgia, brain tumors, epilepsy, and spine disorders in Hyderabad.',
-    images: [`${SITE_URL}/api/og?title=Neurological%20Conditions&subtitle=Expert%20Treatment%20in%20Hyderabad`],
+    card: "summary_large_image",
+    title: "Neurological Conditions A–Z | Dr. Sayuj Krishnan",
+    description:
+      "Find information about conditions treated, diagnostic pathways, and evidence-based neurosurgical care.",
+    images: [
+      `${SITE_URL}/api/og?title=Conditions%20A%E2%80%93Z&subtitle=Brain%20%26%20Spine%20Care%20Index`,
+    ],
   },
 };
 
+const letterGroups = groupConditionsByLetter();
+const letters = Object.keys(letterGroups).sort();
+
 export default function ConditionsPage() {
-  const conditions = [
-    {
-      title: 'Trigeminal Neuralgia',
-      description: 'Severe facial pain condition treated with advanced surgical techniques including microvascular decompression.',
-      href: '/conditions/trigeminal-neuralgia-treatment',
-      symptoms: ['Severe facial pain', 'Electric shock-like sensations', 'Pain triggered by touch', 'Difficulty eating/speaking']
-    },
-    {
-      title: 'Brain Tumors',
-      description: 'Comprehensive treatment for benign and malignant brain tumors using advanced surgical techniques.',
-      href: '/services/brain-tumor-surgery-hyderabad/',
-      symptoms: ['Headaches', 'Seizures', 'Memory problems', 'Personality changes', 'Vision problems']
-    },
-    {
-      title: 'Epilepsy',
-      description: 'Surgical treatment for drug-resistant epilepsy with advanced techniques and comprehensive evaluation.',
-      href: '/services/epilepsy-surgery',
-      symptoms: ['Recurrent seizures', 'Loss of consciousness', 'Uncontrolled movements', 'Memory loss']
-    },
-    {
-      title: 'Spine Disorders',
-      description: 'Minimally invasive treatment for herniated discs, spinal stenosis, and other spine conditions.',
-      href: '/services/minimally-invasive-spine-surgery/',
-      symptoms: ['Back pain', 'Neck pain', 'Numbness/tingling', 'Weakness in limbs', 'Difficulty walking']
-    }
-  ];
-
   return (
-    <div className="min-h-screen bg-white">
-      <div className="container mx-auto px-4 py-16">
-        <header className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-blue-800 mb-4">Neurological Conditions We Treat</h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Expert diagnosis and treatment for complex neurological conditions with advanced surgical techniques
-          </p>
-        </header>
-
-        <section className="grid md:grid-cols-2 gap-8 mb-16">
-          {conditions.map((condition, index) => (
-            <div key={index} className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
-              <h2 className="text-2xl font-semibold text-blue-700 mb-3">{condition.title}</h2>
-              <p className="text-gray-600 mb-4">{condition.description}</p>
-              
-              <div className="mb-4">
-                <h3 className="font-semibold text-gray-700 mb-2">Common Symptoms:</h3>
-                <ul className="space-y-1">
-                  {condition.symptoms.map((symptom, idx) => (
-                    <li key={idx} className="text-sm text-gray-600">• {symptom}</li>
-                  ))}
-                </ul>
-              </div>
-              
-              <Link 
-                href={condition.href}
-                className="inline-block bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-colors"
-              >
-                Learn More
-              </Link>
-            </div>
-          ))}
-        </section>
-
-        <section className="bg-gray-50 p-8 rounded-lg mb-12">
-          <h2 className="text-2xl font-bold text-blue-800 mb-4 text-center">When to Seek Medical Attention</h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div>
-              <h3 className="font-semibold text-red-700 mb-2">Emergency Symptoms:</h3>
-              <ul className="space-y-1 text-gray-600">
-                <li>• Sudden severe headache</li>
-                <li>• Loss of consciousness</li>
-                <li>• Sudden weakness or paralysis</li>
-                <li>• Difficulty speaking or understanding</li>
-                <li>• Sudden vision changes</li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-semibold text-orange-700 mb-2">Schedule Consultation:</h3>
-              <ul className="space-y-1 text-gray-600">
-                <li>• Persistent headaches</li>
-                <li>• Recurrent seizures</li>
-                <li>• Chronic back/neck pain</li>
-                <li>• Numbness or tingling</li>
-                <li>• Memory or cognitive changes</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <section className="bg-blue-50 p-8 rounded-lg text-center">
-          <h2 className="text-2xl font-bold text-blue-800 mb-4">Need Expert Evaluation?</h2>
-          <p className="text-gray-600 mb-6">
-            Dr. Sayuj Krishnan provides comprehensive evaluation and personalized treatment plans for neurological conditions.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link 
-              href="/appointments/"
-              className="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-colors"
-            >
-              Book Consultation
-            </Link>
-            <Link 
-              href="/contact/"
-              className="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-full hover:bg-blue-600 hover:text-white transition-colors"
-            >
-              Contact Us
-            </Link>
-          </div>
-        </section>
+    <div className="bg-white">
+      <div className="mx-auto max-w-5xl px-6 py-8">
+        <BreadcrumbNavigation
+          items={[
+            { label: "Conditions" }
+          ]}
+        />
       </div>
+      <Section background="none" className="bg-gradient-to-r from-blue-50 to-indigo-100 py-16">
+        <div className="mx-auto max-w-5xl">
+          <p className="text-sm uppercase tracking-wide text-blue-600">
+            Conditions & Treatments
+          </p>
+          <h1 className="mt-3 text-4xl font-bold text-gray-900">
+            Conditions We Treat – A to Z
+          </h1>
+          <p className="mt-4 max-w-3xl text-lg text-gray-600">
+            Browse neurological, brain, and spine conditions managed by Dr.
+            Sayuj Krishnan. Each condition links to detailed guides, treatment
+            options, and patient success stories.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3 text-sm font-medium text-blue-700">
+            {letters.map((letter) => (
+              <a
+                key={letter}
+                href={`#letter-${letter}`}
+                className="rounded-full border border-blue-200 bg-white px-3 py-1 transition hover:border-blue-400 hover:text-blue-900"
+              >
+                {letter}
+              </a>
+            ))}
+          </div>
+        </div>
+      </Section>
+
+      <Section background="white" className="py-14">
+        <div className="mx-auto max-w-5xl">
+          <ConditionsExplorer conditions={CONDITION_RESOURCES} />
+
+          <div className="mt-16">
+            <Card padding="lg" className="bg-blue-50 shadow-none">
+              <h2 className="text-2xl font-semibold text-blue-900">
+                Need Help Identifying a Condition?
+              </h2>
+              <p className="mt-2 text-blue-800">
+                Call or message our coordination team for triage. We review imaging,
+                organise second opinions, and help plan the next steps in your care.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Button
+                  href="tel:+919778280044"
+                  className="bg-blue-600 text-white hover:bg-blue-700 border-none"
+                >
+                  Call +91 97782 80044
+                </Button>
+                <Button
+                  href="https://wa.me/919778280044"
+                  variant="outline"
+                  className="bg-transparent border-blue-200 text-blue-600 hover:bg-blue-50 hover:border-blue-300"
+                >
+                  WhatsApp the Care Team
+                </Button>
+                <Button
+                  href="/appointments"
+                  variant="outline"
+                  className="bg-transparent border-blue-200 text-blue-600 hover:bg-blue-50 hover:border-blue-300"
+                >
+                  Book Consultation
+                </Button>
+              </div>
+            </Card>
+          </div>
+        </div>
+      </Section>
     </div>
   );
 }

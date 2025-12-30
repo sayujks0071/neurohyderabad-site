@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
         client_secret: process.env.GOOGLE_CLIENT_SECRET || '',
         code: code,
         grant_type: 'authorization_code',
-        redirect_uri: 'https://www.drsayuj.com/auth/callback',
+        redirect_uri: 'https://www.drsayuj.info/auth/callback',
       }),
     });
 

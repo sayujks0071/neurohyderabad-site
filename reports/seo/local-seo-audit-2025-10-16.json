@@ -1,0 +1,450 @@
+{
+  "timestamp": "2025-10-16T17:42:36.065Z",
+  "site": "https://www.drsayuj.info",
+  "auditDate": "2025-10-16",
+  "localConfig": {
+    "businessName": "Dr. Sayuj Krishnan",
+    "primaryLocation": "Hyderabad",
+    "hospital": "Yashoda Hospital",
+    "specialties": [
+      "Neurosurgeon",
+      "Brain Surgery",
+      "Spine Surgery",
+      "Endoscopic Spine Surgery",
+      "Minimally Invasive Surgery"
+    ],
+    "targetKeywords": [
+      "neurosurgeon hyderabad",
+      "brain surgeon hyderabad",
+      "spine surgeon hyderabad",
+      "endoscopic spine surgery hyderabad",
+      "minimally invasive spine surgery hyderabad",
+      "brain tumor surgery hyderabad",
+      "epilepsy surgery hyderabad"
+    ],
+    "locations": [
+      "Malakpet",
+      "Banjara Hills",
+      "Hitec City",
+      "Jubilee Hills",
+      "Secunderabad",
+      "Kukatpally",
+      "Manikonda",
+      "LB Nagar"
+    ]
+  },
+  "summary": {
+    "totalPages": 10,
+    "successfulPages": 10,
+    "averageLocalSEOScore": 100,
+    "issues": []
+  },
+  "pages": [
+    {
+      "url": "https://www.drsayuj.info/",
+      "status": "success",
+      "localSEO": {
+        "title": "Best Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan",
+        "description": "Best neurosurgeon in Hyderabad specializing in endoscopic spine surgery, brain tumor surgery &amp; minimally invasive procedures. Same-day discharge at Yashoda Hospital.",
+        "h1": "Dr. Sayuj Krishnan<br/><span class=\"text-3xl md:text-5xl text-blue-600\">Best Neurosurgeon in Hyderabad</span>",
+        "locationMentions": [
+          "Malakpet",
+          "Banjara Hills",
+          "Hitec City",
+          "Jubilee Hills",
+          "Secunderabad",
+          "LB Nagar"
+        ],
+        "specialtyMentions": [
+          "Neurosurgeon",
+          "Brain Surgery",
+          "Spine Surgery",
+          "Endoscopic Spine Surgery",
+          "Minimally Invasive Surgery"
+        ],
+        "keywordMentions": [
+          "neurosurgeon hyderabad",
+          "brain surgeon hyderabad",
+          "endoscopic spine surgery hyderabad",
+          "brain tumor surgery hyderabad"
+        ],
+        "hasBusinessName": true,
+        "hasHospitalName": true,
+        "hasLocalBusinessSchema": true,
+        "hasPhysicianSchema": true,
+        "hasPhone": true,
+        "hasEmail": true,
+        "hasLocationContent": true,
+        "hasSpecialtyContent": true,
+        "localSEOScore": 97
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/about",
+      "status": "success",
+      "localSEO": {
+        "title": "About Dr Sayuj Krishnan | Leading Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+        "description": "Dr Sayuj Krishnan is a highly experienced neurosurgeon with 9 years of expertise in minimally invasive brain and spine surgery in Hyderabad. MBBS, DNB Neurosurgery, Fellowship in MISS.",
+        "h1": "About Dr Sayuj Krishnan",
+        "locationMentions": [
+          "Malakpet",
+          "Banjara Hills",
+          "Hitec City",
+          "Jubilee Hills",
+          "Secunderabad",
+          "LB Nagar"
+        ],
+        "specialtyMentions": [
+          "Neurosurgeon",
+          "Brain Surgery",
+          "Spine Surgery",
+          "Endoscopic Spine Surgery",
+          "Minimally Invasive Surgery"
+        ],
+        "keywordMentions": [
+          "neurosurgeon hyderabad",
+          "brain surgeon hyderabad",
+          "endoscopic spine surgery hyderabad",
+          "brain tumor surgery hyderabad",
+          "epilepsy surgery hyderabad"
+        ],
+        "hasBusinessName": true,
+        "hasHospitalName": true,
+        "hasLocalBusinessSchema": true,
+        "hasPhysicianSchema": true,
+        "hasPhone": true,
+        "hasEmail": true,
+        "hasLocationContent": true,
+        "hasSpecialtyContent": true,
+        "localSEOScore": 100
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/contact",
+      "status": "success",
+      "localSEO": {
+        "title": "Contact Dr Sayuj Krishnan | Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+        "description": "Contact Dr Sayuj Krishnan for neurosurgical consultations. Phone: +91 9778280044, Email: neurospinehyd@drsayuj.com. Located at Yashoda Hospital, Malakpet.",
+        "h1": "Contact Dr Sayuj Krishnan",
+        "locationMentions": [
+          "Malakpet",
+          "Banjara Hills",
+          "Hitec City",
+          "Jubilee Hills",
+          "Secunderabad",
+          "LB Nagar"
+        ],
+        "specialtyMentions": [
+          "Neurosurgeon",
+          "Brain Surgery",
+          "Spine Surgery",
+          "Endoscopic Spine Surgery",
+          "Minimally Invasive Surgery"
+        ],
+        "keywordMentions": [
+          "neurosurgeon hyderabad",
+          "brain surgeon hyderabad",
+          "endoscopic spine surgery hyderabad",
+          "brain tumor surgery hyderabad",
+          "epilepsy surgery hyderabad"
+        ],
+        "hasBusinessName": true,
+        "hasHospitalName": true,
+        "hasLocalBusinessSchema": true,
+        "hasPhysicianSchema": true,
+        "hasPhone": true,
+        "hasEmail": true,
+        "hasLocationContent": true,
+        "hasSpecialtyContent": true,
+        "localSEOScore": 100
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/appointments",
+      "status": "success",
+      "localSEO": {
+        "title": "Book an Appointment | Dr Sayuj Krishnan | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+        "description": "Schedule a consultation with Dr Sayuj Krishnan, leading neurosurgeon in Hyderabad. Expert treatment for brain and spine conditions.",
+        "h1": "Book an Appointment with Dr. Sayuj Krishnan",
+        "locationMentions": [
+          "Malakpet",
+          "Banjara Hills",
+          "Hitec City",
+          "Jubilee Hills",
+          "Secunderabad",
+          "LB Nagar"
+        ],
+        "specialtyMentions": [
+          "Neurosurgeon",
+          "Brain Surgery",
+          "Spine Surgery",
+          "Endoscopic Spine Surgery",
+          "Minimally Invasive Surgery"
+        ],
+        "keywordMentions": [
+          "neurosurgeon hyderabad",
+          "brain surgeon hyderabad",
+          "endoscopic spine surgery hyderabad",
+          "brain tumor surgery hyderabad",
+          "epilepsy surgery hyderabad"
+        ],
+        "hasBusinessName": true,
+        "hasHospitalName": true,
+        "hasLocalBusinessSchema": true,
+        "hasPhysicianSchema": true,
+        "hasPhone": true,
+        "hasEmail": true,
+        "hasLocationContent": true,
+        "hasSpecialtyContent": true,
+        "localSEOScore": 100
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/services",
+      "status": "success",
+      "localSEO": {
+        "title": "Neurosurgical Services in Hyderabad | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+        "description": "Expert neurosurgical services including endoscopic spine surgery, brain tumor surgery, epilepsy surgery, and trigeminal neuralgia treatment in Hyderabad.",
+        "h1": "Neurosurgical Services",
+        "locationMentions": [
+          "Malakpet",
+          "Banjara Hills",
+          "Hitec City",
+          "Jubilee Hills",
+          "Secunderabad",
+          "LB Nagar"
+        ],
+        "specialtyMentions": [
+          "Neurosurgeon",
+          "Brain Surgery",
+          "Spine Surgery",
+          "Endoscopic Spine Surgery",
+          "Minimally Invasive Surgery"
+        ],
+        "keywordMentions": [
+          "neurosurgeon hyderabad",
+          "brain surgeon hyderabad",
+          "endoscopic spine surgery hyderabad",
+          "brain tumor surgery hyderabad",
+          "epilepsy surgery hyderabad"
+        ],
+        "hasBusinessName": true,
+        "hasHospitalName": true,
+        "hasLocalBusinessSchema": true,
+        "hasPhysicianSchema": true,
+        "hasPhone": true,
+        "hasEmail": true,
+        "hasLocationContent": true,
+        "hasSpecialtyContent": true,
+        "localSEOScore": 100
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/conditions",
+      "status": "success",
+      "localSEO": {
+        "title": "Neurological Conditions Treated | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+        "description": "Expert treatment for neurological conditions including trigeminal neuralgia, brain tumors, epilepsy, and spine disorders in Hyderabad.",
+        "h1": "Neurological Conditions We Treat",
+        "locationMentions": [
+          "Malakpet",
+          "Banjara Hills",
+          "Hitec City",
+          "Jubilee Hills",
+          "Secunderabad",
+          "LB Nagar"
+        ],
+        "specialtyMentions": [
+          "Neurosurgeon",
+          "Brain Surgery",
+          "Spine Surgery",
+          "Endoscopic Spine Surgery",
+          "Minimally Invasive Surgery"
+        ],
+        "keywordMentions": [
+          "neurosurgeon hyderabad",
+          "brain surgeon hyderabad",
+          "endoscopic spine surgery hyderabad",
+          "brain tumor surgery hyderabad",
+          "epilepsy surgery hyderabad"
+        ],
+        "hasBusinessName": true,
+        "hasHospitalName": true,
+        "hasLocalBusinessSchema": true,
+        "hasPhysicianSchema": true,
+        "hasPhone": true,
+        "hasEmail": true,
+        "hasLocationContent": true,
+        "hasSpecialtyContent": true,
+        "localSEOScore": 100
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/best-neurosurgeon-in-hyderabad",
+      "status": "success",
+      "localSEO": {
+        "title": "Best Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+        "description": "Evidence-based brain and spine care in Hyderabad. Endoscopic spine, brain tumor, trigeminal neuralgia, epilepsy treatment. Book a consultation.",
+        "h1": "Best Neurosurgeon in Hyderabad — Evidence-Based Brain &amp; Spine Care",
+        "locationMentions": [
+          "Malakpet",
+          "Banjara Hills",
+          "Hitec City",
+          "Jubilee Hills",
+          "Secunderabad",
+          "LB Nagar"
+        ],
+        "specialtyMentions": [
+          "Neurosurgeon",
+          "Brain Surgery",
+          "Spine Surgery",
+          "Endoscopic Spine Surgery",
+          "Minimally Invasive Surgery"
+        ],
+        "keywordMentions": [
+          "neurosurgeon hyderabad",
+          "brain surgeon hyderabad",
+          "endoscopic spine surgery hyderabad",
+          "brain tumor surgery hyderabad",
+          "epilepsy surgery hyderabad"
+        ],
+        "hasBusinessName": true,
+        "hasHospitalName": true,
+        "hasLocalBusinessSchema": true,
+        "hasPhysicianSchema": true,
+        "hasPhone": true,
+        "hasEmail": true,
+        "hasLocationContent": true,
+        "hasSpecialtyContent": true,
+        "localSEOScore": 100
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/endoscopic-spine-surgery-hyderabad",
+      "status": "success",
+      "localSEO": {
+        "title": "Endoscopic Spine Surgery in Hyderabad | Cervical &amp; Lumbar | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+        "description": "Full Endoscopic Spine Surgery (FESS) in Hyderabad for cervical/lumbar disc herniation and foraminal stenosis. Indications, technique, risks, recovery timelines, FAQs, and booking.",
+        "h1": "Endoscopic Spine Surgery in Hyderabad",
+        "locationMentions": [
+          "Malakpet",
+          "Banjara Hills",
+          "Hitec City",
+          "Jubilee Hills",
+          "Secunderabad",
+          "LB Nagar"
+        ],
+        "specialtyMentions": [
+          "Neurosurgeon",
+          "Brain Surgery",
+          "Spine Surgery",
+          "Endoscopic Spine Surgery",
+          "Minimally Invasive Surgery"
+        ],
+        "keywordMentions": [
+          "neurosurgeon hyderabad",
+          "brain surgeon hyderabad",
+          "endoscopic spine surgery hyderabad",
+          "brain tumor surgery hyderabad",
+          "epilepsy surgery hyderabad"
+        ],
+        "hasBusinessName": true,
+        "hasHospitalName": true,
+        "hasLocalBusinessSchema": true,
+        "hasPhysicianSchema": true,
+        "hasPhone": true,
+        "hasEmail": true,
+        "hasLocationContent": true,
+        "hasSpecialtyContent": true,
+        "localSEOScore": 100
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/services/epilepsy-surgery-hyderabad",
+      "status": "success",
+      "localSEO": {
+        "title": "Epilepsy Surgery in Hyderabad | Drug-Resistant Epilepsy Tre… | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+        "description": "Expert epilepsy surgery for drug-resistant epilepsy in Hyderabad. LITT, resection surgery, VNS. Comprehensive evaluation and advanced techniques.",
+        "h1": "Epilepsy Surgery in Hyderabad",
+        "locationMentions": [
+          "Malakpet",
+          "Banjara Hills",
+          "Hitec City",
+          "Jubilee Hills",
+          "Secunderabad",
+          "LB Nagar"
+        ],
+        "specialtyMentions": [
+          "Neurosurgeon",
+          "Brain Surgery",
+          "Spine Surgery",
+          "Endoscopic Spine Surgery",
+          "Minimally Invasive Surgery"
+        ],
+        "keywordMentions": [
+          "neurosurgeon hyderabad",
+          "brain surgeon hyderabad",
+          "endoscopic spine surgery hyderabad",
+          "brain tumor surgery hyderabad",
+          "epilepsy surgery hyderabad"
+        ],
+        "hasBusinessName": true,
+        "hasHospitalName": true,
+        "hasLocalBusinessSchema": true,
+        "hasPhysicianSchema": true,
+        "hasPhone": true,
+        "hasEmail": true,
+        "hasLocationContent": true,
+        "hasSpecialtyContent": true,
+        "localSEOScore": 100
+      }
+    },
+    {
+      "url": "https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad",
+      "status": "success",
+      "localSEO": {
+        "title": "Brain Tumor Surgery in Hyderabad | Microsurgery &amp; Radiosurg… | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+        "description": "Brain tumor surgery with neuronavigation and neuromonitoring in Hyderabad. Risks, recovery, and alternatives explained.",
+        "h1": "Brain Tumor Surgery in Hyderabad",
+        "locationMentions": [
+          "Malakpet",
+          "Banjara Hills",
+          "Hitec City",
+          "Jubilee Hills",
+          "Secunderabad",
+          "LB Nagar"
+        ],
+        "specialtyMentions": [
+          "Neurosurgeon",
+          "Brain Surgery",
+          "Spine Surgery",
+          "Endoscopic Spine Surgery",
+          "Minimally Invasive Surgery"
+        ],
+        "keywordMentions": [
+          "neurosurgeon hyderabad",
+          "brain surgeon hyderabad",
+          "endoscopic spine surgery hyderabad",
+          "brain tumor surgery hyderabad",
+          "epilepsy surgery hyderabad"
+        ],
+        "hasBusinessName": true,
+        "hasHospitalName": true,
+        "hasLocalBusinessSchema": true,
+        "hasPhysicianSchema": true,
+        "hasPhone": true,
+        "hasEmail": true,
+        "hasLocationContent": true,
+        "hasSpecialtyContent": true,
+        "localSEOScore": 100
+      }
+    }
+  ],
+  "recommendations": [],
+  "napConsistency": {
+    "businessName": 10,
+    "hospitalName": 10,
+    "phone": 10,
+    "email": 10
+  }
+}

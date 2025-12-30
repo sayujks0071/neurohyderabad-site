@@ -5,7 +5,29 @@ export const metadata = {
   title: "Best Neurosurgeon in Hyderabad | Endoscopic Spine Surgery | Dr. Sayuj Krishnan",
   description:
     "Consult Dr. Sayuj Krishnan, neurosurgeon in Hyderabad specializing in full endoscopic spine & minimally invasive brain surgery. OPD timings, directions, FAQs, and WhatsApp booking.",
-  alternates: { canonical: "https://www.drsayuj.com/neurosurgeon-hyderabad" },
+  alternates: { canonical: "https://www.drsayuj.info/neurosurgeon-hyderabad" },
+  openGraph: {
+    title: "Best Neurosurgeon in Hyderabad | Endoscopic Spine Surgery | Dr. Sayuj Krishnan",
+    description:
+      "Consult Dr. Sayuj Krishnan for full endoscopic spine and minimally invasive brain surgery in Hyderabad. OPD timings, directions, and WhatsApp booking.",
+    url: "https://www.drsayuj.info/neurosurgeon-hyderabad",
+    type: "article",
+    images: [
+      {
+        url: "https://www.drsayuj.info/images/og-default.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Dr Sayuj Krishnan - Neurosurgeon in Hyderabad",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Best Neurosurgeon in Hyderabad | Endoscopic Spine Surgery",
+    description:
+      "Endoscopic spine and minimally invasive brain surgery with Dr. Sayuj Krishnan at Yashoda Hospital, Malakpet.",
+    images: ["https://www.drsayuj.info/images/og-default.jpg"],
+  },
 };
 
 const FAQ = [
@@ -45,8 +67,8 @@ export default function Page() {
       "Endoscopic Spine Surgery",
       "Minimally Invasive Brain Surgery",
     ],
-    url: "https://www.drsayuj.com",
-    image: "https://www.drsayuj.com/images/dr-sayuj.jpg",
+    url: "https://www.drsayuj.info",
+    image: "https://www.drsayuj.info/images/og-default.jpg",
     telephone: "+919778280044",
     areaServed: ["Hyderabad", "Telangana", "India"],
     sameAs: [
@@ -70,8 +92,8 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.drsayuj.com/" },
-      { "@type": "ListItem", position: 2, name: "Neurosurgeon in Hyderabad", item: "https://www.drsayuj.com/neurosurgeon-hyderabad" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.drsayuj.info/" },
+      { "@type": "ListItem", position: 2, name: "Neurosurgeon in Hyderabad", item: "https://www.drsayuj.info/neurosurgeon-hyderabad" },
     ],
   };
 
@@ -106,6 +128,9 @@ export default function Page() {
           </a>
           <a href="tel:+919778280044" className="rounded-2xl px-6 py-3 border">
             Call: +91-9778280044
+          </a>
+          <a href="/appointments" className="rounded-2xl px-6 py-3 bg-blue-600 text-white">
+            Book Appointment
           </a>
           <a href="https://maps.google.com/?q=Yashoda+Hospitals+Malakpet+Hyderabad" className="rounded-2xl px-6 py-3 border">
             Directions (Google Maps)

@@ -3,16 +3,48 @@ import Link from 'next/link';
 import StandardCTA from '@/app/_components/StandardCTA';
 import NAP from '@/app/_components/NAP';
 import ReviewedBy from '@/app/_components/ReviewedBy';
+import AuthorByline from '@/app/_components/AuthorByline';
+import SourceList from '@/app/_components/SourceList';
 import SchemaScript from '@/app/_components/SchemaScript';
+import LocationPageTracker from '../../../src/components/LocationPageTracker';
+import { SITE_URL } from '@/src/lib/seo';
+import { sources } from '../../blog/sources';
 
 export const metadata: Metadata = {
   title: 'Brain & Spine Surgeon near Banjara Hills, Hyderabad',
   description: 'Advanced brain and spine care near Banjara Hills, Hyderabad. Directions to Yashoda Hospital, Malakpet. Parking, timings, and appointment info.',
   keywords: 'brain surgeon Banjara Hills, spine surgeon Banjara Hills, neurosurgeon near Banjara Hills, Yashoda Hospital Malakpet, Hyderabad',
+  alternates: {
+    canonical: 'https://www.drsayuj.info/locations/brain-spine-surgeon-banjara-hills',
+    languages: {
+      'en-IN': 'https://www.drsayuj.info/locations/brain-spine-surgeon-banjara-hills',
+      'x-default': 'https://www.drsayuj.info/locations/brain-spine-surgeon-banjara-hills',
+    },
+  },
   openGraph: {
     title: 'Brain & Spine Surgeon near Banjara Hills, Hyderabad',
     description: 'Advanced brain and spine care near Banjara Hills, Hyderabad. Directions to Yashoda Hospital, Malakpet. Parking, timings, and appointment info.',
     type: 'website',
+    url: 'https://www.drsayuj.info/locations/brain-spine-surgeon-banjara-hills',
+    images: [
+      {
+        url: `${SITE_URL}/images/og-default.jpg`,
+        width: 1200,
+        height: 630,
+        alt: 'Brain & Spine Surgeon near Banjara Hills',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Brain & Spine Surgeon near Banjara Hills, Hyderabad',
+    description: 'Advanced brain and spine care near Banjara Hills, Hyderabad. Directions to Yashoda Hospital, Malakpet. Parking, timings, and appointment info.',
+    images: [
+      {
+        url: `${SITE_URL}/images/og-default.jpg`,
+        alt: 'Brain & Spine Surgeon near Banjara Hills',
+      },
+    ],
   },
 };
 
@@ -20,8 +52,8 @@ const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "Dr. Sayuj Krishnan - Neurosurgeon",
-  "image": "https://www.drsayuj.com/images/og-default.jpg",
-  "url": "https://www.drsayuj.com/locations/brain-spine-surgeon-banjara-hills",
+  "image": "https://www.drsayuj.info/images/og-default.jpg",
+  "url": "https://www.drsayuj.info/locations/brain-spine-surgeon-banjara-hills",
   "telephone": "+919778280044",
   "address": {
     "@type": "PostalAddress",
@@ -304,9 +336,19 @@ export default function BanjaraHillsLocationPage() {
       {/* Review Notice */}
       <section className="py-8">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <AuthorByline 
+            publishedOn="2025-01-15"
+            updatedOn="2025-10-19"
+          />
+          
+          <SourceList sources={sources['brain-spine-surgeon-banjara-hills'] || []} />
+          
           <ReviewedBy lastReviewed="2025-01-15" />
         </div>
       </section>
+
+      {/* Location Page Tracking */}
+      <LocationPageTracker location="banjara-hills" />
     </div>
   );
 }

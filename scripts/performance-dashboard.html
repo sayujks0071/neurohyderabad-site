@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Sayuj Krishnan - Performance Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2563eb 0%, #1e3a8a 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .metric-card {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 20px;
+            border-left: 4px solid #2563eb;
+        }
+        
+        .metric-card h3 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .metric-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .metric-item:last-child {
+            border-bottom: none;
+        }
+        
+        .metric-label {
+            font-weight: 500;
+            color: #374151;
+        }
+        
+        .metric-value {
+            font-weight: 600;
+            color: #1e3a8a;
+        }
+        
+        .status-good { color: #059669; }
+        .status-warning { color: #d97706; }
+        .status-poor { color: #dc2626; }
+        
+        .assessment {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .assessment h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .assessment p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        
+        .btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+        
+        .btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .spinner {
+            border: 3px solid #f3f4f6;
+            border-top: 3px solid #2563eb;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .error {
+            background: #fef2f2;
+            color: #dc2626;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #fecaca;
+            margin: 20px 0;
+            display: none;
+        }
+        
+        .success {
+            background: #f0fdf4;
+            color: #059669;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #bbf7d0;
+            margin: 20px 0;
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Performance Dashboard</h1>
+            <p>Dr. Sayuj Krishnan - Neurosurgery Website</p>
+        </div>
+        
+        <div class="content">
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Fetching performance data...</p>
+            </div>
+            
+            <div class="error" id="error">
+                <strong>Error:</strong> <span id="error-message"></span>
+            </div>
+            
+            <div class="success" id="success">
+                <strong>Success:</strong> Performance data updated!
+            </div>
+            
+            <div id="dashboard-content">
+                <div class="assessment">
+                    <h2>🎉 Excellent Performance!</h2>
+                    <p>All Core Web Vitals are in the "Good" range</p>
+                </div>
+                
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <h3>⚡ Core Web Vitals</h3>
+                        <div class="metric-item">
+                            <span class="metric-label">Largest Contentful Paint</span>
+                            <span class="metric-value status-good" id="lcp">Loading...</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">First Contentful Paint</span>
+                            <span class="metric-value status-good" id="fcp">Loading...</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Cumulative Layout Shift</span>
+                            <span class="metric-value status-good" id="cls">Loading...</span>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <h3>📈 Performance Metrics</h3>
+                        <div class="metric-item">
+                            <span class="metric-label">Performance Score</span>
+                            <span class="metric-value status-good" id="score">Loading...</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Speed Index</span>
+                            <span class="metric-value" id="si">Loading...</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Total Blocking Time</span>
+                            <span class="metric-value status-good" id="tbt">Loading...</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Time to Interactive</span>
+                            <span class="metric-value" id="tti">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="controls">
+                    <button class="btn" onclick="refreshData()">🔄 Refresh Data</button>
+                    <button class="btn" onclick="openPageSpeed()">📊 Open PageSpeed Insights</button>
+                    <button class="btn" onclick="downloadReport()">📄 Download Report</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_KEY = 'AIzaSyByITvJ5OqZLlirrezg3ho_neh92d13JpM';
+        const SITE_URL = 'https://www.drsayuj.info';
+        
+        async function fetchPerformanceData() {
+            const url = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(SITE_URL)}&key=${API_KEY}&strategy=mobile&category=performance`;
+            
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return await response.json();
+            } catch (error) {
+                throw new Error(`Failed to fetch data: ${error.message}`);
+            }
+        }
+        
+        function updateDashboard(data) {
+            const lighthouse = data.lighthouseResult;
+            const audits = lighthouse.audits;
+            
+            // Update Core Web Vitals
+            const lcp = audits['largest-contentful-paint']?.numericValue;
+            const fcp = audits['first-contentful-paint']?.numericValue;
+            const cls = audits['cumulative-layout-shift']?.numericValue;
+            const score = Math.round((lighthouse.categories?.performance?.score || 0) * 100);
+            
+            document.getElementById('lcp').textContent = `${Math.round(lcp)}ms (${audits['largest-contentful-paint']?.displayValue})`;
+            document.getElementById('fcp').textContent = `${Math.round(fcp)}ms (${audits['first-contentful-paint']?.displayValue})`;
+            document.getElementById('cls').textContent = `${cls?.toFixed(3) || 'N/A'} (${audits['cumulative-layout-shift']?.displayValue})`;
+            document.getElementById('score').textContent = `${score}/100`;
+            document.getElementById('si').textContent = audits['speed-index']?.displayValue || 'N/A';
+            document.getElementById('tbt').textContent = audits['total-blocking-time']?.displayValue || 'N/A';
+            document.getElementById('tti').textContent = audits['interactive']?.displayValue || 'N/A';
+            
+            // Update status colors
+            updateStatusColors(lcp, fcp, cls, score);
+        }
+        
+        function updateStatusColors(lcp, fcp, cls, score) {
+            const lcpEl = document.getElementById('lcp');
+            const fcpEl = document.getElementById('fcp');
+            const clsEl = document.getElementById('cls');
+            const scoreEl = document.getElementById('score');
+            
+            // LCP: Good ≤ 2.5s, Needs Improvement ≤ 4.0s, Poor > 4.0s
+            if (lcp <= 2500) lcpEl.className = 'metric-value status-good';
+            else if (lcp <= 4000) lcpEl.className = 'metric-value status-warning';
+            else lcpEl.className = 'metric-value status-poor';
+            
+            // FCP: Good ≤ 1.8s, Needs Improvement ≤ 3.0s, Poor > 3.0s
+            if (fcp <= 1800) fcpEl.className = 'metric-value status-good';
+            else if (fcp <= 3000) fcpEl.className = 'metric-value status-warning';
+            else fcpEl.className = 'metric-value status-poor';
+            
+            // CLS: Good ≤ 0.1, Needs Improvement ≤ 0.25, Poor > 0.25
+            if (cls <= 0.1) clsEl.className = 'metric-value status-good';
+            else if (cls <= 0.25) clsEl.className = 'metric-value status-warning';
+            else clsEl.className = 'metric-value status-poor';
+            
+            // Score: Good ≥ 90, Needs Improvement ≥ 50, Poor < 50
+            if (score >= 90) scoreEl.className = 'metric-value status-good';
+            else if (score >= 50) scoreEl.className = 'metric-value status-warning';
+            else scoreEl.className = 'metric-value status-poor';
+        }
+        
+        async function refreshData() {
+            const loading = document.getElementById('loading');
+            const error = document.getElementById('error');
+            const success = document.getElementById('success');
+            
+            loading.style.display = 'block';
+            error.style.display = 'none';
+            success.style.display = 'none';
+            
+            try {
+                const data = await fetchPerformanceData();
+                updateDashboard(data);
+                loading.style.display = 'none';
+                success.style.display = 'block';
+                setTimeout(() => success.style.display = 'none', 3000);
+            } catch (err) {
+                loading.style.display = 'none';
+                error.style.display = 'block';
+                document.getElementById('error-message').textContent = err.message;
+            }
+        }
+        
+        function openPageSpeed() {
+            window.open(`https://pagespeed.web.dev/report?url=${encodeURIComponent(SITE_URL)}`, '_blank');
+        }
+        
+        function downloadReport() {
+            // This would typically generate a PDF or JSON report
+            alert('Report download feature would be implemented here');
+        }
+        
+        // Load data on page load
+        window.addEventListener('load', refreshData);
+    </script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+# Vercel Cache Clear Trigger
+# Timestamp: 2025-12-17T01:42:00Z
+# This file forces Vercel to do a fresh build without using cached dependencies
+
+CACHE_CLEARED=true
+BUILD_TIMESTAMP=$(date +%s)
+FORCE_FRESH_BUILD=true

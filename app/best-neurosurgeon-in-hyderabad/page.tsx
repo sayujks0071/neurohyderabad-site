@@ -2,14 +2,23 @@ import { SITE_URL } from "../../src/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import SmartImage from '@/components/SmartImage';
-import { HeroCTA } from "../../src/components/Experiments";
-import SocialProofBand from "../../src/components/Experiments/SocialProofBand";
+// import { HeroCTA } from "../../src/components/Experiments";
+// import SocialProofBand from "../../src/components/Experiments/SocialProofBand";
 import { analytics } from "../../src/lib/analytics";
 import ScrollDepthTracker from "../../src/components/ScrollDepthTracker";
 
 export const metadata: Metadata = {
-  title: "Best Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan",
-  description: "Evidence-based brain and spine care in Hyderabad. Endoscopic spine, brain tumor, trigeminal neuralgia, epilepsy treatment. Book a consultation.",
+  title: "Best Neurosurgeon in Hyderabad 2025 | Dr. Sayuj Krishnan",
+  description: "German-trained neurosurgeon at Yashoda Hospital, Malakpet. 1,000+ endoscopic brain & spine surgeries, 4.9★ rating, insurance-friendly same-day discharge.",
+  keywords: [
+    "best neurosurgeon in hyderabad",
+    "best spine surgeon hyderabad",
+    "yashoda hospital neurosurgeon",
+    "malakpet neurosurgeon",
+    "endoscopic spine surgeon hyderabad",
+    "brain tumor surgeon hyderabad",
+    "awake brain surgery hyderabad"
+  ],
   alternates: {
     canonical: `${SITE_URL}/best-neurosurgeon-in-hyderabad/`,
     languages: {
@@ -18,9 +27,15 @@ export const metadata: Metadata = {
     }
   },
   openGraph: {
+    title: "Best Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan, German-Trained Spine & Brain Surgeon",
+    description: "Trusted 4.9★ neurosurgeon with 1,000+ endoscopic spine/brain procedures and fast recovery protocols at Yashoda Hospital, Malakpet.",
+    url: `${SITE_URL}/best-neurosurgeon-in-hyderabad/`,
+    siteName: "Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+    locale: "en_IN",
+    type: "article",
     images: [
       {
-        url: `${SITE_URL}/api/og?title=${encodeURIComponent("Best Neurosurgeon in Hyderabad")}&subtitle=${encodeURIComponent("Dr. Sayuj Krishnan - Evidence-Based Brain & Spine Care")}`,
+        url: `${SITE_URL}/api/og?title=${encodeURIComponent("Best Neurosurgeon in Hyderabad")}&subtitle=${encodeURIComponent("German-trained brain & spine surgeon at Yashoda Hospital")}`,
         width: 1200,
         height: 630,
         alt: "Best Neurosurgeon in Hyderabad — Dr. Sayuj Krishnan",
@@ -29,9 +44,11 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
+    title: "Best Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan",
+    description: "German-trained, 1,000+ endoscopic brain & spine surgeries with 4.9★ patient rating at Yashoda Hospital, Malakpet.",
     images: [
       {
-        url: `${SITE_URL}/api/og?title=${encodeURIComponent("Best Neurosurgeon in Hyderabad")}&subtitle=${encodeURIComponent("Dr. Sayuj Krishnan - Evidence-Based Brain & Spine Care")}`,
+        url: `${SITE_URL}/api/og?title=${encodeURIComponent("Best Neurosurgeon in Hyderabad")}&subtitle=${encodeURIComponent("German-trained brain & spine surgeon at Yashoda Hospital")}`,
         alt: "Best Neurosurgeon in Hyderabad — Dr. Sayuj Krishnan",
       },
     ],
@@ -64,13 +81,43 @@ export default function BestNeurosurgeonPage() {
                 <br />
                 Specializing in Endoscopic Spine Surgery, Brain Tumor Surgery & Epilepsy Treatment
               </p>
-              <HeroCTA />
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link 
+                  href="/appointments" 
+                  className="bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-blue-700 transition-colors text-center"
+                >
+                  Book Consultation
+                </Link>
+                <Link 
+                  href="/services" 
+                  className="border-2 border-blue-600 text-blue-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-blue-50 transition-colors text-center"
+                >
+                  View Services
+                </Link>
+              </div>
             </div>
           </div>
         </header>
 
         {/* Social Proof Section */}
-        <SocialProofBand />
+        <section className="bg-gray-50 border-t border-b border-gray-200 py-8">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="flex flex-wrap items-center justify-center gap-8 text-sm text-gray-700">
+              <div className="flex items-center gap-2">
+                <span className="text-lg" aria-hidden>🏥</span>
+                <span>Yashoda Hospital Affiliation</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-lg" aria-hidden>🎓</span>
+                <span>9+ Years Neurosurgical Experience</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-lg" aria-hidden>🔬</span>
+                <span>Neuronavigation & Intraoperative Monitoring</span>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Introduction */}
         <section className="py-16 bg-gray-50">
@@ -113,7 +160,7 @@ export default function BestNeurosurgeonPage() {
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-blue-700 mb-2">15+ Years Experience</h3>
+                    <h3 className="text-xl font-semibold text-blue-700 mb-2">9+ Years Experience</h3>
                     <p className="text-gray-700">
                       Across brain and spine procedures with a focus on patient safety and optimal outcomes
                     </p>
@@ -343,6 +390,50 @@ export default function BestNeurosurgeonPage() {
           </div>
         </section>
 
+        {/* How to Book */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4 max-w-5xl">
+            <h2 className="text-3xl font-bold text-center text-blue-800 mb-10">
+              How to Book a Consultation in Hyderabad
+            </h2>
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="bg-gray-50 p-6 rounded-lg shadow-sm h-full">
+                <div className="text-sm font-semibold text-blue-700 mb-2">Step 1</div>
+                <h3 id="step-share-imaging" className="text-xl font-semibold text-blue-800 mb-3">
+                  Share Imaging & Symptoms
+                </h3>
+                <p className="text-gray-700">
+                  Upload your MRI/CT and a short symptom summary to hellodr@drsayuj.info or WhatsApp. 
+                  This helps confirm if an endoscopic or conservative path is safest.
+                </p>
+              </div>
+              <div className="bg-gray-50 p-6 rounded-lg shadow-sm h-full">
+                <div className="text-sm font-semibold text-blue-700 mb-2">Step 2</div>
+                <h3 id="step-pick-slot" className="text-xl font-semibold text-blue-800 mb-3">
+                  Pick a Same-Week Slot
+                </h3>
+                <p className="text-gray-700">
+                  The coordination team offers the earliest clinic or video slot (often same-day for nerve pain). 
+                  Insurance pre-auth starts as soon as you confirm.
+                </p>
+              </div>
+              <div className="bg-gray-50 p-6 rounded-lg shadow-sm h-full">
+                <div className="text-sm font-semibold text-blue-700 mb-2">Step 3</div>
+                <h3 id="step-visit-clinic" className="text-xl font-semibold text-blue-800 mb-3">
+                  Visit Yashoda, Malakpet
+                </h3>
+                <p className="text-gray-700">
+                  Bring your ID, insurance card, and medication list. We finalize the plan in-clinic and share a 
+                  written recovery roadmap with red-flag warnings.
+                </p>
+              </div>
+            </div>
+            <p className="text-center text-sm text-gray-600 mt-6">
+              Outstation patients can opt for teleconsultation with airport pickup support when surgery is advised.
+            </p>
+          </div>
+        </section>
+
         {/* FAQs */}
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4 max-w-4xl">
@@ -371,6 +462,20 @@ export default function BestNeurosurgeonPage() {
                   Age alone is not a barrier; overall health and specific condition determine candidacy.
                 </p>
               </div>
+              <div className="bg-gray-50 p-6 rounded-lg">
+                <h3 className="text-xl font-semibold mb-3 text-blue-700">How do I choose the best neurosurgeon in Hyderabad?</h3>
+                <p className="text-gray-700">
+                  Look for fellowship training, high endoscopic case volumes, navigation/ICU support, transparent outcomes, 
+                  and clear recovery plans. Dr. Sayuj practices at Yashoda Hospital, Malakpet with these safeguards in place.
+                </p>
+              </div>
+              <div className="bg-gray-50 p-6 rounded-lg">
+                <h3 className="text-xl font-semibold mb-3 text-blue-700">What does minimally invasive spine surgery cost in Hyderabad?</h3>
+                <p className="text-gray-700">
+                  Endoscopic discectomy packages are typically ₹95,000–1,35,000 including surgeon fees, OT, implants, and follow-ups. 
+                  Cashless insurance approval often reduces out-of-pocket expenses by 12–18% once pre-authorization is cleared.
+                </p>
+              </div>
             </div>
           </div>
         </section>
@@ -385,9 +490,12 @@ export default function BestNeurosurgeonPage() {
               Book a consultation at Yashoda Hospitals – Malakpet. Bring your MRI and medication list 
               for a safe, stepwise plan.
             </p>
-            <HeroCTA 
-              className="bg-white text-blue-800 hover:bg-blue-100"
-            />
+            <Link 
+              href="/appointments" 
+              className="bg-white text-blue-800 hover:bg-blue-100 px-8 py-4 rounded-full text-lg font-semibold transition-colors inline-block"
+            >
+              Book Consultation
+            </Link>
           </div>
         </section>
 
@@ -440,6 +548,10 @@ export default function BestNeurosurgeonPage() {
                 "url": `${SITE_URL}/best-neurosurgeon-in-hyderabad/`,
                 "name": "Best Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan",
                 "description": "Looking for the best neurosurgeon in Hyderabad? Dr. Sayuj Krishnan offers endoscopic spine surgery, brain tumor surgery, trigeminal neuralgia and epilepsy care. Safety-first, evidence-based treatment.",
+                "speakable": {
+                  "@type": "SpeakableSpecification",
+                  "cssSelector": ["header h1", "header p"]
+                },
                 "isPartOf": { "@id": `${SITE_URL}/#website` },
                 "primaryImageOfPage": {
                   "@type": "ImageObject",
@@ -452,7 +564,16 @@ export default function BestNeurosurgeonPage() {
                 "datePublished": "2023-01-01T00:00:00+05:30",
                 "dateModified": new Date().toISOString(),
                 "breadcrumb": { "@id": `${SITE_URL}/best-neurosurgeon-in-hyderabad/#breadcrumb` },
-                "mainEntity": { "@id": `${SITE_URL}/#physician` }
+                "mainEntity": { "@id": `${SITE_URL}/#physician` },
+                "about": [
+                  { "@type": "MedicalSpecialty", "name": "Neurosurgery" },
+                  { "@type": "MedicalProcedure", "name": "Endoscopic Spine Surgery" },
+                  { "@type": "MedicalCondition", "name": "Brain Tumor" }
+                ],
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": `${SITE_URL}/appointments`
+                }
               },
               {
                 "@type": "BreadcrumbList",
@@ -499,8 +620,67 @@ export default function BestNeurosurgeonPage() {
                       "@type": "Answer",
                       "text": "Many are—with careful selection, medical optimization, and clear recovery planning. Age alone is not a barrier; overall health and specific condition determine candidacy."
                     }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "How do I choose the best neurosurgeon in Hyderabad?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "Look for fellowship training, high endoscopic case volumes, navigation/ICU support, transparent outcomes, and clear recovery plans. Dr. Sayuj practices at Yashoda Hospital, Malakpet with these safeguards in place."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "What does minimally invasive spine surgery cost in Hyderabad?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "Endoscopic discectomy packages are typically ₹95,000–1,35,000 including surgeon fees, OT, implants, and follow-ups. Cashless insurance approval often reduces out-of-pocket expenses by 12–18% once pre-authorization is cleared."
+                    }
                   }
                 ]
+              },
+              {
+                "@type": "HowTo",
+                "@id": `${SITE_URL}/best-neurosurgeon-in-hyderabad/#how-to-book`,
+                "name": "How to book a consultation with Dr. Sayuj in Hyderabad",
+                "description": "Three quick steps to schedule an in-clinic or teleconsultation at Yashoda Hospital, Malakpet.",
+                "totalTime": "PT24H",
+                "supply": [
+                  { "@type": "HowToSupply", "name": "MRI/CT scans and reports" },
+                  { "@type": "HowToSupply", "name": "Medication list and ID proof" }
+                ],
+                "tool": [
+                  { "@type": "HowToTool", "name": "Secure video or WhatsApp link for imaging review" }
+                ],
+                "step": [
+                  {
+                    "@type": "HowToStep",
+                    "position": 1,
+                    "name": "Share imaging & symptoms",
+                    "url": `${SITE_URL}/best-neurosurgeon-in-hyderabad/#step-share-imaging`,
+                    "text": "Upload MRI/CT and a short symptom summary to hellodr@drsayuj.info or WhatsApp to confirm eligibility for an endoscopic or conservative path."
+                  },
+                  {
+                    "@type": "HowToStep",
+                    "position": 2,
+                    "name": "Pick a same-week slot",
+                    "url": `${SITE_URL}/best-neurosurgeon-in-hyderabad/#step-pick-slot`,
+                    "text": "Coordination team schedules the earliest clinic or video slot—often same-day for nerve pain—and starts insurance pre-authorization."
+                  },
+                  {
+                    "@type": "HowToStep",
+                    "position": 3,
+                    "name": "Visit Yashoda, Malakpet",
+                    "url": `${SITE_URL}/best-neurosurgeon-in-hyderabad/#step-visit-clinic`,
+                    "text": "Bring your ID, insurance card, and medication list. The final plan and recovery roadmap are shared in writing after consultation."
+                  }
+                ],
+                "performer": { "@id": `${SITE_URL}/#physician` },
+                "areaServed": {
+                  "@type": "City",
+                  "name": "Hyderabad",
+                  "containedInPlace": { "@type": "State", "name": "Telangana" }
+                }
               }
             ]
           })

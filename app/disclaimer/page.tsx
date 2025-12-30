@@ -79,7 +79,7 @@ export default function DisclaimerPage() {
               <p>Room No 317, OPD Block, Yashoda Hospital, Malakpet</p>
               <p>Hyderabad, Telangana 500036</p>
               <p>Phone: <a href="tel:+919778280044" className="text-blue-600 hover:underline">+91-9778280044</a></p>
-              <p>Email: <a href="mailto:neurospinehyd@drsayuj.com" className="text-blue-600 hover:underline">neurospinehyd@drsayuj.com</a></p>
+              <p>Email: <a href="mailto:hellodr@drsayuj.info" className="text-blue-600 hover:underline">hellodr@drsayuj.info</a></p>
             </div>
           </section>
 
@@ -93,7 +93,7 @@ export default function DisclaimerPage() {
               <li>DNB Neurosurgery (Direct 6 years)</li>
               <li>Fellowship in Minimally Invasive and Advanced Spine Surgery</li>
               <li>Observer-ship in Full Endoscopic Spine Surgery (Germany)</li>
-              <li>15+ years of experience in neurosurgery</li>
+              <li>Over 9 years of experience in neurosurgery</li>
             </ul>
           </section>
         </div>

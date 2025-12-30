@@ -4,7 +4,7 @@ export default function DiseaseGuidesStructuredData() {
     "@type": "MedicalWebPage",
     "name": "Disease Guides & Medical Conditions",
     "description": "Comprehensive disease guides for neurological and spinal conditions with expert medical information and treatment options.",
-    "url": "https://www.drsayuj.com/disease-guides/",
+    "url": "https://www.drsayuj.info/disease-guides/",
     "mainEntity": {
       "@type": "MedicalBusiness",
       "name": "Dr. Sayuj Krishnan - Disease Guides & Medical Conditions",
@@ -75,8 +75,8 @@ export default function DiseaseGuidesStructuredData() {
         "addressCountry": "IN"
       },
       "telephone": "+91-9778280044",
-      "email": "neurospinehyd@drsayuj.com",
-      "url": "https://www.drsayuj.com"
+      "email": "hellodr@drsayuj.info",
+      "url": "https://www.drsayuj.info"
     },
     "breadcrumb": {
       "@type": "BreadcrumbList",
@@ -85,13 +85,13 @@ export default function DiseaseGuidesStructuredData() {
           "@type": "ListItem",
           "position": 1,
           "name": "Home",
-          "item": "https://www.drsayuj.com/"
+          "item": "https://www.drsayuj.info/"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "Disease Guides",
-          "item": "https://www.drsayuj.com/disease-guides/"
+          "item": "https://www.drsayuj.info/disease-guides/"
         }
       ]
     },

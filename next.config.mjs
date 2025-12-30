@@ -1,19 +1,28 @@
+// #region agent log
+import pkg from "workflow/next";
+const { withWorkflow } = pkg;
+// #endregion
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Enable compression
   compress: true,
-  
+
   // Consistent trailing slash behavior - disabled for API routes
   trailingSlash: false,
-  
-  // Safari optimization: Reduce hydration payload
+
+  // Performance optimizations
   experimental: {
     // Reduce hydration data size for Safari compatibility
     optimizePackageImports: ['@/components', '@/lib'],
     // Enable partial pre-rendering for better performance
     ppr: false,
+    // Enable optimized CSS loading
+    optimizeCss: true,
   },
-  
+  // Server external packages (moved from experimental)
+  serverExternalPackages: ['sharp'],
+
   // Configure images for dynamic OG generation and local images
   images: {
     remotePatterns: [
@@ -36,22 +45,53 @@ const nextConfig = {
     ],
     // Allow query strings for dynamic OG images
     dangerouslyAllowSVG: true,
-    contentDispositionType: 'attachment',
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    contentDispositionType: 'inline',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none';",
     // Allow local images with query strings (for OG images)
     unoptimized: false,
     // Configure domains for external images if needed
     domains: [],
+    // Performance optimizations
+    formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 31536000, // 1 year
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
-  
+
   // 301 redirects for legacy URLs to consolidate duplicate content
   async redirects() {
     return [
+      // Fix: Redirect uppercase SITEMAP.XML to lowercase sitemap.xml (for Google Search Console)
+      {
+        source: '/SITEMAP.XML',
+        destination: '/sitemap.xml',
+        permanent: true,
+      },
       // CRITICAL: Apex domain redirect to www (single hop 301)
       {
         source: '/((?!api|_next|images|favicon.ico|robots.txt|sitemap.xml|site.webmanifest).*)',
         has: [{ type: 'host', value: 'drsayuj.com' }],
         destination: 'https://www.drsayuj.com/$1',
+        permanent: true,
+      },
+      // CRITICAL: Apex domain redirect for drsayuj.info to www (single hop 301)
+      {
+        source: '/((?!api|_next|images|favicon.ico|robots.txt|sitemap.xml|site.webmanifest).*)',
+        has: [{ type: 'host', value: 'drsayuj.info' }],
+        destination: 'https://www.drsayuj.info/$1',
+        permanent: true,
+      },
+      // SITE ARCHITECTURE CONSOLIDATION: Reduce 5 hub pages to 2
+      // Redirect /specializations to /services (consolidate "what we do")
+      {
+        source: '/specializations',
+        destination: '/services',
+        permanent: true,
+      },
+      // Redirect /disease-guides to /conditions (consolidate medical info)
+      {
+        source: '/disease-guides/:path*',
+        destination: '/conditions/:path*',
         permanent: true,
       },
       // Brain tumor surgery redirects
@@ -63,7 +103,7 @@ const nextConfig = {
       // Trigeminal neuralgia redirects
       {
         source: '/conditions/trigeminal-neuralgia',
-        destination: '/conditions/trigeminal-neuralgia-treatment',
+        destination: '/conditions/trigeminal-neuralgia-treatment-hyderabad',
         permanent: true,
       },
       // Slip disc redirects
@@ -96,52 +136,17 @@ const nextConfig = {
       // Redirect MVD and radiosurgery to trigeminal neuralgia page
       {
         source: '/services/microvascular-decompression-mvd-hyderabad',
-        destination: '/services/microvascular-decompression',
+        destination: '/conditions/trigeminal-neuralgia-treatment-hyderabad',
         permanent: true,
       },
       {
         source: '/services/radiosurgery-gamma-knife-hyderabad',
-        destination: '/services/radiosurgery-gamma-knife',
-        permanent: true,
-      },
-      {
-        source: '/services/microvascular-decompression/',
-        destination: '/services/microvascular-decompression',
-        permanent: true,
-      },
-      {
-        source: '/services/radiosurgery-gamma-knife/',
-        destination: '/services/radiosurgery-gamma-knife',
-        permanent: true,
-      },
-      {
-        source: '/conditions/trigeminal-neuralgia-treatment/',
-        destination: '/conditions/trigeminal-neuralgia-treatment',
-        permanent: true,
-      },
-      {
-        source: '/conditions/lumbar-spinal-stenosis/',
-        destination: '/conditions/lumbar-spinal-stenosis-treatment',
-        permanent: true,
-      },
-      {
-        source: '/conditions/cervical-radiculopathy/',
-        destination: '/conditions/cervical-radiculopathy-treatment',
-        permanent: true,
-      },
-      {
-        source: '/:path((?!_next|api|images|favicon\\.ico|robots\\.txt|sitemap\\.xml|site\\.webmanifest).+)/',
-        destination: '/:path',
-        permanent: true,
-      },
-      {
-        source: '/conditions/sciatica/',
-        destination: '/conditions/sciatica-treatment',
+        destination: '/conditions/trigeminal-neuralgia-treatment-hyderabad',
         permanent: true,
       },
     ];
   },
-  
+
   // Security and SEO-friendly defaults with caching
   async headers() {
     return [
@@ -155,9 +160,6 @@ const nextConfig = {
           { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
           // HSTS for security (after redirects are confirmed)
           { key: "Strict-Transport-Security", value: "max-age=31536000; includeSubDomains; preload" },
-          // Safari optimization: Help with content decoding
-          { key: "Content-Type", value: "text/html; charset=utf-8" },
-          { key: "Cache-Control", value: "public, s-maxage=3600, max-age=600, stale-while-revalidate=86400" },
         ]
       },
       {
@@ -195,11 +197,16 @@ const nextConfig = {
       {
         source: "/:all*(svg|jpg|jpeg|png|gif|webp|avif|ico|js|css|woff2)",
         headers: [
-          { key: "Cache-Control", value: "public, max-age=31536000, immutable" }
+          { key: "Cache-Control", value: "public, max-age=0, s-maxage=31536000, immutable" }
         ]
       },
     ];
   }
 };
 
-export default nextConfig;// Force deployment Sun Oct  5 11:15:00 IST 2025
+// #region agent log
+// Wrap with withWorkflow to enable workflow directives
+const wrappedConfig = withWorkflow(nextConfig);
+// #endregion
+
+export default wrappedConfig;// Force deployment Fri Oct  3 12:33:37 IST 2025

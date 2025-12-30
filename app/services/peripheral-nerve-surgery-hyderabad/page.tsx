@@ -4,6 +4,11 @@ import { SITE_URL } from '../../../src/lib/seo';
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import NAP from '@/app/_components/NAP';
 import { makeMetadata } from '@/app/_lib/meta';
+import AuthorByline from '@/app/_components/AuthorByline';
+import SourceList from '@/app/_components/SourceList';
+import { getServiceSources } from '../sources';
+import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
+import FAQPageSchema from '@/app/_components/FAQPageSchema';
 
 const baseMetadata = makeMetadata({
   title: 'Peripheral Nerve Surgery in Hyderabad | Carpal Tunnel, Ulnar, Peroneal',
@@ -38,6 +43,8 @@ export const metadata: Metadata = {
     type: 'website',
   },
 };
+
+const ARTICLE_SOURCES = getServiceSources('peripheral-nerve-surgery-hyderabad');
 
 const procedures = [
   {
@@ -137,7 +144,7 @@ export default function PeripheralNerveSurgeryPage() {
     "@type": "MedicalWebPage",
     "name": "Peripheral Nerve Surgery in Hyderabad",
     "description": "Expert peripheral nerve surgery including carpal tunnel release, ulnar nerve decompression, and nerve tumor removal in Hyderabad.",
-    "url": "https://www.drsayuj.com/services/peripheral-nerve-surgery-hyderabad/",
+    "url": "https://www.drsayuj.info/services/peripheral-nerve-surgery-hyderabad/",
     "mainEntity": {
       "@type": "MedicalBusiness",
       "name": "Dr. Sayuj Krishnan - Peripheral Nerve Surgery",
@@ -166,8 +173,8 @@ export default function PeripheralNerveSurgeryPage() {
         "addressCountry": "IN"
       },
       "telephone": "+91-9778280044",
-      "email": "neurospinehyd@drsayuj.com",
-      "url": "https://www.drsayuj.com"
+      "email": "hellodr@drsayuj.info",
+      "url": "https://www.drsayuj.info"
     },
     "breadcrumb": {
       "@type": "BreadcrumbList",
@@ -176,19 +183,19 @@ export default function PeripheralNerveSurgeryPage() {
           "@type": "ListItem",
           "position": 1,
           "name": "Home",
-          "item": "https://www.drsayuj.com/"
+          "item": "https://www.drsayuj.info/"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "Services",
-          "item": "https://www.drsayuj.com/services/"
+          "item": "https://www.drsayuj.info/services/"
         },
         {
           "@type": "ListItem",
           "position": 3,
           "name": "Peripheral Nerve Surgery",
-          "item": "https://www.drsayuj.com/services/peripheral-nerve-surgery-hyderabad/"
+          "item": "https://www.drsayuj.info/services/peripheral-nerve-surgery-hyderabad/"
         }
       ]
     },
@@ -214,12 +221,25 @@ export default function PeripheralNerveSurgeryPage() {
 
   return (
     <main className="container mx-auto px-4 py-16">
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', path: '/' },
+          { name: 'Services', path: '/services' },
+          { name: 'Peripheral Nerve Surgery Hyderabad', path: '/services/peripheral-nerve-surgery-hyderabad' },
+        ]}
+      />
+      <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/peripheral-nerve-surgery-hyderabad`} />
       <div className="max-w-6xl mx-auto">
         {/* Header Section */}
         <section className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold text-blue-800 mb-6">
             Peripheral Nerve Surgery in Hyderabad
           </h1>
+          <AuthorByline
+            publishedOn="2025-09-03"
+            updatedOn="2025-10-19"
+            className="justify-center mb-6"
+          />
           <p className="text-xl text-gray-700 mb-8 max-w-4xl mx-auto">
             Expert peripheral nerve surgery for carpal tunnel syndrome, ulnar nerve compression, 
             peroneal neuropathy, nerve tumors, and traumatic nerve injuries. Advanced microsurgical 
@@ -582,6 +602,31 @@ export default function PeripheralNerveSurgeryPage() {
           </div>
         </section>
 
+        {/* Patient Success Story */}
+        <section className="mb-12">
+          <h2 className="text-3xl font-bold text-blue-800 mb-6">Patient Success Story</h2>
+          <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+            <h3 className="text-xl font-semibold mb-3 text-blue-700">
+              <Link
+                href="/stories/mvd-trigeminal-neuralgia-hyderabad"
+                className="underline underline-offset-4 decoration-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-sm"
+              >
+                MVD for Trigeminal Neuralgia — Case Story (Hyderabad)
+              </Link>
+            </h3>
+            <p className="text-gray-700 mb-4">
+              Read about a de-identified patient who experienced severe facial pain and was successfully treated with 
+              microvascular decompression (MVD), achieving lasting pain relief and improved quality of life.
+            </p>
+            <Link 
+              href="/stories/mvd-trigeminal-neuralgia-hyderabad"
+              className="text-blue-600 hover:text-blue-700 font-medium"
+            >
+              Read the full story →
+            </Link>
+          </div>
+        </section>
+
         {/* CTA Section */}
         <section className="text-center bg-blue-600 text-white rounded-lg p-8">
           <h2 className="text-3xl font-bold mb-4">Schedule Your Peripheral Nerve Consultation</h2>
@@ -606,8 +651,10 @@ export default function PeripheralNerveSurgeryPage() {
           </div>
         </section>
 
+        <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
+
         <section className="mb-12 space-y-6">
-          <ReviewedBy />
+          <ReviewedBy lastReviewed="2025-10-19" />
           <NAP />
         </section>
       </div>

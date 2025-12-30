@@ -7,15 +7,9 @@ export default function WebsiteSchema() {
     "@id": `${SITE_URL}/#website`,
     "url": SITE_URL,
     "name": "Dr Sayuj Krishnan - Neurosurgeon in Hyderabad",
-    "description": "Expert neurosurgeon in Hyderabad specializing in minimally invasive brain & spine surgery",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": `${SITE_URL}/search?q={search_term_string}`
-      },
-      "query-input": "required name=search_term_string"
-    }
+    "description": "Expert neurosurgeon in Hyderabad specializing in minimally invasive brain & spine surgery"
+    // Note: SearchAction removed - no search page implemented yet
+    // Can be re-added when /search route is created
   };
 
   return (

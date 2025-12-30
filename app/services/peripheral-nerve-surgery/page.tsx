@@ -3,8 +3,12 @@ import SchemaScript from '@/app/_schema/Script';
 import { peripheralNerveSchemas } from '@/app/_schema/pages/peripheralNerve';
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import NAP from '@/app/_components/NAP';
-import MedicalCitations from '@/app/_components/MedicalCitations';
 import SmartImage from '@/components/SmartImage';
+import AuthorByline from '@/app/_components/AuthorByline';
+import SourceList from '@/app/_components/SourceList';
+import { getServiceSources } from '../sources';
+import FAQPageSchema from '@/app/_components/FAQPageSchema';
+import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
 
 export const metadata = makeMetadata({
   title: 'Peripheral Nerve Surgery Hyderabad | Carpal & Ulnar',
@@ -12,13 +16,38 @@ export const metadata = makeMetadata({
   canonicalPath: '/services/peripheral-nerve-surgery',
 });
 
+const ARTICLE_SOURCES = getServiceSources('peripheral-nerve-surgery');
+
 export default function Page() {
-  const url = 'https://www.drsayuj.com/services/peripheral-nerve-surgery';
+  const url = 'https://www.drsayuj.info/services/peripheral-nerve-surgery';
   const schemas = peripheralNerveSchemas(url);
+  const faqs = [
+    {
+      question: 'How soon can I return to desk work after carpal tunnel surgery?',
+      answer: 'Most patients resume desk work in 7–10 days once sutures are off and discomfort is controlled.',
+    },
+    {
+      question: 'Do ulnar nerve symptoms always need surgery?',
+      answer: 'No. Night splints and activity changes are tried first; surgery is recommended if weakness progresses or studies show significant block.',
+    },
+  ];
 
   return (
     <main id="main" className="prose">
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', path: '/' },
+          { name: 'Services', path: '/services' },
+          { name: 'Peripheral Nerve Surgery', path: '/services/peripheral-nerve-surgery' },
+        ]}
+      />
+      <FAQPageSchema faqs={faqs} pageUrl={url} />
       <h1>Peripheral Nerve Surgery</h1>
+      <AuthorByline
+        publishedOn="2025-09-01"
+        updatedOn="2025-10-19"
+        className="mb-6"
+      />
 
       <section className="not-prose mb-10 rounded-xl border border-emerald-100 bg-emerald-50 p-6 text-sm leading-6">
         <h2 className="mb-2 text-base font-semibold text-emerald-900">Fast facts</h2>
@@ -138,8 +167,8 @@ export default function Page() {
         </div>
       </dl>
 
-      <ReviewedBy lastReviewed="2025-01-15" />
-      <MedicalCitations />
+      <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
+      <ReviewedBy lastReviewed="2025-10-19" />
       <NAP />
 
       {schemas.map((schema, index) => (

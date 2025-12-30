@@ -1,2 +1,0 @@
-# neurohyderabad-site
-neuro website

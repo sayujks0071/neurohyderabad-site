@@ -35,7 +35,7 @@ export default function SpinalStenosisTreatmentPage() {
           <p className="text-center">
             <strong>Contact:</strong>
             <a href="tel:+919778280044" className="text-blue-600 hover:underline ml-2">+91-9778280044</a> •
-            <a href="mailto:neurospinehyd@drsayuj.com" className="text-blue-600 hover:underline ml-2">neurospinehyd@drsayuj.com</a> •
+            <a href="mailto:hellodr@drsayuj.info" className="text-blue-600 hover:underline ml-2">hellodr@drsayuj.info</a> •
             <a href="/appointments" className="text-blue-600 hover:underline ml-2">Appointments</a>
           </p>
         </section>
@@ -97,6 +97,12 @@ export default function SpinalStenosisTreatmentPage() {
             >
               Minimally Invasive Surgery
             </Link>
+            <Link 
+              href="/services/awake-spine-surgery-hyderabad"
+              className="border-2 border-green-600 text-green-700 px-8 py-3 rounded-full hover:bg-green-600 hover:text-white transition-colors"
+            >
+              Awake Spine Option
+            </Link>
           </div>
         </section>
 
@@ -105,6 +111,43 @@ export default function SpinalStenosisTreatmentPage() {
           <NAP />
         </section>
       </div>
+      
+      {/* FAQ Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What is the best treatment for spinal stenosis?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Treatment for spinal stenosis depends on severity. Mild to moderate cases often respond to conservative treatment including physical therapy, medications, and epidural injections. Severe cases with progressive symptoms may require endoscopic ULBD (unilateral laminotomy bilateral decompression) or traditional laminectomy for effective decompression."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can spinal stenosis be cured without surgery?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "While spinal stenosis cannot be completely 'cured' as it's a structural narrowing, many patients find significant relief with conservative treatment including physical therapy, medications, and injections. Surgery is typically reserved for cases with progressive symptoms, severe pain, or neurological deficits that don't respond to conservative care."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is endoscopic ULBD for spinal stenosis?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Endoscopic ULBD (Unilateral Laminotomy Bilateral Decompression) is a minimally invasive procedure that decompresses the spinal canal through a small incision on one side, providing bilateral decompression. This technique offers faster recovery, less pain, and same-day discharge compared to traditional open laminectomy."
+                }
+              }
+            ]
+          })
+        }}
+      />
     </div>
   );
 }

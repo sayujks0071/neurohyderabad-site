@@ -2,7 +2,7 @@
 // import { Statsig } from '@statsig/js-client';
 
 // Export GA4 measurement ID for GoogleAnalytics component
-export const GA4_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID || 'G-XXXXXXXXXX';
+export const GA4_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID || 'G-MMLQCFN4ZJ';
 
 // Event tracking interface
 interface EventProps {
@@ -102,18 +102,20 @@ export const analytics = {
     });
   },
 
-  heroCTAClick: (pageSlug: string, ctaLabel: string, serviceOrCondition?: string) => {
+  heroCTAClick: (pageSlug: string, ctaLabel: string, serviceOrCondition?: string, experimentVariant?: string) => {
     track('Hero_CTA_Click', {
       page_slug: pageSlug,
       cta_label: ctaLabel,
-      service_or_condition: serviceOrCondition
+      service_or_condition: serviceOrCondition,
+      experiment_variant: experimentVariant
     });
   },
 
-  stickyCTAClick: (pageSlug: string, ctaLabel: string) => {
+  stickyCTAClick: (pageSlug: string, ctaLabel: string, experimentVariant?: string) => {
     track('Sticky_CTA_Click', {
       page_slug: pageSlug,
-      cta_label: ctaLabel
+      cta_label: ctaLabel,
+      experiment_variant: experimentVariant
     });
   },
 
@@ -202,6 +204,55 @@ export const analytics = {
     track('Scroll_Depth', {
       page_slug: pageSlug,
       depth_percentage: depth
+    });
+  },
+
+  // Trust signal tracking
+  trustSignalView: (pageSlug: string, signalType: string, serviceType?: string) => {
+    track('Trust_Signal_View', {
+      page_slug: pageSlug,
+      trust_signal_type: signalType,
+      service_type: serviceType
+    });
+  },
+
+  trustSignalClick: (pageSlug: string, signalType: string, destination: string, serviceType?: string) => {
+    track('Trust_Signal_Click', {
+      page_slug: pageSlug,
+      trust_signal_type: signalType,
+      destination: destination,
+      service_type: serviceType
+    });
+  },
+
+  // Trust pathway funnel tracking
+  trustPathwayStart: (pageSlug: string, entryPoint: string) => {
+    track('Trust_Pathway_Start', {
+      page_slug: pageSlug,
+      entry_point: entryPoint
+    });
+  },
+
+  trustPathwayComplete: (pageSlug: string, pathwayType: 'about' | 'patient_stories', timeSpent: number) => {
+    track('Trust_Pathway_Complete', {
+      page_slug: pageSlug,
+      pathway_type: pathwayType,
+      time_spent_seconds: timeSpent
+    });
+  },
+
+  // Engagement events
+  timeOnPage: (pageSlug: string, seconds: number) => {
+    track('Time_On_Page', {
+      page_slug: pageSlug,
+      seconds: seconds
+    });
+  },
+
+  exitIntent: (pageSlug: string, exitPoint: string) => {
+    track('Exit_Intent', {
+      page_slug: pageSlug,
+      exit_point: exitPoint
     });
   }
 };

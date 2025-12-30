@@ -1,35 +1,27 @@
 'use client';
 
-import React from 'react';
-import { useExperiment } from '@statsig/react-bindings';
-
 interface ReassuranceMicrocopyProps {
   className?: string;
   serviceType?: 'spine' | 'brain' | 'epilepsy' | 'nerve';
 }
 
-export default function ReassuranceMicrocopy({ 
-  className = '', 
-  serviceType = 'spine' 
-}: ReassuranceMicrocopyProps) {
-  // A/B test for reassurance microcopy
-  const { value: variant } = useExperiment('exp_reassurance_microcopy');
+const COPY_BY_SERVICE: Record<string, string> = {
+  spine: 'Evidence-based protocols that prioritise minimally invasive options before considering fusion.',
+  brain: 'Neuronavigation-guided surgery with personalised rehabilitation plans for every case.',
+  epilepsy: 'Comprehensive seizure evaluation and surgery only when medications no longer work.',
+  nerve: 'Targeted microsurgery aimed at restoring function while protecting delicate nerve pathways.',
+};
 
-  const getMicrocopy = () => {
-    const variantValue = String(variant || 'control');
-    switch (variantValue) {
-      case 'treatment':
-        return "Minimally invasive options first—surgery only when needed";
-      case 'control':
-      default:
-        return "Expert neurosurgical care with advanced techniques";
-    }
-  };
+export default function ReassuranceMicrocopy({
+  className = '',
+  serviceType = 'spine',
+}: ReassuranceMicrocopyProps) {
+  const copy = COPY_BY_SERVICE[serviceType] ?? COPY_BY_SERVICE.spine;
 
   return (
     <div className={`bg-blue-50 border-l-4 border-blue-500 p-4 ${className}`}>
       <p className="text-blue-800 font-medium">
-        {getMicrocopy()}
+        {copy}
       </p>
     </div>
   );

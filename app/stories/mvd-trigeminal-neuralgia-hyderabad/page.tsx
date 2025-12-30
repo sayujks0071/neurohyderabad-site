@@ -9,6 +9,13 @@ export const metadata: Metadata = {
   title: 'MVD for Trigeminal Neuralgia — Case Story (Hyderabad)',
   description: 'De-identified story: severe facial pain relieved after microvascular decompression in Hyderabad. Recovery and durability of pain relief.',
   keywords: 'MVD, microvascular decompression, trigeminal neuralgia, facial pain, brain surgery, Hyderabad, case study',
+  alternates: {
+    canonical: 'https://www.drsayuj.info/stories/mvd-trigeminal-neuralgia-hyderabad',
+    languages: {
+      'en-IN': 'https://www.drsayuj.info/stories/mvd-trigeminal-neuralgia-hyderabad',
+      'x-default': 'https://www.drsayuj.info/stories/mvd-trigeminal-neuralgia-hyderabad',
+    },
+  },
   openGraph: {
     title: 'MVD for Trigeminal Neuralgia — Case Story (Hyderabad)',
     description: 'De-identified story: severe facial pain relieved after microvascular decompression in Hyderabad. Recovery and durability of pain relief.',
@@ -24,19 +31,19 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.drsayuj.com/"
+      "item": "https://www.drsayuj.info/"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Patient Stories",
-      "item": "https://www.drsayuj.com/patient-stories"
+      "item": "https://www.drsayuj.info/patient-stories"
     },
     {
       "@type": "ListItem",
       "position": 3,
       "name": "MVD for Trigeminal Neuralgia",
-      "item": "https://www.drsayuj.com/stories/mvd-trigeminal-neuralgia-hyderabad"
+      "item": "https://www.drsayuj.info/stories/mvd-trigeminal-neuralgia-hyderabad"
     }
   ]
 };
@@ -45,7 +52,7 @@ const medicalWebPageSchema = {
   "@context": "https://schema.org",
   "@type": "MedicalWebPage",
   "name": "MVD for Trigeminal Neuralgia — Case Story (Hyderabad)",
-  "url": "https://www.drsayuj.com/stories/mvd-trigeminal-neuralgia-hyderabad",
+  "url": "https://www.drsayuj.info/stories/mvd-trigeminal-neuralgia-hyderabad",
   "datePublished": "2025-01-15",
   "dateModified": "2025-01-15",
   "about": {
@@ -101,9 +108,9 @@ export default function MVDTrigeminalNeuralgiaStoryPage() {
       <nav className="bg-gray-50 py-4">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <ol className="flex items-center space-x-2 text-sm text-gray-600">
-            <li><Link href="/" className="hover:text-blue-600">Home</Link></li>
+            <li><Link href="/" className="underline underline-offset-2 decoration-blue-300 hover:text-blue-700 hover:decoration-blue-500">Home</Link></li>
             <li>/</li>
-            <li><Link href="/patient-stories" className="hover:text-blue-600">Patient Stories</Link></li>
+            <li><Link href="/patient-stories" className="underline underline-offset-2 decoration-blue-300 hover:text-blue-700 hover:decoration-blue-500">Patient Stories</Link></li>
             <li>/</li>
             <li className="text-gray-900 font-medium">MVD for Trigeminal Neuralgia</li>
           </ol>

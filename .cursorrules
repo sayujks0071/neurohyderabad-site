@@ -1,0 +1,21 @@
+# Cursor Rules for Neurohyderabad Site
+
+## MCP Server Configuration
+The project uses two MCP servers:
+- **Playwright** - For browser automation and testing
+- **Figma** - For design-to-code workflow
+Configuration is stored in `~/.cursor/mcp.json` and can be set up using `npm run setup:cursor-mcp`.
+
+## Project Guidelines
+- Use TypeScript for all new code
+- Follow Next.js 15 App Router conventions
+- Maintain SEO best practices (E-E-A-T components)
+- Block example/test/draft blog posts from being published
+- Validate blog posts before creation
+
+## Blog Workflow
+- Never create blog posts with "example", "test", "draft", "sample", "template", or "placeholder" in the slug or title
+- Use `npm run blog:validate` before creating new blog posts
+- Use `npm run blog:remove-examples` to check for and remove example posts
+
+

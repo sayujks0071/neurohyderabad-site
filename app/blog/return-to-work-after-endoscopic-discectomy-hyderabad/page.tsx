@@ -1,9 +1,12 @@
-import Link from 'next/link'
 import { Metadata } from 'next'
+import Link from 'next/link'
 import { JsonLd } from '../../../src/lib/seo/jsonld'
 import ReviewedBy from '@/app/_components/ReviewedBy'
 import NAP from '@/app/_components/NAP'
 import { makeMetadata } from '@/app/_lib/meta'
+import AuthorByline from '@/app/_components/AuthorByline';
+import SourceList from '@/app/_components/SourceList';
+import { sources } from '../sources';
 
 const baseMetadata = makeMetadata({
   title: 'Return to Work After Endoscopic Discectomy in Hyderabad',
@@ -24,7 +27,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: baseMetadata.title,
     description: baseMetadata.description,
-    url: 'https://www.drsayuj.com/blog/return-to-work-after-endoscopic-discectomy-hyderabad/',
+    url: 'https://www.drsayuj.info/blog/return-to-work-after-endoscopic-discectomy-hyderabad/',
     type: 'article',
     publishedTime: '2025-10-01T00:00:00.000Z',
     modifiedTime: '2025-10-01T00:00:00.000Z',
@@ -33,10 +36,10 @@ export const metadata: Metadata = {
     tags: ['endoscopic discectomy', 'recovery', 'return to work', 'hyderabad', 'rehabilitation']
   },
   alternates: {
-    canonical: 'https://www.drsayuj.com/blog/return-to-work-after-endoscopic-discectomy-hyderabad/',
+    canonical: 'https://www.drsayuj.info/blog/return-to-work-after-endoscopic-discectomy-hyderabad/',
     languages: {
-      'en-IN': 'https://www.drsayuj.com/blog/return-to-work-after-endoscopic-discectomy-hyderabad/',
-      'x-default': 'https://www.drsayuj.com/blog/return-to-work-after-endoscopic-discectomy-hyderabad/'
+      'en-IN': 'https://www.drsayuj.info/blog/return-to-work-after-endoscopic-discectomy-hyderabad/',
+      'x-default': 'https://www.drsayuj.info/blog/return-to-work-after-endoscopic-discectomy-hyderabad/'
     }
   }
 }
@@ -46,12 +49,12 @@ const blogPostingSchema = {
   "@type": "BlogPosting",
   "headline": "Return to Work After Endoscopic Discectomy in Hyderabad: A Practical Guide",
   "description": "Week‑by‑week recovery, desk vs manual timelines, red flags, and safe progressions after endoscopic discectomy in Hyderabad.",
-  "mainEntityOfPage": "https://www.drsayuj.com/blog/return-to-work-after-endoscopic-discectomy-hyderabad/",
-  "url": "https://www.drsayuj.com/blog/return-to-work-after-endoscopic-discectomy-hyderabad/",
+  "mainEntityOfPage": "https://www.drsayuj.info/blog/return-to-work-after-endoscopic-discectomy-hyderabad/",
+  "url": "https://www.drsayuj.info/blog/return-to-work-after-endoscopic-discectomy-hyderabad/",
   "datePublished": "2025-10-01",
   "dateModified": "2025-10-01",
-  "author": { "@id": "https://www.drsayuj.com/#physician" },
-  "publisher": { "@id": "https://www.drsayuj.com/#hospital" },
+  "author": { "@id": "https://www.drsayuj.info/#physician" },
+  "publisher": { "@id": "https://www.drsayuj.info/#hospital" },
   "articleSection": "Spine Surgery",
   "wordCount": "1200",
   "citation": [
@@ -103,9 +106,9 @@ export default function ReturnToWorkAfterEndoscopicDiscectomyPage() {
         {/* Breadcrumbs */}
         <nav className="mb-6" aria-label="Breadcrumb">
           <ol className="flex items-center space-x-2 text-sm text-gray-600">
-            <li><Link href="/" className="hover:text-blue-600">Home</Link></li>
+            <li><Link href="/" className="underline underline-offset-2 decoration-blue-300 hover:text-blue-700 hover:decoration-blue-500">Home</Link></li>
             <li className="text-gray-400">/</li>
-            <li><Link href="/blog/" className="hover:text-blue-600">Blog</Link></li>
+            <li><Link href="/blog/" className="underline underline-offset-2 decoration-blue-300 hover:text-blue-700 hover:decoration-blue-500">Blog</Link></li>
             <li className="text-gray-400">/</li>
             <li className="text-gray-900 font-medium">Return to Work After Endoscopic Discectomy</li>
           </ol>
@@ -297,33 +300,33 @@ export default function ReturnToWorkAfterEndoscopicDiscectomyPage() {
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="border rounded-lg p-4">
                   <h3 className="font-semibold mb-2">
-                    <a href="/services/endoscopic-discectomy-hyderabad/" className="text-blue-600 hover:text-blue-800">
+                    <Link href="/services/endoscopic-discectomy-hyderabad/" className="text-blue-600 hover:text-blue-800">
                       Endoscopic Discectomy
-                    </a>
+                    </Link>
                   </h3>
                   <p className="text-sm text-gray-600">Minimally invasive treatment for herniated discs</p>
                 </div>
                 <div className="border rounded-lg p-4">
                   <h3 className="font-semibold mb-2">
-                    <a href="/services/minimally-invasive-spine-surgery/" className="text-blue-600 hover:text-blue-800">
+                    <Link href="/services/minimally-invasive-spine-surgery/" className="text-blue-600 hover:text-blue-800">
                       Minimally Invasive Spine Surgery
-                    </a>
+                    </Link>
                   </h3>
                   <p className="text-sm text-gray-600">Comprehensive MISS techniques and recovery planning</p>
                 </div>
                 <div className="border rounded-lg p-4">
                   <h3 className="font-semibold mb-2">
-                    <a href="/conditions/sciatica-treatment-hyderabad/" className="text-blue-600 hover:text-blue-800">
+                    <Link href="/conditions/sciatica-treatment-hyderabad/" className="text-blue-600 hover:text-blue-800">
                       Sciatica Treatment
-                    </a>
+                    </Link>
                   </h3>
                   <p className="text-sm text-gray-600">Conservative to surgical treatment options</p>
                 </div>
                 <div className="border rounded-lg p-4">
                   <h3 className="font-semibold mb-2">
-                    <a href="/appointments/" className="text-blue-600 hover:text-blue-800">
+                    <Link href="/appointments/" className="text-blue-600 hover:text-blue-800">
                       Book Consultation
-                    </a>
+                    </Link>
                   </h3>
                   <p className="text-sm text-gray-600">Schedule your personalized recovery plan</p>
                 </div>
@@ -336,12 +339,12 @@ export default function ReturnToWorkAfterEndoscopicDiscectomyPage() {
                 <p className="text-lg text-blue-800 mb-4">
                   Book a consultation at Yashoda Hospitals – Malakpet. Bring your MRI and job details; we'll tailor an RTW plan that fits your role.
                 </p>
-                <a 
+                <Link 
                   href="/appointments/" 
                   className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium"
                 >
                   Schedule Consultation
-                </a>
+                </Link>
               </div>
             </section>
 
@@ -388,7 +391,19 @@ export default function ReturnToWorkAfterEndoscopicDiscectomyPage() {
               <NAP />
             </section>
           </div>
-        </article>
+        
+      <AuthorByline 
+        
+        
+        publishedOn="2025-01-15"
+        updatedOn="2025-10-19"
+      />
+      
+      <SourceList sources={sources['return-to-work-after-endoscopic-discectomy-hyderabad']} />
+      
+      <NAP />
+      <ReviewedBy />
+</article>
       </div>
     </>
   )

@@ -53,7 +53,7 @@ export default function GoogleOAuth({
         client_id: '568785727095-ro3c0n1om83ahqut7j28vobmnhn8h5m2.apps.googleusercontent.com',
         scope: 'openid email profile',
         ux_mode: 'popup',
-        redirect_uri: 'https://www.drsayuj.com/auth/callback',
+        redirect_uri: 'https://www.drsayuj.info/auth/callback',
         callback: (response: any) => {
           setIsLoading(false);
           

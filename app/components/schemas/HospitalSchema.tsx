@@ -21,13 +21,61 @@ export default function HospitalSchema() {
       "latitude": "17.3750",
       "longitude": "78.5147"
     },
+    "medicalSpecialty": [
+      "Neurosurgery",
+      "Spine Surgery", 
+      "Brain Surgery",
+      "Endoscopic Surgery",
+      "Minimally Invasive Surgery",
+      "Epilepsy Surgery",
+      "Peripheral Nerve Surgery"
+    ],
     "department": {
       "@type": "MedicalSpecialty",
       "name": "Department of Neurosurgery",
       "availableService": [
-        "Brain Surgery",
-        "Spine Surgery",
-        "Minimally Invasive Neurosurgery"
+        {
+          "@type": "MedicalService",
+          "name": "Endoscopic Spine Surgery",
+          "description": "Minimally invasive spine surgery using endoscopic techniques"
+        },
+        {
+          "@type": "MedicalService", 
+          "name": "Brain Tumor Surgery",
+          "description": "Advanced brain tumor surgery with neuronavigation"
+        },
+        {
+          "@type": "MedicalService",
+          "name": "Epilepsy Surgery", 
+          "description": "Surgical treatment for drug-resistant epilepsy"
+        },
+        {
+          "@type": "MedicalService",
+          "name": "Trigeminal Neuralgia Treatment",
+          "description": "Microvascular decompression and radiosurgery"
+        }
+      ]
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Neurosurgery Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "MedicalService",
+            "name": "Endoscopic Discectomy",
+            "description": "Minimally invasive disc surgery"
+          }
+        },
+        {
+          "@type": "Offer", 
+          "itemOffered": {
+            "@type": "MedicalService",
+            "name": "Spinal Fusion Surgery",
+            "description": "Advanced spinal fusion techniques"
+          }
+        }
       ]
     }
   };

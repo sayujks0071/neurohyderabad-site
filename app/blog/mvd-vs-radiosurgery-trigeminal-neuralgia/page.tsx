@@ -5,6 +5,9 @@ import Breadcrumbs from "../../components/Breadcrumbs";
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import NAP from '@/app/_components/NAP';
 import { makeMetadata } from '@/app/_lib/meta';
+import AuthorByline from '@/app/_components/AuthorByline';
+import SourceList from '@/app/_components/SourceList';
+import { sources } from '../sources';
 
 const baseMetadata = makeMetadata({
   title: 'MVD vs Radiosurgery vs Percutaneous for Trigeminal Neuralgia | Which is Best?',
@@ -445,7 +448,19 @@ export default function MVDvsRadiosurgeryPage() {
             </section>
           </div>
         </article>
-      </main>
+      
+      <AuthorByline 
+        
+        
+        publishedOn="2025-01-15"
+        updatedOn="2025-10-19"
+      />
+      
+      <SourceList sources={sources['mvd-vs-radiosurgery-trigeminal-neuralgia']} />
+      
+      <NAP />
+      <ReviewedBy />
+</main>
 
       {/* JSON-LD */}
       <script

@@ -49,10 +49,10 @@ export default function NAP({
           <div className="flex items-center">
             <span className="font-medium min-w-[80px]">Email:</span>
             <a 
-              href="mailto:neurospinehyd@drsayuj.com" 
+              href="mailto:hellodr@drsayuj.info" 
               className="text-blue-600 hover:text-blue-800"
             >
-              neurospinehyd@drsayuj.com
+              hellodr@drsayuj.info
             </a>
           </div>
         )}

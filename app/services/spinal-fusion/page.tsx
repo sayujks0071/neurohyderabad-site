@@ -3,8 +3,11 @@ import SchemaScript from '@/app/_schema/Script';
 import { spinalFusionSchemas } from '@/app/_schema/pages/spinalFusion';
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import NAP from '@/app/_components/NAP';
-import MedicalCitations from '@/app/_components/MedicalCitations';
 import SmartImage from '@/components/SmartImage';
+import AuthorByline from '@/app/_components/AuthorByline';
+import SourceList from '@/app/_components/SourceList';
+import { getServiceSources } from '../sources';
+import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
 
 export const metadata = makeMetadata({
   title: 'Spinal Fusion Surgery in Hyderabad | TLIF & ACDF',
@@ -12,13 +15,28 @@ export const metadata = makeMetadata({
   canonicalPath: '/services/spinal-fusion',
 });
 
+const ARTICLE_SOURCES = getServiceSources('spinal-fusion');
+
 export default function Page() {
-  const url = 'https://www.drsayuj.com/services/spinal-fusion';
+  const url = 'https://www.drsayuj.info/services/spinal-fusion';
   const schemas = spinalFusionSchemas(url);
 
+  const breadcrumbItems = [
+    { name: 'Home', path: '/' },
+    { name: 'Services', path: '/services' },
+    { name: 'Spinal Fusion Surgery', path: '/services/spinal-fusion' },
+  ];
+
   return (
-    <main id="main" className="prose">
+    <>
+      <BreadcrumbSchema items={breadcrumbItems} />
+      <main id="main" className="prose">
       <h1>Spinal Fusion Surgery (TLIF/ACDF)</h1>
+      <AuthorByline
+        publishedOn="2025-09-07"
+        updatedOn="2025-10-19"
+        className="mb-6"
+      />
 
       <section className="not-prose mb-10 rounded-xl border border-blue-100 bg-blue-50 p-6 text-sm leading-6">
         <h2 className="mb-2 text-base font-semibold text-blue-900">Patient summary</h2>
@@ -141,13 +159,14 @@ export default function Page() {
         </div>
       </dl>
 
-      <ReviewedBy lastReviewed="2025-01-15" />
-      <MedicalCitations />
+      <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
+      <ReviewedBy lastReviewed="2025-10-19" />
       <NAP />
 
       {schemas.map((schema, index) => (
         <SchemaScript key={index} data={schema} />
       ))}
     </main>
+    </>
   );
 }

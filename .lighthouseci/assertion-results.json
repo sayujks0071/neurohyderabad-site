@@ -1,5 +1,21 @@
 [
   {
+    "name": "maxNumericValue",
+    "expected": 200,
+    "actual": 314,
+    "values": [
+      315.5,
+      314
+    ],
+    "operator": "<=",
+    "passed": false,
+    "auditId": "total-blocking-time",
+    "level": "error",
+    "url": "https://www.drsayuj.com/conditions/trigeminal-neuralgia-treatment-hyderabad",
+    "auditTitle": "Total Blocking Time",
+    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/lighthouse-total-blocking-time/"
+  },
+  {
     "name": "minScore",
     "expected": 0.9,
     "actual": 0,
@@ -11,41 +27,25 @@
     "passed": false,
     "auditId": "color-contrast",
     "level": "error",
-    "url": "https://www.drsayuj.com/",
+    "url": "https://www.drsayuj.com/conditions/trigeminal-neuralgia-treatment-hyderabad",
     "auditTitle": "Background and foreground colors do not have a sufficient contrast ratio.",
     "auditDocumentationLink": "https://dequeuniversity.com/rules/axe/4.10/color-contrast"
   },
   {
     "name": "minScore",
     "expected": 0.9,
-    "actual": 0,
+    "actual": 0.63,
     "values": [
-      0,
-      0
+      0.53,
+      0.63
     ],
     "operator": ">=",
     "passed": false,
-    "auditId": "dom-size-insight",
+    "auditId": "first-contentful-paint",
     "level": "warn",
-    "url": "https://www.drsayuj.com/",
-    "auditTitle": "Optimize DOM size",
-    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/dom-size/"
-  },
-  {
-    "name": "minScore",
-    "expected": 0.9,
-    "actual": 0,
-    "values": [
-      0,
-      0
-    ],
-    "operator": ">=",
-    "passed": false,
-    "auditId": "heading-order",
-    "level": "error",
-    "url": "https://www.drsayuj.com/",
-    "auditTitle": "Heading elements are not in a sequentially-descending order",
-    "auditDocumentationLink": "https://dequeuniversity.com/rules/axe/4.10/heading-order"
+    "url": "https://www.drsayuj.com/conditions/trigeminal-neuralgia-treatment-hyderabad",
+    "auditTitle": "First Contentful Paint",
+    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/first-contentful-paint/"
   },
   {
     "name": "minScore",
@@ -59,23 +59,39 @@
     "passed": false,
     "auditId": "image-delivery-insight",
     "level": "error",
-    "url": "https://www.drsayuj.com/",
+    "url": "https://www.drsayuj.com/conditions/trigeminal-neuralgia-treatment-hyderabad",
     "auditTitle": "Improve image delivery",
     "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/uses-optimized-images/"
+  },
+  {
+    "name": "maxNumericValue",
+    "expected": 2500,
+    "actual": 3230.1955,
+    "values": [
+      3230.1955,
+      11461.562000000002
+    ],
+    "operator": "<=",
+    "passed": false,
+    "auditId": "largest-contentful-paint",
+    "level": "error",
+    "url": "https://www.drsayuj.com/conditions/trigeminal-neuralgia-treatment-hyderabad",
+    "auditTitle": "Largest Contentful Paint",
+    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint/"
   },
   {
     "name": "minScore",
     "expected": 0.9,
     "actual": 0.5,
     "values": [
-      0.5,
+      0,
       0.5
     ],
     "operator": ">=",
     "passed": false,
     "auditId": "legacy-javascript-insight",
     "level": "error",
-    "url": "https://www.drsayuj.com/",
+    "url": "https://www.drsayuj.com/conditions/trigeminal-neuralgia-treatment-hyderabad",
     "auditTitle": "Legacy JavaScript",
     "auditDocumentationLink": "https://web.dev/articles/baseline-and-polyfills"
   },
@@ -91,7 +107,7 @@
     "passed": false,
     "auditId": "legacy-javascript",
     "level": "warn",
-    "url": "https://www.drsayuj.com/",
+    "url": "https://www.drsayuj.com/conditions/trigeminal-neuralgia-treatment-hyderabad",
     "auditTitle": "Avoid serving legacy JavaScript to modern browsers",
     "auditDocumentationLink": "https://web.dev/baseline"
   },
@@ -105,9 +121,41 @@
     ],
     "operator": ">=",
     "passed": false,
+    "auditId": "link-text",
+    "level": "error",
+    "url": "https://www.drsayuj.com/conditions/trigeminal-neuralgia-treatment-hyderabad",
+    "auditTitle": "Links do not have descriptive text",
+    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/seo/link-text/"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.9,
+    "actual": 0.43,
+    "values": [
+      0.3,
+      0.43
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditId": "max-potential-fid",
+    "level": "warn",
+    "url": "https://www.drsayuj.com/conditions/trigeminal-neuralgia-treatment-hyderabad",
+    "auditTitle": "Max Potential First Input Delay",
+    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/lighthouse-max-potential-fid/"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.9,
+    "actual": 0,
+    "values": [
+      0,
+      0
+    ],
+    "operator": ">=",
+    "passed": false,
     "auditId": "network-dependency-tree-insight",
     "level": "error",
-    "url": "https://www.drsayuj.com/",
+    "url": "https://www.drsayuj.com/conditions/trigeminal-neuralgia-treatment-hyderabad",
     "auditTitle": "Network dependency tree",
     "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/critical-request-chains"
   },
@@ -123,7 +171,7 @@
     "passed": false,
     "auditId": "render-blocking-insight",
     "level": "warn",
-    "url": "https://www.drsayuj.com/",
+    "url": "https://www.drsayuj.com/conditions/trigeminal-neuralgia-treatment-hyderabad",
     "auditTitle": "Render blocking requests",
     "auditDocumentationLink": "https://web.dev/learn/performance/understanding-the-critical-path#render-blocking_resources"
   },
@@ -137,11 +185,11 @@
     ],
     "operator": "<=",
     "passed": false,
-    "auditId": "render-blocking-resources",
-    "level": "warn",
-    "url": "https://www.drsayuj.com/",
-    "auditTitle": "Eliminate render-blocking resources",
-    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/render-blocking-resources/"
+    "auditId": "unused-javascript",
+    "level": "error",
+    "url": "https://www.drsayuj.com/conditions/trigeminal-neuralgia-treatment-hyderabad",
+    "auditTitle": "Reduce unused JavaScript",
+    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/"
   },
   {
     "name": "maxLength",
@@ -155,23 +203,38 @@
     "passed": false,
     "auditId": "uses-responsive-images",
     "level": "error",
-    "url": "https://www.drsayuj.com/",
+    "url": "https://www.drsayuj.com/conditions/trigeminal-neuralgia-treatment-hyderabad",
     "auditTitle": "Properly size images",
     "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/uses-responsive-images/"
   },
   {
     "name": "minScore",
     "expected": 0.95,
-    "actual": 0.94,
+    "actual": 0.92,
     "values": [
-      0.94,
-      0.94
+      0.92,
+      0.92
     ],
     "operator": ">=",
     "passed": false,
-    "auditProperty": "accessibility",
+    "auditProperty": "seo",
     "auditId": "categories",
     "level": "error",
-    "url": "https://www.drsayuj.com/"
+    "url": "https://www.drsayuj.com/conditions/trigeminal-neuralgia-treatment-hyderabad"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.9,
+    "actual": 0.8,
+    "values": [
+      0.8,
+      0.59
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditProperty": "performance",
+    "auditId": "categories",
+    "level": "warn",
+    "url": "https://www.drsayuj.com/conditions/trigeminal-neuralgia-treatment-hyderabad"
   }
 ]

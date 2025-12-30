@@ -4,7 +4,7 @@ export default function TechnologyStructuredData() {
     "@type": "MedicalWebPage",
     "name": "Advanced Technology & Facilities",
     "description": "State-of-the-art neurosurgery technology and equipment for the most advanced, minimally invasive, and precise surgical procedures in Hyderabad.",
-    "url": "https://www.drsayuj.com/technology-facilities/",
+    "url": "https://www.drsayuj.info/technology-facilities/",
     "mainEntity": {
       "@type": "MedicalBusiness",
       "name": "Dr. Sayuj Krishnan - Advanced Neurosurgery Technology",
@@ -61,8 +61,8 @@ export default function TechnologyStructuredData() {
         "addressCountry": "IN"
       },
       "telephone": "+91-9778280044",
-      "email": "neurospinehyd@drsayuj.com",
-      "url": "https://www.drsayuj.com"
+      "email": "hellodr@drsayuj.info",
+      "url": "https://www.drsayuj.info"
     },
     "breadcrumb": {
       "@type": "BreadcrumbList",
@@ -71,13 +71,13 @@ export default function TechnologyStructuredData() {
           "@type": "ListItem",
           "position": 1,
           "name": "Home",
-          "item": "https://www.drsayuj.com/"
+          "item": "https://www.drsayuj.info/"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "Technology & Facilities",
-          "item": "https://www.drsayuj.com/technology-facilities/"
+          "item": "https://www.drsayuj.info/technology-facilities/"
         }
       ]
     },

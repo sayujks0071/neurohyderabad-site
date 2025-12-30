@@ -45,3 +45,24 @@ coverage/
 # Temporary folders
 tmp/
 temp/
+
+# Internal documentation (not for public deployment)
+docs/internal/
+*.md
+*.patch
+*.sh
+*.png
+
+# Ignore specific JSON files (but not essential config files)
+lighthouse-audit*.json
+comprehensive-lighthouse-audit.json
+lighthouse-report*.json
+vercel-compression-test.json
+statsig-mcp-config.json
+budgets.json
+
+# Generated sitemap/robots outputs
+public/sitemap*.xml
+public/robots.txt
+.vercel
+.env*.local

@@ -9,7 +9,27 @@ export const metadata = {
   title: "Neurosurgeon in Gachibowli, Hyderabad | Endoscopic Spine | Dr. Sayuj Krishnan",
   description:
     "Consult Dr. Sayuj Krishnan near Gachibowli, Hyderabad for endoscopic spine & minimally invasive brain surgery. OPD timings, parking, directions, WhatsApp booking, and FAQs.",
-  alternates: { canonical: "https://www.drsayuj.com/neurosurgeon-gachibowli" },
+  alternates: { canonical: "https://www.drsayuj.info/neurosurgeon-gachibowli" },
+  openGraph: {
+    title: "Neurosurgeon in Gachibowli, Hyderabad | Endoscopic Spine | Dr. Sayuj Krishnan",
+    description: "Consult Dr. Sayuj Krishnan near Gachibowli for endoscopic spine & minimally invasive brain surgery. OPD timings, parking, directions, WhatsApp booking, and FAQs.",
+    url: "https://www.drsayuj.info/neurosurgeon-gachibowli",
+    type: "article",
+    images: [
+      {
+        url: "https://www.drsayuj.info/images/og-default.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Dr Sayuj Krishnan - Neurosurgeon for Gachibowli patients",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Neurosurgeon in Gachibowli, Hyderabad",
+    description: "Endoscopic spine and brain surgery consultations for Gachibowli patients — book via WhatsApp or call.",
+    images: ["https://www.drsayuj.info/images/og-default.jpg"],
+  },
 };
 
 const FAQ = [
@@ -23,8 +43,8 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.drsayuj.com/" },
-      { "@type": "ListItem", position: 2, name: "Neurosurgeon in Gachibowli", item: "https://www.drsayuj.com/neurosurgeon-gachibowli" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.drsayuj.info/" },
+      { "@type": "ListItem", position: 2, name: "Neurosurgeon in Gachibowli", item: "https://www.drsayuj.info/neurosurgeon-gachibowli" },
     ],
   };
 
@@ -40,15 +60,50 @@ export default function Page() {
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            "name": "Dr Sayuj Krishnan - Neurosurgeon near Gachibowli",
+            "image": "https://www.drsayuj.info/images/og-default.jpg",
+            "url": "https://www.drsayuj.info/neurosurgeon-gachibowli",
+            "telephone": "+919778280044",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Room No 317, OPD Block, Yashoda Hospital, Malakpet",
+              "addressLocality": "Hyderabad",
+              "addressRegion": "Telangana",
+              "postalCode": "500036",
+              "addressCountry": "IN"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 17.385,
+              "longitude": 78.4867
+            },
+            "areaServed": {
+              "@type": "City",
+              "name": "Gachibowli"
+            },
+            "availableService": [
+              { "@type": "MedicalProcedure", "name": "Endoscopic Spine Surgery" },
+              { "@type": "MedicalProcedure", "name": "Awake Brain Surgery" }
+            ]
+          })
+        }}
+      />
       <h1 className="text-3xl md:text-4xl font-bold">Neurosurgeon in Gachibowli, Hyderabad</h1>
       <p className="mt-4 text-lg">
         Serving patients from <strong>Gachibowli</strong> and nearby localities. OPD at Yashoda Hospitals (Malakpet) with endoscopic spine expertise.
       </p>
 
       <div className="mt-6 flex flex-wrap gap-3">
-        <a href="https://wa.me/919778280044" className="rounded-2xl px-6 py-3 bg-green-600 text-white">WhatsApp Booking</a>
-        <a href="tel:+919778280044" className="rounded-2xl px-6 py-3 border">Call: +91-9778280044</a>
-        <a href="https://maps.google.com/?q=Yashoda+Hospitals+Malakpet+Hyderabad" className="rounded-2xl px-6 py-3 border">Directions</a>
+        <a href="https://wa.me/919778280044" className="rounded-2xl px-6 py-3 bg-green-600 text-white" aria-label="WhatsApp booking for Gachibowli patients">WhatsApp Booking</a>
+        <a href="tel:+919778280044" className="rounded-2xl px-6 py-3 border" aria-label="Call +91 9778280044">Call: +91-9778280044</a>
+        <a href="/appointments" className="rounded-2xl px-6 py-3 bg-blue-600 text-white" aria-label="Book an appointment near Gachibowli">Book Appointment</a>
+        <a href="https://maps.google.com/?q=Yashoda+Hospitals+Malakpet+Hyderabad" className="rounded-2xl px-6 py-3 border" aria-label="Directions to Yashoda Hospital Malakpet">Directions</a>
       </div>
 
       <section className="grid md:grid-cols-2 gap-8 mt-10">

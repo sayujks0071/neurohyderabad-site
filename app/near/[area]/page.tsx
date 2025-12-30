@@ -5,6 +5,8 @@ import StandardCTA from '@/app/_components/StandardCTA';
 import MapCard from '@/app/_components/MapCard';
 import { CLINIC } from '@/app/_lib/clinic';
 import { Metadata } from 'next';
+import { makeMetadata } from '@/app/_lib/meta';
+import { SITE_URL } from '@/src/lib/seo';
 
 const AREAS = {
   'banjara-hills': {
@@ -90,18 +92,23 @@ export async function generateMetadata({ params }: { params: Promise<{ area: str
     return {};
   }
 
-  const title = `Brain & Spine Care near ${data.name} | Dr. Sayuj`;
+  const title = `Brain & Spine Care near ${data.name} | Dr. Sayuj Krishnan`;
   const description = `Consult neurosurgeon Dr. Sayuj Krishnan at Yashoda Hospital Malakpet. Travel from ${data.name} takes ${data.travelTime}.`;
+  const canonicalPath = `/near/${area}`;
 
   return {
-    title,
-    description,
-    alternates: {
-      canonical: `/near/${area}`,
-      languages: {
-        'en-IN': `/near/${area}`,
-        'x-default': `/near/${area}`,
-      },
+    ...makeMetadata({
+      title,
+      description,
+      canonicalPath,
+    }),
+    openGraph: {
+      title,
+      description,
+      url: `${SITE_URL}${canonicalPath}`,
+      siteName: 'Dr. Sayuj Krishnan - Neurosurgeon Hyderabad',
+      locale: 'en_IN',
+      type: 'website',
     },
   };
 }
@@ -113,7 +120,7 @@ export default async function AreaPage({ params }: { params: Promise<{ area: str
     notFound();
   }
 
-  const pageUrl = `https://www.drsayuj.com/near/${area}`;
+  const pageUrl = `${SITE_URL}/near/${area}`;
 
   const clinicSchema = {
     '@context': 'https://schema.org',
@@ -145,8 +152,8 @@ export default async function AreaPage({ params }: { params: Promise<{ area: str
     '@type': 'BreadcrumbList',
     '@id': `${pageUrl}#breadcrumb`,
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.drsayuj.com/' },
-      { '@type': 'ListItem', position: 2, name: 'Neighbourhoods', item: 'https://www.drsayuj.com/near' },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+      { '@type': 'ListItem', position: 2, name: 'Neighbourhoods', item: `${SITE_URL}/near` },
       { '@type': 'ListItem', position: 3, name: data.name, item: pageUrl },
     ],
   };

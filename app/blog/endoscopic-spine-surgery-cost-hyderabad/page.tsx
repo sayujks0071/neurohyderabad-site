@@ -1,8 +1,12 @@
 import { Metadata } from 'next'
+import Link from 'next/link'
 import { JsonLd } from '../../../src/lib/seo/jsonld'
 import ReviewedBy from '@/app/_components/ReviewedBy'
 import NAP from '@/app/_components/NAP'
 import { makeMetadata } from '@/app/_lib/meta'
+import AuthorByline from '@/app/_components/AuthorByline'
+import SourceList from '@/app/_components/SourceList'
+import { getBlogSources } from '../sources'
 
 const baseMetadata = makeMetadata({
   title: 'Endoscopic Spine Surgery Cost in Hyderabad | What Affects Price',
@@ -23,30 +27,32 @@ export const metadata: Metadata = {
   openGraph: {
     title: baseMetadata.title,
     description: baseMetadata.description,
-    url: 'https://www.drsayuj.com/blog/endoscopic-spine-surgery-cost-hyderabad/',
+    url: 'https://www.drsayuj.info/blog/endoscopic-spine-surgery-cost-hyderabad/',
     type: 'article',
     publishedTime: '2025-09-30T00:00:00.000Z',
-    modifiedTime: '2025-09-30T00:00:00.000Z',
+    modifiedTime: '2025-10-19T00:00:00.000Z',
     authors: ['Dr Sayuj Krishnan'],
     section: 'Spine Surgery',
     tags: ['endoscopic spine surgery', 'cost', 'hyderabad', 'insurance', 'day care']
   },
   alternates: {
-    canonical: 'https://www.drsayuj.com/blog/endoscopic-spine-surgery-cost-hyderabad/'
+    canonical: 'https://www.drsayuj.info/blog/endoscopic-spine-surgery-cost-hyderabad/'
   }
 }
+
+const ARTICLE_SOURCES = getBlogSources("endoscopic-spine-surgery-cost-hyderabad");
 
 const blogPostingSchema = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   "headline": "Endoscopic Spine Surgery Cost in Hyderabad: What Affects Your Final Bill",
   "description": "Transparent overview of endoscopic spine surgery costs in Hyderabad—what affects price, insurance, day-care eligibility, and recovery planning.",
-  "mainEntityOfPage": "https://www.drsayuj.com/blog/endoscopic-spine-surgery-cost-hyderabad/",
-  "url": "https://www.drsayuj.com/blog/endoscopic-spine-surgery-cost-hyderabad/",
+  "mainEntityOfPage": "https://www.drsayuj.info/blog/endoscopic-spine-surgery-cost-hyderabad/",
+  "url": "https://www.drsayuj.info/blog/endoscopic-spine-surgery-cost-hyderabad/",
   "datePublished": "2025-09-30",
-  "dateModified": "2025-09-30",
-  "author": { "@id": "https://www.drsayuj.com/#physician" },
-  "publisher": { "@id": "https://www.drsayuj.com/#hospital" },
+  "dateModified": "2025-10-19",
+  "author": { "@id": "https://www.drsayuj.info/#physician" },
+  "publisher": { "@id": "https://www.drsayuj.info/#hospital" },
   "articleSection": "Spine Surgery",
   "wordCount": "1150",
   "citation": [
@@ -99,9 +105,11 @@ export default function EndoscopicSpineSurgeryCostPage() {
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
             Endoscopic Spine Surgery Cost in Hyderabad: What Affects Your Final Bill
           </h1>
-          <div className="text-gray-600 text-sm mb-4">
-            Published: September 30, 2025 | Updated: September 30, 2025
-          </div>
+          <AuthorByline
+            publishedOn="2025-09-30"
+            updatedOn="2025-10-19"
+            className="text-gray-600 mb-4"
+          />
         </header>
 
         <div className="prose prose-lg max-w-none">
@@ -297,17 +305,17 @@ export default function EndoscopicSpineSurgeryCostPage() {
             <div className="grid md:grid-cols-2 gap-4">
               <div className="border rounded-lg p-4">
                 <h3 className="font-semibold mb-2">
-                  <a href="/services/minimally-invasive-spine-surgery/" className="text-blue-600 hover:text-blue-800">
+                  <Link href="/services/minimally-invasive-spine-surgery/" className="text-blue-600 hover:text-blue-800">
                     Endoscopic Foraminotomy
-                  </a>
+                  </Link>
                 </h3>
                 <p className="text-sm text-gray-600">Minimally invasive nerve decompression for foraminal stenosis</p>
               </div>
               <div className="border rounded-lg p-4">
                 <h3 className="font-semibold mb-2">
-                  <a href="/services/minimally-invasive-spine-surgery/" className="text-blue-600 hover:text-blue-800">
+                  <Link href="/services/minimally-invasive-spine-surgery/" className="text-blue-600 hover:text-blue-800">
                     Minimally Invasive Spine Surgery
-                  </a>
+                  </Link>
                 </h3>
                 <p className="text-sm text-gray-600">Advanced techniques for faster recovery</p>
               </div>
@@ -321,50 +329,24 @@ export default function EndoscopicSpineSurgeryCostPage() {
             <div className="grid md:grid-cols-2 gap-4">
               <div className="border rounded-lg p-4">
                 <h3 className="font-semibold mb-2">
-                  <a href="/conditions/spinal-stenosis-treatment-hyderabad/" className="text-blue-600 hover:text-blue-800">
+                  <Link href="/conditions/spinal-stenosis-treatment-hyderabad/" className="text-blue-600 hover:text-blue-800">
                     Spinal Stenosis Treatment
-                  </a>
+                  </Link>
                 </h3>
                 <p className="text-sm text-gray-600">Comprehensive treatment options for spinal canal narrowing</p>
               </div>
               <div className="border rounded-lg p-4">
                 <h3 className="font-semibold mb-2">
-                  <a href="/conditions/slip-disc-treatment-hyderabad/" className="text-blue-600 hover:text-blue-800">
+                  <Link href="/conditions/slip-disc-treatment-hyderabad/" className="text-blue-600 hover:text-blue-800">
                     Slip Disc Treatment
-                  </a>
+                  </Link>
                 </h3>
                 <p className="text-sm text-gray-600">Advanced treatment for herniated discs</p>
               </div>
             </div>
           </section>
 
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-              References
-            </h2>
-            <ul className="list-disc pl-6 space-y-2 text-sm">
-              <li>
-                <a href="https://www.aans.org/patients/conditions-and-treatments" className="text-blue-600 hover:text-blue-800" target="_blank" rel="noopener noreferrer">
-                  AANS: Conditions and Treatments
-                </a>
-              </li>
-              <li>
-                <a href="https://www.ninds.nih.gov/health-information/disorders" className="text-blue-600 hover:text-blue-800" target="_blank" rel="noopener noreferrer">
-                  NINDS: Neurological Disorders
-                </a>
-              </li>
-              <li>
-                <a href="https://www.nhs.uk/conditions/sciatica/treatment/" className="text-blue-600 hover:text-blue-800" target="_blank" rel="noopener noreferrer">
-                  NHS: Sciatica Treatment
-                </a>
-              </li>
-              <li>
-                <a href="https://www.mayoclinic.org/diseases-conditions/herniated-disk/symptoms-causes/syc-20354095" className="text-blue-600 hover:text-blue-800" target="_blank" rel="noopener noreferrer">
-                  Mayo Clinic: Herniated Disk
-                </a>
-              </li>
-            </ul>
-          </section>
+          <SourceList sources={ARTICLE_SOURCES} heading="Trusted References" />
 
           <section className="border-t pt-6">
             <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4">
@@ -376,7 +358,7 @@ export default function EndoscopicSpineSurgeryCostPage() {
           </section>
 
           <section className="mt-8 space-y-4">
-            <ReviewedBy />
+            <ReviewedBy lastReviewed="2025-10-19" />
             <NAP />
           </section>
         </div>

@@ -9,6 +9,13 @@ export const metadata: Metadata = {
   title: 'Endoscopic ULBD for Lumbar Stenosis — Case Story (Hyderabad)',
   description: 'De-identified case: walking distance and leg pain improved after endoscopic ULBD for stenosis in Hyderabad. Recovery timeline and outcomes.',
   keywords: 'endoscopic ULBD, lumbar stenosis, spinal decompression, walking distance, Hyderabad, case study',
+  alternates: {
+    canonical: 'https://www.drsayuj.info/stories/endoscopic-ulbd-stenosis-hyderabad',
+    languages: {
+      'en-IN': 'https://www.drsayuj.info/stories/endoscopic-ulbd-stenosis-hyderabad',
+      'x-default': 'https://www.drsayuj.info/stories/endoscopic-ulbd-stenosis-hyderabad',
+    },
+  },
   openGraph: {
     title: 'Endoscopic ULBD for Lumbar Stenosis — Case Story (Hyderabad)',
     description: 'De-identified case: walking distance and leg pain improved after endoscopic ULBD for stenosis in Hyderabad. Recovery timeline and outcomes.',
@@ -24,19 +31,19 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.drsayuj.com/"
+      "item": "https://www.drsayuj.info/"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Patient Stories",
-      "item": "https://www.drsayuj.com/patient-stories"
+      "item": "https://www.drsayuj.info/patient-stories"
     },
     {
       "@type": "ListItem",
       "position": 3,
       "name": "Endoscopic ULBD for Stenosis",
-      "item": "https://www.drsayuj.com/stories/endoscopic-ulbd-stenosis-hyderabad"
+      "item": "https://www.drsayuj.info/stories/endoscopic-ulbd-stenosis-hyderabad"
     }
   ]
 };
@@ -45,7 +52,7 @@ const medicalWebPageSchema = {
   "@context": "https://schema.org",
   "@type": "MedicalWebPage",
   "name": "Endoscopic ULBD for Lumbar Stenosis — Case Story (Hyderabad)",
-  "url": "https://www.drsayuj.com/stories/endoscopic-ulbd-stenosis-hyderabad",
+  "url": "https://www.drsayuj.info/stories/endoscopic-ulbd-stenosis-hyderabad",
   "datePublished": "2025-01-15",
   "dateModified": "2025-01-15",
   "about": {
@@ -101,9 +108,9 @@ export default function EndoscopicULBDStoryPage() {
       <nav className="bg-gray-50 py-4">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <ol className="flex items-center space-x-2 text-sm text-gray-600">
-            <li><Link href="/" className="hover:text-blue-600">Home</Link></li>
+            <li><Link href="/" className="underline underline-offset-2 decoration-blue-300 hover:text-blue-700 hover:decoration-blue-500">Home</Link></li>
             <li>/</li>
-            <li><Link href="/patient-stories" className="hover:text-blue-600">Patient Stories</Link></li>
+            <li><Link href="/patient-stories" className="underline underline-offset-2 decoration-blue-300 hover:text-blue-700 hover:decoration-blue-500">Patient Stories</Link></li>
             <li>/</li>
             <li className="text-gray-900 font-medium">Endoscopic ULBD for Stenosis</li>
           </ol>

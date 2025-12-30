@@ -40,7 +40,7 @@ export function GlobalStructuredData() {
         "alternateName": "Dr Sayuj",
         "description": "Expert neurosurgeon in Hyderabad specializing in endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures",
         "url": `${url}`,
-        "image": `${SITE_URL}/images/dr-sayuj-krishnan.jpg`,
+        "image": `${SITE_URL}/images/og-default.jpg`,
         "telephone": telephone.replace(/-/g, ""),
         "email": email,
         "address": {
@@ -87,6 +87,10 @@ export function GlobalStructuredData() {
           }
         ],
         "memberOf": [
+          {
+            "@type": "Organization",
+            "name": "AO Spine"
+          },
           {
             "@type": "Organization",
             "name": "Neurological Society of India"
@@ -146,8 +150,12 @@ export function GlobalStructuredData() {
           }
         ],
         "sameAs": [
+          "https://www.yashodahospitals.com/doctor/dr-sayuj-krishnan/",
+          "https://www.practo.com/hyderabad/doctor/dr-sayuj-krishnan-neurosurgeon",
+          "https://www.justdial.com/Hyderabad/Dr-Sayuj-Krishnan-Neurosurgeon-Malakpet",
           "https://www.linkedin.com/in/dr-sayuj-krishnan",
-          "https://www.researchgate.net/profile/Dr-Sayuj-Krishnan"
+          "https://www.researchgate.net/profile/Dr-Sayuj-Krishnan",
+          "https://g.co/kgs/9366939683880052414"
         ]
       },
       {

@@ -3,8 +3,17 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Neurosurgeon in Malakpet, Hyderabad | Dr Sayuj Krishnan - Yashoda Hospital",
-  description: "Expert neurosurgeon Dr Sayuj Krishnan at Yashoda Hospital, Malakpet. Specializing in endoscopic spine surgery and brain surgery. Easy access from Dilsukhnagar, Kothapet.",
+  title: "Best Spine Surgeon in Yashoda Hospital Malakpet | Dr Sayuj Krishnan - Neurosurgeon",
+  description: "Dr Sayuj Krishnan is the best spine surgeon in Yashoda Hospital Malakpet, Hyderabad. Expert neurosurgeon and spine specialist offering endoscopic spine surgery, minimally invasive procedures, and brain surgery. Easy access from Dilsukhnagar, Kothapet, LB Nagar.",
+  keywords: [
+    'best spine surgeon in yashoda hospital',
+    'spine surgeon in yashoda hospital hyderabad',
+    'yashoda hospital malakpet spine surgeon',
+    'yashoda hospital spine surgeon',
+    'best spine surgeon in yashoda hospital malakpet',
+    'neurosurgeon in malakpet',
+    'spine specialist in yashoda hospital',
+  ],
   alternates: {
     canonical: `${SITE_URL}/locations/malakpet/`,
   },
@@ -14,14 +23,14 @@ export default function MalakpetLocationPage() {
   return (
     <main className="container mx-auto px-4 py-16">
       <article className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8 text-center">Neurosurgeon in Malakpet, Hyderabad</h1>
+        <h1 className="text-4xl font-bold mb-8 text-center">Best Spine Surgeon in Yashoda Hospital Malakpet, Hyderabad</h1>
         
         <section className="mb-8 bg-blue-50 p-6 rounded-lg">
           <h2 className="text-2xl font-semibold mb-4">Yashoda Hospital, Malakpet</h2>
           <div className="space-y-2 text-gray-700">
             <p><strong>Address:</strong> Room No 317, OPD Block, Yashoda Hospital, Nalgonda X Roads, Malakpet, Hyderabad 500036</p>
             <p><strong>Phone:</strong> <a href="tel:+919778280044" className="text-blue-600 hover:underline">+91-9778280044</a></p>
-            <p><strong>Email:</strong> <a href="mailto:neurospinehyd@drsayuj.com" className="text-blue-600 hover:underline">neurospinehyd@drsayuj.com</a></p>
+            <p><strong>Email:</strong> <a href="mailto:hellodr@drsayuj.info" className="text-blue-600 hover:underline">hellodr@drsayuj.info</a></p>
             <p><strong>Hours:</strong> Mon-Fri: 9 AM - 5 PM, Sat: 9 AM - 1 PM</p>
           </div>
         </section>
@@ -79,7 +88,7 @@ export default function MalakpetLocationPage() {
               "addressCountry": "IN"
             },
             "telephone": "+919778280044",
-            "email": "neurospinehyd@drsayuj.com",
+            "email": "hellodr@drsayuj.info",
             "medicalSpecialty": "Neurosurgery",
             "availableService": [
               {"@type": "MedicalProcedure", "name": "Endoscopic Spine Surgery"},

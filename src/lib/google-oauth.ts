@@ -2,7 +2,7 @@
 
 export const GOOGLE_OAUTH_CONFIG = {
   clientId: '568785727095-ro3c0n1om83ahqut7j28vobmnhn8h5m2.apps.googleusercontent.com',
-  redirectUri: 'https://www.drsayuj.com/auth/callback',
+  redirectUri: 'https://www.drsayuj.info/auth/callback',
   scope: 'openid email profile',
   uxMode: 'popup' as const,
 };
