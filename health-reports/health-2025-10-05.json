@@ -1,0 +1,130 @@
+{
+  "timestamp": "2025-10-05T19:18:53.151Z",
+  "results": [
+    {
+      "url": "https://www.drsayuj.com/",
+      "status": 200,
+      "responseTime": 1418,
+      "contentLength": 112235,
+      "compression": {
+        "status": "warning",
+        "encoding": "none"
+      },
+      "caching": {
+        "status": "good",
+        "cacheControl": "public, s-maxage=3600, max-age=600, stale-while-revalidate=86400"
+      },
+      "security": {
+        "status": "good",
+        "present": 4,
+        "total": 4
+      },
+      "healthy": true
+    },
+    {
+      "url": "https://www.drsayuj.com/services/endoscopic-discectomy-hyderabad",
+      "status": 200,
+      "responseTime": 620,
+      "contentLength": 77685,
+      "compression": {
+        "status": "warning",
+        "encoding": "none"
+      },
+      "caching": {
+        "status": "good",
+        "cacheControl": "public, s-maxage=3600, max-age=600, stale-while-revalidate=86400"
+      },
+      "security": {
+        "status": "good",
+        "present": 4,
+        "total": 4
+      },
+      "healthy": true
+    },
+    {
+      "url": "https://www.drsayuj.com/stories/endoscopic-discectomy-same-day-hyderabad",
+      "status": 200,
+      "responseTime": 656,
+      "contentLength": 76073,
+      "compression": {
+        "status": "warning",
+        "encoding": "none"
+      },
+      "caching": {
+        "status": "good",
+        "cacheControl": "public, s-maxage=3600, max-age=600, stale-while-revalidate=86400"
+      },
+      "security": {
+        "status": "good",
+        "present": 4,
+        "total": 4
+      },
+      "healthy": true
+    },
+    {
+      "url": "https://www.drsayuj.com/locations/brain-spine-surgeon-jubilee-hills",
+      "status": 200,
+      "responseTime": 361,
+      "contentLength": 79434,
+      "compression": {
+        "status": "warning",
+        "encoding": "none"
+      },
+      "caching": {
+        "status": "good",
+        "cacheControl": "public, s-maxage=3600, max-age=600, stale-while-revalidate=86400"
+      },
+      "security": {
+        "status": "good",
+        "present": 4,
+        "total": 4
+      },
+      "healthy": true
+    },
+    {
+      "url": "https://www.drsayuj.com/patient-stories",
+      "status": 200,
+      "responseTime": 325,
+      "contentLength": 69720,
+      "compression": {
+        "status": "warning",
+        "encoding": "none"
+      },
+      "caching": {
+        "status": "good",
+        "cacheControl": "public, s-maxage=3600, max-age=600, stale-while-revalidate=86400"
+      },
+      "security": {
+        "status": "good",
+        "present": 4,
+        "total": 4
+      },
+      "healthy": true
+    },
+    {
+      "url": "https://www.drsayuj.com/appointments",
+      "status": 200,
+      "responseTime": 551,
+      "contentLength": 56831,
+      "compression": {
+        "status": "warning",
+        "encoding": "none"
+      },
+      "caching": {
+        "status": "good",
+        "cacheControl": "public, s-maxage=3600, max-age=600, stale-while-revalidate=86400"
+      },
+      "security": {
+        "status": "good",
+        "present": 4,
+        "total": 4
+      },
+      "healthy": true
+    }
+  ],
+  "summary": {
+    "totalPages": 6,
+    "healthyPages": 6,
+    "avgResponseTime": 655.1666666666666
+  }
+}

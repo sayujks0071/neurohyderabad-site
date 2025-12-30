@@ -1,0 +1,153 @@
+import { Metadata } from 'next';
+import Link from 'next/link';
+import { SITE_URL } from '../../../src/lib/seo';
+import ReviewedBy from '@/app/_components/ReviewedBy';
+import NAP from '@/app/_components/NAP';
+import { makeMetadata } from '@/app/_lib/meta';
+
+const baseMetadata = makeMetadata({
+  title: 'Spinal Stenosis Treatment in Hyderabad | Expert Care & Surgery',
+  description: 'Conservative care, injections, and endoscopic ULBD decompression for spinal stenosis in Hyderabad.',
+  canonicalPath: '/conditions/spinal-stenosis-treatment-hyderabad',
+});
+
+export const metadata: Metadata = {
+  ...baseMetadata,
+  alternates: {
+    canonical: `${SITE_URL}/conditions/spinal-stenosis-treatment-hyderabad/`,
+    languages: {
+      'en-IN': `${SITE_URL}/conditions/spinal-stenosis-treatment-hyderabad/`,
+      'x-default': `${SITE_URL}/conditions/spinal-stenosis-treatment-hyderabad/`,
+    },
+  },
+};
+
+export default function SpinalStenosisTreatmentPage() {
+  return (
+    <div className="min-h-screen bg-white">
+      <div className="container mx-auto px-4 py-16">
+        <header className="text-center mb-8">
+          <h1 className="text-4xl font-bold mb-4">Spinal Stenosis Treatment in Hyderabad</h1>
+          <p className="text-lg text-gray-600">Expert treatment for spinal canal narrowing and nerve compression</p>
+        </header>
+
+        <section className="bg-blue-50 p-6 rounded-lg mb-8">
+          <p className="text-center">
+            <strong>Contact:</strong>
+            <a href="tel:+919778280044" className="text-blue-600 hover:underline ml-2">+91-9778280044</a> •
+            <a href="mailto:hellodr@drsayuj.info" className="text-blue-600 hover:underline ml-2">hellodr@drsayuj.info</a> •
+            <a href="/appointments" className="text-blue-600 hover:underline ml-2">Appointments</a>
+          </p>
+        </section>
+        <section className="mb-12">
+          <h2 className="text-3xl font-bold text-blue-800 mb-6">What is Spinal Stenosis?</h2>
+          <div className="prose max-w-none">
+            <p className="text-lg text-gray-700 mb-6">
+              Spinal stenosis is a narrowing of the spinal canal that can compress the spinal cord and nerve roots, 
+              causing pain, numbness, and weakness in the back, legs, or arms.
+            </p>
+            <p className="text-gray-700 mb-6">
+              Dr. Sayuj Krishnan specializes in both conservative and surgical treatment of spinal stenosis, 
+              including advanced endoscopic decompression procedures.
+            </p>
+          </div>
+        </section>
+
+        <section className="mb-12">
+          <h2 className="text-3xl font-bold text-blue-800 mb-6">Treatment Options</h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="bg-white p-6 rounded-lg shadow-sm border">
+              <h3 className="text-lg font-semibold mb-3 text-blue-700">Conservative Treatment</h3>
+              <ul className="space-y-2 text-gray-700">
+                <li>• Physical therapy and exercises</li>
+                <li>• Anti-inflammatory medications</li>
+                <li>• Epidural steroid injections</li>
+                <li>• Activity modification</li>
+                <li>• Assistive devices (walkers)</li>
+              </ul>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-sm border">
+              <h3 className="text-lg font-semibold mb-3 text-blue-700">Surgical Options</h3>
+              <ul className="space-y-2 text-gray-700">
+                <li>• Endoscopic ULBD</li>
+                <li>• Laminectomy</li>
+                <li>• Foraminotomy</li>
+                <li>• Spinal fusion (severe cases)</li>
+                <li>• Interspinous spacers</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-blue-50 p-8 rounded-lg text-center">
+          <h2 className="text-2xl font-bold text-blue-800 mb-4">Need Expert Spinal Stenosis Treatment?</h2>
+          <p className="text-gray-600 mb-6">
+            Dr. Sayuj Krishnan provides personalized treatment plans for spinal stenosis.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link 
+              href="/appointments/"
+              className="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-colors"
+            >
+              Book Consultation
+            </Link>
+            <Link 
+              href="/services/minimally-invasive-spine-surgery/"
+              className="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-full hover:bg-blue-600 hover:text-white transition-colors"
+            >
+              Minimally Invasive Surgery
+            </Link>
+            <Link 
+              href="/services/awake-spine-surgery-hyderabad"
+              className="border-2 border-green-600 text-green-700 px-8 py-3 rounded-full hover:bg-green-600 hover:text-white transition-colors"
+            >
+              Awake Spine Option
+            </Link>
+          </div>
+        </section>
+
+        <section className="mt-12 space-y-6">
+          <ReviewedBy />
+          <NAP />
+        </section>
+      </div>
+      
+      {/* FAQ Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What is the best treatment for spinal stenosis?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Treatment for spinal stenosis depends on severity. Mild to moderate cases often respond to conservative treatment including physical therapy, medications, and epidural injections. Severe cases with progressive symptoms may require endoscopic ULBD (unilateral laminotomy bilateral decompression) or traditional laminectomy for effective decompression."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can spinal stenosis be cured without surgery?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "While spinal stenosis cannot be completely 'cured' as it's a structural narrowing, many patients find significant relief with conservative treatment including physical therapy, medications, and injections. Surgery is typically reserved for cases with progressive symptoms, severe pain, or neurological deficits that don't respond to conservative care."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is endoscopic ULBD for spinal stenosis?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Endoscopic ULBD (Unilateral Laminotomy Bilateral Decompression) is a minimally invasive procedure that decompresses the spinal canal through a small incision on one side, providing bilateral decompression. This technique offers faster recovery, less pain, and same-day discharge compared to traditional open laminectomy."
+                }
+              }
+            ]
+          })
+        }}
+      />
+    </div>
+  );
+}

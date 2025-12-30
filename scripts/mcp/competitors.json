@@ -1,0 +1,24 @@
+{
+  "competitors": [
+    {
+      "name": "Mayo Clinic",
+      "url": "https://www.mayoclinic.org/"
+    },
+    {
+      "name": "Cleveland Clinic",
+      "url": "https://my.clevelandclinic.org/"
+    },
+    {
+      "name": "Johns Hopkins Medicine",
+      "url": "https://www.hopkinsmedicine.org/"
+    },
+    {
+      "name": "Mass General Hospital",
+      "url": "https://www.massgeneral.org/"
+    },
+    {
+      "name": "Boston Children's Hospital",
+      "url": "https://www.childrenshospital.org/"
+    }
+  ]
+}

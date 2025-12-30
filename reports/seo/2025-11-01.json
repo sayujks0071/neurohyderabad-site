@@ -1,0 +1,68 @@
+{
+  "domain": "www.drsayuj.info",
+  "timestamp": "2025-11-01T08:00:36+05:30",
+  "robots_txt": {
+    "allow_all": true,
+    "disallow": [
+      "/api/",
+      "/auth/",
+      "/drafts",
+      "/drafts/",
+      "/cache-test-new",
+      "/force-cache-clear",
+      "/force-redeploy-test",
+      "/simple-statsig-test",
+      "/statsig-test",
+      "/test-compression",
+      "/test-inngest",
+      "/test-error",
+      "/email-test"
+    ],
+    "sitemap": "https://www.drsayuj.info/sitemap.xml",
+    "host": "https://www.drsayuj.info"
+  },
+  "canonical_redirect": "apex -> www (observed)",
+  "pages_tested": [
+    "https://www.drsayuj.info/",
+    "https://www.drsayuj.info/services/minimally-invasive-spine-surgery",
+    "https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad",
+    "https://www.drsayuj.info/services/epilepsy-surgery-hyderabad",
+    "https://www.drsayuj.info/emergency-rehabilitation",
+    "https://www.drsayuj.info/patient-stories"
+  ],
+  "lighthouse": {
+    "home": {
+      "mobile": {
+        "performance": null,
+        "accessibility": null,
+        "bestPractices": null,
+        "seo": null,
+        "metrics": {
+          "LCP": null,
+          "CLS": null,
+          "INP": null,
+          "TBT": null
+        }
+      },
+      "desktop": {
+        "performance": null,
+        "accessibility": null,
+        "bestPractices": null,
+        "seo": null,
+        "metrics": {
+          "LCP": null,
+          "CLS": null,
+          "INP": null,
+          "TBT": null
+        }
+      }
+    }
+  },
+  "issues": {
+    "missingStructuredData": true,
+    "missingDefaultSeoConfig": true,
+    "needsCanonicalEnforcementInCode": true,
+    "needsImageOptimization": true,
+    "needsFontPreconnect": true
+  }
+}

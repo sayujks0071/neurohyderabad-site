@@ -1,0 +1,62 @@
+[
+  {
+    "id": "booking_1760873284216_3fcjv7o37",
+    "receivedAt": "2025-10-19T11:28:04.216Z",
+    "source": "website",
+    "booking": {
+      "patientName": "Integration Test",
+      "age": "30",
+      "gender": "male",
+      "appointmentDate": "2025-11-25",
+      "appointmentTime": "2:00 PM",
+      "reason": "Integration test with public webhook"
+    },
+    "confirmationMessage": "Thank you for your request for an appointment on 2025-11-25 at 2:00 PM. We have received your details and our team will contact you shortly to confirm the appointment.",
+    "usedAI": false
+  },
+  {
+    "id": "booking_1760873258023_g22yn0rbo",
+    "receivedAt": "2025-10-19T11:27:38.023Z",
+    "source": "public-test",
+    "booking": {
+      "patientName": "Public Test",
+      "age": "25",
+      "gender": "female",
+      "appointmentDate": "2025-11-20",
+      "appointmentTime": "3:00 PM",
+      "reason": "Public webhook test"
+    },
+    "confirmationMessage": "Public test confirmed",
+    "usedAI": false
+  },
+  {
+    "id": "booking_1760872636128_py285u8ee",
+    "receivedAt": "2025-10-19T11:17:16.128Z",
+    "source": "website",
+    "booking": {
+      "patientName": "John Doe",
+      "age": "35",
+      "gender": "male",
+      "appointmentDate": "2025-11-15",
+      "appointmentTime": "10:00 AM",
+      "reason": "Consultation"
+    },
+    "confirmationMessage": "Appointment confirmed",
+    "usedAI": false
+  },
+  {
+    "id": "booking_1760872420961_z4ea2ttb8",
+    "receivedAt": "2025-10-19T11:13:40.961Z",
+    "source": "website",
+    "booking": {
+      "patientName": "Test Patient",
+      "age": "30",
+      "gender": "male",
+      "appointmentDate": "2025-11-10",
+      "appointmentTime": "2:00 PM",
+      "reason": "Test consultation"
+    },
+    "confirmationMessage": "Test confirmation message",
+    "usedAI": false
+  }
+]
