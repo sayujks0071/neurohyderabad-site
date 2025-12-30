@@ -7,6 +7,7 @@ import SmartImage from '@/components/SmartImage';
 import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import { getServiceSources } from '../sources';
+import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
 
 export const metadata = makeMetadata({
   title: 'Spinal Fusion Surgery in Hyderabad | TLIF & ACDF',
@@ -20,8 +21,16 @@ export default function Page() {
   const url = 'https://www.drsayuj.info/services/spinal-fusion';
   const schemas = spinalFusionSchemas(url);
 
+  const breadcrumbItems = [
+    { name: 'Home', path: '/' },
+    { name: 'Services', path: '/services' },
+    { name: 'Spinal Fusion Surgery', path: '/services/spinal-fusion' },
+  ];
+
   return (
-    <main id="main" className="prose">
+    <>
+      <BreadcrumbSchema items={breadcrumbItems} />
+      <main id="main" className="prose">
       <h1>Spinal Fusion Surgery (TLIF/ACDF)</h1>
       <AuthorByline
         publishedOn="2025-09-07"
@@ -158,5 +167,6 @@ export default function Page() {
         <SchemaScript key={index} data={schema} />
       ))}
     </main>
+    </>
   );
 }

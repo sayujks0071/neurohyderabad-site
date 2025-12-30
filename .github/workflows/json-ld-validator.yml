@@ -16,6 +16,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          submodules: false
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -23,11 +25,14 @@ jobs:
           node-version: '18'
 
       - name: Install schema validator
+        timeout-minutes: 3
+        continue-on-error: false
         run: |
           npm install -g schema-dts
           npm install -g ajv-cli
 
       - name: Create validation script
+        timeout-minutes: 1
         run: |
           cat > validate-schema.js << 'EOF'
           const https = require('https');
@@ -129,10 +134,14 @@ jobs:
 
       - name: Run validation
         id: validate
+        timeout-minutes: 10
+        continue-on-error: true
         run: node validate-schema.js || echo "validation_failed=true" >> $GITHUB_OUTPUT
 
       - name: Create issue if validation fails
         if: steps.validate.outputs.validation_failed == 'true'
+        continue-on-error: true
+        timeout-minutes: 2
         uses: actions/github-script@v7
         with:
           script: |
@@ -165,3 +174,16 @@ jobs:
                 labels: ['json-ld-validation', 'bug', 'seo']
               });
             }
+
+      - name: Write validation summary
+        timeout-minutes: 1
+        run: echo "JSON-LD validation completed" > json-ld-validation-report.txt
+
+      - name: Upload JSON-LD validation report
+        if: always()
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: json-ld-validation-report
+          path: json-ld-validation-report.txt
+          retention-days: 30

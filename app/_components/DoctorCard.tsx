@@ -12,7 +12,7 @@ export default function DoctorCard() {
             alt="Dr. Sayuj Krishnan - Premier Neurosurgeon in Hyderabad"
             width={128}
             height={128}
-            className="object-cover w-full h-full rounded-full"
+            className="object-cover w-full h-full rounded-full max-w-[128px]"
             quality={75}
             sizes="128px"
             placeholder="blur"
@@ -40,7 +40,7 @@ export default function DoctorCard() {
           </Link>
           <a 
             href="tel:+919778280044" 
-            className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-semibold text-center transition-colors"
+            className="bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded-lg font-semibold text-center transition-colors"
           >
             Call Now
           </a>

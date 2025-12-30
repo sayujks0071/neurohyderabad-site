@@ -8,6 +8,8 @@ import Link from 'next/link';
 import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import { getServiceSources } from '../sources';
+import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
+import FAQPageSchema from '@/app/_components/FAQPageSchema';
 
 export const metadata: Metadata = makeMetadata({
   title: 'KIMS Spine Surgery Second Opinion | Dr. Sayuj Krishnan Expert Review',
@@ -19,6 +21,16 @@ const ARTICLE_SOURCES = getServiceSources('kims-spine-surgery-second-opinion');
 
 export default function KIMSSpineSurgerySecondOpinionPage() {
   const url = 'https://www.drsayuj.info/services/kims-spine-surgery-second-opinion';
+  const faqs = [
+    {
+      question: 'When should I seek a second opinion for spine surgery?',
+      answer: 'If surgery feels rushed, the diagnosis is unclear, or you want to confirm a minimally invasive alternative, a second opinion helps align the plan with your goals.',
+    },
+    {
+      question: 'Can I share MRI scans digitally for review?',
+      answer: 'Yes. You can send DICOM files or reports; we review them before consult to suggest alternatives or confirm the plan.',
+    },
+  ];
   
   const schemas = [
     {
@@ -49,6 +61,14 @@ export default function KIMSSpineSurgerySecondOpinionPage() {
 
   return (
     <main id="main" className="prose">
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', path: '/' },
+          { name: 'Services', path: '/services' },
+          { name: 'KIMS Spine Surgery Second Opinion', path: '/services/kims-spine-surgery-second-opinion' },
+        ]}
+      />
+      <FAQPageSchema faqs={faqs} pageUrl={url} />
       <h1>KIMS Spine Surgery Second Opinion | Dr. Sayuj Krishnan Expert Review</h1>
       <AuthorByline
         publishedOn="2025-09-11"

@@ -13,7 +13,7 @@ export function BestNeurosurgeonStructuredData() {
         "url": `${SITE_URL}`,
         "image": `${SITE_URL}/images/og-default.jpg`,
         "telephone": "+919778280044",
-        "email": "neurospinehyd@drsayuj.com",
+        "email": "hellodr@drsayuj.info",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Room No 317, OPD Block",
@@ -119,7 +119,7 @@ export function BestNeurosurgeonStructuredData() {
         "description": "Leading neurosurgeon in Hyderabad specializing in endoscopic spine surgery and brain surgery",
         "url": `${SITE_URL}/best-neurosurgeon-in-hyderabad`,
         "telephone": "+919778280044",
-        "email": "neurospinehyd@drsayuj.com",
+        "email": "hellodr@drsayuj.info",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Room No 317, OPD Block",

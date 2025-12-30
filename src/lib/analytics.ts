@@ -2,7 +2,7 @@
 // import { Statsig } from '@statsig/js-client';
 
 // Export GA4 measurement ID for GoogleAnalytics component
-export const GA4_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID || 'G-XXXXXXXXXX';
+export const GA4_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID || 'G-MMLQCFN4ZJ';
 
 // Event tracking interface
 interface EventProps {
@@ -102,18 +102,20 @@ export const analytics = {
     });
   },
 
-  heroCTAClick: (pageSlug: string, ctaLabel: string, serviceOrCondition?: string) => {
+  heroCTAClick: (pageSlug: string, ctaLabel: string, serviceOrCondition?: string, experimentVariant?: string) => {
     track('Hero_CTA_Click', {
       page_slug: pageSlug,
       cta_label: ctaLabel,
-      service_or_condition: serviceOrCondition
+      service_or_condition: serviceOrCondition,
+      experiment_variant: experimentVariant
     });
   },
 
-  stickyCTAClick: (pageSlug: string, ctaLabel: string) => {
+  stickyCTAClick: (pageSlug: string, ctaLabel: string, experimentVariant?: string) => {
     track('Sticky_CTA_Click', {
       page_slug: pageSlug,
-      cta_label: ctaLabel
+      cta_label: ctaLabel,
+      experiment_variant: experimentVariant
     });
   },
 

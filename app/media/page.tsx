@@ -4,6 +4,7 @@ import { mediaPublications } from '@/src/content/media';
 import StandardCTA from '@/app/_components/StandardCTA';
 import NAP from '@/app/_components/NAP';
 import ReviewedBy from '@/app/_components/ReviewedBy';
+import VideoObjectSchema from '@/app/components/schemas/VideoObjectSchema';
 
 export const metadata: Metadata = {
   title: 'Media Publications & Expert Articles | Dr. Sayuj Krishnan',
@@ -47,9 +48,29 @@ export default function MediaPage() {
             Featured Publications
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredPublications.map((publication) => (
-              <div key={publication.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                <div className="p-6">
+            {featuredPublications.map((publication) => {
+              // Extract video ID for YouTube videos
+              const getVideoId = (url: string) => {
+                const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\s]+)/);
+                return match ? match[1] : null;
+              };
+              
+              const videoId = publication.type === 'interview' && publication.url.includes('youtube') 
+                ? getVideoId(publication.url) 
+                : null;
+              
+              return (
+                <div key={publication.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                  {/* VideoObject Schema for YouTube videos */}
+                  {videoId && (
+                    <VideoObjectSchema
+                      videoId={videoId}
+                      title={publication.title}
+                      description={publication.description}
+                      uploadDate={publication.date}
+                    />
+                  )}
+                  <div className="p-6">
                   <div className="mb-4">
                     <span className="inline-block bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">
                       {publication.type.replace('-', ' ').toUpperCase()}
@@ -83,11 +104,12 @@ export default function MediaPage() {
                     rel="noopener noreferrer"
                     className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm"
                   >
-                    Read Full Article →
+                    {publication.type === 'interview' ? 'Watch Interview →' : 'Read Full Article →'}
                   </a>
                 </div>
-              </div>
-            ))}
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -170,6 +192,23 @@ export default function MediaPage() {
           <ReviewedBy lastReviewed="2025-01-15" />
         </div>
       </section>
+      
+      {/* VideoObject Schema for YouTube videos */}
+      {mediaPublications
+        .filter(pub => pub.type === 'interview' && pub.url.includes('youtube.com'))
+        .map((publication) => {
+          const videoId = publication.url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\s]+)/)?.[1];
+          if (!videoId) return null;
+          return (
+            <VideoObjectSchema
+              key={publication.id}
+              videoId={videoId}
+              title={publication.title}
+              description={publication.description}
+              uploadDate={publication.date}
+            />
+          );
+        })}
     </div>
   );
 }

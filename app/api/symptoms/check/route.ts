@@ -97,7 +97,7 @@ export async function POST(request: NextRequest) {
       recommendation,
       contactInfo: {
         phone: '+91-9778280044',
-        email: 'neurospinehyd@drsayuj.com',
+        email: 'hellodr@drsayuj.info',
         location: 'Yashoda Hospital, Room 317, OPD Block, Malakpet, Hyderabad',
       },
       checkedAt: new Date().toISOString(),

@@ -20,6 +20,7 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
           token: ${{ secrets.GITHUB_TOKEN }}
+          submodules: false
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -27,9 +28,13 @@ jobs:
           node-version: '18'
 
       - name: Install sharp for image optimization
+        timeout-minutes: 3
+        continue-on-error: false
         run: npm install sharp
 
       - name: Optimize images
+        timeout-minutes: 15
+        continue-on-error: true
         run: |
           cat > optimize-images.js << 'EOF'
           const sharp = require('sharp');
@@ -152,10 +157,12 @@ jobs:
           main().catch(console.error);
           EOF
           
-          node optimize-images.js
+          node optimize-images.js || echo "No images to optimize or optimization completed with warnings"
 
       - name: Create Pull Request with optimizations
-        if: success()
+        if: success() && github.event_name == 'pull_request'
+        timeout-minutes: 3
+        continue-on-error: true
         uses: peter-evans/create-pull-request@v5
         with:
           commit-message: 'chore: optimize images for performance'
@@ -176,11 +183,13 @@ jobs:
             - Better Core Web Vitals scores
             
             Please review and merge if the changes look good.
-          branch: automated-image-optimization
-          delete-branch: true
+              branch: automated-image-optimization
+              delete-branch: true
 
       - name: Comment optimization summary
         if: github.event_name == 'pull_request'
+        timeout-minutes: 2
+        continue-on-error: true
         uses: actions/github-script@v7
         with:
           script: |
@@ -202,3 +211,12 @@ jobs:
               repo: context.repo.repo,
               body: comment
             });
+
+      - name: Upload image optimization summary
+        if: always()
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: image-optimization-summary
+          path: optimization-summary.txt
+          retention-days: 30

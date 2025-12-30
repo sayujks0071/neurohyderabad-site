@@ -15,7 +15,7 @@ export async function sendConfirmationEmail(
 
     console.info("--- APPOINTMENT EMAIL (simulation) ---");
     console.info(`To: patient@example.com (placeholder)`);
-    console.info(`From: neurospinehyd@drsayuj.com`);
+    console.info(`From: hellodr@drsayuj.info`);
     console.info(`Subject: Appointment Request with Dr. Sayuj Krishnan`);
     console.info("---------------------------------------");
     console.info(confirmationMessage);

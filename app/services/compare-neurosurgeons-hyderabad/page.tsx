@@ -8,6 +8,8 @@ import Link from 'next/link';
 import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import { getServiceSources } from '../sources';
+import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
+import FAQPageSchema from '@/app/_components/FAQPageSchema';
 
 export const metadata: Metadata = makeMetadata({
   title: 'Best Neurosurgeon in Hyderabad: Compare Dr. Sayuj vs Apollo, KIMS, Yashoda',
@@ -112,6 +114,17 @@ const faqs = [
 ];
 
 export default function CompareNeurosurgeonsPage() {
+  const pageUrl = 'https://www.drsayuj.info/services/compare-neurosurgeons-hyderabad';
+  const faqs = [
+    {
+      question: 'What should I compare when choosing a neurosurgeon in Hyderabad?',
+      answer: 'Review surgeon experience, minimally invasive options, outcomes, infection rates, and follow-up support—not just hospital brand.',
+    },
+    {
+      question: 'Do all hospitals offer endoscopic spine surgery?',
+      answer: 'No. Endoscopic/MISS programs depend on surgeon training and equipment. Ask specifically about endoscopic options and outcomes.',
+    },
+  ];
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -141,6 +154,14 @@ export default function CompareNeurosurgeonsPage() {
 
   return (
     <main className="container mx-auto px-4 py-16">
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', path: '/' },
+          { name: 'Services', path: '/services' },
+          { name: 'Compare Neurosurgeons Hyderabad', path: '/services/compare-neurosurgeons-hyderabad' },
+        ]}
+      />
+      <FAQPageSchema faqs={faqs} pageUrl={pageUrl} />
       <div className="max-w-6xl mx-auto">
         {/* Header Section */}
         <section className="text-center mb-16">

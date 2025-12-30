@@ -161,6 +161,26 @@ export default function SlipDiscTreatmentPage() {
         </div>
       </section>
 
+      <section className="mb-12 rounded-lg border border-green-200 bg-green-50 p-6">
+        <h2 className="text-2xl font-semibold mb-4 text-green-800">Worried about general anaesthesia?</h2>
+        <p className="text-gray-700 mb-4">
+          For elderly or high-risk patients, Dr. Sayuj offers <strong>awake endoscopic spine surgery</strong> using spinal/epidural blocks with light sedation—minimising anaesthesia risk while keeping the incision tiny.
+        </p>
+        <div className="flex flex-wrap gap-3">
+          <Link href="/services/awake-spine-surgery-hyderabad" className="rounded-full bg-green-600 px-5 py-2 text-sm font-semibold text-white hover:bg-green-700">
+            Explore Awake Spine Surgery
+          </Link>
+          <a
+            href="https://wa.me/919778280044"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-full border border-green-300 px-5 py-2 text-sm font-semibold text-green-800 hover:bg-green-100"
+          >
+            Share MRI on WhatsApp
+          </a>
+        </div>
+      </section>
+
       <section className="mb-12">
         <h2 className="text-2xl font-semibold mb-6 text-blue-700">Candidates for Endoscopic Discectomy</h2>
         <div className="bg-gray-50 p-6 rounded-lg">

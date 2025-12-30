@@ -54,7 +54,7 @@ export default function MalakpetNeurosurgeonPage() {
     description: "Full neurosurgical services including endoscopic spine surgery and brain surgery at Yashoda Hospital Malakpet",
     url: "https://www.drsayuj.info/neurosurgeon-malakpet",
     telephone: "+91-9778280044",
-    email: "neurospinehyd@drsayuj.com",
+    email: "hellodr@drsayuj.info",
     address: {
       "@type": "PostalAddress",
       streetAddress: "Room 317, OPD Block, Yashoda Hospital, Alexander Road",
@@ -191,7 +191,7 @@ export default function MalakpetNeurosurgeonPage() {
                   <h4 className="font-semibold text-gray-900">Contact Information</h4>
                   <ul className="mt-2 space-y-1 text-gray-700">
                     <li>📞 <strong>Phone:</strong> +91 9778280044</li>
-                    <li>✉️ <strong>Email:</strong> neurospinehyd@drsayuj.com</li>
+                    <li>✉️ <strong>Email:</strong> hellodr@drsayuj.info</li>
                     <li>💬 <strong>WhatsApp:</strong> +91 9778280044</li>
                   </ul>
                 </div>

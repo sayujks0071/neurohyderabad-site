@@ -49,6 +49,10 @@ const NAV_SECTIONS: NavSection[] = [
         label: "Epilepsy Surgery",
         href: "/services/epilepsy-surgery-hyderabad",
       },
+      {
+        label: "Compare Neurosurgeons",
+        href: "/services/compare-neurosurgeons-hyderabad",
+      },
       { label: "Conditions A-Z", href: "/conditions" },
     ],
   },

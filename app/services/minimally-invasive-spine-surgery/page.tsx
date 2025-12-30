@@ -11,6 +11,8 @@ import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import { getServiceSources } from '../sources';
 import JsonLd from '@/components/JsonLd';
+import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
+import FAQPageSchema from '@/app/_components/FAQPageSchema';
 
 const baseMetadata = makeMetadata({
   title: 'Endoscopic Spine Surgery Hyderabad | Dr. Sayuj Krishnan',
@@ -172,6 +174,14 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
   return (
     <>
       <JsonLd data={gbpSchema} />
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', path: '/' },
+          { name: 'Services', path: '/services' },
+          { name: 'Minimally Invasive Spine Surgery', path: '/services/minimally-invasive-spine-surgery' },
+        ]}
+      />
+      <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/minimally-invasive-spine-surgery`} />
       <div className="min-h-screen bg-white">
         <script
           type="application/ld+json"
@@ -192,10 +202,31 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
           <p className="text-center">
             <strong>Contact:</strong>
             <a href="tel:+919778280044" className="text-blue-600 hover:underline ml-2">+91-9778280044</a> •
-            <a href="mailto:neurospinehyd@drsayuj.com" className="text-blue-600 hover:underline ml-2">neurospinehyd@drsayuj.com</a> •
+            <a href="mailto:hellodr@drsayuj.info" className="text-blue-600 hover:underline ml-2">hellodr@drsayuj.info</a> •
             <a href="/appointments" className="text-blue-600 hover:underline ml-2">Appointments</a>
           </p>
         </section>
+
+        <section className="mb-10 rounded-lg border border-green-200 bg-green-50 p-6">
+          <h2 className="text-2xl font-semibold text-green-800 mb-3">For high-risk or elderly patients</h2>
+          <p className="text-gray-700 mb-3">
+            If you need to avoid general anaesthesia because of cardiac, lung, or metabolic risks, we offer an <strong>awake endoscopic spine pathway</strong> using spinal/epidural blocks with light sedation.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <Link href="/services/awake-spine-surgery-hyderabad" className="rounded-full bg-green-700 px-5 py-2 text-sm font-semibold text-white hover:bg-green-800">
+              See Awake Spine Surgery
+            </Link>
+            <a
+              href="https://wa.me/919778280044"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full border border-green-300 px-5 py-2 text-sm font-semibold text-green-800 hover:bg-green-100"
+            >
+              Share MRI on WhatsApp
+            </a>
+          </div>
+        </section>
+
         <section className="mb-12">
           <h2 className="text-3xl font-bold text-blue-800 mb-6">What is Minimally Invasive Spine Surgery?</h2>
           <div className="prose max-w-none">
@@ -415,7 +446,10 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
           <div className="grid md:grid-cols-2 gap-6">
             <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
               <h3 className="text-xl font-semibold mb-3 text-blue-700">
-                <Link href="/stories/endoscopic-discectomy-same-day-hyderabad" className="hover:text-blue-600">
+                <Link
+                  href="/stories/endoscopic-discectomy-same-day-hyderabad"
+                  className="underline underline-offset-4 decoration-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-sm"
+                >
                   Same-Day Endoscopic Discectomy
                 </Link>
               </h3>
@@ -431,7 +465,10 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
             </div>
             <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
               <h3 className="text-xl font-semibold mb-3 text-blue-700">
-                <Link href="/stories/endoscopic-ulbd-stenosis-hyderabad" className="hover:text-blue-600">
+                <Link
+                  href="/stories/endoscopic-ulbd-stenosis-hyderabad"
+                  className="underline underline-offset-4 decoration-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-sm"
+                >
                   Endoscopic ULBD for Lumbar Stenosis
                 </Link>
               </h3>

@@ -26,7 +26,7 @@ export function middleware(req: NextRequest) {
   if (req.nextUrl.pathname.startsWith('/drafts')) {
     // Check for admin access key in environment
     const adminKey = process.env.ADMIN_ACCESS_KEY || 'admin123'; // Default key for development
-    
+
     // Check for admin key in query params (simple auth)
     const providedKey = req.nextUrl.searchParams.get('key');
     if (providedKey !== adminKey) {
@@ -40,7 +40,9 @@ export function middleware(req: NextRequest) {
 export const config = {
   matcher: [
     // skip static/assets for perf
-    '/((?!_next|assets|images|favicon.ico|robots.txt|sitemap.xml|site.webmanifest).*)',
+    // CRITICAL: Exclude all sitemap files (sitemap.xml, sitemap-0.xml, etc.) and robots.txt
+    // This prevents middleware from intercepting crawler requests
+    '/((?!_next|assets|images|favicon.ico|robots.txt|sitemap.*\\.xml|site.webmanifest).*)',
   ],
 }
 

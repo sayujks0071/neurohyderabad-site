@@ -7,6 +7,8 @@ import SmartImage from '@/components/SmartImage';
 import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import { getServiceSources } from '../sources';
+import FAQPageSchema from '@/app/_components/FAQPageSchema';
+import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
 
 export const metadata = makeMetadata({
   title: 'Peripheral Nerve Surgery Hyderabad | Carpal & Ulnar',
@@ -19,9 +21,27 @@ const ARTICLE_SOURCES = getServiceSources('peripheral-nerve-surgery');
 export default function Page() {
   const url = 'https://www.drsayuj.info/services/peripheral-nerve-surgery';
   const schemas = peripheralNerveSchemas(url);
+  const faqs = [
+    {
+      question: 'How soon can I return to desk work after carpal tunnel surgery?',
+      answer: 'Most patients resume desk work in 7–10 days once sutures are off and discomfort is controlled.',
+    },
+    {
+      question: 'Do ulnar nerve symptoms always need surgery?',
+      answer: 'No. Night splints and activity changes are tried first; surgery is recommended if weakness progresses or studies show significant block.',
+    },
+  ];
 
   return (
     <main id="main" className="prose">
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', path: '/' },
+          { name: 'Services', path: '/services' },
+          { name: 'Peripheral Nerve Surgery', path: '/services/peripheral-nerve-surgery' },
+        ]}
+      />
+      <FAQPageSchema faqs={faqs} pageUrl={url} />
       <h1>Peripheral Nerve Surgery</h1>
       <AuthorByline
         publishedOn="2025-09-01"

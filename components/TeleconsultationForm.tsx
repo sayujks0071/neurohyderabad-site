@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import { useStatsigEvents } from '../src/lib/statsig-events';
+import { trackContactConversion } from '../src/lib/google-ads-conversion';
 
 interface TeleconsultationFormProps {
   pageSlug: string;
@@ -48,7 +49,7 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
       subject,
       body: `Page: ${pageSlug}\nName: ${formState.name}\nPhone: ${formState.phone}\nEmail: ${formState.email}\nCondition: ${formState.condition}\nMessage: ${formState.message}`,
     });
-    return `mailto:neurospinehyd@drsayuj.com?${params.toString()}`;
+    return `mailto:hellodr@drsayuj.info?${params.toString()}`;
   }, [formState, pageSlug, subject]);
 
   const handleChange = (field: keyof FormState) => (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -92,7 +93,14 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
       logAppointmentBooking('appointment_form', service || 'general');
       logContactFormSubmit('appointment_request', true);
       
-      window.location.href = mailtoHref;
+      // Track Google Ads conversion (will handle navigation if URL provided)
+      const conversionTracked = trackContactConversion(mailtoHref);
+      
+      // If conversion function didn't handle navigation, navigate manually
+      if (!conversionTracked) {
+        window.location.href = mailtoHref;
+      }
+      
       setStatus('success');
       setFormState(initialState);
     } catch (error) {

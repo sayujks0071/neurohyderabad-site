@@ -1,11 +1,16 @@
+// #region agent log
+import pkg from "workflow/next";
+const { withWorkflow } = pkg;
+// #endregion
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Enable compression
   compress: true,
-  
+
   // Consistent trailing slash behavior - disabled for API routes
   trailingSlash: false,
-  
+
   // Performance optimizations
   experimental: {
     // Reduce hydration data size for Safari compatibility
@@ -17,7 +22,7 @@ const nextConfig = {
   },
   // Server external packages (moved from experimental)
   serverExternalPackages: ['sharp'],
-  
+
   // Configure images for dynamic OG generation and local images
   images: {
     remotePatterns: [
@@ -52,10 +57,16 @@ const nextConfig = {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
-  
+
   // 301 redirects for legacy URLs to consolidate duplicate content
   async redirects() {
     return [
+      // Fix: Redirect uppercase SITEMAP.XML to lowercase sitemap.xml (for Google Search Console)
+      {
+        source: '/SITEMAP.XML',
+        destination: '/sitemap.xml',
+        permanent: true,
+      },
       // CRITICAL: Apex domain redirect to www (single hop 301)
       {
         source: '/((?!api|_next|images|favicon.ico|robots.txt|sitemap.xml|site.webmanifest).*)',
@@ -135,7 +146,7 @@ const nextConfig = {
       },
     ];
   },
-  
+
   // Security and SEO-friendly defaults with caching
   async headers() {
     return [
@@ -193,4 +204,9 @@ const nextConfig = {
   }
 };
 
-export default nextConfig;// Force deployment Fri Oct  3 12:33:37 IST 2025
+// #region agent log
+// Wrap with withWorkflow to enable workflow directives
+const wrappedConfig = withWorkflow(nextConfig);
+// #endregion
+
+export default wrappedConfig;// Force deployment Fri Oct  3 12:33:37 IST 2025

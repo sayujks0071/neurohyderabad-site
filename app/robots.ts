@@ -33,7 +33,11 @@ export default function robots(): MetadataRoute.Robots {
         disallow: DISALLOW_PATHS,
       },
     ],
-    sitemap: 'https://www.drsayuj.info/sitemap.xml?v=2',
-    host: 'https://www.drsayuj.info',
+    sitemap: [
+      'https://www.drsayuj.info/sitemap.xml',
+      'https://www.drsayuj.info/sitemap-images.xml',
+      'https://www.drsayuj.info/sitemap-videos.xml',
+    ],
+    host: 'www.drsayuj.info',
   };
 }

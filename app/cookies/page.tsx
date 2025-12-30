@@ -73,7 +73,7 @@ export default function CookiePolicyPage() {
             </p>
             <div className="bg-gray-50 p-4 rounded-lg">
               <p className="text-gray-700">
-                <strong>Email:</strong> neurospinehyd@drsayuj.com<br />
+                <strong>Email:</strong> hellodr@drsayuj.info<br />
                 <strong>Phone:</strong> +91 97782 80044<br />
                 <strong>Address:</strong> Yashoda Hospital, Malakpet, Hyderabad
               </p>

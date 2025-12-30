@@ -4,9 +4,9 @@ import { Resend } from 'resend';
 const resend = new Resend(process.env.RESEND_API_KEY || 're_YJVHwSAs_PxKJHrCFidkmuFAkvNuQL1by');
 
 // Email configuration
-const FROM_EMAIL = 'Dr. Sayuj Krishnan <noreply@drsayuj.info>';
-const TO_EMAIL = 'dr.sayujkrishnan@gmail.com';
-const ADMIN_EMAIL = 'neurospinehyd@drsayuj.com';
+const FROM_EMAIL = 'Dr. Sayuj Krishnan <hellodr@drsayuj.info>';
+const TO_EMAIL = 'hellodr@drsayuj.info';
+const ADMIN_EMAIL = 'hellodr@drsayuj.info';
 
 // Email templates
 export const emailTemplates = {
@@ -128,8 +128,50 @@ export const emailTemplates = {
         <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0; color: #64748b; font-size: 14px; text-align: center;">
           <p>Dr. Sayuj Krishnan - Neurosurgeon</p>
           <p>Yashoda Hospital, Malakpet, Hyderabad</p>
-          <p>Phone: +91 9778280044 | Email: neurospinehyd@drsayuj.com</p>
+          <p>Phone: +91 9778280044 | Email: hellodr@drsayuj.info</p>
           <p><a href="https://www.drsayuj.info">www.drsayuj.info</a></p>
+        </div>
+      </div>
+    `
+  }),
+
+  newsletterSubscription: (data: {
+    email: string;
+    name?: string;
+  }) => ({
+    subject: 'Welcome to Dr. Sayuj Krishnan\'s Health Insights',
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <div style="text-align: center; margin-bottom: 30px;">
+          <h1 style="color: #2563eb; margin: 0;">Dr. Sayuj Krishnan</h1>
+          <p style="color: #64748b; margin: 5px 0;">Neurosurgeon - Hyderabad</p>
+        </div>
+        
+        <div style="background: #f0f9ff; padding: 30px; border-radius: 12px; margin: 20px 0; border-left: 4px solid #2563eb;">
+          <h2 style="color: #1e40af; margin-top: 0;">Thank you for subscribing!</h2>
+          <p>Dear ${data.name || 'Subscriber'},</p>
+          <p>Thank you for subscribing to our health insights newsletter. You'll now receive:</p>
+          <ul style="color: #374151;">
+            <li>Expert neurosurgical insights and patient education</li>
+            <li>Latest advances in minimally invasive spine surgery</li>
+            <li>Recovery tips and health maintenance guides</li>
+            <li>Updates on new treatment options and technologies</li>
+          </ul>
+        </div>
+        
+        <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0;">
+          <h3 style="color: #1e40af; margin-top: 0;">What to Expect</h3>
+          <p style="color: #374151;">We send valuable health information monthly, focusing on brain and spine health, recovery strategies, and patient success stories.</p>
+        </div>
+        
+        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0; color: #64748b; font-size: 14px; text-align: center;">
+          <p>Dr. Sayuj Krishnan - Neurosurgeon</p>
+          <p>Yashoda Hospital, Malakpet, Hyderabad</p>
+          <p>Phone: +91 9778280044 | Email: hellodr@drsayuj.info</p>
+          <p><a href="https://www.drsayuj.info">www.drsayuj.info</a></p>
+          <p style="margin-top: 20px; font-size: 12px;">
+            <a href="https://www.drsayuj.info/newsletter/unsubscribe?email=${encodeURIComponent(data.email)}">Unsubscribe</a>
+          </p>
         </div>
       </div>
     `
@@ -221,7 +263,7 @@ export const emailTemplates = {
           }
 
           <div style="text-align: center; color: #475569; font-size: 14px;">
-            <p style="margin: 0;">Questions? Call +91 9778280044 or email neurospinehyd@drsayuj.com</p>
+            <p style="margin: 0;">Questions? Call +91 9778280044 or email hellodr@drsayuj.info</p>
             <p style="margin: 8px 0 0;">Yashoda Hospital, Malakpet, Hyderabad</p>
           </div>
         </div>
@@ -338,6 +380,43 @@ export const sendPreAppointmentBriefingEmail = async (data: {
       success: false,
       error: error instanceof Error ? error.message : 'Unknown error',
     };
+  }
+};
+
+export const sendNewsletterSubscriptionEmail = async (data: {
+  email: string;
+  name?: string;
+}) => {
+  try {
+    const template = emailTemplates.newsletterSubscription(data);
+    
+    // Send confirmation to subscriber
+    const result = await resend.emails.send({
+      from: FROM_EMAIL,
+      to: data.email,
+      subject: template.subject,
+      html: template.html,
+    });
+
+    // Also notify admin (optional)
+    await resend.emails.send({
+      from: FROM_EMAIL,
+      to: ADMIN_EMAIL,
+      subject: `New Newsletter Subscription - ${data.email}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #2563eb;">New Newsletter Subscription</h2>
+          <p><strong>Email:</strong> ${data.email}</p>
+          ${data.name ? `<p><strong>Name:</strong> ${data.name}</p>` : ''}
+          <p><strong>Date:</strong> ${new Date().toLocaleString()}</p>
+        </div>
+      `
+    });
+
+    return { success: true, messageId: result.data?.id };
+  } catch (error) {
+    console.error('Error sending newsletter subscription email:', error);
+    return { success: false, error: error instanceof Error ? error.message : 'Unknown error' };
   }
 };
 

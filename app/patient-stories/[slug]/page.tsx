@@ -138,9 +138,9 @@ export default async function PatientStoryPage({ params }: PageProps) {
       <nav className="bg-gray-50 py-4">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <ol className="flex items-center space-x-2 text-sm text-gray-600">
-            <li><Link href="/" className="hover:text-blue-600">Home</Link></li>
+            <li><Link href="/" className="underline underline-offset-2 decoration-blue-300 hover:text-blue-700 hover:decoration-blue-500">Home</Link></li>
             <li>/</li>
-            <li><Link href="/patient-stories" className="hover:text-blue-600">Patient Stories</Link></li>
+            <li><Link href="/patient-stories" className="underline underline-offset-2 decoration-blue-300 hover:text-blue-700 hover:decoration-blue-500">Patient Stories</Link></li>
             <li>/</li>
             <li className="text-gray-900 font-medium">{story.title}</li>
           </ol>

@@ -92,7 +92,7 @@ export default function MedicalDisclaimerPage() {
                 </p>
                 <ul className="space-y-2">
                   <li><strong>Phone:</strong> <a href="tel:+919778280044" className="text-blue-600 hover:underline">+91 9778280044</a></li>
-                  <li><strong>Email:</strong> <a href="mailto:neurospinehyd@drsayuj.com" className="text-blue-600 hover:underline">neurospinehyd@drsayuj.com</a></li>
+                  <li><strong>Email:</strong> <a href="mailto:hellodr@drsayuj.info" className="text-blue-600 hover:underline">hellodr@drsayuj.info</a></li>
                   <li><strong>Appointments:</strong> <a href="/appointments" className="text-blue-600 hover:underline">Book Online</a></li>
                 </ul>
               </div>

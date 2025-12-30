@@ -64,13 +64,26 @@ export default function PhysicianSchema() {
       {
         "@type": "Physician",
         "@id": `${SITE_URL}/#physician`,
-        "name": "Dr Sayuj Krishnan",
-        "alternateName": "Dr Sayuj",
+        "name": "Dr Sayuj Krishnan S",
+        "alternateName": ["Dr Sayuj Krishnan", "Dr Sayuj"],
+        "givenName": "Sayuj",
+        "familyName": "Krishnan",
+        "additionalName": "S",
+        "honorificPrefix": "Dr",
         "description": "Premier neurosurgeon with over 9 years of experience specializing in minimally invasive brain & spine surgery, awake brain surgery, and robotic neurosurgery. Fellowship-trained with German training in endoscopic spine surgery.",
+        "disambiguatingDescription": "Hyderabad (India)-based neurosurgeon and spine surgeon at Yashoda Hospital, Malakpet. Not associated with US-based internal medicine physician Dr. Sayuj Paudel.",
         "url": SITE_URL,
         "image": `${SITE_URL}/images/og-default.jpg`,
-        "telephone": "+919778280044",
-        "email": "neurospinehyd@drsayuj.com",
+        "telephone": "+91 97782 80044",
+        "email": "hellodr@drsayuj.info",
+        "identifier": [
+          {
+            "@type": "PropertyValue",
+            "propertyID": "TCMC Registration",
+            "value": "47973"
+          }
+        ],
+        "medicalLicense": "TCMC Registration 47973 (Travancore-Cochin Medical Council)",
         "additionalProperty": [
           {
             "@type": "PropertyValue",
@@ -101,8 +114,9 @@ export default function PhysicianSchema() {
         ],
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "Room No 317, OPD Block",
-          "addressLocality": "Malakpet",
+          "streetAddress": "Room No 317, OPD Block, Yashoda Hospital, Malakpet",
+          "addressLocality": "Hyderabad",
+          "addressNeighborhood": "Malakpet",
           "addressRegion": "Telangana",
           "postalCode": "500036",
           "addressCountry": "IN"
@@ -285,18 +299,15 @@ export default function PhysicianSchema() {
             "addressCountry": "IN"
           }
         },
+        "knowsLanguage": ["English", "Hindi", "Telugu", "Malayalam", "Tamil"],
         "sameAs": [
           "https://www.yashodahospitals.com/doctor/dr-sayuj-krishnan/",
           "https://www.practo.com/hyderabad/doctor/dr-sayuj-krishnan-neurosurgeon",
           "https://www.justdial.com/Hyderabad/Dr-Sayuj-Krishnan-Neurosurgeon-Malakpet",
-          "https://www.linkedin.com/in/dr-sayuj-krishnan",
-          "https://www.researchgate.net/profile/Dr-Sayuj-Krishnan",
+          "https://in.linkedin.com/in/dr-sayuj-krishnan-s-275baa66",
           "https://g.co/kgs/9366939683880052414",
           "https://www.google.com/maps/place/Dr+Sayuj+Krishnan",
-          "https://www.linkedin.com/posts/dr-sayuj-krishnan-s-275baa66_had-the-privilege-of-demonstrating-full-endoscopic-activity-7379487709532209152-ngkQ",
-          "https://www.linkedin.com/posts/dr-sayuj-krishnan-s-275baa66_recent-talk-on-full-endoscopic-spine-surgery-activity-7028204194725597184-rcmt",
-          "https://www.yashodahospitals.com/events/cervical-spine-boot-camp-cadaveric-workshop/",
-          "https://www.researchgate.net/publication/389909423_Consciousness_Information_And_Emergent_Spacetime_Biological_Counter-Curvature_and_Cross-_Domain_Clues_for_a_Mind-_Geometry_Coupling"
+          "https://www.youtube.com/channel/UCc-KQY7cjePPy0p49W3SZFQ"
         ]
       },
       {
@@ -305,12 +316,13 @@ export default function PhysicianSchema() {
         "name": "Dr Sayuj Krishnan - Neurosurgeon in Hyderabad",
         "description": "Expert neurosurgeon specializing in endoscopic spine surgery and brain surgery in Hyderabad",
         "url": SITE_URL,
-        "telephone": "+919778280044",
-        "email": "neurospinehyd@drsayuj.com",
+        "telephone": "+91 97782 80044",
+        "email": "hellodr@drsayuj.info",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "Room No 317, OPD Block",
-          "addressLocality": "Malakpet",
+          "streetAddress": "Room No 317, OPD Block, Yashoda Hospital, Malakpet",
+          "addressLocality": "Hyderabad",
+          "addressNeighborhood": "Malakpet",
           "addressRegion": "Telangana",
           "postalCode": "500036",
           "addressCountry": "IN"

@@ -178,7 +178,7 @@ Requirements:
 - Organize content with H2/H3 sections and short paragraphs
 - Include at least one bulleted list of practical tips
 - Add a "When to contact a neurosurgeon" callout
-- Close with a clear CTA to call +91-9778280044 or email neurospinehyd@drsayuj.com
+- Close with a clear CTA to call +91-9778280044 or email hellodr@drsayuj.info
 - Cite insights as "Based on our medical library" instead of footnotes
 
 Use this supporting information from verified documents:

@@ -2,7 +2,7 @@ import type { SVGProps } from "react";
 
 export const CONTACT_INFO = {
   phone: "+91 9778280044",
-  email: "neurospinehyd@drsayuj.com",
+  email: "hellodr@drsayuj.info",
   address:
     "Room No 317, 3rd Floor, OPD Block, Yashoda Hospital, Near New Market Metro station, Malakpet, Hyderabad, Telangana, India - 500036",
   mapsLink:

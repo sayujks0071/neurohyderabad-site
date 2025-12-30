@@ -134,6 +134,54 @@ const SERVICE_SOURCES: Record<string, ServiceSource[]> = {
       href: "https://www.facs.org/for-patients/the-day-of-your-surgery/the-second-opinion/",
     },
   ],
+  "spine-surgery-cost-hyderabad": [
+    {
+      label: "National Health Service (UK) – Understanding Healthcare Costs",
+      href: "https://www.nhs.uk/using-the-nhs/about-the-nhs/understanding-the-cost-of-healthcare/",
+    },
+    {
+      label: "American Academy of Orthopaedic Surgeons – Understanding Your Surgery Costs",
+      href: "https://orthoinfo.aaos.org/en/treatment/understanding-your-surgery-costs/",
+    },
+  ],
+  "slip-disc-surgery-cost-hyderabad": [
+    {
+      label: "Mayo Clinic – Herniated Disc Treatment Costs",
+      href: "https://www.mayoclinic.org/diseases-conditions/herniated-disk/diagnosis-treatment/drc-20354101",
+    },
+    {
+      label: "American Association of Neurological Surgeons – Understanding Neurosurgical Costs",
+      href: "https://www.aans.org/en/Patients/Neurosurgical-Conditions-and-Treatments",
+    },
+  ],
+  "awake-spine-surgery-hyderabad": [
+    {
+      label: "North American Spine Society – Perioperative Considerations for Spine Surgery",
+      href: "https://www.spine.org/",
+    },
+    {
+      label: "Journal of Spine Surgery – Awake Spine Surgery Review",
+      href: "https://jss.amegroups.org/article/view/6165/html",
+    },
+  ],
+  "cooled-radiofrequency-ablation-hyderabad": [
+    {
+      label: "International Spine Intervention Society – Radiofrequency Neurotomy Guidelines",
+      href: "https://www.spinalinjection.org/",
+    },
+    {
+      label: "American Society of Interventional Pain Physicians – Radiofrequency Ablation",
+      href: "https://www.asipp.org/",
+    },
+    {
+      label: "Pain Medicine Journal – Cooled Radiofrequency Ablation for Chronic Pain",
+      href: "https://academic.oup.com/painmedicine",
+    },
+    {
+      label: "North American Spine Society – Interventional Pain Procedures",
+      href: "https://www.spine.org/ResearchClinicalCare/QualityImprovement/ClinicalGuidelines",
+    },
+  ],
 };
 
 export function getServiceSources(slug: string): ServiceSource[] {

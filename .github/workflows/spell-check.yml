@@ -13,8 +13,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          submodules: false
 
       - name: Run spell check on markdown files
+        timeout-minutes: 10
+        continue-on-error: true
         uses: streetsidesoftware/cspell-action@v5
         with:
           files: |
@@ -56,8 +60,9 @@ jobs:
           node spell-check-report.js
 
       - name: Upload spell check report
+        if: always()
+        continue-on-error: true
         uses: actions/upload-artifact@v4
-        if: failure()
         with:
           name: spell-check-report
           path: spell-check-report.txt

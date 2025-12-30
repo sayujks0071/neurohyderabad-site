@@ -75,7 +75,7 @@ export default function DiseaseGuidesStructuredData() {
         "addressCountry": "IN"
       },
       "telephone": "+91-9778280044",
-      "email": "neurospinehyd@drsayuj.com",
+      "email": "hellodr@drsayuj.info",
       "url": "https://www.drsayuj.info"
     },
     "breadcrumb": {

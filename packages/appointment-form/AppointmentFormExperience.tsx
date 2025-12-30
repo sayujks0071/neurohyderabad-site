@@ -8,6 +8,7 @@ import Confirmation from "./Confirmation";
 import Faq from "./Faq";
 import LoadingOverlay from "./LoadingOverlay";
 import MapSection from "./MapSection";
+import { trackConversionOnly } from "@/src/lib/google-ads-conversion";
 
 type ViewState = "form" | "confirmation";
 
@@ -47,6 +48,9 @@ function AppointmentFormContent({
       setBookingData(payload.booking);
       setConfirmationMessage(payload.confirmationMessage);
 
+      // Track Google Ads conversion for successful appointment booking
+      trackConversionOnly();
+
       if (payload.emailResult?.success) {
         addToast("Confirmation email simulated successfully.", "success");
       } else if (payload.emailResult?.error) {
@@ -57,7 +61,8 @@ function AppointmentFormContent({
         addToast("AI generated a personalised confirmation.", "info");
       }
 
-      setView("confirmation");
+      // Redirect to thank you page after successful submission
+      window.location.href = "/appointments/thank-you";
     } catch (error) {
       console.error("[appointments] Failed to submit booking:", error);
       addToast(

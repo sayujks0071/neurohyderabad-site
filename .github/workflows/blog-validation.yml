@@ -1,0 +1,93 @@
+name: Blog Post Validation
+
+on:
+  pull_request:
+    paths:
+      - 'app/blog/**'
+      - 'scripts/**'
+  push:
+    branches:
+      - main
+    paths:
+      - 'app/blog/**'
+
+permissions:
+  contents: read
+
+jobs:
+  validate-blog-posts:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Check for example/test/draft blog posts
+        run: |
+          node scripts/remove-example-blog-posts.js --dry-run
+          
+          # Exit with error if example posts are found
+          if [ $? -ne 0 ]; then
+            echo "❌ Example/test/draft blog posts found!"
+            echo "Please remove these posts before merging."
+            exit 1
+          fi
+
+      - name: Validate blog post structure
+        run: |
+          # Check for any new blog posts in the PR
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            echo "Checking for new blog posts in PR..."
+            git diff --name-only origin/${{ github.base_ref }}...HEAD | grep "^app/blog/" | while read file; do
+              if [[ "$file" =~ app/blog/([^/]+)/page\.tsx$ ]]; then
+                slug="${BASH_REMATCH[1]}"
+                echo "Validating blog post: $slug"
+                node scripts/validate-blog-post.js "$slug" || exit 1
+              fi
+            done
+          fi
+
+      - name: Check blog listing page filters
+        run: |
+          # Verify that blog page.tsx has filtering logic
+          if ! grep -q "FORBIDDEN_KEYWORDS\|isValidPost" app/blog/page.tsx; then
+            echo "⚠️  Warning: Blog listing page may not filter example posts"
+          else
+            echo "✅ Blog listing page has filtering logic"
+          fi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

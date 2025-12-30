@@ -1,7 +1,14 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Merriweather } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
-import Header from "./components/Header";
+
+declare global {
+  interface Window {
+    dataLayer?: unknown[];
+  }
+}
+import Header from "./components/HeaderRefactored";
 import Footer from "./components/Footer";
 import WebsiteSchema from "./components/schemas/WebsiteSchema";
 import PhysicianSchema from "./components/schemas/PhysicianSchema";
@@ -10,6 +17,7 @@ import TrustStrip from "./_components/TrustStrip";
 import ClientAnalytics from "./_components/ClientAnalytics";
 import StickyCTA from "./_components/StickyCTA";
 import ClientOnlyWrapper from "./_components/ClientOnlyWrapper";
+import HypertuneProvider from "./providers/hypertune-provider";
 import { SITE_URL } from "../src/lib/seo";
 
 const inter = Inter({
@@ -18,15 +26,25 @@ const inter = Inter({
   display: "swap",
   preload: true,
   fallback: ['system-ui', 'arial'],
+  weight: ['400', '500', '600', '700'],
+});
+
+const merriweather = Merriweather({
+  subsets: ["latin"],
+  variable: "--font-merriweather",
+  display: "swap",
+  weight: ['400', '700'],
+  fallback: ['Georgia', 'serif'],
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Dr. Sayuj Krishnan | Best Neurosurgeon in Hyderabad | Brain & Spine Surgery",
-    template: "%s | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad"
+    default: "Neurosurgeon & Endoscopic Spine Specialist Hyderabad | Dr. Sayuj Krishnan S",
+    template: "%s | Dr. Sayuj Krishnan S"
   },
-  description: "Expert neurosurgeon Dr. Sayuj Krishnan in Hyderabad specializing in endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures. Same-day discharge available. Book consultation at Yashoda Hospital Malakpet.",
+  description:
+    "German-trained neurosurgeon in Hyderabad for minimally invasive spine and brain surgery with same-day discharge at Yashoda Hospital, Malakpet.",
   keywords: [
     "neurosurgeon hyderabad",
     "brain surgeon hyderabad", 
@@ -44,9 +62,9 @@ export const metadata: Metadata = {
     "neurosurgery hyderabad",
     "best neurosurgeon hyderabad"
   ],
-  authors: [{ name: "Dr. Sayuj Krishnan", url: SITE_URL }],
-  creator: "Dr. Sayuj Krishnan",
-  publisher: "Dr. Sayuj Krishnan",
+  authors: [{ name: "Dr. Sayuj Krishnan S", url: SITE_URL }],
+  creator: "Dr. Sayuj Krishnan S",
+  publisher: "Dr. Sayuj Krishnan S",
   formatDetection: {
     email: false,
     address: false,
@@ -59,7 +77,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Dr. Sayuj Krishnan | Best Neurosurgeon in Hyderabad | Brain & Spine Surgery",
+    title: "Neurosurgeon & Endoscopic Spine Specialist Hyderabad | Dr. Sayuj Krishnan S",
     description: "Expert neurosurgeon Dr. Sayuj Krishnan in Hyderabad specializing in endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures. Same-day discharge available.",
     url: SITE_URL,
     siteName: "Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
@@ -77,7 +95,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dr. Sayuj Krishnan | Best Neurosurgeon in Hyderabad",
+    title: "Dr. Sayuj Krishnan S | Best Neurosurgeon in Hyderabad",
     description: "Expert neurosurgeon specializing in endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures in Hyderabad.",
     images: ["/images/og-default.jpg"],
     site: "@drsayuj",
@@ -124,107 +142,19 @@ export const viewport: Viewport = {
   themeColor: "#0B2E4E",
 };
 
-import EngagementTracker from './_components/EngagementTracker';
-import ExitIntentHandler from './_components/ExitIntentHandler';
-import ConversionFunnelTracker from './_components/ConversionFunnelTracker';
-import TrustSignalViewportTracker from './_components/TrustSignalViewportTracker';
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+      <html lang="en">
       <head>
-            {/* Critical CSS inlined for fastest rendering */}
-            <style dangerouslySetInnerHTML={{
-              __html: `
-                *,*::before,*::after{box-sizing:border-box}
-                html{line-height:1.15;-webkit-text-size-adjust:100%}
-                body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif}
-                .min-h-screen{min-height:100vh}
-                .container{margin-left:auto;margin-right:auto;padding-left:1rem;padding-right:1rem}
-                @media (min-width:640px){.container{max-width:640px}}
-                @media (min-width:768px){.container{max-width:768px}}
-                @media (min-width:1024px){.container{max-width:1024px}}
-                @media (min-width:1280px){.container{max-width:1280px}}
-                @media (min-width:1536px){.container{max-width:1536px}}
-                .home-hero{background:linear-gradient(90deg,#2563eb 0%,#1e3a8a 100%);color:#f8fafc;padding-top:80px;padding-bottom:80px}
-                .home-hero__title{font-size:2.25rem;font-weight:700;margin-bottom:1.5rem;line-height:1.1;color:#f8fafc}
-                .home-hero__subtitle{display:block;font-size:1.875rem;color:#dbeafe}
-                .home-hero__lead{color:rgba(226,238,255,0.96);font-weight:500;line-height:1.55;max-width:40rem;margin:0 auto 1.5rem auto}
-                .bg-white{background-color:#ffffff}
-                .text-blue-600{color:#2563eb}
-                .px-8{padding-left:2rem;padding-right:2rem}
-                .py-4{padding-top:1rem;padding-bottom:1rem}
-                .rounded-full{border-radius:9999px}
-                .text-lg{font-size:1.125rem;line-height:1.75rem}
-                .font-semibold{font-weight:600}
-                .hover\\:bg-gray-100:hover{background-color:#f3f4f6}
-                .transition-colors{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:150ms}
-                .inline-block{display:inline-block}
-                .grid{display:grid}
-                .lg\\:grid-cols-2{grid-template-columns:repeat(1,minmax(0,1fr))}
-                @media (min-width:1024px){.lg\\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}}
-                .gap-12{gap:3rem}
-                .items-center{align-items:center}
-                .text-center{text-align:center}
-                .lg\\:text-left{text-align:left}
-                @media (min-width:1024px){.lg\\:text-left{text-align:left}}
-                .mb-6{margin-bottom:1.5rem}
-                .mb-4{margin-bottom:1rem}
-                .ml-4{margin-left:1rem}
-                @media (min-width:768px){
-                  .home-hero__title{font-size:3.75rem}
-                  .home-hero__subtitle{font-size:3rem}
-                  .home-hero__lead{font-size:1.5rem}
-                }
-                .max-w-md{max-width:28rem}
-                .mx-auto{margin-left:auto;margin-right:auto}
-                .w-32{width:8rem}
-                .h-32{height:8rem}
-                .relative{position:relative}
-                .overflow-hidden{overflow:hidden}
-                .shadow-lg{box-shadow:0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05)}
-                .object-cover{object-fit:cover}
-                .w-full{width:100%}
-                .h-full{height:100%}
-                .text-blue-800{color:#1e40af}
-                .text-blue-100{color:#dbeafe}
-                .bg-green-600{background-color:#16a34a}
-                .hover\\:bg-green-700:hover{background-color:#15803d}
-                /* Critical image optimization */
-                img{max-width:100%;height:auto}
-                .object-cover{object-fit:cover}
-                .rounded-full{border-radius:9999px}
-              `
-            }} />
-            
-            {/* Preload critical resources for fastest LCP */}
-            <link rel="preload" href="https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-            
-            {/* Critical resource hints for performance - only essential ones */}
-            <link rel="preconnect" href="https://fonts.googleapis.com" />
-            <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-            
-            {/* DNS prefetch for external domains - only critical ones */}
-            <link rel="dns-prefetch" href="//www.googletagmanager.com" />
-            
-            {/* Additional performance hints */}
-            <meta name="format-detection" content="telephone=no" />
-            <meta name="mobile-web-app-capable" content="yes" />
-            <meta name="apple-mobile-web-app-capable" content="yes" />
-            <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <link rel="dns-prefetch" href="https://edge.hypertune.com" />
+        <link rel="preconnect" href="https://edge.hypertune.com" crossOrigin="anonymous" />
       </head>
-      <body className={`${inter.variable} antialiased`}>
-        <ClientOnlyWrapper>
-          <ClientAnalytics />
-          <EngagementTracker trackTime={true} trackMilestones={true} />
-          <ExitIntentHandler showOffer={false} />
-          <ConversionFunnelTracker />
-          <TrustSignalViewportTracker />
-        </ClientOnlyWrapper>
+      <body className={`${inter.variable} ${merriweather.variable} antialiased`}>
+        <ClientAnalytics />
         <WebsiteSchema />
         <PhysicianSchema />
         <HospitalSchema />
@@ -237,13 +167,16 @@ export default function RootLayout({
         </a>
         <Header />
         <TrustStrip />
-        <main id="main-content" tabIndex={-1} role="main">
-          {children}
-        </main>
+        <HypertuneProvider>
+          <main id="main-content" tabIndex={-1} role="main">
+            {children}
+          </main>
+        </HypertuneProvider>
         <Footer />
         <ClientOnlyWrapper>
           <StickyCTA />
         </ClientOnlyWrapper>
+        {process.env.VERCEL ? <Analytics /> : null}
       </body>
     </html>
   );

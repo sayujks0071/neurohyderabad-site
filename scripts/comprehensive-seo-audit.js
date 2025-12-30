@@ -41,7 +41,6 @@ function makeRequest(url) {
         'User-Agent': 'SEO-Audit-Bot/1.0',
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
         'Accept-Language': 'en-US,en;q=0.5',
-        'Accept-Encoding': 'gzip, deflate',
         'Connection': 'keep-alive',
       }
     };
@@ -74,11 +73,16 @@ async function parseSitemap() {
   console.log('🔍 Parsing sitemap...');
   
   try {
-    const sitemapIndex = await makeRequest(`${SITE_URL}/sitemap.xml`);
-    const sitemapContent = await makeRequest(`${SITE_URL}/sitemap-0.xml`);
+    // Primary sitemap is a single urlset at /sitemap.xml (no index sitemap)
+    const sitemap = await makeRequest(`${SITE_URL}/sitemap.xml`);
+    const fallback = await makeRequest(`${SITE_URL}/sitemap-0.xml`).catch(() => null);
+
+    const xmlSource = sitemap.statusCode === 200 && sitemap.body.includes('<urlset')
+      ? sitemap.body
+      : fallback?.body || '';
     
     const urls = [];
-    const urlMatches = sitemapContent.body.match(/<loc>(.*?)<\/loc>/g);
+    const urlMatches = xmlSource.match(/<loc>(.*?)<\/loc>/g);
     
     if (urlMatches) {
       urlMatches.forEach(match => {
@@ -90,8 +94,8 @@ async function parseSitemap() {
     }
     
     auditResults.discovery = {
-      sitemapIndex: sitemapIndex.statusCode === 200,
-      sitemapContent: sitemapContent.statusCode === 200,
+      sitemapIndex: sitemap.statusCode === 200,
+      sitemapContent: Boolean(urlMatches && urlMatches.length),
       totalUrls: urls.length,
       urls: urls.slice(0, MAX_PAGES)
     };

@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
+    "postbuild": "next-sitemap && node scripts/generate-image-sitemap.js && node scripts/generate-video-sitemap.js",
     "start": "next start",
     "promote:draft": "ts-node scripts/promote-draft.ts",
     "check:schemas": "ts-node scripts/check-schemas.ts",
@@ -15,26 +16,47 @@
     "seo:report": "node scripts/seo/report.mjs",
     "seo:all": "npm run seo:audit && npm run seo:report",
     "verify:deployment": "node scripts/verify-deployment.js",
-    "reindex:gemini": "ts-node scripts/reindex-gemini-rag.ts"
+    "check:sitemap": "node scripts/check-sitemap.js",
+    "reindex:gemini": "ts-node scripts/reindex-gemini-rag.ts",
+    "new:blog": "ts-node scripts/new-blog.ts",
+    "normalize:blog": "ts-node scripts/normalize-blog-metadata.ts",
+    "blog:auto-publish": "ts-node scripts/auto-blog-scheduler.ts",
+    "blog:generate-today": "ts-node scripts/auto-blog-scheduler.ts --generate-today",
+    "hypertune:generate": "npx hypertune",
+    "hypertune:verify": "./scripts/verify-hypertune-setup.sh",
+    "hypertune:test-api": "./scripts/test-hypertune-api.sh",
+    "hypertune:check-schema": "./scripts/check-hypertune-schema.sh",
+    "ai-gateway:setup": "./scripts/setup-ai-gateway.sh",
+    "ai-gateway:pull": "vercel env pull"
   },
   "dependencies": {
+    "@ai-sdk/openai": "^2.0.77",
+    "@ai-sdk/react": "^2.0.106",
+    "@flags-sdk/hypertune": "^0.3.2",
     "@google/genai": "^0.6.0",
     "@hookform/resolvers": "^3.6.0",
     "@statsig/js-client": "^3.25.5",
     "@statsig/react-bindings": "^3.25.5",
     "@statsig/session-replay": "^3.25.5",
     "@statsig/web-analytics": "^3.25.5",
+    "@vercel/analytics": "^1.6.1",
+    "@vercel/edge-config": "^1.4.3",
     "@vercel/og": "^0.8.5",
+    "ai": "^5.0.106",
     "critters": "^0.0.23",
+    "flags": "^4.0.2",
+    "hypertune": "^2.10.1",
     "inngest": "^3.44.2",
     "lucide-react": "^0.544.0",
-    "next": "15.5.3",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
+    "next": "15.5.9",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
     "react-hook-form": "^7.52.2",
     "react-markdown": "^10.1.0",
     "resend": "^6.2.2",
+    "server-only": "^0.0.1",
     "web-vitals": "^5.1.0",
+    "workflow": "^4.0.1-beta.32",
     "yup": "^1.4.0"
   },
   "devDependencies": {
@@ -45,6 +67,7 @@
     "@types/react-dom": "^19",
     "eslint-config-next": "^15.5.4",
     "eslint-plugin-jsx-a11y": "^6.8.0",
+    "gray-matter": "^4.0.3",
     "lighthouse": "^13.0.1",
     "linkinator": "^6.1.4",
     "next-seo": "^6.0.0",
@@ -55,6 +78,12 @@
     "tailwindcss": "^4",
     "ts-node": "^10.9.2",
     "typescript": "^5",
-    "vercel": "^48.1.6"
+    "vercel": "^48.10.10"
+  },
+  "overrides": {
+    "esbuild": "^0.25.12",
+    "path-to-regexp": "^6.3.0",
+    "undici": "^5.28.7",
+    "tmp": "^0.2.4"
   }
 }

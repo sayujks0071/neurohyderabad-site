@@ -614,7 +614,7 @@ const CTA_LINKS = [
     variant: 'secondary' as const,
   },
   {
-    href: 'mailto:neurospinehyd@drsayuj.com',
+    href: 'mailto:hellodr@drsayuj.info',
     label: 'Email Care Team',
     variant: 'outline' as const,
   },
@@ -633,7 +633,7 @@ export async function generateMetadata({ params }: GenerateMetadataProps): Promi
     return {};
   }
 
-  const title = `${entry.name} | Dr. Sayuj Krishnan`;
+  const title = `${entry.name} | Dr. Sayuj Krishnan S`;
 
   return {
     title,
@@ -649,7 +649,7 @@ export async function generateMetadata({ params }: GenerateMetadataProps): Promi
       title,
       description: entry.metaDescription,
       url: entry.canonical,
-      siteName: 'Dr. Sayuj Krishnan - Neurosurgeon Hyderabad',
+      siteName: 'Dr. Sayuj Krishnan S - Neurosurgeon Hyderabad',
       type: 'article',
     },
     twitter: {

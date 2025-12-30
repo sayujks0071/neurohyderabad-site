@@ -106,9 +106,9 @@ export default function ReturnToWorkAfterEndoscopicDiscectomyPage() {
         {/* Breadcrumbs */}
         <nav className="mb-6" aria-label="Breadcrumb">
           <ol className="flex items-center space-x-2 text-sm text-gray-600">
-            <li><Link href="/" className="hover:text-blue-600">Home</Link></li>
+            <li><Link href="/" className="underline underline-offset-2 decoration-blue-300 hover:text-blue-700 hover:decoration-blue-500">Home</Link></li>
             <li className="text-gray-400">/</li>
-            <li><Link href="/blog/" className="hover:text-blue-600">Blog</Link></li>
+            <li><Link href="/blog/" className="underline underline-offset-2 decoration-blue-300 hover:text-blue-700 hover:decoration-blue-500">Blog</Link></li>
             <li className="text-gray-400">/</li>
             <li className="text-gray-900 font-medium">Return to Work After Endoscopic Discectomy</li>
           </ol>

@@ -23,8 +23,8 @@ export default function LocalNAP() {
           +91 9778280044
         </a>{" "}
         · Email:{" "}
-        <a className="text-blue-700 underline" href="mailto:neurospinehyd@drsayuj.com">
-          neurospinehyd@drsayuj.com
+        <a className="text-blue-700 underline" href="mailto:hellodr@drsayuj.info">
+          hellodr@drsayuj.info
         </a>
       </p>
       <div className="mt-4 flex flex-wrap gap-3">

@@ -38,7 +38,7 @@ export default function SciaticaTreatmentPage() {
           <p className="text-center">
             <strong>Contact:</strong>
             <a href="tel:+919778280044" className="text-blue-600 hover:underline ml-2">+91-9778280044</a> •
-            <a href="mailto:neurospinehyd@drsayuj.com" className="text-blue-600 hover:underline ml-2">neurospinehyd@drsayuj.com</a> •
+            <a href="mailto:hellodr@drsayuj.info" className="text-blue-600 hover:underline ml-2">hellodr@drsayuj.info</a> •
             <Link href="/appointments" className="text-blue-600 hover:underline ml-2">Appointments</Link>
           </p>
           <div className="mt-4 text-center">
@@ -129,6 +129,43 @@ export default function SciaticaTreatmentPage() {
           <NAP />
         </section>
       </div>
+      
+      {/* FAQ Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What is the best treatment for sciatica?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "The best treatment for sciatica depends on severity and duration. Most patients start with conservative treatment including physical therapy, medications, and epidural injections. If symptoms persist after 6+ weeks, endoscopic discectomy may be recommended for faster recovery and less pain compared to open surgery."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How long does sciatica pain last?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Acute sciatica typically improves within 4-6 weeks with conservative treatment. Chronic sciatica (lasting 3+ months) may require surgical intervention. Early treatment and proper management can prevent chronic symptoms and improve outcomes."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "When should I see a doctor for sciatica?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "See a doctor immediately if you experience severe pain, progressive weakness, loss of bladder or bowel control, or if pain persists after 6 weeks of self-care. Dr. Sayuj Krishnan provides expert evaluation and personalized treatment plans for sciatica in Hyderabad."
+                }
+              }
+            ]
+          })
+        }}
+      />
     </div>
   );
 }

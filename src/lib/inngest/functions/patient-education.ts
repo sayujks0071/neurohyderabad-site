@@ -79,7 +79,7 @@ export const patientEducationDelivery = inngest.createFunction(
           doctorName: "Dr. Sayuj Krishnan",
           contactInfo: {
             phone: "+91-9778280044",
-            email: "neurospinehyd@drsayuj.com"
+            email: "hellodr@drsayuj.info"
           }
         }
       };
