@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   title: {
     absolute: "Neurosurgeon & Endoscopic Spine Specialist Hyderabad | Dr. Sayuj Krishnan S",
   },
-  description: 'German-trained neurosurgeon in Hyderabad for minimally invasive spine and awake brain surgery. 1,000+ endoscopic procedures with same-day discharge at Yashoda Hospital, Malakpet.',
+  description: 'German-trained neurosurgeon in Hyderabad for minimally invasive spine and awake brain surgery. 1,000+ endoscopic procedures with same-day discharge at Yashoda Hospital, Malakpet. Expert in endoscopic discectomy, brain tumor surgery, epilepsy surgery, and ROSA robotic DBS.',
   keywords: [
     'dr sayuj krishnan',
     'best spine surgeon in yashoda hospital',
@@ -66,8 +66,8 @@ export const metadata: Metadata = {
     }
   },
   openGraph: {
-    title: 'Dr. Sayuj Krishnan S | German-Trained Neurosurgeon in Hyderabad',
-    description: 'German-trained neurosurgeon specializing in minimally invasive spine surgery, awake brain surgery, and robotic DBS. Over 1,000 endoscopic procedures performed.',
+    title: 'Dr. Sayuj Krishnan S | German-Trained Neurosurgeon in Hyderabad | Brain & Spine Surgery',
+    description: 'German-trained neurosurgeon specializing in minimally invasive spine surgery, awake brain surgery, and robotic DBS. Over 1,000 endoscopic procedures performed. Same-day discharge available at Yashoda Hospital, Malakpet.',
     url: HOME_CANONICAL,
     siteName: 'Dr. Sayuj Krishnan S - Neurosurgeon Hyderabad',
     locale: 'en_IN',
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
         url: 'https://www.drsayuj.info/images/og-default.jpg',
         width: 1200,
         height: 630,
-        alt: 'Dr. Sayuj Krishnan - Premier Neurosurgeon in Hyderabad',
+        alt: 'Dr. Sayuj Krishnan - Premier Neurosurgeon in Hyderabad | Endoscopic Spine Surgery & Brain Tumor Surgery',
         type: 'image/jpeg'
       }
     ]
@@ -85,8 +85,10 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Dr. Sayuj Krishnan | German-Trained Neurosurgeon in Hyderabad',
-    description: 'German-trained neurosurgeon specializing in minimally invasive spine & brain surgery. Over 1,000 endoscopic procedures.',
-    images: ['https://www.drsayuj.info/images/og-default.jpg']
+    description: 'German-trained neurosurgeon specializing in minimally invasive spine & brain surgery. Over 1,000 endoscopic procedures. Same-day discharge available.',
+    images: ['https://www.drsayuj.info/images/og-default.jpg'],
+    site: '@drsayuj',
+    creator: '@drsayuj'
   }
 };
 

@@ -77,18 +77,18 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Neurosurgeon & Endoscopic Spine Specialist Hyderabad | Dr. Sayuj Krishnan S",
-    description: "Expert neurosurgeon Dr. Sayuj Krishnan in Hyderabad specializing in endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures. Same-day discharge available.",
+    title: "Dr. Sayuj Krishnan S | Best Neurosurgeon in Hyderabad | Brain & Spine Surgery",
+    description: "Expert neurosurgeon Dr. Sayuj Krishnan in Hyderabad specializing in endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures. Same-day discharge available. 1,000+ endoscopic procedures performed.",
     url: SITE_URL,
     siteName: "Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
     locale: "en_IN",
     type: "website",
     images: [
       {
-        url: "/images/og-default.jpg",
+        url: `${SITE_URL}/images/og-default.jpg`,
         width: 1200,
         height: 630,
-        alt: "Dr Sayuj — Neurosurgeon • Endoscopic Spine Surgery",
+        alt: "Dr Sayuj Krishnan — Neurosurgeon & Endoscopic Spine Surgeon in Hyderabad | Yashoda Hospital Malakpet",
         type: "image/jpeg",
       },
     ],
@@ -96,8 +96,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Dr. Sayuj Krishnan S | Best Neurosurgeon in Hyderabad",
-    description: "Expert neurosurgeon specializing in endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures in Hyderabad.",
-    images: ["/images/og-default.jpg"],
+    description: "German-trained neurosurgeon specializing in endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures. 1,000+ endoscopic procedures. Same-day discharge available.",
+    images: [`${SITE_URL}/images/og-default.jpg`],
     site: "@drsayuj",
     creator: "@drsayuj",
   },
