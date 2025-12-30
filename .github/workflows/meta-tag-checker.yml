@@ -145,11 +145,25 @@ jobs:
         id: check
         timeout-minutes: 10
         continue-on-error: true
-        run: node check-meta-tags.js || echo "check_failed=true" >> $GITHUB_OUTPUT
+        run: |
+          if node check-meta-tags.js; then
+            echo "check_failed=false" >> $GITHUB_OUTPUT
+            echo "✅ Meta tag check passed"
+          else
+            echo "check_failed=true" >> $GITHUB_OUTPUT
+            echo "❌ Meta tag check failed"
+          fi
 
       - name: Write meta tag report
         timeout-minutes: 1
-        run: echo "Meta tag check completed" > meta-tag-report.txt
+        run: |
+          if [ -f check-meta-tags.js ]; then
+            node check-meta-tags.js > meta-tag-report.txt 2>&1 || true
+            echo "" >> meta-tag-report.txt
+            echo "Check status: ${{ steps.check.outputs.check_failed }}" >> meta-tag-report.txt
+          else
+            echo "Meta tag check script not found" > meta-tag-report.txt
+          fi
 
       - name: Upload meta tag report
         if: always()
@@ -166,8 +180,20 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            const status = '${{ steps.check.outputs.check_failed }}' === 'true' ? '❌ Failed' : '✅ Passed';
+            const fs = require('fs');
+            let reportContent = '';
+            try {
+              if (fs.existsSync('meta-tag-report.txt')) {
+                reportContent = fs.readFileSync('meta-tag-report.txt', 'utf8');
+              }
+            } catch (error) {
+              reportContent = 'Could not read report file';
+            }
+            
+            const checkFailed = '${{ steps.check.outputs.check_failed }}' === 'true';
+            const status = checkFailed ? '❌ Failed' : '✅ Passed';
             const comment = `## 🏷️ Meta Tag Check: ${status}\n\n` +
+              `${reportContent ? '```\n' + reportContent.substring(0, 1000) + '\n```\n\n' : ''}` +
               `[View full report](${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID})`;
             
             github.rest.issues.createComment({

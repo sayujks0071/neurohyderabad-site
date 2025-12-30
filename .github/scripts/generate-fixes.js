@@ -90,6 +90,9 @@ function buildPromptFromArtifacts(artifactFiles) {
       
       try {
         content = fs.readFileSync(filePath, 'utf8');
+        // Sanitize content to prevent injection attacks if used in shell commands
+        // Remove null bytes and control characters that could be dangerous
+        content = content.replace(/\0/g, '').replace(/[\x00-\x1F\x7F]/g, '');
       } catch (e) {
         content = '[Could not read file: ' + e.message + ']';
       }

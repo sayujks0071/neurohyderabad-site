@@ -34,6 +34,16 @@ jobs:
           # GitHub CLI is pre-installed and will use GH_TOKEN automatically
             gh --version
 
+      - name: Check for jq
+        run: |
+          if ! command -v jq &> /dev/null; then
+            echo "jq not found, installing..."
+            sudo apt-get update && sudo apt-get install -y jq
+          else
+            echo "jq is already installed"
+            jq --version
+          fi
+
       - name: Fetch workflow runs (last 24 hours)
         id: fetch_runs
         env:
