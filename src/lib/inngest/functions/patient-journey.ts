@@ -14,12 +14,14 @@ export const patientJourneyOrchestrator = inngest.createFunction(
     // Step 1: Send immediate welcome email
     await step.run("send-welcome-email", async () => {
       console.log(`Sending welcome email to ${patientEmail}`);
-      // TODO: Integrate with email service
+      const result = await EmailService.sendWelcomeEmail(patientEmail, patientName, source);
       return {
-        emailSent: true,
+        emailSent: result.success,
         template: "welcome",
         recipient: patientEmail,
-        messageId: "dev_mode"
+        messageId: result.messageId,
+        error: result.error,
+        development: result.development
       };
     });
 
@@ -108,21 +110,20 @@ export const patientFollowUp = inngest.createFunction(
     // Step 2: Send personalized follow-up email
     await step.run("send-follow-up-email", async () => {
       console.log(`Sending ${followUpType} follow-up to ${patientEmail}`);
-      
-      const emailContent = {
-        to: patientEmail,
-        subject: `Your ${condition} Consultation - Dr. Sayuj Krishnan`,
-        template: followUpType,
-        personalization: {
-          patientName,
-          condition,
-          source
-        }
-      };
 
-      // TODO: Send actual email
-      console.log("Email content:", emailContent);
-      return { emailSent: true };
+      const result = await EmailService.sendFollowUpEmail(
+        patientEmail,
+        patientName,
+        condition,
+        followUpType,
+        source
+      );
+      return {
+        emailSent: result.success,
+        messageId: result.messageId,
+        error: result.error,
+        development: result.development
+      };
     });
 
     // Step 3: Schedule next follow-up if no response
@@ -180,18 +181,19 @@ export const appointmentPreparation = inngest.createFunction(
       };
 
       const instructions = preparationInstructions[appointmentType] || preparationInstructions["consultation"];
-      // TODO: Integrate with email service
-      console.log("Appointment confirmation email:", {
+      const result = await EmailService.sendAppointmentConfirmation(
         patientEmail,
         patientName,
         appointmentDate,
         appointmentType,
         instructions
-      });
+      );
 
       return { 
-        confirmationSent: true,
-        messageId: "dev_mode"
+        confirmationSent: result.success,
+        messageId: result.messageId,
+        error: result.error,
+        development: result.development
       };
     });
 
@@ -303,8 +305,20 @@ export const postAppointmentFollowUp = inngest.createFunction(
         }
       };
 
+      const result = await EmailService.sendAppointmentSummary(
+        patientEmail,
+        patientName,
+        appointmentType,
+        diagnosis,
+        treatmentPlan
+      );
       console.log("Summary email:", summaryEmail);
-      return { summarySent: true };
+      return {
+        summarySent: result.success,
+        messageId: result.messageId,
+        error: result.error,
+        development: result.development
+      };
     });
 
     // Step 2: Schedule follow-up based on treatment plan
@@ -342,9 +356,20 @@ export const postAppointmentFollowUp = inngest.createFunction(
         ]
       };
 
-      // TODO: Send actual education materials
+      const result = await EmailService.sendEducationMaterials(
+        patientEmail,
+        patientName,
+        diagnosis,
+        "post-appointment",
+        educationContent.materials
+      );
       console.log("Education materials:", educationContent);
-      return { educationSent: true };
+      return {
+        educationSent: result.success,
+        messageId: result.messageId,
+        error: result.error,
+        development: result.development
+      };
     });
 
     return {

@@ -1,6 +1,6 @@
 import { inngest } from "@/src/lib/inngest";
 import type { Events } from "@/src/lib/inngest";
-// import EmailService from "@/src/lib/email";
+import EmailService from "@/src/lib/email";
 
 // Example function: Send appointment reminder
 export const appointmentReminder = inngest.createFunction(
@@ -25,11 +25,18 @@ export const appointmentReminder = inngest.createFunction(
     // Step 2: Send email reminder
     const emailResult = await step.run("send-reminder-email", async () => {
       console.log(`Sending ${reminderType} reminder to ${patientEmail}`);
-      // TODO: Integrate with email service
-      
-      return { 
-        success: true, 
-        messageId: "dev_mode"
+      const result = await EmailService.sendAppointmentReminder(
+        patientEmail,
+        patientName,
+        appointmentDate,
+        reminderType
+      );
+
+      return {
+        success: result.success,
+        messageId: result.messageId,
+        error: result.error,
+        development: result.development
       };
     });
 
@@ -58,8 +65,35 @@ export const appointmentCreated = inngest.createFunction(
     // Step 1: Send confirmation email
     await step.run("send-confirmation", async () => {
       console.log(`Sending confirmation email to ${patientEmail} for appointment ${appointmentId}`);
-      // Add your email sending logic here
-      return { confirmationSent: true };
+      const preparationInstructions: Record<string, string[]> = {
+        "consultation": [
+          "Bring all previous medical reports and MRI/CT scans",
+          "List of current medications",
+          "Insurance card and ID",
+          "Arrive 15 minutes early"
+        ],
+        "surgery": [
+          "Complete pre-operative tests",
+          "Follow fasting instructions",
+          "Bring a family member",
+          "Review post-operative care plan"
+        ]
+      };
+
+      const instructions = preparationInstructions[appointmentType] || preparationInstructions["consultation"];
+      const result = await EmailService.sendAppointmentConfirmation(
+        patientEmail,
+        patientName,
+        appointmentDate,
+        appointmentType,
+        instructions
+      );
+      return {
+        confirmationSent: result.success,
+        messageId: result.messageId,
+        error: result.error,
+        development: result.development
+      };
     });
 
     // Step 2: Schedule reminder emails

@@ -67,27 +67,20 @@ export const patientEducationDelivery = inngest.createFunction(
     // Step 2: Send education materials via email
     await step.run("send-education-materials", async () => {
       console.log(`Sending education materials to ${patientEmail}`);
-      
-      const educationEmail = {
-        to: patientEmail,
-        subject: `Your Personalized Health Education - Dr. Sayuj Krishnan`,
-        template: "patient-education",
-        data: {
-          patientName,
-          condition,
-          educationType,
-          content: educationContent.content,
-          doctorName: "Dr. Sayuj Krishnan",
-          contactInfo: {
-            phone: "+91-9778280044",
-            email: "hellodr@drsayuj.info"
-          }
-        }
-      };
 
-      // TODO: Send actual email with attachments/links
-      console.log("Education email:", educationEmail);
-      return { educationSent: true };
+      const result = await EmailService.sendEducationMaterials(
+        patientEmail,
+        patientName,
+        condition,
+        educationType,
+        educationContent.content
+      );
+      return {
+        educationSent: result.success,
+        messageId: result.messageId,
+        error: result.error,
+        development: result.development
+      };
     });
 
     // Step 3: Schedule follow-up education delivery

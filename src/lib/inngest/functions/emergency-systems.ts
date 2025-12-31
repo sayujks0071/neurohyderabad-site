@@ -1,7 +1,7 @@
 import { inngest } from "@/src/lib/inngest";
 import type { Events } from "@/src/lib/inngest";
 import { emergencyCaseRepository } from "@/src/lib/emergency/repository";
-// import EmailService from "@/src/lib/email";
+import EmailService from "@/src/lib/email";
 
 // Emergency Notification System
 export const emergencyNotificationSystem = inngest.createFunction(
@@ -36,11 +36,17 @@ export const emergencyNotificationSystem = inngest.createFunction(
     // Step 2: Notify hospital emergency department
     await step.run("notify-hospital-emergency", async () => {
       console.log(`Notifying hospital emergency department`);
-      // TODO: Integrate with email service
-      
-      return { 
-        hospitalNotified: true,
-        messageId: "dev_mode"
+      const result = await EmailService.sendEmergencyNotification(
+        emergencyType,
+        patientInfo,
+        severity
+      );
+
+      return {
+        hospitalNotified: result.success,
+        messageId: result.messageId,
+        error: result.error,
+        development: result.development
       };
     });
 
