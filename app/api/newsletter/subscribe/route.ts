@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { sendNewsletterSubscriptionEmail } from '@/lib/email';
+import { sendNewsletterSubscriptionEmail, addNewsletterSubscriber } from '@/lib/email';
 
 export async function POST(request: NextRequest) {
   try {
@@ -22,6 +22,29 @@ export async function POST(request: NextRequest) {
       }, { status: 400 });
     }
 
+    // Store subscription in database (Resend contacts)
+    const storeResult = await addNewsletterSubscriber({
+      email: body.email,
+      name: body.name
+    });
+
+    // If storage fails, we might still want to send the email, or fail?
+    // Usually if storage fails (e.g. API error), we probably want to retry or log it.
+    // If it's just config missing, we might proceed.
+    // However, if the user isn't added to the list, they won't get future emails.
+    // Given the previous code just sent email, let's keep sending email as primary success indicator,
+    // but maybe warn if storage failed.
+
+    if (!storeResult.success) {
+      console.warn('Failed to store subscription:', storeResult.error);
+      // Depending on requirements, we could return error here.
+      // But let's proceed to send confirmation email so user gets immediate feedback,
+      // and we (admin) can see logs.
+      // ACTUALLY, if we can't store them, maybe we shouldn't tell them they are subscribed?
+      // But the previous implementation didn't store either.
+      // Let's assume we proceed.
+    }
+
     // Send confirmation email
     const result = await sendNewsletterSubscriptionEmail({
       email: body.email,
@@ -29,13 +52,11 @@ export async function POST(request: NextRequest) {
     });
     
     if (result.success) {
-      // TODO: Store subscription in database (e.g., Resend contacts, Mailchimp, etc.)
-      // For now, just send confirmation email
-      
       return NextResponse.json({ 
         success: true, 
         message: 'Successfully subscribed to newsletter',
-        messageId: result.messageId 
+        messageId: result.messageId,
+        contactStored: storeResult.success
       });
     } else {
       return NextResponse.json({ 
@@ -51,29 +72,3 @@ export async function POST(request: NextRequest) {
     }, { status: 500 });
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
