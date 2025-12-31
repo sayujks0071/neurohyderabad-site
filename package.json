@@ -77,6 +77,7 @@
     "sharp": "^0.34.4",
     "tailwindcss": "^4",
     "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5",
     "vercel": "^48.10.10"
   },
