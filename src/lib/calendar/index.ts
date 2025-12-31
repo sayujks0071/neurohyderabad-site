@@ -91,4 +91,5 @@ END:VCALENDAR`;
   }
 }
 
-export { CalendarService, CalendarInviteResult, AppointmentDetails };
+export { CalendarService };
+export type { CalendarInviteResult, AppointmentDetails };

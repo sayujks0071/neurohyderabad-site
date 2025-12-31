@@ -1,6 +1,6 @@
 import { inngest } from "@/src/lib/inngest";
 import type { Events } from "@/src/lib/inngest";
-import { crm } from "@/src/lib/crm";
+import { crm } from "@/src/lib/crm/index";
 import { CalendarService } from "@/src/lib/calendar";
 import { EmailService } from "@/src/lib/email";
 
