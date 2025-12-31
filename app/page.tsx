@@ -22,6 +22,8 @@ import UserJourneyTracker from "./_components/UserJourneyTracker";
 import TrustBridgeLink from "./_components/TrustBridgeLink";
 import { mediaPublications } from "../src/content/media";
 import MedicalClinicSchema from "./components/schemas/MedicalClinicSchema";
+import OrganizationSchema from "./components/schemas/OrganizationSchema";
+import LocalBusinessSchema from "./components/schemas/LocalBusinessSchema";
 import Button from "./_components/Button";
 import Card from "./_components/Card";
 import Section from "./_components/Section";
@@ -167,6 +169,8 @@ const HOME_FAQS = [
 export default function Home() {
   return (
     <>
+      <OrganizationSchema />
+      <LocalBusinessSchema />
       <MedicalClinicSchema />
       <FAQPageSchema faqs={HOME_FAQS} pageUrl={HOME_CANONICAL} />
 
