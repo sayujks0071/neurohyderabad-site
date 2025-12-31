@@ -1,6 +1,6 @@
 import { inngest } from "@/src/lib/inngest";
 import type { Events } from "@/src/lib/inngest";
-// import EmailService from "@/src/lib/email";
+import EmailService from "@/src/lib/email";
 
 // Example function: Send appointment reminder
 export const appointmentReminder = inngest.createFunction(
@@ -25,12 +25,13 @@ export const appointmentReminder = inngest.createFunction(
     // Step 2: Send email reminder
     const emailResult = await step.run("send-reminder-email", async () => {
       console.log(`Sending ${reminderType} reminder to ${patientEmail}`);
-      // TODO: Integrate with email service
       
-      return { 
-        success: true, 
-        messageId: "dev_mode"
-      };
+      return await EmailService.sendAppointmentReminder(
+        patientEmail,
+        patientName,
+        appointmentDate,
+        reminderType
+      );
     });
 
     // Step 3: Log the reminder
