@@ -9,7 +9,13 @@ const fs = require('fs');
 const path = require('path');
 
 const SITE_URL = 'https://www.drsayuj.info';
-const API_KEY = process.env.PAGESPEED_API_KEY || 'AIzaSyByITvJ5OqZLlirrezg3ho_neh92d13JpM';
+const API_KEY = process.env.PAGESPEED_API_KEY;
+
+if (!API_KEY) {
+  console.error('❌ PAGESPEED_API_KEY environment variable is required');
+  console.error('💡 Set it with: export PAGESPEED_API_KEY=your_api_key');
+  process.exit(1);
+}
 
 class PerformanceDashboard {
   constructor() {
