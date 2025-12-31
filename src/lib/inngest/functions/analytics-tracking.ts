@@ -1,5 +1,6 @@
 import { inngest } from "@/src/lib/inngest";
 import type { Events } from "@/src/lib/inngest";
+import { db } from "@/src/lib/db";
 
 // Advanced Analytics and Conversion Tracking
 export const analyticsProcessor = inngest.createFunction(
@@ -49,8 +50,44 @@ export const analyticsProcessor = inngest.createFunction(
     // Step 2: Store in analytics database
     await step.run("store-analytics", async () => {
       console.log(`Storing analytics data for ${page}`);
-      // TODO: Store in database (PostgreSQL, MongoDB, etc.)
-      return { stored: true, recordId: `analytics_${Date.now()}` };
+
+      const { deviceInfo, pageCategory, userIntent, sessionId } = enrichedData;
+
+      if (!db.isConfigured()) {
+        console.warn('Database not configured, skipping persistent storage');
+        return { stored: false, reason: 'db_not_configured' };
+      }
+
+      try {
+        const result = await db.query(
+          `INSERT INTO analytics_events (
+            event_type, page_path, session_id, user_agent, referrer, timestamp,
+            is_mobile, is_tablet, browser, os,
+            page_category, user_intent
+          ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+          RETURNING id`,
+          [
+            'page-view',
+            page,
+            sessionId,
+            userAgent,
+            referrer,
+            new Date(timestamp),
+            deviceInfo.isMobile,
+            deviceInfo.isTablet,
+            deviceInfo.browser,
+            deviceInfo.os,
+            pageCategory,
+            userIntent
+          ]
+        );
+
+        const recordId = result.rows[0]?.id;
+        return { stored: true, recordId: `analytics_${recordId}` };
+      } catch (error) {
+        console.error('Failed to store analytics data:', error);
+        throw error;
+      }
     });
 
     // Step 3: Check for conversion opportunities
