@@ -231,8 +231,33 @@ export const appointmentPreparation = inngest.createFunction(
     // Step 3: Add to calendar and send calendar invite
     await step.run("create-calendar-invite", async () => {
       console.log(`Creating calendar invite for ${patientEmail}`);
-      // TODO: Integrate with calendar service (Google Calendar, Outlook)
-      return { calendarInviteSent: true };
+
+      // 1. Generate ICS
+      const { icsContent, error } = await CalendarService.generateCalendarInvite(
+        patientEmail,
+        patientName,
+        appointmentDate,
+        appointmentType
+      );
+
+      if (error || !icsContent) {
+        console.error("Failed to generate calendar invite:", error);
+        return { calendarInviteSent: false, error };
+      }
+
+      // 2. Send Email with Attachment
+      const result = await EmailService.sendCalendarInvite(
+        patientEmail,
+        patientName,
+        appointmentDate,
+        icsContent
+      );
+
+      return {
+        calendarInviteSent: result.success,
+        messageId: result.messageId,
+        error: result.error
+      };
     });
 
     return {

@@ -14,6 +14,54 @@ export interface EmailTemplate {
 export class EmailService {
   private static fromEmail = 'Dr. Sayuj Krishnan <hellodr@drsayuj.info>';
 
+  // Send calendar invite
+  static async sendCalendarInvite(
+    patientEmail: string,
+    patientName: string,
+    appointmentDate: string,
+    icsContent: string
+  ) {
+    const startDate = new Date(appointmentDate);
+
+    const emailData: any = {
+      to: patientEmail,
+      from: this.fromEmail,
+      subject: `Calendar Invite: Appointment with Dr. Sayuj Krishnan`,
+      text: `Please find attached the calendar invite for your appointment with Dr. Sayuj Krishnan.`,
+      html: `
+        <div style="font-family: Arial, sans-serif; padding: 20px;">
+          <h2>Calendar Invitation</h2>
+          <p>Dear ${patientName},</p>
+          <p>Please find attached the calendar invite for your appointment.</p>
+          <p><strong>Date:</strong> ${startDate.toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}</p>
+          <p>You can add this to your calendar (Google, Outlook, Apple) by opening the attachment.</p>
+        </div>
+      `,
+      attachments: [
+        {
+          filename: 'appointment.ics',
+          content: icsContent
+        }
+      ]
+    };
+
+    try {
+      // Check if we have a valid API key
+      if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === 're_development_key') {
+        console.log('Development mode: Calendar invite email not sent (no API key)');
+        return { success: true, messageId: 'dev_mode', development: true };
+      }
+
+      const result = await resend.emails.send(emailData);
+      console.log('Calendar invite email sent successfully:', result);
+      return { success: true, messageId: result.data?.id };
+    } catch (error) {
+      console.error('Failed to send calendar invite email:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      return { success: false, error: errorMessage };
+    }
+  }
+
   // Send welcome email to new patients
   static async sendWelcomeEmail(patientEmail: string, patientName: string, source: string) {
     const emailData: EmailTemplate = {
