@@ -55,7 +55,10 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "About Dr. Sayuj Krishnan | Premier Neurosurgeon in Hyderabad",
-    description: "Learn about Dr. Sayuj Krishnan's exceptional training, over 9 years of neurosurgical experience, and pioneering work in minimally invasive brain & spine surgery."
+    description: "Learn about Dr. Sayuj Krishnan's exceptional training, over 9 years of neurosurgical experience, and pioneering work in minimally invasive brain & spine surgery.",
+    images: [`${SITE_URL}/images/og-default.jpg`],
+    site: '@drsayuj',
+    creator: '@drsayuj'
   }
 };
 

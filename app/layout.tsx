@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Merriweather } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
@@ -19,23 +18,6 @@ import StickyCTA from "./_components/StickyCTA";
 import ClientOnlyWrapper from "./_components/ClientOnlyWrapper";
 import HypertuneProvider from "./providers/hypertune-provider";
 import { SITE_URL } from "../src/lib/seo";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-  preload: true,
-  fallback: ['system-ui', 'arial'],
-  weight: ['400', '500', '600', '700'],
-});
-
-const merriweather = Merriweather({
-  subsets: ["latin"],
-  variable: "--font-merriweather",
-  display: "swap",
-  weight: ['400', '700'],
-  fallback: ['Georgia', 'serif'],
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -152,8 +134,14 @@ export default function RootLayout({
       <head>
         <link rel="dns-prefetch" href="https://edge.hypertune.com" />
         <link rel="preconnect" href="https://edge.hypertune.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap"
+        />
       </head>
-      <body className={`${inter.variable} ${merriweather.variable} antialiased`}>
+      <body className="antialiased">
         <ClientAnalytics />
         <WebsiteSchema />
         <PhysicianSchema />

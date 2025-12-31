@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 // Force static generation
 export const dynamic = 'force-static';
@@ -102,7 +103,7 @@ export default function Page() {
       <div className="mt-6 flex flex-wrap gap-3">
         <a href="https://wa.me/919778280044" className="rounded-2xl px-6 py-3 bg-green-600 text-white" aria-label="WhatsApp booking for Banjara Hills patients">WhatsApp Booking</a>
         <a href="tel:+919778280044" className="rounded-2xl px-6 py-3 border" aria-label="Call +91 9778280044">Call: +91-9778280044</a>
-        <a href="/appointments" className="rounded-2xl px-6 py-3 bg-blue-600 text-white" aria-label="Book an appointment near Banjara Hills">Book Appointment</a>
+        <Link href="/appointments" className="rounded-2xl px-6 py-3 bg-blue-600 text-white" aria-label="Book an appointment near Banjara Hills">Book Appointment</Link>
         <a href="https://maps.google.com/?q=Yashoda+Hospitals+Malakpet+Hyderabad" className="rounded-2xl px-6 py-3 border" aria-label="Directions to Yashoda Hospital Malakpet">Directions</a>
       </div>
 

@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 // Force static generation
 export const dynamic = 'force-static';
@@ -120,7 +121,7 @@ export default function Page() {
       <div className="mt-6 flex flex-wrap gap-3">
         <a href="https://wa.me/919778280044" className="rounded-2xl px-6 py-3 bg-green-600 text-white">WhatsApp Booking</a>
         <a href="tel:+919778280044" className="rounded-2xl px-6 py-3 border">Call: +91-9778280044</a>
-        <a href="/appointments" className="rounded-2xl px-6 py-3 bg-blue-600 text-white">Book Appointment</a>
+        <Link href="/appointments" className="rounded-2xl px-6 py-3 bg-blue-600 text-white">Book Appointment</Link>
         <a href="https://maps.google.com/?q=Yashoda+Hospitals+Malakpet+Hyderabad" className="rounded-2xl px-6 py-3 border">Directions</a>
       </div>
 
@@ -169,10 +170,10 @@ export default function Page() {
       <section className="mt-12">
         <h2 className="text-2xl font-semibold">Popular services for Hitech City patients</h2>
         <ul className="mt-4 space-y-2 list-disc list-inside">
-          <li><a className="text-blue-700 hover:underline" href="/services/endoscopic-spine-surgery-hyderabad/">Endoscopic Spine Surgery (same-day discharge)</a></li>
-          <li><a className="text-blue-700 hover:underline" href="/services/brain-tumor-surgery-hyderabad/">Brain Tumor Surgery with neuronavigation</a></li>
-          <li><a className="text-blue-700 hover:underline" href="/services/epilepsy-surgery-hyderabad/">Epilepsy Surgery programme</a></li>
-          <li><a className="text-blue-700 hover:underline" href="/services/spine-surgery-hyderabad/">Comprehensive Spine Surgery & fusion options</a></li>
+          <li><Link className="text-blue-700 hover:underline" href="/services/endoscopic-spine-surgery-hyderabad/">Endoscopic Spine Surgery (same-day discharge)</Link></li>
+          <li><Link className="text-blue-700 hover:underline" href="/services/brain-tumor-surgery-hyderabad/">Brain Tumor Surgery with neuronavigation</Link></li>
+          <li><Link className="text-blue-700 hover:underline" href="/services/epilepsy-surgery-hyderabad/">Epilepsy Surgery programme</Link></li>
+          <li><Link className="text-blue-700 hover:underline" href="/services/spine-surgery-hyderabad/">Comprehensive Spine Surgery & fusion options</Link></li>
         </ul>
       </section>
 

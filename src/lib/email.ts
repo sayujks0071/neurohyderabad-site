@@ -14,6 +14,54 @@ export interface EmailTemplate {
 export class EmailService {
   private static fromEmail = 'Dr. Sayuj Krishnan <hellodr@drsayuj.info>';
 
+  // Send calendar invite
+  static async sendCalendarInvite(
+    patientEmail: string,
+    patientName: string,
+    appointmentDate: string,
+    icsContent: string
+  ) {
+    const startDate = new Date(appointmentDate);
+
+    const emailData: any = {
+      to: patientEmail,
+      from: this.fromEmail,
+      subject: `Calendar Invite: Appointment with Dr. Sayuj Krishnan`,
+      text: `Please find attached the calendar invite for your appointment with Dr. Sayuj Krishnan.`,
+      html: `
+        <div style="font-family: Arial, sans-serif; padding: 20px;">
+          <h2>Calendar Invitation</h2>
+          <p>Dear ${patientName},</p>
+          <p>Please find attached the calendar invite for your appointment.</p>
+          <p><strong>Date:</strong> ${startDate.toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}</p>
+          <p>You can add this to your calendar (Google, Outlook, Apple) by opening the attachment.</p>
+        </div>
+      `,
+      attachments: [
+        {
+          filename: 'appointment.ics',
+          content: icsContent
+        }
+      ]
+    };
+
+    try {
+      // Check if we have a valid API key
+      if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === 're_development_key') {
+        console.log('Development mode: Calendar invite email not sent (no API key)');
+        return { success: true, messageId: 'dev_mode', development: true };
+      }
+
+      const result = await resend.emails.send(emailData);
+      console.log('Calendar invite email sent successfully:', result);
+      return { success: true, messageId: result.data?.id };
+    } catch (error) {
+      console.error('Failed to send calendar invite email:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      return { success: false, error: errorMessage };
+    }
+  }
+
   // Send welcome email to new patients
   static async sendWelcomeEmail(patientEmail: string, patientName: string, source: string) {
     const emailData: EmailTemplate = {
@@ -101,6 +149,216 @@ Location: Yashoda Hospital, Malakpet, Hyderabad
       return { success: true, messageId: result.data?.id };
     } catch (error) {
       console.error('Failed to send welcome email:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      return { success: false, error: errorMessage };
+    }
+  }
+
+  // Send follow-up email to a patient
+  static async sendFollowUpEmail(
+    patientEmail: string,
+    patientName: string,
+    condition: string,
+    followUpType: string,
+    source?: string
+  ) {
+    const followUpLabel = followUpType ? followUpType.replace(/-/g, " ") : "follow-up";
+    const conditionLabel = condition || "your consultation";
+    const sourceLabel = source ? `Source: ${source}` : "Source: direct inquiry";
+
+    const emailData: EmailTemplate = {
+      to: patientEmail,
+      from: this.fromEmail,
+      subject: `Follow-up on your ${conditionLabel} inquiry`,
+      text: `Follow-up - Dr. Sayuj Krishnan
+
+Dear ${patientName},
+
+This is a ${followUpLabel} regarding your ${conditionLabel} inquiry. Our team is ready to help you with the next steps for your consultation.
+
+${sourceLabel}
+
+You can book an appointment here:
+https://www.drsayuj.info/appointments
+
+If you have any questions, reply to this email or call +91-9778280044.
+
+© 2025 Dr. Sayuj Krishnan. All rights reserved.`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <div style="background: #1e40af; color: white; padding: 24px; text-align: center;">
+            <h1 style="margin: 0; font-size: 24px;">Follow-up on Your Inquiry</h1>
+            <p style="margin: 8px 0 0 0; font-size: 14px;">Dr. Sayuj Krishnan - Neurosurgeon</p>
+          </div>
+          <div style="padding: 24px; background: #f8fafc;">
+            <p>Dear ${patientName},</p>
+            <p>This is a ${followUpLabel} regarding your <strong>${conditionLabel}</strong> inquiry. Our team is ready to help you with the next steps for your consultation.</p>
+            <p style="color: #6b7280; font-size: 14px;">${sourceLabel}</p>
+            <div style="text-align: center; margin: 24px 0;">
+              <a href="https://www.drsayuj.info/appointments"
+                 style="background: #3b82f6; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
+                Book an Appointment
+              </a>
+            </div>
+            <p>If you have questions, reply to this email or call +91-9778280044.</p>
+          </div>
+          <div style="background: #1f2937; color: white; padding: 16px; text-align: center;">
+            <p style="margin: 0; font-size: 12px;">© 2025 Dr. Sayuj Krishnan. All rights reserved.</p>
+          </div>
+        </div>
+      `
+    };
+
+    try {
+      if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === 're_development_key') {
+        console.log('Development mode: Follow-up email not sent (no API key)');
+        return { success: true, messageId: 'dev_mode', development: true };
+      }
+
+      const result = await resend.emails.send(emailData);
+      console.log('Follow-up email sent successfully:', result);
+      return { success: true, messageId: result.data?.id };
+    } catch (error) {
+      console.error('Failed to send follow-up email:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      return { success: false, error: errorMessage };
+    }
+  }
+
+  // Send appointment summary after consultation
+  static async sendAppointmentSummary(
+    patientEmail: string,
+    patientName: string,
+    appointmentType: string,
+    diagnosis?: string,
+    treatmentPlan?: any
+  ) {
+    const nextSteps = Array.isArray(treatmentPlan?.nextSteps)
+      ? (treatmentPlan.nextSteps as string[])
+      : [];
+    const planSummary =
+      typeof treatmentPlan === "string"
+        ? treatmentPlan
+        : treatmentPlan?.summary || treatmentPlan?.recommendations || "";
+
+    const emailData: EmailTemplate = {
+      to: patientEmail,
+      from: this.fromEmail,
+      subject: `Your Appointment Summary - Dr. Sayuj Krishnan`,
+      text: `Appointment Summary - Dr. Sayuj Krishnan
+
+Dear ${patientName},
+
+Thank you for your ${appointmentType} appointment. Below is a brief summary.
+
+Diagnosis: ${diagnosis || "To be shared by the care team"}
+Plan: ${planSummary || "Our team will share the detailed plan with you soon."}
+${nextSteps.length ? `Next steps:\n${nextSteps.map((step: string) => `- ${step}`).join('\n')}` : ""}
+
+For questions, reply to this email or call +91-9778280044.
+
+© 2025 Dr. Sayuj Krishnan. All rights reserved.`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <div style="background: #059669; color: white; padding: 24px; text-align: center;">
+            <h1 style="margin: 0; font-size: 24px;">Appointment Summary</h1>
+            <p style="margin: 8px 0 0 0; font-size: 14px;">Dr. Sayuj Krishnan - Neurosurgeon</p>
+          </div>
+          <div style="padding: 24px; background: #f8fafc;">
+            <p>Dear ${patientName},</p>
+            <p>Thank you for your ${appointmentType} appointment. Below is a brief summary.</p>
+            <div style="background: white; padding: 16px; border-radius: 8px; margin: 16px 0; border: 1px solid #e5e7eb;">
+              <p><strong>Diagnosis:</strong> ${diagnosis || "To be shared by the care team"}</p>
+              <p><strong>Plan:</strong> ${planSummary || "Our team will share the detailed plan with you soon."}</p>
+            </div>
+            ${nextSteps.length ? `
+              <div style="background: #ecfdf3; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                <h3 style="margin: 0 0 8px 0;">Next Steps</h3>
+                <ul>${nextSteps.map((step: string) => `<li>${step}</li>`).join('')}</ul>
+              </div>
+            ` : ""}
+            <p>For questions, reply to this email or call +91-9778280044.</p>
+          </div>
+          <div style="background: #1f2937; color: white; padding: 16px; text-align: center;">
+            <p style="margin: 0; font-size: 12px;">© 2025 Dr. Sayuj Krishnan. All rights reserved.</p>
+          </div>
+        </div>
+      `
+    };
+
+    try {
+      if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === 're_development_key') {
+        console.log('Development mode: Appointment summary not sent (no API key)');
+        return { success: true, messageId: 'dev_mode', development: true };
+      }
+
+      const result = await resend.emails.send(emailData);
+      console.log('Appointment summary sent successfully:', result);
+      return { success: true, messageId: result.data?.id };
+    } catch (error) {
+      console.error('Failed to send appointment summary:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      return { success: false, error: errorMessage };
+    }
+  }
+
+  // Send education materials to patient
+  static async sendEducationMaterials(
+    patientEmail: string,
+    patientName: string,
+    condition: string,
+    educationType: string,
+    materials: string[]
+  ) {
+    const materialList = Array.isArray(materials) ? materials : [];
+    const subjectType = educationType ? educationType.replace(/-/g, " ") : "education";
+
+    const emailData: EmailTemplate = {
+      to: patientEmail,
+      from: this.fromEmail,
+      subject: `Your ${subjectType} resources - Dr. Sayuj Krishnan`,
+      text: `Education Materials - Dr. Sayuj Krishnan
+
+Dear ${patientName},
+
+Here are your ${subjectType} materials for ${condition}:
+${materialList.map(item => `- ${item}`).join('\n')}
+
+If you have questions, reply to this email or call +91-9778280044.
+
+© 2025 Dr. Sayuj Krishnan. All rights reserved.`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <div style="background: #7c3aed; color: white; padding: 24px; text-align: center;">
+            <h1 style="margin: 0; font-size: 24px;">Your Education Materials</h1>
+            <p style="margin: 8px 0 0 0; font-size: 14px;">Dr. Sayuj Krishnan - Neurosurgeon</p>
+          </div>
+          <div style="padding: 24px; background: #f8fafc;">
+            <p>Dear ${patientName},</p>
+            <p>Here are your <strong>${subjectType}</strong> materials for <strong>${condition}</strong>:</p>
+            <ul>
+              ${materialList.map(item => `<li>${item}</li>`).join('')}
+            </ul>
+            <p>If you have questions, reply to this email or call +91-9778280044.</p>
+          </div>
+          <div style="background: #1f2937; color: white; padding: 16px; text-align: center;">
+            <p style="margin: 0; font-size: 12px;">© 2025 Dr. Sayuj Krishnan. All rights reserved.</p>
+          </div>
+        </div>
+      `
+    };
+
+    try {
+      if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === 're_development_key') {
+        console.log('Development mode: Education materials not sent (no API key)');
+        return { success: true, messageId: 'dev_mode', development: true };
+      }
+
+      const result = await resend.emails.send(emailData);
+      console.log('Education materials sent successfully:', result);
+      return { success: true, messageId: result.data?.id };
+    } catch (error) {
+      console.error('Failed to send education materials:', error);
       const errorMessage = error instanceof Error ? error.message : 'Unknown error';
       return { success: false, error: errorMessage };
     }
@@ -407,6 +665,112 @@ Emergency Contact: +91-9778280044`,
       return { success: true, messageId: result.data?.id };
     } catch (error) {
       console.error('Failed to send emergency notification:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      return { success: false, error: errorMessage };
+    }
+  }
+
+  // Send feedback request
+  static async sendFeedbackRequest(
+    patientEmail: string,
+    patientName: string,
+    serviceType: string,
+    appointmentDate: string,
+    questions: string[],
+    feedbackLink: string
+  ) {
+    const emailData: EmailTemplate = {
+      to: patientEmail,
+      from: this.fromEmail,
+      subject: `How was your ${serviceType} with Dr. Sayuj Krishnan?`,
+      text: `Feedback Request - Dr. Sayuj Krishnan
+
+Dear ${patientName},
+
+We hope you had a positive experience with your ${serviceType} on ${new Date(appointmentDate).toLocaleDateString('en-IN', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      })}.
+
+Your feedback is very important to us. It helps us improve our services and provide better care for our patients.
+
+Please take a moment to share your thoughts by visiting the link below:
+${feedbackLink}
+
+We would love to hear your thoughts on:
+${questions.map((q, i) => `${i + 1}. ${q}`).join('\n')}
+
+Thank you for your trust in us.
+
+Best regards,
+Dr. Sayuj Krishnan
+
+Contact Information:
+Phone: +91-9778280044
+Email: hellodr@drsayuj.info
+
+© 2025 Dr. Sayuj Krishnan. All rights reserved.`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <div style="background: linear-gradient(135deg, #8b5cf6, #a78bfa); color: white; padding: 30px; text-align: center;">
+            <h1 style="margin: 0; font-size: 28px;">We Value Your Feedback</h1>
+            <p style="margin: 10px 0 0 0; font-size: 16px;">Dr. Sayuj Krishnan - Neurosurgeon</p>
+          </div>
+
+          <div style="padding: 30px; background: #f8fafc;">
+            <h2 style="color: #6d28d9; margin-top: 0;">Dear ${patientName},</h2>
+
+            <p>We hope you had a positive experience with your <strong>${serviceType}</strong> on ${new Date(appointmentDate).toLocaleDateString('en-IN', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            })}.</p>
+
+            <p>Your feedback is very important to us. It helps us improve our services and provide better care for our patients.</p>
+
+            <div style="background: white; padding: 20px; border-radius: 8px; margin: 20px 0; border: 2px solid #a78bfa;">
+              <h3 style="color: #6d28d9; margin-top: 0;">We'd love to hear about:</h3>
+              <ul style="color: #4b5563;">
+                ${questions.map(q => `<li>${q}</li>`).join('')}
+              </ul>
+            </div>
+
+            <div style="text-align: center; margin: 30px 0;">
+              <a href="${feedbackLink}"
+                 style="background: #7c3aed; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
+                Share Your Feedback
+              </a>
+            </div>
+
+            <p style="font-size: 14px; color: #6b7280; text-align: center;">
+              If the button above doesn't work, copy and paste this link into your browser:<br>
+              <a href="${feedbackLink}" style="color: #7c3aed;">${feedbackLink}</a>
+            </p>
+          </div>
+
+          <div style="background: #1f2937; color: white; padding: 20px; text-align: center;">
+            <p><strong>Contact Us:</strong> +91-9778280044</p>
+            <p style="margin-bottom: 0; font-size: 14px; color: #9ca3af;">
+              © 2025 Dr. Sayuj Krishnan. All rights reserved.
+            </p>
+          </div>
+        </div>
+      `
+    };
+
+    try {
+      // Check if we have a valid API key
+      if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === 're_development_key') {
+        console.log('Development mode: Feedback request not sent (no API key)');
+        return { success: true, messageId: 'dev_mode', development: true };
+      }
+
+      const result = await resend.emails.send(emailData);
+      console.log('Feedback request sent successfully:', result);
+      return { success: true, messageId: result.data?.id };
+    } catch (error) {
+      console.error('Failed to send feedback request:', error);
       const errorMessage = error instanceof Error ? error.message : 'Unknown error';
       return { success: false, error: errorMessage };
     }

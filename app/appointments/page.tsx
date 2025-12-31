@@ -1,5 +1,6 @@
 import { SITE_URL } from "../../src/lib/seo";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { AppointmentFormExperience } from "@/packages/appointment-form";
 import AppointmentFormTracker from "../../src/components/AppointmentFormTracker";
 import PhoneClickTracker from "../../src/components/PhoneClickTracker";
@@ -123,24 +124,24 @@ export default function AppointmentsPage() {
                 Find directions and travel times from your area:
               </p>
               <div className="space-y-3">
-                <a 
+                <Link
                   href="/locations/brain-spine-surgeon-jubilee-hills"
                   className="block text-sm text-blue-600 hover:text-blue-700 font-medium"
                 >
                   → From Jubilee Hills (15-20 min)
-                </a>
-                <a 
+                </Link>
+                <Link
                   href="/locations/brain-spine-surgeon-banjara-hills"
                   className="block text-sm text-blue-600 hover:text-blue-700 font-medium"
                 >
                   → From Banjara Hills (20-25 min)
-                </a>
-                <a 
+                </Link>
+                <Link
                   href="/locations/brain-spine-surgeon-hitec-city"
                   className="block text-sm text-blue-600 hover:text-blue-700 font-medium"
                 >
                   → From HITEC City (25-30 min)
-                </a>
+                </Link>
               </div>
             </div>
           </aside>

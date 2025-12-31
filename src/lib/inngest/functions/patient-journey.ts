@@ -1,6 +1,8 @@
 import { inngest } from "@/src/lib/inngest";
 import type { Events } from "@/src/lib/inngest";
-// import EmailService from "@/src/lib/email";
+import { crm } from "@/src/lib/crm/index";
+import { CalendarService } from "@/src/lib/calendar/index";
+import { EmailService } from "@/src/lib/email";
 
 // Patient Journey: Initial Contact to Consultation
 export const patientJourneyOrchestrator = inngest.createFunction(
@@ -12,12 +14,14 @@ export const patientJourneyOrchestrator = inngest.createFunction(
     // Step 1: Send immediate welcome email
     await step.run("send-welcome-email", async () => {
       console.log(`Sending welcome email to ${patientEmail}`);
-      // TODO: Integrate with email service
+      const result = await EmailService.sendWelcomeEmail(patientEmail, patientName, source);
       return {
-        emailSent: true,
+        emailSent: result.success,
         template: "welcome",
         recipient: patientEmail,
-        messageId: "dev_mode"
+        messageId: result.messageId,
+        error: result.error,
+        development: result.development
       };
     });
 
@@ -47,11 +51,32 @@ export const patientJourneyOrchestrator = inngest.createFunction(
 
     // Step 3: Add to CRM/lead tracking
     await step.run("add-to-crm", async () => {
-      console.log(`Adding ${patientName} to CRM system`);
-      // TODO: Integrate with CRM (HubSpot, Salesforce, etc.)
+      console.log(`Adding ${patientName} to CRM system (${crm.name})`);
+
+      const leadScore = urgency === "high" ? 90 : urgency === "medium" ? 70 : 50;
+
+      // Robust name splitting
+      const nameParts = patientName.trim().split(/\s+/);
+      const firstName = nameParts[0];
+      const lastName = nameParts.length > 1 ? nameParts.slice(1).join(' ') : undefined;
+
+      const addResult = await crm.addLead({
+        email: patientEmail,
+        firstName,
+        lastName,
+        source,
+        condition,
+        urgency
+      });
+
+      if (addResult.success) {
+        await crm.updateLeadScore(patientEmail, leadScore);
+      }
+
       return {
-        crmAdded: true,
-        leadScore: urgency === "high" ? 90 : urgency === "medium" ? 70 : 50
+        crmAdded: addResult.success,
+        leadId: addResult.id,
+        leadScore
       };
     });
 
@@ -85,21 +110,20 @@ export const patientFollowUp = inngest.createFunction(
     // Step 2: Send personalized follow-up email
     await step.run("send-follow-up-email", async () => {
       console.log(`Sending ${followUpType} follow-up to ${patientEmail}`);
-      
-      const emailContent = {
-        to: patientEmail,
-        subject: `Your ${condition} Consultation - Dr. Sayuj Krishnan`,
-        template: followUpType,
-        personalization: {
-          patientName,
-          condition,
-          source
-        }
-      };
 
-      // TODO: Send actual email
-      console.log("Email content:", emailContent);
-      return { emailSent: true };
+      const result = await EmailService.sendFollowUpEmail(
+        patientEmail,
+        patientName,
+        condition,
+        followUpType,
+        source
+      );
+      return {
+        emailSent: result.success,
+        messageId: result.messageId,
+        error: result.error,
+        development: result.development
+      };
     });
 
     // Step 3: Schedule next follow-up if no response
@@ -157,18 +181,19 @@ export const appointmentPreparation = inngest.createFunction(
       };
 
       const instructions = preparationInstructions[appointmentType] || preparationInstructions["consultation"];
-      // TODO: Integrate with email service
-      console.log("Appointment confirmation email:", {
+      const result = await EmailService.sendAppointmentConfirmation(
         patientEmail,
         patientName,
         appointmentDate,
         appointmentType,
         instructions
-      });
+      );
 
       return { 
-        confirmationSent: true,
-        messageId: "dev_mode"
+        confirmationSent: result.success,
+        messageId: result.messageId,
+        error: result.error,
+        development: result.development
       };
     });
 
@@ -214,8 +239,36 @@ export const appointmentPreparation = inngest.createFunction(
     // Step 3: Add to calendar and send calendar invite
     await step.run("create-calendar-invite", async () => {
       console.log(`Creating calendar invite for ${patientEmail}`);
-      // TODO: Integrate with calendar service (Google Calendar, Outlook)
-      return { calendarInviteSent: true };
+
+      // 1. Generate ICS
+      const calendarResult = await CalendarService.generateCalendarInvite(
+        patientEmail,
+        patientName,
+        new Date(appointmentDate),
+        30, // duration in minutes
+        'Yashoda Hospital, Malakpet'
+      );
+      const icsContent = calendarResult.icsContent;
+      const error = calendarResult.error;
+
+      if (error || !icsContent) {
+        console.error("Failed to generate calendar invite:", error);
+        return { calendarInviteSent: false, error };
+      }
+
+      // 2. Send Email with Attachment
+      const result = await EmailService.sendCalendarInvite(
+        patientEmail,
+        patientName,
+        appointmentDate,
+        icsContent
+      );
+
+      return {
+        calendarInviteSent: result.success,
+        messageId: result.messageId,
+        error: result.error
+      };
     });
 
     return {
@@ -252,8 +305,20 @@ export const postAppointmentFollowUp = inngest.createFunction(
         }
       };
 
+      const result = await EmailService.sendAppointmentSummary(
+        patientEmail,
+        patientName,
+        appointmentType,
+        diagnosis,
+        treatmentPlan
+      );
       console.log("Summary email:", summaryEmail);
-      return { summarySent: true };
+      return {
+        summarySent: result.success,
+        messageId: result.messageId,
+        error: result.error,
+        development: result.development
+      };
     });
 
     // Step 2: Schedule follow-up based on treatment plan
@@ -291,9 +356,20 @@ export const postAppointmentFollowUp = inngest.createFunction(
         ]
       };
 
-      // TODO: Send actual education materials
+      const result = await EmailService.sendEducationMaterials(
+        patientEmail,
+        patientName,
+        diagnosis,
+        "post-appointment",
+        educationContent.materials
+      );
       console.log("Education materials:", educationContent);
-      return { educationSent: true };
+      return {
+        educationSent: result.success,
+        messageId: result.messageId,
+        error: result.error,
+        development: result.development
+      };
     });
 
     return {

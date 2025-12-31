@@ -78,6 +78,28 @@ export function buildLocalServiceSchema({
           url: SITE_URL,
         },
       },
+      {
+        '@type': 'MedicalProcedure',
+        '@id': `${serviceUrl}#procedure`,
+        name,
+        description,
+        url: serviceUrl,
+        procedureType: 'https://schema.org/TherapeuticProcedure',
+        provider: {
+          '@id': `${SITE_URL}/#physician`,
+          '@type': 'Physician',
+          name: 'Dr Sayuj Krishnan',
+        },
+        areaServed: areaServed.map((area) => ({
+          '@type': 'AdministrativeArea',
+          name: area,
+        })),
+        availableAtOrFrom: {
+          '@id': `${SITE_URL}/#medicalclinic`,
+          '@type': 'MedicalClinic',
+          name: CLINIC.name,
+        },
+      },
     ],
   };
 }

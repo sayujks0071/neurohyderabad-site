@@ -1,5 +1,6 @@
 import { inngest } from "@/src/lib/inngest";
 import type { Events } from "@/src/lib/inngest";
+import EmailService from "@/src/lib/email";
 
 // Patient Education Content Delivery
 export const patientEducationDelivery = inngest.createFunction(
@@ -66,27 +67,20 @@ export const patientEducationDelivery = inngest.createFunction(
     // Step 2: Send education materials via email
     await step.run("send-education-materials", async () => {
       console.log(`Sending education materials to ${patientEmail}`);
-      
-      const educationEmail = {
-        to: patientEmail,
-        subject: `Your Personalized Health Education - Dr. Sayuj Krishnan`,
-        template: "patient-education",
-        data: {
-          patientName,
-          condition,
-          educationType,
-          content: educationContent.content,
-          doctorName: "Dr. Sayuj Krishnan",
-          contactInfo: {
-            phone: "+91-9778280044",
-            email: "hellodr@drsayuj.info"
-          }
-        }
-      };
 
-      // TODO: Send actual email with attachments/links
-      console.log("Education email:", educationEmail);
-      return { educationSent: true };
+      const result = await EmailService.sendEducationMaterials(
+        patientEmail,
+        patientName,
+        condition,
+        educationType,
+        educationContent.content
+      );
+      return {
+        educationSent: result.success,
+        messageId: result.messageId,
+        error: result.error,
+        development: result.development
+      };
     });
 
     // Step 3: Schedule follow-up education delivery
@@ -298,22 +292,22 @@ export const patientFeedbackCollection = inngest.createFunction(
     await step.run("send-feedback-request", async () => {
       console.log(`Sending feedback request to ${patientEmail}`);
       
-      const feedbackEmail = {
-        to: patientEmail,
-        subject: feedbackRequest.subject,
-        template: "feedback-request",
-        data: {
-          patientName,
-          serviceType,
-          appointmentDate,
-          questions: feedbackRequest.questions,
-          feedbackLink: `https://www.drsayuj.info/feedback?patient=${patientId}&service=${serviceType}`
-        }
-      };
+      const feedbackLink = `https://www.drsayuj.info/feedback?patient=${patientId}&service=${serviceType}`;
 
-      // TODO: Send actual feedback request
-      console.log("Feedback request sent:", feedbackEmail);
-      return { feedbackRequestSent: true };
+      const result = await EmailService.sendFeedbackRequest(
+        patientEmail,
+        patientName,
+        serviceType,
+        appointmentDate,
+        feedbackRequest.questions,
+        feedbackLink
+      );
+
+      console.log("Feedback request sent:", result);
+      return {
+        feedbackRequestSent: result.success,
+        messageId: result.messageId
+      };
     });
 
     // Step 3: Schedule follow-up if no response
