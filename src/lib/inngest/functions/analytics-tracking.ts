@@ -1,4 +1,5 @@
 import { inngest } from "@/src/lib/inngest";
+import { getCRM } from "@/src/lib/crm";
 import type { Events } from "@/src/lib/inngest";
 
 // Advanced Analytics and Conversion Tracking
@@ -123,7 +124,26 @@ export const conversionTracker = inngest.createFunction(
     // Step 2: Update lead score in CRM
     await step.run("update-lead-score", async () => {
       console.log(`Updating lead score: ${conversionScore}`);
-      // TODO: Update CRM with new lead score
+      const crm = getCRM();
+
+      // In a real scenario, we would need the lead's email or ID to update the score.
+      // We'll attempt to extract it from the event data if available, or fallback to a placeholder/log.
+      // This part assumes that `event.data` might eventually contain user identification
+      const email = (event.data as any).email || (event.data as any).userEmail;
+
+      if (email) {
+        await crm.updateLeadScore({
+          email,
+          score: conversionScore,
+          reason: `Conversion: ${conversionType}`,
+          metadata: { page, conversionType }
+        });
+      } else {
+        // Log that we calculated a score but couldn't associate it with a user yet
+        // In a real flow, we might store this in a temporary store until the user identifies themselves
+        console.log(`Calculated lead score ${conversionScore} for anonymous user on ${page}`);
+      }
+
       return { leadScoreUpdated: true, newScore: conversionScore };
     });
 
