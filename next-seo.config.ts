@@ -31,7 +31,7 @@ const SEO_CONFIG: DefaultSeoProps = {
   twitter: {
     cardType: 'summary_large_image',
     site: '@drsayuj',
-    creator: '@drsayuj',
+    handle: '@drsayuj',
   },
   additionalMetaTags: [
     {
