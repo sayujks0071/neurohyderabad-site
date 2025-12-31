@@ -1,7 +1,7 @@
 import { inngest } from "@/src/lib/inngest";
 import type { Events } from "@/src/lib/inngest";
 import { crm } from "@/src/lib/crm/index";
-import { CalendarService } from "@/src/lib/calendar";
+import { CalendarService } from "@/src/lib/calendar/index";
 import { EmailService } from "@/src/lib/email";
 
 // Patient Journey: Initial Contact to Consultation
@@ -234,12 +234,15 @@ export const appointmentPreparation = inngest.createFunction(
       console.log(`Creating calendar invite for ${patientEmail}`);
 
       // 1. Generate ICS
-      const { icsContent, error } = await CalendarService.generateCalendarInvite(
+      const calendarResult = await CalendarService.generateCalendarInvite(
         patientEmail,
         patientName,
-        appointmentDate,
-        appointmentType
+        new Date(appointmentDate),
+        30, // duration in minutes
+        'Yashoda Hospital, Malakpet'
       );
+      const icsContent = calendarResult.icsContent;
+      const error = calendarResult.error;
 
       if (error || !icsContent) {
         console.error("Failed to generate calendar invite:", error);
