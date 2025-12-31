@@ -1,5 +1,6 @@
 import { inngest } from "@/src/lib/inngest";
 import type { Events } from "@/src/lib/inngest";
+import EmailService from "@/src/lib/email";
 
 // Advanced Analytics and Conversion Tracking
 export const analyticsProcessor = inngest.createFunction(
@@ -160,9 +161,13 @@ export const conversionTracker = inngest.createFunction(
         priority: conversionScore > 80 ? "high" : "medium"
       };
 
-      // TODO: Send notification (Slack, email, etc.)
+      const result = await EmailService.sendConversionNotification(notification);
       console.log("Team notification:", notification);
-      return { teamNotified: true };
+
+      return {
+        teamNotified: true,
+        notificationResult: result
+      };
     });
 
     return {

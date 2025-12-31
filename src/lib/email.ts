@@ -411,6 +411,58 @@ Emergency Contact: +91-9778280044`,
       return { success: false, error: errorMessage };
     }
   }
+
+  // Send conversion notification to team
+  static async sendConversionNotification(notification: any) {
+    const emailData: EmailTemplate = {
+      to: process.env.ADMIN_EMAIL || 'hellodr@drsayuj.info',
+      from: this.fromEmail,
+      subject: `New Conversion: ${notification.conversionType} (Score: ${notification.score})`,
+      text: `New Conversion Alert
+
+Type: ${notification.conversionType}
+Score: ${notification.score}
+Page: ${notification.page}
+Priority: ${notification.priority}
+Timestamp: ${new Date(notification.timestamp).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}
+
+Check the analytics dashboard for more details.`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <div style="background: linear-gradient(135deg, #4f46e5, #6366f1); color: white; padding: 30px; text-align: center;">
+            <h1 style="margin: 0; font-size: 28px;">New Conversion Alert</h1>
+            <p style="margin: 10px 0 0 0; font-size: 16px;">Analytics Notification</p>
+          </div>
+
+          <div style="padding: 30px; background: #f8fafc;">
+            <div style="background: white; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #6366f1;">
+              <p><strong>Type:</strong> ${notification.conversionType}</p>
+              <p><strong>Score:</strong> ${notification.score}</p>
+              <p><strong>Page:</strong> ${notification.page}</p>
+              <p><strong>Priority:</strong> <span style="color: ${notification.priority === 'high' ? '#dc2626' : '#059669'}; font-weight: bold;">${notification.priority.toUpperCase()}</span></p>
+              <p><strong>Time:</strong> ${new Date(notification.timestamp).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}</p>
+            </div>
+          </div>
+        </div>
+      `
+    };
+
+    try {
+      // Check if we have a valid API key
+      if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === 're_development_key') {
+        console.log('Development mode: Conversion notification not sent (no API key)');
+        return { success: true, messageId: 'dev_mode', development: true };
+      }
+
+      const result = await resend.emails.send(emailData);
+      console.log('Conversion notification sent successfully:', result);
+      return { success: true, messageId: result.data?.id };
+    } catch (error) {
+      console.error('Failed to send conversion notification:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      return { success: false, error: errorMessage };
+    }
+  }
 }
 
 export default EmailService;
