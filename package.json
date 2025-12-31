@@ -62,7 +62,7 @@
   "devDependencies": {
     "@lhci/cli": "^0.15.1",
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20.19.17",
+    "@types/node": "^20.19.27",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint-config-next": "^15.5.4",
