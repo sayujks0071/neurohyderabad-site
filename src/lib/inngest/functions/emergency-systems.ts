@@ -1,5 +1,6 @@
 import { inngest } from "@/src/lib/inngest";
 import type { Events } from "@/src/lib/inngest";
+import { emergencyCaseRepository } from "@/src/lib/emergency/repository";
 // import EmailService from "@/src/lib/email";
 
 // Emergency Notification System
@@ -58,7 +59,9 @@ export const emergencyNotificationSystem = inngest.createFunction(
         assignedDoctor: "Dr. Sayuj Krishnan"
       };
 
-      // TODO: Store in emergency case management system
+      // Store in emergency case management system
+      await emergencyCaseRepository.create(caseRecord);
+
       console.log("Emergency case created:", caseRecord);
       return { caseCreated: true, caseId: caseRecord.caseId };
     });
