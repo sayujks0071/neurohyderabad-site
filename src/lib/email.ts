@@ -411,6 +411,97 @@ Emergency Contact: +91-9778280044`,
       return { success: false, error: errorMessage };
     }
   }
+
+  // Send patient education email
+  static async sendPatientEducationEmail(
+    patientEmail: string,
+    patientName: string,
+    condition: string,
+    educationType: string,
+    content: string[]
+  ) {
+    const formattedCondition = condition.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+    const formattedType = educationType.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+
+    const emailData: EmailTemplate = {
+      to: patientEmail,
+      from: this.fromEmail,
+      subject: `Your Personalized Health Education - Dr. Sayuj Krishnan`,
+      text: `Your Personalized Health Education - Dr. Sayuj Krishnan
+
+Dear ${patientName},
+
+Based on your recent consultation, we have curated the following educational materials for your ${formattedCondition} (${formattedType}).
+
+Education Materials:
+${content.map(item => `- ${item}`).join('\n')}
+
+We hope these resources help you better understand your condition and the next steps in your care. If you have any questions, please don't hesitate to reach out.
+
+Contact Information:
+Phone: +91-9778280044
+Email: hellodr@drsayuj.info
+Location: Yashoda Hospital, Malakpet, Hyderabad
+
+© 2025 Dr. Sayuj Krishnan. All rights reserved.`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <div style="background: linear-gradient(135deg, #3b82f6, #60a5fa); color: white; padding: 30px; text-align: center;">
+            <h1 style="margin: 0; font-size: 28px;">📚 Patient Education</h1>
+            <p style="margin: 10px 0 0 0; font-size: 16px;">Dr. Sayuj Krishnan - Neurosurgeon</p>
+          </div>
+
+          <div style="padding: 30px; background: #f8fafc;">
+            <h2 style="color: #1d4ed8; margin-top: 0;">Dear ${patientName},</h2>
+
+            <p>Based on your recent consultation, we have curated the following educational materials for your <strong>${formattedCondition}</strong> (${formattedType}).</p>
+
+            <div style="background: white; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #3b82f6;">
+              <h3 style="color: #1e40af; margin-top: 0;">Education Materials</h3>
+              <ul style="color: #374151;">
+                ${content.map(item => `<li>${item}</li>`).join('')}
+              </ul>
+            </div>
+
+            <p>We hope these resources help you better understand your condition and the next steps in your care. If you have any questions, please don't hesitate to reach out.</p>
+
+            <div style="text-align: center; margin: 30px 0;">
+              <a href="https://www.drsayuj.info/contact"
+                 style="background: #3b82f6; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
+                Contact Us
+              </a>
+            </div>
+          </div>
+
+          <div style="background: #1f2937; color: white; padding: 20px; text-align: center;">
+            <h3 style="margin-top: 0;">Contact Information</h3>
+            <p><strong>Phone:</strong> +91-9778280044</p>
+            <p><strong>Email:</strong> hellodr@drsayuj.info</p>
+            <p><strong>Location:</strong> Yashoda Hospital, Malakpet, Hyderabad</p>
+            <p style="margin-bottom: 0; font-size: 14px; color: #9ca3af;">
+              © 2025 Dr. Sayuj Krishnan. All rights reserved.
+            </p>
+          </div>
+        </div>
+      `
+    };
+
+    try {
+      // Check if we have a valid API key
+      if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === 're_development_key') {
+        console.log('Development mode: Patient education email not sent (no API key)');
+        return { success: true, messageId: 'dev_mode', development: true };
+      }
+
+      const result = await resend.emails.send(emailData);
+      console.log('Patient education email sent successfully:', result);
+      return { success: true, messageId: result.data?.id };
+    } catch (error) {
+      console.error('Failed to send patient education email:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      return { success: false, error: errorMessage };
+    }
+  }
 }
 
 export default EmailService;
