@@ -411,6 +411,112 @@ Emergency Contact: +91-9778280044`,
       return { success: false, error: errorMessage };
     }
   }
+
+  // Send feedback request
+  static async sendFeedbackRequest(
+    patientEmail: string,
+    patientName: string,
+    serviceType: string,
+    appointmentDate: string,
+    questions: string[],
+    feedbackLink: string
+  ) {
+    const emailData: EmailTemplate = {
+      to: patientEmail,
+      from: this.fromEmail,
+      subject: `How was your ${serviceType} with Dr. Sayuj Krishnan?`,
+      text: `Feedback Request - Dr. Sayuj Krishnan
+
+Dear ${patientName},
+
+We hope you had a positive experience with your ${serviceType} on ${new Date(appointmentDate).toLocaleDateString('en-IN', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      })}.
+
+Your feedback is very important to us. It helps us improve our services and provide better care for our patients.
+
+Please take a moment to share your thoughts by visiting the link below:
+${feedbackLink}
+
+We would love to hear your thoughts on:
+${questions.map((q, i) => `${i + 1}. ${q}`).join('\n')}
+
+Thank you for your trust in us.
+
+Best regards,
+Dr. Sayuj Krishnan
+
+Contact Information:
+Phone: +91-9778280044
+Email: hellodr@drsayuj.info
+
+© 2025 Dr. Sayuj Krishnan. All rights reserved.`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <div style="background: linear-gradient(135deg, #8b5cf6, #a78bfa); color: white; padding: 30px; text-align: center;">
+            <h1 style="margin: 0; font-size: 28px;">We Value Your Feedback</h1>
+            <p style="margin: 10px 0 0 0; font-size: 16px;">Dr. Sayuj Krishnan - Neurosurgeon</p>
+          </div>
+
+          <div style="padding: 30px; background: #f8fafc;">
+            <h2 style="color: #6d28d9; margin-top: 0;">Dear ${patientName},</h2>
+
+            <p>We hope you had a positive experience with your <strong>${serviceType}</strong> on ${new Date(appointmentDate).toLocaleDateString('en-IN', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            })}.</p>
+
+            <p>Your feedback is very important to us. It helps us improve our services and provide better care for our patients.</p>
+
+            <div style="background: white; padding: 20px; border-radius: 8px; margin: 20px 0; border: 2px solid #a78bfa;">
+              <h3 style="color: #6d28d9; margin-top: 0;">We'd love to hear about:</h3>
+              <ul style="color: #4b5563;">
+                ${questions.map(q => `<li>${q}</li>`).join('')}
+              </ul>
+            </div>
+
+            <div style="text-align: center; margin: 30px 0;">
+              <a href="${feedbackLink}"
+                 style="background: #7c3aed; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
+                Share Your Feedback
+              </a>
+            </div>
+
+            <p style="font-size: 14px; color: #6b7280; text-align: center;">
+              If the button above doesn't work, copy and paste this link into your browser:<br>
+              <a href="${feedbackLink}" style="color: #7c3aed;">${feedbackLink}</a>
+            </p>
+          </div>
+
+          <div style="background: #1f2937; color: white; padding: 20px; text-align: center;">
+            <p><strong>Contact Us:</strong> +91-9778280044</p>
+            <p style="margin-bottom: 0; font-size: 14px; color: #9ca3af;">
+              © 2025 Dr. Sayuj Krishnan. All rights reserved.
+            </p>
+          </div>
+        </div>
+      `
+    };
+
+    try {
+      // Check if we have a valid API key
+      if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === 're_development_key') {
+        console.log('Development mode: Feedback request not sent (no API key)');
+        return { success: true, messageId: 'dev_mode', development: true };
+      }
+
+      const result = await resend.emails.send(emailData);
+      console.log('Feedback request sent successfully:', result);
+      return { success: true, messageId: result.data?.id };
+    } catch (error) {
+      console.error('Failed to send feedback request:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      return { success: false, error: errorMessage };
+    }
+  }
 }
 
 export default EmailService;
