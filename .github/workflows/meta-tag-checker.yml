@@ -27,76 +27,84 @@ jobs:
       - name: Create meta tag checker
         run: |
           cat > check-meta-tags.js << 'EOF'
-          const https = require('https');
           const cheerio = require('cheerio');
           
+          const BASE_URL = process.env.META_TAG_BASE_URL || 'https://neurohyderabad.org';
+          const USER_AGENT = 'Mozilla/5.0 (compatible; MetaTagChecker/1.0)';
+          
           const urls = [
-            'https://neurohyderabad.org',
-            'https://neurohyderabad.org/about',
-            'https://neurohyderabad.org/treatments',
-            'https://neurohyderabad.org/contact'
-          ];
+            '/',
+            '/about',
+            '/services',
+            '/contact'
+          ].map((path) => new URL(path, BASE_URL).toString());
+
+          async function fetchHtml(url) {
+            const res = await fetch(url, {
+              redirect: 'follow',
+              headers: { 'User-Agent': USER_AGENT }
+            });
+            const data = await res.text();
+            return { data, status: res.status, finalUrl: res.url };
+          }
           
           async function checkMetaTags(url) {
-            return new Promise((resolve, reject) => {
-              https.get(url, (res) => {
-                let data = '';
-                res.on('data', chunk => data += chunk);
-                res.on('end', () => {
-                  const issues = [];
-                  
-                  // Check title
-                  const titleMatch = data.match(/<title>(.*?)<\/title>/i);
-                  const title = titleMatch ? titleMatch[1] : '';
-                  
-                  if (!title) {
-                    issues.push('Missing <title> tag');
-                  } else if (title.length < 30) {
-                    issues.push(`Title too short (${title.length} chars, min 30)`);
-                  } else if (title.length > 60) {
-                    issues.push(`Title too long (${title.length} chars, max 60)`);
-                  }
-                  
-                  // Check description
-                  const descMatch = data.match(/<meta name="description" content="(.*?)"\/?>/i);
-                  const description = descMatch ? descMatch[1] : '';
-                  
-                  if (!description) {
-                    issues.push('Missing meta description');
-                  } else if (description.length < 120) {
-                    issues.push(`Description too short (${description.length} chars, min 120)`);
-                  } else if (description.length > 160) {
-                    issues.push(`Description too long (${description.length} chars, max 160)`);
-                  }
-                  
-                  // Check OG tags
-                  if (!data.match(/<meta property="og:title"/i)) {
-                    issues.push('Missing og:title');
-                  }
-                  if (!data.match(/<meta property="og:description"/i)) {
-                    issues.push('Missing og:description');
-                  }
-                  if (!data.match(/<meta property="og:image"/i)) {
-                    issues.push('Missing og:image');
-                  }
-                  if (!data.match(/<meta property="og:url"/i)) {
-                    issues.push('Missing og:url');
-                  }
-                  
-                  // Check Twitter Card
-                  if (!data.match(/<meta name="twitter:card"/i)) {
-                    issues.push('Missing twitter:card');
-                  }
-                  
-                  // Check canonical
-                  if (!data.match(/<link rel="canonical"/i)) {
-                    issues.push('Missing canonical tag');
-                  }
-                  
-                  resolve({ url, title, description, issues });
-                });
-              }).on('error', reject);
-            });
+            const { data, status, finalUrl } = await fetchHtml(url);
+            const issues = [];
+            
+            if (status >= 400) {
+              issues.push(`HTTP ${status}`);
+            }
+            
+            const $ = cheerio.load(data);
+            
+            // Check title
+            const title = $('title').first().text().trim();
+            
+            if (!title) {
+              issues.push('Missing <title> tag');
+            } else if (title.length < 30) {
+              issues.push(`Title too short (${title.length} chars, min 30)`);
+            } else if (title.length > 60) {
+              issues.push(`Title too long (${title.length} chars, max 60)`);
+            }
+            
+            // Check description
+            const description = $('meta[name="description"]').attr('content') || '';
+            
+            if (!description) {
+              issues.push('Missing meta description');
+            } else if (description.length < 120) {
+              issues.push(`Description too short (${description.length} chars, min 120)`);
+            } else if (description.length > 160) {
+              issues.push(`Description too long (${description.length} chars, max 160)`);
+            }
+            
+            // Check OG tags
+            if ($('meta[property="og:title"]').length === 0) {
+              issues.push('Missing og:title');
+            }
+            if ($('meta[property="og:description"]').length === 0) {
+              issues.push('Missing og:description');
+            }
+            if ($('meta[property="og:image"]').length === 0) {
+              issues.push('Missing og:image');
+            }
+            if ($('meta[property="og:url"]').length === 0) {
+              issues.push('Missing og:url');
+            }
+            
+            // Check Twitter Card
+            if ($('meta[name="twitter:card"]').length === 0) {
+              issues.push('Missing twitter:card');
+            }
+            
+            // Check canonical
+            if ($('link[rel="canonical"]').length === 0) {
+              issues.push('Missing canonical tag');
+            }
+            
+            return { url, finalUrl, title, description, issues };
           }
           
           async function main() {
@@ -109,12 +117,20 @@ jobs:
                 const result = await checkMetaTags(url);
                 results.push(result);
                 
+                const redirected = result.finalUrl && result.finalUrl !== url;
+                
                 if (result.issues.length === 0) {
                   console.log(`✅ ${url}`);
+                  if (redirected) {
+                    console.log(`   Final: ${result.finalUrl}`);
+                  }
                   console.log(`   Title: ${result.title}`);
                   console.log(`   Desc: ${result.description.substring(0, 60)}...`);
                 } else {
                   console.log(`⚠️  ${url}`);
+                  if (redirected) {
+                    console.log(`   Final: ${result.finalUrl}`);
+                  }
                   result.issues.forEach(issue => {
                     console.log(`   - ${issue}`);
                   });
