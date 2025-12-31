@@ -1,7 +1,8 @@
 import { inngest } from "@/src/lib/inngest";
 import type { Events } from "@/src/lib/inngest";
 import { crm } from "@/src/lib/crm";
-// import EmailService from "@/src/lib/email";
+import { CalendarService } from "@/src/lib/calendar";
+import { EmailService } from "@/src/lib/email";
 
 // Patient Journey: Initial Contact to Consultation
 export const patientJourneyOrchestrator = inngest.createFunction(

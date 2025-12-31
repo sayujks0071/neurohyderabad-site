@@ -66,3 +66,6 @@ public/sitemap*.xml
 public/robots.txt
 .vercel
 .env*.local
+
+# Empty external submodule directory (actual code is in packages/appointment-form)
+external/appointmentform/
