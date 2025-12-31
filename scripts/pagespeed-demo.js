@@ -6,7 +6,13 @@
 async function run() {
   const apiEndpoint = 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed';
   const targetUrl = 'https://www.drsayuj.info';
-  const apiKey = process.env.PAGESPEED_API_KEY || 'AIzaSyByITvJ5OqZLlirrezg3ho_neh92d13JpM';
+  const apiKey = process.env.PAGESPEED_API_KEY;
+
+  if (!apiKey) {
+    console.error('❌ PAGESPEED_API_KEY environment variable is required');
+    console.error('💡 Set it with: export PAGESPEED_API_KEY=your_api_key');
+    process.exit(1);
+  }
 
   const url = new URL(apiEndpoint);
   url.searchParams.set('url', targetUrl);

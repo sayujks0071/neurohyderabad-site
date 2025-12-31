@@ -10,6 +10,8 @@
      ============================================ */
   
   /* Font Families */
+  --font-inter: "Inter";
+  --font-merriweather: "Merriweather";
   --font-primary: var(--font-inter), system-ui, -apple-system, sans-serif;
   --font-secondary: var(--font-merriweather), Georgia, serif;
   
