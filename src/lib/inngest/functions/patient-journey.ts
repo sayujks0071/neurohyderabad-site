@@ -1,6 +1,8 @@
 import { inngest } from "@/src/lib/inngest";
 import type { Events } from "@/src/lib/inngest";
-// import EmailService from "@/src/lib/email";
+import { crm } from "@/src/lib/crm";
+import { CalendarService } from "@/src/lib/calendar";
+import { EmailService } from "@/src/lib/email";
 
 // Patient Journey: Initial Contact to Consultation
 export const patientJourneyOrchestrator = inngest.createFunction(
@@ -48,10 +50,26 @@ export const patientJourneyOrchestrator = inngest.createFunction(
     // Step 3: Add to CRM/lead tracking
     await step.run("add-to-crm", async () => {
       console.log(`Adding ${patientName} to CRM system`);
-      // TODO: Integrate with CRM (HubSpot, Salesforce, etc.)
+
+      const leadScore = urgency === "high" ? 90 : urgency === "medium" ? 70 : 50;
+
+      const addResult = await crm.addLead({
+        email: patientEmail,
+        firstName: patientName.split(' ')[0],
+        lastName: patientName.split(' ').slice(1).join(' '),
+        source,
+        condition,
+        urgency
+      });
+
+      if (addResult.success) {
+        await crm.updateLeadScore(patientEmail, leadScore);
+      }
+
       return {
-        crmAdded: true,
-        leadScore: urgency === "high" ? 90 : urgency === "medium" ? 70 : 50
+        crmAdded: addResult.success,
+        leadId: addResult.id,
+        leadScore
       };
     });
 
@@ -214,8 +232,33 @@ export const appointmentPreparation = inngest.createFunction(
     // Step 3: Add to calendar and send calendar invite
     await step.run("create-calendar-invite", async () => {
       console.log(`Creating calendar invite for ${patientEmail}`);
-      // TODO: Integrate with calendar service (Google Calendar, Outlook)
-      return { calendarInviteSent: true };
+
+      // 1. Generate ICS
+      const { icsContent, error } = await CalendarService.generateCalendarInvite(
+        patientEmail,
+        patientName,
+        appointmentDate,
+        appointmentType
+      );
+
+      if (error || !icsContent) {
+        console.error("Failed to generate calendar invite:", error);
+        return { calendarInviteSent: false, error };
+      }
+
+      // 2. Send Email with Attachment
+      const result = await EmailService.sendCalendarInvite(
+        patientEmail,
+        patientName,
+        appointmentDate,
+        icsContent
+      );
+
+      return {
+        calendarInviteSent: result.success,
+        messageId: result.messageId,
+        error: result.error
+      };
     });
 
     return {

@@ -203,7 +203,7 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
             <strong>Contact:</strong>
             <a href="tel:+919778280044" className="text-blue-600 hover:underline ml-2">+91-9778280044</a> •
             <a href="mailto:hellodr@drsayuj.info" className="text-blue-600 hover:underline ml-2">hellodr@drsayuj.info</a> •
-            <a href="/appointments" className="text-blue-600 hover:underline ml-2">Appointments</a>
+            <Link href="/appointments" className="text-blue-600 hover:underline ml-2">Appointments</Link>
           </p>
         </section>
 

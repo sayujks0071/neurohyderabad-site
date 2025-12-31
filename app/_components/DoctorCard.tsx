@@ -1,7 +1,11 @@
 import Link from 'next/link';
 import OptimizedImage from './OptimizedImage';
 
-export default function DoctorCard() {
+interface DoctorCardProps {
+  priority?: boolean;
+}
+
+export default function DoctorCard({ priority = false }: DoctorCardProps) {
   return (
     <div className="bg-white rounded-xl shadow-lg p-6 max-w-md mx-auto">
       <div className="text-center">
@@ -16,7 +20,8 @@ export default function DoctorCard() {
             quality={75}
             sizes="128px"
             placeholder="blur"
-            loading="lazy"
+            priority={priority}
+            loading={priority ? undefined : "lazy"}
             decoding="async"
           />
         </div>
