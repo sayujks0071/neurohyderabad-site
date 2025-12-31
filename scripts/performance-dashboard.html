@@ -275,7 +275,13 @@
     </div>
 
     <script>
-        const API_KEY = 'AIzaSyByITvJ5OqZLlirrezg3ho_neh92d13JpM';
+        // API_KEY must be set via environment variable or server-side injection
+        // DO NOT hardcode API keys in client-side code
+        const API_KEY = window.PAGESPEED_API_KEY || '';
+        if (!API_KEY) {
+            console.error('❌ PAGESPEED_API_KEY is required. Set it via server-side injection.');
+            document.body.innerHTML = '<div style="padding: 2rem; text-align: center;"><h1>Configuration Error</h1><p>PAGESPEED_API_KEY must be set via environment variable.</p></div>';
+        }
         const SITE_URL = 'https://www.drsayuj.info';
         
         async function fetchPerformanceData() {
