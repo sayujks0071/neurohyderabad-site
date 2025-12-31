@@ -411,6 +411,94 @@ Emergency Contact: +91-9778280044`,
       return { success: false, error: errorMessage };
     }
   }
+
+  // Send health reminder
+  static async sendHealthReminder(
+    patientEmail: string,
+    patientName: string,
+    reminderType: string,
+    content: string,
+    condition?: string,
+    doctorContact?: string
+  ) {
+    const emailData: EmailTemplate = {
+      to: patientEmail,
+      from: this.fromEmail,
+      subject: `${reminderType.charAt(0).toUpperCase() + reminderType.slice(1)} Reminder - Dr. Sayuj Krishnan`,
+      text: `${reminderType.charAt(0).toUpperCase() + reminderType.slice(1)} Reminder - Dr. Sayuj Krishnan
+
+Dear ${patientName},
+
+${content}
+
+${condition ? `Condition: ${condition}\n` : ''}
+${doctorContact ? `Contact: ${doctorContact}\n` : ''}
+
+Health Tip:
+Regular check-ups and following medical advice are key to your recovery and well-being.
+
+Emergency Contact: +91-9778280044
+
+© 2025 Dr. Sayuj Krishnan. All rights reserved.`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <div style="background: linear-gradient(135deg, #4f46e5, #6366f1); color: white; padding: 30px; text-align: center;">
+            <h1 style="margin: 0; font-size: 28px;">🔔 ${reminderType.charAt(0).toUpperCase() + reminderType.slice(1)} Reminder</h1>
+            <p style="margin: 10px 0 0 0; font-size: 16px;">Dr. Sayuj Krishnan - Neurosurgeon</p>
+          </div>
+
+          <div style="padding: 30px; background: #f8fafc;">
+            <h2 style="color: #4f46e5; margin-top: 0;">Dear ${patientName},</h2>
+
+            <div style="background: white; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #6366f1;">
+              <p style="font-size: 16px; line-height: 1.5; margin: 0;">${content}</p>
+            </div>
+
+            ${condition ? `
+            <div style="margin: 20px 0; padding: 15px; background-color: #f1f5f9; border-radius: 6px;">
+              <p style="margin: 0;"><strong>Condition:</strong> ${condition}</p>
+            </div>` : ''}
+
+            <div style="background: #e0e7ff; padding: 20px; border-radius: 8px; margin: 20px 0;">
+              <h3 style="color: #3730a3; margin-top: 0;">💡 Health Tip</h3>
+              <p style="color: #3730a3; margin: 0;">Regular check-ups and following medical advice are key to your recovery and well-being.</p>
+            </div>
+
+            <div style="text-align: center; margin: 30px 0;">
+              <a href="https://www.drsayuj.info/contact"
+                 style="background: #4f46e5; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
+                Contact Us
+              </a>
+            </div>
+          </div>
+
+          <div style="background: #1f2937; color: white; padding: 20px; text-align: center;">
+            ${doctorContact ? `<p><strong>Doctor Contact:</strong> ${doctorContact}</p>` : ''}
+            <p><strong>Emergency Contact:</strong> +91-9778280044</p>
+            <p style="margin-bottom: 0; font-size: 14px; color: #9ca3af;">
+              © 2025 Dr. Sayuj Krishnan. All rights reserved.
+            </p>
+          </div>
+        </div>
+      `
+    };
+
+    try {
+      // Check if we have a valid API key
+      if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === 're_development_key') {
+        console.log(`Development mode: Health reminder (${reminderType}) not sent (no API key)`);
+        return { success: true, messageId: 'dev_mode', development: true };
+      }
+
+      const result = await resend.emails.send(emailData);
+      console.log('Health reminder sent successfully:', result);
+      return { success: true, messageId: result.data?.id };
+    } catch (error) {
+      console.error('Failed to send health reminder:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      return { success: false, error: errorMessage };
+    }
+  }
 }
 
 export default EmailService;

@@ -1,5 +1,6 @@
 import { inngest } from "@/src/lib/inngest";
 import type { Events } from "@/src/lib/inngest";
+import EmailService from "@/src/lib/email";
 
 // Patient Education Content Delivery
 export const patientEducationDelivery = inngest.createFunction(
@@ -205,7 +206,16 @@ export const healthReminders = inngest.createFunction(
         }
       };
 
-      // TODO: Send actual reminder (email, SMS, push notification)
+      // Send actual reminder via email
+      await EmailService.sendHealthReminder(
+        patientEmail,
+        patientName,
+        reminderType,
+        reminderContent.content,
+        condition,
+        "+91-9778280044"
+      );
+
       console.log("Reminder sent:", reminder);
       return { reminderSent: true };
     });
