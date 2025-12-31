@@ -205,12 +205,12 @@ export default function SciaticaPainManagementPage() {
                 Don't let sciatica pain control your life. Dr. Sayuj Krishnan offers comprehensive treatment options from conservative management to advanced endoscopic surgery. Book a consultation to discuss your symptoms and explore the best treatment approach for your condition.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <a
+                <Link
                   href="/appointments"
                   className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors text-center"
                 >
                   Book Consultation
-                </a>
+                </Link>
                 <a
                   href="tel:+919778280044"
                   className="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors text-center"
@@ -237,7 +237,6 @@ export default function SciaticaPainManagementPage() {
     </div>
   );
 }
-
 
 
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 
 interface ContentRecommendationsProps {
@@ -34,13 +34,11 @@ export default function ContentRecommendations({
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (query || currentSlug) {
-      loadRecommendations();
+  const loadRecommendations = useCallback(async () => {
+    if (!query && !currentSlug) {
+      return;
     }
-  }, [query, currentSlug, limit]);
 
-  const loadRecommendations = async () => {
     setIsLoading(true);
     setError(null);
 
@@ -69,7 +67,11 @@ export default function ContentRecommendations({
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [query, currentSlug, limit]);
+
+  useEffect(() => {
+    loadRecommendations();
+  }, [loadRecommendations]);
 
   if (isLoading) {
     return (
@@ -138,4 +140,3 @@ export default function ContentRecommendations({
     </div>
   );
 }
-

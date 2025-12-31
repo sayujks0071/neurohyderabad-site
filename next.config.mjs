@@ -88,6 +88,12 @@ const nextConfig = {
         destination: '/services',
         permanent: true,
       },
+      // Redirect /treatments to /services (consolidate treatments/services)
+      {
+        source: '/treatments',
+        destination: '/services',
+        permanent: true,
+      },
       // Redirect /disease-guides to /conditions (consolidate medical info)
       {
         source: '/disease-guides/:path*',

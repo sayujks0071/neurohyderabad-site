@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { SITE_URL } from '../../src/lib/seo';
 
 export const metadata = {
@@ -129,9 +130,9 @@ export default function Page() {
           <a href="tel:+919778280044" className="rounded-2xl px-6 py-3 border">
             Call: +91-9778280044
           </a>
-          <a href="/appointments" className="rounded-2xl px-6 py-3 bg-blue-600 text-white">
+          <Link href="/appointments" className="rounded-2xl px-6 py-3 bg-blue-600 text-white">
             Book Appointment
-          </a>
+          </Link>
           <a href="https://maps.google.com/?q=Yashoda+Hospitals+Malakpet+Hyderabad" className="rounded-2xl px-6 py-3 border">
             Directions (Google Maps)
           </a>

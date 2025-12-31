@@ -6,6 +6,20 @@ import MedicalReviewNotice from '../../src/components/MedicalReviewNotice';
 export const metadata: Metadata = {
   title: 'Neurosurgical Services in Hyderabad | Dr. Sayuj Krishnan',
   description: 'Expert neurosurgical services including endoscopic spine surgery, brain tumor surgery, epilepsy surgery, and trigeminal neuralgia treatment in Hyderabad.',
+  keywords: [
+    'neurosurgical services hyderabad',
+    'spine surgery hyderabad',
+    'brain surgery hyderabad',
+    'endoscopic spine surgery',
+    'minimally invasive spine surgery',
+    'brain tumor surgery hyderabad',
+    'epilepsy surgery hyderabad',
+    'trigeminal neuralgia treatment',
+    'neurosurgeon services',
+    'spine specialist services',
+    'awake brain surgery',
+    'ROSA DBS hyderabad'
+  ],
   alternates: {
     canonical: `${SITE_URL}/services/`,
     languages: {
@@ -20,7 +34,7 @@ export const metadata: Metadata = {
     siteName: 'Dr. Sayuj Krishnan - Neurosurgeon in Hyderabad',
     images: [
       {
-        url: `${SITE_URL}/api/og?title=Neurosurgical%20Services&subtitle=Expert%20Brain%20%26%20Spine%20Care`,
+        url: `${SITE_URL}/images/og-default.jpg`,
         width: 1200,
         height: 630,
         alt: 'Neurosurgical Services - Dr. Sayuj Krishnan',
@@ -34,7 +48,9 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Neurosurgical Services in Hyderabad | Dr. Sayuj Krishnan',
     description: 'Expert neurosurgical services including endoscopic spine surgery, brain tumor surgery, epilepsy surgery, and trigeminal neuralgia treatment in Hyderabad.',
-    images: [`${SITE_URL}/api/og?title=Neurosurgical%20Services&subtitle=Expert%20Brain%20%26%20Spine%20Care`],
+    images: [`${SITE_URL}/images/og-default.jpg`],
+    site: '@drsayuj',
+    creator: '@drsayuj'
   },
 };
 

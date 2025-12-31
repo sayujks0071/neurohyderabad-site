@@ -15,7 +15,23 @@ const clinicSchema = getMedicalClinicSchema();
 export const metadata: Metadata = {
   title: "Contact Dr Sayuj Krishnan | Neurosurgeon in Hyderabad",
   description: "Contact Dr Sayuj Krishnan for neurosurgical consultations. Phone: +91 9778280044, Email: hellodr@drsayuj.info. Located at Yashoda Hospital, Malakpet.",
-  alternates: { canonical: "/contact" },
+  keywords: [
+    "contact neurosurgeon hyderabad",
+    "dr sayuj krishnan contact",
+    "neurosurgeon hyderabad phone number",
+    "yashoda hospital malakpet neurosurgeon",
+    "book appointment neurosurgeon hyderabad",
+    "emergency neurosurgeon hyderabad",
+    "spine surgeon hyderabad contact",
+    "brain surgeon hyderabad consultation"
+  ],
+  alternates: {
+    canonical: `${SITE_URL}/contact`,
+    languages: {
+      'en-IN': `${SITE_URL}/contact`,
+      'x-default': `${SITE_URL}/contact`
+    }
+  },
   openGraph: {
     title: "Contact Dr Sayuj Krishnan | Neurosurgeon in Hyderabad",
     description: "Contact Dr Sayuj Krishnan for neurosurgical consultations. Phone: +91 9778280044, Email: hellodr@drsayuj.info. Located at Yashoda Hospital, Malakpet.",
@@ -25,13 +41,21 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: `${SITE_URL}/api/og?title=${encodeURIComponent("Contact Dr Sayuj Krishnan")}&subtitle=${encodeURIComponent("Expert neurosurgical care")}`,
+        url: `${SITE_URL}/images/og-default.jpg`,
         width: 1200,
         height: 630,
         alt: "Contact Dr Sayuj Krishnan — Neurosurgeon in Hyderabad",
         type: 'image/jpeg'
       },
     ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Contact Dr Sayuj Krishnan | Neurosurgeon in Hyderabad",
+    description: "Contact Dr Sayuj Krishnan for neurosurgical consultations. Phone: +91 9778280044, Email: hellodr@drsayuj.info. Located at Yashoda Hospital, Malakpet.",
+    images: [`${SITE_URL}/images/og-default.jpg`],
+    site: '@drsayuj',
+    creator: '@drsayuj'
   },
 };
 
