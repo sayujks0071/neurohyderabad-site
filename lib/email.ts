@@ -383,6 +383,41 @@ export const sendPreAppointmentBriefingEmail = async (data: {
   }
 };
 
+export const addNewsletterSubscriber = async (data: { email: string; name?: string }) => {
+  try {
+    const audienceId = process.env.RESEND_AUDIENCE_ID;
+    if (!audienceId) {
+      console.warn('RESEND_AUDIENCE_ID is not set. Skipping subscription storage.');
+      return { success: false, error: 'Configuration missing' };
+    }
+
+    let firstName, lastName;
+    if (data.name) {
+      const parts = data.name.trim().split(/\s+/);
+      firstName = parts[0];
+      lastName = parts.slice(1).join(' ');
+    }
+
+    const result = await resend.contacts.create({
+      email: data.email,
+      firstName,
+      lastName,
+      audienceId,
+      unsubscribed: false,
+    });
+
+    if (result.error) {
+      console.error('Error from Resend adding subscriber:', result.error);
+      return { success: false, error: result.error.message };
+    }
+
+    return { success: true, contactId: result.data?.id };
+  } catch (error) {
+    console.error('Error adding subscriber to Resend:', error);
+    return { success: false, error: error instanceof Error ? error.message : 'Unknown error' };
+  }
+};
+
 export const sendNewsletterSubscriptionEmail = async (data: {
   email: string;
   name?: string;
