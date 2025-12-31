@@ -1,6 +1,7 @@
 import { openai } from '@ai-sdk/openai';
 import { streamText } from 'ai';
 import { NextRequest } from 'next/server';
+import { rateLimit } from '../../../../src/lib/rate-limit';
 
 /**
  * Streaming Chat API using Vercel AI SDK
@@ -10,6 +11,21 @@ import { NextRequest } from 'next/server';
  */
 export async function POST(request: NextRequest) {
   try {
+    // 🛡️ Rate Limiting: 10 requests per minute per IP
+    const ip = request.headers.get('x-forwarded-for') ?? 'unknown';
+    const limit = await rateLimit(ip, 10, 60 * 1000); // 10 requests per minute
+
+    if (!limit.success) {
+      return new Response('Too Many Requests', {
+        status: 429,
+        headers: {
+          'X-RateLimit-Limit': limit.limit.toString(),
+          'X-RateLimit-Remaining': limit.remaining.toString(),
+          'X-RateLimit-Reset': limit.reset.toString(),
+        }
+      });
+    }
+
     const body = await request.json();
     const { message, conversationHistory = [], pageSlug, service } = body;
 
