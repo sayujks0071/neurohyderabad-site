@@ -1,10 +1,17 @@
 import { MockCRM } from './mock-crm';
+import { HubSpotCRM } from './hubspot-crm';
 import { CRMProvider } from './types';
 
-// In a real application, you might switch based on environment variables
-// e.g. const crm: CRMProvider = process.env.CRM_PROVIDER === 'hubspot' ? new HubSpotCRM() : new MockCRM();
+// Factory to get the appropriate CRM provider
+export const getCRM = (): CRMProvider => {
+  // Check for HubSpot API key
+  if (process.env.HUBSPOT_ACCESS_TOKEN) {
+    return new HubSpotCRM(process.env.HUBSPOT_ACCESS_TOKEN);
+  }
 
-const crm: CRMProvider = new MockCRM();
+  // Fallback to Mock CRM for development/testing
+  return new MockCRM();
+};
 
-export { crm };
+export const crm = getCRM();
 export * from './types';

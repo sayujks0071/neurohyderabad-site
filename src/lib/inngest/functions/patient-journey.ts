@@ -49,14 +49,19 @@ export const patientJourneyOrchestrator = inngest.createFunction(
 
     // Step 3: Add to CRM/lead tracking
     await step.run("add-to-crm", async () => {
-      console.log(`Adding ${patientName} to CRM system`);
+      console.log(`Adding ${patientName} to CRM system (${crm.name})`);
 
       const leadScore = urgency === "high" ? 90 : urgency === "medium" ? 70 : 50;
 
+      // Robust name splitting
+      const nameParts = patientName.trim().split(/\s+/);
+      const firstName = nameParts[0];
+      const lastName = nameParts.length > 1 ? nameParts.slice(1).join(' ') : undefined;
+
       const addResult = await crm.addLead({
         email: patientEmail,
-        firstName: patientName.split(' ')[0],
-        lastName: patientName.split(' ').slice(1).join(' '),
+        firstName,
+        lastName,
         source,
         condition,
         urgency
