@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useState, CSSProperties } from 'react';
+import { useState, useMemo, CSSProperties } from 'react';
 
 interface OptimizedImageProps {
   src: string;
@@ -41,13 +41,15 @@ export default function OptimizedImage({
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 
-  // Generate a simple blur placeholder if not provided
-  const defaultBlurDataURL = blurDataURL || `data:image/svg+xml;base64,${Buffer.from(
-    `<svg width="${width || 400}" height="${height || 300}" xmlns="http://www.w3.org/2000/svg">
+  // Generate a simple blur placeholder if not provided (using btoa instead of Buffer for client component)
+  const defaultBlurDataURL = useMemo(() => {
+    if (blurDataURL) return blurDataURL;
+    const svg = `<svg width="${width || 400}" height="${height || 300}" xmlns="http://www.w3.org/2000/svg">
       <rect width="100%" height="100%" fill="#f3f4f6"/>
       <text x="50%" y="50%" text-anchor="middle" dy=".3em" fill="#9ca3af" font-family="system-ui">Loading...</text>
-    </svg>`
-  ).toString('base64')}`;
+    </svg>`;
+    return `data:image/svg+xml;base64,${btoa(svg)}`;
+  }, [blurDataURL, width, height]);
 
   const handleLoad = () => {
     setIsLoading(false);
