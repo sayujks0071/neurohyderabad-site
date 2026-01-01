@@ -11,6 +11,7 @@ interface OptimizedImageProps {
   fill?: boolean;
   priority?: boolean;
   className?: string;
+  imgClassName?: string;
   sizes?: string;
   quality?: number;
   placeholder?: 'blur' | 'empty';
@@ -29,6 +30,7 @@ export default function OptimizedImage({
   fill = false,
   priority = false,
   className = '',
+  imgClassName = '',
   sizes = '100vw',
   quality = 85,
   placeholder = 'blur',
@@ -100,7 +102,7 @@ export default function OptimizedImage({
         quality={quality}
         placeholder={placeholder}
         blurDataURL={defaultBlurDataURL}
-        className={`transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
+        className={`transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'} ${imgClassName}`}
         style={style}
         onLoad={handleLoad}
         onError={handleError}
