@@ -44,6 +44,7 @@
     "@vercel/edge-config": "^1.4.3",
     "@vercel/og": "^0.8.5",
     "ai": "^5.0.106",
+    "botid": "^1.5.10",
     "critters": "^0.0.23",
     "flags": "^4.0.2",
     "hypertune": "^2.10.1",
