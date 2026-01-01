@@ -15,25 +15,24 @@ import MedicalDisclaimer from '@/components/MedicalDisclaimer';
  * - Utility routes (/utm-links, /force-*)
  * - Internal test pages (/statsig-test, /cache-test-*)
  */
+const EXCLUDE_PATTERNS = [
+  /^\/api\//,                    // API routes
+  /^\/test-routes/,              // Test routes
+  /^\/utm-links/,                // UTM link utility page
+  /^\/admin\//,                  // Admin routes (if any)
+  /^\/force-/,                   // Force redeploy/cache test pages
+  /^\/statsig-test/,             // Statsig test pages
+  /^\/cache-test/,               // Cache test pages
+  /^\/test-compression/,         // Compression test
+  /^\/test-inngest/,             // Inngest test
+  /^\/simple-statsig-test/,      // Simple statsig test
+];
+
 export default function ConditionalEEATSection() {
   const pathname = usePathname();
 
-  // Define patterns where E-E-A-T components should NOT appear
-  const excludePatterns = [
-    /^\/api\//,                    // API routes
-    /^\/test-routes/,              // Test routes
-    /^\/utm-links/,                // UTM link utility page
-    /^\/admin\//,                  // Admin routes (if any)
-    /^\/force-/,                   // Force redeploy/cache test pages
-    /^\/statsig-test/,             // Statsig test pages
-    /^\/cache-test/,               // Cache test pages
-    /^\/test-compression/,         // Compression test
-    /^\/test-inngest/,             // Inngest test
-    /^\/simple-statsig-test/,      // Simple statsig test
-  ];
-
   // Check if current pathname matches any exclude pattern
-  const shouldExclude = excludePatterns.some(pattern => pattern.test(pathname));
+  const shouldExclude = EXCLUDE_PATTERNS.some(pattern => pattern.test(pathname));
 
   // Don't render on excluded routes
   if (shouldExclude) {
