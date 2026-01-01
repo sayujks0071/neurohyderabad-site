@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 export const metadata = {
   title: "Endoscopic Spine Surgery in Hyderabad | Cervical & Lumbar | Dr. Sayuj Krishnan",
@@ -6,29 +7,6 @@ export const metadata = {
     "Full Endoscopic Spine Surgery (FESS) in Hyderabad for cervical/lumbar disc herniation and foraminal stenosis. Indications, technique, risks, recovery timelines, FAQs, and booking.",
   alternates: { canonical: "https://www.drsayuj.info/endoscopic-spine-surgery-hyderabad" },
 };
-
-const SECTIONS = [
-  {
-    title: "Who is it for?",
-    body:
-      "Patients with cervical or lumbar radiculopathy from soft disc herniation or focal foraminal stenosis with clinicoradiological concordance. We exclude red flags (myelopathy/instability/infection/tumor) and optimize comorbidities.",
-  },
-  {
-    title: "Technique (Inside-out vs Outside-in)",
-    body:
-      "Approach is tailored to pathology/level. Endoscopic access via a working channel with continuous irrigation allows decompression under magnified vision. The choice between inside-out and outside-in depends on fragment location and foraminal anatomy.",
-  },
-  {
-    title: "Benefits & Risks",
-    body:
-      "Benefits may include smaller access corridor, less muscle trauma, reduced blood loss, and shorter hospital stay. Risks include dural tear, nerve injury, dysesthesia, infection, hematoma, and symptom persistence/recurrence. All patients receive informed, documented counseling.",
-  },
-  {
-    title: "Recovery Timeline (Typical)",
-    body:
-      "Ambulation within hours; discharge often within 24 hours; ADLs in 3–7 days; desk work 2–3 weeks; progressive conditioning thereafter. Individual recovery varies.",
-  },
-];
 
 const FAQ = [
   {
@@ -109,25 +87,90 @@ export default function Page() {
         </div>
       </header>
 
+      {/* Trust & Expertise Section */}
+      <section className="mb-10 bg-blue-50 p-6 rounded-2xl border border-blue-100">
+        <h2 className="text-2xl font-bold text-blue-900">Why Choose Dr. Sayuj Krishnan for Endoscopic Spine Surgery?</h2>
+        <ul className="mt-4 space-y-4">
+          <li className="flex gap-3">
+            <span className="text-xl">✅</span>
+            <span>
+              <strong>Specialized Training:</strong> <Link href="/about" className="text-blue-700 hover:underline">German-trained neurosurgeon</Link> with extensive experience in minimally invasive techniques.
+            </span>
+          </li>
+          <li className="flex gap-3">
+            <span className="text-xl">✅</span>
+            <span>
+              <strong>Minimally Invasive Expertise:</strong> Specializing in <Link href="/spine-surgery" className="text-blue-700 hover:underline">Full Endoscopic Spine Surgery (FESS)</Link> which allows for smaller incisions (less than 1cm) and faster recovery compared to traditional open surgery.
+            </span>
+          </li>
+          <li className="flex gap-3">
+            <span className="text-xl">✅</span>
+            <span>
+              <strong>Advanced Facility:</strong> Procedures are performed at <Link href="/locations/malakpet" className="text-blue-700 hover:underline">Yashoda Hospitals, Malakpet</Link>, equipped with state-of-the-art endoscopic visualization systems.
+            </span>
+          </li>
+        </ul>
+      </section>
+
       <section className="space-y-8 mb-10">
-        {SECTIONS.map((s) => (
-          <article key={s.title}>
-            <h2 className="text-2xl font-semibold">{s.title}</h2>
-            <p className="mt-3">{s.body}</p>
-          </article>
-        ))}
+        <article>
+          <h2 className="text-2xl font-semibold">Who is it for?</h2>
+          <p className="mt-3">
+            Patients with <Link href="/conditions/cervical-radiculopathy-treatment-hyderabad" className="text-blue-600 hover:underline">cervical radiculopathy</Link> or lumbar radiculopathy from soft disc herniation or focal foraminal stenosis with clinicoradiological concordance. We exclude red flags (myelopathy/instability/infection/tumor) and optimize comorbidities.
+          </p>
+          <p className="mt-2 text-gray-600 text-sm">
+            Not sure if you are a candidate? See our guide on <Link href="/conditions/slip-disc-treatment-hyderabad" className="text-blue-600 hover:underline">Slip Disc Treatment</Link>.
+          </p>
+        </article>
+
+        <article>
+          <h2 className="text-2xl font-semibold">Technique (Inside-out vs Outside-in)</h2>
+          <p className="mt-3">
+            Approach is tailored to pathology/level. Endoscopic access via a working channel with continuous irrigation allows decompression under magnified vision. The choice between inside-out and outside-in depends on fragment location and foraminal anatomy.
+          </p>
+        </article>
+
+        <article>
+          <h2 className="text-2xl font-semibold">Benefits & Risks</h2>
+          <p className="mt-3">
+            Benefits may include smaller access corridor, less muscle trauma, reduced blood loss, and shorter hospital stay. Risks include dural tear, nerve injury, dysesthesia, infection, hematoma, and symptom persistence/recurrence. All patients receive informed, documented counseling.
+          </p>
+        </article>
+
+        <article>
+          <h2 className="text-2xl font-semibold">Recovery Timeline (Typical)</h2>
+          <p className="mt-3">
+            Ambulation within hours; discharge often within 24 hours; ADLs in 3–7 days; desk work 2–3 weeks; progressive conditioning thereafter. Individual recovery varies.
+          </p>
+        </article>
       </section>
 
       <section>
         <h2 className="text-2xl font-semibold">FAQs</h2>
         <div className="mt-4 space-y-4">
           {FAQ.map(({ q, a }) => (
-            <details key={q} className="rounded-xl border p-4">
-              <summary className="font-medium">{q}</summary>
-              <p className="mt-2">{a}</p>
+            <details key={q} className="rounded-xl border p-4 group">
+              <summary className="font-medium cursor-pointer list-none flex justify-between items-center">
+                {q}
+                <span className="transition group-open:rotate-180">
+                  <svg fill="none" height="24" shapeRendering="geometricPrecision" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                </span>
+              </summary>
+              <p className="mt-2 text-gray-700">{a}</p>
             </details>
           ))}
         </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="mt-10 p-6 border rounded-2xl bg-gray-50 text-center">
+         <h2 className="text-xl font-bold">Need a Second Opinion?</h2>
+         <p className="mt-2 text-gray-600">Consult Dr. Sayuj Krishnan to verify if you are a candidate for endoscopic surgery.</p>
+         <div className="mt-4">
+            <Link href="/contact" className="inline-block bg-blue-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-blue-700 transition-colors">
+               Book Appointment
+            </Link>
+         </div>
       </section>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
