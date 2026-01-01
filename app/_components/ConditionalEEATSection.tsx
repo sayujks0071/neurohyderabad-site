@@ -14,7 +14,6 @@ import MedicalDisclaimer from '@/components/MedicalDisclaimer';
  * - Admin/test routes (/test-routes, /admin/*)
  * - Utility routes (/utm-links, /force-*)
  * - Internal test pages (/statsig-test, /cache-test-*)
- * - Standalone policy pages (already have their own specific content)
  */
 export default function ConditionalEEATSection() {
   const pathname = usePathname();
