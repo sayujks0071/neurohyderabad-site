@@ -1,5 +1,4 @@
 name: Image Optimization
-
 on:
   pull_request:
     branches: [main]
@@ -7,7 +6,6 @@ on:
       - 'public/**/*.{jpg,jpeg,png,webp,gif,svg}'
       - 'app/**/*.{jpg,jpeg,png,webp,gif,svg}'
   workflow_dispatch:
-
 jobs:
   optimize-images:
     runs-on: ubuntu-latest
@@ -15,6 +13,7 @@ jobs:
       contents: write
       pull-requests: write
     steps:
+
       - name: Checkout code
         uses: actions/checkout@v4
         with:
@@ -26,10 +25,12 @@ jobs:
         uses: pnpm/action-setup@v4
         with:
           version: 9
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'pnpm'
 
       - name: Install sharp for image optimization
         timeout-minutes: 3
@@ -44,31 +45,25 @@ jobs:
           const sharp = require('sharp');
           const fs = require('fs');
           const path = require('path');
-          
           async function optimizeImage(filePath) {
             try {
               const ext = path.extname(filePath).toLowerCase();
               const stats = fs.statSync(filePath);
               const originalSize = stats.size;
-              
               let sharpInstance = sharp(filePath);
-              
               // Get metadata
               const metadata = await sharpInstance.metadata();
-              
               // Skip if already optimized or too small
               if (originalSize < 10000) {
                 console.log(`✅ ${filePath} - Already small (${(originalSize / 1024).toFixed(2)} KB)`);
                 return { optimized: false, saved: 0 };
               }
-              
               // Resize if too large
               if (metadata.width > 2000) {
                 sharpInstance = sharpInstance.resize(2000, null, {
                   withoutEnlargement: true
                 });
               }
-              
               // Optimize based on format
               if (ext === '.jpg' || ext === '.jpeg') {
                 await sharpInstance
@@ -85,12 +80,10 @@ jobs:
               } else {
                 return { optimized: false, saved: 0 };
               }
-              
               const newStats = fs.statSync(filePath + '.tmp');
               const newSize = newStats.size;
               const saved = originalSize - newSize;
               const percent = ((saved / originalSize) * 100).toFixed(2);
-              
               // Only replace if we saved space
               if (saved > 0) {
                 fs.renameSync(filePath + '.tmp', filePath);
@@ -106,14 +99,11 @@ jobs:
               return { optimized: false, saved: 0 };
             }
           }
-          
           async function findImages(dir, images = []) {
             const files = fs.readdirSync(dir);
-            
             for (const file of files) {
               const filePath = path.join(dir, file);
               const stat = fs.statSync(filePath);
-              
               if (stat.isDirectory()) {
                 if (!filePath.includes('node_modules') && !filePath.includes('.next')) {
                   await findImages(filePath, images);
@@ -125,19 +115,14 @@ jobs:
                 }
               }
             }
-            
             return images;
           }
-          
           async function main() {
             console.log('🖼️  Starting Image Optimization\n');
-            
             const images = await findImages('./public');
             console.log(`Found ${images.length} images to process\n`);
-            
             let totalSaved = 0;
             let optimizedCount = 0;
-            
             for (const image of images) {
               const result = await optimizeImage(image);
               if (result.optimized) {
@@ -145,22 +130,18 @@ jobs:
                 totalSaved += result.saved;
               }
             }
-            
             console.log('\n' + '='.repeat(60));
             console.log('📊 Summary:');
             console.log('='.repeat(60));
             console.log(`Total images processed: ${images.length}`);
             console.log(`Images optimized: ${optimizedCount}`);
             console.log(`Total space saved: ${(totalSaved / 1024).toFixed(2)} KB`);
-            
             // Write summary for GitHub Actions
             fs.writeFileSync('optimization-summary.txt', 
               `Optimized ${optimizedCount} images\nSaved ${(totalSaved / 1024).toFixed(2)} KB total`);
           }
-          
           main().catch(console.error);
           EOF
-          
           node optimize-images.js || echo "No images to optimize or optimization completed with warnings"
 
       - name: Create Pull Request with optimizations
@@ -173,19 +154,15 @@ jobs:
           title: '🖼️ Automated Image Optimization'
           body: |
             ## Image Optimization Results
-            
             This PR contains automatically optimized images to improve site performance.
-            
             **Changes:**
             - Compressed JPEG/PNG/WebP images
             - Resized oversized images
             - Applied progressive encoding
-            
             **Benefits:**
             - Faster page load times
             - Reduced bandwidth usage
             - Better Core Web Vitals scores
-            
             Please review and merge if the changes look good.
               branch: automated-image-optimization
               delete-branch: true
@@ -199,16 +176,13 @@ jobs:
           script: |
             const fs = require('fs');
             let summary = 'No optimization summary available';
-            
             try {
               summary = fs.readFileSync('optimization-summary.txt', 'utf8');
             } catch (e) {
               console.log('No summary file found');
             }
-            
             const comment = `## 🖼️ Image Optimization Report\n\n${summary}\n\n` +
               `[View full report](${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID})`;
-            
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,

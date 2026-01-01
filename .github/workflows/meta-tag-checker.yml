@@ -1,5 +1,4 @@
 name: Meta Tag Checker
-
 on:
   push:
     branches: [main]
@@ -9,11 +8,11 @@ on:
     # Run weekly on Wednesday at 3 AM UTC (8:30 AM IST)
     - cron: '0 3 * * 3'
   workflow_dispatch:
-
 jobs:
   check-meta-tags:
     runs-on: ubuntu-latest
     steps:
+
       - name: Checkout code
         uses: actions/checkout@v4
         with:
@@ -23,26 +22,25 @@ jobs:
         uses: pnpm/action-setup@v4
         with:
           version: 9
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'pnpm'
 
       - name: Create meta tag checker
         run: |
           cat > check-meta-tags.js << 'EOF'
           const cheerio = require('cheerio');
-          
           const BASE_URL = process.env.META_TAG_BASE_URL || 'https://neurohyderabad.org';
           const USER_AGENT = 'Mozilla/5.0 (compatible; MetaTagChecker/1.0)';
-          
           const urls = [
             '/',
             '/about',
             '/services',
             '/contact'
           ].map((path) => new URL(path, BASE_URL).toString());
-
           async function fetchHtml(url) {
             const res = await fetch(url, {
               redirect: 'follow',
@@ -51,20 +49,15 @@ jobs:
             const data = await res.text();
             return { data, status: res.status, finalUrl: res.url };
           }
-          
           async function checkMetaTags(url) {
             const { data, status, finalUrl } = await fetchHtml(url);
             const issues = [];
-            
             if (status >= 400) {
               issues.push(`HTTP ${status}`);
             }
-            
             const $ = cheerio.load(data);
-            
             // Check title
             const title = $('title').first().text().trim();
-            
             if (!title) {
               issues.push('Missing <title> tag');
             } else if (title.length < 30) {
@@ -72,10 +65,8 @@ jobs:
             } else if (title.length > 60) {
               issues.push(`Title too long (${title.length} chars, max 60)`);
             }
-            
             // Check description
             const description = $('meta[name="description"]').attr('content') || '';
-            
             if (!description) {
               issues.push('Missing meta description');
             } else if (description.length < 120) {
@@ -83,7 +74,6 @@ jobs:
             } else if (description.length > 160) {
               issues.push(`Description too long (${description.length} chars, max 160)`);
             }
-            
             // Check OG tags
             if ($('meta[property="og:title"]').length === 0) {
               issues.push('Missing og:title');
@@ -97,32 +87,25 @@ jobs:
             if ($('meta[property="og:url"]').length === 0) {
               issues.push('Missing og:url');
             }
-            
             // Check Twitter Card
             if ($('meta[name="twitter:card"]').length === 0) {
               issues.push('Missing twitter:card');
             }
-            
             // Check canonical
             if ($('link[rel="canonical"]').length === 0) {
               issues.push('Missing canonical tag');
             }
-            
             return { url, finalUrl, title, description, issues };
           }
-          
           async function main() {
             console.log('\n🏷️  Starting Meta Tag Check\n');
             const results = [];
             let hasIssues = false;
-            
             for (const url of urls) {
               try {
                 const result = await checkMetaTags(url);
                 results.push(result);
-                
                 const redirected = result.finalUrl && result.finalUrl !== url;
-                
                 if (result.issues.length === 0) {
                   console.log(`✅ ${url}`);
                   if (redirected) {
@@ -146,7 +129,6 @@ jobs:
                 hasIssues = true;
               }
             }
-            
             if (hasIssues) {
               console.log('⚠️  Some meta tag issues found.');
               process.exit(1);
@@ -154,7 +136,6 @@ jobs:
               console.log('✅ All meta tags are properly configured!');
             }
           }
-          
           main().catch(console.error);
           EOF
 
@@ -209,13 +190,11 @@ jobs:
             } catch (error) {
               reportContent = 'Could not read report file';
             }
-            
             const checkFailed = '${{ steps.check.outputs.check_failed }}' === 'true';
             const status = checkFailed ? '❌ Failed' : '✅ Passed';
             const comment = `## 🏷️ Meta Tag Check: ${status}\n\n` +
               `${reportContent ? '```\n' + reportContent.substring(0, 1000) + '\n```\n\n' : ''}` +
               `[View full report](${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID})`;
-            
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,

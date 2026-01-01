@@ -1,5 +1,4 @@
 name: Broken Link Checker
-
 on:
   push:
     branches: [main]
@@ -9,11 +8,11 @@ on:
     # Run weekly on Monday at 3 AM UTC (8:30 AM IST)
     - cron: '0 3 * * 1'
   workflow_dispatch:
-
 jobs:
   check-links:
     runs-on: ubuntu-latest
     steps:
+
       - name: Checkout code
         uses: actions/checkout@v4
         with:
@@ -23,6 +22,7 @@ jobs:
         uses: pnpm/action-setup@v4
         with:
           version: 9
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -55,7 +55,6 @@ jobs:
             --exclude "instagram.com" \
             --ordered \
             --filter-level 3 > link-report.txt 2>&1 || true
-          
           echo "Link check completed"
           cat link-report.txt
 
@@ -67,15 +66,12 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            
             try {
               const report = fs.readFileSync('link-report.txt', 'utf8');
               const brokenLinks = [];
-              
               // Parse broken links from report
               const lines = report.split('\n');
               let currentUrl = '';
-              
               for (const line of lines) {
                 if (line.includes('Getting links from:')) {
                   currentUrl = line.split('Getting links from:')[1].trim();
@@ -83,7 +79,6 @@ jobs:
                   brokenLinks.push({ page: currentUrl, issue: line.trim() });
                 }
               }
-              
               if (brokenLinks.length > 0) {
                 const issueBody = `## 🔗 Broken Links Found\n\n` +
                   `Found ${brokenLinks.length} broken link(s) on the site.\n\n` +
@@ -96,7 +91,6 @@ jobs:
                   `**Action Required**: Please review and fix these broken links.\n` +
                   `Run triggered by: ${context.eventName}\n` +
                   `[View full report](${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID})`;
-                
                 // Check for existing open issue
                 const issues = await github.rest.issues.listForRepo({
                   owner: context.repo.owner,
@@ -104,7 +98,6 @@ jobs:
                   state: 'open',
                   labels: 'broken-links'
                 });
-                
                 if (issues.data.length > 0) {
                   // Update existing issue
                   await github.rest.issues.createComment({

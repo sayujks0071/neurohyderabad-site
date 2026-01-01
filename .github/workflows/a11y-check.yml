@@ -1,5 +1,4 @@
 name: Accessibility Audit (a11y)
-
 on:
   push:
     branches: [main]
@@ -9,11 +8,11 @@ on:
     # Run daily at 5 AM UTC (10:30 AM IST)
     - cron: '0 5 * * *'
   workflow_dispatch:
-
 jobs:
   accessibility-audit:
     runs-on: ubuntu-latest
     steps:
+
       - name: Checkout code
         uses: actions/checkout@v4
         with:
@@ -23,6 +22,7 @@ jobs:
         uses: pnpm/action-setup@v4
         with:
           version: 9
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -53,7 +53,7 @@ jobs:
         timeout-minutes: 3
         continue-on-error: false
         run: |
-          pnpm install -g pa11y pa11y-ci @axe-core/cli
+          echo 'Using pnpm dlx'
 
       - name: Run comprehensive a11y audit
         id: audit
@@ -65,7 +65,6 @@ jobs:
           const fs = require('fs');
           const util = require('util');
           const execPromise = util.promisify(exec);
-          
           const urls = [
             'http://localhost:3000',
             'http://localhost:3000/about',
@@ -74,7 +73,6 @@ jobs:
             'http://localhost:3000/treatments/brain-tumor-surgery',
             'http://localhost:3000/treatments/spine-surgery'
           ];
-          
           const issues = {
             colorContrast: [],
             missingAlt: [],
@@ -84,29 +82,21 @@ jobs:
             keyboardNav: [],
             tapTargets: []
           };
-          
           let totalIssues = 0;
           let criticalIssues = 0;
-          
           console.log('♿ Starting Comprehensive Accessibility Audit\n');
           console.log('Testing', urls.length, 'pages...\n');
-          
           for (const url of urls) {
             console.log(`Testing: ${url}`);
-            
             try {
               // Run pa11y
-              const { stdout } = await execPromise(`pa11y ${url} --reporter json`);
+              const { stdout } = await execPromise(`pnpm dlx pa11y ${url} --reporter json`);
               const results = JSON.parse(stdout);
-              
               const pageIssues = results.issues || [];
               const criticalCount = pageIssues.filter(i => i.type === 'error').length;
-              
               console.log(`  Found ${pageIssues.length} issues (${criticalCount} critical)`);
-              
               totalIssues += pageIssues.length;
               criticalIssues += criticalCount;
-              
               // Categorize issues
               pageIssues.forEach(issue => {
                 if (issue.code.includes('color-contrast')) {
@@ -121,12 +111,10 @@ jobs:
                   issues.ariaIssues.push({ url, ...issue });
                 }
               });
-              
             } catch (error) {
               console.error(`  Error testing ${url}:`, error.message);
             }
           }
-          
           // Generate detailed report
           console.log('\n' + '='.repeat(70));
           console.log('📊 Accessibility Audit Summary');
@@ -139,7 +127,6 @@ jobs:
           console.log(`  🏷️  Missing Form Labels: ${issues.missingLabels.length}`);
           console.log(`  📝 Heading Order: ${issues.headingOrder.length}`);
           console.log(`  🧩 ARIA Issues: ${issues.ariaIssues.length}`);
-          
           // Detailed issue list
           if (issues.colorContrast.length > 0) {
             console.log('\n🔴 Color Contrast Issues:');
@@ -151,7 +138,6 @@ jobs:
               console.log(`  ... and ${issues.colorContrast.length - 5} more`);
             }
           }
-          
           if (issues.missingAlt.length > 0) {
             console.log('\n🔴 Missing Alt Text:');
             issues.missingAlt.slice(0, 5).forEach(i => {
@@ -161,7 +147,6 @@ jobs:
               console.log(`  ... and ${issues.missingAlt.length - 5} more`);
             }
           }
-          
           // Write summary file
           const summary = {
             totalIssues,
@@ -175,9 +160,7 @@ jobs:
             },
             details: issues
           };
-          
           fs.writeFileSync('a11y-report.json', JSON.stringify(summary, null, 2));
-          
           // Exit with error if critical issues found
           if (criticalIssues > 0) {
             console.log('\n⚠️  Critical accessibility issues found!');
@@ -186,7 +169,6 @@ jobs:
             console.log('\n✅ No critical accessibility issues!');
           }
           EOF
-          
           node a11y-audit.js || echo "audit_failed=true" >> $GITHUB_OUTPUT
 
       - name: Upload accessibility report
@@ -206,14 +188,12 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            
             let report = { totalIssues: 0, criticalIssues: 0 };
             try {
               report = JSON.parse(fs.readFileSync('a11y-report.json', 'utf8'));
             } catch (e) {
               console.log('Could not read report file');
             }
-            
             const issueBody = `## ♿ Accessibility Audit Failed\n\n` +
               `**Total Issues**: ${report.totalIssues}\n` +
               `**Critical Issues**: ${report.criticalIssues}\n\n` +
@@ -224,14 +204,12 @@ jobs:
               `- 📝 Heading Order: ${report.categories?.headingOrder || 0}\n` +
               `- 🧩 ARIA Issues: ${report.categories?.ariaIssues || 0}\n\n` +
               `[View full report](${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID})`;
-            
             const issues = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
               state: 'open',
               labels: 'accessibility'
             });
-            
             if (issues.data.length > 0) {
               await github.rest.issues.createComment({
                 owner: context.repo.owner,
@@ -258,19 +236,15 @@ jobs:
           script: |
             const fs = require('fs');
             let report = { totalIssues: 0, criticalIssues: 0, categories: {} };
-            
             try {
               report = JSON.parse(fs.readFileSync('a11y-report.json', 'utf8'));
             } catch (e) {}
-            
             const emoji = report.criticalIssues === 0 ? '✅' : '⚠️';
             const status = report.criticalIssues === 0 ? 'Passed' : 'Failed';
-            
             const comment = `## ♿ Accessibility Audit: ${emoji} ${status}\n\n` +
               `**Total Issues**: ${report.totalIssues}\n` +
               `**Critical Issues**: ${report.criticalIssues}\n\n` +
               `[View full report](${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID})`;
-            
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,

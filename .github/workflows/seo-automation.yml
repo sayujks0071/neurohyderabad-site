@@ -1,5 +1,4 @@
 name: SEO Automation
-
 on:
   # Nightly SEO + Lighthouse guardrail
   schedule:
@@ -24,19 +23,17 @@ on:
       - 'app/sitemap.ts'
       - 'next-sitemap.config.js'
   workflow_dispatch:
-
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
-
 jobs:
   seo-audit:
     runs-on: ubuntu-latest
     permissions:
       contents: read
       actions: read
-
     steps:
+
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
@@ -46,6 +43,7 @@ jobs:
         uses: pnpm/action-setup@v4
         with:
           version: 9
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -68,7 +66,6 @@ jobs:
           node <<'EOF'
           const fs = require('fs');
           const path = require('path');
-
           function findFiles(dir, pattern) {
             if (!fs.existsSync(dir)) return [];
             const entries = fs.readdirSync(dir);
@@ -79,17 +76,14 @@ jobs:
               return pattern.test(entry) ? [full] : [];
             });
           }
-
           const candidates = [
             ...findFiles(process.cwd(), /^lighthouse-.*\.json$/),
             ...findFiles(path.join(process.cwd(), 'reports'), /\.json$/),
           ];
-
           if (candidates.length === 0) {
             console.log('No Lighthouse/SEO JSON reports found, skipping regression gate.');
             process.exit(0);
           }
-
           let failures = [];
           for (const file of candidates) {
             try {
@@ -98,7 +92,6 @@ jobs:
               const scores = Object.entries(categories)
                 .map(([k, v]) => ({ name: k, score: v && typeof v.score === 'number' ? v.score : null }))
                 .filter(s => s.score !== null);
-
               scores.forEach(({ name, score }) => {
                 if (score < 0.9) {
                   failures.push(`${path.basename(file)}: ${name} score ${score}`);
@@ -108,12 +101,10 @@ jobs:
               console.warn(`Could not parse ${file}:`, err.message);
             }
           }
-
           if (failures.length) {
             console.error('Lighthouse regression detected:\n' + failures.join('\n'));
             process.exit(1);
           }
-
           console.log('All Lighthouse scores >= 0.90');
           EOF
 
@@ -143,7 +134,6 @@ jobs:
               '',
               'Download artifacts for full Lighthouse/SEO findings.'
             ].join('\n');
-
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,

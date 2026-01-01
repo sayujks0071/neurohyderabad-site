@@ -1,5 +1,4 @@
 name: Auto-Fix AI PR Bot
-
 on:
   workflow_run:
     workflows:
@@ -13,13 +12,11 @@ on:
     types:
       - completed
   workflow_dispatch:
-
 permissions:
   contents: write
   pull-requests: write
   actions: read
   issues: read
-
 jobs:
   autofix:
     # Run on workflow failures OR manual dispatch OR when workflows complete (to check for issues)
@@ -30,8 +27,8 @@ jobs:
         github.event.workflow_run.conclusion == 'success'
       ))
     runs-on: ubuntu-latest
-    
     steps:
+
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
@@ -55,10 +52,12 @@ jobs:
         uses: pnpm/action-setup@v4
         with:
           version: 9
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'pnpm'
 
       - name: Aggregate all reports
         id: aggregate
@@ -68,7 +67,6 @@ jobs:
           cat > aggregate-reports.js << 'EOF'
           const fs = require('fs');
           const path = require('path');
-          
           const issues = {
             lighthouse: [],
             brokenLinks: [],
@@ -78,15 +76,12 @@ jobs:
             images: [],
             spelling: []
           };
-          
           function findFiles(dir, files = []) {
             if (!fs.existsSync(dir)) return files;
-            
             const items = fs.readdirSync(dir);
             for (const item of items) {
               const fullPath = path.join(dir, item);
               const stat = fs.statSync(fullPath);
-              
               if (stat.isDirectory()) {
                 findFiles(fullPath, files);
               } else {
@@ -95,11 +90,8 @@ jobs:
             }
             return files;
           }
-          
           const artifactFiles = findFiles('artifacts');
-          
           console.log('Found', artifactFiles.length, 'artifact files');
-          
           if (artifactFiles.length === 0) {
             console.log('No artifacts found - creating empty report');
             const emptyReport = {
@@ -126,15 +118,12 @@ jobs:
             fs.writeFileSync('fixes.patch', '# No fixes needed - no artifacts found');
             process.exit(0);
           }
-          
           artifactFiles.forEach(file => {
             try {
               const content = fs.readFileSync(file, 'utf8');
-              
               // Try to parse as JSON
               try {
                 const json = JSON.parse(content);
-                
                 // Lighthouse reports
                 if (json.categories) {
                   Object.entries(json.categories).forEach(([key, value]) => {
@@ -147,7 +136,6 @@ jobs:
                     }
                   });
                 }
-                
                 // Accessibility reports
                 if (json.totalIssues) {
                   issues.accessibility.push({
@@ -156,7 +144,6 @@ jobs:
                     categories: json.categories
                   });
                 }
-                
               } catch (e) {
                 // Not JSON, check for text patterns
                 if (content.includes('BROKEN') || content.includes('404')) {
@@ -168,7 +155,6 @@ jobs:
               console.log('Could not read', file);
             }
           });
-          
           const report = {
             summary: {
               lighthouse: issues.lighthouse.length,
@@ -181,15 +167,11 @@ jobs:
             },
             details: issues
           };
-          
           fs.writeFileSync('aggregated-report.json', JSON.stringify(report, null, 2));
-          
           console.log('\nAggregated Report:');
           console.log(JSON.stringify(report.summary, null, 2));
-          
           // Check if there are actionable issues
           const totalIssues = Object.values(report.summary).reduce((a, b) => a + b, 0);
-          
           if (totalIssues === 0) {
             console.log('No issues found to fix');
             // Create empty file to indicate no fixes needed
@@ -197,7 +179,6 @@ jobs:
             process.exit(0);
           }
           EOF
-          
           node aggregate-reports.js
 
       - name: Skip AI fixes (missing OPENAI_API_KEY)
@@ -238,23 +219,19 @@ jobs:
             echo "has_fixes=false" >> $GITHUB_OUTPUT
             exit 0
           fi
-          
           # Check if patch is just a comment (no fixes needed)
           if grep -q "^# No fixes needed" fixes.patch; then
             echo "No fixes needed - all checks passed"
             echo "has_fixes=false" >> $GITHUB_OUTPUT
             exit 0
           fi
-          
           if [ ! -s fixes.patch ] || [ "$(wc -c < fixes.patch)" -lt 50 ]; then
             echo "Patch file is empty or too small"
             echo "has_fixes=false" >> $GITHUB_OUTPUT
             exit 0
           fi
-          
           echo "Patch file exists and is non-empty"
           echo "has_fixes=true" >> $GITHUB_OUTPUT
-          
           # Try to apply patch in dry-run mode
           if git apply --check fixes.patch 2>&1; then
             echo "Patch can be applied cleanly"
@@ -271,10 +248,8 @@ jobs:
         run: |
           git config user.name "Auto-Fix Bot"
           git config user.email "autofix@neurohyderabad.org"
-          
           # Apply the patch
           git apply fixes.patch
-          
           # Add changed files
           git add -A
 
@@ -288,20 +263,15 @@ jobs:
           title: '🤖 Auto-Fix: Automated Code Improvements'
           body: |
             ## 🤖 Auto-Fix AI PR Bot
-            
             This PR was automatically generated to fix issues detected by CI workflows.
-            
             ### Issues Addressed:
-            
             🔦 **Lighthouse Performance**: Optimizations for Core Web Vitals  
             🔗 **Broken Links**: Fixed or updated non-working URLs  
             📋 **Schema/JSON-LD**: Corrected structured data markup  
             🏷️ **Meta Tags**: Improved SEO metadata  
             ♿ **Accessibility**: Enhanced WCAG compliance  
             🖼️ **Images**: Added missing alt tags and optimized sizing  
-            
             ### What Changed:
-            
             The AI analyzed audit reports from:
             - Lighthouse CI
             - Broken Link Checker
@@ -309,21 +279,15 @@ jobs:
             - Meta Tag Checker
             - Accessibility Audit
             - Image Optimization
-            
             And generated surgical code fixes for the detected issues.
-            
             ### Review Checklist:
-            
             - [ ] Changes look correct
             - [ ] No unintended modifications
             - [ ] Tests pass
             - [ ] Lighthouse scores improved
-            
             ---
-            
             **Triggered by**: ${{ github.event.workflow_run.name }}  
             **Run ID**: ${{ github.event.workflow_run.id }}  
-            
             🔗 [View workflow run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
           branch: autofix/ai-${{ github.run_id }}
           delete-branch: true

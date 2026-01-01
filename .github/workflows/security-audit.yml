@@ -1,5 +1,4 @@
 name: Security Audit
-
 on:
   push:
     branches: [main]
@@ -9,57 +8,57 @@ on:
     # Run weekly on Monday at 4 AM UTC (9:30 AM IST)
     - cron: '0 4 * * 1'
   workflow_dispatch:
-
 jobs:
   security-audit:
     runs-on: ubuntu-latest
-    
     steps:
+
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           submodules: false
-      
+
       - name: Setup Node.js
         uses: pnpm/action-setup@v4
         with:
           version: 9
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'pnpm'
-      
+
       - name: Install dependencies
         run: pnpm install
         timeout-minutes: 5
         continue-on-error: false
-      
+
       - name: Run security audit (production dependencies only)
         id: audit-prod
         continue-on-error: true
         run: |
           echo "Checking production dependencies..."
-          npm audit --production --audit-level=high || echo "audit_prod_failed=true" >> $GITHUB_OUTPUT
+          pnpm audit --production --audit-level=high || echo "audit_prod_failed=true" >> $GITHUB_OUTPUT
         timeout-minutes: 2
-      
+
       - name: Run security audit (all dependencies)
         id: audit-all
         continue-on-error: true
         run: |
           echo "Checking all dependencies (including dev)..."
-          npm audit --audit-level=high || echo "audit_all_failed=true" >> $GITHUB_OUTPUT
+          pnpm audit --audit-level=high || echo "audit_all_failed=true" >> $GITHUB_OUTPUT
         timeout-minutes: 2
-      
+
       - name: Generate audit report
         if: always()
         continue-on-error: true
         run: |
           mkdir -p reports/security
-          npm audit --json > reports/security/audit-report.json 2>&1 || true
-          npm audit --production --json > reports/security/audit-report-prod.json 2>&1 || true
+          pnpm audit --json > reports/security/audit-report.json 2>&1 || true
+          pnpm audit --production --json > reports/security/audit-report-prod.json 2>&1 || true
         timeout-minutes: 2
-      
+
       - name: Upload audit reports
         if: always()
         continue-on-error: true
@@ -68,7 +67,7 @@ jobs:
           name: security-audit-report
           path: reports/security/
           retention-days: 30
-      
+
       - name: Create security issue (if high/critical in production)
         if: steps.audit-prod.outputs.audit_prod_failed == 'true'
         continue-on-error: true
@@ -77,7 +76,6 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            
             let auditData = { vulnerabilities: {} };
             try {
               const report = fs.readFileSync('reports/security/audit-report-prod.json', 'utf8');
@@ -85,22 +83,27 @@ jobs:
             } catch (e) {
               console.log('Could not read audit report');
             }
-            
-            const highSeverity = Object.values(auditData.vulnerabilities || {})
+            const advisories = Object.values(auditData.advisories || {});
+            const highSeverity = advisories
               .filter(v => v.severity === 'high' || v.severity === 'critical').length;
+            // Also check for 'vulnerabilities' if pnpm changed format or to support npm fallback
+            const vulns = Object.values(auditData.vulnerabilities || {});
+            const highSeverityLegacy = vulns.filter(v => v.severity === 'high' || v.severity === 'critical').length;
+            const totalHigh = Math.max(highSeverity, highSeverityLegacy);
             
-            if (highSeverity > 0) {
+            // Re-assign for the check
+            const highSeverityCount = totalHigh;
+            if (highSeverityCount > 0) {
               const issueBody = `## 🔒 Security Audit Alert\n\n` +
                 `**High/Critical vulnerabilities in production dependencies**: ${highSeverity}\n\n` +
                 `This workflow detected security vulnerabilities in production dependencies.\n\n` +
                 `### Recommended Actions:\n` +
                 `1. Review the audit report in workflow artifacts\n` +
-                `2. Run \`npm audit fix\` to attempt automatic fixes\n` +
+                `2. Run \`pnpm audit --fix\` to attempt automatic fixes\n` +
                 `3. For breaking changes, manually update affected packages\n` +
                 `4. Test thoroughly after updates\n\n` +
                 `[View full report](${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID})\n\n` +
                 `_Note: Dev dependency vulnerabilities are tracked but do not trigger this alert._`;
-              
               await github.rest.issues.create({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
@@ -109,7 +112,7 @@ jobs:
                 labels: ['security', 'dependencies']
               });
             }
-      
+
       - name: Summary
         if: always()
         run: |
@@ -128,4 +131,3 @@ jobs:
           fi
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "View detailed reports in workflow artifacts." >> $GITHUB_STEP_SUMMARY
-
