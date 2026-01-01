@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useState, CSSProperties } from 'react';
+import { useState, useMemo, CSSProperties } from 'react';
 
 interface OptimizedImageProps {
   src: string;
@@ -42,12 +42,23 @@ export default function OptimizedImage({
   const [hasError, setHasError] = useState(false);
 
   // Generate a simple blur placeholder if not provided
-  const defaultBlurDataURL = blurDataURL || `data:image/svg+xml;base64,${Buffer.from(
-    `<svg width="${width || 400}" height="${height || 300}" xmlns="http://www.w3.org/2000/svg">
-      <rect width="100%" height="100%" fill="#f3f4f6"/>
-      <text x="50%" y="50%" text-anchor="middle" dy=".3em" fill="#9ca3af" font-family="system-ui">Loading...</text>
-    </svg>`
-  ).toString('base64')}`;
+  const defaultBlurDataURL = useMemo(() => {
+    if (blurDataURL) return blurDataURL;
+
+    const svg = `
+      <svg width="${width || 400}" height="${height || 300}" xmlns="http://www.w3.org/2000/svg">
+        <rect width="100%" height="100%" fill="#f3f4f6"/>
+        <text x="50%" y="50%" text-anchor="middle" dy=".3em" fill="#9ca3af" font-family="system-ui">Loading...</text>
+      </svg>
+    `;
+
+    // btoa is available globally in Node.js 16+ and all modern browsers.
+    // We avoid Buffer to prevent including the node polyfill in the client bundle.
+    const toBase64 = (str: string) =>
+      typeof window === 'undefined' ? btoa(str) : window.btoa(str);
+
+    return `data:image/svg+xml;base64,${toBase64(svg)}`;
+  }, [blurDataURL, width, height]);
 
   const handleLoad = () => {
     setIsLoading(false);
