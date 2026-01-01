@@ -33,32 +33,42 @@ function log(message, color = 'reset') {
   console.log(`${colors[color]}${message}${colors.reset}`);
 }
 
+// HTTP agent for connection pooling
+const httpsAgent = new https.Agent({
+  keepAlive: true,
+  maxSockets: 5,
+  maxFreeSockets: 2,
+  timeout: 5000
+});
+
 function makeRequest(url) {
   return new Promise((resolve, reject) => {
     const startTime = Date.now();
     
     const options = {
+      agent: httpsAgent,
       headers: {
         'Accept-Encoding': 'gzip, br'
       }
     };
     
     https.get(url, options, (res) => {
-      let data = '';
+      const chunks = [];
       
       res.on('data', (chunk) => {
-        data += chunk;
+        chunks.push(chunk);
       });
       
       res.on('end', () => {
         const endTime = Date.now();
         const responseTime = endTime - startTime;
+        const contentLength = Buffer.concat(chunks).length;
         
         resolve({
           statusCode: res.statusCode,
           headers: res.headers,
           responseTime,
-          contentLength: data.length,
+          contentLength,
           compressed: res.headers['content-encoding'] || 'none'
         });
       });
@@ -209,17 +219,14 @@ function generateReport(results) {
 async function main() {
   log('Starting health monitoring...', 'blue');
   
-  const results = [];
-  
-  for (const page of PAGES_TO_CHECK) {
-    const url = `${SITE_URL}${page}`;
-    log(`Checking ${url}...`, 'blue');
-    const result = await checkPageHealth(url);
-    results.push(result);
-    
-    // Small delay between requests
-    await new Promise(resolve => setTimeout(resolve, 500));
-  }
+  // Process pages in parallel with Promise.all for better performance
+  const results = await Promise.all(
+    PAGES_TO_CHECK.map(async (page) => {
+      const url = `${SITE_URL}${page}`;
+      log(`Checking ${url}...`, 'blue');
+      return await checkPageHealth(url);
+    })
+  );
   
   generateReport(results);
   
@@ -233,13 +240,19 @@ async function main() {
     fs.mkdirSync(reportsDir, { recursive: true });
   }
   
+  // Filter once and reuse
+  const validResults = results.filter(r => !r.error);
+  const avgResponseTime = validResults.length > 0
+    ? Math.round(validResults.reduce((sum, r) => sum + r.responseTime, 0) / validResults.length)
+    : 0;
+  
   fs.writeFileSync(reportFile, JSON.stringify({
     timestamp,
     results,
     summary: {
       totalPages: results.length,
       healthyPages: results.filter(r => r.healthy).length,
-      avgResponseTime: results.filter(r => !r.error).reduce((sum, r) => sum + r.responseTime, 0) / results.filter(r => !r.error).length
+      avgResponseTime
     }
   }, null, 2));
   

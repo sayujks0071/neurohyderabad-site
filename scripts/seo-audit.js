@@ -49,22 +49,74 @@ const audit = {
   recommendations: []
 };
 
+// Request cache to avoid duplicate fetches
+const requestCache = new Map();
+
 /**
- * Fetch URL content
+ * Fetch URL content with caching
  */
 function fetchUrl(url) {
+  // Check cache first
+  if (requestCache.has(url)) {
+    return Promise.resolve(requestCache.get(url));
+  }
+
   return new Promise((resolve, reject) => {
     const protocol = url.startsWith('https') ? https : http;
-    protocol.get(url, { timeout: 10000 }, (res) => {
-      let data = '';
-      res.on('data', chunk => data += chunk);
-      res.on('end', () => resolve({ statusCode: res.statusCode, headers: res.headers, body: data }));
-    }).on('error', reject).on('timeout', () => reject(new Error('Timeout')));
+    const req = protocol.get(url, { timeout: 10000 }, (res) => {
+      const chunks = [];
+      res.on('data', chunk => chunks.push(chunk));
+      res.on('end', () => {
+        const result = { 
+          statusCode: res.statusCode, 
+          headers: res.headers, 
+          body: Buffer.concat(chunks).toString('utf8')
+        };
+        // Cache the result
+        requestCache.set(url, result);
+        resolve(result);
+      });
+    });
+    req.on('error', reject);
+    req.on('timeout', () => {
+      req.destroy();
+      reject(new Error('Timeout'));
+    });
   });
 }
 
+// Pre-compiled regex patterns for better performance
+// Note: Using non-global patterns where appropriate to avoid state issues
+const REGEX_PATTERNS = {
+  title: /<title[^>]*>([^<]+)<\/title>/i,
+  metaDescription: /<meta\s+name=["']description["']\s+content=["']([^"']+)["']/i,
+  canonical: /<link\s+rel=["']canonical["']\s+href=["']([^"']+)["']/i,
+  h1: /<h1[^>]*>([^<]+)<\/h1>/gi,
+  h2: /<h2[^>]*>([^<]+)<\/h2>/gi,
+  ogTags: /<meta\s+property=["']og:([^"']+)["']\s+content=["']([^"']+)["']/gi,
+  twitterTags: /<meta\s+name=["']twitter:([^"']+)["']\s+content=["']([^"']+)["']/gi,
+  jsonLd: /<script\s+type=["']application\/ld\+json["'][^>]*>([^<]+)<\/script>/gi,
+  links: /<a\s+[^>]*href=["']([^"']+)["'][^>]*>/gi,
+  images: /<img\s+[^>]*src=["']([^"']+)["'][^>]*>/gi,
+  body: /<body[^>]*>([\s\S]*)<\/body>/i,
+  tags: /<[^>]+>/g,
+  whitespace: /\s+/g
+};
+
+// Helper function to safely reset and use global regex patterns
+function matchAllWithLimit(html, pattern, limit) {
+  const matches = [];
+  pattern.lastIndex = 0;
+  let match;
+  while ((match = pattern.exec(html)) !== null && matches.length < limit) {
+    matches.push(match);
+  }
+  pattern.lastIndex = 0; // Reset for next use
+  return matches;
+}
+
 /**
- * Extract metadata from HTML
+ * Extract metadata from HTML with optimized regex caching
  */
 function extractMetadata(html, url) {
   const metadata = {
@@ -84,100 +136,89 @@ function extractMetadata(html, url) {
   };
 
   // Title
-  const titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i);
+  const titleMatch = html.match(REGEX_PATTERNS.title);
   if (titleMatch) metadata.title = titleMatch[1].trim();
 
   // Meta description
-  const descMatch = html.match(/<meta\s+name=["']description["']\s+content=["']([^"']+)["']/i);
+  const descMatch = html.match(REGEX_PATTERNS.metaDescription);
   if (descMatch) metadata.metaDescription = descMatch[1].trim();
 
   // Canonical URL
-  const canonicalMatch = html.match(/<link\s+rel=["']canonical["']\s+href=["']([^"']+)["']/i);
+  const canonicalMatch = html.match(REGEX_PATTERNS.canonical);
   if (canonicalMatch) metadata.canonicalUrl = canonicalMatch[1];
 
   // H1 tags
-  const h1Matches = html.match(/<h1[^>]*>([^<]+)<\/h1>/gi);
+  const h1Matches = html.match(REGEX_PATTERNS.h1);
   if (h1Matches) {
-    metadata.h1 = h1Matches.map(h => h.replace(/<[^>]+>/g, '').trim());
+    metadata.h1 = h1Matches.map(h => h.replace(REGEX_PATTERNS.tags, '').trim());
   }
 
-  // H2 tags
-  const h2Matches = html.match(/<h2[^>]*>([^<]+)<\/h2>/gi);
+  // H2 tags (limit to 10 for performance)
+  const h2Matches = html.match(REGEX_PATTERNS.h2);
   if (h2Matches) {
-    metadata.h2 = h2Matches.map(h => h.replace(/<[^>]+>/g, '').trim()).slice(0, 10);
+    metadata.h2 = h2Matches.slice(0, 10).map(h => h.replace(REGEX_PATTERNS.tags, '').trim());
   }
 
   // Open Graph tags
-  const ogMatches = html.match(/<meta\s+property=["']og:([^"']+)["']\s+content=["']([^"']+)["']/gi);
-  if (ogMatches) {
-    ogMatches.forEach(tag => {
-      const match = tag.match(/property=["']og:([^"']+)["']\s+content=["']([^"']+)["']/);
-      if (match) metadata.ogTags[match[1]] = match[2];
-    });
-  }
+  const ogMatches = matchAllWithLimit(html, REGEX_PATTERNS.ogTags, 10);
+  ogMatches.forEach(match => {
+    metadata.ogTags[match[1]] = match[2];
+  });
 
   // Twitter tags
-  const twitterMatches = html.match(/<meta\s+name=["']twitter:([^"']+)["']\s+content=["']([^"']+)["']/gi);
-  if (twitterMatches) {
-    twitterMatches.forEach(tag => {
-      const match = tag.match(/name=["']twitter:([^"']+)["']\s+content=["']([^"']+)["']/);
-      if (match) metadata.twitterTags[match[1]] = match[2];
-    });
-  }
+  const twitterMatches = matchAllWithLimit(html, REGEX_PATTERNS.twitterTags, 10);
+  twitterMatches.forEach(match => {
+    metadata.twitterTags[match[1]] = match[2];
+  });
 
   // Structured data
-  const jsonLdMatches = html.match(/<script\s+type=["']application\/ld\+json["'][^>]*>([^<]+)<\/script>/gi);
-  if (jsonLdMatches) {
-    jsonLdMatches.forEach(script => {
-      try {
-        const json = script.replace(/<script[^>]*>/, '').replace(/<\/script>/, '');
-        metadata.structuredData.push(JSON.parse(json));
-      } catch (e) {
-        // Invalid JSON
-      }
-    });
-  }
+  const jsonLdMatches = matchAllWithLimit(html, REGEX_PATTERNS.jsonLd, 5);
+  jsonLdMatches.forEach(match => {
+    try {
+      metadata.structuredData.push(JSON.parse(match[1]));
+    } catch (e) {
+      // Invalid JSON - skip
+    }
+  });
 
-  // Links
-  const linkMatches = html.match(/<a\s+[^>]*href=["']([^"']+)["'][^>]*>/gi);
-  if (linkMatches) {
-    linkMatches.forEach(link => {
-      const match = link.match(/href=["']([^"']+)["']/);
-      if (match) {
-        const href = match[1];
-        try {
-          const linkUrl = new URL(href, url);
-          if (linkUrl.hostname === new URL(url).hostname) {
-            metadata.internalLinks.push(href);
-          } else {
-            metadata.externalLinks.push(href);
-          }
-        } catch (e) {
-          // Invalid URL
-        }
+  // Links - optimized with Set for deduplication
+  const internalLinksSet = new Set();
+  const externalLinksSet = new Set();
+  const baseUrl = new URL(url);
+  
+  const linkMatches = matchAllWithLimit(html, REGEX_PATTERNS.links, 200);
+  linkMatches.forEach(match => {
+    try {
+      const linkUrl = new URL(match[1], url);
+      if (linkUrl.hostname === baseUrl.hostname) {
+        internalLinksSet.add(match[1]);
+      } else {
+        externalLinksSet.add(match[1]);
       }
-    });
-  }
+    } catch (e) {
+      // Invalid URL - skip
+    }
+  });
+  metadata.internalLinks = Array.from(internalLinksSet);
+  metadata.externalLinks = Array.from(externalLinksSet);
 
   // Images
-  const imgMatches = html.match(/<img\s+[^>]*src=["']([^"']+)["'][^>]*>/gi);
-  if (imgMatches) {
-    imgMatches.forEach(img => {
-      const srcMatch = img.match(/src=["']([^"']+)["']/);
-      const altMatch = img.match(/alt=["']([^"']*)["']/);
-      if (srcMatch) {
-        metadata.images.push({
-          src: srcMatch[1],
-          alt: altMatch ? altMatch[1] : ''
-        });
-      }
+  const imgMatches = matchAllWithLimit(html, REGEX_PATTERNS.images, 50);
+  imgMatches.forEach(match => {
+    const altMatch = match[0].match(/alt=["']([^"']*)["']/);
+    metadata.images.push({
+      src: match[1],
+      alt: altMatch ? altMatch[1] : ''
     });
-  }
+  });
 
-  // Word count (approximate)
-  const bodyMatch = html.match(/<body[^>]*>([\s\S]*)<\/body>/i);
+  // Word count (approximate) - optimized
+  const bodyMatch = html.match(REGEX_PATTERNS.body);
   if (bodyMatch) {
-    const text = bodyMatch[1].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+    const text = bodyMatch[1]
+      .replace(REGEX_PATTERNS.tags, ' ')
+      .replace(REGEX_PATTERNS.whitespace, ' ')
+      .trim();
     metadata.wordCount = text.split(' ').length;
   }
 
@@ -278,52 +319,60 @@ async function runAudit() {
     audit.summary.totalPages = urls.length;
     console.log(`✅ Found ${urls.length} URLs in sitemap`);
 
-    // Crawl pages (limit to 50 for performance)
+    // Crawl pages with concurrent processing (limit to 50 for performance)
     const urlsToCrawl = urls.slice(0, 50);
     console.log(`\n🕷️  Crawling ${urlsToCrawl.length} pages...`);
 
-    for (const url of urlsToCrawl) {
-      try {
-        console.log(`  Crawling: ${url}`);
-        const response = await fetchUrl(url);
-        
-        if (response.statusCode !== 200) {
-          audit.issues.high.push({
+    // Process in batches of 5 for better performance
+    const BATCH_SIZE = 5;
+    for (let i = 0; i < urlsToCrawl.length; i += BATCH_SIZE) {
+      const batch = urlsToCrawl.slice(i, i + BATCH_SIZE);
+      console.log(`  Processing batch ${Math.floor(i/BATCH_SIZE) + 1}/${Math.ceil(urlsToCrawl.length/BATCH_SIZE)}`);
+      
+      await Promise.all(batch.map(async (url) => {
+        try {
+          const response = await fetchUrl(url);
+          
+          if (response.statusCode !== 200) {
+            audit.issues.high.push({
+              url,
+              type: 'non_200_status',
+              message: `Page returned status ${response.statusCode}`
+            });
+            return;
+          }
+
+          const metadata = extractMetadata(response.body, url);
+          const pageIssues = analyzePage(metadata);
+          
+          audit.pages.push({
             url,
-            type: 'non_200_status',
-            message: `Page returned status ${response.statusCode}`
+            statusCode: response.statusCode,
+            metadata,
+            issues: pageIssues
           });
-          continue;
+
+          // Categorize issues
+          pageIssues.forEach(issue => {
+            audit.issues[issue.severity].push({ url, ...issue });
+            if (issue.severity === 'critical') audit.summary.errors++;
+            else audit.summary.warnings++;
+          });
+
+          audit.summary.crawledPages++;
+        } catch (error) {
+          console.error(`  ❌ Error crawling ${url}:`, error.message);
+          audit.issues.critical.push({
+            url,
+            type: 'crawl_error',
+            message: error.message
+          });
         }
-
-        const metadata = extractMetadata(response.body, url);
-        const pageIssues = analyzePage(metadata);
-        
-        audit.pages.push({
-          url,
-          statusCode: response.statusCode,
-          metadata,
-          issues: pageIssues
-        });
-
-        // Categorize issues
-        pageIssues.forEach(issue => {
-          audit.issues[issue.severity].push({ url, ...issue });
-          if (issue.severity === 'critical') audit.summary.errors++;
-          else audit.summary.warnings++;
-        });
-
-        audit.summary.crawledPages++;
-        
-        // Rate limiting
-        await new Promise(resolve => setTimeout(resolve, 100));
-      } catch (error) {
-        console.error(`  ❌ Error crawling ${url}:`, error.message);
-        audit.issues.critical.push({
-          url,
-          type: 'crawl_error',
-          message: error.message
-        });
+      }));
+      
+      // Small delay between batches to avoid overwhelming the server
+      if (i + BATCH_SIZE < urlsToCrawl.length) {
+        await new Promise(resolve => setTimeout(resolve, 200));
       }
     }
 

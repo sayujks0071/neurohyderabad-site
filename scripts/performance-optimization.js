@@ -144,203 +144,123 @@ function implementCriticalFixes() {
   console.log('🚀 Implementing critical performance fixes...');
   
   const implemented = [];
+  const errors = [];
   
   // 1. Optimize next.config.mjs for better performance
   try {
     const nextConfigPath = path.join(__dirname, '../next.config.mjs');
-    let nextConfig = fs.readFileSync(nextConfigPath, 'utf8');
     
-    // Add performance optimizations if not already present
-    if (!nextConfig.includes('experimental.optimizeCss')) {
-      const optimizationConfig = `
-  // Performance optimizations
-  experimental: {
-    optimizeCss: true,
-    optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
-  },
-  
-  // Webpack optimizations
-  webpack: (config, { dev, isServer }) => {
-    if (!dev && !isServer) {
-      // Optimize for production
-      config.optimization.splitChunks = {
-        chunks: 'all',
-        cacheGroups: {
-          vendor: {
-            test: /[\\/]node_modules[\\/]/,
-            name: 'vendors',
-            chunks: 'all',
-            maxSize: 200000,
-          },
-          common: {
-            name: 'common',
-            minChunks: 2,
-            chunks: 'all',
-            maxSize: 100000,
-          },
-          analytics: {
-            test: /[\\/]node_modules[\\/](statsig|analytics)[\\/]/,
-            name: 'analytics',
-            chunks: 'all',
-            maxSize: 50000,
-          },
-          ui: {
-            test: /[\\/]node_modules[\\/](@radix-ui|lucide-react)[\\/]/,
-            name: 'ui',
-            chunks: 'all',
-            maxSize: 100000,
-          }
-        }
-      };
-    }
-    return config;
-  },`;
+    // Check if file exists before reading
+    if (!fs.existsSync(nextConfigPath)) {
+      console.log('⚠️  next.config.mjs not found, skipping optimization');
+    } else {
+      const nextConfig = fs.readFileSync(nextConfigPath, 'utf8');
       
-      // Insert before the closing brace
-      nextConfig = nextConfig.replace(/^};$/m, `${optimizationConfig}\n};`);
-      fs.writeFileSync(nextConfigPath, nextConfig);
+      // More specific check using regex to avoid false positives
+      const hasOptimizeCss = /experimental\s*:\s*\{[^}]*optimizeCss\s*:\s*true/s.test(nextConfig);
+      const hasOptimizePackageImports = /optimizePackageImports\s*:\s*\[/s.test(nextConfig);
       
-      implemented.push({
-        id: 'next-config-optimization',
-        title: 'Next.js Configuration Optimization',
-        description: 'Added performance optimizations to next.config.mjs',
-        status: 'completed'
-      });
+      if (!hasOptimizeCss && !hasOptimizePackageImports) {
+        console.log('ℹ️  Performance optimizations not yet implemented in next.config.mjs');
+        implemented.push({
+          id: 'next-config-optimization-suggestion',
+          title: 'Next.js Configuration Optimization Suggestion',
+          description: 'Consider adding experimental.optimizeCss and optimizePackageImports for better performance',
+          status: 'suggested'
+        });
+      } else {
+        implemented.push({
+          id: 'next-config-already-optimized',
+          title: 'Next.js Configuration Already Optimized',
+          description: 'Performance optimizations already present in next.config.mjs',
+          status: 'verified'
+        });
+      }
     }
   } catch (error) {
-    console.error('Error optimizing next.config.mjs:', error.message);
+    errors.push({
+      location: 'next.config.mjs optimization',
+      error: error.message
+    });
+    console.error('Error checking next.config.mjs:', error.message);
   }
   
-  // 2. Create performance monitoring component
+  // 2. Create performance monitoring component suggestion
   try {
     const performanceMonitorPath = path.join(__dirname, '../src/components/PerformanceMonitor.tsx');
-    const performanceMonitorContent = `"use client";
-
-import { useEffect } from 'react';
-
-export default function PerformanceMonitor() {
-  useEffect(() => {
-    // Monitor Core Web Vitals
-    if (typeof window !== 'undefined' && 'PerformanceObserver' in window) {
-      // LCP monitoring
-      const lcpObserver = new PerformanceObserver((list) => {
-        const entries = list.getEntries();
-        const lastEntry = entries[entries.length - 1];
-        console.log('LCP:', lastEntry.startTime);
+    const componentDir = path.dirname(performanceMonitorPath);
+    
+    if (!fs.existsSync(componentDir)) {
+      console.log('ℹ️  Component directory not found, suggesting performance monitoring implementation');
+      implemented.push({
+        id: 'performance-monitoring-suggestion',
+        title: 'Performance Monitoring Component Suggestion',
+        description: 'Consider implementing Core Web Vitals monitoring with PerformanceObserver API',
+        status: 'suggested'
       });
-      lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
-      
-      // FID monitoring
-      const fidObserver = new PerformanceObserver((list) => {
-        const entries = list.getEntries();
-        entries.forEach((entry) => {
-          console.log('FID:', entry.processingStart - entry.startTime);
-        });
+    } else if (!fs.existsSync(performanceMonitorPath)) {
+      console.log('ℹ️  Performance monitoring component not found, suggesting implementation');
+      implemented.push({
+        id: 'performance-monitoring-missing',
+        title: 'Performance Monitoring Component Missing',
+        description: 'Consider creating PerformanceMonitor.tsx to track Core Web Vitals',
+        status: 'suggested'
       });
-      fidObserver.observe({ entryTypes: ['first-input'] });
-      
-      // CLS monitoring
-      let clsValue = 0;
-      const clsObserver = new PerformanceObserver((list) => {
-        const entries = list.getEntries();
-        entries.forEach((entry) => {
-          if (!entry.hadRecentInput) {
-            clsValue += entry.value;
-            console.log('CLS:', clsValue);
-          }
-        });
+    } else {
+      implemented.push({
+        id: 'performance-monitoring-exists',
+        title: 'Performance Monitoring Already Implemented',
+        description: 'Performance monitoring component already exists',
+        status: 'verified'
       });
-      clsObserver.observe({ entryTypes: ['layout-shift'] });
     }
-  }, []);
-  
-  return null;
-}`;
-    
-    fs.writeFileSync(performanceMonitorPath, performanceMonitorContent);
-    
-    implemented.push({
-      id: 'performance-monitoring',
-      title: 'Performance Monitoring Component',
-      description: 'Created component to monitor Core Web Vitals',
-      status: 'completed'
-    });
   } catch (error) {
-    console.error('Error creating performance monitor:', error.message);
+    errors.push({
+      location: 'performance monitor check',
+      error: error.message
+    });
+    console.error('Error checking performance monitor:', error.message);
   }
   
-  // 3. Optimize image loading strategy
+  // 3. Image optimization utilities suggestion
   try {
     const imageOptimizationPath = path.join(__dirname, '../src/lib/imageOptimization.ts');
-    const imageOptimizationContent = `/**
- * Image Optimization Utilities
- * Provides optimized image loading strategies
- */
-
-export const IMAGE_OPTIMIZATION_CONFIG = {
-  // Default quality for images
-  quality: 85,
-  
-  // Responsive breakpoints
-  breakpoints: {
-    mobile: 768,
-    tablet: 1024,
-    desktop: 1200,
-  },
-  
-  // Image formats priority
-  formats: ['image/avif', 'image/webp', 'image/jpeg'],
-  
-  // Lazy loading configuration
-  lazyLoading: {
-    rootMargin: '50px',
-    threshold: 0.1,
-  },
-  
-  // Critical images that should load immediately
-  criticalImages: [
-    '/images/logo-optimized.png',
-    '/images/hero-bg.jpg',
-    '/images/og-default.jpg'
-  ]
-};
-
-export function getOptimizedImageProps(src: string, isCritical = false) {
-  return {
-    src,
-    quality: IMAGE_OPTIMIZATION_CONFIG.quality,
-    priority: isCritical || IMAGE_OPTIMIZATION_CONFIG.criticalImages.includes(src),
-    sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw',
-    placeholder: 'blur' as const,
-    blurDataURL: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k='
-  };
-}
-
-export function preloadCriticalImages() {
-  if (typeof window === 'undefined') return;
-  
-  IMAGE_OPTIMIZATION_CONFIG.criticalImages.forEach(src => {
-    const link = document.createElement('link');
-    link.rel = 'preload';
-    link.as = 'image';
-    link.href = src;
-    document.head.appendChild(link);
-  });
-}`;
+    const libDir = path.dirname(imageOptimizationPath);
     
-    fs.writeFileSync(imageOptimizationPath, imageOptimizationContent);
-    
-    implemented.push({
-      id: 'image-optimization-utils',
-      title: 'Image Optimization Utilities',
-      description: 'Created utilities for optimized image loading',
-      status: 'completed'
-    });
+    if (!fs.existsSync(libDir)) {
+      console.log('ℹ️  Lib directory not found, suggesting image optimization utilities');
+      implemented.push({
+        id: 'image-optimization-suggestion',
+        title: 'Image Optimization Utilities Suggestion',
+        description: 'Consider implementing centralized image optimization configuration',
+        status: 'suggested'
+      });
+    } else if (!fs.existsSync(imageOptimizationPath)) {
+      console.log('ℹ️  Image optimization utilities not found, suggesting implementation');
+      implemented.push({
+        id: 'image-optimization-missing',
+        title: 'Image Optimization Utilities Missing',
+        description: 'Consider creating imageOptimization.ts for centralized image configuration',
+        status: 'suggested'
+      });
+    } else {
+      implemented.push({
+        id: 'image-optimization-exists',
+        title: 'Image Optimization Already Implemented',
+        description: 'Image optimization utilities already exist',
+        status: 'verified'
+      });
+    }
   } catch (error) {
-    console.error('Error creating image optimization utilities:', error.message);
+    errors.push({
+      location: 'image optimization check',
+      error: error.message
+    });
+    console.error('Error checking image optimization:', error.message);
   }
   
   optimizationResults.implemented = implemented;
+  optimizationResults.errors = errors;
   return implemented;
 }
 
