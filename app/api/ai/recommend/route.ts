@@ -1,7 +1,7 @@
-import { generateText } from 'ai';
+import { generateObject, jsonSchema } from 'ai';
 import { NextRequest, NextResponse } from 'next/server';
 import { getAllBlogPosts } from '@/src/lib/blog';
-import { getAIClient, getGatewayModel, isAIGatewayConfigured } from '@/src/lib/ai/gateway';
+import { getTextModel, hasAIConfig } from '@/src/lib/ai/gateway';
 
 /**
  * Content Recommendation API using Vercel AI SDK
@@ -9,9 +9,28 @@ import { getAIClient, getGatewayModel, isAIGatewayConfigured } from '@/src/lib/a
  * Recommends relevant blog posts/articles based on user query or current content
  */
 export async function POST(request: NextRequest) {
+  let query = '';
+  let currentSlug: string | undefined;
+  let limit = 5;
+  let availablePosts: Awaited<ReturnType<typeof getAllBlogPosts>> = [];
+
+  const getFallbackSlugs = () => {
+    const queryLower = (query || '').toLowerCase();
+    if (!queryLower) {
+      return availablePosts.slice(0, limit).map((post) => post.slug);
+    }
+    return availablePosts
+      .filter(post => {
+        const searchText = `${post.title} ${post.excerpt} ${post.category} ${post.tags?.join(' ')}`.toLowerCase();
+        return searchText.includes(queryLower);
+      })
+      .slice(0, limit)
+      .map(post => post.slug);
+  };
+
   try {
     const body = await request.json();
-    const { query, currentSlug, limit = 5 } = body;
+    ({ query, currentSlug, limit = 5 } = body);
 
     if (!query && !currentSlug) {
       return NextResponse.json(
@@ -20,26 +39,33 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const hasAIConfig = isAIGatewayConfigured() || process.env.OPENAI_API_KEY;
-    if (!hasAIConfig) {
-      return NextResponse.json(
-        { error: 'AI Gateway API key or OpenAI API key not configured' },
-        { status: 500 }
-      );
-    }
-
-    const aiClient = getAIClient();
-    const modelName = isAIGatewayConfigured() 
-      ? getGatewayModel('gpt-4o-mini')
-      : 'gpt-4o-mini';
-
     // Get all blog posts
     const allPosts = await getAllBlogPosts();
     
     // Filter out current post if provided
-    const availablePosts = currentSlug 
+    availablePosts = currentSlug 
       ? allPosts.filter(post => post.slug !== currentSlug)
       : allPosts;
+
+    if (!hasAIConfig()) {
+      const fallbackSlugs = getFallbackSlugs();
+      const fallbackPosts = availablePosts
+        .filter(post => fallbackSlugs.includes(post.slug))
+        .slice(0, limit)
+        .map(post => ({
+          slug: post.slug,
+          title: post.title,
+          excerpt: post.excerpt,
+          category: post.category,
+          tags: post.tags,
+          publishedAt: post.publishedAt,
+        }));
+
+      return NextResponse.json({
+        recommendations: fallbackPosts,
+        count: fallbackPosts.length,
+      });
+    }
 
     // Create a summary of available posts for the AI
     const postsSummary = availablePosts.slice(0, 20).map(post => ({
@@ -51,8 +77,16 @@ export async function POST(request: NextRequest) {
     }));
 
     // Use AI SDK to find relevant posts
-    const { text } = await generateText({
-      model: aiClient(modelName),
+    const { object } = await generateObject({
+      model: getTextModel(),
+      schema: jsonSchema({
+        type: 'object',
+        properties: {
+          slugs: { type: 'array', items: { type: 'string' } },
+        },
+        required: ['slugs'],
+        additionalProperties: false,
+      }),
       prompt: `Given the following user query or current article context, recommend the most relevant blog posts from the list below.
 
 ${query ? `User Query: ${query}` : `Current Article Slug: ${currentSlug}`}
@@ -60,34 +94,61 @@ ${query ? `User Query: ${query}` : `Current Article Slug: ${currentSlug}`}
 Available Blog Posts:
 ${JSON.stringify(postsSummary, null, 2)}
 
-Return ONLY a JSON array of slugs (e.g., ["slug1", "slug2", "slug3"]) for the ${limit} most relevant posts. Do not include any other text.`,
+Return ONLY JSON with a "slugs" array (e.g., {"slugs": ["slug1", "slug2", "slug3"]}) for the ${limit} most relevant posts. Do not include any other text.`,
       temperature: 0.3,
     });
 
-    // Parse the AI response
-    let recommendedSlugs: string[] = [];
-    try {
-      // Try to extract JSON array from response
-      const jsonMatch = text.match(/\[[\s\S]*?\]/);
-      if (jsonMatch) {
-        recommendedSlugs = JSON.parse(jsonMatch[0]);
-      }
-    } catch (error) {
-      console.error('Error parsing AI response:', error);
-      // Fallback: use simple keyword matching
-      const queryLower = (query || '').toLowerCase();
-      recommendedSlugs = availablePosts
-        .filter(post => {
-          const searchText = `${post.title} ${post.excerpt} ${post.category} ${post.tags?.join(' ')}`.toLowerCase();
-          return searchText.includes(queryLower);
-        })
-        .slice(0, limit)
-        .map(post => post.slug);
+    let recommendedSlugs = (object?.slugs || [])
+      .filter((slug) => typeof slug === 'string' && slug.length > 0)
+      .slice(0, limit);
+    if (recommendedSlugs.length === 0) {
+      recommendedSlugs = getFallbackSlugs();
     }
 
     // Get full post details for recommended slugs
-    const recommendedPosts = availablePosts
+    let recommendedPosts = availablePosts
       .filter(post => recommendedSlugs.includes(post.slug))
+      .slice(0, limit)
+      .map(post => ({
+        slug: post.slug,
+        title: post.title,
+        excerpt: post.excerpt,
+        category: post.category,
+        tags: post.tags,
+        publishedAt: post.publishedAt,
+      }));
+    if (recommendedPosts.length === 0) {
+      const fallbackSlugs = getFallbackSlugs();
+      recommendedPosts = availablePosts
+        .filter(post => fallbackSlugs.includes(post.slug))
+        .slice(0, limit)
+        .map(post => ({
+          slug: post.slug,
+          title: post.title,
+          excerpt: post.excerpt,
+          category: post.category,
+          tags: post.tags,
+          publishedAt: post.publishedAt,
+        }));
+    }
+
+    return NextResponse.json({
+      recommendations: recommendedPosts,
+      count: recommendedPosts.length,
+    });
+
+  } catch (error) {
+    console.error('Error generating recommendations:', error);
+    if (!availablePosts.length) {
+      return NextResponse.json(
+        { error: 'Failed to generate recommendations' },
+        { status: 500 }
+      );
+    }
+
+    const fallbackSlugs = getFallbackSlugs();
+    const fallbackPosts = availablePosts
+      .filter(post => fallbackSlugs.includes(post.slug))
       .slice(0, limit)
       .map(post => ({
         slug: post.slug,
@@ -99,16 +160,8 @@ Return ONLY a JSON array of slugs (e.g., ["slug1", "slug2", "slug3"]) for the ${
       }));
 
     return NextResponse.json({
-      recommendations: recommendedPosts,
-      count: recommendedPosts.length,
+      recommendations: fallbackPosts,
+      count: fallbackPosts.length,
     });
-
-  } catch (error) {
-    console.error('Error generating recommendations:', error);
-    return NextResponse.json(
-      { error: 'Failed to generate recommendations' },
-      { status: 500 }
-    );
   }
 }
-

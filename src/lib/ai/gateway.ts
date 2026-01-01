@@ -10,6 +10,8 @@
 
 import { createOpenAI } from '@ai-sdk/openai';
 
+const DEFAULT_TEXT_MODEL = process.env.AI_TEXT_MODEL || 'gpt-4o-mini';
+
 /**
  * Create OpenAI client configured for AI Gateway
  * 
@@ -49,10 +51,16 @@ export function getGatewayModel(modelName: string = 'gpt-4o-mini'): string {
 
   if (isCloudflareGateway) {
     // Cloudflare Gateway: use model name directly
+    if (modelName.includes('/')) {
+      return modelName.split('/').pop() || modelName;
+    }
     return modelName;
   }
 
   // Vercel AI Gateway: use provider/model format
+  if (modelName.includes('/') || modelName.includes(':')) {
+    return modelName;
+  }
   const provider = process.env.AI_GATEWAY_PROVIDER || 'openai';
   return `${provider}/${modelName}`;
 }
@@ -98,3 +106,17 @@ export function getAIClient() {
   return openai;
 }
 
+/**
+ * Get the configured text model name, accounting for gateway formatting.
+ */
+export function getTextModelName(modelName: string = DEFAULT_TEXT_MODEL): string {
+  return isAIGatewayConfigured() ? getGatewayModel(modelName) : modelName;
+}
+
+/**
+ * Get a text model instance for the configured provider.
+ */
+export function getTextModel(modelName: string = DEFAULT_TEXT_MODEL) {
+  const aiClient = getAIClient();
+  return aiClient(getTextModelName(modelName));
+}

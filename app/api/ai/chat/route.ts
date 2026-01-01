@@ -1,7 +1,7 @@
-import { openai } from '@ai-sdk/openai';
 import { streamText } from 'ai';
 import { NextRequest } from 'next/server';
 import { rateLimit } from '../../../../src/lib/rate-limit';
+import { getTextModel, hasAIConfig } from '@/src/lib/ai/gateway';
 
 /**
  * Streaming Chat API using Vercel AI SDK
@@ -33,10 +33,10 @@ export async function POST(request: NextRequest) {
       return new Response('Message is required', { status: 400 });
     }
 
-    // Check if OpenAI API key is configured
-    if (!process.env.OPENAI_API_KEY) {
+    // Check if AI configuration is available
+    if (!hasAIConfig()) {
       return new Response(
-        JSON.stringify({ error: 'OpenAI API key not configured' }),
+        JSON.stringify({ error: 'AI Gateway API key or OpenAI API key not configured' }),
         { status: 500, headers: { 'Content-Type': 'application/json' } }
       );
     }
@@ -119,9 +119,9 @@ Always be professional, empathetic, and prioritize patient safety. If you're uns
       { role: 'user' as const, content: message }
     ];
 
-    // Use AI SDK's streamText with direct OpenAI
+    // Use AI SDK's streamText with the configured model
     const result = streamText({
-      model: openai('gpt-4o-mini'),
+      model: getTextModel(),
       messages,
       temperature: 0.7,
     });
@@ -144,4 +144,3 @@ Always be professional, empathetic, and prioritize patient safety. If you're uns
     );
   }
 }
-

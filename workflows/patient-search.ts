@@ -6,9 +6,9 @@
  */
 
 import { sleep } from "workflow";
-import { generateText } from "ai";
+import { generateObject, generateText, jsonSchema } from "ai";
 import { getAllBlogPosts } from "@/src/lib/blog";
-import { getAIClient, getGatewayModel, isAIGatewayConfigured } from "@/src/lib/ai/gateway";
+import { getTextModel, hasAIConfig } from "@/src/lib/ai/gateway";
 
 interface SearchResult {
   type: "blog" | "gemini" | "general";
@@ -95,18 +95,43 @@ async function analyzeSearchIntent(
 
   console.log(`[Patient Search] Analyzing intent for: "${query}"`);
 
-  const aiClient = getAIClient();
-  const modelName = isAIGatewayConfigured()
-    ? getGatewayModel("gpt-4o-mini")
-    : "gpt-4o-mini";
+  if (!hasAIConfig()) {
+    return {
+      intent: "information",
+      specialty: "general",
+      urgency: "low",
+      terms: [query],
+    };
+  }
 
   const contextInfo = userContext?.previousSearches?.length
     ? `\nUser's previous searches: ${userContext.previousSearches.join(", ")}`
     : "";
 
-  const { text } = await generateText({
-    model: aiClient(modelName),
-    prompt: `Analyze the search intent for this medical query: "${query}"${contextInfo}
+  try {
+    const { object } = await generateObject({
+      model: getTextModel(),
+      schema: jsonSchema({
+        type: "object",
+        properties: {
+          intent: {
+            type: "string",
+            enum: ["information", "appointment", "emergency", "treatment", "diagnosis"],
+          },
+          specialty: {
+            type: "string",
+            enum: ["neurosurgery", "spine", "brain", "epilepsy", "general"],
+          },
+          urgency: {
+            type: "string",
+            enum: ["low", "medium", "high", "emergency"],
+          },
+          terms: { type: "array", items: { type: "string" } },
+        },
+        required: ["intent", "specialty", "urgency", "terms"],
+        additionalProperties: false,
+      }),
+      prompt: `Analyze the search intent for this medical query: "${query}"${contextInfo}
 
 Determine:
 1. Primary intent (information, appointment, emergency, treatment, diagnosis)
@@ -115,14 +140,9 @@ Determine:
 4. Key medical terms
 
 Return as JSON: {"intent": "...", "specialty": "...", "urgency": "...", "terms": [...]}`,
-    temperature: 0.3,
-  });
-
-  try {
-    const jsonMatch = text.match(/\{[\s\S]*\}/);
-    if (jsonMatch) {
-      return JSON.parse(jsonMatch[0]);
-    }
+      temperature: 0.3,
+    });
+    return object;
   } catch (error) {
     console.error("[Patient Search] Error parsing intent:", error);
   }
@@ -244,11 +264,6 @@ async function generateSearchSummary(
 
   console.log(`[Patient Search] Generating AI summary`);
 
-  const aiClient = getAIClient();
-  const modelName = isAIGatewayConfigured()
-    ? getGatewayModel("gpt-4o-mini")
-    : "gpt-4o-mini";
-
   const resultsContext = [
     ...blogResults.slice(0, 3),
     ...geminiResults.slice(0, 2),
@@ -256,8 +271,15 @@ async function generateSearchSummary(
     .map((r) => `${r.title}: ${r.excerpt}`)
     .join("\n\n");
 
+  if (!hasAIConfig()) {
+    const highlights = resultsContext
+      ? `\n\nHighlights:\n${resultsContext}`
+      : "";
+    return `Here are relevant resources for "${query}". You can review the summaries below or book a consultation with Dr. Sayuj Krishnan for personalized guidance.${highlights}`;
+  }
+
   const { text } = await generateText({
-    model: aiClient(modelName),
+    model: getTextModel(),
     prompt: `Based on the search query "${query}" and the following relevant content, provide a concise, helpful summary for the patient.
 
 Relevant content:
@@ -287,24 +309,33 @@ async function extractRelatedTopics(
 
   console.log(`[Patient Search] Extracting related topics`);
 
-  const aiClient = getAIClient();
-  const modelName = isAIGatewayConfigured()
-    ? getGatewayModel("gpt-4o-mini")
-    : "gpt-4o-mini";
-
-  const { text } = await generateText({
-    model: aiClient(modelName),
-    prompt: `For the medical query "${query}" with intent "${searchIntent.intent}" and specialty "${searchIntent.specialty}", suggest 5 related topics a patient might want to explore.
-
-Return ONLY a JSON array of strings, e.g., ["topic1", "topic2", "topic3", "topic4", "topic5"]`,
-    temperature: 0.5,
-  });
+  if (!hasAIConfig()) {
+    return [
+      "Spine Surgery",
+      "Brain Tumors",
+      "Epilepsy Treatment",
+      "Minimally Invasive Surgery",
+      "Neurosurgery Recovery",
+    ];
+  }
 
   try {
-    const jsonMatch = text.match(/\[[\s\S]*?\]/);
-    if (jsonMatch) {
-      return JSON.parse(jsonMatch[0]);
-    }
+    const { object } = await generateObject({
+      model: getTextModel(),
+      schema: jsonSchema({
+        type: "object",
+        properties: {
+          topics: { type: "array", items: { type: "string" } },
+        },
+        required: ["topics"],
+        additionalProperties: false,
+      }),
+      prompt: `For the medical query "${query}" with intent "${searchIntent.intent}" and specialty "${searchIntent.specialty}", suggest 5 related topics a patient might want to explore.
+
+Return ONLY JSON with a "topics" array, e.g., {"topics": ["topic1", "topic2", "topic3", "topic4", "topic5"]}`,
+      temperature: 0.5,
+    });
+    return object.topics;
   } catch (error) {
     console.error("[Patient Search] Error parsing related topics:", error);
   }

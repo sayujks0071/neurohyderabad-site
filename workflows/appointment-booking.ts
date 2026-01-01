@@ -11,11 +11,7 @@
 
 import { sleep, FatalError } from "workflow";
 import { generateText } from "ai";
-import {
-  getAIClient,
-  getGatewayModel,
-  isAIGatewayConfigured,
-} from "@/src/lib/ai/gateway";
+import { getTextModel, hasAIConfig } from "@/src/lib/ai/gateway";
 
 interface PatientInfo {
   name: string;
@@ -408,24 +404,30 @@ async function preparePatientEducation(
 
   console.log(`[Appointment Workflow] Preparing patient education content`);
 
-  const aiClient = getAIClient();
-  const modelName = isAIGatewayConfigured()
-    ? getGatewayModel("gpt-4o-mini")
-    : "gpt-4o-mini";
+  if (!hasAIConfig()) {
+    console.log(
+      `[Appointment Workflow] AI config missing, skipping education content`
+    );
+    return;
+  }
 
-  const { text } = await generateText({
-    model: aiClient(modelName),
-    prompt: `Based on the patient's chief complaint: "${chiefComplaint}", generate a brief patient education summary (2-3 paragraphs) covering:
+  try {
+    const { text } = await generateText({
+      model: getTextModel(),
+      prompt: `Based on the patient's chief complaint: "${chiefComplaint}", generate a brief patient education summary (2-3 paragraphs) covering:
 1. Common causes
 2. What to expect during consultation
 3. Typical diagnostic tests
 4. General preparation tips
 
 Keep it simple and reassuring.`,
-    temperature: 0.7,
-  });
+      temperature: 0.7,
+    });
 
-  console.log(`Patient education content prepared (${text.length} chars)`);
+    console.log(`Patient education content prepared (${text.length} chars)`);
+  } catch (error) {
+    console.error(`[Appointment Workflow] AI education content error:`, error);
+  }
   // In production, this would be emailed or saved to patient portal
 }
 

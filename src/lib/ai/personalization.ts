@@ -10,8 +10,8 @@
  * - Previous interactions
  */
 
-import { generateText } from 'ai';
-import { getAIClient, getGatewayModel, isAIGatewayConfigured } from './gateway';
+import { generateObject, jsonSchema } from 'ai';
+import { getTextModel, hasAIConfig } from './gateway';
 
 export interface PersonalizationContext {
   condition?: string;
@@ -51,18 +51,57 @@ export interface PersonalizedContent {
 export async function personalizeContent(
   context: PersonalizationContext
 ): Promise<PersonalizedContent> {
-  if (!process.env.OPENAI_API_KEY) {
+  if (!hasAIConfig()) {
     return fallbackPersonalization(context);
   }
 
   try {
-    const aiClient = getAIClient();
-    const modelName = isAIGatewayConfigured() 
-      ? getGatewayModel('gpt-4o-mini')
-      : 'gpt-4o-mini';
-    
-    const { text } = await generateText({
-      model: aiClient(modelName),
+    const { object } = await generateObject({
+      model: getTextModel(),
+      schema: jsonSchema({
+        type: 'object',
+        properties: {
+          recommendedPages: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                slug: { type: 'string' },
+                title: { type: 'string' },
+                reason: { type: 'string' },
+                priority: { type: 'number' },
+              },
+              required: ['slug', 'title', 'reason', 'priority'],
+              additionalProperties: false,
+            },
+          },
+          personalizedMessage: { type: 'string' },
+          suggestedActions: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                action: { type: 'string' },
+                url: { type: 'string' },
+                reason: { type: 'string' },
+              },
+              required: ['action', 'url', 'reason'],
+              additionalProperties: false,
+            },
+          },
+          contentModifications: {
+            type: 'object',
+            properties: {
+              highlight: { type: 'array', items: { type: 'string' } },
+              emphasize: { type: 'array', items: { type: 'string' } },
+              hide: { type: 'array', items: { type: 'string' } },
+            },
+            additionalProperties: false,
+          },
+        },
+        required: ['recommendedPages', 'suggestedActions', 'contentModifications'],
+        additionalProperties: false,
+      }),
       prompt: `You are an AI content personalization engine for a neurosurgery practice website (www.drsayuj.info).
 
 User Context:
@@ -112,12 +151,7 @@ Return ONLY valid JSON, no other text.`,
       temperature: 0.5,
     });
 
-    const jsonMatch = text.match(/\{[\s\S]*\}/);
-    if (jsonMatch) {
-      return JSON.parse(jsonMatch[0]) as PersonalizedContent;
-    }
-
-    return fallbackPersonalization(context);
+    return object as PersonalizedContent;
   } catch (error) {
     console.error('Personalization error:', error);
     return fallbackPersonalization(context);
@@ -215,4 +249,3 @@ export function personalizeMessage(
 
   return message;
 }
-

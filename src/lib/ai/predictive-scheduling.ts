@@ -9,8 +9,8 @@
  * - Seasonal patterns
  */
 
-import { generateText } from 'ai';
-import { getAIClient, getGatewayModel, isAIGatewayConfigured } from './gateway';
+import { generateObject, jsonSchema } from 'ai';
+import { getTextModel, hasAIConfig } from './gateway';
 
 export interface SchedulingRequest {
   preferredDates: string[];
@@ -47,18 +47,49 @@ export interface SchedulingPrediction {
 export async function predictOptimalSlots(
   request: SchedulingRequest
 ): Promise<SchedulingPrediction> {
-  if (!process.env.OPENAI_API_KEY) {
+  if (!hasAIConfig()) {
     return fallbackScheduling(request);
   }
 
   try {
-    const aiClient = getAIClient();
-    const modelName = isAIGatewayConfigured() 
-      ? getGatewayModel('gpt-4o-mini')
-      : 'gpt-4o-mini';
-    
-    const { text } = await generateText({
-      model: aiClient(modelName),
+    const { object } = await generateObject({
+      model: getTextModel(),
+      schema: jsonSchema({
+        type: 'object',
+        properties: {
+          recommendedSlots: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                date: { type: 'string' },
+                time: { type: 'string' },
+                confidence: { type: 'number' },
+                reasoning: { type: 'string' },
+              },
+              required: ['date', 'time', 'confidence', 'reasoning'],
+              additionalProperties: false,
+            },
+          },
+          alternativeSlots: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                date: { type: 'string' },
+                time: { type: 'string' },
+                confidence: { type: 'number' },
+              },
+              required: ['date', 'time', 'confidence'],
+              additionalProperties: false,
+            },
+          },
+          estimatedWaitTime: { type: 'string' },
+          suggestions: { type: 'array', items: { type: 'string' } },
+        },
+        required: ['recommendedSlots', 'alternativeSlots', 'estimatedWaitTime', 'suggestions'],
+        additionalProperties: false,
+      }),
       prompt: `You are an AI scheduling assistant for a neurosurgery practice. Predict optimal appointment slots based on the following information:
 
 Patient Request:
@@ -92,13 +123,7 @@ Return ONLY valid JSON, no other text.`,
       temperature: 0.4,
     });
 
-    // Parse JSON from response
-    const jsonMatch = text.match(/\{[\s\S]*\}/);
-    if (jsonMatch) {
-      return JSON.parse(jsonMatch[0]) as SchedulingPrediction;
-    }
-
-    return fallbackScheduling(request);
+    return object as SchedulingPrediction;
   } catch (error) {
     console.error('Predictive scheduling error:', error);
     return fallbackScheduling(request);
@@ -155,4 +180,3 @@ export async function predictNoShow(
 
   return { probability, factors };
 }
-

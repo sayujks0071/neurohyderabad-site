@@ -8,8 +8,8 @@
  * - Patient history
  */
 
-import { generateText } from 'ai';
-import { getAIClient, getGatewayModel, isAIGatewayConfigured } from './gateway';
+import { generateObject, jsonSchema } from 'ai';
+import { getTextModel, hasAIConfig } from './gateway';
 
 export interface FollowUpRequest {
   procedureType: string;
@@ -55,18 +55,72 @@ export interface FollowUpRecommendation {
 export async function generateFollowUpCare(
   request: FollowUpRequest
 ): Promise<FollowUpRecommendation> {
-  if (!process.env.OPENAI_API_KEY) {
+  if (!hasAIConfig()) {
     return fallbackFollowUpCare(request);
   }
 
   try {
-    const aiClient = getAIClient();
-    const modelName = isAIGatewayConfigured() 
-      ? getGatewayModel('gpt-4o-mini')
-      : 'gpt-4o-mini';
-    
-    const { text } = await generateText({
-      model: aiClient(modelName),
+    const { object } = await generateObject({
+      model: getTextModel(),
+      schema: jsonSchema({
+        type: 'object',
+        properties: {
+          carePlan: {
+            type: 'object',
+            properties: {
+              immediate: { type: 'array', items: { type: 'string' } },
+              shortTerm: { type: 'array', items: { type: 'string' } },
+              longTerm: { type: 'array', items: { type: 'string' } },
+            },
+            required: ['immediate', 'shortTerm', 'longTerm'],
+            additionalProperties: false,
+          },
+          medicationGuidance: {
+            type: 'object',
+            properties: {
+              current: { type: 'array', items: { type: 'string' } },
+              adjustments: { type: 'array', items: { type: 'string' } },
+              warnings: { type: 'array', items: { type: 'string' } },
+            },
+            additionalProperties: false,
+          },
+          activityRecommendations: {
+            type: 'object',
+            properties: {
+              allowed: { type: 'array', items: { type: 'string' } },
+              restricted: { type: 'array', items: { type: 'string' } },
+              timeline: { type: 'string' },
+            },
+            required: ['allowed', 'restricted', 'timeline'],
+            additionalProperties: false,
+          },
+          warningSigns: {
+            type: 'object',
+            properties: {
+              urgent: { type: 'array', items: { type: 'string' } },
+              monitor: { type: 'array', items: { type: 'string' } },
+            },
+            required: ['urgent', 'monitor'],
+            additionalProperties: false,
+          },
+          nextSteps: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                action: { type: 'string' },
+                timeline: { type: 'string' },
+                priority: { type: 'string', enum: ['high', 'medium', 'low'] },
+              },
+              required: ['action', 'timeline', 'priority'],
+              additionalProperties: false,
+            },
+          },
+          personalizedMessage: { type: 'string' },
+        },
+        required: ['carePlan', 'activityRecommendations', 'warningSigns', 'nextSteps', 'personalizedMessage'],
+        additionalProperties: false,
+      }),
       prompt: `You are an AI assistant helping with post-operative care for neurosurgery patients. Generate personalized follow-up care recommendations.
 
 Patient Information:
@@ -115,12 +169,7 @@ Return ONLY valid JSON, no other text.`,
       temperature: 0.4,
     });
 
-    const jsonMatch = text.match(/\{[\s\S]*\}/);
-    if (jsonMatch) {
-      return JSON.parse(jsonMatch[0]) as FollowUpRecommendation;
-    }
-
-    return fallbackFollowUpCare(request);
+    return object as FollowUpRecommendation;
   } catch (error) {
     console.error('Follow-up care generation error:', error);
     return fallbackFollowUpCare(request);
@@ -180,4 +229,3 @@ function fallbackFollowUpCare(request: FollowUpRequest): FollowUpRecommendation 
     personalizedMessage: `Thank you for choosing Dr. Sayuj Krishnan for your ${request.procedureType}. We're here to support your recovery. For any concerns, call +91-9778280044.`,
   };
 }
-

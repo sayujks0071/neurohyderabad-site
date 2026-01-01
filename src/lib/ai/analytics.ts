@@ -8,8 +8,8 @@
  * - Patient journey analysis
  */
 
-import { generateText } from 'ai';
-import { getAIClient, getGatewayModel, isAIGatewayConfigured } from './gateway';
+import { generateObject, jsonSchema } from 'ai';
+import { getTextModel, hasAIConfig } from './gateway';
 
 export interface AnalyticsData {
   pageViews: number;
@@ -57,18 +57,51 @@ export interface AIInsights {
 export async function generateInsights(
   data: AnalyticsData
 ): Promise<AIInsights> {
-  if (!process.env.OPENAI_API_KEY) {
+  if (!hasAIConfig()) {
     return fallbackInsights(data);
   }
 
   try {
-    const aiClient = getAIClient();
-    const modelName = isAIGatewayConfigured() 
-      ? getGatewayModel('gpt-4o-mini')
-      : 'gpt-4o-mini';
-    
-    const { text } = await generateText({
-      model: aiClient(modelName),
+    const { object } = await generateObject({
+      model: getTextModel(),
+      schema: jsonSchema({
+        type: 'object',
+        properties: {
+          keyFindings: { type: 'array', items: { type: 'string' } },
+          recommendations: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                action: { type: 'string' },
+                priority: { type: 'string', enum: ['high', 'medium', 'low'] },
+                expectedImpact: { type: 'string' },
+                reasoning: { type: 'string' },
+              },
+              required: ['action', 'priority', 'expectedImpact', 'reasoning'],
+              additionalProperties: false,
+            },
+          },
+          trends: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                trend: { type: 'string' },
+                direction: { type: 'string', enum: ['up', 'down', 'stable'] },
+                significance: { type: 'string' },
+              },
+              required: ['trend', 'direction', 'significance'],
+              additionalProperties: false,
+            },
+          },
+          opportunities: { type: 'array', items: { type: 'string' } },
+          warnings: { type: 'array', items: { type: 'string' } },
+          summary: { type: 'string' },
+        },
+        required: ['keyFindings', 'recommendations', 'trends', 'opportunities', 'warnings', 'summary'],
+        additionalProperties: false,
+      }),
       prompt: `You are an AI analytics expert analyzing data for a neurosurgery practice website (www.drsayuj.info).
 
 Analytics Data:
@@ -108,12 +141,7 @@ Return ONLY valid JSON, no other text.`,
       temperature: 0.4,
     });
 
-    const jsonMatch = text.match(/\{[\s\S]*\}/);
-    if (jsonMatch) {
-      return JSON.parse(jsonMatch[0]) as AIInsights;
-    }
-
-    return fallbackInsights(data);
+    return object as AIInsights;
   } catch (error) {
     console.error('AI analytics error:', error);
     return fallbackInsights(data);
@@ -170,4 +198,3 @@ function fallbackInsights(data: AnalyticsData): AIInsights {
     summary: `Analysis of ${data.pageViews} page views shows ${data.conversions} conversions. Focus on improving engagement and conversion optimization.`,
   };
 }
-

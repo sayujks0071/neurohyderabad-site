@@ -3,7 +3,7 @@
  */
 
 import { generateObject, jsonSchema } from 'ai';
-import { getAIClient, getGatewayModel, isAIGatewayConfigured } from './gateway';
+import { getTextModel, hasAIConfig } from './gateway';
 
 export interface TriageRequest {
   symptoms: string[];
@@ -58,16 +58,13 @@ export async function analyzeTriage(request: TriageRequest): Promise<TriageResul
     };
   }
 
-  if (!process.env.OPENAI_API_KEY) {
+  if (!hasAIConfig()) {
     return basicTriage(request);
   }
 
   try {
-    const aiClient = getAIClient();
-    const modelName = isAIGatewayConfigured() ? getGatewayModel('gpt-4o-mini') : 'gpt-4o-mini';
-    
     const { object } = await generateObject({
-      model: aiClient(modelName),
+      model: getTextModel(),
       schema: jsonSchema({
         type: 'object',
         properties: {

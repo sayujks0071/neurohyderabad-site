@@ -10,11 +10,10 @@
  */
 
 import { sleep } from "workflow";
-import { generateText } from "ai";
+import { generateObject, jsonSchema } from "ai";
 import {
-  getAIClient,
-  getGatewayModel,
-  isAIGatewayConfigured,
+  getTextModel,
+  hasAIConfig,
 } from "@/src/lib/ai/gateway";
 
 interface FollowUpRequest {
@@ -161,37 +160,43 @@ async function createCheckInSchedule(
 
   console.log(`[Follow-Up] Creating check-in schedule for ${procedure}`);
 
-  const aiClient = getAIClient();
-  const modelName = isAIGatewayConfigured()
-    ? getGatewayModel("gpt-4o-mini")
-    : "gpt-4o-mini";
+  if (hasAIConfig()) {
+    try {
+      const { object } = await generateObject({
+        model: getTextModel(),
+        schema: jsonSchema({
+          type: "object",
+          properties: {
+            checkIns: {
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  day: { type: "number" },
+                  title: { type: "string" },
+                  questions: { type: "array", items: { type: "string" } },
+                  urgentSymptoms: { type: "array", items: { type: "string" } },
+                },
+                required: ["day", "title", "questions", "urgentSymptoms"],
+                additionalProperties: false,
+              },
+            },
+          },
+          required: ["checkIns"],
+          additionalProperties: false,
+        }),
+        prompt: `Create a follow-up check-in schedule for a patient who had ${procedure}.
 
-  const { text } = await generateText({
-    model: aiClient(modelName),
-    prompt: `Create a follow-up check-in schedule for a patient who had ${procedure}.
-
-Return a JSON array of check-ins with this structure:
-[
-  {
-    "day": 1,
-    "title": "Day 1 Post-Surgery Check",
-    "questions": ["How is your pain level?", "..."],
-    "urgentSymptoms": ["severe bleeding", "..."]
-  },
-  ...
-]
+Return JSON with a "checkIns" array using this structure:
+{"checkIns": [{"day": 1, "title": "Day 1 Post-Surgery Check", "questions": ["How is your pain level?"], "urgentSymptoms": ["severe bleeding"]}]}
 
 Include check-ins for: Day 1, Day 3, Week 1, Week 2, Week 4, Week 8, Month 3, Month 6`,
-    temperature: 0.5,
-  });
-
-  try {
-    const jsonMatch = text.match(/\[[\s\S]*?\]/);
-    if (jsonMatch) {
-      return JSON.parse(jsonMatch[0]);
+        temperature: 0.5,
+      });
+      return object.checkIns;
+    } catch (error) {
+      console.error("[Follow-Up] Error parsing schedule:", error);
     }
-  } catch (error) {
-    console.error("[Follow-Up] Error parsing schedule:", error);
   }
 
   // Default schedule
@@ -336,14 +341,21 @@ async function assessRecoveryProgress(
 
   console.log(`[Follow-Up] Assessing recovery progress for ${procedure}`);
 
-  const aiClient = getAIClient();
-  const modelName = isAIGatewayConfigured()
-    ? getGatewayModel("gpt-4o-mini")
-    : "gpt-4o-mini";
-
-  const { text } = await generateText({
-    model: aiClient(modelName),
-    prompt: `Assess recovery progress for a patient who had ${procedure} ${daysSinceSurgery} days ago.
+  if (hasAIConfig()) {
+    try {
+      const { object } = await generateObject({
+        model: getTextModel(),
+        schema: jsonSchema({
+          type: "object",
+          properties: {
+            status: { type: "string", enum: ["on-track", "needs-attention", "urgent"] },
+            progressPercentage: { type: "number" },
+            concerns: { type: "array", items: { type: "string" } },
+          },
+          required: ["status", "progressPercentage", "concerns"],
+          additionalProperties: false,
+        }),
+        prompt: `Assess recovery progress for a patient who had ${procedure} ${daysSinceSurgery} days ago.
 
 Current symptoms: ${currentSymptoms.join(", ") || "None reported"}
 
@@ -355,16 +367,12 @@ Return as JSON:
 }
 
 Consider typical recovery timelines for neurosurgery procedures.`,
-    temperature: 0.3,
-  });
-
-  try {
-    const jsonMatch = text.match(/\{[\s\S]*?\}/);
-    if (jsonMatch) {
-      return JSON.parse(jsonMatch[0]);
+        temperature: 0.3,
+      });
+      return object;
+    } catch (error) {
+      console.error("[Follow-Up] Error parsing recovery status:", error);
     }
-  } catch (error) {
-    console.error("[Follow-Up] Error parsing recovery status:", error);
   }
 
   // Default assessment
@@ -415,31 +423,32 @@ async function generateRecommendations(
 
   console.log(`[Follow-Up] Generating recommendations`);
 
-  const aiClient = getAIClient();
-  const modelName = isAIGatewayConfigured()
-    ? getGatewayModel("gpt-4o-mini")
-    : "gpt-4o-mini";
-
-  const { text } = await generateText({
-    model: aiClient(modelName),
-    prompt: `Generate 5-7 personalized recovery recommendations for a patient who had ${procedure} ${daysSinceSurgery} days ago.
+  if (hasAIConfig()) {
+    try {
+      const { object } = await generateObject({
+        model: getTextModel(),
+        schema: jsonSchema({
+          type: "object",
+          properties: {
+            recommendations: { type: "array", items: { type: "string" } },
+          },
+          required: ["recommendations"],
+          additionalProperties: false,
+        }),
+        prompt: `Generate 5-7 personalized recovery recommendations for a patient who had ${procedure} ${daysSinceSurgery} days ago.
 
 Recovery status: ${recoveryStatus.status}
 Complications: ${complicationStatus.isUrgent ? "Yes" : "No"}
 
-Return ONLY a JSON array of strings, e.g., ["recommendation1", "recommendation2", ...]
+Return ONLY JSON with a "recommendations" array, e.g., {"recommendations": ["recommendation1", "recommendation2", ...]}
 
 Focus on practical, actionable advice for this stage of recovery.`,
-    temperature: 0.6,
-  });
-
-  try {
-    const jsonMatch = text.match(/\[[\s\S]*?\]/);
-    if (jsonMatch) {
-      return JSON.parse(jsonMatch[0]);
+        temperature: 0.6,
+      });
+      return object.recommendations;
+    } catch (error) {
+      console.error("[Follow-Up] Error parsing recommendations:", error);
     }
-  } catch (error) {
-    console.error("[Follow-Up] Error parsing recommendations:", error);
   }
 
   return [

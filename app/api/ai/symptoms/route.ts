@@ -1,6 +1,6 @@
-import { generateText } from 'ai';
+import { generateObject, jsonSchema } from 'ai';
 import { NextRequest, NextResponse } from 'next/server';
-import { getAIClient, getGatewayModel, isAIGatewayConfigured } from '@/src/lib/ai/gateway';
+import { getTextModel, hasAIConfig } from '@/src/lib/ai/gateway';
 
 /**
  * Smart Symptom Analyzer API using Vercel AI SDK
@@ -19,23 +19,32 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const hasAIConfig = isAIGatewayConfigured() || process.env.OPENAI_API_KEY;
-    if (!hasAIConfig) {
-      return NextResponse.json(
-        { error: 'AI Gateway API key or OpenAI API key not configured' },
-        { status: 500 }
-      );
+    if (!hasAIConfig()) {
+      const analysis = buildFallbackAnalysis(symptoms);
+      return NextResponse.json({
+        analysis,
+        disclaimer: 'This is preliminary guidance only and does not constitute a medical diagnosis. Always consult with a qualified healthcare provider.',
+      });
     }
 
-    const aiClient = getAIClient();
-    const modelName = isAIGatewayConfigured() 
-      ? getGatewayModel('gpt-4o-mini')
-      : 'gpt-4o-mini';
-
     // Use AI SDK to analyze symptoms
-    const { text } = await generateText({
-      model: aiClient(modelName),
-      prompt: `You are a medical assistant helping to triage symptoms for a neurosurgery practice. Analyze the following symptoms and provide guidance.
+    let analysis;
+    try {
+      const { object } = await generateObject({
+        model: getTextModel(),
+        schema: jsonSchema({
+          type: 'object',
+          properties: {
+            urgency: { type: 'string', enum: ['emergency', 'urgent', 'routine'] },
+            recommendation: { type: 'string' },
+            possibleConditions: { type: 'array', items: { type: 'string' } },
+            nextSteps: { type: 'array', items: { type: 'string' } },
+            emergencyContact: { type: 'string' },
+          },
+          required: ['urgency', 'recommendation', 'possibleConditions', 'nextSteps', 'emergencyContact'],
+          additionalProperties: false,
+        }),
+        prompt: `You are a medical assistant helping to triage symptoms for a neurosurgery practice. Analyze the following symptoms and provide guidance.
 
 Patient Information:
 - Symptoms: ${symptoms}
@@ -60,28 +69,12 @@ Format your response as JSON with the following structure:
 }
 
 Response:`,
-      temperature: 0.3,
-    });
-
-    // Parse the AI response
-    let analysis;
-    try {
-      const jsonMatch = text.match(/\{[\s\S]*?\}/);
-      if (jsonMatch) {
-        analysis = JSON.parse(jsonMatch[0]);
-      } else {
-        throw new Error('No JSON found in response');
-      }
+        temperature: 0.3,
+      });
+      analysis = object;
     } catch (error) {
-      console.error('Error parsing AI response:', error);
-      // Fallback response
-      analysis = {
-        urgency: 'routine',
-        recommendation: 'Please consult with Dr. Sayuj Krishnan for proper evaluation of your symptoms.',
-        possibleConditions: [],
-        nextSteps: ['Schedule an appointment', 'Call +91-9778280044 for immediate concerns'],
-        emergencyContact: '+91-9778280044',
-      };
+      console.error('Error generating symptom analysis:', error);
+      analysis = buildFallbackAnalysis(symptoms);
     }
 
     return NextResponse.json({
@@ -98,3 +91,31 @@ Response:`,
   }
 }
 
+function buildFallbackAnalysis(symptoms: string) {
+  const emergencyKeywords = [
+    'stroke',
+    'seizure',
+    'severe headache',
+    'sudden weakness',
+    'paralysis',
+    'loss of vision',
+    'severe neck pain',
+    'trauma',
+    'accident',
+    'unconscious',
+  ];
+  const lowerSymptoms = symptoms.toLowerCase();
+  const isEmergency = emergencyKeywords.some((keyword) => lowerSymptoms.includes(keyword));
+
+  return {
+    urgency: isEmergency ? 'emergency' : 'routine',
+    recommendation: isEmergency
+      ? 'Seek emergency medical care immediately or call +91-9778280044.'
+      : 'Please consult with Dr. Sayuj Krishnan for proper evaluation of your symptoms.',
+    possibleConditions: [],
+    nextSteps: isEmergency
+      ? ['Call +91-9778280044 immediately', 'Visit the nearest emergency room']
+      : ['Schedule an appointment', 'Call +91-9778280044 for immediate concerns'],
+    emergencyContact: '+91-9778280044',
+  };
+}

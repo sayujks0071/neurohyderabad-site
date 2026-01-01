@@ -10,11 +10,10 @@
  */
 
 import { sleep } from "workflow";
-import { generateText } from "ai";
+import { generateObject, generateText, jsonSchema } from "ai";
 import {
-  getAIClient,
-  getGatewayModel,
-  isAIGatewayConfigured,
+  getTextModel,
+  hasAIConfig,
 } from "@/src/lib/ai/gateway";
 import { getAllBlogPosts } from "@/src/lib/blog";
 
@@ -163,13 +162,12 @@ async function generateConditionOverview(condition: string): Promise<string> {
 
   console.log(`[Patient Education] Generating overview for ${condition}`);
 
-  const aiClient = getAIClient();
-  const modelName = isAIGatewayConfigured()
-    ? getGatewayModel("gpt-4o-mini")
-    : "gpt-4o-mini";
+  if (!hasAIConfig()) {
+    return `${condition} is a condition that can affect the brain, spine, or nerves. For a personalized explanation and treatment options, schedule a consultation with Dr. Sayuj Krishnan.`;
+  }
 
   const { text } = await generateText({
-    model: aiClient(modelName),
+    model: getTextModel(),
     prompt: `Write a comprehensive but patient-friendly overview of ${condition} in the context of neurosurgery.
 
 Include:
@@ -194,26 +192,35 @@ async function generateSymptomGuide(condition: string): Promise<string[]> {
 
   console.log(`[Patient Education] Generating symptom guide for ${condition}`);
 
-  const aiClient = getAIClient();
-  const modelName = isAIGatewayConfigured()
-    ? getGatewayModel("gpt-4o-mini")
-    : "gpt-4o-mini";
-
-  const { text } = await generateText({
-    model: aiClient(modelName),
-    prompt: `List the common symptoms of ${condition} that patients should watch for.
-
-Return ONLY a JSON array of strings, e.g., ["symptom1", "symptom2", ...]
-
-Include 8-10 symptoms, ordered from most common to less common.`,
-    temperature: 0.5,
-  });
+  if (!hasAIConfig()) {
+    return [
+      "Persistent pain",
+      "Numbness or tingling",
+      "Weakness in limbs",
+      "Difficulty walking",
+      "Balance problems",
+    ];
+  }
 
   try {
-    const jsonMatch = text.match(/\[[\s\S]*?\]/);
-    if (jsonMatch) {
-      return JSON.parse(jsonMatch[0]);
-    }
+    const { object } = await generateObject({
+      model: getTextModel(),
+      schema: jsonSchema({
+        type: "object",
+        properties: {
+          symptoms: { type: "array", items: { type: "string" } },
+        },
+        required: ["symptoms"],
+        additionalProperties: false,
+      }),
+      prompt: `List the common symptoms of ${condition} that patients should watch for.
+
+Return ONLY JSON with a "symptoms" array, e.g., {"symptoms": ["symptom1", "symptom2", ...]}
+
+Include 8-10 symptoms, ordered from most common to less common.`,
+      temperature: 0.5,
+    });
+    return object.symptoms;
   } catch (error) {
     console.error("[Patient Education] Error parsing symptoms:", error);
   }
@@ -235,13 +242,12 @@ async function generateDiagnosisInfo(condition: string): Promise<string> {
 
   console.log(`[Patient Education] Generating diagnosis info for ${condition}`);
 
-  const aiClient = getAIClient();
-  const modelName = isAIGatewayConfigured()
-    ? getGatewayModel("gpt-4o-mini")
-    : "gpt-4o-mini";
+  if (!hasAIConfig()) {
+    return `Diagnosis for ${condition} usually begins with a consultation and physical exam, followed by imaging tests such as MRI or CT scans. Bring any prior reports and a list of symptoms to your visit.`;
+  }
 
   const { text } = await generateText({
-    model: aiClient(modelName),
+    model: getTextModel(),
     prompt: `Explain how ${condition} is diagnosed in a patient-friendly way.
 
 Include:
@@ -269,30 +275,39 @@ async function generateTreatmentOptions(
 
   console.log(`[Patient Education] Generating treatment options for ${condition}`);
 
-  const aiClient = getAIClient();
-  const modelName = isAIGatewayConfigured()
-    ? getGatewayModel("gpt-4o-mini")
-    : "gpt-4o-mini";
-
   const contextualInfo = treatmentPlan
     ? `\n\nThe patient's recommended treatment plan is: ${treatmentPlan}`
     : "";
 
-  const { text } = await generateText({
-    model: aiClient(modelName),
-    prompt: `List the treatment options for ${condition}, focusing on Dr. Sayuj Krishnan's expertise in minimally invasive neurosurgery.${contextualInfo}
-
-Return ONLY a JSON array of strings, e.g., ["treatment1", "treatment2", ...]
-
-Include 5-7 treatment options, from conservative to surgical.`,
-    temperature: 0.6,
-  });
+  if (!hasAIConfig()) {
+    return [
+      "Conservative management (medication, physical therapy)",
+      "Minimally invasive surgery",
+      "Endoscopic spine surgery",
+      "Traditional open surgery",
+      "Post-operative rehabilitation",
+    ];
+  }
 
   try {
-    const jsonMatch = text.match(/\[[\s\S]*?\]/);
-    if (jsonMatch) {
-      return JSON.parse(jsonMatch[0]);
-    }
+    const { object } = await generateObject({
+      model: getTextModel(),
+      schema: jsonSchema({
+        type: "object",
+        properties: {
+          treatments: { type: "array", items: { type: "string" } },
+        },
+        required: ["treatments"],
+        additionalProperties: false,
+      }),
+      prompt: `List the treatment options for ${condition}, focusing on Dr. Sayuj Krishnan's expertise in minimally invasive neurosurgery.${contextualInfo}
+
+Return ONLY JSON with a "treatments" array, e.g., {"treatments": ["treatment1", "treatment2", ...]}
+
+Include 5-7 treatment options, from conservative to surgical.`,
+      temperature: 0.6,
+    });
+    return object.treatments;
   } catch (error) {
     console.error("[Patient Education] Error parsing treatments:", error);
   }
@@ -317,17 +332,16 @@ async function generatePreparationGuide(
 
   console.log(`[Patient Education] Generating preparation guide for ${condition}`);
 
-  const aiClient = getAIClient();
-  const modelName = isAIGatewayConfigured()
-    ? getGatewayModel("gpt-4o-mini")
-    : "gpt-4o-mini";
-
   const contextualInfo = treatmentPlan
     ? `\n\nThe treatment plan is: ${treatmentPlan}`
     : "";
 
+  if (!hasAIConfig()) {
+    return `Preparation tips for ${condition}: bring past medical records, imaging reports, and a list of medications. Write down your symptoms, their duration, and any questions. Arrive early for registration and avoid heavy meals before the visit.`;
+  }
+
   const { text } = await generateText({
-    model: aiClient(modelName),
+    model: getTextModel(),
     prompt: `Create a preparation guide for a patient with ${condition} who will be seeing a neurosurgeon.${contextualInfo}
 
 Include:
@@ -352,13 +366,12 @@ async function generateRecoveryInfo(condition: string): Promise<string> {
 
   console.log(`[Patient Education] Generating recovery info for ${condition}`);
 
-  const aiClient = getAIClient();
-  const modelName = isAIGatewayConfigured()
-    ? getGatewayModel("gpt-4o-mini")
-    : "gpt-4o-mini";
+  if (!hasAIConfig()) {
+    return `Recovery after treatment for ${condition} varies by patient and procedure. Expect gradual improvement over weeks, follow activity restrictions, and contact the clinic if pain, weakness, or fever worsens.`;
+  }
 
   const { text } = await generateText({
-    model: aiClient(modelName),
+    model: getTextModel(),
     prompt: `Provide recovery and post-treatment information for ${condition}.
 
 Include:
@@ -387,26 +400,51 @@ async function generateFAQs(
 
   console.log(`[Patient Education] Generating ${count} FAQs for ${condition}`);
 
-  const aiClient = getAIClient();
-  const modelName = isAIGatewayConfigured()
-    ? getGatewayModel("gpt-4o-mini")
-    : "gpt-4o-mini";
-
-  const { text } = await generateText({
-    model: aiClient(modelName),
-    prompt: `Generate ${count} frequently asked questions and answers about ${condition} from a patient's perspective.
-
-Return as a JSON array of objects: [{"question": "...", "answer": "..."}, ...]
-
-Focus on practical, common concerns patients have.`,
-    temperature: 0.6,
-  });
+  if (!hasAIConfig()) {
+    return [
+      {
+        question: `What causes ${condition}?`,
+        answer:
+          "Multiple factors can contribute, including genetics, lifestyle, and environmental factors.",
+      },
+      {
+        question: "How long is the recovery?",
+        answer:
+          "Recovery times vary, but most patients see significant improvement within 4-6 weeks.",
+      },
+    ];
+  }
 
   try {
-    const jsonMatch = text.match(/\[[\s\S]*?\]/);
-    if (jsonMatch) {
-      return JSON.parse(jsonMatch[0]);
-    }
+    const { object } = await generateObject({
+      model: getTextModel(),
+      schema: jsonSchema({
+        type: "object",
+        properties: {
+          faqs: {
+            type: "array",
+            items: {
+              type: "object",
+              properties: {
+                question: { type: "string" },
+                answer: { type: "string" },
+              },
+              required: ["question", "answer"],
+              additionalProperties: false,
+            },
+          },
+        },
+        required: ["faqs"],
+        additionalProperties: false,
+      }),
+      prompt: `Generate ${count} frequently asked questions and answers about ${condition} from a patient's perspective.
+
+Return as JSON with a "faqs" array: {"faqs": [{"question": "...", "answer": "..."}, ...]}
+
+Focus on practical, common concerns patients have.`,
+      temperature: 0.6,
+    });
+    return object.faqs;
   } catch (error) {
     console.error("[Patient Education] Error parsing FAQs:", error);
   }
@@ -467,13 +505,12 @@ async function generateRecoveryTimeline(condition: string): Promise<string> {
 
   console.log(`[Patient Education] Generating recovery timeline for ${condition}`);
 
-  const aiClient = getAIClient();
-  const modelName = isAIGatewayConfigured()
-    ? getGatewayModel("gpt-4o-mini")
-    : "gpt-4o-mini";
+  if (!hasAIConfig()) {
+    return `Recovery timeline for ${condition}:\n- Days 1-3: Rest and follow post-care instructions.\n- Week 1: Gradual mobility, manage pain.\n- Weeks 2-4: Light activity and follow-up visits.\n- Month 2-3: Continued improvement and therapy if advised.\n- Long-term: Periodic check-ins and lifestyle adjustments.`;
+  }
 
   const { text } = await generateText({
-    model: aiClient(modelName),
+    model: getTextModel(),
     prompt: `Create a detailed recovery timeline for ${condition} treatment.
 
 Format as a day-by-day or week-by-week guide:
