@@ -26,10 +26,11 @@ jobs:
         with:
           submodules: false
 
-      - name: Setup Node.js
+      - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: '9'
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -46,12 +47,12 @@ jobs:
         run: pnpm exec tsc --noEmit
 
       - name: Build
-        run: pnpm build
+        run: pnpm run build
         env:
           NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: ${{ secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID && secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || 'G-MMLQCFN4ZJ' }}
 
       - name: Verify sitemap XML
-        run: pnpm check:sitemap
+        run: pnpm run check:sitemap
 
       - name: Check Performance Budget
         run: node scripts/check-budget.js

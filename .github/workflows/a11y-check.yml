@@ -19,10 +19,11 @@ jobs:
         with:
           submodules: false
 
-      - name: Setup Node.js
+      - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: '9'
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -35,7 +36,7 @@ jobs:
         continue-on-error: false
 
       - name: Build site
-        run: pnpm build
+        run: pnpm run build
         timeout-minutes: 10
         continue-on-error: false
         env:
@@ -45,7 +46,7 @@ jobs:
         timeout-minutes: 5
         continue-on-error: false
         run: |
-          pnpm start &
+          pnpm run start &
           sleep 5
           pnpm dlx wait-on http://localhost:3000 --timeout 60000 || (sleep 10 && pnpm dlx wait-on http://localhost:3000 --timeout 60000)
 
@@ -53,7 +54,7 @@ jobs:
         timeout-minutes: 3
         continue-on-error: false
         run: |
-          pnpm install -g pa11y pa11y-ci @axe-core/cli
+          pnpm add -g pa11y pa11y-ci @axe-core/cli
 
       - name: Run comprehensive a11y audit
         id: audit
@@ -280,4 +281,4 @@ jobs:
 
       - name: Stop server
         if: always()
-        run: pkill -f "pnpm start" || true
+        run: pkill -f "pnpm run start" || true

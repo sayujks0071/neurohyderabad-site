@@ -27,6 +27,20 @@ jobs:
           path: wiki
           submodules: false
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: '9'
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
       - name: Setup GitHub CLI
         env:
           GH_TOKEN: ${{ github.token }}
@@ -346,4 +360,3 @@ jobs:
             git commit -m "Update CI Dashboard - $(TZ="Asia/Kolkata" date '+%Y-%m-%d %H:%M:%S IST')" || exit 0
             git push || echo "Wiki push failed (may not have wiki enabled)"
           fi
-

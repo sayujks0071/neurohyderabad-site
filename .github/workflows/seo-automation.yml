@@ -42,10 +42,11 @@ jobs:
         with:
           submodules: false
 
-      - name: Setup Node.js
+      - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: '9'
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -59,9 +60,9 @@ jobs:
         env:
           NEXT_PUBLIC_GA4_MEASUREMENT_ID: G-MMLQCFN4ZJ
         run: |
-          pnpm seo:all
-          pnpm check:schemas
-          pnpm check:lighthouse
+          pnpm run seo:all
+          pnpm run check:schemas
+          pnpm run check:lighthouse
 
       - name: Fail on Lighthouse regression (<0.90)
         run: |

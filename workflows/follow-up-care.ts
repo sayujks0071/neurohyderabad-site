@@ -193,7 +193,9 @@ Return JSON with a "checkIns" array using this structure:
 Include check-ins for: Day 1, Day 3, Week 1, Week 2, Week 4, Week 8, Month 3, Month 6`,
         temperature: 0.5,
       });
-      return object.checkIns;
+      type CheckInScheduleResult = { checkIns: CheckInSchedule[] };
+      const result = object as CheckInScheduleResult;
+      return result.checkIns;
     } catch (error) {
       console.error("[Follow-Up] Error parsing schedule:", error);
     }
@@ -369,7 +371,12 @@ Return as JSON:
 Consider typical recovery timelines for neurosurgery procedures.`,
         temperature: 0.3,
       });
-      return object;
+      type RecoveryProgressResult = {
+        status: "on-track" | "needs-attention" | "urgent";
+        progressPercentage: number;
+        concerns: string[];
+      };
+      return object as RecoveryProgressResult;
     } catch (error) {
       console.error("[Follow-Up] Error parsing recovery status:", error);
     }
@@ -445,7 +452,9 @@ Return ONLY JSON with a "recommendations" array, e.g., {"recommendations": ["rec
 Focus on practical, actionable advice for this stage of recovery.`,
         temperature: 0.6,
       });
-      return object.recommendations;
+      type RecommendationsResult = { recommendations: string[] };
+      const result = object as RecommendationsResult;
+      return result.recommendations;
     } catch (error) {
       console.error("[Follow-Up] Error parsing recommendations:", error);
     }

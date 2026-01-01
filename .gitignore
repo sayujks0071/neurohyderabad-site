@@ -49,6 +49,7 @@ temp/
 # Internal documentation (not for public deployment)
 docs/internal/
 *.md
+!docs/MAINTENANCE_REPORT.md
 *.patch
 *.sh
 *.png

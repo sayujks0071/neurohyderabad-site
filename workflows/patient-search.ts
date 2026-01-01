@@ -142,7 +142,13 @@ Determine:
 Return as JSON: {"intent": "...", "specialty": "...", "urgency": "...", "terms": [...]}`,
       temperature: 0.3,
     });
-    return object;
+    type SearchIntentResult = {
+      intent: "information" | "appointment" | "emergency" | "treatment" | "diagnosis";
+      specialty: "neurosurgery" | "spine" | "brain" | "epilepsy" | "general";
+      urgency: "low" | "medium" | "high" | "emergency";
+      terms: string[];
+    };
+    return object as SearchIntentResult;
   } catch (error) {
     console.error("[Patient Search] Error parsing intent:", error);
   }
@@ -335,7 +341,9 @@ async function extractRelatedTopics(
 Return ONLY JSON with a "topics" array, e.g., {"topics": ["topic1", "topic2", "topic3", "topic4", "topic5"]}`,
       temperature: 0.5,
     });
-    return object.topics;
+    type TopicsResult = { topics: string[] };
+    const result = object as TopicsResult;
+    return result.topics;
   } catch (error) {
     console.error("[Patient Search] Error parsing related topics:", error);
   }

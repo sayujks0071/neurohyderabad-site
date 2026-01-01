@@ -220,7 +220,9 @@ Return ONLY JSON with a "symptoms" array, e.g., {"symptoms": ["symptom1", "sympt
 Include 8-10 symptoms, ordered from most common to less common.`,
       temperature: 0.5,
     });
-    return object.symptoms;
+    type SymptomsResult = { symptoms: string[] };
+    const result = object as SymptomsResult;
+    return result.symptoms;
   } catch (error) {
     console.error("[Patient Education] Error parsing symptoms:", error);
   }
@@ -307,7 +309,9 @@ Return ONLY JSON with a "treatments" array, e.g., {"treatments": ["treatment1", 
 Include 5-7 treatment options, from conservative to surgical.`,
       temperature: 0.6,
     });
-    return object.treatments;
+    type TreatmentsResult = { treatments: string[] };
+    const result = object as TreatmentsResult;
+    return result.treatments;
   } catch (error) {
     console.error("[Patient Education] Error parsing treatments:", error);
   }
@@ -444,7 +448,9 @@ Return as JSON with a "faqs" array: {"faqs": [{"question": "...", "answer": "...
 Focus on practical, common concerns patients have.`,
       temperature: 0.6,
     });
-    return object.faqs;
+    type FAQsResult = { faqs: Array<{ question: string; answer: string }> };
+    const result = object as FAQsResult;
+    return result.faqs;
   } catch (error) {
     console.error("[Patient Education] Error parsing FAQs:", error);
   }

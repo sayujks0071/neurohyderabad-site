@@ -24,10 +24,11 @@ jobs:
         with:
           submodules: false
 
-      - name: Setup Node.js
+      - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: '9'
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -40,7 +41,7 @@ jobs:
       - name: Check and Publish Scheduled Posts
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: pnpm blog:auto-publish
+        run: pnpm run blog:auto-publish
 
       - name: Lint published content
         run: pnpm exec next lint
@@ -51,7 +52,7 @@ jobs:
       - name: Build to validate
         env:
           NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: ${{ secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID && secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || 'G-MMLQCFN4ZJ' }}
-        run: pnpm build
+        run: pnpm run build
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
