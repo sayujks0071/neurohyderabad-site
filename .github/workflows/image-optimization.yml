@@ -23,14 +23,18 @@ jobs:
           submodules: false
 
       - name: Setup Node.js
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
 
       - name: Install sharp for image optimization
         timeout-minutes: 3
         continue-on-error: false
-        run: npm install sharp
+        run: pnpm install sharp
 
       - name: Optimize images
         timeout-minutes: 15
