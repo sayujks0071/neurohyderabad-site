@@ -77,6 +77,7 @@ export default function NewsletterSignup({
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
+              autoComplete="email"
               className="w-full px-4 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               disabled={status === 'submitting'}
               required
@@ -117,6 +118,7 @@ export default function NewsletterSignup({
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Enter your email for health insights"
+        autoComplete="email"
         className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         disabled={status === 'submitting'}
         required

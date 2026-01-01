@@ -109,6 +109,7 @@ export default function BookingForm({
               <Input
                 label="Patient Full Name"
                 id="patientName"
+                autoComplete="name"
                 {...register("patientName")}
                 error={errors.patientName?.message}
                 required

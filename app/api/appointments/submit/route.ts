@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { generateBookingConfirmation } from "@/src/lib/appointments/gemini";
 import { sendConfirmationEmail } from "@/src/lib/appointments/email";
 import { buildWebhookPayload, notifyAppointmentWebhooks } from "@/src/lib/appointments/webhooks";
+import { rateLimit } from "@/src/lib/rate-limit";
 import type { BookingData } from "@/packages/appointment-form/types";
 
 const ALLOWED_GENDERS = new Set(["male", "female", "other"]);
@@ -63,6 +64,19 @@ function parseBookingData(payload: unknown): BookingData {
 
 export async function POST(request: Request) {
   try {
+    // Get IP from x-forwarded-for (first IP is the real client IP) or fallback
+    const forwardedFor = request.headers.get("x-forwarded-for");
+    const ip = forwardedFor ? forwardedFor.split(",")[0].trim() : "127.0.0.1";
+
+    const { success } = rateLimit(ip, 5, 60 * 1000); // 5 requests per minute
+
+    if (!success) {
+      return NextResponse.json(
+        { error: "Too many requests. Please try again later." },
+        { status: 429 }
+      );
+    }
+
     const body = await request.json();
     const booking = parseBookingData(body);
 
