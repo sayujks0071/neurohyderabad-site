@@ -13,7 +13,6 @@ import MedicalDisclaimer from '@/components/MedicalDisclaimer';
  * - API routes (/api/*)
  * - Admin/test routes (/test-routes, /admin/*)
  * - Utility routes (/utm-links, /force-*)
- * - Error pages (not-found, error)
  * - Internal test pages (/statsig-test, /cache-test-*)
  * - Standalone policy pages (already have their own specific content)
  */
