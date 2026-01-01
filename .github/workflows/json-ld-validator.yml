@@ -39,11 +39,11 @@ jobs:
           const http = require('http');
           
           const urls = [
-            'https://neurohyderabad.org',
-            'https://neurohyderabad.org/about',
-            'https://neurohyderabad.org/treatments',
-            'https://neurohyderabad.org/treatments/brain-tumor-surgery',
-            'https://neurohyderabad.org/treatments/spine-surgery'
+            'https://www.drsayuj.info',
+            'https://www.drsayuj.info/about',
+            'https://www.drsayuj.info/services',
+            'https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad',
+            'https://www.drsayuj.info/services/minimally-invasive-spine-surgery'
           ];
           
           async function validatePage(url) {
