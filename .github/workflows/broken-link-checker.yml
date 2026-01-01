@@ -42,7 +42,7 @@ jobs:
         timeout-minutes: 20
         continue-on-error: true
         run: |
-          npx broken-link-checker https://neurohyderabad.org \
+          npx broken-link-checker https://www.drsayuj.info \
             --recursive \
             --verbose \
             --exclude "linkedin.com" \
