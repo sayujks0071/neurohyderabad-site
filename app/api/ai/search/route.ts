@@ -94,7 +94,9 @@ Return ONLY JSON with a "slugs" array (e.g., {"slugs": ["slug1", "slug2", "slug3
       temperature: 0.2, // Lower temperature for more consistent search results
     });
 
-    let relevantSlugs = (object?.slugs || [])
+    type SearchResult = { slugs: string[] };
+    const result = object as SearchResult;
+    let relevantSlugs = (result?.slugs || [])
       .filter((slug) => typeof slug === 'string' && slug.length > 0)
       .slice(0, limit);
     if (relevantSlugs.length === 0) {

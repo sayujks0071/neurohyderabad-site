@@ -71,7 +71,14 @@ Format your response as JSON with the following structure:
 Response:`,
         temperature: 0.3,
       });
-      analysis = object;
+      type SymptomAnalysis = {
+        urgency: 'emergency' | 'urgent' | 'routine';
+        recommendation: string;
+        possibleConditions: string[];
+        nextSteps: string[];
+        emergencyContact: string;
+      };
+      analysis = object as SymptomAnalysis;
     } catch (error) {
       console.error('Error generating symptom analysis:', error);
       analysis = buildFallbackAnalysis(symptoms);
