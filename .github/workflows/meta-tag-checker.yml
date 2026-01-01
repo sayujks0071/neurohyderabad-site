@@ -20,9 +20,13 @@ jobs:
           submodules: false
 
       - name: Setup Node.js
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
 
       - name: Create meta tag checker
         run: |
@@ -155,7 +159,7 @@ jobs:
           EOF
 
       - name: Install dependencies
-        run: npm install cheerio
+        run: pnpm install cheerio
 
       - name: Run meta tag check
         id: check

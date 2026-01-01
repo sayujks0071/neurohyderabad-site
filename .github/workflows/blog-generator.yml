@@ -58,13 +58,17 @@ jobs:
           submodules: false
 
       - name: Setup Node.js
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install
 
       - name: Generate Blog Post
         env:
@@ -72,7 +76,7 @@ jobs:
         run: |
           if [ "${{ github.event_name }}" == "schedule" ]; then
             echo "Running scheduled generation..."
-            npm run blog:generate-today
+            pnpm blog:generate-today
           else
             echo "Running manual generation..."
             CMD_ARGS="--title \"${{ github.event.inputs.title }}\""
@@ -93,19 +97,19 @@ jobs:
               CMD_ARGS="$CMD_ARGS --ai"
             fi
             
-            npm run new:blog -- $CMD_ARGS
+            pnpm new:blog -- $CMD_ARGS
           fi
 
       - name: Lint generated content
-        run: npx next lint
+        run: pnpm exec next lint
 
       - name: Type check
-        run: npx tsc --noEmit
+        run: pnpm exec tsc --noEmit
 
       - name: Build to validate
         env:
           NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: ${{ secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID && secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || 'G-MMLQCFN4ZJ' }}
-        run: npm run build
+        run: pnpm build
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
