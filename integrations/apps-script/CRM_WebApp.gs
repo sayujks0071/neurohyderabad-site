@@ -339,8 +339,7 @@ function to24h(timeStr) {
   m = s.match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/);
   if (!m) return null;
   
-  const originalHours = m[1];
-  let hh = Number(originalHours);
+  let hh = Number(m[1]);
   const mm = Number(m[2]);
   const modifier = m[3];
   
@@ -349,9 +348,9 @@ function to24h(timeStr) {
   // - 12 PM -> 12 (noon)
   // - Other PM hours -> add 12
   // - Other AM hours -> keep as-is
-  if (modifier === "PM" && originalHours !== "12") {
+  if (modifier === "PM" && hh !== 12) {
     hh += 12;
-  } else if (modifier === "AM" && originalHours === "12") {
+  } else if (modifier === "AM" && hh === 12) {
     hh = 0;
   }
   
