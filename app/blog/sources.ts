@@ -214,6 +214,20 @@ export const BLOG_SOURCES: Record<string, SourceEntry[]> = {
       href: "https://jss.amegroups.org/article/view/4826/html",
     },
   ],
+  "spine-tumor-surgery-hyderabad": [
+    {
+      label: "American Association of Neurological Surgeons – Spinal Tumors",
+      href: "https://www.aans.org/patients/conditions-treatments/spinal-tumors/",
+    },
+    {
+      label: "National Cancer Institute – Spine Tumor Overview",
+      href: "https://www.cancer.gov/types/spine",
+    },
+    {
+      label: "Spine Universe – Types of Spinal Tumors",
+      href: "https://www.spineuniverse.com/conditions/spinal-tumors",
+    },
+  ],
 };
 
 export function getBlogSources(slug: string): SourceEntry[] {
