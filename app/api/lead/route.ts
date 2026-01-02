@@ -5,15 +5,38 @@ import { randomUUID } from "crypto";
 const WEBAPP_URL = process.env.GOOGLE_APPS_SCRIPT_WEBAPP_URL;
 const API_TOKEN = process.env.GOOGLE_APPS_SCRIPT_API_TOKEN;
 
+// Allowed origins for CORS (in production, restrict to your actual domains)
+const ALLOWED_ORIGINS = process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:3000', 'http://localhost:5173'];
+
+function getCorsHeaders(origin: string | null) {
+  // If origin is in allowed list, return it; otherwise don't set the header (browser will block)
+  const allowedOrigin = origin && ALLOWED_ORIGINS.includes(origin) ? origin : null;
+  
+  const headers: Record<string, string> = {
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+  };
+  
+  // Only set the origin header if we have an allowed origin
+  if (allowedOrigin) {
+    headers['Access-Control-Allow-Origin'] = allowedOrigin;
+  }
+  
+  return headers;
+}
+
 export async function POST(req: NextRequest) {
+  const origin = req.headers.get('origin');
+  const corsHeaders = getCorsHeaders(origin);
+  
   // 1. Rate Limiting
   const ip = req.headers.get("x-forwarded-for") ?? "unknown";
-  const limit = rateLimit(ip, 5, 60 * 1000); // 5 requests per minute
+  const limit = await rateLimit(ip, 5, 60 * 1000); // 5 requests per minute
 
   if (!limit.success) {
     return NextResponse.json(
       { error: "Too many requests. Please try again later." },
-      { status: 429 }
+      { status: 429, headers: corsHeaders }
     );
   }
 
@@ -28,7 +51,7 @@ export async function POST(req: NextRequest) {
       console.warn("Honeypot field 'company' was filled; treating submission as spam.", {
         ip,
       });
-      return NextResponse.json({ ok: true, message: "Received" });
+      return NextResponse.json({ ok: true, message: "Received" }, { headers: corsHeaders });
     }
 
     // 3. Generate Request ID if missing
@@ -49,7 +72,7 @@ export async function POST(req: NextRequest) {
         console.error("GOOGLE_APPS_SCRIPT_WEBAPP_URL is not set in production.");
         return NextResponse.json(
           { error: "Internal Server Configuration Error" },
-          { status: 500 }
+          { status: 500, headers: corsHeaders }
         );
       } else {
         // Dev mode mock response
@@ -63,7 +86,7 @@ export async function POST(req: NextRequest) {
           mock: true,
           driveFolderUrl: "https://drive.google.com/mock-folder",
           calendarEventId: "mock-calendar-event-id"
-        });
+        }, { headers: corsHeaders });
       }
     }
 
@@ -74,7 +97,7 @@ export async function POST(req: NextRequest) {
         console.error("GOOGLE_APPS_SCRIPT_API_TOKEN is not set in production.");
         return NextResponse.json(
           { error: "Internal Server Configuration Error" },
-          { status: 500 }
+          { status: 500, headers: corsHeaders }
         );
       }
       // In dev, we might just be testing connectivity to a script that doesn't enforce it yet,
@@ -94,29 +117,26 @@ export async function POST(req: NextRequest) {
     if (!response.ok) {
       return NextResponse.json(
         { error: "Failed to submit lead upstream." },
-        { status: 502 }
+        { status: 502, headers: corsHeaders }
       );
     }
 
     const result = await response.json();
-    return NextResponse.json(result);
+    return NextResponse.json(result, { headers: corsHeaders });
 
   } catch (error) {
     console.error("Error in /api/lead:", error);
     return NextResponse.json(
       { error: "Internal Server Error" },
-      { status: 500 }
+      { status: 500, headers: corsHeaders }
     );
   }
 }
 
 export async function OPTIONS(request: NextRequest) {
+  const origin = request.headers.get('origin');
   return new NextResponse(null, {
     status: 204,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-    },
+    headers: getCorsHeaders(origin),
   });
 }
