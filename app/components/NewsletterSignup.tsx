@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useId } from 'react';
 import Button from '../_components/Button';
+import Spinner from '../../packages/appointment-form/ui/Spinner';
 
 interface NewsletterSignupProps {
   className?: string;
@@ -15,6 +16,11 @@ export default function NewsletterSignup({
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [error, setError] = useState('');
+
+  // Accessibility IDs
+  const errorId = useId();
+  const successId = useId();
+  const inputId = useId();
 
   const validateEmail = (email: string) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -70,9 +76,11 @@ export default function NewsletterSignup({
         <p className="text-sm text-blue-700 mb-4">
           Subscribe to receive expert neurosurgical insights, patient education, and health tips.
         </p>
-        <form onSubmit={handleSubmit} className="space-y-3">
+        <form onSubmit={handleSubmit} className="space-y-3" noValidate>
           <div>
+            <label htmlFor={inputId} className="sr-only">Email address</label>
             <input
+              id={inputId}
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -81,10 +89,11 @@ export default function NewsletterSignup({
               className="w-full px-4 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               disabled={status === 'submitting'}
               required
-              aria-label="Email address"
+              aria-invalid={!!error}
+              aria-describedby={error ? errorId : status === 'success' ? successId : undefined}
             />
             {error && (
-              <p className="mt-1 text-sm text-red-600" role="alert">
+              <p id={errorId} className="mt-1 text-sm text-red-600" role="alert">
                 {error}
               </p>
             )}
@@ -95,15 +104,20 @@ export default function NewsletterSignup({
             disabled={status === 'submitting'}
             fullWidth
           >
-            {status === 'submitting' 
-              ? 'Subscribing...' 
-              : status === 'success' 
-              ? '✓ Subscribed!' 
-              : 'Subscribe'}
+            {status === 'submitting' ? (
+              <span className="flex items-center gap-2">
+                <Spinner className="h-4 w-4 text-white" />
+                <span>Subscribing...</span>
+              </span>
+            ) : status === 'success' ? (
+              '✓ Subscribed!'
+            ) : (
+              'Subscribe'
+            )}
           </Button>
         </form>
         {status === 'success' && (
-          <p className="mt-2 text-sm text-green-700" role="alert">
+          <p id={successId} className="mt-2 text-sm text-green-700" role="alert">
             Thank you for subscribing! Check your email for confirmation.
           </p>
         )}
@@ -112,61 +126,48 @@ export default function NewsletterSignup({
   }
 
   return (
-    <form onSubmit={handleSubmit} className={`flex flex-col sm:flex-row gap-2 ${className}`}>
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Enter your email for health insights"
-        autoComplete="email"
-        className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-        disabled={status === 'submitting'}
-        required
-        aria-label="Email address"
-      />
+    <form onSubmit={handleSubmit} className={`flex flex-col sm:flex-row gap-2 ${className}`} noValidate>
+      <div className="flex-1">
+        <label htmlFor={inputId} className="sr-only">Email address</label>
+        <input
+          id={inputId}
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Enter your email for health insights"
+          autoComplete="email"
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          disabled={status === 'submitting'}
+          required
+          aria-invalid={!!error}
+          aria-describedby={error ? errorId : status === 'success' ? successId : undefined}
+        />
+        {error && (
+          <p id={errorId} className="text-sm text-red-600 mt-1" role="alert">
+            {error}
+          </p>
+        )}
+        {status === 'success' && (
+          <p id={successId} className="text-sm text-green-700 mt-1" role="alert">
+            Thank you for subscribing!
+          </p>
+        )}
+      </div>
       <Button
         type="submit"
         variant="primary"
         disabled={status === 'submitting'}
+        className="h-[42px]" // Match input height roughly
       >
-        {status === 'submitting' ? 'Subscribing...' : 'Subscribe'}
+        {status === 'submitting' ? (
+          <span className="flex items-center gap-2">
+            <Spinner className="h-4 w-4 text-white" />
+            <span className="sr-only">Subscribing...</span>
+          </span>
+        ) : (
+          'Subscribe'
+        )}
       </Button>
-      {error && (
-        <p className="text-sm text-red-600 mt-1" role="alert">
-          {error}
-        </p>
-      )}
-      {status === 'success' && (
-        <p className="text-sm text-green-700 mt-1" role="alert">
-          Thank you for subscribing!
-        </p>
-      )}
     </form>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
