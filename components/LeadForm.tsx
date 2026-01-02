@@ -27,6 +27,7 @@ const schema = yup.object({
   phone: yup
     .string()
     .required("Phone number is required")
+    .transform((value) => (value ? value.replace(/[^\d+]/g, "") : value))
     .matches(/^[0-9+]{8,15}$/, "Please enter a valid phone number (8-15 digits)"),
   email: yup.string().email("Invalid email address").required("Email is required"),
   city: yup.string().required("City is required"),
@@ -75,9 +76,15 @@ export default function LeadForm() {
       }
 
       setIsSubmitted(true);
-    } catch (err: any) {
+    } catch (err: unknown) {
+      let message = "An unexpected error occurred. Please try again.";
+      if (err instanceof Error) {
+        message = err.message || message;
+      } else if (typeof err === "string") {
+        message = err || message;
+      }
       console.error("Submission error:", err);
-      setSubmitError(err.message || "An unexpected error occurred. Please try again.");
+      setSubmitError(message);
     }
   };
 
