@@ -8,7 +8,7 @@ const API_TOKEN = process.env.GOOGLE_APPS_SCRIPT_API_TOKEN;
 export async function POST(req: NextRequest) {
   // 1. Rate Limiting
   const ip = req.headers.get("x-forwarded-for") ?? "unknown";
-  const limit = rateLimit(ip, 5, 60 * 1000); // 5 requests per minute
+  const limit = await rateLimit(ip, 5, 60 * 1000); // 5 requests per minute
 
   if (!limit.success) {
     return NextResponse.json(
@@ -22,7 +22,12 @@ export async function POST(req: NextRequest) {
 
     // 2. Honeypot Check
     if (body.company) {
-      // Silently fail (return success) to fool bots
+      // Honeypot triggered: the "company" field should remain empty for real users.
+      // We intentionally return a generic success response to avoid signaling bots that
+      // their submission was rejected, but we still log this event for monitoring.
+      console.warn("Honeypot field 'company' was filled; treating submission as spam.", {
+        ip,
+      });
       return NextResponse.json({ ok: true, message: "Received" });
     }
 
@@ -106,12 +111,31 @@ export async function POST(req: NextRequest) {
 }
 
 export async function OPTIONS(request: NextRequest) {
+  // Get the origin from the request
+  const origin = request.headers.get('origin');
+  const allowedOrigins = [
+    'https://neurohyderabad.com',
+    'https://www.neurohyderabad.com',
+    process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null,
+  ].filter(Boolean);
+
+  // In development, allow localhost
+  const isDevelopment = process.env.NODE_ENV !== 'production';
+  const isAllowedOrigin = 
+    (isDevelopment && origin?.includes('localhost')) ||
+    (origin && allowedOrigins.includes(origin));
+
+  const headers: Record<string, string> = {
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+  };
+
+  if (isAllowedOrigin && origin) {
+    headers['Access-Control-Allow-Origin'] = origin;
+  }
+
   return new NextResponse(null, {
     status: 204,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-    },
+    headers,
   });
 }
