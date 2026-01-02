@@ -235,6 +235,6 @@ Consider implementing these additional security measures:
 
 ## References
 
-- Original vulnerability report: PR #82 discussion_r2658135148
+- Original vulnerability report: PR #82 review comment r2658135148
 - Security fix commit: 1354c68
 - Google Apps Script Security Best Practices: https://developers.google.com/apps-script/guides/security
