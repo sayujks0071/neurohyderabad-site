@@ -1,0 +1,47 @@
+{
+  "last_updated": "2026-01-02",
+  "keywords": [
+    {
+      "term": "neurosurgeon hyderabad",
+      "difficulty": "High",
+      "volume": "High",
+      "target_page": "/"
+    },
+    {
+      "term": "best spine surgeon hyderabad",
+      "difficulty": "High",
+      "volume": "High",
+      "target_page": "/"
+    },
+    {
+      "term": "endoscopic spine surgery hyderabad",
+      "difficulty": "High",
+      "volume": "Med",
+      "target_page": "/services/minimally-invasive-spine-surgery"
+    },
+    {
+      "term": "brain tumor surgery hyderabad",
+      "difficulty": "Med",
+      "volume": "Med",
+      "target_page": "/conditions/brain-tumor-surgery-hyderabad"
+    },
+    {
+      "term": "spine tumor surgery hyderabad",
+      "difficulty": "Med",
+      "volume": "Low",
+      "target_page": "/conditions/spine-tumor-surgery-hyderabad"
+    },
+    {
+      "term": "slip disc treatment hyderabad",
+      "difficulty": "Med",
+      "volume": "High",
+      "target_page": "/conditions/slip-disc-treatment-hyderabad"
+    },
+    {
+      "term": "cervical myelopathy surgery hyderabad",
+      "difficulty": "Med",
+      "volume": "Low",
+      "target_page": "/conditions/cervical-myelopathy-decompression-hyderabad"
+    }
+  ]
+}
