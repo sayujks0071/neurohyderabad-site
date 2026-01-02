@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import OptimizedImage from '../_components/OptimizedImage';
+import Image from 'next/image';
 import SiteSearch from './SiteSearch';
 
 /**
@@ -121,7 +121,7 @@ export default function HeaderRefactored() {
             className="flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)] focus:ring-offset-2 rounded"
             aria-label="Dr Sayuj — Neurosurgeon and Endoscopic Spine Surgery homepage"
           >
-            <OptimizedImage
+            <Image
               src="/images/logo.svg"
               alt="Dr Sayuj — Neurosurgeon and Endoscopic Spine Surgery"
               width={40}
