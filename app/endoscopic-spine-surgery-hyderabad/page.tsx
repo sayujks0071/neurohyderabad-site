@@ -320,9 +320,9 @@ export default function Page() {
                 We accept most major health insurance policies and TPAs. Our team assists with:
               </p>
               <ul className="list-disc list-inside text-gray-700 text-sm space-y-1 mt-2">
-                 <li>Cashless pre-authorization</li>
-                 <li>Reimbursement documentation</li>
-                 <li>Detailed cost estimation</li>
+                <li>Cashless pre-authorization</li>
+                <li>Reimbursement documentation</li>
+                <li>Detailed cost estimation</li>
               </ul>
             </div>
           </div>
