@@ -72,3 +72,6 @@ public/robots.txt
 
 # Empty external submodule directory (actual code is in packages/appointment-form)
 external/appointmentform/
+
+# HubSpot CLI config (developer-local, not needed in repo)
+hubspot.config.yml

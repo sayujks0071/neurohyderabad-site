@@ -73,6 +73,7 @@ export default function NewsletterSignup({
         <p className="text-sm text-blue-700 mb-4">
           Subscribe to receive expert neurosurgical insights, patient education, and health tips.
         </p>
+        {/* noValidate: Disable native browser validation to use custom validation with styled error messages and ARIA attributes */}
         <form onSubmit={handleSubmit} className="space-y-3" noValidate>
           <div>
             <input
@@ -117,6 +118,7 @@ export default function NewsletterSignup({
   }
 
   return (
+    // noValidate: Disable native browser validation to use custom validation with styled error messages and ARIA attributes
     <form onSubmit={handleSubmit} className={`flex flex-col sm:flex-row gap-2 ${className}`} noValidate>
       <input
         type="email"
