@@ -25,11 +25,15 @@ export function middleware(req: NextRequest) {
   // Protect drafts route - redirect to home if accessed publicly
   if (req.nextUrl.pathname.startsWith('/drafts')) {
     // Check for admin access key in environment
-    const adminKey = process.env.ADMIN_ACCESS_KEY || 'admin123'; // Default key for development
+    // 🛡️ Sentinel: Removed default fallback to prevent unauthorized access in production if env var is missing.
+    const adminKey = process.env.ADMIN_ACCESS_KEY;
 
     // Check for admin key in query params (simple auth)
     const providedKey = req.nextUrl.searchParams.get('key');
-    if (providedKey !== adminKey) {
+
+    // If adminKey is not configured (undefined/empty) OR providedKey does not match, deny access.
+    // This ensures that if the secret is missing in production, the route is closed by default (fail secure).
+    if (!adminKey || providedKey !== adminKey) {
       return NextResponse.redirect(new URL('/', req.url));
     }
   }
@@ -45,4 +49,3 @@ export const config = {
     '/((?!_next|assets|images|favicon.ico|robots.txt|sitemap.*\\.xml|site.webmanifest).*)',
   ],
 }
-
