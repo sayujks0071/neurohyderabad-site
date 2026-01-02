@@ -177,10 +177,28 @@ export default function ContactPage() {
                   </div>
                 </Card>
 
+                <Card padding="lg" className="shadow-md">
+                  <h2 className="text-xl font-semibold mb-4 text-blue-700">How to Reach Us</h2>
+                  <div className="space-y-6">
+                    <div>
+                      <h3 className="font-semibold text-md mb-2">By Appointment</h3>
+                      <p className="text-gray-600 text-sm mb-3">
+                        For consultations, please use the form above or call us directly.
+                      </p>
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-md mb-2">Emergency</h3>
+                      <Button
+                        href={telephoneHref}
+                        className="w-full justify-center bg-red-600 text-white hover:bg-red-700 border-none"
+                      >
+                        Call Emergency: {telephone}
+                      </Button>
+                    </div>
+                  </div>
+                </Card>
               </div>
             </div>
-
-            {/* Redundant "How to Reach Us" card removed here to avoid duplication with the "Additional Information" grid above */}
 
             <Card padding="lg" className="shadow-md">
               <h2 className="text-2xl font-semibold mb-6 text-blue-700">Convenient Locations</h2>
