@@ -1,6 +1,21 @@
 import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/next";
+import { Inter, Merriweather } from "next/font/google";
 import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const merriweather = Merriweather({
+  subsets: ["latin"],
+  variable: "--font-merriweather",
+  weight: ["400", "700"],
+  display: "swap",
+});
 
 declare global {
   interface Window {
@@ -134,14 +149,8 @@ export default function RootLayout({
       <head>
         <link rel="dns-prefetch" href="https://edge.hypertune.com" />
         <link rel="preconnect" href="https://edge.hypertune.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap"
-        />
       </head>
-      <body className="antialiased">
+      <body className={`antialiased ${inter.variable} ${merriweather.variable}`}>
         <ClientAnalytics />
         <WebsiteSchema />
         <PhysicianSchema />
