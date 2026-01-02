@@ -22,7 +22,12 @@ export async function POST(req: NextRequest) {
 
     // 2. Honeypot Check
     if (body.company) {
-      // Silently fail (return success) to fool bots
+      // Honeypot triggered: the "company" field should remain empty for real users.
+      // We intentionally return a generic success response to avoid signaling bots that
+      // their submission was rejected, but we still log this event for monitoring.
+      console.warn("Honeypot field 'company' was filled; treating submission as spam.", {
+        ip,
+      });
       return NextResponse.json({ ok: true, message: "Received" });
     }
 
