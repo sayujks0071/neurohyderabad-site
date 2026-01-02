@@ -5,10 +5,24 @@ import { randomUUID } from "crypto";
 const WEBAPP_URL = process.env.GOOGLE_APPS_SCRIPT_WEBAPP_URL;
 const API_TOKEN = process.env.GOOGLE_APPS_SCRIPT_API_TOKEN;
 
+// Allowed origins for CORS (in production, restrict to your actual domains)
+const ALLOWED_ORIGINS = process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:3000', 'http://localhost:5173'];
+
+function getCorsHeaders(origin: string | null) {
+  // If origin is in allowed list, return it; otherwise return the first allowed origin as fallback
+  const allowedOrigin = origin && ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
+  
+  return {
+    'Access-Control-Allow-Origin': allowedOrigin,
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+  };
+}
+
 export async function POST(req: NextRequest) {
   // 1. Rate Limiting
   const ip = req.headers.get("x-forwarded-for") ?? "unknown";
-  const limit = rateLimit(ip, 5, 60 * 1000); // 5 requests per minute
+  const limit = await rateLimit(ip, 5, 60 * 1000); // 5 requests per minute
 
   if (!limit.success) {
     return NextResponse.json(
@@ -111,12 +125,9 @@ export async function POST(req: NextRequest) {
 }
 
 export async function OPTIONS(request: NextRequest) {
+  const origin = request.headers.get('origin');
   return new NextResponse(null, {
     status: 204,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-    },
+    headers: getCorsHeaders(origin),
   });
 }
