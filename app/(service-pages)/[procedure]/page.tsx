@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import JsonLd from '@/components/JsonLd';
 import { SITE_URL } from '@/src/lib/seo';
+import { LocalPathways } from '@/src/components/locations/LocalPathways';
+import { getLocationById } from '@/src/data/locations';
 
 type ProcedureKey =
   | 'endoscopic-discectomy'
@@ -665,6 +667,9 @@ export default async function ProcedurePage({ params }: { params: Promise<{ proc
   const key = procedure as ProcedureKey;
   const entry = PROCEDURE_CONTENT[key];
 
+  // Reuse main location for services pages (Hyderabad context)
+  const location = getLocationById("hyderabad");
+
   if (!entry) {
     notFound();
   }
@@ -742,6 +747,22 @@ export default async function ProcedurePage({ params }: { params: Promise<{ proc
               {entry.relatedService.label} →
             </Link>
           </section>
+        )}
+
+        {location && (
+            <div className="mt-16 border-t pt-10">
+                <h2 className="text-2xl font-bold mb-6">Visit Our Clinics</h2>
+                <div className="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <p className="mb-4 text-gray-700">
+                            Looking for {entry.name.toLowerCase()} in your area? We serve patients across Hyderabad.
+                        </p>
+                        <Link href="/locations" className="text-blue-700 hover:underline font-semibold">
+                            View all locations &rarr;
+                        </Link>
+                    </div>
+                </div>
+            </div>
         )}
       </main>
     </div>

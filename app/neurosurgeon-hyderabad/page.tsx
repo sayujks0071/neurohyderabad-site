@@ -1,6 +1,14 @@
 import React from "react";
 import Link from "next/link";
-import { SITE_URL } from '../../src/lib/seo';
+import { getLocationById } from "@/src/data/locations";
+import { LocationNAPCard } from "@/src/components/locations/LocationNAPCard";
+import { LocationCTAs } from "@/src/components/locations/LocationCTAs";
+import { LocationMapEmbed } from "@/src/components/locations/LocationMapEmbed";
+import { LocalPathways } from "@/src/components/locations/LocalPathways";
+import { LocationSchema } from "@/src/components/locations/LocationSchema";
+import { notFound } from "next/navigation";
+
+export const revalidate = 86400;
 
 export const metadata = {
   title: "Best Neurosurgeon in Hyderabad | Endoscopic Spine Surgery | Dr. Sayuj Krishnan",
@@ -59,57 +67,21 @@ const FAQ = [
 ];
 
 export default function Page() {
-  const physicianSchema = {
-    "@context": "https://schema.org",
-    "@type": "Physician",
-    name: "Dr. Sayuj Krishnan",
-    medicalSpecialty: [
-      "Neurosurgery",
-      "Endoscopic Spine Surgery",
-      "Minimally Invasive Brain Surgery",
-    ],
-    url: "https://www.drsayuj.info",
-    image: "https://www.drsayuj.info/images/og-default.jpg",
-    telephone: "+919778280044",
-    areaServed: ["Hyderabad", "Telangana", "India"],
-    sameAs: [
-      "https://www.yashodahospitals.com/doctors/dr-sayuj-krishnan/",
-      "https://www.practo.com/hyderabad/doctor/dr-sayuj-krishnan-neurosurgeon",
-      "https://www.facebook.com/drsayujkrishnan",
-      "https://www.youtube.com/@drsayujkrishnan",
-      "https://www.linkedin.com/in/dr-sayuj-krishnan",
-    ],
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "Yashoda Hospitals, Malakpet",
-      addressLocality: "Hyderabad",
-      addressRegion: "Telangana",
-      postalCode: "500036",
-      addressCountry: "IN",
-    },
-  };
+  const location = getLocationById("hyderabad");
 
-  const breadcrumb = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.drsayuj.info/" },
-      { "@type": "ListItem", position: 2, name: "Neurosurgeon in Hyderabad", item: "https://www.drsayuj.info/neurosurgeon-hyderabad" },
-    ],
-  };
+  if (!location) {
+    return notFound();
+  }
 
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: FAQ.map(({ q, a }) => ({
-      "@type": "Question",
-      name: q,
-      acceptedAnswer: { "@type": "Answer", text: a },
-    })),
-  };
+  const breadcrumb = [
+      { name: "Locations", item: "https://www.drsayuj.info/locations" },
+      { name: "Neurosurgeon in Hyderabad", item: "https://www.drsayuj.info/neurosurgeon-hyderabad" },
+  ];
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
+      <LocationSchema location={location} breadcrumb={breadcrumb} faq={FAQ} />
+
       <section className="mb-8">
         <h1 className="text-3xl md:text-4xl font-bold">
           Neurosurgeon in Hyderabad — Endoscopic Spine & Minimally Invasive Brain Surgery
@@ -120,27 +92,15 @@ export default function Page() {
           minimally invasive brain procedures. Evidence-based, patient-first counseling with transparent risks and recovery plans.
         </p>
 
-        <div className="mt-6 flex flex-wrap gap-3">
-          <a
-            href="https://wa.me/919778280044?text=Hi%20I%20want%20to%20book%20an%20appointment"
-            className="rounded-2xl px-6 py-3 bg-green-600 text-white"
-          >
-            WhatsApp Booking
-          </a>
-          <a href="tel:+919778280044" className="rounded-2xl px-6 py-3 border">
-            Call: +91-9778280044
-          </a>
-          <Link href="/appointments" className="rounded-2xl px-6 py-3 bg-blue-600 text-white">
-            Book Appointment
-          </Link>
-          <a href="https://maps.google.com/?q=Yashoda+Hospitals+Malakpet+Hyderabad" className="rounded-2xl px-6 py-3 border">
-            Directions (Google Maps)
-          </a>
+        <div className="mt-6">
+           <LocationCTAs location={location} />
         </div>
       </section>
 
       <section className="grid md:grid-cols-2 gap-8 mb-10">
         <div>
+           <LocationNAPCard location={location} className="mb-6" />
+
           <h2 className="text-2xl font-semibold">OPD Timings & Location</h2>
           <ul className="mt-3 list-disc pl-5">
             <li>Yashoda Hospitals – Malakpet, Hyderabad</li>
@@ -165,6 +125,7 @@ export default function Page() {
           faster return to work—when indications are correct and peri-operative protocols are followed. We practice
           guideline-aligned selection and provide day-by-day recovery calendars.
         </p>
+        <LocationMapEmbed location={location} className="mt-6" />
       </section>
 
       <section>
@@ -179,9 +140,7 @@ export default function Page() {
         </div>
       </section>
 
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(physicianSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <LocalPathways location={location} />
     </main>
   );
 }
