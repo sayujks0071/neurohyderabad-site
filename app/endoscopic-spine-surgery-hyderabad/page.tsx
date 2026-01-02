@@ -354,18 +354,18 @@ export default function Page() {
 
       {/* Final CTA Section */}
       <section className="mt-16 p-8 border border-blue-100 rounded-3xl bg-gradient-to-br from-blue-50 to-white text-center shadow-md">
-         <h2 className="text-2xl font-bold text-blue-900 mb-3">Ready to Live Pain-Free?</h2>
-         <p className="text-gray-600 max-w-2xl mx-auto mb-8">
-           Don't let back or neck pain control your life. Consult Dr. Sayuj Krishnan to discuss if endoscopic spine surgery is the right path for your recovery.
-         </p>
-         <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/appointments" className="inline-block bg-blue-600 text-white px-8 py-4 rounded-full font-bold hover:bg-blue-700 transition-shadow shadow-lg hover:shadow-xl">
-               Book Appointment
-            </Link>
-            <a href="tel:+919778280044" className="inline-block bg-white text-blue-700 border-2 border-blue-100 px-8 py-4 rounded-full font-bold hover:border-blue-300 transition-colors">
-               Call +91-9778280044
-            </a>
-         </div>
+        <h2 className="text-2xl font-bold text-blue-900 mb-3">Ready to Live Pain-Free?</h2>
+        <p className="text-gray-600 max-w-2xl mx-auto mb-8">
+          Don't let back or neck pain control your life. Consult Dr. Sayuj Krishnan to discuss if endoscopic spine surgery is the right path for your recovery.
+        </p>
+        <div className="flex flex-wrap justify-center gap-4">
+          <Link href="/appointments" className="inline-block bg-blue-600 text-white px-8 py-4 rounded-full font-bold hover:bg-blue-700 transition-shadow shadow-lg hover:shadow-xl">
+            Book Appointment
+          </Link>
+          <a href="tel:+919778280044" className="inline-block bg-white text-blue-700 border-2 border-blue-100 px-8 py-4 rounded-full font-bold hover:border-blue-300 transition-colors">
+            Call +91-9778280044
+          </a>
+        </div>
       </section>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
