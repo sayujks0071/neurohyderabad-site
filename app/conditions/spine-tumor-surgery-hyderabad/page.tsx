@@ -76,6 +76,38 @@ const schemaData = [
           text: "Hospital stay is typically 4-7 days depending on whether spinal fusion was performed. Full rehabilitation may take weeks to months.",
         },
       },
+      {
+        "@type": "Question",
+        name: "Will I need spinal fusion?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Spinal fusion is only recommended when a tumour or its removal makes the spine unstable. Your surgeon will assess tumour location, bone involvement, and your overall health to decide whether fusion is necessary in your case.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How do you protect nerves during surgery?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Nerves are protected using an operating microscope, fine microsurgical instruments, and continuous intraoperative neuromonitoring of spinal cord and nerve function. This helps the surgeon separate tumour from healthy tissue and detect any stress on the nerves early.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What is the role of radiosurgery?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Stereotactic radiosurgery is a focused form of radiotherapy used for selected spinal tumours, such as small residual or inoperable lesions and certain metastatic spine tumours. It delivers high-dose radiation precisely to the tumour while limiting exposure to the spinal cord.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Do you treat metastatic spine tumours?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes. Metastatic spine tumours are managed in a multidisciplinary way, combining surgery when needed with radiation and systemic cancer treatments. The aim is to relieve spinal cord compression, stabilise the spine, and improve quality of life.",
+        },
+      },
     ],
   },
   {
