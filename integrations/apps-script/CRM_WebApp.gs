@@ -113,7 +113,15 @@ function doPost(e) {
 }
 
 function doGet(e) {
-  return json({ ok: true, status: "ok", timestamp: new Date().toISOString() });
+  const staffEmails = PROPS.getProperty("STAFF_EMAILS");
+  return json({
+    ok: true,
+    status: "ok",
+    timestamp: new Date().toISOString(),
+    config: {
+      staffEmailsConfigured: !!staffEmails && staffEmails.length > 0
+    }
+  });
 }
 
 // ---------- helpers ----------
