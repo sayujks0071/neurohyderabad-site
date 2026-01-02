@@ -3,15 +3,15 @@ import Link from "next/link";
 import SchemaScript from "@/app/_components/SchemaScript";
 import LocalNAP from "@/app/_components/LocalNAP";
 import YMYLAttribution from "@/app/_components/YMYLAttribution";
-import AuthorByline from '@/app/_components/AuthorByline';
-import SourceList from '@/app/_components/SourceList';
-import ReviewedBy from '@/app/_components/ReviewedBy';
+import AuthorByline from "@/app/_components/AuthorByline";
+import SourceList from "@/app/_components/SourceList";
+import ReviewedBy from "@/app/_components/ReviewedBy";
 import { SITE_URL } from "@/src/lib/seo";
-import { sources } from '../../blog/sources';
+import { sources } from "../../blog/sources";
 
 // Static generation with 24-hour revalidation
 export const revalidate = 86400;
-export const dynamic = 'error';
+export const dynamic = "error";
 
 const CANONICAL = `${SITE_URL}/conditions/spine-tumor-surgery-hyderabad`;
 
@@ -57,23 +57,39 @@ const schemaData = [
         name: "Are all spine tumours cancerous?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "No. Many spinal tumours are benign (non-cancerous) but can still cause paralysis by compressing the spinal cord. Others may be metastases from cancer elsewhere.",
+          text: "No. Many primary spinal tumours (like meningiomas or schwannomas) are benign but dangerous because they compress the spinal cord. Metastatic tumours (spread from lung, breast, etc.) are malignant and require comprehensive oncological care.",
         },
       },
       {
         "@type": "Question",
-        name: "Is paralysis after surgery common?",
+        name: "Will I need spinal fusion?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "With modern intraoperative neuromonitoring and microsurgical techniques, the risk of new deficits is significantly minimised. The goal is often to prevent paralysis.",
+          text: "If the tumour has destroyed the vertebral bone or if removing the tumour makes the spine unstable, we perform spinal fusion (fixation with screws and rods) to restore stability and alignment.",
         },
       },
       {
         "@type": "Question",
-        name: "How long is the recovery?",
+        name: "How do you protect nerves during surgery?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Hospital stay is typically 4-7 days depending on whether spinal fusion was performed. Full rehabilitation may take weeks to months.",
+          text: "We use continuous intraoperative neuromonitoring (IONM) which tests nerve function in real-time. This warns the surgeon immediately if any manipulation threatens nerve integrity, allowing for safer resection.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What is the role of radiosurgery?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Stereotactic radiosurgery (like CyberKnife or Gamma Knife) delivers high-dose radiation to the tumour while sparing healthy spinal cord tissue. It is often used for metastatic tumours or residual benign tumours.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Do you treat metastatic spine tumours?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes. We work closely with medical and radiation oncologists. Surgery is often the first step to relieve spinal cord compression and stabilise the spine before radiation or chemotherapy begins.",
         },
       },
     ],
@@ -159,8 +175,9 @@ const references = [
     url: "https://www.aans.org/patients/conditions-treatments/spinal-tumors/",
   },
   {
-    label: "National Cancer Institute — Spine Tumor Overview",
-    url: "https://www.cancer.gov/types/spine",
+    label:
+      "National Cancer Institute — Brain and Spinal Cord Tumors (Patient Overview)",
+    url: "https://www.cancer.gov/types/brain/patient/adult-brain-tumors-treatment-pdq",
   },
   {
     label: "Spine Universe — Types of Spinal Tumors",
@@ -222,9 +239,10 @@ export default function SpineTumorSurgeryConditionPage() {
             Spine Tumor Surgery in Hyderabad
           </h1>
           <p className="mt-4 text-lg text-slate-100">
-            Comprehensive management of spinal cord tumours and vertebral metastases.
-            Combining microsurgical precision with advanced spinal reconstruction
-            to relieve pain, restore stability, and preserve neurological function.
+            Comprehensive management of spinal cord tumours and vertebral
+            metastases. Combining microsurgical precision with advanced spinal
+            reconstruction to relieve pain, restore stability, and preserve
+            neurological function.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <a
@@ -252,14 +270,23 @@ export default function SpineTumorSurgeryConditionPage() {
               Types of Spinal Tumours We Treat
             </h2>
             <p className="mt-4 text-gray-700">
-              Spinal tumours can develop within the spinal cord (intramedullary),
-              inside the covering but outside the cord (intradural-extramedullary),
-              or in the bones/vertebrae (extradural).
+              Spinal tumours can develop within the spinal cord
+              (intramedullary), inside the covering but outside the cord
+              (intradural-extramedullary), or in the bones/vertebrae
+              (extradural).
             </p>
             <ul className="mt-4 list-disc space-y-2 pl-6 text-gray-700">
-              <li><strong>Benign Tumours:</strong> Meningiomas, Schwannomas, Neurofibromas.</li>
-              <li><strong>Malignant Tumours:</strong> Ependymomas, Astrocytomas.</li>
-              <li><strong>Metastatic Tumours:</strong> Cancer spread from lung, breast, prostate, or kidney.</li>
+              <li>
+                <strong>Benign Tumours:</strong> Meningiomas, Schwannomas,
+                Neurofibromas.
+              </li>
+              <li>
+                <strong>Malignant Tumours:</strong> Ependymomas, Astrocytomas.
+              </li>
+              <li>
+                <strong>Metastatic Tumours:</strong> Cancer spread from lung,
+                breast, prostate, or kidney.
+              </li>
             </ul>
             <p className="mt-4 text-gray-700">
               Early diagnosis and intervention are critical to prevent permanent
@@ -271,10 +298,22 @@ export default function SpineTumorSurgeryConditionPage() {
               When is Surgery Needed?
             </h3>
             <ol className="mt-3 list-decimal space-y-2 pl-6 text-gray-700">
-              <li><strong>Progressive Weakness:</strong> Growing paralysis or loss of sensation.</li>
-              <li><strong>Intractable Pain:</strong> Severe pain not relieved by medication, often worse at night.</li>
-              <li><strong>Spinal Instability:</strong> Tumour destroying bone, risking vertebral collapse.</li>
-              <li><strong>Diagnosis:</strong> Need for biopsy to determine the exact tumour type for oncology treatment.</li>
+              <li>
+                <strong>Progressive Weakness:</strong> Growing paralysis or loss
+                of sensation.
+              </li>
+              <li>
+                <strong>Intractable Pain:</strong> Severe pain not relieved by
+                medication, often worse at night.
+              </li>
+              <li>
+                <strong>Spinal Instability:</strong> Tumour destroying bone,
+                risking vertebral collapse.
+              </li>
+              <li>
+                <strong>Diagnosis:</strong> Need for biopsy to determine the
+                exact tumour type for oncology treatment.
+              </li>
             </ol>
           </div>
         </div>
@@ -291,9 +330,9 @@ export default function SpineTumorSurgeryConditionPage() {
                 Microsurgical Resection
               </h3>
               <p className="mt-3 text-gray-700">
-                Using high-magnification microscopes to delicately separate the tumour
-                from the spinal cord and nerves. This is the gold standard for benign
-                tumours like schwannomas and meningiomas.
+                Using high-magnification microscopes to delicately separate the
+                tumour from the spinal cord and nerves. This is the gold
+                standard for benign tumours like schwannomas and meningiomas.
               </p>
             </div>
             <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
@@ -301,8 +340,9 @@ export default function SpineTumorSurgeryConditionPage() {
                 Spinal Stabilisation (Fusion)
               </h3>
               <p className="mt-3 text-gray-700">
-                If the tumour involves the vertebrae, screws and rods are used to
-                rebuild the spine's strength and stability after tumour removal.
+                If the tumour involves the vertebrae, screws and rods are used
+                to rebuild the spine's strength and stability after tumour
+                removal.
               </p>
             </div>
             <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
@@ -311,7 +351,8 @@ export default function SpineTumorSurgeryConditionPage() {
               </h3>
               <p className="mt-3 text-gray-700">
                 Removing the bone (laminectomy) pushing on the spinal cord to
-                create space and immediately relieve pressure, often done in emergencies.
+                create space and immediately relieve pressure, often done in
+                emergencies.
               </p>
             </div>
             <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
@@ -319,8 +360,9 @@ export default function SpineTumorSurgeryConditionPage() {
                 Separation Surgery
               </h3>
               <p className="mt-3 text-gray-700">
-                Creating a safe gap between the spinal cord and the tumour to allow
-                high-dose radiation (SBRT/CyberKnife) to be delivered safely post-surgery.
+                Creating a safe gap between the spinal cord and the tumour to
+                allow high-dose radiation (SBRT/CyberKnife) to be delivered
+                safely post-surgery.
               </p>
             </div>
           </div>
@@ -333,16 +375,20 @@ export default function SpineTumorSurgeryConditionPage() {
         </h2>
         <ul className="mt-6 grid gap-4 text-gray-700 md:grid-cols-2">
           <li className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
-            • <strong>Neuromonitoring (IONM):</strong> Continuous electrical testing of nerves during surgery to prevent injury.
+            • <strong>Neuromonitoring (IONM):</strong> Continuous electrical
+            testing of nerves during surgery to prevent injury.
           </li>
           <li className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
-            • <strong>CUSA (Ultrasonic Aspirator):</strong> Device to gently liquefy and remove firm tumours without tugging on the cord.
+            • <strong>CUSA (Ultrasonic Aspirator):</strong> Device to gently
+            liquefy and remove firm tumours without tugging on the cord.
           </li>
           <li className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
-            • <strong>Intraoperative Navigation:</strong> GPS-like guidance to precisely locate deep-seated tumours.
+            • <strong>Intraoperative Navigation:</strong> GPS-like guidance to
+            precisely locate deep-seated tumours.
           </li>
           <li className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
-            • <strong>Multidisciplinary Care:</strong> Collaboration with medical and radiation oncologists for complete cancer care.
+            • <strong>Multidisciplinary Care:</strong> Collaboration with
+            medical and radiation oncologists for complete cancer care.
           </li>
         </ul>
       </section>
@@ -356,19 +402,21 @@ export default function SpineTumorSurgeryConditionPage() {
             <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
               <h3 className="font-semibold text-blue-700">In-Hospital</h3>
               <p className="mt-2 text-gray-700">
-                Pain management and early mobilisation (walking) usually within 24-48 hours.
-                Drains are typically removed by day 2 or 3.
+                Pain management and early mobilisation (walking) usually within
+                24-48 hours. Drains are typically removed by day 2 or 3.
               </p>
             </div>
             <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
               <h3 className="font-semibold text-blue-700">Physical Therapy</h3>
               <p className="mt-2 text-gray-700">
-                Crucial for regaining strength, balance, and gait. Our team designs
-                a specific plan based on your preoperative function.
+                Crucial for regaining strength, balance, and gait. Our team
+                designs a specific plan based on your preoperative function.
               </p>
             </div>
             <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
-              <h3 className="font-semibold text-blue-700">Oncology Follow-up</h3>
+              <h3 className="font-semibold text-blue-700">
+                Oncology Follow-up
+              </h3>
               <p className="mt-2 text-gray-700">
                 For malignant tumours, radiation or chemotherapy planning begins
                 once the surgical wound has healed (usually 2-3 weeks).
@@ -384,9 +432,9 @@ export default function SpineTumorSurgeryConditionPage() {
         </h2>
         <p className="mt-4 text-gray-700">
           A diagnosis of a spinal tumour can be overwhelming. We prioritise
-          clear communication, rapid evaluation, and compassionate care.
-          Dr. Sayuj Krishnan reviews all imaging personally to determine the
-          safest and most effective treatment strategy.
+          clear communication, rapid evaluation, and compassionate care. Dr.
+          Sayuj Krishnan reviews all imaging personally to determine the safest
+          and most effective treatment strategy.
         </p>
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           <Link
@@ -397,7 +445,8 @@ export default function SpineTumorSurgeryConditionPage() {
               Minimally Invasive Spine Surgery
             </h3>
             <p className="mt-2 text-gray-700">
-              Learn about how keyhole techniques can be applied to certain spinal conditions.
+              Learn about how keyhole techniques can be applied to certain
+              spinal conditions.
             </p>
           </Link>
           <Link
@@ -408,7 +457,8 @@ export default function SpineTumorSurgeryConditionPage() {
               Patient Success Stories
             </h3>
             <p className="mt-2 text-gray-700">
-              Read about recovery journeys of patients who have undergone complex spinal surgeries.
+              Read about recovery journeys of patients who have undergone
+              complex spinal surgeries.
             </p>
           </Link>
         </div>
@@ -441,7 +491,9 @@ export default function SpineTumorSurgeryConditionPage() {
           <YMYLAttribution lastReviewed="2026-01-02" />
         </div>
         <div className="mt-8 rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
-          <h2 className="text-lg font-semibold text-gray-900">Key References</h2>
+          <h2 className="text-lg font-semibold text-gray-900">
+            Key References
+          </h2>
           <ul className="mt-4 list-disc space-y-2 pl-6 text-gray-700">
             {references.map((ref) => (
               <li key={ref.url}>
@@ -459,12 +511,9 @@ export default function SpineTumorSurgeryConditionPage() {
         </div>
       </section>
 
-      <AuthorByline
-        publishedOn="2026-01-02"
-        updatedOn="2026-01-02"
-      />
+      <AuthorByline publishedOn="2026-01-02" updatedOn="2026-01-02" />
 
-      <SourceList sources={sources['spine-tumor-surgery-hyderabad']} />
+      <SourceList sources={sources["spine-tumor-surgery-hyderabad"]} />
 
       <ReviewedBy />
     </main>
