@@ -221,7 +221,7 @@ export const BLOG_SOURCES: Record<string, SourceEntry[]> = {
     },
     {
       label: "National Cancer Institute – Spine Tumor Overview",
-      href: "https://www.cancer.gov/types/spine",
+      href: "https://www.cancer.gov/types/spinal-cord-tumors",
     },
     {
       label: "Spine Universe – Types of Spinal Tumors",
