@@ -230,12 +230,14 @@ export default function SpineTumorSurgeryConditionPage() {
             <a
               href="https://www.drsayuj.info/appointments?utm_source=seo&utm_medium=page&utm_campaign=spine_tumor_condition"
               className="rounded-full bg-blue-500 px-6 py-3 text-sm font-semibold text-white shadow hover:bg-blue-600"
+              rel="noopener noreferrer"
             >
               Request Surgical Opinion
             </a>
             <a
               href="https://wa.me/919778280044"
               className="rounded-full border border-white px-6 py-3 text-sm font-semibold text-white hover:bg-white hover:text-slate-900"
+              rel="noopener noreferrer"
             >
               WhatsApp MRI Report
             </a>
