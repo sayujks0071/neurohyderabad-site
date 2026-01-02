@@ -159,8 +159,8 @@ const references = [
     url: "https://www.aans.org/patients/conditions-treatments/spinal-tumors/",
   },
   {
-    label: "National Cancer Institute — Spine Tumor Overview",
-    url: "https://www.cancer.gov/types/spine",
+    label: "National Cancer Institute — Brain and Spinal Cord Tumors (Patient Overview)",
+    url: "https://www.cancer.gov/types/brain/patient/adult-brain-tumors-treatment-pdq",
   },
   {
     label: "Spine Universe — Types of Spinal Tumors",
