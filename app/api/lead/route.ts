@@ -5,10 +5,32 @@ import { randomUUID } from "crypto";
 const WEBAPP_URL = process.env.GOOGLE_APPS_SCRIPT_WEBAPP_URL;
 const API_TOKEN = process.env.GOOGLE_APPS_SCRIPT_API_TOKEN;
 
-export async function POST(req: NextRequest) {
-  // 1. Rate Limiting
-  const ip = req.headers.get("x-forwarded-for") ?? "unknown";
-  const limit = rateLimit(ip, 5, 60 * 1000); // 5 requests per minute
+type LeadPayload = {
+  fullName?: string;
+  name?: string;
+  phone?: string;
+  email?: string;
+  city?: string;
+  concern?: string;
+  condition?: string;
+  reason?: string;
+  preferredDate?: string;
+  appointmentDate?: string;
+  preferredTime?: string;
+  appointmentTime?: string;
+  source?: string;
+  company?: string;
+  requestId?: string;
+  metadata?: Record<string, unknown>;
+};
+
+function normalizeString(value: unknown) {
+  return typeof value === "string" ? value.trim() : "";
+}
+
+export async function POST(request: NextRequest) {
+  const ip = request.headers.get("x-forwarded-for") ?? "unknown";
+  const limit = rateLimit(ip, 5, 60 * 1000);
 
   if (!limit.success) {
     return NextResponse.json(
@@ -18,32 +40,36 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const body = await req.json();
+    const body = (await request.json()) as LeadPayload;
 
-    // 2. Honeypot Check
     if (body.company) {
-      // Honeypot triggered: the "company" field should remain empty for real users.
-      // We intentionally return a generic success response to avoid signaling bots that
-      // their submission was rejected, but we still log this event for monitoring.
       console.warn("Honeypot field 'company' was filled; treating submission as spam.", {
         ip,
       });
       return NextResponse.json({ ok: true, message: "Received" });
     }
 
-    // 3. Generate Request ID if missing
-    if (!body.requestId) {
-      body.requestId = randomUUID();
+    const fullName = normalizeString(body.fullName ?? body.name);
+    if (!fullName) {
+      return NextResponse.json(
+        { error: "Missing required fields", required: ["fullName"] },
+        { status: 400 }
+      );
     }
 
-    // 4. Inject API Token
-    // We only inject this if it exists.
-    // If it's missing in Production, we'll fail below.
-    if (API_TOKEN) {
-      body.apiToken = API_TOKEN;
-    }
+    const payload = {
+      requestId: body.requestId ?? randomUUID(),
+      fullName,
+      phone: normalizeString(body.phone),
+      email: normalizeString(body.email),
+      city: normalizeString(body.city),
+      concern: normalizeString(body.concern ?? body.reason ?? body.condition),
+      preferredDate: normalizeString(body.preferredDate ?? body.appointmentDate),
+      preferredTime: normalizeString(body.preferredTime ?? body.appointmentTime),
+      source: normalizeString(body.source || "website"),
+      metadata: body.metadata ?? {},
+    };
 
-    // 5. Mock Mode (Development / No Env Var)
     if (!WEBAPP_URL) {
       if (process.env.NODE_ENV === "production") {
         console.error("GOOGLE_APPS_SCRIPT_WEBAPP_URL is not set in production.");
@@ -51,25 +77,22 @@ export async function POST(req: NextRequest) {
           { error: "Internal Server Configuration Error" },
           { status: 500 }
         );
-      } else {
-        // Dev mode mock response
-        console.warn("Using MOCK response because GOOGLE_APPS_SCRIPT_WEBAPP_URL is unset.");
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-
-        return NextResponse.json({
-          ok: true,
-          requestId: body.requestId,
-          message: "[MOCK] Lead processed successfully",
-          mock: true,
-          driveFolderUrl: "https://drive.google.com/mock-folder",
-          calendarEventId: "mock-calendar-event-id"
-        });
       }
+
+      console.warn("Using MOCK response because GOOGLE_APPS_SCRIPT_WEBAPP_URL is unset.");
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      return NextResponse.json({
+        ok: true,
+        requestId: payload.requestId,
+        message: "[MOCK] Lead processed successfully",
+        mock: true,
+        driveFolderUrl: "https://drive.google.com/mock-folder",
+        calendarEventId: "mock-calendar-event-id",
+      });
     }
 
-    // 6. Security Check for Token
     if (!API_TOKEN) {
-      // In production, we MUST have a token for the new secure script
       if (process.env.NODE_ENV === "production") {
         console.error("GOOGLE_APPS_SCRIPT_API_TOKEN is not set in production.");
         return NextResponse.json(
@@ -77,18 +100,20 @@ export async function POST(req: NextRequest) {
           { status: 500 }
         );
       }
-      // In dev, we might just be testing connectivity to a script that doesn't enforce it yet,
-      // or we accept it might fail auth.
-      console.warn("GOOGLE_APPS_SCRIPT_API_TOKEN is unset. Upstream script may reject request.");
+      console.warn(
+        "GOOGLE_APPS_SCRIPT_API_TOKEN is unset. Upstream script may reject request."
+      );
     }
 
-    // 7. Forward to Google Apps Script
     const response = await fetch(WEBAPP_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(body),
+      body: JSON.stringify({
+        ...payload,
+        ...(API_TOKEN ? { apiToken: API_TOKEN } : {}),
+      }),
     });
 
     if (!response.ok) {
@@ -99,8 +124,14 @@ export async function POST(req: NextRequest) {
     }
 
     const result = await response.json();
-    return NextResponse.json(result);
+    if (result?.ok === false) {
+      return NextResponse.json(
+        { error: result.error || "Submission failed upstream." },
+        { status: 400 }
+      );
+    }
 
+    return NextResponse.json(result);
   } catch (error) {
     console.error("Error in /api/lead:", error);
     return NextResponse.json(
@@ -110,13 +141,22 @@ export async function POST(req: NextRequest) {
   }
 }
 
-export async function OPTIONS(request: NextRequest) {
+export async function GET() {
+  return NextResponse.json({
+    status: "ok",
+    configured: !!(WEBAPP_URL && API_TOKEN),
+    webappUrl: WEBAPP_URL ? "***configured***" : "missing",
+    apiToken: API_TOKEN ? "***configured***" : "missing",
+  });
+}
+
+export async function OPTIONS() {
   return new NextResponse(null, {
     status: 204,
     headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization",
     },
   });
 }

@@ -52,6 +52,7 @@ temp/
 docs/internal/
 *.md
 !docs/MAINTENANCE_REPORT.md
+!integrations/apps-script/README.md
 *.patch
 *.sh
 *.png
