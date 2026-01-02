@@ -1,5 +1,12 @@
 import React from "react";
 import Link from "next/link";
+import { getLocationById } from "@/src/data/locations";
+import { LocationNAPCard } from "@/src/components/locations/LocationNAPCard";
+import { LocationCTAs } from "@/src/components/locations/LocationCTAs";
+import { LocationMapEmbed } from "@/src/components/locations/LocationMapEmbed";
+import { LocalPathways } from "@/src/components/locations/LocalPathways";
+import { LocationSchema } from "@/src/components/locations/LocationSchema";
+import { notFound } from "next/navigation";
 
 // Force static generation
 export const dynamic = 'force-static';
@@ -50,83 +57,33 @@ const FAQ = [
 ];
 
 export default function Page() {
-  const breadcrumb = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.drsayuj.info/" },
-      { "@type": "ListItem", position: 2, name: "Neurosurgeon in Hitech City", item: "https://www.drsayuj.info/neurosurgeon-hitech-city" },
-    ],
-  };
+  const location = getLocationById("hitech-city");
 
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: FAQ.map(({ q, a }) => ({
-      "@type": "Question",
-      name: q,
-      acceptedAnswer: { "@type": "Answer", text: a },
-    })),
-  };
+  if (!location) {
+    return notFound();
+  }
+
+  const breadcrumb = [
+     { name: "Neurosurgeon in Hitech City", item: `https://www.drsayuj.info/${location.slug}` },
+  ];
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "LocalBusiness",
-            "name": "Dr Sayuj Krishnan - Neurosurgeon near Hitech City",
-            "image": "https://www.drsayuj.info/images/og-default.jpg",
-            "url": "https://www.drsayuj.info/neurosurgeon-hitech-city",
-            "telephone": "+919778280044",
-            "address": {
-              "@type": "PostalAddress",
-              "streetAddress": "Room No 317, OPD Block, Yashoda Hospital, Malakpet",
-              "addressLocality": "Hyderabad",
-              "addressRegion": "Telangana",
-              "postalCode": "500036",
-              "addressCountry": "IN"
-            },
-            "geo": {
-              "@type": "GeoCoordinates",
-              "latitude": 17.385,
-              "longitude": 78.4867
-            },
-            "areaServed": {
-              "@type": "City",
-              "name": "Hitech City"
-            },
-            "availableService": [
-              { "@type": "MedicalProcedure", "name": "Endoscopic Spine Surgery" },
-              { "@type": "MedicalProcedure", "name": "Awake Brain Surgery" }
-            ]
-          })
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
+      <LocationSchema location={location} breadcrumb={breadcrumb} faq={FAQ} />
+
       <h1 className="text-3xl md:text-4xl font-bold">Neurosurgeon in Hitech City, Hyderabad</h1>
       <p className="mt-4 text-lg">
         Serving patients from <strong>Hitech City</strong> and nearby localities. OPD at Yashoda Hospitals (Malakpet) with endoscopic spine expertise.
       </p>
 
-      <div className="mt-6 flex flex-wrap gap-3">
-        <a href="https://wa.me/919778280044" className="rounded-2xl px-6 py-3 bg-green-600 text-white">WhatsApp Booking</a>
-        <a href="tel:+919778280044" className="rounded-2xl px-6 py-3 border">Call: +91-9778280044</a>
-        <Link href="/appointments" className="rounded-2xl px-6 py-3 bg-blue-600 text-white">Book Appointment</Link>
-        <a href="https://maps.google.com/?q=Yashoda+Hospitals+Malakpet+Hyderabad" className="rounded-2xl px-6 py-3 border">Directions</a>
+      <div className="mt-6">
+         <LocationCTAs location={location} />
       </div>
 
       <section className="grid md:grid-cols-2 gap-8 mt-10">
         <div>
+          <LocationNAPCard location={location} className="mb-6" />
+
           <h2 className="text-2xl font-semibold">OPD Timings</h2>
           <ul className="mt-3 list-disc pl-5">
             <li>Mon–Sat, 10:00–16:00 (IST)</li>
@@ -142,16 +99,8 @@ export default function Page() {
         </div>
 
         <div>
-          <h2 className="text-2xl font-semibold">Map</h2>
-          <div className="mt-3 aspect-video w-full overflow-hidden rounded-xl border">
-            <iframe
-              title="Map to Yashoda Hospital for Hitech City patients"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.123456789!2d78.5147!3d17.3750!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb99dac93a348d%3A0xc9039baf28225326!2sYashoda%20Hospital%20Malakpet!5e0!3m2!1sen!2sin!4v1234567890"
-              className="w-full h-full"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-          </div>
+          <h2 className="text-2xl font-semibold mb-3">Map</h2>
+          <LocationMapEmbed location={location} />
         </div>
       </section>
 
@@ -167,55 +116,7 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="mt-12">
-        <h2 className="text-2xl font-semibold">Popular services for Hitech City patients</h2>
-        <ul className="mt-4 space-y-2 list-disc list-inside">
-          <li><Link className="text-blue-700 hover:underline" href="/services/endoscopic-spine-surgery-hyderabad/">Endoscopic Spine Surgery (same-day discharge)</Link></li>
-          <li><Link className="text-blue-700 hover:underline" href="/services/brain-tumor-surgery-hyderabad/">Brain Tumor Surgery with neuronavigation</Link></li>
-          <li><Link className="text-blue-700 hover:underline" href="/services/epilepsy-surgery-hyderabad/">Epilepsy Surgery programme</Link></li>
-          <li><Link className="text-blue-700 hover:underline" href="/services/spine-surgery-hyderabad/">Comprehensive Spine Surgery & fusion options</Link></li>
-        </ul>
-      </section>
-
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "LocalBusiness",
-            "name": "Dr Sayuj Krishnan - Neurosurgeon near Hitech City",
-            "image": "https://www.drsayuj.info/images/og-default.jpg",
-            "url": "https://www.drsayuj.info/neurosurgeon-hitech-city",
-            "telephone": "+919778280044",
-            "address": {
-              "@type": "PostalAddress",
-              "streetAddress": "Room No 317, OPD Block, Yashoda Hospital, Malakpet",
-              "addressLocality": "Hyderabad",
-              "addressRegion": "Telangana",
-              "postalCode": "500036",
-              "addressCountry": "IN"
-            },
-            "geo": {
-              "@type": "GeoCoordinates",
-              "latitude": 17.385,
-              "longitude": 78.4867
-            },
-            "areaServed": {
-              "@type": "City",
-              "name": "Hyderabad",
-              "containsPlace": { "@type": "Place", "name": "Hitech City" }
-            },
-            "availableService": [
-              { "@type": "MedicalProcedure", "name": "Endoscopic Spine Surgery" },
-              { "@type": "MedicalProcedure", "name": "Awake Brain Surgery" },
-              { "@type": "MedicalProcedure", "name": "Spine Fusion" }
-            ]
-          })
-        }}
-      />
+      <LocalPathways location={location} />
     </main>
   );
 }
-// Force deployment

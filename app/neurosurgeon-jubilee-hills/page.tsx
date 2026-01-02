@@ -1,8 +1,19 @@
 import React from "react";
 import Link from "next/link";
-import type { Metadata } from "next";
+import { getLocationById } from "@/src/data/locations";
+import { LocationNAPCard } from "@/src/components/locations/LocationNAPCard";
+import { LocationCTAs } from "@/src/components/locations/LocationCTAs";
+import { LocationMapEmbed } from "@/src/components/locations/LocationMapEmbed";
+import { LocalPathways } from "@/src/components/locations/LocalPathways";
+import { LocationSchema } from "@/src/components/locations/LocationSchema";
+import { notFound } from "next/navigation";
 
-export const metadata: Metadata = {
+// Force static generation
+export const dynamic = 'force-static';
+export const dynamicParams = false;
+export const revalidate = 86400;
+
+export const metadata = {
   title: "Best Neurosurgeon in Jubilee Hills, Hyderabad | Dr. Sayuj Krishnan | Full Endoscopic Spine Surgery & Daycare Spine Procedures",
   description:
     "Leading neurosurgeon Dr. Sayuj Krishnan serving Jubilee Hills, Hyderabad. Expert in endoscopic spine surgery, brain tumor surgery, trigeminal neuralgia treatment & emergency neurotrauma care. 9+ years experience. Easy access from Jubilee Hills Check Post, Road No. 36, Film Nagar. Book consultation today.",
@@ -39,56 +50,21 @@ const FAQ = [
 ];
 
 export default function JubileeHillsNeurosurgeonPage() {
-  const breadcrumb = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.drsayuj.info/" },
-      { "@type": "ListItem", position: 2, name: "Locations", item: "https://www.drsayuj.info/locations" },
-      { "@type": "ListItem", position: 3, name: "Neurosurgeon in Jubilee Hills", item: "https://www.drsayuj.info/neurosurgeon-jubilee-hills" },
-    ],
-  };
+  const location = getLocationById("jubilee-hills");
 
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: FAQ.map(({ q, a }) => ({
-      "@type": "Question",
-      name: q,
-      acceptedAnswer: { "@type": "Answer", text: a },
-    })),
-  };
+  if (!location) {
+    return notFound();
+  }
 
-  const localBusinessSchema = {
-    "@context": "https://schema.org",
-    "@type": "MedicalClinic",
-    name: "Dr. Sayuj Krishnan - Neurosurgeon serving Jubilee Hills",
-    description: "Full endoscopic spine surgery and brain surgery services for Jubilee Hills residents at Yashoda Hospital Malakpet",
-    url: "https://www.drsayuj.info/neurosurgeon-jubilee-hills",
-    telephone: "+91-9778280044",
-    email: "hellodr@drsayuj.info",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "Room 317, OPD Block, Yashoda Hospital, Malakpet",
-      addressLocality: "Hyderabad",
-      addressRegion: "Telangana",
-      postalCode: "500036",
-      addressCountry: "IN",
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: 17.375,
-      longitude: 78.5147,
-    },
-    areaServed: {
-      "@type": "City",
-      name: "Jubilee Hills, Hyderabad",
-    },
-    priceRange: "₹₹₹",
-  };
+  const breadcrumb = [
+      { name: "Locations", item: "https://www.drsayuj.info/locations" },
+      { name: "Neurosurgeon in Jubilee Hills", item: "https://www.drsayuj.info/neurosurgeon-jubilee-hills" },
+  ];
 
   return (
     <main className="bg-white">
+      <LocationSchema location={location} breadcrumb={breadcrumb} faq={FAQ} />
+
       <section className="bg-gradient-to-r from-blue-600 to-blue-800 py-12 text-white">
         <div className="mx-auto max-w-5xl px-4">
           <p className="text-sm uppercase tracking-wide text-blue-100">
@@ -101,16 +77,8 @@ export default function JubileeHillsNeurosurgeonPage() {
             Dr. Sayuj Krishnan – Fellowship-Trained Neurosurgeon & Spine Surgeon serving Jubilee Hills residents. 
             Full Endoscopic Spine Surgery • Brain Tumor Surgery • Daycare Procedures • 9+ Years Experience
           </p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <a href="https://wa.me/919778280044" className="rounded-full bg-green-500 px-6 py-3 text-sm font-semibold text-white hover:bg-green-600">
-              WhatsApp: +91 9778280044
-            </a>
-            <a href="tel:+919778280044" className="rounded-full border-2 border-white px-6 py-3 text-sm font-semibold hover:bg-white hover:text-blue-800">
-              Call Now
-            </a>
-            <a href="https://maps.google.com/?q=Yashoda+Hospitals+Malakpet+Hyderabad" className="rounded-full border-2 border-white px-6 py-3 text-sm font-semibold hover:bg-white hover:text-blue-800" target="_blank" rel="noopener noreferrer">
-              Get Directions
-            </a>
+          <div className="mt-6">
+            <LocationCTAs location={location} />
           </div>
         </div>
       </section>
@@ -131,17 +99,9 @@ export default function JubileeHillsNeurosurgeonPage() {
               specializes in minimally invasive procedures that enable same-day discharge and rapid return to active life—
               perfect for Jubilee Hills professionals and families seeking world-class care close to home.
             </p>
-            <div className="mt-5 flex flex-wrap gap-3">
-              <Link href="/appointments" className="rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-700 shadow">
-                Book Appointment
-              </Link>
-              <Link href="https://wa.me/919778280044" className="rounded-full bg-green-500 px-6 py-3 text-sm font-semibold text-white hover:bg-green-600">
-                WhatsApp Booking
-              </Link>
-              <Link href="tel:+919778280044" className="rounded-full border border-blue-200 px-6 py-3 text-sm font-semibold text-blue-800 hover:bg-blue-50">
-                Call: +91 97782 80044
-              </Link>
-            </div>
+             <div className="mt-6">
+                <LocationCTAs location={location} />
+             </div>
             
             <div className="mt-6 rounded-lg border border-blue-200 bg-blue-50 p-6">
               <h3 className="font-semibold text-blue-800">Why Jubilee Hills Patients Choose Dr. Sayuj:</h3>
@@ -157,6 +117,8 @@ export default function JubileeHillsNeurosurgeonPage() {
           </div>
 
           <div>
+             <LocationNAPCard location={location} className="mb-6 shadow-lg" />
+
             <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-lg">
               <h3 className="text-xl font-semibold text-blue-700">
                 Specialized Services for Jubilee Hills
@@ -213,29 +175,11 @@ export default function JubileeHillsNeurosurgeonPage() {
                   <li>• Teleconsultation: Available for follow-ups</li>
                 </ul>
               </div>
-              
-              <div className="mt-4 rounded-lg border border-gray-200 bg-white p-4">
-                <h4 className="font-semibold text-gray-900">Hospital Address</h4>
-                <p className="mt-2 text-gray-700">
-                  Room No. 317, OPD Block<br />
-                  Yashoda Hospital, Alexander Road<br />
-                  Malakpet, Hyderabad<br />
-                  Telangana 500036
-                </p>
-              </div>
             </div>
 
             <div>
               <h3 className="text-xl font-semibold text-blue-700">Map & Navigation</h3>
-              <div className="mt-4 aspect-video w-full overflow-hidden rounded-xl border shadow-lg">
-                <iframe
-                  title="Map from Jubilee Hills to Yashoda Hospital Malakpet"
-                  src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d30449.0!2d78.5147!3d17.3750!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x3bcb99dac93a348d%3A0xc9039baf28225326!2sJubilee%20Hills%2C%20Hyderabad!3m2!1d17.4321!2d78.4077!4m5!1s0x3bcb99dac93a348d%3A0xc9039baf28225326!2sYashoda%20Hospital%20Malakpet!3m2!1d17.3750!2d78.5147!5e0!3m2!1sen!2sin!4v1234567890"
-                  className="h-full w-full"
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
-              </div>
+              <LocationMapEmbed location={location} className="mt-4 shadow-lg" />
               
               <div className="mt-4 rounded-lg border border-green-200 bg-green-50 p-4">
                 <h4 className="font-semibold text-green-800">Metro Option</h4>
@@ -263,26 +207,7 @@ export default function JubileeHillsNeurosurgeonPage() {
         </div>
       </section>
 
-      <section className="bg-blue-50 py-12">
-        <div className="mx-auto max-w-5xl px-4 text-center">
-          <h2 className="text-2xl font-bold text-gray-900">Ready to Book Your Consultation?</h2>
-          <p className="mt-4 text-lg text-gray-700">
-            Jubilee Hills residents trust Dr. Sayuj Krishnan for world-class neurosurgical care close to home.
-          </p>
-          <div className="mt-6 flex flex-wrap justify-center gap-4">
-            <Link href="/appointments" className="rounded-full bg-blue-600 px-8 py-3 font-semibold text-white hover:bg-blue-700">
-              Book Online Appointment
-            </Link>
-            <a href="tel:+919778280044" className="rounded-full border-2 border-blue-600 px-8 py-3 font-semibold text-blue-600 hover:bg-blue-600 hover:text-white">
-              Call: +91 9778280044
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
+       <LocalPathways location={location} />
     </main>
   );
 }

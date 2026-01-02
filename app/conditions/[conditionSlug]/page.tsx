@@ -11,6 +11,8 @@ import ConditionStructuredData from "../ConditionStructuredData";
 import Section from "../../_components/Section";
 import Card from "../../_components/Card";
 import Button from "../../_components/Button";
+import { LocalPathways } from "@/src/components/locations/LocalPathways";
+import { getLocationById } from "@/src/data/locations";
 
 const DEDICATED_CONDITIONS = CONDITION_RESOURCES.filter((condition) => {
   const path = condition.primaryPath;
@@ -90,6 +92,9 @@ export default async function ConditionDetailPage({ params }: PageParams) {
   if (!condition || !DEDICATED_CONDITIONS.some((item) => item.slug === conditionSlug)) {
     return notFound();
   }
+
+   // Reuse main location for condition pages
+   const location = getLocationById("hyderabad");
 
   return (
     <div className="bg-white">
@@ -240,6 +245,16 @@ export default async function ConditionDetailPage({ params }: PageParams) {
               </Card>
             </div>
           ) : null}
+
+          {location && (
+            <div className="mt-12 border-t pt-10">
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">Local Care Options</h2>
+                <p className="mb-6 text-gray-700">
+                    Dr. Sayuj Krishnan provides treatment for {condition.name} at multiple locations across Hyderabad.
+                </p>
+                 <LocalPathways location={location} />
+            </div>
+          )}
 
           <div className="mt-12">
             <Card padding="lg" className="bg-blue-50 shadow-none">
