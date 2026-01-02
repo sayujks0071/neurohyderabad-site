@@ -50,6 +50,7 @@ export default function LeadForm() {
     register,
     handleSubmit,
     control,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<LeadFormData>({
     resolver: yupResolver(schema),
@@ -89,7 +90,10 @@ export default function LeadForm() {
           Thank you for reaching out. We have received your details and will contact you shortly to confirm your appointment.
         </p>
         <button
-          onClick={() => setIsSubmitted(false)}
+          onClick={() => {
+            setIsSubmitted(false);
+            reset();
+          }}
           className="text-green-800 underline hover:text-green-900"
         >
           Send another enquiry

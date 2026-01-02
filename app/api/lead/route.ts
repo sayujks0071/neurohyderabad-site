@@ -22,12 +22,7 @@ export async function POST(req: NextRequest) {
 
     // 2. Honeypot Check
     if (body.company) {
-      // Honeypot triggered: the "company" field should remain empty for real users.
-      // We intentionally return a generic success response to avoid signaling bots that
-      // their submission was rejected, but we still log this event for monitoring.
-      console.warn("Honeypot field 'company' was filled; treating submission as spam.", {
-        ip,
-      });
+      // Silently fail (return success) to fool bots
       return NextResponse.json({ ok: true, message: "Received" });
     }
 
@@ -99,6 +94,16 @@ export async function POST(req: NextRequest) {
     }
 
     const result = await response.json();
+
+    // Google Apps Script returns 200 OK even for application errors, so we must check result.ok
+    if (result.ok === false) {
+      console.error("Upstream script error:", result.error);
+      return NextResponse.json(
+        { error: result.error || "Submission failed upstream." },
+        { status: 400 } // Or 502, but 400 usually means validation failure here
+      );
+    }
+
     return NextResponse.json(result);
 
   } catch (error) {
