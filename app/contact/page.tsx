@@ -9,6 +9,7 @@ import { CLINIC_INFO, getMedicalClinicSchema } from "../../src/lib/clinic";
 import Section from "../_components/Section";
 import Card from "../_components/Card";
 import Button from "../_components/Button";
+import LeadForm from "@/components/LeadForm";
 
 const clinicSchema = getMedicalClinicSchema();
 
@@ -107,56 +108,96 @@ export default function ContactPage() {
         </Section>
 
         <Section background="gray" className="py-12 md:py-16">
-          <div className="max-w-4xl mx-auto space-y-8">
-            <div className="grid md:grid-cols-2 gap-8">
-              <Card padding="lg" className="shadow-md">
-                <h2 className="text-2xl font-semibold mb-6 text-blue-700">Get in Touch</h2>
-                <div className="space-y-6">
-                  <div>
-                    <h3 className="font-semibold text-lg mb-2">Phone</h3>
-                    <a href={telephoneHref} className="text-blue-600 hover:underline text-lg">
-                      {telephone}
-                    </a>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-lg mb-2">Email</h3>
-                    <a href={`mailto:${email}`} className="text-blue-600 hover:underline">
-                      {email}
-                    </a>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-lg mb-2">Location</h3>
-                    <div className="text-gray-600">
-                      <p>{streetAddress}</p>
-                      <p>{addressLocality}, {addressRegion}</p>
-                      <p>{postalCode}</p>
+          <div className="max-w-5xl mx-auto space-y-12">
+
+            {/* New Lead Form Section */}
+            <div className="grid lg:grid-cols-2 gap-10">
+              <div className="order-2 lg:order-1">
+                 <LeadForm />
+              </div>
+              <div className="order-1 lg:order-2 space-y-6">
+                 <div>
+                    <h2 className="text-3xl font-bold mb-4 text-slate-800">We are here to help</h2>
+                    <p className="text-lg text-slate-600 mb-6">
+                      Whether you have a question about a procedure, need a second opinion, or want to schedule a visit, our team is ready to assist you.
+                    </p>
+                 </div>
+
+                 <Card padding="lg" className="shadow-md bg-blue-50/50 border-blue-100">
+                    <h3 className="text-xl font-semibold mb-4 text-blue-800">Contact Details</h3>
+                    <div className="space-y-4">
+                      <div>
+                        <p className="font-semibold text-blue-900">Phone</p>
+                        <a href={telephoneHref} className="text-blue-700 hover:underline text-lg">
+                          {telephone}
+                        </a>
+                      </div>
+                      <div>
+                        <p className="font-semibold text-blue-900">Email</p>
+                        <a href={`mailto:${email}`} className="text-blue-700 hover:underline">
+                          {email}
+                        </a>
+                      </div>
+                      <div>
+                        <p className="font-semibold text-blue-900">Address</p>
+                        <p className="text-slate-700">
+                          {streetAddress}<br/>
+                          {addressLocality}, {addressRegion} {postalCode}
+                        </p>
+                      </div>
+                    </div>
+                 </Card>
+              </div>
+            </div>
+
+            <div className="border-t border-slate-200 pt-10">
+              <h3 className="text-2xl font-bold text-center mb-8 text-slate-700">Additional Information</h3>
+              <div className="grid md:grid-cols-2 gap-8">
+                <Card padding="lg" className="shadow-md">
+                  <h2 className="text-xl font-semibold mb-4 text-blue-700">Office Hours</h2>
+                  <div className="space-y-3 text-gray-600">
+                    <div className="flex justify-between border-b border-gray-100 pb-2">
+                      <span>Monday - Friday</span>
+                      <span>9:00 AM - 5:00 PM</span>
+                    </div>
+                    <div className="flex justify-between border-b border-gray-100 pb-2">
+                      <span>Saturday</span>
+                      <span>9:00 AM - 1:00 PM</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-red-600 font-medium">Sunday</span>
+                      <span>Emergency Only</span>
                     </div>
                   </div>
-                </div>
-              </Card>
+                  <div className="mt-6 p-4 bg-red-50 rounded-lg border border-red-100">
+                    <p className="text-sm text-red-800 flex items-center gap-2">
+                      <span className="text-xl">🚑</span>
+                      <strong>24/7 Emergency Support Available</strong>
+                    </p>
+                  </div>
+                </Card>
 
-              <Card padding="lg" className="shadow-md">
-                <h2 className="text-2xl font-semibold mb-6 text-blue-700">Office Hours</h2>
-                <div className="space-y-4 text-gray-600">
-                  <div className="flex justify-between">
-                    <span>Monday - Friday</span>
-                    <span>9:00 AM - 5:00 PM</span>
+                <Card padding="lg" className="shadow-md">
+                  <h2 className="text-xl font-semibold mb-4 text-blue-700">How to Reach Us</h2>
+                  <div className="space-y-6">
+                    <div>
+                      <h3 className="font-semibold text-md mb-2">By Appointment</h3>
+                      <p className="text-gray-600 text-sm mb-3">
+                        For consultations, please use the form above or call us directly.
+                      </p>
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-md mb-2">Emergency</h3>
+                      <Button
+                        href={telephoneHref}
+                        className="w-full justify-center bg-red-600 text-white hover:bg-red-700 border-none"
+                      >
+                        Call Emergency: {telephone}
+                      </Button>
+                    </div>
                   </div>
-                  <div className="flex justify-between">
-                    <span>Saturday</span>
-                    <span>9:00 AM - 1:00 PM</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Sunday</span>
-                    <span>Emergency Only</span>
-                  </div>
-                </div>
-                <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-                  <p className="text-sm text-blue-800">
-                    <strong>Emergency Cases:</strong> Available 24/7 for urgent neurosurgical emergencies.
-                  </p>
-                </div>
-              </Card>
+                </Card>
+              </div>
             </div>
 
             <Card padding="lg" className="shadow-md">
