@@ -220,8 +220,8 @@ export const BLOG_SOURCES: Record<string, SourceEntry[]> = {
       href: "https://www.aans.org/patients/conditions-treatments/spinal-tumors/",
     },
     {
-      label: "National Cancer Institute – Spine Tumor Overview",
-      href: "https://www.cancer.gov/types/spine",
+      label: "National Cancer Institute – Brain and Spinal Cord Tumors (Patient Overview)",
+      href: "https://www.cancer.gov/types/brain/patient/adult-brain-tumors-treatment-pdq",
     },
     {
       label: "Spine Universe – Types of Spinal Tumors",
