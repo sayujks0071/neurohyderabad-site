@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import Button from '../_components/Button';
 
 interface NewsletterSignupProps {
@@ -15,6 +15,9 @@ export default function NewsletterSignup({
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [error, setError] = useState('');
+  const fieldId = useId();
+  const errorId = `${fieldId}-error`;
+  const successId = `${fieldId}-success`;
 
   const validateEmail = (email: string) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -70,7 +73,7 @@ export default function NewsletterSignup({
         <p className="text-sm text-blue-700 mb-4">
           Subscribe to receive expert neurosurgical insights, patient education, and health tips.
         </p>
-        <form onSubmit={handleSubmit} className="space-y-3">
+        <form onSubmit={handleSubmit} className="space-y-3" noValidate>
           <div>
             <input
               type="email"
@@ -82,9 +85,11 @@ export default function NewsletterSignup({
               disabled={status === 'submitting'}
               required
               aria-label="Email address"
+              aria-invalid={error ? 'true' : 'false'}
+              aria-describedby={error ? errorId : undefined}
             />
             {error && (
-              <p className="mt-1 text-sm text-red-600" role="alert">
+              <p className="mt-1 text-sm text-red-600" role="alert" id={errorId}>
                 {error}
               </p>
             )}
@@ -103,7 +108,7 @@ export default function NewsletterSignup({
           </Button>
         </form>
         {status === 'success' && (
-          <p className="mt-2 text-sm text-green-700" role="alert">
+          <p className="mt-2 text-sm text-green-700" role="alert" id={successId}>
             Thank you for subscribing! Check your email for confirmation.
           </p>
         )}
@@ -112,7 +117,7 @@ export default function NewsletterSignup({
   }
 
   return (
-    <form onSubmit={handleSubmit} className={`flex flex-col sm:flex-row gap-2 ${className}`}>
+    <form onSubmit={handleSubmit} className={`flex flex-col sm:flex-row gap-2 ${className}`} noValidate>
       <input
         type="email"
         value={email}
@@ -123,6 +128,8 @@ export default function NewsletterSignup({
         disabled={status === 'submitting'}
         required
         aria-label="Email address"
+        aria-invalid={error ? 'true' : 'false'}
+        aria-describedby={error ? errorId : undefined}
       />
       <Button
         type="submit"
@@ -132,12 +139,12 @@ export default function NewsletterSignup({
         {status === 'submitting' ? 'Subscribing...' : 'Subscribe'}
       </Button>
       {error && (
-        <p className="text-sm text-red-600 mt-1" role="alert">
+        <p className="text-sm text-red-600 mt-1" role="alert" id={errorId}>
           {error}
         </p>
       )}
       {status === 'success' && (
-        <p className="text-sm text-green-700 mt-1" role="alert">
+        <p className="text-sm text-green-700 mt-1" role="alert" id={successId}>
           Thank you for subscribing!
         </p>
       )}
