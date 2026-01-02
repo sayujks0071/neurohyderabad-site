@@ -3,10 +3,10 @@ import { rateLimit } from "@/src/lib/rate-limit";
 import { randomUUID } from "crypto";
 
 const WEBAPP_URL = process.env.GOOGLE_APPS_SCRIPT_WEBAPP_URL;
+const API_TOKEN = process.env.GOOGLE_APPS_SCRIPT_API_TOKEN;
 
 export async function POST(req: NextRequest) {
   // 1. Rate Limiting
-  // Use IP address for limiting. Fallback to 'unknown' if not present.
   const ip = req.headers.get("x-forwarded-for") ?? "unknown";
   const limit = rateLimit(ip, 5, 60 * 1000); // 5 requests per minute
 
@@ -31,7 +31,14 @@ export async function POST(req: NextRequest) {
       body.requestId = randomUUID();
     }
 
-    // 4. Mock Mode (Development / No Env Var)
+    // 4. Inject API Token
+    // We only inject this if it exists.
+    // If it's missing in Production, we'll fail below.
+    if (API_TOKEN) {
+      body.apiToken = API_TOKEN;
+    }
+
+    // 5. Mock Mode (Development / No Env Var)
     if (!WEBAPP_URL) {
       if (process.env.NODE_ENV === "production") {
         console.error("GOOGLE_APPS_SCRIPT_WEBAPP_URL is not set in production.");
@@ -42,7 +49,6 @@ export async function POST(req: NextRequest) {
       } else {
         // Dev mode mock response
         console.warn("Using MOCK response because GOOGLE_APPS_SCRIPT_WEBAPP_URL is unset.");
-        // Simulate network delay
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         return NextResponse.json({
@@ -56,7 +62,22 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // 5. Forward to Google Apps Script
+    // 6. Security Check for Token
+    if (!API_TOKEN) {
+      // In production, we MUST have a token for the new secure script
+      if (process.env.NODE_ENV === "production") {
+        console.error("GOOGLE_APPS_SCRIPT_API_TOKEN is not set in production.");
+        return NextResponse.json(
+          { error: "Internal Server Configuration Error" },
+          { status: 500 }
+        );
+      }
+      // In dev, we might just be testing connectivity to a script that doesn't enforce it yet,
+      // or we accept it might fail auth.
+      console.warn("GOOGLE_APPS_SCRIPT_API_TOKEN is unset. Upstream script may reject request.");
+    }
+
+    // 7. Forward to Google Apps Script
     const response = await fetch(WEBAPP_URL, {
       method: "POST",
       headers: {
@@ -66,17 +87,12 @@ export async function POST(req: NextRequest) {
     });
 
     if (!response.ok) {
-      // Handle HTTP errors from the script (rare, usually 200 OK with error body)
       return NextResponse.json(
         { error: "Failed to submit lead upstream." },
         { status: 502 }
       );
     }
 
-    // Apps Script returns JSON (even for logical errors if we handled them)
-    // Note: Google Apps Script sometimes returns a redirect (302) to a content page.
-    // fetch handles redirects automatically by default.
-    // However, the text/content returned by the redirected page is the JSON we output.
     const result = await response.json();
     return NextResponse.json(result);
 

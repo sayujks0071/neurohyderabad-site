@@ -2,49 +2,48 @@
 // Deploy this as a Web App:
 // 1. Extensions > Apps Script
 // 2. Paste this code.
-// 3. Project Settings > Script Properties: add keys (SHEET_ID, etc.)
+// 3. Project Settings > Script Properties: add keys (SHEET_ID, API_TOKEN, etc.)
 // 4. Deploy > New Deployment > Web App > Execute as Me > Access: Anyone
 // 5. Copy URL to Vercel env var GOOGLE_APPS_SCRIPT_WEBAPP_URL
-
-// --- CONFIGURATION via Script Properties ---
-// SHEET_ID: ID of the Google Sheet
-// SHEET_TAB: Name of the tab (default: 'Leads')
-// PARENT_FOLDER_ID: Drive folder ID where subfolders are created
-// STAFF_EMAILS: Comma-separated emails to notify/share folder with
-// CALENDAR_ID: (Optional) Google Calendar ID to create events in
-// ALLOWED_ORIGINS: (Optional) Comma-separated list of allowed origins for CORS (e.g. https://mysite.com)
+// 6. Set API_TOKEN in both Script Properties and Vercel env var GOOGLE_APPS_SCRIPT_API_TOKEN
 
 const PROPS = PropertiesService.getScriptProperties();
 
 function doPost(e) {
+  const lock = LockService.getScriptLock();
+  lock.waitLock(30000);
+
   try {
-    // 1. CORS Pre-check & Setup
-    // Note: Actual CORS for POST is handled by returning proper headers in the response
-
-    // 2. Parse Payload
     if (!e || !e.postData || !e.postData.contents) {
-      return createJSONResponse({ error: "Invalid payload" }, 400);
+      return json({ ok: false, error: "Invalid payload" });
     }
-    const data = JSON.parse(e.postData.contents);
 
-    // 3. Validation
+    let data;
+    try {
+      data = JSON.parse(e.postData.contents);
+    } catch (err) {
+      return json({ ok: false, error: "Invalid JSON" });
+    }
+
+    // --- Auth (REQUIRED) ---
+    const expectedToken = PROPS.getProperty("API_TOKEN");
+    if (!expectedToken || data.apiToken !== expectedToken) {
+      return json({ ok: false, error: "Unauthorized" });
+    }
+
+    // --- Validation ---
     const errors = validate(data);
-    if (errors.length > 0) {
-      return createJSONResponse({ error: "Validation failed", details: errors }, 400);
+    if (errors.length) {
+      return json({ ok: false, error: "Validation failed", details: errors });
     }
 
-    // 4. Idempotency Check
-    const sheetId = PROPS.getProperty('SHEET_ID');
-    const sheetTab = PROPS.getProperty('SHEET_TAB') || 'Leads';
-    if (!sheetId) throw new Error("Missing SHEET_ID property");
-
+    const sheetId = mustProp("SHEET_ID");
+    const sheetTab = PROPS.getProperty("SHEET_TAB") || "Leads";
     const ss = SpreadsheetApp.openById(sheetId);
     let sheet = ss.getSheetByName(sheetTab);
 
-    // Create sheet if missing
     if (!sheet) {
       sheet = ss.insertSheet(sheetTab);
-      // Add headers
       sheet.appendRow([
         "timestamp", "requestId", "fullName", "phone", "email", "city",
         "concern", "preferredDate", "preferredTime", "source", "status",
@@ -54,28 +53,27 @@ function doPost(e) {
       sheet.setFrozenRows(1);
     }
 
-    const requestId = data.requestId;
-    const existingRow = findRowByRequestId(sheet, requestId);
-
-    if (existingRow) {
-      // Idempotent return
-      return createJSONResponse({
+    // --- Idempotency (fast) ---
+    const existing = findByRequestIdFast(sheet, data.requestId);
+    if (existing) {
+      return json({
         ok: true,
-        requestId: requestId,
+        requestId: data.requestId,
         message: "Already processed",
-        driveFolderUrl: existingRow.driveFolderUrl,
-        calendarEventId: existingRow.calendarEventId,
-        calendarEventUrl: existingRow.calendarEventUrl
+        sheetRowIndex: existing.rowIndex,
+        driveFolderUrl: existing.driveFolderUrl || "",
+        calendarEventId: existing.calendarEventId || "",
+        calendarEventUrl: existing.calendarEventUrl || ""
       });
     }
 
-    // 5. Process New Lead
-    const processingResult = processLead(data);
+    // --- Process lead ---
+    const result = processLead(data);
 
-    // 6. Append to Sheet
-    const rowData = [
-      new Date(), // timestamp
-      requestId,
+    // Append row
+    sheet.appendRow([
+      new Date(),
+      data.requestId,
       data.fullName,
       data.phone,
       data.email || "",
@@ -84,42 +82,53 @@ function doPost(e) {
       data.preferredDate || "",
       data.preferredTime || "",
       data.source || "website",
-      processingResult.status,
-      processingResult.driveFolderUrl || "",
-      processingResult.calendarEventId || "",
-      processingResult.calendarEventUrl || "",
-      processingResult.staffNotified ? "YES" : "NO",
-      processingResult.confirmationSent ? "YES" : "NO",
-      processingResult.notes || "",
-      JSON.stringify(data) // rawJson
-    ];
+      result.status || "NEW",
+      result.driveFolderUrl || "",
+      result.calendarEventId || "",
+      result.calendarEventUrl || "",
+      result.staffNotified ? "YES" : "NO",
+      result.confirmationSent ? "YES" : "NO",
+      result.notes || "",
+      JSON.stringify(sanitizeRaw(data))
+    ]);
 
-    sheet.appendRow(rowData);
-    const lastRowIndex = sheet.getLastRow();
+    const rowIndex = sheet.getLastRow();
 
-    // 7. Success Response
-    return createJSONResponse({
+    return json({
       ok: true,
-      requestId: requestId,
-      sheetRowIndex: lastRowIndex,
-      driveFolderUrl: processingResult.driveFolderUrl,
-      calendarEventId: processingResult.calendarEventId,
-      calendarEventUrl: processingResult.calendarEventUrl,
+      requestId: data.requestId,
+      sheetRowIndex: rowIndex,
+      driveFolderUrl: result.driveFolderUrl || "",
+      calendarEventId: result.calendarEventId || "",
+      calendarEventUrl: result.calendarEventUrl || "",
       message: "Lead processed successfully"
     });
 
   } catch (err) {
     Logger.log(err);
-    return createJSONResponse({ error: "Internal Server Error", message: err.toString() }, 500);
+    return json({ ok: false, error: "Internal error", message: String(err) });
+  } finally {
+    lock.releaseLock();
   }
 }
 
 function doGet(e) {
-  // Simple health check
-  return createJSONResponse({ status: "ok", timestamp: new Date().toISOString() });
+  return json({ ok: true, status: "ok", timestamp: new Date().toISOString() });
 }
 
-// --- Helper Functions ---
+// ---------- helpers ----------
+
+function mustProp(name) {
+  const v = PROPS.getProperty(name);
+  if (!v) throw new Error("Missing Script Property: " + name);
+  return v;
+}
+
+function json(obj) {
+  return ContentService
+    .createTextOutput(JSON.stringify(obj))
+    .setMimeType(ContentService.MimeType.JSON);
+}
 
 function validate(data) {
   const errors = [];
@@ -132,35 +141,38 @@ function validate(data) {
   }
 
   if (data.phone) {
-    const cleanPhone = data.phone.replace(/[^0-9+]/g, '');
-    if (cleanPhone.length < 8 || cleanPhone.length > 15) {
-      errors.push("Phone length invalid (8-15 chars allowed)");
-    }
+    const clean = String(data.phone).replace(/[^0-9+]/g, "");
+    if (clean.length < 8 || clean.length > 15) errors.push("Phone length invalid (8-15)");
   }
 
   return errors;
 }
 
-function findRowByRequestId(sheet, requestId) {
-  const data = sheet.getDataRange().getValues();
-  // Assume requestId is column index 1 (0-based) based on headers
-  const REQUEST_ID_COL = 1;
+// Faster than reading whole sheet
+function findByRequestIdFast(sheet, requestId) {
+  const tf = sheet.createTextFinder(requestId).matchEntireCell(true).findNext();
+  if (!tf) return null;
 
-  for (let i = 1; i < data.length; i++) { // Skip header
-    if (data[i][REQUEST_ID_COL] === requestId) {
-      return {
-        rowIndex: i + 1,
-        driveFolderUrl: data[i][11],
-        calendarEventId: data[i][12],
-        calendarEventUrl: data[i][13]
-      };
-    }
-  }
-  return null;
+  const row = tf.getRow();
+  // columns based on your header ordering
+  const values = sheet.getRange(row, 1, 1, 18).getValues()[0];
+  return {
+    rowIndex: row,
+    driveFolderUrl: values[11],
+    calendarEventId: values[12],
+    calendarEventUrl: values[13]
+  };
+}
+
+function sanitizeRaw(data) {
+  // Never store token in sheet
+  const copy = JSON.parse(JSON.stringify(data));
+  delete copy.apiToken;
+  return copy;
 }
 
 function processLead(data) {
-  const result = {
+  const res = {
     status: "NEW",
     driveFolderUrl: "",
     calendarEventId: "",
@@ -170,145 +182,160 @@ function processLead(data) {
     notes: ""
   };
 
-  const parentFolderId = PROPS.getProperty('PARENT_FOLDER_ID');
-  const staffEmailsRaw = PROPS.getProperty('STAFF_EMAILS');
-  const staffEmails = staffEmailsRaw ? staffEmailsRaw.split(',').map(e => e.trim()) : [];
-  const calendarId = PROPS.getProperty('CALENDAR_ID');
+  const parentFolderId = PROPS.getProperty("PARENT_FOLDER_ID");
+  const staffEmails = (PROPS.getProperty("STAFF_EMAILS") || "")
+    .split(",").map(s => s.trim()).filter(Boolean);
+  const calendarId = PROPS.getProperty("CALENDAR_ID");
 
-  // A. Create Drive Folder
+  // Drive folder
   if (parentFolderId) {
     try {
-      const folderName = `${new Date().toISOString().slice(0,10)}_${data.fullName}_${data.phone}_${data.requestId}`;
-      const parentFolder = DriveApp.getFolderById(parentFolderId);
-      const newFolder = parentFolder.createFolder(folderName);
-      result.driveFolderUrl = newFolder.getUrl();
+      const parent = DriveApp.getFolderById(parentFolderId);
+      const folderName = safeFolderName(`${isoDate()}_${data.fullName}_${data.phone}_${data.requestId}`);
+      const folder = parent.createFolder(folderName);
+      res.driveFolderUrl = folder.getUrl();
 
-      // Permissions
-      if (staffEmails.length > 0) {
-        staffEmails.forEach(email => {
-          try { newFolder.addEditor(email); } catch (e) { console.error("Error sharing folder: " + e); }
-        });
-      }
+      staffEmails.forEach(email => {
+        try { folder.addEditor(email); } catch (e) { Logger.log("Share failed: " + email + " " + e); }
+      });
     } catch (e) {
-      result.notes += `Drive Error: ${e.message}; `;
-      console.error(e);
+      res.notes += `Drive Error: ${String(e)}; `;
     }
   }
 
-  // B. Calendar / Notification
+  // Calendar (optional)
   if (calendarId) {
     try {
       const cal = CalendarApp.getCalendarById(calendarId);
       if (cal) {
-        let title = `Appointment: ${data.fullName} (${data.phone})`;
-        let description = `Concern: ${data.concern || "N/A"}\n\nFolder: ${result.driveFolderUrl || "N/A"}`;
+        const title = `Appointment: ${data.fullName} (${data.phone})`;
+        const description = [
+          `Concern: ${data.concern || "N/A"}`,
+          `Folder: ${res.driveFolderUrl || "N/A"}`,
+          `RequestId: ${data.requestId}`
+        ].join("\n");
 
+        const dt = parsePreferredDateTime(data.preferredDate, data.preferredTime);
         let event;
-        if (data.preferredDate && data.preferredTime) {
-          // Parse date/time (assuming ISO or simple format, but handling simply here)
-          // Input expected: date "YYYY-MM-DD", time "HH:MM" (24h) or "HH:MM AM/PM"
-          // We'll try to construct a date object.
-          // Note: Browser/Node passes ISO strings ideally.
-          // Let's assume standard ISO "YYYY-MM-DD" and "HH:mm"
-
-          const dateTimeStr = `${data.preferredDate}T${convertTimeTo24(data.preferredTime)}`;
-          const startTime = new Date(dateTimeStr);
-          // Adjust for timezone if script is not in IST, but usually script runs in owner's TZ.
-          // For safety, we rely on the script's timezone setting or we can force it.
-          // Better: Create event in specific timezone
-          // Apps Script Dates are native JS Dates.
-
-          if (!isNaN(startTime.getTime())) {
-            const endTime = new Date(startTime.getTime() + 20 * 60000); // 20 mins
-            event = cal.createEvent(title, startTime, endTime, {description: description});
-          }
+        if (dt) {
+          const end = new Date(dt.getTime() + 20 * 60000);
+          event = cal.createEvent(title, dt, end, { description });
+        } else {
+          event = cal.createAllDayEvent(title + " [Unscheduled]", new Date(), { description });
         }
 
-        if (!event) {
-          // Fallback: All day event
-          event = cal.createAllDayEvent(title + " [Unscheduled]", new Date(), {description: description});
-        }
-
-        result.calendarEventId = event.getId();
-        // There is no direct getUrl() on CalendarEvent, but we can construct/guess or use advanced API.
-        // For simplicity, we skip the URL or leave blank, or use a generic calendar link.
-        // Actually, let's just leave ID.
-        result.calendarEventId = event.getId();
+        res.calendarEventId = event.getId();
+        // calendarEventUrl requires Advanced Calendar API (optional)
       }
     } catch (e) {
-       result.notes += `Calendar Error: ${e.message}; `;
-       // Fallback to email notification if calendar fails
-       notifyStaff(staffEmails, data, result.driveFolderUrl);
-       result.staffNotified = true;
+      res.notes += `Calendar Error: ${String(e)}; `;
     }
-  } else {
-    // No calendar, just notify
-    notifyStaff(staffEmails, data, result.driveFolderUrl);
-    result.staffNotified = true;
   }
 
-  // C. Send User Confirmation
+  // Staff notify (recommended always)
+  if (staffEmails.length) {
+    try {
+      notifyStaff(staffEmails, data, res.driveFolderUrl);
+      res.staffNotified = true;
+    } catch (e) {
+      res.notes += `Staff Notify Error: ${String(e)}; `;
+    }
+  }
+
+  // User email confirmation
   if (data.email) {
     try {
-      const subject = "Appointment Request Received";
-      let body = `Dear ${data.fullName},\n\nWe have received your appointment request.\n\n`;
-      if (result.calendarEventId) {
-        body += `We have tentatively blocked a slot for you on ${data.preferredDate} at ${data.preferredTime}.\n`;
-      } else {
-        body += `Our team will review your request and contact you shortly to confirm the details.\n`;
-      }
-      body += `\nReference ID: ${data.requestId}\n\nRegards,\nClinic Team`;
-
       MailApp.sendEmail({
         to: data.email,
-        subject: subject,
-        body: body
+        subject: "Appointment Request Received",
+        body: buildUserEmail(data, res)
       });
-      result.confirmationSent = true;
+      res.confirmationSent = true;
     } catch (e) {
-       result.notes += `Email Error: ${e.message}; `;
+      res.notes += `Email Error: ${String(e)}; `;
     }
   }
 
-  return result;
+  return res;
 }
 
 function notifyStaff(emails, data, folderUrl) {
-  if (!emails || emails.length === 0) return;
   const subject = `New Lead: ${data.fullName} - ${data.phone}`;
-  const body = `New lead submitted from website.\n\nName: ${data.fullName}\nPhone: ${data.phone}\nConcern: ${data.concern}\n\nDrive Folder: ${folderUrl}`;
+  const body = [
+    "New lead submitted from website.",
+    "",
+    `Name: ${data.fullName}`,
+    `Phone: ${data.phone}`,
+    `Email: ${data.email || "-"}`,
+    `City: ${data.city || "-"}`,
+    `Concern: ${data.concern || "-"}`,
+    `Preferred: ${(data.preferredDate || "-")} ${(data.preferredTime || "")}`,
+    "",
+    `Drive Folder: ${folderUrl || "-"}`
+  ].join("\n");
 
-  emails.forEach(email => {
-    try {
-      MailApp.sendEmail(email, subject, body);
-    } catch (e) {
-      console.error("Failed to notify staff: " + email);
-    }
-  });
+  emails.forEach(email => MailApp.sendEmail(email, subject, body));
 }
 
-function convertTimeTo24(timeStr) {
-  // Handle "09:00 AM", "2:30 PM", "14:00"
-  if (!timeStr) return "09:00";
-  const [time, modifier] = timeStr.split(' ');
-  let [hours, minutes] = time.split(':');
-  if (hours === '12') {
-    hours = '00';
-  }
-  if (modifier === 'PM') {
-    hours = parseInt(hours, 10) + 12;
-  }
-  return `${hours}:${minutes}:00`;
+function buildUserEmail(data, res) {
+  const lines = [
+    `Dear ${data.fullName},`,
+    "",
+    "We have received your appointment request.",
+    "",
+    `Reference ID: ${data.requestId}`,
+    "",
+    "Our team will contact you shortly to confirm the details.",
+    "",
+    "Regards,",
+    "Clinic Team"
+  ];
+  return lines.join("\n");
 }
 
-function createJSONResponse(data, statusCode) {
-  const output = ContentService.createTextOutput(JSON.stringify(data));
-  output.setMimeType(ContentService.MimeType.JSON);
+function parsePreferredDateTime(dateStr, timeStr) {
+  if (!dateStr || !timeStr) return null;
+  // expect YYYY-MM-DD and HH:MM (or "HH:MM AM/PM")
+  const parts = String(dateStr).split("-");
+  if (parts.length !== 3) return null;
+  const y = Number(parts[0]), m = Number(parts[1]), d = Number(parts[2]);
+  if (!y || !m || !d) return null;
 
-  // Note: Apps Script Web Apps don't strictly support setting HTTP status codes
-  // in the response headers the way standard APIs do. It always returns 200 OK
-  // from the Google server standpoint unless the script crashes.
-  // The client must parse the JSON body to check for "error" or "ok".
+  const t = to24h(timeStr);
+  if (!t) return null;
+  const hh = t.hh, mm = t.mm;
 
-  return output;
+  // Construct in script timezone (set script tz to Asia/Kolkata)
+  const dt = new Date(y, m - 1, d, hh, mm, 0);
+  if (isNaN(dt.getTime())) return null;
+  return dt;
+}
+
+function to24h(timeStr) {
+  const s = String(timeStr).trim().toUpperCase();
+  // "14:30"
+  let m = s.match(/^(\d{1,2}):(\d{2})$/);
+  if (m) return { hh: Number(m[1]), mm: Number(m[2]) };
+
+  // "2:30 PM"
+  m = s.match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/);
+  if (!m) return null;
+  let hh = Number(m[1]);
+  const mm = Number(m[2]);
+  const ampm = m[3];
+  if (hh === 12) hh = 0;
+  if (ampm === "PM") hh += 12;
+  return { hh, mm };
+}
+
+function isoDate() {
+  return Utilities.formatDate(new Date(), Session.getScriptTimeZone(), "yyyy-MM-dd");
+}
+
+function safeFolderName(name) {
+  return String(name)
+    .replace(/[\/\\:*?"<>|#%]/g, "-")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 180);
 }
