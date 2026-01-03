@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import OptimizedImage from './OptimizedImage';
+import Image from 'next/image';
 
 interface DoctorCardProps {
   priority?: boolean;
@@ -11,18 +11,14 @@ export default function DoctorCard({ priority = false }: DoctorCardProps) {
       <div className="text-center">
         {/* Doctor Photo - Professional Portrait */}
         <div className="w-32 h-32 rounded-full mx-auto mb-4 relative overflow-hidden shadow-lg">
-          <OptimizedImage
+          <Image
             src="/images/dr-sayuj-krishnan-portrait.jpg"
             alt="Dr. Sayuj Krishnan - Premier Neurosurgeon in Hyderabad"
             width={128}
             height={128}
-            className="object-cover w-full h-full rounded-full max-w-[128px]"
+            className="object-cover w-full h-full rounded-full"
             quality={75}
-            sizes="128px"
-            placeholder="blur"
             priority={priority}
-            loading={priority ? undefined : "lazy"}
-            decoding="async"
           />
         </div>
         
