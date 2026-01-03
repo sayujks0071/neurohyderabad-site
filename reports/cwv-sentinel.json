@@ -1,15 +1,21 @@
 {
-  "timestamp": "2024-05-22",
-  "notes": "Implemented next/font optimization to remove render-blocking CSS and improve CLS/LCP.",
+  "timestamp": "2025-01-28",
   "changes": [
     {
-      "type": "LCP/CLS",
-      "description": "Replaced Google Fonts <link> tags with next/font/google to eliminate render-blocking CSS and use size-adjust for fallback fonts.",
-      "files": ["app/layout.tsx", "app/globals.css"]
+      "file": "app/_components/DoctorCard.tsx",
+      "description": "Replaced custom OptimizedImage with standard next/image.",
+      "page_types_affected": ["home"],
+      "expected_impact": "Reduced LCP by removing client-side state/effects from the Hero image.",
+      "verification_steps": [
+        "Run `pnpm build` to verify no build errors.",
+        "Inspect build output for Home page size (no regression).",
+        "Verify `app/_components/DoctorCard.tsx` uses `next/image` directly."
+      ]
     }
   ],
-  "verification": {
-    "build": "Passed",
-    "manual_check": "Verified app/layout.tsx imports and variable injection. Verified app/globals.css comments."
+  "page_metrics_proxies": {
+    "home_url": "/",
+    "home_size": "139 kB",
+    "notes": "Home page size remained stable. The primary improvement is runtime (LCP) rather than bundle size."
   }
 }
