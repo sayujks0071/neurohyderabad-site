@@ -30,7 +30,7 @@ export const PhysicianSchema: React.FC = () => {
     "affiliation": {
        "@type": "MedicalClinic",
        "name": "Yashoda Hospital Malakpet",
-       "@id": "https://www.drsayuj.info/locations/neurosurgeon-malakpet#clinic"
+       "@id": `https://www.drsayuj.info/${mainLocation.slug}#clinic`
     }
   };
 
