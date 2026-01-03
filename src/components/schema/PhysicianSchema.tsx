@@ -1,5 +1,5 @@
 import React from 'react';
-import { CANONICAL_PHYSICIAN_NAME, CANONICAL_TELEPHONE, getLocationById } from '../../data/locations';
+import { CANONICAL_PHYSICIAN_NAME, getLocationById } from '../../data/locations';
 
 // Using the first location (Secunderabad/Malakpet base) as the canonical address source for the physician
 // or we can hardcode the main clinic details if they differ.
