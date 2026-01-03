@@ -1,5 +1,5 @@
 import React from 'react';
-import { CANONICAL_PHYSICIAN_NAME, getLocationById } from '../../data/locations';
+import { CANONICAL_PHYSICIAN_NAME, CANONICAL_TELEPHONE, getLocationById } from '../../data/locations';
 
 // Using the first location (Secunderabad/Malakpet base) as the canonical address source for the physician
 // or we can hardcode the main clinic details if they differ.
@@ -17,7 +17,7 @@ export const PhysicianSchema: React.FC = () => {
     "@id": "https://www.drsayuj.info/#physician",
     "name": CANONICAL_PHYSICIAN_NAME,
     "url": "https://www.drsayuj.info/",
-    "telephone": CANONICAL_TELEPHONE,
+    "telephone": mainLocation.telephone,
     "image": "https://www.drsayuj.info/images/dr-sayuj-krishnan.jpg",
     "address": {
       "@type": "PostalAddress",
@@ -30,7 +30,7 @@ export const PhysicianSchema: React.FC = () => {
     "affiliation": {
        "@type": "MedicalClinic",
        "name": "Yashoda Hospital Malakpet",
-       "@id": `https://www.drsayuj.info/${mainLocation.slug}#clinic`
+       "@id": "https://www.drsayuj.info/locations/neurosurgeon-malakpet#clinic"
     }
   };
 

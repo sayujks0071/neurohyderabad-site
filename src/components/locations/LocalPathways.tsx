@@ -2,8 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 import { LocationData } from '../../data/locations';
 
-// In a real scenario, we might fetch these from a registry.
-// For now, I'll define simple maps.
 const SERVICE_MAP: Record<string, string> = {
   "endoscopic-spine-surgery-hyderabad": "Endoscopic Spine Surgery",
   "brain-tumor-surgery-hyderabad": "Brain Tumor Surgery",
