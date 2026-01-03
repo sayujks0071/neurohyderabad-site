@@ -51,6 +51,8 @@ async function addLeadToCRM(leadData: {
 }
 
 const ALLOWED_GENDERS = new Set(["male", "female", "other"]);
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const PHONE_REGEX = /^[+]?[0-9\s()-]{10,}$/;
 
 class ValidationError extends Error {
   constructor(message: string) {
@@ -69,6 +71,16 @@ function parseBookingData(payload: unknown): BookingData {
   const patientName = String(raw.patientName ?? "").trim();
   if (patientName.length < 3) {
     throw new ValidationError("Patient name is invalid.");
+  }
+
+  const email = String(raw.email ?? "").trim();
+  if (!EMAIL_REGEX.test(email)) {
+    throw new ValidationError("Email is invalid.");
+  }
+
+  const phone = String(raw.phone ?? "").trim();
+  if (!PHONE_REGEX.test(phone)) {
+    throw new ValidationError("Phone number is invalid.");
   }
 
   const ageValue =
@@ -99,6 +111,8 @@ function parseBookingData(payload: unknown): BookingData {
 
   return {
     patientName,
+    email,
+    phone,
     age: String(ageValue),
     gender: gender as BookingData["gender"],
     appointmentDate,
@@ -143,6 +157,8 @@ export async function POST(request: Request) {
     const source = request.headers.get("x-booking-source") || "website";
     void addLeadToCRM({
       fullName: booking.patientName,
+      email: booking.email,
+      phone: booking.phone,
       concern: booking.reason.substring(0, 100),
       preferredDate: booking.appointmentDate,
       preferredTime: booking.appointmentTime,
@@ -151,7 +167,6 @@ export async function POST(request: Request) {
         age: booking.age,
         gender: booking.gender,
         bookingReason: booking.reason,
-        contactMissing: true,
       },
     }).catch((error) => {
       console.error("[appointments/submit] Failed to add lead to CRM:", error);

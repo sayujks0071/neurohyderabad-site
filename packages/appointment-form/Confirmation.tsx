@@ -40,6 +40,14 @@ export default function Confirmation({
               </dd>
             </div>
             <div>
+              <dt className="font-medium text-slate-500">Email</dt>
+              <dd className="mt-1 text-slate-800">{bookingData.email}</dd>
+            </div>
+            <div>
+              <dt className="font-medium text-slate-500">Phone</dt>
+              <dd className="mt-1 text-slate-800">{bookingData.phone}</dd>
+            </div>
+            <div>
               <dt className="font-medium text-slate-500">Age</dt>
               <dd className="mt-1 text-slate-800">{bookingData.age}</dd>
             </div>

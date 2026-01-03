@@ -15,7 +15,7 @@ export async function sendConfirmationEmail(
     }
 
     console.info("--- APPOINTMENT EMAIL (simulation) ---");
-    console.info(`To: patient@example.com (placeholder)`);
+    console.info(`To: ${data.email}`);
     console.info(`From: hellodr@drsayuj.info`);
     console.info(`Subject: Appointment Request with Dr. Sayuj Krishnan`);
     console.info("---------------------------------------");
@@ -52,6 +52,8 @@ export async function sendAdminNotificationEmail(
       appointmentTime: data.appointmentTime,
       reason: data.reason,
       source,
+      email: data.email,
+      phone: data.phone,
     });
 
     if (result.success) {

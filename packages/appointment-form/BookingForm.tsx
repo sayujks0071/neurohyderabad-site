@@ -22,6 +22,14 @@ const schema: yup.ObjectSchema<BookingData> = yup
       .string()
       .required("Patient name is required")
       .min(3, "Name must be at least 3 characters"),
+    email: yup
+      .string()
+      .required("Email is required")
+      .email("Please enter a valid email address"),
+    phone: yup
+      .string()
+      .required("Phone number is required")
+      .matches(/^[0-9+\s()-]{10,}$/, "Please enter a valid phone number"),
     age: yup
       .string()
       .required("Age is required")
@@ -45,6 +53,8 @@ const schema: yup.ObjectSchema<BookingData> = yup
 
 const defaultValues: BookingData = {
   patientName: "",
+  email: "",
+  phone: "",
   age: "",
   gender: "",
   appointmentDate: "",
@@ -112,6 +122,27 @@ export default function BookingForm({
                 autoComplete="name"
                 {...register("patientName")}
                 error={errors.patientName?.message}
+                required
+              />
+            </div>
+
+            <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+              <Input
+                label="Email Address"
+                id="email"
+                type="email"
+                autoComplete="email"
+                {...register("email")}
+                error={errors.email?.message}
+                required
+              />
+              <Input
+                label="Phone Number"
+                id="phone"
+                type="tel"
+                autoComplete="tel"
+                {...register("phone")}
+                error={errors.phone?.message}
                 required
               />
             </div>
