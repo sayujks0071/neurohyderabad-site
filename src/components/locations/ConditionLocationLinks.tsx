@@ -14,7 +14,7 @@ export const ConditionLocationLinks: React.FC<ConditionLocationLinksProps> = ({ 
         {conditionName ? `Where to Consult for ${conditionName}` : "Where to Consult in Hyderabad"}
       </h3>
       <p className="text-gray-700 mb-4">
-        Get expert opinion and treatment for {conditionName ? conditionName.toLowerCase() : "your condition"} from Dr. Sayuj Krishnan.
+        Get expert opinion and treatment for {conditionName ?? "your condition"} from Dr. Sayuj Krishnan.
         Serving patients from across the city:
       </p>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
