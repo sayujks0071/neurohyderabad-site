@@ -17,8 +17,8 @@ export const ConditionLocationLinks: React.FC<ConditionLocationLinksProps> = ({ 
         Get expert opinion and treatment for {conditionName ? conditionName.toLowerCase() : "your condition"} from Dr. Sayuj Krishnan.
         Serving patients from across the city:
       </p>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
-        {locations.slice(0, 4).map(location => (
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6">
+        {locations.map(location => (
           <Link
             key={location.id}
             href={`/${location.slug}`}
