@@ -17,7 +17,7 @@ export const PhysicianSchema: React.FC = () => {
     "@id": "https://www.drsayuj.info/#physician",
     "name": CANONICAL_PHYSICIAN_NAME,
     "url": "https://www.drsayuj.info/",
-    "telephone": mainLocation.telephone,
+    "telephone": CANONICAL_TELEPHONE,
     "image": "https://www.drsayuj.info/images/dr-sayuj-krishnan.jpg",
     "address": {
       "@type": "PostalAddress",
