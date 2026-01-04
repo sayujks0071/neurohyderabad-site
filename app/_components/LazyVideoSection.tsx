@@ -9,7 +9,7 @@ const PatientEducationVideos = dynamic(() => import('./PatientEducationVideos'),
     <div className="py-16 bg-white">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="animate-pulse bg-gray-200 h-64 rounded-lg"></div>
+          <div className="animate-pulse bg-gray-200 h-[800px] md:h-[600px] rounded-lg"></div>
         </div>
       </div>
     </div>
@@ -44,7 +44,7 @@ export default function LazyVideoSection() {
         <div className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              <div className="animate-pulse bg-gray-200 h-64 rounded-lg"></div>
+              <div className="animate-pulse bg-gray-200 h-[800px] md:h-[600px] rounded-lg"></div>
             </div>
           </div>
         </div>
