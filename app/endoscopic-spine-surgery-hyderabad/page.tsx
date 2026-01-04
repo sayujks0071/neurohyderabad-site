@@ -2,6 +2,8 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Metadata } from "next";
+import RelatedMedicalInsights from "../../src/components/RelatedMedicalInsights";
+import { relatedBlogs } from "../../src/data/related-blogs";
 
 export const metadata: Metadata = {
   title: "Endoscopic Spine Surgery in Hyderabad | Cost & Best Surgeon",
@@ -464,6 +466,9 @@ export default function Page() {
           </div>
         </div>
       </section>
+
+      {/* Related Blogs Section */}
+      <RelatedMedicalInsights blogs={relatedBlogs} />
 
       <section>
         <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
