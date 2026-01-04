@@ -8,6 +8,8 @@ import SourceList from '@/app/_components/SourceList';
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import { SITE_URL } from "@/src/lib/seo";
 import { sources } from '../../blog/sources';
+import { ConditionLocationLinks } from '@/src/components/locations/ConditionLocationLinks';
+import { PhysicianSchema } from "@/src/components/schema/PhysicianSchema";
 
 // Static generation with 24-hour revalidation
 export const revalidate = 86400;
@@ -101,44 +103,7 @@ const schemaData = [
         item: CANONICAL,
       },
     ],
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "Physician",
-    name: "Dr. Sayuj Krishnan",
-    medicalSpecialty: "Neurosurgery",
-    url: SITE_URL,
-    sameAs: [],
-    telephone: "+91 9778280044",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "Room 317, OPD Block, Yashoda Hospital, Malakpet",
-      addressLocality: "Hyderabad",
-      addressRegion: "Telangana",
-      postalCode: "500036",
-      addressCountry: "IN",
-    },
-    affiliation: {
-      "@type": "MedicalClinic",
-      name: "Yashoda Hospital Malakpet",
-    },
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "MedicalClinic",
-    name: "Dr. Sayuj Krishnan - Brain & Spine Clinic",
-    url: SITE_URL,
-    areaServed: "Hyderabad",
-    telephone: "+91 9778280044",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "Room 317, OPD Block, Yashoda Hospital, Malakpet",
-      addressLocality: "Hyderabad",
-      addressRegion: "Telangana",
-      postalCode: "500036",
-      addressCountry: "IN",
-    },
-  },
+  }
 ] as const;
 
 const faqItems = [
@@ -228,6 +193,7 @@ export default function BrainTumorSurgeryConditionPage() {
   return (
     <main className="bg-white">
       <SchemaScript id="brain-tumor-condition-jsonld" data={schemaData} />
+      <PhysicianSchema />
 
       <section className="bg-slate-900 py-12 text-white">
         <div className="mx-auto max-w-5xl px-4">
@@ -455,7 +421,7 @@ export default function BrainTumorSurgeryConditionPage() {
           <h2 className="text-2xl font-semibold text-gray-900">
             Frequently Asked Questions
           </h2>
-          <div className="mt-6 space-y-4">
+          <div className="mt-6 space-y-4 mb-12">
             {faqItems.map((item) => (
               <details
                 key={item.question}
@@ -468,6 +434,7 @@ export default function BrainTumorSurgeryConditionPage() {
               </details>
             ))}
           </div>
+          <ConditionLocationLinks conditionName="Brain Tumor Surgery" />
         </div>
       </section>
 

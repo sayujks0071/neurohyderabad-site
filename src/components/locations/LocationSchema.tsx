@@ -19,7 +19,7 @@ export const LocationSchema: React.FC<LocationSchemaProps> = ({ location, breadc
     "name": location.canonical_display_name,
     "url": "https://www.drsayuj.info/",
     "telephone": location.telephone,
-    "image": "https://www.drsayuj.info/images/dr-sayuj-krishnan.jpg" // Assuming this exists or using OG
+    "image": "https://www.drsayuj.info/images/dr-sayuj-krishnan.jpg"
   };
 
   // 2. MedicalClinic / LocalBusiness Schema (Per Location)

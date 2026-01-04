@@ -1,18 +1,41 @@
-import { SITE_URL } from "../../../src/lib/seo";
-import type { Metadata } from "next";
-import Link from "next/link";
+import React from "react";
+import { getLocationById } from "@/src/data/locations";
+import { LocationNAPCard } from "@/src/components/locations/LocationNAPCard";
+import { LocationCTAs } from "@/src/components/locations/LocationCTAs";
+import { LocationMapEmbed } from "@/src/components/locations/LocationMapEmbed";
+import { LocalPathways } from "@/src/components/locations/LocalPathways";
+import { LocationSchema } from "@/src/components/locations/LocationSchema";
+import { notFound } from "next/navigation";
 
-export const metadata: Metadata = {
+// Force static generation
+export const dynamic = 'force-static';
+export const dynamicParams = false;
+export const revalidate = 86400;
+
+export const metadata = {
   title: "Neurosurgeon in LB Nagar, Hyderabad | Dr Sayuj Krishnan",
   description: "Expert neurosurgeon serving LB Nagar. Dr Sayuj Krishnan offers spine and brain surgery at nearby Yashoda Hospital. Accessible from Vanasthalipuram, Nagole.",
   alternates: {
-    canonical: `${SITE_URL}/locations/lb-nagar/`,
+    canonical: "https://www.drsayuj.info/locations/lb-nagar/",
   },
 };
 
 export default function LBNagarLocationPage() {
+  const location = getLocationById("lb-nagar");
+
+  if (!location) {
+    return notFound();
+  }
+
+  const breadcrumb = [
+      { name: "Locations", item: "https://www.drsayuj.info/locations" },
+      { name: "Neurosurgeon in LB Nagar", item: "https://www.drsayuj.info/locations/lb-nagar" },
+  ];
+
   return (
     <main className="container mx-auto px-4 py-16">
+      <LocationSchema location={location} breadcrumb={breadcrumb} />
+
       <article className="max-w-4xl mx-auto">
         <h1 className="text-4xl font-bold mb-8 text-center">Neurosurgeon Near LB Nagar</h1>
         
@@ -22,15 +45,13 @@ export default function LBNagarLocationPage() {
           </p>
         </section>
 
-        <section className="mb-8 bg-blue-50 p-6 rounded-lg">
-          <h2 className="text-2xl font-semibold mb-4">Clinic Details</h2>
-          <div className="space-y-2 text-gray-700">
-            <p><strong>Yashoda Hospital, Malakpet</strong></p>
-            <p>Room No 317, OPD Block, Nalgonda X Roads, Malakpet, Hyderabad 500036</p>
-            <p><strong>Phone:</strong> <a href="tel:+919778280044" className="text-blue-600 hover:underline">+91-9778280044</a></p>
-            <p><strong>Email:</strong> <a href="mailto:hellodr@drsayuj.info" className="text-blue-600 hover:underline">hellodr@drsayuj.info</a></p>
-            <p><strong>From LB Nagar:</strong> ~4 km, 10-15 minutes</p>
-          </div>
+        <section className="mb-8">
+            <LocationNAPCard location={location} />
+        </section>
+
+        <section className="mb-8">
+            <h2 className="text-2xl font-semibold mb-4">Clinic Actions</h2>
+            <LocationCTAs location={location} />
         </section>
 
         <section className="mb-8">
@@ -73,30 +94,13 @@ export default function LBNagarLocationPage() {
           </p>
         </section>
 
-        <section className="bg-blue-50 p-6 rounded-lg text-center">
-          <h3 className="text-lg font-semibold mb-4">Book Your Consultation from LB Nagar</h3>
-          <Link href="/appointments" className="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-colors inline-block">
-            Book Appointment
-          </Link>
+        <section className="mb-8">
+            <h2 className="text-2xl font-semibold mb-4">Location Map</h2>
+            <LocationMapEmbed location={location} />
         </section>
-      </article>
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "LocalBusiness",
-            "name": "Dr Sayuj Krishnan - Neurosurgeon serving LB Nagar",
-            "areaServed": {
-              "@type": "Place",
-              "name": "LB Nagar, Hyderabad"
-            },
-            "telephone": "+919778280044",
-            "email": "hellodr@drsayuj.info"
-          })
-        }}
-      />
+        <LocalPathways location={location} />
+      </article>
     </main>
   );
 }
