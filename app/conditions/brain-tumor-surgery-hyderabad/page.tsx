@@ -434,7 +434,7 @@ export default function BrainTumorSurgeryConditionPage() {
               </details>
             ))}
           </div>
-          <ConditionLocationLinks conditionName="Brain Tumor Surgery" />
+           <ConditionLocationLinks />
         </div>
       </section>
 

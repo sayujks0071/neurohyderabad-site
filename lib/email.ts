@@ -1,7 +1,8 @@
 import { Resend } from 'resend';
 
 // Initialize Resend with API key
-const resend = new Resend(process.env.RESEND_API_KEY || 're_YJVHwSAs_PxKJHrCFidkmuFAkvNuQL1by');
+// 🛡️ Sentinel: Removed hardcoded API key. Using env var or development placeholder.
+const resend = new Resend(process.env.RESEND_API_KEY || 're_development_key');
 
 // Email configuration
 const FROM_EMAIL = 'Dr. Sayuj Krishnan <hellodr@drsayuj.info>';
