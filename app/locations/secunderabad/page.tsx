@@ -1,89 +1,102 @@
-import { SITE_URL } from "../../../src/lib/seo";
-import type { Metadata } from "next";
-import Link from "next/link";
+import React from "react";
+import { getLocationById } from "@/src/data/locations";
+import { LocationNAPCard } from "@/src/components/locations/LocationNAPCard";
+import { LocationCTAs } from "@/src/components/locations/LocationCTAs";
+import { LocationMapEmbed } from "@/src/components/locations/LocationMapEmbed";
+import { LocalPathways } from "@/src/components/locations/LocalPathways";
+import { LocationSchema } from "@/src/components/locations/LocationSchema";
+import { notFound } from "next/navigation";
 
-export const metadata: Metadata = {
-  title: "Neurosurgeon in Secunderabad | Dr Sayuj Krishnan - Spine & Brain Surgery",
-  description: "Expert neurosurgeon serving Secunderabad. Dr Sayuj Krishnan offers endoscopic spine surgery, brain tumor surgery. Accessible from Tarnaka, Malkajgiri, Alwal.",
-  alternates: {
-    canonical: `${SITE_URL}/locations/secunderabad/`,
+// Force static generation
+export const dynamic = 'force-static';
+export const dynamicParams = false;
+export const revalidate = 86400;
+
+export const metadata = {
+  title: "Neurosurgeon in Secunderabad | Dr. Sayuj Krishnan",
+  description: "Consult Dr. Sayuj Krishnan near Secunderabad for endoscopic spine & minimally invasive brain surgery. OPD timings, parking, directions.",
+  // Point canonical to the root page to consolidate SEO value
+  alternates: { canonical: "https://www.drsayuj.info/neurosurgeon-secunderabad" },
+  openGraph: {
+    title: "Neurosurgeon in Secunderabad | Dr. Sayuj Krishnan",
+    description: "Consult Dr. Sayuj Krishnan near Secunderabad for endoscopic spine & minimally invasive brain surgery. OPD timings, parking, directions.",
+    url: "https://www.drsayuj.info/neurosurgeon-secunderabad",
+    type: "article",
+    images: [
+      {
+        url: "https://www.drsayuj.info/images/og-default.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Dr Sayuj Krishnan - Neurosurgeon for Secunderabad patients",
+      },
+    ],
   },
 };
 
+const FAQ = [
+  { q: "How far is the OPD from Secunderabad?", a: "Yashoda Malakpet is about 8-10 km from Secunderabad station (approx 20-30 mins)." },
+  { q: "Do you treat brain tumors?", a: "Yes, we specialize in minimally invasive brain tumor surgery." },
+];
+
 export default function SecunderabadLocationPage() {
+  const location = getLocationById("secunderabad");
+
+  if (!location) {
+    return notFound();
+  }
+
+  const breadcrumb = [
+     { name: "Neurosurgeon in Secunderabad", item: `https://www.drsayuj.info/${location.slug}` },
+  ];
+
   return (
-    <main className="container mx-auto px-4 py-16">
-      <article className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8 text-center">Neurosurgeon Serving Secunderabad</h1>
-        
-        <section className="mb-8">
-          <p className="text-lg text-gray-700 mb-4">
-            Dr Sayuj Krishnan provides expert neurosurgical care for Secunderabad residents at Yashoda Hospital, Malakpet—easily accessible via the Inner Ring Road.
+    <main className="mx-auto max-w-5xl px-4 py-10">
+      <LocationSchema location={location} breadcrumb={breadcrumb} faq={FAQ} />
+
+      <h1 className="text-3xl md:text-4xl font-bold">Neurosurgeon in Secunderabad</h1>
+      <p className="mt-4 text-lg">
+        Serving patients from <strong>Secunderabad</strong> and nearby localities. OPD at Yashoda Hospitals (Malakpet) with endoscopic spine expertise.
+      </p>
+
+      <div className="mt-6">
+         <LocationCTAs location={location} />
+      </div>
+
+      <section className="grid md:grid-cols-2 gap-8 mt-10">
+        <div>
+          <LocationNAPCard location={location} className="mb-6" />
+
+          <h2 className="text-2xl font-semibold">OPD Timings</h2>
+          <ul className="mt-3 list-disc pl-5">
+            <li>Mon–Sat, 10:00–16:00 (IST)</li>
+            <li>Emergency 24×7 via hospital triage</li>
+          </ul>
+
+          <h3 className="text-xl font-semibold mt-6">Directions from Secunderabad</h3>
+          <p className="mt-3">
+            From Secunderabad Station → Mettuguda → Tarnaka → Amberpet → Malakpet.
           </p>
-        </section>
+        </div>
 
-        <section className="mb-8 bg-blue-50 p-6 rounded-lg">
-          <h2 className="text-2xl font-semibold mb-4">Clinic Location</h2>
-          <div className="space-y-2 text-gray-700">
-            <p><strong>Yashoda Hospital, Malakpet</strong></p>
-            <p>Room No 317, OPD Block, Nalgonda X Roads, Malakpet, Hyderabad 500036</p>
-            <p><strong>Phone:</strong> <a href="tel:+919778280044" className="text-blue-600 hover:underline">+91-9778280044</a></p>
-            <p><strong>From Secunderabad:</strong> ~10 km, 30-40 minutes via Mettuguda and Inner Ring Road</p>
-          </div>
-        </section>
+        <div>
+          <h2 className="text-2xl font-semibold mb-3">Map</h2>
+          <LocationMapEmbed location={location} />
+        </div>
+      </section>
 
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">Common Conditions Treated</h2>
-          <div className="grid md:grid-cols-2 gap-4">
-            <div className="bg-white p-4 rounded-lg shadow-sm border">
-              <h3 className="font-semibold text-blue-700 mb-2">Lumbar Disc Herniation</h3>
-              <p className="text-sm text-gray-600">Endoscopic discectomy for sciatica relief</p>
-            </div>
-            <div className="bg-white p-4 rounded-lg shadow-sm border">
-              <h3 className="font-semibold text-blue-700 mb-2">Cervical Spondylotic Myelopathy</h3>
-              <p className="text-sm text-gray-600">Spinal cord decompression surgery</p>
-            </div>
-            <div className="bg-white p-4 rounded-lg shadow-sm border">
-              <h3 className="font-semibold text-blue-700 mb-2">Brain Tumors</h3>
-              <p className="text-sm text-gray-600">Microsurgical tumor removal</p>
-            </div>
-            <div className="bg-white p-4 rounded-lg shadow-sm border">
-              <h3 className="font-semibold text-blue-700 mb-2">Trigeminal Neuralgia</h3>
-              <p className="text-sm text-gray-600">Microvascular decompression</p>
-            </div>
-          </div>
-        </section>
+      <section className="mt-10">
+        <h2 className="text-2xl font-semibold">FAQs</h2>
+        <div className="mt-4 space-y-4">
+          {FAQ.map(({ q, a }) => (
+            <details key={q} className="rounded-xl border p-4">
+              <summary className="font-medium">{q}</summary>
+              <p className="mt-2">{a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
 
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">Areas Served Near Secunderabad</h2>
-          <p className="text-gray-700">
-            Tarnaka, Malkajgiri, Alwal, East Marredpally, West Marredpally, Begumpet, Bowenpally, Trimulgherry, and all parts of Secunderabad.
-          </p>
-        </section>
-
-        <section className="bg-blue-50 p-6 rounded-lg text-center">
-          <h3 className="text-lg font-semibold mb-4">Schedule Your Consultation from Secunderabad</h3>
-          <Link href="/appointments" className="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-colors inline-block">
-            Book Appointment
-          </Link>
-        </section>
-      </article>
-
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "LocalBusiness",
-            "name": "Dr Sayuj Krishnan - Neurosurgeon serving Secunderabad",
-            "areaServed": {
-              "@type": "Place",
-              "name": "Secunderabad, Hyderabad"
-            },
-            "telephone": "+919778280044"
-          })
-        }}
-      />
+      <LocalPathways location={location} />
     </main>
   );
 }

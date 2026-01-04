@@ -11,7 +11,10 @@ import { buildLocalServiceSchema } from '@/src/lib/schema/localService';
 import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import TrustProof from '@/app/_components/TrustProof';
+import { ServiceLocationLinks } from '@/src/components/locations/ServiceLocationLinks';
 import { getServiceSources } from '../sources';
+import { ServiceLocationLinks } from '@/src/components/locations/ServiceLocationLinks';
+import { PhysicianSchema } from "@/src/components/schema/PhysicianSchema";
 
 const SERVICE_SLUG = 'endoscopic-spine-surgery-hyderabad';
 
@@ -136,6 +139,7 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
     <>
       <JsonLd data={schema} />
       <JsonLd data={gbpSchema} />
+      <PhysicianSchema />
       <main className="container mx-auto px-4 py-16">
         <Breadcrumbs
           items={[
@@ -275,6 +279,7 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
             neighbourhoods. We help with corporate approvals, insurance paperwork, and travel coordination for families who support
             you during the procedure.
           </p>
+          <ServiceLocationLinks className="mb-8" serviceName="Endoscopic Spine Surgery" />
           <div className="grid md:grid-cols-2 gap-6">
             <div className="bg-blue-50 border border-blue-100 rounded-xl p-6">
               <h3 className="text-lg font-semibold text-blue-800 mb-3">Pre-Surgery Preparation</h3>
@@ -350,6 +355,8 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
             </Link>
           </div>
         </section>
+
+        <ServiceLocationLinks />
 
         <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
         <ReviewedBy lastReviewed="2025-10-19" />

@@ -13,6 +13,8 @@ import { getServiceSources } from '../sources';
 import JsonLd from '@/components/JsonLd';
 import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
+import { ServiceLocationLinks } from '@/src/components/locations/ServiceLocationLinks';
+import { PhysicianSchema } from "@/src/components/schema/PhysicianSchema";
 
 const baseMetadata = makeMetadata({
   title: 'Endoscopic Spine Surgery Hyderabad | Dr. Sayuj Krishnan',
@@ -182,6 +184,7 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
         ]}
       />
       <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/minimally-invasive-spine-surgery`} />
+      <PhysicianSchema />
       <div className="min-h-screen bg-white">
         <script
           type="application/ld+json"
@@ -205,6 +208,10 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
             <a href="mailto:hellodr@drsayuj.info" className="text-blue-600 hover:underline ml-2">hellodr@drsayuj.info</a> •
             <Link href="/appointments" className="text-blue-600 hover:underline ml-2">Appointments</Link>
           </p>
+        </section>
+
+        <section className="mb-12">
+            <ServiceLocationLinks serviceName="Minimally Invasive Spine Surgery" />
         </section>
 
         <section className="mb-10 rounded-lg border border-green-200 bg-green-50 p-6">

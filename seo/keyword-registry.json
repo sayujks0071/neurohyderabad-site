@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-02",
+  "last_updated": "2026-01-03",
   "keywords": [
     {
       "term": "neurosurgeon hyderabad",
@@ -42,6 +42,18 @@
       "difficulty": "Med",
       "volume": "Low",
       "target_page": "/conditions/cervical-myelopathy-decompression-hyderabad"
+    },
+    {
+      "term": "spine surgery recovery time",
+      "difficulty": "Med",
+      "volume": "Med",
+      "target_page": "/blog/endoscopic-spine-surgery-recovery-timeline"
+    },
+    {
+      "term": "laser spine surgery hyderabad",
+      "difficulty": "High",
+      "volume": "Med",
+      "target_page": "/services/minimally-invasive-spine-surgery"
     }
   ]
 }

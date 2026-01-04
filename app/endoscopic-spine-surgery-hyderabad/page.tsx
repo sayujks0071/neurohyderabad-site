@@ -1,11 +1,12 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Endoscopic Spine Surgery in Hyderabad | Best Spine Surgeon | Dr. Sayuj",
+  title: "Endoscopic Spine Surgery in Hyderabad | Cost & Best Surgeon",
   description:
-    "Expert endoscopic spine surgery in Hyderabad (TELD, IELD, Cervical) by Dr. Sayuj Krishnan. Minimally invasive, suture-less treatment for slip disc & sciatica. Check red flags, cost & recovery.",
+    "Expert endoscopic spine surgery in Hyderabad by Dr. Sayuj Krishnan. Minimally invasive (TESS/ILESS), transparent cost estimates (₹1.5L - ₹3.5L), and 90%+ success rates. German-trained specialist at Yashoda Hospital.",
   alternates: { canonical: "https://www.drsayuj.info/endoscopic-spine-surgery-hyderabad" },
   openGraph: {
     title: "Endoscopic Spine Surgery in Hyderabad | Dr. Sayuj Krishnan",
@@ -113,25 +114,43 @@ export default function Page() {
         </div>
       </header>
 
-      {/* Trust & Expertise Section */}
-      <section className="mb-12 bg-blue-50 p-8 rounded-2xl border border-blue-100 shadow-sm">
-        <h2 className="text-2xl font-bold text-blue-900 mb-6">Why Choose Endoscopic Spine Surgery with Dr. Sayuj?</h2>
-        <div className="grid md:grid-cols-3 gap-6">
-          <div className="flex flex-col gap-2">
-            <span className="text-3xl">🇩🇪</span>
-            <h3 className="font-semibold text-lg">German-Trained</h3>
-            <p className="text-sm text-gray-700">Fellowship training in advanced full-endoscopic spine techniques, ensuring international standards of care.</p>
+      {/* Surgeon Profile Section (E-E-A-T) */}
+      <section className="mb-12 bg-gradient-to-r from-gray-50 to-white p-8 rounded-2xl border border-gray-100 shadow-sm flex flex-col md:flex-row gap-8 items-center">
+        <div className="flex-1 space-y-4">
+          <span className="text-blue-600 font-bold tracking-wider text-sm uppercase">Meet Your Surgeon</span>
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Dr. Sayuj Krishnan</h2>
+          <p className="text-gray-700 text-lg">
+            Consultant Neurosurgeon & Endoscopic Spine Specialist
+          </p>
+          <p className="text-gray-600 leading-relaxed">
+            With advanced fellowship training in Germany, Dr. Sayuj specializes in Full Endoscopic Spine Surgery. He is committed to delivering international standards of minimally invasive care at Yashoda Hospitals, Hyderabad.
+          </p>
+          <div className="flex flex-wrap gap-3 mt-4">
+             <span className="px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full">German Trained</span>
+             <span className="px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full">Minimally Invasive Expert</span>
+             <span className="px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full">Complex Spine</span>
           </div>
-          <div className="flex flex-col gap-2">
-            <span className="text-3xl">🔬</span>
-            <h3 className="font-semibold text-lg">Pin-Hole Surgery</h3>
-            <p className="text-sm text-gray-700">Incisions less than 1cm mean minimal muscle damage, practically no blood loss, and tiny scars.</p>
-          </div>
-          <div className="flex flex-col gap-2">
-            <span className="text-3xl">🏥</span>
-            <h3 className="font-semibold text-lg">Premium Facility</h3>
-            <p className="text-sm text-gray-700">Performed at Yashoda Hospitals, Malakpet, utilizing the latest high-definition endoscopic visualization systems.</p>
-          </div>
+        </div>
+        <div className="shrink-0">
+           <div className="w-32 h-32 md:w-48 md:h-48 bg-gray-200 rounded-full overflow-hidden border-4 border-white shadow-lg relative">
+             <Image
+               src="/images/dr-sayuj-krishnan-portrait.jpg"
+               alt="Dr Sayuj Krishnan"
+               className="object-cover"
+               fill
+               sizes="(max-width: 768px) 128px, 192px"
+             />
+           </div>
+        </div>
+      </section>
+
+      {/* Success Rate Highlight */}
+      <section className="mb-12 text-center">
+        <div className="inline-block bg-green-50 border border-green-200 rounded-2xl p-8 max-w-4xl mx-auto">
+          <h2 className="text-3xl font-bold text-green-800 mb-2">90-95% Success Rate</h2>
+          <p className="text-gray-700 text-lg">
+            For correctly indicated candidates (e.g., herniated discs without instability), endoscopic spine surgery delivers <span className="font-semibold">exceptional outcomes</span> with high patient satisfaction and rapid return to daily life.
+          </p>
         </div>
       </section>
 
@@ -203,6 +222,35 @@ export default function Page() {
               </tr>
             </tbody>
           </table>
+        </div>
+      </section>
+
+      {/* Advanced Techniques Section */}
+      <section className="mb-12">
+        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">Advanced Endoscopic Techniques We Use</h2>
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
+            <h3 className="text-xl font-bold text-blue-900 mb-3">Transforaminal (TESS)</h3>
+            <p className="text-gray-700 mb-4">
+              The "keyhole" approach from the side of the spine.
+            </p>
+            <ul className="text-sm text-gray-600 space-y-2 list-disc list-inside">
+              <li>Bypasses the bone completely.</li>
+              <li>Ideal for foraminal stenosis and lateral disc herniations.</li>
+              <li>Preserves maximum spinal stability.</li>
+            </ul>
+          </div>
+          <div className="p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
+            <h3 className="text-xl font-bold text-blue-900 mb-3">Interlaminar (ILESS)</h3>
+            <p className="text-gray-700 mb-4">
+              The posterior approach through the natural window between vertebrae.
+            </p>
+             <ul className="text-sm text-gray-600 space-y-2 list-disc list-inside">
+              <li>Best for L5-S1 disc herniations due to pelvic anatomy.</li>
+              <li>Excellent for central canal stenosis decompression.</li>
+              <li>Similar to microdiscectomy but with much less trauma.</li>
+            </ul>
+          </div>
         </div>
       </section>
 
@@ -302,60 +350,87 @@ export default function Page() {
           </div>
         </article>
 
-        <article>
-           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">Recovery Roadmap</h2>
-           <div className="relative border-l-2 border-blue-200 ml-4 space-y-8 pl-8 py-2">
-             <div className="relative">
-               <span className="absolute -left-[41px] top-1 h-6 w-6 rounded-full bg-blue-600 border-4 border-white shadow-sm"></span>
-               <h3 className="font-bold text-lg text-gray-900">Day 0: Surgery & Mobilization</h3>
-               <p className="text-gray-700 mt-1">Surgery takes 60-90 mins. You are encouraged to walk with support within 3-4 hours after the effect of anesthesia wears off.</p>
-             </div>
-             <div className="relative">
-               <span className="absolute -left-[41px] top-1 h-6 w-6 rounded-full bg-blue-600 border-4 border-white shadow-sm"></span>
-               <h3 className="font-bold text-lg text-gray-900">Day 1: Discharge</h3>
-               <p className="text-gray-700 mt-1">Most patients are discharged the same day or next morning with simple oral painkillers and instructions for wound care.</p>
-             </div>
-             <div className="relative">
-               <span className="absolute -left-[41px] top-1 h-6 w-6 rounded-full bg-blue-600 border-4 border-white shadow-sm"></span>
-               <h3 className="font-bold text-lg text-gray-900">Week 1-2: Light Activity</h3>
-               <p className="text-gray-700 mt-1">Short walks are encouraged. You can perform light household activities but should avoid bending, lifting, or twisting.</p>
-             </div>
-             <div className="relative">
-               <span className="absolute -left-[41px] top-1 h-6 w-6 rounded-full bg-blue-600 border-4 border-white shadow-sm"></span>
-               <h3 className="font-bold text-lg text-gray-900">Week 3+: Back to Work</h3>
-               <p className="text-gray-700 mt-1">Return to sedentary/desk jobs is typically allowed. Physical therapy begins to strengthen core muscles.</p>
-             </div>
-           </div>
-        </article>
-
-        <article className="bg-gray-50 border border-gray-200 rounded-2xl p-8 shadow-sm">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Transparent Pricing & Insurance</h2>
-          <p className="text-gray-700 mb-6 leading-relaxed">
-            Endoscopic spine surgery in Hyderabad is a cost-effective option. The reduced hospital stay and medication needs often lower the overall cost compared to traditional surgery.
-          </p>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div>
-              <h3 className="font-semibold text-blue-900 mb-2">Cost Factors</h3>
-              <ul className="list-disc list-inside text-gray-700 text-sm space-y-1">
-                <li>Hospital Room Category (General to Suite)</li>
-                <li>Complexity (Single vs. Multi-level)</li>
-                <li>Use of specialized implants (rare for simple discectomy)</li>
-              </ul>
+        {/* Recovery Roadmap */}
+        <section className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">Recovery Timeline: What to Expect</h2>
+          <div className="grid md:grid-cols-4 gap-6">
+            <div className="relative pl-6 md:pl-0 pt-0 md:pt-8 border-l-2 md:border-l-0 md:border-t-2 border-blue-200">
+              <span className="absolute -left-[9px] md:-top-[9px] md:left-0 w-4 h-4 bg-blue-600 rounded-full"></span>
+              <h3 className="font-bold text-lg text-gray-900 mb-2">Day of Surgery</h3>
+              <p className="text-gray-600 text-sm">Walk within 2-4 hours. Liquid diet. Pain is usually minimal.</p>
             </div>
-            <div>
-              <h3 className="font-semibold text-blue-900 mb-2">Insurance Support</h3>
-              <p className="text-gray-700 text-sm">
-                We accept most major health insurance policies and TPAs. Our team assists with:
-              </p>
-              <ul className="list-disc list-inside text-gray-700 text-sm space-y-1 mt-2">
-                <li>Cashless pre-authorization</li>
-                <li>Reimbursement documentation</li>
-                <li>Detailed cost estimation</li>
-              </ul>
+            <div className="relative pl-6 md:pl-0 pt-0 md:pt-8 border-l-2 md:border-l-0 md:border-t-2 border-blue-200">
+              <span className="absolute -left-[9px] md:-top-[9px] md:left-0 w-4 h-4 bg-blue-600 rounded-full"></span>
+              <h3 className="font-bold text-lg text-gray-900 mb-2">Day 1 (Discharge)</h3>
+              <p className="text-gray-600 text-sm">Go home. You can climb stairs and manage self-care independently.</p>
+            </div>
+            <div className="relative pl-6 md:pl-0 pt-0 md:pt-8 border-l-2 md:border-l-0 md:border-t-2 border-blue-200">
+              <span className="absolute -left-[9px] md:-top-[9px] md:left-0 w-4 h-4 bg-blue-600 rounded-full"></span>
+              <h3 className="font-bold text-lg text-gray-900 mb-2">Week 1-2</h3>
+              <p className="text-gray-600 text-sm">Short walks. Return to desk work (WFH). No heavy lifting or bending.</p>
+            </div>
+            <div className="relative pl-6 md:pl-0 pt-0 md:pt-8 border-l-2 md:border-l-0 md:border-t-2 border-green-200">
+              <span className="absolute -left-[9px] md:-top-[9px] md:left-0 w-4 h-4 bg-green-500 rounded-full"></span>
+              <h3 className="font-bold text-lg text-gray-900 mb-2">Week 4-6</h3>
+              <p className="text-gray-600 text-sm">Resume driving, gym, and full activity after doctor's clearance.</p>
             </div>
           </div>
-          <div className="mt-8 pt-6 border-t border-gray-200">
-            <a href="https://wa.me/919778280044?text=Hi%20I%20need%20cost%20estimate%20for%20endoscopic%20spine%20surgery" className="inline-flex items-center gap-2 text-green-700 font-bold hover:underline text-lg">
+        </section>
+
+        <article className="bg-white border border-gray-200 rounded-2xl p-8 shadow-md">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Estimated Cost of Endoscopic Spine Surgery in Hyderabad</h2>
+          <p className="text-gray-700 mb-6 leading-relaxed">
+            We believe in transparency. Below are estimated price ranges for common endoscopic procedures.
+            <span className="block mt-2 text-sm text-gray-500 italic">*Prices are indicative for the surgical procedure and standard ward stay. Final costs depend on room selection, insurance, and medical complexity.</span>
+          </p>
+
+          <div className="overflow-x-auto mb-8">
+            <table className="w-full border-collapse">
+              <thead>
+                <tr className="bg-gray-50 border-b border-gray-200">
+                  <th className="text-left p-4 font-semibold text-gray-900">Procedure</th>
+                  <th className="text-left p-4 font-semibold text-gray-900">Estimated Cost Range</th>
+                  <th className="text-left p-4 font-semibold text-gray-900">Typical Stay</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                <tr>
+                  <td className="p-4 text-gray-700 font-medium">Endoscopic Lumbar Discectomy</td>
+                  <td className="p-4 text-blue-800 font-bold">₹1,50,000 – ₹2,50,000</td>
+                  <td className="p-4 text-gray-600">1 Day</td>
+                </tr>
+                <tr>
+                  <td className="p-4 text-gray-700 font-medium">Endoscopic Decompression (Stenosis)</td>
+                  <td className="p-4 text-blue-800 font-bold">₹1,80,000 – ₹3,00,000</td>
+                  <td className="p-4 text-gray-600">1-2 Days</td>
+                </tr>
+                <tr>
+                  <td className="p-4 text-gray-700 font-medium">Cervical Endoscopic Surgery</td>
+                  <td className="p-4 text-blue-800 font-bold">₹2,00,000 – ₹3,50,000</td>
+                  <td className="p-4 text-gray-600">1-2 Days</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 pt-6 border-t border-gray-100">
+            <div>
+              <h3 className="font-semibold text-blue-900 mb-2">What Affects the Cost?</h3>
+              <ul className="list-disc list-inside text-gray-700 text-sm space-y-1">
+                <li>Hospital Room Category (General vs. Private vs. Suite)</li>
+                <li>Single-level vs. Multi-level surgery</li>
+                <li>Pre-existing medical conditions (e.g., Cardiac/Diabetes management)</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold text-blue-900 mb-2">Insurance & Cashless</h3>
+              <p className="text-gray-700 text-sm mb-2">
+                We accept all major health insurance providers. Our team handles the paperwork for a hassle-free cashless experience.
+              </p>
+            </div>
+          </div>
+          <div className="mt-8">
+            <a href="https://wa.me/919778280044?text=Hi%20I%20need%20a%20cost%20estimate%20for%20endoscopic%20spine%20surgery" className="inline-flex items-center gap-2 text-green-700 font-bold hover:underline text-lg">
               <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" role="img" aria-label="WhatsApp icon"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
               Get a Personalized Cost Estimate
             </a>
