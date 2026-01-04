@@ -17,7 +17,7 @@ export const PhysicianSchema: React.FC = () => {
     "@id": "https://www.drsayuj.info/#physician",
     "name": CANONICAL_PHYSICIAN_NAME,
     "url": "https://www.drsayuj.info/",
-    "telephone": mainLocation.telephone,
+    "telephone": CANONICAL_TELEPHONE,
     "image": "https://www.drsayuj.info/images/dr-sayuj-krishnan.jpg",
     "address": {
       "@type": "PostalAddress",
@@ -29,8 +29,8 @@ export const PhysicianSchema: React.FC = () => {
     },
     "affiliation": {
        "@type": "MedicalClinic",
-       "name": "Yashoda Hospital Malakpet",
-       "@id": "https://www.drsayuj.info/locations/neurosurgeon-malakpet#clinic"
+       "name": mainLocation.name,
+       "@id": `https://www.drsayuj.info/${mainLocation.slug}#clinic`
     }
   };
 
