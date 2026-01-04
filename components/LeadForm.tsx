@@ -115,6 +115,7 @@ export default function LeadForm() {
         <Input
           label="Full Name"
           id="fullName"
+          autoComplete="name"
           {...register("fullName")}
           error={errors.fullName?.message}
           required
@@ -125,6 +126,7 @@ export default function LeadForm() {
             label="Phone Number"
             id="phone"
             type="tel"
+            autoComplete="tel"
             {...register("phone")}
             error={errors.phone?.message}
             required
@@ -133,6 +135,7 @@ export default function LeadForm() {
             label="Email"
             id="email"
             type="email"
+            autoComplete="email"
             {...register("email")}
             error={errors.email?.message}
             required
@@ -142,6 +145,7 @@ export default function LeadForm() {
         <Input
           label="City"
           id="city"
+          autoComplete="address-level2"
           {...register("city")}
           error={errors.city?.message}
           required
