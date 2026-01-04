@@ -1,18 +1,41 @@
-import { SITE_URL } from "../../../src/lib/seo";
-import type { Metadata } from "next";
-import Link from "next/link";
+import React from "react";
+import { getLocationById } from "@/src/data/locations";
+import { LocationNAPCard } from "@/src/components/locations/LocationNAPCard";
+import { LocationCTAs } from "@/src/components/locations/LocationCTAs";
+import { LocationMapEmbed } from "@/src/components/locations/LocationMapEmbed";
+import { LocalPathways } from "@/src/components/locations/LocalPathways";
+import { LocationSchema } from "@/src/components/locations/LocationSchema";
+import { notFound } from "next/navigation";
 
-export const metadata: Metadata = {
+// Force static generation
+export const dynamic = 'force-static';
+export const dynamicParams = false;
+export const revalidate = 86400;
+
+export const metadata = {
   title: "Neurosurgeon in Banjara Hills, Hyderabad | Dr Sayuj Krishnan",
   description: "Expert neurosurgical care near Banjara Hills. Dr Sayuj Krishnan offers advanced spine and brain surgery. Convenient access from Jubilee Hills, Punjagutta.",
   alternates: {
-    canonical: `${SITE_URL}/locations/banjara-hills/`,
+    canonical: "https://www.drsayuj.info/locations/banjara-hills/",
   },
 };
 
 export default function BanjaraHillsLocationPage() {
+  const location = getLocationById("banjara-hills");
+
+  if (!location) {
+    return notFound();
+  }
+
+  const breadcrumb = [
+      { name: "Locations", item: "https://www.drsayuj.info/locations" },
+      { name: "Neurosurgeon in Banjara Hills", item: "https://www.drsayuj.info/locations/banjara-hills" },
+  ];
+
   return (
     <main className="container mx-auto px-4 py-16">
+      <LocationSchema location={location} breadcrumb={breadcrumb} />
+
       <article className="max-w-4xl mx-auto">
         <h1 className="text-4xl font-bold mb-8 text-center">Neurosurgeon Near Banjara Hills</h1>
         
@@ -22,14 +45,13 @@ export default function BanjaraHillsLocationPage() {
           </p>
         </section>
 
-        <section className="mb-8 bg-blue-50 p-6 rounded-lg">
-          <h2 className="text-2xl font-semibold mb-4">Primary Practice Location</h2>
-          <div className="space-y-2 text-gray-700">
-            <p><strong>Yashoda Hospital, Malakpet</strong></p>
-            <p>Room No 317, OPD Block, Nalgonda X Roads, Malakpet, Hyderabad 500036</p>
-            <p><strong>Phone:</strong> <a href="tel:+919778280044" className="text-blue-600 hover:underline">+91-9778280044</a></p>
-            <p><strong>Distance from Banjara Hills:</strong> ~6 km, 20-30 minutes by car</p>
-          </div>
+        <section className="mb-8">
+            <LocationNAPCard location={location} />
+        </section>
+
+        <section className="mb-8">
+            <h2 className="text-2xl font-semibold mb-4">Clinic Actions</h2>
+            <LocationCTAs location={location} />
         </section>
 
         <section className="mb-8">
@@ -58,30 +80,13 @@ export default function BanjaraHillsLocationPage() {
           </div>
         </section>
 
-        <section className="bg-blue-50 p-6 rounded-lg text-center">
-          <h3 className="text-lg font-semibold mb-4">Book Your Consultation from Banjara Hills</h3>
-          <Link href="/appointments" className="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-colors inline-block">
-            Book Appointment
-          </Link>
+        <section className="mb-8">
+            <h2 className="text-2xl font-semibold mb-4">Location Map</h2>
+            <LocationMapEmbed location={location} />
         </section>
-      </article>
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "LocalBusiness",
-            "name": "Dr Sayuj Krishnan - Neurosurgeon serving Banjara Hills",
-            "areaServed": {
-              "@type": "Place",
-              "name": "Banjara Hills, Hyderabad"
-            },
-            "telephone": "+919778280044",
-            "medicalSpecialty": "Neurosurgery"
-          })
-        }}
-      />
+        <LocalPathways location={location} />
+      </article>
     </main>
   );
 }

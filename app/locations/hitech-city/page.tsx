@@ -1,94 +1,77 @@
-import { SITE_URL } from "../../../src/lib/seo";
-import type { Metadata } from "next";
-import Link from "next/link";
+import React from "react";
+import { getLocationById } from "@/src/data/locations";
+import { LocationNAPCard } from "@/src/components/locations/LocationNAPCard";
+import { LocationCTAs } from "@/src/components/locations/LocationCTAs";
+import { LocationMapEmbed } from "@/src/components/locations/LocationMapEmbed";
+import { LocalPathways } from "@/src/components/locations/LocalPathways";
+import { LocationSchema } from "@/src/components/locations/LocationSchema";
+import { notFound } from "next/navigation";
 
-export const metadata: Metadata = {
-  title: "Neurosurgeon Near Hi-Tech City, Hyderabad | Dr Sayuj Krishnan",
-  description: "Expert spine and brain surgeon serving Hi-Tech City, Madhapur, Gachibowli. Dr Sayuj Krishnan offers minimally invasive neurosurgery with advanced techniques.",
+// Force static generation
+export const dynamic = 'force-static';
+export const dynamicParams = false;
+export const revalidate = 86400;
+
+export const metadata = {
+  title: "Neurosurgeon in Hitech City, Hyderabad | Dr Sayuj Krishnan",
+  description: "Expert neurosurgical care near Hitech City & Madhapur. Dr Sayuj Krishnan offers advanced spine and brain surgery. Accessible via Metro or ORR.",
   alternates: {
-    canonical: `${SITE_URL}/locations/hitech-city/`,
+    canonical: "https://www.drsayuj.info/locations/hitech-city/",
   },
 };
 
-export default function HiTechCityLocationPage() {
+export default function HitechCityLocationPage() {
+  const location = getLocationById("hitech-city");
+
+  if (!location) {
+    return notFound();
+  }
+
+  const breadcrumb = [
+      { name: "Locations", item: "https://www.drsayuj.info/locations" },
+      { name: "Neurosurgeon in Hitech City", item: "https://www.drsayuj.info/locations/hitech-city" },
+  ];
+
   return (
     <main className="container mx-auto px-4 py-16">
+      <LocationSchema location={location} breadcrumb={breadcrumb} />
+
       <article className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8 text-center">Neurosurgeon Near Hi-Tech City</h1>
+        <h1 className="text-4xl font-bold mb-8 text-center">Neurosurgeon Near Hitech City</h1>
         
         <section className="mb-8">
           <p className="text-lg text-gray-700 mb-4">
-            Dr Sayuj Krishnan provides comprehensive neurosurgical care for Hi-Tech City professionals at Yashoda Hospital, Malakpet—accessible within 30-40 minutes from the IT corridor.
+            Dr Sayuj Krishnan serves patients from Hitech City and Madhapur at Yashoda Hospital, Malakpet.
+            While located in Malakpet, we see many patients from the IT corridor seeking specialized endoscopic spine care.
           </p>
         </section>
 
-        <section className="mb-8 bg-blue-50 p-6 rounded-lg">
-          <h2 className="text-2xl font-semibold mb-4">Practice Location</h2>
-          <div className="space-y-2 text-gray-700">
-            <p><strong>Yashoda Hospital, Malakpet</strong></p>
-            <p>Room No 317, OPD Block, Nalgonda X Roads, Malakpet, Hyderabad 500036</p>
-            <p><strong>Phone:</strong> <a href="tel:+919778280044" className="text-blue-600 hover:underline">+91-9778280044</a></p>
-            <p><strong>From Hi-Tech City:</strong> ~12 km, 30-40 minutes via Outer Ring Road</p>
-          </div>
+        <section className="mb-8">
+            <LocationNAPCard location={location} />
         </section>
 
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">For IT Professionals: Work-Life Compatible Surgery</h2>
-          <div className="space-y-4">
-            <div className="bg-white p-4 rounded-lg shadow-sm border">
-              <h3 className="font-semibold text-blue-700 mb-2">Minimally Invasive Techniques</h3>
-              <p className="text-sm text-gray-600">Faster recovery, less downtime for busy professionals</p>
-            </div>
-            <div className="bg-white p-4 rounded-lg shadow-sm border">
-              <h3 className="font-semibold text-blue-700 mb-2">Day-Care Surgery Options</h3>
-              <p className="text-sm text-gray-600">Selected endoscopic procedures allow same-day discharge</p>
-            </div>
-            <div className="bg-white p-4 rounded-lg shadow-sm border">
-              <h3 className="font-semibold text-blue-700 mb-2">Quick Return to Desk Work</h3>
-              <p className="text-sm text-gray-600">Many patients resume remote work within 1-2 weeks</p>
-            </div>
-          </div>
+            <h2 className="text-2xl font-semibold mb-4">Clinic Actions</h2>
+            <LocationCTAs location={location} />
         </section>
 
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">Common Issues for Tech Workers</h2>
+          <h2 className="text-2xl font-semibold mb-4">Why Choose Us?</h2>
           <ul className="space-y-2 text-gray-700">
-            <li>• <strong>Cervical Disc Herniation:</strong> From prolonged sitting and poor posture</li>
-            <li>• <strong>Lumbar Disc Herniation:</strong> Back pain radiating to legs</li>
-            <li>• <strong>Cervical Myelopathy:</strong> Spinal cord compression from degenerative changes</li>
+            <li>• Expert in Endoscopic (Keyhole) Spine Surgery</li>
+            <li>• Rapid recovery protocols for busy professionals</li>
+            <li>• Comprehensive care for spinal and cranial conditions</li>
+            <li>• Transparent pricing and ethical advice</li>
           </ul>
         </section>
 
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">Nearby Areas Served</h2>
-          <p className="text-gray-700">
-            Hi-Tech City, Madhapur, Gachibowli, Kondapur, Kukatpally, Manikonda, Nanakramguda, Financial District.
-          </p>
+            <h2 className="text-2xl font-semibold mb-4">Location Map</h2>
+            <LocationMapEmbed location={location} />
         </section>
 
-        <section className="bg-blue-50 p-6 rounded-lg text-center">
-          <h3 className="text-lg font-semibold mb-4">Book Your Consultation from Hi-Tech City</h3>
-          <Link href="/appointments" className="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-colors inline-block">
-            Book Appointment
-          </Link>
-        </section>
+        <LocalPathways location={location} />
       </article>
-
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "LocalBusiness",
-            "name": "Dr Sayuj Krishnan - Neurosurgeon serving Hi-Tech City",
-            "areaServed": {
-              "@type": "Place",
-              "name": "Hi-Tech City, Hyderabad"
-            },
-            "telephone": "+919778280044"
-          })
-        }}
-      />
     </main>
   );
 }
