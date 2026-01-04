@@ -1,102 +1,107 @@
-import { SITE_URL } from "../../../src/lib/seo";
-import type { Metadata } from "next";
-import Link from "next/link";
+import React from "react";
+import { getLocationById } from "@/src/data/locations";
+import { LocationNAPCard } from "@/src/components/locations/LocationNAPCard";
+import { LocationCTAs } from "@/src/components/locations/LocationCTAs";
+import { LocationMapEmbed } from "@/src/components/locations/LocationMapEmbed";
+import { LocalPathways } from "@/src/components/locations/LocalPathways";
+import { LocationSchema } from "@/src/components/locations/LocationSchema";
+import { notFound } from "next/navigation";
 
-export const metadata: Metadata = {
+// Force static generation
+export const dynamic = 'force-static';
+export const dynamicParams = false;
+export const revalidate = 86400;
+
+export const metadata = {
   title: "Neurosurgeon in LB Nagar, Hyderabad | Dr Sayuj Krishnan",
   description: "Expert neurosurgeon serving LB Nagar. Dr Sayuj Krishnan offers spine and brain surgery at nearby Yashoda Hospital. Accessible from Vanasthalipuram, Nagole.",
   alternates: {
-    canonical: `${SITE_URL}/locations/lb-nagar/`,
+    canonical: "https://www.drsayuj.info/locations/lb-nagar",
+  },
+  openGraph: {
+    title: "Neurosurgeon in LB Nagar, Hyderabad | Dr Sayuj Krishnan",
+    description: "Expert neurosurgeon serving LB Nagar. Dr Sayuj Krishnan offers spine and brain surgery at nearby Yashoda Hospital.",
+    url: "https://www.drsayuj.info/locations/lb-nagar",
+    type: "article",
+    images: [
+      {
+        url: "https://www.drsayuj.info/images/og-default.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Dr Sayuj Krishnan - Neurosurgeon for LB Nagar patients",
+      },
+    ],
   },
 };
 
+const FAQ = [
+  { q: "How far is the OPD from LB Nagar?", a: "Typically 10-15 minutes by car (~4 km)." },
+  { q: "Do you treat sciatica?", a: "Yes, Dr. Sayuj specializes in endoscopic spine surgery for sciatica and disc problems." },
+  { q: "Is emergency care available?", a: "Yes, 24/7 emergency neurosurgery services are available at Yashoda Hospital, Malakpet." },
+];
+
 export default function LBNagarLocationPage() {
+  const location = getLocationById("lb-nagar");
+
+  if (!location) {
+    return notFound();
+  }
+
+  const breadcrumb = [
+     { name: "Neurosurgeon in LB Nagar", item: `https://www.drsayuj.info/${location.slug}` },
+  ];
+
   return (
-    <main className="container mx-auto px-4 py-16">
-      <article className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8 text-center">Neurosurgeon Near LB Nagar</h1>
-        
-        <section className="mb-8">
-          <p className="text-lg text-gray-700 mb-4">
-            Dr Sayuj Krishnan provides expert neurosurgical care for LB Nagar residents at Yashoda Hospital, Malakpet—conveniently located just 10 minutes away.
-          </p>
-        </section>
+    <main className="mx-auto max-w-5xl px-4 py-10">
+      <LocationSchema location={location} breadcrumb={breadcrumb} faq={FAQ} />
 
-        <section className="mb-8 bg-blue-50 p-6 rounded-lg">
-          <h2 className="text-2xl font-semibold mb-4">Clinic Details</h2>
-          <div className="space-y-2 text-gray-700">
-            <p><strong>Yashoda Hospital, Malakpet</strong></p>
-            <p>Room No 317, OPD Block, Nalgonda X Roads, Malakpet, Hyderabad 500036</p>
-            <p><strong>Phone:</strong> <a href="tel:+919778280044" className="text-blue-600 hover:underline">+91-9778280044</a></p>
-            <p><strong>Email:</strong> <a href="mailto:hellodr@drsayuj.info" className="text-blue-600 hover:underline">hellodr@drsayuj.info</a></p>
-            <p><strong>From LB Nagar:</strong> ~4 km, 10-15 minutes</p>
+      <h1 className="text-3xl md:text-4xl font-bold text-center mb-6">Neurosurgeon Near LB Nagar, Hyderabad</h1>
+      <p className="text-lg text-gray-700 mb-8 text-center max-w-3xl mx-auto">
+        Dr Sayuj Krishnan provides expert neurosurgical care for LB Nagar residents at Yashoda Hospital, Malakpet—conveniently located just 10 minutes away.
+      </p>
+
+      <div className="mt-6 flex justify-center">
+        <LocationCTAs location={location} />
+      </div>
+
+      <section className="grid md:grid-cols-2 gap-8 mt-10">
+        <div>
+          <LocationNAPCard location={location} className="mb-6" />
+
+          <h2 className="text-2xl font-semibold">Clinic Details</h2>
+          <div className="mt-3 space-y-2 text-gray-700">
+             <p><strong>From LB Nagar:</strong> ~4 km, 10-15 minutes</p>
+             <p>Serving areas: LB Nagar, Vanasthalipuram, Nagole, Kothapet, Hayathnagar.</p>
           </div>
-        </section>
 
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">Comprehensive Neurosurgical Services</h2>
-          <div className="grid md:grid-cols-2 gap-4">
-            <div className="bg-white p-4 rounded-lg shadow-sm border">
-              <h3 className="font-semibold text-blue-700 mb-2">Endoscopic Spine Surgery</h3>
-              <p className="text-sm text-gray-600">Minimally invasive treatment for herniated discs</p>
-            </div>
-            <div className="bg-white p-4 rounded-lg shadow-sm border">
-              <h3 className="font-semibold text-blue-700 mb-2">Brain Tumor Surgery</h3>
-              <p className="text-sm text-gray-600">Advanced microsurgical removal</p>
-            </div>
-            <div className="bg-white p-4 rounded-lg shadow-sm border">
-              <h3 className="font-semibold text-blue-700 mb-2">Facial Pain Surgery</h3>
-              <p className="text-sm text-gray-600">Trigeminal neuralgia treatment</p>
-            </div>
-            <div className="bg-white p-4 rounded-lg shadow-sm border">
-              <h3 className="font-semibold text-blue-700 mb-2">Spinal Stenosis Treatment</h3>
-              <p className="text-sm text-gray-600">Decompression for nerve compression</p>
-            </div>
-          </div>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">Why LB Nagar Patients Choose Dr Sayuj</h2>
-          <ul className="space-y-2 text-gray-700">
-            <li>✓ Close proximity to LB Nagar (10-15 minutes)</li>
-            <li>✓ Advanced training in minimally invasive techniques</li>
-            <li>✓ Day-care surgery options for selected cases</li>
-            <li>✓ Insurance and cashless treatment accepted</li>
-            <li>✓ Comprehensive pre and post-operative care</li>
+          <h3 className="text-xl font-semibold mt-6">Why LB Nagar Patients Choose Dr Sayuj</h3>
+          <ul className="mt-3 list-disc pl-5 space-y-1">
+            <li>Close proximity to LB Nagar (10-15 minutes)</li>
+            <li>Advanced training in minimally invasive techniques</li>
+            <li>Day-care surgery options for selected cases</li>
+            <li>Insurance and cashless treatment accepted</li>
           </ul>
-        </section>
+        </div>
 
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">Nearby Areas Served</h2>
-          <p className="text-gray-700">
-            LB Nagar, Vanasthalipuram, Nagole, Kothapet, Hayathnagar, Pedda Amberpet, Mansoorabad, and surrounding areas.
-          </p>
-        </section>
+        <div>
+          <h2 className="text-2xl font-semibold mb-3">Map</h2>
+          <LocationMapEmbed location={location} />
+        </div>
+      </section>
 
-        <section className="bg-blue-50 p-6 rounded-lg text-center">
-          <h3 className="text-lg font-semibold mb-4">Book Your Consultation from LB Nagar</h3>
-          <Link href="/appointments" className="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-colors inline-block">
-            Book Appointment
-          </Link>
-        </section>
-      </article>
+      <section className="mt-10">
+        <h2 className="text-2xl font-semibold">FAQs</h2>
+        <div className="mt-4 space-y-4">
+          {FAQ.map(({ q, a }) => (
+            <details key={q} className="rounded-xl border p-4">
+              <summary className="font-medium">{q}</summary>
+              <p className="mt-2">{a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "LocalBusiness",
-            "name": "Dr Sayuj Krishnan - Neurosurgeon serving LB Nagar",
-            "areaServed": {
-              "@type": "Place",
-              "name": "LB Nagar, Hyderabad"
-            },
-            "telephone": "+919778280044",
-            "email": "hellodr@drsayuj.info"
-          })
-        }}
-      />
+      <LocalPathways location={location} />
     </main>
   );
 }

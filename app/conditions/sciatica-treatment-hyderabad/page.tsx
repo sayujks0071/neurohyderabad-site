@@ -9,6 +9,7 @@ import { sources } from '../../blog/sources';
 import { makeMetadata } from '@/app/_lib/meta';
 import Section from '@/app/_components/Section';
 import { patientStories } from '../../../src/content/stories';
+import { ConditionLocationLinks } from '@/src/components/locations/ConditionLocationLinks';
 
 const baseMetadata = makeMetadata({
   title: 'Sciatica Treatment in Hyderabad | Expert Pain Relief & Surgery',
@@ -295,6 +296,7 @@ export default function SciaticaTreatmentPage() {
             </a>
           </div>
         </div>
+        <ConditionLocationLinks />
       </Section>
 
       <Section className="border-t border-gray-200">
