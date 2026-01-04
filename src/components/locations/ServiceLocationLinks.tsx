@@ -18,7 +18,7 @@ export const ServiceLocationLinks: React.FC = () => {
         {featuredLocations.map(loc => (
           <Link
             key={loc.id}
-            href={`/${loc.slug.startsWith('locations/') ? loc.slug : loc.slug}/`}
+            href={`/${loc.slug}/`}
             className="text-blue-600 hover:underline hover:text-blue-800 transition-colors"
           >
             Neurosurgeon in {loc.areaServedName}
