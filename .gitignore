@@ -70,3 +70,6 @@ public/robots.txt
 
 # Empty external submodule directory (actual code is in packages/appointment-form)
 external/appointmentform/
+
+# Temporary PR content files
+pr_content.html
