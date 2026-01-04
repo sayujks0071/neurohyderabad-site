@@ -1,5 +1,15 @@
 {
-  "timestamp": "2025-01-28",
+  "timestamp": "2026-01-03",
+  "build_metrics": {
+    "first_load_js": "102 kB",
+    "home_page_size": "102 kB (JS)"
+  },
+  "findings": {
+    "home": {
+      "lcp_candidate": "DoctorCard image or text block",
+      "cls_risk": "Lazy loaded components without skeletons. Addressed PatientEducationVideos."
+    }
+  },
   "changes": [
     {
       "timestamp": "2024-05-22",
@@ -22,11 +32,27 @@
         "Inspect build output for Home page size (no regression).",
         "Verify `app/_components/DoctorCard.tsx` uses `next/image` directly."
       ]
+    },
+    {
+      "timestamp": "2026-01-03",
+      "component": "PatientEducationVideos",
+      "change": "Removed double lazy-loading (internal IntersectionObserver). Now renders immediately when the chunk loads.",
+      "impact": "Eliminated second CLS shift and improved Interaction to Next Paint (INP) for the video section."
+    },
+    {
+      "timestamp": "2026-01-03",
+      "component": "LazyVideoSection",
+      "change": "Updated placeholder height to h-[800px] md:h-[600px] to better match content height.",
+      "impact": "Reduced Cumulative Layout Shift (CLS) when the component lazy loads."
     }
   ],
   "page_metrics_proxies": {
     "home_url": "/",
     "home_size": "139 kB",
     "notes": "Home page size remained stable. The primary improvement is runtime (LCP) rather than bundle size."
+  },
+  "verification": {
+    "manual_check": "Scroll down to 'Expert Insights & Media Coverage'. The Video Library section below it should load more smoothly with less content jumping.",
+    "build_check": "Build passed successfully."
   }
 }
