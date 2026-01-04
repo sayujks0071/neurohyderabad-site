@@ -2,6 +2,12 @@ import React from 'react';
 import Link from 'next/link';
 import { locations } from '../../data/locations';
 
+// Helper to get a random subset of locations
+const getRandomLocations = (count: number) => {
+  const shuffled = [...locations].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, count);
+};
+
 export const ServiceLocationLinks: React.FC = () => {
   // Use a stable subset or random based on build?
   // For static generation, this will be fixed at build time which is fine.
@@ -18,9 +24,8 @@ export const ServiceLocationLinks: React.FC = () => {
         {featuredLocations.map(loc => (
           <Link
             key={loc.id}
-            href={`/${loc.slug}/`}
+            href={`/${loc.slug.startsWith('locations/') ? loc.slug : loc.slug}/`}
             className="text-blue-600 hover:underline hover:text-blue-800 transition-colors"
-            aria-label={`Visit neurosurgeon consultation page for ${loc.areaServedName} area`}
           >
             Neurosurgeon in {loc.areaServedName}
           </Link>

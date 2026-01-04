@@ -16,7 +16,7 @@ export const metadata = {
   title: "Neurosurgeon near Manikonda, Hyderabad | Dr Sayuj Krishnan",
   description: "Expert neurosurgeon near Manikonda. Dr Sayuj Krishnan provides advanced brain and spine surgery with minimally invasive techniques. Easy access via ORR.",
   alternates: {
-    canonical: "https://www.drsayuj.info/neurosurgeon-manikonda",
+    canonical: "https://www.drsayuj.info/locations/neurosurgeon-manikonda",
   },
   openGraph: {
     title: "Neurosurgeon near Manikonda, Hyderabad | Dr Sayuj Krishnan",

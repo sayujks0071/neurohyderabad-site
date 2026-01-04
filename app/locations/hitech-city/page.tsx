@@ -39,7 +39,7 @@ const FAQ = [
   { q: "Fastest way to book?", a: "WhatsApp us your MRI and symptoms; we'll confirm the earliest slot." },
 ];
 
-export default function HiTechCityLocationPage() {
+export default function HitechCityLocationPage() {
   const location = getLocationById("hitech-city");
 
   if (!location) {

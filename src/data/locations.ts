@@ -174,7 +174,7 @@ export const locations: LocationData[] = [
     id: "lb-nagar",
     name: "Dr Sayuj Krishnan - Neurosurgeon near LB Nagar",
     canonical_display_name: CANONICAL_PHYSICIAN_NAME,
-    slug: "neurosurgeon-lb-nagar",
+    slug: "locations/lb-nagar",
     address: YASHODA_MALAKPET_ADDRESS,
     telephone: CANONICAL_TELEPHONE,
     whatsapp: CANONICAL_WHATSAPP,

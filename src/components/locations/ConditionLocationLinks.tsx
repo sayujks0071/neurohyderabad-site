@@ -16,7 +16,7 @@ export const ConditionLocationLinks: React.FC = () => {
         {featuredLocations.map(loc => (
           <li key={loc.id}>
             <Link
-              href={`/${loc.slug}/`}
+              href={`/${loc.slug.startsWith('locations/') ? loc.slug : loc.slug}/`}
               className="text-blue-700 hover:underline text-sm font-medium"
             >
               {loc.areaServedName}

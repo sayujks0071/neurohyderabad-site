@@ -35,9 +35,9 @@ export const metadata = {
 };
 
 const FAQ = [
-  { question: "How far is the clinic from Nizampet?", answer: "Approximately 30-35 km, taking 50-70 minutes depending on traffic." },
-  { question: "What conditions are treated?", answer: "We treat slip discs, spinal stenosis, brain tumors, trigeminal neuralgia, and more." },
-  { question: "Is emergency surgery available?", answer: "Yes, 24/7 emergency neurosurgery is available at Yashoda Hospital, Malakpet." },
+  { q: "How far is the clinic from Nizampet?", a: "Approximately 30-35 km, taking 50-70 minutes depending on traffic." },
+  { q: "What conditions are treated?", a: "We treat slip discs, spinal stenosis, brain tumors, trigeminal neuralgia, and more." },
+  { q: "Is emergency surgery available?", a: "Yes, 24/7 emergency neurosurgery is available at Yashoda Hospital, Malakpet." },
 ];
 
 export default function NizampetLocationPage() {
