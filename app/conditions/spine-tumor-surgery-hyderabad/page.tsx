@@ -176,8 +176,8 @@ const references = [
   },
   {
     label:
-      "National Cancer Institute — Brain and Spinal Cord Tumors (Patient Overview)",
-    url: "https://www.cancer.gov/types/brain/patient/adult-brain-tumors-treatment-pdq",
+      "National Cancer Institute — Spinal Cord Tumors Treatment (Adult, Patient Version)",
+    url: "https://www.cancer.gov/types/spinal-cord-tumors/patient/spinal-cord-tumors-treatment-pdq",
   },
   {
     label: "Spine Universe — Types of Spinal Tumors",
