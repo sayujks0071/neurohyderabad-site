@@ -21,7 +21,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           submodules: false
 
-      - name: Setup Node.js
+      - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 9
