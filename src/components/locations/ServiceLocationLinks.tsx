@@ -20,6 +20,7 @@ export const ServiceLocationLinks: React.FC = () => {
             key={loc.id}
             href={`/${loc.slug}/`}
             className="text-blue-600 hover:underline hover:text-blue-800 transition-colors"
+            aria-label={`Visit neurosurgeon consultation page for ${loc.areaServedName} area`}
           >
             Neurosurgeon in {loc.areaServedName}
           </Link>
