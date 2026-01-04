@@ -15,6 +15,8 @@ import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
 import { ServiceLocationLinks } from '@/src/components/locations/ServiceLocationLinks';
 import { PhysicianSchema } from "@/src/components/schema/PhysicianSchema";
+import CostTransparencySection from '@/src/components/CostTransparencySection';
+import PatientJourneySection from '@/src/components/PatientJourneySection';
 
 const baseMetadata = makeMetadata({
   title: 'Endoscopic Spine Surgery Hyderabad | Dr. Sayuj Krishnan',
@@ -88,6 +90,54 @@ const gbpSchema = {
     "https://www.youtube.com/@drsayujneurohyd"
   ]
 };
+
+const COSTS = [
+  {
+    procedure: 'Endoscopic Discectomy',
+    range: '₹95,000 - ₹1,35,000',
+    recovery: '1-2 weeks',
+    includes: ['Surgeon fees', 'OT charges', 'Implants', 'Follow-up visits']
+  },
+  {
+    procedure: 'Endoscopic ULBD (Stenosis)',
+    range: '₹1,20,000 - ₹1,60,000',
+    recovery: '2-3 weeks',
+    includes: ['Bilateral decompression', 'Hospital stay (1-2 days)', 'Medications']
+  },
+  {
+    procedure: 'Cervical Endoscopic Discectomy',
+    range: '₹1,20,000 - ₹1,70,000',
+    recovery: '2-3 weeks',
+    includes: ['Anterior/Posterior approach', 'Neck brace', 'Physiotherapy guidance']
+  }
+];
+
+const JOURNEY_STEPS = [
+  {
+    title: 'Initial Assessment',
+    description: 'MRI review and clinical exam. Secure tele-consult available for outstation patients.'
+  },
+  {
+    title: 'Pre-Op Planning',
+    description: 'Fitness check and anaesthesia clearance. Option for Awake Spine Surgery protocol.'
+  },
+  {
+    title: 'The Procedure',
+    description: '45-90 mins endoscopic surgery through a keyhole (8mm) incision.'
+  },
+  {
+    title: 'Immediate Recovery',
+    description: 'Walk within 2 hours. Liquid diet within 1 hour. Minimal pain.'
+  },
+  {
+    title: 'Discharge',
+    description: 'Go home the same day or next morning. No bed rest required.'
+  },
+  {
+    title: 'Rehabilitation',
+    description: 'Week 1: Rest & Walk. Week 2: Desk work. Week 6: Gym & exercises.'
+  }
+];
 
 export default function MinimallyInvasiveSpineSurgeryPage() {
   const procedures = [
@@ -248,6 +298,8 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
           </div>
         </section>
 
+        <PatientJourneySection title="Your Treatment Journey" steps={JOURNEY_STEPS} />
+
         <section className="mb-12">
           <h2 className="text-3xl font-bold text-blue-800 mb-6">Procedures We Offer</h2>
           <div className="grid md:grid-cols-2 gap-8">
@@ -272,6 +324,8 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
             ))}
           </div>
         </section>
+
+        <CostTransparencySection costs={COSTS} />
 
         <OutcomeMetricsSection procedure="Minimally Invasive Spine Surgery" />
 
