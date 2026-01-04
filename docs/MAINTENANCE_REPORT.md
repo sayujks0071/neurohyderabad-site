@@ -9,7 +9,7 @@ We have established a baseline on `main` (via `maintenance/fix-all`) with the fo
         *   `undici` -> `^5.29.0` (Mitigates DoS and randomness issues)
         *   `esbuild` -> `^0.25.12` (Mitigates dev server vulnerability)
         *   `tmp` -> `^0.2.4` (Mitigates temp file vulnerability)
-    *   **Note**: `pnpm audit` still reports "moderate" severity for `undici@5.28.4` because it is deeply nested in `@vercel/node`. However, `undici@5.29.0` is also installed, and full resolution requires upstream updates from Vercel.
+    *   **Note**: `pnpm audit` still reports "moderate" severity for `undici@5.28.7` because it is deeply nested in `@vercel/node`. However, `undici@5.29.0` is also installed, and full resolution requires upstream updates from Vercel.
 *   **Package Manager Standardization**:
     *   Enforced `pnpm` usage across CI.
     *   Deleted `package-lock.json` (which was causing `npm ci` to install stale deps) and `pnpm-lock.yaml` was regenerated to ensure clean resolution.
