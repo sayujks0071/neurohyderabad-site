@@ -10,6 +10,7 @@ import { makeMetadata } from '@/app/_lib/meta';
 import Section from '@/app/_components/Section';
 import { patientStories } from '../../../src/content/stories';
 import { ConditionLocationLinks } from '@/src/components/locations/ConditionLocationLinks';
+import { PhysicianSchema } from "@/src/components/schema/PhysicianSchema";
 
 const baseMetadata = makeMetadata({
   title: 'Sciatica Treatment in Hyderabad | Expert Pain Relief & Surgery',
@@ -35,6 +36,7 @@ const spineStories = patientStories
 export default function SciaticaTreatmentPage() {
   return (
     <div className="min-h-screen bg-white">
+      <PhysicianSchema />
       <Section background="blue" className="pt-24 pb-12">
         <header className="text-center mb-8">
           <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">Sciatica Treatment in Hyderabad</h1>
@@ -276,7 +278,7 @@ export default function SciaticaTreatmentPage() {
       </Section>
 
       <Section>
-        <div className="bg-blue-600 rounded-2xl p-8 md:p-12 text-center text-white shadow-xl">
+        <div className="bg-blue-600 rounded-2xl p-8 md:p-12 text-center text-white shadow-xl mb-12">
           <h2 className="text-3xl font-bold mb-4">Start Your Journey to Pain-Free Living</h2>
           <p className="text-blue-100 text-lg mb-8 max-w-2xl mx-auto">
             Don't let sciatica control your life. Get an expert opinion from Dr. Sayuj Krishnan and explore your treatment options today.
@@ -296,7 +298,8 @@ export default function SciaticaTreatmentPage() {
             </a>
           </div>
         </div>
-        <ConditionLocationLinks />
+
+        <ConditionLocationLinks conditionName="Sciatica Treatment" />
       </Section>
 
       <Section className="border-t border-gray-200">

@@ -16,21 +16,7 @@ export const metadata = {
   title: "Neurosurgeon in LB Nagar, Hyderabad | Dr Sayuj Krishnan",
   description: "Expert neurosurgeon serving LB Nagar. Dr Sayuj Krishnan offers spine and brain surgery at nearby Yashoda Hospital. Accessible from Vanasthalipuram, Nagole.",
   alternates: {
-    canonical: "https://www.drsayuj.info/locations/lb-nagar",
-  },
-  openGraph: {
-    title: "Neurosurgeon in LB Nagar, Hyderabad | Dr Sayuj Krishnan",
-    description: "Expert neurosurgeon serving LB Nagar. Dr Sayuj Krishnan offers spine and brain surgery at nearby Yashoda Hospital.",
-    url: "https://www.drsayuj.info/locations/lb-nagar",
-    type: "article",
-    images: [
-      {
-        url: "https://www.drsayuj.info/images/og-default.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Dr Sayuj Krishnan - Neurosurgeon for LB Nagar patients",
-      },
-    ],
+    canonical: "https://www.drsayuj.info/locations/lb-nagar/",
   },
 };
 

@@ -1,38 +1,29 @@
-[
-  {
-    "timestamp": "2024-05-22",
-    "notes": "Implemented next/font optimization to remove render-blocking CSS and improve CLS/LCP.",
-    "changes": [
-      {
-        "type": "LCP/CLS",
-        "description": "Replaced Google Fonts <link> tags with next/font/google to eliminate render-blocking CSS and use size-adjust for fallback fonts.",
-        "files": ["app/layout.tsx", "app/globals.css"]
-      }
-    ],
-    "verification": {
-      "build": "Passed",
-      "manual_check": "Verified app/layout.tsx imports and variable injection. Verified app/globals.css comments."
+{
+  "timestamp": "2026-01-03",
+  "build_metrics": {
+    "first_load_js": "102 kB",
+    "home_page_size": "102 kB (JS)"
+  },
+  "findings": {
+    "home": {
+      "lcp_candidate": "DoctorCard image or text block",
+      "cls_risk": "Lazy loaded components without skeletons. Addressed PatientEducationVideos."
     }
   },
-  {
-    "timestamp": "2025-01-28",
-    "changes": [
-      {
-        "file": "app/_components/DoctorCard.tsx",
-        "description": "Replaced custom OptimizedImage with standard next/image.",
-        "page_types_affected": ["home"],
-        "expected_impact": "Reduced LCP by removing client-side state/effects from the Hero image.",
-        "verification_steps": [
-          "Run `pnpm build` to verify no build errors.",
-          "Inspect build output for Home page size (no regression).",
-          "Verify `app/_components/DoctorCard.tsx` uses `next/image` directly."
-        ]
-      }
-    ],
-    "page_metrics_proxies": {
-      "home_url": "/",
-      "home_size": "139 kB",
-      "notes": "Home page size remained stable. The primary improvement is runtime (LCP) rather than bundle size."
+  "changes": [
+    {
+      "component": "PatientEducationVideos",
+      "change": "Removed double lazy-loading (internal IntersectionObserver). Now renders immediately when the chunk loads.",
+      "impact": "Eliminated second CLS shift and improved Interaction to Next Paint (INP) for the video section."
+    },
+    {
+      "component": "LazyVideoSection",
+      "change": "Updated placeholder height to h-[800px] md:h-[600px] to better match content height.",
+      "impact": "Reduced Cumulative Layout Shift (CLS) when the component lazy loads."
     }
+  ],
+  "verification": {
+    "manual_check": "Scroll down to 'Expert Insights & Media Coverage'. The Video Library section below it should load more smoothly with less content jumping.",
+    "build_check": "Build passed successfully."
   }
-]
+}
