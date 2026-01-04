@@ -27,6 +27,7 @@ const schema = yup.object({
   phone: yup
     .string()
     .required("Phone number is required")
+    .transform((value) => (value ? value.replace(/[^\d+]/g, "") : value))
     .matches(/^[0-9+]{8,15}$/, "Please enter a valid phone number (8-15 digits)"),
   email: yup.string().email("Invalid email address").required("Email is required"),
   city: yup.string().required("City is required"),
