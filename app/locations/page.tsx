@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import SchemaScript from "@/app/_components/SchemaScript";
-import LocalNAP from "@/app/_components/LocalNAP";
+import { LocationNAPCard } from "@/src/components/locations/LocationNAPCard";
 import YMYLAttribution from "@/app/_components/YMYLAttribution";
 import { SITE_URL } from "@/src/lib/seo";
+import { locations } from "@/src/data/locations";
 
 // Static generation with 24-hour revalidation
 export const revalidate = 86400;
@@ -70,30 +71,9 @@ export const metadata: Metadata = {
 };
 
 export default function LocationsPage() {
-  const locations = [
-    {
-      name: "Banjara Hills",
-      slug: "brain-spine-surgeon-banjara-hills",
-      address: "Yashoda Hospitals, Banjara Hills, Hyderabad",
-      description: "Premium neurosurgery care in the heart of Banjara Hills"
-    },
-    {
-      name: "Hitec City",
-      slug: "brain-spine-surgeon-hitec-city", 
-      address: "Yashoda Hospitals, Hitec City, Hyderabad",
-      description: "Advanced neurosurgery services in Hitec City"
-    },
-    {
-      name: "Jubilee Hills",
-      slug: "brain-spine-surgeon-jubilee-hills",
-      address: "Yashoda Hospitals, Jubilee Hills, Hyderabad", 
-      description: "Expert neurosurgery care in Jubilee Hills"
-    }
-  ];
-
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="mx-auto max-w-4xl px-4 py-12">
+      <div className="mx-auto max-w-6xl px-4 py-12">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
             Neurosurgeon Locations in Hyderabad
@@ -106,19 +86,21 @@ export default function LocationsPage() {
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-12">
           {locations.map((location) => (
-            <div key={location.slug} className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+            <div key={location.id} className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow flex flex-col">
               <h2 className="text-2xl font-semibold text-gray-900 mb-3">
-                {location.name}
+                {location.areaServedName}
               </h2>
-              <p className="text-gray-600 mb-4">
-                {location.address}
-              </p>
-              <p className="text-gray-700 mb-6">
-                {location.description}
-              </p>
+              <div className="flex-grow">
+                 <p className="text-gray-600 mb-2">
+                    {location.address.streetAddress}
+                 </p>
+                 <p className="text-sm text-gray-500 mb-4">
+                    Distance to clinic: ~20-30 mins
+                 </p>
+              </div>
               <Link 
-                href={`/locations/${location.slug}`}
-                className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+                href={`/${location.slug}`}
+                className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors text-center mt-4"
               >
                 View Details
               </Link>
@@ -179,8 +161,11 @@ export default function LocationsPage() {
           </Link>
         </div>
 
-        <LocalNAP />
-        <YMYLAttribution lastReviewed="2024-12-19" />
+        <div className="mt-12">
+             {/* Using the first location (Malakpet) as the canonical NAP for the footer area */}
+             <LocationNAPCard location={locations.find(l => l.id === "malakpet") || locations[0]} />
+        </div>
+        <YMYLAttribution lastReviewed="2025-01-15" />
       </div>
       
       <SchemaScript data={schemaData} />

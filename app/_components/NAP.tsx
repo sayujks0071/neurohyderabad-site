@@ -1,4 +1,5 @@
 import React from 'react';
+import { getLocationById, CANONICAL_PHYSICIAN_NAME } from '@/src/data/locations';
 
 interface NAPProps {
   className?: string;
@@ -11,6 +12,11 @@ export default function NAP({
   showEmail = true, 
   variant = 'default' 
 }: NAPProps) {
+  // Default to Malakpet as the main location for generic NAP
+  const location = getLocationById("malakpet");
+
+  if (!location) return null;
+
   const baseClasses = "text-gray-700";
   const compactClasses = "text-sm";
   const footerClasses = "text-gray-600 text-sm";
@@ -29,20 +35,20 @@ export default function NAP({
   return (
     <div className={getClasses()}>
       <div className="font-semibold text-gray-900 mb-2">
-        Dr. Sayuj Krishnan S
+        {CANONICAL_PHYSICIAN_NAME}
       </div>
       <div className="space-y-1">
         <div className="flex items-start">
           <span className="font-medium min-w-[80px]">Hospital:</span>
-          <span>Yashoda Hospital, Room 317, OPD Block, Malakpet, Hyderabad 500036</span>
+          <span>{location.address.streetAddress}, {location.address.addressLocality} {location.address.postalCode}</span>
         </div>
         <div className="flex items-center">
           <span className="font-medium min-w-[80px]">Phone:</span>
           <a 
-            href="tel:+919778280044" 
+            href={`tel:${location.telephone}`}
             className="text-blue-600 hover:text-blue-800 font-medium"
           >
-            +91 9778280044
+            {location.telephone}
           </a>
         </div>
         {showEmail && (
