@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import dynamic from 'next/dynamic';
 import ExpandedFAQ from "../src/components/ExpandedFAQ";
-import LazyVideoSection from "./_components/LazyVideoSection";
-import LazyRecoveryTimeline from "./_components/LazyRecoveryTimeline";
-import LazyReputationPanel from "./_components/LazyReputationPanel";
+import LazySection from "./_components/LazySection";
 import { SITE_URL } from "../src/lib/seo";
 // Temporarily commenting out problematic imports
 // import BreadcrumbSchema from "./components/schemas/BreadcrumbSchema";
@@ -29,6 +28,43 @@ import Card from "./_components/Card";
 import Section from "./_components/Section";
 import FAQPageSchema from "./_components/FAQPageSchema";
 import HeroCTAButtons from "./_components/HeroCTAButtons";
+
+// Dynamic imports for Lazy components
+const PatientEducationVideos = dynamic(() => import('./_components/PatientEducationVideos'), {
+  loading: () => (
+    <div className="py-16 bg-white">
+      <div className="container mx-auto px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="animate-pulse bg-gray-200 h-[800px] md:h-[600px] rounded-lg"></div>
+        </div>
+      </div>
+    </div>
+  )
+});
+
+const RecoveryTimeline = dynamic(() => import('./_components/RecoveryTimeline'), {
+  loading: () => (
+    <div className="py-16 bg-slate-950">
+      <div className="container mx-auto px-4">
+        <div className="max-w-5xl mx-auto">
+          <div className="animate-pulse bg-slate-800 h-64 rounded-lg"></div>
+        </div>
+      </div>
+    </div>
+  )
+});
+
+const LocalReputationPanel = dynamic(() => import('./_components/LocalReputationPanel'), {
+  loading: () => (
+    <div className="py-8 bg-gray-50">
+      <div className="container mx-auto px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="animate-pulse bg-gray-200 h-32 rounded-lg"></div>
+        </div>
+      </div>
+    </div>
+  )
+});
 
 const HOME_CANONICAL = SITE_URL.endsWith("/") ? SITE_URL : `${SITE_URL}/`;
 
@@ -290,7 +326,19 @@ export default function Home() {
         </Section>
 
         {/* Lazy load video section - only loads when user scrolls */}
-        <LazyVideoSection />
+        <LazySection
+          placeholder={
+            <div className="py-16 bg-white">
+              <div className="container mx-auto px-4">
+                <div className="max-w-6xl mx-auto">
+                  <div className="animate-pulse bg-gray-200 h-[800px] md:h-[600px] rounded-lg"></div>
+                </div>
+              </div>
+            </div>
+          }
+        >
+          <PatientEducationVideos />
+        </LazySection>
 
         {/* Minimally Invasive Spine Surgery (MISS) */}
         <Section background="gray" className="py-16">
@@ -508,7 +556,19 @@ export default function Home() {
         </Section>
 
         {/* Lazy load recovery timeline - only loads when user scrolls */}
-        <LazyRecoveryTimeline />
+        <LazySection
+          placeholder={
+            <div className="py-16 bg-slate-950">
+              <div className="container mx-auto px-4">
+                <div className="max-w-5xl mx-auto">
+                  <div className="animate-pulse bg-slate-800 h-64 rounded-lg"></div>
+                </div>
+              </div>
+            </div>
+          }
+        >
+          <RecoveryTimeline />
+        </LazySection>
 
         {/* Trigeminal Neuralgia Care */}
         <Section background="gray" className="py-16">
@@ -784,7 +844,19 @@ export default function Home() {
 
         <ExpandedFAQ faqs={HOME_FAQS} className="bg-gray-50" />
         {/* Lazy load reputation panel - only loads when user scrolls */}
-        <LazyReputationPanel />
+        <LazySection
+          placeholder={
+            <div className="py-8 bg-gray-50">
+              <div className="container mx-auto px-4">
+                <div className="max-w-6xl mx-auto">
+                  <div className="animate-pulse bg-gray-200 h-32 rounded-lg"></div>
+                </div>
+              </div>
+            </div>
+          }
+        >
+          <LocalReputationPanel />
+        </LazySection>
 
         {/* Disease Guides Section */}
         <Section background="gray" className="py-16">
