@@ -1,8 +1,16 @@
 import { Resend } from 'resend';
 
-// Initialize Resend with API key
+const RESEND_DEV_PLACEHOLDER = 're_development_key';
+const DEVELOPMENT_MESSAGE_ID = 'dev_mode';
+const isDevelopmentEmailKey =
+  !process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === RESEND_DEV_PLACEHOLDER;
+
 // 🛡️ Sentinel: Removed hardcoded API key. Using env var or development placeholder.
-const resend = new Resend(process.env.RESEND_API_KEY || 're_development_key');
+const resend = new Resend(process.env.RESEND_API_KEY || RESEND_DEV_PLACEHOLDER);
+
+const logDevelopmentSkip = (context: string) => {
+  console.log(`Development mode: ${context} email not sent (missing RESEND_API_KEY)`);
+};
 
 // Email configuration
 const FROM_EMAIL = 'Dr. Sayuj Krishnan <hellodr@drsayuj.info>';
@@ -282,6 +290,11 @@ export const sendContactFormEmail = async (data: {
   subject?: string;
 }) => {
   try {
+    if (isDevelopmentEmailKey) {
+      logDevelopmentSkip('contact form');
+      return { success: true, messageId: DEVELOPMENT_MESSAGE_ID, development: true };
+    }
+
     const template = emailTemplates.contactForm(data);
     
     const result = await resend.emails.send({
@@ -309,6 +322,16 @@ export const sendAppointmentRequestEmail = async (data: {
   message?: string;
 }) => {
   try {
+    if (isDevelopmentEmailKey) {
+      logDevelopmentSkip('appointment request');
+      return {
+        success: true,
+        adminMessageId: DEVELOPMENT_MESSAGE_ID,
+        patientMessageId: DEVELOPMENT_MESSAGE_ID,
+        development: true,
+      };
+    }
+
     const template = emailTemplates.appointmentRequest(data);
     
     // Send to admin
@@ -356,6 +379,11 @@ export const sendPreAppointmentBriefingEmail = async (data: {
   sources?: string[];
 }) => {
   try {
+    if (isDevelopmentEmailKey) {
+      logDevelopmentSkip('pre-appointment briefing');
+      return { success: true, messageId: DEVELOPMENT_MESSAGE_ID, development: true };
+    }
+
     const template = emailTemplates.preAppointmentBriefing({
       patientName: data.patientName,
       condition: data.condition,
@@ -389,6 +417,11 @@ export const sendNewsletterSubscriptionEmail = async (data: {
   name?: string;
 }) => {
   try {
+    if (isDevelopmentEmailKey) {
+      logDevelopmentSkip('newsletter subscription');
+      return { success: true, messageId: DEVELOPMENT_MESSAGE_ID, development: true };
+    }
+
     const template = emailTemplates.newsletterSubscription(data);
     
     // Send confirmation to subscriber
@@ -424,6 +457,11 @@ export const sendNewsletterSubscriptionEmail = async (data: {
 // Test email function
 export const sendTestEmail = async () => {
   try {
+    if (isDevelopmentEmailKey) {
+      logDevelopmentSkip('test');
+      return { success: true, messageId: DEVELOPMENT_MESSAGE_ID, development: true };
+    }
+
     const result = await resend.emails.send({
       from: FROM_EMAIL,
       to: TO_EMAIL,
