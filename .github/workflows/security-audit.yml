@@ -95,7 +95,7 @@ jobs:
             const highSeverityCount = totalHigh;
             if (highSeverityCount > 0) {
               const issueBody = `## 🔒 Security Audit Alert\n\n` +
-                `**High/Critical vulnerabilities in production dependencies**: ${highSeverity}\n\n` +
+                `**High/Critical vulnerabilities in production dependencies**: ${highSeverityCount}\n\n` +
                 `This workflow detected security vulnerabilities in production dependencies.\n\n` +
                 `### Recommended Actions:\n` +
                 `1. Review the audit report in workflow artifacts\n` +
@@ -107,7 +107,7 @@ jobs:
               await github.rest.issues.create({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                title: `🔒 Security: ${highSeverity} high/critical vulnerabilities in production dependencies`,
+                title: `🔒 Security: ${highSeverityCount} high/critical vulnerabilities in production dependencies`,
                 body: issueBody,
                 labels: ['security', 'dependencies']
               });
