@@ -143,9 +143,14 @@ function validate(data) {
   if (!data.requestId) errors.push("Missing requestId");
   if (!data.fullName) errors.push("Missing fullName");
   if (!data.phone) errors.push("Missing phone");
-
-  if (data.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+  if (!data.email) {
+    errors.push("Missing email");
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
     errors.push("Invalid email format");
+  }
+  if (!data.city) errors.push("Missing city");
+  if (!data.concern || data.concern.length < 10) {
+    errors.push("Concern required (min 10 chars)");
   }
 
   if (data.phone) {
@@ -216,6 +221,13 @@ function processLead(data) {
     try {
       const cal = CalendarApp.getCalendarById(calendarId);
       if (cal) {
+        // Timezone check: warn if script timezone doesn't match expected appointment timezone
+        const scriptTimeZone = Session.getScriptTimeZone();
+        const expectedTimeZone = "Asia/Kolkata";
+        if (scriptTimeZone !== expectedTimeZone) {
+          res.notes += `Timezone warning: Script is running in ${scriptTimeZone}, but appointments are assumed to be in ${expectedTimeZone}. `;
+        }
+
         const title = `Appointment: ${data.fullName} (${data.phone})`;
         const description = [
           `Concern: ${data.concern || "N/A"}`,
@@ -321,18 +333,30 @@ function parsePreferredDateTime(dateStr, timeStr) {
 
 function to24h(timeStr) {
   const s = String(timeStr).trim().toUpperCase();
-  // "14:30"
+  // Handle 24-hour format: "14:30"
   let m = s.match(/^(\d{1,2}):(\d{2})$/);
   if (m) return { hh: Number(m[1]), mm: Number(m[2]) };
 
-  // "2:30 PM"
+  // Handle 12-hour format with AM/PM: "2:30 PM"
   m = s.match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/);
   if (!m) return null;
-  let hh = Number(m[1]);
+  
+  const originalHours = m[1];
   const mm = Number(m[2]);
-  const ampm = m[3];
-  if (hh === 12) hh = 0;
-  if (ampm === "PM") hh += 12;
+  const modifier = m[3];
+  let hh = Number(originalHours);
+  
+  // Make AM/PM handling explicit for clarity:
+  // - 12 AM  -> 00
+  // - 12 PM  -> 12
+  // - Other PM hours -> add 12
+  // - Other AM hours -> keep as-is
+  if (modifier === "PM" && originalHours !== "12") {
+    hh += 12;
+  } else if (modifier === "AM" && originalHours === "12") {
+    hh = 0;
+  }
+  
   return { hh, mm };
 }
 
