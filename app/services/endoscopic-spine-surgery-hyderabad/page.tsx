@@ -11,6 +11,7 @@ import { buildLocalServiceSchema } from '@/src/lib/schema/localService';
 import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import TrustProof from '@/app/_components/TrustProof';
+import { ServiceLocationLinks } from '@/src/components/locations/ServiceLocationLinks';
 import { getServiceSources } from '../sources';
 import { ServiceLocationLinks } from '@/src/components/locations/ServiceLocationLinks';
 import { PhysicianSchema } from "@/src/components/schema/PhysicianSchema";
@@ -354,6 +355,8 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
             </Link>
           </div>
         </section>
+
+        <ServiceLocationLinks />
 
         <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
         <ReviewedBy lastReviewed="2025-10-19" />

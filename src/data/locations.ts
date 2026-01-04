@@ -15,7 +15,7 @@ export interface LocationData {
   id: string;
   name: string; // The specific location name, e.g. "Dr. Sayuj Krishnan - Secunderabad"
   canonical_display_name: string; // "Dr. Sayuj Krishnan – Neurosurgeon"
-  slug: string; // e.g. "neurosurgeon-secunderabad"
+  slug: string; // e.g. "neurosurgeon-secunderabad" or "locations/lb-nagar"
   address: LocationAddress;
   telephone: string;
   whatsapp?: string;
@@ -42,7 +42,7 @@ const YASHODA_MALAKPET_ADDRESS: LocationAddress = {
 };
 
 const YASHODA_GEO: LocationGeo = {
-  latitude: 17.3750, // Approximate from existing pages
+  latitude: 17.3750,
   longitude: 78.5147,
 };
 

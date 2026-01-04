@@ -1,94 +1,105 @@
-import { SITE_URL } from "../../../src/lib/seo";
-import type { Metadata } from "next";
-import Link from "next/link";
+import React from "react";
+import { getLocationById } from "@/src/data/locations";
+import { LocationNAPCard } from "@/src/components/locations/LocationNAPCard";
+import { LocationCTAs } from "@/src/components/locations/LocationCTAs";
+import { LocationMapEmbed } from "@/src/components/locations/LocationMapEmbed";
+import { LocalPathways } from "@/src/components/locations/LocalPathways";
+import { LocationSchema } from "@/src/components/locations/LocationSchema";
+import { notFound } from "next/navigation";
 
-export const metadata: Metadata = {
-  title: "Neurosurgeon Near Hi-Tech City, Hyderabad | Dr Sayuj Krishnan",
-  description: "Expert spine and brain surgeon serving Hi-Tech City, Madhapur, Gachibowli. Dr Sayuj Krishnan offers minimally invasive neurosurgery with advanced techniques.",
-  alternates: {
-    canonical: `${SITE_URL}/locations/hitech-city/`,
+// Force static generation
+export const dynamic = 'force-static';
+export const dynamicParams = false;
+export const revalidate = 86400;
+
+export const metadata = {
+  title: "Neurosurgeon in Hitech City, Hyderabad | Dr. Sayuj Krishnan",
+  description: "Consult Dr. Sayuj Krishnan near Hitech City, Hyderabad for endoscopic spine & minimally invasive brain surgery. OPD timings, parking, directions.",
+  // Point canonical to the root page to consolidate SEO value
+  alternates: { canonical: "https://www.drsayuj.info/neurosurgeon-hitech-city" },
+  openGraph: {
+    title: "Neurosurgeon in Hitech City, Hyderabad | Dr. Sayuj Krishnan",
+    description: "Consult Dr. Sayuj Krishnan near Hitech City for endoscopic spine & minimally invasive brain surgery. OPD timings, parking, directions.",
+    url: "https://www.drsayuj.info/neurosurgeon-hitech-city",
+    type: "article",
+    images: [
+      {
+        url: "https://www.drsayuj.info/images/og-default.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Dr Sayuj Krishnan - Neurosurgeon for Hitech City patients",
+      },
+    ],
   },
 };
 
-export default function HiTechCityLocationPage() {
+const FAQ = [
+  { q: "How far is the OPD from Hitech City?", a: "Typically 25–40 minutes by car depending on traffic; see landmark directions below." },
+  { q: "Parking availability?", a: "On-site hospital parking with valet options during peak hours." },
+  { q: "Fastest way to book?", a: "WhatsApp us your MRI and symptoms; we'll confirm the earliest slot." },
+];
+
+export default function HitechCityLocationPage() {
+  const location = getLocationById("hitech-city");
+
+  if (!location) {
+    return notFound();
+  }
+
+  const breadcrumb = [
+     { name: "Neurosurgeon in Hitech City", item: `https://www.drsayuj.info/${location.slug}` },
+  ];
+
   return (
-    <main className="container mx-auto px-4 py-16">
-      <article className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8 text-center">Neurosurgeon Near Hi-Tech City</h1>
-        
-        <section className="mb-8">
-          <p className="text-lg text-gray-700 mb-4">
-            Dr Sayuj Krishnan provides comprehensive neurosurgical care for Hi-Tech City professionals at Yashoda Hospital, Malakpet—accessible within 30-40 minutes from the IT corridor.
-          </p>
-        </section>
+    <main className="mx-auto max-w-5xl px-4 py-10">
+      <LocationSchema location={location} breadcrumb={breadcrumb} faq={FAQ} />
 
-        <section className="mb-8 bg-blue-50 p-6 rounded-lg">
-          <h2 className="text-2xl font-semibold mb-4">Practice Location</h2>
-          <div className="space-y-2 text-gray-700">
-            <p><strong>Yashoda Hospital, Malakpet</strong></p>
-            <p>Room No 317, OPD Block, Nalgonda X Roads, Malakpet, Hyderabad 500036</p>
-            <p><strong>Phone:</strong> <a href="tel:+919778280044" className="text-blue-600 hover:underline">+91-9778280044</a></p>
-            <p><strong>From Hi-Tech City:</strong> ~12 km, 30-40 minutes via Outer Ring Road</p>
-          </div>
-        </section>
+      <h1 className="text-3xl md:text-4xl font-bold">Neurosurgeon in Hitech City, Hyderabad</h1>
+      <p className="mt-4 text-lg">
+        Serving patients from <strong>Hitech City</strong> and nearby localities. OPD at Yashoda Hospitals (Malakpet) with endoscopic spine expertise.
+      </p>
 
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">For IT Professionals: Work-Life Compatible Surgery</h2>
-          <div className="space-y-4">
-            <div className="bg-white p-4 rounded-lg shadow-sm border">
-              <h3 className="font-semibold text-blue-700 mb-2">Minimally Invasive Techniques</h3>
-              <p className="text-sm text-gray-600">Faster recovery, less downtime for busy professionals</p>
-            </div>
-            <div className="bg-white p-4 rounded-lg shadow-sm border">
-              <h3 className="font-semibold text-blue-700 mb-2">Day-Care Surgery Options</h3>
-              <p className="text-sm text-gray-600">Selected endoscopic procedures allow same-day discharge</p>
-            </div>
-            <div className="bg-white p-4 rounded-lg shadow-sm border">
-              <h3 className="font-semibold text-blue-700 mb-2">Quick Return to Desk Work</h3>
-              <p className="text-sm text-gray-600">Many patients resume remote work within 1-2 weeks</p>
-            </div>
-          </div>
-        </section>
+      <div className="mt-6">
+         <LocationCTAs location={location} />
+      </div>
 
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">Common Issues for Tech Workers</h2>
-          <ul className="space-y-2 text-gray-700">
-            <li>• <strong>Cervical Disc Herniation:</strong> From prolonged sitting and poor posture</li>
-            <li>• <strong>Lumbar Disc Herniation:</strong> Back pain radiating to legs</li>
-            <li>• <strong>Cervical Myelopathy:</strong> Spinal cord compression from degenerative changes</li>
+      <section className="grid md:grid-cols-2 gap-8 mt-10">
+        <div>
+          <LocationNAPCard location={location} className="mb-6" />
+
+          <h2 className="text-2xl font-semibold">OPD Timings</h2>
+          <ul className="mt-3 list-disc pl-5">
+            <li>Mon–Sat, 10:00–16:00 (IST)</li>
+            <li>Emergency 24×7 via hospital triage</li>
           </ul>
-        </section>
 
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">Nearby Areas Served</h2>
-          <p className="text-gray-700">
-            Hi-Tech City, Madhapur, Gachibowli, Kondapur, Kukatpally, Manikonda, Nanakramguda, Financial District.
-          </p>
-        </section>
+          <h3 className="text-xl font-semibold mt-6">Landmark Directions from Hitech City</h3>
+          <ol className="mt-3 list-decimal pl-5">
+            <li>From Cyber Towers → Gachibowli → Mehdipatnam → Malakpet</li>
+            <li>From Mindspace → Financial District → Masab Tank → Malakpet</li>
+            <li>Metro: Hitech City → Malakpet (10–15 min cab from station)</li>
+          </ol>
+        </div>
 
-        <section className="bg-blue-50 p-6 rounded-lg text-center">
-          <h3 className="text-lg font-semibold mb-4">Book Your Consultation from Hi-Tech City</h3>
-          <Link href="/appointments" className="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-colors inline-block">
-            Book Appointment
-          </Link>
-        </section>
-      </article>
+        <div>
+          <h2 className="text-2xl font-semibold mb-3">Map</h2>
+          <LocationMapEmbed location={location} />
+        </div>
+      </section>
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "LocalBusiness",
-            "name": "Dr Sayuj Krishnan - Neurosurgeon serving Hi-Tech City",
-            "areaServed": {
-              "@type": "Place",
-              "name": "Hi-Tech City, Hyderabad"
-            },
-            "telephone": "+919778280044"
-          })
-        }}
-      />
+      <section className="mt-10">
+        <h2 className="text-2xl font-semibold">FAQs</h2>
+        <div className="mt-4 space-y-4">
+          {FAQ.map(({ q, a }) => (
+            <details key={q} className="rounded-xl border p-4">
+              <summary className="font-medium">{q}</summary>
+              <p className="mt-2">{a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <LocalPathways location={location} />
     </main>
   );
 }

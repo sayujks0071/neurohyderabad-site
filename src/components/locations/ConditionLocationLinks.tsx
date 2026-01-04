@@ -2,38 +2,34 @@ import React from 'react';
 import Link from 'next/link';
 import { locations } from '../../data/locations';
 
-interface ConditionLocationLinksProps {
-  className?: string;
-  conditionName?: string;
-}
+export const ConditionLocationLinks: React.FC = () => {
+  // Pick 4 locations for condition pages
+  const featuredLocations = locations.slice(0, 4);
 
-export const ConditionLocationLinks: React.FC<ConditionLocationLinksProps> = ({ className = "", conditionName }) => {
   return (
-    <div className={`rounded-xl border border-gray-200 bg-white p-6 shadow-sm ${className}`}>
-      <h3 className="text-xl font-semibold text-gray-900 mb-4">
-        {conditionName ? `Where to Consult for ${conditionName}` : "Where to Consult in Hyderabad"}
-      </h3>
-      <p className="text-gray-700 mb-4">
-        Get expert opinion and treatment for {conditionName ?? "your condition"} from Dr. Sayuj Krishnan.
-        Serving patients from across the city:
+    <section className="mt-10 p-6 bg-gray-50 rounded-xl border border-gray-100">
+      <h3 className="text-xl font-semibold mb-3 text-gray-800">Where to Consult in Hyderabad</h3>
+      <p className="mb-4 text-sm text-gray-600">
+        Expert diagnosis and treatment available for patients near:
       </p>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
-        {locations.map(location => (
-          <Link
-            key={location.id}
-            href={`/${location.slug}`}
-            className="text-sm font-medium text-blue-700 hover:text-blue-900 hover:underline"
-          >
-            {location.areaServedName}
-          </Link>
+      <ul className="grid grid-cols-2 gap-3 mb-6">
+        {featuredLocations.map(loc => (
+          <li key={loc.id}>
+            <Link
+              href={`/${loc.slug.startsWith('locations/') ? loc.slug : loc.slug}/`}
+              className="text-blue-700 hover:underline text-sm font-medium"
+            >
+              {loc.areaServedName}
+            </Link>
+          </li>
         ))}
-      </div>
+      </ul>
       <Link
         href="/appointments"
-        className="inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-2 text-white text-sm font-semibold hover:bg-blue-700 transition-colors"
+        className="block w-full text-center bg-white border border-blue-600 text-blue-700 py-2 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
       >
-        Book Consultation &rarr;
+        Schedule Consultation
       </Link>
-    </div>
+    </section>
   );
 };

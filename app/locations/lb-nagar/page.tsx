@@ -20,6 +20,12 @@ export const metadata = {
   },
 };
 
+const FAQ = [
+  { q: "How far is the OPD from LB Nagar?", a: "Typically 10-15 minutes by car (~4 km)." },
+  { q: "Do you treat sciatica?", a: "Yes, Dr. Sayuj specializes in endoscopic spine surgery for sciatica and disc problems." },
+  { q: "Is emergency care available?", a: "Yes, 24/7 emergency neurosurgery services are available at Yashoda Hospital, Malakpet." },
+];
+
 export default function LBNagarLocationPage() {
   const location = getLocationById("lb-nagar");
 
@@ -28,79 +34,60 @@ export default function LBNagarLocationPage() {
   }
 
   const breadcrumb = [
-      { name: "Locations", item: "https://www.drsayuj.info/locations" },
-      { name: "Neurosurgeon in LB Nagar", item: "https://www.drsayuj.info/locations/lb-nagar" },
+     { name: "Neurosurgeon in LB Nagar", item: `https://www.drsayuj.info/${location.slug}` },
   ];
 
   return (
-    <main className="container mx-auto px-4 py-16">
-      <LocationSchema location={location} breadcrumb={breadcrumb} />
+    <main className="mx-auto max-w-5xl px-4 py-10">
+      <LocationSchema location={location} breadcrumb={breadcrumb} faq={FAQ} />
 
-      <article className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8 text-center">Neurosurgeon Near LB Nagar</h1>
-        
-        <section className="mb-8">
-          <p className="text-lg text-gray-700 mb-4">
-            Dr Sayuj Krishnan provides expert neurosurgical care for LB Nagar residents at Yashoda Hospital, Malakpet—conveniently located just 10 minutes away.
-          </p>
-        </section>
+      <h1 className="text-3xl md:text-4xl font-bold text-center mb-6">Neurosurgeon Near LB Nagar, Hyderabad</h1>
+      <p className="text-lg text-gray-700 mb-8 text-center max-w-3xl mx-auto">
+        Dr Sayuj Krishnan provides expert neurosurgical care for LB Nagar residents at Yashoda Hospital, Malakpet—conveniently located just 10 minutes away.
+      </p>
 
-        <section className="mb-8">
-            <LocationNAPCard location={location} />
-        </section>
+      <div className="mt-6 flex justify-center">
+        <LocationCTAs location={location} />
+      </div>
 
-        <section className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4">Clinic Actions</h2>
-            <LocationCTAs location={location} />
-        </section>
+      <section className="grid md:grid-cols-2 gap-8 mt-10">
+        <div>
+          <LocationNAPCard location={location} className="mb-6" />
 
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">Comprehensive Neurosurgical Services</h2>
-          <div className="grid md:grid-cols-2 gap-4">
-            <div className="bg-white p-4 rounded-lg shadow-sm border">
-              <h3 className="font-semibold text-blue-700 mb-2">Endoscopic Spine Surgery</h3>
-              <p className="text-sm text-gray-600">Minimally invasive treatment for herniated discs</p>
-            </div>
-            <div className="bg-white p-4 rounded-lg shadow-sm border">
-              <h3 className="font-semibold text-blue-700 mb-2">Brain Tumor Surgery</h3>
-              <p className="text-sm text-gray-600">Advanced microsurgical removal</p>
-            </div>
-            <div className="bg-white p-4 rounded-lg shadow-sm border">
-              <h3 className="font-semibold text-blue-700 mb-2">Facial Pain Surgery</h3>
-              <p className="text-sm text-gray-600">Trigeminal neuralgia treatment</p>
-            </div>
-            <div className="bg-white p-4 rounded-lg shadow-sm border">
-              <h3 className="font-semibold text-blue-700 mb-2">Spinal Stenosis Treatment</h3>
-              <p className="text-sm text-gray-600">Decompression for nerve compression</p>
-            </div>
+          <h2 className="text-2xl font-semibold">Clinic Details</h2>
+          <div className="mt-3 space-y-2 text-gray-700">
+             <p><strong>From LB Nagar:</strong> ~4 km, 10-15 minutes</p>
+             <p>Serving areas: LB Nagar, Vanasthalipuram, Nagole, Kothapet, Hayathnagar.</p>
           </div>
-        </section>
 
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">Why LB Nagar Patients Choose Dr Sayuj</h2>
-          <ul className="space-y-2 text-gray-700">
-            <li>✓ Close proximity to LB Nagar (10-15 minutes)</li>
-            <li>✓ Advanced training in minimally invasive techniques</li>
-            <li>✓ Day-care surgery options for selected cases</li>
-            <li>✓ Insurance and cashless treatment accepted</li>
-            <li>✓ Comprehensive pre and post-operative care</li>
+          <h3 className="text-xl font-semibold mt-6">Why LB Nagar Patients Choose Dr Sayuj</h3>
+          <ul className="mt-3 list-disc pl-5 space-y-1">
+            <li>Close proximity to LB Nagar (10-15 minutes)</li>
+            <li>Advanced training in minimally invasive techniques</li>
+            <li>Day-care surgery options for selected cases</li>
+            <li>Insurance and cashless treatment accepted</li>
           </ul>
-        </section>
+        </div>
 
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">Nearby Areas Served</h2>
-          <p className="text-gray-700">
-            LB Nagar, Vanasthalipuram, Nagole, Kothapet, Hayathnagar, Pedda Amberpet, Mansoorabad, and surrounding areas.
-          </p>
-        </section>
+        <div>
+          <h2 className="text-2xl font-semibold mb-3">Map</h2>
+          <LocationMapEmbed location={location} />
+        </div>
+      </section>
 
-        <section className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4">Location Map</h2>
-            <LocationMapEmbed location={location} />
-        </section>
+      <section className="mt-10">
+        <h2 className="text-2xl font-semibold">FAQs</h2>
+        <div className="mt-4 space-y-4">
+          {FAQ.map(({ q, a }) => (
+            <details key={q} className="rounded-xl border p-4">
+              <summary className="font-medium">{q}</summary>
+              <p className="mt-2">{a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
 
-        <LocalPathways location={location} />
-      </article>
+      <LocalPathways location={location} />
     </main>
   );
 }

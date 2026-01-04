@@ -1,87 +1,105 @@
-import { SITE_URL } from "../../../src/lib/seo";
-import type { Metadata } from "next";
-import Link from "next/link";
+import React from "react";
+import { getLocationById } from "@/src/data/locations";
+import { LocationNAPCard } from "@/src/components/locations/LocationNAPCard";
+import { LocationCTAs } from "@/src/components/locations/LocationCTAs";
+import { LocationMapEmbed } from "@/src/components/locations/LocationMapEmbed";
+import { LocalPathways } from "@/src/components/locations/LocalPathways";
+import { LocationSchema } from "@/src/components/locations/LocationSchema";
+import { notFound } from "next/navigation";
 
-export const metadata: Metadata = {
-  title: "Neurosurgeon in Banjara Hills, Hyderabad | Dr Sayuj Krishnan",
-  description: "Expert neurosurgical care near Banjara Hills. Dr Sayuj Krishnan offers advanced spine and brain surgery. Convenient access from Jubilee Hills, Punjagutta.",
-  alternates: {
-    canonical: `${SITE_URL}/locations/banjara-hills/`,
+// Force static generation
+export const dynamic = 'force-static';
+export const dynamicParams = false;
+export const revalidate = 86400;
+
+export const metadata = {
+  title: "Neurosurgeon in Banjara Hills, Hyderabad | Dr. Sayuj Krishnan",
+  description: "Consult Dr. Sayuj Krishnan near Banjara Hills, Hyderabad for endoscopic spine & minimally invasive brain surgery. OPD timings, parking, directions, WhatsApp booking.",
+  // Point canonical to the root page to consolidate SEO value
+  alternates: { canonical: "https://www.drsayuj.info/neurosurgeon-banjara-hills" },
+  openGraph: {
+    title: "Neurosurgeon in Banjara Hills, Hyderabad | Dr. Sayuj Krishnan",
+    description: "Consult Dr. Sayuj Krishnan near Banjara Hills for endoscopic spine & minimally invasive brain surgery. OPD timings, parking, directions, WhatsApp booking.",
+    url: "https://www.drsayuj.info/neurosurgeon-banjara-hills",
+    type: "article",
+    images: [
+      {
+        url: "https://www.drsayuj.info/images/og-default.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Dr Sayuj Krishnan - Neurosurgeon for Banjara Hills patients",
+      },
+    ],
   },
 };
 
+const FAQ = [
+  { q: "How far is the OPD from Banjara Hills?", a: "Typically 15–25 minutes by car depending on traffic; see landmark directions below." },
+  { q: "Parking availability?", a: "On-site hospital parking with valet options during peak hours." },
+  { q: "Fastest way to book?", a: "WhatsApp us your MRI and symptoms; we'll confirm the earliest slot." },
+];
+
 export default function BanjaraHillsLocationPage() {
+  const location = getLocationById("banjara-hills");
+
+  if (!location) {
+    return notFound();
+  }
+
+  const breadcrumb = [
+     { name: "Neurosurgeon in Banjara Hills", item: `https://www.drsayuj.info/${location.slug}` },
+  ];
+
   return (
-    <main className="container mx-auto px-4 py-16">
-      <article className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8 text-center">Neurosurgeon Near Banjara Hills</h1>
-        
-        <section className="mb-8">
-          <p className="text-lg text-gray-700 mb-4">
-            Dr Sayuj Krishnan serves patients from Banjara Hills at Yashoda Hospital, Malakpet—conveniently accessible within 20-30 minutes from Banjara Hills, Jubilee Hills, and Road No. 10 areas.
-          </p>
-        </section>
+    <main className="mx-auto max-w-5xl px-4 py-10">
+      <LocationSchema location={location} breadcrumb={breadcrumb} faq={FAQ} />
 
-        <section className="mb-8 bg-blue-50 p-6 rounded-lg">
-          <h2 className="text-2xl font-semibold mb-4">Primary Practice Location</h2>
-          <div className="space-y-2 text-gray-700">
-            <p><strong>Yashoda Hospital, Malakpet</strong></p>
-            <p>Room No 317, OPD Block, Nalgonda X Roads, Malakpet, Hyderabad 500036</p>
-            <p><strong>Phone:</strong> <a href="tel:+919778280044" className="text-blue-600 hover:underline">+91-9778280044</a></p>
-            <p><strong>Distance from Banjara Hills:</strong> ~6 km, 20-30 minutes by car</p>
-          </div>
-        </section>
+      <h1 className="text-3xl md:text-4xl font-bold">Neurosurgeon in Banjara Hills, Hyderabad</h1>
+      <p className="mt-4 text-lg">
+        Serving patients from <strong>Banjara Hills</strong> and nearby localities. OPD at Yashoda Hospitals (Malakpet) with endoscopic spine expertise.
+      </p>
 
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">Specialized Services</h2>
-          <ul className="space-y-2 text-gray-700">
-            <li>• Endoscopic Spine Surgery for disc herniation</li>
-            <li>• Minimally Invasive Brain Tumor Surgery</li>
-            <li>• Trigeminal Neuralgia (Microvascular Decompression)</li>
-            <li>• Cervical Myelopathy Treatment</li>
-            <li>• Epilepsy Surgery Evaluation</li>
+      <div className="mt-6">
+        <LocationCTAs location={location} />
+      </div>
+
+      <section className="grid md:grid-cols-2 gap-8 mt-10">
+        <div>
+          <LocationNAPCard location={location} className="mb-6" />
+
+          <h2 className="text-2xl font-semibold">OPD Timings</h2>
+          <ul className="mt-3 list-disc pl-5">
+            <li>Mon–Sat, 10:00–16:00 (IST)</li>
+            <li>Emergency 24×7 via hospital triage</li>
           </ul>
-        </section>
 
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">Why Banjara Hills Patients Choose Dr Sayuj</h2>
-          <div className="grid md:grid-cols-3 gap-4">
-            <div className="bg-white p-4 rounded-lg shadow-sm border text-center">
-              <p className="font-semibold text-blue-700">9+ Years Experience</p>
-            </div>
-            <div className="bg-white p-4 rounded-lg shadow-sm border text-center">
-              <p className="font-semibold text-blue-700">Advanced Training in Germany</p>
-            </div>
-            <div className="bg-white p-4 rounded-lg shadow-sm border text-center">
-              <p className="font-semibold text-blue-700">Minimally Invasive Techniques</p>
-            </div>
-          </div>
-        </section>
+          <h3 className="text-xl font-semibold mt-6">Landmark Directions from Banjara Hills</h3>
+          <ol className="mt-3 list-decimal pl-5">
+            <li>From Road No. 1 → Road No. 12 → Masab Tank → Malakpet</li>
+            <li>From GVK One Mall → Road No. 45 → Malakpet Bridge</li>
+            <li>Metro: Banjara Hills → Malakpet (5–8 min cab from station)</li>
+          </ol>
+        </div>
 
-        <section className="bg-blue-50 p-6 rounded-lg text-center">
-          <h3 className="text-lg font-semibold mb-4">Book Your Consultation from Banjara Hills</h3>
-          <Link href="/appointments" className="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-colors inline-block">
-            Book Appointment
-          </Link>
-        </section>
-      </article>
+        <div>
+          <h2 className="text-2xl font-semibold mb-3">Map</h2>
+          <LocationMapEmbed location={location} />
+        </div>
+      </section>
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "LocalBusiness",
-            "name": "Dr Sayuj Krishnan - Neurosurgeon serving Banjara Hills",
-            "areaServed": {
-              "@type": "Place",
-              "name": "Banjara Hills, Hyderabad"
-            },
-            "telephone": "+919778280044",
-            "medicalSpecialty": "Neurosurgery"
-          })
-        }}
-      />
+      <section className="mt-10">
+        <h2 className="text-2xl font-semibold">FAQs</h2>
+        <div className="mt-4 space-y-4">
+          {FAQ.map(({ q, a }) => (
+            <details key={q} className="rounded-xl border p-4">
+              <summary className="font-medium">{q}</summary>
+              <p className="mt-2">{a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <LocalPathways location={location} />
     </main>
   );
 }
