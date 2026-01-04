@@ -28,7 +28,10 @@ export const metadata: Metadata = {
 };
 
 const spineStories = patientStories
-  .filter((story) => story.tags.includes('spine'))
+  .filter((story) => {
+    const relatedTags = ['spine', 'disc', 'back-pain'];
+    return story.tags.some((tag) => relatedTags.includes(tag));
+  })
   .slice(0, 2);
 
 export default function SciaticaTreatmentPage() {
@@ -99,7 +102,7 @@ export default function SciaticaTreatmentPage() {
                 "Numbness, tingling, or muscle weakness in the affected leg",
                 "Sharp pain that may make it difficult to stand up or walk",
                 "Pain that worsens when sitting, coughing, or sneezing",
-                "Current-like sensation shooting down the leg"
+                "Electric shock-like sensation shooting down the leg"
               ].map((symptom, i) => (
                 <li key={i} className="flex gap-3 items-start text-gray-700">
                   <span className="mt-1.5 w-1.5 h-1.5 bg-blue-600 rounded-full flex-shrink-0" />
@@ -149,7 +152,7 @@ export default function SciaticaTreatmentPage() {
 
         <div className="mt-12 bg-red-50 p-6 rounded-xl border border-red-100 max-w-4xl mx-auto">
           <div className="flex gap-4 items-start">
-            <span className="text-3xl">⚠️</span>
+            <span className="text-3xl" aria-hidden="true">⚠️</span>
             <div>
               <h3 className="text-lg font-bold text-red-800 mb-2">Red Flags: When to Seek Immediate Care</h3>
               <p className="text-gray-700 mb-2">
@@ -196,7 +199,7 @@ export default function SciaticaTreatmentPage() {
         <div className="grid md:grid-cols-2 gap-8">
           <div className="bg-green-50/50 p-8 rounded-2xl border border-green-100">
             <h3 className="text-xl font-bold text-green-800 mb-4 flex items-center gap-2">
-              <span className="bg-green-100 p-2 rounded-lg">🌿</span> Conservative Treatment
+              <span className="bg-green-100 p-2 rounded-lg" aria-hidden="true">🌿</span> Conservative Treatment
             </h3>
             <p className="text-gray-700 mb-4 font-medium">Most cases resolve with non-surgical care within 4-6 weeks.</p>
             <ul className="space-y-4">
@@ -217,14 +220,14 @@ export default function SciaticaTreatmentPage() {
 
           <div className="bg-blue-50/50 p-8 rounded-2xl border border-blue-100">
             <h3 className="text-xl font-bold text-blue-800 mb-4 flex items-center gap-2">
-              <span className="bg-blue-100 p-2 rounded-lg">🔬</span> Surgical Solutions
+              <span className="bg-blue-100 p-2 rounded-lg" aria-hidden="true">🔬</span> Surgical Solutions
             </h3>
             <p className="text-gray-700 mb-4 font-medium">Recommended when conservative care fails or neurological deficits are present.</p>
             <ul className="space-y-4">
               <li className="bg-white p-4 rounded-lg shadow-sm border-l-4 border-blue-500">
                 <strong className="block text-blue-700 mb-1">Endoscopic Discectomy</strong>
                 <span className="text-gray-600 text-sm">
-                  Dr. Sayuj's specialty. A keyhole procedure (&lt;8mm incision) to remove the herniated disc fragment.
+                  Dr. Sayuj's specialty. A keyhole procedure {'(<8mm incision)'} to remove the herniated disc fragment.
                   <Link href="/services/minimally-invasive-spine-surgery" className="text-blue-600 hover:underline ml-1">Learn more about endoscopic surgery.</Link>
                 </span>
               </li>
@@ -244,34 +247,41 @@ export default function SciaticaTreatmentPage() {
       {/* Patient Stories Section */}
       <Section background="gray">
         <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Patient Success Stories</h2>
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          {spineStories.map((story) => (
-            <article key={story.id} className="bg-white rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow border border-gray-100">
-              <div className="flex items-center mb-6">
-                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold text-lg">
-                  {story.patientInitials.charAt(0)}
+        {spineStories.length > 0 ? (
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {spineStories.map((story) => (
+              <article key={story.id} className="bg-white rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow border border-gray-100">
+                <div className="flex items-center mb-6">
+                  <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold text-lg">
+                    {story.patientInitials.charAt(0)}
+                  </div>
+                  <div className="ml-4">
+                    <div className="font-bold text-gray-900">{story.title}</div>
+                    <div className="text-sm text-gray-500">{story.procedure}</div>
+                  </div>
                 </div>
-                <div className="ml-4">
-                  <div className="font-bold text-gray-900">{story.title}</div>
-                  <div className="text-sm text-gray-500">{story.procedure}</div>
+                <blockquote className="text-gray-700 italic text-lg mb-6 border-l-4 border-blue-200 pl-4">
+                  {story.quote}
+                </blockquote>
+                <div className="text-sm text-gray-600 mb-4 bg-gray-50 p-4 rounded-lg">
+                  <strong>Outcome:</strong> {story.summary}
                 </div>
-              </div>
-              <blockquote className="text-gray-700 italic text-lg mb-6 border-l-4 border-blue-200 pl-4">
-                {story.quote}
-              </blockquote>
-              <div className="text-sm text-gray-600 mb-4 bg-gray-50 p-4 rounded-lg">
-                <strong>Outcome:</strong> {story.summary}
-              </div>
-              <Link
-                href={`/patient-stories/${story.slug}`}
-                className="text-blue-600 font-semibold hover:text-blue-800 flex items-center gap-2 group"
-              >
-                Read full story
-                <span className="transform group-hover:translate-x-1 transition-transform">→</span>
-              </Link>
-            </article>
-          ))}
-        </div>
+                <Link
+                  href={`/patient-stories/${story.slug}`}
+                  className="text-blue-600 font-semibold hover:text-blue-800 flex items-center gap-2 group"
+                >
+                  Read full story
+                  <span className="transform group-hover:translate-x-1 transition-transform">→</span>
+                </Link>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <p className="text-center text-gray-600 max-w-2xl mx-auto">
+            Patient stories for sciatica will be added soon. In the meantime, please contact us to learn how we
+            can help in your specific case.
+          </p>
+        )}
       </Section>
 
       <Section>
@@ -325,7 +335,7 @@ export default function SciaticaTreatmentPage() {
             <details key={i} className="group bg-white border border-gray-200 rounded-lg p-4 open:bg-gray-50 transition-colors">
               <summary className="font-semibold text-gray-900 cursor-pointer list-none flex justify-between items-center">
                 {faq.q}
-                <span className="text-gray-400 group-open:rotate-180 transition-transform">▼</span>
+                <span aria-hidden="true" className="text-gray-400 group-open:rotate-180 transition-transform">▼</span>
               </summary>
               <p className="mt-3 text-gray-700 leading-relaxed">{faq.a}</p>
             </details>
@@ -410,17 +420,33 @@ export default function SciaticaTreatmentPage() {
               "@type": "AnatomicalStructure",
               "name": "Sciatic Nerve"
             },
-            "differentialDiagnosis": {
-              "@type": "DDxElement",
-              "diagnosis": {
-                "@type": "MedicalCondition",
-                "name": "Herniated Disc"
+            "differentialDiagnosis": [
+              {
+                "@type": "DDxElement",
+                "diagnosis": {
+                  "@type": "MedicalCondition",
+                  "name": "Herniated Disc"
+                },
+                "distinguishingSign": {
+                  "@type": "MedicalSign",
+                  "name": "Leg pain radiating below the knee"
+                }
               },
-              "distinguishingSign": {
-                "@type": "MedicalSign",
-                "name": "Leg pain radiating below the knee"
+              {
+                "@type": "DDxElement",
+                "diagnosis": {
+                  "@type": "MedicalCondition",
+                  "name": "Spinal Stenosis"
+                }
+              },
+              {
+                "@type": "DDxElement",
+                "diagnosis": {
+                  "@type": "MedicalCondition",
+                  "name": "Spondylolisthesis"
+                }
               }
-            },
+            ],
             "possibleTreatment": [
               {
                 "@type": "MedicalTherapy",
