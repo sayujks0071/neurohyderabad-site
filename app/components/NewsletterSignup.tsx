@@ -93,7 +93,7 @@ export default function NewsletterSignup({
               aria-describedby={error ? errorId : status === 'success' ? successId : undefined}
             />
             {error && (
-              <p id={errorId} className="mt-1 text-sm text-red-600" role="alert">
+              <p id={errorId} className="mt-1 text-sm text-red-600" role="alert" aria-live="polite">
                 {error}
               </p>
             )}
@@ -117,7 +117,7 @@ export default function NewsletterSignup({
           </Button>
         </form>
         {status === 'success' && (
-          <p id={successId} className="mt-2 text-sm text-green-700" role="alert">
+          <p id={successId} className="mt-2 text-sm text-green-700" role="alert" aria-live="polite">
             Thank you for subscribing! Check your email for confirmation.
           </p>
         )}
@@ -143,12 +143,12 @@ export default function NewsletterSignup({
           aria-describedby={error ? errorId : status === 'success' ? successId : undefined}
         />
         {error && (
-          <p id={errorId} className="text-sm text-red-600 mt-1" role="alert">
+          <p id={errorId} className="text-sm text-red-600 mt-1" role="alert" aria-live="polite">
             {error}
           </p>
         )}
         {status === 'success' && (
-          <p id={successId} className="text-sm text-green-700 mt-1" role="alert">
+          <p id={successId} className="text-sm text-green-700 mt-1" role="alert" aria-live="polite">
             Thank you for subscribing!
           </p>
         )}
@@ -162,7 +162,7 @@ export default function NewsletterSignup({
         {status === 'submitting' ? (
           <span className="flex items-center gap-2">
             <Spinner className="h-4 w-4 text-white" />
-            <span className="sr-only">Subscribing...</span>
+            <span>Subscribing...</span>
           </span>
         ) : (
           'Subscribe'
