@@ -13,6 +13,8 @@ import SourceList from '@/app/_components/SourceList';
 import TrustProof from '@/app/_components/TrustProof';
 import { ServiceLocationLinks } from '@/src/components/locations/ServiceLocationLinks';
 import { getServiceSources } from '../sources';
+import { PhysicianSchema } from "@/src/components/schema/PhysicianSchema";
+import { patientStories } from '@/src/content/stories';
 import { PhysicianSchema } from '@/src/components/schema/PhysicianSchema';
 
 const SERVICE_SLUG = 'endoscopic-spine-surgery-hyderabad';
@@ -134,6 +136,11 @@ const gbpSchema = {
 };
 
 export default function EndoscopicSpineSurgeryHyderabadPage() {
+  const relevantStories = patientStories.filter(story => {
+    const tags = story.tags.join(' ').toLowerCase();
+    return tags.includes('spine') || tags.includes('tlif');
+  }).slice(0, 2);
+
   return (
     <>
       <JsonLd data={schema} />
@@ -179,7 +186,7 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
               </Link>
             </div>
           </div>
-          <TrustProof serviceType="spine" className="mb-6" />
+          <TrustProof serviceType="spine" className="mb-6" stories={relevantStories} />
           <div className="bg-blue-50 border border-blue-100 rounded-2xl p-6 shadow-sm">
             <h2 className="text-xl font-semibold text-blue-800 mb-4">Why Choose Malakpet for “Keyhole” Surgery?</h2>
             <ul className="space-y-3 text-gray-700">

@@ -1,29 +1,23 @@
 {
   "timestamp": "2026-01-03",
   "build_metrics": {
-    "first_load_js": "102 kB",
-    "home_page_size": "102 kB (JS)"
+    "first_load_js": "102 kB"
   },
   "findings": {
-    "home": {
-      "lcp_candidate": "DoctorCard image or text block",
-      "cls_risk": "Lazy loaded components without skeletons. Addressed PatientEducationVideos."
+    "service_pages": {
+      "lcp_candidate": "TrustProof component was importing entire stories database client-side.",
+      "optimization": "Refactored TrustProof to accept stories as server-side props."
     }
   },
   "changes": [
     {
-      "component": "PatientEducationVideos",
-      "change": "Removed double lazy-loading (internal IntersectionObserver). Now renders immediately when the chunk loads.",
-      "impact": "Eliminated second CLS shift and improved Interaction to Next Paint (INP) for the video section."
-    },
-    {
-      "component": "LazyVideoSection",
-      "change": "Updated placeholder height to h-[800px] md:h-[600px] to better match content height.",
-      "impact": "Reduced Cumulative Layout Shift (CLS) when the component lazy loads."
+      "component": "TrustProof",
+      "change": "Refactored to accept `stories` prop instead of importing `patientStories` directly. Updated `brain-tumor-surgery-hyderabad` and `endoscopic-spine-surgery-hyderabad` to pass filtered stories from server.",
+      "impact": "Reduced client bundle size for pages using TrustProof by decoupling the stories database from the client component. Improved hydration performance."
     }
   ],
   "verification": {
-    "manual_check": "Scroll down to 'Expert Insights & Media Coverage'. The Video Library section below it should load more smoothly with less content jumping.",
+    "manual_check": "Verify that 'Why Patients Trust Dr. Sayuj Krishnan' section still loads relevant stories on Brain Tumor and Endoscopic Spine service pages.",
     "build_check": "Build passed successfully."
   }
 }
