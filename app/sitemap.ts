@@ -83,6 +83,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/blog/spine-health-maintenance-hyderabad',
     '/blog/disc-replacement-vs-fusion',
     '/blog/how-much-does-brain-surgery-cost-hyderabad',
+    '/blog/lumbar-canal-stenosis-walking-pain-hyderabad',
   ];
 
   const symptomPages = [
