@@ -192,7 +192,7 @@ export default function LeadForm() {
         </div>
 
         <div className="pt-4">
-          <Button type="submit" disabled={isSubmitting} className="w-full justify-center">
+          <Button type="submit" isLoading={isSubmitting} className="w-full justify-center">
             {isSubmitting ? "Sending..." : "Request Call Back"}
           </Button>
         </div>
