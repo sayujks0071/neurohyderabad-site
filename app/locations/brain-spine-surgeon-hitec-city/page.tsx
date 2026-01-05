@@ -1,11 +1,20 @@
-import { Metadata } from 'next';
-import Link from 'next/link';
-import StandardCTA from '@/app/_components/StandardCTA';
-import NAP from '@/app/_components/NAP';
+import React from "react";
+import { getLocationById } from "@/src/data/locations";
+import { LocationNAPCard } from "@/src/components/locations/LocationNAPCard";
+import { LocationCTAs } from "@/src/components/locations/LocationCTAs";
+import { LocationMapEmbed } from "@/src/components/locations/LocationMapEmbed";
+import { LocalPathways } from "@/src/components/locations/LocalPathways";
+import { LocationSchema } from "@/src/components/locations/LocationSchema";
+import { notFound } from "next/navigation";
 import ReviewedBy from '@/app/_components/ReviewedBy';
-import SchemaScript from '@/app/_components/SchemaScript';
+import LocationPageTracker from '@/src/components/LocationPageTracker';
 
-export const metadata: Metadata = {
+// Force static generation
+export const dynamic = 'force-static';
+export const dynamicParams = false;
+export const revalidate = 86400;
+
+export const metadata = {
   title: 'Brain & Spine Surgeon near HITEC City, Hyderabad',
   description: 'Advanced brain and spine care near HITEC City, Hyderabad. Directions to Yashoda Hospital, Malakpet. Parking, timings, and appointment info.',
   keywords: 'brain surgeon HITEC City, spine surgeon HITEC City, neurosurgeon near HITEC City, Yashoda Hospital Malakpet, Hyderabad',
@@ -23,75 +32,39 @@ export const metadata: Metadata = {
   },
 };
 
-const localBusinessSchema = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "Dr. Sayuj Krishnan - Neurosurgeon",
-  "image": "https://www.drsayuj.info/images/og-default.jpg",
-  "url": "https://www.drsayuj.info/locations/brain-spine-surgeon-hitec-city",
-  "telephone": "+919778280044",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "OPD Block, Room No 317, Yashoda Hospital, Malakpet",
-    "addressLocality": "Hyderabad",
-    "addressRegion": "Telangana",
-    "postalCode": "500036",
-    "addressCountry": "IN"
-  },
-  "areaServed": {
-    "@type": "City",
-    "name": "Hyderabad"
-  },
-  "department": {
-    "@type": "Hospital",
-    "name": "Yashoda Hospital - Malakpet"
-  }
-};
-
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
+const FAQ = [
     {
-      "@type": "Question",
-      "name": "Do you have a clinic in HITEC City?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "We consult at Yashoda Hospital, Malakpet. Teleconsultations may be arranged on a case-by-case basis."
-      }
+      q: "Do you have a clinic in HITEC City?",
+      a: "We consult at Yashoda Hospital, Malakpet. Teleconsultations may be arranged on a case-by-case basis."
     },
     {
-      "@type": "Question",
-      "name": "What are the OPD timings?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Please confirm current timings when booking. Urgent cases are accommodated where possible."
-      }
+      q: "What are the OPD timings?",
+      a: "Please confirm current timings when booking. Urgent cases are accommodated where possible."
     },
     {
-      "@type": "Question",
-      "name": "Is parking available?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, parking is available. Allow extra time during peak hours."
-      }
+      q: "Is parking available?",
+      a: "Yes, parking is available. Allow extra time during peak hours."
     },
     {
-      "@type": "Question",
-      "name": "Do you offer cashless insurance?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Many plans are supported with pre-authorization. Please bring your insurance details."
-      }
+      q: "Do you offer cashless insurance?",
+      a: "Many plans are supported with pre-authorization. Please bring your insurance details."
     }
-  ]
-};
+];
 
 export default function HITECCityLocationPage() {
+  const location = getLocationById("hitech-city");
+
+  if (!location) {
+    return notFound();
+  }
+
+  const breadcrumb = [
+     { name: "Brain & Spine Surgeon near HITEC City", item: `https://www.drsayuj.info/locations/brain-spine-surgeon-hitec-city` },
+  ];
+
   return (
     <div className="min-h-screen bg-white">
-      <SchemaScript data={localBusinessSchema} />
-      <SchemaScript data={faqSchema} />
+      <LocationSchema location={location} breadcrumb={breadcrumb} faq={FAQ} />
       
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-blue-50 to-indigo-100 py-16">
@@ -103,7 +76,7 @@ export default function HITECCityLocationPage() {
             <p className="text-xl text-gray-600 mb-8">
               Advanced neurosurgical care with convenient access from HITEC City
             </p>
-            <StandardCTA />
+            <LocationCTAs location={location} className="justify-center" />
           </div>
         </div>
       </section>
@@ -113,7 +86,7 @@ export default function HITECCityLocationPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-gray-900 mb-8">Overview</h2>
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
-            Patients from HITEC City often visit our Malakpet OPD for minimally invasive spine surgery (endoscopic discectomy/ULBD), 
+            Patients from <strong>{location.areaServedName}</strong> often visit our Malakpet OPD for minimally invasive spine surgery (endoscopic discectomy/ULBD),
             trigeminal neuralgia (MVD/radiosurgery), brain tumor surgery, and epilepsy surgery.
           </p>
           <p className="text-lg text-gray-700 leading-relaxed">
@@ -133,17 +106,7 @@ export default function HITECCityLocationPage() {
               <p className="text-gray-700 mb-4">
                 35–55 minutes outside peak via HITEC → Ameerpet → Nampally → Malakpet.
               </p>
-              <Link 
-                href="https://maps.google.com/?q=Yashoda+Hospital+Malakpet+Hyderabad"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium"
-              >
-                Get Directions on Google Maps
-                <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
-              </Link>
+              <LocationMapEmbed location={location} />
             </div>
             <div className="bg-white p-6 rounded-lg shadow-sm">
               <h3 className="text-xl font-bold text-gray-900 mb-4">Transportation Options</h3>
@@ -164,7 +127,7 @@ export default function HITECCityLocationPage() {
           <div className="bg-blue-50 p-6 rounded-lg">
             <h3 className="text-xl font-bold text-blue-900 mb-4">Location</h3>
             <p className="text-blue-800 mb-4">
-              OPD Block, Room No 317, Yashoda Hospital, Malakpet
+              {location.address.streetAddress}, {location.address.addressLocality}
             </p>
             <p className="text-blue-800">
               Parking options available. Best times to avoid peak congestion are early morning slots (8-10 AM) 
@@ -237,23 +200,13 @@ export default function HITECCityLocationPage() {
       <section className="py-16 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-gray-900 mb-8">Frequently Asked Questions</h2>
-          <div className="space-y-6">
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <h3 className="text-lg font-bold text-gray-900 mb-3">Do you have a clinic in HITEC City?</h3>
-              <p className="text-gray-700">We see patients at Yashoda Hospital, Malakpet; teleconsults may be arranged case-by-case.</p>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <h3 className="text-lg font-bold text-gray-900 mb-3">What are the OPD timings?</h3>
-              <p className="text-gray-700">Confirm current schedule when booking; urgent cases accommodated where possible.</p>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <h3 className="text-lg font-bold text-gray-900 mb-3">Is parking available?</h3>
-              <p className="text-gray-700">Yes; allow extra time during peak hours.</p>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <h3 className="text-lg font-bold text-gray-900 mb-3">Do you offer cashless insurance?</h3>
-              <p className="text-gray-700">Many plans supported with pre-authorization; bring insurance details.</p>
-            </div>
+          <div className="space-y-4">
+            {FAQ.map(({ q, a }) => (
+              <details key={q} className="bg-white rounded-xl border p-4 shadow-sm">
+                <summary className="font-bold text-gray-900 cursor-pointer">{q}</summary>
+                <p className="mt-2 text-gray-700">{a}</p>
+              </details>
+            ))}
           </div>
         </div>
       </section>
@@ -267,44 +220,19 @@ export default function HITECCityLocationPage() {
           <p className="text-xl text-gray-600 mb-8">
             Schedule your appointment with Dr. Sayuj Krishnan
           </p>
-          <StandardCTA />
+          <LocationCTAs location={location} className="justify-center" />
         </div>
       </section>
 
-      {/* Internal Links */}
-      <section className="py-12">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Related Information</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Link 
-              href="/services"
-              className="block bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6"
-            >
-              <h3 className="text-lg font-bold text-gray-900 mb-2">Our Services</h3>
-              <p className="text-gray-600 text-sm">Explore all neurosurgical services</p>
-            </Link>
-            <Link 
-              href="/appointments"
-              className="block bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6"
-            >
-              <h3 className="text-lg font-bold text-gray-900 mb-2">Book Appointment</h3>
-              <p className="text-gray-600 text-sm">Schedule your consultation</p>
-            </Link>
-            <Link 
-              href="/patient-stories"
-              className="block bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6"
-            >
-              <h3 className="text-lg font-bold text-gray-900 mb-2">Patient Stories</h3>
-              <p className="text-gray-600 text-sm">Read success stories</p>
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Internal Links & Pathways */}
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <LocalPathways location={location} />
+      </div>
 
       {/* NAP Section */}
       <section className="py-12 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <NAP />
+          <LocationNAPCard location={location} />
         </div>
       </section>
 
@@ -314,6 +242,9 @@ export default function HITECCityLocationPage() {
           <ReviewedBy lastReviewed="2025-01-15" />
         </div>
       </section>
+
+      {/* Location Page Tracking */}
+      <LocationPageTracker location="hitech-city" />
     </div>
   );
 }

@@ -1,20 +1,28 @@
 import React from 'react';
+import { getLocationById, LocationData } from '@/src/data/locations';
 
 interface NAPProps {
   className?: string;
   showEmail?: boolean;
   variant?: 'default' | 'compact' | 'footer';
+  locationId?: string; // Optional: allows overriding the default location
 }
 
 export default function NAP({ 
   className = '', 
   showEmail = true, 
-  variant = 'default' 
+  variant = 'default',
+  locationId = 'malakpet'
 }: NAPProps) {
   const baseClasses = "text-gray-700";
   const compactClasses = "text-sm";
   const footerClasses = "text-gray-600 text-sm";
   
+  const location = getLocationById(locationId) || getLocationById('malakpet');
+
+  // Fallback if location data is missing (should not happen with correct data)
+  if (!location) return null;
+
   const getClasses = () => {
     switch (variant) {
       case 'compact':
@@ -29,20 +37,20 @@ export default function NAP({
   return (
     <div className={getClasses()}>
       <div className="font-semibold text-gray-900 mb-2">
-        Dr. Sayuj Krishnan S
+        {location.canonical_display_name}
       </div>
       <div className="space-y-1">
         <div className="flex items-start">
           <span className="font-medium min-w-[80px]">Hospital:</span>
-          <span>Yashoda Hospital, Room 317, OPD Block, Malakpet, Hyderabad 500036</span>
+          <span>{location.address.streetAddress}, {location.address.addressLocality} {location.address.postalCode}</span>
         </div>
         <div className="flex items-center">
           <span className="font-medium min-w-[80px]">Phone:</span>
           <a 
-            href="tel:+919778280044" 
+            href={`tel:${location.telephone}`}
             className="text-blue-600 hover:text-blue-800 font-medium"
           >
-            +91 9778280044
+            {location.telephone}
           </a>
         </div>
         {showEmail && (
