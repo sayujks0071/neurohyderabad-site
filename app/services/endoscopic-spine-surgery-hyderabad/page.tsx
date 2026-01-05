@@ -15,7 +15,6 @@ import { ServiceLocationLinks } from '@/src/components/locations/ServiceLocation
 import { getServiceSources } from '../sources';
 import { PhysicianSchema } from "@/src/components/schema/PhysicianSchema";
 import { patientStories } from '@/src/content/stories';
-import { PhysicianSchema } from '@/src/components/schema/PhysicianSchema';
 
 const SERVICE_SLUG = 'endoscopic-spine-surgery-hyderabad';
 
@@ -279,7 +278,7 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
         </section>
 
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-blue-900 mb-4">Serving Patients Across Hyderabad</h2>
+          <h2 className="text-3xl font-bold text-blue-900 mb-6">Serving Patients Across Hyderabad</h2>
           <p className="text-gray-700 mb-6">
             Our Malakpet location is convenient for patients travelling from Dilsukhnagar, LB Nagar, Charminar, Koti, and other
             neighbourhoods. We help with corporate approvals, insurance paperwork, and travel coordination for families who support

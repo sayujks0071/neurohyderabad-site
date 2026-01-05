@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  <url>
+    <loc>https://www.drsayuj.info/patient-stories</loc>
+    <video:video>
+      <video:thumbnail_loc>https://img.youtube.com/vi/vqqAHzwZPYw?si=aPy69clyracOFAG-/maxresdefault.jpg</video:thumbnail_loc>
+      <video:title>Dr. Sayuj Krishnan - Neurosurgery Video</video:title>
+      <video:description>Educational video about neurosurgery and spine surgery by Dr. Sayuj Krishnan</video:description>
+      <video:content_loc>https://youtu.be/vqqAHzwZPYw?si=aPy69clyracOFAG-</video:content_loc>
+      <video:player_loc>https://www.youtube.com/embed/vqqAHzwZPYw?si=aPy69clyracOFAG-</video:player_loc>
+      <video:publication_date>2024-01-01T00:00:00+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:requires_subscription>no</video:requires_subscription>
+      <video:live>no</video:live>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://www.drsayuj.info/patient-stories</loc>
+    <video:video>
+      <video:thumbnail_loc>https://img.youtube.com/vi/HPhPB5jY0xk?si=H-Vrx9t1eGeph3an/maxresdefault.jpg</video:thumbnail_loc>
+      <video:title>Dr. Sayuj Krishnan - Neurosurgery Video</video:title>
+      <video:description>Educational video about neurosurgery and spine surgery by Dr. Sayuj Krishnan</video:description>
+      <video:content_loc>https://youtu.be/HPhPB5jY0xk?si=H-Vrx9t1eGeph3an</video:content_loc>
+      <video:player_loc>https://www.youtube.com/embed/HPhPB5jY0xk?si=H-Vrx9t1eGeph3an</video:player_loc>
+      <video:publication_date>2024-01-01T00:00:00+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:requires_subscription>no</video:requires_subscription>
+      <video:live>no</video:live>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://www.drsayuj.info/media</loc>
+    <video:video>
+      <video:thumbnail_loc>https://img.youtube.com/vi/N6_M_nZ0Zs8/maxresdefault.jpg</video:thumbnail_loc>
+      <video:title>Dr. Sayuj Krishnan - Neurosurgery Video</video:title>
+      <video:description>Educational video about neurosurgery and spine surgery by Dr. Sayuj Krishnan</video:description>
+      <video:content_loc>https://www.youtube.com/watch?v=N6_M_nZ0Zs8</video:content_loc>
+      <video:player_loc>https://www.youtube.com/embed/N6_M_nZ0Zs8</video:player_loc>
+      <video:publication_date>2024-01-01T00:00:00+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:requires_subscription>no</video:requires_subscription>
+      <video:live>no</video:live>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://www.drsayuj.info/</loc>
+    <video:video>
+      <video:thumbnail_loc>https://img.youtube.com/vi/vqqAHzwZPYw/maxresdefault.jpg</video:thumbnail_loc>
+      <video:title>Brain Tumor Surgery & Awake Craniotomy</video:title>
+      <video:description>Educational video about neurosurgery and spine surgery by Dr. Sayuj Krishnan</video:description>
+      <video:content_loc>https://www.youtube.com/watch?v=vqqAHzwZPYw</video:content_loc>
+      <video:player_loc>https://www.youtube.com/embed/vqqAHzwZPYw</video:player_loc>
+      <video:publication_date>2024-01-01T00:00:00+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:requires_subscription>no</video:requires_subscription>
+      <video:live>no</video:live>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://www.drsayuj.info/</loc>
+    <video:video>
+      <video:thumbnail_loc>https://img.youtube.com/vi/dwQOFaVyYu8/maxresdefault.jpg</video:thumbnail_loc>
+      <video:title>Endoscopic Spine Surgery</video:title>
+      <video:description>Educational video about neurosurgery and spine surgery by Dr. Sayuj Krishnan</video:description>
+      <video:content_loc>https://www.youtube.com/watch?v=dwQOFaVyYu8</video:content_loc>
+      <video:player_loc>https://www.youtube.com/embed/dwQOFaVyYu8</video:player_loc>
+      <video:publication_date>2024-01-01T00:00:00+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:requires_subscription>no</video:requires_subscription>
+      <video:live>no</video:live>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://www.drsayuj.info/</loc>
+    <video:video>
+      <video:thumbnail_loc>https://img.youtube.com/vi/brpiquTwE5c/maxresdefault.jpg</video:thumbnail_loc>
+      <video:title>Sciatica Patient Education</video:title>
+      <video:description>Educational video about neurosurgery and spine surgery by Dr. Sayuj Krishnan</video:description>
+      <video:content_loc>https://www.youtube.com/watch?v=brpiquTwE5c</video:content_loc>
+      <video:player_loc>https://www.youtube.com/embed/brpiquTwE5c</video:player_loc>
+      <video:publication_date>2024-01-01T00:00:00+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:requires_subscription>no</video:requires_subscription>
+      <video:live>no</video:live>
+    </video:video>
+  </url>
+</urlset>

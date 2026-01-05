@@ -9,11 +9,11 @@ export const metadata: Metadata = {
   title: "Endoscopic Spine Surgery in Hyderabad | Cost & Best Surgeon",
   description:
     "Expert endoscopic spine surgery in Hyderabad by Dr. Sayuj Krishnan. Minimally invasive (TESS/ILESS), transparent cost estimates (₹1.5L - ₹3.5L), and 90%+ success rates. German-trained specialist at Yashoda Hospital.",
-  alternates: { canonical: "https://www.drsayuj.info/endoscopic-spine-surgery-hyderabad" },
+  alternates: { canonical: "https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad" },
   openGraph: {
     title: "Endoscopic Spine Surgery in Hyderabad | Dr. Sayuj Krishnan",
     description: "Minimally invasive spine surgery (MISS) for faster recovery. German-trained specialist at Yashoda Hospital.",
-    url: "https://www.drsayuj.info/endoscopic-spine-surgery-hyderabad",
+    url: "https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad",
     type: "website",
   }
 };
