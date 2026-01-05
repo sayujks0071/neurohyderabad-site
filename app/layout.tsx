@@ -129,6 +129,12 @@ export const metadata: Metadata = {
   },
   manifest: "/site.webmanifest",
   category: "medical",
+  classification: "Health and Wellness",
+  other: {
+    subject: "Neurosurgery and Spine Surgery",
+    rating: "General",
+    distribution: "Global",
+  },
 };
 
 export const viewport: Viewport = {
