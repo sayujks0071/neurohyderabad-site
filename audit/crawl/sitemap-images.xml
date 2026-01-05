@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://www.drsayuj.info/</loc>
+    <image:image>
+      <image:loc>https://www.drsayuj.info/images/og-default.jpg</image:loc>
+      <image:caption>Dr. Sayuj Krishnan - Neurosurgeon in Hyderabad</image:caption>
+      <image:title>Dr. Sayuj Krishnan - Expert Neurosurgeon</image:title>
+      <image:license>https://www.drsayuj.info/content-integrity</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.drsayuj.info/images/dr-sayuj-krishnan-portrait-optimized.jpg</image:loc>
+      <image:caption>Dr. Sayuj Krishnan Portrait</image:caption>
+      <image:title>Dr. Sayuj Krishnan - Neurosurgeon</image:title>
+      <image:license>https://www.drsayuj.info/content-integrity</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.drsayuj.info/images/logo-optimized.png</image:loc>
+      <image:caption>Dr. Sayuj Krishnan Logo</image:caption>
+      <image:title>Dr. Sayuj Krishnan Neurosurgery Logo</image:title>
+      <image:license>https://www.drsayuj.info/content-integrity</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.drsayuj.info/images/dr-sayuj-krishnan-portrait-optimized.jpg</image:loc>
+      <image:caption>dr sayuj krishnan portrait optimized</image:caption>
+      <image:title>dr sayuj krishnan portrait optimized</image:title>
+      <image:license>https://www.drsayuj.info/content-integrity</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.drsayuj.info/images/dr-sayuj-krishnan-portrait.jpg</image:loc>
+      <image:caption>dr sayuj krishnan portrait</image:caption>
+      <image:title>dr sayuj krishnan portrait</image:title>
+      <image:license>https://www.drsayuj.info/content-integrity</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.drsayuj.info/about</loc>
+    <image:image>
+      <image:loc>https://www.drsayuj.info/images/dr-sayuj-krishnan-portrait-optimized.jpg</image:loc>
+      <image:caption>Dr. Sayuj Krishnan Portrait</image:caption>
+      <image:title>Dr. Sayuj Krishnan - Neurosurgeon</image:title>
+      <image:license>https://www.drsayuj.info/content-integrity</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.drsayuj.info/images/dr-sayuj-krishnan-portrait-optimized.jpg</image:loc>
+      <image:caption>dr sayuj krishnan portrait optimized</image:caption>
+      <image:title>dr sayuj krishnan portrait optimized</image:title>
+      <image:license>https://www.drsayuj.info/content-integrity</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.drsayuj.info/images/dr-sayuj-krishnan-portrait.jpg</image:loc>
+      <image:caption>dr sayuj krishnan portrait</image:caption>
+      <image:title>dr sayuj krishnan portrait</image:title>
+      <image:license>https://www.drsayuj.info/content-integrity</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.drsayuj.info/services/minimally-invasive-spine-surgery</loc>
+    <image:image>
+      <image:loc>https://www.drsayuj.info/images/og-default.jpg</image:loc>
+      <image:caption>Dr. Sayuj Krishnan - Neurosurgeon in Hyderabad</image:caption>
+      <image:title>Dr. Sayuj Krishnan - Expert Neurosurgeon</image:title>
+      <image:license>https://www.drsayuj.info/content-integrity</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.drsayuj.info/images/dr-sayuj-krishnan-portrait-optimized.jpg</image:loc>
+      <image:caption>Dr. Sayuj Krishnan Portrait</image:caption>
+      <image:title>Dr. Sayuj Krishnan - Neurosurgeon</image:title>
+      <image:license>https://www.drsayuj.info/content-integrity</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.drsayuj.info/images/logo-optimized.png</image:loc>
+      <image:caption>Dr. Sayuj Krishnan Logo</image:caption>
+      <image:title>Dr. Sayuj Krishnan Neurosurgery Logo</image:title>
+      <image:license>https://www.drsayuj.info/content-integrity</image:license>
+    </image:image>
+  </url>
+</urlset>

@@ -3,9 +3,9 @@ import { DefaultSeoProps } from 'next-seo';
 
 const SEO_CONFIG: DefaultSeoProps = {
   titleTemplate:
-    '%s | Dr. Sayuj Krishnan - Neurosurgeon & Endoscopic Spine Surgeon in Hyderabad',
+    '%s | Dr. Sayuj Krishnan',
   defaultTitle:
-    'Best Spine Surgeon at Yashoda Hospital Malakpet | Dr. Sayuj Krishnan, Neurosurgeon in Hyderabad',
+    'Best Spine Surgeon at Yashoda Hospital Malakpet | Dr. Sayuj Krishnan',
   description:
     'Consultant neurosurgeon and full endoscopic spine surgeon in Hyderabad. Advanced spine (slip disc, stenosis, sciatica), brain tumor, epilepsy, trigeminal neuralgia, and 24/7 emergency neurosurgical care at Yashoda Hospital Malakpet. 1,000+ endoscopic procedures performed.',
   canonical: 'https://www.drsayuj.info/',

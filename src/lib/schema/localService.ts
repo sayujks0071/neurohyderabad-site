@@ -109,7 +109,7 @@ export function buildLocalServiceSchema({
           name: area,
         })),
         availableAtOrFrom: {
-          '@id': `${SITE_URL}/#medicalclinic`, // Consistent ID with PhysicianSchema
+          '@id': `${SITE_URL}/${location.slug}#clinic`, // Consistent ID with PhysicianSchema
           '@type': 'MedicalClinic',
           name: location.name,
         },

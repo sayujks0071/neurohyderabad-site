@@ -37,8 +37,8 @@ import { SITE_URL } from "../src/lib/seo";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Neurosurgeon & Endoscopic Spine Specialist Hyderabad | Dr. Sayuj Krishnan S",
-    template: "%s | Dr. Sayuj Krishnan S"
+    default: "Neurosurgeon & Endoscopic Spine Specialist Hyderabad | Dr. Sayuj Krishnan",
+    template: "%s | Dr. Sayuj Krishnan"
   },
   description:
     "German-trained neurosurgeon in Hyderabad for minimally invasive spine and brain surgery with same-day discharge at Yashoda Hospital, Malakpet.",
@@ -59,9 +59,9 @@ export const metadata: Metadata = {
     "neurosurgery hyderabad",
     "best neurosurgeon hyderabad"
   ],
-  authors: [{ name: "Dr. Sayuj Krishnan S", url: SITE_URL }],
-  creator: "Dr. Sayuj Krishnan S",
-  publisher: "Dr. Sayuj Krishnan S",
+  authors: [{ name: "Dr. Sayuj Krishnan", url: SITE_URL }],
+  creator: "Dr. Sayuj Krishnan",
+  publisher: "Dr. Sayuj Krishnan",
   formatDetection: {
     email: false,
     address: false,
