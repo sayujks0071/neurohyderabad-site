@@ -13,7 +13,7 @@ const logDevelopmentSkip = (context: string) => {
 };
 
 // Email configuration
-const FROM_EMAIL = 'Dr. Sayuj Krishnan <hellodr@drsayuj.info>';
+const FROM_EMAIL = process.env.RESEND_FROM?.trim() || 'Dr. Sayuj Krishnan <hellodr@drsayuj.info>';
 const TO_EMAIL = 'hellodr@drsayuj.info';
 const ADMIN_EMAIL = 'hellodr@drsayuj.info';
 

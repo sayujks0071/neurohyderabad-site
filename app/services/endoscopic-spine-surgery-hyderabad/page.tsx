@@ -15,6 +15,7 @@ import { ServiceLocationLinks } from '@/src/components/locations/ServiceLocation
 import { getServiceSources } from '../sources';
 import { PhysicianSchema } from "@/src/components/schema/PhysicianSchema";
 import { patientStories } from '@/src/content/stories';
+import { PhysicianSchema } from '@/src/components/schema/PhysicianSchema';
 
 const SERVICE_SLUG = 'endoscopic-spine-surgery-hyderabad';
 

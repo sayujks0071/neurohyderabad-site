@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-03",
+  "last_updated": "2026-01-04",
   "keywords": [
     {
       "term": "neurosurgeon hyderabad",
@@ -60,6 +60,30 @@
       "difficulty": "High",
       "volume": "Med",
       "target_page": "/services/minimally-invasive-spine-surgery"
+    },
+    {
+      "term": "slip disc surgery cost hyderabad",
+      "difficulty": "Med",
+      "volume": "High",
+      "target_page": "/services/slip-disc-surgery-cost-hyderabad"
+    },
+    {
+      "term": "laminectomy vs microdiscectomy recovery time",
+      "difficulty": "Med",
+      "volume": "Med",
+      "target_page": "/blog/microdiscectomy-vs-laminectomy-recovery-comparison"
+    },
+    {
+      "term": "lumbar laminectomy surgery hyderabad",
+      "difficulty": "Med",
+      "volume": "Med",
+      "target_page": "/services/lumbar-laminectomy-surgery-hyderabad"
+    },
+    {
+      "term": "awake spine surgery hyderabad",
+      "difficulty": "Low",
+      "volume": "Low",
+      "target_page": "/services/awake-spine-surgery-hyderabad"
     }
   ]
 }

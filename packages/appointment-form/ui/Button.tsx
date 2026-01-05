@@ -1,12 +1,14 @@
 'use client';
 
 import type { ButtonHTMLAttributes, PropsWithChildren } from "react";
+import Spinner from "./Spinner";
 
 type ButtonVariant = "primary" | "secondary";
 
 interface ButtonProps
   extends PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>> {
   variant?: ButtonVariant;
+  isLoading?: boolean;
 }
 
 const VARIANT_CLASSES: Record<ButtonVariant, string> = {
@@ -20,6 +22,8 @@ export default function Button({
   children,
   className = "",
   variant = "primary",
+  isLoading = false,
+  disabled,
   ...props
 }: ButtonProps) {
   const baseClasses = [
@@ -39,7 +43,13 @@ export default function Button({
     .trim();
 
   return (
-    <button className={baseClasses} {...props}>
+    <button
+      className={baseClasses}
+      disabled={disabled || isLoading}
+      aria-busy={isLoading}
+      {...props}
+    >
+      {isLoading && <Spinner className="mr-2 h-5 w-5" aria-hidden="true" />}
       {children}
     </button>
   );

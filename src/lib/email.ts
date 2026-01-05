@@ -2,6 +2,8 @@ import { Resend } from 'resend';
 
 // Initialize Resend with API key (with fallback for development)
 const resend = new Resend(process.env.RESEND_API_KEY || 're_development_key');
+const DEFAULT_FROM_EMAIL = 'Dr. Sayuj Krishnan <hellodr@drsayuj.info>';
+const RESEND_FROM = process.env.RESEND_FROM?.trim();
 
 export interface EmailTemplate {
   to: string;
@@ -12,7 +14,7 @@ export interface EmailTemplate {
 }
 
 export class EmailService {
-  private static fromEmail = 'Dr. Sayuj Krishnan <hellodr@drsayuj.info>';
+  private static fromEmail = RESEND_FROM || DEFAULT_FROM_EMAIL;
 
   // Send calendar invite
   static async sendCalendarInvite(
@@ -298,6 +300,74 @@ For questions, reply to this email or call +91-9778280044.
     } catch (error) {
       console.error('Failed to send appointment summary:', error);
       const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      return { success: false, error: errorMessage };
+    }
+  }
+
+  // Send appointment request alert to clinic admin
+  static async sendAppointmentRequestAlert(data: {
+    patientName: string;
+    age: string;
+    gender: string;
+    appointmentDate: string;
+    appointmentTime: string;
+    reason: string;
+    source?: string;
+    email?: string;
+    phone?: string;
+  }) {
+    const adminEmail =
+      process.env.APPOINTMENT_ADMIN_EMAIL ||
+      process.env.NEXT_PUBLIC_CONTACT_EMAIL ||
+      "hellodr@drsayuj.info";
+
+    const emailData: EmailTemplate = {
+      to: adminEmail,
+      from: this.fromEmail,
+      subject: `New Appointment Request - ${data.patientName}`,
+      text: `New appointment request received.
+
+Patient: ${data.patientName}
+Age: ${data.age}
+Gender: ${data.gender}
+Preferred Date: ${data.appointmentDate}
+Preferred Time: ${data.appointmentTime}
+Reason: ${data.reason}
+${data.email ? `Email: ${data.email}\n` : ""}${data.phone ? `Phone: ${data.phone}\n` : ""}${data.source ? `Source: ${data.source}\n` : ""}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <div style="background: #1e40af; color: white; padding: 24px; text-align: center;">
+            <h1 style="margin: 0; font-size: 24px;">New Appointment Request</h1>
+            <p style="margin: 8px 0 0 0; font-size: 14px;">Dr. Sayuj Krishnan - Neurosurgeon</p>
+          </div>
+          <div style="padding: 24px; background: #f8fafc;">
+            <h2 style="margin-top: 0; color: #1e40af;">Patient Details</h2>
+            <p><strong>Name:</strong> ${data.patientName}</p>
+            <p><strong>Age:</strong> ${data.age}</p>
+            <p><strong>Gender:</strong> ${data.gender}</p>
+            <p><strong>Preferred Date:</strong> ${data.appointmentDate}</p>
+            <p><strong>Preferred Time:</strong> ${data.appointmentTime}</p>
+            <p><strong>Reason:</strong> ${data.reason}</p>
+            ${data.email ? `<p><strong>Email:</strong> ${data.email}</p>` : ""}
+            ${data.phone ? `<p><strong>Phone:</strong> ${data.phone}</p>` : ""}
+            ${data.source ? `<p><strong>Source:</strong> ${data.source}</p>` : ""}
+          </div>
+        </div>
+      `,
+    };
+
+    try {
+      if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === "re_development_key") {
+        console.log("Development mode: Appointment admin alert not sent (no API key)");
+        return { success: true, messageId: "dev_mode", development: true };
+      }
+
+      const result = await resend.emails.send(emailData);
+      console.log("Appointment admin alert sent successfully:", result);
+      return { success: true, messageId: result.data?.id };
+    } catch (error) {
+      console.error("Failed to send appointment admin alert:", error);
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
       return { success: false, error: errorMessage };
     }
   }

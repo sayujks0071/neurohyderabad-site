@@ -1,10 +1,7 @@
 import React from 'react';
 import { CANONICAL_PHYSICIAN_NAME, CANONICAL_TELEPHONE, getLocationById } from '../../data/locations';
 
-// Using the first location (Secunderabad/Malakpet base) as the canonical address source for the physician
-// or we can hardcode the main clinic details if they differ.
-// Ideally, we should pull from locations.ts to stay consistent.
-const MAIN_LOCATION_ID = "malakpet"; // Assuming Malakpet is the main clinic
+const MAIN_LOCATION_ID = 'malakpet';
 
 export const PhysicianSchema: React.FC = () => {
   const mainLocation = getLocationById(MAIN_LOCATION_ID);
@@ -28,9 +25,9 @@ export const PhysicianSchema: React.FC = () => {
       "addressCountry": mainLocation.address.addressCountry
     },
     "affiliation": {
-       "@type": "MedicalClinic",
-       "name": mainLocation.name,
-       "@id": `https://www.drsayuj.info/${mainLocation.slug}#clinic`
+      "@type": "MedicalClinic",
+      "name": mainLocation.name,
+      "@id": `https://www.drsayuj.info/${mainLocation.slug}#clinic`
     }
   };
 
