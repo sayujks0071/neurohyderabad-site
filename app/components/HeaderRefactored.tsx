@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import SiteSearch from './SiteSearch';
@@ -71,14 +71,28 @@ const NAV_ITEMS: NavItem[] = [
 export default function HeaderRefactored() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const sentinelRef = useRef<HTMLDivElement>(null);
 
-  // Handle scroll for sticky header shadow
+  // Optimized scroll detection using IntersectionObserver to avoid main-thread scroll listeners
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // If sentinel is NOT intersecting, we have scrolled past the top area
+        setIsScrolled(!entry.isIntersecting);
+      },
+      { threshold: 0 }
+    );
+
+    const currentSentinel = sentinelRef.current;
+    if (currentSentinel) {
+      observer.observe(currentSentinel);
+    }
+
+    return () => {
+      if (currentSentinel) {
+        observer.unobserve(currentSentinel);
+      }
     };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   // Close mobile menu on escape key
@@ -108,6 +122,12 @@ export default function HeaderRefactored() {
 
   return (
     <>
+      {/* Scroll sentinel: invisible element to detect when user scrolls past top */}
+      <div
+        ref={sentinelRef}
+        className="absolute top-0 left-0 w-full h-4 pointer-events-none bg-transparent -z-50"
+        aria-hidden="true"
+      />
       <header
         className={`sticky-nav sticky top-0 z-50 border-b transition-shadow ${
           isScrolled ? 'shadow-md' : 'shadow-sm'
