@@ -1,0 +1,55 @@
+name: Jules SEO Reprint
+
+on:
+  schedule:
+    - cron: '30 2 * * *'
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  create-issue:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create Issue
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+
+            const promptFile = 'jules-prompts/seo-reprint.md';
+            const titleBase = 'SEO Reprint Task';
+
+            const today = new Date().toISOString().split('T')[0];
+            const title = `[Jules] ${titleBase} - ${today}`;
+
+            // Check for existing issue
+            const { data: issues } = await github.rest.search.issuesAndPullRequests({
+              q: `repo:${context.repo.owner}/${context.repo.repo} is:issue "${title}"`
+            });
+
+            if (issues.total_count > 0) {
+              console.log(`Issue "${title}" already exists. Skipping.`);
+              return;
+            }
+
+            try {
+              const body = fs.readFileSync(promptFile, 'utf8');
+
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: title,
+                body: body,
+                labels: ['jules']
+              });
+              console.log(`Created issue: ${title}`);
+            } catch (error) {
+              console.error(`Failed to read prompt file: ${promptFile}`);
+              throw error;
+            }
