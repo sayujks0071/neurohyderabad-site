@@ -2,6 +2,8 @@ import { Resend } from 'resend';
 
 // Initialize Resend with API key (with fallback for development)
 const resend = new Resend(process.env.RESEND_API_KEY || 're_development_key');
+const DEFAULT_FROM_EMAIL = 'Dr. Sayuj Krishnan <hellodr@drsayuj.info>';
+const RESEND_FROM = process.env.RESEND_FROM?.trim();
 
 export interface EmailTemplate {
   to: string;
@@ -12,7 +14,7 @@ export interface EmailTemplate {
 }
 
 export class EmailService {
-  private static fromEmail = 'Dr. Sayuj Krishnan <hellodr@drsayuj.info>';
+  private static fromEmail = RESEND_FROM || DEFAULT_FROM_EMAIL;
 
   // Send calendar invite
   static async sendCalendarInvite(
