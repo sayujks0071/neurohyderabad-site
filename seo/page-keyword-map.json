@@ -1,10 +1,55 @@
 {
-  "/": ["neurosurgeon hyderabad", "best spine surgeon hyderabad", "brain surgeon hyderabad"],
-  "/services/minimally-invasive-spine-surgery": ["endoscopic spine surgery hyderabad", "minimally invasive spine surgery", "laser spine surgery hyderabad"],
-  "/services/cervical-endoscopic-spine-surgery-hyderabad": ["cervical endoscopic spine surgery hyderabad", "endoscopic cervical discectomy", "keyhole neck surgery hyderabad"],
-  "/conditions/brain-tumor-surgery-hyderabad": ["brain tumor surgery hyderabad", "brain tumor treatment", "glioma surgery hyderabad"],
-  "/conditions/spine-tumor-surgery-hyderabad": ["spine tumor surgery hyderabad", "spinal tumor treatment", "spinal cord tumor surgery"],
-  "/conditions/slip-disc-treatment-hyderabad": ["slip disc treatment hyderabad", "sciatica treatment hyderabad", "herniated disc surgery"],
-  "/conditions/cervical-myelopathy-decompression-hyderabad": ["cervical myelopathy surgery hyderabad", "cervical spondylosis surgery"],
-  "/blog/endoscopic-spine-surgery-recovery-timeline": ["spine surgery recovery time", "endoscopic spine surgery recovery", "return to work after spine surgery"]
+  "/": [
+    "neurosurgeon hyderabad",
+    "best spine surgeon hyderabad"
+  ],
+  "/services/minimally-invasive-spine-surgery": [
+    "endoscopic spine surgery hyderabad",
+    "laser spine surgery hyderabad",
+    "minimally invasive spine surgery hyderabad"
+  ],
+  "/services/cervical-endoscopic-spine-surgery-hyderabad": [
+    "cervical endoscopic spine surgery hyderabad"
+  ],
+  "/conditions/brain-tumor-surgery-hyderabad": [
+    "brain tumor surgery hyderabad",
+    "best neurosurgeon for brain tumor hyderabad"
+  ],
+  "/conditions/spine-tumor-surgery-hyderabad": [
+    "spine tumor surgery hyderabad"
+  ],
+  "/conditions/slip-disc-treatment-hyderabad": [
+    "slip disc treatment hyderabad",
+    "slip disc surgery hyderabad"
+  ],
+  "/conditions/cervical-myelopathy-decompression-hyderabad": [
+    "cervical myelopathy surgery hyderabad"
+  ],
+  "/blog/endoscopic-spine-surgery-recovery-timeline": [
+    "spine surgery recovery time"
+  ],
+  "/services/slip-disc-surgery-cost-hyderabad": [
+    "slip disc surgery cost hyderabad"
+  ],
+  "/blog/microdiscectomy-vs-laminectomy-recovery-comparison": [
+    "laminectomy vs microdiscectomy recovery time",
+    "microdiscectomy vs laminectomy cost hyderabad",
+    "laminectomy recovery time"
+  ],
+  "/services/lumbar-laminectomy-surgery-hyderabad": [
+    "lumbar laminectomy surgery hyderabad"
+  ],
+  "/services/awake-spine-surgery-hyderabad": [
+    "awake spine surgery hyderabad"
+  ],
+  "/services/endoscopic-discectomy-hyderabad": [
+    "endoscopic discectomy hyderabad",
+    "micro lumbar disc surgery hyderabad"
+  ],
+  "/services/spine-surgery-cost-hyderabad": [
+    "spine surgery cost hyderabad"
+  ],
+  "/blog/endoscopic-vs-microdiscectomy-hyderabad": [
+    "endoscopic discectomy vs open surgery"
+  ]
 }
