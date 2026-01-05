@@ -27,6 +27,7 @@ const schema = yup.object({
   phone: yup
     .string()
     .required("Phone number is required")
+    .transform((value) => (value ? value.replace(/[^\d+]/g, "") : value))
     .matches(/^[0-9+]{8,15}$/, "Please enter a valid phone number (8-15 digits)"),
   email: yup.string().email("Invalid email address").required("Email is required"),
   city: yup.string().required("City is required"),
@@ -115,6 +116,7 @@ export default function LeadForm() {
         <Input
           label="Full Name"
           id="fullName"
+          autoComplete="name"
           {...register("fullName")}
           error={errors.fullName?.message}
           required
@@ -125,6 +127,7 @@ export default function LeadForm() {
             label="Phone Number"
             id="phone"
             type="tel"
+            autoComplete="tel"
             {...register("phone")}
             error={errors.phone?.message}
             required
@@ -133,6 +136,7 @@ export default function LeadForm() {
             label="Email"
             id="email"
             type="email"
+            autoComplete="email"
             {...register("email")}
             error={errors.email?.message}
             required
@@ -142,6 +146,7 @@ export default function LeadForm() {
         <Input
           label="City"
           id="city"
+          autoComplete="address-level2"
           {...register("city")}
           error={errors.city?.message}
           required

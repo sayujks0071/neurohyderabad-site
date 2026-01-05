@@ -299,7 +299,7 @@ export default function SciaticaTreatmentPage() {
           </div>
         </div>
 
-         <ConditionLocationLinks />
+        <ConditionLocationLinks />
       </Section>
 
       <Section className="border-t border-gray-200">

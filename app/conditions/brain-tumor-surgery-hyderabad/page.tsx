@@ -434,7 +434,7 @@ export default function BrainTumorSurgeryConditionPage() {
               </details>
             ))}
           </div>
-           <ConditionLocationLinks />
+          <ConditionLocationLinks />
         </div>
       </section>
 
