@@ -12,6 +12,7 @@ import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import TrustProof from '@/app/_components/TrustProof';
 import { getServiceSources } from '../sources';
+import { patientStories } from '@/src/content/stories';
 
 const SERVICE_SLUG = 'brain-tumor-surgery-hyderabad';
 
@@ -149,6 +150,11 @@ const gbpSchema = {
 };
 
 export default function BrainTumorSurgeryHyderabadPage() {
+  const relevantStories = patientStories.filter(story => {
+    const tags = story.tags.join(' ').toLowerCase();
+    return tags.includes('brain') || tags.includes('meningioma');
+  }).slice(0, 2);
+
   return (
     <>
       <JsonLd data={schema} />
@@ -193,7 +199,7 @@ export default function BrainTumorSurgeryHyderabadPage() {
               </Link>
             </div>
           </div>
-          <TrustProof serviceType="brain" className="mb-6" />
+          <TrustProof serviceType="brain" className="mb-6" stories={relevantStories} />
           <div className="bg-blue-50 border border-blue-100 rounded-2xl p-6 shadow-sm">
             <h2 className="text-xl font-semibold text-blue-800 mb-4">Why Malakpet Patients Trust Our Team</h2>
             <ul className="space-y-3 text-gray-700">

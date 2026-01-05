@@ -3,27 +3,19 @@
 import { useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { patientStories } from '@/src/content/stories';
 import { analytics } from '@/src/lib/analytics';
+import type { PatientStory } from '@/src/content/stories';
 
 interface TrustProofProps {
   serviceType?: 'spine' | 'brain' | 'epilepsy' | 'all';
   className?: string;
+  stories: PatientStory[];
 }
 
-export default function TrustProof({ serviceType = 'all', className = '' }: TrustProofProps) {
+export default function TrustProof({ serviceType = 'all', className = '', stories = [] }: TrustProofProps) {
   const pathname = usePathname();
   
-  // Filter patient stories based on service type
-  const relevantStories = serviceType === 'all' 
-    ? patientStories.slice(0, 2)
-    : patientStories.filter(story => {
-        const tags = story.tags.join(' ').toLowerCase();
-        if (serviceType === 'spine') return tags.includes('spine') || tags.includes('tlif');
-        if (serviceType === 'brain') return tags.includes('brain') || tags.includes('meningioma');
-        if (serviceType === 'epilepsy') return tags.includes('epilepsy');
-        return true;
-      }).slice(0, 2);
+  // Use passed stories prop instead of importing large data file
 
   // Track TrustProof component view (on mount) - use useEffect for proper client-side behavior
   useEffect(() => {
@@ -65,10 +57,10 @@ export default function TrustProof({ serviceType = 'all', className = '' }: Trus
           </Link>
         </div>
 
-        {relevantStories.length > 0 && (
+        {stories.length > 0 && (
           <div className="space-y-3">
             <h4 className="font-semibold text-gray-900 text-sm mb-2">Patient Success Stories:</h4>
-            {relevantStories.map((story) => (
+            {stories.map((story) => (
               <Link
                 key={story.id}
                 href={`/patient-stories/${story.slug}`}
@@ -130,4 +122,3 @@ export default function TrustProof({ serviceType = 'all', className = '' }: Trus
     </section>
   );
 }
-
