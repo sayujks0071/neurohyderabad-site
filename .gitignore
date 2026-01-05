@@ -53,8 +53,10 @@ docs/internal/
 *.md
 !docs/MAINTENANCE_REPORT.md
 !integrations/apps-script/README.md
+!docs/JULES_SETUP.md
 *.patch
 *.sh
+!.jules-setup.sh
 *.png
 
 # Ignore specific JSON files (but not essential config files)
