@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { rateLimit } from "@/src/lib/rate-limit";
 
 export async function GET() {
   return NextResponse.json({
@@ -9,13 +10,38 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
-  try {
-    const { code } = await request.json();
+  // 🛡️ Sentinel: Add rate limiting to prevent abuse
+  const ip = request.headers.get("x-forwarded-for") ?? "unknown";
+  const limit = rateLimit(ip, 10, 60 * 1000); // 10 requests per minute
 
-    if (!code) {
+  if (!limit.success) {
+    return NextResponse.json(
+      { error: "Too many requests. Please try again later." },
+      { status: 429 }
+    );
+  }
+
+  try {
+    const body = await request.json();
+    const { code } = body;
+
+    if (!code || typeof code !== 'string') {
       return NextResponse.json(
         { error: 'Authorization code is required' },
         { status: 400 }
+      );
+    }
+
+    // 🛡️ Sentinel: Use environment variables instead of hardcoded secrets
+    const clientId = process.env.GOOGLE_CLIENT_ID;
+    const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
+    const redirectUri = process.env.GOOGLE_REDIRECT_URI || 'https://www.drsayuj.info/auth/callback';
+
+    if (!clientId || !clientSecret) {
+      console.error('Google OAuth configuration missing');
+      return NextResponse.json(
+        { error: 'Internal server configuration error' },
+        { status: 500 }
       );
     }
 
@@ -26,11 +52,11 @@ export async function POST(request: NextRequest) {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: new URLSearchParams({
-        client_id: '568785727095-ro3c0n1om83ahqut7j28vobmnhn8h5m2.apps.googleusercontent.com',
-        client_secret: process.env.GOOGLE_CLIENT_SECRET || '',
+        client_id: clientId,
+        client_secret: clientSecret,
         code: code,
         grant_type: 'authorization_code',
-        redirect_uri: 'https://www.drsayuj.info/auth/callback',
+        redirect_uri: redirectUri,
       }),
     });
 
