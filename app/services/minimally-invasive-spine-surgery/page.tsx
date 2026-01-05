@@ -457,45 +457,77 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
         </section>
 
         <section className="mb-12">
+          <h2 className="text-3xl font-bold text-blue-800 mb-6">Red Flag Symptoms (When to see a doctor urgently)</h2>
+          <div className="bg-red-50 border-l-4 border-red-500 p-6 rounded-r-lg">
+            <p className="text-lg font-semibold text-red-800 mb-3">
+              Seek immediate medical attention if you experience:
+            </p>
+            <ul className="space-y-2 text-red-700">
+              <li className="flex items-start">
+                <span className="font-bold mr-2">•</span>
+                <span><strong>Cauda Equina Syndrome signs:</strong> Loss of bladder or bowel control, or numbness in the groin/saddle area.</span>
+              </li>
+              <li className="flex items-start">
+                <span className="font-bold mr-2">•</span>
+                <span><strong>Progressive weakness:</strong> Sudden inability to lift your foot (foot drop) or leg weakness that gets worse.</span>
+              </li>
+              <li className="flex items-start">
+                <span className="font-bold mr-2">•</span>
+                <span><strong>History of cancer:</strong> If you have a history of cancer and develop new, severe back pain.</span>
+              </li>
+            </ul>
+            <p className="mt-4 text-sm text-red-600 italic">
+              *These symptoms may indicate serious nerve compression requiring urgent evaluation to prevent permanent damage.
+            </p>
+          </div>
+        </section>
+
+        <section className="mb-12">
           <h2 className="text-3xl font-bold text-blue-800 mb-6">Related Conditions & Symptoms</h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div className="bg-white p-6 rounded-lg shadow-sm border">
-              <h3 className="text-xl font-semibold text-blue-700 mb-3">Conditions We Treat</h3>
+              <h3 className="text-xl font-semibold text-blue-700 mb-3">Spine Conditions We Treat</h3>
               <ul className="space-y-2">
                 <li>
-                  <Link href="/conditions/cervical-radiculopathy-treatment-hyderabad" className="text-blue-600 hover:text-blue-800 hover:underline">
-                    Cervical Radiculopathy Treatment
+                  <Link href="/conditions/spinal-stenosis-treatment-hyderabad" className="text-blue-600 hover:text-blue-800 hover:underline">
+                    Spinal Stenosis Treatment
                   </Link>
-                  <span className="text-gray-600 text-sm ml-2">- Neck and arm pain from nerve compression</span>
+                  <span className="text-gray-600 text-sm ml-2">- Narrowing of spinal canal</span>
                 </li>
                 <li>
-                  <Link href="/conditions/trigeminal-neuralgia-treatment-hyderabad" className="text-blue-600 hover:text-blue-800 hover:underline">
-                    Trigeminal Neuralgia Treatment
+                  <Link href="/conditions/slip-disc-treatment-hyderabad" className="text-blue-600 hover:text-blue-800 hover:underline">
+                    Slip Disc / Herniated Disc
                   </Link>
-                  <span className="text-gray-600 text-sm ml-2">- Severe facial pain management</span>
+                  <span className="text-gray-600 text-sm ml-2">- Microdiscectomy & endoscopic options</span>
                 </li>
                 <li>
-                  <Link href="/conditions/brain-tumor-surgery-hyderabad" className="text-blue-600 hover:text-blue-800 hover:underline">
-                    Brain Tumor Surgery
+                  <Link href="/conditions/spine-tumor-surgery-hyderabad" className="text-blue-600 hover:text-blue-800 hover:underline">
+                    Spine Tumor Surgery
                   </Link>
-                  <span className="text-gray-600 text-sm ml-2">- Advanced brain tumor treatment</span>
+                  <span className="text-gray-600 text-sm ml-2">- Removal of spinal cord tumors</span>
                 </li>
               </ul>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-sm border">
-              <h3 className="text-xl font-semibold text-blue-700 mb-3">Common Symptoms</h3>
+              <h3 className="text-xl font-semibold text-blue-700 mb-3">Related Symptoms</h3>
               <ul className="space-y-2">
                 <li>
-                  <Link href="/symptoms/signs-of-brain-tumor" className="text-blue-600 hover:text-blue-800 hover:underline">
-                    Signs of Brain Tumor
+                  <Link href="/conditions/sciatica-treatment-hyderabad" className="text-blue-600 hover:text-blue-800 hover:underline">
+                    Sciatica (Leg Pain)
                   </Link>
-                  <span className="text-gray-600 text-sm ml-2">- Early warning signs to watch for</span>
+                  <span className="text-gray-600 text-sm ml-2">- Shooting pain down the leg</span>
                 </li>
                 <li>
-                  <Link href="/symptoms/pain-on-top-of-head-causes" className="text-blue-600 hover:text-blue-800 hover:underline">
-                    Head Pain Causes
+                  <Link href="/conditions/cervical-radiculopathy-treatment-hyderabad" className="text-blue-600 hover:text-blue-800 hover:underline">
+                    Cervical Radiculopathy
                   </Link>
-                  <span className="text-gray-600 text-sm ml-2">- Understanding different types of head pain</span>
+                  <span className="text-gray-600 text-sm ml-2">- Pinched nerve in the neck</span>
+                </li>
+                <li>
+                  <Link href="/conditions/cervical-myelopathy-decompression-hyderabad" className="text-blue-600 hover:text-blue-800 hover:underline">
+                    Cervical Myelopathy
+                  </Link>
+                  <span className="text-gray-600 text-sm ml-2">- Cord compression symptoms</span>
                 </li>
               </ul>
             </div>
