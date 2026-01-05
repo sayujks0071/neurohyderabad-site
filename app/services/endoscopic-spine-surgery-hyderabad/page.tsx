@@ -13,7 +13,7 @@ import SourceList from '@/app/_components/SourceList';
 import TrustProof from '@/app/_components/TrustProof';
 import { ServiceLocationLinks } from '@/src/components/locations/ServiceLocationLinks';
 import { getServiceSources } from '../sources';
-import { PhysicianSchema } from "@/src/components/schema/PhysicianSchema";
+import { PhysicianSchema } from '@/src/components/schema/PhysicianSchema';
 
 const SERVICE_SLUG = 'endoscopic-spine-surgery-hyderabad';
 
