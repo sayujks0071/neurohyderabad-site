@@ -1,5 +1,8 @@
 import { SITE_URL } from '../seo';
-import { CLINIC } from '@/app/_lib/clinic';
+import { getLocationById } from '@/src/data/locations';
+
+// We default to Malakpet as the main clinic location for services
+const DEFAULT_LOCATION_ID = 'malakpet';
 
 interface LocalServiceSchemaOptions {
   slug: string;
@@ -15,6 +18,15 @@ export function buildLocalServiceSchema({
   areaServed = ['Hyderabad', 'Telangana'],
 }: LocalServiceSchemaOptions) {
   const serviceUrl = `${SITE_URL}/services/${slug}`;
+
+  const location = getLocationById(DEFAULT_LOCATION_ID);
+
+  // If location data is missing, we return a minimal schema or throw error.
+  // For safety, we'll return what we can or rely on existing fallbacks if needed.
+  if (!location) {
+      console.error(`Default location ${DEFAULT_LOCATION_ID} not found for schema generation.`);
+      return {};
+  }
 
   return {
     '@context': 'https://schema.org',
@@ -52,7 +64,7 @@ export function buildLocalServiceSchema({
         provider: {
           '@id': `${SITE_URL}/#physician`,
           '@type': 'Physician',
-          name: 'Dr Sayuj Krishnan',
+          name: location.canonical_display_name,
         },
         areaServed: areaServed.map((area) => ({
           '@type': 'AdministrativeArea',
@@ -60,21 +72,23 @@ export function buildLocalServiceSchema({
         })),
         availableAtOrFrom: {
           '@type': 'MedicalClinic',
-          name: CLINIC.name,
+          name: location.name,
           address: {
             '@type': 'PostalAddress',
-            streetAddress: CLINIC.street,
-            addressLocality: CLINIC.locality,
-            addressRegion: CLINIC.region,
-            postalCode: CLINIC.postalCode,
-            addressCountry: 'IN',
+            streetAddress: location.address.streetAddress,
+            addressLocality: location.address.addressLocality,
+            addressRegion: location.address.addressRegion,
+            postalCode: location.address.postalCode,
+            addressCountry: location.address.addressCountry,
           },
-          geo: {
-            '@type': 'GeoCoordinates',
-            latitude: CLINIC.geo.lat,
-            longitude: CLINIC.geo.lng,
-          },
-          telephone: CLINIC.phoneHuman,
+          ...(location.geo && {
+            geo: {
+                '@type': 'GeoCoordinates',
+                latitude: location.geo.latitude,
+                longitude: location.geo.longitude,
+            }
+          }),
+          telephone: location.telephone,
           url: SITE_URL,
         },
       },
@@ -88,16 +102,16 @@ export function buildLocalServiceSchema({
         provider: {
           '@id': `${SITE_URL}/#physician`,
           '@type': 'Physician',
-          name: 'Dr Sayuj Krishnan',
+          name: location.canonical_display_name,
         },
         areaServed: areaServed.map((area) => ({
           '@type': 'AdministrativeArea',
           name: area,
         })),
         availableAtOrFrom: {
-          '@id': `${SITE_URL}/#medicalclinic`,
+          '@id': `${SITE_URL}/#medicalclinic`, // Consistent ID with PhysicianSchema
           '@type': 'MedicalClinic',
-          name: CLINIC.name,
+          name: location.name,
         },
       },
     ],

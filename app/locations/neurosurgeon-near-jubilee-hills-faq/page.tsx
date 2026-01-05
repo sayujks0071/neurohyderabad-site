@@ -1,80 +1,73 @@
-import { Metadata } from 'next';
-import { makeMetadata } from '@/app/_lib/meta';
-import SchemaScript from '@/app/_schema/Script';
+import React from 'react';
+import Link from 'next/link';
+import { getLocationById } from "@/src/data/locations";
+import { LocationNAPCard } from "@/src/components/locations/LocationNAPCard";
+import { LocationSchema } from "@/src/components/locations/LocationSchema";
+import { notFound } from "next/navigation";
 import ReviewedBy from '@/app/_components/ReviewedBy';
-import NAP from '@/app/_components/NAP';
 import MedicalCitations from '@/app/_components/MedicalCitations';
 import SmartImage from '@/components/SmartImage';
-import Link from 'next/link';
+import LocationPageTracker from '@/src/components/LocationPageTracker';
 
-export const metadata: Metadata = makeMetadata({
+// Force static generation
+export const dynamic = 'force-static';
+export const dynamicParams = false;
+export const revalidate = 86400;
+
+export const metadata = {
   title: 'Neurosurgeon Near Jubilee Hills FAQ | Dr. Sayuj Krishnan',
   description: 'Frequently asked questions about finding a neurosurgeon near Jubilee Hills, Hyderabad. Expert answers from Dr. Sayuj Krishnan about brain and spine surgery options.',
-  canonicalPath: '/locations/neurosurgeon-near-jubilee-hills-faq',
-});
+  alternates: {
+    canonical: 'https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills-faq',
+  },
+};
 
-export default function NeurosurgeonNearJubileeHillsFAQPage() {
-  const url = 'https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills-faq';
-  
-  const schemas = [
+const FAQ = [
     {
-      '@context': 'https://schema.org',
-      '@type': 'WebPage',
-      '@id': `${url}#webpage`,
-      url,
-      name: 'Neurosurgeon Near Jubilee Hills FAQ | Dr. Sayuj Krishnan',
-      description: 'Frequently asked questions about finding a neurosurgeon near Jubilee Hills, Hyderabad. Expert answers from Dr. Sayuj Krishnan about brain and spine surgery options.',
-      author: { '@id': 'https://www.drsayuj.info/#physician' },
-      publisher: { '@id': 'https://www.drsayuj.info/#physician' },
-      datePublished: '2025-01-15',
-      dateModified: '2025-01-15',
-      mainEntityOfPage: url,
-      breadcrumb: { '@id': `${url}#breadcrumb` }
+      q: "Who is the best neurosurgeon near Jubilee Hills?",
+      a: "Dr. Sayuj Krishnan is a leading neurosurgeon accessible from Jubilee Hills, specializing in minimally invasive brain and spine surgery. With over 9 years of experience and advanced training in Germany, he offers endoscopic spine surgery with same-day discharge options."
     },
     {
-      '@context': 'https://schema.org',
-      '@type': 'BreadcrumbList',
-      '@id': `${url}#breadcrumb`,
-      itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.drsayuj.info/' },
-        { '@type': 'ListItem', position: 2, name: 'Locations', item: 'https://www.drsayuj.info/locations' },
-        { '@type': 'ListItem', position: 3, name: 'Neurosurgeon Near Jubilee Hills FAQ', item: url }
-      ]
+      q: "How far is Dr. Sayuj's clinic from Jubilee Hills?",
+      a: "Dr. Sayuj practices at Yashoda Hospital Malakpet, approximately 15-20 km from Jubilee Hills. The journey takes 30-45 minutes by road via ORR, or 25-35 minutes by metro from Jubilee Hills to Malakpet."
+    },
+    {
+      q: "What spine conditions can be treated near Jubilee Hills?",
+      a: "Dr. Sayuj treats all spine conditions including slip disc, spinal stenosis, spondylolisthesis, sciatica, and spinal tumors. He specializes in endoscopic spine surgery with 6-8mm incisions and same-day discharge for many procedures."
+    },
+    {
+      q: "Is there emergency neurosurgery available near Jubilee Hills?",
+      a: "Yes, Dr. Sayuj provides 24/7 emergency neurosurgery services. For urgent cases, you can call +91 97782 80044 or visit Yashoda Hospital Malakpet's emergency department, which is easily accessible from Jubilee Hills."
+    },
+    {
+      q: "What are the costs of neurosurgery near Jubilee Hills?",
+      a: "Costs vary by procedure. Endoscopic discectomy costs ₹1.5-2L, spinal fusion ₹3-4L, and brain tumor surgery ₹4-5.5L. Dr. Sayuj offers transparent pricing and works with most insurance providers for cashless treatment."
+    },
+    {
+      q: "How do I book an appointment with a neurosurgeon near Jubilee Hills?",
+      a: "You can book online at www.drsayuj.info/appointments, call +91 97782 80044, or visit Yashoda Hospital Malakpet. Dr. Sayuj offers flexible appointment timings and same-day consultations for urgent cases."
     }
   ];
 
-  const faqs = [
-    {
-      question: "Who is the best neurosurgeon near Jubilee Hills?",
-      answer: "Dr. Sayuj Krishnan is a leading neurosurgeon accessible from Jubilee Hills, specializing in minimally invasive brain and spine surgery. With over 9 years of experience and advanced training in Germany, he offers endoscopic spine surgery with same-day discharge options."
-    },
-    {
-      question: "How far is Dr. Sayuj's clinic from Jubilee Hills?",
-      answer: "Dr. Sayuj practices at Yashoda Hospital Malakpet, approximately 15-20 km from Jubilee Hills. The journey takes 30-45 minutes by road via ORR, or 25-35 minutes by metro from Jubilee Hills to Malakpet."
-    },
-    {
-      question: "What spine conditions can be treated near Jubilee Hills?",
-      answer: "Dr. Sayuj treats all spine conditions including slip disc, spinal stenosis, spondylolisthesis, sciatica, and spinal tumors. He specializes in endoscopic spine surgery with 6-8mm incisions and same-day discharge for many procedures."
-    },
-    {
-      question: "Is there emergency neurosurgery available near Jubilee Hills?",
-      answer: "Yes, Dr. Sayuj provides 24/7 emergency neurosurgery services. For urgent cases, you can call +91 97782 80044 or visit Yashoda Hospital Malakpet's emergency department, which is easily accessible from Jubilee Hills."
-    },
-    {
-      question: "What are the costs of neurosurgery near Jubilee Hills?",
-      answer: "Costs vary by procedure. Endoscopic discectomy costs ₹1.5-2L, spinal fusion ₹3-4L, and brain tumor surgery ₹4-5.5L. Dr. Sayuj offers transparent pricing and works with most insurance providers for cashless treatment."
-    },
-    {
-      question: "How do I book an appointment with a neurosurgeon near Jubilee Hills?",
-      answer: "You can book online at www.drsayuj.info/appointments, call +91 97782 80044, or visit Yashoda Hospital Malakpet. Dr. Sayuj offers flexible appointment timings and same-day consultations for urgent cases."
-    }
+export default function NeurosurgeonNearJubileeHillsFAQPage() {
+  const location = getLocationById("jubilee-hills");
+
+  if (!location) {
+    return notFound();
+  }
+
+  const breadcrumb = [
+    { name: "Locations", item: 'https://www.drsayuj.info/locations' },
+    { name: "Neurosurgeon Near Jubilee Hills FAQ", item: 'https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills-faq' }
   ];
 
   return (
-    <main id="main" className="prose">
-      <h1>Neurosurgeon Near Jubilee Hills FAQ | Dr. Sayuj Krishnan</h1>
+    <main id="main" className="max-w-4xl mx-auto px-4 py-12">
+      <LocationSchema location={location} breadcrumb={breadcrumb} faq={FAQ} />
 
-      <section className="not-prose mb-10 rounded-xl border border-blue-100 bg-blue-50 p-6 text-sm leading-6">
+      <h1 className="text-3xl md:text-4xl font-bold mb-8">Neurosurgeon Near Jubilee Hills FAQ | Dr. Sayuj Krishnan</h1>
+
+      <section className="mb-10 rounded-xl border border-blue-100 bg-blue-50 p-6 text-sm leading-6">
         <h2 className="mb-2 text-base font-semibold text-blue-900">Quick answers</h2>
         <ul className="list-disc pl-5 text-blue-900">
           <li>Dr. Sayuj Krishnan is the leading neurosurgeon accessible from Jubilee Hills.</li>
@@ -89,32 +82,32 @@ export default function NeurosurgeonNearJubileeHillsFAQPage() {
         width={1400}
         height={780}
         alt="Neurosurgeon consultation near Jubilee Hills"
-        className="mb-10 rounded-xl"
+        className="mb-10 rounded-xl w-full h-auto object-cover"
         priority
       />
 
-      <p>
+      <p className="text-lg text-gray-700 mb-8">
         If you're looking for a neurosurgeon near Jubilee Hills, Dr. Sayuj Krishnan provides expert brain and spine surgery 
         care at Yashoda Hospital Malakpet. This FAQ addresses common questions about accessing neurosurgical care from Jubilee Hills.
       </p>
 
-      <h2>Frequently Asked Questions</h2>
+      <h2 className="text-2xl font-bold mb-6 text-gray-900">Frequently Asked Questions</h2>
       
-      <div className="space-y-6">
-        {faqs.map((faq, index) => (
-          <div key={index} className="bg-white border border-gray-200 rounded-lg p-6">
-            <h3 className="text-lg font-semibold mb-3 text-blue-800">{faq.question}</h3>
-            <p className="text-gray-700">{faq.answer}</p>
+      <div className="space-y-6 mb-12">
+        {FAQ.map((faq, index) => (
+          <div key={index} className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+            <h3 className="text-lg font-semibold mb-3 text-blue-800">{faq.q}</h3>
+            <p className="text-gray-700">{faq.a}</p>
           </div>
         ))}
       </div>
 
-      <h2>Getting to Dr. Sayuj from Jubilee Hills</h2>
+      <h2 className="text-2xl font-bold mb-6 text-gray-900">Getting to Dr. Sayuj from Jubilee Hills</h2>
       
-      <div className="grid gap-6 md:grid-cols-2">
-        <div className="bg-white border border-gray-200 rounded-lg p-6">
+      <div className="grid gap-6 md:grid-cols-2 mb-12">
+        <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
           <h3 className="text-xl font-semibold mb-4 text-blue-800">By Road</h3>
-          <div className="space-y-2 text-sm">
+          <div className="space-y-2 text-sm text-gray-700">
             <p><strong>Distance:</strong> 15-20 km</p>
             <p><strong>Travel Time:</strong> 30-45 minutes</p>
             <p><strong>Route:</strong> Jubilee Hills → ORR → Malakpet → Yashoda Hospital</p>
@@ -122,9 +115,9 @@ export default function NeurosurgeonNearJubileeHillsFAQPage() {
           </div>
         </div>
         
-        <div className="bg-white border border-gray-200 rounded-lg p-6">
+        <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
           <h3 className="text-xl font-semibold mb-4 text-blue-800">By Metro</h3>
-          <div className="space-y-2 text-sm">
+          <div className="space-y-2 text-sm text-gray-700">
             <p><strong>Route:</strong> Jubilee Hills Metro → Malakpet Metro</p>
             <p><strong>Travel Time:</strong> 25-35 minutes</p>
             <p><strong>Walk:</strong> 5 minutes from Malakpet Metro to hospital</p>
@@ -133,11 +126,11 @@ export default function NeurosurgeonNearJubileeHillsFAQPage() {
         </div>
       </div>
 
-      <h2>Services Available Near Jubilee Hills</h2>
+      <h2 className="text-2xl font-bold mb-6 text-gray-900">Services Available Near Jubilee Hills</h2>
       
-      <div className="bg-green-50 rounded-lg p-6 mb-8">
+      <div className="bg-green-50 rounded-lg p-6 mb-8 border border-green-100">
         <h3 className="text-lg font-semibold mb-4 text-green-800">Neurosurgical Services</h3>
-        <div className="grid md:grid-cols-2 gap-4">
+        <div className="grid md:grid-cols-2 gap-4 text-green-900">
           <div>
             <h4 className="font-semibold mb-2">Spine Surgery</h4>
             <ul className="text-sm space-y-1">
@@ -159,25 +152,25 @@ export default function NeurosurgeonNearJubileeHillsFAQPage() {
         </div>
       </div>
 
-      <h2>Patient Success Stories from Jubilee Hills</h2>
+      <h2 className="text-2xl font-bold mb-6 text-gray-900">Patient Success Stories from Jubilee Hills</h2>
       
-      <div className="bg-blue-50 rounded-lg p-6 mb-8">
-        <blockquote className="text-lg text-gray-700 mb-4">
+      <div className="bg-blue-50 rounded-lg p-6 mb-12 border border-blue-100">
+        <blockquote className="text-lg text-gray-700 mb-4 italic">
           "I traveled from Jubilee Hills for my endoscopic discectomy with Dr. Sayuj. The journey was worth it - 
           I was walking the same day and back to work in 2 weeks. The minimally invasive approach made all the difference."
         </blockquote>
         <cite className="text-blue-600 font-semibold">— Rajesh Kumar, Software Engineer, Jubilee Hills</cite>
       </div>
 
-      <h2>Emergency Contact Information</h2>
+      <h2 className="text-2xl font-bold mb-6 text-gray-900">Emergency Contact Information</h2>
       
-      <div className="bg-red-50 rounded-lg p-6 mb-8">
+      <div className="bg-red-50 rounded-lg p-6 mb-12 border border-red-100">
         <h3 className="text-xl font-semibold mb-4 text-red-800">24/7 Emergency Services</h3>
-        <div className="space-y-3">
+        <div className="space-y-3 text-red-900">
           <div className="flex items-center">
             <span className="text-red-600 mr-3">📞</span>
             <div>
-              <strong>Emergency Hotline:</strong> +91 97782 80044
+              <strong>Emergency Hotline:</strong> <a href="tel:+919778280044" className="hover:underline">+91 97782 80044</a>
             </div>
           </div>
           <div className="flex items-center">
@@ -195,9 +188,9 @@ export default function NeurosurgeonNearJubileeHillsFAQPage() {
         </div>
       </div>
 
-      <div className="bg-blue-50 rounded-lg p-6 mt-8">
+      <div className="bg-blue-50 rounded-lg p-6 mt-8 border border-blue-100">
         <h2 className="text-2xl font-bold mb-4 text-blue-800">Ready to Consult with Dr. Sayuj?</h2>
-        <p className="mb-4">
+        <p className="mb-6 text-blue-900">
           Get expert neurosurgical care accessible from Jubilee Hills. Dr. Sayuj offers personalized treatment 
           with advanced minimally invasive techniques and same-day discharge options.
         </p>
@@ -217,13 +210,16 @@ export default function NeurosurgeonNearJubileeHillsFAQPage() {
         </div>
       </div>
 
-      <NAP />
-      <ReviewedBy />
-      <MedicalCitations />
+      <div className="mt-12">
+        <LocationNAPCard location={location} />
+      </div>
 
-      {schemas.map((schema, index) => (
-        <SchemaScript key={index} data={schema} />
-      ))}
+      <div className="mt-12">
+        <ReviewedBy lastReviewed="2025-01-15" />
+        <MedicalCitations />
+      </div>
+
+      <LocationPageTracker location="jubilee-hills" />
     </main>
   );
 }
