@@ -93,7 +93,7 @@ const gbpSchema = {
 
 const COSTS = [
   {
-    procedure: 'Endoscopic Discectomy',
+    procedure: 'Endoscopic Discectomy (Lumbar)',
     range: '₹95,000 - ₹1,35,000',
     recovery: '1-2 weeks',
     includes: ['Surgeon fees', 'OT charges', 'Implants', 'Follow-up visits']
@@ -109,6 +109,18 @@ const COSTS = [
     range: '₹1,20,000 - ₹1,70,000',
     recovery: '2-3 weeks',
     includes: ['Anterior/Posterior approach', 'Neck brace', 'Physiotherapy guidance']
+  },
+  {
+    procedure: 'MIS TLIF (Spinal Fusion)',
+    range: '₹2,50,000 - ₹3,50,000',
+    recovery: '4-6 weeks',
+    includes: ['Implants (Screws/Cage)', 'Minimally Invasive access', 'Hospital stay (3-4 days)']
+  },
+  {
+    procedure: 'Vertebroplasty (Cement)',
+    range: '₹1,10,000 - ₹1,50,000',
+    recovery: '1 week',
+    includes: ['Bone cement', 'Fluoroscopy charges', 'Day care stay']
   }
 ];
 
@@ -143,7 +155,7 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
   const procedures = [
     {
       title: 'Endoscopic Discectomy',
-      description: 'Removal of herniated disc material through a small incision using endoscopic visualization.',
+      description: 'Removal of herniated disc material through a small incision using endoscopic visualization. We utilise both Transforaminal (side) and Interlaminar (back) approaches tailored to the disc location.',
       benefits: ['Smaller incision', 'Less muscle damage', 'Faster recovery', 'Reduced pain'],
       recovery: '1-2 weeks'
     },
@@ -164,6 +176,12 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
       description: 'Endoscopic cervical discectomy and foraminotomy for neck and arm pain relief.',
       benefits: ['Anterior approach', 'Preserved motion', 'Minimal scarring', 'Quick mobilization'],
       recovery: '1-2 weeks'
+    },
+    {
+      title: 'MIS TLIF (Fusion)',
+      description: 'Minimally Invasive Transforaminal Lumbar Interbody Fusion for instability or spondylolisthesis.',
+      benefits: ['Small incisions', 'Less blood loss', 'Faster fusion', 'Reduced hospital stay'],
+      recovery: '4-6 weeks'
     }
   ];
 
@@ -299,6 +317,60 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
         </section>
 
         <PatientJourneySection title="Your Treatment Journey" steps={JOURNEY_STEPS} />
+
+        {/* Diagnosis Section - Added to match competitor depth */}
+        <section className="mb-12">
+          <h2 className="text-3xl font-bold text-blue-800 mb-6">Diagnosis & Eligibility</h2>
+          <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+            <p className="text-gray-700 mb-4">
+              Accurate diagnosis is the first step towards successful treatment. At Yashoda Hospital, we use advanced imaging and clinical evaluation to determine if you are a candidate for endoscopic surgery.
+            </p>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <h3 className="text-lg font-semibold text-blue-700 mb-3">Diagnostic Tests We Use</h3>
+                <ul className="space-y-2 text-gray-700">
+                  <li className="flex items-start">
+                    <span className="text-blue-600 mr-2 mt-1">•</span>
+                    <span><strong>MRI Spine:</strong> Essential to visualize disc herniation and nerve compression.</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-blue-600 mr-2 mt-1">•</span>
+                    <span><strong>Dynamic X-Rays:</strong> To check for spinal instability (slippage) during movement.</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-blue-600 mr-2 mt-1">•</span>
+                    <span><strong>CT Scan:</strong> Detailed bone imaging for fractures or bony spurs.</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-blue-600 mr-2 mt-1">•</span>
+                    <span><strong>Nerve Conduction Studies (NCS):</strong> To confirm nerve damage if diagnosis is unclear.</span>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-blue-700 mb-3">Who is a Candidate?</h3>
+                 <ul className="space-y-2 text-gray-700">
+                  <li className="flex items-start">
+                    <span className="text-green-600 mr-2 mt-1">✓</span>
+                    <span>Patients with radiating leg pain (sciatica) or arm pain.</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-600 mr-2 mt-1">✓</span>
+                    <span>Those who have failed 6 weeks of physiotherapy and medication.</span>
+                  </li>
+                   <li className="flex items-start">
+                    <span className="text-green-600 mr-2 mt-1">✓</span>
+                    <span>Difficulty walking due to spinal stenosis (claudication).</span>
+                  </li>
+                   <li className="flex items-start">
+                    <span className="text-green-600 mr-2 mt-1">✓</span>
+                    <span>Presence of progressive numbness or muscle weakness.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
 
         <section className="mb-12">
           <h2 className="text-3xl font-bold text-blue-800 mb-6">Procedures We Offer</h2>
