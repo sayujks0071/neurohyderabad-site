@@ -84,6 +84,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/blog/disc-replacement-vs-fusion',
     '/blog/how-much-does-brain-surgery-cost-hyderabad',
     '/blog/lumbar-canal-stenosis-walking-pain-hyderabad',
+    '/blog/awake-spine-surgery-vs-general-anesthesia-guide',
   ];
 
   const symptomPages = [
