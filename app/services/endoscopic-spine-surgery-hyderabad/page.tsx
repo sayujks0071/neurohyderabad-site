@@ -14,6 +14,7 @@ import TrustProof from '@/app/_components/TrustProof';
 import { ServiceLocationLinks } from '@/src/components/locations/ServiceLocationLinks';
 import { getServiceSources } from '../sources';
 import { patientStories } from '@/src/content/stories';
+import { PhysicianSchema } from "@/src/components/schema/PhysicianSchema";
 
 const SERVICE_SLUG = 'endoscopic-spine-surgery-hyderabad';
 
