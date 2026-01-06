@@ -7,10 +7,14 @@ on:
 
 permissions:
   issues: write
+  contents: read
 
 jobs:
   create-issue:
     runs-on: ubuntu-latest
+    env:
+      PROMPT_FILE: jules-prompts/rolling-7d-seo-summary.md
+      ISSUE_TITLE_BASE: Rolling 7-day SEO Summary
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -22,8 +26,12 @@ jobs:
           script: |
             const fs = require('fs');
 
-            const promptFile = 'jules-prompts/rolling-7d-seo-summary.md';
-            const titleBase = 'Rolling 7-day SEO Summary';
+            const promptFile = process.env.PROMPT_FILE;
+            const titleBase = process.env.ISSUE_TITLE_BASE;
+
+            if (!promptFile || !titleBase) {
+              throw new Error("Missing required env vars: PROMPT_FILE or ISSUE_TITLE_BASE");
+            }
 
             const today = new Date().toISOString().split('T')[0];
             const title = `[Jules] ${titleBase} - ${today}`;
@@ -39,6 +47,9 @@ jobs:
             }
 
             try {
+              if (!fs.existsSync(promptFile)) {
+                 throw new Error(`Prompt file not found: ${promptFile}`);
+              }
               const body = fs.readFileSync(promptFile, 'utf8');
 
               await github.rest.issues.create({
