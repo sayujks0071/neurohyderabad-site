@@ -53,6 +53,7 @@ docs/internal/
 *.md
 !docs/MAINTENANCE_REPORT.md
 !integrations/apps-script/README.md
+!seo/blog-automation/**/*.md
 *.patch
 *.sh
 *.png
