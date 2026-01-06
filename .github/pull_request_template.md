@@ -1,18 +1,19 @@
 ## Daily SEO Keyword Research
 
 ### Changelog
-<!-- Summarize what changed in the keyword landscape. Copy from changelog.md -->
+<!-- Paste contents of seo/keyword-research/YYYY-MM-DD/changelog.md here -->
 
-### Top 20 BOFU Keywords (Hyderabad)
-<!-- Copy from keyword-universe.csv (filtered) -->
+### Top Keywords
+<!-- List top 5-10 high priority keywords discovered -->
 
 ### New Pages Created
-<!-- List any new pages or content files added -->
+<!-- List any new pages created -->
 
-### Cannibalization Warnings
-<!-- Note any potential conflicts with existing pages -->
+### Cannibalization Check
+- [ ] Checked for existing pages targeting similar keywords
+- [ ] Updated existing pages if needed (internal links)
 
-### Links to Generated Files
-- [Competitors](seo/keyword-research/latest/competitors.md)
-- [Keyword Universe](seo/keyword-research/latest/keyword-universe.csv)
-- [Clusters & Mapping](seo/keyword-research/latest/clusters-and-mapping.md)
+### Verification
+- [ ] `pnpm next lint` passed
+- [ ] `pnpm next build` passed
+- [ ] Verified correct schema markup

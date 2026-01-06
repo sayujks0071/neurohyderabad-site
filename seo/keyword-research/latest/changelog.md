@@ -1,14 +1,15 @@
-# Changelog - 2026-01-04
+# Changelog - 2026-01-03
 
-## Added
-- **New Keyword Cluster**: "Laminectomy vs Microdiscectomy" (Comparison/Recovery focus).
-- **New Procedure Gap**: "Lumbar Laminectomy" identified as a potential missing service page.
-- **Competitor Insight**: AIG & Yashoda dominate high-level terms; Opportunity in specific comparison queries ("vs") where global content currently ranks.
+## Research
+*   Identified 2 critical content gaps: `Lumbar Laminectomy` (Service) and `Spondylolisthesis` (Condition).
+*   Verified `Endoscopic Spine Surgery` is well covered.
 
-## Updates
-- Mapped `spine fusion surgery cost hyderabad` to existing blog post.
-- Mapped `awake spine surgery hyderabad` to existing service page.
-
-## Action Plan
-1. Create blog post: `microdiscectomy-vs-laminectomy-recovery-comparison`.
-2. Update Keyword Registry.
+## Actions
+1.  **New Page**: `/services/lumbar-laminectomy-surgery-hyderabad/page.tsx`
+    *   Targeting: "lumbar laminectomy surgery hyderabad"
+    *   Type: Service Page
+2.  **New Page**: `/conditions/spondylolisthesis-treatment-hyderabad/page.tsx`
+    *   Targeting: "spondylolisthesis treatment hyderabad"
+    *   Type: Condition Page
+3.  **Registry Update**: Added new pages to `seo/keyword-registry.json`.
+4.  **Files Created**: Standard SEO snapshot files.
