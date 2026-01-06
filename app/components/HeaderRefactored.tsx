@@ -165,7 +165,7 @@ export default function HeaderRefactored() {
                   {item.label}
                 </Link>
                 {item.dropdown && (
-                  <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-[var(--color-border)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 p-4">
+                  <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-[var(--color-border)] opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-200 p-4">
                     <ul className="space-y-2">
                       {item.dropdown.map((link) => (
                         <li key={link.href}>
