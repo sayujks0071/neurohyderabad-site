@@ -126,6 +126,12 @@ const nextConfig = {
         destination: '/conditions/slip-disc-treatment-hyderabad',
         permanent: true,
       },
+      // Redirect orphaned root page to service page
+      {
+        source: '/endoscopic-spine-surgery-hyderabad',
+        destination: '/services/endoscopic-spine-surgery-hyderabad',
+        permanent: true,
+      },
       // Consolidate specific endoscopic procedures to main MISS page
       {
         source: '/services/endoscopic-foraminotomy-hyderabad',

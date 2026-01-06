@@ -14,6 +14,7 @@ import TrustProof from '@/app/_components/TrustProof';
 import { ServiceLocationLinks } from '@/src/components/locations/ServiceLocationLinks';
 import { getServiceSources } from '../sources';
 import { patientStories } from '@/src/content/stories';
+import PhysicianSchema from '@/app/components/schemas/PhysicianSchema';
 
 const SERVICE_SLUG = 'endoscopic-spine-surgery-hyderabad';
 
@@ -96,6 +97,22 @@ const faqs = [
     answer:
       'Endoscopic spine surgery is a specialised skill. Dr. Sayuj has focused training in full endoscopic techniques and performs them regularly at Yashoda Hospital, ensuring precision, safety, and consistent patient outcomes.',
   },
+  {
+    question: 'When should I see a neurosurgeon for back pain?',
+    answer: 'If you have persistent back or leg pain, numbness or weakness that isn’t improving with rest and physiotherapy, or if you experience loss of bowel or bladder control, consult a neurosurgeon. Early evaluation in Hyderabad can prevent nerve damage and may allow for minimally invasive treatment.'
+  },
+  {
+    question: 'Is endoscopic spine surgery painful?',
+    answer: 'Endoscopic spine surgery uses tiny incisions and causes less tissue disruption than traditional open surgery. Most patients report manageable discomfort controlled with oral pain medication and are able to walk the same day.'
+  },
+  {
+    question: 'How soon can I walk after endoscopic disc surgery?',
+    answer: 'Patients typically begin walking within a few hours of endoscopic discectomy. Many return to desk work within 1–2 weeks, while heavy labour may require 4–8 weeks of graded recovery.'
+  },
+  {
+    question: 'What is the success rate of endoscopic discectomy?',
+    answer: 'For appropriately selected patients, endoscopic discectomy has a high success rate (around 85–95%) in relieving leg pain and numbness. Success depends on proper diagnosis, surgeon experience and adherence to post‑operative care instructions.'
+  }
 ];
 
 // Google Business Profile JSON-LD for Endoscopic Spine Surgery
@@ -201,42 +218,87 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
         data={{
           "@context": "https://schema.org",
           "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "When should I see a neurosurgeon for back pain?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "If you have persistent back or leg pain, numbness or weakness that isn’t improving with rest and physiotherapy, or if you experience loss of bowel or bladder control, consult a neurosurgeon. Early evaluation in Hyderabad can prevent nerve damage and may allow for minimally invasive treatment."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Is endoscopic spine surgery painful?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Endoscopic spine surgery uses tiny incisions and causes less tissue disruption than traditional open surgery. Most patients report manageable discomfort controlled with oral pain medication and are able to walk the same day."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "How soon can I walk after endoscopic disc surgery?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Patients typically begin walking within a few hours of endoscopic discectomy. Many return to desk work within 1–2 weeks, while heavy labour may require 4–8 weeks of graded recovery."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "What is the success rate of endoscopic discectomy?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "For appropriately selected patients, endoscopic discectomy has a high success rate (around 85–95%) in relieving leg pain and numbness. Success depends on proper diagnosis, surgeon experience and adherence to post‑operative care instructions."
-              }
+          "mainEntity": faqs.map(faq => ({
+            "@type": "Question",
+            "name": faq.question,
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": faq.answer
             }
-          ]
+          }))
         }}
       />
+
+      {/* Types of Procedures - Ported from Root Page */}
+      <section className="mb-16">
+        <h2 className="text-3xl font-bold text-blue-900 mb-6">Types of Endoscopic Procedures We Perform</h2>
+        <div className="grid md:grid-cols-3 gap-6">
+          <div className="p-6 bg-white border border-gray-200 rounded-xl hover:shadow-md transition-shadow">
+            <h3 className="font-bold text-blue-900 mb-2">Transforaminal (TELD)</h3>
+            <p className="text-gray-700 text-sm mb-3">
+              Also known as the &quot;keyhole&quot; approach. The scope enters through the side (foramen), avoiding bone removal.
+            </p>
+            <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Best For: Lateral Disc Herniations</p>
+          </div>
+          <div className="p-6 bg-white border border-gray-200 rounded-xl hover:shadow-md transition-shadow">
+            <h3 className="font-bold text-blue-900 mb-2">Interlaminar (IELD)</h3>
+            <p className="text-gray-700 text-sm mb-3">
+              Enters from the back of the spine between two vertebrae (laminae). Similar to traditional surgery but with a much smaller footprint.
+            </p>
+            <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Best For: L5-S1 Discs, Stenosis</p>
+          </div>
+          <div className="p-6 bg-white border border-gray-200 rounded-xl hover:shadow-md transition-shadow">
+            <h3 className="font-bold text-blue-900 mb-2">Cervical Endoscopy</h3>
+            <p className="text-gray-700 text-sm mb-3">
+              Posterior cervical foraminotomy allows decompression of neck nerve roots without fusing the spine.
+            </p>
+            <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Best For: Neck & Arm Pain</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits Comparison Table - Ported from Root Page */}
+      <section className="mb-16">
+        <h2 className="text-3xl font-bold text-blue-900 mb-6">Endoscopic vs. Open Spine Surgery</h2>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse border border-gray-200 rounded-lg overflow-hidden">
+            <thead>
+              <tr className="bg-gray-100">
+                <th className="p-4 text-left font-semibold text-gray-700">Feature</th>
+                <th className="p-4 text-left font-bold text-blue-800 bg-blue-50">Endoscopic Surgery</th>
+                <th className="p-4 text-left font-semibold text-gray-600">Traditional Open Surgery</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-200 text-sm md:text-base">
+              <tr>
+                <td className="p-4 font-medium text-gray-900">Incision Size</td>
+                <td className="p-4 bg-blue-50/50 text-blue-900">Tiny (&lt; 1 cm)</td>
+                <td className="p-4 text-gray-600">Large (3 - 5 cm)</td>
+              </tr>
+              <tr>
+                <td className="p-4 font-medium text-gray-900">Muscle Damage</td>
+                <td className="p-4 bg-blue-50/50 text-blue-900">Minimal (Muscles separated, not cut)</td>
+                <td className="p-4 text-gray-600">Moderate (Muscles cut/retracted)</td>
+              </tr>
+              <tr>
+                <td className="p-4 font-medium text-gray-900">Hospital Stay</td>
+                <td className="p-4 bg-blue-50/50 text-blue-900">Day Care / 1 Night</td>
+                <td className="p-4 text-gray-600">3 - 5 Days</td>
+              </tr>
+              <tr>
+                <td className="p-4 font-medium text-gray-900">Recovery Time</td>
+                <td className="p-4 bg-blue-50/50 text-blue-900">1 - 2 Weeks</td>
+                <td className="p-4 text-gray-600">4 - 8 Weeks</td>
+              </tr>
+              <tr>
+                <td className="p-4 font-medium text-gray-900">Pain</td>
+                <td className="p-4 bg-blue-50/50 text-blue-900">Minimal (often manageable with oral meds)</td>
+                <td className="p-4 text-gray-600">Moderate to Severe</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-blue-900 mb-6">Conditions Treated with Endoscopic Surgery</h2>
@@ -246,7 +308,10 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
           </p>
           <ul className="grid md:grid-cols-2 gap-4 text-sm text-gray-700">
             {conditions.map((condition) => (
-              <li key={condition} className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">• {condition}</li>
+              <li key={condition} className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm flex items-start gap-2">
+                <span className="text-blue-500 font-bold mt-1">•</span>
+                <span>{condition}</span>
+              </li>
             ))}
           </ul>
         </section>
@@ -311,22 +376,53 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
               Endoscopic spine surgery (keyhole surgery) at Yashoda Hospital Malakpet offers an affordable, high-quality alternative to traditional open spine surgery. Our transparent pricing includes surgeon fees, hospital charges, implants, and follow-up consultations.
             </p>
             <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-white rounded-lg p-4">
+              <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
                 <h3 className="font-semibold text-blue-800 mb-2">Endoscopic Discectomy</h3>
                 <p className="text-sm text-gray-600 mb-2">For slip disc and sciatica</p>
                 <p className="text-lg font-bold text-blue-900">INR 95,000 - 1,35,000</p>
                 <p className="text-xs text-gray-500 mt-1">Self-pay package (varies by case complexity)</p>
               </div>
-              <div className="bg-white rounded-lg p-4">
-                <h3 className="font-semibold text-blue-800 mb-2">Insurance Coverage</h3>
-                <p className="text-sm text-gray-600 mb-2">Most insurance plans accepted</p>
-                <p className="text-sm text-gray-700">We help with pre-authorization and claim processing. Cashless treatment available for eligible insurance policies.</p>
+              <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
+                <h3 className="font-semibold text-blue-800 mb-2">Endoscopic Stenosis Decompression</h3>
+                <p className="text-sm text-gray-600 mb-2">For canal stenosis (walking pain)</p>
+                <p className="text-lg font-bold text-blue-900">INR 1,20,000 - 1,60,000</p>
+                <p className="text-xs text-gray-500 mt-1">Self-pay package</p>
               </div>
             </div>
-            <p className="text-sm text-gray-600 mt-4">
-              <strong>Note:</strong> Final cost depends on case complexity, type of procedure, and insurance coverage. 
-              Contact our clinic for a personalized cost estimate after reviewing your MRI scans.
+             <div className="mt-6 bg-white rounded-lg p-4 border border-blue-200">
+               <h3 className="font-semibold text-blue-800 mb-2">Insurance & Cashless</h3>
+               <p className="text-sm text-gray-700">We accept all major health insurance providers (Star, HDFC Ergo, Bajaj Allianz, CGHS, etc.). Our team handles the pre-authorization paperwork for a hassle-free cashless experience.</p>
+             </div>
+            <p className="text-sm text-gray-600 mt-4 italic">
+              * Note: Final cost depends on room category (General vs Private), case complexity, and insurance approval limits. Contact our clinic for a personalized cost estimate after reviewing your MRI scans.
             </p>
+          </div>
+        </section>
+
+        {/* Red Flags Section - Ported from Root Page */}
+        <section className="mb-16 bg-red-50 border border-red-100 rounded-2xl p-8">
+          <h2 className="text-2xl font-bold text-red-900 mb-4 flex items-center gap-2">
+            <svg className="w-8 h-8 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            Red Flags: When is Surgery Urgent?
+          </h2>
+          <p className="text-gray-700 mb-6">
+            Most spine conditions can wait for medication or therapy. However, immediate medical attention is required if you experience:
+          </p>
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="bg-white p-5 rounded-lg border-l-4 border-red-500 shadow-sm">
+              <h3 className="font-bold text-red-800 mb-2">Cauda Equina Syndrome</h3>
+              <p className="text-sm text-gray-700">Sudden loss of bowel or bladder control, or numbness in the groin/saddle area.</p>
+            </div>
+            <div className="bg-white p-5 rounded-lg border-l-4 border-red-500 shadow-sm">
+              <h3 className="font-bold text-red-800 mb-2">Progressive Weakness</h3>
+              <p className="text-sm text-gray-700">Rapidly worsening weakness in the foot (foot drop) or leg that affects walking.</p>
+            </div>
+            <div className="bg-white p-5 rounded-lg border-l-4 border-red-500 shadow-sm">
+              <h3 className="font-bold text-red-800 mb-2">Intractable Pain</h3>
+              <p className="text-sm text-gray-700">Severe pain that does not improve with rest or maximum medical management.</p>
+            </div>
           </div>
         </section>
 
