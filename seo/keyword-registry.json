@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-04",
+  "last_updated": "2026-01-03",
   "keywords": [
     {
       "term": "neurosurgeon hyderabad",
@@ -84,6 +84,12 @@
       "difficulty": "Low",
       "volume": "Low",
       "target_page": "/services/awake-spine-surgery-hyderabad"
+    },
+    {
+      "term": "spondylolisthesis treatment hyderabad",
+      "difficulty": "Med",
+      "volume": "Med",
+      "target_page": "/conditions/spondylolisthesis-treatment-hyderabad"
     }
   ]
 }
