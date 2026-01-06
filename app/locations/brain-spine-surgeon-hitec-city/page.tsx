@@ -19,10 +19,10 @@ export const metadata = {
   description: 'Advanced brain and spine care near HITEC City, Hyderabad. Directions to Yashoda Hospital, Malakpet. Parking, timings, and appointment info.',
   keywords: 'brain surgeon HITEC City, spine surgeon HITEC City, neurosurgeon near HITEC City, Yashoda Hospital Malakpet, Hyderabad',
   alternates: {
-    canonical: 'https://www.drsayuj.info/locations/brain-spine-surgeon-hitec-city',
+    canonical: 'https://www.drsayuj.info/neurosurgeon-hitech-city',
     languages: {
-      'en-IN': 'https://www.drsayuj.info/locations/brain-spine-surgeon-hitec-city',
-      'x-default': 'https://www.drsayuj.info/locations/brain-spine-surgeon-hitec-city',
+      'en-IN': 'https://www.drsayuj.info/neurosurgeon-hitech-city',
+      'x-default': 'https://www.drsayuj.info/neurosurgeon-hitech-city',
     },
   },
   openGraph: {
