@@ -134,6 +134,42 @@ export default function SlipDiscTreatmentPage() {
         </div>
       </div>
 
+      {/* NEW: Conservative Management Section */}
+      <section className="mb-12 bg-white p-6 rounded-lg border border-gray-100 shadow-sm">
+        <h2 className="text-2xl font-semibold mb-4 text-blue-700">Conservative Treatment First</h2>
+        <p className="text-gray-700 mb-4">
+          Surgery is rarely the first step. For 80-90% of slip disc patients, symptoms improve with structured conservative care. Dr. Sayuj Krishnan emphasizes a graded approach:
+        </p>
+        <div className="grid md:grid-cols-3 gap-6">
+          <div className="bg-gray-50 p-4 rounded-lg">
+             <h3 className="font-semibold text-gray-900 mb-2">Medication</h3>
+             <p className="text-sm text-gray-600">Anti-inflammatories and muscle relaxants to reduce acute pain and swelling.</p>
+          </div>
+          <div className="bg-gray-50 p-4 rounded-lg">
+             <h3 className="font-semibold text-gray-900 mb-2">Physiotherapy</h3>
+             <p className="text-sm text-gray-600">Core strengthening and specific extension exercises (McKenzie) to stabilize the spine.</p>
+          </div>
+           <div className="bg-gray-50 p-4 rounded-lg">
+             <h3 className="font-semibold text-gray-900 mb-2">Spinal Injections</h3>
+             <p className="text-sm text-gray-600">Targeted nerve root blocks (SNRB) to calm inflamed nerves and avoid surgery.</p>
+          </div>
+        </div>
+        <p className="text-gray-700 mt-4 italic text-sm">
+          *Surgery is recommended only if these measures fail after 6 weeks or if there is profound weakness (red flags).
+        </p>
+      </section>
+
+      {/* NEW: Cost Teaser */}
+      <div className="mb-12 bg-blue-50 border-l-4 border-blue-600 p-6 rounded-r-lg flex flex-col md:flex-row justify-between items-center gap-4">
+        <div>
+           <h3 className="text-lg font-bold text-blue-900">Worried about Surgery Costs?</h3>
+           <p className="text-blue-800 text-sm">We believe in complete transparency. Check our detailed price guide for endoscopic procedures.</p>
+        </div>
+        <Link href="/services/slip-disc-surgery-cost-hyderabad" className="whitespace-nowrap bg-blue-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-blue-700 transition-colors">
+           View Cost Guide
+        </Link>
+      </div>
+
       <section className="mb-12">
         <h2 className="text-2xl font-semibold mb-6 text-blue-700">Treatment Process</h2>
         <div className="grid md:grid-cols-3 gap-6">
