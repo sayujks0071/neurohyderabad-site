@@ -1,6 +1,6 @@
 'use client';
 
-import OptimizedImage from './OptimizedImage';
+import Image from 'next/image';
 
 type VideoItem = {
   id: string;
@@ -76,13 +76,12 @@ export default function PatientEducationVideos() {
                 className="bg-gray-50 rounded-2xl shadow-lg overflow-hidden border border-gray-100 flex flex-col"
               >
                         <div className="relative aspect-video bg-gray-200">
-                          <OptimizedImage
+                          <Image
                             src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`}
                             alt={video.title}
                             fill
                             className="object-cover rounded-t-2xl"
                             sizes="(min-width: 1024px) 360px, (min-width: 768px) 33vw, 100vw"
-                            priority={false}
                             quality={90}
                           />
                   <a
