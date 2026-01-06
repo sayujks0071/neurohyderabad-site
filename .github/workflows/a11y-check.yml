@@ -21,8 +21,7 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: '9'
+        # Use pnpm version from package.json#packageManager
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -70,10 +69,10 @@ jobs:
           const urls = [
             'http://localhost:3000',
             'http://localhost:3000/about',
-            'http://localhost:3000/treatments',
+            'http://localhost:3000/services',
             'http://localhost:3000/contact',
-            'http://localhost:3000/treatments/brain-tumor-surgery',
-            'http://localhost:3000/treatments/spine-surgery'
+            'http://localhost:3000/services/brain-tumor-surgery-hyderabad',
+            'http://localhost:3000/services/spine-surgery-hyderabad'
           ];
           
           const issues = {

@@ -32,47 +32,10 @@ jobs:
           incremental_files_only: false
           strict: false
 
-      - name: Setup pnpm
-        if: always()
-        uses: pnpm/action-setup@v4
-        with:
-          version: '9'
-
-      - name: Setup Node.js
-        if: always()
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'pnpm'
-
-      - name: Install dependencies
-        if: always()
-        run: pnpm install
-
-      - name: Create custom spell check report
+      - name: Write spell check summary
         if: always()
         run: |
-          cat > spell-check-report.js << 'EOF'
-          const fs = require('fs');
-          const path = require('path');
-          
-          // Common medical/neurosurgery terms to ignore
-          const medicalTerms = [
-            'neurosurgery', 'neurosurgeon', 'craniotomy', 'laminectomy',
-            'discectomy', 'microdiscectomy', 'endoscopic', 'minimally',
-            'invasive', 'spinal', 'vertebral', 'intervertebral', 'herniated',
-            'stenosis', 'spondylosis', 'myelopathy', 'radiculopathy'
-          ];
-          
-          console.log('✅ Spell check complete!');
-          console.log('Medical terminology exceptions configured.');
-          EOF
-          
-          node spell-check-report.js
+          echo "Spell check completed (see job logs for details)." > spell-check-report.txt
 
       - name: Upload spell check report
         if: always()
