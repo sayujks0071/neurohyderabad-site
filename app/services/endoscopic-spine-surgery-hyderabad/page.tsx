@@ -13,7 +13,6 @@ import SourceList from '@/app/_components/SourceList';
 import TrustProof from '@/app/_components/TrustProof';
 import { ServiceLocationLinks } from '@/src/components/locations/ServiceLocationLinks';
 import { getServiceSources } from '../sources';
-import { PhysicianSchema } from "@/src/components/schema/PhysicianSchema";
 import { patientStories } from '@/src/content/stories';
 import { PhysicianSchema } from '@/src/components/schema/PhysicianSchema';
 
