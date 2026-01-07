@@ -18,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const servicePages = [
     '/services/minimally-invasive-spine-surgery',
+    '/services/endoscopic-spine-surgery-hyderabad',
     '/services/endoscopic-discectomy-hyderabad',
     '/services/brain-tumor-surgery-hyderabad',
     '/services/spinal-fusion-surgery-hyderabad',
