@@ -11,10 +11,14 @@ import Section from '@/app/_components/Section';
 import { patientStories } from '../../../src/content/stories';
 import { ConditionLocationLinks } from '@/src/components/locations/ConditionLocationLinks';
 import { PhysicianSchema } from "@/src/components/schema/PhysicianSchema";
+import CostTransparencySection from '@/src/components/CostTransparencySection';
+import TeleconsultationForm from '@/components/TeleconsultationForm';
+import OutcomeMetricsSection from '@/components/OutcomeMetricsSection';
+import FAQPageSchema from '@/app/_components/FAQPageSchema';
 
 const baseMetadata = makeMetadata({
-  title: 'Spondylolisthesis Treatment in Hyderabad | Slipped Vertebra Surgery',
-  description: 'Expert treatment for Spondylolisthesis (Slipped Vertebra) by Dr. Sayuj Krishnan. Minimally invasive fusion (TLIF) and conservative options in Hyderabad.',
+  title: 'Spondylolisthesis Treatment in Hyderabad | Slipped Vertebra Surgery Cost',
+  description: 'Expert treatment for Spondylolisthesis (Slipped Vertebra) by Dr. Sayuj Krishnan. Minimally invasive fusion (MIS-TLIF) costs and recovery in Hyderabad.',
   canonicalPath: '/conditions/spondylolisthesis-treatment-hyderabad',
 });
 
@@ -33,10 +37,56 @@ const spineStories = patientStories
   .filter((story) => story.tags.includes('spine') || story.tags.includes('fusion'))
   .slice(0, 2);
 
+const COSTS = [
+  {
+    procedure: 'MIS TLIF (Fusion)',
+    range: '₹2,50,000 - ₹3,50,000',
+    recovery: '4-6 weeks',
+    includes: ['Titanium Implants', 'Minimally Invasive Access', '4 Days Hospital Stay', 'Physiotherapy']
+  },
+  {
+    procedure: 'Open TLIF (Fusion)',
+    range: '₹2,00,000 - ₹2,80,000',
+    recovery: '6-8 weeks',
+    includes: ['Standard Incision', 'Implants & Graft', '5-6 Days Hospital Stay']
+  },
+  {
+    procedure: 'Laminectomy (Decompression)',
+    range: '₹1,20,000 - ₹1,60,000',
+    recovery: '2-3 weeks',
+    includes: ['Nerve Release Only', 'No Implants', '2 Days Hospital Stay']
+  }
+];
+
 export default function SpondylolisthesisPage() {
+  const faqs = [
+    {
+      question: 'Do I really need surgery for spondylolisthesis?',
+      answer: 'Not always. Surgery is usually recommended only if you have Grade 3/4 slips, or if you have Grade 1/2 slips with persistent nerve pain/weakness that hasn\'t improved after 6 weeks of rehabilitation and medication.'
+    },
+    {
+      question: 'What is the cost of spondylolisthesis surgery in Hyderabad?',
+      answer: 'The cost typically ranges from ₹2.5 Lakhs to ₹3.5 Lakhs for Minimally Invasive TLIF (Fusion). This includes hospital stay, implants, and surgeon fees. Open surgery may cost slightly less, but recovery is longer.'
+    },
+    {
+      question: 'How long is the recovery after spinal fusion?',
+      answer: 'With MIS-TLIF, patients usually walk the next day. Desk work can often resume in 3-4 weeks. Complete bone fusion takes 3-6 months, during which heavy lifting is restricted.'
+    },
+    {
+      question: 'Can spondylolisthesis be cured with exercise?',
+      answer: 'Grade 1 slips can often be stabilized with core strengthening exercises. While the slip itself won\'t reverse, the pain can vanish completely, avoiding the need for surgery.'
+    },
+    {
+      question: 'Is MIS TLIF better than open surgery?',
+      answer: 'Yes, for most patients. MIS TLIF involves smaller incisions, less muscle cutting, less blood loss, and a shorter hospital stay compared to traditional open fusion.'
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-white">
       <PhysicianSchema />
+      <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/conditions/spondylolisthesis-treatment-hyderabad`} />
+
       <Section background="blue" className="pt-24 pb-12">
         <header className="text-center mb-8">
           <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">Spondylolisthesis Treatment in Hyderabad</h1>
@@ -145,6 +195,10 @@ export default function SpondylolisthesisPage() {
         </div>
       </Section>
 
+      <CostTransparencySection costs={COSTS} />
+
+      <OutcomeMetricsSection procedure="Spinal Fusion (TLIF)" />
+
        {/* Patient Stories Section */}
       <Section background="gray">
         <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Patient Success Stories</h2>
@@ -191,6 +245,22 @@ export default function SpondylolisthesisPage() {
           </div>
         </div>
         <ConditionLocationLinks />
+      </Section>
+
+      <Section background="gray">
+        <TeleconsultationForm pageSlug="/conditions/spondylolisthesis-treatment-hyderabad" service="Spondylolisthesis Treatment" />
+      </Section>
+
+      <Section>
+        <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Frequently Asked Questions</h2>
+        <div className="max-w-3xl mx-auto space-y-6">
+          {faqs.map((faq) => (
+            <article key={faq.question} className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">{faq.question}</h3>
+              <p className="text-gray-700">{faq.answer}</p>
+            </article>
+          ))}
+        </div>
       </Section>
 
       <Section>
