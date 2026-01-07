@@ -1,0 +1,73 @@
+{
+  "date": "2026-01-03",
+  "slug": "headache-vs-brain-tumor-warning-signs",
+  "title": "Headache or Brain Tumor? 7 Warning Signs You Should Not Ignore",
+  "category": "brain",
+  "primaryKeyword": "headache vs brain tumor",
+  "targetLocations": [
+    "Hyderabad",
+    "Secunderabad",
+    "Banjara Hills",
+    "Jubilee Hills"
+  ],
+  "workflow": {
+    "trigger": "daily-blog-run",
+    "script": "scripts/auto-blog-scheduler.ts",
+    "mode": "manual-review + doctor approval",
+    "generatedAt": "2026-01-03T02:05:00+05:30",
+    "reviewedAt": "2026-01-03T06:40:00+05:30",
+    "reviewer": "Dr. Sayuj Krishnan"
+  },
+  "qualityChecks": {
+    "ymylReview": true,
+    "eeatEvidence": true,
+    "medicalDisclaimer": true,
+    "internalLinks": [
+      "/neurosurgeon-hyderabad",
+      "/conditions/brain-tumor-surgery-hyderabad",
+      "/appointments",
+      "/blog/understanding-mri-spine-report-guide"
+    ],
+    "schemaType": "MedicalWebPage",
+    "cta": "book-consult"
+  },
+  "contentHighlights": [
+    "Seven red-flag headache patterns tied to tumor suspicion",
+    "Comparison table of migraine vs tumor characteristics",
+    "Diagnostic escalation guidance (MRI with contrast, papilledema exam)",
+    "Patient education emphasis on urgency without fear"
+  ],
+  "sources": [
+    {
+      "name": "Johns Hopkins Medicine",
+      "url": "https://www.hopkinsmedicine.org/health/conditions-and-diseases/brain-tumor/brain-tumor-headache-symptoms"
+    },
+    {
+      "name": "American Brain Tumor Association",
+      "url": "https://www.abta.org/about-brain-tumors/brain-tumor-symptoms/"
+    },
+    {
+      "name": "NINDS (NIH)",
+      "url": "https://www.ninds.nih.gov/health-information/disorders/headache"
+    },
+    {
+      "name": "Mayo Clinic",
+      "url": "https://www.mayoclinic.org/diseases-conditions/brain-tumor/symptoms-causes/syc-20350084"
+    }
+  ],
+  "aiUsage": {
+    "promptVersion": "v3.2-headache-awareness",
+    "model": "gpt-4.1-extended",
+    "guardrails": [
+      "disallow absolute cure claims",
+      "require triage guidance for red-flag symptoms",
+      "enforce internal link inclusion"
+    ],
+    "hallucinationScan": "no issues detected"
+  },
+  "nextActions": [
+    "Monitor engagement vs bounce in GA4 for TOFU/MOFU readers",
+    "Add localized FAQ snippet to neurosurgeon landing pages if CTR improves",
+    "Queue follow-up article on imaging pathways if search demand holds"
+  ]
+}
