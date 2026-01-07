@@ -65,6 +65,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const blogPosts = [
+    '/blog/headache-vs-brain-tumor-warning-signs',
     '/blog/does-endoscopic-spine-surgery-work-for-sciatica-hyderabad',
     '/blog/when-to-worry-about-back-pain-neurosurgeon-hyderabad',
     '/blog/brain-tumor-surgery-cost-hyderabad',
