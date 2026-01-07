@@ -4,7 +4,7 @@ Analyze the SEO performance for the last 7 days.
 *Note: Since you might not have direct access to GSC/GA, use available local reports or verify technical SEO health.*
 
 1. Run `pnpm run build` to check for build errors.
-2. Run `pnpm run audit` or checking scripts in `scripts/`.
+2. Run `node scripts/seo-audit.js` or checking scripts in `scripts/`.
 3. Check `seo/keyword-research/latest/` for any manual updates.
 
 **Action:**

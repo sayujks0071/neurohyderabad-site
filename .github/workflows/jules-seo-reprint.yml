@@ -1,66 +1,81 @@
 name: Jules SEO Reprint
-
 on:
   schedule:
     - cron: '30 2 * * *'
   workflow_dispatch:
 
-permissions:
-  issues: write
-  contents: read
-
 jobs:
   create-issue:
     runs-on: ubuntu-latest
-    env:
-      PROMPT_FILE: jules-prompts/seo-reprint.md
-      ISSUE_TITLE_BASE: SEO Reprint Task
+    permissions:
+      contents: read
+      issues: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Create Issue
         uses: actions/github-script@v7
+        env:
+          PROMPT_FILE: jules-prompts/seo-reprint.md
+          ISSUE_TITLE_BASE: "[Jules] SEO Reprint Task"
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const fs = require('fs');
-
             const promptFile = process.env.PROMPT_FILE;
             const titleBase = process.env.ISSUE_TITLE_BASE;
+            const date = new Date().toISOString().split('T')[0];
+            const title = `${titleBase} - ${date}`;
 
-            if (!promptFile || !titleBase) {
-              throw new Error("Missing required env vars: PROMPT_FILE or ISSUE_TITLE_BASE");
-            }
+            // Check for existing open issue with the same title using search
+            // Search syntax: repo:OWNER/REPO is:issue is:open in:title "TITLE"
+            const q = `repo:${context.repo.owner}/${context.repo.repo} is:issue is:open in:title "${title}"`;
 
-            const today = new Date().toISOString().split('T')[0];
-            const title = `[Jules] ${titleBase} - ${today}`;
-
-            // Check for existing issue
-            const { data: issues } = await github.rest.search.issuesAndPullRequests({
-              q: `repo:${context.repo.owner}/${context.repo.repo} is:issue "${title}"`
+            const search = await github.rest.search.issuesAndPullRequests({
+              q: q
             });
 
-            if (issues.total_count > 0) {
+            if (search.data.total_count > 0) {
               console.log(`Issue "${title}" already exists. Skipping.`);
               return;
             }
 
+            // Ensure label exists
             try {
-              if (!fs.existsSync(promptFile)) {
-                 throw new Error(`Prompt file not found: ${promptFile}`);
-              }
-              const body = fs.readFileSync(promptFile, 'utf8');
-
-              await github.rest.issues.create({
+              await github.rest.issues.getLabel({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                title: title,
-                body: body,
-                labels: ['jules']
+                name: 'jules'
               });
-              console.log(`Created issue: ${title}`);
             } catch (error) {
-              console.error(`Failed to read prompt file: ${promptFile}`);
-              throw error;
+              if (error.status === 404) {
+                console.log('Label "jules" not found. Creating it.');
+                await github.rest.issues.createLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  name: 'jules',
+                  color: '007bff',
+                  description: 'Tasks for Jules AI Agent'
+                });
+              } else {
+                throw error;
+              }
             }
+
+            let body = '';
+            try {
+              body = fs.readFileSync(promptFile, 'utf8');
+            } catch (error) {
+              console.error(`Error reading prompt file: ${error.message}`);
+              core.setFailed(`Could not read prompt file: ${promptFile}`);
+              return;
+            }
+
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: title,
+              body: body,
+              labels: ['jules']
+            });
+            console.log(`Created issue: ${title}`);
