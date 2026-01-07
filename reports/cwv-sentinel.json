@@ -7,6 +7,10 @@
     "location_pages": {
       "bottleneck": "Google Maps iframe was loading immediately (even with lazy loading), causing TBT and bandwidth usage issues.",
       "optimization": "Implemented Click-to-Load Facade for LocationMapEmbed."
+    },
+    "home_page": {
+      "bottleneck": "Hero section LCP image (DoctorCard) was using a 1.3MB high-res original source file, causing unnecessary processing overhead and risk of slow load on cache miss.",
+      "optimization": "Resized source image to 400x400px (21KB) to match display requirements."
     }
   },
   "changes": [
@@ -14,10 +18,15 @@
       "component": "LocationMapEmbed",
       "change": "Converted to 'use client' and implemented a placeholder state. Iframe only loads when user clicks 'Load Map'.",
       "impact": "Eliminated initial iframe network request and JS execution for map. Significantly improves TBT and LCP (if map was in viewport) for all Location pages."
+    },
+    {
+      "component": "DoctorCard",
+      "change": "Replaced source image '/images/dr-sayuj-krishnan-portrait.jpg' (1.3MB) with '/images/dr-sayuj-krishnan-portrait-sm.jpg' (21KB).",
+      "impact": "Reduced LCP source file size by ~98%. Eliminates heavy server-side image optimization overhead for the hero image."
     }
   ],
   "verification": {
-    "manual_check": "Navigate to any location page (e.g., /neurosurgeon-banjara-hills). Verify map placeholder is visible. Click 'Load Map' and verify iframe loads correctly.",
+    "manual_check": "1. Navigate to any location page (e.g., /neurosurgeon-banjara-hills). Verify map placeholder is visible. Click 'Load Map' and verify iframe loads correctly.\n2. Inspect the doctor image in the hero section on Home. Verify it loads instantly, is the correct resolution, and is NOT rotated (upright orientation).",
     "build_check": "Build passed successfully."
   }
 }
