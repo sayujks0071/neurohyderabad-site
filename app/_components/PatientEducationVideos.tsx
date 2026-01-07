@@ -1,5 +1,3 @@
-'use client';
-
 import Image from 'next/image';
 
 type VideoItem = {
@@ -82,7 +80,7 @@ export default function PatientEducationVideos() {
                             fill
                             className="object-cover rounded-t-2xl"
                             sizes="(min-width: 1024px) 360px, (min-width: 768px) 33vw, 100vw"
-                            quality={90}
+                            quality={80}
                           />
                   <a
                     href={`https://www.youtube.com/watch?v=${video.id}`}
