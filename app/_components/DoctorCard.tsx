@@ -12,7 +12,7 @@ export default function DoctorCard({ priority = false }: DoctorCardProps) {
         {/* Doctor Photo - Professional Portrait */}
         <div className="w-32 h-32 rounded-full mx-auto mb-4 relative overflow-hidden shadow-lg">
           <Image
-            src="/images/dr-sayuj-krishnan-portrait.jpg"
+            src="/images/dr-sayuj-krishnan-portrait-sm.jpg"
             alt="Dr. Sayuj Krishnan - Premier Neurosurgeon in Hyderabad"
             width={128}
             height={128}
