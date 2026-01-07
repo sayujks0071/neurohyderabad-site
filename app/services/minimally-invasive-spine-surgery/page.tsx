@@ -17,6 +17,7 @@ import { ServiceLocationLinks } from '@/src/components/locations/ServiceLocation
 import { PhysicianSchema } from "@/src/components/schema/PhysicianSchema";
 import CostTransparencySection from '@/src/components/CostTransparencySection';
 import PatientJourneySection from '@/src/components/PatientJourneySection';
+import SurgeryComparisonTable from '@/src/components/SurgeryComparisonTable';
 
 const baseMetadata = makeMetadata({
   title: 'Endoscopic Spine Surgery Hyderabad | Dr. Sayuj Krishnan',
@@ -313,6 +314,14 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
               Dr. Sayuj Krishnan specializes in endoscopic spine procedures, offering patients the benefits of modern surgical techniques 
               with reduced trauma and quicker return to daily activities. <Link href="/services/endoscopic-spine-surgery-hyderabad/" className="text-blue-600 hover:underline">Learn more about our local patient journey for endoscopic spine surgery in Hyderabad.</Link>
             </p>
+          </div>
+
+          <div className="mt-8">
+            <h3 className="text-xl font-semibold text-gray-800 mb-4">Traditional Open Surgery vs. Endoscopic Surgery</h3>
+            <p className="text-gray-600 mb-4">
+              Understanding the difference between traditional and endoscopic approaches can help you make an informed decision about your spine care.
+            </p>
+            <SurgeryComparisonTable />
           </div>
         </section>
 
