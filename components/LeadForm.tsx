@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -46,6 +46,7 @@ const availableTimes = [
 export default function LeadForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const successRef = useRef<HTMLDivElement>(null);
 
   const {
     register,
@@ -59,6 +60,12 @@ export default function LeadForm() {
       company: "",
     }
   });
+
+  useEffect(() => {
+    if (isSubmitted && successRef.current) {
+      successRef.current.focus();
+    }
+  }, [isSubmitted]);
 
   const onSubmit = async (data: LeadFormData) => {
     setSubmitError(null);
@@ -84,14 +91,18 @@ export default function LeadForm() {
 
   if (isSubmitted) {
     return (
-      <div className="bg-green-50 border border-green-200 rounded-2xl p-8 text-center">
+      <div
+        ref={successRef}
+        tabIndex={-1}
+        className="bg-green-50 border border-green-200 rounded-2xl p-8 text-center outline-none"
+      >
         <h3 className="text-2xl font-bold text-green-800 mb-4">Request Received</h3>
         <p className="text-green-700 mb-6">
           Thank you for reaching out. We have received your details and will contact you shortly to confirm your appointment.
         </p>
         <button
           onClick={() => setIsSubmitted(false)}
-          className="text-green-800 underline hover:text-green-900"
+          className="text-green-800 underline hover:text-green-900 focus:outline-none focus:ring-2 focus:ring-green-500 rounded p-1"
         >
           Send another enquiry
         </button>
