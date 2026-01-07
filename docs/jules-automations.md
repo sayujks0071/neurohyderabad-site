@@ -1,38 +1,40 @@
 # Jules Automations
 
-This repository uses scheduled GitHub Actions to create daily tasks for Jules (the AI agent). These tasks are created as GitHub Issues with the label `jules`.
+This repository uses GitHub Actions to schedule daily tasks for Jules (the AI software engineer). These automations create GitHub Issues labeled `jules` containing specific instructions (prompts) for maintenance, SEO, and quality assurance.
 
-## How it works
+## How It Works
 
-1.  **Schedules**: Several workflows run daily (early morning UTC, which is morning IST) defined in `.github/workflows/jules-*.yml`.
-2.  **Issue Creation**: Each workflow uses `actions/github-script` to verify if an issue for "today" already exists (to prevent duplicates).
-3.  **Prompts**: If no issue exists, it reads the content from the corresponding markdown file in `jules-prompts/` and creates a new issue.
-4.  **Execution**: Jules (or an external listener) picks up issues with the `jules` label and executes the instructions found in the body.
+1.  **Scheduled Workflows**: GitHub Actions run on a defined cron schedule (UTC).
+2.  **Prompt Files**: Each workflow reads a Markdown file from `jules-prompts/`.
+3.  **Issue Creation**: The workflow creates a new Issue with the content of the prompt file and applies the label `jules`.
+4.  **Jules Pick-up**: Jules (or a developer) checks the `jules` label to find pending tasks.
 
-## Workflows & Schedules
+## Schedules
 
-| Workflow | IST | UTC | Cron | Prompt File |
+The schedules are set in UTC to correspond to morning hours in IST (India Standard Time).
+
+| Workflow | IST Time | UTC Time | Cron | Prompt File |
 | :--- | :--- | :--- | :--- | :--- |
-| **SEO Reprint** | 08:00 | 02:30 | `30 2 * * *` | `jules-prompts/seo-reprint.md` |
-| **PR Deploy Check** | 08:45 | 03:15 | `15 3 * * *` | `jules-prompts/pr-deploy-check.md` |
-| **Competitor Gap** | 09:00 | 03:30 | `30 3 * * *` | `jules-prompts/competitor-gap-scan.md` |
-| **SEO Summary (7d)** | 09:15 | 03:45 | `45 3 * * *` | `jules-prompts/rolling-7d-seo-summary.md` |
-| **Local SEO Check** | 09:30 | 04:00 | `0 4 * * *` | `jules-prompts/local-seo-check.md` |
+| **SEO Reprint** | 08:00 AM | 02:30 AM | `30 2 * * *` | `jules-prompts/seo-reprint.md` |
+| **PR & Deploy Check** | 08:45 AM | 03:15 AM | `15 3 * * *` | `jules-prompts/pr-deploy-check.md` |
+| **Competitor Gap Scan** | 09:00 AM | 03:30 AM | `30 3 * * *` | `jules-prompts/competitor-gap-scan.md` |
+| **Rolling 7-Day Summary** | 09:15 AM | 03:45 AM | `45 3 * * *` | `jules-prompts/rolling-7d-seo-summary.md` |
+| **Local SEO Check** | 09:30 AM | 04:00 AM | `0 4 * * *` | `jules-prompts/local-seo-check.md` |
 
 ## Editing Prompts
 
-To change what Jules does for a specific task, simply edit the corresponding markdown file in `jules-prompts/`.
-For example, to change the instructions for the "Local SEO Check", edit `jules-prompts/local-seo-check.md`. The next time the workflow runs, it will use the new content.
+To change what Jules does for a specific task:
+1.  Open the corresponding file in `jules-prompts/` (e.g., `jules-prompts/seo-reprint.md`).
+2.  Edit the instructions. Markdown is supported.
+3.  Commit and push the changes. The next scheduled run will use the updated content.
 
-## Pausing/Disabling
+## Pausing or Disabling
 
 To stop a specific automation:
-1.  Go to the "Actions" tab in GitHub.
+1.  Go to the **Actions** tab in the GitHub repository.
 2.  Select the workflow (e.g., "Jules SEO Reprint").
-3.  Click the "..." menu and select "Disable workflow".
+3.  Click the **...** (three dots) menu and select **Disable workflow**.
 
-Alternatively, you can delete the workflow file or comment out the `schedule` trigger in the YAML file.
+## Duplicate Prevention
 
-## Manual Trigger
-
-All workflows are configured with `workflow_dispatch`, meaning you can manually trigger them from the "Actions" tab to test them or run them on-demand.
+The workflows are designed to check for existing **open** issues with the same title (e.g., `[Jules] SEO Reprint Task - YYYY-MM-DD`). If one exists, a new one will *not* be created. This prevents spamming if tasks are not completed immediately.
