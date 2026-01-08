@@ -86,6 +86,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/blog/how-much-does-brain-surgery-cost-hyderabad',
     '/blog/lumbar-canal-stenosis-walking-pain-hyderabad',
     '/blog/awake-spine-surgery-vs-general-anesthesia-guide',
+    '/blog/trigeminal-neuralgia-vs-tooth-pain-guide',
   ];
 
   const symptomPages = [
