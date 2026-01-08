@@ -1,0 +1,18 @@
+[
+  {
+    "url": "/services/endoscopic-spine-surgery-hyderabad",
+    "schemas": "WebSite, Physician, LocalBusiness, Hospital, BreadcrumbList, MedicalService, MedicalProcedure, MedicalBusiness, Physician, BreadcrumbList, FAQPage"
+  },
+  {
+    "url": "/conditions/sciatica-treatment-hyderabad",
+    "schemas": "WebSite, Physician, LocalBusiness, Hospital, Physician, FAQPage, MedicalCondition"
+  },
+  {
+    "url": "/locations/banjara-hills",
+    "schemas": "WebSite, Physician, LocalBusiness, Hospital, Physician, MedicalClinic, BreadcrumbList, FAQPage"
+  },
+  {
+    "url": "/blog/sciatica-vs-normal-back-pain-guide",
+    "schemas": "WebSite, Physician, LocalBusiness, Hospital, BreadcrumbList, MedicalWebPage, FAQPage"
+  }
+]

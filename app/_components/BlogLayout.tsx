@@ -101,22 +101,47 @@ function getCTAComponent(ctaType?: CTAType, overrideText?: string) {
  * Generate JSON-LD schema for blog post
  */
 function generateBlogSchema(post: BlogPost) {
+  const imageUrl = post.heroImage
+    ? (post.heroImage.startsWith('http') ? post.heroImage : `${SITE_URL}${post.heroImage}`)
+    : `${SITE_URL}/images/dr-sayuj-krishnan-portrait.jpg`;
+
   const baseSchema = {
     '@context': 'https://schema.org',
-    '@type': post.schemaType || 'BlogPosting',
-    headline: post.title,
+    '@type': 'BlogPosting',
+    headline: post.title.substring(0, 110), // Truncate to safe length for headline
     description: post.description,
+    image: imageUrl,
+    datePublished: post.publishedAt,
+    dateModified: post.updatedAt || post.publishedAt,
     author: {
       '@type': 'Person',
       name: 'Dr. Sayuj Krishnan',
-      url: `${SITE_URL}/about/`,
+      url: `${SITE_URL}/about`,
+      jobTitle: 'Neurosurgeon',
+      worksFor: {
+        '@type': 'Hospital',
+        name: 'Yashoda Hospital Malakpet'
+      }
     },
-    datePublished: post.publishedAt,
-    dateModified: post.updatedAt || post.publishedAt,
+    publisher: {
+      '@type': 'Organization',
+      name: 'Dr. Sayuj Krishnan',
+      logo: {
+        '@type': 'ImageObject',
+        url: `${SITE_URL}/icon.svg`
+      }
+    },
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': `${SITE_URL}/blog/${post.slug}/`,
     },
+    ...(post.lastReviewedBy && {
+      reviewedBy: {
+        '@type': 'Person',
+        name: post.lastReviewedBy,
+        jobTitle: 'Neurosurgeon' // Assumed
+      }
+    })
   };
 
   // Add FAQPage schema if FAQs exist
