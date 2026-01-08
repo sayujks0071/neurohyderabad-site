@@ -28,7 +28,8 @@
     "hypertune:test-api": "./scripts/test-hypertune-api.sh",
     "hypertune:check-schema": "./scripts/check-hypertune-schema.sh",
     "ai-gateway:setup": "./scripts/setup-ai-gateway.sh",
-    "ai-gateway:pull": "vercel env pull"
+    "ai-gateway:pull": "vercel env pull",
+    "bloom:run": "python3 scripts/bloom/run_bloom.py"
   },
   "dependencies": {
     "@ai-sdk/openai": "^2.0.77",
