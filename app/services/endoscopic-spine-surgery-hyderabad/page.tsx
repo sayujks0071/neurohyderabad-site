@@ -15,6 +15,7 @@ import { ServiceLocationLinks } from '@/src/components/locations/ServiceLocation
 import { getServiceSources } from '../sources';
 import { patientStories } from '@/src/content/stories';
 import { PhysicianSchema } from "@/src/components/schema/PhysicianSchema";
+import SurgeryComparisonTable from '@/src/components/SurgeryComparisonTable';
 
 const SERVICE_SLUG = 'endoscopic-spine-surgery-hyderabad';
 
@@ -275,6 +276,14 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
               <li>Follow personalised rehab and return-to-work guidelines shared before discharge.</li>
             </ol>
           </div>
+        </section>
+
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-blue-900 mb-6">Endoscopic vs. Traditional Spine Surgery</h2>
+          <p className="text-gray-700 mb-6">
+            Many patients ask why endoscopic surgery is preferred over traditional open methods. The key difference lies in how we approach the spine—preserving your natural anatomy rather than cutting through it.
+          </p>
+          <SurgeryComparisonTable />
         </section>
 
         <section className="mb-16">
