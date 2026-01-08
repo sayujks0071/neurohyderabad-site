@@ -1,27 +1,16 @@
 {
   "timestamp": "2026-01-03",
   "build_metrics": {
-    "first_load_js": "102 kB"
-  },
-  "findings": {
-    "home_page": {
-      "bottleneck": "Hero section LCP image (DoctorCard) was using a 1.3MB high-res original source file, causing unnecessary processing overhead and risk of slow load on cache miss.",
-      "optimization": "Resized source image to 400x400px (21KB) to match display requirements."
-    },
-    "location_pages": {
-      "bottleneck": "Google Maps iframe was loading immediately (even with lazy loading), causing TBT and bandwidth usage issues.",
-      "optimization": "Implemented Click-to-Load Facade for LocationMapEmbed."
-    }
+    "shared_js_kb": 102,
+    "homepage_js_kb": 102,
+    "notes": "Shared JS is 102kB. Implemented optimized portrait image for LCP improvement."
   },
   "changes": [
     {
-      "component": "DoctorCard",
-      "change": "Replaced source image '/images/dr-sayuj-krishnan-portrait.jpg' (1.3MB) with '/images/dr-sayuj-krishnan-portrait-sm.jpg' (21KB).",
-      "impact": "Reduced LCP source file size by ~98%. Eliminates heavy server-side image optimization overhead for the hero image."
+      "page_type": "Home",
+      "change": "Updated DoctorCard to use `dr-sayuj-krishnan-portrait-v2.jpg` (400x400, optimized, stripped metadata).",
+      "expected_impact": "LCP Improvement: Replaces legacy JPEG with optimized, metadata-stripped version. Prevents potential rotation issues and ensures faster load time compared to the original high-res image.",
+      "verification": "Check network tab for `dr-sayuj-krishnan-portrait-v2.jpg` instead of `...-sm.jpg`. Verify image orientation is correct."
     }
-  ],
-  "verification": {
-    "manual_check": "Inspect the doctor image in the hero section. Verify it loads instantly and is the correct resolution.",
-    "build_check": "Build passed successfully."
-  }
+  ]
 }
