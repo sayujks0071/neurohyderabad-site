@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { rateLimit } from "@/src/lib/rate-limit";
+import { validateLeadPayload } from "@/src/lib/validation";
 import { randomUUID } from "crypto";
 
 const WEBAPP_URL = process.env.GOOGLE_APPS_SCRIPT_WEBAPP_URL;
@@ -57,16 +58,42 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Normalize fields before validation to ensure we validate exactly what we process
+    const phone = normalizeString(body.phone);
+    const email = normalizeString(body.email);
+    const city = normalizeString(body.city);
+    const concern = normalizeString(body.concern ?? body.reason ?? body.condition);
+    const source = normalizeString(body.source || "website");
+    const preferredDate = normalizeString(body.preferredDate ?? body.appointmentDate);
+    const preferredTime = normalizeString(body.preferredTime ?? body.appointmentTime);
+
+    // 🛡️ Sentinel: Validate input lengths to prevent DoS
+    const validation = validateLeadPayload({
+      fullName,
+      phone,
+      email,
+      city,
+      concern,
+      source,
+    });
+
+    if (!validation.isValid) {
+      return NextResponse.json(
+        { error: "Validation Error", details: validation.error },
+        { status: 400 }
+      );
+    }
+
     const payload = {
       requestId: body.requestId ?? randomUUID(),
       fullName,
-      phone: normalizeString(body.phone),
-      email: normalizeString(body.email),
-      city: normalizeString(body.city),
-      concern: normalizeString(body.concern ?? body.reason ?? body.condition),
-      preferredDate: normalizeString(body.preferredDate ?? body.appointmentDate),
-      preferredTime: normalizeString(body.preferredTime ?? body.appointmentTime),
-      source: normalizeString(body.source || "website"),
+      phone,
+      email,
+      city,
+      concern,
+      preferredDate,
+      preferredTime,
+      source,
       metadata: body.metadata ?? {},
     };
 
