@@ -98,14 +98,10 @@ export default function NewsletterSignup({
           <Button
             type="submit"
             variant="primary"
-            disabled={status === 'submitting'}
+            isLoading={status === 'submitting'}
             fullWidth
           >
-            {status === 'submitting' 
-              ? 'Subscribing...' 
-              : status === 'success' 
-              ? '✓ Subscribed!' 
-              : 'Subscribe'}
+            {status === 'success' ? '✓ Subscribed!' : 'Subscribe'}
           </Button>
         </form>
         {status === 'success' && (
@@ -136,9 +132,9 @@ export default function NewsletterSignup({
       <Button
         type="submit"
         variant="primary"
-        disabled={status === 'submitting'}
+        isLoading={status === 'submitting'}
       >
-        {status === 'submitting' ? 'Subscribing...' : 'Subscribe'}
+        {status === 'success' ? '✓' : 'Subscribe'}
       </Button>
       {error && (
         <p className="text-sm text-red-600 mt-1" role="alert" id={errorId}>
@@ -153,29 +149,3 @@ export default function NewsletterSignup({
     </form>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
