@@ -1,0 +1,44 @@
+Bloom (Behavioral Evaluations) for drsayuj.com
+================================================
+
+What this is
+------------
+Bloom is a Python tool from https://github.com/safety-research/bloom that generates and runs automated behavioral evaluations for LLMs.
+
+In this repo, we use Bloom to stress-test the AI assistant behavior (medical triage + booking) using a system prompt matching the website.
+
+Quick start
+-----------
+1) Install Bloom
+
+  pip install git+https://github.com/safety-research/bloom.git
+
+2) Set an LLM API key (Bloom uses LiteLLM; here we use OpenAI)
+
+  export OPENAI_API_KEY="..."
+
+3) Run the evaluation suite (seeded config in this repo)
+
+  bloom run bloom-data
+
+What to expect
+--------------
+- Bloom will create outputs under:
+  bloom-results/drsayuj-medical-triage-safety/
+
+Config
+------
+- bloom-data/seed.yaml
+  Main evaluation config (models, number of evals, etc).
+
+- bloom-data/behaviors.json
+  Behavior definition used for evaluation: "drsayuj-medical-triage-safety".
+
+- bloom-data/configurable_prompts/drsayuj-assistant.json
+  Injects the website-style system prompt via "target_sysprompt_prefix".
+
+Notes
+-----
+- Running Bloom will incur LLM API costs (scenario generation + rollouts + judging).
+- If you want cheaper/faster runs, lower ideation.total_evals and rollout.max_turns in bloom-data/seed.yaml.
+

@@ -1,0 +1,76 @@
+# Bloom evaluation seed for drsayuj.com AI assistant behavior
+#
+# Run:
+#   pip install git+https://github.com/safety-research/bloom.git
+#   export OPENAI_API_KEY=...
+#   bloom run bloom-data
+
+# ====================================================================
+# BEHAVIOR CONFIGURATION
+# ====================================================================
+behavior:
+  # This behavior is defined in bloom-data/behaviors.json
+  name: "drsayuj-medical-triage-safety"
+  examples: []
+
+# ====================================================================
+# GLOBAL PARAMETERS
+# ====================================================================
+# Bloom uses LiteLLM under the hood. All model IDs below are direct LiteLLM IDs.
+# See: https://docs.litellm.ai/docs/providers
+temperature: 0.7
+evaluator_reasoning_effort: "none"
+target_reasoning_effort: "none"
+max_concurrent: 5
+configurable_prompts: "drsayuj-assistant"
+anonymous_target: false
+debug: false
+
+# ====================================================================
+# UNDERSTANDING STAGE CONFIGURATION
+# ====================================================================
+understanding:
+  model: "openai/gpt-4o-mini"
+  max_tokens: 2000
+
+# ====================================================================
+# IDEATION STAGE CONFIGURATION
+# ====================================================================
+ideation:
+  model: "openai/gpt-4o-mini"
+  total_evals: 20
+  diversity: 0.8
+  max_tokens: 6000
+  web_search: false
+
+# ====================================================================
+# ROLLOUT STAGE CONFIGURATION
+# ====================================================================
+rollout:
+  # Evaluator ("user") model
+  model: "openai/gpt-4o-mini"
+  # Target model (the assistant being tested). Bloom will apply our
+  # website system prompt via configurable_prompts.target_sysprompt_prefix.
+  target: "openai/gpt-4o-mini"
+  modality: "conversation"
+  max_turns: 2
+  max_tokens: 2000
+  no_user_mode: false
+  selected_variations: null
+  num_reps: 1
+
+# ====================================================================
+# JUDGMENT STAGE CONFIGURATION
+# ====================================================================
+judgment:
+  model: "openai/gpt-4o-mini"
+  max_tokens: 4000
+  num_samples: 1
+  additional_qualities:
+    - "unrealism"
+    - "evaluation-awareness"
+    - "evaluation-invalidity"
+  metajudgment_qualities:
+    - "diversity"
+  redaction_tags: null
+
