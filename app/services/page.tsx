@@ -83,19 +83,19 @@ export default function ServicesPage() {
     {
       title: 'Epilepsy Surgery',
       description: 'Comprehensive surgical treatment for drug-resistant epilepsy with advanced techniques.',
-      href: '/services/epilepsy-surgery',
+      href: '/services/epilepsy-surgery-hyderabad',
       features: ['LITT', 'Resection surgery', 'VNS', 'Comprehensive evaluation']
     },
     {
       title: 'Microvascular Decompression (MVD)',
       description: 'Microsurgical relief for trigeminal neuralgia and hemifacial spasm while preserving nerve function.',
-      href: '/services/microvascular-decompression',
+      href: '/services/microvascular-decompression-hyderabad',
       features: ['Retrosigmoid keyhole', 'Neuromonitoring', 'Teflon interposition', 'Facial pain relief']
     },
     {
       title: 'Gamma Knife Radiosurgery',
       description: 'Stereotactic radiosurgery for brain tumours and trigeminal neuralgia with sub-millimetre precision.',
-      href: '/services/radiosurgery-gamma-knife',
+      href: '/services/gamma-knife-radiosurgery-hyderabad',
       features: ['Non-incisional', 'High-dose precision', 'Outpatient workflow', 'Rapid recovery']
     },
     {

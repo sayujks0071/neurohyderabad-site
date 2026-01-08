@@ -23,7 +23,7 @@ export const CONDITION_RESOURCES: ConditionResource[] = [
     name: "Acoustic Neuroma",
     summary:
       "Hearing-preserving microsurgery and radiosurgery options for vestibular schwannoma causing imbalance or tinnitus.",
-    primaryPath: "/conditions/acoustic-neuroma",
+    primaryPath: "/conditions/acoustic-neuroma-treatment-hyderabad",
     relatedResources: [
       {
         href: "/technology-facilities",
@@ -62,7 +62,7 @@ export const CONDITION_RESOURCES: ConditionResource[] = [
     name: "Brain Aneurysm",
     summary:
       "Emergency evaluation and microsurgical or endovascular strategies for ruptured and unruptured aneurysms.",
-    primaryPath: "/conditions/aneurysm",
+    primaryPath: "/conditions/brain-aneurysm-treatment-hyderabad",
     relatedResources: [
       {
         href: "/emergency-rehabilitation",
@@ -175,10 +175,10 @@ export const CONDITION_RESOURCES: ConditionResource[] = [
     name: "Carpal Tunnel Syndrome",
     summary:
       "Day-care minimally invasive decompression for wrist nerve compression with rapid functional recovery.",
-    primaryPath: "/services/peripheral-nerve-surgery-hyderabad",
+    primaryPath: "/conditions/carpal-tunnel-syndrome-hyderabad",
     relatedResources: [
       {
-        href: "/stories/carpal-tunnel-day-care-success",
+        href: "/patient-stories/carpal-tunnel-day-care-success",
         label: "Patient story: Grip strength restored in 14 days",
       },
     ],
@@ -206,7 +206,7 @@ export const CONDITION_RESOURCES: ConditionResource[] = [
     name: "Chiari Malformation",
     summary:
       "Posterior fossa decompression planning for craniovertebral junction disorders causing headaches and imbalance.",
-    primaryPath: "/services/minimally-invasive-spine-surgery",
+    primaryPath: "/conditions/chiari-malformation-hyderabad",
     keywords: ["chiari", "posterior fossa", "craniovertebral"],
     symptomHighlights: [
       "Occipital headaches worsened by coughing or exertion",
@@ -255,7 +255,7 @@ export const CONDITION_RESOURCES: ConditionResource[] = [
     name: "Cervical Myelopathy",
     summary:
       "Decompression and stabilisation strategies for cervical spinal cord compression leading to gait disturbance.",
-    primaryPath: "/services/minimally-invasive-spine-surgery",
+    primaryPath: "/services/cervical-spine-surgery-hyderabad",
     keywords: ["myelopathy", "cervical", "spinal cord"],
     symptomHighlights: [
       "Hand clumsiness and difficulty with buttons or writing",
@@ -297,7 +297,7 @@ export const CONDITION_RESOURCES: ConditionResource[] = [
     name: "Disc Herniation (Lumbar)",
     summary:
       "Full endoscopic discectomy and rehabilitation pathways for sciatic pain caused by lumbar disc prolapse.",
-    primaryPath: "/conditions/disc-herniation",
+    primaryPath: "/conditions/herniated-disc-treatment-hyderabad",
     relatedResources: [
       {
         href: "/conditions/sciatica-treatment-hyderabad",
@@ -503,7 +503,7 @@ export const CONDITION_RESOURCES: ConditionResource[] = [
     name: "Pituitary Adenoma",
     summary:
       "Endoscopic endonasal surgery for hormonal and vision-related pituitary tumours with endocrinology support.",
-    primaryPath: "/conditions/pituitary-adenoma",
+    primaryPath: "/conditions/pituitary-adenoma-hyderabad",
     relatedResources: [
       {
         href: "/services/brain-tumor-surgery-hyderabad",
@@ -615,7 +615,7 @@ export const CONDITION_RESOURCES: ConditionResource[] = [
     name: "Spondylolisthesis",
     summary:
       "MIS TLIF and stabilization techniques for vertebral slippage causing back pain and radiculopathy.",
-    primaryPath: "/services/minimally-invasive-spine-surgery",
+    primaryPath: "/conditions/spondylolisthesis-treatment-hyderabad",
     relatedResources: [
       {
         href: "/stories/lumbar-miss-tlif-recovery",
@@ -639,7 +639,7 @@ export const CONDITION_RESOURCES: ConditionResource[] = [
     name: "Trigeminal Neuralgia",
     summary:
       "Microvascular decompression and radiosurgery options for severe facial pain refractory to medication.",
-    primaryPath: "/conditions/trigeminal-neuralgia",
+    primaryPath: "/conditions/trigeminal-neuralgia-treatment-hyderabad",
     relatedResources: [
       {
         href: "/stories/mvd-trigeminal-neuralgia-hyderabad",
