@@ -11,6 +11,8 @@ import Section from '@/app/_components/Section';
 import { patientStories } from '../../../src/content/stories';
 import { ConditionLocationLinks } from '@/src/components/locations/ConditionLocationLinks';
 import { PhysicianSchema } from "@/src/components/schema/PhysicianSchema";
+import PatientEducationVideos from '@/app/_components/PatientEducationVideos';
+import { breadcrumbJsonLd, SITE_URL as BASE_URL } from '@/src/lib/seo';
 
 const baseMetadata = makeMetadata({
   title: 'Sciatica Treatment in Hyderabad | Expert Pain Relief & Surgery',
@@ -277,6 +279,8 @@ export default function SciaticaTreatmentPage() {
         </div>
       </Section>
 
+      <PatientEducationVideos />
+
       <Section>
         <div className="bg-blue-600 rounded-2xl p-8 md:p-12 text-center text-white shadow-xl mb-12">
           <h2 className="text-3xl font-bold mb-4">Start Your Journey to Pain-Free Living</h2>
@@ -350,6 +354,17 @@ export default function SciaticaTreatmentPage() {
         </div>
       </Section>
       
+      {/* Breadcrumb Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbJsonLd([
+            { name: 'Home', url: BASE_URL },
+            { name: 'Conditions', url: `${BASE_URL}/conditions` },
+            { name: 'Sciatica Treatment', url: `${BASE_URL}/conditions/sciatica-treatment-hyderabad` }
+          ]))
+        }}
+      />
       {/* FAQ Schema */}
       <script
         type="application/ld+json"
