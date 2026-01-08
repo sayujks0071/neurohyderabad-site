@@ -90,6 +90,24 @@
       "difficulty": "Med",
       "volume": "Med",
       "target_page": "/conditions/spondylolisthesis-treatment-hyderabad"
+    },
+    {
+      "term": "osteoporotic spine fracture treatment hyderabad",
+      "difficulty": "Med",
+      "volume": "Low",
+      "target_page": "/conditions/osteoporotic-spine-fracture-hyderabad"
+    },
+    {
+      "term": "spinal tuberculosis treatment hyderabad",
+      "difficulty": "Med",
+      "volume": "Med",
+      "target_page": "/conditions/spinal-tuberculosis-treatment-hyderabad"
+    },
+    {
+      "term": "lumbar canal stenosis surgery hyderabad",
+      "difficulty": "Med",
+      "volume": "High",
+      "target_page": "/conditions/spinal-stenosis-treatment-hyderabad"
     }
   ]
 }
