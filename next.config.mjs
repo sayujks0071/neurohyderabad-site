@@ -22,7 +22,7 @@ const nextConfig = {
   // Performance optimizations
   experimental: {
     // Reduce hydration data size for Safari compatibility
-    optimizePackageImports: ['@/components', '@/lib'],
+    optimizePackageImports: ['@/components', '@/lib', 'lucide-react'],
     // Enable partial pre-rendering for better performance
     ppr: false,
     // Enable optimized CSS loading
