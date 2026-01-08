@@ -1,0 +1,84 @@
+{
+  "summary": {
+    "total_checked": 13,
+    "broken_links": 13,
+    "redirect_chains": 0,
+    "duplicate_titles": 0,
+    "missing_titles": 0,
+    "thin_pages": 0,
+    "sitemap_status": "error",
+    "robots_status": "ok"
+  },
+  "details": {
+    "broken_links": [
+      {
+        "url": "http://localhost:3000/disease-guides/degenerative-disc-disease",
+        "status": 404,
+        "source": "internal_link_check"
+      },
+      {
+        "url": "http://localhost:3000/stories/minimal-invasive-meningioma-resection",
+        "status": 404,
+        "source": "internal_link_check"
+      },
+      {
+        "url": "http://localhost:3000/stories/carpal-tunnel-day-care-success",
+        "status": 404,
+        "source": "internal_link_check"
+      },
+      {
+        "url": "http://localhost:3000/stories/temporal-lobe-epilepsy-control",
+        "status": 404,
+        "source": "internal_link_check"
+      },
+      {
+        "url": "http://localhost:3000/stories/lumbar-miss-tlif-recovery",
+        "status": 404,
+        "source": "internal_link_check"
+      },
+      {
+        "url": "http://localhost:3000/services/epilepsy-surgery",
+        "status": 404,
+        "source": "internal_link_check"
+      },
+      {
+        "url": "http://localhost:3000/services/microvascular-decompression",
+        "status": 404,
+        "source": "internal_link_check"
+      },
+      {
+        "url": "http://localhost:3000/services/radiosurgery-gamma-knife",
+        "status": 404,
+        "source": "internal_link_check"
+      },
+      {
+        "url": "http://localhost:3000/conditions/trigeminal-neuralgia-treatment",
+        "status": 404,
+        "source": "internal_link_check"
+      },
+      {
+        "url": "http://localhost:3000/services/sciatica-treatment-hyderabad",
+        "status": 404,
+        "source": "internal_link_check"
+      },
+      {
+        "url": "http://localhost:3000/conditions/sciatica-pain-treatment",
+        "status": 404,
+        "source": "internal_link_check"
+      },
+      {
+        "url": "http://localhost:3000/conditions/slipped-disc",
+        "status": 404,
+        "source": "internal_link_check"
+      },
+      {
+        "url": "http://localhost:3000/conditions/brain-tumor",
+        "status": 404,
+        "source": "internal_link_check"
+      }
+    ],
+    "redirect_chains": [],
+    "title_issues": [],
+    "thin_pages": []
+  }
+}
