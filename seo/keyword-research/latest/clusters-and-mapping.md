@@ -1,23 +1,31 @@
-# Clusters and Mapping - 2026-01-03
+## Clusters and Mapping - 2026-01-03
 
-## 1. Cluster: Lumbar Laminectomy (Gap Fill)
-*   **Primary Keyword**: `lumbar laminectomy surgery hyderabad`
-*   **Intent**: Transactional (Patient knows they need decompression)
-*   **Target**: `/services/lumbar-laminectomy-surgery-hyderabad` (New Page)
-*   **Supporting Keywords**: `lumbar decompression surgery`, `laminectomy vs laminotomy`, `spinal decompression cost hyderabad`
+### Cluster 1: Osteoporotic Spine Fracture
+*   **Label:** HYD | BOFU | SPINE | fracture | treatment
+*   **Primary Keyword:** osteoporotic spine fracture treatment hyderabad
+*   **Secondary Keywords:** vertebroplasty hyderabad, kyphoplasty hyderabad, spine fracture specialist hyderabad, elderly back pain treatment hyderabad
+*   **Target URL:** `/conditions/osteoporotic-spine-fracture-hyderabad` (NEW)
+*   **Intent:** Transactional/Commercial. Patients (or their children) looking for urgent or semi-urgent solutions for compression fractures.
 
-## 2. Cluster: Spondylolisthesis (Gap Fill)
-*   **Primary Keyword**: `spondylolisthesis treatment hyderabad`
-*   **Intent**: Commercial (Diagnosis known, seeking doctor)
-*   **Target**: `/conditions/spondylolisthesis-treatment-hyderabad` (New Page)
-*   **Supporting Keywords**: `slipped vertebrae surgery`, `grade 1 spondylolisthesis treatment`, `tlif surgery cost hyderabad`
+### Cluster 2: Spinal Tuberculosis (Pott's Spine)
+*   **Label:** HYD | MOFU | SPINE | tuberculosis | treatment
+*   **Primary Keyword:** spinal tuberculosis treatment hyderabad
+*   **Secondary Keywords:** pott's spine treatment hyderabad, tb spine doctor hyderabad, spine infection treatment hyderabad
+*   **Target URL:** `/conditions/spinal-tuberculosis-treatment-hyderabad` (NEW)
+*   **Intent:** Commercial/Informational. Long-term treatment, high anxiety, requires trust.
 
-## 3. Cluster: Endoscopic Spine Surgery (Reinforce)
-*   **Primary Keyword**: `endoscopic spine surgery hyderabad`
-*   **Target**: `/services/minimally-invasive-spine-surgery` (Existing)
-*   **Action**: Ensure internal links from new Laminectomy page point here as "Better Alternative".
+### Cluster 3: Cervical Spondylosis
+*   **Label:** HYD | MOFU | SPINE | spondylosis | treatment
+*   **Primary Keyword:** cervical spondylosis treatment hyderabad
+*   **Secondary Keywords:** neck pain specialist hyderabad, cervical spondylitis doctor
+*   **Target URL:** `/conditions/cervical-spondylosis-treatment-hyderabad` (Check if exists, else future)
 
-## 4. Cluster: Sciatica (Reinforce)
-*   **Primary Keyword**: `sciatica treatment hyderabad`
-*   **Target**: `/conditions/sciatica-treatment-hyderabad` (Existing)
-*   **Action**: No change needed, page is strong.
+### Cluster 4: Lumbar Spondylosis
+*   **Label:** HYD | MOFU | SPINE | spondylosis | treatment
+*   **Primary Keyword:** lumbar spondylosis treatment hyderabad
+*   **Secondary Keywords:** lower back pain doctor hyderabad, lumbar spondylitis treatment
+*   **Target URL:** `/conditions/lumbar-spondylosis-treatment-hyderabad` (Check if exists, else future)
+
+### Mapping Updates:
+*   Added mappings for new fracture and TB pages.
+*   Confirmed mappings for key service pages (Endoscopic, Fusion).

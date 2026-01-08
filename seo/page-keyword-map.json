@@ -1,7 +1,8 @@
 {
   "/": [
     "neurosurgeon hyderabad",
-    "best spine surgeon hyderabad"
+    "best spine surgeon hyderabad",
+    "back pain doctor hyderabad"
   ],
   "/services/minimally-invasive-spine-surgery": [
     "endoscopic spine surgery hyderabad",
@@ -51,5 +52,21 @@
   ],
   "/blog/endoscopic-vs-microdiscectomy-hyderabad": [
     "endoscopic discectomy vs open surgery"
+  ],
+  "/conditions/spondylolisthesis-treatment-hyderabad": [
+    "spondylolisthesis treatment hyderabad"
+  ],
+  "/conditions/osteoporotic-spine-fracture-hyderabad": [
+    "osteoporotic spine fracture treatment hyderabad",
+    "vertebroplasty hyderabad",
+    "kyphoplasty hyderabad"
+  ],
+  "/conditions/spinal-tuberculosis-treatment-hyderabad": [
+    "spinal tuberculosis treatment hyderabad",
+    "pott's spine treatment hyderabad"
+  ],
+  "/conditions/spinal-stenosis-treatment-hyderabad": [
+    "lumbar canal stenosis surgery hyderabad",
+    "spinal stenosis treatment hyderabad"
   ]
 }
