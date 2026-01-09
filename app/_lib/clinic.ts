@@ -18,6 +18,7 @@ const fallback: LocationData = {
   telephone: "+919778280044",
   whatsapp: "919778280044",
   directions_url: "https://maps.google.com/?q=Yashoda+Hospitals+Malakpet+Hyderabad",
+  google_maps_place_url: "https://www.google.com/maps/place/Dr+Sayuj+Krishnan",
   embed_url: "",
   geo: {
       latitude: 17.3750,

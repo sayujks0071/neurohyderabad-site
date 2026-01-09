@@ -11,16 +11,8 @@ interface LocationSchemaProps {
 }
 
 export const LocationSchema: React.FC<LocationSchemaProps> = ({ location, breadcrumb, faq }) => {
-  // 1. Physician Schema (Sitewide Identity)
-  const physicianSchema = {
-    "@context": "https://schema.org",
-    "@type": "Physician",
-    "@id": "https://www.drsayuj.info/#physician",
-    "name": location.canonical_display_name,
-    "url": "https://www.drsayuj.info/",
-    "telephone": location.telephone,
-    "image": "https://www.drsayuj.info/images/dr-sayuj-krishnan.jpg"
-  };
+  // 1. Physician Schema is handled globally by PhysicianSchema.tsx in RootLayout.
+  // We do NOT duplicate it here to avoid conflicts.
 
   // 2. MedicalClinic / LocalBusiness Schema (Per Location)
   const localBusinessSchema = {
@@ -51,10 +43,12 @@ export const LocationSchema: React.FC<LocationSchemaProps> = ({ location, breadc
       "name": "Hyderabad",
       "containsPlace": { "@type": "Place", "name": location.areaServedName }
     },
-    // Linking back to the physician
+    // Linking back to the physician via department (clinic has a neurosurgery department/physician)
     "department": {
         "@id": "https://www.drsayuj.info/#physician"
-    }
+    },
+    // Also explicitly link that this clinic is a place where the physician works (if supported by schema, but department is safer inverted relationship)
+    "hasMap": location.google_maps_place_url
   };
 
   // 3. Breadcrumb Schema
@@ -85,10 +79,6 @@ export const LocationSchema: React.FC<LocationSchemaProps> = ({ location, breadc
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(physicianSchema) }}
-      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}

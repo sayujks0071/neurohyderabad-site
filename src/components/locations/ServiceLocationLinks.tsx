@@ -11,6 +11,9 @@ export const ServiceLocationLinks: React.FC<ServiceLocationLinksProps> = ({
   className = '',
   serviceName
 }) => {
+  // Limit to 6 locations as per requirements
+  const displayedLocations = locations.slice(0, 6);
+
   return (
     <div className={`rounded-xl border border-blue-100 bg-blue-50/50 p-6 ${className}`}>
       <h3 className="text-xl font-semibold text-blue-900 mb-4">
@@ -22,8 +25,8 @@ export const ServiceLocationLinks: React.FC<ServiceLocationLinksProps> = ({
         Dr. Sayuj Krishnan is accessible to patients across Hyderabad. Our clinic at Yashoda Hospital
         Malakpet is centrally located with easy access from major residential areas.
       </p>
-      <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
-        {locations.map((location) => (
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-3 mb-6">
+        {displayedLocations.map((location) => (
           <Link
             key={location.id}
             href={`/${location.slug}`}
@@ -34,6 +37,12 @@ export const ServiceLocationLinks: React.FC<ServiceLocationLinksProps> = ({
           </Link>
         ))}
       </div>
+      <Link
+        href="/appointments"
+        className="block w-full text-center bg-white border border-blue-600 text-blue-700 py-2 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
+      >
+        Book Appointment
+      </Link>
     </div>
   );
 };
