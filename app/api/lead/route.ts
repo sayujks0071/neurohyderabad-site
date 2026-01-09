@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
   
   // 1. Rate Limiting
   const ip = req.headers.get("x-forwarded-for") ?? "unknown";
-  const limit = await rateLimit(ip, 5, 60 * 1000); // 5 requests per minute
+  const limit = rateLimit(ip, 5, 60 * 1000); // 5 requests per minute
 
   if (!limit.success) {
     return NextResponse.json(
