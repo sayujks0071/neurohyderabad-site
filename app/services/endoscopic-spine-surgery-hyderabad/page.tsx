@@ -32,18 +32,12 @@ const baseMetadata = makeMetadata({
 export const metadata: Metadata = {
   ...baseMetadata,
   keywords: [
-    'endoscopic spine surgery',
     'endoscopic spine surgery hyderabad',
-    'minimally invasive spine surgery',
-    'keyhole spine surgery cost at malakpet yashoda',
-    'keyhole spine surgery',
+    'minimally invasive spine surgery hyderabad',
+    'keyhole spine surgery cost',
     'endoscopic discectomy hyderabad',
-    'full endoscopic discectomy hyderabad',
-    'day care spine surgery hyderabad',
-    'miss spine surgery hyderabad',
-    'transforaminal endoscopic spine surgery hyderabad',
-    'yashoda hospital endoscopic spine surgery',
-    'spine surgery hyderabad',
+    'spine surgeon yashoda hospital malakpet',
+    'day care spine surgery',
   ],
   openGraph: {
     title: 'Endoscopic Spine Surgery in Hyderabad | Minimally Invasive Keyhole Surgery',

@@ -20,9 +20,6 @@ import TrustSignalViewportTracker from "./_components/TrustSignalViewportTracker
 import UserJourneyTracker from "./_components/UserJourneyTracker";
 import TrustBridgeLink from "./_components/TrustBridgeLink";
 import { mediaPublications } from "../src/content/media";
-import MedicalClinicSchema from "./components/schemas/MedicalClinicSchema";
-import OrganizationSchema from "./components/schemas/OrganizationSchema";
-import LocalBusinessSchema from "./components/schemas/LocalBusinessSchema";
 import Button from "./_components/Button";
 import Card from "./_components/Card";
 import Section from "./_components/Section";
@@ -205,9 +202,11 @@ const HOME_FAQS = [
 export default function Home() {
   return (
     <>
-      <OrganizationSchema />
-      <LocalBusinessSchema />
-      <MedicalClinicSchema />
+      {/* Schemas handled in RootLayout: Website, Physician, Hospital.
+          Specific page schemas like FAQPage remain here.
+          OrganizationSchema, LocalBusinessSchema, and MedicalClinicSchema were removed
+          to avoid duplicate entities in the Knowledge Graph. */}
+
       <FAQPageSchema faqs={HOME_FAQS} pageUrl={HOME_CANONICAL} />
 
       {/* <ScrollDepthTracker pageSlug="/" /> */}
