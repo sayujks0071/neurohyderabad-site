@@ -13,6 +13,7 @@ import { ConditionLocationLinks } from '@/src/components/locations/ConditionLoca
 import { PhysicianSchema } from "@/src/components/schema/PhysicianSchema";
 import PatientEducationVideos from '@/app/_components/PatientEducationVideos';
 import { breadcrumbJsonLd, SITE_URL as BASE_URL } from '@/src/lib/seo';
+import CostTransparencySection from '@/src/components/CostTransparencySection';
 
 const baseMetadata = makeMetadata({
   title: 'Sciatica Treatment in Hyderabad | Expert Pain Relief & Surgery',
@@ -34,6 +35,33 @@ export const metadata: Metadata = {
 const spineStories = patientStories
   .filter((story) => story.tags.includes('spine'))
   .slice(0, 2);
+
+const sciaticaCosts = [
+  {
+    procedure: "Initial Consultation",
+    range: "₹800 - ₹1,000",
+    recovery: "Immediate",
+    includes: ["Physical Assessment", "Neurological Exam", "Treatment Planning"]
+  },
+  {
+    procedure: "MRI Spine (Lumbar)",
+    range: "₹6,500 - ₹8,500",
+    recovery: "Immediate",
+    includes: ["Imaging Scan", "Radiologist Report"]
+  },
+  {
+    procedure: "Spinal Injection (Block)",
+    range: "₹15,000 - ₹25,000",
+    recovery: "Same Day",
+    includes: ["Procedure Charges", "Fluoroscopy Guidance", "Day Care Stay"]
+  },
+  {
+    procedure: "Endoscopic Discectomy",
+    range: "₹1,20,000 - ₹1,80,000",
+    recovery: "1-2 Weeks",
+    includes: ["Surgeon Fees", "OT Charges", "Standard Implants", "Hospital Stay (1-2 days)"]
+  }
+];
 
 export default function SciaticaTreatmentPage() {
   return (
@@ -246,6 +274,13 @@ export default function SciaticaTreatmentPage() {
         </div>
       </Section>
 
+      <Section>
+        <CostTransparencySection
+          costs={sciaticaCosts}
+          disclaimer="*Approximate cost estimates for self-pay patients at Yashoda Hospital, Malakpet. Final quote depends on room selection, insurance approval, and specific medical requirements."
+        />
+      </Section>
+
       {/* Patient Stories Section */}
       <Section background="gray">
         <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Patient Success Stories</h2>
@@ -329,6 +364,10 @@ export default function SciaticaTreatmentPage() {
             {
               q: "What is the success rate of endoscopic spine surgery for sciatica?",
               a: "Endoscopic discectomy has a high success rate (over 90%) for relieving leg pain caused by disc herniation. It offers faster recovery and less pain compared to open surgery."
+            },
+            {
+              q: "How much does sciatica treatment cost in Hyderabad?",
+              a: "The cost varies by treatment type. Conservative care starts from ₹800 (consultation). Spinal injections range from ₹15,000 to ₹25,000. Endoscopic surgery packages typically range from ₹1,20,000 to ₹1,80,000 depending on room category and insurance coverage."
             }
           ].map((faq, i) => (
             <details key={i} className="group bg-white border border-gray-200 rounded-lg p-4 open:bg-gray-50 transition-colors">
@@ -411,6 +450,14 @@ export default function SciaticaTreatmentPage() {
                 "acceptedAnswer": {
                   "@type": "Answer",
                   "text": "Endoscopic discectomy has a high success rate (over 90%) for relieving leg pain caused by disc herniation. It offers faster recovery and less pain compared to open surgery."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How much does sciatica treatment cost in Hyderabad?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "The cost varies by treatment type. Conservative care starts from ₹800 (consultation). Spinal injections range from ₹15,000 to ₹25,000. Endoscopic surgery packages typically range from ₹1,20,000 to ₹1,80,000 depending on room category and insurance coverage."
                 }
               }
             ]
