@@ -44,6 +44,18 @@
       "target_page": "/conditions/slip-disc-treatment-hyderabad"
     },
     {
+      "term": "sciatica treatment hyderabad",
+      "difficulty": "Med",
+      "volume": "High",
+      "target_page": "/conditions/sciatica-pain-treatment-hyderabad"
+    },
+    {
+      "term": "spinal fusion surgery hyderabad",
+      "difficulty": "High",
+      "volume": "Med",
+      "target_page": "/services/spinal-fusion-surgery-hyderabad"
+    },
+    {
       "term": "cervical myelopathy surgery hyderabad",
       "difficulty": "Med",
       "volume": "Low",
