@@ -79,9 +79,9 @@ export default function LeadForm() {
     } catch (err: unknown) {
       let message = "An unexpected error occurred. Please try again.";
       if (err instanceof Error) {
-        message = err.message || message;
+        message = err.message.length > 0 ? err.message : message;
       } else if (typeof err === "string") {
-        message = err || message;
+        message = err.length > 0 ? err : message;
       }
       console.error("Submission error:", err);
       setSubmitError(message);
