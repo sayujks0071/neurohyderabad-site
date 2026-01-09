@@ -6,7 +6,7 @@ const WEBAPP_URL = process.env.GOOGLE_APPS_SCRIPT_WEBAPP_URL;
 const API_TOKEN = process.env.GOOGLE_APPS_SCRIPT_API_TOKEN;
 
 // Allowed origins for CORS (in production, restrict to your actual domains)
-const ALLOWED_ORIGINS = process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:3000', 'http://localhost:5173'];
+const ALLOWED_ORIGINS = process.env.ALLOWED_ORIGINS?.split(',').map((o) => o.trim()) || ['http://localhost:3000', 'http://localhost:5173'];
 
 function getCorsHeaders(origin: string | null) {
   // If origin is in allowed list, return it; otherwise don't set the header (browser will block)
