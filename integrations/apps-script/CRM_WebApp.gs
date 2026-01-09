@@ -231,6 +231,10 @@ function processLead(data) {
         if (scriptTimeZone !== expectedTimeZone) {
           res.notes += `Timezone warning: Script is running in ${scriptTimeZone}, but appointments are expected in ${expectedTimeZone}. `;
           Logger.log(`Timezone mismatch: ${scriptTimeZone} vs ${expectedTimeZone}`);
+          // Fail calendar event creation explicitly to avoid creating events with incorrect times
+          throw new Error(
+            `Timezone mismatch: script timezone is ${scriptTimeZone}, but expected ${expectedTimeZone}`
+          );
         }
         
         let event;
