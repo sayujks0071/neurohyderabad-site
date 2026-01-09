@@ -101,45 +101,45 @@ export default function Page() {
       </div>
 
       <h2>Comparison table</h2>
-      <div className="overflow-x-auto">
-        <table className="min-w-full border border-gray-200 rounded-lg">
+      <div className="my-6 overflow-x-auto rounded-lg border border-gray-200 bg-white overflow-hidden">
+        <table className="min-w-full border-collapse text-sm">
           <thead className="bg-gray-50">
             <tr>
-              <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">Factor</th>
-              <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">Disc Replacement</th>
-              <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">Spinal Fusion</th>
+              <th className="border-b border-gray-200 px-4 py-2 text-left font-semibold text-gray-900">Factor</th>
+              <th className="border-b border-gray-200 px-4 py-2 text-left font-semibold text-gray-900">Disc Replacement</th>
+              <th className="border-b border-gray-200 px-4 py-2 text-left font-semibold text-gray-900">Spinal Fusion</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
             <tr>
-              <td className="px-4 py-2 text-sm font-semibold text-gray-700">Motion preservation</td>
-              <td className="px-4 py-2 text-sm text-gray-700">✅ Maintains natural movement</td>
-              <td className="px-4 py-2 text-sm text-gray-700">❌ Eliminates motion</td>
+              <td className="px-4 py-2 font-semibold text-gray-900">Motion preservation</td>
+              <td className="px-4 py-2 text-gray-700">✅ Maintains natural movement</td>
+              <td className="px-4 py-2 text-gray-700">❌ Eliminates motion</td>
             </tr>
             <tr>
-              <td className="px-4 py-2 text-sm font-semibold text-gray-700">Recovery time</td>
-              <td className="px-4 py-2 text-sm text-gray-700">6-12 weeks</td>
-              <td className="px-4 py-2 text-sm text-gray-700">8-16 weeks</td>
+              <td className="px-4 py-2 font-semibold text-gray-900">Recovery time</td>
+              <td className="px-4 py-2 text-gray-700">6-12 weeks</td>
+              <td className="px-4 py-2 text-gray-700">8-16 weeks</td>
             </tr>
             <tr>
-              <td className="px-4 py-2 text-sm font-semibold text-gray-700">Long-term mobility</td>
-              <td className="px-4 py-2 text-sm text-gray-700">✅ Better range of motion</td>
-              <td className="px-4 py-2 text-sm text-gray-700">⚠️ May limit flexibility</td>
+              <td className="px-4 py-2 font-semibold text-gray-900">Long-term mobility</td>
+              <td className="px-4 py-2 text-gray-700">✅ Better range of motion</td>
+              <td className="px-4 py-2 text-gray-700">⚠️ May limit flexibility</td>
             </tr>
             <tr>
-              <td className="px-4 py-2 text-sm font-semibold text-gray-700">Adjacent level protection</td>
-              <td className="px-4 py-2 text-sm text-gray-700">✅ Reduces stress on nearby discs</td>
-              <td className="px-4 py-2 text-sm text-gray-700">⚠️ May increase stress</td>
+              <td className="px-4 py-2 font-semibold text-gray-900">Adjacent level protection</td>
+              <td className="px-4 py-2 text-gray-700">✅ Reduces stress on nearby discs</td>
+              <td className="px-4 py-2 text-gray-700">⚠️ May increase stress</td>
             </tr>
             <tr>
-              <td className="px-4 py-2 text-sm font-semibold text-gray-700">Cost</td>
-              <td className="px-4 py-2 text-sm text-gray-700">Higher (₹4-6L)</td>
-              <td className="px-4 py-2 text-sm text-gray-700">Lower (₹3-5L)</td>
+              <td className="px-4 py-2 font-semibold text-gray-900">Cost</td>
+              <td className="px-4 py-2 text-gray-700">Higher (₹4-6L)</td>
+              <td className="px-4 py-2 text-gray-700">Lower (₹3-5L)</td>
             </tr>
             <tr>
-              <td className="px-4 py-2 text-sm font-semibold text-gray-700">Insurance coverage</td>
-              <td className="px-4 py-2 text-sm text-gray-700">Limited</td>
-              <td className="px-4 py-2 text-sm text-gray-700">Widely covered</td>
+              <td className="px-4 py-2 font-semibold text-gray-900">Insurance coverage</td>
+              <td className="px-4 py-2 text-gray-700">Limited</td>
+              <td className="px-4 py-2 text-gray-700">Widely covered</td>
             </tr>
           </tbody>
         </table>

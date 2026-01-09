@@ -117,8 +117,8 @@ export default function MVDvsRadiosurgeryPage() {
 
             <section className="mb-8">
               <h2>Detailed Comparison Table</h2>
-              <div className="overflow-x-auto">
-                <table className="w-full border-collapse bg-white shadow-sm rounded-lg overflow-hidden text-sm">
+              <div className="my-6 overflow-x-auto rounded-lg border border-gray-200 bg-white overflow-hidden">
+                <table className="min-w-full border-collapse text-sm">
                   <thead className="bg-blue-600 text-white">
                     <tr>
                       <th className="p-3 text-left">Feature</th>
@@ -127,7 +127,7 @@ export default function MVDvsRadiosurgeryPage() {
                       <th className="p-3 text-left">Percutaneous</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody className="divide-y divide-gray-200">
                     <tr className="border-b">
                       <td className="p-3 font-semibold">Invasiveness</td>
                       <td className="p-3">Open brain surgery</td>

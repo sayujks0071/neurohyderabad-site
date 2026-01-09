@@ -150,35 +150,35 @@ export default function Page() {
       </div>
 
       <h2>Cost comparison: Hyderabad vs other cities</h2>
-      <div className="overflow-x-auto">
-        <table className="min-w-full border border-gray-200 rounded-lg">
+      <div className="my-6 overflow-x-auto rounded-lg border border-gray-200 bg-white overflow-hidden">
+        <table className="min-w-full border-collapse text-sm">
           <thead className="bg-gray-50">
             <tr>
-              <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">City</th>
-              <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">TLIF Range</th>
-              <th className="px-4 py-2 text-left text-sm font-semibold text-gray-700">ACDF Range</th>
+              <th className="border-b border-gray-200 px-4 py-2 text-left font-semibold text-gray-900">City</th>
+              <th className="border-b border-gray-200 px-4 py-2 text-left font-semibold text-gray-900">TLIF Range</th>
+              <th className="border-b border-gray-200 px-4 py-2 text-left font-semibold text-gray-900">ACDF Range</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
             <tr>
-              <td className="px-4 py-2 text-sm text-gray-700">Hyderabad</td>
-              <td className="px-4 py-2 text-sm text-gray-700">₹3.75L - ₹5.35L</td>
-              <td className="px-4 py-2 text-sm text-gray-700">₹2.80L - ₹4.00L</td>
+              <td className="px-4 py-2 text-gray-700">Hyderabad</td>
+              <td className="px-4 py-2 text-gray-700">₹3.75L - ₹5.35L</td>
+              <td className="px-4 py-2 text-gray-700">₹2.80L - ₹4.00L</td>
             </tr>
             <tr>
-              <td className="px-4 py-2 text-sm text-gray-700">Mumbai</td>
-              <td className="px-4 py-2 text-sm text-gray-700">₹4.50L - ₹6.50L</td>
-              <td className="px-4 py-2 text-sm text-gray-700">₹3.20L - ₹4.80L</td>
+              <td className="px-4 py-2 text-gray-700">Mumbai</td>
+              <td className="px-4 py-2 text-gray-700">₹4.50L - ₹6.50L</td>
+              <td className="px-4 py-2 text-gray-700">₹3.20L - ₹4.80L</td>
             </tr>
             <tr>
-              <td className="px-4 py-2 text-sm text-gray-700">Delhi</td>
-              <td className="px-4 py-2 text-sm text-gray-700">₹4.20L - ₹6.00L</td>
-              <td className="px-4 py-2 text-sm text-gray-700">₹3.00L - ₹4.50L</td>
+              <td className="px-4 py-2 text-gray-700">Delhi</td>
+              <td className="px-4 py-2 text-gray-700">₹4.20L - ₹6.00L</td>
+              <td className="px-4 py-2 text-gray-700">₹3.00L - ₹4.50L</td>
             </tr>
             <tr>
-              <td className="px-4 py-2 text-sm text-gray-700">Bangalore</td>
-              <td className="px-4 py-2 text-sm text-gray-700">₹4.00L - ₹5.80L</td>
-              <td className="px-4 py-2 text-sm text-gray-700">₹2.90L - ₹4.20L</td>
+              <td className="px-4 py-2 text-gray-700">Bangalore</td>
+              <td className="px-4 py-2 text-gray-700">₹4.00L - ₹5.80L</td>
+              <td className="px-4 py-2 text-gray-700">₹2.90L - ₹4.20L</td>
             </tr>
           </tbody>
         </table>

@@ -299,7 +299,7 @@ export default function BlogLayout({ post, content, className = '' }: BlogLayout
                   </pre>
                 ),
                 table: ({ children }) => (
-                  <div className="my-6 overflow-x-auto rounded-lg border border-gray-200 bg-white">
+                  <div className="my-6 overflow-x-auto rounded-lg border border-gray-200 bg-white overflow-hidden">
                     <table className="min-w-full border-collapse text-sm">{children}</table>
                   </div>
                 ),
