@@ -15,6 +15,7 @@
 import React from 'react';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import Breadcrumbs from '@/app/components/Breadcrumbs';
 import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
@@ -237,6 +238,7 @@ export default function BlogLayout({ post, content, className = '' }: BlogLayout
           {/* Content */}
           <div className="prose max-w-none mb-8">
             <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
               components={{
                 h1: ({ children }) => (
                   <h1 className="text-4xl font-bold mb-4 mt-8 first:mt-0">{children}</h1>
@@ -295,6 +297,24 @@ export default function BlogLayout({ post, content, className = '' }: BlogLayout
                   <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto mb-4">
                     {children}
                   </pre>
+                ),
+                table: ({ children }) => (
+                  <div className="my-6 overflow-x-auto rounded-lg border border-gray-200 bg-white">
+                    <table className="min-w-full border-collapse text-sm">{children}</table>
+                  </div>
+                ),
+                thead: ({ children }) => <thead className="bg-gray-50">{children}</thead>,
+                tbody: ({ children }) => <tbody className="divide-y divide-gray-200">{children}</tbody>,
+                tr: ({ children }) => <tr className="align-top">{children}</tr>,
+                th: ({ children }) => (
+                  <th className="border-b border-gray-200 px-4 py-2 text-left font-semibold text-gray-900">
+                    {children}
+                  </th>
+                ),
+                td: ({ children }) => (
+                  <td className="px-4 py-2 text-gray-700 [&_p]:m-0 [&_ul]:my-0 [&_ol]:my-0">
+                    {children}
+                  </td>
                 ),
               }}
             >
