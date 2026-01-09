@@ -4,7 +4,7 @@ import Link from "next/link";
 import { AppointmentFormExperience } from "@/packages/appointment-form";
 import AppointmentFormTracker from "../../src/components/AppointmentFormTracker";
 import PhoneClickTracker from "../../src/components/PhoneClickTracker";
-import OpenAIAgentsBooking from "../_components/OpenAIAgentsBooking";
+import OpenAIAgentsBookingWrapper from "../_components/OpenAIAgentsBookingWrapper";
 
 export const metadata: Metadata = {
   title: "Book an Appointment | Dr Sayuj Krishnan",
@@ -59,7 +59,7 @@ export default function AppointmentsPage() {
             detect emergencies, and guide you through the booking process naturally.
           </p>
         </div>
-        <OpenAIAgentsBooking pageSlug="/appointments" service="general" />
+        <OpenAIAgentsBookingWrapper pageSlug="/appointments" service="general" />
       </section>
 
       {/* Divider */}

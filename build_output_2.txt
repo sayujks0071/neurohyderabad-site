@@ -1,0 +1,53 @@
+
+> neurosurgery-nextjs-site@0.1.0 build /app
+> next build
+
+Discovering workflow directives 3492ms
+Created steps bundle 191ms
+Created intermediate workflow bundle 124ms
+Creating webhook route
+Creating manifest...
+Created manifest with 40 step(s) and 4 workflow(s) 71ms
+   ▲ Next.js 15.5.9
+   - Experiments (use with caution):
+     ✓ optimizeCss
+     · optimizePackageImports
+
+   Creating an optimized production build ...
+Failed to compile.
+
+./app/appointments/page.tsx
+Error:   [31mx[0m `ssr: false` is not allowed with `next/dynamic` in Server Components. Please move it into a Client Component.
+    ,-[[36;1;4m/app/app/appointments/page.tsx[0m:9:1]
+ [2m 6[0m |     import AppointmentFormTracker from "../../src/components/AppointmentFormTracker";
+ [2m 7[0m |     import PhoneClickTracker from "../../src/components/PhoneClickTracker";
+ [2m 8[0m |
+ [2m 9[0m | [35;1m,[0m[35;1m-[0m[35;1m>[0m const OpenAIAgentsBooking = dynamic(() => import('../_components/OpenAIAgentsBooking'), {
+ [2m10[0m | [35;1m|[0m     ssr: false,
+ [2m11[0m | [35;1m|[0m     loading: () => (
+ [2m12[0m | [35;1m|[0m       <div className="max-w-4xl mx-auto h-[500px] bg-white rounded-2xl border border-gray-200 shadow-lg animate-pulse">
+ [2m13[0m | [35;1m|[0m         <div className="bg-gray-200 h-16 w-full rounded-t-2xl"></div>
+ [2m14[0m | [35;1m|[0m         <div className="p-4 space-y-4">
+ [2m15[0m | [35;1m|[0m           <div className="flex gap-2 mb-4">
+ [2m16[0m | [35;1m|[0m              <div className="w-10 h-10 bg-gray-300 rounded-full"></div>
+ [2m17[0m | [35;1m|[0m              <div className="space-y-2">
+ [2m18[0m | [35;1m|[0m                <div className="h-4 w-32 bg-gray-300 rounded"></div>
+ [2m19[0m | [35;1m|[0m                <div className="h-3 w-24 bg-gray-200 rounded"></div>
+ [2m20[0m | [35;1m|[0m              </div>
+ [2m21[0m | [35;1m|[0m           </div>
+ [2m22[0m | [35;1m|[0m           <div className="bg-gray-200 h-10 w-3/4 rounded-lg"></div>
+ [2m23[0m | [35;1m|[0m         </div>
+ [2m24[0m | [35;1m|[0m       </div>
+ [2m25[0m | [35;1m|[0m     )
+ [2m26[0m | [35;1m`[0m[35;1m-[0m[35;1m>[0m });
+ [2m27[0m |
+ [2m28[0m |     export const metadata: Metadata = {
+ [2m29[0m |       title: "Book an Appointment | Dr Sayuj Krishnan",
+    `----
+
+Import trace for requested module:
+./app/appointments/page.tsx
+
+
+> Build failed because of webpack errors
+ ELIFECYCLE  Command failed with exit code 1.
