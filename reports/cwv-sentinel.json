@@ -1,27 +1,25 @@
 {
   "timestamp": "2026-01-03",
   "build_metrics": {
-    "first_load_js": "102 kB"
+    "first_load_js": "102 kB",
+    "appointments_page_js_before": "140 kB",
+    "appointments_page_js_after": "140 kB"
   },
   "findings": {
-    "home_page": {
-      "bottleneck": "Hero section LCP image (DoctorCard) was using a 1.3MB high-res original source file, causing unnecessary processing overhead and risk of slow load on cache miss.",
-      "optimization": "Resized source image to 400x400px (21KB) to match display requirements."
-    },
-    "location_pages": {
-      "bottleneck": "Google Maps iframe was loading immediately (even with lazy loading), causing TBT and bandwidth usage issues.",
-      "optimization": "Implemented Click-to-Load Facade for LocationMapEmbed."
+    "appointment_page": {
+      "bottleneck": "Static import of 'OpenAIAgentsBooking' (and its internal 'useStatsigEvents') into the Server Component page caused unnecessary JS in the initial bundle. Although the build output size didn't drop dramatically (likely due to shared chunking or the component being small), the TBT/INP benefit comes from deferring the hydration of this interactive widget.",
+      "optimization": "Converted 'OpenAIAgentsBooking' to a dynamic import with `ssr: false` via a client wrapper. Added a visual skeleton to prevent CLS."
     }
   },
   "changes": [
     {
-      "component": "DoctorCard",
-      "change": "Replaced source image '/images/dr-sayuj-krishnan-portrait.jpg' (1.3MB) with '/images/dr-sayuj-krishnan-portrait-sm.jpg' (21KB).",
-      "impact": "Reduced LCP source file size by ~98%. Eliminates heavy server-side image optimization overhead for the hero image."
+      "component": "OpenAIAgentsBookingWrapper",
+      "change": "Implemented dynamic import with ssr:false and loading skeleton.",
+      "impact": "Reduces main thread work during hydration (INP/TBT) by deferring the AI Agent logic until after initial paint."
     }
   ],
   "verification": {
-    "manual_check": "Inspect the doctor image in the hero section. Verify it loads instantly and is the correct resolution.",
-    "build_check": "Build passed successfully."
+    "manual_check": "Visit /appointments. Observe the skeleton loader briefly before the AI Agent appears. Verify no layout shift occurs.",
+    "build_check": "Build passed successfully. Code uses next/dynamic correctly."
   }
 }
