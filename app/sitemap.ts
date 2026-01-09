@@ -87,6 +87,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/blog/lumbar-canal-stenosis-walking-pain-hyderabad',
     '/blog/awake-spine-surgery-vs-general-anesthesia-guide',
     '/blog/trigeminal-neuralgia-vs-tooth-pain-guide',
+    '/blog/osteoporotic-spine-fracture-elderly-guide',
   ];
 
   const symptomPages = [
