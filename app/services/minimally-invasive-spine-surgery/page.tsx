@@ -17,6 +17,7 @@ import { ServiceLocationLinks } from '@/src/components/locations/ServiceLocation
 import { PhysicianSchema } from "@/src/components/schema/PhysicianSchema";
 import CostTransparencySection from '@/src/components/CostTransparencySection';
 import PatientJourneySection from '@/src/components/PatientJourneySection';
+import SurgeryComparisonTable from '@/src/components/SurgeryComparisonTable';
 
 const baseMetadata = makeMetadata({
   title: 'Endoscopic Spine Surgery Hyderabad | Dr. Sayuj Krishnan',
@@ -266,16 +267,26 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
             updatedOn="2025-10-19"
             className="justify-center mb-4"
           />
-          <p className="text-lg text-gray-600">Advanced endoscopic techniques for faster recovery and better outcomes</p>
+          <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+            Advanced <strong>endoscopic spine surgery</strong> in Hyderabad.
+            Experience <span className="text-blue-700 font-semibold">Day Care</span> procedures,
+            <span className="text-blue-700 font-semibold"> Same-Day Discharge</span>, and
+            <span className="text-blue-700 font-semibold"> Awake Spine Surgery</span> options for faster recovery.
+          </p>
         </header>
 
-        <section className="bg-blue-50 p-6 rounded-lg mb-8">
-          <p className="text-center">
-            <strong>Contact:</strong>
-            <a href="tel:+919778280044" className="text-blue-600 hover:underline ml-2">+91-9778280044</a> •
-            <a href="mailto:hellodr@drsayuj.info" className="text-blue-600 hover:underline ml-2">hellodr@drsayuj.info</a> •
-            <Link href="/appointments" className="text-blue-600 hover:underline ml-2">Appointments</Link>
+        <section className="bg-blue-50 p-6 rounded-lg mb-8 border border-blue-100 shadow-sm text-center">
+          <p className="text-gray-800 text-lg mb-4">
+            <strong>Yashoda Hospital, Malakpet</strong> • Room No. 317, OPD Block
           </p>
+          <div className="flex flex-wrap justify-center gap-6 text-sm font-medium">
+             <a href="tel:+919778280044" className="flex items-center text-blue-700 hover:text-blue-900 bg-white px-4 py-2 rounded-full shadow-sm hover:shadow-md transition-all">
+               📞 +91-9778280044
+             </a>
+             <Link href="/appointments" className="flex items-center text-white bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-full shadow-sm hover:shadow-md transition-all">
+               Book Appointment
+             </Link>
+          </div>
         </section>
 
         <section className="mb-12">
@@ -313,6 +324,12 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
               Dr. Sayuj Krishnan specializes in endoscopic spine procedures, offering patients the benefits of modern surgical techniques 
               with reduced trauma and quicker return to daily activities. <Link href="/services/endoscopic-spine-surgery-hyderabad/" className="text-blue-600 hover:underline">Learn more about our local patient journey for endoscopic spine surgery in Hyderabad.</Link>
             </p>
+          </div>
+
+          <div className="mt-8">
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">Compare: Endoscopic vs. Traditional Surgery</h3>
+            <p className="text-gray-600 mb-4">See why patients prefer the endoscopic approach for safer, faster recovery.</p>
+            <SurgeryComparisonTable />
           </div>
         </section>
 
@@ -511,7 +528,7 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
         </section>
 
         <section className="mb-12">
-          <h2 className="text-3xl font-bold text-blue-800 mb-6">Frequently Asked Questions</h2>
+          <h2 className="text-3xl font-bold text-blue-800 mb-6">Common Concerns</h2>
           <div className="space-y-6">
             <div className="bg-gray-50 p-6 rounded-lg">
               <h3 className="text-xl font-semibold mb-3 text-blue-700">Is endoscopic surgery always better than open surgery?</h3>
