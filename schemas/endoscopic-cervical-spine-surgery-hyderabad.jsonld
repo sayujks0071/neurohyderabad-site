@@ -1,1 +1,16 @@
-{"@context": "https://schema.org", "@type": "Physician", "name": "Dr. Sayuj Krishnan"}
+{
+  "@context": "https://schema.org",
+  "@type": "Physician",
+  "name": "Dr. Sayuj Krishnan",
+  "medicalSpecialty": "Neurosurgery",
+  "url": "https://www.drsayuj.info/",
+  "telephone": "+919778280044",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Room No 317, OPD Block, Yashoda Hospital, Nalgonda X Roads, Malakpet",
+    "addressLocality": "Hyderabad",
+    "addressRegion": "Telangana",
+    "postalCode": "500036",
+    "addressCountry": "IN"
+  }
+}
