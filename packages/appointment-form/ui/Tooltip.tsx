@@ -5,9 +5,10 @@ import { cloneElement, useId, useState, type ReactElement } from "react";
 interface TooltipProps {
   children: ReactElement<any>;
   text: string;
+  skipAriaDescription?: boolean;
 }
 
-export default function Tooltip({ children, text }: TooltipProps) {
+export default function Tooltip({ children, text, skipAriaDescription }: TooltipProps) {
   const [visible, setVisible] = useState(false);
   const tooltipId = useId();
 
@@ -22,7 +23,7 @@ export default function Tooltip({ children, text }: TooltipProps) {
   };
 
   const trigger = cloneElement(children, {
-    "aria-describedby": visible ? tooltipId : undefined,
+    "aria-describedby": (visible && !skipAriaDescription) ? tooltipId : undefined,
     onMouseEnter: withHandlers(children.props.onMouseEnter, () => setVisible(true)),
     onMouseLeave: withHandlers(children.props.onMouseLeave, () => setVisible(false)),
     onFocus: withHandlers(children.props.onFocus, () => setVisible(true)),
