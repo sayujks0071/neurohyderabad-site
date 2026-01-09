@@ -8,3 +8,5 @@ Review the PRs merged in the last 24 hours.
 **Action:**
 - If issues are found, create a new bug report issue.
 - If everything looks good, close this issue with a comment summarizing the check.
+
+<!-- Prompt for Jules Agent -->

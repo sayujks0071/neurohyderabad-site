@@ -10,3 +10,5 @@ Analyze the current blog posts and service pages. Identify content that is:
 - Analyze the top 3 competitors for its main keyword.
 - Rewrite or improve the content to match or exceed competitor quality (E-E-A-T).
 - Submit a PR with the updated content.
+
+<!-- Prompt for Jules Agent -->

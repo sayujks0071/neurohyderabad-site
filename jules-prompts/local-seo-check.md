@@ -6,6 +6,6 @@ Verify the Local SEO signals for "Dr. Sayuj Krishnan".
 3. Check that the `LocalBusiness` or `Physician` schema is validating correctly (use the `json-ld-validator` workflow logic or scripts).
 
 **Action:**
-- Run `npx tsx scripts/check-schemas.ts` (if available) or manually verify a sample page's schema.
+- Run `npm run check:schemas` (or `npx tsx scripts/check-schemas.ts`) to validate schemas.
 - Ensure the Google Maps embed is working and correct.
 - If errors are found, fix them in a PR.

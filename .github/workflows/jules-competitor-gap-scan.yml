@@ -1,3 +1,4 @@
+# Daily schedule for Jules Automation
 name: Jules Competitor Gap Scan
 on:
   schedule:

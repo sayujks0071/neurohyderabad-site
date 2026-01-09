@@ -38,3 +38,4 @@ To stop a specific automation:
 ## Duplicate Prevention
 
 The workflows are designed to check for existing **open** issues with the same title (e.g., `[Jules] SEO Reprint Task - YYYY-MM-DD`). If one exists, a new one will *not* be created. This prevents spamming if tasks are not completed immediately.
+<!-- Prompt for Jules Agent -->
