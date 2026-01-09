@@ -9,7 +9,7 @@ interface ConditionLocationLinksProps {
 }
 
 export const ConditionLocationLinks: React.FC<ConditionLocationLinksProps> = ({ conditionName, className }) => {
-  // Pick 4 locations for condition pages
+  // Pick 4 locations for condition pages as per requirements
   const featuredLocations = locations.slice(0, 4);
 
   return (
