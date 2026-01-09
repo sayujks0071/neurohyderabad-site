@@ -175,7 +175,7 @@ export default function Calendar({
         }`}
       >
         <div className="flex items-center justify-between mb-4">
-          <Tooltip text="Previous month">
+          <Tooltip text="Previous month" skipAriaDescription>
             <button
               type="button"
               onClick={handlePrevMonth}
@@ -192,7 +192,7 @@ export default function Calendar({
           >
             {monthName} {year}
           </div>
-          <Tooltip text="Next month">
+          <Tooltip text="Next month" skipAriaDescription>
             <button
               type="button"
               onClick={handleNextMonth}
