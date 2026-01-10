@@ -32,7 +32,7 @@ const PatientEducationVideos = dynamic(() => import('./_components/PatientEducat
     <div className="py-16 bg-white">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="animate-pulse bg-gray-200 h-[800px] md:h-[600px] rounded-lg"></div>
+          <div className="animate-pulse bg-gray-200 h-[1700px] md:h-[750px] rounded-lg"></div>
         </div>
       </div>
     </div>
@@ -44,7 +44,7 @@ const RecoveryTimeline = dynamic(() => import('./_components/RecoveryTimeline'),
     <div className="py-16 bg-slate-950">
       <div className="container mx-auto px-4">
         <div className="max-w-5xl mx-auto">
-          <div className="animate-pulse bg-slate-800 h-64 rounded-lg"></div>
+          <div className="animate-pulse bg-slate-800 h-[1200px] md:h-[900px] rounded-lg"></div>
         </div>
       </div>
     </div>
@@ -330,7 +330,7 @@ export default function Home() {
             <div className="py-16 bg-white">
               <div className="container mx-auto px-4">
                 <div className="max-w-6xl mx-auto">
-                  <div className="animate-pulse bg-gray-200 h-[800px] md:h-[600px] rounded-lg"></div>
+                  <div className="animate-pulse bg-gray-200 h-[1700px] md:h-[750px] rounded-lg"></div>
                 </div>
               </div>
             </div>
@@ -560,7 +560,7 @@ export default function Home() {
             <div className="py-16 bg-slate-950">
               <div className="container mx-auto px-4">
                 <div className="max-w-5xl mx-auto">
-                  <div className="animate-pulse bg-slate-800 h-64 rounded-lg"></div>
+                  <div className="animate-pulse bg-slate-800 h-[1200px] md:h-[900px] rounded-lg"></div>
                 </div>
               </div>
             </div>
