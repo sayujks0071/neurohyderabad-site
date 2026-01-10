@@ -12,10 +12,13 @@ import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import { sources } from '../../blog/sources';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
+import TrustProof from '@/app/_components/TrustProof';
+import { patientStories } from '@/src/content/stories';
+import CostTransparencySection from '@/src/components/CostTransparencySection';
 
 const baseMetadata = makeMetadata({
-  title: "Sciatica Treatment in Hyderabad | Leg Pain Relief | Dr. Sayuj",
-  description: "Specialized sciatica treatment in Hyderabad. Expert diagnosis and minimally invasive solutions for radiating leg pain by Dr. Sayuj Krishnan.",
+  title: "Sciatica Treatment in Hyderabad | Cost, Relief & Recovery | Dr. Sayuj",
+  description: "Expert sciatica treatment in Hyderabad by Dr. Sayuj Krishnan. From nerve blocks to endoscopic surgery. Check estimated costs and patient success stories.",
   canonicalPath: '/conditions/sciatica-pain-treatment-hyderabad',
 });
 
@@ -26,7 +29,9 @@ export const metadata: Metadata = {
     "sciatica pain relief",
     "leg pain treatment",
     "sciatica doctor hyderabad",
-    "radiating leg pain treatment"
+    "radiating leg pain treatment",
+    "sciatica surgery cost hyderabad",
+    "endoscopic spine surgery for sciatica"
   ],
   alternates: {
     canonical: `${SITE_URL}/conditions/sciatica-pain-treatment-hyderabad/`,
@@ -56,6 +61,31 @@ const FAQ = [
   {
     q: "What are the warning signs of severe sciatica?",
     a: "Seek immediate medical attention if you experience: sudden severe pain after an accident, loss of bowel/bladder control (Cauda Equina Syndrome), or progressive weakness/numbness in the leg."
+  },
+  {
+    q: "What is the cost of sciatica surgery in Hyderabad?",
+    a: "The cost depends on the procedure. A simple nerve root block may cost ₹15,000–₹25,000, while endoscopic spine surgery typically ranges from ₹1.5 Lakhs to ₹2.5 Lakhs depending on the hospital category and implant requirements."
+  }
+];
+
+const sciaticaCosts = [
+  {
+    procedure: "Conservative Management",
+    range: "₹5,000 - ₹15,000",
+    recovery: "2-4 Weeks",
+    includes: ["Consultation", "MRI Scan (approx)", "Medications (1 week)", "Physiotherapy Assessment"]
+  },
+  {
+    procedure: "Nerve Root Block (Injection)",
+    range: "₹20,000 - ₹35,000",
+    recovery: "Same Day Discharge",
+    includes: ["Procedure Charges", "C-Arm Guidance", "Day Care Stay", "Post-proc medicines"]
+  },
+  {
+    procedure: "Endoscopic Discectomy",
+    range: "₹1.50 Lakh - ₹2.50 Lakh",
+    recovery: "1-2 Weeks",
+    includes: ["Surgery Charges", "Hospital Stay (1-2 Days)", "Anesthesia", "Standard Consumables"]
   }
 ];
 
@@ -65,6 +95,14 @@ export default function SciaticaTreatmentPage() {
     { name: "Conditions", path: "/conditions/" },
     { name: "Sciatica Treatment", path: "/conditions/sciatica-pain-treatment-hyderabad/" }
   ];
+
+  // Filter relevant stories (spine, leg pain)
+  const relatedStories = patientStories.filter(story =>
+    story.tags.includes('spine') ||
+    story.tags.includes('fusion') ||
+    story.tags.includes('sciatica') ||
+    story.condition.toLowerCase().includes('leg pain')
+  ).slice(0, 2);
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-10">
@@ -130,32 +168,47 @@ export default function SciaticaTreatmentPage() {
         </div>
       </div>
 
+      {/* Trust Signals Section */}
+      <div className="mb-12">
+        <TrustProof
+          stories={relatedStories}
+          serviceType="spine"
+          className="bg-gradient-to-br from-white to-blue-50/50"
+        />
+      </div>
+
       <section className="mb-12">
         <h2 className="text-2xl font-semibold mb-6 text-blue-700">Treatment Options</h2>
         <div className="grid md:grid-cols-3 gap-6">
-          <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-white p-6 rounded-lg shadow-md border border-gray-100">
             <h3 className="text-lg font-semibold mb-3 text-blue-700">1. Conservative Care</h3>
             <p className="text-gray-700">
               Initial treatment includes anti-inflammatory medications, muscle relaxants, and specialized
               physiotherapy exercises to relieve nerve pressure.
             </p>
           </div>
-          <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-white p-6 rounded-lg shadow-md border border-gray-100">
             <h3 className="text-lg font-semibold mb-3 text-blue-700">2. Pain Interventions</h3>
             <p className="text-gray-700">
               For persistent pain, targeted nerve root blocks (epidural steroid injections) can provide
               significant relief and reduce inflammation.
             </p>
           </div>
-          <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-white p-6 rounded-lg shadow-md border border-gray-100">
             <h3 className="text-lg font-semibold mb-3 text-blue-700">3. Surgical Solutions</h3>
             <p className="text-gray-700">
-              If conservative measures fail, <strong>Endoscopic Discectomy</strong> is the gold standard
+              If conservative measures fail, <strong>Endoscopic Discectomy</strong> is a leading minimally invasive option
               to permanently remove the pressure off the nerve.
             </p>
           </div>
         </div>
       </section>
+
+      {/* Cost Transparency Section */}
+      <CostTransparencySection
+        costs={sciaticaCosts}
+        disclaimer="Estimates for general guidance. Final cost depends on hospital category (Economy/Private/Deluxe), specific implants (if any), and medical complexity. Insurance cashless facility available."
+      />
 
       <section className="mb-12 rounded-lg border border-green-200 bg-green-50 p-6">
         <h2 className="text-2xl font-semibold mb-4 text-green-800">Is it a Slip Disc?</h2>
@@ -163,14 +216,14 @@ export default function SciaticaTreatmentPage() {
           Most sciatica is caused by a herniated disc. Learn more about our specialized minimally invasive treatment for slip discs.
         </p>
         <div className="flex flex-wrap gap-3">
-          <Link href="/conditions/slip-disc-treatment-hyderabad" className="rounded-full bg-green-600 px-5 py-2 text-sm font-semibold text-white hover:bg-green-700">
+          <Link href="/conditions/slip-disc-treatment-hyderabad" className="rounded-full bg-green-600 px-5 py-2 text-sm font-semibold text-white hover:bg-green-700 transition-colors">
             View Slip Disc Treatment
           </Link>
           <a
             href="https://wa.me/919778280044"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full border border-green-300 px-5 py-2 text-sm font-semibold text-green-800 hover:bg-green-100"
+            className="rounded-full border border-green-300 px-5 py-2 text-sm font-semibold text-green-800 hover:bg-green-100 transition-colors"
           >
             Chat with Doctor
           </a>
@@ -266,7 +319,7 @@ export default function SciaticaTreatmentPage() {
 
       <AuthorByline
         publishedOn="2026-01-03"
-        updatedOn="2026-01-03"
+        updatedOn="2026-01-10"
       />
 
       <SourceList sources={sources['sciatica-treatment-hyderabad'] || []} />
