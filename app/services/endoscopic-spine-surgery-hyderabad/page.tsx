@@ -16,6 +16,7 @@ import { getServiceSources } from '../sources';
 import { patientStories } from '@/src/content/stories';
 import { PhysicianSchema } from "@/src/components/schema/PhysicianSchema";
 import SurgeryComparisonTable from '@/src/components/SurgeryComparisonTable';
+import CostTransparencySection from '@/src/components/CostTransparencySection';
 
 const SERVICE_SLUG = 'endoscopic-spine-surgery-hyderabad';
 
@@ -36,6 +37,8 @@ export const metadata: Metadata = {
     'minimally invasive spine surgery hyderabad',
     'keyhole spine surgery cost',
     'endoscopic discectomy hyderabad',
+    'transforaminal endoscopic spine surgery hyderabad',
+    'interlaminar endoscopic spine surgery',
     'spine surgeon yashoda hospital malakpet',
     'day care spine surgery',
   ],
@@ -92,6 +95,34 @@ const faqs = [
     answer:
       'Endoscopic spine surgery is a specialised skill. Dr. Sayuj has focused training in full endoscopic techniques and performs them regularly at Yashoda Hospital, ensuring precision, safety, and consistent patient outcomes.',
   },
+];
+
+const COSTS = [
+  {
+    procedure: 'Endoscopic Discectomy (Lumbar)',
+    range: '₹95,000 - ₹1,35,000',
+    recovery: '1-2 Days',
+    includes: ['Surgeon Fees', 'OT & Nursing', 'Standard Room (1 Day)', 'Medications']
+  },
+  {
+    procedure: 'Endoscopic Canal Decompression',
+    range: 'Ask for Estimate',
+    recovery: '2 Days',
+    includes: ['Stenosis Decompression', 'Advanced Endoscope Use', 'Neuromonitoring']
+  },
+  {
+    procedure: 'Cervical Endoscopic Decompression',
+    range: 'Ask for Estimate',
+    recovery: '2 Days',
+    includes: ['Neck Surgery', 'High-Definition Optics', 'Specialised Instrumentation']
+  }
+];
+
+const RECOVERY_STEPS = [
+  { time: 'Day 0 (Surgery)', milestone: 'Walk to washroom with assistance 3 hours after surgery.' },
+  { time: 'Day 1 (Discharge)', milestone: 'Climb a flight of stairs. Discharge with oral pain meds.' },
+  { time: 'Week 1', milestone: 'Short walks outside. Desk work from home allowed.' },
+  { time: 'Week 3-4', milestone: 'Resume driving and full-time office work.' },
 ];
 
 // Google Business Profile JSON-LD for Endoscopic Spine Surgery
@@ -247,6 +278,24 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
           </ul>
         </section>
 
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-blue-900 mb-6">Advanced Endoscopic Techniques We Use</h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+              <h3 className="text-xl font-semibold text-blue-800 mb-3">Transforaminal Endoscopy (TESS)</h3>
+              <p className="text-gray-700">
+                Best for <strong>slip disc (herniation)</strong> affecting the nerve root. We enter through the side (foramen) without cutting bone, avoiding instability. This is the true "stitch-less" spine surgery.
+              </p>
+            </div>
+            <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+              <h3 className="text-xl font-semibold text-blue-800 mb-3">Interlaminar Endoscopy (ILESS)</h3>
+              <p className="text-gray-700">
+                Ideal for <strong>L5-S1 disc herniations</strong> and <strong>spinal stenosis</strong>. We access the spine from the back through a tiny window between vertebrae, allowing us to clear thickened ligaments pressing on the nerves.
+              </p>
+            </div>
+          </div>
+        </section>
+
         <section className="mb-16 grid md:grid-cols-2 gap-10">
           <div>
             <h2 className="text-3xl font-bold text-blue-900 mb-4">What to Expect at Yashoda Hospital, Malakpet</h2>
@@ -269,6 +318,18 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
               <li>Walk with assistance within 2-3 hours and discharge the same evening or next morning.</li>
               <li>Follow personalised rehab and return-to-work guidelines shared before discharge.</li>
             </ol>
+          </div>
+        </section>
+
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-blue-900 mb-6">Recovery Timeline</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+            {RECOVERY_STEPS.map((step, idx) => (
+              <div key={idx} className="bg-blue-50 border border-blue-100 rounded-xl p-4">
+                <div className="text-sm font-semibold text-blue-600 mb-2 uppercase">{step.time}</div>
+                <div className="text-gray-800 text-sm">{step.milestone}</div>
+              </div>
+            ))}
           </div>
         </section>
 
@@ -308,31 +369,10 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
           </div>
         </section>
 
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold text-blue-900 mb-6">Keyhole Spine Surgery Cost at Malakpet Yashoda Hospital</h2>
-          <div className="bg-blue-50 border border-blue-100 rounded-xl p-6 mb-8">
-            <p className="text-gray-700 mb-4">
-              Endoscopic spine surgery (keyhole surgery) at Yashoda Hospital Malakpet offers an affordable, high-quality alternative to traditional open spine surgery. Our transparent pricing includes surgeon fees, hospital charges, implants, and follow-up consultations.
-            </p>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-white rounded-lg p-4">
-                <h3 className="font-semibold text-blue-800 mb-2">Endoscopic Discectomy</h3>
-                <p className="text-sm text-gray-600 mb-2">For slip disc and sciatica</p>
-                <p className="text-lg font-bold text-blue-900">INR 95,000 - 1,35,000</p>
-                <p className="text-xs text-gray-500 mt-1">Self-pay package (varies by case complexity)</p>
-              </div>
-              <div className="bg-white rounded-lg p-4">
-                <h3 className="font-semibold text-blue-800 mb-2">Insurance Coverage</h3>
-                <p className="text-sm text-gray-600 mb-2">Most insurance plans accepted</p>
-                <p className="text-sm text-gray-700">We help with pre-authorization and claim processing. Cashless treatment available for eligible insurance policies.</p>
-              </div>
-            </div>
-            <p className="text-sm text-gray-600 mt-4">
-              <strong>Note:</strong> Final cost depends on case complexity, type of procedure, and insurance coverage. 
-              Contact our clinic for a personalized cost estimate after reviewing your MRI scans.
-            </p>
-          </div>
-        </section>
+        <CostTransparencySection
+          costs={COSTS}
+          disclaimer="Approximate package estimates for self-pay patients at Yashoda Hospital Malakpet. Final cost depends on room category (General/Sharing/Private), insurance approvals, and specific implant requirements. We offer full assistance with insurance pre-authorization."
+        />
 
         <section className="mb-16 grid lg:grid-cols-[1.2fr_1fr] gap-10 items-start">
           <div className="space-y-6">
