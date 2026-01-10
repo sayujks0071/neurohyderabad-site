@@ -1,25 +1,25 @@
 {
-  "timestamp": "2026-01-03",
-  "build_metrics": {
-    "first_load_js": "102 kB",
-    "appointments_page_js_before": "140 kB",
-    "appointments_page_js_after": "140 kB"
-  },
-  "findings": {
-    "appointment_page": {
-      "bottleneck": "Static import of 'OpenAIAgentsBooking' (and its internal 'useStatsigEvents') into the Server Component page caused unnecessary JS in the initial bundle. Although the build output size didn't drop dramatically (likely due to shared chunking or the component being small), the TBT/INP benefit comes from deferring the hydration of this interactive widget.",
-      "optimization": "Converted 'OpenAIAgentsBooking' to a dynamic import with `ssr: false` via a client wrapper. Added a visual skeleton to prevent CLS."
+  "timestamp": "2026-01-10T12:00:00Z",
+  "commit": "HEAD",
+  "pages": {
+    "home": {
+      "path": "app/page.tsx",
+      "lcp_candidate": "DoctorCard (Image: /images/dr-sayuj-krishnan-portrait-v2.jpg)",
+      "findings": [
+        "DoctorCard image has priority={true}, correctly using next/image.",
+        "LazySection placeholders have fixed heights (800px, 64px, 32px), reducing CLS risk if content matches.",
+        "PatientEducationVideos uses next/image with 'fill' for thumbnails. Good.",
+        "Corrected LazySection placeholder height for PatientEducationVideos and RecoveryTimeline to match content height, significantly reducing CLS risk on both mobile and desktop."
+      ]
+    },
+    "condition": {
+      "path": "app/conditions/slip-disc-treatment-hyderabad/page.tsx",
+      "lcp_candidate": "H1 Title (Text)",
+      "findings": [
+        "Mostly text-based. Low LCP risk.",
+        "Images in 'Why Choose Dr. Sayuj' section (icons) are inside cards.",
+        "Videos or heavier content might be lower down."
+      ]
     }
-  },
-  "changes": [
-    {
-      "component": "OpenAIAgentsBookingWrapper",
-      "change": "Implemented dynamic import with ssr:false and loading skeleton.",
-      "impact": "Reduces main thread work during hydration (INP/TBT) by deferring the AI Agent logic until after initial paint."
-    }
-  ],
-  "verification": {
-    "manual_check": "Visit /appointments. Observe the skeleton loader briefly before the AI Agent appears. Verify no layout shift occurs.",
-    "build_check": "Build passed successfully. Code uses next/dynamic correctly."
   }
 }

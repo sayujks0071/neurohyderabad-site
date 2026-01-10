@@ -2,19 +2,19 @@
 > neurosurgery-nextjs-site@0.1.0 build /app
 > next build
 
-Discovering workflow directives 2718ms
-Created steps bundle 151ms
-Created intermediate workflow bundle 93ms
+Discovering workflow directives 2728ms
+Created steps bundle 119ms
+Created intermediate workflow bundle 85ms
 Creating webhook route
 Creating manifest...
-Created manifest with 40 step(s) and 4 workflow(s) 38ms
+Created manifest with 40 step(s) and 4 workflow(s) 27ms
    ▲ Next.js 15.5.9
    - Experiments (use with caution):
      ✓ optimizeCss
      · optimizePackageImports
 
    Creating an optimized production build ...
- ⚠ Compiled with warnings in 34.7s
+ ⚠ Compiled with warnings in 42s
 
 ./app/.well-known/workflow/v1/step/route.js
 Critical dependency: require function is used in a way in which dependencies cannot be statically extracted
@@ -35,253 +35,14 @@ Blog post cervical-spondylosis-neck-pain-hyderabad has validation errors: [ 'des
 Blog post cost-of-endoscopic-spine-surgery-hyderabad has validation errors: [ 'description should be 155 characters or less for meta tags' ]
 Blog post osteoporotic-spine-fracture-elderly-guide has validation errors: [ 'description should be 155 characters or less for meta tags' ]
 Blog post trigeminal-neuralgia-vs-tooth-pain-guide has validation errors: [ 'description should be 155 characters or less for meta tags' ]
-   Generating static pages (0/220) ...
-Blog post cost-of-endoscopic-spine-surgery-hyderabad has validation errors: [ 'description should be 155 characters or less for meta tags' ]
-Blog post cost-of-endoscopic-spine-surgery-hyderabad has validation errors: [ 'description should be 155 characters or less for meta tags' ]
-   Generating static pages (55/220)
-Blog post awake-spine-surgery-vs-general-anesthesia-guide has validation errors: [ 'description should be 155 characters or less for meta tags' ]
-Blog post cost-of-endoscopic-spine-surgery-hyderabad has validation errors: [ 'description should be 155 characters or less for meta tags' ]
-Blog post cervical-spondylosis-neck-pain-hyderabad has validation errors: [ 'description should be 155 characters or less for meta tags' ]
-Blog post osteoporotic-spine-fracture-elderly-guide has validation errors: [ 'description should be 155 characters or less for meta tags' ]
-Blog post trigeminal-neuralgia-vs-tooth-pain-guide has validation errors: [ 'description should be 155 characters or less for meta tags' ]
-   Generating static pages (110/220)
-Blog post awake-spine-surgery-vs-general-anesthesia-guide has validation errors: [ 'description should be 155 characters or less for meta tags' ]
-Blog post awake-spine-surgery-vs-general-anesthesia-guide has validation errors: [ 'description should be 155 characters or less for meta tags' ]
-Blog post cervical-spondylosis-neck-pain-hyderabad has validation errors: [ 'description should be 155 characters or less for meta tags' ]
-Blog post cervical-spondylosis-neck-pain-hyderabad has validation errors: [ 'description should be 155 characters or less for meta tags' ]
-Blog post osteoporotic-spine-fracture-elderly-guide has validation errors: [ 'description should be 155 characters or less for meta tags' ]
-Blog post osteoporotic-spine-fracture-elderly-guide has validation errors: [ 'description should be 155 characters or less for meta tags' ]
-Blog post trigeminal-neuralgia-vs-tooth-pain-guide has validation errors: [ 'description should be 155 characters or less for meta tags' ]
-Blog post trigeminal-neuralgia-vs-tooth-pain-guide has validation errors: [ 'description should be 155 characters or less for meta tags' ]
-   Generating static pages (165/220)
- ✓ Generating static pages (220/220)
-   Finalizing page optimization ...
-   Collecting build traces ...
 
-Route (app)                                                             Size  First Load JS  Revalidate  Expire
-┌ ○ /                                                                3.81 kB         150 kB          6h      1y
-├ ○ /_not-found                                                        276 B         102 kB
-├ ƒ /.well-known/workflow/v1/flow                                      276 B         102 kB
-├ ƒ /.well-known/workflow/v1/step                                      276 B         102 kB
-├ ƒ /.well-known/workflow/v1/webhook/[token]                           276 B         102 kB
-├ ƒ /[procedure]                                                       219 B         105 kB
-├ ○ /about                                                             187 B         110 kB          1h      1y
-├ ○ /ai-chat                                                         4.49 kB         110 kB
-├ ƒ /api/ai-booking                                                    276 B         102 kB
-├ ƒ /api/ai-diagnostic                                                 276 B         102 kB
-├ ƒ /api/ai/analytics                                                  276 B         102 kB
-├ ƒ /api/ai/chat                                                       276 B         102 kB
-├ ƒ /api/ai/follow-up-care                                             276 B         102 kB
-├ ƒ /api/ai/personalize                                                276 B         102 kB
-├ ƒ /api/ai/predictive-scheduling                                      276 B         102 kB
-├ ƒ /api/ai/recommend                                                  276 B         102 kB
-├ ƒ /api/ai/search                                                     276 B         102 kB
-├ ƒ /api/ai/summarize                                                  276 B         102 kB
-├ ƒ /api/ai/symptoms                                                   276 B         102 kB
-├ ƒ /api/ai/triage                                                     276 B         102 kB
-├ ƒ /api/appointments/briefing                                         276 B         102 kB
-├ ƒ /api/appointments/submit                                           276 B         102 kB
-├ ƒ /api/auth/google                                                   276 B         102 kB
-├ ƒ /api/blog/generate                                                 276 B         102 kB
-├ ƒ /api/content/validate                                              276 B         102 kB
-├ ƒ /api/cron/reindex-rag                                              276 B         102 kB
-├ ƒ /api/drafts/content                                                276 B         102 kB
-├ ƒ /api/drafts/list                                                   276 B         102 kB
-├ ƒ /api/email/appointment                                             276 B         102 kB
-├ ƒ /api/email/contact                                                 276 B         102 kB
-├ ƒ /api/faq/generate                                                  276 B         102 kB
-├ ƒ /api/gemini-files/list                                             276 B         102 kB
-├ ƒ /api/gemini-files/manage                                           276 B         102 kB
-├ ƒ /api/gemini-files/search                                           276 B         102 kB
-├ ƒ /api/gemini-files/upload                                           276 B         102 kB
-├ ƒ /api/health                                                        276 B         102 kB
-├ ƒ /api/inngest                                                       276 B         102 kB
-├ ƒ /api/lead                                                          276 B         102 kB
-├ ƒ /api/newsletter/subscribe                                          276 B         102 kB
-├ ƒ /api/og                                                            276 B         102 kB
-├ ƒ /api/openai-agents-simple                                          276 B         102 kB
-├ ƒ /api/openai-chat                                                   276 B         102 kB
-├ ƒ /api/revalidate                                                    276 B         102 kB
-├ ƒ /api/search-console                                                276 B         102 kB
-├ ƒ /api/symptoms/check                                                276 B         102 kB
-├ ƒ /api/utm-links                                                     276 B         102 kB
-├ ƒ /api/workflows/booking                                             276 B         102 kB
-├ ƒ /api/workflows/education                                           276 B         102 kB
-├ ƒ /api/workflows/follow-up                                           276 B         102 kB
-├ ƒ /api/workflows/search                                              276 B         102 kB
-├ ƒ /api/wp-proxy                                                      276 B         102 kB
-├ ○ /appointments                                                    8.99 kB         140 kB
-├ ○ /appointments/thank-you                                            219 B         105 kB
-├ ○ /auth/callback                                                   2.19 kB         104 kB
-├ ○ /best-neurosurgeon-in-hyderabad                                  1.55 kB         112 kB          1d      1y
-├ ○ /blog                                                              187 B         110 kB          1d      1y
-├ ● /blog/[slug]                                                     1.59 kB         107 kB          1d      1y
-├   ├ /blog/microdiscectomy-vs-laminectomy-recovery-comparison                                       1d      1y
-├   ├ /blog/awake-spine-surgery-vs-general-anesthesia-guide                                          1d      1y
-├   ├ /blog/cervical-spondylosis-neck-pain-hyderabad                                                 1d      1y
-├   └ [+9 more paths]
-├ ○ /blog/awake-craniotomy-guide                                       213 B         111 kB
-├ ○ /blog/brain-tumor-surgery-cost-hyderabad                           213 B         111 kB
-├ ○ /blog/day-care-endoscopic-spine-surgery-eligibility                253 B         105 kB          1d      1y
-├ ○ /blog/day-care-spine-surgery-insurance-hyderabad                   213 B         111 kB
-├ ○ /blog/disc-replacement-vs-fusion                                   213 B         111 kB
-├ ○ /blog/does-endoscopic-spine-surgery-work-for-sciatica-hyderabad    219 B         105 kB
-├ ○ /blog/endoscopic-cervical-spine-surgery-hyderabad                  253 B         105 kB
-├ ○ /blog/endoscopic-discectomy-cost-hyderabad                         253 B         105 kB          1d      1y
-├ ○ /blog/endoscopic-spine-surgery-cost-hyderabad                      253 B         105 kB
-├ ○ /blog/endoscopic-vs-microdiscectomy-hyderabad                      253 B         105 kB          1d      1y
-├ ○ /blog/how-much-does-brain-surgery-cost-hyderabad                   253 B         105 kB          1d      1y
-├ ○ /blog/mvd-vs-radiosurgery-trigeminal-neuralgia                     253 B         105 kB          1d      1y
-├ ƒ /blog/page/[page]                                                  187 B         110 kB
-├ ○ /blog/return-to-work-after-endoscopic-discectomy-hyderabad         253 B         105 kB
-├ ○ /blog/sciatica-pain-management-hyderabad                           253 B         105 kB
-├ ○ /blog/spinal-fusion-cost-hyderabad                                 213 B         111 kB
-├ ○ /blog/spine-health-maintenance-hyderabad                           253 B         105 kB
-├ ○ /blog/spine-surgery-recovery-timeline-hyderabad                    253 B         105 kB
-├ ○ /blog/when-to-worry-about-back-pain-neurosurgeon-hyderabad         219 B         105 kB
-├ ○ /blog/world-stroke-day-2025-hyderabad-stroke-code                  253 B         105 kB          1d      1y
-├ ○ /brain-surgery                                                     219 B         105 kB
-├ ○ /brain-tumor-surgery                                               276 B         102 kB
-├ ○ /conditions                                                      9.55 kB         115 kB
-├ ● /conditions/[conditionSlug]                                        213 B         111 kB
-├ ● /conditions/a-z/[slug]                                           1.71 kB         107 kB
-├   ├ /conditions/a-z/acoustic-neuroma
-├   ├ /conditions/a-z/aneurysm
-├   ├ /conditions/a-z/brain-tumor
-├   └ [+22 more paths]
-├ ○ /conditions/brain-bleed-evacuation-hyderabad                       253 B         105 kB          1d      1y
-├ ○ /conditions/brain-tumor-surgery-hyderabad                          253 B         105 kB          1d      1y
-├ ○ /conditions/cervical-myelopathy-decompression-hyderabad            253 B         105 kB          1d      1y
-├ ○ /conditions/cervical-radiculopathy-treatment-hyderabad             253 B         105 kB          1d      1y
-├ ○ /conditions/osteoporotic-spine-fracture-hyderabad                  128 B         109 kB
-├ ○ /conditions/sciatica-treatment-hyderabad                           213 B         111 kB
-├ ○ /conditions/slip-disc-treatment-hyderabad                          253 B         105 kB          6h      1y
-├ ○ /conditions/spinal-stenosis-treatment-hyderabad                    127 B         109 kB
-├ ○ /conditions/spine-tumor-surgery-hyderabad                          253 B         105 kB          1d      1y
-├ ○ /conditions/spondylolisthesis-treatment-hyderabad                  128 B         109 kB
-├ ○ /conditions/trigeminal-neuralgia-treatment-hyderabad               253 B         105 kB          1d      1y
-├ ○ /contact                                                         1.99 kB         139 kB
-├ ○ /content-integrity                                                 219 B         105 kB
-├ ○ /cookies                                                           276 B         102 kB
-├ ○ /disclaimer                                                        276 B         102 kB
-├ ○ /disease-guides                                                    253 B         105 kB
-├ ○ /disease-guides/degenerative-disc-disease                          253 B         105 kB
-├ ○ /drafts                                                          37.6 kB         139 kB
-├ ○ /editorial-policy                                                  276 B         102 kB
-├ ○ /emergency-rehabilitation                                          253 B         105 kB
-├ ○ /endoscopic-spine-surgery-hyderabad                                213 B         111 kB
-├ ○ /force-cache-clear                                                 276 B         102 kB
-├ ○ /german-training                                                   219 B         105 kB
-├ ○ /icon.svg                                                            0 B            0 B
-├ ○ /knowledge-base                                                  2.52 kB         108 kB
-├ ○ /locations                                                         219 B         105 kB          1d      1y
-├ ○ /locations/banjara-hills                                           918 B         106 kB          1d      1y
-├ ○ /locations/brain-spine-surgeon-banjara-hills                     1.33 kB         106 kB          1d      1y
-├ ○ /locations/brain-spine-surgeon-hitec-city                        1.33 kB         106 kB          1d      1y
-├ ○ /locations/brain-spine-surgeon-jubilee-hills                     1.33 kB         106 kB          1d      1y
-├ ○ /locations/hitech-city                                             918 B         106 kB          1d      1y
-├ ○ /locations/lb-nagar                                                918 B         106 kB          1d      1y
-├ ○ /locations/malakpet                                                918 B         106 kB          1d      1y
-├ ○ /locations/neurosurgeon-kukatpally                                 918 B         106 kB          1d      1y
-├ ○ /locations/neurosurgeon-manikonda                                  918 B         106 kB          1d      1y
-├ ○ /locations/neurosurgeon-near-jubilee-hills                         276 B         102 kB
-├ ○ /locations/neurosurgeon-near-jubilee-hills-faq                     705 B         111 kB          1d      1y
-├ ○ /locations/neurosurgeon-near-kachiguda-faq                         705 B         111 kB          1d      1y
-├ ○ /locations/neurosurgeon-near-kondapur-faq                          705 B         111 kB          1d      1y
-├ ○ /locations/neurosurgeon-nizampet                                   918 B         106 kB          1d      1y
-├ ○ /locations/secunderabad                                            918 B         106 kB          1d      1y
-├ ○ /media                                                           1.71 kB         143 kB
-├ ○ /medical-disclaimer                                                219 B         105 kB
-├ ○ /near                                                              219 B         105 kB
-├ ● /near/[area]                                                      1.7 kB         143 kB
-├   ├ /near/banjara-hills
-├   ├ /near/jubilee-hills
-├   ├ /near/hitech-city
-├   └ [+5 more paths]
-├ ○ /neurosurgeon-banjara-hills                                        918 B         106 kB          1d      1y
-├ ○ /neurosurgeon-gachibowli                                           918 B         106 kB          1d      1y
-├ ○ /neurosurgeon-hitech-city                                          918 B         106 kB          1d      1y
-├ ○ /neurosurgeon-hyderabad                                            918 B         106 kB          1d      1y
-├ ○ /neurosurgeon-jubilee-hills                                        918 B         106 kB          1d      1y
-├ ○ /neurosurgeon-malakpet                                             918 B         106 kB          1d      1y
-├ ○ /neurosurgeon-secunderabad                                         918 B         106 kB          1d      1y
-├ ○ /patient-stories                                                 1.72 kB         143 kB          1h      1y
-├ ● /patient-stories/[slug]                                          1.72 kB         143 kB
-├   ├ /patient-stories/minimal-invasive-meningioma-resection
-├   ├ /patient-stories/video-testimonial-1
-├   ├ /patient-stories/video-testimonial-2
-├   └ [+3 more paths]
-├ ○ /pediatric-neurosurgery                                            219 B         105 kB
-├ ○ /privacy                                                           276 B         102 kB
-├ ○ /research                                                          219 B         105 kB
-├ ○ /robots.txt                                                        276 B         102 kB          1w      1y
-├ ○ /services                                                          253 B         105 kB
-├ ○ /services/awake-spine-surgery-hyderabad                            253 B         105 kB
-├ ○ /services/brain-tumor-surgery-hyderabad                          2.25 kB         107 kB
-├ ○ /services/cervical-endoscopic-spine-surgery-hyderabad              127 B         109 kB
-├ ○ /services/compare-neurosurgeons-hyderabad                          253 B         105 kB
-├ ○ /services/cooled-radiofrequency-ablation-hyderabad                 696 B         106 kB
-├ ○ /services/dr-sayuj-vs-apollo-neuro-icu                             213 B         111 kB
-├ ○ /services/endoscopic-discectomy-hyderabad                          696 B         106 kB
-├ ○ /services/endoscopic-spine-surgery-hyderabad                     2.25 kB         107 kB          1h      1y
-├ ○ /services/epilepsy-surgery-hyderabad                               128 B         109 kB
-├ ○ /services/kims-spine-surgery-second-opinion                        213 B         111 kB
-├ ○ /services/lumbar-laminectomy-surgery-hyderabad                     128 B         109 kB
-├ ○ /services/minimally-invasive-spine-surgery                         128 B         109 kB
-├ ○ /services/peripheral-nerve-surgery                                 213 B         111 kB
-├ ○ /services/peripheral-nerve-surgery-hyderabad                       253 B         105 kB
-├ ○ /services/slip-disc-surgery-cost-hyderabad                         253 B         105 kB
-├ ○ /services/spinal-fusion                                            213 B         111 kB
-├ ○ /services/spinal-fusion-surgery-hyderabad                          253 B         105 kB
-├ ○ /services/spine-surgery-cost-hyderabad                             253 B         105 kB
-├ ○ /services/spine-surgery-hyderabad                                  253 B         105 kB
-├ ○ /sitemap-images.xml                                                276 B         102 kB          1w      1y
-├ ○ /sitemap-videos.xml                                                276 B         102 kB          1w      1y
-├ ○ /sitemap.xml                                                       276 B         102 kB
-├ ○ /specializations                                                   219 B         105 kB
-├ ○ /spine-surgery                                                     219 B         105 kB
-├ ○ /stories/endoscopic-discectomy-same-day-hyderabad                1.72 kB         143 kB
-├ ○ /stories/endoscopic-ulbd-stenosis-hyderabad                      1.72 kB         143 kB
-├ ○ /stories/mvd-trigeminal-neuralgia-hyderabad                      1.72 kB         143 kB
-├ ○ /symptoms-checker                                                2.01 kB         104 kB
-├ ○ /symptoms/pain-on-top-of-head-causes                               219 B         105 kB          1d      1y
-├ ○ /symptoms/signs-of-brain-tumor                                     219 B         105 kB          1d      1y
-├ ○ /technology-facilities                                             253 B         105 kB
-├ ○ /technology-innovation                                             219 B         105 kB
-├ ○ /terms                                                             276 B         102 kB
-└ ○ /utm-links                                                       2.01 kB         104 kB
-+ First Load JS shared by all                                         102 kB
-  ├ chunks/538bca6c-78678a03101b889a.js                              54.2 kB
-  ├ chunks/5534-6c7c850180cedc8f.js                                  45.4 kB
-  └ other shared chunks (total)                                      2.17 kB
-
-
-ƒ Middleware                                                         33.1 kB
-
-○  (Static)   prerendered as static content
-●  (SSG)      prerendered as static HTML (uses generateStaticParams)
-ƒ  (Dynamic)  server-rendered on demand
-
-
-> neurosurgery-nextjs-site@0.1.0 postbuild /app
-> next-sitemap && node scripts/generate-image-sitemap.js && node scripts/generate-video-sitemap.js
-
-✨ [next-sitemap] Loading next-sitemap config: file:///app/next-sitemap.config.js
-✅ [next-sitemap] Generation completed
-┌───────────────┬────────┐
-│ (index)       │ Values │
-├───────────────┼────────┤
-│ indexSitemaps │ 0      │
-│ sitemaps      │ 1      │
-└───────────────┴────────┘
------------------------------------------------------
- SITEMAPS
------------------------------------------------------
-
-   ○ https://www.drsayuj.info/sitemap.xml
-
-
-✅ Image sitemap generated: /app/public/sitemap-images.xml
-   Total images: 15
-✅ Video sitemap generated: /app/public/sitemap-videos.xml
-   Total videos: 6
+> Build error occurred
+[Error: Cannot find module '/app/.next/server/next-font-manifest.json'
+Require stack:
+- /app/node_modules/.pnpm/next@15.5.9_@babel+core@7.28.5_@opentelemetry+api@1.9.0_react-dom@19.2.3_react@19.2.3__react@19.2.3/node_modules/next/dist/export/index.js
+- /app/node_modules/.pnpm/next@15.5.9_@babel+core@7.28.5_@opentelemetry+api@1.9.0_react-dom@19.2.3_react@19.2.3__react@19.2.3/node_modules/next/dist/build/index.js
+- /app/node_modules/.pnpm/next@15.5.9_@babel+core@7.28.5_@opentelemetry+api@1.9.0_react-dom@19.2.3_react@19.2.3__react@19.2.3/node_modules/next/dist/cli/next-build.js] {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+ ELIFECYCLE  Command failed with exit code 1.
