@@ -228,6 +228,20 @@ export const BLOG_SOURCES: Record<string, SourceEntry[]> = {
       href: "https://www.spineuniverse.com/conditions/spinal-tumors",
     },
   ],
+  "cauda-equina-syndrome-warning-signs-hyderabad": [
+    {
+      label: "American Academy of Orthopaedic Surgeons – Cauda Equina Syndrome",
+      href: "https://orthoinfo.aaos.org/en/diseases--conditions/cauda-equina-syndrome/",
+    },
+    {
+      label: "American Association of Neurological Surgeons – Cauda Equina Syndrome",
+      href: "https://www.aans.org/Patients/Neurosurgical-Conditions-and-Treatments/Cauda-Equina-Syndrome",
+    },
+    {
+      label: "NHS UK – Cauda Equina Syndrome Overview",
+      href: "https://www.nhs.uk/conditions/cauda-equina-syndrome/",
+    },
+  ],
 };
 
 export function getBlogSources(slug: string): SourceEntry[] {
