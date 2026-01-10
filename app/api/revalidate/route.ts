@@ -1,13 +1,23 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
+import crypto from 'crypto';
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const secret = searchParams.get('secret');
   const path = searchParams.get('path');
+  const expectedToken = process.env.REVALIDATE_TOKEN;
+
+  // 🛡️ Sentinel: Use constant-time comparison to prevent timing attacks
+  let isValid = false;
+  if (secret && expectedToken && secret.length === expectedToken.length) {
+    const secretBuffer = Buffer.from(secret);
+    const expectedBuffer = Buffer.from(expectedToken);
+    isValid = crypto.timingSafeEqual(secretBuffer, expectedBuffer);
+  }
 
   // Check for secret to confirm this is a valid request
-  if (secret !== process.env.REVALIDATE_TOKEN) {
+  if (!isValid) {
     return NextResponse.json(
       { error: 'Unauthorized' },
       { status: 401 }
