@@ -13,7 +13,7 @@ import { getServiceSources } from '../sources';
 import JsonLd from '@/components/JsonLd';
 import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
-import { ServiceLocationLinks } from '@/src/components/locations/ServiceLocationLinks';
+import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import { PhysicianSchema } from "@/src/components/schema/PhysicianSchema";
 import CostTransparencySection from '@/src/components/CostTransparencySection';
 import PatientJourneySection from '@/src/components/PatientJourneySection';
@@ -290,7 +290,7 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
         </section>
 
         <section className="mb-12">
-            <ServiceLocationLinks serviceName="Minimally Invasive Spine Surgery" />
+            <LocalPathways mode="service" />
         </section>
 
         <section className="mb-10 rounded-lg border border-green-200 bg-green-50 p-6">

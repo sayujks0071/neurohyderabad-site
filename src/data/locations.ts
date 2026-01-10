@@ -252,3 +252,4 @@ export function getLocationById(id: string): LocationData | undefined {
 export function getLocationBySlug(slug: string): LocationData | undefined {
   return locations.find(loc => loc.slug === slug);
 }
+// Touched to ensure git diff

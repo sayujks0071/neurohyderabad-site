@@ -11,6 +11,7 @@ import { makeMetadata } from '@/app/_lib/meta';
 import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import { sources } from '../../blog/sources';
+import { LocalPathways } from '@/src/components/locations/LocalPathways';
 
 const baseMetadata = makeMetadata({
   title: "Sciatica Treatment in Hyderabad | Leg Pain Relief | Dr. Sayuj",
@@ -242,6 +243,8 @@ export default function SciaticaTreatmentPage() {
       ))}
     </div>
   </section>
+
+  <LocalPathways mode="condition" />
 
   <section className="mb-12 space-y-6">
     <ReviewedBy />

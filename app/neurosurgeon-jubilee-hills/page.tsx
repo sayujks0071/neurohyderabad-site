@@ -14,14 +14,14 @@ export const dynamicParams = false;
 export const revalidate = 86400;
 
 export const metadata = {
-  title: "Best Neurosurgeon in Jubilee Hills, Hyderabad | Dr. Sayuj Krishnan | Full Endoscopic Spine Surgery & Daycare Spine Procedures",
+  title: "Best Neurosurgeon in Jubilee Hills, Hyderabad | Endoscopic Spine | Dr. Sayuj Krishnan",
   description:
-    "Leading neurosurgeon Dr. Sayuj Krishnan serving Jubilee Hills, Hyderabad. Expert in endoscopic spine surgery, brain tumor surgery, trigeminal neuralgia treatment & emergency neurotrauma care. 9+ years experience. Easy access from Jubilee Hills Check Post, Road No. 36, Film Nagar. Book consultation today.",
-  keywords: "neurosurgeon jubilee hills, brain surgeon jubilee hills, spine specialist jubilee hills, endoscopic spine surgery jubilee hills, dr sayuj krishnan jubilee hills, best neurosurgeon near jubilee hills, spine surgeon near me jubilee hills",
+    "Leading neurosurgeon Dr. Sayuj Krishnan serving Jubilee Hills, Hyderabad. Expert in endoscopic spine surgery, brain tumor surgery, trigeminal neuralgia treatment & emergency neurotrauma care. Easy access from Jubilee Hills Check Post.",
+  keywords: "neurosurgeon jubilee hills, brain surgeon jubilee hills, spine specialist jubilee hills, endoscopic spine surgery jubilee hills, dr sayuj krishnan jubilee hills",
   alternates: { canonical: "https://www.drsayuj.info/neurosurgeon-jubilee-hills" },
   openGraph: {
-    title: "Best Neurosurgeon in Jubilee Hills, Hyderabad | Dr. Sayuj Krishnan",
-    description: "Expert neurosurgeon serving Jubilee Hills with endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures. 9+ years experience.",
+    title: "Best Neurosurgeon in Jubilee Hills, Hyderabad | Endoscopic Spine | Dr. Sayuj Krishnan",
+    description: "Expert neurosurgeon serving Jubilee Hills with endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures.",
     url: "https://www.drsayuj.info/neurosurgeon-jubilee-hills",
     type: "website",
     images: [
@@ -35,7 +35,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Best Neurosurgeon in Jubilee Hills, Hyderabad | Dr. Sayuj Krishnan",
+    title: "Best Neurosurgeon in Jubilee Hills, Hyderabad | Endoscopic Spine",
     description: "Expert neurosurgeon serving Jubilee Hills with endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures.",
     images: ["https://www.drsayuj.info/images/og-default.jpg"],
   },
@@ -99,9 +99,6 @@ export default function JubileeHillsNeurosurgeonPage() {
               specializes in minimally invasive procedures that enable same-day discharge and rapid return to active life—
               perfect for Jubilee Hills professionals and families seeking world-class care close to home.
             </p>
-             <div className="mt-6">
-                <LocationCTAs location={location} />
-             </div>
             
             <div className="mt-6 rounded-lg border border-blue-200 bg-blue-50 p-6">
               <h3 className="font-semibold text-blue-800">Why Jubilee Hills Patients Choose Dr. Sayuj:</h3>
@@ -135,19 +132,9 @@ export default function JubileeHillsNeurosurgeonPage() {
                   <Link href="/conditions/brain-tumor-surgery-hyderabad" className="text-sm text-blue-600 hover:underline">Learn more →</Link>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-gray-900">Emergency Brain Bleed Care</h4>
-                  <p className="text-sm text-gray-600">24/7 endoscopic hemorrhage evacuation & stroke management</p>
-                  <Link href="/conditions/brain-bleed-evacuation-hyderabad" className="text-sm text-blue-600 hover:underline">Learn more →</Link>
-                </div>
-                <div>
                   <h4 className="font-semibold text-gray-900">Trigeminal Neuralgia Treatment</h4>
                   <p className="text-sm text-gray-600">Microvascular decompression (MVD) & radiosurgery options</p>
                   <Link href="/conditions/trigeminal-neuralgia-treatment-hyderabad" className="text-sm text-blue-600 hover:underline">Learn more →</Link>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900">Cervical Myelopathy Decompression</h4>
-                  <p className="text-sm text-gray-600">Endoscopic cervical decompression for spinal cord compression</p>
-                  <Link href="/conditions/cervical-myelopathy-decompression-hyderabad" className="text-sm text-blue-600 hover:underline">Learn more →</Link>
                 </div>
               </div>
             </div>

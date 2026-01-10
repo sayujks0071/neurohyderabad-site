@@ -8,6 +8,9 @@ import { LocalPathways } from "@/src/components/locations/LocalPathways";
 import { LocationSchema } from "@/src/components/locations/LocationSchema";
 import { notFound } from "next/navigation";
 
+// Force static generation
+export const dynamic = 'force-static';
+export const dynamicParams = false;
 export const revalidate = 86400;
 
 export const metadata = {

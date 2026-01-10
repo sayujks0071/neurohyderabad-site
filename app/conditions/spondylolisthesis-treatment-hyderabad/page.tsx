@@ -9,7 +9,7 @@ import { sources } from '../../blog/sources';
 import { makeMetadata } from '@/app/_lib/meta';
 import Section from '@/app/_components/Section';
 import { patientStories } from '../../../src/content/stories';
-import { ConditionLocationLinks } from '@/src/components/locations/ConditionLocationLinks';
+import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import { PhysicianSchema } from "@/src/components/schema/PhysicianSchema";
 import CostTransparencySection from '@/src/components/CostTransparencySection';
 import TeleconsultationForm from '@/components/TeleconsultationForm';
@@ -244,7 +244,7 @@ export default function SpondylolisthesisPage() {
             </Link>
           </div>
         </div>
-        <ConditionLocationLinks />
+        <LocalPathways mode="condition" />
       </Section>
 
       <Section background="gray">
