@@ -11,6 +11,7 @@ import { buildLocalServiceSchema } from '@/src/lib/schema/localService';
 import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import TrustProof from '@/app/_components/TrustProof';
+import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import { getServiceSources } from '../sources';
 import { patientStories } from '@/src/content/stories';
 
@@ -347,6 +348,8 @@ export default function BrainTumorSurgeryHyderabadPage() {
             </Link>
           </div>
         </section>
+
+        <LocalPathways mode="service" />
 
         <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
         <ReviewedBy lastReviewed="2025-10-19" />

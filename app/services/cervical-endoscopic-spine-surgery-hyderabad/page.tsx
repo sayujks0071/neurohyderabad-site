@@ -13,7 +13,7 @@ import { getServiceSources } from '../sources';
 import JsonLd from '@/components/JsonLd';
 import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
-import { ServiceLocationLinks } from '@/src/components/locations/ServiceLocationLinks';
+import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import { PhysicianSchema } from "@/src/components/schema/PhysicianSchema";
 
 const baseMetadata = makeMetadata({
@@ -184,7 +184,7 @@ export default function CervicalEndoscopicSpineSurgeryPage() {
         </section>
 
         <section className="mb-12">
-            <ServiceLocationLinks serviceName="Cervical Endoscopic Spine Surgery" />
+            <LocalPathways mode="service" />
         </section>
 
         <section className="mb-12">

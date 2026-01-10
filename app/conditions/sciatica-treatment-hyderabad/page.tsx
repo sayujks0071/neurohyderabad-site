@@ -9,7 +9,7 @@ import { sources } from '../../blog/sources';
 import { makeMetadata } from '@/app/_lib/meta';
 import Section from '@/app/_components/Section';
 import { patientStories } from '../../../src/content/stories';
-import { ConditionLocationLinks } from '@/src/components/locations/ConditionLocationLinks';
+import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import { PhysicianSchema } from "@/src/components/schema/PhysicianSchema";
 import PatientEducationVideos from '@/app/_components/PatientEducationVideos';
 import { breadcrumbJsonLd, SITE_URL as BASE_URL } from '@/src/lib/seo';
@@ -338,7 +338,7 @@ export default function SciaticaTreatmentPage() {
           </div>
         </div>
 
-        <ConditionLocationLinks />
+        <LocalPathways mode="condition" />
       </Section>
 
       <Section className="border-t border-gray-200">

@@ -8,7 +8,7 @@ import SourceList from '@/app/_components/SourceList';
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import { SITE_URL } from "@/src/lib/seo";
 import { sources } from '../../blog/sources';
-import { ConditionLocationLinks } from '@/src/components/locations/ConditionLocationLinks';
+import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import { PhysicianSchema } from "@/src/components/schema/PhysicianSchema";
 
 // Static generation with 24-hour revalidation
@@ -434,7 +434,7 @@ export default function BrainTumorSurgeryConditionPage() {
               </details>
             ))}
           </div>
-          <ConditionLocationLinks />
+          <LocalPathways mode="condition" />
         </div>
       </section>
 
