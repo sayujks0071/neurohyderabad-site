@@ -77,9 +77,9 @@ export default function StandardCTA({ className = '', variant = 'default' }: Sta
     : "flex flex-wrap gap-3";
 
   const buttonToneClasses = useMemo<Record<CTAIntent, string>>(() => ({
-    call: "bg-green-700 hover:bg-green-800 text-white",
-    whatsapp: "bg-green-700 hover:bg-green-800 text-white",
-    appointment: "bg-blue-700 hover:bg-blue-800 text-white",
+    call: "bg-gradient-to-r from-green-600 to-emerald-600 text-white shadow-lg shadow-green-500/30 hover:shadow-green-500/50",
+    whatsapp: "bg-gradient-to-r from-green-600 to-emerald-600 text-white shadow-lg shadow-green-500/30 hover:shadow-green-500/50",
+    appointment: "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50",
   }), []);
 
   return (
@@ -91,7 +91,7 @@ export default function StandardCTA({ className = '', variant = 'default' }: Sta
           onClick={() => handleCTAClick(button)}
           target={button.target}
           rel={button.rel}
-          className={`${buttonToneClasses[button.intent]} font-semibold rounded-lg transition-colors duration-200 ${buttonPadding} min-h-[44px] flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}
+          className={`${buttonToneClasses[button.intent]} font-semibold rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] ${buttonPadding} min-h-[44px] flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}
           aria-label={button.ariaLabel || button.label}
         >
           <CTAIcon intent={button.intent} />
