@@ -32,11 +32,16 @@ export default function TrustBridgeTracker() {
 
     sectionRef.current = section;
 
-    // Track when Trust Bridge enters viewport
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && !hasTrackedView.current) {
+          if (!entry.isIntersecting) return;
+
+          const ratio = entry.intersectionRatio;
+          const percentage = Math.round(ratio * 100);
+
+          // Track View (at 30%)
+          if (ratio >= 0.3 && !hasTrackedView.current) {
             hasTrackedView.current = true;
             analytics.trustSignalView(
               pathname || '/',
@@ -44,43 +49,28 @@ export default function TrustBridgeTracker() {
               'all'
             );
           }
+
+          // Track Depth (25, 50, 75, 100)
+          [25, 50, 75, 100].forEach((milestone) => {
+            // Check if we reached this milestone (with small buffer for float precision)
+            if (percentage >= milestone && !scrollDepthTracked.current.has(milestone)) {
+              scrollDepthTracked.current.add(milestone);
+              analytics.track('Trust_Bridge_Scroll_Depth', {
+                page_slug: pathname || '/',
+                scroll_depth_percentage: milestone,
+                section: 'trust_bridge'
+              });
+            }
+          });
         });
       },
-      { threshold: 0.3 } // Track when 30% visible
+      {
+        // 0.3 for view tracking, others for depth tracking
+        threshold: [0.25, 0.3, 0.5, 0.75, 1.0]
+      }
     );
 
     observer.observe(section);
-
-    // Track scroll depth within Trust Bridge section
-    const trackScrollDepth = () => {
-      if (!section) return;
-
-      const rect = section.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      const sectionTop = rect.top;
-      const sectionHeight = rect.height;
-
-      // Calculate scroll depth within section
-      if (sectionTop < windowHeight && sectionTop + sectionHeight > 0) {
-        const visibleHeight = Math.min(windowHeight - sectionTop, sectionHeight);
-        const depth = Math.round((visibleHeight / sectionHeight) * 100);
-        
-        // Track at 25%, 50%, 75%, 100% milestones
-        [25, 50, 75, 100].forEach((milestone) => {
-          if (depth >= milestone && !scrollDepthTracked.current.has(milestone)) {
-            scrollDepthTracked.current.add(milestone);
-            analytics.track('Trust_Bridge_Scroll_Depth', {
-              page_slug: pathname || '/',
-              scroll_depth_percentage: milestone,
-              section: 'trust_bridge'
-            });
-          }
-        });
-      }
-    };
-
-    window.addEventListener('scroll', trackScrollDepth);
-    trackScrollDepth(); // Initial check
 
     // Track clicks on Trust Bridge links
     const handleTrustBridgeClick = (e: MouseEvent) => {
@@ -90,7 +80,6 @@ export default function TrustBridgeTracker() {
       if (!link) return;
 
       const href = link.getAttribute('href') || '';
-      const linkText = link.textContent?.trim() || '';
 
       if (href.includes('/about')) {
         analytics.trustSignalClick(
@@ -115,12 +104,9 @@ export default function TrustBridgeTracker() {
 
     return () => {
       observer.disconnect();
-      window.removeEventListener('scroll', trackScrollDepth);
       section.removeEventListener('click', handleTrustBridgeClick);
     };
   }, [pathname]);
 
   return null; // This component doesn't render anything
 }
-
-
