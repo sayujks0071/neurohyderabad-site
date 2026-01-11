@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-01-10T12:00:00Z",
+  "timestamp": "2026-01-10T14:15:00Z",
   "commit": "HEAD",
   "pages": {
     "home": {
@@ -9,7 +9,8 @@
         "DoctorCard image has priority={true}, correctly using next/image.",
         "LazySection placeholders have fixed heights (800px, 64px, 32px), reducing CLS risk if content matches.",
         "PatientEducationVideos uses next/image with 'fill' for thumbnails. Good.",
-        "Corrected LazySection placeholder height for PatientEducationVideos and RecoveryTimeline to match content height, significantly reducing CLS risk on both mobile and desktop."
+        "Corrected LazySection placeholder height for PatientEducationVideos and RecoveryTimeline to match content height, significantly reducing CLS risk on both mobile and desktop.",
+        "Refactored Header to lazy-load SiteSearch component, removing it from the critical rendering path. This defers hydration cost and potential TBT impact."
       ]
     },
     "condition": {
