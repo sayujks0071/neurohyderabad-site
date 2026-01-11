@@ -1,16 +1,14 @@
-## Changelog - 2026-01-03
+# SEO Changelog - 2026-01-10
 
-### New Research:
-*   Simulated competitor analysis for Hyderabad Spine/Neuro market.
-*   Identified 2 critical content gaps: `Osteoporotic Spine Fracture` and `Spinal Tuberculosis`.
-*   Verified existing high-volume keywords like "Endoscopic Spine Surgery" and "Sciatica" are well-mapped.
+## New Pages
+- Created `/locations/neurosurgeon-kondapur` (Gap fill for Hitech City neighbor)
+- Created `/locations/neurosurgeon-kothapet` (Gap fill for Malakpet neighbor)
 
-### Actions:
-1.  **Created:** `seo/keyword-research/2026-01-03/` artifacts.
-2.  **Updated:** Central `seo/keyword-registry.json` and `seo/page-keyword-map.json` with new clusters.
-3.  **Planned:** Creation of `/conditions/osteoporotic-spine-fracture-hyderabad/page.tsx` and `/conditions/spinal-tuberculosis-treatment-hyderabad/page.tsx` (or one of them if limit is tight).
+## Data Updates
+- Updated `src/data/locations.ts` with Kondapur and Kothapet metadata.
+- Updated `seo/keyword-registry.json` with new location keywords.
+- Updated `seo/page-keyword-map.json` with new page mappings.
 
-### Notes:
-*   "Spinal Stenosis" page was originally thought to be missing, but `lumbar canal stenosis` is mapped to `/conditions/spinal-stenosis-treatment-hyderabad`. Need to double check if that file *actually* exists. (Verified: It does NOT exist in the file list I pulled earlier. I only saw `spondylolisthesis` and `slip-disc` in `app/conditions/`).
-*   **Correction:** I will prioritize `Spinal Stenosis` as it's a higher volume term than TB or Fracture.
-*   **Revised Plan:** Create `Spinal Stenosis` and `Osteoporotic Fracture` pages. TB can wait for tomorrow.
+## Insights
+- "Kondapur" is a high-growth area with significant IT population looking for premium care.
+- "Kothapet" captures local residential traffic near the clinic (Malakpet).
