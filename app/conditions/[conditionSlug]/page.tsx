@@ -252,7 +252,7 @@ export default async function ConditionDetailPage({ params }: PageParams) {
                 <p className="mb-6 text-gray-700">
                     Dr. Sayuj Krishnan provides treatment for {condition.name} at multiple locations across Hyderabad.
                 </p>
-                 <LocalPathways location={location} />
+                 <LocalPathways mode="condition" currentSlug={condition.slug} />
             </div>
           )}
 

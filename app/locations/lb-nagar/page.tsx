@@ -21,9 +21,9 @@ export const metadata = {
 };
 
 const FAQ = [
-  { q: "How far is the OPD from LB Nagar?", a: "Typically 10-15 minutes by car (~4 km)." },
-  { q: "Do you treat sciatica?", a: "Yes, Dr. Sayuj specializes in endoscopic spine surgery for sciatica and disc problems." },
-  { q: "Is emergency care available?", a: "Yes, 24/7 emergency neurosurgery services are available at Yashoda Hospital, Malakpet." },
+  { question: "How far is the OPD from LB Nagar?", answer: "Typically 10-15 minutes by car (~4 km)." },
+  { question: "Do you treat sciatica?", answer: "Yes, Dr. Sayuj specializes in endoscopic spine surgery for sciatica and disc problems." },
+  { question: "Is emergency care available?", answer: "Yes, 24/7 emergency neurosurgery services are available at Yashoda Hospital, Malakpet." },
 ];
 
 export default function LBNagarLocationPage() {
@@ -33,13 +33,9 @@ export default function LBNagarLocationPage() {
     return notFound();
   }
 
-  const breadcrumb = [
-     { name: "Neurosurgeon in LB Nagar", item: `https://www.drsayuj.info/${location.slug}` },
-  ];
-
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
-      <LocationSchema location={location} breadcrumb={breadcrumb} faq={FAQ} />
+      <LocationSchema location={location} faq={FAQ} />
 
       <h1 className="text-3xl md:text-4xl font-bold text-center mb-6">Neurosurgeon Near LB Nagar, Hyderabad</h1>
       <p className="text-lg text-gray-700 mb-8 text-center max-w-3xl mx-auto">
@@ -78,16 +74,18 @@ export default function LBNagarLocationPage() {
       <section className="mt-10">
         <h2 className="text-2xl font-semibold">FAQs</h2>
         <div className="mt-4 space-y-4">
-          {FAQ.map(({ q, a }) => (
-            <details key={q} className="rounded-xl border p-4">
-              <summary className="font-medium">{q}</summary>
-              <p className="mt-2">{a}</p>
+          {FAQ.map(({ question, answer }) => (
+            <details key={question} className="rounded-xl border p-4">
+              <summary className="font-medium">{question}</summary>
+              <p className="mt-2">{answer}</p>
             </details>
           ))}
         </div>
       </section>
 
-      <LocalPathways location={location} />
+      <div className="mt-12">
+        <LocalPathways mode="location" locationId={location.id} />
+      </div>
     </main>
   );
 }

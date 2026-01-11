@@ -34,9 +34,9 @@ export const metadata = {
 };
 
 const FAQ = [
-  { q: "How far is the OPD from Banjara Hills?", a: "Typically 15–25 minutes by car depending on traffic; see landmark directions below." },
-  { q: "Parking availability?", a: "On-site hospital parking with valet options during peak hours." },
-  { q: "Fastest way to book?", a: "WhatsApp us your MRI and symptoms; we'll confirm the earliest slot." },
+  { question: "How far is the OPD from Banjara Hills?", answer: "Typically 15–25 minutes by car depending on traffic; see landmark directions below." },
+  { question: "Parking availability?", answer: "On-site hospital parking with valet options during peak hours." },
+  { question: "Fastest way to book?", answer: "WhatsApp us your MRI and symptoms; we'll confirm the earliest slot." },
 ];
 
 export default function BanjaraHillsLocationPage() {
@@ -46,13 +46,9 @@ export default function BanjaraHillsLocationPage() {
     return notFound();
   }
 
-  const breadcrumb = [
-     { name: "Neurosurgeon in Banjara Hills", item: `https://www.drsayuj.info/${location.slug}` },
-  ];
-
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
-      <LocationSchema location={location} breadcrumb={breadcrumb} faq={FAQ} />
+      <LocationSchema location={location} faq={FAQ} />
 
       <h1 className="text-3xl md:text-4xl font-bold">Neurosurgeon in Banjara Hills, Hyderabad</h1>
       <p className="mt-4 text-lg">
@@ -90,16 +86,18 @@ export default function BanjaraHillsLocationPage() {
       <section className="mt-10">
         <h2 className="text-2xl font-semibold">FAQs</h2>
         <div className="mt-4 space-y-4">
-          {FAQ.map(({ q, a }) => (
-            <details key={q} className="rounded-xl border p-4">
-              <summary className="font-medium">{q}</summary>
-              <p className="mt-2">{a}</p>
+          {FAQ.map(({ question, answer }) => (
+            <details key={question} className="rounded-xl border p-4">
+              <summary className="font-medium">{question}</summary>
+              <p className="mt-2">{answer}</p>
             </details>
           ))}
         </div>
       </section>
 
-      <LocalPathways location={location} />
+      <div className="mt-12">
+        <LocalPathways mode="location" locationId={location.id} />
+      </div>
     </main>
   );
 }

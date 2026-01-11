@@ -1,44 +1,51 @@
 'use client';
 
 import React, { useState } from 'react';
-import { LocationData } from '../../data/locations';
+import { LocationData } from '@/src/data/locations';
+import { MapPin } from 'lucide-react';
 
 interface LocationMapEmbedProps {
   location: LocationData;
   className?: string;
+  height?: string;
 }
 
-export const LocationMapEmbed: React.FC<LocationMapEmbedProps> = ({ location, className = "" }) => {
-  const [showMap, setShowMap] = useState(false);
+export const LocationMapEmbed: React.FC<LocationMapEmbedProps> = ({
+  location,
+  className = '',
+  height = '450px'
+}) => {
+  const [isLoaded, setIsLoaded] = useState(false);
 
   return (
-    <div
-      className={`w-full overflow-hidden rounded-xl border bg-gray-100 relative ${className}`}
-      style={{ minHeight: '300px' }}
-    >
-      {!showMap ? (
-        <div className="absolute inset-0 flex flex-col items-center justify-center bg-gray-50 p-6 text-center">
-          <div className="mb-4 text-4xl" role="img" aria-label="Map icon">🗺️</div>
-          <h3 className="mb-2 text-lg font-semibold text-gray-900">View Clinic Location</h3>
-          <p className="mb-6 text-sm text-gray-600 max-w-xs">
-            See {location.canonical_display_name} on Google Maps
+    <div className={`relative w-full rounded-2xl overflow-hidden shadow-xl border border-gray-200 bg-gray-100 ${className}`} style={{ height }}>
+      {!isLoaded && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-gray-50 z-10">
+          <MapPin className="w-12 h-12 text-blue-600 mb-4 animate-bounce" />
+          <h3 className="text-xl font-semibold text-gray-900 mb-2">View Location on Map</h3>
+          <p className="text-gray-500 mb-6 text-center max-w-md px-4">
+            Click below to load the interactive Google Map for {location.name}
           </p>
           <button
-            onClick={() => setShowMap(true)}
-            className="rounded-full bg-blue-600 px-6 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
-            aria-label={`Load Google Map for ${location.canonical_display_name}`}
+            onClick={() => setIsLoaded(true)}
+            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition-all transform hover:scale-105"
           >
             Load Map
           </button>
         </div>
-      ) : (
+      )}
+
+      {isLoaded && (
         <iframe
-          title={`Map to clinic for ${location.areaServedName} patients`}
           src={location.embed_url}
-          className="w-full h-full min-h-[300px] border-0"
+          width="100%"
+          height="100%"
+          style={{ border: 0 }}
+          allowFullScreen
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
-          allowFullScreen
+          title={`Google Map for ${location.name}`}
+          className="animate-in fade-in duration-500"
         />
       )}
     </div>
