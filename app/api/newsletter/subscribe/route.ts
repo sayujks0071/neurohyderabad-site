@@ -1,7 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { sendNewsletterSubscriptionEmail } from '@/lib/email';
+import { rateLimit } from '@/src/lib/rate-limit';
 
 export async function POST(request: NextRequest) {
+  // 🛡️ Sentinel: Rate limiting - 5 requests per 60 seconds per IP to prevent email spam/DoS
+  const ip = request.headers.get("x-forwarded-for") ?? "unknown";
+  const limit = rateLimit(ip, 5, 60 * 1000);
+
+  if (!limit.success) {
+    return NextResponse.json(
+      { success: false, error: "Too many requests. Please try again later." },
+      { status: 429 }
+    );
+  }
+
   try {
     const body = await request.json();
     
@@ -51,30 +63,3 @@ export async function POST(request: NextRequest) {
     }, { status: 500 });
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
