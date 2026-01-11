@@ -404,6 +404,7 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
           </div>
         </section>
 
+        {/* Added bottom Pathways */}
         <LocalPathways mode="service" />
 
         <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
