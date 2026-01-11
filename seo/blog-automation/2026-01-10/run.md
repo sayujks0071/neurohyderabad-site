@@ -1,37 +1,34 @@
-# Blog Automation Run: 2026-01-10
+## Blog Automation Run: 2026-01-10
 
-## 1. Structure Detection
+### 1. Structure Detection
 - **System:** Next.js App Router
-- **Content:** MDX files in `content/blog/`
-- **Metadata:** Frontmatter for SEO, `app/blog/sources.ts` for citations.
+- **Content Source:** `content/blog/` (MDX)
+- **Routing:** `app/blog/[slug]/page.tsx`
+- **Frontmatter:** Verified standard fields (slug, title, category, tags, etc.)
 
-## 2. Topic Selection
-- **Chosen Topic:** Cauda Equina Syndrome
+### 2. Topic Selection
+- **Chosen Topic:** Spondylolisthesis vs. Herniated Disc
 - **Rationale:**
-  - **High Urgency (Score 95):** Medical emergency (Red Flag) aligning with "Spine Surgery" expertise.
-  - **Gap:** No existing dedicated page for this critical condition.
-  - **Conversion:** Direct link to emergency/urgent appointment context.
+  - **High Patient Confusion:** Patients frequently confuse "slipped disc" and "slipped bone".
+  - **Treatment Divergence:** Critical to explain why one might need fusion vs simple decompression.
+  - **Internal Linking:** Strong hub opportunity linking `endoscopic-spine-surgery`, `spondylolisthesis-treatment`, and `slip-disc-treatment`.
+  - **Gap:** Specific comparison not covered in existing blog posts.
+- **Score:** 95/100
 
-## 3. Implementation Details
-- **Slug:** `cauda-equina-syndrome-warning-signs-hyderabad`
-- **Target Intent:** BOFU (Emergency/Urgent Care)
+### 3. Implementation Details
+- **File:** `content/blog/spondylolisthesis-vs-herniated-disc-difference.mdx`
 - **Internal Links Added:**
-  - Sciatica (`/conditions/sciatica-pain-treatment-hyderabad`)
-  - Slip Disc (`/conditions/slip-disc-treatment-hyderabad`)
-  - Lumbar Canal Stenosis (`/conditions/lumbar-canal-stenosis-treatment-hyderabad`)
-  - Microdiscectomy (`/services/microdiscectomy-surgery-hyderabad`)
-  - Contact/Appointment (`/contact`)
-
-## 4. References
-- Added to `app/blog/sources.ts`:
+  - `/blog/sciatica-vs-normal-back-pain-guide`
+  - `/conditions/slip-disc-treatment-hyderabad`
+  - `/services/endoscopic-spine-surgery-hyderabad`
+  - `/conditions/spondylolisthesis-treatment-hyderabad`
+  - `/blog/understanding-mri-spine-report-guide`
+  - `/appointments`
+- **References:**
   - AAOS (OrthoInfo)
-  - NHS UK
-  - AANS
   - Cleveland Clinic
-  - PubMed Central (statpearls)
+  - NASS
 
-## 5. Verification
-- Lint: Passed
-- Schema Check: Passed
-- Build: Passed
-- Visual Verification: Confirmed via Playwright screenshot.
+### 4. Risks & Notes
+- **Medical Accuracy:** Distinction between stable vs unstable spine is simplified but accurate for patient education.
+- **Formatting:** Used HTML tables (via Markdown syntax as per existing files) for comparison.
