@@ -1,0 +1,49 @@
+name: Google SEO Automation
+
+on:
+  schedule:
+    # Run daily at 09:00 UTC
+    - cron: '0 9 * * *'
+  workflow_dispatch:
+    inputs:
+      action_type:
+        description: 'Action to perform'
+        required: true
+        default: 'sitemap'
+        type: choice
+        options:
+        - sitemap
+      target_url:
+        description: 'Target URL (only for indexing, currently unused in sitemap mode)'
+        required: false
+
+jobs:
+  seo-submit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run Sitemap Submission
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.action_type == 'sitemap' }}
+        env:
+          GOOGLE_INDEXING_KEY_JSON: ${{ secrets.GOOGLE_INDEXING_KEY_JSON }}
+          SITE_URL: ${{ vars.SITE_URL || 'https://www.drsayuj.info' }}
+        run: npx tsx scripts/google-seo-automation.ts --sitemap
+
+      # Note: Manual URL indexing via workflow_dispatch could be added here if needed in the future,
+      # but sticking to the requested daily sitemap automation for now.
