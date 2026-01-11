@@ -9,3 +9,5 @@ Verify the Local SEO signals for "Dr. Sayuj Krishnan".
 - Run `npm run check:schemas` to validate JSON-LD schema on key pages.
 - Ensure the Google Maps embed is working and correct.
 - If errors are found, fix them in a PR.
+
+<!-- Jules Automation -->
