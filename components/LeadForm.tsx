@@ -47,6 +47,7 @@ export default function LeadForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const successRef = useRef<HTMLDivElement>(null);
+  const errorRef = useRef<HTMLDivElement>(null);
 
   const {
     register,
@@ -66,6 +67,12 @@ export default function LeadForm() {
       successRef.current.focus();
     }
   }, [isSubmitted]);
+
+  useEffect(() => {
+    if (submitError && errorRef.current) {
+      errorRef.current.focus();
+    }
+  }, [submitError]);
 
   const onSubmit = async (data: LeadFormData) => {
     setSubmitError(null);
@@ -118,7 +125,12 @@ export default function LeadForm() {
       </p>
 
       {submitError && (
-        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+        <div
+          ref={errorRef}
+          tabIndex={-1}
+          role="alert"
+          className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+        >
           {submitError}
         </div>
       )}
