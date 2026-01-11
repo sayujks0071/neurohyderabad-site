@@ -3,7 +3,13 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import SiteSearch from './SiteSearch';
+import dynamic from 'next/dynamic';
+import SearchPlaceholder from './SearchPlaceholder';
+
+const SiteSearch = dynamic(() => import('./SiteSearch'), {
+  loading: () => <SearchPlaceholder />,
+  ssr: false, // SiteSearch is client-only interaction
+});
 
 /**
  * Refactored Header Component - Grade 2 Enhancement
