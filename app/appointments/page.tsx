@@ -1,10 +1,11 @@
 import { SITE_URL } from "../../src/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { AppointmentFormExperience } from "@/packages/appointment-form";
-import AppointmentFormTracker from "../../src/components/AppointmentFormTracker";
-import PhoneClickTracker from "../../src/components/PhoneClickTracker";
+import BookingCalendarEmbed from "../_components/BookingCalendarEmbed";
 import OpenAIAgentsBookingWrapper from "../_components/OpenAIAgentsBookingWrapper";
+
+const BOOKING_APP_URL =
+  "https://opal.google/?flow=drive:/1wPh_Tb_nEf-hnrCYH6rEQ85cPTqx37EF&shared&mode=app";
 
 export const metadata: Metadata = {
   title: "Book an Appointment | Dr Sayuj Krishnan",
@@ -72,19 +73,15 @@ export default function AppointmentsPage() {
       {/* Traditional Form Section */}
       <section>
         <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold text-blue-800 mb-4">📝 Traditional Appointment Form</h2>
+          <h2 className="text-2xl font-bold text-blue-800 mb-4">📅 Online Booking Calendar</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Prefer to fill out a form? Use our detailed appointment request form below.
+            Choose your preferred slot and complete the booking inside the calendar below.
           </p>
         </div>
         
         <div className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-6">
-            <AppointmentFormExperience />
-            <div className="hidden" aria-hidden>
-              <AppointmentFormTracker pageSlug="/appointments" />
-              <PhoneClickTracker />
-            </div>
+            <BookingCalendarEmbed url={BOOKING_APP_URL} />
           </div>
 
           <aside className="space-y-6">
