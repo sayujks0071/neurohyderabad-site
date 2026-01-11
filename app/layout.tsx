@@ -29,8 +29,7 @@ import PhysicianSchema from "./components/schemas/PhysicianSchema";
 import HospitalSchema from "./components/schemas/HospitalSchema";
 import TrustStrip from "./_components/TrustStrip";
 import ClientAnalytics from "./_components/ClientAnalytics";
-import StickyCTA from "./_components/StickyCTA";
-import ClientOnlyWrapper from "./_components/ClientOnlyWrapper";
+import DynamicStickyCTA from "./_components/DynamicStickyCTA";
 import HypertuneProvider from "./providers/hypertune-provider";
 import { SITE_URL } from "../src/lib/seo";
 
@@ -179,9 +178,7 @@ export default function RootLayout({
           </main>
         </HypertuneProvider>
         <Footer />
-        <ClientOnlyWrapper>
-          <StickyCTA />
-        </ClientOnlyWrapper>
+        <DynamicStickyCTA />
         {process.env.VERCEL ? <Analytics /> : null}
       </body>
     </html>
