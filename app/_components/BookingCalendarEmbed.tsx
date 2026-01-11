@@ -3,7 +3,6 @@
 import { useCallback, useRef } from "react";
 import { Calendar, ExternalLink } from "lucide-react";
 import { trackConversionOnly } from "@/src/lib/google-ads-conversion";
-import { ExternalLink, Calendar } from "lucide-react";
 
 interface BookingCalendarEmbedProps {
   url: string;
@@ -35,15 +34,6 @@ export default function BookingCalendarEmbed({
         </p>
       </div>
 
-      <div className="space-y-3">
-        <h3 className="text-2xl font-semibold text-slate-900">
-          Book your appointment in seconds
-        </h3>
-        <p className="text-sm md:text-base text-slate-600">
-          Click below to open our secure booking assistant. Choose a slot, share
-          your details, and our care team will confirm the appointment.
-        </p>
-      </div>
       <a
         href={url}
         target="_blank"
@@ -57,8 +47,6 @@ export default function BookingCalendarEmbed({
 
       <p className="text-xs text-slate-500">
         Opens in a new tab • Secure via Google Opal
-      <p className="text-xs text-slate-500">
-        Opens in a new tab for privacy and security.
       </p>
     </div>
   );
