@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-03",
+  "last_updated": "2026-01-10",
   "keywords": [
     {
       "term": "neurosurgeon hyderabad",
@@ -120,6 +120,18 @@
       "difficulty": "Med",
       "volume": "High",
       "target_page": "/conditions/spinal-stenosis-treatment-hyderabad"
+    },
+    {
+      "term": "neurosurgeon kondapur",
+      "difficulty": "Low",
+      "volume": "Med",
+      "target_page": "/locations/neurosurgeon-kondapur"
+    },
+    {
+      "term": "neurosurgeon kothapet",
+      "difficulty": "Low",
+      "volume": "Med",
+      "target_page": "/locations/neurosurgeon-kothapet"
     }
   ]
 }

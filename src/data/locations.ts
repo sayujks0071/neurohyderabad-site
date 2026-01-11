@@ -242,6 +242,38 @@ export const locations: LocationData[] = [
     areaServedName: "Nizampet",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS
+  },
+  {
+    id: "kondapur",
+    name: "Dr Sayuj Krishnan - Neurosurgeon near Kondapur",
+    canonical_display_name: CANONICAL_PHYSICIAN_NAME,
+    slug: "locations/neurosurgeon-kondapur",
+    address: YASHODA_MALAKPET_ADDRESS,
+    telephone: CANONICAL_TELEPHONE,
+    whatsapp: CANONICAL_WHATSAPP,
+    directions_url: YASHODA_DIRECTIONS,
+    google_maps_place_url: CANONICAL_MAPS_URL,
+    embed_url: REPO_EMBED,
+    geo: YASHODA_GEO,
+    areaServedName: "Kondapur",
+    top_services_slugs: DEFAULT_SERVICES,
+    top_conditions_slugs: DEFAULT_CONDITIONS
+  },
+  {
+    id: "kothapet",
+    name: "Dr Sayuj Krishnan - Neurosurgeon near Kothapet",
+    canonical_display_name: CANONICAL_PHYSICIAN_NAME,
+    slug: "locations/neurosurgeon-kothapet",
+    address: YASHODA_MALAKPET_ADDRESS,
+    telephone: CANONICAL_TELEPHONE,
+    whatsapp: CANONICAL_WHATSAPP,
+    directions_url: YASHODA_DIRECTIONS,
+    google_maps_place_url: CANONICAL_MAPS_URL,
+    embed_url: REPO_EMBED,
+    geo: YASHODA_GEO,
+    areaServedName: "Kothapet",
+    top_services_slugs: DEFAULT_SERVICES,
+    top_conditions_slugs: DEFAULT_CONDITIONS
   }
 ];
 
@@ -252,4 +284,3 @@ export function getLocationById(id: string): LocationData | undefined {
 export function getLocationBySlug(slug: string): LocationData | undefined {
   return locations.find(loc => loc.slug === slug);
 }
-// Touched to ensure git diff
