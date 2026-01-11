@@ -24,15 +24,16 @@ export default function BookingCalendarEmbed({
       <div className="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto">
         <Calendar className="w-8 h-8 text-blue-600" />
       </div>
-      <div className="space-y-3">
-        <h3 className="text-2xl font-semibold text-slate-900">
-          Book your appointment in seconds
+
+      <div className="space-y-2">
+        <h3 className="text-xl font-semibold text-slate-900">
+          Book Your Appointment Online
         </h3>
-        <p className="text-sm md:text-base text-slate-600">
-          Click below to open our secure booking assistant. Choose a slot, share
-          your details, and our care team will confirm the appointment.
+        <p className="text-slate-600 max-w-md mx-auto">
+          Our secure booking assistant is hosted on Google. Click the button below to open the calendar in a new secure window.
         </p>
       </div>
+
       <a
         href={url}
         target="_blank"
@@ -43,8 +44,9 @@ export default function BookingCalendarEmbed({
         <span>Open Booking App</span>
         <ExternalLink className="w-4 h-4 opacity-90 group-hover:translate-x-0.5 transition-transform" />
       </a>
+
       <p className="text-xs text-slate-500">
-        Opens in a new tab for privacy and security.
+        Opens in a new tab • Secure via Google Opal
       </p>
     </div>
   );
