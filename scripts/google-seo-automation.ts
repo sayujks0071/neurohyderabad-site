@@ -1,5 +1,4 @@
 import { google } from 'googleapis';
-import { parse } from 'path';
 
 // Define types for command line arguments
 interface CliArgs {
