@@ -14,6 +14,8 @@ import { PhysicianSchema } from "@/src/components/schema/PhysicianSchema";
 import PatientEducationVideos from '@/app/_components/PatientEducationVideos';
 import { breadcrumbJsonLd, SITE_URL as BASE_URL } from '@/src/lib/seo';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
+import OutcomeMetricsSection from '@/components/OutcomeMetricsSection';
+import RecoveryTimeline from '@/app/_components/RecoveryTimeline';
 
 const baseMetadata = makeMetadata({
   title: 'Sciatica Treatment in Hyderabad | Expert Pain Relief & Surgery',
@@ -280,6 +282,13 @@ export default function SciaticaTreatmentPage() {
           disclaimer="*Approximate cost estimates for self-pay patients at Yashoda Hospital, Malakpet. Final quote depends on room selection, insurance approval, and specific medical requirements."
         />
       </Section>
+
+      <OutcomeMetricsSection procedure="Endoscopic Discectomy" />
+
+      <RecoveryTimeline
+        title="Recovery Roadmap for Sciatica Surgery"
+        description="Most patients experience immediate leg pain relief after endoscopic discectomy. Follow this timeline to ensure a safe and lasting recovery."
+      />
 
       {/* Patient Stories Section */}
       <Section background="gray">

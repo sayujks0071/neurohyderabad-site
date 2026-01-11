@@ -1,4 +1,17 @@
-const milestones = [
+export interface RecoveryMilestone {
+  phase: string;
+  title: string;
+  highlights: string[];
+}
+
+interface RecoveryTimelineProps {
+  title?: string;
+  description?: string;
+  milestones?: RecoveryMilestone[];
+  className?: string;
+}
+
+const DEFAULT_MILESTONES: RecoveryMilestone[] = [
   {
     phase: 'Day 0 • Procedure Day',
     title: 'Mobilise within 3 hours of surgery',
@@ -46,20 +59,24 @@ const milestones = [
   }
 ];
 
-export default function RecoveryTimeline() {
+export default function RecoveryTimeline({
+  title = "What Your First Eight Weeks Look Like After Minimally Invasive Spine Surgery",
+  description = "Every patient receives a personalised rehab manual, tele-follow up schedule, and physiotherapy support. Use this timeline to set expectations and prepare your support system.",
+  milestones = DEFAULT_MILESTONES,
+  className = ""
+}: RecoveryTimelineProps) {
   return (
-    <section className="py-16 bg-slate-950 text-slate-50">
+    <section className={`py-16 bg-slate-950 text-slate-50 ${className}`}>
       <div className="container mx-auto px-4">
         <div className="max-w-5xl mx-auto">
           <span className="text-sm uppercase tracking-wide text-emerald-200 font-semibold">
             Recovery Roadmap
           </span>
           <h2 className="text-3xl font-bold mt-3 text-slate-50">
-            What Your First Eight Weeks Look Like After Minimally Invasive Spine Surgery
+            {title}
           </h2>
           <p className="text-slate-200 mt-4 max-w-3xl">
-            Every patient receives a personalised rehab manual, tele-follow up schedule, and physiotherapy support.
-            Use this timeline to set expectations and prepare your support system.
+            {description}
           </p>
 
           <div className="mt-10 relative">
