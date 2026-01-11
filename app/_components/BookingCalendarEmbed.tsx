@@ -1,7 +1,8 @@
 "use client";
 
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useRef } from "react";
 import { trackConversionOnly } from "@/src/lib/google-ads-conversion";
+import { ExternalLink, Calendar } from "lucide-react";
 
 interface BookingCalendarEmbedProps {
   url: string;
@@ -10,7 +11,6 @@ interface BookingCalendarEmbedProps {
 export default function BookingCalendarEmbed({
   url,
 }: BookingCalendarEmbedProps) {
-  const iframeRef = useRef<HTMLIFrameElement>(null);
   const hasTrackedRef = useRef(false);
 
   const trackOnce = useCallback(() => {
@@ -19,41 +19,34 @@ export default function BookingCalendarEmbed({
     trackConversionOnly();
   }, []);
 
-  useEffect(() => {
-    const handleWindowBlur = () => {
-      if (document.activeElement === iframeRef.current) {
-        // First interaction with the embedded booking app: fire the existing Ads tag.
-        trackOnce();
-      }
-    };
-
-    window.addEventListener("blur", handleWindowBlur);
-    return () => window.removeEventListener("blur", handleWindowBlur);
-  }, [trackOnce]);
-
   return (
-    <div className="space-y-3">
-      <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
-        <iframe
-          ref={iframeRef}
-          title="Appointment booking calendar"
-          src={url}
-          className="w-full h-[80vh] min-h-[720px]"
-          loading="lazy"
-        />
+    <div className="bg-white border border-slate-200 rounded-2xl shadow-sm p-8 text-center space-y-6">
+      <div className="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto">
+        <Calendar className="w-8 h-8 text-blue-600" />
       </div>
-      <p className="text-sm text-slate-600">
-        Having trouble loading the calendar?{" "}
-        <a
-          href={url}
-          target="_blank"
-          rel="noreferrer"
-          onClick={trackOnce}
-          className="text-blue-600 hover:text-blue-700 underline"
-        >
-          Open the booking app in a new tab
-        </a>
-        .
+
+      <div className="space-y-2">
+        <h3 className="text-xl font-semibold text-slate-900">
+          Book Your Appointment Online
+        </h3>
+        <p className="text-slate-600 max-w-md mx-auto">
+          Our secure booking assistant is hosted on Google. Click the button below to open the calendar in a new secure window.
+        </p>
+      </div>
+
+      <a
+        href={url}
+        target="_blank"
+        rel="noreferrer"
+        onClick={trackOnce}
+        className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-8 rounded-xl shadow-lg shadow-blue-500/30 hover:scale-[1.02] transition-transform duration-200 group"
+      >
+        <span>Open Booking App</span>
+        <ExternalLink className="w-4 h-4 opacity-90 group-hover:translate-x-0.5 transition-transform" />
+      </a>
+
+      <p className="text-xs text-slate-500">
+        Opens in a new tab • Secure via Google Opal
       </p>
     </div>
   );
