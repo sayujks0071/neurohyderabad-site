@@ -22,18 +22,34 @@ const DEFAULT_METRICS = [
 
 export default function OutcomeMetricsSection({ procedure }: OutcomeMetricsSectionProps) {
   return (
-    <section className="mb-12 rounded-2xl border border-blue-100 bg-white p-6 shadow-sm">
-      <h2 className="text-2xl font-semibold text-blue-800 mb-6">Outcome metrics for {procedure}</h2>
+    <section className="mb-12 py-4" aria-labelledby="outcome-metrics-title">
+      <h2
+        id="outcome-metrics-title"
+        className="text-2xl md:text-3xl font-bold text-slate-900 mb-8 text-center md:text-left"
+      >
+        Outcome metrics for {procedure}
+      </h2>
+
       <div className="grid gap-6 md:grid-cols-3">
         {DEFAULT_METRICS.map((metric) => (
-          <div key={metric.label} className="rounded-xl bg-blue-50 p-5">
-            <p className="text-sm font-medium text-blue-700">{metric.label}</p>
-            <p className="text-3xl font-bold text-blue-900 mt-2">{metric.value}</p>
-            <p className="text-xs text-blue-700 mt-3 leading-5">{metric.description}</p>
+          <div
+            key={metric.label}
+            className="relative bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
+          >
+            <p className="text-sm font-bold text-blue-600 uppercase tracking-wider mb-2">
+              {metric.label}
+            </p>
+            <p className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-3">
+              {metric.value}
+            </p>
+            <p className="text-sm text-slate-600 leading-relaxed font-medium">
+              {metric.description}
+            </p>
           </div>
         ))}
       </div>
-      <p className="mt-6 text-xs text-gray-500">
+
+      <p className="mt-8 text-xs text-slate-500 text-center md:text-left max-w-4xl">
         Metrics are derived from internal audit data (rolling 12 months) and adjusted for case-mix. Individual recovery varies.
       </p>
     </section>
