@@ -60,6 +60,8 @@ const PatientPortal = () => {
     type: null as AppointmentType | null,
     date: "",
     time: "",
+    painScore: 5,
+    mriScanAvailable: false,
   });
 
   const clinicName = "Dr. Sayuj Krishnan | Yashoda Hospitals, Malakpet";
@@ -127,6 +129,8 @@ const PatientPortal = () => {
     const reasonParts = [
       `Appointment Type: ${formData.type}`,
       `Symptoms: ${formData.symptoms}`,
+      `Pain Score: ${formData.painScore}/10`,
+      `MRI Available: ${formData.mriScanAvailable ? "Yes" : "No"}`,
     ];
     if (triageSummary) {
       reasonParts.push(`AI Triage Summary: ${triageSummary}`);
@@ -150,6 +154,8 @@ const PatientPortal = () => {
           appointmentDate: formData.date,
           appointmentTime: formData.time,
           reason: reasonParts.join("\n"),
+          painScore: formData.painScore,
+          mriScanAvailable: formData.mriScanAvailable,
         }),
       });
 
@@ -374,6 +380,8 @@ const PatientPortal = () => {
                   type: null,
                   date: "",
                   time: "",
+                  painScore: 5,
+                  mriScanAvailable: false,
                 });
                 setNearbyCentersResult(null);
                 setRefinementResult(null);
@@ -665,6 +673,66 @@ const PatientPortal = () => {
                     className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none text-base leading-relaxed bg-slate-50 focus:bg-white transition-colors resize-none"
                     placeholder="Describe your pain, location, duration, and any triggers..."
                   />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">
+                    Pain Intensity (1-10)
+                  </label>
+                  <div className="flex items-center gap-4">
+                    <span className="text-sm font-bold text-slate-400">1</span>
+                    <input
+                      type="range"
+                      min="1"
+                      max="10"
+                      step="1"
+                      value={formData.painScore}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          painScore: Number(e.target.value),
+                        })
+                      }
+                      className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                    />
+                    <span className="text-sm font-bold text-slate-400">10</span>
+                  </div>
+                  <div className="text-center mt-2">
+                    <span
+                      className={`inline-block px-3 py-1 rounded-lg text-sm font-bold ${
+                        formData.painScore <= 3
+                          ? "bg-green-100 text-green-700"
+                          : formData.painScore <= 7
+                          ? "bg-yellow-100 text-yellow-700"
+                          : "bg-red-100 text-red-700"
+                      }`}
+                    >
+                      Score: {formData.painScore}
+                      {formData.painScore >= 8 && " (Severe)"}
+                      {formData.painScore <= 3 && " (Mild)"}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex items-center p-4 bg-slate-50 rounded-xl border border-slate-200">
+                  <input
+                    type="checkbox"
+                    id="mriScanAvailable"
+                    checked={formData.mriScanAvailable}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        mriScanAvailable: e.target.checked,
+                      })
+                    }
+                    className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500 border-gray-300"
+                  />
+                  <label
+                    htmlFor="mriScanAvailable"
+                    className="ml-3 text-sm font-medium text-slate-700 cursor-pointer select-none"
+                  >
+                    I have recent MRI/CT Scan reports
+                  </label>
                 </div>
 
                 {refinementResult && (

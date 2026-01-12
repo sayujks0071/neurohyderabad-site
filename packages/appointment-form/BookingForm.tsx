@@ -48,6 +48,8 @@ const schema: yup.ObjectSchema<BookingData> = yup
       .string()
       .required("Reason for visit is required")
       .min(10, "Please provide more details (min 10 characters)"),
+    painScore: yup.number().optional(),
+    mriScanAvailable: yup.boolean().optional(),
   })
   .required();
 
@@ -60,6 +62,8 @@ const defaultValues: BookingData = {
   appointmentDate: "",
   appointmentTime: "",
   reason: "",
+  painScore: undefined,
+  mriScanAvailable: undefined,
 };
 
 const availableTimes = [

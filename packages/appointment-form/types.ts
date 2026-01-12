@@ -7,6 +7,8 @@ export interface BookingData {
   appointmentDate: string;
   appointmentTime: string;
   reason: string;
+  painScore?: number;
+  mriScanAvailable?: boolean;
 }
 
 export interface EmailResult {
