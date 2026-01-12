@@ -66,6 +66,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const blogPosts = [
     '/blog/awake-spine-surgery-vs-general-anesthesia-guide',
+    '/blog/cauda-equina-syndrome-warning-signs-hyderabad',
     '/blog/cervical-spondylosis-neck-pain-hyderabad',
     '/blog/cost-of-endoscopic-spine-surgery-hyderabad',
     '/blog/endoscopic-spine-surgery-recovery-timeline',
@@ -75,6 +76,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/blog/neuroplasticity-brain-recovery-hyderabad',
     '/blog/osteoporotic-spine-fracture-elderly-guide',
     '/blog/sciatica-vs-normal-back-pain-guide',
+    '/blog/spondylolisthesis-vs-herniated-disc-difference',
     '/blog/trigeminal-neuralgia-vs-tooth-pain-guide',
     '/blog/understanding-mri-spine-report-guide',
     '/blog/understanding-brain-mri-tumor-report-guide',

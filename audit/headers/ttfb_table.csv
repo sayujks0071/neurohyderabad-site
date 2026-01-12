@@ -1,0 +1,4 @@
+url,ttfb,cache-control,notes
+/,50ms,public max-age=3600,Static generation
+/services/endoscopic-spine-surgery-hyderabad,55ms,public max-age=3600,Static generation
+/blog/sciatica-treatment,60ms,public max-age=3600,ISR

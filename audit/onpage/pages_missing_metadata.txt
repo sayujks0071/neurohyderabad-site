@@ -1,0 +1,8 @@
+app/(service-pages)/[procedure]/page.tsx missing metadata
+app/patient-stories/[slug]/page.tsx missing metadata
+app/blog/page/[page]/page.tsx missing metadata
+app/brain-tumor-surgery/page.tsx missing metadata
+app/conditions/[conditionSlug]/page.tsx missing metadata
+app/conditions/a-z/[slug]/page.tsx missing metadata
+app/near/[area]/page.tsx missing metadata
+app/knowledge-base/page.tsx missing metadata
