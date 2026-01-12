@@ -1,0 +1,68 @@
+import { SITE_URL } from '@/src/lib/seo';
+import { getLocationById } from '@/src/data/locations';
+
+export default function AppointmentSchema() {
+  const malakpet = getLocationById('malakpet');
+  if (!malakpet) return null;
+
+  // The user requested a specific JSON-LD structure for the booking page.
+  // We use a graph to include both Physician and MedicalClinic entities.
+  const schema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Physician",
+        "name": "Dr. Sayuj Krishnan",
+        "medicalSpecialty": "Neurosurgeon",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": malakpet.address.streetAddress,
+          "addressLocality": malakpet.address.addressLocality,
+          "addressRegion": malakpet.address.addressRegion,
+          "postalCode": malakpet.address.postalCode,
+          "addressCountry": malakpet.address.addressCountry
+        },
+        "availableService": [
+          "Neurosurgery",
+          "Spine Surgery",
+          "Brain Tumor Surgery"
+        ],
+        "url": `${SITE_URL}/appointments`,
+        "telephone": malakpet.telephone,
+        // Using the v2 image as it's the specific resized asset mentioned in memory
+        "image": `${SITE_URL}/images/dr-sayuj-krishnan-portrait-v2.jpg`,
+        "priceRange": "$$",
+        "worksFor": {
+          "@id": `${SITE_URL}/appointments#clinic`
+        }
+      },
+      {
+        "@type": "MedicalClinic",
+        "@id": `${SITE_URL}/appointments#clinic`,
+        "name": "Yashoda Hospitals, Malakpet",
+        "telephone": malakpet.telephone,
+        "url": malakpet.google_maps_place_url, // Using map URL as website URL for the clinic entity context if Yashoda specific URL is not desired
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": malakpet.address.streetAddress,
+          "addressLocality": malakpet.address.addressLocality,
+          "addressRegion": malakpet.address.addressRegion,
+          "postalCode": malakpet.address.postalCode,
+          "addressCountry": malakpet.address.addressCountry
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": malakpet.geo?.latitude,
+            "longitude": malakpet.geo?.longitude
+        }
+      }
+    ]
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
