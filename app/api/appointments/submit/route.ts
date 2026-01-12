@@ -109,6 +109,18 @@ function parseBookingData(payload: unknown): BookingData {
     throw new ValidationError("Reason must be at least 10 characters.");
   }
 
+  let painScore: number | undefined;
+  if (typeof raw.painScore === "number") {
+    painScore = raw.painScore;
+  } else if (raw.painScore) {
+    painScore = Number(raw.painScore);
+  }
+
+  let mriScanAvailable: boolean | undefined;
+  if (typeof raw.mriScanAvailable === "boolean") {
+    mriScanAvailable = raw.mriScanAvailable;
+  }
+
   return {
     patientName,
     email,
@@ -118,6 +130,8 @@ function parseBookingData(payload: unknown): BookingData {
     appointmentDate,
     appointmentTime,
     reason,
+    painScore,
+    mriScanAvailable,
   };
 }
 
@@ -167,6 +181,8 @@ export async function POST(request: Request) {
         age: booking.age,
         gender: booking.gender,
         bookingReason: booking.reason,
+        painScore: booking.painScore,
+        mriScanAvailable: booking.mriScanAvailable,
       },
     }).catch((error) => {
       console.error("[appointments/submit] Failed to add lead to CRM:", error);

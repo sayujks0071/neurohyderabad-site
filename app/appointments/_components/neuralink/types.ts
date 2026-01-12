@@ -52,6 +52,8 @@ export interface Appointment {
   aiTriageConcerns?: string[];
   fullAiAnalysis?: string;
   reports?: Report[];
+  painScore?: number;
+  mriScanAvailable?: boolean;
 }
 
 export interface TimeSlot {
