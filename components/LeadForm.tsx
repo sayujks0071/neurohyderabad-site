@@ -51,6 +51,7 @@ export default function LeadForm() {
 
   const {
     register,
+    reset,
     handleSubmit,
     control,
     formState: { errors, isSubmitting },
@@ -90,6 +91,7 @@ export default function LeadForm() {
       }
 
       setIsSubmitted(true);
+      reset();
     } catch (err: any) {
       console.error("Submission error:", err);
       setSubmitError(err.message || "An unexpected error occurred. Please try again.");
