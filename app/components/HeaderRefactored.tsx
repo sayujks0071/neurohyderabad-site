@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import SearchPlaceholder from './SearchPlaceholder';
@@ -75,6 +76,7 @@ const NAV_ITEMS: NavItem[] = [
 ];
 
 export default function HeaderRefactored() {
+  const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const sentinelRef = useRef<HTMLDivElement>(null);
@@ -162,32 +164,40 @@ export default function HeaderRefactored() {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-8" aria-label="Main navigation">
-            {NAV_ITEMS.map((item) => (
-              <div key={item.href} className="relative group">
-                <Link
-                  href={item.href}
-                  className="text-[var(--color-text-primary)] hover:text-[var(--color-primary-500)] transition-colors font-medium text-sm py-2 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)] focus:ring-offset-2 rounded"
-                >
-                  {item.label}
-                </Link>
-                {item.dropdown && (
-                  <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-[var(--color-border)] opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-200 p-4">
-                    <ul className="space-y-2">
-                      {item.dropdown.map((link) => (
-                        <li key={link.href}>
-                          <Link
-                            href={link.href}
-                            className="block px-4 py-2 text-sm text-[var(--color-text-primary)] hover:bg-[var(--color-primary-50)] hover:text-[var(--color-primary-700)] rounded transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)]"
-                          >
-                            {link.label}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
-            ))}
+            {NAV_ITEMS.map((item) => {
+              const isActive = pathname === item.href || (item.href !== '/' && pathname?.startsWith(item.href));
+              return (
+                <div key={item.href} className="relative group">
+                  <Link
+                    href={item.href}
+                    className={`transition-colors font-medium text-sm py-2 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)] focus:ring-offset-2 rounded ${
+                      isActive
+                        ? 'text-[var(--color-primary-500)]'
+                        : 'text-[var(--color-text-primary)] hover:text-[var(--color-primary-500)]'
+                    }`}
+                    aria-current={isActive ? 'page' : undefined}
+                  >
+                    {item.label}
+                  </Link>
+                  {item.dropdown && (
+                    <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-[var(--color-border)] opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-200 p-4">
+                      <ul className="space-y-2">
+                        {item.dropdown.map((link) => (
+                          <li key={link.href}>
+                            <Link
+                              href={link.href}
+                              className="block px-4 py-2 text-sm text-[var(--color-text-primary)] hover:bg-[var(--color-primary-50)] hover:text-[var(--color-primary-700)] rounded transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)]"
+                            >
+                              {link.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </nav>
 
           {/* Desktop CTA & Search */}
@@ -318,32 +328,40 @@ export default function HeaderRefactored() {
 
             {/* Mobile Menu Items */}
             <div className="flex-1 overflow-y-auto p-4 space-y-1">
-              {NAV_ITEMS.map((item) => (
-                <div key={item.href} className="py-2">
-                  <Link
-                    href={item.href}
-                    onClick={toggleMobileMenu}
-                    className="block px-4 py-3 text-base font-medium text-[var(--color-text-primary)] hover:bg-[var(--color-primary-50)] hover:text-[var(--color-primary-700)] rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)]"
-                  >
-                    {item.label}
-                  </Link>
-                  {item.dropdown && (
-                    <ul className="mt-2 space-y-1 pl-4">
-                      {item.dropdown.map((link) => (
-                        <li key={link.href}>
-                          <Link
-                            href={link.href}
-                            onClick={toggleMobileMenu}
-                            className="block px-4 py-2 text-sm text-[var(--color-text-secondary)] hover:bg-[var(--color-primary-50)] hover:text-[var(--color-primary-700)] rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)]"
-                          >
-                            {link.label}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              ))}
+              {NAV_ITEMS.map((item) => {
+                const isActive = pathname === item.href || (item.href !== '/' && pathname?.startsWith(item.href));
+                return (
+                  <div key={item.href} className="py-2">
+                    <Link
+                      href={item.href}
+                      onClick={toggleMobileMenu}
+                      className={`block px-4 py-3 text-base font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)] ${
+                        isActive
+                          ? 'text-[var(--color-primary-500)] bg-[var(--color-primary-50)]'
+                          : 'text-[var(--color-text-primary)] hover:bg-[var(--color-primary-50)] hover:text-[var(--color-primary-700)]'
+                      }`}
+                      aria-current={isActive ? 'page' : undefined}
+                    >
+                      {item.label}
+                    </Link>
+                    {item.dropdown && (
+                      <ul className="mt-2 space-y-1 pl-4">
+                        {item.dropdown.map((link) => (
+                          <li key={link.href}>
+                            <Link
+                              href={link.href}
+                              onClick={toggleMobileMenu}
+                              className="block px-4 py-2 text-sm text-[var(--color-text-secondary)] hover:bg-[var(--color-primary-50)] hover:text-[var(--color-primary-700)] rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)]"
+                            >
+                              {link.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                );
+              })}
             </div>
 
             {/* Mobile CTA */}
