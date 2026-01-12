@@ -1,14 +1,13 @@
-# SEO Changelog - 2026-01-10
+# Changelog - 2026-01-10
 
-## New Pages
-- Created `/locations/neurosurgeon-kondapur` (Gap fill for Hitech City neighbor)
-- Created `/locations/neurosurgeon-kothapet` (Gap fill for Malakpet neighbor)
+## Research Findings
+*   Verified that "Endoscopic Spine Surgery" is a highly competitive term with major hospitals bidding on it.
+*   Identified "Uniportal" and "Single Hole" as specific layman/technical terms that are less saturated but highly relevant for Dr. Sayuj's expertise.
+*   "Cost" intent is high, addressed in existing pages.
 
-## Data Updates
-- Updated `src/data/locations.ts` with Kondapur and Kothapet metadata.
-- Updated `seo/keyword-registry.json` with new location keywords.
-- Updated `seo/page-keyword-map.json` with new page mappings.
-
-## Insights
-- "Kondapur" is a high-growth area with significant IT population looking for premium care.
-- "Kothapet" captures local residential traffic near the clinic (Malakpet).
+## Actions Taken
+1.  **New Page Created**: `/services/uniportal-endoscopic-spine-surgery-hyderabad`
+    *   Targets: `uniportal endoscopic spine surgery`, `stitchless spine surgery`.
+    *   Structure: Based on `endoscopic-spine-surgery-hyderabad` but tailored for the specific technique.
+2.  **Registry Updated**: Added new keywords and mapped them to the new page.
+3.  **Sources Updated**: Added references for Uniportal Endoscopic Surgery to `app/services/sources.ts`.
