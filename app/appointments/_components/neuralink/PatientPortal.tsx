@@ -50,7 +50,7 @@ const PatientPortal = () => {
   const [step, setStep] = useState(1);
   const [confirmationMessage, setConfirmationMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [formData, setFormData] = useState({
+  const INITIAL_FORM_STATE = {
     name: "",
     email: "",
     phone: "",
@@ -62,7 +62,10 @@ const PatientPortal = () => {
     time: "",
     painScore: 5,
     mriScanAvailable: false,
-  });
+  };
+
+  const [formData, setFormData] = useState(INITIAL_FORM_STATE);
+  const [lastSubmittedData, setLastSubmittedData] = useState(INITIAL_FORM_STATE);
 
   const clinicName = "Dr. Sayuj Krishnan | Yashoda Hospitals, Malakpet";
   const clinicAddress = `${CLINIC.street}, ${CLINIC.city}, ${CLINIC.region} ${CLINIC.postalCode}`;
@@ -168,6 +171,14 @@ const PatientPortal = () => {
       setConfirmationMessage(payload?.confirmationMessage || null);
       trackConversionOnly();
 
+      setLastSubmittedData(formData);
+      setFormData(INITIAL_FORM_STATE);
+      setStep(1);
+      setNearbyCentersResult(null);
+      setRefinementResult(null);
+      setInterpretationResult(null);
+      setReportText("");
+
       setIsSubmitted(true);
       window.scrollTo(0, 0);
     } catch (error) {
@@ -224,7 +235,7 @@ const PatientPortal = () => {
               Appointment Request Received
             </h2>
             <p className="text-slate-500 text-lg mb-6">
-              Our coordinator will call you shortly to confirm your requested slot.
+              Appointment request received. Please bring any MRI/CT scans with you. We will confirm via phone shortly.
             </p>
             {confirmationMessage && (
               <div className="max-w-2xl mx-auto mb-10 bg-slate-50 border border-slate-200 rounded-3xl p-6 text-left">
@@ -245,11 +256,11 @@ const PatientPortal = () => {
                   <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">
                     Patient
                   </p>
-                  <p className="font-bold text-slate-900 text-lg">{formData.name}</p>
+                  <p className="font-bold text-slate-900 text-lg">{lastSubmittedData.name}</p>
                   <p className="text-sm text-slate-500">
-                    {formData.age} yrs •{" "}
-                    {formData.gender.charAt(0).toUpperCase() +
-                      formData.gender.slice(1)}
+                    {lastSubmittedData.age} yrs •{" "}
+                    {lastSubmittedData.gender.charAt(0).toUpperCase() +
+                      lastSubmittedData.gender.slice(1)}
                   </p>
                 </div>
                 <div>
@@ -257,11 +268,11 @@ const PatientPortal = () => {
                     Consultation
                   </p>
                   <p className="font-bold text-slate-900 text-lg">
-                    {formData.type}
+                    {lastSubmittedData.type}
                   </p>
                   <p className="text-sm text-slate-500">
-                    {new Date(formData.date).toLocaleDateString("en-IN")} •{" "}
-                    {formData.time}
+                    {new Date(lastSubmittedData.date).toLocaleDateString("en-IN")} •{" "}
+                    {lastSubmittedData.time}
                   </p>
                 </div>
               </div>
@@ -369,25 +380,8 @@ const PatientPortal = () => {
             <button
               onClick={() => {
                 setIsSubmitted(false);
-                setStep(1);
-                setFormData({
-                  name: "",
-                  email: "",
-                  phone: "",
-                  age: "",
-                  gender: "male",
-                  symptoms: "",
-                  type: null,
-                  date: "",
-                  time: "",
-                  painScore: 5,
-                  mriScanAvailable: false,
-                });
-                setNearbyCentersResult(null);
-                setRefinementResult(null);
-                setInterpretationResult(null);
-                setReportText("");
                 setConfirmationMessage(null);
+                // Form data and state were already reset on submit
               }}
               className="text-slate-400 hover:text-slate-600 font-bold text-sm transition-colors"
             >
@@ -801,7 +795,7 @@ const PatientPortal = () => {
                   ) : isSyncing ? (
                     <>
                       <Cloud className="w-5 h-5 animate-bounce mr-2" />
-                      Submitting...
+                      Sending...
                     </>
                   ) : (
                     <>
