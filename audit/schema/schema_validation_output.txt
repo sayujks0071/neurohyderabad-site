@@ -1,0 +1,20 @@
+🔍 Validating JSON-LD schemas...
+✅ awake-brain-surgery-hyderabad.jsonld
+✅ best-neurosurgeon-in-hyderabad.jsonld
+✅ brain-tumor-surgeon-hyderabad.jsonld
+✅ endoscopic-cervical-spine-surgery-hyderabad.jsonld
+✅ endoscopic-spine-surgery-hyderabad.jsonld
+✅ pediatric-neurosurgeon-hyderabad.jsonld
+
+📊 Schema Validation Results:
+   Total files: 6
+   Valid files: 6
+   Invalid files: 0
+   Total errors: 0
+
+✅ All schemas are valid!
+npm notice
+npm notice New minor version of npm available! 11.6.2 -> 11.7.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.7.0
+npm notice To update run: npm install -g npm@11.7.0
+npm notice

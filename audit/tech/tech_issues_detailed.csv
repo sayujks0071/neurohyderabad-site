@@ -1,0 +1,5 @@
+url,issue_type,notes
+/sitemap.xml,Phantom URLs,Contains /blog/... URLs that do not exist as MDX files (e.g., /blog/endoscopic-spine-surgery-cost-hyderabad).
+/robots.txt,Optimized,Looks good.
+/app/conditions/[conditionSlug],Missing Metadata,Dynamic route needs generateMetadata.
+/app/brain-tumor-surgery,Missing Metadata,Root level page needs metadata.

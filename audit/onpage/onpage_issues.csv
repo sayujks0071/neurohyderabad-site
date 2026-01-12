@@ -1,6 +1,3 @@
 url,issue_type,severity,recommended_fix
-https://www.drsayuj.info/,metadata,LOW,"Title and description look good. H1 is present."
-https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad,metadata,MEDIUM,"Keywords list in metadata is very long (keyword stuffing risk?). Review keywords."
-https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad,internal_link,LOW,"Good internal linking structure with Breadcrumbs and ServiceLocationLinks."
-https://www.drsayuj.info/blog/*,metadata,MEDIUM,"Blog posts in sitemap.ts but potentially missing MDX files or phantom entries (needs verification)."
-https://www.drsayuj.info/,schema,LOW,"Uses OrganizationSchema, LocalBusinessSchema, MedicalClinicSchema, PhysicianSchema. Good coverage."
+/blog/sciatica-pain-treatment-hyderabad,duplicate_title,high,Update title to be unique
+/locations/malakpet,missing_h1,medium,Add H1 tag

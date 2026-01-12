@@ -1,0 +1,4 @@
+url,schema_type,status
+/,Physician,Present (via Global)
+/services/endoscopic-spine-surgery-hyderabad,MedicalSpecialty,Check if present
+/blog/sciatica-treatment,Article,Check author/publisher
