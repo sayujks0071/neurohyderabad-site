@@ -11,3 +11,5 @@ Analyze the SEO performance for the last 7 days.
 - Summarize the technical health of the repo.
 - Report any broken links (run broken link checker if possible).
 - Identify any "quick wins" for the next week.
+
+<!-- Jules Automation -->

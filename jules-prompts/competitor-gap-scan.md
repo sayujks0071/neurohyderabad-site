@@ -9,3 +9,5 @@ Scan the key competitors defined in `AGENTS.md` (e.g., drraveesh.com, spinesurge
 - Create a list of missing topics.
 - Prioritize them based on relevance to "Neurosurgeon in Hyderabad" and "Spine Surgery".
 - If a high-priority gap is found, draft a plan or a new page to cover it.
+
+<!-- Jules Automation -->
