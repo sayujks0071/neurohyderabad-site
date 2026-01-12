@@ -77,6 +77,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/blog/sciatica-vs-normal-back-pain-guide',
     '/blog/trigeminal-neuralgia-vs-tooth-pain-guide',
     '/blog/understanding-mri-spine-report-guide',
+    '/blog/understanding-brain-mri-tumor-report-guide',
   ];
 
   const symptomPages = [
