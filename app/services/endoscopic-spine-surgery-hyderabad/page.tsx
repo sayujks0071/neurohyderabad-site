@@ -125,6 +125,47 @@ const RECOVERY_STEPS = [
   { time: 'Week 3-4', milestone: 'Resume driving and full-time office work.' },
 ];
 
+const SUCCESS_RATES = [
+  {
+    condition: "Lumbar Disc Herniation",
+    rate: "90-95%",
+    description: "High success in relieving sciatica pain with low recurrence rates compared to open surgery."
+  },
+  {
+    condition: "Spinal Stenosis",
+    rate: "85-90%",
+    description: "Effective decompression of the spinal canal with significant improvement in walking distance."
+  },
+  {
+    condition: "Cervical Disc Herniation",
+    rate: "90%+",
+    description: "Excellent outcomes for arm pain (radiculopathy) with minimal neck muscle trauma."
+  }
+];
+
+const ADVANCED_TECHNIQUES = [
+  {
+    title: "Transforaminal Endoscopy (TESS)",
+    description: "Best for slip disc (herniation) affecting the nerve root. Accessed through the side (foramen) without cutting bone, avoiding instability."
+  },
+  {
+    title: "Interlaminar Endoscopy (ILESS)",
+    description: "Ideal for L5-S1 herniations and spinal stenosis. Accessed from the back through a tiny window, clearing thickened ligaments."
+  },
+  {
+    title: "Endoscopic Cervical Decompression",
+    description: "Posterior approach for neck disc herniations, avoiding fusion and preserving neck mobility."
+  },
+  {
+    title: "Endoscopic Foraminal Decompression",
+    description: "Targeted widening of the nerve exit canal to relieve 'pinched nerves' caused by bone spurs or collapse."
+  },
+  {
+    title: "Endoscopic Lumbar Discectomy",
+    description: "Gold-standard minimally invasive removal of disc fragments pressing on nerves, allowing same-day walking."
+  }
+];
+
 // Google Business Profile JSON-LD for Endoscopic Spine Surgery
 const gbpSchema = {
   "@context": "https://schema.org",
@@ -188,7 +229,7 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
             </h1>
             <AuthorByline
               publishedOn="2025-09-05"
-              updatedOn="2025-10-19"
+              updatedOn="2026-01-10"
               className="mb-6"
             />
             <p className="text-lg text-gray-700 mb-6">
@@ -280,18 +321,33 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
 
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-blue-900 mb-6">Advanced Endoscopic Techniques We Use</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
-              <h3 className="text-xl font-semibold text-blue-800 mb-3">Transforaminal Endoscopy (TESS)</h3>
-              <p className="text-gray-700">
-                Best for <strong>slip disc (herniation)</strong> affecting the nerve root. We enter through the side (foramen) without cutting bone, avoiding instability. This is the true "stitch-less" spine surgery.
-              </p>
-            </div>
-            <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
-              <h3 className="text-xl font-semibold text-blue-800 mb-3">Interlaminar Endoscopy (ILESS)</h3>
-              <p className="text-gray-700">
-                Ideal for <strong>L5-S1 disc herniations</strong> and <strong>spinal stenosis</strong>. We access the spine from the back through a tiny window between vertebrae, allowing us to clear thickened ligaments pressing on the nerves.
-              </p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {ADVANCED_TECHNIQUES.map((tech) => (
+              <div key={tech.title} className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                <h3 className="text-lg font-semibold text-blue-800 mb-2">{tech.title}</h3>
+                <p className="text-sm text-gray-700 leading-relaxed">
+                  {tech.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-blue-900 mb-6">Clinical Success Rates</h2>
+          <div className="bg-blue-900 rounded-2xl p-8 text-white shadow-xl">
+            <p className="mb-8 text-blue-100 max-w-3xl">
+              Endoscopic spine surgery has evolved to become the gold standard for many spinal conditions.
+              Success is defined as significant pain relief, return to function, and no need for further surgery.
+            </p>
+            <div className="grid md:grid-cols-3 gap-8">
+              {SUCCESS_RATES.map((item) => (
+                <div key={item.condition} className="bg-blue-800/50 rounded-xl p-6 border border-blue-700 backdrop-blur-sm">
+                  <div className="text-4xl font-bold text-blue-300 mb-2">{item.rate}</div>
+                  <div className="text-lg font-semibold text-white mb-2">{item.condition}</div>
+                  <p className="text-sm text-blue-200 leading-relaxed">{item.description}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -408,7 +464,7 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
         <LocalPathways mode="service" />
 
         <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
-        <ReviewedBy lastReviewed="2025-10-19" />
+        <ReviewedBy lastReviewed="2026-01-10" />
       </main>
     </>
   );
