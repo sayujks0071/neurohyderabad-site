@@ -194,7 +194,7 @@ export default function JubileeHillsNeurosurgeonPage() {
         </div>
       </section>
 
-       <LocalPathways location={location} />
+       <LocalPathways mode="location" locationId={location.id} />
     </main>
   );
 }
