@@ -15,9 +15,7 @@ import { SITE_URL } from "../src/lib/seo";
 // import { analytics } from "../src/lib/analytics";
 import DoctorCard from "./_components/DoctorCard";
 import TrustSignals from "./_components/TrustSignals";
-import TrustBridgeTracker from "./_components/TrustBridgeTracker";
-import TrustSignalViewportTracker from "./_components/TrustSignalViewportTracker";
-import UserJourneyTracker from "./_components/UserJourneyTracker";
+import HomeTrackers from "./_components/HomeTrackers";
 import TrustBridgeLink from "./_components/TrustBridgeLink";
 import { mediaPublications } from "../src/content/media";
 import Button from "./_components/Button";
@@ -210,9 +208,7 @@ export default function Home() {
       <FAQPageSchema faqs={HOME_FAQS} pageUrl={HOME_CANONICAL} />
 
       {/* <ScrollDepthTracker pageSlug="/" /> */}
-      <TrustBridgeTracker />
-      <TrustSignalViewportTracker />
-      <UserJourneyTracker />
+      <HomeTrackers />
       <div className="min-h-screen bg-white">
         {/* Hero Section - LCP Optimized */}
         <header className="home-hero text-white">
