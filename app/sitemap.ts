@@ -47,6 +47,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/neurosurgeon-malakpet',
     '/locations/malakpet',
     '/locations/lb-nagar',
+    '/locations/neurosurgeon-kothapet',
     '/locations/brain-spine-surgeon-jubilee-hills',
     '/locations/brain-spine-surgeon-banjara-hills',
     '/locations/brain-spine-surgeon-hitec-city',

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import {
   Clock,
   ChevronLeft,
+  ChevronRight,
   Brain,
   Activity,
   Check,
