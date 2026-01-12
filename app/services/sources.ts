@@ -182,6 +182,16 @@ const SERVICE_SOURCES: Record<string, ServiceSource[]> = {
       href: "https://www.spine.org/ResearchClinicalCare/QualityImprovement/ClinicalGuidelines",
     },
   ],
+  "uniportal-endoscopic-spine-surgery-hyderabad": [
+    {
+      "label": "Journal of Spine Surgery – Uniportal vs Biportal Endoscopy",
+      "href": "https://jss.amegroups.org/article/view/5253/html",
+    },
+    {
+      "label": "Neurospine – Evolution of Uniportal Endoscopic Spine Surgery",
+      "href": "https://www.e-neurospine.org/journal/view.php?number=2223",
+    },
+  ],
 };
 
 export function getServiceSources(slug: string): ServiceSource[] {

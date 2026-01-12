@@ -1,20 +1,17 @@
-# Cluster Mapping - 2026-01-10
+# Clusters & Mapping - 2026-01-10
 
-## Location Clusters (High Priority)
-- **Kondapur**: Target `locations/neurosurgeon-kondapur`
-  - `neurosurgeon kondapur`
-  - `brain doctor kondapur`
-  - `spine specialist near kondapur`
-- **Kothapet**: Target `locations/neurosurgeon-kothapet`
-  - `neurosurgeon kothapet`
-  - `spine doctor kothapet`
-  - `neuro physician near kothapet`
+## Cluster: Endoscopic Spine Surgery (Core)
+*   **Primary URL**: `/services/endoscopic-spine-surgery-hyderabad`
+*   **Keywords**: `endoscopic spine surgery hyderabad`, `endoscopic discectomy cost hyderabad`, `keyhole spine surgery`
+*   **Action**: Maintain. Content is robust.
 
-## Procedure Clusters
-- **Decompression**: Mapped to `lumbar-laminectomy-surgery-hyderabad`
-  - `lumbar decompression surgery`
-  - `spinal decompression hyderabad`
+## Cluster: Uniportal Endoscopic Surgery (Niche Differentiator)
+*   **Primary URL**: `/services/uniportal-endoscopic-spine-surgery-hyderabad` (NEW)
+*   **Keywords**: `uniportal endoscopic spine surgery hyderabad`, `single hole spine surgery`, `stitchless spine surgery`
+*   **Action**: Create new page. This captures the segment of patients looking for the "least invasive" option explicitly.
+*   **Rationale**: Competitors use "Endoscopic" broadly. "Uniportal" is a specific technical advantage (one incision vs two/larger).
 
-## Cost Clusters
-- **Stenosis Cost**: Mapped to `spine-surgery-cost-hyderabad`
-  - `spinal stenosis surgery cost`
+## Cluster: Minimally Invasive (Broad)
+*   **Primary URL**: `/services/minimally-invasive-spine-surgery`
+*   **Keywords**: `minimally invasive spine surgery hyderabad`, `laser spine surgery hyderabad`
+*   **Action**: Maintain.

@@ -132,6 +132,24 @@
       "difficulty": "Low",
       "volume": "Med",
       "target_page": "/locations/neurosurgeon-kothapet"
+    },
+    {
+      "term": "uniportal endoscopic spine surgery hyderabad",
+      "difficulty": "Med",
+      "volume": "Low",
+      "target_page": "/services/uniportal-endoscopic-spine-surgery-hyderabad"
+    },
+    {
+      "term": "single hole spine surgery hyderabad",
+      "difficulty": "Low",
+      "volume": "Low",
+      "target_page": "/services/uniportal-endoscopic-spine-surgery-hyderabad"
+    },
+    {
+      "term": "stitchless spine surgery hyderabad",
+      "difficulty": "Med",
+      "volume": "Med",
+      "target_page": "/services/uniportal-endoscopic-spine-surgery-hyderabad"
     }
   ]
 }
