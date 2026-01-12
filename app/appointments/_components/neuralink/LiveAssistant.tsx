@@ -80,7 +80,7 @@ const LiveAssistant = ({
           },
           onmessage: async (message) => {
             const audioData =
-              message.serverContent?.modelTurn?.parts[0]?.inlineData?.data;
+              message.serverContent?.modelTurn?.parts?.[0]?.inlineData?.data;
             if (audioData && outputContextRef.current) {
               const ctx = outputContextRef.current;
               nextStartTimeRef.current = Math.max(
@@ -130,13 +130,17 @@ const LiveAssistant = ({
           speechConfig: {
             voiceConfig: { prebuiltVoiceConfig: { voiceName: "Kore" } },
           },
-          systemInstruction: `You are the NeuroLink Conversational Assistant for Dr. Sayuj's practice.
-          Your goal is to provide real-time, professional support to patients and clinical staff.
-          - If a patient is talking, help them understand neurosurgical procedures or guide them through booking.
-          - If a doctor or staff member is talking, provide concise medical context or triage summaries based on symptoms they describe.
-          - Be empathetic, extremely professional, and precise.
-          - Never diagnose, but suggest triage levels based on reported red flags like foot drop, bladder loss, or sudden severe vision changes.
-          - Keep responses relatively brief to maintain natural conversation flow.`,
+          systemInstruction: {
+            parts: [{
+              text: `You are the NeuroLink Conversational Assistant for Dr. Sayuj's practice.
+              Your goal is to provide real-time, professional support to patients and clinical staff.
+              - If a patient is talking, help them understand neurosurgical procedures or guide them through booking.
+              - If a doctor or staff member is talking, provide concise medical context or triage summaries based on symptoms they describe.
+              - Be empathetic, extremely professional, and precise.
+              - Never diagnose, but suggest triage levels based on reported red flags like foot drop, bladder loss, or sudden severe vision changes.
+              - Keep responses relatively brief to maintain natural conversation flow.`
+            }]
+          },
         },
       });
 
