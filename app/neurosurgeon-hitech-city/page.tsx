@@ -116,7 +116,7 @@ export default function Page() {
         </div>
       </section>
 
-      <LocalPathways location={location} />
+      <LocalPathways mode="location" locationId={location.id} />
     </main>
   );
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { LocationData, CANONICAL_PHYSICIAN_NAME, CANONICAL_TELEPHONE } from '@/src/data/locations';
+import { LocationData } from '@/src/data/locations';
 
 // Helper to sanitize and format JSON-LD
 const toJson = (data: any) => JSON.stringify(data, null, 2);
@@ -15,8 +15,8 @@ interface LocationSchemaProps {
   location: LocationData;
   siteUrl?: string;
   imageUrl?: string;
-  faq?: FAQItem[] | any[]; // Allow loose typing to catch legacy q/a without strict errors, but Interface above handles it.
-  breadcrumb?: any[]; // Accepting breadcrumb but ignoring it or using it if we wanted to
+  faq?: FAQItem[] | any[]; // Allow loose typing to catch legacy q/a without strict errors
+  breadcrumb?: any[]; // Accepting breadcrumb but we generate defaults if not provided (or ignore if we prefer internal logic)
 }
 
 export const LocationSchema: React.FC<LocationSchemaProps> = ({
@@ -26,20 +26,11 @@ export const LocationSchema: React.FC<LocationSchemaProps> = ({
   faq
 }) => {
 
-  // 1. Physician Schema
-  const physicianSchema = {
-    "@context": "https://schema.org",
-    "@type": "Physician",
-    "@id": `${siteUrl}/#physician`,
-    "name": CANONICAL_PHYSICIAN_NAME,
-    "url": siteUrl,
-    "image": imageUrl,
-    "telephone": CANONICAL_TELEPHONE,
-    "priceRange": "₹₹",
-    "medicalSpecialty": ["Neurological Surgery", "Spine Surgery"],
-  };
+  // Note: Physician Schema is injected globally by RootLayout via <PhysicianSchema />.
+  // We do not duplicate it here to avoid conflicting entities.
+  // We only generate MedicalClinic (linked to Physician via department) and Breadcrumb/FAQ.
 
-  // 2. MedicalClinic / LocalBusiness Schema
+  // 1. MedicalClinic / LocalBusiness Schema
   const cleanSlug = location.slug.startsWith('/') ? location.slug.slice(1) : location.slug;
   const clinicId = `${siteUrl}/${cleanSlug}#clinic`;
 
@@ -71,10 +62,18 @@ export const LocationSchema: React.FC<LocationSchemaProps> = ({
     "areaServed": {
         "@type": "Place",
         "name": location.areaServedName
-    }
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        "opens": "10:00",
+        "closes": "16:00"
+      }
+    ]
   };
 
-  // 3. BreadcrumbList Schema
+  // 2. BreadcrumbList Schema
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -100,7 +99,7 @@ export const LocationSchema: React.FC<LocationSchemaProps> = ({
     ]
   };
 
-  // 4. FAQPage Schema
+  // 3. FAQPage Schema
   const faqSchema = faq ? {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -122,10 +121,6 @@ export const LocationSchema: React.FC<LocationSchemaProps> = ({
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: toJson(physicianSchema) }}
-      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: toJson(clinicSchema) }}

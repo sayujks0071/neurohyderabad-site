@@ -23,7 +23,7 @@ export const metadata = {
     description:
       "Consult Dr. Sayuj Krishnan for full endoscopic spine and minimally invasive brain surgery in Hyderabad. OPD timings, directions, and WhatsApp booking.",
     url: "https://www.drsayuj.info/neurosurgeon-hyderabad",
-    type: "article",
+    type: "website",
     images: [
       {
         url: "https://www.drsayuj.info/images/og-default.jpg",
@@ -143,7 +143,7 @@ export default function Page() {
         </div>
       </section>
 
-      <LocalPathways location={location} />
+      <LocalPathways mode="location" locationId={location.id} />
     </main>
   );
 }
