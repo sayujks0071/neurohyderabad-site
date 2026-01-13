@@ -78,3 +78,11 @@ external/appointmentform/
 
 # HubSpot CLI config (developer-local, not needed in repo)
 hubspot.config.yml
+
+# Google Service Account credentials (NEVER commit these!)
+service_account_credentials.json
+*service-account*.json
+*credentials*.json
+!package.json
+!tsconfig.json
+!jsconfig.json

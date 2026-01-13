@@ -83,17 +83,24 @@ export async function POST(request: NextRequest) {
     const { action } = await request.json();
     
     if (action === 'ping_sitemaps') {
-      // Ping Google and Bing about updated sitemaps
-      const googlePing = `https://www.google.com/ping?sitemap=${encodeURIComponent(`${SITE_URL}/sitemap.xml`)}`;
+      // DEPRECATED: Google's unauthenticated ping endpoint was deprecated on June 26, 2023
+      // Use the Google Search Console API instead via scripts/google-seo-automation.ts
+      // Bing still supports ping, but Google requires authenticated API submission
       const bingPing = `https://www.bing.com/ping?sitemap=${encodeURIComponent(`${SITE_URL}/sitemap.xml`)}`;
       
-      // Note: In production, you would actually fetch these URLs
       return NextResponse.json({
         success: true,
-        message: 'Sitemap ping URLs generated',
-        google: googlePing,
-        bing: bingPing,
-        note: 'Visit these URLs to notify search engines of sitemap updates'
+        message: 'Sitemap notification',
+        note: 'Google ping endpoint is deprecated. Use GSC API for Google submissions.',
+        google: {
+          deprecated: true,
+          message: 'Use Google Search Console API instead',
+          script: 'scripts/google-seo-automation.ts --sitemap'
+        },
+        bing: {
+          pingUrl: bingPing,
+          note: 'Bing still supports ping endpoint'
+        }
       });
     }
     
