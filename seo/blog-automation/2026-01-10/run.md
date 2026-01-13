@@ -1,35 +1,37 @@
-# Blog Automation Run: 2026-01-10
+## Blog Automation Run: 2026-01-10
 
-## 1. Structure Discovery
-- **Platform:** Next.js App Router
-- **Content Store:** `content/blog/` (MDX)
-- **Routing:** Manual array `blogPosts` in `app/sitemap.ts`
-- **Frontmatter:** Strict schema including `slug`, `title`, `description`, `tags`, `schemaType` (MedicalWebPage), `faq`, `sources`.
+### 1. Structure Detection
+- **System:** Next.js App Router
+- **Blog Storage:** MDX files in `content/blog/`
+- **Frontmatter:** Standard YAML (slug, title, category, tags, keywords, locations, schema, faq, sources).
+- **Automation:** Detected `scripts/new-blog.ts` and `scripts/auto-blog-scheduler.ts` but chose manual creation to ensure fresh topic and strict adherence to prompt requirements.
 
-## 2. Topic Selection
-**Chosen Topic:** "Understanding Your Brain MRI Report: Benign vs. Malignant Tumor Signs"
-**Score:** 95/100
-**Rationale:**
-1.  **Patient Demand:** High anxiety moment (reading report before doctor visit). Matches high-volume queries for report terminology.
-2.  **Pattern Match:** Replicates the success of the existing "Understanding MRI Spine Report" guide.
-3.  **Gap Filling:** Brain pillar is under-served compared to Spine.
-4.  **Conversion:** Naturally leads to "Second Opinion" or "Appointment" CTA.
+### 2. Topic Selection
+- **Topic:** Awake Craniotomy: How Brain Surgery Is Performed While You Are Awake
+- **Score Rationale:**
+  - **High Value (90/100):** Addresses a specific, high-fear patient concern ("awake during surgery").
+  - **Expertise Brand:** Demonstrates advanced neurosurgical capability (Dr. Sayuj), differentiating from general surgeons.
+  - **Gap Fill:** Site has "Awake Spine" but lacked "Awake Brain" guide, despite being a core neurosurgical topic.
+  - **Keyword Potential:** "Awake craniotomy", "Awake brain surgery hyderabad".
 
-## 3. Implementation Details
-**File Created:** `content/blog/understanding-brain-mri-tumor-report-guide.mdx`
-**Sitemap Updated:** Added `/blog/understanding-brain-mri-tumor-report-guide` to `app/sitemap.ts`.
+### 3. Execution Details
+- **File:** `content/blog/awake-craniotomy-brain-tumor-guide.mdx`
+- **Internal Links Added:**
+  - `/neurosurgeon-hyderabad` (Home/Doctor)
+  - `/conditions/brain-tumor-surgery-hyderabad` (Condition)
+  - `/appointments` (Conversion)
+  - `/blog/headache-vs-brain-tumor-warning-signs` (Related Content)
+  - `/blog/understanding-brain-mri-tumor-report-guide` (Related Content)
+  - `/services/brain-tumor-surgery-hyderabad` (Service)
+- **References Used:**
+  - Mayfield Clinic
+  - Johns Hopkins Medicine
+  - AANS
+  - National Brain Tumor Society
 
-**Internal Links Added:**
-- `/symptoms/signs-of-brain-tumor` (Headaches)
-- `/services/epilepsy-surgery-hyderabad` (Seizures)
-- `/services/brain-tumor-surgery-hyderabad` (Gliomas, Meningioma, Hydrocephalus)
-- `/appointments` (Implicit via CTA component)
+### 4. Notes/Risks
+- **Risk:** None. Content is educational and conservative.
+- **Validation:** Manual review of frontmatter against existing files.
 
-**References:**
-- RadiologyInfo.org
-- American Brain Tumor Association
-- Mayfield Clinic
-
-## 4. Risks & Notes
-- **Ghost Files:** Noticed `cauda-equina-syndrome` and `spondylolisthesis` MDX files exist but are not in `app/sitemap.ts`. Should be fixed in a separate maintenance task.
-- **Linking:** Ensured links connect to both Symptoms and Service pages for better cluster strength.
+### 5. PR Information
+- **Branch:** `content/daily-blog-2026-01-10`
