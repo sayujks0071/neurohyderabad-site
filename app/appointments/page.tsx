@@ -53,6 +53,8 @@ export default function AppointmentsPage() {
   return (
     <>
       <AppointmentSchema />
+      {/* Hidden H1 for SEO and Accessibility structure (visually handled by component) */}
+      <h1 className="sr-only">Book Appointment with Dr. Sayuj Krishnan</h1>
       <NeuraLinkBookingApp />
     </>
   );
