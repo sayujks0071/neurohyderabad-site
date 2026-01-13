@@ -293,7 +293,7 @@ export default function BookingForm({
 
           <div className="mt-10 pt-6 border-t border-slate-200 text-center">
             <Button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Submitting..." : "Submit Request"}
+              {isSubmitting ? "Sending..." : "Submit Request"}
             </Button>
           </div>
         </form>
