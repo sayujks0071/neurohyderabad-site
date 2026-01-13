@@ -1,10 +1,13 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
-import { getHypertune, waitForHypertune } from '@/src/lib/hypertune/client';
+import type { getHypertune } from '@/src/lib/hypertune/client';
+
+// Define the client type based on the return type of the getHypertune function
+type HypertuneClient = ReturnType<typeof getHypertune>;
 
 interface HypertuneContextType {
-  hypertune: ReturnType<typeof getHypertune> | null;
+  hypertune: HypertuneClient | null;
   isReady: boolean;
 }
 
@@ -26,7 +29,7 @@ interface HypertuneProviderProps {
 }
 
 export default function HypertuneProvider({ children }: HypertuneProviderProps) {
-  const [hypertune, setHypertune] = useState<ReturnType<typeof getHypertune> | null>(null);
+  const [hypertune, setHypertune] = useState<HypertuneClient | null>(null);
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
@@ -34,6 +37,10 @@ export default function HypertuneProvider({ children }: HypertuneProviderProps) 
 
     async function initHypertune() {
       try {
+        // Dynamically import the client logic to avoid including the heavy Hypertune SDK
+        // in the initial shared bundle. This significantly improves First Load JS.
+        const { getHypertune, waitForHypertune } = await import('@/src/lib/hypertune/client');
+
         const client = getHypertune();
         
         if (client) {
@@ -52,7 +59,12 @@ export default function HypertuneProvider({ children }: HypertuneProviderProps) 
       }
     }
 
-    initHypertune();
+    // Use requestIdleCallback if available to further defer execution off the critical path
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      window.requestIdleCallback(() => initHypertune());
+    } else {
+      setTimeout(initHypertune, 0);
+    }
 
     return () => {
       mounted = false;
