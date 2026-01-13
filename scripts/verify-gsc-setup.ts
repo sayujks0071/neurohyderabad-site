@@ -70,7 +70,7 @@ try {
       process.env[currentKey] = currentValue.replace(/^["']|["']$/g, '');
     }
   }
-} catch (e) {
+} catch (e: any) {
   // Ignore errors loading .env.local
   console.warn('Warning: Could not load .env.local:', e.message);
 }
