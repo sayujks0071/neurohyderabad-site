@@ -73,7 +73,8 @@
     "vitest": "^4.0.16",
     "web-vitals": "^5.1.0",
     "workflow": "^4.0.1-beta.32",
-    "yup": "^1.4.0"
+    "yup": "^1.4.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@lhci/cli": "^0.15.1",
