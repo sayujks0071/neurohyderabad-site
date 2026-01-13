@@ -90,11 +90,14 @@ export default function BookingForm({
     handleSubmit,
     control,
     reset,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm<BookingData>({
     resolver: yupResolver(schema),
     defaultValues,
   });
+
+  const painScoreValue = watch("painScore");
 
   useEffect(() => {
     if (initialData) {
@@ -226,7 +229,57 @@ export default function BookingForm({
               />
             </div>
 
-            <div className="md:col-span-2">
+            <div className="md:col-span-2 space-y-6">
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">
+                  Pain Intensity Score (1-10)
+                </label>
+                <div className="flex items-center gap-4">
+                  <span className="text-sm font-bold text-slate-400">1</span>
+                  <input
+                    type="range"
+                    min="1"
+                    max="10"
+                    step="1"
+                    className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-cyan-600"
+                    {...register("painScore")}
+                  />
+                  <span className="text-sm font-bold text-slate-400">10</span>
+                </div>
+                <div className="text-center mt-2">
+                  {painScoreValue && (
+                    <span
+                      className={`inline-block px-3 py-1 rounded-lg text-sm font-bold ${
+                        painScoreValue <= 3
+                          ? "bg-green-100 text-green-700"
+                          : painScoreValue <= 7
+                          ? "bg-yellow-100 text-yellow-700"
+                          : "bg-red-100 text-red-700"
+                      }`}
+                    >
+                      Score: {painScoreValue}
+                      {painScoreValue >= 8 && " (Severe)"}
+                      {painScoreValue <= 3 && " (Mild)"}
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              <div className="flex items-center p-4 bg-slate-50 rounded-xl border border-slate-200">
+                <input
+                  type="checkbox"
+                  id="mriScanAvailable"
+                  className="w-5 h-5 text-cyan-600 rounded focus:ring-cyan-500 border-gray-300"
+                  {...register("mriScanAvailable")}
+                />
+                <label
+                  htmlFor="mriScanAvailable"
+                  className="ml-3 text-sm font-medium text-slate-700 cursor-pointer select-none"
+                >
+                  I have recent MRI/CT Scan reports available
+                </label>
+              </div>
+
               <Textarea
                 label="Reason for Visit / Chief Complaint"
                 id="reason"
