@@ -12,7 +12,7 @@
   "/services/cervical-endoscopic-spine-surgery-hyderabad": [
     "cervical endoscopic spine surgery hyderabad"
   ],
-  "/conditions/brain-tumor-surgery-hyderabad": [
+  "/services/brain-tumor-surgery-hyderabad": [
     "brain tumor surgery hyderabad",
     "best neurosurgeon for brain tumor hyderabad"
   ],
@@ -26,7 +26,8 @@
   "/conditions/sciatica-pain-treatment-hyderabad": [
     "sciatica treatment hyderabad",
     "sciatica pain relief hyderabad",
-    "leg pain treatment hyderabad"
+    "leg pain treatment hyderabad",
+    "sciatic nerve pain relief hyderabad"
   ],
   "/services/spinal-fusion-surgery-hyderabad": [
     "spinal fusion surgery hyderabad",
@@ -93,5 +94,10 @@
     "uniportal endoscopic spine surgery hyderabad",
     "single hole spine surgery hyderabad",
     "stitchless spine surgery hyderabad"
+  ],
+  "/services/spinal-decompression-surgery-hyderabad": [
+    "spinal decompression surgery hyderabad",
+    "lumbar decompression surgery cost",
+    "nerve decompression surgery hyderabad"
   ]
 }

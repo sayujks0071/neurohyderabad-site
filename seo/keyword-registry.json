@@ -29,7 +29,7 @@
       "term": "brain tumor surgery hyderabad",
       "difficulty": "Med",
       "volume": "Med",
-      "target_page": "/conditions/brain-tumor-surgery-hyderabad"
+      "target_page": "/services/brain-tumor-surgery-hyderabad"
     },
     {
       "term": "spine tumor surgery hyderabad",
@@ -150,6 +150,18 @@
       "difficulty": "Med",
       "volume": "Med",
       "target_page": "/services/uniportal-endoscopic-spine-surgery-hyderabad"
+    },
+    {
+      "term": "spinal decompression surgery hyderabad",
+      "difficulty": "Med",
+      "volume": "High",
+      "target_page": "/services/spinal-decompression-surgery-hyderabad"
+    },
+    {
+      "term": "kyphoplasty hyderabad",
+      "difficulty": "Med",
+      "volume": "Low",
+      "target_page": "/conditions/osteoporotic-spine-fracture-hyderabad"
     }
   ]
 }
