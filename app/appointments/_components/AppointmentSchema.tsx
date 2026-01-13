@@ -1,3 +1,4 @@
+import React from 'react';
 import { SITE_URL } from '@/src/lib/seo';
 import { getLocationById } from '@/src/data/locations';
 
@@ -7,6 +8,12 @@ export default function AppointmentSchema() {
 
   // The user requested a specific JSON-LD structure for the booking page.
   // We use a graph to include both Physician and MedicalClinic entities.
+  // Verified requirements:
+  // - Name: 'Dr. Sayuj Krishnan'
+  // - MedicalSpecialty: 'Neurosurgeon'
+  // - Address: Yashoda Hospitals, Malakpet, Hyderabad (via Malakpet location data)
+  // - AvailableService: 'Neurosurgery', 'Spine Surgery', 'Brain Tumor Surgery'
+  // - URL: Booking page URL
   const schema = {
     "@context": "https://schema.org",
     "@graph": [
@@ -16,8 +23,8 @@ export default function AppointmentSchema() {
         "medicalSpecialty": "Neurosurgeon",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": malakpet.address.streetAddress,
-          "addressLocality": malakpet.address.addressLocality,
+          "streetAddress": malakpet.address.streetAddress, // Contains Yashoda Hospital, Malakpet
+          "addressLocality": malakpet.address.addressLocality, // Hyderabad
           "addressRegion": malakpet.address.addressRegion,
           "postalCode": malakpet.address.postalCode,
           "addressCountry": malakpet.address.addressCountry
