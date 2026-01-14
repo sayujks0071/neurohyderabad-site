@@ -72,7 +72,7 @@ try {
   }
 } catch (e: any) {
   // Ignore errors loading .env.local
-  console.warn('Warning: Could not load .env.local:', e.message);
+  console.warn('Warning: Could not load .env.local:', (e as Error).message);
 }
 
 import { google } from 'googleapis';

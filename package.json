@@ -83,6 +83,7 @@
     "@types/pg": "^8.16.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "axios": "^1.13.2",
     "eslint-config-next": "^15.5.9",
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "gray-matter": "^4.0.3",
