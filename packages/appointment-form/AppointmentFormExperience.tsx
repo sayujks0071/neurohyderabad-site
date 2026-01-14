@@ -90,7 +90,7 @@ function AppointmentFormContent({
     <div className="relative">
       <LoadingOverlay
         isLoading={isLoading}
-        message="Submitting your request..."
+        message="Sending..."
       />
       {view === "form" && (
         <>

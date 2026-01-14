@@ -469,10 +469,11 @@ const PatientPortal = () => {
 
               <div className="space-y-4">
                 <div>
-                  <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
+                  <label htmlFor="patient-name" className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
                     Full Name
                   </label>
                   <input
+                    id="patient-name"
                     required
                     type="text"
                     value={formData.name}
@@ -486,10 +487,11 @@ const PatientPortal = () => {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
+                    <label htmlFor="patient-age" className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
                       Age
                     </label>
                     <input
+                      id="patient-age"
                       required
                       type="number"
                       value={formData.age}
@@ -500,10 +502,11 @@ const PatientPortal = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
+                    <label htmlFor="patient-gender" className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
                       Gender
                     </label>
                     <select
+                      id="patient-gender"
                       value={formData.gender}
                       onChange={(e) =>
                         setFormData({ ...formData, gender: e.target.value })
@@ -518,10 +521,11 @@ const PatientPortal = () => {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
+                  <label htmlFor="patient-phone" className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
                     Phone
                   </label>
                   <input
+                    id="patient-phone"
                     required
                     type="tel"
                     value={formData.phone}
@@ -533,10 +537,11 @@ const PatientPortal = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
+                  <label htmlFor="patient-email" className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
                     Email
                   </label>
                   <input
+                    id="patient-email"
                     required
                     type="email"
                     value={formData.email}
@@ -566,12 +571,13 @@ const PatientPortal = () => {
                     </span>
                   </div>
                 </div>
-                <p className="text-sm text-slate-600">
+                <label htmlFor="patient-report-text" className="text-sm text-slate-600 block">
                   Confused by your MRI/CT report? Paste the findings below for a
                   plain English explanation.
-                </p>
+                </label>
 
                 <textarea
+                  id="patient-report-text"
                   value={reportText}
                   onChange={(event) => setReportText(event.target.value)}
                   rows={3}
@@ -640,7 +646,7 @@ const PatientPortal = () => {
               <div className="space-y-4">
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+                    <label htmlFor="patient-symptoms" className="text-xs font-bold text-slate-500 uppercase tracking-wider">
                       Symptoms
                     </label>
                     <button
@@ -658,6 +664,7 @@ const PatientPortal = () => {
                     </button>
                   </div>
                   <textarea
+                    id="patient-symptoms"
                     required
                     value={formData.symptoms}
                     onChange={(e) =>
@@ -670,12 +677,13 @@ const PatientPortal = () => {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">
+                  <label htmlFor="patient-pain-score" className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">
                     Pain Intensity (1-10)
                   </label>
                   <div className="flex items-center gap-4">
                     <span className="text-sm font-bold text-slate-400">1</span>
                     <input
+                      id="patient-pain-score"
                       type="range"
                       min="1"
                       max="10"

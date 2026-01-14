@@ -56,6 +56,7 @@ try {
 }
 
 import { google } from 'googleapis';
+// import { AxiosError } from 'axios';
 
 // Define types for command line arguments
 interface CliArgs {

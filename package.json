@@ -13,15 +13,15 @@
     "check:lighthouse": "ts-node scripts/check-lighthouse.ts",
     "lhci": "lhci autorun",
     "seo:lh": "lhci autorun --collect.url=https://www.drsayuj.com --upload.target=temporary-public-storage",
-    "seo:audit": "node scripts/seo/audit.mjs",
-    "seo:report": "node scripts/seo/report.mjs",
-    "seo:all": "npm run seo:audit && npm run seo:report",
+    "seo:audit": "node scripts/comprehensive-seo-audit.js",
     "verify:deployment": "node scripts/verify-deployment.js",
     "check:sitemap": "node scripts/check-sitemap.js",
     "gsc:verify": "npx tsx scripts/verify-gsc-setup.ts",
     "gsc:list": "npx tsx scripts/google-seo-automation.ts --list",
     "gsc:submit": "npx tsx scripts/google-seo-automation.ts --sitemap",
     "gsc:submit-all": "npx tsx scripts/submit-all-sitemaps.ts",
+    "gsc:index": "npx tsx scripts/google-seo-automation.ts --index",
+    "gsc:index-priority": "npx tsx scripts/index-priority-urls.ts",
     "reindex:gemini": "ts-node scripts/reindex-gemini-rag.ts",
     "new:blog": "ts-node scripts/new-blog.ts",
     "normalize:blog": "ts-node scripts/normalize-blog-metadata.ts",
@@ -73,7 +73,8 @@
     "vitest": "^4.0.16",
     "web-vitals": "^5.1.0",
     "workflow": "^4.0.1-beta.32",
-    "yup": "^1.4.0"
+    "yup": "^1.4.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@lhci/cli": "^0.15.1",

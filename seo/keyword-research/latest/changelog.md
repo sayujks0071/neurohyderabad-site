@@ -1,13 +1,14 @@
-# Changelog - 2026-01-10
+# SEO Changelog - 2026-01-14
 
-## Research Findings
-*   Verified that "Endoscopic Spine Surgery" is a highly competitive term with major hospitals bidding on it.
-*   Identified "Uniportal" and "Single Hole" as specific layman/technical terms that are less saturated but highly relevant for Dr. Sayuj's expertise.
-*   "Cost" intent is high, addressed in existing pages.
+## New Content
+- **Blog Post:** `sciatica-pain-relief-exercises-hyderabad.mdx`
+  - Targets: "sciatica exercises hyderabad", "sciatica pain relief at home"
+  - Intent: Capture TOFU traffic looking for relief before surgery.
 
-## Actions Taken
-1.  **New Page Created**: `/services/uniportal-endoscopic-spine-surgery-hyderabad`
-    *   Targets: `uniportal endoscopic spine surgery`, `stitchless spine surgery`.
-    *   Structure: Based on `endoscopic-spine-surgery-hyderabad` but tailored for the specific technique.
-2.  **Registry Updated**: Added new keywords and mapped them to the new page.
-3.  **Sources Updated**: Added references for Uniportal Endoscopic Surgery to `app/services/sources.ts`.
+## Updates
+- **Keyword Registry:** Added 6 new keywords.
+- **Page Map:** Updated `/conditions/sciatica-pain-treatment-hyderabad` and `/` with new variations.
+
+## Insights
+- High demand for "non-surgical" and "exercise" related content for sciatica in Hyderabad.
+- Competitors are weak on localized "exercise" guides.
