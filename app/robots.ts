@@ -35,10 +35,6 @@ export default function robots(): MetadataRoute.Robots {
     ],
     sitemap: [
       'https://www.drsayuj.info/sitemap.xml',
-      'https://www.drsayuj.info/sitemap-blog.xml',
-      'https://www.drsayuj.info/sitemap-services.xml',
-      'https://www.drsayuj.info/sitemap-conditions.xml',
-      'https://www.drsayuj.info/sitemap-locations.xml',
       'https://www.drsayuj.info/sitemap-images.xml',
       'https://www.drsayuj.info/sitemap-videos.xml',
     ],

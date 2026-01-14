@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-01-10T03:00:00Z",
+  "timestamp": "2026-01-10T02:00:00Z",
   "build_metrics": {
     "home_page_js_before": "150kB",
     "home_page_js_after": "116kB"
@@ -12,14 +12,6 @@
       "action": "Modified HypertuneProvider to dynamically import the SDK in useEffect/requestIdleCallback.",
       "expected_impact": "Reduced First Load JS by ~34kB (22% reduction). This significantly reduces TBT and improves LCP on slow connections.",
       "verification": "Next.js build output confirmed reduction from 150kB to 116kB for the home page route."
-    },
-    {
-      "page_type": "Appointment",
-      "url": "/appointments",
-      "observation": "LCP element (H1 title) had 'animate-in fade-in delay-100' classes, causing a 100ms+ delay in Largest Contentful Paint.",
-      "action": "Removed animation classes from the H1 title in NeuraLinkBookingApp.tsx.",
-      "expected_impact": "LCP should improve by at least 100ms + animation duration. Text will be visible immediately upon paint.",
-      "verification": "Manual code review of NeuraLinkBookingApp.tsx and successful build."
     }
   ]
 }

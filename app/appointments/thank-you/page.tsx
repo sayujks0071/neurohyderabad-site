@@ -37,7 +37,7 @@ export default function AppointmentThankYouPage() {
               Thank You for Reaching Out!
             </h1>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Appointment request received. Please bring any MRI/CT scans with you. We will confirm via phone shortly.
+              Your appointment request has been successfully received. Our team will contact you shortly to confirm your consultation.
             </p>
           </div>
 

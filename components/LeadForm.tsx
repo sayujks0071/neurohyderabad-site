@@ -107,7 +107,7 @@ export default function LeadForm() {
       >
         <h3 className="text-2xl font-bold text-green-800 mb-4">Request Received</h3>
         <p className="text-green-700 mb-6">
-          Appointment request received. Please bring any MRI/CT scans with you. We will confirm via phone shortly.
+          Thank you for reaching out. We have received your details and will contact you shortly to confirm your appointment.
         </p>
         <button
           onClick={() => setIsSubmitted(false)}

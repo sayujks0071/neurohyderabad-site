@@ -1,36 +1,11 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { Activity, ChevronRight, MessageSquareCode, ShieldCheck, MessageSquare } from "lucide-react";
+import { Activity, ChevronRight, MessageSquareCode, ShieldCheck } from "lucide-react";
 import PatientPortal from "./PatientPortal";
+import ChatBot from "./ChatBot";
+import LiveAssistant from "./LiveAssistant";
 import { CLINIC } from "@/app/_lib/clinic";
-import dynamic from "next/dynamic";
-
-// Dynamic import for LiveAssistant (heavy dependency on @google/genai)
-// Only loaded when the user explicitly clicks "Voice AI Assistant".
-const LiveAssistant = dynamic(() => import("./LiveAssistant"), {
-  ssr: false,
-});
-
-// Dynamic import for ChatBot (imports lucide-react icons and other logic)
-// ssr: false ensures it doesn't bloat the initial server HTML.
-// Using a loading component that mimics the initial button to avoid layout shifts/pop-in.
-const ChatBot = dynamic(() => import("./ChatBot"), {
-  ssr: false,
-  loading: () => (
-    <div className="fixed bottom-6 left-6 z-[90]">
-      <button
-        className="p-4 rounded-full shadow-2xl bg-blue-600 text-white flex items-center justify-center group"
-        aria-label="Loading AI Assistant"
-      >
-        <MessageSquare className="w-6 h-6" />
-        <span className="max-w-0 overflow-hidden group-hover:max-w-xs group-hover:ml-2 transition-all duration-500 font-bold whitespace-nowrap">
-          Web AI Assistant
-        </span>
-      </button>
-    </div>
-  ),
-});
 
 const NeuraLinkBookingApp = () => {
   const [isAssistantOpen, setIsAssistantOpen] = useState(false);
@@ -54,8 +29,7 @@ const NeuraLinkBookingApp = () => {
             Advanced Neurosurgical Booking
           </div>
 
-          {/* LCP Optimization: Removed animation classes (animate-in fade-in) to ensure immediate text paint */}
-          <h1 className="text-4xl sm:text-6xl font-extrabold text-slate-900 mb-6 tracking-tight leading-[1.1]">
+          <h1 className="text-4xl sm:text-6xl font-extrabold text-slate-900 mb-6 tracking-tight leading-[1.1] animate-in fade-in slide-in-from-bottom-6 duration-700 delay-100">
             Book your consultation with
             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
               Dr. Sayuj Krishnan
@@ -100,10 +74,7 @@ const NeuraLinkBookingApp = () => {
         <PatientPortal />
       </section>
 
-      {/* Conditionally render LiveAssistant to prevent loading its heavy dependencies (@google/genai) until needed */}
-      {isAssistantOpen && (
-        <LiveAssistant isOpen={isAssistantOpen} onClose={() => setIsAssistantOpen(false)} />
-      )}
+      <LiveAssistant isOpen={isAssistantOpen} onClose={() => setIsAssistantOpen(false)} />
       <ChatBot />
     </div>
   );
