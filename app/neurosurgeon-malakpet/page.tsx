@@ -154,6 +154,60 @@ export default function MalakpetNeurosurgeonPage() {
 
       <section className="bg-gray-50 py-12">
         <div className="mx-auto max-w-5xl px-4">
+          <h2 className="mb-8 text-center text-2xl font-bold text-gray-900 md:text-3xl">
+            Meet Your Expert Neurosurgeon in Malakpet
+          </h2>
+          <div className="grid gap-8 items-center md:grid-cols-2">
+             <div>
+                <h3 className="mb-2 text-xl font-semibold text-blue-800">Dr. Sayuj Krishnan</h3>
+                <p className="mb-4 font-medium text-gray-600">Consultant Neurosurgeon & Spine Surgeon</p>
+                <p className="mb-4 text-gray-700">
+                  With over <strong>9 years of experience</strong> and specialized <strong>German training</strong>,
+                  Dr. Sayuj brings international standards of neurosurgical care to Malakpet. He has performed
+                  over <strong>1,000 successful endoscopic procedures</strong>, helping patients recover faster with minimal pain.
+                </p>
+                <div className="space-y-3">
+                   <div className="flex items-start">
+                      <span className="mr-2 mt-1 text-green-600">✓</span>
+                      <div className="text-gray-700">
+                        <strong>German Fellowship Trained:</strong> Observer-ship in Full Endoscopic Spine Surgery (RIWOspine Academy, Germany).
+                      </div>
+                   </div>
+                   <div className="flex items-start">
+                      <span className="mr-2 mt-1 text-green-600">✓</span>
+                      <div className="text-gray-700">
+                         <strong>Expert Qualifications:</strong> MBBS, DNB Neurosurgery (6-Year Direct Course), Fellowship in Minimally Invasive Spine Surgery.
+                      </div>
+                   </div>
+                   <div className="flex items-start">
+                      <span className="mr-2 mt-1 text-green-600">✓</span>
+                      <div className="text-gray-700">
+                         <strong>Professional Memberships:</strong> AO Spine (International), Neurological Society of India (NSI).
+                      </div>
+                   </div>
+                </div>
+             </div>
+             <div className="rounded-lg border border-gray-100 bg-white p-6 shadow-md">
+                <h4 className="mb-4 font-semibold text-gray-900">Specialized Expertise</h4>
+                <ul className="space-y-2 text-gray-700">
+                   <li>• <strong>Endoscopic Spine Surgery:</strong> For slip disc & sciatica (stitchless).</li>
+                   <li>• <strong>Brain Tumor Surgery:</strong> Advanced microsurgery & awake craniotomy.</li>
+                   <li>• <strong>Trigeminal Neuralgia:</strong> Microvascular decompression.</li>
+                   <li>• <strong>Spinal Fixation:</strong> For fractures and instability.</li>
+                   <li>• <strong>Pediatric Neurosurgery:</strong> Specialized care for children.</li>
+                </ul>
+                <div className="mt-6 border-t border-gray-100 pt-6">
+                   <p className="mb-1 text-sm text-gray-500">Practicing at:</p>
+                   <p className="font-semibold text-blue-900">Yashoda Hospitals, Malakpet</p>
+                   <p className="text-sm text-gray-600">Room 317, OPD Block</p>
+                </div>
+             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-12">
+        <div className="mx-auto max-w-5xl px-4">
           <h2 className="text-2xl font-bold text-gray-900">Visit Us at Yashoda Hospital Malakpet</h2>
           <div className="mt-8 grid gap-8 md:grid-cols-2">
             <div>
