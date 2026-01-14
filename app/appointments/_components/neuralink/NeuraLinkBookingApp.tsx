@@ -54,7 +54,8 @@ const NeuraLinkBookingApp = () => {
             Advanced Neurosurgical Booking
           </div>
 
-          <h1 className="text-4xl sm:text-6xl font-extrabold text-slate-900 mb-6 tracking-tight leading-[1.1] animate-in fade-in slide-in-from-bottom-6 duration-700 delay-100">
+          {/* LCP Optimization: Removed animation classes (animate-in fade-in) to ensure immediate text paint */}
+          <h1 className="text-4xl sm:text-6xl font-extrabold text-slate-900 mb-6 tracking-tight leading-[1.1]">
             Book your consultation with
             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
               Dr. Sayuj Krishnan
