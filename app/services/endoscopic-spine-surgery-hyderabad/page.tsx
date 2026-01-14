@@ -106,13 +106,13 @@ const COSTS = [
   },
   {
     procedure: 'Endoscopic Canal Decompression',
-    range: 'Ask for Estimate',
+    range: '₹1,20,000 - ₹1,60,000',
     recovery: '2 Days',
     includes: ['Stenosis Decompression', 'Advanced Endoscope Use', 'Neuromonitoring']
   },
   {
     procedure: 'Cervical Endoscopic Decompression',
-    range: 'Ask for Estimate',
+    range: '₹1,20,000 - ₹1,70,000',
     recovery: '2 Days',
     includes: ['Neck Surgery', 'High-Definition Optics', 'Specialised Instrumentation']
   }
@@ -163,6 +163,10 @@ const ADVANCED_TECHNIQUES = [
   {
     title: "Endoscopic Lumbar Discectomy",
     description: "Gold-standard minimally invasive removal of disc fragments pressing on nerves, allowing same-day walking."
+  },
+  {
+    title: "Awake Endoscopic Spine Surgery",
+    description: "For elderly or high-risk patients, we perform the procedure under local anaesthesia with mild sedation, avoiding general anaesthesia risks."
   }
 ];
 
@@ -305,6 +309,25 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
           ]
         }}
       />
+
+        <section className="mb-12 bg-green-50 border border-green-200 rounded-2xl p-6 shadow-sm">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div>
+              <h2 className="text-2xl font-bold text-green-900 mb-2">Free MRI Review & Second Opinion</h2>
+              <p className="text-green-800">
+                Not sure if you need surgery? Send us your MRI report on WhatsApp. Dr. Sayuj will personally review it to see if you are a candidate for <strong>Keyhole Endoscopic Surgery</strong>.
+              </p>
+            </div>
+            <a
+              href="https://wa.me/919778280044?text=Hi%20Dr%20Sayuj,%20I%20would%20like%20a%20free%20MRI%20review%20for%20endoscopic%20spine%20surgery"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center whitespace-nowrap rounded-full bg-green-600 px-6 py-3 text-white font-semibold hover:bg-green-700 transition-colors shadow-md"
+            >
+              WhatsApp MRI Now
+            </a>
+          </div>
+        </section>
 
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-blue-900 mb-6">Conditions Treated with Endoscopic Surgery</h2>
