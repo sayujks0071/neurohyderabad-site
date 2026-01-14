@@ -84,6 +84,7 @@ function parseArgs(): CliArgs {
     return { mode: 'help' };
   }
 
+  // Handle sitemap submission mode
   if (args.includes('--sitemap')) {
     const sitemapIndex = args.indexOf('--sitemap');
     const sitemapUrl = args[sitemapIndex + 1];
@@ -100,6 +101,7 @@ function parseArgs(): CliArgs {
     return { mode: 'status', sitemap: sitemapUrl };
   }
 
+  // Handle single URL indexing mode
   const indexFlag = args.indexOf('--index');
   if (indexFlag !== -1 && args[indexFlag + 1]) {
     return { mode: 'index', url: args[indexFlag + 1] };
@@ -110,7 +112,8 @@ function parseArgs(): CliArgs {
 
 // Helper to get authenticated client
 async function getAuthClient() {
-  const keyJson = process.env.GOOGLE_INDEXING_KEY_JSON;
+  // Support both correct and misspelled environment variable names
+  const keyJson = process.env.GOOGLE_INDEXING_KEY_JSON || process.env.GOOGOLE_INDEXING_KEY_JSON;
   if (!keyJson) {
     throw new Error('GOOGLE_INDEXING_KEY_JSON environment variable is missing.');
   }
