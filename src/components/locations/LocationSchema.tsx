@@ -23,7 +23,8 @@ export const LocationSchema: React.FC<LocationSchemaProps> = ({
   location,
   siteUrl = 'https://www.drsayuj.info',
   imageUrl = 'https://www.drsayuj.info/images/dr-sayuj-krishnan-portrait-v2.jpg',
-  faq
+  faq,
+  breadcrumb
 }) => {
 
   // Note: Physician Schema is injected globally by RootLayout via <PhysicianSchema />.
@@ -74,29 +75,53 @@ export const LocationSchema: React.FC<LocationSchemaProps> = ({
   };
 
   // 2. BreadcrumbList Schema
+  // Use passed breadcrumb if available, otherwise generate default
+  let itemListElement;
+
+  if (breadcrumb && breadcrumb.length > 0) {
+      // Normalize breadcrumb prop to schema structure if needed, or assume it matches what we want
+      // For simplicity, let's assume the prop is [{name, item}] and we add Home
+      itemListElement = [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": siteUrl
+        },
+        ...breadcrumb.map((b, i) => ({
+            "@type": "ListItem",
+            "position": i + 2,
+            "name": b.name,
+            "item": b.item
+        }))
+      ];
+  } else {
+      itemListElement = [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": siteUrl
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Locations",
+            "item": `${siteUrl}/locations`
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": location.areaServedName,
+            "item": `${siteUrl}/${cleanSlug}`
+        }
+      ];
+  }
+
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": siteUrl
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Locations",
-        "item": `${siteUrl}/locations`
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "name": location.areaServedName,
-        "item": `${siteUrl}/${cleanSlug}`
-      }
-    ]
+    "itemListElement": itemListElement
   };
 
   // 3. FAQPage Schema
