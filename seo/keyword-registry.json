@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-10",
+  "last_updated": "2026-01-14",
   "keywords": [
     {
       "term": "neurosurgeon hyderabad",
@@ -150,6 +150,30 @@
       "difficulty": "Med",
       "volume": "Med",
       "target_page": "/services/uniportal-endoscopic-spine-surgery-hyderabad"
+    },
+    {
+      "term": "sciatica exercises hyderabad",
+      "difficulty": "Low",
+      "volume": "Med",
+      "target_page": "/blog/sciatica-pain-relief-exercises-hyderabad"
+    },
+    {
+      "term": "best sciatica doctor hyderabad",
+      "difficulty": "High",
+      "volume": "High",
+      "target_page": "/conditions/sciatica-pain-treatment-hyderabad"
+    },
+    {
+      "term": "lumbar canal stenosis treatment without surgery",
+      "difficulty": "Med",
+      "volume": "Med",
+      "target_page": "/conditions/spinal-stenosis-treatment-hyderabad"
+    },
+    {
+      "term": "neurosurgeon for sciatica near me",
+      "difficulty": "High",
+      "volume": "High",
+      "target_page": "/"
     }
   ]
 }

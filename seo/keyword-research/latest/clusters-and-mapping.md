@@ -1,17 +1,20 @@
-# Clusters & Mapping - 2026-01-10
+# Clusters and Mapping - 2026-01-14
 
-## Cluster: Endoscopic Spine Surgery (Core)
-*   **Primary URL**: `/services/endoscopic-spine-surgery-hyderabad`
-*   **Keywords**: `endoscopic spine surgery hyderabad`, `endoscopic discectomy cost hyderabad`, `keyhole spine surgery`
-*   **Action**: Maintain. Content is robust.
+## Cluster: Sciatica Management (HYD | TOFU | SPINE | sciatica | exercises)
 
-## Cluster: Uniportal Endoscopic Surgery (Niche Differentiator)
-*   **Primary URL**: `/services/uniportal-endoscopic-spine-surgery-hyderabad` (NEW)
-*   **Keywords**: `uniportal endoscopic spine surgery hyderabad`, `single hole spine surgery`, `stitchless spine surgery`
-*   **Action**: Create new page. This captures the segment of patients looking for the "least invasive" option explicitly.
-*   **Rationale**: Competitors use "Endoscopic" broadly. "Uniportal" is a specific technical advantage (one incision vs two/larger).
+### Sub-cluster: Exercises & Home Relief (TOFU)
+- **Primary:** "sciatica exercises hyderabad"
+- **Secondary:** "sciatica pain relief at home", "sleeping positions for sciatica"
+- **Target:** [NEW] `content/blog/sciatica-pain-relief-exercises-hyderabad.mdx`
 
-## Cluster: Minimally Invasive (Broad)
-*   **Primary URL**: `/services/minimally-invasive-spine-surgery`
-*   **Keywords**: `minimally invasive spine surgery hyderabad`, `laser spine surgery hyderabad`
-*   **Action**: Maintain.
+### Sub-cluster: Treatment & Doctor (BOFU)
+- **Primary:** "best sciatica doctor hyderabad"
+- **Secondary:** "neurosurgeon for sciatica near me", "sciatica specialist hyderabad"
+- **Target:** [EXISTING] `/conditions/sciatica-pain-treatment-hyderabad`
+
+## Cluster: Lumbar Stenosis (NONE | MOFU | SPINE | stenosis | non-surgical)
+
+### Sub-cluster: Non-Surgical Options (MOFU)
+- **Primary:** "lumbar canal stenosis treatment without surgery"
+- **Target:** [EXISTING] `/conditions/spinal-stenosis-treatment-hyderabad`
+- **Action:** Add FAQ about non-surgical options to existing page.
