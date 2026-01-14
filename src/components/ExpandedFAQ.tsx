@@ -11,6 +11,7 @@ interface ExpandedFAQProps {
   faqs?: FAQItem[];
   title?: string;
   className?: string;
+  disableSchema?: boolean;
 }
 
 const defaultFAQLibrary: FAQItem[] = [
@@ -181,7 +182,8 @@ const defaultFAQLibrary: FAQItem[] = [
 export default function ExpandedFAQ({
   faqs = defaultFAQLibrary,
   title = 'Frequently Asked Questions',
-  className = ''
+  className = '',
+  disableSchema = false
 }: ExpandedFAQProps) {
   const groupedByCategory = faqs.reduce<Record<string, FAQItem[]>>((acc, item) => {
     const key = item.category || 'General Guidance';
@@ -195,13 +197,15 @@ export default function ExpandedFAQ({
   return (
     <section className={`py-16 ${className}`} aria-labelledby="faq-section-title">
       {/* FAQ Schema for SEO */}
-      <FAQSchema 
-        faqs={faqs.map(faq => ({
-          question: faq.question,
-          answer: faq.answer
-        }))}
-        pageTitle={title}
-      />
+      {!disableSchema && (
+        <FAQSchema
+          faqs={faqs.map(faq => ({
+            question: faq.question,
+            answer: faq.answer
+          }))}
+          pageTitle={title}
+        />
+      )}
       <div className="container mx-auto px-4">
         <div className="max-w-5xl mx-auto">
           <h2 

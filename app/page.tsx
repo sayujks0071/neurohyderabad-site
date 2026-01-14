@@ -837,7 +837,8 @@ export default function Home() {
           </div>
         </Section>
 
-        <ExpandedFAQ faqs={HOME_FAQS} className="bg-gray-50" />
+        {/* Disable internal schema as it is already handled by FAQPageSchema above */}
+        <ExpandedFAQ faqs={HOME_FAQS} className="bg-gray-50" disableSchema={true} />
         {/* Lazy load reputation panel - only loads when user scrolls */}
         <LazySection
           placeholder={
