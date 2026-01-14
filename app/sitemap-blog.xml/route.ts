@@ -1,8 +1,19 @@
-import { MetadataRoute } from 'next';
+import { SITE_URL } from '@/src/lib/seo';
 
-const SITE_URL = 'https://www.drsayuj.info';
+export const runtime = 'nodejs';
+// Regenerate weekly
+export const revalidate = 604800;
 
-export default function sitemapBlog(): MetadataRoute.Sitemap {
+function escapeXml(value: string) {
+  return value
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&apos;');
+}
+
+export async function GET() {
   const now = new Date().toISOString();
   
   // High-value SEO blog posts targeting competitive keywords
@@ -67,10 +78,24 @@ export default function sitemapBlog(): MetadataRoute.Sitemap {
     { url: '/blog/how-much-does-brain-surgery-cost-hyderabad', priority: 0.8 },
   ];
 
-  return blogPosts.map(post => ({
-    url: `${SITE_URL}${post.url}`,
-    lastModified: now,
-    changeFrequency: 'weekly' as const,
-    priority: post.priority,
-  }));
+  let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+  xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+
+  for (const post of blogPosts) {
+    xml += `  <url>\n`;
+    xml += `    <loc>${escapeXml(SITE_URL + post.url)}</loc>\n`;
+    xml += `    <lastmod>${now}</lastmod>\n`;
+    xml += `    <changefreq>weekly</changefreq>\n`;
+    xml += `    <priority>${post.priority}</priority>\n`;
+    xml += `  </url>\n`;
+  }
+
+  xml += `</urlset>\n`;
+
+  return new Response(xml, {
+    headers: {
+      'Content-Type': 'application/xml; charset=utf-8',
+      'Cache-Control': 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400',
+    },
+  });
 }

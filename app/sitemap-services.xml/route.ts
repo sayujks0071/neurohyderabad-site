@@ -1,8 +1,18 @@
-import { MetadataRoute } from 'next';
+import { SITE_URL } from '@/src/lib/seo';
 
-const SITE_URL = 'https://www.drsayuj.info';
+export const runtime = 'nodejs';
+export const revalidate = 604800; // Weekly
 
-export default function sitemapServices(): MetadataRoute.Sitemap {
+function escapeXml(value: string) {
+  return value
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&apos;');
+}
+
+export async function GET() {
   const now = new Date().toISOString();
   
   const services = [
@@ -57,10 +67,24 @@ export default function sitemapServices(): MetadataRoute.Sitemap {
     { url: '/services/spine-fracture-surgery-hyderabad', priority: 0.7 },
   ];
 
-  return services.map(service => ({
-    url: `${SITE_URL}${service.url}`,
-    lastModified: now,
-    changeFrequency: 'weekly' as const,
-    priority: service.priority,
-  }));
+  let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+  xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+
+  for (const service of services) {
+    xml += `  <url>\n`;
+    xml += `    <loc>${escapeXml(SITE_URL + service.url)}</loc>\n`;
+    xml += `    <lastmod>${now}</lastmod>\n`;
+    xml += `    <changefreq>weekly</changefreq>\n`;
+    xml += `    <priority>${service.priority}</priority>\n`;
+    xml += `  </url>\n`;
+  }
+
+  xml += `</urlset>\n`;
+
+  return new Response(xml, {
+    headers: {
+      'Content-Type': 'application/xml; charset=utf-8',
+      'Cache-Control': 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400',
+    },
+  });
 }
