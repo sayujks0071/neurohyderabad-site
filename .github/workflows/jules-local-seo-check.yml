@@ -1,6 +1,7 @@
 name: Jules Local SEO Check
 on:
   schedule:
+    # 09:30 IST (India Standard Time) = 04:00 UTC
     - cron: '0 4 * * *'
   workflow_dispatch:
 

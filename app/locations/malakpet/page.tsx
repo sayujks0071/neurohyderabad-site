@@ -91,7 +91,7 @@ export default function MalakpetLocationPage() {
         </div>
       </section>
 
-      <LocalPathways location={location} />
+      <LocalPathways mode="location" locationId={location.id} />
     </main>
   );
 }

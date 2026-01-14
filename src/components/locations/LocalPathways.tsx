@@ -111,7 +111,7 @@ export const LocalPathways: React.FC<LocalPathwaysProps> = ({
         </h3>
         <div className={gridClass}>
           {displayLocations.map(loc => (
-            <Link key={loc.id} href={`/${loc.slug.replace(/^locations\//, 'locations/')}`} className={linkClass}>
+            <Link key={loc.id} href={`/${loc.slug}`} className={linkClass}>
               <span className="font-medium text-gray-700 group-hover:text-blue-600 transition-colors">{loc.areaServedName}</span>
               <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-blue-600" />
             </Link>

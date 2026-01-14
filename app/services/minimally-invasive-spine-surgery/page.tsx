@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import { ShieldCheck, Microscope, HeartHandshake, Clock } from 'lucide-react';
 import { SITE_URL } from '../../../src/lib/seo';
 import OutcomeMetricsSection from '@/components/OutcomeMetricsSection';
 import TeleconsultationForm from '@/components/TeleconsultationForm';
@@ -411,6 +412,40 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
                 </div>
               </div>
             ))}
+          </div>
+        </section>
+
+        <section className="mb-12 bg-white rounded-lg border border-blue-100 shadow-sm p-8">
+          <h2 className="text-3xl font-bold text-blue-800 mb-8 text-center">Why Choose Dr. Sayuj Krishnan?</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="text-center">
+              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Microscope className="w-8 h-8 text-blue-600" />
+              </div>
+              <h3 className="font-semibold text-gray-900 mb-2">Endoscopic Expert</h3>
+              <p className="text-sm text-gray-600">Specialized training in full endoscopic spine surgery techniques.</p>
+            </div>
+            <div className="text-center">
+              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <ShieldCheck className="w-8 h-8 text-blue-600" />
+              </div>
+              <h3 className="font-semibold text-gray-900 mb-2">Advanced Safety</h3>
+              <p className="text-sm text-gray-600">Neuro-navigation and neuromonitoring for maximum safety.</p>
+            </div>
+            <div className="text-center">
+              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Clock className="w-8 h-8 text-blue-600" />
+              </div>
+              <h3 className="font-semibold text-gray-900 mb-2">Rapid Recovery</h3>
+              <p className="text-sm text-gray-600">Day-care procedures with same-day walking and discharge.</p>
+            </div>
+            <div className="text-center">
+              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <HeartHandshake className="w-8 h-8 text-blue-600" />
+              </div>
+              <h3 className="font-semibold text-gray-900 mb-2">Ethical Care</h3>
+              <p className="text-sm text-gray-600">Transparent pricing and honest surgical indications.</p>
+            </div>
           </div>
         </section>
 

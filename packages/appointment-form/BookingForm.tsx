@@ -2,8 +2,8 @@
 
 import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
 import type { BookingData } from "@/packages/appointment-form/types";
 import Input from "./ui/Input";
 import Select from "./ui/Select";
@@ -16,54 +16,35 @@ interface BookingFormProps {
   initialData?: BookingData | null;
 }
 
-const schema: yup.ObjectSchema<BookingData> = yup
-  .object({
-    patientName: yup
-      .string()
-      .required("Patient name is required")
-      .min(3, "Name must be at least 3 characters"),
-    email: yup
-      .string()
-      .required("Email is required")
-      .email("Please enter a valid email address"),
-    phone: yup
-      .string()
-      .required("Phone number is required")
-      .matches(/^[0-9+\s()-]{10,}$/, "Please enter a valid phone number"),
-    age: yup
-      .string()
-      .required("Age is required")
-      .matches(/^\d+$/, "Age must be a number")
-      .test("age-range", "Age seems too high", (value) => {
-        const numeric = Number(value);
-        return Number.isFinite(numeric) && numeric > 0 && numeric <= 120;
-      }),
-    gender: yup
-      .mixed<BookingData["gender"]>()
-      .oneOf(["male", "female", "other"], "Please select a gender")
-      .required("Gender is required"),
-    appointmentDate: yup.string().required("Please select a date"),
-    appointmentTime: yup.string().required("Please select a time"),
-    reason: yup
-      .string()
-      .required("Reason for visit is required")
-      .min(10, "Please provide more details (min 10 characters)"),
-    painScore: yup.number().optional(),
-    mriScanAvailable: yup.boolean().optional(),
-  })
-  .required();
+const appointmentSchema = z.object({
+  patientName: z.string().min(2, "Name is too short"),
+  email: z.string().email("Please enter a valid email address"),
+  contactNumber: z.string().regex(/^[6-9]\d{9}$/, "Invalid Indian mobile number"),
+  age: z.string().regex(/^\d+$/, "Age must be a number").refine((val) => {
+    const n = Number(val);
+    return Number.isFinite(n) && n > 0 && n <= 120;
+  }, "Age seems too high"),
+  gender: z.enum(["male", "female", "other"], { errorMap: () => ({ message: "Please select a gender" }) }),
+  requestedDate: z.date({ required_error: "Please select a date" }).min(new Date(new Date().setHours(0, 0, 0, 0)), "Date must be in the future"),
+  appointmentTime: z.string().min(1, "Please select a time"),
+  reason: z.string().min(10, "Please provide more details (min 10 characters)"),
+  painScore: z.coerce.number().min(1).max(10).optional(),
+  hasMRI: z.boolean().default(false),
+});
 
-const defaultValues: BookingData = {
+type BookingFormValues = z.infer<typeof appointmentSchema>;
+
+const defaultValues: Partial<BookingFormValues> = {
   patientName: "",
   email: "",
-  phone: "",
+  contactNumber: "",
   age: "",
-  gender: "",
-  appointmentDate: "",
+  gender: undefined,
+  requestedDate: undefined,
   appointmentTime: "",
   reason: "",
   painScore: undefined,
-  mriScanAvailable: undefined,
+  hasMRI: false,
 };
 
 const availableTimes = [
@@ -90,19 +71,61 @@ export default function BookingForm({
     handleSubmit,
     control,
     reset,
+    watch,
     formState: { errors, isSubmitting },
-  } = useForm<BookingData>({
-    resolver: yupResolver(schema),
-    defaultValues,
+  } = useForm<BookingFormValues>({
+    resolver: zodResolver(appointmentSchema),
+    defaultValues: defaultValues as BookingFormValues,
+    mode: "onTouched", // Trigger validation on blur
   });
+
+  const painScoreValue = watch("painScore");
 
   useEffect(() => {
     if (initialData) {
-      reset(initialData);
+      // Map initialData (BookingData) to form values (BookingFormValues)
+      const mappedData: Partial<BookingFormValues> = {
+        patientName: initialData.patientName,
+        email: initialData.email,
+        contactNumber: initialData.phone,
+        age: initialData.age,
+        gender: (initialData.gender && ["male", "female", "other"].includes(initialData.gender))
+          ? (initialData.gender as "male" | "female" | "other")
+          : undefined,
+        requestedDate: initialData.appointmentDate ? new Date(initialData.appointmentDate) : undefined,
+        appointmentTime: initialData.appointmentTime,
+        reason: initialData.reason,
+        painScore: initialData.painScore,
+        hasMRI: initialData.mriScanAvailable ?? false,
+      };
+
+      // If date is invalid, don't set it (validation will catch it)
+      if (mappedData.requestedDate && isNaN(mappedData.requestedDate.getTime())) {
+          mappedData.requestedDate = undefined;
+      }
+
+      reset(mappedData as BookingFormValues);
     } else {
-      reset(defaultValues);
+      reset(defaultValues as BookingFormValues);
     }
   }, [initialData, reset]);
+
+  const handleFormSubmit = (data: BookingFormValues) => {
+    // Map form values back to BookingData
+    const submissionData: BookingData = {
+      patientName: data.patientName,
+      email: data.email,
+      phone: data.contactNumber,
+      age: data.age,
+      gender: data.gender,
+      appointmentDate: data.requestedDate.toISOString().split("T")[0],
+      appointmentTime: data.appointmentTime,
+      reason: data.reason,
+      painScore: data.painScore,
+      mriScanAvailable: data.hasMRI,
+    };
+    onSubmit(submissionData);
+  };
 
   return (
     <div className="max-w-4xl mx-auto my-8 md:my-16">
@@ -117,7 +140,7 @@ export default function BookingForm({
           </p>
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} noValidate>
+        <form onSubmit={handleSubmit(handleFormSubmit)} noValidate>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
             <div className="md:col-span-2">
               <Input
@@ -142,12 +165,13 @@ export default function BookingForm({
               />
               <Input
                 label="Phone Number"
-                id="phone"
+                id="contactNumber"
                 type="tel"
                 autoComplete="tel"
-                {...register("phone")}
-                error={errors.phone?.message}
+                {...register("contactNumber")}
+                error={errors.contactNumber?.message}
                 required
+                placeholder="10-digit mobile number"
               />
             </div>
 
@@ -178,14 +202,18 @@ export default function BookingForm({
 
             <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
               <Controller
-                name="appointmentDate"
+                name="requestedDate"
                 control={control}
                 render={({ field }) => (
                   <Calendar
                     label="Preferred Date"
-                    value={field.value}
-                    onChange={field.onChange}
-                    error={errors.appointmentDate?.message}
+                    value={field.value ? field.value.toISOString().split("T")[0] : ""}
+                    onChange={(dateString) => {
+                        const [year, month, day] = dateString.split("-").map(Number);
+                        const date = new Date(year, month - 1, day);
+                        field.onChange(date);
+                    }}
+                    error={errors.requestedDate?.message}
                     required
                   />
                 )}
@@ -226,7 +254,57 @@ export default function BookingForm({
               />
             </div>
 
-            <div className="md:col-span-2">
+            <div className="md:col-span-2 space-y-6">
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">
+                  Pain Intensity Score (1-10)
+                </label>
+                <div className="flex items-center gap-4">
+                  <span className="text-sm font-bold text-slate-400">1</span>
+                  <input
+                    type="range"
+                    min="1"
+                    max="10"
+                    step="1"
+                    className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-cyan-600"
+                    {...register("painScore")}
+                  />
+                  <span className="text-sm font-bold text-slate-400">10</span>
+                </div>
+                <div className="text-center mt-2">
+                  {painScoreValue && (
+                    <span
+                      className={`inline-block px-3 py-1 rounded-lg text-sm font-bold ${
+                        painScoreValue <= 3
+                          ? "bg-green-100 text-green-700"
+                          : painScoreValue <= 7
+                          ? "bg-yellow-100 text-yellow-700"
+                          : "bg-red-100 text-red-700"
+                      }`}
+                    >
+                      Score: {painScoreValue}
+                      {painScoreValue >= 8 && " (Severe)"}
+                      {painScoreValue <= 3 && " (Mild)"}
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              <div className="flex items-center p-4 bg-slate-50 rounded-xl border border-slate-200">
+                <input
+                  type="checkbox"
+                  id="hasMRI"
+                  className="w-5 h-5 text-cyan-600 rounded focus:ring-cyan-500 border-gray-300"
+                  {...register("hasMRI")}
+                />
+                <label
+                  htmlFor="hasMRI"
+                  className="ml-3 text-sm font-medium text-slate-700 cursor-pointer select-none"
+                >
+                  I have recent MRI/CT Scan reports available
+                </label>
+              </div>
+
               <Textarea
                 label="Reason for Visit / Chief Complaint"
                 id="reason"
@@ -240,7 +318,7 @@ export default function BookingForm({
 
           <div className="mt-10 pt-6 border-t border-slate-200 text-center">
             <Button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Submitting..." : "Submit Request"}
+              {isSubmitting ? "Sending..." : "Submit Request"}
             </Button>
           </div>
         </form>

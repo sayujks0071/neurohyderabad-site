@@ -14,6 +14,7 @@ import TrustProof from '@/app/_components/TrustProof';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import { getServiceSources } from '../sources';
 import { patientStories } from '@/src/content/stories';
+import CostTransparencySection from '@/src/components/CostTransparencySection';
 
 const SERVICE_SLUG = 'brain-tumor-surgery-hyderabad';
 
@@ -32,6 +33,7 @@ export const metadata: Metadata = {
     'neuronavigation surgery hyderabad',
     'awake craniotomy hyderabad',
     'yashoda hospital brain tumor specialist',
+    'brain tumor surgery cost hyderabad',
   ],
   openGraph: {
     title: 'Brain Tumor Surgery in Hyderabad | Advanced Neurosurgical Oncology – Dr. Sayuj Krishnan',
@@ -115,6 +117,33 @@ const faqs = [
   },
 ];
 
+const COSTS = [
+  {
+    procedure: 'Craniotomy (Tumor Excision)',
+    range: 'Ask for Estimate',
+    recovery: '5-7 Days (ICU + Ward)',
+    includes: ['Microsurgery', 'Neuronavigation', 'ICU Stay (2-3 days)']
+  },
+  {
+    procedure: 'Awake Craniotomy',
+    range: 'Ask for Estimate',
+    recovery: '3-5 Days',
+    includes: ['Functional Mapping', 'Anaesthesia Team', 'Rapid Recovery Protocol']
+  },
+  {
+    procedure: 'Stereotactic Biopsy',
+    range: '₹1,00,000 - ₹1,50,000',
+    recovery: '1-2 Days',
+    includes: ['Needle Biopsy', 'Histopathology', 'Day Care/Short Stay']
+  },
+  {
+    procedure: 'Endoscopic Pituitary Surgery',
+    range: '₹2,00,000 - ₹3,00,000',
+    recovery: '3-4 Days',
+    includes: ['Transnasal Approach', 'Endocrinology Review', 'Skull Base Repair']
+  }
+];
+
 // Google Business Profile JSON-LD for Brain Tumor Surgery
 const gbpSchema = {
   "@context": "https://schema.org",
@@ -177,7 +206,7 @@ export default function BrainTumorSurgeryHyderabadPage() {
             </h1>
             <AuthorByline
               publishedOn="2025-09-04"
-              updatedOn="2025-10-19"
+              updatedOn="2026-01-10"
               className="mb-6"
             />
             <p className="text-lg text-gray-700 mb-6">
@@ -233,6 +262,14 @@ export default function BrainTumorSurgeryHyderabadPage() {
                 "@type": "Answer",
                 "text": "Urgent cases with progressive neurological deficits are prioritised within 48–72 hours. Elective cases are usually scheduled within a week after multidisciplinary review and pre‑anaesthesia evaluation."
               }
+            },
+            {
+               "@type": "Question",
+               "name": "What is the cost of brain tumor surgery in Hyderabad?",
+               "acceptedAnswer": {
+                 "@type": "Answer",
+                 "text": "The cost of brain tumor surgery varies significantly based on tumor complexity, ICU stay duration, and technology used (neuronavigation, monitoring). Biopsies may start from ₹1,00,000, while complex craniotomies can range higher. We provide transparent estimates after scan review."
+               }
             }
           ]
         }}
@@ -318,6 +355,12 @@ export default function BrainTumorSurgeryHyderabadPage() {
           </div>
         </section>
 
+        {/* Added CostTransparencySection */}
+        <CostTransparencySection
+          costs={COSTS}
+          disclaimer="Costs for brain tumor surgery depend heavily on tumor size, ICU duration, and specialized equipment (neuronavigation). The above ranges are indicative. Insurance coverage is available for most procedures."
+        />
+
         <section className="mb-16 grid lg:grid-cols-[1.2fr_1fr] gap-10 items-start">
           <div className="space-y-6">
             <h2 className="text-3xl font-bold text-blue-900">Clinic Location & Neuro-Oncology Desk</h2>
@@ -352,7 +395,7 @@ export default function BrainTumorSurgeryHyderabadPage() {
         <LocalPathways mode="service" />
 
         <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
-        <ReviewedBy lastReviewed="2025-10-19" />
+        <ReviewedBy lastReviewed="2026-01-10" />
       </main>
     </>
   );

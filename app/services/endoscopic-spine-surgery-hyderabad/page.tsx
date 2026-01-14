@@ -404,7 +404,6 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
             neighbourhoods. We help with corporate approvals, insurance paperwork, and travel coordination for families who support
             you during the procedure.
           </p>
-          <LocalPathways mode="service" className="mb-8" />
           <div className="grid md:grid-cols-2 gap-6">
             <div className="bg-blue-50 border border-blue-100 rounded-xl p-6">
               <h3 className="text-lg font-semibold text-blue-800 mb-3">Pre-Surgery Preparation</h3>
