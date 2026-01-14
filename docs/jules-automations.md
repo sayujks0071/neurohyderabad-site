@@ -6,7 +6,7 @@ This repository uses GitHub Actions to schedule daily tasks for Jules (the AI so
 
 1.  **Scheduled Workflows**: GitHub Actions run on a defined cron schedule (UTC).
 2.  **Prompt Files**: Each workflow reads a Markdown file from `jules-prompts/`.
-3.  **Issue Creation**: The workflow creates a new Issue with the content of the prompt file and applies the label `jules`.
+3.  **Issue Creation**: The workflow creates a new Issue with the content of the prompt file and applies the label `jules`. If the label does not exist, it is automatically created.
 4.  **Jules Pick-up**: Jules (or a developer) checks the `jules` label to find pending tasks.
 
 ## Schedules

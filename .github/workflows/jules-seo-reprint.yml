@@ -56,6 +56,28 @@ jobs:
               return;
             }
 
+            // Ensure label 'jules' exists
+            try {
+              await github.rest.issues.getLabel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                name: 'jules'
+              });
+            } catch (error) {
+              if (error.status === 404) {
+                await github.rest.issues.createLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  name: 'jules',
+                  color: '000000',
+                  description: 'Jules Automation'
+                });
+                console.log('Created label: jules');
+              } else {
+                throw error;
+              }
+            }
+
             // Create the issue
             const { data: newIssue } = await github.rest.issues.create({
               owner: context.repo.owner,
