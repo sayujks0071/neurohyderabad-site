@@ -1,15 +1,16 @@
-import { SITE_URL } from '@/src/lib/seo';
+import { SITE_URL } from "@/src/lib/seo";
 
-export const runtime = 'nodejs';
-export const revalidate = 604800; // Weekly
+export const runtime = "nodejs";
+// Regenerate weekly
+export const revalidate = 604800;
 
 function escapeXml(value: string) {
   return value
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;')
-    .replaceAll("'", '&apos;');
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&apos;");
 }
 
 export async function GET() {
@@ -75,8 +76,8 @@ export async function GET() {
 
   for (const location of locations) {
     xml += `  <url>\n`;
-    xml += `    <loc>${escapeXml(SITE_URL + location.url)}</loc>\n`;
-    xml += `    <lastmod>${now}</lastmod>\n`;
+    xml += `    <loc>${escapeXml(`${SITE_URL}${location.url}`)}</loc>\n`;
+    xml += `    <lastmod>${escapeXml(now)}</lastmod>\n`;
     xml += `    <changefreq>weekly</changefreq>\n`;
     xml += `    <priority>${location.priority}</priority>\n`;
     xml += `  </url>\n`;
@@ -86,8 +87,8 @@ export async function GET() {
 
   return new Response(xml, {
     headers: {
-      'Content-Type': 'application/xml; charset=utf-8',
-      'Cache-Control': 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400',
+      "Content-Type": "application/xml; charset=utf-8",
+      "Cache-Control": "public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400",
     },
   });
 }

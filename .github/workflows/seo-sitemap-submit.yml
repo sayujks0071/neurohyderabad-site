@@ -38,12 +38,22 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Run Sitemap Submission
+      - name: Run Sitemap Submission (Single)
         if: ${{ github.event_name == 'schedule' || github.event.inputs.action_type == 'sitemap' }}
         env:
           GOOGLE_INDEXING_KEY_JSON: ${{ secrets.GOOGLE_INDEXING_KEY_JSON }}
           SITE_URL: ${{ vars.SITE_URL || 'https://www.drsayuj.info' }}
+          GSC_SITE_URL: ${{ vars.GSC_SITE_URL || '' }}
         run: npx tsx scripts/google-seo-automation.ts --sitemap
+
+      - name: Run Batch Sitemap Submission (All Sitemaps)
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.action_type == 'sitemap' }}
+        env:
+          GOOGLE_INDEXING_KEY_JSON: ${{ secrets.GOOGLE_INDEXING_KEY_JSON }}
+          SITE_URL: ${{ vars.SITE_URL || 'https://www.drsayuj.info' }}
+          GSC_SITE_URL: ${{ vars.GSC_SITE_URL || '' }}
+        run: npx tsx scripts/submit-all-sitemaps.ts
+        continue-on-error: true  # Don't fail workflow if some sitemaps don't exist yet
 
       # Note: Manual URL indexing via workflow_dispatch could be added here if needed in the future,
       # but sticking to the requested daily sitemap automation for now.
