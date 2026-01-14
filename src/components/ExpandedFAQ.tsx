@@ -1,4 +1,6 @@
+import React from 'react';
 import FAQSchema from "../../app/components/schemas/FAQSchema";
+import { ChevronDown } from 'lucide-react';
 
 interface FAQItem {
   question: string;
@@ -11,6 +13,7 @@ interface ExpandedFAQProps {
   faqs?: FAQItem[];
   title?: string;
   className?: string;
+  disableSchema?: boolean;
 }
 
 const defaultFAQLibrary: FAQItem[] = [
@@ -181,7 +184,8 @@ const defaultFAQLibrary: FAQItem[] = [
 export default function ExpandedFAQ({
   faqs = defaultFAQLibrary,
   title = 'Frequently Asked Questions',
-  className = ''
+  className = '',
+  disableSchema = false
 }: ExpandedFAQProps) {
   const groupedByCategory = faqs.reduce<Record<string, FAQItem[]>>((acc, item) => {
     const key = item.category || 'General Guidance';
@@ -195,13 +199,15 @@ export default function ExpandedFAQ({
   return (
     <section className={`py-16 ${className}`} aria-labelledby="faq-section-title">
       {/* FAQ Schema for SEO */}
-      <FAQSchema 
-        faqs={faqs.map(faq => ({
-          question: faq.question,
-          answer: faq.answer
-        }))}
-        pageTitle={title}
-      />
+      {!disableSchema && (
+        <FAQSchema
+          faqs={faqs.map(faq => ({
+            question: faq.question,
+            answer: faq.answer
+          }))}
+          pageTitle={title}
+        />
+      )}
       <div className="container mx-auto px-4">
         <div className="max-w-5xl mx-auto">
           <h2 
@@ -228,10 +234,10 @@ export default function ExpandedFAQ({
                         <details
                           data-faq-item
                           data-faq-id={faqId}
-                          className="group bg-white rounded-lg shadow-md border border-gray-200 transition-shadow hover:shadow-lg"
+                          className="group bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
                         >
                           <summary
-                            className="flex items-start justify-between px-6 py-4 text-left cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-lg"
+                            className="flex items-start justify-between px-6 py-4 text-left cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded-lg hover:bg-white/50 transition-colors duration-300"
                             aria-controls={`faq-answer-${faqId}-${index}`}
                           >
                             <div className="pr-6">
@@ -249,14 +255,14 @@ export default function ExpandedFAQ({
                             </div>
                             <span
                               aria-hidden="true"
-                              className="ml-4 inline-flex h-8 w-8 items-center justify-center rounded-full bg-blue-100 text-blue-600 transition-transform duration-200 group-open:rotate-45"
+                              className="ml-4 inline-flex h-8 w-8 items-center justify-center rounded-full bg-blue-100/50 text-blue-600 transition-transform duration-300 group-open:rotate-180"
                             >
-                              +
+                              <ChevronDown className="w-5 h-5" />
                             </span>
                           </summary>
                           <div
                             id={`faq-answer-${faqId}-${index}`}
-                            className="px-6 pb-5 text-gray-700 leading-relaxed space-y-3 border-t border-gray-100"
+                            className="px-6 pb-5 text-gray-700 leading-relaxed space-y-3 border-t border-white/20"
                             role="region"
                             aria-labelledby={`faq-question-${faqId}-${index}`}
                           >

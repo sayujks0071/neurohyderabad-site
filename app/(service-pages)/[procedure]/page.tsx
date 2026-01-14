@@ -662,8 +662,20 @@ export async function generateMetadata({ params }: GenerateMetadataProps): Promi
   };
 }
 
+export async function generateStaticParams() {
+  return Object.keys(PROCEDURE_CONTENT).map((procedure) => ({
+    procedure,
+  }));
+}
+
 export default async function ProcedurePage({ params }: { params: Promise<{ procedure: string }> }) {
   const { procedure } = await params;
+  
+  // Early return for sitemap routes to prevent matching
+  if (procedure.includes('sitemap') || procedure.endsWith('.xml')) {
+    notFound();
+  }
+  
   const key = procedure as ProcedureKey;
   const entry = PROCEDURE_CONTENT[key];
 

@@ -1,20 +1,14 @@
-# Daily SEO Changelog - 2026-01-10
+# SEO Changelog - 2026-01-14
 
-## Research Findings
-*   Confirmed dominance of Yashoda/KIMS in local search.
-*   Identified "Spinal Decompression Surgery" as a high-value gap utilized by portals (Yapita).
-*   Found consistent search volume for "Cost" related queries.
+## New Content
+- **Blog Post:** `sciatica-pain-relief-exercises-hyderabad.mdx`
+  - Targets: "sciatica exercises hyderabad", "sciatica pain relief at home"
+  - Intent: Capture TOFU traffic looking for relief before surgery.
 
-## Actions Taken
-1.  **Registry Update:**
-    *   Added "spinal decompression surgery hyderabad".
-    *   Fixed path for "brain tumor surgery hyderabad" (Conditions -> Services).
-    *   Added secondary keywords for sciatica and kyphoplasty.
-2.  **New Page Creation:**
-    *   `app/services/spinal-decompression-surgery-hyderabad/page.tsx`: Targeting the broader intent of nerve decompression, aggregating laminectomy/discectomy under one umbrella.
-3.  **Mapping Refinement:**
-    *   Consolidated "Kyphoplasty" under Osteoporosis condition page.
+## Updates
+- **Keyword Registry:** Added 6 new keywords.
+- **Page Map:** Updated `/conditions/sciatica-pain-treatment-hyderabad` and `/` with new variations.
 
-## Next Steps
-*   Monitor "Scoliosis" volume.
-*   Consider a dedicated "Kyphoplasty" procedure page if volume grows.
+## Insights
+- High demand for "non-surgical" and "exercise" related content for sciatica in Hyderabad.
+- Competitors are weak on localized "exercise" guides.

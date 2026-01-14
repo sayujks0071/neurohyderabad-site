@@ -102,7 +102,7 @@ export default function KukatpallyLocationPage() {
         </div>
       </section>
 
-      <LocalPathways location={location} />
+      <LocalPathways locationId={location.id} mode="location" />
     </main>
   );
 }

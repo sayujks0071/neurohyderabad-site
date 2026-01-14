@@ -1,6 +1,7 @@
 name: Jules Competitor Gap Scan
 on:
   schedule:
+    # 09:00 IST (India Standard Time) = 03:30 UTC
     - cron: '30 3 * * *'
   workflow_dispatch:
 

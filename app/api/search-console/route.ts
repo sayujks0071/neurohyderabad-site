@@ -36,7 +36,9 @@ export async function GET(request: NextRequest) {
       `${SITE_URL}/sitemap-blog.xml`,
       `${SITE_URL}/sitemap-services.xml`,
       `${SITE_URL}/sitemap-conditions.xml`,
-      `${SITE_URL}/sitemap-locations.xml`
+      `${SITE_URL}/sitemap-locations.xml`,
+      `${SITE_URL}/sitemap-images.xml`,
+      `${SITE_URL}/sitemap-videos.xml`,
     ],
     priority_urls: PRIORITY_URLS.map(url => `${SITE_URL}${url}`),
     instructions: {
