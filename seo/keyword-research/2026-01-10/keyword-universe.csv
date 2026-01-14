@@ -1,9 +1,17 @@
 keyword,intent,funnel,geo,cluster_label,recommended_target,difficulty,priority,serp_notes,needs_manual_validation
-endoscopic spine surgery hyderabad,Commercial,BOFU,HYD,HYD | BOFU | SPINE | endoscopic-discectomy | service,/services/endoscopic-spine-surgery-hyderabad,High,90,Local Pack + Ads,FALSE
-uniportal endoscopic spine surgery hyderabad,Commercial,BOFU,HYD,HYD | BOFU | SPINE | endoscopic-discectomy | niche,/services/uniportal-endoscopic-spine-surgery-hyderabad,Med,85,Niche differentiator,FALSE
-single hole spine surgery hyderabad,Commercial,BOFU,HYD,HYD | BOFU | SPINE | endoscopic-discectomy | layman,/services/uniportal-endoscopic-spine-surgery-hyderabad,Low,75,,FALSE
-stitchless spine surgery hyderabad,Commercial,BOFU,HYD,HYD | BOFU | SPINE | endoscopic-discectomy | benefit,/services/uniportal-endoscopic-spine-surgery-hyderabad,Med,80,Used by competitors,FALSE
-best endoscopic spine surgeon in hyderabad,Commercial,BOFU,HYD,HYD | BOFU | SPINE | endoscopic-discectomy | best-doctor,/,High,95,Crowded SERP,FALSE
-endoscopic discectomy cost hyderabad,Commercial,BOFU,HYD,HYD | BOFU | SPINE | endoscopic-discectomy | cost,/services/endoscopic-spine-surgery-hyderabad,High,85,Price snippets visible,FALSE
-endoscopic spine surgery vs microdiscectomy,Informational,MOFU,NONE,NONE | MOFU | SPINE | comparison | tech,/blog/microdiscectomy-vs-laminectomy-recovery-comparison,Med,60,,FALSE
-laser spine surgery hyderabad,Commercial,BOFU,HYD,HYD | BOFU | SPINE | laser | service,/services/minimally-invasive-spine-surgery,High,70,Often conflated with endoscopic,FALSE
+best spine surgeon hyderabad,Commercial,BOFU,HYD,HYD | BOFU | SPINE | surgeon | best,/,High,100,Local Pack,FALSE
+neurosurgeon hyderabad,Commercial,BOFU,HYD,HYD | BOFU | BRAIN | surgeon | general,/,High,95,Local Pack,FALSE
+endoscopic spine surgery hyderabad,Commercial,BOFU,HYD,HYD | BOFU | SPINE | endoscopic | general,/services/minimally-invasive-spine-surgery,Med,90,Video Carousel,FALSE
+spinal decompression surgery hyderabad,Commercial,BOFU,HYD,HYD | BOFU | SPINE | decompression | general,/services/spinal-decompression-surgery-hyderabad,Med,85,Snippet (Yapita),FALSE
+slip disc surgery cost hyderabad,Transactional,BOFU,HYD,HYD | BOFU | SPINE | slip-disc | cost,/services/slip-disc-surgery-cost-hyderabad,Med,85,Snippet (Range),FALSE
+brain tumor surgery hyderabad,Commercial,BOFU,HYD,HYD | BOFU | BRAIN | tumor | surgery,/conditions/brain-tumor-surgery-hyderabad,Med,80,Yashoda/KIMS dominant,FALSE
+lumbar laminectomy surgery hyderabad,Commercial,BOFU,HYD,HYD | BOFU | SPINE | laminectomy | general,/services/lumbar-laminectomy-surgery-hyderabad,Med,75,,FALSE
+scoliosis surgery hyderabad,Commercial,BOFU,HYD,HYD | BOFU | SPINE | scoliosis | surgery,/conditions/scoliosis-surgery-hyderabad,High,60,Yashoda dominant,TRUE
+minimally invasive spine surgery hyderabad,Commercial,BOFU,HYD,HYD | BOFU | SPINE | miss | general,/services/minimally-invasive-spine-surgery,Med,75,,FALSE
+spine surgery cost hyderabad,Transactional,BOFU,HYD,HYD | BOFU | SPINE | general | cost,/services/spine-surgery-cost-hyderabad,High,70,Care Hospitals,FALSE
+spinal fusion surgery hyderabad,Commercial,BOFU,HYD,HYD | BOFU | SPINE | fusion | general,/services/spinal-fusion-surgery-hyderabad,High,70,,FALSE
+neurosurgeon kondapur,Commercial,BOFU,HYD,HYD | BOFU | LOC | kondapur | neurosurgeon,/locations/neurosurgeon-kondapur,Low,65,KIMS Kondapur,FALSE
+neurosurgeon secunderabad,Commercial,BOFU,HYD,HYD | BOFU | LOC | secunderabad | neurosurgeon,/locations/neurosurgeon-secunderabad,Low,60,KIMS Secunderabad,FALSE
+awake spine surgery hyderabad,Informational,MOFU,HYD,HYD | MOFU | SPINE | awake | surgery,/services/awake-spine-surgery-hyderabad,Low,50,Niche USP,FALSE
+kyphoplasty hyderabad,Commercial,BOFU,HYD,HYD | BOFU | SPINE | kyphoplasty | general,/conditions/osteoporotic-spine-fracture-hyderabad,Med,55,Yashoda mentions,FALSE
+sciatic nerve pain relief hyderabad,Informational,MOFU,HYD,HYD | MOFU | SPINE | sciatica | treatment,/conditions/sciatica-pain-treatment-hyderabad,Med,80,,FALSE
