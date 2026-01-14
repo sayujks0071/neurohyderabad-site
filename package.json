@@ -20,6 +20,7 @@
     "gsc:list": "npx tsx scripts/google-seo-automation.ts --list",
     "gsc:submit": "npx tsx scripts/google-seo-automation.ts --sitemap",
     "gsc:submit-all": "npx tsx scripts/submit-all-sitemaps.ts",
+    "gsc:index": "npx tsx scripts/google-seo-automation.ts --index",
     "reindex:gemini": "ts-node scripts/reindex-gemini-rag.ts",
     "new:blog": "ts-node scripts/new-blog.ts",
     "normalize:blog": "ts-node scripts/normalize-blog-metadata.ts",
