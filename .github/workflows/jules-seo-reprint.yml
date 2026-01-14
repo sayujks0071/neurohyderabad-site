@@ -1,6 +1,7 @@
 name: Jules SEO Reprint
 on:
   schedule:
+    # 08:00 IST (India Standard Time) = 02:30 UTC
     - cron: '30 2 * * *'
   workflow_dispatch:
 

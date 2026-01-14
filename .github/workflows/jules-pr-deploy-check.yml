@@ -1,6 +1,7 @@
 name: Jules PR & Deploy Check
 on:
   schedule:
+    # 08:45 IST (India Standard Time) = 03:15 UTC
     - cron: '15 3 * * *'
   workflow_dispatch:
 
