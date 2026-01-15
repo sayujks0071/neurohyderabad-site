@@ -40,7 +40,7 @@ async function main() {
         { name: 'userEngagementDuration' }
       ],
       orderBys: [{ desc: true, metric: { metricName: 'screenPageViews' } }],
-      limit: 10
+      limit: "10" as any
     });
 
     console.log(pad('Page Path', 40) + pad('Views', 10) + pad('Users', 10) + 'Avg Time');
@@ -68,7 +68,7 @@ async function main() {
         dimensions: [{ name: 'sessionSourceMedium' }],
         metrics: [{ name: 'sessions' }, { name: 'bounceRate' }],
         orderBys: [{ desc: true, metric: { metricName: 'sessions' } }],
-        limit: 5
+        limit: "5" as any
     });
 
     console.log(pad('Source / Medium', 40) + pad('Sessions', 10) + 'Bounce Rate');
@@ -84,15 +84,15 @@ async function main() {
 
     // 4. Metadata Check
     console.log('\n🛠️  Property Metadata (Custom Definitions)');
-    const metadata = await client.getMetadata();
+    const metadata: any = await client.getMetadata();
     const customDims = metadata.customDimensions || [];
     const customMets = metadata.customMetrics || [];
 
     console.log(`   Custom Dimensions: ${customDims.length}`);
-    customDims.forEach(d => console.log(`   - ${d.apiName} (${d.scope})`));
+    customDims.forEach((d: any) => console.log(`   - ${d.apiName} (${d.scope})`));
 
     console.log(`   Custom Metrics: ${customMets.length}`);
-    customMets.forEach(m => console.log(`   - ${m.apiName} (${m.scope})`));
+    customMets.forEach((m: any) => console.log(`   - ${m.apiName} (${m.scope})`));
 
 
   } catch (error: any) {
