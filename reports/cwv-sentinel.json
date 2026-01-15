@@ -1,25 +1,39 @@
 {
-  "timestamp": "2026-01-10T03:00:00Z",
-  "build_metrics": {
-    "home_page_js_before": "150kB",
-    "home_page_js_after": "116kB"
-  },
-  "findings": [
-    {
-      "page_type": "Home",
+  "timestamp": "2025-05-20T10:00:00Z",
+  "notes": "Initial run. Build failed due to dependency issues, relying on static analysis.",
+  "pages": {
+    "home": {
       "url": "/",
-      "observation": "High First Load JS (150kB) caused by eager loading of Hypertune SDK in RootLayout.",
-      "action": "Modified HypertuneProvider to dynamically import the SDK in useEffect/requestIdleCallback.",
-      "expected_impact": "Reduced First Load JS by ~34kB (22% reduction). This significantly reduces TBT and improves LCP on slow connections.",
-      "verification": "Next.js build output confirmed reduction from 150kB to 116kB for the home page route."
+      "lcp_candidate": "DoctorCard (Image) or Hero Text",
+      "bottlenecks": [
+        "DoctorCard image could use import for blur placeholder (minor)"
+      ]
     },
-    {
-      "page_type": "Appointment",
+    "appointment": {
       "url": "/appointments",
-      "observation": "LCP element (H1 title) had 'animate-in fade-in delay-100' classes, causing a 100ms+ delay in Largest Contentful Paint.",
-      "action": "Removed animation classes from the H1 title in NeuraLinkBookingApp.tsx.",
-      "expected_impact": "LCP should improve by at least 100ms + animation duration. Text will be visible immediately upon paint.",
-      "verification": "Manual code review of NeuraLinkBookingApp.tsx and successful build."
+      "lcp_candidate": "H1 (hidden) or visible H1 text",
+      "bottlenecks": [
+        "NeuraLinkBookingApp background uses mix-blend-multiply and blur-3xl on large areas, causing high paint cost."
+      ]
+    },
+    "location": {
+      "url": "/neurosurgeon-banjara-hills",
+      "bottlenecks": [
+        "LocationMapEmbed uses iframe but is optimized with click-to-load."
+      ]
+    },
+    "condition": {
+      "url": "/conditions/sciatica-treatment-hyderabad",
+      "bottlenecks": []
+    }
+  },
+  "changes": [
+    {
+      "component": "NeuraLinkBookingApp.tsx",
+      "page_type": "Appointment",
+      "description": "Removed expensive mix-blend-multiply and redundant filter class from background decoration. Added pointer-events-none.",
+      "expected_impact": "Reduced Paint/Composite cost, improving Interaction to Next Paint (INP) and LCP on low-end devices.",
+      "verification": "Visual check (background should look similar), Performance trace (paint time reduction)."
     }
   ]
 }
