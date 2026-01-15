@@ -1,5 +1,15 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import {
+  AlertTriangle,
+  Leaf,
+  Microscope,
+  Activity,
+  UserCheck,
+  ShieldCheck,
+  Clock,
+  HeartHandshake
+} from 'lucide-react';
 import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import ReviewedBy from '@/app/_components/ReviewedBy';
@@ -16,6 +26,8 @@ import { breadcrumbJsonLd, SITE_URL as BASE_URL } from '@/src/lib/seo';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
 import OutcomeMetricsSection from '@/components/OutcomeMetricsSection';
 import RecoveryTimeline from '@/app/_components/RecoveryTimeline';
+import FAQPageSchema from '@/app/_components/FAQPageSchema';
+import JsonLd from '@/components/JsonLd';
 
 const baseMetadata = makeMetadata({
   title: 'Sciatica Treatment in Hyderabad | Expert Pain Relief & Surgery',
@@ -65,10 +77,98 @@ const sciaticaCosts = [
   }
 ];
 
+const faqs = [
+  {
+    question: "What is the fastest way to cure sciatica?",
+    answer: "There is no instant cure, but relief can be accelerated. Rest for 1-2 days (not more), use ice/heat packs, take prescribed anti-inflammatories, and perform gentle stretching. If pain persists, consult a specialist for targeted injections or therapy."
+  },
+  {
+    question: "Can sciatica go away on its own?",
+    answer: "Yes, mild sciatica often resolves within 4-6 weeks with self-care. However, if the pain is severe, causes weakness, or lasts longer than 6 weeks, medical intervention is necessary to prevent permanent nerve damage."
+  },
+  {
+    question: "Is walking good for sciatica?",
+    answer: "Yes, walking is generally good for sciatica as it improves blood flow and reduces inflammation. However, listen to your body—take short walks and stop if the pain worsens. Avoid high-impact activities."
+  },
+  {
+    question: "How do I know if I need surgery for sciatica?",
+    answer: "Surgery is typically considered if: 1) You have significant muscle weakness or loss of bowel/bladder control (emergency), 2) Pain is unbearable despite conservative treatment, or 3) Symptoms persist for more than 6-12 weeks and affect your quality of life."
+  },
+  {
+    question: "What is the success rate of endoscopic spine surgery for sciatica?",
+    answer: "Endoscopic discectomy has a high success rate (over 90%) for relieving leg pain caused by disc herniation. It offers faster recovery and less pain compared to open surgery."
+  },
+  {
+    question: "How much does sciatica treatment cost in Hyderabad?",
+    answer: "The cost varies by treatment type. Conservative care starts from ₹800 (consultation). Spinal injections range from ₹15,000 to ₹25,000. Endoscopic surgery packages typically range from ₹1,20,000 to ₹1,80,000 depending on room category and insurance coverage."
+  }
+];
+
+const medicalWebPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "MedicalWebPage",
+  "name": "Sciatica Treatment in Hyderabad",
+  "description": "Comprehensive guide to sciatica causes, symptoms, and treatments including endoscopic spine surgery by Dr. Sayuj Krishnan.",
+  "medicalAudience": {
+    "@type": "MedicalAudience",
+    "audienceType": "Patients with back and leg pain"
+  },
+  "about": {
+    "@type": "MedicalCondition",
+    "name": "Sciatica",
+    "alternateName": "Sciatic Nerve Pain",
+    "associatedAnatomy": {
+      "@type": "AnatomicalStructure",
+      "name": "Sciatic Nerve"
+    },
+    "differentialDiagnosis": {
+      "@type": "DDxElement",
+      "diagnosis": {
+        "@type": "MedicalCondition",
+        "name": "Herniated Disc"
+      },
+      "distinguishingSign": {
+        "@type": "MedicalSign",
+        "name": "Leg pain radiating below the knee"
+      }
+    },
+    "possibleTreatment": [
+      {
+        "@type": "MedicalTherapy",
+        "name": "Physical Therapy"
+      },
+      {
+        "@type": "MedicalTherapy",
+        "name": "Epidural Steroid Injection"
+      },
+      {
+        "@type": "MedicalProcedure",
+        "name": "Endoscopic Discectomy"
+      }
+    ]
+  },
+  "specialty": "Neurosurgery"
+};
+
 export default function SciaticaTreatmentPage() {
   return (
     <div className="min-h-screen bg-white">
       <PhysicianSchema />
+      <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/conditions/sciatica-treatment-hyderabad`} />
+      <JsonLd data={medicalWebPageSchema} />
+
+      {/* Breadcrumb Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbJsonLd([
+            { name: 'Home', url: BASE_URL },
+            { name: 'Conditions', url: `${BASE_URL}/conditions` },
+            { name: 'Sciatica Treatment', url: `${BASE_URL}/conditions/sciatica-treatment-hyderabad` }
+          ]))
+        }}
+      />
+
       <Section background="blue" className="pt-24 pb-12">
         <header className="text-center mb-8">
           <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">Sciatica Treatment in Hyderabad</h1>
@@ -184,7 +284,9 @@ export default function SciaticaTreatmentPage() {
 
         <div className="mt-12 bg-red-50 p-6 rounded-xl border border-red-100 max-w-4xl mx-auto">
           <div className="flex gap-4 items-start">
-            <span className="text-3xl">⚠️</span>
+            <div className="text-red-500 mt-1">
+              <AlertTriangle className="w-8 h-8" />
+            </div>
             <div>
               <h3 className="text-lg font-bold text-red-800 mb-2">Red Flags: When to Seek Immediate Care</h3>
               <p className="text-gray-700 mb-2">
@@ -231,7 +333,10 @@ export default function SciaticaTreatmentPage() {
         <div className="grid md:grid-cols-2 gap-8">
           <div className="bg-green-50/50 p-8 rounded-2xl border border-green-100">
             <h3 className="text-xl font-bold text-green-800 mb-4 flex items-center gap-2">
-              <span className="bg-green-100 p-2 rounded-lg">🌿</span> Conservative Treatment
+              <span className="bg-green-100 p-2 rounded-lg text-green-700">
+                <Leaf className="w-6 h-6" />
+              </span>
+              Conservative Treatment
             </h3>
             <p className="text-gray-700 mb-4 font-medium">Most cases resolve with non-surgical care within 4-6 weeks.</p>
             <ul className="space-y-4">
@@ -240,8 +345,15 @@ export default function SciaticaTreatmentPage() {
                 <span className="text-gray-600 text-sm">Anti-inflammatories, muscle relaxants, and neuropathic pain medications to reduce symptoms.</span>
               </li>
               <li className="bg-white p-4 rounded-lg shadow-sm">
-                <strong className="block text-gray-900 mb-1">Physical Therapy</strong>
-                <span className="text-gray-600 text-sm">Targeted exercises to improve posture, strengthen back muscles, and improve flexibility.</span>
+                <strong className="block text-gray-900 mb-1">Physical Therapy & Exercises</strong>
+                <span className="text-gray-600 text-sm block mb-2">Targeted exercises to improve posture, strengthen back muscles, and improve flexibility.</span>
+                <Link
+                  href="/blog/sciatica-pain-relief-exercises-hyderabad"
+                  className="text-green-700 font-semibold text-sm hover:underline flex items-center gap-1"
+                >
+                  <Activity className="w-4 h-4" />
+                  View Recommended Sciatica Exercises
+                </Link>
               </li>
               <li className="bg-white p-4 rounded-lg shadow-sm">
                 <strong className="block text-gray-900 mb-1">Pain Interventions</strong>
@@ -252,7 +364,10 @@ export default function SciaticaTreatmentPage() {
 
           <div className="bg-blue-50/50 p-8 rounded-2xl border border-blue-100">
             <h3 className="text-xl font-bold text-blue-800 mb-4 flex items-center gap-2">
-              <span className="bg-blue-100 p-2 rounded-lg">🔬</span> Surgical Solutions
+              <span className="bg-blue-100 p-2 rounded-lg text-blue-700">
+                <Microscope className="w-6 h-6" />
+              </span>
+              Surgical Solutions
             </h3>
             <p className="text-gray-700 mb-4 font-medium">Recommended when conservative care fails or neurological deficits are present.</p>
             <ul className="space-y-4">
@@ -272,6 +387,40 @@ export default function SciaticaTreatmentPage() {
                 <span className="text-gray-600 text-sm">Creating space for the nerve by removing part of the vertebra (lamina).</span>
               </li>
             </ul>
+          </div>
+        </div>
+      </Section>
+
+      <Section background="gray">
+        <h2 className="text-3xl font-bold text-blue-800 mb-8 text-center">Why Choose Dr. Sayuj Krishnan?</h2>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="text-center bg-white p-6 rounded-xl shadow-sm">
+            <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <UserCheck className="w-8 h-8 text-blue-600" />
+            </div>
+            <h3 className="font-semibold text-gray-900 mb-2">Personalized Care</h3>
+            <p className="text-sm text-gray-600">Tailored treatment plans starting with the least invasive options.</p>
+          </div>
+          <div className="text-center bg-white p-6 rounded-xl shadow-sm">
+            <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <ShieldCheck className="w-8 h-8 text-blue-600" />
+            </div>
+            <h3 className="font-semibold text-gray-900 mb-2">Safety First</h3>
+            <p className="text-sm text-gray-600">Advanced monitoring and safety protocols for all procedures.</p>
+          </div>
+          <div className="text-center bg-white p-6 rounded-xl shadow-sm">
+            <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Clock className="w-8 h-8 text-blue-600" />
+            </div>
+            <h3 className="font-semibold text-gray-900 mb-2">Quick Recovery</h3>
+            <p className="text-sm text-gray-600">Focus on techniques that allow for faster return to daily life.</p>
+          </div>
+          <div className="text-center bg-white p-6 rounded-xl shadow-sm">
+            <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <HeartHandshake className="w-8 h-8 text-blue-600" />
+            </div>
+            <h3 className="font-semibold text-gray-900 mb-2">Transparent Costs</h3>
+            <p className="text-sm text-gray-600">Clear communication about treatment costs and insurance options.</p>
           </div>
         </div>
       </Section>
@@ -353,38 +502,13 @@ export default function SciaticaTreatmentPage() {
       <Section className="border-t border-gray-200">
         <h2 className="text-2xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
         <div className="space-y-4 max-w-4xl mx-auto">
-          {[
-            {
-              q: "What is the fastest way to cure sciatica?",
-              a: "There is no instant cure, but relief can be accelerated. Rest for 1-2 days (not more), use ice/heat packs, take prescribed anti-inflammatories, and perform gentle stretching. If pain persists, consult a specialist for targeted injections or therapy."
-            },
-            {
-              q: "Can sciatica go away on its own?",
-              a: "Yes, mild sciatica often resolves within 4-6 weeks with self-care. However, if the pain is severe, causes weakness, or lasts longer than 6 weeks, medical intervention is necessary to prevent permanent nerve damage."
-            },
-            {
-              q: "Is walking good for sciatica?",
-              a: "Yes, walking is generally good for sciatica as it improves blood flow and reduces inflammation. However, listen to your body—take short walks and stop if the pain worsens. Avoid high-impact activities."
-            },
-            {
-              q: "How do I know if I need surgery for sciatica?",
-              a: "Surgery is typically considered if: 1) You have significant muscle weakness or loss of bowel/bladder control (emergency), 2) Pain is unbearable despite conservative treatment, or 3) Symptoms persist for more than 6-12 weeks and affect your quality of life."
-            },
-            {
-              q: "What is the success rate of endoscopic spine surgery for sciatica?",
-              a: "Endoscopic discectomy has a high success rate (over 90%) for relieving leg pain caused by disc herniation. It offers faster recovery and less pain compared to open surgery."
-            },
-            {
-              q: "How much does sciatica treatment cost in Hyderabad?",
-              a: "The cost varies by treatment type. Conservative care starts from ₹800 (consultation). Spinal injections range from ₹15,000 to ₹25,000. Endoscopic surgery packages typically range from ₹1,20,000 to ₹1,80,000 depending on room category and insurance coverage."
-            }
-          ].map((faq, i) => (
+          {faqs.map((faq, i) => (
             <details key={i} className="group bg-white border border-gray-200 rounded-lg p-4 open:bg-gray-50 transition-colors">
               <summary className="font-semibold text-gray-900 cursor-pointer list-none flex justify-between items-center">
-                {faq.q}
+                {faq.question}
                 <span className="text-gray-400 group-open:rotate-180 transition-transform">▼</span>
               </summary>
-              <p className="mt-3 text-gray-700 leading-relaxed">{faq.a}</p>
+              <p className="mt-3 text-gray-700 leading-relaxed">{faq.answer}</p>
             </details>
           ))}
         </div>
@@ -401,119 +525,6 @@ export default function SciaticaTreatmentPage() {
           <NAP />
         </div>
       </Section>
-      
-      {/* Breadcrumb Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumbJsonLd([
-            { name: 'Home', url: BASE_URL },
-            { name: 'Conditions', url: `${BASE_URL}/conditions` },
-            { name: 'Sciatica Treatment', url: `${BASE_URL}/conditions/sciatica-treatment-hyderabad` }
-          ]))
-        }}
-      />
-      {/* FAQ Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": "What is the fastest way to cure sciatica?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "There is no instant cure, but relief can be accelerated. Rest for 1-2 days (not more), use ice/heat packs, take prescribed anti-inflammatories, and perform gentle stretching. If pain persists, consult a specialist for targeted injections or therapy."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Can sciatica go away on its own?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Yes, mild sciatica often resolves within 4-6 weeks with self-care. However, if the pain is severe, causes weakness, or lasts longer than 6 weeks, medical intervention is necessary to prevent permanent nerve damage."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Is walking good for sciatica?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Yes, walking is generally good for sciatica as it improves blood flow and reduces inflammation. However, listen to your body—take short walks and stop if the pain worsens. Avoid high-impact activities."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How do I know if I need surgery for sciatica?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Surgery is typically considered if: 1) You have significant muscle weakness or loss of bowel/bladder control (emergency), 2) Pain is unbearable despite conservative treatment, or 3) Symptoms persist for more than 6-12 weeks and affect your quality of life."
-                }
-              },
-               {
-                "@type": "Question",
-                "name": "What is the success rate of endoscopic spine surgery for sciatica?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Endoscopic discectomy has a high success rate (over 90%) for relieving leg pain caused by disc herniation. It offers faster recovery and less pain compared to open surgery."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How much does sciatica treatment cost in Hyderabad?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "The cost varies by treatment type. Conservative care starts from ₹800 (consultation). Spinal injections range from ₹15,000 to ₹25,000. Endoscopic surgery packages typically range from ₹1,20,000 to ₹1,80,000 depending on room category and insurance coverage."
-                }
-              }
-            ]
-          })
-        }}
-      />
-      {/* MedicalCondition Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "MedicalCondition",
-            "name": "Sciatica",
-            "alternateName": "Sciatic Nerve Pain",
-            "associatedAnatomy": {
-              "@type": "AnatomicalStructure",
-              "name": "Sciatic Nerve"
-            },
-            "differentialDiagnosis": {
-              "@type": "DDxElement",
-              "diagnosis": {
-                "@type": "MedicalCondition",
-                "name": "Herniated Disc"
-              },
-              "distinguishingSign": {
-                "@type": "MedicalSign",
-                "name": "Leg pain radiating below the knee"
-              }
-            },
-            "possibleTreatment": [
-              {
-                "@type": "MedicalTherapy",
-                "name": "Physical Therapy"
-              },
-              {
-                "@type": "MedicalTherapy",
-                "name": "Epidural Steroid Injection"
-              },
-              {
-                "@type": "MedicalProcedure",
-                "name": "Endoscopic Discectomy"
-              }
-            ]
-          })
-        }}
-      />
     </div>
   );
 }
