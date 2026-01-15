@@ -14,7 +14,6 @@ import TrustProof from '@/app/_components/TrustProof';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import { getServiceSources } from '../sources';
 import { patientStories } from '@/src/content/stories';
-import { PhysicianSchema } from "@/src/components/schema/PhysicianSchema";
 import SurgeryComparisonTable from '@/src/components/SurgeryComparisonTable';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
 
@@ -163,7 +162,7 @@ export default function UniportalPage() {
     <>
       <JsonLd data={schema} />
       <JsonLd data={gbpSchema} />
-      <PhysicianSchema />
+      {/* PhysicianSchema removed as it's in layout */}
       <main className="container mx-auto px-4 py-16">
         <Breadcrumbs
           items={[

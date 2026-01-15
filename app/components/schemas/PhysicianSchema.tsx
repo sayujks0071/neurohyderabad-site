@@ -1,6 +1,22 @@
 import { SITE_URL } from '../../../src/lib/seo';
+import { CANONICAL_PHYSICIAN_NAME, CANONICAL_TELEPHONE, getLocationById } from '../../../src/data/locations';
+
+const MAIN_LOCATION_ID = 'malakpet'; // Assuming Malakpet is the main location for schema
 
 export default function PhysicianSchema() {
+  const mainLocation = getLocationById(MAIN_LOCATION_ID);
+
+  // Fallback data if location is not found (though it should be)
+  const telephone = mainLocation ? mainLocation.telephone : CANONICAL_TELEPHONE;
+  const address = mainLocation ? mainLocation.address : {
+    streetAddress: "Room No 317, OPD Block, Yashoda Hospital, Malakpet",
+    addressLocality: "Hyderabad",
+    addressRegion: "Telangana",
+    postalCode: "500036",
+    addressCountry: "IN"
+  };
+  const locationName = mainLocation ? mainLocation.name : "Yashoda Hospital, Malakpet";
+
   const serviceOffers = [
     {
       name: "Spine Surgery",
@@ -64,7 +80,7 @@ export default function PhysicianSchema() {
       {
         "@type": "Physician",
         "@id": `${SITE_URL}/#physician`,
-        "name": "Dr Sayuj Krishnan S",
+        "name": CANONICAL_PHYSICIAN_NAME,
         "alternateName": ["Dr Sayuj Krishnan", "Dr Sayuj"],
         "givenName": "Sayuj",
         "familyName": "Krishnan",
@@ -74,7 +90,7 @@ export default function PhysicianSchema() {
         "disambiguatingDescription": "Hyderabad (India)-based neurosurgeon and spine surgeon at Yashoda Hospital, Malakpet. Not associated with US-based internal medicine physician Dr. Sayuj Paudel.",
         "url": SITE_URL,
         "image": `${SITE_URL}/images/og-default.jpg`,
-        "telephone": "+91 97782 80044",
+        "telephone": telephone,
         "email": "hellodr@drsayuj.info",
         "identifier": [
           {
@@ -114,12 +130,12 @@ export default function PhysicianSchema() {
         ],
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "Room No 317, OPD Block, Yashoda Hospital, Malakpet",
-          "addressLocality": "Hyderabad",
+          "streetAddress": address.streetAddress,
+          "addressLocality": address.addressLocality,
           "addressNeighborhood": "Malakpet",
-          "addressRegion": "Telangana",
-          "postalCode": "500036",
-          "addressCountry": "IN"
+          "addressRegion": address.addressRegion,
+          "postalCode": address.postalCode,
+          "addressCountry": address.addressCountry
         },
         "geo": {
           "@type": "GeoCoordinates",
@@ -225,15 +241,15 @@ export default function PhysicianSchema() {
         ],
         "hospitalAffiliation": {
           "@type": "Hospital",
-          "name": "Yashoda Hospital, Malakpet",
+          "name": locationName,
           "url": "https://www.yashodahospitals.com/malakpet/",
           "address": {
             "@type": "PostalAddress",
-            "streetAddress": "Nalgonda X Roads, Malakpet",
-            "addressLocality": "Hyderabad",
-            "addressRegion": "Telangana",
-            "postalCode": "500036",
-            "addressCountry": "IN"
+            "streetAddress": address.streetAddress,
+            "addressLocality": address.addressLocality,
+            "addressRegion": address.addressRegion,
+            "postalCode": address.postalCode,
+            "addressCountry": address.addressCountry
           }
         },
         "knowsAbout": [
@@ -323,16 +339,16 @@ export default function PhysicianSchema() {
         "name": "Dr Sayuj Krishnan - Neurosurgeon in Hyderabad",
         "description": "Expert neurosurgeon specializing in endoscopic spine surgery and brain surgery in Hyderabad",
         "url": SITE_URL,
-        "telephone": "+91 97782 80044",
+        "telephone": telephone,
         "email": "hellodr@drsayuj.info",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "Room No 317, OPD Block, Yashoda Hospital, Malakpet",
-          "addressLocality": "Hyderabad",
+          "streetAddress": address.streetAddress,
+          "addressLocality": address.addressLocality,
           "addressNeighborhood": "Malakpet",
-          "addressRegion": "Telangana",
-          "postalCode": "500036",
-          "addressCountry": "IN"
+          "addressRegion": address.addressRegion,
+          "postalCode": address.postalCode,
+          "addressCountry": address.addressCountry
         },
         "geo": {
           "@type": "GeoCoordinates",

@@ -53,71 +53,13 @@ export default function Page() {
     return notFound();
   }
 
-  // Schema expects breadcrumb as ListItem format inside the component or we can omit as it generates defaults.
-  // LocationSchema was defined to take breadcrumb list but implemented defaults. Let's rely on defaults for now or pass context if needed.
-  // Actually, I didn't add breadcrumb prop to LocationSchema in my previous write_file. I will update LocationSchema to accept it or handle it.
-  // Re-reading LocationSchema.tsx: It generates breadcrumb with defaults.
-  // But wait, the previous file content I read had `breadcrumb={breadcrumb}` passed to LocationSchema, implying the PREVIOUS file had a version of LocationSchema that accepted it?
-  // No, I read the file and then overwrote it. Wait, did I overwrite `app/neurosurgeon-banjara-hills/page.tsx`?
-  // No, I read it. The file content I saw was ALREADY using the new components?
-  // Ah, looking at the `read_file` output:
-  // It imports `LocationNAPCard`, `LocationCTAs`, `LocalPathways` etc.
-  // Is it possible the user already started this work or I am hallucinating?
-  // Let's re-read the `read_file` output carefully.
-  // Yes! The file `app/neurosurgeon-banjara-hills/page.tsx` ALREADY imports the components I just created.
-  // But I just created them.
-  // Does `read_file` return the content AFTER I created the components?
-  // No, `read_file` reads the file on disk.
-  // The imports are:
-  // `import { LocationNAPCard } from "@/src/components/locations/LocationNAPCard";`
-  // Maybe I'm confused about the sequence.
-  // If the file content I read *already has* the imports, it means either:
-  // 1. I wrote to the file previously (I haven't).
-  // 2. The file already had these imports and was broken (because the components didn't exist).
-  // 3. I am hallucinating the file content.
-
-  // Let's look at the `read_file` output again.
-  // It shows:
-  // import { LocationNAPCard } from "@/src/components/locations/LocationNAPCard";
-  // ...
-  // <LocationSchema location={location} breadcrumb={breadcrumb} faq={FAQ} />
-  // ...
-  // <LocalPathways location={location} />
-
-  // This is strange because `LocalPathways` in my implementation takes `mode="location"` and `locationId`, not `location` object directly (well, `locationId` prop).
-  // My implementation: `export const LocalPathways: React.FC<LocalPathwaysProps> = ({ mode, locationId, ... })`
-  // The file usage: `<LocalPathways location={location} />`
-  // This implies the file expects a DIFFERENT interface.
-
-  // Conclusion: The file `app/neurosurgeon-banjara-hills/page.tsx` already exists and seems to have been updated to use these components, BUT with a potentially different API signature than what I just implemented (or what I see in the file).
-  // Or maybe the file I read *is* the target state? No, that doesn't make sense.
-  // Wait, I haven't written `app/neurosurgeon-banjara-hills/page.tsx` yet.
-  // I read it.
-  // If the file already has the imports, it implies the components were expected to be there.
-  // BUT `ls src/components` didn't show `locations/` folder initially.
-  // So the code in `app/neurosurgeon-banjara-hills/page.tsx` was likely pointing to non-existent files?
-  // Or maybe I misread the `read_file` output.
-
-  // Let's re-examine `read_file` output for `app/neurosurgeon-banjara-hills/page.tsx`.
-  // It definitely has the imports.
-  // And it uses `<LocalPathways location={location} />`.
-
-  // My `LocalPathways` implementation:
-  // `interface LocalPathwaysProps { mode: Mode; locationId?: string; ... }`
-
-  // So there is a mismatch. I need to update the page to match my component API.
-  // Also, `LocationSchema` in the file is passed `faq={FAQ}`.
-  // My `LocationSchema` implementation does NOT accept `faq`.
-  // I need to update `LocationSchema` to accept `faq` (FAQPage schema).
-  // And update `app/neurosurgeon-banjara-hills/page.tsx` to use the correct props.
+  const breadcrumb = [
+     { name: "Neurosurgeon in Banjara Hills", item: `https://www.drsayuj.info/${location.slug}` },
+  ];
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
-      <LocationSchema
-         location={location}
-         // breadcrumb handling needs to be checked in LocationSchema
-         faq={FAQ}
-      />
+      <LocationSchema location={location} breadcrumb={breadcrumb} faq={FAQ} />
 
       <h1 className="text-3xl md:text-4xl font-bold">Neurosurgeon in Banjara Hills, Hyderabad</h1>
       <p className="mt-4 text-lg">
@@ -164,9 +106,7 @@ export default function Page() {
         </div>
       </section>
 
-      <div className="mt-12">
-        <LocalPathways mode="location" locationId={location.id} />
-      </div>
+      <LocalPathways mode="location" locationId={location.id} />
     </main>
   );
 }

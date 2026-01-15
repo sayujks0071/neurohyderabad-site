@@ -14,7 +14,6 @@ import JsonLd from '@/components/JsonLd';
 import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
-import { PhysicianSchema } from "@/src/components/schema/PhysicianSchema";
 import CostTransparencySection from '@/src/components/CostTransparencySection';
 import PatientJourneySection from '@/src/components/PatientJourneySection';
 
@@ -187,7 +186,7 @@ export default function LumbarLaminectomyPage() {
         ]}
       />
       <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/lumbar-laminectomy-surgery-hyderabad`} />
-      <PhysicianSchema />
+      {/* PhysicianSchema removed as it's in layout */}
       <div className="min-h-screen bg-white">
         <script
           type="application/ld+json"

@@ -53,10 +53,15 @@ export default function Page() {
     return notFound();
   }
 
+  const breadcrumb = [
+     { name: "Neurosurgeon in Gachibowli", item: `https://www.drsayuj.info/${location.slug}` },
+  ];
+
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
       <LocationSchema
          location={location}
+         breadcrumb={breadcrumb}
          faq={FAQ}
       />
 

@@ -10,15 +10,14 @@ import { makeMetadata } from '@/app/_lib/meta';
 import Section from '@/app/_components/Section';
 import { patientStories } from '../../../src/content/stories';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
-import { PhysicianSchema } from "@/src/components/schema/PhysicianSchema";
 import CostTransparencySection from '@/src/components/CostTransparencySection';
 import TeleconsultationForm from '@/components/TeleconsultationForm';
 import OutcomeMetricsSection from '@/components/OutcomeMetricsSection';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
 
 const baseMetadata = makeMetadata({
-  title: 'Spondylolisthesis Treatment in Hyderabad | Slipped Vertebra Surgery Cost',
-  description: 'Expert treatment for Spondylolisthesis (Slipped Vertebra) by Dr. Sayuj Krishnan. Minimally invasive fusion (MIS-TLIF) costs and recovery in Hyderabad.',
+  title: 'Spondylolisthesis Treatment in Hyderabad | Spinal Fusion',
+  description: 'Expert treatment for Spondylolisthesis (Slipped Vertebra) by Dr. Sayuj Krishnan. Minimally invasive fusion (TLIF) surgery options in Hyderabad.',
   canonicalPath: '/conditions/spondylolisthesis-treatment-hyderabad',
 });
 
@@ -34,64 +33,60 @@ export const metadata: Metadata = {
 };
 
 const spineStories = patientStories
-  .filter((story) => story.tags.includes('spine') || story.tags.includes('fusion'))
+  .filter((story) => story.tags.includes('spine') || story.tags.includes('fusion') || story.tags.includes('listhesis'))
   .slice(0, 2);
 
 const COSTS = [
   {
-    procedure: 'MIS TLIF (Fusion)',
-    range: '₹2,50,000 - ₹3,50,000',
-    recovery: '4-6 weeks',
-    includes: ['Titanium Implants', 'Minimally Invasive Access', '4 Days Hospital Stay', 'Physiotherapy']
+    procedure: 'MIS-TLIF (Keyhole Fusion)',
+    range: '₹2,80,000 - ₹3,50,000',
+    recovery: '4 weeks',
+    includes: ['Surgeon Fees', 'Titanium Implants', '3-4 Days Hospital Stay']
   },
   {
-    procedure: 'Open TLIF (Fusion)',
-    range: '₹2,00,000 - ₹2,80,000',
-    recovery: '6-8 weeks',
-    includes: ['Standard Incision', 'Implants & Graft', '5-6 Days Hospital Stay']
+    procedure: 'Open TLIF',
+    range: '₹2,20,000 - ₹2,80,000',
+    recovery: '6 weeks',
+    includes: ['Standard Fusion', 'Titanium Implants', '5 Days Hospital Stay']
   },
   {
-    procedure: 'Laminectomy (Decompression)',
+    procedure: 'Decompression (No Fusion)',
     range: '₹1,20,000 - ₹1,60,000',
-    recovery: '2-3 weeks',
-    includes: ['Nerve Release Only', 'No Implants', '2 Days Hospital Stay']
+    recovery: '2 weeks',
+    includes: ['Bone Spur Removal', 'No Implants', '1-2 Days Stay']
   }
 ];
 
 export default function SpondylolisthesisPage() {
   const faqs = [
     {
-      question: 'Do I really need surgery for spondylolisthesis?',
-      answer: 'Not always. Surgery is usually recommended only if you have Grade 3/4 slips, or if you have Grade 1/2 slips with persistent nerve pain/weakness that hasn\'t improved after 6 weeks of rehabilitation and medication.'
+      question: 'What is spondylolisthesis?',
+      answer: 'It is a condition where one vertebra slips forward over the one below it. This instability can pinch nerves, causing back pain and leg pain (sciatica).'
     },
     {
-      question: 'What is the cost of spondylolisthesis surgery in Hyderabad?',
-      answer: 'The cost typically ranges from ₹2.5 Lakhs to ₹3.5 Lakhs for Minimally Invasive TLIF (Fusion). This includes hospital stay, implants, and surgeon fees. Open surgery may cost slightly less, but recovery is longer.'
+      question: 'Is surgery always needed for spondylolisthesis?',
+      answer: 'No. Grade 1 (minor slip) can often be managed with physiotherapy and core strengthening. Surgery is advised for Grade 2 or higher slips, or if there is severe nerve compression causing foot weakness.'
     },
     {
-      question: 'How long is the recovery after spinal fusion?',
-      answer: 'With MIS-TLIF, patients usually walk the next day. Desk work can often resume in 3-4 weeks. Complete bone fusion takes 3-6 months, during which heavy lifting is restricted.'
+      question: 'What is TLIF surgery?',
+      answer: 'TLIF (Transforaminal Lumbar Interbody Fusion) is the gold standard surgery for this condition. We realign the slipped bone, free the nerves, and fuse the vertebrae using screws and a cage.'
     },
     {
-      question: 'Can spondylolisthesis be cured with exercise?',
-      answer: 'Grade 1 slips can often be stabilized with core strengthening exercises. While the slip itself won\'t reverse, the pain can vanish completely, avoiding the need for surgery.'
-    },
-    {
-      question: 'Is MIS TLIF better than open surgery?',
-      answer: 'Yes, for most patients. MIS TLIF involves smaller incisions, less muscle cutting, less blood loss, and a shorter hospital stay compared to traditional open fusion.'
+      question: 'How long does it take to recover from spinal fusion?',
+      answer: 'Patients walk the next day. You can return to light work in 3-4 weeks. Complete bone fusion takes 3-6 months, but implants hold the spine stable immediately.'
     }
   ];
 
   return (
     <div className="min-h-screen bg-white">
-      <PhysicianSchema />
+      {/* PhysicianSchema removed as it's in layout */}
       <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/conditions/spondylolisthesis-treatment-hyderabad`} />
 
       <Section background="blue" className="pt-24 pb-12">
         <header className="text-center mb-8">
           <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">Spondylolisthesis Treatment in Hyderabad</h1>
           <p className="text-xl text-gray-700 max-w-3xl mx-auto mb-8">
-            Advanced care for "slipped vertebrae" – stabilizing your spine with modern, minimally invasive techniques.
+            Comprehensive care for Spinal Instability (Slipped Vertebra). Advanced minimally invasive fusion (TLIF) to restore stability and stop pain.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
@@ -113,27 +108,25 @@ export default function SpondylolisthesisPage() {
       <Section>
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">What is Spondylolisthesis?</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">Understanding the "Slipped Bone"</h2>
             <div className="prose max-w-none text-gray-700">
               <p className="text-lg mb-4">
-                Spondylolisthesis (spon-di-lo-lis-thee-sis) is a spinal condition where one of the lower vertebrae slips forward onto the bone directly beneath it.
-                This is different from a "slip disc" (which involves the soft cushion). Here, the <strong>bone itself shifts position</strong>.
+                Spondylolisthesis occurs when a spinal bone (vertebra) slides forward out of place. This instability stretches the nerves and causes persistent low back pain that worsens when standing or walking.
               </p>
               <p className="mb-4">
-                This slippage can compress the spinal cord or nerves, leading to lower back pain, leg pain (sciatica), and hamstring tightness.
-                It is common in older adults (degenerative) but can also occur in young athletes (isthmic).
+                It is commonly caused by age-related wear (Degenerative) or a crack in the bone from youth (Isthmic). If untreated, the slip can progress, leading to severe nerve damage.
               </p>
             </div>
           </div>
           <div className="bg-gray-50 p-8 rounded-2xl border border-gray-100 shadow-sm">
-            <h3 className="text-xl font-bold text-gray-900 mb-4">Common Symptoms</h3>
+            <h3 className="text-xl font-bold text-gray-900 mb-4">Symptoms of Instability</h3>
             <ul className="space-y-3">
               {[
-                "Persistent lower back pain that worsens with standing/walking",
-                "Pain radiating down the legs (Sciatica)",
-                "Tight hamstrings (back of thighs)",
-                "Stiffness in the back, especially in the morning",
-                "Difficulty standing for long periods"
+                "Lower back pain that feels 'broken' or 'loose'",
+                "Pain radiating to buttocks and legs (Sciatica)",
+                "Hamstring tightness (back of thighs)",
+                "Difficulty standing or walking for long periods",
+                "Waddling gait in severe cases"
               ].map((symptom, i) => (
                 <li key={i} className="flex gap-3 items-start text-gray-700">
                   <span className="mt-1.5 w-1.5 h-1.5 bg-blue-600 rounded-full flex-shrink-0" />
@@ -146,58 +139,34 @@ export default function SpondylolisthesisPage() {
       </Section>
 
       <Section background="gray">
-        <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Grades of Slippage</h2>
-        <p className="text-center max-w-2xl mx-auto mb-8 text-gray-700">Doctors classify the severity based on how much the bone has slipped forward.</p>
-        <div className="grid md:grid-cols-4 gap-4">
-          {[
-            { grade: "Grade 1", desc: "Less than 25% slip. Often treated without surgery." },
-            { grade: "Grade 2", desc: "25% to 50% slip. May cause significant pain." },
-            { grade: "Grade 3", desc: "50% to 75% slip. Usually requires stabilization." },
-            { grade: "Grade 4", desc: "More than 75% slip. Severe instability." }
-          ].map((item, i) => (
-            <div key={i} className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 text-center">
-              <div className="text-2xl font-bold text-blue-600 mb-2">{item.grade}</div>
-              <p className="text-gray-600">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      <Section>
         <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Treatment Options</h2>
 
         <div className="grid md:grid-cols-2 gap-8">
-          <div className="bg-green-50/50 p-8 rounded-2xl border border-green-100">
+          <div className="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm">
             <h3 className="text-xl font-bold text-green-800 mb-4">Conservative Care</h3>
-            <p className="text-gray-700 mb-4">For Grade 1 and mild symptoms, we always start here.</p>
+            <p className="text-gray-700 mb-4">For mild slips (Grade 1) with manageable pain.</p>
             <ul className="space-y-3 list-disc list-inside text-gray-700">
-              <li><strong>Core Strengthening:</strong> Specific exercises to stabilize the spine.</li>
-              <li><strong>Activity Modification:</strong> Avoiding heavy lifting and hyperextension.</li>
-              <li><strong>Bracing:</strong> Temporary back brace to provide support.</li>
-              <li><strong>Pain Management:</strong> Medications and nerve blocks.</li>
+              <li><strong>Core Strengthening:</strong> Physiotherapy to stabilize the spine naturally with muscles.</li>
+              <li><strong>Pain Management:</strong> Medication and occasional epidural injections.</li>
+              <li><strong>Lifestyle Changes:</strong> Weight loss and avoiding hyperextension.</li>
             </ul>
           </div>
 
-          <div className="bg-blue-50/50 p-8 rounded-2xl border border-blue-100">
+          <div className="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm">
             <h3 className="text-xl font-bold text-blue-800 mb-4">Surgical Stabilization</h3>
-            <p className="text-gray-700 mb-4">For higher grades or when nerve pain persists.</p>
+            <p className="text-gray-700 mb-4">For unstable slips (Grade 2+) or nerve compression.</p>
             <ul className="space-y-3 list-disc list-inside text-gray-700">
-              <li><strong>Spinal Fusion (TLIF):</strong> Joining the vertebrae together using screws and a cage to stop the slipping.</li>
-              <li><strong>Minimally Invasive Fusion (MIS-TLIF):</strong> Doing the fusion through small incisions for faster recovery.</li>
-              <li><strong>Decompression:</strong> Removing bone spurs pressing on nerves.</li>
+              <li><strong>TLIF (Fusion):</strong> Realigning and fusing the bones with titanium screws and cages.</li>
+              <li><strong>Decompression:</strong> Freeing the trapped nerves.</li>
+              <li><strong>Minimally Invasive Option:</strong> Performing the fusion through keyhole incisions for faster recovery.</li>
             </ul>
-             <div className="mt-4 pt-4 border-t border-blue-200">
-                <Link href="/services/spinal-fusion-surgery-hyderabad" className="text-blue-600 font-semibold hover:underline">
-                    Learn about Spinal Fusion Cost & Procedure →
-                </Link>
-             </div>
           </div>
         </div>
       </Section>
 
       <CostTransparencySection costs={COSTS} />
 
-      <OutcomeMetricsSection procedure="Spinal Fusion (TLIF)" />
+      <OutcomeMetricsSection procedure="Spinal Fusion" />
 
        {/* Patient Stories Section */}
       <Section background="gray">

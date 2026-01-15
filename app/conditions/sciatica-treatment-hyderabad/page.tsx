@@ -10,7 +10,6 @@ import { makeMetadata } from '@/app/_lib/meta';
 import Section from '@/app/_components/Section';
 import { patientStories } from '../../../src/content/stories';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
-import { PhysicianSchema } from "@/src/components/schema/PhysicianSchema";
 import PatientEducationVideos from '@/app/_components/PatientEducationVideos';
 import { breadcrumbJsonLd, SITE_URL as BASE_URL } from '@/src/lib/seo';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
@@ -68,7 +67,7 @@ const sciaticaCosts = [
 export default function SciaticaTreatmentPage() {
   return (
     <div className="min-h-screen bg-white">
-      <PhysicianSchema />
+      {/* Removed PhysicianSchema as it is now in layout */}
       <Section background="blue" className="pt-24 pb-12">
         <header className="text-center mb-8">
           <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">Sciatica Treatment in Hyderabad</h1>

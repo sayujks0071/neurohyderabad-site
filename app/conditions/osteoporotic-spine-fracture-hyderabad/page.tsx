@@ -10,7 +10,6 @@ import { makeMetadata } from '@/app/_lib/meta';
 import Section from '@/app/_components/Section';
 import { patientStories } from '../../../src/content/stories';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
-import { PhysicianSchema } from "@/src/components/schema/PhysicianSchema";
 import CostTransparencySection from '@/src/components/CostTransparencySection';
 import TeleconsultationForm from '@/components/TeleconsultationForm';
 import OutcomeMetricsSection from '@/components/OutcomeMetricsSection';
@@ -84,7 +83,7 @@ export default function OsteoporoticFracturePage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <PhysicianSchema />
+      {/* PhysicianSchema removed as it's in layout */}
       <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/conditions/osteoporotic-spine-fracture-hyderabad`} />
 
       <Section background="blue" className="pt-24 pb-12">

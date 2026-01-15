@@ -1,309 +1,271 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import Link from 'next/link';
-import { SITE_URL } from '../../../src/lib/seo';
-import OutcomeMetricsSection from '@/components/OutcomeMetricsSection';
-import TeleconsultationForm from '@/components/TeleconsultationForm';
-import { patientStories } from '../../../src/content/stories';
-import ReviewedBy from '@/app/_components/ReviewedBy';
+import Breadcrumbs from '@/app/components/Breadcrumbs';
+import JsonLd from '@/components/JsonLd';
 import NAP from '@/app/_components/NAP';
+import ReviewedBy from '@/app/_components/ReviewedBy';
+import MapEmbed from '@/components/MapEmbed';
 import { makeMetadata } from '@/app/_lib/meta';
+import { SITE_URL } from '@/src/lib/seo';
+import { buildLocalServiceSchema } from '@/src/lib/schema/localService';
 import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
-import { getServiceSources } from '../sources';
-import JsonLd from '@/components/JsonLd';
-import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
-import FAQPageSchema from '@/app/_components/FAQPageSchema';
+import TrustProof from '@/app/_components/TrustProof';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
-import { PhysicianSchema } from "@/src/components/schema/PhysicianSchema";
+import { getServiceSources } from '../sources';
+import { patientStories } from '@/src/content/stories';
+import CostTransparencySection from '@/src/components/CostTransparencySection';
+
+const SERVICE_SLUG = 'cervical-endoscopic-spine-surgery-hyderabad';
 
 const baseMetadata = makeMetadata({
-  title: 'Cervical Endoscopic Spine Surgery Hyderabad | Dr. Sayuj Krishnan',
-  description: 'Advanced cervical endoscopic spine surgery in Hyderabad. Treat neck pain and radiculopathy with keyhole surgery. Fast recovery, no fusion.',
-  canonicalPath: '/services/cervical-endoscopic-spine-surgery-hyderabad',
+  title: 'Cervical Endoscopic Spine Surgery in Hyderabad | Keyhole Neck Surgery',
+  description:
+    'Advanced endoscopic cervical spine surgery by Dr. Sayuj Krishnan at Yashoda Hospital. Minimally invasive relief for neck pain and radiculopathy with rapid recovery.',
+  canonicalPath: `/services/${SERVICE_SLUG}`,
 });
 
 export const metadata: Metadata = {
   ...baseMetadata,
+  keywords: [
+    'cervical endoscopic spine surgery hyderabad',
+    'posterior cervical foraminotomy',
+    'endoscopic anterior cervical discectomy',
+    'keyhole neck surgery',
+    'neck pain specialist hyderabad',
+    'cervical radiculopathy treatment',
+  ],
   openGraph: {
-    title: baseMetadata.title,
-    description: baseMetadata.description,
-    url: `${SITE_URL}/services/cervical-endoscopic-spine-surgery-hyderabad`,
-    siteName: 'Dr. Sayuj Krishnan - Neurosurgeon in Hyderabad',
-    images: [
-      {
-        url: `${SITE_URL}/api/og?title=Cervical%20Endoscopic%20Spine%20Surgery&subtitle=Keyhole%20Neck%20Solutions%20in%20Hyderabad`,
-        width: 1200,
-        height: 630,
-        alt: 'Cervical Endoscopic Spine Surgery - Dr. Sayuj Krishnan',
-      },
-    ],
+    title: 'Cervical Endoscopic Spine Surgery | Keyhole Neck Surgery Hyderabad',
+    description:
+      'Minimally invasive endoscopic solutions for cervical disc herniation and stenosis. Dr. Sayuj Krishnan offers cutting-edge care at Yashoda Hospital Malakpet.',
+    url: `${SITE_URL}/services/${SERVICE_SLUG}`,
+    siteName: 'Dr. Sayuj Krishnan - Neurosurgeon Hyderabad',
     locale: 'en_IN',
     type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: baseMetadata.title,
-    description: baseMetadata.description,
-    images: [`${SITE_URL}/api/og?title=Cervical%20Endoscopic%20Spine%20Surgery&subtitle=Keyhole%20Neck%20Solutions%20in%20Hyderabad`],
+    images: [
+      {
+        url: `${SITE_URL}/api/og?title=${encodeURIComponent(
+          'Cervical Endoscopic Surgery'
+        )}&subtitle=${encodeURIComponent('Keyhole Neck Solutions')}`,
+        width: 1200,
+        height: 630,
+        alt: 'Cervical Endoscopic Spine Surgery – Dr. Sayuj Krishnan',
+      },
+    ],
   },
 };
 
-const spineStoryHighlights = patientStories
-  .filter((story) => story.tags.includes('cervical') || story.tags.includes('spine'))
-  .slice(0, 2);
+const schema = buildLocalServiceSchema({
+  slug: SERVICE_SLUG,
+  name: 'Cervical Endoscopic Spine Surgery',
+  description:
+    'Full endoscopic cervical spine surgery for disc herniation and foraminal stenosis using minimally invasive posterior or anterior approaches.',
+});
 
-const ARTICLE_SOURCES = getServiceSources('minimally-invasive-spine-surgery'); // Reusing MISS sources as they are relevant
+const ARTICLE_SOURCES = getServiceSources(SERVICE_SLUG);
 
-// Google Business Profile JSON-LD
-const gbpSchema = {
-  "@context": "https://schema.org",
-  "@type": "MedicalBusiness",
-  "name": "Cervical Endoscopic Spine Surgery | Dr. Sayuj Krishnan",
-  "url": "https://www.drsayuj.info/services/cervical-endoscopic-spine-surgery-hyderabad/?utm_source=google&utm_medium=organic&utm_campaign=gbp_cervical_endoscopic",
-  "image": "https://www.drsayuj.info/images/og-default.jpg",
-  "description": "Specialized cervical endoscopic spine surgery for neck pain and radiculopathy by Dr. Sayuj Krishnan in Hyderabad.",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://www.drsayuj.info/services/cervical-endoscopic-spine-surgery-hyderabad/"
+const indications = [
+  'Cervical disc herniation causing arm pain (radiculopathy)',
+  'Foraminal stenosis (narrowing of the nerve exit canal)',
+  'Cervical myelopathy (in selected early cases)',
+  'Failed previous neck surgery requiring revision',
+];
+
+const faqs = [
+  {
+    question: 'How is endoscopic cervical surgery different from ACDF?',
+    answer:
+      'ACDF involves fusion with plates and screws. Endoscopic posterior foraminotomy preserves motion, avoids implants, and does not require fusion, making it ideal for lateral disc herniations.',
   },
-  "medicalSpecialty": "Minimally Invasive Spine Surgery",
-  "areaServed": {
-    "@type": "AdministrativeArea",
-    "name": "Hyderabad, Telangana, India"
+  {
+    question: 'Is it safe to operate on the neck endoscopically?',
+    answer:
+      'Yes. The full-endoscopic technique uses high-definition vision and continuous irrigation, providing excellent visualization of nerves. It is a precise, targeted procedure with a high safety profile in experienced hands.',
   },
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Room No. 317, OPD Block, Yashoda Hospital, Malakpet",
-    "addressLocality": "Hyderabad",
-    "addressRegion": "Telangana",
-    "postalCode": "500036",
-    "addressCountry": "IN"
+  {
+    question: 'What is the recovery time?',
+    answer:
+      'Most patients experience immediate relief from arm pain. Neck soreness resolves in a few days. Desk work can often resume in 1–2 weeks, compared to 4–6 weeks for open fusion surgery.',
   },
-  "openingHours": "Mo-Sa 10:00-17:00",
-  "telephone": "+91-97782-80044",
-  "priceRange": "₹₹",
-  "sameAs": [
-    "https://www.instagram.com/drsayujneurohyd",
-    "https://www.linkedin.com/in/drsayujkrishnan",
-    "https://www.youtube.com/@drsayujneurohyd"
-  ]
-};
+];
+
+const COSTS = [
+  {
+    procedure: 'Endoscopic Posterior Foraminotomy',
+    range: '₹1,50,000 - ₹2,00,000',
+    recovery: '1-2 Days',
+    includes: ['Keyhole Surgery', 'Nerve Decompression', 'No Implants']
+  },
+  {
+    procedure: 'Endoscopic Anterior Discectomy',
+    range: '₹1,80,000 - ₹2,30,000',
+    recovery: '1-2 Days',
+    includes: ['Anterior Approach', 'Disc Removal', 'HD Visualization']
+  },
+  {
+    procedure: 'ACDF (Fusion)',
+    range: '₹2,50,000 - ₹3,50,000',
+    recovery: '3-4 Days',
+    includes: ['Implants (Cage/Plate)', 'Bone Graft', 'Hospital Stay']
+  }
+];
 
 export default function CervicalEndoscopicSpineSurgeryPage() {
-  const approaches = [
-    {
-      title: 'Posterior Cervical Foraminotomy',
-      description: 'Endoscopic decompression of the nerve root from the back of the neck. Ideal for lateral disc herniations.',
-      benefits: ['Avoids fusion', 'Preserves neck motion', 'No throat manipulation', 'Same-day discharge'],
-      recovery: '1-2 weeks'
-    },
-    {
-      title: 'Anterior Endoscopic Discectomy',
-      description: 'Targeted removal of central disc herniations from the front using an endoscope, often without needing fusion.',
-      benefits: ['Direct vision of cord', 'Minimal swallowing risk', 'Small incision', 'Rapid relief'],
-      recovery: '2-3 weeks'
-    }
-  ];
-
-  const faqs = [
-    {
-      question: 'What is Cervical Endoscopic Spine Surgery?',
-      answer:
-        'It is an advanced minimally invasive technique to treat neck pain and arm pain (radiculopathy) caused by disc herniations or stenosis. Using a high-definition endoscope and micro-instruments through a tiny incision (<1cm), Dr. Sayuj removes the compression while preserving the stability of the spine.'
-    },
-    {
-      question: 'Does this surgery require fusion (screws and plates)?',
-      answer:
-        'In many cases, NO. The primary advantage of endoscopic cervical foraminotomy is that it preserves the natural motion of your neck. Unlike ACDF (Anterior Cervical Discectomy and Fusion), we do not need to place screws, plates, or cages.'
-    },
-    {
-      question: 'Is it safe for voice and swallowing?',
-      answer:
-        'Yes, especially with the posterior approach. Traditional anterior neck surgery carries a small risk of temporary hoarseness or difficulty swallowing. The posterior endoscopic approach enters from the back of the neck, completely avoiding the throat and vocal cords.'
-    },
-    {
-      question: 'What conditions can be treated?',
-      answer:
-        'It is highly effective for Cervical Radiculopathy (pinched nerve causing arm pain), Foraminal Stenosis, and Soft Disc Herniations. It may not be suitable for large central calcified discs or severe spinal cord compression (myelopathy), which may require other approaches.'
-    },
-    {
-      question: 'How fast is the recovery?',
-      answer:
-        'Patients typically go home the same day or the next morning. You can walk and move your neck gently immediately after surgery. Most patients return to desk jobs within 1 week and driving within 2 weeks.'
-    },
-    {
-      question: 'Why choose Dr. Sayuj for this procedure?',
-      answer:
-        'Dr. Sayuj Krishnan is one of the few neurosurgeons in Hyderabad proficient in both Anterior and Posterior Endoscopic Cervical techniques. His "Motion Preservation" philosophy prioritizes saving your natural spinal function whenever possible.'
-    }
-  ];
-
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": faqs.map((faq) => ({
-      "@type": "Question",
-      "name": faq.question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faq.answer
-      }
-    }))
-  };
+  const relevantStories = patientStories.filter(story => {
+    const tags = story.tags.join(' ').toLowerCase();
+    return tags.includes('cervical') || tags.includes('neck');
+  }).slice(0, 2);
 
   return (
     <>
-      <JsonLd data={gbpSchema} />
-      <BreadcrumbSchema
-        items={[
-          { name: 'Home', path: '/' },
-          { name: 'Services', path: '/services' },
-          { name: 'Cervical Endoscopic Surgery', path: '/services/cervical-endoscopic-spine-surgery-hyderabad' },
-        ]}
-      />
-      <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/cervical-endoscopic-spine-surgery-hyderabad`} />
-      <PhysicianSchema />
-      <div className="min-h-screen bg-white">
-      <div className="container mx-auto px-4 py-16">
-        <header className="text-center mb-8">
-          <h1 className="text-4xl font-bold mb-4">Cervical Endoscopic Spine Surgery in Hyderabad</h1>
-          <AuthorByline
-            publishedOn="2026-01-03"
-            updatedOn="2026-01-03"
-            className="justify-center mb-4"
-          />
-          <p className="text-lg text-gray-600">Advanced keyhole neck surgery to relieve arm pain without fusion.</p>
+      <JsonLd data={schema} />
+      {/* PhysicianSchema removed as it's in layout */}
+      <main className="container mx-auto px-4 py-16">
+        <Breadcrumbs
+          items={[
+            { name: 'Home', href: '/' },
+            { name: 'Services', href: '/services/' },
+            { name: 'Cervical Endoscopic Spine Surgery', href: `/services/${SERVICE_SLUG}/` },
+          ]}
+        />
+
+        <header className="grid md:grid-cols-2 gap-10 items-start mb-16">
+          <div>
+            <p className="text-sm font-medium uppercase tracking-wide text-blue-600 mb-3">Neck Pain Solutions</p>
+            <h1 className="text-4xl md:text-5xl font-bold text-blue-900 leading-tight mb-6">
+              Cervical Endoscopic Spine Surgery in Hyderabad
+            </h1>
+            <AuthorByline
+              publishedOn="2025-09-15"
+              updatedOn="2026-01-10"
+              className="mb-6"
+            />
+            <p className="text-lg text-gray-700 mb-6">
+              Suffering from radiating arm pain or neck stiffness? Endoscopic cervical surgery offers a
+              <strong> "fusion-free" alternative</strong> to traditional neck surgery. Dr. Sayuj Krishnan uses advanced
+              keyhole techniques to relieve nerve pressure while preserving natural neck motion.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Link
+                href="/appointments/"
+                className="inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3 text-white font-semibold hover:bg-blue-700 transition-colors"
+              >
+                Book Neck Consultation
+              </Link>
+              <Link
+                href="/about"
+                className="inline-flex items-center justify-center rounded-full border border-blue-200 px-6 py-3 text-blue-700 font-semibold hover:border-blue-400 hover:text-blue-900 transition-colors"
+              >
+                Dr. Sayuj's Expertise
+              </Link>
+            </div>
+          </div>
+          <TrustProof serviceType="spine" className="mb-6" stories={relevantStories} />
+          <div className="bg-blue-50 border border-blue-100 rounded-2xl p-6 shadow-sm">
+            <h2 className="text-xl font-semibold text-blue-800 mb-4">Why Consider Endoscopic Neck Surgery?</h2>
+            <ul className="space-y-3 text-gray-700">
+              <li>• <strong>No Fusion Required:</strong> Maintains natural neck movement.</li>
+              <li>• <strong>Tiny Incision:</strong> Less than 8mm, minimizing scar tissue.</li>
+              <li>• <strong>Rapid Recovery:</strong> Often a day-care or overnight procedure.</li>
+              <li>• <strong>Less Pain:</strong> Minimal muscle dissection compared to open surgery.</li>
+            </ul>
+          </div>
         </header>
 
-        <section className="bg-blue-50 p-6 rounded-lg mb-8">
-          <p className="text-center">
-            <strong>Contact:</strong>
-            <a href="tel:+919778280044" className="text-blue-600 hover:underline ml-2">+91-9778280044</a> •
-            <Link href="/appointments" className="text-blue-600 hover:underline ml-2">Book Consultation</Link>
+      {/* FAQPage JSON-LD for this page */}
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": faqs.map((faq) => ({
+            "@type": "Question",
+            "name": faq.question,
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": faq.answer
+            }
+          }))
+        }}
+      />
+
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-blue-900 mb-6">Conditions Treated</h2>
+          <p className="text-gray-700 mb-4">
+            This advanced technique is highly effective for specific cervical spine problems where nerve roots are compressed.
           </p>
+          <ul className="grid md:grid-cols-2 gap-4 text-sm text-gray-700">
+            {indications.map((condition) => (
+              <li key={condition} className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">• {condition}</li>
+            ))}
+          </ul>
         </section>
 
-        <section className="mb-12">
-            <LocalPathways mode="service" />
-        </section>
-
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold text-blue-800 mb-6">Relief from Neck & Arm Pain Without Fusion</h2>
-          <div className="prose max-w-none">
-            <p className="text-lg text-gray-700 mb-6">
-              Suffering from neck pain that shoots down your arm? You might have a pinched nerve (cervical radiculopathy).
-              Historically, surgery for this meant removing the entire disc and fusing the bones (ACDF).
-              Today, <strong>Cervical Endoscopic Spine Surgery</strong> allows Dr. Sayuj to free the nerve through a tiny incision,
-              often preserving your disc and natural neck motion.
-            </p>
+        <section className="mb-16 grid md:grid-cols-2 gap-10">
+          <div>
+            <h2 className="text-3xl font-bold text-blue-900 mb-4">The Procedure: What Happens?</h2>
             <p className="text-gray-700 mb-6">
-              This "Keyhole" approach is performed at Yashoda Hospital, Malakpet, utilizing high-definition endoscopes for maximum safety and precision.
+              The most common endoscopic approach is the <strong>Posterior Cervical Foraminotomy</strong>. It is performed
+              from the back of the neck. A small tube is inserted to the target area. Using high-definition endoscopy
+              and a high-speed drill, a small amount of bone and ligament is removed to open the nerve channel (foramen).
+              The disc herniation is then carefully removed, freeing the nerve.
             </p>
+            <p className="text-gray-700">
+              Since the disc itself is preserved (unlike ACDF where it is removed entirely), spinal stability is maintained
+              without the need for screws or plates.
+            </p>
+          </div>
+          <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+            <h3 className="text-xl font-semibold text-blue-800 mb-3">Recovery Timeline</h3>
+            <ol className="space-y-3 text-sm text-gray-700 list-decimal list-inside">
+              <li><strong>Day 0:</strong> Surgery (approx 60-90 mins). Mobilize within 2-3 hours.</li>
+              <li><strong>Day 1:</strong> Discharge. Minimal neck collar usage (soft collar for comfort).</li>
+              <li><strong>Week 1:</strong> Light activities. Wound check.</li>
+              <li><strong>Week 2-3:</strong> Return to desk work and driving.</li>
+            </ol>
           </div>
         </section>
 
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold text-blue-800 mb-6">Our Approaches</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            {approaches.map((approach, index) => (
-              <div key={index} className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-                <h3 className="text-xl font-semibold text-blue-700 mb-3">{approach.title}</h3>
-                <p className="text-gray-600 mb-4">{approach.description}</p>
-                <div className="mb-4">
-                  <h4 className="font-semibold text-gray-700 mb-2">Key Benefits:</h4>
-                  <ul className="space-y-1">
-                    {approach.benefits.map((benefit, idx) => (
-                      <li key={idx} className="text-sm text-gray-600">• {benefit}</li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="text-sm text-blue-600 font-medium">
-                  Recovery: {approach.recovery}
-                </div>
+        <CostTransparencySection
+          costs={COSTS}
+          disclaimer="Estimates for self-pay patients. Implants (if needed for fusion) are charged additionally at MRP. Insurance usually covers these procedures."
+        />
+
+        <section className="mb-16 grid lg:grid-cols-[1.2fr_1fr] gap-10 items-start">
+          <div className="space-y-6">
+            <h2 className="text-3xl font-bold text-blue-900">Expert Care at Yashoda Malakpet</h2>
+            <p className="text-gray-700">
+              Dr. Sayuj Krishnan is among the few neurosurgeons in Hyderabad proficient in Full Endoscopic Cervical Spine Surgery.
+              The procedure is performed in a state-of-the-art suite with dedicated endoscopic towers and safety equipment.
+            </p>
+            <NAP className="bg-gray-50 border border-gray-200 rounded-xl p-6" />
+            <div>
+              <h3 className="text-xl font-semibold text-blue-800 mb-3">Map & Directions</h3>
+              <MapEmbed />
+            </div>
+          </div>
+          <div className="bg-blue-50 border border-blue-100 rounded-2xl p-6 shadow-sm space-y-5">
+            <h3 className="text-xl font-semibold text-blue-800">Frequently Asked Questions</h3>
+            {faqs.map((faq) => (
+              <div key={faq.question}>
+                <p className="font-semibold text-blue-900">{faq.question}</p>
+                <p className="text-sm text-blue-900/80 leading-relaxed">{faq.answer}</p>
               </div>
             ))}
-          </div>
-        </section>
-
-        <OutcomeMetricsSection procedure="Endoscopic Cervical Foraminotomy" />
-
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold text-blue-800 mb-6 text-center">Patient Stories</h2>
-          <div className="grid md:grid-cols-2 gap-6">
-             {spineStoryHighlights.length > 0 ? (
-                spineStoryHighlights.map((story) => (
-                  <article key={story.id} className="bg-white rounded-lg p-6 shadow-sm border-l-4 border-blue-500">
-                    <div className="flex items-center mb-4">
-                      <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                        <span className="text-blue-600 font-bold text-lg">
-                          {story.patientInitials.charAt(0)}
-                        </span>
-                      </div>
-                      <div className="ml-4">
-                        <div className="font-semibold text-gray-800">{story.patientInitials}</div>
-                        <div className="text-sm text-gray-600">{story.procedure}</div>
-                      </div>
-                    </div>
-                    <p className="text-gray-700 italic">“{story.quote}”</p>
-                    <Link
-                      href={`/patient-stories/${story.slug}`}
-                      className="mt-4 inline-flex items-center text-blue-600 font-semibold hover:text-blue-700"
-                    >
-                      Read full story →
-                    </Link>
-                  </article>
-                ))
-             ) : (
-                <p className="text-gray-600">Patient stories coming soon.</p>
-             )}
-          </div>
-        </section>
-
-        <section className="mb-12">
-          <TeleconsultationForm pageSlug="/services/cervical-endoscopic-spine-surgery-hyderabad" service="Cervical Endoscopic Spine Surgery" />
-        </section>
-
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold text-blue-800 mb-6">Frequently Asked Questions</h2>
-          <div className="space-y-6">
-            {faqs.map((faq) => (
-              <article key={faq.question} className="bg-white border border-blue-100 rounded-lg p-6 shadow-sm">
-                <h3 className="text-xl font-semibold text-blue-700 mb-3">{faq.question}</h3>
-                <p className="text-gray-700">{faq.answer}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="bg-blue-50 p-8 rounded-lg text-center">
-          <h2 className="text-2xl font-bold text-blue-800 mb-4">Are you a candidate?</h2>
-          <p className="text-gray-600 mb-6">
-            Dr. Sayuj will review your MRI to see if you qualify for motion-preserving endoscopic surgery.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/appointments/"
-              className="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-colors"
+              href="/blog/cervical-spine-surgery-recovery-tips/"
+              className="inline-flex items-center justify-center rounded-full bg-blue-600 px-5 py-2 text-white font-semibold hover:bg-blue-700 transition-colors"
             >
-              Book Consultation
+              Read Recovery Guide
             </Link>
-            <a
-              href="https://wa.me/919778280044"
-              className="border-2 border-green-600 text-green-700 px-8 py-3 rounded-full hover:bg-green-600 hover:text-white transition-colors"
-            >
-              WhatsApp MRI
-            </a>
           </div>
         </section>
 
-        <SourceList sources={ARTICLE_SOURCES} heading="Scientific References" />
+        <LocalPathways mode="service" />
 
-        <section className="mt-12 space-y-6">
-          <ReviewedBy lastReviewed="2026-01-03" />
-          <NAP />
-        </section>
-      </div>
-    </div>
+        <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
+        <ReviewedBy lastReviewed="2026-01-10" />
+      </main>
     </>
   );
 }

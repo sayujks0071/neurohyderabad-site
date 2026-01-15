@@ -8,6 +8,7 @@ import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import { sources } from '../../blog/sources';
+import { LocalPathways } from "@/src/components/locations/LocalPathways";
 
 // Static generation with 24-hour revalidation
 export const revalidate = 86400;
@@ -463,6 +464,7 @@ export default function TrigeminalNeuralgiaTreatmentPage() {
 
       <section className="mx-auto max-w-5xl px-4 py-12">
         <LocalNAP />
+        <LocalPathways mode="condition" />
         <div className="mt-8">
           <YMYLAttribution lastReviewed="2025-02-14" />
         </div>

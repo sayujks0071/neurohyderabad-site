@@ -103,7 +103,7 @@ export default function NizampetLocationPage() {
         </div>
       </section>
 
-      <LocalPathways location={location} />
+      <LocalPathways locationId={location.id} mode="location" />
     </main>
   );
 }
