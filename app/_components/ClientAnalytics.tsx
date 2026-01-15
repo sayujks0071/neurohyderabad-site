@@ -143,12 +143,13 @@ export default function ClientAnalytics() {
   return (
     <>
       <CookieConsent />
+      {/* Load GA tag (Consent Mode default denied) so tag detection works */}
+      <GoogleAnalytics />
       {enableAnalytics && <GoogleAdsConversions />}
       {shouldLoad && (
         <>
           <WebVitals />
           <StatsigAnalytics />
-          <GoogleAnalytics />
           <PrivacyFriendlyAnalytics />
           <FloatingWhatsApp />
         </>
