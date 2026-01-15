@@ -61,7 +61,7 @@ export class GA4Client {
       dateRanges: [{ startDate, endDate }],
       dimensions: [{ name: 'pagePath' }],
       metrics: [{ name: 'screenPageViews' }],
-      limit,
+      limit: String(limit) as any, // Cast to string/any to satisfy API types
       orderBys: [
         {
           desc: true,
