@@ -22,6 +22,7 @@
     "gsc:submit-all": "npx tsx scripts/submit-all-sitemaps.ts",
     "gsc:index": "npx tsx scripts/google-seo-automation.ts --index",
     "gsc:index-priority": "npx tsx scripts/index-priority-urls.ts",
+    "jules:weekly-seo": "npx tsx scripts/jules-weekly-seo-automation.ts",
     "analytics:bigquery-insights": "npx tsx scripts/ga4-bigquery-insights.ts",
     "reindex:gemini": "ts-node scripts/reindex-gemini-rag.ts",
     "new:blog": "ts-node scripts/new-blog.ts",

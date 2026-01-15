@@ -54,6 +54,7 @@ docs/internal/
 !docs/MAINTENANCE_REPORT.md
 !integrations/apps-script/README.md
 !docs/JULES_SETUP.md
+!docs/JULES_API_SETUP.md
 !AGENTS.md
 !jules-prompts/*.md
 !docs/jules-automations.md
