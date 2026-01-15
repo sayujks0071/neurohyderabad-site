@@ -1,6 +1,12 @@
-import { google } from 'googleapis';
+import { google, analyticsdata_v1beta, analyticsadmin_v1beta } from 'googleapis';
 
-// Interface for GA4 analytics report
+// Re-export types for convenience
+export type RunReportRequest = analyticsdata_v1beta.Schema$RunReportRequest;
+export type RunRealtimeReportRequest = analyticsdata_v1beta.Schema$RunRealtimeReportRequest;
+export type RunReportResponse = analyticsdata_v1beta.Schema$RunReportResponse;
+export type RunRealtimeReportResponse = analyticsdata_v1beta.Schema$RunRealtimeReportResponse;
+
+// Interface for simple report options (backward compatibility)
 export interface GAReportOptions {
   startDate?: string;
   endDate?: string;
@@ -33,7 +39,9 @@ export class GA4Client {
       const credentials = JSON.parse(keyJson);
       this.auth = new google.auth.GoogleAuth({
         credentials,
-        scopes: ['https://www.googleapis.com/auth/analytics.readonly'],
+        scopes: [
+            'https://www.googleapis.com/auth/analytics.readonly',
+        ],
       });
     } catch (e) {
       throw new Error('Failed to parse GOOGLE_INDEXING_KEY_JSON. Ensure it is valid JSON.');
@@ -42,49 +50,100 @@ export class GA4Client {
 
   /**
    * Fetches the most visited pages for the specified date range
+   * (Simplified wrapper around runReport)
    */
   async getMostPopularPages(options: GAReportOptions = {}): Promise<GAPageView[]> {
+    const startDate = options.startDate || '30daysAgo';
+    const endDate = options.endDate || 'today';
+    const limit = options.limit || 10;
+
+    const response = await this.runReport({
+      dateRanges: [{ startDate, endDate }],
+      dimensions: [{ name: 'pagePath' }],
+      metrics: [{ name: 'screenPageViews' }],
+      limit,
+      orderBys: [
+        {
+          desc: true,
+          metric: { metricName: 'screenPageViews' },
+        },
+      ],
+    });
+
+    const rows = response.rows || [];
+    return rows.map((row) => ({
+      path: row.dimensionValues?.[0]?.value || '/',
+      views: parseInt(row.metricValues?.[0]?.value || '0', 10),
+    }));
+  }
+
+  /**
+   * Runs a core Google Analytics Data API report.
+   * Mirrors the functionality of the MCP `run_report` tool.
+   */
+  async runReport(requestBody: Omit<RunReportRequest, 'property'>): Promise<RunReportResponse> {
     if (!this.propertyId) {
       throw new Error('GA4 Property ID is not configured. Set GA4_PROPERTY_ID env var or pass it to constructor.');
     }
 
     const analyticsData = google.analyticsdata({ version: 'v1beta', auth: this.auth });
-    const startDate = options.startDate || '30daysAgo';
-    const endDate = options.endDate || 'today';
-    const limit = options.limit || 10;
 
     try {
       const response = await analyticsData.properties.runReport({
         property: `properties/${this.propertyId}`,
-        requestBody: {
-          dateRanges: [{ startDate, endDate }],
-          dimensions: [{ name: 'pagePath' }],
-          metrics: [{ name: 'screenPageViews' }],
-          limit,
-          orderBys: [
-            {
-              desc: true,
-              metric: { metricName: 'screenPageViews' },
-            },
-          ],
-        },
+        requestBody,
       });
 
-      const rows = response.data.rows || [];
-      return rows.map((row) => ({
-        path: row.dimensionValues?.[0]?.value || '/',
-        views: parseInt(row.metricValues?.[0]?.value || '0', 10),
-      }));
+      return response.data;
     } catch (error: any) {
-      console.error('Error fetching GA4 data:', error.message);
-      // Determine if it's a permission error or invalid property
-      if (error.code === 403) {
-        throw new Error(`Permission denied. Ensure the service account has 'Viewer' access to property ${this.propertyId}.`);
-      }
-      if (error.code === 404) {
-        throw new Error(`Property ${this.propertyId} not found. Check the ID.`);
-      }
+      this.handleError(error);
+      throw error; // Should be unreachable due to handleError throwing
+    }
+  }
+
+  /**
+   * Runs a realtime Google Analytics report.
+   * Mirrors the functionality of the MCP `run_realtime_report` tool.
+   */
+  async runRealtimeReport(requestBody: Omit<RunRealtimeReportRequest, 'property'>): Promise<RunRealtimeReportResponse> {
+    if (!this.propertyId) {
+      throw new Error('GA4 Property ID is not configured. Set GA4_PROPERTY_ID env var or pass it to constructor.');
+    }
+
+    const analyticsData = google.analyticsdata({ version: 'v1beta', auth: this.auth });
+
+    try {
+      const response = await analyticsData.properties.runRealtimeReport({
+        property: `properties/${this.propertyId}`,
+        requestBody,
+      });
+
+      return response.data;
+    } catch (error: any) {
+      this.handleError(error);
       throw error;
+    }
+  }
+
+  /**
+   * Retrieves metadata (custom dimensions and metrics) for the property.
+   * Mirrors the MCP `get_custom_dimensions_and_metrics` tool.
+   */
+  async getMetadata(): Promise<analyticsdata_v1beta.Schema$Metadata> {
+    if (!this.propertyId) {
+      throw new Error('GA4 Property ID is not configured.');
+    }
+
+    const analyticsData = google.analyticsdata({ version: 'v1beta', auth: this.auth });
+
+    try {
+      const response = await analyticsData.properties.getMetadata({
+        name: `properties/${this.propertyId}/metadata`,
+      });
+      return response.data;
+    } catch (error: any) {
+        this.handleError(error);
+        throw error;
     }
   }
 
@@ -94,7 +153,6 @@ export class GA4Client {
    */
   async listAccessibleProperties(): Promise<Array<{ name: string; displayName: string; createTime: string }>> {
     try {
-        // We need the analytics.readonly scope which is already requested
         const analyticsAdmin = google.analyticsadmin({ version: 'v1beta', auth: this.auth });
 
         // List account summaries which include properties
@@ -117,5 +175,16 @@ export class GA4Client {
         console.error('Error listing properties:', error.message);
         throw error;
     }
+  }
+
+  private handleError(error: any) {
+    console.error('GA4 API Error:', error.message);
+    if (error.code === 403) {
+      throw new Error(`Permission denied. Ensure the service account has 'Viewer' access to property ${this.propertyId}.`);
+    }
+    if (error.code === 404) {
+      throw new Error(`Property ${this.propertyId} not found. Check the ID.`);
+    }
+    throw error;
   }
 }
