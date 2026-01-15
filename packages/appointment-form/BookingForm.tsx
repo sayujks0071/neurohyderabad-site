@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -16,7 +16,7 @@ interface BookingFormProps {
   initialData?: BookingData | null;
 }
 
-const appointmentSchema = z.object({
+export const appointmentSchema = z.object({
   patientName: z.string().min(2, "Name is too short"),
   email: z.string().email("Please enter a valid email address"),
   contactNumber: z.string().regex(/^[6-9]\d{9}$/, "Invalid Indian mobile number"),
@@ -25,10 +25,10 @@ const appointmentSchema = z.object({
     return Number.isFinite(n) && n > 0 && n <= 120;
   }, "Age seems too high"),
   gender: z.enum(["male", "female", "other"], { errorMap: () => ({ message: "Please select a gender" }) }),
-  requestedDate: z.date({ required_error: "Please select a date" }).min(new Date(new Date().setHours(0, 0, 0, 0)), "Date must be in the future"),
+  requestedDate: z.date({ required_error: "Please select a date" }).min(new Date(), "Date must be in the future"),
   appointmentTime: z.string().min(1, "Please select a time"),
   reason: z.string().min(10, "Please provide more details (min 10 characters)"),
-  painScore: z.coerce.number().min(1).max(10).optional(),
+  painScore: z.coerce.number().min(1).max(10),
   hasMRI: z.boolean().default(false),
 });
 
