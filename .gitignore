@@ -55,9 +55,11 @@ docs/internal/
 !integrations/apps-script/README.md
 !docs/JULES_SETUP.md
 !docs/JULES_API_SETUP.md
+!docs/JULES_GIT_CONFIG_FIX.md
 !AGENTS.md
 !jules-prompts/*.md
 !docs/jules-automations.md
+!scripts/fix-jules-git-config.sh
 *.patch
 *.sh
 !.jules-setup.sh
