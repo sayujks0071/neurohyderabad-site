@@ -2,7 +2,12 @@
 // import { Statsig } from '@statsig/js-client';
 
 // Export GA4 measurement ID for GoogleAnalytics component
-export const GA4_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID || 'G-MMLQCFN4ZJ';
+// Prefer the env var documented in `.env.example`, but keep backward compatibility.
+export const GA4_MEASUREMENT_ID =
+  process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ||
+  process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID ||
+  process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID ||
+  "G-BBTYBBDWMR";
 
 // Event tracking interface
 interface EventProps {

@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
+import { GA4_MEASUREMENT_ID } from '@/src/lib/analytics';
 
 /**
  * Privacy-Friendly Analytics Component
@@ -12,7 +13,7 @@ import { usePathname } from 'next/navigation';
  * Usage:
  * - Set NEXT_PUBLIC_PLAUSIBLE_DOMAIN for Plausible
  * - Set NEXT_PUBLIC_FATHOM_SITE_ID for Fathom
- * - Set NEXT_PUBLIC_GOOGLE_ANALYTICS_ID for Google Analytics (fallback)
+ * - GA4 is loaded separately via `src/components/GoogleAnalytics.tsx` (after consent)
  */
 export default function PrivacyFriendlyAnalytics() {
   const pathname = usePathname();
@@ -54,11 +55,15 @@ export default function PrivacyFriendlyAnalytics() {
       return; // Use privacy-friendly option if available
     }
 
-    const FALLBACK_GA_ID = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || 'G-MMLQCFN4ZJ';
+    // Avoid double-loading GA: the app already loads GA4 via `GoogleAnalytics` component.
+    if (GA4_MEASUREMENT_ID && GA4_MEASUREMENT_ID !== 'G-XXXXXXXXXX') {
+      return;
+    }
 
-    // Only load GA if no privacy-friendly option is configured
-    const gaId = FALLBACK_GA_ID;
+    const gaId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
     if (!gaId) return;
+
+    if ((window as any).gtag) return;
 
     // Load gtag
     const script1 = document.createElement('script');
