@@ -110,7 +110,7 @@ export default function BookingForm({
     }
   }, [initialData, reset]);
 
-  const handleFormSubmit = (data: BookingFormValues) => {
+  const handleFormSubmit = async (data: BookingFormValues) => {
     // Map form values back to BookingData
     const submissionData: BookingData = {
       patientName: data.patientName,
@@ -124,7 +124,7 @@ export default function BookingForm({
       painScore: data.painScore,
       mriScanAvailable: data.hasMRI,
     };
-    onSubmit(submissionData);
+    await onSubmit(submissionData);
   };
 
   return (
@@ -317,7 +317,7 @@ export default function BookingForm({
           </div>
 
           <div className="mt-10 pt-6 border-t border-slate-200 text-center">
-            <Button type="submit" disabled={isSubmitting}>
+            <Button type="submit" isLoading={isSubmitting} disabled={isSubmitting}>
               {isSubmitting ? "Sending..." : "Submit Request"}
             </Button>
           </div>
