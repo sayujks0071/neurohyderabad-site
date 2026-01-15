@@ -18,11 +18,6 @@ const StatsigAnalytics = dynamic(
   { ssr: false, loading: () => null }
 );
 
-const GoogleAnalytics = dynamic(
-  () => import("../../src/components/GoogleAnalytics"),
-  { ssr: false, loading: () => null }
-);
-
 const GoogleAdsConversions = dynamic(
   () => import("../../src/components/GoogleAdsConversions"),
   { ssr: false, loading: () => null }
@@ -148,7 +143,6 @@ export default function ClientAnalytics() {
         <>
           <WebVitals />
           <StatsigAnalytics />
-          <GoogleAnalytics />
           <PrivacyFriendlyAnalytics />
           <FloatingWhatsApp />
         </>
