@@ -99,83 +99,70 @@ async function callJulesAPI() {
   console.log(`📅 Date: ${today}`);
   console.log(`📝 Using prompt from: ${fs.existsSync(PROMPT_FILE) ? PROMPT_FILE : 'inline'}\n`);
 
-  // Try multiple possible API endpoints
-  const apiUrls = [
-    process.env.JULES_API_URL,
-    'https://api.jules.ai/v1/automations',
-    'https://jules.ai/api/v1/automations',
-    'https://api.google.com/jules/v1/automations',
-  ].filter(Boolean) as string[];
+  // Jules API uses Google Cloud API format
+  const baseUrl = process.env.JULES_API_URL || 'https://jules.googleapis.com';
+  const apiVersion = '/v1alpha';
+  const sessionsEndpoint = `${baseUrl}${apiVersion}/sessions`;
 
-  for (const apiUrl of apiUrls) {
-    try {
-      console.log(`🔗 Trying API endpoint: ${apiUrl}`);
-      
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${JULES_API_TOKEN}`,
-          'Content-Type': 'application/json',
-          'User-Agent': 'neurohyderabad-site-automation/1.0',
+  try {
+    console.log(`🔗 Creating Jules session: ${sessionsEndpoint}`);
+    
+    // Try OAuth token first (as API expects OAuth 2), fallback to API key
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json',
+      'User-Agent': 'neurohyderabad-site-automation/1.0',
+    };
+    
+    // Use Authorization Bearer token (OAuth 2) as primary method
+    headers['Authorization'] = `Bearer ${JULES_API_TOKEN}`;
+    
+    const response = await fetch(sessionsEndpoint, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({
+        prompt: WEEKLY_PROMPT,
+        sourceContext: {
+          source: 'sources/github-sayujks0071-neurohyderabad-site',
+          githubRepoContext: {
+            startingBranch: 'main',
+          },
         },
-        body: JSON.stringify({
-          prompt: WEEKLY_PROMPT,
-          context: {
-            repo: 'sayujks0071/neurohyderabad-site',
-            branch: 'main',
-            task: 'weekly-seo-maintenance',
-            date: today,
-          },
-          instructions: {
-            make_changes: true,
-            commit: true,
-            commit_message: `SEO: weekly maintenance ${today}`,
-          },
-        }),
-      });
+        title: `SEO: weekly maintenance ${today}`,
+        requirePlanApproval: false, // Auto-approve for automation
+      }),
+    });
 
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.warn(`⚠️  Endpoint ${apiUrl} returned ${response.status}: ${errorText}`);
-        continue;
-      }
-
-      const result = await response.json();
-      
-      console.log('✅ Jules API Response:');
-      console.log(JSON.stringify(result, null, 2));
-      
-      if (result.changes_made) {
-        console.log('\n📊 Changes Summary:');
-        result.changes_made.forEach((change: any, idx: number) => {
-          console.log(`  ${idx + 1}. ${change.file}: ${change.reason}`);
-        });
-      }
-      
-      if (result.seo_insights) {
-        console.log('\n💡 SEO Insights:');
-        console.log(result.seo_insights);
-      }
-      
-      if (result.competitor_gaps) {
-        console.log('\n🔍 Competitor Gaps:');
-        console.log(result.competitor_gaps);
-      }
-      
-      console.log('\n✅ Weekly SEO automation completed!');
-      return;
-      
-    } catch (error) {
-      console.warn(`⚠️  Error with endpoint ${apiUrl}:`, error instanceof Error ? error.message : error);
-      continue;
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error(`❌ API returned ${response.status}: ${errorText}`);
+      process.exit(1);
     }
+
+    const result = await response.json();
+    
+    console.log('✅ Jules API Response:');
+    console.log(JSON.stringify(result, null, 2));
+    
+    if (result.name) {
+      console.log(`\n📝 Session created: ${result.name}`);
+    }
+    
+    if (result.state) {
+      console.log(`📊 Session state: ${result.state}`);
+    }
+    
+    if (result.activities) {
+      console.log(`\n📊 Activities: ${result.activities.length} found`);
+    }
+    
+    console.log('\n✅ Weekly SEO automation session created!');
+    console.log('💡 Note: Jules will process the session asynchronously.');
+    console.log('   Check the session status using the session ID above.');
+    
+  } catch (error) {
+    console.error('❌ Error calling Jules API:', error instanceof Error ? error.message : error);
+    process.exit(1);
   }
-  
-  console.error('❌ All API endpoints failed. Please check:');
-  console.error('   1. JULES_API_TOKEN is correct');
-  console.error('   2. JULES_API_URL is set correctly (if using custom endpoint)');
-  console.error('   3. Network connectivity');
-  process.exit(1);
 }
 
 callJulesAPI();
