@@ -17,6 +17,26 @@ echo "  Python: $(python3 --version)"
 echo "  Git: $(git --version)"
 echo ""
 
+# Clean up problematic git URL rewrite rules that break non-interactive clones
+echo "🔧 Checking global git URL rewrite rules..."
+INSTEADOF_RULES=$(git config --global --get-regexp '^url\..*insteadof$' 2>/dev/null || true)
+if [ -n "$INSTEADOF_RULES" ]; then
+  echo "$INSTEADOF_RULES"
+else
+  echo "  (none)"
+fi
+
+for key in \
+  "url.http://git@192.168.0.1:8080/.insteadOf" \
+  "url.http://git@192.168.0.1:8080/.insteadof"; do
+  if git config --global --get-all "$key" >/dev/null 2>&1; then
+    git config --global --unset-all "$key" || true
+    echo "  Removed $key"
+  fi
+done
+
+echo ""
+
 # Verify Node.js version (Next.js 15 requires Node.js 18.17+)
 NODE_VERSION=$(node -v | cut -d'v' -f2 | cut -d'.' -f1)
 if [ "$NODE_VERSION" -lt 18 ]; then
