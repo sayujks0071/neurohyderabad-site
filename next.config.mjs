@@ -19,6 +19,9 @@ const nextConfig = {
   // Consistent trailing slash behavior - disabled for API routes
   trailingSlash: false,
 
+  // Disable X-Powered-By header for security (Info Leakage)
+  poweredByHeader: false,
+
   // Performance optimizations
   experimental: {
     // Reduce hydration data size for Safari compatibility
@@ -174,6 +177,10 @@ const nextConfig = {
           { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
           // HSTS for security (after redirects are confirmed)
           { key: "Strict-Transport-Security", value: "max-age=31536000; includeSubDomains; preload" },
+          // Prevent Adobe Flash and PDF documents from including data from across domains
+          { key: "X-Permitted-Cross-Domain-Policies", value: "none" },
+          // Enable DNS prefetching control
+          { key: "X-DNS-Prefetch-Control", value: "on" },
         ]
       },
       {
