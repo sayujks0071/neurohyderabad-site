@@ -1,5 +1,9 @@
 import { Appointment } from './data';
 
+// Message template for WhatsApp confirmation
+export const WHATSAPP_MESSAGE_TEMPLATE = (name: string, date: string) =>
+  `Hello ${name}, this is regarding your appointment with Dr. Sayuj on ${date}. We confirm your slot. Please bring your MRI/CT scans.`;
+
 export const generateWhatsappUrl = (patient: Appointment): string => {
   // Sanitize phone number: remove non-digits
   let cleanNumber = patient.contactNumber.replace(/\D/g, '');
@@ -10,8 +14,8 @@ export const generateWhatsappUrl = (patient: Appointment): string => {
     cleanNumber = cleanNumber.slice(2);
   }
 
-  // Dynamic Message
-  const message = `Hello ${patient.patientName}, this is regarding your appointment with Dr. Sayuj on ${patient.requestedDate}. We confirm your slot. Please bring your MRI/CT scans.`;
+  // Generate the message
+  const message = WHATSAPP_MESSAGE_TEMPLATE(patient.patientName, patient.requestedDate);
 
   return `https://wa.me/91${cleanNumber}?text=${encodeURIComponent(message)}`;
 };

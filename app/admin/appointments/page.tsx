@@ -82,7 +82,7 @@ export default function AppointmentListPage() {
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                   <button
                     onClick={() => sendWhatsapp(appt)}
-                    className="flex items-center gap-2 px-4 py-2 !bg-green-600 !text-white rounded hover:!bg-green-700 transition-colors tooltip font-semibold shadow-sm"
+                    className="flex items-center gap-2 px-4 py-2 !bg-green-600 !text-white rounded hover:!bg-green-700 transition-all transform hover:scale-105 active:scale-95 tooltip font-semibold shadow-sm"
                     title="Send WhatsApp Confirmation"
                     aria-label={`Confirm appointment for ${appt.patientName} via WhatsApp`}
                   >
