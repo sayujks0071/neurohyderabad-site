@@ -117,6 +117,26 @@
     {
       "path": "/api/cron/reindex-rag",
       "schedule": "0 1 * * *"
+    },
+    {
+      "path": "/api/cron/jules?task=seo-reprint",
+      "schedule": "30 2 * * *"
+    },
+    {
+      "path": "/api/cron/jules?task=pr-deploy-check",
+      "schedule": "15 3 * * *"
+    },
+    {
+      "path": "/api/cron/jules?task=competitor-gap-scan",
+      "schedule": "30 3 * * *"
+    },
+    {
+      "path": "/api/cron/jules?task=rolling-7d-seo-summary",
+      "schedule": "45 3 * * *"
+    },
+    {
+      "path": "/api/cron/jules?task=local-seo-check",
+      "schedule": "0 4 * * *"
     }
   ]
 }
