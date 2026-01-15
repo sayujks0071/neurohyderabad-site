@@ -19,6 +19,8 @@ type LeadPayload = {
   appointmentDate?: string;
   preferredTime?: string;
   appointmentTime?: string;
+  painScore?: number;
+  mriScanAvailable?: boolean;
   source?: string;
   company?: string;
   requestId?: string;
@@ -94,7 +96,11 @@ export async function POST(request: NextRequest) {
       preferredDate,
       preferredTime,
       source,
-      metadata: body.metadata ?? {},
+      metadata: {
+        ...(body.metadata ?? {}),
+        painScore: body.painScore,
+        mriScanAvailable: body.mriScanAvailable,
+      },
     };
 
     if (!WEBAPP_URL) {
@@ -116,6 +122,7 @@ export async function POST(request: NextRequest) {
         mock: true,
         driveFolderUrl: "https://drive.google.com/mock-folder",
         calendarEventId: "mock-calendar-event-id",
+        metadata: payload.metadata
       });
     }
 
