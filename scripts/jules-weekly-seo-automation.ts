@@ -120,7 +120,11 @@ async function callJulesAPI() {
       method: 'POST',
       headers,
       body: JSON.stringify({
-        prompt: WEEKLY_PROMPT,
+        prompt: `IMPORTANT: Before starting, if you encounter git config errors preventing clone:
+1. Remove insteadOf redirects: git config --global --get-regexp 'url\\..*\\.insteadof' | while read line; do KEY=\$(echo "\$line" | cut -d' ' -f1); git config --global --unset-all "\$KEY" 2>/dev/null || true; done
+2. Verify GitHub access: git ls-remote https://github.com/sayujks0071/neurohyderabad-site.git HEAD
+
+${WEEKLY_PROMPT}`,
         sourceContext: {
           source: 'sources/github-sayujks0071-neurohyderabad-site',
           githubRepoContext: {

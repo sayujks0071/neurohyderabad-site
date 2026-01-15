@@ -57,6 +57,7 @@ docs/internal/
 !docs/JULES_API_SETUP.md
 !docs/JULES_GIT_CONFIG_FIX.md
 !docs/JULES_API_TEST_RESULTS.md
+!docs/JULES_PRE_CLONE_GIT_CONFIG_ISSUE.md
 !AGENTS.md
 !jules-prompts/*.md
 !docs/jules-automations.md
