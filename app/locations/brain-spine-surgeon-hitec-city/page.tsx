@@ -16,7 +16,7 @@ export const revalidate = 86400;
 
 export const metadata = {
   title: 'Brain & Spine Surgeon near HITEC City, Hyderabad',
-  description: 'Brain and spine care for HITEC City patients at Yashoda Hospital, Malakpet. Directions, parking, OPD timings, and appointment info.',
+  description: 'Neurosurgeon near HITEC City at Yashoda Hospital, Malakpet. Directions, parking, OPD timings, and appointments.',
   keywords: 'brain surgeon HITEC City, spine surgeon HITEC City, neurosurgeon near HITEC City, Yashoda Hospital Malakpet, Hyderabad',
   alternates: {
     canonical: 'https://www.drsayuj.info/locations/brain-spine-surgeon-hitec-city',
@@ -27,7 +27,7 @@ export const metadata = {
   },
   openGraph: {
     title: 'Brain & Spine Surgeon near HITEC City, Hyderabad',
-    description: 'Brain and spine care for HITEC City patients at Yashoda Hospital, Malakpet. Directions, parking, OPD timings, and appointment info.',
+    description: 'Neurosurgeon near HITEC City at Yashoda Hospital, Malakpet. Directions, parking, OPD timings, and appointments.',
     url: 'https://www.drsayuj.info/locations/brain-spine-surgeon-hitec-city',
     type: 'website',
   },

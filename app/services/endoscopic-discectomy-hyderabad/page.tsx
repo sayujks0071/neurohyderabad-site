@@ -122,7 +122,13 @@ export default function EndoscopicDiscectomyPage() {
             <div className="bg-white p-6 rounded-lg shadow-sm border">
               <h3 className="text-lg font-semibold mb-3 text-blue-700">Symptoms Treated</h3>
               <ul className="space-y-2 text-gray-700">
-                <li>• Severe leg pain (sciatica)</li>
+                <li>
+                  • Severe leg pain (
+                  <Link href="/conditions/sciatica-treatment-hyderabad" className="text-blue-600 underline">
+                    sciatica
+                  </Link>
+                  )
+                </li>
                 <li>• Numbness or tingling in legs/feet</li>
                 <li>• Muscle weakness</li>
                 <li>• Difficulty walking or standing</li>

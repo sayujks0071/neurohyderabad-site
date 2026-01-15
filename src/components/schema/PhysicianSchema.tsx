@@ -28,7 +28,10 @@ export const PhysicianSchema: React.FC = () => {
       "@type": "MedicalClinic",
       "name": mainLocation.name,
       "@id": `https://www.drsayuj.info/${mainLocation.slug}#clinic`
-    }
+    },
+    "sameAs": [
+      mainLocation.google_maps_place_url
+    ]
   };
 
   return (

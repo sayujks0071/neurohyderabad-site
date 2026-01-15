@@ -14,14 +14,14 @@ export const dynamicParams = false;
 export const revalidate = 86400;
 
 export const metadata = {
-  title: "Neurosurgeon in Malakpet, Hyderabad | Dr. Sayuj Krishnan at Yashoda Hospital | Full Endoscopic Spine Surgery",
+  title: "Neurosurgeon in Malakpet, Hyderabad | Dr. Sayuj Krishnan",
   description:
-    "Dr. Sayuj Krishnan practices at Yashoda Hospital Malakpet. Expert neurosurgeon offering endoscopic spine surgery, brain tumor surgery, and 24/7 emergency neurosurgical care right in Malakpet, Hyderabad. Book consultation today.",
+    "Dr. Sayuj Krishnan at Yashoda Hospital Malakpet offers endoscopic spine surgery, brain tumor care, and emergency neurosurgery. Book a visit.",
   keywords: "neurosurgeon malakpet, yashoda hospital malakpet neurosurgeon, spine surgeon malakpet, dr sayuj krishnan malakpet, endoscopic spine surgery malakpet",
   alternates: { canonical: "https://www.drsayuj.info/neurosurgeon-malakpet" },
   openGraph: {
     title: "Neurosurgeon in Malakpet | Dr. Sayuj Krishnan at Yashoda Hospital",
-    description: "Expert neurosurgeon practicing at Yashoda Hospital Malakpet with endoscopic spine surgery and brain surgery expertise.",
+    description: "Neurosurgeon at Yashoda Hospital Malakpet with endoscopic spine surgery and brain tumor expertise.",
     url: "https://www.drsayuj.info/neurosurgeon-malakpet",
     type: "website",
     images: [

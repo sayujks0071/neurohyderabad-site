@@ -86,6 +86,11 @@ const faqs = [
       'Endoscopic surgery uses a high-definition camera through a “keyhole” incision that is typically less than 1 cm. This approach preserves muscle, reduces postoperative pain, and speeds recovery compared to tubular or open techniques.',
   },
   {
+    question: 'What should I expect on the day of endoscopic spine surgery?',
+    answer:
+      'Most cases are day-care procedures. You arrive for pre-op checks, undergo the keyhole surgery, and begin walking within hours. Discharge is usually the same evening or next morning with a written recovery plan.',
+  },
+  {
     question: 'Is Yashoda Hospital, Malakpet easy to reach for day-care surgery?',
     answer:
       'Yes. The hospital is centrally located in Malakpet, making it convenient for patients travelling from Dilsukhnagar, LB Nagar, Charminar, Koti, and other parts of Hyderabad. Parking and attendant lounges are available on-site.',
@@ -237,7 +242,11 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
               className="mb-6"
             />
             <p className="text-lg text-gray-700 mb-6">
-              Endoscopic—or “keyhole”—spine surgery provides fast, lasting relief from slip disc, sciatica, and foraminal stenosis
+              Endoscopic—or “keyhole”—spine surgery provides fast, lasting relief from slip disc,{" "}
+              <Link href="/conditions/sciatica-treatment-hyderabad" className="text-blue-700 underline">
+                sciatica
+              </Link>
+              , and foraminal stenosis
               with almost no muscle disruption. Performed by Dr. Sayuj at Yashoda Hospital, Malakpet, this approach helps you walk
               the same day and return to normal life sooner.
             </p>
@@ -280,6 +289,14 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
               "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "If you have persistent back or leg pain, numbness or weakness that isn’t improving with rest and physiotherapy, or if you experience loss of bowel or bladder control, consult a neurosurgeon. Early evaluation in Hyderabad can prevent nerve damage and may allow for minimally invasive treatment."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What should I expect on the day of endoscopic spine surgery?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Most cases are day-care procedures. You arrive for pre-op checks, undergo keyhole surgery, and begin walking within hours. Discharge is usually the same evening or next morning with a recovery plan."
               }
             },
             {

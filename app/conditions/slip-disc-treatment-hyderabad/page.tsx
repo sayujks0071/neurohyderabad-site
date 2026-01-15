@@ -121,7 +121,13 @@ export default function SlipDiscTreatmentPage() {
           <ul className="space-y-2 text-gray-700">
             <li className="flex items-start">
               <span className="text-blue-600 mr-2 mt-1">•</span>
-              <span>Sharp, shooting pain in the leg or arm (Sciatica)</span>
+              <span>
+                Sharp, shooting pain in the leg or arm (
+                <Link href="/conditions/sciatica-treatment-hyderabad" className="text-blue-600 underline">
+                  Sciatica
+                </Link>
+                )
+              </span>
             </li>
             <li className="flex items-start">
               <span className="text-blue-600 mr-2 mt-1">•</span>

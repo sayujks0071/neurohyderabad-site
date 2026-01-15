@@ -30,8 +30,8 @@ import FAQPageSchema from '@/app/_components/FAQPageSchema';
 import JsonLd from '@/components/JsonLd';
 
 const baseMetadata = makeMetadata({
-  title: 'Sciatica Treatment in Hyderabad | Sciatica Specialist Dr. Sayuj',
-  description: 'Conservative care, injections, and endoscopic surgery for sciatica by Dr. Sayuj Krishnan in Hyderabad. Get expert relief and a clear plan.',
+  title: 'Sciatica Treatment in Hyderabad | Dr. Sayuj Krishnan',
+  description: 'Sciatica specialist in Hyderabad offering conservative care, injections, and endoscopic surgery with clear recovery plans.',
   canonicalPath: '/conditions/sciatica-treatment-hyderabad',
 });
 
@@ -85,6 +85,10 @@ const faqs = [
   {
     question: "Can sciatica go away on its own?",
     answer: "Yes, mild sciatica often resolves within 4-6 weeks with self-care. However, if the pain is severe, causes weakness, or lasts longer than 6 weeks, medical intervention is necessary to prevent permanent nerve damage."
+  },
+  {
+    question: "How long does sciatica recovery take?",
+    answer: "Most patients improve within 6-12 weeks with a structured plan that combines medication, physiotherapy, and activity modification. Faster recovery is possible when the underlying cause is addressed early."
   },
   {
     question: "Is walking good for sciatica?",
