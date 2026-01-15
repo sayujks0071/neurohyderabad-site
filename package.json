@@ -22,6 +22,7 @@
     "gsc:submit-all": "npx tsx scripts/submit-all-sitemaps.ts",
     "gsc:index": "npx tsx scripts/google-seo-automation.ts --index",
     "gsc:index-priority": "npx tsx scripts/index-priority-urls.ts",
+    "analytics:bigquery-insights": "npx tsx scripts/ga4-bigquery-insights.ts",
     "reindex:gemini": "ts-node scripts/reindex-gemini-rag.ts",
     "new:blog": "ts-node scripts/new-blog.ts",
     "normalize:blog": "ts-node scripts/normalize-blog-metadata.ts",
@@ -39,6 +40,7 @@
     "@ai-sdk/openai": "^2.0.77",
     "@ai-sdk/react": "^2.0.106",
     "@flags-sdk/hypertune": "^0.3.2",
+    "@google-cloud/bigquery": "^8.1.1",
     "@google/genai": "^0.6.0",
     "@hookform/resolvers": "^3.6.0",
     "@statsig/js-client": "^3.25.5",
@@ -74,7 +76,7 @@
     "web-vitals": "^5.1.0",
     "workflow": "^4.0.1-beta.32",
     "yup": "^1.4.0",
-    "zod": "^3.23.8"
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@lhci/cli": "^0.15.1",
