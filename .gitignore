@@ -63,6 +63,7 @@ docs/internal/
 *.patch
 *.sh
 !.jules-setup.sh
+!scripts/fix-jules-git-config.sh
 *.png
 
 # Ignore specific JSON files (but not essential config files)
