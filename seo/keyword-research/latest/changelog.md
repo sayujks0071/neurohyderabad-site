@@ -1,14 +1,12 @@
-# SEO Changelog - 2026-01-14
+# Changelog - 2026-01-15
 
-## New Content
-- **Blog Post:** `sciatica-pain-relief-exercises-hyderabad.mdx`
-  - Targets: "sciatica exercises hyderabad", "sciatica pain relief at home"
-  - Intent: Capture TOFU traffic looking for relief before surgery.
+## New Pages
+*   `app/services/kyphoplasty-vertebroplasty-hyderabad/page.tsx` (Proposed) - Fills gap in sitemap.
 
-## Updates
-- **Keyword Registry:** Added 6 new keywords.
-- **Page Map:** Updated `/conditions/sciatica-pain-treatment-hyderabad` and `/` with new variations.
+## Keyword Updates
+*   Added 10 new keywords related to Vertebroplasty/Kyphoplasty.
+*   Identified missing page for `kyphoplasty-vertebroplasty-hyderabad` which was present in `sitemap-services.ts`.
 
-## Insights
-- High demand for "non-surgical" and "exercise" related content for sciatica in Hyderabad.
-- Competitors are weak on localized "exercise" guides.
+## Registry Updates
+*   Updated `seo/keyword-registry.json`
+*   Updated `seo/page-keyword-map.json`

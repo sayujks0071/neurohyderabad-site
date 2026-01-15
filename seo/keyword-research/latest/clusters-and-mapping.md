@@ -1,20 +1,26 @@
-# Clusters and Mapping - 2026-01-14
+# Cluster & Mapping - 2026-01-15
 
-## Cluster: Sciatica Management (HYD | TOFU | SPINE | sciatica | exercises)
+## Cluster: Vertebroplasty & Kyphoplasty
+**Naming:** `HYD | BOFU | SPINE | vertebroplasty | surgery`
 
-### Sub-cluster: Exercises & Home Relief (TOFU)
-- **Primary:** "sciatica exercises hyderabad"
-- **Secondary:** "sciatica pain relief at home", "sleeping positions for sciatica"
-- **Target:** [NEW] `content/blog/sciatica-pain-relief-exercises-hyderabad.mdx`
+### Primary Keywords
+*   vertebroplasty hyderabad
+*   kyphoplasty hyderabad
 
-### Sub-cluster: Treatment & Doctor (BOFU)
-- **Primary:** "best sciatica doctor hyderabad"
-- **Secondary:** "neurosurgeon for sciatica near me", "sciatica specialist hyderabad"
-- **Target:** [EXISTING] `/conditions/sciatica-pain-treatment-hyderabad`
+### Secondary Keywords
+*   cement spine surgery hyderabad
+*   vertebroplasty cost in hyderabad
+*   best doctor for kyphoplasty hyderabad
+*   spine fracture surgery hyderabad
 
-## Cluster: Lumbar Stenosis (NONE | MOFU | SPINE | stenosis | non-surgical)
+### Target Page
+*   **New Page**: `/services/kyphoplasty-vertebroplasty-hyderabad`
+*   **Existing Condition Page**: `/conditions/osteoporotic-spine-fracture-hyderabad` (Already exists, link to new service page)
 
-### Sub-cluster: Non-Surgical Options (MOFU)
-- **Primary:** "lumbar canal stenosis treatment without surgery"
-- **Target:** [EXISTING] `/conditions/spinal-stenosis-treatment-hyderabad`
-- **Action:** Add FAQ about non-surgical options to existing page.
+## Mapping Logic
+*   **Transactional/Procedure** queries ("surgery", "cost", "doctor") -> Map to `/services/kyphoplasty-vertebroplasty-hyderabad`.
+*   **Condition/Symptoms** queries ("treatment", "fracture") -> Map to `/conditions/osteoporotic-spine-fracture-hyderabad`.
+
+## Cannibalization Check
+*   Ensure `/conditions/osteoporotic-spine-fracture-hyderabad` links to the new service page for surgical options.
+*   Ensure new service page links back to condition page for "causes and symptoms".
