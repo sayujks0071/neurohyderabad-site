@@ -74,7 +74,7 @@ export default function BookingForm({
     watch,
     formState: { errors, isSubmitting },
   } = useForm<BookingFormValues>({
-    resolver: zodResolver(appointmentSchema),
+    resolver: zodResolver(appointmentSchema as any),
     defaultValues: defaultValues as BookingFormValues,
     mode: "onTouched", // Trigger validation on blur
   });

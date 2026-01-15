@@ -181,9 +181,9 @@ const references = [
 ] as const;
 
 export const metadata: Metadata = {
-  title: "Pain on Top of Head Causes — Vertex Headache Guide Hyderabad",
+  title: "Vertex Headache Causes — Pain on Top of Head Guide Hyderabad",
   description:
-    "Explore posture, migraine, cervicogenic, and occipital neuralgia causes of vertex headaches, plus red flags needing neurosurgical review in Hyderabad.",
+    "Learn why pain on top of the head happens (vertex headache), from posture strain to migraine and occipital neuralgia, plus red flags in Hyderabad.",
   alternates: {
     canonical: CANONICAL,
     languages: {
@@ -192,9 +192,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Pain on Top of Head — Causes & Care Pathway",
+    title: "Vertex Headache — Causes & Care Pathway",
     description:
-      "Understand vertex headache causes, red flags, and when to consult Dr. Sayuj Krishnan for cervical spine or nerve evaluation in Hyderabad.",
+      "Understand pain on top of the head, vertex headache causes, red flags, and when to consult Dr. Sayuj Krishnan in Hyderabad.",
     url: CANONICAL,
     type: "article",
   },

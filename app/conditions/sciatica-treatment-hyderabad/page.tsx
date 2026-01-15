@@ -30,8 +30,8 @@ import FAQPageSchema from '@/app/_components/FAQPageSchema';
 import JsonLd from '@/components/JsonLd';
 
 const baseMetadata = makeMetadata({
-  title: 'Sciatica Treatment in Hyderabad | Expert Pain Relief & Surgery',
-  description: 'Conservative care, injections, and endoscopic surgery for sciatica tailored by Dr. Sayuj Krishnan in Hyderabad. Book your consultation today.',
+  title: 'Sciatica Treatment in Hyderabad | Sciatica Specialist Dr. Sayuj',
+  description: 'Conservative care, injections, and endoscopic surgery for sciatica by Dr. Sayuj Krishnan in Hyderabad. Get expert relief and a clear plan.',
   canonicalPath: '/conditions/sciatica-treatment-hyderabad',
 });
 
