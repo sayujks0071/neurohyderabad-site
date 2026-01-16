@@ -22,8 +22,8 @@ export function middleware(req: NextRequest) {
     return NextResponse.redirect(url, 308)
   }
 
-  // Protect drafts route - redirect to home if accessed publicly
-  if (req.nextUrl.pathname.startsWith('/drafts')) {
+  // Protect drafts and admin routes - redirect to home if accessed publicly
+  if (req.nextUrl.pathname.startsWith('/drafts') || req.nextUrl.pathname.startsWith('/admin')) {
     // Check for admin access key in environment
     // 🛡️ Sentinel: Removed default fallback to prevent unauthorized access in production if env var is missing.
     const adminKey = process.env.ADMIN_ACCESS_KEY;
