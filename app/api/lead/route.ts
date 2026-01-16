@@ -103,39 +103,19 @@ export async function POST(request: NextRequest) {
       },
     };
 
-    if (!WEBAPP_URL) {
-      if (process.env.NODE_ENV === "production") {
-        console.error("GOOGLE_APPS_SCRIPT_WEBAPP_URL is not set in production.");
-        return NextResponse.json(
-          { error: "Internal Server Configuration Error" },
-          { status: 500 }
-        );
-      }
+    if (!WEBAPP_URL || !API_TOKEN) {
+      const missing = [
+        !WEBAPP_URL ? "GOOGLE_APPS_SCRIPT_WEBAPP_URL" : null,
+        !API_TOKEN ? "GOOGLE_APPS_SCRIPT_API_TOKEN" : null,
+      ].filter((value): value is string => Boolean(value));
 
-      console.warn("Using MOCK response because GOOGLE_APPS_SCRIPT_WEBAPP_URL is unset.");
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      console.error(
+        `Lead integration is not configured. Missing: ${missing.join(", ")}.`
+      );
 
-      return NextResponse.json({
-        ok: true,
-        requestId: payload.requestId,
-        message: "[MOCK] Lead processed successfully",
-        mock: true,
-        driveFolderUrl: "https://drive.google.com/mock-folder",
-        calendarEventId: "mock-calendar-event-id",
-        metadata: payload.metadata
-      });
-    }
-
-    if (!API_TOKEN) {
-      if (process.env.NODE_ENV === "production") {
-        console.error("GOOGLE_APPS_SCRIPT_API_TOKEN is not set in production.");
-        return NextResponse.json(
-          { error: "Internal Server Configuration Error" },
-          { status: 500 }
-        );
-      }
-      console.warn(
-        "GOOGLE_APPS_SCRIPT_API_TOKEN is unset. Upstream script may reject request."
+      return NextResponse.json(
+        { error: "Lead integration is not configured." },
+        { status: 500 }
       );
     }
 
