@@ -10,3 +10,4 @@ Review the PRs merged in the last 24 hours.
 - If everything looks good, close this issue with a comment summarizing the check.
 
 <!-- Jules Automation -->
+<!-- Managed by Jules -->

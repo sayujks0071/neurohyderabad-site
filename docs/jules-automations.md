@@ -1,6 +1,6 @@
 # Jules Automations
 
-This repository uses GitHub Actions to schedule daily tasks for Jules (the AI software engineer). These automations create GitHub Issues labeled `jules` containing specific instructions (prompts) for maintenance, SEO, and quality assurance.
+This repository uses GitHub Actions to schedule daily tasks for Jules (the AI Software Engineer). These automations create GitHub Issues labeled `jules` containing specific instructions (prompts) for maintenance, SEO, and quality assurance.
 
 ## How It Works
 
