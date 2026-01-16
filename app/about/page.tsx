@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { SITE_URL } from "../../src/lib/seo";
 import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
-import PhysicianSchema from "../components/schemas/PhysicianSchema";
+import { PhysicianSchema } from "../../src/components/schema/PhysicianSchema";
 import Section from "../_components/Section";
 import Card from "../_components/Card";
 import Button from "../_components/Button";

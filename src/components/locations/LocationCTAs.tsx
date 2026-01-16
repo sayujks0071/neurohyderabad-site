@@ -1,14 +1,20 @@
 import React from 'react';
-import { LocationData } from '@/src/data/locations';
+import { LocationData, getLocationById } from '@/src/data/locations';
 import { Phone, MessageCircle, Map, Calendar } from 'lucide-react';
 import Link from 'next/link';
 
 interface LocationCTAsProps {
-  location: LocationData;
+  location?: LocationData;
+  locationId?: string;
+  mode?: 'location'; // Optional, to match LocalPathways prop style if passed
   className?: string;
 }
 
-export const LocationCTAs: React.FC<LocationCTAsProps> = ({ location, className = '' }) => {
+export const LocationCTAs: React.FC<LocationCTAsProps> = ({ location: legacyLocation, locationId, className = '' }) => {
+  const location = legacyLocation || (locationId ? getLocationById(locationId) : null);
+
+  if (!location) return null;
+
   return (
     <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 ${className}`}>
       {/* Call */}
