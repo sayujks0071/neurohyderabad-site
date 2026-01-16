@@ -1,39 +1,26 @@
 {
-  "timestamp": "2025-05-20T10:00:00Z",
-  "notes": "Initial run. Build failed due to dependency issues, relying on static analysis.",
+  "timestamp": "2023-10-27T10:30:00Z",
+  "commit_hash": "HEAD",
   "pages": {
-    "home": {
+    "Home": {
       "url": "/",
-      "lcp_candidate": "DoctorCard (Image) or Hero Text",
-      "bottlenecks": [
-        "DoctorCard image could use import for blur placeholder (minor)"
-      ]
+      "notes": "First Load JS: 103kB. Inter font optimized to Variable Font."
     },
-    "appointment": {
+    "Location": {
+      "url": "/locations/malakpet",
+      "notes": "Static."
+    },
+    "Condition": {
+      "url": "/conditions/sciatica-pain-treatment-hyderabad",
+      "notes": "Static."
+    },
+    "Appointment": {
       "url": "/appointments",
-      "lcp_candidate": "H1 (hidden) or visible H1 text",
-      "bottlenecks": [
-        "NeuraLinkBookingApp background uses mix-blend-multiply and blur-3xl on large areas, causing high paint cost."
-      ]
-    },
-    "location": {
-      "url": "/neurosurgeon-banjara-hills",
-      "bottlenecks": [
-        "LocationMapEmbed uses iframe but is optimized with click-to-load."
-      ]
-    },
-    "condition": {
-      "url": "/conditions/sciatica-treatment-hyderabad",
-      "bottlenecks": []
+      "notes": "Server-rendered on demand (f)."
     }
   },
-  "changes": [
-    {
-      "component": "NeuraLinkBookingApp.tsx",
-      "page_type": "Appointment",
-      "description": "Removed expensive mix-blend-multiply and redundant filter class from background decoration. Added pointer-events-none.",
-      "expected_impact": "Reduced Paint/Composite cost, improving Interaction to Next Paint (INP) and LCP on low-end devices.",
-      "verification": "Visual check (background should look similar), Performance trace (paint time reduction)."
-    }
-  ]
+  "changes": {
+    "app/layout.tsx": "Removed explicit weight array from Inter font to enable Variable Font loading. This reduces the number of font requests and ensures optimal LCP text rendering."
+  },
+  "impact": "Reduced font requests from 4 to 1 for the primary font. Potential LCP improvement due to faster font availability."
 }
