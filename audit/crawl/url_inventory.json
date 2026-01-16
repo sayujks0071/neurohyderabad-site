@@ -1,606 +1,1214 @@
 [
   {
-    "url": "https://www.drsayuj.info/",
-    "path": "/",
-    "type": "home",
-    "inSitemap": true,
-    "source": "sitemap.ts"
+    "url": "https://www.drsayuj.info/icon.svg",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/sitemap-blog.xml",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/sitemap-conditions.xml",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/sitemap-images.xml",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/sitemap-locations.xml",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/sitemap-services.xml",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/sitemap-videos.xml",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/robots.txt",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/sitemap.xml",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/ai-chat",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/admin/appointments",
+    "pageType": "Appointment",
+    "status": 200,
+    "inlinks": "N/A"
   },
   {
     "url": "https://www.drsayuj.info/about",
-    "path": "/about",
-    "type": "other",
-    "inSitemap": true,
-    "source": "sitemap.ts"
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
   },
   {
     "url": "https://www.drsayuj.info/appointments",
-    "path": "/appointments",
-    "type": "other",
-    "inSitemap": true,
-    "source": "sitemap.ts"
+    "pageType": "Appointment",
+    "status": 200,
+    "inlinks": "N/A"
   },
   {
-    "url": "https://www.drsayuj.info/contact",
-    "path": "/contact",
-    "type": "other",
-    "inSitemap": true,
-    "source": "sitemap.ts"
+    "url": "https://www.drsayuj.info/appointments/thank-you",
+    "pageType": "Appointment",
+    "status": 200,
+    "inlinks": "N/A"
   },
   {
-    "url": "https://www.drsayuj.info/services",
-    "path": "/services",
-    "type": "service",
-    "inSitemap": true,
-    "source": "sitemap.ts"
+    "url": "https://www.drsayuj.info/awake-brain-surgery",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
   },
   {
-    "url": "https://www.drsayuj.info/conditions",
-    "path": "/conditions",
-    "type": "condition",
-    "inSitemap": true,
-    "source": "sitemap.ts"
+    "url": "https://www.drsayuj.info/brain-tumor-surgery",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
   },
   {
-    "url": "https://www.drsayuj.info/locations",
-    "path": "/locations",
-    "type": "location",
-    "inSitemap": true,
-    "source": "sitemap.ts"
+    "url": "https://www.drsayuj.info/cervical-disc-replacement",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/craniovertebral-junction-surgery",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/endoscopic-cervical-spine-surgery",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/endoscopic-discectomy",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/endoscopic-lumbar-fusion",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/lumbar-stenosis-surgery",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/minimally-invasive-spine-surgery",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/neuro-endoscopy",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/spinal-cord-compression-surgery",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/spinal-fracture-fixation",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
   },
   {
     "url": "https://www.drsayuj.info/best-neurosurgeon-in-hyderabad",
-    "path": "/best-neurosurgeon-in-hyderabad",
-    "type": "location",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/services/minimally-invasive-spine-surgery",
-    "path": "/services/minimally-invasive-spine-surgery",
-    "type": "service",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/services/endoscopic-discectomy-hyderabad",
-    "path": "/services/endoscopic-discectomy-hyderabad",
-    "type": "service",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad",
-    "path": "/services/brain-tumor-surgery-hyderabad",
-    "type": "service",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/services/spinal-fusion-surgery-hyderabad",
-    "path": "/services/spinal-fusion-surgery-hyderabad",
-    "type": "service",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/services/epilepsy-surgery-hyderabad",
-    "path": "/services/epilepsy-surgery-hyderabad",
-    "type": "service",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/services/peripheral-nerve-surgery-hyderabad",
-    "path": "/services/peripheral-nerve-surgery-hyderabad",
-    "type": "service",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/services/awake-spine-surgery-hyderabad",
-    "path": "/services/awake-spine-surgery-hyderabad",
-    "type": "service",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/services/spine-surgery-cost-hyderabad",
-    "path": "/services/spine-surgery-cost-hyderabad",
-    "type": "service",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/services/slip-disc-surgery-cost-hyderabad",
-    "path": "/services/slip-disc-surgery-cost-hyderabad",
-    "type": "service",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/brain-tumor-surgery-hyderabad",
-    "path": "/conditions/brain-tumor-surgery-hyderabad",
-    "type": "condition",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/sciatica-treatment-hyderabad",
-    "path": "/conditions/sciatica-treatment-hyderabad",
-    "type": "condition",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/spinal-stenosis-treatment-hyderabad",
-    "path": "/conditions/spinal-stenosis-treatment-hyderabad",
-    "type": "condition",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/trigeminal-neuralgia-treatment-hyderabad",
-    "path": "/conditions/trigeminal-neuralgia-treatment-hyderabad",
-    "type": "condition",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/cervical-radiculopathy-treatment-hyderabad",
-    "path": "/conditions/cervical-radiculopathy-treatment-hyderabad",
-    "type": "condition",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/slip-disc-treatment-hyderabad",
-    "path": "/conditions/slip-disc-treatment-hyderabad",
-    "type": "condition",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/neurosurgeon-hyderabad",
-    "path": "/neurosurgeon-hyderabad",
-    "type": "location",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/neurosurgeon-jubilee-hills",
-    "path": "/neurosurgeon-jubilee-hills",
-    "type": "location",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/neurosurgeon-banjara-hills",
-    "path": "/neurosurgeon-banjara-hills",
-    "type": "location",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/neurosurgeon-hitech-city",
-    "path": "/neurosurgeon-hitech-city",
-    "type": "location",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/neurosurgeon-secunderabad",
-    "path": "/neurosurgeon-secunderabad",
-    "type": "location",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/neurosurgeon-gachibowli",
-    "path": "/neurosurgeon-gachibowli",
-    "type": "location",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/neurosurgeon-malakpet",
-    "path": "/neurosurgeon-malakpet",
-    "type": "location",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/locations/malakpet",
-    "path": "/locations/malakpet",
-    "type": "location",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/locations/lb-nagar",
-    "path": "/locations/lb-nagar",
-    "type": "location",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/locations/brain-spine-surgeon-jubilee-hills",
-    "path": "/locations/brain-spine-surgeon-jubilee-hills",
-    "type": "location",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/locations/brain-spine-surgeon-banjara-hills",
-    "path": "/locations/brain-spine-surgeon-banjara-hills",
-    "type": "location",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/locations/brain-spine-surgeon-hitec-city",
-    "path": "/locations/brain-spine-surgeon-hitec-city",
-    "type": "location",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/knowledge-base",
-    "path": "/knowledge-base",
-    "type": "other",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog",
-    "path": "/blog",
-    "type": "blog",
-    "inSitemap": true,
-    "source": "sitemap.ts",
-    "note": "Phantom URL? In sitemap but no matching MDX file found yet (could be hardcoded page)"
-  },
-  {
-    "url": "https://www.drsayuj.info/patient-stories",
-    "path": "/patient-stories",
-    "type": "other",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/disease-guides",
-    "path": "/disease-guides",
-    "type": "other",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/research",
-    "path": "/research",
-    "type": "other",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/media",
-    "path": "/media",
-    "type": "other",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/emergency-rehabilitation",
-    "path": "/emergency-rehabilitation",
-    "type": "other",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/technology-facilities",
-    "path": "/technology-facilities",
-    "type": "other",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/headache-vs-brain-tumor-warning-signs",
-    "path": "/blog/headache-vs-brain-tumor-warning-signs",
-    "type": "blog",
-    "inSitemap": true,
-    "source": "sitemap.ts",
-    "hasMdxSource": true
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/does-endoscopic-spine-surgery-work-for-sciatica-hyderabad",
-    "path": "/blog/does-endoscopic-spine-surgery-work-for-sciatica-hyderabad",
-    "type": "blog",
-    "inSitemap": true,
-    "source": "sitemap.ts",
-    "note": "Phantom URL? In sitemap but no matching MDX file found yet (could be hardcoded page)"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/when-to-worry-about-back-pain-neurosurgeon-hyderabad",
-    "path": "/blog/when-to-worry-about-back-pain-neurosurgeon-hyderabad",
-    "type": "location",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/brain-tumor-surgery-cost-hyderabad",
-    "path": "/blog/brain-tumor-surgery-cost-hyderabad",
-    "type": "blog",
-    "inSitemap": true,
-    "source": "sitemap.ts",
-    "note": "Phantom URL? In sitemap but no matching MDX file found yet (could be hardcoded page)"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/endoscopic-spine-surgery-cost-hyderabad",
-    "path": "/blog/endoscopic-spine-surgery-cost-hyderabad",
-    "type": "blog",
-    "inSitemap": true,
-    "source": "sitemap.ts",
-    "note": "Phantom URL? In sitemap but no matching MDX file found yet (could be hardcoded page)"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/endoscopic-discectomy-cost-hyderabad",
-    "path": "/blog/endoscopic-discectomy-cost-hyderabad",
-    "type": "blog",
-    "inSitemap": true,
-    "source": "sitemap.ts",
-    "note": "Phantom URL? In sitemap but no matching MDX file found yet (could be hardcoded page)"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/spinal-fusion-cost-hyderabad",
-    "path": "/blog/spinal-fusion-cost-hyderabad",
-    "type": "blog",
-    "inSitemap": true,
-    "source": "sitemap.ts",
-    "note": "Phantom URL? In sitemap but no matching MDX file found yet (could be hardcoded page)"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/spine-surgery-recovery-timeline-hyderabad",
-    "path": "/blog/spine-surgery-recovery-timeline-hyderabad",
-    "type": "blog",
-    "inSitemap": true,
-    "source": "sitemap.ts",
-    "note": "Phantom URL? In sitemap but no matching MDX file found yet (could be hardcoded page)"
+    "pageType": "Location",
+    "status": 200,
+    "inlinks": "N/A"
   },
   {
     "url": "https://www.drsayuj.info/blog/awake-craniotomy-guide",
-    "path": "/blog/awake-craniotomy-guide",
-    "type": "blog",
-    "inSitemap": true,
-    "source": "sitemap.ts",
-    "note": "Phantom URL? In sitemap but no matching MDX file found yet (could be hardcoded page)"
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
   },
   {
-    "url": "https://www.drsayuj.info/blog/day-care-spine-surgery-insurance-hyderabad",
-    "path": "/blog/day-care-spine-surgery-insurance-hyderabad",
-    "type": "blog",
-    "inSitemap": true,
-    "source": "sitemap.ts",
-    "note": "Phantom URL? In sitemap but no matching MDX file found yet (could be hardcoded page)"
+    "url": "https://www.drsayuj.info/blog/brain-tumor-surgery-cost-hyderabad",
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
   },
   {
     "url": "https://www.drsayuj.info/blog/day-care-endoscopic-spine-surgery-eligibility",
-    "path": "/blog/day-care-endoscopic-spine-surgery-eligibility",
-    "type": "blog",
-    "inSitemap": true,
-    "source": "sitemap.ts",
-    "note": "Phantom URL? In sitemap but no matching MDX file found yet (could be hardcoded page)"
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/day-care-spine-surgery-insurance-hyderabad",
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/does-endoscopic-spine-surgery-work-for-sciatica-hyderabad",
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
   },
   {
     "url": "https://www.drsayuj.info/blog/endoscopic-cervical-spine-surgery-hyderabad",
-    "path": "/blog/endoscopic-cervical-spine-surgery-hyderabad",
-    "type": "blog",
-    "inSitemap": true,
-    "source": "sitemap.ts",
-    "note": "Phantom URL? In sitemap but no matching MDX file found yet (could be hardcoded page)"
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/endoscopic-discectomy-cost-hyderabad",
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
   },
   {
     "url": "https://www.drsayuj.info/blog/endoscopic-vs-microdiscectomy-hyderabad",
-    "path": "/blog/endoscopic-vs-microdiscectomy-hyderabad",
-    "type": "blog",
-    "inSitemap": true,
-    "source": "sitemap.ts",
-    "note": "Phantom URL? In sitemap but no matching MDX file found yet (could be hardcoded page)"
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
   },
   {
-    "url": "https://www.drsayuj.info/blog/return-to-work-after-endoscopic-discectomy-hyderabad",
-    "path": "/blog/return-to-work-after-endoscopic-discectomy-hyderabad",
-    "type": "blog",
-    "inSitemap": true,
-    "source": "sitemap.ts",
-    "note": "Phantom URL? In sitemap but no matching MDX file found yet (could be hardcoded page)"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/mvd-vs-radiosurgery-trigeminal-neuralgia",
-    "path": "/blog/mvd-vs-radiosurgery-trigeminal-neuralgia",
-    "type": "blog",
-    "inSitemap": true,
-    "source": "sitemap.ts",
-    "note": "Phantom URL? In sitemap but no matching MDX file found yet (could be hardcoded page)"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/sciatica-pain-management-hyderabad",
-    "path": "/blog/sciatica-pain-management-hyderabad",
-    "type": "blog",
-    "inSitemap": true,
-    "source": "sitemap.ts",
-    "note": "Phantom URL? In sitemap but no matching MDX file found yet (could be hardcoded page)"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/spine-health-maintenance-hyderabad",
-    "path": "/blog/spine-health-maintenance-hyderabad",
-    "type": "blog",
-    "inSitemap": true,
-    "source": "sitemap.ts",
-    "note": "Phantom URL? In sitemap but no matching MDX file found yet (could be hardcoded page)"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/disc-replacement-vs-fusion",
-    "path": "/blog/disc-replacement-vs-fusion",
-    "type": "blog",
-    "inSitemap": true,
-    "source": "sitemap.ts",
-    "note": "Phantom URL? In sitemap but no matching MDX file found yet (could be hardcoded page)"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/how-much-does-brain-surgery-cost-hyderabad",
-    "path": "/blog/how-much-does-brain-surgery-cost-hyderabad",
-    "type": "blog",
-    "inSitemap": true,
-    "source": "sitemap.ts",
-    "note": "Phantom URL? In sitemap but no matching MDX file found yet (could be hardcoded page)"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/lumbar-canal-stenosis-walking-pain-hyderabad",
-    "path": "/blog/lumbar-canal-stenosis-walking-pain-hyderabad",
-    "type": "blog",
-    "inSitemap": true,
-    "source": "sitemap.ts",
-    "hasMdxSource": true
+    "url": "https://www.drsayuj.info/blog/awake-craniotomy-brain-tumor-guide",
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
   },
   {
     "url": "https://www.drsayuj.info/blog/awake-spine-surgery-vs-general-anesthesia-guide",
-    "path": "/blog/awake-spine-surgery-vs-general-anesthesia-guide",
-    "type": "blog",
-    "inSitemap": true,
-    "source": "sitemap.ts",
-    "hasMdxSource": true
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
   },
   {
-    "url": "https://www.drsayuj.info/blog/trigeminal-neuralgia-vs-tooth-pain-guide",
-    "path": "/blog/trigeminal-neuralgia-vs-tooth-pain-guide",
-    "type": "blog",
-    "inSitemap": true,
-    "source": "sitemap.ts",
-    "hasMdxSource": true
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/osteoporotic-spine-fracture-elderly-guide",
-    "path": "/blog/osteoporotic-spine-fracture-elderly-guide",
-    "type": "blog",
-    "inSitemap": true,
-    "source": "sitemap.ts",
-    "hasMdxSource": true
-  },
-  {
-    "url": "https://www.drsayuj.info/symptoms/signs-of-brain-tumor",
-    "path": "/symptoms/signs-of-brain-tumor",
-    "type": "other",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/symptoms/pain-on-top-of-head-causes",
-    "path": "/symptoms/pain-on-top-of-head-causes",
-    "type": "other",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/privacy",
-    "path": "/privacy",
-    "type": "other",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/cookies",
-    "path": "/cookies",
-    "type": "other",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/terms",
-    "path": "/terms",
-    "type": "other",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/disclaimer",
-    "path": "/disclaimer",
-    "type": "other",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/medical-disclaimer",
-    "path": "/medical-disclaimer",
-    "type": "other",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/content-integrity",
-    "path": "/content-integrity",
-    "type": "other",
-    "inSitemap": true,
-    "source": "sitemap.ts"
-  },
-  {
-    "url": "https://www.drsayuj.info/editorial-policy",
-    "path": "/editorial-policy",
-    "type": "other",
-    "inSitemap": true,
-    "source": "sitemap.ts"
+    "url": "https://www.drsayuj.info/blog/cauda-equina-syndrome-warning-signs-hyderabad",
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
   },
   {
     "url": "https://www.drsayuj.info/blog/cervical-spondylosis-neck-pain-hyderabad",
-    "path": "/blog/cervical-spondylosis-neck-pain-hyderabad",
-    "type": "blog",
-    "inSitemap": false,
-    "source": "mdx_file",
-    "note": "Orphan content? Not in sitemap.ts"
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
   },
   {
     "url": "https://www.drsayuj.info/blog/cost-of-endoscopic-spine-surgery-hyderabad",
-    "path": "/blog/cost-of-endoscopic-spine-surgery-hyderabad",
-    "type": "blog",
-    "inSitemap": false,
-    "source": "mdx_file",
-    "note": "Orphan content? Not in sitemap.ts"
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
   },
   {
     "url": "https://www.drsayuj.info/blog/endoscopic-spine-surgery-recovery-timeline",
-    "path": "/blog/endoscopic-spine-surgery-recovery-timeline",
-    "type": "blog",
-    "inSitemap": false,
-    "source": "mdx_file",
-    "note": "Orphan content? Not in sitemap.ts"
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/headache-vs-brain-tumor-warning-signs",
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/l4-l5-disc-bulge-treatment-hyderabad",
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/lumbar-canal-stenosis-walking-pain-hyderabad",
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
   },
   {
     "url": "https://www.drsayuj.info/blog/microdiscectomy-vs-laminectomy-recovery-comparison",
-    "path": "/blog/microdiscectomy-vs-laminectomy-recovery-comparison",
-    "type": "blog",
-    "inSitemap": false,
-    "source": "mdx_file",
-    "note": "Orphan content? Not in sitemap.ts"
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
   },
   {
     "url": "https://www.drsayuj.info/blog/neuroplasticity-brain-recovery-hyderabad",
-    "path": "/blog/neuroplasticity-brain-recovery-hyderabad",
-    "type": "blog",
-    "inSitemap": false,
-    "source": "mdx_file",
-    "note": "Orphan content? Not in sitemap.ts"
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/normal-pressure-hydrocephalus-nph-symptoms-treatment-hyderabad",
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/osteoporotic-spine-fracture-elderly-guide",
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/sciatica-exercises-for-office-workers-hyderabad",
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/sciatica-pain-relief-exercises-hyderabad",
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
   },
   {
     "url": "https://www.drsayuj.info/blog/sciatica-vs-normal-back-pain-guide",
-    "path": "/blog/sciatica-vs-normal-back-pain-guide",
-    "type": "blog",
-    "inSitemap": false,
-    "source": "mdx_file",
-    "note": "Orphan content? Not in sitemap.ts"
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/spinal-tuberculosis-symptoms-treatment-hyderabad",
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/spondylolisthesis-vs-herniated-disc-difference",
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/trigeminal-neuralgia-vs-tooth-pain-guide",
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/understanding-brain-mri-tumor-report-guide",
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
   },
   {
     "url": "https://www.drsayuj.info/blog/understanding-mri-spine-report-guide",
-    "path": "/blog/understanding-mri-spine-report-guide",
-    "type": "blog",
-    "inSitemap": false,
-    "source": "mdx_file",
-    "note": "Orphan content? Not in sitemap.ts"
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/endoscopic-spine-surgery-cost-hyderabad",
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/disc-replacement-vs-fusion",
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/mvd-vs-radiosurgery-trigeminal-neuralgia",
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/how-much-does-brain-surgery-cost-hyderabad",
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/return-to-work-after-endoscopic-discectomy-hyderabad",
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/sciatica-pain-management-hyderabad",
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/spinal-fusion-cost-hyderabad",
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/when-to-worry-about-back-pain-neurosurgeon-hyderabad",
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/spine-health-maintenance-hyderabad",
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/spine-surgery-recovery-timeline-hyderabad",
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/world-stroke-day-2025-hyderabad-stroke-code",
+    "pageType": "Blog",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/brain-surgery",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/a-z/acoustic-neuroma",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/a-z/aneurysm",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/a-z/brachial-plexus",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/a-z/brain-tumor",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/a-z/carpal-tunnel",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/a-z/cervical-disc",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/a-z/cervical-myelopathy",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/a-z/chiari-malformation",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/a-z/degenerative-disc-disease",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/a-z/disc-herniation",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/a-z/epilepsy",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/a-z/glioma",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/a-z/hydrocephalus",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/a-z/lumbar-stenosis",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/a-z/meningioma",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/a-z/metastasis",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/a-z/normal-pressure-hydrocephalus",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/a-z/pituitary-adenoma",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/a-z/radiculopathy",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/a-z/sciatica",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/a-z/seizure-disorders",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/a-z/spinal-cord-tumour",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/a-z/spondylolisthesis",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/a-z/trigeminal-neuralgia",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/a-z/vascular-malformations",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/acoustic-neuroma-treatment-hyderabad",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/brain-aneurysm-treatment-hyderabad",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/carpal-tunnel-syndrome-hyderabad",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/chiari-malformation-hyderabad",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/herniated-disc-treatment-hyderabad",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/pituitary-adenoma-hyderabad",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/brain-bleed-evacuation-hyderabad",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/cervical-myelopathy-decompression-hyderabad",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/brain-tumor-surgery-hyderabad",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/cervical-radiculopathy-treatment-hyderabad",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/osteoporotic-spine-fracture-hyderabad",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/sciatica-pain-treatment-hyderabad",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/slip-disc-treatment-hyderabad",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/spinal-stenosis-treatment-hyderabad",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/trigeminal-neuralgia-treatment-hyderabad",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/spine-tumor-surgery-hyderabad",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/spondylolisthesis-treatment-hyderabad",
+    "pageType": "Condition",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/content-integrity",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/disclaimer",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/contact",
+    "pageType": "Contact",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/cookies",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/disease-guides",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/disease-guides/degenerative-disc-disease",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/emergency-rehabilitation",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/editorial-policy",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/knowledge-base",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/german-training",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/banjara-hills",
+    "pageType": "Location",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/brain-spine-surgeon-banjara-hills",
+    "pageType": "Location",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/hitech-city",
+    "pageType": "Location",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/brain-spine-surgeon-hitec-city",
+    "pageType": "Location",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/malakpet",
+    "pageType": "Location",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/brain-spine-surgeon-jubilee-hills",
+    "pageType": "Location",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/neurosurgeon-kondapur",
+    "pageType": "Location",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/neurosurgeon-kothapet",
+    "pageType": "Location",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/lb-nagar",
+    "pageType": "Location",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/neurosurgeon-manikonda",
+    "pageType": "Location",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/neurosurgeon-kukatpally",
+    "pageType": "Location",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills",
+    "pageType": "Location",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills-faq",
+    "pageType": "Location",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/neurosurgeon-near-kachiguda-faq",
+    "pageType": "Location",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/neurosurgeon-near-kondapur-faq",
+    "pageType": "Location",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/locations",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/neurosurgeon-nizampet",
+    "pageType": "Location",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/secunderabad",
+    "pageType": "Location",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/medical-disclaimer",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/media",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/near",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/neurosurgeon-banjara-hills",
+    "pageType": "Location",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/near/banjara-hills",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/near/gachibowli",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/near/hitech-city",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/near/jubilee-hills",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/near/kondapur",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/near/madhapur",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/near/malakpet",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/near/secunderabad",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/neurosurgeon-hitech-city",
+    "pageType": "Location",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/neurosurgeon-hyderabad",
+    "pageType": "Location",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/neurosurgeon-gachibowli",
+    "pageType": "Location",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/neurosurgeon-jubilee-hills",
+    "pageType": "Location",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/neurosurgeon-malakpet",
+    "pageType": "Location",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/neurosurgeon-secunderabad",
+    "pageType": "Location",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/patient-stories/carpal-tunnel-day-care-success",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/patient-stories/lumbar-miss-tlif-recovery",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/patient-stories/minimal-invasive-meningioma-resection",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/patient-stories/temporal-lobe-epilepsy-control",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/privacy",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/patient-stories",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/research",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/pediatric-neurosurgery",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/awake-spine-surgery-hyderabad",
+    "pageType": "Service",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad",
+    "pageType": "Service",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/cervical-endoscopic-spine-surgery-hyderabad",
+    "pageType": "Service",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/compare-neurosurgeons-hyderabad",
+    "pageType": "Service",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/dr-sayuj-vs-apollo-neuro-icu",
+    "pageType": "Service",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/cooled-radiofrequency-ablation-hyderabad",
+    "pageType": "Service",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/endoscopic-discectomy-hyderabad",
+    "pageType": "Service",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad",
+    "pageType": "Service",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/kyphoplasty-vertebroplasty-hyderabad",
+    "pageType": "Service",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/epilepsy-surgery-hyderabad",
+    "pageType": "Service",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/kims-spine-surgery-second-opinion",
+    "pageType": "Service",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/peripheral-nerve-surgery",
+    "pageType": "Service",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/minimally-invasive-spine-surgery",
+    "pageType": "Service",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/services",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/slip-disc-surgery-cost-hyderabad",
+    "pageType": "Service",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/peripheral-nerve-surgery-hyderabad",
+    "pageType": "Service",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/spinal-decompression-surgery-hyderabad",
+    "pageType": "Service",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/lumbar-laminectomy-surgery-hyderabad",
+    "pageType": "Service",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/spinal-fusion-surgery-hyderabad",
+    "pageType": "Service",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/spinal-fusion",
+    "pageType": "Service",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/spine-surgery-cost-hyderabad",
+    "pageType": "Service",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/spine-surgery-hyderabad",
+    "pageType": "Service",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/specializations",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/stories/endoscopic-discectomy-same-day-hyderabad",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/uniportal-endoscopic-spine-surgery-hyderabad",
+    "pageType": "Service",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/spine-surgery",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/stories/endoscopic-ulbd-stenosis-hyderabad",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/stories/mvd-trigeminal-neuralgia-hyderabad",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/symptoms/pain-on-top-of-head-causes",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/symptoms-checker",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/technology-facilities",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/technology-innovation",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/terms",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/symptoms/signs-of-brain-tumor",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
+  },
+  {
+    "url": "https://www.drsayuj.info/utm-links",
+    "pageType": "Other",
+    "status": 200,
+    "inlinks": "N/A"
   }
 ]

@@ -1,6 +1,4 @@
-issue,evidence,affected_pages,fix,impact,effort
-sitemap.ts vs content mismatch,sitemap.ts has 23 blog posts but only 12 MDX files,All Blog Pages,"Audit sitemap.ts to remove ghost URLs or create missing MDX content",HIGH,MEDIUM
-Missing 'Physician' Schema on some pages,PhysicianSchema is in layout but checked for consistency,Service Pages,"Ensure PhysicianSchema is correctly populated with global data in layout or page",HIGH,LOW
-Keyword Stuffing in Metadata,Service page has 12+ keywords,Service Pages,"Reduce keywords to 5-7 core terms",MEDIUM,LOW
-Image Optimization,Verify DoctorCard uses next/image,Homepage,"Check DoctorCard implementation",MEDIUM,LOW
-Broken Links / 404s,Sitemap entries without files,Blog,"Clean up sitemap.ts",HIGH,LOW
+Issue,Severity,Evidence,Recommendation
+"Sitemap Conflict: public/sitemap.xml shadows app/sitemap.ts",High,"Both files exist. Static file takes precedence, preventing dynamic updates.",Remove public/sitemap.xml or configure next-sitemap to strictly generate specialized sitemaps only.
+"Robots.txt points to potentially missing sitemaps",Medium,"robots.ts lists sitemap-blog.xml etc. If these are dynamic routes, they work. If they are expected to be static files from next-sitemap, verify they exist.","Verify accessibility of all sitemaps in robots.txt."
+"Long Titles",Medium,"Many pages have titles > 60 chars due to brand suffix.","Shorten base titles or reduce suffix length."

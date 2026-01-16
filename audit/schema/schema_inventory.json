@@ -1,0 +1,38 @@
+{
+  "/": [
+    "WebSite",
+    null,
+    "Hospital",
+    "FAQPage"
+  ],
+  "/services/endoscopic-spine-surgery-hyderabad": [
+    "WebSite",
+    null,
+    "Hospital",
+    null,
+    "MedicalBusiness",
+    "BreadcrumbList",
+    "FAQPage"
+  ],
+  "/conditions/sciatica-pain-treatment-hyderabad": [
+    "WebSite",
+    null,
+    "Hospital",
+    "MedicalWebPage",
+    "FAQPage",
+    "BreadcrumbList"
+  ],
+  "/locations/malakpet": [
+    "WebSite",
+    null,
+    "Hospital",
+    "MedicalClinic",
+    "BreadcrumbList",
+    "FAQPage"
+  ],
+  "/blog/sciatica-pain-management-hyderabad": [
+    "WebSite",
+    null,
+    "Hospital"
+  ]
+}
