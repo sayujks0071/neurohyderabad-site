@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { mockAppointments, Appointment } from './data';
-import { MessageCircle } from 'lucide-react';
+import { WhatsAppIcon } from '../../_components/WhatsAppIcon';
 import { generateWhatsappUrl } from './utils';
 
 export default function AppointmentListPage() {
@@ -86,7 +86,7 @@ export default function AppointmentListPage() {
                     title="Send WhatsApp Confirmation"
                     aria-label={`Confirm appointment for ${appt.patientName} via WhatsApp`}
                   >
-                    <MessageCircle className="w-4 h-4" />
+                    <WhatsAppIcon className="w-4 h-4 fill-white" />
                     <span>Confirm via WhatsApp</span>
                   </button>
                 </td>
