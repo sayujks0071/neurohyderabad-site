@@ -26,7 +26,7 @@ declare global {
 import Header from "./components/HeaderRefactored";
 import Footer from "./components/Footer";
 import WebsiteSchema from "./components/schemas/WebsiteSchema";
-import PhysicianSchema from "./components/schemas/PhysicianSchema";
+import { PhysicianSchema } from "../src/components/schema/PhysicianSchema";
 import HospitalSchema from "./components/schemas/HospitalSchema";
 import TrustStrip from "./_components/TrustStrip";
 import ClientAnalytics from "./_components/ClientAnalytics";

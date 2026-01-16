@@ -34,7 +34,7 @@ export const CANONICAL_PHYSICIAN_NAME = "Dr. Sayuj Krishnan – Neurosurgeon";
 export const CANONICAL_TELEPHONE = "+919778280044";
 export const CANONICAL_WHATSAPP = "919778280044";
 
-const YASHODA_MALAKPET_ADDRESS: LocationAddress = {
+export const YASHODA_MALAKPET_ADDRESS: LocationAddress = {
   streetAddress: "Room No 317, OPD Block, Yashoda Hospital, Nalgonda X Roads, Malakpet",
   addressLocality: "Hyderabad",
   addressRegion: "Telangana",
@@ -42,18 +42,18 @@ const YASHODA_MALAKPET_ADDRESS: LocationAddress = {
   addressCountry: "IN",
 };
 
-const YASHODA_GEO: LocationGeo = {
+export const YASHODA_GEO: LocationGeo = {
   latitude: 17.3750,
   longitude: 78.5147,
 };
 
 // Common map links
-const YASHODA_DIRECTIONS = "https://maps.google.com/?q=Yashoda+Hospitals+Malakpet+Hyderabad";
-const CANONICAL_MAPS_URL = "https://www.google.com/maps/place/Dr+Sayuj+Krishnan";
+export const YASHODA_DIRECTIONS = "https://maps.google.com/?q=Yashoda+Hospitals+Malakpet+Hyderabad";
+export const CANONICAL_MAPS_URL = "https://www.google.com/maps/place/Dr+Sayuj+Krishnan";
 // Using the embed URL found in the repo
-const REPO_EMBED = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3807.669641427599!2d78.51261531487614!3d17.37976998808307!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb99dac93a348d%3A0xc9039baf28225326!2sYashoda%20Hospitals%20-%20Malakpet!5e0!3m2!1sen!2sin!4v1628587456789!5m2!1sen!2sin";
+export const REPO_EMBED = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3807.669641427599!2d78.51261531487614!3d17.37976998808307!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb99dac93a348d%3A0xc9039baf28225326!2sYashoda%20Hospitals%20-%20Malakpet!5e0!3m2!1sen!2sin!4v1628587456789!5m2!1sen!2sin";
 
-const SOCIAL_PROFILES = [
+export const SOCIAL_PROFILES = [
   "https://www.facebook.com/drsayujneurohyd",
   "https://www.instagram.com/drsayujneurohyd",
   "https://www.linkedin.com/in/drsayujkrishnan",

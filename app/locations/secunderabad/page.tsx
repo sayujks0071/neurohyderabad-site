@@ -59,12 +59,12 @@ export default function SecunderabadLocationPage() {
       </p>
 
       <div className="mt-6">
-         <LocationCTAs location={location} />
+         <LocationCTAs mode="location" locationId={location.id} />
       </div>
 
       <section className="grid md:grid-cols-2 gap-8 mt-10">
         <div>
-          <LocationNAPCard location={location} className="mb-6" />
+          <LocationNAPCard mode="location" locationId={location.id} className="mb-6" />
 
           <h2 className="text-2xl font-semibold">OPD Timings</h2>
           <ul className="mt-3 list-disc pl-5">
@@ -80,7 +80,7 @@ export default function SecunderabadLocationPage() {
 
         <div>
           <h2 className="text-2xl font-semibold mb-3">Map</h2>
-          <LocationMapEmbed location={location} />
+          <LocationMapEmbed mode="location" locationId={location.id} />
         </div>
       </section>
 
@@ -96,7 +96,7 @@ export default function SecunderabadLocationPage() {
         </div>
       </section>
 
-      <LocalPathways location={location} />
+      <LocalPathways mode="location" locationId={location.id} />
     </main>
   );
 }
