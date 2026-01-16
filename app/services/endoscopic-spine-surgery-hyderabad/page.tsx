@@ -243,7 +243,7 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
             />
             <p className="text-lg text-gray-700 mb-6">
               Endoscopic—or “keyhole”—spine surgery provides fast, lasting relief from slip disc,{" "}
-              <Link href="/conditions/sciatica-treatment-hyderabad" className="text-blue-700 underline">
+              <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-700 underline">
                 sciatica
               </Link>
               , and foraminal stenosis

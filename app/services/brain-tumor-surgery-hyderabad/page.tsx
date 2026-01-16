@@ -15,13 +15,14 @@ import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import { getServiceSources } from '../sources';
 import { patientStories } from '@/src/content/stories';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
+import MedicalWebPageSchema from '../../components/schemas/MedicalWebPageSchema';
 
 const SERVICE_SLUG = 'brain-tumor-surgery-hyderabad';
 
 const baseMetadata = makeMetadata({
-  title: 'Brain Tumor Surgery in Hyderabad | Advanced Neurosurgical Oncology – Dr. Sayuj Krishnan',
+  title: 'Brain Tumor Surgery Hyderabad | Advanced Safety & Care – Dr. Sayuj',
   description:
-    'Facing a brain tumour diagnosis? At Yashoda Hospital, Malakpet, Dr. Sayuj Krishnan offers advanced brain tumour surgery in Hyderabad using neuronavigation and microsurgical techniques to maximise safety and recovery.',
+    'Advanced brain tumor surgery in Hyderabad with Dr. Sayuj Krishnan. High success rates with Neuronavigation & Awake Craniotomy for faster recovery. Trusted Neuro-Oncology care.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
 });
 
@@ -36,9 +37,9 @@ export const metadata: Metadata = {
     'brain tumor surgery cost hyderabad',
   ],
   openGraph: {
-    title: 'Brain Tumor Surgery in Hyderabad | Advanced Neurosurgical Oncology – Dr. Sayuj Krishnan',
+    title: 'Brain Tumor Surgery Hyderabad | Advanced Safety & Care',
     description:
-      'At Yashoda Hospital, Malakpet, Dr. Sayuj Krishnan offers advanced brain tumour surgery in Hyderabad using neuronavigation and microsurgical techniques to maximise safety and recovery.',
+      'Advanced brain tumor surgery in Hyderabad with Dr. Sayuj Krishnan. High success rates with Neuronavigation & Awake Craniotomy for faster recovery. Trusted Neuro-Oncology care.',
     url: `${SITE_URL}/services/${SERVICE_SLUG}`,
     siteName: 'Dr. Sayuj Krishnan - Neurosurgeon Hyderabad',
     locale: 'en_IN',
@@ -56,7 +57,7 @@ export const metadata: Metadata = {
   },
 };
 
-const schema = buildLocalServiceSchema({
+const serviceSchema = buildLocalServiceSchema({
   slug: SERVICE_SLUG,
   name: 'Advanced Brain Tumor Surgery in Hyderabad',
   description:
@@ -185,10 +186,24 @@ export default function BrainTumorSurgeryHyderabadPage() {
     return tags.includes('brain') || tags.includes('meningioma');
   }).slice(0, 2);
 
+  const breadcrumbs = [
+    { name: 'Home', path: '/' },
+    { name: 'Services', path: '/services/' },
+    { name: 'Brain Tumor Surgery in Hyderabad', path: `/services/${SERVICE_SLUG}/` },
+  ];
+
   return (
     <>
-      <JsonLd data={schema} />
+      <JsonLd data={serviceSchema} />
       <JsonLd data={gbpSchema} />
+      <MedicalWebPageSchema
+        title="Brain Tumor Surgery Hyderabad | Advanced Safety & Care – Dr. Sayuj"
+        description="Advanced brain tumor surgery in Hyderabad with Dr. Sayuj Krishnan. High success rates with Neuronavigation & Awake Craniotomy for faster recovery. Trusted Neuro-Oncology care."
+        pageSlug={`/services/${SERVICE_SLUG}/`}
+        pageType="service"
+        serviceOrCondition="Brain Tumor Surgery"
+        breadcrumbs={breadcrumbs}
+      />
       <main className="container mx-auto px-4 py-16">
         <Breadcrumbs
           items={[
