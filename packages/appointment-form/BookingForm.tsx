@@ -270,6 +270,11 @@ export default function BookingForm({
                     </span>
                   )}
                 </div>
+                {errors.painScore && (
+                  <p className="mt-1 text-sm text-center text-red-600">
+                    {errors.painScore.message}
+                  </p>
+                )}
               </div>
 
               <div className="flex items-center p-4 bg-slate-50 rounded-xl border border-slate-200">
