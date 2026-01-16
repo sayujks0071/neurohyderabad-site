@@ -462,6 +462,33 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
           </div>
         </section>
 
+        {/* Red Flags Section */}
+        <section className="mb-16 bg-red-50 border border-red-100 rounded-2xl p-8">
+          <h2 className="text-2xl font-bold text-red-900 mb-4 flex items-center gap-2">
+            <svg className="w-8 h-8 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            Red Flags: When is Surgery Urgent?
+          </h2>
+          <p className="text-gray-700 mb-6">
+            Most spine conditions can wait for medication or therapy. However, immediate medical attention is required if you experience:
+          </p>
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="bg-white p-5 rounded-lg border-l-4 border-red-500 shadow-sm">
+              <h3 className="font-bold text-red-800 mb-2">Cauda Equina Syndrome</h3>
+              <p className="text-sm text-gray-700">Sudden loss of bowel or bladder control, or numbness in the groin/saddle area.</p>
+            </div>
+            <div className="bg-white p-5 rounded-lg border-l-4 border-red-500 shadow-sm">
+              <h3 className="font-bold text-red-800 mb-2">Progressive Weakness</h3>
+              <p className="text-sm text-gray-700">Rapidly worsening weakness in the foot (foot drop) or leg that affects walking.</p>
+            </div>
+            <div className="bg-white p-5 rounded-lg border-l-4 border-red-500 shadow-sm">
+              <h3 className="font-bold text-red-800 mb-2">Intractable Pain</h3>
+              <p className="text-sm text-gray-700">Severe pain that does not improve with rest or maximum medical management.</p>
+            </div>
+          </div>
+        </section>
+
         <CostTransparencySection
           costs={COSTS}
           disclaimer="Approximate package estimates for self-pay patients at Yashoda Hospital Malakpet. Final cost depends on room category (General/Sharing/Private), insurance approvals, and specific implant requirements. We offer full assistance with insurance pre-authorization."
