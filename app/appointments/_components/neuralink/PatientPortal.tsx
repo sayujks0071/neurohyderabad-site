@@ -802,7 +802,7 @@ const PatientPortal = () => {
                     </>
                   ) : isSyncing ? (
                     <>
-                      <Cloud className="w-5 h-5 animate-bounce mr-2" />
+                      <Loader2 className="w-5 h-5 animate-spin mr-2" />
                       Sending...
                     </>
                   ) : (
