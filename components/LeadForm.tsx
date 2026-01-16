@@ -188,20 +188,22 @@ export default function LeadForm() {
 
         <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2">
+              <label htmlFor="painScore" className="block text-sm font-medium text-slate-700 mb-2">
                 Pain Intensity Score (1-10)
               </label>
               <div className="flex items-center gap-4">
-                <span className="text-sm font-bold text-slate-400">1</span>
+                <span className="text-sm font-bold text-slate-400" aria-hidden="true">1</span>
                 <input
+                  id="painScore"
                   type="range"
                   min="1"
                   max="10"
                   step="1"
-                  className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                  className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                  aria-valuetext={painScoreValue ? `Score: ${painScoreValue}${painScoreValue >= 8 ? ' (Severe)' : painScoreValue <= 3 ? ' (Mild)' : ''}` : "Score: 5"}
                   {...register("painScore")}
                 />
-                <span className="text-sm font-bold text-slate-400">10</span>
+                <span className="text-sm font-bold text-slate-400" aria-hidden="true">10</span>
               </div>
               <div className="text-center mt-2">
                 {painScoreValue !== undefined && (
