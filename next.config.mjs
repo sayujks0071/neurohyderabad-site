@@ -161,6 +161,12 @@ const nextConfig = {
         destination: '/conditions/trigeminal-neuralgia-treatment-hyderabad',
         permanent: true,
       },
+      // Duplicate content consolidation
+      {
+        source: '/endoscopic-spine-surgery-hyderabad',
+        destination: '/services/endoscopic-spine-surgery-hyderabad',
+        permanent: true,
+      },
     ];
   },
 
