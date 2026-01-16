@@ -225,7 +225,8 @@ export function GlobalStructuredData() {
             }
           }
         ],
-        ...(CLINIC_AGGREGATE_RATING ? { aggregateRating: CLINIC_AGGREGATE_RATING } : {}),
+        // Removed duplicate aggregateRating here as it is already present in PhysicianSchema
+        // ...(CLINIC_AGGREGATE_RATING ? { aggregateRating: CLINIC_AGGREGATE_RATING } : {}),
         "hasOfferCatalog": {
           "@type": "OfferCatalog",
           "name": "Neurosurgical Services",
