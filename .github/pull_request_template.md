@@ -1,28 +1,30 @@
-## Daily SEO Keyword Research
+# Daily SEO Keyword Research & Content Expansion
 
-### Overview
-This PR adds the daily keyword research snapshot and updates the site structure based on new opportunities.
+## 1. Competitor Discovery
+* **Simulated Analysis:** Focused on high-intent queries ("endoscopic spine surgery", "sciatica treatment").
+* **Key Findings:** Identified a gap in content targeting "IT professionals" (office workers) suffering from sciatica, a major demographic in Hyderabad.
 
-- **Date:** {{ date }}
-- **Focus:** {{ focus_area }}
+## 2. Keyword Universe & Clustering
+* **New Cluster:** "Sciatica Exercises for Office Workers" (TOFU/Info)
+    * `sciatica exercises for office workers` (Primary)
+    * `back pain due to sitting hyderabad` (Secondary)
+* **Updated Cluster:** "Recovery Timeline" (MOFU)
+    * `return to work after spine surgery`
+    * `endoscopic discectomy vs microdiscectomy recovery`
 
-### Changelog
-- [ ] Added daily keyword snapshot in `seo/keyword-research/{{ date }}/`
-- [ ] Updated `seo/keyword-registry.json`
-- [ ] Updated `seo/page-keyword-map.json`
-- [ ] Created new pages (if applicable):
-    - `{{ new_page_1 }}`
-    - `{{ new_page_2 }}`
+## 3. Auto-Placement
+* **Registry Updates:** Updated `seo/keyword-registry.json` and `seo/page-keyword-map.json` with new terms.
+* **Content Updates:** Added secondary keywords to existing `endoscopic-spine-surgery-recovery-timeline` post.
 
-### Top Keywords Discovered
-| Keyword | Volume | Difficulty | Target |
-| :--- | :--- | :--- | :--- |
-| `{{ keyword_1 }}` | High | High | `{{ target_1 }}` |
-| `{{ keyword_2 }}` | Med | Med | `{{ target_2 }}` |
+## 4. New Page Generation
+* **Created:** `content/blog/sciatica-exercises-for-office-workers-hyderabad.mdx`
+* **Rationale:** Safe, low-risk MDX blog post reusing existing components. Targets local high-volume intent without requiring new UI development.
 
-### Cannibalization Check
-- [x] Verified that new keywords do not conflict with existing high-performing pages.
+## 5. Verification
+* **Linting:** Verified no major linting errors.
+* **Schema:** Verified JSON-LD schemas are valid.
+* **Normalization:** Ran blog metadata normalization script to ensure frontmatter compliance.
 
-### Verification
-- [ ] Ran `pnpm lint` (or equivalent)
-- [ ] Verified build locally
+## Links
+* [Keyword Universe CSV](seo/keyword-research/2026-01-16/keyword-universe.csv)
+* [Cluster Mapping](seo/keyword-research/2026-01-16/clusters-and-mapping.md)
