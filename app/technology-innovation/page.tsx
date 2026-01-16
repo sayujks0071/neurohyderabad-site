@@ -3,10 +3,11 @@ import Link from "next/link";
 import { SITE_URL } from "../../src/lib/seo";
 import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
 import { serviceJsonLd } from "../../src/lib/seo";
+import MedicalWebPageSchema from "../components/schemas/MedicalWebPageSchema";
 
 export const metadata: Metadata = {
-  title: "Technology & Innovation | Advanced Neurosurgical Equipment | Dr. Sayuj Krishnan",
-  description: "State-of-the-art neurosurgical technology and innovation with Dr. Sayuj Krishnan. Advanced equipment including neuronavigation, ROSA DBS, intraoperative monitoring, and minimally invasive techniques.",
+  title: "Advanced Neurosurgery Technology Hyderabad | AI, Robotics & Safety",
+  description: "Experience safer spine & brain surgery with AI-driven neuronavigation, ROSA Robotics, and real-time monitoring. Dr. Sayuj Krishnan uses advanced technology for precision & faster recovery.",
   keywords: [
     "neurosurgical technology hyderabad",
     "neuronavigation hyderabad",
@@ -17,7 +18,9 @@ export const metadata: Metadata = {
     "robotic neurosurgery hyderabad",
     "brain surgery technology",
     "spine surgery technology",
-    "neurosurgical innovation hyderabad"
+    "neurosurgical innovation hyderabad",
+    "AI in neurosurgery",
+    "robotic spine surgery safety"
   ],
   alternates: {
     canonical: `${SITE_URL}/technology-innovation`,
@@ -27,8 +30,8 @@ export const metadata: Metadata = {
     }
   },
   openGraph: {
-    title: "Technology & Innovation | Advanced Neurosurgical Equipment",
-    description: "State-of-the-art neurosurgical technology and innovation with Dr. Sayuj Krishnan. Advanced equipment including neuronavigation, ROSA DBS, intraoperative monitoring, and minimally invasive techniques.",
+    title: "Advanced Neurosurgery Technology Hyderabad | AI, Robotics & Safety",
+    description: "Experience safer spine & brain surgery with AI-driven neuronavigation, ROSA Robotics, and real-time monitoring. Dr. Sayuj Krishnan uses advanced technology for precision & faster recovery.",
     url: `${SITE_URL}/technology-innovation`,
     siteName: "Dr. Sayuj Krishnan - Premier Neurosurgeon Hyderabad",
     locale: "en_IN",
@@ -38,15 +41,15 @@ export const metadata: Metadata = {
         url: `${SITE_URL}/images/og-default.jpg`,
         width: 1200,
         height: 630,
-        alt: "Advanced Neurosurgical Technology and Innovation - Dr. Sayuj Krishnan",
+        alt: "Advanced Neurosurgical Technology - Dr. Sayuj Krishnan",
         type: "image/jpeg"
       }
     ]
   },
   twitter: {
     card: "summary_large_image",
-    title: "Technology & Innovation | Advanced Neurosurgical Equipment",
-    description: "State-of-the-art neurosurgical technology and innovation with Dr. Sayuj Krishnan. Advanced equipment including neuronavigation, ROSA DBS, intraoperative monitoring, and minimally invasive techniques."
+    title: "Advanced Neurosurgery Technology Hyderabad | AI, Robotics & Safety",
+    description: "Experience safer spine & brain surgery with AI-driven neuronavigation, ROSA Robotics, and real-time monitoring."
   }
 };
 
@@ -58,15 +61,60 @@ export default function TechnologyInnovationPage() {
     areaServed: "Hyderabad, Telangana, India"
   });
 
+  const faqData = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is robotic neurosurgery better than traditional surgery?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Robotic assistance (like ROSA DBS) enhances human expertise by providing sub-millimeter precision and stability that is hard to achieve manually. However, the surgeon's judgment and experience remain the most critical factors. Robotics are a tool for safety and accuracy, not a replacement for the surgeon."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does AI help in brain and spine surgery?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "AI assists in preoperative planning by analyzing MRI/CT scans to map tumors and critical pathways. During surgery, AI-driven navigation (Neuronavigation) acts like a GPS, guiding the surgeon to avoid vital structures, reducing risks, and preserving function."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does advanced technology increase the cost of surgery significantly?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "While advanced technology involves specialized equipment, it often reduces overall costs by minimizing complications, shortening hospital stays, and speeding up recovery. The long-term value in safety and quality of life is significant."
+        }
+      }
+    ]
+  };
+
+  const breadcrumbs = [
+    { name: "Home", path: "/" },
+    { name: "Technology & Innovation", path: "/technology-innovation" }
+  ];
+
   return (
     <>
-      <BreadcrumbSchema items={[
-        { name: "Home", path: "/" },
-        { name: "Technology & Innovation", path: "/technology-innovation" }
-      ]} />
+      <BreadcrumbSchema items={breadcrumbs} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(technologyServiceJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqData) }}
+      />
+      <MedicalWebPageSchema
+        title="Advanced Neurosurgery Technology Hyderabad | AI, Robotics & Safety"
+        description="Experience safer spine & brain surgery with AI-driven neuronavigation, ROSA Robotics, and real-time monitoring."
+        pageSlug="/technology-innovation/"
+        pageType="service"
+        serviceOrCondition="Neurosurgical Technology"
+        breadcrumbs={breadcrumbs}
       />
       
       <div className="min-h-screen bg-white">
@@ -77,12 +125,10 @@ export default function TechnologyInnovationPage() {
               <div className="grid lg:grid-cols-2 gap-12 items-center">
                 <div>
                   <h1 className="text-4xl md:text-6xl font-bold mb-6">
-                    Technology & Innovation
+                    Advanced Technology & Innovation
                   </h1>
                   <p className="text-xl md:text-2xl mb-8 text-blue-100">
-                    State-of-the-art neurosurgical technology and innovation for optimal 
-                    patient outcomes. Advanced equipment and techniques for safer, more 
-                    effective procedures.
+                    Precision-driven neurosurgery using AI, Robotics, and Real-time Navigation for safer procedures and faster recovery.
                   </p>
                   <div className="flex flex-wrap gap-4">
                     <Link 
@@ -103,8 +149,8 @@ export default function TechnologyInnovationPage() {
                   <div className="w-80 h-80 bg-white/10 rounded-full flex items-center justify-center">
                     <div className="text-center">
                       <div className="text-6xl mb-4">🔬</div>
-                      <p className="text-lg font-semibold">Advanced Technology</p>
-                      <p className="text-blue-200">Innovation in Neurosurgery</p>
+                      <p className="text-lg font-semibold">Precision & Safety</p>
+                      <p className="text-blue-200">AI & Robotics</p>
                     </div>
                   </div>
                 </div>
@@ -456,8 +502,25 @@ export default function TechnologyInnovationPage() {
           </div>
         </section>
 
-        {/* Why Choose Dr. Krishnan */}
+        {/* FAQ Section */}
         <section className="py-16 bg-gray-50">
+            <div className="container mx-auto px-4">
+                <div className="max-w-4xl mx-auto">
+                    <h2 className="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
+                    <div className="space-y-6">
+                        {faqData.mainEntity.map((item, index) => (
+                            <div key={index} className="bg-white p-6 rounded-lg shadow-sm">
+                                <h3 className="text-lg font-semibold text-blue-800 mb-2">{item.name}</h3>
+                                <p className="text-gray-700">{item.acceptedAnswer.text}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {/* Why Choose Dr. Krishnan */}
+        <section className="py-16">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <h2 className="text-3xl font-bold text-center mb-12">Why Choose Dr. Sayuj Krishnan for Advanced Technology?</h2>
@@ -550,4 +613,3 @@ export default function TechnologyInnovationPage() {
     </>
   );
 }
-

@@ -27,6 +27,7 @@ export interface LocationData {
   // For LocalPathways
   top_services_slugs: string[];
   top_conditions_slugs: string[];
+  sameAs?: string[];
 }
 
 export const CANONICAL_PHYSICIAN_NAME = "Dr. Sayuj Krishnan – Neurosurgeon";
@@ -51,6 +52,13 @@ const YASHODA_DIRECTIONS = "https://maps.google.com/?q=Yashoda+Hospitals+Malakpe
 const CANONICAL_MAPS_URL = "https://www.google.com/maps/place/Dr+Sayuj+Krishnan";
 // Using the embed URL found in the repo
 const REPO_EMBED = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3807.669641427599!2d78.51261531487614!3d17.37976998808307!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb99dac93a348d%3A0xc9039baf28225326!2sYashoda%20Hospitals%20-%20Malakpet!5e0!3m2!1sen!2sin!4v1628587456789!5m2!1sen!2sin";
+
+const SOCIAL_PROFILES = [
+  "https://www.facebook.com/drsayujneurohyd",
+  "https://www.instagram.com/drsayujneurohyd",
+  "https://www.linkedin.com/in/drsayujkrishnan",
+  "https://www.youtube.com/@drsayujneurohyd"
+];
 
 const DEFAULT_SERVICES = [
   "endoscopic-spine-surgery-hyderabad",
@@ -81,7 +89,8 @@ export const locations: LocationData[] = [
     geo: YASHODA_GEO,
     areaServedName: "Secunderabad",
     top_services_slugs: DEFAULT_SERVICES,
-    top_conditions_slugs: DEFAULT_CONDITIONS
+    top_conditions_slugs: DEFAULT_CONDITIONS,
+    sameAs: SOCIAL_PROFILES
   },
   {
     id: "hitech-city",
@@ -97,7 +106,8 @@ export const locations: LocationData[] = [
     geo: YASHODA_GEO,
     areaServedName: "Hitech City",
     top_services_slugs: DEFAULT_SERVICES,
-    top_conditions_slugs: DEFAULT_CONDITIONS
+    top_conditions_slugs: DEFAULT_CONDITIONS,
+    sameAs: SOCIAL_PROFILES
   },
   {
     id: "banjara-hills",
@@ -113,7 +123,8 @@ export const locations: LocationData[] = [
     geo: YASHODA_GEO,
     areaServedName: "Banjara Hills",
     top_services_slugs: DEFAULT_SERVICES,
-    top_conditions_slugs: DEFAULT_CONDITIONS
+    top_conditions_slugs: DEFAULT_CONDITIONS,
+    sameAs: SOCIAL_PROFILES
   },
   {
     id: "gachibowli",
@@ -129,7 +140,8 @@ export const locations: LocationData[] = [
     geo: YASHODA_GEO,
     areaServedName: "Gachibowli",
     top_services_slugs: DEFAULT_SERVICES,
-    top_conditions_slugs: DEFAULT_CONDITIONS
+    top_conditions_slugs: DEFAULT_CONDITIONS,
+    sameAs: SOCIAL_PROFILES
   },
   {
     id: "jubilee-hills",
@@ -145,7 +157,8 @@ export const locations: LocationData[] = [
     geo: YASHODA_GEO,
     areaServedName: "Jubilee Hills",
     top_services_slugs: DEFAULT_SERVICES,
-    top_conditions_slugs: DEFAULT_CONDITIONS
+    top_conditions_slugs: DEFAULT_CONDITIONS,
+    sameAs: SOCIAL_PROFILES
   },
   {
     id: "malakpet",
@@ -161,7 +174,8 @@ export const locations: LocationData[] = [
     geo: YASHODA_GEO,
     areaServedName: "Malakpet",
     top_services_slugs: DEFAULT_SERVICES,
-    top_conditions_slugs: DEFAULT_CONDITIONS
+    top_conditions_slugs: DEFAULT_CONDITIONS,
+    sameAs: SOCIAL_PROFILES
   },
   {
     id: "hyderabad",
@@ -177,7 +191,8 @@ export const locations: LocationData[] = [
     geo: YASHODA_GEO,
     areaServedName: "Hyderabad",
     top_services_slugs: DEFAULT_SERVICES,
-    top_conditions_slugs: DEFAULT_CONDITIONS
+    top_conditions_slugs: DEFAULT_CONDITIONS,
+    sameAs: SOCIAL_PROFILES
   },
   {
     id: "lb-nagar",
@@ -193,7 +208,8 @@ export const locations: LocationData[] = [
     geo: YASHODA_GEO,
     areaServedName: "LB Nagar",
     top_services_slugs: DEFAULT_SERVICES,
-    top_conditions_slugs: DEFAULT_CONDITIONS
+    top_conditions_slugs: DEFAULT_CONDITIONS,
+    sameAs: SOCIAL_PROFILES
   },
   {
     id: "kukatpally",
@@ -209,7 +225,8 @@ export const locations: LocationData[] = [
     geo: YASHODA_GEO,
     areaServedName: "Kukatpally",
     top_services_slugs: DEFAULT_SERVICES,
-    top_conditions_slugs: DEFAULT_CONDITIONS
+    top_conditions_slugs: DEFAULT_CONDITIONS,
+    sameAs: SOCIAL_PROFILES
   },
   {
     id: "manikonda",
@@ -225,7 +242,8 @@ export const locations: LocationData[] = [
     geo: YASHODA_GEO,
     areaServedName: "Manikonda",
     top_services_slugs: DEFAULT_SERVICES,
-    top_conditions_slugs: DEFAULT_CONDITIONS
+    top_conditions_slugs: DEFAULT_CONDITIONS,
+    sameAs: SOCIAL_PROFILES
   },
   {
     id: "nizampet",
@@ -241,7 +259,8 @@ export const locations: LocationData[] = [
     geo: YASHODA_GEO,
     areaServedName: "Nizampet",
     top_services_slugs: DEFAULT_SERVICES,
-    top_conditions_slugs: DEFAULT_CONDITIONS
+    top_conditions_slugs: DEFAULT_CONDITIONS,
+    sameAs: SOCIAL_PROFILES
   },
   {
     id: "kondapur",
@@ -257,7 +276,8 @@ export const locations: LocationData[] = [
     geo: YASHODA_GEO,
     areaServedName: "Kondapur",
     top_services_slugs: DEFAULT_SERVICES,
-    top_conditions_slugs: DEFAULT_CONDITIONS
+    top_conditions_slugs: DEFAULT_CONDITIONS,
+    sameAs: SOCIAL_PROFILES
   },
   {
     id: "kothapet",
@@ -273,7 +293,8 @@ export const locations: LocationData[] = [
     geo: YASHODA_GEO,
     areaServedName: "Kothapet",
     top_services_slugs: DEFAULT_SERVICES,
-    top_conditions_slugs: DEFAULT_CONDITIONS
+    top_conditions_slugs: DEFAULT_CONDITIONS,
+    sameAs: SOCIAL_PROFILES
   }
 ];
 

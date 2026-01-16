@@ -11,13 +11,14 @@ import { buildLocalServiceSchema } from '@/src/lib/schema/localService';
 import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import { getServiceSources } from '../sources';
+import MedicalWebPageSchema from '../../components/schemas/MedicalWebPageSchema';
 
 const SERVICE_SLUG = 'spine-surgery-hyderabad';
 
 const baseMetadata = makeMetadata({
-  title: 'Expert Spine Surgery in Hyderabad | Dr. Sayuj | Yashoda Malakpet',
+  title: 'Spine Surgery Hyderabad | Minimally Invasive Specialist - Dr. Sayuj',
   description:
-    'Get relief from back pain. Dr. Sayuj offers advanced, minimally-invasive spine surgery at Yashoda Hospital, Malakpet. Expert care for patients in Hyderabad.',
+    'Advanced minimally invasive spine surgery in Hyderabad. Walk the next day with keyhole endoscopic techniques for slip disc & sciatica. Expert care at Yashoda Malakpet.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
 });
 
@@ -32,9 +33,9 @@ export const metadata: Metadata = {
     'spine surgery consultation hyderabad',
   ],
   openGraph: {
-    title: 'Spine Surgery in Hyderabad | Dr. Sayuj Krishnan',
+    title: 'Spine Surgery Hyderabad | Minimally Invasive Specialist',
     description:
-      'Advanced spine surgery in Hyderabad for slip disc, spinal stenosis, deformity correction, and complex revision procedures with minimally invasive options.',
+      'Advanced minimally invasive spine surgery in Hyderabad. Walk the next day with keyhole endoscopic techniques for slip disc & sciatica. Expert care at Yashoda Malakpet.',
     url: `${SITE_URL}/services/${SERVICE_SLUG}`,
     siteName: 'Dr. Sayuj Krishnan - Neurosurgeon Hyderabad',
     locale: 'en_IN',
@@ -52,7 +53,7 @@ export const metadata: Metadata = {
   },
 };
 
-const schema = buildLocalServiceSchema({
+const serviceSchema = buildLocalServiceSchema({
   slug: SERVICE_SLUG,
   name: 'Comprehensive Spine Surgery in Hyderabad',
   description:
@@ -80,9 +81,23 @@ const faqs = [
 ];
 
 export default function SpineSurgeryHyderabadPage() {
+  const breadcrumbs = [
+    { name: 'Home', path: '/' },
+    { name: 'Services', path: '/services/' },
+    { name: 'Spine Surgery in Hyderabad', path: `/services/${SERVICE_SLUG}/` },
+  ];
+
   return (
     <>
-      <JsonLd data={schema} />
+      <JsonLd data={serviceSchema} />
+      <MedicalWebPageSchema
+        title="Spine Surgery Hyderabad | Minimally Invasive Specialist - Dr. Sayuj"
+        description="Advanced minimally invasive spine surgery in Hyderabad. Walk the next day with keyhole endoscopic techniques for slip disc & sciatica. Expert care at Yashoda Malakpet."
+        pageSlug={`/services/${SERVICE_SLUG}/`}
+        pageType="service"
+        serviceOrCondition="Spine Surgery"
+        breadcrumbs={breadcrumbs}
+      />
       <main className="container mx-auto px-4 py-16">
         <Breadcrumbs
           items={[
