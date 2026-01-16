@@ -19,6 +19,8 @@ export default function ConditionStructuredData({
     name: condition.name,
     description: condition.summary,
     url,
+    "author": { "@id": `${SITE_URL}/#physician` },
+    "maintainer": { "@id": `${SITE_URL}/#physician` },
   };
 
   if (condition.symptomHighlights?.length) {

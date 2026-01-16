@@ -48,6 +48,7 @@ module.exports = {
     "/blog/*sample*",
     "/blog/*template*",
     "/blog/*placeholder*",
+    "/conditions/a-z/*",
   ],
   changefreq: "weekly",
   priority: 0.7,
