@@ -15,17 +15,18 @@ const Card: React.FC<CardProps> = ({
     hover = true,
     bordered = true,
 }) => {
-    const baseStyles = 'bg-[var(--color-surface)] rounded-lg overflow-hidden transition-all duration-200';
+    const baseStyles = 'relative bg-white/70 backdrop-blur-lg rounded-2xl overflow-hidden transition-all duration-300';
 
     const paddingStyles = {
         none: '',
         sm: 'p-4',
-        md: 'p-6',
-        lg: 'p-8',
+        md: 'p-8',
+        lg: 'p-10',
     };
 
-    const hoverStyles = hover ? 'hover:shadow-md hover:-translate-y-1 hover:border-[var(--color-primary-500)]' : '';
-    const borderStyles = bordered ? 'border border-[var(--color-border)] shadow-sm' : 'shadow-none';
+    const hoverStyles = hover ? 'hover:shadow-2xl hover:-translate-y-1' : '';
+
+    const borderStyles = bordered ? 'border border-white/20 shadow-xl' : 'shadow-none';
 
     const combinedClasses = `${baseStyles} ${paddingStyles[padding]} ${hoverStyles} ${borderStyles} ${className}`;
 
