@@ -8,6 +8,7 @@ import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import { getServiceSources } from '../sources';
 import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
+import { LocalPathways } from '@/src/components/locations/LocalPathways';
 
 export const metadata = makeMetadata({
   title: 'Spinal Fusion Surgery in Hyderabad | TLIF & ACDF',
@@ -159,6 +160,11 @@ export default function Page() {
         </div>
       </dl>
 
+
+
+      <div className="not-prose mt-12">
+        <LocalPathways mode="service" />
+      </div>
       <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
       <ReviewedBy lastReviewed="2025-10-19" />
       <NAP />

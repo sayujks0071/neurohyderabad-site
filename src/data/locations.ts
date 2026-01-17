@@ -65,14 +65,14 @@ const DEFAULT_SERVICES = [
   "endoscopic-spine-surgery-hyderabad",
   "brain-tumor-surgery-hyderabad",
   "minimally-invasive-spine-surgery",
-  "sciatica-treatment-hyderabad"
+  "endoscopic-discectomy-hyderabad"
 ];
 
 const DEFAULT_CONDITIONS = [
-  "sciatica-pain-treatment",
-  "slipped-disc",
-  "brain-tumor",
-  "trigeminal-neuralgia"
+  "sciatica-pain-treatment-hyderabad",
+  "slip-disc-treatment-hyderabad",
+  "brain-tumor-surgery-hyderabad",
+  "trigeminal-neuralgia-treatment-hyderabad"
 ];
 
 export const locations: LocationData[] = [

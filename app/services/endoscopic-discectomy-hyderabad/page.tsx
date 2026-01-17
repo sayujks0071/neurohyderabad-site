@@ -8,6 +8,7 @@ import ServicePageTracker from '../../../src/components/ServicePageTracker';
 import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import { getServiceSources } from '../sources';
+import { LocalPathways } from '@/src/components/locations/LocalPathways';
 
 const baseMetadata = makeMetadata({
   title: 'Endoscopic Discectomy Hyderabad | Dr. Sayuj Krishnan',
@@ -300,7 +301,12 @@ export default function EndoscopicDiscectomyPage() {
           </div>
         </section>
 
-        <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
+
+
+      <div className="not-prose mt-12">
+        <LocalPathways mode="service" />
+      </div>
+      <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
 
         <section className="mt-12 space-y-6">
           <ReviewedBy lastReviewed="2025-10-19" />
