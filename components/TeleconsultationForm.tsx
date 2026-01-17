@@ -311,13 +311,14 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
               value={formState.painScore}
               onChange={handleChange('painScore')}
               className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-              aria-valuetext={`Score: ${formState.painScore}`}
+              aria-valuetext={`Score: ${formState.painScore}${formState.painScore >= 8 ? ' (Severe)' : formState.painScore <= 3 ? ' (Mild)' : ''}`}
             />
             <span className="text-sm font-bold text-gray-400" aria-hidden="true">10</span>
           </div>
           <div className="text-center mt-2">
             <span
-              className={`inline-block px-3 py-1 rounded-lg text-xs font-bold ${
+              key={formState.painScore}
+              className={`inline-block px-3 py-1 rounded-lg text-xs font-bold transition-transform duration-200 ease-out transform scale-100 animate-[pulse_0.3s_ease-in-out_1] ${
                 formState.painScore <= 3
                   ? "bg-green-100 text-green-700"
                   : formState.painScore <= 7
