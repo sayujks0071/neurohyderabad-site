@@ -65,7 +65,7 @@ const HOME_CANONICAL = SITE_URL.endsWith("/") ? SITE_URL : `${SITE_URL}/`;
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Neurosurgeon & Endoscopic Spine Specialist Hyderabad | Dr. Sayuj Krishnan S",
+    absolute: "Endoscopic Spine & Neurosurgeon Hyderabad | Dr. Sayuj Krishnan",
   },
   description: 'German-trained neurosurgeon in Hyderabad for minimally invasive spine and awake brain surgery. 1,000+ endoscopic procedures with same-day discharge at Yashoda Hospital, Malakpet. Expert in endoscopic discectomy, brain tumor surgery, epilepsy surgery, and ROSA robotic DBS.',
   keywords: [

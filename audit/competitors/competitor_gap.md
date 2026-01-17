@@ -1,24 +1,27 @@
-# Competitor Benchmark: Hyderabad Spine/Neuro
+# Competitor Benchmark Analysis
 
-## 1. Top Competitors (SERP Analysis)
-Based on "spine surgeon hyderabad" and "minimally invasive spine surgery hyderabad":
+## Top Competitors
+1. **Dr. Raveesh Sunkara (drraveesh.com)**
+   - **Strengths:** High ranking for "endoscopic spine surgery" and "neurosurgeon". Personal branding strong.
+   - **Gap:** Likely similar content strategy. Dr. Sayuj can differentiate with "German Training" and "Awake Spine Surgery" specifics.
 
-1.  **Dr. Raveesh Sunkara (drraveesh.com)**
-    *   **Strengths:** Strong "Best X in Hyderabad" pages, explicit "Endoscopic" and "Minimally Invasive" pages.
-    *   **Gaps:** Some pages feel generic.
-2.  **SpineSurgeon.in (Dr. Surya Prakash Voleti)**
-    *   **Strengths:** Exact match domain, 25+ years experience highlighted.
-    *   **Gaps:** Older design, potentially slower.
-3.  **Yashoda Hospitals**
-    *   **Strengths:** High domain authority, huge content volume, "List of Doctors" aggregator style.
-    *   **Gaps:** Less personal connection than a solo surgeon site.
+2. **Epione / ANSSI (Pain Clinics)**
+   - **Strengths:** "No Surgery" messaging for Sciatica.
+   - **Gap:** Dr. Sayuj should emphasize "Conservative First" approach in Sciatica pages to capture this intent, then pivot to "Minimally Invasive" if needed.
 
-## 2. Content Gaps Identified
-*   **"Day Care" / "Same Day" Messaging:** Competitors like Citi Neuro Centre emphasize "Faster Recovery" and "Day Care". Our site has some mention but needs a dedicated landing page or stronger H1 focus.
-*   **Cost Transparency:** Users search for cost, but competitors often hide it. We have cost blogs, but they need to be more prominent or consolidated into a "Price Guide" to win the featured snippet.
-*   **"Awake" Surgery:** Dr. Sayuj's "Awake Spine Surgery" is a unique differentiator. We need to double down on this vs general "Minimally Invasive".
+3. **Yashoda Hospitals**
+   - **Strengths:** Domain authority.
+   - **Gap:** Dr. Sayuj is *in* Yashoda. He can piggyback on this by optimizing for "Yashoda Malakpet Neurosurgeon" (which he does).
 
-## 3. Recommended Actions
-1.  **Consolidate "Cost" content:** We have multiple cost blogs. Create a "Master Cost Guide" page or ensure the main cost blog is updated and linked everywhere.
-2.  **Boost "Awake" & "Endoscopic" keywords:** Ensure metadata explicitly targets "Endoscopic Spine Surgery Hyderabad" (which we do) but also "Day Care Spine Surgery".
-3.  **Schema:** Ensure `Physician` schema is on ALL pages (currently missing on some per static audit).
+## Keyword Gaps & Opportunities
+
+| Keyword | Intent | Target Page | Gap/Action |
+|---|---|---|---|
+| "endoscopic spine surgery cost hyderabad" | Commercial | `/blog/endoscopic-spine-surgery-cost-hyderabad` | Ensure this page exists and has updated pricing ranges (even if broad). |
+| "awake spine surgery hyderabad" | Informational/Transactional | `/services/awake-spine-surgery-hyderabad` | Unique selling point. Competitors don't highlight "Awake" as much. |
+| "sciatica treatment without surgery hyderabad" | Informational | `/conditions/sciatica-pain-treatment-hyderabad` | Add section "Can Sciatica be cured without surgery?" to capture this traffic. |
+
+## Recommendations
+1. **Enhance Sciatica Page:** Add stronger "Non-surgical" content block to compete with Pain Clinics.
+2. **Leverage "German Trained":** Use this USP in meta descriptions and H1s (already doing it).
+3. **Video Content:** Ensure video schema is effectively used on Service pages (Lazy loaded videos are good, but schema must be present).
