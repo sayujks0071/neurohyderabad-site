@@ -8,8 +8,8 @@ import { analytics } from "../../src/lib/analytics";
 import ScrollDepthTracker from "../../src/components/ScrollDepthTracker";
 
 export const metadata: Metadata = {
-  title: "Best Neurosurgeon in Hyderabad 2025 | Dr. Sayuj Krishnan",
-  description: "German-trained neurosurgeon at Yashoda Hospital, Malakpet. 1,000+ endoscopic brain & spine surgeries, 4.9★ rating, insurance-friendly same-day discharge.",
+  title: "Best Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan",
+  description: "German-trained neurosurgeon at Yashoda Malakpet with 1,000+ endoscopic brain & spine cases. Consultations available.",
   keywords: [
     "best neurosurgeon in hyderabad",
     "best spine surgeon hyderabad",
@@ -27,8 +27,8 @@ export const metadata: Metadata = {
     }
   },
   openGraph: {
-    title: "Best Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan, German-Trained Spine & Brain Surgeon",
-    description: "Trusted 4.9★ neurosurgeon with 1,000+ endoscopic spine/brain procedures and fast recovery protocols at Yashoda Hospital, Malakpet.",
+    title: "Best Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan",
+    description: "German-trained neurosurgeon at Yashoda Malakpet with 1,000+ endoscopic spine/brain procedures and fast recovery protocols.",
     url: `${SITE_URL}/best-neurosurgeon-in-hyderabad/`,
     siteName: "Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
     locale: "en_IN",

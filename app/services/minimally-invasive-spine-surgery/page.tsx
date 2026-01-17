@@ -15,7 +15,6 @@ import JsonLd from '@/components/JsonLd';
 import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
-import { PhysicianSchema } from "@/src/components/schema/PhysicianSchema";
 import CostTransparencySection from '@/src/components/CostTransparencySection';
 import PatientJourneySection from '@/src/components/PatientJourneySection';
 import SurgeryComparisonTable from '@/src/components/SurgeryComparisonTable';
@@ -254,7 +253,6 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
         ]}
       />
       <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/minimally-invasive-spine-surgery`} />
-      <PhysicianSchema />
       <div className="min-h-screen bg-white">
         <script
           type="application/ld+json"
@@ -636,7 +634,7 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
               <h3 className="text-xl font-semibold text-blue-700 mb-3">Related Symptoms</h3>
               <ul className="space-y-2">
                 <li>
-                  <Link href="/conditions/sciatica-treatment-hyderabad" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 hover:text-blue-800 hover:underline">
                     Sciatica (Leg Pain)
                   </Link>
                   <span className="text-gray-600 text-sm ml-2">- Shooting pain down the leg</span>

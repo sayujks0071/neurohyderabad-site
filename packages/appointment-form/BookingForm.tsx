@@ -1,38 +1,20 @@
 'use client';
 
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
 import type { BookingData } from "@/packages/appointment-form/types";
 import Input from "./ui/Input";
 import Select from "./ui/Select";
 import Textarea from "./ui/Textarea";
 import Button from "./ui/Button";
 import Calendar from "./ui/Calendar";
+import { appointmentSchema, BookingFormValues } from "./schema";
 
 interface BookingFormProps {
   onSubmit: (data: BookingData) => Promise<void> | void;
   initialData?: BookingData | null;
 }
-
-const appointmentSchema = z.object({
-  patientName: z.string().min(2, "Name is too short"),
-  email: z.string().email("Please enter a valid email address"),
-  contactNumber: z.string().regex(/^[6-9]\d{9}$/, "Invalid Indian mobile number"),
-  age: z.string().regex(/^\d+$/, "Age must be a number").refine((val) => {
-    const n = Number(val);
-    return Number.isFinite(n) && n > 0 && n <= 120;
-  }, "Age seems too high"),
-  gender: z.enum(["male", "female", "other"], { errorMap: () => ({ message: "Please select a gender" }) }),
-  requestedDate: z.date({ required_error: "Please select a date" }).min(new Date(new Date().setHours(0, 0, 0, 0)), "Date must be in the future"),
-  appointmentTime: z.string().min(1, "Please select a time"),
-  reason: z.string().min(10, "Please provide more details (min 10 characters)"),
-  painScore: z.coerce.number().min(1).max(10).optional(),
-  hasMRI: z.boolean().default(false),
-});
-
-type BookingFormValues = z.infer<typeof appointmentSchema>;
 
 const defaultValues: Partial<BookingFormValues> = {
   patientName: "",
@@ -110,7 +92,7 @@ export default function BookingForm({
     }
   }, [initialData, reset]);
 
-  const handleFormSubmit = (data: BookingFormValues) => {
+  const handleFormSubmit = async (data: BookingFormValues) => {
     // Map form values back to BookingData
     const submissionData: BookingData = {
       patientName: data.patientName,
@@ -124,7 +106,7 @@ export default function BookingForm({
       painScore: data.painScore,
       mriScanAvailable: data.hasMRI,
     };
-    onSubmit(submissionData);
+    await onSubmit(submissionData);
   };
 
   return (
@@ -288,6 +270,11 @@ export default function BookingForm({
                     </span>
                   )}
                 </div>
+                {errors.painScore && (
+                  <p className="mt-1 text-sm text-center text-red-600">
+                    {errors.painScore.message}
+                  </p>
+                )}
               </div>
 
               <div className="flex items-center p-4 bg-slate-50 rounded-xl border border-slate-200">

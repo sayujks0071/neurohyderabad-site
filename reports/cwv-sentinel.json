@@ -1,25 +1,29 @@
 {
-  "timestamp": "2026-01-10T03:00:00Z",
-  "build_metrics": {
-    "home_page_js_before": "150kB",
-    "home_page_js_after": "116kB"
-  },
-  "findings": [
-    {
-      "page_type": "Home",
-      "url": "/",
-      "observation": "High First Load JS (150kB) caused by eager loading of Hypertune SDK in RootLayout.",
-      "action": "Modified HypertuneProvider to dynamically import the SDK in useEffect/requestIdleCallback.",
-      "expected_impact": "Reduced First Load JS by ~34kB (22% reduction). This significantly reduces TBT and improves LCP on slow connections.",
-      "verification": "Next.js build output confirmed reduction from 150kB to 116kB for the home page route."
+  "timestamp": "2025-05-22T10:15:00Z",
+  "notes": {
+    "measurement": "Unable to run Lighthouse CI due to missing Chrome environment. Used manual code analysis and build output.",
+    "build_output": {
+      "shared_js": "103 kB",
+      "home_size": "103 kB",
+      "location_size": "106 kB"
     },
-    {
-      "page_type": "Appointment",
-      "url": "/appointments",
-      "observation": "LCP element (H1 title) had 'animate-in fade-in delay-100' classes, causing a 100ms+ delay in Largest Contentful Paint.",
-      "action": "Removed animation classes from the H1 title in NeuraLinkBookingApp.tsx.",
-      "expected_impact": "LCP should improve by at least 100ms + animation duration. Text will be visible immediately upon paint.",
-      "verification": "Manual code review of NeuraLinkBookingApp.tsx and successful build."
+    "bottlenecks": [
+      {
+        "type": "CLS/LCP",
+        "suspected_source": "Font loading strategy (display: 'swap') for Merriweather and Inter.",
+        "details": "The 'swap' strategy can cause layout shifts (CLS) when the web font loads and replaces the fallback font, especially for the Hero section text (Merriweather) and Headings (Inter). It can also delay LCP if the browser waits for the font (block period)."
+      },
+      {
+        "type": "CLS",
+        "suspected_source": "LazySection placeholders",
+        "details": "Placeholders have fixed heights that might not match loaded content, causing shifts below the fold."
+      }
+    ],
+    "selected_bottleneck": "Font loading strategy (display: 'swap')",
+    "proposed_fix": "Change font display to 'optional' in app/layout.tsx to prevent layout shifts and ensure text visibility.",
+    "verification": {
+      "status": "Success",
+      "method": "Build passed. Code analysis confirms this change aligns with Next.js and Web Vitals best practices for CLS optimization."
     }
-  ]
+  }
 }

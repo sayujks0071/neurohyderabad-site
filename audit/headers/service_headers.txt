@@ -1,0 +1,20 @@
+HTTP/1.1 200 OK
+X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin
+X-Frame-Options: SAMEORIGIN
+Permissions-Policy: camera=(), microphone=(), geolocation=()
+Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+X-Permitted-Cross-Domain-Policies: none
+X-DNS-Prefetch-Control: on
+Vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding
+x-nextjs-cache: HIT
+x-nextjs-prerender: 1
+x-nextjs-prerender: 1
+x-nextjs-stale-time: 300
+Cache-Control: s-maxage=3600, stale-while-revalidate=31532400
+ETag: "12xjo4lf04i4l2c"
+Content-Type: text/html; charset=utf-8
+Content-Length: 214172
+Date: Fri, 16 Jan 2026 23:42:09 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5

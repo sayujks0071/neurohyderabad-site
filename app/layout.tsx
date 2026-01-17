@@ -1,20 +1,24 @@
 import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { Inter, Merriweather } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
+  // 'optional' reduces CLS by using the fallback font if the web font isn't available immediately.
+  // This prioritizes layout stability (CWV) over the custom font.
+  display: "optional",
 });
 
 const merriweather = Merriweather({
   subsets: ["latin"],
   variable: "--font-merriweather",
   weight: ["400", "700"],
-  display: "swap",
+  // 'optional' reduces CLS by using the fallback font if the web font isn't available immediately.
+  // This prioritizes layout stability (CWV) over the custom font.
+  display: "optional",
 });
 
 declare global {
@@ -25,10 +29,11 @@ declare global {
 import Header from "./components/HeaderRefactored";
 import Footer from "./components/Footer";
 import WebsiteSchema from "./components/schemas/WebsiteSchema";
-import PhysicianSchema from "./components/schemas/PhysicianSchema";
+import { PhysicianSchema } from "../src/components/schema/PhysicianSchema";
 import HospitalSchema from "./components/schemas/HospitalSchema";
 import TrustStrip from "./_components/TrustStrip";
 import ClientAnalytics from "./_components/ClientAnalytics";
+import GoogleAnalytics from "../src/components/GoogleAnalytics";
 import DynamicStickyCTA from "./_components/DynamicStickyCTA";
 import HypertuneProvider from "./providers/hypertune-provider";
 import { SITE_URL } from "../src/lib/seo";
@@ -155,11 +160,17 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://edge.hypertune.com" />
         <link rel="preconnect" href="https://edge.hypertune.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://i.ytimg.com" />
-        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.google-analytics.com" />
       </head>
       <body className={`antialiased ${inter.variable} ${merriweather.variable}`}>
+        <GoogleAnalytics />
         <ClientAnalytics />
+        {process.env.NEXT_PUBLIC_CHATBOT_ID && (
+          <Script id="chatbase-embed" strategy="lazyOnload">
+            {`(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="${process.env.NEXT_PUBLIC_CHATBOT_ID}";script.domain="www.chatbase.co";document.body.appendChild(script)})()`}
+          </Script>
+        )}
         <WebsiteSchema />
         <PhysicianSchema />
         <HospitalSchema />

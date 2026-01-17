@@ -9,6 +9,7 @@ import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import { getServiceSources } from '../sources';
 import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
+import { LocalPathways } from '@/src/components/locations/LocalPathways';
 
 const baseMetadata = makeMetadata({
   title: 'Cooled Radiofrequency Ablation Hyderabad | Dr. Sayuj Krishnan',
@@ -499,7 +500,12 @@ export default function CooledRadiofrequencyAblationPage() {
           </div>
         </section>
 
-        <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
+
+
+      <div className="not-prose mt-12">
+        <LocalPathways mode="service" />
+      </div>
+      <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
 
         <section className="mt-12 space-y-6">
           <ReviewedBy lastReviewed="2025-01-15" />

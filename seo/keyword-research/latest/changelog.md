@@ -1,14 +1,15 @@
-# SEO Changelog - 2026-01-14
+# SEO Changelog: 2026-01-17
 
 ## New Content
-- **Blog Post:** `sciatica-pain-relief-exercises-hyderabad.mdx`
-  - Targets: "sciatica exercises hyderabad", "sciatica pain relief at home"
-  - Intent: Capture TOFU traffic looking for relief before surgery.
+* **Page Created:** `app/services/cervical-disc-replacement-hyderabad/page.tsx`
+  * Implements `OutcomeMetricsSection`
+  * Includes `TeleconsultationForm`
+  * Full JSON-LD Schema (Physician, MedicalWebPage)
 
-## Updates
-- **Keyword Registry:** Added 6 new keywords.
-- **Page Map:** Updated `/conditions/sciatica-pain-treatment-hyderabad` and `/` with new variations.
+## Registry Updates
+* Updated `seo/keyword-registry.json` with 12 new terms.
+* Updated `seo/page-keyword-map.json` linking keywords to the new service page.
 
-## Insights
-- High demand for "non-surgical" and "exercise" related content for sciatica in Hyderabad.
-- Competitors are weak on localized "exercise" guides.
+## System Changes
+* Cleaned up `verification/` folder.
+* Standardized `.github/pull_request_template.md`.

@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-14",
+  "last_updated": "2026-01-17",
   "keywords": [
     {
       "term": "neurosurgeon hyderabad",
@@ -29,7 +29,7 @@
       "term": "brain tumor surgery hyderabad",
       "difficulty": "Med",
       "volume": "Med",
-      "target_page": "/conditions/brain-tumor-surgery-hyderabad"
+      "target_page": "/services/brain-tumor-surgery-hyderabad"
     },
     {
       "term": "spine tumor surgery hyderabad",
@@ -174,6 +174,84 @@
       "difficulty": "High",
       "volume": "High",
       "target_page": "/"
+    },
+    {
+      "term": "vertebroplasty hyderabad",
+      "difficulty": "Med",
+      "volume": "Med",
+      "target_page": "/services/kyphoplasty-vertebroplasty-hyderabad"
+    },
+    {
+      "term": "kyphoplasty hyderabad",
+      "difficulty": "Med",
+      "volume": "Med",
+      "target_page": "/services/kyphoplasty-vertebroplasty-hyderabad"
+    },
+    {
+      "term": "cement spine surgery hyderabad",
+      "difficulty": "Low",
+      "volume": "Low",
+      "target_page": "/services/kyphoplasty-vertebroplasty-hyderabad"
+    },
+    {
+      "term": "vertebroplasty cost in hyderabad",
+      "difficulty": "High",
+      "volume": "Low",
+      "target_page": "/services/kyphoplasty-vertebroplasty-hyderabad"
+    },
+    {
+      "term": "best doctor for kyphoplasty hyderabad",
+      "difficulty": "High",
+      "volume": "Low",
+      "target_page": "/services/kyphoplasty-vertebroplasty-hyderabad"
+    },
+    {
+      "term": "sciatica exercises for office workers",
+      "difficulty": "Low",
+      "volume": "Med",
+      "target_page": "/blog/sciatica-exercises-for-office-workers-hyderabad"
+    },
+    {
+      "term": "back pain due to sitting hyderabad",
+      "difficulty": "Low",
+      "volume": "Med",
+      "target_page": "/blog/sciatica-exercises-for-office-workers-hyderabad"
+    },
+    {
+      "term": "return to work after spine surgery",
+      "difficulty": "Med",
+      "volume": "Med",
+      "target_page": "/blog/endoscopic-spine-surgery-recovery-timeline"
+    },
+    {
+      "term": "cervical disc replacement hyderabad",
+      "difficulty": "Med",
+      "volume": "Med",
+      "target_page": "/services/cervical-disc-replacement-hyderabad"
+    },
+    {
+      "term": "artificial disc replacement india",
+      "difficulty": "High",
+      "volume": "High",
+      "target_page": "/services/cervical-disc-replacement-hyderabad"
+    },
+    {
+      "term": "neurosurgeon manikonda",
+      "difficulty": "Low",
+      "volume": "Med",
+      "target_page": "/locations/neurosurgeon-manikonda"
+    },
+    {
+      "term": "endoscopic discectomy cost hyderabad",
+      "difficulty": "Med",
+      "volume": "High",
+      "target_page": "/services/spine-surgery-cost-hyderabad"
+    },
+    {
+      "term": "back pain doctor gachibowli",
+      "difficulty": "Med",
+      "volume": "Med",
+      "target_page": "/locations/neurosurgeon-gachibowli"
     }
   ]
 }

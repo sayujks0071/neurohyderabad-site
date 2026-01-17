@@ -8,6 +8,7 @@ import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import { sources } from '../../blog/sources';
+import { LocalPathways } from '@/src/components/locations/LocalPathways';
 
 // Static generation with 24-hour revalidation
 export const revalidate = 86400;
@@ -490,6 +491,11 @@ export default function TrigeminalNeuralgiaTreatmentPage() {
         updatedOn="2025-10-19"
       />
       
+
+
+      <div className="mt-12">
+        <LocalPathways mode="condition" />
+      </div>
       <SourceList sources={sources['trigeminal-neuralgia-treatment-hyderabad'] || []} />
       
       <ReviewedBy />

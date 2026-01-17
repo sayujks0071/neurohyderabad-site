@@ -14,7 +14,6 @@ import TrustProof from '@/app/_components/TrustProof';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import { getServiceSources } from '../sources';
 import { patientStories } from '@/src/content/stories';
-import { PhysicianSchema } from "@/src/components/schema/PhysicianSchema";
 import SurgeryComparisonTable from '@/src/components/SurgeryComparisonTable';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
 
@@ -24,9 +23,9 @@ const SERVICE_SLUG = 'endoscopic-spine-surgery-hyderabad';
 export const revalidate = 3600; // Revalidate every hour
 
 const baseMetadata = makeMetadata({
-  title: 'Endoscopic Spine Surgery in Hyderabad | Minimally Invasive Keyhole Surgery – Dr. Sayuj Krishnan',
+  title: 'Endoscopic Spine Surgery Hyderabad | 90% Same-Day Discharge',
   description:
-    'Endoscopic spine surgery in Hyderabad at Yashoda Hospital Malakpet. Dr. Sayuj Krishnan offers minimally invasive keyhole spine surgery for slip disc, sciatica, and spinal stenosis. Same-day discharge, faster recovery. Book consultation today.',
+    'Expert endoscopic spine surgery in Hyderabad by Dr. Sayuj Krishnan. 90% same-day discharge. Minimally invasive keyhole surgery for slip disc & sciatica.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
 });
 
@@ -86,6 +85,11 @@ const faqs = [
       'Endoscopic surgery uses a high-definition camera through a “keyhole” incision that is typically less than 1 cm. This approach preserves muscle, reduces postoperative pain, and speeds recovery compared to tubular or open techniques.',
   },
   {
+    question: 'What should I expect on the day of endoscopic spine surgery?',
+    answer:
+      'Most cases are day-care procedures. You arrive for pre-op checks, undergo the keyhole surgery, and begin walking within hours. Discharge is usually the same evening or next morning with a written recovery plan.',
+  },
+  {
     question: 'Is Yashoda Hospital, Malakpet easy to reach for day-care surgery?',
     answer:
       'Yes. The hospital is centrally located in Malakpet, making it convenient for patients travelling from Dilsukhnagar, LB Nagar, Charminar, Koti, and other parts of Hyderabad. Parking and attendant lounges are available on-site.',
@@ -94,6 +98,10 @@ const faqs = [
     question: 'Why choose Dr. Sayuj for this “keyhole” procedure?',
     answer:
       'Endoscopic spine surgery is a specialised skill. Dr. Sayuj has focused training in full endoscopic techniques and performs them regularly at Yashoda Hospital, ensuring precision, safety, and consistent patient outcomes.',
+  },
+  {
+    question: 'Is endoscopic spine surgery the same as laser spine surgery?',
+    answer: 'No. Laser surgery often refers to limited surface ablation. Endoscopic surgery is a comprehensive structural correction (removing bone spurs or disc fragments) under high-definition visualization, offering far superior long-term results than laser alone.'
   },
 ];
 
@@ -106,13 +114,13 @@ const COSTS = [
   },
   {
     procedure: 'Endoscopic Canal Decompression',
-    range: 'Ask for Estimate',
+    range: '₹1,20,000 - ₹1,60,000',
     recovery: '2 Days',
     includes: ['Stenosis Decompression', 'Advanced Endoscope Use', 'Neuromonitoring']
   },
   {
     procedure: 'Cervical Endoscopic Decompression',
-    range: 'Ask for Estimate',
+    range: '₹1,20,000 - ₹1,70,000',
     recovery: '2 Days',
     includes: ['Neck Surgery', 'High-Definition Optics', 'Specialised Instrumentation']
   }
@@ -163,6 +171,10 @@ const ADVANCED_TECHNIQUES = [
   {
     title: "Endoscopic Lumbar Discectomy",
     description: "Gold-standard minimally invasive removal of disc fragments pressing on nerves, allowing same-day walking."
+  },
+  {
+    title: "Awake Endoscopic Spine Surgery",
+    description: "For elderly or high-risk patients, we perform the procedure under local anaesthesia with mild sedation, avoiding general anaesthesia risks."
   }
 ];
 
@@ -211,7 +223,6 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
     <>
       <JsonLd data={schema} />
       <JsonLd data={gbpSchema} />
-      <PhysicianSchema />
       <main className="container mx-auto px-4 py-16">
         <Breadcrumbs
           items={[
@@ -228,12 +239,16 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
               Endoscopic Spine Surgery in Hyderabad | Minimally Invasive Keyhole Surgery
             </h1>
             <AuthorByline
-              publishedOn="2025-09-05"
-              updatedOn="2026-01-10"
+              publishedOn="2024-09-05"
+              updatedOn="2025-02-20"
               className="mb-6"
             />
             <p className="text-lg text-gray-700 mb-6">
-              Endoscopic—or “keyhole”—spine surgery provides fast, lasting relief from slip disc, sciatica, and foraminal stenosis
+              Endoscopic—or “keyhole”—spine surgery provides fast, lasting relief from slip disc,{" "}
+              <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-700 underline">
+                sciatica
+              </Link>
+              , and foraminal stenosis
               with almost no muscle disruption. Performed by Dr. Sayuj at Yashoda Hospital, Malakpet, this approach helps you walk
               the same day and return to normal life sooner.
             </p>
@@ -280,6 +295,14 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
             },
             {
               "@type": "Question",
+              "name": "What should I expect on the day of endoscopic spine surgery?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Most cases are day-care procedures. You arrive for pre-op checks, undergo keyhole surgery, and begin walking within hours. Discharge is usually the same evening or next morning with a recovery plan."
+              }
+            },
+            {
+              "@type": "Question",
               "name": "Is endoscopic spine surgery painful?",
               "acceptedAnswer": {
                 "@type": "Answer",
@@ -305,6 +328,25 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
           ]
         }}
       />
+
+        <section className="mb-12 bg-green-50 border border-green-200 rounded-2xl p-6 shadow-sm">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div>
+              <h2 className="text-2xl font-bold text-green-900 mb-2">Free MRI Review & Second Opinion</h2>
+              <p className="text-green-800">
+                Not sure if you need surgery? Send us your MRI report on WhatsApp. Dr. Sayuj will personally review it to see if you are a candidate for <strong>Keyhole Endoscopic Surgery</strong>.
+              </p>
+            </div>
+            <a
+              href="https://wa.me/919778280044?text=Hi%20Dr%20Sayuj,%20I%20would%20like%20a%20free%20MRI%20review%20for%20endoscopic%20spine%20surgery"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center whitespace-nowrap rounded-full bg-green-600 px-6 py-3 text-white font-semibold hover:bg-green-700 transition-colors shadow-md"
+            >
+              WhatsApp MRI Now
+            </a>
+          </div>
+        </section>
 
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-blue-900 mb-6">Conditions Treated with Endoscopic Surgery</h2>
@@ -424,6 +466,33 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
           </div>
         </section>
 
+        {/* Red Flags Section */}
+        <section className="mb-16 bg-red-50 border border-red-100 rounded-2xl p-8">
+          <h2 className="text-2xl font-bold text-red-900 mb-4 flex items-center gap-2">
+            <svg className="w-8 h-8 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            Red Flags: When is Surgery Urgent?
+          </h2>
+          <p className="text-gray-700 mb-6">
+            Most spine conditions can wait for medication or therapy. However, immediate medical attention is required if you experience:
+          </p>
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="bg-white p-5 rounded-lg border-l-4 border-red-500 shadow-sm">
+              <h3 className="font-bold text-red-800 mb-2">Cauda Equina Syndrome</h3>
+              <p className="text-sm text-gray-700">Sudden loss of bowel or bladder control, or numbness in the groin/saddle area.</p>
+            </div>
+            <div className="bg-white p-5 rounded-lg border-l-4 border-red-500 shadow-sm">
+              <h3 className="font-bold text-red-800 mb-2">Progressive Weakness</h3>
+              <p className="text-sm text-gray-700">Rapidly worsening weakness in the foot (foot drop) or leg that affects walking.</p>
+            </div>
+            <div className="bg-white p-5 rounded-lg border-l-4 border-red-500 shadow-sm">
+              <h3 className="font-bold text-red-800 mb-2">Intractable Pain</h3>
+              <p className="text-sm text-gray-700">Severe pain that does not improve with rest or maximum medical management.</p>
+            </div>
+          </div>
+        </section>
+
         <CostTransparencySection
           costs={COSTS}
           disclaimer="Approximate package estimates for self-pay patients at Yashoda Hospital Malakpet. Final cost depends on room category (General/Sharing/Private), insurance approvals, and specific implant requirements. We offer full assistance with insurance pre-authorization."
@@ -463,7 +532,7 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
         <LocalPathways mode="service" />
 
         <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
-        <ReviewedBy lastReviewed="2026-01-10" />
+        <ReviewedBy lastReviewed="2025-02-20" />
       </main>
     </>
   );

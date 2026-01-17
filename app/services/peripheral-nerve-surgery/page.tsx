@@ -9,6 +9,7 @@ import SourceList from '@/app/_components/SourceList';
 import { getServiceSources } from '../sources';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
 import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
+import { LocalPathways } from '@/src/components/locations/LocalPathways';
 
 export const metadata = makeMetadata({
   title: 'Peripheral Nerve Surgery Hyderabad | Carpal & Ulnar',
@@ -167,6 +168,11 @@ export default function Page() {
         </div>
       </dl>
 
+
+
+      <div className="not-prose mt-12">
+        <LocalPathways mode="service" />
+      </div>
       <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
       <ReviewedBy lastReviewed="2025-10-19" />
       <NAP />

@@ -144,6 +144,7 @@ const AppointmentScheduler = ({
           <div className="flex items-center space-x-4 bg-white px-3 py-1.5 rounded-full border border-slate-200 shadow-sm">
             <button
               onClick={() => changeDate(-7)}
+              aria-label="Previous week"
               className="p-1.5 hover:bg-slate-100 rounded-full text-slate-500 transition-colors"
             >
               <ChevronLeft className="w-4 h-4" />
@@ -153,6 +154,7 @@ const AppointmentScheduler = ({
             </span>
             <button
               onClick={() => changeDate(7)}
+              aria-label="Next week"
               className="p-1.5 hover:bg-slate-100 rounded-full text-slate-500 transition-colors"
             >
               <ChevronRight className="w-4 h-4" />
@@ -172,18 +174,20 @@ const AppointmentScheduler = ({
         </div>
         <div className="grid grid-cols-7 gap-3">
           {[...Array(7)].map((_, i) => {
-            const viewDate = new Date(currentDate);
-            viewDate.setDate(viewDate.getDate() + i);
+            const buttonDate = new Date(currentDate);
+            buttonDate.setDate(buttonDate.getDate() + i);
 
-            const dStr = viewDate.toISOString().split("T")[0];
+            const dStr = buttonDate.toISOString().split("T")[0];
             const isSelected = currentDate === dStr;
-            const isWeekend = viewDate.getDay() === 0 || viewDate.getDay() === 6;
+            const isWeekend = buttonDate.getDay() === 0 || buttonDate.getDay() === 6;
 
             return (
               <button
                 key={dStr}
                 type="button"
                 disabled={isWeekend}
+                aria-label={`Select ${buttonDate.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}`}
+                aria-pressed={isSelected}
                 onClick={() => {
                   setCurrentDate(dStr);
                   if (selectedType) {
@@ -199,9 +203,9 @@ const AppointmentScheduler = ({
                 }`}
               >
                 <span className="text-xs font-medium mb-1 opacity-80">
-                  {viewDate.toLocaleDateString("en-US", { weekday: "short" })}
+                  {buttonDate.toLocaleDateString("en-US", { weekday: "short" })}
                 </span>
-                <span className="text-xl font-bold">{viewDate.getDate()}</span>
+                <span className="text-xl font-bold">{buttonDate.getDate()}</span>
                 {isSelected && (
                   <div className="absolute -bottom-1.5 w-1 h-1 bg-white rounded-full" />
                 )}

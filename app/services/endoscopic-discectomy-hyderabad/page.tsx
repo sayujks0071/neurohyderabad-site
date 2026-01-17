@@ -8,6 +8,7 @@ import ServicePageTracker from '../../../src/components/ServicePageTracker';
 import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import { getServiceSources } from '../sources';
+import { LocalPathways } from '@/src/components/locations/LocalPathways';
 
 const baseMetadata = makeMetadata({
   title: 'Endoscopic Discectomy Hyderabad | Dr. Sayuj Krishnan',
@@ -122,7 +123,13 @@ export default function EndoscopicDiscectomyPage() {
             <div className="bg-white p-6 rounded-lg shadow-sm border">
               <h3 className="text-lg font-semibold mb-3 text-blue-700">Symptoms Treated</h3>
               <ul className="space-y-2 text-gray-700">
-                <li>• Severe leg pain (sciatica)</li>
+                <li>
+                  • Severe leg pain (
+                  <Link href="/conditions/sciatica-treatment-hyderabad" className="text-blue-600 underline">
+                    sciatica
+                  </Link>
+                  )
+                </li>
                 <li>• Numbness or tingling in legs/feet</li>
                 <li>• Muscle weakness</li>
                 <li>• Difficulty walking or standing</li>
@@ -294,7 +301,12 @@ export default function EndoscopicDiscectomyPage() {
           </div>
         </section>
 
-        <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
+
+
+      <div className="not-prose mt-12">
+        <LocalPathways mode="service" />
+      </div>
+      <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
 
         <section className="mt-12 space-y-6">
           <ReviewedBy lastReviewed="2025-10-19" />

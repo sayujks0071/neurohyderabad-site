@@ -1,0 +1,78 @@
+name: Jules Weekly SEO Automation
+
+on:
+  schedule:
+    # Every Monday at 09:00 IST (03:30 UTC)
+    - cron: '30 3 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+env:
+  NODE_OPTIONS: '--max-old-space-size=4096'
+
+jobs:
+  weekly-seo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run Jules Weekly SEO Automation
+        env:
+          JULES_API_TOKEN: ${{ secrets.JULES_API_TOKEN }}
+          JULES_API_URL: ${{ secrets.JULES_API_URL }}
+          GOOGLE_JULES_API_TOKEN: ${{ secrets.JULES_API_TOKEN }}
+        run: |
+          npx tsx scripts/jules-weekly-seo-automation.ts
+
+      - name: Check for changes
+        id: git-check
+        run: |
+          git diff --exit-code || echo "changes=true" >> $GITHUB_OUTPUT
+
+      - name: Commit and push changes
+        if: steps.git-check.outputs.changes == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "SEO: weekly maintenance $(date +%Y-%m-%d)" || exit 0
+          git push
+
+      - name: Create PR if changes made
+        if: steps.git-check.outputs.changes == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: "SEO: Weekly Maintenance $(date +%Y-%m-%d)"
+          body: |
+            Automated weekly SEO improvements by Google Jules API.
+            
+            ## Changes Made
+            - See commit message for details
+            
+            ## Next Steps
+            - Review changes
+            - Merge if approved
+          branch: jules/weekly-seo-$(date +%Y-%m-%d)
+          delete-branch: true

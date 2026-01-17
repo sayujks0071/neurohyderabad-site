@@ -8,6 +8,22 @@ set -x  # Print commands
 echo "🚀 Setting up neurohyderabad-site environment for Jules"
 echo "=========================================================="
 
+# Fix git config issues first (before any git operations)
+echo ""
+echo "🔧 Fixing git config for cloning..."
+# Remove problematic insteadOf redirects that prevent GitHub cloning
+INSTEADOF_CONFIGS=$(git config --global --get-regexp 'url\..*\.insteadof' 2>/dev/null || true)
+if [ -n "$INSTEADOF_CONFIGS" ]; then
+  echo "$INSTEADOF_CONFIGS" | while IFS= read -r line; do
+    if [ -n "$line" ]; then
+      KEY=$(echo "$line" | cut -d' ' -f1)
+      echo "Removing git config: $KEY"
+      git config --global --unset-all "$KEY" 2>/dev/null || true
+    fi
+  done
+  echo "✅ Git config cleaned"
+fi
+
 # Display environment info
 echo ""
 echo "📋 Environment Information:"

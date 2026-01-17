@@ -43,9 +43,9 @@ const NeuraLinkBookingApp = () => {
   return (
     <div className="bg-slate-50/50">
       <section className="relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
-          <div className="absolute -top-[20%] -right-[10%] w-[700px] h-[700px] rounded-full bg-blue-100/40 blur-3xl opacity-60 mix-blend-multiply filter" />
-          <div className="absolute top-[20%] -left-[10%] w-[500px] h-[500px] rounded-full bg-indigo-100/40 blur-3xl opacity-60 mix-blend-multiply filter" />
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+          <div className="absolute -top-[20%] -right-[10%] w-[700px] h-[700px] rounded-full bg-blue-100/40 blur-3xl opacity-60" />
+          <div className="absolute top-[20%] -left-[10%] w-[500px] h-[500px] rounded-full bg-indigo-100/40 blur-3xl opacity-60" />
         </div>
 
         <div className="max-w-5xl mx-auto py-20 px-4 text-center">

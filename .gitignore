@@ -54,12 +54,18 @@ docs/internal/
 !docs/MAINTENANCE_REPORT.md
 !integrations/apps-script/README.md
 !docs/JULES_SETUP.md
+!docs/JULES_API_SETUP.md
+!docs/JULES_GIT_CONFIG_FIX.md
+!docs/JULES_API_TEST_RESULTS.md
+!docs/JULES_PRE_CLONE_GIT_CONFIG_ISSUE.md
 !AGENTS.md
 !jules-prompts/*.md
 !docs/jules-automations.md
+!scripts/fix-jules-git-config.sh
 *.patch
 *.sh
 !.jules-setup.sh
+!scripts/fix-jules-git-config.sh
 *.png
 
 # Ignore specific JSON files (but not essential config files)

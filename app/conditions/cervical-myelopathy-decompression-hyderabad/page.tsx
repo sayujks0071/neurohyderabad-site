@@ -8,6 +8,7 @@ import SourceList from '@/app/_components/SourceList';
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import { SITE_URL } from "@/src/lib/seo";
 import { sources } from '../../blog/sources';
+import { LocalPathways } from '@/src/components/locations/LocalPathways';
 
 // Static generation with 24-hour revalidation
 export const revalidate = 86400;
@@ -567,6 +568,11 @@ export default function CervicalMyelopathyPage() {
         updatedOn="2025-11-01"
       />
       
+
+
+      <div className="mt-12">
+        <LocalPathways mode="condition" />
+      </div>
       <SourceList sources={sources['cervical-myelopathy-decompression-hyderabad'] || []} />
       
       <ReviewedBy />

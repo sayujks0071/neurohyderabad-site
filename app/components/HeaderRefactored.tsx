@@ -170,7 +170,7 @@ export default function HeaderRefactored() {
                 <div key={item.href} className="relative group">
                   <Link
                     href={item.href}
-                    className={`transition-colors font-medium text-sm py-2 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)] focus:ring-offset-2 rounded ${
+                    className={`inline-flex items-center gap-1 transition-colors font-medium text-sm py-2 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)] focus:ring-offset-2 rounded ${
                       isActive
                         ? 'text-[var(--color-primary-500)]'
                         : 'text-[var(--color-text-primary)] hover:text-[var(--color-primary-500)]'
@@ -178,6 +178,17 @@ export default function HeaderRefactored() {
                     aria-current={isActive ? 'page' : undefined}
                   >
                     {item.label}
+                    {item.dropdown && (
+                      <svg
+                        className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180 opacity-75"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        aria-hidden="true"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    )}
                   </Link>
                   {item.dropdown && (
                     <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-[var(--color-border)] opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-200 p-4">

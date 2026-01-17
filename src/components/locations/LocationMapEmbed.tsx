@@ -1,21 +1,27 @@
 'use client';
 
 import React, { useState } from 'react';
-import { LocationData } from '@/src/data/locations';
+import { LocationData, getLocationById } from '@/src/data/locations';
 import { MapPin } from 'lucide-react';
 
 interface LocationMapEmbedProps {
-  location: LocationData;
+  location?: LocationData;
+  locationId?: string;
+  mode?: 'location'; // Optional
   className?: string;
   height?: string;
 }
 
 export const LocationMapEmbed: React.FC<LocationMapEmbedProps> = ({
-  location,
+  location: legacyLocation,
+  locationId,
   className = '',
   height = '450px'
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const location = legacyLocation || (locationId ? getLocationById(locationId) : null);
+
+  if (!location) return null;
 
   return (
     <div className={`relative w-full rounded-2xl overflow-hidden shadow-xl border border-gray-200 bg-gray-100 ${className}`} style={{ height }}>

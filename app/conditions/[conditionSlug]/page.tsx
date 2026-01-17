@@ -14,18 +14,35 @@ import Button from "../../_components/Button";
 import { LocalPathways } from "@/src/components/locations/LocalPathways";
 import { getLocationById } from "@/src/data/locations";
 
+// List of condition pages that have explicit static folders in app/conditions/
+// These take precedence over dynamic routing.
+const STATIC_CONDITION_PATHS = [
+  "/conditions/brain-bleed-evacuation-hyderabad",
+  "/conditions/brain-tumor-surgery-hyderabad",
+  "/conditions/cervical-myelopathy-decompression-hyderabad",
+  "/conditions/cervical-radiculopathy-treatment-hyderabad",
+  "/conditions/osteoporotic-spine-fracture-hyderabad",
+  "/conditions/sciatica-pain-treatment-hyderabad",
+  "/conditions/sciatica-treatment-hyderabad",
+  "/conditions/slip-disc-treatment-hyderabad",
+  "/conditions/spinal-stenosis-treatment-hyderabad",
+  "/conditions/spine-tumor-surgery-hyderabad",
+  "/conditions/spondylolisthesis-treatment-hyderabad",
+  "/conditions/trigeminal-neuralgia-treatment-hyderabad",
+];
+
 const DEDICATED_CONDITIONS = CONDITION_RESOURCES.filter((condition) => {
   const path = condition.primaryPath;
   return (
     path.startsWith("/conditions/") &&
     !path.startsWith("/conditions/a-z/") &&
-    path === `/conditions/${condition.slug}`
+    !STATIC_CONDITION_PATHS.includes(path)
   );
 });
 
 export async function generateStaticParams() {
   return DEDICATED_CONDITIONS.map((condition) => ({
-    conditionSlug: condition.slug,
+    conditionSlug: condition.primaryPath.replace("/conditions/", ""),
   }));
 }
 
@@ -39,9 +56,14 @@ export async function generateMetadata({
   params,
 }: PageParams): Promise<Metadata> {
   const { conditionSlug } = await params;
-  const condition = getConditionResource(conditionSlug);
+  const currentPath = `/conditions/${conditionSlug}`;
 
-  if (!condition || !DEDICATED_CONDITIONS.some((item) => item.slug === conditionSlug)) {
+  // Find condition by path (primaryPath) OR by slug (legacy fallback)
+  const condition =
+    CONDITION_RESOURCES.find(c => c.primaryPath === currentPath) ||
+    getConditionResource(conditionSlug);
+
+  if (!condition || !DEDICATED_CONDITIONS.some((item) => item.slug === condition.slug)) {
     return {};
   }
 
@@ -50,7 +72,7 @@ export async function generateMetadata({
     condition.summary ||
     `Learn about diagnosis and treatment for ${condition.name} with Dr. Sayuj Krishnan in Hyderabad.`;
 
-  const canonical = `${SITE_URL}/conditions/${condition.slug}`;
+  const canonical = `${SITE_URL}${condition.primaryPath}`;
 
   return {
     title,
@@ -87,9 +109,14 @@ export async function generateMetadata({
 
 export default async function ConditionDetailPage({ params }: PageParams) {
   const { conditionSlug } = await params;
-  const condition = getConditionResource(conditionSlug);
+  const currentPath = `/conditions/${conditionSlug}`;
 
-  if (!condition || !DEDICATED_CONDITIONS.some((item) => item.slug === conditionSlug)) {
+  // Find condition by path (primaryPath) OR by slug (legacy fallback)
+  const condition =
+    CONDITION_RESOURCES.find(c => c.primaryPath === currentPath) ||
+    getConditionResource(conditionSlug);
+
+  if (!condition || !DEDICATED_CONDITIONS.some((item) => item.slug === condition.slug)) {
     return notFound();
   }
 
@@ -100,7 +127,7 @@ export default async function ConditionDetailPage({ params }: PageParams) {
     <div className="bg-white">
       <ConditionStructuredData
         condition={condition}
-        canonicalPath={`/conditions/${condition.slug}`}
+        canonicalPath={condition.primaryPath}
       />
 
       <Section background="none" className="bg-gradient-to-r from-blue-50 to-indigo-100 py-16">

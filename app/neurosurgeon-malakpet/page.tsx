@@ -6,6 +6,8 @@ import { LocationCTAs } from "@/src/components/locations/LocationCTAs";
 import { LocationMapEmbed } from "@/src/components/locations/LocationMapEmbed";
 import { LocalPathways } from "@/src/components/locations/LocalPathways";
 import { LocationSchema } from "@/src/components/locations/LocationSchema";
+import TrustProof from "@/app/_components/TrustProof";
+import { patientStories } from "@/src/content/stories";
 import { notFound } from "next/navigation";
 
 // Force static generation
@@ -14,14 +16,14 @@ export const dynamicParams = false;
 export const revalidate = 86400;
 
 export const metadata = {
-  title: "Neurosurgeon in Malakpet, Hyderabad | Dr. Sayuj Krishnan at Yashoda Hospital | Full Endoscopic Spine Surgery",
+  title: "Neurosurgeon in Malakpet, Hyderabad | Dr. Sayuj Krishnan",
   description:
-    "Dr. Sayuj Krishnan practices at Yashoda Hospital Malakpet. Expert neurosurgeon offering endoscopic spine surgery, brain tumor surgery, and 24/7 emergency neurosurgical care right in Malakpet, Hyderabad. Book consultation today.",
+    "Dr. Sayuj Krishnan at Yashoda Hospital Malakpet offers endoscopic spine surgery, brain tumor care, and emergency neurosurgery. Book a visit.",
   keywords: "neurosurgeon malakpet, yashoda hospital malakpet neurosurgeon, spine surgeon malakpet, dr sayuj krishnan malakpet, endoscopic spine surgery malakpet",
   alternates: { canonical: "https://www.drsayuj.info/neurosurgeon-malakpet" },
   openGraph: {
     title: "Neurosurgeon in Malakpet | Dr. Sayuj Krishnan at Yashoda Hospital",
-    description: "Expert neurosurgeon practicing at Yashoda Hospital Malakpet with endoscopic spine surgery and brain surgery expertise.",
+    description: "Neurosurgeon at Yashoda Hospital Malakpet with endoscopic spine surgery and brain tumor expertise.",
     url: "https://www.drsayuj.info/neurosurgeon-malakpet",
     type: "website",
     images: [
@@ -41,14 +43,6 @@ export const metadata = {
   },
 };
 
-const FAQ = [
-  { q: "Where exactly is Dr. Sayuj's clinic in Malakpet?", a: "Dr. Sayuj Krishnan's clinic is at Room 317, OPD Block, Yashoda Hospital, Alexander Road, Malakpet, Hyderabad 500036. It's centrally located and easily accessible from all parts of Malakpet." },
-  { q: "What services are available at the Malakpet clinic?", a: "Full range of neurosurgical services including endoscopic spine surgery, brain tumor surgery, trigeminal neuralgia treatment, cervical myelopathy decompression, and 24/7 emergency neurosurgical care." },
-  { q: "Is parking available at Yashoda Hospital Malakpet?", a: "Yes, Yashoda Hospital has extensive on-site parking facilities with dedicated visitor parking. Valet service is also available during peak hours." },
-  { q: "How do I book an appointment at the Malakpet clinic?", a: "Book instantly via WhatsApp (+91 9778280044), call directly, or use our online appointment system. Walk-in consultations are also available during OPD hours." },
-  { q: "Do you accept insurance at Yashoda Hospital Malakpet?", a: "Yes, we accept all major health insurance policies with cashless TPA approvals. Our team assists with pre-authorization and claims processing." },
-];
-
 export default function MalakpetNeurosurgeonPage() {
   const location = getLocationById("malakpet");
 
@@ -56,10 +50,25 @@ export default function MalakpetNeurosurgeonPage() {
     return notFound();
   }
 
+  const whatsappNumber = location.telephone.replace(/\D/g, '');
+
+  const FAQ = [
+    { q: "Where exactly is Dr. Sayuj's clinic in Malakpet?", a: "Dr. Sayuj Krishnan's clinic is at Room 317, OPD Block, Yashoda Hospital, Alexander Road, Malakpet, Hyderabad 500036. It's centrally located and easily accessible from all parts of Malakpet." },
+    { q: "What services are available at the Malakpet clinic?", a: "Full range of neurosurgical services including endoscopic spine surgery, brain tumor surgery, trigeminal neuralgia treatment, cervical myelopathy decompression, and 24/7 emergency neurosurgical care." },
+    { q: "Is parking available at Yashoda Hospital Malakpet?", a: "Yes, Yashoda Hospital has extensive on-site parking facilities with dedicated visitor parking. Valet service is also available during peak hours." },
+    { q: "How do I book an appointment at the Malakpet clinic?", a: `Book instantly via WhatsApp (${location.telephone}), call directly, or use our online appointment system. Walk-in consultations are also available during OPD hours.` },
+    { q: "Do you accept insurance at Yashoda Hospital Malakpet?", a: "Yes, we accept all major health insurance policies with cashless TPA approvals. Our team assists with pre-authorization and claims processing." },
+  ];
+
   const breadcrumb = [
       { name: "Locations", item: "https://www.drsayuj.info/locations" },
       { name: "Neurosurgeon in Malakpet", item: "https://www.drsayuj.info/neurosurgeon-malakpet" },
   ];
+
+  // Select relevant stories (Spine & Brain)
+  const relevantStories = patientStories.filter(s =>
+    s.tags.includes('spine') || s.tags.includes('brain')
+  ).slice(0, 2);
 
   return (
     <main className="bg-white">
@@ -84,6 +93,7 @@ export default function MalakpetNeurosurgeonPage() {
 
       <section className="mx-auto max-w-5xl px-4 py-12">
         <div className="grid gap-8 md:grid-cols-2">
+          {/* Left Column: Intro & Trust */}
           <div>
             <h2 className="text-2xl font-bold text-gray-900">
               Expert Neurosurgical Care Right in Malakpet
@@ -115,7 +125,32 @@ export default function MalakpetNeurosurgeonPage() {
             </div>
           </div>
 
-          <div>
+          {/* Right Column: Emergency & Services */}
+          <div className="space-y-6">
+            {/* Emergency Alert Section */}
+            <div className="rounded-lg border-l-4 border-red-500 bg-red-50 p-6 shadow-sm">
+                <div className="flex items-start">
+                    <div className="flex-shrink-0">
+                        <svg className="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        </svg>
+                    </div>
+                    <div className="ml-3">
+                        <h3 className="text-lg font-bold text-red-800">24/7 Emergency Care</h3>
+                        <p className="mt-1 text-sm text-red-700">
+                            Available round-the-clock at Yashoda Hospital Malakpet for:
+                        </p>
+                        <ul className="mt-2 list-disc pl-5 text-sm text-red-800">
+                            <li>Head Injuries (Trauma)</li>
+                            <li>Stroke / Brain Bleeds</li>
+                            <li>Spine Fractures & Paralysis</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <TrustProof stories={relevantStories} className="border-blue-100 shadow-lg" />
+
             <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-lg">
               <h3 className="text-xl font-semibold text-blue-700">
                 Comprehensive Neurosurgical Services
@@ -138,18 +173,37 @@ export default function MalakpetNeurosurgeonPage() {
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900">Trigeminal Neuralgia Treatment</h4>
-                  <p className="text-sm text-gray-600">Microvascular decompression for facial pain relief</p>
+                  <p className="text-sm text-gray-600">Microvascular decompression (MVD) for facial pain relief</p>
                   <Link href="/conditions/trigeminal-neuralgia-treatment-hyderabad" className="text-sm text-blue-600 hover:underline">Learn more →</Link>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-gray-900">Cervical Myelopathy Surgery</h4>
-                  <p className="text-sm text-gray-600">Endoscopic decompression for spinal cord compression</p>
-                  <Link href="/conditions/cervical-myelopathy-decompression-hyderabad" className="text-sm text-blue-600 hover:underline">Learn more →</Link>
+                   <h4 className="font-semibold text-gray-900">Cervical Myelopathy Decompression</h4>
+                   <p className="text-sm text-gray-600">Surgery for spinal cord compression and balance issues</p>
+                   <Link href="/conditions/cervical-myelopathy-treatment-hyderabad" className="text-sm text-blue-600 hover:underline">Learn more →</Link>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Second Opinion CTA */}
+      <section className="bg-green-50 border-y border-green-100 py-10">
+          <div className="mx-auto max-w-4xl px-4 text-center">
+              <h2 className="text-2xl font-bold text-green-900">Already at Yashoda or Nearby? Get a Second Opinion.</h2>
+              <p className="mt-3 text-lg text-green-800">
+                  If you have been advised surgery or want to explore minimally invasive options, Dr. Sayuj provides detailed second opinions.
+                  Bring your MRI reports for a comprehensive review.
+              </p>
+              <div className="mt-6 flex justify-center gap-4">
+                  <a href={`tel:${location.telephone}`} className="rounded-full bg-green-600 px-6 py-3 font-semibold text-white hover:bg-green-700">
+                      Call for Appointment
+                  </a>
+                  <a href={`https://wa.me/${whatsappNumber}?text=Hi%20Dr%20Sayuj,%20I%20am%20at%20Malakpet%20and%20need%20a%20second%20opinion`} className="rounded-full border border-green-600 px-6 py-3 font-semibold text-green-700 hover:bg-green-100">
+                      WhatsApp Us
+                  </a>
+              </div>
+          </div>
       </section>
 
       <section className="bg-gray-50 py-12">

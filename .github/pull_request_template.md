@@ -1,28 +1,26 @@
-## Daily SEO Keyword Research
+# Daily SEO Keyword Research & Content Expansion
 
-### Overview
-This PR adds the daily keyword research snapshot and updates the site structure based on new opportunities.
+## 1. Competitor Discovery
+* **Focus:** [e.g., "endoscopic spine surgery", "sciatica treatment"]
+* **Key Findings:** [Summary of gaps or opportunities found]
 
-- **Date:** {{ date }}
-- **Focus:** {{ focus_area }}
+## 2. Keyword Universe & Clustering
+* **New Clusters:** [List main clusters added]
+* **Updates:** [List existing clusters updated]
 
-### Changelog
-- [ ] Added daily keyword snapshot in `seo/keyword-research/{{ date }}/`
-- [ ] Updated `seo/keyword-registry.json`
-- [ ] Updated `seo/page-keyword-map.json`
-- [ ] Created new pages (if applicable):
-    - `{{ new_page_1 }}`
-    - `{{ new_page_2 }}`
+## 3. Auto-Placement
+* **Registry Updates:** Updated `seo/keyword-registry.json` and `seo/page-keyword-map.json` with new terms.
+* **Content Updates:** [List content files modified]
 
-### Top Keywords Discovered
-| Keyword | Volume | Difficulty | Target |
-| :--- | :--- | :--- | :--- |
-| `{{ keyword_1 }}` | High | High | `{{ target_1 }}` |
-| `{{ keyword_2 }}` | Med | Med | `{{ target_2 }}` |
+## 4. New Page Generation
+* **Created:** [List new pages or posts]
+* **Rationale:** [Why these pages were created]
 
-### Cannibalization Check
-- [x] Verified that new keywords do not conflict with existing high-performing pages.
+## 5. Verification
+* **Linting:** Verified no major linting errors.
+* **Schema:** Verified JSON-LD schemas are valid.
+* **Visual:** Verified new pages render correctly.
 
-### Verification
-- [ ] Ran `pnpm lint` (or equivalent)
-- [ ] Verified build locally
+## Links
+* [Keyword Universe CSV](seo/keyword-research/latest/keyword-universe.csv)
+* [Cluster Mapping](seo/keyword-research/latest/clusters-and-mapping.md)
