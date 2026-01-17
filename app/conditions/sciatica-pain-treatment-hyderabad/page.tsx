@@ -17,8 +17,8 @@ import { patientStories } from '@/src/content/stories';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
 
 const baseMetadata = makeMetadata({
-  title: "Sciatica Treatment in Hyderabad | Non-Surgical & Endoscopic Options",
-  description: "Expert sciatica treatment in Hyderabad by Dr. Sayuj Krishnan. 90% of patients recover without surgery. Get a precise diagnosis and non-surgical relief plan.",
+  title: "Sciatica Treatment Hyderabad | Non-Surgical Relief | Dr Sayuj",
+  description: "Expert sciatica treatment in Hyderabad. 90% recovery without surgery. Precise diagnosis & non-surgical relief plans by Dr. Sayuj Krishnan.",
   canonicalPath: '/conditions/sciatica-pain-treatment-hyderabad',
 });
 
@@ -375,8 +375,8 @@ export default function SciaticaTreatmentPage() {
       <BreadcrumbSchema items={breadcrumbs} />
 
       <AuthorByline
-        publishedOn="2026-01-03"
-        updatedOn="2026-01-15"
+        publishedOn="2025-01-03"
+        updatedOn="2025-01-15"
       />
 
       <SourceList sources={sources['sciatica-treatment-hyderabad'] || []} />

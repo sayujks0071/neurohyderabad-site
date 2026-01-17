@@ -23,9 +23,9 @@ const SERVICE_SLUG = 'endoscopic-spine-surgery-hyderabad';
 export const revalidate = 3600; // Revalidate every hour
 
 const baseMetadata = makeMetadata({
-  title: 'Endoscopic Spine Surgery in Hyderabad | Minimally Invasive Keyhole Surgery – Dr. Sayuj Krishnan',
+  title: 'Endoscopic Spine Surgery Hyderabad | 90% Same-Day Discharge',
   description:
-    'Endoscopic spine surgery in Hyderabad at Yashoda Hospital Malakpet. Dr. Sayuj Krishnan offers minimally invasive keyhole spine surgery for slip disc, sciatica, and spinal stenosis. Same-day discharge, faster recovery. Book consultation today.',
+    'Expert endoscopic spine surgery in Hyderabad by Dr. Sayuj Krishnan. 90% same-day discharge. Minimally invasive keyhole surgery for slip disc & sciatica.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
 });
 
@@ -98,6 +98,10 @@ const faqs = [
     question: 'Why choose Dr. Sayuj for this “keyhole” procedure?',
     answer:
       'Endoscopic spine surgery is a specialised skill. Dr. Sayuj has focused training in full endoscopic techniques and performs them regularly at Yashoda Hospital, ensuring precision, safety, and consistent patient outcomes.',
+  },
+  {
+    question: 'Is endoscopic spine surgery the same as laser spine surgery?',
+    answer: 'No. Laser surgery often refers to limited surface ablation. Endoscopic surgery is a comprehensive structural correction (removing bone spurs or disc fragments) under high-definition visualization, offering far superior long-term results than laser alone.'
   },
 ];
 
@@ -235,8 +239,8 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
               Endoscopic Spine Surgery in Hyderabad | Minimally Invasive Keyhole Surgery
             </h1>
             <AuthorByline
-              publishedOn="2025-09-05"
-              updatedOn="2026-01-10"
+              publishedOn="2024-09-05"
+              updatedOn="2025-02-20"
               className="mb-6"
             />
             <p className="text-lg text-gray-700 mb-6">
@@ -528,7 +532,7 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
         <LocalPathways mode="service" />
 
         <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
-        <ReviewedBy lastReviewed="2026-01-10" />
+        <ReviewedBy lastReviewed="2025-02-20" />
       </main>
     </>
   );
