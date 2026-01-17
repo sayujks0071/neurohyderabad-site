@@ -1,1 +1,1 @@
-[Latest Report](2025-05-23/report.md)
+seo/ranking-ops/2026-01-17/report.md

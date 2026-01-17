@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import type { Metadata } from 'next';
 import MedicalWebPageSchema from "../../components/schemas/MedicalWebPageSchema";
-import FAQPageSchema from "../../components/schemas/FAQPageSchema";
+import FAQPageSchema from "@/app/_components/FAQPageSchema";
 import BreadcrumbSchema from "../../components/schemas/BreadcrumbSchema";
 import { SITE_URL } from "../../../src/lib/seo";
 import ReviewedBy from '@/app/_components/ReviewedBy';
@@ -343,23 +343,22 @@ export default function SlipDiscTreatmentPage() {
         serviceOrCondition="Slip Disc Treatment"
         breadcrumbs={breadcrumbs}
       />
-      
-      <FAQPageSchema />
+
+      <FAQPageSchema
+        faqs={FAQ.map(item => ({ question: item.q, answer: item.a }))}
+        pageUrl={`${SITE_URL}/conditions/slip-disc-treatment-hyderabad/`}
+      />
       <BreadcrumbSchema items={breadcrumbs} />
-    
-      <AuthorByline 
+
+      <AuthorByline
         publishedOn="2025-02-15"
         updatedOn="2025-10-19"
       />
-      
-
 
       <div className="mt-12">
         <LocalPathways mode="condition" />
       </div>
       <SourceList sources={sources['slip-disc-treatment-hyderabad'] || []} />
-      
-      <ReviewedBy />
 </main>
   );
 }

@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import type { Metadata } from 'next';
 import MedicalWebPageSchema from "../../components/schemas/MedicalWebPageSchema";
-import FAQPageSchema from "../../components/schemas/FAQPageSchema";
+import FAQPageSchema from "@/app/_components/FAQPageSchema";
 import BreadcrumbSchema from "../../components/schemas/BreadcrumbSchema";
 import { SITE_URL } from "../../../src/lib/seo";
 import ReviewedBy from '@/app/_components/ReviewedBy';
@@ -371,7 +371,10 @@ export default function SciaticaTreatmentPage() {
         breadcrumbs={breadcrumbs}
       />
 
-      <FAQPageSchema />
+      <FAQPageSchema
+        faqs={FAQ.map(item => ({ question: item.q, answer: item.a }))}
+        pageUrl={`${SITE_URL}/conditions/sciatica-pain-treatment-hyderabad/`}
+      />
       <BreadcrumbSchema items={breadcrumbs} />
 
       <AuthorByline
@@ -380,8 +383,6 @@ export default function SciaticaTreatmentPage() {
       />
 
       <SourceList sources={sources['sciatica-treatment-hyderabad'] || []} />
-
-      <ReviewedBy />
 </main>
   );
 }
