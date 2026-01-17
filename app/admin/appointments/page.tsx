@@ -1,10 +1,11 @@
-
 'use client';
 
 import { useEffect, useState } from "react";
 import { onAuthStateChange, signInWithGoogle, logOut } from "@/src/lib/firebase/auth";
 import { collection, getDocs, getFirestore } from "firebase/firestore";
 import { getApp } from "firebase/app";
+import { MessageCircle } from 'lucide-react';
+import { generateWhatsappUrl } from './utils';
 
 export default function AppointmentsPage() {
   const [user, setUser] = useState<any>(null);
@@ -30,6 +31,24 @@ export default function AppointmentsPage() {
         });
     }
   }, [user]);
+
+  const sendWhatsapp = (appointment: any) => {
+    if (!appointment.phone) {
+        alert("No phone number available for this patient.");
+        return;
+    }
+
+    // Map Firestore data to Appointment interface expected by utils
+    const url = generateWhatsappUrl({
+      id: appointment.id,
+      fullName: appointment.fullName || "Patient",
+      phone: appointment.phone,
+      preferredDate: appointment.preferredDate || "your requested date",
+      status: 'Pending'
+    });
+
+    window.open(url, '_blank');
+  };
 
   if (!user) {
     return (
@@ -67,6 +86,7 @@ export default function AppointmentsPage() {
               <th className="py-2 px-4 border-b">Preferred Date</th>
               <th className="py-2 px-4 border-b">Preferred Time</th>
               <th className="py-2 px-4 border-b">Source</th>
+              <th className="py-2 px-4 border-b">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -79,6 +99,16 @@ export default function AppointmentsPage() {
                 <td className="py-2 px-4 border-b">{appointment.preferredDate}</td>
                 <td className="py-2 px-4 border-b">{appointment.preferredTime}</td>
                 <td className="py-2 px-4 border-b">{appointment.source}</td>
+                <td className="py-2 px-4 border-b">
+                   <button
+                    onClick={() => sendWhatsapp(appointment)}
+                    className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-3 rounded text-sm transition-colors"
+                    title="Confirm via WhatsApp"
+                   >
+                     <MessageCircle size={16} />
+                     <span>Confirm</span>
+                   </button>
+                </td>
               </tr>
             ))}
           </tbody>
