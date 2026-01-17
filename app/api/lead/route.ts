@@ -3,7 +3,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { rateLimit } from "@/src/lib/rate-limit";
 import { validateLeadPayload } from "@/src/lib/validation";
 import { randomUUID } from "crypto";
-import { addLead } from "@/src/lib/firebase/firestore";
 
 type LeadPayload = {
   fullName?: string;
@@ -96,16 +95,16 @@ export async function POST(request: NextRequest) {
       metadata: body.metadata ?? {},
     };
 
-    const result = await addLead(payload);
+    // Lead data is now handled by n8n workflow via appointment webhooks
+    // This endpoint accepts leads but data storage is managed by n8n
+    console.log("[api/lead] Lead received:", { fullName, phone, email, source });
 
-    if (!result.success) {
-      return NextResponse.json(
-        { error: "Failed to submit lead to Firestore." },
-        { status: 500 }
-      );
-    }
-
-    return NextResponse.json(result);
+    return NextResponse.json({
+      ok: true,
+      message: "Lead received successfully",
+      requestId: payload.requestId,
+      note: "Data is processed via n8n workflow"
+    });
   } catch (error) {
     console.error("Error in /api/lead:", error);
     return NextResponse.json(

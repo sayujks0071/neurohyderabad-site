@@ -58,7 +58,6 @@
     "ai": "^5.0.106",
     "botid": "^1.5.10",
     "critters": "^0.0.23",
-    "firebase": "^12.8.0",
     "flags": "^4.0.2",
     "googleapis": "^170.0.0",
     "hypertune": "^2.10.1",

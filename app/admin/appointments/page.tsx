@@ -1,81 +1,42 @@
 'use client';
 
-import { useEffect, useState } from "react";
-import { onAuthStateChange, signInWithGoogle, logOut } from "@/src/lib/firebase/auth";
-import { collection, getDocs, getFirestore } from "firebase/firestore";
-import { getApp } from "firebase/app";
 import { MessageCircle } from 'lucide-react';
 import { generateWhatsappUrl } from './utils';
+import { mockAppointments, type Appointment } from './data';
 
-// Force dynamic rendering to prevent build-time Firebase initialization errors
+// Force dynamic rendering
 export const dynamic = 'force-dynamic';
 
 export default function AppointmentsPage() {
-  const [user, setUser] = useState<any>(null);
-  const [appointments, setAppointments] = useState<any[]>([]);
+  // Using mock data - appointments are stored in n8n workflow (Google Sheets)
+  // Admin can view appointments directly in Google Sheets or via n8n dashboard
+  const appointments = mockAppointments;
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChange((user: any) => {
-      setUser(user);
-    });
-    return () => unsubscribe();
-  }, []);
-
-  useEffect(() => {
-    if (user) {
-      const db = getFirestore(getApp());
-      getDocs(collection(db, "leads"))
-        .then((querySnapshot) => {
-          const appointments = querySnapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }));
-          setAppointments(appointments);
-        });
-    }
-  }, [user]);
-
-  const sendWhatsapp = (appointment: any) => {
+  const sendWhatsapp = (appointment: Appointment) => {
     if (!appointment.phone) {
         alert("No phone number available for this patient.");
         return;
     }
 
-    // Map Firestore data to Appointment interface expected by utils
     const url = generateWhatsappUrl({
       id: appointment.id,
-      fullName: appointment.fullName || "Patient",
+      fullName: appointment.fullName,
       phone: appointment.phone,
-      preferredDate: appointment.preferredDate || "your requested date",
-      status: 'Pending'
+      preferredDate: appointment.preferredDate,
+      status: appointment.status || 'Pending'
     });
     window.open(url, '_blank');
   };
 
-  if (!user) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-screen">
-        <h1 className="text-2xl font-bold mb-4">Admin Portal</h1>
-        <button
-          onClick={signInWithGoogle}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Sign in with Google
-        </button>
-      </div>
-    );
-  }
-
   return (
     <div className="container mx-auto p-4">
       <div className="flex justify-between items-center mb-4">
-        <h1 className="text-2xl font-bold">Appointments</h1>
-        <button
-          onClick={logOut}
-          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Sign Out
-        </button>
+        <div>
+          <h1 className="text-2xl font-bold">Appointments</h1>
+          <p className="text-sm text-gray-600 mt-1">
+            Note: Appointments are stored in n8n workflow (Google Sheets). View full data in Google Sheets or n8n dashboard.
+          </p>
+        </div>
       </div>
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white">
@@ -95,12 +56,12 @@ export default function AppointmentsPage() {
             {appointments.map((appointment) => (
               <tr key={appointment.id}>
                 <td className="py-2 px-4 border-b">{appointment.fullName}</td>
-                <td className="py-2 px-4 border-b">{appointment.email}</td>
+                <td className="py-2 px-4 border-b">{appointment.email || 'N/A'}</td>
                 <td className="py-2 px-4 border-b">{appointment.phone}</td>
-                <td className="py-2 px-4 border-b">{appointment.concern}</td>
+                <td className="py-2 px-4 border-b">{appointment.concern || 'N/A'}</td>
                 <td className="py-2 px-4 border-b">{appointment.preferredDate}</td>
-                <td className="py-2 px-4 border-b">{appointment.preferredTime}</td>
-                <td className="py-2 px-4 border-b">{appointment.source}</td>
+                <td className="py-2 px-4 border-b">{appointment.preferredTime || 'N/A'}</td>
+                <td className="py-2 px-4 border-b">{appointment.source || 'web'}</td>
                 <td className="py-2 px-4 border-b">
                    <button
                     onClick={() => sendWhatsapp(appointment)}
