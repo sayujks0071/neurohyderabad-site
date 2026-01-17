@@ -117,7 +117,7 @@ export const CONDITION_RESOURCES: ConditionResource[] = [
         label: "Early signs of brain tumour",
       },
       {
-        href: "/stories/minimal-invasive-meningioma-resection",
+        href: "/patient-stories/minimal-invasive-meningioma-resection",
         label: "Patient story: Returning to work after meningioma surgery",
       },
     ],
@@ -446,7 +446,7 @@ export const CONDITION_RESOURCES: ConditionResource[] = [
     primaryPath: "/services/brain-tumor-surgery-hyderabad",
     relatedResources: [
       {
-        href: "/stories/minimal-invasive-meningioma-resection",
+        href: "/patient-stories/minimal-invasive-meningioma-resection",
         label: "Patient story: Awake mapping during meningioma surgery",
       },
     ],
