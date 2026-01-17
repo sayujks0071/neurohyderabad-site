@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import { Loader2 } from 'lucide-react';
 import { useStatsigEvents } from '../src/lib/statsig-events';
 import { trackContactConversion } from '../src/lib/google-ads-conversion';
 
@@ -144,7 +145,7 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
         id="form-status"
       >
         {status === 'submitting' && 'Submitting your appointment request'}
-        {status === 'success' && 'Email draft opened successfully. Please review and send to confirm your request.'}
+        {status === 'success' && 'Appointment request prepared. Please send the email to confirm. Please bring any MRI/CT scans with you. We will confirm via phone shortly.'}
         {status === 'error' && 'An error occurred. Please call us directly at +91 9778280044.'}
       </div>
 
@@ -382,15 +383,15 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <button
           type="submit"
-          className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex items-center justify-center bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
           disabled={status === 'submitting'}
           aria-busy={status === 'submitting'}
           aria-describedby="form-status"
         >
           {status === 'submitting' ? (
             <>
-              <span className="sr-only">Submitting form</span>
-              <span aria-hidden="true">Preparing email…</span>
+              <Loader2 className="w-5 h-5 animate-spin mr-2" />
+              <span>Sending...</span>
             </>
           ) : (
             'Send appointment request'
@@ -409,7 +410,7 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
           aria-atomic="true"
         >
           <p className="text-sm font-medium text-green-800">
-            Email draft opened in your mail app. Please review and send to confirm the request.
+            Appointment request prepared. Please send the email to confirm. Please bring any MRI/CT scans with you. We will confirm via phone shortly.
           </p>
         </div>
       )}
