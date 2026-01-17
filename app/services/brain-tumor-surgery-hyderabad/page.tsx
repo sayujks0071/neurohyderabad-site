@@ -20,9 +20,9 @@ import MedicalWebPageSchema from '../../components/schemas/MedicalWebPageSchema'
 const SERVICE_SLUG = 'brain-tumor-surgery-hyderabad';
 
 const baseMetadata = makeMetadata({
-  title: 'Brain Tumor Surgery Hyderabad | Advanced Safety & Care – Dr. Sayuj',
+  title: 'Brain Tumor Surgery Hyderabad | Neuronavigation Specialist | Dr Sayuj',
   description:
-    'Advanced brain tumor surgery in Hyderabad with Dr. Sayuj Krishnan. High success rates with Neuronavigation & Awake Craniotomy for faster recovery. Trusted Neuro-Oncology care.',
+    'Expert brain tumor surgery in Hyderabad. High success rates using Neuronavigation & Awake Craniotomy. Advanced neuro-oncology care by Dr. Sayuj Krishnan.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
 });
 
@@ -115,6 +115,10 @@ const faqs = [
     question: 'Is a craniotomy always required?',
     answer:
       'Not always. Some lesions are best managed with stereotactic biopsy, radiosurgery, or endoscopic skull base approaches. Surgical planning is individualised based on tumour type, size, and location.',
+  },
+  {
+    question: 'How long does recovery take after brain tumor surgery?',
+    answer: 'Most patients spend 1-2 days in the ICU for monitoring and move to the ward for another 3-4 days. You can usually return to light daily activities within 2-3 weeks, though full recovery depends on the specific tumor type and location.'
   },
 ];
 
@@ -220,8 +224,8 @@ export default function BrainTumorSurgeryHyderabadPage() {
               Advanced Brain Tumor Surgery in Hyderabad
             </h1>
             <AuthorByline
-              publishedOn="2025-09-04"
-              updatedOn="2026-01-10"
+              publishedOn="2024-09-04"
+              updatedOn="2025-02-20"
               className="mb-6"
             />
             <p className="text-lg text-gray-700 mb-6">
@@ -410,7 +414,7 @@ export default function BrainTumorSurgeryHyderabadPage() {
         <LocalPathways mode="service" />
 
         <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
-        <ReviewedBy lastReviewed="2026-01-10" />
+        <ReviewedBy lastReviewed="2025-02-20" />
       </main>
     </>
   );

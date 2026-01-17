@@ -57,7 +57,8 @@ export const SOCIAL_PROFILES = [
   "https://www.facebook.com/drsayujneurohyd",
   "https://www.instagram.com/drsayujneurohyd",
   "https://www.linkedin.com/in/drsayujkrishnan",
-  "https://www.youtube.com/@drsayujneurohyd"
+  "https://www.youtube.com/@drsayujneurohyd",
+  "https://twitter.com/drsayuj"
 ];
 
 const DEFAULT_SERVICES = [
