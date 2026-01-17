@@ -13,3 +13,4 @@ Analyze the SEO performance for the last 7 days.
 - Identify any "quick wins" for the next week.
 
 <!-- Jules Automation -->
+<!-- Managed by Jules -->
