@@ -1,6 +1,6 @@
 import React from 'react';
 import { SITE_URL } from '@/src/lib/seo';
-import { getLocationById } from '@/src/data/locations';
+import { getLocationById, SOCIAL_PROFILES } from '@/src/data/locations';
 
 export default function AppointmentSchema() {
   const malakpet = getLocationById('malakpet');
@@ -19,8 +19,10 @@ export default function AppointmentSchema() {
     "@graph": [
       {
         "@type": "Physician",
+        "@id": `${SITE_URL}/#physician`,
         "name": "Dr. Sayuj Krishnan",
         "medicalSpecialty": "Neurosurgeon",
+        "sameAs": SOCIAL_PROFILES,
         "address": {
           "@type": "PostalAddress",
           "streetAddress": malakpet.address.streetAddress, // Contains Yashoda Hospital, Malakpet
@@ -49,6 +51,7 @@ export default function AppointmentSchema() {
         "name": "Yashoda Hospitals, Malakpet",
         "telephone": malakpet.telephone,
         "url": malakpet.google_maps_place_url, // Using map URL as website URL for the clinic entity context if Yashoda specific URL is not desired
+        "sameAs": "https://www.yashodahospitals.com/malakpet/",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": malakpet.address.streetAddress,
