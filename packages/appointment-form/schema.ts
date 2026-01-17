@@ -3,7 +3,7 @@ import { z } from "zod";
 export const appointmentSchema = z.object({
   patientName: z.string().min(2, "Name is too short"),
   email: z.string().email("Please enter a valid email address"),
-  contactNumber: z.string().regex(/^[6-9]\d{9}$/, "Please enter a valid 10-digit mobile number"),
+  contactNumber: z.string().regex(/^[6-9]\d{9}$/, "Invalid Indian mobile number"),
   age: z.string().regex(/^\d+$/, "Age must be a number").refine((val) => {
     const n = Number(val);
     return Number.isFinite(n) && n > 0 && n <= 120;
