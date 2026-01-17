@@ -160,8 +160,8 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://edge.hypertune.com" />
         <link rel="preconnect" href="https://edge.hypertune.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://i.ytimg.com" />
-        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.google-analytics.com" />
       </head>
       <body className={`antialiased ${inter.variable} ${merriweather.variable}`}>
         <GoogleAnalytics />
