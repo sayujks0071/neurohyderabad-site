@@ -11,6 +11,7 @@ import { makeMetadata } from '@/app/_lib/meta';
 import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import { sources } from '../../blog/sources';
+import { LocalPathways } from '@/src/components/locations/LocalPathways';
 
 const baseMetadata = makeMetadata({
   title: "Slip Disc Treatment in Hyderabad | Endoscopic Discectomy | Dr. Sayuj Krishnan",
@@ -351,6 +352,11 @@ export default function SlipDiscTreatmentPage() {
         updatedOn="2025-10-19"
       />
       
+
+
+      <div className="mt-12">
+        <LocalPathways mode="condition" />
+      </div>
       <SourceList sources={sources['slip-disc-treatment-hyderabad'] || []} />
       
       <ReviewedBy />
