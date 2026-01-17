@@ -1,30 +1,26 @@
 # Daily SEO Keyword Research & Content Expansion
 
 ## 1. Competitor Discovery
-* **Simulated Analysis:** Focused on high-intent queries ("endoscopic spine surgery", "sciatica treatment").
-* **Key Findings:** Identified a gap in content targeting "IT professionals" (office workers) suffering from sciatica, a major demographic in Hyderabad.
+* **Focus:** [e.g., "endoscopic spine surgery", "sciatica treatment"]
+* **Key Findings:** [Summary of gaps or opportunities found]
 
 ## 2. Keyword Universe & Clustering
-* **New Cluster:** "Sciatica Exercises for Office Workers" (TOFU/Info)
-    * `sciatica exercises for office workers` (Primary)
-    * `back pain due to sitting hyderabad` (Secondary)
-* **Updated Cluster:** "Recovery Timeline" (MOFU)
-    * `return to work after spine surgery`
-    * `endoscopic discectomy vs microdiscectomy recovery`
+* **New Clusters:** [List main clusters added]
+* **Updates:** [List existing clusters updated]
 
 ## 3. Auto-Placement
 * **Registry Updates:** Updated `seo/keyword-registry.json` and `seo/page-keyword-map.json` with new terms.
-* **Content Updates:** Added secondary keywords to existing `endoscopic-spine-surgery-recovery-timeline` post.
+* **Content Updates:** [List content files modified]
 
 ## 4. New Page Generation
-* **Created:** `content/blog/sciatica-exercises-for-office-workers-hyderabad.mdx`
-* **Rationale:** Safe, low-risk MDX blog post reusing existing components. Targets local high-volume intent without requiring new UI development.
+* **Created:** [List new pages or posts]
+* **Rationale:** [Why these pages were created]
 
 ## 5. Verification
 * **Linting:** Verified no major linting errors.
 * **Schema:** Verified JSON-LD schemas are valid.
-* **Normalization:** Ran blog metadata normalization script to ensure frontmatter compliance.
+* **Visual:** Verified new pages render correctly.
 
 ## Links
-* [Keyword Universe CSV](seo/keyword-research/2026-01-16/keyword-universe.csv)
-* [Cluster Mapping](seo/keyword-research/2026-01-16/clusters-and-mapping.md)
+* [Keyword Universe CSV](seo/keyword-research/latest/keyword-universe.csv)
+* [Cluster Mapping](seo/keyword-research/latest/clusters-and-mapping.md)

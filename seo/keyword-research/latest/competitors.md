@@ -1,22 +1,12 @@
-# Competitor Analysis - 2026-01-15
+# Daily Competitor Analysis: 2026-01-17
 
-## Target Keywords
-1. vertebroplasty hyderabad
-2. kyphoplasty hyderabad
-3. spine fracture surgery hyderabad
-4. cement injection spine surgery cost
+## Focus Keywords
+* "Cervical Disc Replacement Hyderabad"
+* "Artificial Disc Replacement Spine India"
+* "Best Spine Surgeon Manikonda"
 
-## Top Competitors Analyzed
-1. **Yashoda Hospitals**: Ranks #1 for "spine surgery hyderabad". Strong domain authority.
-2. **Apollo Hospitals**: Ranks #2. Extensive content on "minimally invasive spine surgery".
-3. **KIMS Hospitals**: Good visibility for "orthopedic spine surgery".
-4. **Dr. Sudheer Ambekar**: Local competitor, good GMB reviews.
-5. **Care Hospitals**: Strong presence in Hyderabad.
-
-## SERP Observations
-*   **Local Pack**: Dominated by large hospitals and 2-3 individual surgeons with high review counts.
-*   **PAA (People Also Ask)**:
-    *   "What is the cost of vertebroplasty in Hyderabad?"
-    *   "Is kyphoplasty better than vertebroplasty?"
-    *   "Recovery time for cement spine surgery?"
-*   **Ads**: 3-4 ads at top for "spine surgeon hyderabad".
+## Competitors Analyzed
+1. **Yashoda Hospitals:** Strong on generic "spine surgery" but weak on specific "artificial disc replacement" details for Manikonda.
+2. **KIMS Hospitals:** Good domain authority, but content is thin on the specific "Cervical Artificial Disc" procedure.
+3. **Dr. Sudhir Kumar (Apollo):** Direct competitor, ranks well for "neurosurgeon hyderabad".
+4. **Practo/JustDial:** Dominating local listings but lack authoritative medical depth.

@@ -1,12 +1,15 @@
-# Changelog - 2026-01-15
+# SEO Changelog: 2026-01-17
 
-## New Pages
-*   `app/services/kyphoplasty-vertebroplasty-hyderabad/page.tsx` (Proposed) - Fills gap in sitemap.
-
-## Keyword Updates
-*   Added 10 new keywords related to Vertebroplasty/Kyphoplasty.
-*   Identified missing page for `kyphoplasty-vertebroplasty-hyderabad` which was present in `sitemap-services.ts`.
+## New Content
+* **Page Created:** `app/services/cervical-disc-replacement-hyderabad/page.tsx`
+  * Implements `OutcomeMetricsSection`
+  * Includes `TeleconsultationForm`
+  * Full JSON-LD Schema (Physician, MedicalWebPage)
 
 ## Registry Updates
-*   Updated `seo/keyword-registry.json`
-*   Updated `seo/page-keyword-map.json`
+* Updated `seo/keyword-registry.json` with 12 new terms.
+* Updated `seo/page-keyword-map.json` linking keywords to the new service page.
+
+## System Changes
+* Cleaned up `verification/` folder.
+* Standardized `.github/pull_request_template.md`.

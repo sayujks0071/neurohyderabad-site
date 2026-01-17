@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-15",
+  "last_updated": "2026-01-17",
   "keywords": [
     {
       "term": "neurosurgeon hyderabad",
@@ -222,6 +222,36 @@
       "difficulty": "Med",
       "volume": "Med",
       "target_page": "/blog/endoscopic-spine-surgery-recovery-timeline"
+    },
+    {
+      "term": "cervical disc replacement hyderabad",
+      "difficulty": "Med",
+      "volume": "Med",
+      "target_page": "/services/cervical-disc-replacement-hyderabad"
+    },
+    {
+      "term": "artificial disc replacement india",
+      "difficulty": "High",
+      "volume": "High",
+      "target_page": "/services/cervical-disc-replacement-hyderabad"
+    },
+    {
+      "term": "neurosurgeon manikonda",
+      "difficulty": "Low",
+      "volume": "Med",
+      "target_page": "/locations/neurosurgeon-manikonda"
+    },
+    {
+      "term": "endoscopic discectomy cost hyderabad",
+      "difficulty": "Med",
+      "volume": "High",
+      "target_page": "/services/spine-surgery-cost-hyderabad"
+    },
+    {
+      "term": "back pain doctor gachibowli",
+      "difficulty": "Med",
+      "volume": "Med",
+      "target_page": "/locations/neurosurgeon-gachibowli"
     }
   ]
 }
