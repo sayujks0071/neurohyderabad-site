@@ -1,10 +1,9 @@
+
 import { NextRequest, NextResponse } from "next/server";
 import { rateLimit } from "@/src/lib/rate-limit";
 import { validateLeadPayload } from "@/src/lib/validation";
 import { randomUUID } from "crypto";
-
-const WEBAPP_URL = process.env.GOOGLE_APPS_SCRIPT_WEBAPP_URL;
-const API_TOKEN = process.env.GOOGLE_APPS_SCRIPT_API_TOKEN;
+import { addLead } from "@/src/lib/firebase/firestore";
 
 type LeadPayload = {
   fullName?: string;
@@ -19,8 +18,6 @@ type LeadPayload = {
   appointmentDate?: string;
   preferredTime?: string;
   appointmentTime?: string;
-  painScore?: number;
-  mriScanAvailable?: boolean;
   source?: string;
   company?: string;
   requestId?: string;
@@ -96,72 +93,15 @@ export async function POST(request: NextRequest) {
       preferredDate,
       preferredTime,
       source,
-      metadata: {
-        ...(body.metadata ?? {}),
-        painScore: body.painScore,
-        mriScanAvailable: body.mriScanAvailable,
-      },
+      metadata: body.metadata ?? {},
     };
 
-    if (!WEBAPP_URL) {
-      if (process.env.NODE_ENV === "production") {
-        console.error("GOOGLE_APPS_SCRIPT_WEBAPP_URL is not set in production.");
-        return NextResponse.json(
-          { error: "Internal Server Configuration Error" },
-          { status: 500 }
-        );
-      }
+    const result = await addLead(payload);
 
-      console.warn("Using MOCK response because GOOGLE_APPS_SCRIPT_WEBAPP_URL is unset.");
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      return NextResponse.json({
-        ok: true,
-        requestId: payload.requestId,
-        message: "[MOCK] Lead processed successfully",
-        mock: true,
-        driveFolderUrl: "https://drive.google.com/mock-folder",
-        calendarEventId: "mock-calendar-event-id",
-        metadata: payload.metadata
-      });
-    }
-
-    if (!API_TOKEN) {
-      if (process.env.NODE_ENV === "production") {
-        console.error("GOOGLE_APPS_SCRIPT_API_TOKEN is not set in production.");
-        return NextResponse.json(
-          { error: "Internal Server Configuration Error" },
-          { status: 500 }
-        );
-      }
-      console.warn(
-        "GOOGLE_APPS_SCRIPT_API_TOKEN is unset. Upstream script may reject request."
-      );
-    }
-
-    const response = await fetch(WEBAPP_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ...payload,
-        ...(API_TOKEN ? { apiToken: API_TOKEN } : {}),
-      }),
-    });
-
-    if (!response.ok) {
+    if (!result.success) {
       return NextResponse.json(
-        { error: "Failed to submit lead upstream." },
-        { status: 502 }
-      );
-    }
-
-    const result = await response.json();
-    if (result?.ok === false) {
-      return NextResponse.json(
-        { error: result.error || "Submission failed upstream." },
-        { status: 400 }
+        { error: "Failed to submit lead to Firestore." },
+        { status: 500 }
       );
     }
 
@@ -178,9 +118,6 @@ export async function POST(request: NextRequest) {
 export async function GET() {
   return NextResponse.json({
     status: "ok",
-    configured: !!(WEBAPP_URL && API_TOKEN),
-    webappUrl: WEBAPP_URL ? "***configured***" : "missing",
-    apiToken: API_TOKEN ? "***configured***" : "missing",
   });
 }
 
