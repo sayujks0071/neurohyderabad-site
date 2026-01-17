@@ -34,7 +34,7 @@ export default function AppointmentsPage() {
         <div>
           <h1 className="text-2xl font-bold">Appointments</h1>
           <p className="text-sm text-gray-600 mt-1">
-            Note: Appointments are stored in n8n workflow (Google Sheets). View full data in Google Sheets or n8n dashboard.
+            Note: Appointments are stored in n8n workflow (Google Sheets). View full data in Google Sheets or n8n dashboard. (Updated)
           </p>
         </div>
       </div>
