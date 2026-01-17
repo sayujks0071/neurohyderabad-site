@@ -372,6 +372,70 @@ ${data.email ? `Email: ${data.email}\n` : ""}${data.phone ? `Phone: ${data.phone
     }
   }
 
+  // Send appointment request confirmation to patient
+  static async sendAppointmentRequestConfirmation(data: {
+    patientName: string;
+    appointmentDate: string;
+    appointmentTime: string;
+    reason: string;
+    email: string;
+  }) {
+    const emailData: EmailTemplate = {
+      to: data.email,
+      from: this.fromEmail,
+      subject: `Appointment Request Received - Dr. Sayuj Krishnan`,
+      text: `Appointment Request Received - Dr. Sayuj Krishnan
+
+Dear ${data.patientName},
+
+Thank you for requesting an appointment. Our team will review your request and contact you shortly to confirm the time.
+
+Requested date: ${data.appointmentDate}
+Requested time: ${data.appointmentTime}
+Reason: ${data.reason}
+
+If you need to update your request, reply to this email or call +91-9778280044.
+
+© 2025 Dr. Sayuj Krishnan. All rights reserved.`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <div style="background: #1e40af; color: white; padding: 24px; text-align: center;">
+            <h1 style="margin: 0; font-size: 24px;">Appointment Request Received</h1>
+            <p style="margin: 8px 0 0 0; font-size: 14px;">Dr. Sayuj Krishnan - Neurosurgeon</p>
+          </div>
+          <div style="padding: 24px; background: #f8fafc;">
+            <p>Dear ${data.patientName},</p>
+            <p>Thank you for requesting an appointment. Our team will review your request and contact you shortly to confirm the time.</p>
+            <div style="background: white; padding: 16px; border-radius: 8px; margin: 16px 0; border: 1px solid #e5e7eb;">
+              <p><strong>Requested date:</strong> ${data.appointmentDate}</p>
+              <p><strong>Requested time:</strong> ${data.appointmentTime}</p>
+              <p><strong>Reason:</strong> ${data.reason}</p>
+            </div>
+            <p>If you need to update your request, reply to this email or call +91-9778280044.</p>
+          </div>
+          <div style="background: #1f2937; color: white; padding: 16px; text-align: center;">
+            <p style="margin: 0; font-size: 12px;">© 2025 Dr. Sayuj Krishnan. All rights reserved.</p>
+          </div>
+        </div>
+      `,
+    };
+
+    try {
+      if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === "re_development_key") {
+        console.log("Development mode: Appointment request confirmation not sent (no API key)");
+        return { success: true, messageId: "dev_mode", development: true };
+      }
+
+      const result = await resend.emails.send(emailData);
+      console.log("Appointment request confirmation sent successfully:", result);
+      return { success: true, messageId: result.data?.id };
+    } catch (error) {
+      console.error("Failed to send appointment request confirmation:", error);
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
+      return { success: false, error: errorMessage };
+    }
+  }
+
   // Send education materials to patient
   static async sendEducationMaterials(
     patientEmail: string,
