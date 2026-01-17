@@ -4,7 +4,7 @@ import NeuraLinkBookingApp from "./_components/neuralink/NeuraLinkBookingApp";
 import AppointmentSchema from "./_components/AppointmentSchema";
 
 export const metadata: Metadata = {
-  title: "Book Appointment | Dr. Sayuj Krishnan - Top Neurosurgeon",
+  title: "Book Appointment | Best Neurosurgeon Hyderabad | Dr. Sayuj Krishnan",
   description:
     "Schedule a consultation with Dr Sayuj Krishnan, the best neurosurgeon in Hyderabad. Book appointment for spine surgery, brain tumor surgery, and expert neurosurgical care.",
   keywords: [
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     canonical: "/appointments",
   },
   openGraph: {
-    title: "Book Appointment | Dr. Sayuj Krishnan - Top Neurosurgeon",
+    title: "Book Appointment | Best Neurosurgeon Hyderabad | Dr. Sayuj Krishnan",
     description:
       "Schedule a consultation with Dr Sayuj Krishnan, the best neurosurgeon in Hyderabad. Book appointment for spine surgery, brain tumor surgery, and expert neurosurgical care.",
     url: `${SITE_URL}/appointments`,
