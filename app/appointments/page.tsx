@@ -2,6 +2,7 @@ import { SITE_URL } from "../../src/lib/seo";
 import type { Metadata } from "next";
 import NeuraLinkBookingApp from "./_components/neuralink/NeuraLinkBookingApp";
 import AppointmentSchema from "./_components/AppointmentSchema";
+import AppointmentFaqSchema from "./_components/AppointmentFaqSchema";
 
 export const metadata: Metadata = {
   title: "Book Appointment | Best Neurosurgeon Hyderabad | Dr. Sayuj Krishnan",
@@ -53,6 +54,7 @@ export default function AppointmentsPage() {
   return (
     <>
       <AppointmentSchema />
+      <AppointmentFaqSchema />
       {/* Hidden H1 for SEO and Accessibility structure (visually handled by component) */}
       <h1 className="sr-only">Book Appointment with Dr. Sayuj Krishnan</h1>
       <NeuraLinkBookingApp />
