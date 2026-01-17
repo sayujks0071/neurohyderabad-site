@@ -7,6 +7,9 @@ import { getApp } from "firebase/app";
 import { MessageCircle } from 'lucide-react';
 import { generateWhatsappUrl } from './utils';
 
+// Force dynamic rendering to prevent build-time Firebase initialization errors
+export const dynamic = 'force-dynamic';
+
 export default function AppointmentsPage() {
   const [user, setUser] = useState<any>(null);
   const [appointments, setAppointments] = useState<any[]>([]);
@@ -46,7 +49,6 @@ export default function AppointmentsPage() {
       preferredDate: appointment.preferredDate || "your requested date",
       status: 'Pending'
     });
-
     window.open(url, '_blank');
   };
 
