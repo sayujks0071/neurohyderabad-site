@@ -44,6 +44,7 @@ const availableTimes = [
   "04:30 PM",
 ];
 
+// Refactored to use enhanced Zod validation for strict type safety
 export default function BookingForm({
   onSubmit,
   initialData,
