@@ -696,7 +696,7 @@ const PatientPortal = () => {
                     Pain Intensity (1-10)
                   </label>
                   <div className="flex items-center gap-4">
-                    <span className="text-sm font-bold text-slate-400">1</span>
+                    <span className="text-sm font-bold text-slate-400" aria-hidden="true">1</span>
                     <input
                       id="patient-pain-score"
                       type="range"
@@ -711,8 +711,9 @@ const PatientPortal = () => {
                         })
                       }
                       className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                      aria-valuetext={`Score: ${formData.painScore}${formData.painScore >= 8 ? ' (Severe)' : formData.painScore <= 3 ? ' (Mild)' : ''}`}
                     />
-                    <span className="text-sm font-bold text-slate-400">10</span>
+                    <span className="text-sm font-bold text-slate-400" aria-hidden="true">10</span>
                   </div>
                   <div className="text-center mt-2">
                     <span

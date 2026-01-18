@@ -95,6 +95,7 @@ const AppointmentScheduler = ({
               key={item.id}
               type="button"
               onClick={() => onSelect(item.id, currentDate, selectedTime)}
+              aria-pressed={selectedType === item.id}
               className={`group flex items-start p-5 rounded-2xl border transition-all text-left relative overflow-hidden ${
                 selectedType === item.id
                   ? "border-blue-500 bg-blue-50/50 shadow-md ring-1 ring-blue-200"
@@ -290,6 +291,7 @@ const TimeSlotButton = ({ slot, selectedTime, onSelect }: TimeSlotButtonProps) =
     type="button"
     disabled={!slot.available}
     onClick={onSelect}
+    aria-pressed={selectedTime === slot.time}
     className={`py-2.5 px-2 rounded-xl text-sm font-bold transition-all border shadow-sm ${
       selectedTime === slot.time
         ? "bg-blue-600 text-white border-blue-600 shadow-blue-200"
