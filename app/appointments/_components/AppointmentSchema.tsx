@@ -37,6 +37,7 @@ export default function AppointmentSchema() {
           "Brain Tumor Surgery"
         ],
         "url": `${SITE_URL}/appointments`,
+        "hasMap": malakpet.google_maps_place_url,
         "telephone": malakpet.telephone,
         // Using the v2 image as it's the specific resized asset mentioned in memory
         "image": `${SITE_URL}/images/dr-sayuj-krishnan-portrait-v2.jpg`,
@@ -50,7 +51,8 @@ export default function AppointmentSchema() {
         "@id": `${SITE_URL}/appointments#clinic`,
         "name": "Yashoda Hospitals, Malakpet",
         "telephone": malakpet.telephone,
-        "url": malakpet.google_maps_place_url, // Using map URL as website URL for the clinic entity context if Yashoda specific URL is not desired
+        "url": "https://www.yashodahospitals.com/malakpet/",
+        "hasMap": malakpet.directions_url,
         "sameAs": "https://www.yashodahospitals.com/malakpet/",
         "address": {
           "@type": "PostalAddress",
