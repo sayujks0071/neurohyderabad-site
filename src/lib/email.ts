@@ -315,6 +315,8 @@ For questions, reply to this email or call +91-9778280044.
     source?: string;
     email?: string;
     phone?: string;
+    painScore?: number;
+    mriScanAvailable?: boolean;
   }) {
     const adminEmail =
       process.env.APPOINTMENT_ADMIN_EMAIL ||
@@ -333,6 +335,8 @@ Gender: ${data.gender}
 Preferred Date: ${data.appointmentDate}
 Preferred Time: ${data.appointmentTime}
 Reason: ${data.reason}
+Pain Score: ${data.painScore ?? "Not provided"}/10
+MRI/CT Scans: ${data.mriScanAvailable ? "Available" : "Not available"}
 ${data.email ? `Email: ${data.email}\n` : ""}${data.phone ? `Phone: ${data.phone}\n` : ""}${data.source ? `Source: ${data.source}\n` : ""}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -348,6 +352,8 @@ ${data.email ? `Email: ${data.email}\n` : ""}${data.phone ? `Phone: ${data.phone
             <p><strong>Preferred Date:</strong> ${data.appointmentDate}</p>
             <p><strong>Preferred Time:</strong> ${data.appointmentTime}</p>
             <p><strong>Reason:</strong> ${data.reason}</p>
+            <p><strong>Pain Score:</strong> ${data.painScore ?? "Not provided"}/10</p>
+            <p><strong>MRI/CT Scans:</strong> ${data.mriScanAvailable ? "Available" : "Not available"}</p>
             ${data.email ? `<p><strong>Email:</strong> ${data.email}</p>` : ""}
             ${data.phone ? `<p><strong>Phone:</strong> ${data.phone}</p>` : ""}
             ${data.source ? `<p><strong>Source:</strong> ${data.source}</p>` : ""}

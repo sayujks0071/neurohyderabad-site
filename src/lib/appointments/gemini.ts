@@ -43,6 +43,8 @@ export async function generateBookingConfirmation(
       `Requested Date: ${data.appointmentDate}`,
       `Requested Time: ${data.appointmentTime}`,
       `Reason: ${data.reason}`,
+      `Pain Score: ${data.painScore ?? "Not provided"}/10`,
+      `MRI/CT Scans Available: ${data.mriScanAvailable ? "Yes" : "No"}`,
     ].join("\n");
 
     const response = await ai.models.generateContent({
