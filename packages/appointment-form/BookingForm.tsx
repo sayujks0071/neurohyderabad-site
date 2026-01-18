@@ -10,6 +10,7 @@ import Textarea from "./ui/Textarea";
 import Button from "./ui/Button";
 import Calendar from "./ui/Calendar";
 import { appointmentSchema, BookingFormValues } from "./schema";
+import { formatLocalDate, parseLocalDate } from "@/src/lib/dates";
 
 interface BookingFormProps {
   onSubmit: (data: BookingData) => Promise<void> | void;
@@ -75,7 +76,9 @@ export default function BookingForm({
         gender: (initialData.gender && ["male", "female", "other"].includes(initialData.gender))
           ? (initialData.gender as "male" | "female" | "other")
           : undefined,
-        requestedDate: initialData.appointmentDate ? new Date(initialData.appointmentDate) : undefined,
+        requestedDate: initialData.appointmentDate
+          ? parseLocalDate(initialData.appointmentDate)
+          : undefined,
         appointmentTime: initialData.appointmentTime,
         reason: initialData.reason,
         painScore: initialData.painScore ?? 5,
@@ -101,7 +104,7 @@ export default function BookingForm({
       phone: data.contactNumber,
       age: data.age,
       gender: data.gender,
-      appointmentDate: data.requestedDate.toISOString().split("T")[0],
+      appointmentDate: formatLocalDate(data.requestedDate),
       appointmentTime: data.appointmentTime,
       reason: data.reason,
       painScore: data.painScore,
@@ -190,7 +193,7 @@ export default function BookingForm({
                 render={({ field }) => (
                   <Calendar
                     label="Preferred Date"
-                    value={field.value ? field.value.toISOString().split("T")[0] : ""}
+                    value={field.value ? formatLocalDate(field.value) : ""}
                     onChange={(dateString) => {
                         const [year, month, day] = dateString.split("-").map(Number);
                         const date = new Date(year, month - 1, day);
