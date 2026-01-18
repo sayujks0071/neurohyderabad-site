@@ -20,6 +20,7 @@ import {
   Cloud,
   Check,
   Info,
+  ShieldCheck,
 } from "lucide-react";
 import {
   analyzeSymptoms,
@@ -415,6 +416,20 @@ const PatientPortal = () => {
               2. Details
             </div>
           </div>
+        </div>
+        <div className="mt-4 flex flex-wrap items-center gap-3 text-xs font-semibold text-slate-600">
+          <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1">
+            <Check className="w-3.5 h-3.5 text-emerald-600" />
+            Confirmations in 30–60 minutes
+          </span>
+          <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1">
+            <Phone className="w-3.5 h-3.5 text-blue-600" />
+            WhatsApp & phone updates
+          </span>
+          <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1">
+            <ShieldCheck className="w-3.5 h-3.5 text-slate-500" />
+            Data handled securely
+          </span>
         </div>
         {errorMessage && (
           <div className="mt-6 bg-red-50 border border-red-100 text-red-700 text-sm font-medium rounded-2xl p-4">

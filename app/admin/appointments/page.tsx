@@ -6,7 +6,6 @@ import { mockAppointments, type Appointment } from './data';
 
 // Force dynamic rendering
 export const dynamic = 'force-dynamic';
-
 export default function AppointmentsPage() {
   // Using mock data - appointments are stored in n8n workflow (Google Sheets)
   // Admin can view appointments directly in Google Sheets or via n8n dashboard
@@ -34,7 +33,7 @@ export default function AppointmentsPage() {
         <div>
           <h1 className="text-2xl font-bold">Appointments</h1>
           <p className="text-sm text-gray-600 mt-1">
-            Note: Appointments are stored in n8n workflow (Google Sheets). View full data in Google Sheets or n8n dashboard.
+            Note: Appointments are stored in n8n workflow (Google Sheets). View full data in Google Sheets or n8n dashboard. (Updated)
           </p>
         </div>
       </div>
