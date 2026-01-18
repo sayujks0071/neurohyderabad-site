@@ -60,7 +60,7 @@ import { google } from 'googleapis';
 
 // Define types for command line arguments
 interface CliArgs {
-  mode: 'sitemap' | 'index' | 'list' | 'status' | 'help';
+  mode: 'sitemap' | 'index' | 'inspect' | 'list' | 'status' | 'help';
   url?: string;
   sitemap?: string;
   siteUrl?: string;
@@ -98,6 +98,12 @@ function parseArgs(): CliArgs {
     const statusIndex = args.indexOf('--status');
     const sitemapUrl = args[statusIndex + 1];
     return { mode: 'status', sitemap: sitemapUrl };
+  }
+
+  if (args.includes('--inspect')) {
+    const inspectIndex = args.indexOf('--inspect');
+    const inspectUrl = args[inspectIndex + 1];
+    return { mode: 'inspect', url: inspectUrl };
   }
 
   const indexFlag = args.indexOf('--index');
@@ -241,6 +247,26 @@ function handleHttpError(error: any, operation: string) {
   process.exit(1);
 }
 
+function resolveInspectionUrl(rawUrl: string): string {
+  const siteUrl = process.env.SITE_URL || 'https://www.drsayuj.info';
+  const formattedSiteUrl = siteUrl.replace(/\/$/, '');
+  const trimmed = rawUrl.trim();
+
+  if (!trimmed) {
+    throw new Error('URL is required for inspection.');
+  }
+
+  if (/^https?:\/\//i.test(trimmed)) {
+    return new URL(trimmed).toString();
+  }
+
+  const resolved = trimmed.startsWith('/')
+    ? `${formattedSiteUrl}${trimmed}`
+    : `${formattedSiteUrl}/${trimmed}`;
+
+  return new URL(resolved).toString();
+}
+
 async function requestIndexing(url: string) {
   try {
     console.log(`Authenticating with Google...`);
@@ -261,6 +287,86 @@ async function requestIndexing(url: string) {
   } catch (error: any) {
     console.error(`❌ Error requesting indexing:`, error.message);
     process.exit(1);
+  }
+}
+
+/**
+ * Inspects a URL using Google Search Console URL Inspection API
+ */
+async function inspectUrl(rawUrl: string) {
+  try {
+    const siteUrl = process.env.SITE_URL || 'https://www.drsayuj.info';
+    const formattedSiteUrl = siteUrl.replace(/\/$/, '');
+    const targetSiteUrl = process.env.GSC_SITE_URL || formattedSiteUrl;
+    const inspectionUrl = resolveInspectionUrl(rawUrl);
+
+    console.log(`🔐 Authenticating with Google...`);
+    const auth = await getAuthClient();
+    const searchConsole = google.searchconsole({ version: 'v1', auth });
+
+    console.log(`🔍 Inspecting URL: ${inspectionUrl}`);
+    console.log(`   Property: ${targetSiteUrl}`);
+
+    const res = await searchConsole.urlInspection.index.inspect({
+      requestBody: {
+        inspectionUrl,
+        siteUrl: targetSiteUrl,
+      },
+    });
+
+    const result = res.data.inspectionResult;
+    if (!result) {
+      console.log('⚠️  No inspection results returned.');
+      return;
+    }
+
+    const indexStatus = result.indexStatusResult;
+    const mobileUsability = result.mobileUsabilityResult;
+    const richResults = result.richResultsResult;
+
+    console.log(`\n📊 Inspection Summary:\n`);
+    if (indexStatus) {
+      if (indexStatus.verdict) {
+        console.log(`   Verdict: ${indexStatus.verdict}`);
+      }
+      if (indexStatus.coverageState) {
+        console.log(`   Coverage State: ${indexStatus.coverageState}`);
+      }
+      if (indexStatus.indexingState) {
+        console.log(`   Indexing State: ${indexStatus.indexingState}`);
+      }
+      if (indexStatus.pageFetchState) {
+        console.log(`   Fetch State: ${indexStatus.pageFetchState}`);
+      }
+      if (indexStatus.robotsTxtState) {
+        console.log(`   Robots State: ${indexStatus.robotsTxtState}`);
+      }
+      if (indexStatus.lastCrawlTime) {
+        console.log(`   Last Crawl: ${new Date(indexStatus.lastCrawlTime).toLocaleString()}`);
+      }
+      if (indexStatus.googleCanonical) {
+        console.log(`   Google Canonical: ${indexStatus.googleCanonical}`);
+      }
+      if (indexStatus.userCanonical) {
+        console.log(`   User Canonical: ${indexStatus.userCanonical}`);
+      }
+    } else {
+      console.log(`   ⚠️  Index status result not available.`);
+    }
+
+    if (mobileUsability?.verdict) {
+      console.log(`   Mobile Usability: ${mobileUsability.verdict}`);
+    }
+
+    if (richResults?.verdict) {
+      console.log(`   Rich Results: ${richResults.verdict}`);
+    }
+
+    if (result.inspectionResultLink) {
+      console.log(`\n   🔗 View in Search Console: ${result.inspectionResultLink}`);
+    }
+  } catch (error: any) {
+    handleHttpError(error, 'URL inspection');
   }
 }
 
@@ -468,6 +574,7 @@ Commands:
                     (default: {SITE_URL}/sitemap.xml)
   --list            List all sitemaps submitted for the property
   --status <url>    Get detailed status of a specific sitemap
+  --inspect <url>   Inspect a URL using Search Console API
   --index <url>     Request instant indexing for a specific URL via Indexing API
                     (Note: Limited to JobPosting and BroadcastEvent schema types)
   --help            Show this help message
@@ -484,6 +591,9 @@ Examples:
 
   # Check status of a sitemap
   npx tsx scripts/google-seo-automation.ts --status https://www.drsayuj.info/sitemap.xml
+
+  # Inspect a URL
+  npx tsx scripts/google-seo-automation.ts --inspect https://www.drsayuj.info/
 
 Environment Variables:
   GOOGLE_INDEXING_KEY_JSON  (Required) The full JSON content of your Service Account Key
@@ -524,6 +634,15 @@ async function main() {
         await requestIndexing(args.url);
       } else {
         console.error('Error: URL is required for --index mode.');
+        printHelp();
+        process.exit(1);
+      }
+      break;
+    case 'inspect':
+      if (args.url) {
+        await inspectUrl(args.url);
+      } else {
+        console.error('Error: URL is required for --inspect mode.');
         printHelp();
         process.exit(1);
       }
