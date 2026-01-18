@@ -10,6 +10,7 @@ import Textarea from "./ui/Textarea";
 import Button from "./ui/Button";
 import Calendar from "./ui/Calendar";
 import { appointmentSchema, BookingFormValues } from "./schema";
+import { formatLocalDate, parseLocalDate } from "@/src/lib/dates";
 
 interface BookingFormProps {
   onSubmit: (data: BookingData) => Promise<void> | void;
@@ -25,8 +26,8 @@ const defaultValues: Partial<BookingFormValues> = {
   requestedDate: undefined,
   appointmentTime: "",
   reason: "",
-  painScore: undefined,
-  hasMRI: false,
+  painScore: 5,
+  mriScanAvailable: false,
 };
 
 const availableTimes = [
@@ -44,6 +45,7 @@ const availableTimes = [
   "04:30 PM",
 ];
 
+// Refactored to use enhanced Zod validation for strict type safety
 export default function BookingForm({
   onSubmit,
   initialData,
@@ -74,11 +76,13 @@ export default function BookingForm({
         gender: (initialData.gender && ["male", "female", "other"].includes(initialData.gender))
           ? (initialData.gender as "male" | "female" | "other")
           : undefined,
-        requestedDate: initialData.appointmentDate ? new Date(initialData.appointmentDate) : undefined,
+        requestedDate: initialData.appointmentDate
+          ? parseLocalDate(initialData.appointmentDate)
+          : undefined,
         appointmentTime: initialData.appointmentTime,
         reason: initialData.reason,
-        painScore: initialData.painScore,
-        hasMRI: initialData.mriScanAvailable ?? false,
+        painScore: initialData.painScore ?? 5,
+        mriScanAvailable: initialData.mriScanAvailable ?? false,
       };
 
       // If date is invalid, don't set it (validation will catch it)
@@ -100,11 +104,11 @@ export default function BookingForm({
       phone: data.contactNumber,
       age: data.age,
       gender: data.gender,
-      appointmentDate: data.requestedDate.toISOString().split("T")[0],
+      appointmentDate: formatLocalDate(data.requestedDate),
       appointmentTime: data.appointmentTime,
       reason: data.reason,
       painScore: data.painScore,
-      mriScanAvailable: data.hasMRI,
+      mriScanAvailable: data.mriScanAvailable,
     };
     await onSubmit(submissionData);
   };
@@ -189,7 +193,7 @@ export default function BookingForm({
                 render={({ field }) => (
                   <Calendar
                     label="Preferred Date"
-                    value={field.value ? field.value.toISOString().split("T")[0] : ""}
+                    value={field.value ? formatLocalDate(field.value) : ""}
                     onChange={(dateString) => {
                         const [year, month, day] = dateString.split("-").map(Number);
                         const date = new Date(year, month - 1, day);
@@ -280,12 +284,12 @@ export default function BookingForm({
               <div className="flex items-center p-4 bg-slate-50 rounded-xl border border-slate-200">
                 <input
                   type="checkbox"
-                  id="hasMRI"
+                  id="mriScanAvailable"
                   className="w-5 h-5 text-cyan-600 rounded focus:ring-cyan-500 border-gray-300"
-                  {...register("hasMRI")}
+                  {...register("mriScanAvailable")}
                 />
                 <label
-                  htmlFor="hasMRI"
+                  htmlFor="mriScanAvailable"
                   className="ml-3 text-sm font-medium text-slate-700 cursor-pointer select-none"
                 >
                   I have recent MRI/CT Scan reports available

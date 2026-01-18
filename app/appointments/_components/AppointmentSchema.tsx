@@ -8,7 +8,7 @@ export default function AppointmentSchema() {
 
   // The user requested a specific JSON-LD structure for the booking page.
   // We use a graph to include both Physician and MedicalClinic entities.
-  // Verified requirements:
+  // Verified against latest SEO requirements:
   // - Name: 'Dr. Sayuj Krishnan'
   // - MedicalSpecialty: 'Neurosurgeon'
   // - Address: Yashoda Hospitals, Malakpet, Hyderabad (via Malakpet location data)

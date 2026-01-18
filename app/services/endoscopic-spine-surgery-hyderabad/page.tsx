@@ -31,6 +31,9 @@ const baseMetadata = makeMetadata({
 
 export const metadata: Metadata = {
   ...baseMetadata,
+  title: 'Endoscopic Spine Surgery Hyderabad | Keyhole Surgery Cost',
+  description:
+    'Endoscopic spine surgery in Hyderabad by Dr. Sayuj Krishnan. 90% same-day discharge. Keyhole surgery for slip disc & sciatica. Check cost & recovery.',
   keywords: [
     'endoscopic spine surgery hyderabad',
     'minimally invasive spine surgery hyderabad',
@@ -42,7 +45,7 @@ export const metadata: Metadata = {
     'day care spine surgery',
   ],
   openGraph: {
-    title: 'Endoscopic Spine Surgery in Hyderabad | Minimally Invasive Keyhole Surgery',
+    title: 'Endoscopic Spine Surgery in Hyderabad | Keyhole Surgery Cost',
     description:
       'Endoscopic spine surgery in Hyderabad at Yashoda Hospital Malakpet. Minimally invasive keyhole surgery for slip disc, sciatica, and spinal stenosis. Same-day discharge available.',
     url: `${SITE_URL}/services/${SERVICE_SLUG}`,
@@ -437,6 +440,55 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
             Many patients ask why endoscopic surgery is preferred over traditional open methods. The key difference lies in how we approach the spine—preserving your natural anatomy rather than cutting through it.
           </p>
           <SurgeryComparisonTable />
+
+          <div className="mt-8 bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+             <h3 className="text-xl font-bold text-blue-800 mb-4">Cost & Recovery Comparison</h3>
+             <div className="overflow-x-auto">
+               <table className="w-full text-sm text-left text-gray-700">
+                 <thead className="bg-blue-50 text-blue-900 font-semibold">
+                   <tr>
+                     <th className="px-4 py-3 rounded-tl-lg">Feature</th>
+                     <th className="px-4 py-3">Endoscopic Spine Surgery</th>
+                     <th className="px-4 py-3">Microdiscectomy</th>
+                     <th className="px-4 py-3 rounded-tr-lg">Open Spine Surgery</th>
+                   </tr>
+                 </thead>
+                 <tbody className="divide-y divide-gray-100">
+                   <tr>
+                     <td className="px-4 py-3 font-medium">Incision Size</td>
+                     <td className="px-4 py-3 text-green-700 font-semibold">8mm (Keyhole)</td>
+                     <td className="px-4 py-3">2-3 cm</td>
+                     <td className="px-4 py-3">5-10 cm</td>
+                   </tr>
+                   <tr>
+                     <td className="px-4 py-3 font-medium">Hospital Stay</td>
+                     <td className="px-4 py-3 text-green-700 font-semibold">Day Care (6-8 hours)</td>
+                     <td className="px-4 py-3">1-2 Days</td>
+                     <td className="px-4 py-3">3-5 Days</td>
+                   </tr>
+                   <tr>
+                     <td className="px-4 py-3 font-medium">Return to Desk Work</td>
+                     <td className="px-4 py-3 text-green-700 font-semibold">3-5 Days</td>
+                     <td className="px-4 py-3">2-3 Weeks</td>
+                     <td className="px-4 py-3">4-6 Weeks</td>
+                   </tr>
+                   <tr>
+                     <td className="px-4 py-3 font-medium">Est. Cost (Self-Pay)</td>
+                     <td className="px-4 py-3">₹1.3L - ₹1.8L*</td>
+                     <td className="px-4 py-3">₹1.1L - ₹1.5L</td>
+                     <td className="px-4 py-3">₹80k - ₹1.2L</td>
+                   </tr>
+                   <tr>
+                     <td className="px-4 py-3 font-medium">Infection Risk</td>
+                     <td className="px-4 py-3 text-green-700 font-semibold">&lt; 0.1%</td>
+                     <td className="px-4 py-3">~1-2%</td>
+                     <td className="px-4 py-3">~3-5%</td>
+                   </tr>
+                 </tbody>
+               </table>
+             </div>
+             <p className="text-xs text-gray-500 mt-3">*Costs are approximate and vary by room category and implant needs. Higher initial cost of endoscopy is often offset by shorter hospital stay and faster return to work.</p>
+          </div>
         </section>
 
         <section className="mb-16">

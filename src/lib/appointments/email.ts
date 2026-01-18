@@ -1,32 +1,27 @@
 import type { BookingData, EmailResult } from "@/packages/appointment-form/types";
 import { EmailService } from "@/src/lib/email";
 
-const SIMULATED_FAILURE_RATE = 0.1;
-
 export async function sendConfirmationEmail(
   data: BookingData,
   confirmationMessage: string
 ): Promise<EmailResult> {
   try {
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    const result = await EmailService.sendAppointmentRequestConfirmation({
+      patientName: data.patientName,
+      appointmentDate: data.appointmentDate,
+      appointmentTime: data.appointmentTime,
+      reason: data.reason,
+      email: data.email,
+    });
 
-    if (Math.random() < SIMULATED_FAILURE_RATE) {
-      throw new Error("Simulated email server connection timeout.");
+    if (result.success) {
+      return { success: true };
     }
 
-    console.info("--- APPOINTMENT EMAIL (simulation) ---");
-    console.info(`To: ${data.email}`);
-    console.info(`From: hellodr@drsayuj.info`);
-    console.info(`Subject: Appointment Request with Dr. Sayuj Krishnan`);
-    console.info("---------------------------------------");
-    console.info(confirmationMessage);
-    console.info("\nRequest summary:");
-    console.info(`Patient: ${data.patientName} (${data.age}, ${data.gender})`);
-    console.info(`Date: ${data.appointmentDate} at ${data.appointmentTime}`);
-    console.info(`Reason: ${data.reason}`);
-    console.info("--- END OF SIMULATION ---");
-
-    return { success: true };
+    return {
+      success: false,
+      error: result.error || "Failed to send confirmation email.",
+    };
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "Unknown email error";

@@ -531,6 +531,9 @@ async function runComprehensiveAudit() {
     // 3. On-page SEO analysis
     const onPageAnalysis = analyzeOnPageSEO(pageResults);
     
+    // Save detailed page results
+    auditResults.pages = pageResults;
+
     // 4. Generate recommendations
     const recommendations = generateRecommendations();
     

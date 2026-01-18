@@ -30,7 +30,8 @@ const PatientEducationVideos = dynamic(() => import('./_components/PatientEducat
     <div className="py-16 bg-white">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="animate-pulse bg-gray-200 h-[1700px] md:h-[750px] rounded-lg"></div>
+          {/* Estimated height: Mobile ~1700px, Desktop ~600px */}
+          <div className="animate-pulse bg-gray-200 h-[1700px] md:h-[600px] rounded-lg"></div>
         </div>
       </div>
     </div>
@@ -42,7 +43,8 @@ const RecoveryTimeline = dynamic(() => import('./_components/RecoveryTimeline'),
     <div className="py-16 bg-slate-950">
       <div className="container mx-auto px-4">
         <div className="max-w-5xl mx-auto">
-          <div className="animate-pulse bg-slate-800 h-[1200px] md:h-[900px] rounded-lg"></div>
+          {/* Estimated height: Mobile ~1500px, Desktop ~1400px */}
+          <div className="animate-pulse bg-slate-800 h-[1500px] md:h-[1400px] rounded-lg"></div>
         </div>
       </div>
     </div>
@@ -54,7 +56,8 @@ const LocalReputationPanel = dynamic(() => import('./_components/LocalReputation
     <div className="py-8 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="animate-pulse bg-gray-200 h-32 rounded-lg"></div>
+          {/* Estimated height: Mobile ~1100px (stack), Desktop ~600px */}
+          <div className="animate-pulse bg-gray-200 h-[1100px] md:h-[600px] rounded-lg"></div>
         </div>
       </div>
     </div>
@@ -65,9 +68,9 @@ const HOME_CANONICAL = SITE_URL.endsWith("/") ? SITE_URL : `${SITE_URL}/`;
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Neurosurgeon Hyderabad | Endoscopic Spine & Brain Specialist",
+    absolute: "Best Neurosurgeon Hyderabad | Endoscopic Spine & Brain Specialist",
   },
-  description: 'German-trained neurosurgeon in Hyderabad (Yashoda Hospital). Specialist in endoscopic spine, brain tumor & robotic surgery. Same-day discharge available.',
+  description: 'Top-rated neurosurgeon in Hyderabad (Yashoda Hospital). Expert in endoscopic spine surgery, brain tumors & sciatica. 1000+ surgeries. Book appointment.',
   keywords: [
     'dr sayuj krishnan',
     'best spine surgeon in yashoda hospital',

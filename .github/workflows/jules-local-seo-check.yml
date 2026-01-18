@@ -1,5 +1,5 @@
 name: Jules Local SEO Check
-# Managed by Jules
+# Managed by Jules (Daily Schedule)
 on:
   schedule:
     # 09:30 IST (India Standard Time) = 04:00 UTC

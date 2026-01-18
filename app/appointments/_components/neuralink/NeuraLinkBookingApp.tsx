@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { Activity, ChevronRight, MessageSquareCode, ShieldCheck, MessageSquare } from "lucide-react";
 import PatientPortal from "./PatientPortal";
+import AppointmentFaq from "../AppointmentFaq";
 import { CLINIC } from "@/app/_lib/clinic";
 import dynamic from "next/dynamic";
 
@@ -99,6 +100,8 @@ const NeuraLinkBookingApp = () => {
       <section ref={formRef} className="pb-20">
         <PatientPortal />
       </section>
+
+      <AppointmentFaq />
 
       {/* Conditionally render LiveAssistant to prevent loading its heavy dependencies (@google/genai) until needed */}
       {isAssistantOpen && (

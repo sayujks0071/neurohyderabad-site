@@ -2,37 +2,20 @@
   "mcpServers": {
     "playwright": {
       "command": "npx",
-      "args": ["@playwright/mcp@latest"]
+      "args": [
+        "@playwright/mcp@latest"
+      ]
+    },
+    "n8n-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "supergateway",
+        "--streamableHttp",
+        "https://sayujks20417.app.n8n.cloud/mcp-server/http",
+        "--header",
+        "authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MjZiNTdlNi0xYmMxLTQzMGYtYmU0Yy1lMjFiZjk1NGRlMzkiLCJpc3MiOiJuOG4iLCJhdWQiOiJtY3Atc2VydmVyLWFwaSIsImp0aSI6ImExM2JkZTU0LTMzYmYtNGY5OC1hZmM1LTQ3MmY3NDE0OTJkZiIsImlhdCI6MTc2ODY4MTgzOH0.QaWqpg7EERwf8Xx2RanjXogrTTVt_SkKvpl4YYPMDh4"
+      ]
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
