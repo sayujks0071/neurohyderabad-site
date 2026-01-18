@@ -81,13 +81,12 @@ export default function ContactPage() {
               <figure className="flex flex-col items-center">
                 <div className="w-48 h-48 md:w-56 md:h-56 rounded-3xl overflow-hidden shadow-2xl ring-4 ring-blue-100">
                   <Image
-                    src="/images/dr-sayuj-krishnan-portrait.jpg"
+                    src="/images/dr-sayuj-krishnan-portrait-v2.jpg"
                     alt="Dr. Sayuj Krishnan — Consultant Neurosurgeon & Spine Surgeon"
                     width={320}
                     height={320}
                     className="object-cover w-full h-full"
                     priority
-                    quality={95}
                     sizes="(max-width: 768px) 192px, 320px"
                   />
                 </div>
