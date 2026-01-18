@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { AppointmentType, TimeSlot } from "./types";
 import { getAvailableSlots, getNextAvailableDate } from "./calendarService";
+import { formatLocalDate, parseLocalDate } from "@/src/lib/dates";
 
 interface AppointmentSchedulerProps {
   onSelect: (type: AppointmentType, date: string, time: string) => void;
@@ -64,13 +65,13 @@ const AppointmentScheduler = ({
   }, [currentDate]);
 
   const changeDate = (days: number) => {
-    const d = new Date(currentDate);
+    const d = parseLocalDate(currentDate);
     d.setDate(d.getDate() + days);
-    setCurrentDate(d.toISOString().split("T")[0]);
+    setCurrentDate(formatLocalDate(d));
   };
 
   const formatDate = (dateStr: string) => {
-    return new Date(dateStr).toLocaleDateString("en-US", {
+    return parseLocalDate(dateStr).toLocaleDateString("en-US", {
       month: "long",
       year: "numeric",
     });
@@ -174,10 +175,10 @@ const AppointmentScheduler = ({
         </div>
         <div className="grid grid-cols-7 gap-3">
           {[...Array(7)].map((_, i) => {
-            const buttonDate = new Date(currentDate);
+            const buttonDate = parseLocalDate(currentDate);
             buttonDate.setDate(buttonDate.getDate() + i);
 
-            const dStr = buttonDate.toISOString().split("T")[0];
+            const dStr = formatLocalDate(buttonDate);
             const isSelected = currentDate === dStr;
             const isWeekend = buttonDate.getDay() === 0 || buttonDate.getDay() === 6;
 
