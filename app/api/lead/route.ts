@@ -99,7 +99,13 @@ export async function POST(request: NextRequest) {
     // Submit to Google Sheets (if configured)
     await submitToGoogleSheets(payload);
 
-    console.log("[api/lead] Lead received:", { fullName, phone, email, source });
+    // 🛡️ Sentinel: Redact sensitive PII from logs
+    console.log("[api/lead] Lead received:", {
+      fullName,
+      phone: phone ? `${phone.slice(0, 3)}***${phone.slice(-3)}` : undefined,
+      email: email ? `${email[0]}***@${email.split('@')[1]}` : undefined,
+      source
+    });
 
     return NextResponse.json({
       ok: true,
