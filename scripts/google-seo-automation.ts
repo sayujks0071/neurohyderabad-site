@@ -78,7 +78,7 @@ interface SitemapStatus {
 
 // Parse command line arguments
 function parseArgs(): CliArgs {
-  const args = process.argv.slice(2);
+  const args = process.argv.slice(2).filter(arg => arg !== '--');
 
   if (args.includes('--help') || args.includes('-h')) {
     return { mode: 'help' };
