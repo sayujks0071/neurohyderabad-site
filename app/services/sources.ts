@@ -192,6 +192,16 @@ const SERVICE_SOURCES: Record<string, ServiceSource[]> = {
       "href": "https://www.e-neurospine.org/journal/view.php?number=2223",
     },
   ],
+  "microdiscectomy-surgery-cost-hyderabad": [
+    {
+      label: "Spine Universe – Microdiscectomy Cost and Recovery",
+      href: "https://www.spineuniverse.com/treatments/surgery/microdiscectomy-recovery",
+    },
+    {
+      label: "American Association of Neurological Surgeons – Lumbar Discectomy",
+      href: "https://www.aans.org/en/Patients/Neurosurgical-Conditions-and-Treatments/Lumbar-Disc-Herniation",
+    },
+  ],
 };
 
 export function getServiceSources(slug: string): ServiceSource[] {

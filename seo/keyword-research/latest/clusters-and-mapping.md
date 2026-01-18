@@ -1,13 +1,24 @@
-# Cluster & Mapping Strategy: 2026-01-17
+# Keyword Clusters & Mapping: 2026-01-18
 
-## Primary Cluster: Cervical Spine Surgery
-* **Core Topic:** Artificial Disc Replacement (ADR)
-* **Intent:** Commercial / Transactional (BOFU)
-* **Geography:** Hyderabad (Manikonda, Banjara Hills focus)
+## 1. Microdiscectomy Cost & Procedure
+*   **Cluster:** `HYD | BOFU | SPINE | microdiscectomy | cost`
+*   **Primary Keyword:** "microdiscectomy surgery cost hyderabad"
+*   **Target Page:** `/services/microdiscectomy-surgery-cost-hyderabad` (NEW)
+*   **Strategy:** Create a dedicated cost page or add to existing pricing section. For now, proposing a new service page if pattern allows.
 
-## Mapping
-| Keyword | Cluster | Target Page | Action |
-| :--- | :--- | :--- | :--- |
-| cervical disc replacement hyderabad | SPINE-CERVICAL | /services/cervical-disc-replacement-hyderabad | Created New Page |
-| artificial disc replacement spine | SPINE-CERVICAL | /services/cervical-disc-replacement-hyderabad | Mapped to New Page |
-| best spine surgeon manikonda | SPINE-GENERAL | /locations/manikonda | Mapped to Location (Future) |
+## 2. Local Neurosurgeon Presence (Expansion)
+*   **Cluster:** `HYD | BOFU | LOCATION | neurosurgeon | jubilee-hills`
+*   **Primary Keyword:** "neurosurgeon in jubiles hills"
+*   **Target Page:** `/locations/neurosurgeon-jubilee-hills` (NEW)
+*   **Strategy:** Replicate existing location page pattern (e.g., Banjara Hills).
+
+## 3. Failed Back Surgery
+*   **Cluster:** `NONE | TOFU | SPINE | failed-back-surgery | symptoms`
+*   **Primary Keyword:** "signs of failed back surgery syndrome"
+*   **Target Page:** `/conditions/failed-back-surgery-syndrome-hyderabad` (NEW)
+*   **Strategy:** Create a condition page explaining FBSS and revision options.
+
+## 4. Brain Tumor Cost
+*   **Cluster:** `HYD | BOFU | BRAIN | brain-tumor | cost`
+*   **Primary Keyword:** "cost of brain tumor surgery in hyderabad"
+*   **Target Page:** `/services/brain-tumor-surgery-cost-hyderabad` (NEW)
