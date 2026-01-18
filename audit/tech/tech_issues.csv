@@ -1,4 +1,20 @@
-Issue,Severity,Evidence,Recommendation
-"Sitemap Conflict: public/sitemap.xml shadows app/sitemap.ts",High,"Both files exist. Static file takes precedence, preventing dynamic updates.",Remove public/sitemap.xml or configure next-sitemap to strictly generate specialized sitemaps only.
-"Robots.txt points to potentially missing sitemaps",Medium,"robots.ts lists sitemap-blog.xml etc. If these are dynamic routes, they work. If they are expected to be static files from next-sitemap, verify they exist.","Verify accessibility of all sitemaps in robots.txt."
-"Long Titles",Medium,"Many pages have titles > 60 chars due to brand suffix.","Shorten base titles or reduce suffix length."
+url,issue_type,severity,recommended_fix
+https://www.drsayuj.info/brain-tumor-surgery,Status 308,High,Fix error
+https://www.drsayuj.info/brain-tumor-surgery,Missing Canonical,High,Add canonical tag
+https://www.drsayuj.info/specializations,Status 308,High,Fix error
+https://www.drsayuj.info/specializations,Missing Canonical,High,Add canonical tag
+https://www.drsayuj.info/conditions/sciatica-treatment-hyderabad,Status 404,High,Fix error
+https://www.drsayuj.info/conditions/sciatica-treatment-hyderabad,Missing Canonical,High,Add canonical tag
+https://www.drsayuj.info/neurosurgeon-jubilee-hills,Status None,High,Fix error
+https://www.drsayuj.info/neurosurgeon-jubilee-hills,Missing Canonical,High,Add canonical tag
+https://www.drsayuj.info/neurosurgeon-banjara-hills,Status None,High,Fix error
+https://www.drsayuj.info/neurosurgeon-banjara-hills,Missing Canonical,High,Add canonical tag
+https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills,Status 307,High,Fix error
+https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills,Missing Canonical,High,Add canonical tag
+https://www.drsayuj.info/knowledge-base,Missing Canonical,High,Add canonical tag
+https://www.drsayuj.info/disease-guides,Status 308,High,Fix error
+https://www.drsayuj.info/disease-guides,Missing Canonical,High,Add canonical tag
+https://www.drsayuj.info/emergency-rehabilitation,Status None,High,Fix error
+https://www.drsayuj.info/emergency-rehabilitation,Missing Canonical,High,Add canonical tag
+https://www.drsayuj.info/disease-guides/degenerative-disc-disease,Status 308,High,Fix error
+https://www.drsayuj.info/disease-guides/degenerative-disc-disease,Missing Canonical,High,Add canonical tag
