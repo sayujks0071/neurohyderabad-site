@@ -13,6 +13,7 @@ import SourceList from '@/app/_components/SourceList';
 import { getServiceSources } from '../sources';
 import JsonLd from '@/components/JsonLd';
 import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
+import MedicalWebPageSchema from '@/app/components/schemas/MedicalWebPageSchema';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
@@ -245,6 +246,14 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
   return (
     <>
       <JsonLd data={gbpSchema} />
+      <MedicalWebPageSchema
+        pageType="service"
+        pageSlug="/services/minimally-invasive-spine-surgery"
+        title="Endoscopic Spine Surgery Hyderabad | Dr. Sayuj Krishnan"
+        description="Expert endoscopic spine surgery in Hyderabad with Dr. Sayuj Krishnan. Minimally invasive procedures with same-day discharge at Yashoda Hospital Malakpet."
+        serviceOrCondition="Minimally Invasive Spine Surgery"
+        lastReviewed="2025-10-19"
+      />
       <BreadcrumbSchema
         items={[
           { name: 'Home', path: '/' },
