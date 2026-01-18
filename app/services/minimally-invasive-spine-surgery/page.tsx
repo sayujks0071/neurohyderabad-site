@@ -454,6 +454,9 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
         {/* Patient Testimonials Section */}
         <section className="mb-12">
           <h2 className="text-3xl font-bold text-blue-800 mb-6 text-center">Patient Success Stories</h2>
+          <p className="text-gray-700 mb-6">
+            See how minimally invasive techniques have helped patients with severe <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 underline">sciatica</Link> and back pain return to their active lives.
+          </p>
           <div className="grid md:grid-cols-2 gap-6">
             {spineStoryHighlights.map((story) => (
               <article key={story.id} className="bg-white rounded-lg p-6 shadow-sm border-l-4 border-blue-500">
