@@ -1,40 +1,41 @@
 # Jules Automations
 
-This repository uses GitHub Actions to schedule daily tasks for Jules (the AI Software Engineer). These automations create GitHub Issues labeled `jules` containing specific instructions (prompts) for maintenance, SEO, and quality assurance.
+This repository uses scheduled GitHub Actions to create "tasks" (GitHub Issues) for Jules (our AI engineer) to pick up daily. This ensures continuous maintenance and optimization of the codebase without manual intervention.
 
-## How It Works
+## Workflows
 
-1.  **Scheduled Workflows**: GitHub Actions run on a defined cron schedule (UTC).
-2.  **Prompt Files**: Each workflow reads a Markdown file from `jules-prompts/`.
-3.  **Issue Creation**: The workflow creates a new Issue with the content of the prompt file and applies the label `jules`.
-4.  **Jules Pick-up**: Jules (or a developer) checks the `jules` label to find pending tasks.
+The workflows are located in `.github/workflows/` and are prefixed with `jules-`. They are configured to run on a daily schedule (IST mornings).
 
-## Schedules
-
-The schedules are set in UTC to correspond to morning hours in IST (India Standard Time).
-
-| Workflow | IST Time | UTC Time | Cron | Prompt File |
+| Workflow | IST | UTC | Cron | Purpose |
 | :--- | :--- | :--- | :--- | :--- |
-| **SEO Reprint** | 08:00 AM | 02:30 AM | `30 2 * * *` | `jules-prompts/seo-reprint.md` |
-| **PR & Deploy Check** | 08:45 AM | 03:15 AM | `15 3 * * *` | `jules-prompts/pr-deploy-check.md` |
-| **Competitor Gap Scan** | 09:00 AM | 03:30 AM | `30 3 * * *` | `jules-prompts/competitor-gap-scan.md` |
-| **Rolling 7-Day Summary** | 09:15 AM | 03:45 AM | `45 3 * * *` | `jules-prompts/rolling-7d-seo-summary.md` |
-| **Local SEO Check** | 09:30 AM | 04:00 AM | `0 4 * * *` | `jules-prompts/local-seo-check.md` |
+| **SEO Reprint** | 08:00 | 02:30 | `30 2 * * *` | Identifies stale content for update. |
+| **PR & Deploy Check** | 08:45 | 03:15 | `15 3 * * *` | Reviews recent PRs and deployments. |
+| **Competitor Gap Scan** | 09:00 | 03:30 | `30 3 * * *` | Scans competitors for new content topics. |
+| **Rolling 7-Day SEO** | 09:15 | 03:45 | `45 3 * * *` | Summarizes weekly SEO health. |
+| **Local SEO Check** | 09:30 | 04:00 | `0 4 * * *` | Verifies local business signals. |
+
+## How it works
+
+1. **Schedule Trigger:** GitHub Actions triggers the workflow at the specified time.
+2. **Read Prompt:** The workflow reads a markdown template from `jules-prompts/`.
+3. **Check Duplicates:** It checks if an issue with the same title (including today's date) already exists to prevent spam.
+4. **Create Issue:** If unique, it creates a new GitHub Issue with the content of the prompt file and applies the label `jules`.
+5. **Jules Picks Up:** Jules (or an assigned engineer) monitors the `jules` label and executes the instructions in the issue body.
 
 ## Editing Prompts
 
-To change what Jules does for a specific task:
-1.  Open the corresponding file in `jules-prompts/` (e.g., `jules-prompts/seo-reprint.md`).
-2.  Edit the instructions. Markdown is supported.
-3.  Commit and push the changes. The next scheduled run will use the updated content.
+To change what Jules does for a specific task, simply edit the corresponding markdown file in `jules-prompts/`.
 
-## Pausing or Disabling
+Example: To add a new check to the "Local SEO Check", edit `jules-prompts/local-seo-check.md`.
 
-To stop a specific automation:
-1.  Go to the **Actions** tab in the GitHub repository.
-2.  Select the workflow (e.g., "Jules SEO Reprint").
-3.  Click the **...** (three dots) menu and select **Disable workflow**.
+## Pausing Automations
 
-## Duplicate Prevention
+To pause a specific automation:
+1. Go to the **Actions** tab in GitHub.
+2. Select the workflow from the sidebar.
+3. Click the **...** menu and select **Disable workflow**.
 
-The workflows are designed to check for existing **open** issues with the same title (e.g., `[Jules] SEO Reprint Task - YYYY-MM-DD`). If one exists, a new one will *not* be created. This prevents spamming if tasks are not completed immediately.
+## Troubleshooting
+
+- **Issue not created:** Check the Action logs. Common reasons include GitHub API rate limits or the issue already existing.
+- **Wrong Schedule:** Ensure you've converted IST to UTC correctly using a converter. GitHub Actions use UTC.

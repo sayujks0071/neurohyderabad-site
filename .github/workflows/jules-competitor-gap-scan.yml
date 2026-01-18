@@ -1,5 +1,5 @@
 name: Jules Competitor Gap Scan
-# Managed by Jules
+# Managed by Jules (Daily Schedule)
 on:
   schedule:
     # 09:00 IST (India Standard Time) = 03:30 UTC

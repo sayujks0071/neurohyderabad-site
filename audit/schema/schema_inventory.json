@@ -1,38 +1,815 @@
 {
-  "/": [
+  "https://www.drsayuj.info": [
     "WebSite",
-    null,
+    "Physician",
     "Hospital",
     "FAQPage"
   ],
-  "/services/endoscopic-spine-surgery-hyderabad": [
+  "https://www.drsayuj.info/about": [
     "WebSite",
-    null,
+    "Physician",
     "Hospital",
-    null,
-    "MedicalBusiness",
     "BreadcrumbList",
-    "FAQPage"
+    "Physician"
   ],
-  "/conditions/sciatica-pain-treatment-hyderabad": [
+  "https://www.drsayuj.info/appointments": [
     "WebSite",
-    null,
+    "Physician",
     "Hospital",
-    "MedicalWebPage",
-    "FAQPage",
-    "BreadcrumbList"
+    "Physician",
+    "MedicalClinic"
   ],
-  "/locations/malakpet": [
+  "https://www.drsayuj.info/contact": [
     "WebSite",
-    null,
+    "Physician",
     "Hospital",
     "MedicalClinic",
+    "BreadcrumbList"
+  ],
+  "https://www.drsayuj.info/services": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "MedicalWebPage"
+  ],
+  "https://www.drsayuj.info/conditions": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/locations": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/best-neurosurgeon-in-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    [
+      "WebPage",
+      "MedicalWebPage"
+    ],
+    "BreadcrumbList",
+    "FAQPage",
+    "HowTo"
+  ],
+  "https://www.drsayuj.info/brain-surgery": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "MedicalService"
+  ],
+  "https://www.drsayuj.info/brain-tumor-surgery": [],
+  "https://www.drsayuj.info/pediatric-neurosurgery": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "MedicalService"
+  ],
+  "https://www.drsayuj.info/specializations": [],
+  "https://www.drsayuj.info/spine-surgery": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "MedicalService"
+  ],
+  "https://www.drsayuj.info/symptoms-checker": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/technology-innovation": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "MedicalService"
+  ],
+  "https://www.drsayuj.info/services/minimally-invasive-spine-surgery": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "MedicalBusiness",
+    "BreadcrumbList"
+  ],
+  "https://www.drsayuj.info/services/endoscopic-discectomy-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "FAQPage"
+  ],
+  "https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "MedicalService",
+    "MedicalProcedure",
+    "MedicalBusiness"
+  ],
+  "https://www.drsayuj.info/services/spinal-fusion-surgery-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "MedicalBusiness",
+    "BreadcrumbList"
+  ],
+  "https://www.drsayuj.info/services/epilepsy-surgery-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/services/peripheral-nerve-surgery-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
     "BreadcrumbList",
     "FAQPage"
   ],
-  "/blog/sciatica-pain-management-hyderabad": [
+  "https://www.drsayuj.info/services/awake-spine-surgery-hyderabad": [
     "WebSite",
-    null,
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "FAQPage"
+  ],
+  "https://www.drsayuj.info/services/spine-surgery-cost-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "FAQPage"
+  ],
+  "https://www.drsayuj.info/services/slip-disc-surgery-cost-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "FAQPage"
+  ],
+  "https://www.drsayuj.info/services/cervical-endoscopic-spine-surgery-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "MedicalBusiness",
+    "BreadcrumbList"
+  ],
+  "https://www.drsayuj.info/services/compare-neurosurgeons-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "FAQPage"
+  ],
+  "https://www.drsayuj.info/services/cooled-radiofrequency-ablation-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "MedicalProcedure"
+  ],
+  "https://www.drsayuj.info/services/dr-sayuj-vs-apollo-neuro-icu": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "FAQPage"
+  ],
+  "https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "MedicalService",
+    "MedicalProcedure",
+    "MedicalBusiness"
+  ],
+  "https://www.drsayuj.info/services/kims-spine-surgery-second-opinion": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "FAQPage"
+  ],
+  "https://www.drsayuj.info/services/lumbar-laminectomy-surgery-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "MedicalBusiness",
+    "BreadcrumbList"
+  ],
+  "https://www.drsayuj.info/services/peripheral-nerve-surgery": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "FAQPage"
+  ],
+  "https://www.drsayuj.info/services/spinal-fusion": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "MedicalWebPage"
+  ],
+  "https://www.drsayuj.info/services/spine-surgery-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "MedicalService",
+    "MedicalProcedure",
+    "MedicalWebPage"
+  ],
+  "https://www.drsayuj.info/services/uniportal-endoscopic-spine-surgery-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "MedicalService",
+    "MedicalProcedure",
+    "MedicalBusiness"
+  ],
+  "https://www.drsayuj.info/conditions/brain-tumor-surgery-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/conditions/sciatica-treatment-hyderabad": [],
+  "https://www.drsayuj.info/conditions/spinal-stenosis-treatment-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "FAQPage",
+    "MedicalCondition"
+  ],
+  "https://www.drsayuj.info/conditions/trigeminal-neuralgia-treatment-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/conditions/cervical-radiculopathy-treatment-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/conditions/slip-disc-treatment-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "MedicalWebPage",
+    "FAQPage"
+  ],
+  "https://www.drsayuj.info/conditions/brain-bleed-evacuation-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/conditions/cervical-myelopathy-decompression-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/conditions/osteoporotic-spine-fracture-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "FAQPage",
+    "MedicalCondition"
+  ],
+  "https://www.drsayuj.info/conditions/sciatica-pain-treatment-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "MedicalWebPage",
+    "FAQPage"
+  ],
+  "https://www.drsayuj.info/conditions/spine-tumor-surgery-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/conditions/spondylolisthesis-treatment-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "FAQPage",
+    "MedicalCondition"
+  ],
+  "https://www.drsayuj.info/neurosurgeon-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/neurosurgeon-jubilee-hills": [],
+  "https://www.drsayuj.info/neurosurgeon-banjara-hills": [],
+  "https://www.drsayuj.info/neurosurgeon-hitech-city": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/neurosurgeon-secunderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/neurosurgeon-gachibowli": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/neurosurgeon-malakpet": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/locations/malakpet": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/locations/lb-nagar": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/locations/neurosurgeon-kothapet": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/locations/brain-spine-surgeon-jubilee-hills": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/locations/brain-spine-surgeon-banjara-hills": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/locations/brain-spine-surgeon-hitec-city": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/locations/banjara-hills": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/locations/hitech-city": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/locations/neurosurgeon-kondapur": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/locations/neurosurgeon-kukatpally": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/locations/neurosurgeon-manikonda": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills": [],
+  "https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills-faq": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/locations/neurosurgeon-near-kachiguda-faq": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/locations/neurosurgeon-near-kondapur-faq": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/locations/neurosurgeon-nizampet": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/locations/secunderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/knowledge-base": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/blog": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/patient-stories": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "VideoObject",
+    "VideoObject"
+  ],
+  "https://www.drsayuj.info/disease-guides": [],
+  "https://www.drsayuj.info/research": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/media": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "VideoObject",
+    "VideoObject"
+  ],
+  "https://www.drsayuj.info/emergency-rehabilitation": [],
+  "https://www.drsayuj.info/technology-facilities": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "MedicalWebPage"
+  ],
+  "https://www.drsayuj.info/disease-guides/degenerative-disc-disease": [],
+  "https://www.drsayuj.info/stories/endoscopic-discectomy-same-day-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "MedicalWebPage"
+  ],
+  "https://www.drsayuj.info/stories/endoscopic-ulbd-stenosis-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "MedicalWebPage"
+  ],
+  "https://www.drsayuj.info/stories/mvd-trigeminal-neuralgia-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "MedicalWebPage"
+  ],
+  "https://www.drsayuj.info/blog/meningioma-brain-tumor-treatment-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "MedicalWebPage",
+    "FAQPage"
+  ],
+  "https://www.drsayuj.info/blog/l4-l5-disc-bulge-treatment-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "MedicalWebPage",
+    "FAQPage"
+  ],
+  "https://www.drsayuj.info/blog/sciatica-exercises-for-office-workers-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "MedicalWebPage",
+    "FAQPage"
+  ],
+  "https://www.drsayuj.info/blog/spinal-tuberculosis-symptoms-treatment-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "MedicalWebPage",
+    "FAQPage"
+  ],
+  "https://www.drsayuj.info/blog/normal-pressure-hydrocephalus-nph-symptoms-treatment-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "MedicalWebPage",
+    "FAQPage"
+  ],
+  "https://www.drsayuj.info/blog/sciatica-pain-relief-exercises-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "MedicalWebPage",
+    "FAQPage"
+  ],
+  "https://www.drsayuj.info/blog/awake-craniotomy-brain-tumor-guide": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "MedicalWebPage",
+    "FAQPage"
+  ],
+  "https://www.drsayuj.info/blog/cauda-equina-syndrome-warning-signs-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "MedicalWebPage",
+    "FAQPage"
+  ],
+  "https://www.drsayuj.info/blog/spondylolisthesis-vs-herniated-disc-difference": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "MedicalWebPage",
+    "FAQPage"
+  ],
+  "https://www.drsayuj.info/blog/understanding-brain-mri-tumor-report-guide": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "MedicalWebPage",
+    "FAQPage"
+  ],
+  "https://www.drsayuj.info/blog/microdiscectomy-vs-laminectomy-recovery-comparison": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "MedicalWebPage"
+  ],
+  "https://www.drsayuj.info/blog/awake-spine-surgery-vs-general-anesthesia-guide": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "MedicalWebPage",
+    "FAQPage"
+  ],
+  "https://www.drsayuj.info/blog/cervical-spondylosis-neck-pain-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "MedicalWebPage",
+    "FAQPage"
+  ],
+  "https://www.drsayuj.info/blog/endoscopic-spine-surgery-recovery-timeline": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "MedicalWebPage",
+    "FAQPage"
+  ],
+  "https://www.drsayuj.info/blog/headache-vs-brain-tumor-warning-signs": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "MedicalWebPage",
+    "FAQPage"
+  ],
+  "https://www.drsayuj.info/blog/lumbar-canal-stenosis-walking-pain-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "MedicalWebPage",
+    "FAQPage"
+  ],
+  "https://www.drsayuj.info/blog/osteoporotic-spine-fracture-elderly-guide": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "MedicalWebPage",
+    "FAQPage"
+  ],
+  "https://www.drsayuj.info/blog/trigeminal-neuralgia-vs-tooth-pain-guide": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "BlogPosting",
+    "FAQPage"
+  ],
+  "https://www.drsayuj.info/blog/sciatica-vs-normal-back-pain-guide": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "MedicalWebPage",
+    "FAQPage"
+  ],
+  "https://www.drsayuj.info/blog/cost-of-endoscopic-spine-surgery-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "BlogPosting",
+    "FAQPage"
+  ],
+  "https://www.drsayuj.info/blog/understanding-mri-spine-report-guide": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "MedicalWebPage",
+    "FAQPage"
+  ],
+  "https://www.drsayuj.info/blog/neuroplasticity-brain-recovery-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "BlogPosting",
+    "FAQPage"
+  ],
+  "https://www.drsayuj.info/blog/awake-craniotomy-guide": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "MedicalWebPage",
+    "BlogPosting"
+  ],
+  "https://www.drsayuj.info/blog/brain-tumor-surgery-cost-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BlogPosting",
+    "BreadcrumbList"
+  ],
+  "https://www.drsayuj.info/blog/day-care-endoscopic-spine-surgery-eligibility": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "BlogPosting"
+  ],
+  "https://www.drsayuj.info/blog/day-care-spine-surgery-insurance-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BlogPosting",
+    "BreadcrumbList"
+  ],
+  "https://www.drsayuj.info/blog/disc-replacement-vs-fusion": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BlogPosting",
+    "BreadcrumbList"
+  ],
+  "https://www.drsayuj.info/blog/does-endoscopic-spine-surgery-work-for-sciatica-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/blog/endoscopic-cervical-spine-surgery-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BlogPosting",
+    "FAQPage"
+  ],
+  "https://www.drsayuj.info/blog/endoscopic-discectomy-cost-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "BlogPosting"
+  ],
+  "https://www.drsayuj.info/blog/endoscopic-spine-surgery-cost-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BlogPosting",
+    "FAQPage"
+  ],
+  "https://www.drsayuj.info/blog/endoscopic-vs-microdiscectomy-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "BlogPosting"
+  ],
+  "https://www.drsayuj.info/blog/how-much-does-brain-surgery-cost-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList"
+  ],
+  "https://www.drsayuj.info/blog/mvd-vs-radiosurgery-trigeminal-neuralgia": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "BlogPosting"
+  ],
+  "https://www.drsayuj.info/blog/return-to-work-after-endoscopic-discectomy-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BlogPosting",
+    "FAQPage"
+  ],
+  "https://www.drsayuj.info/blog/sciatica-pain-management-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "Article"
+  ],
+  "https://www.drsayuj.info/blog/spinal-fusion-cost-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BlogPosting",
+    "BreadcrumbList"
+  ],
+  "https://www.drsayuj.info/blog/spine-health-maintenance-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/blog/spine-surgery-recovery-timeline-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/blog/when-to-worry-about-back-pain-neurosurgeon-hyderabad": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/blog/world-stroke-day-2025-hyderabad-stroke-code": [
+    "WebSite",
+    "Physician",
+    "Hospital",
+    "BreadcrumbList",
+    "Article",
+    "FAQPage",
+    "HowTo"
+  ],
+  "https://www.drsayuj.info/symptoms/signs-of-brain-tumor": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/symptoms/pain-on-top-of-head-causes": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/privacy": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/cookies": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/terms": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/disclaimer": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/medical-disclaimer": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/content-integrity": [
+    "WebSite",
+    "Physician",
+    "Hospital"
+  ],
+  "https://www.drsayuj.info/editorial-policy": [
+    "WebSite",
+    "Physician",
     "Hospital"
   ]
 }

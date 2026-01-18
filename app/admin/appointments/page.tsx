@@ -24,7 +24,6 @@ export default function AppointmentsPage() {
       preferredDate: appointment.preferredDate,
       status: appointment.status || 'Pending'
     });
-
     window.open(url, '_blank');
   };
 

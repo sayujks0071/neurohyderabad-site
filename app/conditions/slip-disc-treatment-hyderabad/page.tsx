@@ -115,7 +115,7 @@ export default function SlipDiscTreatmentPage() {
           <p className="text-gray-700 mb-4">
             A slip disc, also known as a herniated disc, occurs when the soft center of a spinal 
             disc pushes through a crack in the outer ring. This can compress nearby nerves, 
-            causing pain, numbness, or weakness in the arms or legs.
+            causing pain, numbness, or weakness in the arms or legs. This compression is often the primary cause of <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 underline">sciatica</Link>.
           </p>
           
           <h3 className="text-xl font-semibold mb-4 text-blue-700">Common Symptoms</h3>

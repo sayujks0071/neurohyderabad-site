@@ -17,8 +17,8 @@ import { patientStories } from '@/src/content/stories';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
 
 const baseMetadata = makeMetadata({
-  title: "Sciatica Treatment Hyderabad | Non-Surgical Relief | Dr Sayuj",
-  description: "Expert sciatica treatment in Hyderabad. 90% recovery without surgery. Precise diagnosis & non-surgical relief plans by Dr. Sayuj Krishnan.",
+  title: "Sciatica Treatment Hyderabad | 90% Non-Surgical Relief | Dr Sayuj",
+  description: "Best sciatica treatment in Hyderabad. 90% patients recover without surgery. Expert diagnosis & endoscopic options for severe cases. Book consult.",
   canonicalPath: '/conditions/sciatica-pain-treatment-hyderabad',
 });
 
