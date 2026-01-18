@@ -1,5 +1,5 @@
 name: Jules SEO Reprint
-# Managed by Jules
+# Managed by Jules (Daily Schedule)
 on:
   schedule:
     # 08:00 IST (India Standard Time) = 02:30 UTC
