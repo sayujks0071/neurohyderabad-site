@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { SITE_URL } from '../../src/lib/seo';
 import MedicalReviewNotice from '../../src/components/MedicalReviewNotice';
+import { LocalPathways } from '@/src/components/locations/LocalPathways';
 
 export const metadata: Metadata = {
   title: 'Neurosurgical Services in Hyderabad | Dr. Sayuj Krishnan',
@@ -324,7 +325,7 @@ export default function ServicesPage() {
           </div>
         </section>
 
-        <section className="bg-blue-50 p-8 rounded-lg text-center">
+        <section className="bg-blue-50 p-8 rounded-lg text-center mb-16">
           <h2 className="text-2xl font-bold text-blue-800 mb-4">Ready to Discuss Your Treatment Options?</h2>
           <p className="text-gray-600 mb-6">
             Dr. Sayuj Krishnan provides personalized treatment plans based on your specific condition and needs.
@@ -344,6 +345,9 @@ export default function ServicesPage() {
             </Link>
           </div>
         </section>
+
+        {/* Local Pathways */}
+        <LocalPathways mode="service" />
       </div>
 
       {/* JSON-LD Structured Data */}
