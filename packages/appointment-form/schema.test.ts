@@ -42,7 +42,7 @@ describe("Appointment Schema Validation", () => {
     expect(result.success).toBe(false);
     if (!result.success) {
       const error = result.error.issues.find(i => i.path.includes("contactNumber"));
-      expect(error?.message).toBe("Invalid Indian mobile number");
+      expect(error?.message).toBe("Please enter a valid 10-digit mobile number");
     }
   });
 
