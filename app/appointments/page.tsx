@@ -1,8 +1,10 @@
-import { SITE_URL } from "../../src/lib/seo";
+import { SITE_URL } from "@/src/lib/seo";
 import type { Metadata } from "next";
 import NeuraLinkBookingApp from "./_components/neuralink/NeuraLinkBookingApp";
 import AppointmentSchema from "./_components/AppointmentSchema";
 import AppointmentFaqSchema from "./_components/AppointmentFaqSchema";
+import BookingHeroContent from "./_components/neuralink/BookingHeroContent";
+import BookingLocationInfo from "./_components/neuralink/BookingLocationInfo";
 
 export const metadata: Metadata = {
   title: "Book Appointment | Best Neurosurgeon Hyderabad | Dr. Sayuj Krishnan",
@@ -55,9 +57,16 @@ export default function AppointmentsPage() {
     <>
       <AppointmentSchema />
       <AppointmentFaqSchema />
-      {/* Hidden H1 for SEO and Accessibility structure (visually handled by component) */}
-      <h1 className="sr-only">Book Appointment with Dr. Sayuj Krishnan</h1>
-      <NeuraLinkBookingApp />
+      {/*
+        CWV Optimization:
+        Main content (H1, Description) is now server-rendered via BookingHeroContent passed as children/props
+        to the client wrapper. This improves LCP significantly compared to client-side rendering.
+        Removed duplicate hidden H1 since BookingHeroContent renders the semantic H1.
+      */}
+      <NeuraLinkBookingApp
+        heroContent={<BookingHeroContent />}
+        locationInfo={<BookingLocationInfo />}
+      />
     </>
   );
 }
