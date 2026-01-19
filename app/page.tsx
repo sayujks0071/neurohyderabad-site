@@ -4,8 +4,8 @@ import dynamic from 'next/dynamic';
 import ExpandedFAQ from "../src/components/ExpandedFAQ";
 import LazySection from "./_components/LazySection";
 import { SITE_URL } from "../src/lib/seo";
+import BreadcrumbSchema from "./components/schemas/BreadcrumbSchema";
 // Temporarily commenting out problematic imports
-// import BreadcrumbSchema from "./components/schemas/BreadcrumbSchema";
 // import { HeroCTA, StickyCTA } from "../src/components/Experiments";
 // import SocialProofBand from "../src/components/Experiments/SocialProofBand";
 // import ScrollDepthTracker from "../src/components/ScrollDepthTracker";
@@ -1000,10 +1000,10 @@ export default function Home() {
         </Section>
 
         {/* FAQPage Schema */}
-        {/* <FAQPageSchema />
-      <BreadcrumbSchema items={[
-        { name: "Home", path: "/" }
-      ]} /> */}
+        {/* <FAQPageSchema /> */}
+        <BreadcrumbSchema items={[
+          { name: "Home", path: "/" }
+        ]} />
 
         {/* Sticky CTA for mobile */}
         {/* <StickyCTA /> */}
