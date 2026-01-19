@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-17",
+  "last_updated": "2026-01-19",
   "keywords": [
     {
       "term": "neurosurgeon hyderabad",
@@ -252,6 +252,36 @@
       "difficulty": "Med",
       "volume": "Med",
       "target_page": "/locations/neurosurgeon-gachibowli"
+    },
+    {
+      "term": "microscopic spine surgery cost hyderabad",
+      "difficulty": "Med",
+      "volume": "Med",
+      "target_page": "/services/microscopic-spine-surgery-hyderabad"
+    },
+    {
+      "term": "robotic spine surgery hyderabad",
+      "difficulty": "High",
+      "volume": "Low",
+      "target_page": "/services/robotic-spine-surgery-hyderabad"
+    },
+    {
+      "term": "lumbar canal stenosis symptoms telugu",
+      "difficulty": "Low",
+      "volume": "Med",
+      "target_page": "/blog/lumbar-canal-stenosis-symptoms-telugu"
+    },
+    {
+      "term": "spinal implants cost in india",
+      "difficulty": "Med",
+      "volume": "Med",
+      "target_page": "/blog/spinal-implants-cost-india"
+    },
+    {
+      "term": "best hospital for brain tumor surgery in hyderabad",
+      "difficulty": "High",
+      "volume": "Med",
+      "target_page": "/"
     }
   ]
 }
