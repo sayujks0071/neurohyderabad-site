@@ -16,6 +16,15 @@ The message must follow these rules:
 const fallbackMessage = (data: BookingData) =>
   `Thank you for your request for an appointment on ${data.appointmentDate} at ${data.appointmentTime}. We have received your details and our team will contact you shortly to confirm the appointment.`;
 
+// 🛡️ Sentinel: Sanitize input to prevent prompt injection and token exhaustion
+function sanitizeForPrompt(text: string | number | undefined | null, maxLength = 500): string {
+  if (text === null || text === undefined) return "";
+  const str = String(text);
+  // Remove control characters (including newlines) to prevent structure injection
+  // and truncate to prevent token exhaustion
+  return str.replace(/[\x00-\x1F\x7F]/g, " ").trim().substring(0, maxLength);
+}
+
 export async function generateBookingConfirmation(
   data: BookingData
 ): Promise<{ message: string; usedAI: boolean }> {
@@ -34,15 +43,16 @@ export async function generateBookingConfirmation(
   try {
     const ai = new GoogleGenAI({ apiKey });
 
+    // 🛡️ Sentinel: Sanitize inputs before injecting into prompt
     const userPrompt = [
       "Generate a confirmation message for the following appointment request:",
       "",
-      `Patient Name: ${data.patientName}`,
-      `Age: ${data.age}`,
-      `Gender: ${data.gender}`,
-      `Requested Date: ${data.appointmentDate}`,
-      `Requested Time: ${data.appointmentTime}`,
-      `Reason: ${data.reason}`,
+      `Patient Name: ${sanitizeForPrompt(data.patientName)}`,
+      `Age: ${sanitizeForPrompt(data.age)}`,
+      `Gender: ${sanitizeForPrompt(data.gender)}`,
+      `Requested Date: ${sanitizeForPrompt(data.appointmentDate)}`,
+      `Requested Time: ${sanitizeForPrompt(data.appointmentTime)}`,
+      `Reason: ${sanitizeForPrompt(data.reason)}`,
     ].join("\n");
 
     const response = await ai.models.generateContent({
