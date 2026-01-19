@@ -220,6 +220,7 @@ export default function BookingForm({
                           key={time}
                           type="button"
                           onClick={() => field.onChange(time)}
+                          aria-pressed={field.value === time}
                           className={`w-full text-center px-2 py-2.5 border rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-1 ${
                             field.value === time
                               ? "bg-cyan-600 text-white border-cyan-600"
@@ -308,7 +309,7 @@ export default function BookingForm({
           </div>
 
           <div className="mt-10 pt-6 border-t border-slate-200 text-center">
-            <Button type="submit" disabled={isSubmitting}>
+            <Button type="submit" isLoading={isSubmitting}>
               {isSubmitting ? "Sending..." : "Submit Request"}
             </Button>
           </div>
