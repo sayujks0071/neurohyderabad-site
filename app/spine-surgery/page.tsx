@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE_URL } from "../../src/lib/seo";
 import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
+import FAQPageSchema from "../_components/FAQPageSchema";
 import { serviceJsonLd } from "../../src/lib/seo";
 
 export const metadata: Metadata = {
@@ -58,12 +59,36 @@ export default function SpineSurgeryPage() {
     areaServed: "Hyderabad, Telangana, India"
   });
 
+  const faqs = [
+    {
+      question: "What is the cost of endoscopic spine surgery in Hyderabad?",
+      answer: "The cost varies based on the specific procedure (e.g., discectomy vs. fusion) and hospital choice. Generally, it ranges from ₹1.5 Lakhs to ₹3.5 Lakhs. Dr. Sayuj Krishnan offers transparent pricing and accepts major insurance plans and cashless facilities."
+    },
+    {
+      question: "How long is the recovery time for minimally invasive spine surgery?",
+      answer: "Most patients are discharged the same day or within 24 hours. Desk work can often be resumed in 1-2 weeks, while full physical activity may take 6-8 weeks. This is significantly faster than traditional open surgery which often requires months of recovery."
+    },
+    {
+      question: "Is endoscopic spine surgery safe?",
+      answer: "Yes, it is considered very safe with lower risks of infection, blood loss, and nerve damage compared to open surgery due to the tiny 6-8mm incisions. Dr. Krishnan has performed over 1,000 successful procedures with excellent outcomes."
+    },
+    {
+      question: "Will I need bed rest after surgery?",
+      answer: "Prolonged bed rest is rarely needed and actually discouraged. Patients are typically encouraged to walk within 3-4 hours of surgery to promote circulation and speed up recovery."
+    },
+    {
+      question: "Do you accept health insurance for spine surgery?",
+      answer: "Yes, we accept all major health insurance providers and TPA services. Our team assists with the pre-authorization process to ensure a smooth cashless admission experience."
+    }
+  ];
+
   return (
     <>
       <BreadcrumbSchema items={[
         { name: "Home", path: "/" },
         { name: "Spine Surgery", path: "/spine-surgery" }
       ]} />
+      <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/spine-surgery`} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(spineServiceJsonLd) }}
@@ -404,6 +429,30 @@ export default function SpineSurgeryPage() {
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="py-16">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
+              <div className="space-y-4">
+                {faqs.map((faq, index) => (
+                  <details key={index} className="group bg-white rounded-lg shadow-sm border border-gray-200">
+                    <summary className="flex justify-between items-center font-semibold cursor-pointer list-none p-6 text-lg text-gray-800 hover:text-blue-600 transition-colors">
+                      <span>{faq.question}</span>
+                      <span className="transition-transform group-open:rotate-180 text-blue-500">
+                        <svg fill="none" height="24" shapeRendering="geometricPrecision" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                      </span>
+                    </summary>
+                    <div className="text-gray-600 mt-0 px-6 pb-6">
+                      <p>{faq.answer}</p>
+                    </div>
+                  </details>
+                ))}
               </div>
             </div>
           </div>

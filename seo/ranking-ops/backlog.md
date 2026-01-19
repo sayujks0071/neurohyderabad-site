@@ -5,3 +5,5 @@
 - [ ] **Schema:** Audit FAQSchema on all service pages.
 - [ ] **Performance:** Check LCP on mobile for `spine-surgery` page.
 - [ ] **Structure:** Check for other orphan pages in `sitemap.ts` that might be duplicates.
+- [ ] **Content Gap:** Create a dedicated "Insurance & TPA" page to build trust.
+- [ ] **Structure:** Link `spine-surgery` page to more specific conditions like 'sciatica' and 'spinal-stenosis' deeply in the content.
