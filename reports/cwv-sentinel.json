@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-01-18T05:22:27Z",
+  "timestamp": "2026-01-18T06:00:00Z",
   "notes": {
     "home": {
       "url": "/",
@@ -20,7 +20,11 @@
     },
     "appointment": {
       "url": "/appointments",
-      "status": "Pending Analysis"
+      "status": "Optimization Applied",
+      "bottleneck": "LCP",
+      "findings": "Appointment page used a full-page client component (NeuraLinkBookingApp) which delayed LCP element (Hero H1) painting until hydration.",
+      "action": "Refactored NeuraLinkBookingApp to accept server-rendered hero content. Extracted H1 and static text to BookingHeroContent (Server Component) and passed as children.",
+      "verification": "Build passed. Static analysis confirms H1 is now in the server output of app/appointments/page.tsx."
     }
   }
 }
