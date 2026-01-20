@@ -66,12 +66,11 @@ export default function AppointmentsPage() {
                 <td className="py-2 px-4 border-b">
                    <button
                     onClick={() => sendWhatsapp(appointment)}
-                    // Using !important to override global button styles defined in globals.css
-                    className="flex items-center gap-2 !bg-[#25D366] !hover:bg-[#128C7E] text-white font-bold py-1 px-3 rounded text-sm transition-colors"
+                    className="flex items-center gap-2 !bg-[#25D366] hover:!bg-[#128C7E] text-white font-bold py-1 px-3 rounded text-sm transition-colors"
                     title="Confirm via WhatsApp"
                    >
                      <MessageCircle size={16} />
-                     <span>Confirm via WhatsApp</span>
+                     <span>WhatsApp</span>
                    </button>
                 </td>
               </tr>

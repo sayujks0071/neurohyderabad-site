@@ -1,6 +1,4 @@
-url,ttfb_ms,cache_control,content_encoding,server
-https://www.drsayuj.info,265.74,"public, max-age=0, must-revalidate",N/A,Vercel
-https://www.drsayuj.info/services/minimally-invasive-spine-surgery,148.05,"public, max-age=0, must-revalidate",N/A,Vercel
-https://www.drsayuj.info/conditions/brain-tumor-surgery-hyderabad,154.13,"public, max-age=0, must-revalidate",N/A,Vercel
-https://www.drsayuj.info/neurosurgeon-hyderabad,140.48,"public, max-age=0, must-revalidate",N/A,Vercel
-https://www.drsayuj.info/blog/meningioma-brain-tumor-treatment-hyderabad,192.0,"public, max-age=0, must-revalidate",N/A,Vercel
+url,ttfb,cache-control,content-encoding,server
+https://www.drsayuj.info,0.148771,"public, max-age=0, must-revalidate",,Vercel
+https://www.drsayuj.info/services/minimally-invasive-spine-surgery,0.151387,"public, max-age=0, must-revalidate",,Vercel
+https://www.drsayuj.info/blog/epilepsy-surgery-options-hyderabad,0.201225,"public, max-age=0, must-revalidate",,Vercel

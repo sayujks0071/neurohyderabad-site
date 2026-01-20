@@ -164,6 +164,10 @@ const ADVANCED_TECHNIQUES = [
     description: "Ideal for L5-S1 herniations and spinal stenosis. Accessed from the back through a tiny window, clearing thickened ligaments."
   },
   {
+    title: "Daycare Spine Surgery",
+    description: "Our specialized protocol allows 90% of patients to walk within 3 hours and go home the same day, minimizing hospital acquired infection risks."
+  },
+  {
     title: "Endoscopic Cervical Decompression",
     description: "Posterior approach for neck disc herniations, avoiding fusion and preserving neck mobility."
   },
@@ -357,6 +361,11 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
             Endoscopic surgery is recommended when nerve compression is localised and the spine remains stable. It allows precise
             removal of the offending disc or tissue without wider muscle detachment or bone removal.
           </p>
+          <div className="mb-6 bg-blue-50 p-4 rounded-lg">
+             <p className="text-sm text-blue-800">
+               <strong>Related Symptoms:</strong> If you are experiencing <Link href="/symptoms/back-pain" className="underline font-semibold hover:text-blue-900">severe back pain</Link> or shooting leg pain (<Link href="/conditions/sciatica-pain-treatment-hyderabad" className="underline font-semibold hover:text-blue-900">sciatica</Link>), this minimally invasive option might be right for you.
+             </p>
+          </div>
           <ul className="grid md:grid-cols-2 gap-4 text-sm text-gray-700">
             {conditions.map((condition) => (
               <li key={condition} className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">• {condition}</li>
