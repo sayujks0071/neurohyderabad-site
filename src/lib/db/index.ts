@@ -1,49 +1,47 @@
-import { Pool, QueryResult } from 'pg';
+import { neon } from '@neondatabase/serverless';
 
-// Use a singleton pattern for the pool
-let pool: Pool | undefined;
+// Type for the Neon SQL client
+type NeonClient = ReturnType<typeof neon>;
 
-function getPool(): Pool | null {
-  if (!pool) {
+// Lazy-initialize the SQL client
+let sql: NeonClient | null = null;
+
+function getSql(): NeonClient | null {
+  if (!sql) {
     const connectionString = process.env.POSTGRES_URL || process.env.DATABASE_URL;
     if (!connectionString) {
       console.warn('POSTGRES_URL/DATABASE_URL not set. Database operations will be skipped.');
       return null;
     }
-
-    pool = new Pool({
-      connectionString,
-      ssl: { rejectUnauthorized: false },
-      max: 10, // Max connections in pool
-      idleTimeoutMillis: 30000,
-      connectionTimeoutMillis: 10000,
-    });
-
-    // Handle pool errors
-    pool.on('error', (err) => {
-      console.error('Unexpected database pool error:', err);
-    });
+    sql = neon(connectionString);
   }
-  return pool;
+  return sql;
 }
 
 // Type-safe query result
 type QueryResultRow = Record<string, unknown>;
 
+// Mock result for when DB is not configured
+const EMPTY_RESULT = { rows: [], rowCount: 0 };
+
 export const db = {
   /**
    * Execute a SQL query with optional parameters
+   * Uses Neon serverless driver - optimized for edge/serverless
+   * Note: Uses sql.query() for parameterized queries (Neon v1.0+ API)
    */
   query: async <T extends QueryResultRow = QueryResultRow>(
     text: string,
     params?: unknown[]
-  ): Promise<QueryResult<T>> => {
-    const p = getPool();
-    if (!p) {
+  ): Promise<{ rows: T[]; rowCount: number }> => {
+    const client = getSql();
+    if (!client) {
       console.debug('Database not configured, skipping query:', text.substring(0, 100));
-      return { rows: [], rowCount: 0, command: '', oid: 0, fields: [] };
+      return EMPTY_RESULT as { rows: T[]; rowCount: number };
     }
-    return p.query<T>(text, params);
+    // Use sql.query() for parameterized queries (v1.0+ API)
+    const rows = await client.query(text, params ?? []) as T[];
+    return { rows, rowCount: rows.length };
   },
 
   /**
@@ -53,8 +51,13 @@ export const db = {
     text: string,
     params?: unknown[]
   ): Promise<T[]> => {
-    const result = await db.query<T>(text, params);
-    return result.rows;
+    const client = getSql();
+    if (!client) {
+      console.debug('Database not configured, skipping query');
+      return [];
+    }
+    // Use sql.query() for parameterized queries (v1.0+ API)
+    return client.query(text, params ?? []) as Promise<T[]>;
   },
 
   /**
@@ -64,8 +67,8 @@ export const db = {
     text: string,
     params?: unknown[]
   ): Promise<T | null> => {
-    const result = await db.query<T>(text, params);
-    return result.rows[0] ?? null;
+    const rows = await db.queryRows<T>(text, params);
+    return rows[0] ?? null;
   },
 
   /**
@@ -102,7 +105,7 @@ export const db = {
   },
 
   /**
-   * Check if database is configured and reachable
+   * Check if database is configured
    */
   isConfigured: (): boolean => {
     return !!(process.env.POSTGRES_URL || process.env.DATABASE_URL);
@@ -114,7 +117,7 @@ export const db = {
   healthCheck: async (): Promise<{ ok: boolean; latencyMs: number; error?: string }> => {
     const start = Date.now();
     try {
-      await db.query('SELECT 1');
+      await db.queryOne('SELECT 1 as check');
       return { ok: true, latencyMs: Date.now() - start };
     } catch (error) {
       return {
@@ -126,13 +129,10 @@ export const db = {
   },
 
   /**
-   * Close the pool (for cleanup)
+   * Reset connection (neon serverless handles this automatically)
    */
   close: async (): Promise<void> => {
-    if (pool) {
-      await pool.end();
-      pool = undefined;
-    }
+    sql = null;
   },
 };
 
