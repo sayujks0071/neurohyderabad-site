@@ -14,7 +14,7 @@ if (!neonAuthUrl && typeof window !== 'undefined') {
 }
 
 // Create Neon client instance
-export const neonClient = neonAuthUrl ? null;
+export const neonClient = null;
 
 // Auth helper functions
 export const auth = {
