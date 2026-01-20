@@ -6,7 +6,6 @@ import { ToastProvider, useToast } from "./ToastContext";
 import BookingForm from "./BookingForm";
 import Confirmation from "./Confirmation";
 import Faq from "./Faq";
-import LoadingOverlay from "./LoadingOverlay";
 import MapSection from "./MapSection";
 import { trackConversionOnly } from "@/src/lib/google-ads-conversion";
 
@@ -24,11 +23,9 @@ function AppointmentFormContent({
   const [view, setView] = useState<ViewState>("form");
   const [bookingData, setBookingData] = useState<BookingData | null>(null);
   const [confirmationMessage, setConfirmationMessage] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const { addToast } = useToast();
 
   const submitForm = async (data: BookingData) => {
-    setIsLoading(true);
     try {
       const response = await fetch(apiEndpoint, {
         method: "POST",
@@ -72,8 +69,6 @@ function AppointmentFormContent({
           : "Failed to book appointment. Please try again later.",
         "error"
       );
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -89,10 +84,6 @@ function AppointmentFormContent({
 
   return (
     <div className="relative">
-      <LoadingOverlay
-        isLoading={isLoading}
-        message="Sending..."
-      />
       {view === "form" && (
         <>
           <BookingForm onSubmit={submitForm} initialData={bookingData} />
