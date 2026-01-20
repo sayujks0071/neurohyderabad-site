@@ -13,9 +13,22 @@ const logDevelopmentSkip = (context: string) => {
 };
 
 // Email configuration
+const DEFAULT_ADMIN_EMAIL = 'hellodr@drsayuj.info';
 const FROM_EMAIL = process.env.RESEND_FROM?.trim() || 'Dr. Sayuj Krishnan <hellodr@drsayuj.info>';
-const TO_EMAIL = 'hellodr@drsayuj.info';
-const ADMIN_EMAIL = 'hellodr@drsayuj.info';
+const parseEmailList = (...values: Array<string | undefined>) =>
+  Array.from(
+    new Set(
+      values
+        .flatMap((value) => (value ? value.split(/[,\n;]/) : []))
+        .map((email) => email.trim())
+        .filter(Boolean)
+    )
+  );
+const ADMIN_EMAILS = parseEmailList(
+  process.env.ADMIN_EMAIL?.trim() || DEFAULT_ADMIN_EMAIL,
+  process.env.CRM_STAFF_EMAILS
+);
+const PRIMARY_ADMIN_EMAIL = ADMIN_EMAILS[0] || DEFAULT_ADMIN_EMAIL;
 
 // Email templates
 export const emailTemplates = {
@@ -299,7 +312,7 @@ export const sendContactFormEmail = async (data: {
     
     const result = await resend.emails.send({
       from: FROM_EMAIL,
-      to: [TO_EMAIL, ADMIN_EMAIL],
+      to: ADMIN_EMAILS,
       replyTo: data.email,
       subject: template.subject,
       html: template.html,
@@ -337,7 +350,7 @@ export const sendAppointmentRequestEmail = async (data: {
     // Send to admin
     const adminResult = await resend.emails.send({
       from: FROM_EMAIL,
-      to: [TO_EMAIL, ADMIN_EMAIL],
+      to: ADMIN_EMAILS,
       replyTo: data.email,
       subject: template.subject,
       html: template.html,
@@ -397,7 +410,7 @@ export const sendPreAppointmentBriefingEmail = async (data: {
     const result = await resend.emails.send({
       from: FROM_EMAIL,
       to: data.patientEmail,
-      bcc: ADMIN_EMAIL,
+      bcc: ADMIN_EMAILS,
       subject: template.subject,
       html: template.html,
     });
@@ -435,7 +448,7 @@ export const sendNewsletterSubscriptionEmail = async (data: {
     // Also notify admin (optional)
     await resend.emails.send({
       from: FROM_EMAIL,
-      to: ADMIN_EMAIL,
+      to: ADMIN_EMAILS,
       subject: `New Newsletter Subscription - ${data.email}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -464,7 +477,7 @@ export const sendTestEmail = async () => {
 
     const result = await resend.emails.send({
       from: FROM_EMAIL,
-      to: TO_EMAIL,
+      to: PRIMARY_ADMIN_EMAIL,
       subject: 'Test Email - Dr. Sayuj Krishnan Website',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">

@@ -1,5 +1,6 @@
 import { GoogleGenAI } from "@google/genai";
 import type { BookingData } from "@/packages/appointment-form/types";
+import { sanitizeForPrompt } from "@/src/lib/validation";
 
 const MODEL_NAME = "gemini-2.5-flash";
 
@@ -43,16 +44,16 @@ export async function generateBookingConfirmation(
   try {
     const ai = new GoogleGenAI({ apiKey });
 
-    // 🛡️ Sentinel: Sanitize inputs before injecting into prompt
+    // 🛡️ Sentinel: Sanitize inputs to prevent prompt injection
     const userPrompt = [
       "Generate a confirmation message for the following appointment request:",
       "",
-      `Patient Name: ${sanitizeForPrompt(data.patientName)}`,
-      `Age: ${sanitizeForPrompt(data.age)}`,
-      `Gender: ${sanitizeForPrompt(data.gender)}`,
-      `Requested Date: ${sanitizeForPrompt(data.appointmentDate)}`,
-      `Requested Time: ${sanitizeForPrompt(data.appointmentTime)}`,
-      `Reason: ${sanitizeForPrompt(data.reason)}`,
+      `Patient Name: ${sanitizeForPrompt(data.patientName, 100)}`,
+      `Age: ${sanitizeForPrompt(data.age, 10)}`,
+      `Gender: ${sanitizeForPrompt(data.gender, 20)}`,
+      `Requested Date: ${sanitizeForPrompt(data.appointmentDate, 20)}`,
+      `Requested Time: ${sanitizeForPrompt(data.appointmentTime, 20)}`,
+      `Reason: ${sanitizeForPrompt(data.reason, 1000)}`,
     ].join("\n");
 
     const response = await ai.models.generateContent({
