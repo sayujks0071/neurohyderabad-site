@@ -1,8 +1,37 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import ExpandedFAQ from "../../src/components/ExpandedFAQ";
 import { SITE_URL } from "../../src/lib/seo";
 import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
 import { serviceJsonLd } from "../../src/lib/seo";
+
+const SPINE_SURGERY_FAQS = [
+  {
+    question: "Is endoscopic spine surgery safe for elderly patients?",
+    answer: "Yes, because it uses local anesthesia and smaller incisions, it lowers risks like blood loss and infection, making it safer for elderly patients with other health conditions.",
+    category: "Safety"
+  },
+  {
+    question: "How soon can I walk after endoscopic spine surgery?",
+    answer: "Most patients walk within 3-4 hours after surgery. We encourage early mobilization to speed up recovery and prevent clots.",
+    category: "Recovery"
+  },
+  {
+    question: "Does insurance cover endoscopic spine surgery in Hyderabad?",
+    answer: "Yes, most major insurance providers and TPA approvals cover endoscopic spine procedures at Yashoda Hospitals. We assist with the pre-authorization process.",
+    category: "Cost & Insurance"
+  },
+  {
+    question: "What is the success rate of endoscopic discectomy?",
+    answer: "The success rate is over 90% for properly selected patients, with a recurrence rate of less than 5%, comparable to or better than traditional open surgery.",
+    category: "Outcomes"
+  },
+  {
+    question: "Will I need general anesthesia?",
+    answer: "Many endoscopic procedures can be done under local anesthesia with conscious sedation, meaning you are awake but comfortable. This avoids the risks of general anesthesia.",
+    category: "Procedure"
+  }
+];
 
 export const metadata: Metadata = {
   title: "Endoscopic Spine Surgery in Hyderabad | Minimally Invasive Procedures – Dr. Sayuj Krishnan",
@@ -408,6 +437,8 @@ export default function SpineSurgeryPage() {
             </div>
           </div>
         </section>
+
+        <ExpandedFAQ faqs={SPINE_SURGERY_FAQS} className="bg-white" />
 
         {/* Call to Action */}
         <section className="py-16 bg-blue-600 text-white">
