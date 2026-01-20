@@ -1,9 +1,18 @@
 import { Resend } from 'resend';
 
-// Initialize Resend with API key (with fallback for development)
-const resend = new Resend(process.env.RESEND_API_KEY || 're_development_key');
+const resendApiKey = process.env.RESEND_API_KEY?.trim();
+const resend = resendApiKey ? new Resend(resendApiKey) : null;
 const DEFAULT_FROM_EMAIL = 'Dr. Sayuj Krishnan <hellodr@drsayuj.info>';
 const RESEND_FROM = process.env.RESEND_FROM?.trim();
+
+const requireResendConfig = (context: string) => {
+  if (!resend) {
+    const error = `RESEND_API_KEY is not configured; ${context} email not sent.`;
+    console.error(error);
+    return { success: false, error, configurationMissing: true };
+  }
+  return null;
+};
 
 export interface EmailTemplate {
   to: string;
@@ -48,13 +57,12 @@ export class EmailService {
     };
 
     try {
-      // Check if we have a valid API key
-      if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === 're_development_key') {
-        console.log('Development mode: Calendar invite email not sent (no API key)');
-        return { success: true, messageId: 'dev_mode', development: true };
+      const configError = requireResendConfig('calendar invite');
+      if (configError) {
+        return configError;
       }
 
-      const result = await resend.emails.send(emailData);
+      const result = await resend!.emails.send(emailData);
       console.log('Calendar invite email sent successfully:', result);
       return { success: true, messageId: result.data?.id };
     } catch (error) {
@@ -140,13 +148,12 @@ Location: Yashoda Hospital, Malakpet, Hyderabad
     };
 
     try {
-      // Check if we have a valid API key
-      if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === 're_development_key') {
-        console.log('Development mode: Email not sent (no API key)');
-        return { success: true, messageId: 'dev_mode', development: true };
+      const configError = requireResendConfig('welcome');
+      if (configError) {
+        return configError;
       }
-      
-      const result = await resend.emails.send(emailData);
+
+      const result = await resend!.emails.send(emailData);
       console.log('Welcome email sent successfully:', result);
       return { success: true, messageId: result.data?.id };
     } catch (error) {
@@ -212,12 +219,12 @@ If you have any questions, reply to this email or call +91-9778280044.
     };
 
     try {
-      if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === 're_development_key') {
-        console.log('Development mode: Follow-up email not sent (no API key)');
-        return { success: true, messageId: 'dev_mode', development: true };
+      const configError = requireResendConfig('follow-up');
+      if (configError) {
+        return configError;
       }
 
-      const result = await resend.emails.send(emailData);
+      const result = await resend!.emails.send(emailData);
       console.log('Follow-up email sent successfully:', result);
       return { success: true, messageId: result.data?.id };
     } catch (error) {
@@ -289,12 +296,12 @@ For questions, reply to this email or call +91-9778280044.
     };
 
     try {
-      if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === 're_development_key') {
-        console.log('Development mode: Appointment summary not sent (no API key)');
-        return { success: true, messageId: 'dev_mode', development: true };
+      const configError = requireResendConfig('appointment summary');
+      if (configError) {
+        return configError;
       }
 
-      const result = await resend.emails.send(emailData);
+      const result = await resend!.emails.send(emailData);
       console.log('Appointment summary sent successfully:', result);
       return { success: true, messageId: result.data?.id };
     } catch (error) {
@@ -315,6 +322,8 @@ For questions, reply to this email or call +91-9778280044.
     source?: string;
     email?: string;
     phone?: string;
+    painScore?: number;
+    mriScanAvailable?: boolean;
   }) {
     const adminEmail =
       process.env.APPOINTMENT_ADMIN_EMAIL ||
@@ -333,7 +342,7 @@ Gender: ${data.gender}
 Preferred Date: ${data.appointmentDate}
 Preferred Time: ${data.appointmentTime}
 Reason: ${data.reason}
-${data.email ? `Email: ${data.email}\n` : ""}${data.phone ? `Phone: ${data.phone}\n` : ""}${data.source ? `Source: ${data.source}\n` : ""}`,
+${data.painScore ? `Pain Score: ${data.painScore}/10\n` : ""}${data.mriScanAvailable !== undefined ? `MRI Scan Available: ${data.mriScanAvailable ? "Yes" : "No"}\n` : ""}${data.email ? `Email: ${data.email}\n` : ""}${data.phone ? `Phone: ${data.phone}\n` : ""}${data.source ? `Source: ${data.source}\n` : ""}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <div style="background: #1e40af; color: white; padding: 24px; text-align: center;">
@@ -348,6 +357,8 @@ ${data.email ? `Email: ${data.email}\n` : ""}${data.phone ? `Phone: ${data.phone
             <p><strong>Preferred Date:</strong> ${data.appointmentDate}</p>
             <p><strong>Preferred Time:</strong> ${data.appointmentTime}</p>
             <p><strong>Reason:</strong> ${data.reason}</p>
+            ${data.painScore ? `<p><strong>Pain Score:</strong> ${data.painScore}/10</p>` : ""}
+            ${data.mriScanAvailable !== undefined ? `<p><strong>MRI Scan Available:</strong> ${data.mriScanAvailable ? "Yes" : "No"}</p>` : ""}
             ${data.email ? `<p><strong>Email:</strong> ${data.email}</p>` : ""}
             ${data.phone ? `<p><strong>Phone:</strong> ${data.phone}</p>` : ""}
             ${data.source ? `<p><strong>Source:</strong> ${data.source}</p>` : ""}
@@ -357,12 +368,12 @@ ${data.email ? `Email: ${data.email}\n` : ""}${data.phone ? `Phone: ${data.phone
     };
 
     try {
-      if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === "re_development_key") {
-        console.log("Development mode: Appointment admin alert not sent (no API key)");
-        return { success: true, messageId: "dev_mode", development: true };
+      const configError = requireResendConfig('appointment request alert');
+      if (configError) {
+        return configError;
       }
 
-      const result = await resend.emails.send(emailData);
+      const result = await resend!.emails.send(emailData);
       console.log("Appointment admin alert sent successfully:", result);
       return { success: true, messageId: result.data?.id };
     } catch (error) {
@@ -483,12 +494,12 @@ If you have questions, reply to this email or call +91-9778280044.
     };
 
     try {
-      if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === 're_development_key') {
-        console.log('Development mode: Education materials not sent (no API key)');
-        return { success: true, messageId: 'dev_mode', development: true };
+      const configError = requireResendConfig('education materials');
+      if (configError) {
+        return configError;
       }
 
-      const result = await resend.emails.send(emailData);
+      const result = await resend!.emails.send(emailData);
       console.log('Education materials sent successfully:', result);
       return { success: true, messageId: result.data?.id };
     } catch (error) {
@@ -600,17 +611,86 @@ Emergency Contact: +91-9778280044
     };
 
     try {
-      // Check if we have a valid API key
-      if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === 're_development_key') {
-        console.log('Development mode: Appointment confirmation not sent (no API key)');
-        return { success: true, messageId: 'dev_mode', development: true };
+      const configError = requireResendConfig('appointment confirmation');
+      if (configError) {
+        return configError;
       }
-      
-      const result = await resend.emails.send(emailData);
+
+      const result = await resend!.emails.send(emailData);
       console.log('Appointment confirmation sent successfully:', result);
       return { success: true, messageId: result.data?.id };
     } catch (error) {
       console.error('Failed to send appointment confirmation:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      return { success: false, error: errorMessage };
+    }
+  }
+
+  // Send appointment request confirmation (intake acknowledgment)
+  static async sendAppointmentRequestConfirmation(
+    patientEmail: string,
+    patientName: string,
+    appointmentDate: string,
+    appointmentTime: string,
+    confirmationMessage: string,
+    reason?: string
+  ) {
+    const messageLines = confirmationMessage
+      .split("\n")
+      .map((line) => line.trim())
+      .filter(Boolean);
+
+    const appointmentDetails = [
+      `Date: ${appointmentDate}`,
+      `Time: ${appointmentTime}`,
+      reason ? `Reason: ${reason}` : undefined,
+    ].filter(Boolean);
+
+    const emailData: EmailTemplate = {
+      to: patientEmail,
+      from: this.fromEmail,
+      subject: "Appointment Request Received - Dr. Sayuj Krishnan",
+      text: `${confirmationMessage}
+
+Appointment Details:
+${appointmentDetails.join("\n")}
+
+If you need to update your request, call +91-9778280044 or reply to this email.`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <div style="background: #2563eb; color: white; padding: 24px; text-align: center;">
+            <h1 style="margin: 0; font-size: 24px;">Appointment Request Received</h1>
+            <p style="margin: 8px 0 0 0; font-size: 14px;">Dr. Sayuj Krishnan - Neurosurgeon</p>
+          </div>
+          <div style="padding: 24px; background: #f8fafc;">
+            <p>Hi ${patientName},</p>
+            ${messageLines.map((line) => `<p>${line}</p>`).join("")}
+            <div style="background: white; padding: 16px; border-radius: 8px; margin: 16px 0; border: 1px solid #e5e7eb;">
+              <h3 style="margin: 0 0 8px 0; color: #1e40af;">Appointment Details</h3>
+              <ul style="margin: 0; padding-left: 18px; color: #374151;">
+                ${appointmentDetails.map((detail) => `<li>${detail}</li>`).join("")}
+              </ul>
+            </div>
+            <p>If you need to update your request, call +91-9778280044 or reply to this email.</p>
+          </div>
+          <div style="background: #1f2937; color: white; padding: 16px; text-align: center;">
+            <p style="margin: 0; font-size: 12px;">© 2025 Dr. Sayuj Krishnan. All rights reserved.</p>
+          </div>
+        </div>
+      `
+    };
+
+    try {
+      const configError = requireResendConfig('appointment request confirmation');
+      if (configError) {
+        return configError;
+      }
+
+      const result = await resend!.emails.send(emailData);
+      console.log('Appointment request confirmation sent successfully:', result);
+      return { success: true, messageId: result.data?.id };
+    } catch (error) {
+      console.error('Failed to send appointment request confirmation:', error);
       const errorMessage = error instanceof Error ? error.message : 'Unknown error';
       return { success: false, error: errorMessage };
     }
@@ -709,17 +789,73 @@ Emergency Contact: +91-9778280044
     };
 
     try {
-      // Check if we have a valid API key
-      if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === 're_development_key') {
-        console.log('Development mode: Appointment reminder not sent (no API key)');
-        return { success: true, messageId: 'dev_mode', development: true };
+      const configError = requireResendConfig('appointment reminder');
+      if (configError) {
+        return configError;
       }
-      
-      const result = await resend.emails.send(emailData);
+
+      const result = await resend!.emails.send(emailData);
       console.log('Appointment reminder sent successfully:', result);
       return { success: true, messageId: result.data?.id };
     } catch (error) {
       console.error('Failed to send appointment reminder:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      return { success: false, error: errorMessage };
+    }
+  }
+
+  // Send health or care reminder
+  static async sendHealthReminder(
+    patientEmail: string,
+    patientName: string,
+    reminderType: string,
+    subject: string,
+    content: string,
+    condition?: string
+  ) {
+    const reminderLabel = reminderType ? reminderType.replace(/-/g, " ") : "health reminder";
+
+    const emailData: EmailTemplate = {
+      to: patientEmail,
+      from: this.fromEmail,
+      subject,
+      text: `${subject}
+
+Dear ${patientName},
+
+${content}
+
+${condition ? `Condition: ${condition}\n` : ""}If you have questions, reply to this email or call +91-9778280044.`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <div style="background: #0ea5e9; color: white; padding: 24px; text-align: center;">
+            <h1 style="margin: 0; font-size: 24px;">${reminderLabel.toUpperCase()}</h1>
+            <p style="margin: 8px 0 0 0; font-size: 14px;">Dr. Sayuj Krishnan - Neurosurgeon</p>
+          </div>
+          <div style="padding: 24px; background: #f8fafc;">
+            <p>Dear ${patientName},</p>
+            <p>${content}</p>
+            ${condition ? `<p><strong>Condition:</strong> ${condition}</p>` : ""}
+            <p>If you have questions, reply to this email or call +91-9778280044.</p>
+          </div>
+          <div style="background: #1f2937; color: white; padding: 16px; text-align: center;">
+            <p style="margin: 0; font-size: 12px;">© 2025 Dr. Sayuj Krishnan. All rights reserved.</p>
+          </div>
+        </div>
+      `
+    };
+
+    try {
+      const configError = requireResendConfig('health reminder');
+      if (configError) {
+        return configError;
+      }
+
+      const result = await resend!.emails.send(emailData);
+      console.log('Health reminder sent successfully:', result);
+      return { success: true, messageId: result.data?.id };
+    } catch (error) {
+      console.error('Failed to send health reminder:', error);
       const errorMessage = error instanceof Error ? error.message : 'Unknown error';
       return { success: false, error: errorMessage };
     }
@@ -788,13 +924,12 @@ Emergency Contact: +91-9778280044`,
     };
 
     try {
-      // Check if we have a valid API key
-      if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === 're_development_key') {
-        console.log('Development mode: Emergency notification not sent (no API key)');
-        return { success: true, messageId: 'dev_mode', development: true };
+      const configError = requireResendConfig('emergency notification');
+      if (configError) {
+        return configError;
       }
-      
-      const result = await resend.emails.send(emailData);
+
+      const result = await resend!.emails.send(emailData);
       console.log('Emergency notification sent successfully:', result);
       return { success: true, messageId: result.data?.id };
     } catch (error) {
@@ -894,13 +1029,12 @@ Email: hellodr@drsayuj.info
     };
 
     try {
-      // Check if we have a valid API key
-      if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === 're_development_key') {
-        console.log('Development mode: Feedback request not sent (no API key)');
-        return { success: true, messageId: 'dev_mode', development: true };
+      const configError = requireResendConfig('feedback request');
+      if (configError) {
+        return configError;
       }
 
-      const result = await resend.emails.send(emailData);
+      const result = await resend!.emails.send(emailData);
       console.log('Feedback request sent successfully:', result);
       return { success: true, messageId: result.data?.id };
     } catch (error) {

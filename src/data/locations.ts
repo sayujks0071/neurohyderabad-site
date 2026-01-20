@@ -21,7 +21,7 @@ export interface LocationData {
   whatsapp?: string;
   directions_url: string;
   google_maps_place_url: string; // Canonical Google Maps URL
-  embed_url: string;
+  embed_url: string; // Shared embed URL for Yashoda Malakpet as all locations are served from here
   geo?: LocationGeo;
   areaServedName: string; // e.g. "Secunderabad"
   // For LocalPathways
@@ -58,7 +58,8 @@ export const SOCIAL_PROFILES = [
   "https://www.instagram.com/drsayujneurohyd",
   "https://www.linkedin.com/in/drsayujkrishnan",
   "https://www.youtube.com/@drsayujneurohyd",
-  "https://twitter.com/drsayuj"
+  "https://twitter.com/drsayuj",
+  "https://www.google.com/maps?cid=14503792272825406246"
 ];
 
 const DEFAULT_SERVICES = [
@@ -75,6 +76,7 @@ const DEFAULT_CONDITIONS = [
   "trigeminal-neuralgia-treatment-hyderabad"
 ];
 
+// Single Source of Truth for Location Data
 export const locations: LocationData[] = [
   {
     id: "secunderabad",

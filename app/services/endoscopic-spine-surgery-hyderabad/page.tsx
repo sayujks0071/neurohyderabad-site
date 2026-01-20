@@ -74,13 +74,6 @@ const schema = buildLocalServiceSchema({
 
 const ARTICLE_SOURCES = getServiceSources(SERVICE_SLUG);
 
-const conditions = [
-  'Lumbar disc herniation causing sciatica or leg weakness',
-  'Foraminal stenosis with nerve compression',
-  'Cervical disc prolapse with arm pain or numbness',
-  'Synovial cysts and focal nerve root compression',
-];
-
 const faqs = [
   {
     question: 'How is this different from other minimally invasive spine surgeries?',
@@ -162,6 +155,10 @@ const ADVANCED_TECHNIQUES = [
   {
     title: "Interlaminar Endoscopy (ILESS)",
     description: "Ideal for L5-S1 herniations and spinal stenosis. Accessed from the back through a tiny window, clearing thickened ligaments."
+  },
+  {
+    title: "Daycare Spine Surgery",
+    description: "Our specialized protocol allows 90% of patients to walk within 3 hours and go home the same day, minimizing hospital acquired infection risks."
   },
   {
     title: "Endoscopic Cervical Decompression",
@@ -352,11 +349,15 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
         </section>
 
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-blue-900 mb-6">Conditions Treated with Endoscopic Surgery</h2>
-          <p className="text-gray-700 mb-4">
-            Endoscopic surgery is recommended when nerve compression is localised and the spine remains stable. It allows precise
-            removal of the offending disc or tissue without wider muscle detachment or bone removal.
+          <h2 className="text-3xl font-bold text-blue-900 mb-6">Am I a Candidate for Endoscopic Spine Surgery?</h2>
+          <p className="text-gray-700 mb-8">
+            Endoscopic spine surgery is a targeted "keyhole" solution. It is most effective when the main problem is <strong>nerve compression</strong> (pinched nerve) rather than generalized back ache or spinal instability. Dr. Sayuj evaluates every patient individually, but generally:
           </p>
+          <div className="mb-6 bg-blue-50 p-4 rounded-lg">
+             <p className="text-sm text-blue-800">
+               <strong>Related Symptoms:</strong> If you are experiencing <Link href="/symptoms/back-pain" className="underline font-semibold hover:text-blue-900">severe back pain</Link> or shooting leg pain (<Link href="/conditions/sciatica-pain-treatment-hyderabad" className="underline font-semibold hover:text-blue-900">sciatica</Link>), this minimally invasive option might be right for you.
+             </p>
+          </div>
           <ul className="grid md:grid-cols-2 gap-4 text-sm text-gray-700">
             {conditions.map((condition) => (
               <li key={condition} className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">• {condition}</li>

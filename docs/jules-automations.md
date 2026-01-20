@@ -35,6 +35,18 @@ To pause a specific automation:
 2. Select the workflow from the sidebar.
 3. Click the **...** menu and select **Disable workflow**.
 
+## Configuration
+
+The prompt file path and the base title for the issue are configurable via the environment variables defined in each workflow file (e.g., `.github/workflows/jules-seo-reprint.yml`).
+
+```yaml
+env:
+  PROMPT_FILE: jules-prompts/seo-reprint.md
+  ISSUE_TITLE: "[Jules] SEO Reprint Task"
+```
+
+To change the schedule, you must edit the cron expression in the `on.schedule` section of the workflow YAML file.
+
 ## Troubleshooting
 
 - **Issue not created:** Check the Action logs. Common reasons include GitHub API rate limits or the issue already existing.

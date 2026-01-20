@@ -1,20 +1,6 @@
 url,issue_type,severity,recommended_fix
-https://www.drsayuj.info/brain-tumor-surgery,Status 308,High,Fix error
-https://www.drsayuj.info/brain-tumor-surgery,Missing Canonical,High,Add canonical tag
-https://www.drsayuj.info/specializations,Status 308,High,Fix error
-https://www.drsayuj.info/specializations,Missing Canonical,High,Add canonical tag
-https://www.drsayuj.info/conditions/sciatica-treatment-hyderabad,Status 404,High,Fix error
-https://www.drsayuj.info/conditions/sciatica-treatment-hyderabad,Missing Canonical,High,Add canonical tag
-https://www.drsayuj.info/neurosurgeon-jubilee-hills,Status None,High,Fix error
-https://www.drsayuj.info/neurosurgeon-jubilee-hills,Missing Canonical,High,Add canonical tag
-https://www.drsayuj.info/neurosurgeon-banjara-hills,Status None,High,Fix error
-https://www.drsayuj.info/neurosurgeon-banjara-hills,Missing Canonical,High,Add canonical tag
-https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills,Status 307,High,Fix error
-https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills,Missing Canonical,High,Add canonical tag
-https://www.drsayuj.info/knowledge-base,Missing Canonical,High,Add canonical tag
-https://www.drsayuj.info/disease-guides,Status 308,High,Fix error
-https://www.drsayuj.info/disease-guides,Missing Canonical,High,Add canonical tag
-https://www.drsayuj.info/emergency-rehabilitation,Status None,High,Fix error
-https://www.drsayuj.info/emergency-rehabilitation,Missing Canonical,High,Add canonical tag
-https://www.drsayuj.info/disease-guides/degenerative-disc-disease,Status 308,High,Fix error
-https://www.drsayuj.info/disease-guides/degenerative-disc-disease,Missing Canonical,High,Add canonical tag
+https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills,Sitemap contains redirect (307),Medium,Update sitemap to point to final destination
+https://www.drsayuj.info/locations/malakpet,Non-canonical in sitemap,Low,Remove from sitemap (points to neurosurgeon-malakpet)
+https://www.drsayuj.info/locations/banjara-hills,Non-canonical in sitemap,Low,Remove from sitemap (points to neurosurgeon-banjara-hills)
+https://www.drsayuj.info/locations/hitech-city,Non-canonical in sitemap,Low,Remove from sitemap (points to neurosurgeon-hitech-city)
+https://www.drsayuj.info/locations/secunderabad,Non-canonical in sitemap,Low,Remove from sitemap (points to neurosurgeon-secunderabad)
