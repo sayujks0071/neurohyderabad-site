@@ -112,6 +112,11 @@ function generateBlogSchema(post: BlogPost) {
       name: 'Dr. Sayuj Krishnan',
       url: `${SITE_URL}/about/`,
     },
+    reviewedBy: {
+      '@type': 'Physician',
+      name: post.lastReviewedBy || 'Dr. Sayuj Krishnan',
+      url: `${SITE_URL}/about/`,
+    },
     datePublished: post.publishedAt,
     dateModified: post.updatedAt || post.publishedAt,
     mainEntityOfPage: {

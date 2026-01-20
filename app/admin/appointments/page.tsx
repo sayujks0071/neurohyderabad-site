@@ -12,6 +12,8 @@ export default function AppointmentsPage() {
   const appointments = mockAppointments;
 
   const sendWhatsapp = (appointment: Appointment) => {
+    // Logic uses generateWhatsappUrl which implements the required message template and sanitization:
+    // "Hello {name}, this is regarding your appointment with Dr. Sayuj on {date}. We confirm your slot. Please bring your MRI/CT scans."
     if (!appointment.phone) {
         alert("No phone number available for this patient.");
         return;
@@ -64,11 +66,11 @@ export default function AppointmentsPage() {
                 <td className="py-2 px-4 border-b">
                    <button
                     onClick={() => sendWhatsapp(appointment)}
-                    className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-3 rounded text-sm transition-colors"
+                    className="flex items-center gap-2 !bg-[#25D366] hover:!bg-[#128C7E] text-white font-bold py-1 px-3 rounded text-sm transition-colors"
                     title="Confirm via WhatsApp"
                    >
                      <MessageCircle size={16} />
-                     <span>Confirm</span>
+                     <span>WhatsApp</span>
                    </button>
                 </td>
               </tr>

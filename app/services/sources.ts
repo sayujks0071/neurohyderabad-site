@@ -192,14 +192,14 @@ const SERVICE_SOURCES: Record<string, ServiceSource[]> = {
       "href": "https://www.e-neurospine.org/journal/view.php?number=2223",
     },
   ],
-  "microdiscectomy-surgery-cost-hyderabad": [
+  "robotic-spine-surgery-hyderabad": [
     {
-      label: "Spine Universe – Microdiscectomy Cost and Recovery",
-      href: "https://www.spineuniverse.com/treatments/surgery/microdiscectomy-recovery",
+      "label": "Journal of Robotic Surgery – Accuracy of Robotic Spine Surgery",
+      "href": "https://link.springer.com/journal/11701",
     },
     {
-      label: "American Association of Neurological Surgeons – Lumbar Discectomy",
-      href: "https://www.aans.org/en/Patients/Neurosurgical-Conditions-and-Treatments/Lumbar-Disc-Herniation",
+      "label": "Spine Journal – Robotic vs Navigation for Pedicle Screws",
+      "href": "https://www.thespinejournalonline.com/",
     },
   ],
 };

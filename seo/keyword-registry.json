@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-18",
+  "last_updated": "2026-01-20",
   "keywords": [
     {
       "term": "neurosurgeon hyderabad",
@@ -254,64 +254,46 @@
       "target_page": "/locations/neurosurgeon-gachibowli"
     },
     {
-      "term": "microdiscectomy surgery cost hyderabad",
+      "term": "micro lumbar disc surgery hyderabad",
       "difficulty": "Med",
       "volume": "Med",
-      "target_page": "/services/microdiscectomy-surgery-cost-hyderabad"
+      "target_page": "/services/endoscopic-discectomy-hyderabad"
     },
     {
-      "term": "l4-l5 disc surgery recovery time",
-      "difficulty": "Low",
-      "volume": "Med",
-      "target_page": "/blog/microdiscectomy-vs-laminectomy-recovery-comparison"
-    },
-    {
-      "term": "best neurosurgeon for microdiscectomy hyderabad",
-      "difficulty": "High",
+      "term": "disc bulge treatment hyderabad",
+      "difficulty": "Med",
       "volume": "High",
-      "target_page": "/"
+      "target_page": "/conditions/slip-disc-treatment-hyderabad"
     },
     {
-      "term": "lumbar microdiscectomy procedure steps",
-      "difficulty": "Med",
+      "term": "spinal tumor excision hyderabad",
+      "difficulty": "High",
       "volume": "Low",
-      "target_page": "/services/lumbar-microdiscectomy-surgery-hyderabad"
+      "target_page": "/conditions/spine-tumor-surgery-hyderabad"
     },
     {
-      "term": "neurosurgeon in Jubilee hills",
-      "difficulty": "Low",
-      "volume": "Med",
-      "target_page": "/locations/neurosurgeon-jubilee-hills"
-    },
-    {
-      "term": "neurosurgeon in hitech city",
-      "difficulty": "Low",
-      "volume": "Med",
-      "target_page": "/locations/neurosurgeon-hitech-city"
-    },
-    {
-      "term": "signs of failed back surgery syndrome",
+      "term": "spinal tumor surgery cost in hyderabad",
       "difficulty": "High",
       "volume": "Med",
-      "target_page": "/conditions/failed-back-surgery-syndrome-hyderabad"
+      "target_page": "/conditions/spine-tumor-surgery-hyderabad"
     },
     {
-      "term": "lumbar fusion vs microdiscectomy",
+      "term": "types of spine tumors",
       "difficulty": "Med",
-      "volume": "Med",
-      "target_page": "/services/spinal-fusion-surgery-hyderabad"
+      "volume": "High",
+      "target_page": "/blog/types-of-spine-tumors-symptoms-guide"
     },
     {
-      "term": "cost of brain tumor surgery in hyderabad",
-      "difficulty": "Med",
-      "volume": "Low",
-      "target_page": "/services/brain-tumor-surgery-cost-hyderabad"
-    },
-    {
-      "term": "endoscopic spine surgery success rate",
+      "term": "cervical spondylotic myelopathy treatment hyderabad",
       "difficulty": "High",
-      "volume": "Med",
-      "target_page": "/services/minimally-invasive-spine-surgery"
+      "volume": "Low",
+      "target_page": "/conditions/cervical-myelopathy-decompression-hyderabad"
+    },
+    {
+      "term": "endoscopic spine surgery cost hyderabad",
+      "difficulty": "Med",
+      "volume": "High",
+      "target_page": "/services/spine-surgery-cost-hyderabad"
     }
   ]
 }

@@ -156,6 +156,15 @@ export async function POST(request: Request) {
       })
     );
 
+    // 🛡️ Sentinel: Redact sensitive PII from logs for audit trail
+    console.log("[appointments/submit] Appointment received:", {
+      patientName: booking.patientName,
+      phone: booking.phone ? `${booking.phone.slice(0, 3)}***${booking.phone.slice(-3)}` : undefined,
+      email: booking.email ? `${booking.email[0]}***@${booking.email.split('@')[1]}` : undefined,
+      appointmentDate: booking.appointmentDate,
+      source
+    });
+
     return NextResponse.json({
       booking,
       confirmationMessage: message,

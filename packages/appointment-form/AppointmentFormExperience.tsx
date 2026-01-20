@@ -46,7 +46,11 @@ function AppointmentFormContent({
 
       const payload = await response.json();
       setBookingData(payload.booking);
-      setConfirmationMessage(payload.confirmationMessage);
+      // Use the specific reassuring message requested by the user
+      setConfirmationMessage(
+        "Appointment request received. Please bring any MRI/CT scans with you. We will confirm via phone shortly."
+      );
+      setView("confirmation");
 
       // Track Google Ads conversion for successful appointment booking
       trackConversionOnly();
@@ -60,9 +64,6 @@ function AppointmentFormContent({
       if (payload.usedAI) {
         addToast("AI generated a personalised confirmation.", "info");
       }
-
-      // Redirect to thank you page after successful submission
-      window.location.href = "/appointments/thank-you";
     } catch (error) {
       console.error("[appointments] Failed to submit booking:", error);
       addToast(
