@@ -1,12 +1,13 @@
 import { Appointment } from './data';
 
 // Message template for WhatsApp confirmation
+// Requirement: Dynamic Message: 'Hello {patientName}, this is regarding your appointment with Dr. Sayuj on {requestedDate}. We confirm your slot. Please bring your MRI/CT scans.'
 export const WHATSAPP_MESSAGE_TEMPLATE = (name: string, date: string) =>
   `Hello ${name}, this is regarding your appointment with Dr. Sayuj on ${date}. We confirm your slot. Please bring your MRI/CT scans.`;
 
 export const generateWhatsappUrl = (patient: Appointment): string => {
-  // Sanitize phone number: remove all non-digit characters (spaces, dashes, parens, etc.)
-  // This ensures we have a clean string of numbers to work with.
+  // Requirement: Sanitize phone number (remove spaces or dashes) before inserting it into the link.
+  // Format: https://wa.me/91{contactNumber}?text={message}
   let cleanNumber = patient.phone.replace(/\D/g, '');
 
   // Normalize Indian numbers: if the user entered 91XXXXXXXXXX (12 digits), we strip the '91' prefix.

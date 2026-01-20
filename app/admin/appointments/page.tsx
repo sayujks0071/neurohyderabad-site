@@ -1,6 +1,6 @@
 'use client';
 
-import { MessageCircle } from 'lucide-react';
+import { WhatsAppIcon } from '@/src/components/WhatsAppIcon';
 import { generateWhatsappUrl } from './utils';
 import { mockAppointments, type Appointment } from './data';
 
@@ -69,7 +69,7 @@ export default function AppointmentsPage() {
                     className="flex items-center gap-2 !bg-[#25D366] hover:!bg-[#128C7E] text-white font-bold py-1 px-3 rounded text-sm transition-colors"
                     title="Confirm via WhatsApp"
                    >
-                     <MessageCircle size={16} />
+                     <WhatsAppIcon size={16} />
                      <span>WhatsApp</span>
                    </button>
                 </td>
