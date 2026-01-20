@@ -34,9 +34,9 @@ export const appointmentReminder = inngest.createFunction(
 
       return {
         success: result.success,
-        messageId: result.messageId,
-        error: result.error,
-        development: result.development
+        messageId: 'messageId' in result ? result.messageId : undefined,
+        error: 'error' in result ? result.error : undefined,
+        development: 'development' in result ? result.development : undefined
       };
     });
 
@@ -90,9 +90,9 @@ export const appointmentCreated = inngest.createFunction(
       );
       return {
         confirmationSent: result.success,
-        messageId: result.messageId,
-        error: result.error,
-        development: result.development
+        messageId: 'messageId' in result ? result.messageId : undefined,
+        error: 'error' in result ? result.error : undefined,
+        development: 'development' in result ? result.development : undefined
       };
     });
 

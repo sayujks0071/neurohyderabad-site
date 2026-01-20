@@ -77,9 +77,9 @@ export const patientEducationDelivery = inngest.createFunction(
       );
       return {
         educationSent: result.success,
-        messageId: result.messageId,
-        error: result.error,
-        development: result.development
+        messageId: 'messageId' in result ? result.messageId : undefined,
+        error: 'error' in result ? result.error : undefined,
+        development: 'development' in result ? result.development : undefined
       };
     });
 
@@ -197,10 +197,9 @@ export const healthReminders = inngest.createFunction(
 
       return {
         reminderSent: result.success,
-        messageId: result.messageId,
-        error: result.error,
-        configurationMissing: (result as { configurationMissing?: boolean })
-          .configurationMissing,
+        messageId: 'messageId' in result ? result.messageId : undefined,
+        error: 'error' in result ? result.error : undefined,
+        configurationMissing: 'configurationMissing' in result ? result.configurationMissing : undefined,
       };
     });
 
@@ -306,7 +305,7 @@ export const patientFeedbackCollection = inngest.createFunction(
       console.log("Feedback request sent:", result);
       return {
         feedbackRequestSent: result.success,
-        messageId: result.messageId
+        messageId: 'messageId' in result ? result.messageId : undefined
       };
     });
 
