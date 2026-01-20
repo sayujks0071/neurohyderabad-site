@@ -9,7 +9,7 @@
  * - API endpoint health
  */
 
-import { sleep, FatalError } from "workflow";
+import { sleep, FatalError, RetryableError, getStepMetadata } from "workflow";
 
 interface HealthCheckResult {
   checkId: string;
@@ -141,6 +141,7 @@ export async function runSiteHealthCheck(): Promise<HealthCheckResult> {
 
 /**
  * Step: Check critical pages
+ * With intelligent retry for transient failures
  */
 async function checkCriticalPages(): Promise<{
   checks: HealthCheckResult["checks"];
@@ -148,10 +149,12 @@ async function checkCriticalPages(): Promise<{
 }> {
   "use step";
 
-  console.log("[Health Workflow] Checking critical pages");
+  const metadata = getStepMetadata();
+  console.log(`[Health Workflow] Checking critical pages (attempt ${metadata.attempt + 1})`);
 
   const checks: HealthCheckResult["checks"] = [];
   let failedCount = 0;
+  let serverErrors = 0;
 
   for (const page of CRITICAL_PAGES) {
     const start = Date.now();
@@ -170,6 +173,16 @@ async function checkCriticalPages(): Promise<{
           latency,
           message: latency > 3000 ? "Slow response" : "OK",
         });
+      } else if (response.status >= 500) {
+        // Track server errors for potential retry
+        serverErrors++;
+        failedCount++;
+        checks.push({
+          name: page.name,
+          status: "fail",
+          latency,
+          message: `HTTP ${response.status}`,
+        });
       } else {
         failedCount++;
         checks.push({
@@ -181,6 +194,7 @@ async function checkCriticalPages(): Promise<{
       }
     } catch (error) {
       failedCount++;
+      serverErrors++;
       checks.push({
         name: page.name,
         status: "fail",
@@ -189,9 +203,18 @@ async function checkCriticalPages(): Promise<{
     }
   }
 
+  // If most failures are server errors, retry with backoff
+  if (serverErrors > CRITICAL_PAGES.length / 2 && metadata.attempt < 3) {
+    throw new RetryableError(
+      `${serverErrors} server errors detected, retrying...`,
+      { retryAfter: (metadata.attempt + 1) * 10000 } // 10s, 20s, 30s
+    );
+  }
+
   console.log(`[Health Workflow] Pages checked: ${checks.length}, failed: ${failedCount}`);
   return { checks, failedCount };
 }
+checkCriticalPages.maxRetries = 3;
 
 /**
  * Step: Check API endpoints

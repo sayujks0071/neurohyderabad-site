@@ -9,7 +9,7 @@
  * - Performance monitoring
  */
 
-import { sleep } from "workflow";
+import { sleep, FatalError, RetryableError, getStepMetadata } from "workflow";
 
 interface SEOTask {
   type: "sitemap" | "indexing" | "schema" | "performance" | "content-refresh";
@@ -120,11 +120,13 @@ export async function runDailySEOOptimization(): Promise<SEOResult> {
 
 /**
  * Step: Submit sitemap to Google Search Console
+ * With retry logic and exponential backoff
  */
 async function submitSitemapToGoogle(): Promise<{ success: boolean; error?: string }> {
   "use step";
 
-  console.log("[SEO Workflow] Submitting sitemap to Google");
+  const metadata = getStepMetadata();
+  console.log(`[SEO Workflow] Submitting sitemap to Google (attempt ${metadata.attempt + 1})`);
 
   try {
     // Ping Google with sitemap URL
@@ -136,13 +138,39 @@ async function submitSitemapToGoogle(): Promise<{ success: boolean; error?: stri
     if (response.ok) {
       console.log("[SEO Workflow] Sitemap ping successful");
       return { success: true };
-    } else {
-      return { success: false, error: `HTTP ${response.status}` };
     }
+
+    // Handle rate limiting with retry
+    if (response.status === 429) {
+      throw new RetryableError("Rate limited by Google", {
+        retryAfter: `${(metadata.attempt + 1) * 30}s`, // 30s, 60s, 90s...
+      });
+    }
+
+    // Server errors - retry with exponential backoff
+    if (response.status >= 500) {
+      throw new RetryableError(`Google server error: ${response.status}`, {
+        retryAfter: (metadata.attempt ** 2) * 5000, // 5s, 20s, 45s...
+      });
+    }
+
+    // Client errors - don't retry
+    if (response.status >= 400) {
+      throw new FatalError(`Sitemap ping failed: HTTP ${response.status}`);
+    }
+
+    return { success: false, error: `HTTP ${response.status}` };
   } catch (error) {
-    return { success: false, error: String(error) };
+    if (error instanceof FatalError || error instanceof RetryableError) {
+      throw error;
+    }
+    // Network errors - retry with backoff
+    throw new RetryableError(`Network error: ${error}`, {
+      retryAfter: (metadata.attempt + 1) * 5000,
+    });
   }
 }
+submitSitemapToGoogle.maxRetries = 5;
 
 /**
  * Step: Request indexing for new/updated pages

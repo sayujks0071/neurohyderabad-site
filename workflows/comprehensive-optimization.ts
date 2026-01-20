@@ -5,7 +5,7 @@
  * Uses parallel execution, webhooks, and timeouts for robust operation
  */
 
-import { sleep, createWebhook } from "workflow";
+import { sleep, createWebhook, FatalError, RetryableError, getStepMetadata } from "workflow";
 
 interface OptimizationResult {
   runId: string;
@@ -272,25 +272,48 @@ async function runAnalyticsPhase(): Promise<OptimizationResult["phases"][0]> {
   }
 }
 
-// Helper functions
+// Helper functions with retry logic
 
 async function checkEndpoint(
   path: string,
   name: string
 ): Promise<{ name: string; ok: boolean; latency: number; error?: string }> {
+  "use step";
+  
+  const metadata = getStepMetadata();
   const start = Date.now();
+  
   try {
     const response = await fetch(`${SITE_URL}${path}`, {
       method: "HEAD",
       headers: { "User-Agent": "DrSayuj-Optimizer/1.0" },
     });
+    
+    const latency = Date.now() - start;
+    
+    // Retry on server errors with exponential backoff
+    if (response.status >= 500) {
+      throw new RetryableError(`${name}: Server error ${response.status}`, {
+        retryAfter: (metadata.attempt ** 2) * 2000,
+      });
+    }
+    
     return {
       name,
       ok: response.ok,
-      latency: Date.now() - start,
+      latency,
       error: response.ok ? undefined : `HTTP ${response.status}`,
     };
   } catch (error) {
+    if (error instanceof RetryableError) throw error;
+    
+    // Network errors - retry
+    if (metadata.attempt < 2) {
+      throw new RetryableError(`${name}: ${error}`, {
+        retryAfter: (metadata.attempt + 1) * 3000,
+      });
+    }
+    
     return {
       name,
       ok: false,
@@ -299,39 +322,72 @@ async function checkEndpoint(
     };
   }
 }
+checkEndpoint.maxRetries = 3;
 
 async function pingSitemap(): Promise<{ success: boolean; error?: string }> {
+  "use step";
+  
+  const metadata = getStepMetadata();
+  
   try {
     const pingUrl = `https://www.google.com/ping?sitemap=${encodeURIComponent(
       `${SITE_URL}/sitemap.xml`
     )}`;
     const response = await fetch(pingUrl);
+    
+    if (response.status === 429) {
+      throw new RetryableError("Sitemap ping rate limited", {
+        retryAfter: "60s",
+      });
+    }
+    
+    if (response.status >= 500) {
+      throw new RetryableError(`Sitemap ping server error: ${response.status}`, {
+        retryAfter: (metadata.attempt ** 2) * 5000,
+      });
+    }
+    
     return { success: response.ok };
   } catch (error) {
-    return { success: false, error: String(error) };
+    if (error instanceof RetryableError) throw error;
+    throw new RetryableError(`Sitemap ping failed: ${error}`, {
+      retryAfter: 5000,
+    });
   }
 }
+pingSitemap.maxRetries = 5;
 
 async function validateSchemas(): Promise<{ valid: boolean; errors: string[] }> {
+  "use step";
   // In production, would validate JSON-LD schemas
   return { valid: true, errors: [] };
 }
+validateSchemas.maxRetries = 2;
 
 async function checkMetaTags(): Promise<{ valid: boolean; errors: string[] }> {
+  "use step";
   // In production, would check meta tags on key pages
   return { valid: true, errors: [] };
 }
+checkMetaTags.maxRetries = 2;
 
 async function indexPriorityPages(): Promise<{ count: number; errors: string[] }> {
+  "use step";
+  
+  const metadata = getStepMetadata();
   const priorityPages = [
     "/services/endoscopic-spine-surgery-hyderabad",
     "/services/brain-tumor-surgery-hyderabad",
     "/conditions/slip-disc-treatment-hyderabad",
     "/neurosurgeon-hyderabad",
   ];
-  // In production, would use Google Indexing API
+  
+  // In production, would use Google Indexing API with proper error handling
+  console.log(`[Optimize] Indexing ${priorityPages.length} pages (attempt ${metadata.attempt + 1})`);
+  
   return { count: priorityPages.length, errors: [] };
 }
+indexPriorityPages.maxRetries = 3;
 
 /**
  * Run optimization with external webhook callback
