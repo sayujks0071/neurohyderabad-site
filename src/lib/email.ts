@@ -335,9 +335,7 @@ Gender: ${data.gender}
 Preferred Date: ${data.appointmentDate}
 Preferred Time: ${data.appointmentTime}
 Reason: ${data.reason}
-Pain Score: ${data.painScore ?? "Not provided"}/10
-MRI/CT Scans: ${data.mriScanAvailable ? "Available" : "Not available"}
-${data.email ? `Email: ${data.email}\n` : ""}${data.phone ? `Phone: ${data.phone}\n` : ""}${data.source ? `Source: ${data.source}\n` : ""}`,
+${data.painScore ? `Pain Score: ${data.painScore}/10\n` : ""}${data.mriScanAvailable !== undefined ? `MRI Scan Available: ${data.mriScanAvailable ? "Yes" : "No"}\n` : ""}${data.email ? `Email: ${data.email}\n` : ""}${data.phone ? `Phone: ${data.phone}\n` : ""}${data.source ? `Source: ${data.source}\n` : ""}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <div style="background: #1e40af; color: white; padding: 24px; text-align: center;">
@@ -352,8 +350,8 @@ ${data.email ? `Email: ${data.email}\n` : ""}${data.phone ? `Phone: ${data.phone
             <p><strong>Preferred Date:</strong> ${data.appointmentDate}</p>
             <p><strong>Preferred Time:</strong> ${data.appointmentTime}</p>
             <p><strong>Reason:</strong> ${data.reason}</p>
-            <p><strong>Pain Score:</strong> ${data.painScore ?? "Not provided"}/10</p>
-            <p><strong>MRI/CT Scans:</strong> ${data.mriScanAvailable ? "Available" : "Not available"}</p>
+            ${data.painScore ? `<p><strong>Pain Score:</strong> ${data.painScore}/10</p>` : ""}
+            ${data.mriScanAvailable !== undefined ? `<p><strong>MRI Scan Available:</strong> ${data.mriScanAvailable ? "Yes" : "No"}</p>` : ""}
             ${data.email ? `<p><strong>Email:</strong> ${data.email}</p>` : ""}
             ${data.phone ? `<p><strong>Phone:</strong> ${data.phone}</p>` : ""}
             ${data.source ? `<p><strong>Source:</strong> ${data.source}</p>` : ""}
