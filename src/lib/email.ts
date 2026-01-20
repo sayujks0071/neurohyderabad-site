@@ -2,7 +2,11 @@ import { Resend } from 'resend';
 
 const resendApiKey = process.env.RESEND_API_KEY?.trim();
 const resend = resendApiKey ? new Resend(resendApiKey) : null;
-const DEFAULT_FROM_EMAIL = 'Dr. Sayuj Krishnan <hellodr@drsayuj.info>';
+// Use Resend test domain until drsayuj.info is DNS-verified
+// Change back to 'Dr. Sayuj Krishnan <hellodr@drsayuj.info>' after DNS verification
+const DEFAULT_FROM_EMAIL = process.env.RESEND_DOMAIN_VERIFIED === 'true' 
+  ? 'Dr. Sayuj Krishnan <hellodr@drsayuj.info>'
+  : 'Dr. Sayuj Krishnan <onboarding@resend.dev>';
 const RESEND_FROM = process.env.RESEND_FROM?.trim();
 
 const requireResendConfig = (context: string) => {

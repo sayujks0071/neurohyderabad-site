@@ -14,7 +14,12 @@ const requireResendConfig = (context: string) => {
 
 // Email configuration
 const DEFAULT_ADMIN_EMAIL = 'hellodr@drsayuj.info';
-const FROM_EMAIL = process.env.RESEND_FROM?.trim() || 'Dr. Sayuj Krishnan <hellodr@drsayuj.info>';
+// Use Resend test domain until drsayuj.info is DNS-verified
+const FROM_EMAIL = process.env.RESEND_FROM?.trim() || (
+  process.env.RESEND_DOMAIN_VERIFIED === 'true' 
+    ? 'Dr. Sayuj Krishnan <hellodr@drsayuj.info>'
+    : 'Dr. Sayuj Krishnan <onboarding@resend.dev>'
+);
 const parseEmailList = (...values: Array<string | undefined>) =>
   Array.from(
     new Set(
