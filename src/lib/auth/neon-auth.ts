@@ -16,7 +16,7 @@ if (!neonAuthUrl && typeof window !== 'undefined') {
 // Create Neon client instance
 export const neonClient = {
   auth: {
-    getSession: async () => null,
+    getSession: async () => { user: null },
     signIn: {
       email: async () => null
     },
