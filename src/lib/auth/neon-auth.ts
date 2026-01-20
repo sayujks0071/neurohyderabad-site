@@ -14,7 +14,18 @@ if (!neonAuthUrl && typeof window !== 'undefined') {
 }
 
 // Create Neon client instance
-export const neonClient = null;
+export const neonClient = {
+  auth: {
+    getSession: async () => null,
+    signIn: {
+      email: async () => null
+    },
+    signUp: {
+      email: async () => null
+    },
+    signOut: async () => undefined
+  }
+};
 
 // Auth helper functions
 export const auth = {
