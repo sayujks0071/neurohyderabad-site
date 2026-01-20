@@ -49,6 +49,8 @@ export async function sendAdminNotificationEmail(
       source,
       email: data.email,
       phone: data.phone,
+      painScore: data.painScore,
+      mriScanAvailable: data.mriScanAvailable,
     });
 
     if (result.success) {

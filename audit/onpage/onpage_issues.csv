@@ -1,155 +1,231 @@
 url,issue_type,severity,recommended_fix
-https://www.drsayuj.info,Title too long,Medium,Fix issue
-https://www.drsayuj.info/about,Title too long,Medium,Fix issue
-https://www.drsayuj.info/about,Meta description too long,Medium,Fix issue
-https://www.drsayuj.info/appointments,Title too long,Medium,Fix issue
-https://www.drsayuj.info/appointments,Meta description too long,Medium,Fix issue
-https://www.drsayuj.info/appointments,Multiple H1 tags,High,Fix issue
-https://www.drsayuj.info/contact,Title too long,Medium,Fix issue
-https://www.drsayuj.info/services,Title too long,Medium,Fix issue
-https://www.drsayuj.info/conditions,Title too long,Medium,Fix issue
-https://www.drsayuj.info/locations,Title too long,Medium,Fix issue
-https://www.drsayuj.info/best-neurosurgeon-in-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/brain-surgery,Title too long,Medium,Fix issue
-https://www.drsayuj.info/brain-surgery,Meta description too long,Medium,Fix issue
-https://www.drsayuj.info/brain-tumor-surgery,Title too short,Low,Expand title
-https://www.drsayuj.info/pediatric-neurosurgery,Title too long,Medium,Fix issue
-https://www.drsayuj.info/pediatric-neurosurgery,Meta description too long,Medium,Fix issue
-https://www.drsayuj.info/specializations,Title too short,Low,Expand title
-https://www.drsayuj.info/spine-surgery,Title too long,Medium,Fix issue
-https://www.drsayuj.info/spine-surgery,Meta description too long,Medium,Fix issue
-https://www.drsayuj.info/symptoms-checker,Title too long,Medium,Fix issue
-https://www.drsayuj.info/technology-innovation,Title too long,Medium,Fix issue
-https://www.drsayuj.info/technology-innovation,Meta description too long,Medium,Fix issue
-https://www.drsayuj.info/services/minimally-invasive-spine-surgery,Title too long,Medium,Fix issue
-https://www.drsayuj.info/services/endoscopic-discectomy-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/services/spinal-fusion-surgery-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/services/epilepsy-surgery-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/services/peripheral-nerve-surgery-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/services/awake-spine-surgery-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/services/spine-surgery-cost-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/services/slip-disc-surgery-cost-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/services/cervical-endoscopic-spine-surgery-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/services/compare-neurosurgeons-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/services/cooled-radiofrequency-ablation-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/services/dr-sayuj-vs-apollo-neuro-icu,Title too long,Medium,Fix issue
-https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/services/kims-spine-surgery-second-opinion,Title too long,Medium,Fix issue
-https://www.drsayuj.info/services/lumbar-laminectomy-surgery-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/services/peripheral-nerve-surgery,Title too long,Medium,Fix issue
-https://www.drsayuj.info/services/spinal-fusion,Title too long,Medium,Fix issue
-https://www.drsayuj.info/services/spine-surgery-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/services/uniportal-endoscopic-spine-surgery-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/conditions/brain-tumor-surgery-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/conditions/brain-tumor-surgery-hyderabad,Meta description too long,Medium,Fix issue
-https://www.drsayuj.info/conditions/sciatica-treatment-hyderabad,Title too short,Low,Expand title
-https://www.drsayuj.info/conditions/spinal-stenosis-treatment-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/conditions/trigeminal-neuralgia-treatment-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/conditions/trigeminal-neuralgia-treatment-hyderabad,Meta description too long,Medium,Fix issue
-https://www.drsayuj.info/conditions/cervical-radiculopathy-treatment-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/conditions/slip-disc-treatment-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/conditions/brain-bleed-evacuation-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/conditions/brain-bleed-evacuation-hyderabad,Meta description too long,Medium,Fix issue
-https://www.drsayuj.info/conditions/cervical-myelopathy-decompression-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/conditions/cervical-myelopathy-decompression-hyderabad,Meta description too long,Medium,Fix issue
-https://www.drsayuj.info/conditions/osteoporotic-spine-fracture-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/conditions/sciatica-pain-treatment-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/conditions/spine-tumor-surgery-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/conditions/spine-tumor-surgery-hyderabad,Meta description too long,Medium,Fix issue
-https://www.drsayuj.info/conditions/spondylolisthesis-treatment-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/neurosurgeon-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/neurosurgeon-hyderabad,Meta description too long,Medium,Fix issue
-https://www.drsayuj.info/neurosurgeon-jubilee-hills,Title too short,Low,Expand title
-https://www.drsayuj.info/neurosurgeon-banjara-hills,Title too short,Low,Expand title
-https://www.drsayuj.info/neurosurgeon-hitech-city,Title too long,Medium,Fix issue
-https://www.drsayuj.info/neurosurgeon-hitech-city,Meta description too long,Medium,Fix issue
-https://www.drsayuj.info/neurosurgeon-secunderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/neurosurgeon-secunderabad,Meta description too long,Medium,Fix issue
-https://www.drsayuj.info/neurosurgeon-gachibowli,Title too long,Medium,Fix issue
-https://www.drsayuj.info/neurosurgeon-gachibowli,Meta description too long,Medium,Fix issue
-https://www.drsayuj.info/neurosurgeon-malakpet,Title too long,Medium,Fix issue
-https://www.drsayuj.info/locations/malakpet,Title too long,Medium,Fix issue
-https://www.drsayuj.info/locations/lb-nagar,Title too long,Medium,Fix issue
-https://www.drsayuj.info/locations/neurosurgeon-kothapet,Title too long,Medium,Fix issue
-https://www.drsayuj.info/locations/brain-spine-surgeon-jubilee-hills,Title too long,Medium,Fix issue
-https://www.drsayuj.info/locations/brain-spine-surgeon-banjara-hills,Title too long,Medium,Fix issue
-https://www.drsayuj.info/locations/brain-spine-surgeon-hitec-city,Title too long,Medium,Fix issue
-https://www.drsayuj.info/locations/banjara-hills,Title too long,Medium,Fix issue
-https://www.drsayuj.info/locations/banjara-hills,Meta description too long,Medium,Fix issue
-https://www.drsayuj.info/locations/hitech-city,Title too long,Medium,Fix issue
-https://www.drsayuj.info/locations/neurosurgeon-kondapur,Title too long,Medium,Fix issue
-https://www.drsayuj.info/locations/neurosurgeon-kukatpally,Title too long,Medium,Fix issue
-https://www.drsayuj.info/locations/neurosurgeon-manikonda,Title too long,Medium,Fix issue
-https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills,Title too short,Low,Expand title
-https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills-faq,Title too long,Medium,Fix issue
-https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills-faq,Meta description too long,Medium,Fix issue
-https://www.drsayuj.info/locations/neurosurgeon-near-kachiguda-faq,Title too long,Medium,Fix issue
-https://www.drsayuj.info/locations/neurosurgeon-near-kondapur-faq,Title too long,Medium,Fix issue
-https://www.drsayuj.info/locations/neurosurgeon-nizampet,Title too long,Medium,Fix issue
-https://www.drsayuj.info/locations/secunderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/knowledge-base,Title too long,Medium,Fix issue
-https://www.drsayuj.info/knowledge-base,Missing canonical tag,High,Fix issue
-https://www.drsayuj.info/blog,Title too long,Medium,Fix issue
-https://www.drsayuj.info/patient-stories,Title too long,Medium,Fix issue
-https://www.drsayuj.info/disease-guides,Title too short,Low,Expand title
-https://www.drsayuj.info/research,Title too long,Medium,Fix issue
-https://www.drsayuj.info/media,Title too long,Medium,Fix issue
-https://www.drsayuj.info/media,Meta description too long,Medium,Fix issue
-https://www.drsayuj.info/emergency-rehabilitation,Title too short,Low,Expand title
-https://www.drsayuj.info/technology-facilities,Title too long,Medium,Fix issue
-https://www.drsayuj.info/technology-facilities,Meta description too long,Medium,Fix issue
-https://www.drsayuj.info/best-neurosurgeon-in-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/disease-guides/degenerative-disc-disease,Title too short,Low,Expand title
-https://www.drsayuj.info/stories/endoscopic-discectomy-same-day-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/stories/endoscopic-ulbd-stenosis-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/stories/mvd-trigeminal-neuralgia-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/meningioma-brain-tumor-treatment-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/meningioma-brain-tumor-treatment-hyderabad,Meta description too long,Medium,Fix issue
-https://www.drsayuj.info/blog/l4-l5-disc-bulge-treatment-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/sciatica-exercises-for-office-workers-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/spinal-tuberculosis-symptoms-treatment-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/normal-pressure-hydrocephalus-nph-symptoms-treatment-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/sciatica-pain-relief-exercises-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/awake-craniotomy-brain-tumor-guide,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/cauda-equina-syndrome-warning-signs-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/spondylolisthesis-vs-herniated-disc-difference,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/understanding-brain-mri-tumor-report-guide,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/microdiscectomy-vs-laminectomy-recovery-comparison,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/awake-spine-surgery-vs-general-anesthesia-guide,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/cervical-spondylosis-neck-pain-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/endoscopic-spine-surgery-recovery-timeline,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/headache-vs-brain-tumor-warning-signs,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/lumbar-canal-stenosis-walking-pain-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/osteoporotic-spine-fracture-elderly-guide,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/trigeminal-neuralgia-vs-tooth-pain-guide,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/sciatica-vs-normal-back-pain-guide,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/cost-of-endoscopic-spine-surgery-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/understanding-mri-spine-report-guide,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/neuroplasticity-brain-recovery-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/awake-craniotomy-guide,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/brain-tumor-surgery-cost-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/day-care-endoscopic-spine-surgery-eligibility,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/day-care-spine-surgery-insurance-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/does-endoscopic-spine-surgery-work-for-sciatica-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/does-endoscopic-spine-surgery-work-for-sciatica-hyderabad,Meta description too long,Medium,Fix issue
-https://www.drsayuj.info/blog/endoscopic-cervical-spine-surgery-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/endoscopic-discectomy-cost-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/endoscopic-spine-surgery-cost-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/endoscopic-vs-microdiscectomy-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/how-much-does-brain-surgery-cost-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/mvd-vs-radiosurgery-trigeminal-neuralgia,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/return-to-work-after-endoscopic-discectomy-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/sciatica-pain-management-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/spinal-fusion-cost-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/spine-health-maintenance-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/spine-surgery-recovery-timeline-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/when-to-worry-about-back-pain-neurosurgeon-hyderabad,Title too long,Medium,Fix issue
-https://www.drsayuj.info/blog/world-stroke-day-2025-hyderabad-stroke-code,Title too long,Medium,Fix issue
-https://www.drsayuj.info/symptoms/signs-of-brain-tumor,Title too long,Medium,Fix issue
-https://www.drsayuj.info/symptoms/pain-on-top-of-head-causes,Title too long,Medium,Fix issue
-https://www.drsayuj.info/privacy,Title too long,Medium,Fix issue
-https://www.drsayuj.info/cookies,Title too long,Medium,Fix issue
-https://www.drsayuj.info/terms,Title too long,Medium,Fix issue
-https://www.drsayuj.info/disclaimer,Title too long,Medium,Fix issue
-https://www.drsayuj.info/content-integrity,Title too long,Medium,Fix issue
+https://www.drsayuj.info,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/about,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/about,Long Meta Desc,Medium,"Shorten to <160 chars"
+https://www.drsayuj.info/appointments,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/appointments,Long Meta Desc,Medium,"Shorten to <160 chars"
+https://www.drsayuj.info/contact,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/services,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/conditions,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/locations,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/best-neurosurgeon-in-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/brain-surgery,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/brain-surgery,Long Meta Desc,Medium,"Shorten to <160 chars"
+https://www.drsayuj.info/brain-surgery,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/pediatric-neurosurgery,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/pediatric-neurosurgery,Long Meta Desc,Medium,"Shorten to <160 chars"
+https://www.drsayuj.info/pediatric-neurosurgery,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/spine-surgery,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/spine-surgery,Long Meta Desc,Medium,"Shorten to <160 chars"
+https://www.drsayuj.info/spine-surgery,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/symptoms-checker,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/symptoms-checker,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/technology-innovation,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/technology-innovation,Long Meta Desc,Medium,"Shorten to <160 chars"
+https://www.drsayuj.info/services/minimally-invasive-spine-surgery,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/services/endoscopic-discectomy-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/services/spinal-fusion-surgery-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/services/epilepsy-surgery-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/services/peripheral-nerve-surgery-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/services/awake-spine-surgery-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/services/spine-surgery-cost-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/services/spine-surgery-cost-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/services/slip-disc-surgery-cost-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/services/slip-disc-surgery-cost-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/services/cervical-endoscopic-spine-surgery-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/services/cervical-endoscopic-spine-surgery-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/services/compare-neurosurgeons-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/services/compare-neurosurgeons-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/services/cooled-radiofrequency-ablation-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/services/cooled-radiofrequency-ablation-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/services/dr-sayuj-vs-apollo-neuro-icu,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/services/dr-sayuj-vs-apollo-neuro-icu,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/services/kims-spine-surgery-second-opinion,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/services/kims-spine-surgery-second-opinion,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/services/lumbar-laminectomy-surgery-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/services/lumbar-laminectomy-surgery-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/services/peripheral-nerve-surgery,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/services/peripheral-nerve-surgery,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/services/spinal-fusion,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/services/spinal-fusion,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/services/spine-surgery-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/services/spine-surgery-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/services/uniportal-endoscopic-spine-surgery-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/services/uniportal-endoscopic-spine-surgery-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/conditions/brain-tumor-surgery-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/conditions/brain-tumor-surgery-hyderabad,Long Meta Desc,Medium,"Shorten to <160 chars"
+https://www.drsayuj.info/conditions/spinal-stenosis-treatment-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/conditions/trigeminal-neuralgia-treatment-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/conditions/trigeminal-neuralgia-treatment-hyderabad,Long Meta Desc,Medium,"Shorten to <160 chars"
+https://www.drsayuj.info/conditions/cervical-radiculopathy-treatment-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/conditions/slip-disc-treatment-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/conditions/brain-bleed-evacuation-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/conditions/brain-bleed-evacuation-hyderabad,Long Meta Desc,Medium,"Shorten to <160 chars"
+https://www.drsayuj.info/conditions/brain-bleed-evacuation-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/conditions/cervical-myelopathy-decompression-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/conditions/cervical-myelopathy-decompression-hyderabad,Long Meta Desc,Medium,"Shorten to <160 chars"
+https://www.drsayuj.info/conditions/osteoporotic-spine-fracture-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/conditions/osteoporotic-spine-fracture-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/conditions/sciatica-pain-treatment-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/conditions/spine-tumor-surgery-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/conditions/spine-tumor-surgery-hyderabad,Long Meta Desc,Medium,"Shorten to <160 chars"
+https://www.drsayuj.info/conditions/spine-tumor-surgery-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/conditions/spondylolisthesis-treatment-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/conditions/spondylolisthesis-treatment-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/neurosurgeon-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/neurosurgeon-hyderabad,Long Meta Desc,Medium,"Shorten to <160 chars"
+https://www.drsayuj.info/neurosurgeon-jubilee-hills,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/neurosurgeon-jubilee-hills,Long Meta Desc,Medium,"Shorten to <160 chars"
+https://www.drsayuj.info/neurosurgeon-banjara-hills,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/neurosurgeon-banjara-hills,Long Meta Desc,Medium,"Shorten to <160 chars"
+https://www.drsayuj.info/neurosurgeon-hitech-city,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/neurosurgeon-hitech-city,Long Meta Desc,Medium,"Shorten to <160 chars"
+https://www.drsayuj.info/neurosurgeon-secunderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/neurosurgeon-secunderabad,Long Meta Desc,Medium,"Shorten to <160 chars"
+https://www.drsayuj.info/neurosurgeon-gachibowli,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/neurosurgeon-gachibowli,Long Meta Desc,Medium,"Shorten to <160 chars"
+https://www.drsayuj.info/neurosurgeon-malakpet,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/locations/malakpet,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/locations/malakpet,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/locations/lb-nagar,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/locations/lb-nagar,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/locations/neurosurgeon-kothapet,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/locations/neurosurgeon-kothapet,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/locations/brain-spine-surgeon-jubilee-hills,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/locations/brain-spine-surgeon-banjara-hills,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/locations/brain-spine-surgeon-hitec-city,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/locations/banjara-hills,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/locations/banjara-hills,Long Meta Desc,Medium,"Shorten to <160 chars"
+https://www.drsayuj.info/locations/banjara-hills,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/locations/hitech-city,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/locations/hitech-city,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/locations/neurosurgeon-kondapur,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/locations/neurosurgeon-kondapur,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/locations/neurosurgeon-kukatpally,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/locations/neurosurgeon-kukatpally,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/locations/neurosurgeon-manikonda,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/locations/neurosurgeon-manikonda,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills,Missing H1,High,"Add H1 tag"
+https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills-faq,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills-faq,Long Meta Desc,Medium,"Shorten to <160 chars"
+https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills-faq,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/locations/neurosurgeon-near-kachiguda-faq,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/locations/neurosurgeon-near-kachiguda-faq,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/locations/neurosurgeon-near-kondapur-faq,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/locations/neurosurgeon-near-kondapur-faq,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/locations/neurosurgeon-nizampet,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/locations/neurosurgeon-nizampet,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/locations/secunderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/locations/secunderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/knowledge-base,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/patient-stories,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/research,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/research,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/media,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/media,Long Meta Desc,Medium,"Shorten to <160 chars"
+https://www.drsayuj.info/media,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/technology-facilities,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/technology-facilities,Long Meta Desc,Medium,"Shorten to <160 chars"
+https://www.drsayuj.info/technology-facilities,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/best-neurosurgeon-in-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/best-neurosurgeon-in-hyderabad,Duplicate Title,High,"Unique title needed (duplicates https://www.drsayuj.info/best-neurosurgeon-in-hyderabad)"
+https://www.drsayuj.info/best-neurosurgeon-in-hyderabad,Duplicate Meta Desc,Medium,"Unique meta needed (duplicates https://www.drsayuj.info/best-neurosurgeon-in-hyderabad)"
+https://www.drsayuj.info/stories/endoscopic-discectomy-same-day-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/stories/endoscopic-ulbd-stenosis-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/stories/endoscopic-ulbd-stenosis-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/stories/mvd-trigeminal-neuralgia-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/stories/mvd-trigeminal-neuralgia-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/blog/epilepsy-surgery-options-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/epilepsy-surgery-options-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/blog/cervical-radiculopathy-arm-pain-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/cervical-radiculopathy-arm-pain-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/blog/meningioma-brain-tumor-treatment-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/meningioma-brain-tumor-treatment-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/blog/l4-l5-disc-bulge-treatment-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/l4-l5-disc-bulge-treatment-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/blog/sciatica-exercises-for-office-workers-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/sciatica-exercises-for-office-workers-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/blog/spinal-tuberculosis-symptoms-treatment-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/spinal-tuberculosis-symptoms-treatment-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/blog/normal-pressure-hydrocephalus-nph-symptoms-treatment-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/normal-pressure-hydrocephalus-nph-symptoms-treatment-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/blog/sciatica-pain-relief-exercises-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/sciatica-pain-relief-exercises-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/blog/awake-craniotomy-brain-tumor-guide,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/awake-craniotomy-brain-tumor-guide,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/blog/cauda-equina-syndrome-warning-signs-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/cauda-equina-syndrome-warning-signs-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/blog/spondylolisthesis-vs-herniated-disc-difference,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/spondylolisthesis-vs-herniated-disc-difference,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/blog/understanding-brain-mri-tumor-report-guide,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/microdiscectomy-vs-laminectomy-recovery-comparison,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/microdiscectomy-vs-laminectomy-recovery-comparison,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/blog/awake-spine-surgery-vs-general-anesthesia-guide,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/awake-spine-surgery-vs-general-anesthesia-guide,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/blog/cervical-spondylosis-neck-pain-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/cervical-spondylosis-neck-pain-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/blog/endoscopic-spine-surgery-recovery-timeline,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/endoscopic-spine-surgery-recovery-timeline,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/blog/headache-vs-brain-tumor-warning-signs,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/lumbar-canal-stenosis-walking-pain-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/lumbar-canal-stenosis-walking-pain-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/blog/osteoporotic-spine-fracture-elderly-guide,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/osteoporotic-spine-fracture-elderly-guide,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/blog/trigeminal-neuralgia-vs-tooth-pain-guide,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/trigeminal-neuralgia-vs-tooth-pain-guide,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/blog/sciatica-vs-normal-back-pain-guide,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/cost-of-endoscopic-spine-surgery-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/cost-of-endoscopic-spine-surgery-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/blog/understanding-mri-spine-report-guide,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/neuroplasticity-brain-recovery-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/awake-craniotomy-guide,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/awake-craniotomy-guide,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/blog/brain-tumor-surgery-cost-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/brain-tumor-surgery-cost-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/blog/day-care-endoscopic-spine-surgery-eligibility,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/day-care-endoscopic-spine-surgery-eligibility,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/blog/day-care-spine-surgery-insurance-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/day-care-spine-surgery-insurance-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/blog/disc-replacement-vs-fusion,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/blog/does-endoscopic-spine-surgery-work-for-sciatica-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/does-endoscopic-spine-surgery-work-for-sciatica-hyderabad,Long Meta Desc,Medium,"Shorten to <160 chars"
+https://www.drsayuj.info/blog/does-endoscopic-spine-surgery-work-for-sciatica-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/blog/endoscopic-cervical-spine-surgery-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/endoscopic-cervical-spine-surgery-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/blog/endoscopic-discectomy-cost-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/endoscopic-discectomy-cost-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/blog/endoscopic-spine-surgery-cost-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/endoscopic-spine-surgery-cost-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/blog/endoscopic-vs-microdiscectomy-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/endoscopic-vs-microdiscectomy-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/blog/how-much-does-brain-surgery-cost-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/how-much-does-brain-surgery-cost-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/blog/mvd-vs-radiosurgery-trigeminal-neuralgia,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/mvd-vs-radiosurgery-trigeminal-neuralgia,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/blog/return-to-work-after-endoscopic-discectomy-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/return-to-work-after-endoscopic-discectomy-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/blog/sciatica-pain-management-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/sciatica-pain-management-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/blog/spinal-fusion-cost-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/spinal-fusion-cost-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/blog/spine-health-maintenance-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/spine-health-maintenance-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/blog/spine-surgery-recovery-timeline-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/spine-surgery-recovery-timeline-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/blog/when-to-worry-about-back-pain-neurosurgeon-hyderabad,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/when-to-worry-about-back-pain-neurosurgeon-hyderabad,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/blog/world-stroke-day-2025-hyderabad-stroke-code,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/blog/world-stroke-day-2025-hyderabad-stroke-code,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/symptoms/signs-of-brain-tumor,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/symptoms/pain-on-top-of-head-causes,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/privacy,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/cookies,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/terms,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/disclaimer,Long Title,Medium,"Shorten title to <60 chars"
+https://www.drsayuj.info/medical-disclaimer,Low Inlinks (Orphan?),Medium,"Add internal links from related pages"
+https://www.drsayuj.info/content-integrity,Long Title,Medium,"Shorten title to <60 chars"
