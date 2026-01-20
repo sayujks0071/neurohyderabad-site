@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE_URL } from "../../src/lib/seo";
 import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
-import { serviceJsonLd } from "../../src/lib/seo";
+import MedicalWebPageSchema from "../components/schemas/MedicalWebPageSchema";
 
 export const metadata: Metadata = {
-  title: "Endoscopic Spine Surgery in Hyderabad | Minimally Invasive Procedures – Dr. Sayuj Krishnan",
-  description: "Looking for minimally invasive or endoscopic spine surgery in Hyderabad? Dr. Sayuj Krishnan performs slip disc, spinal stenosis and fusion procedures through tiny incisions for faster recovery. Book a consultation today.",
+  title: "Endoscopic Spine Surgery Hyderabad | Minimally Invasive Specialist",
+  description: "Expert endoscopic spine surgery in Hyderabad. Minimally invasive slip disc & stenosis treatment. Same-day discharge. Dr. Sayuj Krishnan.",
   keywords: [
     "spine surgery hyderabad",
     "endoscopic spine surgery hyderabad",
@@ -17,7 +17,9 @@ export const metadata: Metadata = {
     "same day spine surgery",
     "endoscopic discectomy hyderabad",
     "spine specialist hyderabad",
-    "back pain treatment hyderabad"
+    "back pain treatment hyderabad",
+    "tailbone pain treatment hyderabad",
+    "coccydynia treatment hyderabad"
   ],
   alternates: {
     canonical: `${SITE_URL}/spine-surgery`,
@@ -27,8 +29,8 @@ export const metadata: Metadata = {
     }
   },
   openGraph: {
-    title: "Endoscopic Spine Surgery in Hyderabad | Minimally Invasive Procedures – Dr. Sayuj Krishnan",
-    description: "Looking for minimally invasive or endoscopic spine surgery in Hyderabad? Dr. Sayuj Krishnan performs slip disc, spinal stenosis and fusion procedures through tiny incisions for faster recovery.",
+    title: "Endoscopic Spine Surgery Hyderabad | Minimally Invasive Specialist",
+    description: "Expert endoscopic spine surgery in Hyderabad. Minimally invasive slip disc & stenosis treatment. Same-day discharge. Dr. Sayuj Krishnan.",
     url: `${SITE_URL}/spine-surgery`,
     siteName: "Dr. Sayuj Krishnan - Premier Neurosurgeon Hyderabad",
     locale: "en_IN",
@@ -51,22 +53,18 @@ export const metadata: Metadata = {
 };
 
 export default function SpineSurgeryPage() {
-  const spineServiceJsonLd = serviceJsonLd({
-    name: "Minimally Invasive Spine Surgery",
-    description: "Advanced endoscopic spine surgery techniques for faster recovery and better outcomes. Specializing in slip disc treatment, spinal stenosis, and sciatica relief.",
-    url: `${SITE_URL}/spine-surgery`,
-    areaServed: "Hyderabad, Telangana, India"
-  });
-
   return (
     <>
-      <BreadcrumbSchema items={[
-        { name: "Home", path: "/" },
-        { name: "Spine Surgery", path: "/spine-surgery" }
-      ]} />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(spineServiceJsonLd) }}
+      <MedicalWebPageSchema
+        title="Endoscopic Spine Surgery Hyderabad | Minimally Invasive Specialist"
+        description="Expert endoscopic spine surgery in Hyderabad. Minimally invasive slip disc & stenosis treatment. Same-day discharge. Dr. Sayuj Krishnan."
+        pageSlug="/spine-surgery"
+        pageType="service"
+        serviceOrCondition="Minimally Invasive Spine Surgery"
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Spine Surgery", path: "/spine-surgery" }
+        ]}
       />
       
       <div className="min-h-screen bg-white">
@@ -156,6 +154,9 @@ export default function SpineSurgeryPage() {
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <h2 className="text-3xl font-bold text-center mb-12">Conditions We Treat</h2>
+              <p className="text-center text-gray-600 mb-8">
+                In addition to spine care, Dr. Sayuj specializes in <Link href="/services/brain-tumor-surgery-hyderabad" className="text-blue-600 hover:underline">Brain Tumor Surgery</Link> using advanced neuronavigation.
+              </p>
               <div className="grid md:grid-cols-2 gap-12">
                 <div className="bg-white p-8 rounded-lg shadow-lg">
                   <h3 className="text-2xl font-semibold mb-6 text-blue-700">Slip Disc (Herniated Disc)</h3>
@@ -409,6 +410,66 @@ export default function SpineSurgeryPage() {
           </div>
         </section>
 
+        {/* FAQ Section */}
+        <section className="py-16">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
+              <div className="grid gap-6 md:grid-cols-2">
+                <div className="space-y-4">
+                   <details className="group border border-gray-200 rounded-lg p-4 open:bg-blue-50">
+                    <summary className="font-semibold text-gray-800 cursor-pointer list-none flex justify-between items-center">
+                      <span>How long does endoscopic spine surgery take?</span>
+                      <span className="transition group-open:rotate-180">▼</span>
+                    </summary>
+                    <p className="text-gray-600 mt-3 text-sm">
+                      Most procedures take 45-90 minutes depending on the complexity. You are usually up and walking within 3 hours.
+                    </p>
+                  </details>
+                  <details className="group border border-gray-200 rounded-lg p-4 open:bg-blue-50">
+                    <summary className="font-semibold text-gray-800 cursor-pointer list-none flex justify-between items-center">
+                      <span>Will I need general anesthesia?</span>
+                      <span className="transition group-open:rotate-180">▼</span>
+                    </summary>
+                    <p className="text-gray-600 mt-3 text-sm">
+                      Many endoscopic procedures can be done under local anesthesia with sedation, or general anesthesia depending on patient preference and case complexity.
+                    </p>
+                  </details>
+                   <details className="group border border-gray-200 rounded-lg p-4 open:bg-blue-50">
+                    <summary className="font-semibold text-gray-800 cursor-pointer list-none flex justify-between items-center">
+                      <span>What about Tailbone Pain (Coccydynia)?</span>
+                      <span className="transition group-open:rotate-180">▼</span>
+                    </summary>
+                    <p className="text-gray-600 mt-3 text-sm">
+                      <strong>Coccydynia</strong> or tailbone pain is common after prolonged sitting or trauma. Most cases resolve with specialized cushions, posture correction, and local injections. Surgery (coccygectomy) is rare but available for persistent cases.
+                    </p>
+                  </details>
+                </div>
+                 <div className="space-y-4">
+                   <details className="group border border-gray-200 rounded-lg p-4 open:bg-blue-50">
+                    <summary className="font-semibold text-gray-800 cursor-pointer list-none flex justify-between items-center">
+                      <span>Is it covered by insurance?</span>
+                      <span className="transition group-open:rotate-180">▼</span>
+                    </summary>
+                    <p className="text-gray-600 mt-3 text-sm">
+                      Yes, most health insurance policies cover endoscopic spine surgery. Our team assists with cashless pre-authorization.
+                    </p>
+                  </details>
+                   <details className="group border border-gray-200 rounded-lg p-4 open:bg-blue-50">
+                    <summary className="font-semibold text-gray-800 cursor-pointer list-none flex justify-between items-center">
+                      <span>What if the pain comes back?</span>
+                      <span className="transition group-open:rotate-180">▼</span>
+                    </summary>
+                    <p className="text-gray-600 mt-3 text-sm">
+                      Recurrence rates are low (similar to or better than open surgery). If pain returns, we re-evaluate with MRI. Revision surgery is possible but rarely needed.
+                    </p>
+                  </details>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Call to Action */}
         <section className="py-16 bg-blue-600 text-white">
           <div className="container mx-auto px-4">
@@ -439,4 +500,3 @@ export default function SpineSurgeryPage() {
     </>
   );
 }
-

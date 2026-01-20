@@ -19,6 +19,10 @@ export default function BookingHeroContent() {
       <p className="text-lg sm:text-xl text-slate-600 mb-10 leading-relaxed max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-6 duration-700 delay-200">
         Secure your neurosurgical appointment at Yashoda Hospitals, Malakpet. Get AI-assisted triage,
         report interpretation, and a fast confirmation call from our care team.
+        <br/><br/>
+        <span className="text-sm">
+          Specializing in <a href="/services/brain-tumor-surgery-hyderabad" className="text-blue-600 hover:underline">Brain Tumor Surgery</a>, Endoscopic Spine Procedures, and more.
+        </span>
       </p>
     </>
   );
