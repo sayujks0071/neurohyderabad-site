@@ -88,8 +88,18 @@ module.exports = {
       };
     }
 
-    // Medium priority (blog posts and locations)
-    if (path.includes('/blog/') || path.includes('/locations/')) {
+    // Medium priority (blog posts) - daily for fresh content indexing
+    if (path.includes('/blog/')) {
+      return {
+        loc: path,
+        changefreq: 'daily',
+        priority: 0.7,
+        lastmod: new Date().toISOString(),
+      };
+    }
+
+    // Medium priority (locations)
+    if (path.includes('/locations/')) {
       return {
         loc: path,
         changefreq: 'weekly',

@@ -166,7 +166,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }
 
   for (const page of allBlogUrls) {
-    entries.push({ url: `${SITE_URL}${page}`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 });
+    entries.push({ url: `${SITE_URL}${page}`, lastModified: now, changeFrequency: 'daily', priority: 0.7 });
   }
 
   for (const page of symptomPages) {
