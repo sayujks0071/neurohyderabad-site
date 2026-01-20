@@ -6,6 +6,8 @@ import { generateWhatsappUrl } from './utils';
 
 export const dynamic = 'force-dynamic';
 
+type WhatsappStatus = 'Confirmed' | 'Pending' | 'Cancelled';
+
 interface Appointment {
   id: string;
   patient_name: string;
@@ -39,6 +41,17 @@ const StatusIcon = ({ status }: { status: string }) => {
     default:
       return <Clock size={14} className="text-yellow-600" />;
   }
+};
+
+const normalizeWhatsappStatus = (status: string): WhatsappStatus => {
+  const normalized = status.toLowerCase();
+  if (normalized === 'confirmed' || normalized === 'completed') {
+    return 'Confirmed';
+  }
+  if (normalized === 'cancelled' || normalized === 'no-show') {
+    return 'Cancelled';
+  }
+  return 'Pending';
 };
 
 export default function AppointmentsPage() {
@@ -76,7 +89,7 @@ export default function AppointmentsPage() {
       fullName: appointment.patient_name,
       phone: appointment.patient_phone,
       preferredDate: appointment.preferred_date,
-      status: appointment.status || 'Pending',
+      status: normalizeWhatsappStatus(appointment.status),
     });
     window.open(url, '_blank');
   };
