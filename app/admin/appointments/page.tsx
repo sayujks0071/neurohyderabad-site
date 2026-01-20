@@ -8,19 +8,7 @@ export const dynamic = 'force-dynamic';
 
 type WhatsappStatus = 'Confirmed' | 'Pending' | 'Cancelled';
 
-interface Appointment {
-  id: string;
-  patient_name: string;
-  patient_email: string;
-  patient_phone: string;
-  preferred_date: string;
-  preferred_time: string;
-  appointment_type: string;
-  chief_complaint: string;
-  status: string;
-  source: string;
-  created_at: string;
-}
+import type { Appointment } from './types';
 
 const statusColors: Record<string, string> = {
   pending: 'bg-yellow-100 text-yellow-800',

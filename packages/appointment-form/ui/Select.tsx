@@ -1,5 +1,6 @@
 'use client';
 
+import { forwardRef } from "react";
 import type { SelectHTMLAttributes } from "react";
 
 interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
@@ -8,15 +9,18 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   required?: boolean;
 }
 
-export default function Select({
-  label,
-  error,
-  required,
-  id,
-  className = "",
-  children,
-  ...props
-}: SelectProps) {
+const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select(
+  {
+    label,
+    error,
+    required,
+    id,
+    className = "",
+    children,
+    ...props
+  },
+  ref
+) {
   const errorId = error ? `${id}-error` : undefined;
 
   return (
@@ -30,6 +34,7 @@ export default function Select({
       </label>
       <select
         id={id}
+        ref={ref}
         className={`block w-full rounded-md border border-slate-300 bg-white px-4 py-2.5 text-slate-800 shadow-sm focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 ${
           error ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""
         } ${className}`}
@@ -46,4 +51,8 @@ export default function Select({
       )}
     </div>
   );
-}
+});
+
+Select.displayName = "Select";
+
+export default Select;

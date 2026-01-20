@@ -96,14 +96,22 @@ export function getAIClient() {
     } catch (error) {
       console.error('Failed to create AI Gateway client, falling back to direct OpenAI:', error);
       // Fallback to direct OpenAI if gateway fails
-      const { openai } = require('@ai-sdk/openai');
-      return openai;
+      const apiKey = process.env.OPENAI_API_KEY;
+      if (!apiKey) {
+        throw new Error('OPENAI_API_KEY must be set for direct OpenAI access');
+      }
+      const directClient = createOpenAI({ apiKey });
+      return (model: string) => directClient(model);
     }
   }
 
   // Fallback to direct OpenAI
-  const { openai } = require('@ai-sdk/openai');
-  return openai;
+  const apiKey = process.env.OPENAI_API_KEY;
+  if (!apiKey) {
+    throw new Error('OPENAI_API_KEY must be set for direct OpenAI access');
+  }
+  const directClient = createOpenAI({ apiKey });
+  return (model: string) => directClient(model);
 }
 
 /**

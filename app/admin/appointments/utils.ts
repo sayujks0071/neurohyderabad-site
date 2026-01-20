@@ -1,10 +1,10 @@
-import { Appointment } from './data';
+import { WhatsappAppointment } from './types';
 
 // Message template for WhatsApp confirmation
 export const WHATSAPP_MESSAGE_TEMPLATE = (name: string, date: string) =>
   `Hello ${name}, this is regarding your appointment with Dr. Sayuj on ${date}. We confirm your slot. Please bring your MRI/CT scans.`;
 
-export const generateWhatsappUrl = (patient: Appointment): string => {
+export const generateWhatsappUrl = (patient: WhatsappAppointment): string => {
   // Sanitize phone number: remove all non-digit characters (spaces, dashes, parens, etc.)
   // This ensures we have a clean string of numbers to work with.
   let cleanNumber = patient.phone.replace(/\D/g, '');

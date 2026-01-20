@@ -1,5 +1,6 @@
 'use client';
 
+import { forwardRef } from "react";
 import type { TextareaHTMLAttributes } from "react";
 
 interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -8,14 +9,17 @@ interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   required?: boolean;
 }
 
-export default function Textarea({
-  label,
-  error,
-  required,
-  id,
-  className = "",
-  ...props
-}: TextareaProps) {
+const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function Textarea(
+  {
+    label,
+    error,
+    required,
+    id,
+    className = "",
+    ...props
+  },
+  ref
+) {
   const errorId = error ? `${id}-error` : undefined;
 
   return (
@@ -29,6 +33,7 @@ export default function Textarea({
       </label>
       <textarea
         id={id}
+        ref={ref}
         rows={4}
         className={`block w-full rounded-md border border-slate-300 px-4 py-2.5 text-slate-800 shadow-sm focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 ${
           error ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""
@@ -44,4 +49,8 @@ export default function Textarea({
       )}
     </div>
   );
-}
+});
+
+Textarea.displayName = "Textarea";
+
+export default Textarea;

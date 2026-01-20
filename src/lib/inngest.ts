@@ -5,6 +5,9 @@ export const inngest = new Inngest({
   id: "neurosurgery-nextjs-site",
   name: "Dr. Sayuj Krishnan - Neurosurgery Website",
   // Optional: Add environment-specific configuration
+  ...(process.env.INNGEST_BASE_URL && {
+    baseUrl: process.env.INNGEST_BASE_URL,
+  }),
   ...(process.env.INNGEST_EVENT_KEY && {
     eventKey: process.env.INNGEST_EVENT_KEY,
   }),

@@ -1,23 +1,10 @@
-// Temporarily disabled Inngest functions to fix website loading
-import { NextRequest, NextResponse } from 'next/server';
+import { serve } from "inngest/next";
+import { inngest } from "@/src/lib/inngest";
+import { inngestFunctions } from "@/src/lib/inngest/functions";
 
-export async function GET() {
-  return NextResponse.json({ 
-    message: 'Inngest API temporarily disabled for debugging',
-    status: 'maintenance'
-  });
-}
+export const runtime = "nodejs";
 
-export async function POST() {
-  return NextResponse.json({ 
-    message: 'Inngest API temporarily disabled for debugging',
-    status: 'maintenance'
-  });
-}
-
-export async function PUT() {
-  return NextResponse.json({ 
-    message: 'Inngest API temporarily disabled for debugging',
-    status: 'maintenance'
-  });
-}
+export const { GET, POST, PUT } = serve({
+  client: inngest,
+  functions: inngestFunctions,
+});

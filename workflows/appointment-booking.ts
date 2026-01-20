@@ -676,6 +676,13 @@ async function scheduleReminders(
 
   console.log(`[Appointment Workflow] Scheduling reminders for ${bookingId}`);
 
+  if (!process.env.INNGEST_EVENT_KEY) {
+    console.log(
+      "[Appointment Workflow] INNGEST_EVENT_KEY not set; skipping reminders."
+    );
+    return false;
+  }
+
   const appointmentDateTime = buildAppointmentDateTime(date, time);
   if (!appointmentDateTime) {
     console.error(
