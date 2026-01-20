@@ -1,20 +1,6 @@
-url,issue_type,severity,recommended_fix
-https://www.drsayuj.info/services/minimally-invasive-spine-surgery,Missing FAQPage Schema,Medium,Add FAQ schema
-https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad,Missing FAQPage Schema,Medium,Add FAQ schema
-https://www.drsayuj.info/services/spinal-fusion-surgery-hyderabad,Missing FAQPage Schema,Medium,Add FAQ schema
-https://www.drsayuj.info/services/epilepsy-surgery-hyderabad,Missing FAQPage Schema,Medium,Add FAQ schema
-https://www.drsayuj.info/services/cervical-endoscopic-spine-surgery-hyderabad,Missing FAQPage Schema,Medium,Add FAQ schema
-https://www.drsayuj.info/services/cooled-radiofrequency-ablation-hyderabad,Missing FAQPage Schema,Medium,Add FAQ schema
-https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad,Missing FAQPage Schema,Medium,Add FAQ schema
-https://www.drsayuj.info/services/lumbar-laminectomy-surgery-hyderabad,Missing FAQPage Schema,Medium,Add FAQ schema
-https://www.drsayuj.info/services/spinal-fusion,Missing FAQPage Schema,Medium,Add FAQ schema
-https://www.drsayuj.info/services/spine-surgery-hyderabad,Missing FAQPage Schema,Medium,Add FAQ schema
-https://www.drsayuj.info/services/uniportal-endoscopic-spine-surgery-hyderabad,Missing FAQPage Schema,Medium,Add FAQ schema
-https://www.drsayuj.info/conditions/brain-tumor-surgery-hyderabad,Missing FAQPage Schema,Medium,Add FAQ schema
-https://www.drsayuj.info/conditions/sciatica-treatment-hyderabad,No Structured Data,High,Implement Schema
-https://www.drsayuj.info/conditions/trigeminal-neuralgia-treatment-hyderabad,Missing FAQPage Schema,Medium,Add FAQ schema
-https://www.drsayuj.info/conditions/cervical-radiculopathy-treatment-hyderabad,Missing FAQPage Schema,Medium,Add FAQ schema
-https://www.drsayuj.info/conditions/brain-bleed-evacuation-hyderabad,Missing FAQPage Schema,Medium,Add FAQ schema
-https://www.drsayuj.info/conditions/cervical-myelopathy-decompression-hyderabad,Missing FAQPage Schema,Medium,Add FAQ schema
-https://www.drsayuj.info/conditions/spine-tumor-surgery-hyderabad,Missing FAQPage Schema,Medium,Add FAQ schema
-https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills,No Structured Data,High,Implement Schema
+url,schema_type,issue
+https://www.drsayuj.info,Physician,Missing priceRange
+https://www.drsayuj.info/services/minimally-invasive-spine-surgery,Physician,Missing priceRange
+https://www.drsayuj.info/neurosurgeon-hyderabad,Physician,Missing priceRange
+https://www.drsayuj.info/blog/epilepsy-surgery-options-hyderabad,Physician,Missing priceRange
+https://www.drsayuj.info/blog/epilepsy-surgery-options-hyderabad,MedicalWebPage,Missing reviewedBy

@@ -115,6 +115,7 @@ export function buildPhysicianSchema() {
     "@id": "https://www.drsayuj.info/#physician",
     "name": "Dr. Sayuj Krishnan S",
     "medicalSpecialty": ["Neurosurgery", "SpineSurgery"],
+    "priceRange": "₹₹",
     "affiliation": {
       "@type": "Hospital",
       "name": "Yashoda Hospital, Malakpet",

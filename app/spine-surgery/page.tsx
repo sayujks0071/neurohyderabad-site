@@ -1,12 +1,41 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import ExpandedFAQ from "../../src/components/ExpandedFAQ";
 import { SITE_URL } from "../../src/lib/seo";
 import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
-import { serviceJsonLd } from "../../src/lib/seo";
+import MedicalWebPageSchema from "../components/schemas/MedicalWebPageSchema";
+
+const SPINE_SURGERY_FAQS = [
+  {
+    question: "Is endoscopic spine surgery safe for elderly patients?",
+    answer: "Yes, because it uses local anesthesia and smaller incisions, it lowers risks like blood loss and infection, making it safer for elderly patients with other health conditions.",
+    category: "Safety"
+  },
+  {
+    question: "How soon can I walk after endoscopic spine surgery?",
+    answer: "Most patients walk within 3-4 hours after surgery. We encourage early mobilization to speed up recovery and prevent clots.",
+    category: "Recovery"
+  },
+  {
+    question: "Does insurance cover endoscopic spine surgery in Hyderabad?",
+    answer: "Yes, most major insurance providers and TPA approvals cover endoscopic spine procedures at Yashoda Hospitals. We assist with the pre-authorization process.",
+    category: "Cost & Insurance"
+  },
+  {
+    question: "What is the success rate of endoscopic discectomy?",
+    answer: "The success rate is over 90% for properly selected patients, with a recurrence rate of less than 5%, comparable to or better than traditional open surgery.",
+    category: "Outcomes"
+  },
+  {
+    question: "Will I need general anesthesia?",
+    answer: "Many endoscopic procedures can be done under local anesthesia with conscious sedation, meaning you are awake but comfortable. This avoids the risks of general anesthesia.",
+    category: "Procedure"
+  }
+];
 
 export const metadata: Metadata = {
-  title: "Endoscopic Spine Surgery in Hyderabad | Minimally Invasive Procedures – Dr. Sayuj Krishnan",
-  description: "Looking for minimally invasive or endoscopic spine surgery in Hyderabad? Dr. Sayuj Krishnan performs slip disc, spinal stenosis and fusion procedures through tiny incisions for faster recovery. Book a consultation today.",
+  title: "Endoscopic Spine Surgery Hyderabad | Minimally Invasive Specialist",
+  description: "Expert endoscopic spine surgery in Hyderabad. Minimally invasive slip disc & stenosis treatment. Same-day discharge. Dr. Sayuj Krishnan.",
   keywords: [
     "spine surgery hyderabad",
     "endoscopic spine surgery hyderabad",
@@ -17,7 +46,9 @@ export const metadata: Metadata = {
     "same day spine surgery",
     "endoscopic discectomy hyderabad",
     "spine specialist hyderabad",
-    "back pain treatment hyderabad"
+    "back pain treatment hyderabad",
+    "tailbone pain treatment hyderabad",
+    "coccydynia treatment hyderabad"
   ],
   alternates: {
     canonical: `${SITE_URL}/spine-surgery`,
@@ -27,8 +58,8 @@ export const metadata: Metadata = {
     }
   },
   openGraph: {
-    title: "Endoscopic Spine Surgery in Hyderabad | Minimally Invasive Procedures – Dr. Sayuj Krishnan",
-    description: "Looking for minimally invasive or endoscopic spine surgery in Hyderabad? Dr. Sayuj Krishnan performs slip disc, spinal stenosis and fusion procedures through tiny incisions for faster recovery.",
+    title: "Endoscopic Spine Surgery Hyderabad | Minimally Invasive Specialist",
+    description: "Expert endoscopic spine surgery in Hyderabad. Minimally invasive slip disc & stenosis treatment. Same-day discharge. Dr. Sayuj Krishnan.",
     url: `${SITE_URL}/spine-surgery`,
     siteName: "Dr. Sayuj Krishnan - Premier Neurosurgeon Hyderabad",
     locale: "en_IN",
@@ -51,22 +82,18 @@ export const metadata: Metadata = {
 };
 
 export default function SpineSurgeryPage() {
-  const spineServiceJsonLd = serviceJsonLd({
-    name: "Minimally Invasive Spine Surgery",
-    description: "Advanced endoscopic spine surgery techniques for faster recovery and better outcomes. Specializing in slip disc treatment, spinal stenosis, and sciatica relief.",
-    url: `${SITE_URL}/spine-surgery`,
-    areaServed: "Hyderabad, Telangana, India"
-  });
-
   return (
     <>
-      <BreadcrumbSchema items={[
-        { name: "Home", path: "/" },
-        { name: "Spine Surgery", path: "/spine-surgery" }
-      ]} />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(spineServiceJsonLd) }}
+      <MedicalWebPageSchema
+        title="Endoscopic Spine Surgery Hyderabad | Minimally Invasive Specialist"
+        description="Expert endoscopic spine surgery in Hyderabad. Minimally invasive slip disc & stenosis treatment. Same-day discharge. Dr. Sayuj Krishnan."
+        pageSlug="/spine-surgery"
+        pageType="service"
+        serviceOrCondition="Minimally Invasive Spine Surgery"
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Spine Surgery", path: "/spine-surgery" }
+        ]}
       />
       
       <div className="min-h-screen bg-white">
@@ -156,6 +183,9 @@ export default function SpineSurgeryPage() {
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <h2 className="text-3xl font-bold text-center mb-12">Conditions We Treat</h2>
+              <p className="text-center text-gray-600 mb-8">
+                In addition to spine care, Dr. Sayuj specializes in <Link href="/services/brain-tumor-surgery-hyderabad" className="text-blue-600 hover:underline">Brain Tumor Surgery</Link> using advanced neuronavigation.
+              </p>
               <div className="grid md:grid-cols-2 gap-12">
                 <div className="bg-white p-8 rounded-lg shadow-lg">
                   <h3 className="text-2xl font-semibold mb-6 text-blue-700">Slip Disc (Herniated Disc)</h3>
@@ -409,6 +439,8 @@ export default function SpineSurgeryPage() {
           </div>
         </section>
 
+        <ExpandedFAQ faqs={SPINE_SURGERY_FAQS} className="bg-white" />
+
         {/* Call to Action */}
         <section className="py-16 bg-blue-600 text-white">
           <div className="container mx-auto px-4">
@@ -439,4 +471,3 @@ export default function SpineSurgeryPage() {
     </>
   );
 }
-

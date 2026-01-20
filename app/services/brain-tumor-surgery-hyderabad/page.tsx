@@ -16,6 +16,7 @@ import { getServiceSources } from '../sources';
 import { patientStories } from '@/src/content/stories';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
 import MedicalWebPageSchema from '../../components/schemas/MedicalWebPageSchema';
+import FAQPageSchema from '@/app/_components/FAQPageSchema';
 
 const SERVICE_SLUG = 'brain-tumor-surgery-hyderabad';
 
@@ -120,6 +121,10 @@ const faqs = [
     question: 'How long does recovery take after brain tumor surgery?',
     answer: 'Most patients spend 1-2 days in the ICU for monitoring and move to the ward for another 3-4 days. You can usually return to light daily activities within 2-3 weeks, though full recovery depends on the specific tumor type and location.'
   },
+  {
+    question: 'What is the cost of brain tumor surgery in Hyderabad?',
+    answer: 'The cost of brain tumor surgery varies significantly based on tumor complexity, ICU stay duration, and technology used (neuronavigation, monitoring). Biopsies may start from ₹1,00,000, while complex craniotomies can range higher. We provide transparent estimates after scan review.'
+  }
 ];
 
 const COSTS = [
@@ -152,15 +157,11 @@ const COSTS = [
 // Google Business Profile JSON-LD for Brain Tumor Surgery
 const gbpSchema = {
   "@context": "https://schema.org",
-  "@type": "MedicalBusiness",
+  "@type": "MedicalClinic", // Changed from MedicalBusiness to MedicalClinic for consistency
   "name": "Brain Tumor Surgery | Dr. Sayuj Krishnan",
   "url": "https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad/?utm_source=google&utm_medium=organic&utm_campaign=gbp_brain_tumor_surgery_hyderabad",
   "image": "https://www.drsayuj.info/images/og-default.jpg",
   "description": "Microsurgical and awake brain tumor surgery by Dr. Sayuj Krishnan, Yashoda Hospital Hyderabad. Expert in glioma, meningioma, and skull base tumor management with neuronavigation.",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad/"
-  },
   "medicalSpecialty": "Neurosurgery",
   "areaServed": {
     "@type": "AdministrativeArea",
@@ -208,6 +209,8 @@ export default function BrainTumorSurgeryHyderabadPage() {
         serviceOrCondition="Brain Tumor Surgery"
         breadcrumbs={breadcrumbs}
       />
+      <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/${SERVICE_SLUG}`} />
+
       <main className="container mx-auto px-4 py-16">
         <Breadcrumbs
           items={[
@@ -259,40 +262,6 @@ export default function BrainTumorSurgeryHyderabadPage() {
             </ul>
           </div>
         </header>
-
-      {/* FAQPage JSON-LD for this page */}
-      <JsonLd
-        data={{
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "Are all brain tumours treated with open surgery?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Not every brain tumour needs open surgery. Depending on its type, size and location, options such as stereotactic biopsy, radiosurgery or endoscopic approaches may be appropriate. Dr. Sayuj Krishnan tailors the plan for each patient in Hyderabad after reviewing scans and discussing risks."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "How quickly can brain tumour surgery be scheduled?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Urgent cases with progressive neurological deficits are prioritised within 48–72 hours. Elective cases are usually scheduled within a week after multidisciplinary review and pre‑anaesthesia evaluation."
-              }
-            },
-            {
-               "@type": "Question",
-               "name": "What is the cost of brain tumor surgery in Hyderabad?",
-               "acceptedAnswer": {
-                 "@type": "Answer",
-                 "text": "The cost of brain tumor surgery varies significantly based on tumor complexity, ICU stay duration, and technology used (neuronavigation, monitoring). Biopsies may start from ₹1,00,000, while complex craniotomies can range higher. We provide transparent estimates after scan review."
-               }
-            }
-          ]
-        }}
-      />
 
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-blue-900 mb-6">Types of Brain Tumors We Treat</h2>

@@ -1,4 +1,5 @@
 name: Jules Competitor Gap Scan
+# v1.0
 # Managed by Jules (Daily Schedule)
 on:
   schedule:
