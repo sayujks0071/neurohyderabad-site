@@ -1,6 +1,5 @@
 import { GoogleGenAI } from "@google/genai";
 import type { BookingData } from "@/packages/appointment-form/types";
-import { sanitizeForPrompt } from "@/src/lib/validation";
 
 const MODEL_NAME = "gemini-2.5-flash";
 
