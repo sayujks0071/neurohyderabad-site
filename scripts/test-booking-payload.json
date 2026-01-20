@@ -1,0 +1,12 @@
+{
+  "patientName": "Test Patient CRM",
+  "email": "test-crm@example.com",
+  "phone": "+919999888877",
+  "age": 45,
+  "gender": "male",
+  "appointmentDate": "2026-01-25",
+  "appointmentTime": "14:30",
+  "reason": "Testing the complete CRM booking flow including Firebase, Google Apps Script, n8n webhooks, and email notifications. This is a comprehensive test of the entire system integration.",
+  "painScore": 6,
+  "mriScanAvailable": true
+}
