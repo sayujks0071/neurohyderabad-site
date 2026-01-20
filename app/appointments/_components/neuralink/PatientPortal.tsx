@@ -34,6 +34,24 @@ import SpeechButton from "./SpeechButton";
 import { trackConversionOnly } from "@/src/lib/google-ads-conversion";
 import { CLINIC } from "@/app/_lib/clinic";
 
+type WorkflowAppointmentType = "new-consultation" | "follow-up" | "second-opinion";
+
+const WORKFLOW_APPOINTMENT_TYPE_MAP: Record<AppointmentType, WorkflowAppointmentType> = {
+  [AppointmentType.NEW_CONSULTATION]: "new-consultation",
+  [AppointmentType.FOLLOW_UP]: "follow-up",
+  [AppointmentType.POST_OP_CHECK]: "follow-up",
+  [AppointmentType.REPORT_REVIEW]: "second-opinion",
+  [AppointmentType.BRAIN_SPECIALIST]: "new-consultation",
+  [AppointmentType.SPINE_SPECIALIST]: "new-consultation",
+};
+
+const toWorkflowAppointmentType = (
+  type: AppointmentType | null
+): WorkflowAppointmentType => {
+  if (!type) return "new-consultation";
+  return WORKFLOW_APPOINTMENT_TYPE_MAP[type] || "new-consultation";
+};
+
 const PatientPortal = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
@@ -130,8 +148,11 @@ const PatientPortal = () => {
       setIsAnalyzing(false);
     }
 
+    const appointmentTypeLabel = formData.type || "General Consultation";
     const reasonParts = [
-      `Appointment Type: ${formData.type}`,
+      `Appointment Type: ${appointmentTypeLabel}`,
+      `Preferred Date: ${formData.date}`,
+      `Preferred Time: ${formData.time}`,
       `Symptoms: ${formData.symptoms}`,
       `Pain Score: ${formData.painScore}/10`,
       `MRI Available: ${formData.mriScanAvailable ? "Yes" : "No"}`,
@@ -143,23 +164,27 @@ const PatientPortal = () => {
     setIsSyncing(true);
 
     try {
-      const response = await fetch("/api/appointments/submit", {
+      const workflowAppointmentType = toWorkflowAppointmentType(formData.type);
+      const response = await fetch("/api/workflows/booking", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "x-booking-source": "neuralink",
         },
         body: JSON.stringify({
-          patientName: formData.name,
+          name: formData.name,
           email: formData.email,
           phone: formData.phone,
           age: formData.age,
           gender: formData.gender,
-          appointmentDate: formData.date,
-          appointmentTime: formData.time,
-          reason: reasonParts.join("\n"),
+          preferredDate: formData.date,
+          preferredTime: formData.time,
+          appointmentType: workflowAppointmentType,
+          chiefComplaint: formData.symptoms,
+          intakeNotes: reasonParts.join("\n"),
           painScore: formData.painScore,
           mriScanAvailable: formData.mriScanAvailable,
+          source: "neuralink",
         }),
       });
 

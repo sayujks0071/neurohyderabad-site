@@ -363,7 +363,7 @@ export async function handleAppointmentBooking(
     }
 
     // Step 8: Sync CRM + webhooks
-    await syncBookingLead(booking, patientInfo.source);
+    await syncBookingLead(bookingId, booking, patientInfo.source);
     await triggerAppointmentWebhooks(
       booking,
       confirmationMessage,
@@ -612,12 +612,14 @@ async function sendBookingAdminAlert(
  * Step: Sync booking to CRM / Google Sheets
  */
 async function syncBookingLead(
+  bookingId: string,
   booking: BookingData,
   source?: string
 ): Promise<boolean> {
   "use step";
 
   const result = await submitToGoogleSheets({
+    requestId: bookingId,
     fullName: booking.patientName,
     email: booking.email,
     phone: booking.phone,

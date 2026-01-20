@@ -6,13 +6,14 @@ export async function sendConfirmationEmail(
   confirmationMessage: string
 ): Promise<EmailResult> {
   try {
-    const result = await EmailService.sendAppointmentRequestConfirmation({
-      patientName: data.patientName,
-      appointmentDate: data.appointmentDate,
-      appointmentTime: data.appointmentTime,
-      reason: data.reason,
-      email: data.email,
-    });
+    const result = await EmailService.sendAppointmentRequestConfirmation(
+      data.email,
+      data.patientName,
+      data.appointmentDate,
+      data.appointmentTime,
+      confirmationMessage,
+      data.reason
+    );
 
     if (result.success) {
       return { success: true };
