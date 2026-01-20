@@ -43,11 +43,12 @@ export async function POST(request: NextRequest) {
     if (result.success) {
       // TODO: Store subscription in database (e.g., Resend contacts, Mailchimp, etc.)
       // For now, just send confirmation email
-      
-      return NextResponse.json({ 
-        success: true, 
+
+      const messageId = "messageId" in result ? result.messageId : undefined;
+      return NextResponse.json({
+        success: true,
         message: 'Successfully subscribed to newsletter',
-        messageId: result.messageId 
+        ...(messageId ? { messageId } : {}),
       });
     } else {
       return NextResponse.json({ 
