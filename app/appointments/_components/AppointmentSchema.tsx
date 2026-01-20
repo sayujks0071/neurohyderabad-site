@@ -43,7 +43,7 @@ export default function AppointmentSchema() {
         "telephone": malakpet.telephone,
         // Using the v2 image as it's the specific resized asset mentioned in memory
         "image": `${SITE_URL}/images/dr-sayuj-krishnan-portrait-v2.jpg`,
-        "priceRange": "$$",
+        "priceRange": "₹₹",
         "worksFor": {
           "@id": `${SITE_URL}/appointments#clinic`
         }
