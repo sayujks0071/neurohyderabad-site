@@ -8,7 +8,7 @@
  * - Patient education content streaming
  */
 
-import { getWritable, sleep, FatalError } from "workflow";
+import { getWritable, sleep, FatalError, fetch } from "workflow";
 import { generateText, streamText } from "ai";
 import { getTextModel, hasAIConfig } from "@/src/lib/ai/gateway";
 
@@ -67,6 +67,7 @@ export async function streamBlogGeneration(
   targetKeywords: string[]
 ): Promise<{ wordCount: number; sections: number }> {
   "use workflow";
+  globalThis.fetch = fetch;
 
   // Write initial status
   await writeStatus("running", `Starting content generation for: ${topic}`);
@@ -233,6 +234,7 @@ export async function streamHealthDashboard(
   durationMinutes: number = 5
 ): Promise<{ checksPerformed: number; issues: number }> {
   "use workflow";
+  globalThis.fetch = fetch;
 
   await writeLog("info", `Starting health monitoring for ${durationMinutes} minutes`);
 
@@ -395,6 +397,7 @@ export async function streamBatchSEOOptimization(
   tasks: SEOTask[]
 ): Promise<{ completed: number; failed: number }> {
   "use workflow";
+  globalThis.fetch = fetch;
 
   await writeStatus("running", `Starting batch SEO optimization for ${tasks.length} tasks`);
 
@@ -464,6 +467,7 @@ export async function streamPatientEducation(
   appointmentType: "consultation" | "follow-up" | "surgery"
 ): Promise<{ sections: number }> {
   "use workflow";
+  globalThis.fetch = fetch;
 
   await writeStatus("running", `Generating education content for ${condition}`);
 

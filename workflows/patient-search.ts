@@ -5,7 +5,7 @@
  * and patient education content with contextual AI-powered responses.
  */
 
-import { sleep } from "workflow";
+import { sleep, fetch } from "workflow";
 import { generateObject, generateText, jsonSchema } from "ai";
 import { getAllBlogPosts } from "@/src/lib/blog";
 import { getTextModel, hasAIConfig } from "@/src/lib/ai/gateway";
@@ -40,6 +40,7 @@ export async function handlePatientSearch(
   }
 ): Promise<SearchWorkflowResult> {
   "use workflow";
+  globalThis.fetch = fetch;
 
   const startTime = Date.now();
   console.log(`[Patient Search Workflow] Starting search for: "${query}"`);

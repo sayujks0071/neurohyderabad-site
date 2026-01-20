@@ -9,7 +9,7 @@
  * - Follow-up care coordination
  */
 
-import { sleep, FatalError, getStepMetadata } from "workflow";
+import { sleep, FatalError, getStepMetadata, fetch } from "workflow";
 import { generateText } from "ai";
 import { getTextModel, hasAIConfig } from "@/src/lib/ai/gateway";
 import { inngest } from "@/src/lib/inngest";
@@ -238,6 +238,7 @@ export async function handleAppointmentBooking(
   patientInfo: PatientInfo
 ): Promise<AppointmentBookingResult> {
   "use workflow";
+  globalThis.fetch = fetch;
 
   const bookingId = generateBookingId();
   console.log(

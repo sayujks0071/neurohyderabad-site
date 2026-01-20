@@ -9,7 +9,7 @@
  * - Internal linking optimization
  */
 
-import { sleep } from "workflow";
+import { sleep, fetch } from "workflow";
 import { generateText } from "ai";
 import { getTextModel, hasAIConfig } from "@/src/lib/ai/gateway";
 
@@ -32,6 +32,7 @@ interface ContentResult {
  */
 export async function runDailyContentOptimization(): Promise<ContentResult> {
   "use workflow";
+  globalThis.fetch = fetch;
 
   const taskId = `content-${Date.now()}`;
   console.log(`[Content Workflow] Starting optimization ${taskId}`);
@@ -242,6 +243,7 @@ export async function generateBlogOutline(topic: string): Promise<{
   estimatedWordCount: number;
 }> {
   "use workflow";
+  globalThis.fetch = fetch;
 
   console.log(`[Content Workflow] Generating outline for: ${topic}`);
 
@@ -302,6 +304,7 @@ export async function optimizeContent(
   keywordDensity: number;
 }> {
   "use workflow";
+  globalThis.fetch = fetch;
 
   console.log(`[Content Workflow] Optimizing for keyword: ${targetKeyword}`);
 
@@ -346,6 +349,7 @@ export async function scheduleContent(
   publishDate: Date
 ): Promise<{ scheduled: boolean; message: string }> {
   "use workflow";
+  globalThis.fetch = fetch;
 
   console.log(`[Content Workflow] Scheduling ${slug} for ${publishDate.toISOString()}`);
 

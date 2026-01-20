@@ -9,7 +9,7 @@
  * - FAQ generation
  */
 
-import { sleep } from "workflow";
+import { sleep, fetch } from "workflow";
 import { generateObject, generateText, jsonSchema } from "ai";
 import {
   getTextModel,
@@ -54,6 +54,7 @@ export async function handlePatientEducation(
   request: EducationRequest
 ): Promise<PatientEducationResult> {
   "use workflow";
+  globalThis.fetch = fetch;
 
   console.log(
     `[Patient Education Workflow] Starting for patient ${request.patientId}, condition: ${request.condition}`
