@@ -18,6 +18,8 @@
     "check:sitemap": "node scripts/check-sitemap.js",
     "gsc:verify": "npx tsx scripts/verify-gsc-setup.ts",
     "gsc:list": "npx tsx scripts/google-seo-automation.ts --list",
+    "gsc:status": "npx tsx scripts/google-seo-automation.ts --status",
+    "gsc:inspect": "npx tsx scripts/google-seo-automation.ts --inspect",
     "gsc:submit": "npx tsx scripts/google-seo-automation.ts --sitemap",
     "gsc:submit-all": "npx tsx scripts/submit-all-sitemaps.ts",
     "gsc:index": "npx tsx scripts/google-seo-automation.ts --index",
