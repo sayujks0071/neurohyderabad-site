@@ -9,7 +9,7 @@
  * - Follow-up care coordination
  */
 
-import { sleep, FatalError } from "workflow";
+import { sleep, FatalError, getStepMetadata } from "workflow";
 import { generateText } from "ai";
 import { getTextModel, hasAIConfig } from "@/src/lib/ai/gateway";
 import { inngest } from "@/src/lib/inngest";
@@ -529,7 +529,9 @@ async function sendConfirmationEmail(
 ): Promise<boolean> {
   "use step";
 
-  console.log(`[Appointment Workflow] Sending confirmation email to ${patientInfo.email}`);
+  // Use stepId as idempotency key to prevent duplicate emails on retry
+  const { stepId } = getStepMetadata();
+  console.log(`[Appointment Workflow] Sending confirmation email to ${patientInfo.email} (idempotencyKey: ${stepId})`);
 
   try {
     const baseUrl =
@@ -540,7 +542,11 @@ async function sendConfirmationEmail(
 
     const response = await fetch(`${baseUrl}/api/email/appointment`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { 
+        "Content-Type": "application/json",
+        // Pass idempotency key to email API to prevent duplicate sends
+        "X-Idempotency-Key": stepId,
+      },
       body: JSON.stringify({
         to: patientInfo.email,
         name: patientInfo.name,
@@ -550,6 +556,12 @@ async function sendConfirmationEmail(
         chiefComplaint: patientInfo.chiefComplaint,
       }),
     });
+
+    // Handle 409 Conflict as success (duplicate request, already processed)
+    if (response.status === 409) {
+      console.log(`[Appointment Workflow] Email already sent (duplicate request)`);
+      return true;
+    }
 
     const success = response.ok;
     console.log(`[Appointment Workflow] Confirmation email sent: ${success}`);
@@ -571,7 +583,9 @@ async function scheduleReminders(
 ): Promise<boolean> {
   "use step";
 
-  console.log(`[Appointment Workflow] Scheduling reminders for ${bookingId}`);
+  // Use stepId as base for idempotency keys
+  const { stepId } = getStepMetadata();
+  console.log(`[Appointment Workflow] Scheduling reminders for ${bookingId} (stepId: ${stepId})`);
 
   const appointmentDateTime = buildAppointmentDateTime(date, time);
   if (!appointmentDateTime) {
@@ -592,7 +606,11 @@ async function scheduleReminders(
   for (const reminder of reminders) {
     const reminderTime = new Date(appointmentDateTime.getTime() - reminder.offsetMs);
     if (reminderTime > new Date()) {
+      // Use stepId + reminder type as idempotency key to prevent duplicate reminders
+      const idempotencyKey = `${stepId}-${reminder.type}`;
+      
       await inngest.send({
+        id: idempotencyKey, // Inngest uses 'id' for idempotency
         name: "appointment/reminder",
         data: {
           appointmentId: bookingId,

@@ -8,7 +8,7 @@
  */
 
 import { createHook, createWebhook, defineHook, type RequestWithResponse } from "workflow";
-import { sleep, FatalError } from "workflow";
+import { sleep, FatalError, getStepMetadata } from "workflow";
 import { z } from "zod";
 
 // ============================================================
@@ -424,8 +424,17 @@ async function publishContent(draft: ContentDraft): Promise<void> {
 
 async function sendStaffNotification(appointment: AppointmentData, webhookUrl: string): Promise<void> {
   "use step";
+  
+  const { stepId } = getStepMetadata();
   console.log(`[Appointment] Notifying staff for: ${appointment.appointmentId}`);
   console.log(`[Appointment] Confirmation webhook: ${webhookUrl}`);
+  
+  // In production: send email/SMS with idempotency key
+  // await emailService.send({
+  //   to: "staff@drsayuj.info",
+  //   subject: `New Appointment Request: ${appointment.patientName}`,
+  //   idempotencyKey: stepId, // Prevents duplicate notifications on retry
+  // });
 }
 
 async function notifyEmergencyTeam(emergency: EmergencyCase, token: string): Promise<void> {
@@ -463,10 +472,30 @@ async function initiatePayment(payment: PaymentRequest, callbackUrl: string): Pr
 
 async function sendPaymentConfirmation(email: string, orderId: string, transactionId: string): Promise<void> {
   "use step";
+  
+  const { stepId } = getStepMetadata();
   console.log(`[Payment] Sending confirmation to ${email} for order ${orderId}`);
+  
+  // Use stepId as idempotency key to prevent duplicate emails on retry
+  // await emailService.send({
+  //   to: email,
+  //   template: "payment-confirmation",
+  //   data: { orderId, transactionId },
+  //   idempotencyKey: stepId,
+  // });
 }
 
 async function sendPaymentFailure(email: string, orderId: string, error: string): Promise<void> {
   "use step";
+  
+  const { stepId } = getStepMetadata();
   console.log(`[Payment] Sending failure notification to ${email} for order ${orderId}: ${error}`);
+  
+  // Use stepId as idempotency key
+  // await emailService.send({
+  //   to: email,
+  //   template: "payment-failed",
+  //   data: { orderId, error },
+  //   idempotencyKey: stepId,
+  // });
 }
