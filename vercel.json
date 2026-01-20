@@ -117,6 +117,18 @@
     {
       "path": "/api/cron/reindex-rag",
       "schedule": "0 1 * * *"
+    },
+    {
+      "path": "/api/workflows/seo",
+      "schedule": "0 6 * * *"
+    },
+    {
+      "path": "/api/workflows/health",
+      "schedule": "*/30 * * * *"
+    },
+    {
+      "path": "/api/workflows/content",
+      "schedule": "0 5 * * *"
     }
   ]
 }
