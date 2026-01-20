@@ -9,6 +9,7 @@ import ReviewedBy from '@/app/_components/ReviewedBy';
 import NAP from '@/app/_components/NAP';
 import SourceList from '@/app/_components/SourceList';
 import { getServiceSources } from '../sources';
+import { LocalPathways } from '@/src/components/locations/LocalPathways';
 
 const baseMetadata = makeMetadata({
   title: 'Awake Spine Surgery in Hyderabad | Endoscopic & Regional Anaesthesia',
@@ -170,6 +171,11 @@ export default function AwakeSpineSurgeryPage() {
         </div>
       </section>
 
+
+
+      <div className="not-prose mt-12">
+        <LocalPathways mode="service" />
+      </div>
       <SourceList sources={ARTICLE_SOURCES} />
       <ReviewedBy lastReviewed="2025-10-24" reviewerName="Dr. Sayuj Krishnan" />
       <NAP />

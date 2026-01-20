@@ -1,6 +1,6 @@
-issue,evidence,affected_pages,fix,impact,effort
-sitemap.ts vs content mismatch,sitemap.ts has 23 blog posts but only 12 MDX files,All Blog Pages,"Audit sitemap.ts to remove ghost URLs or create missing MDX content",HIGH,MEDIUM
-Missing 'Physician' Schema on some pages,PhysicianSchema is in layout but checked for consistency,Service Pages,"Ensure PhysicianSchema is correctly populated with global data in layout or page",HIGH,LOW
-Keyword Stuffing in Metadata,Service page has 12+ keywords,Service Pages,"Reduce keywords to 5-7 core terms",MEDIUM,LOW
-Image Optimization,Verify DoctorCard uses next/image,Homepage,"Check DoctorCard implementation",MEDIUM,LOW
-Broken Links / 404s,Sitemap entries without files,Blog,"Clean up sitemap.ts",HIGH,LOW
+url,issue_type,severity,recommended_fix
+https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills,Sitemap contains redirect (307),Medium,Update sitemap to point to final destination
+https://www.drsayuj.info/locations/malakpet,Non-canonical in sitemap,Low,Remove from sitemap (points to neurosurgeon-malakpet)
+https://www.drsayuj.info/locations/banjara-hills,Non-canonical in sitemap,Low,Remove from sitemap (points to neurosurgeon-banjara-hills)
+https://www.drsayuj.info/locations/hitech-city,Non-canonical in sitemap,Low,Remove from sitemap (points to neurosurgeon-hitech-city)
+https://www.drsayuj.info/locations/secunderabad,Non-canonical in sitemap,Low,Remove from sitemap (points to neurosurgeon-secunderabad)

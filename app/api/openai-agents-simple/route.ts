@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { DR_SAYUJ_SYSTEM_PROMPT } from '@/src/lib/ai/prompts';
 
 export async function POST(request: NextRequest) {
   let body: any = null;
@@ -67,7 +68,7 @@ export async function POST(request: NextRequest) {
 
     if (isEmergency) {
       return NextResponse.json({
-        response: "🚨 This sounds urgent. Please proceed to Yashoda Hospitals Emergency, Malakpet or call 040-4567 4567. Do not wait for an online booking.",
+        response: "🚨 This sounds urgent. Please proceed to Yashoda Hospitals Emergency, Malakpet or call +91-9778280044 immediately. Do not wait for an online booking.",
         action: "handoff_emergency",
         data: {},
         isEmergency: true
@@ -78,43 +79,7 @@ export async function POST(request: NextRequest) {
     const messages = [
       {
         role: 'system',
-        content: `You are Dr. Sayuj Krishnan's AI assistant for a neurosurgery practice in Hyderabad, India. Your role is to help patients book appointments and provide information about neurosurgical conditions and treatments.
-
-Key information about Dr. Sayuj Krishnan:
-- Neurosurgeon specializing in minimally invasive brain and spine surgery
-- Located at Yashoda Hospital, Room 317, OPD Block, Malakpet, Hyderabad
-- Phone: +91-9778280044
-- Email: hellodr@drsayuj.info
-- Hours: Mon–Sat 10:00–13:00 & 17:00–19:30 IST; Sun closed
-- Specializes in: Endoscopic spine surgery, brain tumor surgery, epilepsy surgery, trigeminal neuralgia treatment
-
-${geminiContext ? `\nIMPORTANT: Use the following document-backed information when answering questions. This information comes from our medical documents:${geminiContext}\n\nWhen referencing this information, mention that it's based on our medical documents.` : ''}
-
-Your capabilities:
-1. Help patients book appointments - When a patient wants to book, be helpful and guide them through the process. Ask for their name, preferred date/time, and contact information.
-2. Provide information about neurosurgical conditions
-3. Answer questions about procedures and treatments
-4. Provide contact information and location details
-5. Help with rescheduling or cancelling appointments
-
-Always be professional, empathetic, and prioritize patient safety. If you're unsure about medical advice, recommend consulting with Dr. Sayuj directly.
-
-For booking appointments, collect:
-- Patient name
-- Mobile number
-- Appointment type (new consultation, follow-up, second opinion)
-- Preferred date/time
-- Brief description of concern
-
-When a patient says they want to book an appointment, respond enthusiastically and helpfully. Guide them through the booking process step by step.
-
-For information requests, provide accurate details about:
-- Clinic hours and location
-- What to bring to appointments
-- Contact information
-- General information about procedures
-
-Never provide medical diagnosis or treatment advice.`
+        content: `${DR_SAYUJ_SYSTEM_PROMPT}${geminiContext ? `\n\nADDITIONAL DOCUMENT CONTEXT:\n${geminiContext}` : ''}`
       },
       // Add conversation history if provided
       ...(body.conversationHistory || []).map((msg: any) => ({

@@ -38,20 +38,23 @@ export interface CRMProvider {
 }
 
 /**
- * A mock CRM implementation that logs to console.
- * Used when no specific CRM credentials are provided.
+ * CRM fallback when no credentials are provided.
+ * Returns a configuration error instead of simulating success.
  */
-class MockCRM implements CRMProvider {
-  name = "MockCRM";
+class UnconfiguredCRM implements CRMProvider {
+  name = "CRMUnavailable";
 
-  async updateLeadScore(update: LeadScoreUpdate) {
-    console.log(`[MockCRM] Updating lead score:`, JSON.stringify(update, null, 2));
-    return { success: true, message: "Logged to console" };
+  async updateLeadScore() {
+    return {
+      success: false,
+      message: "HUBSPOT_ACCESS_TOKEN is not configured.",
+    };
   }
 
-  async identifyLead(profile: LeadProfile) {
-    console.log(`[MockCRM] Identifying lead:`, JSON.stringify(profile, null, 2));
-    return { success: true, leadId: `mock_${Date.now()}` };
+  async identifyLead() {
+    return {
+      success: false,
+    };
   }
 }
 
@@ -156,6 +159,6 @@ export function getCRM(): CRMProvider {
     return new HubSpotCRM(hubspotToken);
   }
 
-  // Fallback to Mock CRM
-  return new MockCRM();
+  console.error("HUBSPOT_ACCESS_TOKEN is not set; CRM integration disabled.");
+  return new UnconfiguredCRM();
 }

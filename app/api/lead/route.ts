@@ -1,10 +1,9 @@
+
 import { NextRequest, NextResponse } from "next/server";
 import { rateLimit } from "@/src/lib/rate-limit";
 import { validateLeadPayload } from "@/src/lib/validation";
+import { submitToGoogleSheets } from "@/src/lib/google-sheets";
 import { randomUUID } from "crypto";
-
-const WEBAPP_URL = process.env.GOOGLE_APPS_SCRIPT_WEBAPP_URL;
-const API_TOKEN = process.env.GOOGLE_APPS_SCRIPT_API_TOKEN;
 
 type LeadPayload = {
   fullName?: string;
@@ -97,68 +96,23 @@ export async function POST(request: NextRequest) {
       metadata: body.metadata ?? {},
     };
 
-    if (!WEBAPP_URL) {
-      if (process.env.NODE_ENV === "production") {
-        console.error("GOOGLE_APPS_SCRIPT_WEBAPP_URL is not set in production.");
-        return NextResponse.json(
-          { error: "Internal Server Configuration Error" },
-          { status: 500 }
-        );
-      }
+    // Submit to Google Sheets (if configured)
+    await submitToGoogleSheets(payload);
 
-      console.warn("Using MOCK response because GOOGLE_APPS_SCRIPT_WEBAPP_URL is unset.");
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      return NextResponse.json({
-        ok: true,
-        requestId: payload.requestId,
-        message: "[MOCK] Lead processed successfully",
-        mock: true,
-        driveFolderUrl: "https://drive.google.com/mock-folder",
-        calendarEventId: "mock-calendar-event-id",
-      });
-    }
-
-    if (!API_TOKEN) {
-      if (process.env.NODE_ENV === "production") {
-        console.error("GOOGLE_APPS_SCRIPT_API_TOKEN is not set in production.");
-        return NextResponse.json(
-          { error: "Internal Server Configuration Error" },
-          { status: 500 }
-        );
-      }
-      console.warn(
-        "GOOGLE_APPS_SCRIPT_API_TOKEN is unset. Upstream script may reject request."
-      );
-    }
-
-    const response = await fetch(WEBAPP_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ...payload,
-        ...(API_TOKEN ? { apiToken: API_TOKEN } : {}),
-      }),
+    // 🛡️ Sentinel: Redact sensitive PII from logs
+    console.log("[api/lead] Lead received:", {
+      fullName,
+      phone: phone ? `${phone.slice(0, 3)}***${phone.slice(-3)}` : undefined,
+      email: email ? `${email[0]}***@${email.split('@')[1]}` : undefined,
+      source
     });
 
-    if (!response.ok) {
-      return NextResponse.json(
-        { error: "Failed to submit lead upstream." },
-        { status: 502 }
-      );
-    }
-
-    const result = await response.json();
-    if (result?.ok === false) {
-      return NextResponse.json(
-        { error: result.error || "Submission failed upstream." },
-        { status: 400 }
-      );
-    }
-
-    return NextResponse.json(result);
+    return NextResponse.json({
+      ok: true,
+      message: "Lead received successfully",
+      requestId: payload.requestId,
+      note: "Data processed"
+    });
   } catch (error) {
     console.error("Error in /api/lead:", error);
     return NextResponse.json(
@@ -171,19 +125,5 @@ export async function POST(request: NextRequest) {
 export async function GET() {
   return NextResponse.json({
     status: "ok",
-    configured: !!(WEBAPP_URL && API_TOKEN),
-    webappUrl: WEBAPP_URL ? "***configured***" : "missing",
-    apiToken: API_TOKEN ? "***configured***" : "missing",
-  });
-}
-
-export async function OPTIONS() {
-  return new NextResponse(null, {
-    status: 204,
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type, Authorization",
-    },
   });
 }

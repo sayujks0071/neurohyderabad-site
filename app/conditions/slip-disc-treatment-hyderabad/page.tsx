@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import type { Metadata } from 'next';
 import MedicalWebPageSchema from "../../components/schemas/MedicalWebPageSchema";
-import FAQPageSchema from "../../components/schemas/FAQPageSchema";
+import FAQPageSchema from "@/app/_components/FAQPageSchema";
 import BreadcrumbSchema from "../../components/schemas/BreadcrumbSchema";
 import { SITE_URL } from "../../../src/lib/seo";
 import ReviewedBy from '@/app/_components/ReviewedBy';
@@ -11,6 +11,7 @@ import { makeMetadata } from '@/app/_lib/meta';
 import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import { sources } from '../../blog/sources';
+import { LocalPathways } from '@/src/components/locations/LocalPathways';
 
 const baseMetadata = makeMetadata({
   title: "Slip Disc Treatment in Hyderabad | Endoscopic Discectomy | Dr. Sayuj Krishnan",
@@ -114,14 +115,20 @@ export default function SlipDiscTreatmentPage() {
           <p className="text-gray-700 mb-4">
             A slip disc, also known as a herniated disc, occurs when the soft center of a spinal 
             disc pushes through a crack in the outer ring. This can compress nearby nerves, 
-            causing pain, numbness, or weakness in the arms or legs.
+            causing pain, numbness, or weakness in the arms or legs. This compression is often the primary cause of <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 underline">sciatica</Link>.
           </p>
           
           <h3 className="text-xl font-semibold mb-4 text-blue-700">Common Symptoms</h3>
           <ul className="space-y-2 text-gray-700">
             <li className="flex items-start">
               <span className="text-blue-600 mr-2 mt-1">•</span>
-              <span>Sharp, shooting pain in the leg or arm (Sciatica)</span>
+              <span>
+                Sharp, shooting pain in the leg or arm (
+                <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 underline">
+                  Sciatica
+                </Link>
+                )
+              </span>
             </li>
             <li className="flex items-start">
               <span className="text-blue-600 mr-2 mt-1">•</span>
@@ -336,18 +343,22 @@ export default function SlipDiscTreatmentPage() {
         serviceOrCondition="Slip Disc Treatment"
         breadcrumbs={breadcrumbs}
       />
-      
-      <FAQPageSchema />
+
+      <FAQPageSchema
+        faqs={FAQ.map(item => ({ question: item.q, answer: item.a }))}
+        pageUrl={`${SITE_URL}/conditions/slip-disc-treatment-hyderabad/`}
+      />
       <BreadcrumbSchema items={breadcrumbs} />
-    
-      <AuthorByline 
+
+      <AuthorByline
         publishedOn="2025-02-15"
         updatedOn="2025-10-19"
       />
-      
+
+      <div className="mt-12">
+        <LocalPathways mode="condition" />
+      </div>
       <SourceList sources={sources['slip-disc-treatment-hyderabad'] || []} />
-      
-      <ReviewedBy />
 </main>
   );
 }

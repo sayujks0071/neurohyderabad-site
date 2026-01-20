@@ -144,7 +144,7 @@ function generateAIResponse(request: BookingRequest): AIResponse {
 
   if (hasPhone && !bookingData.preferredDate) {
     return {
-      response: `Perfect! I have your phone number: ${phoneNumber || bookingData.phone}. When would you prefer to have your appointment? Dr. Sayuj is available Monday to Friday, 9 AM to 6 PM. What day works best for you?`,
+      response: `Perfect! I have your phone number: ${phoneNumber || bookingData.phone}. When would you prefer to have your appointment? Dr. Sayuj's OPD hours are Monday to Saturday (10:00 AM – 1:00 PM and 5:00 PM – 7:30 PM). What day works best for you?`,
       isEmergency: false,
       nextStep: 'scheduling',
       bookingData: {

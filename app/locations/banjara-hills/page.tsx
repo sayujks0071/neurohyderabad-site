@@ -6,6 +6,7 @@ import { LocationMapEmbed } from "@/src/components/locations/LocationMapEmbed";
 import { LocalPathways } from "@/src/components/locations/LocalPathways";
 import { LocationSchema } from "@/src/components/locations/LocationSchema";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 
 // Force static generation
 export const dynamic = 'force-static';
@@ -54,6 +55,12 @@ export default function BanjaraHillsLocationPage() {
       <p className="mt-4 text-lg">
         Serving patients from <strong>Banjara Hills</strong> and nearby localities. OPD at Yashoda Hospitals (Malakpet) with endoscopic spine expertise.
       </p>
+
+      <div className="mt-4 bg-blue-50 border border-blue-100 p-4 rounded-lg">
+        <p className="text-sm text-blue-800">
+          <strong>Common conditions treated:</strong> <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="underline hover:text-blue-900">Sciatica</Link>, Slip Disc, Brain Tumors, and Spinal Stenosis.
+        </p>
+      </div>
 
       <div className="mt-6">
         <LocationCTAs location={location} />

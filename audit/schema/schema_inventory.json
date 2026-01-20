@@ -1,0 +1,34 @@
+{
+  "https://www.drsayuj.info": [
+    "WebSite",
+    null,
+    "Hospital",
+    "FAQPage",
+    "BreadcrumbList"
+  ],
+  "https://www.drsayuj.info/services/minimally-invasive-spine-surgery": [
+    "WebSite",
+    null,
+    "Hospital",
+    "MedicalBusiness",
+    "MedicalWebPage",
+    "BreadcrumbList",
+    "FAQPage",
+    "FAQPage"
+  ],
+  "https://www.drsayuj.info/neurosurgeon-hyderabad": [
+    "WebSite",
+    null,
+    "Hospital",
+    "MedicalClinic",
+    "BreadcrumbList",
+    "FAQPage"
+  ],
+  "https://www.drsayuj.info/blog/epilepsy-surgery-options-hyderabad": [
+    "WebSite",
+    null,
+    "Hospital",
+    "BreadcrumbList",
+    null
+  ]
+}

@@ -20,6 +20,7 @@ import {
   Cloud,
   Check,
   Info,
+  ShieldCheck,
 } from "lucide-react";
 import {
   analyzeSymptoms,
@@ -416,6 +417,20 @@ const PatientPortal = () => {
             </div>
           </div>
         </div>
+        <div className="mt-4 flex flex-wrap items-center gap-3 text-xs font-semibold text-slate-600">
+          <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1">
+            <Check className="w-3.5 h-3.5 text-emerald-600" />
+            Confirmations in 30–60 minutes
+          </span>
+          <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1">
+            <Phone className="w-3.5 h-3.5 text-blue-600" />
+            WhatsApp & phone updates
+          </span>
+          <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1">
+            <ShieldCheck className="w-3.5 h-3.5 text-slate-500" />
+            Data handled securely
+          </span>
+        </div>
         {errorMessage && (
           <div className="mt-6 bg-red-50 border border-red-100 text-red-700 text-sm font-medium rounded-2xl p-4">
             {errorMessage}
@@ -681,7 +696,7 @@ const PatientPortal = () => {
                     Pain Intensity (1-10)
                   </label>
                   <div className="flex items-center gap-4">
-                    <span className="text-sm font-bold text-slate-400">1</span>
+                    <span className="text-sm font-bold text-slate-400" aria-hidden="true">1</span>
                     <input
                       id="patient-pain-score"
                       type="range"
@@ -696,8 +711,9 @@ const PatientPortal = () => {
                         })
                       }
                       className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                      aria-valuetext={`Score: ${formData.painScore}${formData.painScore >= 8 ? ' (Severe)' : formData.painScore <= 3 ? ' (Mild)' : ''}`}
                     />
-                    <span className="text-sm font-bold text-slate-400">10</span>
+                    <span className="text-sm font-bold text-slate-400" aria-hidden="true">10</span>
                   </div>
                   <div className="text-center mt-2">
                     <span
@@ -802,7 +818,7 @@ const PatientPortal = () => {
                     </>
                   ) : isSyncing ? (
                     <>
-                      <Cloud className="w-5 h-5 animate-bounce mr-2" />
+                      <Loader2 className="w-5 h-5 animate-spin mr-2" />
                       Sending...
                     </>
                   ) : (

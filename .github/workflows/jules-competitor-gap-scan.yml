@@ -1,4 +1,6 @@
 name: Jules Competitor Gap Scan
+# v1.0
+# Managed by Jules (Daily Schedule)
 on:
   schedule:
     # 09:00 IST (India Standard Time) = 03:30 UTC
@@ -46,6 +48,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               state: 'open',
+              per_page: 100
             });
 
             // Find strictly matching title
@@ -54,6 +57,28 @@ jobs:
             if (duplicate) {
               console.log(`Issue already exists: ${duplicate.html_url}`);
               return;
+            }
+
+            // Check if label exists, create if not
+            try {
+              await github.rest.issues.getLabel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                name: 'jules'
+              });
+            } catch (error) {
+              if (error.status === 404) {
+                console.log('Label "jules" not found. Creating it...');
+                await github.rest.issues.createLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  name: 'jules',
+                  color: '0E8A16', // Green color
+                  description: 'Tasks for Jules AI'
+                });
+              } else {
+                throw error;
+              }
             }
 
             // Create the issue

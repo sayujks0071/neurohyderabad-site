@@ -1,16 +1,20 @@
-import { SITE_URL } from "../../src/lib/seo";
+import { SITE_URL } from "@/src/lib/seo";
 import type { Metadata } from "next";
 import NeuraLinkBookingApp from "./_components/neuralink/NeuraLinkBookingApp";
 import AppointmentSchema from "./_components/AppointmentSchema";
+import AppointmentFaqSchema from "./_components/AppointmentFaqSchema";
+import BookingHeroContent from "./_components/neuralink/BookingHeroContent";
+import BookingLocationInfo from "./_components/neuralink/BookingLocationInfo";
 
 export const metadata: Metadata = {
-  title: "Book an Appointment | Best Neurosurgeon Hyderabad | Dr Sayuj Krishnan",
+  title: "Book Appointment | Neurosurgeon Hyderabad | Dr. Sayuj",
   description:
-    "Schedule a consultation with Dr Sayuj Krishnan, the best neurosurgeon in Hyderabad. Book appointment for spine surgery, brain tumor surgery, and expert neurosurgical care.",
+    "Schedule a consultation with Dr Sayuj Krishnan. Book appointment for spine surgery & brain tumor surgery in Hyderabad.",
   keywords: [
     "Book Appointment",
     "Best Neurosurgeon Hyderabad",
     "Dr Sayuj Krishnan Appointment",
+    "Neurosurgeon Appointment",
     "Neurosurgeon Appointment Hyderabad",
     "Spine Surgeon Appointment Hyderabad",
     "Yashoda Hospital Neurosurgeon Appointment"
@@ -19,7 +23,7 @@ export const metadata: Metadata = {
     canonical: "/appointments",
   },
   openGraph: {
-    title: "Book an Appointment | Best Neurosurgeon Hyderabad | Dr Sayuj Krishnan",
+    title: "Book Appointment | Best Neurosurgeon Hyderabad | Dr. Sayuj Krishnan",
     description:
       "Schedule a consultation with Dr Sayuj Krishnan, the best neurosurgeon in Hyderabad. Book appointment for spine surgery, brain tumor surgery, and expert neurosurgical care.",
     url: `${SITE_URL}/appointments`,
@@ -28,7 +32,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: `${SITE_URL}/api/og?title=${encodeURIComponent("Book an Appointment | Dr Sayuj Krishnan")}&subtitle=${encodeURIComponent("Consultations in Hyderabad")}`,
+        url: `${SITE_URL}/api/og?title=${encodeURIComponent("Book Appointment | Dr Sayuj Krishnan")}&subtitle=${encodeURIComponent("Consultations in Hyderabad")}`,
         width: 1200,
         height: 630,
         alt: "Book an Appointment — Dr Sayuj Krishnan",
@@ -53,9 +57,17 @@ export default function AppointmentsPage() {
   return (
     <>
       <AppointmentSchema />
-      {/* Hidden H1 for SEO and Accessibility structure (visually handled by component) */}
-      <h1 className="sr-only">Book Appointment with Dr. Sayuj Krishnan</h1>
-      <NeuraLinkBookingApp />
+      <AppointmentFaqSchema />
+      {/*
+        CWV Optimization:
+        Main content (H1, Description) is now server-rendered via BookingHeroContent passed as children/props
+        to the client wrapper. This improves LCP significantly compared to client-side rendering.
+        Removed duplicate hidden H1 since BookingHeroContent renders the semantic H1.
+      */}
+      <NeuraLinkBookingApp
+        heroContent={<BookingHeroContent />}
+        locationInfo={<BookingLocationInfo />}
+      />
     </>
   );
 }

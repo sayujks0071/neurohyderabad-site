@@ -14,7 +14,6 @@ import JsonLd from '@/components/JsonLd';
 import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
-import { PhysicianSchema } from "@/src/components/schema/PhysicianSchema";
 
 const baseMetadata = makeMetadata({
   title: 'Cervical Endoscopic Spine Surgery Hyderabad | Dr. Sayuj Krishnan',
@@ -162,7 +161,6 @@ export default function CervicalEndoscopicSpineSurgeryPage() {
         ]}
       />
       <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/cervical-endoscopic-spine-surgery-hyderabad`} />
-      <PhysicianSchema />
       <div className="min-h-screen bg-white">
       <div className="container mx-auto px-4 py-16">
         <header className="text-center mb-8">

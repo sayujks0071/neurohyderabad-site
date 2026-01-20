@@ -13,9 +13,9 @@ import SourceList from '@/app/_components/SourceList';
 import { getServiceSources } from '../sources';
 import JsonLd from '@/components/JsonLd';
 import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
+import MedicalWebPageSchema from '@/app/components/schemas/MedicalWebPageSchema';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
-import { PhysicianSchema } from "@/src/components/schema/PhysicianSchema";
 import CostTransparencySection from '@/src/components/CostTransparencySection';
 import PatientJourneySection from '@/src/components/PatientJourneySection';
 import SurgeryComparisonTable from '@/src/components/SurgeryComparisonTable';
@@ -246,6 +246,14 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
   return (
     <>
       <JsonLd data={gbpSchema} />
+      <MedicalWebPageSchema
+        pageType="service"
+        pageSlug="/services/minimally-invasive-spine-surgery"
+        title="Endoscopic Spine Surgery Hyderabad | Dr. Sayuj Krishnan"
+        description="Expert endoscopic spine surgery in Hyderabad with Dr. Sayuj Krishnan. Minimally invasive procedures with same-day discharge at Yashoda Hospital Malakpet."
+        serviceOrCondition="Minimally Invasive Spine Surgery"
+        lastReviewed="2025-10-19"
+      />
       <BreadcrumbSchema
         items={[
           { name: 'Home', path: '/' },
@@ -254,7 +262,6 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
         ]}
       />
       <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/minimally-invasive-spine-surgery`} />
-      <PhysicianSchema />
       <div className="min-h-screen bg-white">
         <script
           type="application/ld+json"
@@ -456,6 +463,9 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
         {/* Patient Testimonials Section */}
         <section className="mb-12">
           <h2 className="text-3xl font-bold text-blue-800 mb-6 text-center">Patient Success Stories</h2>
+          <p className="text-gray-700 mb-6">
+            See how minimally invasive techniques have helped patients with severe <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 underline">sciatica</Link> and back pain return to their active lives.
+          </p>
           <div className="grid md:grid-cols-2 gap-6">
             {spineStoryHighlights.map((story) => (
               <article key={story.id} className="bg-white rounded-lg p-6 shadow-sm border-l-4 border-blue-500">
@@ -636,7 +646,7 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
               <h3 className="text-xl font-semibold text-blue-700 mb-3">Related Symptoms</h3>
               <ul className="space-y-2">
                 <li>
-                  <Link href="/conditions/sciatica-treatment-hyderabad" className="text-blue-600 hover:text-blue-800 hover:underline">
+                  <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 hover:text-blue-800 hover:underline">
                     Sciatica (Leg Pain)
                   </Link>
                   <span className="text-gray-600 text-sm ml-2">- Shooting pain down the leg</span>

@@ -3,36 +3,19 @@
 import React, { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
 import type { BookingData } from "@/packages/appointment-form/types";
 import Input from "./ui/Input";
 import Select from "./ui/Select";
 import Textarea from "./ui/Textarea";
 import Button from "./ui/Button";
 import Calendar from "./ui/Calendar";
+import { appointmentSchema, BookingFormValues } from "./schema";
+import { formatLocalDate, parseLocalDate } from "@/src/lib/dates";
 
 interface BookingFormProps {
   onSubmit: (data: BookingData) => Promise<void> | void;
   initialData?: BookingData | null;
 }
-
-export const appointmentSchema = z.object({
-  patientName: z.string().min(2, "Name is too short"),
-  email: z.string().email("Please enter a valid email address"),
-  contactNumber: z.string().regex(/^[6-9]\d{9}$/, "Invalid Indian mobile number"),
-  age: z.string().regex(/^\d+$/, "Age must be a number").refine((val) => {
-    const n = Number(val);
-    return Number.isFinite(n) && n > 0 && n <= 120;
-  }, "Age seems too high"),
-  gender: z.enum(["male", "female", "other"], { errorMap: () => ({ message: "Please select a gender" }) }),
-  requestedDate: z.date({ required_error: "Please select a date" }).min(new Date(), "Date must be in the future"),
-  appointmentTime: z.string().min(1, "Please select a time"),
-  reason: z.string().min(10, "Please provide more details (min 10 characters)"),
-  painScore: z.coerce.number().min(1).max(10),
-  hasMRI: z.boolean().default(false),
-});
-
-type BookingFormValues = z.infer<typeof appointmentSchema>;
 
 const defaultValues: Partial<BookingFormValues> = {
   patientName: "",
@@ -43,8 +26,8 @@ const defaultValues: Partial<BookingFormValues> = {
   requestedDate: undefined,
   appointmentTime: "",
   reason: "",
-  painScore: undefined,
-  hasMRI: false,
+  painScore: 5,
+  mriScanAvailable: false,
 };
 
 const availableTimes = [
@@ -62,6 +45,7 @@ const availableTimes = [
   "04:30 PM",
 ];
 
+// Refactored to use enhanced Zod validation for strict type safety
 export default function BookingForm({
   onSubmit,
   initialData,
@@ -74,7 +58,7 @@ export default function BookingForm({
     watch,
     formState: { errors, isSubmitting },
   } = useForm<BookingFormValues>({
-    resolver: zodResolver(appointmentSchema as any),
+    resolver: zodResolver(appointmentSchema),
     defaultValues: defaultValues as BookingFormValues,
     mode: "onTouched", // Trigger validation on blur
   });
@@ -92,11 +76,13 @@ export default function BookingForm({
         gender: (initialData.gender && ["male", "female", "other"].includes(initialData.gender))
           ? (initialData.gender as "male" | "female" | "other")
           : undefined,
-        requestedDate: initialData.appointmentDate ? new Date(initialData.appointmentDate) : undefined,
+        requestedDate: initialData.appointmentDate
+          ? parseLocalDate(initialData.appointmentDate)
+          : undefined,
         appointmentTime: initialData.appointmentTime,
         reason: initialData.reason,
-        painScore: initialData.painScore,
-        hasMRI: initialData.mriScanAvailable ?? false,
+        painScore: initialData.painScore ?? 5,
+        mriScanAvailable: initialData.mriScanAvailable ?? false,
       };
 
       // If date is invalid, don't set it (validation will catch it)
@@ -110,7 +96,7 @@ export default function BookingForm({
     }
   }, [initialData, reset]);
 
-  const handleFormSubmit = (data: BookingFormValues) => {
+  const handleFormSubmit = async (data: BookingFormValues) => {
     // Map form values back to BookingData
     const submissionData: BookingData = {
       patientName: data.patientName,
@@ -118,13 +104,13 @@ export default function BookingForm({
       phone: data.contactNumber,
       age: data.age,
       gender: data.gender,
-      appointmentDate: data.requestedDate.toISOString().split("T")[0],
+      appointmentDate: formatLocalDate(data.requestedDate),
       appointmentTime: data.appointmentTime,
       reason: data.reason,
       painScore: data.painScore,
-      mriScanAvailable: data.hasMRI,
+      mriScanAvailable: data.mriScanAvailable,
     };
-    onSubmit(submissionData);
+    await onSubmit(submissionData);
   };
 
   return (
@@ -207,7 +193,7 @@ export default function BookingForm({
                 render={({ field }) => (
                   <Calendar
                     label="Preferred Date"
-                    value={field.value ? field.value.toISOString().split("T")[0] : ""}
+                    value={field.value ? formatLocalDate(field.value) : ""}
                     onChange={(dateString) => {
                         const [year, month, day] = dateString.split("-").map(Number);
                         const date = new Date(year, month - 1, day);
@@ -234,6 +220,7 @@ export default function BookingForm({
                           key={time}
                           type="button"
                           onClick={() => field.onChange(time)}
+                          aria-pressed={field.value === time}
                           className={`w-full text-center px-2 py-2.5 border rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-1 ${
                             field.value === time
                               ? "bg-cyan-600 text-white border-cyan-600"
@@ -256,12 +243,16 @@ export default function BookingForm({
 
             <div className="md:col-span-2 space-y-6">
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
+                <label
+                  htmlFor="painScore-slider"
+                  className="block text-sm font-medium text-slate-700 mb-2"
+                >
                   Pain Intensity Score (1-10)
                 </label>
                 <div className="flex items-center gap-4">
-                  <span className="text-sm font-bold text-slate-400">1</span>
+                  <span className="text-sm font-bold text-slate-400" aria-hidden="true">1</span>
                   <input
+                    id="painScore-slider"
                     type="range"
                     min="1"
                     max="10"
@@ -269,7 +260,7 @@ export default function BookingForm({
                     className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-cyan-600"
                     {...register("painScore")}
                   />
-                  <span className="text-sm font-bold text-slate-400">10</span>
+                  <span className="text-sm font-bold text-slate-400" aria-hidden="true">10</span>
                 </div>
                 <div className="text-center mt-2">
                   {painScoreValue && (
@@ -288,17 +279,22 @@ export default function BookingForm({
                     </span>
                   )}
                 </div>
+                {errors.painScore && (
+                  <p className="mt-1 text-sm text-center text-red-600">
+                    {errors.painScore.message}
+                  </p>
+                )}
               </div>
 
               <div className="flex items-center p-4 bg-slate-50 rounded-xl border border-slate-200">
                 <input
                   type="checkbox"
-                  id="hasMRI"
+                  id="mriScanAvailable"
                   className="w-5 h-5 text-cyan-600 rounded focus:ring-cyan-500 border-gray-300"
-                  {...register("hasMRI")}
+                  {...register("mriScanAvailable")}
                 />
                 <label
-                  htmlFor="hasMRI"
+                  htmlFor="mriScanAvailable"
                   className="ml-3 text-sm font-medium text-slate-700 cursor-pointer select-none"
                 >
                   I have recent MRI/CT Scan reports available
@@ -317,7 +313,7 @@ export default function BookingForm({
           </div>
 
           <div className="mt-10 pt-6 border-t border-slate-200 text-center">
-            <Button type="submit" disabled={isSubmitting}>
+            <Button type="submit" isLoading={isSubmitting}>
               {isSubmitting ? "Sending..." : "Submit Request"}
             </Button>
           </div>

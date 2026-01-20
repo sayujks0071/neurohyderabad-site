@@ -1,5 +1,6 @@
 import { GoogleGenAI } from "@google/genai";
 import type { BookingData } from "@/packages/appointment-form/types";
+import { sanitizeForPrompt } from "@/src/lib/validation";
 
 const MODEL_NAME = "gemini-2.5-flash";
 
@@ -10,11 +11,21 @@ The message must follow these rules:
 1. Confirm receipt of the appointment request for the patient.
 2. Mention the requested date and time.
 3. State clear next steps: the office will call shortly to confirm the final appointment details and provide any instructions.
-4. Do not add any greeting such as "Dear [Patient Name]". Start the message directly.
-5. Keep the entire message under 50 words.`;
+4. Remind the patient to bring any MRI/CT scans with them.
+5. Do not add any greeting such as "Dear [Patient Name]". Start the message directly.
+6. Keep the entire message under 50 words.`;
 
 const fallbackMessage = (data: BookingData) =>
-  `Thank you for your request for an appointment on ${data.appointmentDate} at ${data.appointmentTime}. We have received your details and our team will contact you shortly to confirm the appointment.`;
+  `Appointment request received. Please bring any MRI/CT scans with you. We will confirm via phone shortly.`;
+
+// 🛡️ Sentinel: Sanitize input to prevent prompt injection and token exhaustion
+function sanitizeForPrompt(text: string | number | undefined | null, maxLength = 500): string {
+  if (text === null || text === undefined) return "";
+  const str = String(text);
+  // Remove control characters (including newlines) to prevent structure injection
+  // and truncate to prevent token exhaustion
+  return str.replace(/[\x00-\x1F\x7F]/g, " ").trim().substring(0, maxLength);
+}
 
 export async function generateBookingConfirmation(
   data: BookingData
@@ -34,15 +45,16 @@ export async function generateBookingConfirmation(
   try {
     const ai = new GoogleGenAI({ apiKey });
 
+    // 🛡️ Sentinel: Sanitize inputs to prevent prompt injection
     const userPrompt = [
       "Generate a confirmation message for the following appointment request:",
       "",
-      `Patient Name: ${data.patientName}`,
-      `Age: ${data.age}`,
-      `Gender: ${data.gender}`,
-      `Requested Date: ${data.appointmentDate}`,
-      `Requested Time: ${data.appointmentTime}`,
-      `Reason: ${data.reason}`,
+      `Patient Name: ${sanitizeForPrompt(data.patientName, 100)}`,
+      `Age: ${sanitizeForPrompt(data.age, 10)}`,
+      `Gender: ${sanitizeForPrompt(data.gender, 20)}`,
+      `Requested Date: ${sanitizeForPrompt(data.appointmentDate, 20)}`,
+      `Requested Time: ${sanitizeForPrompt(data.appointmentTime, 20)}`,
+      `Reason: ${sanitizeForPrompt(data.reason, 1000)}`,
     ].join("\n");
 
     const response = await ai.models.generateContent({

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import SchemaScript from "@/app/_components/SchemaScript";
 import LocalNAP from "@/app/_components/LocalNAP";
 import YMYLAttribution from "@/app/_components/YMYLAttribution";
 import { SITE_URL } from "@/src/lib/seo";
@@ -8,137 +7,15 @@ import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import { sources } from '../../blog/sources';
+import { LocalPathways } from '@/src/components/locations/LocalPathways';
+import MedicalWebPageSchema from '../../components/schemas/MedicalWebPageSchema';
+import FAQPageSchema from "@/app/_components/FAQPageSchema";
 
 // Static generation with 24-hour revalidation
 export const revalidate = 86400;
 export const dynamic = 'error';
 
 const CANONICAL = `${SITE_URL}/conditions/trigeminal-neuralgia-treatment-hyderabad`;
-
-const schemaData = [
-  {
-    "@context": "https://schema.org",
-    "@type": "MedicalWebPage",
-    name: "Trigeminal Neuralgia Treatment in Hyderabad",
-    description:
-      "Explore medicines, microvascular decompression, radiosurgery and percutaneous options for trigeminal neuralgia in Hyderabad with Dr. Sayuj Krishnan.",
-    url: CANONICAL,
-    inLanguage: "en-IN",
-    isPartOf: {
-      "@type": "WebSite",
-      name: "Dr. Sayuj Krishnan — Brain & Spine Clinic",
-      url: SITE_URL,
-    },
-    about: {
-      "@type": "MedicalCondition",
-      name: "Trigeminal Neuralgia",
-      alternateName: "TN",
-      medicalSpecialty: "Neurosurgery",
-      signOrSymptom: [
-        "Electric shock-like facial pain",
-        "Trigger-based pain episodes",
-        "Facial hypersensitivity",
-      ],
-      possibleTreatment: [
-        "Carbamazepine therapy",
-        "Microvascular decompression",
-        "Gamma Knife radiosurgery",
-        "Percutaneous rhizotomy",
-      ],
-    },
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: "Is trigeminal neuralgia curable?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Many people achieve long-term relief with procedures like microvascular decompression or radiosurgery. Recurrence is possible, so regular follow-up is important.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "How long does Gamma Knife radiosurgery take to work?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Pain relief usually develops progressively over two to eight weeks after radiosurgery. Medication tapering begins once sustained improvement is confirmed.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "What are the risks of microvascular decompression?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Complication rates are low in experienced hands but include hearing changes, facial numbness, or cerebrospinal fluid leak. Comprehensive monitoring reduces these risks.",
-        },
-      },
-    ],
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: `${SITE_URL}/`,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Conditions",
-        item: `${SITE_URL}/conditions`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: "Trigeminal Neuralgia Treatment Hyderabad",
-        item: CANONICAL,
-      },
-    ],
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "Physician",
-    name: "Dr. Sayuj Krishnan",
-    medicalSpecialty: "Neurosurgery",
-    url: SITE_URL,
-    sameAs: [],
-    telephone: "+91 9778280044",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "Room 317, OPD Block, Yashoda Hospital, Malakpet",
-      addressLocality: "Hyderabad",
-      addressRegion: "Telangana",
-      postalCode: "500036",
-      addressCountry: "IN",
-    },
-    affiliation: {
-      "@type": "MedicalClinic",
-      name: "Yashoda Hospital Malakpet",
-    },
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "MedicalClinic",
-    name: "Dr. Sayuj Krishnan - Brain & Spine Clinic",
-    url: SITE_URL,
-    areaServed: "Hyderabad",
-    telephone: "+91 9778280044",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "Room 317, OPD Block, Yashoda Hospital, Malakpet",
-      addressLocality: "Hyderabad",
-      addressRegion: "Telangana",
-      postalCode: "500036",
-      addressCountry: "IN",
-    },
-  },
-] as const;
 
 const faqItems = [
   {
@@ -166,7 +43,7 @@ const faqItems = [
     answer:
       "Medicines control pain for many people, but side effects or breakthrough pain may prompt procedures. We decide together based on symptom control and MRI findings.",
   },
-] as const;
+];
 
 const references = [
   {
@@ -181,7 +58,7 @@ const references = [
     label: "National Institute for Health and Care Excellence (NICE) — Guideline NG173: Neuropathic pain in adults",
     url: "https://www.nice.org.uk/guidance/ng173",
   },
-] as const;
+];
 
 export const metadata: Metadata = {
   title: "Trigeminal Neuralgia Treatment Hyderabad — Facial Pain Care",
@@ -204,9 +81,24 @@ export const metadata: Metadata = {
 };
 
 export default function TrigeminalNeuralgiaTreatmentPage() {
+  const breadcrumbs = [
+    { name: "Home", path: "/" },
+    { name: "Conditions", path: "/conditions" },
+    { name: "Trigeminal Neuralgia Treatment Hyderabad", path: "/conditions/trigeminal-neuralgia-treatment-hyderabad" },
+  ];
+
   return (
     <main className="bg-white">
-      <SchemaScript id="tn-jsonld" data={schemaData} />
+      <MedicalWebPageSchema
+        title="Trigeminal Neuralgia Treatment in Hyderabad"
+        description="Explore medicines, microvascular decompression, radiosurgery and percutaneous options for trigeminal neuralgia in Hyderabad with Dr. Sayuj Krishnan."
+        pageSlug="/conditions/trigeminal-neuralgia-treatment-hyderabad"
+        pageType="condition"
+        serviceOrCondition="Trigeminal Neuralgia"
+        breadcrumbs={breadcrumbs}
+      />
+      <FAQPageSchema faqs={faqItems} pageUrl={CANONICAL} />
+
       <section className="bg-blue-50 py-12">
         <div className="mx-auto max-w-5xl px-4">
           <p className="text-sm font-semibold uppercase tracking-wide text-blue-700">
@@ -490,6 +382,11 @@ export default function TrigeminalNeuralgiaTreatmentPage() {
         updatedOn="2025-10-19"
       />
       
+
+
+      <div className="mt-12">
+        <LocalPathways mode="condition" />
+      </div>
       <SourceList sources={sources['trigeminal-neuralgia-treatment-hyderabad'] || []} />
       
       <ReviewedBy />

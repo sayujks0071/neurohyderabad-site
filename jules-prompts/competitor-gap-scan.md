@@ -11,3 +11,6 @@ Scan the key competitors defined in `AGENTS.md` (e.g., drraveesh.com, spinesurge
 - If a high-priority gap is found, draft a plan or a new page to cover it.
 
 <!-- Jules Automation -->
+<!-- Managed by Jules -->
+
+<!-- v1.0 -->

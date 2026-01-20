@@ -16,7 +16,7 @@ export const revalidate = 86400;
 
 export const metadata = {
   title: 'Brain & Spine Surgeon near HITEC City, Hyderabad',
-  description: 'Brain and spine care for HITEC City patients at Yashoda Hospital, Malakpet. Directions, parking, OPD timings, and appointment info.',
+  description: 'Neurosurgeon near HITEC City at Yashoda Hospital, Malakpet. Directions, parking, OPD timings, and appointments.',
   keywords: 'brain surgeon HITEC City, spine surgeon HITEC City, neurosurgeon near HITEC City, Yashoda Hospital Malakpet, Hyderabad',
   alternates: {
     canonical: 'https://www.drsayuj.info/locations/brain-spine-surgeon-hitec-city',
@@ -27,7 +27,7 @@ export const metadata = {
   },
   openGraph: {
     title: 'Brain & Spine Surgeon near HITEC City, Hyderabad',
-    description: 'Brain and spine care for HITEC City patients at Yashoda Hospital, Malakpet. Directions, parking, OPD timings, and appointment info.',
+    description: 'Neurosurgeon near HITEC City at Yashoda Hospital, Malakpet. Directions, parking, OPD timings, and appointments.',
     url: 'https://www.drsayuj.info/locations/brain-spine-surgeon-hitec-city',
     type: 'website',
   },
@@ -77,7 +77,7 @@ export default function HITECCityLocationPage() {
             <p className="text-xl text-gray-600 mb-8">
               Advanced neurosurgical care with convenient access from HITEC City
             </p>
-            <LocationCTAs location={location} className="justify-center" />
+            <LocationCTAs mode="location" locationId={location.id} className="justify-center" />
           </div>
         </div>
       </section>
@@ -107,7 +107,7 @@ export default function HITECCityLocationPage() {
               <p className="text-gray-700 mb-4">
                 35–55 minutes outside peak via HITEC → Ameerpet → Nampally → Malakpet.
               </p>
-              <LocationMapEmbed location={location} />
+              <LocationMapEmbed mode="location" locationId={location.id} />
             </div>
             <div className="bg-white p-6 rounded-lg shadow-sm">
               <h3 className="text-xl font-bold text-gray-900 mb-4">Transportation Options</h3>
@@ -221,19 +221,19 @@ export default function HITECCityLocationPage() {
           <p className="text-xl text-gray-600 mb-8">
             Schedule your appointment with Dr. Sayuj Krishnan
           </p>
-          <LocationCTAs location={location} className="justify-center" />
+          <LocationCTAs mode="location" locationId={location.id} className="justify-center" />
         </div>
       </section>
 
       {/* Internal Links & Pathways */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <LocalPathways location={location} />
+        <LocalPathways mode="location" locationId={location.id} />
       </div>
 
       {/* NAP Section */}
       <section className="py-12 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <LocationNAPCard location={location} />
+          <LocationNAPCard mode="location" locationId={location.id} />
         </div>
       </section>
 
