@@ -186,22 +186,22 @@ export const healthReminders = inngest.createFunction(
     await step.run("send-reminder", async () => {
       console.log(`Sending ${reminderType} reminder to ${patientEmail}`);
       
-      const reminder = {
-        to: patientEmail,
-        subject: reminderContent.subject,
-        template: "health-reminder",
-        data: {
-          patientName,
-          reminderType,
-          content: reminderContent.content,
-          condition,
-          doctorContact: "+91-9778280044"
-        }
-      };
+      const result = await EmailService.sendHealthReminder(
+        patientEmail,
+        patientName,
+        reminderType,
+        reminderContent.subject,
+        reminderContent.content,
+        condition
+      );
 
-      // TODO: Send actual reminder (email, SMS, push notification)
-      console.log("Reminder sent:", reminder);
-      return { reminderSent: true };
+      return {
+        reminderSent: result.success,
+        messageId: result.messageId,
+        error: result.error,
+        configurationMissing: (result as { configurationMissing?: boolean })
+          .configurationMissing,
+      };
     });
 
     // Step 3: Schedule next reminder if recurring

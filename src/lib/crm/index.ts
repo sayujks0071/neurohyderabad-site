@@ -1,6 +1,23 @@
-import { MockCRM } from './mock-crm';
 import { HubSpotCRM } from './hubspot-crm';
 import { CRMProvider } from './types';
+
+class UnconfiguredCRM implements CRMProvider {
+  name = "CRMUnavailable";
+
+  async addLead() {
+    return {
+      success: false,
+      message: "HUBSPOT_ACCESS_TOKEN is not configured.",
+    };
+  }
+
+  async updateLeadScore() {
+    return {
+      success: false,
+      message: "HUBSPOT_ACCESS_TOKEN is not configured.",
+    };
+  }
+}
 
 // Factory to get the appropriate CRM provider
 export const getCRM = (): CRMProvider => {
@@ -9,8 +26,8 @@ export const getCRM = (): CRMProvider => {
     return new HubSpotCRM(process.env.HUBSPOT_ACCESS_TOKEN);
   }
 
-  // Fallback to Mock CRM for development/testing
-  return new MockCRM();
+  console.error("HUBSPOT_ACCESS_TOKEN is not set; CRM integration disabled.");
+  return new UnconfiguredCRM();
 };
 
 export const crm = getCRM();

@@ -1,15 +1,15 @@
 import { Resend } from 'resend';
 
-const RESEND_DEV_PLACEHOLDER = 're_development_key';
-const DEVELOPMENT_MESSAGE_ID = 'dev_mode';
-const isDevelopmentEmailKey =
-  !process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === RESEND_DEV_PLACEHOLDER;
+const resendApiKey = process.env.RESEND_API_KEY?.trim();
+const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
-// 🛡️ Sentinel: Removed hardcoded API key. Using env var or development placeholder.
-const resend = new Resend(process.env.RESEND_API_KEY || RESEND_DEV_PLACEHOLDER);
-
-const logDevelopmentSkip = (context: string) => {
-  console.log(`Development mode: ${context} email not sent (missing RESEND_API_KEY)`);
+const requireResendConfig = (context: string) => {
+  if (!resend) {
+    const error = `RESEND_API_KEY is not configured; ${context} email not sent.`;
+    console.error(error);
+    return { success: false, error, configurationMissing: true };
+  }
+  return null;
 };
 
 // Email configuration
@@ -303,14 +303,14 @@ export const sendContactFormEmail = async (data: {
   subject?: string;
 }) => {
   try {
-    if (isDevelopmentEmailKey) {
-      logDevelopmentSkip('contact form');
-      return { success: true, messageId: DEVELOPMENT_MESSAGE_ID, development: true };
+    const configError = requireResendConfig('contact form');
+    if (configError) {
+      return configError;
     }
 
     const template = emailTemplates.contactForm(data);
     
-    const result = await resend.emails.send({
+    const result = await resend!.emails.send({
       from: FROM_EMAIL,
       to: ADMIN_EMAILS,
       replyTo: data.email,
@@ -335,20 +335,15 @@ export const sendAppointmentRequestEmail = async (data: {
   message?: string;
 }) => {
   try {
-    if (isDevelopmentEmailKey) {
-      logDevelopmentSkip('appointment request');
-      return {
-        success: true,
-        adminMessageId: DEVELOPMENT_MESSAGE_ID,
-        patientMessageId: DEVELOPMENT_MESSAGE_ID,
-        development: true,
-      };
+    const configError = requireResendConfig('appointment request');
+    if (configError) {
+      return configError;
     }
 
     const template = emailTemplates.appointmentRequest(data);
     
     // Send to admin
-    const adminResult = await resend.emails.send({
+    const adminResult = await resend!.emails.send({
       from: FROM_EMAIL,
       to: ADMIN_EMAILS,
       replyTo: data.email,
@@ -358,7 +353,7 @@ export const sendAppointmentRequestEmail = async (data: {
 
     // Send confirmation to patient
     const patientTemplate = emailTemplates.patientConfirmation(data);
-    const patientResult = await resend.emails.send({
+    const patientResult = await resend!.emails.send({
       from: FROM_EMAIL,
       to: data.email,
       subject: patientTemplate.subject,
@@ -392,9 +387,9 @@ export const sendPreAppointmentBriefingEmail = async (data: {
   sources?: string[];
 }) => {
   try {
-    if (isDevelopmentEmailKey) {
-      logDevelopmentSkip('pre-appointment briefing');
-      return { success: true, messageId: DEVELOPMENT_MESSAGE_ID, development: true };
+    const configError = requireResendConfig('pre-appointment briefing');
+    if (configError) {
+      return configError;
     }
 
     const template = emailTemplates.preAppointmentBriefing({
@@ -407,7 +402,7 @@ export const sendPreAppointmentBriefingEmail = async (data: {
       sources: data.sources,
     });
 
-    const result = await resend.emails.send({
+    const result = await resend!.emails.send({
       from: FROM_EMAIL,
       to: data.patientEmail,
       bcc: ADMIN_EMAILS,
@@ -430,15 +425,15 @@ export const sendNewsletterSubscriptionEmail = async (data: {
   name?: string;
 }) => {
   try {
-    if (isDevelopmentEmailKey) {
-      logDevelopmentSkip('newsletter subscription');
-      return { success: true, messageId: DEVELOPMENT_MESSAGE_ID, development: true };
+    const configError = requireResendConfig('newsletter subscription');
+    if (configError) {
+      return configError;
     }
 
     const template = emailTemplates.newsletterSubscription(data);
     
     // Send confirmation to subscriber
-    const result = await resend.emails.send({
+    const result = await resend!.emails.send({
       from: FROM_EMAIL,
       to: data.email,
       subject: template.subject,
@@ -446,7 +441,7 @@ export const sendNewsletterSubscriptionEmail = async (data: {
     });
 
     // Also notify admin (optional)
-    await resend.emails.send({
+    await resend!.emails.send({
       from: FROM_EMAIL,
       to: ADMIN_EMAILS,
       subject: `New Newsletter Subscription - ${data.email}`,
@@ -470,12 +465,12 @@ export const sendNewsletterSubscriptionEmail = async (data: {
 // Test email function
 export const sendTestEmail = async () => {
   try {
-    if (isDevelopmentEmailKey) {
-      logDevelopmentSkip('test');
-      return { success: true, messageId: DEVELOPMENT_MESSAGE_ID, development: true };
+    const configError = requireResendConfig('test');
+    if (configError) {
+      return configError;
     }
 
-    const result = await resend.emails.send({
+    const result = await resend!.emails.send({
       from: FROM_EMAIL,
       to: PRIMARY_ADMIN_EMAIL,
       subject: 'Test Email - Dr. Sayuj Krishnan Website',
