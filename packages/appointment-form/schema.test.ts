@@ -72,4 +72,38 @@ describe("Appointment Schema Validation", () => {
       expect(error).toBeDefined();
     }
   });
+
+  it("fails when painScore is too low", () => {
+    const invalidData = {
+      ...baseValidData,
+      painScore: 0,
+    };
+    const result = appointmentSchema.safeParse(invalidData);
+    expect(result.success).toBe(false);
+    if (!result.success) {
+      const error = result.error.issues.find(i => i.path.includes("painScore"));
+      expect(error).toBeDefined();
+    }
+  });
+
+  it("coerces string painScore to number", () => {
+    const validDataWithString = {
+      ...baseValidData,
+      painScore: "7",
+    };
+    const result = appointmentSchema.safeParse(validDataWithString);
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.painScore).toBe(7);
+    }
+  });
+
+  it("defaults mriScanAvailable to false if missing", () => {
+    const { mriScanAvailable, ...dataWithoutMri } = baseValidData;
+    const result = appointmentSchema.safeParse(dataWithoutMri);
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.mriScanAvailable).toBe(false);
+    }
+  });
 });
