@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "pnpm run build",
+  "buildCommand": "NODE_OPTIONS='--max-old-space-size=4096' pnpm run build",
   "devCommand": "pnpm run dev",
   "installCommand": "pnpm install",
   "framework": "nextjs",
