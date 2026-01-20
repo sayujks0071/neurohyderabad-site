@@ -37,6 +37,13 @@ describe('generateWhatsappUrl', () => {
     expect(url).toContain('wa.me/919876543210');
   });
 
+  test('handles number with leading zero (11 digits) by removing 0', () => {
+    const patient = { ...basePatient, phone: '09876543210' };
+    const url = generateWhatsappUrl(patient);
+    // Should strip leading 0 -> 9876543210 -> wa.me/919876543210
+    expect(url).toContain('wa.me/919876543210');
+  });
+
   test('handles non-Indian number by appending 91 anyway (as per current logic)', () => {
      // The current logic hardcodes 91 prefix in the URL.
      // So if I pass 15551234567, it will be wa.me/9115551234567.
