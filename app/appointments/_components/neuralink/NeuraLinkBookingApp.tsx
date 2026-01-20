@@ -1,9 +1,9 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { Activity, ChevronRight, MessageSquareCode, ShieldCheck, MessageSquare } from "lucide-react";
+import { ChevronRight, MessageSquareCode, MessageSquare } from "lucide-react";
 import PatientPortal from "./PatientPortal";
-import { CLINIC } from "@/app/_lib/clinic";
+import AppointmentFaq from "../AppointmentFaq";
 import dynamic from "next/dynamic";
 
 // Dynamic import for LiveAssistant (heavy dependency on @google/genai)
@@ -32,7 +32,12 @@ const ChatBot = dynamic(() => import("./ChatBot"), {
   ),
 });
 
-const NeuraLinkBookingApp = () => {
+interface NeuraLinkBookingAppProps {
+  heroContent: React.ReactNode;
+  locationInfo: React.ReactNode;
+}
+
+const NeuraLinkBookingApp = ({ heroContent, locationInfo }: NeuraLinkBookingAppProps) => {
   const [isAssistantOpen, setIsAssistantOpen] = useState(false);
   const formRef = useRef<HTMLDivElement>(null);
 
@@ -49,23 +54,7 @@ const NeuraLinkBookingApp = () => {
         </div>
 
         <div className="max-w-5xl mx-auto py-20 px-4 text-center">
-          <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-blue-50/80 border border-blue-100 text-blue-700 text-sm font-bold mb-6 backdrop-blur-sm shadow-sm animate-in fade-in slide-in-from-bottom-4 duration-700">
-            <Activity className="w-4 h-4 mr-2 text-blue-500" />
-            Advanced Neurosurgical Booking
-          </div>
-
-          {/* LCP Optimization: Removed animation classes (animate-in fade-in) to ensure immediate text paint */}
-          <h1 className="text-4xl sm:text-6xl font-extrabold text-slate-900 mb-6 tracking-tight leading-[1.1]">
-            Book your consultation with
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
-              Dr. Sayuj Krishnan
-            </span>
-          </h1>
-
-          <p className="text-lg sm:text-xl text-slate-600 mb-10 leading-relaxed max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-6 duration-700 delay-200">
-            Secure your neurosurgical appointment at Yashoda Hospitals, Malakpet. Get AI-assisted triage,
-            report interpretation, and a fast confirmation call from our care team.
-          </p>
+          {heroContent}
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <button
@@ -83,22 +72,15 @@ const NeuraLinkBookingApp = () => {
             </button>
           </div>
 
-          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 text-slate-500 text-sm">
-            <div className="flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4" />
-              Patient data handled securely
-            </div>
-            <div className="hidden sm:block w-1.5 h-1.5 rounded-full bg-slate-300" />
-            <div>
-              {CLINIC.street}, {CLINIC.city}
-            </div>
-          </div>
+          {locationInfo}
         </div>
       </section>
 
       <section ref={formRef} className="pb-20">
         <PatientPortal />
       </section>
+
+      <AppointmentFaq />
 
       {/* Conditionally render LiveAssistant to prevent loading its heavy dependencies (@google/genai) until needed */}
       {isAssistantOpen && (

@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import { Loader2 } from 'lucide-react';
 import { useStatsigEvents } from '../src/lib/statsig-events';
 import { trackContactConversion } from '../src/lib/google-ads-conversion';
 
@@ -17,6 +18,8 @@ type FormState = {
   email: string;
   condition: string;
   message: string;
+  painScore: number;
+  mriScanAvailable: boolean;
 };
 
 const initialState: FormState = {
@@ -25,6 +28,8 @@ const initialState: FormState = {
   email: '',
   condition: '',
   message: '',
+  painScore: 5,
+  mriScanAvailable: false,
 };
 
 export default function TeleconsultationForm({ pageSlug, service }: TeleconsultationFormProps) {
@@ -35,6 +40,8 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
     email: '',
     condition: '',
     message: '',
+    painScore: '',
+    mriScanAvailable: '',
   });
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const { logAppointmentBooking, logContactFormSubmit } = useStatsigEvents();
@@ -47,14 +54,22 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
   const mailtoHref = useMemo(() => {
     const params = new URLSearchParams({
       subject,
-      body: `Page: ${pageSlug}\nName: ${formState.name}\nPhone: ${formState.phone}\nEmail: ${formState.email}\nCondition: ${formState.condition}\nMessage: ${formState.message}`,
+      body: `Page: ${pageSlug}\nName: ${formState.name}\nPhone: ${formState.phone}\nEmail: ${formState.email}\nCondition: ${formState.condition}\nPain Score: ${formState.painScore}/10\nMRI Available: ${formState.mriScanAvailable ? 'Yes' : 'No'}\nMessage: ${formState.message}`,
     });
     return `mailto:hellodr@drsayuj.info?${params.toString()}`;
   }, [formState, pageSlug, subject]);
 
   const handleChange = (field: keyof FormState) => (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormState((prev) => ({ ...prev, [field]: event.target.value }));
+    let value: string | number = event.target.value;
+    if (field === 'painScore') {
+      value = Number(value);
+    }
+    setFormState((prev) => ({ ...prev, [field]: value }));
     setErrors((prev) => ({ ...prev, [field]: '' }));
+  };
+
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFormState((prev) => ({ ...prev, mriScanAvailable: event.target.checked }));
   };
 
   const validate = () => {
@@ -62,7 +77,11 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
     let valid = true;
 
     (Object.keys(formState) as (keyof FormState)[]).forEach((key) => {
-      if (!formState[key].trim()) {
+      // painScore and mriScanAvailable are always valid by type/default
+      if (key === 'painScore' || key === 'mriScanAvailable') return;
+
+      const value = formState[key];
+      if (typeof value === 'string' && !value.trim()) {
         newErrors[key] = REQUIRED_MESSAGE;
         valid = false;
       }
@@ -113,7 +132,7 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
   return (
     <form 
       onSubmit={handleSubmit} 
-      className="space-y-6 rounded-2xl border border-blue-100 bg-white p-6 shadow-sm"
+      className="space-y-6 relative bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
       aria-label="Teleconsultation appointment request form"
       noValidate
     >
@@ -126,7 +145,7 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
         id="form-status"
       >
         {status === 'submitting' && 'Submitting your appointment request'}
-        {status === 'success' && 'Email draft opened successfully. Please review and send to confirm your request.'}
+        {status === 'success' && 'Appointment request prepared. Please send the email to confirm. Please bring any MRI/CT scans with you. We will confirm via phone shortly.'}
         {status === 'error' && 'An error occurred. Please call us directly at +91 9778280044.'}
       </div>
 
@@ -278,8 +297,63 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
         </div>
 
         <div>
+          <label htmlFor="tele-painScore" className="mb-2 block text-sm font-medium text-gray-700">
+            Pain Intensity Score (1-10)
+          </label>
+          <div className="flex items-center gap-4">
+            <span className="text-sm font-bold text-gray-400" aria-hidden="true">1</span>
+            <input
+              id="tele-painScore"
+              name="painScore"
+              type="range"
+              min="1"
+              max="10"
+              step="1"
+              value={formState.painScore}
+              onChange={handleChange('painScore')}
+              className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              aria-valuetext={`Score: ${formState.painScore}${formState.painScore >= 8 ? ' (Severe)' : formState.painScore <= 3 ? ' (Mild)' : ''}`}
+            />
+            <span className="text-sm font-bold text-gray-400" aria-hidden="true">10</span>
+          </div>
+          <div className="text-center mt-2">
+            <span
+              key={formState.painScore}
+              className={`inline-block px-3 py-1 rounded-lg text-xs font-bold transition-transform duration-200 ease-out transform scale-100 animate-[pulse_0.3s_ease-in-out_1] ${
+                formState.painScore <= 3
+                  ? "bg-green-100 text-green-700"
+                  : formState.painScore <= 7
+                  ? "bg-yellow-100 text-yellow-700"
+                  : "bg-red-100 text-red-700"
+              }`}
+            >
+              Score: {formState.painScore}
+              {formState.painScore >= 8 && " (Severe)"}
+              {formState.painScore <= 3 && " (Mild)"}
+            </span>
+          </div>
+        </div>
+
+        <div className="flex items-center p-3 bg-gray-50 rounded-lg border border-gray-200">
+          <input
+            type="checkbox"
+            id="tele-mriScanAvailable"
+            name="mriScanAvailable"
+            checked={formState.mriScanAvailable}
+            onChange={handleCheckboxChange}
+            className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500 border-gray-300"
+          />
+          <label
+            htmlFor="tele-mriScanAvailable"
+            className="ml-3 text-sm font-medium text-gray-700 cursor-pointer select-none"
+          >
+            I have MRI/CT Scan reports available
+          </label>
+        </div>
+
+        <div>
           <label htmlFor="tele-message" className="mb-2 block text-sm font-medium text-gray-700">
-            Additional details (reports, preferred slot) <span className="text-red-600" aria-label="required">*</span>
+            Additional details (preferred slot, questions) <span className="text-red-600" aria-label="required">*</span>
           </label>
           <textarea
             id="tele-message"
@@ -288,7 +362,7 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
             value={formState.message}
             onChange={handleChange('message')}
             className={`w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.message ? 'border-red-500 focus:ring-red-500' : 'border-gray-300'}`}
-            placeholder="Share MRI findings, previous surgeries, or questions you want to cover."
+            placeholder="Share any questions or preferred times."
             required
             aria-required="true"
             aria-invalid={errors.message ? 'true' : 'false'}
@@ -309,15 +383,15 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <button
           type="submit"
-          className="inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex items-center justify-center bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
           disabled={status === 'submitting'}
           aria-busy={status === 'submitting'}
           aria-describedby="form-status"
         >
           {status === 'submitting' ? (
             <>
-              <span className="sr-only">Submitting form</span>
-              <span aria-hidden="true">Preparing email…</span>
+              <Loader2 className="w-5 h-5 animate-spin mr-2" />
+              <span>Sending...</span>
             </>
           ) : (
             'Send appointment request'
@@ -336,7 +410,7 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
           aria-atomic="true"
         >
           <p className="text-sm font-medium text-green-800">
-            Email draft opened in your mail app. Please review and send to confirm the request.
+            Appointment request prepared. Please send the email to confirm. Please bring any MRI/CT scans with you. We will confirm via phone shortly.
           </p>
         </div>
       )}

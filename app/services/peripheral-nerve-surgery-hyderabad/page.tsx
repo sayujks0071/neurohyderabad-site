@@ -7,8 +7,9 @@ import { makeMetadata } from '@/app/_lib/meta';
 import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import { getServiceSources } from '../sources';
-import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
+import { LocalPathways } from '@/src/components/locations/LocalPathways';
+import MedicalWebPageSchema from '../../components/schemas/MedicalWebPageSchema';
 
 const baseMetadata = makeMetadata({
   title: 'Peripheral Nerve Surgery in Hyderabad | Carpal Tunnel, Ulnar, Peroneal',
@@ -139,96 +140,24 @@ const faqs = [
 ];
 
 export default function PeripheralNerveSurgeryPage() {
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "MedicalWebPage",
-    "name": "Peripheral Nerve Surgery in Hyderabad",
-    "description": "Expert peripheral nerve surgery including carpal tunnel release, ulnar nerve decompression, and nerve tumor removal in Hyderabad.",
-    "url": "https://www.drsayuj.info/services/peripheral-nerve-surgery-hyderabad/",
-    "mainEntity": {
-      "@type": "MedicalBusiness",
-      "name": "Dr. Sayuj Krishnan - Peripheral Nerve Surgery",
-      "description": "Expert peripheral nerve surgery including carpal tunnel release, ulnar nerve decompression, peroneal nerve surgery, and nerve tumor removal.",
-      "medicalSpecialty": "Neurosurgery",
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Peripheral Nerve Surgery Services",
-        "itemListElement": procedures.map(procedure => ({
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "MedicalProcedure",
-            "name": procedure.name,
-            "description": procedure.description,
-            "bodyLocation": "Peripheral Nerves",
-            "procedureType": "Surgical"
-          }
-        }))
-      },
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Yashoda Hospital, Malakpet",
-        "addressLocality": "Hyderabad",
-        "addressRegion": "Telangana",
-        "postalCode": "500036",
-        "addressCountry": "IN"
-      },
-      "telephone": "+91-9778280044",
-      "email": "hellodr@drsayuj.info",
-      "url": "https://www.drsayuj.info"
-    },
-    "breadcrumb": {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://www.drsayuj.info/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Services",
-          "item": "https://www.drsayuj.info/services/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "Peripheral Nerve Surgery",
-          "item": "https://www.drsayuj.info/services/peripheral-nerve-surgery-hyderabad/"
-        }
-      ]
-    },
-    "about": [
-      {
-        "@type": "MedicalCondition",
-        "name": "Carpal Tunnel Syndrome",
-        "signOrSymptom": ["Numbness in fingers", "Hand weakness", "Night pain"],
-        "cause": ["Repetitive movements", "Diabetes", "Arthritis"]
-      },
-      {
-        "@type": "MedicalCondition",
-        "name": "Cubital Tunnel Syndrome",
-        "signOrSymptom": ["Elbow pain", "Finger numbness", "Hand weakness"],
-        "cause": ["Elbow trauma", "Repetitive bending", "Arthritis"]
-      }
-    ],
-    "mentions": procedures.map(procedure => ({
-      "@type": "MedicalProcedure",
-      "name": procedure.name
-    }))
-  };
+  const breadcrumbs = [
+    { name: 'Home', path: '/' },
+    { name: 'Services', path: '/services' },
+    { name: 'Peripheral Nerve Surgery Hyderabad', path: '/services/peripheral-nerve-surgery-hyderabad' },
+  ];
 
   return (
     <main className="container mx-auto px-4 py-16">
-      <BreadcrumbSchema
-        items={[
-          { name: 'Home', path: '/' },
-          { name: 'Services', path: '/services' },
-          { name: 'Peripheral Nerve Surgery Hyderabad', path: '/services/peripheral-nerve-surgery-hyderabad' },
-        ]}
+      <MedicalWebPageSchema
+        title="Peripheral Nerve Surgery in Hyderabad"
+        description="Expert peripheral nerve surgery including carpal tunnel release, ulnar nerve decompression, and nerve tumor removal in Hyderabad."
+        pageSlug="/services/peripheral-nerve-surgery-hyderabad"
+        pageType="service"
+        serviceOrCondition="Peripheral Nerve Surgery"
+        breadcrumbs={breadcrumbs}
       />
       <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/peripheral-nerve-surgery-hyderabad`} />
+
       <div className="max-w-6xl mx-auto">
         {/* Header Section */}
         <section className="text-center mb-16">
@@ -651,19 +580,18 @@ export default function PeripheralNerveSurgeryPage() {
           </div>
         </section>
 
-        <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
+
+
+      <div className="not-prose mt-12">
+        <LocalPathways mode="service" />
+      </div>
+      <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
 
         <section className="mb-12 space-y-6">
           <ReviewedBy lastReviewed="2025-10-19" />
           <NAP />
         </section>
       </div>
-
-      {/* Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
     </main>
   );
 }

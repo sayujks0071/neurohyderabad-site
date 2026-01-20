@@ -6,7 +6,7 @@ import { ChevronRight, MapPin, Activity, Stethoscope } from 'lucide-react';
 type Mode = 'location' | 'service' | 'condition';
 
 interface LocalPathwaysProps {
-  mode?: Mode; // Optional because legacy usage doesn't provide it
+  mode?: Mode;
   locationId?: string;
   currentSlug?: string;
   className?: string;

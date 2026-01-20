@@ -1,39 +1,23 @@
 {
-  "timestamp": "2025-05-20T10:00:00Z",
-  "notes": "Initial run. Build failed due to dependency issues, relying on static analysis.",
-  "pages": {
+  "timestamp": "2025-02-23T12:00:00Z",
+  "notes": {
     "home": {
-      "url": "/",
-      "lcp_candidate": "DoctorCard (Image) or Hero Text",
-      "bottlenecks": [
-        "DoctorCard image could use import for blur placeholder (minor)"
-      ]
+      "bottleneck": "LCP",
+      "observation": "DoctorCard image in Hero section lacked 'sizes' attribute despite having 'priority'. This can lead to suboptimal image resource selection by the browser.",
+      "fix": "Added sizes='128px' to DoctorCard image."
     },
-    "appointment": {
-      "url": "/appointments",
-      "lcp_candidate": "H1 (hidden) or visible H1 text",
-      "bottlenecks": [
-        "NeuraLinkBookingApp background uses mix-blend-multiply and blur-3xl on large areas, causing high paint cost."
-      ]
-    },
-    "location": {
-      "url": "/neurosurgeon-banjara-hills",
-      "bottlenecks": [
-        "LocationMapEmbed uses iframe but is optimized with click-to-load."
-      ]
-    },
-    "condition": {
-      "url": "/conditions/sciatica-treatment-hyderabad",
-      "bottlenecks": []
+    "general": {
+      "observation": "Shared JS bundle is ~103kB, which is relatively high. Hypertune is lazy-loaded to mitigate this."
     }
   },
   "changes": [
     {
-      "component": "NeuraLinkBookingApp.tsx",
-      "page_type": "Appointment",
-      "description": "Removed expensive mix-blend-multiply and redundant filter class from background decoration. Added pointer-events-none.",
-      "expected_impact": "Reduced Paint/Composite cost, improving Interaction to Next Paint (INP) and LCP on low-end devices.",
-      "verification": "Visual check (background should look similar), Performance trace (paint time reduction)."
+      "file": "app/_components/DoctorCard.tsx",
+      "description": "Added sizes='128px' to Image component to assist browser in resource selection for LCP optimization."
     }
-  ]
+  ],
+  "verification": {
+    "method": "Manual inspection via Playwright script",
+    "result": "sizes attribute verified as '128px'. Visual appearance unchanged."
+  }
 }

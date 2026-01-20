@@ -21,9 +21,40 @@ export const metadata: Metadata = {
   },
 };
 
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Sciatica Pain Management in Hyderabad: Complete Treatment Guide",
+  "description": "Comprehensive guide to sciatica pain management in Hyderabad. Learn about conservative treatments, when surgery is needed, and recovery expectations.",
+  "image": `${SITE_URL}/images/og-default.jpg`,
+  "author": {
+    "@type": "Person",
+    "name": "Dr. Sayuj Krishnan",
+    "url": `${SITE_URL}/about`
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Dr. Sayuj Krishnan",
+    "logo": {
+      "@type": "ImageObject",
+      "url": `${SITE_URL}/icon.svg`
+    }
+  },
+  "datePublished": "2025-01-15",
+  "dateModified": "2025-10-19",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": `${SITE_URL}/blog/sciatica-pain-management-hyderabad`
+  }
+};
+
 export default function SciaticaPainManagementPage() {
   return (
     <div className="min-h-screen bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto">
           <article className="prose prose-lg max-w-none">

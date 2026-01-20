@@ -1,13 +1,19 @@
 import React from 'react';
-import { LocationData } from '@/src/data/locations';
+import { LocationData, getLocationById } from '@/src/data/locations';
 import { MapPin, Phone, MessageCircle, Navigation } from 'lucide-react';
 
 interface LocationNAPCardProps {
-  location: LocationData;
+  location?: LocationData;
+  locationId?: string;
+  mode?: 'location'; // Optional, for prop compatibility
   className?: string;
 }
 
-export const LocationNAPCard: React.FC<LocationNAPCardProps> = ({ location, className = '' }) => {
+export const LocationNAPCard: React.FC<LocationNAPCardProps> = ({ location: legacyLocation, locationId, className = '' }) => {
+  const location = legacyLocation || (locationId ? getLocationById(locationId) : null);
+
+  if (!location) return null;
+
   return (
     <div className={`bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-6 ${className}`}>
       <h3 className="text-xl font-bold text-gray-900 mb-4">{location.name}</h3>

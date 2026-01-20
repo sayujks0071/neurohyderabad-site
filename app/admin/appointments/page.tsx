@@ -1,94 +1,77 @@
 'use client';
 
-import React from 'react';
-import { mockAppointments, Appointment } from './data';
 import { MessageCircle } from 'lucide-react';
 import { generateWhatsappUrl } from './utils';
+import { mockAppointments, type Appointment } from './data';
 
-export default function AppointmentListPage() {
-  const sendWhatsapp = (patient: Appointment) => {
-    const url = generateWhatsappUrl(patient);
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
+export default function AppointmentsPage() {
+  // Using mock data - appointments are stored in n8n workflow (Google Sheets)
+  // Admin can view appointments directly in Google Sheets or via n8n dashboard
+  const appointments = mockAppointments;
+
+  const sendWhatsapp = (appointment: Appointment) => {
+    // Logic uses generateWhatsappUrl which implements the required message template and sanitization:
+    // "Hello {name}, this is regarding your appointment with Dr. Sayuj on {date}. We confirm your slot. Please bring your MRI/CT scans."
+    if (!appointment.phone) {
+        alert("No phone number available for this patient.");
+        return;
+    }
+
+    const url = generateWhatsappUrl({
+      id: appointment.id,
+      fullName: appointment.fullName,
+      phone: appointment.phone,
+      preferredDate: appointment.preferredDate,
+      status: appointment.status || 'Pending'
+    });
     window.open(url, '_blank');
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">Appointment List (Admin)</h1>
-      <div className="overflow-x-auto bg-white shadow-md rounded-lg">
-        <table className="min-w-full leading-normal">
+    <div className="container mx-auto p-4">
+      <div className="flex justify-between items-center mb-4">
+        <div>
+          <h1 className="text-2xl font-bold">Appointments</h1>
+          <p className="text-sm text-gray-600 mt-1">
+            Note: Appointments are stored in n8n workflow (Google Sheets). View full data in Google Sheets or n8n dashboard. (Updated)
+          </p>
+        </div>
+      </div>
+      <div className="overflow-x-auto">
+        <table className="min-w-full bg-white">
           <thead>
             <tr>
-              <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                Patient Name
-              </th>
-              <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                Contact
-              </th>
-              <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                Date
-              </th>
-              <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                Status
-              </th>
-              <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                Quick Actions
-              </th>
+              <th className="py-2 px-4 border-b">Full Name</th>
+              <th className="py-2 px-4 border-b">Email</th>
+              <th className="py-2 px-4 border-b">Phone</th>
+              <th className="py-2 px-4 border-b">Concern</th>
+              <th className="py-2 px-4 border-b">Preferred Date</th>
+              <th className="py-2 px-4 border-b">Preferred Time</th>
+              <th className="py-2 px-4 border-b">Source</th>
+              <th className="py-2 px-4 border-b">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {mockAppointments.map((appt) => (
-              <tr key={appt.id}>
-                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                  <div className="flex items-center">
-                    <div className="ml-3">
-                      <p className="text-gray-900 whitespace-no-wrap">
-                        {appt.patientName}
-                      </p>
-                    </div>
-                  </div>
-                </td>
-                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                  <p className="text-gray-900 whitespace-no-wrap">{appt.contactNumber}</p>
-                </td>
-                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                  <p className="text-gray-900 whitespace-no-wrap">
-                    {appt.requestedDate}
-                  </p>
-                  <p className="text-gray-600 text-xs">{appt.timeSlot}</p>
-                </td>
-                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                  <span
-                    className={`relative inline-block px-3 py-1 font-semibold leading-tight ${
-                      appt.status === 'Confirmed'
-                        ? 'text-green-900'
-                        : appt.status === 'Pending'
-                        ? 'text-orange-900'
-                        : 'text-red-900'
-                    }`}
-                  >
-                    <span
-                      aria-hidden
-                      className={`absolute inset-0 opacity-50 rounded-full ${
-                        appt.status === 'Confirmed'
-                          ? 'bg-green-200'
-                          : appt.status === 'Pending'
-                          ? 'bg-orange-200'
-                          : 'bg-red-200'
-                      }`}
-                    ></span>
-                    <span className="relative">{appt.status}</span>
-                  </span>
-                </td>
-                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                  <button
-                    onClick={() => sendWhatsapp(appt)}
-                    className="flex items-center gap-2 px-4 py-2 !bg-green-600 !text-white rounded hover:!bg-green-700 transition-colors tooltip font-semibold shadow-sm"
-                    title="Send WhatsApp Confirmation"
-                    aria-label={`Confirm appointment for ${appt.patientName} via WhatsApp`}
-                  >
-                    <MessageCircle className="w-4 h-4" />
-                    <span>Confirm via WhatsApp</span>
-                  </button>
+            {appointments.map((appointment) => (
+              <tr key={appointment.id}>
+                <td className="py-2 px-4 border-b">{appointment.fullName}</td>
+                <td className="py-2 px-4 border-b">{appointment.email || 'N/A'}</td>
+                <td className="py-2 px-4 border-b">{appointment.phone}</td>
+                <td className="py-2 px-4 border-b">{appointment.concern || 'N/A'}</td>
+                <td className="py-2 px-4 border-b">{appointment.preferredDate}</td>
+                <td className="py-2 px-4 border-b">{appointment.preferredTime || 'N/A'}</td>
+                <td className="py-2 px-4 border-b">{appointment.source || 'web'}</td>
+                <td className="py-2 px-4 border-b">
+                   <button
+                    onClick={() => sendWhatsapp(appointment)}
+                    className="flex items-center gap-2 !bg-[#25D366] hover:!bg-[#128C7E] text-white font-bold py-1 px-3 rounded text-sm transition-colors"
+                    title="Confirm via WhatsApp"
+                   >
+                     <MessageCircle size={16} />
+                     <span>WhatsApp</span>
+                   </button>
                 </td>
               </tr>
             ))}

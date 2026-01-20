@@ -9,6 +9,7 @@ import SourceList from '@/app/_components/SourceList';
 import { getServiceSources } from '../sources';
 import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
+import { LocalPathways } from '@/src/components/locations/LocalPathways';
 
 const baseMetadata = makeMetadata({
   title: 'Slip Disc Surgery Cost in Hyderabad | Endoscopic Discectomy Price 2025',
@@ -253,7 +254,12 @@ export default function SlipDiscSurgeryCostPage() {
           </section>
 
           <section className="mt-12 space-y-6">
-            <SourceList sources={ARTICLE_SOURCES} heading="References" />
+
+
+      <div className="mt-12">
+        <LocalPathways mode="service" />
+      </div>
+      <SourceList sources={ARTICLE_SOURCES} heading="References" />
             <ReviewedBy lastReviewed="2025-11-25" />
             <NAP />
           </section>

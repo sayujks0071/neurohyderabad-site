@@ -14,7 +14,6 @@ import TrustProof from '@/app/_components/TrustProof';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import { getServiceSources } from '../sources';
 import { patientStories } from '@/src/content/stories';
-import { PhysicianSchema } from "@/src/components/schema/PhysicianSchema";
 import SurgeryComparisonTable from '@/src/components/SurgeryComparisonTable';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
 
@@ -24,14 +23,17 @@ const SERVICE_SLUG = 'endoscopic-spine-surgery-hyderabad';
 export const revalidate = 3600; // Revalidate every hour
 
 const baseMetadata = makeMetadata({
-  title: 'Endoscopic Spine Surgery in Hyderabad | Minimally Invasive Keyhole Surgery – Dr. Sayuj Krishnan',
+  title: 'Endoscopic Spine Surgery Hyderabad | 90% Same-Day Discharge',
   description:
-    'Endoscopic spine surgery in Hyderabad at Yashoda Hospital Malakpet. Dr. Sayuj Krishnan offers minimally invasive keyhole spine surgery for slip disc, sciatica, and spinal stenosis. Same-day discharge, faster recovery. Book consultation today.',
+    'Expert endoscopic spine surgery in Hyderabad by Dr. Sayuj Krishnan. 90% same-day discharge. Minimally invasive keyhole surgery for slip disc & sciatica.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
 });
 
 export const metadata: Metadata = {
   ...baseMetadata,
+  title: 'Endoscopic Spine Surgery Hyderabad | Keyhole Surgery Cost',
+  description:
+    'Endoscopic spine surgery in Hyderabad by Dr. Sayuj Krishnan. 90% same-day discharge. Keyhole surgery for slip disc & sciatica. Check cost & recovery.',
   keywords: [
     'endoscopic spine surgery hyderabad',
     'minimally invasive spine surgery hyderabad',
@@ -43,7 +45,7 @@ export const metadata: Metadata = {
     'day care spine surgery',
   ],
   openGraph: {
-    title: 'Endoscopic Spine Surgery in Hyderabad | Minimally Invasive Keyhole Surgery',
+    title: 'Endoscopic Spine Surgery in Hyderabad | Keyhole Surgery Cost',
     description:
       'Endoscopic spine surgery in Hyderabad at Yashoda Hospital Malakpet. Minimally invasive keyhole surgery for slip disc, sciatica, and spinal stenosis. Same-day discharge available.',
     url: `${SITE_URL}/services/${SERVICE_SLUG}`,
@@ -72,13 +74,6 @@ const schema = buildLocalServiceSchema({
 
 const ARTICLE_SOURCES = getServiceSources(SERVICE_SLUG);
 
-const conditions = [
-  'Lumbar disc herniation causing sciatica or leg weakness',
-  'Foraminal stenosis with nerve compression',
-  'Cervical disc prolapse with arm pain or numbness',
-  'Synovial cysts and focal nerve root compression',
-];
-
 const faqs = [
   {
     question: 'How is this different from other minimally invasive spine surgeries?',
@@ -99,6 +94,10 @@ const faqs = [
     question: 'Why choose Dr. Sayuj for this “keyhole” procedure?',
     answer:
       'Endoscopic spine surgery is a specialised skill. Dr. Sayuj has focused training in full endoscopic techniques and performs them regularly at Yashoda Hospital, ensuring precision, safety, and consistent patient outcomes.',
+  },
+  {
+    question: 'Is endoscopic spine surgery the same as laser spine surgery?',
+    answer: 'No. Laser surgery often refers to limited surface ablation. Endoscopic surgery is a comprehensive structural correction (removing bone spurs or disc fragments) under high-definition visualization, offering far superior long-term results than laser alone.'
   },
 ];
 
@@ -156,6 +155,10 @@ const ADVANCED_TECHNIQUES = [
   {
     title: "Interlaminar Endoscopy (ILESS)",
     description: "Ideal for L5-S1 herniations and spinal stenosis. Accessed from the back through a tiny window, clearing thickened ligaments."
+  },
+  {
+    title: "Daycare Spine Surgery",
+    description: "Our specialized protocol allows 90% of patients to walk within 3 hours and go home the same day, minimizing hospital acquired infection risks."
   },
   {
     title: "Endoscopic Cervical Decompression",
@@ -220,7 +223,6 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
     <>
       <JsonLd data={schema} />
       <JsonLd data={gbpSchema} />
-      <PhysicianSchema />
       <main className="container mx-auto px-4 py-16">
         <Breadcrumbs
           items={[
@@ -237,13 +239,13 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
               Endoscopic Spine Surgery in Hyderabad | Minimally Invasive Keyhole Surgery
             </h1>
             <AuthorByline
-              publishedOn="2025-09-05"
-              updatedOn="2026-01-10"
+              publishedOn="2024-09-05"
+              updatedOn="2025-02-20"
               className="mb-6"
             />
             <p className="text-lg text-gray-700 mb-6">
               Endoscopic—or “keyhole”—spine surgery provides fast, lasting relief from slip disc,{" "}
-              <Link href="/conditions/sciatica-treatment-hyderabad" className="text-blue-700 underline">
+              <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-700 underline">
                 sciatica
               </Link>
               , and foraminal stenosis
@@ -347,11 +349,15 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
         </section>
 
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-blue-900 mb-6">Conditions Treated with Endoscopic Surgery</h2>
-          <p className="text-gray-700 mb-4">
-            Endoscopic surgery is recommended when nerve compression is localised and the spine remains stable. It allows precise
-            removal of the offending disc or tissue without wider muscle detachment or bone removal.
+          <h2 className="text-3xl font-bold text-blue-900 mb-6">Am I a Candidate for Endoscopic Spine Surgery?</h2>
+          <p className="text-gray-700 mb-8">
+            Endoscopic spine surgery is a targeted "keyhole" solution. It is most effective when the main problem is <strong>nerve compression</strong> (pinched nerve) rather than generalized back ache or spinal instability. Dr. Sayuj evaluates every patient individually, but generally:
           </p>
+          <div className="mb-6 bg-blue-50 p-4 rounded-lg">
+             <p className="text-sm text-blue-800">
+               <strong>Related Symptoms:</strong> If you are experiencing <Link href="/symptoms/back-pain" className="underline font-semibold hover:text-blue-900">severe back pain</Link> or shooting leg pain (<Link href="/conditions/sciatica-pain-treatment-hyderabad" className="underline font-semibold hover:text-blue-900">sciatica</Link>), this minimally invasive option might be right for you.
+             </p>
+          </div>
           <ul className="grid md:grid-cols-2 gap-4 text-sm text-gray-700">
             {conditions.map((condition) => (
               <li key={condition} className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">• {condition}</li>
@@ -435,6 +441,55 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
             Many patients ask why endoscopic surgery is preferred over traditional open methods. The key difference lies in how we approach the spine—preserving your natural anatomy rather than cutting through it.
           </p>
           <SurgeryComparisonTable />
+
+          <div className="mt-8 bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+             <h3 className="text-xl font-bold text-blue-800 mb-4">Cost & Recovery Comparison</h3>
+             <div className="overflow-x-auto">
+               <table className="w-full text-sm text-left text-gray-700">
+                 <thead className="bg-blue-50 text-blue-900 font-semibold">
+                   <tr>
+                     <th className="px-4 py-3 rounded-tl-lg">Feature</th>
+                     <th className="px-4 py-3">Endoscopic Spine Surgery</th>
+                     <th className="px-4 py-3">Microdiscectomy</th>
+                     <th className="px-4 py-3 rounded-tr-lg">Open Spine Surgery</th>
+                   </tr>
+                 </thead>
+                 <tbody className="divide-y divide-gray-100">
+                   <tr>
+                     <td className="px-4 py-3 font-medium">Incision Size</td>
+                     <td className="px-4 py-3 text-green-700 font-semibold">8mm (Keyhole)</td>
+                     <td className="px-4 py-3">2-3 cm</td>
+                     <td className="px-4 py-3">5-10 cm</td>
+                   </tr>
+                   <tr>
+                     <td className="px-4 py-3 font-medium">Hospital Stay</td>
+                     <td className="px-4 py-3 text-green-700 font-semibold">Day Care (6-8 hours)</td>
+                     <td className="px-4 py-3">1-2 Days</td>
+                     <td className="px-4 py-3">3-5 Days</td>
+                   </tr>
+                   <tr>
+                     <td className="px-4 py-3 font-medium">Return to Desk Work</td>
+                     <td className="px-4 py-3 text-green-700 font-semibold">3-5 Days</td>
+                     <td className="px-4 py-3">2-3 Weeks</td>
+                     <td className="px-4 py-3">4-6 Weeks</td>
+                   </tr>
+                   <tr>
+                     <td className="px-4 py-3 font-medium">Est. Cost (Self-Pay)</td>
+                     <td className="px-4 py-3">₹1.3L - ₹1.8L*</td>
+                     <td className="px-4 py-3">₹1.1L - ₹1.5L</td>
+                     <td className="px-4 py-3">₹80k - ₹1.2L</td>
+                   </tr>
+                   <tr>
+                     <td className="px-4 py-3 font-medium">Infection Risk</td>
+                     <td className="px-4 py-3 text-green-700 font-semibold">&lt; 0.1%</td>
+                     <td className="px-4 py-3">~1-2%</td>
+                     <td className="px-4 py-3">~3-5%</td>
+                   </tr>
+                 </tbody>
+               </table>
+             </div>
+             <p className="text-xs text-gray-500 mt-3">*Costs are approximate and vary by room category and implant needs. Higher initial cost of endoscopy is often offset by shorter hospital stay and faster return to work.</p>
+          </div>
         </section>
 
         <section className="mb-16">
@@ -460,6 +515,33 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
                 <li>• Physiotherapy-guided exercises begin Day 2</li>
                 <li>• Follow-up visit in 7-10 days with wound inspection and rehab plan</li>
               </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* Red Flags Section */}
+        <section className="mb-16 bg-red-50 border border-red-100 rounded-2xl p-8">
+          <h2 className="text-2xl font-bold text-red-900 mb-4 flex items-center gap-2">
+            <svg className="w-8 h-8 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            Red Flags: When is Surgery Urgent?
+          </h2>
+          <p className="text-gray-700 mb-6">
+            Most spine conditions can wait for medication or therapy. However, immediate medical attention is required if you experience:
+          </p>
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="bg-white p-5 rounded-lg border-l-4 border-red-500 shadow-sm">
+              <h3 className="font-bold text-red-800 mb-2">Cauda Equina Syndrome</h3>
+              <p className="text-sm text-gray-700">Sudden loss of bowel or bladder control, or numbness in the groin/saddle area.</p>
+            </div>
+            <div className="bg-white p-5 rounded-lg border-l-4 border-red-500 shadow-sm">
+              <h3 className="font-bold text-red-800 mb-2">Progressive Weakness</h3>
+              <p className="text-sm text-gray-700">Rapidly worsening weakness in the foot (foot drop) or leg that affects walking.</p>
+            </div>
+            <div className="bg-white p-5 rounded-lg border-l-4 border-red-500 shadow-sm">
+              <h3 className="font-bold text-red-800 mb-2">Intractable Pain</h3>
+              <p className="text-sm text-gray-700">Severe pain that does not improve with rest or maximum medical management.</p>
             </div>
           </div>
         </section>
@@ -503,7 +585,7 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
         <LocalPathways mode="service" />
 
         <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
-        <ReviewedBy lastReviewed="2026-01-10" />
+        <ReviewedBy lastReviewed="2025-02-20" />
       </main>
     </>
   );

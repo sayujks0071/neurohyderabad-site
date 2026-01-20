@@ -15,13 +15,15 @@ import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import { getServiceSources } from '../sources';
 import { patientStories } from '@/src/content/stories';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
+import MedicalWebPageSchema from '../../components/schemas/MedicalWebPageSchema';
+import FAQPageSchema from '@/app/_components/FAQPageSchema';
 
 const SERVICE_SLUG = 'brain-tumor-surgery-hyderabad';
 
 const baseMetadata = makeMetadata({
-  title: 'Brain Tumor Surgery in Hyderabad | Advanced Neurosurgical Oncology – Dr. Sayuj Krishnan',
+  title: 'Brain Tumor Surgery Hyderabad | Neuronavigation Specialist | Dr Sayuj',
   description:
-    'Facing a brain tumour diagnosis? At Yashoda Hospital, Malakpet, Dr. Sayuj Krishnan offers advanced brain tumour surgery in Hyderabad using neuronavigation and microsurgical techniques to maximise safety and recovery.',
+    'Expert brain tumor surgery in Hyderabad. High success rates using Neuronavigation & Awake Craniotomy. Advanced neuro-oncology care by Dr. Sayuj Krishnan.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
 });
 
@@ -36,9 +38,9 @@ export const metadata: Metadata = {
     'brain tumor surgery cost hyderabad',
   ],
   openGraph: {
-    title: 'Brain Tumor Surgery in Hyderabad | Advanced Neurosurgical Oncology – Dr. Sayuj Krishnan',
+    title: 'Brain Tumor Surgery Hyderabad | Advanced Safety & Care',
     description:
-      'At Yashoda Hospital, Malakpet, Dr. Sayuj Krishnan offers advanced brain tumour surgery in Hyderabad using neuronavigation and microsurgical techniques to maximise safety and recovery.',
+      'Advanced brain tumor surgery in Hyderabad with Dr. Sayuj Krishnan. High success rates with Neuronavigation & Awake Craniotomy for faster recovery. Trusted Neuro-Oncology care.',
     url: `${SITE_URL}/services/${SERVICE_SLUG}`,
     siteName: 'Dr. Sayuj Krishnan - Neurosurgeon Hyderabad',
     locale: 'en_IN',
@@ -56,7 +58,7 @@ export const metadata: Metadata = {
   },
 };
 
-const schema = buildLocalServiceSchema({
+const serviceSchema = buildLocalServiceSchema({
   slug: SERVICE_SLUG,
   name: 'Advanced Brain Tumor Surgery in Hyderabad',
   description:
@@ -115,6 +117,14 @@ const faqs = [
     answer:
       'Not always. Some lesions are best managed with stereotactic biopsy, radiosurgery, or endoscopic skull base approaches. Surgical planning is individualised based on tumour type, size, and location.',
   },
+  {
+    question: 'How long does recovery take after brain tumor surgery?',
+    answer: 'Most patients spend 1-2 days in the ICU for monitoring and move to the ward for another 3-4 days. You can usually return to light daily activities within 2-3 weeks, though full recovery depends on the specific tumor type and location.'
+  },
+  {
+    question: 'What is the cost of brain tumor surgery in Hyderabad?',
+    answer: 'The cost of brain tumor surgery varies significantly based on tumor complexity, ICU stay duration, and technology used (neuronavigation, monitoring). Biopsies may start from ₹1,00,000, while complex craniotomies can range higher. We provide transparent estimates after scan review.'
+  }
 ];
 
 const COSTS = [
@@ -147,15 +157,11 @@ const COSTS = [
 // Google Business Profile JSON-LD for Brain Tumor Surgery
 const gbpSchema = {
   "@context": "https://schema.org",
-  "@type": "MedicalBusiness",
+  "@type": "MedicalClinic", // Changed from MedicalBusiness to MedicalClinic for consistency
   "name": "Brain Tumor Surgery | Dr. Sayuj Krishnan",
   "url": "https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad/?utm_source=google&utm_medium=organic&utm_campaign=gbp_brain_tumor_surgery_hyderabad",
   "image": "https://www.drsayuj.info/images/og-default.jpg",
   "description": "Microsurgical and awake brain tumor surgery by Dr. Sayuj Krishnan, Yashoda Hospital Hyderabad. Expert in glioma, meningioma, and skull base tumor management with neuronavigation.",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad/"
-  },
   "medicalSpecialty": "Neurosurgery",
   "areaServed": {
     "@type": "AdministrativeArea",
@@ -185,10 +191,26 @@ export default function BrainTumorSurgeryHyderabadPage() {
     return tags.includes('brain') || tags.includes('meningioma');
   }).slice(0, 2);
 
+  const breadcrumbs = [
+    { name: 'Home', path: '/' },
+    { name: 'Services', path: '/services/' },
+    { name: 'Brain Tumor Surgery in Hyderabad', path: `/services/${SERVICE_SLUG}/` },
+  ];
+
   return (
     <>
-      <JsonLd data={schema} />
+      <JsonLd data={serviceSchema} />
       <JsonLd data={gbpSchema} />
+      <MedicalWebPageSchema
+        title="Brain Tumor Surgery Hyderabad | Advanced Safety & Care – Dr. Sayuj"
+        description="Advanced brain tumor surgery in Hyderabad with Dr. Sayuj Krishnan. High success rates with Neuronavigation & Awake Craniotomy for faster recovery. Trusted Neuro-Oncology care."
+        pageSlug={`/services/${SERVICE_SLUG}/`}
+        pageType="service"
+        serviceOrCondition="Brain Tumor Surgery"
+        breadcrumbs={breadcrumbs}
+      />
+      <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/${SERVICE_SLUG}`} />
+
       <main className="container mx-auto px-4 py-16">
         <Breadcrumbs
           items={[
@@ -205,8 +227,8 @@ export default function BrainTumorSurgeryHyderabadPage() {
               Advanced Brain Tumor Surgery in Hyderabad
             </h1>
             <AuthorByline
-              publishedOn="2025-09-04"
-              updatedOn="2026-01-10"
+              publishedOn="2024-09-04"
+              updatedOn="2025-02-20"
               className="mb-6"
             />
             <p className="text-lg text-gray-700 mb-6">
@@ -240,40 +262,6 @@ export default function BrainTumorSurgeryHyderabadPage() {
             </ul>
           </div>
         </header>
-
-      {/* FAQPage JSON-LD for this page */}
-      <JsonLd
-        data={{
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "Are all brain tumours treated with open surgery?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Not every brain tumour needs open surgery. Depending on its type, size and location, options such as stereotactic biopsy, radiosurgery or endoscopic approaches may be appropriate. Dr. Sayuj Krishnan tailors the plan for each patient in Hyderabad after reviewing scans and discussing risks."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "How quickly can brain tumour surgery be scheduled?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Urgent cases with progressive neurological deficits are prioritised within 48–72 hours. Elective cases are usually scheduled within a week after multidisciplinary review and pre‑anaesthesia evaluation."
-              }
-            },
-            {
-               "@type": "Question",
-               "name": "What is the cost of brain tumor surgery in Hyderabad?",
-               "acceptedAnswer": {
-                 "@type": "Answer",
-                 "text": "The cost of brain tumor surgery varies significantly based on tumor complexity, ICU stay duration, and technology used (neuronavigation, monitoring). Biopsies may start from ₹1,00,000, while complex craniotomies can range higher. We provide transparent estimates after scan review."
-               }
-            }
-          ]
-        }}
-      />
 
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-blue-900 mb-6">Types of Brain Tumors We Treat</h2>
@@ -395,7 +383,7 @@ export default function BrainTumorSurgeryHyderabadPage() {
         <LocalPathways mode="service" />
 
         <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
-        <ReviewedBy lastReviewed="2026-01-10" />
+        <ReviewedBy lastReviewed="2025-02-20" />
       </main>
     </>
   );

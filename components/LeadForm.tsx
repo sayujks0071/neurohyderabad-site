@@ -18,6 +18,8 @@ interface LeadFormData {
   concern: string;
   preferredDate?: string;
   preferredTime?: string;
+  painScore?: number;
+  mriScanAvailable?: boolean;
   company?: string; // Honeypot
   source: string;
 }
@@ -34,6 +36,8 @@ const schema = yup.object({
   concern: yup.string().required("Please describe your concern").min(10, "Please provide a bit more detail"),
   preferredDate: yup.string(),
   preferredTime: yup.string(),
+  painScore: yup.number().min(1).max(10).optional(),
+  mriScanAvailable: yup.boolean().optional(),
   company: yup.string(), // Honeypot - should be empty
   source: yup.string().default("website"),
 }).required();
@@ -54,14 +58,19 @@ export default function LeadForm() {
     reset,
     handleSubmit,
     control,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm<LeadFormData>({
     resolver: yupResolver(schema),
     defaultValues: {
       source: "website",
       company: "",
+      painScore: 5,
+      mriScanAvailable: false,
     }
   });
+
+  const painScoreValue = watch("painScore");
 
   useEffect(() => {
     if (isSubmitted && successRef.current) {
@@ -176,6 +185,60 @@ export default function LeadForm() {
           error={errors.city?.message}
           required
         />
+
+        <div className="space-y-4">
+            <div>
+              <label htmlFor="painScore" className="block text-sm font-medium text-slate-700 mb-2">
+                Pain Intensity Score (1-10)
+              </label>
+              <div className="flex items-center gap-4">
+                <span className="text-sm font-bold text-slate-400" aria-hidden="true">1</span>
+                <input
+                  id="painScore"
+                  type="range"
+                  min="1"
+                  max="10"
+                  step="1"
+                  className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                  aria-valuetext={painScoreValue ? `Score: ${painScoreValue}${painScoreValue >= 8 ? ' (Severe)' : painScoreValue <= 3 ? ' (Mild)' : ''}` : "Score: 5"}
+                  {...register("painScore")}
+                />
+                <span className="text-sm font-bold text-slate-400" aria-hidden="true">10</span>
+              </div>
+              <div className="text-center mt-2">
+                {painScoreValue !== undefined && (
+                  <span
+                    className={`inline-block px-3 py-1 rounded-lg text-xs font-bold ${
+                      painScoreValue <= 3
+                        ? "bg-green-100 text-green-700"
+                        : painScoreValue <= 7
+                        ? "bg-yellow-100 text-yellow-700"
+                        : "bg-red-100 text-red-700"
+                    }`}
+                  >
+                    Score: {painScoreValue}
+                    {painScoreValue >= 8 && " (Severe)"}
+                    {painScoreValue <= 3 && " (Mild)"}
+                  </span>
+                )}
+              </div>
+            </div>
+
+            <div className="flex items-center p-3 bg-slate-50 rounded-lg border border-slate-200">
+              <input
+                type="checkbox"
+                id="mriScanAvailable"
+                className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500 border-gray-300"
+                {...register("mriScanAvailable")}
+              />
+              <label
+                htmlFor="mriScanAvailable"
+                className="ml-3 text-sm font-medium text-slate-700 cursor-pointer select-none"
+              >
+                I have MRI/CT Scan reports available
+              </label>
+            </div>
+        </div>
 
         <Textarea
           label="How can we help?"
