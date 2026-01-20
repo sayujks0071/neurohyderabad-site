@@ -22,7 +22,7 @@ export const metadata = {
   keywords: "neurosurgeon malakpet, yashoda hospital malakpet neurosurgeon, spine surgeon malakpet, daycare spine surgery malakpet, endoscopic spine surgery malakpet",
   alternates: { canonical: "https://www.drsayuj.info/neurosurgeon-malakpet" },
   openGraph: {
-    title: "Neurosurgeon in Malakpet | Dr. Sayuj Krishnan at Yashoda Hospital",
+    title: "Neurosurgeon in Malakpet | Brain & Spine Specialist | Dr. Sayuj",
     description: "Neurosurgeon at Yashoda Hospital Malakpet with endoscopic spine surgery and brain tumor expertise.",
     url: "https://www.drsayuj.info/neurosurgeon-malakpet",
     type: "website",
@@ -70,6 +70,17 @@ export default function MalakpetNeurosurgeonPage() {
     s.tags.includes('spine') || s.tags.includes('brain')
   ).slice(0, 2);
 
+  const commonConditions = [
+      "Sciatica & Leg Pain",
+      "Slip Disc (Herniated Disc)",
+      "Spinal Stenosis",
+      "Brain Tumors",
+      "Head Injuries (Trauma)",
+      "Spondylolisthesis",
+      "Neck Pain (Cervical Spondylosis)",
+      "Trigeminal Neuralgia"
+  ];
+
   return (
     <main className="bg-white">
       <LocationSchema location={location} breadcrumb={breadcrumb} faq={FAQ} />
@@ -79,8 +90,8 @@ export default function MalakpetNeurosurgeonPage() {
           <p className="text-sm uppercase tracking-wide text-blue-100">
             Yashoda Hospital Malakpet · Hyderabad
           </p>
-          <h1 className="mt-4 text-3xl font-bold md:text-5xl">
-            Neurosurgeon in Malakpet, Hyderabad
+          <h1 className="mt-4 text-3xl font-bold md:text-5xl leading-tight">
+            Neurosurgeon in Malakpet &<br className="hidden md:block" /> Brain-Spine Specialist
           </h1>
           <p className="mt-4 text-xl text-blue-50">
             Dr. Sayuj Krishnan – Your Local Neurosurgeon at Yashoda Hospital Malakpet. Full Endoscopic Spine Surgery • Brain Tumor Surgery • 24/7 Emergency Care • 9+ Years Experience
@@ -158,32 +169,38 @@ export default function MalakpetNeurosurgeonPage() {
               <div className="mt-4 space-y-4">
                 <div>
                   <h4 className="font-semibold text-gray-900">Full Endoscopic Spine Surgery</h4>
-                  <p className="text-sm text-gray-600">Minimally invasive spine surgery through 6-8mm incision, same-day discharge</p>
+                  <p className="text-sm text-gray-600">Minimally invasive spine surgery through 6-8mm incision. Includes <strong>Endoscopic Discectomy</strong> and <strong>Endoscopic ULBD</strong>.</p>
                   <Link href="/services/endoscopic-spine-surgery-hyderabad" className="text-sm text-blue-600 hover:underline">Learn more →</Link>
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900">Brain Tumor Surgery</h4>
-                  <p className="text-sm text-gray-600">Advanced microsurgical techniques with neuronavigation</p>
+                  <p className="text-sm text-gray-600">Advanced microsurgical techniques with neuronavigation.</p>
                   <Link href="/conditions/brain-tumor-surgery-hyderabad" className="text-sm text-blue-600 hover:underline">Learn more →</Link>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-gray-900">Emergency Brain Bleed Evacuation</h4>
-                  <p className="text-sm text-gray-600">24/7 emergency endoscopic hemorrhage evacuation</p>
-                  <Link href="/conditions/brain-bleed-evacuation-hyderabad" className="text-sm text-blue-600 hover:underline">Learn more →</Link>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900">Trigeminal Neuralgia Treatment</h4>
-                  <p className="text-sm text-gray-600">Microvascular decompression (MVD) for facial pain relief</p>
-                  <Link href="/conditions/trigeminal-neuralgia-treatment-hyderabad" className="text-sm text-blue-600 hover:underline">Learn more →</Link>
-                </div>
-                <div>
-                   <h4 className="font-semibold text-gray-900">Cervical Myelopathy Decompression</h4>
-                   <p className="text-sm text-gray-600">Surgery for spinal cord compression and balance issues</p>
-                   <Link href="/conditions/cervical-myelopathy-treatment-hyderabad" className="text-sm text-blue-600 hover:underline">Learn more →</Link>
+                  <h4 className="font-semibold text-gray-900">Spinal Fixation & Fusion</h4>
+                  <p className="text-sm text-gray-600">Including <strong>MIS TLIF</strong> for spondylolisthesis and fractures.</p>
+                  <Link href="/services/spinal-fusion-surgery-hyderabad" className="text-sm text-blue-600 hover:underline">Learn more →</Link>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* NEW: Conditions Treated Grid */}
+      <section className="bg-gray-50 py-12 border-y border-gray-100">
+        <div className="mx-auto max-w-5xl px-4">
+           <h2 className="text-2xl font-bold text-gray-900 mb-2">Conditions We Treat at Malakpet</h2>
+           <p className="text-gray-600 mb-8">Specialized care for common and complex brain and spine disorders.</p>
+           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+              {commonConditions.map((condition, idx) => (
+                  <div key={idx} className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 flex items-center">
+                      <span className="text-blue-500 mr-2">•</span>
+                      <span className="font-medium text-gray-800">{condition}</span>
+                  </div>
+              ))}
+           </div>
         </div>
       </section>
 
@@ -206,7 +223,7 @@ export default function MalakpetNeurosurgeonPage() {
           </div>
       </section>
 
-      <section className="bg-gray-50 py-12">
+      <section className="bg-white py-12">
         <div className="mx-auto max-w-5xl px-4">
           <h2 className="mb-8 text-center text-2xl font-bold text-gray-900 md:text-3xl">
             Meet Your Expert Neurosurgeon in Malakpet
@@ -214,31 +231,33 @@ export default function MalakpetNeurosurgeonPage() {
           <div className="grid gap-8 items-center md:grid-cols-2">
              <div>
                 <h3 className="mb-2 text-xl font-semibold text-blue-800">Dr. Sayuj Krishnan</h3>
-                <p className="mb-4 font-medium text-gray-600">Consultant Neurosurgeon & Spine Surgeon</p>
+                <p className="mb-4 font-medium text-gray-600 text-lg">Consultant Neurosurgeon & Spine Surgeon</p>
                 <p className="mb-4 text-gray-700">
                   With over <strong>9 years of experience</strong> and specialized <strong>German training</strong>,
                   Dr. Sayuj brings international standards of neurosurgical care to Malakpet. He has performed
-                  over <strong>1,000 successful endoscopic procedures</strong>, helping patients recover faster with minimal pain.
+                  over <strong>1,000 successful endoscopic procedures</strong>.
                 </p>
-                <div className="space-y-3">
-                   <div className="flex items-start">
-                      <span className="mr-2 mt-1 text-green-600">✓</span>
-                      <div className="text-gray-700">
-                        <strong>German Fellowship Trained:</strong> Observer-ship in Full Endoscopic Spine Surgery (RIWOspine Academy, Germany).
-                      </div>
-                   </div>
-                   <div className="flex items-start">
-                      <span className="mr-2 mt-1 text-green-600">✓</span>
-                      <div className="text-gray-700">
-                         <strong>Expert Qualifications:</strong> MBBS, DNB Neurosurgery (6-Year Direct Course), Fellowship in Minimally Invasive Spine Surgery.
-                      </div>
-                   </div>
-                   <div className="flex items-start">
-                      <span className="mr-2 mt-1 text-green-600">✓</span>
-                      <div className="text-gray-700">
-                         <strong>Professional Memberships:</strong> AO Spine (International), Neurological Society of India (NSI).
-                      </div>
-                   </div>
+
+                <div className="bg-blue-50 rounded-lg p-5 border border-blue-100">
+                   <h4 className="font-semibold text-blue-900 mb-3">Credentials & Qualifications</h4>
+                   <ul className="space-y-2">
+                       <li className="flex items-start">
+                          <span className="font-bold text-blue-600 mr-2">MD</span>
+                          <span className="text-gray-700">MBBS, DNB Neurosurgery (6-Year Direct Course)</span>
+                       </li>
+                       <li className="flex items-start">
+                          <span className="font-bold text-blue-600 mr-2">Fellowship</span>
+                          <span className="text-gray-700">Minimally Invasive Spine Surgery</span>
+                       </li>
+                       <li className="flex items-start">
+                          <span className="font-bold text-blue-600 mr-2">Training</span>
+                          <span className="text-gray-700">Full Endoscopic Spine Surgery (RIWOspine, Germany)</span>
+                       </li>
+                       <li className="flex items-start">
+                          <span className="font-bold text-blue-600 mr-2">Member</span>
+                          <span className="text-gray-700">AO Spine (International), NSI (India)</span>
+                       </li>
+                   </ul>
                 </div>
              </div>
              <div className="rounded-lg border border-gray-100 bg-white p-6 shadow-md">
