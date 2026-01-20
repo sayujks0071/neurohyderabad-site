@@ -29,6 +29,7 @@ const SITE_URL = "https://www.drsayuj.info";
 
 /**
  * Main SEO optimization workflow - runs daily
+ * Uses parallel execution for independent tasks
  */
 export async function runDailySEOOptimization(): Promise<SEOResult> {
   "use workflow";
@@ -41,8 +42,15 @@ export async function runDailySEOOptimization(): Promise<SEOResult> {
   let tasksCompleted = 0;
 
   try {
-    // Step 1: Submit sitemap to Google
-    const sitemapResult = await submitSitemapToGoogle();
+    // Phase 1: Run independent checks in parallel
+    const [sitemapResult, schemaResult, cwvResult, linkCheckResult] = await Promise.all([
+      submitSitemapToGoogle(),
+      validateSchemaMarkup(),
+      checkCoreWebVitals(),
+      checkInternalLinks(),
+    ]);
+
+    // Process sitemap result
     if (sitemapResult.success) {
       tasksCompleted++;
       improvements.push("Sitemap submitted to Google Search Console");
@@ -50,19 +58,7 @@ export async function runDailySEOOptimization(): Promise<SEOResult> {
       issues.push(`Sitemap submission failed: ${sitemapResult.error}`);
     }
 
-    await sleep("2s");
-
-    // Step 2: Request indexing for new/updated pages
-    const indexingResult = await requestIndexingForNewPages();
-    tasksCompleted += indexingResult.indexed;
-    if (indexingResult.indexed > 0) {
-      improvements.push(`Requested indexing for ${indexingResult.indexed} pages`);
-    }
-
-    await sleep("2s");
-
-    // Step 3: Validate schema markup
-    const schemaResult = await validateSchemaMarkup();
+    // Process schema result
     if (schemaResult.valid) {
       tasksCompleted++;
       improvements.push("Schema markup validated successfully");
@@ -70,10 +66,7 @@ export async function runDailySEOOptimization(): Promise<SEOResult> {
       issues.push(...schemaResult.errors);
     }
 
-    await sleep("2s");
-
-    // Step 4: Check Core Web Vitals
-    const cwvResult = await checkCoreWebVitals();
+    // Process CWV result
     if (cwvResult.passed) {
       tasksCompleted++;
       improvements.push(`Core Web Vitals: LCP=${cwvResult.lcp}ms, CLS=${cwvResult.cls}`);
@@ -81,22 +74,27 @@ export async function runDailySEOOptimization(): Promise<SEOResult> {
       issues.push(`CWV needs improvement: LCP=${cwvResult.lcp}ms, CLS=${cwvResult.cls}`);
     }
 
-    await sleep("2s");
-
-    // Step 5: Update content timestamps for freshness signals
-    const freshnessResult = await updateContentFreshness();
-    tasksCompleted += freshnessResult.updated;
-    if (freshnessResult.updated > 0) {
-      improvements.push(`Updated freshness signals for ${freshnessResult.updated} pages`);
-    }
-
-    // Step 6: Check for broken internal links
-    const linkCheckResult = await checkInternalLinks();
+    // Process link check result
     if (linkCheckResult.broken > 0) {
       issues.push(`Found ${linkCheckResult.broken} broken internal links`);
     } else {
       tasksCompleted++;
       improvements.push("All internal links are valid");
+    }
+
+    // Phase 2: Sequential tasks that depend on Phase 1
+    // Request indexing for pages (after sitemap is submitted)
+    const indexingResult = await requestIndexingForNewPages();
+    tasksCompleted += indexingResult.indexed;
+    if (indexingResult.indexed > 0) {
+      improvements.push(`Requested indexing for ${indexingResult.indexed} pages`);
+    }
+
+    // Update content freshness
+    const freshnessResult = await updateContentFreshness();
+    tasksCompleted += freshnessResult.updated;
+    if (freshnessResult.updated > 0) {
+      improvements.push(`Updated freshness signals for ${freshnessResult.updated} pages`);
     }
 
     console.log(`[SEO Workflow] Completed ${taskId} with ${tasksCompleted} tasks`);

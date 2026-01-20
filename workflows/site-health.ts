@@ -43,6 +43,7 @@ const API_ENDPOINTS = [
 
 /**
  * Main site health check workflow
+ * Uses parallel execution for all independent health checks
  */
 export async function runSiteHealthCheck(): Promise<HealthCheckResult> {
   "use workflow";
@@ -55,26 +56,36 @@ export async function runSiteHealthCheck(): Promise<HealthCheckResult> {
   const alerts: string[] = [];
 
   try {
-    // Step 1: Check critical pages
-    const pageResults = await checkCriticalPages();
+    // Run ALL health checks in parallel for speed
+    const [
+      pageResults,
+      apiResults,
+      sslResult,
+      perfResult,
+      sitemapResult,
+      robotsResult,
+    ] = await Promise.all([
+      checkCriticalPages(),
+      checkAPIEndpoints(),
+      checkSSLCertificate(),
+      checkPerformance(),
+      checkSitemap(),
+      checkRobotsTxt(),
+    ]);
+
+    // Process page results
     checks.push(...pageResults.checks);
     if (pageResults.failedCount > 0) {
       alerts.push(`${pageResults.failedCount} critical pages are down`);
     }
 
-    await sleep("1s");
-
-    // Step 2: Check API endpoints
-    const apiResults = await checkAPIEndpoints();
+    // Process API results
     checks.push(...apiResults.checks);
     if (apiResults.failedCount > 0) {
       alerts.push(`${apiResults.failedCount} API endpoints are failing`);
     }
 
-    await sleep("1s");
-
-    // Step 3: Check SSL certificate
-    const sslResult = await checkSSLCertificate();
+    // Process SSL result
     checks.push(sslResult);
     if (sslResult.status === "warn") {
       alerts.push(`SSL certificate expires soon: ${sslResult.message}`);
@@ -82,26 +93,19 @@ export async function runSiteHealthCheck(): Promise<HealthCheckResult> {
       alerts.push(`SSL certificate issue: ${sslResult.message}`);
     }
 
-    await sleep("1s");
-
-    // Step 4: Check response times
-    const perfResult = await checkPerformance();
+    // Process performance result
     checks.push(perfResult);
     if (perfResult.status === "warn" || perfResult.status === "fail") {
       alerts.push(`Performance degradation: ${perfResult.message}`);
     }
 
-    await sleep("1s");
-
-    // Step 5: Check sitemap accessibility
-    const sitemapResult = await checkSitemap();
+    // Process sitemap result
     checks.push(sitemapResult);
     if (sitemapResult.status === "fail") {
       alerts.push("Sitemap is not accessible");
     }
 
-    // Step 6: Check robots.txt
-    const robotsResult = await checkRobotsTxt();
+    // Process robots result
     checks.push(robotsResult);
 
     // Determine overall health
@@ -117,7 +121,7 @@ export async function runSiteHealthCheck(): Promise<HealthCheckResult> {
 
     console.log(`[Health Workflow] Completed ${checkId}: ${overall}`);
 
-    // Send alerts if needed
+    // Send alerts if needed (after all checks complete)
     if (alerts.length > 0) {
       await sendHealthAlerts(alerts);
     }
