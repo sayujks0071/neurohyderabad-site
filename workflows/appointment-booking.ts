@@ -9,7 +9,7 @@
  * - Follow-up care coordination
  */
 
-import { sleep, FatalError, fetch } from "workflow";
+import { FatalError, fetch } from "workflow";
 import { generateText } from "ai";
 import type { BookingData, EmailResult } from "@/packages/appointment-form/types";
 import { sendConfirmationEmail as sendAppointmentConfirmationEmail, sendAdminNotificationEmail } from "@/src/lib/appointments/email";
@@ -275,8 +275,9 @@ export async function handleAppointmentBooking(
   globalThis.fetch = fetch;
 
   const bookingId = generateBookingId();
+  // PII Redaction: Removed patient name
   console.log(
-    `[Appointment Workflow] Starting booking ${bookingId} for ${patientInfo.name}`
+    `[Appointment Workflow] Starting booking ${bookingId}`
   );
 
   try {
@@ -344,27 +345,51 @@ export async function handleAppointmentBooking(
       patientInfo.confirmationMessage || DEFAULT_CONFIRMATION_MESSAGE;
     const usedAI = patientInfo.usedAI ?? false;
 
-    // Step 6: Wait for 2 seconds before sending confirmation
-    await sleep("2s");
+    // PARALLEL EXECUTION BLOCK
+    // We initiate independent tasks concurrently to reduce total duration
+    console.log(`[Appointment Workflow] Starting parallel execution for ${bookingId}`);
 
-    // Step 7: Send confirmation + admin emails
-    const confirmationResult = await sendBookingConfirmationEmail(
+    // Task A: Send Confirmation Email (Critical for Webhook)
+    const emailPromise = sendBookingConfirmationEmail(
       booking,
       confirmationMessage
     );
-    const adminEmailResult = await sendBookingAdminAlert(
+
+    // Task B: Send Admin Alert
+    const adminEmailPromise = sendBookingAdminAlert(
+      bookingId, // Passing ID instead of full object for logging inside if needed, but func sig matches below
       booking,
       patientInfo.source
     );
-    if (!adminEmailResult.success) {
-      console.error(
-        `[Appointment Workflow] Admin notification failed: ${adminEmailResult.error}`
-      );
-    }
 
-    // Step 8: Sync CRM + webhooks
-    await syncBookingLead(bookingId, booking, patientInfo.source);
-    await triggerAppointmentWebhooks(
+    // Task C: Sync to Sheets
+    const syncPromise = syncBookingLead(bookingId, booking, patientInfo.source);
+
+    // Task D: Schedule Reminders
+    const remindersPromise = scheduleReminders(
+      bookingId,
+      patientInfo,
+      finalDate,
+      finalTime
+    );
+
+    // Task E: Prepare Education Content
+    const educationPromise = preparePatientEducation(patientInfo.chiefComplaint, patientInfo.email);
+
+    // Await Confirmation Email first as Webhook depends on it
+    const confirmationResult = await emailPromise;
+
+    // Handle Admin Email logging
+    adminEmailPromise.then((result) => {
+        if (!result.success) {
+            console.error(
+                `[Appointment Workflow] Admin notification failed: ${result.error}`
+            );
+        }
+    });
+
+    // Task F: Trigger Webhooks (Dependent on Confirmation Result)
+    const webhookPromise = triggerAppointmentWebhooks(
       booking,
       confirmationMessage,
       confirmationResult,
@@ -372,18 +397,14 @@ export async function handleAppointmentBooking(
       patientInfo.source
     );
 
-    // Step 9: Schedule reminders
-    await sleep("1s");
-    const reminderScheduled = await scheduleReminders(
-      bookingId,
-      patientInfo,
-      finalDate,
-      finalTime
-    );
-
-    // Step 10: Prepare patient education content
-    await sleep("5s");
-    await preparePatientEducation(patientInfo.chiefComplaint, patientInfo.email);
+    // Wait for all remaining background tasks
+    const [reminderScheduled] = await Promise.all([
+        remindersPromise,
+        adminEmailPromise,
+        syncPromise,
+        educationPromise,
+        webhookPromise
+    ]);
 
     // Step 11: Update analytics
     await trackBookingAnalytics(bookingId, patientInfo, status);
@@ -466,8 +487,9 @@ async function checkEmergencySymptoms(
 
   const isEmergency = detectedSymptoms.length > 0;
 
+  // PII Redaction: Removed explicit symptoms list log
   console.log(
-    `[Appointment Workflow] Emergency check: ${isEmergency} (symptoms: ${detectedSymptoms.join(", ")})`
+    `[Appointment Workflow] Emergency check: ${isEmergency} (symptoms count: ${detectedSymptoms.length})`
   );
 
   return { isEmergency, symptoms: detectedSymptoms };
@@ -482,8 +504,9 @@ async function notifyEmergencyTeam(
 ) {
   "use step";
 
+  // PII Redaction: Removed name
   console.log(
-    `[Appointment Workflow] Notifying emergency team for ${patientInfo.name}`
+    `[Appointment Workflow] Notifying emergency team`
   );
 
   // In production, this would:
@@ -492,7 +515,7 @@ async function notifyEmergencyTeam(
   // - Notify on-call doctor
 
   console.log(
-    `Emergency notification sent for patient ${patientInfo.name} with symptoms: ${symptoms.join(", ")}`
+    `Emergency notification sent.`
   );
 }
 
@@ -572,7 +595,8 @@ async function createBookingRecord(
   console.log(`[Appointment Workflow] Creating booking record ${bookingId}`);
 
   // In production, this would save to database
-  console.log(`Booking ${bookingId} created for ${patientInfo.name} on ${date} at ${time}`);
+  // PII Redaction: Removed name
+  console.log(`Booking ${bookingId} created on ${date} at ${time}`);
 }
 
 /**
@@ -584,7 +608,8 @@ async function sendBookingConfirmationEmail(
 ): Promise<EmailResult> {
   "use step";
 
-  console.log(`[Appointment Workflow] Sending confirmation email to ${booking.email}`);
+  // PII Redaction: Removed email
+  console.log(`[Appointment Workflow] Sending confirmation email`);
 
   return await sendAppointmentConfirmationEmail(booking, confirmationMessage);
 }
@@ -593,13 +618,15 @@ async function sendBookingConfirmationEmail(
  * Step: Send admin alert
  */
 async function sendBookingAdminAlert(
+  bookingId: string,
   booking: BookingData,
   source?: string
 ): Promise<EmailResult> {
   "use step";
 
+  // PII Redaction: Use bookingId instead of name
   console.log(
-    `[Appointment Workflow] Sending admin alert for ${booking.patientName}`
+    `[Appointment Workflow] Sending admin alert for booking ${bookingId}`
   );
 
   return await sendAdminNotificationEmail(booking, source);
@@ -741,6 +768,7 @@ async function preparePatientEducation(
   try {
     const { text } = await generateText({
       model: getTextModel(),
+      // PII Redaction: removed complaint from prompt log if it was there (it wasn't logged before, but good to check)
       prompt: `Based on the patient's chief complaint: "${chiefComplaint}", generate a brief patient education summary (2-3 paragraphs) covering:
 1. Common causes
 2. What to expect during consultation
