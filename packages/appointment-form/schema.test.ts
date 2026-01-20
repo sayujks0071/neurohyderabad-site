@@ -48,9 +48,15 @@ describe("Appointment Schema Validation", () => {
 
   it("fails when requestedDate is in the past", () => {
     const pastDate = new Date(Date.now() - 86400000); // Yesterday
+    // Ensure pastDate is really yesterday
+    const today = new Date();
+    today.setHours(0,0,0,0);
+    const yesterday = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 1);
+
     const invalidData = {
       ...baseValidData,
-      requestedDate: pastDate,
+      requestedDate: yesterday,
     };
     const result = appointmentSchema.safeParse(invalidData);
     expect(result.success).toBe(false);
@@ -58,6 +64,18 @@ describe("Appointment Schema Validation", () => {
       const error = result.error.issues.find(i => i.path.includes("requestedDate"));
       expect(error?.message).toBe("Date must be in the future");
     }
+  });
+
+  it("allows requestedDate to be today", () => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const validData = {
+      ...baseValidData,
+      requestedDate: today,
+    };
+    const result = appointmentSchema.safeParse(validData);
+    expect(result.success).toBe(true);
   });
 
   it("fails when painScore is out of range", () => {
