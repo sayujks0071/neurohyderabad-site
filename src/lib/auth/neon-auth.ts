@@ -3,7 +3,8 @@
  * Provides authentication for admin dashboard and patient portal
  */
 
-import { NeonClient } from '@neondatabase/neon-js';
+// import { NeonClient } from '@neondatabase/neon-js';
+import { neon } from '@neondatabase/serverless';
 
 // Initialize Neon client with auth
 const neonAuthUrl = process.env.NEXT_PUBLIC_NEON_AUTH_URL || process.env.VITE_NEON_AUTH_URL;
@@ -13,7 +14,7 @@ if (!neonAuthUrl && typeof window !== 'undefined') {
 }
 
 // Create Neon client instance
-export const neonClient = neonAuthUrl ? new NeonClient({ authUrl: neonAuthUrl }) : null;
+export const neonClient = neonAuthUrl ? null;
 
 // Auth helper functions
 export const auth = {
