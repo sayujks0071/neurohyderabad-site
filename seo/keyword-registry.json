@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-19",
+  "last_updated": "2026-01-20",
   "keywords": [
     {
       "term": "neurosurgeon hyderabad",
@@ -254,34 +254,46 @@
       "target_page": "/locations/neurosurgeon-gachibowli"
     },
     {
-      "term": "microscopic spine surgery cost hyderabad",
+      "term": "micro lumbar disc surgery hyderabad",
       "difficulty": "Med",
       "volume": "Med",
-      "target_page": "/services/microscopic-spine-surgery-hyderabad"
+      "target_page": "/services/endoscopic-discectomy-hyderabad"
     },
     {
-      "term": "robotic spine surgery hyderabad",
+      "term": "disc bulge treatment hyderabad",
+      "difficulty": "Med",
+      "volume": "High",
+      "target_page": "/conditions/slip-disc-treatment-hyderabad"
+    },
+    {
+      "term": "spinal tumor excision hyderabad",
       "difficulty": "High",
       "volume": "Low",
-      "target_page": "/services/robotic-spine-surgery-hyderabad"
+      "target_page": "/conditions/spine-tumor-surgery-hyderabad"
     },
     {
-      "term": "lumbar canal stenosis symptoms telugu",
-      "difficulty": "Low",
-      "volume": "Med",
-      "target_page": "/blog/lumbar-canal-stenosis-symptoms-telugu"
-    },
-    {
-      "term": "spinal implants cost in india",
-      "difficulty": "Med",
-      "volume": "Med",
-      "target_page": "/blog/spinal-implants-cost-india"
-    },
-    {
-      "term": "best hospital for brain tumor surgery in hyderabad",
+      "term": "spinal tumor surgery cost in hyderabad",
       "difficulty": "High",
       "volume": "Med",
-      "target_page": "/"
+      "target_page": "/conditions/spine-tumor-surgery-hyderabad"
+    },
+    {
+      "term": "types of spine tumors",
+      "difficulty": "Med",
+      "volume": "High",
+      "target_page": "/blog/types-of-spine-tumors-symptoms-guide"
+    },
+    {
+      "term": "cervical spondylotic myelopathy treatment hyderabad",
+      "difficulty": "High",
+      "volume": "Low",
+      "target_page": "/conditions/cervical-myelopathy-decompression-hyderabad"
+    },
+    {
+      "term": "endoscopic spine surgery cost hyderabad",
+      "difficulty": "Med",
+      "volume": "High",
+      "target_page": "/services/spine-surgery-cost-hyderabad"
     }
   ]
 }
