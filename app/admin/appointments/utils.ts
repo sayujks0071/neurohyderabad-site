@@ -14,6 +14,9 @@ export const generateWhatsappUrl = (patient: Appointment): string => {
   // For other lengths (e.g. 10 digits), we assume it's a local number and the template adds '91'.
   if (cleanNumber.startsWith('91') && cleanNumber.length === 12) {
     cleanNumber = cleanNumber.slice(2);
+  } else if (cleanNumber.startsWith('0') && cleanNumber.length === 11) {
+    // Handle case where user entered 0 prefix (e.g. 09876543210)
+    cleanNumber = cleanNumber.slice(1);
   }
 
   // Generate the dynamic message using the template

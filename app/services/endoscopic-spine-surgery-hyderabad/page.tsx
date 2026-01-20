@@ -157,6 +157,10 @@ const ADVANCED_TECHNIQUES = [
     description: "Ideal for L5-S1 herniations and spinal stenosis. Accessed from the back through a tiny window, clearing thickened ligaments."
   },
   {
+    title: "Daycare Spine Surgery",
+    description: "Our specialized protocol allows 90% of patients to walk within 3 hours and go home the same day, minimizing hospital acquired infection risks."
+  },
+  {
     title: "Endoscopic Cervical Decompression",
     description: "Posterior approach for neck disc herniations, avoiding fusion and preserving neck mobility."
   },
@@ -349,79 +353,16 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
           <p className="text-gray-700 mb-8">
             Endoscopic spine surgery is a targeted "keyhole" solution. It is most effective when the main problem is <strong>nerve compression</strong> (pinched nerve) rather than generalized back ache or spinal instability. Dr. Sayuj evaluates every patient individually, but generally:
           </p>
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Left: Ideal Candidates */}
-            <div className="bg-green-50/50 border border-green-100 rounded-2xl p-6">
-              <h3 className="text-xl font-bold text-green-800 mb-6 flex items-center gap-3">
-                <span className="flex items-center justify-center w-8 h-8 rounded-full bg-green-100 text-green-600 text-lg">✓</span>
-                Ideal Candidates
-              </h3>
-              <ul className="space-y-4">
-                <li className="flex gap-3">
-                  <span className="text-green-600 mt-1 flex-shrink-0">•</span>
-                  <div>
-                    <strong className="block text-gray-900">Sciatica (Leg Pain)</strong>
-                    <span className="text-sm text-gray-600">Sharp shooting pain, numbness, or tingling going down the leg (often worse than back pain).</span>
-                  </div>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-green-600 mt-1 flex-shrink-0">•</span>
-                  <div>
-                    <strong className="block text-gray-900">Herniated Disc (Slip Disc)</strong>
-                    <span className="text-sm text-gray-600">MRI confirms a disc pressing on the nerve root causing weakness or pain.</span>
-                  </div>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-green-600 mt-1 flex-shrink-0">•</span>
-                  <div>
-                    <strong className="block text-gray-900">Spinal Stenosis (Claudication)</strong>
-                    <span className="text-sm text-gray-600">Heaviness or cramping in legs when walking/standing that improves when sitting.</span>
-                  </div>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-green-600 mt-1 flex-shrink-0">•</span>
-                  <div>
-                    <strong className="block text-gray-900">Foraminal Stenosis</strong>
-                    <span className="text-sm text-gray-600">Narrowing of the nerve exit window, often causing gluteal or thigh pain.</span>
-                  </div>
-                </li>
-              </ul>
-            </div>
-
-            {/* Right: When Fusion/Open is needed */}
-            <div className="bg-gray-50 border border-gray-200 rounded-2xl p-6">
-              <h3 className="text-xl font-bold text-gray-800 mb-6 flex items-center gap-3">
-                <span className="flex items-center justify-center w-8 h-8 rounded-full bg-gray-200 text-gray-600 text-lg">ℹ️</span>
-                When Other Surgery May Be Needed
-              </h3>
-              <ul className="space-y-4">
-                <li className="flex gap-3">
-                  <span className="text-gray-500 mt-1 flex-shrink-0">•</span>
-                  <div>
-                    <strong className="block text-gray-900">Spinal Instability (Spondylolisthesis)</strong>
-                    <span className="text-sm text-gray-600">If vertebrae are slipping significantly, a <Link href="/services/spinal-fusion-surgery-hyderabad" className="text-blue-600 underline">Fusion (TLIF)</Link> may be required to stabilize the spine.</span>
-                  </div>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-gray-500 mt-1 flex-shrink-0">•</span>
-                  <div>
-                    <strong className="block text-gray-900">Severe Scoliosis</strong>
-                    <span className="text-sm text-gray-600">Significant curvature of the spine often requires deformity correction.</span>
-                  </div>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-gray-500 mt-1 flex-shrink-0">•</span>
-                  <div>
-                    <strong className="block text-gray-900">Infection or Tumor</strong>
-                    <span className="text-sm text-gray-600">Complex cases may require wider exposure than a single endoscope port allows.</span>
-                  </div>
-                </li>
-              </ul>
-            </div>
+          <div className="mb-6 bg-blue-50 p-4 rounded-lg">
+             <p className="text-sm text-blue-800">
+               <strong>Related Symptoms:</strong> If you are experiencing <Link href="/symptoms/back-pain" className="underline font-semibold hover:text-blue-900">severe back pain</Link> or shooting leg pain (<Link href="/conditions/sciatica-pain-treatment-hyderabad" className="underline font-semibold hover:text-blue-900">sciatica</Link>), this minimally invasive option might be right for you.
+             </p>
           </div>
-          <div className="mt-6 text-center">
-            <p className="text-sm text-gray-500 italic">Not sure? A clinical exam and MRI review is the only way to confirm.</p>
-          </div>
+          <ul className="grid md:grid-cols-2 gap-4 text-sm text-gray-700">
+            {conditions.map((condition) => (
+              <li key={condition} className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">• {condition}</li>
+            ))}
+          </ul>
         </section>
 
         <section className="mb-16">

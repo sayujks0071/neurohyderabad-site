@@ -1,1 +1,1 @@
-[2025-02-23] [Endoscopic Spine Surgery Candidate Section](./2025-02-23/report.md)
+seo/ranking-ops/2025-01-28/report.md
