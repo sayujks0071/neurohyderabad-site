@@ -97,7 +97,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      messageId: emailResult.messageId,
+      messageId: 'messageId' in emailResult ? emailResult.messageId : undefined,
       sources,
       briefingLength: briefingContent.length,
     });
