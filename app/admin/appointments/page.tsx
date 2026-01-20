@@ -12,6 +12,8 @@ export default function AppointmentsPage() {
   const appointments = mockAppointments;
 
   const sendWhatsapp = (appointment: Appointment) => {
+    // Logic uses generateWhatsappUrl which implements the required message template and sanitization:
+    // "Hello {name}, this is regarding your appointment with Dr. Sayuj on {date}. We confirm your slot. Please bring your MRI/CT scans."
     if (!appointment.phone) {
         alert("No phone number available for this patient.");
         return;
