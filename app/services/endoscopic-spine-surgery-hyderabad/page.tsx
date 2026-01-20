@@ -147,6 +147,15 @@ const SUCCESS_RATES = [
   }
 ];
 
+const conditions = [
+  'Lumbar disc herniation (slip disc)',
+  'Sciatica with leg pain',
+  'Spinal stenosis (narrowing)',
+  'Foraminal stenosis',
+  'Cervical disc herniation',
+  'Failed conservative treatment (6+ weeks)',
+];
+
 const ADVANCED_TECHNIQUES = [
   {
     title: "Transforaminal Endoscopy (TESS)",

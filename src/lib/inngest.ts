@@ -1,7 +1,7 @@
 import { Inngest } from "inngest";
 
 // Create a client to send and receive events
-export const inngest = new Inngest({ 
+export const inngest = new Inngest({
   id: "neurosurgery-nextjs-site",
   name: "Dr. Sayuj Krishnan - Neurosurgery Website",
   // Optional: Add environment-specific configuration
@@ -28,7 +28,7 @@ export type Events = {
       appointmentType: string;
     };
   };
-  
+
   "appointment/confirmed": {
     data: {
       appointmentId: string;
@@ -36,7 +36,7 @@ export type Events = {
       confirmationTime: string;
     };
   };
-  
+
   "appointment/reminder": {
     data: {
       appointmentId: string;
@@ -46,7 +46,7 @@ export type Events = {
       reminderType: "24h" | "1h" | "same-day";
     };
   };
-  
+
   // Patient communication events
   "patient/welcome": {
     data: {
@@ -55,7 +55,7 @@ export type Events = {
       referralSource?: string;
     };
   };
-  
+
   "patient/follow-up-procedure": {
     data: {
       patientEmail: string;
@@ -64,7 +64,7 @@ export type Events = {
       followUpDate: string;
     };
   };
-  
+
   // Website events
   "website/contact-form": {
     data: {
@@ -76,7 +76,7 @@ export type Events = {
       timestamp: string;
     };
   };
-  
+
   "website/consultation-request": {
     data: {
       patientName: string;
@@ -87,7 +87,7 @@ export type Events = {
       preferredDate?: string;
     };
   };
-  
+
   // Analytics events
   "analytics/page-view": {
     data: {
@@ -97,7 +97,7 @@ export type Events = {
       timestamp: string;
     };
   };
-  
+
   "analytics/conversion": {
     data: {
       conversionType: "appointment" | "consultation" | "download";
@@ -106,21 +106,21 @@ export type Events = {
       timestamp: string;
     };
   };
-  
+
   // Test events
   "test/hello.world": {
     data: {
       email: string;
     };
   };
-  
+
   "test/appointment.flow": {
     data: {
       patientName: string;
       patientEmail: string;
     };
   };
-  
+
   "test/error.handling": {
     data: {
       shouldFail: boolean;
