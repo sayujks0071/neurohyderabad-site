@@ -14,6 +14,7 @@ export const metadata: Metadata = {
     "Book Appointment",
     "Best Neurosurgeon Hyderabad",
     "Dr Sayuj Krishnan Appointment",
+    "Neurosurgeon Appointment",
     "Neurosurgeon Appointment Hyderabad",
     "Spine Surgeon Appointment Hyderabad",
     "Yashoda Hospital Neurosurgeon Appointment"

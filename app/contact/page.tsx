@@ -237,21 +237,21 @@ export default function ContactPage() {
               </p>
               <div className="grid md:grid-cols-3 gap-4">
                 <Link
-                  href="/locations/brain-spine-surgeon-jubilee-hills"
+                  href="/neurosurgeon-jubilee-hills"
                   className="block bg-blue-50 border border-blue-200 rounded-lg p-4 hover:bg-blue-100 transition-colors"
                 >
                   <h3 className="font-semibold text-blue-700 mb-2">Near Jubilee Hills</h3>
                   <p className="text-sm text-gray-600">Travel time: 15-20 minutes</p>
                 </Link>
                 <Link
-                  href="/locations/brain-spine-surgeon-banjara-hills"
+                  href="/neurosurgeon-banjara-hills"
                   className="block bg-blue-50 border border-blue-200 rounded-lg p-4 hover:bg-blue-100 transition-colors"
                 >
                   <h3 className="font-semibold text-blue-700 mb-2">Near Banjara Hills</h3>
                   <p className="text-sm text-gray-600">Travel time: 20-25 minutes</p>
                 </Link>
                 <Link
-                  href="/locations/brain-spine-surgeon-hitec-city"
+                  href="/neurosurgeon-hitech-city"
                   className="block bg-blue-50 border border-blue-200 rounded-lg p-4 hover:bg-blue-100 transition-colors"
                 >
                   <h3 className="font-semibold text-blue-700 mb-2">Near HITEC City</h3>

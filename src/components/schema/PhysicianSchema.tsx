@@ -88,6 +88,7 @@ export const PhysicianSchema: React.FC = () => {
         "url": SITE_URL,
         "image": `${SITE_URL}/images/dr-sayuj-krishnan.jpg`,
         "telephone": CANONICAL_TELEPHONE,
+        "priceRange": "₹₹",
         "email": "hellodr@drsayuj.info",
         "identifier": [
           {

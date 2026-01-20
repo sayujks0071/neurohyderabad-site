@@ -1,8 +1,37 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import ExpandedFAQ from "../../src/components/ExpandedFAQ";
 import { SITE_URL } from "../../src/lib/seo";
 import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
 import MedicalWebPageSchema from "../components/schemas/MedicalWebPageSchema";
+
+const SPINE_SURGERY_FAQS = [
+  {
+    question: "Is endoscopic spine surgery safe for elderly patients?",
+    answer: "Yes, because it uses local anesthesia and smaller incisions, it lowers risks like blood loss and infection, making it safer for elderly patients with other health conditions.",
+    category: "Safety"
+  },
+  {
+    question: "How soon can I walk after endoscopic spine surgery?",
+    answer: "Most patients walk within 3-4 hours after surgery. We encourage early mobilization to speed up recovery and prevent clots.",
+    category: "Recovery"
+  },
+  {
+    question: "Does insurance cover endoscopic spine surgery in Hyderabad?",
+    answer: "Yes, most major insurance providers and TPA approvals cover endoscopic spine procedures at Yashoda Hospitals. We assist with the pre-authorization process.",
+    category: "Cost & Insurance"
+  },
+  {
+    question: "What is the success rate of endoscopic discectomy?",
+    answer: "The success rate is over 90% for properly selected patients, with a recurrence rate of less than 5%, comparable to or better than traditional open surgery.",
+    category: "Outcomes"
+  },
+  {
+    question: "Will I need general anesthesia?",
+    answer: "Many endoscopic procedures can be done under local anesthesia with conscious sedation, meaning you are awake but comfortable. This avoids the risks of general anesthesia.",
+    category: "Procedure"
+  }
+];
 
 export const metadata: Metadata = {
   title: "Endoscopic Spine Surgery Hyderabad | Minimally Invasive Specialist",
@@ -410,65 +439,7 @@ export default function SpineSurgeryPage() {
           </div>
         </section>
 
-        {/* FAQ Section */}
-        <section className="py-16">
-          <div className="container mx-auto px-4">
-            <div className="max-w-6xl mx-auto">
-              <h2 className="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
-              <div className="grid gap-6 md:grid-cols-2">
-                <div className="space-y-4">
-                   <details className="group border border-gray-200 rounded-lg p-4 open:bg-blue-50">
-                    <summary className="font-semibold text-gray-800 cursor-pointer list-none flex justify-between items-center">
-                      <span>How long does endoscopic spine surgery take?</span>
-                      <span className="transition group-open:rotate-180">▼</span>
-                    </summary>
-                    <p className="text-gray-600 mt-3 text-sm">
-                      Most procedures take 45-90 minutes depending on the complexity. You are usually up and walking within 3 hours.
-                    </p>
-                  </details>
-                  <details className="group border border-gray-200 rounded-lg p-4 open:bg-blue-50">
-                    <summary className="font-semibold text-gray-800 cursor-pointer list-none flex justify-between items-center">
-                      <span>Will I need general anesthesia?</span>
-                      <span className="transition group-open:rotate-180">▼</span>
-                    </summary>
-                    <p className="text-gray-600 mt-3 text-sm">
-                      Many endoscopic procedures can be done under local anesthesia with sedation, or general anesthesia depending on patient preference and case complexity.
-                    </p>
-                  </details>
-                   <details className="group border border-gray-200 rounded-lg p-4 open:bg-blue-50">
-                    <summary className="font-semibold text-gray-800 cursor-pointer list-none flex justify-between items-center">
-                      <span>What about Tailbone Pain (Coccydynia)?</span>
-                      <span className="transition group-open:rotate-180">▼</span>
-                    </summary>
-                    <p className="text-gray-600 mt-3 text-sm">
-                      <strong>Coccydynia</strong> or tailbone pain is common after prolonged sitting or trauma. Most cases resolve with specialized cushions, posture correction, and local injections. Surgery (coccygectomy) is rare but available for persistent cases.
-                    </p>
-                  </details>
-                </div>
-                 <div className="space-y-4">
-                   <details className="group border border-gray-200 rounded-lg p-4 open:bg-blue-50">
-                    <summary className="font-semibold text-gray-800 cursor-pointer list-none flex justify-between items-center">
-                      <span>Is it covered by insurance?</span>
-                      <span className="transition group-open:rotate-180">▼</span>
-                    </summary>
-                    <p className="text-gray-600 mt-3 text-sm">
-                      Yes, most health insurance policies cover endoscopic spine surgery. Our team assists with cashless pre-authorization.
-                    </p>
-                  </details>
-                   <details className="group border border-gray-200 rounded-lg p-4 open:bg-blue-50">
-                    <summary className="font-semibold text-gray-800 cursor-pointer list-none flex justify-between items-center">
-                      <span>What if the pain comes back?</span>
-                      <span className="transition group-open:rotate-180">▼</span>
-                    </summary>
-                    <p className="text-gray-600 mt-3 text-sm">
-                      Recurrence rates are low (similar to or better than open surgery). If pain returns, we re-evaluate with MRI. Revision surgery is possible but rarely needed.
-                    </p>
-                  </details>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <ExpandedFAQ faqs={SPINE_SURGERY_FAQS} className="bg-white" />
 
         {/* Call to Action */}
         <section className="py-16 bg-blue-600 text-white">
