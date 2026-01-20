@@ -50,6 +50,7 @@ temp/
 docs/internal/
 *.md
 !docs/MAINTENANCE_REPORT.md
+!integrations/apps-script/SECURITY.md
 *.patch
 *.sh
 *.png
