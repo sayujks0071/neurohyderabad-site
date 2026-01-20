@@ -1,7 +1,3 @@
-# Latest Blog Automation Run
-
-- **Date**: 2026-01-17
-- **Topic**: Meningioma Brain Tumor: When is Surgery Needed?
-- **Slug**: `meningioma-brain-tumor-treatment-hyderabad`
-- **Status**: Success
-- **Report**: [View Run Log](./2026-01-17/run.md)
+| Date | Topic | Status | Log |
+| :--- | :--- | :--- | :--- |
+| 2026-01-20 | Sleeping Positions for Sciatica | Published | [View Log](./2026-01-20/run.md) |

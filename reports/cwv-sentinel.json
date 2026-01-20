@@ -1,29 +1,23 @@
 {
-  "timestamp": "2025-05-22T10:15:00Z",
+  "timestamp": "2025-02-23T12:00:00Z",
   "notes": {
-    "measurement": "Unable to run Lighthouse CI due to missing Chrome environment. Used manual code analysis and build output.",
-    "build_output": {
-      "shared_js": "103 kB",
-      "home_size": "103 kB",
-      "location_size": "106 kB"
+    "home": {
+      "bottleneck": "LCP",
+      "observation": "DoctorCard image in Hero section lacked 'sizes' attribute despite having 'priority'. This can lead to suboptimal image resource selection by the browser.",
+      "fix": "Added sizes='128px' to DoctorCard image."
     },
-    "bottlenecks": [
-      {
-        "type": "CLS/LCP",
-        "suspected_source": "Font loading strategy (display: 'swap') for Merriweather and Inter.",
-        "details": "The 'swap' strategy can cause layout shifts (CLS) when the web font loads and replaces the fallback font, especially for the Hero section text (Merriweather) and Headings (Inter). It can also delay LCP if the browser waits for the font (block period)."
-      },
-      {
-        "type": "CLS",
-        "suspected_source": "LazySection placeholders",
-        "details": "Placeholders have fixed heights that might not match loaded content, causing shifts below the fold."
-      }
-    ],
-    "selected_bottleneck": "Font loading strategy (display: 'swap')",
-    "proposed_fix": "Change font display to 'optional' in app/layout.tsx to prevent layout shifts and ensure text visibility.",
-    "verification": {
-      "status": "Success",
-      "method": "Build passed. Code analysis confirms this change aligns with Next.js and Web Vitals best practices for CLS optimization."
+    "general": {
+      "observation": "Shared JS bundle is ~103kB, which is relatively high. Hypertune is lazy-loaded to mitigate this."
     }
+  },
+  "changes": [
+    {
+      "file": "app/_components/DoctorCard.tsx",
+      "description": "Added sizes='128px' to Image component to assist browser in resource selection for LCP optimization."
+    }
+  ],
+  "verification": {
+    "method": "Manual inspection via Playwright script",
+    "result": "sizes attribute verified as '128px'. Visual appearance unchanged."
   }
 }

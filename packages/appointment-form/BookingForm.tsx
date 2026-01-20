@@ -10,6 +10,7 @@ import Textarea from "./ui/Textarea";
 import Button from "./ui/Button";
 import Calendar from "./ui/Calendar";
 import { appointmentSchema, BookingFormValues } from "./schema";
+import { formatLocalDate, parseLocalDate } from "@/src/lib/dates";
 
 interface BookingFormProps {
   onSubmit: (data: BookingData) => Promise<void> | void;
@@ -75,7 +76,9 @@ export default function BookingForm({
         gender: (initialData.gender && ["male", "female", "other"].includes(initialData.gender))
           ? (initialData.gender as "male" | "female" | "other")
           : undefined,
-        requestedDate: initialData.appointmentDate ? new Date(initialData.appointmentDate) : undefined,
+        requestedDate: initialData.appointmentDate
+          ? parseLocalDate(initialData.appointmentDate)
+          : undefined,
         appointmentTime: initialData.appointmentTime,
         reason: initialData.reason,
         painScore: initialData.painScore ?? 5,
@@ -101,7 +104,7 @@ export default function BookingForm({
       phone: data.contactNumber,
       age: data.age,
       gender: data.gender,
-      appointmentDate: data.requestedDate.toISOString().split("T")[0],
+      appointmentDate: formatLocalDate(data.requestedDate),
       appointmentTime: data.appointmentTime,
       reason: data.reason,
       painScore: data.painScore,
@@ -190,7 +193,7 @@ export default function BookingForm({
                 render={({ field }) => (
                   <Calendar
                     label="Preferred Date"
-                    value={field.value ? field.value.toISOString().split("T")[0] : ""}
+                    value={field.value ? formatLocalDate(field.value) : ""}
                     onChange={(dateString) => {
                         const [year, month, day] = dateString.split("-").map(Number);
                         const date = new Date(year, month - 1, day);
@@ -217,6 +220,7 @@ export default function BookingForm({
                           key={time}
                           type="button"
                           onClick={() => field.onChange(time)}
+                          aria-pressed={field.value === time}
                           className={`w-full text-center px-2 py-2.5 border rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-1 ${
                             field.value === time
                               ? "bg-cyan-600 text-white border-cyan-600"
@@ -239,12 +243,16 @@ export default function BookingForm({
 
             <div className="md:col-span-2 space-y-6">
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
+                <label
+                  htmlFor="painScore-slider"
+                  className="block text-sm font-medium text-slate-700 mb-2"
+                >
                   Pain Intensity Score (1-10)
                 </label>
                 <div className="flex items-center gap-4">
-                  <span className="text-sm font-bold text-slate-400">1</span>
+                  <span className="text-sm font-bold text-slate-400" aria-hidden="true">1</span>
                   <input
+                    id="painScore-slider"
                     type="range"
                     min="1"
                     max="10"
@@ -252,7 +260,7 @@ export default function BookingForm({
                     className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-cyan-600"
                     {...register("painScore")}
                   />
-                  <span className="text-sm font-bold text-slate-400">10</span>
+                  <span className="text-sm font-bold text-slate-400" aria-hidden="true">10</span>
                 </div>
                 <div className="text-center mt-2">
                   {painScoreValue && (
@@ -305,7 +313,7 @@ export default function BookingForm({
           </div>
 
           <div className="mt-10 pt-6 border-t border-slate-200 text-center">
-            <Button type="submit" disabled={isSubmitting}>
+            <Button type="submit" isLoading={isSubmitting}>
               {isSubmitting ? "Sending..." : "Submit Request"}
             </Button>
           </div>

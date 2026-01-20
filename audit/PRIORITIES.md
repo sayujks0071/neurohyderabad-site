@@ -1,14 +1,16 @@
-# Prioritized Fix List
+# Prioritized SEO Fixes
 
-| Priority | Issue | Affected URLs | Impact | Effort | Risk | Do Now? |
-|---|---|---|---|---|---|---|
-| **1** | **Missing Article Schema on Hardcoded Blogs** | `/blog/sciatica-pain-management-hyderabad`, etc. | High | Medium | Low | **Yes** |
-| **2** | **Sitemap Conflict (Static vs Dynamic)** | `/sitemap.xml` | High | Low | Low | **Yes** |
-| **3** | **Long Title Tags (> 65 chars)** | Homepage, Service Pages | Medium | Low | Low | **Yes** |
-| 4 | Missing FAQPage Schema on Service Pages | `/services/*` | Medium | Medium | Low | No |
-| 5 | "No Surgery" Content Gap | Sciatica Page | Medium | Medium | Low | No |
+| Issue | Impact (1-5) | Effort (1-5) | Risk | Do now? | Fix Summary |
+|-------|--------------|--------------|------|---------|-------------|
+| **LCP Poor (16s)** | 5 | 3 | Med | **Yes** | Optimize Hero Image (Verified `priority={true}` is present, added `sizes` attribute). |
+| **Sitemap Redirects** | 3 | 1 | Low | **Yes** | Remove `locations/neurosurgeon-near-jubilee-hills` and non-canonical location pages from `sitemap.ts`. |
+| **Schema Missing Fields** | 4 | 2 | Low | **Yes** | Add `priceRange` to Physician schema. Add `reviewedBy` to MedicalWebPage schema. |
+| **Missing H1 Tags** | 4 | 2 | Low | No | Add H1 to pages flagged in onpage_issues.csv (Requires content update). |
+| **Duplicate Titles** | 3 | 2 | Low | No | Update metadata for conflicting pages. |
+| **Orphan Pages** | 3 | 3 | Med | No | Add internal links to `spine-surgery`, `pediatric-neurosurgery`. |
+| **Telugu Content** | 2 | 4 | Low | No | Create `/te/` landing page. |
 
-## Execution Plan
-1. **Fix Sitemap:** Configure `next-sitemap` to stop generating `sitemap.xml` (keep image/video sitemaps) so `app/sitemap.ts` takes precedence.
-2. **Fix Blog Schema:** Refactor one hardcoded blog page to use `BlogLayout` OR manually add `Article` schema to it. *Decision:* Since migrating to MDX is larger effort, I will add `BlogLayout` wrapper or schema injection to `app/blog/sciatica-pain-management-hyderabad/page.tsx` as a proof of concept/fix.
-3. **Fix Titles:** Update `app/layout.tsx` metadata template or individual page titles to be shorter.
+## Top 3 "Do Now"
+1. **Fix Sitemap:** Clean up redirects and non-canonicals.
+2. **Schema Update:** Fix Physician and Blog schema gaps.
+3. **Performance LCP:** Hero image optimization (sizes attribute added).

@@ -1,4 +1,6 @@
-Issue,Severity,Evidence,Recommendation
-"Sitemap Conflict: public/sitemap.xml shadows app/sitemap.ts",High,"Both files exist. Static file takes precedence, preventing dynamic updates.",Remove public/sitemap.xml or configure next-sitemap to strictly generate specialized sitemaps only.
-"Robots.txt points to potentially missing sitemaps",Medium,"robots.ts lists sitemap-blog.xml etc. If these are dynamic routes, they work. If they are expected to be static files from next-sitemap, verify they exist.","Verify accessibility of all sitemaps in robots.txt."
-"Long Titles",Medium,"Many pages have titles > 60 chars due to brand suffix.","Shorten base titles or reduce suffix length."
+url,issue_type,severity,recommended_fix
+https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills,Sitemap contains redirect (307),Medium,Update sitemap to point to final destination
+https://www.drsayuj.info/locations/malakpet,Non-canonical in sitemap,Low,Remove from sitemap (points to neurosurgeon-malakpet)
+https://www.drsayuj.info/locations/banjara-hills,Non-canonical in sitemap,Low,Remove from sitemap (points to neurosurgeon-banjara-hills)
+https://www.drsayuj.info/locations/hitech-city,Non-canonical in sitemap,Low,Remove from sitemap (points to neurosurgeon-hitech-city)
+https://www.drsayuj.info/locations/secunderabad,Non-canonical in sitemap,Low,Remove from sitemap (points to neurosurgeon-secunderabad)

@@ -2,6 +2,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { rateLimit } from "@/src/lib/rate-limit";
 import { validateLeadPayload } from "@/src/lib/validation";
+import { submitToGoogleSheets } from "@/src/lib/google-sheets";
 import { randomUUID } from "crypto";
 
 type LeadPayload = {
@@ -95,15 +96,22 @@ export async function POST(request: NextRequest) {
       metadata: body.metadata ?? {},
     };
 
-    // Lead data is now handled by n8n workflow via appointment webhooks
-    // This endpoint accepts leads but data storage is managed by n8n
-    console.log("[api/lead] Lead received:", { fullName, phone, email, source });
+    // Submit to Google Sheets (if configured)
+    await submitToGoogleSheets(payload);
+
+    // 🛡️ Sentinel: Redact sensitive PII from logs
+    console.log("[api/lead] Lead received:", {
+      fullName,
+      phone: phone ? `${phone.slice(0, 3)}***${phone.slice(-3)}` : undefined,
+      email: email ? `${email[0]}***@${email.split('@')[1]}` : undefined,
+      source
+    });
 
     return NextResponse.json({
       ok: true,
       message: "Lead received successfully",
       requestId: payload.requestId,
-      note: "Data is processed via n8n workflow"
+      note: "Data processed"
     });
   } catch (error) {
     console.error("Error in /api/lead:", error);
@@ -117,16 +125,5 @@ export async function POST(request: NextRequest) {
 export async function GET() {
   return NextResponse.json({
     status: "ok",
-  });
-}
-
-export async function OPTIONS() {
-  return new NextResponse(null, {
-    status: 204,
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type, Authorization",
-    },
   });
 }

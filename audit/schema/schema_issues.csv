@@ -1,9 +1,6 @@
-URL,Issue
-/,Missing Physician Schema
-/services/endoscopic-spine-surgery-hyderabad,Missing Physician Schema
-/services/endoscopic-spine-surgery-hyderabad,Missing MedicalWebPage Schema
-/conditions/sciatica-pain-treatment-hyderabad,Missing Physician Schema
-/locations/malakpet,Missing Physician Schema
-/blog/sciatica-pain-management-hyderabad,Missing Physician Schema
-/blog/sciatica-pain-management-hyderabad,Missing Breadcrumb Schema
-/blog/sciatica-pain-management-hyderabad,Missing Article Schema
+url,schema_type,issue
+https://www.drsayuj.info,Physician,Missing priceRange
+https://www.drsayuj.info/services/minimally-invasive-spine-surgery,Physician,Missing priceRange
+https://www.drsayuj.info/neurosurgeon-hyderabad,Physician,Missing priceRange
+https://www.drsayuj.info/blog/epilepsy-surgery-options-hyderabad,Physician,Missing priceRange
+https://www.drsayuj.info/blog/epilepsy-surgery-options-hyderabad,MedicalWebPage,Missing reviewedBy

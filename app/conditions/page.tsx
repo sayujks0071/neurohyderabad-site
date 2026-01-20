@@ -10,6 +10,7 @@ import { SITE_URL } from "@/src/lib/seo";
 import Section from "../_components/Section";
 import Card from "../_components/Card";
 import Button from "../_components/Button";
+import { LocalPathways } from '@/src/components/locations/LocalPathways';
 
 export const metadata: Metadata = {
   title: "Neurological Conditions A–Z | Dr. Sayuj Krishnan",
@@ -129,6 +130,10 @@ export default function ConditionsPage() {
           </div>
         </div>
       </Section>
+
+      <div className="mx-auto max-w-5xl px-6 pb-16">
+         <LocalPathways mode="condition" />
+      </div>
     </div>
   );
 }

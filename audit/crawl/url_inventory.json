@@ -1,1214 +1,1562 @@
 [
   {
-    "url": "https://www.drsayuj.info/icon.svg",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/sitemap-blog.xml",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/sitemap-conditions.xml",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/sitemap-images.xml",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/sitemap-locations.xml",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/sitemap-services.xml",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/sitemap-videos.xml",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/robots.txt",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/sitemap.xml",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/ai-chat",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/admin/appointments",
-    "pageType": "Appointment",
-    "status": 200,
-    "inlinks": "N/A"
+    "url": "https://www.drsayuj.info",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info",
+    "robots": "index, follow",
+    "title": "Best Neurosurgeon Hyderabad | Endoscopic Spine &amp; Brain Specialist",
+    "metaDescription": "Top-rated neurosurgeon in Hyderabad (Yashoda Hospital). Expert in endoscopic spine surgery, brain tumors &amp; sciatica. 1000+ surgeries. Book appointment.",
+    "h1": "Dr. Sayuj Krishnan: German-Trained Neurosurgeon in Hyderabad<span class=\"home-hero__subtitle block text-3xl md:text-5xl\">Minimally invasive spine, awake brain surgery, and ROSA DBS at Yashoda Hospital, Malakpet.</span>",
+    "wordCount": 10002,
+    "type": "home",
+    "inlinks": 0
   },
   {
     "url": "https://www.drsayuj.info/about",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/about",
+    "robots": "index, follow",
+    "title": "About Dr. Sayuj Krishnan | Premier Neurosurgeon in Hyderabad | Credentials &amp; Experience | Dr. Sayuj Krishnan",
+    "metaDescription": "Learn about Dr. Sayuj Krishnan&#x27;s exceptional training, over 9 years of neurosurgical experience, German fellowship, and pioneering work in minimally invasive brain &amp; spine surgery in Hyderabad.",
+    "h1": "About Dr. Sayuj Krishnan",
+    "wordCount": 6203,
+    "type": "other",
+    "inlinks": 128
   },
   {
     "url": "https://www.drsayuj.info/appointments",
-    "pageType": "Appointment",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/appointments/thank-you",
-    "pageType": "Appointment",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/awake-brain-surgery",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/brain-tumor-surgery",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/cervical-disc-replacement",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/craniovertebral-junction-surgery",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/endoscopic-cervical-spine-surgery",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/endoscopic-discectomy",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/endoscopic-lumbar-fusion",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/lumbar-stenosis-surgery",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/minimally-invasive-spine-surgery",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/neuro-endoscopy",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/spinal-cord-compression-surgery",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/spinal-fracture-fixation",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/best-neurosurgeon-in-hyderabad",
-    "pageType": "Location",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/awake-craniotomy-guide",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/brain-tumor-surgery-cost-hyderabad",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/day-care-endoscopic-spine-surgery-eligibility",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/day-care-spine-surgery-insurance-hyderabad",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/does-endoscopic-spine-surgery-work-for-sciatica-hyderabad",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/endoscopic-cervical-spine-surgery-hyderabad",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/endoscopic-discectomy-cost-hyderabad",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/endoscopic-vs-microdiscectomy-hyderabad",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/awake-craniotomy-brain-tumor-guide",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/awake-spine-surgery-vs-general-anesthesia-guide",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/cauda-equina-syndrome-warning-signs-hyderabad",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/cervical-spondylosis-neck-pain-hyderabad",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/cost-of-endoscopic-spine-surgery-hyderabad",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/endoscopic-spine-surgery-recovery-timeline",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/headache-vs-brain-tumor-warning-signs",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/l4-l5-disc-bulge-treatment-hyderabad",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/lumbar-canal-stenosis-walking-pain-hyderabad",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/microdiscectomy-vs-laminectomy-recovery-comparison",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/neuroplasticity-brain-recovery-hyderabad",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/normal-pressure-hydrocephalus-nph-symptoms-treatment-hyderabad",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/osteoporotic-spine-fracture-elderly-guide",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/sciatica-exercises-for-office-workers-hyderabad",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/sciatica-pain-relief-exercises-hyderabad",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/sciatica-vs-normal-back-pain-guide",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/spinal-tuberculosis-symptoms-treatment-hyderabad",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/spondylolisthesis-vs-herniated-disc-difference",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/trigeminal-neuralgia-vs-tooth-pain-guide",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/understanding-brain-mri-tumor-report-guide",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/understanding-mri-spine-report-guide",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/endoscopic-spine-surgery-cost-hyderabad",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/disc-replacement-vs-fusion",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/mvd-vs-radiosurgery-trigeminal-neuralgia",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/how-much-does-brain-surgery-cost-hyderabad",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/return-to-work-after-endoscopic-discectomy-hyderabad",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/sciatica-pain-management-hyderabad",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/spinal-fusion-cost-hyderabad",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/when-to-worry-about-back-pain-neurosurgeon-hyderabad",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/spine-health-maintenance-hyderabad",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/spine-surgery-recovery-timeline-hyderabad",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/blog/world-stroke-day-2025-hyderabad-stroke-code",
-    "pageType": "Blog",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/brain-surgery",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/a-z/acoustic-neuroma",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/a-z/aneurysm",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/a-z/brachial-plexus",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/a-z/brain-tumor",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/a-z/carpal-tunnel",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/a-z/cervical-disc",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/a-z/cervical-myelopathy",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/a-z/chiari-malformation",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/a-z/degenerative-disc-disease",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/a-z/disc-herniation",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/a-z/epilepsy",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/a-z/glioma",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/a-z/hydrocephalus",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/a-z/lumbar-stenosis",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/a-z/meningioma",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/a-z/metastasis",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/a-z/normal-pressure-hydrocephalus",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/a-z/pituitary-adenoma",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/a-z/radiculopathy",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/a-z/sciatica",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/a-z/seizure-disorders",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/a-z/spinal-cord-tumour",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/a-z/spondylolisthesis",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/a-z/trigeminal-neuralgia",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/a-z/vascular-malformations",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/acoustic-neuroma-treatment-hyderabad",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/brain-aneurysm-treatment-hyderabad",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/carpal-tunnel-syndrome-hyderabad",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/chiari-malformation-hyderabad",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/herniated-disc-treatment-hyderabad",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/pituitary-adenoma-hyderabad",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/brain-bleed-evacuation-hyderabad",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/cervical-myelopathy-decompression-hyderabad",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/brain-tumor-surgery-hyderabad",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/cervical-radiculopathy-treatment-hyderabad",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/osteoporotic-spine-fracture-hyderabad",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/sciatica-pain-treatment-hyderabad",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/slip-disc-treatment-hyderabad",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/spinal-stenosis-treatment-hyderabad",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/trigeminal-neuralgia-treatment-hyderabad",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/spine-tumor-surgery-hyderabad",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/conditions/spondylolisthesis-treatment-hyderabad",
-    "pageType": "Condition",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/content-integrity",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/disclaimer",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/appointments",
+    "robots": "index, follow",
+    "title": "Book Appointment | Best Neurosurgeon Hyderabad | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Schedule a consultation with Dr Sayuj Krishnan, the best neurosurgeon in Hyderabad. Book appointment for spine surgery, brain tumor surgery, and expert neurosurgical care.",
+    "h1": "Book your consultation with<span class=\"block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600\">Dr. Sayuj Krishnan</span>",
+    "wordCount": 3346,
+    "type": "appointment",
+    "inlinks": 128
   },
   {
     "url": "https://www.drsayuj.info/contact",
-    "pageType": "Contact",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/cookies",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/disease-guides",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/disease-guides/degenerative-disc-disease",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/emergency-rehabilitation",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/editorial-policy",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/knowledge-base",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/german-training",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/locations/banjara-hills",
-    "pageType": "Location",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/locations/brain-spine-surgeon-banjara-hills",
-    "pageType": "Location",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/locations/hitech-city",
-    "pageType": "Location",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/locations/brain-spine-surgeon-hitec-city",
-    "pageType": "Location",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/locations/malakpet",
-    "pageType": "Location",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/locations/brain-spine-surgeon-jubilee-hills",
-    "pageType": "Location",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/locations/neurosurgeon-kondapur",
-    "pageType": "Location",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/locations/neurosurgeon-kothapet",
-    "pageType": "Location",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/locations/lb-nagar",
-    "pageType": "Location",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/locations/neurosurgeon-manikonda",
-    "pageType": "Location",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/locations/neurosurgeon-kukatpally",
-    "pageType": "Location",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills",
-    "pageType": "Location",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills-faq",
-    "pageType": "Location",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/locations/neurosurgeon-near-kachiguda-faq",
-    "pageType": "Location",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/locations/neurosurgeon-near-kondapur-faq",
-    "pageType": "Location",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/locations",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/locations/neurosurgeon-nizampet",
-    "pageType": "Location",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/locations/secunderabad",
-    "pageType": "Location",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/medical-disclaimer",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/media",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/near",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/neurosurgeon-banjara-hills",
-    "pageType": "Location",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/near/banjara-hills",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/near/gachibowli",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/near/hitech-city",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/near/jubilee-hills",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/near/kondapur",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/near/madhapur",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/near/malakpet",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/near/secunderabad",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/neurosurgeon-hitech-city",
-    "pageType": "Location",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/neurosurgeon-hyderabad",
-    "pageType": "Location",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/neurosurgeon-gachibowli",
-    "pageType": "Location",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/neurosurgeon-jubilee-hills",
-    "pageType": "Location",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/neurosurgeon-malakpet",
-    "pageType": "Location",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/neurosurgeon-secunderabad",
-    "pageType": "Location",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/patient-stories/carpal-tunnel-day-care-success",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/patient-stories/lumbar-miss-tlif-recovery",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/patient-stories/minimal-invasive-meningioma-resection",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/patient-stories/temporal-lobe-epilepsy-control",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/privacy",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/patient-stories",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/research",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/pediatric-neurosurgery",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/services/awake-spine-surgery-hyderabad",
-    "pageType": "Service",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad",
-    "pageType": "Service",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/services/cervical-endoscopic-spine-surgery-hyderabad",
-    "pageType": "Service",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/services/compare-neurosurgeons-hyderabad",
-    "pageType": "Service",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/services/dr-sayuj-vs-apollo-neuro-icu",
-    "pageType": "Service",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/services/cooled-radiofrequency-ablation-hyderabad",
-    "pageType": "Service",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/services/endoscopic-discectomy-hyderabad",
-    "pageType": "Service",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad",
-    "pageType": "Service",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/services/kyphoplasty-vertebroplasty-hyderabad",
-    "pageType": "Service",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/services/epilepsy-surgery-hyderabad",
-    "pageType": "Service",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/services/kims-spine-surgery-second-opinion",
-    "pageType": "Service",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/services/peripheral-nerve-surgery",
-    "pageType": "Service",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/services/minimally-invasive-spine-surgery",
-    "pageType": "Service",
-    "status": 200,
-    "inlinks": "N/A"
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/contact",
+    "robots": "index, follow",
+    "title": "Contact Dr Sayuj Krishnan | Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan",
+    "metaDescription": "Contact Dr Sayuj Krishnan for neurosurgical consultations. Phone: +91 9778280044, Email: hellodr@drsayuj.info. Located at Yashoda Hospital, Malakpet.",
+    "h1": "Contact Dr Sayuj Krishnan",
+    "wordCount": 3761,
+    "type": "other",
+    "inlinks": 128
   },
   {
     "url": "https://www.drsayuj.info/services",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/services/",
+    "robots": "index, follow",
+    "title": "Neurosurgical Services in Hyderabad | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Expert neurosurgical services including endoscopic spine surgery, brain tumor surgery, epilepsy surgery, and trigeminal neuralgia treatment in Hyderabad.",
+    "h1": "Neurosurgical Services",
+    "wordCount": 5426,
+    "type": "other",
+    "inlinks": 128
   },
   {
-    "url": "https://www.drsayuj.info/services/slip-disc-surgery-cost-hyderabad",
-    "pageType": "Service",
-    "status": 200,
-    "inlinks": "N/A"
+    "url": "https://www.drsayuj.info/conditions",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/conditions",
+    "robots": "index, follow",
+    "title": "Neurological Conditions A–Z | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Browse an A–Z index of brain, spine, and nerve conditions treated by Dr. Sayuj Krishnan with links to detailed guides and treatment options.",
+    "h1": "Conditions We Treat – A to Z",
+    "wordCount": 6504,
+    "type": "other",
+    "inlinks": 128
   },
   {
-    "url": "https://www.drsayuj.info/services/peripheral-nerve-surgery-hyderabad",
-    "pageType": "Service",
-    "status": 200,
-    "inlinks": "N/A"
+    "url": "https://www.drsayuj.info/locations",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/locations",
+    "robots": "index, follow",
+    "title": "Neurosurgeon Locations in Hyderabad | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Expert neurosurgeon Dr. Sayuj Krishnan serves patients across Hyderabad including Banjara Hills, Hitec City, Jubilee Hills, and Malakpet. Book consultation.",
+    "h1": "Neurosurgeon Locations in Hyderabad",
+    "wordCount": 3205,
+    "type": "other",
+    "inlinks": 128
   },
   {
-    "url": "https://www.drsayuj.info/services/spinal-decompression-surgery-hyderabad",
-    "pageType": "Service",
-    "status": 200,
-    "inlinks": "N/A"
+    "url": "https://www.drsayuj.info/best-neurosurgeon-in-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/best-neurosurgeon-in-hyderabad/",
+    "robots": "index, follow",
+    "title": "Best Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "German-trained neurosurgeon at Yashoda Malakpet with 1,000+ endoscopic brain &amp; spine cases. Consultations available.",
+    "h1": "Best Neurosurgeon in Hyderabad — Evidence-Based Brain &amp; Spine Care",
+    "wordCount": 5379,
+    "type": "location",
+    "inlinks": 128
   },
   {
-    "url": "https://www.drsayuj.info/services/lumbar-laminectomy-surgery-hyderabad",
-    "pageType": "Service",
-    "status": 200,
-    "inlinks": "N/A"
+    "url": "https://www.drsayuj.info/brain-surgery",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/brain-surgery",
+    "robots": "index, follow",
+    "title": "Brain Surgery Hyderabad | Awake Brain Surgery &amp; Brain Tumor Surgery | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Expert brain surgery in Hyderabad with Dr. Sayuj Krishnan. Specializing in awake brain surgery, brain tumor surgery, ROSA DBS, and advanced microsurgical techniques with neuronavigation.",
+    "h1": "Advanced Brain Surgery",
+    "wordCount": 4339,
+    "type": "other",
+    "inlinks": 1
   },
   {
-    "url": "https://www.drsayuj.info/services/spinal-fusion-surgery-hyderabad",
-    "pageType": "Service",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/services/spinal-fusion",
-    "pageType": "Service",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/services/spine-surgery-cost-hyderabad",
-    "pageType": "Service",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/services/spine-surgery-hyderabad",
-    "pageType": "Service",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/specializations",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/stories/endoscopic-discectomy-same-day-hyderabad",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/services/uniportal-endoscopic-spine-surgery-hyderabad",
-    "pageType": "Service",
-    "status": 200,
-    "inlinks": "N/A"
+    "url": "https://www.drsayuj.info/pediatric-neurosurgery",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/pediatric-neurosurgery",
+    "robots": "index, follow",
+    "title": "Pediatric Neurosurgery Hyderabad | Children&#x27;s Brain &amp; Spine Surgery | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Expert pediatric neurosurgery in Hyderabad with Dr. Sayuj Krishnan. Specializing in children&#x27;s brain surgery, spine surgery, and neurological conditions with compassionate care.",
+    "h1": "Pediatric Neurosurgery",
+    "wordCount": 4201,
+    "type": "other",
+    "inlinks": 0
   },
   {
     "url": "https://www.drsayuj.info/spine-surgery",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/stories/endoscopic-ulbd-stenosis-hyderabad",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/stories/mvd-trigeminal-neuralgia-hyderabad",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/symptoms/pain-on-top-of-head-causes",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/spine-surgery",
+    "robots": "index, follow",
+    "title": "Endoscopic Spine Surgery in Hyderabad | Minimally Invasive Procedures – Dr. Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Looking for minimally invasive or endoscopic spine surgery in Hyderabad? Dr. Sayuj Krishnan performs slip disc, spinal stenosis and fusion procedures through tiny incisions for faster recovery. Book a consultation today.",
+    "h1": "Endoscopic Spine Surgery in Hyderabad",
+    "wordCount": 4008,
+    "type": "other",
+    "inlinks": 0
   },
   {
     "url": "https://www.drsayuj.info/symptoms-checker",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
-  },
-  {
-    "url": "https://www.drsayuj.info/technology-facilities",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/symptoms-checker",
+    "robots": "index, follow",
+    "title": "Symptom Checker | Dr Sayuj Krishnan - AI-Powered Symptom Analysis | Dr. Sayuj Krishnan",
+    "metaDescription": "Use our AI-powered symptom checker to get preliminary guidance about your symptoms. Not a diagnosis - always consult with Dr. Sayuj for proper evaluation.",
+    "h1": "AI-Powered Symptom Checker",
+    "wordCount": 3057,
+    "type": "other",
+    "inlinks": 0
   },
   {
     "url": "https://www.drsayuj.info/technology-innovation",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/technology-innovation",
+    "robots": "index, follow",
+    "title": "Advanced Neurosurgery Technology Hyderabad | AI, Robotics &amp; Safety | Dr. Sayuj Krishnan",
+    "metaDescription": "Experience safer spine &amp; brain surgery with AI-driven neuronavigation, ROSA Robotics, and real-time monitoring. Dr. Sayuj Krishnan uses advanced technology for precision &amp; faster recovery.",
+    "h1": "Advanced Technology &amp; Innovation",
+    "wordCount": 5194,
+    "type": "other",
+    "inlinks": 128
   },
   {
-    "url": "https://www.drsayuj.info/terms",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
+    "url": "https://www.drsayuj.info/services/minimally-invasive-spine-surgery",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/services/minimally-invasive-spine-surgery",
+    "robots": "index, follow",
+    "title": "Endoscopic Spine Surgery Hyderabad | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Expert endoscopic spine surgery in Hyderabad with Dr. Sayuj Krishnan. Minimally invasive procedures with same-day discharge at Yashoda Hospital Malakpet.",
+    "h1": "Minimally Invasive Spine Surgery",
+    "wordCount": 9272,
+    "type": "service",
+    "inlinks": 128
+  },
+  {
+    "url": "https://www.drsayuj.info/services/endoscopic-discectomy-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/services/endoscopic-discectomy-hyderabad",
+    "robots": "index, follow",
+    "title": "Endoscopic Discectomy Hyderabad | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Expert endoscopic discectomy for herniated discs in Hyderabad. Same-day surgery, faster recovery, less pain with Dr. Sayuj Krishnan.",
+    "h1": "Endoscopic Discectomy in Hyderabad",
+    "wordCount": 4752,
+    "type": "service",
+    "inlinks": 128
+  },
+  {
+    "url": "https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad",
+    "robots": "index, follow",
+    "title": "Brain Tumor Surgery Hyderabad | Neuronavigation Specialist… | Dr. Sayuj Krishnan",
+    "metaDescription": "Expert brain tumor surgery in Hyderabad. High success rates using Neuronavigation &amp; Awake Craniotomy. Advanced neuro-oncology care by Dr. Sayuj Krishnan.",
+    "h1": "Advanced Brain Tumor Surgery in Hyderabad",
+    "wordCount": 5847,
+    "type": "service",
+    "inlinks": 128
+  },
+  {
+    "url": "https://www.drsayuj.info/services/spinal-fusion-surgery-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/services/spinal-fusion-surgery-hyderabad",
+    "robots": "index, follow",
+    "title": "Spinal Fusion Surgery in Hyderabad | TLIF &amp; Fixation Surgery | Dr. Sayuj Krishnan",
+    "metaDescription": "Expert spinal fusion surgery (TLIF/PLIF) by Dr. Sayuj Krishnan. Stabilization for spondylolisthesis and fractures. Minimally invasive screw fixation.",
+    "h1": "Spinal Fusion Surgery (TLIF/PLIF)",
+    "wordCount": 5416,
+    "type": "service",
+    "inlinks": 128
+  },
+  {
+    "url": "https://www.drsayuj.info/services/epilepsy-surgery-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/services/epilepsy-surgery-hyderabad",
+    "robots": "index, follow",
+    "title": "Epilepsy Surgery in Hyderabad | Drug-Resistant Epilepsy Tre… | Dr. Sayuj Krishnan",
+    "metaDescription": "Expert epilepsy surgery for drug-resistant epilepsy in Hyderabad. LITT, resection surgery, VNS. Comprehensive evaluation and advanced techniques.",
+    "h1": "Epilepsy Surgery in Hyderabad",
+    "wordCount": 4648,
+    "type": "service",
+    "inlinks": 128
+  },
+  {
+    "url": "https://www.drsayuj.info/services/peripheral-nerve-surgery-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/services/peripheral-nerve-surgery-hyderabad",
+    "robots": "index, follow",
+    "title": "Peripheral Nerve Surgery in Hyderabad | Carpal Tunnel, Ulna… | Dr. Sayuj Krishnan",
+    "metaDescription": "Carpal tunnel release, ulnar nerve decompression, nerve tumor surgery, and nerve repair options in Hyderabad.",
+    "h1": "Peripheral Nerve Surgery in Hyderabad",
+    "wordCount": 6715,
+    "type": "service",
+    "inlinks": 128
+  },
+  {
+    "url": "https://www.drsayuj.info/services/awake-spine-surgery-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/services/awake-spine-surgery-hyderabad",
+    "robots": "index, follow",
+    "title": "Awake Spine Surgery in Hyderabad | Endoscopic &amp; Regional An… | Dr. Sayuj Krishnan",
+    "metaDescription": "Awake endoscopic spine surgery by Dr. Sayuj Krishnan for high-risk or elderly patients. Smaller incisions, regional anaesthesia, same-day discharge at Yas…",
+    "h1": "Awake Spine Surgery in Hyderabad",
+    "wordCount": 4281,
+    "type": "service",
+    "inlinks": 128
+  },
+  {
+    "url": "https://www.drsayuj.info/services/spine-surgery-cost-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/services/spine-surgery-cost-hyderabad",
+    "robots": "index, follow",
+    "title": "Spine Surgery Cost in Hyderabad | Price Guide &amp; Insurance 2… | Dr. Sayuj Krishnan",
+    "metaDescription": "Complete guide to spine surgery costs in Hyderabad including endoscopic discectomy, spinal fusion, and minimally invasive procedures. Insurance coverage a…",
+    "h1": "Spine Surgery Cost in Hyderabad",
+    "wordCount": 4541,
+    "type": "service",
+    "inlinks": 0
+  },
+  {
+    "url": "https://www.drsayuj.info/services/slip-disc-surgery-cost-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/services/slip-disc-surgery-cost-hyderabad",
+    "robots": "index, follow",
+    "title": "Slip Disc Surgery Cost in Hyderabad | Endoscopic Discectomy… | Dr. Sayuj Krishnan",
+    "metaDescription": "Complete guide to slip disc (herniated disc) surgery cost in Hyderabad. Endoscopic discectomy prices, insurance coverage, and payment options at Yashoda H…",
+    "h1": "Slip Disc Surgery Cost in Hyderabad",
+    "wordCount": 4638,
+    "type": "service",
+    "inlinks": 1
+  },
+  {
+    "url": "https://www.drsayuj.info/services/cervical-endoscopic-spine-surgery-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/services/cervical-endoscopic-spine-surgery-hyderabad",
+    "robots": "index, follow",
+    "title": "Cervical Endoscopic Spine Surgery Hyderabad | Dr. Sayuj Kri… | Dr. Sayuj Krishnan",
+    "metaDescription": "Advanced cervical endoscopic spine surgery in Hyderabad. Treat neck pain and radiculopathy with keyhole surgery. Fast recovery, no fusion.",
+    "h1": "Cervical Endoscopic Spine Surgery in Hyderabad",
+    "wordCount": 5045,
+    "type": "service",
+    "inlinks": 1
+  },
+  {
+    "url": "https://www.drsayuj.info/services/compare-neurosurgeons-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/services/compare-neurosurgeons-hyderabad",
+    "robots": "index, follow",
+    "title": "Best Neurosurgeon in Hyderabad: Compare Dr. Sayuj vs Apollo… | Dr. Sayuj Krishnan",
+    "metaDescription": "Compare the best neurosurgeons in Hyderabad. Dr. Sayuj Krishnan vs Apollo, KIMS, Yashoda hospitals. Expert comparison of experience, techniques, and patie…",
+    "h1": "Best Neurosurgeon in Hyderabad: Compare Your Options",
+    "wordCount": 4685,
+    "type": "service",
+    "inlinks": 0
+  },
+  {
+    "url": "https://www.drsayuj.info/services/cooled-radiofrequency-ablation-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/services/cooled-radiofrequency-ablation-hyderabad",
+    "robots": "index, follow",
+    "title": "Cooled Radiofrequency Ablation Hyderabad | Dr. Sayuj Krishn… | Dr. Sayuj Krishnan",
+    "metaDescription": "Advanced cooled radiofrequency ablation for chronic pain relief in Hyderabad. Long-lasting nerve ablation for facet joints, sacroiliac joints, and trigemi…",
+    "h1": "Cooled Radiofrequency Ablation in Hyderabad",
+    "wordCount": 6083,
+    "type": "service",
+    "inlinks": 1
+  },
+  {
+    "url": "https://www.drsayuj.info/services/dr-sayuj-vs-apollo-neuro-icu",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/services/dr-sayuj-vs-apollo-neuro-icu",
+    "robots": "index, follow",
+    "title": "Dr. Sayuj vs Apollo Neuro ICU: Expert Comparison for Brain… | Dr. Sayuj Krishnan",
+    "metaDescription": "Compare Dr. Sayuj Krishnan with Apollo Neuro ICU for brain and spine surgery. Expert analysis of techniques, outcomes, and patient care approaches in Hyde…",
+    "h1": "Dr. Sayuj vs Apollo Neuro ICU: Expert Comparison for Brain &amp; Spine Surgery",
+    "wordCount": 4640,
+    "type": "service",
+    "inlinks": 0
+  },
+  {
+    "url": "https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad",
+    "robots": "index, follow",
+    "title": "Endoscopic Spine Surgery Hyderabad | Keyhole Surgery Cost | Dr. Sayuj Krishnan",
+    "metaDescription": "Endoscopic spine surgery in Hyderabad by Dr. Sayuj Krishnan. 90% same-day discharge. Keyhole surgery for slip disc &amp; sciatica. Check cost &amp; recovery.",
+    "h1": "Endoscopic Spine Surgery in Hyderabad | Minimally Invasive Keyhole Surgery",
+    "wordCount": 7466,
+    "type": "service",
+    "inlinks": 28
+  },
+  {
+    "url": "https://www.drsayuj.info/services/kims-spine-surgery-second-opinion",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/services/kims-spine-surgery-second-opinion",
+    "robots": "index, follow",
+    "title": "KIMS Spine Surgery Second Opinion | Dr. Sayuj Krishnan Expe… | Dr. Sayuj Krishnan",
+    "metaDescription": "Get a second opinion on KIMS spine surgery recommendations from Dr. Sayuj Krishnan. Expert review of surgical plans, alternative treatments, and minimally…",
+    "h1": "KIMS Spine Surgery Second Opinion | Dr. Sayuj Krishnan Expert Review",
+    "wordCount": 4853,
+    "type": "service",
+    "inlinks": 0
+  },
+  {
+    "url": "https://www.drsayuj.info/services/lumbar-laminectomy-surgery-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/services/lumbar-laminectomy-surgery-hyderabad",
+    "robots": "index, follow",
+    "title": "Lumbar Laminectomy Surgery in Hyderabad | Spinal Decompress… | Dr. Sayuj Krishnan",
+    "metaDescription": "Expert lumbar laminectomy surgery by Dr. Sayuj Krishnan. Relief from spinal stenosis and nerve compression. Advanced decompression techniques.",
+    "h1": "Lumbar Laminectomy (Decompression) Surgery",
+    "wordCount": 5561,
+    "type": "service",
+    "inlinks": 1
+  },
+  {
+    "url": "https://www.drsayuj.info/services/peripheral-nerve-surgery",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/services/peripheral-nerve-surgery",
+    "robots": "index, follow",
+    "title": "Peripheral Nerve Surgery Hyderabad | Carpal &amp; Ulnar | Dr. Sayuj Krishnan",
+    "metaDescription": "Day-care carpal tunnel, ulnar decompression, and nerve repair by Dr. Sayuj Krishnan at Yashoda Hospital Malakpet.",
+    "h1": "Peripheral Nerve Surgery",
+    "wordCount": 4723,
+    "type": "service",
+    "inlinks": 1
+  },
+  {
+    "url": "https://www.drsayuj.info/services/spinal-fusion",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/services/spinal-fusion",
+    "robots": "index, follow",
+    "title": "Spinal Fusion Surgery in Hyderabad | TLIF &amp; ACDF | Dr. Sayuj Krishnan",
+    "metaDescription": "TLIF and ACDF for instability, recovery timelines, and insurance support with Dr. Sayuj Krishnan.",
+    "h1": "Spinal Fusion Surgery (TLIF/ACDF)",
+    "wordCount": 4698,
+    "type": "service",
+    "inlinks": 2
+  },
+  {
+    "url": "https://www.drsayuj.info/services/spine-surgery-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/services/spine-surgery-hyderabad",
+    "robots": "index, follow",
+    "title": "Spine Surgery Hyderabad | Minimally Invasive Specialist - D… | Dr. Sayuj Krishnan",
+    "metaDescription": "Advanced minimally invasive spine surgery in Hyderabad. Walk the next day with keyhole endoscopic techniques for slip disc &amp; sciatica. Expert care at Yash…",
+    "h1": "Advanced Spine Surgery in Hyderabad",
+    "wordCount": 5056,
+    "type": "service",
+    "inlinks": 1
+  },
+  {
+    "url": "https://www.drsayuj.info/services/uniportal-endoscopic-spine-surgery-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/services/uniportal-endoscopic-spine-surgery-hyderabad",
+    "robots": "index, follow",
+    "title": "Uniportal Endoscopic Spine Surgery Hyderabad | Single Hole… | Dr. Sayuj Krishnan",
+    "metaDescription": "Advanced Uniportal Endoscopic Spine Surgery (Single Hole) in Hyderabad by Dr. Sayuj Krishnan. True stitchless, minimally invasive spine surgery for slip d…",
+    "h1": "Uniportal Endoscopic Spine Surgery in Hyderabad",
+    "wordCount": 5893,
+    "type": "service",
+    "inlinks": 0
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/brain-tumor-surgery-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/conditions/brain-tumor-surgery-hyderabad",
+    "robots": "index, follow",
+    "title": "Brain Tumor Surgery Hyderabad | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Comprehensive brain tumour evaluation, neuronavigation-guided microsurgery, radiosurgery, and rehabilitation with Dr. Sayuj Krishnan at Yashoda Hospital, Hyderabad.",
+    "h1": "Brain Tumor Surgery in Hyderabad",
+    "wordCount": 5127,
+    "type": "condition",
+    "inlinks": 128
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/spinal-stenosis-treatment-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/conditions/spinal-stenosis-treatment-hyderabad/",
+    "robots": "index, follow",
+    "title": "Lumbar Canal Stenosis Treatment in Hyderabad | Walking Pain… | Dr. Sayuj Krishnan",
+    "metaDescription": "Expert treatment for Lumbar Canal Stenosis (Spinal Narrowing) by Dr. Sayuj Krishnan. Decompressive Laminectomy costs and recovery in Hyderabad.",
+    "h1": "Lumbar Canal Stenosis Treatment in Hyderabad",
+    "wordCount": 5153,
+    "type": "condition",
+    "inlinks": 128
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/trigeminal-neuralgia-treatment-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/conditions/trigeminal-neuralgia-treatment-hyderabad",
+    "robots": "index, follow",
+    "title": "Trigeminal Neuralgia Treatment Hyderabad — Facial Pain Care | Dr. Sayuj Krishnan",
+    "metaDescription": "Relief options including medicines, microvascular decompression, stereotactic radiosurgery and percutaneous procedures delivered in Hyderabad by Dr. Sayuj Krishnan.",
+    "h1": "Trigeminal Neuralgia Treatment in Hyderabad",
+    "wordCount": 5220,
+    "type": "condition",
+    "inlinks": 128
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/cervical-radiculopathy-treatment-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/conditions/cervical-radiculopathy-treatment-hyderabad",
+    "robots": "index, follow",
+    "title": "Cervical Radiculopathy Treatment Hyderabad — Neck &amp; Arm Pain Relief | Dr. Sayuj Krishnan",
+    "metaDescription": "Comprehensive evaluation, conservative therapy, and minimally invasive surgery for cervical radiculopathy with Dr. Sayuj Krishnan at Yashoda Hospital, Malakpet.",
+    "h1": "Cervical Radiculopathy Treatment in Hyderabad",
+    "wordCount": 4989,
+    "type": "condition",
+    "inlinks": 128
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/slip-disc-treatment-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/conditions/slip-disc-treatment-hyderabad/",
+    "robots": "index, follow",
+    "title": "Slip Disc Treatment in Hyderabad | Endoscopic Discectomy |… | Dr. Sayuj Krishnan",
+    "metaDescription": "Comprehensive slip disc treatment in Hyderabad: Conservative care, Pain Management, and Minimally Invasive Endoscopic Discectomy. Expert care by Dr. Sayuj…",
+    "h1": "Slip Disc Treatment in Hyderabad | Comprehensive Care",
+    "wordCount": 5719,
+    "type": "condition",
+    "inlinks": 33
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/brain-bleed-evacuation-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/conditions/brain-bleed-evacuation-hyderabad",
+    "robots": "index, follow",
+    "title": "Emergency Brain Bleed Evacuation Hyderabad | Intracerebral Hemorrhage Surgery | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "24/7 emergency endoscopic and microsurgical brain bleed evacuation in Hyderabad. Expert treatment for intracerebral hemorrhage, subdural hematoma, and epidural hematoma by Dr. Sayuj Krishnan at Yashoda Hospital.",
+    "h1": "Emergency Brain Bleed Evacuation in Hyderabad",
+    "wordCount": 5550,
+    "type": "condition",
+    "inlinks": 1
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/cervical-myelopathy-decompression-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/conditions/cervical-myelopathy-decompression-hyderabad",
+    "robots": "index, follow",
+    "title": "Cervical Myelopathy Decompression Surgery Hyderabad | Endoscopic Spine Cord Decompression | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Expert treatment for cervical myelopathy with endoscopic and minimally invasive decompression surgery in Hyderabad. Specialized care for spinal cord compression by Dr. Sayuj Krishnan at Yashoda Hospital.",
+    "h1": "Cervical Myelopathy Decompression Surgery in Hyderabad",
+    "wordCount": 5791,
+    "type": "condition",
+    "inlinks": 3
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/osteoporotic-spine-fracture-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/conditions/osteoporotic-spine-fracture-hyderabad/",
+    "robots": "index, follow",
+    "title": "Osteoporotic Spine Fracture Treatment in Hyderabad | Verteb… | Dr. Sayuj Krishnan",
+    "metaDescription": "Expert treatment for Osteoporotic Compression Fractures. Minimally invasive Vertebroplasty &amp; Kyphoplasty (Cement Injection) by Dr. Sayuj Krishnan.",
+    "h1": "Osteoporotic Spine Fracture Treatment in Hyderabad",
+    "wordCount": 4988,
+    "type": "condition",
+    "inlinks": 1
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/sciatica-pain-treatment-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/conditions/sciatica-pain-treatment-hyderabad/",
+    "robots": "index, follow",
+    "title": "Sciatica Treatment Hyderabad | 90% Non-Surgical Relief | Dr… | Dr. Sayuj Krishnan",
+    "metaDescription": "Best sciatica treatment in Hyderabad. 90% patients recover without surgery. Expert diagnosis &amp; endoscopic options for severe cases. Book consult.",
+    "h1": "Sciatica Treatment in Hyderabad <span class=\"block text-2xl md:text-3xl text-blue-600 mt-2 font-medium\">Non-Surgical Relief First</span>",
+    "wordCount": 5951,
+    "type": "condition",
+    "inlinks": 25
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/spine-tumor-surgery-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/conditions/spine-tumor-surgery-hyderabad",
+    "robots": "index, follow",
+    "title": "Spine Tumor Surgery Hyderabad | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Specialized surgical treatment for spinal cord tumours and metastatic spine cancer. Microsurgery and spinal stabilisation by Dr. Sayuj Krishnan at Yashoda Hospital.",
+    "h1": "Spine Tumor Surgery in Hyderabad",
+    "wordCount": 5487,
+    "type": "condition",
+    "inlinks": 2
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/spondylolisthesis-treatment-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/conditions/spondylolisthesis-treatment-hyderabad/",
+    "robots": "index, follow",
+    "title": "Spondylolisthesis Treatment in Hyderabad | Slipped Vertebra… | Dr. Sayuj Krishnan",
+    "metaDescription": "Expert treatment for Spondylolisthesis (Slipped Vertebra) by Dr. Sayuj Krishnan. Minimally invasive fusion (MIS-TLIF) costs and recovery in Hyderabad.",
+    "h1": "Spondylolisthesis Treatment in Hyderabad",
+    "wordCount": 5494,
+    "type": "condition",
+    "inlinks": 2
+  },
+  {
+    "url": "https://www.drsayuj.info/neurosurgeon-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/neurosurgeon-hyderabad",
+    "robots": "index, follow",
+    "title": "Best Neurosurgeon in Hyderabad | Endoscopic Spine Surgery | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Consult Dr. Sayuj Krishnan, neurosurgeon in Hyderabad specializing in full endoscopic spine &amp; minimally invasive brain surgery. OPD timings, directions, FAQs, and WhatsApp booking.",
+    "h1": "Neurosurgeon in Hyderabad — Endoscopic Spine &amp; Minimally Invasive Brain Surgery",
+    "wordCount": 5001,
+    "type": "location",
+    "inlinks": 3
+  },
+  {
+    "url": "https://www.drsayuj.info/neurosurgeon-jubilee-hills",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/neurosurgeon-jubilee-hills",
+    "robots": "index, follow",
+    "title": "Best Neurosurgeon in Jubilee Hills, Hyderabad | Endoscopic Spine | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Leading neurosurgeon Dr. Sayuj Krishnan serving Jubilee Hills, Hyderabad. Expert in endoscopic spine surgery, brain tumor surgery, trigeminal neuralgia treatment &amp; emergency neurotrauma care. Easy access from Jubilee Hills Check Post.",
+    "h1": "Best Neurosurgeon in Jubilee Hills, Hyderabad",
+    "wordCount": 5489,
+    "type": "location",
+    "inlinks": 33
+  },
+  {
+    "url": "https://www.drsayuj.info/neurosurgeon-banjara-hills",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/neurosurgeon-banjara-hills",
+    "robots": "index, follow",
+    "title": "Neurosurgeon in Banjara Hills, Hyderabad | Endoscopic Spine | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Consult Dr. Sayuj Krishnan near Banjara Hills, Hyderabad for endoscopic spine &amp; minimally invasive brain surgery. OPD timings, parking, directions, WhatsApp booking, and FAQs.",
+    "h1": "Neurosurgeon in Banjara Hills, Hyderabad",
+    "wordCount": 4251,
+    "type": "location",
+    "inlinks": 128
+  },
+  {
+    "url": "https://www.drsayuj.info/neurosurgeon-hitech-city",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/neurosurgeon-hitech-city",
+    "robots": "index, follow",
+    "title": "Neurosurgeon in Hitech City, Hyderabad | Endoscopic Spine | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Consult Dr. Sayuj Krishnan near Hitech City, Hyderabad for endoscopic spine &amp; minimally invasive brain surgery. OPD timings, parking, directions, WhatsApp booking, and FAQs.",
+    "h1": "Neurosurgeon in Hitech City, Hyderabad",
+    "wordCount": 4238,
+    "type": "location",
+    "inlinks": 128
+  },
+  {
+    "url": "https://www.drsayuj.info/neurosurgeon-secunderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/neurosurgeon-secunderabad",
+    "robots": "index, follow",
+    "title": "Neurosurgeon in Secunderabad, Hyderabad | Endoscopic Spine | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Consult Dr. Sayuj Krishnan near Secunderabad, Hyderabad for endoscopic spine &amp; minimally invasive brain surgery. OPD timings, parking, directions, WhatsApp booking, and FAQs.",
+    "h1": "Neurosurgeon in Secunderabad, Hyderabad",
+    "wordCount": 4209,
+    "type": "location",
+    "inlinks": 128
+  },
+  {
+    "url": "https://www.drsayuj.info/neurosurgeon-gachibowli",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/neurosurgeon-gachibowli",
+    "robots": "index, follow",
+    "title": "Neurosurgeon in Gachibowli, Hyderabad | Endoscopic Spine | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Consult Dr. Sayuj Krishnan near Gachibowli, Hyderabad for endoscopic spine &amp; minimally invasive brain surgery. OPD timings, parking, directions, WhatsApp booking, and FAQs.",
+    "h1": "Neurosurgeon in Gachibowli, Hyderabad",
+    "wordCount": 4229,
+    "type": "location",
+    "inlinks": 33
+  },
+  {
+    "url": "https://www.drsayuj.info/neurosurgeon-malakpet",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/neurosurgeon-malakpet",
+    "robots": "index, follow",
+    "title": "Neurosurgeon in Malakpet, Hyderabad | Daycare Spine Surgery | Dr. Sayuj Krishnan",
+    "metaDescription": "Dr. Sayuj Krishnan at Yashoda Hospital Malakpet offers Daycare Endoscopic Spine Surgery, brain tumor care, and 24/7 emergency neurosurgery. Book a visit.",
+    "h1": "Neurosurgeon in Malakpet, Hyderabad",
+    "wordCount": 6290,
+    "type": "location",
+    "inlinks": 128
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/malakpet",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/neurosurgeon-malakpet",
+    "robots": "index, follow",
+    "title": "Neurosurgeon in Malakpet | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Dr. Sayuj Krishnan - Expert Neurosurgeon at Yashoda Hospitals, Malakpet. Brain &amp; Spine Surgery. Book Appointment.",
+    "h1": "Neurosurgeon in Malakpet, Hyderabad",
+    "wordCount": 4028,
+    "type": "location",
+    "inlinks": 0
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/lb-nagar",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/locations/lb-nagar/",
+    "robots": "index, follow",
+    "title": "Neurosurgeon in LB Nagar, Hyderabad | Dr Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Expert neurosurgeon serving LB Nagar. Dr Sayuj Krishnan offers spine and brain surgery at nearby Yashoda Hospital. Accessible from Vanasthalipuram, Nagole.",
+    "h1": "Neurosurgeon Near LB Nagar, Hyderabad",
+    "wordCount": 4308,
+    "type": "location",
+    "inlinks": 0
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/neurosurgeon-kothapet",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/locations/neurosurgeon-kothapet",
+    "robots": "index, follow",
+    "title": "Neurosurgeon near Kothapet, Hyderabad | Dr Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Expert neurosurgeon near Kothapet. Dr Sayuj Krishnan is just 5 minutes away at Yashoda Malakpet. Advanced spine &amp; brain care.",
+    "h1": "Best Neurosurgeon Near Kothapet &amp; Dilsukhnagar",
+    "wordCount": 4526,
+    "type": "location",
+    "inlinks": 0
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/brain-spine-surgeon-jubilee-hills",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/neurosurgeon-jubilee-hills",
+    "robots": "index, follow",
+    "title": "Brain &amp; Spine Surgeon near Jubilee Hills, Hyderabad | Dr. Sayuj Krishnan",
+    "metaDescription": "Advanced brain and spine care near Jubilee Hills, Hyderabad. Directions to Yashoda Hospital, Malakpet. Parking, timings, and appointment info.",
+    "h1": "Brain &amp; Spine Surgeon near Jubilee Hills, Hyderabad",
+    "wordCount": 5201,
+    "type": "location",
+    "inlinks": 128
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/brain-spine-surgeon-banjara-hills",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/locations/brain-spine-surgeon-banjara-hills",
+    "robots": "index, follow",
+    "title": "Brain &amp; Spine Surgeon near Banjara Hills, Hyderabad | Dr. Sayuj Krishnan",
+    "metaDescription": "Advanced brain and spine care near Banjara Hills, Hyderabad. Directions to Yashoda Hospital, Malakpet. Parking, timings, and appointment info.",
+    "h1": "Brain &amp; Spine Surgeon near Banjara Hills, Hyderabad",
+    "wordCount": 5311,
+    "type": "location",
+    "inlinks": 128
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/brain-spine-surgeon-hitec-city",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/locations/brain-spine-surgeon-hitec-city",
+    "robots": "index, follow",
+    "title": "Brain &amp; Spine Surgeon near HITEC City, Hyderabad | Dr. Sayuj Krishnan",
+    "metaDescription": "Neurosurgeon near HITEC City at Yashoda Hospital, Malakpet. Directions, parking, OPD timings, and appointments.",
+    "h1": "Brain &amp; Spine Surgeon near HITEC City, Hyderabad",
+    "wordCount": 5159,
+    "type": "location",
+    "inlinks": 128
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/banjara-hills",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/neurosurgeon-banjara-hills",
+    "robots": "index, follow",
+    "title": "Neurosurgeon in Banjara Hills, Hyderabad | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Consult Dr. Sayuj Krishnan near Banjara Hills, Hyderabad for endoscopic spine &amp; minimally invasive brain surgery. OPD timings, parking, directions, WhatsApp booking.",
+    "h1": "Neurosurgeon in Banjara Hills, Hyderabad",
+    "wordCount": 4297,
+    "type": "location",
+    "inlinks": 0
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/hitech-city",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/neurosurgeon-hitech-city",
+    "robots": "index, follow",
+    "title": "Neurosurgeon in Hitech City, Hyderabad | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Consult Dr. Sayuj Krishnan near Hitech City, Hyderabad for endoscopic spine &amp; minimally invasive brain surgery. OPD timings, parking, directions.",
+    "h1": "Neurosurgeon in Hitech City, Hyderabad",
+    "wordCount": 4216,
+    "type": "location",
+    "inlinks": 0
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/neurosurgeon-kondapur",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/locations/neurosurgeon-kondapur",
+    "robots": "index, follow",
+    "title": "Neurosurgeon near Kondapur, Hyderabad | Dr Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Expert neurosurgeon near Kondapur. Dr Sayuj Krishnan provides advanced brain and spine surgery. Convenient access via Hitech City road.",
+    "h1": "Neurosurgeon Near Kondapur, Hyderabad",
+    "wordCount": 4269,
+    "type": "location",
+    "inlinks": 0
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/neurosurgeon-kukatpally",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/locations/neurosurgeon-kukatpally",
+    "robots": "index, follow",
+    "title": "Neurosurgeon near Kukatpally, Hyderabad | Dr Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Expert neurosurgeon near Kukatpally. Dr Sayuj Krishnan provides advanced brain and spine surgery. Convenient access via Metro or road.",
+    "h1": "Neurosurgeon Near Kukatpally, Hyderabad",
+    "wordCount": 4214,
+    "type": "location",
+    "inlinks": 0
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/neurosurgeon-manikonda",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/locations/neurosurgeon-manikonda",
+    "robots": "index, follow",
+    "title": "Neurosurgeon near Manikonda, Hyderabad | Dr Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Expert neurosurgeon near Manikonda. Dr Sayuj Krishnan provides advanced brain and spine surgery with minimally invasive techniques. Easy access via ORR.",
+    "h1": "Neurosurgeon Near Manikonda, Hyderabad",
+    "wordCount": 4181,
+    "type": "location",
+    "inlinks": 0
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills",
+    "statusCode": 307,
+    "canonical": "https://www.drsayuj.info/locations/brain-spine-surgeon-jubilee-hills",
+    "robots": "index, follow",
+    "title": "Neurosurgeon Near Jubilee Hills, Hyderabad | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Expert neurosurgery care near Jubilee Hills, Hyderabad. Advanced brain and spine surgery with Dr. Sayuj Krishnan at Yashoda Hospital.",
+    "h1": "",
+    "wordCount": 1803,
+    "type": "location",
+    "inlinks": 1
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills-faq",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills-faq",
+    "robots": "index, follow",
+    "title": "Neurosurgeon Near Jubilee Hills FAQ | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Frequently asked questions about finding a neurosurgeon near Jubilee Hills, Hyderabad. Expert answers from Dr. Sayuj Krishnan about brain and spine surgery options.",
+    "h1": "Neurosurgeon Near Jubilee Hills FAQ | Dr. Sayuj Krishnan",
+    "wordCount": 5679,
+    "type": "location",
+    "inlinks": 0
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/neurosurgeon-near-kachiguda-faq",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/locations/neurosurgeon-near-kachiguda-faq",
+    "robots": "index, follow",
+    "title": "Neurosurgeon Near Kachiguda FAQ | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Frequently asked questions about finding a neurosurgeon near Kachiguda, Hyderabad. Expert answers from Dr. Sayuj Krishnan about brain and spine surgery options.",
+    "h1": "Neurosurgeon Near Kachiguda FAQ | Dr. Sayuj Krishnan",
+    "wordCount": 5217,
+    "type": "location",
+    "inlinks": 0
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/neurosurgeon-near-kondapur-faq",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/locations/neurosurgeon-near-kondapur-faq",
+    "robots": "index, follow",
+    "title": "Neurosurgeon Near Kondapur FAQ | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Frequently asked questions about finding a neurosurgeon near Kondapur, Hyderabad. Expert answers from Dr. Sayuj Krishnan about brain and spine surgery options.",
+    "h1": "Neurosurgeon Near Kondapur FAQ | Dr. Sayuj Krishnan",
+    "wordCount": 5261,
+    "type": "location",
+    "inlinks": 0
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/neurosurgeon-nizampet",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/locations/neurosurgeon-nizampet",
+    "robots": "index, follow",
+    "title": "Neurosurgeon near Nizampet, Hyderabad | Dr Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Expert neurosurgeon near Nizampet. Dr Sayuj Krishnan provides advanced brain and spine surgery with minimally invasive techniques.",
+    "h1": "Neurosurgeon Near Nizampet, Hyderabad",
+    "wordCount": 4196,
+    "type": "location",
+    "inlinks": 0
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/secunderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/neurosurgeon-secunderabad",
+    "robots": "index, follow",
+    "title": "Neurosurgeon in Secunderabad | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Consult Dr. Sayuj Krishnan near Secunderabad for endoscopic spine &amp; minimally invasive brain surgery. OPD timings, parking, directions.",
+    "h1": "Neurosurgeon in Secunderabad",
+    "wordCount": 4072,
+    "type": "location",
+    "inlinks": 0
+  },
+  {
+    "url": "https://www.drsayuj.info/knowledge-base",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/knowledge-base",
+    "robots": "index, follow",
+    "title": "Medical Knowledge Base - Dr. Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Search our comprehensive medical library for information on brain tumors, spine surgery, treatments, and recovery guides.",
+    "h1": "Medical Knowledge Base",
+    "wordCount": 2740,
+    "type": "other",
+    "inlinks": 128
+  },
+  {
+    "url": "https://www.drsayuj.info/blog",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog",
+    "robots": "index, follow",
+    "title": "Blog | Dr Sayuj Krishnan - Neurosurgery Insights | Dr. Sayuj Krishnan",
+    "metaDescription": "Latest insights, research, and updates in neurosurgery from Dr Sayuj Krishnan. Expert articles on brain and spine conditions, treatments, and innovations.",
+    "h1": "Neurosurgery Blog",
+    "wordCount": 5872,
+    "type": "other",
+    "inlinks": 128
+  },
+  {
+    "url": "https://www.drsayuj.info/patient-stories",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/patient-stories",
+    "robots": "index, follow",
+    "title": "Patient Success Stories | Neurosurgery &amp; Spine Surgery Hyderabad | Dr. Sayuj Krishnan",
+    "metaDescription": "Real patient stories of successful neurosurgery and spine surgery outcomes at Yashoda Hospital Malakpet with Dr. Sayuj Krishnan.",
+    "h1": "Patient Success Stories",
+    "wordCount": 3955,
+    "type": "other",
+    "inlinks": 128
+  },
+  {
+    "url": "https://www.drsayuj.info/research",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/research",
+    "robots": "index, follow",
+    "title": "Research &amp; Innovation | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Learn how Dr. Sayuj Krishnan advances neurosurgery through clinical research, conference presentations, and collaboration with international centres.",
+    "h1": "Advancing Neurosurgery Through Evidence and Collaboration",
+    "wordCount": 3425,
+    "type": "other",
+    "inlinks": 0
+  },
+  {
+    "url": "https://www.drsayuj.info/media",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/media",
+    "robots": "index, follow",
+    "title": "Media Publications &amp; Expert Articles | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Expert articles, media coverage, and publications by Dr. Sayuj Krishnan on neurosurgery, spine surgery, and minimally invasive techniques in leading healthcare publications.",
+    "h1": "Media Publications &amp; Expert Articles",
+    "wordCount": 4137,
+    "type": "other",
+    "inlinks": 2
+  },
+  {
+    "url": "https://www.drsayuj.info/technology-facilities",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/technology-facilities/",
+    "robots": "index, follow",
+    "title": "Advanced Technology &amp; Facilities | Dr. Sayuj Krishnan | State-of-the-Art Neurosurgery Equipment | Dr. Sayuj Krishnan",
+    "metaDescription": "Explore our cutting-edge neurosurgery technology including 3T MRI, neuronavigation, endoscopic systems, intraoperative monitoring, and AI-assisted surgical planning in Hyderabad.",
+    "h1": "Advanced Technology &amp; Facilities",
+    "wordCount": 5095,
+    "type": "other",
+    "inlinks": 2
+  },
+  {
+    "url": "https://www.drsayuj.info/best-neurosurgeon-in-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/best-neurosurgeon-in-hyderabad/",
+    "robots": "index, follow",
+    "title": "Best Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "German-trained neurosurgeon at Yashoda Malakpet with 1,000+ endoscopic brain &amp; spine cases. Consultations available.",
+    "h1": "Best Neurosurgeon in Hyderabad — Evidence-Based Brain &amp; Spine Care",
+    "wordCount": 5379,
+    "type": "location",
+    "inlinks": 128
+  },
+  {
+    "url": "https://www.drsayuj.info/stories/endoscopic-discectomy-same-day-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/stories/endoscopic-discectomy-same-day-hyderabad",
+    "robots": "index, follow",
+    "title": "Same-Day Endoscopic Discectomy in Hyderabad — Case Story | Dr. Sayuj Krishnan",
+    "metaDescription": "De-identified story: severe sciatica treated with endoscopic discectomy and same-day discharge in Hyderabad. Recovery timeline and outcomes.",
+    "h1": "Same-Day Endoscopic Discectomy in Hyderabad — Case Story",
+    "wordCount": 3806,
+    "type": "other",
+    "inlinks": 3
+  },
+  {
+    "url": "https://www.drsayuj.info/stories/endoscopic-ulbd-stenosis-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/stories/endoscopic-ulbd-stenosis-hyderabad",
+    "robots": "index, follow",
+    "title": "Endoscopic ULBD for Lumbar Stenosis — Case Story (Hyderabad) | Dr. Sayuj Krishnan",
+    "metaDescription": "De-identified case: walking distance and leg pain improved after endoscopic ULBD for stenosis in Hyderabad. Recovery timeline and outcomes.",
+    "h1": "Endoscopic ULBD for Lumbar Stenosis — Case Story (Hyderabad)",
+    "wordCount": 3696,
+    "type": "other",
+    "inlinks": 2
+  },
+  {
+    "url": "https://www.drsayuj.info/stories/mvd-trigeminal-neuralgia-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/stories/mvd-trigeminal-neuralgia-hyderabad",
+    "robots": "index, follow",
+    "title": "MVD for Trigeminal Neuralgia — Case Story (Hyderabad) | Dr. Sayuj Krishnan",
+    "metaDescription": "De-identified story: severe facial pain relieved after microvascular decompression in Hyderabad. Recovery and durability of pain relief.",
+    "h1": "MVD for Trigeminal Neuralgia — Case Story (Hyderabad)",
+    "wordCount": 3720,
+    "type": "other",
+    "inlinks": 2
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/epilepsy-surgery-options-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/epilepsy-surgery-options-hyderabad/",
+    "robots": "index, follow",
+    "title": "Epilepsy Surgery: When Medications Stop Working (A Patient&#x27;… | Dr. Sayuj Krishnan",
+    "metaDescription": "Comprehensive guide to epilepsy surgery options in Hyderabad for drug-resistant seizures. Learn about VNS, LITT, and resection surgery for seizure freedom.",
+    "h1": "Epilepsy Surgery: When Medications Stop Working (A Patient&#x27;s Guide)",
+    "wordCount": 7600,
+    "type": "blog",
+    "inlinks": 1
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/cervical-radiculopathy-arm-pain-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/cervical-radiculopathy-arm-pain-hyderabad/",
+    "robots": "index, follow",
+    "title": "Cervical Radiculopathy: Why Your Neck Pain Shoots Down Your… | Dr. Sayuj Krishnan",
+    "metaDescription": "Dr. Sayuj Krishnan explains Cervical Radiculopathy (pinched nerve): causes like disc herniation, symptoms like arm numbness, and advanced treatments in Hy…",
+    "h1": "Cervical Radiculopathy: Why Your Neck Pain Shoots Down Your Arm",
+    "wordCount": 7723,
+    "type": "blog",
+    "inlinks": 1
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/meningioma-brain-tumor-treatment-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/meningioma-brain-tumor-treatment-hyderabad/",
+    "robots": "index, follow",
+    "title": "Meningioma Brain Tumor: When is Surgery Needed vs. Observat… | Dr. Sayuj Krishnan",
+    "metaDescription": "Meningioma treatment guide by Dr. Sayuj Krishnan. Learn about &#x27;wait and watch&#x27; vs surgery, symptoms, and benign brain tumor recovery in Hyderabad.",
+    "h1": "Meningioma Brain Tumor: When is Surgery Needed vs. Observation?",
+    "wordCount": 6624,
+    "type": "blog",
+    "inlinks": 1
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/l4-l5-disc-bulge-treatment-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/l4-l5-disc-bulge-treatment-hyderabad/",
+    "robots": "index, follow",
+    "title": "L4-L5 Disc Bulge: Symptoms, Risks, and Treatment Options in… | Dr. Sayuj Krishnan",
+    "metaDescription": "L4-L5 disc bulge guide by Dr. Sayuj Krishnan. Learn about symptoms like sciatica, foot drop red flags, and non-surgical treatments in Hyderabad.",
+    "h1": "L4-L5 Disc Bulge: Symptoms, Risks, and Treatment Options in Hyderabad",
+    "wordCount": 5955,
+    "type": "blog",
+    "inlinks": 1
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/sciatica-exercises-for-office-workers-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/sciatica-exercises-for-office-workers-hyderabad/",
+    "robots": "index, follow",
+    "title": "5 Sciatica Exercises for Office Workers in Hyderabad | Dr.… | Dr. Sayuj Krishnan",
+    "metaDescription": "Best sciatica exercises for software engineers and office workers in Hyderabad. Learn how to prevent back pain from long sitting hours with Dr. Sayuj Kris…",
+    "h1": "5 Sciatica Exercises for Office Workers in Hyderabad",
+    "wordCount": 5435,
+    "type": "blog",
+    "inlinks": 1
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/spinal-tuberculosis-symptoms-treatment-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/spinal-tuberculosis-symptoms-treatment-hyderabad/",
+    "robots": "index, follow",
+    "title": "Spinal Tuberculosis (Pott&#x27;s Spine) Symptoms &amp; Treatment: A… | Dr. Sayuj Krishnan",
+    "metaDescription": "Learn about Spinal Tuberculosis (Pott&#x27;s Spine) symptoms, diagnosis, and treatment in Hyderabad. Understand when medication works and when surgery is neede…",
+    "h1": "Spinal Tuberculosis (Pott&#x27;s Spine) Symptoms &amp; Treatment: A Guide for Hyderabad Patients",
+    "wordCount": 7473,
+    "type": "blog",
+    "inlinks": 1
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/normal-pressure-hydrocephalus-nph-symptoms-treatment-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/normal-pressure-hydrocephalus-nph-symptoms-treatment-hyderabad/",
+    "robots": "index, follow",
+    "title": "Normal Pressure Hydrocephalus (NPH): The &quot;Reversible Dement… | Dr. Sayuj Krishnan",
+    "metaDescription": "A guide to Normal Pressure Hydrocephalus (NPH) symptoms and treatment in Hyderabad. Learn how VP Shunt surgery can reverse dementia-like symptoms.",
+    "h1": "Normal Pressure Hydrocephalus (NPH): The &quot;Reversible Dementia&quot; You Should Know",
+    "wordCount": 6713,
+    "type": "blog",
+    "inlinks": 1
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/sciatica-pain-relief-exercises-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/sciatica-pain-relief-exercises-hyderabad/",
+    "robots": "index, follow",
+    "title": "Sciatica Pain Relief Exercises at Home: A Guide for Hyderab… | Dr. Sayuj Krishnan",
+    "metaDescription": "Discover the best sciatica pain relief exercises at home. Learn safe stretches, posture tips, and when to see a spine specialist in Hyderabad.",
+    "h1": "Sciatica Pain Relief Exercises at Home: A Guide for Hyderabad Patients",
+    "wordCount": 5196,
+    "type": "blog",
+    "inlinks": 2
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/awake-craniotomy-brain-tumor-guide",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/awake-craniotomy-brain-tumor-guide/",
+    "robots": "index, follow",
+    "title": "Awake Craniotomy: Why and How Brain Surgery Is Performed Wh… | Dr. Sayuj Krishnan",
+    "metaDescription": "Dr. Sayuj Krishnan explains Awake Craniotomy: a technique for removing brain tumors near critical areas while preserving speech and motor function.",
+    "h1": "Awake Craniotomy: Why and How Brain Surgery Is Performed While You Are Awake",
+    "wordCount": 7845,
+    "type": "blog",
+    "inlinks": 2
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/cauda-equina-syndrome-warning-signs-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/cauda-equina-syndrome-warning-signs-hyderabad/",
+    "robots": "index, follow",
+    "title": "Cauda Equina Syndrome: The Back Pain Emergency You Cannot I… | Dr. Sayuj Krishnan",
+    "metaDescription": "Cauda Equina Syndrome is a surgical emergency. If you have saddle numbness or bladder loss with back pain, seek help in Hyderabad immediately.",
+    "h1": "Cauda Equina Syndrome: The Back Pain Emergency You Cannot Ignore",
+    "wordCount": 6640,
+    "type": "blog",
+    "inlinks": 1
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/spondylolisthesis-vs-herniated-disc-difference",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/spondylolisthesis-vs-herniated-disc-difference/",
+    "robots": "index, follow",
+    "title": "Slipped Disc vs. Slipped Vertebra (Spondylolisthesis): Unde… | Dr. Sayuj Krishnan",
+    "metaDescription": "Spondylolisthesis vs herniated disc: symptoms, imaging clues, and when stabilization or simple decompression is needed.",
+    "h1": "Slipped Disc vs. Slipped Vertebra (Spondylolisthesis): Understanding the Difference",
+    "wordCount": 6873,
+    "type": "blog",
+    "inlinks": 1
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/understanding-brain-mri-tumor-report-guide",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/understanding-brain-mri-tumor-report-guide/",
+    "robots": "index, follow",
+    "title": "Understanding Your Brain MRI Report: Benign vs. Malignant T… | Dr. Sayuj Krishnan",
+    "metaDescription": "Decode your brain MRI report. Understand terms like mass effect, enhancing lesion, and edema, and learn the signs of benign vs malignant tumors.",
+    "h1": "Understanding Your Brain MRI Report: Benign vs. Malignant Tumor Signs",
+    "wordCount": 6863,
+    "type": "blog",
+    "inlinks": 5
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/microdiscectomy-vs-laminectomy-recovery-comparison",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/microdiscectomy-vs-laminectomy-recovery-comparison/",
+    "robots": "index, follow",
+    "title": "Microdiscectomy vs. Laminectomy: Recovery &amp; Cost in Hyderab… | Dr. Sayuj Krishnan",
+    "metaDescription": "Compare Microdiscectomy vs Laminectomy for Hyderabad patients. Learn about recovery timelines, success rates, and cost estimates for slip disc surgery.",
+    "h1": "Microdiscectomy vs. Laminectomy: Recovery &amp; Cost in Hyderabad",
+    "wordCount": 5143,
+    "type": "blog",
+    "inlinks": 1
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/awake-spine-surgery-vs-general-anesthesia-guide",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/awake-spine-surgery-vs-general-anesthesia-guide/",
+    "robots": "index, follow",
+    "title": "Awake Spine Surgery vs. General Anesthesia: Which is Safer?… | Dr. Sayuj Krishnan",
+    "metaDescription": "Awake spine surgery vs general anesthesia: safety benefits, faster recovery, and why it suits elderly/high-risk patients in Hyderabad.",
+    "h1": "Awake Spine Surgery vs. General Anesthesia: Which is Safer?",
+    "wordCount": 7477,
+    "type": "blog",
+    "inlinks": 1
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/cervical-spondylosis-neck-pain-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/cervical-spondylosis-neck-pain-hyderabad/",
+    "robots": "index, follow",
+    "title": "Neck Pain or Cervical Spondylosis? A Guide for Hyderabad&#x27;s… | Dr. Sayuj Krishnan",
+    "metaDescription": "Neck pain in Hyderabad? Learn tech neck vs cervical spondylosis, key symptoms, and when to see a spine specialist.",
+    "h1": "Neck Pain or Cervical Spondylosis? A Guide for Hyderabad&#x27;s Tech Professionals",
+    "wordCount": 8077,
+    "type": "blog",
+    "inlinks": 2
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/endoscopic-spine-surgery-recovery-timeline",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/endoscopic-spine-surgery-recovery-timeline/",
+    "robots": "index, follow",
+    "title": "Recovery Timeline: Endoscopic vs. Open Spine Surgery | Dr.… | Dr. Sayuj Krishnan",
+    "metaDescription": "Detailed recovery timeline for endoscopic spine surgery vs open surgery. Learn when you can walk, drive, and return to work after treatment in Hyderabad.",
+    "h1": "Recovery Timeline: Endoscopic vs. Open Spine Surgery",
+    "wordCount": 5968,
+    "type": "blog",
+    "inlinks": 1
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/headache-vs-brain-tumor-warning-signs",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/headache-vs-brain-tumor-warning-signs/",
+    "robots": "index, follow",
+    "title": "Headache or Brain Tumor? 7 Warning Signs You Should Not Ign… | Dr. Sayuj Krishnan",
+    "metaDescription": "Worried about a brain tumor headache? Dr. Sayuj Krishnan explains the 7 critical warning signs, red flags, and migraine differences.",
+    "h1": "Headache or Brain Tumor? 7 Warning Signs You Should Not Ignore",
+    "wordCount": 7216,
+    "type": "blog",
+    "inlinks": 3
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/lumbar-canal-stenosis-walking-pain-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/lumbar-canal-stenosis-walking-pain-hyderabad/",
+    "robots": "index, follow",
+    "title": "Why Walking Hurts: A Guide to Lumbar Canal Stenosis for Sen… | Dr. Sayuj Krishnan",
+    "metaDescription": "Leg pain when walking that goes away when sitting is a classic sign of lumbar canal stenosis. Learn about symptoms, diagnosis, and treatment in Hyderabad.",
+    "h1": "Why Walking Hurts: A Guide to Lumbar Canal Stenosis for Seniors",
+    "wordCount": 6489,
+    "type": "blog",
+    "inlinks": 2
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/osteoporotic-spine-fracture-elderly-guide",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/osteoporotic-spine-fracture-elderly-guide/",
+    "robots": "index, follow",
+    "title": "Osteoporotic Spine Fractures in the Elderly: Healing &amp; Trea… | Dr. Sayuj Krishnan",
+    "metaDescription": "Osteoporotic spine fractures in the elderly: symptoms, risks of bed rest, and how kyphoplasty provides rapid pain relief in Hyderabad.",
+    "h1": "Osteoporotic Spine Fractures in the Elderly: Healing &amp; Treatment Guide",
+    "wordCount": 8374,
+    "type": "blog",
+    "inlinks": 1
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/trigeminal-neuralgia-vs-tooth-pain-guide",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/trigeminal-neuralgia-vs-tooth-pain-guide/",
+    "robots": "index, follow",
+    "title": "Trigeminal Neuralgia vs. Tooth Pain: Why Your Face Hurts Li… | Dr. Sayuj Krishnan",
+    "metaDescription": "Toothache or trigeminal neuralgia? Signs of electric shock facial pain, common misdiagnoses, and treatment options in Hyderabad.",
+    "h1": "Trigeminal Neuralgia vs. Tooth Pain: Why Your Face Hurts Like a Shock",
+    "wordCount": 7897,
+    "type": "blog",
+    "inlinks": 1
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/sciatica-vs-normal-back-pain-guide",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/sciatica-vs-normal-back-pain-guide/",
+    "robots": "index, follow",
+    "title": "Sciatica vs. Normal Back Pain: How to Tell the Difference |… | Dr. Sayuj Krishnan",
+    "metaDescription": "Confused if you have sciatica or just back pain? This guide explains the symptoms, red flags, and when to see a neurosurgeon in Hyderabad.",
+    "h1": "Sciatica vs. Normal Back Pain: How to Tell the Difference",
+    "wordCount": 8282,
+    "type": "blog",
+    "inlinks": 6
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/cost-of-endoscopic-spine-surgery-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/cost-of-endoscopic-spine-surgery-hyderabad/",
+    "robots": "index, follow",
+    "title": "Cost of Endoscopic Spine Surgery in Hyderabad: 2026 Price G… | Dr. Sayuj Krishnan",
+    "metaDescription": "Endoscopic spine surgery cost in Hyderabad: package ranges, insurance approvals, and why keyhole surgery can lower total recovery costs.",
+    "h1": "Cost of Endoscopic Spine Surgery in Hyderabad: 2026 Price Guide",
+    "wordCount": 5861,
+    "type": "blog",
+    "inlinks": 1
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/understanding-mri-spine-report-guide",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/understanding-mri-spine-report-guide/",
+    "robots": "index, follow",
+    "title": "Understanding Your MRI Spine Report: A Patient&#x27;s Guide | Dr… | Dr. Sayuj Krishnan",
+    "metaDescription": "Decode your spine MRI report. Learn what disc bulge, stenosis, and nerve compression mean and when to see a specialist in Hyderabad.",
+    "h1": "Understanding Your MRI Spine Report: A Patient&#x27;s Guide",
+    "wordCount": 8096,
+    "type": "blog",
+    "inlinks": 8
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/neuroplasticity-brain-recovery-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/neuroplasticity-brain-recovery-hyderabad/",
+    "robots": "index, follow",
+    "title": "Neuroplasticity: How Your Brain Heals and Learns After Inju… | Dr. Sayuj Krishnan",
+    "metaDescription": "Understand neuroplasticity and how the brain rewires after stroke, injury, or surgery, plus simple exercises Hyderabad patients can practice to speed reco…",
+    "h1": "Neuroplasticity: How Your Brain Heals and Learns After Injury",
+    "wordCount": 5965,
+    "type": "blog",
+    "inlinks": 3
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/awake-craniotomy-guide",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/awake-craniotomy-guide",
+    "robots": "index, follow",
+    "title": "Awake Craniotomy Guide Hyderabad | Dr. Sayuj | Dr. Sayuj Krishnan",
+    "metaDescription": "Why awake brain surgery is chosen, mapping process, recovery, and FAQs for Hyderabad patients.",
+    "h1": "Awake Craniotomy: A Patient Guide",
+    "wordCount": 4627,
+    "type": "blog",
+    "inlinks": 0
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/brain-tumor-surgery-cost-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/brain-tumor-surgery-cost-hyderabad",
+    "robots": "index, follow",
+    "title": "Brain Tumor Surgery Cost Hyderabad | Transparent Pricing | Dr. Sayuj Krishnan",
+    "metaDescription": "Brain tumor surgery cost breakdown, insurance coverage, and payment options with Dr. Sayuj Krishnan at Yashoda Hospital Malakpet.",
+    "h1": "Brain Tumor Surgery Cost Hyderabad | Transparent Pricing",
+    "wordCount": 4217,
+    "type": "blog",
+    "inlinks": 1
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/day-care-endoscopic-spine-surgery-eligibility",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/day-care-endoscopic-spine-surgery-eligibility/",
+    "robots": "index, follow",
+    "title": "Day-Care Spine Surgery Eligibility | When Can You Go Home S… | Dr. Sayuj Krishnan",
+    "metaDescription": "Criteria, safety protocols, and planning tips for same-day endoscopic spine surgery discharge in Hyderabad.",
+    "h1": "Day-Care Spine Surgery: Are You a Candidate for Same-Day Discharge?",
+    "wordCount": 5964,
+    "type": "blog",
+    "inlinks": 1
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/day-care-spine-surgery-insurance-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/day-care-spine-surgery-insurance-hyderabad",
+    "robots": "index, follow",
+    "title": "Day-Care Spine Surgery Insurance Hyderabad | Coverage Guide | Dr. Sayuj Krishnan",
+    "metaDescription": "Day-care spine surgery insurance coverage, pre-authorization, and cashless treatment options with Dr. Sayuj Krishnan at Yashoda Hospital Malakpet.",
+    "h1": "Day-Care Spine Surgery Insurance Hyderabad | Coverage Guide",
+    "wordCount": 4551,
+    "type": "blog",
+    "inlinks": 1
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/disc-replacement-vs-fusion",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/disc-replacement-vs-fusion",
+    "robots": "index, follow",
+    "title": "Disc Replacement vs Fusion Hyderabad | Dr. Sayuj Krishnan",
+    "metaDescription": "Compare disc replacement vs spinal fusion: benefits, risks, recovery, and candidacy with Dr. Sayuj Krishnan in Hyderabad.",
+    "h1": "Disc Replacement vs Spinal Fusion: Making the Right Choice",
+    "wordCount": 4721,
+    "type": "blog",
+    "inlinks": 0
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/does-endoscopic-spine-surgery-work-for-sciatica-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/does-endoscopic-spine-surgery-work-for-sciatica-hyderabad/",
+    "robots": "index, follow",
+    "title": "Does Endoscopic Spine Surgery Work for Sciatica in Hyderabad? – Dr. Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Understand how endoscopic discectomy and foraminotomy relieve sciatica with tiny incisions, typical recovery timelines, and who is a good candidate in Hyderabad.",
+    "h1": "Does Endoscopic Spine Surgery Work for Sciatica in Hyderabad?",
+    "wordCount": 3230,
+    "type": "blog",
+    "inlinks": 1
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/endoscopic-cervical-spine-surgery-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/endoscopic-cervical-spine-surgery-hyderabad/",
+    "robots": "index, follow",
+    "title": "Endoscopic Cervical Spine Surgery in Hyderabad | Recovery &amp;… | Dr. Sayuj Krishnan",
+    "metaDescription": "When cervical endoscopic surgery is indicated, benefits vs. fusion, recovery timelines, and safety considerations for patients in Hyderabad.",
+    "h1": "Endoscopic Cervical Spine Surgery in Hyderabad: When It’s Recommended and What to Expect",
+    "wordCount": 3908,
+    "type": "blog",
+    "inlinks": 0
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/endoscopic-discectomy-cost-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/endoscopic-discectomy-cost-hyderabad/",
+    "robots": "index, follow",
+    "title": "Endoscopic Discectomy Cost in Hyderabad | What to Expect | Dr. Sayuj Krishnan",
+    "metaDescription": "Breakdown of day-care eligibility, insurance coverage, and cost drivers for endoscopic discectomy in Hyderabad.",
+    "h1": "Endoscopic Discectomy Cost in Hyderabad: What Affects Your Estimate?",
+    "wordCount": 5237,
+    "type": "blog",
+    "inlinks": 2
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/endoscopic-spine-surgery-cost-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/endoscopic-spine-surgery-cost-hyderabad/",
+    "robots": "index, follow",
+    "title": "Endoscopic Spine Surgery Cost in Hyderabad | What Affects P… | Dr. Sayuj Krishnan",
+    "metaDescription": "Cost drivers, insurance nuances, and day-care eligibility for endoscopic spine surgery in Hyderabad.",
+    "h1": "Endoscopic Spine Surgery Cost in Hyderabad: What Affects Your Final Bill",
+    "wordCount": 4962,
+    "type": "blog",
+    "inlinks": 1
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/endoscopic-vs-microdiscectomy-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/endoscopic-vs-microdiscectomy-hyderabad/",
+    "robots": "index, follow",
+    "title": "Endoscopic vs Microdiscectomy in Hyderabad | Which is Right… | Dr. Sayuj Krishnan",
+    "metaDescription": "Compare incision size, recovery, and candidacy for endoscopic discectomy versus microdiscectomy in Hyderabad.",
+    "h1": "Endoscopic vs Microdiscectomy: Choosing the Right Approach for Your Herniated Disc",
+    "wordCount": 5855,
+    "type": "blog",
+    "inlinks": 1
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/how-much-does-brain-surgery-cost-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/how-much-does-brain-surgery-cost-hyderabad/",
+    "robots": "index, follow",
+    "title": "How Much Does Brain Surgery Cost in Hyderabad? Complete Gui… | Dr. Sayuj Krishnan",
+    "metaDescription": "Complete guide to brain surgery costs in Hyderabad. Learn about pricing factors, insurance coverage, payment options, and cost breakdowns for different br…",
+    "h1": "How Much Does Brain Surgery Cost in Hyderabad?",
+    "wordCount": 4075,
+    "type": "blog",
+    "inlinks": 0
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/mvd-vs-radiosurgery-trigeminal-neuralgia",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/mvd-vs-radiosurgery-trigeminal-neuralgia/",
+    "robots": "index, follow",
+    "title": "MVD vs Radiosurgery vs Percutaneous for Trigeminal Neuralgi… | Dr. Sayuj Krishnan",
+    "metaDescription": "Side-by-side comparison of microvascular decompression, Gamma Knife radiosurgery, and percutaneous procedures for trigeminal neuralgia.",
+    "h1": "Trigeminal Neuralgia Treatment: MVD vs Radiosurgery vs Percutaneous Procedures",
+    "wordCount": 5885,
+    "type": "blog",
+    "inlinks": 1
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/return-to-work-after-endoscopic-discectomy-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/return-to-work-after-endoscopic-discectomy-hyderabad/",
+    "robots": "index, follow",
+    "title": "Return to Work After Endoscopic Discectomy in Hyderabad | Dr. Sayuj Krishnan",
+    "metaDescription": "Week-by-week recovery timelines, activity progression, and workplace planning after endoscopic discectomy in Hyderabad.",
+    "h1": "Return to Work After Endoscopic Discectomy in Hyderabad: A Practical Guide",
+    "wordCount": 4715,
+    "type": "blog",
+    "inlinks": 2
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/sciatica-pain-management-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/sciatica-pain-management-hyderabad",
+    "robots": "index, follow",
+    "title": "Sciatica Pain Management in Hyderabad | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Comprehensive guide to sciatica pain management in Hyderabad. Learn about conservative treatments, when surgery is needed, and recovery expectations.",
+    "h1": "Sciatica Pain Management in Hyderabad: Complete Treatment Guide",
+    "wordCount": 4335,
+    "type": "blog",
+    "inlinks": 0
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/spinal-fusion-cost-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/spinal-fusion-cost-hyderabad",
+    "robots": "index, follow",
+    "title": "Spinal Fusion Cost Hyderabad | TLIF ACDF | Dr. Sayuj Krishnan",
+    "metaDescription": "Spinal fusion cost breakdown, insurance coverage, and payment options with Dr. Sayuj Krishnan at Yashoda Hospital Malakpet.",
+    "h1": "Spinal Fusion Cost Hyderabad | TLIF ACDF",
+    "wordCount": 4445,
+    "type": "blog",
+    "inlinks": 0
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/spine-health-maintenance-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/spine-health-maintenance-hyderabad",
+    "robots": "index, follow",
+    "title": "Spine Health Maintenance in Hyderabad | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Complete guide to maintaining spine health in Hyderabad. Learn exercises, lifestyle tips, and preventive measures for a healthy spine.",
+    "h1": "Spine Health Maintenance in Hyderabad: Your Complete Guide",
+    "wordCount": 4691,
+    "type": "blog",
+    "inlinks": 0
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/spine-surgery-recovery-timeline-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/spine-surgery-recovery-timeline-hyderabad",
+    "robots": "index, follow",
+    "title": "Spine Surgery Recovery Timeline | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Complete guide to spine surgery recovery timeline in Hyderabad. Learn what to expect after endoscopic spine surgery and recovery milestones.",
+    "h1": "Spine Surgery Recovery Timeline in Hyderabad: What to Expect",
+    "wordCount": 4678,
+    "type": "blog",
+    "inlinks": 1
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/when-to-worry-about-back-pain-neurosurgeon-hyderabad",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/when-to-worry-about-back-pain-neurosurgeon-hyderabad/",
+    "robots": "index, follow",
+    "title": "When to Worry About Back Pain and See a Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan",
+    "metaDescription": "Learn the red flags for back pain, how MRIs and nerve tests help diagnosis, and when early consultation can prevent nerve damage in Hyderabad.",
+    "h1": "When to Worry About Back Pain and See a Neurosurgeon in Hyderabad",
+    "wordCount": 3041,
+    "type": "location",
+    "inlinks": 1
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/world-stroke-day-2025-hyderabad-stroke-code",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/blog/world-stroke-day-2025-hyderabad-stroke-code/",
+    "robots": "index, follow",
+    "title": "World Stroke Day 2025 Hyderabad | BE-FAST Action Plan | Dr. Sayuj Krishnan",
+    "metaDescription": "Hyderabad families: recognise stroke symptoms with BE-FAST, call 108, and learn Dr Sayuj Krishnan’s Stroke Code pathway, prevention tips, and rehab suppor…",
+    "h1": "World Stroke Day 2025: Recognize Stroke Fast, Act Faster (Hyderabad, India)",
+    "wordCount": 7906,
+    "type": "blog",
+    "inlinks": 1
   },
   {
     "url": "https://www.drsayuj.info/symptoms/signs-of-brain-tumor",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/symptoms/signs-of-brain-tumor",
+    "robots": "index, follow",
+    "title": "Signs of Brain Tumor — When to Seek a Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan",
+    "metaDescription": "Understand early warning signs, emergency red flags, and the diagnostic pathway for suspected brain tumours with Dr. Sayuj Krishnan in Hyderabad.",
+    "h1": "Signs of a Brain Tumor",
+    "wordCount": 4396,
+    "type": "other",
+    "inlinks": 128
   },
   {
-    "url": "https://www.drsayuj.info/utm-links",
-    "pageType": "Other",
-    "status": 200,
-    "inlinks": "N/A"
+    "url": "https://www.drsayuj.info/symptoms/pain-on-top-of-head-causes",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/symptoms/pain-on-top-of-head-causes",
+    "robots": "index, follow",
+    "title": "Vertex Headache Causes | Pain on Top of Head (Hyderabad) | Dr. Sayuj Krishnan",
+    "metaDescription": "Causes of pain on top of the head (vertex headache), red flags, and when to see a neurosurgeon in Hyderabad.",
+    "h1": "Pain on Top of the Head — Causes &amp; Next Steps",
+    "wordCount": 4725,
+    "type": "other",
+    "inlinks": 128
+  },
+  {
+    "url": "https://www.drsayuj.info/privacy",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/privacy",
+    "robots": "index, follow",
+    "title": "Privacy Policy | Dr Sayuj Krishnan - Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan",
+    "metaDescription": "Privacy policy for Dr Sayuj Krishnan&#x27;s neurosurgical practice in Hyderabad. Learn how we protect your personal and medical information.",
+    "h1": "Privacy Policy",
+    "wordCount": 3343,
+    "type": "other",
+    "inlinks": 128
+  },
+  {
+    "url": "https://www.drsayuj.info/cookies",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/cookies",
+    "robots": "index, follow",
+    "title": "Cookie Policy | Dr Sayuj Krishnan - Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan",
+    "metaDescription": "Cookie policy for Dr Sayuj Krishnan&#x27;s neurosurgical practice website. Learn about how we use cookies and similar technologies.",
+    "h1": "Cookie Policy",
+    "wordCount": 3135,
+    "type": "other",
+    "inlinks": 128
+  },
+  {
+    "url": "https://www.drsayuj.info/terms",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/terms",
+    "robots": "index, follow",
+    "title": "Terms of Service | Dr Sayuj Krishnan - Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan",
+    "metaDescription": "Terms of service for Dr Sayuj Krishnan&#x27;s neurosurgical practice in Hyderabad. Read our terms and conditions for using our website and services.",
+    "h1": "Terms of Service",
+    "wordCount": 3690,
+    "type": "other",
+    "inlinks": 128
+  },
+  {
+    "url": "https://www.drsayuj.info/disclaimer",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/disclaimer",
+    "robots": "index, follow",
+    "title": "Medical Disclaimer | Dr Sayuj Krishnan - Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan",
+    "metaDescription": "Medical disclaimer for Dr Sayuj Krishnan&#x27;s neurosurgical practice in Hyderabad. Important information about medical advice and treatment.",
+    "h1": "Medical Disclaimer",
+    "wordCount": 3467,
+    "type": "other",
+    "inlinks": 128
+  },
+  {
+    "url": "https://www.drsayuj.info/medical-disclaimer",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/medical-disclaimer",
+    "robots": "index, follow",
+    "title": "Medical Disclaimer | Dr Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Important medical disclaimer and terms of use for information provided on Dr Sayuj Krishnan&#x27;s website.",
+    "h1": "Medical Disclaimer",
+    "wordCount": 3328,
+    "type": "other",
+    "inlinks": 0
+  },
+  {
+    "url": "https://www.drsayuj.info/content-integrity",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/content-integrity",
+    "robots": "index, follow",
+    "title": "Content Integrity &amp; Editorial Process | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Learn about our rigorous editorial process, medical review standards, and commitment to accurate, evidence-based neurosurgical content.",
+    "h1": "Content Integrity &amp; Editorial Process",
+    "wordCount": 4074,
+    "type": "other",
+    "inlinks": 128
+  },
+  {
+    "url": "https://www.drsayuj.info/editorial-policy",
+    "statusCode": 200,
+    "canonical": "https://www.drsayuj.info/editorial-policy",
+    "robots": "index, follow",
+    "title": "Editorial Policy | Dr Sayuj Krishnan | Dr. Sayuj Krishnan",
+    "metaDescription": "Editorial policy and content standards for medical information provided on Dr Sayuj Krishnan&#x27;s website.",
+    "h1": "Editorial Policy",
+    "wordCount": 3442,
+    "type": "other",
+    "inlinks": 128
   }
 ]

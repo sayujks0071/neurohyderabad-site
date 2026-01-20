@@ -81,13 +81,12 @@ export default function ContactPage() {
               <figure className="flex flex-col items-center">
                 <div className="w-48 h-48 md:w-56 md:h-56 rounded-3xl overflow-hidden shadow-2xl ring-4 ring-blue-100">
                   <Image
-                    src="/images/dr-sayuj-krishnan-portrait.jpg"
+                    src="/images/dr-sayuj-krishnan-portrait-v2.jpg"
                     alt="Dr. Sayuj Krishnan — Consultant Neurosurgeon & Spine Surgeon"
                     width={320}
                     height={320}
                     className="object-cover w-full h-full"
                     priority
-                    quality={95}
                     sizes="(max-width: 768px) 192px, 320px"
                   />
                 </div>
@@ -238,21 +237,21 @@ export default function ContactPage() {
               </p>
               <div className="grid md:grid-cols-3 gap-4">
                 <Link
-                  href="/locations/brain-spine-surgeon-jubilee-hills"
+                  href="/neurosurgeon-jubilee-hills"
                   className="block bg-blue-50 border border-blue-200 rounded-lg p-4 hover:bg-blue-100 transition-colors"
                 >
                   <h3 className="font-semibold text-blue-700 mb-2">Near Jubilee Hills</h3>
                   <p className="text-sm text-gray-600">Travel time: 15-20 minutes</p>
                 </Link>
                 <Link
-                  href="/locations/brain-spine-surgeon-banjara-hills"
+                  href="/neurosurgeon-banjara-hills"
                   className="block bg-blue-50 border border-blue-200 rounded-lg p-4 hover:bg-blue-100 transition-colors"
                 >
                   <h3 className="font-semibold text-blue-700 mb-2">Near Banjara Hills</h3>
                   <p className="text-sm text-gray-600">Travel time: 20-25 minutes</p>
                 </Link>
                 <Link
-                  href="/locations/brain-spine-surgeon-hitec-city"
+                  href="/neurosurgeon-hitech-city"
                   className="block bg-blue-50 border border-blue-200 rounded-lg p-4 hover:bg-blue-100 transition-colors"
                 >
                   <h3 className="font-semibold text-blue-700 mb-2">Near HITEC City</h3>

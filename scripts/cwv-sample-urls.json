@@ -1,6 +1,6 @@
-[
-  "http://localhost:3000/",
-  "http://localhost:3000/appointments",
-  "http://localhost:3000/locations/banjara-hills",
-  "http://localhost:3000/conditions/sciatica-pain-treatment-hyderabad"
-]
+{
+  "home": "/",
+  "appointment": "/appointments",
+  "location": "/locations/banjara-hills",
+  "condition": "/conditions/brain-tumor-surgery-hyderabad"
+}
