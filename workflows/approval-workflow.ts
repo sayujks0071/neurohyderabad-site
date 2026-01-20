@@ -173,63 +173,74 @@ async function processConfirmationResponse(
 ): Promise<ConfirmationResult> {
   "use step";
 
-  const data = await request.json();
-  const { action, date, time, notes } = data;
+  try {
+    const data = await request.json();
+    const { action, date, time, notes } = data;
 
-  let result: ConfirmationResult;
+    let result: ConfirmationResult;
 
-  switch (action) {
-    case "confirm":
-      result = {
-        appointmentId: appointment.appointmentId,
-        status: "confirmed",
-        confirmedDate: appointment.requestedDate,
-        confirmedTime: appointment.requestedTime,
-        notes,
-      };
-      await request.respondWith(
-        Response.json({ success: true, message: "Appointment confirmed" })
-      );
-      break;
-
-    case "reschedule":
-      if (!date || !time) {
+    switch (action) {
+      case "confirm":
+        result = {
+          appointmentId: appointment.appointmentId,
+          status: "confirmed",
+          confirmedDate: appointment.requestedDate,
+          confirmedTime: appointment.requestedTime,
+          notes,
+        };
         await request.respondWith(
-          Response.json({ error: "Date and time required for reschedule" }, { status: 400 })
+          Response.json({ success: true, message: "Appointment confirmed" })
         );
-        throw new FatalError("Missing reschedule date/time");
-      }
-      result = {
-        appointmentId: appointment.appointmentId,
-        status: "rescheduled",
-        confirmedDate: date,
-        confirmedTime: time,
-        notes,
-      };
-      await request.respondWith(
-        Response.json({ success: true, message: "Appointment rescheduled" })
-      );
-      break;
+        break;
 
-    case "cancel":
-      result = {
-        appointmentId: appointment.appointmentId,
-        status: "cancelled",
-        notes,
-      };
-      await request.respondWith(
-        Response.json({ success: true, message: "Appointment cancelled" })
-      );
-      break;
+      case "reschedule":
+        if (!date || !time) {
+          await request.respondWith(
+            Response.json({ error: "Date and time required for reschedule" }, { status: 400 })
+          );
+          throw new FatalError("Missing reschedule date/time");
+        }
+        result = {
+          appointmentId: appointment.appointmentId,
+          status: "rescheduled",
+          confirmedDate: date,
+          confirmedTime: time,
+          notes,
+        };
+        await request.respondWith(
+          Response.json({ success: true, message: "Appointment rescheduled" })
+        );
+        break;
 
-    default:
-      await request.respondWith(
-        Response.json({ error: "Invalid action" }, { status: 400 })
-      );
-      throw new FatalError(`Invalid action: ${action}`);
+      case "cancel":
+        result = {
+          appointmentId: appointment.appointmentId,
+          status: "cancelled",
+          notes,
+        };
+        await request.respondWith(
+          Response.json({ success: true, message: "Appointment cancelled" })
+        );
+        break;
+
+      default:
+        await request.respondWith(
+          Response.json({ error: "Invalid action" }, { status: 400 })
+        );
+        throw new FatalError(`Invalid action: ${action}`);
+    }
+
+    return result;
+  } catch (error) {
+    // Ensure response is sent even on error
+    if (error instanceof FatalError) {
+      throw error; // Already responded before throwing
+    }
+    await request.respondWith(
+      Response.json({ error: "Internal server error" }, { status: 500 })
+    );
+    throw new FatalError(`Webhook processing failed: ${error}`);
   }
-
-  return result;
 }
 
 // ============================================================
