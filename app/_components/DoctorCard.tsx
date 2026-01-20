@@ -17,6 +17,7 @@ export default function DoctorCard({ priority = false }: DoctorCardProps) {
             alt="Dr. Sayuj Krishnan - Premier Neurosurgeon in Hyderabad"
             width={128}
             height={128}
+            sizes="128px"
             className="object-cover w-full h-full rounded-full"
             quality={75}
             priority={priority}
