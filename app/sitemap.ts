@@ -68,24 +68,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/neurosurgeon-secunderabad',
     '/neurosurgeon-gachibowli',
     '/neurosurgeon-malakpet',
-    '/locations/malakpet',
     '/locations/lb-nagar',
     '/locations/neurosurgeon-kothapet',
     '/locations/brain-spine-surgeon-jubilee-hills',
     '/locations/brain-spine-surgeon-banjara-hills',
     '/locations/brain-spine-surgeon-hitec-city',
     // Added Orphans (High Priority ones)
-    '/locations/banjara-hills',
-    '/locations/hitech-city',
     '/locations/neurosurgeon-kondapur',
     '/locations/neurosurgeon-kukatpally',
     '/locations/neurosurgeon-manikonda',
-    '/locations/neurosurgeon-near-jubilee-hills',
-    '/locations/neurosurgeon-near-jubilee-hills-faq',
-    '/locations/neurosurgeon-near-kachiguda-faq',
-    '/locations/neurosurgeon-near-kondapur-faq',
     '/locations/neurosurgeon-nizampet',
-    '/locations/secunderabad',
   ];
 
   const resourcePages = [

@@ -1,0 +1,8 @@
+keyword,intent,funnel,geo,cluster_label,target_url,difficulty,priority,serp_notes
+microscopic spine surgery cost hyderabad,Commercial,BOFU,HYD,HYD | BOFU | SPINE | microscopic-spine-surgery | cost,/services/microscopic-spine-surgery-hyderabad,Med,85,Snippet present
+robotic spine surgery hyderabad,Commercial,BOFU,HYD,HYD | BOFU | SPINE | robotic-spine-surgery | general,NEW_PAGE_SUGGESTION,High,75,Video carousel
+lumbar canal stenosis symptoms telugu,Informational,TOFU,HYD,HYD | TOFU | SPINE | lumbar-canal-stenosis | symptoms-telugu,/blog/lumbar-canal-stenosis-symptoms-telugu,Low,60,Local pack
+spinal implants cost in india,Commercial,MOFU,IN,IN | MOFU | SPINE | spinal-implants | cost,/blog/spinal-implants-cost-india,Med,70,
+best hospital for brain tumor surgery in hyderabad,Commercial,BOFU,HYD,HYD | BOFU | BRAIN | brain-tumor-surgery | best-hospital,/,High,90,Map pack
+endoscopic spine surgery hyderabad,Transactional,BOFU,HYD,HYD | BOFU | SPINE | endoscopic-discectomy | best-doctor,/services/minimally-invasive-spine-surgery,High,95,Existing
+neurosurgeon hyderabad,Transactional,BOFU,HYD,HYD | BOFU | GENERAL | neurosurgeon | best-doctor,/,High,98,Existing

@@ -192,6 +192,16 @@ const SERVICE_SOURCES: Record<string, ServiceSource[]> = {
       "href": "https://www.e-neurospine.org/journal/view.php?number=2223",
     },
   ],
+  "robotic-spine-surgery-hyderabad": [
+    {
+      "label": "Journal of Robotic Surgery – Accuracy of Robotic Spine Surgery",
+      "href": "https://link.springer.com/journal/11701",
+    },
+    {
+      "label": "Spine Journal – Robotic vs Navigation for Pedicle Screws",
+      "href": "https://www.thespinejournalonline.com/",
+    },
+  ],
 };
 
 export function getServiceSources(slug: string): ServiceSource[] {
