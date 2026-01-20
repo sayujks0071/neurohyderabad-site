@@ -113,8 +113,8 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ 
         success: true, 
         message: 'Appointment request submitted successfully!',
-        adminMessageId: result.adminMessageId,
-        patientMessageId: result.patientMessageId 
+        adminMessageId: 'adminMessageId' in result ? result.adminMessageId : undefined,
+        patientMessageId: 'patientMessageId' in result ? result.patientMessageId : undefined 
       });
     } else {
       return NextResponse.json({ 
