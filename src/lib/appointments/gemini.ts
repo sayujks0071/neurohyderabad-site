@@ -11,11 +11,12 @@ The message must follow these rules:
 1. Confirm receipt of the appointment request for the patient.
 2. Mention the requested date and time.
 3. State clear next steps: the office will call shortly to confirm the final appointment details and provide any instructions.
-4. Do not add any greeting such as "Dear [Patient Name]". Start the message directly.
-5. Keep the entire message under 50 words.`;
+4. Remind the patient to bring any MRI/CT scans with them.
+5. Do not add any greeting such as "Dear [Patient Name]". Start the message directly.
+6. Keep the entire message under 50 words.`;
 
 const fallbackMessage = (data: BookingData) =>
-  `Thank you for your request for an appointment on ${data.appointmentDate} at ${data.appointmentTime}. We have received your details and our team will contact you shortly to confirm the appointment.`;
+  `Appointment request received. Please bring any MRI/CT scans with you. We will confirm via phone shortly.`;
 
 // 🛡️ Sentinel: Sanitize input to prevent prompt injection and token exhaustion
 function sanitizeForPrompt(text: string | number | undefined | null, maxLength = 500): string {
