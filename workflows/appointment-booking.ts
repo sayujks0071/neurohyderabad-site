@@ -11,6 +11,10 @@
 
 import { sleep, FatalError, getStepMetadata, fetch } from "workflow";
 import { generateText } from "ai";
+import type { BookingData, EmailResult } from "@/packages/appointment-form/types";
+import { sendConfirmationEmail as sendAppointmentConfirmationEmail, sendAdminNotificationEmail } from "@/src/lib/appointments/email";
+import { buildWebhookPayload, notifyAppointmentWebhooks } from "@/src/lib/appointments/webhooks";
+import { submitToGoogleSheets } from "@/src/lib/google-sheets";
 import { getTextModel, hasAIConfig } from "@/src/lib/ai/gateway";
 import { inngest } from "@/src/lib/inngest";
 
@@ -23,6 +27,14 @@ interface PatientInfo {
   appointmentType: "new-consultation" | "follow-up" | "second-opinion";
   chiefComplaint: string;
   hasEmergencySymptoms?: boolean;
+  intakeNotes?: string;
+  age?: string;
+  gender?: BookingData["gender"];
+  painScore?: number;
+  mriScanAvailable?: boolean;
+  source?: string;
+  confirmationMessage?: string;
+  usedAI?: boolean;
 }
 
 interface AppointmentBookingResult {
@@ -55,6 +67,9 @@ const DEFAULT_TIME_SLOTS = [
   "16:00",
   "16:30",
 ];
+
+const DEFAULT_CONFIRMATION_MESSAGE =
+  "Appointment request received. Please bring any MRI/CT scans with you. We will confirm via phone shortly.";
 
 function normalizeTimeSlot(time: string): string | null {
   const match = time.trim().match(/^(\d{1,2}):(\d{2})(?:\s*(AM|PM))?$/i);
@@ -231,6 +246,25 @@ function buildAppointmentDateTime(date: string, time: string): Date | null {
   return appointmentDate;
 }
 
+function buildBookingData(
+  patientInfo: PatientInfo,
+  date: string,
+  time: string
+): BookingData {
+  return {
+    patientName: patientInfo.name,
+    email: patientInfo.email,
+    phone: patientInfo.phone,
+    age: patientInfo.age ? String(patientInfo.age) : "",
+    gender: patientInfo.gender ?? "",
+    appointmentDate: date,
+    appointmentTime: time,
+    reason: patientInfo.intakeNotes || patientInfo.chiefComplaint,
+    painScore: patientInfo.painScore,
+    mriScanAvailable: patientInfo.mriScanAvailable,
+  };
+}
+
 /**
  * Main appointment booking workflow
  */
@@ -305,18 +339,40 @@ export async function handleAppointmentBooking(
     // Step 5: Create booking record
     await createBookingRecord(bookingId, patientInfo, finalDate, finalTime);
 
+    const booking = buildBookingData(patientInfo, finalDate, finalTime);
+    const confirmationMessage =
+      patientInfo.confirmationMessage || DEFAULT_CONFIRMATION_MESSAGE;
+    const usedAI = patientInfo.usedAI ?? false;
+
     // Step 6: Wait for 2 seconds before sending confirmation
     await sleep("2s");
 
-    // Step 7: Send confirmation email
-    const confirmationSent = await sendConfirmationEmail(
-      patientInfo,
-      bookingId,
-      finalDate,
-      finalTime
+    // Step 7: Send confirmation + admin emails
+    const confirmationResult = await sendBookingConfirmationEmail(
+      booking,
+      confirmationMessage
+    );
+    const adminEmailResult = await sendBookingAdminAlert(
+      booking,
+      patientInfo.source
+    );
+    if (!adminEmailResult.success) {
+      console.error(
+        `[Appointment Workflow] Admin notification failed: ${adminEmailResult.error}`
+      );
+    }
+
+    // Step 8: Sync CRM + webhooks
+    await syncBookingLead(booking, patientInfo.source);
+    await triggerAppointmentWebhooks(
+      booking,
+      confirmationMessage,
+      confirmationResult,
+      usedAI,
+      patientInfo.source
     );
 
-    // Step 8: Schedule reminders
+    // Step 9: Schedule reminders
     await sleep("1s");
     const reminderScheduled = await scheduleReminders(
       bookingId,
@@ -325,11 +381,11 @@ export async function handleAppointmentBooking(
       finalTime
     );
 
-    // Step 9: Prepare patient education content
+    // Step 10: Prepare patient education content
     await sleep("5s");
     await preparePatientEducation(patientInfo.chiefComplaint, patientInfo.email);
 
-    // Step 10: Update analytics
+    // Step 11: Update analytics
     await trackBookingAnalytics(bookingId, patientInfo, status);
 
     console.log(
@@ -341,7 +397,7 @@ export async function handleAppointmentBooking(
       status,
       appointmentDate: finalDate,
       appointmentTime: finalTime,
-      confirmationSent,
+      confirmationSent: confirmationResult.success,
       reminderScheduled,
       estimatedWaitTime: status === "waitlist" ? 7 : undefined,
       nextSteps: generateNextSteps(status, finalDate, finalTime),
@@ -522,55 +578,90 @@ async function createBookingRecord(
 /**
  * Step: Send confirmation email
  */
-async function sendConfirmationEmail(
-  patientInfo: PatientInfo,
-  bookingId: string,
-  date: string,
-  time: string
+async function sendBookingConfirmationEmail(
+  booking: BookingData,
+  confirmationMessage: string
+): Promise<EmailResult> {
+  "use step";
+
+  const { stepId } = getStepMetadata();
+  console.log(
+    `[Appointment Workflow] Sending confirmation email to ${booking.email} (idempotencyKey: ${stepId})`
+  );
+
+  return await sendAppointmentConfirmationEmail(booking, confirmationMessage);
+}
+
+/**
+ * Step: Send admin alert
+ */
+async function sendBookingAdminAlert(
+  booking: BookingData,
+  source?: string
+): Promise<EmailResult> {
+  "use step";
+
+  console.log(
+    `[Appointment Workflow] Sending admin alert for ${booking.patientName}`
+  );
+
+  return await sendAdminNotificationEmail(booking, source);
+}
+
+/**
+ * Step: Sync booking to CRM / Google Sheets
+ */
+async function syncBookingLead(
+  booking: BookingData,
+  source?: string
 ): Promise<boolean> {
   "use step";
 
-  // Use stepId as idempotency key to prevent duplicate emails on retry
-  const { stepId } = getStepMetadata();
-  console.log(`[Appointment Workflow] Sending confirmation email to ${patientInfo.email} (idempotencyKey: ${stepId})`);
+  const result = await submitToGoogleSheets({
+    fullName: booking.patientName,
+    email: booking.email,
+    phone: booking.phone,
+    concern: booking.reason.slice(0, 100),
+    preferredDate: booking.appointmentDate,
+    preferredTime: booking.appointmentTime,
+    source: source || "website",
+    metadata: {
+      age: booking.age,
+      gender: booking.gender,
+      bookingReason: booking.reason,
+      painScore: booking.painScore,
+      mriScanAvailable: booking.mriScanAvailable,
+    },
+  });
 
-  try {
-    const baseUrl =
-      process.env.NEXT_PUBLIC_BASE_URL ||
-      (process.env.VERCEL_URL
-        ? `https://${process.env.VERCEL_URL}`
-        : "http://localhost:3000");
-
-    const response = await fetch(`${baseUrl}/api/email/appointment`, {
-      method: "POST",
-      headers: { 
-        "Content-Type": "application/json",
-        // Pass idempotency key to email API to prevent duplicate sends
-        "X-Idempotency-Key": stepId,
-      },
-      body: JSON.stringify({
-        to: patientInfo.email,
-        name: patientInfo.name,
-        bookingId,
-        appointmentDate: date,
-        appointmentTime: time,
-        chiefComplaint: patientInfo.chiefComplaint,
-      }),
-    });
-
-    // Handle 409 Conflict as success (duplicate request, already processed)
-    if (response.status === 409) {
-      console.log(`[Appointment Workflow] Email already sent (duplicate request)`);
-      return true;
-    }
-
-    const success = response.ok;
-    console.log(`[Appointment Workflow] Confirmation email sent: ${success}`);
-    return success;
-  } catch (error) {
-    console.error(`[Appointment Workflow] Error sending confirmation:`, error);
-    return false;
+  if (!result.success) {
+    console.error("[Appointment Workflow] Google Sheets sync failed:", result.message);
   }
+
+  return result.success;
+}
+
+/**
+ * Step: Notify appointment webhooks
+ */
+async function triggerAppointmentWebhooks(
+  booking: BookingData,
+  confirmationMessage: string,
+  emailResult: EmailResult,
+  usedAI: boolean,
+  source?: string
+): Promise<void> {
+  "use step";
+
+  await notifyAppointmentWebhooks(
+    buildWebhookPayload({
+      booking,
+      confirmationMessage,
+      emailResult,
+      usedAI,
+      source,
+    })
+  );
 }
 
 /**

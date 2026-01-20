@@ -133,6 +133,22 @@
     {
       "path": "/api/workflows/optimize",
       "schedule": "0 3 * * 0"
+    },
+    {
+      "path": "/api/workflows/hyderabad",
+      "schedule": "0 7 * * *"
+    },
+    {
+      "path": "/api/workflows/competitors",
+      "schedule": "0 8 * * 1"
+    },
+    {
+      "path": "/api/workflows/reviews?action=monitor",
+      "schedule": "0 9 * * *"
+    },
+    {
+      "path": "/api/workflows/eeat?action=audit",
+      "schedule": "0 4 * * 0"
     }
   ]
 }
