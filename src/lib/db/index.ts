@@ -8,9 +8,15 @@ let sql: NeonClient | null = null;
 
 function getSql(): NeonClient | null {
   if (!sql) {
-    const connectionString = process.env.POSTGRES_URL || process.env.DATABASE_URL;
+    // Check multiple possible env var names (Vercel/Neon integration uses storage_ prefix)
+    const connectionString = 
+      process.env.POSTGRES_URL || 
+      process.env.DATABASE_URL ||
+      process.env.storage_POSTGRES_URL ||
+      process.env.storage_DATABASE_URL;
+    
     if (!connectionString) {
-      console.warn('POSTGRES_URL/DATABASE_URL not set. Database operations will be skipped.');
+      console.warn('Database URL not set. Checked: POSTGRES_URL, DATABASE_URL, storage_POSTGRES_URL, storage_DATABASE_URL');
       return null;
     }
     sql = neon(connectionString);
@@ -108,7 +114,12 @@ export const db = {
    * Check if database is configured
    */
   isConfigured: (): boolean => {
-    return !!(process.env.POSTGRES_URL || process.env.DATABASE_URL);
+    return !!(
+      process.env.POSTGRES_URL || 
+      process.env.DATABASE_URL ||
+      process.env.storage_POSTGRES_URL ||
+      process.env.storage_DATABASE_URL
+    );
   },
 
   /**
