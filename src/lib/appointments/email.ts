@@ -6,14 +6,13 @@ export async function sendConfirmationEmail(
   confirmationMessage: string
 ): Promise<EmailResult> {
   try {
-    const result = await EmailService.sendAppointmentRequestConfirmation(
-      data.email,
-      data.patientName,
-      data.appointmentDate,
-      data.appointmentTime,
-      confirmationMessage,
-      data.reason
-    );
+    const result = await EmailService.sendAppointmentRequestConfirmation({
+      patientName: data.patientName,
+      appointmentDate: data.appointmentDate,
+      appointmentTime: data.appointmentTime,
+      reason: data.reason,
+      email: data.email,
+    });
 
     if (result.success) {
       return { success: true };
@@ -21,7 +20,7 @@ export async function sendConfirmationEmail(
 
     return {
       success: false,
-      error: result.error || "Failed to send appointment confirmation.",
+      error: result.error || "Failed to send confirmation email.",
     };
   } catch (error) {
     const message =
@@ -50,6 +49,8 @@ export async function sendAdminNotificationEmail(
       source,
       email: data.email,
       phone: data.phone,
+      painScore: data.painScore,
+      mriScanAvailable: data.mriScanAvailable,
     });
 
     if (result.success) {

@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { SITE_URL } from "../../src/lib/seo";
 import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
-import PhysicianSchema from "../components/schemas/PhysicianSchema";
+import { PhysicianSchema } from "../../src/components/schema/PhysicianSchema";
 import Section from "../_components/Section";
 import Card from "../_components/Card";
 import Button from "../_components/Button";
@@ -103,13 +103,12 @@ export default function AboutPage() {
               <div className="relative">
                 <div className="w-80 h-80 rounded-2xl overflow-hidden shadow-2xl">
                   <Image
-                    src="/images/dr-sayuj-krishnan-portrait.jpg"
+                    src="/images/dr-sayuj-krishnan-portrait-v2.jpg"
                     alt="Dr. Sayuj Krishnan - Premier Neurosurgeon in Hyderabad with German Training"
                     width={320}
                     height={320}
                     className="object-cover w-full h-full"
                     priority
-                    quality={95}
                     sizes="(max-width: 768px) 280px, 320px"
                   />
                 </div>

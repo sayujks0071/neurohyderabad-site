@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { getLocationById } from "@/src/data/locations";
 import { LocationNAPCard } from "@/src/components/locations/LocationNAPCard";
 import { LocationSchema } from "@/src/components/locations/LocationSchema";
+import { LocalPathways } from "@/src/components/locations/LocalPathways";
 import { notFound } from "next/navigation";
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import MedicalCitations from '@/app/_components/MedicalCitations';
@@ -208,6 +209,10 @@ export default function NeurosurgeonNearJubileeHillsFAQPage() {
             Get Directions
           </Link>
         </div>
+      </div>
+
+      <div className="mt-12">
+        <LocalPathways mode="location" locationId={location.id} />
       </div>
 
       <div className="mt-12">

@@ -1,4 +1,6 @@
 name: Jules PR & Deploy Check
+# v1.0
+# Managed by Jules (Daily Schedule)
 on:
   schedule:
     # 08:45 IST (India Standard Time) = 03:15 UTC
@@ -46,6 +48,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               state: 'open',
+              per_page: 100
             });
 
             // Find strictly matching title

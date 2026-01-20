@@ -10,6 +10,7 @@ import SourceList from '@/app/_components/SourceList';
 import { getServiceSources } from '../sources';
 import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
+import { LocalPathways } from '@/src/components/locations/LocalPathways';
 
 export const metadata: Metadata = makeMetadata({
   title: 'Dr. Sayuj vs Apollo Neuro ICU: Expert Comparison for Brain & Spine Surgery',
@@ -292,6 +293,11 @@ export default function DrSayujVsApolloNeuroICUPage() {
         </div>
       </div>
 
+
+
+      <div className="not-prose mt-12">
+        <LocalPathways mode="service" />
+      </div>
       <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
       <NAP />
       <ReviewedBy lastReviewed="2025-10-19" />

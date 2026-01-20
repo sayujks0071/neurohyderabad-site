@@ -1,4 +1,6 @@
 name: Jules Competitor Gap Scan
+# v1.0
+# Managed by Jules (Daily Schedule)
 on:
   schedule:
     # 09:00 IST (India Standard Time) = 03:30 UTC
@@ -46,6 +48,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               state: 'open',
+              per_page: 100
             });
 
             // Find strictly matching title

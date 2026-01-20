@@ -1,6 +1,6 @@
 import React from 'react';
 import { SITE_URL } from '@/src/lib/seo';
-import { getLocationById } from '@/src/data/locations';
+import { getLocationById, SOCIAL_PROFILES } from '@/src/data/locations';
 
 export default function AppointmentSchema() {
   const malakpet = getLocationById('malakpet');
@@ -8,10 +8,10 @@ export default function AppointmentSchema() {
 
   // The user requested a specific JSON-LD structure for the booking page.
   // We use a graph to include both Physician and MedicalClinic entities.
-  // Verified requirements:
+  // Verified against SEO requirements:
   // - Name: 'Dr. Sayuj Krishnan'
   // - MedicalSpecialty: 'Neurosurgeon'
-  // - Address: Yashoda Hospitals, Malakpet, Hyderabad (via Malakpet location data)
+  // - Address: Yashoda Hospitals, Malakpet, Hyderabad
   // - AvailableService: 'Neurosurgery', 'Spine Surgery', 'Brain Tumor Surgery'
   // - URL: Booking page URL
   const schema = {
@@ -19,8 +19,12 @@ export default function AppointmentSchema() {
     "@graph": [
       {
         "@type": "Physician",
+        "@id": `${SITE_URL}/#physician`,
         "name": "Dr. Sayuj Krishnan",
         "medicalSpecialty": "Neurosurgeon",
+        "sameAs": SOCIAL_PROFILES,
+        "description": "Premier neurosurgeon specializing in minimally invasive brain & spine surgery, awake brain surgery, and robotic neurosurgery. Fellowship-trained with German training in endoscopic spine surgery.",
+        "knowsLanguage": ["English", "Hindi", "Telugu", "Malayalam", "Tamil"],
         "address": {
           "@type": "PostalAddress",
           "streetAddress": malakpet.address.streetAddress, // Contains Yashoda Hospital, Malakpet
@@ -35,6 +39,7 @@ export default function AppointmentSchema() {
           "Brain Tumor Surgery"
         ],
         "url": `${SITE_URL}/appointments`,
+        "hasMap": malakpet.google_maps_place_url,
         "telephone": malakpet.telephone,
         // Using the v2 image as it's the specific resized asset mentioned in memory
         "image": `${SITE_URL}/images/dr-sayuj-krishnan-portrait-v2.jpg`,
@@ -48,7 +53,9 @@ export default function AppointmentSchema() {
         "@id": `${SITE_URL}/appointments#clinic`,
         "name": "Yashoda Hospitals, Malakpet",
         "telephone": malakpet.telephone,
-        "url": malakpet.google_maps_place_url, // Using map URL as website URL for the clinic entity context if Yashoda specific URL is not desired
+        "url": "https://www.yashodahospitals.com/malakpet/",
+        "hasMap": malakpet.directions_url,
+        "sameAs": "https://www.yashodahospitals.com/malakpet/",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": malakpet.address.streetAddress,

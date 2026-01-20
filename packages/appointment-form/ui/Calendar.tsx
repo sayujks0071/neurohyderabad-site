@@ -11,6 +11,7 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
 } from "../constants";
+import { formatLocalDate } from "@/src/lib/dates";
 import Tooltip from "./Tooltip";
 
 interface CalendarProps {
@@ -93,7 +94,7 @@ export default function Calendar({
     );
     newDate.setHours(0, 0, 0, 0);
     if (newDate < today) return;
-    onChange(newDate.toISOString().split("T")[0]);
+    onChange(formatLocalDate(newDate));
   };
 
   const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
@@ -128,7 +129,7 @@ export default function Calendar({
       case "Enter":
       case " ":
         if (focusedDate >= today) {
-          onChange(focusedDate.toISOString().split("T")[0]);
+          onChange(formatLocalDate(focusedDate));
         }
         break;
       default:

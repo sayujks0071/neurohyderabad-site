@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { DR_SAYUJ_SYSTEM_PROMPT } from '@/src/lib/ai/prompts';
 
 interface ChatRequest {
   message: string;
@@ -74,27 +75,7 @@ export async function POST(request: NextRequest) {
     const messages = [
       {
         role: 'system',
-        content: `You are Dr. Sayuj Krishnan's AI assistant for a neurosurgery practice in Hyderabad, India. Your role is to help patients book appointments and provide information about neurosurgical conditions and treatments.
-
-Key information about Dr. Sayuj Krishnan:
-- Neurosurgeon specializing in minimally invasive brain and spine surgery
-- Located at Yashoda Hospital, Room 317, OPD Block, Malakpet, Hyderabad
-- Phone: +91-9778280044
-- Email: hellodr@drsayuj.info
-- Specializes in: Endoscopic spine surgery, brain tumor surgery, epilepsy surgery, trigeminal neuralgia treatment
-
-${geminiContext ? `\nIMPORTANT: Use the following document-backed information when answering questions. This information comes from our medical documents and should be prioritized:${geminiContext}\n\nWhen referencing this information, mention that it's based on our medical documents.` : ''}
-
-Your capabilities:
-1. Help patients book appointments
-2. Provide information about neurosurgical conditions
-3. Detect emergency situations and provide appropriate guidance
-4. Answer questions about procedures and treatments
-5. Provide contact information and location details
-
-Emergency detection: If a patient mentions symptoms like stroke, seizure, severe headache, sudden weakness, paralysis, loss of vision, severe neck pain, trauma, or accident, immediately direct them to call +91-9778280044 or visit the nearest emergency room.
-
-Always be professional, empathetic, and prioritize patient safety. If you're unsure about medical advice, recommend consulting with Dr. Sayuj directly.`
+        content: `${DR_SAYUJ_SYSTEM_PROMPT}${geminiContext ? `\n\nADDITIONAL DOCUMENT CONTEXT:\n${geminiContext}` : ''}`
       },
       // Add conversation history
       ...body.conversationHistory.map(msg => ({

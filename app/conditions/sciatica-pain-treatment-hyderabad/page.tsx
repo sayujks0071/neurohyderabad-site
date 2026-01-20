@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import type { Metadata } from 'next';
 import MedicalWebPageSchema from "../../components/schemas/MedicalWebPageSchema";
-import FAQPageSchema from "../../components/schemas/FAQPageSchema";
+import FAQPageSchema from "@/app/_components/FAQPageSchema";
 import BreadcrumbSchema from "../../components/schemas/BreadcrumbSchema";
 import { SITE_URL } from "../../../src/lib/seo";
 import ReviewedBy from '@/app/_components/ReviewedBy';
@@ -17,8 +17,8 @@ import { patientStories } from '@/src/content/stories';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
 
 const baseMetadata = makeMetadata({
-  title: "Sciatica Treatment in Hyderabad | Non-Surgical & Endoscopic Options",
-  description: "Expert sciatica treatment in Hyderabad by Dr. Sayuj Krishnan. 90% of patients recover without surgery. Get a precise diagnosis and non-surgical relief plan.",
+  title: "Sciatica Treatment Hyderabad | 90% Non-Surgical Relief | Dr Sayuj",
+  description: "Best sciatica treatment in Hyderabad. 90% patients recover without surgery. Expert diagnosis & endoscopic options for severe cases. Book consult.",
   canonicalPath: '/conditions/sciatica-pain-treatment-hyderabad',
 });
 
@@ -371,17 +371,18 @@ export default function SciaticaTreatmentPage() {
         breadcrumbs={breadcrumbs}
       />
 
-      <FAQPageSchema />
+      <FAQPageSchema
+        faqs={FAQ.map(item => ({ question: item.q, answer: item.a }))}
+        pageUrl={`${SITE_URL}/conditions/sciatica-pain-treatment-hyderabad/`}
+      />
       <BreadcrumbSchema items={breadcrumbs} />
 
       <AuthorByline
-        publishedOn="2026-01-03"
-        updatedOn="2026-01-15"
+        publishedOn="2025-01-03"
+        updatedOn="2025-01-15"
       />
 
       <SourceList sources={sources['sciatica-treatment-hyderabad'] || []} />
-
-      <ReviewedBy />
 </main>
   );
 }

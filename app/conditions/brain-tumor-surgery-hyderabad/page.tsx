@@ -9,7 +9,6 @@ import ReviewedBy from '@/app/_components/ReviewedBy';
 import { SITE_URL } from "@/src/lib/seo";
 import { sources } from '../../blog/sources';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
-import { PhysicianSchema } from "@/src/components/schema/PhysicianSchema";
 
 // Static generation with 24-hour revalidation
 export const revalidate = 86400;
@@ -193,7 +192,6 @@ export default function BrainTumorSurgeryConditionPage() {
   return (
     <main className="bg-white">
       <SchemaScript id="brain-tumor-condition-jsonld" data={schemaData} />
-      <PhysicianSchema />
 
       <section className="bg-slate-900 py-12 text-white">
         <div className="mx-auto max-w-5xl px-4">

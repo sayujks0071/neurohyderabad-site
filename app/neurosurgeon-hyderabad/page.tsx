@@ -14,12 +14,12 @@ export const dynamicParams = false;
 export const revalidate = 86400;
 
 export const metadata = {
-  title: "Best Neurosurgeon in Hyderabad | Endoscopic Spine Surgery | Dr. Sayuj Krishnan",
+  title: "Best Neurosurgeon Hyderabad | Endoscopic Spine Specialist",
   description:
-    "Consult Dr. Sayuj Krishnan, neurosurgeon in Hyderabad specializing in full endoscopic spine & minimally invasive brain surgery. OPD timings, directions, FAQs, and WhatsApp booking.",
+    "Consult Dr. Sayuj Krishnan, neurosurgeon in Hyderabad. Expert in endoscopic spine & minimally invasive brain surgery. OPD timings & booking.",
   alternates: { canonical: "https://www.drsayuj.info/neurosurgeon-hyderabad" },
   openGraph: {
-    title: "Best Neurosurgeon in Hyderabad | Endoscopic Spine Surgery | Dr. Sayuj Krishnan",
+    title: "Best Neurosurgeon Hyderabad | Endoscopic Spine Specialist",
     description:
       "Consult Dr. Sayuj Krishnan for full endoscopic spine and minimally invasive brain surgery in Hyderabad. OPD timings, directions, and WhatsApp booking.",
     url: "https://www.drsayuj.info/neurosurgeon-hyderabad",
@@ -117,6 +117,7 @@ export default function Page() {
             <li>Endoscopic cervical & lumbar discectomy, foraminotomy, ULBD</li>
             <li>Cervical/lumbar radiculopathy, spinal stenosis, disc herniation</li>
             <li>Trigeminal neuralgia (MVD), epilepsy surgery pathways</li>
+            <li><Link href="/services/brain-tumor-surgery-hyderabad" className="text-blue-600 hover:underline">Advanced Brain Tumor Surgery</Link> (Neuronavigation)</li>
           </ul>
         </div>
       </section>
