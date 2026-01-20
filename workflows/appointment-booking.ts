@@ -9,7 +9,7 @@
  * - Follow-up care coordination
  */
 
-import { sleep, FatalError, getStepMetadata, fetch } from "workflow";
+import { sleep, FatalError, fetch } from "workflow";
 import { generateText } from "ai";
 import type { BookingData, EmailResult } from "@/packages/appointment-form/types";
 import { sendConfirmationEmail as sendAppointmentConfirmationEmail, sendAdminNotificationEmail } from "@/src/lib/appointments/email";
@@ -584,10 +584,7 @@ async function sendBookingConfirmationEmail(
 ): Promise<EmailResult> {
   "use step";
 
-  const { stepId } = getStepMetadata();
-  console.log(
-    `[Appointment Workflow] Sending confirmation email to ${booking.email} (idempotencyKey: ${stepId})`
-  );
+  console.log(`[Appointment Workflow] Sending confirmation email to ${booking.email}`);
 
   return await sendAppointmentConfirmationEmail(booking, confirmationMessage);
 }
@@ -677,9 +674,7 @@ async function scheduleReminders(
 ): Promise<boolean> {
   "use step";
 
-  // Use stepId as base for idempotency keys
-  const { stepId } = getStepMetadata();
-  console.log(`[Appointment Workflow] Scheduling reminders for ${bookingId} (stepId: ${stepId})`);
+  console.log(`[Appointment Workflow] Scheduling reminders for ${bookingId}`);
 
   const appointmentDateTime = buildAppointmentDateTime(date, time);
   if (!appointmentDateTime) {
@@ -700,8 +695,8 @@ async function scheduleReminders(
   for (const reminder of reminders) {
     const reminderTime = new Date(appointmentDateTime.getTime() - reminder.offsetMs);
     if (reminderTime > new Date()) {
-      // Use stepId + reminder type as idempotency key to prevent duplicate reminders
-      const idempotencyKey = `${stepId}-${reminder.type}`;
+      // Use bookingId + reminder type as idempotency key to prevent duplicate reminders
+      const idempotencyKey = `${bookingId}-${reminder.type}`;
       
       await inngest.send({
         id: idempotencyKey, // Inngest uses 'id' for idempotency

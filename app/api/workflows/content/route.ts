@@ -87,11 +87,16 @@ export async function POST(request: NextRequest) {
         // Optimize content and wait for result
         const run = await start(optimizeContent, [content, keyword]);
         const result = await run.returnValue;
+        const { message: resultMessage, ...rest } = result as {
+          message?: string;
+          [key: string]: unknown;
+        };
 
         return NextResponse.json({
           message: "Content SEO analysis complete",
           runId: run.runId,
-          ...result,
+          ...rest,
+          ...(resultMessage ? { resultMessage } : {}),
         });
       }
 
@@ -115,11 +120,16 @@ export async function POST(request: NextRequest) {
         // Schedule content
         const run = await start(scheduleContent, [slug, date]);
         const result = await run.returnValue;
+        const { message: resultMessage, ...rest } = result as {
+          message?: string;
+          [key: string]: unknown;
+        };
 
         return NextResponse.json({
           message: "Content scheduling processed",
           runId: run.runId,
-          ...result,
+          ...rest,
+          ...(resultMessage ? { resultMessage } : {}),
         });
       }
 
