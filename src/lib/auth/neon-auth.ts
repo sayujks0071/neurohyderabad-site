@@ -25,7 +25,7 @@ export const neonClient = {
     },
     signOut: async () => undefined
   }
-};
+} as any;
 
 // Auth helper functions
 export const auth = {
