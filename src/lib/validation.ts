@@ -59,3 +59,26 @@ export function validateLeadPayload(payload: {
   }
   return { isValid: true };
 }
+
+// 🛡️ Sentinel: Sanitize user input before sending to LLM to prevent prompt injection
+export function sanitizeForPrompt(input: unknown, maxLength: number = 1000): string {
+  if (input === null || input === undefined) return "";
+
+  // 1. Convert to string and trim whitespace
+  let sanitized = String(input).trim();
+
+  // 2. Remove null bytes and other dangerous control characters
+  // Keep \n (10) and \r (13) for formatting, and \t (9)
+  // Remove other non-printable characters in ASCII range 0-31 and 127
+  sanitized = sanitized.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, "");
+
+  // 3. Normalize newlines to single \n to prevent layout manipulation
+  sanitized = sanitized.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+
+  // 4. Enforce max length to prevent token exhaustion / DoS
+  if (sanitized.length > maxLength) {
+    sanitized = sanitized.slice(0, maxLength);
+  }
+
+  return sanitized;
+}
