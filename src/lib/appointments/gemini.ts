@@ -17,6 +17,15 @@ The message must follow these rules:
 const fallbackMessage = (data: BookingData) =>
   `Thank you for your request for an appointment on ${data.appointmentDate} at ${data.appointmentTime}. We have received your details and our team will contact you shortly to confirm the appointment.`;
 
+// 🛡️ Sentinel: Sanitize input to prevent prompt injection and token exhaustion
+function sanitizeForPrompt(text: string | number | undefined | null, maxLength = 500): string {
+  if (text === null || text === undefined) return "";
+  const str = String(text);
+  // Remove control characters (including newlines) to prevent structure injection
+  // and truncate to prevent token exhaustion
+  return str.replace(/[\x00-\x1F\x7F]/g, " ").trim().substring(0, maxLength);
+}
+
 export async function generateBookingConfirmation(
   data: BookingData
 ): Promise<{ message: string; usedAI: boolean }> {
