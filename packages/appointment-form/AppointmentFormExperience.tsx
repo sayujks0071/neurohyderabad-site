@@ -6,7 +6,6 @@ import { ToastProvider, useToast } from "./ToastContext";
 import BookingForm from "./BookingForm";
 import Confirmation from "./Confirmation";
 import Faq from "./Faq";
-import LoadingOverlay from "./LoadingOverlay";
 import MapSection from "./MapSection";
 import { trackConversionOnly } from "@/src/lib/google-ads-conversion";
 
@@ -89,10 +88,6 @@ function AppointmentFormContent({
 
   return (
     <div className="relative">
-      <LoadingOverlay
-        isLoading={isLoading}
-        message="Sending..."
-      />
       {view === "form" && (
         <>
           <BookingForm onSubmit={submitForm} initialData={bookingData} />
