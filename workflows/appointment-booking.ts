@@ -17,6 +17,7 @@ import { buildWebhookPayload, notifyAppointmentWebhooks } from "@/src/lib/appoin
 import { submitToGoogleSheets } from "@/src/lib/google-sheets";
 import { getTextModel, hasAIConfig } from "@/src/lib/ai/gateway";
 import { inngest } from "@/src/lib/inngest";
+import { appointments } from "@/src/lib/db";
 
 interface PatientInfo {
   name: string;
@@ -571,8 +572,31 @@ async function createBookingRecord(
 
   console.log(`[Appointment Workflow] Creating booking record ${bookingId}`);
 
-  // In production, this would save to database
-  console.log(`Booking ${bookingId} created for ${patientInfo.name} on ${date} at ${time}`);
+  try {
+    await appointments.create({
+      patient_name: patientInfo.name,
+      patient_email: patientInfo.email,
+      patient_phone: patientInfo.phone,
+      preferred_date: date,
+      preferred_time: time,
+      appointment_type: patientInfo.appointmentType,
+      chief_complaint: patientInfo.chiefComplaint,
+      intake_notes: patientInfo.intakeNotes,
+      patient_age: patientInfo.age ? Number(patientInfo.age) : undefined,
+      patient_gender: patientInfo.gender,
+      pain_score: patientInfo.painScore,
+      mri_scan_available: patientInfo.mriScanAvailable,
+      has_emergency_symptoms: patientInfo.hasEmergencySymptoms,
+      source: patientInfo.source,
+      workflow_run_id: bookingId,
+      confirmation_message: patientInfo.confirmationMessage,
+      used_ai_confirmation: patientInfo.usedAI,
+    });
+    console.log(`Booking ${bookingId} persisted to database.`);
+  } catch (error) {
+    console.error(`[Appointment Workflow] Failed to persist booking ${bookingId}:`, error);
+    // Non-fatal, continue workflow
+  }
 }
 
 /**
