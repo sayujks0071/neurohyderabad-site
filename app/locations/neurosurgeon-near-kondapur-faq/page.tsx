@@ -2,6 +2,9 @@ import React from 'react';
 import Link from 'next/link';
 import { getLocationById } from "@/src/data/locations";
 import { LocationNAPCard } from "@/src/components/locations/LocationNAPCard";
+import { LocationCTAs } from "@/src/components/locations/LocationCTAs";
+import { LocationMapEmbed } from "@/src/components/locations/LocationMapEmbed";
+import { LocalPathways } from "@/src/components/locations/LocalPathways";
 import { LocationSchema } from "@/src/components/locations/LocationSchema";
 import { notFound } from "next/navigation";
 import ReviewedBy from '@/app/_components/ReviewedBy';
@@ -51,7 +54,9 @@ const FAQ = [
 
 export default function NeurosurgeonNearKondapurFAQPage() {
   // Mapping Kondapur to Hitech City as it is the closest and most relevant cluster
-  const location = getLocationById("hitech-city");
+  // But strictly using 'kondapur' location data if available might be better if it exists.
+  // We have 'kondapur' in locations.ts. Let's use it.
+  const location = getLocationById("kondapur") || getLocationById("hitech-city");
 
   if (!location) {
     return notFound();
@@ -92,6 +97,10 @@ export default function NeurosurgeonNearKondapurFAQPage() {
         care at Yashoda Hospital Malakpet. This FAQ addresses common questions about accessing neurosurgical care from Kondapur.
       </p>
 
+      <div className="mb-12">
+         <LocationCTAs location={location} />
+      </div>
+
       <h2 className="text-2xl font-bold mb-6 text-gray-900">Frequently Asked Questions</h2>
       
       <div className="space-y-6 mb-12">
@@ -115,41 +124,13 @@ export default function NeurosurgeonNearKondapurFAQPage() {
           </div>
         </div>
         
-        <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-          <h3 className="text-xl font-semibold mb-4 text-blue-800">By Metro</h3>
-          <div className="space-y-2 text-sm text-gray-700">
-            <p><strong>Route:</strong> Hitech City Metro → Malakpet Metro</p>
-            <p><strong>Travel Time:</strong> 35-45 minutes</p>
-            <p><strong>Walk:</strong> 5 minutes from Malakpet Metro to hospital</p>
-            <p><strong>Frequency:</strong> Every 5-10 minutes</p>
-          </div>
+        <div>
+           <LocationMapEmbed location={location} />
         </div>
       </div>
 
-      <h2 className="text-2xl font-bold mb-6 text-gray-900">Services Available Near Kondapur</h2>
-      
-      <div className="bg-green-50 rounded-lg p-6 mb-8 border border-green-100">
-        <h3 className="text-lg font-semibold mb-4 text-green-800">Neurosurgical Services</h3>
-        <div className="grid md:grid-cols-2 gap-4 text-green-900">
-          <div>
-            <h4 className="font-semibold mb-2">Spine Surgery</h4>
-            <ul className="text-sm space-y-1">
-              <li>• Endoscopic discectomy</li>
-              <li>• Spinal fusion (TLIF/ACDF)</li>
-              <li>• Spinal decompression</li>
-              <li>• Spinal tumor surgery</li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-semibold mb-2">Brain Surgery</h4>
-            <ul className="text-sm space-y-1">
-              <li>• Brain tumor surgery</li>
-              <li>• Trigeminal neuralgia treatment</li>
-              <li>• Hydrocephalus treatment</li>
-              <li>• Aneurysm surgery</li>
-            </ul>
-          </div>
-        </div>
+      <div className="mb-12">
+        <LocalPathways mode="location" locationId={location.id} />
       </div>
 
       <h2 className="text-2xl font-bold mb-6 text-gray-900">Patient Success Stories from Kondapur</h2>
@@ -167,46 +148,8 @@ export default function NeurosurgeonNearKondapurFAQPage() {
       <div className="bg-red-50 rounded-lg p-6 mb-12 border border-red-100">
         <h3 className="text-xl font-semibold mb-4 text-red-800">24/7 Emergency Services</h3>
         <div className="space-y-3 text-red-900">
-          <div className="flex items-center">
-            <span className="text-red-600 mr-3">📞</span>
-            <div>
-              <strong>Emergency Hotline:</strong> <a href="tel:+919778280044" className="hover:underline">+91 97782 80044</a>
-            </div>
-          </div>
-          <div className="flex items-center">
-            <span className="text-red-600 mr-3">🏥</span>
-            <div>
-              <strong>Hospital:</strong> Yashoda Hospital Malakpet Emergency Department
-            </div>
-          </div>
-          <div className="flex items-center">
-            <span className="text-red-600 mr-3">📍</span>
-            <div>
-              <strong>Address:</strong> OPD Block, Room No 317, Yashoda Hospital, Malakpet
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="bg-blue-50 rounded-lg p-6 mt-8 border border-blue-100">
-        <h2 className="text-2xl font-bold mb-4 text-blue-800">Ready to Consult with Dr. Sayuj?</h2>
-        <p className="mb-6 text-blue-900">
-          Get expert neurosurgical care accessible from Kondapur. Dr. Sayuj offers personalized treatment 
-          with advanced minimally invasive techniques and same-day discharge options.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4">
-          <Link 
-            href="/appointments" 
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold text-center transition-colors"
-          >
-            Book Consultation
-          </Link>
-          <Link 
-            href="/contact" 
-            className="bg-white hover:bg-gray-50 text-blue-600 border-2 border-blue-600 px-6 py-3 rounded-lg font-semibold text-center transition-colors"
-          >
-            Get Directions
-          </Link>
+           <p className="font-medium">For urgent neurosurgical care, contact our emergency line immediately.</p>
+           <LocationCTAs location={location} className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-2" />
         </div>
       </div>
 
@@ -219,7 +162,7 @@ export default function NeurosurgeonNearKondapurFAQPage() {
         <MedicalCitations />
       </div>
 
-      <LocationPageTracker location="hitech-city" />
+      <LocationPageTracker location={location.id} />
     </main>
   );
 }

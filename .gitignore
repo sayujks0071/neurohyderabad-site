@@ -95,3 +95,4 @@ service_account_credentials.json
 !package.json
 !tsconfig.json
 !jsconfig.json
+.swc/

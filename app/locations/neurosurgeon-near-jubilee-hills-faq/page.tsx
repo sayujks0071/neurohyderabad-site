@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { getLocationById } from "@/src/data/locations";
 import { LocationNAPCard } from "@/src/components/locations/LocationNAPCard";
+import { LocationCTAs } from "@/src/components/locations/LocationCTAs";
 import { LocationSchema } from "@/src/components/locations/LocationSchema";
 import { LocalPathways } from "@/src/components/locations/LocalPathways";
 import { notFound } from "next/navigation";
@@ -92,6 +93,10 @@ export default function NeurosurgeonNearJubileeHillsFAQPage() {
         care at Yashoda Hospital Malakpet. This FAQ addresses common questions about accessing neurosurgical care from Jubilee Hills.
       </p>
 
+      <div className="mb-12">
+        <LocationCTAs location={location} />
+      </div>
+
       <h2 className="text-2xl font-bold mb-6 text-gray-900">Frequently Asked Questions</h2>
       
       <div className="space-y-6 mb-12">
@@ -168,24 +173,8 @@ export default function NeurosurgeonNearJubileeHillsFAQPage() {
       <div className="bg-red-50 rounded-lg p-6 mb-12 border border-red-100">
         <h3 className="text-xl font-semibold mb-4 text-red-800">24/7 Emergency Services</h3>
         <div className="space-y-3 text-red-900">
-          <div className="flex items-center">
-            <span className="text-red-600 mr-3">📞</span>
-            <div>
-              <strong>Emergency Hotline:</strong> <a href="tel:+919778280044" className="hover:underline">+91 97782 80044</a>
-            </div>
-          </div>
-          <div className="flex items-center">
-            <span className="text-red-600 mr-3">🏥</span>
-            <div>
-              <strong>Hospital:</strong> Yashoda Hospital Malakpet Emergency Department
-            </div>
-          </div>
-          <div className="flex items-center">
-            <span className="text-red-600 mr-3">📍</span>
-            <div>
-              <strong>Address:</strong> OPD Block, Room No 317, Yashoda Hospital, Malakpet
-            </div>
-          </div>
+           <p className="font-medium">For urgent neurosurgical care, contact our emergency line immediately.</p>
+           <LocationCTAs location={location} className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-2" />
         </div>
       </div>
 
@@ -195,20 +184,7 @@ export default function NeurosurgeonNearJubileeHillsFAQPage() {
           Get expert neurosurgical care accessible from Jubilee Hills. Dr. Sayuj offers personalized treatment 
           with advanced minimally invasive techniques and same-day discharge options.
         </p>
-        <div className="flex flex-col sm:flex-row gap-4">
-          <Link 
-            href="/appointments" 
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold text-center transition-colors"
-          >
-            Book Consultation
-          </Link>
-          <Link 
-            href="/contact" 
-            className="bg-white hover:bg-gray-50 text-blue-600 border-2 border-blue-600 px-6 py-3 rounded-lg font-semibold text-center transition-colors"
-          >
-            Get Directions
-          </Link>
-        </div>
+        <LocationCTAs location={location} className="grid-cols-1 sm:grid-cols-2" />
       </div>
 
       <div className="mt-12">
