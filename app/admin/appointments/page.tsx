@@ -1,8 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { MessageCircle, RefreshCw, CheckCircle, XCircle, Clock } from 'lucide-react';
+import { RefreshCw, CheckCircle, XCircle, Clock } from 'lucide-react';
 import { generateWhatsappUrl } from './utils';
+import { WhatsAppIcon } from '@/src/components/WhatsAppIcon';
 
 export const dynamic = 'force-dynamic';
 
@@ -42,6 +43,18 @@ const normalizeWhatsappStatus = (status: string): WhatsappStatus => {
   return 'Pending';
 };
 
+const formatDate = (dateStr: string) => {
+  try {
+    return new Date(dateStr).toLocaleDateString('en-IN', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+    });
+  } catch {
+    return dateStr;
+  }
+};
+
 export default function AppointmentsPage() {
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -76,7 +89,7 @@ export default function AppointmentsPage() {
       id: appointment.id,
       fullName: appointment.patient_name,
       phone: appointment.patient_phone,
-      preferredDate: appointment.preferred_date,
+      preferredDate: formatDate(appointment.preferred_date),
       status: normalizeWhatsappStatus(appointment.status),
     });
     window.open(url, '_blank');
@@ -94,18 +107,6 @@ export default function AppointmentsPage() {
       }
     } catch (err) {
       console.error('Failed to update status:', err);
-    }
-  };
-
-  const formatDate = (dateStr: string) => {
-    try {
-      return new Date(dateStr).toLocaleDateString('en-IN', {
-        day: 'numeric',
-        month: 'short',
-        year: 'numeric',
-      });
-    } catch {
-      return dateStr;
     }
   };
 
@@ -186,11 +187,11 @@ export default function AppointmentsPage() {
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => sendWhatsapp(appointment)}
-                        className="flex items-center gap-1 bg-[#25D366] hover:bg-[#128C7E] text-white font-medium py-1 px-2 rounded text-xs transition-colors"
-                        title="Send WhatsApp"
+                        className="flex items-center gap-1 !bg-[#25D366] hover:!bg-[#128C7E] text-white font-medium py-1 px-2 rounded text-xs transition-colors"
+                        title="Confirm via WhatsApp"
                       >
-                        <MessageCircle size={14} />
-                        <span>WhatsApp</span>
+                        <WhatsAppIcon size={14} />
+                        <span>Confirm via WhatsApp</span>
                       </button>
                       {appointment.status === 'pending' && (
                         <button

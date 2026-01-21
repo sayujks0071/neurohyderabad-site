@@ -1,9 +1,9 @@
 import { expect, test, describe } from 'vitest';
 import { generateWhatsappUrl } from './utils';
-import { Appointment } from './data';
+import { WhatsappAppointment } from './types';
 
 describe('generateWhatsappUrl', () => {
-  const basePatient: Appointment = {
+  const basePatient: WhatsappAppointment = {
     id: '1',
     fullName: 'Test User',
     phone: '',
