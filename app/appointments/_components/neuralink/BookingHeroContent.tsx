@@ -1,4 +1,5 @@
 import { Activity } from "lucide-react";
+import Link from 'next/link';
 
 export default function BookingHeroContent() {
   return (
@@ -21,7 +22,7 @@ export default function BookingHeroContent() {
         report interpretation, and a fast confirmation call from our care team.
         <br/><br/>
         <span className="text-sm">
-          Specializing in <a href="/services/brain-tumor-surgery-hyderabad" className="text-blue-600 hover:underline">Brain Tumor Surgery</a>, Endoscopic Spine Procedures, and more.
+          Specializing in <Link href="/services/brain-tumor-surgery-hyderabad" className="text-blue-600 hover:underline">Brain Tumor Surgery</Link>, Endoscopic Spine Procedures, and more.
         </span>
       </p>
     </>

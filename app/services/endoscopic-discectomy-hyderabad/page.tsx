@@ -9,6 +9,8 @@ import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import { getServiceSources } from '../sources';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
+import MedicalWebPageSchema from '../../components/schemas/MedicalWebPageSchema';
+import FAQPageSchema from '@/app/_components/FAQPageSchema';
 
 const baseMetadata = makeMetadata({
   title: 'Endoscopic Discectomy Hyderabad | Dr. Sayuj Krishnan',
@@ -45,8 +47,43 @@ export const metadata: Metadata = {
 const ARTICLE_SOURCES = getServiceSources('endoscopic-discectomy-hyderabad');
 
 export default function EndoscopicDiscectomyPage() {
+  const faqs = [
+    {
+      question: "How long does endoscopic discectomy surgery take?",
+      answer: "Endoscopic discectomy typically takes 45-90 minutes depending on the complexity of the case. The procedure is performed under general anesthesia and uses a small endoscope to remove the herniated disc material through a tiny 8-10mm incision."
+    },
+    {
+      question: "What is the recovery time after endoscopic discectomy?",
+      answer: "Most patients can return to desk work within 1-2 weeks after endoscopic discectomy. Physical jobs may require 4-8 weeks. The procedure allows for same-day or 1-night hospital stay, with most patients walking the same day. Full recovery typically takes 4-6 weeks."
+    },
+    {
+      question: "Is endoscopic discectomy better than open surgery?",
+      answer: "Endoscopic discectomy offers several advantages over traditional open surgery: smaller incision (8-10mm vs 3-4cm), less muscle damage, reduced blood loss, lower infection risk, faster recovery, and same-day discharge. Success rates are comparable (85-90%) with less post-operative pain."
+    },
+    {
+      question: "What are the risks of endoscopic discectomy?",
+      answer: "Endoscopic discectomy is generally safe with low complication rates. Potential risks include infection (<1%), nerve injury (<1%), dural tear (<2%), and recurrence (5-10%). Dr. Sayuj Krishnan's experience with 1000+ endoscopic procedures results in excellent safety outcomes."
+    }
+  ];
+
+  const breadcrumbs = [
+    { name: 'Home', path: '/' },
+    { name: 'Services', path: '/services' },
+    { name: 'Endoscopic Discectomy', path: '/services/endoscopic-discectomy-hyderabad' },
+  ];
+
   return (
     <div className="min-h-screen bg-white">
+      <MedicalWebPageSchema
+        title="Endoscopic Discectomy Hyderabad | Dr. Sayuj Krishnan"
+        description="Expert endoscopic discectomy for herniated discs in Hyderabad. Same-day surgery, faster recovery, less pain with Dr. Sayuj Krishnan."
+        pageSlug="/services/endoscopic-discectomy-hyderabad"
+        pageType="service"
+        serviceOrCondition="Endoscopic Discectomy"
+        breadcrumbs={breadcrumbs}
+      />
+      <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/endoscopic-discectomy-hyderabad`} />
+
       <div className="container mx-auto px-4 py-16">
         <header className="text-center mb-8">
           <h1 className="text-4xl font-bold mb-3">Endoscopic Discectomy in Hyderabad</h1>
@@ -316,51 +353,6 @@ export default function EndoscopicDiscectomyPage() {
         {/* Service Page Tracking */}
         <ServicePageTracker service="endoscopic-discectomy" />
       </div>
-      
-      {/* FAQ Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": "How long does endoscopic discectomy surgery take?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Endoscopic discectomy typically takes 45-90 minutes depending on the complexity of the case. The procedure is performed under general anesthesia and uses a small endoscope to remove the herniated disc material through a tiny 8-10mm incision."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What is the recovery time after endoscopic discectomy?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Most patients can return to desk work within 1-2 weeks after endoscopic discectomy. Physical jobs may require 4-8 weeks. The procedure allows for same-day or 1-night hospital stay, with most patients walking the same day. Full recovery typically takes 4-6 weeks."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Is endoscopic discectomy better than open surgery?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Endoscopic discectomy offers several advantages over traditional open surgery: smaller incision (8-10mm vs 3-4cm), less muscle damage, reduced blood loss, lower infection risk, faster recovery, and same-day discharge. Success rates are comparable (85-90%) with less post-operative pain."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What are the risks of endoscopic discectomy?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Endoscopic discectomy is generally safe with low complication rates. Potential risks include infection (<1%), nerve injury (<1%), dural tear (<2%), and recurrence (5-10%). Dr. Sayuj Krishnan's experience with 1000+ endoscopic procedures results in excellent safety outcomes."
-                }
-              }
-            ]
-          })
-        }}
-      />
     </div>
   );
 }

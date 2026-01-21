@@ -19,7 +19,7 @@ export default function Page() {
     <main className="mx-auto max-w-3xl px-4 py-12">
       <h1 className="text-3xl md:text-4xl font-bold mb-6">Does Endoscopic Spine Surgery Work for Sciatica in Hyderabad?</h1>
       <p className="text-lg text-gray-700 mb-6">
-        Sciatica refers to leg pain, tingling or numbness caused by compression of the sciatic nerve—most often from a slipped (herniated) disc or
+        <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 hover:underline">Sciatica</Link> refers to leg pain, tingling or numbness caused by compression of the sciatic nerve—most often from a slipped (herniated) disc or
         spinal stenosis. When pressure on the nerve persists, pain can travel from the back or buttock down the leg, sometimes with weakness or
         difficulty walking. In Hyderabad, minimally invasive endoscopic techniques are frequently used to relieve this pressure through tiny incisions.
       </p>

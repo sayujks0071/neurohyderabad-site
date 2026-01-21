@@ -70,6 +70,10 @@ const FAQ = [
   {
     q: "What is the cost of sciatica treatment in Hyderabad?",
     a: "The cost depends on the procedure. A simple nerve root block may cost ₹15,000–₹25,000, while endoscopic spine surgery typically ranges from ₹1.5 Lakhs to ₹2.5 Lakhs depending on the hospital category and implant requirements."
+  },
+  {
+    q: "Is my office chair causing my sciatica?",
+    a: "Prolonged sitting is a major risk factor. Poor ergonomics can increase pressure on lumbar discs by 40%, potentially triggering or worsening sciatica. We recommend ergonomic adjustments and taking breaks every 30 minutes."
   }
 ];
 
@@ -318,6 +322,20 @@ export default function SciaticaTreatmentPage() {
       </section>
 
       <section className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-blue-700">Patient Education Resources</h2>
+        <div className="grid md:grid-cols-2 gap-6">
+          <Link href="/blog/sciatica-pain-management-hyderabad" className="block p-6 bg-white border border-gray-200 rounded-lg hover:shadow-md transition-shadow">
+            <h3 className="font-bold text-lg text-blue-800 mb-2">5 Ways to Manage Sciatica at Home</h3>
+            <p className="text-gray-600 text-sm">Learn effective home remedies and exercises to reduce nerve pain while waiting for your appointment.</p>
+          </Link>
+          <Link href="/blog/does-endoscopic-spine-surgery-work-for-sciatica-hyderabad" className="block p-6 bg-white border border-gray-200 rounded-lg hover:shadow-md transition-shadow">
+            <h3 className="font-bold text-lg text-blue-800 mb-2">Endoscopic Surgery for Sciatica</h3>
+            <p className="text-gray-600 text-sm">Understand how minimally invasive surgery can permanently relieve sciatica when medicines fail.</p>
+          </Link>
+        </div>
+      </section>
+
+      <section className="mb-12">
         <h2 className="text-2xl font-semibold mb-6 text-blue-700">Book Your Consultation</h2>
         <div className="bg-blue-50 p-8 rounded-lg text-center">
           <p className="text-lg text-gray-700 mb-6">
@@ -375,7 +393,6 @@ export default function SciaticaTreatmentPage() {
         faqs={FAQ.map(item => ({ question: item.q, answer: item.a }))}
         pageUrl={`${SITE_URL}/conditions/sciatica-pain-treatment-hyderabad/`}
       />
-      <BreadcrumbSchema items={breadcrumbs} />
 
       <AuthorByline
         publishedOn="2025-01-03"
