@@ -3,7 +3,6 @@ import Link from "next/link";
 import type { Metadata } from 'next';
 import MedicalWebPageSchema from "../../components/schemas/MedicalWebPageSchema";
 import FAQPageSchema from "@/app/_components/FAQPageSchema";
-import BreadcrumbSchema from "../../components/schemas/BreadcrumbSchema";
 import { SITE_URL } from "../../../src/lib/seo";
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import NAP from '@/app/_components/NAP';
@@ -12,6 +11,9 @@ import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import { sources } from '../../blog/sources';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
+import TrustProof from '@/app/_components/TrustProof';
+import { patientStories } from '@/src/content/stories';
+import CostTransparencySection from '@/src/components/CostTransparencySection';
 
 const baseMetadata = makeMetadata({
   title: "Slip Disc Treatment in Hyderabad | Endoscopic Discectomy | Dr. Sayuj Krishnan",
@@ -65,12 +67,40 @@ const FAQ = [
   }
 ];
 
+const slipDiscCosts = [
+  {
+    procedure: "Conservative Management",
+    range: "₹5,000 - ₹15,000",
+    recovery: "2-4 Weeks",
+    includes: ["Consultation", "MRI Scan (approx)", "Medications (1 week)", "Physiotherapy Assessment"]
+  },
+  {
+    procedure: "Nerve Root Block (Injection)",
+    range: "₹20,000 - ₹35,000",
+    recovery: "Same Day Discharge",
+    includes: ["Procedure Charges", "C-Arm Guidance", "Day Care Stay", "Post-proc medicines"]
+  },
+  {
+    procedure: "Endoscopic Discectomy",
+    range: "₹2,50,000 - ₹4,00,000",
+    recovery: "1-2 Weeks",
+    includes: ["Surgery", "Hospital Stay (1-2 days)", "Medications", "Follow-up"]
+  }
+];
+
 export default function SlipDiscTreatmentPage() {
   const breadcrumbs = [
     { name: "Home", path: "/" },
     { name: "Conditions", path: "/conditions/" },
     { name: "Slip Disc Treatment", path: "/conditions/slip-disc-treatment-hyderabad/" }
   ];
+
+  // Filter relevant stories
+  const spineStories = patientStories.filter(story =>
+    story.tags.includes('spine') ||
+    story.tags.includes('slip-disc') ||
+    story.tags.includes('sciatica')
+  ).slice(0, 2);
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-10">
@@ -168,6 +198,11 @@ export default function SlipDiscTreatmentPage() {
         </div>
       </div>
 
+      {/* Trust Signals Section */}
+      <div className="mb-12">
+        <TrustProof stories={spineStories} serviceType="spine" className="bg-gradient-to-br from-white to-blue-50/50" />
+      </div>
+
       {/* New Conservative Care Section */}
       <section className="mb-12">
         <h2 className="text-3xl font-bold text-gray-900 mb-6">Comprehensive Care Pathway</h2>
@@ -243,6 +278,11 @@ export default function SlipDiscTreatmentPage() {
           </div>
         </div>
       </section>
+
+      <CostTransparencySection
+        costs={slipDiscCosts}
+        disclaimer="Estimates for general guidance. Final cost depends on hospital category, room choice, and specific implants used. Insurance cashless facility available at Yashoda Hospital."
+      />
 
       <section className="mb-12 rounded-lg border border-green-200 bg-green-50 p-6">
         <h2 className="text-2xl font-semibold mb-4 text-green-800">Worried about general anaesthesia?</h2>
@@ -348,7 +388,6 @@ export default function SlipDiscTreatmentPage() {
         faqs={FAQ.map(item => ({ question: item.q, answer: item.a }))}
         pageUrl={`${SITE_URL}/conditions/slip-disc-treatment-hyderabad/`}
       />
-      <BreadcrumbSchema items={breadcrumbs} />
 
       <AuthorByline
         publishedOn="2025-02-15"
