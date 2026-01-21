@@ -51,3 +51,5 @@ To change the schedule, you must edit the cron expression in the `on.schedule` s
 
 - **Issue not created:** Check the Action logs. Common reasons include GitHub API rate limits or the issue already existing.
 - **Wrong Schedule:** Ensure you've converted IST to UTC correctly using a converter. GitHub Actions use UTC.
+
+<!-- v1.1 -->

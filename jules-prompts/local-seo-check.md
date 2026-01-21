@@ -6,11 +6,11 @@ Verify the Local SEO signals for "Dr. Sayuj Krishnan".
 3. Check that the `LocalBusiness` or `Physician` schema is validating correctly (use the `json-ld-validator` workflow logic or scripts).
 
 **Action:**
-- Run `npm run check:schemas` to validate JSON-LD schema on key pages.
+- Run `pnpm run check:schemas` to validate JSON-LD schema on key pages.
 - Ensure the Google Maps embed is working and correct.
 - If errors are found, fix them in a PR.
 
 <!-- Jules Automation -->
 <!-- Managed by Jules -->
 
-<!-- v1.0 -->
+<!-- v1.1 -->
