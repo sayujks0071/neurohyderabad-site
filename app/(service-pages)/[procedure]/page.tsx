@@ -763,17 +763,7 @@ export default async function ProcedurePage({ params }: { params: Promise<{ proc
 
         {location && (
             <div className="mt-16 border-t pt-10">
-                <h2 className="text-2xl font-bold mb-6">Visit Our Clinics</h2>
-                <div className="grid md:grid-cols-2 gap-8">
-                    <div>
-                        <p className="mb-4 text-gray-700">
-                            Looking for {entry.name.toLowerCase()} in your area? We serve patients across Hyderabad.
-                        </p>
-                        <Link href="/locations" className="text-blue-700 hover:underline font-semibold">
-                            View all locations &rarr;
-                        </Link>
-                    </div>
-                </div>
+                 <LocalPathways mode="service" currentSlug={key} />
             </div>
         )}
       </main>

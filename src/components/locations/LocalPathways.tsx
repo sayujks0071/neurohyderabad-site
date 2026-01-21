@@ -7,11 +7,20 @@ type Mode = 'location' | 'service' | 'condition';
 
 interface LocalPathwaysProps {
   mode?: Mode;
-  locationId?: string;
-  currentSlug?: string;
+  locationId?: string; // For mode='location'
+  currentSlug?: string; // For mode='service' or 'condition' (to exclude current page?)
   className?: string;
   location?: LocationData; // Legacy support
 }
+
+// Simple formatter for slugs if no mapping available
+const formatSlug = (slug: string) => {
+  return slug
+    .replace(/-hyderabad$/, '')
+    .split('-')
+    .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(' ');
+};
 
 export const LocalPathways: React.FC<LocalPathwaysProps> = ({
   mode,
@@ -51,7 +60,7 @@ export const LocalPathways: React.FC<LocalPathwaysProps> = ({
             </h3>
             <div className="space-y-3">
               {effectiveLocation.top_services_slugs.map(slug => {
-                 const title = slug.replace(/-hyderabad$/, '').split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+                 const title = formatSlug(slug);
                  return (
                   <Link key={slug} href={`/services/${slug}`} className={linkClass}>
                     <span className="font-medium text-gray-700 group-hover:text-blue-600 transition-colors">{title}</span>
@@ -70,7 +79,7 @@ export const LocalPathways: React.FC<LocalPathwaysProps> = ({
             </h3>
             <div className="space-y-3">
               {effectiveLocation.top_conditions_slugs.map(slug => {
-                 const title = slug.replace(/-hyderabad$/, '').split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+                 const title = formatSlug(slug);
                  const href = `/conditions/${slug}`;
                  return (
                   <Link key={slug} href={href} className={linkClass}>
@@ -97,11 +106,12 @@ export const LocalPathways: React.FC<LocalPathwaysProps> = ({
 
   // Mode: Service or Condition (showing locations)
   if (effectiveMode === 'service' || effectiveMode === 'condition') {
+    // Exclude 'hyderabad' as it's the main location, we want local areas
     const displayLocations = locations
         .filter(l => l.id !== 'hyderabad')
         .slice(0, 6);
 
-    const title = effectiveMode === 'service' ? 'Available at these Locations' : 'Where to Consult';
+    const title = effectiveMode === 'service' ? 'Visit Our Clinics' : 'Where to Consult';
 
     return (
       <div className={containerClass}>
@@ -109,13 +119,20 @@ export const LocalPathways: React.FC<LocalPathwaysProps> = ({
           <MapPin className="w-6 h-6 text-blue-600" />
           {title}
         </h3>
+        <p className="text-gray-600 mb-6">
+            Expert care available at locations across Hyderabad.
+        </p>
         <div className={gridClass}>
-          {displayLocations.map(loc => (
-            <Link key={loc.id} href={`/${loc.slug}`} className={linkClass}>
-              <span className="font-medium text-gray-700 group-hover:text-blue-600 transition-colors">{loc.areaServedName}</span>
-              <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-blue-600" />
-            </Link>
-          ))}
+          {displayLocations.map(loc => {
+             // Handle slugs that might be nested or simple
+             const href = loc.slug.startsWith('/') ? loc.slug : `/${loc.slug}`;
+             return (
+                <Link key={loc.id} href={href} className={linkClass}>
+                  <span className="font-medium text-gray-700 group-hover:text-blue-600 transition-colors">{loc.areaServedName}</span>
+                  <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-blue-600" />
+                </Link>
+             );
+          })}
         </div>
         <div className="mt-8 pt-6 border-t border-gray-100 flex justify-center">
              <Link

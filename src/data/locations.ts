@@ -302,6 +302,21 @@ export const locations: LocationData[] = [
   }
 ];
 
+export type LocationId =
+  | "secunderabad"
+  | "hitech-city"
+  | "banjara-hills"
+  | "gachibowli"
+  | "jubilee-hills"
+  | "malakpet"
+  | "hyderabad"
+  | "lb-nagar"
+  | "kukatpally"
+  | "manikonda"
+  | "nizampet"
+  | "kondapur"
+  | "kothapet";
+
 export function getLocationById(id: string): LocationData | undefined {
   return locations.find(loc => loc.id === id);
 }
