@@ -159,9 +159,6 @@ export default function RootLayout({
       <head>
         <link rel="dns-prefetch" href="https://edge.hypertune.com" />
         <link rel="preconnect" href="https://edge.hypertune.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://i.ytimg.com" />
-        {/* Optimize connection for YouTube thumbnails (loaded lazily but cross-origin) */}
-        <link rel="preconnect" href="https://i.ytimg.com" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.google-analytics.com" />
       </head>
