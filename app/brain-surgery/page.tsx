@@ -1,8 +1,36 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE_URL } from "../../src/lib/seo";
-import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
-import { serviceJsonLd } from "../../src/lib/seo";
+import MedicalWebPageSchema from "../components/schemas/MedicalWebPageSchema";
+import ExpandedFAQ from "../../src/components/ExpandedFAQ";
+
+const BRAIN_SURGERY_FAQS = [
+  {
+    question: "What is awake brain surgery and is it painful?",
+    answer: "Awake brain surgery allows us to monitor speech and motor functions while removing tumors. The brain itself feels no pain, and local anesthesia ensures you are comfortable throughout the procedure.",
+    category: "Awake Surgery"
+  },
+  {
+    question: "How long is the recovery after brain tumor surgery?",
+    answer: "Most patients spend 3-5 days in the hospital. You can usually return to light activities in 2-3 weeks and full activities in 4-6 weeks, depending on the tumor location and surgery type.",
+    category: "Recovery"
+  },
+  {
+    question: "Do you need to shave my entire head for surgery?",
+    answer: "No, in most cases, we only shave a small strip of hair along the incision line. This minimal shaving approach helps maintain your appearance while ensuring a sterile surgical field.",
+    category: "Procedure"
+  },
+  {
+    question: "How does neuronavigation make surgery safer?",
+    answer: "Neuronavigation works like a GPS for the brain, allowing us to precisely locate tumors and plan the safest entry point, minimizing damage to healthy brain tissue.",
+    category: "Technology"
+  },
+  {
+    question: "What is the success rate of ROSA DBS for Parkinson's?",
+    answer: "ROSA DBS offers sub-millimeter precision for electrode placement, leading to significant symptom improvement in over 90% of appropriately selected Parkinson's patients.",
+    category: "ROSA DBS"
+  }
+];
 
 export const metadata: Metadata = {
   title: "Brain Surgery Hyderabad | Awake Brain Surgery & Brain Tumor Surgery | Dr. Sayuj Krishnan",
@@ -51,22 +79,18 @@ export const metadata: Metadata = {
 };
 
 export default function BrainSurgeryPage() {
-  const brainServiceJsonLd = serviceJsonLd({
-    name: "Brain Surgery",
-    description: "Advanced brain surgery including awake brain surgery, brain tumor surgery, ROSA DBS, and microsurgical techniques with neuronavigation and intraoperative monitoring.",
-    url: `${SITE_URL}/brain-surgery`,
-    areaServed: "Hyderabad, Telangana, India"
-  });
-
   return (
     <>
-      <BreadcrumbSchema items={[
-        { name: "Home", path: "/" },
-        { name: "Brain Surgery", path: "/brain-surgery" }
-      ]} />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(brainServiceJsonLd) }}
+      <MedicalWebPageSchema
+        title="Brain Surgery Hyderabad | Awake Brain Surgery & Brain Tumor Surgery | Dr. Sayuj Krishnan"
+        description="Expert brain surgery in Hyderabad with Dr. Sayuj Krishnan. Specializing in awake brain surgery, brain tumor surgery, ROSA DBS, and advanced microsurgical techniques with neuronavigation."
+        pageSlug="/brain-surgery"
+        pageType="service"
+        serviceOrCondition="Brain Surgery"
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Brain Surgery", path: "/brain-surgery" }
+        ]}
       />
       
       <div className="min-h-screen bg-white">
@@ -478,6 +502,8 @@ export default function BrainSurgeryPage() {
           </div>
         </section>
 
+        <ExpandedFAQ faqs={BRAIN_SURGERY_FAQS} className="bg-white" />
+
         {/* Call to Action */}
         <section className="py-16 bg-blue-600 text-white">
           <div className="container mx-auto px-4">
@@ -508,4 +534,3 @@ export default function BrainSurgeryPage() {
     </>
   );
 }
-
