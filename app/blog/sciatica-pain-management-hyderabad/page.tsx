@@ -70,7 +70,7 @@ export default function SciaticaPainManagementPage() {
                 <span>8 min read</span>
               </div>
               <p className="text-xl text-gray-700 leading-relaxed">
-                Sciatica affects millions of people worldwide, causing debilitating pain that radiates from the lower back down through the leg. In Hyderabad, Dr. Sayuj Krishnan specializes in both conservative and surgical treatment of sciatica, helping patients return to pain-free living.
+                <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 hover:underline">Sciatica</Link> affects millions of people worldwide, causing debilitating pain that radiates from the lower back down through the leg. In Hyderabad, Dr. Sayuj Krishnan specializes in both conservative and surgical treatment of sciatica, helping patients return to pain-free living.
               </p>
             </header>
 

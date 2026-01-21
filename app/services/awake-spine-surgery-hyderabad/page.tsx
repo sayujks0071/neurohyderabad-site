@@ -12,9 +12,9 @@ import { getServiceSources } from '../sources';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 
 const baseMetadata = makeMetadata({
-  title: 'Awake Spine Surgery in Hyderabad | Endoscopic & Regional Anaesthesia',
+  title: 'Awake Spine Surgery in Hyderabad | Local Anesthesia Spine',
   description:
-    'Awake endoscopic spine surgery by Dr. Sayuj Krishnan for high-risk or elderly patients. Smaller incisions, regional anaesthesia, same-day discharge at Yashoda Hospital, Malakpet.',
+    'Awake endoscopic spine surgery for high-risk patients. Local anesthesia, no general anesthesia needed. Faster recovery & same-day discharge in Hyderabad.',
   canonicalPath: '/services/awake-spine-surgery-hyderabad',
 });
 

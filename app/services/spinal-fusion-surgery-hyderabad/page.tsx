@@ -8,7 +8,7 @@ import NAP from '@/app/_components/NAP';
 import { makeMetadata } from '@/app/_lib/meta';
 import AuthorByline from '@/app/_components/AuthorByline';
 import JsonLd from '@/components/JsonLd';
-import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
+import MedicalWebPageSchema from '@/app/components/schemas/MedicalWebPageSchema';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
@@ -151,35 +151,25 @@ export default function SpinalFusionPage() {
     }
   ];
 
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": faqs.map((faq) => ({
-      "@type": "Question",
-      "name": faq.question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faq.answer
-      }
-    }))
-  };
+  const breadcrumbs = [
+    { name: 'Home', path: '/' },
+    { name: 'Services', path: '/services' },
+    { name: 'Spinal Fusion', path: '/services/spinal-fusion-surgery-hyderabad' },
+  ];
 
   return (
     <>
       <JsonLd data={gbpSchema} />
-      <BreadcrumbSchema
-        items={[
-          { name: 'Home', path: '/' },
-          { name: 'Services', path: '/services' },
-          { name: 'Spinal Fusion', path: '/services/spinal-fusion-surgery-hyderabad' },
-        ]}
+      <MedicalWebPageSchema
+        title="Spinal Fusion Surgery in Hyderabad | TLIF & Fixation Surgery"
+        description="Expert spinal fusion surgery (TLIF/PLIF) by Dr. Sayuj Krishnan. Stabilization for spondylolisthesis and fractures. Minimally invasive screw fixation."
+        pageSlug="/services/spinal-fusion-surgery-hyderabad"
+        pageType="service"
+        serviceOrCondition="Spinal Fusion Surgery"
+        breadcrumbs={breadcrumbs}
       />
       <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/spinal-fusion-surgery-hyderabad`} />
       <div className="min-h-screen bg-white">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-        />
         <div className="container mx-auto px-4 py-16">
           <header className="text-center mb-8">
             <h1 className="text-4xl font-bold mb-4">Spinal Fusion Surgery (TLIF/PLIF)</h1>

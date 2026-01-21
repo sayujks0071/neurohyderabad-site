@@ -12,8 +12,8 @@ import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import MedicalWebPageSchema from '../../components/schemas/MedicalWebPageSchema';
 
 const baseMetadata = makeMetadata({
-  title: 'Peripheral Nerve Surgery in Hyderabad | Carpal Tunnel, Ulnar, Peroneal',
-  description: 'Carpal tunnel release, ulnar nerve decompression, nerve tumor surgery, and nerve repair options in Hyderabad.',
+  title: 'Peripheral Nerve Surgery in Hyderabad | Carpal Tunnel Expert',
+  description: 'Expert peripheral nerve surgery in Hyderabad. Minimally invasive treatment for Carpal Tunnel, Ulnar Nerve, and nerve tumors. Restore sensation & strength.',
   canonicalPath: '/services/peripheral-nerve-surgery-hyderabad',
 });
 
