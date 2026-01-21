@@ -1,3 +1,6 @@
+/**
+ * Types for appointment management
+ */
 export interface Appointment {
   id: string;
   patient_name: string;
