@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { generateText } from 'ai';
+import { getTextModel, hasAIConfig } from '@/src/lib/ai/gateway';
 import { DR_SAYUJ_SYSTEM_PROMPT } from '@/src/lib/ai/prompts';
 
 export async function POST(request: NextRequest) {
@@ -14,12 +16,12 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Check if OpenAI API key is configured
-    if (!process.env.OPENAI_API_KEY) {
-      console.error('OpenAI API key not configured');
+    // Check if AI configuration is available
+    if (!hasAIConfig()) {
+      console.error('AI service not configured');
       return NextResponse.json(
         { 
-          error: 'OpenAI API key not configured',
+          error: 'AI service not configured',
           response: "I apologize, but the AI service is not currently available. Please call us directly at +91-9778280044 for immediate assistance."
         },
         { status: 500 }
@@ -93,28 +95,15 @@ export async function POST(request: NextRequest) {
       }
     ];
 
-    // Call OpenAI API
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'gpt-4o-mini',
-        messages,
-        max_tokens: 500,
-        temperature: 0.7,
-        stream: false,
-      }),
+    // Call AI via Gateway
+    const { text } = await generateText({
+      model: getTextModel(), // defaults to gpt-4o-mini
+      messages: messages as any,
+      maxOutputTokens: 500,
+      temperature: 0.7,
     });
 
-    if (!response.ok) {
-      throw new Error(`OpenAI API error: ${response.status}`);
-    }
-
-    const completion = await response.json();
-    const aiResponse = completion.choices[0]?.message?.content || "I apologize, but I couldn't generate a response. Please call us directly at +91-9778280044.";
+    const aiResponse = text || "I apologize, but I couldn't generate a response. Please call us directly at +91-9778280044.";
 
     // Determine action based on response content
     let action = "fallback_manual";
