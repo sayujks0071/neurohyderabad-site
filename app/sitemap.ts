@@ -126,6 +126,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const symptomPages = [
     '/symptoms/signs-of-brain-tumor',
     '/symptoms/pain-on-top-of-head-causes',
+    '/symptoms/back-pain',
+    '/symptoms/neck-pain',
   ];
 
   const legalPages = [
