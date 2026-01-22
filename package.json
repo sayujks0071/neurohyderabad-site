@@ -7,6 +7,7 @@
     "dev": "next dev --turbopack",
     "build": "NODE_OPTIONS='--max-old-space-size=4096' next build",
     "postbuild": "next-sitemap && rm public/sitemap.xml && node scripts/generate-image-sitemap.js && node scripts/generate-video-sitemap.js",
+    "lint": "next lint",
     "start": "next start",
     "promote:draft": "ts-node scripts/promote-draft.ts",
     "check:schemas": "ts-node scripts/check-schemas.ts",
