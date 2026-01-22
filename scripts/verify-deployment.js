@@ -29,7 +29,10 @@ function checkPage(url) {
       res.on('end', () => {
         const status = res.statusCode;
         const hasContent = data.length > 1000; // Reasonable content length
-        const hasError = data.includes('404') || data.includes('Error') || data.includes('Not Found');
+        // More specific error check to avoid false positives (e.g. "Medical error")
+        const hasError = data.includes('<h1>404</h1>') ||
+                        data.includes('<h1>500</h1>') ||
+                        data.includes('Application Error');
         resolve({
           url,
           status,

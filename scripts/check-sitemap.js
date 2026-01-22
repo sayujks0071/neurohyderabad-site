@@ -3,11 +3,11 @@
 const fs = require('fs');
 const path = require('path');
 
-const sitemapPath = path.join(process.cwd(), 'public', 'sitemap.xml');
+const sitemapPath = path.join(process.cwd(), 'public', 'sitemap-images.xml');
 
 try {
   if (!fs.existsSync(sitemapPath)) {
-    console.error('❌ Sitemap not found at public/sitemap.xml');
+    console.error('❌ Sitemap not found at public/sitemap-images.xml');
     process.exit(1);
   }
 
@@ -17,7 +17,7 @@ try {
     process.exit(1);
   }
 
-  console.log('✅ Sitemap looks valid at public/sitemap.xml');
+  console.log('✅ Sitemap looks valid at public/sitemap-images.xml');
   process.exit(0);
 } catch (error) {
   console.error('❌ Sitemap check failed:', error.message);

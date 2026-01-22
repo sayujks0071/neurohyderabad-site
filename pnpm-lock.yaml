@@ -122,6 +122,9 @@ importers:
       server-only:
         specifier: ^0.0.1
         version: 0.0.1
+      sharp:
+        specifier: ^0.34.4
+        version: 0.34.5
       vitest:
         specifier: ^4.0.16
         version: 4.0.16(@edge-runtime/vm@3.2.0)(@opentelemetry/api@1.9.0)(@types/node@20.19.27)(jiti@2.6.1)(jsdom@27.4.0)(lightningcss@1.30.2)(tsx@4.21.0)(yaml@2.8.2)
@@ -186,9 +189,6 @@ importers:
       png-to-ico:
         specifier: ^3.0.1
         version: 3.0.1
-      sharp:
-        specifier: ^0.34.4
-        version: 0.34.5
       tailwindcss:
         specifier: ^4
         version: 4.1.18

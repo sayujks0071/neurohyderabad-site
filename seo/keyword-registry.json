@@ -1,6 +1,30 @@
 {
-  "last_updated": "2026-01-20",
+  "last_updated": "2026-01-22",
   "keywords": [
+    {
+      "term": "pediatric neurosurgeon hyderabad",
+      "difficulty": "Low",
+      "volume": "Med",
+      "target_page": "/pediatric-neurosurgery"
+    },
+    {
+      "term": "spinal cord tumor surgery hyderabad",
+      "difficulty": "High",
+      "volume": "Low",
+      "target_page": "/conditions/spine-tumor-surgery-hyderabad"
+    },
+    {
+      "term": "keyhole spine surgery hyderabad",
+      "difficulty": "Low",
+      "volume": "Low",
+      "target_page": "/services/uniportal-endoscopic-spine-surgery-hyderabad"
+    },
+    {
+      "term": "cervical radiculopathy treatment hyderabad",
+      "difficulty": "Med",
+      "volume": "Med",
+      "target_page": "/conditions/cervical-radiculopathy-treatment-hyderabad"
+    },
     {
       "term": "neurosurgeon hyderabad",
       "difficulty": "High",
