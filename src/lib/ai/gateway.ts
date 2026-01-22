@@ -22,11 +22,12 @@ const DEFAULT_PROVIDER = process.env.AI_GATEWAY_PROVIDER || 'openai';
 
 /**
  * Vercel AI Gateway base URL
+ * Official endpoint: https://ai-gateway.vercel.sh/v1
  * When using Vercel AI Gateway, the AI SDK automatically routes through it
  * if the model is in provider/model format (e.g., 'openai/gpt-4o-mini')
  */
 const VERCEL_AI_GATEWAY_BASE_URL = process.env.AI_GATEWAY_BASE_URL || 
-  'https://gateway.ai.vercel.com/v1';
+  'https://ai-gateway.vercel.sh/v1';
 
 /**
  * Check if Vercel AI Gateway is configured
