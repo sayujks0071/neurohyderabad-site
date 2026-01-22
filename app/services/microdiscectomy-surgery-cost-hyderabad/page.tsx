@@ -85,7 +85,7 @@ export default function MicrodiscectomyCostPage() {
               className="justify-center"
             />
             <p className="text-lg text-gray-600 mt-4 max-w-3xl mx-auto">
-              A comprehensive guide to the cost of Microdiscectomy (Lumbar Decompression), including procedure details, insurance coverage, and price comparisons.
+              A comprehensive guide to the cost of Microdiscectomy (Lumbar Decompression), typically used for treating severe <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 hover:underline">sciatica</Link> and slip disc. Includes procedure details, insurance coverage, and price comparisons.
             </p>
           </header>
 

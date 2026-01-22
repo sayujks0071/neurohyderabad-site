@@ -12,8 +12,8 @@ import FAQPageSchema from '@/app/_components/FAQPageSchema';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 
 const baseMetadata = makeMetadata({
-  title: 'Spine Surgery Cost in Hyderabad | Price Guide & Insurance 2025',
-  description: 'Complete guide to spine surgery costs in Hyderabad including endoscopic discectomy, spinal fusion, and minimally invasive procedures. Insurance coverage and payment options explained.',
+  title: 'Spine Surgery Cost Hyderabad | Insurance & Packages [2025]',
+  description: 'Spine surgery cost in Hyderabad starting ₹95k. Endoscopic & keyhole options. Insurance cashless accepted at Yashoda Hospital. Get price list.',
   canonicalPath: '/services/spine-surgery-cost-hyderabad',
 });
 

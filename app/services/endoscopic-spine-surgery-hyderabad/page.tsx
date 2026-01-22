@@ -31,9 +31,9 @@ const baseMetadata = makeMetadata({
 
 export const metadata: Metadata = {
   ...baseMetadata,
-  title: 'Endoscopic Spine Surgery Hyderabad | Keyhole Surgery Cost',
+  title: 'Endoscopic Spine Surgery Hyderabad | Cost: ₹95k+ | Same-Day',
   description:
-    'Endoscopic spine surgery in Hyderabad by Dr. Sayuj Krishnan. 90% same-day discharge. Keyhole surgery for slip disc & sciatica. Check cost & recovery.',
+    'Expert endoscopic spine surgery in Hyderabad. 90% same-day discharge. Keyhole surgery for slip disc & sciatica. Packages start ₹95k. Book consult.',
   keywords: [
     'endoscopic spine surgery hyderabad',
     'minimally invasive spine surgery hyderabad',
