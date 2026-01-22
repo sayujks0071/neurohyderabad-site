@@ -65,7 +65,7 @@ export default function EndoscopicVsMicrodiscectomyPage() {
           <div className="prose max-w-none">
             <section className="mb-8">
               <p className="text-lg text-gray-700">
-                When facing herniated disc surgery, you'll often hear about two main techniques: endoscopic discectomy and microdiscectomy. Both are effective, minimally invasive procedures, but they differ in approach, incision size, and recovery. Understanding these differences helps you make an informed decision with your surgeon.
+                When facing herniated disc surgery (typically for <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 hover:underline">sciatica</Link> relief), you'll often hear about two main techniques: endoscopic discectomy and microdiscectomy. Both are effective, minimally invasive procedures, but they differ in approach, incision size, and recovery. Understanding these differences helps you make an informed decision with your surgeon.
               </p>
             </section>
 

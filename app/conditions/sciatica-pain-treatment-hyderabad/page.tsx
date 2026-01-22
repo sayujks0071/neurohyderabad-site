@@ -18,7 +18,7 @@ import CostTransparencySection from '@/src/components/CostTransparencySection';
 
 const baseMetadata = makeMetadata({
   title: "Sciatica Treatment Hyderabad | 90% Non-Surgical Relief | Dr Sayuj",
-  description: "Best sciatica treatment in Hyderabad. 90% patients recover without surgery. Expert diagnosis & endoscopic options for severe cases. Book consult.",
+  description: "Stop leg pain today. 90% of our sciatica patients recover without surgery. Expert diagnosis & endoscopic options. Book same-day consult.",
   canonicalPath: '/conditions/sciatica-pain-treatment-hyderabad',
 });
 
@@ -74,6 +74,14 @@ const FAQ = [
   {
     q: "Is my office chair causing my sciatica?",
     a: "Prolonged sitting is a major risk factor. Poor ergonomics can increase pressure on lumbar discs by 40%, potentially triggering or worsening sciatica. We recommend ergonomic adjustments and taking breaks every 30 minutes."
+  },
+  {
+    q: "Is it Sciatica or Piriformis Syndrome?",
+    a: "True sciatica comes from the spine (nerve root compression). Piriformis syndrome is when a muscle in the buttock compresses the sciatic nerve. Dr. Sayuj uses specific clinical tests to distinguish them, as treatments differ significantly (spine decompression vs. muscle release)."
+  },
+  {
+    q: "Is sciatica common during pregnancy?",
+    a: "Yes, up to 50% of women experience some sciatic pain during pregnancy due to the baby's weight and postural changes. We offer safe, medication-free physiotherapy protocols to manage this pain without risking the baby's health."
   }
 ];
 
