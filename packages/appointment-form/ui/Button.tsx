@@ -1,7 +1,7 @@
 'use client';
 
 import type { ButtonHTMLAttributes, PropsWithChildren } from "react";
-import Spinner from "./Spinner";
+import { Loader2 } from "lucide-react";
 
 type ButtonVariant = "primary" | "secondary";
 
@@ -49,7 +49,7 @@ export default function Button({
       aria-busy={isLoading}
       {...props}
     >
-      {isLoading && <Spinner className="mr-2 h-5 w-5" aria-hidden="true" />}
+      {isLoading && <Loader2 className="mr-2 h-5 w-5 animate-spin" aria-hidden="true" />}
       {children}
     </button>
   );
