@@ -9,8 +9,8 @@ module.exports = {
       url: [
         "http://localhost:3000/",
         // add key service pages you promote from drafts:
-        "http://localhost:3000/endoscopic-spine-surgery-hyderabad",
-        "http://localhost:3000/awake-brain-surgery-hyderabad"
+        "http://localhost:3000/services/endoscopic-spine-surgery-hyderabad",
+        "http://localhost:3000/services/awake-spine-surgery-hyderabad"
       ],
       numberOfRuns: 2,
       settings: { 
