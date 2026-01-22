@@ -1,12 +1,16 @@
-# SEO Changelog 2026-01-20
+# SEO Changelog - 2026-01-22
 
-## Summary
-- Refreshed competitor keywords for "spine surgery", "neurosurgeon", "spine tumor".
-- Identified gap in TOFU content for "Spine Tumors" (Types & Symptoms).
-- Mapped 6 new BOFU keywords to existing service/condition pages.
-- Proposed 1 new Blog Post: "Types of Spine Tumors & Warning Signs".
+## Research
+- Analyzed 4 high-intent queries.
+- Identified 7 key competitors.
+- Generated 11 structured keyword clusters.
 
-## Actions
-- [x] Create /seo/keyword-research/2026-01-20/ files.
-- [x] Update Central Registry (registry.json, map.json).
-- [ ] Create new blog post: `content/blog/types-of-spine-tumors-symptoms-guide.mdx`.
+## Updates
+- **Registry Update:** Will add `pediatric-neurosurgery` to the map.
+- **Registry Update:** Will add "keyhole spine surgery" to `/services/uniportal-endoscopic-spine-surgery-hyderabad`.
+- **New Page:** Proposing `/conditions/cervical-radiculopathy-treatment-hyderabad`.
+
+## Insights
+- Competitors focus heavily on "Micro Lumbar Disc Surgeries" and "Full Endoscopic".
+- "Keyhole" is a valuable synonym for our Uniportal page.
+- Pediatric Neurosurgery page existed but was unmapped in SEO registry.

@@ -1,20 +1,35 @@
-# Competitor Discovery 2026-01-20
+# Competitor Discovery - 2026-01-22
 
-## Primary Competitors (Hyderabad Spine/Neuro)
-- https://asianspinehospital.com/
-- https://spinesurgeon.in/ (Dr Surya Prakash)
-- https://drraveesh.com/ (Dr Raveesh Sunkara)
-- https://saideepaneurocare.com/
-- https://drsridharspine.com/
-- https://citineurocentre.com/
+## High-Intent Queries Analyzed
+- "endoscopic spine surgery hyderabad"
+- "best spine surgeon hyderabad"
+- "neurosurgeon hyderabad"
+- "slip disc surgery hyderabad"
 
-## Multi-Specialty Hospitals
-- https://yashodahospitals.com/
-- https://aighospitals.com/
-- https://kaminenihospitals.com/
-- https://apollohospitals.com/
-- https://carehospitals.com/
+## Top Local Surgeon Sites
+1. **Dr. Surya Prakash (spinesurgeon.in)**
+   - Strong on specific procedure pages like "Micro Lumbar Disc Surgeries".
+   - Uses "Best [Condition] in Hyderabad" pattern.
+2. **Dr. Raveesh Sunkara (drraveesh.com)**
+   - Dedicated pages for "Slip Disc Treatment", "Endoscopic Spine Surgery".
+   - Good content depth.
 
-## Analysis
-- **Spine Tumors:** Competitors have detailed pages on "Types of Spine Tumors" and "Symptoms". We should match this with a TOFU guide.
-- **Micro Lumbar Disc:** Specific term used by Dr Surya Prakash. We should map this to our Endoscopic/Microdiscectomy pages.
+## Major Hospital Chains (SERP Dominators)
+1. **Asian Spine Hospital**
+   - Ranks for "Full Endoscopic Spine Surgery".
+   - Focus on "stitchless", "minimally invasive".
+2. **Yashoda Hospitals**
+   - Strong domain authority.
+   - Broad coverage of "Advanced Endoscopic Spine Surgery".
+3. **Apollo Hospitals**
+   - "Best Doctors" listicles rank high.
+4. **AIG Hospitals**
+   - "Neurosurgery & Spine Surgery" landing page.
+5. **Care Hospitals**
+   - Ranks for "Disc Bulge Treatment".
+6. **Sri Sri Holistic Hospitals**
+   - Ranks for "Best Treatment for Slip Disc".
+
+## Aggregators
+- **Practo**: Dominates "Best [Specialist] Near Me" queries.
+- **Justdial**: Ranks for "Top Spine Disc Surgery".

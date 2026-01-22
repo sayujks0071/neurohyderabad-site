@@ -22,7 +22,7 @@ const schemaData = [
     "@type": "MedicalWebPage",
     name: "Cervical Radiculopathy Treatment in Hyderabad",
     description:
-      "Understand symptoms, diagnosis, and minimally invasive treatment options for cervical radiculopathy with Dr. Sayuj Krishnan in Hyderabad.",
+      "Expert treatment for cervical radiculopathy (pinched nerve) in Hyderabad. Endoscopic keyhole surgery for arm pain, numbness, and neck pain by Dr. Sayuj Krishnan.",
     url: CANONICAL,
     inLanguage: "en-IN",
     isPartOf: {
@@ -33,19 +33,20 @@ const schemaData = [
     about: {
       "@type": "MedicalCondition",
       name: "Cervical Radiculopathy",
-      alternateName: "Pinched nerve in the neck",
+      alternateName: ["Pinched Nerve in Neck", "Cervical Nerve Root Compression"],
       medicalSpecialty: "Neurosurgery",
       signOrSymptom: [
-        "Neck pain radiating to arm",
+        "Shooting pain down the arm",
         "Numbness or tingling in fingers",
-        "Grip weakness",
-        "Cervicogenic headache",
+        "Weakness in arm or hand muscles",
+        "Neck pain radiating to the shoulder blade",
+        "Relief when lifting the arm over the head",
       ],
       possibleTreatment: [
-        "Physiotherapy",
-        "Epidural steroid injection",
-        "Endoscopic foraminotomy",
-        "Anterior cervical discectomy and fusion",
+        "Posterior Cervical Foraminotomy (Keyhole)",
+        "Anterior Cervical Discectomy and Fusion (ACDF)",
+        "Artificial Disc Replacement",
+        "Physiotherapy and Nerve Blocks",
       ],
     },
   },
@@ -55,26 +56,26 @@ const schemaData = [
     mainEntity: [
       {
         "@type": "Question",
-        name: "Does every cervical radiculopathy case require surgery?",
+        name: "Does a pinched nerve in the neck require surgery?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "No. Most patients improve with conservative treatment. Surgery is recommended when pain persists, weakness develops, or imaging shows significant compression.",
+          text: "Not always. 90% of cervical radiculopathy cases improve with medication and physiotherapy within 6-8 weeks. Surgery is recommended if there is severe weakness, intractable pain, or if conservative treatment fails.",
         },
       },
       {
         "@type": "Question",
-        name: "How fast is recovery after endoscopic foraminotomy?",
+        name: "What is the best surgery for cervical radiculopathy?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Many patients return to desk work within one to two weeks and resume full activity by six weeks, depending on rehabilitation progress.",
+          text: "For pure nerve pinching without instability, a Minimally Invasive Posterior Cervical Foraminotomy (Keyhole Surgery) is excellent as it preserves motion and requires no fusion. For large central discs, ACDF or Disc Replacement may be better.",
         },
       },
       {
         "@type": "Question",
-        name: "Can cervical problems cause headaches?",
+        name: "How long does it take to recover from pinched nerve surgery?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Yes. Cervicogenic headaches and occipital neuralgia often arise from cervical nerve compression. Treating the underlying issue reduces head pain.",
+          text: "Recovery is rapid. With endoscopic keyhole surgery, patients are often discharged the same day or next day. Desk work can resume in 1-2 weeks. Full return to sports takes about 6-12 weeks.",
         },
       },
     ],
@@ -107,9 +108,9 @@ const schemaData = [
     "@context": "https://schema.org",
     "@type": "Physician",
     name: "Dr. Sayuj Krishnan",
-    medicalSpecialty: "Neurosurgery",
+    medicalSpecialty: ["Neurosurgery", "Spine Surgery", "Endoscopic Spine Surgery"],
     url: SITE_URL,
-    sameAs: [],
+    sameAs: ["https://www.linkedin.com/in/dr-sayuj-krishnan-s-275baa66"],
     telephone: "+91 9778280044",
     address: {
       "@type": "PostalAddress",
@@ -123,13 +124,24 @@ const schemaData = [
       "@type": "MedicalClinic",
       name: "Yashoda Hospital Malakpet",
     },
+    yearsOfExperience: 15,
+    availableService: [
+      {
+        "@type": "MedicalProcedure",
+        name: "Posterior Cervical Foraminotomy",
+      },
+      {
+        "@type": "MedicalProcedure",
+        name: "Anterior Cervical Discectomy and Fusion",
+      },
+    ],
   },
   {
     "@context": "https://schema.org",
     "@type": "MedicalClinic",
-    name: "Dr. Sayuj Krishnan - Brain & Spine Clinic",
+    name: "Dr. Sayuj Krishnan - Brain & Spine Clinic, Yashoda Hospital Malakpet",
     url: SITE_URL,
-    areaServed: "Hyderabad",
+    areaServed: ["Hyderabad", "Telangana", "Jubilee Hills", "Banjara Hills", "Hi-Tech City", "Gachibowli", "Malakpet", "Secunderabad"],
     telephone: "+91 9778280044",
     address: {
       "@type": "PostalAddress",
@@ -144,51 +156,51 @@ const schemaData = [
 
 const faqItems = [
   {
-    question: "Does every cervical radiculopathy need surgery?",
+    question: "Does a pinched nerve in the neck require surgery?",
     answer:
-      "No. Up to 80% of cases improve with physiotherapy, medication, and posture correction. Surgery is reserved for persistent pain, progressive weakness, or severe compression on imaging.",
+      "Not necessarily. Most cases (approx. 90%) of cervical radiculopathy resolve with non-surgical treatments like rest, anti-inflammatory medication, physiotherapy, and possibly a nerve block injection. Surgery is considered when pain is unmanageable, or if there is progressive weakness (motor deficit) in the arm or hand.",
   },
   {
-    question: "How soon can I return to work after endoscopic foraminotomy?",
+    question: "What is the best surgery for cervical radiculopathy?",
     answer:
-      "Most patients resume light duties in one to two weeks and return to full activity by six weeks, provided rehabilitation milestones are met.",
+      "The 'best' surgery depends on the location of the compression. For nerves pinched by bone spurs or side-herniated discs, a **Posterior Cervical Foraminotomy (Keyhole Surgery)** is ideal because it relieves pressure without needing fusion or implants. For central disc herniations, **ACDF (Fusion)** or **Artificial Disc Replacement** provides the most reliable results.",
   },
   {
-    question: "Is fusion always required?",
+    question: "How long does it take to recover from pinched nerve surgery?",
     answer:
-      "Fusion (ACDF) is necessary when instability, multi-level degeneration, or recurrent herniation exists. Whenever feasible, we prioritise motion-preserving options such as endoscopic foraminotomy or disc replacement.",
+      "Recovery is generally quick, especially with minimally invasive techniques. Patients are typically walking hours after surgery and discharged within 24 hours. Most can return to desk jobs in 1-2 weeks. Heavy lifting and contact sports are usually restricted for 6-12 weeks to allow for healing.",
   },
   {
-    question: "Can cervical radiculopathy cause headaches?",
+    question: "Can I use a computer after cervical spine surgery?",
     answer:
-      "Yes. Cervicogenic headaches and occipital neuralgia often stem from upper cervical nerve irritation. Addressing the root cause typically relieves head pain.",
+      "Yes, but you should take frequent breaks. We recommend keeping the monitor at eye level to avoid bending your neck. Short periods of computer use are allowed within a few days, gradually increasing as your neck comfort allows.",
   },
   {
-    question: "What happens if I ignore symptoms?",
+    question: "What are the risks of leaving a pinched nerve untreated?",
     answer:
-      "Untreated compression can lead to chronic pain, permanent numbness, or weakness. Early assessment helps prevent long-term nerve damage.",
+      "If the nerve is severely compressed for a long time, it can lead to permanent nerve damage, resulting in chronic numbness or muscle wasting (atrophy) in the arm or hand. If pain persists beyond 6-8 weeks or if you have weakness, surgical consultation is advised to prevent permanent loss of function.",
   },
 ] as const;
 
 const references = [
   {
-    label: "North American Spine Society (NASS) — Cervical Radiculopathy Guidelines",
-    url: "https://www.spine.org/Research-Clinical-Care/Quality-Improvement/Clinical-Guidelines",
+    label: "AANS — Cervical Radiculopathy",
+    url: "https://www.aans.org/patients/conditions-treatments/cervical-radiculopathy/",
   },
   {
-    label: "American Academy of Orthopaedic Surgeons (AAOS) — Cervical Radiculopathy",
-    url: "https://orthoinfo.aaos.org/en/diseases--conditions/cervical-radiculopathy-pinched-nerve/",
+    label: "North American Spine Society — Cervical Radiculopathy",
+    url: "https://www.spine.org/KnowYourBack/Conditions/DegenerativeConditions/CervicalRadiculopathy",
   },
   {
-    label: "National Institute for Health and Care Excellence (NICE) — Spinal conditions management",
-    url: "https://www.nice.org.uk/guidance/ng59",
+    label: "Johns Hopkins Medicine — Cervical Radiculopathy",
+    url: "https://www.hopkinsmedicine.org/health/conditions-and-diseases/cervical-radiculopathy",
   },
 ] as const;
 
 export const metadata: Metadata = {
-  title: "Cervical Radiculopathy Treatment Hyderabad — Neck & Arm Pain Relief",
+  title: "Cervical Radiculopathy Treatment Hyderabad | Pinched Nerve Surgery",
   description:
-    "Comprehensive evaluation, conservative therapy, and minimally invasive surgery for cervical radiculopathy with Dr. Sayuj Krishnan at Yashoda Hospital, Malakpet.",
+    "Specialized treatment for cervical radiculopathy (pinched nerve) in Hyderabad. Minimally invasive keyhole surgery (Foraminotomy) and ACDF by Dr. Sayuj Krishnan.",
   alternates: {
     canonical: CANONICAL,
     languages: {
@@ -197,258 +209,291 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Cervical Radiculopathy Treatment in Hyderabad",
+    title: "Cervical Radiculopathy (Pinched Nerve) Treatment in Hyderabad",
     description:
-      "Discover conservative care, nerve blocks, and minimally invasive surgery pathways for neck and arm pain.",
+      "Expert care for radiating arm pain and neck pain caused by cervical radiculopathy. Minimally invasive surgical options available.",
     url: CANONICAL,
     type: "article",
+    images: [
+      {
+        url: `${SITE_URL}/images/og-default.jpg`,
+        width: 1200,
+        height: 630,
+        alt: "Cervical Radiculopathy Treatment — Dr Sayuj Krishnan",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Cervical Radiculopathy Treatment in Hyderabad",
+    description:
+      "Expert care for radiating arm pain and neck pain caused by cervical radiculopathy. Minimally invasive surgical options available.",
   },
 };
 
-export default function CervicalRadiculopathyTreatmentPage() {
+export default function CervicalRadiculopathyPage() {
   return (
     <main className="bg-white">
-      <SchemaScript
-        id="cervical-radiculopathy-jsonld"
-        data={schemaData}
-      />
+      <SchemaScript id="cervical-radiculopathy-jsonld" data={schemaData} />
 
-      <section className="bg-gradient-to-r from-blue-900 to-indigo-900 py-12 text-white">
+      {/* Warning Banner for Weakness */}
+      <section className="bg-orange-600 py-4 text-white">
+        <div className="mx-auto max-w-5xl px-4 text-center">
+          <p className="text-lg font-bold">
+            ⚠️ Warning: Sudden arm weakness or loss of grip strength requires urgent evaluation
+          </p>
+        </div>
+      </section>
+
+      <section className="bg-slate-900 py-12 text-white">
         <div className="mx-auto max-w-5xl px-4">
-          <p className="text-sm uppercase tracking-wide text-indigo-200">
-            Spine &amp; Nerve Clinic · Hyderabad
+          <p className="text-sm uppercase tracking-wide text-blue-200">
+            Spine Conditions · Hyderabad
           </p>
           <h1 className="mt-4 text-3xl font-bold md:text-4xl">
-            Cervical Radiculopathy Treatment in Hyderabad
+            Cervical Radiculopathy (Pinched Nerve) Treatment in Hyderabad
           </h1>
-          <p className="mt-4 text-lg text-indigo-100">
-            Neck pain radiating into the arm, tingling fingers, or weak grip may
-            signal cervical radiculopathy. We offer a conservative-first approach,
-            escalating to minimally invasive or motion-preserving surgery only
-            when necessary.
+          <p className="mt-4 text-lg text-slate-100">
+            Suffering from severe arm pain, numbness, or "pins and needles"? Dr. Sayuj Krishnan provides
+            advanced diagnosis and minimally invasive treatment for cervical radiculopathy, helping you get
+            back to a pain-free life faster.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <a
               href="https://www.drsayuj.info/appointments?utm_source=seo&utm_medium=page&utm_campaign=cervical_radiculopathy"
               className="rounded-full bg-blue-500 px-6 py-3 text-sm font-semibold text-white shadow hover:bg-blue-600"
             >
-              Book Neuro Spine Evaluation
+              Book an Appointment
             </a>
             <a
               href="https://wa.me/919778280044"
-              className="rounded-full border border-white px-6 py-3 text-sm font-semibold text-white hover:bg-white hover:text-blue-900"
+              className="rounded-full border border-white px-6 py-3 text-sm font-semibold text-white hover:bg-white hover:text-slate-900"
             >
-              Share MRI via WhatsApp
+              WhatsApp MRI for Opinion
             </a>
           </div>
         </div>
       </section>
 
+      {/* Symptoms Checklist */}
+      <section className="bg-blue-50 py-8">
+        <div className="mx-auto max-w-5xl px-4">
+          <div className="rounded-lg border border-blue-200 bg-white p-6 shadow-lg">
+            <h2 className="text-2xl font-bold text-blue-800">
+              Signs of a Pinched Nerve (Radiculopathy)
+            </h2>
+            <p className="mt-3 text-lg font-semibold text-gray-900">
+              Cervical radiculopathy happens when a nerve root in the neck is compressed. Common symptoms include:
+            </p>
+            <div className="mt-4 grid gap-3 md:grid-cols-2">
+              <div className="flex items-start gap-3 rounded-lg border border-blue-100 bg-blue-50 p-4">
+                <span className="text-2xl">⚡</span>
+                <div>
+                  <h3 className="font-bold text-blue-800">Shooting Pain</h3>
+                  <p className="text-sm text-gray-700">Sharp, electric-shock type pain radiating from the neck down the arm to the fingers.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3 rounded-lg border border-blue-100 bg-blue-50 p-4">
+                <span className="text-2xl">✋</span>
+                <div>
+                  <h3 className="font-bold text-blue-800">Numbness & Tingling</h3>
+                  <p className="text-sm text-gray-700">"Pins and needles" sensation in specific fingers or the hand.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3 rounded-lg border border-blue-100 bg-blue-50 p-4">
+                <span className="text-2xl">💪</span>
+                <div>
+                  <h3 className="font-bold text-blue-800">Muscle Weakness</h3>
+                  <p className="text-sm text-gray-700">Weakness in lifting the arm, extending the wrist, or gripping objects.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3 rounded-lg border border-blue-100 bg-blue-50 p-4">
+                <span className="text-2xl">🛌</span>
+                <div>
+                  <h3 className="font-bold text-blue-800">Relief Position</h3>
+                  <p className="text-sm text-gray-700">Many patients feel relief by resting their hand on top of their head (Shoulder Abduction Sign).</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="mx-auto max-w-5xl px-4 py-12">
-        <div className="grid gap-8 md:grid-cols-2">
+        <div className="grid gap-10 md:grid-cols-2">
           <div>
             <h2 className="text-2xl font-semibold text-gray-900">
-              Symptoms to watch for
+              What Causes Cervical Radiculopathy?
             </h2>
-            <ul className="mt-4 space-y-2 text-gray-700">
-              <li>• Sharp or burning pain from neck into shoulder and arm</li>
-              <li>• Numbness or tingling in fingers</li>
-              <li>• Weak grip or difficulty lifting objects</li>
-              <li>• Symptoms that worsen with neck extension or rotation</li>
-              <li>• Cervicogenic headaches and reduced balance in severe cases</li>
+            <p className="mt-4 text-gray-700">
+              As we age, the discs in our spine lose height and water content. This degenerative process can lead
+              to two main causes of nerve compression:
+            </p>
+            <ul className="mt-4 list-disc space-y-2 pl-6 text-gray-700">
+              <li><strong>Herniated Disc:</strong> The soft inner gel of the disc leaks out and presses directly on the nerve root. This is common in younger patients and often happens suddenly.</li>
+              <li><strong>Bone Spurs (Osteophytes):</strong> Over time, the body creates extra bone to stabilize the spine, narrowing the "foramen" (exit tunnel) for the nerve. This is more common in older adults.</li>
             </ul>
             <p className="mt-4 text-gray-700">
-              Seek emergency care immediately for sudden weakness, loss of bowel
-              or bladder control, or difficulty walking—these may indicate spinal
-              cord compression.
+              Regardless of the cause, the goal of treatment is to relieve the pressure on the nerve to stop the pain and allow the nerve to heal.
             </p>
           </div>
           <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
             <h3 className="text-lg font-semibold text-blue-700">
-              Common causes
+              Diagnostic Approach
             </h3>
-            <ul className="mt-3 space-y-2 text-gray-700">
-              <li>• Degenerative disc disease and disc herniation</li>
-              <li>• Foraminal stenosis narrowing nerve exit pathways</li>
-              <li>• Postural strain (“tech neck”) leading to chronic inflammation</li>
-              <li>• Traumatic injuries such as whiplash</li>
-              <li>• Less commonly: tumours, infections, or congenital anomalies</li>
+            <ol className="mt-3 list-decimal space-y-2 pl-6 text-gray-700">
+              <li>Comprehensive physical exam to pinpoint which nerve is affected (C5, C6, C7, or C8)</li>
+              <li>Reflex and strength testing</li>
+              <li><strong>MRI Cervical Spine:</strong> The gold standard to visualize the nerve compression</li>
+              <li>X-rays to check for instability or alignment issues</li>
+              <li>Nerve Conduction Studies (EMG/NCS) if the diagnosis is unclear</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-gray-50 py-12">
+        <div className="mx-auto max-w-5xl px-4">
+          <h2 className="text-2xl font-semibold text-gray-900">
+            Advanced Surgical Treatments
+          </h2>
+          <p className="mt-2 text-gray-700">
+            While most patients recover without surgery, those with severe pain or weakness may need intervention.
+            Dr. Sayuj Krishnan specializes in minimally invasive options:
+          </p>
+          <div className="mt-8 grid gap-6 md:grid-cols-2">
+            <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+              <h3 className="text-lg font-semibold text-blue-700">
+                1. Posterior Cervical Foraminotomy (Keyhole)
+              </h3>
+              <p className="mt-3 text-gray-700">
+                A minimally invasive procedure performed through the back of the neck. Using a small tube and microscope/endoscope,
+                a small amount of bone/disc is removed to open the nerve tunnel.
+              </p>
+              <ul className="mt-3 space-y-1 text-sm text-gray-600">
+                <li>• <strong>No Fusion Required:</strong> Preserves natural neck motion.</li>
+                <li>• <strong>No Implants:</strong> No screws, plates, or cages.</li>
+                <li>• <strong>Fast Recovery:</strong> Less swallowing difficulty than anterior surgery.</li>
+              </ul>
+            </div>
+            <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+              <h3 className="text-lg font-semibold text-blue-700">
+                2. Anterior Cervical Discectomy & Fusion (ACDF)
+              </h3>
+              <p className="mt-3 text-gray-700">
+                The most common neck surgery. The disc is removed from the front of the neck to unpinch the nerve,
+                and the space is filled with a cage/bone graft to fuse the bones.
+              </p>
+              <ul className="mt-3 space-y-1 text-sm text-gray-600">
+                <li>• Gold standard for central disc herniations.</li>
+                <li>• Highly effective for relieving arm pain (95%+ success).</li>
+                <li>• Prevents recurrence at that level.</li>
+              </ul>
+            </div>
+            <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+              <h3 className="text-lg font-semibold text-blue-700">
+                3. Artificial Disc Replacement (ADR)
+              </h3>
+              <p className="mt-3 text-gray-700">
+                Similar to ACDF, but instead of fusion, a mobile artificial disc device is inserted. This maintains
+                neck motion and reduces stress on adjacent discs.
+              </p>
+              <ul className="mt-3 space-y-1 text-sm text-gray-600">
+                <li>• Preserves range of motion.</li>
+                <li>• Reduces risk of future surgery at other levels.</li>
+                <li>• Ideal for younger patients with healthy bones.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-gray-50 py-12">
+        <div className="mx-auto max-w-5xl px-4">
+          <h2 className="text-2xl font-semibold text-gray-900">
+            Frequently Asked Questions
+          </h2>
+          <div className="mt-6 space-y-4">
+            {faqItems.map((item) => (
+              <details
+                key={item.question}
+                className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm"
+              >
+                <summary className="cursor-pointer text-lg font-semibold text-blue-700">
+                  {item.question}
+                </summary>
+                <p className="mt-3 text-gray-700">{item.answer}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-5xl px-4 py-12">
+        <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+          <h3 className="text-lg font-semibold text-blue-700">
+            Related Resources
+          </h3>
+          <ul className="mt-4 space-y-2 text-gray-700">
+             <li>
+              <Link
+                href="/conditions/cervical-myelopathy-decompression-hyderabad"
+                className="text-blue-700 underline"
+              >
+                Cervical Myelopathy Decompression (Cord Compression)
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/services/minimally-invasive-spine-surgery"
+                className="text-blue-700 underline"
+              >
+                Minimally Invasive Spine Surgery
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/patient-stories"
+                className="text-blue-700 underline"
+              >
+                Patient Success Stories
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section className="bg-gray-50 py-12">
+        <div className="mx-auto max-w-5xl px-4">
+          <LocalNAP />
+          <div className="mt-8">
+            <YMYLAttribution lastReviewed="2026-01-22" />
+          </div>
+          <div className="mt-8 rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+            <h2 className="text-lg font-semibold text-gray-900">Key References</h2>
+            <ul className="mt-4 list-disc space-y-2 pl-6 text-gray-700">
+              {references.map((ref) => (
+                <li key={ref.url}>
+                  <a
+                    href={ref.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-700 underline"
+                  >
+                    {ref.label}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
       </section>
-
-      <section className="bg-gray-50 py-12">
-        <div className="mx-auto max-w-5xl px-4">
-          <h2 className="text-2xl font-semibold text-gray-900">
-            Diagnostic pathway at Yashoda Hospital, Malakpet
-          </h2>
-          <ol className="mt-6 list-decimal space-y-3 pl-6 text-gray-700">
-            <li>Clinical examination including Spurling test, reflexes, and strength grading.</li>
-            <li>MRI cervical spine to identify disc herniation, stenosis, or cord compression.</li>
-            <li>Nerve conduction / EMG studies when symptoms overlap with peripheral neuropathy.</li>
-            <li>Dynamic X-rays to assess instability when surgery is considered.</li>
-            <li>Collaborative review with pain specialists and physiotherapists.</li>
-          </ol>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-5xl px-4 py-12">
-        <h2 className="text-2xl font-semibold text-gray-900">
-          Treatment options
-        </h2>
-        <div className="mt-6 grid gap-6 md:grid-cols-2">
-          <article className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
-            <h3 className="text-lg font-semibold text-blue-700">
-              Conservative management
-            </h3>
-            <p className="mt-3 text-gray-700">
-              Physiotherapy, postural coaching, ergonomic adjustments, and
-              medication form the first line. We emphasise cervical stabilisation,
-              scapular strengthening, and habit change.
-            </p>
-          </article>
-          <article className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
-            <h3 className="text-lg font-semibold text-blue-700">
-              Image-guided injections
-            </h3>
-            <p className="mt-3 text-gray-700">
-              Selective nerve root blocks or epidural steroids offer diagnostic
-              clarity and bridging relief while rehabilitation progresses.
-            </p>
-          </article>
-          <article className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
-            <h3 className="text-lg font-semibold text-blue-700">
-              Endoscopic foraminotomy &amp; ULBD
-            </h3>
-            <p className="mt-3 text-gray-700">
-              Through 8 mm incisions, we remove bone spurs or disc fragments to
-              decompress nerves while preserving motion. Most patients return to
-              desk work within two weeks.
-            </p>
-          </article>
-          <article className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
-            <h3 className="text-lg font-semibold text-blue-700">
-              Fusion or disc replacement
-            </h3>
-            <p className="mt-3 text-gray-700">
-              ACDF stabilises the spine when instability exists. Disc replacement
-              maintains motion in selected patients. Navigation and neuromonitoring
-              guide precise implant placement.
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <section className="bg-gray-50 py-12">
-        <div className="mx-auto max-w-5xl px-4">
-          <h2 className="text-2xl font-semibold text-gray-900">
-            Recovery roadmap
-          </h2>
-          <div className="mt-6 grid gap-6 md:grid-cols-3">
-            <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
-              <h3 className="font-semibold text-blue-700">Return to activity</h3>
-              <p className="mt-2 text-gray-700">
-                Desk work generally resumes within 1–2 weeks after minimally
-                invasive procedures; manual labour requires staged clearance.
-              </p>
-            </div>
-            <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
-              <h3 className="font-semibold text-blue-700">Physiotherapy milestones</h3>
-              <p className="mt-2 text-gray-700">
-                Structured rehab begins within days to rebuild strength and
-                prevent recurrence. We review progress at 2, 6, and 12 weeks.
-              </p>
-            </div>
-            <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
-              <h3 className="font-semibold text-blue-700">Lifestyle coaching</h3>
-              <p className="mt-2 text-gray-700">
-                Ergonomics, sleep, and stress management strategies keep symptoms
-                controlled long term.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-5xl px-4 py-12">
-        <h2 className="text-2xl font-semibold text-gray-900">
-          Frequently Asked Questions
-        </h2>
-        <div className="mt-6 space-y-4">
-          {faqItems.map((item) => (
-            <details
-              key={item.question}
-              className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm"
-            >
-              <summary className="cursor-pointer text-lg font-semibold text-blue-700">
-                {item.question}
-              </summary>
-              <p className="mt-3 text-gray-700">{item.answer}</p>
-            </details>
-          ))}
-        </div>
-      </section>
-
-      <section className="bg-gray-50 py-12">
-        <div className="mx-auto max-w-5xl px-4">
-          <div className="grid gap-4 md:grid-cols-2">
-            <Link
-              href="/services/minimally-invasive-spine-surgery"
-              className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm hover:border-blue-400"
-            >
-              <h3 className="font-semibold text-blue-700">
-                Learn about Minimally Invasive Spine Surgery
-              </h3>
-              <p className="mt-2 text-gray-700">
-                Discover MISS techniques, recovery timelines, and patient stories.
-              </p>
-            </Link>
-            <Link
-              href="/services/spinal-fusion-surgery-hyderabad"
-              className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm hover:border-blue-400"
-            >
-              <h3 className="font-semibold text-blue-700">Explore Cervical Fusion Care</h3>
-              <p className="mt-2 text-gray-700">
-                Understand when ACDF or disc replacement is necessary and how we
-                preserve function.
-              </p>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-5xl px-4 py-12">
-        <LocalNAP />
-        <div className="mt-8">
-          <YMYLAttribution lastReviewed="2025-02-14" />
-        </div>
-        <div className="mt-8 rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
-          <h2 className="text-lg font-semibold text-gray-900">Key References</h2>
-          <ul className="mt-4 list-disc space-y-2 pl-6 text-gray-700">
-            {references.map((ref) => (
-              <li key={ref.url}>
-                <a
-                  href={ref.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-700 underline"
-                >
-                  {ref.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
       
       <AuthorByline 
-        publishedOn="2025-02-15"
-        updatedOn="2025-10-19"
+        publishedOn="2026-01-22"
+        updatedOn="2026-01-22"
       />
       
-
-
       <div className="mt-12">
         <LocalPathways mode="condition" />
       </div>
