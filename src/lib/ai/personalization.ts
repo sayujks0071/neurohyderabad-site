@@ -164,7 +164,7 @@ function fallbackPersonalization(context: PersonalizationContext): PersonalizedC
   if (context.condition) {
     // Map common conditions to relevant pages
     const conditionMap: Record<string, string> = {
-      'sciatica': '/conditions/sciatica-treatment-hyderabad',
+      'sciatica': '/conditions/sciatica-pain-treatment-hyderabad',
       'spinal stenosis': '/conditions/spinal-stenosis-treatment-hyderabad',
       'back pain': '/services/endoscopic-discectomy-hyderabad',
       'brain tumor': '/services/brain-tumor-surgery-hyderabad',

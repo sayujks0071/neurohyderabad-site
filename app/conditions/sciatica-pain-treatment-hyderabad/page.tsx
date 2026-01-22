@@ -407,7 +407,7 @@ export default function SciaticaTreatmentPage() {
         updatedOn="2025-01-15"
       />
 
-      <SourceList sources={sources['sciatica-treatment-hyderabad'] || []} />
+      <SourceList sources={sources['sciatica-pain-treatment-hyderabad'] || []} />
 </main>
   );
 }

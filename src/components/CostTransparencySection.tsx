@@ -26,16 +26,16 @@ export default function CostTransparencySection({ costs, disclaimer }: CostTrans
         <table className="w-full text-left border-collapse">
           <thead>
             <tr className="bg-gray-50 border-b border-gray-100">
-              <th className="p-4 font-semibold text-gray-700">Procedure</th>
-              <th className="p-4 font-semibold text-gray-700">Estimated Cost Range (INR)</th>
-              <th className="p-4 font-semibold text-gray-700">Typical Recovery</th>
-              <th className="p-4 font-semibold text-gray-700">Includes</th>
+              <th scope="col" className="p-4 font-semibold text-gray-700">Procedure</th>
+              <th scope="col" className="p-4 font-semibold text-gray-700">Estimated Cost Range (INR)</th>
+              <th scope="col" className="p-4 font-semibold text-gray-700">Typical Recovery</th>
+              <th scope="col" className="p-4 font-semibold text-gray-700">Includes</th>
             </tr>
           </thead>
           <tbody>
             {costs.map((item, index) => (
               <tr key={index} className="border-b border-gray-100 hover:bg-blue-50/30 transition-colors">
-                <td className="p-4 font-medium text-blue-900">{item.procedure}</td>
+                <th scope="row" className="p-4 font-medium text-blue-900 text-left">{item.procedure}</th>
                 <td className="p-4 font-bold text-green-700">{item.range}</td>
                 <td className="p-4 text-gray-600">{item.recovery}</td>
                 <td className="p-4 text-gray-500 text-sm">
