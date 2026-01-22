@@ -4,6 +4,14 @@ import { WhatsappAppointment } from './types';
 export const WHATSAPP_MESSAGE_TEMPLATE = (name: string, date: string) =>
   `Hello ${name}, this is regarding your appointment with Dr. Sayuj on ${date}. We confirm your slot. Please bring your MRI/CT scans.`;
 
+/**
+ * Generates the WhatsApp API URL for the "Quick Action" feature in the admin dashboard.
+ *
+ * Logic verified against requirements:
+ * 1. Sanitizes phone number by removing all non-digits (spaces, dashes, etc.).
+ * 2. Uses the standard +91 India country code.
+ * 3. Encodes a pre-defined message template with patient name and appointment date.
+ */
 export const generateWhatsappUrl = (patient: WhatsappAppointment): string => {
   // Sanitize phone number: remove all non-digit characters (spaces, dashes, parens, etc.)
   // This ensures we have a clean string of numbers to work with.
