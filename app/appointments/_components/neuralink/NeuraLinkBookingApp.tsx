@@ -5,6 +5,7 @@ import { ChevronRight, MessageSquareCode, MessageSquare } from "lucide-react";
 import PatientPortal from "./PatientPortal";
 import AppointmentFaq from "../AppointmentFaq";
 import dynamic from "next/dynamic";
+import VoiceBookingOption from "../VoiceBookingOption";
 
 // Dynamic import for LiveAssistant (heavy dependency on @google/genai)
 // Only loaded when the user explicitly clicks "Voice AI Assistant".
@@ -87,7 +88,10 @@ const NeuraLinkBookingApp = ({ heroContent, locationInfo }: NeuraLinkBookingAppP
       </section>
 
       <section ref={formRef} className="pb-20">
-        <PatientPortal />
+        <div className="max-w-6xl mx-auto px-4">
+          <VoiceBookingOption />
+          <PatientPortal />
+        </div>
       </section>
 
       <AppointmentFaq />
