@@ -9,7 +9,7 @@
  * - Follow-up care coordination
  */
 
-import { sleep, FatalError, fetch } from "workflow";
+import { FatalError, fetch } from "workflow";
 import { generateText } from "ai";
 import type { BookingData, EmailResult } from "@/packages/appointment-form/types";
 import { sendConfirmationEmail as sendAppointmentConfirmationEmail, sendAdminNotificationEmail } from "@/src/lib/appointments/email";
@@ -70,6 +70,27 @@ const DEFAULT_TIME_SLOTS = [
 
 const DEFAULT_CONFIRMATION_MESSAGE =
   "Appointment request received. Please bring any MRI/CT scans with you. We will confirm via phone shortly.";
+
+// Structured logging helper with PII redaction
+function log(event: string, context: Record<string, any> = {}) {
+  const safeContext = { ...context };
+
+  // Redact PII fields
+  ['name', 'patientName', 'phone'].forEach(field => {
+    if (field in safeContext) safeContext[field] = '***REDACTED***';
+  });
+
+  if (safeContext.email) {
+    const [user, domain] = String(safeContext.email).split('@');
+    safeContext.email = domain ? `${user.substring(0, 2)}***@${domain}` : '***INVALID***';
+  }
+
+  console.log(JSON.stringify({
+    timestamp: new Date().toISOString(),
+    event,
+    ...safeContext
+  }));
+}
 
 function normalizeTimeSlot(time: string): string | null {
   const match = time.trim().match(/^(\d{1,2}):(\d{2})(?:\s*(AM|PM))?$/i);
@@ -275,9 +296,8 @@ export async function handleAppointmentBooking(
   globalThis.fetch = fetch;
 
   const bookingId = generateBookingId();
-  console.log(
-    `[Appointment Workflow] Starting booking ${bookingId} for ${patientInfo.name}`
-  );
+  const start = Date.now();
+  log("WorkflowStarted", { bookingId });
 
   try {
     // Step 1: Validate patient information
@@ -288,9 +308,7 @@ export async function handleAppointmentBooking(
       patientInfo.chiefComplaint
     );
     if (emergencyCheck.isEmergency) {
-      console.log(
-        `[Appointment Workflow] Emergency detected for ${bookingId}`
-      );
+      log("EmergencyDetected", { bookingId, symptoms: emergencyCheck.symptoms });
       await notifyEmergencyTeam(patientInfo, emergencyCheck.symptoms);
       return {
         bookingId,
@@ -318,9 +336,7 @@ export async function handleAppointmentBooking(
     let status: AppointmentBookingResult["status"] = "confirmed";
 
     if (!availability.available) {
-      console.log(
-        `[Appointment Workflow] Preferred slot unavailable for ${bookingId}`
-      );
+      log("PreferredSlotUnavailable", { bookingId, reason: availability.reason });
 
       // Step 4: Find alternative slots
       const alternatives = await findAlternativeSlots(
@@ -344,27 +360,19 @@ export async function handleAppointmentBooking(
       patientInfo.confirmationMessage || DEFAULT_CONFIRMATION_MESSAGE;
     const usedAI = patientInfo.usedAI ?? false;
 
-    // Step 6: Wait for 2 seconds before sending confirmation
-    await sleep("2s");
+    // Parallelize operations: Emails, Sync, Reminders, Education, Analytics
+    const confirmationPromise = sendBookingConfirmationEmail(booking, confirmationMessage);
+    const adminEmailPromise = sendBookingAdminAlert(booking, patientInfo.source);
+    const syncPromise = syncBookingLead(bookingId, booking, patientInfo.source);
+    const remindersPromise = scheduleReminders(bookingId, patientInfo, finalDate, finalTime);
+    const educationPromise = preparePatientEducation(patientInfo.chiefComplaint, patientInfo.email);
+    const analyticsPromise = trackBookingAnalytics(bookingId, patientInfo, status);
 
-    // Step 7: Send confirmation + admin emails
-    const confirmationResult = await sendBookingConfirmationEmail(
-      booking,
-      confirmationMessage
-    );
-    const adminEmailResult = await sendBookingAdminAlert(
-      booking,
-      patientInfo.source
-    );
-    if (!adminEmailResult.success) {
-      console.error(
-        `[Appointment Workflow] Admin notification failed: ${adminEmailResult.error}`
-      );
-    }
+    // Wait for confirmation email to trigger webhooks (webhook payload depends on email result)
+    const confirmationResult = await confirmationPromise;
 
-    // Step 8: Sync CRM + webhooks
-    await syncBookingLead(bookingId, booking, patientInfo.source);
-    await triggerAppointmentWebhooks(
+    // Trigger webhooks (now parallel with remaining tasks)
+    const webhooksPromise = triggerAppointmentWebhooks(
       booking,
       confirmationMessage,
       confirmationResult,
@@ -372,25 +380,32 @@ export async function handleAppointmentBooking(
       patientInfo.source
     );
 
-    // Step 9: Schedule reminders
-    await sleep("1s");
-    const reminderScheduled = await scheduleReminders(
+    // Await all remaining background tasks
+    const [
+      adminEmailResult,
+      _sync,
+      reminderScheduled,
+      _education,
+      _analytics,
+      _webhooks
+    ] = await Promise.all([
+      adminEmailPromise,
+      syncPromise,
+      remindersPromise,
+      educationPromise,
+      analyticsPromise,
+      webhooksPromise
+    ]);
+
+    if (!adminEmailResult.success) {
+      log("AdminNotificationFailed", { error: adminEmailResult.error });
+    }
+
+    log("WorkflowCompleted", {
       bookingId,
-      patientInfo,
-      finalDate,
-      finalTime
-    );
-
-    // Step 10: Prepare patient education content
-    await sleep("5s");
-    await preparePatientEducation(patientInfo.chiefComplaint, patientInfo.email);
-
-    // Step 11: Update analytics
-    await trackBookingAnalytics(bookingId, patientInfo, status);
-
-    console.log(
-      `[Appointment Workflow] Completed booking ${bookingId} with status: ${status}`
-    );
+      status,
+      duration: Date.now() - start
+    });
 
     return {
       bookingId,
@@ -403,7 +418,7 @@ export async function handleAppointmentBooking(
       nextSteps: generateNextSteps(status, finalDate, finalTime),
     };
   } catch (error) {
-    console.error(`[Appointment Workflow] Error in booking ${bookingId}:`, error);
+    log("WorkflowError", { bookingId, error: error instanceof Error ? error.message : String(error) });
     throw error;
   }
 }
@@ -414,7 +429,7 @@ export async function handleAppointmentBooking(
 async function validatePatientInfo(patientInfo: PatientInfo) {
   "use step";
 
-  console.log(`[Appointment Workflow] Validating patient info`);
+  log("ValidatingPatientInfo");
 
   if (!patientInfo.name || patientInfo.name.length < 2) {
     throw new FatalError("Invalid patient name");
@@ -431,8 +446,6 @@ async function validatePatientInfo(patientInfo: PatientInfo) {
   if (!patientInfo.chiefComplaint || patientInfo.chiefComplaint.length < 5) {
     throw new FatalError("Chief complaint is required");
   }
-
-  console.log(`[Appointment Workflow] Validation passed`);
 }
 
 /**
@@ -442,8 +455,6 @@ async function checkEmergencySymptoms(
   chiefComplaint: string
 ): Promise<{ isEmergency: boolean; symptoms: string[] }> {
   "use step";
-
-  console.log(`[Appointment Workflow] Checking for emergency symptoms`);
 
   const emergencyKeywords = [
     "stroke",
@@ -466,9 +477,10 @@ async function checkEmergencySymptoms(
 
   const isEmergency = detectedSymptoms.length > 0;
 
-  console.log(
-    `[Appointment Workflow] Emergency check: ${isEmergency} (symptoms: ${detectedSymptoms.join(", ")})`
-  );
+  // Only log if symptoms detected
+  if (isEmergency) {
+    log("EmergencyCheck", { isEmergency, symptoms: detectedSymptoms });
+  }
 
   return { isEmergency, symptoms: detectedSymptoms };
 }
@@ -482,18 +494,12 @@ async function notifyEmergencyTeam(
 ) {
   "use step";
 
-  console.log(
-    `[Appointment Workflow] Notifying emergency team for ${patientInfo.name}`
-  );
+  log("NotifyingEmergencyTeam", { patientName: patientInfo.name, symptoms });
 
   // In production, this would:
   // - Send SMS to emergency contact
   // - Create high-priority alert in hospital system
   // - Notify on-call doctor
-
-  console.log(
-    `Emergency notification sent for patient ${patientInfo.name} with symptoms: ${symptoms.join(", ")}`
-  );
 }
 
 /**
@@ -505,13 +511,11 @@ async function checkAvailability(
 ): Promise<{ available: boolean; reason?: string }> {
   "use step";
 
-  console.log(`[Appointment Workflow] Checking availability for ${date} ${time}`);
+  log("CheckingAvailability", { date, time });
 
   const availability = evaluateAvailability(date, time);
   if (!availability.available && availability.reason) {
-    console.log(
-      `[Appointment Workflow] Availability failed: ${availability.reason}`
-    );
+    log("AvailabilityFailed", { reason: availability.reason });
   }
 
   return availability;
@@ -526,7 +530,7 @@ async function findAlternativeSlots(
 ): Promise<Array<{ date: string; time: string }>> {
   "use step";
 
-  console.log(`[Appointment Workflow] Finding alternative slots`);
+  log("FindingAlternativeSlots");
 
   const alternatives: Array<{ date: string; time: string }> = [];
   const baseDate = parseDateString(preferredDate) ?? new Date();
@@ -554,7 +558,7 @@ async function findAlternativeSlots(
     }
   }
 
-  console.log(`[Appointment Workflow] Found ${alternatives.length} alternatives`);
+  log("AlternativesFound", { count: alternatives.length });
   return alternatives;
 }
 
@@ -569,10 +573,8 @@ async function createBookingRecord(
 ) {
   "use step";
 
-  console.log(`[Appointment Workflow] Creating booking record ${bookingId}`);
-
+  log("CreatingBookingRecord", { bookingId, patientName: patientInfo.name });
   // In production, this would save to database
-  console.log(`Booking ${bookingId} created for ${patientInfo.name} on ${date} at ${time}`);
 }
 
 /**
@@ -584,8 +586,7 @@ async function sendBookingConfirmationEmail(
 ): Promise<EmailResult> {
   "use step";
 
-  console.log(`[Appointment Workflow] Sending confirmation email to ${booking.email}`);
-
+  log("SendingConfirmationEmail", { email: booking.email });
   return await sendAppointmentConfirmationEmail(booking, confirmationMessage);
 }
 
@@ -598,10 +599,7 @@ async function sendBookingAdminAlert(
 ): Promise<EmailResult> {
   "use step";
 
-  console.log(
-    `[Appointment Workflow] Sending admin alert for ${booking.patientName}`
-  );
-
+  log("SendingAdminAlert", { patientName: booking.patientName });
   return await sendAdminNotificationEmail(booking, source);
 }
 
@@ -674,20 +672,16 @@ async function scheduleReminders(
 ): Promise<boolean> {
   "use step";
 
-  console.log(`[Appointment Workflow] Scheduling reminders for ${bookingId}`);
+  log("SchedulingReminders", { bookingId });
 
   if (!process.env.INNGEST_EVENT_KEY) {
-    console.log(
-      "[Appointment Workflow] INNGEST_EVENT_KEY not set; skipping reminders."
-    );
+    log("InngestKeyMissing", { message: "Skipping reminders" });
     return false;
   }
 
   const appointmentDateTime = buildAppointmentDateTime(date, time);
   if (!appointmentDateTime) {
-    console.error(
-      `[Appointment Workflow] Invalid appointment date/time for reminders: ${date} ${time}`
-    );
+    log("InvalidAppointmentTime", { date, time });
     return false;
   }
 
@@ -721,9 +715,7 @@ async function scheduleReminders(
     }
   }
 
-  console.log(
-    `Reminders scheduled for ${bookingId}: ${scheduledCount} queued`
-  );
+  log("RemindersScheduled", { bookingId, count: scheduledCount });
   return scheduledCount > 0;
 }
 
@@ -736,12 +728,10 @@ async function preparePatientEducation(
 ) {
   "use step";
 
-  console.log(`[Appointment Workflow] Preparing patient education content`);
+  log("PreparingEducationContent");
 
   if (!hasAIConfig()) {
-    console.log(
-      `[Appointment Workflow] AI config missing, skipping education content`
-    );
+    log("AIConfigMissing");
     return;
   }
 
@@ -758,11 +748,10 @@ Keep it simple and reassuring.`,
       temperature: 0.7,
     });
 
-    console.log(`Patient education content prepared (${text.length} chars)`);
+    log("EducationContentPrepared", { length: text.length });
   } catch (error) {
-    console.error(`[Appointment Workflow] AI education content error:`, error);
+    log("AIEducationError", { error: error instanceof Error ? error.message : String(error) });
   }
-  // In production, this would be emailed or saved to patient portal
 }
 
 /**
@@ -775,10 +764,7 @@ async function trackBookingAnalytics(
 ) {
   "use step";
 
-  console.log(`[Appointment Workflow] Tracking analytics for ${bookingId}`);
-
-  // In production, this would send to analytics platforms
-  console.log(`Analytics tracked: booking ${bookingId}, status: ${status}, type: ${patientInfo.appointmentType}`);
+  log("TrackingAnalytics", { bookingId, status, type: patientInfo.appointmentType });
 }
 
 /**
