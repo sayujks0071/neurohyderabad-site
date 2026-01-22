@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { generateText } from 'ai';
+import { getTextModel, hasAIConfig } from '@/src/lib/ai/gateway';
 import { DR_SAYUJ_SYSTEM_PROMPT } from '@/src/lib/ai/prompts';
 
 interface ChatRequest {
@@ -22,11 +24,11 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Check if OpenAI API key is configured
-    if (!process.env.OPENAI_API_KEY) {
+    // Check if AI configuration is available
+    if (!hasAIConfig()) {
       return NextResponse.json(
         { 
-          error: 'OpenAI API key not configured',
+          error: 'AI service not configured',
           response: "I apologize, but the AI service is not currently available. Please call us directly at +91-9778280044 for immediate assistance."
         },
         { status: 500 }
@@ -89,28 +91,19 @@ export async function POST(request: NextRequest) {
       }
     ];
 
-    // Call OpenAI API
-    const openaiResponse = await fetch('https://api.openai.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'gpt-4o-mini', // Use a cost-effective model
-        messages: messages,
-        max_tokens: 500,
-        temperature: 0.7,
-        stream: false
-      }),
+    // Call AI via Gateway
+    const { text: aiResponse, usage } = await generateText({
+      model: getTextModel(), // defaults to gpt-4o-mini
+      messages: messages as any,
+      maxOutputTokens: 500,
+      temperature: 0.7,
     });
 
-    if (!openaiResponse.ok) {
-      throw new Error(`OpenAI API error: ${openaiResponse.status}`);
-    }
-
-    const data = await openaiResponse.json();
-    const aiResponse = data.choices[0]?.message?.content || "I apologize, but I couldn't generate a response. Please call us directly at +91-9778280044.";
+    const usageData = {
+      prompt_tokens: usage.inputTokens || 0,
+      completion_tokens: usage.outputTokens || 0,
+      total_tokens: usage.totalTokens || 0
+    };
 
     // Log the interaction
     console.log('OpenAI Chat Interaction:', {
@@ -124,8 +117,8 @@ export async function POST(request: NextRequest) {
     });
 
     return NextResponse.json({
-      response: aiResponse,
-      usage: data.usage,
+      response: aiResponse || "I apologize, but I couldn't generate a response. Please call us directly at +91-9778280044.",
+      usage: usageData,
       // Include sources if available
       sources: geminiSources.length > 0 ? geminiSources : undefined
     });

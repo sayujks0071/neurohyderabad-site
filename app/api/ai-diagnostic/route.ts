@@ -1,14 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
-
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+import { generateText } from 'ai';
+import { getTextModel, hasAIConfig } from '@/src/lib/ai/gateway';
 
 export async function POST(request: NextRequest) {
   try {
     const { issue, headers, response } = await request.json();
 
-    if (!OPENAI_API_KEY) {
+    if (!hasAIConfig()) {
       return NextResponse.json({ 
-        error: 'OpenAI API key not configured' 
+        error: 'AI service not configured'
       }, { status: 500 });
     }
 
@@ -34,35 +34,21 @@ ANALYSIS NEEDED:
 Provide a detailed technical analysis and solution.
 `;
 
-    const openaiResponse = await fetch('https://api.openai.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${OPENAI_API_KEY}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        model: "gpt-4",
-        messages: [
-          {
-            role: "system",
-            content: "You are a web performance expert specializing in Next.js, Vercel, and compression issues. Provide detailed technical solutions."
-          },
-          {
-            role: "user",
-            content: diagnosticPrompt
-          }
-        ],
-        max_tokens: 1000,
-        temperature: 0.1
-      })
+    const { text: analysis } = await generateText({
+      model: getTextModel('gpt-4'),
+      messages: [
+        {
+          role: "system",
+          content: "You are a web performance expert specializing in Next.js, Vercel, and compression issues. Provide detailed technical solutions."
+        },
+        {
+          role: "user",
+          content: diagnosticPrompt
+        }
+      ],
+      maxOutputTokens: 1000,
+      temperature: 0.1
     });
-
-    if (!openaiResponse.ok) {
-      throw new Error(`OpenAI API error: ${openaiResponse.status}`);
-    }
-
-    const aiData = await openaiResponse.json();
-    const analysis = aiData.choices[0]?.message?.content;
 
     return NextResponse.json({
       success: true,
