@@ -106,11 +106,11 @@ const nextConfig = {
         permanent: true,
       },
       // Redirect /disease-guides to /conditions (consolidate medical info)
-      // {
-      //   source: '/disease-guides/:path*',
-      //   destination: '/conditions/:path*',
-      //   permanent: true,
-      // },
+      {
+        source: '/disease-guides/:path*',
+        destination: '/conditions/:path*',
+        permanent: true,
+      },
       // Brain tumor surgery redirects
       {
         source: '/brain-tumor-surgery-hyderabad',

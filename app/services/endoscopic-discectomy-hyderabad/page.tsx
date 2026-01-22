@@ -162,7 +162,7 @@ export default function EndoscopicDiscectomyPage() {
               <ul className="space-y-2 text-gray-700">
                 <li>
                   • Severe leg pain (
-                  <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 underline">
+                  <Link href="/conditions/sciatica-treatment-hyderabad" className="text-blue-600 underline">
                     sciatica
                   </Link>
                   )
@@ -264,7 +264,7 @@ export default function EndoscopicDiscectomyPage() {
                   <h3 className="font-semibold text-blue-700 mb-2">Slip Disc Treatment</h3>
                   <p className="text-sm text-gray-600">Comprehensive guide to herniated disc treatment options</p>
                 </Link>
-                <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="bg-blue-50 border border-blue-200 rounded-lg p-4 hover:bg-blue-100 transition">
+                <Link href="/conditions/sciatica-treatment-hyderabad" className="bg-blue-50 border border-blue-200 rounded-lg p-4 hover:bg-blue-100 transition">
                   <h3 className="font-semibold text-blue-700 mb-2">Sciatica Treatment</h3>
                   <p className="text-sm text-gray-600">Understanding sciatica causes and treatment</p>
                 </Link>

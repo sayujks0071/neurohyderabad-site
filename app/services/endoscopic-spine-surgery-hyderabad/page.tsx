@@ -31,7 +31,9 @@ const baseMetadata = makeMetadata({
 
 export const metadata: Metadata = {
   ...baseMetadata,
-  title: 'Endoscopic Spine Surgery Hyderabad | Cost: ₹95k+ | Same-Day',
+  title: {
+    absolute: 'Endoscopic Spine Surgery Hyderabad: Cost ₹95k+ | Dr. Sayuj'
+  },
   description:
     'Expert endoscopic spine surgery in Hyderabad. 90% same-day discharge. Keyhole surgery for slip disc & sciatica. Packages start ₹95k. Book consult.',
   keywords: [

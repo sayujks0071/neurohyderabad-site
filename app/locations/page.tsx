@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import SchemaScript from "@/app/_components/SchemaScript";
-import { LocationNAPCard } from "@/src/components/locations/LocationNAPCard";
+import LocalNAP from "@/app/_components/LocalNAP";
 import YMYLAttribution from "@/app/_components/YMYLAttribution";
 import { SITE_URL } from "@/src/lib/seo";
-import { locations } from "@/src/data/locations";
 
 // Static generation with 24-hour revalidation
 export const revalidate = 86400;
@@ -71,6 +70,27 @@ export const metadata: Metadata = {
 };
 
 export default function LocationsPage() {
+  const locations = [
+    {
+      name: "Banjara Hills",
+      slug: "brain-spine-surgeon-banjara-hills",
+      address: "Yashoda Hospitals, Banjara Hills, Hyderabad",
+      description: "Premium neurosurgery care in the heart of Banjara Hills"
+    },
+    {
+      name: "Hitec City",
+      slug: "brain-spine-surgeon-hitec-city",
+      address: "Yashoda Hospitals, Hitec City, Hyderabad",
+      description: "Advanced neurosurgery services in Hitec City"
+    },
+    {
+      name: "Jubilee Hills",
+      slug: "brain-spine-surgeon-jubilee-hills",
+      address: "Yashoda Hospitals, Jubilee Hills, Hyderabad",
+      description: "Expert neurosurgery care in Jubilee Hills"
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="mx-auto max-w-4xl px-4 py-12">
@@ -85,25 +105,25 @@ export default function LocationsPage() {
         </div>
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-12">
-          {locations.map((location) => {
-            const href = location.slug.startsWith('/') ? location.slug : `/${location.slug}`;
-            return (
-              <div key={location.id} className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow flex flex-col h-full">
-                <h2 className="text-2xl font-semibold text-gray-900 mb-3">
-                  {location.areaServedName}
-                </h2>
-                <p className="text-gray-600 mb-4 flex-grow">
-                  Advanced neurosurgery and spine care services for patients in {location.areaServedName}.
-                </p>
-                <Link
-                  href={href}
-                  className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors text-center mt-auto"
-                >
-                  View Details
-                </Link>
-              </div>
-            );
-          })}
+          {locations.map((location) => (
+            <div key={location.slug} className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+              <h2 className="text-2xl font-semibold text-gray-900 mb-3">
+                {location.name}
+              </h2>
+              <p className="text-gray-600 mb-4">
+                {location.address}
+              </p>
+              <p className="text-gray-700 mb-6">
+                {location.description}
+              </p>
+              <Link
+                href={`/locations/${location.slug}`}
+                className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                View Details
+              </Link>
+            </div>
+          ))}
         </div>
 
         <div className="bg-white rounded-lg shadow-md p-8">
@@ -126,7 +146,7 @@ export default function LocationsPage() {
               </h3>
               <p className="text-gray-600">
                 Our multidisciplinary team includes neurosurgeons, neurologists, 
-                anesthesiologists, and specialized nursing staff.
+                anesthesiologists, and specialized nursing staff at every location.
               </p>
             </div>
             <div>
@@ -143,7 +163,7 @@ export default function LocationsPage() {
                 Emergency Services
               </h3>
               <p className="text-gray-600">
-                24/7 emergency neurosurgery services available at Yashoda Hospital, Malakpet
+                24/7 emergency neurosurgery services available at all locations
                 for urgent brain and spine conditions.
               </p>
             </div>
@@ -159,10 +179,7 @@ export default function LocationsPage() {
           </Link>
         </div>
 
-        <div className="mt-12">
-           <LocationNAPCard locationId="malakpet" />
-        </div>
-
+        <LocalNAP />
         <YMYLAttribution lastReviewed="2024-12-19" />
       </div>
       

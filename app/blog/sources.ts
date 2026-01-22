@@ -180,7 +180,7 @@ export const BLOG_SOURCES: Record<string, SourceEntry[]> = {
       href: "https://www.ninds.nih.gov/health-information/disorders/cervical-radiculopathy",
     },
   ],
-  "sciatica-pain-treatment-hyderabad": [
+  "sciatica-treatment-hyderabad": [
     {
       label: "American Academy of Orthopaedic Surgeons – Sciatica (Lumbar Radiculopathy)",
       href: "https://orthoinfo.aaos.org/en/diseases--conditions/sciatica-lumbar-radiculopathy/",

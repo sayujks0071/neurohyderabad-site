@@ -300,7 +300,7 @@ export const CONDITION_RESOURCES: ConditionResource[] = [
     primaryPath: "/conditions/herniated-disc-treatment-hyderabad",
     relatedResources: [
       {
-        href: "/conditions/sciatica-pain-treatment-hyderabad",
+        href: "/conditions/sciatica-treatment-hyderabad",
         label: "Sciatica treatment guidance",
       },
       {
@@ -555,7 +555,7 @@ export const CONDITION_RESOURCES: ConditionResource[] = [
     name: "Sciatica",
     summary:
       "Evidence-based conservative care and surgical escalation for sciatic nerve pain radiating down the leg.",
-    primaryPath: "/conditions/sciatica-pain-treatment-hyderabad",
+    primaryPath: "/conditions/sciatica-treatment-hyderabad",
     relatedResources: [
       {
         href: "/services/endoscopic-discectomy-hyderabad",

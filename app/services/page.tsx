@@ -169,7 +169,7 @@ export default function ServicesPage() {
               <h3 className="font-semibold text-blue-700">Brain Tumor Surgery</h3>
               <p className="text-sm text-gray-600">Safe resection with awake mapping and neuronavigation.</p>
             </Link>
-            <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="block rounded-lg border p-4 hover:border-blue-300">
+            <Link href="/conditions/sciatica-treatment-hyderabad" className="block rounded-lg border p-4 hover:border-blue-300">
               <h3 className="font-semibold text-blue-700">Sciatica & Slip Disc</h3>
               <p className="text-sm text-gray-600">Endoscopic discectomy and MISS options for leg-dominant pain.</p>
             </Link>
@@ -281,7 +281,7 @@ export default function ServicesPage() {
             <div className="bg-blue-50 p-6 rounded-lg">
               <h3 className="text-xl font-semibold text-blue-700 mb-4">Common Conditions We Treat</h3>
               <ul className="space-y-2 text-gray-700">
-                <li>• <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 hover:underline">Sciatica and leg pain</Link></li>
+                <li>• <Link href="/conditions/sciatica-treatment-hyderabad" className="text-blue-600 hover:underline">Sciatica and leg pain</Link></li>
                 <li>• <Link href="/conditions/spinal-stenosis-treatment-hyderabad" className="text-blue-600 hover:underline">Spinal stenosis</Link></li>
                 <li>• <Link href="/conditions/cervical-radiculopathy-treatment-hyderabad" className="text-blue-600 hover:underline">Cervical radiculopathy</Link></li>
                 <li>• <Link href="/conditions/trigeminal-neuralgia-treatment-hyderabad" className="text-blue-600 hover:underline">Trigeminal neuralgia</Link></li>

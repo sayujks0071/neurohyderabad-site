@@ -1,27 +1,23 @@
 {
-  "timestamp": "2025-05-18T12:00:00Z",
-  "commit_hash": "",
-  "pages": {
-    "home": { "url": "/", "notes": ["Hero image optimized with priority", "Shared JS ~103kB"] },
-    "appointment": { "url": "/appointments", "notes": ["Heavy client component NeuraLinkBookingApp", "ChatBot loading immediately"] },
-    "location": { "url": "/locations/banjara-hills", "notes": [] },
-    "condition": { "url": "/conditions/sciatica-pain-treatment-hyderabad", "notes": [] }
+  "timestamp": "2025-02-23T12:00:00Z",
+  "notes": {
+    "home": {
+      "bottleneck": "LCP",
+      "observation": "DoctorCard image in Hero section lacked 'sizes' attribute despite having 'priority'. This can lead to suboptimal image resource selection by the browser.",
+      "fix": "Added sizes='128px' to DoctorCard image."
+    },
+    "general": {
+      "observation": "Shared JS bundle is ~103kB, which is relatively high. Hypertune is lazy-loaded to mitigate this."
+    }
   },
-  "bottlenecks": [
+  "changes": [
     {
-      "page": "/appointments",
-      "metric": "TBT/INP",
-      "description": "ChatBot component loading immediately on client hydration despite being non-critical, increasing Main Thread blocking time."
+      "file": "app/_components/DoctorCard.tsx",
+      "description": "Added sizes='128px' to Image component to assist browser in resource selection for LCP optimization."
     }
   ],
-  "selected_fix": {
-    "description": "Deferred loading of ChatBot component on Appointment page using 4s timeout (simulating idle callback).",
-    "files": ["app/appointments/_components/neuralink/NeuraLinkBookingApp.tsx"],
-    "safety_check": "Retained placeholder button to prevent layout shift. Component loads seamlessly when user waits or clicks (if implemented, but here it auto-loads after 4s)."
-  },
   "verification": {
-    "build_status": "Passed",
-    "lint_status": "Passed",
-    "expected_impact": "Reduced Total Blocking Time (TBT) on /appointments by removing ChatBot initialization from critical path."
+    "method": "Manual inspection via Playwright script",
+    "result": "sizes attribute verified as '128px'. Visual appearance unchanged."
   }
 }

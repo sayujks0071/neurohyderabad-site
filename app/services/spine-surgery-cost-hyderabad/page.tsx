@@ -12,13 +12,16 @@ import FAQPageSchema from '@/app/_components/FAQPageSchema';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 
 const baseMetadata = makeMetadata({
-  title: 'Spine Surgery Cost Hyderabad | Insurance & Packages [2025]',
+  title: 'Spine Surgery Cost Hyderabad | Packages & Insurance [2025]',
   description: 'Spine surgery cost in Hyderabad starting ₹95k. Endoscopic & keyhole options. Insurance cashless accepted at Yashoda Hospital. Get price list.',
   canonicalPath: '/services/spine-surgery-cost-hyderabad',
 });
 
 export const metadata: Metadata = {
   ...baseMetadata,
+  title: {
+    absolute: 'Spine Surgery Cost Hyderabad | Packages & Insurance [2025]'
+  },
   openGraph: {
     title: baseMetadata.title,
     description: baseMetadata.description,

@@ -316,7 +316,7 @@ export default function ReturnToWorkAfterEndoscopicDiscectomyPage() {
                 </div>
                 <div className="border rounded-lg p-4">
                   <h3 className="font-semibold mb-2">
-                    <Link href="/conditions/sciatica-pain-treatment-hyderabad/" className="text-blue-600 hover:text-blue-800">
+                    <Link href="/conditions/sciatica-treatment-hyderabad/" className="text-blue-600 hover:text-blue-800">
                       Sciatica Treatment
                     </Link>
                   </h3>

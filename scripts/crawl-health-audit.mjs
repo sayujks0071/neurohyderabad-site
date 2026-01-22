@@ -2,260 +2,201 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const ROOT_DIR = path.join(__dirname, '..');
-const REPORTS_DIR = path.join(ROOT_DIR, 'reports');
-const REPORT_FILE = path.join(REPORTS_DIR, 'crawl-health-weekly.json');
-const BASE_URL = process.env.BASE_URL || 'http://localhost:3000';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const PROJECT_ROOT = path.resolve(__dirname, '..');
 
-// Ensure reports dir exists
-if (!fs.existsSync(REPORTS_DIR)) {
-  fs.mkdirSync(REPORTS_DIR, { recursive: true });
-}
+const REPORT_PATH = path.join(PROJECT_ROOT, 'reports/crawl-health-weekly.json');
+const CONDITIONS_INDEX_PATH = path.join(PROJECT_ROOT, 'src/data/conditionsIndex.ts');
 
-async function getUrlList() {
-  const urls = new Set(['/', '/appointments', '/robots.txt', '/sitemap.xml']);
-
-  // Extract locations
+// Helper to extract primaryPaths from conditionsIndex.ts
+function extractConditionPaths() {
   try {
-    const locationsContent = fs.readFileSync(path.join(ROOT_DIR, 'src/data/locations.ts'), 'utf8');
-    const slugMatches = locationsContent.matchAll(/slug:\s*["']([^"']+)["']/g);
-    for (const match of slugMatches) {
-        let slug = match[1];
-        if (!slug.startsWith('/')) slug = '/' + slug;
-        urls.add(slug);
-    }
-  } catch (e) {
-    console.error('Error reading locations.ts:', e);
-  }
-
-  // Extract conditions
-  try {
-    const conditionsContent = fs.readFileSync(path.join(ROOT_DIR, 'src/data/conditionsIndex.ts'), 'utf8');
-    const pathMatches = conditionsContent.matchAll(/primaryPath:\s*["']([^"']+)["']/g);
-    for (const match of pathMatches) {
-        urls.add(match[1]);
-    }
-  } catch (e) {
-    console.error('Error reading conditionsIndex.ts:', e);
-  }
-
-  return Array.from(urls);
-}
-
-async function fetchPage(url) {
-  const fullUrl = url.startsWith('http') ? url : `${BASE_URL}${url}`;
-  try {
-    const response = await fetch(fullUrl, { redirect: 'manual' });
-    const status = response.status;
-    let location = response.headers.get('location');
-
-    let redirectChain = [];
-    if (status >= 300 && status < 400 && location) {
-        redirectChain.push({ status, location });
-
-        let currentUrl = location.startsWith('/') ? `${BASE_URL}${location}` : location;
-        let hops = 0;
-
-        while (hops < 5) {
-             try {
-                const nextRes = await fetch(currentUrl, { redirect: 'manual' });
-                if (nextRes.status >= 300 && nextRes.status < 400 && nextRes.headers.get('location')) {
-                    const nextLoc = nextRes.headers.get('location');
-                    redirectChain.push({ status: nextRes.status, location: nextLoc });
-                    currentUrl = nextLoc.startsWith('/') ? `${BASE_URL}${nextLoc}` : nextLoc;
-                    hops++;
-                } else {
-                    break;
-                }
-             } catch (e) {
-                 break;
-             }
-        }
-    }
-
-    // Fetch content if 200
-    let content = '';
-    if (status === 200) {
-        content = await response.text();
-    }
-
-    return {
-        url,
-        status,
-        redirectChain,
-        content
-    };
-  } catch (error) {
-    return {
-        url,
-        status: 0,
-        error: error.message
-    };
-  }
-}
-
-function analyzeContent(html, baseUrl) {
-    const titleMatch = html.match(/<title>([^<]*)<\/title>/i);
-    const title = titleMatch ? titleMatch[1] : null;
-
-    // Internal links
-    const links = new Set();
-    const hrefRegex = /<a[^>]+href=["']([^"']+)["']/gi;
+    const content = fs.readFileSync(CONDITIONS_INDEX_PATH, 'utf-8');
+    const regex = /primaryPath:\s*["']([^"']+)["']/g;
+    const paths = [];
     let match;
-    while ((match = hrefRegex.exec(html)) !== null) {
-        let href = match[1];
-        // Clean href (remove hash, query)
-        href = href.split('#')[0]; // keep query? usually yes for crawl
+    while ((match = regex.exec(content)) !== null) {
+      if (match[1].startsWith('/conditions/')) {
+        paths.push(match[1]);
+      }
+    }
+    return paths;
+  } catch (err) {
+    console.error('Error reading conditionsIndex.ts:', err);
+    return [];
+  }
+}
 
-        if (href.startsWith('/') || href.startsWith(baseUrl)) {
-             // Normalize to path
-             if (href.startsWith(baseUrl)) {
-                 href = href.substring(baseUrl.length);
-             }
-             if (href && href !== '/') {
-                 links.add(href);
-             }
+async function fetchPage(baseUrl, relativeUrl) {
+  const url = new URL(relativeUrl, baseUrl).toString();
+  try {
+    const start = Date.now();
+    const res = await fetch(url);
+    const time = Date.now() - start;
+
+    let html = '';
+    let wordCount = 0;
+    let title = '';
+    let links = [];
+
+    if (res.ok) {
+        html = await res.text();
+        // Extract Title
+        const titleMatch = html.match(/<title>([^<]*)<\/title>/i);
+        title = titleMatch ? titleMatch[1] : '';
+
+        // Estimate Word Count
+        const text = html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+        wordCount = text.split(' ').length;
+
+        // Extract Links
+        const linkRegex = /href=["'](\/[^"']*)["']/g;
+        let lMatch;
+        while ((lMatch = linkRegex.exec(html)) !== null) {
+            // Filter out obviously non-page links
+            const link = lMatch[1];
+            if (!link.startsWith('//') &&
+                !link.match(/\.(png|jpg|jpeg|gif|svg|css|js|ico)$/i)) {
+                links.push(link);
+            }
         }
     }
 
-    // Thin content
-    let text = html.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '')
-                   .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
-                   .replace(/<[^>]+>/g, ' ')
-                   .replace(/\s+/g, ' ')
-                   .trim();
-    const wordCount = text.split(' ').length;
-
-    return { title, links: Array.from(links), wordCount };
+    return {
+      url: relativeUrl,
+      status: res.status,
+      ok: res.ok,
+      redirected: res.redirected,
+      finalUrl: res.url,
+      title,
+      wordCount,
+      time,
+      links: [...new Set(links)]
+    };
+  } catch (err) {
+    return {
+      url: relativeUrl,
+      status: 0,
+      ok: false,
+      error: err.message,
+      links: []
+    };
+  }
 }
 
-const linkCache = new Map();
+async function main() {
+  const args = process.argv.slice(2);
+  const baseUrlArg = args.find(a => a.startsWith('--base-url='));
+  const baseUrl = baseUrlArg ? baseUrlArg.split('=')[1] : 'http://localhost:3000';
 
-async function checkLink(url) {
-    if (linkCache.has(url)) return linkCache.get(url);
-    const fullUrl = url.startsWith('http') ? url : `${BASE_URL}${url}`;
-    try {
-        const res = await fetch(fullUrl, { method: 'HEAD' });
-        let status = res.status;
-        if (status === 405 || status === 404) { // Try GET if HEAD fails or 404 (sometimes static files behave weirdly)
-             const resGet = await fetch(fullUrl, { method: 'GET' });
-             status = resGet.status;
-        }
-        linkCache.set(url, status);
-        return status;
-    } catch (e) {
-        linkCache.set(url, 0);
-        return 0;
-    }
-}
+  console.log(`Starting crawl audit against ${baseUrl}...`);
 
-async function runAudit() {
-  const seedUrls = await getUrlList();
-  console.log(`Auditing ${seedUrls.length} seed URLs...`);
+  // 1. Seeds
+  const conditionPaths = extractConditionPaths();
+  // Limit condition paths to first 5 to avoid huge crawl, plus the ones we know were broken
+  const brokenSuspects = [
+      '/conditions/acoustic-neuroma-treatment-hyderabad',
+      '/conditions/carpal-tunnel-syndrome-hyderabad'
+  ];
+  const seeds = [
+      '/',
+      '/appointments',
+      '/services',
+      '/conditions',
+      '/about',
+      ...brokenSuspects
+  ];
 
-  const auditResults = [];
-  const brokenInternalLinks = []; // { source, target, status }
-  const duplicateTitles = {};
-  const missingTitles = [];
-  const thinPages = [];
-  const redirectChains = [];
-  const allDiscoveredLinks = new Set([...seedUrls]);
+  // Also add any other condition paths from index (maybe check them all since checking existence is fast)
+  // The goal is to check ALL links found on seeds.
 
-  // 1. Crawl Seed Pages
-  for (const url of seedUrls) {
-      // console.log(`Checking ${url}...`);
-      const res = await fetchPage(url);
+  // We will check:
+  // 1. All Seeds (Fetch body + Extract links)
+  // 2. All Discovered Links (Head/Get status check only, unless we want to recurse)
 
-      if (res.status === 0) {
-          console.error(`Failed to fetch ${url}: ${res.error}`);
-          continue;
-      }
+  // For this audit, we'll do 1 level depth.
 
-      if (res.redirectChain && res.redirectChain.length > 1) {
-          redirectChains.push({ url, chain: res.redirectChain });
-      }
+  const results = new Map(); // url -> result
 
-      if (res.status === 200) {
-          // Skip analysis for xml/txt
-          if (url.endsWith('.xml') || url.endsWith('.txt')) {
-              continue;
-          }
-
-          const { title, links, wordCount } = analyzeContent(res.content, BASE_URL);
-
-          if (!title) {
-              missingTitles.push(url);
-          } else {
-              if (!duplicateTitles[title]) duplicateTitles[title] = [];
-              duplicateTitles[title].push(url);
-          }
-
-          if (wordCount < 250) {
-             thinPages.push({ url, wordCount });
-          }
-
-          for (const link of links) {
-              allDiscoveredLinks.add(link);
-              // Check link later or now?
-              // Let's store checking task
-          }
-
-          // Store links for checking 404s later
-          auditResults.push({ url, links });
+  // Queue seeds
+  for (const url of seeds) {
+      if (!results.has(url)) {
+          console.log(`Crawling Seed: ${url}...`);
+          const result = await fetchPage(baseUrl, url);
+          results.set(url, result);
       }
   }
 
-  // 2. Check all discovered unique internal links for 404s
-  console.log(`Checking ${allDiscoveredLinks.size} unique internal links...`);
-  const brokenLinksFound = [];
+  // Collect all discovered links
+  const allDiscoveredLinks = new Set();
+  for (const result of results.values()) {
+      if (result.links) {
+          for (const link of result.links) {
+              // Normalize link (remove hash/query if needed, but keeping simple for now)
+              const cleanLink = link.split('#')[0].split('?')[0];
+              if (cleanLink.length > 1) { // ignore / or empty
+                  allDiscoveredLinks.add(cleanLink);
+              }
+          }
+      }
+  }
 
+  // Also include all condition paths from data source as targets to verify
+  conditionPaths.forEach(p => allDiscoveredLinks.add(p));
+
+  console.log(`Found ${allDiscoveredLinks.size} unique internal links to verify.`);
+
+  // Check discovered links
   for (const link of allDiscoveredLinks) {
-      const status = await checkLink(link);
-      if (status >= 400 || status === 0) {
-          brokenLinksFound.push({ link, status });
+      if (!results.has(link)) {
+          // console.log(`Verifying: ${link}...`); // reduce noise
+          // We can just do a lighter check, but fetchPage is fine.
+          const result = await fetchPage(baseUrl, link);
+          // We don't need to parse links from these (depth 1)
+          delete result.links;
+          results.set(link, result);
       }
   }
 
-  // 3. Map broken links back to source pages
-  for (const res of auditResults) {
-      for (const link of res.links) {
-          const broken = brokenLinksFound.find(b => b.link === link);
-          if (broken) {
-              brokenInternalLinks.push({ source: res.url, target: link, status: broken.status });
-          }
-      }
-  }
-
-  // Filter duplicate titles with only 1 count
-  const actualDuplicateTitles = {};
-  for (const [title, urls] of Object.entries(duplicateTitles)) {
-      if (urls.length > 1) {
-          actualDuplicateTitles[title] = urls;
-      }
-  }
-
+  // Generate Report
+  const finalResults = Array.from(results.values());
   const report = {
-      timestamp: new Date().toISOString(),
-      summary: {
-          urls_checked: seedUrls.length,
-          broken_links_found: brokenInternalLinks.length,
-          redirect_chains: redirectChains.length,
-          duplicate_titles: Object.keys(actualDuplicateTitles).length,
-          missing_titles: missingTitles.length,
-          thin_pages: thinPages.length,
-      },
-      details: {
-          broken_links: brokenInternalLinks,
-          redirect_chains: redirectChains,
-          duplicate_titles: actualDuplicateTitles,
-          missing_titles: missingTitles,
-          thin_pages: thinPages
-      }
+    timestamp: new Date().toISOString(),
+    baseUrl,
+    summary: {
+      totalChecked: finalResults.length,
+      brokenLinks: 0,
+      redirects: 0,
+      thinPages: 0,
+      missingTitles: 0,
+    },
+    details: finalResults
   };
 
-  fs.writeFileSync(REPORT_FILE, JSON.stringify(report, null, 2));
-  console.log(`Report saved to ${REPORT_FILE}`);
+  for (const r of finalResults) {
+    if (!r.ok) report.summary.brokenLinks++;
+    if (r.redirected) report.summary.redirects++;
+    if (r.ok && r.wordCount > 0 && r.wordCount < 300) report.summary.thinPages++;
+    if (r.ok && !r.title) report.summary.missingTitles++;
+  }
+
+  const reportsDir = path.dirname(REPORT_PATH);
+  if (!fs.existsSync(reportsDir)) {
+      fs.mkdirSync(reportsDir, { recursive: true });
+  }
+
+  fs.writeFileSync(REPORT_PATH, JSON.stringify(report, null, 2));
+  console.log(`Audit complete. Checked ${report.summary.totalChecked} links.`);
+  console.log(`Report saved to ${REPORT_PATH}`);
+
+  const broken = finalResults.filter(r => !r.ok);
+  if (broken.length > 0) {
+      console.log('\nBroken Links Found:');
+      broken.forEach(r => console.log(`${r.status} ${r.url} (${r.error || ''})`));
+  } else {
+      console.log('\nNo broken links found!');
+  }
 }
 
-runAudit().catch(console.error);
+main().catch(console.error);

@@ -225,7 +225,7 @@ export default function SlipDiscSurgeryCostPage() {
                 <h3 className="text-lg font-semibold text-blue-700 mb-2">Slip Disc Treatment</h3>
                 <p className="text-sm text-gray-600">Comprehensive treatment options guide</p>
               </Link>
-              <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition">
+              <Link href="/conditions/sciatica-treatment-hyderabad" className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition">
                 <h3 className="text-lg font-semibold text-blue-700 mb-2">Sciatica Treatment</h3>
                 <p className="text-sm text-gray-600">Understanding sciatica and treatment options</p>
               </Link>

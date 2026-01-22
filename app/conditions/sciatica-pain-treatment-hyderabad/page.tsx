@@ -17,13 +17,16 @@ import { patientStories } from '@/src/content/stories';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
 
 const baseMetadata = makeMetadata({
-  title: "Sciatica Treatment Hyderabad | 90% Non-Surgical Relief | Dr Sayuj",
+  title: "Sciatica Treatment Hyderabad: 90% Non-Surgical | Dr. Sayuj",
   description: "Stop leg pain today. 90% of our sciatica patients recover without surgery. Expert diagnosis & endoscopic options. Book same-day consult.",
   canonicalPath: '/conditions/sciatica-pain-treatment-hyderabad',
 });
 
 export const metadata: Metadata = {
   ...baseMetadata,
+  title: {
+    absolute: "Sciatica Treatment Hyderabad: 90% Non-Surgical | Dr. Sayuj"
+  },
   keywords: [
     "sciatica treatment hyderabad",
     "sciatica pain relief",
@@ -407,7 +410,7 @@ export default function SciaticaTreatmentPage() {
         updatedOn="2025-01-15"
       />
 
-      <SourceList sources={sources['sciatica-pain-treatment-hyderabad'] || []} />
+      <SourceList sources={sources['sciatica-treatment-hyderabad'] || []} />
 </main>
   );
 }

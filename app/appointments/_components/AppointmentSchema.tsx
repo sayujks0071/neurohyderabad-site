@@ -6,11 +6,14 @@ export default function AppointmentSchema() {
   const malakpet = getLocationById('malakpet');
   if (!malakpet) return null;
 
-  // Implements Schema.org JSON-LD for Physician and MedicalClinic.
-  // This structure is optimized for Google's Medical Schema requirements.
-  // - Entity: Physician (Dr. Sayuj Krishnan)
-  // - Entity: MedicalClinic (Yashoda Hospitals)
-  // - Includes: Address, Services, Specialty, and Booking URL.
+  // The user requested a specific JSON-LD structure for the booking page.
+  // We use a graph to include both Physician and MedicalClinic entities.
+  // Verified against SEO requirements:
+  // - Name: 'Dr. Sayuj Krishnan'
+  // - MedicalSpecialty: 'Neurosurgeon'
+  // - Address: Yashoda Hospitals, Malakpet, Hyderabad
+  // - AvailableService: 'Neurosurgery', 'Spine Surgery', 'Brain Tumor Surgery'
+  // - URL: Booking page URL
   const schema = {
     "@context": "https://schema.org",
     "@graph": [

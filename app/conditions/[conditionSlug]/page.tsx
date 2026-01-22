@@ -23,7 +23,7 @@ const STATIC_CONDITION_PATHS = [
   "/conditions/cervical-radiculopathy-treatment-hyderabad",
   "/conditions/osteoporotic-spine-fracture-hyderabad",
   "/conditions/sciatica-pain-treatment-hyderabad",
-  "/conditions/sciatica-pain-treatment-hyderabad",
+  "/conditions/sciatica-treatment-hyderabad",
   "/conditions/slip-disc-treatment-hyderabad",
   "/conditions/spinal-stenosis-treatment-hyderabad",
   "/conditions/spine-tumor-surgery-hyderabad",

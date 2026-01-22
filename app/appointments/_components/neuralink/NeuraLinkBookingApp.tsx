@@ -1,11 +1,10 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import { ChevronRight, MessageSquareCode, MessageSquare } from "lucide-react";
 import PatientPortal from "./PatientPortal";
 import AppointmentFaq from "../AppointmentFaq";
 import dynamic from "next/dynamic";
-import VoiceBookingOption from "../VoiceBookingOption";
 
 // Dynamic import for LiveAssistant (heavy dependency on @google/genai)
 // Only loaded when the user explicitly clicks "Voice AI Assistant".
@@ -40,17 +39,7 @@ interface NeuraLinkBookingAppProps {
 
 const NeuraLinkBookingApp = ({ heroContent, locationInfo }: NeuraLinkBookingAppProps) => {
   const [isAssistantOpen, setIsAssistantOpen] = useState(false);
-  // CWV Optimization: Defer ChatBot loading to reduce TBT
-  const [shouldLoadChatBot, setShouldLoadChatBot] = useState(false);
   const formRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    // Load ChatBot after 4 seconds (idle time)
-    const timer = setTimeout(() => {
-      setShouldLoadChatBot(true);
-    }, 4000);
-    return () => clearTimeout(timer);
-  }, []);
 
   const scrollToForm = () => {
     formRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -88,10 +77,7 @@ const NeuraLinkBookingApp = ({ heroContent, locationInfo }: NeuraLinkBookingAppP
       </section>
 
       <section ref={formRef} className="pb-20">
-        <div className="max-w-6xl mx-auto px-4">
-          <VoiceBookingOption />
-          <PatientPortal />
-        </div>
+        <PatientPortal />
       </section>
 
       <AppointmentFaq />
@@ -100,24 +86,7 @@ const NeuraLinkBookingApp = ({ heroContent, locationInfo }: NeuraLinkBookingAppP
       {isAssistantOpen && (
         <LiveAssistant isOpen={isAssistantOpen} onClose={() => setIsAssistantOpen(false)} />
       )}
-
-      {/* CWV Optimization: Show placeholder initially, then lazy load the real ChatBot */}
-      {shouldLoadChatBot ? (
-        <ChatBot />
-      ) : (
-        <div className="fixed bottom-6 left-6 z-[90]">
-          <button
-            className="p-4 rounded-full shadow-2xl bg-blue-600 text-white flex items-center justify-center group"
-            aria-label="Loading AI Assistant"
-            onClick={() => setShouldLoadChatBot(true)}
-          >
-            <MessageSquare className="w-6 h-6" />
-            <span className="max-w-0 overflow-hidden group-hover:max-w-xs group-hover:ml-2 transition-all duration-500 font-bold whitespace-nowrap">
-              Web AI Assistant
-            </span>
-          </button>
-        </div>
-      )}
+      <ChatBot />
     </div>
   );
 };

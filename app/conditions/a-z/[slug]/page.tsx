@@ -9,7 +9,6 @@ import { SITE_URL } from "@/src/lib/seo";
 import ConditionStructuredData from "@/app/conditions/ConditionStructuredData";
 import BreadcrumbNavigation from "@/app/conditions/BreadcrumbNavigation";
 import RelatedConditions from "@/app/conditions/RelatedConditions";
-import { LocalPathways } from "@/src/components/locations/LocalPathways";
 
 type PageParams = {
   params: Promise<{
@@ -211,10 +210,6 @@ export default async function ConditionStubPage({ params }: PageParams) {
           currentCondition={condition} 
           allConditions={CONDITION_RESOURCES} 
         />
-
-        <div className="mt-12">
-          <LocalPathways mode="condition" />
-        </div>
       </div>
     </div>
   );
