@@ -1,4 +1,5 @@
 import { Resend } from 'resend';
+import { escapeHtml } from './security';
 
 const resendApiKey = process.env.RESEND_API_KEY?.trim();
 const resend = resendApiKey ? new Resend(resendApiKey) : null;
@@ -46,7 +47,7 @@ export class EmailService {
       html: `
         <div style="font-family: Arial, sans-serif; padding: 20px;">
           <h2>Calendar Invitation</h2>
-          <p>Dear ${patientName},</p>
+          <p>Dear ${escapeHtml(patientName)},</p>
           <p>Please find attached the calendar invite for your appointment.</p>
           <p><strong>Date:</strong> ${startDate.toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}</p>
           <p>You can add this to your calendar (Google, Outlook, Apple) by opening the attachment.</p>
@@ -110,7 +111,7 @@ Location: Yashoda Hospital, Malakpet, Hyderabad
           </div>
           
           <div style="padding: 30px; background: #f8fafc;">
-            <h2 style="color: #1e40af; margin-top: 0;">Dear ${patientName},</h2>
+            <h2 style="color: #1e40af; margin-top: 0;">Dear ${escapeHtml(patientName)},</h2>
             
             <p>Thank you for reaching out to Dr. Sayuj Krishnan's neurosurgery practice. We're committed to providing you with the highest quality care for your brain and spine health needs.</p>
             
@@ -204,9 +205,9 @@ If you have any questions, reply to this email or call +91-9778280044.
             <p style="margin: 8px 0 0 0; font-size: 14px;">Dr. Sayuj Krishnan - Neurosurgeon</p>
           </div>
           <div style="padding: 24px; background: #f8fafc;">
-            <p>Dear ${patientName},</p>
-            <p>This is a ${followUpLabel} regarding your <strong>${conditionLabel}</strong> inquiry. Our team is ready to help you with the next steps for your consultation.</p>
-            <p style="color: #6b7280; font-size: 14px;">${sourceLabel}</p>
+            <p>Dear ${escapeHtml(patientName)},</p>
+            <p>This is a ${escapeHtml(followUpLabel)} regarding your <strong>${escapeHtml(conditionLabel)}</strong> inquiry. Our team is ready to help you with the next steps for your consultation.</p>
+            <p style="color: #6b7280; font-size: 14px;">${escapeHtml(sourceLabel)}</p>
             <div style="text-align: center; margin: 24px 0;">
               <a href="https://www.drsayuj.info/appointments"
                  style="background: #3b82f6; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
@@ -278,16 +279,16 @@ For questions, reply to this email or call +91-9778280044.
             <p style="margin: 8px 0 0 0; font-size: 14px;">Dr. Sayuj Krishnan - Neurosurgeon</p>
           </div>
           <div style="padding: 24px; background: #f8fafc;">
-            <p>Dear ${patientName},</p>
-            <p>Thank you for your ${appointmentType} appointment. Below is a brief summary.</p>
+            <p>Dear ${escapeHtml(patientName)},</p>
+            <p>Thank you for your ${escapeHtml(appointmentType)} appointment. Below is a brief summary.</p>
             <div style="background: white; padding: 16px; border-radius: 8px; margin: 16px 0; border: 1px solid #e5e7eb;">
-              <p><strong>Diagnosis:</strong> ${diagnosis || "To be shared by the care team"}</p>
-              <p><strong>Plan:</strong> ${planSummary || "Our team will share the detailed plan with you soon."}</p>
+              <p><strong>Diagnosis:</strong> ${escapeHtml(diagnosis || "To be shared by the care team")}</p>
+              <p><strong>Plan:</strong> ${escapeHtml(planSummary || "Our team will share the detailed plan with you soon.")}</p>
             </div>
             ${nextSteps.length ? `
               <div style="background: #ecfdf3; padding: 16px; border-radius: 8px; margin: 16px 0;">
                 <h3 style="margin: 0 0 8px 0;">Next Steps</h3>
-                <ul>${nextSteps.map((step: string) => `<li>${step}</li>`).join('')}</ul>
+                <ul>${nextSteps.map((step: string) => `<li>${escapeHtml(step)}</li>`).join('')}</ul>
               </div>
             ` : ""}
             <p>For questions, reply to this email or call +91-9778280044.</p>
@@ -355,17 +356,17 @@ ${data.painScore ? `Pain Score: ${data.painScore}/10\n` : ""}${data.mriScanAvail
           </div>
           <div style="padding: 24px; background: #f8fafc;">
             <h2 style="margin-top: 0; color: #1e40af;">Patient Details</h2>
-            <p><strong>Name:</strong> ${data.patientName}</p>
-            <p><strong>Age:</strong> ${data.age}</p>
-            <p><strong>Gender:</strong> ${data.gender}</p>
-            <p><strong>Preferred Date:</strong> ${data.appointmentDate}</p>
-            <p><strong>Preferred Time:</strong> ${data.appointmentTime}</p>
-            <p><strong>Reason:</strong> ${data.reason}</p>
+            <p><strong>Name:</strong> ${escapeHtml(data.patientName)}</p>
+            <p><strong>Age:</strong> ${escapeHtml(data.age)}</p>
+            <p><strong>Gender:</strong> ${escapeHtml(data.gender)}</p>
+            <p><strong>Preferred Date:</strong> ${escapeHtml(data.appointmentDate)}</p>
+            <p><strong>Preferred Time:</strong> ${escapeHtml(data.appointmentTime)}</p>
+            <p><strong>Reason:</strong> ${escapeHtml(data.reason)}</p>
             ${data.painScore ? `<p><strong>Pain Score:</strong> ${data.painScore}/10</p>` : ""}
             ${data.mriScanAvailable !== undefined ? `<p><strong>MRI Scan Available:</strong> ${data.mriScanAvailable ? "Yes" : "No"}</p>` : ""}
-            ${data.email ? `<p><strong>Email:</strong> ${data.email}</p>` : ""}
-            ${data.phone ? `<p><strong>Phone:</strong> ${data.phone}</p>` : ""}
-            ${data.source ? `<p><strong>Source:</strong> ${data.source}</p>` : ""}
+            ${data.email ? `<p><strong>Email:</strong> ${escapeHtml(data.email)}</p>` : ""}
+            ${data.phone ? `<p><strong>Phone:</strong> ${escapeHtml(data.phone)}</p>` : ""}
+            ${data.source ? `<p><strong>Source:</strong> ${escapeHtml(data.source)}</p>` : ""}
           </div>
         </div>
       `,
@@ -419,10 +420,10 @@ If you have questions, reply to this email or call +91-9778280044.
             <p style="margin: 8px 0 0 0; font-size: 14px;">Dr. Sayuj Krishnan - Neurosurgeon</p>
           </div>
           <div style="padding: 24px; background: #f8fafc;">
-            <p>Dear ${patientName},</p>
-            <p>Here are your <strong>${subjectType}</strong> materials for <strong>${condition}</strong>:</p>
+            <p>Dear ${escapeHtml(patientName)},</p>
+            <p>Here are your <strong>${escapeHtml(subjectType)}</strong> materials for <strong>${escapeHtml(condition)}</strong>:</p>
             <ul>
-              ${materialList.map(item => `<li>${item}</li>`).join('')}
+              ${materialList.map(item => `<li>${escapeHtml(item)}</li>`).join('')}
             </ul>
             <p>If you have questions, reply to this email or call +91-9778280044.</p>
           </div>
@@ -499,7 +500,7 @@ Emergency Contact: +91-9778280044
           </div>
           
           <div style="padding: 30px; background: #f8fafc;">
-            <h2 style="color: #059669; margin-top: 0;">Dear ${patientName},</h2>
+            <h2 style="color: #059669; margin-top: 0;">Dear ${escapeHtml(patientName)},</h2>
             
             <p>Your appointment has been successfully confirmed. We look forward to seeing you soon.</p>
             
@@ -514,14 +515,14 @@ Emergency Contact: +91-9778280044
                 hour: '2-digit',
                 minute: '2-digit'
               })}</p>
-              <p><strong>Type:</strong> ${appointmentType}</p>
+              <p><strong>Type:</strong> ${escapeHtml(appointmentType)}</p>
               <p><strong>Doctor:</strong> Dr. Sayuj Krishnan</p>
             </div>
             
             <div style="background: #fef3c7; padding: 20px; border-radius: 8px; margin: 20px 0;">
               <h3 style="color: #92400e; margin-top: 0;">📋 Preparation Instructions</h3>
               <ul style="color: #92400e;">
-                ${instructions.map(instruction => `<li>${instruction}</li>`).join('')}
+                ${instructions.map(instruction => `<li>${escapeHtml(instruction)}</li>`).join('')}
               </ul>
             </div>
             
@@ -603,12 +604,12 @@ If you need to update your request, call +91-9778280044 or reply to this email.`
             <p style="margin: 8px 0 0 0; font-size: 14px;">Dr. Sayuj Krishnan - Neurosurgeon</p>
           </div>
           <div style="padding: 24px; background: #f8fafc;">
-            <p>Hi ${patientName},</p>
-            ${messageLines.map((line) => `<p>${line}</p>`).join("")}
+            <p>Hi ${escapeHtml(patientName)},</p>
+            ${messageLines.map((line) => `<p>${escapeHtml(line)}</p>`).join("")}
             <div style="background: white; padding: 16px; border-radius: 8px; margin: 16px 0; border: 1px solid #e5e7eb;">
               <h3 style="margin: 0 0 8px 0; color: #1e40af;">Appointment Details</h3>
               <ul style="margin: 0; padding-left: 18px; color: #374151;">
-                ${appointmentDetails.map((detail) => `<li>${detail}</li>`).join("")}
+                ${appointmentDetails.map((detail) => `<li>${escapeHtml(detail)}</li>`).join("")}
               </ul>
             </div>
             <p>If you need to update your request, call +91-9778280044 or reply to this email.</p>
@@ -682,7 +683,7 @@ Emergency Contact: +91-9778280044
           </div>
           
           <div style="padding: 30px; background: #f8fafc;">
-            <h2 style="color: #dc2626; margin-top: 0;">Dear ${patientName},</h2>
+            <h2 style="color: #dc2626; margin-top: 0;">Dear ${escapeHtml(patientName)},</h2>
             
             <p>This is a friendly reminder about your upcoming appointment with Dr. Sayuj Krishnan.</p>
             
@@ -769,13 +770,13 @@ ${condition ? `Condition: ${condition}\n` : ""}If you have questions, reply to t
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <div style="background: #0ea5e9; color: white; padding: 24px; text-align: center;">
-            <h1 style="margin: 0; font-size: 24px;">${reminderLabel.toUpperCase()}</h1>
+            <h1 style="margin: 0; font-size: 24px;">${escapeHtml(reminderLabel.toUpperCase())}</h1>
             <p style="margin: 8px 0 0 0; font-size: 14px;">Dr. Sayuj Krishnan - Neurosurgeon</p>
           </div>
           <div style="padding: 24px; background: #f8fafc;">
-            <p>Dear ${patientName},</p>
-            <p>${content}</p>
-            ${condition ? `<p><strong>Condition:</strong> ${condition}</p>` : ""}
+            <p>Dear ${escapeHtml(patientName)},</p>
+            <p>${escapeHtml(content)}</p>
+            ${condition ? `<p><strong>Condition:</strong> ${escapeHtml(condition)}</p>` : ""}
             <p>If you have questions, reply to this email or call +91-9778280044.</p>
           </div>
           <div style="background: #1f2937; color: white; padding: 16px; text-align: center;">
@@ -836,9 +837,9 @@ Emergency Contact: +91-9778280044`,
           <div style="padding: 30px; background: #f8fafc;">
             <div style="background: #fef2f2; padding: 20px; border-radius: 8px; margin: 20px 0; border: 2px solid #ef4444;">
               <h3 style="color: #dc2626; margin-top: 0;">Emergency Details</h3>
-              <p><strong>Type:</strong> ${emergencyType}</p>
-              <p><strong>Severity:</strong> ${severity.toUpperCase()}</p>
-              <p><strong>Patient:</strong> ${patientInfo.name || 'Unknown'}</p>
+              <p><strong>Type:</strong> ${escapeHtml(emergencyType)}</p>
+              <p><strong>Severity:</strong> ${escapeHtml(severity.toUpperCase())}</p>
+              <p><strong>Patient:</strong> ${escapeHtml(patientInfo.name || 'Unknown')}</p>
               <p><strong>Time:</strong> ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}</p>
             </div>
             
@@ -928,9 +929,9 @@ Email: hellodr@drsayuj.info
           </div>
 
           <div style="padding: 30px; background: #f8fafc;">
-            <h2 style="color: #6d28d9; margin-top: 0;">Dear ${patientName},</h2>
+            <h2 style="color: #6d28d9; margin-top: 0;">Dear ${escapeHtml(patientName)},</h2>
 
-            <p>We hope you had a positive experience with your <strong>${serviceType}</strong> on ${new Date(appointmentDate).toLocaleDateString('en-IN', {
+            <p>We hope you had a positive experience with your <strong>${escapeHtml(serviceType)}</strong> on ${new Date(appointmentDate).toLocaleDateString('en-IN', {
               year: 'numeric',
               month: 'long',
               day: 'numeric'
@@ -941,7 +942,7 @@ Email: hellodr@drsayuj.info
             <div style="background: white; padding: 20px; border-radius: 8px; margin: 20px 0; border: 2px solid #a78bfa;">
               <h3 style="color: #6d28d9; margin-top: 0;">We'd love to hear about:</h3>
               <ul style="color: #4b5563;">
-                ${questions.map(q => `<li>${q}</li>`).join('')}
+                ${questions.map(q => `<li>${escapeHtml(q)}</li>`).join('')}
               </ul>
             </div>
 
