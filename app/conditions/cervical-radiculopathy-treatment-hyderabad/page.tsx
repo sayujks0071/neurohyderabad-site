@@ -200,7 +200,7 @@ const references = [
 export const metadata: Metadata = {
   title: "Cervical Radiculopathy Treatment Hyderabad | Pinched Nerve Surgery",
   description:
-    "Specialized treatment for cervical radiculopathy (pinched nerve) in Hyderabad. Minimally invasive keyhole surgery (Foraminotomy) and ACDF by Dr. Sayuj Krishnan.",
+    "Expert treatment for cervical radiculopathy (pinched nerve) in Hyderabad. Keyhole surgery (Foraminotomy) and ACDF by Dr. Sayuj Krishnan.",
   alternates: {
     canonical: CANONICAL,
     languages: {
