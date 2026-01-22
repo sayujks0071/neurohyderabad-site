@@ -145,7 +145,7 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
         id="form-status"
       >
         {status === 'submitting' && 'Submitting your appointment request'}
-        {status === 'success' && 'Appointment request prepared. Please send the email to confirm. Please bring any MRI/CT scans with you. We will confirm via phone shortly.'}
+        {status === 'success' && 'Appointment request received. Please bring any MRI/CT scans with you. We will confirm via phone shortly.'}
         {status === 'error' && 'An error occurred. Please call us directly at +91 9778280044.'}
       </div>
 
@@ -410,7 +410,7 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
           aria-atomic="true"
         >
           <p className="text-sm font-medium text-green-800">
-            Appointment request prepared. Please send the email to confirm. Please bring any MRI/CT scans with you. We will confirm via phone shortly.
+            Appointment request received. Please bring any MRI/CT scans with you. We will confirm via phone shortly.
           </p>
         </div>
       )}
