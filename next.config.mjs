@@ -167,6 +167,12 @@ const nextConfig = {
         destination: '/services/endoscopic-spine-surgery-hyderabad',
         permanent: true,
       },
+      // Redirect legacy booking URL to the new appointments page
+      {
+        source: '/book-appointment',
+        destination: '/appointments',
+        permanent: true,
+      },
     ];
   },
 
