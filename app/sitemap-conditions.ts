@@ -12,7 +12,7 @@ export default function sitemapConditions(): MetadataRoute.Sitemap {
     // Spine conditions (high search volume)
     { url: '/conditions/herniated-disc-treatment-hyderabad', priority: 0.9 },
     { url: '/conditions/slip-disc-treatment-hyderabad', priority: 0.9 },
-    { url: '/conditions/sciatica-treatment-hyderabad', priority: 0.9 },
+    { url: '/conditions/sciatica-pain-treatment-hyderabad', priority: 0.9 },
     { url: '/conditions/spinal-stenosis-treatment-hyderabad', priority: 0.8 },
     { url: '/conditions/cervical-radiculopathy-treatment-hyderabad', priority: 0.8 },
     { url: '/conditions/spondylolisthesis-treatment-hyderabad', priority: 0.7 },

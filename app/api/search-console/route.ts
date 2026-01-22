@@ -18,7 +18,7 @@ const PRIORITY_URLS = [
   '/services/brain-tumor-surgery-hyderabad',
   '/conditions',
   '/conditions/herniated-disc-treatment-hyderabad',
-  '/conditions/sciatica-treatment-hyderabad',
+  '/conditions/sciatica-pain-treatment-hyderabad',
   '/about',
   '/appointments',
   '/contact',

@@ -129,7 +129,7 @@ const diseaseGuides = [
     treatments: ['Physical therapy', 'Epidural injections', 'Endoscopic discectomy', 'Microdiscectomy'],
     severity: 'Moderate to Severe',
     recovery: '4-8 weeks',
-    link: '/conditions/sciatica-treatment-hyderabad'
+    link: '/conditions/sciatica-pain-treatment-hyderabad'
   }
 ];
 

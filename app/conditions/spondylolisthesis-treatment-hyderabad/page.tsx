@@ -267,7 +267,7 @@ export default function SpondylolisthesisPage() {
             publishedOn="2026-01-03"
             updatedOn="2026-01-03"
           />
-          <SourceList sources={sources['sciatica-treatment-hyderabad'] || []} />
+          <SourceList sources={sources['sciatica-pain-treatment-hyderabad'] || []} />
           <ReviewedBy />
           <NAP />
         </div>
