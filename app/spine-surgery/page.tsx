@@ -30,6 +30,11 @@ const SPINE_SURGERY_FAQS = [
     question: "Will I need general anesthesia?",
     answer: "Many endoscopic procedures can be done under local anesthesia with conscious sedation, meaning you are awake but comfortable. This avoids the risks of general anesthesia.",
     category: "Procedure"
+  },
+  {
+    question: "What is the cost of endoscopic spine surgery in Hyderabad?",
+    answer: "The cost typically ranges from ₹1.5 Lakhs to ₹2.5 Lakhs, depending on the hospital room category and complexity. This is often cheaper than open surgery when considering the shorter hospital stay and faster return to work.",
+    category: "Cost & Insurance"
   }
 ];
 
@@ -133,6 +138,48 @@ export default function SpineSurgeryPage() {
                       <p className="text-blue-200">Minimally Invasive</p>
                     </div>
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Red Flags - YMYL Signal */}
+        <section className="py-16 bg-red-50">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <div className="flex items-center justify-center mb-8">
+                <div className="bg-red-100 p-4 rounded-full">
+                  <span className="text-4xl">⚠️</span>
+                </div>
+              </div>
+              <h2 className="text-3xl font-bold text-center mb-6 text-red-800">
+                When is Spine Surgery an Emergency?
+              </h2>
+              <p className="text-center text-gray-700 mb-8 text-lg">
+                Most back pain is not an emergency. However, if you experience any of the following
+                "Red Flag" symptoms, you must seek immediate medical attention.
+              </p>
+              <div className="bg-white p-8 rounded-lg shadow-lg border-l-4 border-red-500">
+                <h3 className="text-xl font-bold mb-4 text-red-700">Cauda Equina Syndrome Warning Signs:</h3>
+                <ul className="space-y-4 text-gray-700">
+                  <li className="flex items-start">
+                    <span className="text-red-500 mr-3 text-xl">•</span>
+                    <span><strong>Loss of Bowel or Bladder Control:</strong> Inability to hold urine/stool or inability to pass them.</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-red-500 mr-3 text-xl">•</span>
+                    <span><strong>Saddle Anesthesia:</strong> Numbness in the groin, buttocks, or genital area.</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-red-500 mr-3 text-xl">•</span>
+                    <span><strong>Severe Progressive Weakness:</strong> Sudden inability to lift your foot (foot drop) or inability to walk.</span>
+                  </li>
+                </ul>
+                <div className="mt-6 pt-6 border-t border-gray-100">
+                   <p className="font-semibold text-gray-800">
+                     If you have these symptoms, call our emergency line (+91 97782 80044) or visit Yashoda Hospital Malakpet Casualty immediately.
+                   </p>
                 </div>
               </div>
             </div>
@@ -245,6 +292,81 @@ export default function SpineSurgeryPage() {
                     </Link>
                   </div>
                 </div>
+
+                <div className="bg-white p-8 rounded-lg shadow-lg">
+                  <h3 className="text-2xl font-semibold mb-6 text-blue-700">Sciatica & Leg Pain</h3>
+                  <p className="text-gray-700 mb-6">
+                    Sharp, shooting pain radiating down the leg. We treat the root cause—whether it's a disc bulge or stenosis—not just the symptoms.
+                  </p>
+                  <ul className="space-y-3 text-gray-700">
+                    <li className="flex items-start">
+                      <span className="text-blue-600 mr-2">✓</span>
+                      <span><strong>Precision Diagnosis:</strong> MRI-based nerve root targeting</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-blue-600 mr-2">✓</span>
+                      <span><strong>90% Non-Surgical:</strong> Most cases resolve with injections</span>
+                    </li>
+                  </ul>
+                  <div className="mt-6">
+                    <Link
+                      href="/conditions/sciatica-pain-treatment-hyderabad"
+                      className="text-blue-600 hover:text-blue-800 font-medium"
+                    >
+                      View Sciatica Treatment →
+                    </Link>
+                  </div>
+                </div>
+
+                <div className="bg-white p-8 rounded-lg shadow-lg">
+                  <h3 className="text-2xl font-semibold mb-6 text-blue-700">Spondylolisthesis</h3>
+                  <p className="text-gray-700 mb-6">
+                    Slippage of one vertebra over another causing instability. We offer minimally invasive stabilization (MISS TLIF) for permanent relief.
+                  </p>
+                  <ul className="space-y-3 text-gray-700">
+                    <li className="flex items-start">
+                      <span className="text-blue-600 mr-2">✓</span>
+                      <span><strong>MISS TLIF:</strong> Keyhole fusion technique</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-blue-600 mr-2">✓</span>
+                      <span><strong>Rapid Mobilization:</strong> Walk next day after fusion</span>
+                    </li>
+                  </ul>
+                  <div className="mt-6">
+                    <Link
+                      href="/conditions/spondylolisthesis-treatment-hyderabad"
+                      className="text-blue-600 hover:text-blue-800 font-medium"
+                    >
+                      View Spondylolisthesis Treatment →
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Patient Resources */}
+        <section className="py-16 bg-blue-50">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-3xl font-bold text-center mb-8 text-blue-800">Patient Resources</h2>
+              <div className="grid md:grid-cols-2 gap-6">
+                <Link href="/blog/cost-of-endoscopic-spine-surgery-hyderabad" className="block bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow border border-blue-100 group">
+                  <h3 className="text-xl font-bold text-blue-700 mb-3 group-hover:text-blue-900">Cost Guide: Endoscopic Spine Surgery</h3>
+                  <p className="text-gray-600">
+                    A transparent breakdown of costs, insurance coverage, and packages for 2026. Understand what you are paying for.
+                  </p>
+                  <span className="inline-block mt-4 text-blue-600 font-semibold group-hover:underline">Read Cost Guide →</span>
+                </Link>
+                <Link href="/blog/endoscopic-spine-surgery-recovery-timeline" className="block bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow border border-blue-100 group">
+                  <h3 className="text-xl font-bold text-blue-700 mb-3 group-hover:text-blue-900">Recovery Timeline Guide</h3>
+                  <p className="text-gray-600">
+                    Week-by-week guide on what to expect after surgery, from walking on day 1 to returning to the gym.
+                  </p>
+                  <span className="inline-block mt-4 text-blue-600 font-semibold group-hover:underline">View Recovery Plan →</span>
+                </Link>
               </div>
             </div>
           </div>
