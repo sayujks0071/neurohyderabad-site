@@ -37,6 +37,28 @@ interface PatientInfo {
   usedAI?: boolean;
 }
 
+async function retry<T>(
+  fn: () => Promise<T>,
+  options: { retries: number; delay: number; name: string; predicate?: (res: T) => boolean }
+): Promise<T> {
+  const { retries, delay, name, predicate } = options;
+  for (let i = 0; i <= retries; i++) {
+    try {
+      const result = await fn();
+      if (predicate && !predicate(result)) {
+        throw new Error(`${name} failed check`);
+      }
+      return result;
+    } catch (error) {
+      if (i === retries) throw error;
+      const wait = delay * Math.pow(2, i);
+      console.log(`[Appointment Workflow] Retry ${i + 1}/${retries} for ${name} after ${wait}ms`);
+      await sleep(wait);
+    }
+  }
+  throw new Error(`${name} failed after retries`);
+}
+
 interface AppointmentBookingResult {
   bookingId: string;
   status:
@@ -276,7 +298,7 @@ export async function handleAppointmentBooking(
 
   const bookingId = generateBookingId();
   console.log(
-    `[Appointment Workflow] Starting booking ${bookingId} for ${patientInfo.name}`
+    `[Appointment Workflow] Starting booking ${bookingId}`
   );
 
   try {
@@ -474,7 +496,7 @@ async function notifyEmergencyTeam(
   "use step";
 
   console.log(
-    `[Appointment Workflow] Notifying emergency team for ${patientInfo.name}`
+    `[Appointment Workflow] Notifying emergency team (Emergency detected)`
   );
 
   // In production, this would:
@@ -483,7 +505,7 @@ async function notifyEmergencyTeam(
   // - Notify on-call doctor
 
   console.log(
-    `Emergency notification sent for patient ${patientInfo.name} with symptoms: ${symptoms.join(", ")}`
+    `Emergency notification sent. Symptoms: ${symptoms.join(", ")}`
   );
 }
 
@@ -563,7 +585,7 @@ async function createBookingRecord(
   console.log(`[Appointment Workflow] Creating booking record ${bookingId}`);
 
   // In production, this would save to database
-  console.log(`Booking ${bookingId} created for ${patientInfo.name} on ${date} at ${time}`);
+  console.log(`Booking ${bookingId} created on ${date} at ${time}`);
 }
 
 /**
@@ -575,9 +597,12 @@ async function sendBookingConfirmationEmail(
 ): Promise<EmailResult> {
   "use step";
 
-  console.log(`[Appointment Workflow] Sending confirmation email to ${booking.email}`);
+  console.log(`[Appointment Workflow] Sending confirmation email`);
 
-  return await sendAppointmentConfirmationEmail(booking, confirmationMessage);
+  return await retry(
+    () => sendAppointmentConfirmationEmail(booking, confirmationMessage),
+    { retries: 3, delay: 1000, name: "confirmation-email", predicate: (r) => r.success }
+  );
 }
 
 /**
@@ -589,11 +614,12 @@ async function sendBookingAdminAlert(
 ): Promise<EmailResult> {
   "use step";
 
-  console.log(
-    `[Appointment Workflow] Sending admin alert for ${booking.patientName}`
-  );
+  console.log(`[Appointment Workflow] Sending admin alert`);
 
-  return await sendAdminNotificationEmail(booking, source);
+  return await retry(
+    () => sendAdminNotificationEmail(booking, source),
+    { retries: 3, delay: 1000, name: "admin-email", predicate: (r) => r.success }
+  );
 }
 
 /**
@@ -606,8 +632,9 @@ async function syncBookingLead(
 ): Promise<boolean> {
   "use step";
 
-  const result = await submitToGoogleSheets({
-    requestId: bookingId,
+  const result = await retry(
+    () => submitToGoogleSheets({
+      requestId: bookingId,
     fullName: booking.patientName,
     email: booking.email,
     phone: booking.phone,
@@ -622,7 +649,7 @@ async function syncBookingLead(
       painScore: booking.painScore,
       mriScanAvailable: booking.mriScanAvailable,
     },
-  });
+  }), { retries: 3, delay: 1000, name: "google-sheets", predicate: (r) => r.success });
 
   if (!result.success) {
     console.error("[Appointment Workflow] Google Sheets sync failed:", result.message);
