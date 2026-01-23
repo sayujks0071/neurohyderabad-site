@@ -31,6 +31,11 @@ export default function AppointmentSchema() {
           "postalCode": malakpet.address.postalCode,
           "addressCountry": malakpet.address.addressCountry
         },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": malakpet.geo?.latitude,
+          "longitude": malakpet.geo?.longitude
+        },
         "availableService": [
           "Neurosurgery",
           "Spine Surgery",
