@@ -22,6 +22,8 @@ type LeadPayload = {
   company?: string;
   requestId?: string;
   metadata?: Record<string, unknown>;
+  painScore?: number;
+  mriScanAvailable?: boolean;
 };
 
 function normalizeString(value: unknown) {
@@ -93,7 +95,11 @@ export async function POST(request: NextRequest) {
       preferredDate,
       preferredTime,
       source,
-      metadata: body.metadata ?? {},
+      metadata: {
+        ...(body.metadata ?? {}),
+        painScore: body.painScore,
+        mriScanAvailable: body.mriScanAvailable,
+      },
     };
 
     // Submit to Google Sheets (if configured)
