@@ -344,18 +344,14 @@ export async function handleAppointmentBooking(
       patientInfo.confirmationMessage || DEFAULT_CONFIRMATION_MESSAGE;
     const usedAI = patientInfo.usedAI ?? false;
 
-    // Step 6: Wait for 2 seconds before sending confirmation
-    await sleep("2s");
+    // Step 6: (Removed sleep)
 
-    // Step 7: Send confirmation + admin emails
-    const confirmationResult = await sendBookingConfirmationEmail(
-      booking,
-      confirmationMessage
-    );
-    const adminEmailResult = await sendBookingAdminAlert(
-      booking,
-      patientInfo.source
-    );
+    // Step 7: Send confirmation + admin emails (Parallelized)
+    const [confirmationResult, adminEmailResult] = await Promise.all([
+      sendBookingConfirmationEmail(booking, confirmationMessage),
+      sendBookingAdminAlert(booking, patientInfo.source),
+    ]);
+
     if (!adminEmailResult.success) {
       console.error(
         `[Appointment Workflow] Admin notification failed: ${adminEmailResult.error}`
@@ -363,30 +359,25 @@ export async function handleAppointmentBooking(
     }
 
     // Step 8: Sync CRM + webhooks
-    await syncBookingLead(bookingId, booking, patientInfo.source);
-    await triggerAppointmentWebhooks(
-      booking,
-      confirmationMessage,
-      confirmationResult,
-      usedAI,
-      patientInfo.source
-    );
+    // syncBookingLead is independent; triggerAppointmentWebhooks depends on confirmationResult
+    const [_, webhookResult] = await Promise.all([
+      syncBookingLead(bookingId, booking, patientInfo.source),
+      triggerAppointmentWebhooks(
+        booking,
+        confirmationMessage,
+        confirmationResult,
+        usedAI,
+        patientInfo.source
+      ),
+    ]);
 
-    // Step 9: Schedule reminders
-    await sleep("1s");
-    const reminderScheduled = await scheduleReminders(
-      bookingId,
-      patientInfo,
-      finalDate,
-      finalTime
-    );
-
-    // Step 10: Prepare patient education content
-    await sleep("5s");
-    await preparePatientEducation(patientInfo.chiefComplaint, patientInfo.email);
-
-    // Step 11: Update analytics
-    await trackBookingAnalytics(bookingId, patientInfo, status);
+    // Step 9: Post-booking tasks (Reminders, Education, Analytics)
+    // All run in parallel
+    const [reminderScheduled] = await Promise.all([
+      scheduleReminders(bookingId, patientInfo, finalDate, finalTime),
+      preparePatientEducation(patientInfo.chiefComplaint, patientInfo.email),
+      trackBookingAnalytics(bookingId, patientInfo, status),
+    ]);
 
     console.log(
       `[Appointment Workflow] Completed booking ${bookingId} with status: ${status}`
