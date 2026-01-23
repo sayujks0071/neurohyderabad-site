@@ -2,10 +2,16 @@
 
 import { useRef, useState, useEffect } from "react";
 import { ChevronRight, MessageSquareCode, MessageSquare } from "lucide-react";
-import PatientPortal from "./PatientPortal";
 import AppointmentFaq from "../AppointmentFaq";
 import dynamic from "next/dynamic";
 import VoiceBookingOption from "../VoiceBookingOption";
+import PatientPortalSkeleton from "./PatientPortalSkeleton";
+
+// CWV Optimization: Lazy load heavy Client Component (PatientPortal)
+// This reduces Initial JS Payload by code-splitting the heavy form logic.
+const PatientPortal = dynamic(() => import("./PatientPortal"), {
+  loading: () => <PatientPortalSkeleton />,
+});
 
 // Dynamic import for LiveAssistant (heavy dependency on @google/genai)
 // Only loaded when the user explicitly clicks "Voice AI Assistant".

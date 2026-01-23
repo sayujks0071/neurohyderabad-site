@@ -1,27 +1,12 @@
 {
-  "timestamp": "2025-05-18T12:00:00Z",
-  "commit_hash": "",
-  "pages": {
-    "home": { "url": "/", "notes": ["Hero image optimized with priority", "Shared JS ~103kB"] },
-    "appointment": { "url": "/appointments", "notes": ["Heavy client component NeuraLinkBookingApp", "ChatBot loading immediately"] },
-    "location": { "url": "/locations/banjara-hills", "notes": [] },
-    "condition": { "url": "/conditions/sciatica-pain-treatment-hyderabad", "notes": [] }
-  },
-  "bottlenecks": [
+  "timestamp": "2025-10-03T12:00:00Z",
+  "changes": [
     {
-      "page": "/appointments",
-      "metric": "TBT/INP",
-      "description": "ChatBot component loading immediately on client hydration despite being non-critical, increasing Main Thread blocking time."
+      "pageType": "Appointment Page",
+      "url": "/appointments",
+      "change": "Lazy loaded PatientPortal component using next/dynamic with a loading skeleton, keeping SSR enabled.",
+      "expectedImpact": "Reduces Initial JS Payload by splitting the heavy PatientPortal code (forms, logic, icons) into a separate chunk. This improves hydration performance and TBT while preserving SEO content.",
+      "verification": "Manual verification via build output (successful build) and code review."
     }
-  ],
-  "selected_fix": {
-    "description": "Deferred loading of ChatBot component on Appointment page using 4s timeout (simulating idle callback).",
-    "files": ["app/appointments/_components/neuralink/NeuraLinkBookingApp.tsx"],
-    "safety_check": "Retained placeholder button to prevent layout shift. Component loads seamlessly when user waits or clicks (if implemented, but here it auto-loads after 4s)."
-  },
-  "verification": {
-    "build_status": "Passed",
-    "lint_status": "Passed",
-    "expected_impact": "Reduced Total Blocking Time (TBT) on /appointments by removing ChatBot initialization from critical path."
-  }
+  ]
 }
