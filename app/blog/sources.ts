@@ -242,6 +242,20 @@ export const BLOG_SOURCES: Record<string, SourceEntry[]> = {
       href: "https://www.nhs.uk/conditions/cauda-equina-syndrome/",
     },
   ],
+  "cervical-disc-replacement-vs-fusion-acdf-hyderabad": [
+    {
+      label: "North American Spine Society – Cervical Artificial Disc Replacement",
+      href: "https://www.spine.org/KnowYourBack/Treatments/Surgical/CervicalArtificialDiscReplacement",
+    },
+    {
+      label: "American Academy of Orthopaedic Surgeons – Cervical Disc Replacement",
+      href: "https://orthoinfo.aaos.org/en/treatment/cervical-disc-replacement/",
+    },
+    {
+      label: "Spine-Health – ACDF vs. Cervical Disc Replacement",
+      href: "https://www.spine-health.com/treatment/spine-surgery/acdf-vs-cervical-disc-replacement",
+    },
+  ],
 };
 
 export function getBlogSources(slug: string): SourceEntry[] {
