@@ -1,35 +1,20 @@
-# Competitor Discovery - 2026-01-22
+# Competitor Research Snapshot: 2026-01-23
 
-## High-Intent Queries Analyzed
-- "endoscopic spine surgery hyderabad"
-- "best spine surgeon hyderabad"
-- "neurosurgeon hyderabad"
-- "slip disc surgery hyderabad"
+## Top Competitors (Local Pack & Organic)
 
-## Top Local Surgeon Sites
-1. **Dr. Surya Prakash (spinesurgeon.in)**
-   - Strong on specific procedure pages like "Micro Lumbar Disc Surgeries".
-   - Uses "Best [Condition] in Hyderabad" pattern.
-2. **Dr. Raveesh Sunkara (drraveesh.com)**
-   - Dedicated pages for "Slip Disc Treatment", "Endoscopic Spine Surgery".
-   - Good content depth.
+### 1. Dr. Raveesh Sunkara (drraveesh.com)
+- **Strengths:** Strong "Best Spine Surgeon" ranking, specific pages for endoscopic surgery.
+- **Weaknesses:** Slower page speed, less detailed patient education compared to our planned "Super Profiles".
+- **Keywords:** "endoscopic spine surgery hyderabad", "best spine surgeon hyderabad".
 
-## Major Hospital Chains (SERP Dominators)
-1. **Asian Spine Hospital**
-   - Ranks for "Full Endoscopic Spine Surgery".
-   - Focus on "stitchless", "minimally invasive".
-2. **Yashoda Hospitals**
-   - Strong domain authority.
-   - Broad coverage of "Advanced Endoscopic Spine Surgery".
-3. **Apollo Hospitals**
-   - "Best Doctors" listicles rank high.
-4. **AIG Hospitals**
-   - "Neurosurgery & Spine Surgery" landing page.
-5. **Care Hospitals**
-   - Ranks for "Disc Bulge Treatment".
-6. **Sri Sri Holistic Hospitals**
-   - Ranks for "Best Treatment for Slip Disc".
+### 2. Apollo Hospitals (apollohospitals.com)
+- **Strengths:** High domain authority, "Best Doctors" listicles rank well.
+- **Weaknesses:** Generic "marketplace" feel, lacks deep procedure-specific content.
 
-## Aggregators
-- **Practo**: Dominates "Best [Specialist] Near Me" queries.
-- **Justdial**: Ranks for "Top Spine Disc Surgery".
+### 3. Yashoda Hospitals (yashodahospitals.com)
+- **Strengths:** Detailed procedure pages, good "recovery" content.
+- **Weaknesses:** Hospital brand dominates individual surgeon brand.
+
+## Gap Analysis
+- **Missing Topic:** "Degenerative Disc Disease" specific landing pages are rare. Most competitors bundle it under general "Back Pain" or "Slip Disc".
+- **Opportunity:** A dedicated "Super Profile" for DDD with "Non-Surgical First" angle (Dr. Sayuj's USP) will capture specific long-tail intent.

@@ -1,16 +1,14 @@
-# SEO Changelog - 2026-01-22
+# Changelog: 2026-01-23
 
-## Research
-- Analyzed 4 high-intent queries.
-- Identified 7 key competitors.
-- Generated 11 structured keyword clusters.
+## New Content
+- **Page Created:** `/conditions/degenerative-disc-disease-treatment-hyderabad`
+  - **Type:** Condition Super Profile
+  - **Focus:** Non-surgical & endoscopic options for DDD in elderly/adults.
+  - **Reasoning:** Competitor gap analysis showed weak coverage of specific "degenerative" vs general "slip disc" intent.
 
-## Updates
-- **Registry Update:** Will add `pediatric-neurosurgery` to the map.
-- **Registry Update:** Will add "keyhole spine surgery" to `/services/uniportal-endoscopic-spine-surgery-hyderabad`.
-- **New Page:** Proposing `/conditions/cervical-radiculopathy-treatment-hyderabad`.
+## Keyword Updates
+- Added 5 new keywords related to Degenerative Disc Disease to `keyword-registry.json`.
+- Mapped new cluster to the new page in `page-keyword-map.json`.
 
-## Insights
-- Competitors focus heavily on "Micro Lumbar Disc Surgeries" and "Full Endoscopic".
-- "Keyhole" is a valuable synonym for our Uniportal page.
-- Pediatric Neurosurgery page existed but was unmapped in SEO registry.
+## Strategy Note
+- Moving "Degenerative Disc Disease" from dynamic catch-all to a dedicated static folder to improve authority signals and allow for richer schema/content customization.

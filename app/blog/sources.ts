@@ -256,6 +256,20 @@ export const BLOG_SOURCES: Record<string, SourceEntry[]> = {
       href: "https://www.spine-health.com/treatment/spine-surgery/acdf-vs-cervical-disc-replacement",
     },
   ],
+  "degenerative-disc-disease-treatment-hyderabad": [
+    {
+      label: "North American Spine Society – Degenerative Disc Disease",
+      href: "https://www.spine.org/KnowYourBack/Conditions/DegenerativeDiscDisease",
+    },
+    {
+      label: "American Academy of Orthopaedic Surgeons – Cervical and Lumbar Degenerative Disc Disease",
+      href: "https://orthoinfo.aaos.org/en/diseases--conditions/lumbar-degenerative-disc-disease/",
+    },
+    {
+      label: "Arthritis Foundation – Degenerative Disc Disease",
+      href: "https://www.arthritis.org/diseases/degenerative-disc-disease",
+    },
+  ],
 };
 
 export function getBlogSources(slug: string): SourceEntry[] {

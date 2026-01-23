@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-22",
+  "last_updated": "2026-01-23",
   "keywords": [
     {
       "term": "pediatric neurosurgeon hyderabad",
@@ -318,6 +318,36 @@
       "difficulty": "Med",
       "volume": "High",
       "target_page": "/services/spine-surgery-cost-hyderabad"
+    },
+    {
+      "term": "degenerative disc disease treatment hyderabad",
+      "difficulty": "High",
+      "volume": "Low",
+      "target_page": "/conditions/degenerative-disc-disease-treatment-hyderabad"
+    },
+    {
+      "term": "lumbar degenerative disc disease symptoms",
+      "difficulty": "Low",
+      "volume": "Med",
+      "target_page": "/conditions/degenerative-disc-disease-treatment-hyderabad"
+    },
+    {
+      "term": "non-surgical treatment for degenerative disc disease",
+      "difficulty": "Med",
+      "volume": "Med",
+      "target_page": "/conditions/degenerative-disc-disease-treatment-hyderabad"
+    },
+    {
+      "term": "spine surgery for elderly hyderabad",
+      "difficulty": "Low",
+      "volume": "Low",
+      "target_page": "/conditions/degenerative-disc-disease-treatment-hyderabad"
+    },
+    {
+      "term": "black disc disease treatment",
+      "difficulty": "Low",
+      "volume": "Low",
+      "target_page": "/conditions/degenerative-disc-disease-treatment-hyderabad"
     }
   ]
 }
