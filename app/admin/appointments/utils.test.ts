@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { generateWhatsappUrl } from './utils';
+import { generateWhatsappUrl, formatDate } from './utils';
 import { WhatsappAppointment } from './types';
 
 describe('generateWhatsappUrl', () => {
@@ -7,8 +7,7 @@ describe('generateWhatsappUrl', () => {
     id: '1',
     fullName: 'Test User',
     phone: '',
-    preferredDate: '2023-10-01',
-    status: 'Pending'
+    preferredDate: '2023-10-01'
   };
 
   test('generates correct URL for standard Indian 10-digit number', () => {
@@ -51,5 +50,21 @@ describe('generateWhatsappUrl', () => {
      const patient = { ...basePatient, phone: '15551234567' };
      const url = generateWhatsappUrl(patient);
      expect(url).toContain('wa.me/9115551234567');
+  });
+});
+
+describe('formatDate', () => {
+  test('formats date string correctly', () => {
+    const formatted = formatDate('2023-10-01');
+    // We expect some formatted date.
+    // In many environments this is "1 Oct 2023" or similar.
+    // Checking for year 2023 ensures it parsed correctly.
+    expect(formatted).toContain('2023');
+    expect(formatted).not.toBe('2023-10-01');
+  });
+
+  test('returns original string if date is invalid', () => {
+    const invalid = 'invalid-date';
+    expect(formatDate(invalid)).toBe(invalid);
   });
 });
