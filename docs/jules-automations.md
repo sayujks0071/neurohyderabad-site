@@ -47,6 +47,11 @@ env:
 
 To change the schedule, you must edit the cron expression in the `on.schedule` section of the workflow YAML file.
 
+### Competitor Analysis
+The "Competitor Gap Scan" workflow relies on the list of competitors defined in `AGENTS.md`. To add or remove competitors:
+1. Edit `AGENTS.md` in the root directory.
+2. Update the "Competitor Analysis" section.
+
 ## Troubleshooting
 
 - **Issue not created:** Check the Action logs. Common reasons include GitHub API rate limits or the issue already existing.
