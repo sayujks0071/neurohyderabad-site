@@ -107,11 +107,18 @@ export const LocalPathways: React.FC<LocalPathwaysProps> = ({
   // Mode: Service or Condition (showing locations)
   if (effectiveMode === 'service' || effectiveMode === 'condition') {
     // Exclude 'hyderabad' as it's the main location, we want local areas
+    // Show all area locations (sorted alphabetically by area name for consistency)
     const displayLocations = locations
         .filter(l => l.id !== 'hyderabad')
-        .slice(0, 6);
+        .sort((a, b) => a.areaServedName.localeCompare(b.areaServedName));
 
-    const title = effectiveMode === 'service' ? 'Visit Our Clinics' : 'Where to Consult';
+    const title = effectiveMode === 'service'
+      ? 'Visit Our Neurosurgery Clinics in Hyderabad'
+      : 'Consult Dr. Sayuj Near You';
+
+    const subtitle = effectiveMode === 'service'
+      ? 'Expert neurosurgical care available at multiple convenient locations across Hyderabad.'
+      : 'Find specialized treatment for your condition at a clinic near you.';
 
     return (
       <div className={containerClass}>
@@ -120,7 +127,7 @@ export const LocalPathways: React.FC<LocalPathwaysProps> = ({
           {title}
         </h3>
         <p className="text-gray-600 mb-6">
-            Expert care available at locations across Hyderabad.
+            {subtitle}
         </p>
         <div className={gridClass}>
           {displayLocations.map(loc => {

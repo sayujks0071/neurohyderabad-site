@@ -2,6 +2,7 @@ export default function SeoDoctorJsonLd() {
   const physicianData = {
     '@context': 'https://schema.org',
     '@type': 'Physician',
+    '@id': 'https://www.drsayuj.info/#physician',
     name: 'Dr. Sayuj Krishnan',
     honorificPrefix: 'Dr.',
     givenName: 'Sayuj',
