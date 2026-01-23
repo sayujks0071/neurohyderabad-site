@@ -120,7 +120,7 @@ function generateBlogSchema(post: BlogPost) {
     datePublished: post.publishedAt,
     dateModified: post.updatedAt || post.publishedAt,
     mainEntityOfPage: {
-      '@type': 'WebPage',
+      '@type': 'MedicalWebPage',
       '@id': `${SITE_URL}/blog/${post.slug}/`,
     },
   };

@@ -1,16 +1,33 @@
-# Prioritized SEO Fixes
+# Prioritized Fix List
 
-| Issue | Impact (1-5) | Effort (1-5) | Risk | Do now? | Fix Summary |
-|-------|--------------|--------------|------|---------|-------------|
-| **LCP Poor (16s)** | 5 | 3 | Med | **Yes** | Optimize Hero Image (Verified `priority={true}` is present, added `sizes` attribute). |
-| **Sitemap Redirects** | 3 | 1 | Low | **Yes** | Remove `locations/neurosurgeon-near-jubilee-hills` and non-canonical location pages from `sitemap.ts`. |
-| **Schema Missing Fields** | 4 | 2 | Low | **Yes** | Add `priceRange` to Physician schema. Add `reviewedBy` to MedicalWebPage schema. |
-| **Missing H1 Tags** | 4 | 2 | Low | No | Add H1 to pages flagged in onpage_issues.csv (Requires content update). |
-| **Duplicate Titles** | 3 | 2 | Low | No | Update metadata for conflicting pages. |
-| **Orphan Pages** | 3 | 3 | Med | No | Add internal links to `spine-surgery`, `pediatric-neurosurgery`. |
-| **Telugu Content** | 2 | 4 | Low | No | Create `/te/` landing page. |
+## 1. Fix Double Branding in Blog Titles (High Impact, Low Effort)
+- **Issue**: `src/lib/blog-seo.ts` manually appends ` | Dr. Sayuj Krishnan` to the title, while `app/layout.tsx` also applies a template ` %s | Dr. Sayuj Krishnan`. This results in titles like "Post Title | Dr. Sayuj Krishnan | Dr. Sayuj Krishnan".
+- **Affected URLs**: All dynamic blog posts (`/blog/[slug]`).
+- **Fix**: Update `src/lib/blog-seo.ts` to return `title: { absolute: title }` to bypass the root layout template.
+- **Risk**: Low.
+- **Status**: Implemented.
 
-## Top 3 "Do Now"
-1. **Fix Sitemap:** Clean up redirects and non-canonicals.
-2. **Schema Update:** Fix Physician and Blog schema gaps.
-3. **Performance LCP:** Hero image optimization (sizes attribute added).
+## 2. Enhance Schema on Blog Posts (Medium Impact, Low Effort)
+- **Issue**: Blog posts currently use `BlogPosting` schema. For YMYL (Your Money Your Life) content, Google recommends `MedicalWebPage` or specific medical types where applicable.
+- **Affected URLs**: All blog posts.
+- **Fix**: Update `app/_components/BlogLayout.tsx` to include `MedicalWebPage` in the `@type` array (e.g., `['BlogPosting', 'MedicalWebPage']`) or add it as a separate node in the graph.
+- **Risk**: Low.
+- **Status**: Implemented (`mainEntityOfPage` type updated).
+
+## 3. Optimize MDX Metadata Length (High Impact, Low Effort)
+- **Issue**: Many MDX files in `content/blog/` have titles > 60 chars and descriptions > 160 chars.
+- **Affected URLs**: Multiple blog posts.
+- **Fix**: Manual rewrite required. Automated truncation was rejected as destructive to keywords.
+- **Risk**: Low.
+- **Status**: Deferred for manual editorial review.
+
+## 4. Verify Legacy Blog Metadata (Low Impact, Medium Effort)
+- **Issue**: Static analysis flagged potential missing metadata in legacy `app/blog/*.tsx` pages. While spot checks showed they use `makeMetadata`, we should ensure *all* of them do.
+- **Fix**: Manual verification or refined script check.
+- **Risk**: Low.
+- **Status**: Low priority.
+
+## Selected for Implementation
+1. Fix Double Branding in `src/lib/blog-seo.ts`.
+2. Enhance Schema in `BlogLayout.tsx`.
+3. ~Optimize MDX Metadata Length~ (Deferred).
