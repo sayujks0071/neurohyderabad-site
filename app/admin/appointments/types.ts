@@ -21,5 +21,4 @@ export interface WhatsappAppointment {
   fullName: string;
   phone: string;
   preferredDate: string;
-  status: string;
 }

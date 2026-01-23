@@ -2,12 +2,10 @@
 
 import { useEffect, useState } from 'react';
 import { RefreshCw, CheckCircle, XCircle, Clock } from 'lucide-react';
-import { generateWhatsappUrl } from './utils';
+import { generateWhatsappUrl, formatDate } from './utils';
 import { WhatsAppIcon } from '@/src/components/WhatsAppIcon';
 
 export const dynamic = 'force-dynamic';
-
-type WhatsappStatus = 'Confirmed' | 'Pending' | 'Cancelled';
 
 import type { Appointment } from './types';
 
@@ -29,29 +27,6 @@ const StatusIcon = ({ status }: { status: string }) => {
       return <XCircle size={14} className="text-red-600" />;
     default:
       return <Clock size={14} className="text-yellow-600" />;
-  }
-};
-
-const normalizeWhatsappStatus = (status: string): WhatsappStatus => {
-  const normalized = status.toLowerCase();
-  if (normalized === 'confirmed' || normalized === 'completed') {
-    return 'Confirmed';
-  }
-  if (normalized === 'cancelled' || normalized === 'no-show') {
-    return 'Cancelled';
-  }
-  return 'Pending';
-};
-
-const formatDate = (dateStr: string) => {
-  try {
-    return new Date(dateStr).toLocaleDateString('en-IN', {
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric',
-    });
-  } catch {
-    return dateStr;
   }
 };
 
@@ -90,7 +65,6 @@ export default function AppointmentsPage() {
       fullName: appointment.patient_name,
       phone: appointment.patient_phone,
       preferredDate: formatDate(appointment.preferred_date),
-      status: normalizeWhatsappStatus(appointment.status),
     });
     window.open(url, '_blank');
   };

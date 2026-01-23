@@ -25,3 +25,20 @@ export const generateWhatsappUrl = (patient: WhatsappAppointment): string => {
   // Construct the final WhatsApp API URL with the sanitized number and encoded message
   return `https://wa.me/91${cleanNumber}?text=${encodeURIComponent(message)}`;
 };
+
+export const formatDate = (dateStr: string) => {
+  try {
+    const date = new Date(dateStr);
+    // If date is invalid, getTime() is NaN. Return original string in that case.
+    if (isNaN(date.getTime())) {
+      return dateStr;
+    }
+    return date.toLocaleDateString('en-IN', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+    });
+  } catch {
+    return dateStr;
+  }
+};
