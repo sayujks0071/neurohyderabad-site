@@ -17,7 +17,7 @@ import { patientStories } from '@/src/content/stories';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
 
 const baseMetadata = makeMetadata({
-  title: "Sciatica Treatment Hyderabad | 90% Non-Surgical Relief | Dr Sayuj",
+  title: "Sciatica Treatment Hyderabad | 90% Non-Surgical | Dr Sayuj",
   description: "Stop leg pain today. 90% of our sciatica patients recover without surgery. Expert diagnosis & endoscopic options. Book same-day consult.",
   canonicalPath: '/conditions/sciatica-pain-treatment-hyderabad',
 });
@@ -245,6 +245,44 @@ export default function SciaticaTreatmentPage() {
           className="bg-gradient-to-br from-white to-blue-50/50"
         />
       </div>
+
+      {/* Elderly Safety Section (Competitor Gap) */}
+      <section className="mb-12 bg-white border border-blue-100 rounded-2xl p-8 shadow-sm">
+        <h2 className="text-2xl font-bold text-blue-900 mb-4">Is Endoscopic Spine Surgery Safe for Elderly Patients?</h2>
+        <div className="grid md:grid-cols-2 gap-8 items-center">
+          <div>
+            <p className="text-gray-700 mb-4">
+              Age is often a concern when considering spine surgery. However, traditional open surgery risks (like blood loss and long anesthesia times) are minimized with our endoscopic approach.
+            </p>
+            <p className="text-gray-700 mb-4">
+              For patients over 60 suffering from <Link href="/symptoms/back-pain" className="text-blue-600 underline">severe back pain</Link> or sciatica, we use a specialized "Awake" or "Twilight" sedation protocol. This avoids general anesthesia and allows the patient to communicate with Dr. Sayuj during the procedure, ensuring safety.
+            </p>
+            <ul className="space-y-2 mb-6">
+              <li className="flex items-center text-sm text-gray-700">
+                <span className="text-green-500 mr-2">✓</span> No General Anesthesia Risks
+              </li>
+              <li className="flex items-center text-sm text-gray-700">
+                <span className="text-green-500 mr-2">✓</span> Minimal Cardiac Stress
+              </li>
+              <li className="flex items-center text-sm text-gray-700">
+                <span className="text-green-500 mr-2">✓</span> Early Mobilization (Walk Same Day)
+              </li>
+            </ul>
+          </div>
+          <div className="bg-blue-50 p-6 rounded-xl">
+             <h3 className="font-bold text-blue-800 mb-2">Second Opinion Service</h3>
+             <p className="text-sm text-gray-600 mb-4">
+               Have you been advised open surgery? Get a second opinion to see if <Link href="/services/endoscopic-spine-surgery-hyderabad" className="text-blue-700 font-semibold hover:underline">Endoscopic Spine Surgery</Link> is a safer option for you or your elderly parent.
+             </p>
+             <Link
+               href="/appointments"
+               className="block w-full text-center bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+             >
+               Get a Second Opinion
+             </Link>
+          </div>
+        </div>
+      </section>
 
       <section className="mb-12">
         <h2 className="text-2xl font-semibold mb-6 text-blue-700">Our Treatment Ladder</h2>
