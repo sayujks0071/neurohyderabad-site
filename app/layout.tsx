@@ -35,6 +35,7 @@ import TrustStrip from "./_components/TrustStrip";
 import ClientAnalytics from "./_components/ClientAnalytics";
 import GoogleAnalytics from "../src/components/GoogleAnalytics";
 import DynamicStickyCTA from "./_components/DynamicStickyCTA";
+import FloatingChatWidget from "./_components/FloatingChatWidget";
 import HypertuneProvider from "./providers/hypertune-provider";
 import { SITE_URL } from "../src/lib/seo";
 
@@ -165,11 +166,6 @@ export default function RootLayout({
       <body className={`antialiased ${inter.variable} ${merriweather.variable}`}>
         <GoogleAnalytics />
         <ClientAnalytics />
-        {process.env.NEXT_PUBLIC_CHATBOT_ID && (
-          <Script id="chatbase-embed" strategy="lazyOnload">
-            {`(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="${process.env.NEXT_PUBLIC_CHATBOT_ID}";script.domain="www.chatbase.co";document.body.appendChild(script)})()`}
-          </Script>
-        )}
         <WebsiteSchema />
         <PhysicianSchema />
         <HospitalSchema />
@@ -188,6 +184,7 @@ export default function RootLayout({
           </main>
         </HypertuneProvider>
         <Footer />
+        <FloatingChatWidget />
         <DynamicStickyCTA />
         {process.env.VERCEL ? <Analytics /> : null}
       </body>
