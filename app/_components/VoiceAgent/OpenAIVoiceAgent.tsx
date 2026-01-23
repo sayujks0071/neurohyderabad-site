@@ -329,7 +329,7 @@ Speak naturally and conversationally. Keep responses concise (2-3 sentences max)
       </div>
 
       {/* Visual Feedback */}
-      <div className="flex justify-center mb-6">
+      <div className="flex justify-center mb-6" aria-hidden="true">
         <div className={`relative w-32 h-32 rounded-full flex items-center justify-center transition-all duration-300 ${
           isListening ? 'bg-green-100 animate-pulse' :
           isSpeaking ? 'bg-blue-100 animate-pulse' :
@@ -360,7 +360,12 @@ Speak naturally and conversationally. Keep responses concise (2-3 sentences max)
       </div>
 
       {/* Status Message */}
-      <div className="text-center mb-4 min-h-[60px]">
+      <div
+        className="text-center mb-4 min-h-[60px]"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      >
         {error ? (
           <p className="text-sm text-red-600">{error}</p>
         ) : isInitializing ? (
