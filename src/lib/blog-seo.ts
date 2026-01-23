@@ -28,7 +28,9 @@ export function generateBlogMetadata(post: BlogPost): Metadata {
     : `${SITE_URL}/api/og?title=${encodeURIComponent(post.title)}&subtitle=${encodeURIComponent(post.subtitle || post.excerpt.substring(0, 100))}`;
 
   return {
-    title,
+    title: {
+      absolute: title,
+    },
     description,
     keywords: [
       post.primaryKeyword,

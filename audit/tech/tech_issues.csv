@@ -1,6 +1,1 @@
-url,issue_type,severity,recommended_fix
-https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills,Sitemap contains redirect (307),Medium,Update sitemap to point to final destination
-https://www.drsayuj.info/locations/malakpet,Non-canonical in sitemap,Low,Remove from sitemap (points to neurosurgeon-malakpet)
-https://www.drsayuj.info/locations/banjara-hills,Non-canonical in sitemap,Low,Remove from sitemap (points to neurosurgeon-banjara-hills)
-https://www.drsayuj.info/locations/hitech-city,Non-canonical in sitemap,Low,Remove from sitemap (points to neurosurgeon-hitech-city)
-https://www.drsayuj.info/locations/secunderabad,Non-canonical in sitemap,Low,Remove from sitemap (points to neurosurgeon-secunderabad)
+url,issue,details
