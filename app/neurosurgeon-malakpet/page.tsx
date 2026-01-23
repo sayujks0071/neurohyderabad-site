@@ -71,14 +71,14 @@ export default function MalakpetNeurosurgeonPage() {
   ).slice(0, 2);
 
   const commonConditions = [
-      "Sciatica & Leg Pain",
-      "Slip Disc (Herniated Disc)",
-      "Spinal Stenosis",
-      "Brain Tumors",
-      "Head Injuries (Trauma)",
-      "Spondylolisthesis",
-      "Neck Pain (Cervical Spondylosis)",
-      "Trigeminal Neuralgia"
+      { name: "Sciatica & Leg Pain", url: "/conditions/sciatica-pain-treatment-hyderabad" },
+      { name: "Slip Disc (Herniated Disc)", url: "/conditions/slip-disc-treatment-hyderabad" },
+      { name: "Spinal Stenosis", url: "/conditions/spinal-stenosis-treatment-hyderabad" },
+      { name: "Brain Tumors", url: "/services/brain-tumor-surgery-hyderabad" },
+      { name: "Head Injuries (Trauma)", url: "/emergency-rehabilitation" },
+      { name: "Spondylolisthesis", url: "/conditions/spondylolisthesis-treatment-hyderabad" },
+      { name: "Neck Pain (Cervical Spondylosis)", url: "/conditions/cervical-radiculopathy-treatment-hyderabad" },
+      { name: "Trigeminal Neuralgia", url: "/conditions/trigeminal-neuralgia-treatment-hyderabad" }
   ];
 
   return (
@@ -133,6 +133,37 @@ export default function MalakpetNeurosurgeonPage() {
                 <li>✓ <strong>All major insurance</strong> accepted (cashless TPA)</li>
                 <li>✓ <strong>Ample parking</strong> and easy access</li>
               </ul>
+            </div>
+
+            {/* NEW: Daycare Spine Surgery USP */}
+            <div className="mt-8">
+              <h3 className="text-xl font-bold text-gray-900">Why Daycare Spine Surgery at Malakpet?</h3>
+              <p className="mt-2 text-gray-700">
+                Unlike traditional open spine surgery, our <strong>endoscopic techniques</strong> (keyhole surgery) allow for:
+              </p>
+              <ul className="mt-3 grid gap-3 sm:grid-cols-2">
+                <li className="flex items-start bg-gray-50 p-3 rounded-lg border border-gray-100">
+                  <span className="text-green-500 mr-2 font-bold">✓</span>
+                  <span className="text-sm text-gray-800"><strong>Stitchless:</strong> Tiny 6-8mm incision</span>
+                </li>
+                <li className="flex items-start bg-gray-50 p-3 rounded-lg border border-gray-100">
+                  <span className="text-green-500 mr-2 font-bold">✓</span>
+                  <span className="text-sm text-gray-800"><strong>Fast Recovery:</strong> Walk within 3 hours</span>
+                </li>
+                <li className="flex items-start bg-gray-50 p-3 rounded-lg border border-gray-100">
+                  <span className="text-green-500 mr-2 font-bold">✓</span>
+                  <span className="text-sm text-gray-800"><strong>Reduced Pain:</strong> Minimal tissue damage</span>
+                </li>
+                <li className="flex items-start bg-gray-50 p-3 rounded-lg border border-gray-100">
+                  <span className="text-green-500 mr-2 font-bold">✓</span>
+                  <span className="text-sm text-gray-800"><strong>Home Same Day:</strong> No long hospital stay</span>
+                </li>
+              </ul>
+              <div className="mt-4">
+                 <Link href="/services/endoscopic-spine-surgery-hyderabad" className="text-blue-600 font-semibold hover:underline">
+                    Explore Endoscopic Spine Surgery →
+                 </Link>
+              </div>
             </div>
           </div>
 
@@ -195,10 +226,10 @@ export default function MalakpetNeurosurgeonPage() {
            <p className="text-gray-600 mb-8">Specialized care for common and complex brain and spine disorders.</p>
            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
               {commonConditions.map((condition, idx) => (
-                  <div key={idx} className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 flex items-center">
-                      <span className="text-blue-500 mr-2">•</span>
-                      <span className="font-medium text-gray-800">{condition}</span>
-                  </div>
+                  <Link key={idx} href={condition.url} className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 flex items-center hover:shadow-md transition-shadow group">
+                      <span className="text-blue-500 mr-2 group-hover:text-blue-700">•</span>
+                      <span className="font-medium text-gray-800 group-hover:text-blue-700">{condition.name}</span>
+                  </Link>
               ))}
            </div>
         </div>
