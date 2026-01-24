@@ -225,6 +225,76 @@ export default function SpineSurgeryPage() {
           </div>
         </section>
 
+        {/* Comparison Table */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="max-w-5xl mx-auto">
+              <h2 className="text-3xl font-bold text-center mb-12 text-blue-900">Endoscopic vs. Traditional Open Surgery</h2>
+              <div className="overflow-x-auto shadow-xl rounded-2xl">
+                <table className="w-full text-left border-collapse bg-white">
+                  <thead>
+                    <tr className="bg-blue-900 text-white">
+                      <th className="p-4 md:p-6 text-lg font-semibold">Feature</th>
+                      <th className="p-4 md:p-6 text-lg font-semibold bg-blue-700 border-l border-blue-600">
+                        Endoscopic Spine Surgery
+                        <span className="block text-xs md:text-sm font-normal text-blue-200 mt-1">(Dr. Sayuj's Technique)</span>
+                      </th>
+                      <th className="p-4 md:p-6 text-lg font-semibold border-l border-blue-800 text-gray-300">Traditional Open Surgery</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-100">
+                    <tr className="hover:bg-blue-50 transition-colors">
+                      <td className="p-4 md:p-6 font-medium text-gray-900">Incision Size</td>
+                      <td className="p-4 md:p-6 text-blue-700 font-bold bg-blue-50/50 border-l border-gray-100">
+                        &lt; 1 cm (Keyhole)
+                      </td>
+                      <td className="p-4 md:p-6 text-gray-600 border-l border-gray-100">5 - 8 cm (Large Cut)</td>
+                    </tr>
+                    <tr className="hover:bg-blue-50 transition-colors">
+                      <td className="p-4 md:p-6 font-medium text-gray-900">Muscle Damage</td>
+                      <td className="p-4 md:p-6 text-blue-700 font-bold bg-blue-50/50 border-l border-gray-100">
+                        None (Muscles Dilated)
+                      </td>
+                      <td className="p-4 md:p-6 text-gray-600 border-l border-gray-100">Significant (Muscles Cut)</td>
+                    </tr>
+                    <tr className="hover:bg-blue-50 transition-colors">
+                      <td className="p-4 md:p-6 font-medium text-gray-900">Blood Loss</td>
+                      <td className="p-4 md:p-6 text-blue-700 font-bold bg-blue-50/50 border-l border-gray-100">
+                        Negligible
+                      </td>
+                      <td className="p-4 md:p-6 text-gray-600 border-l border-gray-100">Moderate to High</td>
+                    </tr>
+                    <tr className="hover:bg-blue-50 transition-colors">
+                      <td className="p-4 md:p-6 font-medium text-gray-900">Hospital Stay</td>
+                      <td className="p-4 md:p-6 text-blue-700 font-bold bg-blue-50/50 border-l border-gray-100">
+                        Same Day / 24 Hours
+                      </td>
+                      <td className="p-4 md:p-6 text-gray-600 border-l border-gray-100">3 - 5 Days</td>
+                    </tr>
+                    <tr className="hover:bg-blue-50 transition-colors">
+                      <td className="p-4 md:p-6 font-medium text-gray-900">Return to Work</td>
+                      <td className="p-4 md:p-6 text-blue-700 font-bold bg-blue-50/50 border-l border-gray-100">
+                        1 - 2 Weeks
+                      </td>
+                      <td className="p-4 md:p-6 text-gray-600 border-l border-gray-100">3 - 6 Months</td>
+                    </tr>
+                    <tr className="hover:bg-blue-50 transition-colors">
+                      <td className="p-4 md:p-6 font-medium text-gray-900">Post-op Pain</td>
+                      <td className="p-4 md:p-6 text-blue-700 font-bold bg-blue-50/50 border-l border-gray-100">
+                        Minimal
+                      </td>
+                      <td className="p-4 md:p-6 text-gray-600 border-l border-gray-100">Moderate to Severe</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p className="text-center mt-6 text-gray-500 text-sm">
+                *Recovery times may vary based on individual patient condition and compliance with physiotherapy.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* Conditions Treated */}
         <section className="py-16">
           <div className="container mx-auto px-4">
