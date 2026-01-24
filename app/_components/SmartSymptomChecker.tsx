@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { Loader2 } from 'lucide-react';
 
 interface SymptomAnalysis {
   urgency: 'emergency' | 'urgent' | 'routine';
@@ -151,21 +152,24 @@ export default function SmartSymptomChecker() {
           <button
             type="submit"
             disabled={isLoading || !symptoms.trim()}
-            className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            aria-busy={isLoading}
+            className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
           >
+            {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden="true" />}
             {isLoading ? 'Analyzing...' : 'Analyze Symptoms'}
           </button>
         </form>
 
-        {error && (
-          <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
-            <p className="text-red-800 text-sm">{error}</p>
-          </div>
-        )}
+        <div aria-live="polite">
+          {error && (
+            <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+              <p className="text-red-800 text-sm">{error}</p>
+            </div>
+          )}
 
-        {analysis && (
-          <div className="mt-6 space-y-4">
-            <div className={`p-4 border rounded-lg ${getUrgencyColor(analysis.urgency)}`}>
+          {analysis && (
+            <div className="mt-6 space-y-4">
+              <div className={`p-4 border rounded-lg ${getUrgencyColor(analysis.urgency)}`}>
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-2xl">
                   {analysis.urgency === 'emergency' ? '🚨' : analysis.urgency === 'urgent' ? '⚠️' : 'ℹ️'}
@@ -215,6 +219,7 @@ export default function SmartSymptomChecker() {
             </div>
           </div>
         )}
+        </div>
       </div>
     </div>
   );
