@@ -30,6 +30,8 @@ const nextConfig = {
     ppr: false,
     // Enable optimized CSS loading
     optimizeCss: true,
+    // Keep Turbopack dependency tracking enabled during build
+    turbopackFileSystemCacheForBuild: true,
   },
   // Server external packages (moved from experimental)
   serverExternalPackages: ['sharp'],

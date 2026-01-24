@@ -5,7 +5,7 @@
   "packageManager": "pnpm@9.15.0",
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "NODE_OPTIONS='--max-old-space-size=4096' next build --webpack",
+    "build": "NODE_OPTIONS='--max-old-space-size=4096' next build",
     "postbuild": "next-sitemap && rm public/sitemap.xml && node scripts/generate-image-sitemap.js && node scripts/generate-video-sitemap.js",
     "lint": "next lint",
     "test": "vitest run",
