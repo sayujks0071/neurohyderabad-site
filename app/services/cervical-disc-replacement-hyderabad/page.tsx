@@ -48,39 +48,6 @@ export const metadata: Metadata = {
 };
 
 // Google Business Profile JSON-LD
-const gbpSchema = {
-  "@context": "https://schema.org",
-  "@type": "MedicalBusiness",
-  "name": "Cervical Disc Replacement | Dr. Sayuj Krishnan",
-  "url": "https://www.drsayuj.info/services/cervical-disc-replacement-hyderabad/?utm_source=google&utm_medium=organic&utm_campaign=gbp_adr",
-  "image": "https://www.drsayuj.info/images/og-default.jpg",
-  "description": "Expert artificial disc replacement surgery for cervical spondylosis by Dr. Sayuj Krishnan in Hyderabad. Motion-preserving alternative to fusion.",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://www.drsayuj.info/services/cervical-disc-replacement-hyderabad/"
-  },
-  "medicalSpecialty": "Spine Surgery",
-  "areaServed": {
-    "@type": "AdministrativeArea",
-    "name": "Hyderabad, Telangana, India"
-  },
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Room No. 317, OPD Block, Yashoda Hospital, Malakpet",
-    "addressLocality": "Hyderabad",
-    "addressRegion": "Telangana",
-    "postalCode": "500036",
-    "addressCountry": "IN"
-  },
-  "openingHours": "Mo-Sa 10:00-17:00",
-  "telephone": "+91-97782-80044",
-  "priceRange": "₹₹₹",
-  "sameAs": [
-    "https://www.instagram.com/drsayujneurohyd",
-    "https://www.linkedin.com/in/drsayujkrishnan",
-    "https://www.youtube.com/@drsayujneurohyd"
-  ]
-};
 
 const COSTS = [
   {
@@ -165,7 +132,6 @@ export default function CervicalADRPage() {
 
   return (
     <>
-      <JsonLd data={gbpSchema} />
       <BreadcrumbSchema
         items={[
           { name: 'Home', path: '/' },

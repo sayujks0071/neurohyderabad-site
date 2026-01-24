@@ -57,39 +57,6 @@ const fractureStories = patientStories
 const ARTICLE_SOURCES = getServiceSources('minimally-invasive-spine-surgery'); // Re-using spine sources as relevant
 
 // Google Business Profile JSON-LD
-const gbpSchema = {
-  "@context": "https://schema.org",
-  "@type": "MedicalBusiness",
-  "name": "Vertebroplasty & Kyphoplasty | Dr. Sayuj Krishnan",
-  "url": "https://www.drsayuj.info/services/kyphoplasty-vertebroplasty-hyderabad/?utm_source=google&utm_medium=organic&utm_campaign=gbp_vertebroplasty",
-  "image": "https://www.drsayuj.info/images/og-default.jpg",
-  "description": "Specialized vertebroplasty and kyphoplasty procedures for spine fractures in Hyderabad. Quick recovery and pain relief by Dr. Sayuj Krishnan.",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://www.drsayuj.info/services/kyphoplasty-vertebroplasty-hyderabad/"
-  },
-  "medicalSpecialty": "Minimally Invasive Spine Surgery",
-  "areaServed": {
-    "@type": "AdministrativeArea",
-    "name": "Hyderabad, Telangana, India"
-  },
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Room No. 317, OPD Block, Yashoda Hospital, Malakpet",
-    "addressLocality": "Hyderabad",
-    "addressRegion": "Telangana",
-    "postalCode": "500036",
-    "addressCountry": "IN"
-  },
-  "openingHours": "Mo-Sa 10:00-17:00",
-  "telephone": "+91-97782-80044",
-  "priceRange": "₹₹",
-  "sameAs": [
-    "https://www.instagram.com/drsayujneurohyd",
-    "https://www.linkedin.com/in/drsayujkrishnan",
-    "https://www.youtube.com/@drsayujneurohyd"
-  ]
-};
 
 const COSTS = [
   {
@@ -209,7 +176,6 @@ export default function VertebroplastyKyphoplastyPage() {
 
   return (
     <>
-      <JsonLd data={gbpSchema} />
       <BreadcrumbSchema
         items={[
           { name: 'Home', path: '/' },

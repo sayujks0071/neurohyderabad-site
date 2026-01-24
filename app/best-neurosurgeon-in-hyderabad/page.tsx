@@ -6,6 +6,8 @@ import SmartImage from '@/components/SmartImage';
 // import SocialProofBand from "../../src/components/Experiments/SocialProofBand";
 import { analytics } from "../../src/lib/analytics";
 import ScrollDepthTracker from "../../src/components/ScrollDepthTracker";
+import { LocationCTAs } from "@/src/components/locations/LocationCTAs";
+import { LocalPathways } from "@/src/components/locations/LocalPathways";
 
 export const metadata: Metadata = {
   title: "Best Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan",
@@ -496,6 +498,19 @@ export default function BestNeurosurgeonPage() {
             >
               Book Consultation
             </Link>
+          </div>
+        </section>
+
+        {/* Local Pathways & CTAs */}
+        <section className="py-16 bg-white border-t border-gray-200">
+          <div className="container mx-auto px-4 max-w-4xl">
+             <h2 className="text-3xl font-bold text-center text-blue-800 mb-10">
+               Visit Our Clinic
+             </h2>
+             <div className="mb-12">
+               <LocationCTAs locationId="malakpet" />
+             </div>
+             <LocalPathways mode="service" />
           </div>
         </section>
 
