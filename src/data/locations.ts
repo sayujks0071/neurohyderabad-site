@@ -56,7 +56,7 @@ export const REPO_EMBED = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1
 export const SOCIAL_PROFILES = [
   "https://www.facebook.com/drsayujneurohyd",
   "https://www.instagram.com/drsayujneurohyd",
-  "https://www.linkedin.com/in/drsayujkrishnan",
+  "https://in.linkedin.com/in/drsayujkrishnan",
   "https://www.youtube.com/@drsayujneurohyd",
   "https://twitter.com/drsayuj",
   "https://www.google.com/maps?cid=14503792272825406246",

@@ -18,7 +18,7 @@ import CostTransparencySection from '@/src/components/CostTransparencySection';
 
 const baseMetadata = makeMetadata({
   title: "Sciatica Treatment Hyderabad | 90% Non-Surgical | Dr Sayuj",
-  description: "Stop leg pain today. 90% of our sciatica patients recover without surgery. Expert diagnosis & endoscopic options. Book same-day consult.",
+  description: "Relief from Sciatica leg pain in Hyderabad. 90% non-surgical success with Dr. Sayuj Krishnan. Nerve blocks, Physio & Endoscopic options. Book Consult.",
   canonicalPath: '/conditions/sciatica-pain-treatment-hyderabad',
 });
 
@@ -82,6 +82,14 @@ const FAQ = [
   {
     q: "Is sciatica common during pregnancy?",
     a: "Yes, up to 50% of women experience some sciatic pain during pregnancy due to the baby's weight and postural changes. We offer safe, medication-free physiotherapy protocols to manage this pain without risking the baby's health."
+  },
+  {
+    q: "Can I drive with sciatica?",
+    a: "Driving often worsens sciatica due to the vibration and leg position. We recommend short trips, using a lumbar support cushion, and stopping every 30 minutes to stretch. If you have foot weakness (foot drop), do not drive."
+  },
+  {
+    q: "What exercises should I avoid with sciatica?",
+    a: "Avoid heavy hamstring stretches, straight leg raises, and twisting movements like golf until cleared by a physio. These can increase nerve tension."
   }
 ];
 

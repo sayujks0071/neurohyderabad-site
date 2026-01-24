@@ -21,8 +21,8 @@ import PatientJourneySection from '@/src/components/PatientJourneySection';
 import SurgeryComparisonTable from '@/src/components/SurgeryComparisonTable';
 
 const baseMetadata = makeMetadata({
-  title: 'Endoscopic Spine Surgery Hyderabad | Dr. Sayuj Krishnan',
-  description: 'Expert endoscopic spine surgery in Hyderabad with Dr. Sayuj Krishnan. Minimally invasive procedures with same-day discharge at Yashoda Hospital Malakpet.',
+  title: 'Minimally Invasive Spine Surgery Hyderabad | Day Care | Walk Same Day',
+  description: 'Advanced endoscopic spine surgery in Hyderabad. Tiny incision, no muscle cutting, same-day discharge. Expert care by Dr. Sayuj Krishnan. Get Cost Estimate.',
   canonicalPath: '/services/minimally-invasive-spine-surgery',
 });
 
