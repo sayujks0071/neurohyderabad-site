@@ -1,24 +1,22 @@
-# Cluster Mapping: 2026-01-23
+# Clusters and Mapping - 2026-01-24
 
-## Cluster 1: Degenerative Disc Disease (New)
-**Primary Keyword:** "degenerative disc disease treatment hyderabad"
-**Secondary Keywords:**
-- "lumbar degenerative disc disease symptoms"
-- "non-surgical treatment for degenerative disc disease"
-- "black disc disease treatment"
-- "spine surgery for elderly hyderabad"
-**Target Page:** `/conditions/degenerative-disc-disease-treatment-hyderabad` (New Super Profile)
+## New Cluster: Spine Deformity (Scoliosis/Kyphosis)
 
-## Cluster 2: Endoscopic Spine Surgery (Existing)
-**Primary Keyword:** "endoscopic spine surgery hyderabad"
-**Secondary Keywords:**
-- "stitchless spine surgery hyderabad"
-- "keyhole spine surgery hyderabad"
-**Target Page:** `/services/minimally-invasive-spine-surgery`
+**Primary Keyword:** scoliosis treatment hyderabad
+**Cluster Label:** HYD | BOFU | SPINE | scoliosis | treatment
 
-## Cluster 3: Sciatica (Existing)
-**Primary Keyword:** "sciatica treatment hyderabad"
-**Secondary Keywords:**
-- "leg pain treatment hyderabad"
-- "non-surgical sciatica cure"
-**Target Page:** `/conditions/sciatica-pain-treatment-hyderabad`
+### Keywords mapped to this cluster:
+- scoliosis treatment hyderabad
+- scoliosis correction surgery hyderabad
+- spinal deformity treatment hyderabad
+- kyphosis correction hyderabad
+- scoliosis specialist hyderabad
+- signs of scoliosis in children
+
+### Target Page
+**Recommended:** `/blog/scoliosis-treatment-options-in-hyderabad`
+**Type:** New Blog Post (Safe)
+**Reason:** Current site lacks dedicated deep-dive content for scoliosis/deformity correction. Competitors (KIMS, Care, Dr. Raveesh) have specific pages. A detailed guide/blog is a safe entry point to capture long-tail traffic before committing to a main service page.
+
+## Existing Cluster Updates
+- **Pediatric Spine:** "pediatric spine surgery hyderabad" mapped to existing `/pediatric-neurosurgery`.

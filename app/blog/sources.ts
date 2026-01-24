@@ -284,6 +284,20 @@ export const BLOG_SOURCES: Record<string, SourceEntry[]> = {
       href: "https://www.arthritis.org/diseases/degenerative-disc-disease",
     },
   ],
+  "scoliosis-treatment-options-in-hyderabad": [
+    {
+      label: "Scoliosis Research Society – Patient Information",
+      href: "https://www.srs.org/patients-and-families",
+    },
+    {
+      label: "American Association of Neurological Surgeons – Scoliosis",
+      href: "https://www.aans.org/Patients/Neurosurgical-Conditions-and-Treatments/Scoliosis",
+    },
+    {
+      label: "Mayo Clinic – Scoliosis Symptoms & Causes",
+      href: "https://www.mayoclinic.org/diseases-conditions/scoliosis/symptoms-causes/syc-20350716",
+    },
+  ],
 };
 
 export function getBlogSources(slug: string): SourceEntry[] {
