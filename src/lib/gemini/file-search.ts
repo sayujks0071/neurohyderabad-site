@@ -61,11 +61,11 @@ Note: This answer is based on general medical knowledge. For personalized medica
       });
     }
 
-    // Use gemini-2.5-flash for file search
+    // Use gemini-2.0-flash-exp for file search
     let response: any;
     try {
       response = await genAI.models.generateContent({
-        model: 'gemini-2.5-flash',
+        model: 'gemini-2.0-flash-exp',
         contents: [{ role: 'user', parts: requestParts }],
         config: {
           temperature,
@@ -79,7 +79,7 @@ Note: This answer is based on general medical knowledge. For personalized medica
         throw new Error('Gemini API key is invalid or missing. Please check your GEMINI_API_KEY environment variable.');
       }
       if (errorMsg.includes('404') || errorMsg.includes('model')) {
-        throw new Error('Gemini model "gemini-2.5-flash" not found. Please check the model name.');
+        throw new Error('Gemini model "gemini-2.0-flash-exp" not found. Please check the model name.');
       }
       throw new Error(`Gemini API call failed: ${errorMsg}`);
     }
@@ -204,7 +204,7 @@ Note: This response is based on general medical knowledge. For personalized medi
     }
     
     if (errorMessage.includes('404') || errorMessage.includes('model')) {
-      throw new Error('Gemini model not found. Please check the model name (gemini-2.5-flash).');
+      throw new Error('Gemini model not found. Please check the model name (gemini-2.0-flash-exp).');
     }
     
     console.error('[Gemini Search] Full error details:', { errorMessage, errorStack });

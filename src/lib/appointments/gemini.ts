@@ -1,7 +1,7 @@
 import { GoogleGenAI } from "@google/genai";
 import type { BookingData } from "@/packages/appointment-form/types";
 
-const MODEL_NAME = "gemini-2.5-flash";
+const MODEL_NAME = "gemini-2.0-flash-exp";
 
 const systemInstruction = `You are a friendly and professional medical receptionist for Dr. Sayuj Krishnan, a neurosurgeon.
 Your task is to generate a concise, warm, and reassuring confirmation message for an online appointment request based on the patient details provided.
