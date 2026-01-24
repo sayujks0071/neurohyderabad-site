@@ -14,3 +14,5 @@ Scan the key competitors defined in `AGENTS.md` (e.g., drraveesh.com, spinesurge
 <!-- Managed by Jules -->
 
 <!-- v1.0 -->
+
+<!-- Verified by Jules -->

@@ -1,10 +1,10 @@
 name: Jules SEO Reprint
-# v1.0
+# v1.0 - Verified
 # Managed by Jules (Daily Schedule)
 on:
   schedule:
     # 08:00 IST (India Standard Time) = 02:30 UTC
-    - cron: '30 2 * * *'
+    - cron: "30 2 * * *"
   workflow_dispatch:
 
 permissions:

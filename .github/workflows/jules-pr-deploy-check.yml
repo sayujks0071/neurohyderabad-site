@@ -1,10 +1,10 @@
 name: Jules PR & Deploy Check
-# v1.0
+# v1.0 - Verified
 # Managed by Jules (Daily Schedule)
 on:
   schedule:
     # 08:45 IST (India Standard Time) = 03:15 UTC
-    - cron: '15 3 * * *'
+    - cron: "15 3 * * *"
   workflow_dispatch:
 
 permissions:
