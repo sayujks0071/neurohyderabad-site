@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Appointment Booking</title>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .bg-cyan-600 { background-color: #0891b2; }
+    .hover\:bg-cyan-700:hover { background-color: #0e7490; }
+    .text-cyan-600 { color: #0891b2; }
+  </style>
+</head>
+<body class="bg-slate-50">
+  <div id="root"></div>
+
+  <script>
+    const { useState, useEffect } = React;
+
+    function BookingWidget() {
+      // Accessing OpenAI Apps SDK host state
+      // The bridge is available on window.openai
+      const toolInput = window.openai?.toolInput || {};
+      
+      const [formData, setFormData] = useState({
+        patientName: toolInput.patientName || "",
+        service: toolInput.service || "",
+        phone: "",
+        appointmentDate: toolInput.preferredDate || "",
+        appointmentTime: "",
+        reason: "",
+      });
+      
+      const [status, setStatus] = useState("idle"); // idle | submitting | success | error
+
+      const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
+      };
+
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+        setStatus("submitting");
+
+        try {
+          // Use the MCP callTool helper provided by the bridge
+          const result = await window.openai.callTool("submit_appointment", formData);
+          
+          if (result && (result.success || result.id || !result.error)) {
+            setStatus("success");
+            // Optionally send a follow-up message to the assistant
+            window.openai.sendFollowUpMessage({ 
+                prompt: `I have successfully filled the booking form for ${formData.patientName} for ${formData.service} on ${formData.appointmentDate} at ${formData.appointmentTime}. The system returned a success response. Please inform the user.` 
+            });
+          } else {
+            console.error("Booking error result:", result);
+            setStatus("error");
+          }
+        } catch (err) {
+          console.error("Booking exception:", err);
+          setStatus("error");
+        }
+      };
+
+      if (status === "success") {
+        return React.createElement("div", { className: "p-8 text-center" },
+          React.createElement("div", { className: "bg-green-100 text-green-800 p-6 rounded-2xl mb-6 shadow-sm border border-green-200" },
+            React.createElement("h2", { className: "text-2xl font-bold mb-2" }, "Booking Request Sent!"),
+            React.createElement("p", { className: "text-green-700" }, "Dr. Sayuj's team will contact you shortly to confirm your visit.")
+          ),
+          React.createElement("button", { 
+            onClick: () => window.openai.openExternal({ href: "https://www.drsayuj.com" }),
+            className: "text-cyan-600 font-bold hover:underline"
+          }, "Visit Website for More Info")
+        );
+      }
+
+      return React.createElement("div", { className: "max-w-md mx-auto bg-white shadow-xl rounded-2xl overflow-hidden border border-slate-100" },
+        React.createElement("div", { className: "bg-cyan-600 p-6 text-white text-center" },
+          React.createElement("h2", { className: "text-2xl font-bold" }, "Schedule Consultation"),
+          React.createElement("p", { className: "text-cyan-100 text-sm mt-1" }, "Direct booking via Dr. Sayuj's Assistant")
+        ),
+        React.createElement("form", { onSubmit: handleSubmit, className: "p-6 space-y-4" },
+          React.createElement("div", null,
+            React.createElement("label", { className: "block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1" }, "Patient Full Name"),
+            React.createElement("input", { 
+              type: "text", name: "patientName", value: formData.patientName, onChange: handleChange,
+              className: "w-full rounded-lg border-slate-200 shadow-sm focus:border-cyan-500 focus:ring-cyan-500 sm:text-sm p-3 border outline-none transition-all",
+              required: true, placeholder: "John Doe"
+            })
+          ),
+          React.createElement("div", { className: "grid grid-cols-2 gap-4" },
+            React.createElement("div", null,
+              React.createElement("label", { className: "block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1" }, "Mobile Number"),
+              React.createElement("input", { 
+                type: "tel", name: "phone", value: formData.phone, onChange: handleChange,
+                className: "w-full rounded-lg border-slate-200 shadow-sm focus:border-cyan-500 focus:ring-cyan-500 sm:text-sm p-3 border outline-none",
+                required: true, placeholder: "9876543210"
+              })
+            ),
+            React.createElement("div", null,
+              React.createElement("label", { className: "block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1" }, "Specialty/Service"),
+              React.createElement("input", { 
+                type: "text", name: "service", value: formData.service, onChange: handleChange,
+                className: "w-full rounded-lg border-slate-200 shadow-sm focus:border-cyan-500 focus:ring-cyan-500 sm:text-sm p-3 border outline-none",
+                required: true, placeholder: "Spine Surgery"
+              })
+            )
+          ),
+          React.createElement("div", { className: "grid grid-cols-2 gap-4" },
+            React.createElement("div", null,
+              React.createElement("label", { className: "block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1" }, "Preferred Date"),
+              React.createElement("input", { 
+                type: "date", name: "appointmentDate", value: formData.appointmentDate, onChange: handleChange,
+                className: "w-full rounded-lg border-slate-200 shadow-sm focus:border-cyan-500 focus:ring-cyan-500 sm:text-sm p-3 border outline-none",
+                required: true
+              })
+            ),
+            React.createElement("div", null,
+              React.createElement("label", { className: "block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1" }, "Preferred Time"),
+              React.createElement("select", { 
+                name: "appointmentTime", value: formData.appointmentTime, onChange: handleChange,
+                className: "w-full rounded-lg border-slate-200 shadow-sm focus:border-cyan-500 focus:ring-cyan-500 sm:text-sm p-3 border outline-none",
+                required: true
+              },
+                React.createElement("option", { value: "" }, "Select Slot"),
+                React.createElement("option", { value: "09:00 AM" }, "09:00 AM"),
+                React.createElement("option", { value: "10:30 AM" }, "10:30 AM"),
+                React.createElement("option", { value: "12:00 PM" }, "12:00 PM"),
+                React.createElement("option", { value: "02:30 PM" }, "02:30 PM"),
+                React.createElement("option", { value: "04:00 PM" }, "04:00 PM")
+              )
+            )
+          ),
+          React.createElement("div", null,
+            React.createElement("label", { className: "block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1" }, "Brief Symptoms"),
+            React.createElement("textarea", { 
+              name: "reason", value: formData.reason, onChange: handleChange,
+              className: "w-full rounded-lg border-slate-200 shadow-sm focus:border-cyan-500 focus:ring-cyan-500 sm:text-sm p-3 border h-24 outline-none resize-none",
+              required: true, placeholder: "Describe your condition..."
+            })
+          ),
+          React.createElement("button", { 
+            type: "submit", disabled: status === "submitting",
+            className: `w-full py-4 px-4 rounded-xl text-white font-bold text-lg shadow-lg transition-all transform active:scale-95 ${
+              status === "submitting" ? "bg-slate-400 cursor-not-allowed" : "bg-cyan-600 hover:bg-cyan-700 hover:shadow-cyan-200"
+            }`
+          },
+            status === "submitting" ? 
+              React.createElement("span", { className: "flex items-center justify-center" }, 
+                React.createElement("svg", { className: "animate-spin -ml-1 mr-3 h-5 w-5 text-white", fill: "none", viewBox: "0 0 24 24" },
+                  React.createElement("circle", { className: "opacity-25", cx: "12", cy: "12", r: "10", stroke: "currentColor", strokeWidth: "4" }),
+                  React.createElement("path", { className: "opacity-75", fill: "currentColor", d: "M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" })
+                ),
+                "Confirming..."
+              ) : "Book Appointment"
+          ),
+          status === "error" && React.createElement("p", { className: "text-red-500 text-sm text-center font-medium" }, "Error sending request. Please call us at +91-9778280044.")
+        )
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(React.createElement(BookingWidget));
+  </script>
+</body>
+</html>

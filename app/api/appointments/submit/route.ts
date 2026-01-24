@@ -7,6 +7,7 @@ import {
 import { buildWebhookPayload, notifyAppointmentWebhooks } from "@/src/lib/appointments/webhooks";
 import { submitToGoogleSheets } from "@/src/lib/google-sheets";
 import { rateLimit } from "@/src/lib/rate-limit";
+import { appointments } from "@/src/lib/db";
 import type { BookingData } from "@/packages/appointment-form/types";
 
 const ALLOWED_GENDERS = new Set(["male", "female", "other"]);
@@ -124,6 +125,26 @@ export async function POST(request: Request) {
         adminEmailResult.error
       );
     }
+
+    // Save to database (async, non-blocking)
+    const source = request.headers.get("x-booking-source") || "website";
+    void appointments.create({
+      patient_name: booking.patientName,
+      patient_email: booking.email,
+      patient_phone: booking.phone,
+      preferred_date: booking.appointmentDate,
+      preferred_time: booking.appointmentTime,
+      chief_complaint: booking.reason,
+      patient_age: Number(booking.age),
+      patient_gender: booking.gender,
+      pain_score: booking.painScore,
+      mri_scan_available: booking.mriScanAvailable,
+      source,
+      confirmation_message: message,
+      used_ai_confirmation: usedAI,
+    }).catch((error) => {
+      console.error("[appointments/submit] Failed to save to database:", error);
+    });
 
     // Add lead to CRM / Google Sheet (async, non-blocking)
     const source = request.headers.get("x-booking-source") || "website";
