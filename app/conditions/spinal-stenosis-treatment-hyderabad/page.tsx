@@ -124,18 +124,28 @@ export default function SpinalStenosisPage() {
           <div className="bg-gray-50 p-8 rounded-2xl border border-gray-100 shadow-sm">
             <h3 className="text-xl font-bold text-gray-900 mb-4">Typical Symptoms</h3>
             <ul className="space-y-3">
-              {[
-                "Leg heaviness or cramping when walking (Claudication)",
-                "Relief when sitting or bending forward (Shopping Cart Sign)",
-                "Numbness or tingling in feet",
-                "Lower back pain (often mild compared to leg pain)",
-                "Weakness in legs in severe cases"
-              ].map((symptom, i) => (
-                <li key={i} className="flex gap-3 items-start text-gray-700">
-                  <span className="mt-1.5 w-1.5 h-1.5 bg-blue-600 rounded-full flex-shrink-0" />
-                  <span>{symptom}</span>
-                </li>
-              ))}
+              <li className="flex gap-3 items-start text-gray-700">
+                <span className="mt-1.5 w-1.5 h-1.5 bg-blue-600 rounded-full flex-shrink-0" />
+                <span>Leg heaviness or cramping when walking (Claudication)</span>
+              </li>
+              <li className="flex gap-3 items-start text-gray-700">
+                <span className="mt-1.5 w-1.5 h-1.5 bg-blue-600 rounded-full flex-shrink-0" />
+                <span>Relief when sitting or bending forward (Shopping Cart Sign)</span>
+              </li>
+              <li className="flex gap-3 items-start text-gray-700">
+                <span className="mt-1.5 w-1.5 h-1.5 bg-blue-600 rounded-full flex-shrink-0" />
+                <span>
+                  Numbness or tingling in feet (often confused with <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 underline">Sciatica</Link>)
+                </span>
+              </li>
+              <li className="flex gap-3 items-start text-gray-700">
+                <span className="mt-1.5 w-1.5 h-1.5 bg-blue-600 rounded-full flex-shrink-0" />
+                <span>Lower back pain (often mild compared to leg pain)</span>
+              </li>
+              <li className="flex gap-3 items-start text-gray-700">
+                <span className="mt-1.5 w-1.5 h-1.5 bg-blue-600 rounded-full flex-shrink-0" />
+                <span>Weakness in legs in severe cases</span>
+              </li>
             </ul>
           </div>
         </div>
