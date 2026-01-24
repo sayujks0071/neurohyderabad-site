@@ -61,12 +61,14 @@ export async function POST(request: Request) {
   }
 
   const action = String(body.action || "");
+  console.log(`[Neuralink API] Action: ${action}`);
   if (!action) {
     return jsonError("Missing action", 400);
   }
 
   try {
     const ai = getClient();
+    console.log(`[Neuralink API] AI Client initialized`);
 
     switch (action) {
       case "triage": {
@@ -79,8 +81,8 @@ export async function POST(request: Request) {
         }
 
         const response = await ai.models.generateContent({
-          model: "gemini-3-flash-preview",
-          contents: `Perform a preliminary neurosurgical triage for a ${age}-year-old ${gender} patient with these symptoms: "${symptoms}". Provide a concise professional summary, identify potential neurosurgical concerns as a list of points, and suggest a priority level (LOW, MEDIUM, HIGH, URGENT). Note: This is for doctor assistance, not a diagnosis.`,
+          model: "gemini-2.0-flash-exp",
+          contents: [{ role: "user", parts: [{ text: `Perform a preliminary neurosurgical triage for a ${age}-year-old ${gender} patient with these symptoms: "${symptoms}". Provide a concise professional summary, identify potential neurosurgical concerns as a list of points, and suggest a priority level (LOW, MEDIUM, HIGH, URGENT). Note: This is for doctor assistance, not a diagnosis.` }] }],
           config: {
             responseMimeType: "application/json",
             responseSchema: {
@@ -112,11 +114,11 @@ export async function POST(request: Request) {
         }
 
         const response = await ai.models.generateContent({
-          model: "gemini-3-flash-preview",
-          contents: `The following is a patient's draft description of their symptoms: "${input}".
+          model: "gemini-2.0-flash-exp",
+          contents: [{ role: "user", parts: [{ text: `The following is a patient's draft description of their symptoms: "${input}".
 Help them refine it by providing a more structured, clinical, but easy-to-read version.
 Ask 2-3 clarifying questions that a neurosurgeon would find helpful (e.g., about radiculopathy, bowel/bladder control, or specific pain triggers).
-Return JSON format.`,
+Return JSON format.` }] }],
           config: {
             responseMimeType: "application/json",
             responseSchema: {
@@ -144,11 +146,11 @@ Return JSON format.`,
         }
 
         const response = await ai.models.generateContent({
-          model: "gemini-3-flash-preview",
-          contents: `Analyze this neurosurgical report excerpt: "${reportText}".
+          model: "gemini-2.0-flash-exp",
+          contents: [{ role: "user", parts: [{ text: `Analyze this neurosurgical report excerpt: "${reportText}".
 Translate the complex medical jargon into plain English for a patient.
 Identify 3 key takeaway points.
-Emphasize that this is an AI interpretation and they must discuss with Dr. Sayuj.`,
+Emphasize that this is an AI interpretation and they must discuss with Dr. Sayuj.` }] }],
           config: {
             responseMimeType: "application/json",
             responseSchema: {
@@ -190,8 +192,8 @@ Emphasize that this is an AI interpretation and they must discuss with Dr. Sayuj
         }
 
         const response = await ai.models.generateContent({
-          model: "gemini-2.5-flash",
-          contents: query,
+          model: "gemini-2.0-flash-exp",
+          contents: [{ role: "user", parts: [{ text: query }] }],
           config,
         });
 
@@ -219,7 +221,7 @@ Emphasize that this is an AI interpretation and they must discuss with Dr. Sayuj
         contents.push({ role: "user", parts: [{ text: message }] });
 
         const response = await ai.models.generateContent({
-          model: "gemini-3-flash-preview",
+          model: "gemini-2.0-flash-exp",
           contents,
           config: {
             tools: [{ googleSearch: {} }],
@@ -241,7 +243,7 @@ Emphasize that this is an AI interpretation and they must discuss with Dr. Sayuj
         }
 
         const response = await ai.models.generateContent({
-          model: "gemini-2.5-flash-preview-tts",
+          model: "gemini-2.0-flash-exp",
           contents: [{ parts: [{ text: `Read the following clearly and professionally: ${text}` }] }],
           config: {
             responseModalities: [Modality.AUDIO],
@@ -263,6 +265,7 @@ Emphasize that this is an AI interpretation and they must discuss with Dr. Sayuj
         return jsonError("Unsupported action", 400);
     }
   } catch (error) {
+    console.error("[Neuralink API] Error:", error);
     const message = error instanceof Error ? error.message : "Server error";
     return NextResponse.json({ error: message }, { status: 500 });
   }

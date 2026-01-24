@@ -427,16 +427,14 @@ const PatientPortal = () => {
           <p className="text-slate-500">Fast-track your neurosurgical care.</p>
           <div className="flex items-center space-x-2 bg-white p-1 rounded-full border border-slate-100 shadow-sm">
             <div
-              className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
-                step === 1 ? "bg-slate-900 text-white" : "text-slate-400"
-              }`}
+              className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${step === 1 ? "bg-slate-900 text-white" : "text-slate-400"
+                }`}
             >
               1. Schedule
             </div>
             <div
-              className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
-                step === 2 ? "bg-slate-900 text-white" : "text-slate-400"
-              }`}
+              className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${step === 2 ? "bg-slate-900 text-white" : "text-slate-400"
+                }`}
             >
               2. Details
             </div>
@@ -477,11 +475,10 @@ const PatientPortal = () => {
               <button
                 onClick={handleNextStep}
                 disabled={!formData.type || !formData.date || !formData.time}
-                className={`flex items-center px-8 py-3 rounded-xl font-bold text-lg transition-all ${
-                  !formData.type || !formData.date || !formData.time
-                    ? "bg-slate-100 text-slate-300 cursor-not-allowed"
-                    : "bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-200"
-                }`}
+                className={`flex items-center px-8 py-3 rounded-xl font-bold text-lg transition-all ${!formData.type || !formData.date || !formData.time
+                  ? "bg-slate-100 text-slate-300 cursor-not-allowed"
+                  : "bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-200"
+                  }`}
               >
                 Next Step <ChevronRight className="w-5 h-5 ml-2" />
               </button>
@@ -659,11 +656,10 @@ const PatientPortal = () => {
                   type="button"
                   onClick={handleInterpretReport}
                   disabled={isInterpreting || !reportText.trim()}
-                  className={`w-full py-2.5 rounded-xl text-sm font-bold transition-all flex items-center justify-center ${
-                    isInterpreting
-                      ? "bg-indigo-100 text-indigo-400"
-                      : "bg-indigo-600 text-white hover:bg-indigo-700 shadow-md hover:shadow-indigo-200"
-                  }`}
+                  className={`w-full py-2.5 rounded-xl text-sm font-bold transition-all flex items-center justify-center ${isInterpreting
+                    ? "bg-indigo-100 text-indigo-400"
+                    : "bg-indigo-600 text-white hover:bg-indigo-700 shadow-md hover:shadow-indigo-200"
+                    }`}
                 >
                   {isInterpreting ? (
                     <Loader2 className="w-4 h-4 animate-spin mr-2" />
@@ -696,9 +692,8 @@ const PatientPortal = () => {
                       className="text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center disabled:opacity-50"
                     >
                       <Wand2
-                        className={`w-3 h-3 mr-1 ${
-                          isRefining ? "animate-spin" : ""
-                        }`}
+                        className={`w-3 h-3 mr-1 ${isRefining ? "animate-spin" : ""
+                          }`}
                       />
                       Refine with AI
                     </button>
@@ -742,13 +737,12 @@ const PatientPortal = () => {
                   </div>
                   <div className="text-center mt-2">
                     <span
-                      className={`inline-block px-3 py-1 rounded-lg text-sm font-bold ${
-                        formData.painScore <= 3
-                          ? "bg-green-100 text-green-700"
-                          : formData.painScore <= 7
+                      className={`inline-block px-3 py-1 rounded-lg text-sm font-bold ${formData.painScore <= 3
+                        ? "bg-green-100 text-green-700"
+                        : formData.painScore <= 7
                           ? "bg-yellow-100 text-yellow-700"
                           : "bg-red-100 text-red-700"
-                      }`}
+                        }`}
                     >
                       Score: {formData.painScore}
                       {formData.painScore >= 8 && " (Severe)"}
@@ -827,11 +821,10 @@ const PatientPortal = () => {
                 <button
                   type="submit"
                   disabled={isAnalyzing || isSyncing}
-                  className={`w-full py-4 rounded-2xl text-white font-bold text-lg shadow-xl transition-all flex items-center justify-center relative overflow-hidden ${
-                    isAnalyzing || isSyncing
-                      ? "bg-slate-800"
-                      : "bg-blue-600 hover:bg-blue-700 hover:shadow-blue-200"
-                  }`}
+                  className={`w-full py-4 rounded-2xl text-white font-bold text-lg shadow-xl transition-all flex items-center justify-center relative overflow-hidden ${isAnalyzing || isSyncing
+                    ? "bg-slate-800"
+                    : "bg-blue-600 hover:bg-blue-700 hover:shadow-blue-200"
+                    }`}
                 >
                   {(isAnalyzing || isSyncing) && (
                     <div className="absolute inset-0 bg-white/10 animate-pulse" />

@@ -55,7 +55,7 @@ export async function waitForHypertune(): Promise<void> {
   // If there is no token configured, do not attempt remote initialization.
   // This avoids noisy console errors (and failed network requests) in local/dev environments.
   const token = getHypertuneToken();
-  if (!token) {
+  if (!token || token.startsWith('U2FsdGVkX18')) {
     return;
   }
 

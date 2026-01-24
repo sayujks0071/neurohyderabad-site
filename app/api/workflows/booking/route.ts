@@ -1,72 +1,59 @@
 /**
- * Appointment Booking Workflow API Route
+ * Appointment Booking API Route (Direct Implementation)
  *
- * Triggers the appointment booking workflow
+ * Replaces the Vercel Workflow with direct execution to avoid bundler issues.
+ * Performs validation, saves to CRM (Sheets), sends emails (Resend), and integrates with AI.
  */
 
-import { start } from "workflow/api";
-import { handleAppointmentBooking } from "@/workflows/appointment-booking";
+import { NextRequest, NextResponse } from "next/server";
 import { generateBookingConfirmation } from "@/src/lib/appointments/gemini";
 import type { BookingData } from "@/packages/appointment-form/types";
-import { NextRequest, NextResponse } from "next/server";
+import { sendConfirmationEmail, sendAdminNotificationEmail } from "@/src/lib/appointments/email";
+import { submitToGoogleSheets } from "@/src/lib/google-sheets";
+import { buildWebhookPayload, notifyAppointmentWebhooks } from "@/src/lib/appointments/webhooks";
 
 type WorkflowAppointmentType = "new-consultation" | "follow-up" | "second-opinion";
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
+
+    // Parse and normalize input data
     const name = String(body.name ?? body.patientName ?? "").trim();
     const email = String(body.email ?? "").trim();
     const phone = String(body.phone ?? "").trim();
     const preferredDate = String(body.preferredDate ?? body.appointmentDate ?? "").trim();
     const preferredTime = String(body.preferredTime ?? body.appointmentTime ?? "").trim();
-    const appointmentTypeRaw =
-      typeof body.appointmentType === "string" ? body.appointmentType.trim() : "";
-    const appointmentType = (
-      ["new-consultation", "follow-up", "second-opinion"] as const
-    ).includes(appointmentTypeRaw as WorkflowAppointmentType)
+
+    const appointmentTypeRaw = typeof body.appointmentType === "string" ? body.appointmentType.trim() : "";
+    const appointmentType = (["new-consultation", "follow-up", "second-opinion"] as const).includes(appointmentTypeRaw as WorkflowAppointmentType)
       ? (appointmentTypeRaw as WorkflowAppointmentType)
       : "new-consultation";
+
     const chiefComplaint = String(body.chiefComplaint ?? body.symptoms ?? "").trim();
-    const intakeNotes =
-      typeof body.intakeNotes === "string" ? body.intakeNotes.trim() : "";
+    const intakeNotes = typeof body.intakeNotes === "string" ? body.intakeNotes.trim() : "";
     const ageValue = body.age == null ? "" : String(body.age).trim();
-    const genderRaw =
-      typeof body.gender === "string" ? body.gender.trim().toLowerCase() : "";
-    const gender = (["male", "female", "other"] as const).includes(
-      genderRaw as "male" | "female" | "other"
-    )
+
+    const genderRaw = typeof body.gender === "string" ? body.gender.trim().toLowerCase() : "";
+    const gender = (["male", "female", "other"] as const).includes(genderRaw as "male" | "female" | "other")
       ? (genderRaw as BookingData["gender"])
-      : "";
-    const painScore =
-      typeof body.painScore === "number"
-        ? body.painScore
-        : body.painScore
-        ? Number(body.painScore)
-        : undefined;
-    const mriScanAvailable =
-      typeof body.mriScanAvailable === "boolean" ? body.mriScanAvailable : undefined;
+      : "other"; // Default fallback
+
+    const painScore = typeof body.painScore === "number" ? body.painScore : undefined;
+    const mriScanAvailable = typeof body.mriScanAvailable === "boolean" ? body.mriScanAvailable : undefined;
     const source = typeof body.source === "string" ? body.source : undefined;
-    const hasEmergencySymptoms = Boolean(body.hasEmergencySymptoms);
 
     // Validate required fields
     if (!name || !email || !phone || !preferredDate || !chiefComplaint) {
       return NextResponse.json(
         {
           error: "Missing required fields",
-          required: [
-            "name",
-            "email",
-            "phone",
-            "preferredDate",
-            "chiefComplaint",
-          ],
+          required: ["name", "email", "phone", "preferredDate", "chiefComplaint"],
         },
         { status: 400 }
       );
     }
 
-    const appointmentTime = preferredTime || "10:00";
     const bookingReason = intakeNotes || chiefComplaint;
     const booking: BookingData = {
       patientName: name,
@@ -75,54 +62,79 @@ export async function POST(request: NextRequest) {
       age: ageValue,
       gender,
       appointmentDate: preferredDate,
-      appointmentTime,
+      appointmentTime: preferredTime || "10:00",
       reason: bookingReason,
       painScore,
       mriScanAvailable,
     };
-    const { message: confirmationMessage, usedAI } =
-      await generateBookingConfirmation(booking);
 
-    console.log(`[API] Starting appointment booking workflow for ${name}`);
+    console.log(`[API] Processing booking for ${name}`);
 
-    const patientInfo = {
-      name,
-      email,
-      phone,
-      preferredDate,
-      preferredTime: appointmentTime,
-      appointmentType,
-      chiefComplaint,
-      hasEmergencySymptoms,
-      intakeNotes: intakeNotes || undefined,
-      age: ageValue || undefined,
-      gender,
-      painScore,
-      mriScanAvailable,
-      source,
-      confirmationMessage,
-      usedAI,
-    };
+    // 1. Generate AI Confirmation
+    const { message: confirmationMessage, usedAI } = await generateBookingConfirmation(booking);
 
-    // Start the workflow (executes asynchronously)
-    // Note: start() returns a Run<T> which executes the workflow
-    // The workflow ID can be viewed in the Workflow DevKit Web UI (npx workflow web)
-    const run = await start(handleAppointmentBooking, [patientInfo]);
+    // 2. Send Emails (Parallel)
+    const [confirmationResult, adminEmailResult] = await Promise.all([
+      sendConfirmationEmail(booking, confirmationMessage),
+      sendAdminNotificationEmail(booking, source),
+    ]);
+
+    if (!confirmationResult.success) {
+      console.error(`[API] Failed to send user confirmation email: ${confirmationResult.error}`);
+    }
+
+    if (!adminEmailResult.success) {
+      console.error(`[API] Failed to send admin notification: ${adminEmailResult.error}`);
+    }
+
+    // 3. Sync to Google Sheets (CRM)
+    const sheetsResult = await submitToGoogleSheets({
+      fullName: booking.patientName,
+      email: booking.email,
+      phone: booking.phone,
+      concern: booking.reason.slice(0, 100),
+      preferredDate: booking.appointmentDate,
+      preferredTime: booking.appointmentTime,
+      source: source || "website",
+      metadata: {
+        age: booking.age,
+        gender: booking.gender,
+        bookingReason: booking.reason,
+        painScore: booking.painScore,
+        mriScanAvailable: booking.mriScanAvailable,
+      },
+    });
+
+    if (!sheetsResult.success) {
+      console.warn(`[API] Google Sheets sync failed: ${sheetsResult.message}`);
+    }
+
+    // 4. Trigger Webhooks
+    await notifyAppointmentWebhooks(
+      buildWebhookPayload({
+        booking,
+        confirmationMessage,
+        emailResult: confirmationResult,
+        usedAI,
+        source,
+      })
+    );
+
+    console.log(`[API] Booking completed successfully for ${name}`);
 
     return NextResponse.json({
-      message: "Appointment booking workflow started successfully",
+      message: "Appointment booking processed successfully",
       patientName: name,
-      status: "processing",
-      runId: run.runId,
+      status: "confirmed",
       confirmationMessage,
       usedAI,
-      // Workflow execution can be monitored via: npx workflow web
     });
+
   } catch (error) {
-    console.error("[API] Error starting booking workflow:", error);
+    console.error("[API] Error processing booking:", error);
     return NextResponse.json(
       {
-        error: "Failed to start booking workflow",
+        error: "Failed to process booking",
         message: error instanceof Error ? error.message : "Unknown error",
       },
       { status: 500 }

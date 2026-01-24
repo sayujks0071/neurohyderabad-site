@@ -3,7 +3,7 @@ export default function SearchPlaceholder() {
     <button
       type="button"
       className="flex items-center gap-2 rounded-full border border-gray-200 px-3 py-1.5 text-sm text-gray-600 transition hover:border-blue-300 hover:text-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
-      aria-label="Search site (Loading...)"
+      aria-label="Search site (Cmd/Ctrl + K)"
     >
       <svg
         className="h-4 w-4"
