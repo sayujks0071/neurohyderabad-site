@@ -1,7 +1,10 @@
-import { GoogleGenAI } from "@google/genai";
+import { generateText } from "ai";
+import { getTextModel } from "@/src/lib/ai/gateway";
 import type { BookingData } from "@/packages/appointment-form/types";
 
-const MODEL_NAME = "gemini-2.0-flash";
+// Explicitly use Google's Gemini Flash model via Vercel AI Gateway
+// Format: provider/model (e.g. google/gemini-2.0-flash)
+const MODEL_NAME = "google/gemini-2.0-flash";
 
 const systemInstruction = `You are a friendly and professional medical receptionist for Dr. Sayuj Krishnan, a neurosurgeon.
 Your task is to generate a concise, warm, and reassuring confirmation message for an online appointment request based on the patient details provided.
@@ -29,21 +32,7 @@ function sanitizeForPrompt(text: string | number | undefined | null, maxLength =
 export async function generateBookingConfirmation(
   data: BookingData
 ): Promise<{ message: string; usedAI: boolean }> {
-  const apiKey =
-    process.env.GOOGLE_GENAI_API_KEY ??
-    process.env.GENAI_API_KEY ??
-    process.env.API_KEY;
-
-  if (!apiKey) {
-    console.warn(
-      "[appointments] Missing Google GenAI API key; returning fallback confirmation message."
-    );
-    return { message: fallbackMessage(data), usedAI: false };
-  }
-
   try {
-    const ai = new GoogleGenAI({ apiKey });
-
     // 🛡️ Sentinel: Sanitize inputs to prevent prompt injection
     const userPrompt = [
       "Generate a confirmation message for the following appointment request:",
@@ -56,35 +45,11 @@ export async function generateBookingConfirmation(
       `Reason: ${sanitizeForPrompt(data.reason, 1000)}`,
     ].join("\n");
 
-    const response = await ai.models.generateContent({
-      model: MODEL_NAME,
-      contents: [
-        {
-          role: "user",
-          parts: [{ text: userPrompt }],
-        },
-      ],
-      config: {
-        systemInstruction,
-      },
+    const { text } = await generateText({
+      model: getTextModel(MODEL_NAME),
+      system: systemInstruction,
+      prompt: userPrompt,
     });
-
-    let text: string | undefined;
-
-    const responseText = (response as { text?: unknown }).text;
-
-    if (typeof responseText === "function") {
-      text = (responseText as () => string)();
-    } else if (typeof responseText === "string") {
-      text = responseText;
-    } else if ("output" in response && Array.isArray(response.output)) {
-      text =
-        response.output
-          .flatMap((it: any) => it?.content ?? [])
-          .map((it: any) => it?.text)
-          .find((segment: unknown): segment is string => typeof segment === "string") ??
-        undefined;
-    }
 
     if (!text || !text.trim()) {
       console.warn(
