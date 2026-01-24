@@ -4,6 +4,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
+import { verifyAdminAccess } from '@/src/lib/security';
 import {
   uploadFileBufferToGemini,
   validateFile,
@@ -15,6 +16,12 @@ export const runtime = 'nodejs';
 export const maxDuration = 60; // 60 seconds for file upload
 
 export async function POST(request: NextRequest) {
+  // 🛡️ Sentinel: Protect sensitive upload endpoint
+  const auth = verifyAdminAccess(request);
+  if (!auth.isAuthorized) {
+    return auth.response!;
+  }
+
   try {
     // Parse multipart form data
     const formData = await request.formData();

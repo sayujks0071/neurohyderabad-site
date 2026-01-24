@@ -4,12 +4,19 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
+import { verifyAdminAccess } from '@/src/lib/security';
 import { listGeminiFiles, getGeminiFile, deleteGeminiFile } from '@/src/lib/gemini/file-handler';
 
 export const runtime = 'nodejs';
 export const maxDuration = 30;
 
 export async function GET(request: NextRequest) {
+  // 🛡️ Sentinel: Protect sensitive list endpoint
+  const auth = verifyAdminAccess(request);
+  if (!auth.isAuthorized) {
+    return auth.response!;
+  }
+
   try {
     const searchParams = request.nextUrl.searchParams;
     const pageSize = searchParams.get('pageSize')

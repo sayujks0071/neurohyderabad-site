@@ -4,6 +4,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
+import { verifyAdminAccess } from '@/src/lib/security';
 import {
   searchFiles,
   searchMedicalDocuments,
@@ -20,6 +21,12 @@ export const runtime = 'nodejs';
 export const maxDuration = 60; // 60 seconds for complex searches
 
 export async function POST(request: NextRequest) {
+  // 🛡️ Sentinel: Protect sensitive search endpoint
+  const auth = verifyAdminAccess(request);
+  if (!auth.isAuthorized) {
+    return auth.response!;
+  }
+
   let query: string | undefined;
   let searchType: string = 'standard';
   
