@@ -11,7 +11,4 @@ Review the PRs merged in the last 24 hours.
 
 <!-- Jules Automation -->
 <!-- Managed by Jules -->
-
-<!-- v1.0 -->
-
-<!-- Verified by Jules -->
+<!-- v1.1 -->
