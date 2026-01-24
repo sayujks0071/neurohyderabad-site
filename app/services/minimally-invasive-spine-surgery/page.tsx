@@ -21,7 +21,7 @@ import PatientJourneySection from '@/src/components/PatientJourneySection';
 import SurgeryComparisonTable from '@/src/components/SurgeryComparisonTable';
 
 const baseMetadata = makeMetadata({
-  title: 'Minimally Invasive Spine Surgery Hyderabad | Day Care | Walk Same Day',
+  title: 'Minimally Invasive Spine Surgery Hyderabad',
   description: 'Advanced endoscopic spine surgery in Hyderabad. Tiny incision, no muscle cutting, same-day discharge. Expert care by Dr. Sayuj Krishnan. Get Cost Estimate.',
   canonicalPath: '/services/minimally-invasive-spine-surgery',
 });

@@ -12,7 +12,7 @@ import { getServiceSources } from '../sources';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 
 const baseMetadata = makeMetadata({
-  title: 'Awake Spine Surgery in Hyderabad | Local Anesthesia Spine',
+  title: 'Awake Spine Surgery Hyderabad',
   description:
     'Awake endoscopic spine surgery for high-risk patients. Local anesthesia, no general anesthesia needed. Faster recovery & same-day discharge in Hyderabad.',
   canonicalPath: '/services/awake-spine-surgery-hyderabad',

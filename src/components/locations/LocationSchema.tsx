@@ -43,6 +43,8 @@ export const LocationSchema: React.FC<LocationSchemaProps> = ({
     "image": imageUrl,
     "url": `${siteUrl}/${cleanSlug}`,
     "telephone": location.telephone,
+    "medicalSpecialty": ["Neurosurgery", "Spine Surgery"],
+    "priceRange": "₹₹",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": location.address.streetAddress,
