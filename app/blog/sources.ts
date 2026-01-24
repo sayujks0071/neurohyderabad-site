@@ -4,6 +4,20 @@ export type SourceEntry = {
 };
 
 export const BLOG_SOURCES: Record<string, SourceEntry[]> = {
+  "brain-aneurysm-vs-migraine-warning-signs-hyderabad": [
+    {
+      label: "Brain Aneurysm Foundation – Warning Signs",
+      href: "https://www.bafound.org/warning-signs-symptoms/",
+    },
+    {
+      label: "Mayo Clinic – Brain Aneurysm",
+      href: "https://www.mayoclinic.org/diseases-conditions/brain-aneurysm/symptoms-causes/syc-20361483",
+    },
+    {
+      label: "National Health Service (UK) – Subarachnoid Hemorrhage",
+      href: "https://www.nhs.uk/conditions/subarachnoid-haemorrhage/",
+    },
+  ],
   "world-stroke-day-2025-hyderabad-stroke-code": [
     {
       label: "World Stroke Organization – Global Stroke Fact Sheet 2023",
