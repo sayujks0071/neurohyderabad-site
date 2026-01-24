@@ -173,6 +173,7 @@ export default async function ConditionDetailPage({ params }: PageParams) {
                 width={640}
                 height={420}
                 className="h-full w-full object-cover"
+                sizes="(min-width: 1024px) 500px, 100vw"
                 priority
               />
             </div>
