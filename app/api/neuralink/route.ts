@@ -255,6 +255,8 @@ Emphasize that this is an AI interpretation and they must discuss with Dr. Sayuj
           },
         });
 
+        console.log(`[Neuralink API] Speech response candidates:`, response.candidates?.length);
+
         const base64 =
           response.candidates?.[0]?.content?.parts?.[0]?.inlineData?.data || null;
 
