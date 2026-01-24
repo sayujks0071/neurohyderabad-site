@@ -35,7 +35,7 @@ import TrustStrip from "./_components/TrustStrip";
 import ClientAnalytics from "./_components/ClientAnalytics";
 import GoogleAnalytics from "../src/components/GoogleAnalytics";
 import DynamicStickyCTA from "./_components/DynamicStickyCTA";
-import FloatingChatWidget from "./_components/FloatingChatWidget";
+import FloatingChatWidget from "./_components/DynamicFloatingChatWidget";
 import HypertuneProvider from "./providers/hypertune-provider";
 import { SITE_URL } from "../src/lib/seo";
 
