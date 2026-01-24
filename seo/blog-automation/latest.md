@@ -1,1 +1,1 @@
-[Latest Run](./2026-01-23/run.md)
+[Latest Run](./2026-01-24/run.md)
