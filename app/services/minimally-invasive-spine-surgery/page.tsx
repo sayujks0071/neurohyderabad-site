@@ -123,9 +123,15 @@ const JOURNEY_STEPS = [
 export default function MinimallyInvasiveSpineSurgeryPage() {
   const procedures = [
     {
-      title: 'Endoscopic Discectomy',
-      description: 'Removal of herniated disc material through a small incision using endoscopic visualization. We utilise both Transforaminal (side) and Interlaminar (back) approaches tailored to the disc location.',
-      benefits: ['Smaller incision', 'Less muscle damage', 'Faster recovery', 'Reduced pain'],
+      title: 'Transforaminal Endoscopic Spine Surgery (TESS)',
+      description: 'Ideally suited for paracentral and foraminal disc herniations. Accessed from the side (flank) under local anaesthesia, avoiding the spinal canal entirely.',
+      benefits: ['Local anaesthesia', 'No bone removal', 'Walk immediately', 'Suture-less (Stitch-less)'],
+      recovery: '3-5 days'
+    },
+    {
+      title: 'Interlaminar Endoscopic Spine Surgery (IESS)',
+      description: 'Best for L5-S1 disc herniations and spinal stenosis. Accessed from the back through the natural interlaminar window.',
+      benefits: ['Familiar posterior approach', 'Treats stenosis & disc', 'Minimal muscle dilation', 'High success rate'],
       recovery: '1-2 weeks'
     },
     {
@@ -235,7 +241,7 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
         />
       <div className="container mx-auto px-4 py-16">
         <header className="text-center mb-8">
-          <h1 className="text-4xl font-bold mb-4">Minimally Invasive Spine Surgery</h1>
+          <h1 className="text-4xl font-bold mb-4">Endoscopic & Minimally Invasive Spine Surgery Hyderabad</h1>
           <AuthorByline
             publishedOn="2025-09-10"
             updatedOn="2025-10-19"
@@ -359,6 +365,36 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
                   </li>
                 </ul>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="mb-12">
+          <h2 className="text-3xl font-bold text-blue-800 mb-6">Post-Operative Care Guide</h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="bg-blue-50 p-6 rounded-lg border border-blue-100">
+               <h3 className="text-lg font-semibold text-blue-800 mb-3">Diet & Hydration</h3>
+               <ul className="space-y-2 text-gray-700 text-sm">
+                 <li>• Drink plenty of water (3-4 liters)</li>
+                 <li>• High protein diet for healing</li>
+                 <li>• High fiber to prevent constipation</li>
+               </ul>
+            </div>
+            <div className="bg-blue-50 p-6 rounded-lg border border-blue-100">
+               <h3 className="text-lg font-semibold text-blue-800 mb-3">Wound Care</h3>
+               <ul className="space-y-2 text-gray-700 text-sm">
+                 <li>• Keep incision dry for 3 days</li>
+                 <li>• Change dressing if soaked</li>
+                 <li>• No swimming/tub bath for 2 weeks</li>
+               </ul>
+            </div>
+            <div className="bg-blue-50 p-6 rounded-lg border border-blue-100">
+               <h3 className="text-lg font-semibold text-blue-800 mb-3">Do's & Don'ts</h3>
+               <ul className="space-y-2 text-gray-700 text-sm">
+                 <li>• <strong>Do:</strong> Short walks every hour</li>
+                 <li>• <strong>Don't:</strong> Lift &gt;5kg for 3 weeks</li>
+                 <li>• <strong>Don't:</strong> Twist or bend excessively</li>
+               </ul>
             </div>
           </div>
         </section>
