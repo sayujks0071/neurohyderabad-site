@@ -54,39 +54,6 @@ const spineStoryHighlights = patientStories
 const ARTICLE_SOURCES = getServiceSources('minimally-invasive-spine-surgery'); // Reusing MISS sources as they are relevant
 
 // Google Business Profile JSON-LD
-const gbpSchema = {
-  "@context": "https://schema.org",
-  "@type": "MedicalBusiness",
-  "name": "Cervical Endoscopic Spine Surgery | Dr. Sayuj Krishnan",
-  "url": "https://www.drsayuj.info/services/cervical-endoscopic-spine-surgery-hyderabad/?utm_source=google&utm_medium=organic&utm_campaign=gbp_cervical_endoscopic",
-  "image": "https://www.drsayuj.info/images/og-default.jpg",
-  "description": "Specialized cervical endoscopic spine surgery for neck pain and radiculopathy by Dr. Sayuj Krishnan in Hyderabad.",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://www.drsayuj.info/services/cervical-endoscopic-spine-surgery-hyderabad/"
-  },
-  "medicalSpecialty": "Minimally Invasive Spine Surgery",
-  "areaServed": {
-    "@type": "AdministrativeArea",
-    "name": "Hyderabad, Telangana, India"
-  },
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Room No. 317, OPD Block, Yashoda Hospital, Malakpet",
-    "addressLocality": "Hyderabad",
-    "addressRegion": "Telangana",
-    "postalCode": "500036",
-    "addressCountry": "IN"
-  },
-  "openingHours": "Mo-Sa 10:00-17:00",
-  "telephone": "+91-97782-80044",
-  "priceRange": "₹₹",
-  "sameAs": [
-    "https://www.instagram.com/drsayujneurohyd",
-    "https://www.linkedin.com/in/drsayujkrishnan",
-    "https://www.youtube.com/@drsayujneurohyd"
-  ]
-};
 
 export default function CervicalEndoscopicSpineSurgeryPage() {
   const approaches = [
@@ -152,7 +119,6 @@ export default function CervicalEndoscopicSpineSurgeryPage() {
 
   return (
     <>
-      <JsonLd data={gbpSchema} />
       <BreadcrumbSchema
         items={[
           { name: 'Home', path: '/' },

@@ -45,20 +45,6 @@ export const metadata: Metadata = {
 
 const ARTICLE_SOURCES = getServiceSources('robotic-spine-surgery-hyderabad');
 
-const gbpSchema = {
-  "@context": "https://schema.org",
-  "@type": "MedicalBusiness",
-  "name": "Robotic Spine Surgery | Dr. Sayuj Krishnan",
-  "url": "https://www.drsayuj.info/services/robotic-spine-surgery-hyderabad/?utm_source=google&utm_medium=organic&utm_campaign=gbp_robotic",
-  "image": "https://www.drsayuj.info/images/og-default.jpg",
-  "description": "State-of-the-art robotic spine surgery for scoliosis, kyphosis, and complex spinal reconstruction by Dr. Sayuj Krishnan in Hyderabad.",
-  "medicalSpecialty": "Spinal Surgery",
-  "areaServed": {
-    "@type": "AdministrativeArea",
-    "name": "Hyderabad, Telangana, India"
-  },
-  "telephone": "+91-97782-80044"
-};
 
 const JOURNEY_STEPS = [
   {
@@ -122,7 +108,6 @@ export default function RoboticSpineSurgeryPage() {
 
   return (
     <>
-      <JsonLd data={gbpSchema} />
       <MedicalWebPageSchema
         pageType="service"
         pageSlug="/services/robotic-spine-surgery-hyderabad"

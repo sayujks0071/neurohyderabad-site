@@ -238,6 +238,7 @@ export const PhysicianSchema: React.FC = () => {
         ],
         "hospitalAffiliation": {
           "@type": "Hospital",
+          "@id": `${SITE_URL}/#hospital`,
           "name": "Yashoda Hospital, Malakpet",
           "url": "https://www.yashodahospitals.com/malakpet/",
           "address": {
@@ -302,15 +303,7 @@ export const PhysicianSchema: React.FC = () => {
           "target": `${SITE_URL}/appointments`
         },
         "worksFor": {
-          "@type": "Hospital",
-          "name": "Yashoda Hospital",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Malakpet",
-            "addressLocality": "Hyderabad",
-            "addressRegion": "Telangana",
-            "addressCountry": "IN"
-          }
+          "@id": `${SITE_URL}/#hospital`
         },
         "knowsLanguage": ["English", "Hindi", "Telugu", "Malayalam", "Tamil"],
         "sameAs": SOCIAL_PROFILES,

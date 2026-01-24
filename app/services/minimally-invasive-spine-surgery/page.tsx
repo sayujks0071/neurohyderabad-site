@@ -59,39 +59,6 @@ const spineStoryHighlights = patientStories
 const ARTICLE_SOURCES = getServiceSources('minimally-invasive-spine-surgery');
 
 // Google Business Profile JSON-LD for Minimally Invasive Spine Surgery
-const gbpSchema = {
-  "@context": "https://schema.org",
-  "@type": "MedicalBusiness",
-  "name": "Minimally Invasive Spine Surgery | Dr. Sayuj Krishnan",
-  "url": "https://www.drsayuj.info/services/minimally-invasive-spine-surgery/?utm_source=google&utm_medium=organic&utm_campaign=gbp_minimally_invasive_spine_surgery",
-  "image": "https://www.drsayuj.info/images/og-default.jpg",
-  "description": "Minimally invasive spine surgery for lumbar and cervical conditions by Dr. Sayuj Krishnan. Less blood loss, faster recovery, and shorter hospital stay at Yashoda Hospital, Hyderabad.",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://www.drsayuj.info/services/minimally-invasive-spine-surgery/"
-  },
-  "medicalSpecialty": "Minimally Invasive Spine Surgery",
-  "areaServed": {
-    "@type": "AdministrativeArea",
-    "name": "Hyderabad, Telangana, India"
-  },
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Room No. 317, OPD Block, Yashoda Hospital, Malakpet",
-    "addressLocality": "Hyderabad",
-    "addressRegion": "Telangana",
-    "postalCode": "500036",
-    "addressCountry": "IN"
-  },
-  "openingHours": "Mo-Sa 10:00-17:00",
-  "telephone": "+91-97782-80044",
-  "priceRange": "₹₹",
-  "sameAs": [
-    "https://www.instagram.com/drsayujneurohyd",
-    "https://www.linkedin.com/in/drsayujkrishnan",
-    "https://www.youtube.com/@drsayujneurohyd"
-  ]
-};
 
 const COSTS = [
   {
@@ -245,7 +212,6 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
 
   return (
     <>
-      <JsonLd data={gbpSchema} />
       <MedicalWebPageSchema
         pageType="service"
         pageSlug="/services/minimally-invasive-spine-surgery"

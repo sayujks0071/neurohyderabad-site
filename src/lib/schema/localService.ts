@@ -72,6 +72,7 @@ export function buildLocalServiceSchema({
         })),
         availableAtOrFrom: {
           '@type': 'MedicalClinic',
+          '@id': `${SITE_URL}/${location.slug}#clinic`,
           name: location.name,
           address: {
             '@type': 'PostalAddress',
