@@ -4,9 +4,9 @@ import { useState, useRef, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { Loader2 } from "lucide-react";
 import Input from "@/packages/appointment-form/ui/Input";
 import Textarea from "@/packages/appointment-form/ui/Textarea";
-import Button from "@/packages/appointment-form/ui/Button";
 import Calendar from "@/packages/appointment-form/ui/Calendar";
 import Select from "@/packages/appointment-form/ui/Select";
 
@@ -129,7 +129,7 @@ export default function LeadForm() {
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-8">
+    <div className="relative bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-6 sm:p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
       <h2 className="text-2xl font-bold text-slate-800 mb-2">Quick Enquiry / Call Back</h2>
       <p className="text-slate-500 mb-6 text-sm">
         Fill out the form below for a rapid response from our team.
@@ -280,9 +280,14 @@ export default function LeadForm() {
         </div>
 
         <div className="pt-4">
-          <Button type="submit" isLoading={isSubmitting} className="w-full justify-center">
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed"
+          >
+            {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             {isSubmitting ? "Sending..." : "Request Call Back"}
-          </Button>
+          </button>
         </div>
       </form>
     </div>
