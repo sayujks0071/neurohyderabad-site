@@ -5,12 +5,19 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
+import { verifyAdminAccess } from '@/src/lib/security';
 import { getGeminiFile, deleteGeminiFile } from '@/src/lib/gemini/file-handler';
 
 export const runtime = 'nodejs';
 export const maxDuration = 30;
 
 export async function GET(request: NextRequest) {
+  // 🛡️ Sentinel: Protect sensitive manage endpoint
+  const auth = verifyAdminAccess(request);
+  if (!auth.isAuthorized) {
+    return auth.response!;
+  }
+
   try {
     const searchParams = request.nextUrl.searchParams;
     const fileName = searchParams.get('name');
@@ -55,6 +62,12 @@ export async function GET(request: NextRequest) {
 }
 
 export async function DELETE(request: NextRequest) {
+  // 🛡️ Sentinel: Protect sensitive delete endpoint
+  const auth = verifyAdminAccess(request);
+  if (!auth.isAuthorized) {
+    return auth.response!;
+  }
+
   try {
     const searchParams = request.nextUrl.searchParams;
     const fileName = searchParams.get('name');
