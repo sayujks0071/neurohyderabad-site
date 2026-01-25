@@ -2,6 +2,7 @@ import { generateObject, jsonSchema } from 'ai';
 import { NextRequest, NextResponse } from 'next/server';
 import { getAllBlogPosts } from '@/src/lib/blog';
 import { getTextModel, hasAIConfig } from '@/src/lib/ai/gateway';
+import { SEARCH_INDEX } from '@/src/data/searchIndex';
 
 /**
  * AI-Powered Search API using Vercel AI SDK
@@ -12,30 +13,48 @@ export async function POST(request: NextRequest) {
   let query = '';
   let limit = 10;
   let allPosts: Awaited<ReturnType<typeof getAllBlogPosts>> = [];
+
   const buildFallbackResults = () => {
     const queryLower = query.toLowerCase();
-    const relevantSlugs = allPosts
+
+    // Search blog posts
+    const blogResults = allPosts
       .map(post => {
         const searchText = `${post.title} ${post.excerpt} ${post.category} ${post.tags?.join(' ')} ${post.description}`.toLowerCase();
         const score = (searchText.match(new RegExp(queryLower.split(' ').join('|'), 'g')) || []).length;
-        return { slug: post.slug, score };
+        return {
+          slug: `/blog/${post.slug}`,
+          title: post.title,
+          description: post.excerpt || post.description,
+          category: post.category || 'Blog',
+          score
+        };
       })
-      .filter(item => item.score > 0)
+      .filter(item => item.score > 0);
+
+    // Search static index
+    const staticResults = SEARCH_INDEX
+      .map(item => {
+        const searchText = `${item.title} ${item.description} ${item.category} ${item.tags?.join(' ')}`.toLowerCase();
+        const score = (searchText.match(new RegExp(queryLower.split(' ').join('|'), 'g')) || []).length;
+        return {
+          slug: item.href,
+          title: item.title,
+          description: item.description,
+          category: item.category,
+          score
+        };
+      })
+      .filter(item => item.score > 0);
+
+    return [...blogResults, ...staticResults]
       .sort((a, b) => b.score - a.score)
       .slice(0, limit)
-      .map(item => item.slug);
-
-    return allPosts
-      .filter(post => relevantSlugs.includes(post.slug))
-      .slice(0, limit)
-      .map(post => ({
-        slug: post.slug,
-        title: post.title,
-        excerpt: post.excerpt,
-        category: post.category,
-        tags: post.tags,
-        publishedAt: post.publishedAt,
-        relevanceScore: relevantSlugs.indexOf(post.slug) + 1,
+      .map(item => ({
+        href: item.slug,
+        title: item.title,
+        description: item.description,
+        category: item.category,
       }));
   };
 
@@ -53,15 +72,24 @@ export async function POST(request: NextRequest) {
     // Get all blog posts
     allPosts = await getAllBlogPosts();
     
-    // Create a summary of available posts for semantic search
-    const postsSummary = allPosts.map(post => ({
-      slug: post.slug,
+    // Create a summary of available content for semantic search
+    const blogSummary = allPosts.map(post => ({
+      id: `/blog/${post.slug}`,
       title: post.title,
-      excerpt: post.excerpt || '',
-      category: post.category || '',
+      description: post.excerpt || post.description || '',
+      category: post.category || 'Blog',
       tags: post.tags || [],
-      content: post.description || '',
     }));
+
+    const staticSummary = SEARCH_INDEX.map(item => ({
+      id: item.href,
+      title: item.title,
+      description: item.description,
+      category: item.category,
+      tags: item.tags || [],
+    }));
+
+    const combinedSummary = [...blogSummary, ...staticSummary];
 
     if (!hasAIConfig()) {
       const results = buildFallbackResults();
@@ -78,28 +106,30 @@ export async function POST(request: NextRequest) {
       schema: jsonSchema({
         type: 'object',
         properties: {
-          slugs: { type: 'array', items: { type: 'string' } },
+          ids: { type: 'array', items: { type: 'string' }, description: 'List of relevant content IDs (URLs)' },
         },
-        required: ['slugs'],
+        required: ['ids'],
         additionalProperties: false,
       }),
-      prompt: `Given the user's search query, find the most relevant blog posts from the list below. Consider semantic meaning, not just keyword matching.
+      prompt: `Given the user's search query, find the most relevant content from the list below. Consider semantic meaning, not just keyword matching.
+For example, if the user searches for "headache", include content about "migraine" or "brain tumor symptoms".
 
 User Query: "${query}"
 
-Available Blog Posts:
-${JSON.stringify(postsSummary, null, 2)}
+Available Content:
+${JSON.stringify(combinedSummary, null, 2)}
 
-Return ONLY JSON with a "slugs" array (e.g., {"slugs": ["slug1", "slug2", "slug3"]}) for the ${limit} most relevant posts, ordered by relevance. Do not include any other text.`,
+Return ONLY JSON with an "ids" array containing the IDs (URLs) of the ${limit} most relevant items, ordered by relevance.`,
       temperature: 0.2, // Lower temperature for more consistent search results
     });
 
-    type SearchResult = { slugs: string[] };
+    type SearchResult = { ids: string[] };
     const result = object as SearchResult;
-    let relevantSlugs = (result?.slugs || [])
-      .filter((slug) => typeof slug === 'string' && slug.length > 0)
+    const relevantIds = (result?.ids || [])
+      .filter((id) => typeof id === 'string' && id.length > 0)
       .slice(0, limit);
-    if (relevantSlugs.length === 0) {
+
+    if (relevantIds.length === 0) {
       const fallbackResults = buildFallbackResults();
       return NextResponse.json({
         results: fallbackResults,
@@ -108,19 +138,38 @@ Return ONLY JSON with a "slugs" array (e.g., {"slugs": ["slug1", "slug2", "slug3
       });
     }
 
-    // Get full post details for relevant slugs
-    const results = allPosts
-      .filter(post => relevantSlugs.includes(post.slug))
-      .slice(0, limit)
-      .map(post => ({
-        slug: post.slug,
-        title: post.title,
-        excerpt: post.excerpt,
-        category: post.category,
-        tags: post.tags,
-        publishedAt: post.publishedAt,
-        relevanceScore: relevantSlugs.indexOf(post.slug) + 1, // Lower number = more relevant
-      }));
+    // Get full details for relevant IDs
+    // We map back from the combined list to ensure we have all fields
+    const results = relevantIds
+      .map(id => {
+        // Check blog posts
+        const blogPost = allPosts.find(p => `/blog/${p.slug}` === id);
+        if (blogPost) {
+          return {
+            href: `/blog/${blogPost.slug}`,
+            title: blogPost.title,
+            description: blogPost.excerpt || blogPost.description,
+            category: blogPost.category || 'Blog',
+            tags: blogPost.tags,
+            relevanceScore: relevantIds.indexOf(id) + 1,
+          };
+        }
+        // Check static index
+        const staticItem = SEARCH_INDEX.find(item => item.href === id);
+        if (staticItem) {
+          return {
+            href: staticItem.href,
+            title: staticItem.title,
+            description: staticItem.description,
+            category: staticItem.category,
+            tags: staticItem.tags,
+            relevanceScore: relevantIds.indexOf(id) + 1,
+          };
+        }
+        return null;
+      })
+      .filter(item => item !== null);
+
     if (results.length === 0) {
       const fallbackResults = buildFallbackResults();
       return NextResponse.json({
@@ -146,7 +195,12 @@ Return ONLY JSON with a "slugs" array (e.g., {"slugs": ["slug1", "slug2", "slug3
     }
 
     if (allPosts.length === 0) {
-      allPosts = await getAllBlogPosts();
+      // Try to load posts if not loaded (though they should be)
+      try {
+        allPosts = await getAllBlogPosts();
+      } catch (e) {
+        console.error('Failed to load blog posts for fallback:', e);
+      }
     }
 
     const results = buildFallbackResults();
