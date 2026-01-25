@@ -42,10 +42,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Get relevant context from Gemini File API (optional enhancement)
+    // Get relevant context from MCP/Codex CLI (replaces Gemini File API)
     // Use Promise.race with timeout to prevent blocking
-    let geminiContext = '';
-    let geminiSources: any[] = [];
+    let medicalContext = '';
+    let medicalSources: any[] = [];
     
     try {
       const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 
@@ -54,40 +54,49 @@ export async function POST(request: NextRequest) {
       
       // Add timeout to prevent blocking (5 seconds max)
       const timeoutPromise = new Promise<never>((_, reject) => 
-        setTimeout(() => reject(new Error('Gemini context timeout')), 5000)
+        setTimeout(() => reject(new Error('MCP context timeout')), 5000)
       );
       
-      const geminiFetch = fetch(`${baseUrl}/api/gemini-files/search`, {
+      // Use MCP/Codex CLI instead of direct Gemini call
+      const mcpFetch = fetch(`${baseUrl}/api/mcp`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          query: message,
-          searchType: 'medical',
-          maxResults: 3,
-          category: service || undefined
+          jsonrpc: '2.0',
+          id: Date.now(),
+          method: 'tools/call',
+          params: {
+            name: 'get_medical_info',
+            arguments: {
+              query: message
+            }
+          }
         })
       });
       
-      const geminiResponse = await Promise.race([geminiFetch, timeoutPromise]);
+      const mcpResponse = await Promise.race([mcpFetch, timeoutPromise]);
       
-      if (geminiResponse.ok) {
-        const geminiData = await geminiResponse.json();
-        if (geminiData.answer) {
-          geminiContext = `\n\nRELEVANT MEDICAL INFORMATION FROM OUR DOCUMENTS:\n${geminiData.answer}\n`;
-          geminiSources = geminiData.sources || [];
+      if (mcpResponse.ok) {
+        const mcpData = await mcpResponse.json();
+        const medicalText = mcpData.result?.content?.[0]?.text || '';
+        const sources = mcpData.result?.metadata?.sources || [];
+        
+        if (medicalText) {
+          medicalContext = `\n\nRELEVANT MEDICAL INFORMATION FROM OUR DOCUMENTS:\n${medicalText}\n`;
+          medicalSources = sources;
           
-          if (geminiSources.length > 0) {
-            geminiContext += `\nSources: ${geminiSources.map((s: any) => s.fileName || s.uri).join(', ')}\n`;
+          if (medicalSources.length > 0) {
+            medicalContext += `\nSources: ${medicalSources.map((s: any) => s.fileName || s.uri || s).join(', ')}\n`;
           }
         }
       }
     } catch (error) {
-      // Non-fatal: continue without context if Gemini fails or times out
-      console.warn('Gemini context error (non-fatal, continuing without context):', error instanceof Error ? error.message : error);
+      // Non-fatal: continue without context if MCP fails or times out
+      console.warn('MCP/Codex context error (non-fatal, continuing without context):', error instanceof Error ? error.message : error);
     }
 
     // Build system prompt
-    const systemPrompt = `${DR_SAYUJ_SYSTEM_PROMPT}${geminiContext ? `\n\nADDITIONAL DOCUMENT CONTEXT:\n${geminiContext}` : ''}`;
+    const systemPrompt = `${DR_SAYUJ_SYSTEM_PROMPT}${medicalContext ? `\n\nADDITIONAL DOCUMENT CONTEXT:\n${medicalContext}` : ''}`;
 
     // Build messages array
     const messages = [
@@ -109,7 +118,7 @@ export async function POST(request: NextRequest) {
     // Return streaming response
     return result.toTextStreamResponse({
       headers: {
-        'X-Sources': geminiSources.length > 0 ? JSON.stringify(geminiSources) : '',
+        'X-Sources': medicalSources.length > 0 ? JSON.stringify(medicalSources) : '',
       },
     });
 
