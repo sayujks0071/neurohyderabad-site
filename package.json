@@ -16,6 +16,8 @@
     "lhci": "lhci autorun",
     "seo:lh": "lhci autorun --collect.url=https://www.drsayuj.com --upload.target=temporary-public-storage",
     "seo:audit": "node scripts/comprehensive-seo-audit.js",
+    "health:check": "node scripts/health-seo-check.js",
+    "health:full": "node scripts/health-seo-check.js --full",
     "verify:deployment": "node scripts/verify-deployment.js",
     "check:sitemap": "node scripts/check-sitemap.js",
     "gsc:verify": "npx tsx scripts/verify-gsc-setup.ts",
