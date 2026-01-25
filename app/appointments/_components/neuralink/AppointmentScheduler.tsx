@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useMemo } from "react";
 import {
   Clock,
   ChevronLeft,
@@ -58,11 +58,10 @@ const AppointmentScheduler = ({
   const [currentDate, setCurrentDate] = useState(
     selectedDate || getNextAvailableDate()
   );
-  const [slots, setSlots] = useState<TimeSlot[]>([]);
 
-  useEffect(() => {
-    setSlots(getAvailableSlots(currentDate));
-  }, [currentDate]);
+  // Use useMemo to derive slots synchronously, preventing initial render with empty slots
+  // and eliminating the CLS/flash that occurred with useState+useEffect
+  const slots = useMemo(() => getAvailableSlots(currentDate), [currentDate]);
 
   const changeDate = (days: number) => {
     const d = parseLocalDate(currentDate);
