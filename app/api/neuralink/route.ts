@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { GoogleGenAI, Modality, Type } from "@google/genai";
 import { rateLimit } from "../../../src/lib/rate-limit";
 
+// TODO: Migrate to Codex CLI/AI Gateway for standardized auth and monitoring.
 const SYSTEM_INSTRUCTION = `You are the NeuroLink Assistant for Dr. Sayuj, a world-class neurosurgeon.
 Your goal is to answer questions professionally using the provided Google Search tool for accuracy.
 - If asked about recent neurosurgery news, clinic location, or Dr. Sayuj's bio, use Google Search.
