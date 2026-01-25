@@ -125,7 +125,7 @@ export async function POST(request: NextRequest) {
         model: getTextModel(),
         messages,
         temperature: 0.7,
-        maxTokens: 2000, // Limit response length
+        maxOutputTokens: 2000, // Limit response length
       });
 
       // Return streaming response
