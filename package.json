@@ -75,7 +75,7 @@
     "googleapis": "^170.0.0",
     "hypertune": "^2.10.1",
     "ics": "^3.8.1",
-    "inngest": "^3.44.2",
+    "inngest": "^3.49.3",
     "jsdom": "^27.4.0",
     "lucide-react": "^0.544.0",
     "next": "16.2.0-canary.6",
@@ -91,7 +91,7 @@
     "sharp": "^0.34.4",
     "vitest": "^4.0.16",
     "web-vitals": "^5.1.0",
-    "workflow": "4.0.1-beta.48",
+    "workflow": "4.0.1-beta.50",
     "yup": "^1.4.0",
     "zod": "^3.25.76"
   },
@@ -118,12 +118,41 @@
     "tsconfig-paths": "^4.2.0",
     "tsx": "^4.21.0",
     "typescript": "^5",
-    "vercel": "^48.10.10"
+    "vercel": "^50.5.0"
   },
   "overrides": {
     "esbuild": "^0.25.0",
     "path-to-regexp": "^6.3.0",
-    "undici": "^5.29.0",
-    "tmp": "^0.2.4"
+    "undici": "^6.23.0",
+    "tmp": "^0.2.4",
+    "lodash": "^4.17.23",
+    "lodash-es": "^4.17.23",
+    "tar": "^7.5.4",
+    "diff": "^4.0.4",
+    "devalue": "^5.6.2"
+  },
+  "resolutions": {
+    "esbuild": "^0.25.0",
+    "path-to-regexp": "^6.3.0",
+    "undici": "^6.23.0",
+    "tmp": "^0.2.4",
+    "lodash": "^4.17.23",
+    "lodash-es": "^4.17.23",
+    "tar": "^7.5.4",
+    "diff": "^4.0.4",
+    "devalue": "^5.6.2"
+  },
+  "pnpm": {
+    "overrides": {
+      "esbuild": "^0.25.0",
+      "path-to-regexp": "^6.3.0",
+      "undici": "^6.23.0",
+      "tmp": "^0.2.4",
+      "lodash": "^4.17.23",
+      "lodash-es": "^4.17.23",
+      "tar": "^7.5.4",
+      "diff": "^4.0.4",
+      "devalue": "^5.6.2"
+    }
   }
 }
