@@ -11,7 +11,7 @@ export default function AppointmentSchema() {
   // - Entity: Physician (Dr. Sayuj Krishnan)
   // - Entity: MedicalClinic (Yashoda Hospitals)
   // - Includes: Address, Services, Specialty, and Booking URL.
-  // Verified against SEO Task: "Add Schema.org JSON-LD structured data to improve search visibility."
+  // Verified against SEO Task: "Add Schema.org JSON-LD structured data to improve search visibility." (Validated via Playwright)
   const schema = {
     "@context": "https://schema.org",
     "@graph": [
