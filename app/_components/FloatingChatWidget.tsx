@@ -253,7 +253,6 @@ export default function FloatingChatWidget() {
       }
 
       logContactFormSubmit('ai_chat_widget', true);
-      setIsLoading(false);
     } catch (err) {
       console.error('Chat error:', err);
       setError(err instanceof Error ? err : new Error('Failed to send message'));
