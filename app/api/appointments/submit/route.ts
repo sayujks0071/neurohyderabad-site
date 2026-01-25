@@ -8,6 +8,7 @@ import { buildWebhookPayload, notifyAppointmentWebhooks } from "@/src/lib/appoin
 import { submitToGoogleSheets } from "@/src/lib/google-sheets";
 import { rateLimit } from "@/src/lib/rate-limit";
 import { appointments } from "@/src/lib/db";
+import { analyzeTriage } from "@/src/lib/ai/triage";
 import type { BookingData } from "@/packages/appointment-form/types";
 
 const ALLOWED_GENDERS = new Set(["male", "female", "other"]);
@@ -113,11 +114,24 @@ export async function POST(request: Request) {
     const body = await request.json();
     const booking = parseBookingData(body);
 
+    // AI Triage Analysis
+    let triageResult = null;
+    try {
+      triageResult = await analyzeTriage({
+        symptoms: [], // AI will extract from description if empty
+        description: booking.reason,
+        age: Number(booking.age),
+      });
+    } catch (error) {
+      console.error("[appointments/submit] Triage analysis failed:", error);
+    }
+
     const { message, usedAI } = await generateBookingConfirmation(booking);
     const emailResult = await sendConfirmationEmail(booking, message);
     const adminEmailResult = await sendAdminNotificationEmail(
       booking,
-      request.headers.get("x-booking-source") || "website"
+      request.headers.get("x-booking-source") || "website",
+      triageResult
     );
     if (!adminEmailResult.success) {
       console.error(
@@ -142,6 +156,8 @@ export async function POST(request: Request) {
       source,
       confirmation_message: message,
       used_ai_confirmation: usedAI,
+      has_emergency_symptoms: triageResult ? ['emergency', 'urgent'].includes(triageResult.urgencyLevel) : false,
+      intake_notes: triageResult ? JSON.stringify(triageResult) : undefined,
     }).catch((error) => {
       console.error("[appointments/submit] Failed to save to database:", error);
     });

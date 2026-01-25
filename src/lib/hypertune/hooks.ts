@@ -6,40 +6,38 @@
  * Convenient hooks for using Hypertune feature flags in components
  */
 
-import { useHypertune } from '@/app/providers/hypertune-provider';
+import { useHypertune } from '@/generated/hypertune.react';
 import { hypertuneFlagFallbacks } from './experiments-config';
 
 /**
  * Hook to get a feature flag value
- * @param flagName - Name of the feature flag
+ * @param flagName - Name of the feature flag (supports both camelCase and snake_case)
  * @param fallback - Fallback value if flag is not available
  * @returns The flag value or fallback
  */
 export function useFeatureFlag<T>(flagName: string, fallback: T): T {
-  const { hypertune, isReady } = useHypertune();
+  const hypertune = useHypertune();
   const derivedFallback =
     (hypertuneFlagFallbacks as Record<string, unknown>)[flagName] ??
     fallback;
   const safeFallback = (derivedFallback as T) ?? fallback;
 
-  if (!isReady || !hypertune) {
+  if (!hypertune || !hypertune.props.context) {
     return safeFallback;
   }
 
   try {
-    if (typeof (hypertune as any).getFlagValue === 'function') {
-      return (hypertune as any).getFlagValue(flagName, safeFallback) as T;
-    }
-
-    // Access the flag dynamically
-    // Note: This assumes the flag exists on the hypertune object
-    const flagValue = (hypertune as any)[flagName];
+    // Map snake_case to camelCase for generated flags
+    const camelCaseName = flagName.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase());
     
-    if (typeof flagValue === 'function') {
-      return flagValue({ fallback: safeFallback });
+    // Try camelCase first (generated flags), then snake_case (legacy)
+    const flagMethod = (hypertune as any)[camelCaseName] || (hypertune as any)[flagName];
+    
+    if (typeof flagMethod === 'function') {
+      return flagMethod({ fallback: safeFallback });
     }
     
-    return (flagValue as T) ?? safeFallback;
+    return safeFallback;
   } catch (error) {
     console.warn(`Failed to get feature flag "${flagName}":`, error);
     return safeFallback;

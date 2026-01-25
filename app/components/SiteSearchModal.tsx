@@ -14,27 +14,8 @@ export default function SiteSearchModal({ onClose }: SiteSearchModalProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [results, setResults] = useState<SearchItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [searchFn, setSearchFn] = useState<
-    ((term: string, limit?: number) => SearchItem[]) | null
-  >(null);
-  const searchModulePromiseRef =
-    useRef<Promise<typeof import("@/src/data/searchIndex")> | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
-
-  const ensureSearchFn = useCallback(async () => {
-    if (searchFn) {
-      return searchFn;
-    }
-
-    if (!searchModulePromiseRef.current) {
-      searchModulePromiseRef.current = import("@/src/data/searchIndex");
-    }
-
-    const mod = await searchModulePromiseRef.current;
-    setSearchFn(() => mod.searchContent);
-    return mod.searchContent;
-  }, [searchFn]);
 
   const handleSelect = useCallback(
     (item: SearchItem) => {
@@ -65,34 +46,43 @@ export default function SiteSearchModal({ onClose }: SiteSearchModalProps) {
     }
   }, [activeIndex]);
 
-  // Perform search
+  // Perform search with debounce
   useEffect(() => {
-    if (!searchFn) {
-      let isCurrent = true;
-      setIsLoading(true);
+    const performSearch = async () => {
+      if (!query.trim()) {
+        setResults([]);
+        return;
+      }
 
-      ensureSearchFn()
-        .then((fn) => {
-          if (!isCurrent) {
-            return;
-          }
-          setResults(fn(query, 8));
-          setIsLoading(false);
-        })
-        .catch(() => {
-          if (isCurrent) {
-            setIsLoading(false);
-            setResults([]);
-          }
+      setIsLoading(true);
+      try {
+        const response = await fetch('/api/ai/search', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ query: query.trim(), limit: 8 }),
         });
 
-      return () => {
-        isCurrent = false;
-      };
-    }
+        if (response.ok) {
+          const data = await response.json();
+          setResults(data.results || []);
+        } else {
+          console.error('Search failed:', response.status);
+          setResults([]);
+        }
+      } catch (error) {
+        console.error('Search error:', error);
+        setResults([]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-    setResults(searchFn(query, 8));
-  }, [ensureSearchFn, query, searchFn]);
+    const debounceTimer = setTimeout(() => {
+      performSearch();
+    }, 300);
+
+    return () => clearTimeout(debounceTimer);
+  }, [query]);
 
   // Keyboard navigation within modal
   useEffect(() => {
@@ -155,13 +145,16 @@ export default function SiteSearchModal({ onClose }: SiteSearchModalProps) {
           <input
             ref={inputRef}
             type="search"
-            placeholder="Search conditions, treatments, or resources"
+            placeholder="Search conditions, treatments, or resources..."
             className="w-full border-none text-base text-gray-900 placeholder:text-gray-400 focus:outline-none"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             autoCapitalize="none"
             spellCheck={false}
           />
+          {isLoading && (
+            <div className="h-4 w-4 animate-spin rounded-full border-2 border-gray-200 border-t-blue-600" />
+          )}
           <button
             type="button"
             onClick={onClose}
@@ -175,14 +168,22 @@ export default function SiteSearchModal({ onClose }: SiteSearchModalProps) {
           ref={resultsRef}
           className="max-h-80 overflow-y-auto px-2 py-3 sm:px-3"
         >
-          {isLoading ? (
-            <p className="px-4 py-8 text-center text-sm text-gray-500">
-              Loading search suggestions…
-            </p>
+          {query.trim() === "" ? (
+            <div className="px-4 py-8 text-center">
+               <p className="text-sm text-gray-500 mb-2">
+                Ask me anything about neurosurgery, symptoms, or treatments.
+              </p>
+              <p className="text-xs text-blue-600 font-medium bg-blue-50 inline-block px-3 py-1 rounded-full">
+                ✨ Powered by AI Semantic Search
+              </p>
+            </div>
+          ) : isLoading && results.length === 0 ? (
+            <div className="px-4 py-8 text-center text-sm text-gray-500">
+              <p>Thinking...</p>
+            </div>
           ) : results.length === 0 ? (
             <p className="px-4 py-8 text-center text-sm text-gray-500">
-              No results found. Try a broader term like{" "}
-              <strong>spine</strong> or <strong>epilepsy</strong>.
+              No results found. Try describing your symptoms or using different keywords.
             </p>
           ) : (
             results.map((item, index) => {
@@ -208,7 +209,7 @@ export default function SiteSearchModal({ onClose }: SiteSearchModalProps) {
                     <span className="text-xs uppercase tracking-wide text-blue-600">
                       {item.category}
                     </span>
-                    <span className="text-sm text-gray-600">
+                    <span className="text-sm text-gray-600 line-clamp-2">
                       {item.description}
                     </span>
                   </button>

@@ -328,16 +328,33 @@ For questions, reply to this email or call +91-9778280044.
     phone?: string;
     painScore?: number;
     mriScanAvailable?: boolean;
+    triageResult?: any;
   }) {
     const adminEmail =
       process.env.APPOINTMENT_ADMIN_EMAIL ||
       process.env.NEXT_PUBLIC_CONTACT_EMAIL ||
       "hellodr@drsayuj.info";
 
+    const triageSection = data.triageResult ? `
+AI Triage Analysis:
+Urgency: ${data.triageResult.urgencyLevel.toUpperCase()} (Score: ${data.triageResult.urgencyScore})
+Action: ${data.triageResult.recommendedAction}
+Reasoning: ${data.triageResult.reasoning}
+` : '';
+
+    const triageHtml = data.triageResult ? `
+            <div style="background: ${data.triageResult.urgencyLevel === 'emergency' ? '#fef2f2' : data.triageResult.urgencyLevel === 'urgent' ? '#fff7ed' : '#f0f9ff'}; padding: 20px; border-radius: 8px; margin: 20px 0; border: 2px solid ${data.triageResult.urgencyLevel === 'emergency' ? '#ef4444' : data.triageResult.urgencyLevel === 'urgent' ? '#f97316' : '#0ea5e9'};">
+              <h3 style="color: ${data.triageResult.urgencyLevel === 'emergency' ? '#dc2626' : data.triageResult.urgencyLevel === 'urgent' ? '#c2410c' : '#0284c7'}; margin-top: 0;">AI Triage Analysis</h3>
+              <p><strong>Urgency:</strong> <span style="background: ${data.triageResult.urgencyLevel === 'emergency' ? '#ef4444' : data.triageResult.urgencyLevel === 'urgent' ? '#f97316' : '#0ea5e9'}; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; font-size: 12px; text-transform: uppercase;">${data.triageResult.urgencyLevel}</span> (Score: ${data.triageResult.urgencyScore})</p>
+              <p><strong>Recommended Action:</strong> ${data.triageResult.recommendedAction}</p>
+              <p><strong>Reasoning:</strong> ${data.triageResult.reasoning}</p>
+            </div>
+    ` : '';
+
     const emailData: EmailTemplate = {
       to: adminEmail,
       from: this.fromEmail,
-      subject: `New Appointment Request - ${data.patientName}`,
+      subject: `${data.triageResult?.urgencyLevel === 'emergency' ? '🚨 EMERGENCY: ' : data.triageResult?.urgencyLevel === 'urgent' ? '⚡ URGENT: ' : ''}New Appointment Request - ${data.patientName}`,
       text: `New appointment request received.
 
 Patient: ${data.patientName}
@@ -346,7 +363,8 @@ Gender: ${data.gender}
 Preferred Date: ${data.appointmentDate}
 Preferred Time: ${data.appointmentTime}
 Reason: ${data.reason}
-${data.painScore ? `Pain Score: ${data.painScore}/10\n` : ""}${data.mriScanAvailable !== undefined ? `MRI Scan Available: ${data.mriScanAvailable ? "Yes" : "No"}\n` : ""}${data.email ? `Email: ${data.email}\n` : ""}${data.phone ? `Phone: ${data.phone}\n` : ""}${data.source ? `Source: ${data.source}\n` : ""}`,
+${data.painScore ? `Pain Score: ${data.painScore}/10\n` : ""}${data.mriScanAvailable !== undefined ? `MRI Scan Available: ${data.mriScanAvailable ? "Yes" : "No"}\n` : ""}${data.email ? `Email: ${data.email}\n` : ""}${data.phone ? `Phone: ${data.phone}\n` : ""}${data.source ? `Source: ${data.source}\n` : ""}
+${triageSection}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <div style="background: #1e40af; color: white; padding: 24px; text-align: center;">
@@ -354,6 +372,7 @@ ${data.painScore ? `Pain Score: ${data.painScore}/10\n` : ""}${data.mriScanAvail
             <p style="margin: 8px 0 0 0; font-size: 14px;">Dr. Sayuj Krishnan - Neurosurgeon</p>
           </div>
           <div style="padding: 24px; background: #f8fafc;">
+            ${triageHtml}
             <h2 style="margin-top: 0; color: #1e40af;">Patient Details</h2>
             <p><strong>Name:</strong> ${data.patientName}</p>
             <p><strong>Age:</strong> ${data.age}</p>

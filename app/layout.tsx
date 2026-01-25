@@ -37,7 +37,7 @@ import GoogleAnalytics from "../src/components/GoogleAnalytics";
 import DynamicStickyCTA from "./_components/DynamicStickyCTA";
 import FloatingChatWidget from "./_components/DynamicFloatingChatWidget";
 import FlagValuesEmitter from "./_components/FlagValuesEmitter";
-import HypertuneProvider from "./providers/hypertune-provider";
+import HypertuneWrapper from "./providers/hypertune-wrapper";
 import { SITE_URL } from "../src/lib/seo";
 
 export const metadata: Metadata = {
@@ -179,12 +179,12 @@ export default function RootLayout({
         </a>
         <Header />
         <TrustStrip />
-        <HypertuneProvider>
+        <HypertuneWrapper>
           <FlagValuesEmitter />
           <main id="main-content" tabIndex={-1} role="main">
             {children}
           </main>
-        </HypertuneProvider>
+        </HypertuneWrapper>
         <Footer />
         <FloatingChatWidget />
         <DynamicStickyCTA />

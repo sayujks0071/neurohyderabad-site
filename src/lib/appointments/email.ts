@@ -37,7 +37,8 @@ export async function sendConfirmationEmail(
 
 export async function sendAdminNotificationEmail(
   data: BookingData,
-  source?: string
+  source?: string,
+  triageResult?: any
 ): Promise<EmailResult> {
   try {
     const result = await EmailService.sendAppointmentRequestAlert({
@@ -52,6 +53,7 @@ export async function sendAdminNotificationEmail(
       phone: data.phone,
       painScore: data.painScore,
       mriScanAvailable: data.mriScanAvailable,
+      triageResult,
     });
 
     if (result.success) {

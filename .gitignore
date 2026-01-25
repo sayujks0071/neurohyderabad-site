@@ -61,6 +61,8 @@ docs/internal/
 !AGENTS.md
 !jules-prompts/*.md
 !docs/jules-automations.md
+!docs/VERCEL_PROJECT_INFO.md
+!PROJECT_INFO.md
 !scripts/fix-jules-git-config.sh
 *.patch
 *.sh
