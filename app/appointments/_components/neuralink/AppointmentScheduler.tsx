@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import {
   Clock,
   ChevronLeft,
@@ -55,13 +55,39 @@ const AppointmentScheduler = ({
   selectedTime,
   selectedType,
 }: AppointmentSchedulerProps) => {
-  const [currentDate, setCurrentDate] = useState(
-    selectedDate || getNextAvailableDate()
-  );
+  // Helper to get the start of the week (Sunday) for a given date
+  const getWeekStartDate = (dateStr: string) => {
+    const date = parseLocalDate(dateStr);
+    const dayOfWeek = date.getDay();
+    date.setDate(date.getDate() - dayOfWeek);
+    return formatLocalDate(date);
+  };
 
+  // Initialize currentDate to the week containing selectedDate or next available date
+  const [currentDate, setCurrentDate] = useState(() => {
+    const initialDate = selectedDate || getNextAvailableDate();
+    return getWeekStartDate(initialDate);
+  });
+
+  // Update week view when selectedDate changes (if it's in a different week)
+  useEffect(() => {
+    if (selectedDate) {
+      const selectedWeekStart = getWeekStartDate(selectedDate);
+      setCurrentDate((prev) => {
+        // Only update if the selected date is in a different week
+        if (selectedWeekStart !== prev) {
+          return selectedWeekStart;
+        }
+        return prev;
+      });
+    }
+  }, [selectedDate]);
+
+  // Use selectedDate for slots if available, otherwise use currentDate (week view)
+  const dateForSlots = selectedDate || currentDate;
   // Use useMemo to derive slots synchronously, preventing initial render with empty slots
   // and eliminating the CLS/flash that occurred with useState+useEffect
-  const slots = useMemo(() => getAvailableSlots(currentDate), [currentDate]);
+  const slots = useMemo(() => getAvailableSlots(dateForSlots), [dateForSlots]);
 
   const changeDate = (days: number) => {
     const d = parseLocalDate(currentDate);
@@ -93,7 +119,10 @@ const AppointmentScheduler = ({
             <button
               key={item.id}
               type="button"
-              onClick={() => onSelect(item.id, currentDate, selectedTime)}
+              onClick={() => {
+                const date = selectedDate || currentDate;
+                onSelect(item.id, date, selectedTime);
+              }}
               aria-pressed={selectedType === item.id}
               className={`group flex items-start p-5 rounded-2xl border transition-all text-left relative overflow-hidden ${
                 selectedType === item.id
@@ -179,7 +208,7 @@ const AppointmentScheduler = ({
             buttonDate.setDate(buttonDate.getDate() + i);
 
             const dStr = formatLocalDate(buttonDate);
-            const isSelected = currentDate === dStr;
+            const isSelected = selectedDate === dStr;
             const isWeekend = buttonDate.getDay() === 0 || buttonDate.getDay() === 6;
 
             return (
@@ -189,11 +218,19 @@ const AppointmentScheduler = ({
                 disabled={isWeekend}
                 aria-label={`Select ${buttonDate.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}`}
                 aria-pressed={isSelected}
+                onMouseDown={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                }}
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
                   if (!isWeekend) {
-                    setCurrentDate(dStr);
+                    // Update week view if the selected date is in a different week
+                    const newWeekStart = getWeekStartDate(dStr);
+                    if (newWeekStart !== currentDate) {
+                      setCurrentDate(newWeekStart);
+                    }
                     // Always call onSelect to update parent state, even if no type selected yet
                     if (selectedType) {
                       onSelect(selectedType, dStr, selectedTime);
@@ -208,7 +245,7 @@ const AppointmentScheduler = ({
                     ? "bg-blue-600 text-white border-blue-600 shadow-lg shadow-blue-200 scale-105 z-10"
                     : isWeekend
                     ? "bg-slate-50 text-slate-300 border-slate-100 cursor-not-allowed"
-                    : "bg-white text-slate-600 border-slate-200 hover:border-blue-300 hover:shadow-md cursor-pointer"
+                    : "bg-white text-slate-600 border-slate-200 hover:border-blue-300 hover:shadow-md cursor-pointer active:scale-95"
                 }`}
               >
                 <span className="text-xs font-medium mb-1 opacity-80">
@@ -255,7 +292,8 @@ const AppointmentScheduler = ({
                       onSelect={() => {
                         // Allow time selection even without appointment type
                         const type = selectedType || AppointmentType.NEW_CONSULTATION;
-                        onSelect(type, currentDate, slot.time);
+                        const date = selectedDate || currentDate;
+                        onSelect(type, date, slot.time);
                       }}
                     />
                   ))}
@@ -277,7 +315,8 @@ const AppointmentScheduler = ({
                       onSelect={() => {
                         // Allow time selection even without appointment type
                         const type = selectedType || AppointmentType.NEW_CONSULTATION;
-                        onSelect(type, currentDate, slot.time);
+                        const date = selectedDate || currentDate;
+                        onSelect(type, date, slot.time);
                       }}
                     />
                   ))}
@@ -304,6 +343,10 @@ const TimeSlotButton = ({ slot, selectedTime, onSelect }: TimeSlotButtonProps) =
     <button
       type="button"
       disabled={!slot.available}
+      onMouseDown={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+      }}
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -314,9 +357,9 @@ const TimeSlotButton = ({ slot, selectedTime, onSelect }: TimeSlotButtonProps) =
       aria-pressed={isSelected}
       className={`py-2.5 px-2 rounded-xl text-sm font-bold transition-all border shadow-sm ${
         isSelected
-          ? "bg-blue-600 text-white border-blue-600 shadow-blue-200"
+          ? "bg-blue-600 text-white border-blue-600 shadow-blue-200 z-10"
           : slot.available
-          ? "bg-white text-slate-700 border-slate-200 hover:border-blue-400 hover:text-blue-600 hover:shadow-md cursor-pointer"
+          ? "bg-white text-slate-700 border-slate-200 hover:border-blue-400 hover:text-blue-600 hover:shadow-md cursor-pointer active:scale-95"
           : "bg-slate-50 text-slate-300 border-slate-100 cursor-not-allowed shadow-none"
       }`}
     >
