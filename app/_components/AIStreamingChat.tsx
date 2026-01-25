@@ -104,21 +104,37 @@ export default function AIStreamingChat({
       setMessages(prev => [...prev, assistantMessage]);
 
       let fullContent = '';
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
+      try {
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
 
-        const chunk = decoder.decode(value, { stream: true });
-        fullContent += chunk;
-        
-        setMessages(prev => {
-          const updated = [...prev];
-          const lastMsg = updated[updated.length - 1];
-          if (lastMsg && lastMsg.role === 'assistant') {
-            lastMsg.content = fullContent;
-          }
-          return updated;
-        });
+          const chunk = decoder.decode(value, { stream: true });
+          fullContent += chunk;
+          
+          setMessages(prev => {
+            const updated = [...prev];
+            const lastMsg = updated[updated.length - 1];
+            if (lastMsg && lastMsg.role === 'assistant') {
+              lastMsg.content = fullContent;
+            }
+            return updated;
+          });
+        }
+      } catch (streamError) {
+        console.error('Stream reading error:', streamError);
+        // Update the message with what we have so far
+        if (fullContent) {
+          setMessages(prev => {
+            const updated = [...prev];
+            const lastMsg = updated[updated.length - 1];
+            if (lastMsg && lastMsg.role === 'assistant') {
+              lastMsg.content = fullContent + '\n\n[Stream ended]';
+            }
+            return updated;
+          });
+        }
+        throw streamError;
       }
 
       // Check for emergency keywords

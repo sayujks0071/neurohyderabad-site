@@ -34,12 +34,12 @@ const schema = yup.object({
   email: yup.string().email("Invalid email address").required("Email is required"),
   city: yup.string().required("City is required"),
   concern: yup.string().required("Please describe your concern").min(10, "Please provide a bit more detail"),
-  preferredDate: yup.string(),
-  preferredTime: yup.string(),
-  painScore: yup.number().min(1).max(10).optional(),
-  mriScanAvailable: yup.boolean().optional(),
-  company: yup.string(), // Honeypot - should be empty
-  source: yup.string().default("website"),
+  preferredDate: yup.string().notRequired(),
+  preferredTime: yup.string().notRequired(),
+  painScore: yup.number().min(1).max(10).notRequired(),
+  mriScanAvailable: yup.boolean().notRequired(),
+  company: yup.string().notRequired(), // Honeypot - should be empty
+  source: yup.string().default("website").notRequired(),
 }).required();
 
 const availableTimes = [
@@ -61,7 +61,7 @@ export default function LeadForm() {
     watch,
     formState: { errors, isSubmitting },
   } = useForm<LeadFormData>({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schema) as any,
     defaultValues: {
       source: "website",
       company: "",

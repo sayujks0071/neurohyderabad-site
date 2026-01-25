@@ -189,10 +189,18 @@ const AppointmentScheduler = ({
                 disabled={isWeekend}
                 aria-label={`Select ${buttonDate.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}`}
                 aria-pressed={isSelected}
-                onClick={() => {
-                  setCurrentDate(dStr);
-                  if (selectedType) {
-                    onSelect(selectedType, dStr, "");
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  if (!isWeekend) {
+                    setCurrentDate(dStr);
+                    // Always call onSelect to update parent state, even if no type selected yet
+                    if (selectedType) {
+                      onSelect(selectedType, dStr, selectedTime);
+                    } else {
+                      // Allow date selection even without appointment type
+                      onSelect(selectedType || AppointmentType.NEW_CONSULTATION, dStr, selectedTime);
+                    }
                   }
                 }}
                 className={`flex flex-col items-center justify-center p-3 rounded-2xl border transition-all relative ${
@@ -200,7 +208,7 @@ const AppointmentScheduler = ({
                     ? "bg-blue-600 text-white border-blue-600 shadow-lg shadow-blue-200 scale-105 z-10"
                     : isWeekend
                     ? "bg-slate-50 text-slate-300 border-slate-100 cursor-not-allowed"
-                    : "bg-white text-slate-600 border-slate-200 hover:border-blue-300 hover:shadow-md"
+                    : "bg-white text-slate-600 border-slate-200 hover:border-blue-300 hover:shadow-md cursor-pointer"
                 }`}
               >
                 <span className="text-xs font-medium mb-1 opacity-80">
@@ -244,9 +252,11 @@ const AppointmentScheduler = ({
                       key={slot.time}
                       slot={slot}
                       selectedTime={selectedTime}
-                      onSelect={() =>
-                        selectedType && onSelect(selectedType, currentDate, slot.time)
-                      }
+                      onSelect={() => {
+                        // Allow time selection even without appointment type
+                        const type = selectedType || AppointmentType.NEW_CONSULTATION;
+                        onSelect(type, currentDate, slot.time);
+                      }}
                     />
                   ))}
                 </div>
@@ -264,9 +274,11 @@ const AppointmentScheduler = ({
                       key={slot.time}
                       slot={slot}
                       selectedTime={selectedTime}
-                      onSelect={() =>
-                        selectedType && onSelect(selectedType, currentDate, slot.time)
-                      }
+                      onSelect={() => {
+                        // Allow time selection even without appointment type
+                        const type = selectedType || AppointmentType.NEW_CONSULTATION;
+                        onSelect(type, currentDate, slot.time);
+                      }}
                     />
                   ))}
                 </div>
@@ -285,22 +297,32 @@ interface TimeSlotButtonProps {
   onSelect: () => void;
 }
 
-const TimeSlotButton = ({ slot, selectedTime, onSelect }: TimeSlotButtonProps) => (
-  <button
-    type="button"
-    disabled={!slot.available}
-    onClick={onSelect}
-    aria-pressed={selectedTime === slot.time}
-    className={`py-2.5 px-2 rounded-xl text-sm font-bold transition-all border shadow-sm ${
-      selectedTime === slot.time
-        ? "bg-blue-600 text-white border-blue-600 shadow-blue-200"
-        : slot.available
-        ? "bg-white text-slate-700 border-slate-200 hover:border-blue-400 hover:text-blue-600 hover:shadow-md"
-        : "bg-slate-50 text-slate-300 border-slate-100 cursor-not-allowed shadow-none"
-    }`}
-  >
-    {slot.time}
-  </button>
-);
+const TimeSlotButton = ({ slot, selectedTime, onSelect }: TimeSlotButtonProps) => {
+  const isSelected = selectedTime === slot.time;
+  
+  return (
+    <button
+      type="button"
+      disabled={!slot.available}
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (slot.available) {
+          onSelect();
+        }
+      }}
+      aria-pressed={isSelected}
+      className={`py-2.5 px-2 rounded-xl text-sm font-bold transition-all border shadow-sm ${
+        isSelected
+          ? "bg-blue-600 text-white border-blue-600 shadow-blue-200"
+          : slot.available
+          ? "bg-white text-slate-700 border-slate-200 hover:border-blue-400 hover:text-blue-600 hover:shadow-md cursor-pointer"
+          : "bg-slate-50 text-slate-300 border-slate-100 cursor-not-allowed shadow-none"
+      }`}
+    >
+      {slot.time}
+    </button>
+  );
+};
 
 export default AppointmentScheduler;

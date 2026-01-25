@@ -125,6 +125,41 @@ Speak naturally and conversationally. Keep responses concise (2-3 sentences max)
     }
   }, []);
 
+  // Start capturing and sending audio
+  const startAudioCapture = useCallback((ws: WebSocket, stream: MediaStream) => {
+    if (!audioContextRef.current) return;
+
+    const source = audioContextRef.current.createMediaStreamSource(stream);
+    const processor = audioContextRef.current.createScriptProcessor(4096, 1, 1);
+
+    source.connect(processor);
+    processor.connect(audioContextRef.current.destination);
+
+    processor.onaudioprocess = (e) => {
+      // Check WebSocket state directly instead of relying on isListening state
+      if (ws.readyState !== WebSocket.OPEN) return;
+
+      const inputData = e.inputBuffer.getChannelData(0);
+      const pcm16 = new Int16Array(inputData.length);
+
+      for (let i = 0; i < inputData.length; i++) {
+        const s = Math.max(-1, Math.min(1, inputData[i]));
+        pcm16[i] = s < 0 ? s * 0x8000 : s * 0x7FFF;
+      }
+
+      // Convert to base64 and send
+      try {
+        const base64 = btoa(String.fromCharCode(...new Uint8Array(pcm16.buffer)));
+        ws.send(JSON.stringify({
+          type: 'input_audio_buffer.append',
+          audio: base64,
+        }));
+      } catch (err) {
+        console.error('Error sending audio data:', err);
+      }
+    };
+  }, []);
+
   // Connect to OpenAI Realtime API
   const connect = useCallback(async () => {
     try {
@@ -229,37 +264,7 @@ Speak naturally and conversationally. Keep responses concise (2-3 sentences max)
       setIsInitializing(false);
       onError?.(error);
     }
-  }, [requestMicrophonePermission, initializeAudioContext, playAudio, onError]);
-
-  // Start capturing and sending audio
-  const startAudioCapture = useCallback((ws: WebSocket, stream: MediaStream) => {
-    if (!audioContextRef.current) return;
-
-    const source = audioContextRef.current.createMediaStreamSource(stream);
-    const processor = audioContextRef.current.createScriptProcessor(4096, 1, 1);
-
-    source.connect(processor);
-    processor.connect(audioContextRef.current.destination);
-
-    processor.onaudioprocess = (e) => {
-      if (!isListening || ws.readyState !== WebSocket.OPEN) return;
-
-      const inputData = e.inputBuffer.getChannelData(0);
-      const pcm16 = new Int16Array(inputData.length);
-
-      for (let i = 0; i < inputData.length; i++) {
-        const s = Math.max(-1, Math.min(1, inputData[i]));
-        pcm16[i] = s < 0 ? s * 0x8000 : s * 0x7FFF;
-      }
-
-      // Convert to base64 and send
-      const base64 = btoa(String.fromCharCode(...new Uint8Array(pcm16.buffer)));
-      ws.send(JSON.stringify({
-        type: 'input_audio_buffer.append',
-        audio: base64,
-      }));
-    };
-  }, [isListening]);
+  }, [requestMicrophonePermission, initializeAudioContext, playAudio, startAudioCapture, onError]);
 
   // Try to extract appointment data from conversation
   const tryExtractAppointmentData = useCallback((text: string) => {
