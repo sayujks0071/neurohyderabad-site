@@ -13,11 +13,15 @@ export function createHypertuneSource({
   const token = getHypertuneToken() ?? '';
 
   const configUrl =
+    process.env.EDGE_CONFIG ||
     process.env.EXPERIMENTATION_CONFIG ||
-    process.env.drsayuj_EXPERIMENTATION_CONFIG;
+    process.env.drsayuj_EXPERIMENTATION_CONFIG ||
+    process.env.hypertune_connect_EXPERIMENTATION_CONFIG;
   const itemKey =
+    process.env.EDGE_CONFIG_HYPERTUNE_ITEM_KEY ||
     process.env.EXPERIMENTATION_CONFIG_ITEM_KEY ||
-    process.env.drsayuj_EXPERIMENTATION_CONFIG_ITEM_KEY;
+    process.env.drsayuj_EXPERIMENTATION_CONFIG_ITEM_KEY ||
+    process.env.hypertune_connect_EXPERIMENTATION_CONFIG_ITEM_KEY;
 
   const initDataProvider =
     useEdgeConfig && configUrl && itemKey

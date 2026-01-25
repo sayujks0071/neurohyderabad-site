@@ -44,8 +44,10 @@ export function getHypertuneToken(): string | null {
  */
 export function getExperimentationConfig(): string | null {
   return (
+    process.env.EDGE_CONFIG ||
     process.env.EXPERIMENTATION_CONFIG ||
     process.env.drsayuj_EXPERIMENTATION_CONFIG ||
+    process.env.hypertune_connect_EXPERIMENTATION_CONFIG ||
     null
   );
 }
@@ -56,9 +58,11 @@ export function getExperimentationConfig(): string | null {
  */
 export function getHypertuneConfigKey(): string {
   return (
+    process.env.EDGE_CONFIG_HYPERTUNE_ITEM_KEY ||
     process.env.EXPERIMENTATION_CONFIG_ITEM_KEY ||
     process.env.drsayuj_EXPERIMENTATION_CONFIG_ITEM_KEY ||
-    'hypertune_7233'
+    process.env.hypertune_connect_EXPERIMENTATION_CONFIG_ITEM_KEY ||
+    'hypertune_7808'
   );
 }
 
