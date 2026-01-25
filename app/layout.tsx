@@ -36,6 +36,7 @@ import ClientAnalytics from "./_components/ClientAnalytics";
 import GoogleAnalytics from "../src/components/GoogleAnalytics";
 import DynamicStickyCTA from "./_components/DynamicStickyCTA";
 import FloatingChatWidget from "./_components/DynamicFloatingChatWidget";
+import FlagValuesEmitter from "./_components/FlagValuesEmitter";
 import HypertuneProvider from "./providers/hypertune-provider";
 import { SITE_URL } from "../src/lib/seo";
 
@@ -179,6 +180,7 @@ export default function RootLayout({
         <Header />
         <TrustStrip />
         <HypertuneProvider>
+          <FlagValuesEmitter />
           <main id="main-content" tabIndex={-1} role="main">
             {children}
           </main>

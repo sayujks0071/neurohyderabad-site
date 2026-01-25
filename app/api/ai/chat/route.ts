@@ -3,6 +3,7 @@ import { NextRequest } from 'next/server';
 import { rateLimit } from '../../../../src/lib/rate-limit';
 import { getTextModel, hasAIConfig } from '@/src/lib/ai/gateway';
 import { DR_SAYUJ_SYSTEM_PROMPT } from '@/src/lib/ai/prompts';
+import { getDefaultFlagValues, reportFlagValues } from '@/src/lib/flags';
 
 /**
  * Streaming Chat API using Vercel AI SDK
@@ -41,6 +42,8 @@ export async function POST(request: NextRequest) {
         { status: 500, headers: { 'Content-Type': 'application/json' } }
       );
     }
+
+    reportFlagValues(getDefaultFlagValues());
 
     // Get relevant context from MCP/Codex CLI (replaces Gemini File API)
     // Use Promise.race with timeout to prevent blocking
@@ -125,7 +128,6 @@ export async function POST(request: NextRequest) {
         model: getTextModel(),
         messages,
         temperature: 0.7,
-        maxOutputTokens: 2000, // Limit response length
       });
 
       // Return streaming response
