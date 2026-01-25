@@ -78,17 +78,27 @@ export async function POST(request: NextRequest) {
       
       if (mcpResponse.ok) {
         const mcpData = await mcpResponse.json();
-        const medicalText = mcpData.result?.content?.[0]?.text || '';
-        const sources = mcpData.result?.metadata?.sources || [];
         
-        if (medicalText) {
-          medicalContext = `\n\nRELEVANT MEDICAL INFORMATION FROM OUR DOCUMENTS:\n${medicalText}\n`;
-          medicalSources = sources;
+        // Check for MCP errors
+        if (mcpData.error) {
+          console.warn('MCP returned error:', mcpData.error);
+        } else if (mcpData.result) {
+          const medicalText = mcpData.result?.content?.[0]?.text || '';
+          const sources = mcpData.result?.metadata?.sources || [];
           
-          if (medicalSources.length > 0) {
-            medicalContext += `\nSources: ${medicalSources.map((s: any) => s.fileName || s.uri || s).join(', ')}\n`;
+          if (medicalText && medicalText !== 'No specific match found.') {
+            medicalContext = `\n\nRELEVANT MEDICAL INFORMATION FROM OUR DOCUMENTS:\n${medicalText}\n`;
+            medicalSources = sources;
+            
+            if (medicalSources.length > 0) {
+              medicalContext += `\nSources: ${medicalSources.map((s: any) => s.fileName || s.uri || s).join(', ')}\n`;
+            }
           }
         }
+      } else {
+        // Log non-OK responses but don't fail
+        const errorText = await mcpResponse.text().catch(() => 'Unknown error');
+        console.warn('MCP response not OK:', mcpResponse.status, errorText);
       }
     } catch (error) {
       // Non-fatal: continue without context if MCP fails or times out
@@ -109,18 +119,32 @@ export async function POST(request: NextRequest) {
     ];
 
     // Use AI SDK's streamText with the configured model
-    const result = streamText({
-      model: getTextModel(),
-      messages,
-      temperature: 0.7,
-    });
+    // Wrap in try-catch to handle streamText errors gracefully
+    try {
+      const result = streamText({
+        model: getTextModel(),
+        messages,
+        temperature: 0.7,
+        maxTokens: 2000, // Limit response length
+      });
 
-    // Return streaming response
-    return result.toTextStreamResponse({
-      headers: {
-        'X-Sources': medicalSources.length > 0 ? JSON.stringify(medicalSources) : '',
-      },
-    });
+      // Return streaming response
+      return result.toTextStreamResponse({
+        headers: {
+          'X-Sources': medicalSources.length > 0 ? JSON.stringify(medicalSources) : '',
+        },
+      });
+    } catch (streamError) {
+      console.error('streamText error:', streamError);
+      // Return a non-streaming error response
+      return new Response(
+        JSON.stringify({ 
+          error: 'Streaming error',
+          message: "I'm having trouble generating a response right now. Please try again or call +91-9778280044 for immediate assistance."
+        }),
+        { status: 500, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
 
   } catch (error) {
     console.error('Error processing AI chat request:', error);

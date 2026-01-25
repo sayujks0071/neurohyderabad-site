@@ -122,24 +122,49 @@ async function handleCallTool(name: string, args: any, id: any) {
   try {
     switch (name) {
       case 'get_medical_info':
-        const geminiResponse = await fetch(`${baseUrl}/api/gemini-files/search`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            query: args.query,
-            searchType: 'medical',
-            maxResults: 3
-          })
-        });
-        const geminiData = await geminiResponse.json();
-        return NextResponse.json({
-          jsonrpc: '2.0',
-          id,
-          result: {
-            content: [{ type: 'text', text: geminiData.answer || 'No specific match found.' }],
-            metadata: { sources: geminiData.sources || [] }
+        try {
+          // Add timeout to prevent hanging
+          const timeoutPromise = new Promise<never>((_, reject) => 
+            setTimeout(() => reject(new Error('Gemini search timeout')), 4000)
+          );
+          
+          const geminiFetch = fetch(`${baseUrl}/api/gemini-files/search`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              query: args.query,
+              searchType: 'medical',
+              maxResults: 3
+            })
+          });
+          
+          const geminiResponse = await Promise.race([geminiFetch, timeoutPromise]);
+          
+          if (!geminiResponse.ok) {
+            throw new Error(`Gemini API returned ${geminiResponse.status}`);
           }
-        });
+          
+          const geminiData = await geminiResponse.json();
+          return NextResponse.json({
+            jsonrpc: '2.0',
+            id,
+            result: {
+              content: [{ type: 'text', text: geminiData.answer || 'No specific match found.' }],
+              metadata: { sources: geminiData.sources || [] }
+            }
+          });
+        } catch (error) {
+          // Return a graceful fallback instead of failing
+          console.warn('MCP get_medical_info error:', error instanceof Error ? error.message : error);
+          return NextResponse.json({
+            jsonrpc: '2.0',
+            id,
+            result: {
+              content: [{ type: 'text', text: 'Medical information search is temporarily unavailable. Please contact the clinic directly for detailed information.' }],
+              metadata: { sources: [] }
+            }
+          });
+        }
 
       case 'book_appointment':
         return NextResponse.json({
