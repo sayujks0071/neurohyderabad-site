@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { redirect } from 'next/navigation';
+import { permanentRedirect } from 'next/navigation';
 
 export const metadata: Metadata = {
   title: 'Neurosurgeon Near Jubilee Hills, Hyderabad | Dr. Sayuj Krishnan',
@@ -11,5 +11,5 @@ export const metadata: Metadata = {
 
 export default function NeurosurgeonNearJubileeHillsPage() {
   // Redirect to the correct page
-  redirect('/locations/brain-spine-surgeon-jubilee-hills');
+  permanentRedirect('/locations/brain-spine-surgeon-jubilee-hills');
 }

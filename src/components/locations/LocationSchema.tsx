@@ -30,6 +30,7 @@ export const LocationSchema: React.FC<LocationSchemaProps> = ({
   // Note: Physician Schema is injected globally by RootLayout via <PhysicianSchema />.
   // We do not duplicate it here to avoid conflicting entities.
   // We only generate MedicalClinic (linked to Physician via department) and Breadcrumb/FAQ.
+  // This ensures a clean separation: Physician (Global) vs MedicalClinic (Local).
 
   // 1. MedicalClinic / LocalBusiness Schema
   const cleanSlug = location.slug.startsWith('/') ? location.slug.slice(1) : location.slug;
