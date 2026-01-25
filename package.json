@@ -28,6 +28,7 @@
     "gsc:submit-all": "npx tsx scripts/submit-all-sitemaps.ts",
     "gsc:index": "npx tsx scripts/google-seo-automation.ts --index",
     "gsc:index-priority": "npx tsx scripts/index-priority-urls.ts",
+    "gsc:index-all": "npx tsx scripts/submit-all-urls.ts",
     "jules:weekly-seo": "npx tsx scripts/jules-weekly-seo-automation.ts",
     "jules:test": "npx tsx scripts/test-jules-api.ts",
     "analytics:bigquery-insights": "npx tsx scripts/ga4-bigquery-insights.ts",
