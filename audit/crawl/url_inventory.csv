@@ -1,207 +1,129 @@
-url,status_code,canonical,robots_meta,title,meta_description,h1,word_count,page_type,inlinks_count
-"https://www.drsayuj.info/","200","https://www.drsayuj.info/","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Home","N/A"
-"https://www.drsayuj.info/about","200","https://www.drsayuj.info/about","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Other","N/A"
-"https://www.drsayuj.info/best-neurosurgeon-in-hyderabad","200","https://www.drsayuj.info/best-neurosurgeon-in-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Location","N/A"
-"https://www.drsayuj.info/blog","200","https://www.drsayuj.info/blog","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Other","N/A"
-"https://www.drsayuj.info/blog/acute-back-pain-emergency-signs","200","https://www.drsayuj.info/blog/acute-back-pain-emergency-signs","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/awake-craniotomy-brain-tumor-guide","200","https://www.drsayuj.info/blog/awake-craniotomy-brain-tumor-guide","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/awake-craniotomy-guide","200","https://www.drsayuj.info/blog/awake-craniotomy-guide","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/awake-spine-surgery-vs-general-anesthesia-guide","200","https://www.drsayuj.info/blog/awake-spine-surgery-vs-general-anesthesia-guide","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/awake-vs-general-anesthesia-spine-surgery","200","https://www.drsayuj.info/blog/awake-vs-general-anesthesia-spine-surgery","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/brain-tumor-surgery-cost-hyderabad","200","https://www.drsayuj.info/blog/brain-tumor-surgery-cost-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/cauda-equina-syndrome-warning-signs-hyderabad","200","https://www.drsayuj.info/blog/cauda-equina-syndrome-warning-signs-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/cervical-radiculopathy-arm-pain-hyderabad","200","https://www.drsayuj.info/blog/cervical-radiculopathy-arm-pain-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/cervical-spondylosis-neck-pain-hyderabad","200","https://www.drsayuj.info/blog/cervical-spondylosis-neck-pain-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/chronic-subdural-hematoma-symptoms-elderly","200","https://www.drsayuj.info/blog/chronic-subdural-hematoma-symptoms-elderly","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/cost-of-endoscopic-spine-surgery-hyderabad","200","https://www.drsayuj.info/blog/cost-of-endoscopic-spine-surgery-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/day-care-endoscopic-spine-surgery-eligibility","200","https://www.drsayuj.info/blog/day-care-endoscopic-spine-surgery-eligibility","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/day-care-spine-surgery-insurance-hyderabad","200","https://www.drsayuj.info/blog/day-care-spine-surgery-insurance-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/disc-replacement-vs-fusion","200","https://www.drsayuj.info/blog/disc-replacement-vs-fusion","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/does-endoscopic-spine-surgery-work-for-sciatica-hyderabad","200","https://www.drsayuj.info/blog/does-endoscopic-spine-surgery-work-for-sciatica-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/emergency-signs-need-neurosurgeon","200","https://www.drsayuj.info/blog/emergency-signs-need-neurosurgeon","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/endoscopic-cervical-spine-surgery-hyderabad","200","https://www.drsayuj.info/blog/endoscopic-cervical-spine-surgery-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/endoscopic-discectomy-cost-hyderabad","200","https://www.drsayuj.info/blog/endoscopic-discectomy-cost-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/endoscopic-spine-surgery-cost-hyderabad","200","https://www.drsayuj.info/blog/endoscopic-spine-surgery-cost-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/endoscopic-spine-surgery-recovery-timeline","200","https://www.drsayuj.info/blog/endoscopic-spine-surgery-recovery-timeline","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/endoscopic-surgery-success-stories-hyderabad","200","https://www.drsayuj.info/blog/endoscopic-surgery-success-stories-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/endoscopic-vs-microdiscectomy-hyderabad","200","https://www.drsayuj.info/blog/endoscopic-vs-microdiscectomy-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/endoscopic-vs-open-spine-surgery-comparison","200","https://www.drsayuj.info/blog/endoscopic-vs-open-spine-surgery-comparison","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/epilepsy-surgery-options-hyderabad","200","https://www.drsayuj.info/blog/epilepsy-surgery-options-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/exercises-after-spine-surgery","200","https://www.drsayuj.info/blog/exercises-after-spine-surgery","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/fusion-vs-disc-replacement-guide","200","https://www.drsayuj.info/blog/fusion-vs-disc-replacement-guide","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/head-injury-when-to-seek-help","200","https://www.drsayuj.info/blog/head-injury-when-to-seek-help","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/headache-vs-brain-tumor-warning-signs","200","https://www.drsayuj.info/blog/headache-vs-brain-tumor-warning-signs","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/herniated-disc-treatment-without-surgery","200","https://www.drsayuj.info/blog/herniated-disc-treatment-without-surgery","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/how-much-does-brain-surgery-cost-hyderabad","200","https://www.drsayuj.info/blog/how-much-does-brain-surgery-cost-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/how-to-choose-best-neurosurgeon-hyderabad","200","https://www.drsayuj.info/blog/how-to-choose-best-neurosurgeon-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/insurance-coverage-neurosurgery-india","200","https://www.drsayuj.info/blog/insurance-coverage-neurosurgery-india","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/l4-l5-disc-bulge-treatment-hyderabad","200","https://www.drsayuj.info/blog/l4-l5-disc-bulge-treatment-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/latest-advances-neurosurgery-2024","200","https://www.drsayuj.info/blog/latest-advances-neurosurgery-2024","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/life-after-brain-tumor-surgery","200","https://www.drsayuj.info/blog/life-after-brain-tumor-surgery","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/life-after-spinal-fusion-surgery-recovery-hyderabad","200","https://www.drsayuj.info/blog/life-after-spinal-fusion-surgery-recovery-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/lumbar-canal-stenosis-walking-pain-hyderabad","200","https://www.drsayuj.info/blog/lumbar-canal-stenosis-walking-pain-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/meningioma-brain-tumor-treatment-hyderabad","200","https://www.drsayuj.info/blog/meningioma-brain-tumor-treatment-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/microdiscectomy-vs-laminectomy-recovery-comparison","200","https://www.drsayuj.info/blog/microdiscectomy-vs-laminectomy-recovery-comparison","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/mvd-vs-radiosurgery-trigeminal-neuralgia","200","https://www.drsayuj.info/blog/mvd-vs-radiosurgery-trigeminal-neuralgia","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/navigation-guided-spine-surgery-benefits","200","https://www.drsayuj.info/blog/navigation-guided-spine-surgery-benefits","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/neuroplasticity-brain-recovery-hyderabad","200","https://www.drsayuj.info/blog/neuroplasticity-brain-recovery-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/normal-pressure-hydrocephalus-nph-symptoms-treatment-hyderabad","200","https://www.drsayuj.info/blog/normal-pressure-hydrocephalus-nph-symptoms-treatment-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/osteoporotic-spine-fracture-elderly-guide","200","https://www.drsayuj.info/blog/osteoporotic-spine-fracture-elderly-guide","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/patient-testimonials-spine-surgery","200","https://www.drsayuj.info/blog/patient-testimonials-spine-surgery","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/post-surgery-rehabilitation-guide","200","https://www.drsayuj.info/blog/post-surgery-rehabilitation-guide","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/preparing-for-neurosurgery-complete-guide","200","https://www.drsayuj.info/blog/preparing-for-neurosurgery-complete-guide","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/questions-to-ask-before-spine-surgery","200","https://www.drsayuj.info/blog/questions-to-ask-before-spine-surgery","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/return-to-work-after-endoscopic-discectomy-hyderabad","200","https://www.drsayuj.info/blog/return-to-work-after-endoscopic-discectomy-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/robotic-spine-surgery-hyderabad-2024","200","https://www.drsayuj.info/blog/robotic-spine-surgery-hyderabad-2024","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/sciatica-exercises-for-office-workers-hyderabad","200","https://www.drsayuj.info/blog/sciatica-exercises-for-office-workers-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/sciatica-pain-management-hyderabad","200","https://www.drsayuj.info/blog/sciatica-pain-management-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/sciatica-pain-relief-exercises-hyderabad","200","https://www.drsayuj.info/blog/sciatica-pain-relief-exercises-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/sciatica-vs-normal-back-pain-guide","200","https://www.drsayuj.info/blog/sciatica-vs-normal-back-pain-guide","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/second-opinion-brain-spine-surgery","200","https://www.drsayuj.info/blog/second-opinion-brain-spine-surgery","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/sleeping-positions-for-sciatica-relief-guide","200","https://www.drsayuj.info/blog/sleeping-positions-for-sciatica-relief-guide","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/spinal-fusion-cost-hyderabad","200","https://www.drsayuj.info/blog/spinal-fusion-cost-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/spinal-tuberculosis-symptoms-treatment-hyderabad","200","https://www.drsayuj.info/blog/spinal-tuberculosis-symptoms-treatment-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/spine-health-maintenance-hyderabad","200","https://www.drsayuj.info/blog/spine-health-maintenance-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/spine-surgery-cost-complete-guide-hyderabad","200","https://www.drsayuj.info/blog/spine-surgery-cost-complete-guide-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/spine-surgery-recovery-timeline-hyderabad","200","https://www.drsayuj.info/blog/spine-surgery-recovery-timeline-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/spondylolisthesis-vs-herniated-disc-difference","200","https://www.drsayuj.info/blog/spondylolisthesis-vs-herniated-disc-difference","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/trigeminal-neuralgia-treatment-options","200","https://www.drsayuj.info/blog/trigeminal-neuralgia-treatment-options","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/trigeminal-neuralgia-vs-tooth-pain-guide","200","https://www.drsayuj.info/blog/trigeminal-neuralgia-vs-tooth-pain-guide","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/types-of-spine-tumors-symptoms-guide","200","https://www.drsayuj.info/blog/types-of-spine-tumors-symptoms-guide","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/understanding-brain-mri-tumor-report-guide","200","https://www.drsayuj.info/blog/understanding-brain-mri-tumor-report-guide","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/understanding-mri-spine-report-guide","200","https://www.drsayuj.info/blog/understanding-mri-spine-report-guide","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/when-to-worry-about-back-pain-neurosurgeon-hyderabad","200","https://www.drsayuj.info/blog/when-to-worry-about-back-pain-neurosurgeon-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/blog/world-stroke-day-2025-hyderabad-stroke-code","200","https://www.drsayuj.info/blog/world-stroke-day-2025-hyderabad-stroke-code","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Blog","N/A"
-"https://www.drsayuj.info/brain-surgery","200","https://www.drsayuj.info/brain-surgery","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Other","N/A"
-"https://www.drsayuj.info/conditions","200","https://www.drsayuj.info/conditions","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Other","N/A"
-"https://www.drsayuj.info/conditions/acoustic-neuroma-treatment-hyderabad","200","https://www.drsayuj.info/conditions/acoustic-neuroma-treatment-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Condition","N/A"
-"https://www.drsayuj.info/conditions/brachial-plexus-injury-hyderabad","200","https://www.drsayuj.info/conditions/brachial-plexus-injury-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Condition","N/A"
-"https://www.drsayuj.info/conditions/brain-aneurysm-treatment-hyderabad","200","https://www.drsayuj.info/conditions/brain-aneurysm-treatment-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Condition","N/A"
-"https://www.drsayuj.info/conditions/brain-bleed-evacuation-hyderabad","200","https://www.drsayuj.info/conditions/brain-bleed-evacuation-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Condition","N/A"
-"https://www.drsayuj.info/conditions/brain-tumor-surgery-hyderabad","200","https://www.drsayuj.info/conditions/brain-tumor-surgery-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Condition","N/A"
-"https://www.drsayuj.info/conditions/carpal-tunnel-syndrome-hyderabad","200","https://www.drsayuj.info/conditions/carpal-tunnel-syndrome-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Condition","N/A"
-"https://www.drsayuj.info/conditions/cervical-myelopathy-decompression-hyderabad","200","https://www.drsayuj.info/conditions/cervical-myelopathy-decompression-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Condition","N/A"
-"https://www.drsayuj.info/conditions/cervical-radiculopathy-treatment-hyderabad","200","https://www.drsayuj.info/conditions/cervical-radiculopathy-treatment-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Condition","N/A"
-"https://www.drsayuj.info/conditions/chiari-malformation-hyderabad","200","https://www.drsayuj.info/conditions/chiari-malformation-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Condition","N/A"
-"https://www.drsayuj.info/conditions/chronic-back-pain-treatment-hyderabad","200","https://www.drsayuj.info/conditions/chronic-back-pain-treatment-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Condition","N/A"
-"https://www.drsayuj.info/conditions/cubital-tunnel-syndrome-hyderabad","200","https://www.drsayuj.info/conditions/cubital-tunnel-syndrome-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Condition","N/A"
-"https://www.drsayuj.info/conditions/degenerative-disc-disease-hyderabad","200","https://www.drsayuj.info/conditions/degenerative-disc-disease-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Condition","N/A"
-"https://www.drsayuj.info/conditions/epilepsy-surgery-candidate-hyderabad","200","https://www.drsayuj.info/conditions/epilepsy-surgery-candidate-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Condition","N/A"
-"https://www.drsayuj.info/conditions/facet-joint-syndrome-hyderabad","200","https://www.drsayuj.info/conditions/facet-joint-syndrome-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Condition","N/A"
-"https://www.drsayuj.info/conditions/facial-nerve-palsy-hyderabad","200","https://www.drsayuj.info/conditions/facial-nerve-palsy-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Condition","N/A"
-"https://www.drsayuj.info/conditions/failed-back-surgery-syndrome-hyderabad","200","https://www.drsayuj.info/conditions/failed-back-surgery-syndrome-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Condition","N/A"
-"https://www.drsayuj.info/conditions/glioma-treatment-hyderabad","200","https://www.drsayuj.info/conditions/glioma-treatment-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Condition","N/A"
-"https://www.drsayuj.info/conditions/herniated-disc-treatment-hyderabad","200","https://www.drsayuj.info/conditions/herniated-disc-treatment-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Condition","N/A"
-"https://www.drsayuj.info/conditions/hydrocephalus-treatment-hyderabad","200","https://www.drsayuj.info/conditions/hydrocephalus-treatment-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Condition","N/A"
-"https://www.drsayuj.info/conditions/kyphosis-treatment-hyderabad","200","https://www.drsayuj.info/conditions/kyphosis-treatment-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Condition","N/A"
-"https://www.drsayuj.info/conditions/meningioma-treatment-hyderabad","200","https://www.drsayuj.info/conditions/meningioma-treatment-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Condition","N/A"
-"https://www.drsayuj.info/conditions/neck-pain-treatment-hyderabad","200","https://www.drsayuj.info/conditions/neck-pain-treatment-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Condition","N/A"
-"https://www.drsayuj.info/conditions/neuropathic-pain-treatment-hyderabad","200","https://www.drsayuj.info/conditions/neuropathic-pain-treatment-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Condition","N/A"
-"https://www.drsayuj.info/conditions/osteoporotic-spine-fracture-hyderabad","200","https://www.drsayuj.info/conditions/osteoporotic-spine-fracture-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Condition","N/A"
-"https://www.drsayuj.info/conditions/peripheral-neuropathy-hyderabad","200","https://www.drsayuj.info/conditions/peripheral-neuropathy-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Condition","N/A"
-"https://www.drsayuj.info/conditions/pituitary-adenoma-hyderabad","200","https://www.drsayuj.info/conditions/pituitary-adenoma-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Condition","N/A"
-"https://www.drsayuj.info/conditions/radicular-pain-treatment-hyderabad","200","https://www.drsayuj.info/conditions/radicular-pain-treatment-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Condition","N/A"
-"https://www.drsayuj.info/conditions/sciatica-pain-treatment-hyderabad","200","https://www.drsayuj.info/conditions/sciatica-pain-treatment-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Condition","N/A"
-"https://www.drsayuj.info/conditions/scoliosis-treatment-hyderabad","200","https://www.drsayuj.info/conditions/scoliosis-treatment-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Condition","N/A"
-"https://www.drsayuj.info/conditions/slip-disc-treatment-hyderabad","200","https://www.drsayuj.info/conditions/slip-disc-treatment-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Condition","N/A"
-"https://www.drsayuj.info/conditions/spinal-stenosis-treatment-hyderabad","200","https://www.drsayuj.info/conditions/spinal-stenosis-treatment-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Condition","N/A"
-"https://www.drsayuj.info/conditions/spine-tumor-surgery-hyderabad","200","https://www.drsayuj.info/conditions/spine-tumor-surgery-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Condition","N/A"
-"https://www.drsayuj.info/conditions/spine-tumor-treatment-hyderabad","200","https://www.drsayuj.info/conditions/spine-tumor-treatment-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Condition","N/A"
-"https://www.drsayuj.info/conditions/spondylolisthesis-treatment-hyderabad","200","https://www.drsayuj.info/conditions/spondylolisthesis-treatment-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Condition","N/A"
-"https://www.drsayuj.info/conditions/trigeminal-neuralgia-treatment-hyderabad","200","https://www.drsayuj.info/conditions/trigeminal-neuralgia-treatment-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Condition","N/A"
-"https://www.drsayuj.info/contact","200","https://www.drsayuj.info/contact","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Other","N/A"
-"https://www.drsayuj.info/content-integrity","200","https://www.drsayuj.info/content-integrity","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Other","N/A"
-"https://www.drsayuj.info/cookies","200","https://www.drsayuj.info/cookies","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Other","N/A"
-"https://www.drsayuj.info/disclaimer","200","https://www.drsayuj.info/disclaimer","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Other","N/A"
-"https://www.drsayuj.info/editorial-policy","200","https://www.drsayuj.info/editorial-policy","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Other","N/A"
-"https://www.drsayuj.info/knowledge-base","200","https://www.drsayuj.info/knowledge-base","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Other","N/A"
-"https://www.drsayuj.info/locations","200","https://www.drsayuj.info/locations","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Other","N/A"
-"https://www.drsayuj.info/locations/banjara-hills","200","https://www.drsayuj.info/locations/banjara-hills","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Location","N/A"
-"https://www.drsayuj.info/locations/brain-spine-surgeon-banjara-hills","200","https://www.drsayuj.info/locations/brain-spine-surgeon-banjara-hills","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Location","N/A"
-"https://www.drsayuj.info/locations/brain-spine-surgeon-hitec-city","200","https://www.drsayuj.info/locations/brain-spine-surgeon-hitec-city","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Location","N/A"
-"https://www.drsayuj.info/locations/brain-spine-surgeon-jubilee-hills","200","https://www.drsayuj.info/locations/brain-spine-surgeon-jubilee-hills","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Location","N/A"
-"https://www.drsayuj.info/locations/hitech-city","200","https://www.drsayuj.info/locations/hitech-city","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Location","N/A"
-"https://www.drsayuj.info/locations/lb-nagar","200","https://www.drsayuj.info/locations/lb-nagar","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Location","N/A"
-"https://www.drsayuj.info/locations/malakpet","200","https://www.drsayuj.info/locations/malakpet","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Location","N/A"
-"https://www.drsayuj.info/locations/neurosurgeon-kondapur","200","https://www.drsayuj.info/locations/neurosurgeon-kondapur","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Location","N/A"
-"https://www.drsayuj.info/locations/neurosurgeon-kothapet","200","https://www.drsayuj.info/locations/neurosurgeon-kothapet","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Location","N/A"
-"https://www.drsayuj.info/locations/neurosurgeon-kukatpally","200","https://www.drsayuj.info/locations/neurosurgeon-kukatpally","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Location","N/A"
-"https://www.drsayuj.info/locations/neurosurgeon-manikonda","200","https://www.drsayuj.info/locations/neurosurgeon-manikonda","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Location","N/A"
-"https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills-faq","200","https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills-faq","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Location","N/A"
-"https://www.drsayuj.info/locations/neurosurgeon-near-kachiguda-faq","200","https://www.drsayuj.info/locations/neurosurgeon-near-kachiguda-faq","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Location","N/A"
-"https://www.drsayuj.info/locations/neurosurgeon-near-kondapur-faq","200","https://www.drsayuj.info/locations/neurosurgeon-near-kondapur-faq","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Location","N/A"
-"https://www.drsayuj.info/locations/neurosurgeon-nizampet","200","https://www.drsayuj.info/locations/neurosurgeon-nizampet","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Location","N/A"
-"https://www.drsayuj.info/locations/secunderabad","200","https://www.drsayuj.info/locations/secunderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Location","N/A"
-"https://www.drsayuj.info/media","200","https://www.drsayuj.info/media","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Other","N/A"
-"https://www.drsayuj.info/medical-disclaimer","200","https://www.drsayuj.info/medical-disclaimer","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Other","N/A"
-"https://www.drsayuj.info/neurosurgeon-banjara-hills","200","https://www.drsayuj.info/neurosurgeon-banjara-hills","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Location","N/A"
-"https://www.drsayuj.info/neurosurgeon-gachibowli","200","https://www.drsayuj.info/neurosurgeon-gachibowli","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Location","N/A"
-"https://www.drsayuj.info/neurosurgeon-hitech-city","200","https://www.drsayuj.info/neurosurgeon-hitech-city","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Location","N/A"
-"https://www.drsayuj.info/neurosurgeon-hyderabad","200","https://www.drsayuj.info/neurosurgeon-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Location","N/A"
-"https://www.drsayuj.info/neurosurgeon-jubilee-hills","200","https://www.drsayuj.info/neurosurgeon-jubilee-hills","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Location","N/A"
-"https://www.drsayuj.info/neurosurgeon-malakpet","200","https://www.drsayuj.info/neurosurgeon-malakpet","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Location","N/A"
-"https://www.drsayuj.info/neurosurgeon-secunderabad","200","https://www.drsayuj.info/neurosurgeon-secunderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Location","N/A"
-"https://www.drsayuj.info/patient-stories","200","https://www.drsayuj.info/patient-stories","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Other","N/A"
-"https://www.drsayuj.info/pediatric-neurosurgery","200","https://www.drsayuj.info/pediatric-neurosurgery","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Other","N/A"
-"https://www.drsayuj.info/privacy","200","https://www.drsayuj.info/privacy","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Other","N/A"
-"https://www.drsayuj.info/research","200","https://www.drsayuj.info/research","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Other","N/A"
-"https://www.drsayuj.info/services","200","https://www.drsayuj.info/services","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Other","N/A"
-"https://www.drsayuj.info/services/acoustic-neuroma-surgery-hyderabad","200","https://www.drsayuj.info/services/acoustic-neuroma-surgery-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/awake-craniotomy-hyderabad","200","https://www.drsayuj.info/services/awake-craniotomy-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/awake-spine-surgery-hyderabad","200","https://www.drsayuj.info/services/awake-spine-surgery-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/brachial-plexus-surgery-hyderabad","200","https://www.drsayuj.info/services/brachial-plexus-surgery-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/brain-aneurysm-surgery-hyderabad","200","https://www.drsayuj.info/services/brain-aneurysm-surgery-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/brain-surgery-cost-hyderabad","200","https://www.drsayuj.info/services/brain-surgery-cost-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad","200","https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/carpal-tunnel-surgery-hyderabad","200","https://www.drsayuj.info/services/carpal-tunnel-surgery-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/cervical-endoscopic-spine-surgery-hyderabad","200","https://www.drsayuj.info/services/cervical-endoscopic-spine-surgery-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/cervical-spine-surgery-hyderabad","200","https://www.drsayuj.info/services/cervical-spine-surgery-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/compare-neurosurgeons-hyderabad","200","https://www.drsayuj.info/services/compare-neurosurgeons-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/cooled-radiofrequency-ablation-hyderabad","200","https://www.drsayuj.info/services/cooled-radiofrequency-ablation-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/deep-brain-stimulation-hyderabad","200","https://www.drsayuj.info/services/deep-brain-stimulation-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/disc-replacement-surgery-hyderabad","200","https://www.drsayuj.info/services/disc-replacement-surgery-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/dr-sayuj-vs-apollo-neuro-icu","200","https://www.drsayuj.info/services/dr-sayuj-vs-apollo-neuro-icu","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/emergency-neurosurgery-hyderabad","200","https://www.drsayuj.info/services/emergency-neurosurgery-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/endoscopic-discectomy-hyderabad","200","https://www.drsayuj.info/services/endoscopic-discectomy-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad","200","https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/endoscopic-surgery-cost-calculator","200","https://www.drsayuj.info/services/endoscopic-surgery-cost-calculator","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/epilepsy-surgery-hyderabad","200","https://www.drsayuj.info/services/epilepsy-surgery-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/hydrocephalus-treatment-hyderabad","200","https://www.drsayuj.info/services/hydrocephalus-treatment-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/kims-spine-surgery-second-opinion","200","https://www.drsayuj.info/services/kims-spine-surgery-second-opinion","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/kyphoplasty-vertebroplasty-hyderabad","200","https://www.drsayuj.info/services/kyphoplasty-vertebroplasty-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/laser-spine-surgery-hyderabad","200","https://www.drsayuj.info/services/laser-spine-surgery-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/lumbar-laminectomy-surgery-hyderabad","200","https://www.drsayuj.info/services/lumbar-laminectomy-surgery-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/lumbar-spine-surgery-hyderabad","200","https://www.drsayuj.info/services/lumbar-spine-surgery-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/microscopic-spine-surgery-hyderabad","200","https://www.drsayuj.info/services/microscopic-spine-surgery-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/minimally-invasive-spine-surgery","200","https://www.drsayuj.info/services/minimally-invasive-spine-surgery","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/navigation-guided-surgery-hyderabad","200","https://www.drsayuj.info/services/navigation-guided-surgery-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/nerve-decompression-surgery-hyderabad","200","https://www.drsayuj.info/services/nerve-decompression-surgery-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/peripheral-nerve-surgery","200","https://www.drsayuj.info/services/peripheral-nerve-surgery","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/peripheral-nerve-surgery-hyderabad","200","https://www.drsayuj.info/services/peripheral-nerve-surgery-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/pituitary-tumor-surgery-hyderabad","200","https://www.drsayuj.info/services/pituitary-tumor-surgery-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/robotic-spine-surgery-hyderabad","200","https://www.drsayuj.info/services/robotic-spine-surgery-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/scoliosis-surgery-hyderabad","200","https://www.drsayuj.info/services/scoliosis-surgery-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/slip-disc-surgery-cost-hyderabad","200","https://www.drsayuj.info/services/slip-disc-surgery-cost-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/spinal-decompression-hyderabad","200","https://www.drsayuj.info/services/spinal-decompression-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/spinal-fusion","200","https://www.drsayuj.info/services/spinal-fusion","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/spinal-fusion-surgery-hyderabad","200","https://www.drsayuj.info/services/spinal-fusion-surgery-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/spine-fracture-surgery-hyderabad","200","https://www.drsayuj.info/services/spine-fracture-surgery-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/spine-surgery-cost-hyderabad","200","https://www.drsayuj.info/services/spine-surgery-cost-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/spine-surgery-hyderabad","200","https://www.drsayuj.info/services/spine-surgery-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/trauma-neurosurgery-hyderabad","200","https://www.drsayuj.info/services/trauma-neurosurgery-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/trigeminal-neuralgia-surgery-hyderabad","200","https://www.drsayuj.info/services/trigeminal-neuralgia-surgery-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/services/uniportal-endoscopic-spine-surgery-hyderabad","200","https://www.drsayuj.info/services/uniportal-endoscopic-spine-surgery-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Service","N/A"
-"https://www.drsayuj.info/spine-surgery","200","https://www.drsayuj.info/spine-surgery","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Other","N/A"
-"https://www.drsayuj.info/stories/endoscopic-discectomy-same-day-hyderabad","200","https://www.drsayuj.info/stories/endoscopic-discectomy-same-day-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Other","N/A"
-"https://www.drsayuj.info/stories/endoscopic-ulbd-stenosis-hyderabad","200","https://www.drsayuj.info/stories/endoscopic-ulbd-stenosis-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Other","N/A"
-"https://www.drsayuj.info/stories/mvd-trigeminal-neuralgia-hyderabad","200","https://www.drsayuj.info/stories/mvd-trigeminal-neuralgia-hyderabad","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Other","N/A"
-"https://www.drsayuj.info/symptoms-checker","200","https://www.drsayuj.info/symptoms-checker","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Other","N/A"
-"https://www.drsayuj.info/symptoms/back-pain-red-flags","200","https://www.drsayuj.info/symptoms/back-pain-red-flags","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Other","N/A"
-"https://www.drsayuj.info/symptoms/numbness-tingling-hands-feet","200","https://www.drsayuj.info/symptoms/numbness-tingling-hands-feet","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Other","N/A"
-"https://www.drsayuj.info/symptoms/pain-on-top-of-head-causes","200","https://www.drsayuj.info/symptoms/pain-on-top-of-head-causes","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Other","N/A"
-"https://www.drsayuj.info/symptoms/severe-headache-warning-signs","200","https://www.drsayuj.info/symptoms/severe-headache-warning-signs","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Other","N/A"
-"https://www.drsayuj.info/symptoms/signs-of-brain-tumor","200","https://www.drsayuj.info/symptoms/signs-of-brain-tumor","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Other","N/A"
-"https://www.drsayuj.info/symptoms/when-to-see-neurosurgeon","200","https://www.drsayuj.info/symptoms/when-to-see-neurosurgeon","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Other","N/A"
-"https://www.drsayuj.info/technology-facilities","200","https://www.drsayuj.info/technology-facilities","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Other","N/A"
-"https://www.drsayuj.info/technology-innovation","200","https://www.drsayuj.info/technology-innovation","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Other","N/A"
-"https://www.drsayuj.info/terms","200","https://www.drsayuj.info/terms","index,follow","N/A (Static Scan)","N/A (Static Scan)","N/A (Static Scan)","N/A","Other","N/A"
+URL,Source,Type
+http://localhost:3000/about,Sitemap,Indexable
+http://localhost:3000/appointments,Sitemap,Indexable
+http://localhost:3000/best-neurosurgeon-in-hyderabad,Sitemap,Indexable
+http://localhost:3000/blog,Sitemap,Indexable
+http://localhost:3000/blog/awake-craniotomy-guide,Sitemap,Indexable
+http://localhost:3000/blog/brain-tumor-surgery-cost-hyderabad,Sitemap,Indexable
+http://localhost:3000/blog/day-care-endoscopic-spine-surgery-eligibility,Sitemap,Indexable
+http://localhost:3000/blog/day-care-spine-surgery-insurance-hyderabad,Sitemap,Indexable
+http://localhost:3000/blog/disc-replacement-vs-fusion,Sitemap,Indexable
+http://localhost:3000/blog/does-endoscopic-spine-surgery-work-for-sciatica-hyderabad,Sitemap,Indexable
+http://localhost:3000/blog/endoscopic-cervical-spine-surgery-hyderabad,Sitemap,Indexable
+http://localhost:3000/blog/endoscopic-discectomy-cost-hyderabad,Sitemap,Indexable
+http://localhost:3000/blog/endoscopic-spine-surgery-cost-hyderabad,Sitemap,Indexable
+http://localhost:3000/blog/endoscopic-vs-microdiscectomy-hyderabad,Sitemap,Indexable
+http://localhost:3000/blog/how-much-does-brain-surgery-cost-hyderabad,Sitemap,Indexable
+http://localhost:3000/blog/mvd-vs-radiosurgery-trigeminal-neuralgia,Sitemap,Indexable
+http://localhost:3000/blog/return-to-work-after-endoscopic-discectomy-hyderabad,Sitemap,Indexable
+http://localhost:3000/blog/sciatica-pain-management-hyderabad,Sitemap,Indexable
+http://localhost:3000/blog/spinal-fusion-cost-hyderabad,Sitemap,Indexable
+http://localhost:3000/blog/spine-health-maintenance-hyderabad,Sitemap,Indexable
+http://localhost:3000/blog/spine-surgery-recovery-timeline-hyderabad,Sitemap,Indexable
+http://localhost:3000/blog/when-to-worry-about-back-pain-neurosurgeon-hyderabad,Sitemap,Indexable
+http://localhost:3000/blog/world-stroke-day-2025-hyderabad-stroke-code,Sitemap,Indexable
+http://localhost:3000/brain-surgery,Sitemap,Indexable
+http://localhost:3000/conditions,Sitemap,Indexable
+http://localhost:3000/conditions/brain-bleed-evacuation-hyderabad,Sitemap,Indexable
+http://localhost:3000/conditions/brain-tumor-surgery-hyderabad,Sitemap,Indexable
+http://localhost:3000/conditions/cervical-myelopathy-decompression-hyderabad,Sitemap,Indexable
+http://localhost:3000/conditions/cervical-radiculopathy-treatment-hyderabad,Sitemap,Indexable
+http://localhost:3000/conditions/osteoporotic-spine-fracture-hyderabad,Sitemap,Indexable
+http://localhost:3000/conditions/sciatica-pain-treatment-hyderabad,Sitemap,Indexable
+http://localhost:3000/conditions/slip-disc-treatment-hyderabad,Sitemap,Indexable
+http://localhost:3000/conditions/spinal-stenosis-treatment-hyderabad,Sitemap,Indexable
+http://localhost:3000/conditions/spine-tumor-surgery-hyderabad,Sitemap,Indexable
+http://localhost:3000/conditions/spondylolisthesis-treatment-hyderabad,Sitemap,Indexable
+http://localhost:3000/conditions/trigeminal-neuralgia-treatment-hyderabad,Sitemap,Indexable
+http://localhost:3000/contact,Sitemap,Indexable
+http://localhost:3000/content-integrity,Sitemap,Indexable
+http://localhost:3000/cookies,Sitemap,Indexable
+http://localhost:3000/disclaimer,Sitemap,Indexable
+http://localhost:3000/editorial-policy,Sitemap,Indexable
+http://localhost:3000/knowledge-base,Sitemap,Indexable
+http://localhost:3000/locations,Sitemap,Indexable
+http://localhost:3000/locations/brain-spine-surgeon-banjara-hills,Sitemap,Indexable
+http://localhost:3000/locations/brain-spine-surgeon-hitec-city,Sitemap,Indexable
+http://localhost:3000/locations/brain-spine-surgeon-jubilee-hills,Sitemap,Indexable
+http://localhost:3000/locations/lb-nagar,Sitemap,Indexable
+http://localhost:3000/locations/neurosurgeon-kondapur,Sitemap,Indexable
+http://localhost:3000/locations/neurosurgeon-kothapet,Sitemap,Indexable
+http://localhost:3000/locations/neurosurgeon-kukatpally,Sitemap,Indexable
+http://localhost:3000/locations/neurosurgeon-manikonda,Sitemap,Indexable
+http://localhost:3000/locations/neurosurgeon-nizampet,Sitemap,Indexable
+http://localhost:3000/media,Sitemap,Indexable
+http://localhost:3000/medical-disclaimer,Sitemap,Indexable
+http://localhost:3000/neurosurgeon-banjara-hills,Sitemap,Indexable
+http://localhost:3000/neurosurgeon-gachibowli,Sitemap,Indexable
+http://localhost:3000/neurosurgeon-hitech-city,Sitemap,Indexable
+http://localhost:3000/neurosurgeon-hyderabad,Sitemap,Indexable
+http://localhost:3000/neurosurgeon-jubilee-hills,Sitemap,Indexable
+http://localhost:3000/neurosurgeon-malakpet,Sitemap,Indexable
+http://localhost:3000/neurosurgeon-secunderabad,Sitemap,Indexable
+http://localhost:3000/patient-stories,Sitemap,Indexable
+http://localhost:3000/pediatric-neurosurgery,Sitemap,Indexable
+http://localhost:3000/privacy,Sitemap,Indexable
+http://localhost:3000/research,Sitemap,Indexable
+http://localhost:3000/services,Sitemap,Indexable
+http://localhost:3000/services/awake-spine-surgery-hyderabad,Sitemap,Indexable
+http://localhost:3000/services/brain-tumor-surgery-hyderabad,Sitemap,Indexable
+http://localhost:3000/services/cervical-endoscopic-spine-surgery-hyderabad,Sitemap,Indexable
+http://localhost:3000/services/compare-neurosurgeons-hyderabad,Sitemap,Indexable
+http://localhost:3000/services/cooled-radiofrequency-ablation-hyderabad,Sitemap,Indexable
+http://localhost:3000/services/dr-sayuj-vs-apollo-neuro-icu,Sitemap,Indexable
+http://localhost:3000/services/endoscopic-discectomy-hyderabad,Sitemap,Indexable
+http://localhost:3000/services/endoscopic-spine-surgery-hyderabad,Sitemap,Indexable
+http://localhost:3000/services/epilepsy-surgery-hyderabad,Sitemap,Indexable
+http://localhost:3000/services/kims-spine-surgery-second-opinion,Sitemap,Indexable
+http://localhost:3000/services/lumbar-laminectomy-surgery-hyderabad,Sitemap,Indexable
+http://localhost:3000/services/minimally-invasive-spine-surgery,Sitemap,Indexable
+http://localhost:3000/services/peripheral-nerve-surgery,Sitemap,Indexable
+http://localhost:3000/services/peripheral-nerve-surgery-hyderabad,Sitemap,Indexable
+http://localhost:3000/services/slip-disc-surgery-cost-hyderabad,Sitemap,Indexable
+http://localhost:3000/services/spinal-fusion,Sitemap,Indexable
+http://localhost:3000/services/spinal-fusion-surgery-hyderabad,Sitemap,Indexable
+http://localhost:3000/services/spine-surgery-cost-hyderabad,Sitemap,Indexable
+http://localhost:3000/services/spine-surgery-hyderabad,Sitemap,Indexable
+http://localhost:3000/services/uniportal-endoscopic-spine-surgery-hyderabad,Sitemap,Indexable
+http://localhost:3000/spine-surgery,Sitemap,Indexable
+http://localhost:3000/stories/endoscopic-discectomy-same-day-hyderabad,Sitemap,Indexable
+http://localhost:3000/stories/endoscopic-ulbd-stenosis-hyderabad,Sitemap,Indexable
+http://localhost:3000/stories/mvd-trigeminal-neuralgia-hyderabad,Sitemap,Indexable
+http://localhost:3000/symptoms-checker,Sitemap,Indexable
+http://localhost:3000/symptoms/pain-on-top-of-head-causes,Sitemap,Indexable
+http://localhost:3000/symptoms/signs-of-brain-tumor,Sitemap,Indexable
+http://localhost:3000/technology-facilities,Sitemap,Indexable
+http://localhost:3000/technology-innovation,Sitemap,Indexable
+http://localhost:3000/terms,Sitemap,Indexable
+http://localhost:3000/admin/appointments,FileSystem,Orphan
+http://localhost:3000/admin/login,FileSystem,Orphan
+http://localhost:3000/admin,FileSystem,Orphan
+http://localhost:3000/ai-chat,FileSystem,Orphan
+http://localhost:3000/appointments/thank-you,FileSystem,Orphan
+http://localhost:3000/auth/callback,FileSystem,Orphan
+http://localhost:3000/brain-tumor-surgery,FileSystem,Orphan
+http://localhost:3000/conditions/degenerative-disc-disease-treatment-hyderabad,FileSystem,Orphan
+http://localhost:3000/disease-guides/degenerative-disc-disease,FileSystem,Orphan
+http://localhost:3000/disease-guides,FileSystem,Orphan
+http://localhost:3000/drafts,FileSystem,Orphan
+http://localhost:3000/emergency-rehabilitation,FileSystem,Orphan
+http://localhost:3000/force-cache-clear,FileSystem,Orphan
+http://localhost:3000/german-training,FileSystem,Orphan
+http://localhost:3000/locations/banjara-hills,FileSystem,Orphan
+http://localhost:3000/locations/hitech-city,FileSystem,Orphan
+http://localhost:3000/locations/malakpet,FileSystem,Orphan
+http://localhost:3000/locations/neurosurgeon-near-jubilee-hills,FileSystem,Orphan
+http://localhost:3000/locations/neurosurgeon-near-jubilee-hills-faq,FileSystem,Orphan
+http://localhost:3000/locations/neurosurgeon-near-kachiguda-faq,FileSystem,Orphan
+http://localhost:3000/locations/neurosurgeon-near-kondapur-faq,FileSystem,Orphan
+http://localhost:3000/locations/secunderabad,FileSystem,Orphan
+http://localhost:3000/near,FileSystem,Orphan
+http://localhost:3000/,FileSystem,Orphan
+http://localhost:3000/services/cervical-disc-replacement-hyderabad,FileSystem,Orphan
+http://localhost:3000/services/kyphoplasty-vertebroplasty-hyderabad,FileSystem,Orphan
+http://localhost:3000/services/microdiscectomy-surgery-cost-hyderabad,FileSystem,Orphan
+http://localhost:3000/services/robotic-spine-surgery-hyderabad,FileSystem,Orphan
+http://localhost:3000/services/spinal-decompression-surgery-hyderabad,FileSystem,Orphan
+http://localhost:3000/specializations,FileSystem,Orphan
+http://localhost:3000/symptoms/back-pain,FileSystem,Orphan
+http://localhost:3000/utm-links,FileSystem,Orphan

@@ -15,7 +15,7 @@ import CostTransparencySection from '@/src/components/CostTransparencySection';
 import PatientJourneySection from '@/src/components/PatientJourneySection';
 
 const baseMetadata = makeMetadata({
-  title: 'Spinal Fusion Surgery in Hyderabad | TLIF & Fixation Surgery',
+  title: 'Spinal Fusion Surgery Hyderabad',
   description: 'Expert spinal fusion surgery (TLIF/PLIF) by Dr. Sayuj Krishnan. Stabilization for spondylolisthesis and fractures. Minimally invasive screw fixation.',
   canonicalPath: '/services/spinal-fusion-surgery-hyderabad',
 });

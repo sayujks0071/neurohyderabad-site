@@ -1,0 +1,20 @@
+URL,Issue Type,Severity,Details
+http://localhost:3000/services/awake-spine-surgery-hyderabad,Long Title,Low,78 chars
+http://localhost:3000/services/brain-tumor-surgery-hyderabad,Long Title,Low,80 chars
+http://localhost:3000/services/cervical-endoscopic-spine-surgery-hyderabad,Long Title,Low,81 chars
+http://localhost:3000/services/compare-neurosurgeons-hyderabad,Long Title,Low,81 chars
+http://localhost:3000/services/cooled-radiofrequency-ablation-hyderabad,Long Title,Low,81 chars
+http://localhost:3000/conditions/brain-bleed-evacuation-hyderabad,Long Title,Low,119 chars
+http://localhost:3000/conditions/brain-bleed-evacuation-hyderabad,Long Description,Low,211 chars
+http://localhost:3000/conditions/brain-tumor-surgery-hyderabad,Long Title,Low,79 chars
+http://localhost:3000/conditions/cervical-myelopathy-decompression-hyderabad,Long Title,Low,131 chars
+http://localhost:3000/conditions/cervical-myelopathy-decompression-hyderabad,Long Description,Low,203 chars
+http://localhost:3000/conditions/cervical-radiculopathy-treatment-hyderabad,Long Title,Low,87 chars
+http://localhost:3000/conditions/osteoporotic-spine-fracture-hyderabad,Long Title,Low,81 chars
+http://localhost:3000/locations/brain-spine-surgeon-banjara-hills,Long Title,Low,72 chars
+http://localhost:3000/locations/brain-spine-surgeon-jubilee-hills,Long Title,Low,72 chars
+http://localhost:3000/locations/lb-nagar,Long Title,Low,76 chars
+http://localhost:3000/locations/neurosurgeon-kondapur,Long Title,Low,78 chars
+http://localhost:3000/blog/brain-tumor-surgery-cost-hyderabad,Long Title,Low,77 chars
+http://localhost:3000/blog/day-care-endoscopic-spine-surgery-eligibility,Long Title,Low,81 chars
+http://localhost:3000/blog/day-care-spine-surgery-insurance-hyderabad,Long Title,Low,80 chars

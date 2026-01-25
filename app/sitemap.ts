@@ -43,6 +43,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/services/spinal-fusion',
     '/services/spine-surgery-hyderabad',
     '/services/uniportal-endoscopic-spine-surgery-hyderabad',
+    '/services/cervical-disc-replacement-hyderabad',
+    '/services/kyphoplasty-vertebroplasty-hyderabad',
+    '/services/microdiscectomy-surgery-cost-hyderabad',
+    '/services/robotic-spine-surgery-hyderabad',
+    '/services/spinal-decompression-surgery-hyderabad',
   ];
 
   const conditionPages = [
@@ -58,6 +63,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/conditions/sciatica-pain-treatment-hyderabad',
     '/conditions/spine-tumor-surgery-hyderabad',
     '/conditions/spondylolisthesis-treatment-hyderabad',
+    '/conditions/degenerative-disc-disease-treatment-hyderabad',
   ];
 
   const locationPages = [
@@ -78,6 +84,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/locations/neurosurgeon-kukatpally',
     '/locations/neurosurgeon-manikonda',
     '/locations/neurosurgeon-nizampet',
+    '/locations/banjara-hills',
+    '/locations/hitech-city',
+    '/locations/malakpet',
+    '/locations/secunderabad',
+    '/locations/neurosurgeon-near-jubilee-hills',
   ];
 
   const resourcePages = [
@@ -126,6 +137,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const symptomPages = [
     '/symptoms/signs-of-brain-tumor',
     '/symptoms/pain-on-top-of-head-causes',
+    '/symptoms/back-pain',
   ];
 
   const legalPages = [
