@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
+import { Loader2 } from 'lucide-react';
 import { useStatsigEvents } from '../../src/lib/statsig-events';
 
 interface Message {
@@ -153,7 +154,7 @@ export default function AIBookingAgent({ pageSlug, service }: AIBookingAgentProp
         return `Great! I have all the information I need. Let me summarize your appointment request and connect you with our scheduling team. One moment please...`;
 
       case 'confirmation':
-        return "Your appointment request has been submitted! Our coordinator will call you within one working day to confirm your appointment slot. Is there anything else I can help you with?";
+        return "Appointment request received. Please bring any MRI/CT scans with you. We will confirm via phone shortly. Is there anything else I can help you with?";
 
       default:
         return "I'm here to help you book an appointment with Dr. Sayuj Krishnan. How can I assist you today?";
@@ -365,9 +366,16 @@ This booking was created through our AI chat assistant.`;
             <button
               type="submit"
               disabled={!inputValue.trim() || isLoading}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center min-w-[80px] justify-center"
             >
-              Send
+              {isLoading ? (
+                <>
+                  <Loader2 className="w-4 h-4 animate-spin mr-1" />
+                  Sending...
+                </>
+              ) : (
+                'Send'
+              )}
             </button>
           </div>
         </form>

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
+import { Loader2 } from 'lucide-react';
 import { useStatsigEvents } from '../../src/lib/statsig-events';
 
 interface Message {
@@ -253,9 +254,16 @@ export default function OpenAIAgentsBooking({ pageSlug, service }: OpenAIAgentsB
             <button
               type="submit"
               disabled={!inputValue.trim() || isLoading}
-              className="px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center min-w-[80px] justify-center"
             >
-              Send
+              {isLoading ? (
+                <>
+                  <Loader2 className="w-4 h-4 animate-spin mr-1" />
+                  Sending...
+                </>
+              ) : (
+                'Send'
+              )}
             </button>
           </div>
         </form>
