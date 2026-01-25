@@ -11,6 +11,11 @@ export interface LocationGeo {
   longitude: number;
 }
 
+/**
+ * Single Source of Truth for Location Data
+ * This file centralizes all NAP (Name, Address, Phone) and location-specific data.
+ * It is used by LocationNAPCard, LocationSchema, and other components to ensure consistency.
+ */
 export interface LocationData {
   id: string;
   name: string; // The specific location name, e.g. "Dr. Sayuj Krishnan - Secunderabad"
