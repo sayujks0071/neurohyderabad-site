@@ -117,115 +117,47 @@ export default function FloatingChatWidget() {
         return;
       }
       
-      // Check if response is actually streaming
-      if (!response.body) {
-        const errorMessage: Message = {
-          id: (Date.now() + 1).toString(),
-          role: 'assistant',
-          content: 'No response body received from server. Please try again or call +91-9778280044.',
-        };
-        setMessages(prev => [...prev, errorMessage]);
-        setIsLoading(false);
-        return;
-      }
-      
-      // Check content type to ensure it's a stream
-      const contentType = response.headers.get('content-type');
-      if (contentType && !contentType.includes('text/plain') && !contentType.includes('text/event-stream')) {
-        console.warn('Unexpected content type:', contentType);
-        // Continue anyway - might still be a valid stream
+      // Try to get full response text first (more reliable than streaming in some browsers)
+      // This works because Vercel AI SDK's toTextStreamResponse() returns text/plain
+      let fullContent = '';
+
+      try {
+        // First, try to read the response as text (simpler and more reliable)
+        const textContent = await response.text();
+        console.log('[FloatingChatWidget] Response received:', textContent.substring(0, 100));
+
+        if (textContent && textContent.trim()) {
+          fullContent = textContent;
+        }
+      } catch (textError) {
+        console.warn('[FloatingChatWidget] Text read failed, trying stream:', textError);
+
+        // Fallback to streaming if text() fails
+        if (response.body) {
+          const reader = response.body.getReader();
+          const decoder = new TextDecoder();
+
+          try {
+            while (true) {
+              const { done, value } = await reader.read();
+              if (done) break;
+              const chunk = decoder.decode(value, { stream: true });
+              fullContent += chunk;
+            }
+          } catch (streamError) {
+            console.error('[FloatingChatWidget] Stream error:', streamError);
+          }
+        }
       }
 
-      // Handle streaming response
-      const reader = response.body?.getReader();
-      const decoder = new TextDecoder();
-
-      if (!reader) {
-        throw new Error('No response body');
-      }
-
+      // Create assistant message with the response
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: '',
+        content: fullContent.trim() || "I apologize, but I couldn't get a response. Please try again or call +91-9778280044.",
       };
 
       setMessages(prev => [...prev, assistantMessage]);
-
-      let fullContent = '';
-      let hasReceivedData = false;
-
-      try {
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) break;
-
-          // Decode chunk - AI SDK toTextStreamResponse sends text chunks
-          const chunk = decoder.decode(value, { stream: true });
-
-          // Debug: log first chunk to understand format
-          if (!hasReceivedData && chunk) {
-            console.log('[FloatingChatWidget] First chunk format:', chunk.substring(0, 50));
-          }
-
-          hasReceivedData = true;
-
-          // Process the chunk - Vercel AI SDK toTextStreamResponse() sends plain text
-          // The format is simple text chunks, no special parsing needed
-          // Just append directly - the AI SDK handles all the complexity on the server
-          fullContent += chunk;
-
-          // Update message content in real-time
-          setMessages(prev => {
-            const updated = [...prev];
-            const lastMsg = updated[updated.length - 1];
-            if (lastMsg && lastMsg.role === 'assistant') {
-              lastMsg.content = fullContent;
-            }
-            return updated;
-          });
-        }
-        
-        // Ensure we have content after stream completes
-        if (!fullContent.trim()) {
-          if (hasReceivedData) {
-            fullContent = "I received your message but didn't get a complete response. Please try again or call +91-9778280044.";
-          } else {
-            fullContent = "No response received. Please check your connection and try again, or call +91-9778280044.";
-          }
-        }
-        
-        // Final update to ensure content is set
-        setMessages(prev => {
-          const updated = [...prev];
-          const lastMsg = updated[updated.length - 1];
-          if (lastMsg && lastMsg.role === 'assistant') {
-            lastMsg.content = fullContent;
-          }
-          return updated;
-        });
-      } catch (streamError) {
-        console.error('Streaming error:', streamError);
-        // If streaming fails, use what we have or show error
-        const errorContent = fullContent.trim() || 
-          "I'm having trouble processing your request right now. Please try again or call +91-9778280044 for immediate assistance.";
-        
-        setMessages(prev => {
-          const updated = [...prev];
-          const lastMsg = updated[updated.length - 1];
-          if (lastMsg && lastMsg.role === 'assistant') {
-            lastMsg.content = errorContent;
-          } else {
-            // If no assistant message exists, create one
-            updated.push({
-              id: (Date.now() + 1).toString(),
-              role: 'assistant',
-              content: errorContent,
-            });
-          }
-          return updated;
-        });
-      }
 
       // Check for emergency keywords
       if (fullContent.trim()) {
