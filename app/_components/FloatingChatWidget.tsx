@@ -169,24 +169,11 @@ export default function FloatingChatWidget() {
           }
 
           hasReceivedData = true;
-          
-          // Process the chunk - handle both "0:text" format and plain text
-          const lines = chunk.split('\n');
-          
-          for (const line of lines) {
-            if (!line) continue; // Skip empty lines
-            
-            // AI SDK format: "0:text content" where 0: is the stream prefix
-            if (line.startsWith('0:')) {
-              fullContent += line.slice(2);
-            } else if (line.startsWith('d:') || line.startsWith('e:') || line.trim() === ':') {
-              // Skip control lines (data, error, or empty stream markers)
-              continue;
-            } else if (line.trim()) {
-              // Plain text - append directly (most common case)
-              fullContent += line;
-            }
-          }
+
+          // Process the chunk - Vercel AI SDK toTextStreamResponse() sends plain text
+          // The format is simple text chunks, no special parsing needed
+          // Just append directly - the AI SDK handles all the complexity on the server
+          fullContent += chunk;
 
           // Update message content in real-time
           setMessages(prev => {
