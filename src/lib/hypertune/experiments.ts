@@ -13,8 +13,8 @@ import {
   CtaExperimentConfig,
   StickyCtaConfig,
 } from './experiments-config';
-import { useFeatureFlag } from './hooks';
-import { useHypertune } from '@/app/providers/hypertune-provider';
+import { useCtaVariantAdapter, useStickyCtaVariantAdapter } from './flag-adapter';
+import { useHypertune } from '@/generated/hypertune.react';
 
 function resolvePageSlug(pageSlug?: string) {
   if (pageSlug) return pageSlug;
@@ -29,7 +29,8 @@ function useExperimentExposure(
   variant: string,
   pageSlug?: string,
 ) {
-  const { isReady } = useHypertune();
+  const hypertune = useHypertune();
+  const isReady = hypertune?.props.context !== null;
   const resolvedSlug = resolvePageSlug(pageSlug);
 
   useEffect(() => {
@@ -42,10 +43,8 @@ export function useCtaExperiment(
   pageSlug?: string,
 ): { variant: CtaVariant; config: CtaExperimentConfig } {
   const fallback = hypertuneFlagFallbacks.cta_variant;
-  const variant = useFeatureFlag<CtaVariant>(
-    HYPERTUNE_EXPERIMENT_KEYS.cta,
-    fallback,
-  );
+  // Use adapter to map boolean flag to enum
+  const variant = useCtaVariantAdapter();
   const config = useMemo(
     () => CTA_VARIANTS[variant] ?? CTA_VARIANTS[fallback],
     [variant, fallback],
@@ -64,10 +63,8 @@ export function useStickyCtaExperiment(
   pageSlug?: string,
 ): { variant: StickyCtaVariant; config: StickyCtaConfig } {
   const fallback = hypertuneFlagFallbacks.sticky_cta_variant;
-  const variant = useFeatureFlag<StickyCtaVariant>(
-    HYPERTUNE_EXPERIMENT_KEYS.sticky,
-    fallback,
-  );
+  // Use adapter to map boolean flag to enum (currently always returns 'control')
+  const variant = useStickyCtaVariantAdapter();
   const config = useMemo(
     () => STICKY_CTA_VARIANTS[variant] ?? STICKY_CTA_VARIANTS[fallback],
     [variant, fallback],
