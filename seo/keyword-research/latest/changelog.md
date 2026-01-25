@@ -1,9 +1,16 @@
-# Changelog - 2026-01-24
+# Daily SEO Changelog - 2026-01-25
 
-## Added
-- **New Cluster:** "Spine Deformity" covering Scoliosis and Kyphosis.
-- **New Keywords:** 7 new high-intent keywords added to the universe.
-- **New Page Suggestion:** `/blog/scoliosis-treatment-options-in-hyderabad` to target "scoliosis treatment hyderabad" and related terms.
+## Research
+- Analyzed 4 top competitors (Asian Spine, Yashoda, Apollo, Dr. Raveesh).
+- Identified "Lumbar Spondylosis" as a high-value, low-competition content gap for older patient demographics.
 
-## Updates
-- Mapped "pediatric spine surgery hyderabad" to existing `/pediatric-neurosurgery`.
+## Keyword Registry Updates
+- Added `lumbar spondylosis treatment hyderabad` -> `/blog/lumbar-spondylosis-treatment-exercises-hyderabad`
+- Added `lumbar spondylosis exercises` -> `/blog/lumbar-spondylosis-treatment-exercises-hyderabad`
+- Added `best neurosurgeon for spondylosis hyderabad` -> `/`
+- Added `endoscopic spine surgery cost hyderabad` -> `/services/spine-surgery-cost-hyderabad`
+
+## Content Created
+- **New Blog Post**: `Lumbar Spondylosis Treatment & Exercises: A Guide for Hyderabad Patients`
+  - URL: `/blog/lumbar-spondylosis-treatment-exercises-hyderabad`
+  - Focus: Non-surgical management, exercises, and red flags for surgery.
