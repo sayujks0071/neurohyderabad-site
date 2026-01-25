@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { GoogleGenAI, Modality, Type } from "@google/genai";
+import { rateLimit } from "../../../src/lib/rate-limit";
 
 const SYSTEM_INSTRUCTION = `You are the NeuroLink Assistant for Dr. Sayuj, a world-class neurosurgeon.
 Your goal is to answer questions professionally using the provided Google Search tool for accuracy.
@@ -53,6 +54,25 @@ function jsonError(message: string, status = 400) {
 }
 
 export async function POST(request: Request) {
+  // Rate Limiting: 20 requests per minute per IP
+  const ip = request.headers.get("x-forwarded-for")?.split(',')[0] || "127.0.0.1";
+  const limit = rateLimit(ip, 20, 60 * 1000);
+
+  if (!limit.success) {
+    return NextResponse.json(
+      { error: "Too many requests. Please try again later." },
+      {
+        status: 429,
+        headers: {
+          "Retry-After": String(Math.ceil((limit.reset - Date.now()) / 1000)),
+          "X-RateLimit-Limit": String(limit.limit),
+          "X-RateLimit-Remaining": String(limit.remaining),
+          "X-RateLimit-Reset": String(limit.reset)
+        }
+      }
+    );
+  }
+
   let body: Record<string, unknown>;
   try {
     body = (await request.json()) as Record<string, unknown>;
