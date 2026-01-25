@@ -43,6 +43,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Get relevant context from Gemini File API (optional enhancement)
+    // Use Promise.race with timeout to prevent blocking
     let geminiContext = '';
     let geminiSources: any[] = [];
     
@@ -51,7 +52,12 @@ export async function POST(request: NextRequest) {
                      (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 
                      'http://localhost:3000');
       
-      const geminiResponse = await fetch(`${baseUrl}/api/gemini-files/search`, {
+      // Add timeout to prevent blocking (5 seconds max)
+      const timeoutPromise = new Promise<never>((_, reject) => 
+        setTimeout(() => reject(new Error('Gemini context timeout')), 5000)
+      );
+      
+      const geminiFetch = fetch(`${baseUrl}/api/gemini-files/search`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -61,6 +67,8 @@ export async function POST(request: NextRequest) {
           category: service || undefined
         })
       });
+      
+      const geminiResponse = await Promise.race([geminiFetch, timeoutPromise]);
       
       if (geminiResponse.ok) {
         const geminiData = await geminiResponse.json();
@@ -74,8 +82,8 @@ export async function POST(request: NextRequest) {
         }
       }
     } catch (error) {
-      console.error('Gemini context error (non-fatal):', error);
-      // Continue without context if Gemini fails
+      // Non-fatal: continue without context if Gemini fails or times out
+      console.warn('Gemini context error (non-fatal, continuing without context):', error instanceof Error ? error.message : error);
     }
 
     // Build system prompt

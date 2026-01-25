@@ -86,7 +86,33 @@ export default function FloatingChatWidget() {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to get AI response');
+        let errorText = '';
+        try {
+          errorText = await response.text();
+        } catch (e) {
+          errorText = 'Unknown error';
+        }
+        console.error('API Error:', response.status, errorText);
+        
+        // Handle specific error cases
+        if (response.status === 429) {
+          throw new Error('Too many requests. Please wait a moment and try again.');
+        } else if (response.status === 500) {
+          throw new Error('Server error. Please try again or call +91-9778280044.');
+        } else {
+          throw new Error(`Failed to get AI response (${response.status}). Please try again.`);
+        }
+      }
+      
+      // Check if response is actually streaming
+      if (!response.body) {
+        throw new Error('No response body received from server');
+      }
+      
+      // Check content type to ensure it's a stream
+      const contentType = response.headers.get('content-type');
+      if (contentType && !contentType.includes('text/plain') && !contentType.includes('text/event-stream')) {
+        console.warn('Unexpected content type:', contentType);
       }
 
       // Handle streaming response
@@ -106,21 +132,37 @@ export default function FloatingChatWidget() {
       setMessages(prev => [...prev, assistantMessage]);
 
       let fullContent = '';
+      let hasReceivedData = false;
+      
       try {
         while (true) {
           const { done, value } = await reader.read();
           if (done) break;
 
+          hasReceivedData = true;
+          
+          // Decode chunk - AI SDK toTextStreamResponse sends text chunks
           const chunk = decoder.decode(value, { stream: true });
+          
+          // Debug: log first chunk to understand format
+          if (!hasReceivedData && chunk) {
+            console.log('[FloatingChatWidget] First chunk format:', chunk.substring(0, 50));
+          }
+          
+          // Process the chunk - handle both "0:text" format and plain text
           const lines = chunk.split('\n');
           
           for (const line of lines) {
+            if (!line) continue; // Skip empty lines
+            
+            // AI SDK format: "0:text content" where 0: is the stream prefix
             if (line.startsWith('0:')) {
-              // AI SDK streaming format: "0:text content"
-              const text = line.slice(2);
-              fullContent += text;
-            } else if (line.trim() && !line.startsWith('0:')) {
-              // Fallback: treat as plain text
+              fullContent += line.slice(2);
+            } else if (line.startsWith('d:') || line.startsWith('e:') || line.trim() === ':') {
+              // Skip control lines (data, error, or empty stream markers)
+              continue;
+            } else if (line.trim()) {
+              // Plain text - append directly (most common case)
               fullContent += line;
             }
           }
@@ -135,22 +177,39 @@ export default function FloatingChatWidget() {
             return updated;
           });
         }
+        
+        // Ensure we have content after stream completes
+        if (!fullContent.trim()) {
+          if (hasReceivedData) {
+            fullContent = "I received your message but didn't get a complete response. Please try again or call +91-9778280044.";
+          } else {
+            fullContent = "No response received. Please check your connection and try again, or call +91-9778280044.";
+          }
+        }
+        
+        // Final update to ensure content is set
+        setMessages(prev => {
+          const updated = [...prev];
+          const lastMsg = updated[updated.length - 1];
+          if (lastMsg && lastMsg.role === 'assistant') {
+            lastMsg.content = fullContent;
+          }
+          return updated;
+        });
       } catch (streamError) {
         console.error('Streaming error:', streamError);
-        // If streaming fails, try to get the full response
-        if (fullContent.trim()) {
-          // We have partial content, use it
-          setMessages(prev => {
-            const updated = [...prev];
-            const lastMsg = updated[updated.length - 1];
-            if (lastMsg && lastMsg.role === 'assistant') {
-              lastMsg.content = fullContent || "I'm having trouble processing your request. Please try again or call +91-9778280044.";
-            }
-            return updated;
-          });
-        } else {
-          throw streamError;
-        }
+        // If streaming fails, use what we have or show error
+        const errorContent = fullContent.trim() || 
+          "I'm having trouble processing your request right now. Please try again or call +91-9778280044 for immediate assistance.";
+        
+        setMessages(prev => {
+          const updated = [...prev];
+          const lastMsg = updated[updated.length - 1];
+          if (lastMsg && lastMsg.role === 'assistant') {
+            lastMsg.content = errorContent;
+          }
+          return updated;
+        });
       }
 
       // Check for emergency keywords
@@ -296,8 +355,20 @@ export default function FloatingChatWidget() {
                 <div className="bg-white border border-gray-100 shadow-sm px-3 py-2 rounded-2xl rounded-bl-none">
                   <div className="flex items-center space-x-2">
                     <Loader2 size={14} className="animate-spin text-blue-600" />
-                    <span className="text-xs text-gray-500">Thinking...</span>
+                    <span className="text-xs text-gray-500">
+                      {messages[messages.length - 1]?.role === 'assistant' && messages[messages.length - 1]?.content 
+                        ? 'Typing...' 
+                        : 'Thinking...'}
+                    </span>
                   </div>
+                </div>
+              </div>
+            )}
+            
+            {error && (
+              <div className="flex justify-start">
+                <div className="bg-red-50 border border-red-200 shadow-sm px-3 py-2 rounded-2xl rounded-bl-none">
+                  <p className="text-xs text-red-700">{error.message}</p>
                 </div>
               </div>
             )}
