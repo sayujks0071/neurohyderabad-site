@@ -147,7 +147,6 @@ export async function POST(request: Request) {
     });
 
     // Add lead to CRM / Google Sheet (async, non-blocking)
-    const source = request.headers.get("x-booking-source") || "website";
     void submitToGoogleSheets({
       fullName: booking.patientName,
       email: booking.email,
