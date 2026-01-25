@@ -5,7 +5,7 @@
   "packageManager": "pnpm@9.15.0",
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "NODE_OPTIONS='--max-old-space-size=4096' next build",
+    "build": "NODE_OPTIONS='--max-old-space-size=4096' next build --webpack",
     "postbuild": "next-sitemap && rm public/sitemap.xml && node scripts/generate-image-sitemap.js && node scripts/generate-video-sitemap.js",
     "lint": "next lint",
     "test": "vitest run",
@@ -61,6 +61,7 @@
     "@vercel/analytics": "^1.6.1",
     "@vercel/edge-config": "^1.4.3",
     "@vercel/og": "^0.8.5",
+    "@vercel/toolbar": "^0.1.41",
     "@vitejs/plugin-react": "^5.1.2",
     "ai": "6.0.49",
     "botid": "^1.5.10",
