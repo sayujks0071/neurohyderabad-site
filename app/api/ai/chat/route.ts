@@ -1,4 +1,4 @@
-import { streamText } from 'ai';
+import { generateText } from 'ai';
 import { NextRequest } from 'next/server';
 import { rateLimit } from '../../../../src/lib/rate-limit';
 import { getTextModel, hasAIConfig } from '@/src/lib/ai/gateway';
@@ -121,30 +121,27 @@ export async function POST(request: NextRequest) {
       { role: 'user' as const, content: message }
     ];
 
-    // Use AI SDK's streamText with the configured model
-    // Wrap in try-catch to handle streamText errors gracefully
+    // Use AI SDK's generateText for non-streaming response (more reliable across browsers)
     try {
-      const result = streamText({
+      const result = await generateText({
         model: getTextModel(),
         messages,
         temperature: 0.7,
       });
 
-      // Return streaming response
-      return result.toTextStreamResponse({
-        headers: {
-          'X-Sources': medicalSources.length > 0 ? JSON.stringify(medicalSources) : '',
-        },
+      // Return JSON response (non-streaming for better browser compatibility)
+      return Response.json({
+        content: result.text,
+        sources: medicalSources,
       });
-    } catch (streamError) {
-      console.error('streamText error:', streamError);
-      // Return a non-streaming error response
-      return new Response(
-        JSON.stringify({ 
-          error: 'Streaming error',
+    } catch (generateError) {
+      console.error('generateText error:', generateError);
+      return Response.json(
+        {
+          error: 'Generation error',
           message: "I'm having trouble generating a response right now. Please try again or call +91-9778280044 for immediate assistance."
-        }),
-        { status: 500, headers: { 'Content-Type': 'application/json' } }
+        },
+        { status: 500 }
       );
     }
 

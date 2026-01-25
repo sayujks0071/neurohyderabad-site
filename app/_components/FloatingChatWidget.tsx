@@ -117,38 +117,11 @@ export default function FloatingChatWidget() {
         return;
       }
       
-      // Try to get full response text first (more reliable than streaming in some browsers)
-      // This works because Vercel AI SDK's toTextStreamResponse() returns text/plain
-      let fullContent = '';
+      // Parse JSON response from non-streaming API
+      const data = await response.json();
+      const fullContent = data.content || '';
 
-      try {
-        // First, try to read the response as text (simpler and more reliable)
-        const textContent = await response.text();
-        console.log('[FloatingChatWidget] Response received:', textContent.substring(0, 100));
-
-        if (textContent && textContent.trim()) {
-          fullContent = textContent;
-        }
-      } catch (textError) {
-        console.warn('[FloatingChatWidget] Text read failed, trying stream:', textError);
-
-        // Fallback to streaming if text() fails
-        if (response.body) {
-          const reader = response.body.getReader();
-          const decoder = new TextDecoder();
-
-          try {
-            while (true) {
-              const { done, value } = await reader.read();
-              if (done) break;
-              const chunk = decoder.decode(value, { stream: true });
-              fullContent += chunk;
-            }
-          } catch (streamError) {
-            console.error('[FloatingChatWidget] Stream error:', streamError);
-          }
-        }
-      }
+      console.log('[FloatingChatWidget] Response received:', fullContent.substring(0, 100));
 
       // Create assistant message with the response
       const assistantMessage: Message = {
