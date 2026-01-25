@@ -84,58 +84,60 @@ export default function AIStreamingChat({
       });
 
       if (!response.ok) {
-        throw new Error('Failed to get AI response');
+        let errorText = '';
+        let errorData: any = null;
+        try {
+          const contentType = response.headers.get('content-type');
+          if (contentType?.includes('application/json')) {
+            errorData = await response.json();
+            errorText = errorData.message || errorData.error || 'Unknown error';
+          } else {
+            errorText = await response.text();
+          }
+        } catch (e) {
+          errorText = 'Unknown error';
+        }
+        console.error('API Error:', response.status, errorText);
+        
+        const errorMessage: Message = {
+          id: (Date.now() + 1).toString(),
+          role: 'assistant',
+          content: errorData?.message || 
+            (response.status === 429 
+              ? 'Too many requests. Please wait a moment and try again.' 
+              : response.status === 500
+              ? 'Server error. Please try again or call +91-9778280044.'
+              : `Failed to get AI response. Please try again or call +91-9778280044.`),
+        };
+        setMessages(prev => [...prev, errorMessage]);
+        setIsLoading(false);
+        return;
       }
 
-      // Handle streaming response
-      const reader = response.body?.getReader();
-      const decoder = new TextDecoder();
-      
-      if (!reader) {
-        throw new Error('No response body');
+      // Use response.text() instead of ReadableStream for better browser compatibility
+      // This is more reliable across all browsers, including incognito mode
+      const fullContent = await response.text();
+
+      // Ensure we have content
+      if (!fullContent.trim()) {
+        const errorMessage: Message = {
+          id: (Date.now() + 1).toString(),
+          role: 'assistant',
+          content: "No response received. Please check your connection and try again, or call +91-9778280044.",
+        };
+        setMessages(prev => [...prev, errorMessage]);
+        setIsLoading(false);
+        return;
       }
 
+      // Create assistant message with the full content
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: '',
+        content: fullContent.trim(),
       };
 
       setMessages(prev => [...prev, assistantMessage]);
-
-      let fullContent = '';
-      try {
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) break;
-
-          const chunk = decoder.decode(value, { stream: true });
-          fullContent += chunk;
-          
-          setMessages(prev => {
-            const updated = [...prev];
-            const lastMsg = updated[updated.length - 1];
-            if (lastMsg && lastMsg.role === 'assistant') {
-              lastMsg.content = fullContent;
-            }
-            return updated;
-          });
-        }
-      } catch (streamError) {
-        console.error('Stream reading error:', streamError);
-        // Update the message with what we have so far
-        if (fullContent) {
-          setMessages(prev => {
-            const updated = [...prev];
-            const lastMsg = updated[updated.length - 1];
-            if (lastMsg && lastMsg.role === 'assistant') {
-              lastMsg.content = fullContent + '\n\n[Stream ended]';
-            }
-            return updated;
-          });
-        }
-        throw streamError;
-      }
 
       // Check for emergency keywords
       const emergencyKeywords = ['emergency', 'urgent', 'immediately', 'call', 'stroke', 'seizure'];
