@@ -297,9 +297,7 @@ export async function handleAppointmentBooking(
   globalThis.fetch = fetch;
 
   const bookingId = generateBookingId();
-  console.log(
-    `[Appointment Workflow] Starting booking ${bookingId}`
-  );
+  logWorkflowEvent(bookingId, "workflow-started");
 
   try {
     // Step 1: Validate patient information
@@ -307,13 +305,16 @@ export async function handleAppointmentBooking(
 
     // Step 2: Check for emergency symptoms
     const emergencyCheck = await checkEmergencySymptoms(
+      bookingId,
       patientInfo.chiefComplaint
     );
     if (emergencyCheck.isEmergency) {
-      console.log(
-        `[Appointment Workflow] Emergency detected for ${bookingId}`
+      logWorkflowEvent(bookingId, "emergency-detected");
+      await notifyEmergencyTeam(
+        bookingId,
+        patientInfo,
+        emergencyCheck.symptoms
       );
-      await notifyEmergencyTeam(patientInfo, emergencyCheck.symptoms);
       return {
         bookingId,
         status: "emergency-redirect",
@@ -340,9 +341,7 @@ export async function handleAppointmentBooking(
     let status: AppointmentBookingResult["status"] = "confirmed";
 
     if (!availability.available) {
-      console.log(
-        `[Appointment Workflow] Preferred slot unavailable for ${bookingId}`
-      );
+      logWorkflowEvent(bookingId, "preferred-slot-unavailable");
 
       // Step 4: Find alternative slots
       const alternatives = await findAlternativeSlots(
@@ -375,9 +374,9 @@ export async function handleAppointmentBooking(
     ]);
 
     if (!adminEmailResult.success) {
-      console.error(
-        `[Appointment Workflow] Admin notification failed: ${adminEmailResult.error}`
-      );
+      logWorkflowEvent(bookingId, "admin-notification-failed", {
+        error: adminEmailResult.error,
+      });
     }
 
     // Step 8: Sync CRM + webhooks
@@ -401,9 +400,7 @@ export async function handleAppointmentBooking(
       trackBookingAnalytics(bookingId, patientInfo, status),
     ]);
 
-    console.log(
-      `[Appointment Workflow] Completed booking ${bookingId} with status: ${status}`
-    );
+    logWorkflowEvent(bookingId, "workflow-completed", { status });
 
     return {
       bookingId,
@@ -416,9 +413,33 @@ export async function handleAppointmentBooking(
       nextSteps: generateNextSteps(status, finalDate, finalTime),
     };
   } catch (error) {
-    console.error(`[Appointment Workflow] Error in booking ${bookingId}:`, error);
+    console.error(
+      JSON.stringify({
+        timestamp: new Date().toISOString(),
+        workflow: "appointment-booking",
+        bookingId,
+        event: "workflow-error",
+        error: error instanceof Error ? error.message : String(error),
+      })
+    );
     throw error;
   }
+}
+
+function logWorkflowEvent(
+  bookingId: string | undefined,
+  event: string,
+  payload: Record<string, any> = {}
+) {
+  console.log(
+    JSON.stringify({
+      timestamp: new Date().toISOString(),
+      workflow: "appointment-booking",
+      bookingId,
+      event,
+      ...payload,
+    })
+  );
 }
 
 /**
@@ -452,11 +473,12 @@ async function validatePatientInfo(patientInfo: PatientInfo) {
  * Step: Check for emergency symptoms
  */
 async function checkEmergencySymptoms(
+  bookingId: string,
   chiefComplaint: string
 ): Promise<{ isEmergency: boolean; symptoms: string[] }> {
   "use step";
 
-  console.log(`[Appointment Workflow] Checking for emergency symptoms`);
+  logWorkflowEvent(bookingId, "checking-emergency-symptoms");
 
   const emergencyKeywords = [
     "stroke",
@@ -479,9 +501,10 @@ async function checkEmergencySymptoms(
 
   const isEmergency = detectedSymptoms.length > 0;
 
-  console.log(
-    `[Appointment Workflow] Emergency check: ${isEmergency} (symptoms: ${detectedSymptoms.join(", ")})`
-  );
+  logWorkflowEvent(bookingId, "emergency-check-result", {
+    isEmergency,
+    symptomCount: detectedSymptoms.length,
+  });
 
   return { isEmergency, symptoms: detectedSymptoms };
 }
@@ -490,23 +513,24 @@ async function checkEmergencySymptoms(
  * Step: Notify emergency team
  */
 async function notifyEmergencyTeam(
+  bookingId: string,
   patientInfo: PatientInfo,
   symptoms: string[]
 ) {
   "use step";
 
-  console.log(
-    `[Appointment Workflow] Notifying emergency team (Emergency detected)`
-  );
+  logWorkflowEvent(bookingId, "notifying-emergency-team", {
+    reason: "emergency-detected",
+  });
 
   // In production, this would:
   // - Send SMS to emergency contact
   // - Create high-priority alert in hospital system
   // - Notify on-call doctor
 
-  console.log(
-    `Emergency notification sent. Symptoms: ${symptoms.join(", ")}`
-  );
+  logWorkflowEvent(bookingId, "emergency-notification-sent", {
+    symptomCount: symptoms.length,
+  });
 }
 
 /**
