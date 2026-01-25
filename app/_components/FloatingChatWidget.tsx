@@ -289,7 +289,7 @@ export default function FloatingChatWidget() {
           setIsOpen(!isOpen);
           setIsMinimized(false);
         }}
-        className={`fixed bottom-24 right-4 z-[60] p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-105 ${
+        className={`fixed bottom-24 right-4 z-[60] p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300 ${
           isOpen && !isMinimized
             ? 'bg-gray-800 text-white rotate-90'
             : 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white animate-bounce-subtle'
@@ -362,7 +362,11 @@ export default function FloatingChatWidget() {
           )}
 
           {/* Messages Area */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50/50 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
+          <div
+            className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50/50 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
+            role="log"
+            aria-live="polite"
+          >
             {messages.map((message) => (
               <div
                 key={message.id}
@@ -423,7 +427,9 @@ export default function FloatingChatWidget() {
           {/* Input Area */}
           <form onSubmit={onSubmit} className="p-3 border-t border-gray-100 bg-white shrink-0">
             <div className="flex items-center gap-2 relative">
+              <label htmlFor="chat-input" className="sr-only">Ask a question</label>
               <input
+                id="chat-input"
                 ref={inputRef}
                 type="text"
                 value={input}
@@ -434,6 +440,7 @@ export default function FloatingChatWidget() {
               />
               <button
                 type="submit"
+                aria-label="Send message"
                 disabled={!input.trim() || isLoading}
                 className="absolute right-1.5 p-1.5 bg-blue-600 text-white rounded-full hover:bg-blue-700 disabled:opacity-50 disabled:hover:bg-blue-600 transition-colors shadow-sm"
               >
