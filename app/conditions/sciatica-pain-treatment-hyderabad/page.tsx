@@ -378,7 +378,7 @@ export default function SciaticaTreatmentPage() {
       <section className="mb-12">
         <h2 className="text-2xl font-semibold mb-6 text-blue-700">Patient Education Resources</h2>
         <div className="grid md:grid-cols-2 gap-6">
-          <Link href="/blog/sciatica-pain-management-hyderabad" className="block p-6 bg-white border border-gray-200 rounded-lg hover:shadow-md transition-shadow">
+          <Link href="/blog/sciatica-pain-relief-exercises-hyderabad" className="block p-6 bg-white border border-gray-200 rounded-lg hover:shadow-md transition-shadow">
             <h3 className="font-bold text-lg text-blue-800 mb-2">5 Ways to Manage Sciatica at Home</h3>
             <p className="text-gray-600 text-sm">Learn effective home remedies and exercises to reduce nerve pain while waiting for your appointment.</p>
           </Link>
