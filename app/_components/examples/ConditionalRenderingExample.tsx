@@ -16,8 +16,8 @@ export default function ConditionalRenderingExample() {
   const showPricingTable = useFeatureFlag('showPricingTable', true);
   const enableLiveChat = useFeatureFlag('enableLiveChat', false);
 
-  // Layout variant
-  const layoutVariant = useFeatureFlag('homepageLayout', 'standard');
+  // Layout variant - explicitly type as string to allow any variant comparison
+  const layoutVariant = useFeatureFlag('homepageLayout', 'standard') as string;
 
   return (
     <div className="space-y-8">

@@ -14,9 +14,9 @@ import { useEffect, useState } from 'react';
 export default function ExperimentTrackingExample() {
   const [interactions, setInteractions] = useState(0);
 
-  // Get experiment variants
-  const formLayout = useFeatureFlag('formLayout', 'single-column');
-  const buttonText = useFeatureFlag('buttonText', 'Submit');
+  // Get experiment variants - explicitly type as string to allow any variant comparison
+  const formLayout = useFeatureFlag('formLayout', 'single-column') as string;
+  const buttonText = useFeatureFlag('buttonText', 'Submit') as string;
   const showProgressBar = useFeatureFlag('showProgressBar', false);
 
   // Track experiment exposure on mount
