@@ -1,31 +1,31 @@
 {
-  "timestamp": "2025-02-23T12:00:00Z",
+  "timestamp": "2025-05-22T14:30:00Z",
   "page_types": {
     "home": {
       "url": "/",
-      "notes": "LCP optimized with CSS gradient hero. DoctorCard image has priority. Lazy loading used effectively for below-fold content."
+      "notes": "LCP optimized with CSS gradient hero. DoctorCard image has priority. Lazy loading used effectively."
     },
     "location": {
       "url": "/locations/malakpet",
-      "notes": "Static generation used. Map component uses facade pattern to prevent iframe blocking. TrustProof is lightweight."
+      "notes": "Static generation used. Map component uses facade pattern."
     },
     "condition": {
       "url": "/conditions/[slug]",
-      "notes": "LCP candidate (Hero Image) lacked `sizes` attribute, potentially causing suboptimal image resource selection."
+      "notes": "Hero Image uses `sizes` attribute correctly (verified)."
     },
     "appointment": {
       "url": "/appointments",
-      "notes": "Heavy client components (PatientPortal, ChatBot) are lazy loaded. Background blob uses CSS."
+      "notes": "AppointmentScheduler renders empty slots initially, causing layout shift (CLS) when slots load via useEffect."
     }
   },
   "bottleneck_identified": {
-    "type": "LCP",
-    "page_type": "Condition",
-    "description": "Hero Image on Condition pages uses `next/image` with explicit width/height but missing `sizes` prop. This can lead to browsers downloading larger-than-necessary images on some viewports, delaying LCP."
+    "type": "CLS",
+    "page_type": "Appointment",
+    "description": "AppointmentScheduler initializes `slots` state as empty `[]`, causing a 'No slots available' message or empty grid to render first, followed by the actual slots after hydration/effect. This causes a layout shift."
   },
   "fix_implemented": {
-    "description": "Added `sizes=\"(min-width: 1024px) 500px, 100vw\"` to the Hero Image in `app/conditions/[conditionSlug]/page.tsx`.",
-    "expected_impact": "Browsers can now select the appropriate image size from the srcset. On mobile devices, it ensures the image width matches viewport width efficiently. On desktop, it ensures the image matches the column width (~500px) instead of potentially larger intrinsic sizes.",
-    "verification": "Inspect source code of condition pages to verify `sizes` attribute is present on the `img` tag."
+    "description": "Refactored `AppointmentScheduler` to derive `slots` synchronously using `useMemo` instead of `useState` + `useEffect`.",
+    "expected_impact": "Eliminates the initial 'empty' state render. The slots grid will be populated immediately during the first render pass, preventing the layout shift and flash of incorrect content.",
+    "verification": "Code review confirms synchronous derivation. Manual verification would show the grid appearing instantly."
   }
 }
