@@ -240,9 +240,9 @@ const AppointmentScheduler = ({
                     }
                   }
                 }}
-                className={`flex flex-col items-center justify-center p-3 rounded-2xl border transition-all relative ${
+                className={`flex flex-col items-center justify-center p-3 rounded-2xl border-2 transition-all relative ${
                   isSelected
-                    ? "bg-blue-600 text-white border-blue-600 shadow-lg shadow-blue-200 scale-105 z-10"
+                    ? "bg-blue-600 text-white border-blue-700 shadow-lg shadow-blue-200 scale-105 z-10 ring-2 ring-blue-300 ring-offset-2"
                     : isWeekend
                     ? "bg-slate-50 text-slate-300 border-slate-100 cursor-not-allowed"
                     : "bg-white text-slate-600 border-slate-200 hover:border-blue-300 hover:shadow-md cursor-pointer active:scale-95"
@@ -253,7 +253,11 @@ const AppointmentScheduler = ({
                 </span>
                 <span className="text-xl font-bold">{buttonDate.getDate()}</span>
                 {isSelected && (
-                  <div className="absolute -bottom-1.5 w-1 h-1 bg-white rounded-full" />
+                  <div className="absolute top-1 right-1">
+                    <div className="w-5 h-5 bg-white rounded-full flex items-center justify-center shadow-sm">
+                      <Check className="w-3 h-3 text-blue-600" />
+                    </div>
+                  </div>
                 )}
               </button>
             );
@@ -355,15 +359,22 @@ const TimeSlotButton = ({ slot, selectedTime, onSelect }: TimeSlotButtonProps) =
         }
       }}
       aria-pressed={isSelected}
-      className={`py-2.5 px-2 rounded-xl text-sm font-bold transition-all border shadow-sm ${
+      className={`py-2.5 px-2 rounded-xl text-sm font-bold transition-all border-2 shadow-sm relative ${
         isSelected
-          ? "bg-blue-600 text-white border-blue-600 shadow-blue-200 z-10"
+          ? "bg-blue-600 text-white border-blue-700 shadow-blue-200 z-10 ring-2 ring-blue-300 ring-offset-1"
           : slot.available
           ? "bg-white text-slate-700 border-slate-200 hover:border-blue-400 hover:text-blue-600 hover:shadow-md cursor-pointer active:scale-95"
           : "bg-slate-50 text-slate-300 border-slate-100 cursor-not-allowed shadow-none"
       }`}
     >
       {slot.time}
+      {isSelected && (
+        <div className="absolute -top-1 -right-1">
+          <div className="w-4 h-4 bg-white rounded-full flex items-center justify-center shadow-sm border border-blue-600">
+            <Check className="w-2.5 h-2.5 text-blue-600" />
+          </div>
+        </div>
+      )}
     </button>
   );
 };
