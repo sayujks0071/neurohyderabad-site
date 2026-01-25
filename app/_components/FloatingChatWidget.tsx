@@ -154,21 +154,21 @@ export default function FloatingChatWidget() {
 
       let fullContent = '';
       let hasReceivedData = false;
-      
+
       try {
         while (true) {
           const { done, value } = await reader.read();
           if (done) break;
 
-          hasReceivedData = true;
-          
           // Decode chunk - AI SDK toTextStreamResponse sends text chunks
           const chunk = decoder.decode(value, { stream: true });
-          
+
           // Debug: log first chunk to understand format
           if (!hasReceivedData && chunk) {
             console.log('[FloatingChatWidget] First chunk format:', chunk.substring(0, 50));
           }
+
+          hasReceivedData = true;
           
           // Process the chunk - handle both "0:text" format and plain text
           const lines = chunk.split('\n');

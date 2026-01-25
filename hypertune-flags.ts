@@ -1,7 +1,7 @@
 import { Identify } from "flags";
 import { dedupe, flag } from "flags/next";
 import { createHypertuneAdapter } from "@flags-sdk/hypertune";
-import { createSource, flagFallbacks, vercelFlagDefinitions as flagDefinitions, type Context, type RootFlagValues } from "./generated/hypertune";
+import { createSource, flagFallbacks, vercelFlagDefinitions as flagDefinitions, type Context, type FlagValues } from "./generated/hypertune";
 
 // Identify function for flag evaluation context
 const identify: Identify<Context> = dedupe(
@@ -19,7 +19,7 @@ const identify: Identify<Context> = dedupe(
 
 // Create Hypertune adapter using generated code
 const hypertuneAdapter = createHypertuneAdapter<
-  RootFlagValues,
+  FlagValues,
   Context
 >({
   createSource,
