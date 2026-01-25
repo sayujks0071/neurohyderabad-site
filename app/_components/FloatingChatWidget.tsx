@@ -116,32 +116,40 @@ export default function FloatingChatWidget() {
         setIsLoading(false);
         return;
       }
-      
-      // Parse JSON response from non-streaming API
-      const data = await response.json();
-      const fullContent = data.content || '';
 
-      console.log('[FloatingChatWidget] Response received:', fullContent.substring(0, 100));
+      // Use response.text() instead of ReadableStream for better browser compatibility
+      // This is more reliable across all browsers, including incognito mode
+      const fullContent = await response.text();
 
-      // Create assistant message with the response
+      // Ensure we have content
+      if (!fullContent.trim()) {
+        const errorMessage: Message = {
+          id: (Date.now() + 1).toString(),
+          role: 'assistant',
+          content: "No response received. Please check your connection and try again, or call +91-9778280044.",
+        };
+        setMessages(prev => [...prev, errorMessage]);
+        setIsLoading(false);
+        return;
+      }
+
+      // Create assistant message with the full content
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: fullContent.trim() || "I apologize, but I couldn't get a response. Please try again or call +91-9778280044.",
+        content: fullContent.trim(),
       };
 
       setMessages(prev => [...prev, assistantMessage]);
 
       // Check for emergency keywords
-      if (fullContent.trim()) {
-        const emergencyKeywords = ['emergency', 'urgent', 'immediately', 'call', 'stroke', 'seizure'];
-        const hasEmergency = emergencyKeywords.some(keyword =>
-          fullContent.toLowerCase().includes(keyword)
-        );
+      const emergencyKeywords = ['emergency', 'urgent', 'immediately', 'call', 'stroke', 'seizure'];
+      const hasEmergency = emergencyKeywords.some(keyword =>
+        fullContent.toLowerCase().includes(keyword)
+      );
 
-        if (hasEmergency) {
-          setShowEmergencyAlert(true);
-        }
+      if (hasEmergency) {
+        setShowEmergencyAlert(true);
       }
 
       logContactFormSubmit('ai_chat_widget', true);
