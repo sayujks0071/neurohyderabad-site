@@ -21,7 +21,7 @@ import PatientJourneySection from '@/src/components/PatientJourneySection';
 import SurgeryComparisonTable from '@/src/components/SurgeryComparisonTable';
 
 const baseMetadata = makeMetadata({
-  title: 'Minimally Invasive Spine Surgery Hyderabad | Day Care | Walk Same Day',
+  title: 'Minimally Invasive Spine Surgery Hyderabad | Day Care',
   description: 'Advanced endoscopic spine surgery in Hyderabad. Tiny incision, no muscle cutting, same-day discharge. Expert care by Dr. Sayuj Krishnan. Get Cost Estimate.',
   canonicalPath: '/services/minimally-invasive-spine-surgery',
 });
@@ -422,6 +422,44 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
           </div>
         </section>
 
+        {/* Safety for Elderly Section */}
+        <section className="mb-12 bg-gradient-to-r from-green-50 to-white p-8 rounded-lg border border-green-100 shadow-sm">
+          <h2 className="text-3xl font-bold text-green-900 mb-6">Is Endoscopic Spine Surgery Safe for Elderly Patients?</h2>
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+             <div>
+                <p className="text-lg text-gray-800 mb-4">
+                  Yes, it is often a <strong>safer option for patients over 60</strong> compared to open surgery.
+                  Traditional open spine surgery carries risks due to general anesthesia and blood loss.
+                  Our endoscopic technique mitigates these risks significantly.
+                </p>
+                <ul className="space-y-3">
+                   <li className="flex items-start">
+                      <span className="text-green-600 font-bold mr-2">✓</span>
+                      <span className="text-gray-700"><strong>Local Anesthesia/Sedation:</strong> Avoids the cardiac stress of general anesthesia.</span>
+                   </li>
+                   <li className="flex items-start">
+                      <span className="text-green-600 font-bold mr-2">✓</span>
+                      <span className="text-gray-700"><strong>Minimal Blood Loss:</strong> Crucial for patients on blood thinners (managed carefully).</span>
+                   </li>
+                   <li className="flex items-start">
+                      <span className="text-green-600 font-bold mr-2">✓</span>
+                      <span className="text-gray-700"><strong>Early Mobilization:</strong> Reduces risk of pneumonia and DVT (clots).</span>
+                   </li>
+                </ul>
+             </div>
+             <div className="bg-white p-6 rounded-xl shadow-md border border-green-200">
+                <h3 className="font-bold text-green-800 mb-2">Second Opinion for Senior Citizens</h3>
+                <p className="text-sm text-gray-600 mb-4">
+                  If your parent has been advised major spine surgery, bring them for an evaluation.
+                  We often find that a targeted 45-minute endoscopic procedure can resolve the pain without major surgery.
+                </p>
+                <Link href="/appointments" className="block w-full text-center bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors">
+                  Book Senior Citizen Consult
+                </Link>
+             </div>
+          </div>
+        </section>
+
         <CostTransparencySection costs={COSTS} />
 
         <OutcomeMetricsSection procedure="Minimally Invasive Spine Surgery" />
@@ -430,7 +468,7 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
         <section className="mb-12">
           <h2 className="text-3xl font-bold text-blue-800 mb-6 text-center">Patient Success Stories</h2>
           <p className="text-gray-700 mb-6">
-            See how minimally invasive techniques have helped patients with severe <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 underline">sciatica</Link> and back pain return to their active lives.
+            See how minimally invasive techniques provide effective <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 underline">sciatica leg pain relief</Link> and help patients with back pain return to their active lives.
           </p>
           <div className="grid md:grid-cols-2 gap-6">
             {spineStoryHighlights.map((story) => (

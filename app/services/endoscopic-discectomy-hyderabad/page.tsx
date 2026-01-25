@@ -151,7 +151,7 @@ export default function EndoscopicDiscectomyPage() {
               <h3 className="text-lg font-semibold mb-3 text-blue-700">Suitable Candidates</h3>
               <ul className="space-y-2 text-gray-700">
                 <li>• Herniated lumbar disc confirmed on MRI</li>
-                <li>• Leg pain (sciatica) that hasn't improved with conservative treatment</li>
+                <li>• <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 hover:underline">Leg pain (sciatica)</Link> that hasn't improved with conservative treatment</li>
                 <li>• Nerve compression symptoms</li>
                 <li>• Failed 6+ weeks of non-surgical treatment</li>
                 <li>• No significant spinal instability</li>
