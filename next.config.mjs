@@ -1,15 +1,5 @@
-// #region agent log
-import { createRequire } from "node:module";
 import pkg from "workflow/next";
-
-const require = createRequire(import.meta.url);
-const workflowLoaderPath = require.resolve("@workflow/next/loader");
-const workflowLoaderSuffix = "/node_modules/@workflow/next/dist/loader.js";
-const isWorkflowLoader = (loader) =>
-  typeof loader === "string" &&
-  (loader === workflowLoaderPath || loader.endsWith(workflowLoaderSuffix));
 const { withWorkflow } = pkg;
-// #endregion
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -32,7 +22,7 @@ const nextConfig = {
     optimizeCss: true,
   },
   // Server external packages (moved from experimental)
-  serverExternalPackages: ['sharp'],
+  serverExternalPackages: ['sharp', '@remotion/lambda'],
 
   // Configure images for dynamic OG generation and local images
   images: {
@@ -173,6 +163,17 @@ const nextConfig = {
         destination: '/appointments',
         permanent: true,
       },
+      // Location typo redirects (hitec vs hitech)
+      {
+        source: '/locations/brain-spine-surgeon-hitech-city',
+        destination: '/locations/brain-spine-surgeon-hitec-city',
+        permanent: true,
+      },
+      {
+        source: '/neurosurgeon-hitec-city',
+        destination: '/neurosurgeon-hitech-city',
+        permanent: true,
+      },
     ];
   },
 
@@ -251,51 +252,6 @@ const nextConfig = {
   }
 };
 
-// #region agent log
 // Wrap with withWorkflow to enable workflow directives
-const withWorkflowConfig = withWorkflow(nextConfig);
-
-const wrappedConfig = async (...args) => {
-  const config = await withWorkflowConfig(...args);
-  const isTurbopack =
-    process.env.TURBOPACK === "1" ||
-    process.env.TURBOPACK === "true" ||
-    process.env.npm_lifecycle_script?.includes("--turbopack") ||
-    process.argv.includes("--turbopack");
-
-  if (!isTurbopack || !config.turbopack?.rules) {
-    return config;
-  }
-
-  // Turbopack's webpack loader bridge errors with the workflow loader.
-  const updatedRules = Object.fromEntries(
-    Object.entries(config.turbopack.rules).flatMap(([key, value]) => {
-      if (Array.isArray(value)) {
-        const loaders = value.filter(
-          (loader) => !isWorkflowLoader(loader)
-        );
-        return loaders.length ? [[key, loaders]] : [];
-      }
-
-      if (value && typeof value === "object" && Array.isArray(value.loaders)) {
-        const loaders = value.loaders.filter(
-          (loader) => !isWorkflowLoader(loader)
-        );
-        return loaders.length ? [[key, { ...value, loaders }]] : [];
-      }
-
-      return [[key, value]];
-    })
-  );
-
-  return {
-    ...config,
-    turbopack: {
-      ...config.turbopack,
-      rules: updatedRules,
-    },
-  };
-};
-// #endregion
-
-export default wrappedConfig;// Force deployment Fri Oct  3 12:33:37 IST 2025
+// The workflow package handles both webpack and turbopack configurations internally
+export default withWorkflow(nextConfig);
