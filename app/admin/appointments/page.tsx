@@ -54,6 +54,7 @@ export default function AppointmentsPage() {
     fetchAppointments();
   }, []);
 
+  // Quick Action: Confirm appointment via WhatsApp
   const sendWhatsapp = (appointment: Appointment) => {
     if (!appointment.patient_phone) {
       alert('No phone number available for this patient.');
@@ -163,6 +164,8 @@ export default function AppointmentsPage() {
                         onClick={() => sendWhatsapp(appointment)}
                         className="flex items-center gap-1 !bg-[#25D366] hover:!bg-[#128C7E] text-white font-medium py-1 px-2 rounded text-xs transition-colors"
                         title="Confirm via WhatsApp"
+                        aria-label="Confirm via WhatsApp"
+                        data-testid="whatsapp-button"
                       >
                         <WhatsAppIcon size={14} />
                         <span>Confirm via WhatsApp</span>

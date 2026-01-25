@@ -51,6 +51,15 @@ describe('generateWhatsappUrl', () => {
      const url = generateWhatsappUrl(patient);
      expect(url).toContain('wa.me/9115551234567');
   });
+
+  test('handles complex formatted number with brackets and plus', () => {
+    const patient = { ...basePatient, phone: '+91 (987) 654-3210' };
+    const url = generateWhatsappUrl(patient);
+    // Should strip all non-digits: + ( ) - space -> 919876543210
+    // Then logic removes prefix 91 -> 9876543210
+    // Then template adds 91 -> wa.me/919876543210
+    expect(url).toContain('wa.me/919876543210');
+  });
 });
 
 describe('formatDate', () => {
