@@ -1,5 +1,5 @@
 name: Jules SEO Reprint
-# v1.1 - Verified
+# v1.2 - Verified
 # Managed by Jules (Daily Schedule)
 on:
   schedule:
@@ -50,6 +50,8 @@ jobs:
               state: 'open',
               per_page: 100
             });
+
+            console.log("Checking for duplicate issue with title: " + title);
 
             // Find strictly matching title
             const duplicate = existingIssues.find(issue => issue.title === title);
