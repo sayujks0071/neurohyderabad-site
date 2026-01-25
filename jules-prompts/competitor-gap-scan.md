@@ -1,7 +1,6 @@
-# Competitor Content Gap Scan
+# Competitor Gap Scan
 
-Scan the key competitors defined in `AGENTS.md` (e.g., drraveesh.com, spinesurgeon.in).
-1. Identify new pages or topics they have published recently.
+1. Scan the top 3 competitors (as defined in `AGENTS.md`) for new content published recently.
 2. Compare with our current sitemap.
 3. Identify "Content Gaps" – topics they cover that we do not.
 
@@ -12,7 +11,4 @@ Scan the key competitors defined in `AGENTS.md` (e.g., drraveesh.com, spinesurge
 
 <!-- Jules Automation -->
 <!-- Managed by Jules -->
-
-<!-- v1.0 -->
-
-<!-- Verified by Jules -->
+<!-- v1.1 -->
