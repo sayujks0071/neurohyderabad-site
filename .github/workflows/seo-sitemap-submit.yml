@@ -1,6 +1,13 @@
 name: Google SEO Automation
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'app/sitemap.ts'
+      - 'app/**/page.tsx'
+      - 'content/**'
   schedule:
     # Run daily at 09:00 UTC
     - cron: '0 9 * * *'
@@ -27,9 +34,9 @@ jobs:
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
-          cache: 'pnpm'
         with:
           node-version: '20'
+          cache: 'pnpm'
 
       - name: Install pnpm
         uses: pnpm/action-setup@v3
@@ -40,7 +47,7 @@ jobs:
         run: pnpm install
 
       - name: Run Sitemap Submission (Single)
-        if: ${{ github.event_name == 'schedule' || github.event.inputs.action_type == 'sitemap' }}
+        if: ${{ github.event_name == 'push' || github.event_name == 'schedule' || github.event.inputs.action_type == 'sitemap' }}
         env:
           GOOGLE_INDEXING_KEY_JSON: ${{ secrets.GOOGLE_INDEXING_KEY_JSON }}
           SITE_URL: ${{ vars.SITE_URL || 'https://www.drsayuj.info' }}
@@ -48,7 +55,7 @@ jobs:
         run: npx tsx scripts/google-seo-automation.ts --sitemap
 
       - name: Run Batch Sitemap Submission (All Sitemaps)
-        if: ${{ github.event_name == 'schedule' || github.event.inputs.action_type == 'sitemap' }}
+        if: ${{ github.event_name == 'push' || github.event_name == 'schedule' || github.event.inputs.action_type == 'sitemap' }}
         env:
           GOOGLE_INDEXING_KEY_JSON: ${{ secrets.GOOGLE_INDEXING_KEY_JSON }}
           SITE_URL: ${{ vars.SITE_URL || 'https://www.drsayuj.info' }}
