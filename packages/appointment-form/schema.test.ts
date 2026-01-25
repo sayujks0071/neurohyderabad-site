@@ -60,6 +60,25 @@ describe("Appointment Schema Validation", () => {
     }
   });
 
+  it("fails when requestedDate is exactly now (dynamic check)", async () => {
+    // Sleep for 1ms to ensure strictly in the past compared to execution time
+    await new Promise(r => setTimeout(r, 1));
+    const now = new Date();
+    const invalidData = {
+      ...baseValidData,
+      requestedDate: now,
+    };
+    const result = appointmentSchema.safeParse(invalidData);
+
+    // With static validation (min(new Date())), this would likely pass because module load time < now.
+    // With dynamic validation (refine), this should fail because now <= new Date() (inside refine).
+    expect(result.success).toBe(false);
+    if (!result.success) {
+      const error = result.error.issues.find(i => i.path.includes("requestedDate"));
+      expect(error?.message).toBe("Date must be in the future");
+    }
+  });
+
   it("fails when painScore is out of range", () => {
     const invalidData = {
       ...baseValidData,
