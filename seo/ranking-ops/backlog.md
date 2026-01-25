@@ -10,3 +10,4 @@
 - [ ] **Multimedia:** Add `VideoObject` schema to Brain Surgery page if we can source or create an explainer video (Competitor Gap).
 - [ ] **Content:** Expand "Patient Journey" section on Brain Surgery page to match competitor depth.
 - [Content] Add specific cost guide for Brain Tumor Surgery (similar to Spine).
+- [ ] **Audit:** Check all "Patient Education Resources" sections on other Condition pages for broken links or missing content.
