@@ -47,7 +47,7 @@ const trustIndicators = [
 
 export default function LocalReputationPanel() {
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-gradient-to-br from-blue-50 via-white to-indigo-50">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <span className="text-sm uppercase tracking-wide text-blue-600 font-semibold">
@@ -61,7 +61,8 @@ export default function LocalReputationPanel() {
               href="https://www.google.com/search?q=dr+sayuj+krishnan+neurosurgeon+hyderabad"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-5 py-3 bg-blue-600 text-white rounded-full font-semibold shadow-lg hover:bg-blue-700 transition-colors"
+              className="inline-flex items-center justify-center bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-[0.98]"
+              aria-label="Read more reviews on Google"
             >
               Read More Reviews →
             </a>
@@ -71,7 +72,7 @@ export default function LocalReputationPanel() {
             {patientTestimonials.map((testimonial, index) => (
               <article
                 key={index}
-                className="bg-blue-50 border border-blue-100 rounded-2xl p-6 shadow-sm"
+                className="relative bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-6 md:p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
               >
                 <div className="flex items-center justify-between mb-4">
                   <div>
