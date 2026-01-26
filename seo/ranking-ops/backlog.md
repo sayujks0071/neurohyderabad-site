@@ -11,3 +11,8 @@
 - [ ] **Content:** Expand "Patient Journey" section on Brain Surgery page to match competitor depth.
 - [Content] Add specific cost guide for Brain Tumor Surgery (similar to Spine).
 - [ ] **Audit:** Check all "Patient Education Resources" sections on other Condition pages for broken links or missing content.
+
+## 2026-01-26
+- **Content Gap:** "Risks & Safety Protocols" section for Endoscopic Spine Surgery. Competitors list specific risks (dural tear, infection) to build trust.
+- **Content Gap:** "Patient Education Video" embed. A 30-second animated explainer of the "Keyhole" vs "Open" difference.
+- **Content Gap:** "Anesthesia Protocol" dedicated page. "Awake vs Asleep" is a big patient concern.
