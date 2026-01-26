@@ -32,6 +32,7 @@ import { AppointmentType } from "./types";
 import AppointmentScheduler from "./AppointmentScheduler";
 import SpeechButton from "./SpeechButton";
 import { trackConversionOnly } from "@/src/lib/google-ads-conversion";
+import { trackMiddlewareEvent } from "@/src/lib/middleware/rum";
 import { CLINIC } from "@/app/_lib/clinic";
 
 type WorkflowAppointmentType = "new-consultation" | "follow-up" | "second-opinion";
@@ -197,6 +198,12 @@ const PatientPortal = () => {
       setConfirmationMessage(payload?.confirmationMessage || null);
       trackConversionOnly();
 
+      trackMiddlewareEvent('form_submission', {
+        form_type: 'appointment',
+        status: 'success',
+        appointment_type: workflowAppointmentType
+      });
+
       setLastSubmittedData(formData);
       setFormData(INITIAL_FORM_STATE);
       setStep(1);
@@ -209,11 +216,17 @@ const PatientPortal = () => {
       window.scrollTo(0, 0);
     } catch (error) {
       console.error("Booking error:", error);
-      setErrorMessage(
-        error instanceof Error
+      const errMsg = error instanceof Error
           ? error.message
-          : "Failed to book appointment. Please try again later."
-      );
+          : "Failed to book appointment. Please try again later.";
+
+      trackMiddlewareEvent('form_submission', {
+        form_type: 'appointment',
+        status: 'failure',
+        error: errMsg
+      });
+
+      setErrorMessage(errMsg);
     } finally {
       setIsSyncing(false);
     }

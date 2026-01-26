@@ -12,8 +12,8 @@ export default function MiddlewareRUM() {
       onLoad={() => {
         if (typeof window !== 'undefined' && (window as any).Middleware) {
           (window as any).Middleware.track({
-            serviceName: "miidleware",
-            projectName: "miidleware",
+            serviceName: "drsayuj-website",
+            projectName: "drsayuj-website",
             accountKey: "svxkmvkxzpkxtuyhsgmgdiyfjwkxtytiltea",
             target: "https://hjptv.middleware.io",
             tracePropagationTargets: ["https://www.drsayuj.info/"],

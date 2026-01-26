@@ -5,6 +5,7 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Loader2 } from "lucide-react";
+import { trackMiddlewareEvent } from "@/src/lib/middleware/rum";
 import Input from "@/packages/appointment-form/ui/Input";
 import Textarea from "@/packages/appointment-form/ui/Textarea";
 import Calendar from "@/packages/appointment-form/ui/Calendar";
@@ -87,10 +88,22 @@ export default function LeadForm() {
         throw new Error(result.error || "Failed to submit enquiry.");
       }
 
+      trackMiddlewareEvent('form_submission', {
+        form_type: 'lead',
+        status: 'success'
+      });
+
       setIsSubmitted(true);
       reset();
     } catch (err: any) {
       console.error("Submission error:", err);
+
+      trackMiddlewareEvent('form_submission', {
+        form_type: 'lead',
+        status: 'failure',
+        error: err.message
+      });
+
       setSubmitError(err.message || "An unexpected error occurred. Please try again.");
     }
   };
