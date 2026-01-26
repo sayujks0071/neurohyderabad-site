@@ -32,11 +32,18 @@ class MiddlewareApiClient {
     options: RequestInit = {}
   ): Promise<T> {
     const url = `${this.baseUrl}${endpoint}`;
-    const headers = {
+    const headers: Record<string, string> = {
       'Content-Type': 'application/json',
-      ...(this.accessToken && { 'Authorization': `Bearer ${this.accessToken}` }),
-      ...options.headers,
+      ...options.headers as Record<string, string>,
     };
+
+    // Try multiple authentication methods
+    if (this.accessToken) {
+      // First try Bearer token (for Access Tokens)
+      headers['Authorization'] = `Bearer ${this.accessToken}`;
+      // Also try X-API-Key header (for API Keys)
+      headers['X-API-Key'] = this.accessToken;
+    }
 
     const response = await fetch(url, {
       ...options,
