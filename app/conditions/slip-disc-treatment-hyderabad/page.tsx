@@ -147,6 +147,15 @@ export default function SlipDiscTreatmentPage() {
             disc pushes through a crack in the outer ring. This can compress nearby nerves, 
             causing pain, numbness, or weakness in the arms or legs. This compression is often the primary cause of <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 underline">sciatica leg pain</Link>.
           </p>
+
+          <div className="bg-blue-50 border-l-4 border-blue-600 p-4 mb-6 rounded-r-lg">
+             <p className="text-blue-900 text-sm font-medium">
+               <strong>Did you know?</strong> 90% of sciatica cases are caused by a slip disc. If you have radiating leg pain, treating the disc is key to relief.
+               <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="block mt-1 text-blue-700 hover:underline">
+                 ➜ Read our Full Guide to Sciatica Relief
+               </Link>
+             </p>
+          </div>
           
           <h3 className="text-xl font-semibold mb-4 text-blue-700">Common Symptoms</h3>
           <ul className="space-y-2 text-gray-700">

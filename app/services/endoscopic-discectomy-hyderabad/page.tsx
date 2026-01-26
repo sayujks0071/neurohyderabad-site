@@ -109,7 +109,7 @@ export default function EndoscopicDiscectomyPage() {
             <p className="text-lg text-gray-700 mb-6">
               Endoscopic discectomy is a minimally invasive surgical procedure to remove herniated disc material that's compressing spinal nerves. 
               Using a small endoscope and specialized instruments, Dr. Sayuj Krishnan can access and remove the problematic disc material through 
-              a tiny incision, resulting in less tissue damage and faster recovery.
+              a tiny incision, resulting in less tissue damage and faster recovery. It is the gold standard treatment for <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 underline font-medium">sciatica (leg pain)</Link> caused by a herniated disc.
             </p>
             <p className="text-gray-700 mb-6">
               This advanced technique offers significant advantages over traditional open discectomy, including reduced post-operative pain, 
