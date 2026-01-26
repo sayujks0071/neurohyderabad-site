@@ -7,6 +7,8 @@ import { PhysicianSchema } from "../../src/components/schema/PhysicianSchema";
 import Section from "../_components/Section";
 import Card from "../_components/Card";
 import Button from "../_components/Button";
+import LazySection from "../_components/LazySection";
+import RemotionVideoEmbedWrapper from "../_components/RemotionVideoEmbedWrapper";
 
 // Ensure page is statically generated
 export const revalidate = 3600; // Revalidate every hour
@@ -368,6 +370,29 @@ export default function AboutPage() {
             </Card>
           </div>
         </Section>
+
+        {/* Animated Doctor Introduction Video */}
+        <LazySection
+          placeholder={
+            <div className="py-16 bg-white">
+              <div className="container mx-auto px-4">
+                <div className="max-w-4xl mx-auto">
+                  <div className="animate-pulse bg-gray-200 h-[450px] rounded-xl"></div>
+                </div>
+              </div>
+            </div>
+          }
+        >
+          <Section background="white" className="py-16">
+            <RemotionVideoEmbedWrapper
+              compositionId="DoctorIntro"
+              title="Meet Dr. Sayuj Krishnan"
+              description="An animated introduction to Dr. Sayuj's credentials, specializations, and patient care philosophy."
+              controls
+              loop
+            />
+          </Section>
+        </LazySection>
 
         {/* Pioneering Work */}
         <Section background="gray" className="py-16">
