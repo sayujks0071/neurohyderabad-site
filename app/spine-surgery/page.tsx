@@ -4,6 +4,28 @@ import ExpandedFAQ from "../../src/components/ExpandedFAQ";
 import { SITE_URL } from "../../src/lib/seo";
 import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
 import MedicalWebPageSchema from "../components/schemas/MedicalWebPageSchema";
+import CostTransparencySection from "../../src/components/CostTransparencySection";
+
+const spineCosts = [
+  {
+    procedure: "Endoscopic Discectomy (Slip Disc)",
+    range: "₹2.50 Lakh - ₹4.00 Lakh",
+    recovery: "1-2 Weeks",
+    includes: ["Surgery", "1-night hospital stay", "Medications", "Follow-up"]
+  },
+  {
+    procedure: "Endoscopic Decompression (Stenosis)",
+    range: "₹2.50 Lakh - ₹4.50 Lakh",
+    recovery: "2-3 Weeks",
+    includes: ["Surgery", "1-2 night hospital stay", "Medications", "Follow-up"]
+  },
+  {
+    procedure: "Minimally Invasive Fusion (TLIF)",
+    range: "₹3.00 Lakh - ₹5.00 Lakh",
+    recovery: "6-8 Weeks",
+    includes: ["Surgery", "2-3 night hospital stay", "Implants", "Medications"]
+  }
+];
 
 const SPINE_SURGERY_FAQS = [
   {
@@ -630,6 +652,13 @@ export default function SpineSurgeryPage() {
             </div>
           </div>
         </section>
+
+        <div className="container mx-auto px-4 max-w-6xl">
+          <CostTransparencySection
+            costs={spineCosts}
+            disclaimer="Estimates for general guidance. Final cost depends on hospital category, specific implants (if any), and medical complexity. Insurance cashless facility available."
+          />
+        </div>
 
         <ExpandedFAQ faqs={SPINE_SURGERY_FAQS} className="bg-white" />
 
