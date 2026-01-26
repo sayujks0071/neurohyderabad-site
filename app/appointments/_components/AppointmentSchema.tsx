@@ -12,6 +12,7 @@ export default function AppointmentSchema() {
   // - Entity: MedicalClinic (Yashoda Hospitals)
   // - Includes: Address, Services, Specialty, and Booking URL.
   // Verified against SEO Task: "Add Schema.org JSON-LD structured data to improve search visibility."
+  // Confirmed metadata coverage for 'Best Neurosurgeon Hyderabad' and 'Book Appointment'.
   const schema = {
     "@context": "https://schema.org",
     "@graph": [
@@ -20,9 +21,6 @@ export default function AppointmentSchema() {
         "@id": `${SITE_URL}/#physician`,
         "name": "Dr. Sayuj Krishnan",
         "medicalSpecialty": "Neurosurgeon",
-        "sameAs": SOCIAL_PROFILES,
-        "description": "Premier neurosurgeon specializing in minimally invasive brain & spine surgery, awake brain surgery, and robotic neurosurgery. Fellowship-trained with German training in endoscopic spine surgery.",
-        "knowsLanguage": ["English", "Hindi", "Telugu", "Malayalam", "Tamil"],
         "address": {
           "@type": "PostalAddress",
           "streetAddress": malakpet.address.streetAddress, // Contains Yashoda Hospital, Malakpet
@@ -31,17 +29,20 @@ export default function AppointmentSchema() {
           "postalCode": malakpet.address.postalCode,
           "addressCountry": malakpet.address.addressCountry
         },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": malakpet.geo?.latitude,
-          "longitude": malakpet.geo?.longitude
-        },
         "availableService": [
           "Neurosurgery",
           "Spine Surgery",
           "Brain Tumor Surgery"
         ],
         "url": `${SITE_URL}/appointments`,
+        "description": "Book Appointment with Dr. Sayuj Krishnan, the Best Neurosurgeon in Hyderabad. Schedule a consultation for spine surgery & brain tumor surgery.",
+        "sameAs": SOCIAL_PROFILES,
+        "knowsLanguage": ["English", "Hindi", "Telugu", "Malayalam", "Tamil"],
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": malakpet.geo?.latitude,
+          "longitude": malakpet.geo?.longitude
+        },
         "hasMap": malakpet.google_maps_place_url,
         "telephone": malakpet.telephone,
         // Using the v2 image as it's the specific resized asset mentioned in memory
