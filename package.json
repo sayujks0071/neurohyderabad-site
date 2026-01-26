@@ -33,6 +33,8 @@
     "sitemap:submit": "npx tsx scripts/submit-sitemap-and-index.ts --sitemap-only",
     "sitemap:index": "npx tsx scripts/submit-sitemap-and-index.ts --index-only",
     "sitemap:update": "npx tsx scripts/submit-sitemap-and-index.ts",
+    "middleware:setup": "tsx scripts/setup-middleware-monitoring.ts",
+    "middleware:alerts": "tsx scripts/setup-middleware-alerts.ts",
     "jules:weekly-seo": "npx tsx scripts/jules-weekly-seo-automation.ts",
     "jules:test": "npx tsx scripts/test-jules-api.ts",
     "analytics:bigquery-insights": "npx tsx scripts/ga4-bigquery-insights.ts",
