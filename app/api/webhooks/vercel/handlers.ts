@@ -5,7 +5,7 @@
  * See: https://vercel.com/docs/observability/webhooks-api-reference
  */
 
-import { addDeploymentEvent } from './status/route';
+import { addDeploymentEvent } from './status/store';
 
 interface EventMetadata {
   eventId: string;
