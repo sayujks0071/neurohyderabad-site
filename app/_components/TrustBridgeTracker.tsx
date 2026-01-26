@@ -15,19 +15,7 @@ export default function TrustBridgeTracker() {
   const scrollDepthTracked = useRef<Set<number>>(new Set());
 
   useEffect(() => {
-    // Find Trust Bridge section
-    const findTrustBridge = () => {
-      const sections = document.querySelectorAll('section');
-      for (const section of sections) {
-        const text = section.textContent || '';
-        if (text.includes('Meet Dr. Sayuj Krishnan') && text.includes('Patient Success Stories')) {
-          return section as HTMLElement;
-        }
-      }
-      return null;
-    };
-
-    const section = findTrustBridge();
+    const section = document.getElementById('trust-bridge-section');
     if (!section) return;
 
     sectionRef.current = section;
