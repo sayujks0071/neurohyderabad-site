@@ -10,9 +10,13 @@
  *   ts-node scripts/new-blog.ts --title "My Blog Post" --ai (uses OpenAI to generate content)
  */
 
+// Register tsconfig paths to resolve @ aliases
+import 'tsconfig-paths/register';
+
 import fs from 'fs/promises';
 import path from 'path';
-import { execSync } from 'child_process';
+import { generateText } from 'ai';
+import { getTextModel } from '@/src/lib/ai/gateway';
 
 interface BlogOptions {
   title: string;
@@ -125,20 +129,19 @@ async function loadFAQ(faqPath?: string): Promise<Array<{ question: string; answ
   }
 }
 
-// Generate AI content using OpenAI
+// Generate AI content using Vercel AI Gateway / OpenAI
 async function generateAIContent(options: BlogOptions): Promise<string> {
-  const apiKey = process.env.OPENAI_API_KEY;
+  const apiKey = process.env.OPENAI_API_KEY || process.env.AI_GATEWAY_API_KEY;
   
-  if (!apiKey) {
-    console.warn('OPENAI_API_KEY not set, skipping AI generation');
+  // Note: On Vercel, we might use OIDC, but for this script running locally we need a key
+  if (!apiKey && !process.env.VERCEL) {
+    console.warn('OPENAI_API_KEY or AI_GATEWAY_API_KEY not set, skipping AI generation');
     return '';
   }
 
   // Import AI prompts and validation
   const { AI_BLOG_SYSTEM_PROMPT, buildAiBlogUserPrompt } = require('./ai-blog-prompts');
   const { validateGeneratedArticle } = require('../src/lib/blog-validation');
-  
-  const https = require('https');
   
   // Build topic object for prompt
   const topic = {
@@ -154,9 +157,9 @@ async function generateAIContent(options: BlogOptions): Promise<string> {
   const todayISO = new Date().toISOString();
   const userPrompt = buildAiBlogUserPrompt(topic, todayISO);
 
-  return new Promise((resolve, reject) => {
-    const data = JSON.stringify({
-      model: 'gpt-4o-mini',
+  try {
+    const { text } = await generateText({
+      model: getTextModel('gpt-4o-mini'),
       messages: [
         {
           role: 'system',
@@ -168,89 +171,44 @@ async function generateAIContent(options: BlogOptions): Promise<string> {
         },
       ],
       temperature: 0.3,
-      max_tokens: 4000,
+      maxTokens: 4000,
     });
 
-    const options_req = {
-      hostname: 'api.openai.com',
-      port: 443,
-      path: '/v1/chat/completions',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Length': data.length,
-      },
-    };
+    const content = text || '';
+          
+    // Validate content using strict validation
+    const validation = validateGeneratedArticle(content, topic, 1000);
 
-    const req = https.request(options_req, (res: any) => {
-      let body = '';
-      
-      res.on('data', (chunk: Buffer) => {
-        body += chunk.toString();
+    if (!validation.ok) {
+      console.error('❌ AI article validation FAILED:');
+      validation.errors.forEach((err: string) => {
+        console.error(`   • ${err}`);
       });
-      
-      res.on('end', () => {
-        try {
-          const response = JSON.parse(body);
-          
-          if (response.error) {
-            reject(new Error(`OpenAI API Error: ${response.error.message}`));
-            return;
-          }
-          
-          if (!response.choices || !response.choices[0] || !response.choices[0].message) {
-            reject(new Error('Invalid API response structure'));
-            return;
-          }
-          
-          const content = response.choices[0].message.content || '';
-          
-          // Validate content using strict validation
-          const validation = validateGeneratedArticle(content, topic, 1000);
-          
-          if (!validation.ok) {
-            console.error('❌ AI article validation FAILED:');
-            validation.errors.forEach((err: string) => {
-              console.error(`   • ${err}`);
-            });
-            if (validation.warnings.length > 0) {
-              console.warn('Warnings:');
-              validation.warnings.forEach((w: string) => {
-                console.warn(`   • ${w}`);
-              });
-            }
-            // Hard stop: do NOT create file if validation fails
-            reject(new Error(`AI article validation failed: ${validation.errors.join('; ')}`));
-            return;
-          }
-          
-          if (validation.warnings.length > 0) {
-            console.warn('⚠️  AI article validation warnings:');
-            validation.warnings.forEach((w: string) => {
-              console.warn(`   • ${w}`);
-            });
-            console.warn('   Content will be saved but may need review.');
-          } else {
-            console.log('✅ Content validation passed');
-          }
-          
-          resolve(content);
-        } catch (error) {
-          reject(error);
-        }
+      if (validation.warnings.length > 0) {
+        console.warn('Warnings:');
+        validation.warnings.forEach((w: string) => {
+          console.warn(`   • ${w}`);
+        });
+      }
+      // Hard stop: do NOT create file if validation fails
+      throw new Error(`AI article validation failed: ${validation.errors.join('; ')}`);
+    }
+
+    if (validation.warnings.length > 0) {
+      console.warn('⚠️  AI article validation warnings:');
+      validation.warnings.forEach((w: string) => {
+        console.warn(`   • ${w}`);
       });
-    });
+      console.warn('   Content will be saved but may need review.');
+    } else {
+      console.log('✅ Content validation passed');
+    }
 
-    req.on('error', reject);
-    req.setTimeout(60000, () => {
-      req.destroy();
-      reject(new Error('Request timeout'));
-    });
-
-    req.write(data);
-    req.end();
-  });
+    return content;
+  } catch (error) {
+    console.error('Error generating AI content:', error);
+    throw error;
+  }
 }
 
 // Generate skeleton content
@@ -464,4 +422,3 @@ main().catch((error) => {
   console.error('Error:', error);
   process.exit(1);
 });
-
