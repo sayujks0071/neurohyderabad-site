@@ -226,6 +226,91 @@ export async function handleDeploymentChecksCompleted(payload: any, metadata: Ev
   });
 }
 
+export async function handleDeploymentChecksFailed(payload: any, metadata: EventMetadata) {
+  const eventData = {
+    deploymentId: payload.deployment?.id,
+    projectId: payload.project?.id || payload.projectId,
+    projectName: payload.project?.name,
+    checks: payload.checks,
+    failedChecks: payload.checks?.filter((check: any) => check.state === 'failed') || [],
+  };
+  
+  console.error('[webhooks/vercel] Deployment checks failed:', eventData);
+
+  // Store event for status endpoint
+  addDeploymentEvent({
+    eventId: metadata.eventId,
+    eventType: 'deployment.checks.failed',
+    deploymentId: payload.deployment?.id,
+    projectId: payload.project?.id || payload.projectId,
+    projectName: payload.project?.name,
+    status: 'checks_failed',
+    error: { failedChecks: eventData.failedChecks },
+    createdAt: new Date(metadata.createdAt).toISOString(),
+    region: metadata.region,
+  });
+
+  // Send to monitoring service if configured
+  if (process.env.MONITORING_WEBHOOK_URL) {
+    try {
+      await fetch(process.env.MONITORING_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'deployment_checks_failed',
+          project: payload.project?.name,
+          deploymentId: payload.deployment?.id,
+          failedChecks: eventData.failedChecks,
+          timestamp: new Date().toISOString(),
+        }),
+      });
+    } catch (error) {
+      console.error('[webhooks/vercel] Failed to send monitoring alert:', error);
+    }
+  }
+}
+
+export async function handleDeploymentChecksSucceeded(payload: any, metadata: EventMetadata) {
+  const eventData = {
+    deploymentId: payload.deployment?.id,
+    projectId: payload.project?.id || payload.projectId,
+    projectName: payload.project?.name,
+    checks: payload.checks,
+  };
+  
+  console.log('[webhooks/vercel] Deployment checks succeeded:', eventData);
+
+  // Store event for status endpoint
+  addDeploymentEvent({
+    eventId: metadata.eventId,
+    eventType: 'deployment.checks.succeeded',
+    deploymentId: payload.deployment?.id,
+    projectId: payload.project?.id || payload.projectId,
+    projectName: payload.project?.name,
+    status: 'checks_succeeded',
+    createdAt: new Date(metadata.createdAt).toISOString(),
+    region: metadata.region,
+  });
+}
+
+export async function handleDeploymentCheckrunStart(payload: any, metadata: EventMetadata) {
+  console.log('[webhooks/vercel] Deployment checkrun started:', {
+    deploymentId: payload.deployment?.id,
+    checkId: payload.check?.id,
+    checkName: payload.check?.name,
+    checkType: payload.check?.type,
+  });
+}
+
+export async function handleDeploymentCheckrunCancel(payload: any, metadata: EventMetadata) {
+  console.log('[webhooks/vercel] Deployment checkrun cancelled:', {
+    deploymentId: payload.deployment?.id,
+    checkId: payload.check?.id,
+    checkName: payload.check?.name,
+    userId: payload.user?.id,
+  });
+}
+
 // ===== PROJECT EVENT HANDLERS =====
 
 export async function handleProjectCreated(payload: any, metadata: EventMetadata) {
