@@ -183,6 +183,51 @@ export default function RoboticSpineSurgeryPage() {
             </div>
           </section>
 
+          <section className="mb-12 bg-gray-50 p-8 rounded-lg border border-gray-200">
+            <h2 className="text-3xl font-bold text-blue-800 mb-6">Robotic Precision vs. Traditional Surgery</h2>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left bg-white rounded-lg shadow-sm">
+                <thead>
+                  <tr className="bg-blue-100 border-b border-blue-200">
+                    <th className="p-4 font-semibold text-blue-800">Feature</th>
+                    <th className="p-4 font-semibold text-blue-800">Traditional Open Surgery</th>
+                    <th className="p-4 font-semibold text-blue-800">Robotic Spine Surgery</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-100">
+                  <tr>
+                    <td className="p-4 font-medium text-gray-700">Accuracy</td>
+                    <td className="p-4 text-gray-600">Dependent on surgeon's hand & 2D X-rays (90-95%)</td>
+                    <td className="p-4 text-green-700 font-bold">Sub-millimeter precision (99.9%)</td>
+                  </tr>
+                  <tr>
+                    <td className="p-4 font-medium text-gray-700">Radiation Exposure</td>
+                    <td className="p-4 text-gray-600">High (Frequent X-rays needed)</td>
+                    <td className="p-4 text-green-700 font-bold">Minimal (Pre-planned trajectory)</td>
+                  </tr>
+                  <tr>
+                    <td className="p-4 font-medium text-gray-700">Incision Size</td>
+                    <td className="p-4 text-gray-600">Large (To visualize anatomy)</td>
+                    <td className="p-4 text-green-700 font-bold">Small (Keyhole access)</td>
+                  </tr>
+                  <tr>
+                    <td className="p-4 font-medium text-gray-700">Muscle Damage</td>
+                    <td className="p-4 text-gray-600">Significant (Muscles stripped from bone)</td>
+                    <td className="p-4 text-green-700 font-bold">Minimal (Muscles dilated gently)</td>
+                  </tr>
+                  <tr>
+                    <td className="p-4 font-medium text-gray-700">Recovery Time</td>
+                    <td className="p-4 text-gray-600">Weeks to Months</td>
+                    <td className="p-4 text-green-700 font-bold">Days to Weeks</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p className="mt-4 text-sm text-gray-600 italic text-center">
+              *Comparison based on average clinical outcomes. Individual results may vary.
+            </p>
+          </section>
+
           <PatientJourneySection title="Robotic Surgery Workflow" steps={JOURNEY_STEPS} />
 
           <section className="mb-12">

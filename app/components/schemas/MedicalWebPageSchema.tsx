@@ -9,6 +9,8 @@ interface MedicalWebPageSchemaProps {
   author?: string;
   serviceOrCondition?: string;
   breadcrumbs?: Array<{ name: string; path: string }>;
+  medicalSpecialty?: string | string[];
+  audience?: string;
 }
 
 export default function MedicalWebPageSchema({
@@ -19,7 +21,9 @@ export default function MedicalWebPageSchema({
   lastReviewed = new Date().toISOString().split('T')[0],
   author = 'Dr. Sayuj Krishnan',
   serviceOrCondition,
-  breadcrumbs = []
+  breadcrumbs = [],
+  medicalSpecialty,
+  audience
 }: MedicalWebPageSchemaProps) {
   const baseSchema: any = {
     "@context": "https://schema.org",
@@ -68,6 +72,19 @@ export default function MedicalWebPageSchema({
       "url": SITE_URL
     }
   };
+
+  if (medicalSpecialty) {
+    baseSchema.specialty = Array.isArray(medicalSpecialty)
+      ? medicalSpecialty.map(s => ({ "@type": "MedicalSpecialty", "name": s }))
+      : { "@type": "MedicalSpecialty", "name": medicalSpecialty };
+  }
+
+  if (audience) {
+    baseSchema.audience = {
+      "@type": "Audience",
+      "audienceType": audience
+    };
+  }
 
   // Add service-specific schema
   if (pageType === 'service' && serviceOrCondition) {

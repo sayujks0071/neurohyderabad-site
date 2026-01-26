@@ -39,6 +39,11 @@ export const CANONICAL_PHYSICIAN_NAME = "Dr. Sayuj Krishnan – Neurosurgeon";
 export const CANONICAL_TELEPHONE = "+919778280044";
 export const CANONICAL_WHATSAPP = "919778280044";
 
+/**
+ * Canonical Address for Local Citations (Google Maps, JustDial, etc.)
+ * This address format must be maintained exactly across all external platforms
+ * to ensure NAP (Name, Address, Phone) consistency for Local SEO.
+ */
 export const YASHODA_MALAKPET_ADDRESS: LocationAddress = {
   streetAddress: "Room No 317, OPD Block, Yashoda Hospital, Nalgonda X Roads, Malakpet",
   addressLocality: "Hyderabad",

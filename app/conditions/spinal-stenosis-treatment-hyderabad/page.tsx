@@ -16,8 +16,8 @@ import OutcomeMetricsSection from '@/components/OutcomeMetricsSection';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
 
 const baseMetadata = makeMetadata({
-  title: 'Lumbar Canal Stenosis Treatment in Hyderabad | Walking Pain Surgery',
-  description: 'Expert treatment for Lumbar Canal Stenosis (Spinal Narrowing) by Dr. Sayuj Krishnan. Decompressive Laminectomy costs and recovery in Hyderabad.',
+  title: 'Spinal Stenosis Treatment in Hyderabad | Walking Pain Relief',
+  description: 'Can\'t walk more than 10 mins? Expert Lumbar Canal Stenosis treatment in Hyderabad. Micro-Decompression surgery for leg pain & heaviness. Dr Sayuj.',
   canonicalPath: '/conditions/spinal-stenosis-treatment-hyderabad',
 });
 
