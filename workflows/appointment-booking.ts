@@ -46,7 +46,8 @@ async function retry<T>(
     try {
       const result = await fn();
       if (predicate && !predicate(result)) {
-        throw new Error(`${name} failed check`);
+        const errorMsg = (result as any)?.error || (result as any)?.message || "check failed";
+        throw new Error(`${name} failed: ${errorMsg}`);
       }
       return result;
     } catch (error) {
@@ -431,13 +432,20 @@ function logWorkflowEvent(
   event: string,
   payload: Record<string, any> = {}
 ) {
+  // Redact PII
+  const safePayload = { ...payload };
+  const sensitiveKeys = ["email", "phone", "name", "patientName", "patientEmail"];
+  for (const key of sensitiveKeys) {
+    if (key in safePayload) safePayload[key] = "[REDACTED]";
+  }
+
   console.log(
     JSON.stringify({
       timestamp: new Date().toISOString(),
       workflow: "appointment-booking",
       bookingId,
       event,
-      ...payload,
+      ...safePayload,
     })
   );
 }
@@ -694,14 +702,17 @@ async function triggerAppointmentWebhooks(
 ): Promise<void> {
   "use step";
 
-  await notifyAppointmentWebhooks(
-    buildWebhookPayload({
-      booking,
-      confirmationMessage,
-      emailResult,
-      usedAI,
-      source,
-    })
+  await retry(
+    async () => notifyAppointmentWebhooks(
+      buildWebhookPayload({
+        booking,
+        confirmationMessage,
+        emailResult,
+        usedAI,
+        source,
+      })
+    ),
+    { retries: 3, delay: 1000, name: "webhooks" }
   );
 }
 
