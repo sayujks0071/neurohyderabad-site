@@ -97,7 +97,7 @@ export default function MalakpetNeurosurgeonPage() {
             Dr. Sayuj Krishnan – Your Local Neurosurgeon at Yashoda Hospital Malakpet. Full Endoscopic Spine Surgery • Brain Tumor Surgery • 24/7 Emergency Care • 9+ Years Experience
           </p>
           <div className="mt-6">
-             <LocationCTAs location={location} />
+             <LocationCTAs mode="location" locationId={location.id} />
           </div>
         </div>
       </section>
@@ -377,7 +377,7 @@ export default function MalakpetNeurosurgeonPage() {
             Expert neurosurgical care right in Malakpet at Yashoda Hospital.
           </p>
           <div className="mt-6">
-             <LocationCTAs location={location} />
+             <LocationCTAs mode="location" locationId={location.id} />
           </div>
         </div>
       </section>

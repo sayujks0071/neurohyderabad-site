@@ -78,7 +78,7 @@ export default function JubileeHillsNeurosurgeonPage() {
             Full Endoscopic Spine Surgery • Brain Tumor Surgery • Daycare Procedures • 9+ Years Experience
           </p>
           <div className="mt-6">
-            <LocationCTAs location={location} />
+            <LocationCTAs mode="location" locationId={location.id} />
           </div>
         </div>
       </section>
@@ -114,7 +114,7 @@ export default function JubileeHillsNeurosurgeonPage() {
           </div>
 
           <div>
-             <LocationNAPCard location={location} className="mb-6 shadow-lg" />
+             <LocationNAPCard mode="location" locationId={location.id} className="mb-6 shadow-lg" />
 
             <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-lg">
               <h3 className="text-xl font-semibold text-blue-700">

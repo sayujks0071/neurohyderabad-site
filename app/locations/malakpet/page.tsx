@@ -75,7 +75,7 @@ export default function MalakpetLocationPage() {
         </p>
 
         <div className="mt-8">
-           <LocationCTAs location={location} />
+           <LocationCTAs mode="location" locationId={location.id} />
         </div>
       </div>
 
