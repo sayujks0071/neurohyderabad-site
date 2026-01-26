@@ -25,6 +25,20 @@ A TypeScript client is available at `src/lib/middleware/api-client.ts` that prov
    MIDDLEWARE_API_URL=https://hjptv.middleware.io/api/v1  # Optional, defaults to this
    ```
 
+3. **Quick Setup:**
+   ```bash
+   ./scripts/setup-middleware-env.sh
+   ```
+
+### API Keys Reference
+
+**Note:** Different keys are used for different purposes:
+- **Agent API Key**: `fygjftkluglwjxlwyhqdwshcbwtvfavastli` (for infrastructure agents)
+- **RUM Account Key**: `svxkmvkxzpkxtuyhsgmgdiyfjwkxtytiltea` (for browser monitoring)
+- **API Access Token**: Generated from dashboard (for programmatic API access)
+
+See [Middleware Configuration Guide](./middleware-configuration.md) for complete key reference.
+
 ## Usage Examples
 
 ### 1. Dashboard Management
