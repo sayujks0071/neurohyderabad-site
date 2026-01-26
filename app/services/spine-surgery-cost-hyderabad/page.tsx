@@ -12,8 +12,8 @@ import FAQPageSchema from '@/app/_components/FAQPageSchema';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 
 const baseMetadata = makeMetadata({
-  title: 'Spine Surgery Cost Hyderabad | Packages & Insurance',
-  description: 'Spine surgery cost in Hyderabad starts ₹95k. Cashless insurance accepted. Get detailed price packages for endoscopic surgery.',
+  title: 'Spine Surgery Cost in Hyderabad 2025 | TESS, Fusion & Implants Price',
+  description: 'Detailed spine surgery cost guide for Hyderabad. Endoscopic TESS (₹2.5L+), Microdiscectomy, and Implant prices (Indian vs Imported). Cashless Insurance accepted.',
   canonicalPath: '/services/spine-surgery-cost-hyderabad',
 });
 
@@ -26,10 +26,10 @@ export const metadata: Metadata = {
     siteName: 'Dr. Sayuj Krishnan - Neurosurgeon in Hyderabad',
     images: [
       {
-        url: `${SITE_URL}/api/og?title=Spine%20Surgery%20Cost%20in%20Hyderabad&subtitle=Complete%20Price%20Guide%202025`,
+        url: `${SITE_URL}/api/og?title=Spine%20Surgery%20Cost%20in%20Hyderabad&subtitle=2025%20Price%20Guide%20%26%20Packages`,
         width: 1200,
         height: 630,
-        alt: 'Spine Surgery Cost Guide - Dr. Sayuj Krishnan',
+        alt: 'Spine Surgery Cost Guide Hyderabad - Dr. Sayuj Krishnan',
       },
     ],
     locale: 'en_IN',
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: baseMetadata.title,
     description: baseMetadata.description,
-    images: [`${SITE_URL}/api/og?title=Spine%20Surgery%20Cost%20in%20Hyderabad&subtitle=Complete%20Price%20Guide%202025`],
+    images: [`${SITE_URL}/api/og?title=Spine%20Surgery%20Cost%20in%20Hyderabad&subtitle=2025%20Price%20Guide%20%26%20Packages`],
   },
 };
 
@@ -52,26 +52,34 @@ const faqSchema = {
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "How much does spine surgery cost in Hyderabad?",
+      "name": "How much does endoscopic spine surgery cost in Hyderabad?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Spine surgery costs in Hyderabad vary by procedure type. Endoscopic discectomy typically costs ₹2,50,000-4,00,000, while spinal fusion ranges from ₹3,00,000-5,00,000. Minimally invasive procedures often cost less than open surgery due to shorter hospital stays. Costs include surgery, hospital stay, medications, and follow-up care."
+        "text": "The cost of endoscopic spine surgery in Hyderabad typically ranges from ₹2,50,000 to ₹4,00,000 depending on the technique (TESS vs Interlaminar) and hospital category. This includes surgeon fees, theatre charges, and a 1-night hospital stay."
       }
     },
     {
       "@type": "Question",
-      "name": "Does insurance cover spine surgery in Hyderabad?",
+      "name": "What is the cost of titanium spine implants?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, most health insurance plans cover spine surgery in Hyderabad, including endoscopic and minimally invasive procedures. Cashless insurance options are available at Yashoda Hospital. Our team helps with pre-authorization and understanding your coverage. Contact us to verify your insurance eligibility."
+        "text": "Spine implants (screws and rods) are charged separately. High-grade Indian titanium implants cost approx. ₹35,000–₹50,000 per level, while imported (US/German) FDA-approved implants range from ₹60,000–₹1,00,000 per level."
       }
     },
     {
       "@type": "Question",
-      "name": "What is the cost difference between endoscopic and open spine surgery?",
+      "name": "Is spine surgery covered by insurance in Hyderabad?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Endoscopic spine surgery typically costs ₹2,50,000-4,00,000, while traditional open surgery ranges from ₹2,00,000-3,50,000. However, endoscopic surgery often results in lower overall costs due to same-day or 1-night discharge, reduced medication needs, and faster return to work. The minimally invasive approach offers better value despite slightly higher initial cost."
+        "text": "Yes, nearly all comprehensive health insurance policies cover spine surgery (discectomy, fusion, laminectomy). We accept cashless claims from major providers like Star Health, HDFC Ergo, Niva Bupa, SBI General, and ICICI Lombard at Yashoda Hospital."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is endoscopic surgery cost higher than open surgery?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Endoscopic surgery requires specialized disposable kits, high-definition cameras, and advanced burrs, which increases the consumable cost. However, the total cost often balances out due to shorter hospital stays (1 day vs 3-4 days) and faster return to work."
       }
     }
   ]
@@ -83,30 +91,49 @@ export default function SpineSurgeryCostPage() {
     question: item.name,
     answer: item.acceptedAnswer.text,
   }));
+
   const procedures = [
     {
-      name: 'Endoscopic Discectomy',
-      cost: '₹2,50,000 - ₹4,00,000',
-      includes: ['Surgery', '1-night hospital stay', 'Medications', 'Follow-up'],
-      notes: 'Same-day discharge possible'
+      name: 'Transforaminal Endoscopic (TESS)',
+      cost: '₹2,50,000 - ₹3,50,000',
+      category: 'Endoscopic (Stitchless)',
+      includes: ['Surgeon & Asst Fees', 'OT & C-Arm Charges', 'Endoscope Kit', '1-Day Room Rent'],
+      notes: 'Best for lateral disc herniations. Walk same day.'
     },
     {
-      name: 'Spinal Fusion (TLIF/ACDF)',
-      cost: '₹3,00,000 - ₹5,00,000',
-      includes: ['Surgery', '2-3 night hospital stay', 'Implants', 'Medications', 'Follow-up'],
-      notes: 'Cost varies by implant type'
+      name: 'Interlaminar Endoscopic (IESS)',
+      cost: '₹2,80,000 - ₹4,00,000',
+      category: 'Endoscopic (Stenosis)',
+      includes: ['Surgeon Fees', 'OT Charges', 'Burr/Drill Charges', '1-2 Days Room Rent'],
+      notes: 'For L5-S1 disc and spinal stenosis.'
     },
     {
-      name: 'Minimally Invasive Spine Surgery',
-      cost: '₹2,50,000 - ₹4,50,000',
-      includes: ['Surgery', '1-2 night hospital stay', 'Medications', 'Follow-up'],
-      notes: 'Faster recovery, lower overall cost'
+      name: 'Cervical Endoscopic Discectomy',
+      cost: '₹3,00,000 - ₹4,50,000',
+      category: 'Cervical (Neck)',
+      includes: ['Anterior Approach', 'Neck Brace', 'Physiotherapy', '1-2 Days Stay'],
+      notes: 'Keyhole surgery for neck pain/radiculopathy.'
     },
     {
-      name: 'Open Discectomy',
-      cost: '₹2,00,000 - ₹3,50,000',
-      includes: ['Surgery', '2-3 night hospital stay', 'Medications', 'Follow-up'],
-      notes: 'Traditional approach'
+      name: 'MIS-TLIF (Spinal Fusion)',
+      cost: '₹3,50,000 - ₹5,50,000',
+      category: 'Fusion Surgery',
+      includes: ['Surgery Charges', '3-4 Days Stay', 'Bone Graft', 'Post-op Brace'],
+      notes: 'Plus Implant Cost (see below). For instability.'
+    },
+    {
+      name: 'Microdiscectomy (Gold Standard)',
+      cost: '₹2,20,000 - ₹3,20,000',
+      category: 'Microscopic',
+      includes: ['Microscope Usage', '2-Days Stay', 'Medications', 'Follow-up'],
+      notes: 'Tried and tested standard approach.'
+    },
+    {
+      name: 'Vertebroplasty (Cement)',
+      cost: '₹1,50,000 - ₹2,50,000',
+      category: 'Fracture Care',
+      includes: ['Bone Cement Kit', 'Needle Kit', 'OT Charges', 'Day Care'],
+      notes: 'For osteoporotic compression fractures.'
     }
   ];
 
@@ -116,7 +143,7 @@ export default function SpineSurgeryCostPage() {
         items={[
           { name: 'Home', path: '/' },
           { name: 'Services', path: '/services' },
-          { name: 'Spine Surgery Cost Hyderabad', path: '/services/spine-surgery-cost-hyderabad' },
+          { name: 'Spine Surgery Cost', path: '/services/spine-surgery-cost-hyderabad' },
         ]}
       />
       <FAQPageSchema faqs={faqs} pageUrl={pageUrl} />
@@ -127,150 +154,167 @@ export default function SpineSurgeryCostPage() {
       <div className="min-h-screen bg-white">
         <div className="container mx-auto px-4 py-16">
           <header className="text-center mb-12">
-            <h1 className="text-4xl font-bold mb-4">Spine Surgery Cost in Hyderabad</h1>
+            <h1 className="text-3xl md:text-5xl font-bold mb-4 text-gray-900">Spine Surgery Cost in Hyderabad <span className="text-blue-600 block text-2xl md:text-3xl mt-2 font-medium">2025 Price Guide</span></h1>
             <AuthorByline
               publishedOn="2025-11-25"
               updatedOn="2025-11-25"
               className="justify-center"
             />
-            <p className="text-lg text-gray-600 mt-4 max-w-3xl mx-auto">
-              Complete guide to spine surgery costs, insurance coverage, and payment options at Yashoda Hospital, Hyderabad.
+            <p className="text-lg text-gray-700 mt-6 max-w-3xl mx-auto leading-relaxed">
+              Transparent pricing for world-class spine care. Compare costs for <strong>Endoscopic Spine Surgery</strong>, <strong>Microdiscectomy</strong>, and <strong>Spinal Fusion</strong> at Yashoda Hospital.
             </p>
           </header>
 
-          <section className="bg-blue-50 p-6 rounded-lg mb-8">
-            <p className="text-center">
-              <strong>Contact:</strong>
-              <a href="tel:+919778280044" className="text-blue-600 hover:underline ml-2">+91-9778280044</a> •
-              <a href="mailto:hellodr@drsayuj.info" className="text-blue-600 hover:underline ml-2">hellodr@drsayuj.info</a> •
-              <Link href="/appointments" className="text-blue-600 hover:underline ml-2">Appointments</Link>
+          <section className="bg-blue-50 border border-blue-100 p-6 rounded-xl mb-12 text-center shadow-sm">
+            <p className="text-gray-800 font-medium">
+              Need a formal medical estimate for insurance approval?
             </p>
+            <div className="mt-4 flex flex-wrap justify-center gap-4 text-sm">
+              <a href="tel:+919778280044" className="flex items-center bg-white px-4 py-2 rounded-full text-blue-700 border border-blue-200 hover:shadow-md transition-all">
+                📞 Call: +91-9778280044
+              </a>
+              <a href="https://wa.me/919778280044" className="flex items-center bg-[#25D366] px-4 py-2 rounded-full text-white hover:bg-[#128C7E] transition-all">
+                💬 WhatsApp Estimate
+              </a>
+            </div>
           </section>
 
-          <section className="mb-12">
-            <h2 className="text-3xl font-bold text-blue-800 mb-6">Spine Surgery Cost Breakdown</h2>
-            <div className="grid md:grid-cols-2 gap-6">
+          <section className="mb-14">
+            <h2 className="text-3xl font-bold text-gray-900 mb-8">Procedure Cost Breakdown</h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {procedures.map((procedure, index) => (
-                <div key={index} className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-                  <h3 className="text-xl font-semibold text-blue-700 mb-3">{procedure.name}</h3>
-                  <div className="text-2xl font-bold text-green-600 mb-4">{procedure.cost}</div>
-                  <div className="mb-4">
-                    <h4 className="font-semibold text-gray-700 mb-2">Includes:</h4>
-                    <ul className="space-y-1 text-sm text-gray-600">
+                <div key={index} className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col">
+                  <div className="text-xs font-bold uppercase tracking-wider text-blue-600 mb-2">{procedure.category}</div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">{procedure.name}</h3>
+                  <div className="text-2xl font-bold text-green-700 mb-4">{procedure.cost}</div>
+                  <div className="mb-4 flex-grow">
+                    <ul className="space-y-2 text-sm text-gray-600">
                       {procedure.includes.map((item, idx) => (
-                        <li key={idx}>• {item}</li>
+                        <li key={idx} className="flex items-start">
+                           <span className="text-green-500 mr-2">✓</span> {item}
+                        </li>
                       ))}
                     </ul>
                   </div>
-                  <p className="text-sm text-gray-500 italic">{procedure.notes}</p>
+                  <div className="pt-4 border-t border-gray-100">
+                     <p className="text-sm text-gray-500 italic">💡 {procedure.notes}</p>
+                  </div>
                 </div>
               ))}
             </div>
+            <p className="text-xs text-gray-500 mt-4 text-center italic">
+              *Prices are indicative estimates for General Ward/Twin Sharing. Final cost depends on medical complexity and room category.
+            </p>
           </section>
 
-          <section className="mb-12">
-            <h2 className="text-3xl font-bold text-blue-800 mb-6">Factors Affecting Cost</h2>
+          <section className="mb-14 bg-gray-50 p-8 rounded-2xl border border-gray-200">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">Implants & Consumables Cost (Extra)</h2>
+            <p className="text-gray-700 mb-6">
+              For spinal fusion (screws/rods) or stabilization, implant costs are charged separately based on your choice of brand/material.
+            </p>
             <div className="grid md:grid-cols-2 gap-8">
-              <div className="bg-white p-6 rounded-lg shadow-sm border">
-                <h3 className="text-lg font-semibold mb-3 text-blue-700">Procedure Type</h3>
-                <ul className="space-y-2 text-gray-700">
-                  <li>• Minimally invasive vs open surgery</li>
-                  <li>• Single vs multi-level procedures</li>
-                  <li>• Use of implants (fusion)</li>
-                  <li>• Complexity of case</li>
-                </ul>
+              <div className="bg-white p-6 rounded-lg shadow-sm">
+                 <h3 className="text-lg font-bold text-gray-900 mb-2">🇮🇳 Indian High-Grade Titanium</h3>
+                 <p className="text-2xl font-bold text-blue-700 mb-2">₹35,000 - ₹50,000 <span className="text-sm font-normal text-gray-500">/ level</span></p>
+                 <p className="text-sm text-gray-600">ISO/CE certified Indian brands. Excellent durability and widely used.</p>
               </div>
-              <div className="bg-white p-6 rounded-lg shadow-sm border">
-                <h3 className="text-lg font-semibold mb-3 text-blue-700">Hospital Stay</h3>
-                <ul className="space-y-2 text-gray-700">
-                  <li>• Endoscopic: Same-day or 1 night</li>
-                  <li>• Open surgery: 2-3 nights</li>
-                  <li>• ICU stay (if needed)</li>
-                  <li>• Post-operative care</li>
-                </ul>
+              <div className="bg-white p-6 rounded-lg shadow-sm">
+                 <h3 className="text-lg font-bold text-gray-900 mb-2">🇺🇸 Imported (US/German)</h3>
+                 <p className="text-2xl font-bold text-blue-700 mb-2">₹60,000 - ₹1,00,000 <span className="text-sm font-normal text-gray-500">/ level</span></p>
+                 <p className="text-sm text-gray-600">FDA approved brands (Medtronic, J&J, etc.). Premium finish and extensive R&D.</p>
               </div>
             </div>
           </section>
 
-          <section className="mb-12 bg-green-50 p-8 rounded-lg">
-            <h2 className="text-3xl font-bold text-blue-800 mb-6">Insurance Coverage</h2>
+          <section className="mb-14">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">Insurance & Cashless Facility</h2>
+            <div className="grid md:grid-cols-2 gap-10 items-center">
+              <div>
+                <p className="text-gray-700 mb-6 text-lg">
+                  We accept <strong>Cashless Insurance</strong> from all major TPA and Insurance providers at Yashoda Hospital. Our dedicated desk handles pre-authorization so you can focus on recovery.
+                </p>
+                <h3 className="font-bold text-gray-900 mb-4">Accepted Partners Include:</h3>
+                <div className="flex flex-wrap gap-3">
+                   {['Star Health', 'HDFC Ergo', 'Niva Bupa (Max Bupa)', 'SBI General', 'ICICI Lombard', 'Care Insurance', 'United India', 'New India Assurance'].map(insurer => (
+                     <span key={insurer} className="bg-green-50 text-green-800 px-3 py-1 rounded-md text-sm font-medium border border-green-100">
+                       {insurer}
+                     </span>
+                   ))}
+                   <span className="text-gray-500 text-sm flex items-center">& many more...</span>
+                </div>
+              </div>
+              <div className="bg-blue-600 text-white p-8 rounded-2xl shadow-lg">
+                <h3 className="text-xl font-bold mb-4">Insurance Checklist</h3>
+                <ul className="space-y-3">
+                   <li className="flex items-start"><span className="mr-3">📄</span> Bring your Insurance Card / Policy Copy</li>
+                   <li className="flex items-start"><span className="mr-3">🆔</span> Govt ID Proof (Aadhar/PAN) of Patient</li>
+                   <li className="flex items-start"><span className="mr-3">🕒</span> Past 2 years treatment records (if any)</li>
+                   <li className="flex items-start"><span className="mr-3">👨‍⚕️</span> Previous MRI/X-Ray Reports</li>
+                </ul>
+                <div className="mt-6 pt-6 border-t border-blue-500">
+                   <p className="text-sm opacity-90">Need help checking eligibility?</p>
+                   <a href="https://wa.me/919778280044?text=Hi%20Dr%20Sayuj,%20I%20want%20to%20check%20my%20insurance%20eligibility" className="mt-2 inline-block font-bold hover:underline">Chat with Insurance Desk →</a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section className="mb-14">
+            <h2 className="text-3xl font-bold text-gray-900 mb-8">Why Cost Varies?</h2>
             <div className="grid md:grid-cols-2 gap-8">
-              <div>
-                <h3 className="text-lg font-semibold mb-3 text-blue-700">Accepted Insurance</h3>
-                <ul className="space-y-2 text-gray-700">
-                  <li>• Most major insurance providers</li>
-                  <li>• Cashless insurance available</li>
-                  <li>• TPA networks supported</li>
-                  <li>• Corporate health insurance</li>
-                </ul>
+              <div className="border-l-4 border-blue-500 pl-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Hospital Room Category</h3>
+                <p className="text-gray-700">
+                   Prices vary significantly between General Ward, Twin Sharing, and Private Rooms. Procedure charges (OT, Surgeon) often scale with the room category in corporate hospitals.
+                </p>
               </div>
-              <div>
-                <h3 className="text-lg font-semibold mb-3 text-blue-700">Payment Options</h3>
-                <ul className="space-y-2 text-gray-700">
-                  <li>• Cashless insurance</li>
-                  <li>• Reimbursement claims</li>
-                  <li>• EMI options available</li>
-                  <li>• Cash, UPI, Credit Card</li>
-                </ul>
+              <div className="border-l-4 border-green-500 pl-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Medical Complexity</h3>
+                <p className="text-gray-700">
+                   A straightforward single-level disc is cheaper than a multi-level compression or a revision surgery (re-do of previous surgery), which takes more time and skill.
+                </p>
               </div>
-            </div>
-            <div className="mt-6 p-4 bg-white rounded border border-green-200">
-              <p className="text-gray-700">
-                <strong>Note:</strong> Our team helps with insurance pre-authorization and understanding your coverage. 
-                Contact us at <a href="tel:+919778280044" className="text-blue-600 hover:underline">+91-9778280044</a> to verify your insurance eligibility.
-              </p>
-            </div>
-          </section>
-
-          <section className="mb-12">
-            <h2 className="text-3xl font-bold text-blue-800 mb-6">Why Choose Dr. Sayuj Krishnan?</h2>
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="bg-white p-6 rounded-lg shadow-sm border text-center">
-                <div className="text-3xl mb-3">💰</div>
-                <h3 className="font-semibold text-blue-700 mb-2">Transparent Pricing</h3>
-                <p className="text-sm text-gray-600">No hidden costs, clear cost breakdown provided upfront</p>
+              <div className="border-l-4 border-yellow-500 pl-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Technology Used</h3>
+                <p className="text-gray-700">
+                   Use of specialized equipment like <strong>Neuromonitoring</strong> (to protect nerves), <strong>High-speed Burrs</strong>, or <strong>Microscopes</strong> adds consumable costs but increases safety.
+                </p>
               </div>
-              <div className="bg-white p-6 rounded-lg shadow-sm border text-center">
-                <div className="text-3xl mb-3">🏥</div>
-                <h3 className="font-semibold text-blue-700 mb-2">Same-Day Discharge</h3>
-                <p className="text-sm text-gray-600">Endoscopic procedures allow same-day discharge, reducing overall cost</p>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow-sm border text-center">
-                <div className="text-3xl mb-3">✅</div>
-                <h3 className="font-semibold text-blue-700 mb-2">Insurance Support</h3>
-                <p className="text-sm text-gray-600">Expert help with insurance claims and pre-authorization</p>
+              <div className="border-l-4 border-purple-500 pl-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Length of Stay</h3>
+                <p className="text-gray-700">
+                   Endoscopic surgery allows discharge in 24 hours. Open surgery might need 3-4 days. While the endoscopic kit is costly, the saved room rent often balances the total bill.
+                </p>
               </div>
             </div>
           </section>
 
-          <section className="bg-blue-50 p-8 rounded-lg text-center">
-            <h2 className="text-2xl font-bold text-blue-800 mb-4">Get a Personalized Cost Estimate</h2>
-            <p className="text-gray-600 mb-6">
-              Contact us for a detailed cost estimate based on your specific condition and treatment needs.
+          <section className="bg-gradient-to-r from-blue-900 to-blue-800 text-white p-10 rounded-2xl text-center shadow-xl">
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">Get a Transparent Quote Today</h2>
+            <p className="text-blue-100 mb-8 max-w-2xl mx-auto text-lg">
+              No hidden charges. Share your MRI report for a personalized treatment plan and cost estimate from Dr. Sayuj Krishnan.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link 
                 href="/appointments/"
-                className="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-colors"
+                className="bg-white text-blue-900 px-8 py-4 rounded-full hover:bg-blue-50 transition-colors font-bold text-lg shadow-md"
               >
                 Book Consultation
               </Link>
               <Link 
-                href="/contact/"
-                className="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-full hover:bg-blue-600 hover:text-white transition-colors"
+                href="https://wa.me/919778280044"
+                className="bg-green-600 text-white px-8 py-4 rounded-full hover:bg-green-700 transition-colors font-bold text-lg shadow-md flex items-center justify-center"
               >
-                Contact Us
+                <span className="mr-2">WhatsApp MRI</span>
               </Link>
             </div>
           </section>
 
-          <section className="mt-12 space-y-6">
-
-
-      <div className="mt-12">
-        <LocalPathways mode="service" />
-      </div>
-      <SourceList sources={ARTICLE_SOURCES} heading="References" />
+          <section className="mt-16 space-y-8">
+            <div className="mt-12">
+              <LocalPathways mode="service" />
+            </div>
+            <SourceList sources={ARTICLE_SOURCES} heading="References" />
             <ReviewedBy lastReviewed="2025-11-25" />
             <NAP />
           </section>
