@@ -463,7 +463,7 @@ export default function Home() {
         </Section>
 
         {/* Trust Bridge Section - Connect Services to Credentials */}
-        <Section background="blue" className="py-16 bg-gradient-to-r from-blue-50 to-indigo-50">
+        <Section id="trust-bridge-section" background="blue" className="py-16 bg-gradient-to-r from-blue-50 to-indigo-50">
           <div className="grid md:grid-cols-2 gap-8">
             <TrustBridgeLink
               href="/about"
