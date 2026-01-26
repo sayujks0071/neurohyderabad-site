@@ -55,18 +55,24 @@ export default function AppointmentsPage() {
   }, []);
 
   // Quick Action: Confirm appointment via WhatsApp
+  // Opens a dynamic WhatsApp API link with a pre-filled confirmation message.
+  // Phone number is sanitized and message includes patient name and date.
   const sendWhatsapp = (appointment: Appointment) => {
+    // Ensure we have a phone number before proceeding
     if (!appointment.patient_phone) {
       alert('No phone number available for this patient.');
       return;
     }
 
+    // Generate the WhatsApp URL with sanitized phone and pre-filled message
     const url = generateWhatsappUrl({
       id: appointment.id,
       fullName: appointment.patient_name,
       phone: appointment.patient_phone,
       preferredDate: formatDate(appointment.preferred_date),
     });
+
+    // Open in a new tab
     window.open(url, '_blank');
   };
 
@@ -163,7 +169,7 @@ export default function AppointmentsPage() {
                       <button
                         onClick={() => sendWhatsapp(appointment)}
                         className="flex items-center gap-1 !bg-[#25D366] hover:!bg-[#128C7E] text-white font-medium py-1 px-2 rounded text-xs transition-colors"
-                        title="Confirm via WhatsApp"
+                        title="Click to confirm via WhatsApp"
                         aria-label="Confirm via WhatsApp"
                         data-testid="whatsapp-button"
                       >
