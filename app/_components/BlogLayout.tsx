@@ -14,7 +14,6 @@
 
 import React from 'react';
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import Breadcrumbs from '@/app/components/Breadcrumbs';
@@ -26,17 +25,9 @@ import StandardCTA from '@/app/_components/StandardCTA';
 import RelatedContent from '@/app/_components/RelatedContent';
 import ArticleSummarizer from '@/app/_components/ArticleSummarizer';
 import ContentRecommendations from '@/app/_components/ContentRecommendations';
+import RemotionVideoEmbedWrapper from '@/app/_components/RemotionVideoEmbedWrapper';
 import type { BlogPost, CTAType } from '@/src/types/blog';
 import { SITE_URL } from '@/src/lib/seo';
-
-const RemotionVideoEmbed = dynamic(() => import('@/app/_components/RemotionVideoEmbed'), {
-  ssr: false,
-  loading: () => (
-    <div className="my-8 max-w-sm mx-auto">
-      <div className="animate-pulse bg-gray-200 rounded-xl" style={{ aspectRatio: '9 / 16' }}></div>
-    </div>
-  )
-});
 
 interface BlogLayoutProps {
   post: BlogPost;
@@ -262,7 +253,7 @@ export default function BlogLayout({ post, content, className = '' }: BlogLayout
                 </p>
               </div>
               <div className="w-full md:w-auto flex-shrink-0">
-                <RemotionVideoEmbed
+                <RemotionVideoEmbedWrapper
                   compositionId="BlogToReel"
                   inputProps={{
                     title: post.title,

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import dynamic from "next/dynamic";
 import { SITE_URL } from "../../src/lib/seo";
 import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
 import { PhysicianSchema } from "../../src/components/schema/PhysicianSchema";
@@ -9,17 +8,7 @@ import Section from "../_components/Section";
 import Card from "../_components/Card";
 import Button from "../_components/Button";
 import LazySection from "../_components/LazySection";
-
-const RemotionVideoEmbed = dynamic(() => import('../_components/RemotionVideoEmbed'), {
-  ssr: false,
-  loading: () => (
-    <div className="py-12">
-      <div className="max-w-4xl mx-auto">
-        <div className="animate-pulse bg-gray-200 h-[450px] rounded-xl"></div>
-      </div>
-    </div>
-  )
-});
+import RemotionVideoEmbedWrapper from "../_components/RemotionVideoEmbedWrapper";
 
 // Ensure page is statically generated
 export const revalidate = 3600; // Revalidate every hour
@@ -395,7 +384,7 @@ export default function AboutPage() {
           }
         >
           <Section background="white" className="py-16">
-            <RemotionVideoEmbed
+            <RemotionVideoEmbedWrapper
               compositionId="DoctorIntro"
               title="Meet Dr. Sayuj Krishnan"
               description="An animated introduction to Dr. Sayuj's credentials, specializations, and patient care philosophy."

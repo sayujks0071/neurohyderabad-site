@@ -25,19 +25,9 @@ import Card from "./_components/Card";
 import Section from "./_components/Section";
 import FAQPageSchema from "./_components/FAQPageSchema";
 import HeroCTAButtons from "./_components/HeroCTAButtons";
+import RemotionVideoEmbedWrapper from "./_components/RemotionVideoEmbedWrapper";
 
 // Dynamic imports for Lazy components
-const RemotionVideoEmbed = dynamic(() => import('./_components/RemotionVideoEmbed'), {
-  ssr: false,
-  loading: () => (
-    <div className="py-12">
-      <div className="max-w-4xl mx-auto">
-        <div className="animate-pulse bg-gray-200 h-[450px] rounded-xl"></div>
-      </div>
-    </div>
-  )
-});
-
 const PatientEducationVideos = dynamic(() => import('./_components/PatientEducationVideos'), {
   loading: () => (
     <div className="py-16 bg-white">
@@ -380,7 +370,7 @@ export default function Home() {
           }
         >
           <Section background="none" className="py-16 bg-gradient-to-b from-blue-50 to-white">
-            <RemotionVideoEmbed
+            <RemotionVideoEmbedWrapper
               compositionId="ServiceShowcase"
               title="Our Neurosurgical Services"
               description="Explore our comprehensive range of advanced neurosurgical procedures, from endoscopic spine surgery to robotic deep brain stimulation."
@@ -798,7 +788,7 @@ export default function Home() {
           }
         >
           <Section className="py-16">
-            <RemotionVideoEmbed
+            <RemotionVideoEmbedWrapper
               compositionId="OutcomeDashboard"
               title="Practice at a Glance"
               description="Animated overview of outcomes, experience, and patient satisfaction metrics."

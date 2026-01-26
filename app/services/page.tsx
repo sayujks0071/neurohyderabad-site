@@ -1,20 +1,9 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
 import { SITE_URL } from '../../src/lib/seo';
 import MedicalReviewNotice from '../../src/components/MedicalReviewNotice';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
-
-const RemotionVideoEmbed = dynamic(() => import('../_components/RemotionVideoEmbed'), {
-  ssr: false,
-  loading: () => (
-    <div className="py-12">
-      <div className="max-w-4xl mx-auto">
-        <div className="animate-pulse bg-gray-200 h-[450px] rounded-xl"></div>
-      </div>
-    </div>
-  )
-});
+import RemotionVideoEmbedWrapper from '../_components/RemotionVideoEmbedWrapper';
 
 export const metadata: Metadata = {
   title: 'Neurosurgical Services in Hyderabad | Dr. Sayuj Krishnan',
@@ -147,7 +136,7 @@ export default function ServicesPage() {
 
           {/* Animated Service Showcase Video */}
           <div className="mb-12">
-            <RemotionVideoEmbed
+            <RemotionVideoEmbedWrapper
               compositionId="ServiceShowcase"
               title="Service Highlights"
               description="Watch an animated overview of our key neurosurgical services."

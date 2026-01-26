@@ -1,23 +1,12 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
 import { patientStories } from '@/src/content/stories';
 import StandardCTA from '@/app/_components/StandardCTA';
 import NAP from '@/app/_components/NAP';
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import VideoObjectSchema from '@/app/components/schemas/VideoObjectSchema';
 import LazySection from '@/app/_components/LazySection';
-
-const RemotionVideoEmbed = dynamic(() => import('@/app/_components/RemotionVideoEmbed'), {
-  ssr: false,
-  loading: () => (
-    <div className="py-12">
-      <div className="max-w-4xl mx-auto">
-        <div className="animate-pulse bg-gray-200 h-[450px] rounded-xl"></div>
-      </div>
-    </div>
-  )
-});
+import RemotionVideoEmbedWrapper from '@/app/_components/RemotionVideoEmbedWrapper';
 
 export const metadata: Metadata = {
   title: 'Patient Success Stories | Neurosurgery & Spine Surgery Hyderabad',
@@ -80,7 +69,7 @@ export default function PatientStoriesPage() {
       >
         <section className="py-16 bg-white">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <RemotionVideoEmbed
+            <RemotionVideoEmbedWrapper
               compositionId="PatientTestimonial"
               title="Video Testimonials"
               description="Watch animated patient success stories featuring real outcomes and recovery milestones."

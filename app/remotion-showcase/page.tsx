@@ -1,19 +1,7 @@
 import type { Metadata } from 'next';
-import dynamic from 'next/dynamic';
 import { makeMetadata } from '@/app/_lib/meta';
 import Section from '../_components/Section';
-
-const RemotionShowcase = dynamic(
-  () => import('../_components/RemotionShowcase'),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="w-full h-96 bg-gray-100 rounded-xl animate-pulse flex items-center justify-center">
-        <span className="text-gray-400 text-lg">Loading video previews...</span>
-      </div>
-    ),
-  },
-);
+import RemotionShowcaseWrapper from '../_components/RemotionShowcaseWrapper';
 
 export const metadata: Metadata = makeMetadata({
   title: 'Video Showcase | Remotion Animations | Dr. Sayuj Krishnan',
@@ -46,7 +34,7 @@ export default function RemotionShowcasePage() {
       {/* Showcase */}
       <Section className="py-16">
         <div className="max-w-6xl mx-auto">
-          <RemotionShowcase />
+          <RemotionShowcaseWrapper />
         </div>
       </Section>
 
