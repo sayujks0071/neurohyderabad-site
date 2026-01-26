@@ -8,11 +8,10 @@ export default function AppointmentSchema() {
 
   // Implements Schema.org JSON-LD for Physician and MedicalClinic.
   // This structure is optimized for Google's Medical Schema requirements.
-  // - Entity: Physician (Dr. Sayuj Krishnan)
-  // - Entity: MedicalClinic (Yashoda Hospitals)
-  // - Includes: Address, Services, Specialty, and Booking URL.
-  // Verified against SEO Task: "Add Schema.org JSON-LD structured data to improve search visibility."
-  // Confirmed metadata coverage for 'Best Neurosurgeon Hyderabad' and 'Book Appointment'.
+  // Task: Add Schema.org JSON-LD structured data to improve search visibility.
+  // 1. Physician Entity: Dr. Sayuj Krishnan
+  // 2. MedicalClinic Entity: Yashoda Hospitals, Malakpet
+  // 3. Includes: Address, Specialty, Available Services, and Booking URL.
   const schema = {
     "@context": "https://schema.org",
     "@graph": [
@@ -45,7 +44,6 @@ export default function AppointmentSchema() {
         },
         "hasMap": malakpet.google_maps_place_url,
         "telephone": malakpet.telephone,
-        // Using the v2 image as it's the specific resized asset mentioned in memory
         "image": `${SITE_URL}/images/dr-sayuj-krishnan-portrait-v2.jpg`,
         "priceRange": "₹₹",
         "worksFor": {
