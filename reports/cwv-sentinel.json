@@ -1,31 +1,28 @@
 {
-  "timestamp": "2025-05-22T14:30:00Z",
-  "page_types": {
+  "timestamp": "2026-01-26T05:24:56Z",
+  "commit": "HEAD",
+  "notes": {
     "home": {
       "url": "/",
-      "notes": "LCP optimized with CSS gradient hero. DoctorCard image has priority. Lazy loading used effectively."
-    },
-    "location": {
-      "url": "/locations/malakpet",
-      "notes": "Static generation used. Map component uses facade pattern."
-    },
-    "condition": {
-      "url": "/conditions/[slug]",
-      "notes": "Hero Image uses `sizes` attribute correctly (verified)."
+      "status": "improved",
+      "issue": "CLS risk detected in lazy-loaded sections (PatientEducationVideos, RecoveryTimeline, LocalReputationPanel). Placeholders were significantly shorter than rendered content (e.g., RecoveryTimeline mobile gap > 400px).",
+      "fix": "Updated placeholder heights in app/page.tsx to match calculated content heights.",
+      "metrics_target": "CLS"
     },
     "appointment": {
       "url": "/appointments",
-      "notes": "AppointmentScheduler renders empty slots initially, causing layout shift (CLS) when slots load via useEffect."
+      "status": "optimized",
+      "notes": "Uses server-rendered hero and lazy-loaded client components. Good LCP/INP structure."
+    },
+    "location": {
+      "url": "/locations/banjara-hills",
+      "status": "optimized",
+      "notes": "Static generation, click-to-load map. Low risk."
+    },
+    "condition": {
+      "url": "/conditions/sciatica-pain-treatment-hyderabad",
+      "status": "optimized",
+      "notes": "Static generation, prioritized hero image. Low risk."
     }
-  },
-  "bottleneck_identified": {
-    "type": "CLS",
-    "page_type": "Appointment",
-    "description": "AppointmentScheduler initializes `slots` state as empty `[]`, causing a 'No slots available' message or empty grid to render first, followed by the actual slots after hydration/effect. This causes a layout shift."
-  },
-  "fix_implemented": {
-    "description": "Refactored `AppointmentScheduler` to derive `slots` synchronously using `useMemo` instead of `useState` + `useEffect`.",
-    "expected_impact": "Eliminates the initial 'empty' state render. The slots grid will be populated immediately during the first render pass, preventing the layout shift and flash of incorrect content.",
-    "verification": "Code review confirms synchronous derivation. Manual verification would show the grid appearing instantly."
   }
 }

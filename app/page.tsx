@@ -33,7 +33,7 @@ const PatientEducationVideos = dynamic(() => import('./_components/PatientEducat
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           {/* CLS Optimization: Explicit height matches rendered content (3 cards in grid/stack) */}
-          <div className="animate-pulse bg-gray-200 h-[1700px] md:h-[600px] rounded-lg"></div>
+          <div className="animate-pulse bg-gray-200 h-[1750px] md:h-[750px] rounded-lg"></div>
         </div>
       </div>
     </div>
@@ -46,7 +46,7 @@ const RecoveryTimeline = dynamic(() => import('./_components/RecoveryTimeline'),
       <div className="container mx-auto px-4">
         <div className="max-w-5xl mx-auto">
           {/* CLS Optimization: Explicit height matches 5 vertical milestones + header */}
-          <div className="animate-pulse bg-slate-800 h-[1500px] md:h-[1400px] rounded-lg"></div>
+          <div className="animate-pulse bg-slate-800 h-[1950px] md:h-[1700px] rounded-lg"></div>
         </div>
       </div>
     </div>
@@ -59,7 +59,7 @@ const LocalReputationPanel = dynamic(() => import('./_components/LocalReputation
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           {/* CLS Optimization: Explicit height matches testimonials grid + trust indicators */}
-          <div className="animate-pulse bg-gray-200 h-[1100px] md:h-[600px] rounded-lg"></div>
+          <div className="animate-pulse bg-gray-200 h-[1850px] md:h-[850px] rounded-lg"></div>
         </div>
       </div>
     </div>
@@ -347,7 +347,7 @@ export default function Home() {
               <div className="container mx-auto px-4">
                 <div className="max-w-6xl mx-auto">
                   {/* CLS Optimization: Height aligned with dynamic import loading state */}
-                  <div className="animate-pulse bg-gray-200 h-[1700px] md:h-[600px] rounded-lg"></div>
+                  <div className="animate-pulse bg-gray-200 h-[1750px] md:h-[750px] rounded-lg"></div>
                 </div>
               </div>
             </div>
@@ -599,7 +599,7 @@ export default function Home() {
               <div className="container mx-auto px-4">
                 <div className="max-w-5xl mx-auto">
                   {/* CLS Optimization: Height aligned with dynamic import loading state */}
-                  <div className="animate-pulse bg-slate-800 h-[1500px] md:h-[1400px] rounded-lg"></div>
+                  <div className="animate-pulse bg-slate-800 h-[1950px] md:h-[1700px] rounded-lg"></div>
                 </div>
               </div>
             </div>
@@ -889,7 +889,7 @@ export default function Home() {
               <div className="container mx-auto px-4">
                 <div className="max-w-6xl mx-auto">
                   {/* CLS Optimization: Height aligned with dynamic import loading state */}
-                  <div className="animate-pulse bg-gray-200 h-[1100px] md:h-[600px] rounded-lg"></div>
+                  <div className="animate-pulse bg-gray-200 h-[1850px] md:h-[850px] rounded-lg"></div>
                 </div>
               </div>
             </div>
