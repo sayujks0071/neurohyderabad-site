@@ -259,6 +259,7 @@ export default function BookingForm({
                     max="10"
                     step="1"
                     className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-cyan-600"
+                    aria-valuetext={painScoreValue ? `Score: ${painScoreValue}${painScoreValue >= 8 ? ' (Severe)' : painScoreValue <= 3 ? ' (Mild)' : ''}` : "Score: 5"}
                     {...register("painScore")}
                   />
                   <span className="text-sm font-bold text-slate-400" aria-hidden="true">10</span>
