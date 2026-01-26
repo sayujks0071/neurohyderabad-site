@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 import ExpandedFAQ from "../src/components/ExpandedFAQ";
 import LazySection from "./_components/LazySection";
 import { SITE_URL } from "../src/lib/seo";
+import { makeMetadata } from "@/app/_lib/meta";
 import BreadcrumbSchema from "./components/schemas/BreadcrumbSchema";
 import MedicalWebPageSchema from "./components/schemas/MedicalWebPageSchema";
 // Temporarily commenting out problematic imports
@@ -67,11 +68,19 @@ const LocalReputationPanel = dynamic(() => import('./_components/LocalReputation
 
 const HOME_CANONICAL = SITE_URL.endsWith("/") ? SITE_URL : `${SITE_URL}/`;
 
+const baseMetadata = makeMetadata({
+  title: "Best Neurosurgeon Hyderabad | Spine & Brain Specialist",
+  description: "Top-rated neurosurgeon in Hyderabad (Yashoda Hospital). Expert in endoscopic spine surgery, brain tumors & sciatica. Book appointment now.",
+  canonicalPath: "/",
+  ogImage: "https://www.drsayuj.info/images/og-default.jpg",
+  ogImageAlt: "Dr. Sayuj Krishnan - Premier Neurosurgeon in Hyderabad | Endoscopic Spine Surgery & Brain Tumor Surgery"
+});
+
 export const metadata: Metadata = {
+  ...baseMetadata,
   title: {
     absolute: "Best Neurosurgeon Hyderabad | Spine & Brain Specialist",
   },
-  description: 'Top-rated neurosurgeon in Hyderabad (Yashoda Hospital). Expert in endoscopic spine surgery, brain tumors & sciatica. Book appointment now.',
   keywords: [
     'dr sayuj krishnan',
     'best spine surgeon in yashoda hospital',
@@ -95,20 +104,16 @@ export const metadata: Metadata = {
     'neurosurgeon near me',
     'back pain specialist near me'
   ],
-  alternates: {
-    canonical: HOME_CANONICAL,
-    languages: {
-      'en-IN': HOME_CANONICAL,
-      'x-default': HOME_CANONICAL
-    }
-  },
+  // Override openGraph to match specific requirements if makeMetadata default isn't enough,
+  // but makeMetadata output is generally good.
+  // The original had specific OG title/desc that were slightly different from main title/desc.
+  // To preserve EXACTLY what was there, we can override OpenGraph too.
   openGraph: {
+    ...baseMetadata.openGraph,
     title: 'Dr. Sayuj Krishnan S | German-Trained Neurosurgeon in Hyderabad | Brain & Spine Surgery',
     description: 'German-trained neurosurgeon specializing in minimally invasive spine surgery, awake brain surgery, and robotic DBS. Over 1,000 endoscopic procedures performed. Same-day discharge available at Yashoda Hospital, Malakpet.',
     url: HOME_CANONICAL,
     siteName: 'Dr. Sayuj Krishnan S - Neurosurgeon Hyderabad',
-    locale: 'en_IN',
-    type: 'website',
     images: [
       {
         url: 'https://www.drsayuj.info/images/og-default.jpg',
