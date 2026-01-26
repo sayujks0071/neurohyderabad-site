@@ -1,10 +1,23 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { patientStories } from '@/src/content/stories';
 import StandardCTA from '@/app/_components/StandardCTA';
 import NAP from '@/app/_components/NAP';
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import VideoObjectSchema from '@/app/components/schemas/VideoObjectSchema';
+import LazySection from '@/app/_components/LazySection';
+
+const RemotionVideoEmbed = dynamic(() => import('@/app/_components/RemotionVideoEmbed'), {
+  ssr: false,
+  loading: () => (
+    <div className="py-12">
+      <div className="max-w-4xl mx-auto">
+        <div className="animate-pulse bg-gray-200 h-[450px] rounded-xl"></div>
+      </div>
+    </div>
+  )
+});
 
 export const metadata: Metadata = {
   title: 'Patient Success Stories | Neurosurgery & Spine Surgery Hyderabad',
@@ -52,6 +65,31 @@ export default function PatientStoriesPage() {
           </div>
         </div>
       </section>
+
+      {/* Animated Patient Testimonial Video */}
+      <LazySection
+        placeholder={
+          <div className="py-16 bg-white">
+            <div className="container mx-auto px-4">
+              <div className="max-w-4xl mx-auto">
+                <div className="animate-pulse bg-gray-200 h-[450px] rounded-xl"></div>
+              </div>
+            </div>
+          </div>
+        }
+      >
+        <section className="py-16 bg-white">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <RemotionVideoEmbed
+              compositionId="PatientTestimonial"
+              title="Video Testimonials"
+              description="Watch animated patient success stories featuring real outcomes and recovery milestones."
+              controls
+              loop
+            />
+          </div>
+        </section>
+      </LazySection>
 
       {/* Stories Grid */}
       <section className="py-16">

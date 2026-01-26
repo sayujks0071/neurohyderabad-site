@@ -27,6 +27,17 @@ import FAQPageSchema from "./_components/FAQPageSchema";
 import HeroCTAButtons from "./_components/HeroCTAButtons";
 
 // Dynamic imports for Lazy components
+const RemotionVideoEmbed = dynamic(() => import('./_components/RemotionVideoEmbed'), {
+  ssr: false,
+  loading: () => (
+    <div className="py-12">
+      <div className="max-w-4xl mx-auto">
+        <div className="animate-pulse bg-gray-200 h-[450px] rounded-xl"></div>
+      </div>
+    </div>
+  )
+});
+
 const PatientEducationVideos = dynamic(() => import('./_components/PatientEducationVideos'), {
   loading: () => (
     <div className="py-16 bg-white">
@@ -354,6 +365,29 @@ export default function Home() {
           }
         >
           <PatientEducationVideos />
+        </LazySection>
+
+        {/* Animated Service Showcase Video */}
+        <LazySection
+          placeholder={
+            <div className="py-16 bg-blue-50">
+              <div className="container mx-auto px-4">
+                <div className="max-w-4xl mx-auto">
+                  <div className="animate-pulse bg-blue-100 h-[500px] rounded-xl"></div>
+                </div>
+              </div>
+            </div>
+          }
+        >
+          <Section background="none" className="py-16 bg-gradient-to-b from-blue-50 to-white">
+            <RemotionVideoEmbed
+              compositionId="ServiceShowcase"
+              title="Our Neurosurgical Services"
+              description="Explore our comprehensive range of advanced neurosurgical procedures, from endoscopic spine surgery to robotic deep brain stimulation."
+              controls
+              loop
+            />
+          </Section>
         </LazySection>
 
         {/* Minimally Invasive Spine Surgery (MISS) */}
@@ -750,6 +784,29 @@ export default function Home() {
             </Card>
           </div>
         </Section>
+
+        {/* Animated Outcome Dashboard */}
+        <LazySection
+          placeholder={
+            <div className="py-16">
+              <div className="container mx-auto px-4">
+                <div className="max-w-4xl mx-auto">
+                  <div className="animate-pulse bg-gray-200 h-[450px] rounded-xl"></div>
+                </div>
+              </div>
+            </div>
+          }
+        >
+          <Section className="py-16">
+            <RemotionVideoEmbed
+              compositionId="OutcomeDashboard"
+              title="Practice at a Glance"
+              description="Animated overview of outcomes, experience, and patient satisfaction metrics."
+              controls
+              loop
+            />
+          </Section>
+        </LazySection>
 
         {/* Emergency Services */}
         <Section background="none" className="py-16 bg-red-50">

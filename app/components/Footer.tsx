@@ -196,14 +196,20 @@ export default function Footer() {
               >
                 Blog
               </Link>
-              <Link 
-                href="/patient-stories" 
+              <Link
+                href="/patient-stories"
                 className="flex items-center min-h-[44px] text-gray-200 underline underline-offset-4 decoration-gray-700 decoration-1 hover:text-gray-100 hover:decoration-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 Patient Stories
               </Link>
-              <Link 
-                href="/contact" 
+              <Link
+                href="/remotion-showcase"
+                className="flex items-center min-h-[44px] text-gray-200 underline underline-offset-4 decoration-gray-700 decoration-1 hover:text-gray-100 hover:decoration-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+              >
+                Video Showcase
+              </Link>
+              <Link
+                href="/contact"
                 className="flex items-center min-h-[44px] text-gray-200 underline underline-offset-4 decoration-gray-700 decoration-1 hover:text-gray-100 hover:decoration-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 Contact
