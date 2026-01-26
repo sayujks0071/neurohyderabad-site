@@ -1,10 +1,13 @@
 # Cursor Rules for Neurohyderabad Site
 
 ## MCP Server Configuration
-The project uses two MCP servers:
+The project uses multiple MCP servers:
 - **Playwright** - For browser automation and testing
 - **Figma** - For design-to-code workflow
-Configuration is stored in `~/.cursor/mcp.json` and can be set up using `npm run setup:cursor-mcp`.
+- **Middleware** - For observability and monitoring (dashboards, alerts, metrics)
+Configuration is stored in `~/.cursor/mcp.json` and can be set up using:
+- `./scripts/setup-middleware-mcp.sh` - Setup Middleware MCP server
+- `./scripts/update-mcp-config.sh` - Update MCP config with Middleware
 
 ## Project Guidelines
 - Use TypeScript for all new code
