@@ -257,11 +257,11 @@ const nextConfig = {
 
   // Webpack configuration for Middleware sourcemap uploader
   webpack: (config, { isServer }) => {
-    // Only add plugin for client-side builds in production
-    if (!isServer && process.env.NODE_ENV === 'production') {
+    // Only add plugin for client-side builds in production if account key is present
+    if (!isServer && process.env.NODE_ENV === 'production' && process.env.MIDDLEWARE_ACCOUNT_KEY) {
       config.plugins.push(
         new MiddlewareWebpackPlugin(
-          "svxkmvkxzpkxtuyhsgmgdiyfjwkxtytiltea", // Account key of the application
+          process.env.MIDDLEWARE_ACCOUNT_KEY, // Account key of the application
           "1.0.0", // Application version
           ".next/", // By default path of next.js where sourcemap resides
           "_next/", // Base path where your sourcemap will reside after upload
