@@ -46,6 +46,7 @@ const availableTimes = [
 ];
 
 // Refactored to use enhanced Zod validation for strict type safety
+// This form automatically consumes the validated types from appointmentSchema
 export default function BookingForm({
   onSubmit,
   initialData,
