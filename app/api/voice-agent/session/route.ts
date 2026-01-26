@@ -1,26 +1,37 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { isAIGatewayConfigured, getGatewayModel } from '@/src/lib/ai/gateway';
 
 export async function POST(req: NextRequest) {
   try {
     const { instructions, voice = 'alloy', model = 'gpt-4o-realtime-preview' } = await req.json();
 
-    // Validate OpenAI API key
-    if (!process.env.OPENAI_API_KEY) {
+    const apiKey = process.env.AI_GATEWAY_API_KEY || process.env.OPENAI_API_KEY;
+
+    // Validate API key
+    if (!apiKey) {
       return NextResponse.json(
-        { error: 'OpenAI API key not configured' },
+        { error: 'OpenAI/Gateway API key not configured' },
         { status: 500 }
       );
     }
 
-    // Create a session with OpenAI Realtime API
-    const response = await fetch('https://api.openai.com/v1/realtime/sessions', {
+    const isGateway = isAIGatewayConfigured();
+
+    const baseUrl = isGateway
+      ? (process.env.AI_GATEWAY_BASE_URL || 'https://ai-gateway.vercel.sh/v1')
+      : 'https://api.openai.com/v1';
+
+    const finalModel = isGateway ? getGatewayModel(model) : model;
+
+    // Create a session with OpenAI Realtime API (or via Gateway)
+    const response = await fetch(`${baseUrl}/realtime/sessions`, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+        'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model,
+        model: finalModel,
         voice,
         instructions,
         modalities: ['text', 'audio'],
@@ -37,7 +48,7 @@ export async function POST(req: NextRequest) {
 
     if (!response.ok) {
       const error = await response.json();
-      console.error('OpenAI API error:', error);
+      console.error('OpenAI/Gateway API error:', error);
       return NextResponse.json(
         { error: 'Failed to create voice session' },
         { status: response.status }
