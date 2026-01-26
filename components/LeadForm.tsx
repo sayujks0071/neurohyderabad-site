@@ -2,45 +2,33 @@
 
 import { useState, useRef, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import { Loader2 } from "lucide-react";
 import Input from "@/packages/appointment-form/ui/Input";
 import Textarea from "@/packages/appointment-form/ui/Textarea";
 import Calendar from "@/packages/appointment-form/ui/Calendar";
 import Select from "@/packages/appointment-form/ui/Select";
 
-interface LeadFormData {
-  fullName: string;
-  phone: string;
-  email: string;
-  city: string;
-  concern: string;
-  preferredDate?: string;
-  preferredTime?: string;
-  painScore?: number;
-  mriScanAvailable?: boolean;
-  company?: string; // Honeypot
-  source: string;
-}
-
-const schema = yup.object({
-  fullName: yup.string().required("Full name is required"),
-  phone: yup
+const schema = z.object({
+  fullName: z.string().min(1, "Full name is required"),
+  phone: z
     .string()
-    .required("Phone number is required")
-    .transform((value) => (value ? value.replace(/[^\d+]/g, "") : value))
-    .matches(/^[0-9+]{8,15}$/, "Please enter a valid phone number (8-15 digits)"),
-  email: yup.string().email("Invalid email address").required("Email is required"),
-  city: yup.string().required("City is required"),
-  concern: yup.string().required("Please describe your concern").min(10, "Please provide a bit more detail"),
-  preferredDate: yup.string().notRequired(),
-  preferredTime: yup.string().notRequired(),
-  painScore: yup.number().min(1).max(10).notRequired(),
-  mriScanAvailable: yup.boolean().notRequired(),
-  company: yup.string().notRequired(), // Honeypot - should be empty
-  source: yup.string().default("website").notRequired(),
-}).required();
+    .min(1, "Phone number is required")
+    .transform((val) => val.replace(/[^\d+]/g, ""))
+    .refine((val) => /^[0-9+]{8,15}$/.test(val), "Please enter a valid phone number (8-15 digits)"),
+  email: z.string().min(1, "Email is required").email("Invalid email address"),
+  city: z.string().min(1, "City is required"),
+  concern: z.string().min(10, "Please provide a bit more detail"),
+  preferredDate: z.string().optional(),
+  preferredTime: z.string().optional(),
+  painScore: z.coerce.number().min(1).max(10).optional(),
+  mriScanAvailable: z.boolean().optional(),
+  company: z.string().optional(), // Honeypot
+  source: z.string().default("website"),
+});
+
+type LeadFormData = z.infer<typeof schema>;
 
 const availableTimes = [
   "09:00 AM", "10:00 AM", "11:00 AM",
@@ -60,8 +48,8 @@ export default function LeadForm() {
     control,
     watch,
     formState: { errors, isSubmitting },
-  } = useForm<LeadFormData>({
-    resolver: yupResolver(schema) as any,
+  } = useForm({
+    resolver: zodResolver(schema),
     defaultValues: {
       source: "website",
       company: "",
