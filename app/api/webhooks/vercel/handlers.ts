@@ -117,19 +117,38 @@ export async function handleDeploymentError(payload: any, metadata: EventMetadat
     projectName: payload.project?.name,
     error: payload.error,
     buildErrorAt: payload.deployment?.buildErrorAt,
+    // Additional error details
+    errorMessage: payload.error?.message || payload.deployment?.errorMessage,
+    errorCode: payload.error?.code || payload.deployment?.errorCode,
+    buildId: payload.deployment?.build?.id,
+    buildStatus: payload.deployment?.build?.status,
+    readyState: payload.deployment?.readyState,
+    state: payload.deployment?.state,
+    url: payload.deployment?.url,
+    target: payload.target,
   };
   
-  console.error('[webhooks/vercel] Deployment error:', eventData);
+  console.error('[webhooks/vercel] Deployment error:', JSON.stringify(eventData, null, 2));
 
-  // Store event for status endpoint
+  // Store event for status endpoint with comprehensive error details
   addDeploymentEvent({
     eventId: metadata.eventId,
     eventType: 'deployment.error',
     deploymentId: payload.deployment?.id,
     projectId: payload.project?.id || payload.projectId,
     projectName: payload.project?.name,
+    url: payload.deployment?.url,
+    target: payload.target,
     status: 'error',
-    error: payload.error,
+    error: {
+      message: eventData.errorMessage,
+      code: eventData.errorCode,
+      originalError: payload.error,
+      buildErrorAt: eventData.buildErrorAt,
+      buildStatus: eventData.buildStatus,
+      readyState: eventData.readyState,
+      state: eventData.state,
+    },
     createdAt: new Date(metadata.createdAt).toISOString(),
     region: metadata.region,
   });
@@ -144,7 +163,16 @@ export async function handleDeploymentError(payload: any, metadata: EventMetadat
           type: 'deployment_error',
           project: payload.project?.name,
           deploymentId: payload.deployment?.id,
-          error: payload.error,
+          deploymentUrl: payload.deployment?.url,
+          error: {
+            message: eventData.errorMessage,
+            code: eventData.errorCode,
+            originalError: payload.error,
+            buildErrorAt: eventData.buildErrorAt,
+            buildStatus: eventData.buildStatus,
+            readyState: eventData.readyState,
+            state: eventData.state,
+          },
           timestamp: new Date().toISOString(),
         }),
       });
