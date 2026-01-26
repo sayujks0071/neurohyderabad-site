@@ -298,6 +298,77 @@ class MiddlewareApiClient {
       body: JSON.stringify(tokenData),
     });
   }
+
+  // ===== ERROR AND INCIDENT MANAGEMENT =====
+
+  /**
+   * List all errors and incidents with filtering and pagination
+   * Uses the query endpoint to fetch error data
+   * Includes clickable issue_url for each incident
+   */
+  async listErrors(options?: {
+    limit?: number;
+    offset?: number;
+    filters?: Record<string, any>;
+    timeRange?: { start: number; end: number };
+  }): Promise<any[]> {
+    const timeRange = options?.timeRange || {
+      start: Date.now() - (24 * 60 * 60 * 1000), // Last 24 hours
+      end: Date.now(),
+    };
+
+    // Use query endpoint to fetch errors
+    return this.query({
+      query: {
+        metric: 'error.count',
+        filters: [
+          ...(options?.filters ? Object.entries(options.filters).map(([k, v]) => ({ key: k, value: v })) : []),
+        ],
+        groupBy: ['error_message', 'error_type', 'service'],
+        timeRange,
+        limit: options?.limit || 50,
+        offset: options?.offset || 0,
+      },
+    });
+  }
+
+  /**
+   * Get detailed information about a specific error or incident by fingerprint
+   * Uses query endpoint with fingerprint filter
+   */
+  async getErrorDetails(fingerprint: string): Promise<any> {
+    return this.query({
+      query: {
+        metric: 'error.details',
+        filters: [
+          { key: 'fingerprint', value: fingerprint },
+        ],
+        timeRange: {
+          start: Date.now() - (7 * 24 * 60 * 60 * 1000), // Last 7 days
+          end: Date.now(),
+        },
+      },
+    });
+  }
+
+  /**
+   * Execute flexible queries to retrieve logs, metrics, traces, and other data
+   */
+  async query(queryConfig: {
+    query: {
+      metric?: string;
+      filters?: Array<{ key: string; value: any }>;
+      groupBy?: string[];
+      timeRange?: { start: number; end: number };
+      limit?: number;
+      offset?: number;
+    };
+  }): Promise<any> {
+    return this.request('/builder/query', {
+      method: 'POST',
+      body: JSON.stringify(queryConfig),
+    });
+  }
 }
 
 // Export singleton instance
