@@ -86,7 +86,7 @@ export const PhysicianSchema: React.FC = () => {
         "description": "Premier neurosurgeon with over 9 years of experience specializing in minimally invasive brain & spine surgery, awake brain surgery, and robotic neurosurgery. Fellowship-trained with German training in endoscopic spine surgery. Performed 1,000+ endoscopic procedures with same-day discharge capability.",
         "disambiguatingDescription": "Hyderabad (India)-based neurosurgeon and spine surgeon at Yashoda Hospital, Malakpet. Not associated with US-based internal medicine physician Dr. Sayuj Paudel.",
         "url": SITE_URL,
-        "image": `${SITE_URL}/images/dr-sayuj-krishnan.jpg`,
+        "image": `${SITE_URL}/images/dr-sayuj-krishnan-portrait-optimized.jpg`,
         "telephone": CANONICAL_TELEPHONE,
         "priceRange": "₹₹",
         "email": "hellodr@drsayuj.info",
