@@ -37,6 +37,7 @@ import GoogleAnalytics from "../src/components/GoogleAnalytics";
 import DynamicStickyCTA from "./_components/DynamicStickyCTA";
 import FloatingChatWidget from "./_components/DynamicFloatingChatWidget";
 import FlagValuesEmitter from "./_components/FlagValuesEmitter";
+import MiddlewareRUM from "./_components/MiddlewareRUM";
 import HypertuneWrapper from "./providers/hypertune-wrapper";
 import { SITE_URL } from "../src/lib/seo";
 
@@ -163,8 +164,11 @@ export default function RootLayout({
         <link rel="preconnect" href="https://edge.hypertune.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.google-analytics.com" />
+        <link rel="preconnect" href="https://cdnjs.middleware.io" />
+        <link rel="preconnect" href="https://hjptv.middleware.io" />
       </head>
       <body className={`antialiased ${inter.variable} ${merriweather.variable}`}>
+        <MiddlewareRUM />
         <GoogleAnalytics />
         <ClientAnalytics />
         <WebsiteSchema />

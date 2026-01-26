@@ -1,8 +1,12 @@
 import pkg from "workflow/next";
 const { withWorkflow } = pkg;
+import MiddlewareWebpackPlugin from "@middleware.io/sourcemap-uploader/dist/webpack-plugin";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Enable production sourcemaps for Middleware
+  productionBrowserSourceMaps: true,
+
   // Enable compression
   compress: true,
 
@@ -249,7 +253,24 @@ const nextConfig = {
         ]
       },
     ];
-  }
+  },
+
+  // Webpack configuration for Middleware sourcemap uploader
+  webpack: (config, { isServer }) => {
+    // Only add plugin for client-side builds in production
+    if (!isServer && process.env.NODE_ENV === 'production') {
+      config.plugins.push(
+        new MiddlewareWebpackPlugin(
+          "svxkmvkxzpkxtuyhsgmgdiyfjwkxtytiltea", // Account key of the application
+          "1.0.0", // Application version
+          ".next/", // By default path of next.js where sourcemap resides
+          "_next/", // Base path where your sourcemap will reside after upload
+          "https://hjptv.middleware.io/api/v1/rum/getSasUrl"
+        )
+      );
+    }
+    return config;
+  },
 };
 
 // Wrap with withWorkflow to enable workflow directives
