@@ -244,11 +244,10 @@ export async function POST(request: NextRequest) {
         try {
           const result = await submitSitemapToGSC(sitemap);
           return NextResponse.json({
-            success: result.success,
+            ...result,
             message: result.success 
               ? 'Sitemap submitted successfully' 
               : 'Sitemap submission failed',
-            ...result,
           });
         } catch (error: any) {
           console.error('[search-console] Sitemap submission error:', error);
@@ -271,11 +270,10 @@ export async function POST(request: NextRequest) {
         try {
           const result = await requestUrlIndexing(url, type || 'URL_UPDATED');
           return NextResponse.json({
-            success: result.success,
+            ...result,
             message: result.success 
               ? 'Indexing request submitted successfully' 
               : 'Indexing request failed',
-            ...result,
           });
         } catch (error: any) {
           console.error('[search-console] URL indexing error:', error);
@@ -341,8 +339,8 @@ export async function POST(request: NextRequest) {
         try {
           const result = await inspectUrl(url);
           return NextResponse.json({
-            success: true,
             ...result,
+            success: result.success !== false,
           });
         } catch (error: any) {
           console.error('[search-console] URL inspection error:', error);
