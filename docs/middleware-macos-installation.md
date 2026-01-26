@@ -54,6 +54,14 @@ The output shows:
 - **Exit Code**: `0` - Success (0 = running, non-zero = error)
 - **Service Name**: `io.middleware.mw-agent`
 
+### Installation Success Indicators
+
+After successful installation, you should see:
+- ✅ Message: "Middleware Agent is successfully installed"
+- ✅ Configuration file: `/opt/mw-agent/agent-config.yaml`
+- ✅ Agent running in background
+- ✅ Telemetry data being sent to: `https://hjptv.middleware.io`
+
 ### Check Agent Logs
 
 View agent logs to verify it's working correctly:
