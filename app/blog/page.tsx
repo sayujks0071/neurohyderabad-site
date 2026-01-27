@@ -216,6 +216,7 @@ export default async function BlogPage() {
                     <Link 
                       href={`/blog/${postSlug}`}
                       className="text-blue-600 hover:text-blue-800 font-medium"
+                      aria-label={`Read more about ${postTitle}`}
                     >
                       Read More →
                     </Link>

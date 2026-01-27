@@ -25,6 +25,7 @@ import StandardCTA from '@/app/_components/StandardCTA';
 import RelatedContent from '@/app/_components/RelatedContent';
 import ArticleSummarizer from '@/app/_components/ArticleSummarizer';
 import ContentRecommendations from '@/app/_components/ContentRecommendations';
+import RemotionVideoEmbedWrapper from '@/app/_components/RemotionVideoEmbedWrapper';
 import type { BlogPost, CTAType } from '@/src/types/blog';
 import { SITE_URL } from '@/src/lib/seo';
 
@@ -238,6 +239,41 @@ export default function BlogLayout({ post, content, className = '' }: BlogLayout
           {/* Article Summarizer */}
           <div className="mb-6">
             <ArticleSummarizer content={content} maxLength={200} />
+          </div>
+
+          {/* Blog-to-Reel Video Summary */}
+          <div className="my-8 p-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-100">
+            <div className="flex flex-col md:flex-row gap-6 items-start">
+              <div className="flex-1">
+                <p className="text-sm font-semibold text-blue-700 uppercase tracking-wide mb-2">
+                  Video Summary
+                </p>
+                <p className="text-gray-600 text-sm mb-3">
+                  Watch a short animated reel summarizing the key takeaways from this article.
+                </p>
+              </div>
+              <div className="w-full md:w-auto flex-shrink-0">
+                <RemotionVideoEmbedWrapper
+                  compositionId="BlogToReel"
+                  inputProps={{
+                    title: post.title,
+                    subtitle: post.subtitle || post.description,
+                    category: post.category || 'Neurosurgery',
+                    readTime: post.readingTimeMinutes ? `${post.readingTimeMinutes} min` : '5 min',
+                    authorName: 'Dr. Sayuj Krishnan',
+                    callToAction: 'Book a consultation at www.drsayuj.info',
+                    keyPoints: [
+                      { heading: 'Key Insight', body: post.description.slice(0, 120), icon: '\u{1F4CA}' },
+                      { heading: 'Expert Care', body: 'German-trained neurosurgeon with 9+ years of experience.', icon: '\u{1FA7A}' },
+                      { heading: 'Next Step', body: 'Schedule a consultation to discuss your treatment options.', icon: '\u{1F3C3}' },
+                    ],
+                  }}
+                  controls
+                  loop
+                  maxWidth="280px"
+                />
+              </div>
+            </div>
           </div>
 
           {/* Content */}

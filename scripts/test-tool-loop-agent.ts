@@ -1,5 +1,6 @@
+import 'tsconfig-paths/register';
 import { ToolLoopAgent } from 'ai';
-import { openai } from "@ai-sdk/openai";
+import { getTextModel } from '@/src/lib/ai/gateway';
 import { z } from 'zod';
 import * as dotenv from 'dotenv';
 
@@ -9,16 +10,16 @@ dotenv.config();
 async function main() {
   console.log("🤖 Initializing Dr. Sayuj Krishnan's AI ToolLoopAgent (v6)...");
 
-  const apiKey = process.env.OPENAI_API_KEY;
+  const apiKey = process.env.OPENAI_API_KEY || process.env.AI_GATEWAY_API_KEY;
   if (!apiKey) {
-    console.error("❌ Error: OPENAI_API_KEY is not set.");
+    console.error("❌ Error: OPENAI_API_KEY or AI_GATEWAY_API_KEY is not set.");
     console.log("Usage: OPENAI_API_KEY=your_key npx tsx scripts/test-tool-loop-agent.ts");
     process.exit(1);
   }
 
   // Create the agent
   const agent = new ToolLoopAgent({
-    model: openai("gpt-4o"), // Use a valid model name
+    model: getTextModel("gpt-4o"), // Use gateway model
     instructions: `You are Dr. Sayuj Krishnan's expert AI Medical Assistant. 
     Your goal is to assist patients with clinic information and appointment inquiries.
     Dr. Sayuj Krishnan is a Neurosurgeon in Hyderabad.

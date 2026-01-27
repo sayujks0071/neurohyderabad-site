@@ -1,4 +1,4 @@
-import { AbsoluteFill, Sequence } from 'remotion';
+import { AbsoluteFill, Sequence, useCurrentFrame, interpolate } from 'remotion';
 import type { ConsultationPrepProps } from '../types/ConsultationPrepProps';
 import { WelcomeScene } from '../components/ConsultationPrep/WelcomeScene';
 import { CalendarScene } from '../components/ConsultationPrep/CalendarScene';
@@ -9,8 +9,8 @@ import { PrepStepsScene } from '../components/ConsultationPrep/PrepStepsScene';
  *
  * Scene breakdown:
  * - Frames 0-180 (6s): Welcome Scene - Patient greeting
- * - Frames 181-450 (9s): Calendar Scene - Appointment date visualization
- * - Frames 451-900 (15s): Prep Steps Scene - 3 preparation steps
+ * - Frames 150-450 (10s): Calendar Scene - Appointment date visualization (starts with crossfade)
+ * - Frames 420-900 (16s): Prep Steps Scene - 3 preparation steps (starts with crossfade)
  */
 export const ConsultationPrepVideo: React.FC<ConsultationPrepProps> = ({
   patientName,
@@ -19,6 +19,8 @@ export const ConsultationPrepVideo: React.FC<ConsultationPrepProps> = ({
   appointmentTime,
   prepSteps,
 }) => {
+  const frame = useCurrentFrame();
+
   return (
     <AbsoluteFill style={{ backgroundColor: 'white' }}>
       {/* Scene 1: Welcome (6 seconds) */}
@@ -26,20 +28,24 @@ export const ConsultationPrepVideo: React.FC<ConsultationPrepProps> = ({
         <WelcomeScene patientName={patientName} />
       </Sequence>
 
-      {/* Scene 2: Calendar (9 seconds) */}
-      <Sequence from={180} durationInFrames={270}>
-        <CalendarScene
-          appointmentDate={appointmentDate}
-          appointmentTime={appointmentTime}
-        />
+      {/* Scene 2: Calendar (9 seconds + 1s overlap) */}
+      <Sequence from={150} durationInFrames={300}>
+        <AbsoluteFill style={{ opacity: interpolate(frame, [150, 180], [0, 1]) }}>
+          <CalendarScene
+            appointmentDate={appointmentDate}
+            appointmentTime={appointmentTime}
+          />
+        </AbsoluteFill>
       </Sequence>
 
-      {/* Scene 3: Prep Steps (15 seconds) */}
-      <Sequence from={450} durationInFrames={450}>
-        <PrepStepsScene
-          surgeryType={surgeryType}
-          prepSteps={prepSteps}
-        />
+      {/* Scene 3: Prep Steps (15 seconds + 1s overlap) */}
+      <Sequence from={420} durationInFrames={480}>
+        <AbsoluteFill style={{ opacity: interpolate(frame, [420, 450], [0, 1]) }}>
+          <PrepStepsScene
+            surgeryType={surgeryType}
+            prepSteps={prepSteps}
+          />
+        </AbsoluteFill>
       </Sequence>
     </AbsoluteFill>
   );

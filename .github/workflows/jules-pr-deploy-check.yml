@@ -1,5 +1,5 @@
 name: Jules PR & Deploy Check
-# v1.2 - Verified
+# v1.3 - Verified
 # Managed by Jules (Daily Schedule)
 on:
   schedule:
@@ -21,6 +21,7 @@ jobs:
       - name: Create Issue
         uses: actions/github-script@v7
         env:
+          # Note: Schedule is defined in 'on.schedule.cron' and cannot be parameterized via env vars.
           PROMPT_FILE: jules-prompts/pr-deploy-check.md
           ISSUE_TITLE: "[Jules] PR & Deploy Check"
         with:

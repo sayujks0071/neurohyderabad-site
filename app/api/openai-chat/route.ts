@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { generateText } from 'ai';
 import { getTextModel, hasAIConfig } from '@/src/lib/ai/gateway';
 import { DR_SAYUJ_SYSTEM_PROMPT } from '@/src/lib/ai/prompts';
+import { rateLimit } from '@/src/lib/rate-limit';
 
 interface ChatRequest {
   message: string;
@@ -14,6 +15,20 @@ interface ChatRequest {
 }
 
 export async function POST(request: NextRequest) {
+  // 🛡️ Sentinel: Rate limit to prevent DoS/wallet draining
+  const ip = request.headers.get("x-forwarded-for") ?? "unknown";
+  const limit = rateLimit(ip, 5, 60 * 1000); // 5 requests per minute
+
+  if (!limit.success) {
+    return NextResponse.json(
+      {
+        error: 'Too many requests',
+        response: "I'm receiving too many messages right now. Please try again in a minute."
+      },
+      { status: 429 }
+    );
+  }
+
   try {
     const body: ChatRequest = await request.json();
     
@@ -48,7 +63,10 @@ export async function POST(request: NextRequest) {
       
       const geminiResponse = await fetch(`${baseUrl}/api/gemini-files/search`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'x-admin-key': process.env.ADMIN_ACCESS_KEY || ''
+        },
         body: JSON.stringify({
           query: body.message,
           searchType: 'medical',

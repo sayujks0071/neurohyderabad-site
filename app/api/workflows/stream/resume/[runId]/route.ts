@@ -57,7 +57,7 @@ export async function GET(
       headers: {
         "Content-Type": "application/x-ndjson",
         "X-Run-Id": runId,
-        "X-Run-Status": status,
+        "X-Run-Status": String(status),
         "X-Start-Index": String(startIndex ?? 0),
         "Cache-Control": "no-cache",
         "Connection": "keep-alive",

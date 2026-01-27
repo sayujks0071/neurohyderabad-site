@@ -63,7 +63,7 @@ const references = [
 export const metadata: Metadata = {
   title: "Trigeminal Neuralgia Treatment Hyderabad | Immediate Pain Relief",
   description:
-    "Stop severe facial pain. MVD Surgery & Radiofrequency Ablation for Trigeminal Neuralgia in Hyderabad. Expert cure by Dr. Sayuj Krishnan. Book Consult.",
+    "Expert Trigeminal Neuralgia treatment in Hyderabad. MVD surgery & Radiofrequency ablation for facial pain relief by Dr. Sayuj. Proven results. Book now.",
   alternates: {
     canonical: CANONICAL,
     languages: {
