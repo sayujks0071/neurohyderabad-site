@@ -40,6 +40,7 @@ interface RemotionVideoEmbedWrapperProps {
   loop?: boolean;
   className?: string;
   maxWidth?: string;
+  immediate?: boolean;
 }
 
 export default function RemotionVideoEmbedWrapper(props: RemotionVideoEmbedWrapperProps) {
