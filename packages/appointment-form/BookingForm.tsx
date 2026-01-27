@@ -59,7 +59,6 @@ export default function BookingForm({
     watch,
     formState: { errors, isSubmitting },
   } = useForm<BookingFormValues>({
-    // @ts-expect-error - Zod resolver types clash with strict optional defaults
     resolver: zodResolver(appointmentSchema),
     defaultValues: defaultValues as BookingFormValues,
     mode: "onTouched", // Trigger validation on blur
