@@ -384,6 +384,24 @@
       "difficulty": "Low",
       "volume": "Low",
       "target_page": "/conditions/degenerative-disc-disease-treatment-hyderabad"
+    },
+    {
+      "term": "microdiscectomy surgery hyderabad",
+      "difficulty": "Med",
+      "volume": "Med",
+      "target_page": "/services/microdiscectomy-surgery-hyderabad"
+    },
+    {
+      "term": "microscopic spine surgery hyderabad",
+      "difficulty": "Med",
+      "volume": "Med",
+      "target_page": "/services/microdiscectomy-surgery-hyderabad"
+    },
+    {
+      "term": "lumbar microdiscectomy recovery",
+      "difficulty": "Low",
+      "volume": "Med",
+      "target_page": "/services/microdiscectomy-surgery-hyderabad"
     }
   ]
 }
