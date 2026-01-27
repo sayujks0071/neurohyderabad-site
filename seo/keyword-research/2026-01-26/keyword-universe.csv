@@ -1,0 +1,10 @@
+keyword,intent,funnel,geo,cluster,target_page,difficulty,priority,serp_notes
+neurosurgeon madhapur,Commercial,BOFU,HYD,LOC | BOFU | NEURO | madhapur | best-doctor,/locations/neurosurgeon-madhapur,Low,90,Local Pack
+best neurosurgeon in madhapur,Commercial,BOFU,HYD,LOC | BOFU | NEURO | madhapur | best-doctor,/locations/neurosurgeon-madhapur,Low,85,Local Pack
+spine specialist madhapur,Commercial,BOFU,HYD,LOC | BOFU | SPINE | madhapur | specialist,/locations/neurosurgeon-madhapur,Med,80,
+scoliosis treatment hyderabad,Commercial,MOFU,HYD,COND | MOFU | SPINE | scoliosis | treatment,/conditions/scoliosis-treatment-hyderabad,Med,95,Snippet
+scoliosis surgery cost hyderabad,Transactional,BOFU,HYD,COND | BOFU | SPINE | scoliosis | cost,/conditions/scoliosis-treatment-hyderabad,High,90,
+best scoliosis surgeon hyderabad,Commercial,BOFU,HYD,COND | BOFU | SPINE | scoliosis | best-doctor,/conditions/scoliosis-treatment-hyderabad,High,85,
+kyphosis correction surgery hyderabad,Commercial,BOFU,HYD,COND | BOFU | SPINE | kyphosis | correction,/conditions/kyphosis-treatment-hyderabad,Med,70,
+spine deformity correction hyderabad,Informational,TOFU,HYD,COND | TOFU | SPINE | deformity | guide,/conditions/scoliosis-treatment-hyderabad,Med,60,
+neurosurgeon near inorbit mall,Commercial,BOFU,HYD,LOC | BOFU | NEURO | madhapur | landmark,/locations/neurosurgeon-madhapur,Low,50,
