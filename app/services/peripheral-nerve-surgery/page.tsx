@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { makeMetadata } from '@/app/_lib/meta';
 import SchemaScript from '@/app/_schema/Script';
 import { peripheralNerveSchemas } from '@/app/_schema/pages/peripheralNerve';
@@ -74,7 +73,7 @@ export default function Page() {
         Entrapment neuropathies limit hand dexterity, grip strength, and quality of sleep. Dr. Sayuj Krishnan combines ultrasound-guided nerve
         assessment, precise microsurgical decompression, and coordinated rehabilitation so that patients regain function quickly while
         protecting long-term nerve health. Surgery is considered once splints, physiotherapy, workplace modification, and injectables fail to
-        control symptoms—or when weakness appears on examination. (For cranial nerve disorders like <Link href="/conditions/trigeminal-neuralgia-treatment-hyderabad" className="text-emerald-700 underline">trigeminal neuralgia</Link>, specialised skull base procedures are available).
+        control symptoms—or when weakness appears on examination.
       </p>
 
       <h2 id="carpal-tunnel">Carpal Tunnel Release</h2>

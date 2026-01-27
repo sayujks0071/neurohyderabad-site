@@ -46,7 +46,6 @@ env:
 ```
 
 To change the schedule, you must edit the cron expression in the `on.schedule` section of the workflow YAML file.
-Note: The schedule triggers are defined statically in the YAML `on: schedule` block and cannot be set via environment variables.
 
 ### Competitor Analysis
 The "Competitor Gap Scan" workflow relies on the list of competitors defined in `AGENTS.md`. To add or remove competitors:
@@ -57,4 +56,4 @@ The "Competitor Gap Scan" workflow relies on the list of competitors defined in 
 
 - **Issue not created:** Check the Action logs. Common reasons include GitHub API rate limits or the issue already existing.
 - **Wrong Schedule:** Ensure you've converted IST to UTC correctly using a converter. GitHub Actions use UTC.
-<!-- v1.3 - Verified -->
+<!-- v1.2 - Verified -->

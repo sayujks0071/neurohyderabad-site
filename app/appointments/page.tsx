@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: "Book Appointment | Best Neurosurgeon Hyderabad | Dr. Sayuj",
   description:
     "Book Appointment with Dr. Sayuj Krishnan, the Best Neurosurgeon in Hyderabad. Schedule a consultation for spine surgery & brain tumor surgery.",
-  // SEO: Optimized for local search intent. Verified to include 'Best Neurosurgeon Hyderabad' and 'Book Appointment'.
+  // SEO: Optimized for local search intent
   keywords: [
     "Book Appointment",
     "Best Neurosurgeon Hyderabad",
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
 export default function AppointmentsPage() {
   return (
     <>
-      {/* JSON-LD Structured Data for SEO: Physician & MedicalClinic */}
+      {/* JSON-LD Structured Data for SEO (Physician & MedicalClinic) */}
       <AppointmentSchema />
       <AppointmentFaqSchema />
       {/*

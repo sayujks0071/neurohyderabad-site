@@ -35,7 +35,6 @@ export default function Button({
     "active:scale-95 active:shadow-md",
     "disabled:opacity-50 disabled:cursor-not-allowed",
     "disabled:shadow-none disabled:transform-none",
-    "relative overflow-hidden",
     VARIANT_CLASSES[variant],
     className,
   ]
@@ -50,9 +49,6 @@ export default function Button({
       aria-busy={isLoading}
       {...props}
     >
-      {isLoading && (
-        <div className="absolute inset-0 bg-white/10 animate-pulse" />
-      )}
       {isLoading && <Loader2 className="mr-2 h-5 w-5 animate-spin" aria-hidden="true" />}
       {children}
     </button>

@@ -412,14 +412,11 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <button
           type="submit"
-          className="flex items-center justify-center bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden"
+          className="flex items-center justify-center bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
           disabled={status === 'submitting'}
           aria-busy={status === 'submitting'}
           aria-describedby="form-status"
         >
-          {status === 'submitting' && (
-            <div className="absolute inset-0 bg-white/10 animate-pulse" />
-          )}
           {status === 'submitting' ? (
             <>
               <Loader2 className="w-5 h-5 animate-spin mr-2" />
