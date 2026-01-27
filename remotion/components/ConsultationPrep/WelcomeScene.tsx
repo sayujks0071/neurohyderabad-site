@@ -30,12 +30,15 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
     },
   });
 
+  // Subtle breathing animation for continuous movement
+  const breathingScale = 1 + Math.sin(frame / 45) * 0.01;
+
   return (
     <div
       style={{
         width: '100%',
         height: '100%',
-        backgroundColor: COLORS.accent, // cyan-600 (#00A3E0)
+        background: `linear-gradient(135deg, ${COLORS.accent} 0%, #0077A3 100%)`,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -45,7 +48,7 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
     >
       <div
         style={{
-          transform: `scale(${scale})`,
+          transform: `scale(${scale * breathingScale})`,
           textAlign: 'center',
         }}
       >
@@ -59,7 +62,36 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
             marginBottom: '24px',
           }}
         >
-          Hi {patientName}!
+          {`Hi ${patientName}!`.split('').map((char, i) => {
+            const charOpacity = spring({
+              frame: frame - i * 3,
+              fps,
+              from: 0,
+              to: 1,
+              durationInFrames: 20,
+            });
+            const charY = spring({
+              frame: frame - i * 3,
+              fps,
+              from: 20,
+              to: 0,
+              durationInFrames: 20,
+              config: { damping: 10 },
+            });
+            return (
+              <span
+                key={i}
+                style={{
+                  display: 'inline-block',
+                  opacity: charOpacity,
+                  transform: `translateY(${charY}px)`,
+                  whiteSpace: 'pre',
+                }}
+              >
+                {char}
+              </span>
+            );
+          })}
         </h1>
         <p
           style={{

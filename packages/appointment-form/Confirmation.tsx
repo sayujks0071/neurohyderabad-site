@@ -69,6 +69,22 @@ export default function Confirmation({
                 {bookingData.appointmentTime}
               </dd>
             </div>
+            {bookingData.painScore && (
+              <div>
+                <dt className="font-medium text-slate-500">Pain Score</dt>
+                <dd className="mt-1 text-slate-800">
+                  {bookingData.painScore} / 10
+                </dd>
+              </div>
+            )}
+            {bookingData.mriScanAvailable !== undefined && (
+              <div>
+                <dt className="font-medium text-slate-500">MRI Available</dt>
+                <dd className="mt-1 text-slate-800">
+                  {bookingData.mriScanAvailable ? "Yes" : "No"}
+                </dd>
+              </div>
+            )}
             <div className="sm:col-span-2">
               <dt className="font-medium text-slate-500">Reason for Visit</dt>
               <dd className="mt-1 text-slate-800 whitespace-pre-wrap">

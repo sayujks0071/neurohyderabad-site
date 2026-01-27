@@ -39,7 +39,7 @@
     "jules:test": "npx tsx scripts/test-jules-api.ts",
     "analytics:bigquery-insights": "npx tsx scripts/ga4-bigquery-insights.ts",
     "reindex:gemini": "ts-node scripts/reindex-gemini-rag.ts",
-    "new:blog": "ts-node scripts/new-blog.ts",
+    "new:blog": "tsx scripts/new-blog.ts",
     "normalize:blog": "ts-node scripts/normalize-blog-metadata.ts",
     "blog:auto-publish": "ts-node scripts/auto-blog-scheduler.ts",
     "blog:generate-today": "ts-node scripts/auto-blog-scheduler.ts --generate-today",
@@ -52,7 +52,13 @@
     "bloom:run": "python3 scripts/bloom/run_bloom.py",
     "remotion:preview": "remotion preview remotion/Root.tsx",
     "remotion:deploy": "remotion lambda sites create remotion/Root.tsx --site-name=drsayuj-remotion-site",
-    "remotion:render:local": "remotion render remotion/Root.tsx ConsultationPrep out/video.mp4"
+    "remotion:render:local": "remotion render remotion/Root.tsx ConsultationPrep out/video.mp4",
+    "remotion:render:services": "remotion render remotion/Root.tsx ServiceShowcase out/service-showcase.mp4",
+    "remotion:render:dashboard": "remotion render remotion/Root.tsx OutcomeDashboard out/outcome-dashboard.mp4",
+    "remotion:render:reel": "remotion render remotion/Root.tsx BlogToReel out/blog-reel.mp4",
+    "remotion:render:intro": "remotion render remotion/Root.tsx DoctorIntro out/doctor-intro.mp4",
+    "remotion:render:testimonials": "remotion render remotion/Root.tsx PatientTestimonial out/patient-testimonials.mp4",
+    "remotion:render:all": "pnpm remotion:render:local && pnpm remotion:render:services && pnpm remotion:render:dashboard && pnpm remotion:render:reel && pnpm remotion:render:intro && pnpm remotion:render:testimonials"
   },
   "dependencies": {
     "@ai-sdk/openai": "3.0.18",

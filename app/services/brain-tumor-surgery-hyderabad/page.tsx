@@ -246,7 +246,7 @@ export default function BrainTumorSurgeryHyderabadPage() {
             </li>
             <li className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
               <strong className="text-blue-800">Meningiomas &amp; Skull Base Tumors:</strong> Precision microsurgery preserving
-              cranial nerve function.
+              cranial nerve function (often relevant for <Link href="/conditions/trigeminal-neuralgia-treatment-hyderabad" className="text-blue-700 hover:underline">trigeminal neuralgia</Link>).
             </li>
             <li className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
               <strong className="text-blue-800">Pituitary &amp; Sellar Lesions:</strong> Endoscopic and minimally invasive
