@@ -103,21 +103,21 @@ const faqs = [
 
 const COSTS = [
   {
-    procedure: 'Endoscopic Discectomy (Lumbar)',
-    range: '₹95,000 - ₹1,35,000',
-    recovery: '1-2 Days',
+    procedure: 'Endoscopic Discectomy (TESS)',
+    range: '₹2,50,000 - ₹3,50,000',
+    recovery: '1 Day (Day Care)',
     includes: ['Surgeon Fees', 'OT & Nursing', 'Standard Room (1 Day)', 'Medications']
   },
   {
-    procedure: 'Endoscopic Canal Decompression',
-    range: '₹1,20,000 - ₹1,60,000',
-    recovery: '2 Days',
+    procedure: 'Endoscopic Canal Decompression (Interlaminar)',
+    range: '₹2,80,000 - ₹4,00,000',
+    recovery: '1-2 Days',
     includes: ['Stenosis Decompression', 'Advanced Endoscope Use', 'Neuromonitoring']
   },
   {
     procedure: 'Cervical Endoscopic Decompression',
-    range: '₹1,20,000 - ₹1,70,000',
-    recovery: '2 Days',
+    range: '₹3,00,000 - ₹4,50,000',
+    recovery: '1-2 Days',
     includes: ['Neck Surgery', 'High-Definition Optics', 'Specialised Instrumentation']
   }
 ];
@@ -450,9 +450,9 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
                    </tr>
                    <tr>
                      <td className="px-4 py-3 font-medium">Est. Cost (Self-Pay)</td>
-                     <td className="px-4 py-3">₹1.3L - ₹1.8L*</td>
-                     <td className="px-4 py-3">₹1.1L - ₹1.5L</td>
-                     <td className="px-4 py-3">₹80k - ₹1.2L</td>
+                     <td className="px-4 py-3">₹2.5L - ₹3.5L*</td>
+                     <td className="px-4 py-3">₹2.2L - ₹3.2L</td>
+                     <td className="px-4 py-3">₹1.5L - ₹2.5L</td>
                    </tr>
                    <tr>
                      <td className="px-4 py-3 font-medium">Infection Risk</td>

@@ -1,8 +1,6 @@
-keyword,intent,suggested_target_page
-spine surgery cost in hyderabad,Commercial,services/spine-surgery-cost-hyderabad
-spine surgeon telugu,Informational,blog/spine-surgery-guide-telugu
-laser spine surgery hyderabad,Commercial,services/laser-spine-surgery-hyderabad
-spine surgery insurance hyderabad,Transactional,blog/spine-surgery-insurance-guide
-best neurosurgeon kphb,Local,locations/neurosurgeon-kphb
-endoscopic vs microdiscectomy,Informational,blog/endoscopic-vs-microdiscectomy-comparison
-second opinion spine surgery,Commercial,services/spine-surgery-second-opinion
+Keyword,Intent,Suggested URL,Priority
+"endoscopic spine surgery cost in hyderabad",Commercial,/services/endoscopic-spine-surgery-cost-hyderabad,High
+"transforaminal endoscopic spine surgery",Informational/Transactional,/services/endoscopic-spine-surgery-hyderabad,Medium
+"thoracic endoscopic spine surgery hyderabad",Transactional,/services/thoracic-endoscopic-spine-surgery-hyderabad,Medium
+"micro lumbar disc surgery hyderabad",Transactional,/services/micro-lumbar-disc-surgery-hyderabad,Medium
+"endoscopic foraminal decompression",Informational,/services/endoscopic-spine-surgery-hyderabad,Low

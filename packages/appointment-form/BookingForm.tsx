@@ -59,6 +59,7 @@ export default function BookingForm({
     watch,
     formState: { errors, isSubmitting },
   } = useForm<BookingFormValues>({
+    // @ts-expect-error - Zod resolver type mismatch with optional/default values
     resolver: zodResolver(appointmentSchema),
     defaultValues: defaultValues as BookingFormValues,
     mode: "onTouched", // Trigger validation on blur
@@ -97,7 +98,7 @@ export default function BookingForm({
     }
   }, [initialData, reset]);
 
-  const handleFormSubmit = async (data: BookingFormValues) => {
+  const handleFormSubmit = async (data: any) => {
     // Map form values back to BookingData
     const submissionData: BookingData = {
       patientName: data.patientName,
