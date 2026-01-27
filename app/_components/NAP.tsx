@@ -1,11 +1,11 @@
 import React from 'react';
-import { getLocationById, LocationData } from '@/src/data/locations';
+import { getLocationById } from '@/src/data/locations';
 
 interface NAPProps {
   className?: string;
   showEmail?: boolean;
   variant?: 'default' | 'compact' | 'footer';
-  locationId?: string; // Optional: allows overriding the default location
+  locationId?: string;
 }
 
 export default function NAP({ 

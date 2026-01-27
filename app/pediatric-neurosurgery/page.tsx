@@ -3,6 +3,7 @@ import Link from "next/link";
 import { SITE_URL } from "../../src/lib/seo";
 import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
 import { serviceJsonLd } from "../../src/lib/seo";
+import { LocalPathways } from "@/src/components/locations/LocalPathways";
 
 export const metadata: Metadata = {
   title: "Pediatric Neurosurgery Hyderabad | Children's Brain & Spine Surgery | Dr. Sayuj Krishnan",
@@ -488,8 +489,11 @@ export default function PediatricNeurosurgeryPage() {
             </div>
           </div>
         </section>
+
+        <div className="max-w-6xl mx-auto px-4 pb-16">
+          <LocalPathways mode="service" />
+        </div>
       </div>
     </>
   );
 }
-

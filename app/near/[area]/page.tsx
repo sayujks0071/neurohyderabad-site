@@ -3,10 +3,11 @@ import SchemaScript from '@/app/_schema/Script';
 import NAP from '@/app/_components/NAP';
 import StandardCTA from '@/app/_components/StandardCTA';
 import MapCard from '@/app/_components/MapCard';
-import { CLINIC } from '@/app/_lib/clinic';
+import { getLocationById } from '@/src/data/locations';
 import { Metadata } from 'next';
 import { makeMetadata } from '@/app/_lib/meta';
 import { SITE_URL } from '@/src/lib/seo';
+import { LocalPathways } from '@/src/components/locations/LocalPathways';
 
 const AREAS = {
   'banjara-hills': {
@@ -79,8 +80,6 @@ type AreaKey = keyof typeof AREAS;
 
 const AREA_LIST = Object.keys(AREAS) as AreaKey[];
 
-const MAP_EMBED = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3814.258094969931!2d78.49575477699536!3d17.37830340220051!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb99ac8416ae97%3A0x8ac1f3f5da2b5b75!2sYashoda%20Hospitals%20Malakpet!5e0!3m2!1sen!2sin!4v1707040000000!5m2!1sen!2sin';
-
 export function generateStaticParams() {
   return AREA_LIST.map((area) => ({ area }));
 }
@@ -120,31 +119,34 @@ export default async function AreaPage({ params }: { params: Promise<{ area: str
     notFound();
   }
 
+  const malakpetLocation = getLocationById('malakpet');
+  if (!malakpetLocation) throw new Error("Critical: Malakpet location data missing");
+
   const pageUrl = `${SITE_URL}/near/${area}`;
 
   const clinicSchema = {
     '@context': 'https://schema.org',
     '@type': 'MedicalClinic',
     '@id': `${pageUrl}#clinic`,
-    name: CLINIC.name,
+    name: malakpetLocation.name,
     url: pageUrl,
-    telephone: CLINIC.phoneHuman,
-    email: CLINIC.email,
+    telephone: malakpetLocation.telephone,
+    // email: not in SSoT, usually avoided in schema unless public
     areaServed: data.name,
     address: {
       '@type': 'PostalAddress',
-      streetAddress: CLINIC.street,
-      addressLocality: CLINIC.locality,
-      addressRegion: CLINIC.region,
-      postalCode: CLINIC.postalCode,
-      addressCountry: 'IN',
+      streetAddress: malakpetLocation.address.streetAddress,
+      addressLocality: malakpetLocation.address.addressLocality,
+      addressRegion: malakpetLocation.address.addressRegion,
+      postalCode: malakpetLocation.address.postalCode,
+      addressCountry: malakpetLocation.address.addressCountry,
     },
-    geo: {
+    geo: malakpetLocation.geo ? {
       '@type': 'GeoCoordinates',
-      latitude: CLINIC.geo.lat,
-      longitude: CLINIC.geo.lng,
-    },
-    hasMap: MAP_EMBED,
+      latitude: malakpetLocation.geo.latitude,
+      longitude: malakpetLocation.geo.longitude,
+    } : undefined,
+    hasMap: malakpetLocation.google_maps_place_url, // Using canonical Maps URL for hasMap
   };
 
   const breadcrumbSchema = {
@@ -170,7 +172,7 @@ export default async function AreaPage({ params }: { params: Promise<{ area: str
         '@type': 'HowToStep',
         position: 1,
         name: 'Plan your appointment',
-        text: 'Call or WhatsApp +91 9778280044 to confirm OPD slot with Dr. Sayuj Krishnan.',
+        text: `Call or WhatsApp ${malakpetLocation.telephone} to confirm OPD slot with Dr. Sayuj Krishnan.`,
       },
       {
         '@type': 'HowToStep',
@@ -194,7 +196,7 @@ export default async function AreaPage({ params }: { params: Promise<{ area: str
       <section className="not-prose mb-8 rounded-xl border border-emerald-100 bg-emerald-50 p-5 text-sm leading-6">
         <h2 className="mb-2 text-base font-semibold text-emerald-900">Quick facts</h2>
         <ul className="list-disc pl-5 text-emerald-900">
-          <li>Consultations and surgeries are performed at Yashoda Hospital, Malakpet, Room 317 (OPD Block).</li>
+          <li>Consultations and surgeries are performed at {malakpetLocation.address.streetAddress} (OPD Block).</li>
           <li>Travel from {data.name} typically takes {data.travelTime.split(' (')[0]} — plan buffer for peak hours.</li>
           <li>Tele-consult triage helps review MRI and plan admission before you travel in.</li>
           <li>On-site parking and Malakpet Metro station make OPD visits convenient.</li>
@@ -240,10 +242,15 @@ export default async function AreaPage({ params }: { params: Promise<{ area: str
       <section>
         <h2>Directions</h2>
         <p>Set your navigation to “Yashoda Hospital Malakpet OPD Block”. Use the map below for live traffic updates.</p>
-        <MapCard area={data.name} mapUrl={MAP_EMBED} />
+        <MapCard area={data.name} mapUrl={malakpetLocation.embed_url} />
       </section>
 
       <NAP />
+
+      {/* Added Local Pathways */}
+      <div className="not-prose mt-12">
+        <LocalPathways mode="service" />
+      </div>
 
       <SchemaScript data={clinicSchema} />
       <SchemaScript data={breadcrumbSchema} />
