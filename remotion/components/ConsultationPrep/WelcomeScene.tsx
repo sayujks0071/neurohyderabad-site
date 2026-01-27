@@ -30,12 +30,15 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
     },
   });
 
+  // Subtle breathing animation for continuous movement
+  const breathingScale = 1 + Math.sin(frame / 45) * 0.01;
+
   return (
     <div
       style={{
         width: '100%',
         height: '100%',
-        backgroundColor: COLORS.accent, // cyan-600 (#00A3E0)
+        background: `linear-gradient(135deg, ${COLORS.accent} 0%, #0077A3 100%)`,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -45,7 +48,7 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
     >
       <div
         style={{
-          transform: `scale(${scale})`,
+          transform: `scale(${scale * breathingScale})`,
           textAlign: 'center',
         }}
       >

@@ -159,10 +159,21 @@
     "spine surgery for elderly hyderabad",
     "black disc disease treatment"
   ],
-  "/services/microdiscectomy-surgery-hyderabad": [
+"/services/microdiscectomy-surgery-hyderabad": [
     "microdiscectomy surgery hyderabad",
     "microscopic spine surgery hyderabad",
     "microscopic lumbar discectomy",
     "best surgeon for microdiscectomy in hyderabad"
+  ],
+  "/locations/neurosurgeon-madhapur": [
+    "neurosurgeon madhapur",
+    "best neurosurgeon in madhapur",
+    "spine specialist madhapur"
+  ],
+  "/conditions/scoliosis-treatment-hyderabad": [
+    "scoliosis treatment hyderabad",
+    "scoliosis surgery cost hyderabad",
+    "spine deformity correction hyderabad",
+    "kyphosis correction hyderabad"
   ]
 }

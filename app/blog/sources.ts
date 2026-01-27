@@ -298,6 +298,20 @@ export const BLOG_SOURCES: Record<string, SourceEntry[]> = {
       href: "https://www.mayoclinic.org/diseases-conditions/scoliosis/symptoms-causes/syc-20350716",
     },
   ],
+  "failed-back-surgery-syndrome-treatment-hyderabad": [
+    {
+      label: "American Association of Neurological Surgeons – Failed Back Surgery Syndrome",
+      href: "https://www.aans.org/Patients/Neurosurgical-Conditions-and-Treatments/Failed-Back-Surgery-Syndrome",
+    },
+    {
+      label: "National Center for Biotechnology Information – FBSS Clinical Review",
+      href: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5913031/",
+    },
+    {
+      label: "Spine-Health – Failed Back Surgery Syndrome Overview",
+      href: "https://www.spine-health.com/conditions/spine-surgery/failed-back-surgery-syndrome-fbss-what-it-and-how-avoid-pain-after-surgery",
+    },
+  ],
 };
 
 export function getBlogSources(slug: string): SourceEntry[] {

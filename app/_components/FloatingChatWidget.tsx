@@ -186,15 +186,20 @@ export default function FloatingChatWidget() {
       {/* Floating Button */}
       <button
         onClick={() => {
-          setIsOpen(!isOpen);
-          setIsMinimized(false);
+          if (isOpen && isMinimized) {
+            setIsMinimized(false);
+          } else {
+            setIsOpen((prev) => !prev);
+            setIsMinimized(false);
+          }
         }}
         className={`fixed bottom-24 right-4 z-[60] p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300 ${
           isOpen && !isMinimized
             ? 'bg-gray-800 text-white rotate-90'
             : 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white animate-bounce-subtle'
         }`}
-        aria-label={isOpen ? "Close chat" : "Open AI Assistant"}
+        aria-label={isOpen ? (isMinimized ? "Expand chat" : "Close chat") : "Open AI Assistant"}
+        aria-expanded={isOpen && !isMinimized}
       >
         {isOpen && !isMinimized ? <X size={24} /> : <MessageCircle size={28} />}
         {!isOpen && (

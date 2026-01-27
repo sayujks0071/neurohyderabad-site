@@ -1,4 +1,4 @@
-#!/usr/bin/env ts-node
+#!/usr/bin/env npx tsx
 
 /**
  * New Blog Post Generator
@@ -6,12 +6,9 @@
  * Creates a new blog post with proper frontmatter and skeleton content
  * 
  * Usage:
- *   ts-node scripts/new-blog.ts --title "My Blog Post" --category spine --primaryKeyword "spine surgery"
- *   ts-node scripts/new-blog.ts --title "My Blog Post" --ai (uses OpenAI to generate content)
+ *   npx tsx scripts/new-blog.ts --title "My Blog Post" --category spine --primaryKeyword "spine surgery"
+ *   npx tsx scripts/new-blog.ts --title "My Blog Post" --ai (uses OpenAI to generate content)
  */
-
-// Register tsconfig paths to resolve @ aliases
-import 'tsconfig-paths/register';
 
 import fs from 'fs/promises';
 import path from 'path';
@@ -171,7 +168,7 @@ async function generateAIContent(options: BlogOptions): Promise<string> {
         },
       ],
       temperature: 0.3,
-      maxTokens: 4000,
+      maxOutputTokens: 4000,
     });
 
     const content = text || '';
@@ -335,7 +332,7 @@ async function main() {
 
   if (!options.title) {
     console.error('Error: --title is required');
-    console.error('Usage: ts-node scripts/new-blog.ts --title "My Blog Post" [options]');
+    console.error('Usage: npx tsx scripts/new-blog.ts --title "My Blog Post" [options]');
     console.error('');
     console.error('Options:');
     console.error('  --title <string>           (required) Blog post title');

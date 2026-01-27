@@ -107,9 +107,18 @@ export const LocalPathways: React.FC<LocalPathwaysProps> = ({
   // Mode: Service or Condition (showing locations)
   if (effectiveMode === 'service' || effectiveMode === 'condition') {
     // Exclude 'hyderabad' as it's the main location, we want local areas
-    // Show all area locations (sorted alphabetically by area name for consistency)
+    // Show curated list of major areas to avoid link farming (limit to ~6 distinct zones)
+    const FEATURED_AREAS = [
+      'banjara-hills',
+      'jubilee-hills',
+      'hitech-city',
+      'gachibowli',
+      'secunderabad',
+      'malakpet'
+    ];
+
     const displayLocations = locations
-        .filter(l => l.id !== 'hyderabad')
+        .filter(l => FEATURED_AREAS.includes(l.id))
         .sort((a, b) => a.areaServedName.localeCompare(b.areaServedName));
 
     const title = effectiveMode === 'service'

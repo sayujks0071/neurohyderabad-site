@@ -23,19 +23,19 @@
       "term": "scoliosis treatment hyderabad",
       "difficulty": "High",
       "volume": "Med",
-      "target_page": "/blog/scoliosis-treatment-options-in-hyderabad"
+      "target_page": "/conditions/scoliosis-treatment-hyderabad"
     },
     {
       "term": "kyphosis correction hyderabad",
       "difficulty": "Med",
       "volume": "Low",
-      "target_page": "/blog/scoliosis-treatment-options-in-hyderabad"
+      "target_page": "/conditions/scoliosis-treatment-hyderabad"
     },
     {
       "term": "spinal deformity specialist hyderabad",
       "difficulty": "High",
       "volume": "Low",
-      "target_page": "/blog/scoliosis-treatment-options-in-hyderabad"
+      "target_page": "/conditions/scoliosis-treatment-hyderabad"
     },
     {
       "term": "pediatric neurosurgeon hyderabad",
@@ -402,6 +402,30 @@
       "difficulty": "Low",
       "volume": "Med",
       "target_page": "/services/microdiscectomy-surgery-hyderabad"
+    },
+    {
+      "term": "neurosurgeon madhapur",
+      "difficulty": "Low",
+      "volume": "Med",
+      "target_page": "/locations/neurosurgeon-madhapur"
+    },
+    {
+      "term": "best neurosurgeon in madhapur",
+      "difficulty": "Low",
+      "volume": "Med",
+      "target_page": "/locations/neurosurgeon-madhapur"
+    },
+    {
+      "term": "scoliosis surgery cost hyderabad",
+      "difficulty": "High",
+      "volume": "Med",
+      "target_page": "/conditions/scoliosis-treatment-hyderabad"
+    },
+    {
+      "term": "spine deformity correction hyderabad",
+      "difficulty": "Med",
+      "volume": "Low",
+      "target_page": "/conditions/scoliosis-treatment-hyderabad"
     }
   ]
 }

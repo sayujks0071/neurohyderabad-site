@@ -390,6 +390,7 @@ export default function AboutPage() {
               description="An animated introduction to Dr. Sayuj's credentials, specializations, and patient care philosophy."
               controls
               loop
+              immediate={true}
             />
           </Section>
         </LazySection>

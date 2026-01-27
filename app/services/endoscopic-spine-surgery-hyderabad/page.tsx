@@ -152,12 +152,12 @@ const SUCCESS_RATES = [
 ];
 
 const conditions = [
-  'Lumbar disc herniation (slip disc)',
-  'Sciatica with leg pain',
-  'Spinal stenosis (narrowing)',
-  'Foraminal stenosis',
-  'Cervical disc herniation',
-  'Failed conservative treatment (6+ weeks)',
+  { text: 'Lumbar disc herniation (slip disc)', href: '/conditions/slip-disc-treatment-hyderabad' },
+  { text: 'Sciatica with leg pain', href: '/conditions/sciatica-pain-treatment-hyderabad' },
+  { text: 'Spinal stenosis (narrowing)', href: '/conditions/spinal-stenosis-treatment-hyderabad' },
+  { text: 'Foraminal stenosis' },
+  { text: 'Cervical disc herniation', href: '/conditions/cervical-radiculopathy-treatment-hyderabad' },
+  { text: 'Failed conservative treatment (6+ weeks)' },
 ];
 
 const ADVANCED_TECHNIQUES = [
@@ -183,11 +183,13 @@ const ADVANCED_TECHNIQUES = [
   },
   {
     title: "Endoscopic Lumbar Discectomy",
-    description: "Gold-standard minimally invasive removal of disc fragments pressing on nerves, allowing same-day walking."
+    description: "Gold-standard minimally invasive removal of disc fragments pressing on nerves, allowing same-day walking.",
+    href: "/services/endoscopic-discectomy-hyderabad"
   },
   {
     title: "Awake Endoscopic Spine Surgery",
-    description: "For elderly or high-risk patients, we perform the procedure under local anaesthesia with mild sedation, avoiding general anaesthesia risks."
+    description: "For elderly or high-risk patients, we perform the procedure under local anaesthesia with mild sedation, avoiding general anaesthesia risks.",
+    href: "/services/awake-spine-surgery-hyderabad"
   }
 ];
 
@@ -367,7 +369,15 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
           </div>
           <ul className="grid md:grid-cols-2 gap-4 text-sm text-gray-700">
             {conditions.map((condition) => (
-              <li key={condition} className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">• {condition}</li>
+              <li key={condition.text} className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+                • {condition.href ? (
+                  <Link href={condition.href} className="hover:text-blue-700 hover:underline">
+                    {condition.text}
+                  </Link>
+                ) : (
+                  condition.text
+                )}
+              </li>
             ))}
           </ul>
         </section>
@@ -377,7 +387,15 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {ADVANCED_TECHNIQUES.map((tech) => (
               <div key={tech.title} className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-                <h3 className="text-lg font-semibold text-blue-800 mb-2">{tech.title}</h3>
+                <h3 className="text-lg font-semibold text-blue-800 mb-2">
+                  {tech.href ? (
+                    <Link href={tech.href} className="hover:text-blue-600 hover:underline">
+                      {tech.title}
+                    </Link>
+                  ) : (
+                    tech.title
+                  )}
+                </h3>
                 <p className="text-sm text-gray-700 leading-relaxed">
                   {tech.description}
                 </p>
@@ -445,6 +463,50 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
               <li>Walk with assistance within 2-3 hours and discharge the same evening or next morning.</li>
               <li>Follow personalised rehab and return-to-work guidelines shared before discharge.</li>
             </ol>
+          </div>
+        </section>
+
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-blue-900 mb-6">Step-by-Step: Inside the Operation Theatre</h2>
+          <p className="text-gray-700 mb-8">
+            Many patients feel anxious about what happens during the surgery. Because this is a conscious or lightly sedated procedure for many, transparency is key. Here is the exact 45-60 minute protocol we follow:
+          </p>
+          <div className="relative border-l-4 border-blue-200 ml-4 space-y-10">
+            <div className="relative pl-8">
+              <span className="absolute -left-[21px] top-0 flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 ring-4 ring-white">
+                <span className="text-blue-600 font-bold">1</span>
+              </span>
+              <h3 className="text-xl font-semibold text-blue-900 mb-2">Anesthesia & Positioning</h3>
+              <p className="text-gray-700">You lie face down on a comfortable gel frame. Local anaesthesia is applied to the skin, or mild sedation is given so you sleep but can still wake up if needed. You are comfortable throughout.</p>
+            </div>
+            <div className="relative pl-8">
+              <span className="absolute -left-[21px] top-0 flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 ring-4 ring-white">
+                <span className="text-blue-600 font-bold">2</span>
+              </span>
+              <h3 className="text-xl font-semibold text-blue-900 mb-2">Targeting the "Keyhole"</h3>
+              <p className="text-gray-700">Using a live X-ray (C-arm), Dr. Sayuj marks the exact spot (accurate to the millimetre) on your skin. A tiny 7mm incision is made—about the size of a fingernail.</p>
+            </div>
+            <div className="relative pl-8">
+              <span className="absolute -left-[21px] top-0 flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 ring-4 ring-white">
+                <span className="text-blue-600 font-bold">3</span>
+              </span>
+              <h3 className="text-xl font-semibold text-blue-900 mb-2">The Endoscopic Work</h3>
+              <p className="text-gray-700">A thin tube (endoscope) with a 4K camera is inserted. The herniated disc or bone spur pressing on the nerve is magnified on a large screen and carefully removed using micro-instruments.</p>
+            </div>
+            <div className="relative pl-8">
+              <span className="absolute -left-[21px] top-0 flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 ring-4 ring-white">
+                <span className="text-blue-600 font-bold">4</span>
+              </span>
+              <h3 className="text-xl font-semibold text-blue-900 mb-2">The "Free Nerve" Check</h3>
+              <p className="text-gray-700">Dr. Sayuj visually confirms the nerve is floating freely. If you are awake, he may ask you to move your leg to confirm the pain is gone instantly.</p>
+            </div>
+             <div className="relative pl-8">
+              <span className="absolute -left-[21px] top-0 flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 ring-4 ring-white">
+                <span className="text-blue-600 font-bold">5</span>
+              </span>
+              <h3 className="text-xl font-semibold text-blue-900 mb-2">Closure & Walk</h3>
+              <p className="text-gray-700">The tube is removed. No stitches are usually needed—just a small waterproof band-aid. You are shifted to the recovery room and can typically walk to the washroom within 2-3 hours.</p>
+            </div>
           </div>
         </section>
 

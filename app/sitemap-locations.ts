@@ -36,6 +36,7 @@ export default function sitemapLocations(): MetadataRoute.Sitemap {
     { url: '/locations/neurosurgeon-kukatpally', priority: 0.7 },
     { url: '/locations/neurosurgeon-manikonda', priority: 0.7 },
     { url: '/locations/neurosurgeon-nizampet', priority: 0.7 },
+    { url: '/locations/neurosurgeon-madhapur', priority: 0.7 },
 
     // FAQ location pages
     { url: '/locations/neurosurgeon-near-jubilee-hills-faq', priority: 0.6 },

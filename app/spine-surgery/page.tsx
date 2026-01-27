@@ -5,6 +5,7 @@ import { SITE_URL } from "../../src/lib/seo";
 import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
 import MedicalWebPageSchema from "../components/schemas/MedicalWebPageSchema";
 import CostTransparencySection from "../../src/components/CostTransparencySection";
+import { LocalPathways } from '@/src/components/locations/LocalPathways';
 
 const spineCosts = [
   {
@@ -688,6 +689,10 @@ export default function SpineSurgeryPage() {
             </div>
           </div>
         </section>
+
+        <div className="max-w-6xl mx-auto px-4 pb-16">
+          <LocalPathways mode="service" />
+        </div>
       </div>
     </>
   );

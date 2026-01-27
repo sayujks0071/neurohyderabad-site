@@ -311,6 +311,23 @@ export const locations: LocationData[] = [
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
     sameAs: SOCIAL_PROFILES
+  },
+  {
+    id: "madhapur",
+    name: "Dr Sayuj Krishnan - Neurosurgeon near Madhapur",
+    canonical_display_name: CANONICAL_PHYSICIAN_NAME,
+    slug: "locations/neurosurgeon-madhapur",
+    address: YASHODA_MALAKPET_ADDRESS,
+    telephone: CANONICAL_TELEPHONE,
+    whatsapp: CANONICAL_WHATSAPP,
+    directions_url: YASHODA_DIRECTIONS,
+    google_maps_place_url: CANONICAL_MAPS_URL,
+    embed_url: REPO_EMBED,
+    geo: YASHODA_GEO,
+    areaServedName: "Madhapur",
+    top_services_slugs: DEFAULT_SERVICES,
+    top_conditions_slugs: DEFAULT_CONDITIONS,
+    sameAs: SOCIAL_PROFILES
   }
 ];
 
@@ -327,7 +344,8 @@ export type LocationId =
   | "manikonda"
   | "nizampet"
   | "kondapur"
-  | "kothapet";
+  | "kothapet"
+  | "madhapur";
 
 export function getLocationById(id: string): LocationData | undefined {
   return locations.find(loc => loc.id === id);
