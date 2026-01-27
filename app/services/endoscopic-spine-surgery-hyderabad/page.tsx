@@ -31,7 +31,7 @@ const baseMetadata = makeMetadata({
 
 export const metadata: Metadata = {
   ...baseMetadata,
-  title: 'Endoscopic Spine Surgery Hyderabad | Day Care Keyhole Surgery',
+  title: 'Endoscopic Spine Surgery Hyderabad | Day Care Keyhole',
   description:
     'Advanced Endoscopic Spine Surgery in Hyderabad. 7mm incision, same-day discharge. Expert treatment for Slip Disc & Sciatica. Check packages.',
   keywords: [
@@ -98,6 +98,10 @@ const faqs = [
   {
     question: 'Is endoscopic spine surgery the same as laser spine surgery?',
     answer: 'No. Laser surgery often refers to limited surface ablation. Endoscopic surgery is a comprehensive structural correction (removing bone spurs or disc fragments) under high-definition visualization, offering far superior long-term results than laser alone.'
+  },
+  {
+    question: 'How does endoscopic spine surgery recovery compare to microscopic surgery?',
+    answer: 'Endoscopic surgery typically offers a faster recovery. Since it uses a smaller incision (8mm vs 2-3cm) and avoids cutting muscle, most patients walk within 3 hours and return to work in 3-5 days, compared to 2-3 weeks for microscopic surgery.'
   },
 ];
 
