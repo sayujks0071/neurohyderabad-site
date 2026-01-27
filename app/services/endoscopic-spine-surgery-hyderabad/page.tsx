@@ -31,7 +31,7 @@ const baseMetadata = makeMetadata({
 
 export const metadata: Metadata = {
   ...baseMetadata,
-  title: 'Endoscopic Spine Surgery Hyderabad | Day Care Keyhole',
+  title: 'Endoscopic Spine Surgery Hyderabad | Day Care Keyhole Surgery',
   description:
     'Advanced Endoscopic Spine Surgery in Hyderabad. 7mm incision, same-day discharge. Expert treatment for Slip Disc & Sciatica. Check packages.',
   keywords: [
@@ -99,29 +99,25 @@ const faqs = [
     question: 'Is endoscopic spine surgery the same as laser spine surgery?',
     answer: 'No. Laser surgery often refers to limited surface ablation. Endoscopic surgery is a comprehensive structural correction (removing bone spurs or disc fragments) under high-definition visualization, offering far superior long-term results than laser alone.'
   },
-  {
-    question: 'How does endoscopic spine surgery recovery compare to microscopic surgery?',
-    answer: 'Endoscopic surgery typically offers a faster recovery. Since it uses a smaller incision (8mm vs 2-3cm) and avoids cutting muscle, most patients walk within 3 hours and return to work in 3-5 days, compared to 2-3 weeks for microscopic surgery.'
-  },
 ];
 
 const COSTS = [
   {
-    procedure: 'Endoscopic Discectomy (Lumbar)',
-    range: '₹95,000 - ₹1,35,000',
-    recovery: '1-2 Days',
+    procedure: 'Endoscopic Discectomy (TESS)',
+    range: '₹2,50,000 - ₹3,50,000',
+    recovery: '1 Day (Day Care)',
     includes: ['Surgeon Fees', 'OT & Nursing', 'Standard Room (1 Day)', 'Medications']
   },
   {
-    procedure: 'Endoscopic Canal Decompression',
-    range: '₹1,20,000 - ₹1,60,000',
-    recovery: '2 Days',
+    procedure: 'Endoscopic Canal Decompression (Interlaminar)',
+    range: '₹2,80,000 - ₹4,00,000',
+    recovery: '1-2 Days',
     includes: ['Stenosis Decompression', 'Advanced Endoscope Use', 'Neuromonitoring']
   },
   {
     procedure: 'Cervical Endoscopic Decompression',
-    range: '₹1,20,000 - ₹1,70,000',
-    recovery: '2 Days',
+    range: '₹3,00,000 - ₹4,50,000',
+    recovery: '1-2 Days',
     includes: ['Neck Surgery', 'High-Definition Optics', 'Specialised Instrumentation']
   }
 ];
@@ -188,34 +184,6 @@ const ADVANCED_TECHNIQUES = [
   {
     title: "Awake Endoscopic Spine Surgery",
     description: "For elderly or high-risk patients, we perform the procedure under local anaesthesia with mild sedation, avoiding general anaesthesia risks."
-  }
-];
-
-const SURGERY_STEPS = [
-  {
-    step: "Step 1: Anesthesia",
-    title: "Comfort & Safety",
-    description: "The procedure is typically performed under local or regional anaesthesia with mild sedation. You remain comfortable but awake, allowing you to communicate with the surgeon if needed. General anaesthesia is available for anxious patients."
-  },
-  {
-    step: "Step 2: The Keyhole",
-    title: "Tiny Incision",
-    description: "A small incision of about 7-8mm (less than 1 cm) is made. This is covered by a small Band-Aid after surgery, leaving minimal to no scarring."
-  },
-  {
-    step: "Step 3: Access",
-    title: "Muscle Preservation",
-    description: "Instead of cutting through muscles (as in open surgery), we use a series of dilators to gently separate muscle fibres. This creates a tunnel to the spine without tissue damage."
-  },
-  {
-    step: "Step 4: The Procedure",
-    title: "High-Definition Decompression",
-    description: "An endoscope with a 4K camera is inserted. Dr. Sayuj views the nerves on a large monitor and precisely removes the disc herniation or bone spurs pressing on the nerve using micro-instruments."
-  },
-  {
-    step: "Step 5: Immediate Relief",
-    title: "Closure & Recovery",
-    description: "The instruments are removed, and the skin is closed with a single stitch or skin glue. Most patients feel immediate relief from leg pain and are encouraged to walk within 2-3 hours."
   }
 ];
 
@@ -387,24 +355,6 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
         </section>
 
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-blue-900 mb-8">Inside the Operation Theatre: Step-by-Step</h2>
-          <div className="relative border-l-2 border-blue-200 ml-3 space-y-10 pb-2">
-            {SURGERY_STEPS.map((item, index) => (
-              <div key={index} className="relative pl-8">
-                {/* Timeline Dot */}
-                <span className="absolute -left-[9px] top-1 h-5 w-5 rounded-full bg-blue-600 border-4 border-white shadow-sm ring-1 ring-blue-100"></span>
-
-                <div className="bg-white border border-gray-100 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
-                   <div className="text-xs font-bold text-blue-600 uppercase tracking-wide mb-1">{item.step}</div>
-                   <h3 className="text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
-                   <p className="text-gray-700 leading-relaxed">{item.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="mb-16">
           <h2 className="text-3xl font-bold text-blue-900 mb-6">Clinical Success Rates</h2>
           <div className="bg-blue-900 rounded-2xl p-8 text-white shadow-xl">
             <p className="mb-8 text-blue-100 max-w-3xl">
@@ -500,9 +450,9 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
                    </tr>
                    <tr>
                      <td className="px-4 py-3 font-medium">Est. Cost (Self-Pay)</td>
-                     <td className="px-4 py-3">₹1.3L - ₹1.8L*</td>
-                     <td className="px-4 py-3">₹1.1L - ₹1.5L</td>
-                     <td className="px-4 py-3">₹80k - ₹1.2L</td>
+                     <td className="px-4 py-3">₹2.5L - ₹3.5L*</td>
+                     <td className="px-4 py-3">₹2.2L - ₹3.2L</td>
+                     <td className="px-4 py-3">₹1.5L - ₹2.5L</td>
                    </tr>
                    <tr>
                      <td className="px-4 py-3 font-medium">Infection Risk</td>

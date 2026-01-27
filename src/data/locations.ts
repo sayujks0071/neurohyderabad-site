@@ -71,8 +71,7 @@ export const SOCIAL_PROFILES = [
   "https://twitter.com/drsayuj",
   "https://www.google.com/maps?cid=14503792272825406246",
   "https://www.yashodahospitals.com/doctors/dr-sayuj-krishnan/",
-  "https://www.google.com/search?q=Dr+Sayuj+Krishnan+Neurosurgeon+Hyderabad",
-  "https://www.practo.com/hyderabad/doctor/dr-sayuj-krishnan-neurosurgeon"
+  "https://www.google.com/search?q=Dr+Sayuj+Krishnan+Neurosurgeon+Hyderabad"
 ];
 
 const DEFAULT_SERVICES = [

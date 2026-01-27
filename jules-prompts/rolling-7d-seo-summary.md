@@ -6,7 +6,6 @@ Analyze the SEO performance for the last 7 days.
 1. Run `npx tsc --noEmit` to check for type errors (since `pnpm build` may panic on Canary).
 2. Run `npm run seo:audit` (if available) or check `reports/cwv-sentinel.json` for technical SEO issues.
 3. Check `seo/keyword-research/latest/` for any manual updates.
-4. Review Core Web Vitals status if report data is available.
 
 **Action:**
 - Summarize the technical health of the repo.
@@ -15,4 +14,4 @@ Analyze the SEO performance for the last 7 days.
 
 <!-- Jules Automation -->
 <!-- Managed by Jules -->
-<!-- v1.3 -->
+<!-- v1.2 -->
