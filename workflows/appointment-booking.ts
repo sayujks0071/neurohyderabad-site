@@ -17,6 +17,7 @@ import { buildWebhookPayload, notifyAppointmentWebhooks } from "@/src/lib/appoin
 import { submitToGoogleSheets } from "@/src/lib/google-sheets";
 import { getTextModel, hasAIConfig } from "@/src/lib/ai/gateway";
 import { inngest } from "@/src/lib/inngest";
+import { appointments, workflowRuns } from "@/src/lib/db";
 
 interface PatientInfo {
   name: string;
@@ -298,6 +299,18 @@ export async function handleAppointmentBooking(
   globalThis.fetch = fetch;
 
   const bookingId = generateBookingId();
+
+  try {
+    await workflowRuns.create({
+      id: bookingId,
+      workflow_name: "appointment-booking",
+      triggered_by: patientInfo.source || "website",
+      input_data: { appointmentType: patientInfo.appointmentType },
+    });
+  } catch (e) {
+    console.warn("Failed to create workflow run record", e);
+  }
+
   logWorkflowEvent(bookingId, "workflow-started");
 
   try {
@@ -403,6 +416,12 @@ export async function handleAppointmentBooking(
 
     logWorkflowEvent(bookingId, "workflow-completed", { status });
 
+    try {
+      await workflowRuns.complete(bookingId, { status });
+    } catch (e) {
+      console.warn("Failed to complete workflow run record", e);
+    }
+
     return {
       bookingId,
       status,
@@ -414,15 +433,23 @@ export async function handleAppointmentBooking(
       nextSteps: generateNextSteps(status, finalDate, finalTime),
     };
   } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
     console.error(
       JSON.stringify({
         timestamp: new Date().toISOString(),
         workflow: "appointment-booking",
         bookingId,
         event: "workflow-error",
-        error: error instanceof Error ? error.message : String(error),
+        error: errorMessage,
       })
     );
+
+    try {
+      await workflowRuns.complete(bookingId, undefined, errorMessage);
+    } catch (e) {
+      console.warn("Failed to record workflow error", e);
+    }
+
     throw error;
   }
 }
@@ -616,8 +643,30 @@ async function createBookingRecord(
 
   console.log(`[Appointment Workflow] Creating booking record ${bookingId}`);
 
-  // In production, this would save to database
-  console.log(`Booking ${bookingId} created on ${date} at ${time}`);
+  try {
+    await appointments.create({
+      patient_name: patientInfo.name,
+      patient_email: patientInfo.email,
+      patient_phone: patientInfo.phone,
+      patient_age: patientInfo.age ? Number(patientInfo.age) : undefined,
+      patient_gender: patientInfo.gender,
+      preferred_date: date,
+      preferred_time: time,
+      appointment_type: patientInfo.appointmentType,
+      chief_complaint: patientInfo.chiefComplaint,
+      intake_notes: patientInfo.intakeNotes,
+      pain_score: patientInfo.painScore,
+      mri_scan_available: patientInfo.mriScanAvailable,
+      has_emergency_symptoms: patientInfo.hasEmergencySymptoms,
+      source: patientInfo.source,
+      workflow_run_id: bookingId,
+      confirmation_message: patientInfo.confirmationMessage,
+    });
+    console.log(`Booking ${bookingId} saved to database`);
+  } catch (error) {
+    console.error(`[Appointment Workflow] Failed to save booking to DB:`, error);
+    throw error;
+  }
 }
 
 /**
