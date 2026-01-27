@@ -18,8 +18,8 @@ export const appointmentSchema = z.object({
   }, { message: "Date must be in the future" }),
   appointmentTime: z.string().min(1, "Please select a time"),
   reason: z.string().min(10, "Please provide more details (min 10 characters)"),
-  painScore: z.coerce.number().min(1).max(10).default(5),
-  mriScanAvailable: z.boolean().default(false),
+  painScore: z.coerce.number().min(1).max(10),
+  mriScanAvailable: z.boolean(),
 });
 
 export type BookingFormValues = z.infer<typeof appointmentSchema>;

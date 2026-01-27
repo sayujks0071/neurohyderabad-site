@@ -58,9 +58,10 @@ export default function AppointmentsPage() {
   // Opens a dynamic WhatsApp API link with a pre-filled confirmation message.
   // Phone number is sanitized and message includes patient name and date.
   const sendWhatsapp = (appointment: Appointment) => {
+    setError(null);
     // Ensure we have a phone number before proceeding
     if (!appointment.patient_phone) {
-      alert('No phone number available for this patient.');
+      setError('No phone number available for this patient.');
       return;
     }
 
