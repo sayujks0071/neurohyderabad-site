@@ -1,4 +1,5 @@
 // Centralized event tracking helper with privacy-safe instrumentation
+import { trackMiddlewareEvent } from '@/src/lib/middleware/rum';
 // import { Statsig } from '@statsig/js-client';
 
 // Export GA4 measurement ID for GoogleAnalytics component
@@ -73,6 +74,9 @@ export function track(eventName: string, props: EventProps = {}) {
     if (typeof window !== 'undefined' && (window as any).Statsig) {
       (window as any).Statsig.logEvent(eventName, undefined, enrichedProps);
     }
+
+    // Log to Middleware RUM
+    trackMiddlewareEvent(eventName, enrichedProps);
     
     // Log to GA4 (when available)
     if (typeof window !== 'undefined' && (window as any).gtag) {
