@@ -26,19 +26,11 @@ import Section from "./_components/Section";
 import FAQPageSchema from "./_components/FAQPageSchema";
 import HeroCTAButtons from "./_components/HeroCTAButtons";
 import RemotionVideoEmbedWrapper from "./_components/RemotionVideoEmbedWrapper";
+import PatientEducationVideosSkeleton from "./_components/skeletons/PatientEducationVideosSkeleton";
 
 // Dynamic imports for Lazy components
 const PatientEducationVideos = dynamic(() => import('./_components/PatientEducationVideos'), {
-  loading: () => (
-    <div className="py-16 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="max-w-6xl mx-auto">
-          {/* CLS Optimization: Explicit height matches rendered content (3 cards in grid/stack) */}
-          <div className="animate-pulse bg-gray-200 h-[1700px] md:h-[600px] rounded-lg"></div>
-        </div>
-      </div>
-    </div>
-  )
+  loading: () => <PatientEducationVideosSkeleton />
 });
 
 const RecoveryTimeline = dynamic(() => import('./_components/RecoveryTimeline'), {
@@ -343,16 +335,7 @@ export default function Home() {
 
         {/* Lazy load video section - only loads when user scrolls */}
         <LazySection
-          placeholder={
-            <div className="py-16 bg-white">
-              <div className="container mx-auto px-4">
-                <div className="max-w-6xl mx-auto">
-                  {/* CLS Optimization: Height aligned with dynamic import loading state */}
-                  <div className="animate-pulse bg-gray-200 h-[1700px] md:h-[600px] rounded-lg"></div>
-                </div>
-              </div>
-            </div>
-          }
+          placeholder={<PatientEducationVideosSkeleton />}
         >
           <PatientEducationVideos />
         </LazySection>
