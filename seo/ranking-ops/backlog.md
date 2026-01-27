@@ -11,3 +11,6 @@
 - [ ] **Content:** Expand "Patient Journey" section on Brain Surgery page to match competitor depth.
 - [Content] Add specific cost guide for Brain Tumor Surgery (similar to Spine).
 - [ ] **Audit:** Check all "Patient Education Resources" sections on other Condition pages for broken links or missing content.
+- [ ] **Multimedia:** Add embedded video testimonials/explainers to Service pages (Competitor Advantage).
+- [ ] **Content:** Strengthen "Why Dr. Sayuj" sections on service pages with stronger USPs.
+- [ ] **Schema:** Verify MedicalProcedure schema includes specific procedure codes (CPT/ICD-10) where possible.

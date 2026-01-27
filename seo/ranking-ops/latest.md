@@ -1,1 +1,1 @@
-seo/ranking-ops/2026-01-25/report.md
+[Latest Report](./2025-02-21/report.md)
