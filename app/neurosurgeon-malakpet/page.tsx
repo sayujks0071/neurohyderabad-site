@@ -213,6 +213,11 @@ export default function MalakpetNeurosurgeonPage() {
                   <p className="text-sm text-gray-600">Including <strong>MIS TLIF</strong> for spondylolisthesis and fractures.</p>
                   <Link href="/services/spinal-fusion-surgery-hyderabad" className="text-sm text-blue-600 hover:underline">Learn more →</Link>
                 </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900">Trauma & Fracture Care</h4>
+                  <p className="text-sm text-gray-600">Emergency fixation for <strong>spine fractures</strong> and <strong>head injury</strong> management.</p>
+                  <Link href="/emergency-rehabilitation" className="text-sm text-blue-600 hover:underline">Learn more →</Link>
+                </div>
               </div>
             </div>
           </div>
@@ -238,9 +243,9 @@ export default function MalakpetNeurosurgeonPage() {
       {/* Second Opinion CTA */}
       <section className="bg-green-50 border-y border-green-100 py-10">
           <div className="mx-auto max-w-4xl px-4 text-center">
-              <h2 className="text-2xl font-bold text-green-900">Already at Yashoda or Nearby? Get a Second Opinion.</h2>
+              <h2 className="text-2xl font-bold text-green-900">Advised Spine Surgery in Malakpet or Dilsukhnagar?</h2>
               <p className="mt-3 text-lg text-green-800">
-                  If you have been advised surgery or want to explore minimally invasive options, Dr. Sayuj provides detailed second opinions.
+                  Before you proceed, get a <strong>Second Opinion</strong> from Dr. Sayuj. Explore minimally invasive "Keyhole" options that may avoid open surgery.
                   Bring your MRI reports for a comprehensive review.
               </p>
               <div className="mt-6 flex justify-center gap-4">
@@ -329,12 +334,19 @@ export default function MalakpetNeurosurgeonPage() {
               </div>
               
               <div className="mt-6 rounded-lg border border-blue-200 bg-blue-50 p-4">
-                <h4 className="font-semibold text-blue-800">Nearby Landmarks</h4>
-                <ul className="mt-2 space-y-1 text-sm text-blue-900">
-                  <li>• Near Malakpet Railway Station (2 km)</li>
-                  <li>• Close to Dilsukhnagar (3 km)</li>
-                  <li>• Accessible from Charminar (4 km)</li>
-                  <li>• Easy access from LB Nagar (5 km)</li>
+                <h4 className="font-semibold text-blue-800">Areas Served</h4>
+                <p className="mt-2 text-sm text-blue-900 mb-2">
+                  Convenient for patients from:
+                </p>
+                <ul className="grid grid-cols-2 gap-x-2 gap-y-1 text-sm text-blue-900">
+                  <li>• Dilsukhnagar</li>
+                  <li>• Amberpet</li>
+                  <li>• Saidabad</li>
+                  <li>• Chaderghat</li>
+                  <li>• Santosh Nagar</li>
+                  <li>• Champapet</li>
+                  <li>• Moosarambagh</li>
+                  <li>• LB Nagar</li>
                 </ul>
               </div>
             </div>
