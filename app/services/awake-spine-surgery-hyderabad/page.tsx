@@ -10,12 +10,15 @@ import NAP from '@/app/_components/NAP';
 import SourceList from '@/app/_components/SourceList';
 import { getServiceSources } from '../sources';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
+import MedicalWebPageSchema from '@/app/components/schemas/MedicalWebPageSchema';
+
+const SERVICE_SLUG = 'awake-spine-surgery-hyderabad';
 
 const baseMetadata = makeMetadata({
   title: 'Awake Spine Surgery Hyderabad',
   description:
     'Awake endoscopic spine surgery for high-risk patients. Local anesthesia, no general anesthesia needed. Faster recovery & same-day discharge in Hyderabad.',
-  canonicalPath: '/services/awake-spine-surgery-hyderabad',
+  canonicalPath: `/services/${SERVICE_SLUG}`,
 });
 
 export const metadata: Metadata = {
@@ -23,7 +26,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: baseMetadata.title,
     description: baseMetadata.description,
-    url: `${SITE_URL}/services/awake-spine-surgery-hyderabad`,
+    url: `${SITE_URL}/services/${SERVICE_SLUG}`,
     siteName: 'Dr. Sayuj Krishnan - Neurosurgeon in Hyderabad',
     images: [
       {
@@ -44,7 +47,7 @@ export const metadata: Metadata = {
   },
 };
 
-const ARTICLE_SOURCES = getServiceSources('awake-spine-surgery-hyderabad');
+const ARTICLE_SOURCES = getServiceSources(SERVICE_SLUG);
 
 const FAQS = [
   {
@@ -64,19 +67,27 @@ const FAQS = [
   },
 ];
 
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Services', path: '/services' },
+  { name: 'Awake Spine Surgery', path: `/services/${SERVICE_SLUG}` },
+];
+
 export default function AwakeSpineSurgeryPage() {
-  const pageUrl = `${SITE_URL}/services/awake-spine-surgery-hyderabad`;
+  const pageUrl = `${SITE_URL}/services/${SERVICE_SLUG}`;
 
   return (
     <main className="prose mx-auto max-w-5xl px-4 py-12">
-      <BreadcrumbSchema
-        items={[
-          { name: 'Home', path: '/' },
-          { name: 'Services', path: '/services' },
-          { name: 'Awake Spine Surgery', path: '/services/awake-spine-surgery-hyderabad' },
-        ]}
-      />
+      <BreadcrumbSchema items={breadcrumbs} />
       <FAQPageSchema faqs={FAQS} pageUrl={pageUrl} />
+      <MedicalWebPageSchema
+        title="Awake Spine Surgery in Hyderabad | Local Anesthesia Specialist"
+        description="Awake endoscopic spine surgery in Hyderabad by Dr. Sayuj. No general anesthesia risks. Ideal for elderly and high-risk patients."
+        pageSlug={`/services/${SERVICE_SLUG}`}
+        pageType="service"
+        serviceOrCondition="Awake Spine Surgery"
+        breadcrumbs={breadcrumbs}
+      />
 
       <h1 className="text-4xl font-bold text-blue-900">Awake Spine Surgery in Hyderabad</h1>
       <p className="text-lg text-gray-700">
@@ -170,8 +181,6 @@ export default function AwakeSpineSurgeryPage() {
           </a>
         </div>
       </section>
-
-
 
       <div className="not-prose mt-12">
         <LocalPathways mode="service" />

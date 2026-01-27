@@ -3,6 +3,7 @@ import Link from "next/link";
 import { SITE_URL } from "../../src/lib/seo";
 import MedicalWebPageSchema from "../components/schemas/MedicalWebPageSchema";
 import ExpandedFAQ from "../../src/components/ExpandedFAQ";
+import { LocalPathways } from '@/src/components/locations/LocalPathways';
 
 const BRAIN_SURGERY_FAQS = [
   {
@@ -530,6 +531,10 @@ export default function BrainSurgeryPage() {
             </div>
           </div>
         </section>
+
+        <div className="max-w-6xl mx-auto px-4 pb-16">
+          <LocalPathways mode="service" />
+        </div>
       </div>
     </>
   );
