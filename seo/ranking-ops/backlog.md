@@ -14,3 +14,8 @@
 - [ ] **Multimedia:** Add embedded video testimonials/explainers to Service pages (Competitor Advantage).
 - [ ] **Content:** Strengthen "Why Dr. Sayuj" sections on service pages with stronger USPs.
 - [ ] **Schema:** Verify MedicalProcedure schema includes specific procedure codes (CPT/ICD-10) where possible.
+
+## 2026-01-26
+- **Content Gap:** "Risks & Safety Protocols" section for Endoscopic Spine Surgery. Competitors list specific risks (dural tear, infection) to build trust.
+- **Content Gap:** "Patient Education Video" embed. A 30-second animated explainer of the "Keyhole" vs "Open" difference.
+- **Content Gap:** "Anesthesia Protocol" dedicated page. "Awake vs Asleep" is a big patient concern.
