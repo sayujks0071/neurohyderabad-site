@@ -152,12 +152,12 @@ const SUCCESS_RATES = [
 ];
 
 const conditions = [
-  'Lumbar disc herniation (slip disc)',
-  'Sciatica with leg pain',
-  'Spinal stenosis (narrowing)',
-  'Foraminal stenosis',
-  'Cervical disc herniation',
-  'Failed conservative treatment (6+ weeks)',
+  { text: 'Lumbar disc herniation (slip disc)', href: '/conditions/slip-disc-treatment-hyderabad' },
+  { text: 'Sciatica with leg pain', href: '/conditions/sciatica-pain-treatment-hyderabad' },
+  { text: 'Spinal stenosis (narrowing)', href: '/conditions/spinal-stenosis-treatment-hyderabad' },
+  { text: 'Foraminal stenosis' },
+  { text: 'Cervical disc herniation', href: '/conditions/cervical-radiculopathy-treatment-hyderabad' },
+  { text: 'Failed conservative treatment (6+ weeks)' },
 ];
 
 const ADVANCED_TECHNIQUES = [
@@ -183,11 +183,13 @@ const ADVANCED_TECHNIQUES = [
   },
   {
     title: "Endoscopic Lumbar Discectomy",
-    description: "Gold-standard minimally invasive removal of disc fragments pressing on nerves, allowing same-day walking."
+    description: "Gold-standard minimally invasive removal of disc fragments pressing on nerves, allowing same-day walking.",
+    href: "/services/endoscopic-discectomy-hyderabad"
   },
   {
     title: "Awake Endoscopic Spine Surgery",
-    description: "For elderly or high-risk patients, we perform the procedure under local anaesthesia with mild sedation, avoiding general anaesthesia risks."
+    description: "For elderly or high-risk patients, we perform the procedure under local anaesthesia with mild sedation, avoiding general anaesthesia risks.",
+    href: "/services/awake-spine-surgery-hyderabad"
   }
 ];
 
@@ -367,7 +369,15 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
           </div>
           <ul className="grid md:grid-cols-2 gap-4 text-sm text-gray-700">
             {conditions.map((condition) => (
-              <li key={condition} className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">• {condition}</li>
+              <li key={condition.text} className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+                • {condition.href ? (
+                  <Link href={condition.href} className="hover:text-blue-700 hover:underline">
+                    {condition.text}
+                  </Link>
+                ) : (
+                  condition.text
+                )}
+              </li>
             ))}
           </ul>
         </section>
@@ -377,7 +387,15 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {ADVANCED_TECHNIQUES.map((tech) => (
               <div key={tech.title} className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-                <h3 className="text-lg font-semibold text-blue-800 mb-2">{tech.title}</h3>
+                <h3 className="text-lg font-semibold text-blue-800 mb-2">
+                  {tech.href ? (
+                    <Link href={tech.href} className="hover:text-blue-600 hover:underline">
+                      {tech.title}
+                    </Link>
+                  ) : (
+                    tech.title
+                  )}
+                </h3>
                 <p className="text-sm text-gray-700 leading-relaxed">
                   {tech.description}
                 </p>
