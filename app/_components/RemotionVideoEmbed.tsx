@@ -134,6 +134,8 @@ interface RemotionVideoEmbedProps {
   className?: string;
   /** Maximum width of the player container */
   maxWidth?: string;
+  /** Skip intersection observer and load immediately (useful when wrapper handles lazy loading) */
+  immediate?: boolean;
 }
 
 export default function RemotionVideoEmbed({
@@ -146,12 +148,15 @@ export default function RemotionVideoEmbed({
   loop = true,
   className = '',
   maxWidth = '800px',
+  immediate = false,
 }: RemotionVideoEmbedProps) {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(immediate);
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Lazy-load via IntersectionObserver
   useEffect(() => {
+    if (immediate) return;
+
     if (typeof window === 'undefined' || !window.IntersectionObserver) {
       setIsVisible(true);
       return;

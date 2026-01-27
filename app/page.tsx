@@ -376,6 +376,7 @@ export default function Home() {
               description="Explore our comprehensive range of advanced neurosurgical procedures, from endoscopic spine surgery to robotic deep brain stimulation."
               controls
               loop
+              immediate={true}
             />
           </Section>
         </LazySection>
@@ -794,6 +795,7 @@ export default function Home() {
               description="Animated overview of outcomes, experience, and patient satisfaction metrics."
               controls
               loop
+              immediate={true}
             />
           </Section>
         </LazySection>
