@@ -34,6 +34,7 @@ import SpeechButton from "./SpeechButton";
 import { trackConversionOnly } from "@/src/lib/google-ads-conversion";
 import { trackMiddlewareEvent } from "@/src/lib/middleware/rum";
 import { CLINIC } from "@/app/_lib/clinic";
+import { APPOINTMENT_SUCCESS_MESSAGE } from "@/packages/appointment-form/constants";
 
 type WorkflowAppointmentType = "new-consultation" | "follow-up" | "second-opinion";
 
@@ -273,9 +274,7 @@ const PatientPortal = () => {
             <h2 className="text-3xl font-extrabold text-slate-900 mb-2">
               Appointment Request Received
             </h2>
-            <p className="text-slate-500 text-lg mb-6">
-              Appointment request received. Please bring any MRI/CT scans with you. We will confirm via phone shortly.
-            </p>
+            <p className="text-slate-500 text-lg mb-6">{APPOINTMENT_SUCCESS_MESSAGE}</p>
             {confirmationMessage && (
               <div className="max-w-2xl mx-auto mb-10 bg-slate-50 border border-slate-200 rounded-3xl p-6 text-left">
                 <div className="flex items-start gap-3">

@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 import { Loader2 } from 'lucide-react';
 import { useStatsigEvents } from '../src/lib/statsig-events';
 import { trackContactConversion } from '../src/lib/google-ads-conversion';
+import { APPOINTMENT_SUCCESS_MESSAGE } from '@/packages/appointment-form/constants';
 
 interface TeleconsultationFormProps {
   pageSlug: string;
@@ -143,9 +144,7 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
           </svg>
         </div>
         <h3 className="text-2xl font-bold text-gray-800 mb-2">Request Received</h3>
-        <p className="text-gray-600 mb-8">
-          Appointment request received. Please bring any MRI/CT scans with you. We will confirm via phone shortly.
-        </p>
+        <p className="text-gray-600 mb-8">{APPOINTMENT_SUCCESS_MESSAGE}</p>
         <button
           onClick={() => {
             setFormState(initialState);
