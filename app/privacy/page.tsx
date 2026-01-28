@@ -1,5 +1,6 @@
 import { SITE_URL } from "../../src/lib/seo";
 import type { Metadata } from "next";
+import { LocationNAPCard } from "@/src/components/locations/LocationNAPCard";
 
 export const metadata: Metadata = {
   title: "Privacy Policy | Dr Sayuj Krishnan - Neurosurgeon in Hyderabad",
@@ -98,13 +99,7 @@ export default function PrivacyPage() {
             <p>
               If you have any questions about this Privacy Policy or our data practices, please contact us:
             </p>
-            <div className="mt-4 p-4 bg-gray-50 rounded-lg">
-              <p><strong>Dr Sayuj Krishnan</strong></p>
-              <p>Room No 317, OPD Block, Yashoda Hospital, Malakpet</p>
-              <p>Hyderabad, Telangana 500036</p>
-              <p>Phone: <a href="tel:+919778280044" className="text-blue-600 hover:underline">+91-9778280044</a></p>
-              <p>Email: <a href="mailto:hellodr@drsayuj.info" className="text-blue-600 hover:underline">hellodr@drsayuj.info</a></p>
-            </div>
+            <LocationNAPCard locationId="hyderabad" className="mt-4" />
           </section>
 
           <section className="mb-8">

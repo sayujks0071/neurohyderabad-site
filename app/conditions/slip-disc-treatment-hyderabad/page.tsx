@@ -5,7 +5,7 @@ import MedicalWebPageSchema from "../../components/schemas/MedicalWebPageSchema"
 import FAQPageSchema from "@/app/_components/FAQPageSchema";
 import { SITE_URL } from "../../../src/lib/seo";
 import ReviewedBy from '@/app/_components/ReviewedBy';
-import NAP from '@/app/_components/NAP';
+import { LocationNAPCard } from '@/src/components/locations/LocationNAPCard';
 import { makeMetadata } from '@/app/_lib/meta';
 import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
@@ -380,7 +380,7 @@ export default function SlipDiscTreatmentPage() {
 
   <section className="mb-12 space-y-6">
     <ReviewedBy />
-    <NAP />
+    <LocationNAPCard locationId="hyderabad" />
   </section>
 
   {/* Schema Markup */}
