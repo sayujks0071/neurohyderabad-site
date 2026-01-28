@@ -271,6 +271,7 @@ export default function SlipDiscTreatmentPage() {
               If surgery is required, Dr. Sayuj utilizes advanced <strong>Endoscopic Spine Surgery</strong>.
               Unlike open surgery, this technique does not cut muscle or bone. A thin tube with a camera
               is inserted through a tiny incision to precisely remove the herniated disc fragment pressing on the nerve.
+              This relieves the <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 underline">sciatica symptoms</Link> instantly.
             </p>
             <Link href="/services/minimally-invasive-spine-surgery" className="text-blue-600 font-medium hover:underline">
               Learn more about Endoscopic Spine Surgery →

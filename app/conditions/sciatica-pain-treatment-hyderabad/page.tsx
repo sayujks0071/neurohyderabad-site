@@ -17,7 +17,7 @@ import { patientStories } from '@/src/content/stories';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
 
 const baseMetadata = makeMetadata({
-  title: "Sciatica Treatment Hyderabad | 90% Non-Surgical | Dr Sayuj",
+  title: "Sciatica Treatment Hyderabad | Permanent Relief Cost | Dr Sayuj",
   description: "Relief from Sciatica leg pain in Hyderabad. 90% non-surgical success with Dr. Sayuj Krishnan. Nerve blocks, Physio & Endoscopic options. Book Consult.",
   canonicalPath: '/conditions/sciatica-pain-treatment-hyderabad',
 });
