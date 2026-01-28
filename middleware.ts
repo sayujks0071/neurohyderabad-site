@@ -30,10 +30,12 @@ export function middleware(req: NextRequest) {
 
     // Check for admin key in query params (simple auth)
     const providedKey = req.nextUrl.searchParams.get('key');
+    // Check for admin key in headers (API auth)
+    const headerKey = req.headers.get('x-admin-key');
 
-    // If adminKey is not configured (undefined/empty) OR providedKey does not match, deny access.
+    // If adminKey is not configured (undefined/empty) OR provided keys do not match, deny access.
     // This ensures that if the secret is missing in production, the route is closed by default (fail secure).
-    if (!adminKey || providedKey !== adminKey) {
+    if (!adminKey || (providedKey !== adminKey && headerKey !== adminKey)) {
       if (req.nextUrl.pathname.startsWith('/api/')) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
       }

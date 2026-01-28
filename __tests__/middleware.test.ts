@@ -47,4 +47,18 @@ describe('Middleware Security Check', () => {
     expect(res.status).toBe(401)
     // Verify JSON body would be correct (mocked response doesn't strictly parse body here easily without stream reading, but status is key)
   })
+
+  test('should allow /api/admin requests if key provided in header', () => {
+    const req = new NextRequest('https://www.drsayuj.info/api/admin/appointments')
+    req.headers.set('host', 'www.drsayuj.info')
+    req.headers.set('x-forwarded-proto', 'https')
+    req.headers.set('x-admin-key', 'secret123')
+
+    process.env.ADMIN_ACCESS_KEY = 'secret123'
+
+    const res = middleware(req)
+
+    // Should pass through (x-middleware-next: 1)
+    expect(res.headers.get('x-middleware-next')).toBe('1')
+  })
 })
