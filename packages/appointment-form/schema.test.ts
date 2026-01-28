@@ -60,16 +60,29 @@ describe("Appointment Schema Validation", () => {
     }
   });
 
-  it("passes when requestedDate is exactly now (dynamic check allows Today)", async () => {
-    // The schema explicitly allows 'Today' by setting time to 00:00:00
-    const now = new Date();
+  it("passes when requestedDate is in the future (tomorrow)", async () => {
+    const tomorrow = new Date(Date.now() + 86400000);
     const validData = {
       ...baseValidData,
-      requestedDate: now,
+      requestedDate: tomorrow,
     };
     const result = appointmentSchema.safeParse(validData);
 
     expect(result.success).toBe(true);
+  });
+
+  it("fails when requestedDate is today at midnight (strictly past relative to execution time)", async () => {
+    // With .min(new Date()), today's midnight is in the past relative to execution time
+    const todayMidnight = new Date();
+    todayMidnight.setHours(0, 0, 0, 0);
+
+    const invalidData = {
+      ...baseValidData,
+      requestedDate: todayMidnight,
+    };
+    const result = appointmentSchema.safeParse(invalidData);
+
+    expect(result.success).toBe(false);
   });
 
   it("fails when painScore is out of range", () => {
