@@ -1,0 +1,150 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "graphTooltip": 0,
+  "panels": [
+    {
+      "datasource": "Loki",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 15,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 4,
+            "showPoints": "never",
+            "spanNulls": true
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "expr": "sum(count_over_time({job=\"vercel\"} |~ \"(?i)ERROR|Unhandled|TypeError|ReferenceError|Function invocation failed|Edge error|Timeout|504|503|502|500\" [$__interval]))",
+          "refId": "A"
+        }
+      ],
+      "title": "Errors over time",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Loki",
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 8
+      },
+      "id": 2,
+      "options": {
+        "showHeader": true
+      },
+      "targets": [
+        {
+          "expr": "topk(10, sum by (message) (count_over_time({job=\"vercel\"} |~ \"(?i)ERROR|Unhandled|TypeError|ReferenceError|Function invocation failed|Edge error|Timeout|504|503|502|500\" | json [$__range])))",
+          "refId": "A"
+        }
+      ],
+      "title": "Top error messages",
+      "type": "table"
+    },
+    {
+      "datasource": "Loki",
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 8
+      },
+      "id": 3,
+      "options": {
+        "showHeader": true
+      },
+      "targets": [
+        {
+          "expr": "topk(10, sum by (pathname) (count_over_time({job=\"vercel\"} |~ \"(?i)ERROR|Unhandled|TypeError|ReferenceError|Function invocation failed|Edge error|Timeout|504|503|502|500\" [$__range])))",
+          "refId": "A"
+        }
+      ],
+      "title": "Errors by pathname",
+      "type": "table"
+    },
+    {
+      "datasource": "Loki",
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 17
+      },
+      "id": 4,
+      "options": {
+        "showHeader": true
+      },
+      "targets": [
+        {
+          "expr": "topk(10, sum by (deploymentId) (count_over_time({job=\"vercel\"} |~ \"(?i)ERROR|Unhandled|TypeError|ReferenceError|Function invocation failed|Edge error|Timeout|504|503|502|500\" [$__range])))",
+          "refId": "A"
+        }
+      ],
+      "title": "Errors by deployment",
+      "type": "table"
+    }
+  ],
+  "schemaVersion": 38,
+  "tags": [
+    "vercel",
+    "logs"
+  ],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timezone": "browser",
+  "title": "Vercel Prod - Errors & Latency",
+  "uid": "vercel-prod-errors",
+  "version": 1
+}
