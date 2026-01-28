@@ -32,6 +32,8 @@ Thumbs.db
 # Logs
 logs
 *.log
+!logs/
+!logs/.gitkeep
 
 # Runtime data
 pids
@@ -63,12 +65,16 @@ docs/internal/
 !jules-prompts/*.md
 !docs/jules-automations.md
 !docs/VERCEL_PROJECT_INFO.md
+!docs/vercel_mcp_usage.md
+!observability/README.md
 !PROJECT_INFO.md
 !scripts/fix-jules-git-config.sh
 *.patch
 *.sh
 !.jules-setup.sh
 !scripts/fix-jules-git-config.sh
+!scripts/install_launchd.sh
+!scripts/uninstall_launchd.sh
 *.png
 
 # Ignore specific JSON files (but not essential config files)
