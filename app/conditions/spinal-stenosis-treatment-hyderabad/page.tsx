@@ -151,6 +151,45 @@ export default function SpinalStenosisPage() {
         </div>
       </Section>
 
+      <Section background="blue">
+        <div className="bg-white rounded-2xl p-8 border border-blue-100 shadow-lg">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+             <div>
+                <h2 className="text-2xl font-bold text-blue-900 mb-4">Is Spine Surgery Safe for Patients Over 70?</h2>
+                <p className="text-gray-700 mb-4">
+                  Many elderly patients are denied surgery due to age or heart conditions. However, untreated stenosis leads to immobility and rapid health decline.
+                </p>
+                <p className="text-gray-700 mb-4">
+                  Dr. Sayuj specializes in <strong>Awake Spine Surgery</strong> (using local anesthesia) for high-risk patients. This avoids the risks of general anesthesia while effectively relieving leg pain.
+                </p>
+                <ul className="space-y-2 mb-6">
+                   <li className="flex items-center text-sm text-gray-700">
+                     <span className="text-green-500 mr-2">✓</span> No ventilator required
+                   </li>
+                   <li className="flex items-center text-sm text-gray-700">
+                     <span className="text-green-500 mr-2">✓</span> Minimal blood loss
+                   </li>
+                   <li className="flex items-center text-sm text-gray-700">
+                     <span className="text-green-500 mr-2">✓</span> Walk immediately after surgery
+                   </li>
+                </ul>
+             </div>
+             <div className="bg-blue-50 p-6 rounded-xl text-center">
+                <h3 className="font-bold text-blue-800 mb-2">Told You Need "Open" Surgery?</h3>
+                <p className="text-sm text-gray-600 mb-6">
+                  Get a second opinion. 80% of our stenosis patients are eligible for <strong>Micro-Decompression</strong> or Endoscopic Surgery, which are safer and have faster recovery.
+                </p>
+                <Link
+                  href="/appointments"
+                  className="inline-block w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+                >
+                  Get a Second Opinion
+                </Link>
+             </div>
+          </div>
+        </div>
+      </Section>
+
       <Section background="gray">
         <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Treatment Options</h2>
 

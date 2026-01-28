@@ -31,9 +31,9 @@ const baseMetadata = makeMetadata({
 
 export const metadata: Metadata = {
   ...baseMetadata,
-  title: 'Endoscopic Spine Surgery Hyderabad | Day Care Keyhole',
+  title: 'Endoscopic Spine Surgery Hyderabad | Cost & Recovery | Dr. Sayuj',
   description:
-    'Advanced Endoscopic Spine Surgery in Hyderabad. 7mm incision, same-day discharge. Expert treatment for Slip Disc & Sciatica. Check packages.',
+    'Endoscopic Spine Surgery in Hyderabad: Cost Estimate ~₹1.2L. Same-day discharge, 7mm incision. 90% success for Slip Disc & Sciatica. Book Consult.',
   keywords: [
     'endoscopic spine surgery hyderabad',
     'minimally invasive spine surgery hyderabad',

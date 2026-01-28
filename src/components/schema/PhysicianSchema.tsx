@@ -267,10 +267,32 @@ export const PhysicianSchema: React.FC = () => {
           "Pediatric Neurosurgery",
           "Emergency Neurotrauma Care"
         ],
-        "areaServed": {
-          "@type": "AdministrativeArea",
-          "name": "Hyderabad, Telangana, India"
-        },
+        "areaServed": [
+          {
+            "@type": "AdministrativeArea",
+            "name": "Hyderabad"
+          },
+          {
+            "@type": "AdministrativeArea",
+            "name": "Malakpet"
+          },
+          {
+            "@type": "AdministrativeArea",
+            "name": "Dilsukhnagar"
+          },
+          {
+            "@type": "AdministrativeArea",
+            "name": "Banjara Hills"
+          },
+          {
+            "@type": "AdministrativeArea",
+            "name": "Jubilee Hills"
+          },
+          {
+            "@type": "AdministrativeArea",
+            "name": "Gachibowli"
+          }
+        ],
         "availableService": [
           ...serviceOffers.map((service) => ({
             "@type": "MedicalService",

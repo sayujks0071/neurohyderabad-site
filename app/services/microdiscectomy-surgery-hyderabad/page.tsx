@@ -151,12 +151,12 @@ const SUCCESS_RATES = [
 ];
 
 const conditions = [
-  'Lumbar disc herniation (slip disc)',
-  'Severe Sciatica',
-  'Cauda Equina Syndrome',
-  'Spinal stenosis (narrowing)',
-  'Recurrent disc herniation',
-  'Calcified disc fragments',
+  { text: 'Lumbar disc herniation (slip disc)', href: '/conditions/slip-disc-treatment-hyderabad' },
+  { text: 'Severe Sciatica', href: '/conditions/sciatica-pain-treatment-hyderabad' },
+  { text: 'Cauda Equina Syndrome' },
+  { text: 'Spinal stenosis (narrowing)', href: '/conditions/spinal-stenosis-treatment-hyderabad' },
+  { text: 'Recurrent disc herniation' },
+  { text: 'Calcified disc fragments' },
 ];
 
 const ADVANCED_TECHNIQUES = [
@@ -311,7 +311,9 @@ export default function MicrodiscectomySurgeryPage() {
           </p>
           <ul className="grid md:grid-cols-2 gap-4 text-sm text-gray-700">
             {conditions.map((condition) => (
-              <li key={condition} className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">• {condition}</li>
+              <li key={condition.text} className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+                • {condition.href ? <Link href={condition.href} className="hover:text-blue-700 hover:underline">{condition.text}</Link> : condition.text}
+              </li>
             ))}
           </ul>
         </section>

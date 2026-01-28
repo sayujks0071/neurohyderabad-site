@@ -17,7 +17,7 @@ import { LocalPathways } from '@/src/components/locations/LocalPathways';
 const SERVICE_SLUG = 'spine-surgery-hyderabad';
 
 const baseMetadata = makeMetadata({
-  title: 'Spine Surgery Hyderabad | Minimally Invasive Specialist',
+  title: 'Spine Surgery Hyderabad | Top Specialist & Cost | Dr. Sayuj',
   description:
     'Minimally invasive spine surgery in Hyderabad. Walk the next day with keyhole endoscopic techniques for slip disc & sciatica. Expert care at Yashoda.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
