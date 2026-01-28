@@ -1,111 +1,798 @@
 [
-  "/",
-  "/about",
-  "/appointments",
-  "/best-neurosurgeon-in-hyderabad",
-  "/blog",
-  "/blog/awake-craniotomy-guide",
-  "/blog/brain-tumor-surgery-cost-hyderabad",
-  "/blog/day-care-endoscopic-spine-surgery-eligibility",
-  "/blog/day-care-spine-surgery-insurance-hyderabad",
-  "/blog/disc-replacement-vs-fusion",
-  "/blog/does-endoscopic-spine-surgery-work-for-sciatica-hyderabad",
-  "/blog/endoscopic-cervical-spine-surgery-hyderabad",
-  "/blog/endoscopic-discectomy-cost-hyderabad",
-  "/blog/endoscopic-spine-surgery-cost-hyderabad",
-  "/blog/endoscopic-vs-microdiscectomy-hyderabad",
-  "/blog/how-much-does-brain-surgery-cost-hyderabad",
-  "/blog/mvd-vs-radiosurgery-trigeminal-neuralgia",
-  "/blog/return-to-work-after-endoscopic-discectomy-hyderabad",
-  "/blog/sciatica-pain-management-hyderabad",
-  "/blog/spinal-fusion-cost-hyderabad",
-  "/blog/spine-health-maintenance-hyderabad",
-  "/blog/spine-surgery-recovery-timeline-hyderabad",
-  "/blog/when-to-worry-about-back-pain-neurosurgeon-hyderabad",
-  "/blog/world-stroke-day-2025-hyderabad-stroke-code",
-  "/brain-surgery",
-  "/conditions",
-  "/conditions/brain-bleed-evacuation-hyderabad",
-  "/conditions/brain-tumor-surgery-hyderabad",
-  "/conditions/cervical-myelopathy-decompression-hyderabad",
-  "/conditions/cervical-radiculopathy-treatment-hyderabad",
-  "/conditions/degenerative-disc-disease-treatment-hyderabad",
-  "/conditions/osteoporotic-spine-fracture-hyderabad",
-  "/conditions/sciatica-pain-treatment-hyderabad",
-  "/conditions/slip-disc-treatment-hyderabad",
-  "/conditions/spinal-stenosis-treatment-hyderabad",
-  "/conditions/spine-tumor-surgery-hyderabad",
-  "/conditions/spondylolisthesis-treatment-hyderabad",
-  "/conditions/trigeminal-neuralgia-treatment-hyderabad",
-  "/contact",
-  "/content-integrity",
-  "/cookies",
-  "/disclaimer",
-  "/editorial-policy",
-  "/knowledge-base",
-  "/locations",
-  "/locations/banjara-hills",
-  "/locations/brain-spine-surgeon-banjara-hills",
-  "/locations/brain-spine-surgeon-hitec-city",
-  "/locations/brain-spine-surgeon-jubilee-hills",
-  "/locations/hitech-city",
-  "/locations/lb-nagar",
-  "/locations/malakpet",
-  "/locations/neurosurgeon-kondapur",
-  "/locations/neurosurgeon-kothapet",
-  "/locations/neurosurgeon-kukatpally",
-  "/locations/neurosurgeon-manikonda",
-  "/locations/neurosurgeon-near-jubilee-hills",
-  "/locations/neurosurgeon-nizampet",
-  "/locations/secunderabad",
-  "/media",
-  "/medical-disclaimer",
-  "/neurosurgeon-banjara-hills",
-  "/neurosurgeon-gachibowli",
-  "/neurosurgeon-hitech-city",
-  "/neurosurgeon-hyderabad",
-  "/neurosurgeon-jubilee-hills",
-  "/neurosurgeon-malakpet",
-  "/neurosurgeon-secunderabad",
-  "/patient-stories",
-  "/pediatric-neurosurgery",
-  "/privacy",
-  "/research",
-  "/services",
-  "/services/awake-spine-surgery-hyderabad",
-  "/services/brain-tumor-surgery-hyderabad",
-  "/services/cervical-disc-replacement-hyderabad",
-  "/services/cervical-endoscopic-spine-surgery-hyderabad",
-  "/services/compare-neurosurgeons-hyderabad",
-  "/services/cooled-radiofrequency-ablation-hyderabad",
-  "/services/dr-sayuj-vs-apollo-neuro-icu",
-  "/services/endoscopic-discectomy-hyderabad",
-  "/services/endoscopic-spine-surgery-hyderabad",
-  "/services/epilepsy-surgery-hyderabad",
-  "/services/kims-spine-surgery-second-opinion",
-  "/services/kyphoplasty-vertebroplasty-hyderabad",
-  "/services/lumbar-laminectomy-surgery-hyderabad",
-  "/services/microdiscectomy-surgery-cost-hyderabad",
-  "/services/minimally-invasive-spine-surgery",
-  "/services/peripheral-nerve-surgery",
-  "/services/peripheral-nerve-surgery-hyderabad",
-  "/services/robotic-spine-surgery-hyderabad",
-  "/services/slip-disc-surgery-cost-hyderabad",
-  "/services/spinal-decompression-surgery-hyderabad",
-  "/services/spinal-fusion",
-  "/services/spinal-fusion-surgery-hyderabad",
-  "/services/spine-surgery-cost-hyderabad",
-  "/services/spine-surgery-hyderabad",
-  "/services/uniportal-endoscopic-spine-surgery-hyderabad",
-  "/spine-surgery",
-  "/stories/endoscopic-discectomy-same-day-hyderabad",
-  "/stories/endoscopic-ulbd-stenosis-hyderabad",
-  "/stories/mvd-trigeminal-neuralgia-hyderabad",
-  "/symptoms-checker",
-  "/symptoms/back-pain",
-  "/symptoms/pain-on-top-of-head-causes",
-  "/symptoms/signs-of-brain-tumor",
-  "/technology-facilities",
-  "/technology-innovation",
-  "/terms"
+  {
+    "url": "https://www.drsayuj.info",
+    "path": "/"
+  },
+  {
+    "url": "https://www.drsayuj.info/about",
+    "path": "/about"
+  },
+  {
+    "url": "https://www.drsayuj.info/appointments",
+    "path": "/appointments"
+  },
+  {
+    "url": "https://www.drsayuj.info/best-neurosurgeon-in-hyderabad",
+    "path": "/best-neurosurgeon-in-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog",
+    "path": "/blog"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/awake-craniotomy-brain-tumor-guide",
+    "path": "/blog/awake-craniotomy-brain-tumor-guide"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/awake-craniotomy-guide",
+    "path": "/blog/awake-craniotomy-guide"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/awake-spine-surgery-vs-general-anesthesia-guide",
+    "path": "/blog/awake-spine-surgery-vs-general-anesthesia-guide"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/brain-aneurysm-vs-migraine-warning-signs-hyderabad",
+    "path": "/blog/brain-aneurysm-vs-migraine-warning-signs-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/brain-tumor-surgery-cost-hyderabad",
+    "path": "/blog/brain-tumor-surgery-cost-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/carpal-tunnel-vs-cervical-radiculopathy-hyderabad",
+    "path": "/blog/carpal-tunnel-vs-cervical-radiculopathy-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/cauda-equina-syndrome-warning-signs-hyderabad",
+    "path": "/blog/cauda-equina-syndrome-warning-signs-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/cervical-disc-replacement-vs-fusion-acdf-hyderabad",
+    "path": "/blog/cervical-disc-replacement-vs-fusion-acdf-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/cervical-radiculopathy-arm-pain-hyderabad",
+    "path": "/blog/cervical-radiculopathy-arm-pain-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/cervical-spondylosis-neck-pain-hyderabad",
+    "path": "/blog/cervical-spondylosis-neck-pain-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/chronic-subdural-hematoma-symptoms-elderly",
+    "path": "/blog/chronic-subdural-hematoma-symptoms-elderly"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/cost-of-endoscopic-spine-surgery-hyderabad",
+    "path": "/blog/cost-of-endoscopic-spine-surgery-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/day-care-endoscopic-spine-surgery-eligibility",
+    "path": "/blog/day-care-endoscopic-spine-surgery-eligibility"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/day-care-spine-surgery-insurance-hyderabad",
+    "path": "/blog/day-care-spine-surgery-insurance-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/degenerative-disc-disease-guide-hyderabad",
+    "path": "/blog/degenerative-disc-disease-guide-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/disc-replacement-vs-fusion",
+    "path": "/blog/disc-replacement-vs-fusion"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/does-endoscopic-spine-surgery-work-for-sciatica-hyderabad",
+    "path": "/blog/does-endoscopic-spine-surgery-work-for-sciatica-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/endoscopic-cervical-spine-surgery-hyderabad",
+    "path": "/blog/endoscopic-cervical-spine-surgery-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/endoscopic-discectomy-cost-hyderabad",
+    "path": "/blog/endoscopic-discectomy-cost-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/endoscopic-spine-surgery-cost-hyderabad",
+    "path": "/blog/endoscopic-spine-surgery-cost-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/endoscopic-spine-surgery-recovery-timeline",
+    "path": "/blog/endoscopic-spine-surgery-recovery-timeline"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/endoscopic-vs-microdiscectomy-hyderabad",
+    "path": "/blog/endoscopic-vs-microdiscectomy-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/epilepsy-surgery-options-hyderabad",
+    "path": "/blog/epilepsy-surgery-options-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/failed-back-surgery-syndrome-treatment-hyderabad",
+    "path": "/blog/failed-back-surgery-syndrome-treatment-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/headache-vs-brain-tumor-warning-signs",
+    "path": "/blog/headache-vs-brain-tumor-warning-signs"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/how-much-does-brain-surgery-cost-hyderabad",
+    "path": "/blog/how-much-does-brain-surgery-cost-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/l4-l5-disc-bulge-treatment-hyderabad",
+    "path": "/blog/l4-l5-disc-bulge-treatment-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/life-after-spinal-fusion-surgery-recovery-hyderabad",
+    "path": "/blog/life-after-spinal-fusion-surgery-recovery-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/lumbar-canal-stenosis-walking-pain-hyderabad",
+    "path": "/blog/lumbar-canal-stenosis-walking-pain-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/lumbar-spondylosis-treatment-exercises-hyderabad",
+    "path": "/blog/lumbar-spondylosis-treatment-exercises-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/meningioma-brain-tumor-treatment-hyderabad",
+    "path": "/blog/meningioma-brain-tumor-treatment-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/microdiscectomy-vs-laminectomy-recovery-comparison",
+    "path": "/blog/microdiscectomy-vs-laminectomy-recovery-comparison"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/mvd-vs-radiosurgery-trigeminal-neuralgia",
+    "path": "/blog/mvd-vs-radiosurgery-trigeminal-neuralgia"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/neuroplasticity-brain-recovery-hyderabad",
+    "path": "/blog/neuroplasticity-brain-recovery-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/normal-pressure-hydrocephalus-nph-symptoms-treatment-hyderabad",
+    "path": "/blog/normal-pressure-hydrocephalus-nph-symptoms-treatment-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/osteoporotic-spine-fracture-elderly-guide",
+    "path": "/blog/osteoporotic-spine-fracture-elderly-guide"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/return-to-work-after-endoscopic-discectomy-hyderabad",
+    "path": "/blog/return-to-work-after-endoscopic-discectomy-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/sciatica-exercises-for-office-workers-hyderabad",
+    "path": "/blog/sciatica-exercises-for-office-workers-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/sciatica-pain-management-hyderabad",
+    "path": "/blog/sciatica-pain-management-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/sciatica-pain-relief-exercises-hyderabad",
+    "path": "/blog/sciatica-pain-relief-exercises-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/sciatica-vs-normal-back-pain-guide",
+    "path": "/blog/sciatica-vs-normal-back-pain-guide"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/scoliosis-treatment-options-in-hyderabad",
+    "path": "/blog/scoliosis-treatment-options-in-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/sleeping-positions-for-sciatica-relief-guide",
+    "path": "/blog/sleeping-positions-for-sciatica-relief-guide"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/spinal-fusion-cost-hyderabad",
+    "path": "/blog/spinal-fusion-cost-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/spinal-tuberculosis-symptoms-treatment-hyderabad",
+    "path": "/blog/spinal-tuberculosis-symptoms-treatment-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/spine-health-maintenance-hyderabad",
+    "path": "/blog/spine-health-maintenance-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/spine-surgery-recovery-timeline-hyderabad",
+    "path": "/blog/spine-surgery-recovery-timeline-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/spondylolisthesis-vs-herniated-disc-difference",
+    "path": "/blog/spondylolisthesis-vs-herniated-disc-difference"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/trigeminal-neuralgia-vs-tooth-pain-guide",
+    "path": "/blog/trigeminal-neuralgia-vs-tooth-pain-guide"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/types-of-spine-tumors-symptoms-guide",
+    "path": "/blog/types-of-spine-tumors-symptoms-guide"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/understanding-brain-mri-tumor-report-guide",
+    "path": "/blog/understanding-brain-mri-tumor-report-guide"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/understanding-mri-spine-report-guide",
+    "path": "/blog/understanding-mri-spine-report-guide"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/when-to-worry-about-back-pain-neurosurgeon-hyderabad",
+    "path": "/blog/when-to-worry-about-back-pain-neurosurgeon-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/blog/world-stroke-day-2025-hyderabad-stroke-code",
+    "path": "/blog/world-stroke-day-2025-hyderabad-stroke-code"
+  },
+  {
+    "url": "https://www.drsayuj.info/brain-surgery",
+    "path": "/brain-surgery"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions",
+    "path": "/conditions"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/acoustic-neuroma-treatment-hyderabad",
+    "path": "/conditions/acoustic-neuroma-treatment-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/brachial-plexus-injury-hyderabad",
+    "path": "/conditions/brachial-plexus-injury-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/brain-aneurysm-treatment-hyderabad",
+    "path": "/conditions/brain-aneurysm-treatment-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/brain-bleed-evacuation-hyderabad",
+    "path": "/conditions/brain-bleed-evacuation-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/brain-tumor-surgery-hyderabad",
+    "path": "/conditions/brain-tumor-surgery-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/carpal-tunnel-syndrome-hyderabad",
+    "path": "/conditions/carpal-tunnel-syndrome-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/cervical-myelopathy-decompression-hyderabad",
+    "path": "/conditions/cervical-myelopathy-decompression-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/cervical-radiculopathy-treatment-hyderabad",
+    "path": "/conditions/cervical-radiculopathy-treatment-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/chiari-malformation-hyderabad",
+    "path": "/conditions/chiari-malformation-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/chronic-back-pain-treatment-hyderabad",
+    "path": "/conditions/chronic-back-pain-treatment-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/cubital-tunnel-syndrome-hyderabad",
+    "path": "/conditions/cubital-tunnel-syndrome-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/degenerative-disc-disease-hyderabad",
+    "path": "/conditions/degenerative-disc-disease-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/degenerative-disc-disease-treatment-hyderabad",
+    "path": "/conditions/degenerative-disc-disease-treatment-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/epilepsy-surgery-candidate-hyderabad",
+    "path": "/conditions/epilepsy-surgery-candidate-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/facet-joint-syndrome-hyderabad",
+    "path": "/conditions/facet-joint-syndrome-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/facial-nerve-palsy-hyderabad",
+    "path": "/conditions/facial-nerve-palsy-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/failed-back-surgery-syndrome-hyderabad",
+    "path": "/conditions/failed-back-surgery-syndrome-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/glioma-treatment-hyderabad",
+    "path": "/conditions/glioma-treatment-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/herniated-disc-treatment-hyderabad",
+    "path": "/conditions/herniated-disc-treatment-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/hydrocephalus-treatment-hyderabad",
+    "path": "/conditions/hydrocephalus-treatment-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/kyphosis-treatment-hyderabad",
+    "path": "/conditions/kyphosis-treatment-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/meningioma-treatment-hyderabad",
+    "path": "/conditions/meningioma-treatment-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/neck-pain-treatment-hyderabad",
+    "path": "/conditions/neck-pain-treatment-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/neuropathic-pain-treatment-hyderabad",
+    "path": "/conditions/neuropathic-pain-treatment-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/osteoporotic-spine-fracture-hyderabad",
+    "path": "/conditions/osteoporotic-spine-fracture-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/peripheral-neuropathy-hyderabad",
+    "path": "/conditions/peripheral-neuropathy-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/pituitary-adenoma-hyderabad",
+    "path": "/conditions/pituitary-adenoma-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/radicular-pain-treatment-hyderabad",
+    "path": "/conditions/radicular-pain-treatment-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/sciatica-pain-treatment-hyderabad",
+    "path": "/conditions/sciatica-pain-treatment-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/scoliosis-treatment-hyderabad",
+    "path": "/conditions/scoliosis-treatment-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/slip-disc-treatment-hyderabad",
+    "path": "/conditions/slip-disc-treatment-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/spinal-stenosis-treatment-hyderabad",
+    "path": "/conditions/spinal-stenosis-treatment-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/spine-tumor-surgery-hyderabad",
+    "path": "/conditions/spine-tumor-surgery-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/spine-tumor-treatment-hyderabad",
+    "path": "/conditions/spine-tumor-treatment-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/spondylolisthesis-treatment-hyderabad",
+    "path": "/conditions/spondylolisthesis-treatment-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/conditions/trigeminal-neuralgia-treatment-hyderabad",
+    "path": "/conditions/trigeminal-neuralgia-treatment-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/contact",
+    "path": "/contact"
+  },
+  {
+    "url": "https://www.drsayuj.info/content-integrity",
+    "path": "/content-integrity"
+  },
+  {
+    "url": "https://www.drsayuj.info/cookies",
+    "path": "/cookies"
+  },
+  {
+    "url": "https://www.drsayuj.info/disclaimer",
+    "path": "/disclaimer"
+  },
+  {
+    "url": "https://www.drsayuj.info/editorial-policy",
+    "path": "/editorial-policy"
+  },
+  {
+    "url": "https://www.drsayuj.info/knowledge-base",
+    "path": "/knowledge-base"
+  },
+  {
+    "url": "https://www.drsayuj.info/locations",
+    "path": "/locations"
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/banjara-hills",
+    "path": "/locations/banjara-hills"
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/brain-spine-surgeon-banjara-hills",
+    "path": "/locations/brain-spine-surgeon-banjara-hills"
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/brain-spine-surgeon-hitec-city",
+    "path": "/locations/brain-spine-surgeon-hitec-city"
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/brain-spine-surgeon-jubilee-hills",
+    "path": "/locations/brain-spine-surgeon-jubilee-hills"
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/hitech-city",
+    "path": "/locations/hitech-city"
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/lb-nagar",
+    "path": "/locations/lb-nagar"
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/malakpet",
+    "path": "/locations/malakpet"
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/neurosurgeon-kondapur",
+    "path": "/locations/neurosurgeon-kondapur"
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/neurosurgeon-kothapet",
+    "path": "/locations/neurosurgeon-kothapet"
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/neurosurgeon-kukatpally",
+    "path": "/locations/neurosurgeon-kukatpally"
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/neurosurgeon-madhapur",
+    "path": "/locations/neurosurgeon-madhapur"
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/neurosurgeon-manikonda",
+    "path": "/locations/neurosurgeon-manikonda"
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills",
+    "path": "/locations/neurosurgeon-near-jubilee-hills"
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills-faq",
+    "path": "/locations/neurosurgeon-near-jubilee-hills-faq"
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/neurosurgeon-near-kachiguda-faq",
+    "path": "/locations/neurosurgeon-near-kachiguda-faq"
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/neurosurgeon-near-kondapur-faq",
+    "path": "/locations/neurosurgeon-near-kondapur-faq"
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/neurosurgeon-nizampet",
+    "path": "/locations/neurosurgeon-nizampet"
+  },
+  {
+    "url": "https://www.drsayuj.info/locations/secunderabad",
+    "path": "/locations/secunderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/media",
+    "path": "/media"
+  },
+  {
+    "url": "https://www.drsayuj.info/medical-disclaimer",
+    "path": "/medical-disclaimer"
+  },
+  {
+    "url": "https://www.drsayuj.info/neurosurgeon-banjara-hills",
+    "path": "/neurosurgeon-banjara-hills"
+  },
+  {
+    "url": "https://www.drsayuj.info/neurosurgeon-gachibowli",
+    "path": "/neurosurgeon-gachibowli"
+  },
+  {
+    "url": "https://www.drsayuj.info/neurosurgeon-hitech-city",
+    "path": "/neurosurgeon-hitech-city"
+  },
+  {
+    "url": "https://www.drsayuj.info/neurosurgeon-hyderabad",
+    "path": "/neurosurgeon-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/neurosurgeon-jubilee-hills",
+    "path": "/neurosurgeon-jubilee-hills"
+  },
+  {
+    "url": "https://www.drsayuj.info/neurosurgeon-malakpet",
+    "path": "/neurosurgeon-malakpet"
+  },
+  {
+    "url": "https://www.drsayuj.info/neurosurgeon-secunderabad",
+    "path": "/neurosurgeon-secunderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/patient-stories",
+    "path": "/patient-stories"
+  },
+  {
+    "url": "https://www.drsayuj.info/pediatric-neurosurgery",
+    "path": "/pediatric-neurosurgery"
+  },
+  {
+    "url": "https://www.drsayuj.info/privacy",
+    "path": "/privacy"
+  },
+  {
+    "url": "https://www.drsayuj.info/research",
+    "path": "/research"
+  },
+  {
+    "url": "https://www.drsayuj.info/services",
+    "path": "/services"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/acoustic-neuroma-surgery-hyderabad",
+    "path": "/services/acoustic-neuroma-surgery-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/awake-craniotomy-hyderabad",
+    "path": "/services/awake-craniotomy-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/awake-spine-surgery-hyderabad",
+    "path": "/services/awake-spine-surgery-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/brachial-plexus-surgery-hyderabad",
+    "path": "/services/brachial-plexus-surgery-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/brain-aneurysm-surgery-hyderabad",
+    "path": "/services/brain-aneurysm-surgery-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/brain-surgery-cost-hyderabad",
+    "path": "/services/brain-surgery-cost-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad",
+    "path": "/services/brain-tumor-surgery-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/carpal-tunnel-surgery-hyderabad",
+    "path": "/services/carpal-tunnel-surgery-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/cervical-disc-replacement-hyderabad",
+    "path": "/services/cervical-disc-replacement-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/cervical-endoscopic-spine-surgery-hyderabad",
+    "path": "/services/cervical-endoscopic-spine-surgery-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/cervical-spine-surgery-hyderabad",
+    "path": "/services/cervical-spine-surgery-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/compare-neurosurgeons-hyderabad",
+    "path": "/services/compare-neurosurgeons-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/cooled-radiofrequency-ablation-hyderabad",
+    "path": "/services/cooled-radiofrequency-ablation-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/deep-brain-stimulation-hyderabad",
+    "path": "/services/deep-brain-stimulation-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/disc-replacement-surgery-hyderabad",
+    "path": "/services/disc-replacement-surgery-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/dr-sayuj-vs-apollo-neuro-icu",
+    "path": "/services/dr-sayuj-vs-apollo-neuro-icu"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/emergency-neurosurgery-hyderabad",
+    "path": "/services/emergency-neurosurgery-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/endoscopic-discectomy-hyderabad",
+    "path": "/services/endoscopic-discectomy-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad",
+    "path": "/services/endoscopic-spine-surgery-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/endoscopic-surgery-cost-calculator",
+    "path": "/services/endoscopic-surgery-cost-calculator"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/epilepsy-surgery-hyderabad",
+    "path": "/services/epilepsy-surgery-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/hydrocephalus-treatment-hyderabad",
+    "path": "/services/hydrocephalus-treatment-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/kims-spine-surgery-second-opinion",
+    "path": "/services/kims-spine-surgery-second-opinion"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/kyphoplasty-vertebroplasty-hyderabad",
+    "path": "/services/kyphoplasty-vertebroplasty-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/laser-spine-surgery-hyderabad",
+    "path": "/services/laser-spine-surgery-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/lumbar-laminectomy-surgery-hyderabad",
+    "path": "/services/lumbar-laminectomy-surgery-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/lumbar-spine-surgery-hyderabad",
+    "path": "/services/lumbar-spine-surgery-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/microdiscectomy-surgery-cost-hyderabad",
+    "path": "/services/microdiscectomy-surgery-cost-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/microscopic-spine-surgery-hyderabad",
+    "path": "/services/microscopic-spine-surgery-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/minimally-invasive-spine-surgery",
+    "path": "/services/minimally-invasive-spine-surgery"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/navigation-guided-surgery-hyderabad",
+    "path": "/services/navigation-guided-surgery-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/nerve-decompression-surgery-hyderabad",
+    "path": "/services/nerve-decompression-surgery-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/peripheral-nerve-surgery",
+    "path": "/services/peripheral-nerve-surgery"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/peripheral-nerve-surgery-hyderabad",
+    "path": "/services/peripheral-nerve-surgery-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/pituitary-tumor-surgery-hyderabad",
+    "path": "/services/pituitary-tumor-surgery-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/robotic-spine-surgery-hyderabad",
+    "path": "/services/robotic-spine-surgery-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/scoliosis-surgery-hyderabad",
+    "path": "/services/scoliosis-surgery-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/slip-disc-surgery-cost-hyderabad",
+    "path": "/services/slip-disc-surgery-cost-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/spinal-decompression-hyderabad",
+    "path": "/services/spinal-decompression-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/spinal-decompression-surgery-hyderabad",
+    "path": "/services/spinal-decompression-surgery-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/spinal-fusion",
+    "path": "/services/spinal-fusion"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/spinal-fusion-surgery-hyderabad",
+    "path": "/services/spinal-fusion-surgery-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/spine-fracture-surgery-hyderabad",
+    "path": "/services/spine-fracture-surgery-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/spine-surgery-cost-hyderabad",
+    "path": "/services/spine-surgery-cost-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/spine-surgery-hyderabad",
+    "path": "/services/spine-surgery-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/trauma-neurosurgery-hyderabad",
+    "path": "/services/trauma-neurosurgery-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/trigeminal-neuralgia-surgery-hyderabad",
+    "path": "/services/trigeminal-neuralgia-surgery-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/services/uniportal-endoscopic-spine-surgery-hyderabad",
+    "path": "/services/uniportal-endoscopic-spine-surgery-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/spine-surgery",
+    "path": "/spine-surgery"
+  },
+  {
+    "url": "https://www.drsayuj.info/stories/endoscopic-discectomy-same-day-hyderabad",
+    "path": "/stories/endoscopic-discectomy-same-day-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/stories/endoscopic-ulbd-stenosis-hyderabad",
+    "path": "/stories/endoscopic-ulbd-stenosis-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/stories/mvd-trigeminal-neuralgia-hyderabad",
+    "path": "/stories/mvd-trigeminal-neuralgia-hyderabad"
+  },
+  {
+    "url": "https://www.drsayuj.info/symptoms-checker",
+    "path": "/symptoms-checker"
+  },
+  {
+    "url": "https://www.drsayuj.info/symptoms/back-pain",
+    "path": "/symptoms/back-pain"
+  },
+  {
+    "url": "https://www.drsayuj.info/symptoms/back-pain-red-flags",
+    "path": "/symptoms/back-pain-red-flags"
+  },
+  {
+    "url": "https://www.drsayuj.info/symptoms/numbness-tingling-hands-feet",
+    "path": "/symptoms/numbness-tingling-hands-feet"
+  },
+  {
+    "url": "https://www.drsayuj.info/symptoms/pain-on-top-of-head-causes",
+    "path": "/symptoms/pain-on-top-of-head-causes"
+  },
+  {
+    "url": "https://www.drsayuj.info/symptoms/severe-headache-warning-signs",
+    "path": "/symptoms/severe-headache-warning-signs"
+  },
+  {
+    "url": "https://www.drsayuj.info/symptoms/signs-of-brain-tumor",
+    "path": "/symptoms/signs-of-brain-tumor"
+  },
+  {
+    "url": "https://www.drsayuj.info/symptoms/when-to-see-neurosurgeon",
+    "path": "/symptoms/when-to-see-neurosurgeon"
+  },
+  {
+    "url": "https://www.drsayuj.info/technology-facilities",
+    "path": "/technology-facilities"
+  },
+  {
+    "url": "https://www.drsayuj.info/technology-innovation",
+    "path": "/technology-innovation"
+  },
+  {
+    "url": "https://www.drsayuj.info/terms",
+    "path": "/terms"
+  }
 ]

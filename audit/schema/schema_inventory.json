@@ -1,34 +1,20 @@
 {
-  "https://www.drsayuj.info": [
-    "WebSite",
-    null,
-    "Hospital",
-    "FAQPage",
-    "BreadcrumbList"
+  "global": [
+    "WebsiteSchema",
+    "PhysicianSchema",
+    "HospitalSchema"
   ],
-  "https://www.drsayuj.info/services/minimally-invasive-spine-surgery": [
-    "WebSite",
-    null,
-    "Hospital",
-    "MedicalBusiness",
-    "MedicalWebPage",
-    "BreadcrumbList",
-    "FAQPage",
-    "FAQPage"
-  ],
-  "https://www.drsayuj.info/neurosurgeon-hyderabad": [
-    "WebSite",
-    null,
-    "Hospital",
-    "MedicalClinic",
-    "BreadcrumbList",
-    "FAQPage"
-  ],
-  "https://www.drsayuj.info/blog/epilepsy-surgery-options-hyderabad": [
-    "WebSite",
-    null,
-    "Hospital",
-    "BreadcrumbList",
-    null
-  ]
+  "templates": {
+    "home": ["FAQPage", "MedicalWebPage"],
+    "blog": ["Article", "MedicalWebPage"],
+    "service": ["MedicalWebPage", "FAQPage"],
+    "condition": ["MedicalWebPage", "FAQPage"],
+    "location": ["MedicalClinic"]
+  },
+  "compliance": {
+    "ymyl": "High",
+    "author_attribution": "Present in MDX",
+    "reviewer_attribution": "Present in MDX",
+    "medical_disclaimer": "Present in content"
+  }
 }

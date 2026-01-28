@@ -1,26 +1,34 @@
-# Competitor Benchmark
+# Competitor Benchmark: Neuro/Spine Hyderabad
 
-## Top Competitors (Hyderabad)
-1. **Yashoda Hospitals** (Domain Authority: High)
-2. **Apollo Hospitals**
-3. **Dr. Raveesh** (Specialist)
-4. **SpineSurgeon.in** (Specialist)
+## Top Competitors (SERP Analysis)
+1. **Yashoda Hospitals (Corporate Site)**
+   - *Strengths:* High domain authority, massive content volume.
+   - *Weaknesses:* Generic content, less personal, aggressive booking CTAs.
+2. **Apollo Hospitals Hyderabad**
+   - *Strengths:* Strong brand, extensive doctor listings.
+   - *Weaknesses:* Slow page speed, cluttered UI.
+3. **KIMS Hospitals**
+   - *Strengths:* Strong local presence.
+   - *Weaknesses:* Poor mobile experience.
+4. **Dr. G. Sudhir / Spine Surgeon Hyderabad**
+   - *Strengths:* Niche focus on spine.
+   - *Weaknesses:* Older design, less content on "Endoscopic" specifically.
 
 ## Content Gaps Identified
-1. **Local Language Content:** No pages found targeting Telugu/Hindi keywords explicitly in URL (e.g., /te/...).
-   - *Opportunity:* Create /telugu/spine-surgery landing page.
-2. **Interactive Tools:** Competitors use "Spine Health Score" calculators. We have `symptoms-checker`.
-3. **Comparison Pages:** "Endoscopic vs Microdiscectomy". We have `blog/endoscopic-vs-microdiscectomy-hyderabad`? (Check inventory).
-4. **Cost Transparency:** Competitors often hide costs. We have explicit cost pages.
-   - `services/spine-surgery-cost-hyderabad` (Word Count: CHECK)
-   - `services/slip-disc-surgery-cost-hyderabad`
+| Keyword / Topic | Intent | Gap Type | Recommended Page |
+|-----------------|--------|----------|------------------|
+| "spine surgery cost in hyderabad" | Commercial | Transparency | `/services/spine-surgery-cost-hyderabad` (Detailed breakdown) |
+| "endoscopic vs microscopic spine surgery" | Informational | Comparison | `/blog/endoscopic-vs-microscopic-spine-surgery` |
+| "recovery time for slip disc surgery" | Informational | Expectations | `/blog/slip-disc-surgery-recovery-timeline` |
+| "best neurosurgeon for second opinion" | Commercial | Trust | `/second-opinion` (Dedicated landing page) |
+| "spine surgery insurance coverage hyderabad" | Transactional | Financial | `/insurance-coverage` |
 
-## Keyword Gaps
-- "best spine surgeon in kphb" (Hyper-local)
-- "laser spine surgery hyderabad" (If applicable)
-- "spine surgery insurance coverage hyderabad"
+## Feature Gaps
+- **Interactive Cost Calculator:** Competitors have "Get Quote", but a simple calculator would be a differentiator.
+- **Video Testimonials:** Dr. Sayuj has some, but competitors often have more polished video libraries.
+- **Symptom Checker:** "Do I need surgery?" interactive tool.
 
-## SERP Features
-- **FAQ Schema:** Essential. We have it on some pages? (Check schema inventory).
-- **Video Carousel:** Competitors use YouTube embeds.
-- **Local Pack:** GMB optimization is key (Address schema helps).
+## Strategic Recommendations
+1. **Win on "Endoscopic":** Dominate the "Endoscopic" niche where corporate hospitals are more generic.
+2. **Price Transparency:** Create a "Cost of Surgery" guide (with ranges) to capture high-intent traffic.
+3. **Hyper-Local Pages:** Expand on location pages (e.g., "Neurosurgeon in Jubilee Hills") with specific local landmarks/directions.
