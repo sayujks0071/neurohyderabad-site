@@ -9,7 +9,7 @@ import BookingLocationInfo from "./_components/neuralink/BookingLocationInfo";
 export const metadata: Metadata = {
   title: "Book Appointment | Best Neurosurgeon Hyderabad | Dr. Sayuj",
   description:
-    "Book Appointment with Dr. Sayuj Krishnan, the Best Neurosurgeon in Hyderabad. Schedule a consultation for spine surgery & brain tumor surgery.",
+    "Book Appointment with Dr. Sayuj Krishnan, the Best Neurosurgeon in Hyderabad. Schedule a consultation for spine surgery, brain tumor surgery, and endoscopic procedures.",
   // SEO: Optimized for local search intent. Verified to include 'Best Neurosurgeon Hyderabad' and 'Book Appointment'.
   keywords: [
     "Book Appointment",

@@ -7,11 +7,18 @@ export default function AppointmentSchema() {
   if (!malakpet) return null;
 
   // Implements Schema.org JSON-LD for Physician and MedicalClinic.
-  // This structure is optimized for Google's Medical Schema requirements.
-  // Task: Add Schema.org JSON-LD structured data to improve search visibility.
-  // 1. Physician Entity: Dr. Sayuj Krishnan
-  // 2. MedicalClinic Entity: Yashoda Hospitals, Malakpet
-  // 3. Includes: Address, Specialty, Available Services, and Booking URL.
+  // Optimized for Google's Medical Schema requirements.
+  //
+  // Entities:
+  // 1. Physician: Dr. Sayuj Krishnan (Neurosurgeon)
+  // 2. MedicalClinic: Yashoda Hospitals, Malakpet
+  //
+  // Includes:
+  // - Address: Malakpet Location (Yashoda Hospitals)
+  // - Available Services: Neurosurgery, Spine Surgery, Brain Tumor Surgery
+  // - URL: Booking Page URL
+  //
+  // Note: Injected into the body as a JSON-LD script tag (standard for Next.js App Router).
   const schema = {
     "@context": "https://schema.org",
     "@graph": [
@@ -70,7 +77,27 @@ export default function AppointmentSchema() {
             "@type": "GeoCoordinates",
             "latitude": malakpet.geo?.latitude,
             "longitude": malakpet.geo?.longitude
-        }
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "09:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Saturday"],
+            "opens": "09:00",
+            "closes": "13:00"
+          }
+        ]
       }
     ]
   };
