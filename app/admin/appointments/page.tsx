@@ -168,6 +168,7 @@ export default function AppointmentsPage() {
                   </td>
                   <td className="py-3 px-4 border-b">
                     <div className="flex items-center gap-2">
+                      {/* WhatsApp Quick Action */}
                       <button
                         onClick={() => sendWhatsapp(appointment)}
                         className="flex items-center gap-1 !bg-[#25D366] hover:!bg-[#128C7E] text-white font-medium py-1 px-2 rounded text-xs transition-colors"
