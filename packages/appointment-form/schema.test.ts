@@ -110,12 +110,13 @@ describe("Appointment Schema Validation", () => {
     }
   });
 
-  it("defaults mriScanAvailable to false if missing", () => {
+  it("requires mriScanAvailable to be provided", () => {
     const { mriScanAvailable, ...dataWithoutMri } = baseValidData;
     const result = appointmentSchema.safeParse(dataWithoutMri);
-    expect(result.success).toBe(true);
-    if (result.success) {
-      expect(result.data.mriScanAvailable).toBe(false);
+    expect(result.success).toBe(false);
+    if (!result.success) {
+      const error = result.error.issues.find(i => i.path.includes("mriScanAvailable"));
+      expect(error).toBeDefined();
     }
   });
 });
