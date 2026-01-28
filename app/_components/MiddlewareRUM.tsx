@@ -7,7 +7,7 @@ export default function MiddlewareRUM() {
     <Script
       id="middleware-rum"
       src="https://cdnjs.middleware.io/browser/libs/0.0.2/middleware-rum.min.js"
-      strategy="afterInteractive"
+      strategy="lazyOnload"
       crossOrigin="anonymous"
       onLoad={() => {
         if (typeof window !== 'undefined' && (window as any).Middleware) {
