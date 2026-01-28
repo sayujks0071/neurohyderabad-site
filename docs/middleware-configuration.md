@@ -6,7 +6,7 @@ Middleware uses different keys for different purposes:
 
 ### 1. Agent API Key (Infrastructure Monitoring)
 
-**Key**: `fygjftkluglwjxlwyhqdwshcbwtvfavastli`
+**Key**: `<your_agent_api_key>`
 
 **Used for:**
 - macOS Agent installation
@@ -17,11 +17,11 @@ Middleware uses different keys for different purposes:
 **Configuration:**
 ```bash
 # macOS Agent
-MW_API_KEY="fygjftkluglwjxlwyhqdwshcbwtvfavastli"
+MW_API_KEY="<your_agent_api_key>"
 MW_TARGET="https://hjptv.middleware.io"
 
 # Kubernetes Agent (Helm)
---set global.mw.apiKey=fygjftkluglwjxlwyhqdwshcbwtvfavastli
+--set global.mw.apiKey=<your_agent_api_key>
 --set global.mw.target=https://hjptv.middleware.io:443
 ```
 
@@ -32,7 +32,7 @@ MW_TARGET="https://hjptv.middleware.io"
 
 ### 2. RUM Account Key (Real User Monitoring)
 
-**Key**: `svxkmvkxzpkxtuyhsgmgdiyfjwkxtytiltea`
+**Key**: `<your_rum_account_key>`
 
 **Used for:**
 - Browser RUM tracking
@@ -79,19 +79,22 @@ MIDDLEWARE_ACCESS_TOKEN=your_access_token_here
 MIDDLEWARE_API_URL=https://hjptv.middleware.io/api/v1
 
 # Middleware Agent (for infrastructure monitoring)
-MW_API_KEY=fygjftkluglwjxlwyhqdwshcbwtvfavastli
+MW_API_KEY=<your_agent_api_key>
 MW_TARGET=https://hjptv.middleware.io
 
 # Optional: Webhook URL for alerts
 MONITORING_WEBHOOK_URL=https://www.drsayuj.info/api/webhooks/middleware
+
+# Required for Sourcemap Uploads (Middleware RUM Account Key)
+MIDDLEWARE_ACCOUNT_KEY=<your_rum_account_key>
 ```
 
 ## Key Usage Summary
 
 | Key Type | Value | Used For | Location |
 |----------|-------|----------|----------|
-| Agent API Key | `fygjftkluglwjxlwyhqdwshcbwtvfavastli` | Infrastructure agents | Installation scripts, docs |
-| RUM Account Key | `svxkmvkxzpkxtuyhsgmgdiyfjwkxtytiltea` | Browser monitoring | `MiddlewareRUM.tsx`, `next.config.mjs` |
+| Agent API Key | `<your_agent_api_key>` | Infrastructure agents | Installation scripts, docs |
+| RUM Account Key | `<your_rum_account_key>` | Browser monitoring | `MiddlewareRUM.tsx`, `next.config.mjs` |
 | API Access Token | Generated from dashboard | API client | `.env.local` → `MIDDLEWARE_ACCESS_TOKEN` |
 
 ## Configuration Files
@@ -100,7 +103,7 @@ MONITORING_WEBHOOK_URL=https://www.drsayuj.info/api/webhooks/middleware
 
 **macOS:**
 ```bash
-MW_API_KEY="fygjftkluglwjxlwyhqdwshcbwtvfavastli" \
+MW_API_KEY="<your_agent_api_key>" \
 MW_TARGET="https://hjptv.middleware.io" \
 bash -c "$(curl -L https://install.middleware.io/scripts/mw-macos-agent-install.sh)"
 ```
@@ -108,7 +111,7 @@ bash -c "$(curl -L https://install.middleware.io/scripts/mw-macos-agent-install.
 **Kubernetes:**
 ```bash
 helm install mw-agent middleware-labs/mw-kube-agent-v3 \
-  --set global.mw.apiKey=fygjftkluglwjxlwyhqdwshcbwtvfavastli \
+  --set global.mw.apiKey=<your_agent_api_key> \
   --set global.mw.target=https://hjptv.middleware.io:443
 ```
 
@@ -116,8 +119,9 @@ helm install mw-agent middleware-labs/mw-kube-agent-v3 \
 
 **Sourcemap Uploader** (`next.config.mjs`):
 ```javascript
+// Uses process.env.MIDDLEWARE_ACCOUNT_KEY
 new MiddlewareWebpackPlugin(
-  "svxkmvkxzpkxtuyhsgmgdiyfjwkxtytiltea", // RUM Account Key
+  process.env.MIDDLEWARE_ACCOUNT_KEY, // RUM Account Key from env
   "1.0.0",
   ".next/",
   "_next/",
@@ -128,7 +132,7 @@ new MiddlewareWebpackPlugin(
 **RUM Script** (`app/_components/MiddlewareRUM.tsx`):
 ```typescript
 Middleware.track({
-  accountKey: "svxkmvkxzpkxtuyhsgmgdiyfjwkxtytiltea", // RUM Account Key
+  accountKey: "<your_rum_account_key>", // RUM Account Key
   target: "https://hjptv.middleware.io",
   // ...
 })
@@ -192,13 +196,13 @@ pnpm tsx scripts/middleware-api-examples.ts dashboards
 
 ### Agent Not Connecting
 
-1. Verify API key: `fygjftkluglwjxlwyhqdwshcbwtvfavastli`
+1. Verify API key: `<your_agent_api_key>`
 2. Check target URL: `https://hjptv.middleware.io`
 3. Verify agent is running: `sudo launchctl list | grep mw-agent`
 
 ### RUM Not Working
 
-1. Verify account key: `svxkmvkxzpkxtuyhsgmgdiyfjwkxtytiltea`
+1. Verify account key: `<your_rum_account_key>`
 2. Check browser console for errors
 3. Verify script is loading: Network tab → `middleware-rum.min.js`
 
