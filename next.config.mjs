@@ -43,10 +43,6 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'images.unsplash.com',
       },
-      {
-        protocol: 'https',
-        hostname: '**',
-      },
     ],
     // Allow query strings for dynamic OG images
     dangerouslyAllowSVG: true,
@@ -74,16 +70,16 @@ const nextConfig = {
       },
       // CRITICAL: Apex domain redirect to www (single hop 301)
       {
-        source: '/((?!api|_next|images|favicon.ico|robots.txt|sitemap.xml|site.webmanifest).*)',
+        source: '/:path*',
         has: [{ type: 'host', value: 'drsayuj.com' }],
-        destination: 'https://www.drsayuj.com/$1',
+        destination: 'https://www.drsayuj.com/:path*',
         permanent: true,
       },
       // CRITICAL: Apex domain redirect for drsayuj.info to www (single hop 301)
       {
-        source: '/((?!api|_next|images|favicon.ico|robots.txt|sitemap.xml|site.webmanifest).*)',
+        source: '/:path*',
         has: [{ type: 'host', value: 'drsayuj.info' }],
-        destination: 'https://www.drsayuj.info/$1',
+        destination: 'https://www.drsayuj.info/:path*',
         permanent: true,
       },
       // SITE ARCHITECTURE CONSOLIDATION: Reduce 5 hub pages to 2
@@ -233,9 +229,23 @@ const nextConfig = {
         ]
       },
       {
+        source: "/fonts/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" }
+        ]
+      },
+      {
         source: "/:all*(svg|jpg|jpeg|png|gif|webp|avif|ico|js|css|woff2)",
         headers: [
-          { key: "Cache-Control", value: "public, max-age=0, s-maxage=31536000, immutable" }
+          // Aggressive caching for static public assets to reduce repeat Edge Requests.
+          // If an asset changes, it should be cache-busted by filename.
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" }
+        ]
+      },
+      {
+        source: "/site.webmanifest",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=86400, stale-while-revalidate=86400" }
         ]
       },
       {

@@ -14,6 +14,10 @@ import Button from "../../_components/Button";
 import { LocalPathways } from "@/src/components/locations/LocalPathways";
 import { getLocationById } from "@/src/data/locations";
 
+// Ensure this route is fully statically generated (no dynamic fallback SSR).
+export const dynamic = 'force-static';
+export const dynamicParams = false;
+
 // List of condition pages that have explicit static folders in app/conditions/
 // These take precedence over dynamic routing.
 const STATIC_CONDITION_PATHS = [

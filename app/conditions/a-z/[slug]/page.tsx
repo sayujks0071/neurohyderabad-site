@@ -11,6 +11,10 @@ import BreadcrumbNavigation from "@/app/conditions/BreadcrumbNavigation";
 import RelatedConditions from "@/app/conditions/RelatedConditions";
 import { LocalPathways } from "@/src/components/locations/LocalPathways";
 
+// Ensure this route is fully statically generated (no dynamic fallback SSR).
+export const dynamic = 'force-static';
+export const dynamicParams = false;
+
 type PageParams = {
   params: Promise<{
     slug: string;

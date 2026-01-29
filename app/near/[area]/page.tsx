@@ -9,6 +9,10 @@ import { makeMetadata } from '@/app/_lib/meta';
 import { SITE_URL } from '@/src/lib/seo';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 
+// Ensure this route is fully statically generated (no dynamic fallback SSR).
+export const dynamic = 'force-static';
+export const dynamicParams = false;
+
 const AREAS = {
   'banjara-hills': {
     name: 'Banjara Hills',
