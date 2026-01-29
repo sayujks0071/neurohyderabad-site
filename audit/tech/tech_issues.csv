@@ -1,1 +1,7 @@
-URL,Issue Type,Details
+
+url,issue,severity,notes
+drsayuj.com,Potential Duplicate Domain,Medium,"Redirects to www.drsayuj.com instead of www.drsayuj.info (Canonical). Canonical tags mitigate this, but 301 is preferred."
+robots.txt,None,Low,Correctly configured.
+sitemap.xml,None,Low,Correctly generated and covers key pages.
+/about,Missing Metadata (Script Limit),Low,False positive in audit script; metadata exists in file.
+/app/about,Legacy File Path,Low,"Logic in script implies legacy file paths might exist, verify if cleanup needed."

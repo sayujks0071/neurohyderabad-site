@@ -1,6 +1,7 @@
-URL,Type,TTFB(s),Cache-Control,Content-Encoding,X-NextJS-Cache
-http://localhost:3000/,Homepage,0.525635,"no-store, must-revalidate",NONE,N/A
-http://localhost:3000/services/minimally-invasive-spine-surgery,Service,0.398932,"no-store, must-revalidate",NONE,N/A
-http://localhost:3000/conditions/sciatica-pain-treatment-hyderabad,Condition,1.543075,"no-store, must-revalidate",NONE,N/A
-http://localhost:3000/neurosurgeon-hitech-city,Location,1.125940,"no-store, must-revalidate",NONE,N/A
-http://localhost:3000/blog/awake-craniotomy-guide,Blog,0.924011,"no-store, must-revalidate",NONE,N/A
+url,type,status,ttfb_ms,cache-control,content-type,server
+/,home,200,227,"s-maxage=21600, stale-while-revalidate=31514400","text/html; charset=utf-8",""
+/services/minimally-invasive-spine-surgery,service,200,42,"s-maxage=31536000","text/html; charset=utf-8",""
+/conditions/sciatica-pain-treatment-hyderabad,condition,200,43,"s-maxage=21600, stale-while-revalidate=31514400","text/html; charset=utf-8",""
+/locations/malakpet,location,200,42,"s-maxage=86400, stale-while-revalidate=31449600","text/html; charset=utf-8",""
+/blog/sciatica-pain-management-hyderabad,blog,200,24,"s-maxage=31536000","text/html; charset=utf-8",""
+/appointments,appointment,200,21,"s-maxage=31536000","text/html; charset=utf-8",""

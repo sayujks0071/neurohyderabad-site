@@ -14,8 +14,11 @@ export default function ConditionStructuredData({
     ? canonicalPath
     : `${SITE_URL}${canonicalPath}`;
 
+  const medicalConditionId = `${url}#condition`;
+
   const medicalCondition: Record<string, unknown> = {
     "@type": "MedicalCondition",
+    "@id": medicalConditionId,
     name: condition.name,
     description: condition.summary,
     url,
@@ -39,7 +42,60 @@ export default function ConditionStructuredData({
     );
   }
 
-  const graph: Record<string, unknown>[] = [medicalCondition];
+  // YMYL E-E-A-T Enhancement: MedicalWebPage Wrapper
+  const medicalWebPage = {
+    "@type": "MedicalWebPage",
+    "@id": `${url}#webpage`,
+    url,
+    name: `${condition.name} Treatment in Hyderabad | Dr. Sayuj Krishnan`,
+    description: condition.summary,
+    inLanguage: "en-IN",
+    isPartOf: {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      name: "Dr. Sayuj Krishnan - Neurosurgeon in Hyderabad",
+      url: SITE_URL,
+    },
+    mainEntity: {
+      "@id": medicalConditionId,
+    },
+    about: {
+      "@id": medicalConditionId,
+    },
+    author: {
+      "@type": "Person",
+      name: "Dr. Sayuj Krishnan",
+      jobTitle: "Neurosurgeon",
+      url: SITE_URL,
+      worksFor: {
+        "@type": "Hospital",
+        name: "Yashoda Hospital",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Malakpet",
+          addressRegion: "Hyderabad",
+          addressCountry: "IN",
+        },
+      },
+    },
+    reviewedBy: {
+      "@type": "Physician",
+      name: "Dr. Sayuj Krishnan",
+      url: SITE_URL,
+    },
+    lastReviewed: new Date().toISOString().split("T")[0],
+    datePublished: "2024-01-01",
+    specialty: {
+      "@type": "MedicalSpecialty",
+      name: "Neurosurgery",
+    },
+    audience: {
+      "@type": "Audience",
+      audienceType: "Patients",
+    },
+  };
+
+  const graph: Record<string, unknown>[] = [medicalWebPage, medicalCondition];
 
   if (condition.faq?.length) {
     graph.push({
