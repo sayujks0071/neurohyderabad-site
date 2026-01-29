@@ -10,6 +10,8 @@ export default function FloatingWhatsApp() {
     // Optimized scroll detection using IntersectionObserver
     // This avoids firing events on every scroll tick
     const sentinel = document.createElement('div');
+    // Sentinel element used to trigger visibility state
+    // When this element scrolls out of view (at 300px), the button appears
     sentinel.style.position = 'absolute';
     sentinel.style.top = '0';
     sentinel.style.left = '0';
@@ -18,6 +20,7 @@ export default function FloatingWhatsApp() {
     sentinel.style.pointerEvents = 'none';
     sentinel.style.visibility = 'hidden';
     sentinel.style.zIndex = '-1';
+    sentinel.setAttribute('aria-hidden', 'true');
     document.body.appendChild(sentinel);
 
     const observer = new IntersectionObserver(([entry]) => {
