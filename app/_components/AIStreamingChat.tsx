@@ -45,6 +45,7 @@ export default function AIStreamingChat({
   ], [initialMessage]);
 
   // Initialize useChat hook with explicit generic type to prevent excessive narrowing
+  // For @ai-sdk/react v3.0.51, we must use 'transport' and 'sendMessage'
   const { messages, sendMessage, status, error } = useChat<UIMessage>({
     transport,
     messages: initialMessages,
@@ -95,7 +96,7 @@ export default function AIStreamingChat({
 
     const userMessage = input;
     setInput('');
-    // Use helper object with text property for convenience
+    // Use sendMessage with text property as required by this SDK version
     await sendMessage({ text: userMessage });
   };
 
