@@ -426,6 +426,66 @@
       "difficulty": "Med",
       "volume": "Low",
       "target_page": "/conditions/scoliosis-treatment-hyderabad"
+    },
+    {
+      "term": "spine surgery cost in hyderabad",
+      "difficulty": "Med",
+      "volume": "Med",
+      "target_page": "/services/spine-surgery-cost-hyderabad"
+    },
+    {
+      "term": "microdiscectomy cost hyderabad",
+      "difficulty": "Med",
+      "volume": "Low",
+      "target_page": "/services/microdiscectomy-surgery-hyderabad"
+    },
+    {
+      "term": "endoscopic spine surgery vs open surgery",
+      "difficulty": "Med",
+      "volume": "Med",
+      "target_page": "/blog/endoscopic-vs-microdiscectomy-hyderabad"
+    },
+    {
+      "term": "neurosurgeon begumpet",
+      "difficulty": "Low",
+      "volume": "Low",
+      "target_page": "/locations/neurosurgeon-begumpet"
+    },
+    {
+      "term": "best neurosurgeon near begumpet",
+      "difficulty": "Low",
+      "volume": "Low",
+      "target_page": "/locations/neurosurgeon-begumpet"
+    },
+    {
+      "term": "neurosurgeon ameerpet",
+      "difficulty": "Low",
+      "volume": "Low",
+      "target_page": "/locations/neurosurgeon-ameerpet"
+    },
+    {
+      "term": "spine surgeon ameerpet",
+      "difficulty": "Low",
+      "volume": "Low",
+      "target_page": "/locations/neurosurgeon-ameerpet"
+    },
+    {
+      "term": "brain tumor surgery cost hyderabad",
+      "difficulty": "High",
+      "volume": "Low",
+      "target_page": "/services/brain-tumor-surgery-hyderabad"
+    },
+    {
+      "term": "sciatica treatment cost hyderabad",
+      "difficulty": "Med",
+      "volume": "Low",
+      "target_page": "/conditions/sciatica-pain-treatment-hyderabad"
+    },
+    {
+      "term": "recovery time for lumbar decompression surgery",
+      "difficulty": "Med",
+      "volume": "Med",
+      "target_page": "/blog/endoscopic-spine-surgery-recovery-timeline"
     }
   ]
 }

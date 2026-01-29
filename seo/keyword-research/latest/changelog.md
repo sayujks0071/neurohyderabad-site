@@ -1,11 +1,12 @@
-# Daily SEO Changelog - 2026-01-27
+# Changelog 2025-05-23
 
 ## New Pages
-- Created `app/services/microdiscectomy-surgery-hyderabad/page.tsx` targeting "Microdiscectomy Surgery".
+*   `/locations/neurosurgeon-begumpet`: Targeting "neurosurgeon begumpet", "best neurosurgeon near begumpet".
+*   `/locations/neurosurgeon-ameerpet`: Targeting "neurosurgeon ameerpet", "spine surgeon ameerpet".
 
-## Registry Updates
-- Added `microdiscectomy-surgery-hyderabad` to `seo/keyword-registry.json`.
-- Mapped keywords in `seo/page-keyword-map.json`.
+## Keyword Updates
+*   Added cost-related keywords to existing service pages.
+*   Added comparison keywords to existing blog posts.
 
-## Schema Changes
-- Added `MedicalWebPage` schema with specialty "Neurosurgery".
+## Competitor Insights
+*   Competitors are bidding heavily on "cost" terms. Adding content around affordability/insurance/packages on service pages (or dedicated cost pages) is recommended.

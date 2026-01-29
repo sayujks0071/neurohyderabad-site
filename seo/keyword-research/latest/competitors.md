@@ -1,15 +1,10 @@
-# Daily Competitor Analysis - 2026-01-27
-
-## Target Keywords
-- "endoscopic spine surgery hyderabad"
-- "microdiscectomy hyderabad"
-- "minimally invasive spine surgery"
-
-## Competitors Analyzed
-1. **Yashoda Hospitals** - Strong on "robotic spine surgery", weaker on specific "microdiscectomy" long-tail.
-2. **KIMS Hospitals** - Good general dominance, but specific procedure pages are thin.
-3. **Dr. Sukumar** - Competitor for individual surgeon rankings.
-
-## Gap Analysis
-- Most competitors lack detailed "recovery timeline" for microdiscectomy.
-- Few have clear "cost" or "insurance" sections on the procedure page itself.
+| Competitor | URL | Type | Notes |
+|---|---|---|---|
+| Yashoda Hospitals | yashodahospitals.com | Hospital Chain | Dominates "best spine surgeon hyderabad" with directory pages. |
+| Apollo Hospitals | apollohospitals.com | Hospital Chain | Strong on "neurosurgeon hyderabad" and "brain tumor surgery". |
+| Dr. Sukumar | drsukumar.com | Individual Surgeon | Ranks for "minimally invasive spine surgery". |
+| KIMS Hospitals | kimshospitals.com | Hospital Chain | Competes on "scoliosis treatment" and "pediatric neurosurgery". |
+| Practo | practo.com | Directory | Aggregator for "best neurosurgeon near me". |
+| Dr. Sambasiva Rao | drsambasivarao.com | Individual Surgeon | Local competitor in Gachibowli area. |
+| Medicover Hospitals | medicoverhospitals.in | Hospital Chain | Growing presence for "spine surgery cost". |
+| Care Hospitals | carehospitals.com | Hospital Chain | Legacy strong domain for "neurosurgery". |
