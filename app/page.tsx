@@ -892,22 +892,22 @@ export default function Home() {
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl font-bold text-center mb-8">References & Sources</h2>
             <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-gray-50 p-6 rounded-lg">
+              <Card padding="md" hover={true}>
                 <h3 className="font-semibold text-blue-700 mb-3">Medical Guidelines</h3>
                 <ul className="space-y-2 text-sm text-gray-600">
                   <li>• <a href="https://www.aans.org/patients/conditions-and-treatments" target="_blank" rel="noopener" className="text-blue-600 hover:underline">AANS: Conditions and Treatments</a></li>
                   <li>• <a href="https://www.ninds.nih.gov/health-information/disorders" target="_blank" rel="noopener" className="text-blue-600 hover:underline">NINDS: Neurological Disorders</a></li>
                   <li>• <a href="https://www.cancer.gov/types/brain/patient/brain-treatment-pdq" target="_blank" rel="noopener" className="text-blue-600 hover:underline">NCI: Brain Tumor Treatment</a></li>
                 </ul>
-              </div>
-              <div className="bg-gray-50 p-6 rounded-lg">
+              </Card>
+              <Card padding="md" hover={true}>
                 <h3 className="font-semibold text-blue-700 mb-3">Research & Evidence</h3>
                 <ul className="space-y-2 text-sm text-gray-600">
                   <li>• <a href="https://www.epilepsy.com/treatment/surgery" target="_blank" rel="noopener" className="text-blue-600 hover:underline">Epilepsy Foundation: Surgery</a></li>
                   <li>• <a href="https://www.nhs.uk/conditions/brain-tumours/treatment/" target="_blank" rel="noopener" className="text-blue-600 hover:underline">NHS: Brain Tumor Treatment</a></li>
                   <li>• <a href="https://www.mayoclinic.org/diseases-conditions/trigeminal-neuralgia/diagnosis-treatment/drc-20353347" target="_blank" rel="noopener" className="text-blue-600 hover:underline">Mayo Clinic: Trigeminal Neuralgia</a></li>
                 </ul>
-              </div>
+              </Card>
             </div>
           </div>
         </Section>
