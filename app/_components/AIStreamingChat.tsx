@@ -44,8 +44,8 @@ export default function AIStreamingChat({
     },
   ], [initialMessage]);
 
-  // Initialize useChat hook
-  const { messages, sendMessage, status, error } = useChat({
+  // Initialize useChat hook with explicit generic type to prevent excessive narrowing
+  const { messages, sendMessage, status, error } = useChat<UIMessage>({
     transport,
     messages: initialMessages,
     onFinish: (options) => {
