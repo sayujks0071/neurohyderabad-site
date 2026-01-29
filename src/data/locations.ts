@@ -33,6 +33,7 @@ export interface LocationData {
   top_services_slugs: string[];
   top_conditions_slugs: string[];
   sameAs?: string[];
+  openingHours?: string; // e.g. "Mo-Sa 10:00-17:00"
 }
 
 export const CANONICAL_PHYSICIAN_NAME = "Dr. Sayuj Krishnan – Neurosurgeon";
@@ -106,7 +107,8 @@ export const locations: LocationData[] = [
     areaServedName: "Secunderabad",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES
+    sameAs: SOCIAL_PROFILES,
+    openingHours: "Mo-Sa 10:00-17:00"
   },
   {
     id: "hitech-city",
@@ -123,7 +125,8 @@ export const locations: LocationData[] = [
     areaServedName: "Hitech City",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES
+    sameAs: SOCIAL_PROFILES,
+    openingHours: "Mo-Sa 10:00-17:00"
   },
   {
     id: "banjara-hills",
@@ -140,7 +143,8 @@ export const locations: LocationData[] = [
     areaServedName: "Banjara Hills",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES
+    sameAs: SOCIAL_PROFILES,
+    openingHours: "Mo-Sa 10:00-17:00"
   },
   {
     id: "gachibowli",
@@ -157,7 +161,8 @@ export const locations: LocationData[] = [
     areaServedName: "Gachibowli",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES
+    sameAs: SOCIAL_PROFILES,
+    openingHours: "Mo-Sa 10:00-17:00"
   },
   {
     id: "jubilee-hills",
@@ -174,7 +179,8 @@ export const locations: LocationData[] = [
     areaServedName: "Jubilee Hills",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES
+    sameAs: SOCIAL_PROFILES,
+    openingHours: "Mo-Sa 10:00-17:00"
   },
   {
     id: "malakpet",
@@ -191,7 +197,8 @@ export const locations: LocationData[] = [
     areaServedName: "Malakpet",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES
+    sameAs: SOCIAL_PROFILES,
+    openingHours: "Mo-Sa 10:00-17:00"
   },
   {
     id: "hyderabad",
@@ -208,7 +215,8 @@ export const locations: LocationData[] = [
     areaServedName: "Hyderabad",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES
+    sameAs: SOCIAL_PROFILES,
+    openingHours: "Mo-Sa 10:00-17:00"
   },
   {
     id: "lb-nagar",
@@ -225,7 +233,8 @@ export const locations: LocationData[] = [
     areaServedName: "LB Nagar",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES
+    sameAs: SOCIAL_PROFILES,
+    openingHours: "Mo-Sa 10:00-17:00"
   },
   {
     id: "kukatpally",
@@ -242,7 +251,8 @@ export const locations: LocationData[] = [
     areaServedName: "Kukatpally",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES
+    sameAs: SOCIAL_PROFILES,
+    openingHours: "Mo-Sa 10:00-17:00"
   },
   {
     id: "manikonda",
@@ -259,7 +269,8 @@ export const locations: LocationData[] = [
     areaServedName: "Manikonda",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES
+    sameAs: SOCIAL_PROFILES,
+    openingHours: "Mo-Sa 10:00-17:00"
   },
   {
     id: "nizampet",
@@ -276,7 +287,8 @@ export const locations: LocationData[] = [
     areaServedName: "Nizampet",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES
+    sameAs: SOCIAL_PROFILES,
+    openingHours: "Mo-Sa 10:00-17:00"
   },
   {
     id: "kondapur",
@@ -293,7 +305,8 @@ export const locations: LocationData[] = [
     areaServedName: "Kondapur",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES
+    sameAs: SOCIAL_PROFILES,
+    openingHours: "Mo-Sa 10:00-17:00"
   },
   {
     id: "kothapet",
@@ -310,7 +323,8 @@ export const locations: LocationData[] = [
     areaServedName: "Kothapet",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES
+    sameAs: SOCIAL_PROFILES,
+    openingHours: "Mo-Sa 10:00-17:00"
   },
   {
     id: "madhapur",
@@ -327,7 +341,8 @@ export const locations: LocationData[] = [
     areaServedName: "Madhapur",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES
+    sameAs: SOCIAL_PROFILES,
+    openingHours: "Mo-Sa 10:00-17:00"
   }
 ];
 
