@@ -113,6 +113,7 @@ export const LocalPathways: React.FC<LocalPathwaysProps> = ({
       'jubilee-hills',
       'hitech-city',
       'gachibowli',
+      'kondapur',
       'secunderabad',
       'malakpet'
     ];
