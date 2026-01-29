@@ -4,258 +4,212 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT_DIR = path.join(__dirname, '..');
-const REPORTS_DIR = path.join(ROOT_DIR, 'reports');
-const REPORT_FILE = path.join(REPORTS_DIR, 'crawl-health-weekly.json');
-const BASE_URL = process.env.BASE_URL || 'http://localhost:3000';
+const INVENTORY_FILE = path.join(ROOT_DIR, 'audit', 'crawl', 'url_inventory.json');
+const REPORT_FILE = path.join(ROOT_DIR, 'reports', 'crawl-health-weekly.json');
+const BASE_URL = 'http://localhost:3000';
 
-// Ensure reports dir exists
-if (!fs.existsSync(REPORTS_DIR)) {
-  fs.mkdirSync(REPORTS_DIR, { recursive: true });
-}
+async function main() {
+  console.log('Starting Crawl Health Audit...');
 
-async function getUrlList() {
-  const urls = new Set(['/', '/appointments', '/robots.txt', '/sitemap.xml']);
-
-  // Extract locations
+  // 1. Load URLs
+  let urls = [];
   try {
-    const locationsContent = fs.readFileSync(path.join(ROOT_DIR, 'src/data/locations.ts'), 'utf8');
-    const slugMatches = locationsContent.matchAll(/slug:\s*["']([^"']+)["']/g);
-    for (const match of slugMatches) {
-        let slug = match[1];
-        if (!slug.startsWith('/')) slug = '/' + slug;
-        urls.add(slug);
-    }
+    const data = fs.readFileSync(INVENTORY_FILE, 'utf8');
+    urls = JSON.parse(data);
+    // Ensure unique and filter
+    urls = [...new Set(urls)].filter(u => u.startsWith('/'));
   } catch (e) {
-    console.error('Error reading locations.ts:', e);
+    console.error('Failed to load inventory:', e);
+    // Fallback sample if file missing
+    urls = ['/', '/appointments', '/services', '/conditions', '/locations'];
   }
 
-  // Extract conditions
-  try {
-    const conditionsContent = fs.readFileSync(path.join(ROOT_DIR, 'src/data/conditionsIndex.ts'), 'utf8');
-    const pathMatches = conditionsContent.matchAll(/primaryPath:\s*["']([^"']+)["']/g);
-    for (const match of pathMatches) {
-        urls.add(match[1]);
-    }
-  } catch (e) {
-    console.error('Error reading conditionsIndex.ts:', e);
-  }
-
-  return Array.from(urls);
-}
-
-async function fetchPage(url) {
-  const fullUrl = url.startsWith('http') ? url : `${BASE_URL}${url}`;
-  try {
-    const response = await fetch(fullUrl, { redirect: 'manual' });
-    const status = response.status;
-    let location = response.headers.get('location');
-
-    let redirectChain = [];
-    if (status >= 300 && status < 400 && location) {
-        redirectChain.push({ status, location });
-
-        let currentUrl = location.startsWith('/') ? `${BASE_URL}${location}` : location;
-        let hops = 0;
-
-        while (hops < 5) {
-             try {
-                const nextRes = await fetch(currentUrl, { redirect: 'manual' });
-                if (nextRes.status >= 300 && nextRes.status < 400 && nextRes.headers.get('location')) {
-                    const nextLoc = nextRes.headers.get('location');
-                    redirectChain.push({ status: nextRes.status, location: nextLoc });
-                    currentUrl = nextLoc.startsWith('/') ? `${BASE_URL}${nextLoc}` : nextLoc;
-                    hops++;
-                } else {
-                    break;
-                }
-             } catch (e) {
-                 break;
-             }
-        }
-    }
-
-    // Fetch content if 200
-    let content = '';
-    if (status === 200) {
-        content = await response.text();
-    }
-
-    return {
-        url,
-        status,
-        redirectChain,
-        content
-    };
-  } catch (error) {
-    return {
-        url,
-        status: 0,
-        error: error.message
-    };
-  }
-}
-
-function analyzeContent(html, baseUrl) {
-    const titleMatch = html.match(/<title>([^<]*)<\/title>/i);
-    const title = titleMatch ? titleMatch[1] : null;
-
-    // Internal links
-    const links = new Set();
-    const hrefRegex = /<a[^>]+href=["']([^"']+)["']/gi;
-    let match;
-    while ((match = hrefRegex.exec(html)) !== null) {
-        let href = match[1];
-        // Clean href (remove hash, query)
-        href = href.split('#')[0]; // keep query? usually yes for crawl
-
-        if (href.startsWith('/') || href.startsWith(baseUrl)) {
-             // Normalize to path
-             if (href.startsWith(baseUrl)) {
-                 href = href.substring(baseUrl.length);
-             }
-             if (href && href !== '/') {
-                 links.add(href);
-             }
-        }
-    }
-
-    // Thin content
-    let text = html.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '')
-                   .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
-                   .replace(/<[^>]+>/g, ' ')
-                   .replace(/\s+/g, ' ')
-                   .trim();
-    const wordCount = text.split(' ').length;
-
-    return { title, links: Array.from(links), wordCount };
-}
-
-const linkCache = new Map();
-
-async function checkLink(url) {
-    if (linkCache.has(url)) return linkCache.get(url);
-    const fullUrl = url.startsWith('http') ? url : `${BASE_URL}${url}`;
-    try {
-        const res = await fetch(fullUrl, { method: 'HEAD' });
-        let status = res.status;
-        if (status === 405 || status === 404) { // Try GET if HEAD fails or 404 (sometimes static files behave weirdly)
-             const resGet = await fetch(fullUrl, { method: 'GET' });
-             status = resGet.status;
-        }
-        linkCache.set(url, status);
-        return status;
-    } catch (e) {
-        linkCache.set(url, 0);
-        return 0;
-    }
-}
-
-async function runAudit() {
-  const seedUrls = await getUrlList();
-  console.log(`Auditing ${seedUrls.length} seed URLs...`);
-
-  const auditResults = [];
-  const brokenInternalLinks = []; // { source, target, status }
-  const duplicateTitles = {};
-  const missingTitles = [];
-  const thinPages = [];
-  const redirectChains = [];
-  const allDiscoveredLinks = new Set([...seedUrls]);
-
-  // 1. Crawl Seed Pages
-  for (const url of seedUrls) {
-      // console.log(`Checking ${url}...`);
-      const res = await fetchPage(url);
-
-      if (res.status === 0) {
-          console.error(`Failed to fetch ${url}: ${res.error}`);
-          continue;
-      }
-
-      if (res.redirectChain && res.redirectChain.length > 1) {
-          redirectChains.push({ url, chain: res.redirectChain });
-      }
-
-      if (res.status === 200) {
-          // Skip analysis for xml/txt
-          if (url.endsWith('.xml') || url.endsWith('.txt')) {
-              continue;
-          }
-
-          const { title, links, wordCount } = analyzeContent(res.content, BASE_URL);
-
-          if (!title) {
-              missingTitles.push(url);
-          } else {
-              if (!duplicateTitles[title]) duplicateTitles[title] = [];
-              duplicateTitles[title].push(url);
-          }
-
-          if (wordCount < 250) {
-             thinPages.push({ url, wordCount });
-          }
-
-          for (const link of links) {
-              allDiscoveredLinks.add(link);
-              // Check link later or now?
-              // Let's store checking task
-          }
-
-          // Store links for checking 404s later
-          auditResults.push({ url, links });
-      }
-  }
-
-  // 2. Check all discovered unique internal links for 404s
-  console.log(`Checking ${allDiscoveredLinks.size} unique internal links...`);
-  const brokenLinksFound = [];
-
-  for (const link of allDiscoveredLinks) {
-      const status = await checkLink(link);
-      if (status >= 400 || status === 0) {
-          brokenLinksFound.push({ link, status });
-      }
-  }
-
-  // 3. Map broken links back to source pages
-  for (const res of auditResults) {
-      for (const link of res.links) {
-          const broken = brokenLinksFound.find(b => b.link === link);
-          if (broken) {
-              brokenInternalLinks.push({ source: res.url, target: link, status: broken.status });
-          }
-      }
-  }
-
-  // Filter duplicate titles with only 1 count
-  const actualDuplicateTitles = {};
-  for (const [title, urls] of Object.entries(duplicateTitles)) {
-      if (urls.length > 1) {
-          actualDuplicateTitles[title] = urls;
-      }
-  }
-
-  const report = {
-      timestamp: new Date().toISOString(),
-      summary: {
-          urls_checked: seedUrls.length,
-          broken_links_found: brokenInternalLinks.length,
-          redirect_chains: redirectChains.length,
-          duplicate_titles: Object.keys(actualDuplicateTitles).length,
-          missing_titles: missingTitles.length,
-          thin_pages: thinPages.length,
-      },
-      details: {
-          broken_links: brokenInternalLinks,
-          redirect_chains: redirectChains,
-          duplicate_titles: actualDuplicateTitles,
-          missing_titles: missingTitles,
-          thin_pages: thinPages
-      }
+  const results = {
+    summary: {
+      total_checked: 0,
+      status_200: 0,
+      status_404: 0,
+      status_500: 0,
+      redirect_chains: 0,
+      duplicate_titles: 0,
+      missing_titles: 0,
+      thin_pages: 0,
+      broken_internal_links: 0,
+    },
+    issues: [],
+    details: {}
   };
 
-  fs.writeFileSync(REPORT_FILE, JSON.stringify(report, null, 2));
+  const internalLinksToCheck = new Set();
+  const titleMap = new Map();
+
+  // Helper to fetch and parse
+  const checkUrl = async (urlPath) => {
+    const fullUrl = new URL(urlPath, BASE_URL).toString();
+    console.log(`Checking: ${fullUrl}`);
+
+    try {
+      const start = Date.now();
+      const res = await fetch(fullUrl, { redirect: 'manual' });
+      const status = res.status;
+
+      let finalUrl = fullUrl;
+      let redirectChain = [];
+      let currentRes = res;
+      let hopCount = 0;
+
+      // Follow redirects manually to detect chains
+      while (currentRes.status >= 300 && currentRes.status < 400 && hopCount < 10) {
+        const location = currentRes.headers.get('location');
+        if (!location) break;
+
+        const nextUrl = new URL(location, finalUrl).toString(); // Handle relative redirects
+        redirectChain.push({ from: finalUrl, to: nextUrl, status: currentRes.status });
+        finalUrl = nextUrl;
+
+        currentRes = await fetch(finalUrl, { redirect: 'manual' });
+        hopCount++;
+      }
+
+      const finalStatus = currentRes.status;
+      const html = await currentRes.text();
+
+      // Analyze
+      const result = {
+        url: urlPath,
+        final_url: finalUrl,
+        status: finalStatus,
+        redirects: redirectChain,
+        title: '',
+        canonical: '',
+        robots: '',
+        word_count: 0,
+        internal_links: []
+      };
+
+      if (redirectChain.length > 1) {
+        results.summary.redirect_chains++;
+        results.issues.push({ type: 'redirect_chain', url: urlPath, chain: redirectChain });
+      }
+
+      if (finalStatus === 200) {
+        // Title
+        const titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i);
+        result.title = titleMatch ? titleMatch[1].trim() : '';
+
+        if (!result.title) {
+          results.summary.missing_titles++;
+          results.issues.push({ type: 'missing_title', url: urlPath });
+        } else {
+          if (titleMap.has(result.title)) {
+             results.summary.duplicate_titles++;
+             // Only add issue once per duplicate set to avoid noise, or track all
+             results.issues.push({ type: 'duplicate_title', url: urlPath, duplicate_of: titleMap.get(result.title) });
+          } else {
+            titleMap.set(result.title, urlPath);
+          }
+        }
+
+        // Canonical
+        const canonicalMatch = html.match(/<link[^>]*rel=["']canonical["'][^>]*href=["']([^"']+)["'][^>]*>/i);
+        result.canonical = canonicalMatch ? canonicalMatch[1] : '';
+
+        // Robots
+        const robotsMatch = html.match(/<meta[^>]*name=["']robots["'][^>]*content=["']([^"']+)["'][^>]*>/i);
+        result.robots = robotsMatch ? robotsMatch[1] : '';
+
+        // Internal Links (simple regex)
+        const linkRegex = /href=["'](\/[^"']*)["']/g;
+        let match;
+        while ((match = linkRegex.exec(html)) !== null) {
+          const link = match[1];
+          // Filter out obvious non-pages
+          if (!link.startsWith('//') &&
+              !link.match(/\.(png|jpg|jpeg|gif|svg|css|js|ico|xml|json)$/i) &&
+              !link.includes('mailto:') &&
+              !link.includes('tel:')) {
+             result.internal_links.push(link);
+             internalLinksToCheck.add(link);
+          }
+        }
+
+        // Thin Content
+        const bodyContent = html.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '')
+                                .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
+                                .replace(/<[^>]+>/g, ' ')
+                                .replace(/\s+/g, ' ')
+                                .trim();
+        result.word_count = bodyContent.split(' ').length;
+
+        if (result.word_count < 300) {
+           results.summary.thin_pages++;
+           results.issues.push({ type: 'thin_page', url: urlPath, word_count: result.word_count });
+        }
+        results.summary.status_200++;
+      } else if (finalStatus === 404) {
+         results.summary.status_404++;
+         results.issues.push({ type: '404', url: urlPath });
+      } else {
+         results.summary.status_500++; // Group other errors
+      }
+
+      results.details[urlPath] = result;
+
+    } catch (err) {
+      console.error(`Error checking ${urlPath}:`, err.message);
+      results.issues.push({ type: 'error', url: urlPath, error: err.message });
+    }
+  };
+
+  // Run checks with limited concurrency
+  const CONCURRENCY = 5;
+  for (let i = 0; i < urls.length; i += CONCURRENCY) {
+    const chunk = urls.slice(i, i + CONCURRENCY);
+    await Promise.all(chunk.map(checkUrl));
+  }
+
+  // Check discovered internal links for 404s (head request)
+  console.log(`Checking ${internalLinksToCheck.size} unique internal links...`);
+  const internalLinks = [...internalLinksToCheck];
+
+  const checkLink = async (link) => {
+    // skip if already checked as a primary page
+    if (results.details[link]) return;
+
+    try {
+       const fullUrl = new URL(link, BASE_URL).toString();
+       const res = await fetch(fullUrl, { method: 'HEAD' });
+       if (res.status === 404) {
+         results.summary.broken_internal_links++;
+         results.issues.push({ type: 'broken_link', url: link, source: 'internal_scan' });
+       }
+    } catch (e) {
+       // ignore
+    }
+  };
+
+  for (let i = 0; i < internalLinks.length; i += CONCURRENCY) {
+    const chunk = internalLinks.slice(i, i + CONCURRENCY);
+    await Promise.all(chunk.map(checkLink));
+  }
+
+  // Check Robots.txt & Sitemap
+  try {
+    const robotsRes = await fetch(`${BASE_URL}/robots.txt`);
+    if (robotsRes.status !== 200) results.issues.push({ type: 'missing_file', url: '/robots.txt' });
+
+    const sitemapRes = await fetch(`${BASE_URL}/sitemap.xml`);
+    if (sitemapRes.status !== 200) results.issues.push({ type: 'missing_file', url: '/sitemap.xml' });
+  } catch (e) {
+    results.issues.push({ type: 'check_failed', url: 'system_files' });
+  }
+
+  results.summary.total_checked = urls.length;
+
+  // Save Report
+  fs.mkdirSync(path.dirname(REPORT_FILE), { recursive: true });
+  fs.writeFileSync(REPORT_FILE, JSON.stringify(results, null, 2));
   console.log(`Report saved to ${REPORT_FILE}`);
 }
 
-runAudit().catch(console.error);
+main();
