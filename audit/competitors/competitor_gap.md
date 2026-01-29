@@ -1,26 +1,32 @@
-# Competitor Benchmark
 
-## Top Competitors (Hyderabad)
-1. **Yashoda Hospitals** (Domain Authority: High)
-2. **Apollo Hospitals**
-3. **Dr. Raveesh** (Specialist)
-4. **SpineSurgeon.in** (Specialist)
+# Competitor Benchmark: Neuro/Spine Hyderabad
 
-## Content Gaps Identified
-1. **Local Language Content:** No pages found targeting Telugu/Hindi keywords explicitly in URL (e.g., /te/...).
-   - *Opportunity:* Create /telugu/spine-surgery landing page.
-2. **Interactive Tools:** Competitors use "Spine Health Score" calculators. We have `symptoms-checker`.
-3. **Comparison Pages:** "Endoscopic vs Microdiscectomy". We have `blog/endoscopic-vs-microdiscectomy-hyderabad`? (Check inventory).
-4. **Cost Transparency:** Competitors often hide costs. We have explicit cost pages.
-   - `services/spine-surgery-cost-hyderabad` (Word Count: CHECK)
-   - `services/slip-disc-surgery-cost-hyderabad`
+**Date:** 2025-05-23
 
-## Keyword Gaps
-- "best spine surgeon in kphb" (Hyper-local)
-- "laser spine surgery hyderabad" (If applicable)
-- "spine surgery insurance coverage hyderabad"
+## Top Competitors
 
-## SERP Features
-- **FAQ Schema:** Essential. We have it on some pages? (Check schema inventory).
-- **Video Carousel:** Competitors use YouTube embeds.
-- **Local Pack:** GMB optimization is key (Address schema helps).
+1.  **Dr. Raveesh Sunkara (drraveesh.com)**
+    *   **Strengths:** Dominates SERPs for specific condition/treatment keywords (Sciatica, Endoscopic). Strong personal branding.
+    *   **Content:** Dedicated pages for almost every condition. Good speed.
+    *   **Gap:** Design is generic. Content depth varies.
+
+2.  **Asian Spine Hospital (asianspinehospital.com)**
+    *   **Strengths:** Domain authority as a specialized hospital. "Full Endoscopic" branding.
+    *   **Gap:** Corporate feel. Less personal connection.
+
+3.  **Epione Pain & Spine (epionepainandspine.com)**
+    *   **Strengths:** Aggressive "No Surgery" marketing. fast pages.
+    *   **Gap:** Not neurosurgery focused.
+
+4.  **Major Hospitals (Apollo, Yashoda, KIMS)**
+    *   **Strengths:** massive DR.
+    *   **Gap:** Page paths are deep (e.g., `apollohospitals.com/hyderabad/neuro/doctor`). Specific doctor pages are weak on content.
+
+## Dr. Sayuj's Position
+*   **Unique Selling Proposition (USP):** German-trained (Authority), "Endoscopic Pioneer" (Niche), "Awake Brain Surgery" (Niche).
+*   **Opportunity:** Beat hospitals on *depth* of content per page. Beat Dr. Raveesh on *Schema/Technical SEO* and *Visual Trust* (Dr. Sayuj's site design is superior).
+
+## Strategy
+1.  **Local Dominance:** Own "Malakpet", "Dilsukhnagar", "LB Nagar" keywords where Yashoda Malakpet is strong, but also target "Banjara Hills/Jubilee Hills" for premium patients.
+2.  **Schema Wins:** Implement the missing `MedicalWebPage` schema on condition pages to get "Medical Reviewer" rich snippets which competitors might lack.
+3.  **Video/Visual:** Leverage the video content (Doctor Intro, Testimonials) which is a strong differentiator against text-heavy competitor pages.

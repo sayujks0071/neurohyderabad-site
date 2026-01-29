@@ -1,34 +1,23 @@
-{
-  "https://www.drsayuj.info": [
-    "WebSite",
-    null,
-    "Hospital",
-    "FAQPage",
-    "BreadcrumbList"
-  ],
-  "https://www.drsayuj.info/services/minimally-invasive-spine-surgery": [
-    "WebSite",
-    null,
-    "Hospital",
-    "MedicalBusiness",
-    "MedicalWebPage",
-    "BreadcrumbList",
-    "FAQPage",
-    "FAQPage"
-  ],
-  "https://www.drsayuj.info/neurosurgeon-hyderabad": [
-    "WebSite",
-    null,
-    "Hospital",
-    "MedicalClinic",
-    "BreadcrumbList",
-    "FAQPage"
-  ],
-  "https://www.drsayuj.info/blog/epilepsy-surgery-options-hyderabad": [
-    "WebSite",
-    null,
-    "Hospital",
-    "BreadcrumbList",
-    null
-  ]
-}
+
+[
+  {
+    "pattern": "/services/*",
+    "schema_types": ["MedicalWebPage", "MedicalService", "BreadcrumbList", "FAQPage"],
+    "ymyl_status": "High Compliance"
+  },
+  {
+    "pattern": "/conditions/[slug]",
+    "schema_types": ["MedicalCondition", "FAQPage", "BreadcrumbList"],
+    "ymyl_status": "Medium Compliance (Missing MedicalWebPage/reviewedBy)"
+  },
+  {
+    "pattern": "/",
+    "schema_types": ["WebSite", "Physician", "Hospital"],
+    "ymyl_status": "High Compliance"
+  },
+  {
+    "pattern": "/blog/[slug]",
+    "schema_types": ["Article", "BreadcrumbList"],
+    "ymyl_status": "To Be Verified (Assumed Article)"
+  }
+]

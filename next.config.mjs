@@ -72,11 +72,18 @@ const nextConfig = {
         destination: '/sitemap.xml',
         permanent: true,
       },
-      // CRITICAL: Apex domain redirect to www (single hop 301)
+      // CRITICAL: Redirect drsayuj.com (apex) to www.drsayuj.info (Canonical)
       {
         source: '/((?!api|_next|images|favicon.ico|robots.txt|sitemap.xml|site.webmanifest).*)',
         has: [{ type: 'host', value: 'drsayuj.com' }],
-        destination: 'https://www.drsayuj.com/$1',
+        destination: 'https://www.drsayuj.info/$1',
+        permanent: true,
+      },
+      // CRITICAL: Redirect www.drsayuj.com to www.drsayuj.info (Canonical)
+      {
+        source: '/((?!api|_next|images|favicon.ico|robots.txt|sitemap.xml|site.webmanifest).*)',
+        has: [{ type: 'host', value: 'www.drsayuj.com' }],
+        destination: 'https://www.drsayuj.info/$1',
         permanent: true,
       },
       // CRITICAL: Apex domain redirect for drsayuj.info to www (single hop 301)

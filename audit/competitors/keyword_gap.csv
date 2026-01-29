@@ -1,8 +1,22 @@
-keyword,intent,suggested_target_page
-spine surgery cost in hyderabad,Commercial,services/spine-surgery-cost-hyderabad
-spine surgeon telugu,Informational,blog/spine-surgery-guide-telugu
-laser spine surgery hyderabad,Commercial,services/laser-spine-surgery-hyderabad
-spine surgery insurance hyderabad,Transactional,blog/spine-surgery-insurance-guide
-best neurosurgeon kphb,Local,locations/neurosurgeon-kphb
-endoscopic vs microdiscectomy,Informational,blog/endoscopic-vs-microdiscectomy-comparison
-second opinion spine surgery,Commercial,services/spine-surgery-second-opinion
+
+keyword,intent,suggested_target_page,priority
+sciatica treatment hyderabad,Treatment,/conditions/sciatica-pain-treatment-hyderabad,High
+endoscopic spine surgery cost hyderabad,Commercial,/services/spine-surgery-cost-hyderabad,High
+neurosurgeon malakpet,Local,/locations/malakpet,High
+slip disc surgery hyderabad,Surgical,/conditions/slip-disc-treatment-hyderabad,High
+brain tumor surgery cost hyderabad,Commercial,/blog/brain-tumor-surgery-cost-hyderabad,Medium
+awake craniotomy hyderabad,Niche,/services/awake-craniotomy-hyderabad,Medium
+lumbar canal stenosis treatment hyderabad,Condition,/conditions/spinal-stenosis-treatment-hyderabad,Medium
+spondylolisthesis surgery hyderabad,Condition,/conditions/spondylolisthesis-treatment-hyderabad,Medium
+best spine doctor in hyderabad,Authority,/about,Medium
+trigeminal neuralgia mvd surgery hyderabad,Specific,/conditions/trigeminal-neuralgia-treatment-hyderabad,Low
+laser spine surgery vs endoscopic,Comparison,/blog/endoscopic-vs-microdiscectomy-hyderabad,Low
+neurosurgeon second opinion hyderabad,High Intent,/services/kims-spine-surgery-second-opinion,Low
+pediatric neurosurgeon hyderabad,Service,/services/pediatric-neurosurgery,Low
+l4 l5 disc bulge treatment hyderabad,Specific,/conditions/slip-disc-treatment-hyderabad,Low
+neck pain specialist hyderabad,Symptom,/conditions/neck-pain-treatment-hyderabad,Low
+back pain doctor near me,Local,/locations,High
+spine surgeon banjara hills,Local,/locations/banjara-hills,Medium
+endoscopic discectomy recovery time,Info,/services/endoscopic-discectomy-hyderabad,Low
+best hospital for spine surgery in hyderabad,Hospital,/locations/malakpet,Medium
+sciatica pain relief hyderabad,Relief,/conditions/sciatica-pain-treatment-hyderabad,High
