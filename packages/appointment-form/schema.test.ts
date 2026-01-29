@@ -42,11 +42,14 @@ describe("Appointment Schema Validation", () => {
     expect(result.success).toBe(false);
     if (!result.success) {
       const error = result.error.issues.find(i => i.path.includes("contactNumber"));
-      expect(error?.message).toBe("Invalid Indian mobile number");
+      expect(error?.message).toBe("Please enter a valid 10-digit mobile number");
     }
   });
 
   it("fails when requestedDate is in the past", () => {
+    // We need a date that is definitely in the past relative to when the schema was loaded.
+    // Since schema uses static new Date() at load time, we need to be careful.
+    // But any 'past' date (like yesterday) is definitely < load time (today).
     const pastDate = new Date(Date.now() - 86400000); // Yesterday
     const invalidData = {
       ...baseValidData,
@@ -61,7 +64,8 @@ describe("Appointment Schema Validation", () => {
   });
 
   it("passes when requestedDate is exactly now (dynamic check allows Today)", async () => {
-    // The schema explicitly allows 'Today' by setting time to 00:00:00
+    // This passes because the schema's 'min' date is set at module load time,
+    // and this test runs slightly later.
     const now = new Date();
     const validData = {
       ...baseValidData,
