@@ -26,5 +26,5 @@
     }
   ],
   "expected_impact": "Reduced Cumulative Layout Shift (CLS) on the Home Page by preventing the footer/content below from shifting down when the lazy-loaded video section hydrates/paints.",
-  "verification_steps": "Manual verification involves loading the home page on a desktop viewport width (~1200px) and observing if the layout shifts when scrolling to the video section. Automated verification via `pnpm build` ensures no regressions. Note: GitHub CI failed due to billing/infrastructure issues, but local `pnpm build` and `pnpm test` passed successfully."
+  "verification_steps": "Manual verification involves loading the home page on a desktop viewport width (~1200px) and observing if the layout shifts when scrolling to the video section. Automated verification via `pnpm build` ensures no regressions. Note: GitHub CI failed due to billing issues. Local `pnpm build` passed. Local linting verified manually on modified file due to repo-level tooling mismatch (ESLint 9 vs Next 16)."
 }
