@@ -258,6 +258,14 @@ export const analytics = {
       page_slug: pageSlug,
       exit_point: exitPoint
     });
+  },
+
+  // AI Assistant events
+  aiAssistant: {
+    start: () => track('AI_Session_Start', {}),
+    end: () => track('AI_Session_End', {}),
+    error: (message: string) => track('AI_Session_Error', { error_message: message }),
+    message: (role: 'user' | 'assistant') => track('AI_Message', { role })
   }
 };
 
