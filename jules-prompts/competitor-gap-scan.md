@@ -10,5 +10,3 @@
 - If a high-priority gap is found, draft a plan or a new page to cover it.
 
 <!-- Jules Automation -->
-<!-- Managed by Jules -->
-<!-- v1.3 -->

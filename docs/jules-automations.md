@@ -22,6 +22,10 @@ The workflows are located in `.github/workflows/` and are prefixed with `jules-`
 4. **Create Issue:** If unique, it creates a new GitHub Issue with the content of the prompt file and applies the label `jules`.
 5. **Jules Picks Up:** Jules (or an assigned engineer) monitors the `jules` label and executes the instructions in the issue body.
 
+## Manual Execution
+
+You can manually trigger any workflow via the **Actions** tab in GitHub. When running manually, you can optionally provide a custom path to a prompt file (e.g., `jules-prompts/custom-task.md`). If left blank, it uses the default prompt.
+
 ## Editing Prompts
 
 To change what Jules does for a specific task, simply edit the corresponding markdown file in `jules-prompts/`.
@@ -41,12 +45,12 @@ The prompt file path and the base title for the issue are configurable via the e
 
 ```yaml
 env:
-  PROMPT_FILE: jules-prompts/seo-reprint.md
+  # Used if no input provided
+  PROMPT_FILE: ${{ inputs.prompt_file || 'jules-prompts/seo-reprint.md' }}
   ISSUE_TITLE: "[Jules] SEO Reprint Task"
 ```
 
 To change the schedule, you must edit the cron expression in the `on.schedule` section of the workflow YAML file.
-Note: The schedule triggers are defined statically in the YAML `on: schedule` block and cannot be set via environment variables.
 
 ### Competitor Analysis
 The "Competitor Gap Scan" workflow relies on the list of competitors defined in `AGENTS.md`. To add or remove competitors:
@@ -57,4 +61,3 @@ The "Competitor Gap Scan" workflow relies on the list of competitors defined in 
 
 - **Issue not created:** Check the Action logs. Common reasons include GitHub API rate limits or the issue already existing.
 - **Wrong Schedule:** Ensure you've converted IST to UTC correctly using a converter. GitHub Actions use UTC.
-<!-- v1.3 - Verified -->

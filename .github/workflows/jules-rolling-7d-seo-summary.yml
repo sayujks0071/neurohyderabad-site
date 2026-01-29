@@ -1,11 +1,16 @@
 name: Jules Rolling 7-Day SEO Summary
-# v1.3 - Verified
 # Managed by Jules (Daily Schedule)
 on:
   schedule:
     # 09:15 IST (India Standard Time) = 03:45 UTC
+    # To change the schedule, edit the cron expression below.
     - cron: "45 3 * * *"
   workflow_dispatch:
+    inputs:
+      prompt_file:
+        description: 'Path to prompt file'
+        required: false
+        default: 'jules-prompts/rolling-7d-seo-summary.md'
 
 permissions:
   issues: write
@@ -21,8 +26,8 @@ jobs:
       - name: Create Issue
         uses: actions/github-script@v7
         env:
-          # Note: Schedule is defined in 'on.schedule.cron' and cannot be parameterized via env vars.
-          PROMPT_FILE: jules-prompts/rolling-7d-seo-summary.md
+          # Use input if provided (manual run), otherwise default
+          PROMPT_FILE: ${{ inputs.prompt_file || 'jules-prompts/rolling-7d-seo-summary.md' }}
           ISSUE_TITLE: "[Jules] Rolling 7-Day SEO Summary"
         with:
           script: |
