@@ -1,4 +1,4 @@
-import { generateText } from 'ai';
+import { streamText } from 'ai';
 import { NextRequest } from 'next/server';
 import { rateLimit } from '../../../../src/lib/rate-limit';
 import { getTextModel, hasAIConfig } from '@/src/lib/ai/gateway';
@@ -28,11 +28,19 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    const body = await request.json();
-    const { message, conversationHistory = [], pageSlug, service } = body;
+    const { messages, pageSlug, service } = await request.json();
 
-    if (!message) {
-      return new Response('Message is required', { status: 400 });
+    if (!messages || !Array.isArray(messages) || messages.length === 0) {
+      return new Response('Messages array is required', { status: 400 });
+    }
+
+    // Get the last user message for context retrieval
+    const lastUserMessage = messages
+      .filter(m => m.role === 'user')
+      .pop()?.content;
+
+    if (!lastUserMessage) {
+      return new Response('No user message found', { status: 400 });
     }
 
     // Check if AI configuration is available
@@ -48,7 +56,6 @@ export async function POST(request: NextRequest) {
     // Get relevant context from MCP/Codex CLI (replaces Gemini File API)
     // Use Promise.race with timeout to prevent blocking
     let medicalContext = '';
-    let medicalSources: any[] = [];
     
     try {
       const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 
@@ -71,7 +78,7 @@ export async function POST(request: NextRequest) {
           params: {
             name: 'get_medical_info',
             arguments: {
-              query: message
+              query: lastUserMessage
             }
           }
         })
@@ -91,10 +98,9 @@ export async function POST(request: NextRequest) {
           
           if (medicalText && medicalText !== 'No specific match found.') {
             medicalContext = `\n\nRELEVANT MEDICAL INFORMATION FROM OUR DOCUMENTS:\n${medicalText}\n`;
-            medicalSources = sources;
             
-            if (medicalSources.length > 0) {
-              medicalContext += `\nSources: ${medicalSources.map((s: any) => s.fileName || s.uri || s).join(', ')}\n`;
+            if (sources.length > 0) {
+              medicalContext += `\nSources: ${sources.map((s: any) => s.fileName || s.uri || s).join(', ')}\n`;
             }
           }
         }
@@ -111,39 +117,16 @@ export async function POST(request: NextRequest) {
     // Build system prompt
     const systemPrompt = `${DR_SAYUJ_SYSTEM_PROMPT}${medicalContext ? `\n\nADDITIONAL DOCUMENT CONTEXT:\n${medicalContext}` : ''}`;
 
-    // Build messages array
-    const messages = [
-      { role: 'system' as const, content: systemPrompt },
-      ...conversationHistory.map((msg: any) => ({
-        role: (msg.type === 'user' ? 'user' : 'assistant') as 'user' | 'assistant',
-        content: msg.content
-      })),
-      { role: 'user' as const, content: message }
-    ];
+    // Stream text using AI SDK
+    const result = streamText({
+      model: getTextModel(),
+      system: systemPrompt,
+      messages,
+      temperature: 0.7,
+    });
 
-    // Use AI SDK's generateText for non-streaming response (more reliable across browsers)
-    try {
-      const result = await generateText({
-        model: getTextModel(),
-        messages,
-        temperature: 0.7,
-      });
-
-      // Return JSON response (non-streaming for better browser compatibility)
-      return Response.json({
-        content: result.text,
-        sources: medicalSources,
-      });
-    } catch (generateError) {
-      console.error('generateText error:', generateError);
-      return Response.json(
-        {
-          error: 'Generation error',
-          message: "I'm having trouble generating a response right now. Please try again or call +91-9778280044 for immediate assistance."
-        },
-        { status: 500 }
-      );
-    }
+    // Return UI message stream response for useChat (AI SDK v4+)
+    return result.toUIMessageStreamResponse();
 
   } catch (error) {
     console.error('Error processing AI chat request:', error);

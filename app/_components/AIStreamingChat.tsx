@@ -1,18 +1,14 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
+import { useChat } from '@ai-sdk/react';
+import { DefaultChatTransport, type UIMessage } from 'ai';
 import { useStatsigEvents } from '../../src/lib/statsig-events';
 
 interface AIStreamingChatProps {
   pageSlug: string;
   service?: string;
   initialMessage?: string;
-}
-
-interface Message {
-  id: string;
-  role: 'user' | 'assistant';
-  content: string;
 }
 
 /**
@@ -31,17 +27,53 @@ export default function AIStreamingChat({
 }: AIStreamingChatProps) {
   const [showEmergencyAlert, setShowEmergencyAlert] = useState(false);
   const [input, setInput] = useState('');
-  const [messages, setMessages] = useState<Message[]>([
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const { logAppointmentBooking, logContactFormSubmit } = useStatsigEvents();
+
+  // Create transport with dependencies
+  const transport = useMemo(() => new DefaultChatTransport({
+    api: '/api/ai/chat',
+    body: { pageSlug, service },
+  }), [pageSlug, service]);
+
+  const initialMessages = useMemo<UIMessage[]>(() => [
     {
       id: 'initial',
       role: 'assistant',
-      content: initialMessage,
+      parts: [{ type: 'text', text: initialMessage }]
     },
-  ]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-  const { logAppointmentBooking, logContactFormSubmit } = useStatsigEvents();
+  ], [initialMessage]);
+
+  // Initialize useChat hook
+  const { messages, sendMessage, status, error } = useChat({
+    transport,
+    messages: initialMessages,
+    onFinish: (options) => {
+      const message = options.message;
+      // Get text content from parts
+      const textContent = message.parts
+        .filter(part => part.type === 'text')
+        .map(part => (part as any).text)
+        .join(' ');
+
+      const emergencyKeywords = ['emergency', 'urgent', 'immediately', 'call', 'stroke', 'seizure'];
+      const hasEmergency = emergencyKeywords.some(keyword => 
+        textContent.toLowerCase().includes(keyword)
+      );
+      
+      if (hasEmergency) {
+        setShowEmergencyAlert(true);
+      }
+
+      logContactFormSubmit('ai_streaming_chat', true);
+    },
+    onError: (error) => {
+      console.error('Chat error:', error);
+      logContactFormSubmit('ai_streaming_chat', false);
+    }
+  });
+
+  const isLoading = status === 'submitted' || status === 'streaming';
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -51,128 +83,26 @@ export default function AIStreamingChat({
     scrollToBottom();
   }, [messages]);
 
-  const sendMessage = async (content: string) => {
-    if (!content.trim() || isLoading) return;
-
-    const userMessage: Message = {
-      id: Date.now().toString(),
-      role: 'user',
-      content: content.trim(),
-    };
-
-    setMessages(prev => [...prev, userMessage]);
-    setInput('');
-    setIsLoading(true);
-    setError(null);
-
-    // Log user interaction
-    logAppointmentBooking('ai_streaming_interaction', service || 'general');
-
-    try {
-      const response = await fetch('/api/ai/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          message: content.trim(),
-          conversationHistory: messages.slice(-10).map(m => ({
-            type: m.role,
-            content: m.content,
-          })),
-          pageSlug,
-          service,
-        }),
-      });
-
-      if (!response.ok) {
-        let errorText = '';
-        let errorData: any = null;
-        try {
-          const contentType = response.headers.get('content-type');
-          if (contentType?.includes('application/json')) {
-            errorData = await response.json();
-            errorText = errorData.message || errorData.error || 'Unknown error';
-          } else {
-            errorText = await response.text();
-          }
-        } catch (e) {
-          errorText = 'Unknown error';
-        }
-        console.error('API Error:', response.status, errorText);
-        
-        const errorMessage: Message = {
-          id: (Date.now() + 1).toString(),
-          role: 'assistant',
-          content: errorData?.message || 
-            (response.status === 429 
-              ? 'Too many requests. Please wait a moment and try again.' 
-              : response.status === 500
-              ? 'Server error. Please try again or call +91-9778280044.'
-              : `Failed to get AI response. Please try again or call +91-9778280044.`),
-        };
-        setMessages(prev => [...prev, errorMessage]);
-        setIsLoading(false);
-        return;
-      }
-
-      // Use response.text() instead of ReadableStream for better browser compatibility
-      // This is more reliable across all browsers, including incognito mode
-      const fullContent = await response.text();
-
-      // Ensure we have content
-      if (!fullContent.trim()) {
-        const errorMessage: Message = {
-          id: (Date.now() + 1).toString(),
-          role: 'assistant',
-          content: "No response received. Please check your connection and try again, or call +91-9778280044.",
-        };
-        setMessages(prev => [...prev, errorMessage]);
-        setIsLoading(false);
-        return;
-      }
-
-      // Create assistant message with the full content
-      const assistantMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        role: 'assistant',
-        content: fullContent.trim(),
-      };
-
-      setMessages(prev => [...prev, assistantMessage]);
-
-      // Check for emergency keywords
-      const emergencyKeywords = ['emergency', 'urgent', 'immediately', 'call', 'stroke', 'seizure'];
-      const hasEmergency = emergencyKeywords.some(keyword => 
-        fullContent.toLowerCase().includes(keyword)
-      );
-      
-      if (hasEmergency) {
-        setShowEmergencyAlert(true);
-      }
-
-      logContactFormSubmit('ai_streaming_chat', true);
-    } catch (err) {
-      console.error('Chat error:', err);
-      setError(err instanceof Error ? err : new Error('Failed to send message'));
-      logContactFormSubmit('ai_streaming_chat', false);
-      
-      const errorMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        role: 'assistant',
-        content: "I'm having trouble right now. Please call +91-9778280044 for immediate assistance.",
-      };
-      setMessages(prev => [...prev, errorMessage]);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
   };
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await sendMessage(input);
+    if (!input.trim() || isLoading) return;
+
+    logAppointmentBooking('ai_streaming_interaction', service || 'general');
+
+    const userMessage = input;
+    setInput('');
+    // Use helper object with text property for convenience
+    await sendMessage({ text: userMessage });
+  };
+
+  // Wrapper for quick actions
+  const handleQuickAction = async (action: string) => {
+    logAppointmentBooking('ai_streaming_interaction', service || 'general');
+    await sendMessage({ text: action });
   };
 
   const quickActions = [
@@ -219,22 +149,30 @@ export default function AIStreamingChat({
 
         {/* Messages */}
         <div className="h-96 overflow-y-auto p-4 space-y-4">
-          {messages.map((message) => (
-            <div
-              key={message.id}
-              className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
-            >
+          {messages.map((message) => {
+            // Helper to get text content from parts
+            const textContent = message.parts
+              .filter(part => part.type === 'text')
+              .map(part => (part as any).text)
+              .join('');
+
+            return (
               <div
-                className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
-                  message.role === 'user'
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-100 text-gray-800'
-                }`}
+                key={message.id}
+                className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
-                <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                <div
+                  className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
+                    message.role === 'user'
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-gray-100 text-gray-800'
+                  }`}
+                >
+                  <p className="text-sm whitespace-pre-wrap">{textContent}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
           
           {isLoading && (
             <div className="flex justify-start">
@@ -260,7 +198,7 @@ export default function AIStreamingChat({
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Quick Actions */}
+        {/* Quick Actions - Only show if just initial message */}
         {messages.length <= 1 && (
           <div className="p-4 border-t border-gray-200">
             <p className="text-sm text-gray-600 mb-3">Quick actions:</p>
@@ -268,7 +206,7 @@ export default function AIStreamingChat({
               {quickActions.map((action, index) => (
                 <button
                   key={index}
-                  onClick={() => sendMessage(action)}
+                  onClick={() => handleQuickAction(action)}
                   disabled={isLoading}
                   className="text-xs bg-blue-50 text-blue-700 px-3 py-1 rounded-full hover:bg-blue-100 transition-colors disabled:opacity-50"
                 >
@@ -280,7 +218,7 @@ export default function AIStreamingChat({
         )}
 
         {/* Input Form */}
-        <form onSubmit={onSubmit} className="p-4 border-t border-gray-200">
+        <form onSubmit={onFormSubmit} className="p-4 border-t border-gray-200">
           <div className="flex space-x-2">
             <input
               type="text"
