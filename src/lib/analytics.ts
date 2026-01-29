@@ -260,7 +260,7 @@ export const analytics = {
     });
   },
 
-  // AI Assistant events
+  // AI Assistant events (Middleware RUM)
   aiAssistant: {
     start: () => track('AI_Session_Start', {}),
     end: () => track('AI_Session_End', {}),
