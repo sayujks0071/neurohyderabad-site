@@ -9,7 +9,7 @@
  * - Internal linking optimization
  */
 
-import { sleep, fetch } from "workflow";
+import { fetch } from "workflow";
 import { generateText } from "ai";
 import { getTextModel, hasAIConfig } from "@/src/lib/ai/gateway";
 
@@ -41,29 +41,45 @@ export async function runDailyContentOptimization(): Promise<ContentResult> {
   const errors: string[] = [];
 
   try {
-    // Step 1: Check for content that needs freshness update
-    const freshnessResult = await updateContentFreshness();
-    actions.push(...freshnessResult.actions);
+    // Run all optimization steps in parallel for better performance
+    const results = await Promise.allSettled([
+      updateContentFreshness(),
+      generateMissingMetaDescriptions(),
+      suggestInternalLinks(),
+      checkContentQuality(),
+    ]);
 
-    await sleep("2s");
+    const [freshnessRes, metaRes, linkRes, qualityRes] = results;
+
+    // Step 1: Check for content that needs freshness update
+    if (freshnessRes.status === "fulfilled") {
+      actions.push(...freshnessRes.value.actions);
+    } else {
+      errors.push(`Freshness update failed: ${freshnessRes.reason}`);
+    }
 
     // Step 2: Generate missing meta descriptions
-    const metaResult = await generateMissingMetaDescriptions();
-    actions.push(...metaResult.actions);
-    errors.push(...metaResult.errors);
-
-    await sleep("2s");
+    if (metaRes.status === "fulfilled") {
+      actions.push(...metaRes.value.actions);
+      errors.push(...metaRes.value.errors);
+    } else {
+      errors.push(`Meta generation failed: ${metaRes.reason}`);
+    }
 
     // Step 3: Suggest internal links
-    const linkResult = await suggestInternalLinks();
-    actions.push(...linkResult.actions);
-
-    await sleep("2s");
+    if (linkRes.status === "fulfilled") {
+      actions.push(...linkRes.value.actions);
+    } else {
+      errors.push(`Link suggestion failed: ${linkRes.reason}`);
+    }
 
     // Step 4: Check content quality scores
-    const qualityResult = await checkContentQuality();
-    actions.push(...qualityResult.actions);
-    errors.push(...qualityResult.issues);
+    if (qualityRes.status === "fulfilled") {
+      actions.push(...qualityRes.value.actions);
+      errors.push(...qualityRes.value.issues);
+    } else {
+      errors.push(`Quality check failed: ${qualityRes.reason}`);
+    }
 
     console.log(`[Content Workflow] Completed ${taskId}`);
 
@@ -141,19 +157,24 @@ async function generateMissingMetaDescriptions(): Promise<{
     },
   ];
 
-  for (const page of pagesToOptimize) {
-    try {
-      const { text } = await generateText({
-        model: getTextModel(),
-        prompt: `Generate a compelling SEO meta description (150-160 characters) for a page about "${page.title}" by Dr. Sayuj, a neurosurgeon in Hyderabad. Focus on: ${page.focus}. Include a call to action.`,
-        temperature: 0.7,
-      });
+  // Process pages in parallel
+  await Promise.all(
+    pagesToOptimize.map(async (page) => {
+      try {
+        const { text } = await generateText({
+          model: getTextModel(),
+          prompt: `Generate a compelling SEO meta description (150-160 characters) for a page about "${page.title}" by Dr. Sayuj, a neurosurgeon in Hyderabad. Focus on: ${page.focus}. Include a call to action.`,
+          temperature: 0.7,
+        });
 
-      actions.push(`Generated meta for ${page.path}: "${text.slice(0, 100)}..."`);
-    } catch (error) {
-      errors.push(`Failed to generate meta for ${page.path}`);
-    }
-  }
+        actions.push(
+          `Generated meta for ${page.path}: "${text.slice(0, 100)}..."`
+        );
+      } catch (error) {
+        errors.push(`Failed to generate meta for ${page.path}`);
+      }
+    })
+  );
 
   return { actions, errors };
 }
