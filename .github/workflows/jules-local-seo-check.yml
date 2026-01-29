@@ -1,11 +1,16 @@
 name: Jules Local SEO Check
-# v1.3 - Verified
 # Managed by Jules (Daily Schedule)
 on:
   schedule:
     # 09:30 IST (India Standard Time) = 04:00 UTC
+    # To change the schedule, edit the cron expression below.
     - cron: "0 4 * * *"
   workflow_dispatch:
+    inputs:
+      prompt_file:
+        description: 'Path to prompt file'
+        required: false
+        default: 'jules-prompts/local-seo-check.md'
 
 permissions:
   issues: write
@@ -21,8 +26,8 @@ jobs:
       - name: Create Issue
         uses: actions/github-script@v7
         env:
-          # Note: Schedule is defined in 'on.schedule.cron' and cannot be parameterized via env vars.
-          PROMPT_FILE: jules-prompts/local-seo-check.md
+          # Use input if provided (manual run), otherwise default
+          PROMPT_FILE: ${{ inputs.prompt_file || 'jules-prompts/local-seo-check.md' }}
           ISSUE_TITLE: "[Jules] Local SEO Check"
         with:
           script: |

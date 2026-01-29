@@ -12,5 +12,3 @@ Analyze the current blog posts and service pages. Identify content that is:
 - Submit a PR with the updated content.
 
 <!-- Jules Automation -->
-<!-- Managed by Jules -->
-<!-- v1.3 -->
