@@ -1,31 +1,30 @@
 {
-  "timestamp": "2025-05-23T05:50:00Z",
-  "page_types": {
+  "timestamp": "2026-01-29T05:37:33Z",
+  "commit": "f1bbe12",
+  "notes": {
     "home": {
-      "url": "/",
-      "notes": "Previous CLS issue in PatientEducationVideos resolved with Skeleton. LCP optimized with CSS gradient hero. DoctorCard image has priority."
-    },
-    "location": {
-      "url": "/locations/malakpet",
-      "notes": "Static generation used. Map component uses facade pattern."
-    },
-    "condition": {
-      "url": "/conditions/[slug]",
-      "notes": "Hero Image uses `sizes` attribute correctly (verified)."
+      "suspected_bottleneck": "CLS potential in lazy-loaded PatientEducationVideos component due to skeleton height mismatch.",
+      "fix": "Updated PatientEducationVideosSkeleton to include 4 lines of description placeholder instead of 3, matching the actual content length (~160 chars) on desktop."
     },
     "appointment": {
-      "url": "/appointments",
-      "notes": "AppointmentScheduler CLS fixed previously."
+      "LCP": "Text-based LCP (H1). Optimized via Server Component (BookingHeroContent) passed to Client Component.",
+      "notes": "Large background blur elements might affect paint performance (INP/LCP proxy), but prioritized CLS fix on Home first."
+    },
+    "location": {
+      "LCP": "Text-based LCP. Lightweight page structure.",
+      "notes": "Good baseline performance observed."
+    },
+    "condition": {
+      "LCP": "H1 or Hero Image (if present). Hero image uses priority and sizes.",
+      "notes": "Good baseline performance observed."
     }
   },
-  "bottleneck_identified": {
-    "type": "CLS",
-    "page_type": "Home",
-    "description": "PatientEducationVideos component was lazy-loaded with a generic placeholder (h-[1700px] md:h-[600px]) that did not match the grid layout of the actual content, causing layout shifts when the component loaded."
-  },
-  "fix_implemented": {
-    "description": "Created high-fidelity `PatientEducationVideosSkeleton` mirroring the grid structure (header, 3 cards with aspect-video images) and applied it to both `dynamic` import loading prop and `LazySection` placeholder in `app/page.tsx`.",
-    "expected_impact": "Eliminates layout shift when PatientEducationVideos loads, as the skeleton occupies the exact same space and layout as the final content.",
-    "verification": "Visual verification using Playwright screenshot confirmed the skeleton matches the component layout. Build and tests passed."
-  }
+  "changes": [
+    {
+      "file": "app/_components/skeletons/PatientEducationVideosSkeleton.tsx",
+      "description": "Increased description skeleton lines from 3 to 4."
+    }
+  ],
+  "expected_impact": "Reduced Cumulative Layout Shift (CLS) on the Home Page by preventing the footer/content below from shifting down when the lazy-loaded video section hydrates/paints.",
+  "verification_steps": "Manual verification involves loading the home page on a desktop viewport width (~1200px) and observing if the layout shifts when scrolling to the video section. Automated verification via `pnpm build` ensures no regressions."
 }
