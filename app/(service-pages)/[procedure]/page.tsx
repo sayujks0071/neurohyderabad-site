@@ -6,6 +6,10 @@ import { SITE_URL } from '@/src/lib/seo';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import { getLocationById } from '@/src/data/locations';
 
+// Ensure this route is fully statically generated (no dynamic fallback SSR).
+export const dynamic = 'force-static';
+export const dynamicParams = false;
+
 type ProcedureKey =
   | 'endoscopic-discectomy'
   | 'minimally-invasive-spine-surgery'

@@ -12,6 +12,10 @@ import { generateBlogMetadata } from '@/src/lib/blog-seo';
 import BlogLayout from '@/app/_components/BlogLayout';
 import { SITE_URL } from '@/src/lib/seo';
 
+// Ensure this route is fully statically generated (no dynamic fallback SSR).
+export const dynamic = 'force-static';
+export const dynamicParams = false;
+
 interface PageParams {
   params: Promise<{
     slug: string;

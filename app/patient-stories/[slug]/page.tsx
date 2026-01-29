@@ -9,6 +9,10 @@ import SchemaScript from '@/app/_components/SchemaScript';
 import { makeMetadata } from '@/app/_lib/meta';
 import { SITE_URL } from '@/src/lib/seo';
 
+// Ensure this route is fully statically generated (no dynamic fallback SSR).
+export const dynamic = 'force-static';
+export const dynamicParams = false;
+
 interface PageProps {
   params: Promise<{
     slug: string;
