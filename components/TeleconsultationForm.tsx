@@ -142,7 +142,7 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="text-2xl font-bold text-gray-800 mb-2">Request Received</h3>
+        <h3 className="text-2xl font-bold text-gray-800 mb-2">Appointment Request Received</h3>
         <p className="text-gray-600 mb-8">
           Appointment request received. Please bring any MRI/CT scans with you. We will confirm via phone shortly.
         </p>

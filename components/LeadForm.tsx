@@ -115,7 +115,7 @@ export default function LeadForm() {
         tabIndex={-1}
         className="bg-green-50 border border-green-200 rounded-2xl p-8 text-center outline-none"
       >
-        <h3 className="text-2xl font-bold text-green-800 mb-4">Request Received</h3>
+        <h3 className="text-2xl font-bold text-green-800 mb-4">Appointment Request Received</h3>
         <p className="text-green-700 mb-6">
           Appointment request received. Please bring any MRI/CT scans with you. We will confirm via phone shortly.
         </p>
