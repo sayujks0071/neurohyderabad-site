@@ -13,6 +13,8 @@ export interface Appointment {
   status: string;
   source: string;
   created_at: string;
+  pain_score?: number | null;
+  mri_scan_available?: boolean;
 }
 
 /** Shape expected by generateWhatsappUrl */
