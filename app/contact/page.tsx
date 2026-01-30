@@ -122,7 +122,7 @@ export default function ContactPage() {
                     </p>
                  </div>
 
-                 <Card padding="lg" className="shadow-md bg-blue-50/50 border-blue-100">
+                 <Card padding="lg">
                     <h3 className="text-xl font-semibold mb-4 text-blue-800">Contact Details</h3>
                     <div className="space-y-4">
                       <div>
@@ -152,7 +152,7 @@ export default function ContactPage() {
             <div className="border-t border-slate-200 pt-10">
               <h3 className="text-2xl font-bold text-center mb-8 text-slate-700">Additional Information</h3>
               <div className="grid md:grid-cols-2 gap-8">
-                <Card padding="lg" className="shadow-md">
+                <Card padding="lg">
                   <h2 className="text-xl font-semibold mb-4 text-blue-700">Office Hours</h2>
                   <div className="space-y-3 text-gray-600">
                     <div className="flex justify-between border-b border-gray-100 pb-2">
@@ -176,7 +176,7 @@ export default function ContactPage() {
                   </div>
                 </Card>
 
-                <Card padding="lg" className="shadow-md">
+                <Card padding="lg">
                   <h2 className="text-xl font-semibold mb-4 text-blue-700">How to Reach Us</h2>
                   <div className="space-y-6">
                     <div>
@@ -199,7 +199,7 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <Card padding="lg" className="shadow-md">
+            <Card padding="lg">
               <h2 className="text-2xl font-semibold mb-6 text-blue-700">How to Reach Us</h2>
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
@@ -210,7 +210,6 @@ export default function ContactPage() {
                   <Button
                     href="/appointments"
                     variant="primary"
-                    className="bg-blue-600 hover:bg-blue-700"
                   >
                     Book Appointment
                   </Button>
@@ -230,7 +229,7 @@ export default function ContactPage() {
               </div>
             </Card>
 
-            <Card padding="lg" className="shadow-md">
+            <Card padding="lg">
               <h2 className="text-2xl font-semibold mb-6 text-blue-700">Convenient Locations</h2>
               <p className="text-gray-600 mb-6">
                 Dr. Sayuj Krishnan serves patients from across Hyderabad. Find travel information and directions from your area:
@@ -238,21 +237,21 @@ export default function ContactPage() {
               <div className="grid md:grid-cols-3 gap-4">
                 <Link
                   href="/neurosurgeon-jubilee-hills"
-                  className="block bg-blue-50 border border-blue-200 rounded-lg p-4 hover:bg-blue-100 transition-colors"
+                  className="relative block bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
                 >
                   <h3 className="font-semibold text-blue-700 mb-2">Near Jubilee Hills</h3>
                   <p className="text-sm text-gray-600">Travel time: 15-20 minutes</p>
                 </Link>
                 <Link
                   href="/neurosurgeon-banjara-hills"
-                  className="block bg-blue-50 border border-blue-200 rounded-lg p-4 hover:bg-blue-100 transition-colors"
+                  className="relative block bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
                 >
                   <h3 className="font-semibold text-blue-700 mb-2">Near Banjara Hills</h3>
                   <p className="text-sm text-gray-600">Travel time: 20-25 minutes</p>
                 </Link>
                 <Link
                   href="/neurosurgeon-hitech-city"
-                  className="block bg-blue-50 border border-blue-200 rounded-lg p-4 hover:bg-blue-100 transition-colors"
+                  className="relative block bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
                 >
                   <h3 className="font-semibold text-blue-700 mb-2">Near HITEC City</h3>
                   <p className="text-sm text-gray-600">Travel time: 25-30 minutes</p>
@@ -260,7 +259,7 @@ export default function ContactPage() {
               </div>
             </Card>
 
-            <Card padding="lg" className="shadow-md">
+            <Card padding="lg">
               <h2 className="text-2xl font-semibold mb-6 text-blue-700">Location Details</h2>
               <div className="grid lg:grid-cols-2 gap-8 items-start">
                 <div className="text-gray-600 space-y-4">
