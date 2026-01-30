@@ -17,8 +17,8 @@ import { patientStories } from '@/src/content/stories';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
 
 const baseMetadata = makeMetadata({
-  title: "Sciatica Treatment Hyderabad | 90% Non-Surgical | Dr Sayuj",
-  description: "Relief from Sciatica leg pain in Hyderabad. 90% non-surgical success with Dr. Sayuj Krishnan. Nerve blocks, Physio & Endoscopic options. Book Consult.",
+  title: "Sciatica Treatment Hyderabad: 90% Non-Surgical Cure | Dr. Sayuj",
+  description: "Permanent Sciatica Relief in Hyderabad. 90% Cured Without Surgery (Nerve Blocks & Physio). Endoscopic Options for Severe Cases. Check Cost & Recovery.",
   canonicalPath: '/conditions/sciatica-pain-treatment-hyderabad',
 });
 
@@ -263,7 +263,7 @@ export default function SciaticaTreatmentPage() {
               Age is often a concern when considering spine surgery. However, traditional open surgery risks (like blood loss and long anesthesia times) are minimized with our endoscopic approach.
             </p>
             <p className="text-gray-700 mb-4">
-              For patients over 60 suffering from <Link href="/symptoms/back-pain" className="text-blue-600 underline">severe back pain</Link> or sciatica, we use a specialized "Awake" or "Twilight" sedation protocol. This avoids general anesthesia and allows the patient to communicate with Dr. Sayuj during the procedure, ensuring safety.
+              For patients over 60 suffering from <Link href="/symptoms/back-pain" className="text-blue-600 underline">severe back pain</Link> or sciatica, we use a specialized <Link href="/services/awake-spine-surgery-hyderabad" className="text-blue-600 underline">"Awake" or "Twilight" sedation protocol</Link>. This avoids general anesthesia and allows the patient to communicate with Dr. Sayuj during the procedure, ensuring safety.
             </p>
             <ul className="space-y-2 mb-6">
               <li className="flex items-center text-sm text-gray-700">
@@ -292,6 +292,64 @@ export default function SciaticaTreatmentPage() {
         </div>
       </section>
 
+      {/* Second Opinion Checklist - Competitor Gap */}
+      <section className="mb-12 bg-blue-50 border border-blue-100 rounded-2xl p-8 shadow-sm">
+        <h2 className="text-2xl font-bold text-blue-900 mb-6">Planning Spine Surgery? Ask These Questions First</h2>
+        <div className="space-y-4">
+           <p className="text-gray-700 mb-4">If you have been advised surgery for sciatica, ensure you are making an informed choice. Ask your surgeon:</p>
+           <ul className="space-y-3">
+              <li className="flex items-start bg-white p-4 rounded-lg shadow-sm">
+                 <span className="text-blue-600 font-bold mr-3">1.</span>
+                 <span className="text-gray-800">"Is this a traditional open surgery or a full endoscopic keyhole procedure?" (Endoscopic has faster recovery)</span>
+              </li>
+              <li className="flex items-start bg-white p-4 rounded-lg shadow-sm">
+                 <span className="text-blue-600 font-bold mr-3">2.</span>
+                 <span className="text-gray-800">"Will you be cutting the back muscles or just dilating them?" (Muscle preservation prevents future back pain)</span>
+              </li>
+              <li className="flex items-start bg-white p-4 rounded-lg shadow-sm">
+                 <span className="text-blue-600 font-bold mr-3">3.</span>
+                 <span className="text-gray-800">"What is your personal success rate for this specific condition?"</span>
+              </li>
+              <li className="flex items-start bg-white p-4 rounded-lg shadow-sm">
+                 <span className="text-blue-600 font-bold mr-3">4.</span>
+                 <span className="text-gray-800">"Can this be done under local anesthesia or sedation?" (Important for elderly/high-risk patients)</span>
+              </li>
+           </ul>
+        </div>
+      </section>
+
+      {/* Visual Patient Journey */}
+      <section className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-blue-700">Your Journey to Pain Relief</h2>
+        <div className="relative">
+           {/* Connecting Line (Desktop visible) */}
+           <div className="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gray-200 -z-10 transform -translate-y-1/2"></div>
+
+           <div className="grid md:grid-cols-4 gap-6 text-center">
+              <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 relative">
+                 <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold relative z-10">1</div>
+                 <h3 className="font-bold text-gray-900 mb-1">Diagnosis</h3>
+                 <p className="text-xs text-gray-600">MRI & Clinical Exam</p>
+              </div>
+              <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 relative">
+                 <div className="w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold relative z-10">2</div>
+                 <h3 className="font-bold text-gray-900 mb-1">Conservative</h3>
+                 <p className="text-xs text-gray-600">Meds & Physio (3-6 wks)</p>
+              </div>
+              <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 relative">
+                 <div className="w-10 h-10 bg-yellow-500 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold relative z-10">3</div>
+                 <h3 className="font-bold text-gray-900 mb-1">Intervention</h3>
+                 <p className="text-xs text-gray-600">Nerve Block (If pain persists)</p>
+              </div>
+              <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 relative">
+                 <div className="w-10 h-10 bg-red-500 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold relative z-10">4</div>
+                 <h3 className="font-bold text-gray-900 mb-1">Surgery</h3>
+                 <p className="text-xs text-gray-600">Endoscopy (Last resort)</p>
+              </div>
+           </div>
+        </div>
+      </section>
+
       <section className="mb-12">
         <h2 className="text-2xl font-semibold mb-6 text-blue-700">Our Treatment Ladder</h2>
         <div className="grid md:grid-cols-3 gap-6">
@@ -312,7 +370,7 @@ export default function SciaticaTreatmentPage() {
           <div className="bg-white p-6 rounded-lg shadow-md border-t-4 border-blue-500">
             <h3 className="text-lg font-bold mb-3 text-gray-900">Step 3: Surgical Solution</h3>
             <p className="text-gray-700 mb-3">
-              <strong>Endoscopic Discectomy</strong> is the gold standard when conservative care fails. It's a keyhole procedure with same-day walking.
+              <Link href="/services/endoscopic-discectomy-hyderabad" className="font-bold text-blue-700 hover:underline">Endoscopic Discectomy</Link> is the gold standard when conservative care fails. It's a keyhole procedure with same-day walking.
             </p>
             <p className="text-sm font-semibold text-blue-700">Reserved for: ~10% of cases</p>
           </div>

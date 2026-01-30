@@ -120,7 +120,7 @@ export const locations: LocationData[] = [
     google_maps_place_url: CANONICAL_MAPS_URL,
     embed_url: REPO_EMBED,
     geo: YASHODA_GEO,
-    areaServedName: "Hitech City",
+    areaServedName: "Hitech City, Hyderabad",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
     sameAs: SOCIAL_PROFILES
@@ -137,7 +137,7 @@ export const locations: LocationData[] = [
     google_maps_place_url: CANONICAL_MAPS_URL,
     embed_url: REPO_EMBED,
     geo: YASHODA_GEO,
-    areaServedName: "Banjara Hills",
+    areaServedName: "Banjara Hills, Hyderabad",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
     sameAs: SOCIAL_PROFILES
@@ -154,7 +154,7 @@ export const locations: LocationData[] = [
     google_maps_place_url: CANONICAL_MAPS_URL,
     embed_url: REPO_EMBED,
     geo: YASHODA_GEO,
-    areaServedName: "Gachibowli",
+    areaServedName: "Gachibowli, Hyderabad",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
     sameAs: SOCIAL_PROFILES
@@ -171,7 +171,7 @@ export const locations: LocationData[] = [
     google_maps_place_url: CANONICAL_MAPS_URL,
     embed_url: REPO_EMBED,
     geo: YASHODA_GEO,
-    areaServedName: "Jubilee Hills",
+    areaServedName: "Jubilee Hills, Hyderabad",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
     sameAs: SOCIAL_PROFILES
@@ -188,7 +188,7 @@ export const locations: LocationData[] = [
     google_maps_place_url: CANONICAL_MAPS_URL,
     embed_url: REPO_EMBED,
     geo: YASHODA_GEO,
-    areaServedName: "Malakpet",
+    areaServedName: "Malakpet, Hyderabad",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
     sameAs: SOCIAL_PROFILES
@@ -222,7 +222,7 @@ export const locations: LocationData[] = [
     google_maps_place_url: CANONICAL_MAPS_URL,
     embed_url: REPO_EMBED,
     geo: YASHODA_GEO,
-    areaServedName: "LB Nagar",
+    areaServedName: "LB Nagar, Hyderabad",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
     sameAs: SOCIAL_PROFILES
@@ -239,7 +239,7 @@ export const locations: LocationData[] = [
     google_maps_place_url: CANONICAL_MAPS_URL,
     embed_url: REPO_EMBED,
     geo: YASHODA_GEO,
-    areaServedName: "Kukatpally",
+    areaServedName: "Kukatpally, Hyderabad",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
     sameAs: SOCIAL_PROFILES
@@ -256,7 +256,7 @@ export const locations: LocationData[] = [
     google_maps_place_url: CANONICAL_MAPS_URL,
     embed_url: REPO_EMBED,
     geo: YASHODA_GEO,
-    areaServedName: "Manikonda",
+    areaServedName: "Manikonda, Hyderabad",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
     sameAs: SOCIAL_PROFILES
@@ -273,7 +273,7 @@ export const locations: LocationData[] = [
     google_maps_place_url: CANONICAL_MAPS_URL,
     embed_url: REPO_EMBED,
     geo: YASHODA_GEO,
-    areaServedName: "Nizampet",
+    areaServedName: "Nizampet, Hyderabad",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
     sameAs: SOCIAL_PROFILES
@@ -290,7 +290,7 @@ export const locations: LocationData[] = [
     google_maps_place_url: CANONICAL_MAPS_URL,
     embed_url: REPO_EMBED,
     geo: YASHODA_GEO,
-    areaServedName: "Kondapur",
+    areaServedName: "Kondapur, Hyderabad",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
     sameAs: SOCIAL_PROFILES
@@ -307,7 +307,7 @@ export const locations: LocationData[] = [
     google_maps_place_url: CANONICAL_MAPS_URL,
     embed_url: REPO_EMBED,
     geo: YASHODA_GEO,
-    areaServedName: "Kothapet",
+    areaServedName: "Kothapet, Hyderabad",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
     sameAs: SOCIAL_PROFILES
@@ -324,7 +324,7 @@ export const locations: LocationData[] = [
     google_maps_place_url: CANONICAL_MAPS_URL,
     embed_url: REPO_EMBED,
     geo: YASHODA_GEO,
-    areaServedName: "Madhapur",
+    areaServedName: "Madhapur, Hyderabad",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
     sameAs: SOCIAL_PROFILES
