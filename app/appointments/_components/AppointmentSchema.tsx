@@ -70,6 +70,12 @@ export default function AppointmentSchema() {
             "@type": "GeoCoordinates",
             "latitude": malakpet.geo?.latitude,
             "longitude": malakpet.geo?.longitude
+        },
+        "parentOrganization": {
+          "@id": `${SITE_URL}/#hospital`
+        },
+        "department": {
+          "@id": `${SITE_URL}/#physician`
         }
       }
     ]
