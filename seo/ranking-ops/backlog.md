@@ -19,3 +19,8 @@
 - **Content Gap:** "Risks & Safety Protocols" section for Endoscopic Spine Surgery. Competitors list specific risks (dural tear, infection) to build trust.
 - **Content Gap:** "Patient Education Video" embed. A 30-second animated explainer of the "Keyhole" vs "Open" difference.
 - **Content Gap:** "Anesthesia Protocol" dedicated page. "Awake vs Asleep" is a big patient concern.
+
+## 2026-01-30
+- [ ] **Content Gap:** Add "Second Opinion Checklist" to other service pages (Brain Tumor, Spine).
+- [ ] **Trust Signal:** Add "Red Flags" section to other condition pages (e.g., Spondylolisthesis).
+- [ ] **Local SEO:** Verify `app/locations/` pages all have specific "Emergency" contact info visible above fold.
