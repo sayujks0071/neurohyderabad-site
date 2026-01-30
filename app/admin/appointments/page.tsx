@@ -134,6 +134,7 @@ export default function AppointmentsPage() {
                 <th className="py-3 px-4 border-b text-left text-sm font-semibold text-gray-600">Patient</th>
                 <th className="py-3 px-4 border-b text-left text-sm font-semibold text-gray-600">Contact</th>
                 <th className="py-3 px-4 border-b text-left text-sm font-semibold text-gray-600">Date/Time</th>
+                <th className="py-3 px-4 border-b text-left text-sm font-semibold text-gray-600">Clinical Info</th>
                 <th className="py-3 px-4 border-b text-left text-sm font-semibold text-gray-600">Complaint</th>
                 <th className="py-3 px-4 border-b text-left text-sm font-semibold text-gray-600">Status</th>
                 <th className="py-3 px-4 border-b text-left text-sm font-semibold text-gray-600">Actions</th>
@@ -153,6 +154,14 @@ export default function AppointmentsPage() {
                   <td className="py-3 px-4 border-b">
                     <div>{formatDate(appointment.preferred_date)}</div>
                     <div className="text-sm text-gray-500">{appointment.preferred_time || 'TBD'}</div>
+                  </td>
+                  <td className="py-3 px-4 border-b">
+                    <div className="text-sm font-medium">
+                      Pain: {appointment.pain_score != null ? `${appointment.pain_score}/10` : 'N/A'}
+                    </div>
+                    <div className="text-xs text-gray-500">
+                      MRI: {appointment.mri_scan_available ? 'Yes' : 'No'}
+                    </div>
                   </td>
                   <td className="py-3 px-4 border-b">
                     <div className="max-w-xs truncate" title={appointment.chief_complaint}>
