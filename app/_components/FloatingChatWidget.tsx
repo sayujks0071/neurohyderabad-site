@@ -214,7 +214,7 @@ export default function FloatingChatWidget() {
         <div className="fixed bottom-24 right-4 w-[200px] bg-white rounded-lg shadow-lg border border-gray-200 z-[60] p-3 animate-in slide-in-from-bottom-4 fade-in duration-200">
           <button
             onClick={() => setIsMinimized(false)}
-            className="w-full text-left text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors"
+            className="w-full text-left text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
           >
             Click to expand chat
           </button>
@@ -241,14 +241,14 @@ export default function FloatingChatWidget() {
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setIsMinimized(true)}
-                className="p-1 hover:bg-white/20 rounded-md transition-colors"
+                className="p-1 hover:bg-white/20 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-white/50"
                 aria-label="Minimize chat"
               >
                 <Minus size={18} />
               </button>
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1 hover:bg-white/20 rounded-md transition-colors"
+                className="p-1 hover:bg-white/20 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-white/50"
                 aria-label="Close chat"
               >
                 <X size={18} />
@@ -261,7 +261,7 @@ export default function FloatingChatWidget() {
             <div className="bg-red-50 p-3 border-b border-red-100 flex items-start gap-2 shrink-0">
               <AlertTriangle className="text-red-600 shrink-0 mt-0.5" size={16} />
               <p className="text-xs text-red-700 font-medium">
-                Emergency? Call <a href="tel:+919778280044" className="underline font-bold">+91-9778280044</a>
+                Emergency? Call <a href="tel:+919778280044" className="underline font-bold focus:outline-none focus:ring-2 focus:ring-red-500 rounded px-1">+91-9778280044</a>
               </p>
             </div>
           )}
@@ -321,7 +321,7 @@ export default function FloatingChatWidget() {
                 <button
                   key={i}
                   onClick={() => sendMessage(action)}
-                  className="whitespace-nowrap px-3 py-1 bg-white border border-blue-100 text-blue-600 text-xs rounded-full hover:bg-blue-50 transition-colors shadow-sm"
+                  className="whitespace-nowrap px-3 py-1 bg-white border border-blue-100 text-blue-600 text-xs rounded-full hover:bg-blue-50 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
                 >
                   {action}
                 </button>
