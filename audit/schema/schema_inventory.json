@@ -1,34 +1,1815 @@
-{
-  "https://www.drsayuj.info": [
-    "WebSite",
-    null,
-    "Hospital",
-    "FAQPage",
-    "BreadcrumbList"
-  ],
-  "https://www.drsayuj.info/services/minimally-invasive-spine-surgery": [
-    "WebSite",
-    null,
-    "Hospital",
-    "MedicalBusiness",
-    "MedicalWebPage",
-    "BreadcrumbList",
-    "FAQPage",
-    "FAQPage"
-  ],
-  "https://www.drsayuj.info/neurosurgeon-hyderabad": [
-    "WebSite",
-    null,
-    "Hospital",
-    "MedicalClinic",
-    "BreadcrumbList",
-    "FAQPage"
-  ],
-  "https://www.drsayuj.info/blog/epilepsy-surgery-options-hyderabad": [
-    "WebSite",
-    null,
-    "Hospital",
-    "BreadcrumbList",
-    null
-  ]
-}
+[
+  {
+    "url": "/",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "FAQPage",
+      "MedicalWebPage",
+      "BreadcrumbList"
+    ]
+  },
+  {
+    "url": "/${SITE_URL}${condition.url}",
+    "types": []
+  },
+  {
+    "url": "/${SITE_URL}${page.url}",
+    "types": []
+  },
+  {
+    "url": "/${SITE_URL}${location.url}",
+    "types": []
+  },
+  {
+    "url": "/${SITE_URL}${page}",
+    "types": []
+  },
+  {
+    "url": "/${SITE_URL}${service.url}",
+    "types": []
+  },
+  {
+    "url": "/appointments",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "Physician",
+      "MedicalClinic",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/about",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "Physician"
+    ]
+  },
+  {
+    "url": "/best-neurosurgeon-in-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      [
+        "WebPage",
+        "MedicalWebPage"
+      ],
+      "BreadcrumbList",
+      "FAQPage",
+      "HowTo"
+    ]
+  },
+  {
+    "url": "/blog",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital"
+    ]
+  },
+  {
+    "url": "/blog/brain-tumor-surgery-cost-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BlogPosting",
+      "BreadcrumbList"
+    ]
+  },
+  {
+    "url": "/blog/awake-craniotomy-guide",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalWebPage",
+      "BlogPosting",
+      "BreadcrumbList",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/blog/awake-craniotomy-brain-tumor-guide",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalWebPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/blog/awake-spine-surgery-vs-general-anesthesia-guide",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalWebPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/blog/brain-aneurysm-vs-migraine-warning-signs-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalWebPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/blog/carpal-tunnel-vs-cervical-radiculopathy-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalWebPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/blog/cauda-equina-syndrome-warning-signs-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalWebPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/blog/cervical-radiculopathy-arm-pain-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalWebPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/blog/cervical-spondylosis-neck-pain-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalWebPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/blog/cervical-disc-replacement-vs-fusion-acdf-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalWebPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/blog/chronic-subdural-hematoma-symptoms-elderly",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalWebPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/blog/day-care-spine-surgery-insurance-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BlogPosting",
+      "BreadcrumbList"
+    ]
+  },
+  {
+    "url": "/blog/day-care-endoscopic-spine-surgery-eligibility",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "BlogPosting"
+    ]
+  },
+  {
+    "url": "/blog/cost-of-endoscopic-spine-surgery-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "BlogPosting",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/blog/degenerative-disc-disease-guide-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalWebPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/blog/does-endoscopic-spine-surgery-work-for-sciatica-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalWebPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/blog/endoscopic-cervical-spine-surgery-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BlogPosting",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/blog/disc-replacement-vs-fusion",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BlogPosting",
+      "BreadcrumbList"
+    ]
+  },
+  {
+    "url": "/blog/endoscopic-discectomy-cost-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "BlogPosting",
+      "FAQPage",
+      "BreadcrumbList"
+    ]
+  },
+  {
+    "url": "/blog/endoscopic-spine-surgery-cost-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BlogPosting",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/blog/endoscopic-vs-microdiscectomy-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "BlogPosting",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/blog/endoscopic-spine-surgery-recovery-timeline",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalWebPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/blog/failed-back-surgery-syndrome-treatment-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "BlogPosting",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/blog/headache-vs-brain-tumor-warning-signs",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalWebPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/blog/epilepsy-surgery-options-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalWebPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/blog/how-much-does-brain-surgery-cost-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList"
+    ]
+  },
+  {
+    "url": "/blog/lumbar-spondylosis-treatment-exercises-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalWebPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/blog/life-after-spinal-fusion-surgery-recovery-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalWebPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/blog/l4-l5-disc-bulge-treatment-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalWebPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/blog/lumbar-canal-stenosis-walking-pain-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalWebPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/blog/meningioma-brain-tumor-treatment-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalWebPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/blog/mvd-vs-radiosurgery-trigeminal-neuralgia",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "BlogPosting"
+    ]
+  },
+  {
+    "url": "/blog/normal-pressure-hydrocephalus-nph-symptoms-treatment-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalWebPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/blog/neuroplasticity-brain-recovery-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "BlogPosting",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/blog/microdiscectomy-vs-laminectomy-recovery-comparison",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalWebPage"
+    ]
+  },
+  {
+    "url": "/blog/sciatica-pain-relief-exercises-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalWebPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/blog/return-to-work-after-endoscopic-discectomy-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BlogPosting",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/blog/sciatica-pain-management-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "Article"
+    ]
+  },
+  {
+    "url": "/blog/sciatica-exercises-for-office-workers-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalWebPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/blog/osteoporotic-spine-fracture-elderly-guide",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalWebPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/blog/spinal-fusion-cost-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BlogPosting",
+      "BreadcrumbList"
+    ]
+  },
+  {
+    "url": "/blog/sleeping-positions-for-sciatica-relief-guide",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalWebPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/blog/spinal-tuberculosis-symptoms-treatment-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalWebPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/blog/sciatica-vs-normal-back-pain-guide",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalWebPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/blog/scoliosis-treatment-options-in-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "BlogPosting"
+    ]
+  },
+  {
+    "url": "/blog/spine-health-maintenance-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital"
+    ]
+  },
+  {
+    "url": "/blog/spine-surgery-recovery-timeline-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital"
+    ]
+  },
+  {
+    "url": "/blog/trigeminal-neuralgia-vs-tooth-pain-guide",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "BlogPosting",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/blog/types-of-spine-tumors-symptoms-guide",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalWebPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/blog/spondylolisthesis-vs-herniated-disc-difference",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalWebPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/blog/when-to-worry-about-back-pain-neurosurgeon-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital"
+    ]
+  },
+  {
+    "url": "/blog/understanding-brain-mri-tumor-report-guide",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalWebPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/blog/understanding-mri-spine-report-guide",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalWebPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/blog/world-stroke-day-2025-hyderabad-stroke-code",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "Article",
+      "FAQPage",
+      "HowTo"
+    ]
+  },
+  {
+    "url": "/brain-surgery",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalWebPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/conditions/brachial-plexus-injury-hyderabad",
+    "types": []
+  },
+  {
+    "url": "/conditions/acoustic-neuroma-treatment-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalCondition",
+      "FAQPage",
+      "BreadcrumbList"
+    ]
+  },
+  {
+    "url": "/conditions/brain-bleed-evacuation-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital"
+    ]
+  },
+  {
+    "url": "/conditions/brain-aneurysm-treatment-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalCondition",
+      "FAQPage",
+      "BreadcrumbList"
+    ]
+  },
+  {
+    "url": "/conditions",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital"
+    ]
+  },
+  {
+    "url": "/conditions/carpal-tunnel-syndrome-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalCondition",
+      "FAQPage",
+      "BreadcrumbList"
+    ]
+  },
+  {
+    "url": "/conditions/brain-tumor-surgery-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital"
+    ]
+  },
+  {
+    "url": "/conditions/cervical-radiculopathy-treatment-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital"
+    ]
+  },
+  {
+    "url": "/conditions/cervical-myelopathy-decompression-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital"
+    ]
+  },
+  {
+    "url": "/conditions/chiari-malformation-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalCondition",
+      "BreadcrumbList"
+    ]
+  },
+  {
+    "url": "/conditions/chronic-back-pain-treatment-hyderabad",
+    "types": []
+  },
+  {
+    "url": "/conditions/degenerative-disc-disease-hyderabad",
+    "types": []
+  },
+  {
+    "url": "/conditions/cubital-tunnel-syndrome-hyderabad",
+    "types": []
+  },
+  {
+    "url": "/conditions/epilepsy-surgery-candidate-hyderabad",
+    "types": []
+  },
+  {
+    "url": "/conditions/degenerative-disc-disease-treatment-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalWebPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/conditions/facet-joint-syndrome-hyderabad",
+    "types": []
+  },
+  {
+    "url": "/conditions/failed-back-surgery-syndrome-hyderabad",
+    "types": []
+  },
+  {
+    "url": "/conditions/facial-nerve-palsy-hyderabad",
+    "types": []
+  },
+  {
+    "url": "/conditions/glioma-treatment-hyderabad",
+    "types": []
+  },
+  {
+    "url": "/conditions/herniated-disc-treatment-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalCondition",
+      "FAQPage",
+      "BreadcrumbList"
+    ]
+  },
+  {
+    "url": "/conditions/kyphosis-treatment-hyderabad",
+    "types": []
+  },
+  {
+    "url": "/conditions/hydrocephalus-treatment-hyderabad",
+    "types": []
+  },
+  {
+    "url": "/conditions/meningioma-treatment-hyderabad",
+    "types": []
+  },
+  {
+    "url": "/conditions/neck-pain-treatment-hyderabad",
+    "types": []
+  },
+  {
+    "url": "/conditions/neuropathic-pain-treatment-hyderabad",
+    "types": []
+  },
+  {
+    "url": "/conditions/peripheral-neuropathy-hyderabad",
+    "types": []
+  },
+  {
+    "url": "/conditions/radicular-pain-treatment-hyderabad",
+    "types": []
+  },
+  {
+    "url": "/conditions/pituitary-adenoma-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalCondition",
+      "BreadcrumbList"
+    ]
+  },
+  {
+    "url": "/conditions/osteoporotic-spine-fracture-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "FAQPage",
+      "MedicalCondition"
+    ]
+  },
+  {
+    "url": "/conditions/sciatica-pain-treatment-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalWebPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/conditions/spine-tumor-treatment-hyderabad",
+    "types": []
+  },
+  {
+    "url": "/conditions/scoliosis-treatment-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "FAQPage",
+      "MedicalCondition"
+    ]
+  },
+  {
+    "url": "/conditions/spinal-stenosis-treatment-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "FAQPage",
+      "MedicalCondition"
+    ]
+  },
+  {
+    "url": "/conditions/slip-disc-treatment-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalWebPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/conditions/spine-tumor-surgery-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital"
+    ]
+  },
+  {
+    "url": "/conditions/spondylolisthesis-treatment-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "FAQPage",
+      "MedicalCondition"
+    ]
+  },
+  {
+    "url": "/contact",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalClinic",
+      "BreadcrumbList"
+    ]
+  },
+  {
+    "url": "/conditions/trigeminal-neuralgia-treatment-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalWebPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/cookies",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital"
+    ]
+  },
+  {
+    "url": "/content-integrity",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital"
+    ]
+  },
+  {
+    "url": "/disclaimer",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital"
+    ]
+  },
+  {
+    "url": "/knowledge-base",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital"
+    ]
+  },
+  {
+    "url": "/editorial-policy",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital"
+    ]
+  },
+  {
+    "url": "/locations/banjara-hills",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalClinic",
+      "BreadcrumbList",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/locations",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital"
+    ]
+  },
+  {
+    "url": "/locations/lb-nagar",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalClinic",
+      "BreadcrumbList",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/locations/brain-spine-surgeon-banjara-hills",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalClinic",
+      "BreadcrumbList",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/locations/brain-spine-surgeon-jubilee-hills",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalClinic",
+      "BreadcrumbList",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/locations/hitech-city",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalClinic",
+      "BreadcrumbList",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/locations/brain-spine-surgeon-hitec-city",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalClinic",
+      "BreadcrumbList",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/locations/neurosurgeon-kothapet",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalClinic",
+      "BreadcrumbList",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/locations/neurosurgeon-kukatpally",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalClinic",
+      "BreadcrumbList",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/locations/malakpet",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalClinic",
+      "BreadcrumbList",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/locations/neurosurgeon-madhapur",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalClinic",
+      "BreadcrumbList",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/locations/neurosurgeon-kondapur",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalClinic",
+      "BreadcrumbList",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/locations/neurosurgeon-manikonda",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalClinic",
+      "BreadcrumbList",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/locations/neurosurgeon-near-kachiguda-faq",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalClinic",
+      "BreadcrumbList",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/locations/neurosurgeon-near-jubilee-hills-faq",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalClinic",
+      "BreadcrumbList",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/locations/neurosurgeon-near-kondapur-faq",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalClinic",
+      "BreadcrumbList",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/locations/neurosurgeon-near-jubilee-hills",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalClinic",
+      "BreadcrumbList",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/medical-disclaimer",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital"
+    ]
+  },
+  {
+    "url": "/neurosurgeon-banjara-hills",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalClinic",
+      "BreadcrumbList",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/locations/secunderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalClinic",
+      "BreadcrumbList",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/locations/neurosurgeon-nizampet",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalClinic",
+      "BreadcrumbList",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/media",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "VideoObject",
+      "VideoObject"
+    ]
+  },
+  {
+    "url": "/neurosurgeon-gachibowli",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalClinic",
+      "BreadcrumbList",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/neurosurgeon-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalClinic",
+      "BreadcrumbList",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/neurosurgeon-jubilee-hills",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalClinic",
+      "BreadcrumbList",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/neurosurgeon-hitech-city",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalClinic",
+      "BreadcrumbList",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/neurosurgeon-malakpet",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalClinic",
+      "BreadcrumbList",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/privacy",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital"
+    ]
+  },
+  {
+    "url": "/research",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital"
+    ]
+  },
+  {
+    "url": "/neurosurgeon-secunderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalClinic",
+      "BreadcrumbList",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/patient-stories",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "VideoObject",
+      "VideoObject"
+    ]
+  },
+  {
+    "url": "/pediatric-neurosurgery",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalService"
+    ]
+  },
+  {
+    "url": "/services/acoustic-neuroma-surgery-hyderabad",
+    "types": []
+  },
+  {
+    "url": "/services/awake-craniotomy-hyderabad",
+    "types": []
+  },
+  {
+    "url": "/services/brachial-plexus-surgery-hyderabad",
+    "types": []
+  },
+  {
+    "url": "/services",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalWebPage"
+    ]
+  },
+  {
+    "url": "/services/awake-spine-surgery-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "FAQPage",
+      "MedicalWebPage"
+    ]
+  },
+  {
+    "url": "/services/brain-aneurysm-surgery-hyderabad",
+    "types": []
+  },
+  {
+    "url": "/services/brain-surgery-cost-hyderabad",
+    "types": []
+  },
+  {
+    "url": "/services/carpal-tunnel-surgery-hyderabad",
+    "types": []
+  },
+  {
+    "url": "/services/cervical-disc-replacement-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "FAQPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/services/brain-tumor-surgery-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalService",
+      "MedicalProcedure",
+      "MedicalWebPage",
+      "FAQPage",
+      "BreadcrumbList"
+    ]
+  },
+  {
+    "url": "/services/cervical-spine-surgery-hyderabad",
+    "types": []
+  },
+  {
+    "url": "/services/deep-brain-stimulation-hyderabad",
+    "types": []
+  },
+  {
+    "url": "/services/cervical-endoscopic-spine-surgery-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/services/compare-neurosurgeons-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "FAQPage",
+      "WebPage"
+    ]
+  },
+  {
+    "url": "/services/cooled-radiofrequency-ablation-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalProcedure",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/services/disc-replacement-surgery-hyderabad",
+    "types": []
+  },
+  {
+    "url": "/services/emergency-neurosurgery-hyderabad",
+    "types": []
+  },
+  {
+    "url": "/services/dr-sayuj-vs-apollo-neuro-icu",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "FAQPage",
+      "WebPage",
+      "BreadcrumbList"
+    ]
+  },
+  {
+    "url": "/services/endoscopic-discectomy-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalWebPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/services/endoscopic-spine-surgery-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalService",
+      "MedicalProcedure",
+      "BreadcrumbList",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/services/endoscopic-surgery-cost-calculator",
+    "types": []
+  },
+  {
+    "url": "/services/hydrocephalus-treatment-hyderabad",
+    "types": []
+  },
+  {
+    "url": "/services/kims-spine-surgery-second-opinion",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "FAQPage",
+      "WebPage",
+      "BreadcrumbList"
+    ]
+  },
+  {
+    "url": "/services/epilepsy-surgery-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital"
+    ]
+  },
+  {
+    "url": "/services/kyphoplasty-vertebroplasty-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "FAQPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/services/lumbar-spine-surgery-hyderabad",
+    "types": []
+  },
+  {
+    "url": "/services/microscopic-spine-surgery-hyderabad",
+    "types": []
+  },
+  {
+    "url": "/services/laser-spine-surgery-hyderabad",
+    "types": []
+  },
+  {
+    "url": "/services/microdiscectomy-surgery-cost-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/services/lumbar-laminectomy-surgery-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "FAQPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/services/navigation-guided-surgery-hyderabad",
+    "types": []
+  },
+  {
+    "url": "/services/nerve-decompression-surgery-hyderabad",
+    "types": []
+  },
+  {
+    "url": "/services/peripheral-nerve-surgery",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "FAQPage",
+      "MedicalWebPage",
+      "MedicalProcedure",
+      "MedicalProcedure",
+      "BreadcrumbList",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/services/peripheral-nerve-surgery-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalWebPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/services/minimally-invasive-spine-surgery",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalWebPage",
+      "BreadcrumbList",
+      "FAQPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/services/pituitary-tumor-surgery-hyderabad",
+    "types": []
+  },
+  {
+    "url": "/services/scoliosis-surgery-hyderabad",
+    "types": []
+  },
+  {
+    "url": "/services/spinal-decompression-hyderabad",
+    "types": []
+  },
+  {
+    "url": "/services/robotic-spine-surgery-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalWebPage",
+      "BreadcrumbList",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/services/slip-disc-surgery-cost-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "FAQPage",
+      "FAQPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/services/spine-fracture-surgery-hyderabad",
+    "types": []
+  },
+  {
+    "url": "/services/spinal-decompression-surgery-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "FAQPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/services/spinal-fusion-surgery-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalWebPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/services/spinal-fusion",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalWebPage",
+      "MedicalProcedure",
+      "MedicalProcedure",
+      "BreadcrumbList",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/services/spine-surgery-cost-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "FAQPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/services/trauma-neurosurgery-hyderabad",
+    "types": []
+  },
+  {
+    "url": "/services/trigeminal-neuralgia-surgery-hyderabad",
+    "types": []
+  },
+  {
+    "url": "/services/spine-surgery-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalService",
+      "MedicalProcedure",
+      "MedicalWebPage",
+      "BreadcrumbList"
+    ]
+  },
+  {
+    "url": "/services/uniportal-endoscopic-spine-surgery-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalService",
+      "MedicalProcedure",
+      "BreadcrumbList",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/spine-surgery",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalWebPage",
+      "FAQPage"
+    ]
+  },
+  {
+    "url": "/stories/endoscopic-ulbd-stenosis-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalWebPage"
+    ]
+  },
+  {
+    "url": "/stories/mvd-trigeminal-neuralgia-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalWebPage"
+    ]
+  },
+  {
+    "url": "/symptoms-checker",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital"
+    ]
+  },
+  {
+    "url": "/symptoms/back-pain",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalWebPage",
+      "FAQPage",
+      "BreadcrumbList"
+    ]
+  },
+  {
+    "url": "/stories/endoscopic-discectomy-same-day-hyderabad",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalWebPage"
+    ]
+  },
+  {
+    "url": "/symptoms/severe-headache-warning-signs",
+    "types": []
+  },
+  {
+    "url": "/symptoms/back-pain-red-flags",
+    "types": []
+  },
+  {
+    "url": "/symptoms/numbness-tingling-hands-feet",
+    "types": []
+  },
+  {
+    "url": "/symptoms/pain-on-top-of-head-causes",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital"
+    ]
+  },
+  {
+    "url": "/symptoms/signs-of-brain-tumor",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital"
+    ]
+  },
+  {
+    "url": "/symptoms/when-to-see-neurosurgeon",
+    "types": []
+  },
+  {
+    "url": "/technology-innovation",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "BreadcrumbList",
+      "MedicalService",
+      "FAQPage",
+      "MedicalWebPage"
+    ]
+  },
+  {
+    "url": "/technology-facilities",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital",
+      "MedicalWebPage"
+    ]
+  },
+  {
+    "url": "/terms",
+    "types": [
+      "WebSite",
+      "Physician",
+      "Hospital"
+    ]
+  }
+]

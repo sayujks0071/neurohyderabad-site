@@ -63,11 +63,11 @@ const nextConfig = {
   async redirects() {
     return [
       // Fix: Redirect uppercase SITEMAP.XML to lowercase sitemap.xml (for Google Search Console)
-      {
-        source: '/SITEMAP.XML',
-        destination: '/sitemap.xml',
-        permanent: true,
-      },
+      // {
+      //   source: '/SITEMAP.XML',
+      //   destination: '/sitemap.xml',
+      //   permanent: true,
+      // },
       // CRITICAL: Apex domain redirect to www (single hop 301)
       {
         source: '/:path*',
