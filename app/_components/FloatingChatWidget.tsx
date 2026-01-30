@@ -1,22 +1,18 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import { useStatsigEvents } from '../../src/lib/statsig-events';
 import { MessageCircle, X, Send, AlertTriangle, Loader2, Sparkles, Minus } from 'lucide-react';
 import { usePathname } from 'next/navigation';
-
-interface Message {
-  id: string;
-  role: 'user' | 'assistant';
-  content: string;
-}
+import { useChat } from '@ai-sdk/react';
+import { DefaultChatTransport, type UIMessage } from 'ai';
 
 /**
  * Floating AI Chat Widget using Vercel AI Gateway
  *
  * Features:
  * - Global availability via floating button
- * - Real-time streaming responses
+ * - Real-time streaming responses via useChat hook
  * - Emergency detection
  * - Compact design
  */
@@ -25,21 +21,59 @@ export default function FloatingChatWidget() {
   const [isMinimized, setIsMinimized] = useState(false);
   const [showEmergencyAlert, setShowEmergencyAlert] = useState(false);
   const [input, setInput] = useState('');
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: 'initial',
-      role: 'assistant',
-      content: "Hello! I'm Dr. Sayuj's AI assistant. I can help you with appointments, condition info, and more. How can I help?",
-    },
-  ]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const pathname = usePathname();
 
   // Statsig hooks
   const { logAppointmentBooking, logContactFormSubmit } = useStatsigEvents();
+
+  // Create transport with dependencies
+  const transport = useMemo(() => new DefaultChatTransport({
+    api: '/api/ai/chat',
+    body: {
+      pageSlug: pathname || 'global',
+      service: 'floating_widget'
+    },
+  }), [pathname]);
+
+  const initialMessages = useMemo<UIMessage[]>(() => [
+    {
+      id: 'initial',
+      role: 'assistant',
+      parts: [{ type: 'text', text: "Hello! I'm Dr. Sayuj's AI assistant. I can help you with appointments, condition info, and more. How can I help?" }]
+    },
+  ], []);
+
+  // Initialize useChat hook
+  const { messages, sendMessage, status, error } = useChat<UIMessage>({
+    transport,
+    messages: initialMessages,
+    onFinish: (options) => {
+      const message = options.message;
+      // Get text content from parts
+      const textContent = message.parts
+        .filter(part => part.type === 'text')
+        .map(part => (part as any).text)
+        .join(' ');
+
+      // Check emergency keywords in the response content
+      const emergencyKeywords = ['emergency', 'urgent', 'immediately', 'call', 'stroke', 'seizure'];
+
+      if (emergencyKeywords.some(keyword => textContent.toLowerCase().includes(keyword))) {
+        setShowEmergencyAlert(true);
+      }
+
+      logContactFormSubmit('ai_chat_widget', true);
+    },
+    onError: (err) => {
+      console.error('Chat error:', err);
+      logContactFormSubmit('ai_chat_widget', false);
+    },
+  });
+
+  const isLoading = status === 'submitted' || status === 'streaming';
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -53,125 +87,30 @@ export default function FloatingChatWidget() {
     }
   }, [messages, isOpen, isMinimized]);
 
-  const sendMessage = async (content: string) => {
-    if (!content.trim() || isLoading) return;
-
-    const userMessage: Message = {
-      id: Date.now().toString(),
-      role: 'user',
-      content: content.trim(),
-    };
-
-    setMessages(prev => [...prev, userMessage]);
-    setInput('');
-    setIsLoading(true);
-    setError(null);
-
-    // Log user interaction
-    logAppointmentBooking('ai_chat_widget_interaction', 'general');
-
-    try {
-      const response = await fetch('/api/ai/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          message: content.trim(),
-          conversationHistory: messages.slice(-10).map(m => ({
-            type: m.role,
-            content: m.content,
-          })),
-          pageSlug: pathname || 'global',
-          service: 'floating_widget',
-        }),
-      });
-
-      if (!response.ok) {
-        let errorText = '';
-        let errorData: any = null;
-        try {
-          const contentType = response.headers.get('content-type');
-          if (contentType?.includes('application/json')) {
-            errorData = await response.json();
-            errorText = errorData.message || errorData.error || 'Unknown error';
-          } else {
-            errorText = await response.text();
-          }
-        } catch (e) {
-          errorText = 'Unknown error';
-        }
-        console.error('API Error:', response.status, errorText);
-        
-        // Create error message for user
-        const errorMessage: Message = {
-          id: (Date.now() + 1).toString(),
-          role: 'assistant',
-          content: errorData?.message || 
-            (response.status === 429 
-              ? 'Too many requests. Please wait a moment and try again.' 
-              : response.status === 500
-              ? 'Server error. Please try again or call +91-9778280044.'
-              : `Failed to get AI response. Please try again or call +91-9778280044.`),
-        };
-        setMessages(prev => [...prev, errorMessage]);
-        setIsLoading(false);
-        return;
-      }
-
-      // Use response.text() instead of ReadableStream for better browser compatibility
-      // This is more reliable across all browsers, including incognito mode
-      const fullContent = await response.text();
-
-      // Ensure we have content
-      if (!fullContent.trim()) {
-        const errorMessage: Message = {
-          id: (Date.now() + 1).toString(),
-          role: 'assistant',
-          content: "No response received. Please check your connection and try again, or call +91-9778280044.",
-        };
-        setMessages(prev => [...prev, errorMessage]);
-        setIsLoading(false);
-        return;
-      }
-
-      // Create assistant message with the full content
-      const assistantMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        role: 'assistant',
-        content: fullContent.trim(),
-      };
-
-      setMessages(prev => [...prev, assistantMessage]);
-
-      // Check for emergency keywords
-      const emergencyKeywords = ['emergency', 'urgent', 'immediately', 'call', 'stroke', 'seizure'];
-      const hasEmergency = emergencyKeywords.some(keyword =>
-        fullContent.toLowerCase().includes(keyword)
-      );
-
-      if (hasEmergency) {
-        setShowEmergencyAlert(true);
-      }
-
-      logContactFormSubmit('ai_chat_widget', true);
-    } catch (err) {
-      console.error('Chat error:', err);
-      setError(err instanceof Error ? err : new Error('Failed to send message'));
-      logContactFormSubmit('ai_chat_widget', false);
-
-      const errorMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        role: 'assistant',
-        content: "I'm having trouble right now. Please call +91-9778280044 for immediate assistance.",
-      };
-      setMessages(prev => [...prev, errorMessage]);
-    } finally {
-      setIsLoading(false);
-    }
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInput(e.target.value);
   };
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await sendMessage(input);
+    if (!input.trim() || isLoading) return;
+
+    logAppointmentBooking('ai_chat_widget_interaction', 'general');
+    const userMessage = input;
+    setInput('');
+    await sendMessage({
+      role: 'user',
+      parts: [{ type: 'text', text: userMessage }]
+    } as any); // Type cast might be needed if sendMessage expects stricter type
+  };
+
+  // Handle quick actions by appending a user message
+  const handleQuickAction = async (action: string) => {
+    logAppointmentBooking('ai_chat_widget_interaction', 'general');
+    await sendMessage({
+      role: 'user',
+      parts: [{ type: 'text', text: action }]
+    } as any);
   };
 
   const quickActions = [
@@ -180,6 +119,14 @@ export default function FloatingChatWidget() {
     "Cost of surgery?",
     "Emergency help"
   ];
+
+  // Helper to get text from message
+  const getMessageText = (message: UIMessage) => {
+    return message.parts
+      .filter(part => part.type === 'text')
+      .map(part => (part as any).text)
+      .join('');
+  };
 
   return (
     <>
@@ -284,7 +231,7 @@ export default function FloatingChatWidget() {
                       : 'bg-white text-gray-800 border border-gray-100 shadow-sm rounded-bl-none'
                   }`}
                 >
-                  <p className="whitespace-pre-wrap break-words">{message.content || '...'}</p>
+                  <p className="whitespace-pre-wrap break-words">{getMessageText(message) || '...'}</p>
                 </div>
               </div>
             ))}
@@ -294,11 +241,7 @@ export default function FloatingChatWidget() {
                 <div className="bg-white border border-gray-100 shadow-sm px-3 py-2 rounded-2xl rounded-bl-none">
                   <div className="flex items-center space-x-2">
                     <Loader2 size={14} className="animate-spin text-blue-600" />
-                    <span className="text-xs text-gray-500">
-                      {messages[messages.length - 1]?.role === 'assistant' && messages[messages.length - 1]?.content 
-                        ? 'Typing...' 
-                        : 'Thinking...'}
-                    </span>
+                    <span className="text-xs text-gray-500">Thinking...</span>
                   </div>
                 </div>
               </div>
@@ -307,7 +250,9 @@ export default function FloatingChatWidget() {
             {error && (
               <div className="flex justify-start">
                 <div className="bg-red-50 border border-red-200 shadow-sm px-3 py-2 rounded-2xl rounded-bl-none">
-                  <p className="text-xs text-red-700">{error.message}</p>
+                  <p className="text-xs text-red-700">
+                    {error.message || "I'm having trouble right now. Please call +91-9778280044."}
+                  </p>
                 </div>
               </div>
             )}
@@ -320,7 +265,7 @@ export default function FloatingChatWidget() {
               {quickActions.map((action, i) => (
                 <button
                   key={i}
-                  onClick={() => sendMessage(action)}
+                  onClick={() => handleQuickAction(action)}
                   className="whitespace-nowrap px-3 py-1 bg-white border border-blue-100 text-blue-600 text-xs rounded-full hover:bg-blue-50 transition-colors shadow-sm"
                 >
                   {action}
@@ -330,7 +275,7 @@ export default function FloatingChatWidget() {
           )}
 
           {/* Input Area */}
-          <form onSubmit={onSubmit} className="p-3 border-t border-gray-100 bg-white shrink-0">
+          <form onSubmit={handleSubmit} className="p-3 border-t border-gray-100 bg-white shrink-0">
             <div className="flex items-center gap-2 relative">
               <label htmlFor="chat-input" className="sr-only">Ask a question</label>
               <input
@@ -338,7 +283,7 @@ export default function FloatingChatWidget() {
                 ref={inputRef}
                 type="text"
                 value={input}
-                onChange={(e) => setInput(e.target.value)}
+                onChange={handleInputChange}
                 placeholder="Ask anything..."
                 className="w-full pl-4 pr-10 py-2.5 bg-gray-100 border-none rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:bg-white transition-all"
                 disabled={isLoading}

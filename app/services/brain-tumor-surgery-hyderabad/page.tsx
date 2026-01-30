@@ -17,6 +17,7 @@ import { patientStories } from '@/src/content/stories';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
 import MedicalWebPageSchema from '../../components/schemas/MedicalWebPageSchema';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
+import ArticleSummarizer from '../../_components/ArticleSummarizer';
 
 const SERVICE_SLUG = 'brain-tumor-surgery-hyderabad';
 
@@ -168,6 +169,23 @@ export default function BrainTumorSurgeryHyderabadPage() {
     { name: 'Brain Tumor Surgery in Hyderabad', path: `/services/${SERVICE_SLUG}/` },
   ];
 
+  // Construct content for AI summarization
+  const summaryContent = `
+    Advanced Brain Tumor Surgery in Hyderabad with Dr. Sayuj Krishnan.
+
+    Treatment Highlights:
+    ${treatmentHighlights.map(h => `- ${h.title}: ${h.description}`).join('\n')}
+
+    Types of Tumors Treated:
+    ${tumorTypes.join(', ')}
+
+    Patient Support:
+    ${patientSupport.join('\n')}
+
+    Frequently Asked Questions:
+    ${faqs.map(f => `Q: ${f.question}\nA: ${f.answer}`).join('\n\n')}
+  `;
+
   return (
     <>
       <JsonLd data={serviceSchema} />
@@ -190,7 +208,7 @@ export default function BrainTumorSurgeryHyderabadPage() {
           ]}
         />
 
-        <header className="grid md:grid-cols-2 gap-10 items-start mb-16">
+        <header className="grid md:grid-cols-2 gap-10 items-start mb-8">
           <div>
             <p className="text-sm font-medium uppercase tracking-wide text-blue-600 mb-3">Neurosurgical Oncology</p>
             <h1 className="text-4xl md:text-5xl font-bold text-blue-900 leading-tight mb-6">
@@ -206,7 +224,7 @@ export default function BrainTumorSurgeryHyderabadPage() {
               compassionate, cutting-edge care using microsurgery, neuronavigation, and a full multidisciplinary team to deliver
               the safest possible outcomes for patients across Hyderabad.
             </p>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-4 mb-8">
               <Link
                 href="/appointments/"
                 className="inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3 text-white font-semibold hover:bg-blue-700 transition-colors"
@@ -220,18 +238,22 @@ export default function BrainTumorSurgeryHyderabadPage() {
                 About Dr. Sayuj
               </Link>
             </div>
+
+            {/* AI Summary Feature */}
+            <ArticleSummarizer content={summaryContent} className="mb-6" />
           </div>
           <TrustProof serviceType="brain" className="mb-6" stories={relevantStories} />
-          <div className="bg-blue-50 border border-blue-100 rounded-2xl p-6 shadow-sm">
-            <h2 className="text-xl font-semibold text-blue-800 mb-4">Why Malakpet Patients Trust Our Team</h2>
-            <ul className="space-y-3 text-gray-700">
-              <li>• High-powered microsurgery protecting eloquent brain regions</li>
-              <li>• Advanced neuronavigation and neuromonitoring suites in Yashoda Malakpet</li>
-              <li>• Integrated tumour board with oncology, radiology, and pathology support</li>
-              <li>• Dedicated counselling for families throughout diagnosis and recovery</li>
-            </ul>
-          </div>
         </header>
+
+        <div className="bg-blue-50 border border-blue-100 rounded-2xl p-6 shadow-sm mb-16">
+          <h2 className="text-xl font-semibold text-blue-800 mb-4">Why Malakpet Patients Trust Our Team</h2>
+          <ul className="space-y-3 text-gray-700">
+            <li>• High-powered microsurgery protecting eloquent brain regions</li>
+            <li>• Advanced neuronavigation and neuromonitoring suites in Yashoda Malakpet</li>
+            <li>• Integrated tumour board with oncology, radiology, and pathology support</li>
+            <li>• Dedicated counselling for families throughout diagnosis and recovery</li>
+          </ul>
+        </div>
 
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-blue-900 mb-6">Types of Brain Tumors We Treat</h2>
