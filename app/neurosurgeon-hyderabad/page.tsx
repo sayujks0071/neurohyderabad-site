@@ -14,7 +14,7 @@ export const dynamicParams = false;
 export const revalidate = 86400;
 
 export const metadata = {
-  title: "Best Neurosurgeon Hyderabad | Endoscopic Spine Specialist",
+  title: "Best Neurosurgeon Hyderabad (Yashoda Hospital) | Dr Sayuj",
   description:
     "Consult Dr. Sayuj Krishnan, neurosurgeon in Hyderabad. Expert in endoscopic spine & minimally invasive brain surgery. OPD timings & booking.",
   alternates: { canonical: "https://www.drsayuj.info/neurosurgeon-hyderabad" },
@@ -100,6 +100,37 @@ export default function Page() {
         </div>
       </section>
 
+      {/* Red Flags Section - YMYL Trust Signal */}
+      <section className="mb-12 bg-red-50 p-6 md:p-8 rounded-xl border border-red-100">
+        <div className="flex items-center gap-3 mb-4">
+          <span className="text-3xl">🚨</span>
+          <h2 className="text-2xl font-bold text-red-800">When to See a Neurosurgeon Urgently?</h2>
+        </div>
+        <p className="mb-6 text-gray-700">
+          Most headaches or back pain are not emergencies. However, if you experience any of these <strong>"Red Flag" symptoms</strong>, visit the nearest emergency room (Yashoda Malakpet Casualty) immediately:
+        </p>
+        <div className="grid md:grid-cols-2 gap-6">
+           <div>
+             <h3 className="font-bold text-red-700 mb-2">Brain Symptoms</h3>
+             <ul className="space-y-2 text-gray-700">
+               <li>• "Thunderclap" headache (worst headache of life)</li>
+               <li>• Sudden weakness or numbness on one side of body</li>
+               <li>• Difficulty speaking or understanding speech</li>
+               <li>• First-time seizure (fits) in adulthood</li>
+             </ul>
+           </div>
+           <div>
+             <h3 className="font-bold text-red-700 mb-2">Spine Symptoms</h3>
+             <ul className="space-y-2 text-gray-700">
+               <li>• Loss of bowel or bladder control</li>
+               <li>• Numbness in the groin/saddle area</li>
+               <li>• Sudden inability to lift foot (foot drop)</li>
+               <li>• Severe pain after a fall or accident</li>
+             </ul>
+           </div>
+        </div>
+      </section>
+
       <section className="grid md:grid-cols-2 gap-8 mb-10">
         <div>
            <LocationNAPCard location={location} className="mb-6" />
@@ -130,6 +161,34 @@ export default function Page() {
           guideline-aligned selection and provide day-by-day recovery calendars.
         </p>
         <LocationMapEmbed location={location} className="mt-6" />
+      </section>
+
+      {/* Second Opinion Checklist */}
+      <section className="mb-12 bg-blue-50 p-6 md:p-8 rounded-xl border border-blue-100">
+        <h2 className="text-2xl font-bold text-blue-900 mb-4">Planning a Second Opinion?</h2>
+        <p className="mb-6 text-gray-700">
+           Before finalizing brain or spine surgery, it is safe and recommended to get a second opinion. When consulting Dr. Sayuj, please bring:
+        </p>
+        <div className="grid md:grid-cols-2 gap-8">
+           <ul className="space-y-3 text-gray-700">
+             <li className="flex items-start gap-2">
+               <span className="text-green-600 font-bold">✓</span>
+               <span><strong>MRI Films/CD:</strong> Not just the report. We need to see the actual images to confirm the diagnosis.</span>
+             </li>
+             <li className="flex items-start gap-2">
+               <span className="text-green-600 font-bold">✓</span>
+               <span><strong>History of Symptoms:</strong> A written timeline of when pain started and what makes it better/worse.</span>
+             </li>
+           </ul>
+           <div className="flex items-center justify-center">
+             <Link
+               href="/appointments"
+               className="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors shadow-lg"
+             >
+               Book Second Opinion
+             </Link>
+           </div>
+        </div>
       </section>
 
       <section>
