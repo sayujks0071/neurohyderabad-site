@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db, appointments } from '@/src/lib/db';
+import { verifyAdminAccess } from '@/src/lib/security';
 
 export const dynamic = 'force-dynamic';
 
@@ -7,7 +8,12 @@ export const dynamic = 'force-dynamic';
  * GET /api/admin/appointments
  * Fetch all appointments from the database
  */
-export async function GET() {
+export async function GET(request: Request) {
+  const auth = verifyAdminAccess(request);
+  if (!auth.isAuthorized) {
+    return auth.response || NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   try {
     const result = await appointments.getRecent(100);
     
@@ -29,6 +35,11 @@ export async function GET() {
  * Update appointment status
  */
 export async function PATCH(request: NextRequest) {
+  const auth = verifyAdminAccess(request);
+  if (!auth.isAuthorized) {
+    return auth.response || NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   try {
     const body = await request.json();
     const { id, status } = body;
