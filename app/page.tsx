@@ -27,6 +27,7 @@ import FAQPageSchema from "./_components/FAQPageSchema";
 import HeroCTAButtons from "./_components/HeroCTAButtons";
 import RemotionVideoEmbedWrapper from "./_components/RemotionVideoEmbedWrapper";
 import PatientEducationVideosSkeleton from "./_components/skeletons/PatientEducationVideosSkeleton";
+import { LocationNAPCard } from "@/src/components/locations/LocationNAPCard";
 
 // Dynamic imports for Lazy components
 const PatientEducationVideos = dynamic(() => import('./_components/PatientEducationVideos'), {
@@ -864,26 +865,7 @@ export default function Home() {
                 </Card>
               </div>
             </div>
-            <Card padding="lg" className="shadow-lg">
-              <h3 className="text-xl font-semibold mb-4 text-blue-700">Hospital Location</h3>
-              <div className="space-y-4">
-                <div>
-                  <h3 className="font-semibold text-gray-800">Yashoda Hospital</h3>
-                  <p className="text-gray-600">
-                    Room No 317, OPD Block<br />
-                    Malakpet, Hyderabad<br />
-                    Telangana 500036
-                  </p>
-                </div>
-                <div className="pt-4 border-t">
-                  <h3 className="font-semibold text-gray-800 mb-2">Contact Information</h3>
-                  <p className="text-gray-600">
-                    <strong>Phone:</strong> +91 9778280044<br />
-                    <strong>Email:</strong> hellodr@drsayuj.info
-                  </p>
-                </div>
-              </div>
-            </Card>
+            <LocationNAPCard locationId="malakpet" />
           </div>
         </Section>
 
@@ -1000,32 +982,7 @@ export default function Home() {
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-12">Book an Appointment</h2>
             <div className="grid md:grid-cols-2 gap-12">
-              <Card padding="lg" className="shadow-lg">
-                <h3 className="text-2xl font-semibold mb-6 text-blue-700">Contact Information</h3>
-                <div className="space-y-6">
-                  <div>
-                    <h4 className="font-semibold text-gray-800 mb-2">Phone</h4>
-                    <a href="tel:+919778280044" className="text-blue-600 text-lg hover:underline">
-                      +91 9778280044
-                    </a>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-800 mb-2">Email</h4>
-                    <a href="mailto:hellodr@drsayuj.info" className="text-blue-600 hover:underline">
-                      hellodr@drsayuj.info
-                    </a>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-800 mb-2">Hospital Location</h4>
-                    <p className="text-gray-600">
-                      Yashoda Hospital<br />
-                      Room No 317, OPD Block<br />
-                      Malakpet, Hyderabad<br />
-                      Telangana 500036
-                    </p>
-                  </div>
-                </div>
-              </Card>
+              <LocationNAPCard locationId="malakpet" />
 
               {/* Concluding Paragraph */}
               <Card padding="lg" className="border border-gray-200 mb-8 shadow-none">

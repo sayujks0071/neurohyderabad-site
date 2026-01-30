@@ -1,5 +1,6 @@
 import { SITE_URL } from "../../src/lib/seo";
 import type { Metadata } from "next";
+import NAP from "@/app/_components/NAP";
 
 export const metadata: Metadata = {
   title: "Medical Disclaimer | Dr Sayuj Krishnan - Neurosurgeon in Hyderabad",
