@@ -1,11 +1,16 @@
-# Daily SEO Changelog - 2026-01-27
+# Daily SEO Changelog - 2026-01-30
 
-## New Pages
-- Created `app/services/microdiscectomy-surgery-hyderabad/page.tsx` targeting "Microdiscectomy Surgery".
+## Summary
+Focused on filling content gaps for specific spine conditions that have high local search volume but no dedicated landing pages.
 
-## Registry Updates
-- Added `microdiscectomy-surgery-hyderabad` to `seo/keyword-registry.json`.
-- Mapped keywords in `seo/page-keyword-map.json`.
+## New Pages Planned
+1. **/conditions/spinal-tuberculosis-treatment-hyderabad**
+   - Targets: Spinal TB, Pott's Spine
+   - Rationale: High prevalence in India, requires specialized neurosurgical input for spinal stability.
+2. **/conditions/lumbar-spondylosis-treatment-hyderabad**
+   - Targets: Age-related spinal degeneration
+   - Rationale: Extremely common query. Currently might be hitting generic "back pain" pages or blogs. Needs a commercial landing page.
 
-## Schema Changes
-- Added `MedicalWebPage` schema with specialty "Neurosurgery".
+## Keyword Registry Updates
+- Added 8 new keywords.
+- Mapped 2 new clusters.
