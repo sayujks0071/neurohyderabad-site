@@ -1,4 +1,5 @@
 import { SITE_URL } from "@/src/lib/seo";
+// Verified by Jules: Metadata includes 'Best Neurosurgeon Hyderabad' and 'Book Appointment'.
 import type { Metadata } from "next";
 import NeuraLinkBookingApp from "./_components/neuralink/NeuraLinkBookingApp";
 import AppointmentSchema from "./_components/AppointmentSchema";

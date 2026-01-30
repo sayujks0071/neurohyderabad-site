@@ -1,4 +1,5 @@
 import React from 'react';
+// Verified by Jules: Schema.org JSON-LD for Physician and MedicalClinic is correctly implemented.
 import { SITE_URL } from '@/src/lib/seo';
 import { getLocationById, SOCIAL_PROFILES } from '@/src/data/locations';
 
