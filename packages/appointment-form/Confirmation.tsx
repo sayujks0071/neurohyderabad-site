@@ -22,7 +22,7 @@ export default function Confirmation({
       <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-10 text-center">
         <CheckCircleIcon className="h-16 w-16 text-green-500 mx-auto mb-4" />
         <h2 className="text-3xl font-bold text-slate-800 mb-3">
-          Request Received!
+          Appointment Request Received
         </h2>
         <p className="text-slate-600 leading-relaxed max-w-lg mx-auto mb-8">
           {message}
