@@ -644,25 +644,30 @@ async function createBookingRecord(
   console.log(`[Appointment Workflow] Creating booking record ${bookingId}`);
 
   try {
-    await appointments.create({
-      patient_name: patientInfo.name,
-      patient_email: patientInfo.email,
-      patient_phone: patientInfo.phone,
-      patient_age: patientInfo.age ? Number(patientInfo.age) : undefined,
-      patient_gender: patientInfo.gender,
-      preferred_date: date,
-      preferred_time: time,
-      appointment_type: patientInfo.appointmentType,
-      chief_complaint: patientInfo.chiefComplaint,
-      intake_notes: patientInfo.intakeNotes,
-      pain_score: patientInfo.painScore,
-      mri_scan_available: patientInfo.mriScanAvailable,
-      has_emergency_symptoms: patientInfo.hasEmergencySymptoms,
-      source: patientInfo.source,
-      workflow_run_id: bookingId,
-      confirmation_message: patientInfo.confirmationMessage,
-    });
-    console.log(`Booking ${bookingId} saved to database`);
+    await retry(
+      async () => {
+        await appointments.create({
+          patient_name: patientInfo.name,
+          patient_email: patientInfo.email,
+          patient_phone: patientInfo.phone,
+          patient_age: patientInfo.age ? Number(patientInfo.age) : undefined,
+          patient_gender: patientInfo.gender,
+          preferred_date: date,
+          preferred_time: time,
+          appointment_type: patientInfo.appointmentType,
+          chief_complaint: patientInfo.chiefComplaint,
+          intake_notes: patientInfo.intakeNotes,
+          pain_score: patientInfo.painScore,
+          mri_scan_available: patientInfo.mriScanAvailable,
+          has_emergency_symptoms: patientInfo.hasEmergencySymptoms,
+          source: patientInfo.source,
+          workflow_run_id: bookingId,
+          confirmation_message: patientInfo.confirmationMessage,
+        });
+        console.log(`Booking ${bookingId} saved to database`);
+      },
+      { retries: 3, delay: 1000, name: "create-booking" }
+    );
   } catch (error) {
     console.error(`[Appointment Workflow] Failed to save booking to DB:`, error);
     throw error;
