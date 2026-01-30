@@ -1,9 +1,15 @@
 import { NextResponse } from 'next/server';
 import { db, appointments, workflowRuns } from '@/src/lib/db';
+import { verifyAdminAccess } from '@/src/lib/security';
 
 export const dynamic = 'force-dynamic';
 
-export async function GET() {
+export async function GET(request: Request) {
+  const auth = verifyAdminAccess(request);
+  if (!auth.isAuthorized) {
+    return auth.response || NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   try {
     // Get appointment stats
     const appointmentStats = await appointments.getStats();
