@@ -35,6 +35,10 @@ export const generateWhatsappUrl = (patient: WhatsappAppointment): string => {
   return `https://wa.me/91${sanitizedNumber}?text=${encodeURIComponent(message)}`;
 };
 
+/**
+ * Formats a date string to 'D MMM YYYY' (e.g., '1 Oct 2023').
+ * Returns the original string if parsing fails.
+ */
 export const formatDate = (dateStr: string) => {
   try {
     const date = new Date(dateStr);
