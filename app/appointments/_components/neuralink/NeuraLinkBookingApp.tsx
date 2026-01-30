@@ -6,6 +6,7 @@ import AppointmentFaq from "../AppointmentFaq";
 import dynamic from "next/dynamic";
 import VoiceBookingOption from "../VoiceBookingOption";
 import PatientPortalSkeleton from "./PatientPortalSkeleton";
+import LazySection from "../../../_components/LazySection";
 
 // CWV Optimization: Lazy load heavy Client Component (PatientPortal)
 // This reduces Initial JS Payload by code-splitting the heavy form logic.
@@ -96,7 +97,9 @@ const NeuraLinkBookingApp = ({ heroContent, locationInfo }: NeuraLinkBookingAppP
       <section ref={formRef} className="pb-20">
         <div className="max-w-6xl mx-auto px-4">
           <VoiceBookingOption />
-          <PatientPortal />
+          <LazySection placeholder={<PatientPortalSkeleton />}>
+            <PatientPortal />
+          </LazySection>
         </div>
       </section>
 
