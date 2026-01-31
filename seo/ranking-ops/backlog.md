@@ -19,3 +19,8 @@
 - **Content Gap:** "Risks & Safety Protocols" section for Endoscopic Spine Surgery. Competitors list specific risks (dural tear, infection) to build trust.
 - **Content Gap:** "Patient Education Video" embed. A 30-second animated explainer of the "Keyhole" vs "Open" difference.
 - **Content Gap:** "Anesthesia Protocol" dedicated page. "Awake vs Asleep" is a big patient concern.
+
+## 2025-02-23 Discovery
+- **Duplicate Content Risk:** `app/services/minimally-invasive-spine-surgery/page.tsx` and `app/services/endoscopic-spine-surgery-hyderabad/page.tsx` target very similar keywords. Consider consolidating or distinctly canonicalizing one to the other.
+- **Orphan Pages:** Sitemap discovery revealed several location pages (e.g., `/locations/neurosurgeon-near-jubilee-hills`) labeled as orphans. Need to link them from the footer or a dedicated Locations hub.
+- **Video Sitemap:** We are generating it, but need to ensure all new patient stories are included.
