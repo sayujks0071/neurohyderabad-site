@@ -57,4 +57,4 @@ The "Competitor Gap Scan" workflow relies on the list of competitors defined in 
 
 - **Issue not created:** Check the Action logs. Common reasons include GitHub API rate limits or the issue already existing.
 - **Wrong Schedule:** Ensure you've converted IST to UTC correctly using a converter. GitHub Actions use UTC.
-<!-- v1.3 - Verified -->
+<!-- v1.4 - Verified by Jules -->
