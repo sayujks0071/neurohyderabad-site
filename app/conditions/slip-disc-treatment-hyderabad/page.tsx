@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { Metadata } from 'next';
 import MedicalWebPageSchema from "../../components/schemas/MedicalWebPageSchema";
 import FAQPageSchema from "@/app/_components/FAQPageSchema";
+import BreadcrumbSchema from "../../components/schemas/BreadcrumbSchema";
 import { SITE_URL } from "../../../src/lib/seo";
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import NAP from '@/app/_components/NAP';
@@ -390,8 +391,9 @@ export default function SlipDiscTreatmentPage() {
         pageSlug="/conditions/slip-disc-treatment-hyderabad/"
         pageType="condition"
         serviceOrCondition="Slip Disc Treatment"
-        breadcrumbs={breadcrumbs}
       />
+
+      <BreadcrumbSchema items={breadcrumbs} />
 
       <FAQPageSchema
         faqs={FAQ.map(item => ({ question: item.q, answer: item.a }))}

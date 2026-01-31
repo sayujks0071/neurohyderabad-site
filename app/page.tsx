@@ -215,7 +215,6 @@ export default function Home() {
         title="Best Neurosurgeon in Hyderabad | Spine & Brain Specialist"
         description="Top-rated neurosurgeon in Hyderabad (Yashoda Hospital). Expert in endoscopic spine surgery, brain tumors & sciatica. Book appointment now."
         serviceOrCondition="Neurosurgery Services"
-        breadcrumbs={[{ name: "Home", path: "/" }]}
         medicalSpecialty={["Neurosurgery", "Spine Surgery", "Endoscopic Surgery"]}
         audience="Patients seeking neurosurgical care in Hyderabad"
       />

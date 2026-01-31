@@ -440,8 +440,9 @@ export default function SciaticaTreatmentPage() {
         pageSlug="/conditions/sciatica-pain-treatment-hyderabad/"
         pageType="condition"
         serviceOrCondition="Sciatica Treatment"
-        breadcrumbs={breadcrumbs}
       />
+
+      <BreadcrumbSchema items={breadcrumbs} />
 
       <FAQPageSchema
         faqs={FAQ.map(item => ({ question: item.q, answer: item.a }))}

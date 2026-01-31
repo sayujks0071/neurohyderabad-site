@@ -16,6 +16,7 @@ import { getServiceSources } from '../sources';
 import { patientStories } from '@/src/content/stories';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
 import MedicalWebPageSchema from '../../components/schemas/MedicalWebPageSchema';
+import BreadcrumbSchema from '../../components/schemas/BreadcrumbSchema';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
 
 const SERVICE_SLUG = 'brain-tumor-surgery-hyderabad';
@@ -177,8 +178,8 @@ export default function BrainTumorSurgeryHyderabadPage() {
         pageSlug={`/services/${SERVICE_SLUG}/`}
         pageType="service"
         serviceOrCondition="Brain Tumor Surgery"
-        breadcrumbs={breadcrumbs}
       />
+      <BreadcrumbSchema items={breadcrumbs} />
       <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/${SERVICE_SLUG}`} />
 
       <main className="container mx-auto px-4 py-16">

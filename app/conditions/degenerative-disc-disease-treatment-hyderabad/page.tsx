@@ -359,8 +359,9 @@ export default function DegenerativeDiscDiseasePage() {
         pageSlug="/conditions/degenerative-disc-disease-treatment-hyderabad/"
         pageType="condition"
         serviceOrCondition="Degenerative Disc Disease Treatment"
-        breadcrumbs={breadcrumbs}
       />
+
+      <BreadcrumbSchema items={breadcrumbs} />
 
       <FAQPageSchema
         faqs={FAQ.map(item => ({ question: item.q, answer: item.a }))}

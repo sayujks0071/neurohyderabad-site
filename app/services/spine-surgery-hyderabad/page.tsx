@@ -12,6 +12,7 @@ import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import { getServiceSources } from '../sources';
 import MedicalWebPageSchema from '../../components/schemas/MedicalWebPageSchema';
+import BreadcrumbSchema from '../../components/schemas/BreadcrumbSchema';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 
 const SERVICE_SLUG = 'spine-surgery-hyderabad';
@@ -97,8 +98,8 @@ export default function SpineSurgeryHyderabadPage() {
         pageSlug={`/services/${SERVICE_SLUG}/`}
         pageType="service"
         serviceOrCondition="Spine Surgery"
-        breadcrumbs={breadcrumbs}
       />
+      <BreadcrumbSchema items={breadcrumbs} />
       <main className="container mx-auto px-4 py-16">
         <Breadcrumbs
           items={[

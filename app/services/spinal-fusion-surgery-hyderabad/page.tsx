@@ -9,6 +9,7 @@ import { makeMetadata } from '@/app/_lib/meta';
 import AuthorByline from '@/app/_components/AuthorByline';
 import JsonLd from '@/components/JsonLd';
 import MedicalWebPageSchema from '@/app/components/schemas/MedicalWebPageSchema';
+import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
@@ -132,8 +133,8 @@ export default function SpinalFusionPage() {
         pageSlug="/services/spinal-fusion-surgery-hyderabad"
         pageType="service"
         serviceOrCondition="Spinal Fusion Surgery"
-        breadcrumbs={breadcrumbs}
       />
+      <BreadcrumbSchema items={breadcrumbs} />
       <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/spinal-fusion-surgery-hyderabad`} />
       <div className="min-h-screen bg-white">
         <div className="container mx-auto px-4 py-16">

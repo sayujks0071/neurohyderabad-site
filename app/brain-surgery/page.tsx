@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE_URL } from "../../src/lib/seo";
 import MedicalWebPageSchema from "../components/schemas/MedicalWebPageSchema";
+import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
 import ExpandedFAQ from "../../src/components/ExpandedFAQ";
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 
@@ -88,7 +89,9 @@ export default function BrainSurgeryPage() {
         pageSlug="/brain-surgery"
         pageType="service"
         serviceOrCondition="Brain Surgery"
-        breadcrumbs={[
+      />
+      <BreadcrumbSchema
+        items={[
           { name: "Home", path: "/" },
           { name: "Brain Surgery", path: "/brain-surgery" }
         ]}
