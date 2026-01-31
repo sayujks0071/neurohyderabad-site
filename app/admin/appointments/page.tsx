@@ -135,6 +135,7 @@ export default function AppointmentsPage() {
                 <th className="py-3 px-4 border-b text-left text-sm font-semibold text-gray-600">Contact</th>
                 <th className="py-3 px-4 border-b text-left text-sm font-semibold text-gray-600">Date/Time</th>
                 <th className="py-3 px-4 border-b text-left text-sm font-semibold text-gray-600">Complaint</th>
+                <th className="py-3 px-4 border-b text-left text-sm font-semibold text-gray-600">Clinical Info</th>
                 <th className="py-3 px-4 border-b text-left text-sm font-semibold text-gray-600">Status</th>
                 <th className="py-3 px-4 border-b text-left text-sm font-semibold text-gray-600">Actions</th>
               </tr>
@@ -159,6 +160,34 @@ export default function AppointmentsPage() {
                       {appointment.chief_complaint}
                     </div>
                     <div className="text-sm text-gray-500">{appointment.appointment_type}</div>
+                  </td>
+                  <td className="py-3 px-4 border-b">
+                    {appointment.pain_score !== undefined && (
+                      <div className="text-sm">
+                        <span className="font-medium text-slate-700">Pain Score:</span>{' '}
+                        <span
+                          className={
+                            appointment.pain_score >= 8
+                              ? 'text-red-600 font-bold'
+                              : appointment.pain_score <= 3
+                              ? 'text-green-600'
+                              : 'text-yellow-600'
+                          }
+                        >
+                          {appointment.pain_score}/10
+                        </span>
+                      </div>
+                    )}
+                    {appointment.mri_scan_available && (
+                      <div className="mt-1">
+                        <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">
+                          MRI Available
+                        </span>
+                      </div>
+                    )}
+                    {!appointment.pain_score && !appointment.mri_scan_available && (
+                      <span className="text-gray-400 text-sm">-</span>
+                    )}
                   </td>
                   <td className="py-3 px-4 border-b">
                     <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${statusColors[appointment.status] || statusColors.pending}`}>
