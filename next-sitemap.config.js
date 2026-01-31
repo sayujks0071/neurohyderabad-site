@@ -48,6 +48,11 @@ module.exports = {
     "/blog/*sample*",
     "/blog/*template*",
     "/blog/*placeholder*",
+    // Exclude condition stubs that redirect or are noindex
+    "/conditions/a-z/*",
+    // Exclude known redirecting URLs
+    "/brain-tumor-surgery",
+    "/locations/neurosurgeon-near-jubilee-hills",
   ],
   changefreq: "weekly",
   priority: 0.7,

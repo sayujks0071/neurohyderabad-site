@@ -1,1 +1,36 @@
-URL,Issue Type,Details
+url,issue_type,severity,recommended_fix
+https://www.drsayuj.info/brain-tumor-surgery,Status 308,High,Fix error
+https://www.drsayuj.info/brain-tumor-surgery,Missing Canonical,High,Add canonical tag
+https://www.drsayuj.info/admin/appointments,Status 307,High,Fix error
+https://www.drsayuj.info/admin/appointments,Missing Canonical,High,Add canonical tag
+https://www.drsayuj.info/admin/login,Status 307,High,Fix error
+https://www.drsayuj.info/admin/login,Missing Canonical,High,Add canonical tag
+https://www.drsayuj.info/admin,Status 307,High,Fix error
+https://www.drsayuj.info/admin,Missing Canonical,High,Add canonical tag
+https://www.drsayuj.info/conditions/a-z/acoustic-neuroma,Status 308,High,Fix error
+https://www.drsayuj.info/conditions/a-z/acoustic-neuroma,Missing Canonical,High,Add canonical tag
+https://www.drsayuj.info/conditions/a-z/aneurysm,Status 308,High,Fix error
+https://www.drsayuj.info/conditions/a-z/aneurysm,Missing Canonical,High,Add canonical tag
+https://www.drsayuj.info/conditions/a-z/carpal-tunnel,Status 308,High,Fix error
+https://www.drsayuj.info/conditions/a-z/carpal-tunnel,Missing Canonical,High,Add canonical tag
+https://www.drsayuj.info/conditions/a-z/cervical-disc,Status 308,High,Fix error
+https://www.drsayuj.info/conditions/a-z/cervical-disc,Missing Canonical,High,Add canonical tag
+https://www.drsayuj.info/conditions/a-z/chiari-malformation,Status 308,High,Fix error
+https://www.drsayuj.info/conditions/a-z/chiari-malformation,Missing Canonical,High,Add canonical tag
+https://www.drsayuj.info/conditions/a-z/disc-herniation,Status 308,High,Fix error
+https://www.drsayuj.info/conditions/a-z/disc-herniation,Missing Canonical,High,Add canonical tag
+https://www.drsayuj.info/conditions/a-z/lumbar-stenosis,Status 308,High,Fix error
+https://www.drsayuj.info/conditions/a-z/lumbar-stenosis,Missing Canonical,High,Add canonical tag
+https://www.drsayuj.info/conditions/a-z/pituitary-adenoma,Status 308,High,Fix error
+https://www.drsayuj.info/conditions/a-z/pituitary-adenoma,Missing Canonical,High,Add canonical tag
+https://www.drsayuj.info/conditions/a-z/radiculopathy,Status 308,High,Fix error
+https://www.drsayuj.info/conditions/a-z/radiculopathy,Missing Canonical,High,Add canonical tag
+https://www.drsayuj.info/conditions/a-z/sciatica,Status 308,High,Fix error
+https://www.drsayuj.info/conditions/a-z/sciatica,Missing Canonical,High,Add canonical tag
+https://www.drsayuj.info/conditions/a-z/spondylolisthesis,Status 308,High,Fix error
+https://www.drsayuj.info/conditions/a-z/spondylolisthesis,Missing Canonical,High,Add canonical tag
+https://www.drsayuj.info/conditions/a-z/trigeminal-neuralgia,Status 308,High,Fix error
+https://www.drsayuj.info/conditions/a-z/trigeminal-neuralgia,Missing Canonical,High,Add canonical tag
+https://www.drsayuj.info/icon.svg,Missing Canonical,High,Add canonical tag
+https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills,Status 308,High,Fix error
+https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills,Missing Canonical,High,Add canonical tag

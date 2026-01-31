@@ -301,6 +301,17 @@ export default function ServicesPage() {
                 <li>• Drug-resistant epilepsy</li>
               </ul>
             </div>
+            <div className="bg-indigo-50 p-6 rounded-lg">
+              <h3 className="text-xl font-semibold text-indigo-700 mb-4">Specialized Procedures</h3>
+              <ul className="space-y-2 text-gray-700">
+                <li>• <Link href="/awake-brain-surgery" className="text-indigo-600 hover:underline">Awake Brain Surgery</Link></li>
+                <li>• <Link href="/endoscopic-discectomy" className="text-indigo-600 hover:underline">Endoscopic Discectomy</Link></li>
+                <li>• <Link href="/cervical-disc-replacement" className="text-indigo-600 hover:underline">Cervical Disc Replacement</Link></li>
+                <li>• <Link href="/lumbar-stenosis-surgery" className="text-indigo-600 hover:underline">Lumbar Stenosis Surgery</Link></li>
+                <li>• <Link href="/endoscopic-lumbar-fusion" className="text-indigo-600 hover:underline">Endoscopic Lumbar Fusion</Link></li>
+                <li>• <Link href="/neuro-endoscopy" className="text-indigo-600 hover:underline">Neuro-Endoscopy</Link></li>
+              </ul>
+            </div>
             <div className="bg-green-50 p-6 rounded-lg">
               <h3 className="text-xl font-semibold text-green-700 mb-4">Why Choose Our Services</h3>
               <ul className="space-y-2 text-gray-700">
