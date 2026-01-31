@@ -1,14 +1,14 @@
-import { Hospital, Award, ShieldCheck, Microscope } from 'lucide-react';
+import { Hospital, Trophy, Activity, GraduationCap } from 'lucide-react';
 
 interface TrustStripProps {
   className?: string;
 }
 
 const TRUST_POINTS = [
-  { icon: Hospital, text: 'Yashoda Hospital Affiliation' },
-  { icon: Award, text: '9+ Years Neurosurgical Experience' },
-  { icon: ShieldCheck, text: 'AO Spine International Member' },
-  { icon: Microscope, text: 'Neuronavigation & Intraoperative Monitoring' },
+  { icon: GraduationCap, text: 'German Trained' },
+  { icon: Activity, text: '1000+ Endoscopic Surgeries' },
+  { icon: Hospital, text: 'Yashoda Hospitals Affiliation' },
+  { icon: Trophy, text: 'Award Winning (2019)' },
 ];
 
 export default function TrustStrip({ className = '' }: TrustStripProps) {

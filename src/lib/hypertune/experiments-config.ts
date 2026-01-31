@@ -1,4 +1,4 @@
-export type CTAIntent = 'call' | 'whatsapp' | 'appointment';
+export type CTAIntent = 'call' | 'whatsapp' | 'appointment' | 'emergency';
 
 export type CtaVariant = 'control' | 'teleconsult_first' | 'whatsapp_first';
 
@@ -33,7 +33,7 @@ const BASE_BUTTONS: Record<CTAIntent, Omit<CTAButtonConfig, 'label'>> = {
   },
   whatsapp: {
     intent: 'whatsapp',
-    href: 'https://wa.me/919778280044',
+    href: 'https://wa.me/919778280044?text=Hi%20Dr.%20Sayuj%27s%20team%2C%20I%20would%20like%20to%20book%20a%20consultation%20for',
     target: '_blank',
     rel: 'noopener noreferrer',
     ariaLabel: 'WhatsApp the care team',
@@ -42,6 +42,11 @@ const BASE_BUTTONS: Record<CTAIntent, Omit<CTAButtonConfig, 'label'>> = {
     intent: 'appointment',
     href: '/appointments',
     ariaLabel: 'Book teleconsultation appointment',
+  },
+  emergency: {
+    intent: 'emergency',
+    href: `tel:${CONTACT_PHONE}`,
+    ariaLabel: 'Emergency Call Now',
   },
 };
 
@@ -112,7 +117,7 @@ export const STICKY_CTA_VARIANTS: Record<StickyCtaVariant, StickyCtaConfig> = {
     headline: 'Need immediate consultation?',
     subhead: 'Call or WhatsApp the care team for urgent appointments.',
     buttons: [
-      { ...BASE_BUTTONS.call, label: 'Call OPD' },
+      { ...BASE_BUTTONS.emergency, label: 'Emergency: Call Now' },
       { ...BASE_BUTTONS.whatsapp, label: 'WhatsApp' },
       { ...BASE_BUTTONS.appointment, label: 'Book Tele-Consult' },
     ],
@@ -122,15 +127,15 @@ export const STICKY_CTA_VARIANTS: Record<StickyCtaVariant, StickyCtaConfig> = {
     subhead: 'Share them for a 15-minute surgical review and same-day slot.',
     buttons: [
       { ...BASE_BUTTONS.whatsapp, label: 'Share MRI on WhatsApp' },
+      { ...BASE_BUTTONS.emergency, label: 'Emergency: Call Now' },
       { ...BASE_BUTTONS.appointment, label: 'Book Tele-Consult' },
-      { ...BASE_BUTTONS.call, label: 'Call OPD' },
     ],
   },
   coordinator_first: {
     headline: 'Need the coordinator to arrange everything?',
     subhead: 'We can block OT slots, insurance, and follow-ups for you.',
     buttons: [
-      { ...BASE_BUTTONS.call, label: 'Call Care Coordinator' },
+      { ...BASE_BUTTONS.emergency, label: 'Call Care Coordinator' },
       { ...BASE_BUTTONS.whatsapp, label: 'Message on WhatsApp' },
     ],
   },

@@ -13,6 +13,9 @@ function intentTone(intent: CTAIntent) {
   if (intent === 'whatsapp' || intent === 'call') {
     return 'bg-green-700 hover:bg-green-800 text-white';
   }
+  if (intent === 'emergency') {
+    return 'bg-red-600 hover:bg-red-700 text-white animate-pulse';
+  }
   return '';
 }
 
