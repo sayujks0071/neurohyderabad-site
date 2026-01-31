@@ -1,6 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { appointmentSchema, AppointmentFormData } from "./schema";
 import {
   User,
   Phone,
@@ -17,7 +20,6 @@ import {
   Sparkles,
   Wand2,
   Search,
-  Cloud,
   Check,
   Info,
   ShieldCheck,
@@ -34,6 +36,7 @@ import SpeechButton from "./SpeechButton";
 import { trackConversionOnly } from "@/src/lib/google-ads-conversion";
 import { trackMiddlewareEvent } from "@/src/lib/middleware/rum";
 import { CLINIC } from "@/app/_lib/clinic";
+import { formatLocalDate } from "@/src/lib/dates";
 
 type WorkflowAppointmentType = "new-consultation" | "follow-up" | "second-opinion";
 
@@ -53,6 +56,22 @@ const toWorkflowAppointmentType = (
   return WORKFLOW_APPOINTMENT_TYPE_MAP[type] || "new-consultation";
 };
 
+const parseDateAndTime = (dateStr: string, timeStr: string): Date => {
+  if (!dateStr || !timeStr) return new Date(NaN);
+
+  const [year, month, day] = dateStr.split("-").map(Number);
+  const date = new Date(year, month - 1, day);
+
+  const [time, period] = timeStr.split(' ');
+  let [hours, minutes] = time.split(':').map(Number);
+
+  if (period === 'PM' && hours !== 12) hours += 12;
+  if (period === 'AM' && hours === 12) hours = 0;
+
+  date.setHours(hours, minutes, 0, 0);
+  return date;
+};
+
 const PatientPortal = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
@@ -70,52 +89,124 @@ const PatientPortal = () => {
   const [step, setStep] = useState(1);
   const [confirmationMessage, setConfirmationMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const INITIAL_FORM_STATE = {
-    name: "",
-    email: "",
-    phone: "",
-    age: "",
-    gender: "male",
-    symptoms: "",
-    type: null as AppointmentType | null,
-    date: "",
-    time: "",
-    painScore: 5,
-    mriScanAvailable: false,
-  };
 
-  const [formData, setFormData] = useState(INITIAL_FORM_STATE);
-  const [lastSubmittedData, setLastSubmittedData] = useState(INITIAL_FORM_STATE);
+  // Used for Success View to display what was submitted
+  const [lastSubmittedData, setLastSubmittedData] = useState<Partial<AppointmentFormData>>({});
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    getValues,
+    watch,
+    trigger,
+    formState: { errors },
+    reset
+  } = useForm<AppointmentFormData>({
+    resolver: zodResolver(appointmentSchema),
+    defaultValues: {
+      patientName: "",
+      email: "",
+      contactNumber: "",
+      age: 0,
+      gender: "male",
+      symptoms: "",
+      hasMRI: false,
+      painScore: 5,
+      appointmentType: undefined,
+      appointmentTime: "",
+      appointmentDate: "",
+      requestedDate: undefined,
+    },
+    mode: "onTouched",
+  });
+
+  // Local state for immediate UI feedback and control
+  const [localType, setLocalType] = useState<AppointmentType | null>(null);
+  const [localDate, setLocalDate] = useState("");
+  const [localTime, setLocalTime] = useState("");
+
+  useEffect(() => {
+    register("appointmentDate");
+    register("appointmentTime");
+    register("appointmentType");
+    register("requestedDate");
+  }, [register]);
+
+  // Watch fields for logic
+  const watchedSymptoms = watch("symptoms");
+  const watchedPainScore = watch("painScore");
+  const watchedHasMRI = watch("hasMRI");
+  // We use local state for scheduler props to ensure immediate updates
+  const watchedType = watch("appointmentType");
+  const watchedTime = watch("appointmentTime");
+  const watchedDateStr = watch("appointmentDate");
+  const watchedRequestedDate = watch("requestedDate");
+
+  // Sync local state if form is reset or changed externally (optional, but good practice)
+  useEffect(() => {
+     if (watchedType) setLocalType(watchedType as AppointmentType);
+     if (watchedDateStr) setLocalDate(watchedDateStr);
+     if (watchedTime) setLocalTime(watchedTime);
+  }, [watchedType, watchedDateStr, watchedTime]);
 
   const clinicName = "Dr. Sayuj Krishnan | Yashoda Hospitals, Malakpet";
   const clinicAddress = `${CLINIC.street}, ${CLINIC.city}, ${CLINIC.region} ${CLINIC.postalCode}`;
 
   const handleScheduleSelect = (
     type: AppointmentType,
-    date: string,
-    time: string
+    dateStr: string,
+    timeStr: string
   ) => {
-    setFormData((prev) => ({ ...prev, type, date, time }));
+    // Update local state immediately
+    setLocalType(type);
+    if (dateStr) setLocalDate(dateStr);
+    if (timeStr) setLocalTime(timeStr);
+
+    // If dateStr changes, update appointmentDate
+    if (dateStr) {
+       setValue("appointmentDate", dateStr, { shouldValidate: true });
+    }
+
+    if (type) {
+        setValue("appointmentType", type, { shouldValidate: true });
+    }
+
+    if (timeStr) {
+        setValue("appointmentTime", timeStr, { shouldValidate: true });
+    }
+
+    // Construct strict Date object if both are available (or use values from getValues if arguments are missing/partial)
+    const currentType = type || localType || getValues("appointmentType");
+    const currentDate = dateStr || localDate || getValues("appointmentDate");
+    const currentTime = timeStr || localTime || getValues("appointmentTime");
+
+    if (currentDate && currentTime) {
+      const dateObj = parseDateAndTime(currentDate, currentTime);
+      setValue("requestedDate", dateObj, { shouldValidate: true });
+    }
   };
 
-  const handleNextStep = () => {
-    if (formData.type && formData.date && formData.time) {
+  const handleNextStep = async () => {
+    // Validate step 1 fields
+    const valid = await trigger(["appointmentType", "appointmentTime", "requestedDate", "appointmentDate"]);
+    if (valid) {
       setStep(2);
       window.scrollTo(0, 0);
     }
   };
 
   const handleRefineSymptoms = async () => {
-    if (!formData.symptoms.trim()) return;
+    if (!watchedSymptoms?.trim()) return;
     setIsRefining(true);
-    const result = await refineSymptomDescription(formData.symptoms);
+    const result = await refineSymptomDescription(watchedSymptoms);
     setRefinementResult(result);
     setIsRefining(false);
   };
 
   const applyRefinement = () => {
     if (refinementResult) {
-      setFormData({ ...formData, symptoms: refinementResult.refinedText });
+      setValue("symptoms", refinementResult.refinedText, { shouldValidate: true });
       setRefinementResult(null);
     }
   };
@@ -128,19 +219,16 @@ const PatientPortal = () => {
     setIsInterpreting(false);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const onSubmit = async (data: AppointmentFormData) => {
     setErrorMessage(null);
-
     setIsAnalyzing(true);
     let triageSummary = "";
 
     try {
-      const ageValue = Number(formData.age);
       const triage = await analyzeSymptoms(
-        formData.symptoms,
-        Number.isFinite(ageValue) ? ageValue : 0,
-        formData.gender
+        data.symptoms,
+        data.age,
+        data.gender
       );
       triageSummary = triage?.summary || "";
     } catch (error) {
@@ -149,14 +237,16 @@ const PatientPortal = () => {
       setIsAnalyzing(false);
     }
 
-    const appointmentTypeLabel = formData.type || "General Consultation";
+    const appointmentTypeLabel = data.appointmentType || "General Consultation";
+    const dateStr = data.appointmentDate;
+
     const reasonParts = [
       `Appointment Type: ${appointmentTypeLabel}`,
-      `Preferred Date: ${formData.date}`,
-      `Preferred Time: ${formData.time}`,
-      `Symptoms: ${formData.symptoms}`,
-      `Pain Score: ${formData.painScore}/10`,
-      `MRI Available: ${formData.mriScanAvailable ? "Yes" : "No"}`,
+      `Preferred Date: ${dateStr}`,
+      `Preferred Time: ${data.appointmentTime}`,
+      `Symptoms: ${data.symptoms}`,
+      `Pain Score: ${data.painScore}/10`,
+      `MRI Available: ${data.hasMRI ? "Yes" : "No"}`,
     ];
     if (triageSummary) {
       reasonParts.push(`AI Triage Summary: ${triageSummary}`);
@@ -165,7 +255,7 @@ const PatientPortal = () => {
     setIsSyncing(true);
 
     try {
-      const workflowAppointmentType = toWorkflowAppointmentType(formData.type);
+      const workflowAppointmentType = toWorkflowAppointmentType(data.appointmentType as AppointmentType);
       const response = await fetch("/api/workflows/booking", {
         method: "POST",
         headers: {
@@ -173,18 +263,18 @@ const PatientPortal = () => {
           "x-booking-source": "neuralink",
         },
         body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          age: formData.age,
-          gender: formData.gender,
-          preferredDate: formData.date,
-          preferredTime: formData.time,
+          name: data.patientName,
+          email: data.email,
+          phone: data.contactNumber,
+          age: data.age.toString(),
+          gender: data.gender,
+          preferredDate: dateStr,
+          preferredTime: data.appointmentTime,
           appointmentType: workflowAppointmentType,
-          chiefComplaint: formData.symptoms,
+          chiefComplaint: data.symptoms,
           intakeNotes: reasonParts.join("\n"),
-          painScore: formData.painScore,
-          mriScanAvailable: formData.mriScanAvailable,
+          painScore: data.painScore,
+          mriScanAvailable: data.hasMRI,
           source: "neuralink",
         }),
       });
@@ -204,8 +294,8 @@ const PatientPortal = () => {
         appointment_type: workflowAppointmentType
       });
 
-      setLastSubmittedData(formData);
-      setFormData(INITIAL_FORM_STATE);
+      setLastSubmittedData(data);
+      reset(); // Reset form
       setStep(1);
       setNearbyCentersResult(null);
       setRefinementResult(null);
@@ -295,11 +385,11 @@ const PatientPortal = () => {
                   <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">
                     Patient
                   </p>
-                  <p className="font-bold text-slate-900 text-lg">{lastSubmittedData.name}</p>
+                  <p className="font-bold text-slate-900 text-lg">{lastSubmittedData.patientName}</p>
                   <p className="text-sm text-slate-500">
                     {lastSubmittedData.age} yrs •{" "}
-                    {lastSubmittedData.gender.charAt(0).toUpperCase() +
-                      lastSubmittedData.gender.slice(1)}
+                    {lastSubmittedData.gender ? (lastSubmittedData.gender.charAt(0).toUpperCase() +
+                      lastSubmittedData.gender.slice(1)) : ''}
                   </p>
                 </div>
                 <div>
@@ -307,11 +397,11 @@ const PatientPortal = () => {
                     Consultation
                   </p>
                   <p className="font-bold text-slate-900 text-lg">
-                    {lastSubmittedData.type}
+                    {lastSubmittedData.appointmentType}
                   </p>
                   <p className="text-sm text-slate-500">
-                    {new Date(lastSubmittedData.date).toLocaleDateString("en-IN")} •{" "}
-                    {lastSubmittedData.time}
+                    {lastSubmittedData.requestedDate ? formatLocalDate(lastSubmittedData.requestedDate) : ''} •{" "}
+                    {lastSubmittedData.appointmentTime}
                   </p>
                 </div>
               </div>
@@ -420,7 +510,7 @@ const PatientPortal = () => {
               onClick={() => {
                 setIsSubmitted(false);
                 setConfirmationMessage(null);
-                // Form data and state were already reset on submit
+                // reset() was called in onSubmit
               }}
               className="text-slate-400 hover:text-slate-600 font-bold text-sm transition-colors"
             >
@@ -478,17 +568,22 @@ const PatientPortal = () => {
         <div className="animate-in fade-in duration-500">
           <AppointmentScheduler
             onSelect={handleScheduleSelect}
-            selectedDate={formData.date}
-            selectedTime={formData.time}
-            selectedType={formData.type}
+            selectedDate={localDate}
+            selectedTime={localTime}
+            selectedType={localType}
           />
 
-          <div className="mt-12 flex justify-end sticky bottom-6 z-30">
+          <div className="mt-12 flex flex-col items-end sticky bottom-6 z-30 gap-2">
+            {(errors.requestedDate || errors.appointmentDate || errors.appointmentTime) && (
+               <div className="bg-red-50 text-red-600 px-4 py-2 rounded-xl text-sm font-bold border border-red-100 shadow-sm animate-in fade-in slide-in-from-bottom-2">
+                 {errors.requestedDate?.message || errors.appointmentDate?.message || errors.appointmentTime?.message || "Please check your selection"}
+               </div>
+            )}
             <div className="bg-white/80 backdrop-blur-md p-2 rounded-2xl shadow-2xl border border-slate-200">
               <button
                 onClick={handleNextStep}
-                disabled={!formData.type || !formData.date || !formData.time}
-                className={`flex items-center px-8 py-3 rounded-xl font-bold text-lg transition-all ${!formData.type || !formData.date || !formData.time
+                disabled={!localType || !localDate || !localTime}
+                className={`flex items-center px-8 py-3 rounded-xl font-bold text-lg transition-all ${!localType || !localDate || !localTime
                   ? "bg-slate-100 text-slate-300 cursor-not-allowed"
                   : "bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-200"
                   }`}
@@ -500,7 +595,7 @@ const PatientPortal = () => {
         </div>
       ) : (
         <form
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmit(onSubmit)}
           className="grid grid-cols-1 lg:grid-cols-2 gap-10 animate-in slide-in-from-right-8 duration-500"
         >
           <div className="space-y-8">
@@ -524,15 +619,16 @@ const PatientPortal = () => {
                   </label>
                   <input
                     id="patient-name"
-                    required
                     type="text"
-                    value={formData.name}
-                    onChange={(e) =>
-                      setFormData({ ...formData, name: e.target.value })
-                    }
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none font-medium bg-slate-50 focus:bg-white transition-colors"
+                    className={`w-full px-4 py-3 rounded-xl border focus:ring-2 outline-none font-medium transition-colors ${
+                      errors.patientName ? "border-red-500 focus:ring-red-500 bg-red-50" : "border-slate-200 focus:ring-blue-500 bg-slate-50 focus:bg-white"
+                    }`}
                     placeholder="Enter your name"
+                    {...register("patientName")}
                   />
+                  {errors.patientName && (
+                    <p className="mt-1 text-sm text-red-600">{errors.patientName.message}</p>
+                  )}
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
@@ -542,14 +638,15 @@ const PatientPortal = () => {
                     </label>
                     <input
                       id="patient-age"
-                      required
                       type="number"
-                      value={formData.age}
-                      onChange={(e) =>
-                        setFormData({ ...formData, age: e.target.value })
-                      }
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none font-medium bg-slate-50 focus:bg-white transition-colors"
+                      className={`w-full px-4 py-3 rounded-xl border focus:ring-2 outline-none font-medium transition-colors ${
+                        errors.age ? "border-red-500 focus:ring-red-500 bg-red-50" : "border-slate-200 focus:ring-blue-500 bg-slate-50 focus:bg-white"
+                      }`}
+                      {...register("age")}
                     />
+                    {errors.age && (
+                      <p className="mt-1 text-sm text-red-600">{errors.age.message}</p>
+                    )}
                   </div>
                   <div>
                     <label htmlFor="patient-gender" className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
@@ -557,16 +654,18 @@ const PatientPortal = () => {
                     </label>
                     <select
                       id="patient-gender"
-                      value={formData.gender}
-                      onChange={(e) =>
-                        setFormData({ ...formData, gender: e.target.value })
-                      }
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none font-medium bg-slate-50 focus:bg-white transition-colors"
+                      className={`w-full px-4 py-3 rounded-xl border focus:ring-2 outline-none font-medium transition-colors ${
+                        errors.gender ? "border-red-500 focus:ring-red-500 bg-red-50" : "border-slate-200 focus:ring-blue-500 bg-slate-50 focus:bg-white"
+                      }`}
+                      {...register("gender")}
                     >
                       <option value="male">Male</option>
                       <option value="female">Female</option>
                       <option value="other">Other</option>
                     </select>
+                    {errors.gender && (
+                      <p className="mt-1 text-sm text-red-600">{errors.gender.message}</p>
+                    )}
                   </div>
                 </div>
 
@@ -576,15 +675,16 @@ const PatientPortal = () => {
                   </label>
                   <input
                     id="patient-phone"
-                    required
                     type="tel"
-                    value={formData.phone}
-                    onChange={(e) =>
-                      setFormData({ ...formData, phone: e.target.value })
-                    }
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none font-medium bg-slate-50 focus:bg-white transition-colors"
+                    className={`w-full px-4 py-3 rounded-xl border focus:ring-2 outline-none font-medium transition-colors ${
+                      errors.contactNumber ? "border-red-500 focus:ring-red-500 bg-red-50" : "border-slate-200 focus:ring-blue-500 bg-slate-50 focus:bg-white"
+                    }`}
                     placeholder="+91 9XXXXXXXXX"
+                    {...register("contactNumber")}
                   />
+                  {errors.contactNumber && (
+                    <p className="mt-1 text-sm text-red-600">{errors.contactNumber.message}</p>
+                  )}
                 </div>
                 <div>
                   <label htmlFor="patient-email" className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
@@ -592,15 +692,16 @@ const PatientPortal = () => {
                   </label>
                   <input
                     id="patient-email"
-                    required
                     type="email"
-                    value={formData.email}
-                    onChange={(e) =>
-                      setFormData({ ...formData, email: e.target.value })
-                    }
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none font-medium bg-slate-50 focus:bg-white transition-colors"
+                    className={`w-full px-4 py-3 rounded-xl border focus:ring-2 outline-none font-medium transition-colors ${
+                      errors.email ? "border-red-500 focus:ring-red-500 bg-red-50" : "border-slate-200 focus:ring-blue-500 bg-slate-50 focus:bg-white"
+                    }`}
                     placeholder="name@example.com"
+                    {...register("email")}
                   />
+                  {errors.email && (
+                    <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+                  )}
                 </div>
               </div>
             </div>
@@ -701,7 +802,7 @@ const PatientPortal = () => {
                     <button
                       type="button"
                       onClick={handleRefineSymptoms}
-                      disabled={isRefining || !formData.symptoms.trim()}
+                      disabled={isRefining || !watchedSymptoms?.trim()}
                       className="text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center disabled:opacity-50"
                     >
                       <Wand2
@@ -713,15 +814,16 @@ const PatientPortal = () => {
                   </div>
                   <textarea
                     id="patient-symptoms"
-                    required
-                    value={formData.symptoms}
-                    onChange={(e) =>
-                      setFormData({ ...formData, symptoms: e.target.value })
-                    }
-                    rows={6}
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none text-base leading-relaxed bg-slate-50 focus:bg-white transition-colors resize-none"
+                    className={`w-full px-4 py-3 rounded-xl border focus:ring-2 outline-none text-base leading-relaxed transition-colors resize-none ${
+                      errors.symptoms ? "border-red-500 focus:ring-red-500 bg-red-50" : "border-slate-200 focus:ring-blue-500 bg-slate-50 focus:bg-white"
+                    }`}
                     placeholder="Describe your pain, location, duration, and any triggers..."
+                    rows={6}
+                    {...register("symptoms")}
                   />
+                  {errors.symptoms && (
+                    <p className="mt-1 text-sm text-red-600">{errors.symptoms.message}</p>
+                  )}
                 </div>
 
                 <div>
@@ -736,46 +838,37 @@ const PatientPortal = () => {
                       min="1"
                       max="10"
                       step="1"
-                      value={formData.painScore}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          painScore: Number(e.target.value),
-                        })
-                      }
                       className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
-                      aria-valuetext={`Score: ${formData.painScore}${formData.painScore >= 8 ? ' (Severe)' : formData.painScore <= 3 ? ' (Mild)' : ''}`}
+                      aria-valuetext={`Score: ${watchedPainScore}${watchedPainScore >= 8 ? ' (Severe)' : watchedPainScore <= 3 ? ' (Mild)' : ''}`}
+                      {...register("painScore")}
                     />
                     <span className="text-sm font-bold text-slate-400" aria-hidden="true">10</span>
                   </div>
                   <div className="text-center mt-2">
                     <span
-                      className={`inline-block px-3 py-1 rounded-lg text-sm font-bold ${formData.painScore <= 3
+                      className={`inline-block px-3 py-1 rounded-lg text-sm font-bold ${watchedPainScore <= 3
                         ? "bg-green-100 text-green-700"
-                        : formData.painScore <= 7
+                        : watchedPainScore <= 7
                           ? "bg-yellow-100 text-yellow-700"
                           : "bg-red-100 text-red-700"
                         }`}
                     >
-                      Score: {formData.painScore}
-                      {formData.painScore >= 8 && " (Severe)"}
-                      {formData.painScore <= 3 && " (Mild)"}
+                      Score: {watchedPainScore}
+                      {watchedPainScore >= 8 && " (Severe)"}
+                      {watchedPainScore <= 3 && " (Mild)"}
                     </span>
                   </div>
+                  {errors.painScore && (
+                    <p className="mt-1 text-sm text-red-600 text-center">{errors.painScore.message}</p>
+                  )}
                 </div>
 
                 <div className="flex items-center p-4 bg-slate-50 rounded-xl border border-slate-200">
                   <input
                     type="checkbox"
                     id="mriScanAvailable"
-                    checked={formData.mriScanAvailable}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        mriScanAvailable: e.target.checked,
-                      })
-                    }
                     className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500 border-gray-300"
+                    {...register("hasMRI")}
                   />
                   <label
                     htmlFor="mriScanAvailable"
