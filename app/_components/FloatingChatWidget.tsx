@@ -20,8 +20,8 @@ interface Message {
  * - Emergency detection
  * - Compact design
  */
-export default function FloatingChatWidget() {
-  const [isOpen, setIsOpen] = useState(false);
+export default function FloatingChatWidget({ autoOpen = false }: { autoOpen?: boolean }) {
+  const [isOpen, setIsOpen] = useState(autoOpen);
   const [isMinimized, setIsMinimized] = useState(false);
   const [showEmergencyAlert, setShowEmergencyAlert] = useState(false);
   const [input, setInput] = useState('');

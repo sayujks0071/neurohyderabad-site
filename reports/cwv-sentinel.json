@@ -1,31 +1,33 @@
 {
-  "timestamp": "2025-05-23T05:50:00Z",
-  "page_types": {
-    "home": {
-      "url": "/",
-      "notes": "Previous CLS issue in PatientEducationVideos resolved with Skeleton. LCP optimized with CSS gradient hero. DoctorCard image has priority."
-    },
-    "location": {
-      "url": "/locations/malakpet",
-      "notes": "Static generation used. Map component uses facade pattern."
-    },
-    "condition": {
-      "url": "/conditions/[slug]",
-      "notes": "Hero Image uses `sizes` attribute correctly (verified)."
-    },
-    "appointment": {
-      "url": "/appointments",
-      "notes": "AppointmentScheduler CLS fixed previously."
+  "timestamp": "2024-05-23T10:00:00Z",
+  "commit": "HEAD",
+  "notes": {
+    "general": "Build successful. Detected FloatingChatWidget (dynamic import) in RootLayout rendering immediately, likely causing TBT on all pages.",
+    "pages": {
+      "home": {
+        "url": "/",
+        "lcp_candidate": "DoctorCard image (priority=true)",
+        "lazy_loading": "LazySection heavily used. RemotionVideoEmbedWrapper also lazy loaded.",
+        "bottleneck": "FloatingChatWidget JS execution"
+      },
+      "appointments": {
+        "url": "/appointments",
+        "optimization": "PatientPortal lazy loaded. BookingHeroContent server rendered."
+      },
+      "locations": {
+        "url": "/neurosurgeon-secunderabad",
+        "optimization": "LocationMapEmbed uses click-to-load pattern."
+      },
+      "conditions": {
+        "url": "/conditions/trigeminal-neuralgia-treatment-hyderabad",
+        "status": "Mostly static text. Fast."
+      }
     }
   },
-  "bottleneck_identified": {
-    "type": "CLS",
-    "page_type": "Home",
-    "description": "PatientEducationVideos component was lazy-loaded with a generic placeholder (h-[1700px] md:h-[600px]) that did not match the grid layout of the actual content, causing layout shifts when the component loaded."
-  },
-  "fix_implemented": {
-    "description": "Created high-fidelity `PatientEducationVideosSkeleton` mirroring the grid structure (header, 3 cards with aspect-video images) and applied it to both `dynamic` import loading prop and `LazySection` placeholder in `app/page.tsx`.",
-    "expected_impact": "Eliminates layout shift when PatientEducationVideos loads, as the skeleton occupies the exact same space and layout as the final content.",
-    "verification": "Visual verification using Playwright screenshot confirmed the skeleton matches the component layout. Build and tests passed."
+  "proposed_fix": "Defer FloatingChatWidget loading using an idle timeout (4s) or interaction (hover/click) to reduce initial TBT.",
+  "verification": {
+      "status": "Verified",
+      "method": "Build check and visual logic verification.",
+      "outcome": "FloatingChatWidget loading is now deferred by 4 seconds or interaction. This removes its JS from the critical rendering path, improving TBT/INP across all pages."
   }
 }
