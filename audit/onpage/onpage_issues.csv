@@ -1,119 +1,152 @@
-url,issue,severity,recommended_fix
-"https://www.drsayuj.info/about","Title too long","Low","Shorten title"
-"https://www.drsayuj.info/about","Description too long","Low","Shorten description"
-"https://www.drsayuj.info/appointments","Missing H1","High","Add <h1> tag"
-"https://www.drsayuj.info/blog/awake-craniotomy-brain-tumor-guide","Title too long","Low","Shorten title"
-"https://www.drsayuj.info/blog/awake-craniotomy-brain-tumor-guide","Description too long","Low","Shorten description"
-"https://www.drsayuj.info/blog/awake-craniotomy-guide","Missing Title","High","Add title to metadata"
-"https://www.drsayuj.info/blog/awake-craniotomy-guide","Missing Meta Description","High","Add description to metadata"
-"https://www.drsayuj.info/blog/awake-spine-surgery-vs-general-anesthesia-guide","Description too short","Medium","Expand description"
-"https://www.drsayuj.info/blog/brain-tumor-surgery-cost-hyderabad","Missing Title","High","Add title to metadata"
-"https://www.drsayuj.info/blog/brain-tumor-surgery-cost-hyderabad","Missing Meta Description","High","Add description to metadata"
-"https://www.drsayuj.info/blog/cervical-radiculopathy-arm-pain-hyderabad","Description too long","Low","Shorten description"
-"https://www.drsayuj.info/blog/cervical-spondylosis-neck-pain-hyderabad","Description too short","Medium","Expand description"
-"https://www.drsayuj.info/blog/chronic-subdural-hematoma-symptoms-elderly","Title too long","Low","Shorten title"
-"https://www.drsayuj.info/blog/chronic-subdural-hematoma-symptoms-elderly","Description too long","Low","Shorten description"
-"https://www.drsayuj.info/blog/cost-of-endoscopic-spine-surgery-hyderabad","Description too long","Low","Shorten description"
-"https://www.drsayuj.info/blog/day-care-endoscopic-spine-surgery-eligibility","Missing Title","High","Add title to metadata"
-"https://www.drsayuj.info/blog/day-care-endoscopic-spine-surgery-eligibility","Missing Meta Description","High","Add description to metadata"
-"https://www.drsayuj.info/blog/day-care-spine-surgery-insurance-hyderabad","Missing Title","High","Add title to metadata"
-"https://www.drsayuj.info/blog/day-care-spine-surgery-insurance-hyderabad","Missing Meta Description","High","Add description to metadata"
-"https://www.drsayuj.info/blog/disc-replacement-vs-fusion","Missing Title","High","Add title to metadata"
-"https://www.drsayuj.info/blog/disc-replacement-vs-fusion","Missing Meta Description","High","Add description to metadata"
-"https://www.drsayuj.info/blog/does-endoscopic-spine-surgery-work-for-sciatica-hyderabad","Title too long","Low","Shorten title"
-"https://www.drsayuj.info/blog/endoscopic-cervical-spine-surgery-hyderabad","Missing Title","High","Add title to metadata"
-"https://www.drsayuj.info/blog/endoscopic-cervical-spine-surgery-hyderabad","Missing Meta Description","High","Add description to metadata"
-"https://www.drsayuj.info/blog/endoscopic-discectomy-cost-hyderabad","Missing Title","High","Add title to metadata"
-"https://www.drsayuj.info/blog/endoscopic-discectomy-cost-hyderabad","Missing Meta Description","High","Add description to metadata"
-"https://www.drsayuj.info/blog/endoscopic-spine-surgery-cost-hyderabad","Missing Title","High","Add title to metadata"
-"https://www.drsayuj.info/blog/endoscopic-spine-surgery-cost-hyderabad","Missing Meta Description","High","Add description to metadata"
-"https://www.drsayuj.info/blog/endoscopic-vs-microdiscectomy-hyderabad","Missing Title","High","Add title to metadata"
-"https://www.drsayuj.info/blog/endoscopic-vs-microdiscectomy-hyderabad","Missing Meta Description","High","Add description to metadata"
-"https://www.drsayuj.info/blog/epilepsy-surgery-options-hyderabad","Description too long","Low","Shorten description"
-"https://www.drsayuj.info/blog/how-much-does-brain-surgery-cost-hyderabad","Missing Title","High","Add title to metadata"
-"https://www.drsayuj.info/blog/how-much-does-brain-surgery-cost-hyderabad","Missing Meta Description","High","Add description to metadata"
-"https://www.drsayuj.info/blog/l4-l5-disc-bulge-treatment-hyderabad","Description too short","Medium","Expand description"
-"https://www.drsayuj.info/blog/life-after-spinal-fusion-surgery-recovery-hyderabad","Title too long","Low","Shorten title"
-"https://www.drsayuj.info/blog/microdiscectomy-vs-laminectomy-recovery-comparison","Description too long","Low","Shorten description"
-"https://www.drsayuj.info/blog/mvd-vs-radiosurgery-trigeminal-neuralgia","Missing Title","High","Add title to metadata"
-"https://www.drsayuj.info/blog/mvd-vs-radiosurgery-trigeminal-neuralgia","Missing Meta Description","High","Add description to metadata"
-"https://www.drsayuj.info/blog/osteoporotic-spine-fracture-elderly-guide","Description too long","Low","Shorten description"
-"https://www.drsayuj.info/blog/return-to-work-after-endoscopic-discectomy-hyderabad","Missing Title","High","Add title to metadata"
-"https://www.drsayuj.info/blog/return-to-work-after-endoscopic-discectomy-hyderabad","Missing Meta Description","High","Add description to metadata"
-"https://www.drsayuj.info/blog/sciatica-pain-relief-exercises-hyderabad","Description too long","Low","Shorten description"
-"https://www.drsayuj.info/blog/sleeping-positions-for-sciatica-relief-guide","Description too short","Medium","Expand description"
-"https://www.drsayuj.info/blog/spinal-fusion-cost-hyderabad","Missing Title","High","Add title to metadata"
-"https://www.drsayuj.info/blog/spinal-fusion-cost-hyderabad","Missing Meta Description","High","Add description to metadata"
-"https://www.drsayuj.info/blog/spinal-tuberculosis-symptoms-treatment-hyderabad","Description too short","Medium","Expand description"
-"https://www.drsayuj.info/blog/spondylolisthesis-vs-herniated-disc-difference","Title too long","Low","Shorten title"
-"https://www.drsayuj.info/blog/understanding-brain-mri-tumor-report-guide","Description too long","Low","Shorten description"
-"https://www.drsayuj.info/blog/world-stroke-day-2025-hyderabad-stroke-code","Missing Title","High","Add title to metadata"
-"https://www.drsayuj.info/blog/world-stroke-day-2025-hyderabad-stroke-code","Missing Meta Description","High","Add description to metadata"
-"https://www.drsayuj.info/brain-surgery","Title too long","Low","Shorten title"
-"https://www.drsayuj.info/brain-surgery","Description too long","Low","Shorten description"
-"https://www.drsayuj.info/conditions/brain-bleed-evacuation-hyderabad","Title too long","Low","Shorten title"
-"https://www.drsayuj.info/conditions/brain-bleed-evacuation-hyderabad","Description too long","Low","Shorten description"
-"https://www.drsayuj.info/conditions/cervical-myelopathy-decompression-hyderabad","Title too long","Low","Shorten title"
-"https://www.drsayuj.info/conditions/cervical-myelopathy-decompression-hyderabad","Description too long","Low","Shorten description"
-"https://www.drsayuj.info/conditions/osteoporotic-spine-fracture-hyderabad","Missing Title","High","Add title to metadata"
-"https://www.drsayuj.info/conditions/osteoporotic-spine-fracture-hyderabad","Missing Meta Description","High","Add description to metadata"
-"https://www.drsayuj.info/conditions/sciatica-pain-treatment-hyderabad","Missing Title","High","Add title to metadata"
-"https://www.drsayuj.info/conditions/sciatica-pain-treatment-hyderabad","Missing Meta Description","High","Add description to metadata"
-"https://www.drsayuj.info/conditions/slip-disc-treatment-hyderabad","Missing Title","High","Add title to metadata"
-"https://www.drsayuj.info/conditions/slip-disc-treatment-hyderabad","Missing Meta Description","High","Add description to metadata"
-"https://www.drsayuj.info/conditions/spinal-stenosis-treatment-hyderabad","Missing Title","High","Add title to metadata"
-"https://www.drsayuj.info/conditions/spinal-stenosis-treatment-hyderabad","Missing Meta Description","High","Add description to metadata"
-"https://www.drsayuj.info/conditions/spondylolisthesis-treatment-hyderabad","Missing Title","High","Add title to metadata"
-"https://www.drsayuj.info/conditions/spondylolisthesis-treatment-hyderabad","Missing Meta Description","High","Add description to metadata"
-"https://www.drsayuj.info/knowledge-base","Missing H1","High","Add <h1> tag"
-"https://www.drsayuj.info/media","Description too long","Low","Shorten description"
-"https://www.drsayuj.info/neurosurgeon-banjara-hills","Title too long","Low","Shorten title"
-"https://www.drsayuj.info/neurosurgeon-banjara-hills","Description too long","Low","Shorten description"
-"https://www.drsayuj.info/neurosurgeon-gachibowli","Title too long","Low","Shorten title"
-"https://www.drsayuj.info/neurosurgeon-gachibowli","Description too long","Low","Shorten description"
-"https://www.drsayuj.info/neurosurgeon-hitech-city","Title too long","Low","Shorten title"
-"https://www.drsayuj.info/neurosurgeon-hitech-city","Description too long","Low","Shorten description"
-"https://www.drsayuj.info/neurosurgeon-jubilee-hills","Title too long","Low","Shorten title"
-"https://www.drsayuj.info/neurosurgeon-jubilee-hills","Description too long","Low","Shorten description"
-"https://www.drsayuj.info/neurosurgeon-secunderabad","Title too long","Low","Shorten title"
-"https://www.drsayuj.info/neurosurgeon-secunderabad","Description too long","Low","Shorten description"
-"https://www.drsayuj.info/pediatric-neurosurgery","Description too long","Low","Shorten description"
-"https://www.drsayuj.info/services/awake-spine-surgery-hyderabad","Missing Title","High","Add title to metadata"
-"https://www.drsayuj.info/services/awake-spine-surgery-hyderabad","Missing Meta Description","High","Add description to metadata"
-"https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad","Description too long","Low","Shorten description"
-"https://www.drsayuj.info/services/cervical-endoscopic-spine-surgery-hyderabad","Missing Title","High","Add title to metadata"
-"https://www.drsayuj.info/services/cervical-endoscopic-spine-surgery-hyderabad","Missing Meta Description","High","Add description to metadata"
-"https://www.drsayuj.info/services/compare-neurosurgeons-hyderabad","Missing Title","High","Add title to metadata"
-"https://www.drsayuj.info/services/compare-neurosurgeons-hyderabad","Missing Meta Description","High","Add description to metadata"
-"https://www.drsayuj.info/services/cooled-radiofrequency-ablation-hyderabad","Missing Title","High","Add title to metadata"
-"https://www.drsayuj.info/services/cooled-radiofrequency-ablation-hyderabad","Missing Meta Description","High","Add description to metadata"
-"https://www.drsayuj.info/services/dr-sayuj-vs-apollo-neuro-icu","Missing Title","High","Add title to metadata"
-"https://www.drsayuj.info/services/dr-sayuj-vs-apollo-neuro-icu","Missing Meta Description","High","Add description to metadata"
-"https://www.drsayuj.info/services/endoscopic-discectomy-hyderabad","Missing Title","High","Add title to metadata"
-"https://www.drsayuj.info/services/endoscopic-discectomy-hyderabad","Missing Meta Description","High","Add description to metadata"
-"https://www.drsayuj.info/services/epilepsy-surgery-hyderabad","Missing Title","High","Add title to metadata"
-"https://www.drsayuj.info/services/epilepsy-surgery-hyderabad","Missing Meta Description","High","Add description to metadata"
-"https://www.drsayuj.info/services/kims-spine-surgery-second-opinion","Missing Title","High","Add title to metadata"
-"https://www.drsayuj.info/services/kims-spine-surgery-second-opinion","Missing Meta Description","High","Add description to metadata"
-"https://www.drsayuj.info/services/kyphoplasty-vertebroplasty-hyderabad","Missing Title","High","Add title to metadata"
-"https://www.drsayuj.info/services/kyphoplasty-vertebroplasty-hyderabad","Missing Meta Description","High","Add description to metadata"
-"https://www.drsayuj.info/services/lumbar-laminectomy-surgery-hyderabad","Missing Title","High","Add title to metadata"
-"https://www.drsayuj.info/services/lumbar-laminectomy-surgery-hyderabad","Missing Meta Description","High","Add description to metadata"
-"https://www.drsayuj.info/services/minimally-invasive-spine-surgery","Missing Title","High","Add title to metadata"
-"https://www.drsayuj.info/services/minimally-invasive-spine-surgery","Missing Meta Description","High","Add description to metadata"
-"https://www.drsayuj.info/services/peripheral-nerve-surgery","Missing Title","High","Add title to metadata"
-"https://www.drsayuj.info/services/peripheral-nerve-surgery","Missing Meta Description","High","Add description to metadata"
-"https://www.drsayuj.info/services/robotic-spine-surgery-hyderabad","Missing Title","High","Add title to metadata"
-"https://www.drsayuj.info/services/robotic-spine-surgery-hyderabad","Missing Meta Description","High","Add description to metadata"
-"https://www.drsayuj.info/services/slip-disc-surgery-cost-hyderabad","Missing Title","High","Add title to metadata"
-"https://www.drsayuj.info/services/slip-disc-surgery-cost-hyderabad","Missing Meta Description","High","Add description to metadata"
-"https://www.drsayuj.info/services/spinal-fusion","Missing Title","High","Add title to metadata"
-"https://www.drsayuj.info/services/spinal-fusion","Missing Meta Description","High","Add description to metadata"
-"https://www.drsayuj.info/services/spinal-fusion-surgery-hyderabad","Missing Title","High","Add title to metadata"
-"https://www.drsayuj.info/services/spinal-fusion-surgery-hyderabad","Missing Meta Description","High","Add description to metadata"
-"https://www.drsayuj.info/services/spine-surgery-cost-hyderabad","Missing Title","High","Add title to metadata"
-"https://www.drsayuj.info/services/spine-surgery-cost-hyderabad","Missing Meta Description","High","Add description to metadata"
-"https://www.drsayuj.info/services/spine-surgery-hyderabad","Description too long","Low","Shorten description"
-"https://www.drsayuj.info/technology-facilities","Title too long","Low","Shorten title"
-"https://www.drsayuj.info/technology-facilities","Description too long","Low","Shorten description"
-"https://www.drsayuj.info/technology-innovation","Description too long","Low","Shorten description"
+url,issue_type,severity,recommended_fix
+https://www.drsayuj.info/awake-brain-surgery,Title too long,Medium,Fix issue
+https://www.drsayuj.info/brain-tumor-surgery,Title too short,Low,Expand title
+https://www.drsayuj.info/cervical-disc-replacement,Title too long,Medium,Fix issue
+https://www.drsayuj.info/craniovertebral-junction-surgery,Title too long,Medium,Fix issue
+https://www.drsayuj.info/endoscopic-cervical-spine-surgery,Title too long,Medium,Fix issue
+https://www.drsayuj.info/endoscopic-discectomy,Title too long,Medium,Fix issue
+https://www.drsayuj.info/endoscopic-lumbar-fusion,Title too long,Medium,Fix issue
+https://www.drsayuj.info/lumbar-stenosis-surgery,Title too long,Medium,Fix issue
+https://www.drsayuj.info/minimally-invasive-spine-surgery,Title too long,Medium,Fix issue
+https://www.drsayuj.info/neuro-endoscopy,Title too long,Medium,Fix issue
+https://www.drsayuj.info/spinal-cord-compression-surgery,Title too long,Medium,Fix issue
+https://www.drsayuj.info/spinal-fracture-fixation,Title too long,Medium,Fix issue
+https://www.drsayuj.info/about,Title too long,Medium,Fix issue
+https://www.drsayuj.info/about,Meta description too long,Medium,Fix issue
+https://www.drsayuj.info/admin/appointments,Title too short,Low,Expand title
+https://www.drsayuj.info/admin/login,Title too short,Low,Expand title
+https://www.drsayuj.info/admin,Title too short,Low,Expand title
+https://www.drsayuj.info/ai-chat,Title too long,Medium,Fix issue
+https://www.drsayuj.info/appointments,Title too long,Medium,Fix issue
+https://www.drsayuj.info/appointments/thank-you,Title too long,Medium,Fix issue
+https://www.drsayuj.info/best-neurosurgeon-in-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/blog/cervical-spondylosis-neck-pain-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/blog/degenerative-disc-disease-guide-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/blog/epilepsy-surgery-options-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/blog/failed-back-surgery-syndrome-treatment-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/blog/lumbar-spondylosis-treatment-exercises-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/blog/microdiscectomy-vs-laminectomy-recovery-comparison,Title too long,Medium,Fix issue
+https://www.drsayuj.info/blog/normal-pressure-hydrocephalus-nph-symptoms-treatment-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/blog/osteoporotic-spine-fracture-elderly-guide,Title too long,Medium,Fix issue
+https://www.drsayuj.info/blog/spinal-tuberculosis-symptoms-treatment-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/blog/types-of-spine-tumors-symptoms-guide,Title too long,Medium,Fix issue
+https://www.drsayuj.info/blog/understanding-mri-spine-report-guide,Title too long,Medium,Fix issue
+https://www.drsayuj.info/blog/awake-craniotomy-guide,Title too long,Medium,Fix issue
+https://www.drsayuj.info/blog/brain-tumor-surgery-cost-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/blog/day-care-endoscopic-spine-surgery-eligibility,Title too long,Medium,Fix issue
+https://www.drsayuj.info/blog/day-care-spine-surgery-insurance-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/blog/endoscopic-cervical-spine-surgery-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/blog/endoscopic-discectomy-cost-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/blog/endoscopic-spine-surgery-cost-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/blog/endoscopic-vs-microdiscectomy-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/blog/how-much-does-brain-surgery-cost-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/blog/mvd-vs-radiosurgery-trigeminal-neuralgia,Title too long,Medium,Fix issue
+https://www.drsayuj.info/blog,Title too long,Medium,Fix issue
+https://www.drsayuj.info/blog/return-to-work-after-endoscopic-discectomy-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/blog/sciatica-pain-management-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/blog/spinal-fusion-cost-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/blog/spine-health-maintenance-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/blog/spine-surgery-recovery-timeline-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/blog/when-to-worry-about-back-pain-neurosurgeon-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/blog/world-stroke-day-2025-hyderabad-stroke-code,Title too long,Medium,Fix issue
+https://www.drsayuj.info/brain-surgery,Title too long,Medium,Fix issue
+https://www.drsayuj.info/brain-surgery,Meta description too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/acoustic-neuroma-treatment-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/brain-aneurysm-treatment-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/carpal-tunnel-syndrome-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/chiari-malformation-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/herniated-disc-treatment-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/pituitary-adenoma-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/a-z/acoustic-neuroma,Title too short,Low,Expand title
+https://www.drsayuj.info/conditions/a-z/aneurysm,Title too short,Low,Expand title
+https://www.drsayuj.info/conditions/a-z/brachial-plexus,Title too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/a-z/brachial-plexus,Meta description too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/a-z/brain-tumor,Title too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/a-z/brain-tumor,Meta description too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/a-z/carpal-tunnel,Title too short,Low,Expand title
+https://www.drsayuj.info/conditions/a-z/cervical-disc,Title too short,Low,Expand title
+https://www.drsayuj.info/conditions/a-z/cervical-myelopathy,Title too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/a-z/cervical-myelopathy,Meta description too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/a-z/chiari-malformation,Title too short,Low,Expand title
+https://www.drsayuj.info/conditions/a-z/degenerative-disc-disease,Title too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/a-z/degenerative-disc-disease,Meta description too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/a-z/disc-herniation,Title too short,Low,Expand title
+https://www.drsayuj.info/conditions/a-z/epilepsy,Title too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/a-z/epilepsy,Meta description too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/a-z/glioma,Meta description too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/a-z/hydrocephalus,Title too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/a-z/hydrocephalus,Meta description too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/a-z/lumbar-stenosis,Title too short,Low,Expand title
+https://www.drsayuj.info/conditions/a-z/meningioma,Title too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/a-z/meningioma,Meta description too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/a-z/metastasis,Title too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/a-z/metastasis,Meta description too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/a-z/normal-pressure-hydrocephalus,Title too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/a-z/normal-pressure-hydrocephalus,Meta description too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/a-z/pituitary-adenoma,Title too short,Low,Expand title
+https://www.drsayuj.info/conditions/a-z/radiculopathy,Title too short,Low,Expand title
+https://www.drsayuj.info/conditions/a-z/sciatica,Title too short,Low,Expand title
+https://www.drsayuj.info/conditions/a-z/seizure-disorders,Title too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/a-z/seizure-disorders,Meta description too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/a-z/spinal-cord-tumour,Title too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/a-z/spinal-cord-tumour,Meta description too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/a-z/spondylolisthesis,Title too short,Low,Expand title
+https://www.drsayuj.info/conditions/a-z/trigeminal-neuralgia,Title too short,Low,Expand title
+https://www.drsayuj.info/conditions/a-z/vascular-malformations,Title too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/a-z/vascular-malformations,Meta description too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/brain-bleed-evacuation-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/brain-bleed-evacuation-hyderabad,Meta description too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/brain-tumor-surgery-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/cervical-myelopathy-decompression-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/cervical-myelopathy-decompression-hyderabad,Meta description too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/cervical-radiculopathy-treatment-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/degenerative-disc-disease-treatment-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/degenerative-disc-disease-treatment-hyderabad,Meta description too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/osteoporotic-spine-fracture-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/conditions,Title too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/sciatica-pain-treatment-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/scoliosis-treatment-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/slip-disc-treatment-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/spinal-stenosis-treatment-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/spine-tumor-surgery-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/spine-tumor-surgery-hyderabad,Meta description too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/spondylolisthesis-treatment-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/conditions/trigeminal-neuralgia-treatment-hyderabad,Title too long,Medium,Fix issue
+https://www.drsayuj.info/contact,Title too long,Medium,Fix issue
+https://www.drsayuj.info/content-integrity,Title too long,Medium,Fix issue
+https://www.drsayuj.info/cookies,Title too long,Medium,Fix issue
+https://www.drsayuj.info/disclaimer,Title too long,Medium,Fix issue
+https://www.drsayuj.info/disease-guides/degenerative-disc-disease,Title too long,Medium,Fix issue
+https://www.drsayuj.info/disease-guides,Title too long,Medium,Fix issue
+https://www.drsayuj.info/disease-guides,Meta description too long,Medium,Fix issue
+https://www.drsayuj.info/emergency-rehabilitation,Title too long,Medium,Fix issue
+https://www.drsayuj.info/emergency-rehabilitation,Meta description too long,Medium,Fix issue
+https://www.drsayuj.info/german-training,Title too long,Medium,Fix issue
+https://www.drsayuj.info/german-training,Meta description too long,Medium,Fix issue
+https://www.drsayuj.info/icon.svg,Missing title tag,High,Fix issue
+https://www.drsayuj.info/icon.svg,Missing meta description,High,Fix issue
+https://www.drsayuj.info/icon.svg,Missing H1 tag,High,Fix issue
+https://www.drsayuj.info/icon.svg,Missing canonical tag,High,Fix issue
+https://www.drsayuj.info/icon.svg,Title too short,Low,Expand title
+https://www.drsayuj.info/knowledge-base,Title too long,Medium,Fix issue
+https://www.drsayuj.info/locations/banjara-hills,Title too long,Medium,Fix issue
+https://www.drsayuj.info/locations/banjara-hills,Meta description too long,Medium,Fix issue
+https://www.drsayuj.info/locations/brain-spine-surgeon-banjara-hills,Title too long,Medium,Fix issue
+https://www.drsayuj.info/locations/brain-spine-surgeon-hitec-city,Title too long,Medium,Fix issue
+https://www.drsayuj.info/locations/brain-spine-surgeon-jubilee-hills,Title too long,Medium,Fix issue
+https://www.drsayuj.info/locations/hitech-city,Title too long,Medium,Fix issue
+https://www.drsayuj.info/locations/lb-nagar,Title too long,Medium,Fix issue
+https://www.drsayuj.info/locations/malakpet,Title too long,Medium,Fix issue
+https://www.drsayuj.info/locations/malakpet,Meta description too long,Medium,Fix issue
+https://www.drsayuj.info/locations/neurosurgeon-kondapur,Title too long,Medium,Fix issue
+https://www.drsayuj.info/locations/neurosurgeon-kothapet,Title too long,Medium,Fix issue
+https://www.drsayuj.info/locations/neurosurgeon-kukatpally,Title too long,Medium,Fix issue
+https://www.drsayuj.info/locations/neurosurgeon-madhapur,Title too long,Medium,Fix issue
+https://www.drsayuj.info/locations/neurosurgeon-manikonda,Title too long,Medium,Fix issue
+https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills-faq,Title too long,Medium,Fix issue
+https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills-faq,Meta description too long,Medium,Fix issue
+https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills,Title too short,Low,Expand title
+https://www.drsayuj.info/locations/neurosurgeon-near-kachiguda-faq,Title too long,Medium,Fix issue
+https://www.drsayuj.info/locations/neurosurgeon-near-kondapur-faq,Title too long,Medium,Fix issue
+https://www.drsayuj.info/locations/neurosurgeon-nizampet,Title too long,Medium,Fix issue
+https://www.drsayuj.info/locations,Title too long,Medium,Fix issue

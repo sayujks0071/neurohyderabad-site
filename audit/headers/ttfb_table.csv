@@ -1,6 +1,6 @@
-URL,Type,TTFB(s),Cache-Control,Content-Encoding,X-NextJS-Cache
-http://localhost:3000/,Homepage,0.525635,"no-store, must-revalidate",NONE,N/A
-http://localhost:3000/services/minimally-invasive-spine-surgery,Service,0.398932,"no-store, must-revalidate",NONE,N/A
-http://localhost:3000/conditions/sciatica-pain-treatment-hyderabad,Condition,1.543075,"no-store, must-revalidate",NONE,N/A
-http://localhost:3000/neurosurgeon-hitech-city,Location,1.125940,"no-store, must-revalidate",NONE,N/A
-http://localhost:3000/blog/awake-craniotomy-guide,Blog,0.924011,"no-store, must-revalidate",NONE,N/A
+URL,TTFB,Cache-Control,Content-Type
+http://localhost:3000/,0.067835,"s-maxage=21600, stale-while-revalidate=31514400","text/html; charset=utf-8"
+http://localhost:3000/services/endoscopic-spine-surgery-hyderabad,0.024174,"s-maxage=3600, stale-while-revalidate=31532400","text/html; charset=utf-8"
+http://localhost:3000/conditions/sciatica-pain-treatment-hyderabad,0.022057,"s-maxage=21600, stale-while-revalidate=31514400","text/html; charset=utf-8"
+http://localhost:3000/locations/banjara-hills,0.020318,"s-maxage=86400, stale-while-revalidate=31449600","text/html; charset=utf-8"
+http://localhost:3000/blog/endoscopic-spine-surgery-recovery-timeline,0.021424,"s-maxage=86400, stale-while-revalidate=31449600","text/html; charset=utf-8"

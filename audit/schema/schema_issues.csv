@@ -1,3 +1,31 @@
-URL,Schema Type,Missing Field/Issue
-http://localhost:3000/neurosurgeon-hitech-city,MedicalClinic,Missing medicalSpecialty
-http://localhost:3000/neurosurgeon-hitech-city,MedicalClinic,Missing priceRange (Recommended)
+url,issue_type,severity,recommended_fix
+https://www.drsayuj.info/admin/appointments,No Structured Data,High,Implement Schema
+https://www.drsayuj.info/conditions/chiari-malformation-hyderabad,Missing FAQPage Schema,Medium,Add FAQ schema
+https://www.drsayuj.info/conditions/pituitary-adenoma-hyderabad,Missing FAQPage Schema,Medium,Add FAQ schema
+https://www.drsayuj.info/conditions/a-z/acoustic-neuroma,No Structured Data,High,Implement Schema
+https://www.drsayuj.info/conditions/a-z/aneurysm,No Structured Data,High,Implement Schema
+https://www.drsayuj.info/conditions/a-z/carpal-tunnel,No Structured Data,High,Implement Schema
+https://www.drsayuj.info/conditions/a-z/cervical-disc,No Structured Data,High,Implement Schema
+https://www.drsayuj.info/conditions/a-z/cervical-myelopathy,Missing FAQPage Schema,Medium,Add FAQ schema
+https://www.drsayuj.info/conditions/a-z/chiari-malformation,No Structured Data,High,Implement Schema
+https://www.drsayuj.info/conditions/a-z/degenerative-disc-disease,Missing FAQPage Schema,Medium,Add FAQ schema
+https://www.drsayuj.info/conditions/a-z/disc-herniation,No Structured Data,High,Implement Schema
+https://www.drsayuj.info/conditions/a-z/glioma,Missing FAQPage Schema,Medium,Add FAQ schema
+https://www.drsayuj.info/conditions/a-z/lumbar-stenosis,No Structured Data,High,Implement Schema
+https://www.drsayuj.info/conditions/a-z/meningioma,Missing FAQPage Schema,Medium,Add FAQ schema
+https://www.drsayuj.info/conditions/a-z/metastasis,Missing FAQPage Schema,Medium,Add FAQ schema
+https://www.drsayuj.info/conditions/a-z/normal-pressure-hydrocephalus,Missing FAQPage Schema,Medium,Add FAQ schema
+https://www.drsayuj.info/conditions/a-z/pituitary-adenoma,No Structured Data,High,Implement Schema
+https://www.drsayuj.info/conditions/a-z/radiculopathy,No Structured Data,High,Implement Schema
+https://www.drsayuj.info/conditions/a-z/sciatica,No Structured Data,High,Implement Schema
+https://www.drsayuj.info/conditions/a-z/seizure-disorders,Missing FAQPage Schema,Medium,Add FAQ schema
+https://www.drsayuj.info/conditions/a-z/spinal-cord-tumour,Missing FAQPage Schema,Medium,Add FAQ schema
+https://www.drsayuj.info/conditions/a-z/spondylolisthesis,No Structured Data,High,Implement Schema
+https://www.drsayuj.info/conditions/a-z/trigeminal-neuralgia,No Structured Data,High,Implement Schema
+https://www.drsayuj.info/conditions/a-z/vascular-malformations,Missing FAQPage Schema,Medium,Add FAQ schema
+https://www.drsayuj.info/conditions/brain-bleed-evacuation-hyderabad,Missing FAQPage Schema,Medium,Add FAQ schema
+https://www.drsayuj.info/conditions/brain-tumor-surgery-hyderabad,Missing FAQPage Schema,Medium,Add FAQ schema
+https://www.drsayuj.info/conditions/cervical-myelopathy-decompression-hyderabad,Missing FAQPage Schema,Medium,Add FAQ schema
+https://www.drsayuj.info/conditions/cervical-radiculopathy-treatment-hyderabad,Missing FAQPage Schema,Medium,Add FAQ schema
+https://www.drsayuj.info/conditions/spine-tumor-surgery-hyderabad,Missing FAQPage Schema,Medium,Add FAQ schema
+https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills,No Structured Data,High,Implement Schema

@@ -1,8 +1,11 @@
 keyword,intent,suggested_target_page
-spine surgery cost in hyderabad,Commercial,services/spine-surgery-cost-hyderabad
-spine surgeon telugu,Informational,blog/spine-surgery-guide-telugu
-laser spine surgery hyderabad,Commercial,services/laser-spine-surgery-hyderabad
-spine surgery insurance hyderabad,Transactional,blog/spine-surgery-insurance-guide
-best neurosurgeon kphb,Local,locations/neurosurgeon-kphb
-endoscopic vs microdiscectomy,Informational,blog/endoscopic-vs-microdiscectomy-comparison
-second opinion spine surgery,Commercial,services/spine-surgery-second-opinion
+endoscopic spine surgery cost hyderabad,Commercial,/services/endoscopic-spine-surgery-hyderabad
+laser spine surgery hyderabad,Informational,New Blog: Laser vs Endoscopic Spine Surgery
+best neurosurgeon for second opinion hyderabad,Commercial,/services/second-opinion-spine-surgery
+sciatica treatment without surgery hyderabad,Informational,/conditions/sciatica-pain-treatment-hyderabad
+spinal fusion success rate hyderabad,Informational,/services/spinal-fusion-surgery-hyderabad
+lumbar spondylosis exercises pdf,Informational,/blog/lumbar-spondylosis-treatment-exercises-hyderabad
+endoscopic spine surgery vs microdiscectomy cost,Commercial,/blog/endoscopic-vs-microdiscectomy-hyderabad
+brain tumor surgery recovery time elderly,Informational,/blog/brain-tumor-surgery-recovery-timeline
+awake spine surgery risks,Informational,/blog/awake-spine-surgery-vs-general-anesthesia-guide
+yashoda hospital neurosurgeon appointment,Navigational,/contact

@@ -218,6 +218,16 @@ export const CONDITION_RESOURCES: ConditionResource[] = [
       "Posterior fossa decompression with duraplasty if indicated",
       "Post-operative physiotherapy and symptom monitoring",
     ],
+    faq: [
+      {
+        question: "Is surgery always required for Chiari Malformation?",
+        answer: "Not always. Asymptomatic cases are often monitored with MRI. Surgery is recommended if there are symptoms like severe headaches, balance issues, or syrinx formation.",
+      },
+      {
+        question: "What is the recovery time after decompression surgery?",
+        answer: "Hospital stay is typically 3-5 days. Most patients return to light activities within 2-3 weeks, with full recovery taking 6-12 weeks.",
+      },
+    ],
   },
   {
     slug: "cervical-disc",
@@ -266,6 +276,16 @@ export const CONDITION_RESOURCES: ConditionResource[] = [
       "MRI screening and neuromonitoring for severity",
       "Anterior or posterior decompression with fusion as needed",
       "Physiotherapy focused on balance and strength post-surgery",
+    ],
+    faq: [
+      {
+        question: "How is cervical myelopathy different from radiculopathy?",
+        answer: "Myelopathy involves compression of the spinal cord itself, causing balance issues and dexterity loss. Radiculopathy is compression of a nerve root, causing pain and numbness in the arm.",
+      },
+      {
+        question: "Can cervical myelopathy be reversed?",
+        answer: "Surgery aims to stop progression. Improvement depends on the duration and severity of compression before surgery. Early intervention offers the best outcomes.",
+      },
     ],
   },
   {
@@ -524,6 +544,16 @@ export const CONDITION_RESOURCES: ConditionResource[] = [
       "Endoscopic endonasal resection with ENT collaboration",
       "Endocrine optimisation pre- and post-operatively",
       "Radiosurgery for residual microadenomas when needed",
+    ],
+    faq: [
+      {
+        question: "How is pituitary tumor surgery performed?",
+        answer: "Most pituitary tumors are removed through the nose (transsphenoidal) using an endoscope. This minimally invasive approach leaves no visible scar.",
+      },
+      {
+        question: "Will my vision improve after surgery?",
+        answer: "If vision loss was caused by optic chiasm compression, decompression often leads to significant improvement, especially if treated early.",
+      },
     ],
   },
   {
