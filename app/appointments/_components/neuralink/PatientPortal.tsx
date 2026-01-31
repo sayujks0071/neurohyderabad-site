@@ -273,21 +273,16 @@ const PatientPortal = () => {
             <h2 className="text-3xl font-extrabold text-slate-900 mb-2">
               Appointment Request Received
             </h2>
-            <p className="text-slate-500 text-lg mb-6">
-              Appointment request received. Please bring any MRI/CT scans with you. We will confirm via phone shortly.
-            </p>
-            {confirmationMessage && (
-              <div className="max-w-2xl mx-auto mb-10 bg-slate-50 border border-slate-200 rounded-3xl p-6 text-left">
-                <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-2xl bg-white border border-slate-200 flex items-center justify-center text-blue-600">
-                    <Info className="w-5 h-5" />
-                  </div>
-                  <p className="text-slate-600 text-sm leading-relaxed">
-                    {confirmationMessage}
-                  </p>
+            <div className="max-w-2xl mx-auto mb-10 bg-slate-50 border border-slate-200 rounded-3xl p-6 text-left shadow-sm">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-2xl bg-white border border-slate-100 flex items-center justify-center text-blue-600 shrink-0 shadow-sm">
+                  <Info className="w-6 h-6" />
                 </div>
+                <p className="text-slate-600 text-lg leading-relaxed font-medium">
+                  {confirmationMessage || "Appointment request received. Please bring any MRI/CT scans with you. We will confirm via phone shortly."}
+                </p>
               </div>
-            )}
+            </div>
 
             <div className="bg-slate-50 rounded-3xl p-8 border border-slate-200 text-left max-w-2xl mx-auto mb-10 shadow-inner">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -835,7 +830,7 @@ const PatientPortal = () => {
                   type="submit"
                   disabled={isAnalyzing || isSyncing}
                   className={`w-full py-4 rounded-2xl text-white font-bold text-lg shadow-xl transition-all flex items-center justify-center relative overflow-hidden ${isAnalyzing || isSyncing
-                    ? "bg-slate-800"
+                ? "bg-blue-600/80 cursor-not-allowed"
                     : "bg-blue-600 hover:bg-blue-700 hover:shadow-blue-200"
                     }`}
                 >
