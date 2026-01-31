@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import Breadcrumbs from '@/app/components/Breadcrumbs';
 import JsonLd from '@/components/JsonLd';
 import NAP from '@/app/_components/NAP';
@@ -16,6 +17,20 @@ import { getServiceSources } from '../sources';
 import { patientStories } from '@/src/content/stories';
 import SurgeryComparisonTable from '@/src/components/SurgeryComparisonTable';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
+import type { RecoveryMilestone } from '@/app/_components/RecoveryTimeline';
+
+const RecoveryTimeline = dynamic(() => import('@/app/_components/RecoveryTimeline'), {
+  loading: () => (
+    <div className="py-16 bg-slate-950">
+      <div className="container mx-auto px-4">
+        <div className="max-w-5xl mx-auto">
+          {/* CLS Optimization: Explicit height matches 5 vertical milestones + header */}
+          <div className="animate-pulse bg-slate-800 h-[1500px] md:h-[1400px] rounded-lg"></div>
+        </div>
+      </div>
+    </div>
+  )
+});
 
 const SERVICE_SLUG = 'endoscopic-spine-surgery-hyderabad';
 
@@ -126,11 +141,52 @@ const COSTS = [
   }
 ];
 
-const RECOVERY_STEPS = [
-  { time: 'Day 0 (Surgery)', milestone: 'Walk to washroom with assistance 3 hours after surgery.' },
-  { time: 'Day 1 (Discharge)', milestone: 'Climb a flight of stairs. Discharge with oral pain meds.' },
-  { time: 'Week 1', milestone: 'Short walks outside. Desk work from home allowed.' },
-  { time: 'Week 3-4', milestone: 'Resume driving and full-time office work.' },
+const ENDOSCOPIC_RECOVERY_MILESTONES: RecoveryMilestone[] = [
+  {
+    phase: 'Day 0 • Procedure Day',
+    title: 'Mobilise within 2–3 hours & Same-Day Discharge',
+    highlights: [
+      'Walk to washroom with assistance 3 hours after surgery',
+      'Oral fluids and soft diet started immediately',
+      'Discharge same evening or next morning (Day Care Protocol)'
+    ]
+  },
+  {
+    phase: 'Days 1–3',
+    title: 'At-Home Comfort',
+    highlights: [
+      'No strict bed rest—short walks inside the house encouraged',
+      'Climb stairs gently if needed',
+      'Minimal pain managed with oral medication'
+    ]
+  },
+  {
+    phase: 'Week 1',
+    title: 'Rapid Return to Routine',
+    highlights: [
+      'Desk work from home allowed',
+      'Short walks outside permitted',
+      'Suture removal (if any) or waterproof dressing change'
+    ]
+  },
+  {
+    phase: 'Weeks 2–3',
+    title: 'Driving & Office Commute',
+    highlights: [
+      'Resume driving (short distances)',
+      'Return to office for desk jobs',
+      'Start gentle core activation exercises'
+    ]
+  },
+  {
+    phase: 'Weeks 4–6',
+    title: 'Full Activity',
+    highlights: [
+      'Resume gym, swimming, and longer travel',
+      'Manual labour or heavy lifting allowed progressively',
+      'Final follow-up to clear all restrictions'
+    ]
+  }
 ];
 
 const SUCCESS_RATES = [
@@ -510,17 +566,12 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
           </div>
         </section>
 
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold text-blue-900 mb-6">Recovery Timeline</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-            {RECOVERY_STEPS.map((step, idx) => (
-              <div key={idx} className="bg-blue-50 border border-blue-100 rounded-xl p-4">
-                <div className="text-sm font-semibold text-blue-600 mb-2 uppercase">{step.time}</div>
-                <div className="text-gray-800 text-sm">{step.milestone}</div>
-              </div>
-            ))}
-          </div>
-        </section>
+        <RecoveryTimeline
+          title="Your Recovery Timeline: Back to Life in Weeks"
+          description="Endoscopic surgery minimizes tissue damage, allowing for a significantly faster recovery compared to traditional open surgery. Here is your roadmap from surgery day to full activity."
+          milestones={ENDOSCOPIC_RECOVERY_MILESTONES}
+          className="mb-16 rounded-2xl overflow-hidden shadow-xl"
+        />
 
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-blue-900 mb-6">Endoscopic vs. Traditional Spine Surgery</h2>
