@@ -16,7 +16,7 @@ interface LocationSchemaProps {
   siteUrl?: string;
   imageUrl?: string;
   faq?: FAQItem[] | any[]; // Allow loose typing to catch legacy q/a without strict errors
-  breadcrumb?: any[]; // Accepting breadcrumb but we generate defaults if not provided (or ignore if we prefer internal logic)
+  breadcrumb?: any[]; // Accepting breadcrumb but we generate defaults if not provided
 }
 
 export const LocationSchema: React.FC<LocationSchemaProps> = ({
@@ -40,7 +40,8 @@ export const LocationSchema: React.FC<LocationSchemaProps> = ({
     "@context": "https://schema.org",
     "@type": "MedicalClinic",
     "@id": clinicId,
-    "name": location.name,
+    // Enforce Canonical Identity Rule: Name must be consistent
+    "name": location.canonical_display_name,
     "image": imageUrl,
     "url": `${siteUrl}/${cleanSlug}`,
     "telephone": location.telephone,
@@ -60,6 +61,10 @@ export const LocationSchema: React.FC<LocationSchemaProps> = ({
       "longitude": location.geo.longitude
     } : undefined,
     "hasMap": location.google_maps_place_url,
+    // Establish relationship with the main Hospital entity
+    "containedInPlace": {
+        "@id": `${siteUrl}/#hospital`
+    },
     "department": {
         "@id": `${siteUrl}/#physician`
     },
@@ -82,8 +87,7 @@ export const LocationSchema: React.FC<LocationSchemaProps> = ({
   let itemListElement;
 
   if (breadcrumb && breadcrumb.length > 0) {
-      // Normalize breadcrumb prop to schema structure if needed, or assume it matches what we want
-      // For simplicity, let's assume the prop is [{name, item}] and we add Home
+      // Normalize breadcrumb prop to schema structure if needed
       itemListElement = [
         {
             "@type": "ListItem",
