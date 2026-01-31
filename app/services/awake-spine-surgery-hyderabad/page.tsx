@@ -86,7 +86,6 @@ export default function AwakeSpineSurgeryPage() {
         pageSlug={`/services/${SERVICE_SLUG}`}
         pageType="service"
         serviceOrCondition="Awake Spine Surgery"
-        breadcrumbs={breadcrumbs}
       />
 
       <h1 className="text-4xl font-bold text-blue-900">Awake Spine Surgery in Hyderabad</h1>

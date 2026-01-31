@@ -10,6 +10,7 @@ import SourceList from '@/app/_components/SourceList';
 import { getServiceSources } from '../sources';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import MedicalWebPageSchema from '../../components/schemas/MedicalWebPageSchema';
+import BreadcrumbSchema from '../../components/schemas/BreadcrumbSchema';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
 
 const baseMetadata = makeMetadata({
@@ -80,8 +81,8 @@ export default function EndoscopicDiscectomyPage() {
         pageSlug="/services/endoscopic-discectomy-hyderabad"
         pageType="service"
         serviceOrCondition="Endoscopic Discectomy"
-        breadcrumbs={breadcrumbs}
       />
+      <BreadcrumbSchema items={breadcrumbs} />
       <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/endoscopic-discectomy-hyderabad`} />
 
       <div className="container mx-auto px-4 py-16">

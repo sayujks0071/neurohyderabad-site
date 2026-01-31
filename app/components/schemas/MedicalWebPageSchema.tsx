@@ -8,7 +8,6 @@ interface MedicalWebPageSchemaProps {
   lastReviewed?: string;
   author?: string;
   serviceOrCondition?: string;
-  breadcrumbs?: Array<{ name: string; path: string }>;
   medicalSpecialty?: string | string[];
   audience?: string;
 }
@@ -21,7 +20,6 @@ export default function MedicalWebPageSchema({
   lastReviewed = new Date().toISOString().split('T')[0],
   author = 'Dr. Sayuj Krishnan',
   serviceOrCondition,
-  breadcrumbs = [],
   medicalSpecialty,
   audience
 }: MedicalWebPageSchemaProps) {
@@ -128,19 +126,6 @@ export default function MedicalWebPageSchema({
           "name": "Dr. Sayuj Krishnan"
         }
       }
-    };
-  }
-
-  // Add breadcrumb schema
-  if (breadcrumbs.length > 0) {
-    baseSchema.breadcrumb = {
-      "@type": "BreadcrumbList",
-      "itemListElement": breadcrumbs.map((crumb, index) => ({
-        "@type": "ListItem",
-        "position": index + 1,
-        "name": crumb.name,
-        "item": `${SITE_URL}${crumb.path}`
-      }))
     };
   }
 

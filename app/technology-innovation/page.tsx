@@ -114,7 +114,6 @@ export default function TechnologyInnovationPage() {
         pageSlug="/technology-innovation/"
         pageType="service"
         serviceOrCondition="Neurosurgical Technology"
-        breadcrumbs={breadcrumbs}
       />
       
       <div className="min-h-screen bg-white">

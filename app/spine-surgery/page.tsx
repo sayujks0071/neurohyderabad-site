@@ -118,7 +118,9 @@ export default function SpineSurgeryPage() {
         pageSlug="/spine-surgery"
         pageType="service"
         serviceOrCondition="Minimally Invasive Spine Surgery"
-        breadcrumbs={[
+      />
+      <BreadcrumbSchema
+        items={[
           { name: "Home", path: "/" },
           { name: "Spine Surgery", path: "/spine-surgery" }
         ]}

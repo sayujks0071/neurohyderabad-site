@@ -164,7 +164,6 @@ export default function BackPainSymptomsPage() {
         pageSlug="/symptoms/back-pain"
         pageType="condition"
         serviceOrCondition="Back Pain"
-        breadcrumbs={breadcrumbs}
       />
       <FAQPageSchema
         faqs={FAQ.map(item => ({ question: item.q, answer: item.a }))}
