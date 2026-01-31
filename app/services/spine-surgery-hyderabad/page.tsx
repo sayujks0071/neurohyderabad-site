@@ -128,13 +128,13 @@ export default function SpineSurgeryHyderabadPage() {
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
-                href="/appointments/"
+                href="/appointments"
                 className="inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3 text-white font-semibold hover:bg-blue-700 transition-colors"
               >
                 Book a Spine Consultation
               </Link>
               <Link
-                href="/patient-stories/"
+                href="/patient-stories"
                 className="inline-flex items-center justify-center rounded-full border border-blue-200 px-6 py-3 text-blue-700 font-semibold hover:border-blue-400 hover:text-blue-900 transition-colors"
               >
                 View Spine Case Stories
@@ -254,7 +254,7 @@ export default function SpineSurgeryHyderabadPage() {
               </div>
             ))}
             <Link
-              href="/blog/return-to-work-after-endoscopic-discectomy-hyderabad/"
+              href="/blog/return-to-work-after-endoscopic-discectomy-hyderabad"
               className="inline-flex items-center justify-center rounded-full bg-blue-600 px-5 py-2 text-white font-semibold hover:bg-blue-700 transition-colors"
             >
               Read Recovery Guidance

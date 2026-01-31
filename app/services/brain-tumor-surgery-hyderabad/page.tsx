@@ -208,7 +208,7 @@ export default function BrainTumorSurgeryHyderabadPage() {
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
-                href="/appointments/"
+                href="/appointments"
                 className="inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3 text-white font-semibold hover:bg-blue-700 transition-colors"
               >
                 Book a Neuro-Oncology Consult
@@ -342,7 +342,7 @@ export default function BrainTumorSurgeryHyderabadPage() {
               </div>
             ))}
             <Link
-              href="/blog/brain-tumor-surgery-cost-hyderabad/"
+              href="/blog/brain-tumor-surgery-cost-hyderabad"
               className="inline-flex items-center justify-center rounded-full bg-blue-600 px-5 py-2 text-white font-semibold hover:bg-blue-700 transition-colors"
             >
               Explore Brain Tumor Resources

@@ -18,13 +18,13 @@ export default function NotFound() {
           <div className="text-sm text-gray-500">
             <p>Or try these popular pages:</p>
             <div className="mt-2 space-x-4">
-              <Link href="/services/" className="text-blue-600 hover:text-blue-800 underline">
+              <Link href="/services" className="text-blue-600 hover:text-blue-800 underline">
                 Services
               </Link>
-              <Link href="/conditions/" className="text-blue-600 hover:text-blue-800 underline">
+              <Link href="/conditions" className="text-blue-600 hover:text-blue-800 underline">
                 Conditions
               </Link>
-              <Link href="/contact/" className="text-blue-600 hover:text-blue-800 underline">
+              <Link href="/contact" className="text-blue-600 hover:text-blue-800 underline">
                 Contact
               </Link>
             </div>

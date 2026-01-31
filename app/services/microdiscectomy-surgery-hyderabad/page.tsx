@@ -244,7 +244,7 @@ export default function MicrodiscectomySurgeryPage() {
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
-                href="/appointments/"
+                href="/appointments"
                 className="inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3 text-white font-semibold hover:bg-blue-700 transition-colors"
               >
                 Book Consultation

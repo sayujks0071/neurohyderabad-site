@@ -108,7 +108,7 @@ export default function ReturnToWorkAfterEndoscopicDiscectomyPage() {
           <ol className="flex items-center space-x-2 text-sm text-gray-600">
             <li><Link href="/" className="underline underline-offset-2 decoration-blue-300 hover:text-blue-700 hover:decoration-blue-500">Home</Link></li>
             <li className="text-gray-400">/</li>
-            <li><Link href="/blog/" className="underline underline-offset-2 decoration-blue-300 hover:text-blue-700 hover:decoration-blue-500">Blog</Link></li>
+            <li><Link href="/blog" className="underline underline-offset-2 decoration-blue-300 hover:text-blue-700 hover:decoration-blue-500">Blog</Link></li>
             <li className="text-gray-400">/</li>
             <li className="text-gray-900 font-medium">Return to Work After Endoscopic Discectomy</li>
           </ol>
@@ -300,7 +300,7 @@ export default function ReturnToWorkAfterEndoscopicDiscectomyPage() {
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="border rounded-lg p-4">
                   <h3 className="font-semibold mb-2">
-                    <Link href="/services/endoscopic-discectomy-hyderabad/" className="text-blue-600 hover:text-blue-800">
+                    <Link href="/services/endoscopic-discectomy-hyderabad" className="text-blue-600 hover:text-blue-800">
                       Endoscopic Discectomy
                     </Link>
                   </h3>
@@ -308,7 +308,7 @@ export default function ReturnToWorkAfterEndoscopicDiscectomyPage() {
                 </div>
                 <div className="border rounded-lg p-4">
                   <h3 className="font-semibold mb-2">
-                    <Link href="/services/minimally-invasive-spine-surgery/" className="text-blue-600 hover:text-blue-800">
+                    <Link href="/services/minimally-invasive-spine-surgery" className="text-blue-600 hover:text-blue-800">
                       Minimally Invasive Spine Surgery
                     </Link>
                   </h3>
@@ -316,7 +316,7 @@ export default function ReturnToWorkAfterEndoscopicDiscectomyPage() {
                 </div>
                 <div className="border rounded-lg p-4">
                   <h3 className="font-semibold mb-2">
-                    <Link href="/conditions/sciatica-pain-treatment-hyderabad/" className="text-blue-600 hover:text-blue-800">
+                    <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 hover:text-blue-800">
                       Sciatica Treatment
                     </Link>
                   </h3>
@@ -324,7 +324,7 @@ export default function ReturnToWorkAfterEndoscopicDiscectomyPage() {
                 </div>
                 <div className="border rounded-lg p-4">
                   <h3 className="font-semibold mb-2">
-                    <Link href="/appointments/" className="text-blue-600 hover:text-blue-800">
+                    <Link href="/appointments" className="text-blue-600 hover:text-blue-800">
                       Book Consultation
                     </Link>
                   </h3>
@@ -340,7 +340,7 @@ export default function ReturnToWorkAfterEndoscopicDiscectomyPage() {
                   Book a consultation at Yashoda Hospitals – Malakpet. Bring your MRI and job details; we'll tailor an RTW plan that fits your role.
                 </p>
                 <Link 
-                  href="/appointments/" 
+                  href="/appointments" 
                   className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium"
                 >
                   Schedule Consultation

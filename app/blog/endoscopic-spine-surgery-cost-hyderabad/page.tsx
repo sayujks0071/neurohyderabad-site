@@ -290,7 +290,7 @@ export default function EndoscopicSpineSurgeryCostPage() {
                 <strong>Ready to discuss your case?</strong> Book a consultation to get a personalized cost estimate and treatment plan.
               </p>
               <Link
-                href="/appointments/"
+                href="/appointments"
                 className="inline-block mt-3 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
               >
                 Schedule Consultation
@@ -305,7 +305,7 @@ export default function EndoscopicSpineSurgeryCostPage() {
             <div className="grid md:grid-cols-2 gap-4">
               <div className="border rounded-lg p-4">
                 <h3 className="font-semibold mb-2">
-                  <Link href="/services/minimally-invasive-spine-surgery/" className="text-blue-600 hover:text-blue-800">
+                  <Link href="/services/minimally-invasive-spine-surgery" className="text-blue-600 hover:text-blue-800">
                     Endoscopic Foraminotomy
                   </Link>
                 </h3>
@@ -313,7 +313,7 @@ export default function EndoscopicSpineSurgeryCostPage() {
               </div>
               <div className="border rounded-lg p-4">
                 <h3 className="font-semibold mb-2">
-                  <Link href="/services/minimally-invasive-spine-surgery/" className="text-blue-600 hover:text-blue-800">
+                  <Link href="/services/minimally-invasive-spine-surgery" className="text-blue-600 hover:text-blue-800">
                     Minimally Invasive Spine Surgery
                   </Link>
                 </h3>
@@ -329,7 +329,7 @@ export default function EndoscopicSpineSurgeryCostPage() {
             <div className="grid md:grid-cols-2 gap-4">
               <div className="border rounded-lg p-4">
                 <h3 className="font-semibold mb-2">
-                  <Link href="/conditions/spinal-stenosis-treatment-hyderabad/" className="text-blue-600 hover:text-blue-800">
+                  <Link href="/conditions/spinal-stenosis-treatment-hyderabad" className="text-blue-600 hover:text-blue-800">
                     Spinal Stenosis Treatment
                   </Link>
                 </h3>
@@ -337,7 +337,7 @@ export default function EndoscopicSpineSurgeryCostPage() {
               </div>
               <div className="border rounded-lg p-4">
                 <h3 className="font-semibold mb-2">
-                  <Link href="/conditions/slip-disc-treatment-hyderabad/" className="text-blue-600 hover:text-blue-800">
+                  <Link href="/conditions/slip-disc-treatment-hyderabad" className="text-blue-600 hover:text-blue-800">
                     Slip Disc Treatment
                   </Link>
                 </h3>
