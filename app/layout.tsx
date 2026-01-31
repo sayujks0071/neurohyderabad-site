@@ -188,10 +188,10 @@ export default function RootLayout({
           <main id="main-content" tabIndex={-1} role="main">
             {children}
           </main>
+          <FloatingChatWidget />
+          <DynamicStickyCTA />
         </HypertuneWrapper>
         <Footer />
-        <FloatingChatWidget />
-        <DynamicStickyCTA />
         {process.env.VERCEL ? <Analytics /> : null}
       </body>
     </html>
