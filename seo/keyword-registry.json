@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-25",
+  "last_updated": "2026-01-31",
   "keywords": [
     {
       "term": "lumbar spondylosis treatment hyderabad",
@@ -426,6 +426,30 @@
       "difficulty": "Med",
       "volume": "Low",
       "target_page": "/conditions/scoliosis-treatment-hyderabad"
+    },
+    {
+      "term": "neurosurgeon in dilsukhnagar",
+      "difficulty": "Low",
+      "volume": "Med",
+      "target_page": "/locations/neurosurgeon-dilsukhnagar"
+    },
+    {
+      "term": "best spine surgeon in dilsukhnagar",
+      "difficulty": "Low",
+      "volume": "Low",
+      "target_page": "/locations/neurosurgeon-dilsukhnagar"
+    },
+    {
+      "term": "laser spine surgery hyderabad",
+      "difficulty": "Med",
+      "volume": "Med",
+      "target_page": "/services/minimally-invasive-spine-surgery"
+    },
+    {
+      "term": "spine surgery second opinion hyderabad",
+      "difficulty": "High",
+      "volume": "Low",
+      "target_page": "/services/kims-spine-surgery-second-opinion"
     }
   ]
 }
