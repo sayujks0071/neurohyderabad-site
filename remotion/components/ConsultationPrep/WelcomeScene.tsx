@@ -1,25 +1,46 @@
 import { spring, useCurrentFrame, useVideoConfig } from 'remotion';
 import { COLORS, FONTS } from '../../utils/colorTokens';
+import { useMemo, useState, useEffect } from 'react';
 
 export interface WelcomeSceneProps {
   patientName: string;
 }
 
+// Hook to detect reduced motion preference
+const useReducedMotion = () => {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mediaQuery.matches);
+
+    const handler = (event: MediaQueryListEvent) => {
+      setPrefersReducedMotion(event.matches);
+    };
+    mediaQuery.addEventListener('change', handler);
+    return () => mediaQuery.removeEventListener('change', handler);
+  }, []);
+
+  return prefersReducedMotion;
+};
+
 export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+  const prefersReducedMotion = useReducedMotion();
 
   // Spring-based fade-in animation
-  const opacity = spring({
+  const opacity = useMemo(() => spring({
     frame,
     fps,
     from: 0,
     to: 1,
     durationInFrames: 30,
-  });
+  }), [frame, fps]);
 
   // Spring-based scale animation
-  const scale = spring({
+  const scaleSpring = useMemo(() => spring({
     frame,
     fps,
     from: 0.8,
@@ -28,10 +49,16 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
     config: {
       damping: 15,
     },
-  });
+  }), [frame, fps]);
+
+  const scale = prefersReducedMotion ? 1 : scaleSpring;
 
   // Subtle breathing animation for continuous movement
-  const breathingScale = 1 + Math.sin(frame / 45) * 0.01;
+  const breathingScale = useMemo(() =>
+    prefersReducedMotion ? 1 : (1 + Math.sin(frame / 45) * 0.01),
+  [frame, prefersReducedMotion]);
+
+  const nameChars = useMemo(() => `Hi ${patientName}!`.split(''), [patientName]);
 
   return (
     <div
@@ -57,12 +84,12 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
             fontFamily: FONTS.primary,
             fontSize: '72px',
             fontWeight: 700,
-            color: COLORS.text, // slate-800 (#212B36)
+            color: COLORS.surface, // Improved contrast (was COLORS.text)
             margin: 0,
             marginBottom: '24px',
           }}
         >
-          {`Hi ${patientName}!`.split('').map((char, i) => {
+          {nameChars.map((char, i) => {
             const charOpacity = spring({
               frame: frame - i * 3,
               fps,
@@ -70,7 +97,7 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
               to: 1,
               durationInFrames: 20,
             });
-            const charY = spring({
+            const charY = prefersReducedMotion ? 0 : spring({
               frame: frame - i * 3,
               fps,
               from: 20,
@@ -98,7 +125,7 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
             fontFamily: FONTS.primary,
             fontSize: '32px',
             fontWeight: 500,
-            color: COLORS.text,
+            color: COLORS.surface, // Improved contrast (was COLORS.text)
             margin: 0,
           }}
         >
