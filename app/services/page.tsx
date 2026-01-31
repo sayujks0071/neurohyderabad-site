@@ -209,7 +209,7 @@ export default function ServicesPage() {
                     Minimally invasive removal of herniated disc material through a small 8-10mm incision. 
                     This procedure offers faster recovery, less pain, and reduced risk of complications compared to traditional open surgery.
                   </p>
-                  <Link href="/services/endoscopic-discectomy-hyderabad/" className="text-blue-600 hover:underline">
+                  <Link href="/services/endoscopic-discectomy-hyderabad" className="text-blue-600 hover:underline">
                     Learn more about Endoscopic Discectomy →
                   </Link>
                 </div>
@@ -219,7 +219,7 @@ export default function ServicesPage() {
                     Decompression of nerve roots through enlarged foraminal openings using endoscopic visualization. 
                     Ideal for patients with foraminal stenosis causing leg pain and weakness.
                   </p>
-                  <Link href="/services/minimally-invasive-spine-surgery/" className="text-blue-600 hover:underline">
+                  <Link href="/services/minimally-invasive-spine-surgery" className="text-blue-600 hover:underline">
                     Learn more about Foraminotomy →
                   </Link>
                 </div>
@@ -235,7 +235,7 @@ export default function ServicesPage() {
                     Unilateral laminotomy bilateral decompression for spinal stenosis using endoscopic approach. 
                     This technique provides bilateral decompression while preserving spinal stability and reducing tissue damage.
                   </p>
-                  <Link href="/services/minimally-invasive-spine-surgery/" className="text-blue-600 hover:underline">
+                  <Link href="/services/minimally-invasive-spine-surgery" className="text-blue-600 hover:underline">
                     Learn more about ULBD →
                   </Link>
                 </div>
@@ -245,7 +245,7 @@ export default function ServicesPage() {
                     Endoscopic cervical discectomy and foraminotomy for neck and arm pain relief. 
                     These procedures preserve motion while effectively treating cervical radiculopathy and myelopathy.
                   </p>
-                  <Link href="/services/minimally-invasive-spine-surgery/" className="text-blue-600 hover:underline">
+                  <Link href="/services/minimally-invasive-spine-surgery" className="text-blue-600 hover:underline">
                     Learn more about Cervical Procedures →
                   </Link>
                 </div>
@@ -259,7 +259,7 @@ export default function ServicesPage() {
                   <h4 className="font-semibold text-gray-700 mb-3">Brain Tumor Surgery</h4>
                   <p className="text-gray-600 mb-4">
                     Advanced neuronavigation-guided microsurgery for brain tumors with comprehensive multidisciplinary care. 
-                    <Link href="/services/brain-tumor-surgery-hyderabad/" className="text-blue-600 hover:underline"> Dr. Sayuj provides expert consultations for brain tumor surgery in Hyderabad at Yashoda Hospital, Malakpet.</Link>
+                    <Link href="/services/brain-tumor-surgery-hyderabad" className="text-blue-600 hover:underline"> Dr. Sayuj provides expert consultations for brain tumor surgery in Hyderabad at Yashoda Hospital, Malakpet.</Link>
                   </p>
                 </div>
                 <div>
@@ -344,13 +344,13 @@ export default function ServicesPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 
-              href="/appointments/"
+              href="/appointments"
               className="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-colors"
             >
               Book Consultation
             </Link>
             <Link 
-              href="/contact/"
+              href="/contact"
               className="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-full hover:bg-blue-600 hover:text-white transition-colors"
             >
               Contact Us

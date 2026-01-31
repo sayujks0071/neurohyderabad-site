@@ -219,7 +219,7 @@ export default function BestNeurosurgeonPage() {
                   <li>• ULBD (lumbar stenosis decompression)</li>
                   <li>• Cervical radiculopathy/myelopathy pathways</li>
                 </ul>
-                <Link href="/services/minimally-invasive-spine-surgery/" className="text-blue-600 hover:underline mt-3 block">
+                <Link href="/services/minimally-invasive-spine-surgery" className="text-blue-600 hover:underline mt-3 block">
                   Learn More →
                 </Link>
               </div>
@@ -231,7 +231,7 @@ export default function BestNeurosurgeonPage() {
                   <li>• Awake craniotomy when needed</li>
                   <li>• Multidisciplinary tumor board coordination</li>
                 </ul>
-                <Link href="/services/brain-tumor-surgery-hyderabad/" className="text-blue-600 hover:underline mt-3 block">
+                <Link href="/services/brain-tumor-surgery-hyderabad" className="text-blue-600 hover:underline mt-3 block">
                   Learn More →
                 </Link>
               </div>
@@ -243,7 +243,7 @@ export default function BestNeurosurgeonPage() {
                   <li>• Radiosurgery options</li>
                   <li>• Percutaneous procedures</li>
                 </ul>
-                <Link href="/conditions/trigeminal-neuralgia-treatment-hyderabad/" className="text-blue-600 hover:underline mt-3 block">
+                <Link href="/conditions/trigeminal-neuralgia-treatment-hyderabad" className="text-blue-600 hover:underline mt-3 block">
                   Learn More →
                 </Link>
               </div>
@@ -255,7 +255,7 @@ export default function BestNeurosurgeonPage() {
                   <li>• Resection surgery</li>
                   <li>• Vagus nerve stimulation (VNS)</li>
                 </ul>
-                <Link href="/services/epilepsy-surgery-hyderabad/" className="text-blue-600 hover:underline mt-3 block">
+                <Link href="/services/epilepsy-surgery-hyderabad" className="text-blue-600 hover:underline mt-3 block">
                   Learn More →
                 </Link>
               </div>

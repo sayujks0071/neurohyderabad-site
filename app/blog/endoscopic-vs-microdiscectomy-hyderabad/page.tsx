@@ -445,7 +445,7 @@ export default function EndoscopicVsMicrodiscectomyPage() {
                   Book Consultation
                 </Link>
                 <Link
-                  href="/services/endoscopic-discectomy-hyderabad/"
+                  href="/services/endoscopic-discectomy-hyderabad"
                   className="border-2 border-blue-600 text-blue-600 px-6 py-3 rounded-full hover:bg-blue-600 hover:text-white transition-colors"
                 >
                   Learn More About Endoscopic Surgery

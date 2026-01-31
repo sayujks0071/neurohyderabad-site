@@ -230,11 +230,11 @@ export default function Home() {
               <div className="grid lg:grid-cols-2 gap-12 items-center">
                 <div className="text-center lg:text-left">
                   <h1 className="home-hero__title text-4xl md:text-6xl font-bold leading-tight">
-                    Dr. Sayuj Krishnan: German-Trained Neurosurgeon in Hyderabad
-                    <span className="home-hero__subtitle block text-3xl md:text-5xl">
-                      Minimally invasive spine, awake brain surgery, and ROSA DBS at Yashoda Hospital, Malakpet.
-                    </span>
+                    Neurosurgeon in Hyderabad — Dr. Sayuj Krishnan
                   </h1>
+                  <p className="home-hero__subtitle mt-4 text-2xl md:text-3xl font-semibold text-blue-50">
+                    German-trained. Endoscopic spine. Awake brain surgery. ROSA DBS at Yashoda Hospital, Malakpet.
+                  </p>
                   <p className="home-hero__lead text-xl md:text-2xl">
                     I personally evaluate every case and perform the surgery—combining full-endoscopic spine techniques, awake mapping for complex brain tumors, and robotic guidance for DBS to deliver safer, faster recoveries.
                   </p>
@@ -417,17 +417,17 @@ export default function Home() {
                   Learn More About MISS →
                 </Button>
                 <div className="mt-4">
-                  <Link href="/conditions/slip-disc-treatment-hyderabad/" className="text-blue-600 hover:underline mr-4">Slip Disc Treatment</Link>
-                  <Link href="/conditions/spinal-stenosis-treatment-hyderabad/" className="text-blue-600 hover:underline">Spinal Stenosis</Link>
+                  <Link href="/conditions/slip-disc-treatment-hyderabad" className="text-blue-600 hover:underline mr-4">Slip Disc Treatment</Link>
+                  <Link href="/conditions/spinal-stenosis-treatment-hyderabad" className="text-blue-600 hover:underline">Spinal Stenosis</Link>
                   <div className="mt-3 text-sm">
                     <Link
-                      href="/blog/does-endoscopic-spine-surgery-work-for-sciatica-hyderabad/"
+                      href="/blog/does-endoscopic-spine-surgery-work-for-sciatica-hyderabad"
                       className="inline-flex items-center min-h-[44px] px-2 -mx-2 text-blue-700 hover:underline mr-4"
                     >
                       Does Endoscopic Spine Surgery Work for Sciatica?
                     </Link>
                     <Link
-                      href="/blog/when-to-worry-about-back-pain-neurosurgeon-hyderabad/"
+                      href="/blog/when-to-worry-about-back-pain-neurosurgeon-hyderabad"
                       className="inline-flex items-center min-h-[44px] px-2 -mx-2 text-blue-700 hover:underline"
                     >
                       When to Worry About Back Pain
@@ -439,9 +439,9 @@ export default function Home() {
             <Card padding="lg" className="shadow-lg">
               <h3 className="text-xl font-semibold mb-4 text-blue-700">Who Benefits from MISS?</h3>
               <ul className="space-y-2 text-gray-600">
-                <li>• <Link href="/conditions/slip-disc-treatment-hyderabad/" className="text-blue-600 hover:underline">Patients with herniated discs (slip disc)</Link></li>
-                <li>• <Link href="/conditions/spinal-stenosis-treatment-hyderabad/" className="text-blue-600 hover:underline">Spinal stenosis causing leg pain</Link></li>
-                <li>• <Link href="/conditions/sciatica-pain-treatment-hyderabad/" className="text-blue-600 hover:underline">Sciatica not improving with conservative treatment</Link></li>
+                <li>• <Link href="/conditions/slip-disc-treatment-hyderabad" className="text-blue-600 hover:underline">Patients with herniated discs (slip disc)</Link></li>
+                <li>• <Link href="/conditions/spinal-stenosis-treatment-hyderabad" className="text-blue-600 hover:underline">Spinal stenosis causing leg pain</Link></li>
+                <li>• <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 hover:underline">Sciatica not improving with conservative treatment</Link></li>
                 <li>• Recurrent disc herniations</li>
                 <li>• Foraminal stenosis</li>
               </ul>
@@ -592,8 +592,8 @@ export default function Home() {
                   Learn More About Brain Tumor Surgery →
                 </Button>
                 <div className="mt-4">
-                  <Link href="/services/epilepsy-surgery-hyderabad/" className="text-blue-600 hover:underline mr-4">Epilepsy Surgery</Link>
-                  <Link href="/conditions/trigeminal-neuralgia-treatment-hyderabad/" className="text-blue-600 hover:underline">Trigeminal Neuralgia</Link>
+                  <Link href="/services/epilepsy-surgery-hyderabad" className="text-blue-600 hover:underline mr-4">Epilepsy Surgery</Link>
+                  <Link href="/conditions/trigeminal-neuralgia-treatment-hyderabad" className="text-blue-600 hover:underline">Trigeminal Neuralgia</Link>
                 </div>
               </div>
             </div>
