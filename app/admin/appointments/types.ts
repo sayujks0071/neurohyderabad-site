@@ -10,6 +10,8 @@ export interface Appointment {
   preferred_time: string;
   appointment_type: string;
   chief_complaint: string;
+  pain_score?: number;
+  mri_scan_available?: boolean;
   status: string;
   source: string;
   created_at: string;
