@@ -17,8 +17,8 @@ import { patientStories } from '@/src/content/stories';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
 
 const baseMetadata = makeMetadata({
-  title: "Sciatica Treatment Hyderabad | 90% Non-Surgical | Dr Sayuj",
-  description: "Relief from Sciatica leg pain in Hyderabad. 90% non-surgical success with Dr. Sayuj Krishnan. Nerve blocks, Physio & Endoscopic options. Book Consult.",
+  title: "Sciatica Treatment Hyderabad | 90% Non-Surgical Relief",
+  description: "Relief from Sciatica leg pain in Hyderabad. 90% non-surgical success with Dr. Sayuj Krishnan. Nerve blocks & Endoscopic options. Book Consultation.",
   canonicalPath: '/conditions/sciatica-pain-treatment-hyderabad',
 });
 
@@ -90,6 +90,10 @@ const FAQ = [
   {
     q: "What exercises should I avoid with sciatica?",
     a: "Avoid heavy hamstring stretches, straight leg raises, and twisting movements like golf until cleared by a physio. These can increase nerve tension."
+  },
+  {
+    q: "What is Spinal Instability and does it cause Sciatica?",
+    a: "Spinal instability (spondylolisthesis) occurs when a vertebra slips forward, potentially compressing the sciatic nerve. It often causes low back pain that worsens when standing or walking, along with sciatica. Dr. Sayuj diagnoses this with dynamic X-rays and may treat it with specialized stabilization exercises or minimally invasive fusion if severe."
   }
 ];
 
