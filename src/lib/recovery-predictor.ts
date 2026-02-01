@@ -1,4 +1,7 @@
-import { RecoveryPlan, RecoveryPhase, RecoveryMilestone } from '@/src/types/recovery-timeline';
+import { generateObject } from 'ai';
+import { z } from 'zod';
+import { getTextModel, hasAIConfig } from './ai/gateway';
+import { RecoveryPlan } from '@/src/types/recovery-timeline';
 
 /**
  * AI-Powered Recovery Predictor
@@ -43,80 +46,53 @@ export async function generateRecoveryPlan(request: RecoveryPredictorRequest): P
     const mcpData = await mcpResponse.json();
     const rawContent = mcpData.result?.content?.[0]?.text || '';
 
-    // 2. Parse the unstructured text into a structured RecoveryPlan
-    // In a production environment, we might use generateObject from AI SDK here,
-    // but for now we'll use robust regex-based parsing as suggested by Codex analysis.
-    
-    const plan: RecoveryPlan = {
-      title: `Recovery Plan for ${request.surgeryType}`,
-      description: `Personalized milestones based on clinical documentation for ${request.surgeryType}.`,
-      phases: parsePhases(rawContent),
-      disclaimer: "This timeline is a general guide. Individual recovery varies based on patient health and surgical complexity. Always follow Dr. Sayuj's specific post-operative instructions."
-    };
+    // 2. Use AI Gateway to structure the content into a RecoveryPlan
+    if (hasAIConfig()) {
+      const { object } = await generateObject({
+        model: getTextModel(),
+        schema: z.object({
+          title: z.string(),
+          description: z.string().optional(),
+          phases: z.array(z.object({
+            name: z.string(),
+            duration: z.object({
+              label: z.string(),
+            }),
+            milestones: z.array(z.object({
+              title: z.string(),
+              highlights: z.array(z.string()),
+            })),
+            sortOrder: z.number().optional(),
+          })),
+          disclaimer: z.string().optional(),
+        }),
+        prompt: `You are a medical AI assistant.
 
-    return plan;
+Context from clinical documents:
+${rawContent}
+
+Task: Generate a structured recovery plan for ${request.surgeryType}.
+Patient details: ${request.patientAge ? `Age: ${request.patientAge}` : ''} ${request.comorbidities ? `Comorbidities: ${request.comorbidities.join(', ')}` : ''}
+
+Use the provided context to accurately populate the phases and milestones.
+If the context is missing specific details, use general medical knowledge for this surgery type but prioritize the context.
+Ensure the output matches the schema.`,
+      });
+
+      return object as RecoveryPlan;
+    }
+
+    // Fallback if AI config is missing but we have raw content (very unlikely in this setup)
+    // For now we will just use the hard fallback to keep it simple, or we could keep the regex parser?
+    // Given the instruction to "make best use", assuming Gateway is working, we should rely on it.
+    // But for safety, we'll fall back to the static template.
+    return getFallbackPlan(request.surgeryType);
+
   } catch (error) {
     console.error('Failed to generate recovery plan:', error);
     // Fallback to a basic template if AI/MCP fails
     return getFallbackPlan(request.surgeryType);
   }
-}
-
-function parsePhases(text: string): RecoveryPhase[] {
-  const phases: RecoveryPhase[] = [];
-  
-  // Look for phase headers like "Phase 1:", "Day 0:", "Week 2:", etc.
-  const phaseRegex = /(?:Phase|Day|Week|Month)\s*\d+[:\-\s]+([\s\S]*?)(?=(?:Phase|Day|Week|Month)\s*\d+|$)/g;
-  let match;
-  let order = 0;
-
-  while ((match = phaseRegex.exec(text)) !== null) {
-    const content = match[0];
-    const nameMatch = content.match(/^(.*?)(?:\n|$)/);
-    const name = nameMatch ? nameMatch[1].trim() : `Phase ${order + 1}`;
-    
-    phases.push({
-      name,
-      duration: { label: extractDuration(name) },
-      milestones: parseMilestones(content),
-      sortOrder: order++
-    });
-  }
-
-  // If no phases were detected, return the whole text as one phase
-  if (phases.length === 0 && text.length > 0) {
-    phases.push({
-      name: "General Recovery",
-      duration: { label: "Standard" },
-      milestones: [{
-        title: "Standard Milestones",
-        highlights: text.split('\n').filter(l => l.trim().length > 5).slice(0, 5)
-      }]
-    });
-  }
-
-  return phases;
-}
-
-function parseMilestones(text: string): RecoveryMilestone[] {
-  // Look for bullet points or numbered lists
-  const bulletPoints = text.split('\n')
-    .filter(line => /^[\s\-\*•\d\.]/.test(line.trim()))
-    .map(line => line.replace(/^[\s\-\*•\d\.\s]+/, '').trim())
-    .filter(line => line.length > 10);
-
-  if (bulletPoints.length === 0) return [];
-
-  // Group milestones into sections if possible
-  return [{
-    title: "Key Milestones",
-    highlights: bulletPoints
-  }];
-}
-
-function extractDuration(text: string): string {
-  const match = text.match(/(Day|Week|Month)\s*\d+(?:\s*-\s*\d+)?/i);
-  return match ? match[0] : "Variable";
 }
 
 function getFallbackPlan(surgeryType: string): RecoveryPlan {
