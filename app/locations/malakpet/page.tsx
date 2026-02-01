@@ -17,7 +17,7 @@ export const revalidate = 86400;
 
 export const metadata = {
   title: "Best Neurosurgeon in Malakpet | Dr. Sayuj Krishnan | Yashoda Hospitals",
-  description: "Dr. Sayuj Krishnan is the leading Neurosurgeon at Yashoda Hospitals, Malakpet. Specialist in Endoscopic Spine Surgery, Brain Tumors & Trauma. Book Appointment.",
+  description: "Dr. Sayuj Krishnan: Top Neurosurgeon at Yashoda Malakpet. Expert in Endoscopic Spine Surgery, Brain Tumors & Trauma. Book Appointment.",
   alternates: { canonical: "https://www.drsayuj.info/neurosurgeon-malakpet" },
   openGraph: {
     title: "Best Neurosurgeon in Malakpet | Dr. Sayuj Krishnan",

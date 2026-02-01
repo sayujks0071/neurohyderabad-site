@@ -375,6 +375,32 @@ export default function SciaticaTreatmentPage() {
         </div>
       </section>
 
+      {/* Second Opinion Checklist - Competitor Gap */}
+      <section className="mb-12 bg-indigo-50 border border-indigo-100 rounded-2xl p-8 shadow-sm">
+        <h2 className="text-2xl font-bold text-indigo-900 mb-4">Been Advised Surgery? Ask These Questions First.</h2>
+        <p className="text-gray-700 mb-6">
+          If another doctor has recommended surgery for your sciatica, use this checklist to ensure it is the right choice. Dr. Sayuj encourages you to get a second opinion before making a decision.
+        </p>
+        <div className="grid md:grid-cols-2 gap-6">
+            <div className="bg-white p-5 rounded-lg border border-indigo-100">
+                <h3 className="font-semibold text-indigo-800 mb-2">1. Is the diagnosis confirmed?</h3>
+                <p className="text-sm text-gray-600">Does your MRI clearly show nerve compression that matches your leg pain symptoms? Back pain alone is rarely a reason for surgery.</p>
+            </div>
+            <div className="bg-white p-5 rounded-lg border border-indigo-100">
+                <h3 className="font-semibold text-indigo-800 mb-2">2. Have I tried enough conservative care?</h3>
+                <p className="text-sm text-gray-600">Have you completed 6 weeks of targeted physiotherapy and nerve medications? Surgery should be the last resort.</p>
+            </div>
+            <div className="bg-white p-5 rounded-lg border border-indigo-100">
+                <h3 className="font-semibold text-indigo-800 mb-2">3. Is it &quot;Open&quot; or &quot;Endoscopic&quot;?</h3>
+                <p className="text-sm text-gray-600">Open surgery has a longer recovery. Ask if you are a candidate for <Link href="/services/endoscopic-spine-surgery-hyderabad" className="text-indigo-600 underline">Endoscopic (Keyhole) Surgery</Link> which allows same-day walking.</p>
+            </div>
+            <div className="bg-white p-5 rounded-lg border border-indigo-100">
+                <h3 className="font-semibold text-indigo-800 mb-2">4. What is the success rate?</h3>
+                <p className="text-sm text-gray-600">Ask about specific recurrence rates. Endoscopic surgery typically has a 90%+ success rate for properly selected patients.</p>
+            </div>
+        </div>
+      </section>
+
       <section className="mb-12">
         <h2 className="text-2xl font-semibold mb-6 text-blue-700">Patient Education Resources</h2>
         <div className="grid md:grid-cols-2 gap-6">
