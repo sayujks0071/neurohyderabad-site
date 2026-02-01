@@ -18,7 +18,7 @@ export const revalidate = 86400;
 
 export const metadata = {
   title: 'Neurosurgeon Near Jubilee Hills FAQ | Dr. Sayuj Krishnan',
-  description: 'Frequently asked questions about finding a neurosurgeon near Jubilee Hills, Hyderabad. Expert answers from Dr. Sayuj Krishnan about brain and spine surgery options.',
+  description: 'FAQ: Finding a neurosurgeon near Jubilee Hills, Hyderabad. Expert answers from Dr. Sayuj Krishnan about brain and spine surgery options.',
   alternates: {
     canonical: 'https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills-faq',
   },

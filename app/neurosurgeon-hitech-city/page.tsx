@@ -16,7 +16,7 @@ export const revalidate = 86400;
 export const metadata = {
   title: "Neurosurgeon in Hitech City, Hyderabad | Endoscopic Spine | Dr. Sayuj Krishnan",
   description:
-    "Consult Dr. Sayuj Krishnan near Hitech City, Hyderabad for endoscopic spine & minimally invasive brain surgery. OPD timings, parking, directions, WhatsApp booking, and FAQs.",
+    "Consult Dr. Sayuj Krishnan near Hitech City, Hyderabad for endoscopic spine & minimally invasive brain surgery. Check OPD timings, directions & booking.",
   keywords: [
     "neurosurgeon hitech city",
     "brain surgeon hitech city",

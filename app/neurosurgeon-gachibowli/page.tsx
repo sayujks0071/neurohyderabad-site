@@ -16,7 +16,7 @@ export const revalidate = 86400;
 export const metadata = {
   title: "Neurosurgeon in Gachibowli, Hyderabad | Endoscopic Spine | Dr. Sayuj Krishnan",
   description:
-    "Consult Dr. Sayuj Krishnan near Gachibowli, Hyderabad for endoscopic spine & minimally invasive brain surgery. OPD timings, parking, directions, WhatsApp booking, and FAQs.",
+    "Consult Dr. Sayuj Krishnan near Gachibowli, Hyderabad for endoscopic spine & minimally invasive brain surgery. Check OPD timings, directions & booking.",
   alternates: { canonical: "https://www.drsayuj.info/neurosurgeon-gachibowli" },
   openGraph: {
     title: "Neurosurgeon in Gachibowli, Hyderabad | Endoscopic Spine | Dr. Sayuj Krishnan",
