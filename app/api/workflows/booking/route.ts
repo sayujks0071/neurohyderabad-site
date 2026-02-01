@@ -11,6 +11,7 @@ import type { BookingData } from "@/packages/appointment-form/types";
 import { sendConfirmationEmail, sendAdminNotificationEmail } from "@/src/lib/appointments/email";
 import { submitToGoogleSheets } from "@/src/lib/google-sheets";
 import { buildWebhookPayload, notifyAppointmentWebhooks } from "@/src/lib/appointments/webhooks";
+import { retry } from "@/src/lib/retry";
 
 type WorkflowAppointmentType = "new-consultation" | "follow-up" | "second-opinion";
 
@@ -73,10 +74,36 @@ export async function POST(request: NextRequest) {
     // 1. Generate AI Confirmation
     const { message: confirmationMessage, usedAI } = await generateBookingConfirmation(booking);
 
-    // 2. Send Emails (Parallel)
-    const [confirmationResult, adminEmailResult] = await Promise.all([
-      sendConfirmationEmail(booking, confirmationMessage),
-      sendAdminNotificationEmail(booking, source),
+    // 2. Execute Parallel Actions: Emails & CRM Sync (with Retry)
+    // We group these independent operations to minimize total duration.
+    const [confirmationResult, adminEmailResult, sheetsResult] = await Promise.all([
+      retry(
+        () => sendConfirmationEmail(booking, confirmationMessage),
+        { name: "send-confirmation-email", predicate: (res) => res.success }
+      ),
+      retry(
+        () => sendAdminNotificationEmail(booking, source),
+        { name: "send-admin-email", predicate: (res) => res.success }
+      ),
+      retry(
+        () => submitToGoogleSheets({
+          fullName: booking.patientName,
+          email: booking.email,
+          phone: booking.phone,
+          concern: booking.reason.slice(0, 100),
+          preferredDate: booking.appointmentDate,
+          preferredTime: booking.appointmentTime,
+          source: source || "website",
+          metadata: {
+            age: booking.age,
+            gender: booking.gender,
+            bookingReason: booking.reason,
+            painScore: booking.painScore,
+            mriScanAvailable: booking.mriScanAvailable,
+          },
+        }),
+        { name: "sync-google-sheets", predicate: (res) => res.success }
+      ),
     ]);
 
     if (!confirmationResult.success) {
@@ -87,29 +114,11 @@ export async function POST(request: NextRequest) {
       console.error(`[API] Failed to send admin notification: ${adminEmailResult.error}`);
     }
 
-    // 3. Sync to Google Sheets (CRM)
-    const sheetsResult = await submitToGoogleSheets({
-      fullName: booking.patientName,
-      email: booking.email,
-      phone: booking.phone,
-      concern: booking.reason.slice(0, 100),
-      preferredDate: booking.appointmentDate,
-      preferredTime: booking.appointmentTime,
-      source: source || "website",
-      metadata: {
-        age: booking.age,
-        gender: booking.gender,
-        bookingReason: booking.reason,
-        painScore: booking.painScore,
-        mriScanAvailable: booking.mriScanAvailable,
-      },
-    });
-
     if (!sheetsResult.success) {
       console.warn(`[API] Google Sheets sync failed: ${sheetsResult.message}`);
     }
 
-    // 4. Trigger Webhooks
+    // 3. Trigger Webhooks (after emails, as it needs emailResult)
     await notifyAppointmentWebhooks(
       buildWebhookPayload({
         booking,
