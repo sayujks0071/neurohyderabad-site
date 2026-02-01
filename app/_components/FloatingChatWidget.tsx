@@ -214,7 +214,7 @@ export default function FloatingChatWidget() {
         <div className="fixed bottom-24 right-4 w-[200px] bg-white rounded-lg shadow-lg border border-gray-200 z-[60] p-3 animate-in slide-in-from-bottom-4 fade-in duration-200">
           <button
             onClick={() => setIsMinimized(false)}
-            className="w-full text-left text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors"
+            className="w-full text-left text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
           >
             Click to expand chat
           </button>
@@ -241,14 +241,14 @@ export default function FloatingChatWidget() {
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setIsMinimized(true)}
-                className="p-1 hover:bg-white/20 rounded-md transition-colors"
+                className="p-1 hover:bg-white/20 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-white/50"
                 aria-label="Minimize chat"
               >
                 <Minus size={18} />
               </button>
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1 hover:bg-white/20 rounded-md transition-colors"
+                className="p-1 hover:bg-white/20 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-white/50"
                 aria-label="Close chat"
               >
                 <X size={18} />
@@ -321,7 +321,7 @@ export default function FloatingChatWidget() {
                 <button
                   key={i}
                   onClick={() => sendMessage(action)}
-                  className="whitespace-nowrap px-3 py-1 bg-white border border-blue-100 text-blue-600 text-xs rounded-full hover:bg-blue-50 transition-colors shadow-sm"
+                  className="whitespace-nowrap px-3 py-1 bg-white border border-blue-100 text-blue-600 text-xs rounded-full hover:bg-blue-50 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                   {action}
                 </button>
@@ -347,7 +347,7 @@ export default function FloatingChatWidget() {
                 type="submit"
                 aria-label="Send message"
                 disabled={!input.trim() || isLoading}
-                className="absolute right-1.5 p-1.5 bg-blue-600 text-white rounded-full hover:bg-blue-700 disabled:opacity-50 disabled:hover:bg-blue-600 transition-colors shadow-sm"
+                className="absolute right-1.5 p-1.5 bg-blue-600 text-white rounded-full hover:bg-blue-700 disabled:opacity-50 disabled:hover:bg-blue-600 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
               >
                 <Send size={14} />
               </button>
