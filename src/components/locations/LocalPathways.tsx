@@ -22,6 +22,13 @@ const formatSlug = (slug: string) => {
     .join(' ');
 };
 
+/**
+ * LocalPathways Component
+ * Implements the "Curated Internal Linking Module" strategy.
+ * - On Location Pages: Links to Top Services & Conditions (down-funnel).
+ * - On Service/Condition Pages: Links to relevant Locations (cross-funnel).
+ * This structure distributes link equity and helps users find local care.
+ */
 export const LocalPathways: React.FC<LocalPathwaysProps> = ({
   mode,
   locationId,
@@ -45,7 +52,7 @@ export const LocalPathways: React.FC<LocalPathwaysProps> = ({
     effectiveLocation = getLocationById(locationId);
   }
 
-  // Mode: Location
+  // Mode: Location (Links to Services/Conditions)
   if (effectiveMode === 'location') {
     if (!effectiveLocation) return null;
 
@@ -60,6 +67,7 @@ export const LocalPathways: React.FC<LocalPathwaysProps> = ({
             </h3>
             <div className="space-y-3">
               {effectiveLocation.top_services_slugs.map(slug => {
+                 if (slug === currentSlug) return null; // Exclude current page if matched
                  const title = formatSlug(slug);
                  return (
                   <Link key={slug} href={`/services/${slug}`} className={linkClass}>
@@ -79,6 +87,7 @@ export const LocalPathways: React.FC<LocalPathwaysProps> = ({
             </h3>
             <div className="space-y-3">
               {effectiveLocation.top_conditions_slugs.map(slug => {
+                 if (slug === currentSlug) return null;
                  const title = formatSlug(slug);
                  const href = `/conditions/${slug}`;
                  return (
@@ -107,7 +116,8 @@ export const LocalPathways: React.FC<LocalPathwaysProps> = ({
   // Mode: Service or Condition (showing locations)
   if (effectiveMode === 'service' || effectiveMode === 'condition') {
     // Exclude 'hyderabad' as it's the main location, we want local areas
-    // Show curated list of major areas to avoid link farming (limit to ~6 distinct zones)
+    // Strategy: Show curated list of major areas to avoid link farming (limit to ~6 distinct zones)
+    // This helps distributing link equity to key location pages without overwhelming the user/crawler.
     const FEATURED_AREAS = [
       'banjara-hills',
       'jubilee-hills',

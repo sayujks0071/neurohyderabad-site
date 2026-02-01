@@ -8,6 +8,12 @@ interface NAPProps {
   locationId?: string;
 }
 
+/**
+ * Standardized NAP Component
+ * Renders Name, Address, Phone (plus WhatsApp & Directions) from the single source of truth.
+ * Used in footers, sidebars, and service pages where the full LocationNAPCard is too heavy.
+ * Note: JSON-LD Schema is handled separately by LocationSchema or PhysicianSchema components.
+ */
 export default function NAP({ 
   className = '', 
   showEmail = true, 
@@ -42,7 +48,9 @@ export default function NAP({
       <div className="space-y-1">
         <div className="flex items-start">
           <span className="font-medium min-w-[80px]">Hospital:</span>
-          <span>{location.address.streetAddress}, {location.address.addressLocality} {location.address.postalCode}</span>
+          <span>
+            {location.address.streetAddress}, {location.address.addressLocality} {location.address.postalCode}
+          </span>
         </div>
         <div className="flex items-center">
           <span className="font-medium min-w-[80px]">Phone:</span>
@@ -51,6 +59,32 @@ export default function NAP({
             className="text-blue-600 hover:text-blue-800 font-medium"
           >
             {location.telephone}
+          </a>
+        </div>
+        {location.whatsapp && (
+          <div className="flex items-center">
+            <span className="font-medium min-w-[80px]">WhatsApp:</span>
+            <a
+              href={`https://wa.me/${location.whatsapp}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-green-600 hover:text-green-800 font-medium"
+              aria-label="Chat on WhatsApp"
+            >
+              Chat Now
+            </a>
+          </div>
+        )}
+        <div className="flex items-center">
+          <span className="font-medium min-w-[80px]">Map:</span>
+          <a
+            href={location.directions_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:text-blue-800 font-medium underline"
+            aria-label="Get Directions"
+          >
+            Get Directions
           </a>
         </div>
         {showEmail && (
