@@ -43,7 +43,7 @@ export default function LBNagarLocationPage() {
       </p>
 
       <div className="mt-6 flex justify-center">
-        <LocationCTAs location={location} />
+        <LocationCTAs mode="location" locationId={location.id} />
       </div>
 
       <section className="grid md:grid-cols-2 gap-8 mt-10">

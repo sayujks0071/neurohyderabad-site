@@ -60,7 +60,7 @@ export default function HitechCityLocationPage() {
       </p>
 
       <div className="mt-6">
-         <LocationCTAs mode="location" locationId={location.id} />
+        <LocationCTAs mode="location" locationId={location.id} />
       </div>
 
       <section className="grid md:grid-cols-2 gap-8 mt-10">

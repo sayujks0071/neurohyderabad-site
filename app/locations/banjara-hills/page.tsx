@@ -63,7 +63,7 @@ export default function BanjaraHillsLocationPage() {
       </div>
 
       <div className="mt-6">
-        <LocationCTAs location={location} />
+        <LocationCTAs mode="location" locationId={location.id} />
       </div>
 
       <section className="grid md:grid-cols-2 gap-8 mt-10">
