@@ -103,6 +103,10 @@ const faqs = [
     question: 'How does endoscopic spine surgery recovery compare to microscopic surgery?',
     answer: 'Endoscopic surgery typically offers a faster recovery. Since it uses a smaller incision (8mm vs 2-3cm) and avoids cutting muscle, most patients walk within 3 hours and return to work in 3-5 days, compared to 2-3 weeks for microscopic surgery.'
   },
+  {
+    question: 'Is endoscopic spine surgery covered by health insurance?',
+    answer: 'Yes. Endoscopic spine surgery is a recognized medical procedure (not cosmetic) and is covered by most major health insurance providers and TPAs in India. Since it is often a day-care procedure (less than 24 hours hospitalization), some older policies may require specific checks, but modern policies fully cover it. Our team at Yashoda Hospital Malakpet assists with pre-authorization.'
+  },
 ];
 
 const COSTS = [
@@ -332,6 +336,14 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
               "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "For appropriately selected patients, endoscopic discectomy has a high success rate (around 85–95%) in relieving leg pain and numbness. Success depends on proper diagnosis, surgeon experience and adherence to post‑operative care instructions."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is endoscopic spine surgery covered by health insurance?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Endoscopic spine surgery is a recognized medical procedure (not cosmetic) and is covered by most major health insurance providers and TPAs in India. Since it is often a day-care procedure (less than 24 hours hospitalization), some older policies may require specific checks, but modern policies fully cover it. Our team at Yashoda Hospital Malakpet assists with pre-authorization."
               }
             }
           ]

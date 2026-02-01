@@ -19,3 +19,7 @@
 - **Content Gap:** "Risks & Safety Protocols" section for Endoscopic Spine Surgery. Competitors list specific risks (dural tear, infection) to build trust.
 - **Content Gap:** "Patient Education Video" embed. A 30-second animated explainer of the "Keyhole" vs "Open" difference.
 - **Content Gap:** "Anesthesia Protocol" dedicated page. "Awake vs Asleep" is a big patient concern.
+
+## 2026-01-29
+- **Content Gap:** Expand "Conditions Treated" sections on Service pages to link to specific Condition landing pages with descriptive anchor text.
+- **Content Gap:** Create "Endoscopic Spine Surgery vs. Traditional Surgery" deep-dive comparison page.
