@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import LocalNAP from "@/app/_components/LocalNAP";
+import { LocationNAPCard } from "@/src/components/locations/LocationNAPCard";
 import YMYLAttribution from "@/app/_components/YMYLAttribution";
 import { SITE_URL } from "@/src/lib/seo";
 import AuthorByline from '@/app/_components/AuthorByline';
@@ -354,7 +354,7 @@ export default function TrigeminalNeuralgiaTreatmentPage() {
       </section>
 
       <section className="mx-auto max-w-5xl px-4 py-12">
-        <LocalNAP />
+        <LocationNAPCard locationId="hyderabad" />
         <div className="mt-8">
           <YMYLAttribution lastReviewed="2025-02-14" />
         </div>

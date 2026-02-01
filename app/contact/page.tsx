@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Breadcrumbs from "../components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
-import MapEmbed from "@/components/MapEmbed";
+import { LocationMapEmbed } from "@/src/components/locations/LocationMapEmbed";
 import { CLINIC_INFO, getMedicalClinicSchema } from "../../src/lib/clinic";
 import Section from "../_components/Section";
 import Card from "../_components/Card";
@@ -281,7 +281,7 @@ export default function ContactPage() {
                     </p>
                   </div>
                 </div>
-                <MapEmbed />
+                <LocationMapEmbed locationId="hyderabad" />
               </div>
             </Card>
           </div>

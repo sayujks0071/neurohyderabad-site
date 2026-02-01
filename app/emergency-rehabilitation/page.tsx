@@ -4,7 +4,7 @@ import { SITE_URL } from '../../src/lib/seo';
 import MedicalReviewNotice from '../../src/components/MedicalReviewNotice';
 import EmergencyRehabilitationStructuredData from './structured-data';
 import JsonLd from '@/components/JsonLd';
-import MapEmbed from '@/components/MapEmbed';
+import { LocationMapEmbed } from '@/src/components/locations/LocationMapEmbed';
 import { CLINIC_INFO, getMedicalClinicSchema } from '../../src/lib/clinic';
 
 const clinicSchema = getMedicalClinicSchema();
@@ -398,7 +398,7 @@ export default function EmergencyRehabilitationPage() {
                 </ul>
               </div>
             </div>
-            <MapEmbed />
+            <LocationMapEmbed locationId="hyderabad" />
           </div>
         </section>
 

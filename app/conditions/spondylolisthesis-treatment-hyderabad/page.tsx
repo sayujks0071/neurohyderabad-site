@@ -3,7 +3,7 @@ import Link from 'next/link';
 import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import ReviewedBy from '@/app/_components/ReviewedBy';
-import NAP from '@/app/_components/NAP';
+import { LocationNAPCard } from '@/src/components/locations/LocationNAPCard';
 import { SITE_URL } from '../../../src/lib/seo';
 import { sources } from '../../blog/sources';
 import { makeMetadata } from '@/app/_lib/meta';
@@ -269,7 +269,7 @@ export default function SpondylolisthesisPage() {
           />
           <SourceList sources={sources['sciatica-pain-treatment-hyderabad'] || []} />
           <ReviewedBy />
-          <NAP />
+          <LocationNAPCard locationId="hyderabad" />
         </div>
       </Section>
 

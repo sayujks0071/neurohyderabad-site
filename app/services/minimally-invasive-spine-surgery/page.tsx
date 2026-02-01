@@ -6,7 +6,7 @@ import OutcomeMetricsSection from '@/components/OutcomeMetricsSection';
 import TeleconsultationForm from '@/components/TeleconsultationForm';
 import { patientStories } from '../../../src/content/stories';
 import ReviewedBy from '@/app/_components/ReviewedBy';
-import NAP from '@/app/_components/NAP';
+import { LocationNAPCard } from '@/src/components/locations/LocationNAPCard';
 import { makeMetadata } from '@/app/_lib/meta';
 import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
@@ -255,18 +255,8 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
           </p>
         </header>
 
-        <section className="bg-blue-50 p-6 rounded-lg mb-8 border border-blue-100 shadow-sm text-center">
-          <p className="text-gray-800 text-lg mb-4">
-            <strong>Yashoda Hospital, Malakpet</strong> • Room No. 317, OPD Block
-          </p>
-          <div className="flex flex-wrap justify-center gap-6 text-sm font-medium">
-             <a href="tel:+919778280044" className="flex items-center text-blue-700 hover:text-blue-900 bg-white px-4 py-2 rounded-full shadow-sm hover:shadow-md transition-all">
-               📞 +91-9778280044
-             </a>
-             <Link href="/appointments" className="flex items-center text-white bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-full shadow-sm hover:shadow-md transition-all">
-               Book Appointment
-             </Link>
-          </div>
+        <section className="mb-8">
+           <LocationNAPCard locationId="hyderabad" />
         </section>
 
         <section className="mb-12">
@@ -777,7 +767,6 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
 
         <section className="mt-12 space-y-6">
           <ReviewedBy lastReviewed="2025-10-19" />
-          <NAP />
         </section>
       </div>
     </div>

@@ -2,10 +2,10 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Breadcrumbs from '@/app/components/Breadcrumbs';
 import JsonLd from '@/components/JsonLd';
-import NAP from '@/app/_components/NAP';
 import ReviewedBy from '@/app/_components/ReviewedBy';
-import MapEmbed from '@/components/MapEmbed';
 import { makeMetadata } from '@/app/_lib/meta';
+import { LocationNAPCard } from '@/src/components/locations/LocationNAPCard';
+import { LocationMapEmbed } from '@/src/components/locations/LocationMapEmbed';
 import { SITE_URL } from '@/src/lib/seo';
 import { buildLocalServiceSchema } from '@/src/lib/schema/localService';
 import AuthorByline from '@/app/_components/AuthorByline';
@@ -402,10 +402,10 @@ export default function MicrodiscectomySurgeryPage() {
               Dr. Sayuj Krishnan is a highly experienced neurosurgeon specializing in microscopic and endoscopic spine surgeries.
               Surgery is performed in state-of-the-art operation theatres equipped with the latest Zeiss microscopes.
             </p>
-            <NAP className="bg-gray-50 border border-gray-200 rounded-xl p-6" />
+            <LocationNAPCard locationId="hyderabad" className="bg-gray-50 border border-gray-200 rounded-xl p-6" />
             <div>
               <h3 className="text-xl font-semibold text-blue-800 mb-3">Location</h3>
-              <MapEmbed />
+              <LocationMapEmbed locationId="hyderabad" />
             </div>
           </div>
           <div className="bg-blue-50 border border-blue-100 rounded-2xl p-6 shadow-sm space-y-5">
