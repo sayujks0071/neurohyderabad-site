@@ -17,4 +17,4 @@ export const appointmentSchema = z.object({
   mriScanAvailable: z.boolean().optional(),
 });
 
-export type BookingFormValues = z.infer<typeof appointmentSchema>;
+export type BookingFormValues = z.input<typeof appointmentSchema>;
