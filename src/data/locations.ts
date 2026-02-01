@@ -4,6 +4,7 @@ export interface LocationAddress {
   addressRegion: string;
   postalCode: string;
   addressCountry: string;
+  landmark?: string;
 }
 
 export interface LocationGeo {
@@ -50,6 +51,7 @@ export const YASHODA_MALAKPET_ADDRESS: LocationAddress = {
   addressRegion: "Telangana",
   postalCode: "500036",
   addressCountry: "IN",
+  landmark: "Near Nalgonda X Roads, Metro Station Malakpet",
 };
 
 export const YASHODA_GEO: LocationGeo = {

@@ -29,6 +29,11 @@ export const LocationNAPCard: React.FC<LocationNAPCardProps> = ({ location: lega
               <span itemProp="addressRegion">{location.address.addressRegion}</span> -{' '}
               <span itemProp="postalCode">{location.address.postalCode}</span>
             </p>
+            {location.address.landmark && (
+               <p className="text-sm text-blue-800 mt-1 font-medium">
+                 Landmark: {location.address.landmark}
+               </p>
+            )}
           </div>
         </div>
 
