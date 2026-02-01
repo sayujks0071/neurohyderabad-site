@@ -23,6 +23,7 @@ interface AlertConfig {
     threshold: number;
     operator: '>' | '<' | '=' | '>=' | '<=';
     window?: string;
+    filters?: Array<{ key: string; value: any }>;
   };
   severity: 'low' | 'medium' | 'high' | 'critical';
 }
@@ -47,6 +48,7 @@ const ALERTS: AlertConfig[] = [
       threshold: 2000, // 2 seconds
       operator: '>',
       window: '5m',
+      filters: [{ key: 'endpoint', value: '/api/workflows/booking' }],
     },
     severity: 'medium',
   },
@@ -91,6 +93,7 @@ const ALERTS: AlertConfig[] = [
       threshold: 0.05, // 5%
       operator: '>',
       window: '5m',
+      filters: [{ key: 'endpoint', value: '/api/ai/chat' }],
     },
     severity: 'high',
   },
@@ -144,6 +147,7 @@ async function setupAlerts() {
             ...config.condition,
             filters: [
               { key: 'url', value: SITE_URL },
+              ...(config.condition.filters || []),
             ],
           },
           actions: [

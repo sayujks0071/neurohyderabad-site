@@ -12,7 +12,7 @@ This document outlines the most impactful use cases for Middleware monitoring on
 
 **What to monitor:**
 - Form submission success rate (target: > 95%)
-- API response time for `/api/appointments/submit` (target: < 2s)
+- API response time for `/api/workflows/booking` (target: < 2s)
 - Form abandonment rate
 - Error rate during booking flow
 
@@ -299,7 +299,7 @@ This document outlines the most impactful use cases for Middleware monitoring on
 **Why it matters:** All critical features depend on APIs. Monitor all endpoints.
 
 **What to monitor:**
-- `/api/appointments/submit` - Booking API
+- `/api/workflows/booking` - Booking API
 - `/api/ai/chat` - Chatbot API
 - `/api/lead` - Lead form API
 - `/api/search-console` - SEO API
