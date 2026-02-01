@@ -9,12 +9,12 @@ export const appointmentSchema = z.object({
     return Number.isFinite(n) && n > 0 && n <= 120;
   }, "Age seems too high"),
   gender: z.enum(["male", "female", "other"], { errorMap: () => ({ message: "Please select a gender" }) }),
-  // Using .min() with start of today to allow 'Today' while enforcing future/present date.
-  requestedDate: z.date().min(new Date(new Date().setHours(0, 0, 0, 0)), "Date must be in the future"),
+  // Updated to use strict future check as requested
+  requestedDate: z.date().min(new Date(), "Date must be in the future"),
   appointmentTime: z.string().min(1, "Please select a time"),
   reason: z.string().min(10, "Please provide more details (min 10 characters)"),
   painScore: z.coerce.number().min(1).max(10),
-  mriScanAvailable: z.boolean().optional(),
+  hasMRI: z.boolean().default(false),
 });
 
 export type BookingFormValues = z.infer<typeof appointmentSchema>;
