@@ -1,45 +1,74 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { useChat } from '@ai-sdk/react';
+import { DefaultChatTransport, type UIMessage } from 'ai';
 import { useStatsigEvents } from '../../src/lib/statsig-events';
-import { MessageCircle, X, Send, AlertTriangle, Loader2, Sparkles, Minus } from 'lucide-react';
+import { MessageCircle, X, Send, AlertTriangle, Loader2, Sparkles, Minus, MapPin, Phone, Calendar, ArrowRight } from 'lucide-react';
 import { usePathname } from 'next/navigation';
-
-interface Message {
-  id: string;
-  role: 'user' | 'assistant';
-  content: string;
-}
+import { CANONICAL_WHATSAPP } from '@/src/data/locations';
 
 /**
- * Floating AI Chat Widget using Vercel AI Gateway
+ * Floating AI Chat Widget using Vercel AI SDK (OpenClaw style)
  *
  * Features:
  * - Global availability via floating button
- * - Real-time streaming responses
+ * - Real-time streaming responses via useChat
+ * - Tool Invocations (Generative UI)
  * - Emergency detection
- * - Compact design
+ * - WhatsApp integration
  */
 export default function FloatingChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [showEmergencyAlert, setShowEmergencyAlert] = useState(false);
+  // Manually manage input state as it's not exposed in this version of useChat helpers
   const [input, setInput] = useState('');
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: 'initial',
-      role: 'assistant',
-      content: "Hello! I'm Dr. Sayuj's AI assistant. I can help you with appointments, condition info, and more. How can I help?",
-    },
-  ]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const pathname = usePathname();
 
   // Statsig hooks
   const { logAppointmentBooking, logContactFormSubmit } = useStatsigEvents();
+  const pathname = usePathname();
+
+  // Configure transport for custom API route
+  // Using DefaultChatTransport from 'ai' package as required by this SDK version
+  const transport = new DefaultChatTransport({
+    api: '/api/ai/chat',
+  });
+
+  const { messages, status, sendMessage, error } = useChat({
+    transport,
+    // Using 'messages' instead of 'initialMessages' as required by this SDK version
+    messages: [
+      {
+        id: 'initial',
+        role: 'assistant',
+        parts: [{ type: 'text', text: "Hello! I'm Dr. Sayuj's AI assistant. I can help you with appointments, condition info, and more. How can I help?" }]
+      } as UIMessage,
+    ],
+    onFinish: ({ message }) => {
+      // Check for emergency keywords in the full response
+      const textContent = message.parts
+        .filter(part => part.type === 'text')
+        .map(part => part.text)
+        .join('')
+        .toLowerCase();
+
+      const emergencyKeywords = ['emergency', 'urgent', 'immediately', 'call', 'stroke', 'seizure'];
+      if (emergencyKeywords.some(k => textContent.includes(k))) {
+        setShowEmergencyAlert(true);
+      }
+      logContactFormSubmit('ai_chat_widget', true);
+    },
+    onError: (err) => {
+      console.error('Chat error:', err);
+      logContactFormSubmit('ai_chat_widget', false);
+    }
+  });
+
+  const isLoading = status === 'submitted' || status === 'streaming';
+
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -53,125 +82,21 @@ export default function FloatingChatWidget() {
     }
   }, [messages, isOpen, isMinimized]);
 
-  const sendMessage = async (content: string) => {
-    if (!content.trim() || isLoading) return;
-
-    const userMessage: Message = {
-      id: Date.now().toString(),
-      role: 'user',
-      content: content.trim(),
-    };
-
-    setMessages(prev => [...prev, userMessage]);
-    setInput('');
-    setIsLoading(true);
-    setError(null);
-
-    // Log user interaction
-    logAppointmentBooking('ai_chat_widget_interaction', 'general');
-
-    try {
-      const response = await fetch('/api/ai/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          message: content.trim(),
-          conversationHistory: messages.slice(-10).map(m => ({
-            type: m.role,
-            content: m.content,
-          })),
-          pageSlug: pathname || 'global',
-          service: 'floating_widget',
-        }),
-      });
-
-      if (!response.ok) {
-        let errorText = '';
-        let errorData: any = null;
-        try {
-          const contentType = response.headers.get('content-type');
-          if (contentType?.includes('application/json')) {
-            errorData = await response.json();
-            errorText = errorData.message || errorData.error || 'Unknown error';
-          } else {
-            errorText = await response.text();
-          }
-        } catch (e) {
-          errorText = 'Unknown error';
-        }
-        console.error('API Error:', response.status, errorText);
-        
-        // Create error message for user
-        const errorMessage: Message = {
-          id: (Date.now() + 1).toString(),
-          role: 'assistant',
-          content: errorData?.message || 
-            (response.status === 429 
-              ? 'Too many requests. Please wait a moment and try again.' 
-              : response.status === 500
-              ? 'Server error. Please try again or call +91-9778280044.'
-              : `Failed to get AI response. Please try again or call +91-9778280044.`),
-        };
-        setMessages(prev => [...prev, errorMessage]);
-        setIsLoading(false);
-        return;
-      }
-
-      // Use response.text() instead of ReadableStream for better browser compatibility
-      // This is more reliable across all browsers, including incognito mode
-      const fullContent = await response.text();
-
-      // Ensure we have content
-      if (!fullContent.trim()) {
-        const errorMessage: Message = {
-          id: (Date.now() + 1).toString(),
-          role: 'assistant',
-          content: "No response received. Please check your connection and try again, or call +91-9778280044.",
-        };
-        setMessages(prev => [...prev, errorMessage]);
-        setIsLoading(false);
-        return;
-      }
-
-      // Create assistant message with the full content
-      const assistantMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        role: 'assistant',
-        content: fullContent.trim(),
-      };
-
-      setMessages(prev => [...prev, assistantMessage]);
-
-      // Check for emergency keywords
-      const emergencyKeywords = ['emergency', 'urgent', 'immediately', 'call', 'stroke', 'seizure'];
-      const hasEmergency = emergencyKeywords.some(keyword =>
-        fullContent.toLowerCase().includes(keyword)
-      );
-
-      if (hasEmergency) {
-        setShowEmergencyAlert(true);
-      }
-
-      logContactFormSubmit('ai_chat_widget', true);
-    } catch (err) {
-      console.error('Chat error:', err);
-      setError(err instanceof Error ? err : new Error('Failed to send message'));
-      logContactFormSubmit('ai_chat_widget', false);
-
-      const errorMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        role: 'assistant',
-        content: "I'm having trouble right now. Please call +91-9778280044 for immediate assistance.",
-      };
-      setMessages(prev => [...prev, errorMessage]);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await sendMessage(input);
+    if (!input.trim() || isLoading) return;
+
+    logAppointmentBooking('ai_chat_widget_interaction', 'general');
+    const messageContent = input;
+    setInput(''); // Clear input immediately
+    // Use sendMessage which is available in this SDK version
+    await sendMessage({ text: messageContent });
+  };
+
+  const sendQuickAction = async (action: string) => {
+    if (isLoading) return;
+    logAppointmentBooking('ai_chat_widget_interaction', 'quick_action');
+    await sendMessage({ text: action });
   };
 
   const quickActions = [
@@ -272,33 +197,104 @@ export default function FloatingChatWidget() {
             role="log"
             aria-live="polite"
           >
-            {messages.map((message) => (
+            {messages.map((message) => {
+              // Extract text content from parts
+              const textContent = message.parts
+                .filter(part => part.type === 'text')
+                .map(part => part.text)
+                .join('');
+
+              // Only render message bubble if there is text content
+              // (Sometimes a message might be purely tool invocations which we render below)
+              const showBubble = textContent.trim().length > 0;
+
+              return (
               <div
                 key={message.id}
-                className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'} animate-in fade-in slide-in-from-bottom-2 duration-200`}
+                className={`flex flex-col ${message.role === 'user' ? 'items-end' : 'items-start'} animate-in fade-in slide-in-from-bottom-2 duration-200`}
               >
-                <div
-                  className={`max-w-[85%] px-3 py-2 rounded-2xl text-sm ${
-                    message.role === 'user'
-                      ? 'bg-blue-600 text-white rounded-br-none'
-                      : 'bg-white text-gray-800 border border-gray-100 shadow-sm rounded-bl-none'
-                  }`}
-                >
-                  <p className="whitespace-pre-wrap break-words">{message.content || '...'}</p>
-                </div>
+                {showBubble && (
+                  <div
+                    className={`max-w-[85%] px-3 py-2 rounded-2xl text-sm ${
+                      message.role === 'user'
+                        ? 'bg-blue-600 text-white rounded-br-none'
+                        : 'bg-white text-gray-800 border border-gray-100 shadow-sm rounded-bl-none'
+                    }`}
+                  >
+                    <p className="whitespace-pre-wrap break-words">{textContent}</p>
+                  </div>
+                )}
+
+                {/* Tool Invocations (Generative UI) */}
+                {message.parts
+                  .filter(part => part.type === 'tool-invocation')
+                  .map((part) => {
+                    // Type guard/cast for tool invocation part
+                    const toolInvocation = (part as any).toolInvocation;
+                    if (!toolInvocation) return null; // Should not happen if type is tool-invocation but safeguard
+
+                    const { toolName, toolCallId, state, result } = toolInvocation;
+
+                    if (state === 'result' && result) {
+                      if (toolName === 'getClinicInfo') {
+                         return (
+                          <div key={toolCallId} className="mt-2 max-w-[85%] w-full bg-white rounded-xl border border-blue-100 shadow-md p-3">
+                            <div className="flex items-start gap-2 mb-2">
+                               <MapPin className="text-blue-600 shrink-0 mt-0.5" size={16} />
+                               <div>
+                                 <p className="font-semibold text-xs text-blue-800">Clinic Location</p>
+                                 <p className="text-xs text-gray-600">{result.address.streetAddress}, {result.address.addressLocality}</p>
+                               </div>
+                            </div>
+                             <div className="flex items-start gap-2 mb-2">
+                               <Calendar className="text-blue-600 shrink-0 mt-0.5" size={16} />
+                               <div>
+                                 <p className="font-semibold text-xs text-blue-800">Hours</p>
+                                 <p className="text-xs text-gray-600">{result.hours}</p>
+                               </div>
+                            </div>
+                             <div className="flex items-start gap-2">
+                               <Phone className="text-blue-600 shrink-0 mt-0.5" size={16} />
+                               <div>
+                                 <p className="font-semibold text-xs text-blue-800">Contact</p>
+                                 <a href={`tel:${result.phone}`} className="text-xs text-blue-600 underline">{result.phone}</a>
+                               </div>
+                            </div>
+                          </div>
+                         );
+                      }
+
+                      if (toolName === 'initiateBooking') {
+                        const whatsappText = encodeURIComponent(`Hi, I would like to book an appointment for: ${result.intent}`);
+                        const whatsappLink = `https://wa.me/${CANONICAL_WHATSAPP}?text=${whatsappText}`;
+                        return (
+                          <div key={toolCallId} className="mt-2 max-w-[85%]">
+                            <a
+                              href={whatsappLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center gap-2 bg-[#25D366] text-white px-4 py-2 rounded-xl text-sm font-medium shadow-md hover:bg-[#128C7E] transition-colors w-full justify-center"
+                            >
+                              <MessageCircle size={16} />
+                              Book on WhatsApp
+                              <ArrowRight size={14} className="ml-auto" />
+                            </a>
+                          </div>
+                        );
+                      }
+                    }
+
+                    return null;
+                  })}
               </div>
-            ))}
+            )})}
 
             {isLoading && (
               <div className="flex justify-start">
                 <div className="bg-white border border-gray-100 shadow-sm px-3 py-2 rounded-2xl rounded-bl-none">
                   <div className="flex items-center space-x-2">
                     <Loader2 size={14} className="animate-spin text-blue-600" />
-                    <span className="text-xs text-gray-500">
-                      {messages[messages.length - 1]?.role === 'assistant' && messages[messages.length - 1]?.content 
-                        ? 'Typing...' 
-                        : 'Thinking...'}
-                    </span>
+                    <span className="text-xs text-gray-500">Thinking...</span>
                   </div>
                 </div>
               </div>
@@ -307,7 +303,7 @@ export default function FloatingChatWidget() {
             {error && (
               <div className="flex justify-start">
                 <div className="bg-red-50 border border-red-200 shadow-sm px-3 py-2 rounded-2xl rounded-bl-none">
-                  <p className="text-xs text-red-700">{error.message}</p>
+                  <p className="text-xs text-red-700">Failed to send message. Please try again.</p>
                 </div>
               </div>
             )}
@@ -320,7 +316,7 @@ export default function FloatingChatWidget() {
               {quickActions.map((action, i) => (
                 <button
                   key={i}
-                  onClick={() => sendMessage(action)}
+                  onClick={() => sendQuickAction(action)}
                   className="whitespace-nowrap px-3 py-1 bg-white border border-blue-100 text-blue-600 text-xs rounded-full hover:bg-blue-50 transition-colors shadow-sm"
                 >
                   {action}
