@@ -20,8 +20,8 @@ interface Message {
  * - Emergency detection
  * - Compact design
  */
-export default function FloatingChatWidget() {
-  const [isOpen, setIsOpen] = useState(false);
+export default function FloatingChatWidget({ autoOpen = false }: { autoOpen?: boolean }) {
+  const [isOpen, setIsOpen] = useState(autoOpen);
   const [isMinimized, setIsMinimized] = useState(false);
   const [showEmergencyAlert, setShowEmergencyAlert] = useState(false);
   const [input, setInput] = useState('');
@@ -32,6 +32,13 @@ export default function FloatingChatWidget() {
       content: "Hello! I'm Dr. Sayuj's AI assistant. I can help you with appointments, condition info, and more. How can I help?",
     },
   ]);
+
+  // Handle autoOpen prop updates (e.g. if user clicks after lazy load)
+  useEffect(() => {
+    if (autoOpen) {
+      setIsOpen(true);
+    }
+  }, [autoOpen]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
