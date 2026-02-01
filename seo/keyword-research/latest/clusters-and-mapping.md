@@ -1,13 +1,15 @@
-# Cluster Mapping - 2026-01-27
+# Cluster Mapping & Strategy
 
-## Cluster: Microdiscectomy
-**Primary Keyword:** `microdiscectomy surgery hyderabad`
+## Cluster 1: Dilsukhnagar Location
+* **Cluster ID:** `HYD | BOFU | LOCATIONS | neurosurgeon-dilsukhnagar | near-me`
+* **Primary Keyword:** "neurosurgeon dilsukhnagar"
+* **Secondary Keywords:** "best neurosurgeon in dilsukhnagar", "spine surgeon dilsukhnagar"
+* **Target URL:** `/locations/neurosurgeon-dilsukhnagar`
+* **Strategy:** Create new location page. Leverage proximity to Malakpet (10 mins).
 
-| Keyword | Intent | Funnel | Target URL | Status |
-|---|---|---|---|---|
-| microdiscectomy surgery hyderabad | Commercial | BOFU | `/services/microdiscectomy-surgery-hyderabad` | New Page |
-| lumbar microdiscectomy cost | Commercial | BOFU | `/services/microdiscectomy-surgery-hyderabad` | Section |
-| minimally invasive discectomy | Informational | MOFU | `/services/microdiscectomy-surgery-hyderabad` | Secondary |
-
-## Cannibalization Check
-- Checked against `/services/endoscopic-spine-surgery-hyderabad`. Distinct intent (Micro vs Endoscopic). No overlap found.
+## Cluster 2: Vanasthalipuram Location
+* **Cluster ID:** `HYD | BOFU | LOCATIONS | neurosurgeon-vanasthalipuram | near-me`
+* **Primary Keyword:** "neurosurgeon vanasthalipuram"
+* **Secondary Keywords:** "best spine doctor vanasthalipuram"
+* **Target URL:** `/locations/neurosurgeon-vanasthalipuram`
+* **Strategy:** Create new location page. Target patients traveling on NH65.

@@ -1,11 +1,13 @@
-# Daily SEO Changelog - 2026-01-27
+# Changelog: 2026-02-01
 
 ## New Pages
-- Created `app/services/microdiscectomy-surgery-hyderabad/page.tsx` targeting "Microdiscectomy Surgery".
+* Created `/locations/neurosurgeon-dilsukhnagar`
+* Created `/locations/neurosurgeon-vanasthalipuram`
 
 ## Registry Updates
-- Added `microdiscectomy-surgery-hyderabad` to `seo/keyword-registry.json`.
-- Mapped keywords in `seo/page-keyword-map.json`.
+* Added 7 new keywords to `keyword-registry.json`.
+* Mapped 2 new URLs in `page-keyword-map.json`.
 
-## Schema Changes
-- Added `MedicalWebPage` schema with specialty "Neurosurgery".
+## Rationale
+* **Dilsukhnagar:** High-volume area adjacent to Malakpet. Competitor gap for "Endoscopic Spine".
+* **Vanasthalipuram:** Growing residential area on key highway route to hospital.

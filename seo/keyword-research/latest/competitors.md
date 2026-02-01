@@ -1,15 +1,14 @@
-# Daily Competitor Analysis - 2026-01-27
+# Competitor Discovery: Dilsukhnagar & Vanasthalipuram Area
 
-## Target Keywords
-- "endoscopic spine surgery hyderabad"
-- "microdiscectomy hyderabad"
-- "minimally invasive spine surgery"
+## Target Area: Dilsukhnagar (HYD)
+* **Intent:** High-density residential + commercial hub. High volume of "neurosurgeon near me" searches.
+* **Competitors:**
+    *   *Competitor A (Local Hospital):* Optimized for "Brain Surgery Dilsukhnagar". Weak on "Endoscopic Spine".
+    *   *Competitor B (Aggregator):* Practo/Justdial dominate top 3.
+    *   *Opportunity:* Dedicated location page with "Endoscopic Spine Surgery" focus + Schema markup.
 
-## Competitors Analyzed
-1. **Yashoda Hospitals** - Strong on "robotic spine surgery", weaker on specific "microdiscectomy" long-tail.
-2. **KIMS Hospitals** - Good general dominance, but specific procedure pages are thin.
-3. **Dr. Sukumar** - Competitor for individual surgeon rankings.
-
-## Gap Analysis
-- Most competitors lack detailed "recovery timeline" for microdiscectomy.
-- Few have clear "cost" or "insurance" sections on the procedure page itself.
+## Target Area: Vanasthalipuram (HYD)
+* **Intent:** Residential. Patients often travel to Malakpet/LB Nagar.
+* **Competitors:**
+    *   *Competitor C (Ortho Clinic):* Ranks for "Spine Doctor" but not "Neurosurgeon".
+    *   *Opportunity:* Capture "Neurosurgeon" and "Sciatica Specialist" terms.
