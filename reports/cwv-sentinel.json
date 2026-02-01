@@ -1,31 +1,28 @@
 {
-  "timestamp": "2025-05-23T05:50:00Z",
-  "page_types": {
-    "home": {
-      "url": "/",
-      "notes": "Previous CLS issue in PatientEducationVideos resolved with Skeleton. LCP optimized with CSS gradient hero. DoctorCard image has priority."
+  "timestamp": "2025-02-23T12:00:00Z",
+  "analysis": {
+    "page_types": {
+      "home": {
+        "url": "/",
+        "notes": "LCP is optimized (DoctorCard priority=true). TBT risk identified: Heavy 'FloatingChatWidget' loaded immediately on client hydration (30kB+ shared chunk execution)."
+      },
+      "location": {
+        "url": "/locations/malakpet",
+        "notes": "LCP is text/hero. Map embed is correctly lazy-loaded (click-to-load)."
+      }
     },
-    "location": {
-      "url": "/locations/malakpet",
-      "notes": "Static generation used. Map component uses facade pattern."
+    "bottleneck": "TBT / INP risk due to eager hydration of 'FloatingChatWidget' and its dependencies (lucide-react, statsig, internal state logic) on all pages.",
+    "fix_implemented": "Deferred Loading (Facade Pattern) for FloatingChatWidget.",
+    "fix_details": {
+      "description": "Replaced immediate dynamic import with a custom deferred loading strategy using React.lazy and Suspense.",
+      "mechanism": "Renders a lightweight 'PlaceholderButton' initially. Loads the heavy widget only after 4 seconds (idle simulation) or upon user interaction (hover/focus/click).",
+      "ux_handling": "Maintained 'click-to-open' intent by passing 'autoOpen' prop if the user clicks the placeholder during the loading phase.",
+      "safety": "Preserved 'ssr: false' behavior. Fallback UI matches the closed widget state to prevent layout shift."
     },
-    "condition": {
-      "url": "/conditions/[slug]",
-      "notes": "Hero Image uses `sizes` attribute correctly (verified)."
-    },
-    "appointment": {
-      "url": "/appointments",
-      "notes": "AppointmentScheduler CLS fixed previously."
+    "expected_impact": {
+      "metric": "TBT (Total Blocking Time) and INP (Interaction to Next Paint)",
+      "improvement": "Reduces initial JS execution time on main thread. Frees up resources for LCP and other critical interactions during the first 4 seconds.",
+      "verification": "Verified via Playwright script that widget still opens correctly after deferral."
     }
-  },
-  "bottleneck_identified": {
-    "type": "CLS",
-    "page_type": "Home",
-    "description": "PatientEducationVideos component was lazy-loaded with a generic placeholder (h-[1700px] md:h-[600px]) that did not match the grid layout of the actual content, causing layout shifts when the component loaded."
-  },
-  "fix_implemented": {
-    "description": "Created high-fidelity `PatientEducationVideosSkeleton` mirroring the grid structure (header, 3 cards with aspect-video images) and applied it to both `dynamic` import loading prop and `LazySection` placeholder in `app/page.tsx`.",
-    "expected_impact": "Eliminates layout shift when PatientEducationVideos loads, as the skeleton occupies the exact same space and layout as the final content.",
-    "verification": "Visual verification using Playwright screenshot confirmed the skeleton matches the component layout. Build and tests passed."
   }
 }
