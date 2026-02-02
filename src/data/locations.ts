@@ -15,6 +15,11 @@ export interface LocationGeo {
  * Single Source of Truth for Location Data
  * This file centralizes all NAP (Name, Address, Phone) and location-specific data.
  * It is used by LocationNAPCard, LocationSchema, and other components to ensure consistency.
+ *
+ * Schema Strategy:
+ * - Physician Schema is injected globally (layout), with @id: #physician
+ * - Location Pages use MedicalClinic Schema, with @id: <url>#clinic
+ * - MedicalClinic links to Physician via 'department' to avoid entity conflict.
  */
 export interface LocationData {
   id: string;
