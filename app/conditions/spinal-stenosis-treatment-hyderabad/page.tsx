@@ -169,8 +169,12 @@ export default function SpinalStenosisPage() {
             <h3 className="text-xl font-bold text-blue-800 mb-4">Surgical Decompression</h3>
             <p className="text-gray-700 mb-4">When walking becomes too difficult.</p>
             <ul className="space-y-3 list-disc list-inside text-gray-700">
-              <li><strong>Micro-Decompression:</strong> Removing the bone spur compressing the nerve using a microscope.</li>
-              <li><strong>ULBD (Over-the-top):</strong> Decompressing both sides through a single small incision.</li>
+              <li>
+                <strong><Link href="/services/minimally-invasive-spine-surgery" className="text-blue-600 hover:underline">Micro-Decompression</Link>:</strong> Removing the bone spur compressing the nerve using a microscope.
+              </li>
+              <li>
+                <strong><Link href="/services/minimally-invasive-spine-surgery" className="text-blue-600 hover:underline">ULBD (Endoscopic)</Link>:</strong> Decompressing both sides through a single small incision.
+              </li>
               <li><strong>Fusion:</strong> Only added if the spine is also unstable (spondylolisthesis).</li>
             </ul>
           </div>
