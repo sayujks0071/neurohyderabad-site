@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useStatsigEvents } from '../../src/lib/statsig-events';
 import { MessageCircle, X, Send, AlertTriangle, Loader2, Sparkles, Minus } from 'lucide-react';
 import { usePathname } from 'next/navigation';
+import { trackMiddlewareEvent } from "@/src/lib/middleware/rum";
 
 interface Message {
   id: string;
@@ -69,6 +70,7 @@ export default function FloatingChatWidget() {
 
     // Log user interaction
     logAppointmentBooking('ai_chat_widget_interaction', 'general');
+    trackMiddlewareEvent('chat_message_sent', { source: 'floating_widget', message_length: content.trim().length });
 
     try {
       const response = await fetch('/api/ai/chat', {
@@ -101,6 +103,8 @@ export default function FloatingChatWidget() {
         }
         console.error('API Error:', response.status, errorText);
         
+        trackMiddlewareEvent('chat_error', { source: 'floating_widget', error: errorText, status: response.status });
+
         // Create error message for user
         const errorMessage: Message = {
           id: (Date.now() + 1).toString(),
@@ -152,11 +156,15 @@ export default function FloatingChatWidget() {
         setShowEmergencyAlert(true);
       }
 
+      trackMiddlewareEvent('chat_response_received', { source: 'floating_widget', has_emergency: hasEmergency });
+
       logContactFormSubmit('ai_chat_widget', true);
     } catch (err) {
       console.error('Chat error:', err);
       setError(err instanceof Error ? err : new Error('Failed to send message'));
       logContactFormSubmit('ai_chat_widget', false);
+
+      trackMiddlewareEvent('chat_error', { source: 'floating_widget', error: err instanceof Error ? err.message : 'Failed to send message' });
 
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
@@ -189,7 +197,13 @@ export default function FloatingChatWidget() {
           if (isOpen && isMinimized) {
             setIsMinimized(false);
           } else {
-            setIsOpen((prev) => !prev);
+            setIsOpen((prev) => {
+              const newState = !prev;
+              if (newState) {
+                trackMiddlewareEvent('chat_opened', { source: 'floating_widget' });
+              }
+              return newState;
+            });
             setIsMinimized(false);
           }
         }}
