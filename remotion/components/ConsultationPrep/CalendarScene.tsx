@@ -91,6 +91,9 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
     durationInFrames: 25,
   });
 
+  // Floating animation for "alive" feel
+  const floatingY = Math.sin(frame / 60) * 8;
+
   return (
     <div
       style={{
@@ -104,7 +107,7 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
         padding: SPACING[16],
       }}
     >
-      <div style={{ opacity: calendarOpacity, transform: `scale(${calendarScale})` }}>
+      <div style={{ opacity: calendarOpacity, transform: `scale(${calendarScale}) translateY(${floatingY}px)` }}>
         {/* Calendar card */}
         <div
           style={{
