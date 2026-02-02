@@ -27,7 +27,7 @@ const defaultValues: Partial<BookingFormValues> = {
   appointmentTime: "",
   reason: "",
   painScore: 5,
-  mriScanAvailable: false,
+  hasMRI: false,
 };
 
 const availableTimes = [
@@ -83,7 +83,7 @@ export default function BookingForm({
         appointmentTime: initialData.appointmentTime,
         reason: initialData.reason,
         painScore: initialData.painScore ?? 5,
-        mriScanAvailable: initialData.mriScanAvailable ?? false,
+        hasMRI: initialData.mriScanAvailable ?? false,
       };
 
       // If date is invalid, don't set it (validation will catch it)
@@ -109,7 +109,7 @@ export default function BookingForm({
       appointmentTime: data.appointmentTime,
       reason: data.reason,
       painScore: data.painScore,
-      mriScanAvailable: data.mriScanAvailable,
+      mriScanAvailable: data.hasMRI,
     };
     await onSubmit(submissionData);
     reset();
@@ -297,12 +297,12 @@ export default function BookingForm({
               <div className="flex items-center p-4 bg-slate-50 rounded-xl border border-slate-200">
                 <input
                   type="checkbox"
-                  id="mriScanAvailable"
+                  id="hasMRI"
                   className="w-5 h-5 text-cyan-600 rounded focus:ring-cyan-500 border-gray-300"
-                  {...register("mriScanAvailable")}
+                  {...register("hasMRI")}
                 />
                 <label
-                  htmlFor="mriScanAvailable"
+                  htmlFor="hasMRI"
                   className="ml-3 text-sm font-medium text-slate-700 cursor-pointer select-none"
                 >
                   I have recent MRI/CT Scan reports available

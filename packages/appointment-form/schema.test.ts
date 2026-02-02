@@ -11,7 +11,7 @@ const baseValidData = {
   appointmentTime: "10:00 AM",
   reason: "Severe back pain for 2 weeks. Need appointment.",
   painScore: 5,
-  mriScanAvailable: true,
+  hasMRI: true,
 };
 
 describe("Appointment Schema Validation", () => {
@@ -123,12 +123,12 @@ describe("Appointment Schema Validation", () => {
     }
   });
 
-  it("allows mriScanAvailable to be omitted", () => {
-    const { mriScanAvailable, ...dataWithoutMri } = baseValidData;
+  it("allows hasMRI to be omitted (defaults to false)", () => {
+    const { hasMRI, ...dataWithoutMri } = baseValidData;
     const result = appointmentSchema.safeParse(dataWithoutMri);
     expect(result.success).toBe(true);
     if (result.success) {
-      expect(result.data.mriScanAvailable).toBeUndefined();
+      expect(result.data.hasMRI).toBe(false);
     }
   });
 });
