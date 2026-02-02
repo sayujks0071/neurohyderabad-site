@@ -51,6 +51,7 @@ export default function PatientEducationVideosSkeleton() {
                   <div className="space-y-2 flex-1 pt-2">
                     <div className="h-4 w-full bg-gray-200 rounded animate-pulse"></div>
                     <div className="h-4 w-full bg-gray-200 rounded animate-pulse"></div>
+                    <div className="h-4 w-full bg-gray-200 rounded animate-pulse"></div>
                     <div className="h-4 w-3/4 bg-gray-200 rounded animate-pulse"></div>
                   </div>
 
