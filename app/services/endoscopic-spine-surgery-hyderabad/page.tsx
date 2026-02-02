@@ -100,6 +100,10 @@ const faqs = [
     answer: 'No. Laser surgery often refers to limited surface ablation. Endoscopic surgery is a comprehensive structural correction (removing bone spurs or disc fragments) under high-definition visualization, offering far superior long-term results than laser alone.'
   },
   {
+    question: 'Is endoscopic spine surgery better than robotic spine surgery?',
+    answer: <>It depends on the condition. Robotic surgery is excellent for placing screws in spinal fusion. However, for &quot;decompression&quot; (treating <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="underline hover:text-blue-700">sciatica</Link> or slip disc without fusion), endoscopic surgery is often superior because it is less invasive, preserves natural mobility, and avoids placing metal implants.</>
+  },
+  {
     question: 'How does endoscopic spine surgery recovery compare to microscopic surgery?',
     answer: 'Endoscopic surgery typically offers a faster recovery. Since it uses a smaller incision (8mm vs 2-3cm) and avoids cutting muscle, most patients walk within 3 hours and return to work in 3-5 days, compared to 2-3 weeks for microscopic surgery.'
   },
