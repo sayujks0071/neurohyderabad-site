@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import { Loader2 } from 'lucide-react';
-import { useStatsigEvents } from '../src/lib/statsig-events';
+import { analytics } from '@/src/lib/analytics';
 import { trackContactConversion } from '../src/lib/google-ads-conversion';
 import { APPOINTMENT_SUCCESS_MESSAGE } from '@/packages/appointment-form/constants';
 
@@ -45,8 +45,6 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
     mriScanAvailable: '',
   });
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
-  const { logAppointmentBooking, logContactFormSubmit } = useStatsigEvents();
-
   const subject = useMemo(() => {
     const base = service ? `${service} enquiry` : 'Appointment enquiry';
     return `${base} – ${formState.name || 'New patient'}`;
@@ -109,9 +107,9 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
     setStatus('submitting');
 
     try {
-      // Log Statsig events
-      logAppointmentBooking('appointment_form', service || 'general');
-      logContactFormSubmit('appointment_request', true);
+      // Log Analytics events (Middleware RUM + Statsig)
+      analytics.appointmentSubmit(pageSlug);
+      analytics.appointmentSuccess(pageSlug, service || 'general');
       
       // Track Google Ads conversion (will handle navigation if URL provided)
       const conversionTracked = trackContactConversion(mailtoHref);
@@ -125,7 +123,7 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
       setFormState(initialState);
     } catch (error) {
       console.error(error);
-      logContactFormSubmit('appointment_request', false);
+      analytics.formError(pageSlug, 'teleconsultation_form', 'submission_error');
       setStatus('error');
     }
   };
