@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db, appointments } from '@/src/lib/db';
+import { verifyAdminAccess } from '@/src/lib/security';
 
 export const dynamic = 'force-dynamic';
 
@@ -7,7 +8,13 @@ export const dynamic = 'force-dynamic';
  * GET /api/admin/appointments
  * Fetch all appointments from the database
  */
-export async function GET() {
+export async function GET(request: NextRequest) {
+  // 🛡️ Sentinel: Verify admin access
+  const { isAuthorized, response } = verifyAdminAccess(request);
+  if (!isAuthorized) {
+    return response!;
+  }
+
   try {
     const result = await appointments.getRecent(100);
     
@@ -29,6 +36,12 @@ export async function GET() {
  * Update appointment status
  */
 export async function PATCH(request: NextRequest) {
+  // 🛡️ Sentinel: Verify admin access
+  const { isAuthorized, response } = verifyAdminAccess(request);
+  if (!isAuthorized) {
+    return response!;
+  }
+
   try {
     const body = await request.json();
     const { id, status } = body;
