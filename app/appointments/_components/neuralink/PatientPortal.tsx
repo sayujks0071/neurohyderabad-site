@@ -726,7 +726,7 @@ const PatientPortal = () => {
 
                 <div>
                   <label htmlFor="patient-pain-score" className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">
-                    Pain Intensity (1-10)
+                    Current Pain Level (1-10)
                   </label>
                   <div className="flex items-center gap-4">
                     <span className="text-sm font-bold text-slate-400" aria-hidden="true">1</span>

@@ -135,6 +135,7 @@ export default function AppointmentsPage() {
                 <th className="py-3 px-4 border-b text-left text-sm font-semibold text-gray-600">Contact</th>
                 <th className="py-3 px-4 border-b text-left text-sm font-semibold text-gray-600">Date/Time</th>
                 <th className="py-3 px-4 border-b text-left text-sm font-semibold text-gray-600">Complaint</th>
+                <th className="py-3 px-4 border-b text-left text-sm font-semibold text-gray-600">Clinical Info</th>
                 <th className="py-3 px-4 border-b text-left text-sm font-semibold text-gray-600">Status</th>
                 <th className="py-3 px-4 border-b text-left text-sm font-semibold text-gray-600">Actions</th>
               </tr>
@@ -159,6 +160,14 @@ export default function AppointmentsPage() {
                       {appointment.chief_complaint}
                     </div>
                     <div className="text-sm text-gray-500">{appointment.appointment_type}</div>
+                  </td>
+                  <td className="py-3 px-4 border-b">
+                    <div className="text-sm">
+                      <span className="font-medium">Pain:</span> {appointment.pain_score ?? 'N/A'}/10
+                    </div>
+                    <div className="text-sm">
+                      <span className="font-medium">MRI:</span> {appointment.mri_scan_available ? 'Yes' : 'No'}
+                    </div>
                   </td>
                   <td className="py-3 px-4 border-b">
                     <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${statusColors[appointment.status] || statusColors.pending}`}>
