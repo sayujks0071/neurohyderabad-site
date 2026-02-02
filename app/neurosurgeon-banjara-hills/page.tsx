@@ -66,12 +66,12 @@ export default function Page() {
       </p>
 
       <div className="mt-6">
-        <LocationCTAs mode="location" locationId={location.id} />
+        <LocationCTAs location={location} />
       </div>
 
       <section className="grid md:grid-cols-2 gap-8 mt-10">
         <div>
-          <LocationNAPCard mode="location" locationId={location.id} className="mb-6" />
+          <LocationNAPCard location={location} className="mb-6" />
 
           <h2 className="text-2xl font-semibold">OPD Timings</h2>
           <ul className="mt-3 list-disc pl-5">
@@ -89,7 +89,7 @@ export default function Page() {
 
         <div>
           <h2 className="text-2xl font-semibold mb-3">Map</h2>
-          <LocationMapEmbed mode="location" locationId={location.id} />
+          <LocationMapEmbed location={location} />
         </div>
       </section>
 

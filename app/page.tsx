@@ -27,6 +27,7 @@ import FAQPageSchema from "./_components/FAQPageSchema";
 import HeroCTAButtons from "./_components/HeroCTAButtons";
 import RemotionVideoEmbedWrapper from "./_components/RemotionVideoEmbedWrapper";
 import PatientEducationVideosSkeleton from "./_components/skeletons/PatientEducationVideosSkeleton";
+import { LocalPathways } from "@/src/components/locations/LocalPathways";
 
 // Dynamic imports for Lazy components
 const PatientEducationVideos = dynamic(() => import('./_components/PatientEducationVideos'), {
@@ -835,56 +836,7 @@ export default function Home() {
 
         {/* Areas We Serve in Hyderabad */}
         <Section className="py-16">
-          <h2 className="text-3xl font-bold text-center mb-12">Spine Specialist & Neurosurgeon Near You in Hyderabad</h2>
-          <div className="grid md:grid-cols-2 gap-12">
-            <div>
-              <p className="text-lg text-gray-700 mb-6">
-                Dr. Sayuj Krishnan provides expert neurosurgical care at Yashoda Hospital, Malakpet, serving patients across Hyderabad and throughout Telangana.
-                As a pioneering endoscopic spine surgeon, Dr. Krishnan specializes in advanced, minimally invasive procedures that enable faster recovery
-                and same-day discharge for most patients. Our Malakpet location is conveniently accessible for patients throughout the region.
-              </p>
-              <div className="grid grid-cols-2 gap-4">
-                <Card padding="sm" className="shadow-md">
-                  <h3 className="font-semibold text-blue-700 mb-2">Central Hyderabad</h3>
-                  <ul className="text-sm text-gray-600 space-y-1">
-                    <li>• Jubilee Hills</li>
-                    <li>• Banjara Hills</li>
-                    <li>• Hi-Tech City</li>
-                    <li>• Gachibowli</li>
-                  </ul>
-                </Card>
-                <Card padding="sm" className="shadow-md">
-                  <h3 className="font-semibold text-blue-700 mb-2">Other Areas</h3>
-                  <ul className="text-sm text-gray-600 space-y-1">
-                    <li>• Madhapur</li>
-                    <li>• Kondapur</li>
-                    <li>• Malakpet</li>
-                    <li>• Secunderabad</li>
-                  </ul>
-                </Card>
-              </div>
-            </div>
-            <Card padding="lg" className="shadow-lg">
-              <h3 className="text-xl font-semibold mb-4 text-blue-700">Hospital Location</h3>
-              <div className="space-y-4">
-                <div>
-                  <h3 className="font-semibold text-gray-800">Yashoda Hospital</h3>
-                  <p className="text-gray-600">
-                    Room No 317, OPD Block<br />
-                    Malakpet, Hyderabad<br />
-                    Telangana 500036
-                  </p>
-                </div>
-                <div className="pt-4 border-t">
-                  <h3 className="font-semibold text-gray-800 mb-2">Contact Information</h3>
-                  <p className="text-gray-600">
-                    <strong>Phone:</strong> +91 9778280044<br />
-                    <strong>Email:</strong> hellodr@drsayuj.info
-                  </p>
-                </div>
-              </div>
-            </Card>
-          </div>
+          <LocalPathways mode="service" />
         </Section>
 
         {/* Authoritative Citations */}
