@@ -17,9 +17,9 @@ import { LocalPathways } from '@/src/components/locations/LocalPathways';
 const SERVICE_SLUG = 'spine-surgery-hyderabad';
 
 const baseMetadata = makeMetadata({
-  title: 'Spine Surgery Hyderabad | Minimally Invasive Specialist',
+  title: 'Spine Surgery Hyderabad | Top Minimally Invasive Specialist',
   description:
-    'Minimally invasive spine surgery in Hyderabad. Walk the next day with keyhole endoscopic techniques for slip disc & sciatica. Expert care at Yashoda.',
+    'Expert Spine Surgery in Hyderabad. Minimally invasive & keyhole techniques for slip disc & sciatica. Walk the next day. Yashoda Hospital Malakpet.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
 });
 
@@ -34,9 +34,9 @@ export const metadata: Metadata = {
     'spine surgery consultation hyderabad',
   ],
   openGraph: {
-    title: 'Spine Surgery Hyderabad | Minimally Invasive Specialist',
+    title: 'Spine Surgery Hyderabad | Top Minimally Invasive Specialist',
     description:
-      'Minimally invasive spine surgery in Hyderabad. Walk the next day with keyhole endoscopic techniques for slip disc & sciatica. Expert care at Yashoda.',
+      'Expert Spine Surgery in Hyderabad. Minimally invasive & keyhole techniques for slip disc & sciatica. Walk the next day. Yashoda Hospital Malakpet.',
     url: `${SITE_URL}/services/${SERVICE_SLUG}`,
     siteName: 'Dr. Sayuj Krishnan - Neurosurgeon Hyderabad',
     locale: 'en_IN',

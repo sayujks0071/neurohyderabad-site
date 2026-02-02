@@ -2,6 +2,7 @@ import React from 'react';
 import {
   CANONICAL_PHYSICIAN_NAME,
   CANONICAL_TELEPHONE,
+  CANONICAL_MAPS_URL,
   getLocationById,
   SOCIAL_PROFILES
 } from '../../data/locations';
@@ -134,6 +135,7 @@ export const PhysicianSchema: React.FC = () => {
           "postalCode": mainLocation.address.postalCode,
           "addressCountry": mainLocation.address.addressCountry
         },
+        "hasMap": CANONICAL_MAPS_URL,
         "geo": mainLocation.geo ? {
           "@type": "GeoCoordinates",
           "latitude": mainLocation.geo.latitude,
