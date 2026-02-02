@@ -112,6 +112,7 @@ export default function BookingForm({
       mriScanAvailable: data.mriScanAvailable,
     };
     await onSubmit(submissionData);
+    reset();
   };
 
   return (
