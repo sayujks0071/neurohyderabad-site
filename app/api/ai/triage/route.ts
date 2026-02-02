@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { analyzeTriage, quickTriageCheck, type TriageRequest } from '@/src/lib/ai/triage';
+import { rateLimit } from '@/src/lib/rate-limit';
 
 /**
  * AI-Powered Patient Triage API
@@ -7,6 +8,24 @@ import { analyzeTriage, quickTriageCheck, type TriageRequest } from '@/src/lib/a
  * Analyzes patient symptoms and provides urgency assessment
  */
 export async function POST(request: NextRequest) {
+  // 🛡️ Rate Limiting: 5 requests per minute per IP
+  const ip = request.headers.get('x-forwarded-for') ?? 'unknown';
+  const limit = rateLimit(ip, 5, 60 * 1000);
+
+  if (!limit.success) {
+    return NextResponse.json(
+      { error: 'Too many requests. Please try again later.' },
+      {
+        status: 429,
+        headers: {
+          'X-RateLimit-Limit': limit.limit.toString(),
+          'X-RateLimit-Remaining': limit.remaining.toString(),
+          'X-RateLimit-Reset': limit.reset.toString(),
+        }
+      }
+    );
+  }
+
   try {
     const body = await request.json();
     const { symptoms, description, age, medicalHistory, currentMedications } = body;
