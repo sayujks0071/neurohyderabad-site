@@ -314,15 +314,7 @@ export const PhysicianSchema: React.FC = () => {
           "bestRating": "5",
           "worstRating": "1"
         }
-      },
-      // LocalBusiness schema is handled per-location page by LocationSchema,
-      // but if we want a global fallback/corporate identity, we can keep it here.
-      // However, to avoid "Duplicate Conflicting Entities", we should rely on the Physician schema globally
-      // and the specific MedicalClinic schema on location pages.
-      // The previous file had both.
-      // Decision: Exclude duplicate LocalBusiness here if it's identical to what LocationSchema produces.
-      // But for the Homepage, we might need it.
-      // Let's rely on Physician schema as the primary entity for the site-wide layout.
+      }
     ]
   };
 
