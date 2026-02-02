@@ -44,6 +44,9 @@ describe('AppointmentsPage', () => {
       expect(screen.getByText('John Doe')).toBeInTheDocument();
     });
 
+    // Check for Quick Actions header
+    expect(screen.getByText('Quick Actions')).toBeInTheDocument();
+
     // Check for WhatsApp button
     const whatsappButton = screen.getByTestId('whatsapp-button');
     expect(whatsappButton).toBeInTheDocument();
