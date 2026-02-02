@@ -390,7 +390,7 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
                 type="submit"
                 aria-label="Send message"
                 disabled={!input.trim() || isLoading}
-                className="absolute right-1.5 p-1.5 bg-blue-600 text-white rounded-full hover:bg-blue-700 disabled:opacity-50 disabled:hover:bg-blue-600 transition-colors shadow-sm"
+                className="absolute right-1.5 p-1.5 bg-blue-600 text-white rounded-full hover:bg-blue-700 disabled:opacity-50 disabled:hover:bg-blue-600 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
               >
                 <Send size={14} />
               </button>
