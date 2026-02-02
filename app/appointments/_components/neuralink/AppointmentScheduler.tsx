@@ -284,10 +284,10 @@ const AppointmentScheduler = ({
           <div className="space-y-6">
             {morningSlots.length > 0 && (
               <div>
-                <div className="flex items-center text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 ml-1">
+                <div id="morning-slots-label" className="flex items-center text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 ml-1">
                   <Sun className="w-3 h-3 mr-2" /> Morning
                 </div>
-                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3">
+                <div role="group" aria-labelledby="morning-slots-label" className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3">
                   {morningSlots.map((slot) => (
                     <TimeSlotButton
                       key={slot.time}
@@ -307,10 +307,10 @@ const AppointmentScheduler = ({
 
             {afternoonSlots.length > 0 && (
               <div>
-                <div className="flex items-center text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 ml-1">
+                <div id="afternoon-slots-label" className="flex items-center text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 ml-1">
                   <Moon className="w-3 h-3 mr-2" /> Afternoon
                 </div>
-                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3">
+                <div role="group" aria-labelledby="afternoon-slots-label" className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3">
                   {afternoonSlots.map((slot) => (
                     <TimeSlotButton
                       key={slot.time}

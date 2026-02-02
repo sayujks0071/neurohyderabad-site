@@ -742,7 +742,7 @@ const PatientPortal = () => {
                           painScore: Number(e.target.value),
                         })
                       }
-                      className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                      className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                       aria-valuetext={`Score: ${formData.painScore}${formData.painScore >= 8 ? ' (Severe)' : formData.painScore <= 3 ? ' (Mild)' : ''}`}
                     />
                     <span className="text-sm font-bold text-slate-400" aria-hidden="true">10</span>
