@@ -76,7 +76,7 @@ export default function AppointmentSchema() {
         "parentOrganization": {
           "@id": `${SITE_URL}/#hospital`
         },
-        "department": {
+        "employee": {
           "@id": `${SITE_URL}/#physician`
         }
       }
