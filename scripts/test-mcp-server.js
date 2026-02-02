@@ -1,5 +1,3 @@
-import fetch from 'node-fetch';
-
 async function testMCP() {
   const baseUrl = 'http://localhost:3000/api/mcp';
   
@@ -68,7 +66,9 @@ async function testMCP() {
             phone: '1234567890',
             appointmentDate: '2026-02-01',
             appointmentTime: '10:00 AM',
-            reason: 'Testing the new MCP submission tool.'
+            reason: 'Testing the new MCP submission tool.',
+            painScore: 7,
+            mriScanAvailable: true
           }
         }
       })

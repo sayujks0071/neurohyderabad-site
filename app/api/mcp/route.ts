@@ -53,7 +53,9 @@ const TOOLS = [
         appointmentTime: { type: 'string' },
         reason: { type: 'string' },
         age: { type: 'string' },
-        gender: { type: 'string', enum: ['male', 'female', 'other'] }
+        gender: { type: 'string', enum: ['male', 'female', 'other'] },
+        painScore: { type: 'number', minimum: 1, maximum: 10, description: 'Pain intensity score from 1 to 10' },
+        mriScanAvailable: { type: 'boolean', description: 'Whether the patient has recent MRI/CT scan reports' }
       },
       required: ['patientName', 'phone', 'appointmentDate', 'appointmentTime', 'reason']
     }
@@ -202,8 +204,8 @@ async function handleCallTool(name: string, args: any, id: any) {
             appointmentDate: args.appointmentDate,
             appointmentTime: args.appointmentTime,
             reason: args.reason,
-            painScore: 5,
-            mriScanAvailable: false
+            painScore: args.painScore || 5,
+            mriScanAvailable: args.mriScanAvailable || false
           })
         });
         
