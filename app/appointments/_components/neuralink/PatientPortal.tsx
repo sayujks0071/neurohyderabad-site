@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   User,
   Phone,
@@ -88,6 +88,13 @@ const PatientPortal = () => {
   const [formData, setFormData] = useState(INITIAL_FORM_STATE);
   const [lastSubmittedData, setLastSubmittedData] = useState(INITIAL_FORM_STATE);
 
+  useEffect(() => {
+    trackMiddlewareEvent('form_view', {
+      form_type: 'appointment',
+      step: 1
+    });
+  }, []);
+
   const clinicName = "Dr. Sayuj Krishnan | Yashoda Hospitals, Malakpet";
   const clinicAddress = `${CLINIC.street}, ${CLINIC.city}, ${CLINIC.region} ${CLINIC.postalCode}`;
 
@@ -101,6 +108,11 @@ const PatientPortal = () => {
 
   const handleNextStep = () => {
     if (formData.type && formData.date && formData.time) {
+      trackMiddlewareEvent('form_step_complete', {
+        form_type: 'appointment',
+        step: 1,
+        appointment_type: formData.type
+      });
       setStep(2);
       window.scrollTo(0, 0);
     }

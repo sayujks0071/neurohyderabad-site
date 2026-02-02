@@ -12,6 +12,7 @@ import {
   ExternalLink,
   Globe,
 } from "lucide-react";
+import { trackMiddlewareEvent } from "@/src/lib/middleware/rum";
 import { sendChatMessage } from "./neuralinkApi";
 import SpeechButton from "./SpeechButton";
 
@@ -42,13 +43,22 @@ const ChatBot = () => {
   }, [messages, isTyping]);
 
   const toggleChat = () => {
-    setIsOpen((prev) => !prev);
+    setIsOpen((prev) => {
+      const newState = !prev;
+      if (newState) {
+        trackMiddlewareEvent('chat_widget_open', {
+          source: 'appointment_chatbot'
+        });
+      }
+      return newState;
+    });
   };
 
   const handleSend = async (e?: React.FormEvent) => {
     e?.preventDefault();
     if (!input.trim() || isTyping) return;
 
+    const startTime = performance.now();
     const userMessage = input.trim();
     const history = messages
       .filter((msg) => msg.text.trim().length > 0)
@@ -62,8 +72,21 @@ const ChatBot = () => {
     ]);
     setIsTyping(true);
 
+    trackMiddlewareEvent('chat_message_sent', {
+      source: 'appointment_chatbot'
+    });
+
     try {
       const result = await sendChatMessage(userMessage, history);
+      const endTime = performance.now();
+      const duration = endTime - startTime;
+
+      trackMiddlewareEvent('chat_response_received', {
+        source: 'appointment_chatbot',
+        duration_ms: Math.round(duration),
+        success: true
+      });
+
       setMessages((prev) => {
         const updated = [...prev];
         updated[updated.length - 1] = {
@@ -77,6 +100,15 @@ const ChatBot = () => {
       });
     } catch (error) {
       console.error("Chat error:", error);
+      const endTime = performance.now();
+      const duration = endTime - startTime;
+
+      trackMiddlewareEvent('chat_error', {
+        source: 'appointment_chatbot',
+        duration_ms: Math.round(duration),
+        error: error instanceof Error ? error.message : 'Unknown error'
+      });
+
       setMessages((prev) => {
         const updated = [...prev];
         updated[updated.length - 1] = {

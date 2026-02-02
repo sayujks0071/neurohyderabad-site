@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { useStatsigEvents } from '../../src/lib/statsig-events';
+import { trackMiddlewareEvent } from '@/src/lib/middleware/rum';
 import { MessageCircle, X, Send, AlertTriangle, Loader2, Sparkles, Minus } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 
@@ -50,12 +51,18 @@ export default function FloatingChatWidget() {
       scrollToBottom();
       // Focus input when opened
       setTimeout(() => inputRef.current?.focus(), 100);
+
+      // Track widget open
+      trackMiddlewareEvent('chat_widget_open', {
+        page_slug: pathname || 'unknown'
+      });
     }
   }, [messages, isOpen, isMinimized]);
 
   const sendMessage = async (content: string) => {
     if (!content.trim() || isLoading) return;
 
+    const startTime = performance.now();
     const userMessage: Message = {
       id: Date.now().toString(),
       role: 'user',
@@ -69,6 +76,10 @@ export default function FloatingChatWidget() {
 
     // Log user interaction
     logAppointmentBooking('ai_chat_widget_interaction', 'general');
+    trackMiddlewareEvent('chat_message_sent', {
+      source: 'floating_widget',
+      page_slug: pathname || 'unknown'
+    });
 
     try {
       const response = await fetch('/api/ai/chat', {
@@ -142,6 +153,15 @@ export default function FloatingChatWidget() {
 
       setMessages(prev => [...prev, assistantMessage]);
 
+      const endTime = performance.now();
+      const duration = endTime - startTime;
+
+      trackMiddlewareEvent('chat_response_received', {
+        source: 'floating_widget',
+        duration_ms: Math.round(duration),
+        success: true
+      });
+
       // Check for emergency keywords
       const emergencyKeywords = ['emergency', 'urgent', 'immediately', 'call', 'stroke', 'seizure'];
       const hasEmergency = emergencyKeywords.some(keyword =>
@@ -150,13 +170,25 @@ export default function FloatingChatWidget() {
 
       if (hasEmergency) {
         setShowEmergencyAlert(true);
+        trackMiddlewareEvent('chat_emergency_detected', {
+          source: 'floating_widget'
+        });
       }
 
       logContactFormSubmit('ai_chat_widget', true);
     } catch (err) {
       console.error('Chat error:', err);
+      const endTime = performance.now();
+      const duration = endTime - startTime;
+
       setError(err instanceof Error ? err : new Error('Failed to send message'));
       logContactFormSubmit('ai_chat_widget', false);
+
+      trackMiddlewareEvent('chat_error', {
+        source: 'floating_widget',
+        duration_ms: Math.round(duration),
+        error: err instanceof Error ? err.message : 'Unknown error'
+      });
 
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),

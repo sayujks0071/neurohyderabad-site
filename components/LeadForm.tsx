@@ -63,6 +63,12 @@ export default function LeadForm() {
   const painScoreValue = watch("painScore");
 
   useEffect(() => {
+    trackMiddlewareEvent('form_view', {
+      form_type: 'lead'
+    });
+  }, []);
+
+  useEffect(() => {
     if (isSubmitted && successRef.current) {
       successRef.current.focus();
     }
