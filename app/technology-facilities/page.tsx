@@ -205,7 +205,7 @@ export default function TechnologyFacilitiesPage() {
             State-of-the-art neurosurgery technology and equipment for the most advanced, 
             minimally invasive, and precise surgical procedures in Hyderabad.
           </p>
-          <div className="bg-blue-50 rounded-lg p-6 max-w-4xl mx-auto">
+          <div className="bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-6 max-w-4xl mx-auto">
             <p className="text-lg text-blue-800 font-semibold">
               "Investing in cutting-edge technology ensures our patients receive the safest, 
               most effective, and least invasive treatments available."
@@ -225,7 +225,7 @@ export default function TechnologyFacilitiesPage() {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {category.technologies.map((tech, techIndex) => (
-                <div key={techIndex} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                <div key={techIndex} className="relative bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
                   <TechnologyImage equipment={tech.image?.split('/').pop()?.split('.')[0] || 'default'} />
                   <div className="p-6">
                     <h3 className="text-xl font-semibold text-blue-700 mb-3">{tech.name}</h3>
@@ -260,7 +260,7 @@ export default function TechnologyFacilitiesPage() {
 
           <div className="grid md:grid-cols-2 gap-8">
             {partnerships.map((partner, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-lg p-6 border-l-4 border-blue-500">
+              <div key={index} className="bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-8 border-l-4 border-l-blue-500 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
                 <h3 className="text-xl font-semibold text-blue-700 mb-2">{partner.name}</h3>
                 <p className="text-blue-600 font-medium mb-3">{partner.type}</p>
                 <p className="text-gray-700 mb-4">{partner.description}</p>
@@ -291,10 +291,10 @@ export default function TechnologyFacilitiesPage() {
 
           <div className="grid md:grid-cols-2 gap-8">
             {upcomingTechnology.map((tech, index) => (
-              <div key={index} className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 border border-blue-200">
+              <div key={index} className="bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
                 <div className="flex items-start justify-between mb-4">
                   <h3 className="text-xl font-semibold text-blue-800">{tech.name}</h3>
-                  <span className="bg-blue-600 text-white text-xs px-3 py-1 rounded-full">
+                  <span className="bg-blue-600 text-white text-xs px-3 py-1 rounded-full shadow-lg shadow-blue-500/30">
                     {tech.timeline}
                   </span>
                 </div>
@@ -317,7 +317,7 @@ export default function TechnologyFacilitiesPage() {
 
         {/* Safety & Quality Section */}
         <section className="mb-16">
-          <div className="bg-gray-50 rounded-lg p-8">
+          <div className="bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl">
             <h2 className="text-3xl font-bold text-blue-800 mb-6 text-center">Safety & Quality Assurance</h2>
             <div className="grid md:grid-cols-3 gap-6">
               <div className="text-center">
@@ -340,21 +340,21 @@ export default function TechnologyFacilitiesPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="text-center bg-blue-600 text-white rounded-lg p-8">
-          <h2 className="text-3xl font-bold mb-4">Experience Advanced Neurosurgery Technology</h2>
-          <p className="text-xl mb-6 opacity-90">
+        <section className="text-center bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-12 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+          <h2 className="text-3xl font-bold mb-4 text-blue-800">Experience Advanced Neurosurgery Technology</h2>
+          <p className="text-xl mb-8 text-gray-700 max-w-2xl mx-auto">
             Schedule a consultation to learn how our cutting-edge technology can help with your condition.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 
               href="/appointments"
-              className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+              className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-8 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-[0.98]"
             >
               Book Consultation
             </Link>
             <Link 
               href="/contact"
-              className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors"
+              className="bg-white border border-slate-200 text-slate-600 font-medium py-3 px-8 rounded-xl transition-all duration-300 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900"
             >
               Contact Us
             </Link>
