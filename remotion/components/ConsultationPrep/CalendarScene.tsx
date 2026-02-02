@@ -20,15 +20,16 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
   const year = date.getFullYear();
   const dayName = date.toLocaleDateString('en-US', { weekday: 'long' });
 
-  // Spring animations for entrance
+  // 1. Main Card Entrance (Pop in)
   const calendarScale = spring({
     frame,
     fps,
     from: 0.5,
     to: 1,
-    durationInFrames: 40,
+    durationInFrames: 25,
     config: {
       damping: 12,
+      stiffness: 100,
     },
   });
 
@@ -37,12 +38,53 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
     fps,
     from: 0,
     to: 1,
-    durationInFrames: 30,
+    durationInFrames: 20,
   });
 
-  // Delayed text animation
+  // 2. Day Number Pop (Staggered)
+  const dayNumberScale = spring({
+    frame: frame - 15,
+    fps,
+    from: 0,
+    to: 1,
+    durationInFrames: 20,
+    config: {
+      damping: 10,
+      stiffness: 120,
+    },
+  });
+
+  // 3. Highlight Ring Animation
+  const ringProgress = spring({
+    frame: frame - 20,
+    fps,
+    from: 0,
+    to: 1,
+    durationInFrames: 40,
+    config: { damping: 100 },
+  });
+
+  // 4. Time Section Slide Up (Staggered)
+  const timeSlide = spring({
+    frame: frame - 25,
+    fps,
+    from: 50,
+    to: 0,
+    durationInFrames: 25,
+    config: { damping: 15 },
+  });
+
+  const timeOpacity = spring({
+    frame: frame - 25,
+    fps,
+    from: 0,
+    to: 1,
+    durationInFrames: 20,
+  });
+
+  // 5. Bottom Text Animation
   const textOpacity = spring({
-    frame: frame - 20, // Start 20 frames later
+    frame: frame - 35,
     fps,
     from: 0,
     to: 1,
@@ -72,6 +114,8 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
             boxShadow: '0 20px 60px rgba(0, 0, 0, 0.15)',
             overflow: 'hidden',
             border: `4px solid ${COLORS.accent}`,
+            display: 'flex',
+            flexDirection: 'column',
           }}
         >
           {/* Calendar header */}
@@ -80,6 +124,8 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
               backgroundColor: COLORS.accent,
               padding: SPACING[6],
               textAlign: 'center',
+              position: 'relative',
+              zIndex: 1,
             }}
           >
             <p
@@ -97,26 +143,61 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
             </p>
           </div>
 
-          {/* Day number */}
+          {/* Day number container */}
           <div
             style={{
               padding: `${SPACING[12]} ${SPACING[8]}`,
               textAlign: 'center',
               backgroundColor: COLORS.surface,
+              position: 'relative',
+              flex: 1,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
             }}
           >
-            <p
+            {/* Highlight Ring */}
+            <svg
+              width="200"
+              height="200"
+              viewBox="0 0 200 200"
               style={{
-                fontFamily: FONTS.primary,
-                fontSize: '120px',
-                fontWeight: 700,
-                color: COLORS.text,
-                margin: 0,
-                lineHeight: 1,
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%) rotate(-90deg)',
+                pointerEvents: 'none',
               }}
             >
-              {dayNumber}
-            </p>
+              <circle
+                cx="100"
+                cy="100"
+                r="85"
+                fill="none"
+                stroke={COLORS.accent}
+                strokeWidth="4"
+                strokeDasharray={534} // 2 * PI * 85 ≈ 534
+                strokeDashoffset={534 * (1 - ringProgress)}
+                strokeLinecap="round"
+                opacity={0.3}
+              />
+            </svg>
+
+            <div style={{ transform: `scale(${dayNumberScale})` }}>
+              <p
+                style={{
+                  fontFamily: FONTS.primary,
+                  fontSize: '120px',
+                  fontWeight: 700,
+                  color: COLORS.text,
+                  margin: 0,
+                  lineHeight: 1,
+                }}
+              >
+                {dayNumber}
+              </p>
+            </div>
             <p
               style={{
                 fontFamily: FONTS.primary,
@@ -150,6 +231,9 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
               padding: SPACING[6],
               textAlign: 'center',
               borderTop: `2px solid ${COLORS.accent}`,
+              transform: `translateY(${timeSlide}px)`,
+              opacity: timeOpacity,
+              zIndex: 0,
             }}
           >
             <p
