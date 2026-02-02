@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { sendChatMessage } from "./neuralinkApi";
 import SpeechButton from "./SpeechButton";
+import { trackMiddlewareEvent } from "@/src/lib/middleware/rum";
 
 interface Message {
   role: "user" | "bot";
@@ -42,7 +43,13 @@ const ChatBot = () => {
   }, [messages, isTyping]);
 
   const toggleChat = () => {
-    setIsOpen((prev) => !prev);
+    setIsOpen((prev) => {
+      const newState = !prev;
+      if (newState) {
+        trackMiddlewareEvent("chat_opened", { source: "neuralink_chatbot" });
+      }
+      return newState;
+    });
   };
 
   const handleSend = async (e?: React.FormEvent) => {
@@ -50,6 +57,10 @@ const ChatBot = () => {
     if (!input.trim() || isTyping) return;
 
     const userMessage = input.trim();
+    trackMiddlewareEvent("chat_message_sent", {
+      source: "neuralink_chatbot",
+      message_length: userMessage.length,
+    });
     const history = messages
       .filter((msg) => msg.text.trim().length > 0)
       .map((msg) => ({ role: msg.role, text: msg.text }));
@@ -64,6 +75,11 @@ const ChatBot = () => {
 
     try {
       const result = await sendChatMessage(userMessage, history);
+      trackMiddlewareEvent("chat_response_received", {
+        source: "neuralink_chatbot",
+        has_sources: !!result.sources?.length,
+      });
+
       setMessages((prev) => {
         const updated = [...prev];
         updated[updated.length - 1] = {
@@ -77,6 +93,11 @@ const ChatBot = () => {
       });
     } catch (error) {
       console.error("Chat error:", error);
+      trackMiddlewareEvent("chat_error", {
+        source: "neuralink_chatbot",
+        error: error instanceof Error ? error.message : "Unknown error",
+      });
+
       setMessages((prev) => {
         const updated = [...prev];
         updated[updated.length - 1] = {

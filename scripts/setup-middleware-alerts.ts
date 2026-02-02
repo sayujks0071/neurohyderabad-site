@@ -23,6 +23,7 @@ interface AlertConfig {
     threshold: number;
     operator: '>' | '<' | '=' | '>=' | '<=';
     window?: string;
+    filters?: { key: string; value: string }[];
   };
   severity: 'low' | 'medium' | 'high' | 'critical';
 }
@@ -95,6 +96,42 @@ const ALERTS: AlertConfig[] = [
     severity: 'high',
   },
   {
+    name: 'Chatbot Response Time',
+    description: 'Alert when chatbot API response time > 3s',
+    condition: {
+      metric: 'http.response_time',
+      threshold: 3000,
+      operator: '>',
+      window: '5m',
+      filters: [{ key: 'endpoint', value: '/api/ai/chat' }],
+    },
+    severity: 'high',
+  },
+  {
+    name: 'Mobile LCP',
+    description: 'Alert when Mobile LCP > 3s',
+    condition: {
+      metric: 'web_vitals.lcp',
+      threshold: 3000,
+      operator: '>',
+      window: '10m',
+      filters: [{ key: 'device_type', value: 'mobile' }],
+    },
+    severity: 'high',
+  },
+  {
+    name: 'Critical Page Performance',
+    description: 'Alert when Appointments page response > 2.5s',
+    condition: {
+      metric: 'http.response_time',
+      threshold: 2500,
+      operator: '>',
+      window: '10m',
+      filters: [{ key: 'page', value: '/appointments' }],
+    },
+    severity: 'high',
+  },
+  {
     name: 'High 404 Rate',
     description: 'Alert when 404 error rate > 5%',
     condition: {
@@ -144,6 +181,7 @@ async function setupAlerts() {
             ...config.condition,
             filters: [
               { key: 'url', value: SITE_URL },
+              ...(config.condition.filters || []),
             ],
           },
           actions: [
