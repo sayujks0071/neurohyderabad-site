@@ -644,25 +644,30 @@ async function createBookingRecord(
   console.log(`[Appointment Workflow] Creating booking record ${bookingId}`);
 
   try {
-    await appointments.create({
-      patient_name: patientInfo.name,
-      patient_email: patientInfo.email,
-      patient_phone: patientInfo.phone,
-      patient_age: patientInfo.age ? Number(patientInfo.age) : undefined,
-      patient_gender: patientInfo.gender,
-      preferred_date: date,
-      preferred_time: time,
-      appointment_type: patientInfo.appointmentType,
-      chief_complaint: patientInfo.chiefComplaint,
-      intake_notes: patientInfo.intakeNotes,
-      pain_score: patientInfo.painScore,
-      mri_scan_available: patientInfo.mriScanAvailable,
-      has_emergency_symptoms: patientInfo.hasEmergencySymptoms,
-      source: patientInfo.source,
-      workflow_run_id: bookingId,
-      confirmation_message: patientInfo.confirmationMessage,
-    });
-    console.log(`Booking ${bookingId} saved to database`);
+    await retry(
+      async () => {
+        await appointments.create({
+          patient_name: patientInfo.name,
+          patient_email: patientInfo.email,
+          patient_phone: patientInfo.phone,
+          patient_age: patientInfo.age ? Number(patientInfo.age) : undefined,
+          patient_gender: patientInfo.gender,
+          preferred_date: date,
+          preferred_time: time,
+          appointment_type: patientInfo.appointmentType,
+          chief_complaint: patientInfo.chiefComplaint,
+          intake_notes: patientInfo.intakeNotes,
+          pain_score: patientInfo.painScore,
+          mri_scan_available: patientInfo.mriScanAvailable,
+          has_emergency_symptoms: patientInfo.hasEmergencySymptoms,
+          source: patientInfo.source,
+          workflow_run_id: bookingId,
+          confirmation_message: patientInfo.confirmationMessage,
+        });
+        console.log(`Booking ${bookingId} saved to database`);
+      },
+      { retries: 3, delay: 1000, name: "create-booking" }
+    );
   } catch (error) {
     console.error(`[Appointment Workflow] Failed to save booking to DB:`, error);
     throw error;
@@ -798,30 +803,34 @@ async function scheduleReminders(
     { type: "1h" as const, offsetMs: 60 * 60 * 1000 },
   ];
 
-  let scheduledCount = 0;
   const appointmentIso = appointmentDateTime.toISOString();
 
-  for (const reminder of reminders) {
-    const reminderTime = new Date(appointmentDateTime.getTime() - reminder.offsetMs);
-    if (reminderTime > new Date()) {
-      // Use bookingId + reminder type as idempotency key to prevent duplicate reminders
-      const idempotencyKey = `${bookingId}-${reminder.type}`;
-      
-      await inngest.send({
-        id: idempotencyKey, // Inngest uses 'id' for idempotency
-        name: "appointment/reminder",
-        data: {
-          appointmentId: bookingId,
-          patientEmail: patientInfo.email,
-          patientName: patientInfo.name,
-          appointmentDate: appointmentIso,
-          reminderType: reminder.type,
-        },
-        ts: reminderTime.getTime(),
-      });
-      scheduledCount += 1;
-    }
-  }
+  const results = await Promise.all(
+    reminders.map(async (reminder) => {
+      const reminderTime = new Date(appointmentDateTime.getTime() - reminder.offsetMs);
+      if (reminderTime > new Date()) {
+        // Use bookingId + reminder type as idempotency key to prevent duplicate reminders
+        const idempotencyKey = `${bookingId}-${reminder.type}`;
+
+        await inngest.send({
+          id: idempotencyKey, // Inngest uses 'id' for idempotency
+          name: "appointment/reminder",
+          data: {
+            appointmentId: bookingId,
+            patientEmail: patientInfo.email,
+            patientName: patientInfo.name,
+            appointmentDate: appointmentIso,
+            reminderType: reminder.type,
+          },
+          ts: reminderTime.getTime(),
+        });
+        return true;
+      }
+      return false;
+    })
+  );
+
+  const scheduledCount = results.filter(Boolean).length;
 
   console.log(
     `Reminders scheduled for ${bookingId}: ${scheduledCount} queued`
@@ -848,17 +857,21 @@ async function preparePatientEducation(
   }
 
   try {
-    const { text } = await generateText({
-      model: getTextModel(),
-      prompt: `Based on the patient's chief complaint: "${chiefComplaint}", generate a brief patient education summary (2-3 paragraphs) covering:
+    const { text } = await retry(
+      () =>
+        generateText({
+          model: getTextModel(),
+          prompt: `Based on the patient's chief complaint: "${chiefComplaint}", generate a brief patient education summary (2-3 paragraphs) covering:
 1. Common causes
 2. What to expect during consultation
 3. Typical diagnostic tests
 4. General preparation tips
 
 Keep it simple and reassuring.`,
-      temperature: 0.7,
-    });
+          temperature: 0.7,
+        }),
+      { retries: 2, delay: 1000, name: "generate-patient-education" }
+    );
 
     console.log(`Patient education content prepared (${text.length} chars)`);
   } catch (error) {

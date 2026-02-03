@@ -6,6 +6,8 @@ import { NextResponse } from 'next/server';
  *
  * @param request The incoming request
  * @returns Object containing isAuthorized boolean and optional error response
+ *
+ * 🛡️ Sentinel: Used to secure admin-only API routes.
  */
 export function verifyAdminAccess(request: Request): {
   isAuthorized: boolean;

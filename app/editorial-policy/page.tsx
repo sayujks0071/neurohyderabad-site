@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import NAP from "@/app/_components/NAP";
 
 export const metadata: Metadata = {
   title: "Editorial Policy | Dr Sayuj Krishnan",
@@ -131,11 +132,7 @@ export default function EditorialPolicyPage() {
                 <p className="text-gray-700 mb-4">
                   For questions about our editorial policy or to report content issues:
                 </p>
-                <ul className="space-y-2">
-                  <li><strong>Email:</strong> <a href="mailto:hellodr@drsayuj.info" className="text-blue-600 hover:underline">hellodr@drsayuj.info</a></li>
-                  <li><strong>Phone:</strong> <a href="tel:+919778280044" className="text-blue-600 hover:underline">+91 9778280044</a></li>
-                  <li><strong>Address:</strong> Room No 317, OPD Block, Yashoda Hospital, Malakpet, Hyderabad</li>
-                </ul>
+                <NAP locationId="malakpet" showEmail={true} />
               </div>
             </section>
 

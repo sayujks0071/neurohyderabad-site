@@ -1,13 +1,15 @@
-# Cluster Mapping - 2026-01-27
+# Daily Cluster Mapping - 2025-05-18
 
-## Cluster: Microdiscectomy
-**Primary Keyword:** `microdiscectomy surgery hyderabad`
+## New Clusters
 
-| Keyword | Intent | Funnel | Target URL | Status |
-|---|---|---|---|---|
-| microdiscectomy surgery hyderabad | Commercial | BOFU | `/services/microdiscectomy-surgery-hyderabad` | New Page |
-| lumbar microdiscectomy cost | Commercial | BOFU | `/services/microdiscectomy-surgery-hyderabad` | Section |
-| minimally invasive discectomy | Informational | MOFU | `/services/microdiscectomy-surgery-hyderabad` | Secondary |
+### HYD | BOFU | LOCATION | miyapur | neurosurgeon
+* **Primary Keyword:** "neurosurgeon miyapur"
+* **Secondary Keywords:**
+    * "best neurosurgeon in miyapur"
+    * "spine surgeon miyapur"
+    * "neurosurgeon near miyapur"
+* **Target Page:** `/locations/neurosurgeon-miyapur` (New Page)
+* **Strategy:** Create a dedicated location landing page targeting patients in Miyapur, emphasizing accessibility to Dr. Sayuj at Malakpet (via Metro/ORR).
 
-## Cannibalization Check
-- Checked against `/services/endoscopic-spine-surgery-hyderabad`. Distinct intent (Micro vs Endoscopic). No overlap found.
+## Updates to Existing Clusters
+* None for today.

@@ -426,6 +426,30 @@
       "difficulty": "Med",
       "volume": "Low",
       "target_page": "/conditions/scoliosis-treatment-hyderabad"
+    },
+    {
+      "term": "neurosurgeon miyapur",
+      "difficulty": "Low",
+      "volume": "Med",
+      "target_page": "/locations/neurosurgeon-miyapur"
+    },
+    {
+      "term": "best neurosurgeon in miyapur",
+      "difficulty": "Med",
+      "volume": "Med",
+      "target_page": "/locations/neurosurgeon-miyapur"
+    },
+    {
+      "term": "spine surgeon miyapur",
+      "difficulty": "Med",
+      "volume": "Med",
+      "target_page": "/locations/neurosurgeon-miyapur"
+    },
+    {
+      "term": "neurosurgeon near miyapur",
+      "difficulty": "High",
+      "volume": "Med",
+      "target_page": "/locations/neurosurgeon-miyapur"
     }
   ]
 }

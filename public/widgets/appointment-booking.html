@@ -65,16 +65,34 @@
         }
       };
 
+      const handleReset = () => {
+        setFormData({
+            patientName: toolInput.patientName || "",
+            service: toolInput.service || "",
+            phone: "",
+            appointmentDate: toolInput.preferredDate || "",
+            appointmentTime: "",
+            reason: "",
+        });
+        setStatus("idle");
+      };
+
       if (status === "success") {
         return React.createElement("div", { className: "p-8 text-center" },
           React.createElement("div", { className: "bg-green-100 text-green-800 p-6 rounded-2xl mb-6 shadow-sm border border-green-200" },
-            React.createElement("h2", { className: "text-2xl font-bold mb-2" }, "Booking Request Sent!"),
-            React.createElement("p", { className: "text-green-700" }, "Dr. Sayuj's team will contact you shortly to confirm your visit.")
+            React.createElement("h2", { className: "text-2xl font-bold mb-2" }, "Request Received"),
+            React.createElement("p", { className: "text-green-700" }, "Appointment request received. Please bring any MRI/CT scans with you. We will confirm via phone shortly.")
           ),
-          React.createElement("button", { 
-            onClick: () => window.openai.openExternal({ href: "https://www.drsayuj.com" }),
-            className: "text-cyan-600 font-bold hover:underline"
-          }, "Visit Website for More Info")
+          React.createElement("div", { className: "space-y-4" },
+            React.createElement("button", {
+                onClick: handleReset,
+                className: "block w-full text-center bg-cyan-600 text-white font-bold py-3 rounded-xl hover:bg-cyan-700 transition-colors"
+            }, "Book Another Appointment"),
+            React.createElement("button", {
+                onClick: () => window.openai.openExternal({ href: "https://www.drsayuj.com" }),
+                className: "text-cyan-600 font-bold hover:underline text-sm"
+            }, "Visit Website")
+          )
         );
       }
 
@@ -155,7 +173,7 @@
                   React.createElement("circle", { className: "opacity-25", cx: "12", cy: "12", r: "10", stroke: "currentColor", strokeWidth: "4" }),
                   React.createElement("path", { className: "opacity-75", fill: "currentColor", d: "M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" })
                 ),
-                "Confirming..."
+                "Sending..."
               ) : "Book Appointment"
           ),
           status === "error" && React.createElement("p", { className: "text-red-500 text-sm text-center font-medium" }, "Error sending request. Please call us at +91-9778280044.")

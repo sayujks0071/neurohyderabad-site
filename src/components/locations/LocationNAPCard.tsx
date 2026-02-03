@@ -16,7 +16,12 @@ export const LocationNAPCard: React.FC<LocationNAPCardProps> = ({ location: lega
 
   return (
     <div className={`bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-6 ${className}`}>
-      <h3 className="text-xl font-bold text-gray-900 mb-4">{location.name}</h3>
+      <div className="mb-4">
+        <h3 className="text-xl font-bold text-gray-900">{location.canonical_display_name}</h3>
+        <p className="text-sm text-blue-800 font-medium mt-1">
+          Serving {location.areaServedName}
+        </p>
+      </div>
 
       <div className="space-y-4">
         {/* Address */}

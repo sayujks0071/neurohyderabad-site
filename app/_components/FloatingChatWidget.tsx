@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { useStatsigEvents } from '../../src/lib/statsig-events';
+import { trackMiddlewareEvent } from '@/src/lib/middleware/rum';
 import { MessageCircle, X, Send, AlertTriangle, Loader2, Sparkles, Minus } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 
@@ -20,9 +21,20 @@ interface Message {
  * - Emergency detection
  * - Compact design
  */
-export default function FloatingChatWidget() {
-  const [isOpen, setIsOpen] = useState(false);
+
+interface FloatingChatWidgetProps {
+  autoOpen?: boolean;
+}
+
+export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWidgetProps) {
+  const [isOpen, setIsOpen] = useState(autoOpen);
   const [isMinimized, setIsMinimized] = useState(false);
+
+  useEffect(() => {
+    if (autoOpen) {
+      setIsOpen(true);
+    }
+  }, [autoOpen]);
   const [showEmergencyAlert, setShowEmergencyAlert] = useState(false);
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<Message[]>([
@@ -50,12 +62,18 @@ export default function FloatingChatWidget() {
       scrollToBottom();
       // Focus input when opened
       setTimeout(() => inputRef.current?.focus(), 100);
+
+      // Track widget open
+      trackMiddlewareEvent('chat_widget_open', {
+        page_slug: pathname || 'unknown'
+      });
     }
   }, [messages, isOpen, isMinimized]);
 
   const sendMessage = async (content: string) => {
     if (!content.trim() || isLoading) return;
 
+    const startTime = performance.now();
     const userMessage: Message = {
       id: Date.now().toString(),
       role: 'user',
@@ -69,6 +87,10 @@ export default function FloatingChatWidget() {
 
     // Log user interaction
     logAppointmentBooking('ai_chat_widget_interaction', 'general');
+    trackMiddlewareEvent('chat_message_sent', {
+      source: 'floating_widget',
+      page_slug: pathname || 'unknown'
+    });
 
     try {
       const response = await fetch('/api/ai/chat', {
@@ -142,6 +164,15 @@ export default function FloatingChatWidget() {
 
       setMessages(prev => [...prev, assistantMessage]);
 
+      const endTime = performance.now();
+      const duration = endTime - startTime;
+
+      trackMiddlewareEvent('chat_response_received', {
+        source: 'floating_widget',
+        duration_ms: Math.round(duration),
+        success: true
+      });
+
       // Check for emergency keywords
       const emergencyKeywords = ['emergency', 'urgent', 'immediately', 'call', 'stroke', 'seizure'];
       const hasEmergency = emergencyKeywords.some(keyword =>
@@ -150,13 +181,25 @@ export default function FloatingChatWidget() {
 
       if (hasEmergency) {
         setShowEmergencyAlert(true);
+        trackMiddlewareEvent('chat_emergency_detected', {
+          source: 'floating_widget'
+        });
       }
 
       logContactFormSubmit('ai_chat_widget', true);
     } catch (err) {
       console.error('Chat error:', err);
+      const endTime = performance.now();
+      const duration = endTime - startTime;
+
       setError(err instanceof Error ? err : new Error('Failed to send message'));
       logContactFormSubmit('ai_chat_widget', false);
+
+      trackMiddlewareEvent('chat_error', {
+        source: 'floating_widget',
+        duration_ms: Math.round(duration),
+        error: err instanceof Error ? err.message : 'Unknown error'
+      });
 
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
@@ -214,7 +257,7 @@ export default function FloatingChatWidget() {
         <div className="fixed bottom-24 right-4 w-[200px] bg-white rounded-lg shadow-lg border border-gray-200 z-[60] p-3 animate-in slide-in-from-bottom-4 fade-in duration-200">
           <button
             onClick={() => setIsMinimized(false)}
-            className="w-full text-left text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors"
+            className="w-full text-left text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
           >
             Click to expand chat
           </button>
@@ -241,14 +284,14 @@ export default function FloatingChatWidget() {
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setIsMinimized(true)}
-                className="p-1 hover:bg-white/20 rounded-md transition-colors"
+                className="p-1 hover:bg-white/20 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-white/50"
                 aria-label="Minimize chat"
               >
                 <Minus size={18} />
               </button>
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1 hover:bg-white/20 rounded-md transition-colors"
+                className="p-1 hover:bg-white/20 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-white/50"
                 aria-label="Close chat"
               >
                 <X size={18} />
@@ -261,7 +304,7 @@ export default function FloatingChatWidget() {
             <div className="bg-red-50 p-3 border-b border-red-100 flex items-start gap-2 shrink-0">
               <AlertTriangle className="text-red-600 shrink-0 mt-0.5" size={16} />
               <p className="text-xs text-red-700 font-medium">
-                Emergency? Call <a href="tel:+919778280044" className="underline font-bold">+91-9778280044</a>
+                Emergency? Call <a href="tel:+919778280044" className="underline font-bold focus:outline-none focus:ring-2 focus:ring-red-500 rounded px-1">+91-9778280044</a>
               </p>
             </div>
           )}
@@ -321,7 +364,7 @@ export default function FloatingChatWidget() {
                 <button
                   key={i}
                   onClick={() => sendMessage(action)}
-                  className="whitespace-nowrap px-3 py-1 bg-white border border-blue-100 text-blue-600 text-xs rounded-full hover:bg-blue-50 transition-colors shadow-sm"
+                  className="whitespace-nowrap px-3 py-1 bg-white border border-blue-100 text-blue-600 text-xs rounded-full hover:bg-blue-50 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
                 >
                   {action}
                 </button>
@@ -347,7 +390,7 @@ export default function FloatingChatWidget() {
                 type="submit"
                 aria-label="Send message"
                 disabled={!input.trim() || isLoading}
-                className="absolute right-1.5 p-1.5 bg-blue-600 text-white rounded-full hover:bg-blue-700 disabled:opacity-50 disabled:hover:bg-blue-600 transition-colors shadow-sm"
+                className="absolute right-1.5 p-1.5 bg-blue-600 text-white rounded-full hover:bg-blue-700 disabled:opacity-50 disabled:hover:bg-blue-600 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
               >
                 <Send size={14} />
               </button>

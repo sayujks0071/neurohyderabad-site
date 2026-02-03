@@ -13,9 +13,9 @@ interface ButtonProps
 
 const VARIANT_CLASSES: Record<ButtonVariant, string> = {
   primary:
-    "bg-cyan-600 text-white hover:bg-cyan-700 active:bg-cyan-800 focus:ring-cyan-500",
+    "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 focus:ring-blue-500",
   secondary:
-    "bg-slate-100 text-slate-700 hover:bg-slate-200 active:bg-slate-300 focus:ring-slate-500",
+    "bg-white border border-slate-200 text-slate-600 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 focus:ring-slate-500",
 };
 
 export default function Button({
@@ -28,13 +28,12 @@ export default function Button({
 }: ButtonProps) {
   const baseClasses = [
     "w-full sm:w-auto inline-flex items-center justify-center",
-    "rounded-md px-6 py-3 text-base font-semibold shadow-md",
-    "transition-all duration-150 ease-in-out",
+    "rounded-xl px-6 py-3 text-base font-semibold",
+    "transition-all duration-300",
     "focus:outline-none focus:ring-2 focus:ring-offset-2",
-    "transform hover:-translate-y-0.5 hover:shadow-lg",
-    "active:scale-95 active:shadow-md",
-    "disabled:opacity-50 disabled:cursor-not-allowed",
-    "disabled:shadow-none disabled:transform-none",
+    "hover:scale-[1.02] active:scale-[0.98]",
+    "disabled:opacity-70 disabled:cursor-not-allowed",
+    "disabled:shadow-none disabled:transform-none disabled:hover:scale-100",
     "relative overflow-hidden",
     VARIANT_CLASSES[variant],
     className,

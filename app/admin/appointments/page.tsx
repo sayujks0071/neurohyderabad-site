@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { RefreshCw, CheckCircle, XCircle, Clock, Activity } from 'lucide-react';
 import { generateWhatsappUrl, formatDate } from './utils';
-import { WhatsAppIcon } from '@/src/components/WhatsAppIcon';
+import { WhatsAppButton } from './WhatsAppButton';
 
 export const dynamic = 'force-dynamic';
 
@@ -37,13 +37,12 @@ const ClinicalInfo = ({ painScore, mriAvailable }: { painScore?: number; mriAvai
     <div className="flex flex-col gap-1">
       {painScore !== undefined && (
         <span
-          className={`text-xs px-2 py-0.5 rounded-full font-medium w-fit ${
-            painScore <= 3
+          className={`text-xs px-2 py-0.5 rounded-full font-medium w-fit ${painScore <= 3
               ? 'bg-green-100 text-green-700'
               : painScore <= 7
-              ? 'bg-yellow-100 text-yellow-700'
-              : 'bg-red-100 text-red-700'
-          }`}
+                ? 'bg-yellow-100 text-yellow-700'
+                : 'bg-red-100 text-red-700'
+            }`}
         >
           Pain: {painScore}/10
         </span>
@@ -80,30 +79,6 @@ export default function AppointmentsPage() {
   useEffect(() => {
     fetchAppointments();
   }, []);
-
-  // Quick Action: Confirm appointment via WhatsApp
-  // Opens a dynamic WhatsApp API link with a pre-filled confirmation message.
-  // Phone number is sanitized and message includes patient name and date.
-  // Verified implementation matches requirements for instant communication.
-  const sendWhatsapp = (appointment: Appointment) => {
-    setError(null);
-    // Ensure we have a phone number before proceeding
-    if (!appointment.patient_phone) {
-      setError('No phone number available for this patient.');
-      return;
-    }
-
-    // Generate the WhatsApp URL with sanitized phone and pre-filled message
-    const url = generateWhatsappUrl({
-      id: appointment.id,
-      fullName: appointment.patient_name,
-      phone: appointment.patient_phone,
-      preferredDate: formatDate(appointment.preferred_date),
-    });
-
-    // Open in a new tab
-    window.open(url, '_blank');
-  };
 
   const updateStatus = async (id: string, status: string) => {
     try {
@@ -164,7 +139,7 @@ export default function AppointmentsPage() {
                 <th className="py-3 px-4 border-b text-left text-sm font-semibold text-gray-600">Complaint</th>
                 <th className="py-3 px-4 border-b text-left text-sm font-semibold text-gray-600">Clinical Info</th>
                 <th className="py-3 px-4 border-b text-left text-sm font-semibold text-gray-600">Status</th>
-                <th className="py-3 px-4 border-b text-left text-sm font-semibold text-gray-600">Actions</th>
+                <th className="py-3 px-4 border-b text-left text-sm font-semibold text-gray-600">Quick Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -199,16 +174,7 @@ export default function AppointmentsPage() {
                   </td>
                   <td className="py-3 px-4 border-b">
                     <div className="flex items-center gap-2">
-                      <button
-                        onClick={() => sendWhatsapp(appointment)}
-                        className="flex items-center gap-1 !bg-[#25D366] hover:!bg-[#128C7E] text-white font-medium py-1 px-2 rounded text-xs transition-colors"
-                        title="Click to confirm via WhatsApp"
-                        aria-label="Confirm via WhatsApp"
-                        data-testid="whatsapp-button"
-                      >
-                        <WhatsAppIcon size={14} />
-                        <span>Confirm via WhatsApp</span>
-                      </button>
+                      <WhatsAppButton appointment={appointment} />
                       {appointment.status === 'pending' && (
                         <button
                           onClick={() => updateStatus(appointment.id, 'confirmed')}
