@@ -1,11 +1,15 @@
-keyword,intent,funnel,geo,cluster,recommended_target,difficulty,priority,serp_notes
-microdiscectomy surgery hyderabad,Transactional,BOFU,HYD,SPINE-MICRO,NEW: /services/microdiscectomy-surgery-hyderabad,Med,90,Local Pack
-microscopic spine surgery hyderabad,Transactional,BOFU,HYD,SPINE-MICRO,NEW: /services/microdiscectomy-surgery-hyderabad,Med,85,Ads + Local
-lumbar microdiscectomy recovery,Informational,MOFU,NONE,SPINE-MICRO,/blog/microdiscectomy-recovery-guide,Low,60,People Also Ask
-microdiscectomy vs endoscopic spine surgery,Commercial,MOFU,NONE,SPINE-COMPARE,/blog/endoscopic-vs-microdiscectomy-hyderabad,Med,75,Featured Snippet
-best surgeon for microdiscectomy in hyderabad,Transactional,BOFU,HYD,SPINE-MICRO,NEW: /services/microdiscectomy-surgery-hyderabad,High,95,Local Pack
-acdf surgery hyderabad,Transactional,BOFU,HYD,SPINE-CERVICAL,/services/cervical-disc-replacement-hyderabad,High,80,Ads
-anterior cervical discectomy and fusion cost,Commercial,BOFU,HYD,SPINE-CERVICAL,/services/spine-surgery-cost-hyderabad,Med,70,Snippet
-spine surgery insurance hyderabad,Informational,MOFU,HYD,INSURANCE,/blog/day-care-spine-surgery-insurance-hyderabad,Low,65,PAA
-microscopic lumbar discectomy,Transactional,BOFU,HYD,SPINE-MICRO,NEW: /services/microdiscectomy-surgery-hyderabad,Med,85,
-tube retractor spine surgery,Informational,MOFU,NONE,SPINE-MICRO,NEW: /services/microdiscectomy-surgery-hyderabad,Low,40,
+keyword,intent,funnel,geo,cluster,target,difficulty,priority,serp_notes
+neurosurgeon miyapur,Commercial,BOFU,HYD,LOC-MIYAPUR,/locations/neurosurgeon-miyapur,Low,90,Local Pack
+best neurosurgeon in miyapur,Commercial,BOFU,HYD,LOC-MIYAPUR,/locations/neurosurgeon-miyapur,Med,85,Snippet
+spine surgeon miyapur,Commercial,BOFU,HYD,LOC-MIYAPUR,/locations/neurosurgeon-miyapur,Med,85,Local Pack
+brain doctor miyapur,Informational,MOFU,HYD,LOC-MIYAPUR,/locations/neurosurgeon-miyapur,Low,70,PAA
+neurosurgeon near miyapur,Commercial,BOFU,HYD,LOC-MIYAPUR,/locations/neurosurgeon-miyapur,High,80,Map Pack
+sciatica treatment miyapur,Commercial,BOFU,HYD,LOC-MIYAPUR,/locations/neurosurgeon-miyapur,Low,60,Ads
+slip disc doctor miyapur,Commercial,BOFU,HYD,LOC-MIYAPUR,/locations/neurosurgeon-miyapur,Low,60,Ads
+neurosurgeon dilsukhnagar,Commercial,BOFU,HYD,LOCATIONS | Dilsukhnagar,/locations/neurosurgeon-dilsukhnagar,Low,90,Local Pack
+best neurosurgeon in dilsukhnagar,Commercial,BOFU,HYD,LOCATIONS | Dilsukhnagar,/locations/neurosurgeon-dilsukhnagar,Low,85,
+spine surgeon dilsukhnagar,Commercial,BOFU,HYD,LOCATIONS | Dilsukhnagar,/locations/neurosurgeon-dilsukhnagar,Med,80,
+neurosurgeon vanasthalipuram,Commercial,BOFU,HYD,LOCATIONS | Vanasthalipuram,/locations/neurosurgeon-vanasthalipuram,Low,85,Local Pack
+best spine doctor vanasthalipuram,Commercial,BOFU,HYD,LOCATIONS | Vanasthalipuram,/locations/neurosurgeon-vanasthalipuram,Low,80,
+sciatica treatment dilsukhnagar,Commercial,BOFU,HYD,LOCATIONS | Dilsukhnagar,/locations/neurosurgeon-dilsukhnagar,Med,75,
+brain tumor surgeon dilsukhnagar,Commercial,BOFU,HYD,LOCATIONS | Dilsukhnagar,/locations/neurosurgeon-dilsukhnagar,Low,70,

@@ -131,18 +131,8 @@ export default function MedicalWebPageSchema({
     };
   }
 
-  // Add breadcrumb schema
-  if (breadcrumbs.length > 0) {
-    baseSchema.breadcrumb = {
-      "@type": "BreadcrumbList",
-      "itemListElement": breadcrumbs.map((crumb, index) => ({
-        "@type": "ListItem",
-        "position": index + 1,
-        "name": crumb.name,
-        "item": `${SITE_URL}${crumb.path}`
-      }))
-    };
-  }
+  // Breadcrumb generation is removed from here to be handled by a dedicated BreadcrumbSchema component
+  // ensuring top-level BreadcrumbList and avoiding duplication.
 
   return (
     <script

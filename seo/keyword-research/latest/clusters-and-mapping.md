@@ -1,13 +1,31 @@
-# Cluster Mapping - 2026-01-27
+# Cluster Mapping & Strategy - 2026-02-01
 
-## Cluster: Microdiscectomy
-**Primary Keyword:** `microdiscectomy surgery hyderabad`
+## New Clusters
 
-| Keyword | Intent | Funnel | Target URL | Status |
-|---|---|---|---|---|
-| microdiscectomy surgery hyderabad | Commercial | BOFU | `/services/microdiscectomy-surgery-hyderabad` | New Page |
-| lumbar microdiscectomy cost | Commercial | BOFU | `/services/microdiscectomy-surgery-hyderabad` | Section |
-| minimally invasive discectomy | Informational | MOFU | `/services/microdiscectomy-surgery-hyderabad` | Secondary |
+### HYD | BOFU | LOCATION | miyapur | neurosurgeon
 
-## Cannibalization Check
-- Checked against `/services/endoscopic-spine-surgery-hyderabad`. Distinct intent (Micro vs Endoscopic). No overlap found.
+* **Primary Keyword:** "neurosurgeon miyapur"
+* **Secondary Keywords:**
+  * "best neurosurgeon in miyapur"
+  * "spine surgeon miyapur"
+  * "neurosurgeon near miyapur"
+* **Target Page:** `/locations/neurosurgeon-miyapur` (New Page)
+* **Strategy:** Create a dedicated location landing page targeting patients in Miyapur, emphasizing accessibility to Dr. Sayuj at Malakpet (via Metro/ORR).
+
+### HYD | BOFU | LOCATIONS | neurosurgeon-dilsukhnagar | near-me
+
+* **Primary Keyword:** "neurosurgeon dilsukhnagar"
+* **Secondary Keywords:** "best neurosurgeon in dilsukhnagar", "spine surgeon dilsukhnagar"
+* **Target URL:** `/locations/neurosurgeon-dilsukhnagar`
+* **Strategy:** Create new location page. Leverage proximity to Malakpet (10 mins).
+
+### HYD | BOFU | LOCATIONS | neurosurgeon-vanasthalipuram | near-me
+
+* **Primary Keyword:** "neurosurgeon vanasthalipuram"
+* **Secondary Keywords:** "best spine doctor vanasthalipuram"
+* **Target URL:** `/locations/neurosurgeon-vanasthalipuram`
+* **Strategy:** Create new location page. Target patients traveling on NH65.
+
+## Updates to Existing Clusters
+
+* None for today.

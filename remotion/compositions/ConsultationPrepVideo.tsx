@@ -30,7 +30,12 @@ export const ConsultationPrepVideo: React.FC<ConsultationPrepProps> = ({
 
       {/* Scene 2: Calendar (9 seconds + 1s overlap) */}
       <Sequence from={150} durationInFrames={300}>
-        <AbsoluteFill style={{ opacity: interpolate(frame, [150, 180], [0, 1]) }}>
+        <AbsoluteFill
+          style={{
+            opacity: interpolate(frame, [150, 180], [0, 1]),
+            transform: `translateY(${interpolate(frame, [150, 180], [50, 0], { extrapolateRight: 'clamp' })}px)`,
+          }}
+        >
           <CalendarScene
             appointmentDate={appointmentDate}
             appointmentTime={appointmentTime}
@@ -40,7 +45,12 @@ export const ConsultationPrepVideo: React.FC<ConsultationPrepProps> = ({
 
       {/* Scene 3: Prep Steps (15 seconds + 1s overlap) */}
       <Sequence from={420} durationInFrames={480}>
-        <AbsoluteFill style={{ opacity: interpolate(frame, [420, 450], [0, 1]) }}>
+        <AbsoluteFill
+          style={{
+            opacity: interpolate(frame, [420, 450], [0, 1]),
+            transform: `translateY(${interpolate(frame, [420, 450], [50, 0], { extrapolateRight: 'clamp' })}px)`,
+          }}
+        >
           <PrepStepsScene
             surgeryType={surgeryType}
             prepSteps={prepSteps}

@@ -1,20 +1,44 @@
-import { generateText } from 'ai';
+import { streamText } from 'ai';
 import { NextRequest, NextResponse } from 'next/server';
 import { getTextModel, hasAIConfig } from '@/src/lib/ai/gateway';
+import { rateLimit } from '@/src/lib/rate-limit';
 
 /**
  * Article Summarization API using Vercel AI SDK
  * 
  * Summarizes long articles/blog posts for better readability
+ * Features:
+ * - Streaming response for better UX
+ * - Rate limiting (10 req/min)
+ * - Vercel AI Gateway integration
  */
 export async function POST(request: NextRequest) {
+  // 🛡️ Rate Limiting: 10 requests per minute per IP
+  const ip = request.headers.get('x-forwarded-for') ?? 'unknown';
+  const limit = rateLimit(ip, 10, 60 * 1000);
+
+  if (!limit.success) {
+    return NextResponse.json(
+      { error: 'Too many requests. Please try again later.' },
+      {
+        status: 429,
+        headers: {
+          'X-RateLimit-Limit': limit.limit.toString(),
+          'X-RateLimit-Remaining': limit.remaining.toString(),
+          'X-RateLimit-Reset': limit.reset.toString(),
+        }
+      }
+    );
+  }
+
   let content = '';
   let maxLength = 200;
 
   try {
     const body = await request.json();
-    ({ content, maxLength = 200 } = body);
-    maxLength = Number.isFinite(Number(maxLength)) ? Number(maxLength) : 200;
+    // Support both prompt (useCompletion default) and content (legacy)
+    content = body.prompt || body.content || '';
+    maxLength = body.maxLength ? Number(body.maxLength) : 200;
 
     if (!content) {
       return NextResponse.json(
@@ -24,15 +48,13 @@ export async function POST(request: NextRequest) {
     }
 
     if (!hasAIConfig()) {
+      // Fallback for when AI is not configured
+      // Return plain text so useCompletion renders it correctly
       const summary = buildFallbackSummary(content, maxLength);
-      return NextResponse.json({
-        summary,
-        originalLength: content.length,
-        summaryLength: summary.length,
-      });
+      return new Response(summary);
     }
 
-    const { text } = await generateText({
+    const result = streamText({
       model: getTextModel(),
       prompt: `Summarize the following medical article in approximately ${maxLength} words. Focus on key points, main findings, and actionable information. Keep it concise and easy to understand:
 
@@ -42,21 +64,14 @@ Summary:`,
       temperature: 0.3, // Lower temperature for more factual summaries
     });
 
-    return NextResponse.json({
-      summary: text,
-      originalLength: content.length,
-      summaryLength: text.length,
-    });
+    return result.toTextStreamResponse();
 
   } catch (error) {
     console.error('Error generating summary:', error);
     if (content) {
+      // Use fallback summary on error
       const summary = buildFallbackSummary(content, maxLength);
-      return NextResponse.json({
-        summary,
-        originalLength: content.length,
-        summaryLength: summary.length,
-      });
+      return new Response(summary);
     }
     return NextResponse.json(
       { 

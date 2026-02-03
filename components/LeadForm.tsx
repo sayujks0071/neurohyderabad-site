@@ -10,6 +10,7 @@ import Input from "@/packages/appointment-form/ui/Input";
 import Textarea from "@/packages/appointment-form/ui/Textarea";
 import Calendar from "@/packages/appointment-form/ui/Calendar";
 import Select from "@/packages/appointment-form/ui/Select";
+import { APPOINTMENT_SUCCESS_MESSAGE } from "@/packages/appointment-form/constants";
 
 const schema = z.object({
   fullName: z.string().min(1, "Full name is required"),
@@ -60,6 +61,12 @@ export default function LeadForm() {
   });
 
   const painScoreValue = watch("painScore");
+
+  useEffect(() => {
+    trackMiddlewareEvent('form_view', {
+      form_type: 'lead'
+    });
+  }, []);
 
   useEffect(() => {
     if (isSubmitted && successRef.current) {
@@ -116,9 +123,7 @@ export default function LeadForm() {
         className="bg-green-50 border border-green-200 rounded-2xl p-8 text-center outline-none"
       >
         <h3 className="text-2xl font-bold text-green-800 mb-4">Request Received</h3>
-        <p className="text-green-700 mb-6">
-          Appointment request received. Please bring any MRI/CT scans with you. We will confirm via phone shortly.
-        </p>
+        <p className="text-green-700 mb-6">{APPOINTMENT_SUCCESS_MESSAGE}</p>
         <button
           onClick={() => setIsSubmitted(false)}
           className="text-green-800 underline hover:text-green-900 focus:outline-none focus:ring-2 focus:ring-green-500 rounded p-1"
