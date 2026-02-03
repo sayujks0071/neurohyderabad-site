@@ -23,6 +23,7 @@ interface AlertConfig {
     threshold: number;
     operator: '>' | '<' | '=' | '>=' | '<=';
     window?: string;
+    filters?: { key: string; value: string }[];
   };
   severity: 'low' | 'medium' | 'high' | 'critical';
 }
@@ -47,8 +48,45 @@ const ALERTS: AlertConfig[] = [
       threshold: 2000, // 2 seconds
       operator: '>',
       window: '5m',
+      filters: [{ key: 'path', value: '/api/appointments' }],
     },
     severity: 'medium',
+  },
+  {
+    name: 'Slow Lead API',
+    description: 'Alert when Lead API response time > 2s',
+    condition: {
+      metric: 'http.response_time',
+      threshold: 2000, // 2 seconds
+      operator: '>',
+      window: '5m',
+      filters: [{ key: 'path', value: '/api/lead' }],
+    },
+    severity: 'medium',
+  },
+  {
+    name: 'Slow SEO API',
+    description: 'Alert when SEO API response time > 2s',
+    condition: {
+      metric: 'http.response_time',
+      threshold: 2000, // 2 seconds
+      operator: '>',
+      window: '5m',
+      filters: [{ key: 'path', value: '/api/search-console' }],
+    },
+    severity: 'medium',
+  },
+  {
+    name: 'Appointment API Failure',
+    description: 'Alert when appointment API error rate > 5%',
+    condition: {
+      metric: 'error.rate',
+      threshold: 0.05, // 5%
+      operator: '>',
+      window: '5m',
+      filters: [{ key: 'path', value: '/api/appointments' }],
+    },
+    severity: 'critical',
   },
   {
     name: 'Poor LCP',
@@ -58,6 +96,18 @@ const ALERTS: AlertConfig[] = [
       threshold: 2500, // 2.5 seconds
       operator: '>',
       window: '10m',
+    },
+    severity: 'high',
+  },
+  {
+    name: 'Mobile LCP',
+    description: 'Alert when Mobile LCP exceeds 3s',
+    condition: {
+      metric: 'web_vitals.lcp',
+      threshold: 3000, // 3 seconds
+      operator: '>',
+      window: '10m',
+      filters: [{ key: 'device', value: 'mobile' }],
     },
     severity: 'high',
   },
@@ -91,6 +141,19 @@ const ALERTS: AlertConfig[] = [
       threshold: 0.05, // 5%
       operator: '>',
       window: '5m',
+      filters: [{ key: 'path', value: '/api/ai/chat' }],
+    },
+    severity: 'high',
+  },
+  {
+    name: 'Chatbot API Latency',
+    description: 'Alert when chatbot API response time > 3s',
+    condition: {
+      metric: 'http.response_time',
+      threshold: 3000, // 3 seconds
+      operator: '>',
+      window: '5m',
+      filters: [{ key: 'path', value: '/api/ai/chat' }],
     },
     severity: 'high',
   },
@@ -116,6 +179,30 @@ const ALERTS: AlertConfig[] = [
     },
     severity: 'critical',
   },
+  {
+    name: 'Critical Page LCP (Home)',
+    description: 'Alert when Homepage LCP > 3s',
+    condition: {
+      metric: 'web_vitals.lcp',
+      threshold: 3000, // 3 seconds
+      operator: '>',
+      window: '10m',
+      filters: [{ key: 'path', value: '/' }],
+    },
+    severity: 'high',
+  },
+  {
+    name: 'Critical Page LCP (Appointments)',
+    description: 'Alert when Appointments page LCP > 3s',
+    condition: {
+      metric: 'web_vitals.lcp',
+      threshold: 3000, // 3 seconds
+      operator: '>',
+      window: '10m',
+      filters: [{ key: 'path', value: '/appointments' }],
+    },
+    severity: 'high',
+  },
 ];
 
 async function setupAlerts() {
@@ -137,14 +224,22 @@ async function setupAlerts() {
     for (const config of ALERTS) {
       try {
         console.log(`Creating: ${config.name}...`);
+
+        // Merge global filter (URL) with specific filters
+        const filters = [
+          { key: 'url', value: SITE_URL },
+          ...(config.condition.filters || [])
+        ];
+
+        // Remove filters from condition object as we construct it explicitly
+        const { filters: _, ...conditionWithoutFilters } = config.condition;
+
         const alert = await middlewareApi.createAlert(ruleId, {
           name: config.name,
           description: config.description,
           condition: {
-            ...config.condition,
-            filters: [
-              { key: 'url', value: SITE_URL },
-            ],
+            ...conditionWithoutFilters,
+            filters,
           },
           actions: [
             {
