@@ -1,18 +1,14 @@
-# SEO Changelog - 2026-02-01 (Miyapur, Dilsukhnagar, Vanasthalipuram)
+# Changelog - 2026-02-02
 
-## New Pages
+## Summary
+Daily keyword research focused on Jubilee Hills local SEO and spine surgery cost queries.
 
-* Created `/locations/neurosurgeon-miyapur`
-* Created `/locations/neurosurgeon-dilsukhnagar`
-* Created `/locations/neurosurgeon-vanasthalipuram`
+## Actions
+*   **New Keywords:** Added 6 high-value keywords.
+*   **New Page:** Created `/locations/neurosurgeon-jubilee-hills`.
+*   **Mapping:** Updated registry for cost and recovery terms.
 
-## Registry Updates
-
-* Added Miyapur, Dilsukhnagar, and Vanasthalipuram clusters to `keyword-registry.json` and `page-keyword-map.json`.
-* Total of 11+ new keywords added.
-
-## Rationale
-
-* **Miyapur:** Expansion into North-West Hyderabad. Capture high-intent traffic by offering a "Super Specialist" alternative accessible via Metro/ORR.
-* **Dilsukhnagar:** High-volume area adjacent to Malakpet. Competitor gap for "Endoscopic Spine".
-* **Vanasthalipuram:** Growing residential area on key highway route to hospital.
+## Stats
+*   **Keywords Added:** 6
+*   **Pages Created:** 1
+*   **Cannibalization Checks:** Passed.
