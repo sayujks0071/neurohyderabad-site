@@ -1,42 +1,28 @@
-# Daily Competitor Discovery - 2026-02-01
+# Daily Competitor Discovery - 2026-02-02
 
-## Target Area: Miyapur (North-West HYD)
+## Target Keywords
+* "endoscopic spine surgery hyderabad"
+* "best spine surgeon hyderabad"
+* "neurosurgeon jubilee hills"
+* "spine surgery cost hyderabad"
 
-1. **Srikara Hospitals, Miyapur**
-   - Strong local presence for orthopedics and spine.
-   - Ranking for "spine surgeon miyapur".
+## Competitors Analyzed
 
-2. **Pranaam Hospital**
-   - General multispecialty near Miyapur.
-   - Ranking for "neurosurgeon near miyapur".
+### 1. Local Surgeons
+*   **Dr. Sukumar Sura**: Ranking well for "endoscopic spine surgery".
+*   **Dr. BSV Raju**: Strong presence for "spine surgeon hyderabad".
+*   **Dr. Hariprakash Chakraborty**: Competes on "neurosurgeon hyderabad".
 
-3. **Landmark Hospitals**
-   - Emergency and trauma care focus.
+### 2. Hospitals
+*   **Yashoda Hospitals**: Dominates broad terms.
+*   **Apollo Hospitals**: Strong authority.
+*   **KIMS Hospitals**: Good content on procedures.
 
-## Target Area: Dilsukhnagar (HYD)
+### 3. Portals
+*   **Practo**: Always top for "best doctor near me".
+*   **Lybrate**: Strong Q&A snippets.
 
-* **Intent:** High-density residential + commercial hub. High volume of "neurosurgeon near me" searches.
-- **Competitors:**
-  - *Competitor A (Local Hospital):* Optimized for "Brain Surgery Dilsukhnagar". Weak on "Endoscopic Spine".
-  - *Competitor B (Aggregator):* Practo/Justdial dominate top 3.
-  - *Opportunity:* Dedicated location page with "Endoscopic Spine Surgery" focus + Schema markup.
-
-## Target Area: Vanasthalipuram (HYD)
-
-* **Intent:** Residential. Patients often travel to Malakpet/LB Nagar.
-- **Competitors:**
-  - *Competitor C (Ortho Clinic):* Ranks for "Spine Doctor" but not "Neurosurgeon".
-  - *Opportunity:* Capture "Neurosurgeon" and "Sciatica Specialist" terms.
-
-## Aggregators (SERP Dominators)
-
-1. **Practo**
-   - "Best Neurosurgeons in Miyapur/Dilsukhnagar" list.
-   - High domain authority.
-
-2. **Apollo 24/7**
-   - "Neurologists in Miyapur" listings.
-   - Often mixes neurologists and neurosurgeons.
-
-3. **Lybrate**
-   - Q&A style snippets for "back pain doctor miyapur".
+## Insights
+*   **Jubilee Hills** is a high-value location gap. Competitors have listings but thin content.
+*   **Cost** queries are rising ("spine surgery cost hyderabad"). Competitors have price ranges in blogs.
+*   **Recovery** content is popular ("laminectomy recovery time").

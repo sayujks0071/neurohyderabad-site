@@ -1,31 +1,19 @@
-# Cluster Mapping & Strategy - 2026-02-01
+# Clusters and Mapping - 2026-02-02
 
 ## New Clusters
 
-### HYD | BOFU | LOCATION | miyapur | neurosurgeon
+### LOC | BOFU | NEURO | jubilee-hills
+*   **Primary:** "neurosurgeon jubilee hills"
+*   **Secondary:** "best neurosurgeon in jubilee hills", "spine specialist jubilee hills"
+*   **Target:** `/locations/neurosurgeon-jubilee-hills` (New Page)
+*   **Rationale:** High income area, existing location data, missing page.
 
-* **Primary Keyword:** "neurosurgeon miyapur"
-* **Secondary Keywords:**
-  * "best neurosurgeon in miyapur"
-  * "spine surgeon miyapur"
-  * "neurosurgeon near miyapur"
-* **Target Page:** `/locations/neurosurgeon-miyapur` (New Page)
-* **Strategy:** Create a dedicated location landing page targeting patients in Miyapur, emphasizing accessibility to Dr. Sayuj at Malakpet (via Metro/ORR).
+### HYD | BOFU | SPINE | cost
+*   **Primary:** "spine surgery cost hyderabad"
+*   **Secondary:** "endoscopic spine surgery cost hyderabad"
+*   **Target:** `/services/spine-surgery-cost-hyderabad` (Existing)
+*   **Action:** Ensure keyword mapping is updated.
 
-### HYD | BOFU | LOCATIONS | neurosurgeon-dilsukhnagar | near-me
-
-* **Primary Keyword:** "neurosurgeon dilsukhnagar"
-* **Secondary Keywords:** "best neurosurgeon in dilsukhnagar", "spine surgeon dilsukhnagar"
-* **Target URL:** `/locations/neurosurgeon-dilsukhnagar`
-* **Strategy:** Create new location page. Leverage proximity to Malakpet (10 mins).
-
-### HYD | BOFU | LOCATIONS | neurosurgeon-vanasthalipuram | near-me
-
-* **Primary Keyword:** "neurosurgeon vanasthalipuram"
-* **Secondary Keywords:** "best spine doctor vanasthalipuram"
-* **Target URL:** `/locations/neurosurgeon-vanasthalipuram`
-* **Strategy:** Create new location page. Target patients traveling on NH65.
-
-## Updates to Existing Clusters
-
-* None for today.
+## Updates to Existing
+*   **sciatica treatment without surgery** -> `/conditions/sciatica-pain-treatment-hyderabad`
+*   **laminectomy recovery time** -> `/blog/microdiscectomy-vs-laminectomy-recovery-comparison`
