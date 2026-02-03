@@ -395,6 +395,44 @@ export default function MicrodiscectomySurgeryPage() {
           disclaimer="Estimates for self-pay patients at Yashoda Hospital Malakpet. Includes surgeon fees, hospital charges, and standard room. Implants (if needed) are extra."
         />
 
+        <section className="mb-16 bg-white border border-blue-100 rounded-2xl p-8 shadow-sm">
+          <div className="grid md:grid-cols-[2fr_1fr] gap-8 items-center">
+            <div>
+              <h2 className="text-3xl font-bold text-blue-900 mb-4">Insurance & Cashless Facility</h2>
+              <p className="text-gray-700 mb-4">
+                We understand that spine surgery is a significant financial decision. At Yashoda Hospital Malakpet, we accept <strong>all major health insurance providers and TPAs</strong>.
+              </p>
+              <ul className="space-y-2 mb-6 text-gray-700">
+                <li className="flex items-center">
+                  <span className="text-green-500 mr-2">✓</span>
+                  <span><strong>Cashless Treatment:</strong> Available for eligible policies (Star, HDFC Ergo, Bajaj Allianz, etc.)</span>
+                </li>
+                <li className="flex items-center">
+                  <span className="text-green-500 mr-2">✓</span>
+                  <span><strong>Government Schemes:</strong> We accept EHS (State Govt) and other notified schemes.</span>
+                </li>
+                <li className="flex items-center">
+                  <span className="text-green-500 mr-2">✓</span>
+                  <span><strong>Hassle-Free Process:</strong> Our dedicated Insurance Desk handles pre-authorization paperwork for you.</span>
+                </li>
+              </ul>
+              <p className="text-sm text-gray-500 italic">
+                *Please bring your Insurance Card and ID proof during consultation for eligibility check.
+              </p>
+            </div>
+            <div className="bg-blue-50 p-6 rounded-xl text-center border border-blue-100">
+              <h3 className="font-semibold text-blue-800 mb-2">Need Insurance Guidance?</h3>
+              <p className="text-sm text-gray-600 mb-4">Our coordinators can help check your policy coverage.</p>
+              <a
+                href="tel:+919778280044"
+                className="inline-block w-full bg-blue-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+              >
+                Call Insurance Desk
+              </a>
+            </div>
+          </div>
+        </section>
+
         <section className="mb-16 grid lg:grid-cols-[1.2fr_1fr] gap-10 items-start">
           <div className="space-y-6">
             <h2 className="text-3xl font-bold text-blue-900">Expert Care at Yashoda Malakpet</h2>

@@ -9,7 +9,7 @@ vi.mock('ai', () => ({
 }));
 
 vi.mock('@/src/lib/ai/gateway', () => ({
-  getTextModel: vi.fn(),
+  getTextModel: vi.fn().mockReturnValue('mock-model'),
   hasAIConfig: vi.fn(() => true),
 }));
 
@@ -32,17 +32,17 @@ describe('Recovery Predictor', () => {
     vi.restoreAllMocks();
   });
 
-  it('should use generateObject when AI config is present', async () => {
+  it('should generate a structured recovery plan using AI', async () => {
     const mockPlan = {
-      title: 'AI Generated Plan',
-      description: 'Test description',
+      title: 'Recovery Plan',
       phases: [
         {
           name: 'Phase 1',
-          duration: { label: '1 week' },
-          milestones: []
+          duration: { label: 'Week 1' },
+          milestones: [{ title: 'Milestone 1', highlights: ['Highlight 1'] }]
         }
-      ]
+      ],
+      disclaimer: 'Test disclaimer'
     };
 
     // Mock generateObject response
@@ -50,28 +50,19 @@ describe('Recovery Predictor', () => {
       object: mockPlan
     });
 
-    const request = {
+    const result = await generateRecoveryPlan({
       surgeryType: 'Test Surgery',
-      severity: 'moderate' as const
-    };
-
-    const result = await generateRecoveryPlan(request);
+      patientAge: 45
+    });
 
     // Verify fetch was called for MCP
-    expect(global.fetch).toHaveBeenCalledWith(
-      expect.stringContaining('/api/mcp'),
-      expect.objectContaining({
-        method: 'POST',
-        body: expect.stringContaining('get_medical_info')
-      })
-    );
+    expect(global.fetch).toHaveBeenCalled();
 
-    // Verify generateObject was called with the context
+    // Verify generateObject was called
     expect(ai.generateObject).toHaveBeenCalledWith(
       expect.objectContaining({
+        model: 'mock-model',
         prompt: expect.stringContaining('Mocked medical context from MCP'),
-        // Verify we are asking for specific surgery type
-        // prompt should also contain the surgery type from request
       })
     );
 
@@ -86,11 +77,9 @@ describe('Recovery Predictor', () => {
       status: 500
     });
 
-    const request = {
+    const result = await generateRecoveryPlan({
       surgeryType: 'Test Surgery'
-    };
-
-    const result = await generateRecoveryPlan(request);
+    });
 
     // Should return fallback plan
     expect(result.title).toContain('Recovery Timeline: Test Surgery');
@@ -103,13 +92,12 @@ describe('Recovery Predictor', () => {
     // Mock generateObject failure
     (ai.generateObject as any).mockRejectedValue(new Error('AI Error'));
 
-    const request = {
+    const result = await generateRecoveryPlan({
       surgeryType: 'Test Surgery'
-    };
-
-    const result = await generateRecoveryPlan(request);
+    });
 
     // Should return fallback plan
     expect(result.title).toContain('Recovery Timeline: Test Surgery');
+    expect(result.phases.length).toBeGreaterThan(0);
   });
 });

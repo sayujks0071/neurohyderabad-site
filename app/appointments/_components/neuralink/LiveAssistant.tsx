@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { GoogleGenAI, Modality } from "@google/genai";
 import { Mic, MicOff, X, MessageSquare, Volume2, Activity, Brain } from "lucide-react";
+import { analytics } from "@/src/lib/analytics";
 import { createBlob, decode, decodeAudioData } from "./audioUtils";
 
 const apiKey =
@@ -57,6 +58,7 @@ const LiveAssistant = ({
         model: "gemini-2.5-flash-native-audio-preview-12-2025",
         callbacks: {
           onopen: () => {
+            analytics.aiAssistant.start();
             setIsActive(true);
             setIsConnecting(false);
             setStatus("Active connection established");
@@ -118,6 +120,7 @@ const LiveAssistant = ({
           },
           onerror: (error) => {
             console.error("Live API Error:", error);
+            analytics.aiAssistant.error(error.message);
             setStatus("Connection lost");
             stopSession();
           },
@@ -154,6 +157,7 @@ const LiveAssistant = ({
 
   const stopSession = () => {
     if (sessionRef.current) {
+      analytics.aiAssistant.end();
       try {
         sessionRef.current.close();
       } catch (error) {

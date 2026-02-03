@@ -2,6 +2,7 @@ import { generateObject, jsonSchema } from 'ai';
 import { NextRequest, NextResponse } from 'next/server';
 import { getAllBlogPosts } from '@/src/lib/blog';
 import { getTextModel, hasAIConfig } from '@/src/lib/ai/gateway';
+import { rateLimit } from '@/src/lib/rate-limit';
 
 /**
  * Content Recommendation API using Vercel AI SDK
@@ -9,6 +10,24 @@ import { getTextModel, hasAIConfig } from '@/src/lib/ai/gateway';
  * Recommends relevant blog posts/articles based on user query or current content
  */
 export async function POST(request: NextRequest) {
+  // 🛡️ Rate Limiting: 20 requests per minute per IP
+  const ip = request.headers.get('x-forwarded-for') ?? 'unknown';
+  const rateLimitResult = rateLimit(ip, 20, 60 * 1000);
+
+  if (!rateLimitResult.success) {
+    return NextResponse.json(
+      { error: 'Too many requests. Please try again later.' },
+      {
+        status: 429,
+        headers: {
+          'X-RateLimit-Limit': rateLimitResult.limit.toString(),
+          'X-RateLimit-Remaining': rateLimitResult.remaining.toString(),
+          'X-RateLimit-Reset': rateLimitResult.reset.toString(),
+        }
+      }
+    );
+  }
+
   let query = '';
   let currentSlug: string | undefined;
   let limit = 5;

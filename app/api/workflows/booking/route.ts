@@ -11,6 +11,7 @@ import type { BookingData } from "@/packages/appointment-form/types";
 import { sendConfirmationEmail, sendAdminNotificationEmail } from "@/src/lib/appointments/email";
 import { submitToGoogleSheets } from "@/src/lib/google-sheets";
 import { buildWebhookPayload, notifyAppointmentWebhooks } from "@/src/lib/appointments/webhooks";
+import { appointments } from "@/src/lib/db";
 
 type WorkflowAppointmentType = "new-consultation" | "follow-up" | "second-opinion";
 
@@ -86,6 +87,27 @@ export async function POST(request: NextRequest) {
     if (!adminEmailResult.success) {
       console.error(`[API] Failed to send admin notification: ${adminEmailResult.error}`);
     }
+
+    // 2.5 Save to Postgres Database
+    void appointments.create({
+      patient_name: booking.patientName,
+      patient_email: booking.email,
+      patient_phone: booking.phone,
+      preferred_date: booking.appointmentDate,
+      preferred_time: booking.appointmentTime,
+      appointment_type: appointmentType,
+      chief_complaint: chiefComplaint,
+      intake_notes: intakeNotes,
+      patient_age: Number(booking.age) || undefined,
+      patient_gender: booking.gender,
+      pain_score: booking.painScore,
+      mri_scan_available: booking.mriScanAvailable,
+      source: source || "website",
+      confirmation_message: confirmationMessage,
+      used_ai_confirmation: usedAI,
+    }).catch((error) => {
+      console.error("[API] Failed to save to Postgres:", error);
+    });
 
     // 3. Sync to Google Sheets (CRM)
     const sheetsResult = await submitToGoogleSheets({

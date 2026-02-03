@@ -16,13 +16,13 @@ export const dynamicParams = false;
 export const revalidate = 86400;
 
 export const metadata = {
-  title: "Neurosurgeon in Malakpet, Hyderabad | Daycare Spine Surgery",
+  title: "Dr. Sayuj Krishnan - Neurosurgeon in Malakpet | Yashoda Hospitals",
   description:
     "Dr. Sayuj Krishnan at Yashoda Hospital Malakpet offers Daycare Endoscopic Spine Surgery, brain tumor care, and 24/7 emergency neurosurgery. Book a visit.",
   keywords: "neurosurgeon malakpet, yashoda hospital malakpet neurosurgeon, spine surgeon malakpet, daycare spine surgery malakpet, endoscopic spine surgery malakpet",
   alternates: { canonical: "https://www.drsayuj.info/neurosurgeon-malakpet" },
   openGraph: {
-    title: "Neurosurgeon in Malakpet | Brain & Spine Specialist | Dr. Sayuj",
+    title: "Dr. Sayuj Krishnan - Neurosurgeon in Malakpet | Yashoda Hospitals",
     description: "Neurosurgeon at Yashoda Hospital Malakpet with endoscopic spine surgery and brain tumor expertise.",
     url: "https://www.drsayuj.info/neurosurgeon-malakpet",
     type: "website",
@@ -85,78 +85,160 @@ export default function MalakpetNeurosurgeonPage() {
     <main className="bg-white">
       <LocationSchema location={location} breadcrumb={breadcrumb} faq={FAQ} />
 
+      {/* Hero Section */}
       <section className="bg-gradient-to-r from-blue-600 to-blue-800 py-12 text-white">
         <div className="mx-auto max-w-5xl px-4">
-          <p className="text-sm uppercase tracking-wide text-blue-100">
+          <p className="text-sm uppercase tracking-wide text-blue-100 font-semibold mb-2">
             Yashoda Hospital Malakpet · Hyderabad
           </p>
-          <h1 className="mt-4 text-3xl font-bold md:text-5xl leading-tight">
-            Neurosurgeon in Malakpet &<br className="hidden md:block" /> Brain-Spine Specialist
+          <h1 className="text-3xl font-bold md:text-5xl leading-tight text-white">
+            Dr. Sayuj Krishnan - Neurosurgeon in Malakpet <span className="opacity-80 font-light block text-2xl md:text-3xl mt-2">& Brain-Spine Specialist</span>
           </h1>
-          <p className="mt-4 text-xl text-blue-50">
-            Dr. Sayuj Krishnan – Your Local Neurosurgeon at Yashoda Hospital Malakpet. Full Endoscopic Spine Surgery • Brain Tumor Surgery • 24/7 Emergency Care • 9+ Years Experience
+          <p className="mt-4 text-xl text-blue-50 max-w-3xl">
+            Fellowship-trained Expert in <strong>Minimally Invasive Spine Surgery</strong> & <strong>Brain Tumor Removal</strong>.
+            Practicing at Yashoda Hospital Malakpet with 24/7 Emergency Care.
           </p>
-          <div className="mt-6">
+          <div className="mt-8">
              <LocationCTAs location={location} />
           </div>
         </div>
       </section>
 
+      {/* Doctor Stats / At a Glance */}
+      <section className="bg-blue-50 border-b border-blue-100 py-6">
+        <div className="mx-auto max-w-5xl px-4">
+           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center divide-x divide-blue-200/50">
+              <div className="p-2">
+                 <div className="text-2xl md:text-3xl font-bold text-blue-700">9+</div>
+                 <div className="text-sm text-gray-600 font-medium">Years Experience</div>
+              </div>
+              <div className="p-2">
+                 <div className="text-2xl md:text-3xl font-bold text-blue-700">1000+</div>
+                 <div className="text-sm text-gray-600 font-medium">Successful Surgeries</div>
+              </div>
+               <div className="p-2">
+                 <div className="text-2xl md:text-3xl font-bold text-blue-700">4.9/5</div>
+                 <div className="text-sm text-gray-600 font-medium">Patient Rating</div>
+              </div>
+               <div className="p-2">
+                 <div className="text-xl md:text-2xl font-bold text-blue-700">German</div>
+                 <div className="text-sm text-gray-600 font-medium">Fellowship Trained</div>
+              </div>
+           </div>
+        </div>
+      </section>
+
       <section className="mx-auto max-w-5xl px-4 py-12">
-        <div className="grid gap-8 md:grid-cols-2">
+        <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr]">
           {/* Left Column: Intro & Trust */}
           <div>
-            <h2 className="text-2xl font-bold text-gray-900">
-              Expert Neurosurgical Care Right in Malakpet
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+              World-Class Neurosurgical Care in Malakpet
             </h2>
-            <p className="mt-4 text-gray-700">
-              Dr. Sayuj Krishnan brings world-class neurosurgical expertise to <strong>Malakpet</strong>, 
-              one of Hyderabad's most accessible neighborhoods. Our clinic at Yashoda Hospital Malakpet 
-              offers the full spectrum of brain and spine surgery services—from minimally invasive daycare 
-              procedures to complex brain tumor resections.
+            <p className="text-gray-700 leading-relaxed mb-4">
+              Residents of <strong>Malakpet, Dilsukhnagar, and LB Nagar</strong> no longer need to travel far for advanced brain and spine care.
+              <strong>Dr. Sayuj Krishnan</strong> brings international expertise to the heart of Malakpet at Yashoda Hospitals.
             </p>
-            <p className="mt-4 text-gray-700">
-              Conveniently located on Alexander Road in the heart of Malakpet, we serve patients from 
-              Dilsukhnagar, LB Nagar, Charminar, Moosarambagh, and surrounding areas. As a fellowship-trained 
-              neurosurgeon with German training in endoscopic spine surgery, Dr. Sayuj offers cutting-edge 
-              minimally invasive techniques with same-day discharge for most spine procedures.
+            <p className="text-gray-700 leading-relaxed mb-6">
+              Specializing in <strong>Keyhole (Endoscopic) Spine Surgery</strong>, Dr. Sayuj treats slip discs and sciatica without major open surgery.
+              Most patients walk within hours and go home the same day. He is also a leading expert in <strong>Neuronavigation-guided Brain Tumor Surgery</strong>, ensuring maximum safety for delicate brain procedures.
             </p>
             
-            <div className="mt-6 rounded-lg border border-blue-200 bg-blue-50 p-6">
-              <h3 className="font-semibold text-blue-800">Why Choose Our Malakpet Clinic:</h3>
-              <ul className="mt-3 space-y-2 text-blue-900">
-                <li>✓ <strong>Centrally located</strong> at Yashoda Hospital Malakpet</li>
-                <li>✓ <strong>9+ years</strong> neurosurgical experience</li>
-                <li>✓ <strong>German fellowship</strong> in endoscopic spine surgery</li>
-                <li>✓ <strong>Same-day discharge</strong> for most spine procedures</li>
-                <li>✓ <strong>24/7 emergency</strong> neurosurgical care</li>
-                <li>✓ <strong>All major insurance</strong> accepted (cashless TPA)</li>
-                <li>✓ <strong>Ample parking</strong> and easy access</li>
+            <div className="rounded-xl border border-blue-100 bg-blue-50/50 p-6 mb-8">
+              <h3 className="font-semibold text-blue-900 mb-3 text-lg">Why Choose Dr. Sayuj at Yashoda Malakpet?</h3>
+              <ul className="grid sm:grid-cols-2 gap-3">
+                {[
+                  "Fellowship Trained in Germany",
+                  "Minimally Invasive Specialist",
+                  "24/7 Trauma Availability",
+                  "State-of-the-art ICU Backing",
+                  "Advanced 4K Endoscopy Suite",
+                  "Patient-First Approach"
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center text-gray-800 text-sm">
+                    <span className="text-blue-500 mr-2 font-bold">✓</span>
+                    {item}
+                  </li>
+                ))}
               </ul>
             </div>
 
-            {/* NEW: Daycare Spine Surgery USP */}
-            <div className="mt-8">
-              <h3 className="text-xl font-bold text-gray-900">Why Daycare Spine Surgery at Malakpet?</h3>
-              <p className="mt-2 text-gray-700">
-                Unlike traditional open spine surgery, our <strong>endoscopic techniques</strong> (keyhole surgery) allow for:
-              </p>
-              <ul className="mt-3 grid gap-3 sm:grid-cols-2">
+            {/* Services Grid (Improved) */}
+            <div className="mb-10">
+               <h3 className="text-xl font-bold text-gray-900 mb-6">Specialized Services</h3>
+               <div className="grid sm:grid-cols-2 gap-4">
+                  <div className="border border-gray-200 rounded-xl p-5 hover:border-blue-400 hover:shadow-md transition-all bg-white group">
+                     <h4 className="font-bold text-blue-900 group-hover:text-blue-700 mb-2">Endoscopic Spine Surgery</h4>
+                     <p className="text-sm text-gray-600 mb-3">Stitchless "keyhole" surgery for Slip Disc & Sciatica. <span className="text-green-600 font-semibold text-xs bg-green-50 px-2 py-0.5 rounded">Daycare</span></p>
+                     <Link href="/services/endoscopic-spine-surgery-hyderabad" className="text-blue-600 text-sm font-semibold hover:underline">Learn more →</Link>
+                  </div>
+                  <div className="border border-gray-200 rounded-xl p-5 hover:border-blue-400 hover:shadow-md transition-all bg-white group">
+                     <h4 className="font-bold text-blue-900 group-hover:text-blue-700 mb-2">Brain Tumor Surgery</h4>
+                     <p className="text-sm text-gray-600 mb-3">Safe removal of complex tumors using Neuronavigation & Microscope.</p>
+                     <Link href="/services/brain-tumor-surgery-hyderabad" className="text-blue-600 text-sm font-semibold hover:underline">Learn more →</Link>
+                  </div>
+                   <div className="border border-gray-200 rounded-xl p-5 hover:border-blue-400 hover:shadow-md transition-all bg-white group">
+                     <h4 className="font-bold text-blue-900 group-hover:text-blue-700 mb-2">Spine Fixation (TLIF)</h4>
+                     <p className="text-sm text-gray-600 mb-3">Stabilization for Spondylolisthesis and Spine Fractures.</p>
+                     <Link href="/services/spinal-fusion-surgery-hyderabad" className="text-blue-600 text-sm font-semibold hover:underline">Learn more →</Link>
+                  </div>
+                   <div className="border border-gray-200 rounded-xl p-5 hover:border-blue-400 hover:shadow-md transition-all bg-white group">
+                     <h4 className="font-bold text-blue-900 group-hover:text-blue-700 mb-2">Emergency Neuro-Trauma</h4>
+                     <p className="text-sm text-gray-600 mb-3">Immediate care for Head Injuries, EDH, SDH, and Spine Trauma.</p>
+                     <Link href="/emergency-rehabilitation" className="text-blue-600 text-sm font-semibold hover:underline">Learn more →</Link>
+                  </div>
+               </div>
+            </div>
+
+            {/* Insurance Section (New) */}
+            <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm mb-10">
+               <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                  <span className="bg-green-100 text-green-700 p-1.5 rounded-lg mr-3">
+                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                  </span>
+                  Insurance & Cashless Treatment
+               </h3>
+               <p className="text-gray-700 mb-4 text-sm">
+                  We accept all major health insurance providers and TPA services at Yashoda Hospitals Malakpet.
+                  Our dedicated insurance desk assists with:
+               </p>
+               <div className="grid grid-cols-2 gap-y-2 text-sm text-gray-600 font-medium">
+                  <div className="flex items-center">✓ Star Health</div>
+                  <div className="flex items-center">✓ HDFC Ergo</div>
+                  <div className="flex items-center">✓ ICICI Lombard</div>
+                  <div className="flex items-center">✓ Care Insurance</div>
+                  <div className="flex items-center">✓ Bajaj Allianz</div>
+                  <div className="flex items-center">✓ Govt. Schemes (EHS)</div>
+               </div>
+               <p className="text-xs text-gray-500 mt-4 border-t pt-3">
+                  *Subject to policy terms and approval. Please carry your insurance card for cashless admission.
+               </p>
+            </div>
+
+            {/* Daycare USP */}
+            <div className="mb-8">
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Why Patients Prefer Daycare Spine Surgery</h3>
+              <ul className="space-y-3">
                 <li className="flex items-start bg-gray-50 p-3 rounded-lg border border-gray-100">
                   <span className="text-green-500 mr-2 font-bold">✓</span>
-                  <span className="text-sm text-gray-800"><strong>Stitchless:</strong> Tiny 6-8mm incision</span>
+                  <div>
+                     <strong className="text-gray-900 block text-sm">Smallest Incision (6-8mm)</strong>
+                     <span className="text-sm text-gray-600">No large cuts, minimal scarring.</span>
+                  </div>
                 </li>
                 <li className="flex items-start bg-gray-50 p-3 rounded-lg border border-gray-100">
                   <span className="text-green-500 mr-2 font-bold">✓</span>
-                  <span className="text-sm text-gray-800"><strong>Fast Recovery:</strong> Walk within 3 hours</span>
+                  <div>
+                     <strong className="text-gray-900 block text-sm">Rapid Recovery</strong>
+                     <span className="text-sm text-gray-600">Walk within 2 hours, discharge same/next day.</span>
+                  </div>
                 </li>
-                <li className="flex items-start bg-gray-50 p-3 rounded-lg border border-gray-100">
+                 <li className="flex items-start bg-gray-50 p-3 rounded-lg border border-gray-100">
                   <span className="text-green-500 mr-2 font-bold">✓</span>
-                  <span className="text-sm text-gray-800"><strong>Reduced Pain:</strong> Minimal tissue damage</span>
-                </li>
-                <li className="flex items-start bg-gray-50 p-3 rounded-lg border border-gray-100">
-                  <span className="text-green-500 mr-2 font-bold">✓</span>
-                  <span className="text-sm text-gray-800"><strong>Home Same Day:</strong> No long hospital stay</span>
+                  <div>
+                     <strong className="text-gray-900 block text-sm">No Muscle Cutting</strong>
+                     <span className="text-sm text-gray-600">Muscles are dilated, not cut, preserving back strength.</span>
+                  </div>
                 </li>
               </ul>
               <div className="mt-4">
@@ -167,58 +249,43 @@ export default function MalakpetNeurosurgeonPage() {
             </div>
           </div>
 
-          {/* Right Column: Emergency & Services */}
+          {/* Right Column: Sidebar */}
           <div className="space-y-6">
             {/* Emergency Alert Section */}
-            <div className="rounded-lg border-l-4 border-red-500 bg-red-50 p-6 shadow-sm">
+            <div className="rounded-lg border-l-4 border-red-500 bg-red-50 p-5 shadow-sm">
                 <div className="flex items-start">
-                    <div className="flex-shrink-0">
-                        <svg className="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <div className="flex-shrink-0 mt-1">
+                        <svg className="h-5 w-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                         </svg>
                     </div>
                     <div className="ml-3">
-                        <h3 className="text-lg font-bold text-red-800">24/7 Emergency Care</h3>
-                        <p className="mt-1 text-sm text-red-700">
-                            Available round-the-clock at Yashoda Hospital Malakpet for:
+                        <h3 className="text-base font-bold text-red-800">24/7 Emergency</h3>
+                        <p className="mt-1 text-sm text-red-700 font-medium">
+                            Yashoda Hospital Malakpet
                         </p>
-                        <ul className="mt-2 list-disc pl-5 text-sm text-red-800">
-                            <li>Head Injuries (Trauma)</li>
-                            <li>Stroke / Brain Bleeds</li>
-                            <li>Spine Fractures & Paralysis</li>
-                        </ul>
+                        <p className="text-xs text-red-800 mt-1">Trauma • Stroke • Spine Fracture</p>
+                        <a href={`tel:${location.telephone}`} className="block mt-3 text-center bg-red-600 text-white text-sm font-bold py-2 rounded shadow hover:bg-red-700 transition">
+                           Call Emergency
+                        </a>
                     </div>
                 </div>
             </div>
 
-            <TrustProof stories={relevantStories} className="border-blue-100 shadow-lg" />
+            <TrustProof stories={relevantStories} className="border-blue-100 shadow-md" />
 
-            <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-lg">
-              <h3 className="text-xl font-semibold text-blue-700">
-                Comprehensive Neurosurgical Services
-              </h3>
-              <div className="mt-4 space-y-4">
-                <div>
-                  <h4 className="font-semibold text-gray-900">Full Endoscopic Spine Surgery</h4>
-                  <p className="text-sm text-gray-600">Minimally invasive spine surgery through 6-8mm incision. Includes <strong>Endoscopic Discectomy</strong> and <strong>Endoscopic ULBD</strong>.</p>
-                  <Link href="/services/endoscopic-spine-surgery-hyderabad" className="text-sm text-blue-600 hover:underline">Learn more →</Link>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900">Brain Tumor Surgery</h4>
-                  <p className="text-sm text-gray-600">Advanced microsurgical techniques with neuronavigation.</p>
-                  <Link href="/conditions/brain-tumor-surgery-hyderabad" className="text-sm text-blue-600 hover:underline">Learn more →</Link>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900">Spinal Fixation & Fusion</h4>
-                  <p className="text-sm text-gray-600">Including <strong>MIS TLIF</strong> for spondylolisthesis and fractures.</p>
-                  <Link href="/services/spinal-fusion-surgery-hyderabad" className="text-sm text-blue-600 hover:underline">Learn more →</Link>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900">Trauma & Fracture Care</h4>
-                  <p className="text-sm text-gray-600">Emergency fixation for <strong>spine fractures</strong> and <strong>head injury</strong> management.</p>
-                  <Link href="/emergency-rehabilitation" className="text-sm text-blue-600 hover:underline">Learn more →</Link>
-                </div>
-              </div>
+            <div className="rounded-xl border border-gray-200 bg-gray-50 p-6">
+                <h3 className="font-bold text-gray-900 mb-3">Clinic Location</h3>
+                <LocationMapEmbed location={location} className="rounded-lg shadow-sm mb-3" />
+                <p className="text-sm text-gray-600 mb-2">
+                   <strong>Yashoda Hospitals</strong><br/>
+                   Nalgonda X Roads, Malakpet<br/>
+                   Hyderabad, Telangana 500036
+                </p>
+                <a href={location.directions_url} target="_blank" rel="noopener noreferrer" className="text-blue-600 text-sm font-semibold hover:underline flex items-center">
+                   <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd"></path></svg>
+                   Get Directions
+                </a>
             </div>
           </div>
         </div>
@@ -227,13 +294,13 @@ export default function MalakpetNeurosurgeonPage() {
       {/* NEW: Conditions Treated Grid */}
       <section className="bg-gray-50 py-12 border-y border-gray-100">
         <div className="mx-auto max-w-5xl px-4">
-           <h2 className="text-2xl font-bold text-gray-900 mb-2">Conditions We Treat at Malakpet</h2>
-           <p className="text-gray-600 mb-8">Specialized care for common and complex brain and spine disorders.</p>
-           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+           <h2 className="text-2xl font-bold text-gray-900 mb-2">Conditions We Treat</h2>
+           <p className="text-gray-600 mb-8">Comprehensive care for common and complex neurological disorders.</p>
+           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
               {commonConditions.map((condition, idx) => (
-                  <Link key={idx} href={condition.url} className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 flex items-center hover:shadow-md transition-shadow group">
+                  <Link key={idx} href={condition.url} className="bg-white px-4 py-3 rounded-lg border border-gray-200 flex items-center hover:border-blue-400 hover:shadow-sm transition-all group">
                       <span className="text-blue-500 mr-2 group-hover:text-blue-700">•</span>
-                      <span className="font-medium text-gray-800 group-hover:text-blue-700">{condition.name}</span>
+                      <span className="font-medium text-gray-800 text-sm group-hover:text-blue-700">{condition.name}</span>
                   </Link>
               ))}
            </div>
@@ -243,17 +310,17 @@ export default function MalakpetNeurosurgeonPage() {
       {/* Second Opinion CTA */}
       <section className="bg-green-50 border-y border-green-100 py-10">
           <div className="mx-auto max-w-4xl px-4 text-center">
-              <h2 className="text-2xl font-bold text-green-900">Advised Spine Surgery in Malakpet or Dilsukhnagar?</h2>
+              <h2 className="text-2xl font-bold text-green-900">Advised Spine Surgery?</h2>
               <p className="mt-3 text-lg text-green-800">
-                  Before you proceed, get a <strong>Second Opinion</strong> from Dr. Sayuj. Explore minimally invasive "Keyhole" options that may avoid open surgery.
-                  Bring your MRI reports for a comprehensive review.
+                  Before you proceed, get a <strong>Second Opinion</strong> from Dr. Sayuj at Yashoda Malakpet.
+                  Explore minimally invasive "Keyhole" options that may avoid open surgery.
               </p>
               <div className="mt-6 flex justify-center gap-4">
-                  <a href={`tel:${location.telephone}`} className="rounded-full bg-green-600 px-6 py-3 font-semibold text-white hover:bg-green-700">
-                      Call for Appointment
+                  <a href={`tel:${location.telephone}`} className="rounded-full bg-green-600 px-6 py-3 font-semibold text-white hover:bg-green-700 shadow-md transition-all">
+                      Book Consultation
                   </a>
-                  <a href={`https://wa.me/${whatsappNumber}?text=Hi%20Dr%20Sayuj,%20I%20am%20at%20Malakpet%20and%20need%20a%20second%20opinion`} className="rounded-full border border-green-600 px-6 py-3 font-semibold text-green-700 hover:bg-green-100">
-                      WhatsApp Us
+                  <a href={`https://wa.me/${whatsappNumber}?text=Hi%20Dr%20Sayuj,%20I%20am%20at%20Malakpet%20and%20need%20a%20second%20opinion`} className="rounded-full border-2 border-green-600 px-6 py-3 font-semibold text-green-700 hover:bg-green-100 transition-all">
+                      WhatsApp Chat
                   </a>
               </div>
           </div>
@@ -262,133 +329,99 @@ export default function MalakpetNeurosurgeonPage() {
       <section className="bg-white py-12">
         <div className="mx-auto max-w-5xl px-4">
           <h2 className="mb-8 text-center text-2xl font-bold text-gray-900 md:text-3xl">
-            Meet Your Expert Neurosurgeon in Malakpet
+            Meet Dr. Sayuj Krishnan
           </h2>
           <div className="grid gap-8 items-center md:grid-cols-2">
              <div>
-                <h3 className="mb-2 text-xl font-semibold text-blue-800">Dr. Sayuj Krishnan</h3>
-                <p className="mb-4 font-medium text-gray-600 text-lg">Consultant Neurosurgeon & Spine Surgeon</p>
-                <p className="mb-4 text-gray-700">
+                <h3 className="mb-2 text-xl font-semibold text-blue-800">Consultant Neurosurgeon</h3>
+                <p className="mb-4 text-gray-700 text-lg leading-relaxed">
                   With over <strong>9 years of experience</strong> and specialized <strong>German training</strong>,
                   Dr. Sayuj brings international standards of neurosurgical care to Malakpet. He has performed
-                  over <strong>1,000 successful endoscopic procedures</strong>.
+                  over <strong>1,000 successful procedures</strong>, prioritizing patient safety and quick recovery.
                 </p>
 
-                <div className="bg-blue-50 rounded-lg p-5 border border-blue-100">
-                   <h4 className="font-semibold text-blue-900 mb-3">Credentials & Qualifications</h4>
-                   <ul className="space-y-2">
+                <div className="bg-blue-50 rounded-xl p-5 border border-blue-100">
+                   <h4 className="font-semibold text-blue-900 mb-3">Credentials</h4>
+                   <ul className="space-y-2 text-sm text-gray-700">
                        <li className="flex items-start">
-                          <span className="font-bold text-blue-600 mr-2">MD</span>
-                          <span className="text-gray-700">MBBS, DNB Neurosurgery (6-Year Direct Course)</span>
+                          <span className="font-bold text-blue-600 w-24">MD</span>
+                          <span>MBBS, DNB Neurosurgery (6-Year Direct Course)</span>
                        </li>
                        <li className="flex items-start">
-                          <span className="font-bold text-blue-600 mr-2">Fellowship</span>
-                          <span className="text-gray-700">Minimally Invasive Spine Surgery</span>
+                          <span className="font-bold text-blue-600 w-24">Fellowship</span>
+                          <span>Minimally Invasive Spine Surgery</span>
                        </li>
                        <li className="flex items-start">
-                          <span className="font-bold text-blue-600 mr-2">Training</span>
-                          <span className="text-gray-700">Full Endoscopic Spine Surgery (RIWOspine, Germany)</span>
-                       </li>
-                       <li className="flex items-start">
-                          <span className="font-bold text-blue-600 mr-2">Member</span>
-                          <span className="text-gray-700">AO Spine (International), NSI (India)</span>
+                          <span className="font-bold text-blue-600 w-24">Training</span>
+                          <span>Full Endoscopic Spine Surgery (RIWOspine, Germany)</span>
                        </li>
                    </ul>
                 </div>
              </div>
-             <div className="rounded-lg border border-gray-100 bg-white p-6 shadow-md">
-                <h4 className="mb-4 font-semibold text-gray-900">Specialized Expertise</h4>
-                <ul className="space-y-2 text-gray-700">
-                   <li>• <strong>Endoscopic Spine Surgery:</strong> For slip disc & sciatica (stitchless).</li>
-                   <li>• <strong>Brain Tumor Surgery:</strong> Advanced microsurgery & awake craniotomy.</li>
-                   <li>• <strong>Trigeminal Neuralgia:</strong> Microvascular decompression.</li>
-                   <li>• <strong>Spinal Fixation:</strong> For fractures and instability.</li>
-                   <li>• <strong>Pediatric Neurosurgery:</strong> Specialized care for children.</li>
+             <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-lg relative overflow-hidden">
+                <div className="absolute top-0 right-0 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
+                   TRUSTED EXPERT
+                </div>
+                <h4 className="mb-4 font-semibold text-gray-900 text-lg">Specialized Expertise</h4>
+                <ul className="space-y-3 text-gray-700">
+                   <li className="flex items-center"><span className="text-blue-500 mr-2">●</span> Endoscopic Spine Surgery</li>
+                   <li className="flex items-center"><span className="text-blue-500 mr-2">●</span> Brain Tumor Microsurgery</li>
+                   <li className="flex items-center"><span className="text-blue-500 mr-2">●</span> Trigeminal Neuralgia MVD</li>
+                   <li className="flex items-center"><span className="text-blue-500 mr-2">●</span> Spinal Fixation & Trauma</li>
+                   <li className="flex items-center"><span className="text-blue-500 mr-2">●</span> Pediatric Neurosurgery</li>
                 </ul>
                 <div className="mt-6 border-t border-gray-100 pt-6">
                    <p className="mb-1 text-sm text-gray-500">Practicing at:</p>
-                   <p className="font-semibold text-blue-900">Yashoda Hospitals, Malakpet</p>
-                   <p className="text-sm text-gray-600">Room 317, OPD Block</p>
+                   <p className="font-bold text-blue-900 text-lg">Yashoda Hospitals, Malakpet</p>
                 </div>
              </div>
           </div>
         </div>
       </section>
 
-      <section className="py-12">
+      <section className="py-12 bg-gray-50">
         <div className="mx-auto max-w-5xl px-4">
-          <h2 className="text-2xl font-bold text-gray-900">Visit Us at Yashoda Hospital Malakpet</h2>
+          <h2 className="text-2xl font-bold text-gray-900">Visit Us</h2>
           <div className="mt-8 grid gap-8 md:grid-cols-2">
             <div>
-              <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-lg">
+              <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
                 <LocationNAPCard location={location} />
                 
                 <div className="mt-6 border-t pt-4">
-                  <h4 className="font-semibold text-gray-900">OPD Timings</h4>
-                  <ul className="mt-2 space-y-1 text-gray-700">
-                    <li>• Monday – Saturday: 10:00 AM – 4:00 PM</li>
-                    <li>• Emergency: 24×7 via hospital</li>
-                    <li>• Teleconsultation: Available</li>
+                  <h4 className="font-semibold text-gray-900 mb-2">OPD Timings</h4>
+                  <ul className="space-y-1 text-sm text-gray-700">
+                    <li className="flex justify-between"><span>Mon - Sat:</span> <span className="font-medium">10:00 AM – 4:00 PM</span></li>
+                    <li className="flex justify-between text-red-600"><span>Emergency:</span> <span className="font-bold">24×7 Available</span></li>
                   </ul>
                 </div>
-              </div>
-              
-              <div className="mt-6 rounded-lg border border-blue-200 bg-blue-50 p-4">
-                <h4 className="font-semibold text-blue-800">Areas Served</h4>
-                <p className="mt-2 text-sm text-blue-900 mb-2">
-                  Convenient for patients from:
-                </p>
-                <ul className="grid grid-cols-2 gap-x-2 gap-y-1 text-sm text-blue-900">
-                  <li>• Dilsukhnagar</li>
-                  <li>• Amberpet</li>
-                  <li>• Saidabad</li>
-                  <li>• Chaderghat</li>
-                  <li>• Santosh Nagar</li>
-                  <li>• Champapet</li>
-                  <li>• Moosarambagh</li>
-                  <li>• LB Nagar</li>
-                </ul>
               </div>
             </div>
 
             <div>
-              <h3 className="text-xl font-semibold text-blue-700">Location Map</h3>
-               <LocationMapEmbed location={location} className="mt-4 shadow-lg" />
-              
-              <div className="mt-6 rounded-lg border border-green-200 bg-green-50 p-4">
-                <h4 className="font-semibold text-green-800">Public Transport</h4>
-                <p className="mt-2 text-sm text-green-900">
-                  <strong>Nearest Metro:</strong> Malakpet Station (Green Line) – 10 min walk<br />
-                  <strong>Bus Routes:</strong> Multiple TSRTC buses serve Malakpet area<br />
-                  <strong>Auto/Taxi:</strong> Easily available 24/7
-                </p>
-              </div>
+              <h3 className="text-xl font-semibold text-blue-700 mb-4">Frequently Asked Questions</h3>
+               <div className="space-y-3">
+                {FAQ.map(({ q, a }) => (
+                    <details key={q} className="rounded-lg border border-gray-200 bg-white p-3 shadow-sm group">
+                    <summary className="cursor-pointer font-semibold text-gray-800 text-sm flex justify-between items-center">
+                        {q}
+                        <span className="text-blue-500 group-open:rotate-180 transition-transform">▼</span>
+                    </summary>
+                    <p className="mt-2 text-sm text-gray-600 leading-relaxed">{a}</p>
+                    </details>
+                ))}
+               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-5xl px-4 py-12">
-        <h2 className="text-2xl font-bold text-gray-900">
-          Frequently Asked Questions
-        </h2>
-        <div className="mt-6 space-y-4">
-          {FAQ.map(({ q, a }) => (
-            <details key={q} className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
-              <summary className="cursor-pointer font-semibold text-blue-700">{q}</summary>
-              <p className="mt-3 text-gray-700">{a}</p>
-            </details>
-          ))}
-        </div>
-      </section>
-
-      <section className="bg-blue-50 py-12">
+      <section className="bg-blue-900 py-12 text-white">
         <div className="mx-auto max-w-5xl px-4 text-center">
-          <h2 className="text-2xl font-bold text-gray-900">Book Your Consultation Today</h2>
-          <p className="mt-4 text-lg text-gray-700">
-            Expert neurosurgical care right in Malakpet at Yashoda Hospital.
+          <h2 className="text-2xl font-bold mb-4">Book Your Appointment</h2>
+          <p className="mb-8 text-blue-200 text-lg">
+            Skip the waiting time. Book your slot online or via WhatsApp.
           </p>
-          <div className="mt-6">
+          <div className="flex justify-center">
              <LocationCTAs location={location} />
           </div>
         </div>
