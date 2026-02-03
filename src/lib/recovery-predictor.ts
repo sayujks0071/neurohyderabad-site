@@ -1,7 +1,7 @@
-import { RecoveryPlan } from '@/src/types/recovery-timeline';
 import { generateObject } from 'ai';
 import { z } from 'zod';
-import { getTextModel } from '@/src/lib/ai/gateway';
+import { getTextModel, hasAIConfig } from './ai/gateway';
+import { RecoveryPlan } from '@/src/types/recovery-timeline';
 
 /**
  * AI-Powered Recovery Predictor
@@ -65,9 +65,9 @@ const recoveryPlanSchema = z.object({
 });
 
 export async function generateRecoveryPlan(request: RecoveryPredictorRequest): Promise<RecoveryPlan> {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 
-                 (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 
-                 'http://localhost:3000');
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ||
+    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` :
+      'http://localhost:3000');
 
   try {
     // 1. Fetch clinical data via MCP tool
@@ -81,8 +81,8 @@ export async function generateRecoveryPlan(request: RecoveryPredictorRequest): P
         method: 'tools/call',
         params: {
           name: 'get_medical_info',
-          arguments: { 
-            query: `Detailed recovery timeline and milestones for ${request.surgeryType}${request.severity ? ` (${request.severity} case)` : ''}. Include immediate post-op, first week, and long-term milestones.` 
+          arguments: {
+            query: `Detailed recovery timeline and milestones for ${request.surgeryType}${request.severity ? ` (${request.severity} case)` : ''}. Include immediate post-op, first week, and long-term milestones.`
           }
         }
       })
@@ -103,27 +103,37 @@ export async function generateRecoveryPlan(request: RecoveryPredictorRequest): P
       system: `You are an expert neurosurgical recovery planner for Dr. Sayuj Krishnan.
       Create a detailed, personalized recovery plan based on the provided clinical context.
 
-      Patient Details:
-      - Surgery: ${request.surgeryType}
-      - Age: ${request.patientAge || 'Standard adult'}
-      - Severity: ${request.severity || 'Standard'}
-      ${request.comorbidities ? `- Comorbidities: ${request.comorbidities.join(', ')}` : ''}
+    // 2. Use AI Gateway to structure the content into a RecoveryPlan
+    if (hasAIConfig()) {
+      const { object } = await generateObject({
+        model: getTextModel(),
+        schema: recoveryPlanSchema,
+        system: `You are an expert neurosurgical recovery planner for Dr.Sayuj Krishnan.
+        Create a detailed, personalized recovery plan based on the provided clinical context.
+        Patient Details:
+        - Surgery: ${ request.surgeryType }
+    - Age: ${ request.patientAge || 'Standard adult' }
+    - Severity: ${ request.severity || 'Standard' }
+        ${ request.comorbidities ? `- Comorbidities: ${request.comorbidities.join(', ')}` : '' }
 
-      Guidelines:
-      - Divide recovery into clear phases (e.g., Immediate Post-Op, Week 1, Month 1, etc.).
-      - Include specific, actionable milestones.
-      - Ensure the tone is professional, reassuring, and clear.
-      - Use the provided context to ensure accuracy.`,
-      prompt: context ? `Clinical Context:\n${context}` : `Generate a standard recovery plan for ${request.surgeryType}.`,
-      temperature: 0.2, // Low temperature for consistency
-    });
+        Guidelines:
+      - Divide recovery into clear phases(e.g., Immediate Post - Op, Week 1, Month 1, etc.).
+        - Include specific, actionable milestones.
+        - Ensure the tone is professional, reassuring, and clear.
+        - Use the provided context to ensure accuracy.`,
+        prompt: context ? `Clinical Context: \n${ context }` : `Generate a standard recovery plan for ${ request.surgeryType }.`,
+        temperature: 0.2,
+      });
 
-    // Add disclaimer if not present
-    if (!object.disclaimer) {
-      object.disclaimer = "This timeline is a general guide. Individual recovery varies based on patient health and surgical complexity. Always follow Dr. Sayuj's specific post-operative instructions.";
+      // Add disclaimer if not present
+      if (!object.disclaimer) {
+        object.disclaimer = "This timeline is a general guide. Individual recovery varies based on patient health and surgical complexity. Always follow Dr. Sayuj's specific post-operative instructions.";
+      }
+
+      return object as RecoveryPlan;
     }
 
-    return object as RecoveryPlan;
+    return getFallbackPlan(request.surgeryType);
 
   } catch (error) {
     console.error('Failed to generate recovery plan:', error);
@@ -134,7 +144,7 @@ export async function generateRecoveryPlan(request: RecoveryPredictorRequest): P
 
 function getFallbackPlan(surgeryType: string): RecoveryPlan {
   return {
-    title: `Recovery Timeline: ${surgeryType}`,
+    title: `Recovery Timeline: ${ surgeryType } `,
     description: "Standard recovery guidelines. Please consult Dr. Sayuj for your personalized plan.",
     phases: [
       {

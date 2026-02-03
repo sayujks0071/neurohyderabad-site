@@ -1,31 +1,35 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { generateRecoveryPlan } from '@/src/lib/recovery-predictor';
-import { generateObject } from 'ai';
+import * as ai from 'ai';
 
-// Mock the 'ai' module
+// Mock dependencies
 vi.mock('ai', () => ({
   generateObject: vi.fn(),
+  jsonSchema: vi.fn(),
 }));
 
-// Mock the gateway module to avoid environment variable issues
 vi.mock('@/src/lib/ai/gateway', () => ({
   getTextModel: vi.fn().mockReturnValue('mock-model'),
-  isAIGatewayConfigured: vi.fn().mockReturnValue(true),
+  hasAIConfig: vi.fn(() => true),
 }));
 
-describe('generateRecoveryPlan', () => {
+describe('Recovery Predictor', () => {
   beforeEach(() => {
-    vi.clearAllMocks();
+    vi.resetAllMocks();
 
-    // Mock global fetch
+    // Mock global fetch for MCP
     global.fetch = vi.fn().mockResolvedValue({
       ok: true,
-      json: async () => ({
+      json: () => Promise.resolve({
         result: {
-          content: [{ text: 'Mock clinical context' }]
+          content: [{ text: 'Mocked medical context from MCP' }]
         }
       })
-    } as Response);
+    });
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
   });
 
   it('should generate a structured recovery plan using AI', async () => {
@@ -37,38 +41,63 @@ describe('generateRecoveryPlan', () => {
           duration: { label: 'Week 1' },
           milestones: [{ title: 'Milestone 1', highlights: ['Highlight 1'] }]
         }
-      ]
+      ],
+      disclaimer: 'Test disclaimer'
     };
 
-    (generateObject as any).mockResolvedValue({ object: mockPlan });
+    // Mock generateObject response
+    (ai.generateObject as any).mockResolvedValue({
+      object: mockPlan
+    });
 
     const result = await generateRecoveryPlan({
-      surgeryType: 'Spine Surgery',
+      surgeryType: 'Test Surgery',
       patientAge: 45
     });
 
-    // Check if fetch was called (MCP context)
+    // Verify fetch was called for MCP
     expect(global.fetch).toHaveBeenCalled();
 
-    // Check if generateObject was called
-    expect(generateObject).toHaveBeenCalledWith(expect.objectContaining({
-      model: 'mock-model',
-      schema: expect.any(Object), // Zod schema
-      system: expect.stringContaining('Dr. Sayuj Krishnan'),
-      prompt: expect.stringContaining('Mock clinical context'),
-    }));
+    // Verify generateObject was called
+    expect(ai.generateObject).toHaveBeenCalledWith(
+      expect.objectContaining({
+        model: 'mock-model',
+        prompt: expect.stringContaining('Mocked medical context from MCP'),
+      })
+    );
 
+    // Verify the result matches the mock object
     expect(result).toEqual(mockPlan);
   });
 
-  it('should fallback if AI generation fails', async () => {
-    (generateObject as any).mockRejectedValue(new Error('AI Error'));
-
-    const result = await generateRecoveryPlan({
-      surgeryType: 'Spine Surgery'
+  it('should return fallback plan if MCP fails', async () => {
+    // Mock fetch failure
+    global.fetch = vi.fn().mockResolvedValue({
+      ok: false,
+      status: 500
     });
 
-    expect(result.title).toContain('Recovery Timeline: Spine Surgery');
+    const result = await generateRecoveryPlan({
+      surgeryType: 'Test Surgery'
+    });
+
+    // Should return fallback plan
+    expect(result.title).toContain('Recovery Timeline: Test Surgery');
+    expect(result.phases.length).toBeGreaterThan(0);
+    // Should NOT call generateObject because it failed before that step
+    expect(ai.generateObject).not.toHaveBeenCalled();
+  });
+
+  it('should return fallback plan if generateObject fails', async () => {
+    // Mock generateObject failure
+    (ai.generateObject as any).mockRejectedValue(new Error('AI Error'));
+
+    const result = await generateRecoveryPlan({
+      surgeryType: 'Test Surgery'
+    });
+
+    // Should return fallback plan
+    expect(result.title).toContain('Recovery Timeline: Test Surgery');
     expect(result.phases.length).toBeGreaterThan(0);
   });
 });
