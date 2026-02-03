@@ -2,6 +2,7 @@ import { WhatsappAppointment } from './types';
 
 // Message template for WhatsApp confirmation (includes MRI/CT instruction)
 // Used in the 'Quick Action' feature on the admin appointment list.
+// Standardized format: Hello {name}, ... on {date}.
 export const WHATSAPP_MESSAGE_TEMPLATE = (name: string, date: string) =>
   `Hello ${name}, this is regarding your appointment with Dr. Sayuj on ${date}. We confirm your slot. Please bring your MRI/CT scans.`;
 
@@ -35,6 +36,10 @@ export const generateWhatsappUrl = (patient: WhatsappAppointment): string => {
   return `https://wa.me/91${sanitizedNumber}?text=${encodeURIComponent(message)}`;
 };
 
+/**
+ * Formats a date string to 'D MMM YYYY' (e.g., '1 Oct 2023').
+ * Returns the original string if parsing fails.
+ */
 export const formatDate = (dateStr: string) => {
   try {
     const date = new Date(dateStr);

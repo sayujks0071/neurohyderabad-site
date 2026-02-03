@@ -9,6 +9,9 @@ export const CONTACT_INFO = {
     "https://www.google.com/maps/dir/?api=1&destination=Yashoda+Hospitals,Malakpet,Hyderabad",
 };
 
+export const APPOINTMENT_SUCCESS_MESSAGE =
+  "Appointment request received. Please bring any MRI/CT scans with you. We will confirm via phone shortly.";
+
 export const FAQ_DATA: Array<{ question: string; answer: string }> = [
   {
     question: "What conditions do you treat?",

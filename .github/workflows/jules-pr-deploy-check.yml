@@ -1,5 +1,5 @@
 name: Jules PR & Deploy Check
-# v1.3 - Verified
+# v1.4 - Verified
 # Managed by Jules (Daily Schedule)
 on:
   schedule:
@@ -23,7 +23,7 @@ jobs:
         env:
           # Note: Schedule is defined in 'on.schedule.cron' and cannot be parameterized via env vars.
           PROMPT_FILE: jules-prompts/pr-deploy-check.md
-          ISSUE_TITLE: "[Jules] PR & Deploy Check"
+          ISSUE_TITLE: "[Jules] Daily PR & Deploy Check"
         with:
           script: |
             const fs = require('fs');

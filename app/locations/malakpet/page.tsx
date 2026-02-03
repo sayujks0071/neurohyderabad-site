@@ -104,6 +104,31 @@ export default function MalakpetLocationPage() {
             </div>
           </section>
 
+          {/* Symptoms We Treat Block */}
+          <section className="mb-12">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">Symptoms We Treat</h2>
+            <p className="text-gray-700 mb-4">
+              Don't ignore persistent pain or neurological symptoms. Early diagnosis at our Malakpet clinic can often prevent the need for major surgery.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Link href="/symptoms/back-pain" className="px-4 py-2 bg-gray-100 text-gray-800 rounded-full text-sm font-medium hover:bg-blue-100 hover:text-blue-800 transition-colors">
+                Severe Back Pain
+              </Link>
+              <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="px-4 py-2 bg-gray-100 text-gray-800 rounded-full text-sm font-medium hover:bg-blue-100 hover:text-blue-800 transition-colors">
+                Leg Pain (Sciatica)
+              </Link>
+              <Link href="/conditions/cervical-radiculopathy-treatment-hyderabad" className="px-4 py-2 bg-gray-100 text-gray-800 rounded-full text-sm font-medium hover:bg-blue-100 hover:text-blue-800 transition-colors">
+                Neck & Arm Pain
+              </Link>
+              <Link href="/symptoms/pain-on-top-of-head-causes" className="px-4 py-2 bg-gray-100 text-gray-800 rounded-full text-sm font-medium hover:bg-blue-100 hover:text-blue-800 transition-colors">
+                Headaches
+              </Link>
+              <Link href="/symptoms/signs-of-brain-tumor" className="px-4 py-2 bg-gray-100 text-gray-800 rounded-full text-sm font-medium hover:bg-blue-100 hover:text-blue-800 transition-colors">
+                Warning Signs
+              </Link>
+            </div>
+          </section>
+
           {/* Why Choose Block */}
           <section className="mb-12 bg-blue-50 rounded-2xl p-8 border border-blue-100">
             <h2 className="text-2xl font-bold text-blue-900 mb-4">Why Choose Dr. Sayuj at Yashoda Malakpet?</h2>

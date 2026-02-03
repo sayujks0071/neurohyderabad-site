@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getAllBlogPosts } from '@/src/lib/blog';
 import { getTextModel, hasAIConfig } from '@/src/lib/ai/gateway';
 import { SEARCH_INDEX } from '@/src/data/searchIndex';
+import { rateLimit } from '@/src/lib/rate-limit';
 
 /**
  * AI-Powered Search API using Vercel AI SDK
@@ -10,6 +11,24 @@ import { SEARCH_INDEX } from '@/src/data/searchIndex';
  * Semantic search for blog posts and content
  */
 export async function POST(request: NextRequest) {
+  // 🛡️ Rate Limiting: 20 requests per minute per IP (search is frequent)
+  const ip = request.headers.get('x-forwarded-for') ?? 'unknown';
+  const rateLimitResult = rateLimit(ip, 20, 60 * 1000);
+
+  if (!rateLimitResult.success) {
+    return NextResponse.json(
+      { error: 'Too many requests. Please try again later.' },
+      {
+        status: 429,
+        headers: {
+          'X-RateLimit-Limit': rateLimitResult.limit.toString(),
+          'X-RateLimit-Remaining': rateLimitResult.remaining.toString(),
+          'X-RateLimit-Reset': rateLimitResult.reset.toString(),
+        }
+      }
+    );
+  }
+
   let query = '';
   let limit = 10;
   let allPosts: Awaited<ReturnType<typeof getAllBlogPosts>> = [];

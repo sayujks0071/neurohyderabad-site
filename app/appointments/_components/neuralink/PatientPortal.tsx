@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   User,
   Phone,
@@ -34,6 +34,7 @@ import SpeechButton from "./SpeechButton";
 import { trackConversionOnly } from "@/src/lib/google-ads-conversion";
 import { trackMiddlewareEvent } from "@/src/lib/middleware/rum";
 import { CLINIC } from "@/app/_lib/clinic";
+import { APPOINTMENT_SUCCESS_MESSAGE } from "@/packages/appointment-form/constants";
 
 type WorkflowAppointmentType = "new-consultation" | "follow-up" | "second-opinion";
 
@@ -87,6 +88,13 @@ const PatientPortal = () => {
   const [formData, setFormData] = useState(INITIAL_FORM_STATE);
   const [lastSubmittedData, setLastSubmittedData] = useState(INITIAL_FORM_STATE);
 
+  useEffect(() => {
+    trackMiddlewareEvent('form_view', {
+      form_type: 'appointment',
+      step: 1
+    });
+  }, []);
+
   const clinicName = "Dr. Sayuj Krishnan | Yashoda Hospitals, Malakpet";
   const clinicAddress = `${CLINIC.street}, ${CLINIC.city}, ${CLINIC.region} ${CLINIC.postalCode}`;
 
@@ -100,6 +108,11 @@ const PatientPortal = () => {
 
   const handleNextStep = () => {
     if (formData.type && formData.date && formData.time) {
+      trackMiddlewareEvent('form_step_complete', {
+        form_type: 'appointment',
+        step: 1,
+        appointment_type: formData.type
+      });
       setStep(2);
       window.scrollTo(0, 0);
     }
@@ -273,9 +286,7 @@ const PatientPortal = () => {
             <h2 className="text-3xl font-extrabold text-slate-900 mb-2">
               Appointment Request Received
             </h2>
-            <p className="text-slate-500 text-lg mb-6">
-              Appointment request received. Please bring any MRI/CT scans with you. We will confirm via phone shortly.
-            </p>
+            <p className="text-slate-500 text-lg mb-6">{APPOINTMENT_SUCCESS_MESSAGE}</p>
             {confirmationMessage && (
               <div className="max-w-2xl mx-auto mb-10 bg-slate-50 border border-slate-200 rounded-3xl p-6 text-left">
                 <div className="flex items-start gap-3">
@@ -726,7 +737,7 @@ const PatientPortal = () => {
 
                 <div>
                   <label htmlFor="patient-pain-score" className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">
-                    Pain Intensity (1-10)
+                    Current Pain Level (1-10)
                   </label>
                   <div className="flex items-center gap-4">
                     <span className="text-sm font-bold text-slate-400" aria-hidden="true">1</span>
@@ -743,7 +754,7 @@ const PatientPortal = () => {
                           painScore: Number(e.target.value),
                         })
                       }
-                      className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                      className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                       aria-valuetext={`Score: ${formData.painScore}${formData.painScore >= 8 ? ' (Severe)' : formData.painScore <= 3 ? ' (Mild)' : ''}`}
                     />
                     <span className="text-sm font-bold text-slate-400" aria-hidden="true">10</span>

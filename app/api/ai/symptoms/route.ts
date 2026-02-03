@@ -1,6 +1,7 @@
 import { generateObject, jsonSchema } from 'ai';
 import { NextRequest, NextResponse } from 'next/server';
 import { getTextModel, hasAIConfig } from '@/src/lib/ai/gateway';
+import { rateLimit } from '@/src/lib/rate-limit';
 
 /**
  * Smart Symptom Analyzer API using Vercel AI SDK
@@ -8,6 +9,24 @@ import { getTextModel, hasAIConfig } from '@/src/lib/ai/gateway';
  * Analyzes symptoms and provides preliminary guidance (not diagnosis)
  */
 export async function POST(request: NextRequest) {
+  // 🛡️ Rate Limiting: 5 requests per minute per IP (strict)
+  const ip = request.headers.get('x-forwarded-for') ?? 'unknown';
+  const limit = rateLimit(ip, 5, 60 * 1000);
+
+  if (!limit.success) {
+    return NextResponse.json(
+      { error: 'Too many requests. Please try again later.' },
+      {
+        status: 429,
+        headers: {
+          'X-RateLimit-Limit': limit.limit.toString(),
+          'X-RateLimit-Remaining': limit.remaining.toString(),
+          'X-RateLimit-Reset': limit.reset.toString(),
+        }
+      }
+    );
+  }
+
   try {
     const body = await request.json();
     const { symptoms, age, gender, duration } = body;

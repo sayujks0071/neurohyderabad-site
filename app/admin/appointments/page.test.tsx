@@ -1,9 +1,12 @@
 // @vitest-environment jsdom
+import * as matchers from '@testing-library/jest-dom/matchers';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
 import AppointmentsPage from './page';
 import { Appointment } from './types';
 import '@testing-library/jest-dom/vitest';
+
+expect.extend(matchers);
 
 // Mock the WhatsAppIcon
 vi.mock('@/src/components/WhatsAppIcon', () => ({
@@ -61,11 +64,6 @@ describe('AppointmentsPage', () => {
     fireEvent.click(whatsappBtn);
 
     // Verify window.open was called with correct URL
-    // Note: The date format might vary slightly depending on the test environment's locale implementation of en-IN
-    // We construct the expected message based on what formatDate returns in the app.
-    // In many node envs, 'en-IN' works. If not, we might need to adjust expectation.
-    // However, to be robust, we can inspect the call arguments partially if needed.
-
     // Construct expected URL components
     const expectedPhone = '919876543210'; // 9876543210 -> sanitized + 91 prefix
 
