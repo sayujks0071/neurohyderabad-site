@@ -13,8 +13,8 @@ import MedicalWebPageSchema from '../../components/schemas/MedicalWebPageSchema'
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
 
 const baseMetadata = makeMetadata({
-  title: 'Endoscopic Discectomy Hyderabad',
-  description: 'Expert endoscopic discectomy for herniated discs in Hyderabad. Same-day surgery, faster recovery, less pain with Dr. Sayuj Krishnan.',
+  title: 'Endoscopic Discectomy Hyderabad | Stitch-less Slip Disc Surgery',
+  description: 'Advanced Endoscopic Discectomy in Hyderabad. No Muscle Cutting. Same-Day Discharge. Best for Slip Disc & Sciatica. Dr. Sayuj.',
   canonicalPath: '/services/endoscopic-discectomy-hyderabad',
 });
 
