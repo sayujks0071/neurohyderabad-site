@@ -443,6 +443,7 @@ export default function Home() {
                 <li>• <Link href="/conditions/slip-disc-treatment-hyderabad/" className="text-blue-600 hover:underline">Patients with herniated discs (slip disc)</Link></li>
                 <li>• <Link href="/conditions/spinal-stenosis-treatment-hyderabad/" className="text-blue-600 hover:underline">Spinal stenosis causing leg pain</Link></li>
                 <li>• <Link href="/conditions/sciatica-pain-treatment-hyderabad/" className="text-blue-600 hover:underline">Sciatica not improving with conservative treatment</Link></li>
+                <li>• <Link href="/services/spinal-fusion-surgery-hyderabad" className="text-blue-600 hover:underline">Spinal instability (Spondylolisthesis)</Link></li>
                 <li>• Recurrent disc herniations</li>
                 <li>• Foraminal stenosis</li>
               </ul>

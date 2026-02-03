@@ -156,7 +156,8 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
       title: 'MIS TLIF (Fusion)',
       description: 'Minimally Invasive Transforaminal Lumbar Interbody Fusion for instability or spondylolisthesis.',
       benefits: ['Small incisions', 'Less blood loss', 'Faster fusion', 'Reduced hospital stay'],
-      recovery: '4-6 weeks'
+      recovery: '4-6 weeks',
+      url: '/services/spinal-fusion-surgery-hyderabad'
     }
   ];
 
@@ -404,7 +405,15 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
           <div className="grid md:grid-cols-2 gap-8">
             {procedures.map((procedure, index) => (
               <div key={index} className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-                <h3 className="text-xl font-semibold text-blue-700 mb-3">{procedure.title}</h3>
+                <h3 className="text-xl font-semibold text-blue-700 mb-3">
+                  {procedure.url ? (
+                    <Link href={procedure.url} className="hover:underline">
+                      {procedure.title}
+                    </Link>
+                  ) : (
+                    procedure.title
+                  )}
+                </h3>
                 <p className="text-gray-600 mb-4">{procedure.description}</p>
                 
                 <div className="mb-4">
