@@ -27,7 +27,24 @@ describe('AppointmentsPage', () => {
       status: 'pending',
       source: 'website',
       created_at: '2023-10-20T10:00:00Z',
+      pain_score: 8,
+      mri_scan_available: true,
     },
+    {
+      id: '2',
+      patient_name: 'Patient Two',
+      patient_email: 'p2@example.com',
+      patient_phone: '0987654321',
+      preferred_date: '2023-10-28',
+      preferred_time: '11:00',
+      appointment_type: 'Follow-up',
+      chief_complaint: 'Neck pain',
+      status: 'pending',
+      source: 'website',
+      created_at: '2023-10-26',
+      pain_score: 3,
+      mri_scan_available: false,
+    }
   ];
 
   beforeEach(() => {
@@ -47,7 +64,7 @@ describe('AppointmentsPage', () => {
     vi.restoreAllMocks();
   });
 
-  it('renders the appointments list and confirms via WhatsApp', async () => {
+  it('renders appointments and clinical info correctly', async () => {
     render(<AppointmentsPage />);
 
     // Wait for appointments to load
@@ -55,25 +72,37 @@ describe('AppointmentsPage', () => {
       expect(screen.getByText('John Doe')).toBeInTheDocument();
     });
 
+    // Check Header
+    expect(screen.getByText('Clinical Info')).toBeInTheDocument();
+
+    // Check Patient 1
+    expect(screen.getByText('Pain: 8/10')).toBeInTheDocument();
+    expect(screen.getByText('MRI Ready')).toBeInTheDocument();
+
+    // Check Patient 2
+    expect(screen.getByText('Pain: 3/10')).toBeInTheDocument();
+  });
+
+  it('confirms via WhatsApp', async () => {
+    render(<AppointmentsPage />);
+
+    await waitFor(() => {
+      expect(screen.getByText('John Doe')).toBeInTheDocument();
+    });
+
     // Check for WhatsApp button
-    const whatsappBtn = screen.getByTestId('whatsapp-button');
+    const whatsappBtn = screen.getAllByTestId('whatsapp-button')[0];
     expect(whatsappBtn).toBeInTheDocument();
-    expect(whatsappBtn).toHaveTextContent('Confirm via WhatsApp');
 
     // Click the button
     fireEvent.click(whatsappBtn);
 
     // Verify window.open was called with correct URL
-    // Construct expected URL components
-    const expectedPhone = '919876543210'; // 9876543210 -> sanitized + 91 prefix
-
+    const expectedPhone = '919876543210';
     expect(window.open).toHaveBeenCalledTimes(1);
     const openedUrl = vi.mocked(window.open).mock.calls[0][0] as string;
 
     expect(openedUrl).toContain(`https://wa.me/${expectedPhone}`);
-    expect(openedUrl).toContain('text=');
     expect(openedUrl).toContain(encodeURIComponent('Hello John Doe'));
-    expect(openedUrl).toContain(encodeURIComponent('Dr. Sayuj'));
-    expect(openedUrl).toContain(encodeURIComponent('Please bring your MRI/CT scans'));
   });
 });

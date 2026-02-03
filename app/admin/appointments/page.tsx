@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { RefreshCw, CheckCircle, XCircle, Clock } from 'lucide-react';
-import { formatDate } from './utils';
+import { RefreshCw, CheckCircle, XCircle, Clock, Activity } from 'lucide-react';
+import { generateWhatsappUrl, formatDate } from './utils';
 import { WhatsAppButton } from './WhatsAppButton';
 
 export const dynamic = 'force-dynamic';
@@ -28,6 +28,32 @@ const StatusIcon = ({ status }: { status: string }) => {
     default:
       return <Clock size={14} className="text-yellow-600" />;
   }
+};
+
+const ClinicalInfo = ({ painScore, mriAvailable }: { painScore?: number; mriAvailable?: boolean }) => {
+  if (painScore === undefined && !mriAvailable) return <span className="text-gray-400 text-xs">-</span>;
+
+  return (
+    <div className="flex flex-col gap-1">
+      {painScore !== undefined && (
+        <span
+          className={`text-xs px-2 py-0.5 rounded-full font-medium w-fit ${painScore <= 3
+              ? 'bg-green-100 text-green-700'
+              : painScore <= 7
+                ? 'bg-yellow-100 text-yellow-700'
+                : 'bg-red-100 text-red-700'
+            }`}
+        >
+          Pain: {painScore}/10
+        </span>
+      )}
+      {mriAvailable && (
+        <span className="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 font-medium w-fit flex items-center gap-1">
+          <Activity size={10} /> MRI Ready
+        </span>
+      )}
+    </div>
+  );
 };
 
 export default function AppointmentsPage() {
@@ -138,12 +164,7 @@ export default function AppointmentsPage() {
                     <div className="text-sm text-gray-500">{appointment.appointment_type}</div>
                   </td>
                   <td className="py-3 px-4 border-b">
-                    <div className="text-sm">
-                      <span className="font-medium">Pain:</span> {appointment.pain_score ?? 'N/A'}/10
-                    </div>
-                    <div className="text-sm">
-                      <span className="font-medium">MRI:</span> {appointment.mri_scan_available ? 'Yes' : 'No'}
-                    </div>
+                    <ClinicalInfo painScore={appointment.pain_score} mriAvailable={appointment.mri_scan_available} />
                   </td>
                   <td className="py-3 px-4 border-b">
                     <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${statusColors[appointment.status] || statusColors.pending}`}>
