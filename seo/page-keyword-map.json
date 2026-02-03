@@ -159,7 +159,7 @@
     "spine surgery for elderly hyderabad",
     "black disc disease treatment"
   ],
-"/services/microdiscectomy-surgery-hyderabad": [
+  "/services/microdiscectomy-surgery-hyderabad": [
     "microdiscectomy surgery hyderabad",
     "microscopic spine surgery hyderabad",
     "microscopic lumbar discectomy",
@@ -184,5 +184,11 @@
   "/locations/neurosurgeon-vanasthalipuram": [
     "neurosurgeon vanasthalipuram",
     "best spine doctor vanasthalipuram"
+  ],
+  "/locations/neurosurgeon-miyapur": [
+    "neurosurgeon miyapur",
+    "best neurosurgeon in miyapur",
+    "spine surgeon miyapur",
+    "neurosurgeon near miyapur"
   ]
 }

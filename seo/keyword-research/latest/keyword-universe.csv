@@ -1,4 +1,11 @@
 keyword,intent,funnel,geo,cluster,target,difficulty,priority,serp_notes
+neurosurgeon miyapur,Commercial,BOFU,HYD,LOC-MIYAPUR,/locations/neurosurgeon-miyapur,Low,90,Local Pack
+best neurosurgeon in miyapur,Commercial,BOFU,HYD,LOC-MIYAPUR,/locations/neurosurgeon-miyapur,Med,85,Snippet
+spine surgeon miyapur,Commercial,BOFU,HYD,LOC-MIYAPUR,/locations/neurosurgeon-miyapur,Med,85,Local Pack
+brain doctor miyapur,Informational,MOFU,HYD,LOC-MIYAPUR,/locations/neurosurgeon-miyapur,Low,70,PAA
+neurosurgeon near miyapur,Commercial,BOFU,HYD,LOC-MIYAPUR,/locations/neurosurgeon-miyapur,High,80,Map Pack
+sciatica treatment miyapur,Commercial,BOFU,HYD,LOC-MIYAPUR,/locations/neurosurgeon-miyapur,Low,60,Ads
+slip disc doctor miyapur,Commercial,BOFU,HYD,LOC-MIYAPUR,/locations/neurosurgeon-miyapur,Low,60,Ads
 neurosurgeon dilsukhnagar,Commercial,BOFU,HYD,LOCATIONS | Dilsukhnagar,/locations/neurosurgeon-dilsukhnagar,Low,90,Local Pack
 best neurosurgeon in dilsukhnagar,Commercial,BOFU,HYD,LOCATIONS | Dilsukhnagar,/locations/neurosurgeon-dilsukhnagar,Low,85,
 spine surgeon dilsukhnagar,Commercial,BOFU,HYD,LOCATIONS | Dilsukhnagar,/locations/neurosurgeon-dilsukhnagar,Med,80,

@@ -80,6 +80,33 @@ export default function Page() {
          <LocationCTAs location={location} />
       </div>
 
+      <section className="mt-10 bg-blue-50 p-6 rounded-2xl border border-blue-100">
+        <h2 className="text-2xl font-bold text-blue-900">Why Travel from Hitech City to Malakpet?</h2>
+        <p className="mt-3 text-lg text-gray-700">
+          We understand that travelling from Hitech City/Madhapur to Malakpet can take 45–60 minutes.
+          However, many patients choose this commute for <strong>Endoscopic Spine Surgery</strong> because:
+        </p>
+        <ul className="mt-4 space-y-3 list-none pl-0">
+          <li className="flex gap-3">
+             <span className="text-blue-600 font-bold">✓</span>
+             <span><strong>Specialised Expertise:</strong> Dr. Sayuj is a German-trained specialist in <em>Keyhole Spine Surgery</em>, a technique not universally available.</span>
+          </li>
+          <li className="flex gap-3">
+             <span className="text-blue-600 font-bold">✓</span>
+             <span><strong>Same-Day Discharge:</strong> You travel once for the procedure and are typically back home in Hitech City the same evening, avoiding a 3-day hospital stay.</span>
+          </li>
+          <li className="flex gap-3">
+             <span className="text-blue-600 font-bold">✓</span>
+             <span><strong>Transparent Pricing:</strong> Our <Link href="/blog/cost-of-endoscopic-spine-surgery-hyderabad" className="text-blue-600 underline hover:text-blue-800">cost packages</Link> offer significant value compared to corporate hospitals in the financial district.</span>
+          </li>
+        </ul>
+        <div className="mt-6">
+           <Link href="/spine-surgery" className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+             View Endoscopic Procedures
+           </Link>
+        </div>
+      </section>
+
       <section className="grid md:grid-cols-2 gap-8 mt-10">
         <div>
           <LocationNAPCard location={location} className="mb-6" />

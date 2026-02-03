@@ -1,5 +1,5 @@
 name: Jules Local SEO Check
-# v1.3 - Verified
+# v1.4 - Verified
 # Managed by Jules (Daily Schedule)
 on:
   schedule:
@@ -23,7 +23,7 @@ jobs:
         env:
           # Note: Schedule is defined in 'on.schedule.cron' and cannot be parameterized via env vars.
           PROMPT_FILE: jules-prompts/local-seo-check.md
-          ISSUE_TITLE: "[Jules] Local SEO Check"
+          ISSUE_TITLE: "[Jules] Local SEO Health Check"
         with:
           script: |
             const fs = require('fs');

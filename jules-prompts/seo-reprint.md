@@ -13,4 +13,4 @@ Analyze the current blog posts and service pages. Identify content that is:
 
 <!-- Jules Automation -->
 <!-- Managed by Jules -->
-<!-- v1.3 -->
+<!-- v1.4 -->

@@ -112,6 +112,7 @@ export default function BookingForm({
       mriScanAvailable: data.mriScanAvailable,
     };
     await onSubmit(submissionData);
+    reset();
   };
 
   return (
@@ -211,11 +212,16 @@ export default function BookingForm({
                 control={control}
                 render={({ field }) => (
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-1">
+                    <div id="appointment-time-label" className="block text-sm font-medium text-slate-700 mb-1">
                       Preferred Time{" "}
                       <span className="text-red-500 font-extrabold pl-1">*</span>
-                    </label>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                    </div>
+                    <div
+                      role="group"
+                      aria-labelledby="appointment-time-label"
+                      aria-describedby={errors.appointmentTime ? "appointment-time-error" : undefined}
+                      className="grid grid-cols-2 sm:grid-cols-3 gap-2"
+                    >
                       {availableTimes.map((time) => (
                         <button
                           key={time}
@@ -233,7 +239,7 @@ export default function BookingForm({
                       ))}
                     </div>
                     {errors.appointmentTime && (
-                      <p className="mt-1 text-sm text-red-600">
+                      <p id="appointment-time-error" className="mt-1 text-sm text-red-600">
                         {errors.appointmentTime.message}
                       </p>
                     )}
@@ -248,7 +254,7 @@ export default function BookingForm({
                   htmlFor="painScore-slider"
                   className="block text-sm font-medium text-slate-700 mb-2"
                 >
-                  Pain Intensity Score (1-10)
+                  Pain Intensity (1-10)
                 </label>
                 <div className="flex items-center gap-4">
                   <span className="text-sm font-bold text-slate-400" aria-hidden="true">1</span>
@@ -258,7 +264,7 @@ export default function BookingForm({
                     min="1"
                     max="10"
                     step="1"
-                    className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-cyan-600"
+                    className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
                     aria-valuetext={painScoreValue ? `Score: ${painScoreValue}${painScoreValue >= 8 ? ' (Severe)' : painScoreValue <= 3 ? ' (Mild)' : ''}` : "Score: 5"}
                     {...register("painScore")}
                   />

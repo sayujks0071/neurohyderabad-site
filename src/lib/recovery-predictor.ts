@@ -1,9 +1,13 @@
-import { RecoveryPlan, RecoveryPhase, RecoveryMilestone } from '@/src/types/recovery-timeline';
+import { generateObject } from 'ai';
+import { z } from 'zod';
+import { getTextModel, hasAIConfig } from './ai/gateway';
+import { RecoveryPlan } from '@/src/types/recovery-timeline';
 
 /**
  * AI-Powered Recovery Predictor
  * 
  * Leverages clinical documents via MCP to generate personalized recovery timelines.
+ * Uses Vercel AI Gateway for reliable, structured generation.
  */
 
 export interface RecoveryPredictorRequest {
@@ -13,13 +17,61 @@ export interface RecoveryPredictorRequest {
   severity?: 'mild' | 'moderate' | 'severe';
 }
 
+// Zod schema matching RecoveryPlan interface
+const recoveryDurationSchema = z.object({
+  label: z.string(),
+  startDay: z.number().optional(),
+  endDay: z.number().optional(),
+  startWeek: z.number().optional(),
+  endWeek: z.number().optional(),
+  notes: z.string().optional(),
+});
+
+const recoveryMilestoneSchema = z.object({
+  title: z.string(),
+  highlights: z.array(z.string()),
+  id: z.string().optional(),
+  summary: z.string().optional(),
+  cautions: z.array(z.string()).optional(),
+  callouts: z.array(z.object({
+    label: z.string(),
+    detail: z.string(),
+  })).optional(),
+  sortOrder: z.number().optional(),
+});
+
+const recoveryPhaseSchema = z.object({
+  name: z.string(),
+  duration: recoveryDurationSchema,
+  milestones: z.array(recoveryMilestoneSchema),
+  id: z.string().optional(),
+  displayLabel: z.string().optional(),
+  goals: z.array(z.string()).optional(),
+  summary: z.string().optional(),
+  sortOrder: z.number().optional(),
+});
+
+const recoveryPlanSchema = z.object({
+  title: z.string(),
+  description: z.string().optional(),
+  phases: z.array(recoveryPhaseSchema),
+  id: z.string().optional(),
+  locale: z.string().optional(),
+  audience: z.string().optional(),
+  lastReviewedAt: z.string().optional(),
+  lastReviewedBy: z.string().optional(),
+  version: z.string().optional(),
+  disclaimer: z.string().optional(),
+});
+
 export async function generateRecoveryPlan(request: RecoveryPredictorRequest): Promise<RecoveryPlan> {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 
-                 (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 
-                 'http://localhost:3000');
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ||
+    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` :
+      'http://localhost:3000');
 
   try {
     // 1. Fetch clinical data via MCP tool
+    // We still use MCP to fetch the RAG context
     const mcpResponse = await fetch(`${baseUrl}/api/mcp`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -29,99 +81,71 @@ export async function generateRecoveryPlan(request: RecoveryPredictorRequest): P
         method: 'tools/call',
         params: {
           name: 'get_medical_info',
-          arguments: { 
-            query: `Detailed recovery timeline and milestones for ${request.surgeryType}${request.severity ? ` (${request.severity} case)` : ''}. Include immediate post-op, first week, and long-term milestones.` 
+          arguments: {
+            query: `Detailed recovery timeline and milestones for ${request.surgeryType}${request.severity ? ` (${request.severity} case)` : ''}. Include immediate post-op, first week, and long-term milestones.`
           }
         }
       })
     });
 
-    if (!mcpResponse.ok) {
-      throw new Error(`MCP Server responded with ${mcpResponse.status}`);
+    let context = '';
+    if (mcpResponse.ok) {
+      const mcpData = await mcpResponse.json();
+      context = mcpData.result?.content?.[0]?.text || '';
+    } else {
+      console.warn(`MCP Server responded with ${mcpResponse.status}, proceeding with knowledge base fallback.`);
     }
 
-    const mcpData = await mcpResponse.json();
-    const rawContent = mcpData.result?.content?.[0]?.text || '';
+    // 2. Generate structured plan using Vercel AI Gateway
+    const { object } = await generateObject({
+      model: getTextModel(), // Uses Vercel AI Gateway configuration
+      schema: recoveryPlanSchema,
+      system: `You are an expert neurosurgical recovery planner for Dr. Sayuj Krishnan.
+      Create a detailed, personalized recovery plan based on the provided clinical context.
 
-    // 2. Parse the unstructured text into a structured RecoveryPlan
-    // In a production environment, we might use generateObject from AI SDK here,
-    // but for now we'll use robust regex-based parsing as suggested by Codex analysis.
-    
-    const plan: RecoveryPlan = {
-      title: `Recovery Plan for ${request.surgeryType}`,
-      description: `Personalized milestones based on clinical documentation for ${request.surgeryType}.`,
-      phases: parsePhases(rawContent),
-      disclaimer: "This timeline is a general guide. Individual recovery varies based on patient health and surgical complexity. Always follow Dr. Sayuj's specific post-operative instructions."
-    };
+    // 2. Use AI Gateway to structure the content into a RecoveryPlan
+    if (hasAIConfig()) {
+      const { object } = await generateObject({
+        model: getTextModel(),
+        schema: recoveryPlanSchema,
+        system: `You are an expert neurosurgical recovery planner for Dr.Sayuj Krishnan.
+        Create a detailed, personalized recovery plan based on the provided clinical context.
+        Patient Details:
+        - Surgery: ${ request.surgeryType }
+    - Age: ${ request.patientAge || 'Standard adult' }
+    - Severity: ${ request.severity || 'Standard' }
+        ${ request.comorbidities ? `- Comorbidities: ${request.comorbidities.join(', ')}` : '' }
 
-    return plan;
+        Guidelines:
+      - Divide recovery into clear phases(e.g., Immediate Post - Op, Week 1, Month 1, etc.).
+        - Include specific, actionable milestones.
+        - Ensure the tone is professional, reassuring, and clear.
+        - Use the provided context to ensure accuracy.`,
+        prompt: context ? `Clinical Context: \n${ context }` : `Generate a standard recovery plan for ${ request.surgeryType }.`,
+        temperature: 0.2,
+      });
+
+      // Add disclaimer if not present
+      if (!object.disclaimer) {
+        object.disclaimer = "This timeline is a general guide. Individual recovery varies based on patient health and surgical complexity. Always follow Dr. Sayuj's specific post-operative instructions.";
+      }
+
+      return object as RecoveryPlan;
+    }
+
+    return getFallbackPlan(request.surgeryType);
+
   } catch (error) {
     console.error('Failed to generate recovery plan:', error);
-    // Fallback to a basic template if AI/MCP fails
+    // Fallback to a basic template if AI generation fails
     return getFallbackPlan(request.surgeryType);
   }
 }
 
-function parsePhases(text: string): RecoveryPhase[] {
-  const phases: RecoveryPhase[] = [];
-  
-  // Look for phase headers like "Phase 1:", "Day 0:", "Week 2:", etc.
-  const phaseRegex = /(?:Phase|Day|Week|Month)\s*\d+[:\-\s]+([\s\S]*?)(?=(?:Phase|Day|Week|Month)\s*\d+|$)/g;
-  let match;
-  let order = 0;
-
-  while ((match = phaseRegex.exec(text)) !== null) {
-    const content = match[0];
-    const nameMatch = content.match(/^(.*?)(?:\n|$)/);
-    const name = nameMatch ? nameMatch[1].trim() : `Phase ${order + 1}`;
-    
-    phases.push({
-      name,
-      duration: { label: extractDuration(name) },
-      milestones: parseMilestones(content),
-      sortOrder: order++
-    });
-  }
-
-  // If no phases were detected, return the whole text as one phase
-  if (phases.length === 0 && text.length > 0) {
-    phases.push({
-      name: "General Recovery",
-      duration: { label: "Standard" },
-      milestones: [{
-        title: "Standard Milestones",
-        highlights: text.split('\n').filter(l => l.trim().length > 5).slice(0, 5)
-      }]
-    });
-  }
-
-  return phases;
-}
-
-function parseMilestones(text: string): RecoveryMilestone[] {
-  // Look for bullet points or numbered lists
-  const bulletPoints = text.split('\n')
-    .filter(line => /^[\s\-\*•\d\.]/.test(line.trim()))
-    .map(line => line.replace(/^[\s\-\*•\d\.\s]+/, '').trim())
-    .filter(line => line.length > 10);
-
-  if (bulletPoints.length === 0) return [];
-
-  // Group milestones into sections if possible
-  return [{
-    title: "Key Milestones",
-    highlights: bulletPoints
-  }];
-}
-
-function extractDuration(text: string): string {
-  const match = text.match(/(Day|Week|Month)\s*\d+(?:\s*-\s*\d+)?/i);
-  return match ? match[0] : "Variable";
-}
-
 function getFallbackPlan(surgeryType: string): RecoveryPlan {
   return {
-    title: `Recovery Timeline: ${surgeryType}`,
+    title: `Recovery Timeline: ${ surgeryType } `,
+    description: "Standard recovery guidelines. Please consult Dr. Sayuj for your personalized plan.",
     phases: [
       {
         name: "Immediate Post-Op (Day 0)",
@@ -139,6 +163,7 @@ function getFallbackPlan(surgeryType: string): RecoveryPlan {
           highlights: ["Stitch removal (if any)", "Light walking", "Avoid heavy lifting"]
         }]
       }
-    ]
+    ],
+    disclaimer: "This timeline is a general guide. Individual recovery varies based on patient health and surgical complexity. Always follow Dr. Sayuj's specific post-operative instructions."
   };
 }

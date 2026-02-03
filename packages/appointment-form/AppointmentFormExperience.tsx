@@ -7,6 +7,7 @@ import BookingForm from "./BookingForm";
 import Confirmation from "./Confirmation";
 import Faq from "./Faq";
 import MapSection from "./MapSection";
+import { APPOINTMENT_SUCCESS_MESSAGE } from "./constants";
 import { trackConversionOnly } from "@/src/lib/google-ads-conversion";
 
 type ViewState = "form" | "confirmation";
@@ -46,9 +47,7 @@ function AppointmentFormContent({
       const payload = await response.json();
       setBookingData(payload.booking);
       // Use the specific reassuring message requested by the user
-      setConfirmationMessage(
-        "Appointment request received. Please bring any MRI/CT scans with you. We will confirm via phone shortly."
-      );
+      setConfirmationMessage(APPOINTMENT_SUCCESS_MESSAGE);
       setView("confirmation");
 
       // Track Google Ads conversion for successful appointment booking

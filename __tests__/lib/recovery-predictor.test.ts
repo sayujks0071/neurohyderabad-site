@@ -1,0 +1,103 @@
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { generateRecoveryPlan } from '@/src/lib/recovery-predictor';
+import * as ai from 'ai';
+
+// Mock dependencies
+vi.mock('ai', () => ({
+  generateObject: vi.fn(),
+  jsonSchema: vi.fn(),
+}));
+
+vi.mock('@/src/lib/ai/gateway', () => ({
+  getTextModel: vi.fn().mockReturnValue('mock-model'),
+  hasAIConfig: vi.fn(() => true),
+}));
+
+describe('Recovery Predictor', () => {
+  beforeEach(() => {
+    vi.resetAllMocks();
+
+    // Mock global fetch for MCP
+    global.fetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({
+        result: {
+          content: [{ text: 'Mocked medical context from MCP' }]
+        }
+      })
+    });
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it('should generate a structured recovery plan using AI', async () => {
+    const mockPlan = {
+      title: 'Recovery Plan',
+      phases: [
+        {
+          name: 'Phase 1',
+          duration: { label: 'Week 1' },
+          milestones: [{ title: 'Milestone 1', highlights: ['Highlight 1'] }]
+        }
+      ],
+      disclaimer: 'Test disclaimer'
+    };
+
+    // Mock generateObject response
+    (ai.generateObject as any).mockResolvedValue({
+      object: mockPlan
+    });
+
+    const result = await generateRecoveryPlan({
+      surgeryType: 'Test Surgery',
+      patientAge: 45
+    });
+
+    // Verify fetch was called for MCP
+    expect(global.fetch).toHaveBeenCalled();
+
+    // Verify generateObject was called
+    expect(ai.generateObject).toHaveBeenCalledWith(
+      expect.objectContaining({
+        model: 'mock-model',
+        prompt: expect.stringContaining('Mocked medical context from MCP'),
+      })
+    );
+
+    // Verify the result matches the mock object
+    expect(result).toEqual(mockPlan);
+  });
+
+  it('should return fallback plan if MCP fails', async () => {
+    // Mock fetch failure
+    global.fetch = vi.fn().mockResolvedValue({
+      ok: false,
+      status: 500
+    });
+
+    const result = await generateRecoveryPlan({
+      surgeryType: 'Test Surgery'
+    });
+
+    // Should return fallback plan
+    expect(result.title).toContain('Recovery Timeline: Test Surgery');
+    expect(result.phases.length).toBeGreaterThan(0);
+    // Should NOT call generateObject because it failed before that step
+    expect(ai.generateObject).not.toHaveBeenCalled();
+  });
+
+  it('should return fallback plan if generateObject fails', async () => {
+    // Mock generateObject failure
+    (ai.generateObject as any).mockRejectedValue(new Error('AI Error'));
+
+    const result = await generateRecoveryPlan({
+      surgeryType: 'Test Surgery'
+    });
+
+    // Should return fallback plan
+    expect(result.title).toContain('Recovery Timeline: Test Surgery');
+    expect(result.phases.length).toBeGreaterThan(0);
+  });
+});

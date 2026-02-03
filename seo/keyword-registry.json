@@ -456,6 +456,30 @@
       "difficulty": "Low",
       "volume": "High",
       "target_page": "/locations/neurosurgeon-vanasthalipuram"
+    },
+    {
+      "term": "neurosurgeon miyapur",
+      "difficulty": "Low",
+      "volume": "Med",
+      "target_page": "/locations/neurosurgeon-miyapur"
+    },
+    {
+      "term": "best neurosurgeon in miyapur",
+      "difficulty": "Med",
+      "volume": "Med",
+      "target_page": "/locations/neurosurgeon-miyapur"
+    },
+    {
+      "term": "spine surgeon miyapur",
+      "difficulty": "Med",
+      "volume": "Med",
+      "target_page": "/locations/neurosurgeon-miyapur"
+    },
+    {
+      "term": "neurosurgeon near miyapur",
+      "difficulty": "High",
+      "volume": "Med",
+      "target_page": "/locations/neurosurgeon-miyapur"
     }
   ]
 }

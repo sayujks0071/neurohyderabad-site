@@ -15,6 +15,11 @@ export interface LocationGeo {
  * Single Source of Truth for Location Data
  * This file centralizes all NAP (Name, Address, Phone) and location-specific data.
  * It is used by LocationNAPCard, LocationSchema, and other components to ensure consistency.
+ *
+ * Schema Strategy:
+ * - Physician Schema is injected globally (layout), with @id: #physician
+ * - Location Pages use MedicalClinic Schema, with @id: <url>#clinic
+ * - MedicalClinic links to Physician via 'department' to avoid entity conflict.
  */
 export interface LocationData {
   id: string;
@@ -362,6 +367,23 @@ export const locations: LocationData[] = [
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
     sameAs: SOCIAL_PROFILES
+  },
+  {
+    id: "miyapur",
+    name: "Dr Sayuj Krishnan - Neurosurgeon near Miyapur",
+    canonical_display_name: CANONICAL_PHYSICIAN_NAME,
+    slug: "locations/neurosurgeon-miyapur",
+    address: YASHODA_MALAKPET_ADDRESS,
+    telephone: CANONICAL_TELEPHONE,
+    whatsapp: CANONICAL_WHATSAPP,
+    directions_url: YASHODA_DIRECTIONS,
+    google_maps_place_url: CANONICAL_MAPS_URL,
+    embed_url: REPO_EMBED,
+    geo: YASHODA_GEO,
+    areaServedName: "Miyapur",
+    top_services_slugs: DEFAULT_SERVICES,
+    top_conditions_slugs: DEFAULT_CONDITIONS,
+    sameAs: SOCIAL_PROFILES
   }
 ];
 
@@ -381,7 +403,8 @@ export type LocationId =
   | "kothapet"
   | "madhapur"
   | "dilsukhnagar"
-  | "vanasthalipuram";
+  | "vanasthalipuram"
+  | "miyapur";
 
 export function getLocationById(id: string): LocationData | undefined {
   return locations.find(loc => loc.id === id);
