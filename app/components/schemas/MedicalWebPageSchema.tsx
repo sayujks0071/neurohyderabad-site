@@ -52,7 +52,8 @@ export default function MedicalWebPageSchema({
     "datePublished": "2024-01-01",
     "dateModified": lastReviewed,
     "author": {
-      "@type": "Person",
+      "@type": "Physician",
+      "@id": `${SITE_URL}/#physician`,
       "name": author,
       "jobTitle": "Neurosurgeon",
       "worksFor": {
