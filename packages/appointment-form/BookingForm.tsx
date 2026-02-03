@@ -250,6 +250,7 @@ export default function BookingForm({
 
             <div className="md:col-span-2 space-y-6">
               <div>
+                {/* Clinical Context: Pain Score (1-10) */}
                 <label
                   htmlFor="painScore-slider"
                   className="block text-sm font-medium text-slate-700 mb-2"
@@ -295,6 +296,7 @@ export default function BookingForm({
               </div>
 
               <div className="flex items-center p-4 bg-slate-50 rounded-xl border border-slate-200">
+                {/* Clinical Context: MRI Availability */}
                 <input
                   type="checkbox"
                   id="mriScanAvailable"
