@@ -69,7 +69,7 @@ See `docs/SUBAGENTS-AND-SKILLS.md` for complete documentation.
 
 ## Daily Scheduled Tasks
 
-Jules runs multiple daily automated tasks via GitHub Actions. See `docs/JULES-DAILY-SCHEDULE.md` for the complete schedule including:
+Jules runs multiple daily automated tasks via GitHub Actions. See `docs/jules-automations.md` for the complete schedule including:
 - Daily SEO tasks (reprint, local SEO, competitor scan)
 - Daily sitemap submission
 - Weekly SEO automation (Mondays)
