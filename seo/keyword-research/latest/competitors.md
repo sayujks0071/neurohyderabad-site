@@ -1,28 +1,15 @@
-# Daily Competitor Discovery - 2026-02-02
+# Competitor Research - 2026-02-03
 
-## Target Keywords
-* "endoscopic spine surgery hyderabad"
-* "best spine surgeon hyderabad"
-* "neurosurgeon jubilee hills"
-* "spine surgery cost hyderabad"
+## Primary Competitors (Local Surgeons)
+1. **Dr. Sukumar Sura** (Yashoda) - Strong on "minimally invasive".
+2. **Dr. G. V. Subbaiah Chowdhary** (Star) - High authority.
+3. **Dr. Ranganathan** (Apollo) - Scoliosis focus.
 
-## Competitors Analyzed
+## Secondary Competitors (Hospitals)
+1. **Yashoda Hospitals** - Dominates "best hospital" queries.
+2. **KIMS Hospitals** - Strong specific procedure pages.
+3. **Apollo Health City** - High domain authority.
 
-### 1. Local Surgeons
-*   **Dr. Sukumar Sura**: Ranking well for "endoscopic spine surgery".
-*   **Dr. BSV Raju**: Strong presence for "spine surgeon hyderabad".
-*   **Dr. Hariprakash Chakraborty**: Competes on "neurosurgeon hyderabad".
-
-### 2. Hospitals
-*   **Yashoda Hospitals**: Dominates broad terms.
-*   **Apollo Hospitals**: Strong authority.
-*   **KIMS Hospitals**: Good content on procedures.
-
-### 3. Portals
-*   **Practo**: Always top for "best doctor near me".
-*   **Lybrate**: Strong Q&A snippets.
-
-## Insights
-*   **Jubilee Hills** is a high-value location gap. Competitors have listings but thin content.
-*   **Cost** queries are rising ("spine surgery cost hyderabad"). Competitors have price ranges in blogs.
-*   **Recovery** content is popular ("laminectomy recovery time").
+## SERP Observations
+- "Lumbar Disc Replacement" results are dominated by national portals (Practo) and Apollo. Local surgeon pages are scarce. **Opportunity.**
+- "Ankylosing Spondylitis" is mostly informational (Healthline, Mayo Clinic). Local treatment pages are missing.

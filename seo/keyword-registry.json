@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-02-02",
+  "last_updated": "2026-02-03",
   "keywords": [
     {
       "term": "neurosurgeon jubilee hills",
@@ -504,6 +504,54 @@
       "difficulty": "High",
       "volume": "Med",
       "target_page": "/locations/neurosurgeon-miyapur"
+    },
+    {
+      "term": "lumbar disc replacement hyderabad",
+      "difficulty": "Med",
+      "volume": "Med",
+      "target_page": "/services/lumbar-disc-replacement-hyderabad"
+    },
+    {
+      "term": "artificial lumbar disc replacement cost",
+      "difficulty": "High",
+      "volume": "Med",
+      "target_page": "/services/lumbar-disc-replacement-hyderabad"
+    },
+    {
+      "term": "ankylosing spondylitis treatment hyderabad",
+      "difficulty": "Low",
+      "volume": "Med",
+      "target_page": "/conditions/ankylosing-spondylitis-treatment-hyderabad"
+    },
+    {
+      "term": "best hospital for spine surgery in hyderabad",
+      "difficulty": "High",
+      "volume": "High",
+      "target_page": "/"
+    },
+    {
+      "term": "spine surgery insurance coverage hyderabad",
+      "difficulty": "Med",
+      "volume": "Med",
+      "target_page": "/services/spine-surgery-cost-hyderabad"
+    },
+    {
+      "term": "spine surgeon for second opinion hyderabad",
+      "difficulty": "Low",
+      "volume": "Low",
+      "target_page": "/appointments"
+    },
+    {
+      "term": "emergency spine surgery hyderabad",
+      "difficulty": "Med",
+      "volume": "Low",
+      "target_page": "/contact"
+    },
+    {
+      "term": "robotic spine surgery hyderabad",
+      "difficulty": "High",
+      "volume": "Low",
+      "target_page": "/services/minimally-invasive-spine-surgery"
     }
   ]
 }

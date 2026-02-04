@@ -1,19 +1,16 @@
-# Clusters and Mapping - 2026-02-02
+# Clusters and Mapping - 2026-02-03
 
-## New Clusters
+## Cluster: Lumbar Disc Replacement (High Priority)
+- **Primary:** `lumbar disc replacement hyderabad`
+- **Secondary:** `artificial lumbar disc replacement cost`, `best surgeon for lumbar disc replacement`
+- **Target:** `/services/lumbar-disc-replacement-hyderabad` (NEW)
+- **Rationale:** Competitor gap. High ticket procedure.
 
-### LOC | BOFU | NEURO | jubilee-hills
-*   **Primary:** "neurosurgeon jubilee hills"
-*   **Secondary:** "best neurosurgeon in jubilee hills", "spine specialist jubilee hills"
-*   **Target:** `/locations/neurosurgeon-jubilee-hills` (New Page)
-*   **Rationale:** High income area, existing location data, missing page.
+## Cluster: Ankylosing Spondylitis (Medium Priority)
+- **Primary:** `ankylosing spondylitis treatment hyderabad`
+- **Target:** `/conditions/ankylosing-spondylitis-treatment-hyderabad` (NEW)
+- **Rationale:** Chronic condition, long-term patient potential.
 
-### HYD | BOFU | SPINE | cost
-*   **Primary:** "spine surgery cost hyderabad"
-*   **Secondary:** "endoscopic spine surgery cost hyderabad"
-*   **Target:** `/services/spine-surgery-cost-hyderabad` (Existing)
-*   **Action:** Ensure keyword mapping is updated.
-
-## Updates to Existing
-*   **sciatica treatment without surgery** -> `/conditions/sciatica-pain-treatment-hyderabad`
-*   **laminectomy recovery time** -> `/blog/microdiscectomy-vs-laminectomy-recovery-comparison`
+## Cluster: General/Hospital
+- **Keywords:** `best hospital for spine surgery in hyderabad`
+- **Target:** `/` (Home)
