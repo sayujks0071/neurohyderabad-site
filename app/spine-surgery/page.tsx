@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ShieldCheck, Brain, Eye, Moon } from "lucide-react";
 import ExpandedFAQ from "../../src/components/ExpandedFAQ";
 import { SITE_URL } from "../../src/lib/seo";
 import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
@@ -204,6 +205,66 @@ export default function SpineSurgeryPage() {
                      If you have these symptoms, call our emergency line (+91 97782 80044) or visit Yashoda Hospital Malakpet Casualty immediately.
                    </p>
                 </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Safety & Protocols - Trust Signal */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="text-3xl font-bold text-center mb-12 text-blue-900">Safety Protocols & Risk Management</h2>
+              <p className="text-center text-gray-700 mb-12 max-w-3xl mx-auto">
+                Your safety is our priority. We use advanced German technology and strict protocols to minimize risks
+                associated with spine surgery, making it safer than traditional open procedures.
+              </p>
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div className="bg-blue-50 p-6 rounded-lg border border-blue-100">
+                  <div className="mb-4 text-blue-600">
+                    <ShieldCheck size={48} strokeWidth={1.5} />
+                  </div>
+                  <h3 className="text-xl font-bold mb-3 text-blue-800">Infection Prevention</h3>
+                  <p className="text-sm text-gray-700">
+                    Our ultra-minimally invasive &quot;keyhole&quot; approach means less exposure to air and contaminants.
+                    Infection rates are significantly lower (&lt;0.1%) compared to open surgery (2-5%).
+                  </p>
+                </div>
+                <div className="bg-blue-50 p-6 rounded-lg border border-blue-100">
+                  <div className="mb-4 text-blue-600">
+                    <Brain size={48} strokeWidth={1.5} />
+                  </div>
+                  <h3 className="text-xl font-bold mb-3 text-blue-800">Nerve Safety</h3>
+                  <p className="text-sm text-gray-700">
+                    We use real-time <strong>Neuromonitoring</strong> to track nerve function throughout the surgery,
+                    drastically reducing the risk of nerve damage or weakness.
+                  </p>
+                </div>
+                <div className="bg-blue-50 p-6 rounded-lg border border-blue-100">
+                  <div className="mb-4 text-blue-600">
+                    <Eye size={48} strokeWidth={1.5} />
+                  </div>
+                  <h3 className="text-xl font-bold mb-3 text-blue-800">Precision Optics</h3>
+                  <p className="text-sm text-gray-700">
+                    High-Definition 4K Endoscopes provide crystal-clear visualization of the spinal canal,
+                    allowing Dr. Sayuj to see nerves and discs with extreme clarity.
+                  </p>
+                </div>
+                <div className="bg-blue-50 p-6 rounded-lg border border-blue-100">
+                  <div className="mb-4 text-blue-600">
+                    <Moon size={48} strokeWidth={1.5} />
+                  </div>
+                  <h3 className="text-xl font-bold mb-3 text-blue-800">Anesthesia Safety</h3>
+                  <p className="text-sm text-gray-700">
+                    For elderly or high-risk patients, we offer &quot;Awake&quot; or &quot;Twilight&quot; sedation options,
+                    avoiding the risks of general anesthesia and enabling faster recovery.
+                  </p>
+                </div>
+              </div>
+              <div className="mt-8 text-center">
+                 <p className="text-xs text-gray-500 italic">
+                   *While complications are rare, all surgeries carry some inherent risks. Dr. Sayuj will discuss your specific risk profile during consultation.
+                 </p>
               </div>
             </div>
           </div>
