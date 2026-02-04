@@ -96,13 +96,6 @@ export async function generateRecoveryPlan(request: RecoveryPredictorRequest): P
       console.warn(`MCP Server responded with ${mcpResponse.status}, proceeding with knowledge base fallback.`);
     }
 
-    // 2. Generate structured plan using Vercel AI Gateway
-    const { object } = await generateObject({
-      model: getTextModel(), // Uses Vercel AI Gateway configuration
-      schema: recoveryPlanSchema,
-      system: `You are an expert neurosurgical recovery planner for Dr. Sayuj Krishnan.
-      Create a detailed, personalized recovery plan based on the provided clinical context.
-
     // 2. Use AI Gateway to structure the content into a RecoveryPlan
     if (hasAIConfig()) {
       const { object } = await generateObject({
@@ -112,12 +105,12 @@ export async function generateRecoveryPlan(request: RecoveryPredictorRequest): P
         Create a detailed, personalized recovery plan based on the provided clinical context.
         Patient Details:
         - Surgery: ${ request.surgeryType }
-    - Age: ${ request.patientAge || 'Standard adult' }
-    - Severity: ${ request.severity || 'Standard' }
+        - Age: ${ request.patientAge || 'Standard adult' }
+        - Severity: ${ request.severity || 'Standard' }
         ${ request.comorbidities ? `- Comorbidities: ${request.comorbidities.join(', ')}` : '' }
 
         Guidelines:
-      - Divide recovery into clear phases(e.g., Immediate Post - Op, Week 1, Month 1, etc.).
+        - Divide recovery into clear phases(e.g., Immediate Post - Op, Week 1, Month 1, etc.).
         - Include specific, actionable milestones.
         - Ensure the tone is professional, reassuring, and clear.
         - Use the provided context to ensure accuracy.`,
