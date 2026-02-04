@@ -5,6 +5,7 @@ import { LocationCTAs } from "@/src/components/locations/LocationCTAs";
 import { LocationMapEmbed } from "@/src/components/locations/LocationMapEmbed";
 import { LocalPathways } from "@/src/components/locations/LocalPathways";
 import { LocationSchema } from "@/src/components/locations/LocationSchema";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 // Force static generation
@@ -13,7 +14,7 @@ export const dynamicParams = false;
 export const revalidate = 86400;
 
 export const metadata = {
-  title: "Neurosurgeon near Jubilee Hills, Hyderabad",
+  title: "Neurosurgeon Jubilee Hills | Brain & Spine Specialist",
   description: "Expert neurosurgeon near Jubilee Hills. Dr Sayuj Krishnan provides advanced brain and spine surgery. Convenient access from Road No. 36 and Checkpost.",
   alternates: {
     canonical: "https://www.drsayuj.info/locations/neurosurgeon-jubilee-hills",
@@ -65,6 +66,17 @@ export default function JubileeHillsLocationPage() {
         <LocationCTAs location={location} />
       </div>
 
+      <div className="mt-10 mb-8 bg-blue-50 border border-blue-200 p-6 rounded-xl">
+        <h2 className="text-xl font-bold text-blue-900 mb-2">Second Opinion for Surgery</h2>
+        <p className="text-gray-700 mb-4">
+          Residents of Jubilee Hills often visit us for a second opinion on spine or brain surgery.
+          Bring your MRI for a review to see if a minimally invasive or non-surgical option is available.
+        </p>
+        <a href="https://wa.me/919778280044" className="text-blue-600 font-semibold hover:underline">
+          → WhatsApp your MRI for a free preliminary check
+        </a>
+      </div>
+
       <section className="grid md:grid-cols-2 gap-8 mt-10">
         <div>
           <LocationNAPCard location={location} className="mb-6" />
@@ -75,6 +87,7 @@ export default function JubileeHillsLocationPage() {
             <li>Brain Tumor Excision (Awake Craniotomy)</li>
             <li>Trigeminal Neuralgia Treatment</li>
             <li>Head Injury & Trauma Care</li>
+            <li><Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 hover:underline">Sciatica & Leg Pain Treatment</Link></li>
           </ul>
 
           <h3 className="text-xl font-semibold mt-6">Directions from Jubilee Hills</h3>
