@@ -96,13 +96,6 @@ export async function generateRecoveryPlan(request: RecoveryPredictorRequest): P
       console.warn(`MCP Server responded with ${mcpResponse.status}, proceeding with knowledge base fallback.`);
     }
 
-    // 2. Generate structured plan using Vercel AI Gateway
-    const { object } = await generateObject({
-      model: getTextModel(), // Uses Vercel AI Gateway configuration
-      schema: recoveryPlanSchema,
-      system: `You are an expert neurosurgical recovery planner for Dr. Sayuj Krishnan.
-      Create a detailed, personalized recovery plan based on the provided clinical context.
-
     // 2. Use AI Gateway to structure the content into a RecoveryPlan
     if (hasAIConfig()) {
       const { object } = await generateObject({

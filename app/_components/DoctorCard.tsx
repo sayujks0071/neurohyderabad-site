@@ -8,7 +8,7 @@ interface DoctorCardProps {
 
 export default function DoctorCard({ priority = false }: DoctorCardProps) {
   return (
-    <div className="bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 relative max-w-md mx-auto">
+    <div className="bg-white/90 backdrop-blur-sm border border-white/20 shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 relative max-w-md mx-auto">
       <div className="text-center">
         {/* Doctor Photo - Professional Portrait */}
         <div className="w-32 h-32 rounded-full mx-auto mb-4 relative overflow-hidden shadow-lg border-2 border-white/50">
