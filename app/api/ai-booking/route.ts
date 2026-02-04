@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { rateLimit } from '@/src/lib/rate-limit';
 
 interface BookingRequest {
   message: string;
@@ -179,15 +180,37 @@ Our coordinator will call you within one working day to confirm your appointment
 }
 
 export async function POST(request: NextRequest) {
+  // 🛡️ Sentinel: Add rate limiting to prevent abuse
+  const ip = request.headers.get("x-forwarded-for") ?? "unknown";
+  const limit = rateLimit(ip, 5, 60 * 1000); // 5 requests per minute
+
+  if (!limit.success) {
+    return NextResponse.json(
+      { error: "Too many requests. Please try again later." },
+      { status: 429 }
+    );
+  }
+
   try {
     const body: BookingRequest = await request.json();
     
-    if (!body.message) {
+    // 🛡️ Sentinel: Validate input length
+    if (!body.message || typeof body.message !== 'string') {
       return NextResponse.json(
-        { error: 'Message is required' },
+        { error: 'Message is required and must be a string' },
         { status: 400 }
       );
     }
+
+    if (body.message.length > 2000) {
+      return NextResponse.json(
+        { error: 'Message exceeds maximum length of 2000 characters' },
+        { status: 400 }
+      );
+    }
+
+    // Sanitize input
+    body.message = body.message.trim();
 
     // Generate AI response
     const aiResponse = generateAIResponse(body);
