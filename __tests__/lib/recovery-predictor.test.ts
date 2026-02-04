@@ -14,8 +14,15 @@ vi.mock('@/src/lib/ai/gateway', () => ({
 }));
 
 describe('Recovery Predictor', () => {
-  beforeEach(() => {
-    vi.resetAllMocks();
+  beforeEach(async () => {
+    vi.clearAllMocks();
+
+    // Restore default mock implementations
+    (ai.generateObject as any).mockReset();
+
+    const gateway = await import('@/src/lib/ai/gateway');
+    (gateway.getTextModel as any).mockReturnValue('mock-model');
+    (gateway.hasAIConfig as any).mockReturnValue(true);
 
     // Mock global fetch for MCP
     global.fetch = vi.fn().mockResolvedValue({

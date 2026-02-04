@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { rateLimit } from '@/src/lib/rate-limit';
+import { escapeHtml } from '@/src/lib/validation';
 
 interface BookingRequest {
   message: string;
@@ -70,7 +72,8 @@ function extractEmail(text: string): string | null {
 }
 
 function generateAIResponse(request: BookingRequest): AIResponse {
-  const { message, bookingData, pageSlug, service } = request;
+  const { message, pageSlug, service } = request;
+  const bookingData = request.bookingData || {};
   
   const isEmergency = detectEmergency(message);
   const detectedCondition = detectCondition(message);
@@ -129,8 +132,10 @@ function generateAIResponse(request: BookingRequest): AIResponse {
   }
 
   if (hasUrgency && !hasPhone) {
+    // 🛡️ Sentinel: Safe variable interpolation
+    const safeUrgency = escapeHtml(bookingData.urgency);
     return {
-      response: `Thank you. I'll mark this as a ${bookingData.urgency} appointment. Now, could you please provide your name and contact information? I'll need your phone number for confirmation.`,
+      response: `Thank you. I'll mark this as a ${safeUrgency} appointment. Now, could you please provide your name and contact information? I'll need your phone number for confirmation.`,
       isEmergency: false,
       nextStep: 'details',
       bookingData: {
@@ -143,8 +148,10 @@ function generateAIResponse(request: BookingRequest): AIResponse {
   }
 
   if (hasPhone && !bookingData.preferredDate) {
+    // 🛡️ Sentinel: Safe variable interpolation
+    const safePhone = escapeHtml(phoneNumber || bookingData.phone);
     return {
-      response: `Perfect! I have your phone number: ${phoneNumber || bookingData.phone}. When would you prefer to have your appointment? Dr. Sayuj's OPD hours are Monday to Saturday (10:00 AM – 1:00 PM and 5:00 PM – 7:30 PM). What day works best for you?`,
+      response: `Perfect! I have your phone number: ${safePhone}. When would you prefer to have your appointment? Dr. Sayuj's OPD hours are Monday to Saturday (10:00 AM – 1:00 PM and 5:00 PM – 7:30 PM). What day works best for you?`,
       isEmergency: false,
       nextStep: 'scheduling',
       bookingData: {
@@ -157,14 +164,21 @@ function generateAIResponse(request: BookingRequest): AIResponse {
   }
 
   // Ready to confirm
+  // 🛡️ Sentinel: Safe variable interpolation
+  const safeName = escapeHtml(bookingData.name || 'To be confirmed');
+  const safePhone = escapeHtml(phoneNumber || bookingData.phone);
+  const safeCondition = detectedCondition ? detectedCondition.replace('_', ' ') : escapeHtml(bookingData.condition || 'To be discussed');
+  const safeUrgency = escapeHtml(bookingData.urgency || 'routine');
+  const safeDate = escapeHtml(bookingData.preferredDate || 'To be confirmed');
+
   return {
     response: `Great! I have all the information I need. Let me summarize your appointment request:
 
-• Name: ${bookingData.name || 'To be confirmed'}
-• Phone: ${phoneNumber || bookingData.phone}
-• Condition: ${detectedCondition ? detectedCondition.replace('_', ' ') : bookingData.condition || 'To be discussed'}
-• Urgency: ${bookingData.urgency || 'routine'}
-• Preferred Date: ${bookingData.preferredDate || 'To be confirmed'}
+• Name: ${safeName}
+• Phone: ${safePhone}
+• Condition: ${safeCondition}
+• Urgency: ${safeUrgency}
+• Preferred Date: ${safeDate}
 
 Our coordinator will call you within one working day to confirm your appointment slot. Is there anything else I can help you with?`,
     isEmergency: false,
@@ -179,14 +193,44 @@ Our coordinator will call you within one working day to confirm your appointment
 }
 
 export async function POST(request: NextRequest) {
+  // 🛡️ Sentinel: Rate limiting
+  const ip = request.headers.get("x-forwarded-for") ?? "unknown";
+  const limit = rateLimit(ip, 20, 60 * 1000); // 20 requests per minute
+
+  if (!limit.success) {
+    return NextResponse.json(
+      { error: "Too many requests. Please try again later." },
+      { status: 429 }
+    );
+  }
+
   try {
     const body: BookingRequest = await request.json();
     
+    // 🛡️ Sentinel: Input validation
     if (!body.message) {
       return NextResponse.json(
         { error: 'Message is required' },
         { status: 400 }
       );
+    }
+
+    if (body.message.length > 2000) {
+      return NextResponse.json(
+        { error: 'Message too long (max 2000 characters)' },
+        { status: 400 }
+      );
+    }
+
+    if (body.bookingData) {
+      for (const [key, val] of Object.entries(body.bookingData)) {
+        if (typeof val === 'string' && val.length > 100) {
+           return NextResponse.json(
+             { error: `Field '${key}' too long (max 100 characters)` },
+             { status: 400 }
+           );
+        }
+      }
     }
 
     // Generate AI response

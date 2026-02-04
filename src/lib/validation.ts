@@ -82,3 +82,15 @@ export function sanitizeForPrompt(input: unknown, maxLength: number = 1000): str
 
   return sanitized;
 }
+
+// 🛡️ Sentinel: Escape HTML characters to prevent XSS when echoing input
+export function escapeHtml(unsafe: unknown): string {
+  if (unsafe === null || unsafe === undefined) return "";
+  const str = String(unsafe);
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
