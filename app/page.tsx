@@ -63,8 +63,8 @@ const LocalReputationPanel = dynamic(() => import('./_components/LocalReputation
 const HOME_CANONICAL = SITE_URL.endsWith("/") ? SITE_URL : `${SITE_URL}/`;
 
 const baseMetadata = makeMetadata({
-  title: "Best Neurosurgeon Hyderabad | Spine & Brain Specialist",
-  description: "Top-rated neurosurgeon in Hyderabad (Yashoda Hospital). Expert in endoscopic spine surgery, brain tumors & sciatica. Book appointment now.",
+  title: "Best Neurosurgeon Hyderabad | Dr. Sayuj | Brain & Spine Specialist",
+  description: "German-trained Neurosurgeon in Hyderabad (Yashoda Hospital). 1000+ Endoscopic Spine & Brain Surgeries. 90% Non-Surgical Sciatica Relief. Book Consult.",
   canonicalPath: "/",
   ogImage: "https://www.drsayuj.info/images/og-default.jpg",
   ogImageAlt: "Dr. Sayuj Krishnan - Premier Neurosurgeon in Hyderabad | Endoscopic Spine Surgery & Brain Tumor Surgery"
@@ -73,7 +73,7 @@ const baseMetadata = makeMetadata({
 export const metadata: Metadata = {
   ...baseMetadata,
   title: {
-    absolute: "Best Neurosurgeon Hyderabad | Spine & Brain Specialist",
+    absolute: "Best Neurosurgeon Hyderabad | Dr. Sayuj | Brain & Spine Specialist",
   },
   keywords: [
     'dr sayuj krishnan',

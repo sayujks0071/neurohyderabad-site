@@ -199,7 +199,9 @@ export default function SpinalFusionPage() {
             <h2 className="text-3xl font-bold text-blue-800 mb-6">Conditions Treated</h2>
              <div className="grid md:grid-cols-2 gap-4">
                 <ul className="bg-gray-50 p-6 rounded-lg space-y-2 text-gray-700 list-disc list-inside">
-                  <li><strong>Spondylolisthesis:</strong> Slippage of one vertebra over another.</li>
+                  <li>
+                    <strong>Spondylolisthesis:</strong> Slippage of one vertebra over another, often causing <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 underline">severe sciatica</Link>.
+                  </li>
                   <li><strong>Spinal Fractures:</strong> Due to trauma or osteoporosis.</li>
                 </ul>
                 <ul className="bg-gray-50 p-6 rounded-lg space-y-2 text-gray-700 list-disc list-inside">

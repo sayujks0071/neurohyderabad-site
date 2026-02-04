@@ -119,7 +119,7 @@ export default function AwakeSpineSurgeryPage() {
         <div className="rounded-lg border border-gray-200 p-5">
           <h3 className="text-lg font-semibold text-blue-800">When we choose an awake plan</h3>
           <ul className="mt-2 space-y-2 text-gray-700">
-            <li>• Lumbar stenosis or disc prolapse needing short-segment decompression</li>
+            <li>• Lumbar stenosis or disc prolapse causing <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-700 underline">sciatica</Link> needing short-segment decompression</li>
             <li>• Patients with sleep apnoea, COPD, or heart disease where GA risk is higher</li>
             <li>• Prior anaesthesia intolerance (severe nausea, confusion, or agitation)</li>
             <li>• Desire for faster recovery and fewer opioids post-op</li>

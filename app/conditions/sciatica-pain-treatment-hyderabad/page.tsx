@@ -375,10 +375,52 @@ export default function SciaticaTreatmentPage() {
         </div>
       </section>
 
+      {/* Competitor Gap: Exercises for Sciatica Relief */}
+      <section className="mb-12 bg-white border border-green-100 rounded-2xl p-8 shadow-sm">
+        <h2 className="text-2xl font-bold text-green-900 mb-6">Exercises for Sciatica Relief</h2>
+        <div className="grid md:grid-cols-2 gap-8 items-center">
+           <div>
+              <p className="text-gray-700 mb-4">
+                 While rest is important during acute pain, gentle movement is key to long-term recovery. Specific exercises can help relieve nerve compression and strengthen the spine.
+              </p>
+              <h3 className="font-bold text-green-800 mb-2">Safe Exercises to Try:</h3>
+              <ul className="space-y-3 mb-6">
+                 <li className="flex items-start">
+                    <span className="text-green-600 mr-2 mt-1">●</span>
+                    <span className="text-gray-700"><strong>Knee-to-Chest Stretch:</strong> Lie on your back and gently pull one knee towards your chest. Hold for 20 seconds.</span>
+                 </li>
+                 <li className="flex items-start">
+                    <span className="text-green-600 mr-2 mt-1">●</span>
+                    <span className="text-gray-700"><strong>Sciatic Nerve Flossing:</strong> A specialized technique to mobilize the nerve and reduce adhesion.</span>
+                 </li>
+                 <li className="flex items-start">
+                    <span className="text-green-600 mr-2 mt-1">●</span>
+                    <span className="text-gray-700"><strong>Walking:</strong> Short, frequent walks (10-15 mins) are better than bed rest.</span>
+                 </li>
+              </ul>
+              <div className="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-400 text-sm text-yellow-800">
+                 <strong>Caution:</strong> Stop immediately if pain worsens. Avoid heavy lifting or "toe-touching" stretches.
+              </div>
+           </div>
+           <div className="bg-green-50 p-6 rounded-xl text-center">
+              <h3 className="font-bold text-green-900 mb-3">Download Our Exercise Guide</h3>
+              <p className="text-sm text-gray-600 mb-6">
+                 Get a complete PDF guide of safe home exercises approved by Dr. Sayuj Krishnan.
+              </p>
+              <Link
+                href="/blog/sciatica-pain-management-hyderabad"
+                className="inline-block bg-green-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-green-700 transition-colors"
+              >
+                View Sciatica Exercises Guide
+              </Link>
+           </div>
+        </div>
+      </section>
+
       <section className="mb-12">
         <h2 className="text-2xl font-semibold mb-6 text-blue-700">Patient Education Resources</h2>
         <div className="grid md:grid-cols-2 gap-6">
-          <Link href="/blog/sciatica-pain-relief-exercises-hyderabad" className="block p-6 bg-white border border-gray-200 rounded-lg hover:shadow-md transition-shadow">
+          <Link href="/blog/sciatica-pain-management-hyderabad" className="block p-6 bg-white border border-gray-200 rounded-lg hover:shadow-md transition-shadow">
             <h3 className="font-bold text-lg text-blue-800 mb-2">5 Ways to Manage Sciatica at Home</h3>
             <p className="text-gray-600 text-sm">Learn effective home remedies and exercises to reduce nerve pain while waiting for your appointment.</p>
           </Link>
