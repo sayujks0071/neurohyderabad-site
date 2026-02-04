@@ -16,7 +16,7 @@ export const metadata = {
   title: "Neurosurgeon near Jubilee Hills, Hyderabad",
   description: "Expert neurosurgeon near Jubilee Hills. Dr Sayuj Krishnan provides advanced brain and spine surgery. Convenient access from Road No. 36 and Checkpost.",
   alternates: {
-    canonical: "https://www.drsayuj.info/locations/neurosurgeon-jubilee-hills",
+    canonical: "https://www.drsayuj.info/neurosurgeon-jubilee-hills",
   },
   openGraph: {
     title: "Neurosurgeon near Jubilee Hills, Hyderabad | Dr Sayuj Krishnan",

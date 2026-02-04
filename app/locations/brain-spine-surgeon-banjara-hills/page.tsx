@@ -23,11 +23,7 @@ export const metadata = {
   description: 'Advanced brain and spine care near Banjara Hills, Hyderabad. Directions to Yashoda Hospital, Malakpet. Parking, timings, and appointment info.',
   keywords: 'brain surgeon Banjara Hills, spine surgeon Banjara Hills, neurosurgeon near Banjara Hills, Yashoda Hospital Malakpet, Hyderabad',
   alternates: {
-    canonical: 'https://www.drsayuj.info/locations/brain-spine-surgeon-banjara-hills',
-    languages: {
-      'en-IN': 'https://www.drsayuj.info/locations/brain-spine-surgeon-banjara-hills',
-      'x-default': 'https://www.drsayuj.info/locations/brain-spine-surgeon-banjara-hills',
-    },
+    canonical: 'https://www.drsayuj.info/neurosurgeon-banjara-hills',
   },
   openGraph: {
     title: 'Brain & Spine Surgeon near Banjara Hills, Hyderabad',
