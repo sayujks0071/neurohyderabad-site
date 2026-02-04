@@ -55,12 +55,13 @@ describe('Appointment Page SEO', () => {
 
     // Check linkage
     // Physician worksFor -> Clinic ID
-    // Clinic department -> Physician ID
+    // Clinic employee -> Physician ID
 
     // Note: The implementation in AppointmentSchema.tsx uses:
     // Physician -> worksFor -> @id: .../appointments#clinic
     // MedicalClinic -> @id: .../appointments#clinic
 
     expect(physician.worksFor['@id']).toBe(clinic['@id']);
+    expect(clinic.employee['@id']).toBe(physician['@id']);
   });
 });
