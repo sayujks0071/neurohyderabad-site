@@ -87,6 +87,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/locations/hitech-city',
     '/locations/malakpet',
     '/locations/secunderabad',
+    '/locations/neurosurgeon-uppal',
   ];
   const resourcePages = [
     '/knowledge-base',
