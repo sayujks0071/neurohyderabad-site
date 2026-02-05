@@ -22,6 +22,28 @@ interface MiddlewareAlert {
 }
 
 export async function POST(request: NextRequest) {
+  // SECURITY: Require secret key
+  const webhookSecret = process.env.MIDDLEWARE_WEBHOOK_SECRET;
+
+  // Fail secure if secret is not configured
+  if (!webhookSecret) {
+    console.error('Security: MIDDLEWARE_WEBHOOK_SECRET not configured. Denying access.');
+    return NextResponse.json(
+      { error: 'Server misconfiguration: Auth not set up' },
+      { status: 500 }
+    );
+  }
+
+  // Check for authentication header
+  const headerSecret = request.headers.get('x-middleware-secret');
+  if (headerSecret !== webhookSecret) {
+    console.warn('Security: Unauthorized access attempt to Middleware webhook');
+    return NextResponse.json(
+      { error: 'Unauthorized' },
+      { status: 401 }
+    );
+  }
+
   try {
     const alert: MiddlewareAlert = await request.json();
 
