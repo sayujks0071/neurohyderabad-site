@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { spring, useCurrentFrame, useVideoConfig } from 'remotion';
+import React, { useState, useEffect, useMemo } from 'react';
+import { spring, useCurrentFrame, useVideoConfig, AbsoluteFill } from 'remotion';
 import { COLORS, FONTS } from '../../utils/colorTokens';
 import { GradientBackground } from '../shared/GradientBackground';
 
@@ -21,12 +21,53 @@ const usePrefersReducedMotion = () => {
   return prefersReducedMotion;
 };
 
+const FloatingParticles: React.FC<{ reducedMotion: boolean }> = ({ reducedMotion }) => {
+  const frame = useCurrentFrame();
+
+  // Static particle configuration
+  const particles = useMemo(() => [
+    { x: 0.2, y: 0.3, size: 300, color: 'rgba(255,255,255,0.03)', speed: 1.2 },
+    { x: 0.8, y: 0.7, size: 250, color: 'rgba(255,255,255,0.03)', speed: 0.8 },
+    { x: 0.5, y: 0.5, size: 400, color: 'rgba(255,255,255,0.02)', speed: 1.0 },
+    { x: 0.1, y: 0.8, size: 200, color: 'rgba(255,255,255,0.02)', speed: 1.5 },
+    { x: 0.9, y: 0.2, size: 350, color: 'rgba(255,255,255,0.025)', speed: 0.9 },
+  ], []);
+
+  if (reducedMotion) return null;
+
+  return (
+    <AbsoluteFill style={{ overflow: 'hidden' }}>
+      {particles.map((p, i) => {
+        const xOffset = Math.sin(frame / 100 * p.speed + i) * 30;
+        const yOffset = Math.cos(frame / 120 * p.speed + i) * 30;
+
+        return (
+          <div
+            key={i}
+            style={{
+              position: 'absolute',
+              left: `${p.x * 100}%`,
+              top: `${p.y * 100}%`,
+              width: p.size,
+              height: p.size,
+              borderRadius: '50%',
+              backgroundColor: p.color,
+              transform: `translate(-50%, -50%) translate(${xOffset}px, ${yOffset}px)`,
+              filter: 'blur(40px)',
+            }}
+          />
+        );
+      })}
+    </AbsoluteFill>
+  );
+};
+
 export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const prefersReducedMotion = usePrefersReducedMotion();
 
-  // Spring-based fade-in animation
+  // Spring-based fade-in animation for main container
   const opacity = prefersReducedMotion ? 1 : spring({
     frame,
     fps,
@@ -35,7 +76,7 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
     durationInFrames: 30,
   });
 
-  // Spring-based scale animation
+  // Spring-based scale animation for main container
   const scale = prefersReducedMotion ? 1 : spring({
     frame,
     fps,
@@ -48,21 +89,40 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
   });
 
   // Subtle breathing animation for continuous movement
-  // Disable breathing if reduced motion is preferred
   const breathingScale = prefersReducedMotion ? 1 : 1 + Math.sin(frame / 45) * 0.01;
+
+  // Subtitle animation (starts after title)
+  const subtitleStartFrame = 15;
+  const subtitleOpacity = prefersReducedMotion ? 1 : spring({
+    frame: frame - subtitleStartFrame,
+    fps,
+    from: 0,
+    to: 1,
+    durationInFrames: 40,
+  });
+
+  const subtitleY = prefersReducedMotion ? 0 : spring({
+    frame: frame - subtitleStartFrame,
+    fps,
+    from: 20,
+    to: 0,
+    durationInFrames: 40,
+    config: { damping: 12 },
+  });
 
   return (
     <GradientBackground preset="clinical-blue" animated={!prefersReducedMotion}>
+      <FloatingParticles reducedMotion={prefersReducedMotion} />
       <div
         style={{
           width: '100%',
           height: '100%',
-          // Background handled by GradientBackground wrapper
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
           opacity,
+          zIndex: 1, // Ensure text is above particles
         }}
       >
         <div
@@ -76,28 +136,40 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
               fontFamily: FONTS.primary,
               fontSize: '72px',
               fontWeight: 700,
-              color: COLORS.surface, // Changed to surface (white) for better contrast on gradient
+              color: COLORS.surface,
               margin: 0,
               marginBottom: '24px',
-              textShadow: '0 4px 12px rgba(0,0,0,0.1)', // Added text shadow for legibility
+              textShadow: '0 4px 12px rgba(0,0,0,0.1)',
             }}
           >
             {`Hi ${patientName}!`.split('').map((char, i) => {
+              // Staggered character animations
+              const delay = i * 2; // Faster stagger
+
               const charOpacity = prefersReducedMotion ? 1 : spring({
-                frame: frame - i * 3,
+                frame: frame - delay,
                 fps,
                 from: 0,
                 to: 1,
-                durationInFrames: 20,
+                durationInFrames: 25,
+              });
+
+              const charScale = prefersReducedMotion ? 1 : spring({
+                frame: frame - delay,
+                fps,
+                from: 0.5,
+                to: 1,
+                durationInFrames: 25,
+                config: { damping: 12, stiffness: 100 },
               });
 
               const charY = prefersReducedMotion ? 0 : spring({
-                frame: frame - i * 3,
+                frame: frame - delay,
                 fps,
-                from: 20,
+                from: 30,
                 to: 0,
-                durationInFrames: 20,
-                config: { damping: 10 },
+                durationInFrames: 25,
+                config: { damping: 12 },
               });
 
               return (
@@ -106,7 +178,7 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
                   style={{
                     display: 'inline-block',
                     opacity: charOpacity,
-                    transform: `translateY(${charY}px)`,
+                    transform: `translateY(${charY}px) scale(${charScale})`,
                     whiteSpace: 'pre',
                   }}
                 >
@@ -120,8 +192,10 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
               fontFamily: FONTS.primary,
               fontSize: '32px',
               fontWeight: 500,
-              color: 'rgba(255, 255, 255, 0.9)', // White with slight transparency
+              color: 'rgba(255, 255, 255, 0.9)',
               margin: 0,
+              opacity: subtitleOpacity,
+              transform: `translateY(${subtitleY}px)`,
             }}
           >
             Welcome to Dr. Sayuj Krishnan's Practice
