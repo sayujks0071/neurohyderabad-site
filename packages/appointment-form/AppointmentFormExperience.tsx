@@ -9,6 +9,7 @@ import Faq from "./Faq";
 import MapSection from "./MapSection";
 import { APPOINTMENT_SUCCESS_MESSAGE } from "./constants";
 import { trackConversionOnly } from "@/src/lib/google-ads-conversion";
+import { analytics } from "@/src/lib/analytics";
 
 type ViewState = "form" | "confirmation";
 
@@ -53,6 +54,9 @@ function AppointmentFormContent({
       // Track Google Ads conversion for successful appointment booking
       trackConversionOnly();
 
+      // Track Analytics Success
+      analytics.appointmentSuccess("booking_page", "general");
+
       if (payload.emailResult?.success) {
         addToast("Confirmation email simulated successfully.", "success");
       } else if (payload.emailResult?.error) {
@@ -64,6 +68,14 @@ function AppointmentFormContent({
       }
     } catch (error) {
       console.error("[appointments] Failed to submit booking:", error);
+
+      // Track Analytics Error
+      analytics.formError(
+        "booking_page",
+        "submit",
+        error instanceof Error ? error.message : "Unknown error"
+      );
+
       addToast(
         error instanceof Error
           ? error.message

@@ -23,33 +23,49 @@ interface AlertConfig {
     threshold: number;
     operator: '>' | '<' | '=' | '>=' | '<=';
     window?: string;
+    filters?: { key: string; value: string }[];
   };
   severity: 'low' | 'medium' | 'high' | 'critical';
 }
 
 const ALERTS: AlertConfig[] = [
+  // P1: Critical Alerts (Immediate Action)
   {
-    name: 'High Error Rate',
-    description: 'Alert when error rate exceeds 1%',
+    name: 'Critical Form Failure',
+    description: 'Alert when form submission success rate < 90%',
+    condition: {
+      metric: 'form.success_rate',
+      threshold: 0.9, // 90%
+      operator: '<',
+      window: '15m',
+    },
+    severity: 'critical',
+  },
+  {
+    name: 'Appointment API Down',
+    description: 'Alert when Appointment API 5xx errors > 0',
+    condition: {
+      metric: 'http.status.5xx',
+      threshold: 0,
+      operator: '>',
+      window: '5m',
+      filters: [{ key: 'path', value: '/api/appointments*' }],
+    },
+    severity: 'critical',
+  },
+  {
+    name: 'Critical Error Rate',
+    description: 'Alert when global error rate > 5%',
     condition: {
       metric: 'error.rate',
-      threshold: 0.01, // 1%
+      threshold: 0.05, // 5%
       operator: '>',
       window: '5m',
     },
-    severity: 'high',
+    severity: 'critical',
   },
-  {
-    name: 'Slow Appointment API',
-    description: 'Alert when appointment API response time > 2s',
-    condition: {
-      metric: 'http.response_time',
-      threshold: 2000, // 2 seconds
-      operator: '>',
-      window: '5m',
-    },
-    severity: 'medium',
-  },
+
+  // P2: High Priority (Action Required)
   {
     name: 'Poor LCP',
     description: 'Alert when LCP exceeds 2.5s (poor user experience)',
@@ -61,6 +77,31 @@ const ALERTS: AlertConfig[] = [
     },
     severity: 'high',
   },
+  {
+    name: 'Chatbot High Latency',
+    description: 'Alert when Chatbot API response time > 3s',
+    condition: {
+      metric: 'http.response_time',
+      threshold: 3000, // 3 seconds
+      operator: '>',
+      window: '5m',
+      filters: [{ key: 'path', value: '/api/ai/chat*' }],
+    },
+    severity: 'high',
+  },
+  {
+    name: 'Critical Page Slow Load',
+    description: 'Alert when critical pages load slower than 3s',
+    condition: {
+      metric: 'http.response_time',
+      threshold: 3000, // 3 seconds
+      operator: '>',
+      window: '10m',
+    },
+    severity: 'high',
+  },
+
+  // P3: Monitor (Optimization)
   {
     name: 'High CLS',
     description: 'Alert when CLS exceeds 0.1 (layout instability)',
@@ -84,17 +125,6 @@ const ALERTS: AlertConfig[] = [
     severity: 'medium',
   },
   {
-    name: 'Chatbot API Failure',
-    description: 'Alert when chatbot API error rate > 5%',
-    condition: {
-      metric: 'error.rate',
-      threshold: 0.05, // 5%
-      operator: '>',
-      window: '5m',
-    },
-    severity: 'high',
-  },
-  {
     name: 'High 404 Rate',
     description: 'Alert when 404 error rate > 5%',
     condition: {
@@ -104,17 +134,6 @@ const ALERTS: AlertConfig[] = [
       window: '10m',
     },
     severity: 'medium',
-  },
-  {
-    name: 'Form Submission Failure',
-    description: 'Alert when form submission success rate < 90%',
-    condition: {
-      metric: 'form.success_rate',
-      threshold: 0.9, // 90%
-      operator: '<',
-      window: '15m',
-    },
-    severity: 'critical',
   },
 ];
 
@@ -142,14 +161,22 @@ async function setupAlerts() {
     for (const config of ALERTS) {
       try {
         console.log(`Creating: ${config.name}...`);
+
+        // Merge global filters with specific alert filters
+        const filters = [
+          { key: 'url', value: SITE_URL },
+          ...(config.condition.filters || [])
+        ];
+
         const alert = await middlewareApi.createAlert(ruleId, {
           name: config.name,
           description: config.description,
           condition: {
-            ...config.condition,
-            filters: [
-              { key: 'url', value: SITE_URL },
-            ],
+            metric: config.condition.metric,
+            threshold: config.condition.threshold,
+            operator: config.condition.operator,
+            window: config.condition.window,
+            filters: filters,
           },
           actions: [
             {
