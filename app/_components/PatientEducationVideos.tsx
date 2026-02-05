@@ -39,7 +39,22 @@ const videos: VideoItem[] = [
   }
 ];
 
-export default function PatientEducationVideos() {
+interface PatientEducationVideosProps {
+  category?: string;
+}
+
+export default function PatientEducationVideos({ category }: PatientEducationVideosProps = {}) {
+  const filteredVideos = category
+    ? videos.filter((video) =>
+        video.focus.toLowerCase().includes(category.toLowerCase()) ||
+        video.title.toLowerCase().includes(category.toLowerCase())
+      )
+    : videos;
+
+  if (filteredVideos.length === 0) {
+    return null;
+  }
+
   return (
     <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
@@ -67,8 +82,8 @@ export default function PatientEducationVideos() {
             </a>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-3">
-            {videos.map((video) => (
+          <div className={`grid gap-8 ${filteredVideos.length === 1 ? 'md:grid-cols-1 max-w-2xl mx-auto' : 'md:grid-cols-3'}`}>
+            {filteredVideos.map((video) => (
               <article
                 key={video.id}
                 className="bg-gray-50 rounded-2xl shadow-lg overflow-hidden border border-gray-100 flex flex-col"
