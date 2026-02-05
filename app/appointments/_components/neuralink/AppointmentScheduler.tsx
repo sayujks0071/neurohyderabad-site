@@ -287,7 +287,7 @@ const AppointmentScheduler = ({
                 <div id="morning-slots-label" className="flex items-center text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 ml-1">
                   <Sun className="w-3 h-3 mr-2" /> Morning
                 </div>
-                <div role="group" aria-labelledby="morning-slots-label" className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3">
+                <div role="radiogroup" aria-labelledby="morning-slots-label" className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3">
                   {morningSlots.map((slot) => (
                     <TimeSlotButton
                       key={slot.time}
@@ -310,7 +310,7 @@ const AppointmentScheduler = ({
                 <div id="afternoon-slots-label" className="flex items-center text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 ml-1">
                   <Moon className="w-3 h-3 mr-2" /> Afternoon
                 </div>
-                <div role="group" aria-labelledby="afternoon-slots-label" className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3">
+                <div role="radiogroup" aria-labelledby="afternoon-slots-label" className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3">
                   {afternoonSlots.map((slot) => (
                     <TimeSlotButton
                       key={slot.time}
@@ -344,22 +344,8 @@ const TimeSlotButton = ({ slot, selectedTime, onSelect }: TimeSlotButtonProps) =
   const isSelected = selectedTime === slot.time;
   
   return (
-    <button
-      type="button"
-      disabled={!slot.available}
-      onMouseDown={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-      }}
-      onClick={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        if (slot.available) {
-          onSelect();
-        }
-      }}
-      aria-pressed={isSelected}
-      className={`py-2.5 px-2 rounded-xl text-sm font-bold transition-all border-2 shadow-sm relative ${
+    <label
+      className={`py-2.5 px-2 rounded-xl text-sm font-bold transition-all border-2 shadow-sm relative block text-center focus-within:ring-2 focus-within:ring-blue-300 focus-within:ring-offset-1 focus-within:z-10 ${
         isSelected
           ? "bg-blue-600 text-white border-blue-700 shadow-blue-200 z-10 ring-2 ring-blue-300 ring-offset-1"
           : slot.available
@@ -367,6 +353,19 @@ const TimeSlotButton = ({ slot, selectedTime, onSelect }: TimeSlotButtonProps) =
           : "bg-slate-50 text-slate-300 border-slate-100 cursor-not-allowed shadow-none"
       }`}
     >
+      <input
+        type="radio"
+        name="appointmentTime"
+        value={slot.time}
+        checked={isSelected}
+        disabled={!slot.available}
+        onChange={() => {
+          if (slot.available) {
+            onSelect();
+          }
+        }}
+        className="sr-only peer"
+      />
       {slot.time}
       {isSelected && (
         <div className="absolute -top-1 -right-1">
@@ -375,7 +374,7 @@ const TimeSlotButton = ({ slot, selectedTime, onSelect }: TimeSlotButtonProps) =
           </div>
         </div>
       )}
-    </button>
+    </label>
   );
 };
 

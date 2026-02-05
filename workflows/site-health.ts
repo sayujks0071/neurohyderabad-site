@@ -50,7 +50,12 @@ export async function runSiteHealthCheck(): Promise<HealthCheckResult> {
 
   const checkId = `health-${Date.now()}`;
   const timestamp = new Date().toISOString();
-  console.log(`[Health Workflow] Starting health check ${checkId}`);
+  console.log(JSON.stringify({
+    workflow: "site-health",
+    event: "start",
+    checkId,
+    timestamp
+  }));
 
   const checks: HealthCheckResult["checks"] = [];
   const alerts: string[] = [];
@@ -119,7 +124,15 @@ export async function runSiteHealthCheck(): Promise<HealthCheckResult> {
       overall = "degraded";
     }
 
-    console.log(`[Health Workflow] Completed ${checkId}: ${overall}`);
+    console.log(JSON.stringify({
+      workflow: "site-health",
+      event: "complete",
+      checkId,
+      overall,
+      failCount,
+      warnCount,
+      alertCount: alerts.length
+    }));
 
     // Send alerts if needed (after all checks complete)
     if (alerts.length > 0) {
@@ -128,7 +141,12 @@ export async function runSiteHealthCheck(): Promise<HealthCheckResult> {
 
     return { checkId, timestamp, overall, checks, alerts };
   } catch (error) {
-    console.error(`[Health Workflow] Error in ${checkId}:`, error);
+    console.error(JSON.stringify({
+      workflow: "site-health",
+      event: "error",
+      checkId,
+      error: String(error)
+    }));
     return {
       checkId,
       timestamp,
@@ -150,13 +168,14 @@ async function checkCriticalPages(): Promise<{
   "use step";
 
   const metadata = getStepMetadata();
-  console.log(`[Health Workflow] Checking critical pages (attempt ${metadata.attempt + 1})`);
+  console.log(JSON.stringify({
+    workflow: "site-health",
+    step: "check-critical-pages",
+    attempt: metadata.attempt + 1
+  }));
 
-  const checks: HealthCheckResult["checks"] = [];
-  let failedCount = 0;
-  let serverErrors = 0;
-
-  for (const page of CRITICAL_PAGES) {
+  // Execute all page checks in parallel
+  const results = await Promise.all(CRITICAL_PAGES.map(async (page) => {
     const start = Date.now();
     try {
       const response = await fetch(`${SITE_URL}${page.path}`, {
@@ -167,41 +186,55 @@ async function checkCriticalPages(): Promise<{
       const latency = Date.now() - start;
 
       if (response.ok) {
-        checks.push({
-          name: page.name,
-          status: latency > 3000 ? "warn" : "pass",
-          latency,
-          message: latency > 3000 ? "Slow response" : "OK",
-        });
+        return {
+          check: {
+            name: page.name,
+            status: latency > 3000 ? "warn" as const : "pass" as const,
+            latency,
+            message: latency > 3000 ? "Slow response" : "OK",
+          },
+          failed: false,
+          serverError: false
+        };
       } else if (response.status >= 500) {
-        // Track server errors for potential retry
-        serverErrors++;
-        failedCount++;
-        checks.push({
-          name: page.name,
-          status: "fail",
-          latency,
-          message: `HTTP ${response.status}`,
-        });
+        return {
+          check: {
+            name: page.name,
+            status: "fail" as const,
+            latency,
+            message: `HTTP ${response.status}`,
+          },
+          failed: true,
+          serverError: true
+        };
       } else {
-        failedCount++;
-        checks.push({
-          name: page.name,
-          status: "fail",
-          latency,
-          message: `HTTP ${response.status}`,
-        });
+        return {
+          check: {
+            name: page.name,
+            status: "fail" as const,
+            latency,
+            message: `HTTP ${response.status}`,
+          },
+          failed: true,
+          serverError: false
+        };
       }
     } catch (error) {
-      failedCount++;
-      serverErrors++;
-      checks.push({
-        name: page.name,
-        status: "fail",
-        message: String(error),
-      });
+      return {
+        check: {
+          name: page.name,
+          status: "fail" as const,
+          message: String(error),
+        },
+        failed: true,
+        serverError: true // Assume fetch errors might be transient connection issues
+      };
     }
-  }
+  }));
+
+  const checks = results.map(r => r.check);
+  const failedCount = results.filter(r => r.failed).length;
+  const serverErrors = results.filter(r => r.serverError).length;
 
   // If most failures are server errors, retry with backoff
   if (serverErrors > CRITICAL_PAGES.length / 2 && metadata.attempt < 3) {
@@ -211,7 +244,13 @@ async function checkCriticalPages(): Promise<{
     );
   }
 
-  console.log(`[Health Workflow] Pages checked: ${checks.length}, failed: ${failedCount}`);
+  console.log(JSON.stringify({
+    workflow: "site-health",
+    step: "check-critical-pages-result",
+    checks: checks.length,
+    failed: failedCount
+  }));
+
   return { checks, failedCount };
 }
 checkCriticalPages.maxRetries = 3;
@@ -225,12 +264,13 @@ async function checkAPIEndpoints(): Promise<{
 }> {
   "use step";
 
-  console.log("[Health Workflow] Checking API endpoints");
+  console.log(JSON.stringify({
+    workflow: "site-health",
+    step: "check-api-endpoints"
+  }));
 
-  const checks: HealthCheckResult["checks"] = [];
-  let failedCount = 0;
-
-  for (const endpoint of API_ENDPOINTS) {
+  // Execute all API checks in parallel
+  const results = await Promise.all(API_ENDPOINTS.map(async (endpoint) => {
     const start = Date.now();
     try {
       const response = await fetch(`${SITE_URL}${endpoint.path}`, {
@@ -242,32 +282,48 @@ async function checkAPIEndpoints(): Promise<{
 
       // OPTIONS requests may return various status codes
       if (response.status < 500) {
-        checks.push({
-          name: endpoint.name,
-          status: latency > 2000 ? "warn" : "pass",
-          latency,
-          message: "OK",
-        });
+        return {
+          check: {
+            name: endpoint.name,
+            status: latency > 2000 ? "warn" as const : "pass" as const,
+            latency,
+            message: "OK",
+          },
+          failed: false
+        };
       } else {
-        failedCount++;
-        checks.push({
-          name: endpoint.name,
-          status: "fail",
-          latency,
-          message: `HTTP ${response.status}`,
-        });
+        return {
+          check: {
+            name: endpoint.name,
+            status: "fail" as const,
+            latency,
+            message: `HTTP ${response.status}`,
+          },
+          failed: true
+        };
       }
     } catch (error) {
-      failedCount++;
-      checks.push({
-        name: endpoint.name,
-        status: "fail",
-        message: String(error),
-      });
+      return {
+        check: {
+          name: endpoint.name,
+          status: "fail" as const,
+          message: String(error),
+        },
+        failed: true
+      };
     }
-  }
+  }));
 
-  console.log(`[Health Workflow] APIs checked: ${checks.length}, failed: ${failedCount}`);
+  const checks = results.map(r => r.check);
+  const failedCount = results.filter(r => r.failed).length;
+
+  console.log(JSON.stringify({
+    workflow: "site-health",
+    step: "check-api-endpoints-result",
+    checks: checks.length,
+    failed: failedCount
+  }));
+
   return { checks, failedCount };
 }
 
@@ -277,7 +333,10 @@ async function checkAPIEndpoints(): Promise<{
 async function checkSSLCertificate(): Promise<HealthCheckResult["checks"][0]> {
   "use step";
 
-  console.log("[Health Workflow] Checking SSL certificate");
+  console.log(JSON.stringify({
+    workflow: "site-health",
+    step: "check-ssl"
+  }));
 
   try {
     const response = await fetch(SITE_URL, {
@@ -322,7 +381,10 @@ async function checkSSLCertificate(): Promise<HealthCheckResult["checks"][0]> {
 async function checkPerformance(): Promise<HealthCheckResult["checks"][0]> {
   "use step";
 
-  console.log("[Health Workflow] Checking performance");
+  console.log(JSON.stringify({
+    workflow: "site-health",
+    step: "check-performance"
+  }));
 
   const start = Date.now();
 
@@ -370,7 +432,10 @@ async function checkPerformance(): Promise<HealthCheckResult["checks"][0]> {
 async function checkSitemap(): Promise<HealthCheckResult["checks"][0]> {
   "use step";
 
-  console.log("[Health Workflow] Checking sitemap");
+  console.log(JSON.stringify({
+    workflow: "site-health",
+    step: "check-sitemap"
+  }));
 
   try {
     const response = await fetch(`${SITE_URL}/sitemap.xml`, {
@@ -407,7 +472,10 @@ async function checkSitemap(): Promise<HealthCheckResult["checks"][0]> {
 async function checkRobotsTxt(): Promise<HealthCheckResult["checks"][0]> {
   "use step";
 
-  console.log("[Health Workflow] Checking robots.txt");
+  console.log(JSON.stringify({
+    workflow: "site-health",
+    step: "check-robots"
+  }));
 
   try {
     const response = await fetch(`${SITE_URL}/robots.txt`, {
@@ -442,7 +510,11 @@ async function checkRobotsTxt(): Promise<HealthCheckResult["checks"][0]> {
 async function sendHealthAlerts(alerts: string[]): Promise<void> {
   "use step";
 
-  console.log(`[Health Workflow] Sending ${alerts.length} alerts`);
+  console.log(JSON.stringify({
+    workflow: "site-health",
+    step: "send-alerts",
+    alertCount: alerts.length
+  }));
 
   // In production, this would:
   // - Send email to admin

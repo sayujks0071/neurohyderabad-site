@@ -456,15 +456,33 @@ export default function Home() {
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-2xl font-bold mb-8 text-gray-800">Memberships & Certifications</h2>
             <div className="flex flex-wrap justify-center gap-8 items-center opacity-80 grayscale hover:grayscale-0 transition-all duration-300">
-              <a href="https://www.aospine.org/" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center group">
+              <a
+                href="https://www.aospine.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-col items-center group"
+                aria-label="AO Spine International (opens in a new tab)"
+              >
                   <span className="text-4xl mb-2 group-hover:scale-110 transition-transform">🌍</span>
                   <span className="font-semibold text-gray-700 group-hover:text-blue-700">AO Spine International</span>
               </a>
-              <a href="https://neurosocietyindia.org/" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center group">
+              <a
+                href="https://neurosocietyindia.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-col items-center group"
+                aria-label="Neurological Society of India (opens in a new tab)"
+              >
                   <span className="text-4xl mb-2 group-hover:scale-110 transition-transform">🇮🇳</span>
                   <span className="font-semibold text-gray-700 group-hover:text-blue-700">Neurological Society of India</span>
               </a>
-              <a href="https://www.cns.org/" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center group">
+              <a
+                href="https://www.cns.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-col items-center group"
+                aria-label="Congress of Neurological Surgeons (opens in a new tab)"
+              >
                   <span className="text-4xl mb-2 group-hover:scale-110 transition-transform">🧠</span>
                   <span className="font-semibold text-gray-700 group-hover:text-blue-700">Congress of Neurological Surgeons</span>
               </a>
@@ -878,17 +896,17 @@ export default function Home() {
               <Card padding="md" hover={true}>
                 <h3 className="font-semibold text-blue-700 mb-3">Medical Guidelines</h3>
                 <ul className="space-y-2 text-sm text-gray-600">
-                  <li>• <a href="https://www.aans.org/patients/conditions-and-treatments" target="_blank" rel="noopener" className="text-blue-600 hover:underline">AANS: Conditions and Treatments</a></li>
-                  <li>• <a href="https://www.ninds.nih.gov/health-information/disorders" target="_blank" rel="noopener" className="text-blue-600 hover:underline">NINDS: Neurological Disorders</a></li>
-                  <li>• <a href="https://www.cancer.gov/types/brain/patient/brain-treatment-pdq" target="_blank" rel="noopener" className="text-blue-600 hover:underline">NCI: Brain Tumor Treatment</a></li>
+                  <li>• <a href="https://www.aans.org/patients/conditions-and-treatments" target="_blank" rel="noopener" className="text-blue-600 hover:underline" aria-label="AANS: Conditions and Treatments (opens in a new tab)">AANS: Conditions and Treatments</a></li>
+                  <li>• <a href="https://www.ninds.nih.gov/health-information/disorders" target="_blank" rel="noopener" className="text-blue-600 hover:underline" aria-label="NINDS: Neurological Disorders (opens in a new tab)">NINDS: Neurological Disorders</a></li>
+                  <li>• <a href="https://www.cancer.gov/types/brain/patient/brain-treatment-pdq" target="_blank" rel="noopener" className="text-blue-600 hover:underline" aria-label="NCI: Brain Tumor Treatment (opens in a new tab)">NCI: Brain Tumor Treatment</a></li>
                 </ul>
               </Card>
               <Card padding="md" hover={true}>
                 <h3 className="font-semibold text-blue-700 mb-3">Research & Evidence</h3>
                 <ul className="space-y-2 text-sm text-gray-600">
-                  <li>• <a href="https://www.epilepsy.com/treatment/surgery" target="_blank" rel="noopener" className="text-blue-600 hover:underline">Epilepsy Foundation: Surgery</a></li>
-                  <li>• <a href="https://www.nhs.uk/conditions/brain-tumours/treatment/" target="_blank" rel="noopener" className="text-blue-600 hover:underline">NHS: Brain Tumor Treatment</a></li>
-                  <li>• <a href="https://www.mayoclinic.org/diseases-conditions/trigeminal-neuralgia/diagnosis-treatment/drc-20353347" target="_blank" rel="noopener" className="text-blue-600 hover:underline">Mayo Clinic: Trigeminal Neuralgia</a></li>
+                  <li>• <a href="https://www.epilepsy.com/treatment/surgery" target="_blank" rel="noopener" className="text-blue-600 hover:underline" aria-label="Epilepsy Foundation: Surgery (opens in a new tab)">Epilepsy Foundation: Surgery</a></li>
+                  <li>• <a href="https://www.nhs.uk/conditions/brain-tumours/treatment/" target="_blank" rel="noopener" className="text-blue-600 hover:underline" aria-label="NHS: Brain Tumor Treatment (opens in a new tab)">NHS: Brain Tumor Treatment</a></li>
+                  <li>• <a href="https://www.mayoclinic.org/diseases-conditions/trigeminal-neuralgia/diagnosis-treatment/drc-20353347" target="_blank" rel="noopener" className="text-blue-600 hover:underline" aria-label="Mayo Clinic: Trigeminal Neuralgia (opens in a new tab)">Mayo Clinic: Trigeminal Neuralgia</a></li>
                 </ul>
               </Card>
             </div>

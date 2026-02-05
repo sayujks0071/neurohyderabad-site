@@ -1,10 +1,24 @@
-# Prioritized Fix List (SEO Audit)
+# Prioritized SEO Fixes
 
-| Issue | Affected URLs | Fix Summary | Impact | Effort | Risk | Do Now? |
-|-------|---------------|-------------|--------|--------|------|---------|
-| **Sitemap Fragmentation** | All | Consolidated fragmented sitemap routes (`sitemap-*.xml`) into a single `app/sitemap.ts` and cleaned up `robots.txt`. | 5 | 2 | Low | **Yes** |
-| **Missing Schema Image** | Homepage / Global | Updated `PhysicianSchema` to use `dr-sayuj-krishnan-portrait-optimized.jpg` instead of missing image. | 5 | 1 | Low | **Yes** |
-| **Canonical URL Logic** | Homepage | Refactored `app/page.tsx` to use robust `makeMetadata` utility for canonical generation. | 4 | 2 | Low | **Yes** |
-| **Broken Sitemap Links** | Robots.txt | Fixed `robots.txt` pointing to non-existent sitemaps (before consolidation). | 5 | 1 | Low | **Yes** |
-| **Missing Content/Keywords** | Competitor Gap | Create dedicated pages for "Spine Surgery Cost" and specific conditions found in competitor analysis. | 4 | 4 | Low | No |
-| **Performance (CLS)** | Homepage | Dynamic imports are already using `loading` placeholders, but verify heights match exactly. | 3 | 3 | Med | No |
+## 1. Eliminate Ghost Pages (Critical Technical)
+**Issue**: ~50 URLs listed in sitemaps return 404.
+**Impact**: Wastes crawl budget, bad UX, "Soft 404" signals.
+**Fix**: Remove these URLs from `app/sitemap-services.ts`, `app/sitemap-conditions.ts`, and `app/sitemap.ts`.
+**Effort**: Low. **Risk**: Low.
+
+## 2. Fix Schema Gaps (E-E-A-T)
+**Issue**: `MedicalWebPage` schema is missing `medicalSpecialty` and `audience` fields. Some pages show `undefined` schema types.
+**Impact**: Reduced rich snippet eligibility (Medical Knowledge Graph).
+**Fix**: Update `MedicalWebPageSchema` component to include defaults or props for these fields.
+**Effort**: Medium. **Risk**: Low.
+
+## 3. Metadata Length Optimization (On-Page)
+**Issue**: 120+ pages have titles > 60 chars.
+**Impact**: Title truncation in SERPs (lower CTR).
+**Fix**: Shorten the page-specific titles for key pages (Home, Services, Conditions).
+**Effort**: Medium (repetitive). **Risk**: Low.
+
+## 4. Performance (Lighthouse)
+**Issue**: Lighthouse failed locally, but TTFB is good.
+**Fix**: Ensure `next/image` is used properly (already seems so).
+**Action**: Defer major performance overhaul until Lighthouse can be run, but verify `next/image` usage in key components.
