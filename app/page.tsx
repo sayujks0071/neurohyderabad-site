@@ -768,7 +768,7 @@ export default function Home() {
               <div className="container mx-auto px-4">
                 <div className="max-w-4xl mx-auto">
                   {/* CLS Optimization: Height matched to loaded content (Video + Header) */}
-                  <div className="animate-pulse bg-gray-200 h-[550px] rounded-xl"></div>
+                  <div className="animate-pulse bg-gray-200 h-[450px] rounded-xl"></div>
                 </div>
               </div>
             </div>
