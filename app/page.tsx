@@ -347,7 +347,8 @@ export default function Home() {
             <div className="py-16 bg-blue-50">
               <div className="container mx-auto px-4">
                 <div className="max-w-4xl mx-auto">
-                  <div className="animate-pulse bg-blue-100 h-[500px] rounded-xl"></div>
+                  {/* CLS Optimization: Height matched to loaded content (Video + Header) */}
+                  <div className="animate-pulse bg-blue-100 h-[450px] rounded-xl"></div>
                 </div>
               </div>
             </div>
@@ -785,6 +786,7 @@ export default function Home() {
             <div className="py-16">
               <div className="container mx-auto px-4">
                 <div className="max-w-4xl mx-auto">
+                  {/* CLS Optimization: Height matched to loaded content (Video + Header) */}
                   <div className="animate-pulse bg-gray-200 h-[450px] rounded-xl"></div>
                 </div>
               </div>
