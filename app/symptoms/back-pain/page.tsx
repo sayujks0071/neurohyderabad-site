@@ -14,8 +14,8 @@ import TrustProof from '@/app/_components/TrustProof';
 import { patientStories } from '@/src/content/stories';
 
 const baseMetadata = makeMetadata({
-  title: "Back Pain Symptoms & Causes | When to See a Doctor | Dr Sayuj",
-  description: "Understanding back pain causes: muscle strain vs slip disc vs sciatica. Learn red flag symptoms requiring urgent neurosurgical attention in Hyderabad.",
+  title: "Back Pain Causes & Red Flags | Specialist Treatment Hyderabad",
+  description: "Back pain won't go away? Learn the 5 red flags requiring urgent care. Specialist diagnosis & non-surgical treatment in Hyderabad by Dr. Sayuj.",
   canonicalPath: '/symptoms/back-pain',
 });
 
@@ -159,8 +159,8 @@ export default function BackPainSymptomsPage() {
       </section>
 
       <MedicalWebPageSchema
-        title="Back Pain Symptoms & Causes | Dr. Sayuj Krishnan"
-        description="Comprehensive guide to back pain causes, symptoms, and red flags. Learn when to seek expert neurosurgical care in Hyderabad."
+        title="Back Pain Causes & Red Flags | Specialist Treatment Hyderabad"
+        description="Back pain won't go away? Learn the 5 red flags requiring urgent care. Specialist diagnosis & non-surgical treatment in Hyderabad by Dr. Sayuj."
         pageSlug="/symptoms/back-pain"
         pageType="condition"
         serviceOrCondition="Back Pain"
