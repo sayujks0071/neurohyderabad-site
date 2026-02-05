@@ -137,7 +137,7 @@ export async function generateRecoveryPlan(request: RecoveryPredictorRequest): P
 
 function getFallbackPlan(surgeryType: string): RecoveryPlan {
   return {
-    title: `Recovery Timeline: ${surgeryType} `,
+    title: `Recovery Timeline: ${surgeryType}`,
     description: "Standard recovery guidelines. Please consult Dr. Sayuj for your personalized plan.",
     phases: [
       {
