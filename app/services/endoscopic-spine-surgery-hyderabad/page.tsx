@@ -126,6 +126,33 @@ const COSTS = [
   }
 ];
 
+const RISKS = [
+  {
+    risk: "Infection",
+    stat: "< 0.5%",
+    context: "Significantly lower than open surgery (2-5%)",
+    prevention: "Sterile keyhole access & antibiotics"
+  },
+  {
+    risk: "Dural Tear",
+    stat: "~1-2%",
+    context: "Fluid leak from the spinal sac",
+    prevention: "High-Def 4K visualization avoids accidental nicks"
+  },
+  {
+    risk: "Recurrence",
+    stat: "~5-8%",
+    context: "Disc re-herniation at the same level",
+    prevention: "Complete fragment removal & lifestyle modification"
+  },
+  {
+    risk: "Transient Nerve Irritation",
+    stat: "~3-5%",
+    context: "Temporary tingling during healing",
+    prevention: "Gentle dilation instead of cutting muscle"
+  }
+];
+
 const RECOVERY_STEPS = [
   { time: 'Day 0 (Surgery)', milestone: 'Walk to washroom with assistance 3 hours after surgery.' },
   { time: 'Day 1 (Discharge)', milestone: 'Climb a flight of stairs. Discharge with oral pain meds.' },
@@ -637,6 +664,29 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
           costs={COSTS}
           disclaimer="Approximate package estimates for self-pay patients at Yashoda Hospital Malakpet. Final cost depends on room category (General/Sharing/Private), insurance approvals, and specific implant requirements. We offer full assistance with insurance pre-authorization."
         />
+
+        <section className="mb-16 bg-orange-50 border border-orange-100 rounded-2xl p-8">
+          <h2 className="text-3xl font-bold text-orange-900 mb-6">Safety Profile & Transparent Risk Assessment</h2>
+          <p className="text-gray-700 mb-8">
+            Dr. Sayuj believes in complete transparency. While endoscopic spine surgery is one of the safest techniques available, no surgery is without risk. We use advanced protocols at Yashoda Hospital to minimize these risks further.
+          </p>
+          <div className="grid md:grid-cols-2 gap-6">
+            {RISKS.map((item) => (
+              <div key={item.risk} className="bg-white p-5 rounded-xl border border-orange-200 shadow-sm">
+                <div className="flex justify-between items-start mb-2">
+                  <h3 className="font-bold text-gray-900">{item.risk}</h3>
+                  <span className="bg-orange-100 text-orange-800 text-xs font-bold px-2 py-1 rounded-full">
+                    Risk: {item.stat}
+                  </span>
+                </div>
+                <p className="text-sm text-gray-600 mb-3">{item.context}</p>
+                <div className="text-sm border-t border-gray-100 pt-3 mt-auto">
+                  <span className="font-semibold text-orange-800">Our Protocol:</span> {item.prevention}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
 
         <section className="mb-16 grid lg:grid-cols-[1.2fr_1fr] gap-10 items-start">
           <div className="space-y-6">

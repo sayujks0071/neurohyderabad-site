@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from 'react';
-import Section from "../../src/components/Section";
-import Button from "../../src/components/Button";
-import Card from "../../src/components/Card";
+import Section from "../_components/Section";
+import Button from "../_components/Button";
+import Card from "../_components/Card";
 import { makeMetadata } from "@/app/_lib/meta";
 
 // Note: In a real app, you might want to move this metadata to a layout or use generateMetadata

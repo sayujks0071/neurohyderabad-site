@@ -1,26 +1,28 @@
-const BOOK_URL =
-  "https://www.drsayuj.info/appointments?utm_source=site&utm_medium=cta&utm_campaign=nap_block";
-const WHATSAPP_URL = "https://wa.me/919778280044";
-const DIRECTIONS_URL =
-  "https://www.drsayuj.info/locations?utm_source=site&utm_medium=cta&utm_campaign=nap_block";
+import { getLocationById } from '@/src/data/locations';
+
+const BOOK_URL = "https://www.drsayuj.info/appointments?utm_source=site&utm_medium=cta&utm_campaign=nap_block";
 
 export default function LocalNAP() {
+  // Use Malakpet as the source of truth for the main NAP block
+  const location = getLocationById('malakpet');
+
+  if (!location) return null;
+
   return (
     <section
       aria-label="Clinic contact details"
       className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm"
     >
       <h2 className="text-lg font-semibold text-gray-900">
-        Dr. Sayuj Krishnan, Neurosurgeon
+        {location.canonical_display_name}
       </h2>
       <p className="mt-2 text-gray-700">
-        Room 317, OPD Block, Yashoda Hospital, Malakpet, Hyderabad, Telangana
-        500036
+        {location.address.streetAddress}, {location.address.addressLocality}, {location.address.addressRegion} {location.address.postalCode}
       </p>
       <p className="mt-1 text-gray-700">
         Phone:{" "}
-        <a className="text-blue-700 underline" href="tel:+919778280044">
-          +91 9778280044
+        <a className="text-blue-700 underline" href={`tel:${location.telephone}`}>
+          {location.telephone}
         </a>{" "}
         · Email:{" "}
         <a className="text-blue-700 underline" href="mailto:hellodr@drsayuj.info">
@@ -34,15 +36,19 @@ export default function LocalNAP() {
         >
           Book Consultation
         </a>
-        <a
-          className="rounded-full border border-blue-600 px-4 py-2 text-sm font-semibold text-blue-600 hover:bg-blue-50"
-          href={WHATSAPP_URL}
-        >
-          WhatsApp
-        </a>
+        {location.whatsapp && (
+          <a
+            className="rounded-full border border-blue-600 px-4 py-2 text-sm font-semibold text-blue-600 hover:bg-blue-50"
+            href={`https://wa.me/${location.whatsapp.replace('+', '')}`}
+          >
+            WhatsApp
+          </a>
+        )}
         <a
           className="rounded-full border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100"
-          href={DIRECTIONS_URL}
+          href={location.directions_url}
+          target="_blank"
+          rel="noopener noreferrer"
         >
           Get Directions
         </a>
