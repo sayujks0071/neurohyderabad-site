@@ -39,6 +39,10 @@ export default function AppointmentSchema() {
         "description": "Book Appointment with Dr. Sayuj Krishnan, the Best Neurosurgeon in Hyderabad. Schedule a consultation for spine surgery & brain tumor surgery.",
         "sameAs": SOCIAL_PROFILES,
         "knowsLanguage": ["English", "Hindi", "Telugu", "Malayalam", "Tamil"],
+        "areaServed": {
+          "@type": "AdministrativeArea",
+          "name": "Hyderabad, Telangana, India"
+        },
         "geo": {
           "@type": "GeoCoordinates",
           "latitude": malakpet.geo?.latitude,
