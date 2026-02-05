@@ -382,6 +382,9 @@ export async function handleAppointmentBooking(
     // Step 6: (Removed sleep)
 
     // Step 7: Send confirmation + admin emails (Parallelized)
+    // Start Google Sheets sync early as it is independent of email results
+    const sheetsSyncPromise = syncBookingLead(bookingId, booking, patientInfo.source);
+
     const [confirmationResult, adminEmailResult] = await Promise.all([
       sendBookingConfirmationEmail(booking, confirmationMessage),
       sendBookingAdminAlert(booking, patientInfo.source),
@@ -394,16 +397,18 @@ export async function handleAppointmentBooking(
     }
 
     // Step 8: Sync CRM + webhooks
-    // syncBookingLead is independent; triggerAppointmentWebhooks depends on confirmationResult
+    // Webhooks depend on email confirmation result, but Sheets is already running
+    const webhooksPromise = triggerAppointmentWebhooks(
+      booking,
+      confirmationMessage,
+      confirmationResult,
+      usedAI,
+      patientInfo.source
+    );
+
     const [_, webhookResult] = await Promise.all([
-      syncBookingLead(bookingId, booking, patientInfo.source),
-      triggerAppointmentWebhooks(
-        booking,
-        confirmationMessage,
-        confirmationResult,
-        usedAI,
-        patientInfo.source
-      ),
+      sheetsSyncPromise,
+      webhooksPromise,
     ]);
 
     // Step 9: Post-booking tasks (Reminders, Education, Analytics)

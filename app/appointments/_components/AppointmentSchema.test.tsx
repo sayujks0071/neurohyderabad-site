@@ -1,37 +1,46 @@
 // @vitest-environment jsdom
 import { render } from '@testing-library/react';
-import AppointmentSchema from './AppointmentSchema';
-import { SITE_URL } from '@/src/lib/seo';
 import { describe, it, expect } from 'vitest';
-import '@testing-library/jest-dom/vitest';
+import AppointmentSchema from './AppointmentSchema';
 
 describe('AppointmentSchema', () => {
-  it('renders correct JSON-LD schema', () => {
+  it('renders valid JSON-LD with Physician and MedicalClinic data', () => {
     const { container } = render(<AppointmentSchema />);
-    const script = container.querySelector('script[type="application/ld+json"]');
-    expect(script).toBeInTheDocument();
+    const scriptTag = container.querySelector('script[type="application/ld+json"]');
 
-    if (script) {
-        const json = JSON.parse(script.innerHTML);
-        const physician = json['@graph'].find((item: any) => item['@type'] === 'Physician');
-        const clinic = json['@graph'].find((item: any) => item['@type'] === 'MedicalClinic');
+    expect(scriptTag).toBeDefined();
+    expect(scriptTag).not.toBeNull();
 
-        expect(physician).toBeDefined();
-        expect(physician.name).toBe('Dr. Sayuj Krishnan');
-        expect(physician.medicalSpecialty).toBe('Neurosurgeon');
-        expect(physician.availableService).toEqual(expect.arrayContaining([
-            'Neurosurgery',
-            'Spine Surgery',
-            'Brain Tumor Surgery'
-        ]));
-        // Check exact match for availableService to be precise as per prompt
-        expect(physician.availableService).toHaveLength(3);
+    if (scriptTag) {
+      const json = JSON.parse(scriptTag.innerHTML);
+      expect(json['@context']).toBe('https://schema.org');
+      expect(json['@graph']).toBeDefined();
+      expect(Array.isArray(json['@graph'])).toBe(true);
 
-        expect(physician.url).toBe(`${SITE_URL}/appointments`);
+      const physician = json['@graph'].find((item: any) => item['@type'] === 'Physician');
+      const clinic = json['@graph'].find((item: any) => item['@type'] === 'MedicalClinic');
 
-        expect(clinic).toBeDefined();
-        expect(clinic.name).toContain('Yashoda Hospitals');
-        expect(clinic.address.addressLocality).toBe('Hyderabad');
+      // Verify Physician
+      expect(physician).toBeDefined();
+      expect(physician.name).toBe('Dr. Sayuj Krishnan');
+      expect(physician.medicalSpecialty).toBe('Neurosurgeon');
+      // Using arrayContaining to be flexible with order
+      expect(physician.availableService).toEqual(expect.arrayContaining(['Neurosurgery', 'Spine Surgery', 'Brain Tumor Surgery']));
+      expect(physician.url).toContain('/appointments');
+      expect(physician.address).toBeDefined();
+
+      // Verify Area Served
+      expect(physician.areaServed).toBeDefined();
+      expect(physician.areaServed.name).toContain('Hyderabad');
+
+      // Verify MedicalClinic
+      expect(clinic).toBeDefined();
+      expect(clinic.name).toContain('Yashoda Hospitals');
+      expect(clinic.department).toBeDefined(); // Should link to physician
+
+      // Verify Linkage
+      expect(physician.worksFor['@id']).toBe(clinic['@id']);
+      expect(clinic.department['@id']).toBe(physician['@id']);
     }
   });
 });

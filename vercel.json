@@ -124,7 +124,7 @@
     },
     {
       "path": "/api/workflows/health",
-      "schedule": "*/30 * * * *"
+      "schedule": "0 0 * * *"
     },
     {
       "path": "/api/workflows/content",

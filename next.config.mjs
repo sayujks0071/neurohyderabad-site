@@ -43,6 +43,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'images.unsplash.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'i.ytimg.com',
+      },
     ],
     // Allow query strings for dynamic OG images
     dangerouslyAllowSVG: true,

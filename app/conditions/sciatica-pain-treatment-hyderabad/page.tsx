@@ -15,6 +15,12 @@ import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import TrustProof from '@/app/_components/TrustProof';
 import { patientStories } from '@/src/content/stories';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
+import dynamic from 'next/dynamic';
+import PatientEducationVideosSkeleton from '@/app/_components/skeletons/PatientEducationVideosSkeleton';
+
+const PatientEducationVideos = dynamic(() => import('@/app/_components/PatientEducationVideos'), {
+  loading: () => <PatientEducationVideosSkeleton />
+});
 
 const baseMetadata = makeMetadata({
   title: "Sciatica Treatment Hyderabad | 90% Non-Surgical | Dr Sayuj",
@@ -374,6 +380,8 @@ export default function SciaticaTreatmentPage() {
           </p>
         </div>
       </section>
+
+      <PatientEducationVideos category="sciatica" />
 
       <section className="mb-12">
         <h2 className="text-2xl font-semibold mb-6 text-blue-700">Patient Education Resources</h2>
