@@ -10,7 +10,7 @@ interface WhatsAppButtonProps {
 }
 
 export const WhatsAppButton: React.FC<WhatsAppButtonProps> = ({ appointment }) => {
-  const hasPhone = Boolean(appointment.patient_phone);
+  const hasPhone = Boolean(appointment.patient_phone && appointment.patient_phone.replace(/\D/g, '').length > 0);
 
   const handleClick = () => {
     if (!hasPhone) return;
