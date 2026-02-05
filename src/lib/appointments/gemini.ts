@@ -1,6 +1,7 @@
 import { generateText } from "ai";
 import { getTextModel } from "@/src/lib/ai/gateway";
 import type { BookingData } from "@/packages/appointment-form/types";
+import { APPOINTMENT_SUCCESS_MESSAGE } from "@/packages/appointment-form/constants";
 
 // Explicitly use Google's Gemini Flash model via Vercel AI Gateway
 // Format: provider/model (e.g. google/gemini-2.0-flash)
@@ -17,8 +18,7 @@ The message must follow these rules:
 5. Do not add any greeting such as "Dear [Patient Name]". Start the message directly.
 6. Keep the entire message under 50 words.`;
 
-const fallbackMessage = (data: BookingData) =>
-  `Appointment request received. Please bring any MRI/CT scans with you. We will confirm via phone shortly.`;
+const fallbackMessage = (data: BookingData) => APPOINTMENT_SUCCESS_MESSAGE;
 
 // 🛡️ Sentinel: Sanitize input to prevent prompt injection and token exhaustion
 function sanitizeForPrompt(text: string | number | undefined | null, maxLength = 500): string {
