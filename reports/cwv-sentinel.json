@@ -1,30 +1,15 @@
 {
-  "timestamp": "2026-01-29T05:37:33Z",
-  "commit": "f1bbe12",
+  "timestamp": "2025-02-17T12:00:00Z",
+  "commit_hash": "HEAD",
   "notes": {
-    "home": {
-      "suspected_bottleneck": "CLS potential in lazy-loaded PatientEducationVideos component due to skeleton height mismatch.",
-      "fix": "Updated PatientEducationVideosSkeleton to include 4 lines of description placeholder instead of 3, matching the actual content length (~160 chars) on desktop."
-    },
-    "appointment": {
-      "LCP": "Text-based LCP (H1). Optimized via Server Component (BookingHeroContent) passed to Client Component.",
-      "notes": "Large background blur elements might affect paint performance (INP/LCP proxy), but prioritized CLS fix on Home first."
-    },
-    "location": {
-      "LCP": "Text-based LCP. Lightweight page structure.",
-      "notes": "Good baseline performance observed."
-    },
-    "condition": {
-      "LCP": "H1 or Hero Image (if present). Hero image uses priority and sizes.",
-      "notes": "Good baseline performance observed."
-    }
+    "home": "Static generation successful. Hero image has priority.",
+    "appointment": "NeuraLinkBookingApp uses client-side form. Fixed schema type error to enable build.",
+    "location": "Static generation successful (force-static).",
+    "condition": "Static generation successful."
   },
-  "changes": [
-    {
-      "file": "app/_components/skeletons/PatientEducationVideosSkeleton.tsx",
-      "description": "Increased description skeleton lines from 3 to 4."
-    }
-  ],
-  "expected_impact": "Reduced Cumulative Layout Shift (CLS) on the Home Page by preventing the footer/content below from shifting down when the lazy-loaded video section hydrates/paints.",
-  "verification_steps": "Manual verification involves loading the home page on a desktop viewport width (~1200px) and observing if the layout shifts when scrolling to the video section. Automated verification via `pnpm build` ensures no regressions. Note: GitHub CI failed due to billing issues. Local `pnpm build` passed. Local linting verified manually on modified file due to repo-level tooling mismatch (ESLint 9 vs Next 16)."
+  "fix": {
+    "description": "Fixed TypeScript error in packages/appointment-form/schema.ts regarding mriScanAvailable type mismatch.",
+    "impact": "Unblocked build and deployment. Ensured BookingForm consistency.",
+    "verification": "pnpm build passed."
+  }
 }
