@@ -131,4 +131,22 @@ describe("Appointment Schema Validation", () => {
       expect(result.data.mriScanAvailable).toBe(false);
     }
   });
+
+  it("trims whitespace from string fields", () => {
+    const dataWithWhitespace = {
+      ...baseValidData,
+      patientName: "  John Doe  ",
+      email: "  john@example.com  ",
+      contactNumber: "  9876543210  ",
+      reason: "  Severe back pain for 2 weeks. Need appointment.  ",
+    };
+    const result = appointmentSchema.safeParse(dataWithWhitespace);
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.patientName).toBe("John Doe");
+      expect(result.data.email).toBe("john@example.com");
+      expect(result.data.contactNumber).toBe("9876543210");
+      expect(result.data.reason).toBe("Severe back pain for 2 weeks. Need appointment.");
+    }
+  });
 });
