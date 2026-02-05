@@ -1,30 +1,25 @@
 {
-  "timestamp": "2026-01-29T05:37:33Z",
-  "commit": "f1bbe12",
-  "notes": {
+  "timestamp": "2025-05-18T10:30:00Z",
+  "notes": "Verified fix via build and code analysis. Lighthouse CI skipped due to missing environment.",
+  "pages": {
     "home": {
-      "suspected_bottleneck": "CLS potential in lazy-loaded PatientEducationVideos component due to skeleton height mismatch.",
-      "fix": "Updated PatientEducationVideosSkeleton to include 4 lines of description placeholder instead of 3, matching the actual content length (~160 chars) on desktop."
-    },
-    "appointment": {
-      "LCP": "Text-based LCP (H1). Optimized via Server Component (BookingHeroContent) passed to Client Component.",
-      "notes": "Large background blur elements might affect paint performance (INP/LCP proxy), but prioritized CLS fix on Home first."
-    },
-    "location": {
-      "LCP": "Text-based LCP. Lightweight page structure.",
-      "notes": "Good baseline performance observed."
-    },
-    "condition": {
-      "LCP": "H1 or Hero Image (if present). Hero image uses priority and sizes.",
-      "notes": "Good baseline performance observed."
+      "url": "/",
+      "bottlenecks": [
+        {
+          "type": "CLS",
+          "description": "Lazy-loaded video sections (ServiceShowcase, OutcomeDashboard) have placeholders that do not match the height of the loaded content (Video + Header).",
+          "details": "ServiceShowcase: Placeholder h-[500px] vs Content ~550px. OutcomeDashboard: Placeholder h-[450px] vs Content ~550px."
+        }
+      ]
     }
   },
-  "changes": [
-    {
-      "file": "app/_components/skeletons/PatientEducationVideosSkeleton.tsx",
-      "description": "Increased description skeleton lines from 3 to 4."
-    }
-  ],
-  "expected_impact": "Reduced Cumulative Layout Shift (CLS) on the Home Page by preventing the footer/content below from shifting down when the lazy-loaded video section hydrates/paints.",
-  "verification_steps": "Manual verification involves loading the home page on a desktop viewport width (~1200px) and observing if the layout shifts when scrolling to the video section. Automated verification via `pnpm build` ensures no regressions. Note: GitHub CI failed due to billing issues. Local `pnpm build` passed. Local linting verified manually on modified file due to repo-level tooling mismatch (ESLint 9 vs Next 16)."
+  "fix_applied": {
+    "type": "CLS",
+    "description": "Updated placeholder heights in app/page.tsx to h-[550px] to match the loaded component height (Video 450px + Header ~100px).",
+    "file": "app/page.tsx"
+  },
+  "verification": {
+    "status": "Verified (Proxy)",
+    "details": "Build passed. Code change aligns placeholder height with loaded content height to prevent layout shift."
+  }
 }

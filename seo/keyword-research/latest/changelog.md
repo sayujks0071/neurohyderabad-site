@@ -1,14 +1,10 @@
-# Changelog - 2026-02-02
+# SEO Changelog - 2026-02-05
 
-## Summary
-Daily keyword research focused on Jubilee Hills local SEO and spine surgery cost queries.
+## Added
+- New location target: Kukatpally (Registry update)
+- New location target: Uppal (New page created)
+- New keywords for "spine surgery cost"
 
-## Actions
-*   **New Keywords:** Added 6 high-value keywords.
-*   **New Page:** Created `/locations/neurosurgeon-jubilee-hills`.
-*   **Mapping:** Updated registry for cost and recovery terms.
-
-## Stats
-*   **Keywords Added:** 6
-*   **Pages Created:** 1
-*   **Cannibalization Checks:** Passed.
+## Updates
+- Updated `seo/keyword-registry.json`
+- Updated `seo/page-keyword-map.json`

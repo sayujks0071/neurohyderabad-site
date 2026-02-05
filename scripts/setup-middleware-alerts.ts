@@ -132,6 +132,11 @@ async function setupAlerts() {
       return;
     }
 
+    const webhookSecret = process.env.MIDDLEWARE_WEBHOOK_SECRET;
+    if (!webhookSecret) {
+      console.warn('⚠️  Warning: MIDDLEWARE_WEBHOOK_SECRET not set. Webhooks will not be authenticated.');
+    }
+
     console.log(`📡 Creating alerts for rule: ${ruleId}\n`);
 
     for (const config of ALERTS) {
@@ -153,6 +158,7 @@ async function setupAlerts() {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
+                ...(webhookSecret ? { 'x-middleware-secret': webhookSecret } : {}),
               },
             },
           ],
@@ -172,8 +178,9 @@ async function setupAlerts() {
     console.error('❌ Setup failed:', error.message);
     console.error('\n💡 Make sure you have:');
     console.error('  1. Set MIDDLEWARE_ACCESS_TOKEN in .env.local');
-    console.error('  2. Created a rule in the dashboard');
-    console.error('  3. Provided the rule ID as an argument');
+    console.error('  2. Set MIDDLEWARE_WEBHOOK_SECRET in .env.local');
+    console.error('  3. Created a rule in the dashboard');
+    console.error('  4. Provided the rule ID as an argument');
     process.exit(1);
   }
 }
