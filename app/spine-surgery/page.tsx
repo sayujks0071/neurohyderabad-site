@@ -223,15 +223,15 @@ export default function SpineSurgeryPage() {
                 </p>
                 <ul className="space-y-3 mb-8">
                   <li className="flex items-center">
-                     <span className="text-green-400 mr-3 text-xl">✓</span>
+                     <span className="text-green-400 mr-3 text-xl" aria-hidden="true">✓</span>
                      <span>Avoid unnecessary metal screws (fusion)</span>
                   </li>
                   <li className="flex items-center">
-                     <span className="text-green-400 mr-3 text-xl">✓</span>
+                     <span className="text-green-400 mr-3 text-xl" aria-hidden="true">✓</span>
                      <span>Confirm if surgery is truly needed</span>
                   </li>
                   <li className="flex items-center">
-                     <span className="text-green-400 mr-3 text-xl">✓</span>
+                     <span className="text-green-400 mr-3 text-xl" aria-hidden="true">✓</span>
                      <span>Explore "Awake" surgery options</span>
                   </li>
                 </ul>
