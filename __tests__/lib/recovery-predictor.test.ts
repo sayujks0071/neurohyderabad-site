@@ -1,8 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { generateRecoveryPlan } from '@/src/lib/recovery-predictor';
-import * as ai from 'ai';
 
-// Mock dependencies
+// Mock dependencies before importing the module under test.
 vi.mock('ai', () => ({
   generateObject: vi.fn(),
   jsonSchema: vi.fn(),
@@ -12,6 +10,13 @@ vi.mock('@/src/lib/ai/gateway', () => ({
   getTextModel: vi.fn().mockReturnValue('mock-model'),
   hasAIConfig: vi.fn(() => true),
 }));
+
+async function load() {
+  const predictor = await import('@/src/lib/recovery-predictor');
+  const ai = await import('ai');
+  const gateway = await import('@/src/lib/ai/gateway');
+  return { predictor, ai, gateway };
+}
 
 describe('Recovery Predictor', () => {
   beforeEach(() => {
@@ -25,7 +30,7 @@ describe('Recovery Predictor', () => {
           content: [{ text: 'Mocked medical context from MCP' }]
         }
       })
-    });
+    } as any);
   });
 
   afterEach(() => {
@@ -33,6 +38,8 @@ describe('Recovery Predictor', () => {
   });
 
   it('should generate a structured recovery plan using AI', async () => {
+    const { predictor, ai } = await load();
+
     const mockPlan = {
       title: 'Recovery Plan',
       phases: [
@@ -45,59 +52,53 @@ describe('Recovery Predictor', () => {
       disclaimer: 'Test disclaimer'
     };
 
-    // Mock generateObject response
-    (ai.generateObject as any).mockResolvedValue({
-      object: mockPlan
-    });
+    (ai.generateObject as any).mockResolvedValue({ object: mockPlan });
 
-    const result = await generateRecoveryPlan({
+    const result = await predictor.generateRecoveryPlan({
       surgeryType: 'Test Surgery',
       patientAge: 45
     });
 
-    // Verify fetch was called for MCP
     expect(global.fetch).toHaveBeenCalled();
-
-    // Verify generateObject was called
     expect(ai.generateObject).toHaveBeenCalledWith(
       expect.objectContaining({
         model: 'mock-model',
         prompt: expect.stringContaining('Mocked medical context from MCP'),
       })
     );
-
-    // Verify the result matches the mock object
     expect(result).toEqual(mockPlan);
   });
 
   it('should return fallback plan if MCP fails', async () => {
-    // Mock fetch failure
+    const { predictor, ai, gateway } = await load();
+
     global.fetch = vi.fn().mockResolvedValue({
       ok: false,
       status: 500
-    });
+    } as any);
 
-    const result = await generateRecoveryPlan({
+    (gateway.hasAIConfig as any).mockReturnValue(false);
+
+    const result = await predictor.generateRecoveryPlan({
       surgeryType: 'Test Surgery'
     });
 
-    // Should return fallback plan
     expect(result.title).toContain('Recovery Timeline: Test Surgery');
     expect(result.phases.length).toBeGreaterThan(0);
-    // Should NOT call generateObject because it failed before that step
     expect(ai.generateObject).not.toHaveBeenCalled();
   });
 
   it('should return fallback plan if generateObject fails', async () => {
-    // Mock generateObject failure
+    const { predictor, ai } = await load();
+
     (ai.generateObject as any).mockRejectedValue(new Error('AI Error'));
 
-    const result = await generateRecoveryPlan({
+    const result = await predictor.generateRecoveryPlan({
       surgeryType: 'Test Surgery'
     });
 
-    // Should return fallback plan
     expect(result.title).toContain('Recovery Timeline: Test Surgery');
     expect(result.phases.length).toBeGreaterThan(0);
   });
 });
+

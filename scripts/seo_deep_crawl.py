@@ -21,7 +21,7 @@ from html.parser import HTMLParser
 from typing import Any, Dict, List, Optional, Set, Tuple
 
 BASE_URL = "https://www.drsayuj.info"
-SITEMAP_URL = f"{BASE_URL}/sitemap.xml"
+SITEMAP_URL = f"{BASE_URL}/sitemap-main.xml"
 ROBOTS_URL = f"{BASE_URL}/robots.txt"
 USER_AGENT = "Mozilla/5.0 (compatible; CodexSEO/1.0; +https://www.drsayuj.info)"
 TIMEOUT = 20

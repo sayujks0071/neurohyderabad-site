@@ -68,7 +68,7 @@ import { google } from 'googleapis';
 const DEFAULT_SITE_URL = 'https://www.drsayuj.info';
 const SITE_URL = (process.env.SITE_URL || DEFAULT_SITE_URL).replace(/\/$/, '');
 const GSC_SITE_URL = process.env.GSC_SITE_URL || SITE_URL;
-const DEFAULT_SITEMAP_URL = `${SITE_URL}/sitemap.xml`;
+const DEFAULT_SITEMAP_URL = `${SITE_URL}/sitemap-main.xml`;
 const INSPECTION_ENDPOINT =
   'https://searchconsole.googleapis.com/v1/urlInspection/index:inspect';
 

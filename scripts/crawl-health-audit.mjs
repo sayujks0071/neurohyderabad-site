@@ -198,8 +198,8 @@ async function main() {
     const robotsRes = await fetch(`${BASE_URL}/robots.txt`);
     if (robotsRes.status !== 200) results.issues.push({ type: 'missing_file', url: '/robots.txt' });
 
-    const sitemapRes = await fetch(`${BASE_URL}/sitemap.xml`);
-    if (sitemapRes.status !== 200) results.issues.push({ type: 'missing_file', url: '/sitemap.xml' });
+    const sitemapRes = await fetch(`${BASE_URL}/sitemap-main.xml`);
+    if (sitemapRes.status !== 200) results.issues.push({ type: 'missing_file', url: '/sitemap-main.xml' });
   } catch (e) {
     results.issues.push({ type: 'check_failed', url: 'system_files' });
   }

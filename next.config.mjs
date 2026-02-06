@@ -92,6 +92,13 @@ const nextConfig = {
         destination: 'https://www.drsayuj.info/:path*',
         permanent: true,
       },
+      // Next canary builds have been observed to 308-loop on /sitemap.xml.
+      // Redirect to a stable non-reserved path that we serve explicitly.
+      {
+        source: '/sitemap.xml',
+        destination: '/sitemap-main.xml',
+        permanent: true,
+      },
       // SITE ARCHITECTURE CONSOLIDATION: Reduce 5 hub pages to 2
       // Redirect /specializations to /services (consolidate "what we do")
       {
@@ -300,14 +307,14 @@ const nextConfig = {
         ]
       },
       {
-        source: "/sitemap.xml",
+        source: "/sitemap-images.xml",
         headers: [
           { key: "Content-Type", value: "application/xml; charset=utf-8" },
           { key: "Cache-Control", value: "public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400" }
         ]
       },
       {
-        source: "/sitemap-:path.xml",
+        source: "/sitemap-videos.xml",
         headers: [
           { key: "Content-Type", value: "application/xml; charset=utf-8" },
           { key: "Cache-Control", value: "public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400" }
