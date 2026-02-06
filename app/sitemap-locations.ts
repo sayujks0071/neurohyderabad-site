@@ -10,7 +10,6 @@ export default function sitemapLocations(): MetadataRoute.Sitemap {
     { url: '/locations', priority: 0.8 },
 
     // Primary location (Yashoda Hospital Malakpet)
-    { url: '/locations/malakpet', priority: 1.0 },
     { url: '/neurosurgeon-malakpet', priority: 1.0 },
 
     // Major areas in Hyderabad
@@ -21,16 +20,8 @@ export default function sitemapLocations(): MetadataRoute.Sitemap {
     { url: '/neurosurgeon-gachibowli', priority: 0.8 },
     { url: '/neurosurgeon-secunderabad', priority: 0.8 },
 
-    // Specific location pages with service combinations
-    { url: '/locations/brain-spine-surgeon-jubilee-hills', priority: 0.8 },
-    { url: '/locations/brain-spine-surgeon-banjara-hills', priority: 0.8 },
-    { url: '/locations/brain-spine-surgeon-hitec-city', priority: 0.8 },
-
     // Secondary locations
-    { url: '/locations/banjara-hills', priority: 0.7 },
-    { url: '/locations/hitech-city', priority: 0.7 },
     { url: '/locations/lb-nagar', priority: 0.7 },
-    { url: '/locations/secunderabad', priority: 0.7 },
     { url: '/locations/neurosurgeon-kondapur', priority: 0.7 },
     { url: '/locations/neurosurgeon-kothapet', priority: 0.7 },
     { url: '/locations/neurosurgeon-kukatpally', priority: 0.7 },
