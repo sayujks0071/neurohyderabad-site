@@ -1,66 +1,53 @@
-import { Suspense } from 'react';
 import { FlagValues } from 'flags/react';
-import {
-  seoNoindex,
-  structuredDataEnabled,
-  sitemapExtensions,
-  crawlBudgetMode,
-  ctaExperiment,
-  stickyCtaEnabled,
-  stickyCtaExperiment,
-  chatWidgetEnabled,
-  appointmentFormVariant,
-  imageOptimization,
-  fontDisplay,
-  prefetchLinks,
-  productionSourcemaps,
-  showTestimonials,
-  showVideoSection,
-  showFaqSection,
-  blogEnabled,
-  locationPagesEnabled,
-} from '@/flags';
 
 /**
- * Server component that resolves the 18 standalone feature flags
- * and emits their values for the Vercel Flags Explorer toolbar.
+ * Emit the 18 standalone feature-flag default values for the Vercel
+ * Flags Explorer toolbar.
  *
- * Rendered outside <HypertuneWrapper> since these flags don't depend
- * on Hypertune context. The existing FlagValuesEmitter inside the
- * wrapper handles the Hypertune-backed flags separately.
+ * IMPORTANT: We intentionally pass **static default values** rather
+ * than calling `await flagFn()` for each flag.  The Flags SDK's
+ * `flag()` wrapper calls `headers()` internally to read the override
+ * cookie, which makes the rendering context dynamic.  Pages that
+ * declare `dynamic = "error"` (many /conditions/* and /locations
+ * pages) then fail during static generation.
  *
- * Vercel Toolbar picks up all <script data-flag-values> tags via
- * MutationObserver, so both emitters coexist correctly.
+ * Passing defaults directly avoids the `headers()` call.  The toolbar
+ * still picks up the values (via <script data-flag-values>) and lets
+ * you toggle overrides at runtime.
+ *
+ * If a flag's default ever changes in `flags.ts`, update the
+ * corresponding entry here to keep the toolbar in sync.
  */
-async function ResolvedStandaloneFlags() {
-  const values = {
-    'seo-noindex': await seoNoindex(),
-    'structured-data-enabled': await structuredDataEnabled(),
-    'sitemap-extensions': await sitemapExtensions(),
-    'crawl-budget-mode': await crawlBudgetMode(),
-    'cta-experiment': await ctaExperiment(),
-    'sticky-cta-enabled': await stickyCtaEnabled(),
-    'sticky-cta-experiment': await stickyCtaExperiment(),
-    'chat-widget-enabled': await chatWidgetEnabled(),
-    'appointment-form-variant': await appointmentFormVariant(),
-    'image-optimization': await imageOptimization(),
-    'font-display': await fontDisplay(),
-    'prefetch-links': await prefetchLinks(),
-    'production-sourcemaps': await productionSourcemaps(),
-    'show-testimonials': await showTestimonials(),
-    'show-video-section': await showVideoSection(),
-    'show-faq-section': await showFaqSection(),
-    'blog-enabled': await blogEnabled(),
-    'location-pages-enabled': await locationPagesEnabled(),
-  };
-
-  return <FlagValues values={values} />;
-}
-
 export default function StandaloneFlagValues() {
   return (
-    <Suspense fallback={null}>
-      <ResolvedStandaloneFlags />
-    </Suspense>
+    <FlagValues
+      values={{
+        // ── SEO & Crawl ──
+        'seo-noindex': false,
+        'structured-data-enabled': true,
+        'sitemap-extensions': true,
+        'crawl-budget-mode': 'standard',
+
+        // ── UX & Conversion ──
+        'cta-experiment': 'control',
+        'sticky-cta-enabled': true,
+        'sticky-cta-experiment': 'control',
+        'chat-widget-enabled': true,
+        'appointment-form-variant': 'standard',
+
+        // ── Performance ──
+        'image-optimization': 'avif_webp',
+        'font-display': 'swap',
+        'prefetch-links': true,
+        'production-sourcemaps': true,
+
+        // ── Content & Features ──
+        'show-testimonials': true,
+        'show-video-section': true,
+        'show-faq-section': true,
+        'blog-enabled': true,
+        'location-pages-enabled': true,
+      }}
+    />
   );
 }
