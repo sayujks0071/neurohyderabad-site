@@ -6,76 +6,82 @@ export default function AppointmentSchema() {
   const malakpet = getLocationById('malakpet');
   if (!malakpet) return null;
 
+  const physicianSchema = {
+    "@type": "Physician",
+    "@id": `${SITE_URL}/#physician`,
+    "name": "Dr. Sayuj Krishnan",
+    "medicalSpecialty": "Neurosurgeon",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": malakpet.address.streetAddress,
+      "addressLocality": malakpet.address.addressLocality,
+      "addressRegion": malakpet.address.addressRegion,
+      "postalCode": malakpet.address.postalCode,
+      "addressCountry": malakpet.address.addressCountry
+    },
+    "availableService": [
+      "Neurosurgery",
+      "Spine Surgery",
+      "Brain Tumor Surgery"
+    ],
+    "url": `${SITE_URL}/appointments`,
+    "description": "Book Appointment with Dr. Sayuj Krishnan, the Best Neurosurgeon in Hyderabad. Schedule a consultation for spine surgery & brain tumor surgery.",
+    "sameAs": SOCIAL_PROFILES,
+    "knowsLanguage": ["English", "Hindi", "Telugu", "Malayalam", "Tamil"],
+    "areaServed": {
+      "@type": "AdministrativeArea",
+      "name": "Hyderabad, Telangana, India"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": malakpet.geo?.latitude,
+      "longitude": malakpet.geo?.longitude
+    },
+    "hasMap": malakpet.google_maps_place_url,
+    "telephone": malakpet.telephone,
+    "image": `${SITE_URL}/images/dr-sayuj-krishnan-portrait-v2.jpg`,
+    "priceRange": "₹₹",
+    "worksFor": {
+      "@id": `${SITE_URL}/appointments#clinic`
+    }
+  };
+
+  const clinicSchema = {
+    "@type": "MedicalClinic",
+    "@id": `${SITE_URL}/appointments#clinic`,
+    "name": "Yashoda Hospitals, Malakpet",
+    "telephone": malakpet.telephone,
+    "url": "https://www.yashodahospitals.com/malakpet/",
+    "hasMap": malakpet.directions_url,
+    "sameAs": "https://www.yashodahospitals.com/malakpet/",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": malakpet.address.streetAddress,
+      "addressLocality": malakpet.address.addressLocality,
+      "addressRegion": malakpet.address.addressRegion,
+      "postalCode": malakpet.address.postalCode,
+      "addressCountry": malakpet.address.addressCountry
+    },
+    "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": malakpet.geo?.latitude,
+        "longitude": malakpet.geo?.longitude
+    },
+    "parentOrganization": {
+      "@id": `${SITE_URL}/#hospital`
+    },
+    "department": {
+      "@id": `${SITE_URL}/#physician`
+    }
+  };
+
+  // SEO: Dynamic JSON-LD for Physician and MedicalClinic specific to the booking page context.
+  // Helps Google associate this page with the physician and clinic location.
   const schema = {
     "@context": "https://schema.org",
     "@graph": [
-      {
-        "@type": "Physician",
-        "@id": `${SITE_URL}/#physician`,
-        "name": "Dr. Sayuj Krishnan",
-        "medicalSpecialty": "Neurosurgeon",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": malakpet.address.streetAddress,
-          "addressLocality": malakpet.address.addressLocality,
-          "addressRegion": malakpet.address.addressRegion,
-          "postalCode": malakpet.address.postalCode,
-          "addressCountry": malakpet.address.addressCountry
-        },
-        "availableService": [
-          "Neurosurgery",
-          "Spine Surgery",
-          "Brain Tumor Surgery"
-        ],
-        "url": `${SITE_URL}/appointments`,
-        "description": "Book Appointment with Dr. Sayuj Krishnan, the Best Neurosurgeon in Hyderabad. Schedule a consultation for spine surgery & brain tumor surgery.",
-        "sameAs": SOCIAL_PROFILES,
-        "knowsLanguage": ["English", "Hindi", "Telugu", "Malayalam", "Tamil"],
-        "areaServed": {
-          "@type": "AdministrativeArea",
-          "name": "Hyderabad, Telangana, India"
-        },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": malakpet.geo?.latitude,
-          "longitude": malakpet.geo?.longitude
-        },
-        "hasMap": malakpet.google_maps_place_url,
-        "telephone": malakpet.telephone,
-        "image": `${SITE_URL}/images/dr-sayuj-krishnan-portrait-v2.jpg`,
-        "priceRange": "₹₹",
-        "worksFor": {
-          "@id": `${SITE_URL}/appointments#clinic`
-        }
-      },
-      {
-        "@type": "MedicalClinic",
-        "@id": `${SITE_URL}/appointments#clinic`,
-        "name": "Yashoda Hospitals, Malakpet",
-        "telephone": malakpet.telephone,
-        "url": "https://www.yashodahospitals.com/malakpet/",
-        "hasMap": malakpet.directions_url,
-        "sameAs": "https://www.yashodahospitals.com/malakpet/",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": malakpet.address.streetAddress,
-          "addressLocality": malakpet.address.addressLocality,
-          "addressRegion": malakpet.address.addressRegion,
-          "postalCode": malakpet.address.postalCode,
-          "addressCountry": malakpet.address.addressCountry
-        },
-        "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": malakpet.geo?.latitude,
-            "longitude": malakpet.geo?.longitude
-        },
-        "parentOrganization": {
-          "@id": `${SITE_URL}/#hospital`
-        },
-        "department": {
-          "@id": `${SITE_URL}/#physician`
-        }
-      }
+      physicianSchema,
+      clinicSchema
     ]
   };
 
