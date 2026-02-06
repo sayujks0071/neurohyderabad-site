@@ -262,7 +262,10 @@ export default function BookingForm({
                   Pain Intensity (1-10)
                 </label>
                 <div className="flex items-center gap-4">
-                  <span className="text-sm font-bold text-slate-400" aria-hidden="true">1</span>
+                  <div className="text-center">
+                    <span className="block text-sm font-bold text-slate-400" aria-hidden="true">1</span>
+                    <span className="block text-xs text-slate-400">No Pain</span>
+                  </div>
                   <input
                     id="painScore-slider"
                     type="range"
@@ -273,7 +276,10 @@ export default function BookingForm({
                     aria-valuetext={painScoreValue ? `Score: ${painScoreValue}${painScoreValue >= 8 ? ' (Severe)' : painScoreValue <= 3 ? ' (Mild)' : ''}` : "Score: 5"}
                     {...register("painScore")}
                   />
-                  <span className="text-sm font-bold text-slate-400" aria-hidden="true">10</span>
+                  <div className="text-center">
+                    <span className="block text-sm font-bold text-slate-400" aria-hidden="true">10</span>
+                    <span className="block text-xs text-slate-400">Severe</span>
+                  </div>
                 </div>
                 <div className="text-center mt-2">
                   {painScoreValue && (
@@ -299,7 +305,7 @@ export default function BookingForm({
                 )}
               </div>
 
-              <div className="flex items-center p-4 bg-slate-50 rounded-xl border border-slate-200">
+              <div className="flex items-center p-4 bg-slate-50 rounded-xl border border-slate-200 hover:border-cyan-300 transition-colors">
                 {/* Clinical Context: MRI Availability */}
                 <input
                   type="checkbox"
