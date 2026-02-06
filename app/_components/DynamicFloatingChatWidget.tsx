@@ -32,6 +32,8 @@ const OpenClawWidget = dynamic(() => import('./OpenClawWidget'), {
 export default function DynamicFloatingChatWidget() {
   const [shouldLoad, setShouldLoad] = useState(false);
   const [shouldAutoOpen, setShouldAutoOpen] = useState(false);
+
+  // Check for OpenClaw integration
   const openClawUrl = process.env.NEXT_PUBLIC_OPENCLAW_URL;
 
   useEffect(() => {
@@ -61,7 +63,7 @@ export default function DynamicFloatingChatWidget() {
         />
       }>
         {openClawUrl ? (
-          <OpenClawWidget url={openClawUrl} />
+          <OpenClawWidget autoOpen={shouldAutoOpen} />
         ) : (
           <FloatingChatWidget autoOpen={shouldAutoOpen} />
         )}
