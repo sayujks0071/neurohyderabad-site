@@ -18,6 +18,7 @@ import { submitToGoogleSheets } from "@/src/lib/google-sheets";
 import { getTextModel, hasAIConfig } from "@/src/lib/ai/gateway";
 import { inngest } from "@/src/lib/inngest";
 import { appointments, workflowRuns } from "@/src/lib/db";
+import { APPOINTMENT_SUCCESS_MESSAGE } from "@/packages/appointment-form/constants";
 
 interface PatientInfo {
   name: string;
@@ -91,9 +92,6 @@ const DEFAULT_TIME_SLOTS = [
   "16:00",
   "16:30",
 ];
-
-const DEFAULT_CONFIRMATION_MESSAGE =
-  "Appointment request received. Please bring any MRI/CT scans with you. We will confirm via phone shortly.";
 
 function normalizeTimeSlot(time: string): string | null {
   const match = time.trim().match(/^(\d{1,2}):(\d{2})(?:\s*(AM|PM))?$/i);
@@ -299,6 +297,7 @@ export async function handleAppointmentBooking(
   globalThis.fetch = fetch;
 
   const bookingId = generateBookingId();
+  const startTime = Date.now();
 
   try {
     await workflowRuns.create({
@@ -376,19 +375,23 @@ export async function handleAppointmentBooking(
 
     const booking = buildBookingData(patientInfo, finalDate, finalTime);
     const confirmationMessage =
-      patientInfo.confirmationMessage || DEFAULT_CONFIRMATION_MESSAGE;
+      patientInfo.confirmationMessage || APPOINTMENT_SUCCESS_MESSAGE;
     const usedAI = patientInfo.usedAI ?? false;
 
-    // Step 6: (Removed sleep)
-
-    // Step 7: Send confirmation + admin emails (Parallelized)
+    // Step 7: Send confirmation + admin emails
     // Start Google Sheets sync early as it is independent of email results
     const sheetsSyncPromise = syncBookingLead(bookingId, booking, patientInfo.source);
 
+    const emailStartTime = Date.now();
     const [confirmationResult, adminEmailResult] = await Promise.all([
       sendBookingConfirmationEmail(booking, confirmationMessage),
       sendBookingAdminAlert(booking, patientInfo.source),
     ]);
+
+    logWorkflowEvent(bookingId, "step-duration", {
+      step: "emails",
+      duration: Date.now() - emailStartTime
+    });
 
     if (!adminEmailResult.success) {
       logWorkflowEvent(bookingId, "admin-notification-failed", {
@@ -396,8 +399,10 @@ export async function handleAppointmentBooking(
       });
     }
 
-    // Step 8: Sync CRM + webhooks
-    // Webhooks depend on email confirmation result, but Sheets is already running
+    // Step 8 & 9: Post-confirmation tasks (Webhooks, Reminders, Education, Analytics)
+    // All run in parallel to minimize latency
+    const postConfirmationStartTime = Date.now();
+
     const webhooksPromise = triggerAppointmentWebhooks(
       booking,
       confirmationMessage,
@@ -406,20 +411,24 @@ export async function handleAppointmentBooking(
       patientInfo.source
     );
 
-    const [_, webhookResult] = await Promise.all([
+    const remindersPromise = scheduleReminders(bookingId, patientInfo, finalDate, finalTime);
+    const educationPromise = preparePatientEducation(patientInfo.chiefComplaint, patientInfo.email);
+    const analyticsPromise = trackBookingAnalytics(bookingId, patientInfo, status);
+
+    const [_, _webhooks, reminderScheduled] = await Promise.all([
       sheetsSyncPromise,
       webhooksPromise,
+      remindersPromise,
+      educationPromise,
+      analyticsPromise,
     ]);
 
-    // Step 9: Post-booking tasks (Reminders, Education, Analytics)
-    // All run in parallel
-    const [reminderScheduled] = await Promise.all([
-      scheduleReminders(bookingId, patientInfo, finalDate, finalTime),
-      preparePatientEducation(patientInfo.chiefComplaint, patientInfo.email),
-      trackBookingAnalytics(bookingId, patientInfo, status),
-    ]);
+    logWorkflowEvent(bookingId, "step-duration", {
+      step: "post-confirmation-tasks",
+      duration: Date.now() - postConfirmationStartTime
+    });
 
-    logWorkflowEvent(bookingId, "workflow-completed", { status });
+    logWorkflowEvent(bookingId, "workflow-completed", { status, duration: Date.now() - startTime });
 
     try {
       await workflowRuns.complete(bookingId, { status });
