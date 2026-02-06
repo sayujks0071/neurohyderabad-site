@@ -1,5 +1,4 @@
 import React from 'react';
-// Verified by Jules: Schema.org JSON-LD for Physician and MedicalClinic is correctly implemented.
 import { SITE_URL } from '@/src/lib/seo';
 import { getLocationById, SOCIAL_PROFILES } from '@/src/data/locations';
 
@@ -7,13 +6,6 @@ export default function AppointmentSchema() {
   const malakpet = getLocationById('malakpet');
   if (!malakpet) return null;
 
-  // Implements Schema.org JSON-LD for Physician and MedicalClinic.
-  // This structure is optimized for Google's Medical Schema requirements.
-  // Task: Add Schema.org JSON-LD structured data to improve search visibility.
-  // Verified: Requirements met (Physician, Clinic, specific services, address, URL).
-  // 1. Physician Entity: Dr. Sayuj Krishnan
-  // 2. MedicalClinic Entity: Yashoda Hospitals, Malakpet
-  // 3. Includes: Address, Specialty, Available Services, and Booking URL.
   const schema = {
     "@context": "https://schema.org",
     "@graph": [
@@ -24,8 +16,8 @@ export default function AppointmentSchema() {
         "medicalSpecialty": "Neurosurgeon",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": malakpet.address.streetAddress, // Contains Yashoda Hospital, Malakpet
-          "addressLocality": malakpet.address.addressLocality, // Hyderabad
+          "streetAddress": malakpet.address.streetAddress,
+          "addressLocality": malakpet.address.addressLocality,
           "addressRegion": malakpet.address.addressRegion,
           "postalCode": malakpet.address.postalCode,
           "addressCountry": malakpet.address.addressCountry
