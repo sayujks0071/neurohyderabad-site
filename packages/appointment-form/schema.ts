@@ -3,13 +3,13 @@ import { z } from "zod";
 export const appointmentSchema = z.object({
   patientName: z.string().trim().min(2, "Name is too short"),
   email: z.string().trim().email("Please enter a valid email address"),
-  contactNumber: z.string().trim().regex(/^[6-9]\d{9}$/, "Please enter a valid 10-digit mobile number"),
+  contactNumber: z.string().trim().regex(/^[6-9]\d{9}$/, "Invalid Indian mobile number"),
   age: z.string().trim().regex(/^\d+$/, "Age must be a number").refine((val) => {
     const n = Number(val);
     return Number.isFinite(n) && n > 0 && n <= 120;
   }, "Age seems too high"),
   gender: z.enum(["male", "female", "other"], { errorMap: () => ({ message: "Please select a gender" }) }),
-  requestedDate: z.date().min(new Date(), "Date must be in the future"),
+  requestedDate: z.date().refine((date) => date > new Date(), { message: "Date must be in the future" }),
   appointmentTime: z.string().min(1, "Please select a time"),
   reason: z.string().trim().min(10, "Please provide more details (min 10 characters)"),
   painScore: z.coerce.number().min(1).max(10),
