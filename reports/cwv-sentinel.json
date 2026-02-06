@@ -1,14 +1,15 @@
 {
-  "timestamp": "2024-05-22",
-  "build_status": "success",
-  "bottleneck": "Build failure in BookingForm.tsx due to type mismatch in schema.ts (Critical Blocker)",
-  "page_types": {
-    "Home": { "url": "/", "notes": "Build verified." },
-    "Appointment": { "url": "/appointments", "notes": "Form component schema mismatch resolved. Build verified." },
-    "Location": { "url": "/locations/malakpet", "notes": "Build verified." },
-    "Condition": { "url": "/conditions/sciatica-pain-treatment-hyderabad", "notes": "Build verified." }
+  "timestamp": "2025-02-17T12:00:00Z",
+  "commit_hash": "HEAD",
+  "notes": {
+    "home": "Static generation successful. Hero image has priority.",
+    "appointment": "NeuraLinkBookingApp uses client-side form. Fixed schema type error to enable build.",
+    "location": "Static generation successful (force-static).",
+    "condition": "Static generation successful."
   },
-  "fix_implemented": "Explicitly cast Zod resolver in packages/appointment-form/BookingForm.tsx to Resolver<BookingFormValues>.",
-  "impact": "Restored ability to build and deploy the application without compromising schema strictness or default values.",
-  "verification": "Ran pnpm build (success) and pnpm test packages/appointment-form/schema.test.ts (success)."
+  "fix": {
+    "description": "Fixed TypeScript error in packages/appointment-form/schema.ts regarding mriScanAvailable type mismatch.",
+    "impact": "Unblocked build and deployment. Ensured BookingForm consistency.",
+    "verification": "pnpm build passed."
+  }
 }
