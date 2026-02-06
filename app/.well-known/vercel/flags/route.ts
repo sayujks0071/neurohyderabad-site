@@ -17,10 +17,12 @@ import { createFlagsDiscoveryEndpoint, getProviderData } from "flags/next";
 import * as flags from "@/flags";
 
 // Hypertune-backed flags (ctaVariant, exampleFlag)
-import * as hypertuneFlags from "@/hypertune-flags";
+// Import individual flag exports only — skip the `flags` convenience object
+// which is a nested Record and breaks getProviderData's type signature.
+import { ctaVariantFlag, exampleFlagFlag } from "@/hypertune-flags";
 
 // Merge both sets so every flag is visible in the Explorer
-const allFlags = { ...flags, ...hypertuneFlags };
+const allFlags = { ...flags, ctaVariantFlag, exampleFlagFlag };
 
 export const GET = createFlagsDiscoveryEndpoint(
   async () => getProviderData(allFlags),
