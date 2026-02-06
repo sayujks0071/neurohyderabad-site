@@ -62,7 +62,7 @@ export default function TrustSignalsFooter() {
               </p>
             </div>
             <div className="flex space-x-6 text-sm">
-              <Link href="/sitemap.xml" className="text-gray-400 hover:text-white">Sitemap</Link>
+              <Link href="/sitemap-main.xml" className="text-gray-400 hover:text-white">Sitemap</Link>
               <Link href="/robots.txt" className="text-gray-400 hover:text-white">Robots.txt</Link>
             </div>
           </div>

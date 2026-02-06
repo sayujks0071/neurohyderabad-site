@@ -62,7 +62,7 @@ const TOOLS = [
   },
   {
     name: 'check_site_health',
-    description: 'Get real-time SEO and site health status report for drsayuj.com.',
+    description: 'Get real-time SEO and site health status report for drsayuj.info.',
     inputSchema: {
       type: 'object',
       properties: {}
@@ -198,7 +198,7 @@ async function handleCallTool(name: string, args: any, id: any) {
           body: JSON.stringify({
             patientName: args.patientName,
             phone: args.phone,
-            email: args.email || `guest_${Date.now()}@drsayuj.com`, // Fallback for email if not provided
+            email: args.email || `guest_${Date.now()}@drsayuj.info`, // Fallback for email if not provided
             age: args.age || "30",
             gender: args.gender || "other",
             appointmentDate: args.appointmentDate,

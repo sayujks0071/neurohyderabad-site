@@ -9,7 +9,7 @@ import Select from "./ui/Select";
 import Textarea from "./ui/Textarea";
 import Button from "./ui/Button";
 import Calendar from "./ui/Calendar";
-import { appointmentSchema, BookingFormValues } from "./schema";
+import { appointmentSchema, BookingFormParsedValues, BookingFormValues } from "./schema";
 import { formatLocalDate, parseLocalDate } from "@/src/lib/dates";
 
 interface BookingFormProps {
@@ -98,18 +98,22 @@ export default function BookingForm({
   }, [initialData, reset]);
 
   const handleFormSubmit = async (data: BookingFormValues) => {
+    // Parse once more to get schema defaults (and a fully-typed output object).
+    // In practice the resolver already validated, so this should not throw.
+    const parsed: BookingFormParsedValues = appointmentSchema.parse(data);
+
     // Map form values back to BookingData
     const submissionData: BookingData = {
-      patientName: data.patientName,
-      email: data.email,
-      phone: data.contactNumber,
-      age: data.age,
-      gender: data.gender,
-      appointmentDate: formatLocalDate(data.requestedDate),
-      appointmentTime: data.appointmentTime,
-      reason: data.reason,
-      painScore: data.painScore,
-      mriScanAvailable: data.mriScanAvailable,
+      patientName: parsed.patientName,
+      email: parsed.email,
+      phone: parsed.contactNumber,
+      age: parsed.age,
+      gender: parsed.gender,
+      appointmentDate: formatLocalDate(parsed.requestedDate),
+      appointmentTime: parsed.appointmentTime,
+      reason: parsed.reason,
+      painScore: parsed.painScore,
+      mriScanAvailable: parsed.mriScanAvailable,
     };
     await onSubmit(submissionData);
     reset();

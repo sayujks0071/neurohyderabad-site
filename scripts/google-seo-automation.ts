@@ -150,7 +150,7 @@ async function submitSitemap(sitemapUrl?: string) {
     const formattedSiteUrl = siteUrl.replace(/\/$/, '');
     
     // Support custom sitemap URL or default to main sitemap
-    const feedPath = sitemapUrl || `${formattedSiteUrl}/sitemap.xml`;
+    const feedPath = sitemapUrl || `${formattedSiteUrl}/sitemap-main.xml`;
     
     // Support domain properties (sc-domain:example.com)
     const targetSiteUrl = process.env.GSC_SITE_URL || formattedSiteUrl;
@@ -571,7 +571,7 @@ Usage:
 
 Commands:
   --sitemap [url]   Submit a sitemap to Google Search Console
-                    (default: {SITE_URL}/sitemap.xml)
+                    (default: {SITE_URL}/sitemap-main.xml)
   --list            List all sitemaps submitted for the property
   --status <url>    Get detailed status of a specific sitemap
   --inspect <url>   Inspect a URL using Search Console API
@@ -590,7 +590,7 @@ Examples:
   npx tsx scripts/google-seo-automation.ts --list
 
   # Check status of a sitemap
-  npx tsx scripts/google-seo-automation.ts --status https://www.drsayuj.info/sitemap.xml
+  npx tsx scripts/google-seo-automation.ts --status https://www.drsayuj.info/sitemap-main.xml
 
   # Inspect a URL
   npx tsx scripts/google-seo-automation.ts --inspect https://www.drsayuj.info/

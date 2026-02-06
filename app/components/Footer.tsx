@@ -233,19 +233,19 @@ export default function Footer() {
                 Pain on Top of Head Causes
               </Link>
               <Link 
-                href="/locations/brain-spine-surgeon-jubilee-hills" 
+                href="/neurosurgeon-jubilee-hills" 
                 className="flex items-center min-h-[44px] text-gray-200 underline underline-offset-4 decoration-gray-700 decoration-1 hover:text-gray-100 hover:decoration-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 Near Jubilee Hills
               </Link>
               <Link 
-                href="/locations/brain-spine-surgeon-banjara-hills" 
+                href="/neurosurgeon-banjara-hills" 
                 className="flex items-center min-h-[44px] text-gray-200 underline underline-offset-4 decoration-gray-700 decoration-1 hover:text-gray-100 hover:decoration-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 Near Banjara Hills
               </Link>
               <Link 
-                href="/locations/brain-spine-surgeon-hitec-city" 
+                href="/neurosurgeon-hitech-city" 
                 className="flex items-center min-h-[44px] text-gray-200 underline underline-offset-4 decoration-gray-700 decoration-1 hover:text-gray-100 hover:decoration-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
                 Near HITEC City

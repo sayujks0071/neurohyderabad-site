@@ -2,7 +2,14 @@ const fs = require('fs');
 const path = require('path');
 const { JSDOM } = require('jsdom');
 
-const SITEMAP_PATH = path.join(__dirname, '../public/sitemap.xml');
+const SITEMAP_PATHS = [
+  path.join(__dirname, '../.next/server/app/sitemap-main.xml.body'),
+  path.join(__dirname, '../.next/server/app/sitemap.xml.body'),
+  path.join(__dirname, '../audit/crawl/sitemap.xml'),
+  path.join(__dirname, '../public/sitemap.xml'), // legacy
+];
+
+const SITEMAP_PATH = SITEMAP_PATHS.find((p) => fs.existsSync(p));
 const OUTPUT_DIR = path.join(__dirname, '../audit/crawl');
 
 if (!fs.existsSync(OUTPUT_DIR)) {
@@ -21,6 +28,12 @@ function getPageType(url) {
 }
 
 async function run() {
+  if (!SITEMAP_PATH) {
+    console.error('No sitemap XML found. Build the project first (pnpm build).');
+    process.exitCode = 1;
+    return;
+  }
+
   console.log('Reading sitemap from:', SITEMAP_PATH);
 
   try {
@@ -56,7 +69,7 @@ async function run() {
     const summary = `# Crawl Summary
 
 - **Total URLs:** ${urls.length}
-- **Source:** public/sitemap.xml
+- **Source:** ${path.relative(process.cwd(), SITEMAP_PATH)}
 
 ## Breakdown by Type
 ${Object.entries(inventory.reduce((acc, item) => {
