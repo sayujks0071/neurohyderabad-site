@@ -24,11 +24,9 @@ function AppointmentFormContent({
   const [view, setView] = useState<ViewState>("form");
   const [bookingData, setBookingData] = useState<BookingData | null>(null);
   const [confirmationMessage, setConfirmationMessage] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const { addToast } = useToast();
 
   const submitForm = async (data: BookingData) => {
-    setIsLoading(true);
     try {
       const response = await fetch(apiEndpoint, {
         method: "POST",
@@ -70,8 +68,6 @@ function AppointmentFormContent({
           : "Failed to book appointment. Please try again later.",
         "error"
       );
-    } finally {
-      setIsLoading(false);
     }
   };
 
