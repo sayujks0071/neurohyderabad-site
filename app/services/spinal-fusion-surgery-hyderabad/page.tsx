@@ -171,6 +171,28 @@ export default function SpinalFusionPage() {
             </div>
           </section>
 
+          <section className="mb-12 bg-white border border-green-200 rounded-lg p-8 shadow-sm">
+            <h2 className="text-2xl font-bold text-green-800 mb-4">Motion Preservation: Artificial Disc Replacement (ADR)</h2>
+            <p className="text-gray-700 mb-4">
+              Not every patient requires fusion. For younger patients with healthy facet joints, <strong>Artificial Disc Replacement (ADR)</strong> is an advanced alternative that preserves the natural movement of your spine.
+            </p>
+            <div className="grid md:grid-cols-2 gap-6 items-center">
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Benefits of Disc Replacement:</h3>
+                <ul className="space-y-2 text-gray-700">
+                  <li className="flex items-start"><span className="text-green-600 mr-2">✓</span> Maintains flexibility and range of motion</li>
+                  <li className="flex items-start"><span className="text-green-600 mr-2">✓</span> Reduces stress on adjacent spinal levels</li>
+                  <li className="flex items-start"><span className="text-green-600 mr-2">✓</span> Faster recovery compared to fusion</li>
+                </ul>
+              </div>
+              <div className="bg-green-50 p-4 rounded-lg">
+                <p className="text-sm text-gray-600">
+                  Dr. Sayuj evaluates each case individually to determine if you are a candidate for motion preservation or if stabilization (fusion) is necessary for your long-term relief.
+                </p>
+              </div>
+            </div>
+          </section>
+
            <PatientJourneySection title="Fusion Surgery Journey" steps={JOURNEY_STEPS} />
 
           <section className="mb-12">
