@@ -49,9 +49,9 @@ To change the schedule, you must edit the cron expression in the `on.schedule` s
 **Note:** The schedule triggers are defined statically in the YAML `on: schedule` block and cannot be set via environment variables due to GitHub Actions limitations.
 
 ### Competitor Analysis
-The "Competitor Gap Scan" workflow relies on the list of competitors defined in `AGENTS.md`. To add or remove competitors:
-1. Edit `AGENTS.md` in the root directory.
-2. Update the "Competitor Analysis" section.
+The "Competitor Gap Scan" workflow relies on the list of competitors defined in `seo/keyword-research/latest/competitors.md`. To add or remove competitors:
+1. Edit `seo/keyword-research/latest/competitors.md`.
+2. Update the list of competitors and their analysis.
 
 ## Troubleshooting
 
