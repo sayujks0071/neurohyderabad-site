@@ -9,7 +9,7 @@ const https = require('https');
 const { exec } = require('child_process');
 
 const GA4_MEASUREMENT_ID = 'G-MMLQCFN4ZJ';
-const SITE_URL = 'https://www.drsayuj.com';
+const SITE_URL = 'https://www.drsayuj.info';
 
 console.log('🔍 Analytics Verification Script');
 console.log('================================');
@@ -48,7 +48,7 @@ function testGA4Endpoint() {
 function testSiteAccessibility() {
   return new Promise((resolve, reject) => {
     const options = {
-      hostname: 'www.drsayuj.com',
+      hostname: 'www.drsayuj.info',
       port: 443,
       path: '/',
       method: 'GET',
@@ -75,7 +75,7 @@ function testSiteAccessibility() {
 function checkGA4Script() {
   return new Promise((resolve, reject) => {
     const options = {
-      hostname: 'www.drsayuj.com',
+      hostname: 'www.drsayuj.info',
       port: 443,
       path: '/',
       method: 'GET',
@@ -136,7 +136,7 @@ async function verifyAnalytics() {
     console.log('✅ Analytics Verification Complete!');
     console.log('');
     console.log('📋 Next Steps:');
-    console.log('1. Visit https://www.drsayuj.com in your browser');
+    console.log('1. Visit https://www.drsayuj.info in your browser');
     console.log('2. Accept cookie consent');
     console.log('3. Scroll through pages and click CTAs');
     console.log('4. Check GA4 Real-time reports for events');

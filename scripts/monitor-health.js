@@ -9,7 +9,7 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
-const SITE_URL = 'https://www.drsayuj.com';
+const SITE_URL = 'https://www.drsayuj.info';
 const PAGES_TO_CHECK = [
   '/',
   '/services/endoscopic-discectomy-hyderabad',
@@ -264,4 +264,3 @@ if (require.main === module) {
 }
 
 module.exports = { checkPageHealth, generateReport };
-

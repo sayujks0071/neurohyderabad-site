@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "NODE_OPTIONS='--max-old-space-size=4096' next build --webpack",
-    "postbuild": "next-sitemap && rm public/sitemap.xml && node scripts/generate-image-sitemap.js && node scripts/generate-video-sitemap.js",
+    "postbuild": "next-sitemap && node scripts/generate-image-sitemap.js && node scripts/generate-video-sitemap.js",
     "lint": "next lint",
     "test": "vitest run",
     "start": "next start",

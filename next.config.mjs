@@ -72,11 +72,17 @@ const nextConfig = {
         destination: '/sitemap.xml',
         permanent: true,
       },
-      // CRITICAL: Apex domain redirect to www (single hop 301)
+      // CRITICAL: Consolidate .com -> canonical .info (single hop 301)
       {
         source: '/:path*',
         has: [{ type: 'host', value: 'drsayuj.com' }],
-        destination: 'https://www.drsayuj.com/:path*',
+        destination: 'https://www.drsayuj.info/:path*',
+        permanent: true,
+      },
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.drsayuj.com' }],
+        destination: 'https://www.drsayuj.info/:path*',
         permanent: true,
       },
       // CRITICAL: Apex domain redirect for drsayuj.info to www (single hop 301)
@@ -176,6 +182,47 @@ const nextConfig = {
       {
         source: '/neurosurgeon-hitec-city',
         destination: '/neurosurgeon-hitech-city',
+        permanent: true,
+      },
+      // Consolidate duplicate /locations/* variants to canonical /neurosurgeon-* pages
+      {
+        source: '/locations/brain-spine-surgeon-jubilee-hills',
+        destination: '/neurosurgeon-jubilee-hills',
+        permanent: true,
+      },
+      {
+        source: '/locations/brain-spine-surgeon-banjara-hills',
+        destination: '/neurosurgeon-banjara-hills',
+        permanent: true,
+      },
+      {
+        source: '/locations/brain-spine-surgeon-hitec-city',
+        destination: '/neurosurgeon-hitech-city',
+        permanent: true,
+      },
+      {
+        source: '/locations/banjara-hills',
+        destination: '/neurosurgeon-banjara-hills',
+        permanent: true,
+      },
+      {
+        source: '/locations/hitech-city',
+        destination: '/neurosurgeon-hitech-city',
+        permanent: true,
+      },
+      {
+        source: '/locations/malakpet',
+        destination: '/neurosurgeon-malakpet',
+        permanent: true,
+      },
+      {
+        source: '/locations/neurosurgeon-jubilee-hills',
+        destination: '/neurosurgeon-jubilee-hills',
+        permanent: true,
+      },
+      {
+        source: '/locations/secunderabad',
+        destination: '/neurosurgeon-secunderabad',
         permanent: true,
       },
     ];

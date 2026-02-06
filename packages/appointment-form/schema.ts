@@ -16,4 +16,8 @@ export const appointmentSchema = z.object({
   mriScanAvailable: z.boolean().default(false),
 });
 
-export type BookingFormValues = z.infer<typeof appointmentSchema>;
+// Note:
+// - `zodResolver` is typed on schema input, where `.default()` makes the key optional.
+// - For RHF, treating form values as schema *input* avoids TS incompatibilities.
+export type BookingFormValues = z.input<typeof appointmentSchema>;
+export type BookingFormParsedValues = z.output<typeof appointmentSchema>;

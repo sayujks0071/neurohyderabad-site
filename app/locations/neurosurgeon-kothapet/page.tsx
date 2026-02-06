@@ -73,7 +73,7 @@ export default function KothapetLocationPage() {
           <ul className="mt-3 list-disc pl-5 space-y-1">
             <li>Extremely close proximity to Kothapet, Dilsukhnagar, and L.B. Nagar</li>
             <li>Fellowship-trained in Endoscopic Spine Surgery</li>
-            <li>15+ Years of Experience in Neurosurgery</li>
+            <li>9+ Years of Experience in Neurosurgery</li>
             <li>Advanced facilities at Yashoda Hospitals (24/7 Emergency)</li>
           </ul>
 

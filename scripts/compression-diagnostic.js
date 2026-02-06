@@ -46,7 +46,7 @@ function analyzeCompressionIssue(headers, bodyInfo) {
   analysis.recommendations = [
     '🔧 Set compress: true in next.config.mjs to match Vercel headers',
     '⏰ Wait 10-15 minutes for Vercel cache to clear after deployment',
-    '🧪 Test with: curl -I --compressed https://www.drsayuj.com',
+    '🧪 Test with: curl -I --compressed https://www.drsayuj.info',
     '🔄 Force cache clear by making a significant code change',
     '📱 Test in Chrome/Comet after cache clears'
   ];
@@ -55,7 +55,7 @@ function analyzeCompressionIssue(headers, bodyInfo) {
 }
 
 async function getWebsiteDiagnostics() {
-  const url = 'https://www.drsayuj.com';
+  const url = 'https://www.drsayuj.info';
   
   return new Promise((resolve, reject) => {
     const startTime = Date.now();
@@ -130,7 +130,7 @@ async function main() {
     
     console.log('\n🎯 NEXT STEPS:');
     console.log('   1. Wait for Vercel cache to clear (check x-vercel-cache: MISS)');
-    console.log('   2. Test: curl -I --compressed https://www.drsayuj.com');
+    console.log('   2. Test: curl -I --compressed https://www.drsayuj.info');
     console.log('   3. If still failing, force cache clear with code change');
     console.log('   4. Test in Chrome/Comet browsers after cache clears');
     
@@ -144,7 +144,6 @@ if (require.main === module) {
 }
 
 module.exports = { getWebsiteDiagnostics, analyzeCompressionIssue };
-
 
 
 
