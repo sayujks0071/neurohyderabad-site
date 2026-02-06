@@ -26,7 +26,7 @@ export const LocationNAPCard: React.FC<LocationNAPCardProps> = ({ location: lega
       <div className="space-y-4">
         {/* Address */}
         <div className="flex items-start gap-3">
-          <MapPin className="w-5 h-5 text-blue-600 mt-1 shrink-0" />
+          <MapPin className="w-5 h-5 text-blue-600 mt-1 shrink-0" aria-hidden="true" />
           <div itemScope itemType="https://schema.org/PostalAddress">
             <p className="text-gray-700" itemProp="streetAddress">{location.address.streetAddress}</p>
             <p className="text-gray-700">
@@ -39,10 +39,11 @@ export const LocationNAPCard: React.FC<LocationNAPCardProps> = ({ location: lega
 
         {/* Phone */}
         <div className="flex items-center gap-3">
-          <Phone className="w-5 h-5 text-blue-600 shrink-0" />
+          <Phone className="w-5 h-5 text-blue-600 shrink-0" aria-hidden="true" />
           <a
             href={`tel:${location.telephone}`}
-            className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
+            className="text-gray-700 hover:text-blue-600 font-medium transition-colors rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            aria-label={`Call ${location.telephone}`}
           >
             {location.telephone}
           </a>
@@ -51,13 +52,13 @@ export const LocationNAPCard: React.FC<LocationNAPCardProps> = ({ location: lega
         {/* WhatsApp */}
         {location.whatsapp && (
           <div className="flex items-center gap-3">
-            <MessageCircle className="w-5 h-5 text-green-600 shrink-0" />
+            <MessageCircle className="w-5 h-5 text-green-600 shrink-0" aria-hidden="true" />
             <a
               href={`https://wa.me/${location.whatsapp}`}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Chat on WhatsApp (opens in a new tab)"
-              className="text-gray-700 hover:text-green-600 font-medium transition-colors"
+              className="text-gray-700 hover:text-green-600 font-medium transition-colors rounded-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
             >
               Chat on WhatsApp
             </a>
@@ -66,13 +67,13 @@ export const LocationNAPCard: React.FC<LocationNAPCardProps> = ({ location: lega
 
          {/* Directions Link (Text version) */}
          <div className="flex items-center gap-3">
-          <Navigation className="w-5 h-5 text-blue-600 shrink-0" />
+          <Navigation className="w-5 h-5 text-blue-600 shrink-0" aria-hidden="true" />
           <a
             href={location.directions_url}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`Get directions to ${location.name} (opens in a new tab)`}
-            className="text-blue-600 hover:text-blue-800 font-medium underline decoration-blue-300 hover:decoration-blue-800 transition-all"
+            className="text-blue-600 hover:text-blue-800 font-medium underline decoration-blue-300 hover:decoration-blue-800 transition-all rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
             Get Directions
           </a>
