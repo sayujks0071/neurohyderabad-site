@@ -312,6 +312,20 @@ export const BLOG_SOURCES: Record<string, SourceEntry[]> = {
       href: "https://www.spine-health.com/conditions/spine-surgery/failed-back-surgery-syndrome-fbss-what-it-and-how-avoid-pain-after-surgery",
     },
   ],
+  "slip-disc-treatment-hyderabad": [
+    {
+      label: "North American Spine Society – Herniated Cervical Disc",
+      href: "https://www.spine.org/KnowYourBack/Conditions/HerniatedCervicalDisc",
+    },
+    {
+      label: "American Academy of Orthopaedic Surgeons – Herniated Disk in the Lower Back",
+      href: "https://orthoinfo.aaos.org/en/diseases--conditions/herniated-disk-in-the-lower-back/",
+    },
+    {
+      label: "National Health Service (UK) – Slipped Disc",
+      href: "https://www.nhs.uk/conditions/slipped-disc/",
+    },
+  ],
 };
 
 export function getBlogSources(slug: string): SourceEntry[] {
