@@ -228,7 +228,7 @@ export default function SpinalDecompressionPage() {
              <div className="bg-gray-50 p-6 rounded-lg border-l-4 border-blue-500">
                 <p className="text-lg mb-4">Surgery is recommended when:</p>
                 <ul className="space-y-2 text-gray-700 list-disc list-inside">
-                  <li>Nerve pain (sciatica) persists despite medication and physiotherapy.</li>
+                  <li>Nerve pain (<Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 underline">sciatica</Link>) persists despite medication and physiotherapy.</li>
                   <li>You have difficulty walking or standing for long periods (claudication).</li>
                   <li>There is progressive numbness or weakness in the legs or feet.</li>
                   <li>Loss of bowel or bladder control (Cauda Equina Syndrome) - <strong>Emergency!</strong></li>

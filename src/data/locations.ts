@@ -77,7 +77,8 @@ export const SOCIAL_PROFILES = [
   "https://www.google.com/maps?cid=14503792272825406246",
   "https://www.yashodahospitals.com/doctors/dr-sayuj-krishnan/",
   "https://www.google.com/search?q=Dr+Sayuj+Krishnan+Neurosurgeon+Hyderabad",
-  "https://www.practo.com/hyderabad/doctor/dr-sayuj-krishnan-neurosurgeon"
+  "https://www.practo.com/hyderabad/doctor/dr-sayuj-krishnan-neurosurgeon",
+  "https://www.justdial.com/Hyderabad/Dr-Sayuj-Krishnan-Neurosurgeon-Yashoda-Hospital-Malakpet/040PXX40-XX40-210816155554-Q2H6_BZDET"
 ];
 
 const DEFAULT_SERVICES = [
