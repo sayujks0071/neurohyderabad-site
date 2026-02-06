@@ -1,12 +1,23 @@
-# Competitor Snapshot - 2026-02-05
+# Daily Competitor Analysis - 2026-02-03
 
-## Top Competitors for "Endoscopic Spine Surgery Hyderabad"
-1. Yashoda Hospitals (Current Site)
-2. Apollo Hospitals Hyderabad
-3. KIMS Hospitals
-4. Dr. Sukumar Sura
-5. Dr. Laxminarayana
+## Competitor Discovery (Snapshot)
 
-## Observations
-- Competitors are heavily bidding on "laser spine surgery" even if they perform endoscopic.
-- Many use general "spine surgery cost" pages to capture top-of-funnel traffic.
+### 1. Yashoda Hospitals (Direct Competitor - Institutional)
+*   **Strengths:** Domain authority, "Center of Excellence" pages.
+*   **Weakness:** Generic content, lacks "Dr. Sayuj" personal brand touch.
+*   **Keyword Overlap:** "spine surgery hyderabad", "robotic spine surgery".
+*   **Opportunity:** Target "personal attention" and specific "insurance/cashless" queries they miss.
+
+### 2. Practo / Lybrate (Aggregators)
+*   **Strengths:** Rank for "best list" and "reviews".
+*   **Weakness:** Low intent quality, distracting ads.
+*   **Strategy:** Outrank on specific "cost" and "insurance" long-tail queries where users want direct answers, not lists.
+
+### 3. Dr. [Competitor Name] (Local Specialist)
+*   **Observations:** Ranking well for "endoscopic spine surgery" but poor mobile UX.
+*   **Gap:** They lack a dedicated "Insurance & Finance" guide.
+
+## Action Plan
+*   **Focus:** Financial transparency (Trust signal).
+*   **New Page:** `spine-surgery-insurance-coverage-hyderabad`
+*   **Cluster:** Insurance | Cost | Cashless
