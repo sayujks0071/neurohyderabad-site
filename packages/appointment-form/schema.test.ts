@@ -123,12 +123,12 @@ describe("Appointment Schema Validation", () => {
     }
   });
 
-  it("allows mriScanAvailable to be omitted and defaults to false", () => {
+  it("allows mriScanAvailable to be omitted", () => {
     const { mriScanAvailable, ...dataWithoutMri } = baseValidData;
     const result = appointmentSchema.safeParse(dataWithoutMri);
     expect(result.success).toBe(true);
     if (result.success) {
-      expect(result.data.mriScanAvailable).toBe(false);
+      expect(result.data.mriScanAvailable).toBeUndefined();
     }
   });
 

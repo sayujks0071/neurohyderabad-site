@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { LocationData, locations, getLocationById } from '@/src/data/locations';
+import { LocationData, locations, getLocationById, SERVICES_PATHWAY_AREAS, CONDITIONS_PATHWAY_AREAS } from '@/src/data/locations';
 import { ChevronRight, MapPin, Activity, Stethoscope } from 'lucide-react';
 
 type Mode = 'location' | 'service' | 'condition';
@@ -107,19 +107,13 @@ export const LocalPathways: React.FC<LocalPathwaysProps> = ({
   // Mode: Service or Condition (showing locations)
   if (effectiveMode === 'service' || effectiveMode === 'condition') {
     // Exclude 'hyderabad' as it's the main location, we want local areas
-    // Show curated list of major areas to avoid link farming (limit to ~6 distinct zones)
-    const FEATURED_AREAS = [
-      'banjara-hills',
-      'jubilee-hills',
-      'hitech-city',
-      'gachibowli',
-      'kondapur',
-      'secunderabad',
-      'malakpet'
-    ];
+    // Show curated list of major areas to avoid link farming
+
+    // Use centralized configuration for pathways
+    const targetAreas = effectiveMode === 'service' ? SERVICES_PATHWAY_AREAS : CONDITIONS_PATHWAY_AREAS;
 
     const displayLocations = locations
-        .filter(l => FEATURED_AREAS.includes(l.id))
+        .filter(l => targetAreas.includes(l.id as any))
         .sort((a, b) => a.areaServedName.localeCompare(b.areaServedName));
 
     const title = effectiveMode === 'service'

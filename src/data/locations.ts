@@ -432,3 +432,21 @@ export function getLocationById(id: string): LocationData | undefined {
 export function getLocationBySlug(slug: string): LocationData | undefined {
   return locations.find(loc => loc.slug === slug);
 }
+
+// Curated list of major areas for internal linking to avoid link farming
+// Used by LocalPathways component
+export const SERVICES_PATHWAY_AREAS: LocationId[] = [
+  'banjara-hills',
+  'jubilee-hills',
+  'hitech-city',
+  'gachibowli',
+  'kondapur',
+  'secunderabad'
+];
+
+export const CONDITIONS_PATHWAY_AREAS: LocationId[] = [
+  'banjara-hills',
+  'jubilee-hills',
+  'hitech-city',
+  'gachibowli'
+];
