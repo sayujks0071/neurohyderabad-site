@@ -1,25 +1,14 @@
 {
-  "timestamp": "2025-05-18T10:30:00Z",
-  "notes": "Verified fix via build and code analysis. Lighthouse CI skipped due to missing environment.",
-  "pages": {
-    "home": {
-      "url": "/",
-      "bottlenecks": [
-        {
-          "type": "CLS",
-          "description": "Lazy-loaded video sections (ServiceShowcase, OutcomeDashboard) have placeholders that do not match the height of the loaded content (Video + Header).",
-          "details": "ServiceShowcase: Placeholder h-[500px] vs Content ~550px. OutcomeDashboard: Placeholder h-[450px] vs Content ~550px."
-        }
-      ]
-    }
+  "timestamp": "2024-05-22",
+  "build_status": "success",
+  "bottleneck": "Build failure in BookingForm.tsx due to type mismatch in schema.ts (Critical Blocker)",
+  "page_types": {
+    "Home": { "url": "/", "notes": "Build verified." },
+    "Appointment": { "url": "/appointments", "notes": "Form component schema mismatch resolved. Build verified." },
+    "Location": { "url": "/locations/malakpet", "notes": "Build verified." },
+    "Condition": { "url": "/conditions/sciatica-pain-treatment-hyderabad", "notes": "Build verified." }
   },
-  "fix_applied": {
-    "type": "CLS",
-    "description": "Updated placeholder heights in app/page.tsx to h-[550px] to match the loaded component height (Video 450px + Header ~100px).",
-    "file": "app/page.tsx"
-  },
-  "verification": {
-    "status": "Verified (Proxy)",
-    "details": "Build passed. Code change aligns placeholder height with loaded content height to prevent layout shift."
-  }
+  "fix_implemented": "Explicitly cast Zod resolver in packages/appointment-form/BookingForm.tsx to Resolver<BookingFormValues>.",
+  "impact": "Restored ability to build and deploy the application without compromising schema strictness or default values.",
+  "verification": "Ran pnpm build (success) and pnpm test packages/appointment-form/schema.test.ts (success)."
 }
