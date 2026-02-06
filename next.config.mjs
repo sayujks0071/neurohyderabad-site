@@ -223,6 +223,16 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/locations/hyderabad',
+        destination: '/neurosurgeon-hyderabad',
+        permanent: true,
+      },
+      {
+        source: '/locations/hyderabad/',
+        destination: '/neurosurgeon-hyderabad',
+        permanent: true,
+      },
+      {
         source: '/locations/neurosurgeon-jubilee-hills',
         destination: '/neurosurgeon-jubilee-hills',
         permanent: true,
