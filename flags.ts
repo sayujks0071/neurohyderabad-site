@@ -32,7 +32,7 @@ export const seoNoindex = flag({
     { label: "Noindex (block crawlers)", value: true },
   ],
   decide() {
-    return this.defaultValue;
+    return this.defaultValue! as any;
   },
 });
 
@@ -46,7 +46,7 @@ export const structuredDataEnabled = flag({
     { label: "Disabled", value: false },
   ],
   decide() {
-    return this.defaultValue;
+    return this.defaultValue! as any;
   },
 });
 
@@ -60,7 +60,7 @@ export const sitemapExtensions = flag({
     { label: "Disabled", value: false },
   ],
   decide() {
-    return this.defaultValue;
+    return this.defaultValue! as any;
   },
 });
 
@@ -75,7 +75,7 @@ export const crawlBudgetMode = flag({
     { label: "Conservative (restrict)", value: "conservative" },
   ],
   decide() {
-    return this.defaultValue;
+    return this.defaultValue! as any;
   },
 });
 
@@ -99,7 +99,7 @@ export const ctaExperiment = flag({
     { label: "WhatsApp First", value: "whatsapp_first" },
   ],
   decide() {
-    return this.defaultValue;
+    return this.defaultValue! as any;
   },
 });
 
@@ -113,7 +113,7 @@ export const stickyCtaEnabled = flag({
     { label: "Hidden", value: false },
   ],
   decide() {
-    return this.defaultValue;
+    return this.defaultValue! as any;
   },
 });
 
@@ -132,7 +132,7 @@ export const stickyCtaExperiment = flag({
     { label: "Coordinator First", value: "coordinator_first" },
   ],
   decide() {
-    return this.defaultValue;
+    return this.defaultValue! as any;
   },
 });
 
@@ -146,7 +146,7 @@ export const chatWidgetEnabled = flag({
     { label: "Hidden", value: false },
   ],
   decide() {
-    return this.defaultValue;
+    return this.defaultValue! as any;
   },
 });
 
@@ -160,7 +160,7 @@ export const appointmentFormVariant = flag({
     { label: "Streamlined (name + phone + condition)", value: "streamlined" },
   ],
   decide() {
-    return this.defaultValue;
+    return this.defaultValue! as any;
   },
 });
 
@@ -179,7 +179,7 @@ export const imageOptimization = flag({
     { label: "No optimisation", value: "unoptimized" },
   ],
   decide() {
-    return this.defaultValue;
+    return this.defaultValue! as any;
   },
 });
 
@@ -194,7 +194,7 @@ export const fontDisplay = flag({
     { label: "Block (no FOUT)", value: "block" },
   ],
   decide() {
-    return this.defaultValue;
+    return this.defaultValue! as any;
   },
 });
 
@@ -208,7 +208,7 @@ export const prefetchLinks = flag({
     { label: "Disabled", value: false },
   ],
   decide() {
-    return this.defaultValue;
+    return this.defaultValue! as any;
   },
 });
 
@@ -222,7 +222,7 @@ export const productionSourcemaps = flag({
     { label: "Disabled", value: false },
   ],
   decide() {
-    return this.defaultValue;
+    return this.defaultValue! as any;
   },
 });
 
@@ -240,7 +240,7 @@ export const showTestimonials = flag({
     { label: "Hidden", value: false },
   ],
   decide() {
-    return this.defaultValue;
+    return this.defaultValue! as any;
   },
 });
 
@@ -254,7 +254,7 @@ export const showVideoSection = flag({
     { label: "Hidden", value: false },
   ],
   decide() {
-    return this.defaultValue;
+    return this.defaultValue! as any;
   },
 });
 
@@ -268,7 +268,7 @@ export const showFaqSection = flag({
     { label: "Hidden", value: false },
   ],
   decide() {
-    return this.defaultValue;
+    return this.defaultValue! as any;
   },
 });
 
@@ -282,7 +282,7 @@ export const blogEnabled = flag({
     { label: "Disabled", value: false },
   ],
   decide() {
-    return this.defaultValue;
+    return this.defaultValue! as any;
   },
 });
 
@@ -296,6 +296,6 @@ export const locationPagesEnabled = flag({
     { label: "Disabled", value: false },
   ],
   decide() {
-    return this.defaultValue;
+    return this.defaultValue! as any;
   },
 });

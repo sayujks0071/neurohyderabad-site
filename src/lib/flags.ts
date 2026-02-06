@@ -1,4 +1,4 @@
-import { reportValue } from 'flags';
+// import { reportValue } from 'flags';
 import { hypertuneFlagFallbacks } from '@/src/lib/hypertune/experiments-config';
 
 export const FLAG_FALLBACKS = hypertuneFlagFallbacks;
@@ -10,11 +10,15 @@ export function getDefaultFlagValues(): FlagValues {
 }
 
 export function reportFlagValues(values: FlagValues) {
+  // reportValue is handled automatically by the SDK or not available in v4
+  // Keeping this as no-op or simple log if needed
+  /*
   try {
     Object.entries(values).forEach(([key, value]) => {
-      reportValue(key, value);
+      // reportValue(key, value);
     });
   } catch (error) {
     console.warn('Failed to report flag values:', error);
   }
+  */
 }

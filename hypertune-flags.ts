@@ -1,10 +1,9 @@
-import { Identify } from "flags";
 import { dedupe, flag } from "flags/next";
 import { createHypertuneAdapter } from "@flags-sdk/hypertune";
 import { createSource, flagFallbacks, vercelFlagDefinitions as flagDefinitions, type Context, type FlagValues } from "./generated/hypertune";
 
 // Identify function for flag evaluation context
-const identify: Identify<Context> = dedupe(
+const identify = dedupe(
   async ({ headers, cookies }) => {
     return {
       environment: (process.env.NODE_ENV || "development") as "development" | "production" | "test",
