@@ -122,4 +122,30 @@ describe('POST /api/appointments/submit', () => {
       mri_scan_available: undefined,
     }));
   });
+
+  it('should reject invalid painScore values', async () => {
+    const payload = {
+      patientName: 'Test Patient',
+      email: 'test@example.com',
+      phone: '9876543210',
+      age: '30',
+      gender: 'male',
+      appointmentDate: '2024-12-25',
+      appointmentTime: '10:00 AM',
+      reason: 'Back pain validation check',
+      painScore: 11, // Invalid
+    };
+
+    const request = new Request('http://localhost/api/appointments/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+
+    const response = await POST(request);
+    const body = await response.json();
+
+    expect(response.status).toBe(400);
+    expect(body.error).toMatch(/pain/i);
+  });
 });

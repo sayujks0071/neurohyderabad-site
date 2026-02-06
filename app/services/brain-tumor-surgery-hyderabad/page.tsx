@@ -15,15 +15,16 @@ import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import { getServiceSources } from '../sources';
 import { patientStories } from '@/src/content/stories';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
+import PatientJourneySection from '@/src/components/PatientJourneySection';
 import MedicalWebPageSchema from '../../components/schemas/MedicalWebPageSchema';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
 
 const SERVICE_SLUG = 'brain-tumor-surgery-hyderabad';
 
 const baseMetadata = makeMetadata({
-  title: 'Brain Tumor Surgery Hyderabad | Awake & Neuronavigation Expert',
+  title: 'Brain Tumor Surgery Hyderabad | Awake Craniotomy | Dr Sayuj',
   description:
-    'Advanced Brain Tumor Surgery in Hyderabad using Neuronavigation & Awake Craniotomy. Safe removal of complex tumors. Neuro-Oncology expert Dr Sayuj.',
+    'Advanced brain tumor removal with Neuronavigation & Awake Surgery. Best Neuro-Oncologist in Hyderabad for complex cases. High safety standards.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
 });
 
@@ -154,6 +155,33 @@ const COSTS = [
   }
 ];
 
+const JOURNEY_STEPS = [
+  {
+    title: 'Diagnosis & Staging',
+    description: 'Advanced MRI (3T), spectroscopy, and functional imaging to map the tumor.'
+  },
+  {
+    title: 'Tumor Board Review',
+    description: 'Joint review by neurosurgeons, oncologists, and radiologists to plan the best approach.'
+  },
+  {
+    title: 'Pre-Surgical Planning',
+    description: 'Neuronavigation setup and anaesthesia safety check (PAC) for clearance.'
+  },
+  {
+    title: 'The Surgery',
+    description: 'Microsurgical or endoscopic removal using intra-operative monitoring for safety.'
+  },
+  {
+    title: 'ICU & Recovery',
+    description: 'Close monitoring in Neuro-ICU for 24 hours, followed by ward care.'
+  },
+  {
+    title: 'Histopathology & Care',
+    description: 'Biopsy report discussion and referral for radiation/chemo if required.'
+  }
+];
+
 // Google Business Profile JSON-LD for Brain Tumor Surgery
 
 export default function BrainTumorSurgeryHyderabadPage() {
@@ -259,28 +287,39 @@ export default function BrainTumorSurgeryHyderabadPage() {
           </ul>
         </section>
 
-        <section className="mb-16 grid md:grid-cols-2 gap-10">
-          <div>
-            <h2 className="text-3xl font-bold text-blue-900 mb-4">What to Expect at Yashoda Hospital, Malakpet</h2>
-            <p className="text-gray-700 mb-6">
-              Your journey begins with a comprehensive review of symptoms, imaging, and medical history. When surgery is advised,
-              Dr. Sayuj details the planned approach—whether a craniotomy, endoscopic skull base procedure, or biopsy—and
-              explains how neuronavigation and neuromonitoring enhance safety.
-            </p>
-            <p className="text-gray-700">
-              Post-operatively, patients recover in the neuro ICU with close neurosurgical supervision. Our Malakpet team coordinates
-              adjuvant therapy planning, rehabilitation, and teleconsults to keep patients and families informed every step of the
-              way.
-            </p>
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-blue-900 mb-4">What to Expect at Yashoda Hospital, Malakpet</h2>
+          <p className="text-gray-700 mb-6 max-w-4xl">
+            Your journey begins with a comprehensive review of symptoms, imaging, and medical history. When surgery is advised,
+            Dr. Sayuj details the planned approach—whether a craniotomy, endoscopic skull base procedure, or biopsy—and
+            explains how neuronavigation and neuromonitoring enhance safety.
+          </p>
+          <PatientJourneySection title="Your Treatment Pathway" steps={JOURNEY_STEPS} />
+        </section>
+
+        <section className="mb-16 bg-gradient-to-r from-blue-50 to-white p-8 rounded-2xl border border-blue-100">
+          <h2 className="text-3xl font-bold text-blue-900 mb-8 text-center">Advanced Surgical Techniques</h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            {treatmentHighlights.map((tech, idx) => (
+              <div key={idx} className="bg-white p-6 rounded-xl shadow-sm border border-blue-50">
+                <h3 className="font-semibold text-blue-800 mb-3">{tech.title}</h3>
+                <p className="text-sm text-gray-700">{tech.description}</p>
+              </div>
+            ))}
           </div>
-          <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
-            <h3 className="text-xl font-semibold text-blue-800 mb-3">The Consultation Pathway</h3>
-            <ol className="space-y-3 text-sm text-gray-700 list-decimal list-inside">
-              <li>Bring MRI/CT scans and prior reports for a detailed review.</li>
-              <li>Receive an explanation of surgical strategy and potential risks.</li>
-              <li>Meet the oncology and rehabilitation teams when required.</li>
-              <li>Plan post-operative visits and tele-follow-ups before discharge.</li>
-            </ol>
+        </section>
+
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-blue-900 mb-6">Comprehensive Patient Support</h2>
+          <div className="bg-white border border-gray-200 rounded-xl p-8 shadow-sm">
+            <ul className="grid md:grid-cols-2 gap-4">
+              {patientSupport.map((item, idx) => (
+                <li key={idx} className="flex items-start">
+                  <span className="text-green-500 mr-3 font-bold">✓</span>
+                  <span className="text-gray-700">{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
 

@@ -3,7 +3,7 @@
 const https = require('https');
 
 async function getWebsiteDiagnostics() {
-  const url = 'https://www.drsayuj.com';
+  const url = 'https://www.drsayuj.info';
   
   return new Promise((resolve, reject) => {
     const startTime = Date.now();
@@ -111,7 +111,6 @@ if (require.main === module) {
 }
 
 module.exports = { getWebsiteDiagnostics, sendToAI };
-
 
 
 

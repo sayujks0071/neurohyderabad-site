@@ -585,13 +585,35 @@ async function checkAvailability(
   console.log(`[Appointment Workflow] Checking availability for ${date} ${time}`);
 
   const availability = evaluateAvailability(date, time);
-  if (!availability.available && availability.reason) {
+  if (!availability.available) {
     console.log(
-      `[Appointment Workflow] Availability failed: ${availability.reason}`
+      `[Appointment Workflow] Static availability failed: ${availability.reason}`
     );
+    return availability;
   }
 
-  return availability;
+  // Check database for existing bookings to prevent double-booking
+  try {
+    const isBooked = await retry(
+      async () => {
+        const count = await appointments.checkSlot(date, time);
+        return count > 0;
+      },
+      { retries: 3, delay: 1000, name: "check-slot-availability" }
+    );
+
+    if (isBooked) {
+      console.log(`[Appointment Workflow] Slot ${date} ${time} is already booked`);
+      return { available: false, reason: "Requested slot is already booked." };
+    }
+  } catch (error) {
+    console.error(`[Appointment Workflow] Failed to check DB availability:`, error);
+    // Fail safe: If we can't verify availability, we should probably fail
+    // to avoid double booking, or let the workflow retry mechanism handle it.
+    throw error;
+  }
+
+  return { available: true };
 }
 
 /**

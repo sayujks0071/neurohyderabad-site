@@ -1,19 +1,24 @@
-# Clusters and Mapping - 2026-02-02
+# Cluster & Mapping Report - 2026-02-03
 
-## New Clusters
+## 1. Finance & Insurance Cluster (New)
+*   **Primary Intent:** Users seeking financial clarity before booking.
+*   **Funnel Stage:** BOFU / MOFU
+*   **Target URL:** `/blog/spine-surgery-insurance-coverage-hyderabad` (NEW)
+*   **Keywords:**
+    *   spine surgery insurance coverage hyderabad
+    *   is spine surgery covered by mediclaim
+    *   cashless spine surgery yashoda hospital
+    *   spine surgery cost with insurance hyderabad
 
-### LOC | BOFU | NEURO | jubilee-hills
-*   **Primary:** "neurosurgeon jubilee hills"
-*   **Secondary:** "best neurosurgeon in jubilee hills", "spine specialist jubilee hills"
-*   **Target:** `/locations/neurosurgeon-jubilee-hills` (New Page)
-*   **Rationale:** High income area, existing location data, missing page.
+## 2. Recovery Timeline Cluster (Update)
+*   **Target URL:** `/blog/endoscopic-spine-surgery-recovery-timeline`
+*   **Action:** No changes today, monitoring rankings.
 
-### HYD | BOFU | SPINE | cost
-*   **Primary:** "spine surgery cost hyderabad"
-*   **Secondary:** "endoscopic spine surgery cost hyderabad"
-*   **Target:** `/services/spine-surgery-cost-hyderabad` (Existing)
-*   **Action:** Ensure keyword mapping is updated.
+## 3. Location Specific (Malakpet)
+*   **Target URL:** `/locations/neurosurgeon-malakpet`
+*   **Keywords:**
+    *   yashoda hospital malakpet insurance list (Secondary mapping)
 
-## Updates to Existing
-*   **sciatica treatment without surgery** -> `/conditions/sciatica-pain-treatment-hyderabad`
-*   **laminectomy recovery time** -> `/blog/microdiscectomy-vs-laminectomy-recovery-comparison`
+## Cannibalization Check
+*   Checked against `spine-surgery-cost-hyderabad` (Service page).
+*   **Verdict:** Safe. Service page focuses on "Procedure Cost" (numbers). New blog focuses on "Insurance Eligibility & Process" (policy). Distinct search intents.

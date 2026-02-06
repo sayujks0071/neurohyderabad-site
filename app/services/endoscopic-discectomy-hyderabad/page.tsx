@@ -265,8 +265,8 @@ export default function EndoscopicDiscectomyPage() {
                   <p className="text-sm text-gray-600">Comprehensive guide to herniated disc treatment options</p>
                 </Link>
                 <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="bg-blue-50 border border-blue-200 rounded-lg p-4 hover:bg-blue-100 transition">
-                  <h3 className="font-semibold text-blue-700 mb-2">Sciatica Treatment</h3>
-                  <p className="text-sm text-gray-600">Understanding sciatica causes and treatment</p>
+                  <h3 className="font-semibold text-blue-700 mb-2">Sciatica Treatment Guide</h3>
+                  <p className="text-sm text-gray-600">Read our comprehensive guide on non-surgical and surgical sciatica relief.</p>
                 </Link>
               </div>
             </section>

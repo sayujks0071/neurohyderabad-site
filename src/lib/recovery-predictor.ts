@@ -1,6 +1,6 @@
 import { generateObject } from 'ai';
 import { z } from 'zod';
-import { getTextModel, hasAIConfig } from './ai/gateway';
+import { getTextModel, hasAIConfig } from '@/src/lib/ai/gateway';
 import { RecoveryPlan } from '@/src/types/recovery-timeline';
 
 /**

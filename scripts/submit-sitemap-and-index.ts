@@ -20,7 +20,7 @@ async function submitSitemap() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         action: 'submit_sitemap',
-        sitemap: `${SITE_URL}/sitemap.xml`,
+        sitemap: `${SITE_URL}/sitemap-main.xml`,
       }),
     });
 

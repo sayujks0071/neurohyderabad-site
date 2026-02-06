@@ -72,11 +72,17 @@ const nextConfig = {
         destination: '/sitemap.xml',
         permanent: true,
       },
-      // CRITICAL: Apex domain redirect to www (single hop 301)
+      // CRITICAL: Consolidate .com -> canonical .info (single hop 301)
       {
         source: '/:path*',
         has: [{ type: 'host', value: 'drsayuj.com' }],
-        destination: 'https://www.drsayuj.com/:path*',
+        destination: 'https://www.drsayuj.info/:path*',
+        permanent: true,
+      },
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.drsayuj.com' }],
+        destination: 'https://www.drsayuj.info/:path*',
         permanent: true,
       },
       // CRITICAL: Apex domain redirect for drsayuj.info to www (single hop 301)
@@ -84,6 +90,13 @@ const nextConfig = {
         source: '/:path*',
         has: [{ type: 'host', value: 'drsayuj.info' }],
         destination: 'https://www.drsayuj.info/:path*',
+        permanent: true,
+      },
+      // Next canary builds have been observed to 308-loop on /sitemap.xml.
+      // Redirect to a stable non-reserved path that we serve explicitly.
+      {
+        source: '/sitemap.xml',
+        destination: '/sitemap-main.xml',
         permanent: true,
       },
       // SITE ARCHITECTURE CONSOLIDATION: Reduce 5 hub pages to 2
@@ -178,6 +191,57 @@ const nextConfig = {
         destination: '/neurosurgeon-hitech-city',
         permanent: true,
       },
+      // Consolidate duplicate /locations/* variants to canonical /neurosurgeon-* pages
+      {
+        source: '/locations/brain-spine-surgeon-jubilee-hills',
+        destination: '/neurosurgeon-jubilee-hills',
+        permanent: true,
+      },
+      {
+        source: '/locations/brain-spine-surgeon-banjara-hills',
+        destination: '/neurosurgeon-banjara-hills',
+        permanent: true,
+      },
+      {
+        source: '/locations/brain-spine-surgeon-hitec-city',
+        destination: '/neurosurgeon-hitech-city',
+        permanent: true,
+      },
+      {
+        source: '/locations/banjara-hills',
+        destination: '/neurosurgeon-banjara-hills',
+        permanent: true,
+      },
+      {
+        source: '/locations/hitech-city',
+        destination: '/neurosurgeon-hitech-city',
+        permanent: true,
+      },
+      {
+        source: '/locations/malakpet',
+        destination: '/neurosurgeon-malakpet',
+        permanent: true,
+      },
+      {
+        source: '/locations/hyderabad',
+        destination: '/neurosurgeon-hyderabad',
+        permanent: true,
+      },
+      {
+        source: '/locations/hyderabad/',
+        destination: '/neurosurgeon-hyderabad',
+        permanent: true,
+      },
+      {
+        source: '/locations/neurosurgeon-jubilee-hills',
+        destination: '/neurosurgeon-jubilee-hills',
+        permanent: true,
+      },
+      {
+        source: '/locations/secunderabad',
+        destination: '/neurosurgeon-secunderabad',
+        permanent: true,
+      },
     ];
   },
 
@@ -253,14 +317,14 @@ const nextConfig = {
         ]
       },
       {
-        source: "/sitemap.xml",
+        source: "/sitemap-images.xml",
         headers: [
           { key: "Content-Type", value: "application/xml; charset=utf-8" },
           { key: "Cache-Control", value: "public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400" }
         ]
       },
       {
-        source: "/sitemap-:path.xml",
+        source: "/sitemap-videos.xml",
         headers: [
           { key: "Content-Type", value: "application/xml; charset=utf-8" },
           { key: "Cache-Control", value: "public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400" }

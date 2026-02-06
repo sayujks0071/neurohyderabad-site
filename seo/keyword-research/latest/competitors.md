@@ -1,28 +1,23 @@
-# Daily Competitor Discovery - 2026-02-02
+# Daily Competitor Analysis - 2026-02-03
 
-## Target Keywords
-* "endoscopic spine surgery hyderabad"
-* "best spine surgeon hyderabad"
-* "neurosurgeon jubilee hills"
-* "spine surgery cost hyderabad"
+## Competitor Discovery (Snapshot)
 
-## Competitors Analyzed
+### 1. Yashoda Hospitals (Direct Competitor - Institutional)
+*   **Strengths:** Domain authority, "Center of Excellence" pages.
+*   **Weakness:** Generic content, lacks "Dr. Sayuj" personal brand touch.
+*   **Keyword Overlap:** "spine surgery hyderabad", "robotic spine surgery".
+*   **Opportunity:** Target "personal attention" and specific "insurance/cashless" queries they miss.
 
-### 1. Local Surgeons
-*   **Dr. Sukumar Sura**: Ranking well for "endoscopic spine surgery".
-*   **Dr. BSV Raju**: Strong presence for "spine surgeon hyderabad".
-*   **Dr. Hariprakash Chakraborty**: Competes on "neurosurgeon hyderabad".
+### 2. Practo / Lybrate (Aggregators)
+*   **Strengths:** Rank for "best list" and "reviews".
+*   **Weakness:** Low intent quality, distracting ads.
+*   **Strategy:** Outrank on specific "cost" and "insurance" long-tail queries where users want direct answers, not lists.
 
-### 2. Hospitals
-*   **Yashoda Hospitals**: Dominates broad terms.
-*   **Apollo Hospitals**: Strong authority.
-*   **KIMS Hospitals**: Good content on procedures.
+### 3. Dr. [Competitor Name] (Local Specialist)
+*   **Observations:** Ranking well for "endoscopic spine surgery" but poor mobile UX.
+*   **Gap:** They lack a dedicated "Insurance & Finance" guide.
 
-### 3. Portals
-*   **Practo**: Always top for "best doctor near me".
-*   **Lybrate**: Strong Q&A snippets.
-
-## Insights
-*   **Jubilee Hills** is a high-value location gap. Competitors have listings but thin content.
-*   **Cost** queries are rising ("spine surgery cost hyderabad"). Competitors have price ranges in blogs.
-*   **Recovery** content is popular ("laminectomy recovery time").
+## Action Plan
+*   **Focus:** Financial transparency (Trust signal).
+*   **New Page:** `spine-surgery-insurance-coverage-hyderabad`
+*   **Cluster:** Insurance | Cost | Cashless

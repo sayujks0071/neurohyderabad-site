@@ -77,7 +77,8 @@ export const SOCIAL_PROFILES = [
   "https://www.google.com/maps?cid=14503792272825406246",
   "https://www.yashodahospitals.com/doctors/dr-sayuj-krishnan/",
   "https://www.google.com/search?q=Dr+Sayuj+Krishnan+Neurosurgeon+Hyderabad",
-  "https://www.practo.com/hyderabad/doctor/dr-sayuj-krishnan-neurosurgeon"
+  "https://www.practo.com/hyderabad/doctor/dr-sayuj-krishnan-neurosurgeon",
+  "https://www.justdial.com/Hyderabad/Dr-Sayuj-Krishnan-Neurosurgeon-Yashoda-Hospital-Malakpet/040PXX40-XX40-210816155554-Q2H6_BZDET"
 ];
 
 const DEFAULT_SERVICES = [
@@ -384,6 +385,23 @@ export const locations: LocationData[] = [
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
     sameAs: SOCIAL_PROFILES
+  },
+  {
+    id: "uppal",
+    name: "Dr Sayuj Krishnan - Neurosurgeon near Uppal",
+    canonical_display_name: CANONICAL_PHYSICIAN_NAME,
+    slug: "locations/neurosurgeon-uppal",
+    address: YASHODA_MALAKPET_ADDRESS,
+    telephone: CANONICAL_TELEPHONE,
+    whatsapp: CANONICAL_WHATSAPP,
+    directions_url: YASHODA_DIRECTIONS,
+    google_maps_place_url: CANONICAL_MAPS_URL,
+    embed_url: REPO_EMBED,
+    geo: YASHODA_GEO,
+    areaServedName: "Uppal",
+    top_services_slugs: DEFAULT_SERVICES,
+    top_conditions_slugs: DEFAULT_CONDITIONS,
+    sameAs: SOCIAL_PROFILES
   }
 ];
 
@@ -404,7 +422,8 @@ export type LocationId =
   | "madhapur"
   | "dilsukhnagar"
   | "vanasthalipuram"
-  | "miyapur";
+  | "miyapur"
+  | "uppal";
 
 export function getLocationById(id: string): LocationData | undefined {
   return locations.find(loc => loc.id === id);
@@ -413,3 +432,21 @@ export function getLocationById(id: string): LocationData | undefined {
 export function getLocationBySlug(slug: string): LocationData | undefined {
   return locations.find(loc => loc.slug === slug);
 }
+
+// Curated list of major areas for internal linking to avoid link farming
+// Used by LocalPathways component
+export const SERVICES_PATHWAY_AREAS: LocationId[] = [
+  'banjara-hills',
+  'jubilee-hills',
+  'hitech-city',
+  'gachibowli',
+  'kondapur',
+  'secunderabad'
+];
+
+export const CONDITIONS_PATHWAY_AREAS: LocationId[] = [
+  'banjara-hills',
+  'jubilee-hills',
+  'hitech-city',
+  'gachibowli'
+];

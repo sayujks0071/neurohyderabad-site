@@ -34,7 +34,7 @@ const videos: VideoItem[] = [
     description:
       'Comprehensive patient education about sciatica symptoms, causes, and treatment options. Learn about conservative management and when surgery may be recommended.',
     duration: '6:30',
-    focus: 'Sciatica education',
+    focus: 'Spine & Sciatica education',
     source: 'Dr. Sayuj Krishnan - Neurosurgeon'
   }
 ];
