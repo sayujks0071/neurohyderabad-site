@@ -37,6 +37,7 @@ import GoogleAnalytics from "../src/components/GoogleAnalytics";
 import DynamicStickyCTA from "./_components/DynamicStickyCTA";
 import FloatingChatWidget from "./_components/DynamicFloatingChatWidget";
 import FlagValuesEmitter from "./_components/FlagValuesEmitter";
+import StandaloneFlagValues from "./_components/StandaloneFlagValues";
 import MiddlewareRUM from "./_components/MiddlewareRUM";
 import HypertuneWrapper from "./providers/hypertune-wrapper";
 import { SITE_URL } from "../src/lib/seo";
@@ -192,6 +193,7 @@ export default function RootLayout({
           <DynamicStickyCTA />
         </HypertuneWrapper>
         <Footer />
+        <StandaloneFlagValues />
         {process.env.VERCEL ? <Analytics /> : null}
       </body>
     </html>
