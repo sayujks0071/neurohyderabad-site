@@ -1,23 +1,28 @@
-# Daily Competitor Analysis - 2026-02-03
+# Daily Competitor Analysis - 2026-02-06
 
-## Competitor Discovery (Snapshot)
+## Top Local Competitors (Hyderabad)
 
-### 1. Yashoda Hospitals (Direct Competitor - Institutional)
-*   **Strengths:** Domain authority, "Center of Excellence" pages.
-*   **Weakness:** Generic content, lacks "Dr. Sayuj" personal brand touch.
-*   **Keyword Overlap:** "spine surgery hyderabad", "robotic spine surgery".
-*   **Opportunity:** Target "personal attention" and specific "insurance/cashless" queries they miss.
+1.  **Yashoda Hospitals**
+    *   Top Keywords: "spine surgery hyderabad", "neurosurgeon hyderabad", "brain tumor treatment"
+    *   Strategy: High volume content, patient testimonials, video content.
 
-### 2. Practo / Lybrate (Aggregators)
-*   **Strengths:** Rank for "best list" and "reviews".
-*   **Weakness:** Low intent quality, distracting ads.
-*   **Strategy:** Outrank on specific "cost" and "insurance" long-tail queries where users want direct answers, not lists.
+2.  **Apollo Hospitals Hyderabad**
+    *   Top Keywords: "best neurologist in hyderabad", "spine surgery cost", "robotic spine surgery"
+    *   Strategy: Brand authority, doctor profiles, advanced technology pages.
 
-### 3. Dr. [Competitor Name] (Local Specialist)
-*   **Observations:** Ranking well for "endoscopic spine surgery" but poor mobile UX.
-*   **Gap:** They lack a dedicated "Insurance & Finance" guide.
+3.  **KIMS Hospitals**
+    *   Top Keywords: "neuro surgery kims", "best spine surgeon secunderabad"
+    *   Strategy: Location-based targeting, affordable care messaging.
 
-## Action Plan
-*   **Focus:** Financial transparency (Trust signal).
-*   **New Page:** `spine-surgery-insurance-coverage-hyderabad`
-*   **Cluster:** Insurance | Cost | Cashless
+4.  **Dr. ABC (Generic Competitor)**
+    *   Top Keywords: "endoscopic spine surgery hyderabad", "slip disc treatment"
+    *   Strategy: Personal branding, direct response.
+
+## SERP Observations
+*   **Local Pack:** Dominated by hospitals with high review counts.
+*   **Snippet:** "Cost of spine surgery" snippet is captured by aggregators (Practo/Lybrate).
+*   **Video:** increasing presence of YouTube shorts for "sciatica exercises".
+
+## Opportunities
+*   **Gap:** "Sciatica exercises to avoid" - many pages talk about what to do, fewer about what NOT to do.
+*   **Gap:** "Cost transparency" - users are looking for specific packages.
