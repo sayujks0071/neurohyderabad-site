@@ -36,12 +36,9 @@ export function GET(_req: NextRequest) {
   for (const path of DISALLOW_PATHS) lines.push(`Disallow: ${path}`);
 
   // Sitemaps (all should be HTTP 200 and valid XML)
-  lines.push(`Sitemap: ${SITE}/sitemap-main.xml`);
+  lines.push(`Sitemap: ${SITE}/sitemap.xml`);
   lines.push(`Sitemap: ${SITE}/sitemap-images.xml`);
   lines.push(`Sitemap: ${SITE}/sitemap-videos.xml`);
-
-  // Non-standard but supported by some crawlers; harmless for Google.
-  lines.push('Host: www.drsayuj.info');
 
   return new Response(lines.join('\n') + '\n', {
     headers: {

@@ -253,7 +253,7 @@ export default function SlipDiscTreatmentPage() {
               When conservative care fails or neurological deficits appear.
             </p>
             <ul className="space-y-2 text-sm text-blue-900">
-              <li>• <strong>Endoscopic Discectomy:</strong> Keyhole surgery (gold standard).</li>
+              <li>• <Link href="/services/endoscopic-spine-surgery-hyderabad" className="font-bold underline hover:text-blue-800">Endoscopic discectomy — most common treatment</Link>: Keyhole surgery (gold standard).</li>
               <li>• <strong>Microdiscectomy:</strong> Microscope-assisted removal.</li>
               <li>• <strong>Same-Day Discharge:</strong> Walk home within hours.</li>
               <li>• <strong>Tiny Incision:</strong> Minimal scarring (6-8mm).</li>
