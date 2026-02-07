@@ -76,11 +76,10 @@ export async function POST(request: NextRequest) {
       case 'patient-education': {
         // Use query as condition if condition not provided
         const condition = options.condition || query;
-        const educationContent = await generatePatientEducation(
+        result = await generatePatientEducation(
           condition,
           fileUris || []
         );
-        result = { answer: educationContent, usedFiles: fileUris || [] };
         break;
       }
 

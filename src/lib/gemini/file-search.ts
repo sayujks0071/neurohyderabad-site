@@ -273,7 +273,7 @@ function buildMedicalQuery(
 export async function generatePatientEducation(
   condition: string,
   fileUris: string[]
-): Promise<string> {
+): Promise<FileSearchResponse> {
   const query = `Based on the provided medical documents, create patient-friendly educational content about ${condition}.
 
 Include:
@@ -292,7 +292,7 @@ Use simple language suitable for patients without medical background. Include ap
     temperature: 0.5, // Lower temperature for more factual content
   });
 
-  return result.answer;
+  return result;
 }
 
 /**
