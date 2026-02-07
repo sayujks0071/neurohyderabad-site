@@ -77,7 +77,7 @@ function extractEmail(text: string): string | null {
 // -------------------------------------------------------------------------
 
 function generateRuleBasedResponse(request: BookingRequest): AIResponse {
-  const { message, bookingData, pageSlug, service } = request;
+  const { message, bookingData, service } = request;
   
   const isEmergency = detectEmergency(message);
   const detectedCondition = detectCondition(message);
