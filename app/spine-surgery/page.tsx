@@ -63,7 +63,7 @@ const SPINE_SURGERY_FAQS = [
 ];
 
 export const metadata: Metadata = {
-  title: "Endoscopic Spine Surgery Hyderabad | Minimally Invasive Specialist",
+  title: "Endoscopic Spine Surgery Hyderabad | Dr. Sayuj Krishnan",
   description: "Expert endoscopic spine surgery in Hyderabad. Minimally invasive slip disc & stenosis treatment. Same-day discharge. Dr. Sayuj Krishnan.",
   keywords: [
     "spine surgery hyderabad",
@@ -114,7 +114,7 @@ export default function SpineSurgeryPage() {
   return (
     <>
       <MedicalWebPageSchema
-        title="Endoscopic Spine Surgery Hyderabad | Minimally Invasive Specialist"
+        title="Endoscopic Spine Surgery Hyderabad | Dr. Sayuj Krishnan"
         description="Expert endoscopic spine surgery in Hyderabad. Minimally invasive slip disc & stenosis treatment. Same-day discharge. Dr. Sayuj Krishnan."
         pageSlug="/spine-surgery"
         pageType="service"
@@ -205,6 +205,71 @@ export default function SpineSurgeryPage() {
                      If you have these symptoms, call our emergency line (+91 97782 80044) or visit Yashoda Hospital Malakpet Casualty immediately.
                    </p>
                 </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Second Opinion & MRI Review Section (Competitor Gap) */}
+        <section className="py-16 bg-blue-900 text-white">
+          <div className="container mx-auto px-4">
+            <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <h2 className="text-3xl font-bold mb-6">
+                  Advised Spine Surgery? Get a Second Opinion.
+                </h2>
+                <p className="text-lg text-blue-100 mb-6">
+                  Many patients advised "Open Surgery" can actually be treated with <span className="text-yellow-400 font-bold">Endoscopic Spine Surgery</span>.
+                  Send your MRI for a free preliminary review to check if you are eligible for a minimally invasive approach.
+                </p>
+                <ul className="space-y-3 mb-8">
+                  <li className="flex items-center">
+                     <span className="text-green-400 mr-3 text-xl" aria-hidden="true">✓</span>
+                     <span>Avoid unnecessary metal screws (fusion)</span>
+                  </li>
+                  <li className="flex items-center">
+                     <span className="text-green-400 mr-3 text-xl" aria-hidden="true">✓</span>
+                     <span>Confirm if surgery is truly needed</span>
+                  </li>
+                  <li className="flex items-center">
+                     <span className="text-green-400 mr-3 text-xl" aria-hidden="true">✓</span>
+                     <span>Explore "Awake" surgery options</span>
+                  </li>
+                </ul>
+                <a
+                  href="https://wa.me/919778280044?text=Hi%20Dr%20Sayuj,%20I%20want%20a%20second%20opinion%20for%20spine%20surgery."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-green-500 text-white px-8 py-3 rounded-full font-bold hover:bg-green-600 transition-colors inline-block"
+                >
+                  WhatsApp MRI for Review
+                </a>
+              </div>
+              <div className="bg-white/10 p-8 rounded-xl backdrop-blur-sm border border-white/20">
+                 <h3 className="text-xl font-bold mb-4">What We Look For:</h3>
+                 <div className="space-y-4">
+                    <div className="flex items-start">
+                       <div className="bg-blue-600 p-2 rounded-lg mr-4">📂</div>
+                       <div>
+                          <p className="font-semibold">Recent MRI Scan</p>
+                          <p className="text-sm text-blue-200">Ideally less than 6 months old</p>
+                       </div>
+                    </div>
+                    <div className="flex items-start">
+                       <div className="bg-blue-600 p-2 rounded-lg mr-4">📝</div>
+                       <div>
+                          <p className="font-semibold">Current Symptoms</p>
+                          <p className="text-sm text-blue-200">Where is the pain? (Back vs Leg)</p>
+                       </div>
+                    </div>
+                    <div className="flex items-start">
+                       <div className="bg-blue-600 p-2 rounded-lg mr-4">💊</div>
+                       <div>
+                          <p className="font-semibold">Treatment History</p>
+                          <p className="text-sm text-blue-200">Physio or injections tried?</p>
+                       </div>
+                    </div>
+                 </div>
               </div>
             </div>
           </div>
@@ -407,7 +472,7 @@ export default function SpineSurgeryPage() {
                       href="/conditions/sciatica-pain-treatment-hyderabad"
                       className="text-blue-600 hover:text-blue-800 font-medium"
                     >
-                      View Sciatica Treatment →
+                      View Non-Surgical Sciatica Treatment →
                     </Link>
                   </div>
                 </div>

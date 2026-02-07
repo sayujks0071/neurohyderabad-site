@@ -6,6 +6,7 @@ import { LocationCTAs } from "@/src/components/locations/LocationCTAs";
 import { LocationMapEmbed } from "@/src/components/locations/LocationMapEmbed";
 import { LocalPathways } from "@/src/components/locations/LocalPathways";
 import { LocationSchema } from "@/src/components/locations/LocationSchema";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import TrustProof from "@/app/_components/TrustProof";
 import { patientStories } from "@/src/content/stories";
@@ -16,9 +17,11 @@ export const dynamicParams = false;
 export const revalidate = 86400;
 
 export const metadata = {
-  title: "Best Neurosurgeon for Jubilee Hills | Dr. Sayuj Krishnan",
-  description: "Expert Neurosurgeon serving Jubilee Hills & Film Nagar. Dr. Sayuj Krishnan specializes in Endoscopic Spine Surgery & Brain Tumors. 25 mins from Checkpost.",
-  alternates: { canonical: "https://www.drsayuj.info/locations/neurosurgeon-jubilee-hills" },
+  title: "Neurosurgeon Jubilee Hills | Brain & Spine Specialist",
+  description: "Expert neurosurgeon near Jubilee Hills. Dr Sayuj Krishnan provides advanced brain and spine surgery. Convenient access from Road No. 36 and Checkpost.",
+  alternates: {
+    canonical: "https://www.drsayuj.info/locations/neurosurgeon-jubilee-hills",
+  },
   openGraph: {
     title: "Best Neurosurgeon for Jubilee Hills | Dr. Sayuj Krishnan",
     description: "Advanced Neurosurgery Centre for Jubilee Hills patients. Endoscopic Spine & Brain Surgery specialists.",

@@ -2,6 +2,7 @@ import React from 'react';
 import {
   CANONICAL_PHYSICIAN_NAME,
   CANONICAL_TELEPHONE,
+  CANONICAL_MAPS_URL,
   getLocationById,
   SOCIAL_PROFILES
 } from '../../data/locations';
@@ -88,6 +89,7 @@ export const PhysicianSchema: React.FC = () => {
         "url": SITE_URL,
         "image": `${SITE_URL}/images/dr-sayuj-krishnan-portrait-optimized.jpg`,
         "telephone": CANONICAL_TELEPHONE,
+        "hasMap": CANONICAL_MAPS_URL,
         "priceRange": "₹₹",
         "email": "hellodr@drsayuj.info",
         "identifier": [

@@ -24,7 +24,7 @@ const PatientEducationVideos = dynamic(() => import('@/app/_components/PatientEd
 
 const baseMetadata = makeMetadata({
   title: "Sciatica Treatment Hyderabad | 90% Non-Surgical | Dr Sayuj",
-  description: "Relief from Sciatica leg pain in Hyderabad. 90% non-surgical success with Dr. Sayuj Krishnan. Nerve blocks, Physio & Endoscopic options. Book Consult.",
+  description: "Sciatica Treatment Hyderabad: 90% non-surgical success with Dr. Sayuj Krishnan. Nerve blocks, Physio & Endoscopic options. Book Consult.",
   canonicalPath: '/conditions/sciatica-pain-treatment-hyderabad',
 });
 
