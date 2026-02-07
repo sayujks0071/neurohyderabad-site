@@ -35,19 +35,18 @@ export default function MriAnalysisPage() {
     formData.append("file", file);
 
     try {
-      // Assuming the python service is running on port 8000
-      // In production, you'd use an environment variable or a proxy rewrite
-      const response = await fetch("http://localhost:8000/analyze", {
+      const response = await fetch("/api/mri/analyze", {
         method: "POST",
         body: formData,
       });
 
       if (!response.ok) {
-        throw new Error(`Analysis failed: ${response.statusText}`);
+        const errData = await response.json().catch(() => ({}));
+        throw new Error(errData.error || `Analysis failed: ${response.statusText}`);
       }
 
       const data = await response.json();
-      setResult(data.analysis);
+      setResult(data);
     } catch (err: any) {
       setError(err.message || "An unexpected error occurred.");
     } finally {
@@ -62,6 +61,9 @@ export default function MriAnalysisPage() {
           <h1 className="text-4xl font-bold mb-4">AI MRI Report Analyzer</h1>
           <p className="text-xl opacity-90">
             Upload your MRI PDF report for an instant, AI-powered interpretation.
+          </p>
+          <p className="text-sm mt-2 opacity-75">
+            Note: Do not upload files containing highly sensitive identifiers; redact if possible.
           </p>
         </div>
       </Section>
@@ -127,21 +129,38 @@ export default function MriAnalysisPage() {
 
           {result && (
             <div className="mt-8 space-y-6">
+              {result.extraction?.truncated && (
+                <div className="p-4 bg-orange-50 border-l-4 border-orange-400 text-orange-700">
+                  <p>Warning: The document was very large and has been truncated. The analysis may be incomplete.</p>
+                </div>
+              )}
+
               <Card className="p-8 shadow-xl bg-white border-t-4 border-blue-500 rounded-xl animate-fade-in">
                 <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b pb-4">Analysis Result</h2>
-                <div className="prose prose-blue max-w-none">
-                    {/* Assuming result is an array of strings or objects from Cognee */}
-                    {Array.isArray(result) ? (
-                        <ul className="list-disc pl-5 space-y-2">
-                        {result.map((item: any, index: number) => (
-                            <li key={index} className="text-gray-700">
-                                {typeof item === 'string' ? item : JSON.stringify(item)}
-                            </li>
-                        ))}
-                        </ul>
-                    ) : (
+
+                {result.analysis?.plainEnglishSummary && (
+                  <div className="mb-6">
+                    <h3 className="text-lg font-semibold text-blue-900 mb-2">Summary</h3>
+                    <p className="text-gray-700 leading-relaxed">{result.analysis.plainEnglishSummary}</p>
+                  </div>
+                )}
+
+                {result.analysis?.keyTakeaways && result.analysis.keyTakeaways.length > 0 && (
+                  <div className="mb-6">
+                    <h3 className="text-lg font-semibold text-blue-900 mb-2">Key Takeaways</h3>
+                    <ul className="list-disc pl-5 space-y-2">
+                      {result.analysis.keyTakeaways.map((item: string, index: number) => (
+                        <li key={index} className="text-gray-700">{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                <div className="prose prose-blue max-w-none mt-4">
+                    {/* Fallback/Legacy display if structure differs */}
+                    {!result.analysis && (
                         <div className="whitespace-pre-wrap text-gray-700 leading-relaxed font-normal">
-                             {typeof result === 'string' ? result : JSON.stringify(result, null, 2)}
+                             {JSON.stringify(result, null, 2)}
                         </div>
                     )}
                 </div>
