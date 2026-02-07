@@ -1,6 +1,11 @@
 import pkg from "workflow/next";
 const { withWorkflow } = pkg;
 import MiddlewareWebpackPlugin from "@middleware.io/sourcemap-uploader/dist/webpack-plugin";
+import withBundleAnalyzer from '@next/bundle-analyzer';
+
+const bundleAnalyzer = withBundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+});
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -90,13 +95,6 @@ const nextConfig = {
         source: '/:path*',
         has: [{ type: 'host', value: 'drsayuj.info' }],
         destination: 'https://www.drsayuj.info/:path*',
-        permanent: true,
-      },
-      // Next canary builds have been observed to 308-loop on /sitemap.xml.
-      // Redirect to a stable non-reserved path that we serve explicitly.
-      {
-        source: '/sitemap.xml',
-        destination: '/sitemap-main.xml',
         permanent: true,
       },
       // SITE ARCHITECTURE CONSOLIDATION: Reduce 5 hub pages to 2
@@ -249,6 +247,13 @@ const nextConfig = {
   async headers() {
     return [
       {
+        source: "/robots.txt",
+        headers: [
+          { key: "Content-Type", value: "text/plain; charset=utf-8" },
+          { key: "Cache-Control", value: "public, max-age=604800" }
+        ]
+      },
+      {
         source: "/((?!_next|api|images|favicon.ico|robots.txt|sitemap.xml|site.webmanifest).*)",
         headers: [
           // Security headers
@@ -353,4 +358,4 @@ const nextConfig = {
 
 // Wrap with withWorkflow to enable workflow directives
 // The workflow package handles both webpack and turbopack configurations internally
-export default withWorkflow(nextConfig);
+export default withWorkflow(bundleAnalyzer(nextConfig));
