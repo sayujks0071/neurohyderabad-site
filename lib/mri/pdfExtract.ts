@@ -55,6 +55,7 @@ export async function extractPdfTextInSandbox(pdfBuffer: Buffer): Promise<Extrac
   const sandbox = await createSandbox({
     runtime: 'node',
     timeoutMs: 120000,
+    vcpus: 1,
     network: NETWORK_POLICIES.PDF_EXTRACTION,
   });
 
