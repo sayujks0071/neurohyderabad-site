@@ -87,7 +87,7 @@ export default function BackPainSymptomsPage() {
              <li className="bg-gray-50 p-4 rounded-lg">
                <strong className="block text-blue-700 mb-1">Sciatica</strong>
                <p className="mb-2">Pain that radiates along the sciatic nerve, from the lower back down the leg.</p>
-               <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-sm text-blue-600 hover:underline font-medium">Read Sciatica Guide →</Link>
+               <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 font-semibold hover:underline">View Sciatica Treatment Plan →</Link>
              </li>
              <li className="bg-gray-50 p-4 rounded-lg">
                <strong className="block text-blue-700 mb-1">Spinal Stenosis</strong>

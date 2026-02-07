@@ -20,7 +20,7 @@ const SERVICE_SLUG = 'spine-surgery-hyderabad';
 const baseMetadata = makeMetadata({
   title: 'Best Spine Surgeon Hyderabad | Endoscopic Expert | Dr Sayuj',
   description:
-    'Top-rated spine surgeon in Hyderabad. Expert in endoscopic spine surgery (keyhole) for slip disc & sciatica. 90% success rate. Book at Yashoda Malakpet.',
+    'Expert spine surgeon in Hyderabad. Endoscopic keyhole surgery for slip disc & sciatica with 90% success. Book at Yashoda Malakpet.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
 });
 
@@ -79,6 +79,11 @@ const faqs = [
     question: 'Do you treat patients from outside Hyderabad?',
     answer:
       'Yes. Our coordination team assists patients travelling from across Telangana, Andhra Pradesh, and neighbouring states with scheduling, accommodation, and follow-up teleconsultations.',
+  },
+  {
+    question: 'Is insurance and cashless treatment available for spine surgery?',
+    answer:
+      'Yes, we accept all major insurance providers and offer cashless facilities at Yashoda Hospitals. Our team handles the pre-authorization paperwork for seamless processing.',
   },
 ];
 
