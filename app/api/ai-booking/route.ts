@@ -287,14 +287,31 @@ export async function POST(request: NextRequest) {
       try {
         const aiResponse = await generateLLMResponse(body);
 
+        // Apply server-side emergency safeguards for LLM path
+        let safeResponse = aiResponse;
+        if (aiResponse?.isEmergency) {
+          console.log('Emergency detected via LLM path');
+          safeResponse = {
+            ...aiResponse,
+            response:
+              "🚨 I've detected this may be an emergency situation. Please call our emergency hotline immediately at +91-9778280044 or visit the nearest emergency room. Your safety is our priority.",
+            suggestedAction: 'Call emergency hotline immediately',
+            bookingData: {
+              ...(body.bookingData || {}),
+              ...(aiResponse.bookingData || {}),
+              urgency: 'emergency',
+            },
+          };
+        }
+
         // Log interaction
         console.log('AI Booking Interaction (LLM):', {
           timestamp: new Date().toISOString(),
-          isEmergency: aiResponse.isEmergency,
-          nextStep: aiResponse.nextStep
+          isEmergency: safeResponse.isEmergency,
+          nextStep: safeResponse.nextStep,
         });
 
-        return NextResponse.json(aiResponse);
+        return NextResponse.json(safeResponse);
 
       } catch (llmError) {
         console.error('LLM Generation failed, falling back to rule-based:', llmError);
