@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import SchemaScript from "@/app/_components/SchemaScript";
 import LocalNAP from "@/app/_components/LocalNAP";
 import YMYLAttribution from "@/app/_components/YMYLAttribution";
 import AuthorByline from '@/app/_components/AuthorByline';
@@ -9,101 +8,14 @@ import ReviewedBy from '@/app/_components/ReviewedBy';
 import { SITE_URL } from "@/src/lib/seo";
 import { sources } from '../../blog/sources';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
+import MedicalWebPageSchema from '@/app/components/schemas/MedicalWebPageSchema';
+import FAQPageSchema from '@/app/_components/FAQPageSchema';
 
 // Static generation with 24-hour revalidation
 export const revalidate = 86400;
 export const dynamic = 'error';
 
 const CANONICAL = `${SITE_URL}/conditions/brain-tumor-surgery-hyderabad`;
-
-const schemaData = [
-  {
-    "@context": "https://schema.org",
-    "@type": "MedicalWebPage",
-    name: "Brain Tumor Surgery in Hyderabad",
-    description:
-      "Detailed guidance on brain tumour diagnosis, microsurgery, radiosurgery, and recovery with Dr. Sayuj Krishnan at Yashoda Hospital, Malakpet.",
-    url: CANONICAL,
-    inLanguage: "en-IN",
-    isPartOf: {
-      "@type": "WebSite",
-      name: "Dr. Sayuj Krishnan — Brain & Spine Clinic",
-      url: SITE_URL,
-    },
-    about: {
-      "@type": "MedicalCondition",
-      name: "Brain Tumor",
-      alternateName: "Intracranial Neoplasm",
-      medicalSpecialty: "Neurosurgery",
-      signOrSymptom: [
-        "Headache with vomiting",
-        "Seizures",
-        "Vision or speech changes",
-        "Weakness or balance problems",
-      ],
-      possibleTreatment: [
-        "Microsurgical resection",
-        "Endoscopic tumour removal",
-        "Stereotactic radiosurgery",
-        "Chemotherapy and radiation",
-      ],
-    },
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: "Is brain tumour surgery always necessary?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Surgery is advised when the benefits outweigh risks, such as relieving pressure or obtaining diagnosis. Some benign tumours can be monitored with routine imaging.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Will I need radiation after surgery?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "High-grade tumours often need adjuvant radiotherapy or chemotherapy. Benign tumours may not require further treatment if fully removed.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "How safe is awake craniotomy?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Awake craniotomy is carefully planned with anaesthetists and neuropsychologists to preserve speech or motor function. Complications are rare with experienced teams.",
-        },
-      },
-    ],
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: `${SITE_URL}/`,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Conditions",
-        item: `${SITE_URL}/conditions`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: "Brain Tumor Surgery Hyderabad",
-        item: CANONICAL,
-      },
-    ],
-  }
-] as const;
 
 const faqItems = [
   {
@@ -131,7 +43,7 @@ const faqItems = [
     answer:
       "Yes. Share your existing MRI, biopsy report, and treatment plan. We coordinate in-person or teleconsult second opinions and liaise with your referring team.",
   },
-] as const;
+];
 
 const references = [
   {
@@ -146,7 +58,7 @@ const references = [
     label: "European Association of Neuro-Oncology (EANO) Guidelines",
     url: "https://www.eano.eu/publications/guidelines/",
   },
-] as const;
+];
 
 export const metadata: Metadata = {
   title: "Brain Tumor Treatment Hyderabad | Diagnosis & Care Options",
@@ -191,7 +103,14 @@ export const metadata: Metadata = {
 export default function BrainTumorSurgeryConditionPage() {
   return (
     <main className="bg-white">
-      <SchemaScript id="brain-tumor-condition-jsonld" data={schemaData} />
+      <MedicalWebPageSchema
+        title="Brain Tumor Treatment Hyderabad | Diagnosis & Care Options"
+        description="Detailed guidance on brain tumour diagnosis, microsurgery, radiosurgery, and recovery with Dr. Sayuj Krishnan at Yashoda Hospital, Malakpet."
+        pageSlug="/conditions/brain-tumor-surgery-hyderabad"
+        pageType="condition"
+        serviceOrCondition="Brain Tumor"
+      />
+      <FAQPageSchema faqs={faqItems} pageUrl={CANONICAL} />
 
       <section className="bg-slate-900 py-12 text-white">
         <div className="mx-auto max-w-5xl px-4">

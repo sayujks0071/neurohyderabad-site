@@ -6,6 +6,7 @@ import { LocationCTAs } from "@/src/components/locations/LocationCTAs";
 import { LocationMapEmbed } from "@/src/components/locations/LocationMapEmbed";
 import { LocalPathways } from "@/src/components/locations/LocalPathways";
 import { LocationSchema } from "@/src/components/locations/LocationSchema";
+import MedicalWebPageSchema from '@/app/components/schemas/MedicalWebPageSchema';
 import { notFound } from "next/navigation";
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import AuthorByline from '@/app/_components/AuthorByline';
@@ -88,6 +89,17 @@ export default function BanjaraHillsLocationPage() {
 
   return (
     <div className="min-h-screen bg-white">
+      <MedicalWebPageSchema
+        pageType="location"
+        pageSlug="/locations/brain-spine-surgeon-banjara-hills"
+        title="Brain & Spine Surgeon near Banjara Hills, Hyderabad"
+        description="Advanced brain and spine care near Banjara Hills, Hyderabad. Directions to Yashoda Hospital, Malakpet. Parking, timings, and appointment info."
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Locations", path: "/locations" },
+          { name: "Banjara Hills", path: "/locations/brain-spine-surgeon-banjara-hills" }
+        ]}
+      />
       <LocationSchema location={location} breadcrumb={breadcrumb} faq={FAQ} />
       
       {/* Hero Section */}

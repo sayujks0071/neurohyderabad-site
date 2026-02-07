@@ -14,6 +14,7 @@ import CostTransparencySection from '@/src/components/CostTransparencySection';
 import TeleconsultationForm from '@/components/TeleconsultationForm';
 import OutcomeMetricsSection from '@/components/OutcomeMetricsSection';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
+import MedicalWebPageSchema from '@/app/components/schemas/MedicalWebPageSchema';
 
 const baseMetadata = makeMetadata({
   title: 'Scoliosis Treatment in Hyderabad | Spine Curvature Correction Surgery',
@@ -83,6 +84,13 @@ export default function ScoliosisPage() {
 
   return (
     <div className="min-h-screen bg-white">
+      <MedicalWebPageSchema
+        title="Scoliosis Treatment in Hyderabad | Spine Curvature Correction Surgery"
+        description="Expert treatment for Scoliosis (Spine Deformity) by Dr. Sayuj Krishnan. Minimally invasive correction surgery costs and recovery in Hyderabad."
+        pageSlug="/conditions/scoliosis-treatment-hyderabad"
+        pageType="condition"
+        serviceOrCondition="Scoliosis"
+      />
       <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/conditions/scoliosis-treatment-hyderabad`} />
 
       <Section background="blue" className="pt-24 pb-12">
@@ -270,32 +278,6 @@ export default function ScoliosisPage() {
         </div>
       </Section>
 
-      {/* MedicalCondition Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "MedicalCondition",
-            "name": "Scoliosis",
-            "alternateName": "Spine Curvature",
-            "associatedAnatomy": {
-              "@type": "AnatomicalStructure",
-              "name": "Spine"
-            },
-            "possibleTreatment": [
-              {
-                "@type": "MedicalTherapy",
-                "name": "Spinal Fusion Surgery"
-              },
-              {
-                "@type": "MedicalTherapy",
-                "name": "Bracing"
-              }
-            ]
-          })
-        }}
-      />
     </div>
   );
 }

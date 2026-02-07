@@ -1,13 +1,13 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Breadcrumbs from '@/app/components/Breadcrumbs';
-import JsonLd from '@/components/JsonLd';
 import NAP from '@/app/_components/NAP';
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import MapEmbed from '@/components/MapEmbed';
 import { makeMetadata } from '@/app/_lib/meta';
 import { SITE_URL } from '@/src/lib/seo';
-import { buildLocalServiceSchema } from '@/src/lib/schema/localService';
+import MedicalWebPageSchema from '@/app/components/schemas/MedicalWebPageSchema';
+import FAQPageSchema from '@/app/_components/FAQPageSchema';
 import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import TrustProof from '@/app/_components/TrustProof';
@@ -64,13 +64,6 @@ export const metadata: Metadata = {
     ],
   },
 };
-
-const schema = buildLocalServiceSchema({
-  slug: SERVICE_SLUG,
-  name: 'Full Endoscopic Spine Surgery in Hyderabad',
-  description:
-    'Ultra-minimally invasive endoscopic spine surgery program at Yashoda Hospital Malakpet delivering keyhole decompression with day-care discharge.',
-});
 
 const ARTICLE_SOURCES = getServiceSources(SERVICE_SLUG);
 
@@ -258,7 +251,14 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
 
   return (
     <>
-      <JsonLd data={schema} />
+      <MedicalWebPageSchema
+        pageType="service"
+        pageSlug={`/services/${SERVICE_SLUG}`}
+        title="Endoscopic Spine Surgery Hyderabad | Day Care Keyhole"
+        description="Advanced Endoscopic Spine Surgery in Hyderabad. 7mm incision, same-day discharge. Expert treatment for Slip Disc & Sciatica. Check packages."
+        serviceOrCondition="Endoscopic Spine Surgery"
+      />
+      <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/${SERVICE_SLUG}`} />
       <main className="container mx-auto px-4 py-16">
         <Breadcrumbs
           items={[
@@ -314,56 +314,6 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
             </ul>
           </div>
         </header>
-
-      {/* FAQPage JSON-LD for this page */}
-      <JsonLd
-        data={{
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "When should I see a neurosurgeon for back pain?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "If you have persistent back or leg pain, numbness or weakness that isn’t improving with rest and physiotherapy, or if you experience loss of bowel or bladder control, consult a neurosurgeon. Early evaluation in Hyderabad can prevent nerve damage and may allow for minimally invasive treatment."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "What should I expect on the day of endoscopic spine surgery?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Most cases are day-care procedures. You arrive for pre-op checks, undergo keyhole surgery, and begin walking within hours. Discharge is usually the same evening or next morning with a recovery plan."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Is endoscopic spine surgery painful?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Endoscopic spine surgery uses tiny incisions and causes less tissue disruption than traditional open surgery. Most patients report manageable discomfort controlled with oral pain medication and are able to walk the same day."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "How soon can I walk after endoscopic disc surgery?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Patients typically begin walking within a few hours of endoscopic discectomy. Many return to desk work within 1–2 weeks, while heavy labour may require 4–8 weeks of graded recovery."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "What is the success rate of endoscopic discectomy?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "For appropriately selected patients, endoscopic discectomy has a high success rate (around 85–95%) in relieving leg pain and numbness. Success depends on proper diagnosis, surgeon experience and adherence to post‑operative care instructions."
-              }
-            }
-          ]
-        }}
-      />
 
         <section className="mb-12 bg-green-50 border border-green-200 rounded-2xl p-6 shadow-sm">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
