@@ -11,7 +11,7 @@ export const CONTACT_INFO = {
 
 // User-facing success message for all booking forms
 export const APPOINTMENT_SUCCESS_MESSAGE =
-  "Appointment request received. Please bring any MRI/CT scans with you. We will confirm via phone shortly.";
+  "Appointment request received. Please bring any MRI/CT scans with you. We will call you within 30-60 minutes to confirm your appointment.";
 
 export const FAQ_DATA: Array<{ question: string; answer: string }> = [
   {

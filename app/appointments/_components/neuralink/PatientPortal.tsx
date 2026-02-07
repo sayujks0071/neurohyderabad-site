@@ -831,7 +831,7 @@ const PatientPortal = () => {
                   type="submit"
                   disabled={isAnalyzing || isSyncing}
                   className={`w-full py-4 rounded-2xl text-white font-bold text-lg shadow-xl transition-all flex items-center justify-center relative overflow-hidden ${isAnalyzing || isSyncing
-                    ? "bg-slate-800"
+                    ? "bg-blue-600 opacity-50 cursor-not-allowed"
                     : "bg-blue-600 hover:bg-blue-700 hover:shadow-blue-200"
                     }`}
                 >
