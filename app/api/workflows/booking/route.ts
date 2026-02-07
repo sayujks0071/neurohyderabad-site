@@ -12,6 +12,7 @@ import { sendConfirmationEmail, sendAdminNotificationEmail } from "@/src/lib/app
 import { submitToGoogleSheets } from "@/src/lib/google-sheets";
 import { buildWebhookPayload, notifyAppointmentWebhooks } from "@/src/lib/appointments/webhooks";
 import { appointments } from "@/src/lib/db";
+import { inngest } from "@/src/lib/inngest";
 
 type WorkflowAppointmentType = "new-consultation" | "follow-up" | "second-opinion";
 
@@ -141,6 +142,22 @@ export async function POST(request: NextRequest) {
         source,
       })
     );
+
+    // 5. Trigger Analytics Conversion Event
+    await inngest.send({
+      name: "analytics/conversion",
+      data: {
+        conversionType: "appointment",
+        page: source || "website",
+        value: 100,
+        timestamp: new Date().toISOString(),
+        patientEmail: booking.email,
+        patientName: booking.patientName,
+        condition: booking.reason,
+        userAgent: request.headers.get("user-agent") || undefined,
+        referrer: request.headers.get("referer") || undefined,
+      },
+    });
 
     console.log(`[API] Booking completed successfully for ${name}`);
 
