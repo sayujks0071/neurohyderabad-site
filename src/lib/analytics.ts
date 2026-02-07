@@ -151,6 +151,14 @@ export const analytics = {
     });
   },
 
+  appointmentStepComplete: (pageSlug: string, step: number, serviceOrCondition?: string) => {
+    track('Appointment_Step_Complete', {
+      page_slug: pageSlug,
+      step: step,
+      service_or_condition: serviceOrCondition
+    });
+  },
+
   // Assist events
   phoneClick: (pageSlug: string, phoneType: 'main' | 'whatsapp' | 'emergency') => {
     track('Phone_Click', {
