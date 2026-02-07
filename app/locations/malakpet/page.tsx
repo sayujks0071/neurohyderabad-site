@@ -40,6 +40,8 @@ const FAQ = [
   { q: "What are the OPD timings?", a: "Mon-Sat: 10:00 AM - 4:00 PM. Emergency neurosurgery services are available 24x7." },
   { q: "Is endoscopic spine surgery available at Malakpet?", a: "Yes, the Malakpet branch is equipped with a dedicated 4K Endoscopic Suite for keyhole spine surgeries (stitchless)." },
   { q: "Do you treat head injuries and spine fractures?", a: "Yes, as a Tier-1 Trauma Centre, we manage complex head injuries and traumatic spine fractures around the clock." },
+  { q: "Is parking available at the hospital?", a: "Yes, Yashoda Hospitals Malakpet offers ample parking space with valet services for OPD patients and visitors." },
+  { q: "What is the consultation fee?", a: "Consultation fees may vary. Please call +91-97782 80044 for current charges and to book your appointment." },
 ];
 
 export default function MalakpetLocationPage() {
@@ -152,6 +154,23 @@ export default function MalakpetLocationPage() {
             </ul>
           </section>
 
+          {/* Insurance & Cashless Facility */}
+          <section className="mb-12 bg-green-50 rounded-2xl p-8 border border-green-100">
+            <h2 className="text-2xl font-bold text-green-900 mb-4">Insurance & Cashless Facilities</h2>
+            <p className="text-gray-700 mb-4">
+              We accept all major health insurance providers and offer hassle-free <strong>cashless hospitalization</strong> at Yashoda Hospitals, Malakpet.
+            </p>
+            <div className="flex flex-wrap gap-2 text-sm font-semibold text-green-800">
+              <span className="bg-white px-3 py-1 rounded-full border border-green-200">Star Health</span>
+              <span className="bg-white px-3 py-1 rounded-full border border-green-200">HDFC Ergo</span>
+              <span className="bg-white px-3 py-1 rounded-full border border-green-200">Niva Bupa</span>
+              <span className="bg-white px-3 py-1 rounded-full border border-green-200">ICICI Lombard</span>
+              <span className="bg-white px-3 py-1 rounded-full border border-green-200">MediAssist TPA</span>
+              <span className="bg-white px-3 py-1 rounded-full border border-green-200">+ All Major TPAs</span>
+            </div>
+            <p className="text-sm text-gray-500 mt-4">*Please carry your insurance card and ID proof for cashless admission.</p>
+          </section>
+
           {/* Trust Proof */}
           <TrustProof stories={relevantStories} className="mb-12" />
 
@@ -194,6 +213,33 @@ export default function MalakpetLocationPage() {
             <h3 className="font-semibold text-gray-900 mb-3">Clinic Location</h3>
             <LocationMapEmbed location={location} />
             <p className="text-sm text-gray-500 mt-2 text-center">Near Nalgonda X Roads, Malakpet</p>
+          </div>
+
+          <div className="bg-blue-50 p-6 rounded-xl border border-blue-100">
+            <h3 className="font-semibold text-gray-900 mb-3">How to Reach</h3>
+            <ul className="space-y-3 text-sm text-gray-700">
+              <li className="flex gap-2">
+                <span className="text-xl">🚇</span>
+                <div>
+                  <strong>By Metro:</strong><br/>
+                  Malakpet Metro Station (Red Line) is just 500m away.
+                </div>
+              </li>
+              <li className="flex gap-2">
+                <span className="text-xl">🚌</span>
+                <div>
+                  <strong>By Bus:</strong><br/>
+                  Get down at Nalgonda X Roads Bus Stop. The hospital is within walking distance.
+                </div>
+              </li>
+              <li className="flex gap-2">
+                <span className="text-xl">🚗</span>
+                <div>
+                  <strong>By Car:</strong><br/>
+                  Located on the main road at Nalgonda X Roads. Valet parking is available at the OPD block entrance.
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
