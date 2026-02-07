@@ -360,7 +360,7 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
           </div>
         </div>
 
-        <div className="flex items-center p-3 bg-gray-50 rounded-lg border border-gray-200">
+        <label className="flex items-center p-3 bg-gray-50 rounded-lg border border-gray-200 cursor-pointer hover:bg-gray-100 transition-colors">
           <input
             type="checkbox"
             id="tele-mriScanAvailable"
@@ -369,13 +369,10 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
             onChange={handleCheckboxChange}
             className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500 border-gray-300"
           />
-          <label
-            htmlFor="tele-mriScanAvailable"
-            className="ml-3 text-sm font-medium text-gray-700 cursor-pointer select-none"
-          >
+          <span className="ml-3 text-sm font-medium text-gray-700 select-none">
             I have MRI/CT Scan reports available
-          </label>
-        </div>
+          </span>
+        </label>
 
         <div>
           <label htmlFor="tele-message" className="mb-2 block text-sm font-medium text-gray-700">
