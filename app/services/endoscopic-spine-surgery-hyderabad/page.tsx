@@ -818,6 +818,31 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
           disclaimer="Approximate package estimates for self-pay patients at Yashoda Hospital Malakpet. Final cost depends on room category (General/Sharing/Private), insurance approvals, and specific implant requirements. We offer full assistance with insurance pre-authorization."
         />
 
+        {/* Insurance Section - Added for financial transparency */}
+        <section className="mb-16 bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+           <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+              <span className="bg-green-100 text-green-700 p-1.5 rounded-lg mr-3">
+                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              </span>
+              Insurance & Cashless Treatment
+           </h3>
+           <p className="text-gray-700 mb-4 text-sm">
+              We accept all major health insurance providers and TPA services at Yashoda Hospitals Malakpet.
+              Our dedicated insurance desk assists with cashless pre-authorization for endoscopic procedures.
+           </p>
+           <div className="grid grid-cols-2 md:grid-cols-3 gap-y-2 text-sm text-gray-600 font-medium">
+              <div className="flex items-center">✓ Star Health</div>
+              <div className="flex items-center">✓ HDFC Ergo</div>
+              <div className="flex items-center">✓ ICICI Lombard</div>
+              <div className="flex items-center">✓ Care Insurance</div>
+              <div className="flex items-center">✓ Bajaj Allianz</div>
+              <div className="flex items-center">✓ Govt. Schemes (EHS)</div>
+           </div>
+           <p className="text-xs text-gray-500 mt-4 border-t pt-3">
+              *Subject to policy terms and approval. Please bring your insurance card and ID proof for cashless admission.
+           </p>
+        </section>
+
         <section className="mb-16 bg-orange-50 border border-orange-100 rounded-2xl p-8">
           <h2 className="text-3xl font-bold text-orange-900 mb-6">Safety Profile & Transparent Risk Assessment</h2>
           <p className="text-gray-700 mb-8">
