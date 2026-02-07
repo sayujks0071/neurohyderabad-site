@@ -1,23 +1,16 @@
-# Daily SEO Changelog - 2026-02-03
+# Daily SEO Changelog - 2026-02-06
 
-## Summary
-*   **Focus:** Finance & Insurance (High intent BOFU/MOFU).
-*   **New Page:** `/blog/spine-surgery-insurance-coverage-hyderabad`
-*   **Keywords Added:** 5
-*   **Clusters:** "Finance | Insurance" (New)
+## New Content Added
+*   **Blog Post:** `/blog/sciatica-exercises-to-avoid-hyderabad`
+    *   **Topic:** 5 Exercises to Avoid with Sciatica: Don't Make It Worse
+    *   **Reason:** High search volume for "what not to do" with sciatica pain. Addresses patient fear/avoidance intent.
 
-## Detailed Changes
+## Keyword Registry Updates
+*   Added `sciatica exercises to avoid` -> `/blog/sciatica-exercises-to-avoid-hyderabad`
+*   Added `exercises that make sciatica worse` -> `/blog/sciatica-exercises-to-avoid-hyderabad`
+*   Added `sciatica mistakes` -> `/blog/sciatica-exercises-to-avoid-hyderabad`
+*   Added `safe exercises for sciatica` -> `/blog/sciatica-exercises-to-avoid-hyderabad`
 
-### 1. New Content
-*   **File:** `content/blog/spine-surgery-insurance-coverage-hyderabad.mdx`
-*   **Topic:** Insurance coverage, cashless facilities, EMI options.
-*   **Schema:** `MedicalWebPage`, `FAQPage`.
-
-### 2. Registry Updates
-*   **`seo/keyword-registry.json`:** Added 5 new keywords related to insurance/cost.
-*   **`seo/page-keyword-map.json`:** Mapped new keywords to the new blog post.
-
-### 3. Research Artifacts
-*   `competitors.md`: Analyzed gaps in competitor financial content.
-*   `keyword-universe.csv`: Added "spine surgery insurance coverage hyderabad" cluster.
-*   `clusters-and-mapping.md`: Documented the new "Finance" cluster strategy.
+## Strategy Note
+*   Focusing on "fear-based" queries (avoidance) to capture users early in the research phase (TOFU/MOFU) before they commit to a treatment plan.
+*   Strong internal linking opportunity between "exercises to do" and "exercises to avoid".

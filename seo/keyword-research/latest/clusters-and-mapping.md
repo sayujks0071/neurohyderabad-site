@@ -1,24 +1,31 @@
-# Cluster & Mapping Report - 2026-02-03
+# Daily Keyword Cluster & Mapping - 2026-02-06
 
-## 1. Finance & Insurance Cluster (New)
-*   **Primary Intent:** Users seeking financial clarity before booking.
-*   **Funnel Stage:** BOFU / MOFU
-*   **Target URL:** `/blog/spine-surgery-insurance-coverage-hyderabad` (NEW)
-*   **Keywords:**
-    *   spine surgery insurance coverage hyderabad
-    *   is spine surgery covered by mediclaim
-    *   cashless spine surgery yashoda hospital
-    *   spine surgery cost with insurance hyderabad
+## New Content Opportunity: "Sciatica Exercises to Avoid"
 
-## 2. Recovery Timeline Cluster (Update)
-*   **Target URL:** `/blog/endoscopic-spine-surgery-recovery-timeline`
-*   **Action:** No changes today, monitoring rankings.
+### Rationale
+*   Competitor content focuses heavily on "what to do" (exercises for relief).
+*   User intent often includes "fear of worsening condition" (avoidance).
+*   High intent for patients currently in pain seeking immediate guidance.
 
-## 3. Location Specific (Malakpet)
-*   **Target URL:** `/locations/neurosurgeon-malakpet`
-*   **Keywords:**
-    *   yashoda hospital malakpet insurance list (Secondary mapping)
+### Cluster: SCIATICA | TOFU | EXERCISES | AVOIDANCE
+*   **Primary Keyword:** "sciatica exercises to avoid"
+*   **Secondary Keywords:**
+    *   "exercises that make sciatica worse"
+    *   "sciatica mistakes to avoid"
+    *   "safe exercises for sciatica"
+    *   "activities to avoid with sciatica"
+*   **Target Page:** `/blog/sciatica-exercises-to-avoid-hyderabad` (NEW)
+*   **Internal Linking Strategy:**
+    *   Link FROM: `/conditions/sciatica-pain-treatment-hyderabad` (The main condition page)
+    *   Link FROM: `/blog/sciatica-pain-relief-exercises-hyderabad` (The "what to do" page)
+    *   Link TO: `/services/endoscopic-spine-surgery` (If pain persists)
 
-## Cannibalization Check
-*   Checked against `spine-surgery-cost-hyderabad` (Service page).
-*   **Verdict:** Safe. Service page focuses on "Procedure Cost" (numbers). New blog focuses on "Insurance Eligibility & Process" (policy). Distinct search intents.
+## Existing Cluster Updates
+
+### CLUSTER: LOCATION | BOFU | NEUROSURGEON
+*   Monitoring local rankings for "neurosurgeon [area]".
+*   No changes required today. Stable rankings for Jubilee Hills, Gachibowli.
+
+### CLUSTER: SPINE | BOFU | COST
+*   "spine surgery cost hyderabad" is performing well.
+*   Consider adding a section on "insurance vs cash packages" in future.
