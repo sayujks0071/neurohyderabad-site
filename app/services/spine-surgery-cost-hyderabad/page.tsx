@@ -9,10 +9,11 @@ import SourceList from '@/app/_components/SourceList';
 import { getServiceSources } from '../sources';
 import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
+import MedicalWebPageSchema from '@/app/components/schemas/MedicalWebPageSchema';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 
 const baseMetadata = makeMetadata({
-  title: 'Spine Surgery Cost in Hyderabad 2025 | TESS, Fusion & Implants Price',
+  title: 'Spine Surgery Cost Hyderabad 2025 | TESS, Fusion, Implants',
   description: 'Detailed spine surgery cost guide for Hyderabad. Endoscopic TESS (₹2.5L+), Microdiscectomy, and Implant prices (Indian vs Imported). Cashless Insurance accepted.',
   canonicalPath: '/services/spine-surgery-cost-hyderabad',
 });
@@ -147,9 +148,17 @@ export default function SpineSurgeryCostPage() {
         ]}
       />
       <FAQPageSchema faqs={faqs} pageUrl={pageUrl} />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      <MedicalWebPageSchema
+        title="Spine Surgery Cost in Hyderabad 2025"
+        description="Detailed spine surgery cost guide for Hyderabad including Endoscopic, Microdiscectomy, and Implant prices."
+        pageSlug="/services/spine-surgery-cost-hyderabad"
+        pageType="service"
+        serviceOrCondition="Spine Surgery Cost"
+        breadcrumbs={[
+          { name: 'Home', path: '/' },
+          { name: 'Services', path: '/services' },
+          { name: 'Spine Surgery Cost', path: '/services/spine-surgery-cost-hyderabad' },
+        ]}
       />
       <div className="min-h-screen bg-white">
         <div className="container mx-auto px-4 py-16">

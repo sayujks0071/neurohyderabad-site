@@ -1,8 +1,11 @@
-keyword,intent,suggested_target_page
-spine surgery cost in hyderabad,Commercial,services/spine-surgery-cost-hyderabad
-spine surgeon telugu,Informational,blog/spine-surgery-guide-telugu
-laser spine surgery hyderabad,Commercial,services/laser-spine-surgery-hyderabad
-spine surgery insurance hyderabad,Transactional,blog/spine-surgery-insurance-guide
-best neurosurgeon kphb,Local,locations/neurosurgeon-kphb
-endoscopic vs microdiscectomy,Informational,blog/endoscopic-vs-microdiscectomy-comparison
-second opinion spine surgery,Commercial,services/spine-surgery-second-opinion
+keyword,intent,suggested_target_page,gap_type
+spine surgery cost hyderabad,commercial,services/spine-surgery-cost-hyderabad,content_depth
+insurance coverage spine surgery,informational,services/spine-surgery-insurance-coverage-hyderabad,missing_page
+best neurosurgeon for sciatica,commercial,conditions/sciatica-pain-treatment-hyderabad,keyword_optimization
+endoscopic spine surgery recovery time,informational,blog/endoscopic-spine-surgery-recovery-timeline,content_depth
+laser spine surgery cost,commercial,services/minimally-invasive-spine-surgery,keyword_optimization
+yashoda hospital neurosurgeon reviews,investigational,services/compare-neurosurgeons-hyderabad,competitor_comparison
+cashless spine surgery hyderabad,commercial,services/spine-surgery-insurance-coverage-hyderabad,missing_page
+slip disc surgery success rate,informational,conditions/slip-disc-treatment-hyderabad,trust_signal
+brain tumor surgery cost hyderabad,commercial,services/brain-tumor-surgery-cost-hyderabad,content_depth
+awake spine surgery benefits,informational,services/awake-spine-surgery-hyderabad,content_depth

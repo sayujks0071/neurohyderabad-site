@@ -1,6 +1,4 @@
-URL,Type,TTFB(s),Cache-Control,Content-Encoding,X-NextJS-Cache
-http://localhost:3000/,Homepage,0.525635,"no-store, must-revalidate",NONE,N/A
-http://localhost:3000/services/minimally-invasive-spine-surgery,Service,0.398932,"no-store, must-revalidate",NONE,N/A
-http://localhost:3000/conditions/sciatica-pain-treatment-hyderabad,Condition,1.543075,"no-store, must-revalidate",NONE,N/A
-http://localhost:3000/neurosurgeon-hitech-city,Location,1.125940,"no-store, must-revalidate",NONE,N/A
-http://localhost:3000/blog/awake-craniotomy-guide,Blog,0.924011,"no-store, must-revalidate",NONE,N/A
+url,ttfb,cache_control,content_encoding,status
+/,67.19,"s-maxage=21600, stale-while-revalidate=31514400","",200
+/services/endoscopic-spine-surgery-hyderabad,39.75,"s-maxage=3600, stale-while-revalidate=31532400","",200
+/locations/malakpet,21.89,"","",308

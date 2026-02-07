@@ -72,6 +72,19 @@ const schema = buildLocalServiceSchema({
     'Ultra-minimally invasive endoscopic spine surgery program at Yashoda Hospital Malakpet delivering keyhole decompression with day-care discharge.',
 });
 
+const medicalWebPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "MedicalWebPage",
+  "name": "Endoscopic Spine Surgery Hyderabad | Day Care Keyhole",
+  "description": "Expert endoscopic spine surgery in Hyderabad by Dr. Sayuj Krishnan. 90% same-day discharge. Minimally invasive keyhole surgery for slip disc & sciatica.",
+  "lastReviewed": "2026-02-06",
+  "reviewedBy": {
+    "@type": "Physician",
+    "name": "Dr. Sayuj Krishnan"
+  },
+  "specialty": "Neurosurgery"
+};
+
 const ARTICLE_SOURCES = getServiceSources(SERVICE_SLUG);
 
 const faqs = [
@@ -259,6 +272,7 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
   return (
     <>
       <JsonLd data={schema} />
+      <JsonLd data={medicalWebPageSchema} />
       <main className="container mx-auto px-4 py-16">
         <Breadcrumbs
           items={[

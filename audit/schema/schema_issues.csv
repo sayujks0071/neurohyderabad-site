@@ -1,3 +1,12 @@
-URL,Schema Type,Missing Field/Issue
-http://localhost:3000/neurosurgeon-hitech-city,MedicalClinic,Missing medicalSpecialty
-http://localhost:3000/neurosurgeon-hitech-city,MedicalClinic,Missing priceRange (Recommended)
+url,issue
+/,"Missing Physician Schema"
+/,"Missing MedicalClinic Schema"
+/services/endoscopic-spine-surgery-hyderabad,"Missing Physician Schema"
+/services/spine-surgery-cost-hyderabad,"Missing Physician Schema"
+/services/awake-spine-surgery-hyderabad,"Missing Physician Schema"
+/conditions/sciatica-pain-treatment-hyderabad,"Missing Physician Schema"
+/conditions/sciatica-pain-treatment-hyderabad,"Missing BreadcrumbList"
+/locations/malakpet,"Missing Physician Schema"
+/locations/malakpet,"Missing MedicalClinic Schema"
+/locations/malakpet,"Missing BreadcrumbList"
+/blog/spinal-stenosis-vs-pad-leg-pain-guide,"Missing Physician Schema"

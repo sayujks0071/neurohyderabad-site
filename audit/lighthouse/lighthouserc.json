@@ -1,0 +1,36 @@
+{
+  "ci": {
+    "collect": {
+      "url": [
+        "http://localhost:3000/",
+        "http://localhost:3000/services/endoscopic-spine-surgery-hyderabad",
+        "http://localhost:3000/services/microdiscectomy-surgery-hyderabad",
+        "http://localhost:3000/services/brain-tumor-surgery-hyderabad",
+        "http://localhost:3000/conditions/sciatica-pain-treatment-hyderabad",
+        "http://localhost:3000/conditions/brain-tumor-surgery-hyderabad",
+        "http://localhost:3000/conditions/slip-disc-treatment-hyderabad",
+        "http://localhost:3000/locations/malakpet",
+        "http://localhost:3000/locations/banjara-hills",
+        "http://localhost:3000/blog/spinal-stenosis-vs-pad-leg-pain-guide"
+      ],
+      "numberOfRuns": 1,
+      "settings": {
+        "chromeFlags": "--no-sandbox --headless --disable-gpu",
+        "onlyCategories": [
+          "performance",
+          "accessibility",
+          "best-practices",
+          "seo"
+        ],
+        "skipAudits": [
+          "uses-http2"
+        ]
+      }
+    },
+    "upload": {
+      "target": "filesystem",
+      "outputDir": "/app/audit/lighthouse",
+      "reportFilenamePattern": "%%PATHNAME%%-%%DATETIME%%.report.html"
+    }
+  }
+}

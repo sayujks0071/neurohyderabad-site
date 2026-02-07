@@ -15,7 +15,7 @@ import MedicalWebPageSchema from '@/app/components/schemas/MedicalWebPageSchema'
 const SERVICE_SLUG = 'awake-spine-surgery-hyderabad';
 
 const baseMetadata = makeMetadata({
-  title: 'Awake Spine Surgery Hyderabad',
+  title: 'Awake Spine Surgery Hyderabad | Local Anesthesia | Dr. Sayuj',
   description:
     'Awake endoscopic spine surgery for high-risk patients. Local anesthesia, no general anesthesia needed. Faster recovery & same-day discharge in Hyderabad.',
   canonicalPath: `/services/${SERVICE_SLUG}`,

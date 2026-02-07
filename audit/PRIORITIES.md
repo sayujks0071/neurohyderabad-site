@@ -1,24 +1,14 @@
-# Prioritized SEO Fixes
+# Prioritized Fix Backlog
 
-## 1. Eliminate Ghost Pages (Critical Technical)
-**Issue**: ~50 URLs listed in sitemaps return 404.
-**Impact**: Wastes crawl budget, bad UX, "Soft 404" signals.
-**Fix**: Remove these URLs from `app/sitemap-services.ts`, `app/sitemap-conditions.ts`, and `app/sitemap.ts`.
-**Effort**: Low. **Risk**: Low.
+| Issue | Evidence | Affected URLs | Fix Summary | Impact | Effort | Risk | Do Now? |
+|---|---|---|---|---|---|---|---|
+| **Missing YMYL Schema** | `audit/schema/ymyl_gap_list.md` | Service & Condition Pages | Inject `MedicalWebPage` and `FAQPage` JSON-LD. | 5 | 2 | Low | **Yes** |
+| **Title Tags Too Long** | `audit/onpage/onpage_issues.csv` | ~40 pages (Service/Blog) | Shorten titles to < 60 chars to prevent truncation. | 4 | 2 | Low | **Yes** |
+| **Title Tags Too Short** | `audit/onpage/onpage_issues.csv` | `/services/awake-spine-surgery-hyderabad` | Expand title with keywords. | 3 | 1 | Low | **Yes** |
+| **Missing Cache Headers** | `audit/headers/headers_report.md` | All Pages | Add `Cache-Control` headers in `next.config.mjs`. | 4 | 2 | Med | No |
+| **Missing Content Depth** | `audit/competitors/competitor_gap.md` | Insurance/Cost Pages | Create new pages for "Cost of Surgery" and "Insurance". | 4 | 5 | Low | No |
 
-## 2. Fix Schema Gaps (E-E-A-T)
-**Issue**: `MedicalWebPage` schema is missing `medicalSpecialty` and `audience` fields. Some pages show `undefined` schema types.
-**Impact**: Reduced rich snippet eligibility (Medical Knowledge Graph).
-**Fix**: Update `MedicalWebPageSchema` component to include defaults or props for these fields.
-**Effort**: Medium. **Risk**: Low.
-
-## 3. Metadata Length Optimization (On-Page)
-**Issue**: 120+ pages have titles > 60 chars.
-**Impact**: Title truncation in SERPs (lower CTR).
-**Fix**: Shorten the page-specific titles for key pages (Home, Services, Conditions).
-**Effort**: Medium (repetitive). **Risk**: Low.
-
-## 4. Performance (Lighthouse)
-**Issue**: Lighthouse failed locally, but TTFB is good.
-**Fix**: Ensure `next/image` is used properly (already seems so).
-**Action**: Defer major performance overhaul until Lighthouse can be run, but verify `next/image` usage in key components.
+## "Do Now" Selection
+1.  **Implement `MedicalWebPage` Schema:** Critical for E-E-A-T and YMYL compliance.
+2.  **Optimize Titles (Short/Long):** Quick win for CTR.
+3.  **Fix `awake-spine-surgery` Title:** Specific targeting.
