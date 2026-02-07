@@ -1,15 +1,23 @@
 {
-  "timestamp": "2025-02-17T12:00:00Z",
-  "commit_hash": "HEAD",
-  "notes": {
-    "home": "Static generation successful. Hero image has priority.",
-    "appointment": "NeuraLinkBookingApp uses client-side form. Fixed schema type error to enable build.",
-    "location": "Static generation successful (force-static).",
-    "condition": "Static generation successful."
+  "timestamp": "2025-02-19T10:30:00Z",
+  "notes": "Initial analysis of Core Web Vitals.",
+  "pageTypes": {
+    "Home": {
+      "notes": "LCP optimized with priority image and optional font. Layout shift minimized."
+    },
+    "Location": {
+      "notes": "Text-heavy, fast LCP. Map embed is lazy loaded on interaction."
+    },
+    "Condition": {
+      "notes": "Static content. Video section eager loading was identified, but lazy loading rejected due to SEO risk."
+    },
+    "Appointment": {
+      "notes": "Heavy client logic (PatientPortal) lazy loaded."
+    }
   },
   "fix": {
-    "description": "Fixed TypeScript error in packages/appointment-form/schema.ts regarding mriScanAvailable type mismatch.",
-    "impact": "Unblocked build and deployment. Ensured BookingForm consistency.",
-    "verification": "pnpm build passed."
+    "description": "Optimized TrustStrip background by replacing backdrop-blur-lg with high-opacity solid background.",
+    "impact": "Reduces paint cost and composite layer overhead on every page, improving INP and scrolling performance (frame rate) on low-end devices.",
+    "verification": "Check 'app/_components/TrustStrip.tsx' for removed backdrop-blur class."
   }
 }
