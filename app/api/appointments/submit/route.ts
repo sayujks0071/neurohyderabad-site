@@ -77,15 +77,17 @@ function parseBookingData(payload: unknown): BookingData {
     painScore = Number(raw.painScore);
   }
 
-  if (painScore !== undefined) {
-    if (!Number.isFinite(painScore) || painScore < 1 || painScore > 10) {
-      throw new ValidationError("Pain score must be between 1 and 10.");
-    }
+  if (painScore === undefined || !Number.isFinite(painScore) || painScore < 1 || painScore > 10) {
+    throw new ValidationError("Pain score must be between 1 and 10.");
   }
 
   let mriScanAvailable: boolean | undefined;
   if (typeof raw.mriScanAvailable === "boolean") {
     mriScanAvailable = raw.mriScanAvailable;
+  }
+
+  if (mriScanAvailable === undefined) {
+    throw new ValidationError("MRI scan availability must be specified.");
   }
 
   return {
