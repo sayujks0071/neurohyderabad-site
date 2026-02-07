@@ -32,7 +32,7 @@ import { AppointmentType } from "./types";
 import AppointmentScheduler from "./AppointmentScheduler";
 import SpeechButton from "./SpeechButton";
 import { trackConversionOnly } from "@/src/lib/google-ads-conversion";
-import { trackMiddlewareEvent } from "@/src/lib/middleware/rum";
+import { analytics } from "@/src/lib/analytics";
 import { CLINIC } from "@/app/_lib/clinic";
 import { APPOINTMENT_SUCCESS_MESSAGE } from "@/packages/appointment-form/constants";
 
@@ -89,10 +89,7 @@ const PatientPortal = () => {
   const [lastSubmittedData, setLastSubmittedData] = useState(INITIAL_FORM_STATE);
 
   useEffect(() => {
-    trackMiddlewareEvent('form_view', {
-      form_type: 'appointment',
-      step: 1
-    });
+    analytics.appointmentStart('appointment-portal', 'general');
   }, []);
 
   const clinicName = "Dr. Sayuj Krishnan | Yashoda Hospitals, Malakpet";
@@ -108,11 +105,7 @@ const PatientPortal = () => {
 
   const handleNextStep = () => {
     if (formData.type && formData.date && formData.time) {
-      trackMiddlewareEvent('form_step_complete', {
-        form_type: 'appointment',
-        step: 1,
-        appointment_type: formData.type
-      });
+      analytics.appointmentStepComplete('appointment-portal', 1, formData.type || undefined);
       setStep(2);
       window.scrollTo(0, 0);
     }
@@ -211,11 +204,7 @@ const PatientPortal = () => {
       setConfirmationMessage(payload?.confirmationMessage || null);
       trackConversionOnly();
 
-      trackMiddlewareEvent('form_submission', {
-        form_type: 'appointment',
-        status: 'success',
-        appointment_type: workflowAppointmentType
-      });
+      analytics.appointmentSuccess('appointment-portal', workflowAppointmentType);
 
       setLastSubmittedData(formData);
       setFormData(INITIAL_FORM_STATE);
@@ -233,11 +222,7 @@ const PatientPortal = () => {
           ? error.message
           : "Failed to book appointment. Please try again later.";
 
-      trackMiddlewareEvent('form_submission', {
-        form_type: 'appointment',
-        status: 'failure',
-        error: errMsg
-      });
+      analytics.formError('appointment-portal', 'submit_button', errMsg);
 
       setErrorMessage(errMsg);
     } finally {
