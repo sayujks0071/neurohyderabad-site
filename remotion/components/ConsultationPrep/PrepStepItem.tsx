@@ -18,7 +18,7 @@ export const PrepStepItem: React.FC<PrepStepItemProps> = ({ step, delay = 0 }) =
   const { fps } = useVideoConfig();
   const prefersReducedMotion = usePrefersReducedMotion();
 
-  // 1. Entrance Animation - Slide in from left
+  // 1. Entrance Animation - Slide up from bottom
   const opacity = useMemo(() => prefersReducedMotion ? 1 : spring({
     frame,
     fps,
@@ -27,10 +27,10 @@ export const PrepStepItem: React.FC<PrepStepItemProps> = ({ step, delay = 0 }) =
     durationInFrames: 30,
   }), [frame, fps, prefersReducedMotion]);
 
-  const translateX = useMemo(() => prefersReducedMotion ? 0 : spring({
+  const translateY = useMemo(() => prefersReducedMotion ? 0 : spring({
     frame,
     fps,
-    from: -50,
+    from: 50,
     to: 0,
     durationInFrames: 35,
     config: {
@@ -83,14 +83,15 @@ export const PrepStepItem: React.FC<PrepStepItemProps> = ({ step, delay = 0 }) =
     <div
       style={{
         opacity,
-        transform: `translateX(${translateX}px) scale(${scale})`,
+        transform: `translateY(${translateY}px) scale(${scale})`,
         display: 'flex',
         alignItems: 'flex-start',
         gap: SPACING[6],
-        backgroundColor: COLORS.background,
+        backgroundColor: COLORS.surface,
         padding: SPACING[8],
         borderRadius: '16px',
         border: `3px solid ${COLORS.accent}`,
+        boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
       }}
     >
       {/* Checkmark icon container */}
