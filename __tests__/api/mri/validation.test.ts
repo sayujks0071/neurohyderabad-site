@@ -1,12 +1,12 @@
 import { POST } from '@/app/api/mri/analyze/route';
 import { NextRequest } from 'next/server';
 import { extractPdfTextInSandbox } from '@/lib/mri/pdfExtract';
-import { interpretReportText } from '@/lib/mri/interpretReport';
+import { interpretReportText } from '@/lib/interpretReport';
 import { rateLimit } from '@/src/lib/rate-limit';
 import { vi, describe, it, expect } from 'vitest';
 
 vi.mock('@/lib/mri/pdfExtract');
-vi.mock('@/lib/mri/interpretReport');
+vi.mock('@/lib/interpretReport');
 vi.mock('@/src/lib/rate-limit');
 
 // Helper to create a request with FormData

@@ -1,5 +1,5 @@
 import { Type } from "@google/genai";
-import { getClient, extractText } from "../gemini";
+import { getClient, extractText } from "./gemini";
 
 export interface InterpretReportResult {
   plainEnglishSummary: string;

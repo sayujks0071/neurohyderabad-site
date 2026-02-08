@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { rateLimit } from "@/src/lib/rate-limit";
 import { extractPdfTextInSandbox } from "@/lib/mri/pdfExtract";
-import { interpretReportText } from "@/lib/mri/interpretReport";
+import { interpretReportText } from "@/lib/interpretReport";
 
 // Validation constants
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB

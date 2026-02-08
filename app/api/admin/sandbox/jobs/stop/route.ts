@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { Sandbox } from "@vercel/sandbox";
 import { verifyAdminAccess } from "@/src/lib/security";
+import { destroySandbox } from "@/lib/sandbox/client";
 
 export const runtime = "nodejs";
 
@@ -22,7 +23,7 @@ export async function POST(request: Request) {
 
   try {
     const sandbox = await Sandbox.get({ sandboxId });
-    await sandbox.stop();
+    await destroySandbox(sandbox);
     return NextResponse.json({ success: true });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });

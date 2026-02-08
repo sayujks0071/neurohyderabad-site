@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
+import crypto from 'crypto';
 
 /**
- * Constant-time string comparison to prevent timing attacks.
+ * Constant-time string comparison using SHA-256 hashing to prevent timing attacks.
  * @param a First string (e.g., provided key)
  * @param b Second string (e.g., secret key)
  * @returns true if strings are equal, false otherwise
@@ -11,15 +12,13 @@ function secureCompare(a: string, b: string): boolean {
     return false;
   }
 
-  if (a.length !== b.length) {
-    return false;
-  }
+  // Create hashes for both strings
+  const hashA = crypto.createHash('sha256').update(a).digest();
+  const hashB = crypto.createHash('sha256').update(b).digest();
 
-  let result = 0;
-  for (let i = 0; i < a.length; i++) {
-    result |= a.charCodeAt(i) ^ b.charCodeAt(i);
-  }
-  return result === 0;
+  // Compare hashes using timingSafeEqual
+  // timingSafeEqual requires buffers of the same length, which SHA-256 guarantees (32 bytes)
+  return crypto.timingSafeEqual(hashA, hashB);
 }
 
 /**

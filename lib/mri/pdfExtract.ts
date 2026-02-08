@@ -1,4 +1,4 @@
-import { createSandbox, runSandboxCommand } from '../sandbox/client';
+import { createSandbox, runSandboxCommand, destroySandbox } from '../sandbox/client';
 import { NETWORK_POLICIES } from '../sandbox/network';
 
 // Embedded extract script to avoid file read issues in serverless
@@ -77,19 +77,17 @@ export async function extractPdfTextInSandbox(pdfBuffer: Buffer): Promise<Extrac
       throw new Error('PDF extraction failed inside sandbox');
     }
 
-    // Handle stdout whether it's a string or a function (depending on sandbox version)
-    const stdoutStr = typeof result.stdout === 'function'
-      ? await result.stdout()
-      : result.stdout;
+    const stdoutStr = result.stdout;
 
     // Try to find the JSON line in stdout (in case of other logs)
-    const lines = (stdoutStr as string).trim().split('\n');
+    const lines = stdoutStr.trim().split('\n');
     let jsonResult;
     // Iterate from end to find last valid JSON
     for (let i = lines.length - 1; i >= 0; i--) {
         try {
-            jsonResult = JSON.parse(lines[i]);
-            if (jsonResult && typeof jsonResult === 'object' && 'text' in jsonResult) {
+            const parsed = JSON.parse(lines[i]);
+            if (parsed && typeof parsed === 'object' && 'text' in parsed) {
+                jsonResult = parsed;
                 break;
             }
         } catch (e) {
@@ -104,7 +102,6 @@ export async function extractPdfTextInSandbox(pdfBuffer: Buffer): Promise<Extrac
     return jsonResult;
 
   } finally {
-    // @ts-ignore
-    if (sandbox.destroy) await sandbox.destroy();
+    await destroySandbox(sandbox);
   }
 }

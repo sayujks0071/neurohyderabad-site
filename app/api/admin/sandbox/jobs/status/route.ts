@@ -19,17 +19,28 @@ export async function GET(request: Request) {
   try {
     const sandbox = await Sandbox.get({ sandboxId });
 
-    // Cast sandbox to any to access potentially experimental getCommand
+    // Try to get command.
     const sb = sandbox as any;
-    if (typeof sb.getCommand !== 'function') {
-         // Fallback or error if SDK doesn't support retrieving command by ID
-         throw new Error("Sandbox SDK does not support getCommand");
+    let cmd: any;
+
+    if (typeof sb.getCommand === 'function') {
+        cmd = await sb.getCommand(cmdId);
+    } else {
+        throw new Error("Sandbox SDK does not support getCommand");
     }
 
-    const cmd = await sb.getCommand(cmdId);
+    let stdout = '';
+    let stderr = '';
 
-    const stdout = await cmd.output("stdout");
-    const stderr = await cmd.output("stderr");
+    if (typeof cmd.output === 'function') {
+        // According to some versions, output takes 'stdout' or 'stderr'
+        stdout = await cmd.output("stdout");
+        stderr = await cmd.output("stderr");
+    } else {
+         // Fallback if structure differs
+         stdout = String(cmd.stdout || '');
+         stderr = String(cmd.stderr || '');
+    }
 
     const TAIL_SIZE = 16 * 1024; // 16KB
 

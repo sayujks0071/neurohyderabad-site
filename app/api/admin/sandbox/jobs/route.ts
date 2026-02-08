@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { createSandbox } from "@/lib/sandbox/client";
+import { createSandbox, runSandboxCommand } from "@/lib/sandbox/client";
 import { verifyAdminAccess } from "@/src/lib/security";
 import { NETWORK_POLICIES } from "@/lib/sandbox/network";
 import { rateLimit } from "@/src/lib/rate-limit";
@@ -68,16 +68,17 @@ export async function POST(request: Request) {
         }
     });
 
-    const cmd = await sandbox.runCommand({
+    const cmd = await runSandboxCommand({
+        sandbox,
         cmd: jobConfig.cmd,
         args: [...jobConfig.args],
         env,
         detached: true,
-    });
+    }) as any;
 
     return NextResponse.json({
-        sandboxId: sandbox.sandboxId,
-        cmdId: cmd.cmdId,
+        sandboxId: sandbox.id || (sandbox as any).sandboxId,
+        cmdId: cmd.cmdId || cmd.id,
         startedAt: Date.now(),
         timeoutMs: 1200000,
     });
