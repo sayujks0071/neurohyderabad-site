@@ -1,5 +1,5 @@
 import { Sandbox } from '@vercel/sandbox';
-import { SandboxError, SandboxOIDCError } from './errors';
+import { SandboxError, SandboxOIDCError, SandboxTimeoutError } from './errors';
 
 export interface CreateSandboxOptions {
   runtime?: string;
@@ -12,18 +12,15 @@ export interface CreateSandboxOptions {
 
 export async function createSandbox(options: CreateSandboxOptions = {}) {
   try {
-    const networkPolicy = options.network ? {
-        type: 'restricted' as const,
+    const sandbox = await Sandbox.create({
+      runtime: (options.runtime || 'node') as any,
+      timeout: options.timeoutMs,
+      networkPolicy: options.network ? {
+        type: 'restricted',
         allowedDomains: options.network.allow,
         deniedCIDRs: options.network.deny,
-    } : undefined;
-
-    const sandbox = await Sandbox.create({
-      runtime: (options.runtime || 'node') as any, // Cast if necessary to satisfy type check
-      timeout: options.timeoutMs,
-      networkPolicy: options.network,
+      } : undefined,
       source: options.source,
-      // Pass vcpus, casting if not in published types
       vcpus: options.vcpus,
     } as any);
 
@@ -34,6 +31,21 @@ export async function createSandbox(options: CreateSandboxOptions = {}) {
       throw new SandboxOIDCError();
     }
     throw new SandboxError(`Failed to create sandbox: ${err.message}`);
+  }
+}
+
+export async function destroySandbox(sandbox: Sandbox) {
+  try {
+    const s = sandbox as any;
+    if (typeof s.destroy === 'function') {
+      await s.destroy();
+    } else if (typeof s.close === 'function') {
+      await s.close();
+    } else {
+      console.warn('Sandbox instance does not have a destroy/close method');
+    }
+  } catch (err: any) {
+    console.warn('Failed to destroy sandbox:', err.message);
   }
 }
 
@@ -59,31 +71,40 @@ export async function runSandboxCommand({
   detached = false,
 }: RunCommandOptions) {
   try {
-    const result = await sandbox.runCommand({
+    const command = await sandbox.runCommand({
       cmd,
       args,
       env,
       cwd,
       detached,
-    });
+    }) as any;
 
     if (detached) {
-      return result;
+      return command;
     }
 
-    const command = result as any;
-
-    // Note: If timeoutMs is provided, we can race the command execution if the SDK supported it.
-    // Currently relying on Sandbox level timeout or SDK behavior.
-
-    // Future improvement: Wrap in Promise.race with a timeout rejection if needed.
+    const collectOutput = async () => {
+        const stdoutPromise = typeof command.stdout === 'function' ? command.stdout() : Promise.resolve(String(command.stdout || ''));
+        const stderrPromise = typeof command.stderr === 'function' ? command.stderr() : Promise.resolve(String(command.stderr || ''));
+        return Promise.all([stdoutPromise, stderrPromise]);
+    };
 
     let stdoutStr = '';
     let stderrStr = '';
 
-    if (!detached) {
-       stdoutStr = await command.stdout();
-       stderrStr = await command.stderr();
+    if (timeoutMs) {
+         const results = await Promise.race([
+             collectOutput(),
+             new Promise<never>((_, reject) =>
+               setTimeout(() => reject(new SandboxTimeoutError(`Command timed out after ${timeoutMs}ms`)), timeoutMs)
+             )
+         ]);
+         stdoutStr = results[0];
+         stderrStr = results[1];
+    } else {
+         const results = await collectOutput();
+         stdoutStr = results[0];
+         stderrStr = results[1];
     }
 
     return {
@@ -93,6 +114,9 @@ export async function runSandboxCommand({
       cmdId: command.cmdId,
     };
   } catch (err: any) {
-     throw new SandboxError(`Command execution failed: ${err.message}`);
+    if (err instanceof SandboxTimeoutError) {
+      throw err;
+    }
+    throw new SandboxError(`Command execution failed: ${err.message}`);
   }
 }
