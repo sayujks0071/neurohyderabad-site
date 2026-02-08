@@ -72,7 +72,7 @@ function extractEmail(text: string): string | null {
 }
 
 function generateAIResponse(request: BookingRequest): AIResponse {
-  const { message, pageSlug, service } = request;
+  const { message, service } = request;
   const bookingData = request.bookingData || {};
   
   const isEmergency = detectEmergency(message);
