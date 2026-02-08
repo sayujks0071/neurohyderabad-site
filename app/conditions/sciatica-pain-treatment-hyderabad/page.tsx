@@ -421,6 +421,29 @@ export default function SciaticaTreatmentPage() {
         </div>
       </section>
 
+      {/* Recovery Roadmap Section */}
+      <section className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-blue-700">Sciatica Recovery Roadmap</h2>
+        <div className="grid md:grid-cols-4 gap-4">
+          <div className="bg-white p-4 rounded-lg shadow border-l-4 border-blue-300">
+            <h3 className="font-bold text-lg mb-2">Day 0-3</h3>
+            <p className="text-sm text-gray-600">Rest & medication. Apply ice/heat. Gentle walking as tolerated.</p>
+          </div>
+          <div className="bg-white p-4 rounded-lg shadow border-l-4 border-blue-500">
+            <h3 className="font-bold text-lg mb-2">Week 1-2</h3>
+            <p className="text-sm text-gray-600">Start gentle nerve glides. Pain should reduce by 50%. If not, consider <Link href="/services/minimally-invasive-spine-surgery" className="text-blue-600 hover:underline">injection therapy</Link>.</p>
+          </div>
+           <div className="bg-white p-4 rounded-lg shadow border-l-4 border-blue-700">
+            <h3 className="font-bold text-lg mb-2">Week 3-6</h3>
+            <p className="text-sm text-gray-600">Active physiotherapy. Core strengthening. Return to desk work.</p>
+          </div>
+           <div className="bg-white p-4 rounded-lg shadow border-l-4 border-green-600">
+            <h3 className="font-bold text-lg mb-2">Week 8+</h3>
+            <p className="text-sm text-gray-600">Full activity. If pain persists &gt;6 weeks, <Link href="/services/endoscopic-spine-surgery-hyderabad" className="text-blue-600 hover:underline">endoscopic surgery</Link> may be discussed.</p>
+          </div>
+        </div>
+      </section>
+
       {/* FAQ Section */}
       <section id="faqs" className="mb-12">
         <h2 className="text-2xl font-semibold mb-6 text-blue-700">Frequently Asked Questions</h2>
@@ -458,7 +481,7 @@ export default function SciaticaTreatmentPage() {
 
       <AuthorByline
         publishedOn="2025-01-03"
-        updatedOn="2025-01-15"
+        updatedOn="2025-05-23"
       />
 
       <SourceList sources={sources['sciatica-pain-treatment-hyderabad'] || []} />

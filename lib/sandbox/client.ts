@@ -18,7 +18,12 @@ export async function createSandbox(options: CreateSandboxOptions = {}) {
       // @ts-ignore
       runtime: options.runtime || 'node',
       timeout: options.timeoutMs,
-      networkPolicy: options.network, // Fix: Pass network policy
+      // @ts-ignore
+      networkPolicy: options.network ? {
+        type: 'restricted',
+        allowedDomains: options.network.allow,
+        deniedCIDRs: options.network.deny,
+      } : undefined, // Fix: Pass network policy
       source: options.source, // Fix: Pass source
     });
 

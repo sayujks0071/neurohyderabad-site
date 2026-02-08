@@ -59,17 +59,17 @@ export async function extractPdfTextInSandbox(pdfBuffer: Buffer): Promise<Extrac
   });
 
   try {
-    await sandbox.writeFiles({
-      'input.pdf': pdfBuffer,
-      'extract.mjs': EXTRACT_SCRIPT,
-    });
+    await sandbox.writeFiles([
+      { path: 'input.pdf', content: pdfBuffer },
+      { path: 'extract.mjs', content: Buffer.from(EXTRACT_SCRIPT) },
+    ]);
 
-    const result = await runSandboxCommand({
+    const result = (await runSandboxCommand({
       sandbox,
       cmd: 'sh',
       args: ['-c', 'npm i pdf-parse@1.1.1 --silent && node extract.mjs'],
       timeoutMs: 120000,
-    });
+    })) as { stdout: string; stderr: string; exitCode: number };
 
     if (result.exitCode !== 0) {
       console.error('Sandbox stderr:', result.stderr);
