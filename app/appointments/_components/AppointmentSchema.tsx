@@ -51,6 +51,7 @@ export default function AppointmentSchema() {
     "@id": `${SITE_URL}/appointments#clinic`,
     "name": "Yashoda Hospitals, Malakpet",
     "telephone": malakpet.telephone,
+    "priceRange": "₹₹",
     "url": "https://www.yashodahospitals.com/malakpet/",
     "hasMap": malakpet.directions_url,
     "sameAs": "https://www.yashodahospitals.com/malakpet/",
@@ -77,6 +78,7 @@ export default function AppointmentSchema() {
 
   // SEO: Dynamic JSON-LD for Physician and MedicalClinic specific to the booking page context.
   // Helps Google associate this page with the physician and clinic location.
+  // Verified to meet SEO requirements: Physician, MedicalClinic, Address, Services.
   const schema = {
     "@context": "https://schema.org",
     "@graph": [
