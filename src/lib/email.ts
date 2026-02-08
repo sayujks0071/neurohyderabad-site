@@ -412,7 +412,8 @@ ${triageSection}`,
     patientName: string,
     condition: string,
     educationType: string,
-    materials: string[]
+    materials: string[],
+    detailedContent?: string
   ) {
     const materialList = Array.isArray(materials) ? materials : [];
     const subjectType = educationType ? educationType.replace(/-/g, " ") : "education";
@@ -427,7 +428,7 @@ Dear ${patientName},
 
 Here are your ${subjectType} materials for ${condition}:
 ${materialList.map(item => `- ${item}`).join('\n')}
-
+${detailedContent ? `\nDetailed Information:\n${detailedContent}\n` : ''}
 If you have questions, reply to this email or call +91-9778280044.
 
 © 2025 Dr. Sayuj Krishnan. All rights reserved.`,
@@ -443,6 +444,12 @@ If you have questions, reply to this email or call +91-9778280044.
             <ul>
               ${materialList.map(item => `<li>${item}</li>`).join('')}
             </ul>
+            ${detailedContent ? `
+            <div style="background: white; padding: 20px; border-radius: 8px; margin: 20px 0; border: 1px solid #e5e7eb;">
+              <h3 style="color: #5b21b6; margin-top: 0;">Detailed Information</h3>
+              <div style="color: #374151; line-height: 1.6;">${detailedContent.replace(/\n/g, '<br>')}</div>
+            </div>
+            ` : ''}
             <p>If you have questions, reply to this email or call +91-9778280044.</p>
           </div>
           <div style="background: #1f2937; color: white; padding: 16px; text-align: center;">

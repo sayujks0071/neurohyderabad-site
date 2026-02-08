@@ -259,7 +259,7 @@ export default function BookingForm({
                   htmlFor="painScore-slider"
                   className="block text-sm font-medium text-slate-700 mb-2"
                 >
-                  Pain Intensity (1-10)
+                  Pain Score (1-10)
                 </label>
                 <div className="flex items-center gap-4">
                   <div className="text-center">

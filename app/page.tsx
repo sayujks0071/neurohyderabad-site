@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import dynamic from 'next/dynamic';
-import ExpandedFAQ from "../src/components/ExpandedFAQ";
 import LazySection from "./_components/LazySection";
 import { SITE_URL } from "../src/lib/seo";
 import { makeMetadata } from "@/app/_lib/meta";
@@ -10,13 +9,11 @@ import MedicalWebPageSchema from "./components/schemas/MedicalWebPageSchema";
 // Temporarily commenting out problematic imports
 // import { HeroCTA, StickyCTA } from "../src/components/Experiments";
 // import SocialProofBand from "../src/components/Experiments/SocialProofBand";
-// import ScrollDepthTracker from "../src/components/ScrollDepthTracker";
 // import SEODashboard from "../src/components/SEODashboard";
 // import SEOAuditDashboard from "../src/components/SEOAuditDashboard";
 // import GoogleOAuth from "../src/components/GoogleOAuth";
 // import { analytics } from "../src/lib/analytics";
 import DoctorCard from "./_components/DoctorCard";
-import TrustSignals from "./_components/TrustSignals";
 import HomeTrackers from "./_components/HomeTrackers";
 import TrustBridgeLink from "./_components/TrustBridgeLink";
 import { mediaPublications } from "../src/content/media";
@@ -25,11 +22,16 @@ import Card from "./_components/Card";
 import Section from "./_components/Section";
 import FAQPageSchema from "./_components/FAQPageSchema";
 import HeroCTAButtons from "./_components/HeroCTAButtons";
-import RemotionVideoEmbedWrapper from "./_components/RemotionVideoEmbedWrapper";
 import PatientEducationVideosSkeleton from "./_components/skeletons/PatientEducationVideosSkeleton";
-import { LocationNAPCard } from "@/src/components/locations/LocationNAPCard";
+import TrustSignals from "./_components/TrustSignals";
 
 // Dynamic imports for Lazy components
+const ExpandedFAQ = dynamic(() => import('../src/components/ExpandedFAQ'));
+const RemotionVideoEmbedWrapper = dynamic(() => import('./_components/RemotionVideoEmbedWrapper'));
+const LocationNAPCard = dynamic(() => import('@/src/components/locations/LocationNAPCard').then(mod => mod.LocationNAPCard), {
+  loading: () => <div className="h-64 bg-gray-100 rounded-xl animate-pulse"></div>
+});
+
 const PatientEducationVideos = dynamic(() => import('./_components/PatientEducationVideos'), {
   loading: () => <PatientEducationVideosSkeleton />
 });
@@ -221,7 +223,6 @@ export default function Home() {
         audience="Patients seeking neurosurgical care in Hyderabad"
       />
 
-      {/* <ScrollDepthTracker pageSlug="/" /> */}
       <HomeTrackers />
       <div className="min-h-screen bg-white">
         {/* Hero Section - LCP Optimized */}

@@ -1,8 +1,27 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { generateText } from 'ai';
 import { getTextModel, hasAIConfig } from '@/src/lib/ai/gateway';
+import { rateLimit } from '@/src/lib/rate-limit';
+import { verifyAdminAccess } from '@/src/lib/security';
 
 export async function POST(request: NextRequest) {
+  // 1. Rate Limit (10 requests per hour per IP)
+  const ip = request.headers.get("x-forwarded-for")?.split(",")[0].trim() || "127.0.0.1";
+  const { success } = rateLimit(ip, 10, 60 * 60 * 1000);
+
+  if (!success) {
+    return NextResponse.json(
+      { error: "Too many requests. Please try again later." },
+      { status: 429 }
+    );
+  }
+
+  // 2. Auth Check
+  const auth = verifyAdminAccess(request);
+  if (!auth.isAuthorized) {
+    return auth.response!;
+  }
+
   try {
     const { issue, headers, response } = await request.json();
 
@@ -65,7 +84,13 @@ Provide a detailed technical analysis and solution.
   }
 }
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  // Protect documentation endpoint as well
+  const auth = verifyAdminAccess(request);
+  if (!auth.isAuthorized) {
+    return auth.response!;
+  }
+
   return NextResponse.json({
     message: 'AI Diagnostic API - Send POST with issue details',
     usage: {
@@ -78,20 +103,3 @@ export async function GET() {
     }
   });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

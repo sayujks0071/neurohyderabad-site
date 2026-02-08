@@ -17,28 +17,6 @@ export default function StatsigAnalytics() {
       analytics.pageView(pathname, pageType, serviceOrCondition);
     }
 
-    // Track performance metrics
-    const trackWebVitals = () => {
-      // Track Core Web Vitals
-      import('web-vitals').then(({ onCLS, onINP, onFCP, onLCP, onTTFB }) => {
-        onCLS((metric) => {
-          analytics.coreWebVitals('CLS', metric.value, pathname);
-        });
-        onINP((metric) => {
-          analytics.coreWebVitals('INP', metric.value, pathname);
-        });
-        onFCP((metric) => {
-          analytics.coreWebVitals('FCP', metric.value, pathname);
-        });
-        onLCP((metric) => {
-          analytics.coreWebVitals('LCP', metric.value, pathname);
-        });
-        onTTFB((metric) => {
-          analytics.coreWebVitals('TTFB', metric.value, pathname);
-        });
-      });
-    };
-
     // Track errors
     const handleError = (event: ErrorEvent) => {
       analytics.formError(pathname, 'javascript_error', event.message);
@@ -51,9 +29,6 @@ export default function StatsigAnalytics() {
     // Add event listeners
     window.addEventListener('error', handleError);
     window.addEventListener('unhandledrejection', handleUnhandledRejection);
-
-    // Track performance
-    trackWebVitals();
 
     // Track scroll depth
     const trackScrollDepth = () => {

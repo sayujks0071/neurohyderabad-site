@@ -19,7 +19,7 @@ export const metadata = {
   title: "Dr. Sayuj Krishnan - Neurosurgeon in Malakpet | Yashoda Hospitals",
   description:
     "Dr. Sayuj Krishnan at Yashoda Hospital Malakpet offers Daycare Endoscopic Spine Surgery, brain tumor care, and 24/7 emergency neurosurgery. Book a visit.",
-  keywords: "neurosurgeon malakpet, yashoda hospital malakpet neurosurgeon, spine surgeon malakpet, daycare spine surgery malakpet, endoscopic spine surgery malakpet",
+  keywords: "neurosurgeon malakpet, yashoda hospital malakpet neurosurgeon, spine surgeon malakpet, daycare spine surgery malakpet, endoscopic spine surgery malakpet, spine fracture treatment malakpet, vertebroplasty malakpet",
   alternates: { canonical: "https://www.drsayuj.info/neurosurgeon-malakpet" },
   openGraph: {
     title: "Dr. Sayuj Krishnan - Neurosurgeon in Malakpet | Yashoda Hospitals",
@@ -78,7 +78,8 @@ export default function MalakpetNeurosurgeonPage() {
       { name: "Head Injuries (Trauma)", url: "/emergency-rehabilitation" },
       { name: "Spondylolisthesis", url: "/conditions/spondylolisthesis-treatment-hyderabad" },
       { name: "Neck Pain (Cervical Spondylosis)", url: "/conditions/cervical-radiculopathy-treatment-hyderabad" },
-      { name: "Trigeminal Neuralgia", url: "/conditions/trigeminal-neuralgia-treatment-hyderabad" }
+      { name: "Trigeminal Neuralgia", url: "/conditions/trigeminal-neuralgia-treatment-hyderabad" },
+      { name: "Osteoporotic Fracture", url: "/conditions/osteoporotic-spine-fracture-hyderabad" }
   ];
 
   return (
@@ -137,10 +138,10 @@ export default function MalakpetNeurosurgeonPage() {
             </h2>
             <p className="text-gray-700 leading-relaxed mb-4">
               Residents of <strong>Malakpet, Dilsukhnagar, and LB Nagar</strong> no longer need to travel far for advanced brain and spine care.
-              <strong>Dr. Sayuj Krishnan</strong> brings international expertise to the heart of Malakpet at Yashoda Hospitals.
+              <strong>Dr. Sayuj Krishnan</strong> brings international expertise to the heart of Malakpet at Yashoda Hospitals, <Link href="/services/endoscopic-spine-surgery-hyderabad" className="text-blue-600 underline font-semibold">specialising in endoscopic spine surgery with 90% same-day discharge</Link>.
             </p>
             <p className="text-gray-700 leading-relaxed mb-6">
-              Specializing in <strong>Keyhole (Endoscopic) Spine Surgery</strong>, Dr. Sayuj treats slip discs and sciatica without major open surgery.
+              Using advanced <strong>Keyhole (Endoscopic) Spine Surgery</strong> techniques, Dr. Sayuj treats slip discs and sciatica without major open surgery.
               Most patients walk within hours and go home the same day. He is also a leading expert in <strong>Neuronavigation-guided Brain Tumor Surgery</strong>, ensuring maximum safety for delicate brain procedures.
             </p>
             

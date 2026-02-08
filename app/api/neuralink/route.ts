@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { GoogleGenAI, Modality, Type } from "@google/genai";
 import { rateLimit } from "../../../src/lib/rate-limit";
+import { getClient, extractText } from "../../../lib/gemini";
 
 // TODO: Migrate to Codex CLI/AI Gateway for standardized auth and monitoring.
 const SYSTEM_INSTRUCTION = `You are the NeuroLink Assistant for Dr. Sayuj, a world-class neurosurgeon.
@@ -10,45 +11,6 @@ Your goal is to answer questions professionally using the provided Google Search
 - NEVER provide a definitive medical diagnosis.
 - If you use Google Search grounding, inform the user you have retrieved the latest web data.
 - If emergency symptoms are mentioned, tell them to seek immediate emergency care (ER).`;
-
-function getApiKey() {
-  return (
-    process.env.GOOGLE_GENAI_API_KEY ||
-    process.env.GEMINI_API_KEY ||
-    process.env.GENAI_API_KEY ||
-    process.env.API_KEY ||
-    ""
-  );
-}
-
-function getClient() {
-  const apiKey = getApiKey();
-  if (!apiKey) {
-    throw new Error("Missing Gemini API key");
-  }
-  return new GoogleGenAI({ apiKey });
-}
-
-function extractText(response: any): string {
-  if (!response) return "";
-
-  if (typeof response.text === "function") {
-    return response.text();
-  }
-  if (typeof response.text === "string") {
-    return response.text;
-  }
-
-  if (Array.isArray(response.output)) {
-    const text = response.output
-      .flatMap((item: any) => item?.content ?? [])
-      .map((item: any) => item?.text)
-      .find((segment: unknown): segment is string => typeof segment === "string");
-    return text || "";
-  }
-
-  return "";
-}
 
 function jsonError(message: string, status = 400) {
   return NextResponse.json({ error: message }, { status });
@@ -102,7 +64,7 @@ export async function POST(request: Request) {
         }
 
         const response = await ai.models.generateContent({
-          model: "gemini-2.0-flash-exp",
+          model: "gemini-2.0-flash",
           contents: [{ role: "user", parts: [{ text: `Perform a preliminary neurosurgical triage for a ${age}-year-old ${gender} patient with these symptoms: "${symptoms}". Provide a concise professional summary, identify potential neurosurgical concerns as a list of points, and suggest a priority level (LOW, MEDIUM, HIGH, URGENT). Note: This is for doctor assistance, not a diagnosis.` }] }],
           config: {
             responseMimeType: "application/json",
@@ -135,11 +97,14 @@ export async function POST(request: Request) {
         }
 
         const response = await ai.models.generateContent({
-          model: "gemini-2.0-flash-exp",
-          contents: [{ role: "user", parts: [{ text: `The following is a patient's draft description of their symptoms: "${input}".
+          model: "gemini-2.0-flash",
+          contents: [{
+            role: "user", parts: [{
+              text: `The following is a patient's draft description of their symptoms: "${input}".
 Help them refine it by providing a more structured, clinical, but easy-to-read version.
 Ask 2-3 clarifying questions that a neurosurgeon would find helpful (e.g., about radiculopathy, bowel/bladder control, or specific pain triggers).
-Return JSON format.` }] }],
+Return JSON format.` }]
+          }],
           config: {
             responseMimeType: "application/json",
             responseSchema: {
@@ -167,11 +132,14 @@ Return JSON format.` }] }],
         }
 
         const response = await ai.models.generateContent({
-          model: "gemini-2.0-flash-exp",
-          contents: [{ role: "user", parts: [{ text: `Analyze this neurosurgical report excerpt: "${reportText}".
+          model: "gemini-2.0-flash",
+          contents: [{
+            role: "user", parts: [{
+              text: `Analyze this neurosurgical report excerpt: "${reportText}".
 Translate the complex medical jargon into plain English for a patient.
 Identify 3 key takeaway points.
-Emphasize that this is an AI interpretation and they must discuss with Dr. Sayuj.` }] }],
+Emphasize that this is an AI interpretation and they must discuss with Dr. Sayuj.` }]
+          }],
           config: {
             responseMimeType: "application/json",
             responseSchema: {
@@ -213,7 +181,7 @@ Emphasize that this is an AI interpretation and they must discuss with Dr. Sayuj
         }
 
         const response = await ai.models.generateContent({
-          model: "gemini-2.0-flash-exp",
+          model: "gemini-2.0-flash",
           contents: [{ role: "user", parts: [{ text: query }] }],
           config,
         });
@@ -242,7 +210,7 @@ Emphasize that this is an AI interpretation and they must discuss with Dr. Sayuj
         contents.push({ role: "user", parts: [{ text: message }] });
 
         const response = await ai.models.generateContent({
-          model: "gemini-2.0-flash-exp",
+          model: "gemini-2.0-flash",
           contents,
           config: {
             tools: [{ googleSearch: {} }],
@@ -264,7 +232,7 @@ Emphasize that this is an AI interpretation and they must discuss with Dr. Sayuj
         }
 
         const response = await ai.models.generateContent({
-          model: "gemini-2.0-flash-exp",
+          model: "gemini-2.0-flash",
           contents: [{ parts: [{ text: `Read the following clearly and professionally: ${text}` }] }],
           config: {
             responseModalities: [Modality.AUDIO],
