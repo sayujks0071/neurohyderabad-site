@@ -754,30 +754,35 @@ async function syncBookingLead(
 ): Promise<boolean> {
   "use step";
 
-  const result = await retry(
-    () => submitToGoogleSheets({
-      requestId: bookingId,
-    fullName: booking.patientName,
-    email: booking.email,
-    phone: booking.phone,
-    concern: booking.reason.slice(0, 100),
-    preferredDate: booking.appointmentDate,
-    preferredTime: booking.appointmentTime,
-    source: source || "website",
-    metadata: {
-      age: booking.age,
-      gender: booking.gender,
-      bookingReason: booking.reason,
-      painScore: booking.painScore,
-      mriScanAvailable: booking.mriScanAvailable,
-    },
-  }), { retries: 3, delay: 1000, name: "google-sheets", predicate: (r) => r.success });
+  try {
+    const result = await retry(
+      () => submitToGoogleSheets({
+        requestId: bookingId,
+      fullName: booking.patientName,
+      email: booking.email,
+      phone: booking.phone,
+      concern: booking.reason.slice(0, 100),
+      preferredDate: booking.appointmentDate,
+      preferredTime: booking.appointmentTime,
+      source: source || "website",
+      metadata: {
+        age: booking.age,
+        gender: booking.gender,
+        bookingReason: booking.reason,
+        painScore: booking.painScore,
+        mriScanAvailable: booking.mriScanAvailable,
+      },
+    }), { retries: 3, delay: 1000, name: "google-sheets", predicate: (r) => r.success });
 
-  if (!result.success) {
-    console.error("[Appointment Workflow] Google Sheets sync failed:", result.message);
+    if (!result.success) {
+      console.error("[Appointment Workflow] Google Sheets sync failed:", result.message);
+    }
+
+    return result.success;
+  } catch (error) {
+    console.error(`[Appointment Workflow] Google Sheets sync exception:`, error);
+    return false;
   }
-
-  return result.success;
 }
 
 /**
@@ -792,18 +797,22 @@ async function triggerAppointmentWebhooks(
 ): Promise<void> {
   "use step";
 
-  await retry(
-    async () => notifyAppointmentWebhooks(
-      buildWebhookPayload({
-        booking,
-        confirmationMessage,
-        emailResult,
-        usedAI,
-        source,
-      })
-    ),
-    { retries: 3, delay: 1000, name: "webhooks" }
-  );
+  try {
+    await retry(
+      async () => notifyAppointmentWebhooks(
+        buildWebhookPayload({
+          booking,
+          confirmationMessage,
+          emailResult,
+          usedAI,
+          source,
+        })
+      ),
+      { retries: 3, delay: 1000, name: "webhooks" }
+    );
+  } catch (error) {
+    console.error(`[Appointment Workflow] Webhook notification exception:`, error);
+  }
 }
 
 /**
@@ -819,59 +828,64 @@ async function scheduleReminders(
 
   console.log(`[Appointment Workflow] Scheduling reminders for ${bookingId}`);
 
-  if (!process.env.INNGEST_EVENT_KEY) {
-    console.log(
-      "[Appointment Workflow] INNGEST_EVENT_KEY not set; skipping reminders."
-    );
-    return false;
-  }
-
-  const appointmentDateTime = buildAppointmentDateTime(date, time);
-  if (!appointmentDateTime) {
-    console.error(
-      `[Appointment Workflow] Invalid appointment date/time for reminders: ${date} ${time}`
-    );
-    return false;
-  }
-
-  const reminders = [
-    { type: "24h" as const, offsetMs: 24 * 60 * 60 * 1000 },
-    { type: "1h" as const, offsetMs: 60 * 60 * 1000 },
-  ];
-
-  const appointmentIso = appointmentDateTime.toISOString();
-
-  const results = await Promise.all(
-    reminders.map(async (reminder) => {
-      const reminderTime = new Date(appointmentDateTime.getTime() - reminder.offsetMs);
-      if (reminderTime > new Date()) {
-        // Use bookingId + reminder type as idempotency key to prevent duplicate reminders
-        const idempotencyKey = `${bookingId}-${reminder.type}`;
-
-        await inngest.send({
-          id: idempotencyKey, // Inngest uses 'id' for idempotency
-          name: "appointment/reminder",
-          data: {
-            appointmentId: bookingId,
-            patientEmail: patientInfo.email,
-            patientName: patientInfo.name,
-            appointmentDate: appointmentIso,
-            reminderType: reminder.type,
-          },
-          ts: reminderTime.getTime(),
-        });
-        return true;
-      }
+  try {
+    if (!process.env.INNGEST_EVENT_KEY) {
+      console.log(
+        "[Appointment Workflow] INNGEST_EVENT_KEY not set; skipping reminders."
+      );
       return false;
-    })
-  );
+    }
 
-  const scheduledCount = results.filter(Boolean).length;
+    const appointmentDateTime = buildAppointmentDateTime(date, time);
+    if (!appointmentDateTime) {
+      console.error(
+        `[Appointment Workflow] Invalid appointment date/time for reminders: ${date} ${time}`
+      );
+      return false;
+    }
 
-  console.log(
-    `Reminders scheduled for ${bookingId}: ${scheduledCount} queued`
-  );
-  return scheduledCount > 0;
+    const reminders = [
+      { type: "24h" as const, offsetMs: 24 * 60 * 60 * 1000 },
+      { type: "1h" as const, offsetMs: 60 * 60 * 1000 },
+    ];
+
+    const appointmentIso = appointmentDateTime.toISOString();
+
+    const results = await Promise.all(
+      reminders.map(async (reminder) => {
+        const reminderTime = new Date(appointmentDateTime.getTime() - reminder.offsetMs);
+        if (reminderTime > new Date()) {
+          // Use bookingId + reminder type as idempotency key to prevent duplicate reminders
+          const idempotencyKey = `${bookingId}-${reminder.type}`;
+
+          await inngest.send({
+            id: idempotencyKey, // Inngest uses 'id' for idempotency
+            name: "appointment/reminder",
+            data: {
+              appointmentId: bookingId,
+              patientEmail: patientInfo.email,
+              patientName: patientInfo.name,
+              appointmentDate: appointmentIso,
+              reminderType: reminder.type,
+            },
+            ts: reminderTime.getTime(),
+          });
+          return true;
+        }
+        return false;
+      })
+    );
+
+    const scheduledCount = results.filter(Boolean).length;
+
+    console.log(
+      `Reminders scheduled for ${bookingId}: ${scheduledCount} queued`
+    );
+    return scheduledCount > 0;
+  } catch (error) {
+    console.error(`[Appointment Workflow] Failed to schedule reminders:`, error);
+    return false;
+  }
 }
 
 /**
