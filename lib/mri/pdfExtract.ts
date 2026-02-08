@@ -60,8 +60,8 @@ export async function extractPdfTextInSandbox(pdfBuffer: Buffer): Promise<Extrac
 
   try {
     await sandbox.writeFiles([
-        { path: 'input.pdf', content: pdfBuffer },
-        { path: 'extract.mjs', content: Buffer.from(EXTRACT_SCRIPT) },
+      { path: 'input.pdf', content: pdfBuffer },
+      { path: 'extract.mjs', content: Buffer.from(EXTRACT_SCRIPT) },
     ]);
 
     const result = (await runSandboxCommand({
