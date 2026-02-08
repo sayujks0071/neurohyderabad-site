@@ -77,7 +77,8 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
 
     (Object.keys(formState) as (keyof FormState)[]).forEach((key) => {
       // painScore and mriScanAvailable are always valid by type/default
-      if (key === 'painScore' || key === 'mriScanAvailable') return;
+      // email is optional
+      if (key === 'painScore' || key === 'mriScanAvailable' || key === 'email') return;
 
       const value = formState[key];
       if (typeof value === 'string' && !value.trim()) {
