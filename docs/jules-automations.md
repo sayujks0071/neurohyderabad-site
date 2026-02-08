@@ -1,60 +1,49 @@
 # Jules Automations
 
-This repository uses scheduled GitHub Actions to create "tasks" (GitHub Issues) for Jules (our AI engineer) to pick up daily. This ensures continuous maintenance and optimization of the codebase without manual intervention.
+This repository uses GitHub Actions to schedule daily SEO and maintenance tasks managed by the Jules AI agent.
 
-## Workflows
+## Schedules (UTC vs IST)
 
-The workflows are located in `.github/workflows/` and are prefixed with `jules-`. They are configured to run on a daily schedule (IST mornings).
+GitHub Actions schedules run in UTC. We have configured them to map to Indian Standard Time (IST), which is UTC + 5:30.
 
-| Workflow | IST | UTC | Cron | Purpose |
-| :--- | :--- | :--- | :--- | :--- |
-| **SEO Reprint** | 08:00 | 02:30 | `30 2 * * *` | Identifies stale content for update. |
-| **PR & Deploy Check** | 08:45 | 03:15 | `15 3 * * *` | Reviews recent PRs and deployments. |
-| **Competitor Gap Scan** | 09:00 | 03:30 | `30 3 * * *` | Scans competitors for new content topics. |
-| **Rolling 7-Day SEO** | 09:15 | 03:45 | `45 3 * * *` | Summarizes weekly SEO health. |
-| **Local SEO Check** | 09:30 | 04:00 | `0 4 * * *` | Verifies local business signals. |
+| Workflow | IST Time | UTC Time | Cron Expression |
+| :--- | :--- | :--- | :--- |
+| **SEO Reprint** | 08:00 IST | 02:30 UTC | `30 2 * * *` |
+| **PR & Deploy Check** | 08:45 IST | 03:15 UTC | `15 3 * * *` |
+| **Competitor Gap Scan** | 09:00 IST | 03:30 UTC | `30 3 * * *` |
+| **Rolling 7-Day SEO Summary** | 09:15 IST | 03:45 UTC | `45 3 * * *` |
+| **Local SEO Check** | 09:30 IST | 04:00 UTC | `0 4 * * *` |
 
-## How it works
-
-1. **Schedule Trigger:** GitHub Actions triggers the workflow at the specified time.
-2. **Read Prompt:** The workflow reads a markdown template from `jules-prompts/`.
-3. **Check Duplicates:** It checks if an issue with the same title (including today's date) already exists to prevent spam.
-4. **Create Issue:** If unique, it creates a new GitHub Issue with the content of the prompt file and applies the label `jules`.
-5. **Jules Picks Up:** Jules (or an assigned engineer) monitors the `jules` label and executes the instructions in the issue body.
+*Note: GitHub Actions schedules are approximate and may be delayed during periods of high load.*
 
 ## Editing Prompts
 
-To change what Jules does for a specific task, simply edit the corresponding markdown file in `jules-prompts/`.
+Each scheduled workflow creates a GitHub Issue using a prompt template located in the `jules-prompts/` directory.
 
-Example: To add a new check to the "Local SEO Check", edit `jules-prompts/local-seo-check.md`.
+To change the instructions given to Jules:
+1. Edit the corresponding Markdown file in `jules-prompts/` (e.g., `jules-prompts/seo-reprint.md`).
+2. Commit and push the changes to the `main` branch.
+3. The next scheduled run will use the updated content as the issue body.
 
-## Pausing Automations
+## Pausing or Disabling Workflows
 
 To pause a specific automation:
-1. Go to the **Actions** tab in GitHub.
-2. Select the workflow from the sidebar.
-3. Click the **...** menu and select **Disable workflow**.
 
-## Configuration
+**Option 1: GitHub UI (Recommended)**
+1. Go to the **Actions** tab in the repository.
+2. Select the workflow from the left sidebar.
+3. Click the **...** (three dots) menu in the top right.
+4. Select **Disable workflow**.
 
-The prompt file path and the base title for the issue are configurable via the environment variables defined in each workflow file (e.g., `.github/workflows/jules-seo-reprint.yml`).
+**Option 2: YAML Configuration**
+1. Edit the workflow file in `.github/workflows/`.
+2. Comment out the `schedule` block or add `if: false` to the job.
 
-```yaml
-env:
-  PROMPT_FILE: jules-prompts/seo-reprint.md
-  ISSUE_TITLE: "[Jules] SEO Reprint Task"
-```
+## How Jules Works
 
-To change the schedule, you must edit the cron expression in the `on.schedule` section of the workflow YAML file.
-**Note:** The schedule triggers are defined statically in the YAML `on: schedule` block and cannot be set via environment variables due to GitHub Actions limitations.
-
-### Competitor Analysis
-The "Competitor Gap Scan" workflow relies on the list of competitors defined in `seo/keyword-research/latest/competitors.md`. To add or remove competitors:
-1. Edit `seo/keyword-research/latest/competitors.md`.
-2. Update the list of competitors and their analysis.
-
-## Troubleshooting
-
-- **Issue not created:** Check the Action logs. Common reasons include GitHub API rate limits or the issue already existing.
-- **Wrong Schedule:** Ensure you've converted IST to UTC correctly using a converter. GitHub Actions use UTC.
-<!-- v1.6 - Verified -->
+1. **Trigger:** At the scheduled time, the workflow runs.
+2. **Duplicate Check:** It checks if an **open** issue already exists with the same title (which includes the current date, e.g., `[Jules] SEO Reprint Task - 2023-10-27`).
+   - If found, it skips creation to avoid spam.
+3. **Issue Creation:** If no duplicate exists, it creates a new issue.
+4. **Labeling:** It applies the label `jules`.
+   - Jules (the agent) monitors issues with this label to pick up tasks.

@@ -381,6 +381,31 @@ export default function SciaticaTreatmentPage() {
         </div>
       </section>
 
+      <section className="mb-12 border border-red-100 bg-red-50 rounded-2xl p-8 shadow-sm">
+        <h2 className="text-2xl font-bold text-red-800 mb-6">⚠️ Exercises to Avoid with Sciatica</h2>
+        <p className="text-gray-800 mb-6 font-medium">
+          While movement is key to recovery, the <strong>wrong exercises</strong> can make your pain worse. Avoid these common mistakes until cleared by Dr. Sayuj or your physiotherapist.
+        </p>
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="bg-white p-5 rounded-xl border border-red-100 shadow-sm">
+             <h3 className="text-lg font-bold text-red-700 mb-2">1. Forward Bends (Toe Touches)</h3>
+             <p className="text-sm text-gray-700"><strong>Why Avoid:</strong> Bending forward increases pressure on the lumbar discs by up to 100%, potentially worsening a herniated disc.</p>
+          </div>
+          <div className="bg-white p-5 rounded-xl border border-red-100 shadow-sm">
+             <h3 className="text-lg font-bold text-red-700 mb-2">2. Double Leg Lifts</h3>
+             <p className="text-sm text-gray-700"><strong>Why Avoid:</strong> Lifting both legs while lying on your back puts massive strain on your core and lower back muscles, which can aggravate sciatica.</p>
+          </div>
+           <div className="bg-white p-5 rounded-xl border border-red-100 shadow-sm">
+             <h3 className="text-lg font-bold text-red-700 mb-2">3. High Impact Activities</h3>
+             <p className="text-sm text-gray-700"><strong>Why Avoid:</strong> Running, jumping, or high-intensity aerobics cause repeated impact on the spine, compressing the discs further.</p>
+          </div>
+           <div className="bg-white p-5 rounded-xl border border-red-100 shadow-sm">
+             <h3 className="text-lg font-bold text-red-700 mb-2">4. Deep Hamstring Stretches</h3>
+             <p className="text-sm text-gray-700"><strong>Why Avoid:</strong> Stretching the hamstrings too aggressively can pull on the sciatic nerve (neural tension), increasing pain and inflammation.</p>
+          </div>
+        </div>
+      </section>
+
       <PatientEducationVideos category="sciatica" />
 
       <section className="mb-12">

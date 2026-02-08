@@ -9,7 +9,6 @@ import MedicalWebPageSchema from "./components/schemas/MedicalWebPageSchema";
 // Temporarily commenting out problematic imports
 // import { HeroCTA, StickyCTA } from "../src/components/Experiments";
 // import SocialProofBand from "../src/components/Experiments/SocialProofBand";
-// import ScrollDepthTracker from "../src/components/ScrollDepthTracker";
 // import SEODashboard from "../src/components/SEODashboard";
 // import SEOAuditDashboard from "../src/components/SEOAuditDashboard";
 // import GoogleOAuth from "../src/components/GoogleOAuth";
@@ -224,7 +223,6 @@ export default function Home() {
         audience="Patients seeking neurosurgical care in Hyderabad"
       />
 
-      {/* <ScrollDepthTracker pageSlug="/" /> */}
       <HomeTrackers />
       <div className="min-h-screen bg-white">
         {/* Hero Section - LCP Optimized */}
