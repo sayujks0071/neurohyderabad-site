@@ -9,7 +9,6 @@ except ImportError as exc:
         "    playwright install\n"
         "before executing verification/verify_doctor_card.py."
     ) from exc
-import os
 
 def verify_doctor_card():
     with sync_playwright() as p:
