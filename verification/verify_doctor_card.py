@@ -1,16 +1,10 @@
-try:
-    from playwright.sync_api import sync_playwright, expect
-except ImportError as exc:
-    raise ImportError(
-        "The 'playwright' package is required to run verification scripts.\n"
-        "Install it with:\n"
-        "    pip install playwright\n"
-        "and then run:\n"
-        "    playwright install\n"
-        "before executing verification/verify_doctor_card.py."
-    ) from exc
+from playwright.sync_api import sync_playwright, expect
+import os
 
 def verify_doctor_card():
+    # Get the directory where the script is located
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
         page = browser.new_page()
@@ -25,7 +19,8 @@ def verify_doctor_card():
             expect(card_heading).to_be_visible(timeout=30000)
 
             # Take screenshot of the whole page first to be safe
-            page.screenshot(path="verification/home_page.png")
+            home_page_screenshot = os.path.join(script_dir, "home_page.png")
+            page.screenshot(path=home_page_screenshot)
 
             # Locate the card container to verify class
             # The card has specific classes we added: bg-white/90 backdrop-blur-sm
@@ -39,13 +34,15 @@ def verify_doctor_card():
             print("Found element with .backdrop-blur-sm class")
 
             # Screenshot the card specifically
-            card_locator.screenshot(path="verification/doctor_card.png")
+            doctor_card_screenshot = os.path.join(script_dir, "doctor_card.png")
+            card_locator.screenshot(path=doctor_card_screenshot)
 
             print("Verification complete.")
 
         except Exception as e:
             print(f"Error: {e}")
-            page.screenshot(path="verification/error.png")
+            error_screenshot = os.path.join(script_dir, "error.png")
+            page.screenshot(path=error_screenshot)
             raise e
         finally:
             browser.close()
