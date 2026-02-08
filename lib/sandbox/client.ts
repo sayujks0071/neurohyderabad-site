@@ -14,11 +14,17 @@ export interface CreateSandboxOptions {
 
 export async function createSandbox(options: CreateSandboxOptions = {}) {
   try {
+    const networkPolicy = options.network ? {
+        type: 'restricted' as const,
+        allowedDomains: options.network.allow,
+        deniedCIDRs: options.network.deny,
+    } : undefined;
+
     const sandbox = await Sandbox.create({
       // @ts-ignore
       runtime: options.runtime || 'node',
       timeout: options.timeoutMs,
-      networkPolicy: options.network, // Fix: Pass network policy
+      networkPolicy,
       source: options.source, // Fix: Pass source
     });
 
