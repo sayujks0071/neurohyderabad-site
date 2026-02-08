@@ -1,6 +1,28 @@
 import { NextResponse } from 'next/server';
 
 /**
+ * Constant-time string comparison to prevent timing attacks.
+ * @param a First string (e.g., provided key)
+ * @param b Second string (e.g., secret key)
+ * @returns true if strings are equal, false otherwise
+ */
+function secureCompare(a: string, b: string): boolean {
+  if (typeof a !== 'string' || typeof b !== 'string') {
+    return false;
+  }
+
+  if (a.length !== b.length) {
+    return false;
+  }
+
+  let result = 0;
+  for (let i = 0; i < a.length; i++) {
+    result |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  }
+  return result === 0;
+}
+
+/**
  * Verifies that the request contains a valid admin access key.
  * Checks 'x-admin-key' header first, then 'key' query parameter.
  *
@@ -29,7 +51,7 @@ export function verifyAdminAccess(request: Request): {
 
   // Check header (preferred for APIs)
   const headerKey = request.headers.get('x-admin-key');
-  if (headerKey === adminKey) {
+  if (headerKey && secureCompare(headerKey, adminKey)) {
     return { isAuthorized: true };
   }
 
@@ -37,7 +59,7 @@ export function verifyAdminAccess(request: Request): {
   try {
     const url = new URL(request.url);
     const queryKey = url.searchParams.get('key');
-    if (queryKey === adminKey) {
+    if (queryKey && secureCompare(queryKey, adminKey)) {
       return { isAuthorized: true };
     }
   } catch (e) {
