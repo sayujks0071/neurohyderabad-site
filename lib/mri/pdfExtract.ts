@@ -60,25 +60,30 @@ export async function extractPdfTextInSandbox(pdfBuffer: Buffer): Promise<Extrac
   });
 
   try {
-    await sandbox.writeFiles({
-      'input.pdf': pdfBuffer,
-      'extract.mjs': EXTRACT_SCRIPT,
-    });
+    await sandbox.writeFiles([
+      { path: 'input.pdf', content: pdfBuffer },
+      { path: 'extract.mjs', content: Buffer.from(EXTRACT_SCRIPT) },
+    ]);
 
-    const result = await runSandboxCommand({
+    const result = (await runSandboxCommand({
       sandbox,
       cmd: 'sh',
       args: ['-c', 'npm i pdf-parse@1.1.1 --silent && node extract.mjs'],
       timeoutMs: 120000,
-    });
+    })) as { stdout: string; stderr: string; exitCode: number };
 
     if (result.exitCode !== 0) {
       console.error('Sandbox stderr:', result.stderr);
       throw new Error('PDF extraction failed inside sandbox');
     }
 
+    // Handle stdout whether it's a string or a function (depending on sandbox version)
+    const stdoutStr = typeof result.stdout === 'function'
+      ? await result.stdout()
+      : result.stdout;
+
     // Try to find the JSON line in stdout (in case of other logs)
-    const lines = result.stdout.trim().split('\n');
+    const lines = (stdoutStr as string).trim().split('\n');
     let jsonResult;
     // Iterate from end to find last valid JSON
     for (let i = lines.length - 1; i >= 0; i--) {

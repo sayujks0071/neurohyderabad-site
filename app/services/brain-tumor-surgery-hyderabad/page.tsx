@@ -261,6 +261,44 @@ export default function BrainTumorSurgeryHyderabadPage() {
           </div>
         </header>
 
+        {/* Red Flag Symptoms Section - Added for SEO & User Intent */}
+        <section className="mb-16 bg-red-50 border border-red-100 rounded-2xl p-8">
+          <h2 className="text-2xl font-bold text-red-900 mb-4">When to See a Neurosurgeon (Red Flag Symptoms)</h2>
+          <p className="text-gray-800 mb-6">
+            Early detection of brain tumors significantly improves surgical outcomes. If you or a loved one experiences these warning signs,
+            immediate evaluation is crucial.
+          </p>
+          <div className="grid md:grid-cols-3 gap-6 mb-6">
+            <div className="bg-white p-5 rounded-xl shadow-sm border border-red-100">
+              <h3 className="font-semibold text-red-800 mb-2">Morning Headaches</h3>
+              <p className="text-sm text-gray-700">Severe headaches upon waking, often accompanied by vomiting, which may indicate increased pressure.</p>
+            </div>
+            <div className="bg-white p-5 rounded-xl shadow-sm border border-red-100">
+              <h3 className="font-semibold text-red-800 mb-2">New-Onset Seizures</h3>
+              <p className="text-sm text-gray-700">Any first-time seizure in an adult requires an MRI to rule out a tumor or structural lesion.</p>
+            </div>
+            <div className="bg-white p-5 rounded-xl shadow-sm border border-red-100">
+              <h3 className="font-semibold text-red-800 mb-2">Focal Deficits</h3>
+              <p className="text-sm text-gray-700">Progressive weakness in one side of the body, difficulty speaking, or sudden vision changes.</p>
+            </div>
+          </div>
+          <div className="flex flex-wrap gap-4 items-center">
+            <Link
+              href="/symptoms/signs-of-brain-tumor"
+              className="font-semibold text-red-700 hover:text-red-900 underline underline-offset-4"
+            >
+              Read Full Guide on Brain Tumor Symptoms →
+            </Link>
+            <span className="hidden md:inline text-gray-400">|</span>
+            <Link
+              href="/conditions/brain-tumor-surgery-hyderabad"
+              className="text-gray-600 hover:text-blue-700 hover:underline"
+            >
+              Learn about Diagnosis & Condition Types
+            </Link>
+          </div>
+        </section>
+
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-blue-900 mb-6">Types of Brain Tumors We Treat</h2>
           <p className="text-gray-700 mb-4">
