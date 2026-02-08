@@ -247,11 +247,12 @@ describe('SEO JSON-LD Generators', () => {
         id: 'proc-id'
       };
       const result = procedureJsonLd(props);
+      const { id, ...expectedProps } = props;
       expect(result).toEqual({
         '@context': 'https://schema.org',
         '@type': 'MedicalProcedure',
-        ...props,
-        '@id': props.id
+        ...expectedProps,
+        '@id': id
       });
       // @id is duplicated in the spread if we are not careful,
       // but in the implementation it's added separately.
