@@ -34,7 +34,7 @@ export const WhatsAppButton: React.FC<WhatsAppButtonProps> = ({ appointment }) =
           ? 'bg-[#25D366] hover:bg-[#128C7E] text-white hover:scale-105 shadow-sm'
           : 'bg-gray-200 text-gray-400 cursor-not-allowed'
         }`}
-      title={hasPhone ? "Click to confirm via WhatsApp" : "No phone number available"}
+      title={hasPhone ? `Click to confirm via WhatsApp (${appointment.patient_phone})` : "No phone number available"}
       aria-label={hasPhone ? "Confirm via WhatsApp" : "WhatsApp confirmation unavailable"}
       data-testid="whatsapp-button"
     >
