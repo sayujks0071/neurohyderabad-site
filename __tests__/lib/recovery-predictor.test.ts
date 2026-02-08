@@ -19,9 +19,15 @@ async function load() {
 }
 
 describe('Recovery Predictor', () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     vi.clearAllMocks();
-    // Re-setup specific mocks if reset was intended, but clear is safer for factory mocks
+
+    // Restore default mock implementations
+    (ai.generateObject as any).mockReset();
+
+    const gateway = await import('@/src/lib/ai/gateway');
+    (gateway.getTextModel as any).mockReturnValue('mock-model');
+    (gateway.hasAIConfig as any).mockReturnValue(true);
 
     // Mock global fetch for MCP
     global.fetch = vi.fn().mockResolvedValue({

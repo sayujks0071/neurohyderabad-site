@@ -93,7 +93,8 @@ export async function generateRecoveryPlan(request: RecoveryPredictorRequest): P
       const mcpData = await mcpResponse.json();
       context = mcpData.result?.content?.[0]?.text || '';
     } else {
-      console.warn(`MCP Server responded with ${mcpResponse.status}, proceeding with knowledge base fallback.`);
+      console.warn(`MCP Server responded with ${mcpResponse.status}, falling back to static recovery plan template.`);
+      return getFallbackPlan(request.surgeryType);
     }
 
     // 2. Use AI Gateway to structure the content into a RecoveryPlan

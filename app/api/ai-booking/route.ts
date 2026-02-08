@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { generateObject } from 'ai';
-import { z } from 'zod';
-import { getTextModel, hasAIConfig } from '@/src/lib/ai/gateway';
-import { DR_SAYUJ_SYSTEM_PROMPT } from '@/src/lib/ai/prompts';
+import { rateLimit } from '@/src/lib/rate-limit';
+import { escapeHtml } from '@/src/lib/validation';
 
 interface BookingRequest {
   message: string;
@@ -93,9 +91,9 @@ function extractEmail(text: string): string | null {
   return match ? match[0] : null;
 }
 
-// Renamed fallback function
-function generateRuleBasedResponse(request: BookingRequest): AIResponse {
-  const { message, bookingData, pageSlug, service } = request;
+function generateAIResponse(request: BookingRequest): AIResponse {
+  const { message, service } = request;
+  const bookingData = request.bookingData || {};
   
   const isEmergency = detectEmergency(message);
   const detectedCondition = detectCondition(message);
@@ -154,8 +152,10 @@ function generateRuleBasedResponse(request: BookingRequest): AIResponse {
   }
 
   if (hasUrgency && !hasPhone) {
+    // 🛡️ Sentinel: Safe variable interpolation
+    const safeUrgency = escapeHtml(bookingData.urgency);
     return {
-      response: `Thank you. I'll mark this as a ${bookingData.urgency} appointment. Now, could you please provide your name and contact information? I'll need your phone number for confirmation.`,
+      response: `Thank you. I'll mark this as a ${safeUrgency} appointment. Now, could you please provide your name and contact information? I'll need your phone number for confirmation.`,
       isEmergency: false,
       nextStep: 'details',
       bookingData: {
@@ -168,8 +168,10 @@ function generateRuleBasedResponse(request: BookingRequest): AIResponse {
   }
 
   if (hasPhone && !bookingData.preferredDate) {
+    // 🛡️ Sentinel: Safe variable interpolation
+    const safePhone = escapeHtml(phoneNumber || bookingData.phone);
     return {
-      response: `Perfect! I have your phone number: ${phoneNumber || bookingData.phone}. When would you prefer to have your appointment? Dr. Sayuj's OPD hours are Monday to Saturday (10:00 AM – 1:00 PM and 5:00 PM – 7:30 PM). What day works best for you?`,
+      response: `Perfect! I have your phone number: ${safePhone}. When would you prefer to have your appointment? Dr. Sayuj's OPD hours are Monday to Saturday (10:00 AM – 1:00 PM and 5:00 PM – 7:30 PM). What day works best for you?`,
       isEmergency: false,
       nextStep: 'scheduling',
       bookingData: {
@@ -182,14 +184,21 @@ function generateRuleBasedResponse(request: BookingRequest): AIResponse {
   }
 
   // Ready to confirm
+  // 🛡️ Sentinel: Safe variable interpolation
+  const safeName = escapeHtml(bookingData.name || 'To be confirmed');
+  const safePhone = escapeHtml(phoneNumber || bookingData.phone);
+  const safeCondition = detectedCondition ? detectedCondition.replace('_', ' ') : escapeHtml(bookingData.condition || 'To be discussed');
+  const safeUrgency = escapeHtml(bookingData.urgency || 'routine');
+  const safeDate = escapeHtml(bookingData.preferredDate || 'To be confirmed');
+
   return {
     response: `Great! I have all the information I need. Let me summarize your appointment request:
 
-• Name: ${bookingData.name || 'To be confirmed'}
-• Phone: ${phoneNumber || bookingData.phone}
-• Condition: ${detectedCondition ? detectedCondition.replace('_', ' ') : bookingData.condition || 'To be discussed'}
-• Urgency: ${bookingData.urgency || 'routine'}
-• Preferred Date: ${bookingData.preferredDate || 'To be confirmed'}
+• Name: ${safeName}
+• Phone: ${safePhone}
+• Condition: ${safeCondition}
+• Urgency: ${safeUrgency}
+• Preferred Date: ${safeDate}
 
 Our coordinator will call you within one working day to confirm your appointment slot. Is there anything else I can help you with?`,
     isEmergency: false,
@@ -204,11 +213,21 @@ Our coordinator will call you within one working day to confirm your appointment
 }
 
 export async function POST(request: NextRequest) {
-  let body: BookingRequest;
+  // 🛡️ Sentinel: Rate limiting
+  const ip = request.headers.get("x-forwarded-for") ?? "unknown";
+  const limit = rateLimit(ip, 20, 60 * 1000); // 20 requests per minute
+
+  if (!limit.success) {
+    return NextResponse.json(
+      { error: "Too many requests. Please try again later." },
+      { status: 429 }
+    );
+  }
 
   try {
     body = await request.json();
     
+    // 🛡️ Sentinel: Input validation
     if (!body.message) {
       return NextResponse.json(
         { error: 'Message is required' },
@@ -216,83 +235,26 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // 1. FAST PATH: Rule-based Emergency Detection
-    // We check this first to ensure 0 latency for critical keywords
-    if (detectEmergency(body.message)) {
-      console.log('Use Fast Path: Emergency detected');
-      const emergencyResponse = generateRuleBasedResponse(body);
-      return NextResponse.json(emergencyResponse);
+    if (body.message.length > 2000) {
+      return NextResponse.json(
+        { error: 'Message too long (max 2000 characters)' },
+        { status: 400 }
+      );
     }
 
-    // 2. AI PATH: Use Vercel AI Gateway if configured
-    if (hasAIConfig()) {
-      try {
-        const { object } = await generateObject({
-          model: getTextModel(),
-          schema: aiBookingSchema,
-          messages: [
-            {
-              role: 'system',
-              content: `${DR_SAYUJ_SYSTEM_PROMPT}
-
-You are an intelligent booking assistant. Your goal is to help the user book an appointment by extracting the necessary information.
-
-CURRENT BOOKING STATE:
-${JSON.stringify(body.bookingData, null, 2)}
-
-INSTRUCTIONS:
-1. Extract any new information from the user's message and update the booking data.
-2. If the user mentions a medical condition, classify it.
-3. If the user mentions symptoms like severe pain, update urgency.
-4. If the user provides a phone number, extract it.
-5. Determine the next logical step (condition -> urgency -> details -> scheduling -> confirmation).
-6. Provide a natural, empathetic response guiding them to the next step.
-7. Dr. Sayuj's OPD hours are Mon-Sat (10AM-1PM & 5PM-7:30PM).
-
-OUTPUT FORMAT:
-Return a JSON object matching the schema.
-`
-            },
-            {
-              role: 'user',
-              content: body.message
-            }
-          ],
-          temperature: 0.3, // Lower temperature for more consistent data extraction
-        });
-
-        // Merge the AI extracted data with existing data to ensure nothing is lost
-        // (though we passed existing data to AI, we double check)
-        const mergedBookingData = {
-          ...body.bookingData,
-          ...object.bookingData,
-        };
-
-        // Log the interaction
-        console.log('AI Booking Interaction (Gateway):', {
-          timestamp: new Date().toISOString(),
-          pageSlug: body.pageSlug,
-          service: body.service,
-          message: body.message,
-          isEmergency: object.isEmergency,
-          bookingData: mergedBookingData
-        });
-
-        return NextResponse.json({
-          ...object,
-          bookingData: mergedBookingData
-        });
-
-      } catch (error) {
-        console.error('AI Gateway failed, falling back to rule-based:', error);
-        // Fallthrough to rule-based
+    if (body.bookingData) {
+      for (const [key, val] of Object.entries(body.bookingData)) {
+        if (typeof val === 'string' && val.length > 100) {
+           return NextResponse.json(
+             { error: `Field '${key}' too long (max 100 characters)` },
+             { status: 400 }
+           );
+        }
       }
     }
 
-    // 3. FALLBACK: Rule-based logic
-    // Used if AI is not configured or fails
-    console.log('Using Rule-based fallback');
-    const ruleBasedResponse = generateRuleBasedResponse(body);
+    // Generate AI response
+    const aiResponse = generateAIResponse(body);
 
     // Log the interaction
     console.log('Rule-based Interaction:', {
