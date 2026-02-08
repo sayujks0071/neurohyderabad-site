@@ -17,7 +17,6 @@ describe('Recovery Predictor', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     // Re-setup specific mocks if reset was intended, but clear is safer for factory mocks
-    (ai.generateObject as any).mockReset();
 
     // Mock global fetch for MCP
     global.fetch = vi.fn().mockResolvedValue({
