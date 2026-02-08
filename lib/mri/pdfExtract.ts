@@ -76,8 +76,13 @@ export async function extractPdfTextInSandbox(pdfBuffer: Buffer): Promise<Extrac
       throw new Error('PDF extraction failed inside sandbox');
     }
 
+    // Handle stdout whether it's a string or a function (depending on sandbox version)
+    const stdoutStr = typeof result.stdout === 'function'
+      ? await result.stdout()
+      : result.stdout;
+
     // Try to find the JSON line in stdout (in case of other logs)
-    const lines = result.stdout.trim().split('\n');
+    const lines = (stdoutStr as string).trim().split('\n');
     let jsonResult;
     // Iterate from end to find last valid JSON
     for (let i = lines.length - 1; i >= 0; i--) {

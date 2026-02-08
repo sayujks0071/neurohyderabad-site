@@ -230,20 +230,17 @@ export default function LeadForm() {
               </div>
             </div>
 
-            <div className="flex items-center p-3 bg-slate-50 rounded-lg border border-slate-200">
+            <label className="flex items-center p-3 bg-slate-50 rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100 transition-colors">
               <input
                 type="checkbox"
                 id="mriScanAvailable"
                 className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500 border-gray-300"
                 {...register("mriScanAvailable")}
               />
-              <label
-                htmlFor="mriScanAvailable"
-                className="ml-3 text-sm font-medium text-slate-700 cursor-pointer select-none"
-              >
+              <span className="ml-3 text-sm font-medium text-slate-700 select-none">
                 I have MRI/CT Scan reports available
-              </label>
-            </div>
+              </span>
+            </label>
         </div>
 
         <Textarea

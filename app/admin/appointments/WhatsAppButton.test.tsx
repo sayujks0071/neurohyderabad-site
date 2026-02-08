@@ -52,6 +52,12 @@ describe('WhatsAppButton', () => {
     expect(url).toContain(encodeURIComponent('MRI/CT scans'));
   });
 
+  it('displays correct tooltip with phone number', () => {
+    render(<WhatsAppButton appointment={baseAppointment} />);
+    const btn = screen.getByTestId('whatsapp-button');
+    expect(btn).toHaveAttribute('title', 'Click to confirm via WhatsApp (9876543210)');
+  });
+
   it('renders disabled button for missing phone number', () => {
     const appt = { ...baseAppointment, patient_phone: '' };
     render(<WhatsAppButton appointment={appt} />);

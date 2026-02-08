@@ -1,5 +1,5 @@
 name: Jules PR & Deploy Check
-# v1.7 - Verified
+# v1.8 - Verified
 # Managed by Jules (Daily Schedule)
 on:
   schedule:
