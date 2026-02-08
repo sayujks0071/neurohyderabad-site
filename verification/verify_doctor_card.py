@@ -1,4 +1,14 @@
-from playwright.sync_api import sync_playwright, expect
+try:
+    from playwright.sync_api import sync_playwright, expect
+except ImportError as exc:
+    raise ImportError(
+        "The 'playwright' package is required to run verification scripts.\n"
+        "Install it with:\n"
+        "    pip install playwright\n"
+        "and then run:\n"
+        "    playwright install\n"
+        "before executing verification/verify_doctor_card.py."
+    ) from exc
 import os
 
 def verify_doctor_card():
