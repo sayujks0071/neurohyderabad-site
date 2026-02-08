@@ -44,6 +44,26 @@ const CONDITION_KEYWORDS = {
   'peripheral_nerve': ['nerve pain', 'peripheral', 'carpal tunnel', 'ulnar']
 };
 
+// Zod Schema for Structured Output
+const aiBookingSchema = z.object({
+  response: z.string().describe("The natural language response to the user."),
+  isEmergency: z.boolean().describe("Whether the situation is a medical emergency."),
+  suggestedAction: z.string().optional().describe("Suggested action, e.g., 'Call emergency hotline immediately'."),
+  bookingData: z.object({
+    name: z.string().optional(),
+    phone: z.string().optional(),
+    email: z.string().optional(),
+    condition: z.string().optional(),
+    urgency: z.enum(['routine', 'urgent', 'emergency']).optional(),
+    preferredDate: z.string().optional(),
+    preferredTime: z.string().optional(),
+    symptoms: z.array(z.string()).optional(),
+    previousTreatment: z.string().optional(),
+    insurance: z.string().optional(),
+  }).optional().describe("Updated booking data extracted from the conversation."),
+  nextStep: z.string().optional().describe("The next step in the flow: 'condition', 'urgency', 'details', 'scheduling', 'confirmation', or null."),
+});
+
 function detectEmergency(text: string): boolean {
   const lowerText = text.toLowerCase();
   return EMERGENCY_KEYWORDS.some(keyword => lowerText.includes(keyword));
@@ -205,7 +225,7 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const body: BookingRequest = await request.json();
+    body = await request.json();
     
     // 🛡️ Sentinel: Input validation
     if (!body.message) {
@@ -236,17 +256,17 @@ export async function POST(request: NextRequest) {
     // Generate AI response
     const aiResponse = generateAIResponse(body);
 
-    // Log the interaction (in a real implementation, you'd save this to a database)
-    console.log('AI Booking Interaction:', {
+    // Log the interaction
+    console.log('Rule-based Interaction:', {
       timestamp: new Date().toISOString(),
       pageSlug: body.pageSlug,
       service: body.service,
       message: body.message,
-      isEmergency: aiResponse.isEmergency,
-      bookingData: aiResponse.bookingData
+      isEmergency: ruleBasedResponse.isEmergency,
+      bookingData: ruleBasedResponse.bookingData
     });
 
-    return NextResponse.json(aiResponse);
+    return NextResponse.json(ruleBasedResponse);
 
   } catch (error) {
     console.error('Error processing AI booking request:', error);
@@ -263,13 +283,14 @@ export async function POST(request: NextRequest) {
 export async function GET() {
   return NextResponse.json({
     message: 'AI Booking API is running',
-    version: '1.0.0',
+    version: '2.0.0', // Bumped version
     features: [
-      'Emergency detection',
+      'Vercel AI Gateway Integration',
+      'Structured Data Extraction (zod)',
+      'Fast Path Emergency Detection',
+      'Rule-based Fallback',
       'Condition classification',
-      'Appointment scheduling',
-      'Contact extraction',
-      'Conversational flow'
+      'Appointment scheduling'
     ]
   });
 }

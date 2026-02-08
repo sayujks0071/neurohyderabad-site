@@ -100,10 +100,15 @@ export type Events = {
 
   "analytics/conversion": {
     data: {
-      conversionType: "appointment" | "consultation" | "download";
+      conversionType: "appointment" | "consultation" | "download" | "page-view" | "contact-form" | "phone-call";
       page: string;
       value?: number;
       timestamp: string;
+      patientEmail?: string;
+      patientName?: string;
+      condition?: string;
+      userAgent?: string;
+      referrer?: string;
     };
   };
 

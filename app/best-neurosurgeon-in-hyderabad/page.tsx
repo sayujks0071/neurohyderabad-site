@@ -4,8 +4,6 @@ import Link from "next/link";
 import SmartImage from '@/components/SmartImage';
 // import { HeroCTA } from "../../src/components/Experiments";
 // import SocialProofBand from "../../src/components/Experiments/SocialProofBand";
-import { analytics } from "../../src/lib/analytics";
-import ScrollDepthTracker from "../../src/components/ScrollDepthTracker";
 import { LocationCTAs } from "@/src/components/locations/LocationCTAs";
 import { LocalPathways } from "@/src/components/locations/LocalPathways";
 
@@ -60,16 +58,10 @@ export const metadata: Metadata = {
 export const revalidate = 86400; // ISR: Revalidate every 24 hours
 
 export default function BestNeurosurgeonPage() {
-  // Track page view
-  if (typeof window !== 'undefined') {
-    analytics.pageView('/best-neurosurgeon-in-hyderabad/', 'landing', 'neurosurgery');
-  }
-
   const heroImageUrl = 'https://images.unsplash.com/photo-1624297463486-356c388adb22?auto=format&fit=crop&w=900&q=80';
 
   return (
     <>
-      <ScrollDepthTracker pageSlug="/best-neurosurgeon-in-hyderabad/" />
       <div className="min-h-screen bg-white">
         {/* Hero Section */}
         <header className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20">

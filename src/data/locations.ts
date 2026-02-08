@@ -25,7 +25,7 @@ export interface LocationData {
   id: string;
   name: string; // The specific location name, e.g. "Dr. Sayuj Krishnan - Secunderabad"
   canonical_display_name: string; // "Dr. Sayuj Krishnan – Neurosurgeon"
-  slug: string; // e.g. "neurosurgeon-secunderabad" or "locations/lb-nagar"
+  slug: string; // Absolute path e.g. "/neurosurgeon-secunderabad" or "/locations/lb-nagar"
   address: LocationAddress;
   telephone: string;
   whatsapp?: string;
@@ -77,7 +77,10 @@ export const SOCIAL_PROFILES = [
   "https://www.google.com/maps?cid=14503792272825406246",
   "https://www.yashodahospitals.com/doctors/dr-sayuj-krishnan/",
   "https://www.google.com/search?q=Dr+Sayuj+Krishnan+Neurosurgeon+Hyderabad",
-  "https://www.practo.com/hyderabad/doctor/dr-sayuj-krishnan-neurosurgeon"
+  "https://www.practo.com/hyderabad/doctor/dr-sayuj-krishnan-neurosurgeon",
+  "https://www.justdial.com/Hyderabad/Dr-Sayuj-Krishnan-Neurosurgeon-Yashoda-Hospital-Malakpet/040PXX40-XX40-210816155554-Q2H6_BZDET",
+  "https://www.lybrate.com/hyderabad/doctor/dr-sayuj-krishnan-neurosurgeon",
+  "https://www.clinicspots.com/doctor/dr-sayuj-krishnan"
 ];
 
 const DEFAULT_SERVICES = [
@@ -100,7 +103,7 @@ export const locations: LocationData[] = [
     id: "secunderabad",
     name: "Dr Sayuj Krishnan - Neurosurgeon near Secunderabad",
     canonical_display_name: CANONICAL_PHYSICIAN_NAME,
-    slug: "neurosurgeon-secunderabad",
+    slug: "/neurosurgeon-secunderabad",
     address: YASHODA_MALAKPET_ADDRESS,
     telephone: CANONICAL_TELEPHONE,
     whatsapp: CANONICAL_WHATSAPP,
@@ -117,7 +120,7 @@ export const locations: LocationData[] = [
     id: "hitech-city",
     name: "Dr Sayuj Krishnan - Neurosurgeon near Hitech City",
     canonical_display_name: CANONICAL_PHYSICIAN_NAME,
-    slug: "neurosurgeon-hitech-city",
+    slug: "/neurosurgeon-hitech-city",
     address: YASHODA_MALAKPET_ADDRESS,
     telephone: CANONICAL_TELEPHONE,
     whatsapp: CANONICAL_WHATSAPP,
@@ -134,7 +137,7 @@ export const locations: LocationData[] = [
     id: "banjara-hills",
     name: "Dr Sayuj Krishnan - Neurosurgeon near Banjara Hills",
     canonical_display_name: CANONICAL_PHYSICIAN_NAME,
-    slug: "neurosurgeon-banjara-hills",
+    slug: "/neurosurgeon-banjara-hills",
     address: YASHODA_MALAKPET_ADDRESS,
     telephone: CANONICAL_TELEPHONE,
     whatsapp: CANONICAL_WHATSAPP,
@@ -151,7 +154,7 @@ export const locations: LocationData[] = [
     id: "gachibowli",
     name: "Dr Sayuj Krishnan - Neurosurgeon near Gachibowli",
     canonical_display_name: CANONICAL_PHYSICIAN_NAME,
-    slug: "neurosurgeon-gachibowli",
+    slug: "/neurosurgeon-gachibowli",
     address: YASHODA_MALAKPET_ADDRESS,
     telephone: CANONICAL_TELEPHONE,
     whatsapp: CANONICAL_WHATSAPP,
@@ -168,7 +171,7 @@ export const locations: LocationData[] = [
     id: "jubilee-hills",
     name: "Dr Sayuj Krishnan - Neurosurgeon near Jubilee Hills",
     canonical_display_name: CANONICAL_PHYSICIAN_NAME,
-    slug: "neurosurgeon-jubilee-hills",
+    slug: "/neurosurgeon-jubilee-hills",
     address: YASHODA_MALAKPET_ADDRESS,
     telephone: CANONICAL_TELEPHONE,
     whatsapp: CANONICAL_WHATSAPP,
@@ -185,7 +188,7 @@ export const locations: LocationData[] = [
     id: "malakpet",
     name: "Dr Sayuj Krishnan - Neurosurgeon in Malakpet",
     canonical_display_name: CANONICAL_PHYSICIAN_NAME,
-    slug: "neurosurgeon-malakpet",
+    slug: "/neurosurgeon-malakpet",
     address: YASHODA_MALAKPET_ADDRESS,
     telephone: CANONICAL_TELEPHONE,
     whatsapp: CANONICAL_WHATSAPP,
@@ -202,7 +205,7 @@ export const locations: LocationData[] = [
     id: "hyderabad",
     name: "Dr Sayuj Krishnan - Neurosurgeon in Hyderabad",
     canonical_display_name: CANONICAL_PHYSICIAN_NAME,
-    slug: "neurosurgeon-hyderabad",
+    slug: "/neurosurgeon-hyderabad",
     address: YASHODA_MALAKPET_ADDRESS,
     telephone: CANONICAL_TELEPHONE,
     whatsapp: CANONICAL_WHATSAPP,
@@ -219,7 +222,7 @@ export const locations: LocationData[] = [
     id: "lb-nagar",
     name: "Dr Sayuj Krishnan - Neurosurgeon near LB Nagar",
     canonical_display_name: CANONICAL_PHYSICIAN_NAME,
-    slug: "locations/lb-nagar",
+    slug: "/locations/lb-nagar",
     address: YASHODA_MALAKPET_ADDRESS,
     telephone: CANONICAL_TELEPHONE,
     whatsapp: CANONICAL_WHATSAPP,
@@ -236,7 +239,7 @@ export const locations: LocationData[] = [
     id: "kukatpally",
     name: "Dr Sayuj Krishnan - Neurosurgeon near Kukatpally",
     canonical_display_name: CANONICAL_PHYSICIAN_NAME,
-    slug: "locations/neurosurgeon-kukatpally",
+    slug: "/locations/neurosurgeon-kukatpally",
     address: YASHODA_MALAKPET_ADDRESS,
     telephone: CANONICAL_TELEPHONE,
     whatsapp: CANONICAL_WHATSAPP,
@@ -253,7 +256,7 @@ export const locations: LocationData[] = [
     id: "manikonda",
     name: "Dr Sayuj Krishnan - Neurosurgeon near Manikonda",
     canonical_display_name: CANONICAL_PHYSICIAN_NAME,
-    slug: "locations/neurosurgeon-manikonda",
+    slug: "/locations/neurosurgeon-manikonda",
     address: YASHODA_MALAKPET_ADDRESS,
     telephone: CANONICAL_TELEPHONE,
     whatsapp: CANONICAL_WHATSAPP,
@@ -270,7 +273,7 @@ export const locations: LocationData[] = [
     id: "nizampet",
     name: "Dr Sayuj Krishnan - Neurosurgeon near Nizampet",
     canonical_display_name: CANONICAL_PHYSICIAN_NAME,
-    slug: "locations/neurosurgeon-nizampet",
+    slug: "/locations/neurosurgeon-nizampet",
     address: YASHODA_MALAKPET_ADDRESS,
     telephone: CANONICAL_TELEPHONE,
     whatsapp: CANONICAL_WHATSAPP,
@@ -287,7 +290,7 @@ export const locations: LocationData[] = [
     id: "kondapur",
     name: "Dr Sayuj Krishnan - Neurosurgeon near Kondapur",
     canonical_display_name: CANONICAL_PHYSICIAN_NAME,
-    slug: "locations/neurosurgeon-kondapur",
+    slug: "/locations/neurosurgeon-kondapur",
     address: YASHODA_MALAKPET_ADDRESS,
     telephone: CANONICAL_TELEPHONE,
     whatsapp: CANONICAL_WHATSAPP,
@@ -304,7 +307,7 @@ export const locations: LocationData[] = [
     id: "kothapet",
     name: "Dr Sayuj Krishnan - Neurosurgeon near Kothapet",
     canonical_display_name: CANONICAL_PHYSICIAN_NAME,
-    slug: "locations/neurosurgeon-kothapet",
+    slug: "/locations/neurosurgeon-kothapet",
     address: YASHODA_MALAKPET_ADDRESS,
     telephone: CANONICAL_TELEPHONE,
     whatsapp: CANONICAL_WHATSAPP,
@@ -321,7 +324,7 @@ export const locations: LocationData[] = [
     id: "madhapur",
     name: "Dr Sayuj Krishnan - Neurosurgeon near Madhapur",
     canonical_display_name: CANONICAL_PHYSICIAN_NAME,
-    slug: "locations/neurosurgeon-madhapur",
+    slug: "/locations/neurosurgeon-madhapur",
     address: YASHODA_MALAKPET_ADDRESS,
     telephone: CANONICAL_TELEPHONE,
     whatsapp: CANONICAL_WHATSAPP,
@@ -338,7 +341,7 @@ export const locations: LocationData[] = [
     id: "dilsukhnagar",
     name: "Dr Sayuj Krishnan - Neurosurgeon near Dilsukhnagar",
     canonical_display_name: CANONICAL_PHYSICIAN_NAME,
-    slug: "locations/neurosurgeon-dilsukhnagar",
+    slug: "/locations/neurosurgeon-dilsukhnagar",
     address: YASHODA_MALAKPET_ADDRESS,
     telephone: CANONICAL_TELEPHONE,
     whatsapp: CANONICAL_WHATSAPP,
@@ -355,7 +358,7 @@ export const locations: LocationData[] = [
     id: "vanasthalipuram",
     name: "Dr Sayuj Krishnan - Neurosurgeon near Vanasthalipuram",
     canonical_display_name: CANONICAL_PHYSICIAN_NAME,
-    slug: "locations/neurosurgeon-vanasthalipuram",
+    slug: "/locations/neurosurgeon-vanasthalipuram",
     address: YASHODA_MALAKPET_ADDRESS,
     telephone: CANONICAL_TELEPHONE,
     whatsapp: CANONICAL_WHATSAPP,
@@ -372,7 +375,7 @@ export const locations: LocationData[] = [
     id: "miyapur",
     name: "Dr Sayuj Krishnan - Neurosurgeon near Miyapur",
     canonical_display_name: CANONICAL_PHYSICIAN_NAME,
-    slug: "locations/neurosurgeon-miyapur",
+    slug: "/locations/neurosurgeon-miyapur",
     address: YASHODA_MALAKPET_ADDRESS,
     telephone: CANONICAL_TELEPHONE,
     whatsapp: CANONICAL_WHATSAPP,
@@ -381,6 +384,23 @@ export const locations: LocationData[] = [
     embed_url: REPO_EMBED,
     geo: YASHODA_GEO,
     areaServedName: "Miyapur",
+    top_services_slugs: DEFAULT_SERVICES,
+    top_conditions_slugs: DEFAULT_CONDITIONS,
+    sameAs: SOCIAL_PROFILES
+  },
+  {
+    id: "uppal",
+    name: "Dr Sayuj Krishnan - Neurosurgeon near Uppal",
+    canonical_display_name: CANONICAL_PHYSICIAN_NAME,
+    slug: "/locations/neurosurgeon-uppal",
+    address: YASHODA_MALAKPET_ADDRESS,
+    telephone: CANONICAL_TELEPHONE,
+    whatsapp: CANONICAL_WHATSAPP,
+    directions_url: YASHODA_DIRECTIONS,
+    google_maps_place_url: CANONICAL_MAPS_URL,
+    embed_url: REPO_EMBED,
+    geo: YASHODA_GEO,
+    areaServedName: "Uppal",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
     sameAs: SOCIAL_PROFILES
@@ -404,7 +424,8 @@ export type LocationId =
   | "madhapur"
   | "dilsukhnagar"
   | "vanasthalipuram"
-  | "miyapur";
+  | "miyapur"
+  | "uppal";
 
 export function getLocationById(id: string): LocationData | undefined {
   return locations.find(loc => loc.id === id);
@@ -413,3 +434,21 @@ export function getLocationById(id: string): LocationData | undefined {
 export function getLocationBySlug(slug: string): LocationData | undefined {
   return locations.find(loc => loc.slug === slug);
 }
+
+// Curated list of major areas for internal linking to avoid link farming
+// Used by LocalPathways component
+export const SERVICES_PATHWAY_AREAS: LocationId[] = [
+  'banjara-hills',
+  'jubilee-hills',
+  'hitech-city',
+  'gachibowli',
+  'kondapur',
+  'secunderabad'
+];
+
+export const CONDITIONS_PATHWAY_AREAS: LocationId[] = [
+  'banjara-hills',
+  'jubilee-hills',
+  'hitech-city',
+  'gachibowli'
+];

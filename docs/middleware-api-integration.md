@@ -302,6 +302,9 @@ async function setupDeploymentAlerts() {
         type: 'webhook',
         url: 'https://www.drsayuj.info/api/webhooks/middleware',
         method: 'POST',
+      headers: {
+        'x-middleware-secret': process.env.MIDDLEWARE_WEBHOOK_SECRET
+      }
       },
     ],
   });
@@ -336,6 +339,12 @@ setupDeploymentAlerts();
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
+  // Verify secret
+  const secret = request.headers.get('x-middleware-secret');
+  if (secret !== process.env.MIDDLEWARE_WEBHOOK_SECRET) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   try {
     const alert = await request.json();
     

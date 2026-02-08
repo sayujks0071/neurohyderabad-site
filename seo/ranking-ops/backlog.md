@@ -20,3 +20,13 @@
 - **Content Gap:** "Patient Education Video" embed. A 30-second animated explainer of the "Keyhole" vs "Open" difference.
 - **Content Gap:** "Anesthesia Protocol" dedicated page. "Awake vs Asleep" is a big patient concern.
 - [ ] **Location Pages:** Apply 'Why Travel' pattern to other location pages (Banjara Hills, Gachibowli, etc.) to address distance objections.
+
+## 2026-02-05
+- **Opportunity:** Add "Pre-surgery Prep Checklist" downloadable/interactive widget.
+- **Opportunity:** Add specific visual outcomes stats (e.g., "98% Walking Day 1") to Trust Strip.
+
+## 2026-02-07
+- **Content Gap:** Replicate "Insurance & Cashless Treatment" block on other key service pages (Brain Tumor, Microdiscectomy) to improve financial transparency sitewide.
+
+## 2026-02-08
+- **Internal Linking:** Ensure other "Service" pages (e.g., Epilepsy Surgery) have a clear "Red Flag" section linking back to "Condition" pages.

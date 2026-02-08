@@ -45,6 +45,7 @@
 - **Google Search Console:** SEO monitoring and indexing
 - **Google Analytics:** Analytics tracking
 - **Inngest:** Background job processing
+- **OpenClaw AI Assistant:** Patient support and agent operations
 
 ## Quick Commands
 

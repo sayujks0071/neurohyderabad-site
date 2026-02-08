@@ -58,7 +58,7 @@ function countWords(html) {
 
 async function run() {
   console.log('Fetching sitemap...');
-  const sitemapRes = await fetchUrl(`${SITE_URL}/sitemap.xml`);
+  const sitemapRes = await fetchUrl(`${SITE_URL}/sitemap-main.xml`);
 
   if (sitemapRes.statusCode !== 200) {
     console.error('Failed to fetch sitemap');

@@ -307,7 +307,7 @@ export default function MicrodiscectomySurgeryPage() {
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-blue-900 mb-6">Conditions Treated with Microdiscectomy</h2>
           <p className="text-gray-700 mb-8">
-            Microdiscectomy is ideal for patients with significant leg pain (sciatica) who have not improved with 6 weeks of conservative therapy (medicines/physio).
+            Microdiscectomy is ideal for patients with significant <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-700 underline hover:text-blue-800">leg pain (sciatica)</Link> who have not improved with 6 weeks of conservative therapy (medicines/physio).
           </p>
           <ul className="grid md:grid-cols-2 gap-4 text-sm text-gray-700">
             {conditions.map((condition) => (

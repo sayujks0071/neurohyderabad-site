@@ -11,7 +11,7 @@ const path = require('path');
 
 const SITE_URL = 'https://www.drsayuj.info';
 const SITEMAPS = [
-  '/sitemap.xml',
+  '/sitemap-main.xml',
   '/sitemap-blog.xml',
   '/sitemap-services.xml',
   '/sitemap-conditions.xml',

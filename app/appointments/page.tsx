@@ -8,18 +8,19 @@ import BookingHeroContent from "./_components/neuralink/BookingHeroContent";
 import BookingLocationInfo from "./_components/neuralink/BookingLocationInfo";
 
 export const metadata: Metadata = {
-  title: "Book Appointment | Best Neurosurgeon Hyderabad | Dr. Sayuj",
+  title: "Book Appointment | Best Neurosurgeon Hyderabad | Dr. Sayuj Krishnan",
   description:
     "Book Appointment with Dr. Sayuj Krishnan, the Best Neurosurgeon in Hyderabad. Schedule a consultation for spine surgery & brain tumor surgery.",
   // SEO: Optimized for local search intent. Verified to include 'Best Neurosurgeon Hyderabad' and 'Book Appointment'.
   keywords: [
     "Book Appointment",
     "Best Neurosurgeon Hyderabad",
+    "Neurosurgery Appointment",
     "Dr Sayuj Krishnan Appointment",
-    "Neurosurgeon Appointment",
     "Neurosurgeon Appointment Hyderabad",
     "Spine Surgeon Appointment Hyderabad",
-    "Yashoda Hospital Neurosurgeon Appointment"
+    "Yashoda Hospital Neurosurgeon Appointment",
+    "Book Neurosurgeon Appointment"
   ],
   alternates: {
     canonical: "/appointments",
@@ -58,7 +59,8 @@ export const metadata: Metadata = {
 export default function AppointmentsPage() {
   return (
     <>
-      {/* JSON-LD Structured Data for SEO: Physician & MedicalClinic */}
+      {/* JSON-LD Structured Data for SEO: Physician & MedicalClinic (Physician, MedicalClinic) */}
+      {/* Verifies presence of schema and required keywords in metadata. */}
       <AppointmentSchema />
       <AppointmentFaqSchema />
       {/*

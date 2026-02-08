@@ -6,6 +6,7 @@ import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
 import MedicalWebPageSchema from "../components/schemas/MedicalWebPageSchema";
 import CostTransparencySection from "../../src/components/CostTransparencySection";
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
+import PatientEducationVideos from "../_components/PatientEducationVideos";
 
 const spineCosts = [
   {
@@ -439,6 +440,8 @@ export default function SpineSurgeryPage() {
             </div>
           </div>
         </section>
+
+        <PatientEducationVideos category="spine" />
 
         {/* Patient Resources */}
         <section className="py-16 bg-blue-50">

@@ -4,6 +4,7 @@ import SchemaScript from "@/app/_components/SchemaScript";
 import LocalNAP from "@/app/_components/LocalNAP";
 import YMYLAttribution from "@/app/_components/YMYLAttribution";
 import { SITE_URL } from "@/src/lib/seo";
+import { LocalPathways } from '@/src/components/locations/LocalPathways';
 
 // Static generation with 24-hour revalidation
 export const revalidate = 86400;
@@ -454,6 +455,11 @@ export default function PainOnTopOfHeadCausesPage() {
           </ul>
         </div>
       </section>
+
+      <div className="mt-12">
+        <LocalPathways mode="condition" />
+      </div>
+
     </main>
   );
 }

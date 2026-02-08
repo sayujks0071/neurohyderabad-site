@@ -13,13 +13,14 @@ import SourceList from '@/app/_components/SourceList';
 import { getServiceSources } from '../sources';
 import MedicalWebPageSchema from '../../components/schemas/MedicalWebPageSchema';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
+import SurgeryComparisonTable from '@/src/components/SurgeryComparisonTable';
 
 const SERVICE_SLUG = 'spine-surgery-hyderabad';
 
 const baseMetadata = makeMetadata({
-  title: 'Spine Surgery Hyderabad | Minimally Invasive Specialist',
+  title: 'Best Spine Surgeon Hyderabad | Endoscopic Expert | Dr Sayuj',
   description:
-    'Minimally invasive spine surgery in Hyderabad. Walk the next day with keyhole endoscopic techniques for slip disc & sciatica. Expert care at Yashoda.',
+    'Expert spine surgeon in Hyderabad. Endoscopic keyhole surgery for slip disc & sciatica with 90% success. Book at Yashoda Malakpet.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
 });
 
@@ -79,6 +80,11 @@ const faqs = [
     answer:
       'Yes. Our coordination team assists patients travelling from across Telangana, Andhra Pradesh, and neighbouring states with scheduling, accommodation, and follow-up teleconsultations.',
   },
+  {
+    question: 'Is insurance and cashless treatment available for spine surgery?',
+    answer:
+      'Yes, we accept all major insurance providers and offer cashless facilities at Yashoda Hospitals. Our team handles the pre-authorization paperwork for seamless processing.',
+  },
 ];
 
 export default function SpineSurgeryHyderabadPage() {
@@ -124,7 +130,7 @@ export default function SpineSurgeryHyderabadPage() {
             <p className="text-lg text-gray-700 mb-6">
               Living with chronic back or neck pain can affect every part of your life. At Yashoda Hospital, Malakpet, Dr. Sayuj
               Krishnan delivers advanced spine surgery solutions for slipped discs, stenosis, instability, and deformity with a
-              strong focus on minimally invasive techniques.
+              strong focus on minimally invasive techniques. If you are suffering from radiating leg pain, learn more about our specialized <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-700 underline font-medium">sciatica relief</Link> protocols.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
@@ -151,6 +157,14 @@ export default function SpineSurgeryHyderabadPage() {
             </ul>
           </div>
         </header>
+
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-blue-900 mb-6">Endoscopic vs. Traditional Spine Surgery</h2>
+          <p className="text-gray-700 mb-6">
+            Understanding the difference between traditional open surgery and modern endoscopic techniques is crucial for making an informed decision. Dr. Sayuj prioritizes tissue-preserving methods that allow for faster recovery.
+          </p>
+          <SurgeryComparisonTable />
+        </section>
 
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-blue-900 mb-6">Conditions We Treat with Spine Surgery</h2>

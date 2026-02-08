@@ -1,6 +1,11 @@
 import pkg from "workflow/next";
 const { withWorkflow } = pkg;
 import MiddlewareWebpackPlugin from "@middleware.io/sourcemap-uploader/dist/webpack-plugin";
+import withBundleAnalyzer from '@next/bundle-analyzer';
+
+const bundleAnalyzer = withBundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+});
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -43,6 +48,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'images.unsplash.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'i.ytimg.com',
+      },
     ],
     // Allow query strings for dynamic OG images
     dangerouslyAllowSVG: true,
@@ -68,11 +77,17 @@ const nextConfig = {
         destination: '/sitemap.xml',
         permanent: true,
       },
-      // CRITICAL: Apex domain redirect to www (single hop 301)
+      // CRITICAL: Consolidate .com -> canonical .info (single hop 301)
       {
         source: '/:path*',
         has: [{ type: 'host', value: 'drsayuj.com' }],
-        destination: 'https://www.drsayuj.com/:path*',
+        destination: 'https://www.drsayuj.info/:path*',
+        permanent: true,
+      },
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.drsayuj.com' }],
+        destination: 'https://www.drsayuj.info/:path*',
         permanent: true,
       },
       // CRITICAL: Apex domain redirect for drsayuj.info to www (single hop 301)
@@ -174,12 +189,70 @@ const nextConfig = {
         destination: '/neurosurgeon-hitech-city',
         permanent: true,
       },
+      // Consolidate duplicate /locations/* variants to canonical /neurosurgeon-* pages
+      {
+        source: '/locations/brain-spine-surgeon-jubilee-hills',
+        destination: '/neurosurgeon-jubilee-hills',
+        permanent: true,
+      },
+      {
+        source: '/locations/brain-spine-surgeon-banjara-hills',
+        destination: '/neurosurgeon-banjara-hills',
+        permanent: true,
+      },
+      {
+        source: '/locations/brain-spine-surgeon-hitec-city',
+        destination: '/neurosurgeon-hitech-city',
+        permanent: true,
+      },
+      {
+        source: '/locations/banjara-hills',
+        destination: '/neurosurgeon-banjara-hills',
+        permanent: true,
+      },
+      {
+        source: '/locations/hitech-city',
+        destination: '/neurosurgeon-hitech-city',
+        permanent: true,
+      },
+      {
+        source: '/locations/malakpet',
+        destination: '/neurosurgeon-malakpet',
+        permanent: true,
+      },
+      {
+        source: '/locations/hyderabad',
+        destination: '/neurosurgeon-hyderabad',
+        permanent: true,
+      },
+      {
+        source: '/locations/hyderabad/',
+        destination: '/neurosurgeon-hyderabad',
+        permanent: true,
+      },
+      {
+        source: '/locations/neurosurgeon-jubilee-hills',
+        destination: '/neurosurgeon-jubilee-hills',
+        permanent: true,
+      },
+      {
+        source: '/locations/secunderabad',
+        destination: '/neurosurgeon-secunderabad',
+        permanent: true,
+      },
     ];
   },
 
   // Security and SEO-friendly defaults with caching
   async headers() {
     return [
+      {
+        source: "/robots.txt",
+        headers: [
+          { key: "Content-Type", value: "text/plain; charset=utf-8" },
+          { key: "Cache-Control", value: "public, max-age=604800" }
+        ]
+      },
       {
         source: "/((?!_next|api|images|favicon.ico|robots.txt|sitemap.xml|site.webmanifest).*)",
         headers: [
@@ -249,14 +322,14 @@ const nextConfig = {
         ]
       },
       {
-        source: "/sitemap.xml",
+        source: "/sitemap-images.xml",
         headers: [
           { key: "Content-Type", value: "application/xml; charset=utf-8" },
           { key: "Cache-Control", value: "public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400" }
         ]
       },
       {
-        source: "/sitemap-:path.xml",
+        source: "/sitemap-videos.xml",
         headers: [
           { key: "Content-Type", value: "application/xml; charset=utf-8" },
           { key: "Cache-Control", value: "public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400" }
@@ -285,4 +358,4 @@ const nextConfig = {
 
 // Wrap with withWorkflow to enable workflow directives
 // The workflow package handles both webpack and turbopack configurations internally
-export default withWorkflow(nextConfig);
+export default withWorkflow(bundleAnalyzer(nextConfig));

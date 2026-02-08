@@ -70,7 +70,7 @@ const DELAY_MS = 100; // 100ms delay between requests
 
 // All sitemaps to extract URLs from
 const SITEMAPS = [
-  '/sitemap.xml',
+  '/sitemap-main.xml',
   '/sitemap-blog.xml',
   '/sitemap-services.xml',
   '/sitemap-conditions.xml',

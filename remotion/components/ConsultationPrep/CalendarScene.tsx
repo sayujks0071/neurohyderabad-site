@@ -1,5 +1,7 @@
-import { spring, useCurrentFrame, useVideoConfig, interpolate } from 'remotion';
+import { useMemo } from 'react';
+import { spring, useCurrentFrame, useVideoConfig } from 'remotion';
 import { COLORS, FONTS, SPACING } from '../../utils/colorTokens';
+import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
 
 export interface CalendarSceneProps {
   appointmentDate: string; // YYYY-MM-DD
@@ -12,6 +14,7 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   // Parse the date
   const date = new Date(appointmentDate + 'T00:00:00');
@@ -21,7 +24,7 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
   const dayName = date.toLocaleDateString('en-US', { weekday: 'long' });
 
   // 1. Main Card Entrance (Pop in)
-  const calendarScale = spring({
+  const calendarScale = useMemo(() => prefersReducedMotion ? 1 : spring({
     frame,
     fps,
     from: 0.5,
@@ -31,18 +34,18 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
       damping: 12,
       stiffness: 100,
     },
-  });
+  }), [frame, fps, prefersReducedMotion]);
 
-  const calendarOpacity = spring({
+  const calendarOpacity = useMemo(() => prefersReducedMotion ? 1 : spring({
     frame,
     fps,
     from: 0,
     to: 1,
     durationInFrames: 20,
-  });
+  }), [frame, fps, prefersReducedMotion]);
 
   // 2. Day Number Pop (Staggered)
-  const dayNumberScale = spring({
+  const dayNumberScale = useMemo(() => prefersReducedMotion ? 1 : spring({
     frame: frame - 15,
     fps,
     from: 0,
@@ -52,47 +55,47 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
       damping: 10,
       stiffness: 120,
     },
-  });
+  }), [frame, fps, prefersReducedMotion]);
 
   // 3. Highlight Ring Animation
-  const ringProgress = spring({
+  const ringProgress = useMemo(() => prefersReducedMotion ? 1 : spring({
     frame: frame - 20,
     fps,
     from: 0,
     to: 1,
     durationInFrames: 40,
     config: { damping: 100 },
-  });
+  }), [frame, fps, prefersReducedMotion]);
 
   // 4. Time Section Slide Up (Staggered)
-  const timeSlide = spring({
+  const timeSlide = useMemo(() => prefersReducedMotion ? 0 : spring({
     frame: frame - 25,
     fps,
     from: 50,
     to: 0,
     durationInFrames: 25,
     config: { damping: 15 },
-  });
+  }), [frame, fps, prefersReducedMotion]);
 
-  const timeOpacity = spring({
+  const timeOpacity = useMemo(() => prefersReducedMotion ? 1 : spring({
     frame: frame - 25,
     fps,
     from: 0,
     to: 1,
     durationInFrames: 20,
-  });
+  }), [frame, fps, prefersReducedMotion]);
 
   // 5. Bottom Text Animation
-  const textOpacity = spring({
+  const textOpacity = useMemo(() => prefersReducedMotion ? 1 : spring({
     frame: frame - 35,
     fps,
     from: 0,
     to: 1,
     durationInFrames: 25,
-  });
+  }), [frame, fps, prefersReducedMotion]);
 
   // Floating animation for "alive" feel
-  const floatingY = Math.sin(frame / 60) * 8;
+  const floatingY = prefersReducedMotion ? 0 : Math.sin(frame / 60) * 8;
 
   return (
     <div

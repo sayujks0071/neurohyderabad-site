@@ -15,6 +15,7 @@ const PUBLIC_IMAGES_DIR = path.join(process.cwd(), 'public', 'images');
 
 function generateImageSitemap() {
   const images = [];
+  const seen = new Set();
   
   // Core images
   const coreImages = [
@@ -38,12 +39,22 @@ function generateImageSitemap() {
     }
   ];
   
-  images.push(...coreImages);
+  for (const img of coreImages) {
+    if (seen.has(img.loc)) continue;
+    seen.add(img.loc);
+    images.push(img);
+  }
   
   // Scan public/images directory if it exists
   if (fs.existsSync(PUBLIC_IMAGES_DIR)) {
+    // Avoid including large/unnecessary duplicates. The canonical portrait is `*-portrait-optimized.jpg`.
+    const DENY_FILES = new Set([
+      'dr-sayuj-krishnan-portrait.jpg',
+    ]);
+
     const imageFiles = fs.readdirSync(PUBLIC_IMAGES_DIR)
       .filter(file => /\.(jpg|jpeg|png|webp|avif)$/i.test(file))
+      .filter(file => !DENY_FILES.has(file))
       .map(file => ({
         loc: `${SITE_URL}/images/${file}`,
         caption: file.replace(/[-_]/g, ' ').replace(/\.[^/.]+$/, ''),
@@ -51,7 +62,11 @@ function generateImageSitemap() {
         license: `${SITE_URL}/content-integrity`
       }));
     
-    images.push(...imageFiles);
+    for (const img of imageFiles) {
+      if (seen.has(img.loc)) continue;
+      seen.add(img.loc);
+      images.push(img);
+    }
   }
   
   // Generate XML

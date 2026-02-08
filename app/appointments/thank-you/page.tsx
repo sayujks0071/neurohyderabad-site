@@ -2,6 +2,7 @@ import { SITE_URL } from "@/src/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CheckCircle2, Calendar, Phone, Mail, Clock, MapPin } from "lucide-react";
+import { APPOINTMENT_SUCCESS_MESSAGE } from "@/packages/appointment-form/constants";
 
 export const metadata: Metadata = {
   title: "Thank You for Your Appointment Request | Dr Sayuj Krishnan",
@@ -37,7 +38,7 @@ export default function AppointmentThankYouPage() {
               Thank You for Reaching Out!
             </h1>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Appointment request received. Please bring any MRI/CT scans with you. We will confirm via phone shortly.
+              {APPOINTMENT_SUCCESS_MESSAGE}
             </p>
           </div>
 

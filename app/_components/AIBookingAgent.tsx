@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Loader2 } from 'lucide-react';
 import { useStatsigEvents } from '../../src/lib/statsig-events';
+import { APPOINTMENT_SUCCESS_MESSAGE } from '@/packages/appointment-form/constants';
 
 interface Message {
   id: string;
@@ -154,7 +155,7 @@ export default function AIBookingAgent({ pageSlug, service }: AIBookingAgentProp
         return `Great! I have all the information I need. Let me summarize your appointment request and connect you with our scheduling team. One moment please...`;
 
       case 'confirmation':
-        return "Appointment request received. Please bring any MRI/CT scans with you. We will confirm via phone shortly. Is there anything else I can help you with?";
+        return `${APPOINTMENT_SUCCESS_MESSAGE} Is there anything else I can help you with?`;
 
       default:
         return "I'm here to help you book an appointment with Dr. Sayuj Krishnan. How can I assist you today?";

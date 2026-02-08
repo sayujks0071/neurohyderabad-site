@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { sendPreAppointmentBriefingEmail } from '@/lib/email';
+import { generatePatientEducation } from '@/src/lib/gemini/file-search';
+import { rateLimit } from '@/src/lib/rate-limit';
+
+// 🛡️ Sentinel: Ensure Node.js runtime for Gemini libraries
+export const runtime = 'nodejs';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -20,6 +25,17 @@ const SECTION_HEADINGS = {
 
 export async function POST(request: NextRequest) {
   try {
+    // 🛡️ Sentinel: Rate limit to prevent spam (5 requests per 10 mins per IP)
+    const ip = request.headers.get("x-forwarded-for")?.split(",")[0].trim() || "127.0.0.1";
+    const { success } = rateLimit(ip, 5, 10 * 60 * 1000);
+
+    if (!success) {
+      return NextResponse.json(
+        { error: "Too many requests. Please try again later." },
+        { status: 429 }
+      );
+    }
+
     const body = (await request.json()) as Partial<BriefingRequestBody>;
     const { patientEmail, patientName, condition, procedureType, appointmentDate } = body;
     const trimmedEmail = patientEmail?.trim();
@@ -41,32 +57,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const baseUrl =
-      process.env.NEXT_PUBLIC_BASE_URL ||
-      (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000');
-
-    const geminiResponse = await fetch(`${baseUrl}/api/gemini-files/search`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        searchType: 'patient-education',
-        condition: trimmedCondition,
-        query: `${trimmedProcedure} preparation and recovery for ${trimmedCondition}`,
-        tone: 'friendly',
-        readingLevel: 'patient',
-        temperature: 0.4,
-      }),
-    });
-
-    if (!geminiResponse.ok) {
-      throw new Error(`Gemini search failed with status ${geminiResponse.status}`);
-    }
-
-    const geminiData = await geminiResponse.json();
-    const briefingContent = geminiData?.answer?.trim();
+    // 🛡️ Sentinel: Call internal logic directly instead of insecure/failing fetch
+    // Using explicit procedure + condition context for better content generation
+    const searchContext = `${trimmedProcedure} for ${trimmedCondition}`;
+    const { answer: briefingContent, sources: searchSources } = await generatePatientEducation(searchContext, []);
 
     if (!briefingContent) {
-      throw new Error('Gemini search did not return briefing content');
+      throw new Error('Gemini generation returned empty content');
     }
 
     const sections = {
@@ -75,7 +72,9 @@ export async function POST(request: NextRequest) {
       recovery: extractSection(briefingContent, SECTION_HEADINGS.recovery),
       questionsToAsk: extractSection(briefingContent, SECTION_HEADINGS.questionsToAsk),
     };
-    const sources = formatSources(geminiData);
+
+    // Map sources from search result if available
+    const sources: string[] = searchSources?.map(s => s.displayName) || [];
 
     const emailResult = await sendPreAppointmentBriefingEmail({
       patientEmail: trimmedEmail,
@@ -89,11 +88,15 @@ export async function POST(request: NextRequest) {
     });
 
     if (!emailResult.success) {
+      console.error('Email sending failed:', emailResult.error);
       return NextResponse.json(
-        { error: emailResult.error || 'Failed to send briefing email' },
+        { error: 'Failed to send briefing email' },
         { status: 502 }
       );
     }
+
+    // 🛡️ Sentinel: Log success with redacted PII
+    console.log(`Briefing sent successfully to ${trimmedEmail[0]}***@${trimmedEmail.split('@')[1]}`);
 
     return NextResponse.json({
       success: true,
@@ -106,7 +109,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         error: 'Failed to send briefing',
-        details: error instanceof Error ? error.message : 'Unknown error',
+        // 🛡️ Sentinel: Don't expose internal error details to client
+        details: 'An internal error occurred',
       },
       { status: 500 }
     );
@@ -121,19 +125,5 @@ function extractSection(content: string, headings: string[]): string | undefined
       return match[1].trim();
     }
   }
-  return undefined;
-}
-
-function formatSources(geminiData: any): string[] | undefined {
-  if (Array.isArray(geminiData?.sources) && geminiData.sources.length > 0) {
-    return geminiData.sources.map(
-      (source: { fileName?: string; uri?: string }) => source.fileName || source.uri
-    );
-  }
-
-  if (Array.isArray(geminiData?.usedFiles) && geminiData.usedFiles.length > 0) {
-    return geminiData.usedFiles;
-  }
-
   return undefined;
 }

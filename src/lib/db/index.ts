@@ -219,6 +219,14 @@ export const appointments = {
       FROM appointments
     `);
   },
+
+  checkSlot: async (date: string, time: string) => {
+    const result = await db.queryOne<{ count: string }>(
+      "SELECT COUNT(*) as count FROM appointments WHERE preferred_date = $1 AND preferred_time = $2 AND status != 'cancelled'",
+      [date, time]
+    );
+    return Number(result?.count || 0);
+  },
 };
 
 export const patients = {
