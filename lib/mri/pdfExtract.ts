@@ -69,7 +69,7 @@ export async function extractPdfTextInSandbox(pdfBuffer: Buffer): Promise<Extrac
       cmd: 'sh',
       args: ['-c', 'npm i pdf-parse@1.1.1 --silent && node extract.mjs'],
       timeoutMs: 120000,
-    });
+    }) as { stdout: string; stderr: string; exitCode: number };
 
     if (result.exitCode !== 0) {
       console.error('Sandbox stderr:', result.stderr);

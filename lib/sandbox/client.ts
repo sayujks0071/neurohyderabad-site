@@ -14,14 +14,11 @@ export interface CreateSandboxOptions {
 
 export async function createSandbox(options: CreateSandboxOptions = {}) {
   try {
-    let networkPolicy;
-    if (options.network) {
-      networkPolicy = {
+    const networkPolicy = options.network ? {
         type: 'restricted' as const,
         allowedDomains: options.network.allow,
         deniedCIDRs: options.network.deny,
-      };
-    }
+    } : undefined;
 
     const sandbox = await Sandbox.create({
       // @ts-ignore
