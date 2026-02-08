@@ -18,7 +18,15 @@ export async function GET(request: Request) {
 
   try {
     const sandbox = await Sandbox.get({ sandboxId });
-    const cmd = await sandbox.getCommand(cmdId);
+
+    // Cast sandbox to any to access potentially experimental getCommand
+    const sb = sandbox as any;
+    if (typeof sb.getCommand !== 'function') {
+         // Fallback or error if SDK doesn't support retrieving command by ID
+         throw new Error("Sandbox SDK does not support getCommand");
+    }
+
+    const cmd = await sb.getCommand(cmdId);
 
     const stdout = await cmd.output("stdout");
     const stderr = await cmd.output("stderr");
@@ -33,6 +41,7 @@ export async function GET(request: Request) {
     });
 
   } catch (error: any) {
+     console.error("Job status check failed:", error);
      return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
