@@ -23,9 +23,9 @@ import Section from "./_components/Section";
 import FAQPageSchema from "./_components/FAQPageSchema";
 import HeroCTAButtons from "./_components/HeroCTAButtons";
 import PatientEducationVideosSkeleton from "./_components/skeletons/PatientEducationVideosSkeleton";
+import TrustSignals from "./_components/TrustSignals";
 
 // Dynamic imports for Lazy components
-const TrustSignals = dynamic(() => import('./_components/TrustSignals'));
 const ExpandedFAQ = dynamic(() => import('../src/components/ExpandedFAQ'));
 const RemotionVideoEmbedWrapper = dynamic(() => import('./_components/RemotionVideoEmbedWrapper'));
 const LocationNAPCard = dynamic(() => import('@/src/components/locations/LocationNAPCard').then(mod => mod.LocationNAPCard), {

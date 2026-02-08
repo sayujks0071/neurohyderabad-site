@@ -1,15 +1,15 @@
 {
-  "timestamp": "2025-02-17T12:00:00Z",
+  "timestamp": "2025-02-18T12:00:00Z",
   "commit_hash": "HEAD",
   "notes": {
-    "home": "Static generation successful. Hero image has priority.",
-    "appointment": "NeuraLinkBookingApp uses client-side form. Fixed schema type error to enable build.",
-    "location": "Static generation successful (force-static).",
-    "condition": "Static generation successful."
+    "home": "Identified TrustSignals dynamic import causing CLS on load. Converted to static import.",
+    "appointment": "Verified NeuraLinkBookingApp uses optimized loading.",
+    "location": "No changes needed.",
+    "condition": "No changes needed."
   },
   "fix": {
-    "description": "Fixed TypeScript error in packages/appointment-form/schema.ts regarding mriScanAvailable type mismatch.",
-    "impact": "Unblocked build and deployment. Ensured BookingForm consistency.",
-    "verification": "pnpm build passed."
+    "description": "Converted `TrustSignals` from dynamic to static import in `app/page.tsx`.",
+    "impact": "Eliminated CLS caused by `TrustSignals` loading client-side without a placeholder. It is now server-rendered.",
+    "verification": "Manual code inspection confirms static import. Build verified with `pnpm build` (after fixing unrelated build errors)."
   }
 }
