@@ -69,7 +69,7 @@ export async function POST(request: Request) {
 
     const cmd = await sandbox.runCommand({
         cmd: jobConfig.cmd,
-        args: jobConfig.args,
+        args: [...jobConfig.args],
         env,
         detached: true,
     });
