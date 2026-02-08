@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import dynamic from 'next/dynamic';
+import ExpandedFAQ from "../src/components/ExpandedFAQ";
 import LazySection from "./_components/LazySection";
 import { SITE_URL } from "../src/lib/seo";
 import { makeMetadata } from "@/app/_lib/meta";
@@ -25,42 +25,9 @@ import HeroCTAButtons from "./_components/HeroCTAButtons";
 import PatientEducationVideosSkeleton from "./_components/skeletons/PatientEducationVideosSkeleton";
 import TrustSignals from "./_components/TrustSignals";
 
-// Dynamic imports for Lazy components
-const ExpandedFAQ = dynamic(() => import('../src/components/ExpandedFAQ'));
-const RemotionVideoEmbedWrapper = dynamic(() => import('./_components/RemotionVideoEmbedWrapper'));
-const LocationNAPCard = dynamic(() => import('@/src/components/locations/LocationNAPCard').then(mod => mod.LocationNAPCard), {
-  loading: () => <div className="h-64 bg-gray-100 rounded-xl animate-pulse"></div>
-});
-
-const PatientEducationVideos = dynamic(() => import('./_components/PatientEducationVideos'), {
-  loading: () => <PatientEducationVideosSkeleton />
-});
-
-const RecoveryTimeline = dynamic(() => import('./_components/RecoveryTimeline'), {
-  loading: () => (
-    <div className="py-16 bg-slate-950">
-      <div className="container mx-auto px-4">
-        <div className="max-w-5xl mx-auto">
-          {/* CLS Optimization: Explicit height matches 5 vertical milestones + header */}
-          <div className="animate-pulse bg-slate-800 h-[1500px] md:h-[1400px] rounded-lg"></div>
-        </div>
-      </div>
-    </div>
-  )
-});
-
-const LocalReputationPanel = dynamic(() => import('./_components/LocalReputationPanel'), {
-  loading: () => (
-    <div className="py-8 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <div className="max-w-6xl mx-auto">
-          {/* CLS Optimization: Explicit height matches testimonials grid + trust indicators */}
-          <div className="animate-pulse bg-gray-200 h-[1100px] md:h-[600px] rounded-lg"></div>
-        </div>
-      </div>
-    </div>
-  )
-});
+import PatientEducationVideosWrapper from "./_components/wrappers/PatientEducationVideosWrapper";
+import RecoveryTimelineWrapper from "./_components/wrappers/RecoveryTimelineWrapper";
+import LocalReputationPanelWrapper from "./_components/wrappers/LocalReputationPanelWrapper";
 
 const HOME_CANONICAL = SITE_URL.endsWith("/") ? SITE_URL : `${SITE_URL}/`;
 
@@ -339,7 +306,7 @@ export default function Home() {
         <LazySection
           placeholder={<PatientEducationVideosSkeleton />}
         >
-          <PatientEducationVideos />
+          <PatientEducationVideosWrapper />
         </LazySection>
 
         {/* Animated Service Showcase Video */}
@@ -635,7 +602,7 @@ export default function Home() {
             </div>
           }
         >
-          <RecoveryTimeline />
+          <RecoveryTimelineWrapper />
         </LazySection>
 
         {/* Trigeminal Neuralgia Care */}
@@ -931,7 +898,7 @@ export default function Home() {
             </div>
           }
         >
-          <LocalReputationPanel />
+          <LocalReputationPanelWrapper />
         </LazySection>
 
         {/* Disease Guides Section */}
