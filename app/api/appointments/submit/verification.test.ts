@@ -92,7 +92,7 @@ describe('POST /api/appointments/submit', () => {
     }));
   });
 
-  it('should handle missing optional fields (painScore/mriScanAvailable)', async () => {
+  it('should reject missing mandatory fields (painScore/mriScanAvailable)', async () => {
     const payload = {
       patientName: 'Test Patient 2',
       email: 'test2@example.com',
@@ -114,13 +114,9 @@ describe('POST /api/appointments/submit', () => {
     });
 
     const response = await POST(request);
-    expect(response.status).toBe(200);
-
-    expect(appointments.create).toHaveBeenCalledWith(expect.objectContaining({
-      patient_name: 'Test Patient 2',
-      pain_score: undefined,
-      mri_scan_available: undefined,
-    }));
+    expect(response.status).toBe(400);
+    const body = await response.json();
+    expect(body.error).toBeDefined();
   });
 
   it('should reject invalid painScore values', async () => {

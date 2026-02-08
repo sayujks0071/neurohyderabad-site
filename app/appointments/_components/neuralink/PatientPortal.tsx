@@ -17,7 +17,6 @@ import {
   Sparkles,
   Wand2,
   Search,
-  Cloud,
   Check,
   Info,
   ShieldCheck,
@@ -722,7 +721,7 @@ const PatientPortal = () => {
 
                 <div>
                   <label htmlFor="patient-pain-score" className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">
-                    Current Pain Level (1-10)
+                    Current Pain Score (1-10)
                   </label>
                   <div className="flex items-center gap-4">
                     <span className="text-sm font-bold text-slate-400" aria-hidden="true">1</span>
@@ -831,7 +830,7 @@ const PatientPortal = () => {
                   type="submit"
                   disabled={isAnalyzing || isSyncing}
                   className={`w-full py-4 rounded-2xl text-white font-bold text-lg shadow-xl transition-all flex items-center justify-center relative overflow-hidden ${isAnalyzing || isSyncing
-                    ? "bg-slate-800"
+                    ? "bg-blue-600 opacity-50 cursor-not-allowed"
                     : "bg-blue-600 hover:bg-blue-700 hover:shadow-blue-200"
                     }`}
                 >

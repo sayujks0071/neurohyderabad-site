@@ -11,4 +11,4 @@
 
 <!-- Jules Automation -->
 <!-- Managed by Jules -->
-<!-- v1.7 -->
+<!-- v1.8 -->

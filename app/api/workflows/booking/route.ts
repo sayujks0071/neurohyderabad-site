@@ -6,7 +6,6 @@
  */
 
 import { NextRequest, NextResponse } from "next/server";
-import { generateBookingConfirmation } from "@/src/lib/appointments/gemini";
 import type { BookingData } from "@/packages/appointment-form/types";
 import { sendConfirmationEmail, sendAdminNotificationEmail } from "@/src/lib/appointments/email";
 import { submitToGoogleSheets } from "@/src/lib/google-sheets";
@@ -46,11 +45,11 @@ export async function POST(request: NextRequest) {
     const source = typeof body.source === "string" ? body.source : undefined;
 
     // Validate required fields
-    if (!name || !email || !phone || !preferredDate || !chiefComplaint) {
+    if (!name || !email || !phone || !preferredDate || !chiefComplaint || painScore === undefined || mriScanAvailable === undefined) {
       return NextResponse.json(
         {
           error: "Missing required fields",
-          required: ["name", "email", "phone", "preferredDate", "chiefComplaint"],
+          required: ["name", "email", "phone", "preferredDate", "chiefComplaint", "painScore", "mriScanAvailable"],
         },
         { status: 400 }
       );
@@ -70,66 +69,29 @@ export async function POST(request: NextRequest) {
       mriScanAvailable,
     };
 
-    console.log(`[API] Processing booking for ${name}`);
-
-    // 1. Generate AI Confirmation
-    const { message: confirmationMessage, usedAI } = await generateBookingConfirmation(booking);
-
-    // 2. Send Emails (Parallel)
-    const [confirmationResult, adminEmailResult] = await Promise.all([
-      sendConfirmationEmail(booking, confirmationMessage),
-      sendAdminNotificationEmail(booking, source),
-    ]);
-
-    if (!confirmationResult.success) {
-      console.error(`[API] Failed to send user confirmation email: ${confirmationResult.error}`);
-    }
-
-    if (!adminEmailResult.success) {
-      console.error(`[API] Failed to send admin notification: ${adminEmailResult.error}`);
-    }
-
-    // 2.5 Save to Postgres Database
-    void appointments.create({
-      patient_name: booking.patientName,
-      patient_email: booking.email,
-      patient_phone: booking.phone,
-      preferred_date: booking.appointmentDate,
-      preferred_time: booking.appointmentTime,
-      appointment_type: appointmentType,
-      chief_complaint: chiefComplaint,
-      intake_notes: intakeNotes,
-      patient_age: Number(booking.age) || undefined,
-      patient_gender: booking.gender,
-      pain_score: booking.painScore,
-      mri_scan_available: booking.mriScanAvailable,
+    const result = await processBooking(booking, {
       source: source || "website",
-      confirmation_message: confirmationMessage,
-      used_ai_confirmation: usedAI,
-    }).catch((error) => {
-      console.error("[API] Failed to save to Postgres:", error);
+      appointmentType,
+      intakeNotes,
+      chiefComplaint: chiefComplaint // Pass original chiefComplaint for DB column
     });
 
-    // 3. Sync to Google Sheets (CRM)
-    const sheetsResult = await submitToGoogleSheets({
-      fullName: booking.patientName,
-      email: booking.email,
-      phone: booking.phone,
-      concern: booking.reason.slice(0, 100),
-      preferredDate: booking.appointmentDate,
-      preferredTime: booking.appointmentTime,
-      source: source || "website",
-      metadata: {
-        age: booking.age,
-        gender: booking.gender,
-        bookingReason: booking.reason,
-        painScore: booking.painScore,
-        mriScanAvailable: booking.mriScanAvailable,
-      },
-    });
-
-    if (!sheetsResult.success) {
-      console.warn(`[API] Google Sheets sync failed: ${sheetsResult.message}`);
+    if (result.success) {
+      return NextResponse.json({
+        message: result.message,
+        patientName: result.patientName,
+        status: result.status,
+        confirmationMessage: result.confirmationMessage,
+        usedAI: result.usedAI,
+      });
+    } else {
+      return NextResponse.json(
+        {
+          error: result.error || "Failed to process booking",
+          message: result.message || "Unknown error",
+        },
+        { status: 500 }
+      );
     }
 
     // 4. Trigger Webhooks
