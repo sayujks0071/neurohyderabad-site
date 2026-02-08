@@ -282,7 +282,7 @@ function buildBookingData(
     appointmentDate: date,
     appointmentTime: time,
     reason: patientInfo.intakeNotes || patientInfo.chiefComplaint,
-    painScore: patientInfo.painScore ?? 0,
+    painScore: patientInfo.painScore ?? 5,
     mriScanAvailable: patientInfo.mriScanAvailable ?? false,
   };
 }

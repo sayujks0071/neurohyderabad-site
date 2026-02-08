@@ -40,8 +40,8 @@ export async function POST(request: NextRequest) {
       ? (genderRaw as BookingData["gender"])
       : "other"; // Default fallback
 
-    const painScore = typeof body.painScore === "number" ? body.painScore : undefined;
-    const mriScanAvailable = typeof body.mriScanAvailable === "boolean" ? body.mriScanAvailable : undefined;
+    const painScore = typeof body.painScore === "number" ? body.painScore : 5;
+    const mriScanAvailable = typeof body.mriScanAvailable === "boolean" ? body.mriScanAvailable : false;
     const source = typeof body.source === "string" ? body.source : undefined;
 
     // Validate required fields
