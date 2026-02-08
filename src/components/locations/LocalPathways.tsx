@@ -13,13 +13,25 @@ interface LocalPathwaysProps {
   location?: LocationData; // Legacy support
 }
 
-// Simple formatter for slugs if no mapping available
+// Improved formatter for slugs
 const formatSlug = (slug: string) => {
-  return slug
+  // Remove common suffixes and prefixes
+  const cleanSlug = slug
     .replace(/-hyderabad$/, '')
+    .replace(/^best-/, '')
+    .replace(/-treatment$/, '')
+    .replace(/-surgery$/, ' Surgery'); // Preserve 'Surgery' if it was part of the slug context
+
+  return cleanSlug
     .split('-')
     .map(w => w.charAt(0).toUpperCase() + w.slice(1))
     .join(' ');
+};
+
+// Helper to construct href safely
+const getHref = (type: 'service' | 'condition', slug: string) => {
+  if (slug.startsWith('/')) return slug;
+  return `/${type}s/${slug}`; // Note plural 'services' / 'conditions'
 };
 
 export const LocalPathways: React.FC<LocalPathwaysProps> = ({
@@ -62,7 +74,7 @@ export const LocalPathways: React.FC<LocalPathwaysProps> = ({
               {effectiveLocation.top_services_slugs.map(slug => {
                  const title = formatSlug(slug);
                  return (
-                  <Link key={slug} href={`/services/${slug}`} className={linkClass}>
+                  <Link key={slug} href={getHref('service', slug)} className={linkClass}>
                     <span className="font-medium text-gray-700 group-hover:text-blue-600 transition-colors">{title}</span>
                     <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-blue-600" />
                   </Link>
@@ -80,9 +92,8 @@ export const LocalPathways: React.FC<LocalPathwaysProps> = ({
             <div className="space-y-3">
               {effectiveLocation.top_conditions_slugs.map(slug => {
                  const title = formatSlug(slug);
-                 const href = `/conditions/${slug}`;
                  return (
-                  <Link key={slug} href={href} className={linkClass}>
+                  <Link key={slug} href={getHref('condition', slug)} className={linkClass}>
                     <span className="font-medium text-gray-700 group-hover:text-emerald-600 transition-colors">{title}</span>
                     <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-emerald-600" />
                   </Link>

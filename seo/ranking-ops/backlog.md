@@ -27,3 +27,6 @@
 
 ## 2026-02-07
 - **Content Gap:** Replicate "Insurance & Cashless Treatment" block on other key service pages (Brain Tumor, Microdiscectomy) to improve financial transparency sitewide.
+
+## 2026-02-08
+- **Internal Linking:** Ensure other "Service" pages (e.g., Epilepsy Surgery) have a clear "Red Flag" section linking back to "Condition" pages.

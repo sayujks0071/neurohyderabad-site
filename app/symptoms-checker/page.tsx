@@ -20,9 +20,44 @@ export const metadata: Metadata = {
   },
 };
 
+function generateSymptomCheckerSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'MedicalWebPage',
+    name: 'AI-Powered Symptom Checker',
+    description: 'AI-powered tool for preliminary symptom analysis and triage guidance.',
+    url: `${SITE_URL}/symptoms-checker`,
+    author: {
+      '@type': 'Person',
+      name: 'Dr. Sayuj Krishnan',
+      url: `${SITE_URL}/about/`,
+    },
+    specialty: 'Neurosurgery',
+    audience: 'Patients',
+    lastReviewed: new Date().toISOString().split('T')[0],
+    mainEntity: {
+      '@type': 'SoftwareApplication',
+      name: 'Dr. Sayuj AI Symptom Checker',
+      applicationCategory: 'MedicalApplication',
+      operatingSystem: 'Web',
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'INR'
+      }
+    }
+  };
+}
+
 export default function SymptomsCheckerPage() {
   return (
     <main className="container mx-auto px-4 py-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(generateSymptomCheckerSchema()),
+        }}
+      />
       <div className="max-w-4xl mx-auto">
         {/* Header Section */}
         <div className="text-center mb-12">

@@ -6,21 +6,26 @@ export interface CreateSandboxOptions {
   timeoutMs?: number;
   vcpus?: number;
   network?: { allow: string[]; deny: string[] };
-  env?: Record<string, string>; // Kept for future use or if passed to runCommand implicitly?
-                                // Actually, env is usually for runCommand, but if create supports it (some versions), we pass it.
-                                // Sandbox 1.4.1 doesn't seem to support env in create, but let's leave the interface.
+  env?: Record<string, string>;
   source?: any; // For git source
 }
 
 export async function createSandbox(options: CreateSandboxOptions = {}) {
   try {
+    const networkPolicy = options.network ? {
+        type: 'restricted' as const,
+        allowedDomains: options.network.allow,
+        deniedCIDRs: options.network.deny,
+    } : undefined;
+
     const sandbox = await Sandbox.create({
-      // @ts-ignore
-      runtime: options.runtime || 'node',
+      runtime: (options.runtime || 'node') as any, // Cast if necessary to satisfy type check
       timeout: options.timeoutMs,
-      networkPolicy: options.network, // Fix: Pass network policy
-      source: options.source, // Fix: Pass source
-    });
+      networkPolicy: options.network,
+      source: options.source,
+      // Pass vcpus, casting if not in published types
+      vcpus: options.vcpus,
+    } as any);
 
     return sandbox;
   } catch (err: any) {
@@ -54,53 +59,29 @@ export async function runSandboxCommand({
   detached = false,
 }: RunCommandOptions) {
   try {
-    // We execute the command
     const result = await sandbox.runCommand({
       cmd,
       args,
       env,
       cwd,
       detached,
-      // timeout: timeoutMs, // runCommand doesn't take timeout in the same way as exec?
-      // check runCommand signature. It takes signal?
-      // exec() took timeout. runCommand() takes signal.
-      // If we want timeout, we should use AbortController.
     });
 
     if (detached) {
-        // Returns Command object
-        return result;
+      return result;
     }
 
-    // Returns CommandFinished object
-    // It has output() method? Or we need to fetch logs?
-    // CommandFinished has exitCode.
-    // If it's CommandFinished, we might want to capture stdout/stderr.
-    // But result is CommandFinished.
-    // result.stdout is NOT a property on CommandFinished directly?
-    // Wait, CommandFinished extends Command. Command has stdout().
+    const command = result as any;
 
-    // But `exec` was the old API?
-    // In `lib/sandbox/client.ts` initially I used `sandbox.exec`.
-    // Does `sandbox.exec` exist?
-    // `sandbox.d.ts` did NOT show `exec`. It showed `runCommand`.
-    // So my initial `client.ts` using `sandbox.exec` was probably WRONG if `exec` is deprecated or removed.
-    // I should check if `exec` exists.
-    // If `exec` does not exist, I must update `runSandboxCommand` to use `runCommand` and fetch output.
+    // Note: If timeoutMs is provided, we can race the command execution if the SDK supported it.
+    // Currently relying on Sandbox level timeout or SDK behavior.
 
-    // In `app/api/admin/sandbox/jobs/route.ts` I used `runCommand`.
-
-    // I will rewrite `runSandboxCommand` to use `runCommand` safely.
-
-    const command = result as any; // CommandFinished
-
-    // If not detached, we wait for it? runCommand waits if not detached.
+    // Future improvement: Wrap in Promise.race with a timeout rejection if needed.
 
     let stdoutStr = '';
     let stderrStr = '';
 
     if (!detached) {
-       // It finished.
        stdoutStr = await command.stdout();
        stderrStr = await command.stderr();
     }

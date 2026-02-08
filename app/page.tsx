@@ -9,7 +9,6 @@ import MedicalWebPageSchema from "./components/schemas/MedicalWebPageSchema";
 // Temporarily commenting out problematic imports
 // import { HeroCTA, StickyCTA } from "../src/components/Experiments";
 // import SocialProofBand from "../src/components/Experiments/SocialProofBand";
-// import ScrollDepthTracker from "../src/components/ScrollDepthTracker";
 // import SEODashboard from "../src/components/SEODashboard";
 // import SEOAuditDashboard from "../src/components/SEOAuditDashboard";
 // import GoogleOAuth from "../src/components/GoogleOAuth";
@@ -24,9 +23,9 @@ import Section from "./_components/Section";
 import FAQPageSchema from "./_components/FAQPageSchema";
 import HeroCTAButtons from "./_components/HeroCTAButtons";
 import PatientEducationVideosSkeleton from "./_components/skeletons/PatientEducationVideosSkeleton";
+import TrustSignals from "./_components/TrustSignals";
 
 // Dynamic imports for Lazy components
-const TrustSignals = dynamic(() => import('./_components/TrustSignals'));
 const ExpandedFAQ = dynamic(() => import('../src/components/ExpandedFAQ'));
 const RemotionVideoEmbedWrapper = dynamic(() => import('./_components/RemotionVideoEmbedWrapper'));
 const LocationNAPCard = dynamic(() => import('@/src/components/locations/LocationNAPCard').then(mod => mod.LocationNAPCard), {
@@ -224,7 +223,6 @@ export default function Home() {
         audience="Patients seeking neurosurgical care in Hyderabad"
       />
 
-      {/* <ScrollDepthTracker pageSlug="/" /> */}
       <HomeTrackers />
       <div className="min-h-screen bg-white">
         {/* Hero Section - LCP Optimized */}

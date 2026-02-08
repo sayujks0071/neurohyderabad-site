@@ -17,7 +17,6 @@ import {
   Sparkles,
   Wand2,
   Search,
-  Cloud,
   Check,
   Info,
   ShieldCheck,

@@ -136,28 +136,27 @@ async function testRobots() {
   assert(res.status === 200, `robots.txt HTTP ${res.status}`);
   assert(headerIncludes(res, "content-type", "text/plain"), `robots.txt content-type: ${res.headers.get("content-type")}`);
   const body = await readTextLimited(res, 50_000);
-  assert(body.includes("Sitemap: https://www.drsayuj.info/sitemap-main.xml"), "robots.txt missing sitemap-main.xml");
-  assert(body.toLowerCase().includes("host: www.drsayuj.info"), "robots.txt missing Host: www.drsayuj.info");
+  assert(body.includes("Sitemap: https://www.drsayuj.info/sitemap.xml"), "robots.txt missing sitemap.xml");
+  // Host directive was removed per recommendations, so we don't assert it anymore.
+  // assert(body.toLowerCase().includes("host: www.drsayuj.info"), "robots.txt missing Host: www.drsayuj.info");
 }
 
 async function testSitemaps() {
-  const res = await fetchManual(urlFor("/sitemap.xml"), { headers: { "cache-control": "no-cache" } });
-  assert([301, 302, 307, 308].includes(res.status), `/sitemap.xml expected redirect, got ${res.status}`);
-  const loc = res.headers.get("location") || "";
-  assert(loc === "/sitemap-main.xml" || loc.endsWith("/sitemap-main.xml"), `/sitemap.xml location unexpected: ${loc}`);
-
-  const endpoints = ["/sitemap-main.xml", "/sitemap-images.xml", "/sitemap-videos.xml"];
+  // /sitemap.xml now serves directly (200 OK)
+  const endpoints = ["/sitemap.xml", "/sitemap-main.xml", "/sitemap-images.xml", "/sitemap-videos.xml"];
   for (const p of endpoints) {
     const r = await fetch(urlFor(p), { headers: { "cache-control": "no-cache" } });
     assert(r.status === 200, `${p} HTTP ${r.status}`);
     assert(headerIncludes(r, "content-type", "xml"), `${p} content-type: ${r.headers.get("content-type")}`);
     const xml = await readTextLimited(r, 400_000);
     assert(/<(urlset|sitemapindex)\b/i.test(xml), `${p} missing <urlset>/<sitemapindex>`);
-    if (p === "/sitemap-main.xml") {
+
+    // Validate main sitemaps for content sanity
+    if (p === "/sitemap.xml" || p === "/sitemap-main.xml") {
       const locs = findAll(xml, /<loc>([^<]+)<\/loc>/gi).slice(0, 200);
-      assert(locs.length > 10, "sitemap-main.xml unexpectedly small");
+      assert(locs.length > 10, `${p} unexpectedly small`);
       const offHost = locs.find((u) => !u.startsWith(CANONICAL_ORIGIN));
-      assert(!offHost, `sitemap-main.xml contains non-canonical host: ${offHost}`);
+      assert(!offHost, `${p} contains non-canonical host: ${offHost}`);
     }
   }
 }

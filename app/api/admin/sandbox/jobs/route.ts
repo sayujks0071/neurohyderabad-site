@@ -59,6 +59,7 @@ export async function POST(request: Request) {
     const sandbox = await createSandbox({
         runtime: 'node',
         timeoutMs: 1200000, // 20 min
+        vcpus: 2,
         network: NETWORK_POLICIES.ADMIN_JOB,
         source: {
             type: 'git',
@@ -69,7 +70,7 @@ export async function POST(request: Request) {
 
     const cmd = await sandbox.runCommand({
         cmd: jobConfig.cmd,
-        args: jobConfig.args,
+        args: [...jobConfig.args],
         env,
         detached: true,
     });
