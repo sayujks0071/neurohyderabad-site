@@ -26,6 +26,8 @@
   - See `.Jules/palette.md` for design tokens (if available).
 - **Package Manager:** `pnpm`. Do not use `npm` or `yarn`.
 - **Linting:** `pnpm lint`.
+- **Conciseness:** Keep files under ~700 LOC. Split/refactor when it improves clarity or testability.
+- **Tests:** Colocate tests with source code (e.g. `Component.test.tsx` next to `Component.tsx`).
 
 ## Testing Guidelines
 - **Unit/Integration:** Vitest.
@@ -43,6 +45,10 @@
 ## Multi-Agent Safety
 - **State:** Be aware that other agents (or GitHub Actions) may be running `scripts/` concurrently.
 - **Conflicts:** If you see uncommitted changes from "Jules" (via GitHub Actions), pull/rebase before pushing.
+- **Git Operations:**
+  - **Stash:** Do **not** create/apply/drop `git stash` entries unless explicitly requested.
+  - **Pull:** Always use `git pull --rebase` to integrate changes (never discard other agents' work).
+  - **Push:** Ensure your changes are isolated.
 - **Git:** Use descriptive commit messages.
 
 ## Agent Workflows (Jules Automations)
@@ -69,7 +75,7 @@ See `docs/SUBAGENTS-AND-SKILLS.md` for complete documentation.
 
 ## Daily Scheduled Tasks
 
-Jules runs multiple daily automated tasks via GitHub Actions. See `docs/JULES-DAILY-SCHEDULE.md` for the complete schedule including:
+Jules runs multiple daily automated tasks via GitHub Actions. See `docs/jules-automations.md` for the complete schedule including:
 - Daily SEO tasks (reprint, local SEO, competitor scan)
 - Daily sitemap submission
 - Weekly SEO automation (Mondays)
@@ -149,3 +155,10 @@ For automated deployment monitoring and error troubleshooting:
 ## Troubleshooting
 - **Build Failures:** Check `pnpm build`. ensure memory limits are respected (`max-old-space-size`).
 - **Middleware:** If monitoring fails, run `pnpm middleware:setup` to refresh dashboards.
+
+## OpenClaw Integration
+This repository supports integration with [OpenClaw (Clawdbot)](https://github.com/clawdbot/clawdbot).
+
+- **Best Use Cases:** See `docs/openclaw-best-use-cases.md` for detailed integration guide and standards.
+- **Features:** Patient Chat Widget, Agent API.
+- **Standard:** Follow the "Way of the Claw" for coding and safety.

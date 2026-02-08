@@ -1,7 +1,7 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
   siteUrl: "https://www.drsayuj.info",
-  generateRobotsTxt: false, // Robots.txt served via app/robots.ts
+  generateRobotsTxt: false, // Robots.txt served via app/robots.txt/route.ts
   generateIndexSitemap: false, // CRITICAL: Disable index generation - single sitemap.xml with all URLs
   outDir: "public", // Output directly to public/ for static serving
   robotsTxtOptions: {
@@ -41,6 +41,15 @@ module.exports = {
     "/statsig-test",
     "/test-*",
     "/email-test",
+    // Exclude redirected location variants (keep sitemap canonical)
+    "/locations/banjara-hills",
+    "/locations/hitech-city",
+    "/locations/malakpet",
+    "/locations/secunderabad",
+    "/locations/neurosurgeon-jubilee-hills",
+    "/locations/brain-spine-surgeon-jubilee-hills",
+    "/locations/brain-spine-surgeon-banjara-hills",
+    "/locations/brain-spine-surgeon-hitec-city",
     // Exclude blog posts with forbidden keywords (handled in transform, but added here for clarity)
     "/blog/*example*",
     "/blog/*test*",

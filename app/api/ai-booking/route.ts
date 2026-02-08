@@ -1,4 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { generateObject } from 'ai';
+import { z } from 'zod';
+import { getTextModel, hasAIConfig } from '@/src/lib/ai/gateway';
+import { DR_SAYUJ_SYSTEM_PROMPT } from '@/src/lib/ai/prompts';
 
 interface BookingRequest {
   message: string;
@@ -42,6 +46,26 @@ const CONDITION_KEYWORDS = {
   'peripheral_nerve': ['nerve pain', 'peripheral', 'carpal tunnel', 'ulnar']
 };
 
+// Zod Schema for Structured Output
+const aiBookingSchema = z.object({
+  response: z.string().describe("The natural language response to the user."),
+  isEmergency: z.boolean().describe("Whether the situation is a medical emergency."),
+  suggestedAction: z.string().optional().describe("Suggested action, e.g., 'Call emergency hotline immediately'."),
+  bookingData: z.object({
+    name: z.string().optional(),
+    phone: z.string().optional(),
+    email: z.string().optional(),
+    condition: z.string().optional(),
+    urgency: z.enum(['routine', 'urgent', 'emergency']).optional(),
+    preferredDate: z.string().optional(),
+    preferredTime: z.string().optional(),
+    symptoms: z.array(z.string()).optional(),
+    previousTreatment: z.string().optional(),
+    insurance: z.string().optional(),
+  }).optional().describe("Updated booking data extracted from the conversation."),
+  nextStep: z.string().optional().describe("The next step in the flow: 'condition', 'urgency', 'details', 'scheduling', 'confirmation', or null."),
+});
+
 function detectEmergency(text: string): boolean {
   const lowerText = text.toLowerCase();
   return EMERGENCY_KEYWORDS.some(keyword => lowerText.includes(keyword));
@@ -69,7 +93,8 @@ function extractEmail(text: string): string | null {
   return match ? match[0] : null;
 }
 
-function generateAIResponse(request: BookingRequest): AIResponse {
+// Renamed fallback function
+function generateRuleBasedResponse(request: BookingRequest): AIResponse {
   const { message, bookingData, pageSlug, service } = request;
   
   const isEmergency = detectEmergency(message);
@@ -179,8 +204,10 @@ Our coordinator will call you within one working day to confirm your appointment
 }
 
 export async function POST(request: NextRequest) {
+  let body: BookingRequest;
+
   try {
-    const body: BookingRequest = await request.json();
+    body = await request.json();
     
     if (!body.message) {
       return NextResponse.json(
@@ -189,20 +216,95 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Generate AI response
-    const aiResponse = generateAIResponse(body);
+    // 1. FAST PATH: Rule-based Emergency Detection
+    // We check this first to ensure 0 latency for critical keywords
+    if (detectEmergency(body.message)) {
+      console.log('Use Fast Path: Emergency detected');
+      const emergencyResponse = generateRuleBasedResponse(body);
+      return NextResponse.json(emergencyResponse);
+    }
 
-    // Log the interaction (in a real implementation, you'd save this to a database)
-    console.log('AI Booking Interaction:', {
+    // 2. AI PATH: Use Vercel AI Gateway if configured
+    if (hasAIConfig()) {
+      try {
+        const { object } = await generateObject({
+          model: getTextModel(),
+          schema: aiBookingSchema,
+          messages: [
+            {
+              role: 'system',
+              content: `${DR_SAYUJ_SYSTEM_PROMPT}
+
+You are an intelligent booking assistant. Your goal is to help the user book an appointment by extracting the necessary information.
+
+CURRENT BOOKING STATE:
+${JSON.stringify(body.bookingData, null, 2)}
+
+INSTRUCTIONS:
+1. Extract any new information from the user's message and update the booking data.
+2. If the user mentions a medical condition, classify it.
+3. If the user mentions symptoms like severe pain, update urgency.
+4. If the user provides a phone number, extract it.
+5. Determine the next logical step (condition -> urgency -> details -> scheduling -> confirmation).
+6. Provide a natural, empathetic response guiding them to the next step.
+7. Dr. Sayuj's OPD hours are Mon-Sat (10AM-1PM & 5PM-7:30PM).
+
+OUTPUT FORMAT:
+Return a JSON object matching the schema.
+`
+            },
+            {
+              role: 'user',
+              content: body.message
+            }
+          ],
+          temperature: 0.3, // Lower temperature for more consistent data extraction
+        });
+
+        // Merge the AI extracted data with existing data to ensure nothing is lost
+        // (though we passed existing data to AI, we double check)
+        const mergedBookingData = {
+          ...body.bookingData,
+          ...object.bookingData,
+        };
+
+        // Log the interaction
+        console.log('AI Booking Interaction (Gateway):', {
+          timestamp: new Date().toISOString(),
+          pageSlug: body.pageSlug,
+          service: body.service,
+          message: body.message,
+          isEmergency: object.isEmergency,
+          bookingData: mergedBookingData
+        });
+
+        return NextResponse.json({
+          ...object,
+          bookingData: mergedBookingData
+        });
+
+      } catch (error) {
+        console.error('AI Gateway failed, falling back to rule-based:', error);
+        // Fallthrough to rule-based
+      }
+    }
+
+    // 3. FALLBACK: Rule-based logic
+    // Used if AI is not configured or fails
+    console.log('Using Rule-based fallback');
+    const ruleBasedResponse = generateRuleBasedResponse(body);
+
+    // Log the interaction
+    console.log('Rule-based Interaction:', {
       timestamp: new Date().toISOString(),
       pageSlug: body.pageSlug,
       service: body.service,
       message: body.message,
-      isEmergency: aiResponse.isEmergency,
-      bookingData: aiResponse.bookingData
+      isEmergency: ruleBasedResponse.isEmergency,
+      bookingData: ruleBasedResponse.bookingData
     });
 
-    return NextResponse.json(aiResponse);
+    return NextResponse.json(ruleBasedResponse);
 
   } catch (error) {
     console.error('Error processing AI booking request:', error);
@@ -219,13 +321,14 @@ export async function POST(request: NextRequest) {
 export async function GET() {
   return NextResponse.json({
     message: 'AI Booking API is running',
-    version: '1.0.0',
+    version: '2.0.0', // Bumped version
     features: [
-      'Emergency detection',
+      'Vercel AI Gateway Integration',
+      'Structured Data Extraction (zod)',
+      'Fast Path Emergency Detection',
+      'Rule-based Fallback',
       'Condition classification',
-      'Appointment scheduling',
-      'Contact extraction',
-      'Conversational flow'
+      'Appointment scheduling'
     ]
   });
 }

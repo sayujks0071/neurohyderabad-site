@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { LocationData, locations, getLocationById } from '@/src/data/locations';
+import { LocationData, locations, getLocationById, SERVICES_PATHWAY_AREAS, CONDITIONS_PATHWAY_AREAS } from '@/src/data/locations';
 import { ChevronRight, MapPin, Activity, Stethoscope } from 'lucide-react';
 
 type Mode = 'location' | 'service' | 'condition';
@@ -13,13 +13,25 @@ interface LocalPathwaysProps {
   location?: LocationData; // Legacy support
 }
 
-// Simple formatter for slugs if no mapping available
+// Improved formatter for slugs
 const formatSlug = (slug: string) => {
-  return slug
+  // Remove common suffixes and prefixes
+  const cleanSlug = slug
     .replace(/-hyderabad$/, '')
+    .replace(/^best-/, '')
+    .replace(/-treatment$/, '')
+    .replace(/-surgery$/, ' Surgery'); // Preserve 'Surgery' if it was part of the slug context
+
+  return cleanSlug
     .split('-')
     .map(w => w.charAt(0).toUpperCase() + w.slice(1))
     .join(' ');
+};
+
+// Helper to construct href safely
+const getHref = (type: 'service' | 'condition', slug: string) => {
+  if (slug.startsWith('/')) return slug;
+  return `/${type}s/${slug}`; // Note plural 'services' / 'conditions'
 };
 
 export const LocalPathways: React.FC<LocalPathwaysProps> = ({
@@ -62,7 +74,7 @@ export const LocalPathways: React.FC<LocalPathwaysProps> = ({
               {effectiveLocation.top_services_slugs.map(slug => {
                  const title = formatSlug(slug);
                  return (
-                  <Link key={slug} href={`/services/${slug}`} className={linkClass}>
+                  <Link key={slug} href={getHref('service', slug)} className={linkClass}>
                     <span className="font-medium text-gray-700 group-hover:text-blue-600 transition-colors">{title}</span>
                     <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-blue-600" />
                   </Link>
@@ -80,9 +92,8 @@ export const LocalPathways: React.FC<LocalPathwaysProps> = ({
             <div className="space-y-3">
               {effectiveLocation.top_conditions_slugs.map(slug => {
                  const title = formatSlug(slug);
-                 const href = `/conditions/${slug}`;
                  return (
-                  <Link key={slug} href={href} className={linkClass}>
+                  <Link key={slug} href={getHref('condition', slug)} className={linkClass}>
                     <span className="font-medium text-gray-700 group-hover:text-emerald-600 transition-colors">{title}</span>
                     <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-emerald-600" />
                   </Link>
@@ -107,19 +118,13 @@ export const LocalPathways: React.FC<LocalPathwaysProps> = ({
   // Mode: Service or Condition (showing locations)
   if (effectiveMode === 'service' || effectiveMode === 'condition') {
     // Exclude 'hyderabad' as it's the main location, we want local areas
-    // Show curated list of major areas to avoid link farming (limit to ~6 distinct zones)
-    const FEATURED_AREAS = [
-      'banjara-hills',
-      'jubilee-hills',
-      'hitech-city',
-      'gachibowli',
-      'kondapur',
-      'secunderabad',
-      'malakpet'
-    ];
+    // Show curated list of major areas to avoid link farming
+
+    // Use centralized configuration for pathways
+    const targetAreas = effectiveMode === 'service' ? SERVICES_PATHWAY_AREAS : CONDITIONS_PATHWAY_AREAS;
 
     const displayLocations = locations
-        .filter(l => FEATURED_AREAS.includes(l.id))
+        .filter(l => targetAreas.includes(l.id as any))
         .sort((a, b) => a.areaServedName.localeCompare(b.areaServedName));
 
     const title = effectiveMode === 'service'

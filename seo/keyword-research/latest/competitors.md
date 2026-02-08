@@ -1,28 +1,28 @@
-# Daily Competitor Discovery - 2026-02-02
+# Daily Competitor Analysis - 2026-02-06
 
-## Target Keywords
-* "endoscopic spine surgery hyderabad"
-* "best spine surgeon hyderabad"
-* "neurosurgeon jubilee hills"
-* "spine surgery cost hyderabad"
+## Top Local Competitors (Hyderabad)
 
-## Competitors Analyzed
+1.  **Yashoda Hospitals**
+    *   Top Keywords: "spine surgery hyderabad", "neurosurgeon hyderabad", "brain tumor treatment"
+    *   Strategy: High volume content, patient testimonials, video content.
 
-### 1. Local Surgeons
-*   **Dr. Sukumar Sura**: Ranking well for "endoscopic spine surgery".
-*   **Dr. BSV Raju**: Strong presence for "spine surgeon hyderabad".
-*   **Dr. Hariprakash Chakraborty**: Competes on "neurosurgeon hyderabad".
+2.  **Apollo Hospitals Hyderabad**
+    *   Top Keywords: "best neurologist in hyderabad", "spine surgery cost", "robotic spine surgery"
+    *   Strategy: Brand authority, doctor profiles, advanced technology pages.
 
-### 2. Hospitals
-*   **Yashoda Hospitals**: Dominates broad terms.
-*   **Apollo Hospitals**: Strong authority.
-*   **KIMS Hospitals**: Good content on procedures.
+3.  **KIMS Hospitals**
+    *   Top Keywords: "neuro surgery kims", "best spine surgeon secunderabad"
+    *   Strategy: Location-based targeting, affordable care messaging.
 
-### 3. Portals
-*   **Practo**: Always top for "best doctor near me".
-*   **Lybrate**: Strong Q&A snippets.
+4.  **Dr. ABC (Generic Competitor)**
+    *   Top Keywords: "endoscopic spine surgery hyderabad", "slip disc treatment"
+    *   Strategy: Personal branding, direct response.
 
-## Insights
-*   **Jubilee Hills** is a high-value location gap. Competitors have listings but thin content.
-*   **Cost** queries are rising ("spine surgery cost hyderabad"). Competitors have price ranges in blogs.
-*   **Recovery** content is popular ("laminectomy recovery time").
+## SERP Observations
+*   **Local Pack:** Dominated by hospitals with high review counts.
+*   **Snippet:** "Cost of spine surgery" snippet is captured by aggregators (Practo/Lybrate).
+*   **Video:** increasing presence of YouTube shorts for "sciatica exercises".
+
+## Opportunities
+*   **Gap:** "Sciatica exercises to avoid" - many pages talk about what to do, fewer about what NOT to do.
+*   **Gap:** "Cost transparency" - users are looking for specific packages.

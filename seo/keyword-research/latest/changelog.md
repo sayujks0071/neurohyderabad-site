@@ -1,14 +1,16 @@
-# Changelog - 2026-02-02
+# Daily SEO Changelog - 2026-02-06
 
-## Summary
-Daily keyword research focused on Jubilee Hills local SEO and spine surgery cost queries.
+## New Content Added
+*   **Blog Post:** `/blog/sciatica-exercises-to-avoid-hyderabad`
+    *   **Topic:** 5 Exercises to Avoid with Sciatica: Don't Make It Worse
+    *   **Reason:** High search volume for "what not to do" with sciatica pain. Addresses patient fear/avoidance intent.
 
-## Actions
-*   **New Keywords:** Added 6 high-value keywords.
-*   **New Page:** Created `/locations/neurosurgeon-jubilee-hills`.
-*   **Mapping:** Updated registry for cost and recovery terms.
+## Keyword Registry Updates
+*   Added `sciatica exercises to avoid` -> `/blog/sciatica-exercises-to-avoid-hyderabad`
+*   Added `exercises that make sciatica worse` -> `/blog/sciatica-exercises-to-avoid-hyderabad`
+*   Added `sciatica mistakes` -> `/blog/sciatica-exercises-to-avoid-hyderabad`
+*   Added `safe exercises for sciatica` -> `/blog/sciatica-exercises-to-avoid-hyderabad`
 
-## Stats
-*   **Keywords Added:** 6
-*   **Pages Created:** 1
-*   **Cannibalization Checks:** Passed.
+## Strategy Note
+*   Focusing on "fear-based" queries (avoidance) to capture users early in the research phase (TOFU/MOFU) before they commit to a treatment plan.
+*   Strong internal linking opportunity between "exercises to do" and "exercises to avoid".

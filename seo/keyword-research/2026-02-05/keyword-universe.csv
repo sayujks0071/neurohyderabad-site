@@ -1,0 +1,6 @@
+keyword,intent,funnel,geo,cluster,recommended_target,difficulty,priority,serp_features,validation_needed
+neurosurgeon uppal,Transactional,BOFU,HYD,HYD | BOFU | LOCATION | uppal | neurosurgeon,/locations/neurosurgeon-uppal,Low,85,Local Pack,No
+best neurosurgeon in uppal,Transactional,BOFU,HYD,HYD | BOFU | LOCATION | uppal | best,/locations/neurosurgeon-uppal,Low,80,Local Pack,No
+neurosurgeon kukatpally,Transactional,BOFU,HYD,HYD | BOFU | LOCATION | kukatpally | neurosurgeon,/locations/neurosurgeon-kukatpally,Low,90,Local Pack,No
+lumbar canal stenosis surgery cost hyderabad,Commercial,MOFU,HYD,HYD | MOFU | COST | spinal-stenosis | cost,/services/spine-surgery-cost-hyderabad,Med,70,Snippet,No
+L4 L5 disc bulge treatment hyderabad,Commercial,MOFU,HYD,HYD | MOFU | CONDITION | slip-disc | treatment,/conditions/slip-disc-treatment-hyderabad,Med,75,PAA,No

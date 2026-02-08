@@ -95,8 +95,8 @@ async function parseSitemap() {
   console.log('🔍 Parsing sitemap...');
   
   try {
-    // Primary sitemap is a single urlset at /sitemap.xml (no index sitemap)
-    const sitemap = await makeRequest(`${SITE_URL}/sitemap.xml`);
+    // Primary sitemap is a single urlset at /sitemap-main.xml (sitemap.xml redirects here)
+    const sitemap = await makeRequest(`${SITE_URL}/sitemap-main.xml`);
     const fallback = await makeRequest(`${SITE_URL}/sitemap-0.xml`).catch(() => null);
 
     const xmlSource = sitemap.statusCode === 200 && sitemap.body.includes('<urlset')

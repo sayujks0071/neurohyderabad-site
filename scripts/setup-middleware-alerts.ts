@@ -23,14 +23,52 @@ interface AlertConfig {
     threshold: number;
     operator: '>' | '<' | '=' | '>=' | '<=';
     window?: string;
+    filters?: { key: string; value: string }[];
   };
   severity: 'low' | 'medium' | 'high' | 'critical';
 }
 
 const ALERTS: AlertConfig[] = [
+  // --- Priority 1: Critical (Immediate Action) ---
+  {
+    name: 'Form Submission Failure',
+    description: 'Critical: Form submission success rate < 90%',
+    condition: {
+      metric: 'form.success_rate',
+      threshold: 0.9, // 90%
+      operator: '<',
+      window: '15m',
+    },
+    severity: 'critical',
+  },
+  {
+    name: 'Appointment API Down',
+    description: 'Critical: Appointment API returning 5xx errors',
+    condition: {
+      metric: 'http.status.5xx',
+      threshold: 0,
+      operator: '>',
+      window: '1m',
+      filters: [{ key: 'path', value: '/api/appointments' }],
+    },
+    severity: 'critical',
+  },
+  {
+    name: 'Critical Global Error Rate',
+    description: 'Critical: Global error rate > 5%',
+    condition: {
+      metric: 'error.rate',
+      threshold: 0.05, // 5%
+      operator: '>',
+      window: '5m',
+    },
+    severity: 'critical',
+  },
+
+  // --- Priority 2: High (Urgent Investigation) ---
   {
     name: 'High Error Rate',
-    description: 'Alert when error rate exceeds 1%',
+    description: 'Warning: Error rate exceeds 1%',
     condition: {
       metric: 'error.rate',
       threshold: 0.01, // 1%
@@ -38,17 +76,6 @@ const ALERTS: AlertConfig[] = [
       window: '5m',
     },
     severity: 'high',
-  },
-  {
-    name: 'Slow Appointment API',
-    description: 'Alert when appointment API response time > 2s',
-    condition: {
-      metric: 'http.response_time',
-      threshold: 2000, // 2 seconds
-      operator: '>',
-      window: '5m',
-    },
-    severity: 'medium',
   },
   {
     name: 'Poor LCP',
@@ -61,6 +88,44 @@ const ALERTS: AlertConfig[] = [
     },
     severity: 'high',
   },
+  {
+    name: 'Chatbot API Latency',
+    description: 'Chatbot API taking longer than 3s',
+    condition: {
+      metric: 'http.response_time',
+      threshold: 3000, // 3 seconds
+      operator: '>',
+      window: '5m',
+      filters: [{ key: 'path', value: '/api/ai/chat' }],
+    },
+    severity: 'high',
+  },
+  {
+    name: 'Critical Page Load - Home',
+    description: 'Home page load time > 3s',
+    condition: {
+      metric: 'page.load_time',
+      threshold: 3000,
+      operator: '>',
+      window: '10m',
+      filters: [{ key: 'path', value: '/' }],
+    },
+    severity: 'high',
+  },
+  {
+    name: 'Critical Page Load - Appointments',
+    description: 'Appointment page load time > 3s',
+    condition: {
+      metric: 'page.load_time',
+      threshold: 3000,
+      operator: '>',
+      window: '10m',
+      filters: [{ key: 'path', value: '/appointments' }],
+    },
+    severity: 'high',
+  },
+
+  // --- Priority 3: Monitor (Optimization) ---
   {
     name: 'High CLS',
     description: 'Alert when CLS exceeds 0.1 (layout instability)',
@@ -84,17 +149,6 @@ const ALERTS: AlertConfig[] = [
     severity: 'medium',
   },
   {
-    name: 'Chatbot API Failure',
-    description: 'Alert when chatbot API error rate > 5%',
-    condition: {
-      metric: 'error.rate',
-      threshold: 0.05, // 5%
-      operator: '>',
-      window: '5m',
-    },
-    severity: 'high',
-  },
-  {
     name: 'High 404 Rate',
     description: 'Alert when 404 error rate > 5%',
     condition: {
@@ -104,17 +158,6 @@ const ALERTS: AlertConfig[] = [
       window: '10m',
     },
     severity: 'medium',
-  },
-  {
-    name: 'Form Submission Failure',
-    description: 'Alert when form submission success rate < 90%',
-    condition: {
-      metric: 'form.success_rate',
-      threshold: 0.9, // 90%
-      operator: '<',
-      window: '15m',
-    },
-    severity: 'critical',
   },
 ];
 
@@ -132,19 +175,28 @@ async function setupAlerts() {
       return;
     }
 
+    const webhookSecret = process.env.MIDDLEWARE_WEBHOOK_SECRET;
+    if (!webhookSecret) {
+      console.warn('⚠️  Warning: MIDDLEWARE_WEBHOOK_SECRET not set. Webhooks will not be authenticated.');
+    }
+
     console.log(`📡 Creating alerts for rule: ${ruleId}\n`);
 
     for (const config of ALERTS) {
       try {
         console.log(`Creating: ${config.name}...`);
+
+        const filters = [
+          { key: 'url', value: SITE_URL },
+          ...(config.condition.filters || [])
+        ];
+
         const alert = await middlewareApi.createAlert(ruleId, {
           name: config.name,
           description: config.description,
           condition: {
             ...config.condition,
-            filters: [
-              { key: 'url', value: SITE_URL },
-            ],
+            filters,
           },
           actions: [
             {
@@ -153,6 +205,7 @@ async function setupAlerts() {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
+                ...(webhookSecret ? { 'x-middleware-secret': webhookSecret } : {}),
               },
             },
           ],
@@ -172,8 +225,9 @@ async function setupAlerts() {
     console.error('❌ Setup failed:', error.message);
     console.error('\n💡 Make sure you have:');
     console.error('  1. Set MIDDLEWARE_ACCESS_TOKEN in .env.local');
-    console.error('  2. Created a rule in the dashboard');
-    console.error('  3. Provided the rule ID as an argument');
+    console.error('  2. Set MIDDLEWARE_WEBHOOK_SECRET in .env.local');
+    console.error('  3. Created a rule in the dashboard');
+    console.error('  4. Provided the rule ID as an argument');
     process.exit(1);
   }
 }

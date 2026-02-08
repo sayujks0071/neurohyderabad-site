@@ -13,6 +13,7 @@ export const CLINIC_INFO = {
   addressCountry: CLINIC.country,
   latitude: CLINIC.geo.lat,
   longitude: CLINIC.geo.lng,
+  areaServed: ["Hyderabad", "Secunderabad", "Telangana", "Andhra Pradesh"],
 };
 
 export const CLINIC_OPENING_HOURS = [
@@ -61,6 +62,24 @@ export function getMedicalClinicSchema({ includeContext = true }: ClinicSchemaOp
       latitude: CLINIC.geo.lat,
       longitude: CLINIC.geo.lng,
     },
+    areaServed: [
+      {
+        '@type': 'City',
+        name: 'Hyderabad',
+      },
+      {
+        '@type': 'City',
+        name: 'Secunderabad',
+      },
+      {
+        '@type': 'State',
+        name: 'Telangana',
+      },
+      {
+        '@type': 'State',
+        name: 'Andhra Pradesh',
+      },
+    ],
     openingHoursSpecification: CLINIC_OPENING_HOURS.map(({ dayOfWeek, opens, closes }) => ({
       '@type': 'OpeningHoursSpecification',
       dayOfWeek,

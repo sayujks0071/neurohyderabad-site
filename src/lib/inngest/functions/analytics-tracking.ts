@@ -128,7 +128,7 @@ export const conversionTracker = inngest.createFunction(
   { id: "conversion-tracker" },
   { event: "analytics/conversion" },
   async ({ event, step }) => {
-    const { conversionType, page, value, timestamp, userAgent, referrer } = event.data;
+    const { conversionType, page, value, timestamp, userAgent, referrer, patientEmail, patientName, condition } = event.data;
 
     // Step 1: Calculate conversion score
     const conversionScore = await step.run("calculate-conversion-score", async () => {
@@ -166,7 +166,7 @@ export const conversionTracker = inngest.createFunction(
       // In a real scenario, we would need the lead's email or ID to update the score.
       // We'll attempt to extract it from the event data if available, or fallback to a placeholder/log.
       // This part assumes that `event.data` might eventually contain user identification
-      const email = (event.data as any).email || (event.data as any).userEmail;
+      const email = patientEmail || (event.data as any).email || (event.data as any).userEmail;
 
       if (email) {
         await crm.updateLeadScore({
@@ -192,10 +192,10 @@ export const conversionTracker = inngest.createFunction(
         await inngest.send({
           name: "patient/journey.started",
           data: {
-            patientEmail: "extracted-from-form", // TODO: Extract from form data
-            patientName: "Extracted Name", // TODO: Extract from form data
+            patientEmail: patientEmail || "unknown-email",
+            patientName: patientName || "Anonymous Patient",
             source: page,
-            condition: "to-be-determined", // TODO: Extract from form
+            condition: condition || "General Inquiry",
             urgency: "high"
           }
         });

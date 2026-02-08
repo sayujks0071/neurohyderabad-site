@@ -9,7 +9,7 @@ import Select from "./ui/Select";
 import Textarea from "./ui/Textarea";
 import Button from "./ui/Button";
 import Calendar from "./ui/Calendar";
-import { appointmentSchema, BookingFormValues } from "./schema";
+import { appointmentSchema, BookingFormParsedValues, BookingFormValues } from "./schema";
 import { formatLocalDate, parseLocalDate } from "@/src/lib/dates";
 
 interface BookingFormProps {
@@ -59,7 +59,7 @@ export default function BookingForm({
     watch,
     formState: { errors, isSubmitting },
   } = useForm<BookingFormValues>({
-    resolver: zodResolver(appointmentSchema),
+    resolver: zodResolver(appointmentSchema) as any,
     defaultValues: defaultValues as BookingFormValues,
     mode: "onTouched", // Trigger validation on blur
   });
@@ -98,18 +98,22 @@ export default function BookingForm({
   }, [initialData, reset]);
 
   const handleFormSubmit = async (data: BookingFormValues) => {
+    // Parse once more to get schema defaults (and a fully-typed output object).
+    // In practice the resolver already validated, so this should not throw.
+    const parsed: BookingFormParsedValues = appointmentSchema.parse(data);
+
     // Map form values back to BookingData
     const submissionData: BookingData = {
-      patientName: data.patientName,
-      email: data.email,
-      phone: data.contactNumber,
-      age: data.age,
-      gender: data.gender,
-      appointmentDate: formatLocalDate(data.requestedDate),
-      appointmentTime: data.appointmentTime,
-      reason: data.reason,
-      painScore: data.painScore,
-      mriScanAvailable: data.mriScanAvailable,
+      patientName: parsed.patientName,
+      email: parsed.email,
+      phone: parsed.contactNumber,
+      age: parsed.age,
+      gender: parsed.gender,
+      appointmentDate: formatLocalDate(parsed.requestedDate),
+      appointmentTime: parsed.appointmentTime,
+      reason: parsed.reason,
+      painScore: parsed.painScore,
+      mriScanAvailable: parsed.mriScanAvailable,
     };
     await onSubmit(submissionData);
     reset();
@@ -255,10 +259,13 @@ export default function BookingForm({
                   htmlFor="painScore-slider"
                   className="block text-sm font-medium text-slate-700 mb-2"
                 >
-                  Pain Intensity (1-10)
+                  Pain Score (1-10)
                 </label>
                 <div className="flex items-center gap-4">
-                  <span className="text-sm font-bold text-slate-400" aria-hidden="true">1</span>
+                  <div className="text-center">
+                    <span className="block text-sm font-bold text-slate-400" aria-hidden="true">1</span>
+                    <span className="block text-xs text-slate-400">No Pain</span>
+                  </div>
                   <input
                     id="painScore-slider"
                     type="range"
@@ -269,7 +276,10 @@ export default function BookingForm({
                     aria-valuetext={painScoreValue ? `Score: ${painScoreValue}${painScoreValue >= 8 ? ' (Severe)' : painScoreValue <= 3 ? ' (Mild)' : ''}` : "Score: 5"}
                     {...register("painScore")}
                   />
-                  <span className="text-sm font-bold text-slate-400" aria-hidden="true">10</span>
+                  <div className="text-center">
+                    <span className="block text-sm font-bold text-slate-400" aria-hidden="true">10</span>
+                    <span className="block text-xs text-slate-400">Severe</span>
+                  </div>
                 </div>
                 <div className="text-center mt-2">
                   {painScoreValue && (
@@ -295,7 +305,7 @@ export default function BookingForm({
                 )}
               </div>
 
-              <div className="flex items-center p-4 bg-slate-50 rounded-xl border border-slate-200">
+              <div className="flex items-center p-4 bg-slate-50 rounded-xl border border-slate-200 hover:border-cyan-300 transition-colors">
                 {/* Clinical Context: MRI Availability */}
                 <input
                   type="checkbox"

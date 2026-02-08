@@ -19,7 +19,7 @@ const SITE_URL = 'https://www.drsayuj.info';
 
 // All available sitemaps
 const SITEMAPS = [
-  `${SITE_URL}/sitemap.xml`,
+  `${SITE_URL}/sitemap-main.xml`,
   // Note: Individual sitemaps (blog, services, etc.) are now consolidated into main sitemap
 ];
 
@@ -68,7 +68,7 @@ export async function GET(request: NextRequest) {
       POST: {
         submit_sitemap: {
           description: 'Submit sitemap to Google Search Console',
-          params: { action: 'submit_sitemap', sitemap: 'https://www.drsayuj.info/sitemap.xml' },
+          params: { action: 'submit_sitemap', sitemap: 'https://www.drsayuj.info/sitemap-main.xml' },
         },
         index_url: {
           description: 'Request indexing for a single URL',
@@ -389,7 +389,7 @@ export async function POST(request: NextRequest) {
       case 'ping_sitemaps':
         // DEPRECATED: Google's unauthenticated ping endpoint was deprecated on June 26, 2023
         // Use submit_sitemap action instead
-        const bingPing = `https://www.bing.com/ping?sitemap=${encodeURIComponent(`${SITE_URL}/sitemap.xml`)}`;
+        const bingPing = `https://www.bing.com/ping?sitemap=${encodeURIComponent(`${SITE_URL}/sitemap-main.xml`)}`;
         
         return NextResponse.json({
           success: true,

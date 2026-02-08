@@ -89,7 +89,7 @@ export default function Page() {
         <ul className="mt-4 space-y-3 list-none pl-0">
           <li className="flex gap-3">
              <span className="text-blue-600 font-bold">✓</span>
-             <span><strong>Specialised Expertise:</strong> Dr. Sayuj is a German-trained specialist in <em>Keyhole Spine Surgery</em>, a technique not universally available.</span>
+             <span><strong>Specialised Expertise:</strong> Dr. Sayuj is a German-trained specialist in <Link href="/services/endoscopic-spine-surgery-hyderabad" className="text-blue-600 underline font-semibold">keyhole spine surgery</Link>, a technique not universally available.</span>
           </li>
           <li className="flex gap-3">
              <span className="text-blue-600 font-bold">✓</span>

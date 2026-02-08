@@ -25,9 +25,16 @@ const FloatingChatWidget = dynamic(() => import('./FloatingChatWidget'), {
   ssr: false,
 });
 
+const OpenClawWidget = dynamic(() => import('./OpenClawWidget'), {
+  ssr: false,
+});
+
 export default function DynamicFloatingChatWidget() {
   const [shouldLoad, setShouldLoad] = useState(false);
   const [shouldAutoOpen, setShouldAutoOpen] = useState(false);
+
+  // Check for OpenClaw integration
+  const openClawUrl = process.env.NEXT_PUBLIC_OPENCLAW_URL;
 
   useEffect(() => {
     // Defer loading until idle (4s) to reduce Total Blocking Time (TBT)
@@ -55,7 +62,11 @@ export default function DynamicFloatingChatWidget() {
           onClick={handleClick}
         />
       }>
-        <FloatingChatWidget autoOpen={shouldAutoOpen} />
+        {openClawUrl ? (
+          <OpenClawWidget autoOpen={shouldAutoOpen} />
+        ) : (
+          <FloatingChatWidget autoOpen={shouldAutoOpen} />
+        )}
       </Suspense>
     );
   }

@@ -12,12 +12,21 @@ import crypto from 'crypto';
  * Webhook Configuration:
  * - Name: webhookname-cursor
  * - Payload URL: https://www.drsayuj.info/api/webhooks/cursor
- * - Secret: 26e25b8cfe3525166e2d7f4c688053bf
+ * - Secret: Set as CURSOR_WEBHOOK_SECRET environment variable
  */
 export async function POST(request: NextRequest) {
   try {
-    // Get webhook secret from environment or use provided secret
-    const webhookSecret = process.env.CURSOR_WEBHOOK_SECRET || '26e25b8cfe3525166e2d7f4c688053bf';
+    // SECURITY: Require webhook secret from environment
+    const webhookSecret = process.env.CURSOR_WEBHOOK_SECRET;
+
+    // Fail secure if secret is not configured
+    if (!webhookSecret) {
+      console.error('[webhooks/cursor] Security: CURSOR_WEBHOOK_SECRET not configured. Denying access.');
+      return NextResponse.json(
+        { error: 'Server misconfiguration: Auth not set up' },
+        { status: 500 }
+      );
+    }
     
     // Get signature from headers (common header names)
     const signature = 
@@ -26,31 +35,37 @@ export async function POST(request: NextRequest) {
       request.headers.get('x-signature') ||
       request.headers.get('signature');
 
+    // SECURITY: Require signature header
+    if (!signature) {
+      console.warn('[webhooks/cursor] Security: Missing signature header');
+      return NextResponse.json(
+        { error: 'Unauthorized: Missing signature' },
+        { status: 401 }
+      );
+    }
+
     // Read raw body for signature verification
     const rawBody = await request.text();
     
-    // Verify webhook signature if provided
-    if (signature && webhookSecret) {
-      // Common signature verification methods
-      // Method 1: HMAC SHA256
-      const expectedSignature = crypto
-        .createHmac('sha256', webhookSecret)
-        .update(rawBody)
-        .digest('hex');
-      
-      // Method 2: Compare with provided signature (could be prefixed)
-      const isValid = 
-        signature === expectedSignature ||
-        signature === `sha256=${expectedSignature}` ||
-        `sha256=${expectedSignature}` === signature;
+    // SECURITY: Verify webhook signature
+    // Method 1: HMAC SHA256
+    const expectedSignature = crypto
+      .createHmac('sha256', webhookSecret)
+      .update(rawBody)
+      .digest('hex');
 
-      if (!isValid) {
-        console.error('[webhooks/cursor] Invalid signature');
-        return NextResponse.json(
-          { error: 'Invalid signature' },
-          { status: 401 }
-        );
-      }
+    // Method 2: Compare with provided signature (could be prefixed)
+    const isValid =
+      signature === expectedSignature ||
+      signature === `sha256=${expectedSignature}` ||
+      `sha256=${expectedSignature}` === signature;
+
+    if (!isValid) {
+      console.error('[webhooks/cursor] Security: Invalid signature');
+      return NextResponse.json(
+        { error: 'Unauthorized: Invalid signature' },
+        { status: 401 }
+      );
     }
 
     // Parse payload
@@ -65,7 +80,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    console.log('[webhooks/cursor] Received webhook:', {
+    console.log('[webhooks/cursor] Received verified webhook:', {
       event: payload.event || payload.type || 'unknown',
       timestamp: new Date().toISOString(),
       payloadKeys: Object.keys(payload),

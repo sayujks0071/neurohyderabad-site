@@ -1,5 +1,5 @@
 name: Jules Rolling 7-Day SEO Summary
-# v1.4 - Verified
+# v1.8 - Verified
 # Managed by Jules (Daily Schedule)
 on:
   schedule:
@@ -54,7 +54,7 @@ jobs:
 
             console.log("Checking for duplicate issue with title: " + title);
 
-            // Find strictly matching title
+            // Find strictly matching title to ensure only one issue per day
             const duplicate = existingIssues.find(issue => issue.title === title);
 
             if (duplicate) {

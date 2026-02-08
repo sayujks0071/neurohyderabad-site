@@ -274,7 +274,7 @@ async function verifySitemapSubmission(searchConsole: any) {
     const siteUrl = process.env.SITE_URL || EXPECTED_SITE_URL;
     const formattedSiteUrl = siteUrl.replace(/\/$/, '');
     const targetSiteUrl = process.env.GSC_SITE_URL || formattedSiteUrl;
-    const testSitemapUrl = `${formattedSiteUrl}/sitemap.xml`;
+    const testSitemapUrl = `${formattedSiteUrl}/sitemap-main.xml`;
 
     // Try to submit (this will queue it, not cause issues if already submitted)
     const res = await searchConsole.sitemaps.submit({

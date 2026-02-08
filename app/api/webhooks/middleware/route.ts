@@ -6,6 +6,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
+import crypto from 'crypto';
 
 interface MiddlewareAlert {
   id: string;
@@ -22,6 +23,40 @@ interface MiddlewareAlert {
 }
 
 export async function POST(request: NextRequest) {
+  // SECURITY: Require secret key
+  const webhookSecret = process.env.MIDDLEWARE_WEBHOOK_SECRET;
+
+  // Fail secure if secret is not configured
+  if (!webhookSecret) {
+    console.error('Security: MIDDLEWARE_WEBHOOK_SECRET not configured. Denying access.');
+    return NextResponse.json(
+      { error: 'Server misconfiguration: Auth not set up' },
+      { status: 500 }
+    );
+  }
+
+  // Check for authentication header
+  const headerSecret = request.headers.get('x-middleware-secret');
+
+  // SECURITY: Use constant-time comparison to prevent timing attacks
+  // We hash both values before comparing to handle different lengths securely
+  const isValid = (() => {
+    if (!headerSecret) return false;
+
+    const h1 = crypto.createHash('sha256').update(headerSecret).digest();
+    const h2 = crypto.createHash('sha256').update(webhookSecret).digest();
+
+    return crypto.timingSafeEqual(h1, h2);
+  })();
+
+  if (!isValid) {
+    console.warn('Security: Unauthorized access attempt to Middleware webhook');
+    return NextResponse.json(
+      { error: 'Unauthorized' },
+      { status: 401 }
+    );
+  }
+
   try {
     const alert: MiddlewareAlert = await request.json();
 

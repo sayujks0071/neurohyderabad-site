@@ -1,19 +1,31 @@
-# Clusters and Mapping - 2026-02-02
+# Daily Keyword Cluster & Mapping - 2026-02-06
 
-## New Clusters
+## New Content Opportunity: "Sciatica Exercises to Avoid"
 
-### LOC | BOFU | NEURO | jubilee-hills
-*   **Primary:** "neurosurgeon jubilee hills"
-*   **Secondary:** "best neurosurgeon in jubilee hills", "spine specialist jubilee hills"
-*   **Target:** `/locations/neurosurgeon-jubilee-hills` (New Page)
-*   **Rationale:** High income area, existing location data, missing page.
+### Rationale
+*   Competitor content focuses heavily on "what to do" (exercises for relief).
+*   User intent often includes "fear of worsening condition" (avoidance).
+*   High intent for patients currently in pain seeking immediate guidance.
 
-### HYD | BOFU | SPINE | cost
-*   **Primary:** "spine surgery cost hyderabad"
-*   **Secondary:** "endoscopic spine surgery cost hyderabad"
-*   **Target:** `/services/spine-surgery-cost-hyderabad` (Existing)
-*   **Action:** Ensure keyword mapping is updated.
+### Cluster: SCIATICA | TOFU | EXERCISES | AVOIDANCE
+*   **Primary Keyword:** "sciatica exercises to avoid"
+*   **Secondary Keywords:**
+    *   "exercises that make sciatica worse"
+    *   "sciatica mistakes to avoid"
+    *   "safe exercises for sciatica"
+    *   "activities to avoid with sciatica"
+*   **Target Page:** `/blog/sciatica-exercises-to-avoid-hyderabad` (NEW)
+*   **Internal Linking Strategy:**
+    *   Link FROM: `/conditions/sciatica-pain-treatment-hyderabad` (The main condition page)
+    *   Link FROM: `/blog/sciatica-pain-relief-exercises-hyderabad` (The "what to do" page)
+    *   Link TO: `/services/endoscopic-spine-surgery` (If pain persists)
 
-## Updates to Existing
-*   **sciatica treatment without surgery** -> `/conditions/sciatica-pain-treatment-hyderabad`
-*   **laminectomy recovery time** -> `/blog/microdiscectomy-vs-laminectomy-recovery-comparison`
+## Existing Cluster Updates
+
+### CLUSTER: LOCATION | BOFU | NEUROSURGEON
+*   Monitoring local rankings for "neurosurgeon [area]".
+*   No changes required today. Stable rankings for Jubilee Hills, Gachibowli.
+
+### CLUSTER: SPINE | BOFU | COST
+*   "spine surgery cost hyderabad" is performing well.
+*   Consider adding a section on "insurance vs cash packages" in future.

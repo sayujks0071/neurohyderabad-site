@@ -1,23 +1,19 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import { useStatsigEvents } from '../../src/lib/statsig-events';
 import { trackMiddlewareEvent } from '@/src/lib/middleware/rum';
 import { MessageCircle, X, Send, AlertTriangle, Loader2, Sparkles, Minus } from 'lucide-react';
 import { usePathname } from 'next/navigation';
-
-interface Message {
-  id: string;
-  role: 'user' | 'assistant';
-  content: string;
-}
+import { useChat } from '@ai-sdk/react';
+import { DefaultChatTransport, type UIMessage } from 'ai';
 
 /**
  * Floating AI Chat Widget using Vercel AI Gateway
  *
  * Features:
  * - Global availability via floating button
- * - Real-time streaming responses
+ * - Real-time streaming responses (via useChat)
  * - Emergency detection
  * - Compact design
  */
@@ -36,22 +32,78 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
     }
   }, [autoOpen]);
   const [showEmergencyAlert, setShowEmergencyAlert] = useState(false);
+
+  // Manual input state
   const [input, setInput] = useState('');
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: 'initial',
-      role: 'assistant',
-      content: "Hello! I'm Dr. Sayuj's AI assistant. I can help you with appointments, condition info, and more. How can I help?",
-    },
-  ]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const pathname = usePathname();
 
   // Statsig hooks
   const { logAppointmentBooking, logContactFormSubmit } = useStatsigEvents();
+
+  // Initial greeting
+  const initialMessages = useMemo<UIMessage[]>(() => [
+    {
+      id: 'initial',
+      role: 'assistant',
+      parts: [{ type: 'text', text: "Hello! I'm Dr. Sayuj's AI assistant. I can help you with appointments, condition info, and more. How can I help?" }]
+    },
+  ], []);
+
+  // Configure transport
+  const transport = useMemo(() => new DefaultChatTransport({
+    api: '/api/ai/chat',
+    body: {
+      pageSlug: pathname || 'global',
+      service: 'floating_widget',
+    },
+  }), [pathname]);
+
+  // Use Vercel AI SDK useChat hook with UIMessage
+  const { messages, sendMessage, status, error } = useChat<UIMessage>({
+    transport,
+    messages: initialMessages,
+    onFinish: (message) => {
+      // Get text content from parts
+      const messageParts = message.message?.parts || [];
+      const content = messageParts
+        .filter(p => p.type === 'text')
+        .map(p => (p as any).text)
+        .join('');
+
+      trackMiddlewareEvent('chat_response_received', {
+        source: 'floating_widget',
+        success: true
+      });
+
+      // Check for emergency keywords
+      const emergencyKeywords = ['emergency', 'urgent', 'immediately', 'call', 'stroke', 'seizure'];
+      const hasEmergency = emergencyKeywords.some(keyword =>
+        content.toLowerCase().includes(keyword)
+      );
+
+      if (hasEmergency) {
+        setShowEmergencyAlert(true);
+        trackMiddlewareEvent('chat_emergency_detected', {
+          source: 'floating_widget'
+        });
+      }
+
+      logContactFormSubmit('ai_chat_widget', true);
+    },
+    onError: (error) => {
+      console.error('Chat error:', error);
+      logContactFormSubmit('ai_chat_widget', false);
+      trackMiddlewareEvent('chat_error', {
+        source: 'floating_widget',
+        error: error.message
+      });
+    }
+  });
+
+  const isLoading = status === 'submitted' || status === 'streaming';
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -68,22 +120,17 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
         page_slug: pathname || 'unknown'
       });
     }
+  }, [isOpen, isMinimized]);
+
+  // Scroll on new messages
+  useEffect(() => {
+    if (isOpen && !isMinimized) {
+      scrollToBottom();
+    }
   }, [messages, isOpen, isMinimized]);
 
-  const sendMessage = async (content: string) => {
+  const handleSendMessage = async (content: string) => {
     if (!content.trim() || isLoading) return;
-
-    const startTime = performance.now();
-    const userMessage: Message = {
-      id: Date.now().toString(),
-      role: 'user',
-      content: content.trim(),
-    };
-
-    setMessages(prev => [...prev, userMessage]);
-    setInput('');
-    setIsLoading(true);
-    setError(null);
 
     // Log user interaction
     logAppointmentBooking('ai_chat_widget_interaction', 'general');
@@ -92,129 +139,23 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
       page_slug: pathname || 'unknown'
     });
 
-    try {
-      const response = await fetch('/api/ai/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          message: content.trim(),
-          conversationHistory: messages.slice(-10).map(m => ({
-            type: m.role,
-            content: m.content,
-          })),
-          pageSlug: pathname || 'global',
-          service: 'floating_widget',
-        }),
-      });
-
-      if (!response.ok) {
-        let errorText = '';
-        let errorData: any = null;
-        try {
-          const contentType = response.headers.get('content-type');
-          if (contentType?.includes('application/json')) {
-            errorData = await response.json();
-            errorText = errorData.message || errorData.error || 'Unknown error';
-          } else {
-            errorText = await response.text();
-          }
-        } catch (e) {
-          errorText = 'Unknown error';
-        }
-        console.error('API Error:', response.status, errorText);
-        
-        // Create error message for user
-        const errorMessage: Message = {
-          id: (Date.now() + 1).toString(),
-          role: 'assistant',
-          content: errorData?.message || 
-            (response.status === 429 
-              ? 'Too many requests. Please wait a moment and try again.' 
-              : response.status === 500
-              ? 'Server error. Please try again or call +91-9778280044.'
-              : `Failed to get AI response. Please try again or call +91-9778280044.`),
-        };
-        setMessages(prev => [...prev, errorMessage]);
-        setIsLoading(false);
-        return;
-      }
-
-      // Use response.text() instead of ReadableStream for better browser compatibility
-      // This is more reliable across all browsers, including incognito mode
-      const fullContent = await response.text();
-
-      // Ensure we have content
-      if (!fullContent.trim()) {
-        const errorMessage: Message = {
-          id: (Date.now() + 1).toString(),
-          role: 'assistant',
-          content: "No response received. Please check your connection and try again, or call +91-9778280044.",
-        };
-        setMessages(prev => [...prev, errorMessage]);
-        setIsLoading(false);
-        return;
-      }
-
-      // Create assistant message with the full content
-      const assistantMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        role: 'assistant',
-        content: fullContent.trim(),
-      };
-
-      setMessages(prev => [...prev, assistantMessage]);
-
-      const endTime = performance.now();
-      const duration = endTime - startTime;
-
-      trackMiddlewareEvent('chat_response_received', {
-        source: 'floating_widget',
-        duration_ms: Math.round(duration),
-        success: true
-      });
-
-      // Check for emergency keywords
-      const emergencyKeywords = ['emergency', 'urgent', 'immediately', 'call', 'stroke', 'seizure'];
-      const hasEmergency = emergencyKeywords.some(keyword =>
-        fullContent.toLowerCase().includes(keyword)
-      );
-
-      if (hasEmergency) {
-        setShowEmergencyAlert(true);
-        trackMiddlewareEvent('chat_emergency_detected', {
-          source: 'floating_widget'
-        });
-      }
-
-      logContactFormSubmit('ai_chat_widget', true);
-    } catch (err) {
-      console.error('Chat error:', err);
-      const endTime = performance.now();
-      const duration = endTime - startTime;
-
-      setError(err instanceof Error ? err : new Error('Failed to send message'));
-      logContactFormSubmit('ai_chat_widget', false);
-
-      trackMiddlewareEvent('chat_error', {
-        source: 'floating_widget',
-        duration_ms: Math.round(duration),
-        error: err instanceof Error ? err.message : 'Unknown error'
-      });
-
-      const errorMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        role: 'assistant',
-        content: "I'm having trouble right now. Please call +91-9778280044 for immediate assistance.",
-      };
-      setMessages(prev => [...prev, errorMessage]);
-    } finally {
-      setIsLoading(false);
-    }
+    await sendMessage({ text: content.trim() });
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await sendMessage(input);
+    if (!input.trim() || isLoading) return;
+
+    // Log interaction
+    logAppointmentBooking('ai_chat_widget_interaction', 'general');
+    trackMiddlewareEvent('chat_message_sent', {
+      source: 'floating_widget',
+      page_slug: pathname || 'unknown'
+    });
+
+    const content = input;
+    setInput('');
+    await sendMessage({ text: content.trim() });
   };
 
   const quickActions = [
@@ -315,22 +256,29 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
             role="log"
             aria-live="polite"
           >
-            {messages.map((message) => (
-              <div
-                key={message.id}
-                className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'} animate-in fade-in slide-in-from-bottom-2 duration-200`}
-              >
+            {messages.map((message) => {
+              // Extract text content safely from parts
+              const content = message.parts
+                ? message.parts.filter(p => p.type === 'text').map(p => (p as any).text).join('')
+                : '';
+
+              return (
                 <div
-                  className={`max-w-[85%] px-3 py-2 rounded-2xl text-sm ${
-                    message.role === 'user'
-                      ? 'bg-blue-600 text-white rounded-br-none'
-                      : 'bg-white text-gray-800 border border-gray-100 shadow-sm rounded-bl-none'
-                  }`}
+                  key={message.id}
+                  className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'} animate-in fade-in slide-in-from-bottom-2 duration-200`}
                 >
-                  <p className="whitespace-pre-wrap break-words">{message.content || '...'}</p>
+                  <div
+                    className={`max-w-[85%] px-3 py-2 rounded-2xl text-sm ${
+                      message.role === 'user'
+                        ? 'bg-blue-600 text-white rounded-br-none'
+                        : 'bg-white text-gray-800 border border-gray-100 shadow-sm rounded-bl-none'
+                    }`}
+                  >
+                    <p className="whitespace-pre-wrap break-words">{content || '...'}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
 
             {isLoading && (
               <div className="flex justify-start">
@@ -338,9 +286,7 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
                   <div className="flex items-center space-x-2">
                     <Loader2 size={14} className="animate-spin text-blue-600" />
                     <span className="text-xs text-gray-500">
-                      {messages[messages.length - 1]?.role === 'assistant' && messages[messages.length - 1]?.content 
-                        ? 'Typing...' 
-                        : 'Thinking...'}
+                       {messages[messages.length - 1]?.role === 'assistant' ? 'Typing...' : 'Thinking...'}
                     </span>
                   </div>
                 </div>
@@ -350,7 +296,9 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
             {error && (
               <div className="flex justify-start">
                 <div className="bg-red-50 border border-red-200 shadow-sm px-3 py-2 rounded-2xl rounded-bl-none">
-                  <p className="text-xs text-red-700">{error.message}</p>
+                  <p className="text-xs text-red-700">
+                    {error.message || "I'm having trouble right now. Please call +91-9778280044 for immediate assistance."}
+                  </p>
                 </div>
               </div>
             )}
@@ -363,7 +311,7 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
               {quickActions.map((action, i) => (
                 <button
                   key={i}
-                  onClick={() => sendMessage(action)}
+                  onClick={() => handleSendMessage(action)}
                   className="whitespace-nowrap px-3 py-1 bg-white border border-blue-100 text-blue-600 text-xs rounded-full hover:bg-blue-50 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
                 >
                   {action}

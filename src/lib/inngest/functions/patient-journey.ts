@@ -3,6 +3,7 @@ import type { Events } from "@/src/lib/inngest";
 import { crm } from "@/src/lib/crm/index";
 import { CalendarService } from "@/src/lib/calendar/index";
 import { EmailService } from "@/src/lib/email";
+import { generatePatientEducation } from "@/src/lib/gemini/file-search";
 
 // Patient Journey: Initial Contact to Consultation
 export const patientJourneyOrchestrator = inngest.createFunction(
@@ -356,12 +357,23 @@ export const postAppointmentFollowUp = inngest.createFunction(
         ]
       };
 
+      // Generate detailed content
+      let detailedContent: string | undefined;
+      try {
+        const generated = await generatePatientEducation(diagnosis, []);
+        detailedContent = generated.answer;
+      } catch (error) {
+        console.error("Failed to generate patient education content:", error);
+        // Fallback to undefined, email will just list materials
+      }
+
       const result = await EmailService.sendEducationMaterials(
         patientEmail,
         patientName,
         diagnosis,
         "post-appointment",
-        educationContent.materials
+        educationContent.materials,
+        detailedContent
       );
       console.log("Education materials:", educationContent);
       return {

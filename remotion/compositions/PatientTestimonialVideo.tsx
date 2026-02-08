@@ -17,11 +17,20 @@ import { BrandWatermark } from '../components/shared/BrandWatermark';
 import { RatingIntroScene } from '../components/PatientTestimonial/RatingIntroScene';
 import { TestimonialCardScene } from '../components/PatientTestimonial/TestimonialCardScene';
 
+const DEFAULT_TESTIMONIALS = [
+  { quote: 'I was speaking normally the next day.', patientInitials: 'RM', procedure: 'Meningioma Surgery', rating: 5, recoveryHighlight: 'Speaking normally next day' },
+  { quote: 'I could stand straight the very next morning.', patientInitials: 'PK', procedure: 'TLIF Spine Surgery', rating: 5, recoveryHighlight: 'Walking next morning' },
+  { quote: 'The MVD surgery gave me my life back.', patientInitials: 'SA', procedure: 'Trigeminal Neuralgia MVD', rating: 5, recoveryHighlight: 'Pain-free after years' },
+];
+const DEFAULT_DOCTOR_NAME = 'Dr. Sayuj Krishnan';
+const DEFAULT_OVERALL_RATING = 4.9;
+const DEFAULT_TOTAL_REVIEWS = 500;
+
 export const PatientTestimonialVideo: React.FC<PatientTestimonialProps> = ({
-  testimonials,
-  doctorName,
-  overallRating,
-  totalReviews,
+  testimonials = DEFAULT_TESTIMONIALS,
+  doctorName = DEFAULT_DOCTOR_NAME,
+  overallRating = DEFAULT_OVERALL_RATING,
+  totalReviews = DEFAULT_TOTAL_REVIEWS,
 }) => {
   const introDuration = 210; // 7 seconds
   const remainingFrames = 900 - introDuration;

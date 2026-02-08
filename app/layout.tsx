@@ -7,18 +7,16 @@ import "./globals.css";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
-  // 'optional' reduces CLS by using the fallback font if the web font isn't available immediately.
-  // This prioritizes layout stability (CWV) over the custom font.
-  display: "optional",
+  // 'swap' ensures text is visible immediately with fallback, then swaps.
+  display: "swap",
 });
 
 const merriweather = Merriweather({
   subsets: ["latin"],
   variable: "--font-merriweather",
   weight: ["400", "700"],
-  // 'optional' reduces CLS by using the fallback font if the web font isn't available immediately.
-  // This prioritizes layout stability (CWV) over the custom font.
-  display: "optional",
+  // 'swap' ensures text is visible immediately with fallback, then swaps.
+  display: "swap",
 });
 
 declare global {
@@ -37,6 +35,7 @@ import GoogleAnalytics from "../src/components/GoogleAnalytics";
 import DynamicStickyCTA from "./_components/DynamicStickyCTA";
 import FloatingChatWidget from "./_components/DynamicFloatingChatWidget";
 import FlagValuesEmitter from "./_components/FlagValuesEmitter";
+import StandaloneFlagValues from "./_components/StandaloneFlagValues";
 import MiddlewareRUM from "./_components/MiddlewareRUM";
 import HypertuneWrapper from "./providers/hypertune-wrapper";
 import { SITE_URL } from "../src/lib/seo";
@@ -45,7 +44,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default: "Neurosurgeon & Endoscopic Spine Specialist Hyderabad | Dr. Sayuj Krishnan",
-    template: "%s | Dr. Sayuj Krishnan"
+    template: "%s"
   },
   description:
     "German-trained neurosurgeon in Hyderabad for minimally invasive spine and brain surgery with same-day discharge at Yashoda Hospital, Malakpet.",
@@ -192,6 +191,7 @@ export default function RootLayout({
           <DynamicStickyCTA />
         </HypertuneWrapper>
         <Footer />
+        <StandaloneFlagValues />
         {process.env.VERCEL ? <Analytics /> : null}
       </body>
     </html>

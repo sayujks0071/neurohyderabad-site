@@ -84,7 +84,7 @@ async function checkHealth() {
 
   // Check sitemap
   try {
-    const response = await fetch(`${SITE_URL}/sitemap.xml`);
+    const response = await fetch(`${SITE_URL}/sitemap-main.xml`);
     if (response.ok) {
       const text = await response.text();
       const urlCount = (text.match(/<url>/g) || []).length;

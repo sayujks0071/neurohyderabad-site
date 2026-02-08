@@ -65,6 +65,12 @@ export default function Page() {
         Serving patients from <strong>Banjara Hills</strong> and nearby localities. OPD at Yashoda Hospitals (Malakpet) with endoscopic spine expertise.
       </p>
 
+      <div className="mt-4 bg-blue-50 border border-blue-100 p-4 rounded-lg">
+        <p className="text-sm text-blue-800">
+          <strong>Common conditions treated:</strong> <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="underline hover:text-blue-900">Sciatica</Link>, Slip Disc, Brain Tumors, and Spinal Stenosis.
+        </p>
+      </div>
+
       <div className="mt-6">
         <LocationCTAs mode="location" locationId={location.id} />
       </div>

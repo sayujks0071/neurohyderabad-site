@@ -19,7 +19,7 @@ export const metadata = {
   title: "Dr. Sayuj Krishnan - Neurosurgeon in Malakpet | Yashoda Hospitals",
   description:
     "Dr. Sayuj Krishnan at Yashoda Hospital Malakpet offers Daycare Endoscopic Spine Surgery, brain tumor care, and 24/7 emergency neurosurgery. Book a visit.",
-  keywords: "neurosurgeon malakpet, yashoda hospital malakpet neurosurgeon, spine surgeon malakpet, daycare spine surgery malakpet, endoscopic spine surgery malakpet",
+  keywords: "neurosurgeon malakpet, yashoda hospital malakpet neurosurgeon, spine surgeon malakpet, daycare spine surgery malakpet, endoscopic spine surgery malakpet, spine fracture treatment malakpet, vertebroplasty malakpet",
   alternates: { canonical: "https://www.drsayuj.info/neurosurgeon-malakpet" },
   openGraph: {
     title: "Dr. Sayuj Krishnan - Neurosurgeon in Malakpet | Yashoda Hospitals",
@@ -78,7 +78,8 @@ export default function MalakpetNeurosurgeonPage() {
       { name: "Head Injuries (Trauma)", url: "/emergency-rehabilitation" },
       { name: "Spondylolisthesis", url: "/conditions/spondylolisthesis-treatment-hyderabad" },
       { name: "Neck Pain (Cervical Spondylosis)", url: "/conditions/cervical-radiculopathy-treatment-hyderabad" },
-      { name: "Trigeminal Neuralgia", url: "/conditions/trigeminal-neuralgia-treatment-hyderabad" }
+      { name: "Trigeminal Neuralgia", url: "/conditions/trigeminal-neuralgia-treatment-hyderabad" },
+      { name: "Osteoporotic Fracture", url: "/conditions/osteoporotic-spine-fracture-hyderabad" }
   ];
 
   return (
@@ -137,10 +138,10 @@ export default function MalakpetNeurosurgeonPage() {
             </h2>
             <p className="text-gray-700 leading-relaxed mb-4">
               Residents of <strong>Malakpet, Dilsukhnagar, and LB Nagar</strong> no longer need to travel far for advanced brain and spine care.
-              <strong>Dr. Sayuj Krishnan</strong> brings international expertise to the heart of Malakpet at Yashoda Hospitals.
+              <strong>Dr. Sayuj Krishnan</strong> brings international expertise to the heart of Malakpet at Yashoda Hospitals, <Link href="/services/endoscopic-spine-surgery-hyderabad" className="text-blue-600 underline font-semibold">specialising in endoscopic spine surgery with 90% same-day discharge</Link>.
             </p>
             <p className="text-gray-700 leading-relaxed mb-6">
-              Specializing in <strong>Keyhole (Endoscopic) Spine Surgery</strong>, Dr. Sayuj treats slip discs and sciatica without major open surgery.
+              Using advanced <strong>Keyhole (Endoscopic) Spine Surgery</strong> techniques, Dr. Sayuj treats slip discs and sciatica without major open surgery.
               Most patients walk within hours and go home the same day. He is also a leading expert in <strong>Neuronavigation-guided Brain Tumor Surgery</strong>, ensuring maximum safety for delicate brain procedures.
             </p>
             
@@ -394,6 +395,14 @@ export default function MalakpetNeurosurgeonPage() {
                     <li className="flex justify-between text-red-600"><span>Emergency:</span> <span className="font-bold">24×7 Available</span></li>
                   </ul>
                 </div>
+
+                <div className="mt-4 border-t pt-4">
+                   <h4 className="font-semibold text-gray-900 mb-2">Consultation & Payments</h4>
+                   <p className="text-sm text-gray-700">
+                      <strong>Accepted:</strong> Cash, Credit/Debit Cards, UPI, Insurance Cashless.<br/>
+                      <span className="text-xs text-gray-500">Registration & Consultation fees apply.</span>
+                   </p>
+                </div>
               </div>
             </div>
 
@@ -410,6 +419,43 @@ export default function MalakpetNeurosurgeonPage() {
                     </details>
                 ))}
                </div>
+            </div>
+          </div>
+
+          {/* Getting Here Section */}
+          <div className="mt-8 border-t border-gray-200 pt-8">
+            <h3 className="text-xl font-bold text-gray-900 mb-6">How to Reach Us</h3>
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="flex items-start p-4 bg-white rounded-lg border border-gray-100 shadow-sm">
+                <span className="text-2xl mr-3">🚇</span>
+                <div>
+                  <h4 className="font-semibold text-gray-900 text-sm">By Metro</h4>
+                  <p className="text-xs text-gray-600 mt-1">
+                    Nearest Station: <strong>Malakpet Metro Station (Red Line)</strong>.<br/>
+                    Just a 2-minute walk (200m) from the station exit.
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start p-4 bg-white rounded-lg border border-gray-100 shadow-sm">
+                <span className="text-2xl mr-3">🚌</span>
+                <div>
+                  <h4 className="font-semibold text-gray-900 text-sm">By Bus</h4>
+                  <p className="text-xs text-gray-600 mt-1">
+                    Alight at <strong>Nalgonda X Roads</strong> or Yashoda Hospital Bus Stop.<br/>
+                    Direct buses available from Koti, Dilsukhnagar, and LB Nagar.
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start p-4 bg-white rounded-lg border border-gray-100 shadow-sm">
+                <span className="text-2xl mr-3">🅿️</span>
+                <div>
+                  <h4 className="font-semibold text-gray-900 text-sm">Parking</h4>
+                  <p className="text-xs text-gray-600 mt-1">
+                    Ample parking available for patients.<br/>
+                    <strong>Valet Parking</strong> service available at the main entrance.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

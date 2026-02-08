@@ -82,11 +82,7 @@ interface SitemapConfig {
 
 // Default sitemaps for the site
 const DEFAULT_SITEMAPS: SitemapConfig[] = [
-  { path: '/sitemap.xml', description: 'Main sitemap' },
-  { path: '/sitemap-blog.xml', description: 'Blog posts sitemap' },
-  { path: '/sitemap-services.xml', description: 'Services sitemap' },
-  { path: '/sitemap-conditions.xml', description: 'Conditions sitemap' },
-  { path: '/sitemap-locations.xml', description: 'Locations sitemap' },
+  { path: '/sitemap-main.xml', description: 'Main sitemap (canonical)' },
   { path: '/sitemap-images.xml', description: 'Images sitemap' },
   { path: '/sitemap-videos.xml', description: 'Videos sitemap' },
 ];
