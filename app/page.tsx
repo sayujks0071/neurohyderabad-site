@@ -28,6 +28,8 @@ import TrustSignals from "./_components/TrustSignals";
 import PatientEducationVideosWrapper from "./_components/wrappers/PatientEducationVideosWrapper";
 import RecoveryTimelineWrapper from "./_components/wrappers/RecoveryTimelineWrapper";
 import LocalReputationPanelWrapper from "./_components/wrappers/LocalReputationPanelWrapper";
+import RemotionVideoEmbedWrapper from "./_components/RemotionVideoEmbedWrapper";
+import { LocationNAPCard } from "@/src/components/locations/LocationNAPCard";
 
 const HOME_CANONICAL = SITE_URL.endsWith("/") ? SITE_URL : `${SITE_URL}/`;
 

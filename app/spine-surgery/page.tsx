@@ -7,6 +7,7 @@ import MedicalWebPageSchema from "../components/schemas/MedicalWebPageSchema";
 import CostTransparencySection from "../../src/components/CostTransparencySection";
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import PatientEducationVideos from "../_components/PatientEducationVideos";
+import { CheckCircle, AlertCircle } from "lucide-react";
 
 const spineCosts = [
   {
@@ -436,6 +437,89 @@ export default function SpineSurgeryPage() {
                     </Link>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Am I a Candidate? */}
+        <section className="py-16 bg-blue-50">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="text-3xl font-bold text-center mb-12 text-blue-900">Am I a Candidate for Endoscopic Spine Surgery?</h2>
+              <div className="grid md:grid-cols-2 gap-8 mb-12">
+
+                {/* Good Candidates */}
+                <div className="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-green-500">
+                  <div className="flex items-center gap-3 mb-6">
+                    <CheckCircle className="w-8 h-8 text-green-500" />
+                    <h3 className="text-2xl font-semibold text-gray-800">Good Candidates</h3>
+                  </div>
+                  <ul className="space-y-4">
+                    <li className="flex items-start gap-3">
+                      <span className="text-green-500 font-bold text-lg">•</span>
+                      <p className="text-gray-700">
+                        You have <strong>radiating leg pain</strong> (<Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 hover:underline">Sciatica</Link>) that is worse than your back pain.
+                      </p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-green-500 font-bold text-lg">•</span>
+                      <p className="text-gray-700">
+                        You have tried medication and physiotherapy for at least <strong>6 weeks</strong> without lasting relief.
+                      </p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-green-500 font-bold text-lg">•</span>
+                      <p className="text-gray-700">
+                        Your MRI confirms a <Link href="/conditions/slip-disc-treatment-hyderabad" className="text-blue-600 hover:underline">herniated disc</Link> or <Link href="/conditions/spinal-stenosis-treatment-hyderabad" className="text-blue-600 hover:underline">spinal stenosis</Link> compressing a nerve.
+                      </p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-green-500 font-bold text-lg">•</span>
+                      <p className="text-gray-700">
+                        You have muscle weakness or numbness in your foot or leg.
+                      </p>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* May Require Evaluation */}
+                <div className="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-amber-500">
+                  <div className="flex items-center gap-3 mb-6">
+                    <AlertCircle className="w-8 h-8 text-amber-500" />
+                    <h3 className="text-2xl font-semibold text-gray-800">May Require Evaluation</h3>
+                  </div>
+                  <ul className="space-y-4">
+                    <li className="flex items-start gap-3">
+                      <span className="text-amber-500 font-bold text-lg">•</span>
+                      <p className="text-gray-700">
+                        You have severe <strong>spinal instability</strong> (spondylolisthesis) that might require fusion (MISS TLIF) instead of just decompression.
+                      </p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-amber-500 font-bold text-lg">•</span>
+                      <p className="text-gray-700">
+                        You have an active spinal infection or tumor.
+                      </p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-amber-500 font-bold text-lg">•</span>
+                      <p className="text-gray-700">
+                        You have had multiple failed back surgeries previously (requires careful assessment).
+                      </p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="text-center">
+                <p className="text-lg text-gray-700 mb-6">Not sure if your symptoms match?</p>
+                <Link
+                  href="/symptoms-checker"
+                  className="inline-flex items-center justify-center px-8 py-4 bg-blue-600 text-white font-bold rounded-full text-lg shadow-lg hover:bg-blue-700 hover:scale-105 transition-all"
+                >
+                  Check My Symptoms
+                </Link>
               </div>
             </div>
           </div>
