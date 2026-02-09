@@ -310,6 +310,44 @@ async function testSecurityHeaders() {
   assert(nosniff && nosniff.toLowerCase() === "nosniff", `x-content-type-options unexpected: ${nosniff}`);
 }
 
+const MINIMAL_PDF_B64 = "JVBERi0xLjEKMSAwIG9iago8PAovVHlwZSAvQ2F0YWxvZwovUGFnZXMgMiAwIFIKPj4KZW5kb2JqCjIgMCBvYmoKPDwKL1R5cGUgL1BhZ2VzCi9LaWRzIFszIDAgUl0KL0NvdW50IDEKPj4KZW5kb2JqCjMgMCBvYmoKPDwKL1R5cGUgL1BhZ2UKL1BhcmVudCAyIDAgUgovUmVzb3VyY2VzIDw8Ci9Gb250IDw8Ci9GMSA0IDAgUgo+Pgo+PgovTWVkaWFCb3ggWzAgMCA1MDAgODAwXQovQ29udGVudHMgNSAwIFIKPj4KZW5kb2JqCjQgMCBvYmoKPDwKL1R5cGUgL1ZvbnQKL1N1YnR5cGUgL1R5cGUxCi9CYXNlRm9udCAvSGVsdmV0aWNhCj4+CmVuZG9iago1IDAgb2JqCjw8Ci9MZW5ndGggNDQKPj4Kc3RyZWFtCkJUCi9GMSAyNCBUZgoxMDAgMTAwIFRkCihIZWxsbyBXb3JsZCkgVGoKRVQKZW5kc3RyZWFtCmVuZG9iagp4cmVmCjAgNgowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDAwMTAgMDAwMDAgbiAKMDAwMDAwMDA2MCAwMDAwMCBuIAowMDAwMDAwMTU3IDAwMDAwIG4gCjAwMDAwMDAzMDYgMDAwMDAgbiAKMDAwMDAwMDM5MiAwMDAwMCBuIAp0cmFpbGVyCjw8Ci9TaXplIDYKL1Jvb3QgMSAwIFIKPj4Kc3RhcnR4cmVmCjQ5MQolJUVPRgo=";
+
+async function testMriAnalyzer() {
+  if (process.env.TEST_MRI !== '1') {
+    return;
+  }
+
+  // Use global FormData/Blob (available in Node 18+ / Sandbox)
+  const formData = new FormData();
+
+  // Convert base64 -> binary string -> Uint8Array -> Blob
+  const binaryString = atob(MINIMAL_PDF_B64);
+  const bytes = new Uint8Array(binaryString.length);
+  for (let i = 0; i < binaryString.length; i++) {
+    bytes[i] = binaryString.charCodeAt(i);
+  }
+  const blob = new Blob([bytes], { type: 'application/pdf' });
+  formData.append('file', blob, 'test.pdf');
+
+  const res = await fetch(urlFor("/api/mri/analyze"), {
+      method: 'POST',
+      body: formData
+  });
+
+  if (res.status === 429) {
+      console.log("WARN  api: mri analyzer returned 429 (rate limit). Keeping suite green.");
+      return;
+  }
+
+  const bodyText = await res.text();
+  assert(res.status === 200, `mri analyze HTTP ${res.status} ${bodyText.slice(0, 200)}`);
+
+  const json = JSON.parse(bodyText);
+  assert(json.extraction, "missing extraction result");
+  assert(json.analysis, "missing analysis result");
+  assert(json.analysis.plainEnglishSummary, "missing summary");
+}
+
 async function main() {
   console.log(`Sandbox target: ${BASE_URL}`);
   console.log(`Canonical origin: ${CANONICAL_ORIGIN}`);
@@ -321,6 +359,7 @@ async function main() {
   results.push(await test("security headers", testSecurityHeaders));
   results.push(await test("sample pages (canonical/meta/JSON-LD)", testSamplePages));
   results.push(await test("api: neuralink", testNeuralinkApi));
+  results.push(await test("api: mri analyzer", testMriAnalyzer));
 
   const failed = results.filter((r) => !r.ok);
   console.log("");
