@@ -415,7 +415,7 @@ export async function handleAppointmentBooking(
     );
 
     const remindersPromise = scheduleReminders(bookingId, patientInfo, finalDate, finalTime);
-    const educationPromise = preparePatientEducation(patientInfo.chiefComplaint, patientInfo.email);
+    const educationPromise = preparePatientEducation(bookingId, patientInfo);
     const analyticsPromise = trackBookingAnalytics(bookingId, patientInfo, status);
 
     const [_, _webhooks, reminderScheduled] = await Promise.all([
@@ -424,14 +424,6 @@ export async function handleAppointmentBooking(
       remindersPromise,
       educationPromise,
       analyticsPromise,
-    ]);
-
-    // Step 9: Post-booking tasks (Reminders, Education, Analytics)
-    // All run in parallel
-    const [reminderScheduled] = await Promise.all([
-      scheduleReminders(bookingId, patientInfo, finalDate, finalTime),
-      preparePatientEducation(bookingId, patientInfo),
-      trackBookingAnalytics(bookingId, patientInfo, status),
     ]);
 
     logWorkflowEvent(bookingId, "workflow-completed", { status, duration: Date.now() - startTime });
