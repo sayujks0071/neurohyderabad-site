@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { rateLimit } from '@/src/lib/rate-limit';
 import { escapeHtml } from '@/src/lib/validation';
+import { z } from 'zod';
 
 interface BookingRequest {
   message: string;
@@ -224,6 +225,7 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  let body: BookingRequest;
   try {
     body = await request.json();
     
@@ -262,11 +264,11 @@ export async function POST(request: NextRequest) {
       pageSlug: body.pageSlug,
       service: body.service,
       message: body.message,
-      isEmergency: ruleBasedResponse.isEmergency,
-      bookingData: ruleBasedResponse.bookingData
+      isEmergency: aiResponse.isEmergency,
+      bookingData: aiResponse.bookingData
     });
 
-    return NextResponse.json(ruleBasedResponse);
+    return NextResponse.json(aiResponse);
 
   } catch (error) {
     console.error('Error processing AI booking request:', error);
