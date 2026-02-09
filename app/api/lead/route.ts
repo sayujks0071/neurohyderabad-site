@@ -95,6 +95,8 @@ export async function POST(request: NextRequest) {
       preferredDate,
       preferredTime,
       source,
+      painScore: body.painScore,
+      mriScanAvailable: body.mriScanAvailable,
       metadata: {
         ...(body.metadata ?? {}),
         painScore: body.painScore,
