@@ -905,6 +905,77 @@ Emergency Contact: +91-9778280044`,
     }
   }
 
+  // Send system/technical alert
+  static async sendSystemAlert(
+    alertTitle: string,
+    alertDetails: string,
+    severity: string
+  ) {
+    const adminEmail = process.env.SYSTEM_ALERT_EMAIL || 'hellodr@drsayuj.info';
+
+    const emailData: EmailTemplate = {
+      to: adminEmail,
+      from: this.fromEmail,
+      subject: `🚨 SYSTEM ALERT: ${alertTitle} - ${severity.toUpperCase()}`,
+      text: `SYSTEM ALERT - Dr. Sayuj Krishnan Website
+
+Alert: ${alertTitle}
+Severity: ${severity.toUpperCase()}
+Time: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}
+
+Details:
+${alertDetails}
+
+Action Required:
+- Check system logs
+- Verify service status
+- Investigate root cause`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <div style="background: linear-gradient(135deg, #000000, #333333); color: white; padding: 30px; text-align: center;">
+            <h1 style="margin: 0; font-size: 24px;">🚨 SYSTEM ALERT</h1>
+            <p style="margin: 10px 0 0 0; font-size: 14px;">Middleware Monitoring</p>
+          </div>
+
+          <div style="padding: 30px; background: #f8fafc;">
+            <div style="background: #fef2f2; padding: 20px; border-radius: 8px; margin: 20px 0; border: 2px solid #ef4444;">
+              <h3 style="color: #dc2626; margin-top: 0;">${alertTitle}</h3>
+              <p><strong>Severity:</strong> <span style="background: #dc2626; color: white; padding: 2px 6px; border-radius: 4px; font-size: 12px;">${severity.toUpperCase()}</span></p>
+              <p><strong>Time:</strong> ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}</p>
+            </div>
+
+            <div style="background: white; padding: 20px; border-radius: 8px; margin: 20px 0; border: 1px solid #e5e7eb;">
+              <h3 style="margin-top: 0; color: #374151;">Details</h3>
+              <pre style="background: #f1f5f9; padding: 12px; border-radius: 4px; overflow-x: auto; font-size: 12px;">${alertDetails}</pre>
+            </div>
+
+            <div style="text-align: center; margin: 30px 0;">
+              <a href="https://hjptv.middleware.io"
+                 style="background: #333333; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
+                View Dashboard
+              </a>
+            </div>
+          </div>
+        </div>
+      `
+    };
+
+    try {
+      const configError = requireResendConfig('system alert');
+      if (configError) {
+        return configError;
+      }
+
+      const result = await resend!.emails.send(emailData);
+      console.log('System alert sent successfully:', result);
+      return { success: true, messageId: result.data?.id };
+    } catch (error) {
+      console.error('Failed to send system alert:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      return { success: false, error: errorMessage };
+    }
+  }
+
   // Send feedback request
   static async sendFeedbackRequest(
     patientEmail: string,
