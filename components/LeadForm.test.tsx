@@ -37,6 +37,11 @@ describe('LeadForm', () => {
     fireEvent.change(screen.getByLabelText(/Phone Number/i), { target: { value: '9876543210' } });
     fireEvent.change(screen.getByLabelText(/Email/i), { target: { value: 'john@example.com' } });
     fireEvent.change(screen.getByLabelText(/City/i), { target: { value: 'Hyderabad' } });
+
+    // Clinical context
+    fireEvent.change(screen.getByLabelText(/Pain Intensity Score/i), { target: { value: '8' } });
+    fireEvent.click(screen.getByLabelText(/MRI\/CT Scan reports available/i));
+
     fireEvent.change(screen.getByLabelText(/How can we help/i), { target: { value: 'I have severe back pain and need an appointment.' } });
 
     // Submit
@@ -59,6 +64,14 @@ describe('LeadForm', () => {
 
     // Verify fetch was called
     expect(fetchMock).toHaveBeenCalledWith('/api/lead', expect.anything());
+
+    const callArgs = fetchMock.mock.calls[0];
+    const body = JSON.parse(callArgs[1].body);
+    expect(body).toMatchObject({
+      fullName: 'John Doe',
+      painScore: 8,
+      mriScanAvailable: true,
+    });
 
     // Verify "Send another enquiry" button appears (Reset logic validation indirectly)
     expect(screen.getByText(/Send another enquiry/i)).toBeInTheDocument();

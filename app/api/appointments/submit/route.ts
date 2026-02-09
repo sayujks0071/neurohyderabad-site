@@ -86,6 +86,8 @@ export async function POST(request: Request) {
       preferredDate: booking.appointmentDate,
       preferredTime: booking.appointmentTime,
       source,
+      painScore: booking.painScore,
+      mriScanAvailable: booking.mriScanAvailable,
       metadata: {
         age: booking.age,
         gender: booking.gender,

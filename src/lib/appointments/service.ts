@@ -80,6 +80,8 @@ export async function processBooking(booking: BookingData, options: ProcessBooki
       preferredDate: booking.appointmentDate,
       preferredTime: booking.appointmentTime,
       source: source,
+      painScore: booking.painScore,
+      mriScanAvailable: booking.mriScanAvailable,
       metadata: {
         age: booking.age,
         gender: booking.gender,
