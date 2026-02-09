@@ -1,5 +1,5 @@
 name: Jules Competitor Gap Scan
-# v2.0 - Managed by Jules
+# v2.2 - Managed by Jules
 on:
   schedule:
     # 09:00 IST (India Standard Time) = 03:30 UTC
@@ -28,7 +28,7 @@ jobs:
             const promptFile = process.env.PROMPT_FILE;
             const baseTitle = process.env.ISSUE_TITLE;
 
-            // Generate today's date string (YYYY-MM-DD)
+            // Generate today's date (YYYY-MM-DD) for uniqueness
             const date = new Date().toISOString().split('T')[0];
             const title = `${baseTitle} - ${date}`;
 
@@ -50,7 +50,7 @@ jobs:
               per_page: 100
             });
 
-            console.log("Checking for duplicate issue with title: " + title);
+            console.log(`Checking for duplicate issue with title: ${title}`);
 
             // Find strictly matching title to ensure only one issue per day
             const duplicate = existingIssues.find(issue => issue.title === title);
@@ -60,7 +60,7 @@ jobs:
               return;
             }
 
-            // Check if label exists, create if not
+            // Ensure the 'jules' label exists
             try {
               await github.rest.issues.getLabel({
                 owner: context.repo.owner,

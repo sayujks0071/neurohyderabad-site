@@ -1,6 +1,6 @@
 # Local SEO Health Check
 
-Verify the Local SEO signals for "Dr. Sayuj Krishnan".
+Verify Local SEO signals for "Dr. Sayuj Krishnan".
 1. Check `src/data/locations.ts` for accuracy.
 2. Verify that NAP (Name, Address, Phone) is consistent across the site.
 3. Verify that `AppointmentSchema` in `app/appointments/_components/AppointmentSchema.tsx` produces valid JSON-LD for `Physician` and `MedicalClinic`.
@@ -12,4 +12,4 @@ Verify the Local SEO signals for "Dr. Sayuj Krishnan".
 
 <!-- Jules Automation -->
 <!-- Managed by Jules -->
-<!-- v2.0 -->
+<!-- v2.2 -->
