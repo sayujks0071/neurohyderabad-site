@@ -1,5 +1,6 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, NextRequest } from 'next/server';
 import crypto from 'crypto';
+import { rateLimit } from './rate-limit';
 
 /**
  * Constant-time string comparison using SHA-256 hashing to prevent timing attacks.
@@ -34,6 +35,43 @@ export function verifyAdminAccess(request: Request): {
   isAuthorized: boolean;
   response?: NextResponse;
 } {
+  // 🛡️ Sentinel: Rate limiting protection against brute-force attacks
+  // Try to get IP from NextRequest property or headers
+  let ip = 'unknown';
+  if ((request as any).ip) {
+    ip = (request as any).ip;
+  } else {
+    const forwardedFor = request.headers.get('x-forwarded-for');
+    if (forwardedFor) {
+      ip = forwardedFor.split(',')[0].trim();
+    }
+  }
+
+  // Apply rate limit: 60 requests per minute per IP
+  // Allowing 60 req/min for admin tools/scripts seems reasonable while stopping aggressive brute force
+  const limit = rateLimit(ip, 60, 60 * 1000);
+
+  if (!limit.success) {
+    return {
+      isAuthorized: false,
+      response: NextResponse.json(
+        {
+          error: 'Too Many Requests',
+          message: 'Rate limit exceeded. Please try again later.'
+        },
+        {
+          status: 429,
+          headers: {
+            'Retry-After': Math.ceil((limit.reset - Date.now()) / 1000).toString(),
+            'X-RateLimit-Limit': limit.limit.toString(),
+            'X-RateLimit-Remaining': limit.remaining.toString(),
+            'X-RateLimit-Reset': Math.ceil(limit.reset / 1000).toString()
+          }
+        }
+      ),
+    };
+  }
+
   const adminKey = process.env.ADMIN_ACCESS_KEY;
 
   // Fail secure: if no key is configured, deny everything
