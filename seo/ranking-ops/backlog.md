@@ -30,3 +30,8 @@
 
 ## 2026-02-08
 - **Internal Linking:** Ensure other "Service" pages (e.g., Epilepsy Surgery) have a clear "Red Flag" section linking back to "Condition" pages.
+
+## 2026-02-09
+- **Internal Linking:** Ensure all "Service" pages link to "Symptoms Checker" as a CTA.
+- **Content Gap:** Add "What to Expect at Your First Consultation" section to Service pages.
+- **Schema:** Enhance `FAQSchema` to include "acceptedAnswer" schema for more nuanced questions (e.g., specific recovery timelines).
