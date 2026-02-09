@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Loader2 } from "lucide-react";
+import { Loader2, CheckCircle } from "lucide-react";
 import { trackMiddlewareEvent } from "@/src/lib/middleware/rum";
 import Input from "@/packages/appointment-form/ui/Input";
 import Textarea from "@/packages/appointment-form/ui/Textarea";
@@ -120,13 +120,14 @@ export default function LeadForm() {
       <div
         ref={successRef}
         tabIndex={-1}
-        className="bg-green-50 border border-green-200 rounded-2xl p-8 text-center outline-none"
+        className="bg-white/90 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-8 text-center outline-none animate-in fade-in zoom-in-95 duration-500"
       >
-        <h3 className="text-2xl font-bold text-green-800 mb-4">Request Received</h3>
-        <p className="text-green-700 mb-6">{APPOINTMENT_SUCCESS_MESSAGE}</p>
+        <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
+        <h3 className="text-3xl font-bold text-slate-800 mb-3">Request Received!</h3>
+        <p className="text-slate-600 leading-relaxed max-w-lg mx-auto mb-8">{APPOINTMENT_SUCCESS_MESSAGE}</p>
         <button
           onClick={() => setIsSubmitted(false)}
-          className="text-green-800 underline hover:text-green-900 focus:outline-none focus:ring-2 focus:ring-green-500 rounded p-1"
+          className="inline-flex items-center justify-center bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
         >
           Send another enquiry
         </button>
