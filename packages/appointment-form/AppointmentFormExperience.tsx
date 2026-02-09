@@ -9,6 +9,7 @@ import Faq from "./Faq";
 import MapSection from "./MapSection";
 import { APPOINTMENT_SUCCESS_MESSAGE } from "./constants";
 import { trackConversionOnly } from "@/src/lib/google-ads-conversion";
+import { trackMiddlewareEvent } from "@/src/lib/middleware/rum";
 
 type ViewState = "form" | "confirmation";
 
@@ -29,6 +30,13 @@ function AppointmentFormContent({
 
   const submitForm = async (data: BookingData) => {
     setIsLoading(true);
+
+    // Track form submission attempt
+    trackMiddlewareEvent('form.submit', {
+      form_type: 'appointment',
+      source: bookingSource
+    });
+
     try {
       const response = await fetch(apiEndpoint, {
         method: "POST",
@@ -45,6 +53,14 @@ function AppointmentFormContent({
       }
 
       const payload = await response.json();
+
+      // Track successful submission
+      trackMiddlewareEvent('form.success', {
+        form_type: 'appointment',
+        source: bookingSource,
+        used_ai: payload.usedAI
+      });
+
       setBookingData(payload.booking);
       // Use the specific reassuring message requested by the user
       setConfirmationMessage(APPOINTMENT_SUCCESS_MESSAGE);
@@ -64,6 +80,14 @@ function AppointmentFormContent({
       }
     } catch (error) {
       console.error("[appointments] Failed to submit booking:", error);
+
+      // Track submission error
+      trackMiddlewareEvent('form.error', {
+        form_type: 'appointment',
+        source: bookingSource,
+        error: error instanceof Error ? error.message : 'Unknown error'
+      });
+
       addToast(
         error instanceof Error
           ? error.message
