@@ -1,4 +1,5 @@
 import type { NextRequest } from 'next/server';
+import { SITE_URL } from '@/src/lib/seo';
 
 // Serve a deterministic, newline-formatted robots.txt.
 // We intentionally avoid MetadataRoute here to keep full control over formatting and content.
@@ -26,8 +27,6 @@ const DISALLOW_PATHS = [
   '/utm-links/',
 ];
 
-const SITE = 'https://www.drsayuj.info';
-
 export function GET(_req: NextRequest) {
   const lines: string[] = [];
   lines.push('User-agent: *');
@@ -36,9 +35,9 @@ export function GET(_req: NextRequest) {
   for (const path of DISALLOW_PATHS) lines.push(`Disallow: ${path}`);
 
   // Sitemaps (all should be HTTP 200 and valid XML)
-  lines.push(`Sitemap: ${SITE}/sitemap.xml`);
-  lines.push(`Sitemap: ${SITE}/sitemap-images.xml`);
-  lines.push(`Sitemap: ${SITE}/sitemap-videos.xml`);
+  lines.push(`Sitemap: ${SITE_URL}/sitemap.xml`);
+  lines.push(`Sitemap: ${SITE_URL}/sitemap-images.xml`);
+  lines.push(`Sitemap: ${SITE_URL}/sitemap-videos.xml`);
 
   return new Response(lines.join('\n') + '\n', {
     headers: {
