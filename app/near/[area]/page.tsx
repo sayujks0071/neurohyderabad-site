@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import SchemaScript from '@/app/_schema/Script';
-import StandardCTA from '@/app/_components/StandardCTA';
-import MapCard from '@/app/_components/MapCard';
+import { LocationCTAs } from '@/src/components/locations/LocationCTAs';
+import { LocationMapEmbed } from '@/src/components/locations/LocationMapEmbed';
 import { getLocationById } from '@/src/data/locations';
 import { Metadata } from 'next';
 import { makeMetadata } from '@/app/_lib/meta';
@@ -214,12 +214,14 @@ export default async function AreaPage({ params }: { params: Promise<{ area: str
         </ul>
       </section>
 
-      <StandardCTA className="my-8" />
+      <div className="my-8">
+        <LocationCTAs mode="location" locationId={location.id} />
+      </div>
 
       <section>
         <h2>Directions</h2>
         <p>Set your navigation to “Yashoda Hospital Malakpet OPD Block”. Use the map below for live traffic updates.</p>
-        <MapCard area={data.name} mapUrl={location.embed_url} />
+        <LocationMapEmbed mode="location" locationId={location.id} className="mt-6" />
       </section>
 
       <LocationNAPCard location={location} />
