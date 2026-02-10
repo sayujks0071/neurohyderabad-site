@@ -1,9 +1,23 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { appointments, patients } from '@/src/lib/db';
 import { processBooking } from '@/src/lib/appointments/service';
+import { locations } from '@/src/data/locations';
 import type { BookingData } from '@/packages/appointment-form/types';
 
 export const dynamic = 'force-dynamic';
+
+const SERVICES = [
+  { name: 'Minimally Invasive Spine Surgery', url: '/services/minimally-invasive-spine-surgery' },
+  { name: 'Endoscopic Discectomy', url: '/services/endoscopic-discectomy-hyderabad' },
+  { name: 'Brain Tumor Surgery', url: '/services/brain-tumor-surgery-hyderabad' },
+  { name: 'Awake Spine Surgery', url: '/services/awake-spine-surgery-hyderabad' },
+  { name: 'Spinal Fusion Surgery', url: '/services/spinal-fusion-surgery-hyderabad' },
+  { name: 'Kyphoplasty & Vertebroplasty', url: '/services/kyphoplasty-vertebroplasty-hyderabad' },
+  { name: 'Epilepsy Surgery', url: '/services/epilepsy-surgery-hyderabad' },
+  { name: 'Peripheral Nerve Surgery', url: '/services/peripheral-nerve-surgery-hyderabad' },
+  { name: 'Cooled Radiofrequency Ablation', url: '/services/cooled-radiofrequency-ablation-hyderabad' },
+  { name: 'Robotic Spine Surgery', url: '/services/robotic-spine-surgery-hyderabad' },
+];
 
 function validateApiKey(request: NextRequest): boolean {
   const apiKey = request.headers.get('x-api-key');
@@ -26,12 +40,30 @@ export async function GET(request: NextRequest) {
     if (!tool) {
       return NextResponse.json({
         message: 'OpenClaw Integration API',
-        tools: ['dashboard', 'appointments', 'patients', 'book_appointment'],
-        usage: '?tool=<tool_name> (use POST for book_appointment)'
+        tools: ['dashboard', 'appointments', 'patients', 'get_services', 'get_locations', 'check_availability', 'book_appointment'],
+        usage: '?tool=<tool_name> (use POST for book_appointment and check_availability)'
       });
     }
 
     switch (tool) {
+      case 'get_services':
+        return NextResponse.json({
+          tool: 'get_services',
+          data: SERVICES
+        });
+
+      case 'get_locations':
+        return NextResponse.json({
+          tool: 'get_locations',
+          data: locations.map(loc => ({
+            id: loc.id,
+            name: loc.name,
+            address: loc.address,
+            phone: loc.telephone,
+            slug: loc.slug
+          }))
+        });
+
       case 'dashboard': {
         const stats = await appointments.getStats();
         return NextResponse.json({
@@ -154,6 +186,26 @@ export async function POST(request: NextRequest) {
                 message: result.error || result.message
             }, { status: 500 });
         }
+      }
+
+      case 'check_availability': {
+        const { date, time } = body;
+        if (!date || !time) {
+          return NextResponse.json(
+            { error: 'Missing Parameter', message: 'date (YYYY-MM-DD) and time (HH:MM) are required' },
+            { status: 400 }
+          );
+        }
+
+        const count = await appointments.checkSlot(date, time);
+        return NextResponse.json({
+          tool: 'check_availability',
+          data: {
+            available: count === 0,
+            date,
+            time
+          }
+        });
       }
 
       default:
