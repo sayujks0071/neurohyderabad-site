@@ -53,8 +53,8 @@ const Button: React.FC<ButtonProps> = ({
         className={combinedClasses}
         target={target}
         rel={rel}
-        onClick={onClick}
-        {...props}
+        onClick={onClick as any}
+        {...props as any}
       >
         {children}
       </Link>
