@@ -7,16 +7,17 @@ import "./globals.css";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
-  // 'swap' ensures text is visible immediately with fallback, then swaps.
-  display: "swap",
+  // 'optional' prevents layout shifts (CLS) by only using the font if available immediately.
+  // This prioritizes stability and LCP over FOUT.
+  display: "optional",
 });
 
 const merriweather = Merriweather({
   subsets: ["latin"],
   variable: "--font-merriweather",
   weight: ["400", "700"],
-  // 'swap' ensures text is visible immediately with fallback, then swaps.
-  display: "swap",
+  // 'optional' prevents layout shifts (CLS) by only using the font if available immediately.
+  display: "optional",
 });
 
 declare global {
