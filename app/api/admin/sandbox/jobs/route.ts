@@ -25,7 +25,7 @@ const ALLOWED_JOBS = {
 export const runtime = "nodejs";
 
 export async function POST(request: Request) {
-  const { isAuthorized, response } = verifyAdminAccess(request);
+  const { isAuthorized, response } = await verifyAdminAccess(request);
   if (!isAuthorized) return response!;
 
   const ip = request.headers.get("x-forwarded-for")?.split(',')[0] || "127.0.0.1";

@@ -5,7 +5,7 @@ import { verifyAdminAccess } from "@/src/lib/security";
 export const runtime = "nodejs";
 
 export async function GET(request: Request) {
-  const { isAuthorized, response } = verifyAdminAccess(request);
+  const { isAuthorized, response } = await verifyAdminAccess(request);
   if (!isAuthorized) return response!;
 
   const { searchParams } = new URL(request.url);

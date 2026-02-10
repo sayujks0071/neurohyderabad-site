@@ -2,31 +2,34 @@ import { NextResponse, NextRequest } from 'next/server';
 import { rateLimit } from './rate-limit';
 
 /**
- * Constant-time string comparison.
- * Note: Returns false early if lengths differ, which leaks length but avoids timing attacks on content.
+ * Constant-time string comparison using SHA-256 hashing.
  *
  * @param a First string (e.g., provided key)
  * @param b Second string (e.g., secret key)
  * @returns true if strings are equal, false otherwise
  */
-export function secureCompare(a: string, b: string): boolean {
+export async function secureCompare(a: string, b: string): Promise<boolean> {
   if (typeof a !== 'string' || typeof b !== 'string') {
     return false;
   }
 
-  // Use TextEncoder to handle UTF-8 strings correctly (avoiding charCodeAt issues with surrogate pairs)
+  // Use crypto.subtle.digest which is available in both Node.js (via globalThis.crypto) and Edge Runtime
   const encoder = new TextEncoder();
   const aBuf = encoder.encode(a);
   const bBuf = encoder.encode(b);
 
-  if (aBuf.byteLength !== bBuf.byteLength) {
-    return false;
-  }
+  // Hash both inputs to ensure constant length comparison
+  const hashA = await crypto.subtle.digest('SHA-256', aBuf);
+  const hashB = await crypto.subtle.digest('SHA-256', bBuf);
 
-  // Constant-time comparison
+  const viewA = new DataView(hashA);
+  const viewB = new DataView(hashB);
+
+  // Constant-time comparison of hashes
   let result = 0;
-  for (let i = 0; i < aBuf.byteLength; i++) {
-    result |= aBuf[i] ^ bBuf[i];
+  // SHA-256 produces 32 bytes, so byteLength is always 32
+  for (let i = 0; i < hashA.byteLength; i++) {
+    result |= viewA.getUint8(i) ^ viewB.getUint8(i);
   }
 
   return result === 0;
@@ -41,10 +44,10 @@ export function secureCompare(a: string, b: string): boolean {
  *
  * 🛡️ Sentinel: Used to secure admin-only API routes.
  */
-export function verifyAdminAccess(request: Request): {
+export async function verifyAdminAccess(request: Request): Promise<{
   isAuthorized: boolean;
   response?: NextResponse;
-} {
+}> {
   // 🛡️ Sentinel: Rate limiting protection against brute-force attacks
   // Try to get IP from NextRequest property or headers
   let ip = 'unknown';
@@ -98,7 +101,7 @@ export function verifyAdminAccess(request: Request): {
 
   // Check header (preferred for APIs)
   const headerKey = request.headers.get('x-admin-key');
-  if (headerKey && secureCompare(headerKey, adminKey)) {
+  if (headerKey && await secureCompare(headerKey, adminKey)) {
     return { isAuthorized: true };
   }
 
@@ -106,7 +109,7 @@ export function verifyAdminAccess(request: Request): {
   try {
     const url = new URL(request.url);
     const queryKey = url.searchParams.get('key');
-    if (queryKey && secureCompare(queryKey, adminKey)) {
+    if (queryKey && await secureCompare(queryKey, adminKey)) {
       return { isAuthorized: true };
     }
   } catch (e) {
