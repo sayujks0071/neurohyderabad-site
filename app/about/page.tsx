@@ -4,6 +4,7 @@ import Image from "next/image";
 import { SITE_URL } from "../../src/lib/seo";
 import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
 import { PhysicianSchema } from "../../src/components/schema/PhysicianSchema";
+import MedicalWebPageSchema from "../components/schemas/MedicalWebPageSchema";
 import Section from "../_components/Section";
 import Card from "../_components/Card";
 import Button from "../_components/Button";
@@ -72,6 +73,16 @@ export default function AboutPage() {
         { name: "About Dr. Sayuj Krishnan", path: "/about" }
       ]} />
       <PhysicianSchema />
+      <MedicalWebPageSchema
+        pageType="about"
+        pageSlug="/about"
+        title="About Dr. Sayuj Krishnan | Premier Neurosurgeon in Hyderabad | Credentials & Experience"
+        description="Learn about Dr. Sayuj Krishnan's exceptional training, over 9 years of neurosurgical experience, German fellowship, and pioneering work in minimally invasive brain & spine surgery in Hyderabad."
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "About Dr. Sayuj Krishnan", path: "/about" }
+        ]}
+      />
 
       <div className="min-h-screen bg-white">
         {/* Hero Section */}

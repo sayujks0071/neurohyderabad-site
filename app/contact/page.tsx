@@ -10,6 +10,8 @@ import Section from "../_components/Section";
 import Card from "../_components/Card";
 import Button from "../_components/Button";
 import LeadForm from "@/components/LeadForm";
+import MedicalWebPageSchema from "../components/schemas/MedicalWebPageSchema";
+import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
 
 const clinicSchema = getMedicalClinicSchema();
 
@@ -67,6 +69,22 @@ export default function ContactPage() {
   return (
     <>
       <JsonLd data={clinicSchema} />
+      <MedicalWebPageSchema
+        pageType="contact"
+        pageSlug="/contact"
+        title="Contact Dr Sayuj Krishnan | Neurosurgeon in Hyderabad"
+        description="Contact Dr Sayuj Krishnan for neurosurgical consultations. Phone: +91 9778280044, Email: hellodr@drsayuj.info. Located at Yashoda Hospital, Malakpet."
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Contact", path: "/contact" }
+        ]}
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Contact", path: "/contact" }
+        ]}
+      />
       <Breadcrumbs
         items={[
           { name: "Home", href: "/" },

@@ -137,17 +137,35 @@ export const analytics = {
     });
   },
 
-  appointmentSubmit: (pageSlug: string, errorCount: number = 0) => {
+  appointmentSubmit: (pageSlug: string, source: string, errorCount: number = 0) => {
     track('Appointment_Submit', {
       page_slug: pageSlug,
+      source: source,
       form_errors_count: errorCount
     });
   },
 
-  appointmentSuccess: (pageSlug: string, serviceOrCondition?: string) => {
+  appointmentSuccess: (pageSlug: string, source: string, serviceOrCondition?: string, additionalProps: Record<string, any> = {}) => {
     track('Appointment_Success', {
       page_slug: pageSlug,
-      service_or_condition: serviceOrCondition
+      source: source,
+      service_or_condition: serviceOrCondition,
+      ...additionalProps
+    });
+  },
+
+  leadSubmit: (pageSlug: string, source: string) => {
+    track('Lead_Submit', {
+      page_slug: pageSlug,
+      source: source
+    });
+  },
+
+  leadSuccess: (pageSlug: string, source: string, additionalProps: Record<string, any> = {}) => {
+    track('Lead_Success', {
+      page_slug: pageSlug,
+      source: source,
+      ...additionalProps
     });
   },
 
@@ -164,6 +182,14 @@ export const analytics = {
     track('Phone_Click', {
       page_slug: pageSlug,
       phone_type: phoneType
+    });
+  },
+
+  phoneCall: (pageSlug: string, phoneNumber: string, source: string) => {
+    track('Phone_Call', {
+      page_slug: pageSlug,
+      phone_number: phoneNumber,
+      source: source
     });
   },
 

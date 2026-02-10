@@ -15,8 +15,8 @@ import CostTransparencySection from '@/src/components/CostTransparencySection';
 import PatientJourneySection from '@/src/components/PatientJourneySection';
 
 const baseMetadata = makeMetadata({
-  title: 'Spinal Fusion Surgery Hyderabad',
-  description: 'Expert spinal fusion surgery (TLIF/PLIF) by Dr. Sayuj Krishnan. Stabilization for spondylolisthesis and fractures. Minimally invasive screw fixation.',
+  title: 'Spinal Fusion Surgery Hyderabad | Best TLIF Surgeon Cost',
+  description: 'Expert Spinal Fusion Surgery (TLIF) in Hyderabad by Dr. Sayuj Krishnan. Minimally Invasive Stabilization for Spondylolisthesis. Check Cost & Recovery.',
   canonicalPath: '/services/spinal-fusion-surgery-hyderabad',
 });
 
@@ -115,6 +115,10 @@ export default function SpinalFusionPage() {
     {
       question: 'How long do implants stay in the body?',
       answer: 'The titanium screws and rods are designed to stay in your body permanently. They do not trigger metal detectors and rarely need removal unless there is an infection or discomfort.'
+    },
+    {
+      question: 'Is Artificial Disc Replacement better than Spinal Fusion?',
+      answer: 'For younger patients with healthy facet joints, Disc Replacement is better as it preserves motion. However, if you have spinal instability (spondylolisthesis) or severe arthritis, Fusion (TLIF) is the gold standard for long-term pain relief and stability.'
     }
   ];
 

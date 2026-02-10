@@ -1,24 +1,35 @@
-import { NextResponse } from 'next/server';
-import crypto from 'crypto';
+import { NextResponse, NextRequest } from 'next/server';
+import { rateLimit } from './rate-limit';
 
 /**
- * Constant-time string comparison using SHA-256 hashing to prevent timing attacks.
+ * Constant-time string comparison.
+ * Note: Returns false early if lengths differ, which leaks length but avoids timing attacks on content.
+ *
  * @param a First string (e.g., provided key)
  * @param b Second string (e.g., secret key)
  * @returns true if strings are equal, false otherwise
  */
-function secureCompare(a: string, b: string): boolean {
+export function secureCompare(a: string, b: string): boolean {
   if (typeof a !== 'string' || typeof b !== 'string') {
     return false;
   }
 
-  // Create hashes for both strings
-  const hashA = crypto.createHash('sha256').update(a).digest();
-  const hashB = crypto.createHash('sha256').update(b).digest();
+  // Use TextEncoder to handle UTF-8 strings correctly (avoiding charCodeAt issues with surrogate pairs)
+  const encoder = new TextEncoder();
+  const aBuf = encoder.encode(a);
+  const bBuf = encoder.encode(b);
 
-  // Compare hashes using timingSafeEqual
-  // timingSafeEqual requires buffers of the same length, which SHA-256 guarantees (32 bytes)
-  return crypto.timingSafeEqual(hashA, hashB);
+  if (aBuf.byteLength !== bBuf.byteLength) {
+    return false;
+  }
+
+  // Constant-time comparison
+  let result = 0;
+  for (let i = 0; i < aBuf.byteLength; i++) {
+    result |= aBuf[i] ^ bBuf[i];
+  }
+
+  return result === 0;
 }
 
 /**
@@ -34,6 +45,43 @@ export function verifyAdminAccess(request: Request): {
   isAuthorized: boolean;
   response?: NextResponse;
 } {
+  // 🛡️ Sentinel: Rate limiting protection against brute-force attacks
+  // Try to get IP from NextRequest property or headers
+  let ip = 'unknown';
+  if ((request as any).ip) {
+    ip = (request as any).ip;
+  } else {
+    const forwardedFor = request.headers.get('x-forwarded-for');
+    if (forwardedFor) {
+      ip = forwardedFor.split(',')[0].trim();
+    }
+  }
+
+  // Apply rate limit: 60 requests per minute per IP
+  // Allowing 60 req/min for admin tools/scripts seems reasonable while stopping aggressive brute force
+  const limit = rateLimit(ip, 60, 60 * 1000);
+
+  if (!limit.success) {
+    return {
+      isAuthorized: false,
+      response: NextResponse.json(
+        {
+          error: 'Too Many Requests',
+          message: 'Rate limit exceeded. Please try again later.'
+        },
+        {
+          status: 429,
+          headers: {
+            'Retry-After': Math.ceil((limit.reset - Date.now()) / 1000).toString(),
+            'X-RateLimit-Limit': limit.limit.toString(),
+            'X-RateLimit-Remaining': limit.remaining.toString(),
+            'X-RateLimit-Reset': Math.ceil(limit.reset / 1000).toString()
+          }
+        }
+      ),
+    };
+  }
+
   const adminKey = process.env.ADMIN_ACCESS_KEY;
 
   // Fail secure: if no key is configured, deny everything

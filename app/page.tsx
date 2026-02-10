@@ -24,6 +24,7 @@ import FAQPageSchema from "./_components/FAQPageSchema";
 import HeroCTAButtons from "./_components/HeroCTAButtons";
 import PatientEducationVideosSkeleton from "./_components/skeletons/PatientEducationVideosSkeleton";
 import TrustSignals from "./_components/TrustSignals";
+import { LocationNAPCard } from "@/src/components/locations/LocationNAPCard";
 
 import PatientEducationVideosWrapper from "./_components/wrappers/PatientEducationVideosWrapper";
 import RecoveryTimelineWrapper from "./_components/wrappers/RecoveryTimelineWrapper";

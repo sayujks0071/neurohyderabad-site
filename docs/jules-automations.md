@@ -47,3 +47,5 @@ To pause a specific automation:
 3. **Issue Creation:** If no duplicate exists, it creates a new issue.
 4. **Labeling:** It applies the label `jules`.
    - Jules (the agent) monitors issues with this label to pick up tasks.
+
+<!-- Documentation v2.0 - Verified setup -->

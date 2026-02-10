@@ -1,6 +1,6 @@
 # Rolling 7-Day SEO Summary
 
-Analyze the SEO performance for the last 7 days.
+Analyze SEO performance for the last 7 days.
 *Note: Since you might not have direct access to GSC/GA, use available local reports or verify technical SEO health.*
 
 1. Run `npx tsc --noEmit` to check for type errors (since `pnpm build` may panic on Canary).
@@ -15,4 +15,4 @@ Analyze the SEO performance for the last 7 days.
 
 <!-- Jules Automation -->
 <!-- Managed by Jules -->
-<!-- v1.8 -->
+<!-- v2.2 -->

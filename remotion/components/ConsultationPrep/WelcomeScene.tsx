@@ -1,25 +1,13 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { spring, useCurrentFrame, useVideoConfig, AbsoluteFill } from 'remotion';
 import { COLORS, FONTS } from '../../utils/colorTokens';
 import { GradientBackground } from '../shared/GradientBackground';
+import { WelcomeCharacter } from './WelcomeCharacter';
+import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
 
 export interface WelcomeSceneProps {
   patientName: string;
 }
-
-const usePrefersReducedMotion = () => {
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setPrefersReducedMotion(mediaQuery.matches);
-    const listener = (event: MediaQueryListEvent) => {
-      setPrefersReducedMotion(event.matches);
-    };
-    mediaQuery.addEventListener('change', listener);
-    return () => mediaQuery.removeEventListener('change', listener);
-  }, []);
-  return prefersReducedMotion;
-};
 
 const FloatingParticles: React.FC<{ reducedMotion: boolean }> = ({ reducedMotion }) => {
   const frame = useCurrentFrame();
@@ -142,50 +130,14 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
               textShadow: '0 4px 12px rgba(0,0,0,0.1)',
             }}
           >
-            {`Hi ${patientName}!`.split('').map((char, i) => {
-              // Staggered character animations
-              const delay = i * 2; // Faster stagger
-
-              const charOpacity = prefersReducedMotion ? 1 : spring({
-                frame: frame - delay,
-                fps,
-                from: 0,
-                to: 1,
-                durationInFrames: 25,
-              });
-
-              const charScale = prefersReducedMotion ? 1 : spring({
-                frame: frame - delay,
-                fps,
-                from: 0.5,
-                to: 1,
-                durationInFrames: 25,
-                config: { damping: 12, stiffness: 100 },
-              });
-
-              const charY = prefersReducedMotion ? 0 : spring({
-                frame: frame - delay,
-                fps,
-                from: 30,
-                to: 0,
-                durationInFrames: 25,
-                config: { damping: 12 },
-              });
-
-              return (
-                <span
-                  key={i}
-                  style={{
-                    display: 'inline-block',
-                    opacity: charOpacity,
-                    transform: `translateY(${charY}px) scale(${charScale})`,
-                    whiteSpace: 'pre',
-                  }}
-                >
-                  {char}
-                </span>
-              );
-            })}
+            {`Hi ${patientName}!`.split('').map((char, i) => (
+              <WelcomeCharacter
+                key={i}
+                char={char}
+                index={i}
+                delay={i * 2}
+              />
+            ))}
           </h1>
           <p
             style={{

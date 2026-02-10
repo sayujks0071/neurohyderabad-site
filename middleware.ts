@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import { secureCompare } from '@/src/lib/security'
 
 // NOTE:
 // We intentionally keep this middleware narrowly scoped via `config.matcher`
@@ -78,9 +79,13 @@ export function middleware(req: NextRequest) {
     // Check for admin key in headers (API auth)
     const headerKey = req.headers.get('x-admin-key');
 
+    // 🛡️ Sentinel: Use constant-time comparison to prevent timing attacks
+    const isProvidedValid = providedKey && adminKey ? secureCompare(providedKey, adminKey) : false;
+    const isHeaderValid = headerKey && adminKey ? secureCompare(headerKey, adminKey) : false;
+
     // If adminKey is not configured (undefined/empty) OR provided keys do not match, deny access.
     // This ensures that if the secret is missing in production, the route is closed by default (fail secure).
-    if (!adminKey || (providedKey !== adminKey && headerKey !== adminKey)) {
+    if (!adminKey || (!isProvidedValid && !isHeaderValid)) {
       if (pathname.startsWith('/api/')) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
       }

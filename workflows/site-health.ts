@@ -39,6 +39,8 @@ const CRITICAL_PAGES = [
 const API_ENDPOINTS = [
   { path: "/api/lead", name: "Lead API", method: "OPTIONS" as const },
   { path: "/api/appointments/submit", name: "Appointment API", method: "OPTIONS" as const },
+  { path: "/api/ai/search", name: "AI Search API", method: "POST" as const },
+  { path: "/api/ai/summarize", name: "AI Summarize API", method: "POST" as const },
 ];
 
 /**

@@ -51,11 +51,10 @@ const Button: React.FC<ButtonProps> = ({
       <Link
         href={href}
         className={combinedClasses}
-        aria-label={props['aria-label']}
         target={target}
         rel={rel}
         onClick={onClick}
-        style={props.style}
+        {...props}
       >
         {children}
       </Link>
