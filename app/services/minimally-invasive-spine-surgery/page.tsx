@@ -19,6 +19,7 @@ import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
 import PatientJourneySection from '@/src/components/PatientJourneySection';
 import SurgeryComparisonTable from '@/src/components/SurgeryComparisonTable';
+import EndoscopicProcedureSteps from '@/src/components/EndoscopicProcedureSteps';
 
 const baseMetadata = makeMetadata({
   title: 'Minimally Invasive Spine Surgery Hyderabad | Day Care',
@@ -306,6 +307,8 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
               with reduced trauma and quicker return to daily activities. <Link href="/services/endoscopic-spine-surgery-hyderabad/" className="text-blue-600 hover:underline">Learn more about our local patient journey for endoscopic spine surgery in Hyderabad.</Link>
             </p>
           </div>
+
+          <EndoscopicProcedureSteps />
 
           <div className="mt-8">
             <h3 className="text-2xl font-bold text-gray-900 mb-4">Compare: Endoscopic vs. Traditional Surgery</h3>
