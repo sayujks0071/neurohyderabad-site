@@ -9,7 +9,7 @@ import Faq from "./Faq";
 import MapSection from "./MapSection";
 import { APPOINTMENT_SUCCESS_MESSAGE } from "./constants";
 import { trackConversionOnly } from "@/src/lib/google-ads-conversion";
-import { trackMiddlewareEvent } from "@/src/lib/middleware/rum";
+import { analytics } from "@/src/lib/analytics";
 
 type ViewState = "form" | "confirmation";
 
@@ -32,10 +32,7 @@ function AppointmentFormContent({
     setIsLoading(true);
 
     // Track form submission attempt
-    trackMiddlewareEvent('form.submit', {
-      form_type: 'appointment',
-      source: bookingSource
-    });
+    analytics.appointmentSubmit('appointment_page', bookingSource, 0);
 
     try {
       const response = await fetch(apiEndpoint, {
@@ -55,11 +52,7 @@ function AppointmentFormContent({
       const payload = await response.json();
 
       // Track successful submission
-      trackMiddlewareEvent('form.success', {
-        form_type: 'appointment',
-        source: bookingSource,
-        used_ai: payload.usedAI
-      });
+      analytics.appointmentSuccess('appointment_page', bookingSource, undefined, { used_ai: payload.usedAI });
 
       setBookingData(payload.booking);
       // Use the specific reassuring message requested by the user
@@ -82,11 +75,7 @@ function AppointmentFormContent({
       console.error("[appointments] Failed to submit booking:", error);
 
       // Track submission error
-      trackMiddlewareEvent('form.error', {
-        form_type: 'appointment',
-        source: bookingSource,
-        error: error instanceof Error ? error.message : 'Unknown error'
-      });
+      analytics.formError('appointment_page', 'submit_button', error instanceof Error ? error.message : 'Unknown error');
 
       addToast(
         error instanceof Error
