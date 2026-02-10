@@ -92,23 +92,26 @@ export async function POST(request: NextRequest) {
     allPosts = await getAllBlogPosts();
     
     // Create a summary of available content for semantic search
+    // OPTIMIZATION: Truncate description and limit items to prevent token exhaustion
     const blogSummary = allPosts.map(post => ({
       id: `/blog/${post.slug}`,
       title: post.title,
-      description: post.excerpt || post.description || '',
+      description: (post.excerpt || post.description || '').substring(0, 300),
       category: post.category || 'Blog',
-      tags: post.tags || [],
+      // tags: post.tags || [], // Removed tags to save tokens, category + description is usually enough
     }));
 
     const staticSummary = SEARCH_INDEX.map(item => ({
       id: item.href,
       title: item.title,
-      description: item.description,
+      description: (item.description || '').substring(0, 300),
       category: item.category,
-      tags: item.tags || [],
+      // tags: item.tags || [],
     }));
 
-    const combinedSummary = [...blogSummary, ...staticSummary];
+    // Limit to top 50 items
+    // Prioritize static pages (critical navigation) over blog posts, then recent blog posts
+    const combinedSummary = [...staticSummary, ...blogSummary].slice(0, 50);
 
     if (!hasAIConfig()) {
       const results = buildFallbackResults();
@@ -135,7 +138,7 @@ For example, if the user searches for "headache", include content about "migrain
 
 User Query: "${query}"
 
-Available Content:
+Available Content (Top 50 Candidates):
 ${JSON.stringify(combinedSummary, null, 2)}
 
 Return ONLY JSON with an "ids" array containing the IDs (URLs) of the ${limit} most relevant items, ordered by relevance.`,
