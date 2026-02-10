@@ -48,4 +48,4 @@ To pause a specific automation:
 4. **Labeling:** It applies the label `jules`.
    - Jules (the agent) monitors issues with this label to pick up tasks.
 
-<!-- Documentation v2.0 - Verified setup -->
+<!-- Documentation v2.3 - Verified setup -->
