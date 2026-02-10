@@ -24,7 +24,7 @@ const PatientEducationVideos = dynamic(() => import('@/app/_components/PatientEd
 
 const baseMetadata = makeMetadata({
   title: "Sciatica Treatment Hyderabad | 90% Non-Surgical | Dr Sayuj",
-  description: "Relief from Sciatica leg pain in Hyderabad. 90% non-surgical success with Dr. Sayuj Krishnan. Nerve blocks, Physio & Endoscopic options. Book Consult.",
+  description: "Expert Sciatica treatment in Hyderabad. 90% patients recover without surgery. Dr. Sayuj specializes in nerve blocks & endoscopic cure. Book appointment.",
   canonicalPath: '/conditions/sciatica-pain-treatment-hyderabad',
 });
 
@@ -418,6 +418,14 @@ export default function SciaticaTreatmentPage() {
           <Link href="/blog/does-endoscopic-spine-surgery-work-for-sciatica-hyderabad" className="block p-6 bg-white border border-gray-200 rounded-lg hover:shadow-md transition-shadow">
             <h3 className="font-bold text-lg text-blue-800 mb-2">Endoscopic Surgery for Sciatica</h3>
             <p className="text-gray-600 text-sm">Understand how minimally invasive surgery can permanently relieve sciatica when medicines fail.</p>
+          </Link>
+          <Link href="/blog/sciatica-exercises-for-office-workers-hyderabad" className="block p-6 bg-white border border-gray-200 rounded-lg hover:shadow-md transition-shadow">
+            <h3 className="font-bold text-lg text-blue-800 mb-2">Sciatica Exercises for Office Workers</h3>
+            <p className="text-gray-600 text-sm">Simple desk exercises to relieve back pain and prevent sciatica for IT professionals in Hyderabad.</p>
+          </Link>
+          <Link href="/blog/sciatica-exercises-to-avoid-hyderabad" className="block p-6 bg-white border border-gray-200 rounded-lg hover:shadow-md transition-shadow">
+            <h3 className="font-bold text-lg text-red-700 mb-2">Exercises to Avoid with Sciatica</h3>
+            <p className="text-gray-600 text-sm">Don't make it worse! Learn which common gym exercises can aggravate your sciatic nerve pain.</p>
           </Link>
         </div>
       </section>

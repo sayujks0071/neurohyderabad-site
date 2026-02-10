@@ -18,8 +18,8 @@ import CostTransparencySection from '@/src/components/CostTransparencySection';
 import PatientJourneySection from '@/src/components/PatientJourneySection';
 
 const baseMetadata = makeMetadata({
-  title: 'Lumbar Laminectomy Surgery in Hyderabad | Spinal Decompression',
-  description: 'Expert lumbar laminectomy surgery by Dr. Sayuj Krishnan. Relief from spinal stenosis and nerve compression. Advanced decompression techniques.',
+  title: 'Lumbar Laminectomy Surgery Hyderabad | Spine Decompression',
+  description: 'Expert Lumbar Laminectomy in Hyderabad. Relief from Spinal Stenosis & Leg Pain. Minimally Invasive Decompression by Dr. Sayuj Krishnan. Same Day Walk.',
   canonicalPath: '/services/lumbar-laminectomy-surgery-hyderabad',
 });
 

@@ -198,9 +198,9 @@ const references = [
 ] as const;
 
 export const metadata: Metadata = {
-  title: "Cervical Myelopathy Decompression Surgery Hyderabad | Endoscopic Spine Cord Decompression | Dr. Sayuj Krishnan",
+  title: "Cervical Myelopathy Surgery Hyderabad | Cord Decompression",
   description:
-    "Expert treatment for cervical myelopathy with endoscopic and minimally invasive decompression surgery in Hyderabad. Specialized care for spinal cord compression by Dr. Sayuj Krishnan at Yashoda Hospital.",
+    "Expert Cervical Myelopathy Surgery in Hyderabad. Endoscopic Spinal Cord Decompression by Dr. Sayuj Krishnan. Restore hand function & gait. Book Consult.",
   alternates: {
     canonical: CANONICAL,
     languages: {

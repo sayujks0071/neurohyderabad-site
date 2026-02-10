@@ -16,8 +16,8 @@ import OutcomeMetricsSection from '@/components/OutcomeMetricsSection';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
 
 const baseMetadata = makeMetadata({
-  title: 'Spondylolisthesis Treatment in Hyderabad | Slipped Vertebra Surgery Cost',
-  description: 'Expert treatment for Spondylolisthesis (Slipped Vertebra) by Dr. Sayuj Krishnan. Minimally invasive fusion (MIS-TLIF) costs and recovery in Hyderabad.',
+  title: 'Spondylolisthesis Treatment Hyderabad | Slipped Vertebra',
+  description: 'Best Spondylolisthesis Treatment in Hyderabad. Minimally Invasive Fusion (MIS-TLIF) for Slipped Vertebra by Dr. Sayuj. Check Surgery Cost & Recovery.',
   canonicalPath: '/conditions/spondylolisthesis-treatment-hyderabad',
 });
 

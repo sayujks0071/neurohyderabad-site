@@ -19,8 +19,8 @@ import CostTransparencySection from '@/src/components/CostTransparencySection';
 import PatientJourneySection from '@/src/components/PatientJourneySection';
 
 const baseMetadata = makeMetadata({
-  title: 'Vertebroplasty & Kyphoplasty Hyderabad | Dr. Sayuj Krishnan',
-  description: 'Expert Vertebroplasty and Kyphoplasty in Hyderabad for osteoporotic spine fractures. Minimally invasive cement injection for instant pain relief.',
+  title: 'Vertebroplasty & Kyphoplasty Hyderabad | Fracture Treatment',
+  description: 'Expert Vertebroplasty & Kyphoplasty in Hyderabad. Instant pain relief for Osteoporotic Spine Fractures. Minimally Invasive Cement Injection by Dr Sayuj.',
   canonicalPath: '/services/kyphoplasty-vertebroplasty-hyderabad',
 });
 

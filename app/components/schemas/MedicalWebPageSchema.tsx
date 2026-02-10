@@ -1,7 +1,7 @@
 import { SITE_URL } from '../../../src/lib/seo';
 
 interface MedicalWebPageSchemaProps {
-  pageType: 'service' | 'condition' | 'blog' | 'location';
+  pageType: 'service' | 'condition' | 'blog' | 'location' | 'about' | 'contact';
   pageSlug: string;
   title: string;
   description: string;
