@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { rateLimit } from '@/src/lib/rate-limit';
 
 /**
  * OpenAI Apps SDK compatible MCP Server
@@ -82,6 +83,30 @@ const TOOLS = [
 
 export async function POST(request: NextRequest) {
   try {
+    // 🛡️ Rate Limiting: 10 requests per minute per IP to prevent abuse
+    const ip = request.headers.get('x-forwarded-for')?.split(',')[0].trim() || 'unknown';
+    const limit = rateLimit(ip, 10, 60 * 1000); // 10 requests per minute
+
+    if (!limit.success) {
+      return NextResponse.json({
+        jsonrpc: '2.0',
+        error: {
+          code: -32000,
+          message: 'Too Many Requests',
+          data: {
+            retryAfter: Math.ceil((limit.reset - Date.now()) / 1000)
+          }
+        }
+      }, {
+        status: 429,
+        headers: {
+          'X-RateLimit-Limit': limit.limit.toString(),
+          'X-RateLimit-Remaining': limit.remaining.toString(),
+          'X-RateLimit-Reset': limit.reset.toString(),
+        }
+      });
+    }
+
     const body = await request.json();
     const { method, params, id } = body;
 
