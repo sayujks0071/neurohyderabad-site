@@ -5,7 +5,7 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Loader2, CheckCircle } from "lucide-react";
-import { trackMiddlewareEvent } from "@/src/lib/middleware/rum";
+import { analytics } from "@/src/lib/analytics";
 import Input from "@/packages/appointment-form/ui/Input";
 import Textarea from "@/packages/appointment-form/ui/Textarea";
 import Calendar from "@/packages/appointment-form/ui/Calendar";
@@ -63,8 +63,9 @@ export default function LeadForm() {
   const painScoreValue = watch("painScore");
 
   useEffect(() => {
-    trackMiddlewareEvent('form_view', {
-      form_type: 'lead'
+    analytics.track('Form_View', {
+      form_type: 'lead',
+      page_slug: 'lead_form_component'
     });
   }, []);
 
@@ -82,6 +83,7 @@ export default function LeadForm() {
 
   const onSubmit = async (data: LeadFormData) => {
     setSubmitError(null);
+    analytics.leadSubmit('lead_form_component', data.source);
     try {
       const response = await fetch("/api/lead", {
         method: "POST",
@@ -95,21 +97,14 @@ export default function LeadForm() {
         throw new Error(result.error || "Failed to submit enquiry.");
       }
 
-      trackMiddlewareEvent('form_submission', {
-        form_type: 'lead',
-        status: 'success'
-      });
+      analytics.leadSuccess('lead_form_component', data.source);
 
       setIsSubmitted(true);
       reset();
     } catch (err: any) {
       console.error("Submission error:", err);
 
-      trackMiddlewareEvent('form_submission', {
-        form_type: 'lead',
-        status: 'failure',
-        error: err.message
-      });
+      analytics.formError('lead_form_component', 'submit_button', err.message);
 
       setSubmitError(err.message || "An unexpected error occurred. Please try again.");
     }

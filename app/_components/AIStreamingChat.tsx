@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
 import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport, type UIMessage } from 'ai';
-import { useStatsigEvents } from '../../src/lib/statsig-events';
+import { analytics } from "@/src/lib/analytics";
 
 interface AIStreamingChatProps {
   pageSlug: string;
@@ -28,7 +28,6 @@ export default function AIStreamingChat({
   const [showEmergencyAlert, setShowEmergencyAlert] = useState(false);
   const [input, setInput] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const { logAppointmentBooking, logContactFormSubmit } = useStatsigEvents();
 
   // Create transport with dependencies
   const transport = useMemo(() => new DefaultChatTransport({
@@ -65,11 +64,11 @@ export default function AIStreamingChat({
         setShowEmergencyAlert(true);
       }
 
-      logContactFormSubmit('ai_streaming_chat', true);
+      analytics.aiAssistant.message('assistant');
     },
     onError: (error) => {
       console.error('Chat error:', error);
-      logContactFormSubmit('ai_streaming_chat', false);
+      analytics.aiAssistant.error(error.message);
     }
   });
 
@@ -91,7 +90,7 @@ export default function AIStreamingChat({
     e.preventDefault();
     if (!input.trim() || isLoading) return;
 
-    logAppointmentBooking('ai_streaming_interaction', service || 'general');
+    analytics.aiAssistant.message('user');
 
     const userMessage = input;
     setInput('');
@@ -101,7 +100,7 @@ export default function AIStreamingChat({
 
   // Wrapper for quick actions
   const handleQuickAction = async (action: string) => {
-    logAppointmentBooking('ai_streaming_interaction', service || 'general');
+    analytics.aiAssistant.message('user');
     await sendMessage({ text: action });
   };
 
