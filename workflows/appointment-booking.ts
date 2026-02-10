@@ -17,7 +17,7 @@ import { buildWebhookPayload, notifyAppointmentWebhooks } from "@/src/lib/appoin
 import { submitToGoogleSheets } from "@/src/lib/google-sheets";
 import { getTextModel, hasAIConfig } from "@/src/lib/ai/gateway";
 import { inngest } from "@/src/lib/inngest";
-import { appointments, workflowRuns } from "@/src/lib/db";
+import { appointments, workflowRuns, analytics } from "@/src/lib/db";
 import { APPOINTMENT_SUCCESS_MESSAGE } from "@/packages/appointment-form/constants";
 
 interface PatientInfo {
@@ -53,6 +53,9 @@ async function retry<T>(
       }
       return result;
     } catch (error) {
+      if (error instanceof FatalError) {
+        throw error;
+      }
       if (i === retries) throw error;
       const wait = delay * Math.pow(2, i);
       console.log(`[Appointment Workflow] Retry ${i + 1}/${retries} for ${name} after ${wait}ms`);
@@ -861,22 +864,31 @@ async function scheduleReminders(
     reminders.map(async (reminder) => {
       const reminderTime = new Date(appointmentDateTime.getTime() - reminder.offsetMs);
       if (reminderTime > new Date()) {
-        // Use bookingId + reminder type as idempotency key to prevent duplicate reminders
-        const idempotencyKey = `${bookingId}-${reminder.type}`;
+        try {
+          // Use bookingId + reminder type as idempotency key to prevent duplicate reminders
+          const idempotencyKey = `${bookingId}-${reminder.type}`;
 
-        await inngest.send({
-          id: idempotencyKey, // Inngest uses 'id' for idempotency
-          name: "appointment/reminder",
-          data: {
-            appointmentId: bookingId,
-            patientEmail: patientInfo.email,
-            patientName: patientInfo.name,
-            appointmentDate: appointmentIso,
-            reminderType: reminder.type,
-          },
-          ts: reminderTime.getTime(),
-        });
-        return true;
+          await retry(
+            async () =>
+              inngest.send({
+                id: idempotencyKey, // Inngest uses 'id' for idempotency
+                name: "appointment/reminder",
+                data: {
+                  appointmentId: bookingId,
+                  patientEmail: patientInfo.email,
+                  patientName: patientInfo.name,
+                  appointmentDate: appointmentIso,
+                  reminderType: reminder.type,
+                },
+                ts: reminderTime.getTime(),
+              }),
+            { retries: 3, delay: 1000, name: `reminder-${reminder.type}` }
+          );
+          return true;
+        } catch (error) {
+          logWorkflowEvent(bookingId, "reminder-scheduling-failed", { type: reminder.type }, undefined, error);
+          return false;
+        }
       }
       return false;
     })
@@ -940,6 +952,23 @@ async function trackBookingAnalytics(
   "use step";
 
   logWorkflowEvent(bookingId, "tracking-analytics");
+
+  try {
+    await analytics.track({
+      event_type: "booking_completed",
+      page_path: "/appointments/booking-workflow",
+      user_intent: "book_appointment",
+      meta: {
+        bookingId,
+        status,
+        appointmentType: patientInfo.appointmentType,
+        source: patientInfo.source,
+      },
+    });
+    logWorkflowEvent(bookingId, "analytics-tracked-db");
+  } catch (e) {
+    logWorkflowEvent(bookingId, "analytics-tracking-failed", {}, undefined, e);
+  }
 
   // In production, this would send to analytics platforms
   logWorkflowEvent(bookingId, "analytics-tracked", { status, type: patientInfo.appointmentType });
