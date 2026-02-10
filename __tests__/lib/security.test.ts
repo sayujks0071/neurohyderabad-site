@@ -1,4 +1,4 @@
-import { verifyAdminAccess } from '@/src/lib/security';
+import { verifyAdminAccess, secureCompare } from '@/src/lib/security';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { NextRequest } from 'next/server';
 import { rateLimit } from '@/src/lib/rate-limit';
@@ -102,5 +102,26 @@ describe('verifyAdminAccess', () => {
     expect(body).toEqual(expect.objectContaining({
       error: 'Too Many Requests'
     }));
+  });
+});
+
+describe('secureCompare', () => {
+  it('should return true for identical strings', () => {
+    expect(secureCompare('secret123', 'secret123')).toBe(true);
+  });
+
+  it('should return false for different strings', () => {
+    expect(secureCompare('secret123', 'wrong')).toBe(false);
+  });
+
+  it('should return false for strings of different lengths', () => {
+    expect(secureCompare('secret123', 'secret1234')).toBe(false);
+  });
+
+  it('should return false if either argument is not a string', () => {
+    // @ts-ignore
+    expect(secureCompare(null, 'secret')).toBe(false);
+    // @ts-ignore
+    expect(secureCompare('secret', undefined)).toBe(false);
   });
 });
