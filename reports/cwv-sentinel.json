@@ -1,15 +1,15 @@
 {
-  "timestamp": "2025-02-18T12:00:00Z",
+  "timestamp": "2025-05-23T10:00:00Z",
   "commit_hash": "HEAD",
   "notes": {
-    "home": "Identified TrustSignals dynamic import causing CLS on load. Converted to static import.",
-    "appointment": "Verified NeuraLinkBookingApp uses optimized loading.",
-    "location": "No changes needed.",
-    "condition": "No changes needed."
+    "home": "Identified `display: 'swap'` in font configuration causing potential Layout Shifts (CLS) and FOIT/FOUT issues.",
+    "appointment": "No specific bottlenecks found. `NeuraLinkBookingApp` is well optimized.",
+    "location": "No specific bottlenecks found. `LocationMapEmbed` is lazy loaded.",
+    "condition": "No specific bottlenecks found."
   },
   "fix": {
-    "description": "Converted `TrustSignals` from dynamic to static import in `app/page.tsx`.",
-    "impact": "Eliminated CLS caused by `TrustSignals` loading client-side without a placeholder. It is now server-rendered.",
-    "verification": "Manual code inspection confirms static import. Build verified with `pnpm build` (after fixing unrelated build errors)."
+    "description": "Changed `display: 'swap'` to `display: 'optional'` for `Inter` and `Merriweather` fonts in `app/layout.tsx`.",
+    "impact": "Eliminates Cumulative Layout Shift (CLS) caused by font swapping. Improves Largest Contentful Paint (LCP) stability by prioritizing the fallback font if the web font is not immediately available.",
+    "verification": "Verified with `pnpm test` (passed) and `pnpm build` (passed). Confirmed `app/layout.tsx` changes."
   }
 }
