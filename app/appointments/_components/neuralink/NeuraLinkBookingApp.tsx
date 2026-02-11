@@ -1,8 +1,7 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, ReactNode } from "react";
 import { ChevronRight, MessageSquareCode, MessageSquare } from "lucide-react";
-import AppointmentFaq from "../AppointmentFaq";
 import dynamic from "next/dynamic";
 import VoiceBookingOption from "../VoiceBookingOption";
 import PatientPortalSkeleton from "./PatientPortalSkeleton";
@@ -41,11 +40,12 @@ const ChatBot = dynamic(() => import("./ChatBot"), {
 });
 
 interface NeuraLinkBookingAppProps {
-  heroContent: React.ReactNode;
-  locationInfo: React.ReactNode;
+  heroContent: ReactNode;
+  locationInfo: ReactNode;
+  faqSection: ReactNode;
 }
 
-const NeuraLinkBookingApp = ({ heroContent, locationInfo }: NeuraLinkBookingAppProps) => {
+const NeuraLinkBookingApp = ({ heroContent, locationInfo, faqSection }: NeuraLinkBookingAppProps) => {
   const [isAssistantOpen, setIsAssistantOpen] = useState(false);
   // CWV Optimization: Defer ChatBot loading to reduce TBT
   const [shouldLoadChatBot, setShouldLoadChatBot] = useState(false);
@@ -103,7 +103,7 @@ const NeuraLinkBookingApp = ({ heroContent, locationInfo }: NeuraLinkBookingAppP
         </div>
       </section>
 
-      <AppointmentFaq />
+      {faqSection}
 
       {/* Conditionally render LiveAssistant to prevent loading its heavy dependencies (@google/genai) until needed */}
       {isAssistantOpen && (
