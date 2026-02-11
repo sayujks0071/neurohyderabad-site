@@ -147,7 +147,7 @@ Track these monthly to measure improvement:
 ### Week 1: Critical Monitoring
 - [x] Set up dashboards (Business Critical, Performance).
 - [ ] Configure P1/P2 alerts in Middleware.io.
-- [x] Verify `analytics.appointmentSuccess` and `analytics.formError` are firing correctly.
+- [x] Verify and Fix `analytics.appointmentSuccess` and `analytics.formError` logic.
 
 ### Week 2: Performance Optimization
 - [ ] Deep dive into Core Web Vitals data.
@@ -203,7 +203,7 @@ async function handleSubmit(data: BookingData) {
     await submitBooking(data);
 
     // ✅ Track Success
-    analytics.appointmentSuccess("booking-page", data.serviceType);
+    analytics.appointmentSuccess("booking-page", "appointment-scheduler", data.serviceType);
 
   } catch (error) {
     // ❌ Track Error
