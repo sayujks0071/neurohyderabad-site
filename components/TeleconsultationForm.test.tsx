@@ -54,7 +54,7 @@ describe('TeleconsultationForm Analytics', () => {
 
     // Wait for submission logic
     await waitFor(() => {
-      expect(analytics.appointmentSubmit).toHaveBeenCalledWith('test-page');
+      expect(analytics.appointmentSubmit).toHaveBeenCalledWith('test-page', 'teleconsultation_form');
       expect(analytics.appointmentSuccess).toHaveBeenCalledWith('test-page', 'Test Service');
       expect(trackContactConversion).toHaveBeenCalled();
     });
