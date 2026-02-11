@@ -20,6 +20,9 @@ import {
   Check,
   Info,
   ShieldCheck,
+  Smile,
+  Meh,
+  Frown,
 } from "lucide-react";
 import {
   analyzeSymptoms,
@@ -738,20 +741,33 @@ const PatientPortal = () => {
                           painScore: Number(e.target.value),
                         })
                       }
-                      className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                      className={`w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 transition-all ${
+                        formData.painScore <= 3
+                          ? "accent-green-600 focus:ring-green-500"
+                          : formData.painScore <= 7
+                          ? "accent-yellow-500 focus:ring-yellow-500"
+                          : "accent-red-600 focus:ring-red-500"
+                      }`}
                       aria-valuetext={`Score: ${formData.painScore}${formData.painScore >= 8 ? ' (Severe)' : formData.painScore <= 3 ? ' (Mild)' : ''}`}
                     />
                     <span className="text-sm font-bold text-slate-400" aria-hidden="true">10</span>
                   </div>
                   <div className="text-center mt-2">
                     <span
-                      className={`inline-block px-3 py-1 rounded-lg text-sm font-bold ${formData.painScore <= 3
+                      className={`inline-flex items-center gap-2 px-3 py-1 rounded-lg text-sm font-bold transition-colors ${formData.painScore <= 3
                         ? "bg-green-100 text-green-700"
                         : formData.painScore <= 7
                           ? "bg-yellow-100 text-yellow-700"
                           : "bg-red-100 text-red-700"
                         }`}
                     >
+                      {formData.painScore <= 3 ? (
+                        <Smile className="w-4 h-4" />
+                      ) : formData.painScore <= 7 ? (
+                        <Meh className="w-4 h-4" />
+                      ) : (
+                        <Frown className="w-4 h-4" />
+                      )}
                       Score: {formData.painScore}
                       {formData.painScore >= 8 && " (Severe)"}
                       {formData.painScore <= 3 && " (Mild)"}
