@@ -53,8 +53,8 @@ const Button: React.FC<ButtonProps> = ({
         className={combinedClasses}
         target={target}
         rel={rel}
-        onClick={onClick}
-        {...props}
+        onClick={onClick as any}
+        {...props as any}
       >
         {children}
       </Link>
@@ -65,7 +65,7 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <button
       className={combinedClasses}
-      onClick={onClick}
+      onClick={onClick as any}
       disabled={props.disabled || isLoading}
       aria-busy={isLoading}
       {...props}

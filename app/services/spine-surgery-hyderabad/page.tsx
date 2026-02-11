@@ -14,13 +14,14 @@ import { getServiceSources } from '../sources';
 import MedicalWebPageSchema from '../../components/schemas/MedicalWebPageSchema';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import SurgeryComparisonTable from '@/src/components/SurgeryComparisonTable';
+import CostTransparencySection from '@/src/components/CostTransparencySection';
 
 const SERVICE_SLUG = 'spine-surgery-hyderabad';
 
 const baseMetadata = makeMetadata({
-  title: 'Best Spine Surgeon Hyderabad | Endoscopic Expert | Dr Sayuj',
+  title: 'Spine Surgery Hyderabad | Minimally Invasive & Endoscopic Specialist',
   description:
-    'Expert spine surgeon in Hyderabad. Endoscopic keyhole surgery for slip disc & sciatica with 90% success. Book at Yashoda Malakpet.',
+    'Advanced spine surgery in Hyderabad. Walk the next day with keyhole endoscopic techniques for slip disc & sciatica. Expert care at Yashoda Malakpet.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
 });
 
@@ -63,6 +64,33 @@ const serviceSchema = buildLocalServiceSchema({
 });
 
 const ARTICLE_SOURCES = getServiceSources(SERVICE_SLUG);
+
+const COSTS = [
+  {
+    procedure: 'Endoscopic Discectomy',
+    range: '₹95,000 - ₹1,35,000',
+    recovery: '1-2 weeks',
+    includes: ['Surgeon Fees', 'Endoscopic Kit', 'Standard Room (1 Day)', 'Follow-up']
+  },
+  {
+    procedure: 'Microdiscectomy',
+    range: '₹1,10,000 - ₹1,50,000',
+    recovery: '2-3 weeks',
+    includes: ['Surgeon Fees', 'Microscope Charges', 'Standard Room (2 Days)', 'Medications']
+  },
+  {
+    procedure: 'Spinal Fusion (TLIF)',
+    range: '₹2,50,000 - ₹3,50,000',
+    recovery: '4-6 weeks',
+    includes: ['Implants (Screws/Cages)', 'OT Charges', 'Hospital Stay (3-4 Days)', 'Physiotherapy']
+  },
+  {
+    procedure: 'Laminectomy (Decompression)',
+    range: '₹1,25,000 - ₹1,65,000',
+    recovery: '2-3 weeks',
+    includes: ['Bilateral Decompression', 'Hospital Stay (2-3 Days)', 'Nursing Care', 'Medications']
+  }
+];
 
 const faqs = [
   {
@@ -217,6 +245,11 @@ export default function SpineSurgeryHyderabadPage() {
             </ol>
           </div>
         </section>
+
+        <CostTransparencySection
+          costs={COSTS}
+          disclaimer="Estimates for self-pay patients at Yashoda Hospital Malakpet. Final cost depends on room category and specific medical requirements. Insurance cashless facility available."
+        />
 
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-blue-900 mb-4">Serving Patients Across Hyderabad</h2>

@@ -1,0 +1,19 @@
+# Weekly Backlink & Citation Opportunities (2025-05-23)
+
+## 1. Practo (High Priority)
+- **Why:** Competitors like Dr. Raveesh rank highly here. A verified profile with recent patient stories significantly boosts local SEO.
+- **Action:** Ensure "Dr. Sayuj Krishnan - Yashoda Malakpet" profile is claimed and has the same NAP as `src/data/locations.ts`.
+- **URL:** https://www.practo.com/hyderabad/neurosurgeon
+
+## 2. JustDial Hyderabad
+- **Why:** High intent local search traffic for "Neurosurgeon Malakpet".
+- **Action:** Verify business listing address matches "Room No 317, OPD Block, Yashoda Hospital, Malakpet".
+- **Status:** Check if currently listed as "Dr Sayuj Krishnan" or "Yashoda Neuro". Consolidate if duplicate.
+
+## 3. ClinicSpots / Lybrate
+- **Why:** These directories appear in top SERP results for "Best Neurosurgeon Hyderabad".
+- **Action:** Create or update profile with the new "Endoscopic Spine Surgery" keyword focus.
+- **Backlink Type:** Nofollow (mostly), but excellent for citation consistency and entity trust.
+
+## 4. Local Medical Associations
+- **Action:** Verify membership directory listing on "Neurological Society of India" (NSI) and ensure it links to `https://www.drsayuj.info`.
