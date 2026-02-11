@@ -131,25 +131,25 @@ const faqs = [
 const COSTS = [
   {
     procedure: 'Craniotomy (Tumor Excision)',
-    range: 'Ask for Estimate',
+    range: '₹2,80,000 - ₹4,50,000',
     recovery: '5-7 Days (ICU + Ward)',
     includes: ['Microsurgery', 'Neuronavigation', 'ICU Stay (2-3 days)']
   },
   {
     procedure: 'Awake Craniotomy',
-    range: 'Ask for Estimate',
+    range: '₹3,50,000 - ₹5,50,000',
     recovery: '3-5 Days',
     includes: ['Functional Mapping', 'Anaesthesia Team', 'Rapid Recovery Protocol']
   },
   {
     procedure: 'Stereotactic Biopsy',
-    range: '₹1,00,000 - ₹1,50,000',
+    range: '₹1,20,000 - ₹1,80,000',
     recovery: '1-2 Days',
     includes: ['Needle Biopsy', 'Histopathology', 'Day Care/Short Stay']
   },
   {
-    procedure: 'Endoscopic Pituitary Surgery',
-    range: '₹2,00,000 - ₹3,00,000',
+    procedure: 'Endoscopic Skull Base/Pituitary',
+    range: '₹3,50,000 - ₹5,50,000',
     recovery: '3-4 Days',
     includes: ['Transnasal Approach', 'Endocrinology Review', 'Skull Base Repair']
   }
@@ -226,7 +226,7 @@ export default function BrainTumorSurgeryHyderabadPage() {
             </h1>
             <AuthorByline
               publishedOn="2024-09-04"
-              updatedOn="2025-02-20"
+              updatedOn="2026-02-22"
               className="mb-6"
             />
             <p className="text-lg text-gray-700 mb-6">
@@ -394,6 +394,7 @@ export default function BrainTumorSurgeryHyderabadPage() {
         <CostTransparencySection
           costs={COSTS}
           disclaimer="Costs for brain tumor surgery depend heavily on tumor size, ICU duration, and specialized equipment (neuronavigation). The above ranges are indicative. Insurance coverage is available for most procedures."
+          showInsurance={true}
         />
 
         <section className="mb-16 grid lg:grid-cols-[1.2fr_1fr] gap-10 items-start">
