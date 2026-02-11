@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   User,
   Phone,
@@ -90,10 +90,17 @@ const PatientPortal = () => {
 
   const [formData, setFormData] = useState(INITIAL_FORM_STATE);
   const [lastSubmittedData, setLastSubmittedData] = useState(INITIAL_FORM_STATE);
+  const successRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     analytics.appointmentStart('appointment-portal', 'general');
   }, []);
+
+  useEffect(() => {
+    if (isSubmitted && successRef.current) {
+      successRef.current.focus();
+    }
+  }, [isSubmitted]);
 
   const clinicName = "Dr. Sayuj Krishnan | Yashoda Hospitals, Malakpet";
   const clinicAddress = `${CLINIC.street}, ${CLINIC.city}, ${CLINIC.region} ${CLINIC.postalCode}`;
@@ -265,7 +272,12 @@ const PatientPortal = () => {
 
   if (isSubmitted) {
     return (
-      <div className="max-w-4xl mx-auto py-12 px-4 animate-in fade-in slide-in-from-bottom-8 duration-700">
+      <div
+        ref={successRef}
+        tabIndex={-1}
+        aria-live="polite"
+        className="max-w-4xl mx-auto py-12 px-4 animate-in fade-in slide-in-from-bottom-8 duration-700 outline-none"
+      >
         <div className="bg-white rounded-[2.5rem] shadow-2xl shadow-blue-900/10 border border-slate-100 overflow-hidden relative">
           <div className="absolute top-0 w-full h-2 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500" />
 
@@ -850,7 +862,7 @@ const PatientPortal = () => {
                   isLoading={isAnalyzing || isSyncing}
                   className="w-full py-4 rounded-2xl text-lg shadow-xl"
                 >
-                  {isAnalyzing ? "Triaging..." : isSyncing ? "Sending..." : (
+                  {isAnalyzing ? "Triaging..." : isSyncing ? "Processing..." : (
                     <>
                       Confirm Booking <ChevronRight className="w-5 h-5 ml-2" />
                     </>
