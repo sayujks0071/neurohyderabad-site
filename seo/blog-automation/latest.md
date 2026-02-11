@@ -1,5 +1,8 @@
-# Latest Blog Automation Run
+# Latest Blog Automation Run: 2026-02-11
 
-- **Date**: 2026-02-10
-- **Topic**: Tailbone Pain (Coccydynia) Treatment in Hyderabad
-- **Run Details**: [View Log](/seo/blog-automation/2026-02-10/run.md)
+- **Topic:** Glioblastoma Multiforme (GBM): Symptoms, Treatment & Survival Guide
+- **Log:** [seo/blog-automation/2026-02-11/run.md](seo/blog-automation/2026-02-11/run.md)
+- **Status:** In Progress (PR creation)
+- **Date:** 2026-02-11
+
+See previous runs in `seo/blog-automation/`
