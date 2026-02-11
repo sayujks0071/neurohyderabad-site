@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { secureCompare } from '@/src/lib/security';
 import { appointments, patients } from '@/src/lib/db';
 import { processBooking } from '@/src/lib/appointments/service';
 import { locations } from '@/src/data/locations';
@@ -22,7 +23,8 @@ const SERVICES = [
 function validateApiKey(request: NextRequest): boolean {
   const apiKey = request.headers.get('x-api-key');
   const validApiKey = process.env.OPENCLAW_API_KEY;
-  return !!validApiKey && apiKey === validApiKey;
+  if (!validApiKey || !apiKey) return false;
+  return secureCompare(apiKey, validApiKey);
 }
 
 export async function GET(request: NextRequest) {
@@ -73,7 +75,13 @@ export async function GET(request: NextRequest) {
       }
 
       case 'appointments': {
-        const limit = parseInt(searchParams.get('limit') || '10');
+        let limit = parseInt(searchParams.get('limit') || '10');
+        if (isNaN(limit)) limit = 10;
+
+        // 🛡️ Sentinel: Enforce max limit to prevent DoS/data exfiltration
+        if (limit > 100) limit = 100;
+        if (limit < 1) limit = 1;
+
         const recent = await appointments.getRecent(limit);
 
         // Mask sensitive data if needed, or return as is (assuming API key holder is trusted)

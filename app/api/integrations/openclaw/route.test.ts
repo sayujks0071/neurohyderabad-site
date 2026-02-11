@@ -96,6 +96,31 @@ describe('OpenClaw Integration API', () => {
       expect(data.data).toEqual(mockAppointments);
     });
 
+    it('should handle invalid limit parameter gracefully', async () => {
+      const mockAppointments = [{ id: 1, patient_name: 'Test' }];
+      // @ts-ignore
+      vi.mocked(appointments.getRecent).mockResolvedValue(mockAppointments);
+
+      const req = createRequest('http://localhost/api/integrations/openclaw?tool=appointments&limit=invalid', {
+        'x-api-key': MOCK_API_KEY,
+      });
+      const res = await GET(req);
+      expect(res.status).toBe(200);
+      expect(appointments.getRecent).toHaveBeenCalledWith(10);
+    });
+
+    it('should clamp limit parameter', async () => {
+      const mockAppointments = [{ id: 1, patient_name: 'Test' }];
+      // @ts-ignore
+      vi.mocked(appointments.getRecent).mockResolvedValue(mockAppointments);
+
+      const req = createRequest('http://localhost/api/integrations/openclaw?tool=appointments&limit=1000', {
+        'x-api-key': MOCK_API_KEY,
+      });
+      await GET(req);
+      expect(appointments.getRecent).toHaveBeenCalledWith(100);
+    });
+
     it('should return patient data by email', async () => {
       const mockPatient = { id: 1, name: 'John', email: 'john@example.com' };
       // @ts-ignore
