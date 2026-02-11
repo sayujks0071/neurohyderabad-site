@@ -54,7 +54,7 @@ describe('Analytics Helper', () => {
   });
 
   it('should track appointment success', () => {
-    analytics.appointmentSuccess('test-slug', 'consultation');
+    analytics.appointmentSuccess('test-slug', 'test-source', 'consultation');
 
     expect(trackMiddlewareEvent).toHaveBeenCalledWith('Appointment_Success', expect.objectContaining({
       page_slug: 'test-slug',
