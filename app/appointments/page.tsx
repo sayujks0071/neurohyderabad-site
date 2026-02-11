@@ -6,6 +6,7 @@ import AppointmentSchema from "./_components/AppointmentSchema";
 import AppointmentFaqSchema from "./_components/AppointmentFaqSchema";
 import BookingHeroContent from "./_components/neuralink/BookingHeroContent";
 import BookingLocationInfo from "./_components/neuralink/BookingLocationInfo";
+import AppointmentFaq from "./_components/AppointmentFaq";
 
 export const metadata: Metadata = {
   title: "Book Appointment | Best Neurosurgeon Hyderabad | Dr. Sayuj Krishnan",
@@ -72,6 +73,7 @@ export default function AppointmentsPage() {
       <NeuraLinkBookingApp
         heroContent={<BookingHeroContent />}
         locationInfo={<BookingLocationInfo />}
+        faqSection={<AppointmentFaq />}
       />
     </>
   );
