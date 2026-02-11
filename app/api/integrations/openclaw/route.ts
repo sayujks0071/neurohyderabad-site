@@ -3,6 +3,8 @@ import { secureCompare } from '@/src/lib/security';
 import { appointments, patients } from '@/src/lib/db';
 import { processBooking } from '@/src/lib/appointments/service';
 import { locations } from '@/src/data/locations';
+import { getAllBlogPosts } from '@/src/lib/blog';
+import { SEARCH_INDEX } from '@/src/data/searchIndex';
 import type { BookingData } from '@/packages/appointment-form/types';
 
 export const dynamic = 'force-dynamic';
@@ -42,12 +44,86 @@ export async function GET(request: NextRequest) {
     if (!tool) {
       return NextResponse.json({
         message: 'OpenClaw Integration API',
-        tools: ['dashboard', 'appointments', 'patients', 'get_services', 'get_locations', 'check_availability', 'book_appointment'],
+        tools: ['dashboard', 'appointments', 'patients', 'get_services', 'get_locations', 'check_availability', 'book_appointment', 'search_content'],
         usage: '?tool=<tool_name> (use POST for book_appointment and check_availability)'
       });
     }
 
     switch (tool) {
+      case 'search_content': {
+        const query = searchParams.get('query') || '';
+        if (!query) {
+           return NextResponse.json(
+            { error: 'Missing Parameter', message: 'Query parameter is required' },
+            { status: 400 }
+          );
+        }
+
+        const queryLower = query.toLowerCase();
+        const limit = 5; // Keep it small for the bot
+
+        // Escape regex characters to prevent crashes
+        const escapeRegExp = (string: string) => string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const terms = queryLower.split(' ').filter(t => t.length > 0).map(t => escapeRegExp(t));
+
+        if (terms.length === 0) {
+           return NextResponse.json({
+             tool: 'search_content',
+             query,
+             count: 0,
+             data: []
+           });
+        }
+
+        const regex = new RegExp(terms.join('|'), 'g');
+
+        // Get all content
+        const allPosts = await getAllBlogPosts();
+
+        // Search blog posts
+        const blogResults = allPosts
+          .map(post => {
+            const searchText = `${post.title} ${post.excerpt} ${post.category} ${post.tags?.join(' ')} ${post.description}`.toLowerCase();
+            const score = (searchText.match(regex) || []).length;
+            return {
+              type: 'blog',
+              slug: `/blog/${post.slug}`,
+              title: post.title,
+              description: post.excerpt || post.description,
+              category: post.category || 'Blog',
+              score
+            };
+          })
+          .filter(item => item.score > 0);
+
+        // Search static index
+        const staticResults = SEARCH_INDEX
+          .map(item => {
+            const searchText = `${item.title} ${item.description} ${item.category} ${item.tags?.join(' ')}`.toLowerCase();
+            const score = (searchText.match(regex) || []).length;
+            return {
+              type: 'page',
+              slug: item.href,
+              title: item.title,
+              description: item.description,
+              category: item.category,
+              score
+            };
+          })
+          .filter(item => item.score > 0);
+
+        const results = [...blogResults, ...staticResults]
+          .sort((a, b) => b.score - a.score)
+          .slice(0, limit);
+
+        return NextResponse.json({
+          tool: 'search_content',
+          query,
+          count: results.length,
+          data: results
+        });
+      }
+
       case 'get_services':
         return NextResponse.json({
           tool: 'get_services',
