@@ -6,7 +6,7 @@ import { destroySandbox } from "@/lib/sandbox/client";
 export const runtime = "nodejs";
 
 export async function POST(request: Request) {
-  const { isAuthorized, response } = verifyAdminAccess(request);
+  const { isAuthorized, response } = await verifyAdminAccess(request);
   if (!isAuthorized) return response!;
 
   let body;

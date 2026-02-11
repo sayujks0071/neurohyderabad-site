@@ -12,7 +12,7 @@ export const maxDuration = 30;
 
 export async function GET(request: NextRequest) {
   // 🛡️ Sentinel: Protect sensitive list endpoint
-  const auth = verifyAdminAccess(request);
+  const auth = await verifyAdminAccess(request);
   if (!auth.isAuthorized) {
     return auth.response!;
   }

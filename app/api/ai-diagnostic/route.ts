@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
   }
 
   // 2. Auth Check
-  const auth = verifyAdminAccess(request);
+  const auth = await verifyAdminAccess(request);
   if (!auth.isAuthorized) {
     return auth.response!;
   }
@@ -86,7 +86,7 @@ Provide a detailed technical analysis and solution.
 
 export async function GET(request: NextRequest) {
   // Protect documentation endpoint as well
-  const auth = verifyAdminAccess(request);
+  const auth = await verifyAdminAccess(request);
   if (!auth.isAuthorized) {
     return auth.response!;
   }
