@@ -1,5 +1,5 @@
 name: Jules PR & Deploy Check
-# v2.2 - Managed by Jules
+# v2.3 - Managed by Jules
 on:
   schedule:
     # 08:45 IST (India Standard Time) = 03:15 UTC

@@ -1,5 +1,5 @@
 name: Jules Competitor Gap Scan
-# v2.2 - Managed by Jules
+# v2.3 - Managed by Jules
 on:
   schedule:
     # 09:00 IST (India Standard Time) = 03:30 UTC
