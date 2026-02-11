@@ -2,6 +2,10 @@ import { NextResponse } from "next/server";
 import { GoogleGenAI, Modality, Type } from "@google/genai";
 import { rateLimit } from "../../../src/lib/rate-limit";
 import { getClient, extractText } from "../../../lib/gemini";
+import { generateObject } from "ai";
+import { z } from "zod";
+import { getTextModel } from "@/src/lib/ai/gateway";
+import { interpretReportText } from "@/lib/interpretReport";
 
 // TODO: Migrate to Codex CLI/AI Gateway for standardized auth and monitoring.
 const SYSTEM_INSTRUCTION = `You are the NeuroLink Assistant for Dr. Sayuj, a world-class neurosurgeon.
@@ -50,8 +54,8 @@ export async function POST(request: Request) {
   }
 
   try {
-    const ai = getClient();
-    console.log(`[Neuralink API] AI Client initialized`);
+    // const ai = getClient(); // Only initialize if needed for Google-specific actions
+    // console.log(`[Neuralink API] AI Client initialized`);
 
     switch (action) {
       case "triage": {
@@ -63,31 +67,17 @@ export async function POST(request: Request) {
           return jsonError("Missing triage inputs", 400);
         }
 
-        const response = await ai.models.generateContent({
-          model: "gemini-2.0-flash",
-          contents: [{ role: "user", parts: [{ text: `Perform a preliminary neurosurgical triage for a ${age}-year-old ${gender} patient with these symptoms: "${symptoms}". Provide a concise professional summary, identify potential neurosurgical concerns as a list of points, and suggest a priority level (LOW, MEDIUM, HIGH, URGENT). Note: This is for doctor assistance, not a diagnosis.` }] }],
-          config: {
-            responseMimeType: "application/json",
-            responseSchema: {
-              type: Type.OBJECT,
-              properties: {
-                summary: { type: Type.STRING },
-                suggestedPriority: {
-                  type: Type.STRING,
-                  description: "One of: LOW, MEDIUM, HIGH, URGENT",
-                },
-                keyConcerns: {
-                  type: Type.ARRAY,
-                  items: { type: Type.STRING },
-                },
-              },
-              required: ["summary", "suggestedPriority", "keyConcerns"],
-            },
-          },
+        const { object } = await generateObject({
+          model: getTextModel('gpt-4o-mini'),
+          schema: z.object({
+            summary: z.string(),
+            suggestedPriority: z.enum(["LOW", "MEDIUM", "HIGH", "URGENT"]),
+            keyConcerns: z.array(z.string()),
+          }),
+          prompt: `Perform a preliminary neurosurgical triage for a ${age}-year-old ${gender} patient with these symptoms: "${symptoms}". Provide a concise professional summary, identify potential neurosurgical concerns as a list of points, and suggest a priority level (LOW, MEDIUM, HIGH, URGENT). Note: This is for doctor assistance, not a diagnosis.`,
         });
 
-        const parsed = JSON.parse(extractText(response));
-        return NextResponse.json(parsed);
+        return NextResponse.json(object);
       }
 
       case "refineSymptoms": {
@@ -96,33 +86,18 @@ export async function POST(request: Request) {
           return jsonError("Missing symptoms input", 400);
         }
 
-        const response = await ai.models.generateContent({
-          model: "gemini-2.0-flash",
-          contents: [{
-            role: "user", parts: [{
-              text: `The following is a patient's draft description of their symptoms: "${input}".
+        const { object } = await generateObject({
+          model: getTextModel('gpt-4o-mini'),
+          schema: z.object({
+            refinedText: z.string(),
+            clarifyingQuestions: z.array(z.string()),
+          }),
+          prompt: `The following is a patient's draft description of their symptoms: "${input}".
 Help them refine it by providing a more structured, clinical, but easy-to-read version.
-Ask 2-3 clarifying questions that a neurosurgeon would find helpful (e.g., about radiculopathy, bowel/bladder control, or specific pain triggers).
-Return JSON format.` }]
-          }],
-          config: {
-            responseMimeType: "application/json",
-            responseSchema: {
-              type: Type.OBJECT,
-              properties: {
-                refinedText: { type: Type.STRING },
-                clarifyingQuestions: {
-                  type: Type.ARRAY,
-                  items: { type: Type.STRING },
-                },
-              },
-              required: ["refinedText", "clarifyingQuestions"],
-            },
-          },
+Ask 2-3 clarifying questions that a neurosurgeon would find helpful (e.g., about radiculopathy, bowel/bladder control, or specific pain triggers).`,
         });
 
-        const parsed = JSON.parse(extractText(response));
-        return NextResponse.json(parsed);
+        return NextResponse.json(object);
       }
 
       case "interpretReport": {
@@ -131,36 +106,12 @@ Return JSON format.` }]
           return jsonError("Missing report text", 400);
         }
 
-        const response = await ai.models.generateContent({
-          model: "gemini-2.0-flash",
-          contents: [{
-            role: "user", parts: [{
-              text: `Analyze this neurosurgical report excerpt: "${reportText}".
-Translate the complex medical jargon into plain English for a patient.
-Identify 3 key takeaway points.
-Emphasize that this is an AI interpretation and they must discuss with Dr. Sayuj.` }]
-          }],
-          config: {
-            responseMimeType: "application/json",
-            responseSchema: {
-              type: Type.OBJECT,
-              properties: {
-                plainEnglishSummary: { type: Type.STRING },
-                keyTakeaways: {
-                  type: Type.ARRAY,
-                  items: { type: Type.STRING },
-                },
-              },
-              required: ["plainEnglishSummary", "keyTakeaways"],
-            },
-          },
-        });
-
-        const parsed = JSON.parse(extractText(response));
-        return NextResponse.json(parsed);
+        const result = await interpretReportText(reportText);
+        return NextResponse.json(result);
       }
 
       case "searchCenters": {
+        const ai = getClient(); // Initialize specific client
         const query = String(body.query || "").trim();
         const latitude =
           typeof body.latitude === "number" ? body.latitude : undefined;
@@ -193,6 +144,7 @@ Emphasize that this is an AI interpretation and they must discuss with Dr. Sayuj
       }
 
       case "chat": {
+        const ai = getClient();
         const message = String(body.message || "").trim();
         const history = Array.isArray(body.history) ? body.history : [];
 
@@ -225,6 +177,7 @@ Emphasize that this is an AI interpretation and they must discuss with Dr. Sayuj
       }
 
       case "speech": {
+        const ai = getClient();
         const text = String(body.text || "").trim();
         const voiceName = String(body.voiceName || "Kore").trim();
         if (!text) {
