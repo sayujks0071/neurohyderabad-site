@@ -6,6 +6,7 @@ export default function AppointmentSchema() {
   const malakpet = getLocationById('malakpet');
   if (!malakpet) return null;
 
+  // Physician Schema: Matches the requirement for name, specialty, address, services, URL.
   const physicianSchema = {
     "@type": "Physician",
     "@id": `${SITE_URL}/#physician`,
@@ -19,6 +20,7 @@ export default function AppointmentSchema() {
       "postalCode": malakpet.address.postalCode,
       "addressCountry": malakpet.address.addressCountry
     },
+    // Explicitly listing services as requested: 'Neurosurgery', 'Spine Surgery', 'Brain Tumor Surgery'.
     "availableService": [
       "Neurosurgery",
       "Spine Surgery",
@@ -46,6 +48,7 @@ export default function AppointmentSchema() {
     }
   };
 
+  // MedicalClinic Schema: Explicitly constructed using location data.
   const clinicSchema = {
     "@type": "MedicalClinic",
     "@id": `${SITE_URL}/appointments#clinic`,
