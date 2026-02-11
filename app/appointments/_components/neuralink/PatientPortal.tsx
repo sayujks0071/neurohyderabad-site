@@ -174,6 +174,8 @@ const PatientPortal = () => {
 
     try {
       const workflowAppointmentType = toWorkflowAppointmentType(formData.type);
+      analytics.appointmentSubmit('appointment-portal', 'neuralink');
+
       const response = await fetch("/api/workflows/booking", {
         method: "POST",
         headers: {
@@ -206,7 +208,7 @@ const PatientPortal = () => {
       setConfirmationMessage(payload?.confirmationMessage || null);
       trackConversionOnly();
 
-      analytics.appointmentSuccess('appointment-portal', workflowAppointmentType);
+      analytics.appointmentSuccess('appointment-portal', 'neuralink', workflowAppointmentType);
 
       setLastSubmittedData(formData);
       setFormData(INITIAL_FORM_STATE);
