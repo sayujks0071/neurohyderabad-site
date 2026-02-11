@@ -3,6 +3,7 @@ import { GET, POST } from './route';
 import { NextRequest } from 'next/server';
 import { appointments, patients } from '@/src/lib/db';
 import { processBooking } from '@/src/lib/appointments/service';
+import { getAllBlogPosts } from '@/src/lib/blog';
 
 // Mock the db module
 vi.mock('@/src/lib/db', () => ({
@@ -18,6 +19,16 @@ vi.mock('@/src/lib/db', () => ({
 // Mock the booking service
 vi.mock('@/src/lib/appointments/service', () => ({
   processBooking: vi.fn(),
+}));
+
+// Mock the blog module
+vi.mock('@/src/lib/blog', () => ({
+  getAllBlogPosts: vi.fn(),
+}));
+
+// Mock the search index
+vi.mock('@/src/data/searchIndex', () => ({
+  SEARCH_INDEX: [],
 }));
 
 describe('OpenClaw Integration API', () => {
@@ -160,6 +171,51 @@ describe('OpenClaw Integration API', () => {
       });
       const res = await GET(req);
       expect(res.status).toBe(400);
+    });
+
+    it('should search content', async () => {
+      // Setup mock data
+      const mockPosts = [
+        { title: 'Brain Tumor', slug: 'brain-tumor', excerpt: 'About brain tumors', category: 'Brain' }
+      ];
+      // @ts-ignore
+      vi.mocked(getAllBlogPosts).mockResolvedValue(mockPosts);
+
+      const req = createRequest('http://localhost/api/integrations/openclaw?tool=search_content&query=brain', {
+        'x-api-key': MOCK_API_KEY,
+      });
+      const res = await GET(req);
+      expect(res.status).toBe(200);
+      const data = await res.json();
+      expect(data.tool).toBe('search_content');
+      expect(data.data).toHaveLength(1);
+      expect(data.data[0].title).toBe('Brain Tumor');
+    });
+
+    it('should return 400 if query is missing for search_content', async () => {
+      const req = createRequest('http://localhost/api/integrations/openclaw?tool=search_content', {
+        'x-api-key': MOCK_API_KEY,
+      });
+      const res = await GET(req);
+      expect(res.status).toBe(400);
+    });
+
+    it('should handle special characters in query', async () => {
+      // Setup mock data
+      const mockPosts = [
+        { title: 'Vitamin C+', slug: 'vitamin-c', excerpt: 'About Vitamin C+', category: 'Health' }
+      ];
+      // @ts-ignore
+      vi.mocked(getAllBlogPosts).mockResolvedValue(mockPosts);
+
+      const req = createRequest('http://localhost/api/integrations/openclaw?tool=search_content&query=C+', {
+        'x-api-key': MOCK_API_KEY,
+      });
+      const res = await GET(req);
+      expect(res.status).toBe(200);
+      const data = await res.json();
+      expect(data.data).toHaveLength(1);
+      expect(data.data[0].title).toBe('Vitamin C+');
     });
   });
 
