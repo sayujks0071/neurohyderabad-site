@@ -35,6 +35,7 @@ import AppointmentScheduler from "./AppointmentScheduler";
 import SpeechButton from "./SpeechButton";
 import { trackConversionOnly } from "@/src/lib/google-ads-conversion";
 import { analytics } from "@/src/lib/analytics";
+import Button from "@/packages/appointment-form/ui/Button";
 import { CLINIC } from "@/app/_lib/clinic";
 import { APPOINTMENT_SUCCESS_MESSAGE } from "@/packages/appointment-form/constants";
 
@@ -844,33 +845,17 @@ const PatientPortal = () => {
               </div>
 
               <div className="pt-6 border-t border-slate-100">
-                <button
+                <Button
                   type="submit"
-                  disabled={isAnalyzing || isSyncing}
-                  className={`w-full py-4 rounded-2xl text-white font-bold text-lg shadow-xl transition-all flex items-center justify-center relative overflow-hidden ${isAnalyzing || isSyncing
-                    ? "bg-blue-600 opacity-50 cursor-not-allowed"
-                    : "bg-blue-600 hover:bg-blue-700 hover:shadow-blue-200"
-                    }`}
+                  isLoading={isAnalyzing || isSyncing}
+                  className="w-full py-4 rounded-2xl text-lg shadow-xl"
                 >
-                  {(isAnalyzing || isSyncing) && (
-                    <div className="absolute inset-0 bg-white/10 animate-pulse" />
-                  )}
-                  {isAnalyzing ? (
-                    <>
-                      <Loader2 className="w-5 h-5 animate-spin mr-2" />
-                      Triaging...
-                    </>
-                  ) : isSyncing ? (
-                    <>
-                      <Loader2 className="w-5 h-5 animate-spin mr-2" />
-                      Sending...
-                    </>
-                  ) : (
+                  {isAnalyzing ? "Triaging..." : isSyncing ? "Sending..." : (
                     <>
                       Confirm Booking <ChevronRight className="w-5 h-5 ml-2" />
                     </>
                   )}
-                </button>
+                </Button>
               </div>
             </div>
           </div>
