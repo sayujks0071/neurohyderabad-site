@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { rateLimit } from '@/src/lib/rate-limit';
 import { escapeHtml } from '@/src/lib/validation';
-import { z } from 'zod';
 
 interface BookingRequest {
   message: string;
