@@ -776,30 +776,31 @@ async function syncBookingLead(
 ): Promise<boolean> {
   "use step";
 
-  const result = await retry(
-    () => submitToGoogleSheets({
-      requestId: bookingId,
-    fullName: booking.patientName,
-    email: booking.email,
-    phone: booking.phone,
-    concern: booking.reason.slice(0, 100),
-    preferredDate: booking.appointmentDate,
-    preferredTime: booking.appointmentTime,
-    source: source || "website",
-    metadata: {
-      age: booking.age,
-      gender: booking.gender,
-      bookingReason: booking.reason,
-      painScore: booking.painScore,
-      mriScanAvailable: booking.mriScanAvailable,
-    },
-  }), { retries: 3, delay: 1000, name: "google-sheets", predicate: (r) => r.success });
+  try {
+    const result = await retry(
+      () => submitToGoogleSheets({
+        requestId: bookingId,
+      fullName: booking.patientName,
+      email: booking.email,
+      phone: booking.phone,
+      concern: booking.reason.slice(0, 100),
+      preferredDate: booking.appointmentDate,
+      preferredTime: booking.appointmentTime,
+      source: source || "website",
+      metadata: {
+        age: booking.age,
+        gender: booking.gender,
+        bookingReason: booking.reason,
+        painScore: booking.painScore,
+        mriScanAvailable: booking.mriScanAvailable,
+      },
+    }), { retries: 3, delay: 1000, name: "google-sheets", predicate: (r) => r.success });
 
-  if (!result.success) {
-    logWorkflowEvent(bookingId, "google-sheets-sync-failed", { error: result.message });
+    return result.success;
+  } catch (error) {
+    logWorkflowEvent(bookingId, "google-sheets-sync-failed", { error: error instanceof Error ? error.message : String(error) });
+    return false;
   }
-
-  return result.success;
 }
 
 /**
@@ -815,18 +816,22 @@ async function triggerAppointmentWebhooks(
 ): Promise<void> {
   "use step";
 
-  await retry(
-    async () => notifyAppointmentWebhooks(
-      buildWebhookPayload({
-        booking,
-        confirmationMessage,
-        emailResult,
-        usedAI,
-        source,
-      })
-    ),
-    { retries: 3, delay: 1000, name: "webhooks" }
-  );
+  try {
+    await retry(
+      async () => notifyAppointmentWebhooks(
+        buildWebhookPayload({
+          booking,
+          confirmationMessage,
+          emailResult,
+          usedAI,
+          source,
+        })
+      ),
+      { retries: 3, delay: 1000, name: "webhooks" }
+    );
+  } catch (error) {
+    logWorkflowEvent(bookingId, "webhooks-failed-fatal", { error: error instanceof Error ? error.message : String(error) });
+  }
 }
 
 /**
