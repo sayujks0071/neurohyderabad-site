@@ -23,8 +23,8 @@ const PatientEducationVideos = dynamic(() => import('@/app/_components/PatientEd
 });
 
 const baseMetadata = makeMetadata({
-  title: "Sciatica Treatment Hyderabad | 90% Non-Surgical | Dr Sayuj",
-  description: "Expert Sciatica treatment in Hyderabad. 90% patients recover without surgery. Dr. Sayuj specializes in nerve blocks & endoscopic cure. Book appointment.",
+  title: "Sciatica Treatment in Hyderabad | 90% Non-Surgical Relief | Dr Sayuj",
+  description: "Expert Sciatica treatment in Hyderabad by Dr. Sayuj Krishnan (Yashoda Hospital). 90% patients recover without surgery. Endoscopic options available. Book Appointment.",
   canonicalPath: '/conditions/sciatica-pain-treatment-hyderabad',
 });
 
@@ -59,11 +59,19 @@ const FAQ = [
   },
   {
     q: "What causes sciatica?",
-    a: "The most common cause is a herniated (slipped) disc compressing the nerve root. Other causes include spinal stenosis (narrowing of the spine), bone spurs, or rarely, a tumor or diabetic neuropathy."
+    a: (
+      <>
+        The most common cause is a <Link href="/conditions/slip-disc-treatment-hyderabad" className="text-blue-600 underline">herniated (slipped) disc</Link> compressing the nerve root. Other causes include spinal stenosis (narrowing of the spine), bone spurs, or rarely, a tumor or diabetic neuropathy.
+      </>
+    )
   },
   {
     q: "Does sciatica always require surgery?",
-    a: "No. 80-90% of sciatica cases resolve with conservative treatments like medication, physiotherapy, and rest. Surgery (endoscopic discectomy) is only recommended if pain persists after 6 weeks or if there is severe weakness."
+    a: (
+      <>
+        No. 80-90% of sciatica cases resolve with conservative treatments like medication, physiotherapy, and rest. Surgery (<Link href="/services/endoscopic-spine-surgery-hyderabad" className="text-blue-600 underline">endoscopic discectomy</Link> or <Link href="/services/microdiscectomy-surgery-hyderabad" className="text-blue-600 underline">microdiscectomy</Link>) is only recommended if pain persists after 6 weeks or if there is severe weakness.
+      </>
+    )
   },
   {
     q: "How is sciatica diagnosed?",

@@ -2,6 +2,7 @@ import { streamText } from 'ai';
 import { NextRequest, NextResponse } from 'next/server';
 import { getTextModel, hasAIConfig } from '@/src/lib/ai/gateway';
 import { rateLimit } from '@/src/lib/rate-limit';
+// @ts-ignore
 import { JSDOM } from 'jsdom';
 
 // Required for jsdom
@@ -93,7 +94,7 @@ export async function POST(request: NextRequest) {
         // Extract content (prioritize article, then main, then body)
         // Remove scripts and styles first
         const scripts = doc.querySelectorAll('script, style, noscript, iframe, svg');
-        scripts.forEach(script => script.remove());
+        scripts.forEach((script: any) => script.remove());
 
         const article = doc.querySelector('article') || doc.querySelector('main') || doc.body;
         content = article?.textContent || '';
