@@ -73,6 +73,7 @@ export async function middleware(req: NextRequest) {
   if (pathname.startsWith('/drafts') || pathname.startsWith('/admin') || pathname.startsWith('/api/admin')) {
     // 🛡️ Sentinel: Rate limiting protection against brute-force attacks
     // Use IP address as identifier (fallback to localhost if undefined)
+    // @ts-ignore
     const ip = req.ip ?? '127.0.0.1'
     // Limit to 60 requests per minute
     const limit = rateLimit(ip, 60, 60 * 1000)
