@@ -4,9 +4,9 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT_DIR = path.join(__dirname, '..');
-const INVENTORY_FILE = path.join(ROOT_DIR, 'audit', 'crawl', 'url_inventory.json');
 const REPORT_FILE = path.join(ROOT_DIR, 'reports', 'crawl-health-weekly.json');
 const BASE_URL = 'http://localhost:3000';
+const PROD_URL = 'https://www.drsayuj.info';
 
 async function main() {
   console.log('Starting Crawl Health Audit...');
@@ -14,15 +14,36 @@ async function main() {
   // 1. Load URLs
   let urls = [];
   try {
-    const data = fs.readFileSync(INVENTORY_FILE, 'utf8');
-    urls = JSON.parse(data);
-    // Ensure unique and filter
-    urls = [...new Set(urls)].filter(u => u.startsWith('/'));
+    console.log(`Fetching sitemap from ${BASE_URL}/sitemap.xml...`);
+    const res = await fetch(`${BASE_URL}/sitemap.xml`);
+    if (res.status === 200) {
+      const xml = await res.text();
+      const locRegex = /<loc>(.*?)<\/loc>/g;
+      let match;
+      while ((match = locRegex.exec(xml)) !== null) {
+        let url = match[1].trim();
+        // Normalize to local path
+        if (url.startsWith(PROD_URL)) {
+          url = url.replace(PROD_URL, '');
+        } else if (url.startsWith('http')) {
+             // skip external URLs if any end up here
+             continue;
+        }
+        if (!url) url = '/';
+        urls.push(url);
+      }
+      console.log(`Found ${urls.length} URLs from sitemap.`);
+    } else {
+        throw new Error(`Sitemap fetch failed with status ${res.status}`);
+    }
   } catch (e) {
-    console.error('Failed to load inventory:', e);
+    console.error('Failed to load sitemap:', e.message);
     // Fallback sample if file missing
     urls = ['/', '/appointments', '/services', '/conditions', '/locations'];
   }
+
+  // Ensure unique
+  urls = [...new Set(urls)];
 
   const results = {
     summary: {
@@ -49,7 +70,6 @@ async function main() {
     console.log(`Checking: ${fullUrl}`);
 
     try {
-      const start = Date.now();
       const res = await fetch(fullUrl, { redirect: 'manual' });
       const status = res.status;
 
@@ -72,7 +92,10 @@ async function main() {
       }
 
       const finalStatus = currentRes.status;
-      const html = await currentRes.text();
+      let html = '';
+      if (finalStatus === 200) {
+          html = await currentRes.text();
+      }
 
       // Analyze
       const result = {
@@ -103,8 +126,7 @@ async function main() {
         } else {
           if (titleMap.has(result.title)) {
              results.summary.duplicate_titles++;
-             // Only add issue once per duplicate set to avoid noise, or track all
-             results.issues.push({ type: 'duplicate_title', url: urlPath, duplicate_of: titleMap.get(result.title) });
+             results.issues.push({ type: 'duplicate_title', url: urlPath, duplicate_of: titleMap.get(result.title), title: result.title });
           } else {
             titleMap.set(result.title, urlPath);
           }
@@ -125,7 +147,7 @@ async function main() {
           const link = match[1];
           // Filter out obvious non-pages
           if (!link.startsWith('//') &&
-              !link.match(/\.(png|jpg|jpeg|gif|svg|css|js|ico|xml|json)$/i) &&
+              !link.match(/\.(png|jpg|jpeg|gif|svg|css|js|ico|xml|json|mp4|webm)$/i) &&
               !link.includes('mailto:') &&
               !link.includes('tel:')) {
              result.internal_links.push(link);
@@ -162,7 +184,7 @@ async function main() {
   };
 
   // Run checks with limited concurrency
-  const CONCURRENCY = 5;
+  const CONCURRENCY = 2;
   for (let i = 0; i < urls.length; i += CONCURRENCY) {
     const chunk = urls.slice(i, i + CONCURRENCY);
     await Promise.all(chunk.map(checkUrl));
@@ -198,8 +220,8 @@ async function main() {
     const robotsRes = await fetch(`${BASE_URL}/robots.txt`);
     if (robotsRes.status !== 200) results.issues.push({ type: 'missing_file', url: '/robots.txt' });
 
-    const sitemapRes = await fetch(`${BASE_URL}/sitemap-main.xml`);
-    if (sitemapRes.status !== 200) results.issues.push({ type: 'missing_file', url: '/sitemap-main.xml' });
+    const sitemapRes = await fetch(`${BASE_URL}/sitemap.xml`);
+    if (sitemapRes.status !== 200) results.issues.push({ type: 'missing_file', url: '/sitemap.xml' });
   } catch (e) {
     results.issues.push({ type: 'check_failed', url: 'system_files' });
   }
