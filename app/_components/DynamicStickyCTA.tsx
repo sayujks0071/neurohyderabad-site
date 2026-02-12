@@ -9,12 +9,18 @@ export default function DynamicStickyCTA() {
   const [shouldLoad, setShouldLoad] = useState(false);
 
   useEffect(() => {
+    // If already loaded, no need to attach listener
+    if (shouldLoad) return;
+
     // Handler for scroll interaction
     const handleScroll = () => {
-      setShouldLoad(true);
+      // ⚡ Bolt: Only load when user has scrolled significantly (> 100px)
+      // avoiding eager load on minor movements or initial bounce.
+      if (window.scrollY > 100) {
+        setShouldLoad(true);
+      }
     };
 
-    // Add scroll listener immediately
     // Use passive listener for better scroll performance
     window.addEventListener('scroll', handleScroll, { passive: true });
 
@@ -28,7 +34,7 @@ export default function DynamicStickyCTA() {
       window.removeEventListener('scroll', handleScroll);
       clearTimeout(timer);
     };
-  }, []);
+  }, [shouldLoad]); // ⚡ Bolt: Depend on shouldLoad to cleanup listener once loaded
 
   if (!shouldLoad) {
     return null;
