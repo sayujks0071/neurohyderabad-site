@@ -156,7 +156,7 @@ Return ONLY a JSON object with an "ids" array containing the IDs (URLs) of the $
         }
         return null;
       })
-      .filter((item): item is SearchResult => item !== null);
+      .filter((item): item is NonNullable<typeof item> => item !== null) as SearchResult[];
 
     if (results.length === 0) {
       return performKeywordSearch();

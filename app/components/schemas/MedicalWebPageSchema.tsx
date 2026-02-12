@@ -47,14 +47,30 @@ export default function MedicalWebPageSchema({
     "reviewedBy": {
       "@type": "Physician",
       "@id": `${SITE_URL}/#physician`,
-      "name": "Dr. Sayuj Krishnan"
+      "name": "Dr. Sayuj Krishnan",
+      "hasCredential": {
+        "@type": "EducationalOccupationalCredential",
+        "credentialCategory": "degree",
+        "name": "DNB Neurosurgery"
+      }
     },
+    "lastReviewed": lastReviewed,
     "datePublished": "2024-01-01",
     "dateModified": lastReviewed,
+    "creativeWorkStatus": "Published",
+    "medicalAudience": {
+      "@type": "MedicalAudience",
+      "audienceType": "Patient"
+    },
     "author": {
       "@type": "Person",
       "name": author,
       "jobTitle": "Neurosurgeon",
+      "hasCredential": {
+        "@type": "EducationalOccupationalCredential",
+        "credentialCategory": "degree",
+        "name": "DNB Neurosurgery"
+      },
       "worksFor": {
         "@type": "Hospital",
         "name": "Yashoda Hospital",

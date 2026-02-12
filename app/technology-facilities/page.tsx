@@ -7,7 +7,7 @@ import TechnologyStructuredData from './structured-data';
 import TechnologyImage from '../../src/components/TechnologyImage';
 
 export const metadata: Metadata = {
-  title: 'Advanced Technology & Facilities | Dr. Sayuj Krishnan | State-of-the-Art Neurosurgery Equipment',
+  title: 'Neurosurgery Technology Hyderabad | Dr Sayuj',
   description: 'Explore our cutting-edge neurosurgery technology including 3T MRI, neuronavigation, endoscopic systems, intraoperative monitoring, and AI-assisted surgical planning in Hyderabad.',
   keywords: 'neurosurgery technology, MRI scanner, neuronavigation, endoscopic surgery, intraoperative monitoring, surgical robotics, AI neurosurgery, advanced medical equipment, Hyderabad',
   alternates: {
