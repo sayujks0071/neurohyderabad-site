@@ -152,9 +152,9 @@ export default function HeaderRefactored() {
             <Image
               src="/images/logo.svg"
               alt="Dr Sayuj — Neurosurgeon and Endoscopic Spine Surgery"
-              width={40}
-              height={40}
-              className="h-10 w-10"
+              width={1600}
+              height={600}
+              className="h-10 w-auto"
               priority
             />
             <span className="sr-only md:not-sr-only font-semibold text-[var(--color-text-primary)]">
