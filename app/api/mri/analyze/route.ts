@@ -53,9 +53,9 @@ export async function POST(request: Request) {
 
     // Basic magic bytes check (best effort)
     const buffer = Buffer.from(await file.arrayBuffer());
-    const header = buffer.subarray(0, 4).toString();
-    if (header !== '%PDF') {
-       // Ideally we check more bytes but %PDF is standard
+    const header = buffer.subarray(0, 5).toString();
+    if (!header.startsWith('%PDF-')) {
+       // Ideally we check more bytes but %PDF- is standard for PDF 1.x
        return NextResponse.json({ error: "Invalid file format. Not a PDF." }, { status: 400 });
     }
 
