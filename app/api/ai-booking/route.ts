@@ -18,6 +18,8 @@ interface BookingRequest {
     symptoms?: string[];
     previousTreatment?: string;
     insurance?: string;
+    painScore?: number;
+    mriScanAvailable?: boolean;
   };
   pageSlug: string;
   service?: string;
@@ -63,6 +65,8 @@ const aiBookingSchema = z.object({
     symptoms: z.array(z.string()).optional(),
     previousTreatment: z.string().optional(),
     insurance: z.string().optional(),
+    painScore: z.number().min(1).max(10).optional(),
+    mriScanAvailable: z.boolean().optional(),
   }).optional().describe("Updated booking data extracted from the conversation."),
   nextStep: z.string().optional().describe("The next step in the flow: 'condition', 'urgency', 'details', 'scheduling', 'confirmation', or null."),
 });
@@ -142,10 +146,10 @@ Instructions:
 2. If the user provides a phone number or email, ensure it is captured in bookingData.
 3. Determine the next step in the flow:
    - 'condition': If condition is unknown, ask about symptoms.
-   - 'urgency': If urgency is unknown, ask about pain levels (1-10) or severity.
+   - 'urgency': If urgency is unknown, ask about pain levels (1-10) and if they have any recent MRI scans.
    - 'details': If name/phone/email are missing, ask for them.
    - 'scheduling': If date/time are missing, ask for preference (OPD hours: Mon-Sat 10am-1pm, 5pm-7:30pm).
-   - 'confirmation': If all key info (name, phone, condition, urgency, date) is present, summarize and ask to confirm.
+   - 'confirmation': If all key info (name, phone, condition, urgency, painScore, mriScanAvailable, date) is present, summarize and ask to confirm.
 4. Be empathetic and professional. Dr. Sayuj is a specialist.
 5. If the user asks unrelated medical questions, politely guide them back to booking or suggest a consultation.
 
