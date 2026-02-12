@@ -200,12 +200,12 @@ export default function Home() {
             <div className="max-w-6xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-12 items-center">
                 <div className="text-center lg:text-left">
-                  <h1 className="home-hero__title text-4xl md:text-6xl font-bold leading-tight">
+                  <h1 className="home-hero__title text-4xl md:text-6xl font-bold leading-tight mb-4">
                     Dr. Sayuj Krishnan: German-Trained Neurosurgeon in Hyderabad
-                    <span className="home-hero__subtitle block text-3xl md:text-5xl">
-                      Minimally invasive spine, awake brain surgery, and ROSA DBS at Yashoda Hospital, Malakpet.
-                    </span>
                   </h1>
+                  <h2 className="home-hero__subtitle block text-3xl md:text-5xl font-normal mb-6 leading-tight">
+                    Minimally invasive spine, awake brain surgery, and ROSA DBS at Yashoda Hospital, Malakpet.
+                  </h2>
                   <p className="home-hero__lead text-xl md:text-2xl">
                     I personally evaluate every case and perform the surgery—combining full-endoscopic spine techniques, awake mapping for complex brain tumors, and robotic guidance for DBS to deliver safer, faster recoveries.
                   </p>

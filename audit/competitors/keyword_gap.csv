@@ -1,8 +1,11 @@
-keyword,intent,suggested_target_page
-spine surgery cost in hyderabad,Commercial,services/spine-surgery-cost-hyderabad
-spine surgeon telugu,Informational,blog/spine-surgery-guide-telugu
-laser spine surgery hyderabad,Commercial,services/laser-spine-surgery-hyderabad
-spine surgery insurance hyderabad,Transactional,blog/spine-surgery-insurance-guide
-best neurosurgeon kphb,Local,locations/neurosurgeon-kphb
-endoscopic vs microdiscectomy,Informational,blog/endoscopic-vs-microdiscectomy-comparison
-second opinion spine surgery,Commercial,services/spine-surgery-second-opinion
+Keyword,Intent,Current Ranking (Est),Target Page
+neurosurgeon hyderabad,Transactional,Unknown,Homepage
+spine surgery hyderabad,Transactional,Unknown,/services/spine-surgery-hyderabad
+minimally invasive spine surgery hyderabad,Commercial,Unknown,/services/minimally-invasive-spine-surgery
+endoscopic spine surgery hyderabad,Commercial,Unknown,/services/endoscopic-spine-surgery-hyderabad
+sciatica treatment hyderabad,Commercial,Unknown,/conditions/sciatica-pain-treatment-hyderabad
+best neurosurgeon in hyderabad,Transactional,Unknown,Homepage
+brain tumor surgery hyderabad,Commercial,Unknown,/services/brain-tumor-surgery-hyderabad
+cervical spine surgery hyderabad,Commercial,Unknown,/services/cervical-spine-surgery-hyderabad
+slipped disc treatment hyderabad,Commercial,Unknown,/conditions/slip-disc-treatment-hyderabad
+lumbar spondylosis treatment hyderabad,Informational,Unknown,/conditions/spondylolisthesis-treatment-hyderabad

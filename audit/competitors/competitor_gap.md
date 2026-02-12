@@ -1,26 +1,47 @@
-# Competitor Benchmark
+# Competitor Analysis & Gap Report
 
-## Top Competitors (Hyderabad)
-1. **Yashoda Hospitals** (Domain Authority: High)
-2. **Apollo Hospitals**
-3. **Dr. Raveesh** (Specialist)
-4. **SpineSurgeon.in** (Specialist)
+## Top Competitors (Hyderabad Market)
 
-## Content Gaps Identified
-1. **Local Language Content:** No pages found targeting Telugu/Hindi keywords explicitly in URL (e.g., /te/...).
-   - *Opportunity:* Create /telugu/spine-surgery landing page.
-2. **Interactive Tools:** Competitors use "Spine Health Score" calculators. We have `symptoms-checker`.
-3. **Comparison Pages:** "Endoscopic vs Microdiscectomy". We have `blog/endoscopic-vs-microdiscectomy-hyderabad`? (Check inventory).
-4. **Cost Transparency:** Competitors often hide costs. We have explicit cost pages.
-   - `services/spine-surgery-cost-hyderabad` (Word Count: CHECK)
-   - `services/slip-disc-surgery-cost-hyderabad`
+1. **Hospitals (High Authority)**
+   - AIG Hospitals (`aighospitals.com`)
+   - Apollo Hospitals (`apollohospitals.com`)
+   - KIMS Hospitals (`kimshospitals.com`)
+   - Yashoda Hospitals (`yashodahospitals.com`)
 
-## Keyword Gaps
-- "best spine surgeon in kphb" (Hyper-local)
-- "laser spine surgery hyderabad" (If applicable)
-- "spine surgery insurance coverage hyderabad"
+2. **Individual Surgeons (Direct Competitors)**
+   - **Dr. Raveesh Sunkara** (`drraveesh.com`)
+     - Strategy: "Best Neurosurgeon", "Endoscopic Spine Surgery".
+     - Strengths: Concise titles, procedure-focused pages.
+   - **Dr. Surya Prakash Rao Voleti** (`spinesurgeon.in`)
+     - Strategy: "Best Spine Surgeon", "Minimally Invasive".
+     - Strengths: Experience highlights ("20 years"), specific condition pages.
+   - **Dr. Ravi Suman Reddy** (`drravisumanneuro.com`)
+     - Strategy: "Top 5 neurosurgeons", quantitative proof ("15,000 surgeries").
 
-## SERP Features
-- **FAQ Schema:** Essential. We have it on some pages? (Check schema inventory).
-- **Video Carousel:** Competitors use YouTube embeds.
-- **Local Pack:** GMB optimization is key (Address schema helps).
+## Content Gaps for drsayuj.info
+
+### 1. Title Optimization
+- **Competitors:** Use concise, punchy titles like "Best Neurosurgeon in Hyderabad | Dr. Name".
+- **Current Site:** Many titles are too long or flagged as such. Homepage has multiple H1s which dilutes focus.
+
+### 2. "Best" & "Top" Modifiers
+- Competitors aggressively use "Best", "Top", "Famous" in titles and H1s.
+- `drsayuj.info` uses "Best" on homepage, but inner pages could be better optimized for these high-intent keywords.
+
+### 3. Quantitative Proof
+- Competitors highlight "Years of Experience", "Number of Surgeries".
+- `drsayuj.info` should explicitly state these numbers in the Hero section or Metadata.
+
+### 4. Local SEO
+- Competitors target specific areas (LB Nagar, Hitech City).
+- `drsayuj.info` has location pages (e.g., `/neurosurgeon-banjara-hills`) which is good, but they need to be well-linked and distinct to avoid cannibalization or "doorway page" penalties (ensure unique content).
+
+## Keyword Opportunities
+
+| Keyword | Intent | Priority | Suggested Action |
+|---|---|---|---|
+| endoscopic spine surgery cost hyderabad | Commercial | High | Create/Optimize pricing transparency page or section |
+| best neurosurgeon for brain tumor hyderabad | Transactional | High | Optimize Brain Tumor Service page title/H1 |
+| laser spine surgery hyderabad | Informational/Commercial | Medium | Create comparison page (Laser vs Endoscopic) |
+| sciatica treatment cost hyderabad | Commercial | Medium | Add cost estimates to Sciatica page |
+| spine surgeon near me | Local | High | Optimize Google Business Profile & Location pages |
