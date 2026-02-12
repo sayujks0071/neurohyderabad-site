@@ -267,10 +267,35 @@ export const PhysicianSchema: React.FC = () => {
           "Pediatric Neurosurgery",
           "Emergency Neurotrauma Care"
         ],
-        "areaServed": {
-          "@type": "AdministrativeArea",
-          "name": "Hyderabad, Telangana, India"
-        },
+        "areaServed": [
+          {
+            "@type": "City",
+            "name": "Hyderabad",
+            "containedInPlace": {
+              "@type": "State",
+              "name": "Telangana",
+              "containedInPlace": {
+                "@type": "Country",
+                "name": "India"
+              }
+            }
+          },
+          { "@type": "Place", "name": "Malakpet, Hyderabad" },
+          { "@type": "Place", "name": "Dilsukhnagar, Hyderabad" },
+          { "@type": "Place", "name": "LB Nagar, Hyderabad" },
+          { "@type": "Place", "name": "Kothapet, Hyderabad" },
+          { "@type": "Place", "name": "Jubilee Hills, Hyderabad" },
+          { "@type": "Place", "name": "Banjara Hills, Hyderabad" },
+          { "@type": "Place", "name": "Hitech City, Hyderabad" },
+          { "@type": "Place", "name": "Gachibowli, Hyderabad" },
+          { "@type": "Place", "name": "Kondapur, Hyderabad" },
+          { "@type": "Place", "name": "Madhapur, Hyderabad" },
+          { "@type": "Place", "name": "Secunderabad" },
+          { "@type": "Place", "name": "Kukatpally, Hyderabad" },
+          { "@type": "Place", "name": "Miyapur, Hyderabad" },
+          { "@type": "Place", "name": "Uppal, Hyderabad" },
+          { "@type": "Place", "name": "Manikonda, Hyderabad" }
+        ],
         "availableService": [
           ...serviceOffers.map((service) => ({
             "@type": "MedicalService",
