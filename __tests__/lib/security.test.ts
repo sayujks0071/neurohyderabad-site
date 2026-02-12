@@ -27,52 +27,52 @@ describe('verifyAdminAccess', () => {
     process.env = originalEnv;
   });
 
-  it('should deny access if ADMIN_ACCESS_KEY is not set', () => {
+  it('should deny access if ADMIN_ACCESS_KEY is not set', async () => {
     delete process.env.ADMIN_ACCESS_KEY;
     const req = new NextRequest('http://localhost/api/test');
 
-    const result = verifyAdminAccess(req);
+    const result = await verifyAdminAccess(req);
 
     expect(result.isAuthorized).toBe(false);
     expect(result.response?.status).toBe(500); // Fail secure
   });
 
-  it('should authorize access with valid header', () => {
+  it('should authorize access with valid header', async () => {
     process.env.ADMIN_ACCESS_KEY = 'secret123';
     const req = new NextRequest('http://localhost/api/test', {
       headers: { 'x-admin-key': 'secret123' }
     });
 
-    const result = verifyAdminAccess(req);
+    const result = await verifyAdminAccess(req);
 
     expect(result.isAuthorized).toBe(true);
     expect(result.response).toBeUndefined();
   });
 
-  it('should authorize access with valid query param', () => {
+  it('should authorize access with valid query param', async () => {
     process.env.ADMIN_ACCESS_KEY = 'secret123';
     const req = new NextRequest('http://localhost/api/test?key=secret123');
 
-    const result = verifyAdminAccess(req);
+    const result = await verifyAdminAccess(req);
 
     expect(result.isAuthorized).toBe(true);
   });
 
-  it('should deny access with invalid key', () => {
+  it('should deny access with invalid key', async () => {
     process.env.ADMIN_ACCESS_KEY = 'secret123';
     const req = new NextRequest('http://localhost/api/test?key=wrong');
 
-    const result = verifyAdminAccess(req);
+    const result = await verifyAdminAccess(req);
 
     expect(result.isAuthorized).toBe(false);
     expect(result.response?.status).toBe(401);
   });
 
-  it('should deny access with missing key', () => {
+  it('should deny access with missing key', async () => {
     process.env.ADMIN_ACCESS_KEY = 'secret123';
     const req = new NextRequest('http://localhost/api/test');
 
-    const result = verifyAdminAccess(req);
+    const result = await verifyAdminAccess(req);
 
     expect(result.isAuthorized).toBe(false);
     expect(result.response?.status).toBe(401);
@@ -92,7 +92,7 @@ describe('verifyAdminAccess', () => {
       headers: { 'x-admin-key': 'secret123' }
     });
 
-    const result = verifyAdminAccess(req);
+    const result = await verifyAdminAccess(req);
 
     expect(result.isAuthorized).toBe(false);
     expect(result.response?.status).toBe(429);
@@ -106,22 +106,22 @@ describe('verifyAdminAccess', () => {
 });
 
 describe('secureCompare', () => {
-  it('should return true for identical strings', () => {
-    expect(secureCompare('secret123', 'secret123')).toBe(true);
+  it('should return true for identical strings', async () => {
+    expect(await secureCompare('secret123', 'secret123')).toBe(true);
   });
 
-  it('should return false for different strings', () => {
-    expect(secureCompare('secret123', 'wrong')).toBe(false);
+  it('should return false for different strings', async () => {
+    expect(await secureCompare('secret123', 'wrong')).toBe(false);
   });
 
-  it('should return false for strings of different lengths', () => {
-    expect(secureCompare('secret123', 'secret1234')).toBe(false);
+  it('should return false for strings of different lengths', async () => {
+    expect(await secureCompare('secret123', 'secret1234')).toBe(false);
   });
 
-  it('should return false if either argument is not a string', () => {
+  it('should return false if either argument is not a string', async () => {
     // @ts-ignore
-    expect(secureCompare(null, 'secret')).toBe(false);
+    expect(await secureCompare(null, 'secret')).toBe(false);
     // @ts-ignore
-    expect(secureCompare('secret', undefined)).toBe(false);
+    expect(await secureCompare('secret', undefined)).toBe(false);
   });
 });

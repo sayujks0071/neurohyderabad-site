@@ -22,16 +22,16 @@ const SERVICES = [
   { name: 'Robotic Spine Surgery', url: '/services/robotic-spine-surgery-hyderabad' },
 ];
 
-function validateApiKey(request: NextRequest): boolean {
+async function validateApiKey(request: NextRequest): Promise<boolean> {
   const apiKey = request.headers.get('x-api-key');
   const validApiKey = process.env.OPENCLAW_API_KEY;
   if (!validApiKey || !apiKey) return false;
-  return secureCompare(apiKey, validApiKey);
+  return await secureCompare(apiKey, validApiKey);
 }
 
 export async function GET(request: NextRequest) {
   try {
-    if (!validateApiKey(request)) {
+    if (!await validateApiKey(request)) {
       return NextResponse.json(
         { error: 'Unauthorized', message: 'Invalid or missing API key' },
         { status: 401 }
@@ -209,7 +209,7 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    if (!validateApiKey(request)) {
+    if (!await validateApiKey(request)) {
       return NextResponse.json(
         { error: 'Unauthorized', message: 'Invalid or missing API key' },
         { status: 401 }
