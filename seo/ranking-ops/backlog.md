@@ -39,3 +39,8 @@
 ## 2026-02-10
 - **Opportunity:** Replicate "Endoscopic Procedure Steps" component on other procedure pages (e.g., Microdiscectomy, Brain Tumor Surgery) for consistent visual storytelling.
 - **Optimization:** Check LCP/CLS impact of new component on mobile devices.
+
+## 2026-02-12
+- [x] **Content Improvement:** Added "Red Flags" emergency section to Spine Surgery page. (Done 2026-02-12)
+- [ ] **Content Gap:** Add similar "Red Flags" sections to other critical pages (Brain Tumor, Epilepsy).
+- [ ] **Technical Fix:** Investigate `middleware.ts` type definition properly (currently using `@ts-ignore`).

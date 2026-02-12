@@ -192,6 +192,46 @@ export default function SpineSurgeryHyderabadPage() {
           </ul>
         </section>
 
+        <section className="mb-16">
+          <div className="bg-red-50 border border-red-100 rounded-2xl p-8 shadow-sm">
+            <h2 className="text-2xl font-bold text-red-800 mb-4 flex items-center gap-3">
+              <span className="text-3xl">⚠️</span> Red Flags: When Spine Surgery Cannot Wait
+            </h2>
+            <p className="text-red-900 mb-6 font-medium">
+              While most spine conditions can be managed conservatively, certain symptoms indicate a medical emergency requiring immediate neurosurgical attention to prevent permanent paralysis.
+            </p>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-white p-5 rounded-xl border border-red-100">
+                <h3 className="font-bold text-red-800 mb-2">Cauda Equina Syndrome</h3>
+                <ul className="space-y-2 text-sm text-gray-700">
+                  <li>• Loss of bowel or bladder control (incontinence or retention)</li>
+                  <li>• Numbness in the groin or saddle area</li>
+                  <li>• Severe weakness in both legs</li>
+                </ul>
+              </div>
+              <div className="bg-white p-5 rounded-xl border border-red-100">
+                <h3 className="font-bold text-red-800 mb-2">Progressive Neurological Deficits</h3>
+                <ul className="space-y-2 text-sm text-gray-700">
+                  <li>• Sudden &quot;Foot Drop&quot; (inability to lift the foot)</li>
+                  <li>• Rapidly worsening arm or leg weakness</li>
+                  <li>• Unbearable pain despite strong medication</li>
+                </ul>
+              </div>
+            </div>
+            <div className="mt-6 text-center">
+              <p className="text-red-800 text-sm mb-3">
+                <strong>If you experience these symptoms, do not wait.</strong> Go to the nearest emergency room or contact us immediately.
+              </p>
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center rounded-full bg-red-600 px-6 py-3 text-white font-semibold hover:bg-red-700 transition-colors"
+              >
+                Contact Emergency Team
+              </Link>
+            </div>
+          </div>
+        </section>
+
         <section className="mb-16 grid md:grid-cols-2 gap-10">
           <div>
             <h2 className="text-3xl font-bold text-blue-900 mb-4">What to Expect at Yashoda Hospital, Malakpet</h2>
