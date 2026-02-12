@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { spring, useCurrentFrame, useVideoConfig } from 'remotion';
+import { spring, useCurrentFrame, useVideoConfig, interpolate } from 'remotion';
 import { COLORS, FONTS, SPACING } from '../../utils/colorTokens';
 import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
 
@@ -23,7 +23,7 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
   const year = date.getFullYear();
   const dayName = date.toLocaleDateString('en-US', { weekday: 'long' });
 
-  // 1. Main Card Entrance (Pop in)
+  // 1. Main Card Entrance (Pop in with 3D rotation)
   const calendarScale = useMemo(() => prefersReducedMotion ? 1 : spring({
     frame,
     fps,
@@ -36,6 +36,15 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
     },
   }), [frame, fps, prefersReducedMotion]);
 
+  const calendarRotateX = useMemo(() => prefersReducedMotion ? 0 : spring({
+    frame,
+    fps,
+    from: 45,
+    to: 0,
+    durationInFrames: 30,
+    config: { damping: 15 },
+  }), [frame, fps, prefersReducedMotion]);
+
   const calendarOpacity = useMemo(() => prefersReducedMotion ? 1 : spring({
     frame,
     fps,
@@ -44,7 +53,7 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
     durationInFrames: 20,
   }), [frame, fps, prefersReducedMotion]);
 
-  // 2. Day Number Pop (Staggered)
+  // 2. Day Number Pop (Staggered) - Enhanced Stiffness
   const dayNumberScale = useMemo(() => prefersReducedMotion ? 1 : spring({
     frame: frame - 15,
     fps,
@@ -53,7 +62,7 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
     durationInFrames: 20,
     config: {
       damping: 10,
-      stiffness: 120,
+      stiffness: 200, // Increased from 120 for more pop
     },
   }), [frame, fps, prefersReducedMotion]);
 
@@ -66,6 +75,18 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
     durationInFrames: 40,
     config: { damping: 100 },
   }), [frame, fps, prefersReducedMotion]);
+
+  // Ring Pulse (triggers after drawing)
+  const ringPulseDriver = useMemo(() => prefersReducedMotion ? 0 : spring({
+    frame: frame - 50,
+    fps,
+    from: 0,
+    to: 1,
+    durationInFrames: 20,
+    config: { damping: 100 },
+  }), [frame, fps, prefersReducedMotion]);
+
+  const ringScale = interpolate(ringPulseDriver, [0, 0.5, 1], [1, 1.15, 1]);
 
   // 4. Time Section Slide Up (Staggered)
   const timeSlide = useMemo(() => prefersReducedMotion ? 0 : spring({
@@ -108,9 +129,16 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
         alignItems: 'center',
         justifyContent: 'center',
         padding: SPACING[16],
+        perspective: '1000px', // Add perspective for 3D effect
       }}
     >
-      <div style={{ opacity: calendarOpacity, transform: `scale(${calendarScale}) translateY(${floatingY}px)` }}>
+      <div
+        style={{
+          opacity: calendarOpacity,
+          transform: `scale(${calendarScale}) rotateX(${calendarRotateX}deg) translateY(${floatingY}px)`,
+          transformStyle: 'preserve-3d',
+        }}
+      >
         {/* Calendar card */}
         <div
           style={{
@@ -122,8 +150,25 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
             border: `4px solid ${COLORS.accent}`,
             display: 'flex',
             flexDirection: 'column',
+            position: 'relative', // For background grid
           }}
         >
+          {/* Background Grid Pattern */}
+          <div
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              backgroundImage: `radial-gradient(${COLORS.textSecondary} 1px, transparent 1px)`,
+              backgroundSize: '20px 20px',
+              opacity: 0.1,
+              pointerEvents: 'none',
+              zIndex: 0,
+            }}
+          />
+
           {/* Calendar header */}
           <div
             style={{
@@ -154,41 +199,41 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
             style={{
               padding: `${SPACING[12]} ${SPACING[8]}`,
               textAlign: 'center',
-              backgroundColor: COLORS.surface,
+              backgroundColor: 'transparent', // Make transparent to show grid
               position: 'relative',
               flex: 1,
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
               justifyContent: 'center',
+              zIndex: 1,
             }}
           >
             {/* Highlight Ring */}
-            <svg
-              width="200"
-              height="200"
-              viewBox="0 0 200 200"
-              style={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%) rotate(-90deg)',
-                pointerEvents: 'none',
-              }}
-            >
-              <circle
-                cx="100"
-                cy="100"
-                r="85"
-                fill="none"
-                stroke={COLORS.accent}
-                strokeWidth="4"
-                strokeDasharray={534} // 2 * PI * 85 ≈ 534
-                strokeDashoffset={534 * (1 - ringProgress)}
-                strokeLinecap="round"
-                opacity={0.3}
-              />
-            </svg>
+            <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+               <svg
+                width="200"
+                height="200"
+                viewBox="0 0 200 200"
+                style={{
+                  transform: `rotate(-90deg) scale(${ringScale})`, // Add scale pulse
+                  pointerEvents: 'none',
+                }}
+              >
+                <circle
+                  cx="100"
+                  cy="100"
+                  r="85"
+                  fill="none"
+                  stroke={COLORS.accent}
+                  strokeWidth="4"
+                  strokeDasharray={534} // 2 * PI * 85 ≈ 534
+                  strokeDashoffset={534 * (1 - ringProgress)}
+                  strokeLinecap="round"
+                  opacity={0.3}
+                />
+              </svg>
+            </div>
 
             <div style={{ transform: `scale(${dayNumberScale})` }}>
               <p
@@ -199,6 +244,7 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
                   color: COLORS.text,
                   margin: 0,
                   lineHeight: 1,
+                  textShadow: '0 4px 12px rgba(0,0,0,0.1)', // Added text shadow
                 }}
               >
                 {dayNumber}
@@ -239,7 +285,7 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
               borderTop: `2px solid ${COLORS.accent}`,
               transform: `translateY(${timeSlide}px)`,
               opacity: timeOpacity,
-              zIndex: 0,
+              zIndex: 1,
             }}
           >
             <p
