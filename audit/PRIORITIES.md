@@ -1,24 +1,17 @@
-# Prioritized SEO Fixes
+# Prioritized Fix Backlog
 
-## 1. Eliminate Ghost Pages (Critical Technical)
-**Issue**: ~50 URLs listed in sitemaps return 404.
-**Impact**: Wastes crawl budget, bad UX, "Soft 404" signals.
-**Fix**: Remove these URLs from `app/sitemap-services.ts`, `app/sitemap-conditions.ts`, and `app/sitemap.ts`.
-**Effort**: Low. **Risk**: Low.
+| Issue | Impact (1-5) | Effort (1-5) | Risk | Do Now? | Fix Summary |
+|---|---|---|---|---|---|
+| **Sitemap Redirect Loop** | 5 | 2 | Low | **YES** | Fix `app/sitemap.xml/route.ts` and `next.config.mjs` redirect conflict causing 308 loop. |
+| **Multiple H1 Tags (Homepage)** | 4 | 2 | Low | **YES** | Refactor Homepage (`app/page.tsx`) to have single H1. Downgrade secondary H1s to H2. |
+| **Homepage Performance (TBT/LCP)** | 3 | 4 | Med | **YES** | Optimize critical rendering path. Defer non-essential scripts. Optimize hero image loading. |
+| **Title Tags Too Long** | 3 | 3 | Low | No | Shorten titles on inner pages (About, Contact, etc.) to < 60 chars. |
+| **Missing Meta Descriptions** | 3 | 3 | Low | No | Add unique meta descriptions to pages flagged in audit. |
+| **Schema Enhancement** | 2 | 3 | Low | No | Ensure `Physician` schema is robust and includes reviews/aggregateRating if possible. |
+| **Broken Links (404s)** | 3 | 2 | Low | No | Fix internal 404s found in crawl (if any). |
 
-## 2. Fix Schema Gaps (E-E-A-T)
-**Issue**: `MedicalWebPage` schema is missing `medicalSpecialty` and `audience` fields. Some pages show `undefined` schema types.
-**Impact**: Reduced rich snippet eligibility (Medical Knowledge Graph).
-**Fix**: Update `MedicalWebPageSchema` component to include defaults or props for these fields.
-**Effort**: Medium. **Risk**: Low.
+## Selected "Do Now" Tasks
 
-## 3. Metadata Length Optimization (On-Page)
-**Issue**: 120+ pages have titles > 60 chars.
-**Impact**: Title truncation in SERPs (lower CTR).
-**Fix**: Shorten the page-specific titles for key pages (Home, Services, Conditions).
-**Effort**: Medium (repetitive). **Risk**: Low.
-
-## 4. Performance (Lighthouse)
-**Issue**: Lighthouse failed locally, but TTFB is good.
-**Fix**: Ensure `next/image` is used properly (already seems so).
-**Action**: Defer major performance overhaul until Lighthouse can be run, but verify `next/image` usage in key components.
+1.  **Fix Sitemap Redirect Loop**: Critical for indexability.
+2.  **Fix Multiple H1 Tags**: Critical for on-page relevance and structure.
+3.  **Homepage Performance**: Improve Core Web Vitals (LCP/TBT) for better UX and ranking signal.

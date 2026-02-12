@@ -71,12 +71,6 @@ const nextConfig = {
   // 301 redirects for legacy URLs to consolidate duplicate content
   async redirects() {
     return [
-      // Fix: Redirect uppercase SITEMAP.XML to lowercase sitemap.xml (for Google Search Console)
-      {
-        source: '/SITEMAP.XML',
-        destination: '/sitemap.xml',
-        permanent: true,
-      },
       // CRITICAL: Consolidate .com -> canonical .info (single hop 301)
       {
         source: '/:path*',
