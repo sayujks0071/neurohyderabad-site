@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { spring, useCurrentFrame, useVideoConfig, interpolate } from 'remotion';
 import { COLORS, FONTS, SPACING } from '../../utils/colorTokens';
 import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
@@ -106,17 +106,33 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
     durationInFrames: 20,
   }), [frame, fps, prefersReducedMotion]);
 
-  // 5. Bottom Text Animation
-  const textOpacity = useMemo(() => prefersReducedMotion ? 1 : spring({
-    frame: frame - 35,
-    fps,
-    from: 0,
-    to: 1,
-    durationInFrames: 25,
-  }), [frame, fps, prefersReducedMotion]);
-
   // Floating animation for "alive" feel
   const floatingY = prefersReducedMotion ? 0 : Math.sin(frame / 60) * 8;
+
+  // Background Grid Animation
+  const bgPos = prefersReducedMotion ? 0 : frame * 0.5;
+
+  // Shadow Animation
+  const shadowBlur = interpolate(calendarScale, [0.8, 1], [20, 60], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+  });
+
+  // Ripple Effect (Secondary Ring)
+  const rippleScale = useMemo(() => prefersReducedMotion ? 1 : spring({
+    frame: frame - 25,
+    fps,
+    from: 0.8,
+    to: 1.4,
+    durationInFrames: 40,
+    config: { damping: 100 },
+  }), [frame, fps, prefersReducedMotion]);
+
+  const rippleOpacity = interpolate(rippleScale, [0.8, 1.4], [0.6, 0]);
+
+  // Staggered Text Animation
+  const successText = "Your Appointment is Scheduled";
+  const words = successText.split(' ');
 
   return (
     <div
@@ -145,7 +161,7 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
             width: '400px',
             backgroundColor: COLORS.surface,
             borderRadius: '24px',
-            boxShadow: '0 20px 60px rgba(0, 0, 0, 0.15)',
+            boxShadow: `0 20px ${shadowBlur}px rgba(0, 0, 0, 0.15)`,
             overflow: 'hidden',
             border: `4px solid ${COLORS.accent}`,
             display: 'flex',
@@ -163,6 +179,7 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
               bottom: 0,
               backgroundImage: `radial-gradient(${COLORS.textSecondary} 1px, transparent 1px)`,
               backgroundSize: '20px 20px',
+              backgroundPosition: `${bgPos}px ${bgPos}px`,
               opacity: 0.1,
               pointerEvents: 'none',
               zIndex: 0,
@@ -211,6 +228,21 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
           >
             {/* Highlight Ring */}
             <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+               {/* Ripple Effect */}
+               <div
+                 style={{
+                   position: 'absolute',
+                   top: '50%',
+                   left: '50%',
+                   transform: `translate(-50%, -50%) scale(${rippleScale})`,
+                   width: '170px',
+                   height: '170px',
+                   borderRadius: '50%',
+                   border: `2px solid ${COLORS.accent}`,
+                   opacity: rippleOpacity,
+                 }}
+               />
+
                <svg
                 width="200"
                 height="200"
@@ -304,19 +336,42 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
       </div>
 
       {/* Bottom text */}
-      <div style={{ opacity: textOpacity, marginTop: SPACING[12] }}>
-        <p
-          style={{
-            fontFamily: FONTS.primary,
-            fontSize: '36px',
-            fontWeight: 600,
-            color: COLORS.text,
-            margin: 0,
-            textAlign: 'center',
-          }}
-        >
-          Your Appointment is Scheduled
-        </p>
+      <div style={{ marginTop: SPACING[12], display: 'flex', gap: '0.4em', justifyContent: 'center' }}>
+        {words.map((word, i) => {
+          const delay = 35 + i * 3;
+          const wordOpacity = prefersReducedMotion ? 1 : spring({
+            frame: frame - delay,
+            fps,
+            from: 0,
+            to: 1,
+            durationInFrames: 20,
+          });
+          const wordY = prefersReducedMotion ? 0 : spring({
+            frame: frame - delay,
+            fps,
+            from: 10,
+            to: 0,
+            durationInFrames: 20,
+          });
+
+          return (
+            <span
+              key={i}
+              style={{
+                fontFamily: FONTS.primary,
+                fontSize: '36px',
+                fontWeight: 600,
+                color: COLORS.text,
+                margin: 0,
+                opacity: wordOpacity,
+                transform: `translateY(${wordY}px)`,
+                display: 'inline-block',
+              }}
+            >
+              {word}
+            </span>
+          );
+        })}
       </div>
     </div>
   );
