@@ -6,6 +6,9 @@ export default function AppointmentSchema() {
   const malakpet = getLocationById('malakpet');
   if (!malakpet) return null;
 
+  // SEO: Dynamic JSON-LD for Physician and MedicalClinic specific to the booking page context.
+  // Helps Google associate this page with the physician and clinic location.
+  // Verified to meet SEO requirements: Physician, MedicalClinic, Address, Services.
   const physicianSchema = {
     "@type": "Physician",
     "@id": `${SITE_URL}/#physician`,
@@ -76,9 +79,6 @@ export default function AppointmentSchema() {
     }
   };
 
-  // SEO: Dynamic JSON-LD for Physician and MedicalClinic specific to the booking page context.
-  // Helps Google associate this page with the physician and clinic location.
-  // Verified to meet SEO requirements: Physician, MedicalClinic, Address, Services.
   const schema = {
     "@context": "https://schema.org",
     "@graph": [
