@@ -278,6 +278,24 @@ export default function ContactPage() {
             </Card>
 
             <Card padding="lg">
+              <h2 className="text-2xl font-semibold mb-6 text-blue-700">Directions to Our Clinic</h2>
+              <div className="space-y-6">
+                <div>
+                  <h3 className="font-semibold text-lg text-gray-800 mb-2">From Secunderabad (via MG Road)</h3>
+                  <p className="text-gray-600">Take MG Road towards Koti. Cross the Chaderghat Bridge and turn left towards Malakpet. Yashoda Hospital will be on your left, opposite the Malakpet Metro Station.</p>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg text-gray-800 mb-2">From Hitech City / Gachibowli</h3>
+                  <p className="text-gray-600">Take the PVNR Expressway or ORR to Mehdipatnam, then proceed towards Nampally and Koti. Alternatively, take the Metro directly to Malakpet Station (Red Line).</p>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg text-gray-800 mb-2">From Charminar / Old City</h3>
+                  <p className="text-gray-600">Head towards Darulshifa and cross the Chaderghat Rotary. Continue straight towards Dilsukhnagar. The hospital is 1.5 km ahead on the main road.</p>
+                </div>
+              </div>
+            </Card>
+
+            <Card padding="lg">
               <h2 className="text-2xl font-semibold mb-6 text-blue-700">Location Details</h2>
               <div className="grid lg:grid-cols-2 gap-8 items-start">
                 <div className="text-gray-600 space-y-4">

@@ -135,6 +135,10 @@ const faqs = [
     question: 'How does endoscopic spine surgery recovery compare to microscopic surgery?',
     answer: 'Endoscopic surgery typically offers a faster recovery. Since it uses a smaller incision (8mm vs 2-3cm) and avoids cutting muscle, most patients walk within 3 hours and return to work in 3-5 days, compared to 2-3 weeks for microscopic surgery.'
   },
+  {
+    question: 'Is Laser Spine Surgery better than Endoscopic Spine Surgery?',
+    answer: 'Not necessarily. "Laser spine surgery" is often a marketing term for limited thermal ablation. Endoscopic spine surgery is a comprehensive structural solution that physically removes bone spurs or disc fragments under high-definition vision, offering more durable relief for complex conditions.'
+  },
   // New FAQs
   {
     question: 'What neighbourhoods does Yashoda Malakpet serve?',
@@ -519,6 +523,35 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
         </section>
 
         <section className="mb-16">
+          <h2 className="text-3xl font-bold text-blue-900 mb-6">Laser vs. Endoscopic Spine Surgery</h2>
+          <p className="text-gray-700 mb-6">
+            Many patients search for "Laser Spine Surgery" hoping for the least invasive option. It is important to understand the difference between marketing terms and medical reality.
+          </p>
+          <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm overflow-hidden mb-12">
+            <div className="grid grid-cols-3 gap-4 mb-4 border-b border-gray-100 pb-4">
+               <div className="font-bold text-gray-900">Feature</div>
+               <div className="font-bold text-blue-700">Endoscopic Surgery</div>
+               <div className="font-bold text-gray-500">Laser Surgery</div>
+            </div>
+            <div className="space-y-4">
+               <div className="grid grid-cols-3 gap-4">
+                  <div className="text-sm font-medium text-gray-700">Technique</div>
+                  <div className="text-sm text-gray-600">Physical removal of disc/bone via micro-tools</div>
+                  <div className="text-sm text-gray-600">Thermal ablation (burning) of tissue</div>
+               </div>
+               <div className="grid grid-cols-3 gap-4">
+                  <div className="text-sm font-medium text-gray-700">Effectiveness</div>
+                  <div className="text-sm text-gray-600 font-semibold text-green-700">High (Structural Correction)</div>
+                  <div className="text-sm text-gray-600">Low to Moderate (Symptom masking)</div>
+               </div>
+               <div className="grid grid-cols-3 gap-4">
+                  <div className="text-sm font-medium text-gray-700">Best For</div>
+                  <div className="text-sm text-gray-600">Herniated discs, Stenosis, Bone spurs</div>
+                  <div className="text-sm text-gray-600">Small contained discs only</div>
+               </div>
+            </div>
+          </div>
+
           <h2 className="text-3xl font-bold text-blue-900 mb-6">Endoscopic vs. Traditional Spine Surgery</h2>
           <p className="text-gray-700 mb-6">
             Many patients ask why endoscopic surgery is preferred over traditional open methods. The key difference lies in how we approach the spine—preserving your natural anatomy rather than cutting through it.
