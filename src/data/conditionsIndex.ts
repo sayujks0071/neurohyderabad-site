@@ -117,7 +117,7 @@ export const CONDITION_RESOURCES: ConditionResource[] = [
         label: "Early signs of brain tumour",
       },
       {
-        href: "/stories/minimal-invasive-meningioma-resection",
+        href: "/patient-stories/minimal-invasive-meningioma-resection",
         label: "Patient story: Returning to work after meningioma surgery",
       },
     ],
@@ -255,7 +255,7 @@ export const CONDITION_RESOURCES: ConditionResource[] = [
     name: "Cervical Myelopathy",
     summary:
       "Decompression and stabilisation strategies for cervical spinal cord compression leading to gait disturbance.",
-    primaryPath: "/services/cervical-spine-surgery-hyderabad",
+    primaryPath: "/services/minimally-invasive-spine-surgery",
     keywords: ["myelopathy", "cervical", "spinal cord"],
     symptomHighlights: [
       "Hand clumsiness and difficulty with buttons or writing",
@@ -304,10 +304,6 @@ export const CONDITION_RESOURCES: ConditionResource[] = [
         label: "Sciatica treatment guidance",
       },
       {
-        href: "/stories/endoscopic-discectomy-same-day-hyderabad",
-        label: "Patient story: Same-day discharge after endoscopic discectomy",
-      },
-      {
         href: "/services/endoscopic-discectomy-hyderabad",
         label: "Endoscopic discectomy service details",
       },
@@ -343,7 +339,7 @@ export const CONDITION_RESOURCES: ConditionResource[] = [
     primaryPath: "/services/epilepsy-surgery-hyderabad",
     relatedResources: [
       {
-        href: "/stories/temporal-lobe-epilepsy-control",
+        href: "/patient-stories/temporal-lobe-epilepsy-control",
         label: "Patient story: Seizure-free after temporal lobectomy",
       },
     ],
@@ -420,12 +416,6 @@ export const CONDITION_RESOURCES: ConditionResource[] = [
     summary:
       "Endoscopic ULBD decompression and minimally invasive approaches to treat neurogenic claudication.",
     primaryPath: "/conditions/spinal-stenosis-treatment-hyderabad",
-    relatedResources: [
-      {
-        href: "/stories/endoscopic-ulbd-stenosis-hyderabad",
-        label: "Patient story: Walking pain-free after ULBD",
-      },
-    ],
     keywords: ["lumbar stenosis", "claudication", "ulbd"],
     symptomHighlights: [
       "Leg heaviness or cramping when walking",
@@ -446,7 +436,7 @@ export const CONDITION_RESOURCES: ConditionResource[] = [
     primaryPath: "/services/brain-tumor-surgery-hyderabad",
     relatedResources: [
       {
-        href: "/stories/minimal-invasive-meningioma-resection",
+        href: "/patient-stories/minimal-invasive-meningioma-resection",
         label: "Patient story: Awake mapping during meningioma surgery",
       },
     ],
@@ -618,7 +608,7 @@ export const CONDITION_RESOURCES: ConditionResource[] = [
     primaryPath: "/conditions/spondylolisthesis-treatment-hyderabad",
     relatedResources: [
       {
-        href: "/stories/lumbar-miss-tlif-recovery",
+        href: "/patient-stories/lumbar-miss-tlif-recovery",
         label: "Patient story: Walking pain-free after TLIF",
       },
     ],
@@ -641,10 +631,6 @@ export const CONDITION_RESOURCES: ConditionResource[] = [
       "Microvascular decompression and radiosurgery options for severe facial pain refractory to medication.",
     primaryPath: "/conditions/trigeminal-neuralgia-treatment-hyderabad",
     relatedResources: [
-      {
-        href: "/stories/mvd-trigeminal-neuralgia-hyderabad",
-        label: "Patient story: Rapid recovery after MVD",
-      },
       {
         href: "/conditions/trigeminal-neuralgia-treatment-hyderabad",
         label: "Hyderabad trigeminal neuralgia care",
