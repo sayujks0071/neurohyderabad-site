@@ -3,8 +3,7 @@ import { secureCompare } from '@/src/lib/security';
 import { appointments, patients } from '@/src/lib/db';
 import { processBooking } from '@/src/lib/appointments/service';
 import { locations } from '@/src/data/locations';
-import { getAllBlogPosts } from '@/src/lib/blog';
-import { SEARCH_INDEX } from '@/src/data/searchIndex';
+import { semanticSearch } from '@/src/lib/ai/semantic-search';
 import type { BookingData } from '@/packages/appointment-form/types';
 
 export const dynamic = 'force-dynamic';
@@ -59,68 +58,22 @@ export async function GET(request: NextRequest) {
           );
         }
 
-        const queryLower = query.toLowerCase();
-        const limit = 5; // Keep it small for the bot
+        const results = await semanticSearch(query, 5); // Limit 5 for the bot
 
-        // Escape regex characters to prevent crashes
-        const escapeRegExp = (string: string) => string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        const terms = queryLower.split(' ').filter(t => t.length > 0).map(t => escapeRegExp(t));
-
-        if (terms.length === 0) {
-           return NextResponse.json({
-             tool: 'search_content',
-             query,
-             count: 0,
-             data: []
-           });
-        }
-
-        const regex = new RegExp(terms.join('|'), 'g');
-
-        // Get all content
-        const allPosts = await getAllBlogPosts();
-
-        // Search blog posts
-        const blogResults = allPosts
-          .map(post => {
-            const searchText = `${post.title} ${post.excerpt} ${post.category} ${post.tags?.join(' ')} ${post.description}`.toLowerCase();
-            const score = (searchText.match(regex) || []).length;
-            return {
-              type: 'blog',
-              slug: `/blog/${post.slug}`,
-              title: post.title,
-              description: post.excerpt || post.description,
-              category: post.category || 'Blog',
-              score
-            };
-          })
-          .filter(item => item.score > 0);
-
-        // Search static index
-        const staticResults = SEARCH_INDEX
-          .map(item => {
-            const searchText = `${item.title} ${item.description} ${item.category} ${item.tags?.join(' ')}`.toLowerCase();
-            const score = (searchText.match(regex) || []).length;
-            return {
-              type: 'page',
-              slug: item.href,
-              title: item.title,
-              description: item.description,
-              category: item.category,
-              score
-            };
-          })
-          .filter(item => item.score > 0);
-
-        const results = [...blogResults, ...staticResults]
-          .sort((a, b) => b.score - a.score)
-          .slice(0, limit);
+        const formattedResults = results.map(r => ({
+          type: r.type,
+          slug: r.href,
+          title: r.title,
+          description: r.description,
+          category: r.category,
+          score: r.relevanceScore || 1
+        }));
 
         return NextResponse.json({
           tool: 'search_content',
           query,
-          count: results.length,
-          data: results
+          count: formattedResults.length,
+          data: formattedResults
         });
       }
 
