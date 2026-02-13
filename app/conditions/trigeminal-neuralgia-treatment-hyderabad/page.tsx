@@ -190,6 +190,11 @@ export default function TrigeminalNeuralgiaTreatmentPage() {
               Facial pain board review to align medical and surgical plans.
             </li>
           </ol>
+          <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-100">
+             <p className="text-sm text-blue-900">
+               <strong>Note:</strong> Sometimes facial pain is caused by a tumor pressing on the nerve. Our MRI protocol screens for this. Learn more about <Link href="/services/brain-tumor-surgery-hyderabad" className="underline font-semibold hover:text-blue-700">Skull Base & Brain Tumor Surgery</Link>.
+             </p>
+          </div>
         </div>
       </section>
 
@@ -317,7 +322,7 @@ export default function TrigeminalNeuralgiaTreatmentPage() {
                 href="/patient-stories"
                 className="text-blue-700 underline"
               >
-                Patient Stories — Facial Pain &amp; Neurosurgery Outcomes
+                Patient Stories — See Real Recovery Outcomes
               </Link>
             </li>
             <li>
