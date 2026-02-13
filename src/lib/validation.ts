@@ -21,6 +21,8 @@ export function validateLeadPayload(payload: {
   city?: string;
   concern?: string;
   source?: string;
+  painScore?: number;
+  mriScanAvailable?: boolean;
 }): { isValid: boolean; error?: string } {
   if (payload.fullName && payload.fullName.length > LEAD_VALIDATION.MAX_NAME_LENGTH) {
     return { isValid: false, error: `Name exceeds limit of ${LEAD_VALIDATION.MAX_NAME_LENGTH} characters` };
@@ -57,6 +59,19 @@ export function validateLeadPayload(payload: {
   if (payload.source && payload.source.length > LEAD_VALIDATION.MAX_SOURCE_LENGTH) {
     return { isValid: false, error: `Source exceeds limit of ${LEAD_VALIDATION.MAX_SOURCE_LENGTH} characters` };
   }
+
+  if (payload.painScore !== undefined) {
+    if (typeof payload.painScore !== 'number' || payload.painScore < 1 || payload.painScore > 10) {
+      return { isValid: false, error: 'Pain score must be a number between 1 and 10' };
+    }
+  }
+
+  if (payload.mriScanAvailable !== undefined) {
+    if (typeof payload.mriScanAvailable !== 'boolean') {
+      return { isValid: false, error: 'MRI Scan Available must be a boolean' };
+    }
+  }
+
   return { isValid: true };
 }
 
