@@ -174,20 +174,36 @@ export default function SpineSurgeryHyderabadPage() {
           </p>
           <ul className="grid md:grid-cols-2 gap-4 text-sm text-gray-700">
             <li className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
-              <strong className="text-blue-800">Lumbar &amp; Cervical Disc Herniation:</strong> Persistent arm/leg pain, numbness,
-              or weakness due to nerve compression.
+              <strong className="text-blue-800">
+                <Link href="/conditions/slip-disc-treatment-hyderabad" className="hover:underline hover:text-blue-600">
+                  Lumbar &amp; Cervical Disc Herniation:
+                </Link>
+              </strong>{' '}
+              Persistent arm/leg pain, numbness, or weakness due to nerve compression.
             </li>
             <li className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
-              <strong className="text-blue-800">Spinal Canal Stenosis:</strong> Walking intolerance and heaviness relieved by
-              rest, often seen in older adults.
+              <strong className="text-blue-800">
+                <Link href="/conditions/spinal-stenosis-treatment-hyderabad" className="hover:underline hover:text-blue-600">
+                  Spinal Canal Stenosis:
+                </Link>
+              </strong>{' '}
+              Walking intolerance and heaviness relieved by rest, often seen in older adults.
             </li>
             <li className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
-              <strong className="text-blue-800">Spondylolisthesis:</strong> Slippage causing mechanical back pain or nerve
-              symptoms that require stabilization.
+              <strong className="text-blue-800">
+                <Link href="/conditions/spondylolisthesis-treatment-hyderabad" className="hover:underline hover:text-blue-600">
+                  Spondylolisthesis:
+                </Link>
+              </strong>{' '}
+              Slippage causing mechanical back pain or nerve symptoms that require stabilization.
             </li>
             <li className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
-              <strong className="text-blue-800">Spine Tumors &amp; Infections:</strong> Lesions requiring biopsy, decompression, or
-              stabilization for spinal cord protection.
+              <strong className="text-blue-800">
+                <Link href="/conditions/spine-tumor-surgery-hyderabad" className="hover:underline hover:text-blue-600">
+                  Spine Tumors &amp; Infections:
+                </Link>
+              </strong>{' '}
+              Lesions requiring biopsy, decompression, or stabilization for spinal cord protection.
             </li>
           </ul>
         </section>
