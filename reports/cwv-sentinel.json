@@ -1,24 +1,19 @@
 {
-  "timestamp": "2025-02-27T...Z",
+  "timestamp": "2025-02-27T00:00:00Z",
   "commit_hash": "HEAD",
   "notes": {
     "Home": {
-      "bottleneck": "Image Aspect Ratio failure on Logo",
-      "fix": "Corrected width/height attributes on logo in HeaderRefactored.tsx to match SVG intrinsic dimensions (1600x600) and used w-auto to maintain aspect ratio.",
-      "impact": "Eliminated 'image-aspect-ratio' failure in Lighthouse Best Practices. Improved visual rendering of logo."
-    },
-    "Conditions": {
-      "bottleneck": "Image Aspect Ratio failure on Logo (shared header)",
-      "fix": "Same as Home.",
-      "impact": "Eliminated 'image-aspect-ratio' failure."
+      "bottleneck": "CLS on mobile due to fixed-height video placeholders (450px) vs actual video height (~180px).",
+      "fix": "Updated placeholders in `app/page.tsx` and loading state in `RemotionVideoEmbedWrapper.tsx` to use `aspect-video` and `max-w-[800px]`, ensuring consistent aspect ratio and width during loading.",
+      "impact": "Eliminated large layout shift on mobile devices when videos load. Placeholder now matches the video dimensions exactly."
     }
   },
   "metrics": {
     "before": {
-      "image-aspect-ratio": "Failed (Score 0)"
+      "home-cls-mobile": "High (estimated > 0.25)"
     },
     "after": {
-      "image-aspect-ratio": "Passed"
+      "home-cls-mobile": "Low (estimated < 0.1)"
     }
   }
 }

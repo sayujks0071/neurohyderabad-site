@@ -13,9 +13,9 @@ const RemotionVideoEmbed = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="py-12">
-        <div className="max-w-4xl mx-auto">
-          <div className="animate-pulse bg-gray-200 h-[450px] rounded-xl"></div>
+      <div className="max-w-[800px] mx-auto w-full aspect-video rounded-xl overflow-hidden shadow-lg bg-gray-200 animate-pulse">
+        <div className="h-full w-full flex items-center justify-center text-gray-400">
+          <span className="sr-only">Loading video...</span>
         </div>
       </div>
     ),
