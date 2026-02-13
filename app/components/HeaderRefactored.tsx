@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import SearchPlaceholder from './SearchPlaceholder';
+import { CANONICAL_TELEPHONE, CANONICAL_WHATSAPP } from '@/src/data/locations';
 
 const SiteSearch = dynamic(() => import('./SiteSearch'), {
   loading: () => <SearchPlaceholder />,
@@ -73,7 +74,7 @@ const NAV_ITEMS: NavItem[] = [
       { label: 'Hitech City & Gachibowli', href: '/neurosurgeon-hitech-city' },
     ],
   },
-];
+  ];
 
 export default function HeaderRefactored() {
   const pathname = usePathname();
@@ -215,17 +216,17 @@ export default function HeaderRefactored() {
           <div className="hidden lg:flex items-center gap-4">
             <SiteSearch />
             <a
-              href="tel:+919778280044"
+              href={`tel:${CANONICAL_TELEPHONE}`}
               className="text-sm font-semibold text-[var(--color-primary-700)] hover:text-[var(--color-primary-500)] inline-flex items-center gap-2 min-h-[44px] px-2 -mx-2 underline underline-offset-4 decoration-current focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)] focus:ring-offset-2 rounded"
               aria-label="Call Dr. Sayuj Krishnan's coordinator"
             >
               <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h2.28a1 1 0 01.948.684l1.05 3.152a1 1 0 01-.502 1.21l-1.516.758a11.042 11.042 0 005.516 5.516l.758-1.516a1 1 0 011.21-.502l3.152 1.05a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
               </svg>
-              Call +91 97782 80044
+              Call {CANONICAL_TELEPHONE}
             </a>
             <a
-              href="https://wa.me/919778280044"
+              href={`https://wa.me/${CANONICAL_WHATSAPP}`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm font-semibold text-green-800 hover:text-green-700 inline-flex items-center gap-2 px-3 py-2 min-h-[44px] border border-green-200 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
@@ -386,7 +387,7 @@ export default function HeaderRefactored() {
               </Link>
               <div className="mt-3 grid grid-cols-2 gap-2">
                 <a
-                  href="tel:+919778280044"
+                  href={`tel:${CANONICAL_TELEPHONE}`}
                   onClick={toggleMobileMenu}
                   className="flex items-center justify-center gap-2 rounded-lg border border-[var(--color-border)] px-4 py-3 text-sm font-semibold text-[var(--color-text-primary)] hover:bg-[var(--color-primary-50)] transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)]"
                 >
@@ -396,7 +397,7 @@ export default function HeaderRefactored() {
                   Call
                 </a>
                 <a
-                  href="https://wa.me/919778280044"
+                  href={`https://wa.me/${CANONICAL_WHATSAPP}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={toggleMobileMenu}
@@ -416,26 +417,3 @@ export default function HeaderRefactored() {
     </>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

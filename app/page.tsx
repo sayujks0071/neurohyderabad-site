@@ -25,6 +25,7 @@ import HeroCTAButtons from "./_components/HeroCTAButtons";
 import PatientEducationVideosSkeleton from "./_components/skeletons/PatientEducationVideosSkeleton";
 import TrustSignals from "./_components/TrustSignals";
 import { LocationNAPCard } from "@/src/components/locations/LocationNAPCard";
+import { CANONICAL_TELEPHONE, CANONICAL_WHATSAPP } from "@/src/data/locations";
 
 import PatientEducationVideosWrapper from "./_components/wrappers/PatientEducationVideosWrapper";
 import RecoveryTimelineWrapper from "./_components/wrappers/RecoveryTimelineWrapper";
@@ -227,7 +228,7 @@ export default function Home() {
                     <div className="space-y-3">
                       <HeroCTAButtons />
                       <p className="text-sm text-blue-50">
-                        Call/WhatsApp +91 97782 80044 • Same-day clinic slots at Yashoda Malakpet and secure tele-consults for outstation patients.
+                        Call/WhatsApp {CANONICAL_TELEPHONE} • Same-day clinic slots at Yashoda Malakpet and secure tele-consults for outstation patients.
                       </p>
                     </div>
                   </div>
@@ -787,7 +788,7 @@ export default function Home() {
             <Card className="text-center border-l-4 border-red-500 shadow-lg">
               <div className="text-4xl mb-4">🚨</div>
               <h3 className="text-xl font-semibold text-red-700 mb-3">Emergency Hotline</h3>
-              <p className="text-2xl font-bold text-red-600 mb-2">+91-9778280044</p>
+              <p className="text-2xl font-bold text-red-600 mb-2">{CANONICAL_TELEPHONE}</p>
               <p className="text-gray-600 mb-4">Available 24/7 for urgent consultations</p>
               <Link
                 href="/emergency-rehabilitation"
@@ -1027,7 +1028,7 @@ export default function Home() {
         ]} />
 
         {/* Sticky CTA for mobile */}
-        {/* <StickyCTA /> */}
+        {/* <Sticky CTA /> */}
 
         {/* SEO Dashboard - only in development */}
         {/* {process.env.NODE_ENV === 'development' && (
