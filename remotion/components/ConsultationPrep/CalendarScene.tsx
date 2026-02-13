@@ -130,6 +130,18 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
 
   const rippleOpacity = interpolate(rippleScale, [0.8, 1.4], [0.6, 0]);
 
+  // Sheen Effect (Visual Polish)
+  const sheenDriver = useMemo(() => prefersReducedMotion ? 0 : spring({
+    frame: frame - 45, // Start after card entrance
+    fps,
+    from: 0,
+    to: 1,
+    durationInFrames: 40,
+    config: { damping: 100 },
+  }), [frame, fps, prefersReducedMotion]);
+
+  const sheenLeft = interpolate(sheenDriver, [0, 1], [-100, 200]);
+
   // Staggered Text Animation
   const successText = "Your Appointment is Scheduled";
   const words = successText.split(' ');
@@ -185,6 +197,23 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
               zIndex: 0,
             }}
           />
+
+          {/* Sheen Effect */}
+          {!prefersReducedMotion && (
+            <div
+              style={{
+                position: 'absolute',
+                top: 0,
+                bottom: 0,
+                left: `${sheenLeft}%`,
+                width: '60%',
+                background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)',
+                transform: 'skewX(-20deg)',
+                zIndex: 10,
+                pointerEvents: 'none',
+              }}
+            />
+          )}
 
           {/* Calendar header */}
           <div
