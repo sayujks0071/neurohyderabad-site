@@ -300,6 +300,16 @@ export const analytics = {
     end: () => track('AI_Session_End', {}),
     error: (message: string) => track('AI_Session_Error', { error_message: message }),
     message: (role: 'user' | 'assistant') => track('AI_Message', { role })
+  },
+
+  // ChatBot specific events
+  chat: {
+    open: (source: string) => track('chat_widget_open', { source }),
+    messageSent: (source: string) => track('chat_message_sent', { source }),
+    responseReceived: (source: string, durationMs: number, success: boolean) =>
+      track('chat_response_received', { source, duration_ms: durationMs, success }),
+    error: (source: string, durationMs: number, error: string) =>
+      track('chat_error', { source, duration_ms: durationMs, error_message: error })
   }
 };
 
