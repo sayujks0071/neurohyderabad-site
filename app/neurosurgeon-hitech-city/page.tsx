@@ -14,7 +14,7 @@ export const dynamicParams = false;
 export const revalidate = 86400;
 
 export const metadata = {
-  title: "Neurosurgeon in Hitech City, Hyderabad | Endoscopic Spine | Dr. Sayuj Krishnan",
+  title: "Neurosurgeon in Hitech City | Endoscopic Spine | Dr. Sayuj",
   description:
     "Consult Dr. Sayuj Krishnan near Hitech City, Hyderabad for endoscopic spine & minimally invasive brain surgery. OPD timings, parking, directions, WhatsApp booking, and FAQs.",
   keywords: [
@@ -27,7 +27,7 @@ export const metadata = {
   ],
   alternates: { canonical: "https://www.drsayuj.info/neurosurgeon-hitech-city" },
   openGraph: {
-    title: "Neurosurgeon in Hitech City, Hyderabad | Endoscopic Spine | Dr. Sayuj Krishnan",
+    title: "Neurosurgeon in Hitech City | Endoscopic Spine | Dr. Sayuj",
     description:
       "Consult Dr. Sayuj Krishnan near Hitech City for endoscopic spine and minimally invasive brain surgery with OPD timings, parking, directions, and WhatsApp booking.",
     url: "https://www.drsayuj.info/neurosurgeon-hitech-city",
