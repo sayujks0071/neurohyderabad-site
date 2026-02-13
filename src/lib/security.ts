@@ -104,18 +104,6 @@ export async function verifyAdminAccess(request: Request): Promise<{
     return { isAuthorized: true };
   }
 
-  // Check query param (fallback/convenience)
-  try {
-    const url = new URL(request.url);
-    const queryKey = url.searchParams.get('key');
-    if (queryKey && await secureCompare(queryKey, adminKey)) {
-      return { isAuthorized: true };
-    }
-  } catch (e) {
-    // Invalid URL format
-    console.error('Security: Failed to parse request URL', e);
-  }
-
   // Deny access
   return {
     isAuthorized: false,
