@@ -28,6 +28,8 @@ jobs:
             const promptFile = process.env.PROMPT_FILE;
             const baseTitle = process.env.ISSUE_TITLE;
 
+            console.log('Starting Jules automation...');
+
             // Generate today's date (YYYY-MM-DD) for uniqueness
             const date = new Date().toISOString().split('T')[0];
             const title = `${baseTitle} - ${date}`;
@@ -93,4 +95,4 @@ jobs:
 
             console.log(`Created issue: ${newIssue.html_url}`);
 
-# Verified by Jules
+# Verified by Jules 2026-02-13
