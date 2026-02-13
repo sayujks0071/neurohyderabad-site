@@ -314,11 +314,21 @@ export default function Home() {
         {/* Animated Service Showcase Video */}
         <LazySection
           placeholder={
-            <div className="py-16 bg-blue-50">
+            <div className="py-12 md:py-16 bg-blue-50">
               <div className="container mx-auto px-4">
-                <div className="max-w-4xl mx-auto">
-                  {/* CLS Optimization: Height matched to loaded content (Video + Header) */}
-                  <div className="animate-pulse bg-blue-100 h-[450px] rounded-xl"></div>
+                <div className="max-w-4xl mx-auto text-center">
+                  {/* Header Placeholder */}
+                  <div className="mb-6">
+                    <div className="h-8 md:h-9 w-3/4 md:w-1/2 bg-blue-200 rounded animate-pulse mx-auto mb-2"></div>
+                    <div className="h-4 w-full md:w-2/3 bg-blue-100 rounded animate-pulse mx-auto"></div>
+                    <div className="h-4 w-5/6 md:w-1/2 bg-blue-100 rounded animate-pulse mx-auto mt-1"></div>
+                  </div>
+                  {/* Video Placeholder - Aspect Ratio Match */}
+                  <div className="max-w-[800px] mx-auto w-full aspect-video rounded-xl overflow-hidden shadow-lg bg-blue-100 animate-pulse">
+                    <div className="h-full w-full flex items-center justify-center text-blue-300">
+                      <span className="sr-only">Loading video...</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -753,11 +763,20 @@ export default function Home() {
         {/* Animated Outcome Dashboard */}
         <LazySection
           placeholder={
-            <div className="py-16">
+            <div className="py-12 md:py-16">
               <div className="container mx-auto px-4">
-                <div className="max-w-4xl mx-auto">
-                  {/* CLS Optimization: Height matched to loaded content (Video + Header) */}
-                  <div className="animate-pulse bg-gray-200 h-[450px] rounded-xl"></div>
+                <div className="max-w-4xl mx-auto text-center">
+                  {/* Header Placeholder */}
+                  <div className="mb-6">
+                    <div className="h-8 md:h-9 w-3/4 md:w-1/2 bg-gray-200 rounded animate-pulse mx-auto mb-2"></div>
+                    <div className="h-4 w-full md:w-2/3 bg-gray-100 rounded animate-pulse mx-auto"></div>
+                  </div>
+                  {/* Video Placeholder - Aspect Ratio Match */}
+                  <div className="max-w-[800px] mx-auto w-full aspect-video rounded-xl overflow-hidden shadow-lg bg-gray-200 animate-pulse">
+                    <div className="h-full w-full flex items-center justify-center text-gray-400">
+                      <span className="sr-only">Loading video...</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
