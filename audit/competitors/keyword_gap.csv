@@ -1,11 +1,21 @@
-Keyword,Intent,Current Ranking (Est),Target Page
-neurosurgeon hyderabad,Transactional,Unknown,Homepage
-spine surgery hyderabad,Transactional,Unknown,/services/spine-surgery-hyderabad
-minimally invasive spine surgery hyderabad,Commercial,Unknown,/services/minimally-invasive-spine-surgery
-endoscopic spine surgery hyderabad,Commercial,Unknown,/services/endoscopic-spine-surgery-hyderabad
-sciatica treatment hyderabad,Commercial,Unknown,/conditions/sciatica-pain-treatment-hyderabad
-best neurosurgeon in hyderabad,Transactional,Unknown,Homepage
-brain tumor surgery hyderabad,Commercial,Unknown,/services/brain-tumor-surgery-hyderabad
-cervical spine surgery hyderabad,Commercial,Unknown,/services/cervical-spine-surgery-hyderabad
-slipped disc treatment hyderabad,Commercial,Unknown,/conditions/slip-disc-treatment-hyderabad
-lumbar spondylosis treatment hyderabad,Informational,Unknown,/conditions/spondylolisthesis-treatment-hyderabad
+Keyword,Intent,Competitor Coverage,Suggested Target Page
+endoscopic spine surgery cost hyderabad,Commercial,High,Service: Endoscopic Spine Surgery
+laser vs endoscopic spine surgery,Informational,Med,Blog: Laser vs Endoscopic Comparison
+best pillow for neck pain,Informational,Low,Blog: Spine Health Tips
+spine surgery insurance coverage india,Commercial,Med,Service: Spine Surgery Cost
+L4-L5 disc bulge treatment without surgery,Informational,High,Condition: Slipped Disc
+neurosurgeon consultation fee hyderabad,Commercial,Low,Page: Contact/Appointments
+minimally invasive spine surgery recovery time,Informational,High,Service: MISS
+slipped disc exercise to avoid,Informational,Med,Condition: Slipped Disc
+sciatica pain relief at home,Informational,High,Blog: Sciatica Management
+best mattress for back pain india,Informational,Low,Blog: Spine Health Tips
+cervical spondylosis exercises,Informational,High,Condition: Cervical Spondylosis
+lumbar spondylosis treatment guidelines,Informational,Med,Condition: Lumbar Spondylosis
+spine surgeon vs neurosurgeon difference,Informational,Low,Blog: Choosing Specialist
+endoscopic discectomy success rate,Informational,Med,Service: Endoscopic Discectomy
+microdiscectomy cost in hyderabad,Commercial,High,Service: Microdiscectomy
+spinal fusion alternatives,Informational,Med,Service: Spinal Fusion
+spine surgery risks for elderly,Informational,Low,Blog: Elderly Spine Care
+best hospital for brain tumor surgery hyderabad,Commercial,High,Service: Brain Tumor Surgery
+awake brain surgery benefits,Informational,Low,Service: Awake Craniotomy
+pediatric neurosurgeon hyderabad,Commercial,Med,Service: Pediatric Neurosurgery
