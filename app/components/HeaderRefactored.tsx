@@ -239,7 +239,7 @@ export default function HeaderRefactored() {
             </a>
             <Link
               href="/appointments"
-              className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-[0.98]"
+              className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 motion-safe:hover:scale-[1.02] motion-safe:active:scale-[0.98]"
               aria-label="Book an appointment"
             >
               Book Appointment
@@ -381,7 +381,7 @@ export default function HeaderRefactored() {
               <Link
                 href="/appointments"
                 onClick={toggleMobileMenu}
-                className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-[0.98] w-full text-center block"
+                className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 motion-safe:hover:scale-[1.02] motion-safe:active:scale-[0.98] w-full text-center block"
               >
                 Book Appointment
               </Link>
