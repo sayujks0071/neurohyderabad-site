@@ -127,7 +127,7 @@ Return ONLY a JSON object with an "ids" array containing the IDs (URLs) of the $
 
     // Map back to full objects
     const results = relevantIds
-      .map((id, index) => {
+      .map((id, index): SearchResult | null => {
         // Check blog posts
         const blogPost = allPosts.find(p => `/blog/${p.slug}` === id);
         if (blogPost) {
@@ -136,7 +136,7 @@ Return ONLY a JSON object with an "ids" array containing the IDs (URLs) of the $
             title: blogPost.title,
             description: blogPost.excerpt || blogPost.description,
             category: blogPost.category || 'Blog',
-            tags: blogPost.tags,
+            tags: blogPost.tags || [],
             type: 'blog' as const,
             relevanceScore: relevantIds.length - index, // Simple score based on rank
           };
@@ -149,7 +149,7 @@ Return ONLY a JSON object with an "ids" array containing the IDs (URLs) of the $
             title: staticItem.title,
             description: staticItem.description,
             category: staticItem.category,
-            tags: staticItem.tags,
+            tags: staticItem.tags || [],
             type: 'page' as const,
             relevanceScore: relevantIds.length - index,
           };
