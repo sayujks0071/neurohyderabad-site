@@ -862,7 +862,7 @@ const PatientPortal = () => {
                   isLoading={isAnalyzing || isSyncing}
                   className="w-full py-4 rounded-2xl text-lg shadow-xl"
                 >
-                  {isAnalyzing ? "Triaging..." : isSyncing ? "Processing..." : (
+                  {isAnalyzing ? "Triaging..." : isSyncing ? "Sending..." : (
                     <>
                       Confirm Booking <ChevronRight className="w-5 h-5 ml-2" />
                     </>

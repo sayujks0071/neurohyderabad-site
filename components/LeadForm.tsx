@@ -284,7 +284,7 @@ export default function LeadForm() {
             isLoading={isSubmitting}
             className="w-full sm:w-full"
           >
-            {isSubmitting ? "Processing..." : "Request Call Back"}
+            {isSubmitting ? "Sending..." : "Request Call Back"}
           </Button>
         </div>
       </form>

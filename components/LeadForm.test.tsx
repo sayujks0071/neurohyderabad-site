@@ -52,7 +52,7 @@ describe('LeadForm', () => {
 
     // Check loading state immediately after click (while fetch is pending)
     expect(submitBtn).toBeDisabled();
-    expect(screen.getByText(/Processing.../i)).toBeInTheDocument();
+    expect(screen.getByText(/Sending.../i)).toBeInTheDocument();
 
     // Wait for success message
     await waitFor(() => {
@@ -60,7 +60,7 @@ describe('LeadForm', () => {
     });
 
     // Verify exact success text
-    expect(screen.getByText("Thank you. Appointment request received. Please bring any MRI/CT scans with you. We will confirm via phone shortly.")).toBeInTheDocument();
+    expect(screen.getByText("Appointment request received. Please bring any MRI/CT scans with you. We will confirm via phone shortly.")).toBeInTheDocument();
 
     // Verify fetch was called
     expect(fetchMock).toHaveBeenCalledWith('/api/lead', expect.anything());
