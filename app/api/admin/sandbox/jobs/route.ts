@@ -41,12 +41,12 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  const jobName = body.job as keyof typeof ALLOWED_JOBS;
-  if (!ALLOWED_JOBS[jobName]) {
+  const jobName = body.job as string;
+  if (!Object.keys(ALLOWED_JOBS).includes(jobName)) {
     return NextResponse.json({ error: "Invalid job name" }, { status: 400 });
   }
 
-  const jobConfig = ALLOWED_JOBS[jobName];
+  const jobConfig = ALLOWED_JOBS[jobName as keyof typeof ALLOWED_JOBS];
 
   const env: Record<string, string> = {};
   for (const key of jobConfig.envKeys) {

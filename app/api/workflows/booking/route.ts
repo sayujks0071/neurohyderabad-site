@@ -73,6 +73,22 @@ export async function POST(request: NextRequest) {
     });
 
     if (result.success) {
+      // Trigger Analytics Conversion Event
+      await inngest.send({
+        name: "analytics/conversion",
+        data: {
+          conversionType: "appointment",
+          page: source || "website",
+          value: 100,
+          timestamp: new Date().toISOString(),
+          patientEmail: booking.email,
+          patientName: booking.patientName,
+          condition: booking.reason,
+          userAgent: request.headers.get("user-agent") || undefined,
+          referrer: request.headers.get("referer") || undefined,
+        },
+      });
+
       return NextResponse.json({
         message: result.message,
         patientName: result.patientName,

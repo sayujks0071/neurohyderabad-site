@@ -218,7 +218,7 @@ export function physicianJsonLd() {
     medicalSpecialty: ["Neurosurgery", "Brain Surgery", "Spine Surgery"],
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Room No 317, OPD Block, Yashoda Hospital, Malakpet",
+      streetAddress: "Room No 317, OPD Block, Yashoda Hospital, Nalgonda X Roads, Malakpet",
       addressLocality: "Hyderabad",
       addressRegion: "Telangana",
       postalCode: "500036",
