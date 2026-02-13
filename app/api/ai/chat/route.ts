@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    const { messages } = await request.json();
+    const { messages, pageTitle, pageDescription } = await request.json();
 
     if (!messages || !Array.isArray(messages) || messages.length === 0) {
       return new Response('Messages array is required', { status: 400 });
@@ -45,10 +45,20 @@ export async function POST(request: NextRequest) {
 
     reportFlagValues(getDefaultFlagValues());
 
+    let systemPrompt = DR_SAYUJ_SYSTEM_PROMPT;
+
+    // Add page context if available
+    if (pageTitle || pageDescription) {
+      systemPrompt += `\n\n### CURRENT USER CONTEXT\nThe user is currently viewing the following page on the website:\n`;
+      if (pageTitle) systemPrompt += `- Page Title: ${pageTitle}\n`;
+      if (pageDescription) systemPrompt += `- Page Summary: ${pageDescription}\n`;
+      systemPrompt += `\nIf the user asks about "this page", "this surgery", or "here", refer to the context above.`;
+    }
+
     // Stream text using AI SDK with Tools
     const result = streamText({
       model: getTextModel(),
-      system: DR_SAYUJ_SYSTEM_PROMPT,
+      system: systemPrompt,
       messages,
       temperature: 0.7,
       maxSteps: 5, // Allow multi-step tool execution

@@ -36,9 +36,25 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
   // Manual input state
   const [input, setInput] = useState('');
 
+  // Page context state
+  const [pageTitle, setPageTitle] = useState('');
+  const [pageDescription, setPageDescription] = useState('');
+  const pathname = usePathname();
+
+  // Update page context on navigation
+  useEffect(() => {
+    // Small delay to ensure document title and meta tags are updated by Next.js
+    const timer = setTimeout(() => {
+      setPageTitle(document.title);
+      const metaDesc = document.querySelector('meta[name="description"]');
+      setPageDescription(metaDesc ? metaDesc.getAttribute('content') || '' : '');
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [pathname]);
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const pathname = usePathname();
 
   // Statsig hooks
   const { logAppointmentBooking, logContactFormSubmit } = useStatsigEvents();
@@ -57,6 +73,8 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
     api: '/api/ai/chat',
     body: {
       pageSlug: pathname || 'global',
+      pageTitle,
+      pageDescription,
       service: 'floating_widget',
     },
     initialMessages,
