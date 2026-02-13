@@ -43,8 +43,64 @@ export async function GET(request: NextRequest) {
     if (!tool) {
       return NextResponse.json({
         message: 'OpenClaw Integration API',
-        tools: ['dashboard', 'appointments', 'patients', 'get_services', 'get_locations', 'check_availability', 'book_appointment', 'search_content'],
-        usage: '?tool=<tool_name> (use POST for book_appointment and check_availability)'
+        documentation: 'https://github.com/clawdbot/clawdbot',
+        tools: {
+          search_content: {
+            method: 'GET',
+            description: 'Search content across blog and pages',
+            parameters: {
+              query: { type: 'string', required: true, description: 'Search term' }
+            }
+          },
+          get_services: {
+            method: 'GET',
+            description: 'List available services',
+            parameters: {}
+          },
+          get_locations: {
+            method: 'GET',
+            description: 'Get clinic locations',
+            parameters: {}
+          },
+          check_availability: {
+            method: 'POST',
+            description: 'Check slot availability',
+            parameters: {
+              date: { type: 'string', required: true, format: 'YYYY-MM-DD' },
+              time: { type: 'string', required: true, format: 'HH:MM' }
+            }
+          },
+          book_appointment: {
+            method: 'POST',
+            description: 'Book a new appointment',
+            parameters: {
+              patientName: { type: 'string', required: true },
+              email: { type: 'string', required: true },
+              phone: { type: 'string', required: true },
+              appointmentDate: { type: 'string', required: true },
+              reason: { type: 'string', required: false }
+            }
+          },
+          dashboard: {
+            method: 'GET',
+            description: 'Get clinic dashboard stats (Staff Only)',
+            parameters: {}
+          },
+          appointments: {
+            method: 'GET',
+            description: 'List recent appointments (Staff Only)',
+            parameters: {
+              limit: { type: 'number', required: false, default: 10 }
+            }
+          },
+          patients: {
+            method: 'GET',
+            description: 'Lookup patient by email (Staff Only)',
+            parameters: {
+              email: { type: 'string', required: true }
+            }
+          }
+        }
       });
     }
 
