@@ -4,6 +4,8 @@ import type { Metadata } from "next";
 import NeuraLinkBookingApp from "./_components/neuralink/NeuraLinkBookingApp";
 import AppointmentSchema from "./_components/AppointmentSchema";
 import AppointmentFaqSchema from "./_components/AppointmentFaqSchema";
+import MedicalWebPageSchema from "../components/schemas/MedicalWebPageSchema";
+import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
 import BookingHeroContent from "./_components/neuralink/BookingHeroContent";
 import BookingLocationInfo from "./_components/neuralink/BookingLocationInfo";
 
@@ -59,6 +61,21 @@ export const metadata: Metadata = {
 export default function AppointmentsPage() {
   return (
     <>
+      <MedicalWebPageSchema
+        pageType="service"
+        pageSlug="/appointments"
+        title="Book Appointment | Best Neurosurgeon Hyderabad | Dr. Sayuj Krishnan"
+        description="Book Appointment with Dr. Sayuj Krishnan, the Best Neurosurgeon in Hyderabad. Schedule a consultation for spine surgery & brain tumor surgery."
+        serviceOrCondition="Neurosurgery Consultation"
+        medicalSpecialty="Neurosurgery"
+        audience="Patients"
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Book Appointment", path: "/appointments" }
+        ]}
+      />
       {/* JSON-LD Structured Data for SEO: Physician & MedicalClinic (Physician, MedicalClinic) */}
       {/* Verifies presence of schema and required keywords in metadata. */}
       <AppointmentSchema />

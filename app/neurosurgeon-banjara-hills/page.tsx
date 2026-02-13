@@ -6,6 +6,8 @@ import { LocationCTAs } from "@/src/components/locations/LocationCTAs";
 import { LocationMapEmbed } from "@/src/components/locations/LocationMapEmbed";
 import { LocalPathways } from "@/src/components/locations/LocalPathways";
 import { LocationSchema } from "@/src/components/locations/LocationSchema";
+import MedicalWebPageSchema from "../components/schemas/MedicalWebPageSchema";
+import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
 import { notFound } from "next/navigation";
 
 // Force static generation
@@ -55,6 +57,22 @@ export default function Page() {
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
+      <MedicalWebPageSchema
+        pageType="location"
+        pageSlug="/neurosurgeon-banjara-hills"
+        title="Neurosurgeon in Banjara Hills, Hyderabad | Endoscopic Spine | Dr. Sayuj Krishnan"
+        description="Consult Dr. Sayuj Krishnan near Banjara Hills, Hyderabad for endoscopic spine & minimally invasive brain surgery. OPD timings, parking, directions, WhatsApp booking, and FAQs."
+        serviceOrCondition="Neurosurgical Consultation"
+        medicalSpecialty="Neurosurgery"
+        audience="Patients in Banjara Hills"
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Locations", path: "/locations" },
+          { name: "Neurosurgeon Banjara Hills", path: "/neurosurgeon-banjara-hills" }
+        ]}
+      />
       <LocationSchema
          location={location}
          faq={FAQ}

@@ -131,9 +131,6 @@ export default function MedicalWebPageSchema({
     };
   }
 
-  // Breadcrumb generation is removed from here to be handled by a dedicated BreadcrumbSchema component
-  // ensuring top-level BreadcrumbList and avoiding duplication.
-
   return (
     <script
       type="application/ld+json"

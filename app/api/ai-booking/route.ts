@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { z } from 'zod';
 import { rateLimit } from '@/src/lib/rate-limit';
 import { escapeHtml } from '@/src/lib/validation';
 
@@ -225,7 +226,7 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    body = await request.json();
+    const body: BookingRequest = await request.json();
     
     // 🛡️ Sentinel: Input validation
     if (!body.message) {
@@ -262,11 +263,11 @@ export async function POST(request: NextRequest) {
       pageSlug: body.pageSlug,
       service: body.service,
       message: body.message,
-      isEmergency: ruleBasedResponse.isEmergency,
-      bookingData: ruleBasedResponse.bookingData
+      isEmergency: aiResponse.isEmergency,
+      bookingData: aiResponse.bookingData
     });
 
-    return NextResponse.json(ruleBasedResponse);
+    return NextResponse.json(aiResponse);
 
   } catch (error) {
     console.error('Error processing AI booking request:', error);

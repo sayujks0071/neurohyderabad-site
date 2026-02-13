@@ -146,6 +146,34 @@ export const CONDITION_RESOURCES: ConditionResource[] = [
     ],
   },
   {
+    slug: "brain-tumor-symptoms",
+    name: "Brain Tumor Symptoms",
+    summary:
+      "Recognize early warning signs like persistent headaches, seizures, and vision changes. Early detection saves lives.",
+    primaryPath: "/symptoms/signs-of-brain-tumor",
+    relatedResources: [
+      {
+        href: "/conditions/brain-tumor",
+        label: "Brain Tumor Treatment Overview",
+      },
+      {
+        href: "/services/brain-tumor-surgery-hyderabad",
+        label: "Surgery for Brain Tumors",
+      },
+    ],
+    keywords: ["brain tumor symptoms", "headache red flags", "seizures"],
+    symptomHighlights: [
+      "Headaches that worsen in the morning or with strain",
+      "New onset seizures in adults",
+      "Unexplained nausea, vomiting, or vision problems",
+    ],
+    treatmentHighlights: [
+      "Immediate MRI evaluation",
+      "Neurological examination for focal deficits",
+      "Consultation for surgical planning if mass found",
+    ],
+  },
+  {
     slug: "brachial-plexus",
     name: "Brachial Plexus Injury",
     summary:
