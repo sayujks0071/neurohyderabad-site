@@ -691,6 +691,13 @@ async function createBookingRecord(
   const start = Date.now();
 
   try {
+    // Idempotency check: verify if booking already exists for this workflow run
+    const existingBooking = await appointments.findByWorkflowRunId(bookingId);
+    if (existingBooking) {
+      logWorkflowEvent(bookingId, "booking-already-exists-skipping-creation", {}, Date.now() - start);
+      return;
+    }
+
     await retry(
       async () => {
         await appointments.create({
@@ -757,13 +764,25 @@ async function sendBookingAdminAlert(
   logWorkflowEvent(bookingId, "sending-admin-alert");
   const start = Date.now();
 
-  const result = await retry(
-    () => sendAdminNotificationEmail(booking, source),
-    { retries: 3, delay: 1000, name: "admin-email", predicate: (r) => r.success }
-  );
+  try {
+    const result = await retry(
+      () => sendAdminNotificationEmail(booking, source),
+      { retries: 3, delay: 1000, name: "admin-email", predicate: (r) => r.success }
+    );
 
-  logWorkflowEvent(bookingId, "admin-alert-sent", { success: result.success }, Date.now() - start);
-  return result;
+    logWorkflowEvent(bookingId, "admin-alert-sent", { success: result.success }, Date.now() - start);
+    return result;
+  } catch (error) {
+    // Soft failure: Don't block workflow completion if admin alert fails
+    logWorkflowEvent(bookingId, "admin-alert-failed-soft", {
+      error: error instanceof Error ? error.message : String(error)
+    }, Date.now() - start);
+
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to send admin alert after retries"
+    };
+  }
 }
 
 /**
