@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     "endoscopic spine surgery for sciatica"
   ],
   alternates: {
-    canonical: `${SITE_URL}/conditions/sciatica-pain-treatment-hyderabad/`,
+    canonical: `${SITE_URL}/conditions/sciatica-pain-treatment-hyderabad`,
   },
 };
 

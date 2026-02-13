@@ -22,7 +22,7 @@ import FAQPageSchema from '@/app/_components/FAQPageSchema';
 const SERVICE_SLUG = 'brain-tumor-surgery-hyderabad';
 
 const baseMetadata = makeMetadata({
-  title: 'Brain Tumor Surgery Hyderabad | Best Neurosurgeon | Dr Sayuj',
+  title: 'Brain Tumor Surgery Hyderabad | Top Neurosurgeon | Dr Sayuj',
   description:
     'Expert Brain Tumor Surgery in Hyderabad. Advanced Awake Craniotomy & Neuronavigation for safe removal. Dr Sayuj Krishnan - Best Neurosurgeon. Consult now.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
@@ -358,6 +358,17 @@ export default function BrainTumorSurgeryHyderabadPage() {
                 </li>
               ))}
             </ul>
+          </div>
+        </section>
+
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-blue-900 mb-6">Related Conditions</h2>
+          <div className="bg-blue-50 border border-blue-100 rounded-xl p-6">
+             <h3 className="text-xl font-semibold text-blue-800 mb-3">Facial Pain & Skull Base Disorders</h3>
+             <p className="text-gray-700 mb-4">
+               Some brain tumors (like acoustic neuromas or meningiomas) can press on cranial nerves, causing facial pain.
+               If you are experiencing severe facial shock-like pain, read our guide on <Link href="/conditions/trigeminal-neuralgia-treatment-hyderabad" className="text-blue-700 underline font-semibold hover:text-blue-900">Trigeminal Neuralgia Treatment</Link>.
+             </p>
           </div>
         </section>
 

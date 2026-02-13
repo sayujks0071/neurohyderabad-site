@@ -26,7 +26,7 @@ const SERVICE_SLUG = 'endoscopic-spine-surgery-hyderabad';
 export const revalidate = 3600; // Revalidate every hour
 
 const baseMetadata = makeMetadata({
-  title: 'Endoscopic Spine Surgery Hyderabad | Dr Sayuj | Same-Day Discharge',
+  title: 'Endoscopic Spine Surgery Hyderabad | Same-Day Discharge',
   description:
     'Endoscopic spine surgery in Hyderabad by Dr. Sayuj Krishnan (1000+ cases). 7mm keyhole, 90% same-day discharge, ₹95K–₹1.35L. Book now.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
@@ -34,7 +34,7 @@ const baseMetadata = makeMetadata({
 
 export const metadata: Metadata = {
   ...baseMetadata,
-  title: 'Endoscopic Spine Surgery Hyderabad | Dr Sayuj | Same-Day Discharge',
+  title: 'Endoscopic Spine Surgery Hyderabad | Same-Day Discharge',
   description:
     'Endoscopic spine surgery in Hyderabad by Dr. Sayuj Krishnan (1000+ cases). 7mm keyhole, 90% same-day discharge, ₹95K–₹1.35L. Book now.',
   keywords: [
