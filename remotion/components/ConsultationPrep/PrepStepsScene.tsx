@@ -3,6 +3,7 @@ import { COLORS, FONTS, SPACING } from '../../utils/colorTokens';
 import { PrepStepItem } from './PrepStepItem';
 import { GradientBackground } from '../shared/GradientBackground';
 import type { ConsultationPrepProps } from '../../types/ConsultationPrepProps';
+import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
 
 export interface PrepStepsSceneProps {
   surgeryType: string;
@@ -12,9 +13,10 @@ export interface PrepStepsSceneProps {
 export const PrepStepsScene: React.FC<PrepStepsSceneProps> = ({ surgeryType, prepSteps }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   // Title animation
-  const titleOpacity = spring({
+  const titleOpacity = prefersReducedMotion ? 1 : spring({
     frame,
     fps,
     from: 0,
@@ -22,7 +24,7 @@ export const PrepStepsScene: React.FC<PrepStepsSceneProps> = ({ surgeryType, pre
     durationInFrames: 20,
   });
 
-  const titleY = spring({
+  const titleY = prefersReducedMotion ? 0 : spring({
     frame,
     fps,
     from: -30,
@@ -31,7 +33,7 @@ export const PrepStepsScene: React.FC<PrepStepsSceneProps> = ({ surgeryType, pre
   });
 
   return (
-    <GradientBackground preset="light-clean" animated={true}>
+    <GradientBackground preset="light-clean" animated={!prefersReducedMotion}>
       <div
         style={{
           width: '100%',

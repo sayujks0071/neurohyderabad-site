@@ -13,7 +13,7 @@ import FAQPageSchema from '@/app/_components/FAQPageSchema';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 
 export const metadata: Metadata = makeMetadata({
-  title: 'Best Neurosurgeon in Hyderabad: Compare Dr. Sayuj vs Apollo, KIMS, Yashoda',
+  title: 'Compare Neurosurgeons Hyderabad | Dr Sayuj vs Apollo',
   description: 'Compare the best neurosurgeons in Hyderabad. Dr. Sayuj Krishnan vs Apollo, KIMS, Yashoda hospitals. Expert comparison of experience, techniques, and patient outcomes for brain and spine surgery.',
   canonicalPath: '/services/compare-neurosurgeons-hyderabad',
 });

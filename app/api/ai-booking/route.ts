@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
+import { generateObject } from 'ai';
 import { rateLimit } from '@/src/lib/rate-limit';
 import { escapeHtml } from '@/src/lib/validation';
+import { getTextModel } from '@/src/lib/ai/gateway';
 
 interface BookingRequest {
   message: string;
@@ -16,6 +18,8 @@ interface BookingRequest {
     symptoms?: string[];
     previousTreatment?: string;
     insurance?: string;
+    painScore?: number;
+    mriScanAvailable?: boolean;
   };
   pageSlug: string;
   service?: string;
@@ -61,6 +65,8 @@ const aiBookingSchema = z.object({
     symptoms: z.array(z.string()).optional(),
     previousTreatment: z.string().optional(),
     insurance: z.string().optional(),
+    painScore: z.number().min(1).max(10).optional(),
+    mriScanAvailable: z.boolean().optional(),
   }).optional().describe("Updated booking data extracted from the conversation."),
   nextStep: z.string().optional().describe("The next step in the flow: 'condition', 'urgency', 'details', 'scheduling', 'confirmation', or null."),
 });
@@ -92,8 +98,8 @@ function extractEmail(text: string): string | null {
   return match ? match[0] : null;
 }
 
-function generateAIResponse(request: BookingRequest): AIResponse {
-  const { message, service } = request;
+async function generateAIResponse(request: BookingRequest): Promise<AIResponse> {
+  const { message } = request;
   const bookingData = request.bookingData || {};
   
   const isEmergency = detectEmergency(message);
@@ -101,7 +107,7 @@ function generateAIResponse(request: BookingRequest): AIResponse {
   const phoneNumber = extractPhoneNumber(message);
   const email = extractEmail(message);
 
-  // Emergency detection
+  // Fast-path Emergency detection (Rule-based)
   if (isEmergency) {
     return {
       response: "🚨 I've detected this may be an emergency situation. Please call our emergency hotline immediately at +91-9778280044 or visit the nearest emergency room. Your safety is our priority. I can still help you book an urgent appointment, but please seek immediate medical attention if needed.",
@@ -117,100 +123,65 @@ function generateAIResponse(request: BookingRequest): AIResponse {
     };
   }
 
-  // Determine conversation flow based on current state
-  const hasName = bookingData.name || message.toLowerCase().includes('my name is') || message.toLowerCase().includes('i am');
-  const hasPhone = bookingData.phone || phoneNumber;
-  const hasCondition = bookingData.condition || detectedCondition;
-  const hasUrgency = bookingData.urgency;
+  // Use Vercel AI Gateway for intelligent conversation flow
+  try {
+    const { object } = await generateObject({
+      model: getTextModel('gpt-4o-mini'),
+      schema: aiBookingSchema,
+      prompt: `You are a helpful medical appointment booking assistant for Dr. Sayuj Krishnan, a neurosurgeon.
+Your goal is to help patients book an appointment by collecting necessary information.
 
-  // Generate contextual response
-  if (!hasCondition && !hasName) {
-    return {
-      response: "I'd be happy to help you book an appointment with Dr. Sayuj Krishnan. Could you tell me more about your condition or symptoms? This will help me understand how urgent your appointment should be.",
-      isEmergency: false,
-      nextStep: 'condition',
-      bookingData: {
-        ...bookingData,
-        condition: detectedCondition,
-        phone: phoneNumber || bookingData.phone,
-        email: email || bookingData.email
-      }
-    };
-  }
+Current Booking State:
+${JSON.stringify(bookingData, null, 2)}
 
-  if (hasCondition && !hasUrgency) {
-    return {
-      response: `I understand you're dealing with ${detectedCondition ? detectedCondition.replace('_', ' ') : 'your condition'}. How urgent is your condition? Are you experiencing severe pain, or is this for a routine consultation?`,
-      isEmergency: false,
-      nextStep: 'urgency',
-      bookingData: {
-        ...bookingData,
-        condition: detectedCondition || bookingData.condition,
-        phone: phoneNumber || bookingData.phone,
-        email: email || bookingData.email
-      }
-    };
-  }
+User Message: "${message}"
 
-  if (hasUrgency && !hasPhone) {
-    // 🛡️ Sentinel: Safe variable interpolation
-    const safeUrgency = escapeHtml(bookingData.urgency);
-    return {
-      response: `Thank you. I'll mark this as a ${safeUrgency} appointment. Now, could you please provide your name and contact information? I'll need your phone number for confirmation.`,
-      isEmergency: false,
-      nextStep: 'details',
-      bookingData: {
-        ...bookingData,
-        condition: detectedCondition || bookingData.condition,
-        phone: phoneNumber || bookingData.phone,
-        email: email || bookingData.email
-      }
-    };
-  }
+Detected Entities (for reference):
+- Phone: ${phoneNumber || 'None'}
+- Email: ${email || 'None'}
+- Condition Hint: ${detectedCondition || 'None'}
 
-  if (hasPhone && !bookingData.preferredDate) {
-    // 🛡️ Sentinel: Safe variable interpolation
-    const safePhone = escapeHtml(phoneNumber || bookingData.phone);
-    return {
-      response: `Perfect! I have your phone number: ${safePhone}. When would you prefer to have your appointment? Dr. Sayuj's OPD hours are Monday to Saturday (10:00 AM – 1:00 PM and 5:00 PM – 7:30 PM). What day works best for you?`,
-      isEmergency: false,
-      nextStep: 'scheduling',
-      bookingData: {
-        ...bookingData,
-        condition: detectedCondition || bookingData.condition,
-        phone: phoneNumber || bookingData.phone,
-        email: email || bookingData.email
-      }
-    };
-  }
+Instructions:
+1. Extract any new information from the user message. Update bookingData fields.
+2. If the user provides a phone number or email, ensure it is captured in bookingData.
+3. Determine the next step in the flow:
+   - 'condition': If condition is unknown, ask about symptoms.
+   - 'urgency': If urgency is unknown, ask about pain levels (1-10) and if they have any recent MRI scans.
+   - 'details': If name/phone/email are missing, ask for them.
+   - 'scheduling': If date/time are missing, ask for preference (OPD hours: Mon-Sat 10am-1pm, 5pm-7:30pm).
+   - 'confirmation': If all key info (name, phone, condition, urgency, painScore, mriScanAvailable, date) is present, summarize and ask to confirm.
+4. Be empathetic and professional. Dr. Sayuj is a specialist.
+5. If the user asks unrelated medical questions, politely guide them back to booking or suggest a consultation.
 
-  // Ready to confirm
-  // 🛡️ Sentinel: Safe variable interpolation
-  const safeName = escapeHtml(bookingData.name || 'To be confirmed');
-  const safePhone = escapeHtml(phoneNumber || bookingData.phone);
-  const safeCondition = detectedCondition ? detectedCondition.replace('_', ' ') : escapeHtml(bookingData.condition || 'To be discussed');
-  const safeUrgency = escapeHtml(bookingData.urgency || 'routine');
-  const safeDate = escapeHtml(bookingData.preferredDate || 'To be confirmed');
+Output strictly valid JSON matching the schema.`,
+      temperature: 0.3, // Low temperature for consistent structured output
+    });
 
-  return {
-    response: `Great! I have all the information I need. Let me summarize your appointment request:
-
-• Name: ${safeName}
-• Phone: ${safePhone}
-• Condition: ${safeCondition}
-• Urgency: ${safeUrgency}
-• Preferred Date: ${safeDate}
-
-Our coordinator will call you within one working day to confirm your appointment slot. Is there anything else I can help you with?`,
-    isEmergency: false,
-    nextStep: 'confirmation',
-    bookingData: {
+    // Merge extracted data with existing data, preferring new non-null values
+    const newBookingData = {
       ...bookingData,
-      condition: detectedCondition || bookingData.condition,
-      phone: phoneNumber || bookingData.phone,
-      email: email || bookingData.email
-    }
-  };
+      ...object.bookingData,
+      // Ensure regex-extracted entities are preserved if AI missed them but didn't overwrite them
+      phone: object.bookingData?.phone || phoneNumber || bookingData.phone,
+      email: object.bookingData?.email || email || bookingData.email,
+      condition: object.bookingData?.condition || detectedCondition || bookingData.condition,
+    };
+
+    return {
+      ...object,
+      bookingData: newBookingData
+    };
+
+  } catch (error) {
+    console.error("AI Generation failed, falling back to rule-based logic", error);
+    // Fallback logic if AI fails (simplified version of original rule-based logic)
+    return {
+      response: "I apologize, I'm having trouble processing that. Could you please provide your name and phone number so we can contact you directly?",
+      isEmergency: false,
+      bookingData: bookingData,
+      nextStep: 'details'
+    };
+  }
 }
 
 export async function POST(request: NextRequest) {
@@ -226,7 +197,7 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const body: BookingRequest = await request.json();
+    const body = await request.json();
     
     // 🛡️ Sentinel: Input validation
     if (!body.message) {
@@ -255,10 +226,10 @@ export async function POST(request: NextRequest) {
     }
 
     // Generate AI response
-    const aiResponse = generateAIResponse(body);
+    const aiResponse = await generateAIResponse(body);
 
     // Log the interaction
-    console.log('Rule-based Interaction:', {
+    console.log('AI Booking Interaction:', {
       timestamp: new Date().toISOString(),
       pageSlug: body.pageSlug,
       service: body.service,

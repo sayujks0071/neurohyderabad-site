@@ -17,7 +17,7 @@ import { buildWebhookPayload, notifyAppointmentWebhooks } from "@/src/lib/appoin
 import { submitToGoogleSheets } from "@/src/lib/google-sheets";
 import { getTextModel, hasAIConfig } from "@/src/lib/ai/gateway";
 import { inngest } from "@/src/lib/inngest";
-import { appointments, workflowRuns } from "@/src/lib/db";
+import { appointments, workflowRuns, analytics } from "@/src/lib/db";
 import { APPOINTMENT_SUCCESS_MESSAGE } from "@/packages/appointment-form/constants";
 
 interface PatientInfo {
@@ -53,6 +53,9 @@ async function retry<T>(
       }
       return result;
     } catch (error) {
+      if (error instanceof FatalError) {
+        throw error;
+      }
       if (i === retries) throw error;
       const wait = delay * Math.pow(2, i);
       console.log(`[Appointment Workflow] Retry ${i + 1}/${retries} for ${name} after ${wait}ms`);
@@ -415,7 +418,7 @@ export async function handleAppointmentBooking(
     );
 
     const remindersPromise = scheduleReminders(bookingId, patientInfo, finalDate, finalTime);
-    const educationPromise = preparePatientEducation(patientInfo.chiefComplaint, patientInfo.email);
+    const educationPromise = preparePatientEducation(bookingId, patientInfo);
     const analyticsPromise = trackBookingAnalytics(bookingId, patientInfo, status);
 
     const [_, _webhooks, reminderScheduled] = await Promise.all([
@@ -424,14 +427,6 @@ export async function handleAppointmentBooking(
       remindersPromise,
       educationPromise,
       analyticsPromise,
-    ]);
-
-    // Step 9: Post-booking tasks (Reminders, Education, Analytics)
-    // All run in parallel
-    const [reminderScheduled] = await Promise.all([
-      scheduleReminders(bookingId, patientInfo, finalDate, finalTime),
-      preparePatientEducation(bookingId, patientInfo),
-      trackBookingAnalytics(bookingId, patientInfo, status),
     ]);
 
     logWorkflowEvent(bookingId, "workflow-completed", { status, duration: Date.now() - startTime });
@@ -696,6 +691,13 @@ async function createBookingRecord(
   const start = Date.now();
 
   try {
+    // Idempotency check: verify if booking already exists for this workflow run
+    const existingBooking = await appointments.findByWorkflowRunId(bookingId);
+    if (existingBooking) {
+      logWorkflowEvent(bookingId, "booking-already-exists-skipping-creation", {}, Date.now() - start);
+      return;
+    }
+
     await retry(
       async () => {
         await appointments.create({
@@ -762,13 +764,25 @@ async function sendBookingAdminAlert(
   logWorkflowEvent(bookingId, "sending-admin-alert");
   const start = Date.now();
 
-  const result = await retry(
-    () => sendAdminNotificationEmail(booking, source),
-    { retries: 3, delay: 1000, name: "admin-email", predicate: (r) => r.success }
-  );
+  try {
+    const result = await retry(
+      () => sendAdminNotificationEmail(booking, source),
+      { retries: 3, delay: 1000, name: "admin-email", predicate: (r) => r.success }
+    );
 
-  logWorkflowEvent(bookingId, "admin-alert-sent", { success: result.success }, Date.now() - start);
-  return result;
+    logWorkflowEvent(bookingId, "admin-alert-sent", { success: result.success }, Date.now() - start);
+    return result;
+  } catch (error) {
+    // Soft failure: Don't block workflow completion if admin alert fails
+    logWorkflowEvent(bookingId, "admin-alert-failed-soft", {
+      error: error instanceof Error ? error.message : String(error)
+    }, Date.now() - start);
+
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to send admin alert after retries"
+    };
+  }
 }
 
 /**
@@ -781,30 +795,31 @@ async function syncBookingLead(
 ): Promise<boolean> {
   "use step";
 
-  const result = await retry(
-    () => submitToGoogleSheets({
-      requestId: bookingId,
-    fullName: booking.patientName,
-    email: booking.email,
-    phone: booking.phone,
-    concern: booking.reason.slice(0, 100),
-    preferredDate: booking.appointmentDate,
-    preferredTime: booking.appointmentTime,
-    source: source || "website",
-    metadata: {
-      age: booking.age,
-      gender: booking.gender,
-      bookingReason: booking.reason,
-      painScore: booking.painScore,
-      mriScanAvailable: booking.mriScanAvailable,
-    },
-  }), { retries: 3, delay: 1000, name: "google-sheets", predicate: (r) => r.success });
+  try {
+    const result = await retry(
+      () => submitToGoogleSheets({
+        requestId: bookingId,
+      fullName: booking.patientName,
+      email: booking.email,
+      phone: booking.phone,
+      concern: booking.reason.slice(0, 100),
+      preferredDate: booking.appointmentDate,
+      preferredTime: booking.appointmentTime,
+      source: source || "website",
+      metadata: {
+        age: booking.age,
+        gender: booking.gender,
+        bookingReason: booking.reason,
+        painScore: booking.painScore,
+        mriScanAvailable: booking.mriScanAvailable,
+      },
+    }), { retries: 3, delay: 1000, name: "google-sheets", predicate: (r) => r.success });
 
-  if (!result.success) {
-    logWorkflowEvent(bookingId, "google-sheets-sync-failed", { error: result.message });
+    return result.success;
+  } catch (error) {
+    logWorkflowEvent(bookingId, "google-sheets-sync-failed", { error: error instanceof Error ? error.message : String(error) });
+    return false;
   }
-
-  return result.success;
 }
 
 /**
@@ -820,18 +835,22 @@ async function triggerAppointmentWebhooks(
 ): Promise<void> {
   "use step";
 
-  await retry(
-    async () => notifyAppointmentWebhooks(
-      buildWebhookPayload({
-        booking,
-        confirmationMessage,
-        emailResult,
-        usedAI,
-        source,
-      })
-    ),
-    { retries: 3, delay: 1000, name: "webhooks" }
-  );
+  try {
+    await retry(
+      async () => notifyAppointmentWebhooks(
+        buildWebhookPayload({
+          booking,
+          confirmationMessage,
+          emailResult,
+          usedAI,
+          source,
+        })
+      ),
+      { retries: 3, delay: 1000, name: "webhooks" }
+    );
+  } catch (error) {
+    logWorkflowEvent(bookingId, "webhooks-failed-fatal", { error: error instanceof Error ? error.message : String(error) });
+  }
 }
 
 /**
@@ -869,22 +888,31 @@ async function scheduleReminders(
     reminders.map(async (reminder) => {
       const reminderTime = new Date(appointmentDateTime.getTime() - reminder.offsetMs);
       if (reminderTime > new Date()) {
-        // Use bookingId + reminder type as idempotency key to prevent duplicate reminders
-        const idempotencyKey = `${bookingId}-${reminder.type}`;
+        try {
+          // Use bookingId + reminder type as idempotency key to prevent duplicate reminders
+          const idempotencyKey = `${bookingId}-${reminder.type}`;
 
-        await inngest.send({
-          id: idempotencyKey, // Inngest uses 'id' for idempotency
-          name: "appointment/reminder",
-          data: {
-            appointmentId: bookingId,
-            patientEmail: patientInfo.email,
-            patientName: patientInfo.name,
-            appointmentDate: appointmentIso,
-            reminderType: reminder.type,
-          },
-          ts: reminderTime.getTime(),
-        });
-        return true;
+          await retry(
+            async () =>
+              inngest.send({
+                id: idempotencyKey, // Inngest uses 'id' for idempotency
+                name: "appointment/reminder",
+                data: {
+                  appointmentId: bookingId,
+                  patientEmail: patientInfo.email,
+                  patientName: patientInfo.name,
+                  appointmentDate: appointmentIso,
+                  reminderType: reminder.type,
+                },
+                ts: reminderTime.getTime(),
+              }),
+            { retries: 3, delay: 1000, name: `reminder-${reminder.type}` }
+          );
+          return true;
+        } catch (error) {
+          logWorkflowEvent(bookingId, "reminder-scheduling-failed", { type: reminder.type }, undefined, error);
+          return false;
+        }
       }
       return false;
     })
@@ -948,6 +976,23 @@ async function trackBookingAnalytics(
   "use step";
 
   logWorkflowEvent(bookingId, "tracking-analytics");
+
+  try {
+    await analytics.track({
+      event_type: "booking_completed",
+      page_path: "/appointments/booking-workflow",
+      user_intent: "book_appointment",
+      meta: {
+        bookingId,
+        status,
+        appointmentType: patientInfo.appointmentType,
+        source: patientInfo.source,
+      },
+    });
+    logWorkflowEvent(bookingId, "analytics-tracked-db");
+  } catch (e) {
+    logWorkflowEvent(bookingId, "analytics-tracking-failed", {}, undefined, e);
+  }
 
   // In production, this would send to analytics platforms
   logWorkflowEvent(bookingId, "analytics-tracked", { status, type: patientInfo.appointmentType });

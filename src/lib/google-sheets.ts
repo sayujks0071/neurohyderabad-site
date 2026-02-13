@@ -11,6 +11,8 @@ export interface LeadData {
   preferredDate?: string;
   preferredTime?: string;
   source?: string;
+  painScore?: number;
+  mriScanAvailable?: boolean;
   metadata?: Record<string, unknown>;
 }
 

@@ -7,6 +7,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import crypto from 'crypto';
+import { EmailService } from '@/src/lib/email';
 
 interface MiddlewareAlert {
   id: string;
@@ -114,6 +115,18 @@ export async function POST(request: NextRequest) {
   }
 }
 
+function formatAlertDetails(alert: MiddlewareAlert): string {
+  return `
+ID: ${alert.id}
+Metric: ${alert.metric}
+Value: ${alert.value}
+Threshold: ${alert.threshold}
+Condition: ${alert.condition}
+Timestamp: ${alert.timestamp}
+Filters: ${JSON.stringify(alert.filters, null, 2)}
+  `.trim();
+}
+
 async function handleCriticalAlert(alert: MiddlewareAlert) {
   console.error('[CRITICAL ALERT]', alert);
 
@@ -122,17 +135,19 @@ async function handleCriticalAlert(alert: MiddlewareAlert) {
   // - Complete API failures
   // - Security issues
 
+  const details = formatAlertDetails(alert);
+
+  // Send system alert email
+  await EmailService.sendSystemAlert(
+    alert.name || 'Critical Alert',
+    details,
+    'critical'
+  );
+
   if (alert.metric === 'form.success_rate' && alert.value < 0.9) {
     // Form submission failure - business critical
     console.error('[CRITICAL] Form submission failure detected!');
-    // TODO: Send immediate notification (SMS, phone call, etc.)
   }
-
-  // TODO: Implement immediate notification channels
-  // - SMS via Twilio
-  // - Phone call
-  // - PagerDuty
-  // - Slack critical channel
 }
 
 async function handleHighSeverityAlert(alert: MiddlewareAlert) {
@@ -143,10 +158,14 @@ async function handleHighSeverityAlert(alert: MiddlewareAlert) {
   // - Poor performance metrics
   // - API slowdowns
 
-  // TODO: Send to notification channels
-  // - Email
-  // - Slack
-  // - Teams
+  const details = formatAlertDetails(alert);
+
+  // Send system alert email
+  await EmailService.sendSystemAlert(
+    alert.name || 'High Severity Alert',
+    details,
+    'high'
+  );
 }
 
 async function logAlert(alert: MiddlewareAlert) {

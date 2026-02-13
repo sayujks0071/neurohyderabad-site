@@ -11,6 +11,7 @@ export default function OpenClawWidget({ autoOpen = false }: OpenClawWidgetProps
   const [isOpen, setIsOpen] = useState(autoOpen);
   const [isLoading, setIsLoading] = useState(true);
   const [isMinimized, setIsMinimized] = useState(false);
+  const [iframeUrl, setIframeUrl] = useState<string | null>(null);
 
   useEffect(() => {
     if (autoOpen) {
@@ -25,6 +26,17 @@ export default function OpenClawWidget({ autoOpen = false }: OpenClawWidgetProps
     }
   }, [isOpen]);
 
+  // Set iframe URL with context
+  useEffect(() => {
+    const baseUrl = process.env.NEXT_PUBLIC_OPENCLAW_URL;
+    if (baseUrl) {
+      const currentUrl = encodeURIComponent(window.location.href);
+      const pageTitle = encodeURIComponent(document.title);
+      const separator = baseUrl.includes('?') ? '&' : '?';
+      setIframeUrl(`${baseUrl}${separator}currentUrl=${currentUrl}&pageTitle=${pageTitle}`);
+    }
+  }, []);
+
   const toggleOpen = () => {
     setIsOpen(!isOpen);
     setIsMinimized(false);
@@ -35,9 +47,7 @@ export default function OpenClawWidget({ autoOpen = false }: OpenClawWidgetProps
     setIsMinimized(!isMinimized);
   };
 
-  const url = process.env.NEXT_PUBLIC_OPENCLAW_URL;
-
-  if (!url) return null;
+  if (!iframeUrl) return null;
 
   return (
     <>
@@ -107,7 +117,7 @@ export default function OpenClawWidget({ autoOpen = false }: OpenClawWidgetProps
               </div>
             )}
             <iframe
-              src={url}
+              src={iframeUrl}
               className="w-full h-full border-0"
               allow="microphone; camera; geolocation"
               onLoad={() => setIsLoading(false)}

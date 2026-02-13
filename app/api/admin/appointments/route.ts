@@ -9,7 +9,7 @@ export const dynamic = 'force-dynamic';
  * Fetch all appointments from the database
  */
 export async function GET(request: NextRequest) {
-  const auth = verifyAdminAccess(request);
+  const auth = await verifyAdminAccess(request);
   if (!auth.isAuthorized) {
     return auth.response!;
   }
@@ -35,7 +35,7 @@ export async function GET(request: NextRequest) {
  * Update appointment status
  */
 export async function PATCH(request: NextRequest) {
-  const auth = verifyAdminAccess(request);
+  const auth = await verifyAdminAccess(request);
   if (!auth.isAuthorized) {
     return auth.response!;
   }

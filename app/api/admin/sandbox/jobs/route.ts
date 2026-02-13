@@ -25,7 +25,7 @@ const ALLOWED_JOBS = {
 export const runtime = "nodejs";
 
 export async function POST(request: Request) {
-  const { isAuthorized, response } = verifyAdminAccess(request);
+  const { isAuthorized, response } = await verifyAdminAccess(request);
   if (!isAuthorized) return response!;
 
   const ip = request.headers.get("x-forwarded-for")?.split(',')[0] || "127.0.0.1";
@@ -77,7 +77,7 @@ export async function POST(request: Request) {
     }) as any;
 
     return NextResponse.json({
-        sandboxId: sandbox.id || (sandbox as any).sandboxId,
+        sandboxId: (sandbox as any).id || (sandbox as any).sandboxId,
         cmdId: cmd.cmdId || cmd.id,
         startedAt: Date.now(),
         timeoutMs: 1200000,

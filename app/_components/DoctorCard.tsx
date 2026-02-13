@@ -8,7 +8,7 @@ interface DoctorCardProps {
 
 export default function DoctorCard({ priority = false }: DoctorCardProps) {
   return (
-    <div className="bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 relative max-w-md mx-auto">
+    <div className="bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl motion-safe:hover:-translate-y-1 relative max-w-md mx-auto">
       <div className="text-center">
         {/* Doctor Photo - Professional Portrait */}
         <div className="w-32 h-32 rounded-full mx-auto mb-4 relative overflow-hidden shadow-lg border-2 border-white/50">
@@ -37,7 +37,7 @@ export default function DoctorCard({ priority = false }: DoctorCardProps) {
         <div className="flex flex-col sm:flex-row gap-3 mb-6">
           <Link 
             href="/appointments" 
-            className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2"
+            className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 motion-safe:hover:scale-[1.02] motion-safe:active:scale-[0.98] flex items-center justify-center gap-2"
             aria-label="Book a consultation with Dr. Sayuj Krishnan"
           >
             <Calendar className="w-4 h-4" />

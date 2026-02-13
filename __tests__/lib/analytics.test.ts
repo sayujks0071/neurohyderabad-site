@@ -54,7 +54,7 @@ describe('Analytics Helper', () => {
   });
 
   it('should track appointment success', () => {
-    analytics.appointmentSuccess('test-slug', 'consultation');
+    analytics.appointmentSuccess('test-slug', 'test-source', 'consultation');
 
     expect(trackMiddlewareEvent).toHaveBeenCalledWith('Appointment_Success', expect.objectContaining({
       page_slug: 'test-slug',
@@ -69,6 +69,32 @@ describe('Analytics Helper', () => {
       page_slug: 'test-slug',
       field_name: 'test-field',
       error_type: 'required'
+    }));
+  });
+
+  it('should track chat events', () => {
+    analytics.chat.open('test-source');
+    expect(trackMiddlewareEvent).toHaveBeenCalledWith('chat_widget_open', expect.objectContaining({
+      source: 'test-source'
+    }));
+
+    analytics.chat.messageSent('test-source');
+    expect(trackMiddlewareEvent).toHaveBeenCalledWith('chat_message_sent', expect.objectContaining({
+      source: 'test-source'
+    }));
+
+    analytics.chat.responseReceived('test-source', 100, true);
+    expect(trackMiddlewareEvent).toHaveBeenCalledWith('chat_response_received', expect.objectContaining({
+      source: 'test-source',
+      duration_ms: 100,
+      success: true
+    }));
+
+    analytics.chat.error('test-source', 200, 'test-error');
+    expect(trackMiddlewareEvent).toHaveBeenCalledWith('chat_error', expect.objectContaining({
+      source: 'test-source',
+      duration_ms: 200,
+      error_message: 'test-error'
     }));
   });
 });

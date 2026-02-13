@@ -1,24 +1,36 @@
-# Prioritized SEO Fixes
+# Prioritized Fix Backlog
 
-## 1. Eliminate Ghost Pages (Critical Technical)
-**Issue**: ~50 URLs listed in sitemaps return 404.
-**Impact**: Wastes crawl budget, bad UX, "Soft 404" signals.
-**Fix**: Remove these URLs from `app/sitemap-services.ts`, `app/sitemap-conditions.ts`, and `app/sitemap.ts`.
-**Effort**: Low. **Risk**: Low.
+**Date:** 2026-02-13
+**Audit Run:** #1
 
-## 2. Fix Schema Gaps (E-E-A-T)
-**Issue**: `MedicalWebPage` schema is missing `medicalSpecialty` and `audience` fields. Some pages show `undefined` schema types.
-**Impact**: Reduced rich snippet eligibility (Medical Knowledge Graph).
-**Fix**: Update `MedicalWebPageSchema` component to include defaults or props for these fields.
-**Effort**: Medium. **Risk**: Low.
+## Summary of Findings
+-   **Critical On-Page Issues:** 46 pages have missing or duplicate H1s, titles too long, or missing meta descriptions.
+-   **Performance:** Homepage LCP is poor (6.5s). Inner pages are decent (3.2s) but can be improved.
+-   **Competitor Gap:** Missing structured cost info, recovery timelines, and extensive FAQs on service pages.
+-   **Schema:** Basic schema exists but lacks depth (FAQPage, Article specific fields).
 
-## 3. Metadata Length Optimization (On-Page)
-**Issue**: 120+ pages have titles > 60 chars.
-**Impact**: Title truncation in SERPs (lower CTR).
-**Fix**: Shorten the page-specific titles for key pages (Home, Services, Conditions).
-**Effort**: Medium (repetitive). **Risk**: Low.
+## Priority Matrix
 
-## 4. Performance (Lighthouse)
-**Issue**: Lighthouse failed locally, but TTFB is good.
-**Fix**: Ensure `next/image` is used properly (already seems so).
-**Action**: Defer major performance overhaul until Lighthouse can be run, but verify `next/image` usage in key components.
+| Issue | Evidence | Affected URLs | Fix Summary | Impact (1-5) | Effort (1-5) | Risk | Do now? |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Missing/Duplicate H1s & Meta Titles** | `audit/onpage/onpage_issues.csv` | 46 pages (e.g., conditions/sciatica...) | Audit and fix metadata in `page.tsx` or `layout.tsx`. Ensure unique H1 per page. | 5 | 2 | Low | **Yes** |
+| **Missing FAQPage Schema** | `audit/competitors/competitor_gap.md` | Service & Condition Pages | Add `FAQPage` JSON-LD to `app/services/[slug]/page.tsx` and `app/conditions/[slug]/page.tsx`. Populate with content. | 4 | 3 | Low | **Yes** |
+| **Homepage LCP (6.5s)** | `audit/lighthouse/home.report.json` | `/` | Optimize hero image (preload, priority), reduce unused JS, defer non-critical scripts. | 5 | 3 | Med | **Yes** |
+| **Missing Cost & Recovery Info** | `audit/competitors/competitor_gap.md` | Service Pages | Add "Cost of Surgery" and "Recovery Timeline" sections to service templates. | 4 | 4 | Med | No |
+| **Unused JavaScript** | `audit/lighthouse/summary.md` | All Pages | Analyze bundle, code split heavy components, lazy load third-party scripts. | 3 | 4 | High | No |
+| **Thin Content (<300 words)** | `audit/crawl/url_inventory.csv` | Some blog/condition pages | Expand content with "Symptoms", "Diagnosis", "Treatment" sections. | 3 | 5 | Low | No |
+| **Image Alt Text** | `audit/onpage/onpage_issues.csv` | Various | Add descriptive alt text to images. | 2 | 2 | Low | No |
+
+## Top 3 "Do Now" Fixes
+
+1.  **Fix Critical On-Page Issues (Metadata & H1s):**
+    -   **Why:** Direct impact on CTR and rankings. Low risk.
+    -   **Action:** Review `audit/onpage/onpage_issues.csv` and fix the top offenders in the codebase.
+
+2.  **Add FAQPage Schema to Service/Condition Pages:**
+    -   **Why:** Competitors use it. Increases SERP real estate (Rich Snippets).
+    -   **Action:** Implement `FAQSchema` component or inject JSON-LD in `page.tsx` for these routes.
+
+3.  **Optimize Homepage LCP:**
+    -   **Why:** 6.5s is too slow. First impression matters.
+    -   **Action:** optimize Hero section images and loading strategy.

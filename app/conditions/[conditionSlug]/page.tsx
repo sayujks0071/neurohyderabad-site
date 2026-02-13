@@ -7,6 +7,7 @@ import {
   getConditionResource,
 } from "@/src/data/conditionsIndex";
 import { SITE_URL } from "@/src/lib/seo";
+import { makeMetadata } from "@/app/_lib/meta";
 import ConditionStructuredData from "../ConditionStructuredData";
 import Section from "../../_components/Section";
 import Card from "../../_components/Card";
@@ -78,37 +79,14 @@ export async function generateMetadata({
 
   const canonical = `${SITE_URL}${condition.primaryPath}`;
 
-  return {
+  return makeMetadata({
     title,
     description,
-    alternates: {
-      canonical,
-    },
-    openGraph: {
-      title,
-      description,
-      url: canonical,
-      siteName: "Dr. Sayuj Krishnan - Neurosurgeon in Hyderabad",
-      images: [
-        condition.heroImage
-          ? {
-            url: `${SITE_URL}${condition.heroImage.src}`,
-            width: 1200,
-            height: 630,
-            alt: condition.heroImage.alt,
-          }
-          : {
-            url: `${SITE_URL}/api/og?title=${encodeURIComponent(
-              condition.name,
-            )}&subtitle=Treatment%20at%20Dr%20Sayuj%20Krishnan`,
-            width: 1200,
-            height: 630,
-            alt: `${condition.name} treatment insights`,
-          },
-      ],
-      type: "article",
-    },
-  };
+    canonicalPath: condition.primaryPath,
+    ogImage: condition.heroImage ? condition.heroImage.src : undefined,
+    ogImageAlt: condition.heroImage ? condition.heroImage.alt : undefined,
+    ogType: 'article',
+  });
 }
 
 export default async function ConditionDetailPage({ params }: PageParams) {

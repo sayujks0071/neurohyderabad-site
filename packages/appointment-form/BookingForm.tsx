@@ -272,7 +272,13 @@ export default function BookingForm({
                     min="1"
                     max="10"
                     step="1"
-                    className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+                    className={`w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors ${
+                      (painScoreValue || 5) <= 3
+                        ? "accent-green-600 focus:ring-green-500"
+                        : (painScoreValue || 5) <= 7
+                        ? "accent-yellow-500 focus:ring-yellow-500"
+                        : "accent-red-600 focus:ring-red-500"
+                    }`}
                     aria-valuetext={painScoreValue ? `Score: ${painScoreValue}${painScoreValue >= 8 ? ' (Severe)' : painScoreValue <= 3 ? ' (Mild)' : ''}` : "Score: 5"}
                     {...register("painScore")}
                   />
@@ -305,7 +311,10 @@ export default function BookingForm({
                 )}
               </div>
 
-              <div className="flex items-center p-4 bg-slate-50 rounded-xl border border-slate-200 hover:border-cyan-300 transition-colors">
+              <div
+                className="flex items-center p-4 bg-slate-50 rounded-xl border border-slate-200 hover:border-cyan-300 transition-colors"
+                title="Check this if you have digital or physical copies of your scans"
+              >
                 {/* Clinical Context: MRI Availability */}
                 <input
                   type="checkbox"

@@ -1,4 +1,5 @@
 import { SITE_URL } from '../../../src/lib/seo';
+import { YASHODA_GEO } from '@/src/data/locations';
 
 export default function HospitalSchema() {
   const schema = {
@@ -18,8 +19,8 @@ export default function HospitalSchema() {
     },
     "geo": {
       "@type": "GeoCoordinates",
-      "latitude": "17.3750",
-      "longitude": "78.5147"
+      "latitude": YASHODA_GEO.latitude,
+      "longitude": YASHODA_GEO.longitude
     },
     "medicalSpecialty": [
       "Neurosurgery",

@@ -15,8 +15,8 @@ import CostTransparencySection from '@/src/components/CostTransparencySection';
 import PatientJourneySection from '@/src/components/PatientJourneySection';
 
 const baseMetadata = makeMetadata({
-  title: 'Spinal Fusion Surgery Hyderabad',
-  description: 'Expert spinal fusion surgery (TLIF/PLIF) by Dr. Sayuj Krishnan. Stabilization for spondylolisthesis and fractures. Minimally invasive screw fixation.',
+  title: 'Spinal Fusion & Fracture Surgery Hyderabad | Best TLIF Surgeon',
+  description: 'Expert Spinal Fusion & Fracture Surgery in Hyderabad. Minimally Invasive TLIF for Spondylolisthesis and Trauma Fixation by Dr. Sayuj Krishnan.',
   canonicalPath: '/services/spinal-fusion-surgery-hyderabad',
 });
 
@@ -24,11 +24,15 @@ export const metadata: Metadata = {
   ...baseMetadata,
   keywords: [
     "spinal fusion surgery hyderabad",
+    "spine fracture surgery hyderabad",
+    "spine trauma surgeon",
     "lumbar fusion surgery",
     "spinal fixation surgery",
     "spondylolisthesis surgery hyderabad",
     "TLIF surgery cost hyderabad",
-    "spine screw surgery"
+    "spine screw surgery",
+    "broken spine treatment",
+    "vertebral fracture fixation"
   ],
   openGraph: {
     title: baseMetadata.title,
@@ -115,6 +119,14 @@ export default function SpinalFusionPage() {
     {
       question: 'How long do implants stay in the body?',
       answer: 'The titanium screws and rods are designed to stay in your body permanently. They do not trigger metal detectors and rarely need removal unless there is an infection or discomfort.'
+    },
+    {
+      question: 'Is Artificial Disc Replacement better than Spinal Fusion?',
+      answer: 'For younger patients with healthy facet joints, Disc Replacement is better as it preserves motion. However, if you have spinal instability (spondylolisthesis) or severe arthritis, Fusion (TLIF) is the gold standard for long-term pain relief and stability.'
+    },
+    {
+      question: 'How are spine fractures treated?',
+      answer: 'Stable fractures may heal with bracing and rest. However, unstable fractures from accidents (trauma) often require surgical fixation with screws and rods to prevent paralysis and allow early walking. Dr. Sayuj specializes in minimally invasive percutaneous screw fixation for fractures.'
     }
   ];
 
@@ -127,8 +139,8 @@ export default function SpinalFusionPage() {
   return (
     <>
       <MedicalWebPageSchema
-        title="Spinal Fusion Surgery in Hyderabad | TLIF & Fixation Surgery"
-        description="Expert spinal fusion surgery (TLIF/PLIF) by Dr. Sayuj Krishnan. Stabilization for spondylolisthesis and fractures. Minimally invasive screw fixation."
+        title="Spinal Fusion & Fracture Surgery Hyderabad | TLIF & Fixation"
+        description="Expert spinal fusion surgery (TLIF/PLIF) by Dr. Sayuj Krishnan. Stabilization for spondylolisthesis and traumatic fractures. Minimally invasive screw fixation."
         pageSlug="/services/spinal-fusion-surgery-hyderabad"
         pageType="service"
         serviceOrCondition="Spinal Fusion Surgery"
@@ -169,6 +181,30 @@ export default function SpinalFusionPage() {
                 The most common technique we use is <strong>TLIF (Transforaminal Lumbar Interbody Fusion)</strong>, which allows for nerve decompression and 360-degree fusion with minimal nerve retraction.
               </p>
             </div>
+          </section>
+
+          <section className="mb-12 bg-red-50 border border-red-100 rounded-lg p-8 shadow-sm">
+             <div className="flex items-start gap-4">
+               <div className="text-4xl">🚨</div>
+               <div>
+                  <h2 className="text-2xl font-bold text-red-800 mb-3">Spine Fractures & Trauma Care</h2>
+                  <p className="text-gray-700 mb-4">
+                    Severe back pain after a fall or accident could indicate a <strong>spinal fracture</strong>.
+                    Unstable fractures can damage the spinal cord and cause paralysis if not treated urgently.
+                  </p>
+                  <p className="text-gray-700 mb-6">
+                    Dr. Sayuj performs <strong>emergency spine fixation</strong> (screws & rods) to stabilize the broken bone, protect the nerves, and get the patient out of bed immediately.
+                  </p>
+                  <div className="flex flex-wrap gap-4">
+                     <Link href="/emergency-rehabilitation" className="bg-red-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-red-700 transition-colors">
+                        Emergency Trauma Services →
+                     </Link>
+                     <Link href="/conditions/osteoporotic-spine-fracture-hyderabad" className="bg-white text-red-700 border border-red-200 px-6 py-2 rounded-full font-semibold hover:bg-red-50 transition-colors">
+                        Osteoporotic Fractures (Elderly) →
+                     </Link>
+                  </div>
+               </div>
+             </div>
           </section>
 
           <section className="mb-12 bg-white border border-green-200 rounded-lg p-8 shadow-sm">

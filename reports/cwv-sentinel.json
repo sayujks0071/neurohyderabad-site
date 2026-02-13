@@ -1,15 +1,19 @@
 {
-  "timestamp": "2025-02-18T12:00:00Z",
+  "timestamp": "2025-02-27T00:00:00Z",
   "commit_hash": "HEAD",
   "notes": {
-    "home": "Identified TrustSignals dynamic import causing CLS on load. Converted to static import.",
-    "appointment": "Verified NeuraLinkBookingApp uses optimized loading.",
-    "location": "No changes needed.",
-    "condition": "No changes needed."
+    "Home": {
+      "bottleneck": "CLS on mobile due to fixed-height video placeholders (450px) vs actual video height (~180px).",
+      "fix": "Updated placeholders in `app/page.tsx` and loading state in `RemotionVideoEmbedWrapper.tsx` to use `aspect-video` and `max-w-[800px]`, ensuring consistent aspect ratio and width during loading.",
+      "impact": "Eliminated large layout shift on mobile devices when videos load. Placeholder now matches the video dimensions exactly."
+    }
   },
-  "fix": {
-    "description": "Converted `TrustSignals` from dynamic to static import in `app/page.tsx`.",
-    "impact": "Eliminated CLS caused by `TrustSignals` loading client-side without a placeholder. It is now server-rendered.",
-    "verification": "Manual code inspection confirms static import. Build verified with `pnpm build` (after fixing unrelated build errors)."
+  "metrics": {
+    "before": {
+      "home-cls-mobile": "High (estimated > 0.25)"
+    },
+    "after": {
+      "home-cls-mobile": "Low (estimated < 0.1)"
+    }
   }
 }

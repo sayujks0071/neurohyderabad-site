@@ -137,17 +137,35 @@ export const analytics = {
     });
   },
 
-  appointmentSubmit: (pageSlug: string, errorCount: number = 0) => {
+  appointmentSubmit: (pageSlug: string, source: string, errorCount: number = 0) => {
     track('Appointment_Submit', {
       page_slug: pageSlug,
+      source: source,
       form_errors_count: errorCount
     });
   },
 
-  appointmentSuccess: (pageSlug: string, serviceOrCondition?: string) => {
+  appointmentSuccess: (pageSlug: string, source: string, serviceOrCondition?: string, additionalProps: Record<string, any> = {}) => {
     track('Appointment_Success', {
       page_slug: pageSlug,
-      service_or_condition: serviceOrCondition
+      source: source,
+      service_or_condition: serviceOrCondition,
+      ...additionalProps
+    });
+  },
+
+  leadSubmit: (pageSlug: string, source: string) => {
+    track('Lead_Submit', {
+      page_slug: pageSlug,
+      source: source
+    });
+  },
+
+  leadSuccess: (pageSlug: string, source: string, additionalProps: Record<string, any> = {}) => {
+    track('Lead_Success', {
+      page_slug: pageSlug,
+      source: source,
+      ...additionalProps
     });
   },
 
@@ -164,6 +182,14 @@ export const analytics = {
     track('Phone_Click', {
       page_slug: pageSlug,
       phone_type: phoneType
+    });
+  },
+
+  phoneCall: (pageSlug: string, phoneNumber: string, source: string) => {
+    track('Phone_Call', {
+      page_slug: pageSlug,
+      phone_number: phoneNumber,
+      source: source
     });
   },
 
@@ -274,6 +300,16 @@ export const analytics = {
     end: () => track('AI_Session_End', {}),
     error: (message: string) => track('AI_Session_Error', { error_message: message }),
     message: (role: 'user' | 'assistant') => track('AI_Message', { role })
+  },
+
+  // ChatBot specific events
+  chat: {
+    open: (source: string) => track('chat_widget_open', { source }),
+    messageSent: (source: string) => track('chat_message_sent', { source }),
+    responseReceived: (source: string, durationMs: number, success: boolean) =>
+      track('chat_response_received', { source, duration_ms: durationMs, success }),
+    error: (source: string, durationMs: number, error: string) =>
+      track('chat_error', { source, duration_ms: durationMs, error_message: error })
   }
 };
 

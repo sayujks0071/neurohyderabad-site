@@ -13,7 +13,7 @@ export const maxDuration = 30;
 
 export async function GET(request: NextRequest) {
   // 🛡️ Sentinel: Protect sensitive manage endpoint
-  const auth = verifyAdminAccess(request);
+  const auth = await verifyAdminAccess(request);
   if (!auth.isAuthorized) {
     return auth.response!;
   }
@@ -63,7 +63,7 @@ export async function GET(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   // 🛡️ Sentinel: Protect sensitive delete endpoint
-  const auth = verifyAdminAccess(request);
+  const auth = await verifyAdminAccess(request);
   if (!auth.isAuthorized) {
     return auth.response!;
   }

@@ -1,13 +1,14 @@
 import { notFound } from 'next/navigation';
 import SchemaScript from '@/app/_schema/Script';
-import NAP from '@/app/_components/NAP';
-import StandardCTA from '@/app/_components/StandardCTA';
-import MapCard from '@/app/_components/MapCard';
+import { LocationCTAs } from '@/src/components/locations/LocationCTAs';
+import { LocationMapEmbed } from '@/src/components/locations/LocationMapEmbed';
 import { getLocationById } from '@/src/data/locations';
 import { Metadata } from 'next';
 import { makeMetadata } from '@/app/_lib/meta';
 import { SITE_URL } from '@/src/lib/seo';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
+import { LocationSchema } from '@/src/components/locations/LocationSchema';
+import { LocationNAPCard } from '@/src/components/locations/LocationNAPCard';
 
 // Ensure this route is fully statically generated (no dynamic fallback SSR).
 export const dynamic = 'force-static';
@@ -123,46 +124,11 @@ export default async function AreaPage({ params }: { params: Promise<{ area: str
     notFound();
   }
 
-  const malakpetLocation = getLocationById('malakpet');
-  if (!malakpetLocation) throw new Error("Critical: Malakpet location data missing");
+  // Use the specific location data
+  const location = getLocationById(area);
+  if (!location) throw new Error(`Critical: Location data missing for area: ${area}`);
 
   const pageUrl = `${SITE_URL}/near/${area}`;
-
-  const clinicSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'MedicalClinic',
-    '@id': `${pageUrl}#clinic`,
-    name: malakpetLocation.name,
-    url: pageUrl,
-    telephone: malakpetLocation.telephone,
-    // email: not in SSoT, usually avoided in schema unless public
-    areaServed: data.name,
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: malakpetLocation.address.streetAddress,
-      addressLocality: malakpetLocation.address.addressLocality,
-      addressRegion: malakpetLocation.address.addressRegion,
-      postalCode: malakpetLocation.address.postalCode,
-      addressCountry: malakpetLocation.address.addressCountry,
-    },
-    geo: malakpetLocation.geo ? {
-      '@type': 'GeoCoordinates',
-      latitude: malakpetLocation.geo.latitude,
-      longitude: malakpetLocation.geo.longitude,
-    } : undefined,
-    hasMap: malakpetLocation.google_maps_place_url, // Using canonical Maps URL for hasMap
-  };
-
-  const breadcrumbSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    '@id': `${pageUrl}#breadcrumb`,
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-      { '@type': 'ListItem', position: 2, name: 'Neighbourhoods', item: `${SITE_URL}/near` },
-      { '@type': 'ListItem', position: 3, name: data.name, item: pageUrl },
-    ],
-  };
 
   const howToSchema = {
     '@context': 'https://schema.org',
@@ -176,7 +142,7 @@ export default async function AreaPage({ params }: { params: Promise<{ area: str
         '@type': 'HowToStep',
         position: 1,
         name: 'Plan your appointment',
-        text: `Call or WhatsApp ${malakpetLocation.telephone} to confirm OPD slot with Dr. Sayuj Krishnan.`,
+        text: `Call or WhatsApp ${location.telephone} to confirm OPD slot with Dr. Sayuj Krishnan.`,
       },
       {
         '@type': 'HowToStep',
@@ -193,14 +159,21 @@ export default async function AreaPage({ params }: { params: Promise<{ area: str
     ],
   };
 
+  const breadcrumb = [
+      { name: 'Neighbourhoods', item: `${SITE_URL}/near` },
+      { name: data.name, item: pageUrl },
+  ];
+
   return (
     <main className="prose max-w-3xl mx-auto px-4 py-16">
+      <LocationSchema location={location} breadcrumb={breadcrumb} />
+
       <h1>Brain &amp; Spine Care near {data.name}</h1>
 
       <section className="not-prose mb-8 rounded-xl border border-emerald-100 bg-emerald-50 p-5 text-sm leading-6">
         <h2 className="mb-2 text-base font-semibold text-emerald-900">Quick facts</h2>
         <ul className="list-disc pl-5 text-emerald-900">
-          <li>Consultations and surgeries are performed at {malakpetLocation.address.streetAddress} (OPD Block).</li>
+          <li>Consultations and surgeries are performed at {location.address.streetAddress} (OPD Block).</li>
           <li>Travel from {data.name} typically takes {data.travelTime.split(' (')[0]} — plan buffer for peak hours.</li>
           <li>Tele-consult triage helps review MRI and plan admission before you travel in.</li>
           <li>On-site parking and Malakpet Metro station make OPD visits convenient.</li>
@@ -241,23 +214,23 @@ export default async function AreaPage({ params }: { params: Promise<{ area: str
         </ul>
       </section>
 
-      <StandardCTA className="my-8" />
+      <div className="my-8">
+        <LocationCTAs mode="location" locationId={location.id} />
+      </div>
 
       <section>
         <h2>Directions</h2>
         <p>Set your navigation to “Yashoda Hospital Malakpet OPD Block”. Use the map below for live traffic updates.</p>
-        <MapCard area={data.name} mapUrl={malakpetLocation.embed_url} />
+        <LocationMapEmbed mode="location" locationId={location.id} className="mt-6" />
       </section>
 
-      <NAP />
+      <LocationNAPCard location={location} />
 
       {/* Added Local Pathways */}
       <div className="not-prose mt-12">
-        <LocalPathways mode="service" />
+        <LocalPathways mode="location" locationId={location.id} />
       </div>
 
-      <SchemaScript data={clinicSchema} />
-      <SchemaScript data={breadcrumbSchema} />
       <SchemaScript data={howToSchema} />
     </main>
   );

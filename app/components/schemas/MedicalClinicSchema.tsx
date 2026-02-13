@@ -1,28 +1,36 @@
 import { SITE_URL } from '../../../src/lib/seo';
+import {
+  CANONICAL_PHYSICIAN_NAME,
+  CANONICAL_TELEPHONE,
+  YASHODA_MALAKPET_ADDRESS,
+  YASHODA_GEO,
+  CANONICAL_MAPS_URL,
+  SOCIAL_PROFILES
+} from '@/src/data/locations';
 
 export default function MedicalClinicSchema() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "MedicalClinic",
     "@id": `${SITE_URL}/#medicalclinic`,
-    "name": "Dr. Sayuj Krishnan | Spine Surgeon in Hyderabad",
+    "name": CANONICAL_PHYSICIAN_NAME,
     "description": "Premier neurosurgery and spine surgery clinic in Hyderabad offering minimally invasive procedures, endoscopic spine surgery, brain tumor surgery, and advanced neurosurgical care.",
     "url": SITE_URL,
     "image": `${SITE_URL}/images/og-default.jpg`,
-    "telephone": "+919778280044",
+    "telephone": CANONICAL_TELEPHONE,
     "email": "hellodr@drsayuj.info",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Room No 317, OPD Block, Yashoda Hospital",
-      "addressLocality": "Malakpet",
-      "addressRegion": "Telangana",
-      "postalCode": "500036",
-      "addressCountry": "IN"
+      "streetAddress": YASHODA_MALAKPET_ADDRESS.streetAddress,
+      "addressLocality": YASHODA_MALAKPET_ADDRESS.addressLocality,
+      "addressRegion": YASHODA_MALAKPET_ADDRESS.addressRegion,
+      "postalCode": YASHODA_MALAKPET_ADDRESS.postalCode,
+      "addressCountry": YASHODA_MALAKPET_ADDRESS.addressCountry
     },
     "geo": {
       "@type": "GeoCoordinates",
-      "latitude": 17.3850,
-      "longitude": 78.4867
+      "latitude": YASHODA_GEO.latitude,
+      "longitude": YASHODA_GEO.longitude
     },
     "openingHoursSpecification": [
       {
@@ -139,14 +147,8 @@ export default function MedicalClinicSchema() {
         "name": "Secunderabad"
       }
     ],
-    "hasMap": "https://www.google.com/maps/place/Dr+Sayuj+Krishnan",
-    "sameAs": [
-      "https://www.yashodahospitals.com/doctor/dr-sayuj-krishnan/",
-      "https://www.practo.com/hyderabad/doctor/dr-sayuj-krishnan-neurosurgeon",
-      "https://www.justdial.com/Hyderabad/Dr-Sayuj-Krishnan-Neurosurgeon-Malakpet",
-      "https://www.linkedin.com/in/dr-sayuj-krishnan",
-      "https://g.co/kgs/9366939683880052414"
-    ],
+    "hasMap": CANONICAL_MAPS_URL,
+    "sameAs": SOCIAL_PROFILES,
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "4.9",

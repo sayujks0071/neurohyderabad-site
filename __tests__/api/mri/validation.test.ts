@@ -3,7 +3,7 @@ import { NextRequest } from 'next/server';
 import { extractPdfTextInSandbox } from '@/lib/mri/pdfExtract';
 import { interpretReportText } from '@/lib/interpretReport';
 import { rateLimit } from '@/src/lib/rate-limit';
-import { vi, describe, it, expect } from 'vitest';
+import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
 
 vi.mock('@/lib/mri/pdfExtract');
 vi.mock('@/lib/interpretReport');
@@ -22,12 +22,22 @@ function createRequest(file: File | null) {
 }
 
 describe('POST /api/mri/analyze', () => {
-  // Mock rate limit to always succeed
-  vi.mocked(rateLimit).mockReturnValue({
-    success: true,
-    limit: 10,
-    remaining: 10,
-    reset: Date.now() + 1000,
+  const originalEnv = process.env;
+
+  beforeEach(() => {
+    process.env = { ...originalEnv };
+    process.env.MRI_ANALYZER_ENABLED = '1'; // Enable feature for validation tests
+    // Mock rate limit to always succeed
+    vi.mocked(rateLimit).mockReturnValue({
+        success: true,
+        limit: 10,
+        remaining: 10,
+        reset: Date.now() + 1000,
+    });
+  });
+
+  afterEach(() => {
+    process.env = originalEnv;
   });
 
   it('should return 400 if no file is uploaded', async () => {

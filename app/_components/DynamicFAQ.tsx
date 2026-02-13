@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useId } from 'react';
 
 interface FAQ {
   id: string;
@@ -21,6 +21,7 @@ export default function DynamicFAQ({
   numQuestions = 10,
   className = '' 
 }: DynamicFAQProps) {
+  const componentId = useId();
   const [faqs, setFaqs] = useState<FAQ[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -111,6 +112,8 @@ export default function DynamicFAQ({
               onClick={() => setOpenId(openId === faq.id ? null : faq.id)}
               className="w-full text-left p-4 font-semibold flex justify-between items-center hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-inset"
               aria-expanded={openId === faq.id}
+              aria-controls={`faq-content-${componentId}-${faq.id}`}
+              id={`faq-trigger-${componentId}-${faq.id}`}
             >
               <span className="pr-4">{faq.question}</span>
               <span className="text-primary-600 text-xl flex-shrink-0">
@@ -119,7 +122,12 @@ export default function DynamicFAQ({
             </button>
             
             {openId === faq.id && (
-              <div className="px-4 pb-4 pt-2 border-t border-gray-100">
+              <div
+                className="px-4 pb-4 pt-2 border-t border-gray-100"
+                id={`faq-content-${componentId}-${faq.id}`}
+                role="region"
+                aria-labelledby={`faq-trigger-${componentId}-${faq.id}`}
+              >
                 <div className="prose prose-sm max-w-none text-gray-700">
                   {faq.answer.split('\n').map((paragraph, idx) => (
                     <p key={idx} className="mb-2 last:mb-0">

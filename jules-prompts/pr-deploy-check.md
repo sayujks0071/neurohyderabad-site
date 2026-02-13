@@ -1,6 +1,6 @@
 # Daily PR & Deploy Check
 
-Review the PRs merged in the last 24 hours.
+Review PRs merged in the last 24 hours.
 1. Check for any build failures or reported regressions.
 2. Verify that `AGENTS.md` instructions were followed (e.g., verifying work).
 3. Check `reports/cwv-sentinel.json` for any performance regressions.
@@ -12,4 +12,6 @@ Review the PRs merged in the last 24 hours.
 
 <!-- Jules Automation -->
 <!-- Managed by Jules -->
-<!-- v1.8 -->
+<!-- v2.4 -->
+
+<!-- Verified by Jules -->

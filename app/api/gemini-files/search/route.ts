@@ -22,7 +22,7 @@ export const maxDuration = 60; // 60 seconds for complex searches
 
 export async function POST(request: NextRequest) {
   // 🛡️ Sentinel: Protect sensitive search endpoint
-  const auth = verifyAdminAccess(request);
+  const auth = await verifyAdminAccess(request);
   if (!auth.isAuthorized) {
     return auth.response!;
   }

@@ -18,6 +18,7 @@ import { patientStories } from '@/src/content/stories';
 import SurgeryComparisonTable from '@/src/components/SurgeryComparisonTable';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
+import EndoscopicProcedureSteps from '@/src/components/EndoscopicProcedureSteps';
 
 const SERVICE_SLUG = 'endoscopic-spine-surgery-hyderabad';
 
@@ -25,7 +26,7 @@ const SERVICE_SLUG = 'endoscopic-spine-surgery-hyderabad';
 export const revalidate = 3600; // Revalidate every hour
 
 const baseMetadata = makeMetadata({
-  title: 'Endoscopic Spine Surgery Hyderabad | Dr Sayuj | Same-Day Discharge',
+  title: 'Endoscopic Spine Surgery Hyderabad | Same-Day Discharge',
   description:
     'Endoscopic spine surgery in Hyderabad by Dr. Sayuj Krishnan (1000+ cases). 7mm keyhole, 90% same-day discharge, ₹95K–₹1.35L. Book now.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
@@ -33,7 +34,7 @@ const baseMetadata = makeMetadata({
 
 export const metadata: Metadata = {
   ...baseMetadata,
-  title: 'Endoscopic Spine Surgery Hyderabad | Dr Sayuj | Same-Day Discharge',
+  title: 'Endoscopic Spine Surgery Hyderabad | Same-Day Discharge',
   description:
     'Endoscopic spine surgery in Hyderabad by Dr. Sayuj Krishnan (1000+ cases). 7mm keyhole, 90% same-day discharge, ₹95K–₹1.35L. Book now.',
   keywords: [
@@ -133,6 +134,10 @@ const faqs = [
   {
     question: 'How does endoscopic spine surgery recovery compare to microscopic surgery?',
     answer: 'Endoscopic surgery typically offers a faster recovery. Since it uses a smaller incision (8mm vs 2-3cm) and avoids cutting muscle, most patients walk within 3 hours and return to work in 3-5 days, compared to 2-3 weeks for microscopic surgery.'
+  },
+  {
+    question: 'Is Laser Spine Surgery better than Endoscopic Spine Surgery?',
+    answer: 'Not necessarily. "Laser spine surgery" is often a marketing term for limited thermal ablation. Endoscopic spine surgery is a comprehensive structural solution that physically removes bone spurs or disc fragments under high-definition vision, offering more durable relief for complex conditions.'
   },
   // New FAQs
   {
@@ -298,34 +303,6 @@ const ADVANCED_TECHNIQUES = [
   }
 ];
 
-const SURGERY_STEPS = [
-  {
-    step: "Step 1: Anesthesia",
-    title: "Comfort & Safety",
-    description: "The procedure is typically performed under local or regional anaesthesia with mild sedation. You remain comfortable but awake, allowing you to communicate with the surgeon if needed. General anaesthesia is available for anxious patients."
-  },
-  {
-    step: "Step 2: The Keyhole",
-    title: "Tiny Incision",
-    description: "A small incision of about 7-8mm (less than 1 cm) is made. This is covered by a small Band-Aid after surgery, leaving minimal to no scarring."
-  },
-  {
-    step: "Step 3: Access",
-    title: "Muscle Preservation",
-    description: "Instead of cutting through muscles (as in open surgery), we use a series of dilators to gently separate muscle fibres. This creates a tunnel to the spine without tissue damage."
-  },
-  {
-    step: "Step 4: The Procedure",
-    title: "High-Definition Decompression",
-    description: "An endoscope with a 4K camera is inserted. Dr. Sayuj views the nerves on a large monitor and precisely removes the disc herniation or bone spurs pressing on the nerve using micro-instruments."
-  },
-  {
-    step: "Step 5: Immediate Relief",
-    title: "Closure & Recovery",
-    description: "The instruments are removed, and the skin is closed with a single stitch or skin glue. Most patients feel immediate relief from leg pain and are encouraged to walk within 2-3 hours."
-  }
-];
-
 // Google Business Profile JSON-LD for Endoscopic Spine Surgery
 
 export default function EndoscopicSpineSurgeryHyderabadPage() {
@@ -462,23 +439,7 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
           </div>
         </section>
 
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold text-blue-900 mb-8">Inside the Operation Theatre: Step-by-Step</h2>
-          <div className="relative border-l-2 border-blue-200 ml-3 space-y-10 pb-2">
-            {SURGERY_STEPS.map((item, index) => (
-              <div key={index} className="relative pl-8">
-                {/* Timeline Dot */}
-                <span className="absolute -left-[9px] top-1 h-5 w-5 rounded-full bg-blue-600 border-4 border-white shadow-sm ring-1 ring-blue-100"></span>
-
-                <div className="bg-white border border-gray-100 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
-                   <div className="text-xs font-bold text-blue-600 uppercase tracking-wide mb-1">{item.step}</div>
-                   <h3 className="text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
-                   <p className="text-gray-700 leading-relaxed">{item.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
+        <EndoscopicProcedureSteps />
 
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-blue-900 mb-6">Clinical Success Rates</h2>
@@ -524,49 +485,6 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
           </div>
         </section>
 
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold text-blue-900 mb-6">Step-by-Step: Inside the Operation Theatre</h2>
-          <p className="text-gray-700 mb-8">
-            Many patients feel anxious about what happens during the surgery. Because this is a conscious or lightly sedated procedure for many, transparency is key. Here is the exact 45-60 minute protocol we follow:
-          </p>
-          <div className="relative border-l-4 border-blue-200 ml-4 space-y-10">
-            <div className="relative pl-8">
-              <span className="absolute -left-[21px] top-0 flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 ring-4 ring-white">
-                <span className="text-blue-600 font-bold">1</span>
-              </span>
-              <h3 className="text-xl font-semibold text-blue-900 mb-2">Anesthesia & Positioning</h3>
-              <p className="text-gray-700">You lie face down on a comfortable gel frame. Local anaesthesia is applied to the skin, or mild sedation is given so you sleep but can still wake up if needed. You are comfortable throughout.</p>
-            </div>
-            <div className="relative pl-8">
-              <span className="absolute -left-[21px] top-0 flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 ring-4 ring-white">
-                <span className="text-blue-600 font-bold">2</span>
-              </span>
-              <h3 className="text-xl font-semibold text-blue-900 mb-2">Targeting the "Keyhole"</h3>
-              <p className="text-gray-700">Using a live X-ray (C-arm), Dr. Sayuj marks the exact spot (accurate to the millimetre) on your skin. A tiny 7mm incision is made—about the size of a fingernail.</p>
-            </div>
-            <div className="relative pl-8">
-              <span className="absolute -left-[21px] top-0 flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 ring-4 ring-white">
-                <span className="text-blue-600 font-bold">3</span>
-              </span>
-              <h3 className="text-xl font-semibold text-blue-900 mb-2">The Endoscopic Work</h3>
-              <p className="text-gray-700">A thin tube (endoscope) with a 4K camera is inserted. The herniated disc or bone spur pressing on the nerve is magnified on a large screen and carefully removed using micro-instruments.</p>
-            </div>
-            <div className="relative pl-8">
-              <span className="absolute -left-[21px] top-0 flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 ring-4 ring-white">
-                <span className="text-blue-600 font-bold">4</span>
-              </span>
-              <h3 className="text-xl font-semibold text-blue-900 mb-2">The "Free Nerve" Check</h3>
-              <p className="text-gray-700">Dr. Sayuj visually confirms the nerve is floating freely. If you are awake, he may ask you to move your leg to confirm the pain is gone instantly.</p>
-            </div>
-             <div className="relative pl-8">
-              <span className="absolute -left-[21px] top-0 flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 ring-4 ring-white">
-                <span className="text-blue-600 font-bold">5</span>
-              </span>
-              <h3 className="text-xl font-semibold text-blue-900 mb-2">Closure & Walk</h3>
-              <p className="text-gray-700">The tube is removed. No stitches are usually needed—just a small waterproof band-aid. You are shifted to the recovery room and can typically walk to the washroom within 2-3 hours.</p>
-            </div>
-          </div>
-        </section>
 
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-blue-900 mb-6">Recovery Timeline & Return to Work</h2>
@@ -605,6 +523,35 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
         </section>
 
         <section className="mb-16">
+          <h2 className="text-3xl font-bold text-blue-900 mb-6">Laser vs. Endoscopic Spine Surgery</h2>
+          <p className="text-gray-700 mb-6">
+            Many patients search for "Laser Spine Surgery" hoping for the least invasive option. It is important to understand the difference between marketing terms and medical reality.
+          </p>
+          <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm overflow-hidden mb-12">
+            <div className="grid grid-cols-3 gap-4 mb-4 border-b border-gray-100 pb-4">
+               <div className="font-bold text-gray-900">Feature</div>
+               <div className="font-bold text-blue-700">Endoscopic Surgery</div>
+               <div className="font-bold text-gray-500">Laser Surgery</div>
+            </div>
+            <div className="space-y-4">
+               <div className="grid grid-cols-3 gap-4">
+                  <div className="text-sm font-medium text-gray-700">Technique</div>
+                  <div className="text-sm text-gray-600">Physical removal of disc/bone via micro-tools</div>
+                  <div className="text-sm text-gray-600">Thermal ablation (burning) of tissue</div>
+               </div>
+               <div className="grid grid-cols-3 gap-4">
+                  <div className="text-sm font-medium text-gray-700">Effectiveness</div>
+                  <div className="text-sm text-gray-600 font-semibold text-green-700">High (Structural Correction)</div>
+                  <div className="text-sm text-gray-600">Low to Moderate (Symptom masking)</div>
+               </div>
+               <div className="grid grid-cols-3 gap-4">
+                  <div className="text-sm font-medium text-gray-700">Best For</div>
+                  <div className="text-sm text-gray-600">Herniated discs, Stenosis, Bone spurs</div>
+                  <div className="text-sm text-gray-600">Small contained discs only</div>
+               </div>
+            </div>
+          </div>
+
           <h2 className="text-3xl font-bold text-blue-900 mb-6">Endoscopic vs. Traditional Spine Surgery</h2>
           <p className="text-gray-700 mb-6">
             Many patients ask why endoscopic surgery is preferred over traditional open methods. The key difference lies in how we approach the spine—preserving your natural anatomy rather than cutting through it.
@@ -691,6 +638,27 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
              </div>
              <p className="text-xs text-gray-500 mt-3">*Costs are approximate and vary by room category and implant needs. Higher initial cost of endoscopy is often offset by shorter hospital stay and faster return to work.</p>
           </div>
+
+          <div className="mt-12 bg-indigo-50 border border-indigo-100 rounded-xl p-8">
+            <h3 className="text-2xl font-bold text-indigo-900 mb-4">"Laser Spine Surgery" vs. Endoscopic Surgery</h3>
+            <p className="text-gray-700 mb-4">
+              Many patients ask for "Laser Surgery" because they believe it is the most advanced. However, there is a crucial difference:
+            </p>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-white p-5 rounded-lg border border-indigo-200">
+                <h4 className="font-bold text-gray-900 mb-2">Laser Spine Surgery</h4>
+                <p className="text-sm text-gray-600">
+                  Often refers to burning (ablating) the disc surface. It cannot remove large bone spurs or extensive herniations. <strong>Limited effectiveness for severe sciatica.</strong>
+                </p>
+              </div>
+              <div className="bg-white p-5 rounded-lg border border-indigo-200">
+                <h4 className="font-bold text-indigo-700 mb-2">Endoscopic Spine Surgery (What We Do)</h4>
+                <p className="text-sm text-gray-600">
+                  Uses micro-instruments under 4K vision to physically <strong>remove</strong> the compression. We may use a laser as a <em>tool</em> within the endoscope, but the main work is structural correction.
+                </p>
+              </div>
+            </div>
+          </div>
         </section>
 
         <section className="mb-16">
@@ -762,8 +730,19 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-blue-900 mb-6">Serving Patients Across Hyderabad</h2>
           <p className="text-gray-700 mb-6">
-            Our Malakpet location is convenient for patients travelling from Dilsukhnagar, LB Nagar, Charminar, Koti, and other
-            neighbourhoods. We help with corporate approvals, insurance paperwork, and travel coordination for families who support
+            Our Malakpet location is centrally positioned to serve patients from East and South Hyderabad. We are easily accessible via the Red Line Metro (Malakpet Station) and major bus routes.
+          </p>
+
+          <div className="mb-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+            {['Dilsukhnagar (10 min)', 'LB Nagar (15 min)', 'Charminar (15 min)', 'Koti/Abids (10 min)', 'Santosh Nagar (12 min)', 'Saidabad (5 min)', 'Amberpet (10 min)', 'Uppal (20 min)'].map((area) => (
+              <div key={area} className="bg-gray-50 border border-gray-200 rounded-lg p-3 text-center text-sm font-medium text-gray-700">
+                📍 {area}
+              </div>
+            ))}
+          </div>
+
+          <p className="text-gray-700 mb-6">
+            We help with corporate approvals, insurance paperwork, and travel coordination for families who support
             you during the procedure.
           </p>
           <div className="grid md:grid-cols-2 gap-6">

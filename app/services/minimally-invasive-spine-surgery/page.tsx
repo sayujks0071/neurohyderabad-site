@@ -19,10 +19,11 @@ import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
 import PatientJourneySection from '@/src/components/PatientJourneySection';
 import SurgeryComparisonTable from '@/src/components/SurgeryComparisonTable';
+import EndoscopicProcedureSteps from '@/src/components/EndoscopicProcedureSteps';
 
 const baseMetadata = makeMetadata({
-  title: 'Minimally Invasive Spine Surgery Hyderabad | Day Care',
-  description: 'Advanced endoscopic spine surgery in Hyderabad. Tiny incision, no muscle cutting, same-day discharge. Expert care by Dr. Sayuj Krishnan. Get Cost Estimate.',
+  title: 'Minimally Invasive Spine Surgery Hyderabad | Day Care | Dr Sayuj',
+  description: 'Minimally Invasive Spine Surgery Hyderabad: Day Care procedure with same-day discharge. 1000+ successful endoscopic surgeries by Dr Sayuj. Book Consult.',
   canonicalPath: '/services/minimally-invasive-spine-surgery',
 });
 
@@ -222,8 +223,8 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
       <MedicalWebPageSchema
         pageType="service"
         pageSlug="/services/minimally-invasive-spine-surgery"
-        title="Endoscopic Spine Surgery Hyderabad | Dr. Sayuj Krishnan"
-        description="Expert endoscopic spine surgery in Hyderabad with Dr. Sayuj Krishnan. Minimally invasive procedures with same-day discharge at Yashoda Hospital Malakpet."
+        title="Minimally Invasive Spine Surgery Hyderabad | Day Care | Dr Sayuj"
+        description="Minimally Invasive Spine Surgery Hyderabad: Day Care procedure with same-day discharge. 1000+ successful endoscopic surgeries by Dr Sayuj. Book Consult."
         serviceOrCondition="Minimally Invasive Spine Surgery"
         lastReviewed="2025-10-19"
       />
@@ -306,6 +307,8 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
               with reduced trauma and quicker return to daily activities. <Link href="/services/endoscopic-spine-surgery-hyderabad/" className="text-blue-600 hover:underline">Learn more about our local patient journey for endoscopic spine surgery in Hyderabad.</Link>
             </p>
           </div>
+
+          <EndoscopicProcedureSteps />
 
           <div className="mt-8">
             <h3 className="text-2xl font-bold text-gray-900 mb-4">Compare: Endoscopic vs. Traditional Surgery</h3>

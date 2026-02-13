@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   User,
   Phone,
@@ -20,6 +20,9 @@ import {
   Check,
   Info,
   ShieldCheck,
+  Smile,
+  Meh,
+  Frown,
 } from "lucide-react";
 import {
   analyzeSymptoms,
@@ -32,6 +35,7 @@ import AppointmentScheduler from "./AppointmentScheduler";
 import SpeechButton from "./SpeechButton";
 import { trackConversionOnly } from "@/src/lib/google-ads-conversion";
 import { analytics } from "@/src/lib/analytics";
+import Button from "@/packages/appointment-form/ui/Button";
 import { CLINIC } from "@/app/_lib/clinic";
 import { APPOINTMENT_SUCCESS_MESSAGE } from "@/packages/appointment-form/constants";
 
@@ -86,10 +90,17 @@ const PatientPortal = () => {
 
   const [formData, setFormData] = useState(INITIAL_FORM_STATE);
   const [lastSubmittedData, setLastSubmittedData] = useState(INITIAL_FORM_STATE);
+  const successRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     analytics.appointmentStart('appointment-portal', 'general');
   }, []);
+
+  useEffect(() => {
+    if (isSubmitted && successRef.current) {
+      successRef.current.focus();
+    }
+  }, [isSubmitted]);
 
   const clinicName = "Dr. Sayuj Krishnan | Yashoda Hospitals, Malakpet";
   const clinicAddress = `${CLINIC.street}, ${CLINIC.city}, ${CLINIC.region} ${CLINIC.postalCode}`;
@@ -171,6 +182,8 @@ const PatientPortal = () => {
 
     try {
       const workflowAppointmentType = toWorkflowAppointmentType(formData.type);
+      analytics.appointmentSubmit('appointment-portal', 'neuralink');
+
       const response = await fetch("/api/workflows/booking", {
         method: "POST",
         headers: {
@@ -203,7 +216,7 @@ const PatientPortal = () => {
       setConfirmationMessage(payload?.confirmationMessage || null);
       trackConversionOnly();
 
-      analytics.appointmentSuccess('appointment-portal', workflowAppointmentType);
+      analytics.appointmentSuccess('appointment-portal', 'neuralink', workflowAppointmentType);
 
       setLastSubmittedData(formData);
       setFormData(INITIAL_FORM_STATE);
@@ -259,7 +272,12 @@ const PatientPortal = () => {
 
   if (isSubmitted) {
     return (
-      <div className="max-w-4xl mx-auto py-12 px-4 animate-in fade-in slide-in-from-bottom-8 duration-700">
+      <div
+        ref={successRef}
+        tabIndex={-1}
+        aria-live="polite"
+        className="max-w-4xl mx-auto py-12 px-4 animate-in fade-in slide-in-from-bottom-8 duration-700 outline-none"
+      >
         <div className="bg-white rounded-[2.5rem] shadow-2xl shadow-blue-900/10 border border-slate-100 overflow-hidden relative">
           <div className="absolute top-0 w-full h-2 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500" />
 
@@ -738,20 +756,33 @@ const PatientPortal = () => {
                           painScore: Number(e.target.value),
                         })
                       }
-                      className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                      className={`w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 transition-all ${
+                        formData.painScore <= 3
+                          ? "accent-green-600 focus:ring-green-500"
+                          : formData.painScore <= 7
+                          ? "accent-yellow-500 focus:ring-yellow-500"
+                          : "accent-red-600 focus:ring-red-500"
+                      }`}
                       aria-valuetext={`Score: ${formData.painScore}${formData.painScore >= 8 ? ' (Severe)' : formData.painScore <= 3 ? ' (Mild)' : ''}`}
                     />
                     <span className="text-sm font-bold text-slate-400" aria-hidden="true">10</span>
                   </div>
                   <div className="text-center mt-2">
                     <span
-                      className={`inline-block px-3 py-1 rounded-lg text-sm font-bold ${formData.painScore <= 3
+                      className={`inline-flex items-center gap-2 px-3 py-1 rounded-lg text-sm font-bold transition-colors ${formData.painScore <= 3
                         ? "bg-green-100 text-green-700"
                         : formData.painScore <= 7
                           ? "bg-yellow-100 text-yellow-700"
                           : "bg-red-100 text-red-700"
                         }`}
                     >
+                      {formData.painScore <= 3 ? (
+                        <Smile className="w-4 h-4" />
+                      ) : formData.painScore <= 7 ? (
+                        <Meh className="w-4 h-4" />
+                      ) : (
+                        <Frown className="w-4 h-4" />
+                      )}
                       Score: {formData.painScore}
                       {formData.painScore >= 8 && " (Severe)"}
                       {formData.painScore <= 3 && " (Mild)"}
@@ -826,33 +857,17 @@ const PatientPortal = () => {
               </div>
 
               <div className="pt-6 border-t border-slate-100">
-                <button
+                <Button
                   type="submit"
-                  disabled={isAnalyzing || isSyncing}
-                  className={`w-full py-4 rounded-2xl text-white font-bold text-lg shadow-xl transition-all flex items-center justify-center relative overflow-hidden ${isAnalyzing || isSyncing
-                    ? "bg-blue-600 opacity-50 cursor-not-allowed"
-                    : "bg-blue-600 hover:bg-blue-700 hover:shadow-blue-200"
-                    }`}
+                  isLoading={isAnalyzing || isSyncing}
+                  className="w-full py-4 rounded-2xl text-lg shadow-xl"
                 >
-                  {(isAnalyzing || isSyncing) && (
-                    <div className="absolute inset-0 bg-white/10 animate-pulse" />
-                  )}
-                  {isAnalyzing ? (
-                    <>
-                      <Loader2 className="w-5 h-5 animate-spin mr-2" />
-                      Triaging...
-                    </>
-                  ) : isSyncing ? (
-                    <>
-                      <Loader2 className="w-5 h-5 animate-spin mr-2" />
-                      Sending...
-                    </>
-                  ) : (
+                  {isAnalyzing ? "Triaging..." : isSyncing ? "Sending..." : (
                     <>
                       Confirm Booking <ChevronRight className="w-5 h-5 ml-2" />
                     </>
                   )}
-                </button>
+                </Button>
               </div>
             </div>
           </div>

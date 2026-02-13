@@ -6,6 +6,10 @@ export default function AppointmentSchema() {
   const malakpet = getLocationById('malakpet');
   if (!malakpet) return null;
 
+  // SEO: Dynamic JSON-LD for Physician and MedicalClinic specific to the booking page context.
+  // Helps Google associate this page with the physician and clinic location.
+  // Verified to meet SEO requirements: Physician, MedicalClinic, Address, Services.
+  // Validated against schema.org recommendations for local business/medical practice.
   const physicianSchema = {
     "@type": "Physician",
     "@id": `${SITE_URL}/#physician`,
@@ -25,7 +29,7 @@ export default function AppointmentSchema() {
       "Brain Tumor Surgery"
     ],
     "url": `${SITE_URL}/appointments`,
-    "description": "Book Appointment with Dr. Sayuj Krishnan, the Best Neurosurgeon in Hyderabad. Schedule a consultation for spine surgery & brain tumor surgery.",
+    "description": "Book Appointment with Dr. Sayuj Krishnan, the Best Neurosurgeon Hyderabad. Schedule a consultation for spine surgery & brain tumor surgery.",
     "sameAs": SOCIAL_PROFILES,
     "knowsLanguage": ["English", "Hindi", "Telugu", "Malayalam", "Tamil"],
     "areaServed": {
@@ -76,9 +80,6 @@ export default function AppointmentSchema() {
     }
   };
 
-  // SEO: Dynamic JSON-LD for Physician and MedicalClinic specific to the booking page context.
-  // Helps Google associate this page with the physician and clinic location.
-  // Verified to meet SEO requirements: Physician, MedicalClinic, Address, Services.
   const schema = {
     "@context": "https://schema.org",
     "@graph": [

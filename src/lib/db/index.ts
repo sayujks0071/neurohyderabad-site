@@ -227,6 +227,13 @@ export const appointments = {
     );
     return Number(result?.count || 0);
   },
+
+  findByWorkflowRunId: async (workflowRunId: string) => {
+    return db.queryOne(
+      'SELECT * FROM appointments WHERE workflow_run_id = $1',
+      [workflowRunId]
+    );
+  },
 };
 
 export const patients = {

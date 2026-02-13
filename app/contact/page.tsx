@@ -10,6 +10,8 @@ import Section from "../_components/Section";
 import Card from "../_components/Card";
 import Button from "../_components/Button";
 import LeadForm from "@/components/LeadForm";
+import MedicalWebPageSchema from "../components/schemas/MedicalWebPageSchema";
+import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
 
 const clinicSchema = getMedicalClinicSchema();
 
@@ -67,6 +69,22 @@ export default function ContactPage() {
   return (
     <>
       <JsonLd data={clinicSchema} />
+      <MedicalWebPageSchema
+        pageType="contact"
+        pageSlug="/contact"
+        title="Contact Dr Sayuj Krishnan | Neurosurgeon in Hyderabad"
+        description="Contact Dr Sayuj Krishnan for neurosurgical consultations. Phone: +91 9778280044, Email: hellodr@drsayuj.info. Located at Yashoda Hospital, Malakpet."
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Contact", path: "/contact" }
+        ]}
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Contact", path: "/contact" }
+        ]}
+      />
       <Breadcrumbs
         items={[
           { name: "Home", href: "/" },
@@ -256,6 +274,24 @@ export default function ContactPage() {
                   <h3 className="font-semibold text-blue-700 mb-2">Near HITEC City</h3>
                   <p className="text-sm text-gray-600">Travel time: 25-30 minutes</p>
                 </Link>
+              </div>
+            </Card>
+
+            <Card padding="lg">
+              <h2 className="text-2xl font-semibold mb-6 text-blue-700">Directions to Our Clinic</h2>
+              <div className="space-y-6">
+                <div>
+                  <h3 className="font-semibold text-lg text-gray-800 mb-2">From Secunderabad (via MG Road)</h3>
+                  <p className="text-gray-600">Take MG Road towards Koti. Cross the Chaderghat Bridge and turn left towards Malakpet. Yashoda Hospital will be on your left, opposite the Malakpet Metro Station.</p>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg text-gray-800 mb-2">From Hitech City / Gachibowli</h3>
+                  <p className="text-gray-600">Take the PVNR Expressway or ORR to Mehdipatnam, then proceed towards Nampally and Koti. Alternatively, take the Metro directly to Malakpet Station (Red Line).</p>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg text-gray-800 mb-2">From Charminar / Old City</h3>
+                  <p className="text-gray-600">Head towards Darulshifa and cross the Chaderghat Rotary. Continue straight towards Dilsukhnagar. The hospital is 1.5 km ahead on the main road.</p>
+                </div>
               </div>
             </Card>
 

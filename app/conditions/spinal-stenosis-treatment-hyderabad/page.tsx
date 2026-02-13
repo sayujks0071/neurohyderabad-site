@@ -16,7 +16,7 @@ import OutcomeMetricsSection from '@/components/OutcomeMetricsSection';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
 
 const baseMetadata = makeMetadata({
-  title: 'Spinal Stenosis Treatment in Hyderabad | Walking Pain Relief',
+  title: 'Spinal Stenosis Treatment Hyderabad | Walking Pain Relief',
   description: 'Can\'t walk more than 10 mins? Expert Lumbar Canal Stenosis treatment in Hyderabad. Micro-Decompression surgery for leg pain & heaviness. Dr Sayuj.',
   canonicalPath: '/conditions/spinal-stenosis-treatment-hyderabad',
 });
@@ -24,10 +24,10 @@ const baseMetadata = makeMetadata({
 export const metadata: Metadata = {
   ...baseMetadata,
   alternates: {
-    canonical: `${SITE_URL}/conditions/spinal-stenosis-treatment-hyderabad/`,
+    canonical: `${SITE_URL}/conditions/spinal-stenosis-treatment-hyderabad`,
     languages: {
-      'en-IN': `${SITE_URL}/conditions/spinal-stenosis-treatment-hyderabad/`,
-      'x-default': `${SITE_URL}/conditions/spinal-stenosis-treatment-hyderabad/`,
+      'en-IN': `${SITE_URL}/conditions/spinal-stenosis-treatment-hyderabad`,
+      'x-default': `${SITE_URL}/conditions/spinal-stenosis-treatment-hyderabad`,
     },
   },
 };
@@ -173,6 +173,48 @@ export default function SpinalStenosisPage() {
               <li><strong>ULBD (Over-the-top):</strong> Decompressing both sides through a single small incision.</li>
               <li><strong>Fusion:</strong> Only added if the spine is also unstable (spondylolisthesis).</li>
             </ul>
+          </div>
+        </div>
+      </Section>
+
+      <Section>
+        <div className="bg-blue-50 border border-blue-100 rounded-2xl p-8 shadow-sm">
+          <h2 className="text-2xl font-bold text-blue-900 mb-6">Is Spine Surgery Safe for Elderly Patients (80+)?</h2>
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <p className="text-gray-700 mb-4 text-lg">
+                Many patients in their 70s and 80s fear spine surgery due to age or anesthesia risks. However, untreated stenosis can lead to immobility, which carries higher risks (clots, pneumonia, depression).
+              </p>
+              <p className="text-gray-700 mb-6">
+                Dr. Sayuj specializes in <strong>Awake & Twilight Spine Surgery</strong>. This means we avoid general anesthesia for high-risk patients. You remain comfortable but breathing on your own, significantly reducing cardiac stress and post-op confusion.
+              </p>
+              <ul className="space-y-3">
+                <li className="flex items-center text-gray-700">
+                  <span className="w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center mr-3 font-bold">✓</span>
+                  No General Anesthesia (Safer for Heart/Lungs)
+                </li>
+                <li className="flex items-center text-gray-700">
+                  <span className="w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center mr-3 font-bold">✓</span>
+                  Walk 2 Hours After Surgery
+                </li>
+                <li className="flex items-center text-gray-700">
+                  <span className="w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center mr-3 font-bold">✓</span>
+                  Minimal Blood Loss (Micro-technique)
+                </li>
+              </ul>
+            </div>
+            <div className="bg-white p-6 rounded-xl border border-blue-200">
+               <h3 className="font-bold text-blue-800 mb-3">Case Example</h3>
+               <p className="text-sm text-gray-600 mb-4 italic">
+                 "An 82-year-old cardiac patient was unable to stand for 5 minutes. Traditional surgery was deemed 'high risk'. We performed ULBD under regional anesthesia. He walked out of the hospital the next morning."
+               </p>
+               <Link
+                 href="/patient-stories"
+                 className="text-blue-600 font-semibold hover:underline text-sm"
+               >
+                 Read More Success Stories →
+               </Link>
+            </div>
           </div>
         </div>
       </Section>

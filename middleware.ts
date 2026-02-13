@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import { secureCompare } from '@/src/lib/security'
+import { rateLimit } from '@/src/lib/rate-limit'
 
 // NOTE:
 // We intentionally keep this middleware narrowly scoped via `config.matcher`
@@ -54,7 +56,7 @@ function isBlockedUserAgent(userAgent: string) {
   return BLOCKED_UA_SUBSTRINGS.some((substr) => ua.includes(substr))
 }
 
-export function middleware(req: NextRequest) {
+export async function middleware(req: NextRequest) {
   const pathname = req.nextUrl.pathname
   const userAgent = req.headers.get('user-agent') ?? ''
 
@@ -69,6 +71,31 @@ export function middleware(req: NextRequest) {
 
   // Protect drafts and admin routes - redirect to home if accessed publicly
   if (pathname.startsWith('/drafts') || pathname.startsWith('/admin') || pathname.startsWith('/api/admin')) {
+    // 🛡️ Sentinel: Rate limiting protection against brute-force attacks
+    // Use IP address as identifier (fallback to localhost if undefined)
+    // @ts-ignore
+    const ip = req.ip ?? '127.0.0.1'
+    // Limit to 60 requests per minute
+    const limit = rateLimit(ip, 60, 60 * 1000)
+
+    if (!limit.success) {
+      return NextResponse.json(
+        {
+          error: 'Too Many Requests',
+          message: 'Rate limit exceeded. Please try again later.',
+        },
+        {
+          status: 429,
+          headers: {
+            'Retry-After': Math.ceil((limit.reset - Date.now()) / 1000).toString(),
+            'X-RateLimit-Limit': limit.limit.toString(),
+            'X-RateLimit-Remaining': limit.remaining.toString(),
+            'X-RateLimit-Reset': Math.ceil(limit.reset / 1000).toString(),
+          },
+        },
+      )
+    }
+
     // Check for admin access key in environment
     // 🛡️ Sentinel: Removed default fallback to prevent unauthorized access in production if env var is missing.
     const adminKey = process.env.ADMIN_ACCESS_KEY;
@@ -78,9 +105,13 @@ export function middleware(req: NextRequest) {
     // Check for admin key in headers (API auth)
     const headerKey = req.headers.get('x-admin-key');
 
+    // 🛡️ Sentinel: Use constant-time comparison to prevent timing attacks
+    const isProvidedValid = providedKey && adminKey ? await secureCompare(providedKey, adminKey) : false;
+    const isHeaderValid = headerKey && adminKey ? await secureCompare(headerKey, adminKey) : false;
+
     // If adminKey is not configured (undefined/empty) OR provided keys do not match, deny access.
     // This ensures that if the secret is missing in production, the route is closed by default (fail secure).
-    if (!adminKey || (providedKey !== adminKey && headerKey !== adminKey)) {
+    if (!adminKey || (!isProvidedValid && !isHeaderValid)) {
       if (pathname.startsWith('/api/')) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
       }

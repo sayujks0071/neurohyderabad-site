@@ -6,7 +6,7 @@ import { trackMiddlewareEvent } from '@/src/lib/middleware/rum';
 import { MessageCircle, X, Send, AlertTriangle, Loader2, Sparkles, Minus } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { useChat } from '@ai-sdk/react';
-import { DefaultChatTransport, type UIMessage } from 'ai';
+import { type Message } from 'ai';
 
 /**
  * Floating AI Chat Widget using Vercel AI Gateway
@@ -36,42 +36,50 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
   // Manual input state
   const [input, setInput] = useState('');
 
+  // Page context state
+  const [pageTitle, setPageTitle] = useState('');
+  const [pageDescription, setPageDescription] = useState('');
+  const pathname = usePathname();
+
+  // Update page context on navigation
+  useEffect(() => {
+    // Small delay to ensure document title and meta tags are updated by Next.js
+    const timer = setTimeout(() => {
+      setPageTitle(document.title);
+      const metaDesc = document.querySelector('meta[name="description"]');
+      setPageDescription(metaDesc ? metaDesc.getAttribute('content') || '' : '');
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [pathname]);
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const pathname = usePathname();
 
   // Statsig hooks
   const { logAppointmentBooking, logContactFormSubmit } = useStatsigEvents();
 
   // Initial greeting
-  const initialMessages = useMemo<UIMessage[]>(() => [
+  const initialMessages = useMemo<Message[]>(() => [
     {
       id: 'initial',
       role: 'assistant',
-      parts: [{ type: 'text', text: "Hello! I'm Dr. Sayuj's AI assistant. I can help you with appointments, condition info, and more. How can I help?" }]
+      content: "Hello! I'm Dr. Sayuj's AI assistant. I can help you with appointments, condition info, and more. How can I help?"
     },
   ], []);
 
-  // Configure transport
-  const transport = useMemo(() => new DefaultChatTransport({
+  // Use Vercel AI SDK useChat hook
+  const { messages, append, status, error } = useChat({
     api: '/api/ai/chat',
     body: {
       pageSlug: pathname || 'global',
+      pageTitle,
+      pageDescription,
       service: 'floating_widget',
     },
-  }), [pathname]);
-
-  // Use Vercel AI SDK useChat hook with UIMessage
-  const { messages, sendMessage, status, error } = useChat<UIMessage>({
-    transport,
-    messages: initialMessages,
+    initialMessages,
     onFinish: (message) => {
-      // Get text content from parts
-      const messageParts = message.message?.parts || [];
-      const content = messageParts
-        .filter(p => p.type === 'text')
-        .map(p => (p as any).text)
-        .join('');
+      const content = message.content;
 
       trackMiddlewareEvent('chat_response_received', {
         source: 'floating_widget',
@@ -139,7 +147,7 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
       page_slug: pathname || 'unknown'
     });
 
-    await sendMessage({ text: content.trim() });
+    await append({ role: 'user', content: content.trim() });
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -155,7 +163,7 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
 
     const content = input;
     setInput('');
-    await sendMessage({ text: content.trim() });
+    await append({ role: 'user', content: content.trim() });
   };
 
   const quickActions = [
@@ -257,10 +265,16 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
             aria-live="polite"
           >
             {messages.map((message) => {
-              // Extract text content safely from parts
-              const content = message.parts
-                ? message.parts.filter(p => p.type === 'text').map(p => (p as any).text).join('')
-                : '';
+              // Extract text content directly
+              const content = message.content;
+
+              // Skip messages with empty content (e.g. tool calls) unless we want to show a spinner
+              if (!content && message.role !== 'assistant') return null;
+              if (!content && message.role === 'assistant') {
+                 // Check if it has tool invocations, if so maybe show "Processing..."
+                 // For now, just skip empty messages to avoid empty bubbles
+                 return null;
+              }
 
               return (
                 <div

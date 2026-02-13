@@ -11,6 +11,11 @@ export const runtime = "nodejs"; // Sandbox SDK requires nodejs runtime
 export const maxDuration = 60; // 60 seconds
 
 export async function POST(request: Request) {
+  // Feature Flag Check
+  if (process.env.MRI_ANALYZER_ENABLED !== '1') {
+    return NextResponse.json({ error: "Feature disabled" }, { status: 404 });
+  }
+
   // Rate Limiting: 3 requests per 10 minutes per IP
   const ip = request.headers.get("x-forwarded-for")?.split(',')[0] || "127.0.0.1";
   const limit = rateLimit(ip, 3, 10 * 60 * 1000);
@@ -48,9 +53,9 @@ export async function POST(request: Request) {
 
     // Basic magic bytes check (best effort)
     const buffer = Buffer.from(await file.arrayBuffer());
-    const header = buffer.subarray(0, 4).toString();
-    if (header !== '%PDF') {
-       // Ideally we check more bytes but %PDF is standard
+    const header = buffer.subarray(0, 5).toString();
+    if (!header.startsWith('%PDF-')) {
+       // Ideally we check more bytes but %PDF- is standard for PDF 1.x
        return NextResponse.json({ error: "Invalid file format. Not a PDF." }, { status: 400 });
     }
 

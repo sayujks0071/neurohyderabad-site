@@ -62,6 +62,7 @@ export function getMedicalClinicSchema({ includeContext = true }: ClinicSchemaOp
       latitude: CLINIC.geo.lat,
       longitude: CLINIC.geo.lng,
     },
+    hasMap: 'https://www.google.com/maps/search/?api=1&query=Yashoda+Hospital+Malakpet+Hyderabad',
     areaServed: [
       {
         '@type': 'City',
