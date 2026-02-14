@@ -109,7 +109,7 @@ export const CONDITION_RESOURCES: ConditionResource[] = [
     slug: "brain-tumor",
     name: "Brain Tumor",
     summary:
-      "Advanced neuronavigation-guided resections for benign and malignant tumours with functional preservation.",
+      "Advanced Brain Tumor Surgery in Hyderabad. Awake Craniotomy & Neuronavigation for safe removal by Dr. Sayuj Krishnan.",
     primaryPath: "/services/brain-tumor-surgery-hyderabad",
     relatedResources: [
       {
@@ -572,12 +572,20 @@ export const CONDITION_RESOURCES: ConditionResource[] = [
     slug: "sciatica",
     name: "Sciatica",
     summary:
-      "Evidence-based conservative care and surgical escalation for sciatic nerve pain radiating down the leg.",
+      "Expert Sciatica treatment in Hyderabad. From non-surgical pain relief to endoscopic discectomy for lasting leg pain freedom.",
     primaryPath: "/conditions/sciatica-pain-treatment-hyderabad",
     relatedResources: [
       {
         href: "/services/endoscopic-discectomy-hyderabad",
         label: "Endoscopic discectomy programme",
+      },
+      {
+        href: "/conditions/herniated-disc-treatment-hyderabad",
+        label: "Disc Herniation Treatment",
+      },
+      {
+        href: "/conditions/spondylolisthesis-treatment-hyderabad",
+        label: "Spondylolisthesis Treatment",
       },
     ],
     keywords: ["sciatica", "leg pain", "nerve pain"],
@@ -656,7 +664,7 @@ export const CONDITION_RESOURCES: ConditionResource[] = [
     slug: "trigeminal-neuralgia",
     name: "Trigeminal Neuralgia",
     summary:
-      "Microvascular decompression and radiosurgery options for severe facial pain refractory to medication.",
+      "Permanent relief for Trigeminal Neuralgia facial pain. MVD surgery expert in Hyderabad with high success rates.",
     primaryPath: "/conditions/trigeminal-neuralgia-treatment-hyderabad",
     relatedResources: [
       {
@@ -684,6 +692,41 @@ export const CONDITION_RESOURCES: ConditionResource[] = [
         question: "Is MVD safe for older adults?",
         answer:
           "With careful pre-operative evaluation and microsurgical technique, microvascular decompression offers long-term relief with low complication rates even in seniors.",
+      },
+    ],
+  },
+  {
+    slug: "cervical-spondylosis",
+    name: "Cervical Spondylosis",
+    summary:
+      "Age-related neck arthritis causing pain and stiffness. Comprehensive management from physiotherapy to endoscopic surgery.",
+    primaryPath: "/conditions/cervical-spondylosis-treatment-hyderabad",
+    relatedResources: [
+      {
+        href: "/conditions/cervical-radiculopathy-treatment-hyderabad",
+        label: "Cervical Radiculopathy",
+      },
+      {
+        href: "/services/minimally-invasive-spine-surgery",
+        label: "Minimally invasive spine options",
+      },
+    ],
+    keywords: ["cervical spondylosis", "neck arthritis", "spondylosis treatment"],
+    symptomHighlights: [
+      "Chronic neck pain and stiffness worsening with activity",
+      "Headaches originating from the back of the neck",
+      "Radiating pain or numbness to shoulders and arms",
+    ],
+    treatmentHighlights: [
+      "Ergonomic adjustments and targeted physiotherapy",
+      "Medication for pain relief and inflammation control",
+      "Minimally invasive surgery for severe nerve compression",
+    ],
+    faq: [
+      {
+        question: "Is surgery necessary for cervical spondylosis?",
+        answer:
+          "Not usually. Most patients find relief with non-surgical treatments like physiotherapy and medication. Surgery is only considered if there is significant nerve compression or spinal instability.",
       },
     ],
   },

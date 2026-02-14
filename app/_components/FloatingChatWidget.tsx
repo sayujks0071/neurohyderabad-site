@@ -6,14 +6,14 @@ import { trackMiddlewareEvent } from '@/src/lib/middleware/rum';
 import { MessageCircle, X, Send, AlertTriangle, Loader2, Sparkles, Minus } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { useChat } from '@ai-sdk/react';
-import { type Message } from 'ai';
+import { DefaultChatTransport, type UIMessage } from 'ai';
 
 /**
- * Floating AI Chat Widget using Vercel AI Gateway
+ * Floating AI Chat Widget using Vercel AI SDK (Unified)
  *
  * Features:
  * - Global availability via floating button
- * - Real-time streaming responses (via useChat)
+ * - Real-time streaming responses (via useChat + DefaultChatTransport)
  * - Emergency detection
  * - Compact design
  */
@@ -60,16 +60,16 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
   const { logAppointmentBooking, logContactFormSubmit } = useStatsigEvents();
 
   // Initial greeting
-  const initialMessages = useMemo<Message[]>(() => [
+  const initialMessages = useMemo<UIMessage[]>(() => [
     {
       id: 'initial',
       role: 'assistant',
-      content: "Hello! I'm Dr. Sayuj's AI assistant. I can help you with appointments, condition info, and more. How can I help?"
+      parts: [{ type: 'text', text: "Hello! I'm Dr. Sayuj's AI assistant. I can help you with appointments, condition info, and more. How can I help?" }]
     },
   ], []);
 
-  // Use Vercel AI SDK useChat hook
-  const { messages, append, status, error } = useChat({
+  // Transport
+  const transport = useMemo(() => new DefaultChatTransport({
     api: '/api/ai/chat',
     body: {
       pageSlug: pathname || 'global',
@@ -77,9 +77,19 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
       pageDescription,
       service: 'floating_widget',
     },
-    initialMessages,
-    onFinish: (message) => {
-      const content = message.content;
+  }), [pathname, pageTitle, pageDescription]);
+
+  // Use Vercel AI SDK useChat hook
+  const { messages, sendMessage, status, error } = useChat<UIMessage>({
+    transport,
+    messages: initialMessages,
+    onFinish: (options) => {
+      const message = options.message;
+      // Get text content from parts
+      const content = message.parts
+        .filter(part => part.type === 'text')
+        .map(part => (part as any).text)
+        .join(' ');
 
       trackMiddlewareEvent('chat_response_received', {
         source: 'floating_widget',
@@ -147,7 +157,7 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
       page_slug: pathname || 'unknown'
     });
 
-    await append({ role: 'user', content: content.trim() });
+    await sendMessage({ text: content.trim() });
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -163,7 +173,7 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
 
     const content = input;
     setInput('');
-    await append({ role: 'user', content: content.trim() });
+    await sendMessage({ text: content.trim() });
   };
 
   const quickActions = [
@@ -265,14 +275,15 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
             aria-live="polite"
           >
             {messages.map((message) => {
-              // Extract text content directly
-              const content = message.content;
+              // Extract text content from parts
+              const content = message.parts
+                .filter(part => part.type === 'text')
+                .map(part => (part as any).text)
+                .join(' ');
 
-              // Skip messages with empty content (e.g. tool calls) unless we want to show a spinner
+              // Skip messages with empty content unless we want to show a spinner
               if (!content && message.role !== 'assistant') return null;
               if (!content && message.role === 'assistant') {
-                 // Check if it has tool invocations, if so maybe show "Processing..."
-                 // For now, just skip empty messages to avoid empty bubbles
                  return null;
               }
 
