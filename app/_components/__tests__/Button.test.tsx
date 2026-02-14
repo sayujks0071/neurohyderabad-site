@@ -35,4 +35,18 @@ describe('Button', () => {
     expect(btn).toHaveAttribute('aria-describedby', 'desc-id');
     expect(btn).toHaveAttribute('id', 'btn-button');
   });
+
+  it('adds security and accessibility attributes for external links', () => {
+    render(
+      <Button href="https://example.com" target="_blank">
+        External Link
+      </Button>
+    );
+
+    const link = screen.getByRole('link', { name: /External Link/i });
+    expect(link).toHaveAttribute('target', '_blank');
+    expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+    // Check for the screen reader text
+    expect(screen.getByText('(opens in a new tab)')).toHaveClass('sr-only');
+  });
 });

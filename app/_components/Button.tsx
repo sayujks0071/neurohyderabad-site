@@ -47,16 +47,21 @@ const Button: React.FC<ButtonProps> = ({
   const combinedClasses = `${baseStyles} ${variants[variant]} ${sizes[size]} ${widthClass} ${className}`;
 
   if (href && !isLoading) {
+    const isExternal = target === '_blank';
+    const effectiveRel = rel || (isExternal ? 'noopener noreferrer' : undefined);
+    const hasAriaLabel = props['aria-label'] || props['aria-labelledby'];
+
     return (
       <Link
         href={href}
         className={combinedClasses}
         target={target}
-        rel={rel}
+        rel={effectiveRel}
         onClick={onClick as any}
         {...(props as any)}
       >
         {children}
+        {isExternal && !hasAriaLabel && <span className="sr-only"> (opens in a new tab)</span>}
       </Link>
     );
   }
