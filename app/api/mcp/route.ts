@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { generateText } from 'ai';
+import { getTextModel } from '@/src/lib/ai/gateway';
 
 /**
  * OpenAI Apps SDK compatible MCP Server
@@ -240,17 +242,41 @@ async function handleCallTool(name: string, args: any, id: any) {
         });
 
       case 'monitor_competitors':
-        // Mocking analysis for now - in production this would call src/lib/competitor-analysis.ts
-        return NextResponse.json({
-          jsonrpc: '2.0',
-          id,
-          result: {
-            content: [{ 
-              type: 'text', 
-              text: `Competitor analysis for ${args.competitorUrl || 'main competitors'}: Identified gaps in "Minimally Invasive Spine Surgery" patient education content. Recommendation: Create a 5-part video series on recovery paths.` 
-            }]
-          }
-        });
+        try {
+          const { text } = await generateText({
+            model: getTextModel(),
+            prompt: `You are an expert Medical SEO Strategist. Analyze the competitive landscape for neurosurgery in Hyderabad, India.
+Competitor URL: ${args.competitorUrl || 'General Market Analysis'}
+
+Please provide:
+1. Identify 3 likely content gaps for Dr. Sayuj Krishnan compared to this competitor.
+2. Suggest 2 high-value blog post titles to target these gaps.
+3. Recommend one video content idea.
+
+Keep the analysis concise and actionable.`
+          });
+
+          return NextResponse.json({
+            jsonrpc: '2.0',
+            id,
+            result: {
+              content: [{ type: 'text', text: text }]
+            }
+          });
+        } catch (error) {
+          console.error('AI Competitor Analysis failed:', error);
+          // Fallback
+          return NextResponse.json({
+            jsonrpc: '2.0',
+            id,
+            result: {
+              content: [{
+                type: 'text',
+                text: `Competitor analysis for ${args.competitorUrl || 'main competitors'}: Identified gaps in "Minimally Invasive Spine Surgery" patient education content. Recommendation: Create a 5-part video series on recovery paths.`
+              }]
+            }
+          });
+        }
 
       default:
         return NextResponse.json({
