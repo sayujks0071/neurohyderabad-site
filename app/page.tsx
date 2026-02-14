@@ -335,7 +335,7 @@ export default function Home() {
             </div>
           }
         >
-          <Section background="none" className="py-16 bg-gradient-to-b from-blue-50 to-white">
+          <Section background="none" className="bg-gradient-to-b from-blue-50 to-white">
             <RemotionVideoEmbedWrapper
               compositionId="ServiceShowcase"
               title="Our Neurosurgical Services"
