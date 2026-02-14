@@ -237,6 +237,20 @@ async function testNeuralinkApi() {
   });
 }
 
+async function testAboutPageContent() {
+  const u = urlFor("/about");
+  const res = await fetch(u, { headers: { "cache-control": "no-cache" } });
+  assert(res.status === 200, `/about HTTP ${res.status}`);
+  const html = await readTextLimited(res, 200_000);
+
+  // Validate critical content markers
+  assert(html.includes("<h1>"), "/about missing <h1>");
+  assert(html.includes("Sayuj"), "/about missing 'Sayuj'");
+
+  // Validate specific section or credential mention
+  assert(html.includes("German") || html.includes("germany"), "/about missing 'German'/'Germany' training mention");
+}
+
 async function testSamplePages() {
   // Sample a few pages from sitemap-main.xml so we cover multiple templates.
   const sitemapRes = await fetch(urlFor("/sitemap-main.xml"), { headers: { "cache-control": "no-cache" } });
@@ -357,6 +371,7 @@ async function main() {
   results.push(await test("sitemaps", testSitemaps));
   results.push(await test("redirects", testRedirects));
   results.push(await test("security headers", testSecurityHeaders));
+  results.push(await test("content: about page", testAboutPageContent));
   results.push(await test("sample pages (canonical/meta/JSON-LD)", testSamplePages));
   results.push(await test("api: neuralink", testNeuralinkApi));
   results.push(await test("api: mri analyzer", testMriAnalyzer));
