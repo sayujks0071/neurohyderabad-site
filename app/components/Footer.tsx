@@ -1,7 +1,16 @@
 import Link from "next/link";
 import NewsletterSignup from "./NewsletterSignup";
+import {
+  CANONICAL_PHYSICIAN_NAME,
+  YASHODA_MALAKPET_ADDRESS,
+  CANONICAL_TELEPHONE,
+  CANONICAL_WHATSAPP,
+  YASHODA_DIRECTIONS
+} from "@/src/data/locations";
 
 export default function Footer() {
+  const addressString = `${YASHODA_MALAKPET_ADDRESS.streetAddress}, ${YASHODA_MALAKPET_ADDRESS.addressLocality}, ${YASHODA_MALAKPET_ADDRESS.addressRegion} ${YASHODA_MALAKPET_ADDRESS.postalCode}`;
+
   return (
     <footer className="bg-gray-950 text-gray-100" role="contentinfo">
       <div className="container mx-auto px-4 py-12">
@@ -11,21 +20,21 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4" id="footer-contact-heading">Clinic Details</h3>
             <div className="space-y-3 text-gray-200">
               <p className="font-semibold text-gray-100">
-                Dr. Sayuj Krishnan, Neurosurgeon
+                {CANONICAL_PHYSICIAN_NAME}
               </p>
               <p className="text-sm leading-6">
-                Room 317, OPD Block, Yashoda Hospital, Malakpet, Hyderabad, Telangana 500036
+                {addressString}
               </p>
               <p className="text-sm text-gray-300">
                 <strong>Landmark:</strong> Near Malakpet Railway Station, opposite Yashoda Out‑Patient Block
               </p>
               <p>
                 <a
-                  href="tel:+919778280044"
+                  href={`tel:${CANONICAL_TELEPHONE}`}
                   className="inline-flex items-center min-h-[44px] px-1 -mx-1 text-blue-100 hover:text-white underline underline-offset-2 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
-                  aria-label="Call clinic at +91 9778280044"
+                  aria-label={`Call clinic at ${CANONICAL_TELEPHONE}`}
                 >
-                  +91 9778280044
+                  {CANONICAL_TELEPHONE}
                 </a>{" "}
                 ·{" "}
                 <a
@@ -45,7 +54,7 @@ export default function Footer() {
                   Book Consultation
                 </a>
                 <a
-                  href="https://wa.me/919778280044"
+                  href={`https://wa.me/${CANONICAL_WHATSAPP}`}
                   className="rounded-full border border-blue-300 px-4 py-3 min-h-[44px] text-sm font-semibold text-blue-100 hover:bg-blue-900 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950"
                   aria-label="Contact via WhatsApp"
                   target="_blank"
@@ -54,9 +63,11 @@ export default function Footer() {
                   WhatsApp
                 </a>
                 <a
-                  href="https://www.drsayuj.info/locations?utm_source=site&utm_medium=cta&utm_campaign=footer_nap"
+                  href={YASHODA_DIRECTIONS}
                   className="rounded-full border border-gray-500 px-4 py-3 min-h-[44px] text-sm font-semibold text-gray-100 hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950"
                   aria-label="Get directions to clinic"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   Get Directions
                 </a>
@@ -271,7 +282,7 @@ export default function Footer() {
         <div className="border-t border-gray-800 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-sm text-gray-300 mb-4 md:mb-0">
-              <p>© 2024 Dr Sayuj Krishnan. All rights reserved.</p>
+              <p>© 2024 {CANONICAL_PHYSICIAN_NAME}. All rights reserved.</p>
               <p className="mt-1">
                 MBBS, DNB Neurosurgery (Direct 6 years) | Fellowship in Minimally Invasive and Advanced Spine Surgery
               </p>

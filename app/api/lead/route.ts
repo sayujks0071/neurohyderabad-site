@@ -76,6 +76,8 @@ export async function POST(request: NextRequest) {
       city,
       concern,
       source,
+      painScore: body.painScore,
+      mriScanAvailable: body.mriScanAvailable,
     });
 
     if (!validation.isValid) {
@@ -95,6 +97,7 @@ export async function POST(request: NextRequest) {
       preferredDate,
       preferredTime,
       source,
+      // Persist clinical context fields
       painScore: body.painScore,
       mriScanAvailable: body.mriScanAvailable,
       metadata: {

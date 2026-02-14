@@ -1,4 +1,5 @@
 import { SITE_URL } from '../../../src/lib/seo';
+import { CANONICAL_PHYSICIAN_NAME, getLocationById, LocationId } from '../../../src/data/locations';
 
 interface MedicalWebPageSchemaProps {
   pageType: 'service' | 'condition' | 'blog' | 'location' | 'about' | 'contact';
@@ -11,6 +12,7 @@ interface MedicalWebPageSchemaProps {
   breadcrumbs?: Array<{ name: string; path: string }>;
   medicalSpecialty?: string | string[];
   audience?: string;
+  locationId?: LocationId;
 }
 
 export default function MedicalWebPageSchema({
@@ -19,12 +21,17 @@ export default function MedicalWebPageSchema({
   title,
   description,
   lastReviewed = new Date().toISOString().split('T')[0],
-  author = 'Dr. Sayuj Krishnan',
+  author = CANONICAL_PHYSICIAN_NAME,
   serviceOrCondition,
   breadcrumbs = [],
   medicalSpecialty,
-  audience
+  audience,
+  locationId = 'malakpet'
 }: MedicalWebPageSchemaProps) {
+  const location = getLocationById(locationId) || getLocationById('malakpet');
+
+  if (!location) return null;
+
   const baseSchema: any = {
     "@context": "https://schema.org",
     "@type": "MedicalWebPage",
@@ -42,33 +49,50 @@ export default function MedicalWebPageSchema({
     "about": {
       "@type": "Physician",
       "@id": `${SITE_URL}/#physician`,
-      "name": "Dr. Sayuj Krishnan"
+      "name": CANONICAL_PHYSICIAN_NAME
     },
     "reviewedBy": {
       "@type": "Physician",
       "@id": `${SITE_URL}/#physician`,
-      "name": "Dr. Sayuj Krishnan"
+      "name": CANONICAL_PHYSICIAN_NAME,
+      "hasCredential": {
+        "@type": "EducationalOccupationalCredential",
+        "credentialCategory": "degree",
+        "name": "DNB Neurosurgery"
+      }
     },
+    "lastReviewed": lastReviewed,
     "datePublished": "2024-01-01",
     "dateModified": lastReviewed,
+    "creativeWorkStatus": "Published",
+    "medicalAudience": {
+      "@type": "MedicalAudience",
+      "audienceType": "Patient"
+    },
     "author": {
       "@type": "Person",
       "name": author,
       "jobTitle": "Neurosurgeon",
+      "hasCredential": {
+        "@type": "EducationalOccupationalCredential",
+        "credentialCategory": "degree",
+        "name": "DNB Neurosurgery"
+      },
       "worksFor": {
         "@type": "Hospital",
-        "name": "Yashoda Hospital",
+        "@id": `${SITE_URL}/#hospital`,
+        "name": "Yashoda Hospital, Malakpet",
         "address": {
           "@type": "PostalAddress",
-          "addressLocality": "Malakpet",
-          "addressRegion": "Hyderabad",
-          "addressCountry": "IN"
+          "addressLocality": location.address.addressLocality,
+          "addressRegion": location.address.addressRegion,
+          "addressCountry": location.address.addressCountry
         }
       }
     },
     "publisher": {
       "@type": "Organization",
-      "name": "Dr. Sayuj Krishnan",
+      "name": CANONICAL_PHYSICIAN_NAME,
       "url": SITE_URL
     }
   };
@@ -95,12 +119,12 @@ export default function MedicalWebPageSchema({
       "provider": {
         "@type": "Physician",
         "@id": `${SITE_URL}/#physician`,
-        "name": "Dr. Sayuj Krishnan"
+        "name": CANONICAL_PHYSICIAN_NAME
       },
       "availableAtOrFrom": {
         "@type": "Hospital",
         "@id": `${SITE_URL}/#hospital`,
-        "name": "Yashoda Hospital"
+        "name": "Yashoda Hospital, Malakpet"
       },
       "areaServed": {
         "@type": "City",
@@ -125,14 +149,11 @@ export default function MedicalWebPageSchema({
         "provider": {
           "@type": "Physician",
           "@id": `${SITE_URL}/#physician`,
-          "name": "Dr. Sayuj Krishnan"
+          "name": CANONICAL_PHYSICIAN_NAME
         }
       }
     };
   }
-
-  // Breadcrumb generation is removed from here to be handled by a dedicated BreadcrumbSchema component
-  // ensuring top-level BreadcrumbList and avoiding duplication.
 
   return (
     <script

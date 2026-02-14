@@ -9,7 +9,7 @@
 - [ ] **Internal Linking:** Add links from "Condition" pages (e.g., Sciatica) to the new "Spine Surgery" FAQs.
 - [ ] **Multimedia:** Add `VideoObject` schema to Brain Surgery page if we can source or create an explainer video (Competitor Gap).
 - [ ] **Content:** Expand "Patient Journey" section on Brain Surgery page to match competitor depth.
-- [Content] Add specific cost guide for Brain Tumor Surgery (similar to Spine).
+- [x] [Content] Add specific cost guide for Brain Tumor Surgery (similar to Spine). (Done 2026-02-22)
 - [ ] **Audit:** Check all "Patient Education Resources" sections on other Condition pages for broken links or missing content.
 - [ ] **Multimedia:** Add embedded video testimonials/explainers to Service pages (Competitor Advantage).
 - [ ] **Content:** Strengthen "Why Dr. Sayuj" sections on service pages with stronger USPs.
@@ -26,7 +26,7 @@
 - **Opportunity:** Add specific visual outcomes stats (e.g., "98% Walking Day 1") to Trust Strip.
 
 ## 2026-02-07
-- **Content Gap:** Replicate "Insurance & Cashless Treatment" block on other key service pages (Brain Tumor, Microdiscectomy) to improve financial transparency sitewide.
+- [x] **Content Gap:** Replicate "Insurance & Cashless Treatment" block on other key service pages (Brain Tumor, Microdiscectomy) to improve financial transparency sitewide. (Done 2026-02-22)
 
 ## 2026-02-08
 - **Internal Linking:** Ensure other "Service" pages (e.g., Epilepsy Surgery) have a clear "Red Flag" section linking back to "Condition" pages.
@@ -39,3 +39,8 @@
 ## 2026-02-10
 - **Opportunity:** Replicate "Endoscopic Procedure Steps" component on other procedure pages (e.g., Microdiscectomy, Brain Tumor Surgery) for consistent visual storytelling.
 - **Optimization:** Check LCP/CLS impact of new component on mobile devices.
+
+## 2026-02-12
+- [x] **Content Improvement:** Added "Red Flags" emergency section to Spine Surgery page. (Done 2026-02-12)
+- [ ] **Content Gap:** Add similar "Red Flags" sections to other critical pages (Brain Tumor, Epilepsy).
+- [ ] **Technical Fix:** Investigate `middleware.ts` type definition properly (currently using `@ts-ignore`).

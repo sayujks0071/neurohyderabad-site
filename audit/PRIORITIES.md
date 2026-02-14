@@ -1,24 +1,23 @@
-# Prioritized SEO Fixes
+# Prioritized Fix List (SEO Reprint 2026-02-13)
 
-## 1. Eliminate Ghost Pages (Critical Technical)
-**Issue**: ~50 URLs listed in sitemaps return 404.
-**Impact**: Wastes crawl budget, bad UX, "Soft 404" signals.
-**Fix**: Remove these URLs from `app/sitemap-services.ts`, `app/sitemap-conditions.ts`, and `app/sitemap.ts`.
-**Effort**: Low. **Risk**: Low.
+| Issue | Evidence | Affected URLs | Fix Summary | Impact | Effort | Risk | Do Now? |
+|-------|----------|---------------|-------------|--------|--------|------|---------|
+| Title Tags Too Long | Audit JSON (39 pages) | Homepage, About, Appointments, etc. | Shorten titles to <60 chars. Move brand to end or remove if needed. | High | Low | Low | Yes |
+| Missing Breadcrumb Schema | Schema Audit | All Pages | Add `BreadcrumbList` JSON-LD to `app/layout.tsx` or `src/components/Schema.tsx`. | High | Med | Low | Yes |
+| Missing MedicalClinic Schema | Schema Audit | Location/Contact Pages | Add `MedicalClinic` schema for Yashoda Hospital Malakpet on location pages. | High | Med | Low | Yes |
+| Meta Description Length | Audit JSON (11 pages) | Service Pages | Truncate or rewrite to <160 chars. Focus on CTR. | Med | Low | Low | Yes |
+| Competitor Keyword Gap | Competitor Analysis | New Content | Create "Cost of Spine Surgery" guide. | High | High | Low | No |
+| Video Schema | Competitor Analysis | Service Pages | Implement `VideoObject` schema for embedded videos. | Med | Med | Low | No |
 
-## 2. Fix Schema Gaps (E-E-A-T)
-**Issue**: `MedicalWebPage` schema is missing `medicalSpecialty` and `audience` fields. Some pages show `undefined` schema types.
-**Impact**: Reduced rich snippet eligibility (Medical Knowledge Graph).
-**Fix**: Update `MedicalWebPageSchema` component to include defaults or props for these fields.
-**Effort**: Medium. **Risk**: Low.
+## "Do Now" Execution Plan
+1. **Fix Metadata Length:**
+   - Audit `src/lib/seo.ts` or `app/layout.tsx` for default templates.
+   - Update individual page `metadata` exports in `app/**/page.tsx` to be concise.
+   - Target: Homepage, About, Appointments, core Service pages.
 
-## 3. Metadata Length Optimization (On-Page)
-**Issue**: 120+ pages have titles > 60 chars.
-**Impact**: Title truncation in SERPs (lower CTR).
-**Fix**: Shorten the page-specific titles for key pages (Home, Services, Conditions).
-**Effort**: Medium (repetitive). **Risk**: Low.
+2. **Enhance Schema:**
+   - Verify/Add `BreadcrumbList` in a global component or layout.
+   - Verify/Add `MedicalClinic` schema in `app/neurosurgeon-malakpet/page.tsx` and contact page.
 
-## 4. Performance (Lighthouse)
-**Issue**: Lighthouse failed locally, but TTFB is good.
-**Fix**: Ensure `next/image` is used properly (already seems so).
-**Action**: Defer major performance overhaul until Lighthouse can be run, but verify `next/image` usage in key components.
+3. **Verify:**
+   - Re-run `seo:audit` or manual checks on fixed pages.

@@ -34,7 +34,7 @@ const BRAIN_SURGERY_FAQS = [
 ];
 
 export const metadata: Metadata = {
-  title: "Brain Surgery Hyderabad | Awake Brain Surgery & Brain Tumor Surgery | Dr. Sayuj Krishnan",
+  title: "Brain Surgery Hyderabad | Awake Tumor Surgery | Dr Sayuj",
   description: "Expert brain surgery in Hyderabad with Dr. Sayuj Krishnan. Specializing in awake brain surgery, brain tumors, ROSA DBS, and neuronavigation.",
   keywords: [
     "brain surgery hyderabad",

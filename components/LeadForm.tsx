@@ -4,8 +4,9 @@ import { useState, useRef, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Loader2, CheckCircle } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 import { analytics } from "@/src/lib/analytics";
+import Button from "@/packages/appointment-form/ui/Button";
 import Input from "@/packages/appointment-form/ui/Input";
 import Textarea from "@/packages/appointment-form/ui/Textarea";
 import Calendar from "@/packages/appointment-form/ui/Calendar";
@@ -120,12 +121,11 @@ export default function LeadForm() {
         <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
         <h3 className="text-3xl font-bold text-slate-800 mb-3">Request Received!</h3>
         <p className="text-slate-600 leading-relaxed max-w-lg mx-auto mb-8">{APPOINTMENT_SUCCESS_MESSAGE}</p>
-        <button
+        <Button
           onClick={() => setIsSubmitted(false)}
-          className="inline-flex items-center justify-center bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
         >
           Send another enquiry
-        </button>
+        </Button>
       </div>
     );
   }
@@ -279,18 +279,13 @@ export default function LeadForm() {
         </div>
 
         <div className="pt-4">
-          <button
+          <Button
             type="submit"
-            disabled={isSubmitting}
-            aria-busy={isSubmitting}
-            className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden"
+            isLoading={isSubmitting}
+            className="w-full sm:w-full"
           >
-            {isSubmitting && (
-              <div className="absolute inset-0 bg-white/10 animate-pulse" />
-            )}
-            {isSubmitting && <Loader2 className="mr-2 h-5 w-5 animate-spin" aria-hidden="true" />}
             {isSubmitting ? "Sending..." : "Request Call Back"}
-          </button>
+          </Button>
         </div>
       </form>
     </div>

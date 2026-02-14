@@ -4,3 +4,7 @@ http://localhost:3000/services/minimally-invasive-spine-surgery,Service,0.398932
 http://localhost:3000/conditions/sciatica-pain-treatment-hyderabad,Condition,1.543075,"no-store, must-revalidate",NONE,N/A
 http://localhost:3000/neurosurgeon-hitech-city,Location,1.125940,"no-store, must-revalidate",NONE,N/A
 http://localhost:3000/blog/awake-craniotomy-guide,Blog,0.924011,"no-store, must-revalidate",NONE,N/A
+https://www.drsayuj.info/,0.129636
+https://www.drsayuj.info/services/minimally-invasive-spine-surgery,0.140907
+https://www.drsayuj.info/conditions/sciatica-pain-treatment-hyderabad,0.126951
+https://www.drsayuj.info/neurosurgeon-malakpet,0.121567

@@ -2,6 +2,7 @@ import { streamText } from 'ai';
 import { NextRequest, NextResponse } from 'next/server';
 import { getTextModel, hasAIConfig } from '@/src/lib/ai/gateway';
 import { rateLimit } from '@/src/lib/rate-limit';
+// @ts-ignore
 import { JSDOM } from 'jsdom';
 
 // Required for jsdom

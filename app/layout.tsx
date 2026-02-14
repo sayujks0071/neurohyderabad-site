@@ -29,6 +29,7 @@ declare global {
 import Header from "./components/HeaderRefactored";
 import Footer from "./components/Footer";
 import WebsiteSchema from "./components/schemas/WebsiteSchema";
+import BreadcrumbSchema from "./components/schemas/BreadcrumbSchema";
 import { PhysicianSchema } from "../src/components/schema/PhysicianSchema";
 import HospitalSchema from "./components/schemas/HospitalSchema";
 import TrustStrip from "./_components/TrustStrip";
@@ -45,11 +46,11 @@ import { SITE_URL } from "../src/lib/seo";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Neurosurgeon & Endoscopic Spine Specialist Hyderabad | Dr. Sayuj Krishnan",
+    default: "Best Neurosurgeon Hyderabad | Dr. Sayuj Krishnan",
     template: "%s"
   },
   description:
-    "German-trained neurosurgeon in Hyderabad for minimally invasive spine and brain surgery with same-day discharge at Yashoda Hospital, Malakpet.",
+    "German-trained neurosurgeon in Hyderabad. Minimally invasive spine & brain surgery. Same-day discharge at Yashoda Hospital, Malakpet.",
   keywords: [
     "neurosurgeon hyderabad",
     "brain surgeon hyderabad", 
@@ -82,10 +83,10 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Dr. Sayuj Krishnan S | Best Neurosurgeon in Hyderabad | Brain & Spine Surgery",
-    description: "Expert neurosurgeon Dr. Sayuj Krishnan in Hyderabad specializing in endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures. Same-day discharge available. 1,000+ endoscopic procedures performed.",
+    title: "Best Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan",
+    description: "Expert neurosurgeon in Hyderabad. Endoscopic spine & brain tumor surgery. Same-day discharge available. 1,000+ procedures.",
     url: SITE_URL,
-    siteName: "Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
+    siteName: "Dr. Sayuj Krishnan",
     locale: "en_IN",
     type: "website",
     images: [
@@ -173,6 +174,7 @@ export default function RootLayout({
         <GoogleAnalytics />
         <ClientAnalytics />
         <WebsiteSchema />
+        <BreadcrumbSchema />
         <PhysicianSchema />
         <HospitalSchema />
         <a

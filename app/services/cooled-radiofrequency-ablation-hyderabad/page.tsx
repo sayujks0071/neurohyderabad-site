@@ -12,7 +12,7 @@ import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 
 const baseMetadata = makeMetadata({
-  title: 'Cooled Radiofrequency Ablation Hyderabad | Dr. Sayuj Krishnan',
+  title: 'Cooled Radiofrequency Ablation Hyderabad | Pain Relief',
   description: 'Advanced cooled radiofrequency ablation for chronic pain relief in Hyderabad. Long-lasting nerve ablation for facet joints, sacroiliac joints, and trigeminal neuralgia with Dr. Sayuj Krishnan.',
   canonicalPath: '/services/cooled-radiofrequency-ablation-hyderabad',
 });

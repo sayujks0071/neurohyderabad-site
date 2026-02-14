@@ -110,7 +110,7 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
     try {
       // Log Analytics events (Middleware RUM + Statsig)
       analytics.appointmentSubmit(pageSlug, 'teleconsultation_form');
-      analytics.appointmentSuccess(pageSlug, service || 'general');
+      analytics.appointmentSuccess(pageSlug, 'teleconsultation_form', service || 'general');
       
       // Track Google Ads conversion (will handle navigation if URL provided)
       const conversionTracked = trackContactConversion(mailtoHref);

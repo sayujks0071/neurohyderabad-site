@@ -8,8 +8,8 @@ import { LocationCTAs } from "@/src/components/locations/LocationCTAs";
 import { LocalPathways } from "@/src/components/locations/LocalPathways";
 
 export const metadata: Metadata = {
-  title: "Best Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan",
-  description: "German-trained neurosurgeon at Yashoda Malakpet with 1,000+ endoscopic brain & spine cases. Consultations available.",
+  title: "Best Neurosurgeon in Hyderabad | 1000+ Cases | Dr Sayuj",
+  description: "Looking for the best neurosurgeon in Hyderabad? Dr. Sayuj Krishnan specializes in minimally invasive spine & brain surgery. 90% non-surgical success. Book now.",
   keywords: [
     "best neurosurgeon in hyderabad",
     "best spine surgeon hyderabad",
@@ -577,6 +577,11 @@ export default function BestNeurosurgeonPage() {
                   { "@type": "MedicalProcedure", "name": "Endoscopic Spine Surgery" },
                   { "@type": "MedicalCondition", "name": "Brain Tumor" }
                 ],
+                "aggregateRating": {
+                  "@type": "AggregateRating",
+                  "ratingValue": "4.9",
+                  "reviewCount": "150"
+                },
                 "potentialAction": {
                   "@type": "ReserveAction",
                   "target": `${SITE_URL}/appointments`

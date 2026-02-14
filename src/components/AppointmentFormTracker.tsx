@@ -54,7 +54,7 @@ export default function AppointmentFormTracker({
         }
       });
 
-      analytics.appointmentSubmit(pageSlug, 'appointment_form_tracker', errorCount);
+      analytics.appointmentSubmit(pageSlug, 'generic_form_tracker', errorCount);
     };
 
     // Track rage clicks (rapid clicking on submit button)

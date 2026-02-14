@@ -25,7 +25,7 @@ const ALLOWED_JOBS = {
 export const runtime = "nodejs";
 
 export async function POST(request: Request) {
-  const { isAuthorized, response } = verifyAdminAccess(request);
+  const { isAuthorized, response } = await verifyAdminAccess(request);
   if (!isAuthorized) return response!;
 
   const ip = request.headers.get("x-forwarded-for")?.split(',')[0] || "127.0.0.1";
@@ -41,12 +41,12 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  const jobName = body.job as keyof typeof ALLOWED_JOBS;
-  if (!ALLOWED_JOBS[jobName]) {
+  const jobName = body.job as string;
+  if (!Object.keys(ALLOWED_JOBS).includes(jobName)) {
     return NextResponse.json({ error: "Invalid job name" }, { status: 400 });
   }
 
-  const jobConfig = ALLOWED_JOBS[jobName];
+  const jobConfig = ALLOWED_JOBS[jobName as keyof typeof ALLOWED_JOBS];
 
   const env: Record<string, string> = {};
   for (const key of jobConfig.envKeys) {

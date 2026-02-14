@@ -25,6 +25,7 @@ import HeroCTAButtons from "./_components/HeroCTAButtons";
 import PatientEducationVideosSkeleton from "./_components/skeletons/PatientEducationVideosSkeleton";
 import TrustSignals from "./_components/TrustSignals";
 import { LocationNAPCard } from "@/src/components/locations/LocationNAPCard";
+import { CANONICAL_TELEPHONE, CANONICAL_WHATSAPP } from "@/src/data/locations";
 
 import PatientEducationVideosWrapper from "./_components/wrappers/PatientEducationVideosWrapper";
 import RecoveryTimelineWrapper from "./_components/wrappers/RecoveryTimelineWrapper";
@@ -200,12 +201,12 @@ export default function Home() {
             <div className="max-w-6xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-12 items-center">
                 <div className="text-center lg:text-left">
-                  <h1 className="home-hero__title text-4xl md:text-6xl font-bold leading-tight">
+                  <h1 className="home-hero__title text-4xl md:text-6xl font-bold leading-tight mb-4">
                     Dr. Sayuj Krishnan: German-Trained Neurosurgeon in Hyderabad
-                    <span className="home-hero__subtitle block text-3xl md:text-5xl">
-                      Minimally invasive spine, awake brain surgery, and ROSA DBS at Yashoda Hospital, Malakpet.
-                    </span>
                   </h1>
+                  <h2 className="home-hero__subtitle block text-3xl md:text-5xl font-normal mb-6 leading-tight">
+                    Minimally invasive spine, awake brain surgery, and ROSA DBS at Yashoda Hospital, Malakpet.
+                  </h2>
                   <p className="home-hero__lead text-xl md:text-2xl">
                     I personally evaluate every case and perform the surgery—combining full-endoscopic spine techniques, awake mapping for complex brain tumors, and robotic guidance for DBS to deliver safer, faster recoveries.
                   </p>
@@ -227,7 +228,7 @@ export default function Home() {
                     <div className="space-y-3">
                       <HeroCTAButtons />
                       <p className="text-sm text-blue-50">
-                        Call/WhatsApp +91 97782 80044 • Same-day clinic slots at Yashoda Malakpet and secure tele-consults for outstation patients.
+                        Call/WhatsApp {CANONICAL_TELEPHONE} • Same-day clinic slots at Yashoda Malakpet and secure tele-consults for outstation patients.
                       </p>
                     </div>
                   </div>
@@ -314,17 +315,27 @@ export default function Home() {
         {/* Animated Service Showcase Video */}
         <LazySection
           placeholder={
-            <div className="py-16 bg-blue-50">
+            <div className="py-12 md:py-16 bg-blue-50">
               <div className="container mx-auto px-4">
-                <div className="max-w-4xl mx-auto">
-                  {/* CLS Optimization: Height matched to loaded content (Video + Header) */}
-                  <div className="animate-pulse bg-blue-100 h-[450px] rounded-xl"></div>
+                <div className="max-w-4xl mx-auto text-center">
+                  {/* Header Placeholder */}
+                  <div className="mb-6">
+                    <div className="h-8 md:h-9 w-3/4 md:w-1/2 bg-blue-200 rounded animate-pulse mx-auto mb-2"></div>
+                    <div className="h-4 w-full md:w-2/3 bg-blue-100 rounded animate-pulse mx-auto"></div>
+                    <div className="h-4 w-5/6 md:w-1/2 bg-blue-100 rounded animate-pulse mx-auto mt-1"></div>
+                  </div>
+                  {/* Video Placeholder - Aspect Ratio Match */}
+                  <div className="max-w-[800px] mx-auto w-full aspect-video rounded-xl overflow-hidden shadow-lg bg-blue-100 animate-pulse">
+                    <div className="h-full w-full flex items-center justify-center text-blue-300">
+                      <span className="sr-only">Loading video...</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           }
         >
-          <Section background="none" className="py-16 bg-gradient-to-b from-blue-50 to-white">
+          <Section background="none" className="bg-gradient-to-b from-blue-50 to-white">
             <RemotionVideoEmbedWrapper
               compositionId="ServiceShowcase"
               title="Our Neurosurgical Services"
@@ -753,11 +764,20 @@ export default function Home() {
         {/* Animated Outcome Dashboard */}
         <LazySection
           placeholder={
-            <div className="py-16">
+            <div className="py-12 md:py-16">
               <div className="container mx-auto px-4">
-                <div className="max-w-4xl mx-auto">
-                  {/* CLS Optimization: Height matched to loaded content (Video + Header) */}
-                  <div className="animate-pulse bg-gray-200 h-[450px] rounded-xl"></div>
+                <div className="max-w-4xl mx-auto text-center">
+                  {/* Header Placeholder */}
+                  <div className="mb-6">
+                    <div className="h-8 md:h-9 w-3/4 md:w-1/2 bg-gray-200 rounded animate-pulse mx-auto mb-2"></div>
+                    <div className="h-4 w-full md:w-2/3 bg-gray-100 rounded animate-pulse mx-auto"></div>
+                  </div>
+                  {/* Video Placeholder - Aspect Ratio Match */}
+                  <div className="max-w-[800px] mx-auto w-full aspect-video rounded-xl overflow-hidden shadow-lg bg-gray-200 animate-pulse">
+                    <div className="h-full w-full flex items-center justify-center text-gray-400">
+                      <span className="sr-only">Loading video...</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -787,7 +807,7 @@ export default function Home() {
             <Card className="text-center border-l-4 border-red-500 shadow-lg">
               <div className="text-4xl mb-4">🚨</div>
               <h3 className="text-xl font-semibold text-red-700 mb-3">Emergency Hotline</h3>
-              <p className="text-2xl font-bold text-red-600 mb-2">+91-9778280044</p>
+              <p className="text-2xl font-bold text-red-600 mb-2">{CANONICAL_TELEPHONE}</p>
               <p className="text-gray-600 mb-4">Available 24/7 for urgent consultations</p>
               <Link
                 href="/emergency-rehabilitation"
@@ -1027,7 +1047,7 @@ export default function Home() {
         ]} />
 
         {/* Sticky CTA for mobile */}
-        {/* <StickyCTA /> */}
+        {/* <Sticky CTA /> */}
 
         {/* SEO Dashboard - only in development */}
         {/* {process.env.NODE_ENV === 'development' && (

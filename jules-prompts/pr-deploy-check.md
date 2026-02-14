@@ -12,4 +12,6 @@ Review PRs merged in the last 24 hours.
 
 <!-- Jules Automation -->
 <!-- Managed by Jules -->
-<!-- v2.2 -->
+<!-- v2.4 -->
+
+<!-- Verified by Jules 2026-02-13 -->

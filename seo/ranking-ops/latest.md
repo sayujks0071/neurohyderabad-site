@@ -1,6 +1,3 @@
-# Latest SEO Ops Report
+# Latest SEO Report
 
-- **Date:** 2026-02-10
-- **Action:** Added Endoscopic Procedure Steps Visualization
-- **Page:** `app/services/minimally-invasive-spine-surgery/page.tsx`
-- **Report:** [2026-02-10/report.md](2026-02-10/report.md)
+See [2026-02-12](./2026-02-12/report.md) for details.
