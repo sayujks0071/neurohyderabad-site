@@ -1,36 +1,23 @@
-# Prioritized Fix Backlog
+# Prioritized Fix List (SEO Reprint 2026-02-13)
 
-**Date:** 2026-02-13
-**Audit Run:** #1
+| Issue | Evidence | Affected URLs | Fix Summary | Impact | Effort | Risk | Do Now? |
+|-------|----------|---------------|-------------|--------|--------|------|---------|
+| Title Tags Too Long | Audit JSON (39 pages) | Homepage, About, Appointments, etc. | Shorten titles to <60 chars. Move brand to end or remove if needed. | High | Low | Low | Yes |
+| Missing Breadcrumb Schema | Schema Audit | All Pages | Add `BreadcrumbList` JSON-LD to `app/layout.tsx` or `src/components/Schema.tsx`. | High | Med | Low | Yes |
+| Missing MedicalClinic Schema | Schema Audit | Location/Contact Pages | Add `MedicalClinic` schema for Yashoda Hospital Malakpet on location pages. | High | Med | Low | Yes |
+| Meta Description Length | Audit JSON (11 pages) | Service Pages | Truncate or rewrite to <160 chars. Focus on CTR. | Med | Low | Low | Yes |
+| Competitor Keyword Gap | Competitor Analysis | New Content | Create "Cost of Spine Surgery" guide. | High | High | Low | No |
+| Video Schema | Competitor Analysis | Service Pages | Implement `VideoObject` schema for embedded videos. | Med | Med | Low | No |
 
-## Summary of Findings
--   **Critical On-Page Issues:** 46 pages have missing or duplicate H1s, titles too long, or missing meta descriptions.
--   **Performance:** Homepage LCP is poor (6.5s). Inner pages are decent (3.2s) but can be improved.
--   **Competitor Gap:** Missing structured cost info, recovery timelines, and extensive FAQs on service pages.
--   **Schema:** Basic schema exists but lacks depth (FAQPage, Article specific fields).
+## "Do Now" Execution Plan
+1. **Fix Metadata Length:**
+   - Audit `src/lib/seo.ts` or `app/layout.tsx` for default templates.
+   - Update individual page `metadata` exports in `app/**/page.tsx` to be concise.
+   - Target: Homepage, About, Appointments, core Service pages.
 
-## Priority Matrix
+2. **Enhance Schema:**
+   - Verify/Add `BreadcrumbList` in a global component or layout.
+   - Verify/Add `MedicalClinic` schema in `app/neurosurgeon-malakpet/page.tsx` and contact page.
 
-| Issue | Evidence | Affected URLs | Fix Summary | Impact (1-5) | Effort (1-5) | Risk | Do now? |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Missing/Duplicate H1s & Meta Titles** | `audit/onpage/onpage_issues.csv` | 46 pages (e.g., conditions/sciatica...) | Audit and fix metadata in `page.tsx` or `layout.tsx`. Ensure unique H1 per page. | 5 | 2 | Low | **Yes** |
-| **Missing FAQPage Schema** | `audit/competitors/competitor_gap.md` | Service & Condition Pages | Add `FAQPage` JSON-LD to `app/services/[slug]/page.tsx` and `app/conditions/[slug]/page.tsx`. Populate with content. | 4 | 3 | Low | **Yes** |
-| **Homepage LCP (6.5s)** | `audit/lighthouse/home.report.json` | `/` | Optimize hero image (preload, priority), reduce unused JS, defer non-critical scripts. | 5 | 3 | Med | **Yes** |
-| **Missing Cost & Recovery Info** | `audit/competitors/competitor_gap.md` | Service Pages | Add "Cost of Surgery" and "Recovery Timeline" sections to service templates. | 4 | 4 | Med | No |
-| **Unused JavaScript** | `audit/lighthouse/summary.md` | All Pages | Analyze bundle, code split heavy components, lazy load third-party scripts. | 3 | 4 | High | No |
-| **Thin Content (<300 words)** | `audit/crawl/url_inventory.csv` | Some blog/condition pages | Expand content with "Symptoms", "Diagnosis", "Treatment" sections. | 3 | 5 | Low | No |
-| **Image Alt Text** | `audit/onpage/onpage_issues.csv` | Various | Add descriptive alt text to images. | 2 | 2 | Low | No |
-
-## Top 3 "Do Now" Fixes
-
-1.  **Fix Critical On-Page Issues (Metadata & H1s):**
-    -   **Why:** Direct impact on CTR and rankings. Low risk.
-    -   **Action:** Review `audit/onpage/onpage_issues.csv` and fix the top offenders in the codebase.
-
-2.  **Add FAQPage Schema to Service/Condition Pages:**
-    -   **Why:** Competitors use it. Increases SERP real estate (Rich Snippets).
-    -   **Action:** Implement `FAQSchema` component or inject JSON-LD in `page.tsx` for these routes.
-
-3.  **Optimize Homepage LCP:**
-    -   **Why:** 6.5s is too slow. First impression matters.
-    -   **Action:** optimize Hero section images and loading strategy.
+3. **Verify:**
+   - Re-run `seo:audit` or manual checks on fixed pages.

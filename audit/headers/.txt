@@ -1,0 +1,22 @@
+HTTP/2 200
+age: 14420
+cache-control: public, max-age=0, must-revalidate
+content-type: text/html; charset=utf-8
+date: Sat, 07 Feb 2026 19:24:57 GMT
+etag: "dea91xea57535v"
+permissions-policy: camera=(), microphone=(), geolocation=()
+referrer-policy: strict-origin-when-cross-origin
+server: Vercel
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+x-content-type-options: nosniff
+x-dns-prefetch-control: on
+x-frame-options: SAMEORIGIN
+x-matched-path: /neurosurgeon-malakpet
+x-nextjs-prerender: 1
+x-nextjs-stale-time: 300
+x-permitted-cross-domain-policies: none
+x-vercel-cache: HIT
+x-vercel-id: sfo1::iad1::h6m8s-1771026609649-5175ba159eef
+x-xss-protection: 1; mode=block
+content-length: 237643
