@@ -405,6 +405,23 @@ export const locations: LocationData[] = [
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
     sameAs: SOCIAL_PROFILES
+  },
+  {
+    id: "kachiguda",
+    name: "Dr Sayuj Krishnan - Neurosurgeon near Kachiguda",
+    canonical_display_name: CANONICAL_PHYSICIAN_NAME,
+    slug: "/locations/neurosurgeon-near-kachiguda-faq",
+    address: YASHODA_MALAKPET_ADDRESS,
+    telephone: CANONICAL_TELEPHONE,
+    whatsapp: CANONICAL_WHATSAPP,
+    directions_url: YASHODA_DIRECTIONS,
+    google_maps_place_url: CANONICAL_MAPS_URL,
+    embed_url: REPO_EMBED,
+    geo: YASHODA_GEO,
+    areaServedName: "Kachiguda",
+    top_services_slugs: DEFAULT_SERVICES,
+    top_conditions_slugs: DEFAULT_CONDITIONS,
+    sameAs: SOCIAL_PROFILES
   }
 ];
 
@@ -426,7 +443,8 @@ export type LocationId =
   | "dilsukhnagar"
   | "vanasthalipuram"
   | "miyapur"
-  | "uppal";
+  | "uppal"
+  | "kachiguda";
 
 export function getLocationById(id: string): LocationData | undefined {
   return locations.find(loc => loc.id === id);
