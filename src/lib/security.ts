@@ -2,8 +2,7 @@ import { NextResponse, NextRequest } from 'next/server';
 import { rateLimit } from './rate-limit';
 
 /**
- * Constant-time string comparison.
- * Note: Returns false early if lengths differ, which leaks length but avoids timing attacks on content.
+ * Constant-time string comparison using SHA-256 hashing.
  *
  * @param a First string (e.g., provided key)
  * @param b Second string (e.g., secret key)
@@ -25,7 +24,7 @@ export async function secureCompare(a: string, b: string): Promise<boolean> {
     return false;
   }
 
-  // Constant-time comparison
+  // Constant-time comparison of hashes
   let result = 0;
   for (let i = 0; i < aArr.byteLength; i++) {
     result |= aArr[i] ^ bArr[i];
