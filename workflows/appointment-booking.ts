@@ -662,8 +662,20 @@ async function findAlternativeSlots(
     for (const slot of candidateSlots) {
       const availability = evaluateAvailability(dateString, slot);
       if (availability.available) {
-        alternatives.push({ date: dateString, time: slot });
-        break;
+        try {
+          // Double check against database to ensure slot is truly free
+          const bookedCount = await appointments.checkSlot(dateString, slot);
+          if (bookedCount === 0) {
+            alternatives.push({ date: dateString, time: slot });
+            break;
+          }
+        } catch (error) {
+          console.warn(
+            `[Appointment Workflow] Failed to check slot availability: ${dateString} ${slot}`,
+            error
+          );
+          continue;
+        }
       }
     }
 
