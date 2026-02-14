@@ -7,17 +7,17 @@ import { rateLimit } from "@/src/lib/rate-limit";
 const ALLOWED_JOBS = {
   "reindex-gemini-rag": {
     cmd: "sh",
-    args: ["-lc", "pnpm -s i --frozen-lockfile && pnpm -s reindex:gemini"],
+    args: ["-lc", "npm i -g pnpm && pnpm -s i --frozen-lockfile && pnpm -s reindex:gemini"],
     envKeys: ["GOOGLE_GENAI_API_KEY", "GEMINI_API_KEY"],
   },
   "seo-audit": {
     cmd: "sh",
-    args: ["-lc", "pnpm -s i --frozen-lockfile && pnpm -s seo:audit"],
+    args: ["-lc", "npm i -g pnpm && pnpm -s i --frozen-lockfile && pnpm -s seo:audit"],
     envKeys: [],
   },
   "health-full": {
     cmd: "sh",
-    args: ["-lc", "pnpm -s i --frozen-lockfile && pnpm -s health:full"],
+    args: ["-lc", "npm i -g pnpm && pnpm -s i --frozen-lockfile && pnpm -s health:full"],
     envKeys: [],
   }
 } as const;
