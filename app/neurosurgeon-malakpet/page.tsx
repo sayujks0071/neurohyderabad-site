@@ -16,7 +16,7 @@ export const dynamicParams = false;
 export const revalidate = 86400;
 
 export const metadata = {
-  title: "Neurosurgeon in Malakpet | Dr. Sayuj | Yashoda Hospitals",
+  title: "Neurosurgeon Malakpet | Dr. Sayuj | Yashoda Hospital",
   description:
     "Dr. Sayuj Krishnan at Yashoda Hospital Malakpet offers Daycare Endoscopic Spine Surgery, brain tumor care, and 24/7 emergency neurosurgery. Book a visit.",
   keywords: "neurosurgeon malakpet, yashoda hospital malakpet neurosurgeon, spine surgeon malakpet, daycare spine surgery malakpet, endoscopic spine surgery malakpet, spine fracture treatment malakpet, vertebroplasty malakpet",
