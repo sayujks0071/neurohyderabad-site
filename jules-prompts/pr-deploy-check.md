@@ -11,7 +11,8 @@ Review PRs merged in the last 24 hours.
 - If everything looks good, close this issue with a comment summarizing the check.
 
 <!-- Jules Automation -->
+<!-- Schedule: Daily 08:45 IST -->
 <!-- Managed by Jules -->
 <!-- v2.4 -->
 
-<!-- Verified by Jules 2026-02-13 -->
+<!-- Verified by Jules 2026-02-14 -->
