@@ -1,10 +1,15 @@
 import { streamText } from 'ai';
 import { NextRequest } from 'next/server';
+import fs from 'fs';
+import path from 'path';
 import { rateLimit } from '@/src/lib/rate-limit';
 import { getTextModel, hasAIConfig } from '@/src/lib/ai/gateway';
 import { DR_SAYUJ_SYSTEM_PROMPT } from '@/src/lib/ai/prompts';
 import { getDefaultFlagValues, reportFlagValues } from '@/src/lib/flags';
 import { tools } from '@/src/lib/ai/tools';
+
+// Cache for the system prompt to avoid reading from disk on every request
+let cachedSystemPrompt: string | null = null;
 
 /**
  * Streaming Chat API using Vercel AI SDK
@@ -45,7 +50,21 @@ export async function POST(request: NextRequest) {
 
     reportFlagValues(getDefaultFlagValues());
 
-    let systemPrompt = DR_SAYUJ_SYSTEM_PROMPT;
+    let systemPrompt = cachedSystemPrompt || DR_SAYUJ_SYSTEM_PROMPT;
+
+    // Try to load system prompt from openclaw/SOUL.md to follow OpenClaw structure if not cached
+    if (!cachedSystemPrompt) {
+      try {
+        const soulPath = path.join(process.cwd(), 'openclaw', 'SOUL.md');
+        // Use async readFile to avoid blocking the event loop
+        const content = await fs.promises.readFile(soulPath, 'utf-8');
+        cachedSystemPrompt = content;
+        systemPrompt = content;
+      } catch (e) {
+        console.warn('Failed to load system prompt from SOUL.md, using default.', e);
+        // Fallback is already set
+      }
+    }
 
     // 🛡️ Sentinel: Sanitize and truncate inputs to prevent prompt injection and excessive token usage
     const safeTitle = (typeof pageTitle === 'string' ? pageTitle : '').substring(0, 100).replace(/[<>]/g, '');
