@@ -10,11 +10,15 @@ export default function AppointmentSchema() {
   // Helps Google associate this page with the physician and clinic location.
   // Verified to meet SEO requirements: Physician, MedicalClinic, Address, Services.
   // Validated against schema.org recommendations for local business/medical practice.
+  // Note: This script is server-side rendered and injected into the <body> via this component,
+  // which is a valid placement for JSON-LD structured data according to Google guidelines.
   const physicianSchema = {
     "@type": "Physician",
     "@id": `${SITE_URL}/#physician`,
     "name": "Dr. Sayuj Krishnan",
+    // SEO: Medical Specialty as 'Neurosurgeon'
     "medicalSpecialty": "Neurosurgeon",
+    // SEO: Clinic Location (Yashoda Hospitals, Malakpet, Hyderabad)
     "address": {
       "@type": "PostalAddress",
       "streetAddress": malakpet.address.streetAddress,
@@ -23,6 +27,7 @@ export default function AppointmentSchema() {
       "postalCode": malakpet.address.postalCode,
       "addressCountry": malakpet.address.addressCountry
     },
+    // SEO: Specific Services
     "availableService": [
       "Neurosurgery",
       "Spine Surgery",
