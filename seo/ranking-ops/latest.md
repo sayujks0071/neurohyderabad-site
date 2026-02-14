@@ -1,3 +1,3 @@
 # Latest SEO Report
 
-See [2026-02-12](./2026-02-12/report.md) for details.
+See [2026-02-23](./2026-02-23/report.md) for details.
