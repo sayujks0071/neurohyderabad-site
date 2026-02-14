@@ -13,23 +13,21 @@ export async function secureCompare(a: string, b: string): Promise<boolean> {
     return false;
   }
 
-  // Use crypto.subtle.digest which is available in both Node.js (via globalThis.crypto) and Edge Runtime
   const encoder = new TextEncoder();
-  const aBuf = encoder.encode(a);
-  const bBuf = encoder.encode(b);
+  const aBuf = await crypto.subtle.digest('SHA-256', encoder.encode(a));
+  const bBuf = await crypto.subtle.digest('SHA-256', encoder.encode(b));
 
-  // Hash both inputs to ensure constant length comparison
-  const hashA = await crypto.subtle.digest('SHA-256', aBuf);
-  const hashB = await crypto.subtle.digest('SHA-256', bBuf);
+  const aArr = new Uint8Array(aBuf);
+  const bArr = new Uint8Array(bBuf);
 
-  const viewA = new DataView(hashA);
-  const viewB = new DataView(hashB);
+  if (aArr.byteLength !== bArr.byteLength) {
+    return false;
+  }
 
   // Constant-time comparison of hashes
   let result = 0;
-  // SHA-256 produces 32 bytes, so byteLength is always 32
-  for (let i = 0; i < hashA.byteLength; i++) {
-    result |= viewA.getUint8(i) ^ viewB.getUint8(i);
+  for (let i = 0; i < aArr.byteLength; i++) {
+    result |= aArr[i] ^ bArr[i];
   }
 
   return result === 0;
@@ -103,18 +101,6 @@ export async function verifyAdminAccess(request: Request): Promise<{
   const headerKey = request.headers.get('x-admin-key');
   if (headerKey && await secureCompare(headerKey, adminKey)) {
     return { isAuthorized: true };
-  }
-
-  // Check query param (fallback/convenience)
-  try {
-    const url = new URL(request.url);
-    const queryKey = url.searchParams.get('key');
-    if (queryKey && await secureCompare(queryKey, adminKey)) {
-      return { isAuthorized: true };
-    }
-  } catch (e) {
-    // Invalid URL format
-    console.error('Security: Failed to parse request URL', e);
   }
 
   // Deny access

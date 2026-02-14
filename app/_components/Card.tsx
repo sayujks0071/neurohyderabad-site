@@ -24,7 +24,7 @@ const Card: React.FC<CardProps> = ({
         lg: 'p-10',
     };
 
-    const hoverStyles = hover ? 'hover:shadow-2xl hover:-translate-y-1' : '';
+    const hoverStyles = hover ? 'hover:shadow-2xl motion-safe:hover:-translate-y-1' : '';
 
     const borderStyles = bordered ? 'border border-white/20 shadow-xl' : 'shadow-none';
 

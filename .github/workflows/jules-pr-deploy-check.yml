@@ -1,5 +1,5 @@
 name: Jules PR & Deploy Check
-# v2.2 - Managed by Jules
+# v2.4 - Managed by Jules
 on:
   schedule:
     # 08:45 IST (India Standard Time) = 03:15 UTC
@@ -27,6 +27,8 @@ jobs:
             const fs = require('fs');
             const promptFile = process.env.PROMPT_FILE;
             const baseTitle = process.env.ISSUE_TITLE;
+
+            console.log('Starting Jules automation...');
 
             // Generate today's date (YYYY-MM-DD) for uniqueness
             const date = new Date().toISOString().split('T')[0];
@@ -92,3 +94,5 @@ jobs:
             });
 
             console.log(`Created issue: ${newIssue.html_url}`);
+
+# Verified by Jules 2026-02-13

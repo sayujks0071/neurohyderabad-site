@@ -12,7 +12,7 @@ import {
   ExternalLink,
   Globe,
 } from "lucide-react";
-import { trackMiddlewareEvent } from "@/src/lib/middleware/rum";
+import { analytics } from "@/src/lib/analytics";
 import { sendChatMessage } from "./neuralinkApi";
 import SpeechButton from "./SpeechButton";
 
@@ -46,9 +46,7 @@ const ChatBot = () => {
     setIsOpen((prev) => {
       const newState = !prev;
       if (newState) {
-        trackMiddlewareEvent('chat_widget_open', {
-          source: 'appointment_chatbot'
-        });
+        analytics.chat.open('appointment_chatbot');
       }
       return newState;
     });
@@ -72,20 +70,14 @@ const ChatBot = () => {
     ]);
     setIsTyping(true);
 
-    trackMiddlewareEvent('chat_message_sent', {
-      source: 'appointment_chatbot'
-    });
+    analytics.chat.messageSent('appointment_chatbot');
 
     try {
       const result = await sendChatMessage(userMessage, history);
       const endTime = performance.now();
       const duration = endTime - startTime;
 
-      trackMiddlewareEvent('chat_response_received', {
-        source: 'appointment_chatbot',
-        duration_ms: Math.round(duration),
-        success: true
-      });
+      analytics.chat.responseReceived('appointment_chatbot', Math.round(duration), true);
 
       setMessages((prev) => {
         const updated = [...prev];
@@ -103,11 +95,11 @@ const ChatBot = () => {
       const endTime = performance.now();
       const duration = endTime - startTime;
 
-      trackMiddlewareEvent('chat_error', {
-        source: 'appointment_chatbot',
-        duration_ms: Math.round(duration),
-        error: error instanceof Error ? error.message : 'Unknown error'
-      });
+      analytics.chat.error(
+        'appointment_chatbot',
+        Math.round(duration),
+        error instanceof Error ? error.message : 'Unknown error'
+      );
 
       setMessages((prev) => {
         const updated = [...prev];

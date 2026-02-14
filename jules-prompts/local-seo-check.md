@@ -12,4 +12,6 @@ Verify Local SEO signals for "Dr. Sayuj Krishnan".
 
 <!-- Jules Automation -->
 <!-- Managed by Jules -->
-<!-- v2.2 -->
+<!-- v2.4 -->
+
+<!-- Verified by Jules 2026-02-13 -->

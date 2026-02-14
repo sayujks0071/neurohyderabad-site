@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { secureCompare } from '@/src/lib/security';
 import { appointments, patients } from '@/src/lib/db';
 import { processBooking } from '@/src/lib/appointments/service';
 import { locations } from '@/src/data/locations';
+import { semanticSearch } from '@/src/lib/ai/semantic-search';
 import type { BookingData } from '@/packages/appointment-form/types';
 
 export const dynamic = 'force-dynamic';
@@ -19,15 +21,16 @@ const SERVICES = [
   { name: 'Robotic Spine Surgery', url: '/services/robotic-spine-surgery-hyderabad' },
 ];
 
-function validateApiKey(request: NextRequest): boolean {
+async function validateApiKey(request: NextRequest): Promise<boolean> {
   const apiKey = request.headers.get('x-api-key');
   const validApiKey = process.env.OPENCLAW_API_KEY;
-  return !!validApiKey && apiKey === validApiKey;
+  if (!validApiKey || !apiKey) return false;
+  return await secureCompare(apiKey, validApiKey);
 }
 
 export async function GET(request: NextRequest) {
   try {
-    if (!validateApiKey(request)) {
+    if (!await validateApiKey(request)) {
       return NextResponse.json(
         { error: 'Unauthorized', message: 'Invalid or missing API key' },
         { status: 401 }
@@ -40,12 +43,96 @@ export async function GET(request: NextRequest) {
     if (!tool) {
       return NextResponse.json({
         message: 'OpenClaw Integration API',
-        tools: ['dashboard', 'appointments', 'patients', 'get_services', 'get_locations', 'check_availability', 'book_appointment'],
-        usage: '?tool=<tool_name> (use POST for book_appointment and check_availability)'
+        documentation: 'https://github.com/clawdbot/clawdbot',
+        tools: {
+          search_content: {
+            method: 'GET',
+            description: 'Search content across blog and pages',
+            parameters: {
+              query: { type: 'string', required: true, description: 'Search term' }
+            }
+          },
+          get_services: {
+            method: 'GET',
+            description: 'List available services',
+            parameters: {}
+          },
+          get_locations: {
+            method: 'GET',
+            description: 'Get clinic locations',
+            parameters: {}
+          },
+          check_availability: {
+            method: 'POST',
+            description: 'Check slot availability',
+            parameters: {
+              date: { type: 'string', required: true, format: 'YYYY-MM-DD' },
+              time: { type: 'string', required: true, format: 'HH:MM' }
+            }
+          },
+          book_appointment: {
+            method: 'POST',
+            description: 'Book a new appointment',
+            parameters: {
+              patientName: { type: 'string', required: true },
+              email: { type: 'string', required: true },
+              phone: { type: 'string', required: true },
+              appointmentDate: { type: 'string', required: true },
+              reason: { type: 'string', required: false }
+            }
+          },
+          dashboard: {
+            method: 'GET',
+            description: 'Get clinic dashboard stats (Staff Only)',
+            parameters: {}
+          },
+          appointments: {
+            method: 'GET',
+            description: 'List recent appointments (Staff Only)',
+            parameters: {
+              limit: { type: 'number', required: false, default: 10 }
+            }
+          },
+          patients: {
+            method: 'GET',
+            description: 'Lookup patient by email (Staff Only)',
+            parameters: {
+              email: { type: 'string', required: true }
+            }
+          }
+        }
       });
     }
 
     switch (tool) {
+      case 'search_content': {
+        const query = searchParams.get('query') || '';
+        if (!query) {
+           return NextResponse.json(
+            { error: 'Missing Parameter', message: 'Query parameter is required' },
+            { status: 400 }
+          );
+        }
+
+        const results = await semanticSearch(query, 5); // Limit 5 for the bot
+
+        const formattedResults = results.map(r => ({
+          type: r.type,
+          slug: r.href,
+          title: r.title,
+          description: r.description,
+          category: r.category,
+          score: r.relevanceScore || 1
+        }));
+
+        return NextResponse.json({
+          tool: 'search_content',
+          query,
+          count: formattedResults.length,
+          data: formattedResults
+        });
+      }
+
       case 'get_services':
         return NextResponse.json({
           tool: 'get_services',
@@ -73,7 +160,13 @@ export async function GET(request: NextRequest) {
       }
 
       case 'appointments': {
-        const limit = parseInt(searchParams.get('limit') || '10');
+        let limit = parseInt(searchParams.get('limit') || '10');
+        if (isNaN(limit)) limit = 10;
+
+        // 🛡️ Sentinel: Enforce max limit to prevent DoS/data exfiltration
+        if (limit > 100) limit = 100;
+        if (limit < 1) limit = 1;
+
         const recent = await appointments.getRecent(limit);
 
         // Mask sensitive data if needed, or return as is (assuming API key holder is trusted)
@@ -125,7 +218,7 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    if (!validateApiKey(request)) {
+    if (!await validateApiKey(request)) {
       return NextResponse.json(
         { error: 'Unauthorized', message: 'Invalid or missing API key' },
         { status: 401 }

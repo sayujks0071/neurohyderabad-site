@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback, useRef } from 'react';
+import Link from 'next/link';
 import { Mic, MicOff, Phone, PhoneOff } from 'lucide-react';
 
 interface OpenAIVoiceAgentProps {
@@ -439,9 +440,9 @@ Speak naturally and conversationally. Keep responses concise (2-3 sentences max)
         <div className="mt-4 text-center">
           <p className="text-xs text-gray-500">
             Having trouble? Try our{' '}
-            <a href="/appointments" className="text-blue-600 hover:underline">
+            <Link href="/appointments" className="text-blue-600 hover:underline">
               traditional booking form
-            </a>
+            </Link>
           </p>
         </div>
       )}

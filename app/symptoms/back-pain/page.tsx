@@ -68,7 +68,7 @@ export default function BackPainSymptomsPage() {
 
       <p className="text-lg text-gray-700 mb-8 max-w-3xl">
         Back pain is one of the most common reasons people visit a doctor. While most cases resolve on their own,
-        understanding the underlying cause is crucial for effective treatment, especially if the pain persists or radiates to the legs.
+        understanding the underlying cause is crucial for effective treatment, especially if the pain persists or <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 hover:underline">radiates to the legs (Sciatica)</Link>.
       </p>
 
       <section className="mb-12 grid md:grid-cols-2 gap-12">

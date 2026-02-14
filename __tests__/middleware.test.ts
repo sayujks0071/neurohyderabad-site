@@ -45,7 +45,6 @@ describe('Middleware Security Check', () => {
 
     // Expect 401 Unauthorized for API routes
     expect(res.status).toBe(401)
-    // Verify JSON body would be correct (mocked response doesn't strictly parse body here easily without stream reading, but status is key)
   })
 
   test('should allow /api/admin requests if key provided in header', async () => {

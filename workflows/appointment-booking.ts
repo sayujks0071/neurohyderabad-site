@@ -662,8 +662,20 @@ async function findAlternativeSlots(
     for (const slot of candidateSlots) {
       const availability = evaluateAvailability(dateString, slot);
       if (availability.available) {
-        alternatives.push({ date: dateString, time: slot });
-        break;
+        try {
+          // Double check against database to ensure slot is truly free
+          const bookedCount = await appointments.checkSlot(dateString, slot);
+          if (bookedCount === 0) {
+            alternatives.push({ date: dateString, time: slot });
+            break;
+          }
+        } catch (error) {
+          console.warn(
+            `[Appointment Workflow] Failed to check slot availability: ${dateString} ${slot}`,
+            error
+          );
+          continue;
+        }
       }
     }
 
@@ -691,6 +703,13 @@ async function createBookingRecord(
   const start = Date.now();
 
   try {
+    // Idempotency check: verify if booking already exists for this workflow run
+    const existingBooking = await appointments.findByWorkflowRunId(bookingId);
+    if (existingBooking) {
+      logWorkflowEvent(bookingId, "booking-already-exists-skipping-creation", {}, Date.now() - start);
+      return;
+    }
+
     await retry(
       async () => {
         await appointments.create({
@@ -757,13 +776,25 @@ async function sendBookingAdminAlert(
   logWorkflowEvent(bookingId, "sending-admin-alert");
   const start = Date.now();
 
-  const result = await retry(
-    () => sendAdminNotificationEmail(booking, source),
-    { retries: 3, delay: 1000, name: "admin-email", predicate: (r) => r.success }
-  );
+  try {
+    const result = await retry(
+      () => sendAdminNotificationEmail(booking, source),
+      { retries: 3, delay: 1000, name: "admin-email", predicate: (r) => r.success }
+    );
 
-  logWorkflowEvent(bookingId, "admin-alert-sent", { success: result.success }, Date.now() - start);
-  return result;
+    logWorkflowEvent(bookingId, "admin-alert-sent", { success: result.success }, Date.now() - start);
+    return result;
+  } catch (error) {
+    // Soft failure: Don't block workflow completion if admin alert fails
+    logWorkflowEvent(bookingId, "admin-alert-failed-soft", {
+      error: error instanceof Error ? error.message : String(error)
+    }, Date.now() - start);
+
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to send admin alert after retries"
+    };
+  }
 }
 
 /**
@@ -776,30 +807,31 @@ async function syncBookingLead(
 ): Promise<boolean> {
   "use step";
 
-  const result = await retry(
-    () => submitToGoogleSheets({
-      requestId: bookingId,
-    fullName: booking.patientName,
-    email: booking.email,
-    phone: booking.phone,
-    concern: booking.reason.slice(0, 100),
-    preferredDate: booking.appointmentDate,
-    preferredTime: booking.appointmentTime,
-    source: source || "website",
-    metadata: {
-      age: booking.age,
-      gender: booking.gender,
-      bookingReason: booking.reason,
-      painScore: booking.painScore,
-      mriScanAvailable: booking.mriScanAvailable,
-    },
-  }), { retries: 3, delay: 1000, name: "google-sheets", predicate: (r) => r.success });
+  try {
+    const result = await retry(
+      () => submitToGoogleSheets({
+        requestId: bookingId,
+      fullName: booking.patientName,
+      email: booking.email,
+      phone: booking.phone,
+      concern: booking.reason.slice(0, 100),
+      preferredDate: booking.appointmentDate,
+      preferredTime: booking.appointmentTime,
+      source: source || "website",
+      metadata: {
+        age: booking.age,
+        gender: booking.gender,
+        bookingReason: booking.reason,
+        painScore: booking.painScore,
+        mriScanAvailable: booking.mriScanAvailable,
+      },
+    }), { retries: 3, delay: 1000, name: "google-sheets", predicate: (r) => r.success });
 
-  if (!result.success) {
-    logWorkflowEvent(bookingId, "google-sheets-sync-failed", { error: result.message });
+    return result.success;
+  } catch (error) {
+    logWorkflowEvent(bookingId, "google-sheets-sync-failed", { error: error instanceof Error ? error.message : String(error) });
+    return false;
   }
-
-  return result.success;
 }
 
 /**
@@ -815,18 +847,22 @@ async function triggerAppointmentWebhooks(
 ): Promise<void> {
   "use step";
 
-  await retry(
-    async () => notifyAppointmentWebhooks(
-      buildWebhookPayload({
-        booking,
-        confirmationMessage,
-        emailResult,
-        usedAI,
-        source,
-      })
-    ),
-    { retries: 3, delay: 1000, name: "webhooks" }
-  );
+  try {
+    await retry(
+      async () => notifyAppointmentWebhooks(
+        buildWebhookPayload({
+          booking,
+          confirmationMessage,
+          emailResult,
+          usedAI,
+          source,
+        })
+      ),
+      { retries: 3, delay: 1000, name: "webhooks" }
+    );
+  } catch (error) {
+    logWorkflowEvent(bookingId, "webhooks-failed-fatal", { error: error instanceof Error ? error.message : String(error) });
+  }
 }
 
 /**

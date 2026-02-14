@@ -16,13 +16,13 @@ export const dynamicParams = false;
 export const revalidate = 86400;
 
 export const metadata = {
-  title: "Dr. Sayuj Krishnan - Neurosurgeon in Malakpet | Yashoda Hospitals",
+  title: "Neurosurgeon Malakpet | Dr. Sayuj | Yashoda Hospital",
   description:
     "Dr. Sayuj Krishnan at Yashoda Hospital Malakpet offers Daycare Endoscopic Spine Surgery, brain tumor care, and 24/7 emergency neurosurgery. Book a visit.",
   keywords: "neurosurgeon malakpet, yashoda hospital malakpet neurosurgeon, spine surgeon malakpet, daycare spine surgery malakpet, endoscopic spine surgery malakpet, spine fracture treatment malakpet, vertebroplasty malakpet",
   alternates: { canonical: "https://www.drsayuj.info/neurosurgeon-malakpet" },
   openGraph: {
-    title: "Dr. Sayuj Krishnan - Neurosurgeon in Malakpet | Yashoda Hospitals",
+    title: "Neurosurgeon in Malakpet | Dr. Sayuj | Yashoda Hospitals",
     description: "Neurosurgeon at Yashoda Hospital Malakpet with endoscopic spine surgery and brain tumor expertise.",
     url: "https://www.drsayuj.info/neurosurgeon-malakpet",
     type: "website",
@@ -126,6 +126,27 @@ export default function MalakpetNeurosurgeonPage() {
                  <div className="text-sm text-gray-600 font-medium">Fellowship Trained</div>
               </div>
            </div>
+        </div>
+      </section>
+
+      {/* Serving East Hyderabad Section */}
+      <section className="bg-gray-50 py-10 border-b border-gray-200">
+        <div className="mx-auto max-w-5xl px-4">
+          <h2 className="text-xl font-bold text-gray-900 mb-6">Serving Patients Across East Hyderabad</h2>
+          <div className="grid md:grid-cols-3 gap-6">
+             <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+                <h3 className="font-bold text-blue-900 mb-2">Dilsukhnagar & LB Nagar</h3>
+                <p className="text-sm text-gray-600">Just 5-10 mins drive via NH65. Direct Metro access (Red Line) from Dilsukhnagar to Malakpet Station.</p>
+             </div>
+             <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+                <h3 className="font-bold text-blue-900 mb-2">Saidabad & Santosh Nagar</h3>
+                <p className="text-sm text-gray-600">Easy access via Champapet Road. 10-15 mins drive to Yashoda Malakpet OPD for spine & brain care.</p>
+             </div>
+             <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+                <h3 className="font-bold text-blue-900 mb-2">Amberpet & Kachiguda</h3>
+                <p className="text-sm text-gray-600">Connected via Chaderghat Bridge. 10 mins drive for emergency neurosurgery and trauma care.</p>
+             </div>
+          </div>
         </div>
       </section>
 
@@ -456,6 +477,16 @@ export default function MalakpetNeurosurgeonPage() {
                   </p>
                 </div>
               </div>
+            </div>
+
+            <div className="mt-6 bg-blue-50 p-4 rounded-lg border border-blue-100">
+               <h4 className="font-bold text-blue-900 mb-2 text-sm">Quick Directions</h4>
+               <ul className="grid md:grid-cols-2 gap-2 text-xs text-gray-700">
+                  <li><strong>From Dilsukhnagar:</strong> Take NH65 towards Koti → Nalgonda X Roads (Left) → Yashoda Hospital.</li>
+                  <li><strong>From LB Nagar:</strong> Via Victoria Memorial → Chaderghat Road → Malakpet.</li>
+                  <li><strong>From Kothapet:</strong> Via Dilsukhnagar Main Road → Malakpet Metro Station.</li>
+                  <li><strong>From Charminar:</strong> Via Nayapul → Chaderghat Bridge → Malakpet.</li>
+               </ul>
             </div>
           </div>
         </div>

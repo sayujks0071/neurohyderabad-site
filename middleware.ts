@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { secureCompare } from '@/src/lib/security'
+import { rateLimit } from '@/src/lib/rate-limit'
 
 // NOTE:
 // We intentionally keep this middleware narrowly scoped via `config.matcher`
@@ -70,6 +71,31 @@ export async function middleware(req: NextRequest) {
 
   // Protect drafts and admin routes - redirect to home if accessed publicly
   if (pathname.startsWith('/drafts') || pathname.startsWith('/admin') || pathname.startsWith('/api/admin')) {
+    // 🛡️ Sentinel: Rate limiting protection against brute-force attacks
+    // Use IP address as identifier (fallback to localhost if undefined)
+    // @ts-ignore
+    const ip = req.ip ?? '127.0.0.1'
+    // Limit to 60 requests per minute
+    const limit = rateLimit(ip, 60, 60 * 1000)
+
+    if (!limit.success) {
+      return NextResponse.json(
+        {
+          error: 'Too Many Requests',
+          message: 'Rate limit exceeded. Please try again later.',
+        },
+        {
+          status: 429,
+          headers: {
+            'Retry-After': Math.ceil((limit.reset - Date.now()) / 1000).toString(),
+            'X-RateLimit-Limit': limit.limit.toString(),
+            'X-RateLimit-Remaining': limit.remaining.toString(),
+            'X-RateLimit-Reset': Math.ceil(limit.reset / 1000).toString(),
+          },
+        },
+      )
+    }
+
     // Check for admin access key in environment
     // 🛡️ Sentinel: Removed default fallback to prevent unauthorized access in production if env var is missing.
     const adminKey = process.env.ADMIN_ACCESS_KEY;

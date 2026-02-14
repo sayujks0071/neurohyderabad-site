@@ -88,7 +88,8 @@ export default function ClientAnalytics() {
       // Strategy 1: Idle callback (preferred)
       () => {
         if (win.requestIdleCallback) {
-          idleHandle = win.requestIdleCallback(enable, { timeout: 800 });
+          // Increased timeout to 2500ms to allow LCP to finish first
+          idleHandle = win.requestIdleCallback(enable, { timeout: 2500 });
           return true;
         }
         return false;

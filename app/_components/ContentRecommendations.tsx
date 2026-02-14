@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
+import { Sparkles, ArrowRight, Tag } from 'lucide-react';
 
 interface ContentRecommendationsProps {
   query?: string;
@@ -75,21 +76,18 @@ export default function ContentRecommendations({
 
   if (isLoading) {
     return (
-      <div className={`${className} flex items-center justify-center p-8`}>
+      <div className={`flex items-center justify-center p-12 ${className}`}>
         <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-2"></div>
-          <p className="text-gray-600">Finding relevant articles...</p>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-3"></div>
+          <p className="text-slate-500 font-medium">Finding relevant articles...</p>
         </div>
       </div>
     );
   }
 
   if (error) {
-    return (
-      <div className={`${className} p-4 bg-red-50 border border-red-200 rounded-lg`}>
-        <p className="text-red-800 text-sm">{error}</p>
-      </div>
-    );
+    // Fail silently in production or show minimal error
+    return null;
   }
 
   if (recommendations.length === 0) {
@@ -97,43 +95,57 @@ export default function ContentRecommendations({
   }
 
   return (
-    <div className={className}>
-      <h3 className="text-2xl font-bold mb-4 text-blue-800">
-        {query ? 'Recommended Articles' : 'You May Also Like'}
-      </h3>
+    <div className={`relative bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 ${className}`}>
+      <div className="flex items-center gap-3 mb-6 border-b border-blue-100/50 pb-4">
+        <div className="p-2 bg-blue-100/50 rounded-lg text-blue-600">
+          <Sparkles className="w-5 h-5" />
+        </div>
+        <h3 className="text-2xl font-bold text-slate-800">
+          {query ? 'Recommended Articles' : 'You May Also Like'}
+        </h3>
+      </div>
       
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {recommendations.map((post) => (
           <Link
             key={post.slug}
             href={`/blog/${post.slug}`}
-            className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
+            className="flex flex-col h-full bg-white/50 border border-blue-50/50 rounded-xl p-5 hover:bg-white/80 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 group"
           >
             {post.category && (
-              <span className="text-xs uppercase text-blue-600 font-semibold">
+              <span className="text-xs uppercase tracking-wider text-blue-600 font-bold mb-2">
                 {post.category}
               </span>
             )}
-            <h4 className="font-semibold text-gray-800 mt-2 mb-2 line-clamp-2">
+            <h4 className="font-bold text-slate-800 text-lg mb-2 line-clamp-2 group-hover:text-blue-700 transition-colors">
               {post.title}
             </h4>
             {post.excerpt && (
-              <p className="text-sm text-gray-600 line-clamp-3">
+              <p className="text-sm text-slate-600 line-clamp-3 mb-4 flex-grow">
                 {post.excerpt}
               </p>
             )}
-            {post.tags && post.tags.length > 0 && (
-              <div className="flex flex-wrap gap-1 mt-3">
-                {post.tags.slice(0, 3).map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded"
-                  >
-                    {tag}
-                  </span>
-                ))}
+
+            <div className="mt-auto pt-4 border-t border-slate-100">
+              {post.tags && post.tags.length > 0 ? (
+                <div className="flex flex-wrap gap-2 mb-3">
+                  {post.tags.slice(0, 2).map((tag) => (
+                    <span
+                      key={tag}
+                      className="flex items-center gap-1 text-[10px] bg-blue-50 text-blue-600 px-2 py-1 rounded-full font-medium border border-blue-100"
+                    >
+                      <Tag className="w-3 h-3" />
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              ) : null}
+
+              <div className="flex items-center text-blue-600 font-medium text-sm group/link">
+                Read Article
+                <ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover/link:translate-x-1" />
               </div>
-            )}
+            </div>
           </Link>
         ))}
       </div>

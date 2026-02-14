@@ -21,23 +21,15 @@ export async function GET(request: Request) {
 
     // Try to get command.
     const sb = sandbox as any;
-    let cmd: any;
-
-    if (typeof sb.getCommand === 'function') {
-        cmd = await sb.getCommand(cmdId);
-    } else {
-        throw new Error("Sandbox SDK does not support getCommand");
-    }
+    const cmd = await sb.getCommand(cmdId);
 
     let stdout = '';
     let stderr = '';
 
     if (typeof cmd.output === 'function') {
-        // According to some versions, output takes 'stdout' or 'stderr'
         stdout = await cmd.output("stdout");
         stderr = await cmd.output("stderr");
     } else {
-         // Fallback if structure differs
          stdout = String(cmd.stdout || '');
          stderr = String(cmd.stderr || '');
     }

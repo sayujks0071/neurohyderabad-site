@@ -1,5 +1,6 @@
 # Latest Blog Automation Run
 
-- **Date**: 2026-02-10
-- **Topic**: Tailbone Pain (Coccydynia) Treatment in Hyderabad
-- **Run Details**: [View Log](/seo/blog-automation/2026-02-10/run.md)
+- **Date:** 2026-02-15
+- **Topic:** Deep Brain Stimulation (DBS) for Parkinson's Disease in Hyderabad
+- **Status:** Success
+- **Traceability File:** [Run Details](./2026-02-15/run.md)

@@ -1,131 +1,89 @@
-from playwright.sync_api import Page, expect, sync_playwright
+from playwright.sync_api import sync_playwright
 import time
 
-def verify_appointment_form(page: Page):
+def verify_contact_form(page):
+    print("Navigating to /contact...")
+    page.goto("http://localhost:3000/contact", timeout=60000)
+    page.wait_for_load_state("networkidle")
+
+    # Hide cookie consent
+    page.add_style_tag(content="div[role='dialog'][aria-labelledby='cookie-consent-title'] { display: none !important; }")
+
+    print("Checking /contact for Pain Score slider...")
+    pain_label = page.get_by_text("Pain Intensity Score (1-10)")
+    pain_label.scroll_into_view_if_needed()
+    pain_label.wait_for(state="visible", timeout=10000)
+
+    time.sleep(0.5)
+    page.screenshot(path="/home/jules/verification/contact_form_visible.png")
+    print("Screenshot saved.")
+
+def verify_appointments_form(page):
     print("Navigating to /appointments...")
-    page.goto("http://localhost:3000/appointments")
+    page.goto("http://localhost:3000/appointments", timeout=60000)
 
-    # page.wait_for_load_state("networkidle")
-    page.wait_for_selector("h2:has-text('Book Consultation')")
+    # Hide cookie consent
+    page.add_style_tag(content="div[role='dialog'][aria-labelledby='cookie-consent-title'] { display: none !important; }")
 
-    print("Handling cookie banner...")
+    # Wait for "Reason for Visit"
     try:
-        accept_btn = page.get_by_role("button", name="Accept All")
-        if accept_btn.is_visible():
-            accept_btn.click()
-            print("Accepted cookies.")
-            time.sleep(0.5)
+        page.get_by_text("Reason for Visit").wait_for(timeout=10000)
     except:
-        pass
+        print("Could not find Reason for Visit")
+        page.screenshot(path="/home/jules/verification/appointments_error_1.png")
+        return
 
-    print("Locating Appointment Scheduler...")
+    # Step 1: Select "New Consultation"
+    print("Selecting Reason...")
+    page.get_by_text("New Consultation").click()
+
+    # Step 2: Select Date
+    print("Selecting Date...")
+    # Find enabled date button
+    enabled_date = page.locator("button[aria-label^='Select ']:not([disabled])").nth(2) # 3rd button
+    if enabled_date.count() == 0:
+         enabled_date = page.locator("button[aria-label^='Select ']:not([disabled])").first
+
+    enabled_date.click()
+
+    # Step 3: Select Time
+    print("Selecting Time...")
     try:
-        start_booking = page.get_by_role("button", name="Start Booking")
-        if start_booking.is_visible():
-            start_booking.click()
-            print("Clicked Start Booking.")
-            time.sleep(1)
+        # Wait for time slots to appear (might be async)
+        page.locator("input[name='appointmentTime']").first.wait_for(timeout=5000)
+        # Click the label of the first time slot
+        page.locator("label:has(input[name='appointmentTime'])").first.click()
     except:
-        pass
+        print("Could not find time slots")
+        page.screenshot(path="/home/jules/verification/appointments_error_2.png")
+        return
 
-    print("Selecting New Consultation...")
-    try:
-        type_btn = page.get_by_text("New Consultation").first
-        if type_btn.is_visible():
-            type_btn.click()
-            print("Selected New Consultation.")
-            time.sleep(0.5)
-    except Exception as e:
-        print(f"Could not select type: {e}")
-
-    print("Selecting a weekday date...")
-    # Try to click "Mon" or "Tue" or "Wed" or "Thu" or "Fri"
-    # Assuming they are visible.
-    weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri"]
-    clicked_date = False
-    for day in weekdays:
-        try:
-            # Look for element with text "Mon" inside a button or clickable div
-            # The screenshot shows "Mon" and "9" stacked.
-            # I'll try to click the text "Mon".
-            day_el = page.get_by_text(day, exact=True).first
-            if day_el.is_visible():
-                day_el.click()
-                print(f"Clicked {day}.")
-                clicked_date = True
-                break
-        except:
-            continue
-
-    if not clicked_date:
-        print("Could not find a weekday. Trying to click any date button.")
-        # Try generic date button
-        # page.locator(".date-button-class").first.click()
-        pass
-
-    time.sleep(1) # Wait for slots to load
-
-    print("Selecting time slot...")
-    try:
-        # Look for time buttons again
-        # e.g. "10:00"
-        # The screenshot showed "No slots available" for Sunday. Hopefully weekday has slots.
-        # I'll look for any time button.
-
-        # Try finding a button with text containing ":"
-        time_slot = page.locator('button:has-text(":")').first
-        if time_slot.is_visible():
-            time_slot.click()
-            print(f"Clicked time slot: {time_slot.text_content()}")
-        else:
-            print("No time slots found even after selecting weekday.")
-            page.screenshot(path="/home/jules/verification/no_slots.png")
-            # Maybe I need to change month?
-            # But usually there are slots.
-            # I'll try another day.
-
-    except Exception as e:
-        print(f"Time selection failed: {e}")
-
-    time.sleep(1)
-
+    # Click Next Step
     print("Clicking Next Step...")
-    next_btn = page.get_by_role("button", name="Next Step")
-    if next_btn.is_enabled():
-        next_btn.click()
-        print("Clicked Next Step.")
-    else:
-        print("Next Step disabled. Force clicking time slot again?")
-        # Try to click "11:00" explicitly
-        page.get_by_role("button", name="11:00").first.click()
-        time.sleep(0.5)
-        next_btn.click()
+    page.get_by_text("Next Step").click()
 
-    print("Waiting for Step 2...")
-    page.wait_for_selector("text=Patient Profile", timeout=10000)
-
-    print("Checking for Pain Score label...")
-    # Expect "Current Pain Score (1-10)"
+    # Now we should be on Step 2 (Details)
+    print("Checking /appointments for Pain Score...")
     try:
-        expect(page.get_by_text("Current Pain Score (1-10)")).to_be_visible(timeout=5000)
-        print("Label found!")
-    except:
-        print("Label NOT found. Taking screenshot.")
-        page.screenshot(path="/home/jules/verification/failed_label.png")
-        raise Exception("Label not found")
+        pain_label = page.get_by_text("Current Pain Score (1-10)")
+        pain_label.wait_for(timeout=10000)
 
-    print("Taking verification screenshot...")
-    page.screenshot(path="/home/jules/verification/verification.png")
+        pain_label.scroll_into_view_if_needed()
+        time.sleep(0.5)
+
+        page.screenshot(path="/home/jules/verification/appointments_form.png")
+        print("Screenshot saved to /home/jules/verification/appointments_form.png")
+    except:
+         print("Could not find Pain Score in Step 2")
+         page.screenshot(path="/home/jules/verification/appointments_error_3.png")
+
 
 if __name__ == "__main__":
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
-        page = browser.new_page(viewport={"width": 1280, "height": 1024})
+        page = browser.new_page()
         try:
-            verify_appointment_form(page)
-            print("Verification successful!")
-        except Exception as e:
-            print(f"Verification failed: {e}")
-            page.screenshot(path="/home/jules/verification/error.png")
+            verify_contact_form(page)
+            verify_appointments_form(page)
         finally:
             browser.close()

@@ -1,35 +1,37 @@
 import { SITE_URL } from '../../../src/lib/seo';
+import {
+  CANONICAL_PHYSICIAN_NAME,
+  CANONICAL_TELEPHONE,
+  YASHODA_MALAKPET_ADDRESS,
+  SOCIAL_PROFILES
+} from '@/src/data/locations';
 
 export default function OrganizationSchema() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "Organization",
     "@id": `${SITE_URL}/#organization`,
-    "name": "Dr. Sayuj Krishnan - Neurosurgeon",
+    "name": CANONICAL_PHYSICIAN_NAME,
     "url": SITE_URL,
     "logo": `${SITE_URL}/images/og-default.jpg`,
     "image": `${SITE_URL}/images/og-default.jpg`,
     "description": "Premier neurosurgery practice in Hyderabad specializing in minimally invasive brain and spine surgery. German-trained neurosurgeon with 1,000+ endoscopic procedures.",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Room No 317, OPD Block, Yashoda Hospital",
-      "addressLocality": "Malakpet",
-      "addressRegion": "Telangana",
-      "postalCode": "500036",
-      "addressCountry": "IN"
+      "streetAddress": YASHODA_MALAKPET_ADDRESS.streetAddress,
+      "addressLocality": YASHODA_MALAKPET_ADDRESS.addressLocality,
+      "addressRegion": YASHODA_MALAKPET_ADDRESS.addressRegion,
+      "postalCode": YASHODA_MALAKPET_ADDRESS.postalCode,
+      "addressCountry": YASHODA_MALAKPET_ADDRESS.addressCountry
     },
     "contactPoint": {
       "@type": "ContactPoint",
-      "telephone": "+91-9778280044",
+      "telephone": CANONICAL_TELEPHONE,
       "contactType": "customer service",
       "areaServed": "IN",
       "availableLanguage": ["en", "hi", "te"]
     },
-    "sameAs": [
-      "https://www.yashodahospitals.com/doctor/dr-sayuj-krishnan/",
-      "https://www.linkedin.com/in/dr-sayuj-krishnan",
-      "https://g.co/kgs/9366939683880052414"
-    ]
+    "sameAs": SOCIAL_PROFILES
   };
 
   return (
@@ -39,4 +41,3 @@ export default function OrganizationSchema() {
     />
   );
 }
-

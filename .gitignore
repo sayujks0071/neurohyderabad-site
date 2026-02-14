@@ -99,3 +99,9 @@ service_account_credentials.json
 !tsconfig.json
 !jsconfig.json
 .swc/
+
+# SEO Audit Artifacts
+audit/lighthouse/*.json
+audit/lighthouse/*.html
+audit/crawl/*.json
+audit/crawl/*.csv

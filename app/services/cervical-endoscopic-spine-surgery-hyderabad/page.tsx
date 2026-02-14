@@ -16,7 +16,7 @@ import FAQPageSchema from '@/app/_components/FAQPageSchema';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 
 const baseMetadata = makeMetadata({
-  title: 'Cervical Endoscopic Spine Surgery Hyderabad | Dr. Sayuj Krishnan',
+  title: 'Cervical Endoscopic Spine Surgery Hyderabad | Dr Sayuj',
   description: 'Advanced cervical endoscopic spine surgery in Hyderabad. Treat neck pain and radiculopathy with keyhole surgery. Fast recovery, no fusion.',
   canonicalPath: '/services/cervical-endoscopic-spine-surgery-hyderabad',
 });

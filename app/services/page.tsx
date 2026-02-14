@@ -4,6 +4,8 @@ import { SITE_URL } from '../../src/lib/seo';
 import MedicalReviewNotice from '../../src/components/MedicalReviewNotice';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import RemotionVideoEmbedWrapper from '../_components/RemotionVideoEmbedWrapper';
+import MedicalWebPageSchema from '../components/schemas/MedicalWebPageSchema';
+import BreadcrumbSchema from '../components/schemas/BreadcrumbSchema';
 
 export const metadata: Metadata = {
   title: 'Neurosurgical Services in Hyderabad | Dr. Sayuj Krishnan',
@@ -23,16 +25,16 @@ export const metadata: Metadata = {
     'ROSA DBS hyderabad'
   ],
   alternates: {
-    canonical: `${SITE_URL}/services/`,
+    canonical: `${SITE_URL}/services`,
     languages: {
-      'en-IN': `${SITE_URL}/services/`,
-      'x-default': `${SITE_URL}/services/`
+      'en-IN': `${SITE_URL}/services`,
+      'x-default': `${SITE_URL}/services`
     }
   },
   openGraph: {
     title: 'Neurosurgical Services in Hyderabad | Dr. Sayuj Krishnan',
     description: 'Expert neurosurgical services including endoscopic spine surgery, brain tumor surgery, epilepsy surgery, and trigeminal neuralgia treatment in Hyderabad.',
-    url: `${SITE_URL}/services/`,
+    url: `${SITE_URL}/services`,
     siteName: 'Dr. Sayuj Krishnan - Neurosurgeon in Hyderabad',
     images: [
       {
@@ -110,6 +112,21 @@ export default function ServicesPage() {
 
   return (
     <div className="min-h-screen bg-white">
+      <MedicalWebPageSchema
+        pageType="service"
+        pageSlug="/services"
+        title="Neurosurgical Services in Hyderabad | Dr. Sayuj Krishnan"
+        description="Expert neurosurgical services including endoscopic spine surgery, brain tumor surgery, epilepsy surgery, and trigeminal neuralgia treatment in Hyderabad."
+        serviceOrCondition="Neurosurgery Services"
+        breadcrumbs={[{ name: "Home", path: "/" }, { name: "Services", path: "/services" }]}
+        medicalSpecialty={["Neurosurgery", "Spine Surgery", "Brain Tumor Surgery"]}
+        audience="Patients seeking neurosurgical care in Hyderabad"
+      />
+      <BreadcrumbSchema items={[
+        { name: "Home", path: "/" },
+        { name: "Services", path: "/services" }
+      ]} />
+
       <div className="container mx-auto px-4 py-16">
         <header className="text-center mb-12">
           <h1 className="text-4xl font-bold text-blue-800 mb-4">Neurosurgical Services</h1>
@@ -362,107 +379,6 @@ export default function ServicesPage() {
         {/* Local Pathways */}
         <LocalPathways mode="service" />
       </div>
-
-      {/* JSON-LD Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "MedicalWebPage",
-            "mainEntityOfPage": `${SITE_URL}/services/`,
-            "name": "Neurosurgical Services in Hyderabad | Dr. Sayuj Krishnan",
-            "description": "Expert neurosurgical services including endoscopic spine surgery, brain tumor surgery, epilepsy surgery, and trigeminal neuralgia treatment in Hyderabad.",
-            "medicalSpecialty": "Neurosurgery",
-            "about": [
-              {
-                "@type": "MedicalProcedure",
-                "name": "Endoscopic Spine Surgery",
-                "description": "Minimally invasive spine procedures using advanced endoscopic techniques"
-              },
-              {
-                "@type": "MedicalProcedure", 
-                "name": "Brain Tumor Surgery",
-                "description": "Advanced neuronavigation-guided microsurgery with neuromonitoring"
-              },
-              {
-                "@type": "MedicalProcedure",
-                "name": "Epilepsy Surgery", 
-                "description": "Comprehensive surgical treatment for drug-resistant epilepsy"
-              }
-            ],
-            "author": {
-              "@id": `${SITE_URL}/#physician`
-            },
-            "publisher": {
-              "@id": `${SITE_URL}/#organization`
-            },
-            "datePublished": "2023-01-01T00:00:00+05:30",
-            "dateModified": new Date().toISOString(),
-            "breadcrumb": {
-              "@type": "BreadcrumbList",
-              "itemListElement": [
-                {
-                  "@type": "ListItem",
-                  "position": 1,
-                  "name": "Home",
-                  "item": `${SITE_URL}/`
-                },
-                {
-                  "@type": "ListItem",
-                  "position": 2,
-                  "name": "Services",
-                  "item": `${SITE_URL}/services/`
-                }
-              ]
-            },
-            "potentialAction": {
-              "@type": "SeekToAction",
-              "target": `${SITE_URL}/appointments`,
-              "queryInput": "required name=query"
-            },
-            "hasPart": [
-              {
-                "@type": "FAQPage",
-                "mainEntity": [
-                  {
-                    "@type": "Question",
-                    "name": "What makes endoscopic surgery different from traditional surgery?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": "Endoscopic surgery uses small incisions (8-10mm) and specialized instruments to access and treat spine conditions. This results in less muscle damage, reduced pain, faster recovery, and lower risk of complications compared to traditional open surgery."
-                    }
-                  },
-                  {
-                    "@type": "Question",
-                    "name": "How long is the recovery time for endoscopic procedures?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": "Recovery times vary by procedure, but most endoscopic spine surgeries allow patients to return to desk work within 1-2 weeks and full activities within 4-6 weeks. This is significantly faster than traditional open surgery."
-                    }
-                  },
-                  {
-                    "@type": "Question",
-                    "name": "Are all patients candidates for minimally invasive surgery?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": "Not all patients are suitable for endoscopic procedures. We evaluate each case individually based on MRI findings, symptoms, and overall health. Some complex cases may require traditional open surgery for optimal outcomes."
-                    }
-                  },
-                  {
-                    "@type": "Question",
-                    "name": "What should I expect during my consultation?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": "During your consultation, Dr. Sayuj will review your MRI scans, discuss your symptoms, explain treatment options, and develop a personalized treatment plan. Bring your imaging studies and a list of current medications."
-                    }
-                  }
-                ]
-              }
-            ]
-          })
-        }}
-      />
     </div>
   );
 }

@@ -112,14 +112,14 @@ export default function StickyCTA({ className = '' }: StickyCTAProps) {
   }
 
   const buttonToneClasses: Record<CTAIntent, string> = {
-    call: "bg-green-700 hover:bg-green-800 text-white",
-    whatsapp: "bg-green-700 hover:bg-green-800 text-white",
-    appointment: "bg-blue-700 hover:bg-blue-800 text-white",
+    call: "bg-gradient-to-r from-green-600 to-emerald-600 text-white shadow-lg shadow-green-500/30 hover:shadow-green-500/50",
+    whatsapp: "bg-gradient-to-r from-green-600 to-emerald-600 text-white shadow-lg shadow-green-500/30 hover:shadow-green-500/50",
+    appointment: "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50",
   };
 
   return (
     <div 
-      className={`fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-50 p-4 ${className}`}
+      className={`fixed bottom-0 left-0 right-0 bg-white/70 backdrop-blur-lg border-t border-white/20 shadow-[0_-4px_20px_-5px_rgba(0,0,0,0.1)] z-50 p-4 transition-all duration-300 ${className}`}
       role="region"
       aria-label="Quick contact options"
     >
@@ -143,7 +143,7 @@ export default function StickyCTA({ className = '' }: StickyCTAProps) {
                 target={button.target}
                 rel={button.rel}
                 onClick={() => handleCTAClick(button)}
-                className={`${buttonToneClasses[button.intent]} font-semibold rounded-lg transition-colors duration-200 px-4 py-3 min-h-[44px] text-sm flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2`}
+                className={`${buttonToneClasses[button.intent]} font-semibold rounded-xl transition-all duration-300 motion-safe:hover:scale-[1.02] motion-safe:active:scale-[0.98] px-4 py-3 min-h-[44px] text-sm flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2`}
                 aria-label={button.ariaLabel || button.label}
               >
                 <CTAIcon intent={button.intent} />

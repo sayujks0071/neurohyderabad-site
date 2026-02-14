@@ -22,9 +22,9 @@ import FAQPageSchema from '@/app/_components/FAQPageSchema';
 const SERVICE_SLUG = 'brain-tumor-surgery-hyderabad';
 
 const baseMetadata = makeMetadata({
-  title: 'Brain Tumor Surgery Hyderabad | Awake Craniotomy | Dr Sayuj',
+  title: 'Brain Tumor Surgery Hyderabad | Top Neurosurgeon | Dr Sayuj',
   description:
-    'Advanced brain tumor removal with Neuronavigation & Awake Surgery. Best Neuro-Oncologist in Hyderabad for complex cases. High safety standards.',
+    'Expert Brain Tumor Surgery in Hyderabad. Advanced Awake Craniotomy & Neuronavigation for safe removal. Dr Sayuj Krishnan - Best Neurosurgeon. Consult now.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
 });
 
@@ -131,25 +131,25 @@ const faqs = [
 const COSTS = [
   {
     procedure: 'Craniotomy (Tumor Excision)',
-    range: 'Ask for Estimate',
+    range: '₹2,80,000 - ₹4,50,000',
     recovery: '5-7 Days (ICU + Ward)',
     includes: ['Microsurgery', 'Neuronavigation', 'ICU Stay (2-3 days)']
   },
   {
     procedure: 'Awake Craniotomy',
-    range: 'Ask for Estimate',
+    range: '₹3,50,000 - ₹5,50,000',
     recovery: '3-5 Days',
     includes: ['Functional Mapping', 'Anaesthesia Team', 'Rapid Recovery Protocol']
   },
   {
     procedure: 'Stereotactic Biopsy',
-    range: '₹1,00,000 - ₹1,50,000',
+    range: '₹1,20,000 - ₹1,80,000',
     recovery: '1-2 Days',
     includes: ['Needle Biopsy', 'Histopathology', 'Day Care/Short Stay']
   },
   {
-    procedure: 'Endoscopic Pituitary Surgery',
-    range: '₹2,00,000 - ₹3,00,000',
+    procedure: 'Endoscopic Skull Base/Pituitary',
+    range: '₹3,50,000 - ₹5,50,000',
     recovery: '3-4 Days',
     includes: ['Transnasal Approach', 'Endocrinology Review', 'Skull Base Repair']
   }
@@ -200,8 +200,8 @@ export default function BrainTumorSurgeryHyderabadPage() {
     <>
       <JsonLd data={serviceSchema} />
       <MedicalWebPageSchema
-        title="Brain Tumor Surgery Hyderabad | Advanced Safety & Care – Dr. Sayuj"
-        description="Advanced brain tumor surgery in Hyderabad with Dr. Sayuj Krishnan. High success rates with Neuronavigation & Awake Craniotomy for faster recovery. Trusted Neuro-Oncology care."
+        title="Brain Tumor Surgery Hyderabad | Best Neurosurgeon | Dr Sayuj"
+        description="Expert Brain Tumor Surgery in Hyderabad. Advanced Awake Craniotomy & Neuronavigation for safe removal. Dr Sayuj Krishnan - Best Neurosurgeon. Consult now."
         pageSlug={`/services/${SERVICE_SLUG}/`}
         pageType="service"
         serviceOrCondition="Brain Tumor Surgery"
@@ -226,7 +226,7 @@ export default function BrainTumorSurgeryHyderabadPage() {
             </h1>
             <AuthorByline
               publishedOn="2024-09-04"
-              updatedOn="2025-02-20"
+              updatedOn="2026-02-22"
               className="mb-6"
             />
             <p className="text-lg text-gray-700 mb-6">
@@ -362,6 +362,17 @@ export default function BrainTumorSurgeryHyderabadPage() {
         </section>
 
         <section className="mb-16">
+          <h2 className="text-3xl font-bold text-blue-900 mb-6">Related Conditions</h2>
+          <div className="bg-blue-50 border border-blue-100 rounded-xl p-6">
+             <h3 className="text-xl font-semibold text-blue-800 mb-3">Facial Pain & Skull Base Disorders</h3>
+             <p className="text-gray-700 mb-4">
+               Some brain tumors (like acoustic neuromas or meningiomas) can press on cranial nerves, causing facial pain.
+               If you are experiencing severe facial shock-like pain, read our guide on <Link href="/conditions/trigeminal-neuralgia-treatment-hyderabad" className="text-blue-700 underline font-semibold hover:text-blue-900">Trigeminal Neuralgia Treatment</Link>.
+             </p>
+          </div>
+        </section>
+
+        <section className="mb-16">
           <h2 className="text-3xl font-bold text-blue-900 mb-4">Trusted by Patients Across Telangana & AP</h2>
           <p className="text-gray-700 mb-6">
             We routinely handle referrals from oncology centres in Secunderabad, Warangal, Nalgonda, Guntur, and Vishakhapatnam.
@@ -394,6 +405,7 @@ export default function BrainTumorSurgeryHyderabadPage() {
         <CostTransparencySection
           costs={COSTS}
           disclaimer="Costs for brain tumor surgery depend heavily on tumor size, ICU duration, and specialized equipment (neuronavigation). The above ranges are indicative. Insurance coverage is available for most procedures."
+          showInsurance={true}
         />
 
         <section className="mb-16 grid lg:grid-cols-[1.2fr_1fr] gap-10 items-start">

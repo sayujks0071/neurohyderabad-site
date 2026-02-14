@@ -1,22 +1,36 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
 
 const StickyCTA = dynamic(() => import('./StickyCTA'), { ssr: false });
 
 export default function DynamicStickyCTA() {
   const [shouldLoad, setShouldLoad] = useState(false);
+  const sentinelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Handler for scroll interaction
-    const handleScroll = () => {
-      setShouldLoad(true);
-    };
+    // If already loaded, no need to attach listener
+    if (shouldLoad) return;
 
-    // Add scroll listener immediately
-    // Use passive listener for better scroll performance
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    // Fallback for browsers without IntersectionObserver support
+    if (typeof window !== 'undefined' && !window.IntersectionObserver) {
+      setShouldLoad(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(([entry]) => {
+      // ⚡ Bolt: Load when user scrolls past 100px (sentinel exits viewport)
+      // Use IntersectionObserver instead of scroll listener for better performance
+      if (!entry.isIntersecting) {
+        setShouldLoad(true);
+        observer.disconnect();
+      }
+    });
+
+    if (sentinelRef.current) {
+      observer.observe(sentinelRef.current);
+    }
 
     // Fallback: Load after 4 seconds to ensure availability even without scroll
     // This helps with tracking or if the user interacts in other ways
@@ -25,13 +39,29 @@ export default function DynamicStickyCTA() {
     }, 4000);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      observer.disconnect();
       clearTimeout(timer);
     };
-  }, []);
+  }, [shouldLoad]); // ⚡ Bolt: Depend on shouldLoad to cleanup listener once loaded
 
   if (!shouldLoad) {
-    return null;
+    // ⚡ Bolt: Sentinel element for scroll detection (100px height)
+    // When this element scrolls out of view (top), we know user scrolled > 100px
+    return (
+      <div
+        ref={sentinelRef}
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '1px',
+          height: '100px',
+          visibility: 'hidden',
+          pointerEvents: 'none'
+        }}
+        aria-hidden="true"
+      />
+    );
   }
 
   return <StickyCTA />;

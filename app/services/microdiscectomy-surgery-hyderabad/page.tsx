@@ -14,8 +14,10 @@ import TrustProof from '@/app/_components/TrustProof';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import { getServiceSources } from '../sources';
 import { patientStories } from '@/src/content/stories';
-import SurgeryComparisonTable from '@/src/components/SurgeryComparisonTable';
+import MicroVsEndoTable from '@/src/components/MicroVsEndoTable';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
+import MedicalWebPageSchema from '@/app/components/schemas/MedicalWebPageSchema';
+import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
 
 const SERVICE_SLUG = 'microdiscectomy-surgery-hyderabad';
 
@@ -214,6 +216,22 @@ export default function MicrodiscectomySurgeryPage() {
 
   return (
     <>
+      <MedicalWebPageSchema
+        pageType="service"
+        pageSlug={`/services/${SERVICE_SLUG}`}
+        title="Microdiscectomy Surgery Hyderabad | Microscopic Spine Surgery"
+        description="Gold standard microscopic spine surgery (Microdiscectomy) in Hyderabad by Dr. Sayuj Krishnan. High precision removal of slip disc using Zeiss operating microscope."
+        serviceOrCondition="Microdiscectomy Surgery"
+        medicalSpecialty="Spine Surgery"
+        audience="Patients"
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', path: '/' },
+          { name: 'Services', path: '/services/' },
+          { name: 'Microdiscectomy Surgery Hyderabad', path: `/services/${SERVICE_SLUG}` },
+        ]}
+      />
       <JsonLd data={schema} />
       <main className="container mx-auto px-4 py-16">
         <Breadcrumbs
@@ -383,8 +401,7 @@ export default function MicrodiscectomySurgeryPage() {
            <p className="text-gray-700 mb-6">
              Both are minimally invasive options. Endoscopic uses a camera; Microdiscectomy uses a microscope. Here is a comparison:
            </p>
-           {/* Reusing the table component - it might need context adjustment but usually works for general comparisons */}
-           <SurgeryComparisonTable />
+           <MicroVsEndoTable />
            <p className="mt-4 text-sm text-gray-600">
              *Dr. Sayuj performs both procedures and will recommend the best one based on your specific MRI findings.
            </p>
