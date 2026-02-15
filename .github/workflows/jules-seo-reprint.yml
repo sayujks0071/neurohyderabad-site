@@ -18,7 +18,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Create Issue
+      - name: Create Jules Issue
         uses: actions/github-script@v7
         env:
           PROMPT_FILE: jules-prompts/seo-reprint.md
@@ -96,4 +96,4 @@ jobs:
 
             console.log(`Created issue: ${newIssue.html_url}`);
 
-# Verified by Jules 2026-02-14
+# Verified by Jules 2026-02-15
