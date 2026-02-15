@@ -44,3 +44,8 @@
 - [x] **Content Improvement:** Added "Red Flags" emergency section to Spine Surgery page. (Done 2026-02-12)
 - [ ] **Content Gap:** Add similar "Red Flags" sections to other critical pages (Brain Tumor, Epilepsy).
 - [ ] **Technical Fix:** Investigate `middleware.ts` type definition properly (currently using `@ts-ignore`).
+
+## 2026-02-15
+*   **Opportunity:** Interactive "Symptom Checker" for Sciatica/Back Pain.
+*   **Opportunity:** "Recovery Timeline" visualizer for key surgeries (Endoscopic Discectomy).
+*   **Opportunity:** Video Testimonials embedded directly in service pages.

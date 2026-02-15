@@ -13,6 +13,9 @@ interface MedicalWebPageSchemaProps {
   medicalSpecialty?: string | string[];
   audience?: string;
   locationId?: LocationId;
+  symptoms?: string[];
+  treatments?: string[];
+  riskFactors?: string[];
 }
 
 export default function MedicalWebPageSchema({
@@ -26,7 +29,10 @@ export default function MedicalWebPageSchema({
   breadcrumbs = [],
   medicalSpecialty,
   audience,
-  locationId = 'malakpet'
+  locationId = 'malakpet',
+  symptoms,
+  treatments,
+  riskFactors
 }: MedicalWebPageSchemaProps) {
   const location = getLocationById(locationId) || getLocationById('malakpet');
 
@@ -139,20 +145,48 @@ export default function MedicalWebPageSchema({
 
   // Add condition-specific schema
   if (pageType === 'condition' && serviceOrCondition) {
-    baseSchema.mainEntity = {
+    const treatmentsSchema = treatments && treatments.length > 0
+      ? treatments.map(t => ({
+          "@type": "MedicalTherapy",
+          "name": t,
+          "provider": {
+            "@type": "Physician",
+            "@id": `${SITE_URL}/#physician`,
+            "name": CANONICAL_PHYSICIAN_NAME
+          }
+        }))
+      : {
+          "@type": "MedicalTherapy",
+          "name": "Neurosurgical Treatment",
+          "provider": {
+            "@type": "Physician",
+            "@id": `${SITE_URL}/#physician`,
+            "name": CANONICAL_PHYSICIAN_NAME
+          }
+        };
+
+    const conditionSchema: any = {
       "@type": "MedicalCondition",
       "name": serviceOrCondition,
       "description": description,
-      "possibleTreatment": {
-        "@type": "MedicalTherapy",
-        "name": "Neurosurgical Treatment",
-        "provider": {
-          "@type": "Physician",
-          "@id": `${SITE_URL}/#physician`,
-          "name": CANONICAL_PHYSICIAN_NAME
-        }
-      }
+      "possibleTreatment": treatmentsSchema
     };
+
+    if (symptoms && symptoms.length > 0) {
+      conditionSchema.signOrSymptom = symptoms.map(s => ({
+        "@type": "MedicalSymptom",
+        "name": s
+      }));
+    }
+
+    if (riskFactors && riskFactors.length > 0) {
+      conditionSchema.riskFactor = riskFactors.map(r => ({
+        "@type": "MedicalRiskFactor",
+        "name": r
+      }));
+    }
+
+    baseSchema.mainEntity = conditionSchema;
   }
 
   return (

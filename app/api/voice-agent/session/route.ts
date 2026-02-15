@@ -5,7 +5,7 @@ import { sanitizeForPrompt } from '@/src/lib/validation';
 
 export async function POST(req: NextRequest) {
   // 🛡️ Sentinel: Rate limiting - 10 requests per minute per IP to prevent cost exhaustion
-  const ip = req.ip ?? req.headers.get("x-forwarded-for") ?? "unknown";
+    const ip = (req as any).ip ?? req.headers.get("x-forwarded-for") ?? "unknown";
   const limit = rateLimit(ip, 10, 60 * 1000);
 
   if (!limit.success) {

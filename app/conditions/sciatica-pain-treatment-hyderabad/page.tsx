@@ -426,31 +426,39 @@ export default function SciaticaTreatmentPage() {
 
       <section className="mb-12">
         <h2 className="text-2xl font-semibold mb-6 text-blue-700">Red Flags: When to See a Doctor Urgently</h2>
-        <div className="bg-red-50 p-6 rounded-lg border border-red-100">
-          <p className="text-gray-700 mb-4 font-semibold">
-            Do not ignore sciatica if you have:
+        <div className="bg-red-50 p-6 rounded-lg border-l-4 border-red-500 shadow-sm">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="bg-red-100 p-2 rounded-full text-red-600">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            </div>
+            <h3 className="text-xl font-bold text-red-800 m-0">EMERGENCY CHECKLIST</h3>
+          </div>
+          <p className="text-gray-800 mb-4 font-medium pl-1">
+            Do not wait. Seek immediate medical attention if you have:
           </p>
-          <ul className="space-y-2 text-gray-700">
+          <ul className="space-y-3 text-gray-700 pl-1">
             <li className="flex items-start">
-              <span className="text-red-600 mr-2 mt-1">!</span>
-              <span>Sudden, severe pain or numbness in both legs</span>
+              <span className="text-red-600 mr-3 mt-1 font-bold">!</span>
+              <span><strong>Sudden, severe pain or numbness in both legs</strong> (Bilateral symptoms)</span>
             </li>
             <li className="flex items-start">
-              <span className="text-red-600 mr-2 mt-1">!</span>
-              <span>Loss of bowel or bowel control (incontinence)</span>
+              <span className="text-red-600 mr-3 mt-1 font-bold">!</span>
+              <span><strong>Loss of bowel or bladder control</strong> (Incontinence or inability to pass urine)</span>
             </li>
             <li className="flex items-start">
-              <span className="text-red-600 mr-2 mt-1">!</span>
-              <span>"Saddle anesthesia" - numbness in the groin area</span>
+              <span className="text-red-600 mr-3 mt-1 font-bold">!</span>
+              <span><strong>"Saddle anesthesia"</strong> - numbness in the groin/buttock area where you would sit on a saddle</span>
             </li>
             <li className="flex items-start">
-              <span className="text-red-600 mr-2 mt-1">!</span>
-              <span>Foot drop (difficulty lifting the front of your foot)</span>
+              <span className="text-red-600 mr-3 mt-1 font-bold">!</span>
+              <span><strong>Foot drop</strong> (Sudden difficulty lifting the front of your foot while walking)</span>
             </li>
           </ul>
-          <p className="text-sm text-red-700 mt-4">
-            These could be signs of Cauda Equina Syndrome, a medical emergency requiring immediate surgery.
-          </p>
+          <div className="mt-6 p-4 bg-white/60 rounded border border-red-200">
+            <p className="text-sm text-red-800 font-semibold">
+              ⚠️ These are signs of Cauda Equina Syndrome, a rare but serious medical emergency requiring immediate decompression surgery to prevent permanent paralysis.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -576,8 +584,29 @@ export default function SciaticaTreatmentPage() {
         description="Best Sciatica treatment in Hyderabad. 90% patients recover without surgery using nerve blocks & meds. Endoscopic cure available. Book Dr Sayuj."
         pageSlug="/conditions/sciatica-pain-treatment-hyderabad/"
         pageType="condition"
-        serviceOrCondition="Sciatica Treatment"
+        serviceOrCondition="Sciatica"
         breadcrumbs={breadcrumbs}
+        symptoms={[
+          "Radiating leg pain",
+          "Numbness in leg or foot",
+          "Weakness in leg",
+          "Foot drop (difficulty lifting foot)",
+          "Burning sensation down the leg",
+          "Pain worsening with coughing or sitting"
+        ]}
+        treatments={[
+          "Conservative Management (Medication, Rest)",
+          "Specialized Physiotherapy",
+          "Transforaminal Nerve Root Block (Injection)",
+          "Endoscopic Discectomy (Minimally Invasive Surgery)"
+        ]}
+        riskFactors={[
+          "Prolonged sitting",
+          "Herniated disc (Slip Disc)",
+          "Spinal stenosis",
+          "Obesity",
+          "Heavy lifting"
+        ]}
       />
 
       <FAQPageSchema
