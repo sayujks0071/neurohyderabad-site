@@ -1,9 +1,37 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { isAIGatewayConfigured, getGatewayModel, getGatewayBaseUrl } from '@/src/lib/ai/gateway';
+import { rateLimit } from '@/src/lib/rate-limit';
+import { sanitizeForPrompt } from '@/src/lib/validation';
 
 export async function POST(req: NextRequest) {
+  // 🛡️ Sentinel: Rate limiting - 10 requests per minute per IP to prevent cost exhaustion
+  const ip = req.ip ?? req.headers.get("x-forwarded-for") ?? "unknown";
+  const limit = rateLimit(ip, 10, 60 * 1000);
+
+  if (!limit.success) {
+    return NextResponse.json(
+      {
+        error: "Too many requests. Please try again later.",
+        message: "Rate limit exceeded. Please wait a moment."
+      },
+      { status: 429 }
+    );
+  }
+
   try {
     const { instructions, voice = 'alloy', model = 'gpt-4o-realtime-preview' } = await req.json();
+
+    // 🛡️ Sentinel: Input validation to prevent abuse
+    // 1. Sanitize instructions to remove control characters and limit length (2000 chars)
+    const cleanInstructions = sanitizeForPrompt(instructions, 2000);
+
+    // 2. Validate voice (whitelist)
+    const ALLOWED_VOICES = ['alloy', 'echo', 'shimmer', 'ash', 'ballad', 'coral', 'sage', 'verse'];
+    const safeVoice = ALLOWED_VOICES.includes(voice) ? voice : 'alloy';
+
+    // 3. Validate model (strict whitelist to prevent using expensive/unknown models)
+    const ALLOWED_MODELS = ['gpt-4o-realtime-preview', 'gpt-4o-realtime-preview-2024-10-01'];
+    const safeModel = ALLOWED_MODELS.includes(model) ? model : 'gpt-4o-realtime-preview';
 
     const apiKey = process.env.AI_GATEWAY_API_KEY || process.env.OPENAI_API_KEY;
 
@@ -21,7 +49,7 @@ export async function POST(req: NextRequest) {
       ? getGatewayBaseUrl()
       : 'https://api.openai.com/v1';
 
-    const finalModel = isGateway ? getGatewayModel(model) : model;
+    const finalModel = isGateway ? getGatewayModel(safeModel) : safeModel;
 
     // Create a session with OpenAI Realtime API (or via Gateway)
     const response = await fetch(`${baseUrl}/realtime/sessions`, {
@@ -32,8 +60,8 @@ export async function POST(req: NextRequest) {
       },
       body: JSON.stringify({
         model: finalModel,
-        voice,
-        instructions,
+        voice: safeVoice,
+        instructions: cleanInstructions,
         modalities: ['text', 'audio'],
         input_audio_format: 'pcm16',
         output_audio_format: 'pcm16',
