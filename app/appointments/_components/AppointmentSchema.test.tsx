@@ -32,6 +32,7 @@ describe('AppointmentSchema', () => {
       // Verify Area Served
       expect(physician.areaServed).toBeDefined();
       expect(physician.areaServed.name).toContain('Hyderabad');
+      expect(physician.openingHoursSpecification).toBeDefined();
 
       // Verify MedicalClinic
       expect(clinic).toBeDefined();
