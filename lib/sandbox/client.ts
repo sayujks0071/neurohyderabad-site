@@ -34,6 +34,19 @@ export async function createSandbox(options: CreateSandboxOptions = {}) {
   }
 }
 
+export async function getSandbox(sandboxId: string) {
+  try {
+    const sandbox = await Sandbox.get({ sandboxId });
+    return sandbox;
+  } catch (err: any) {
+    console.error('Sandbox retrieval failed:', err);
+    if (err.message?.includes('OIDC') || err.message?.includes('token')) {
+      throw new SandboxOIDCError();
+    }
+    throw new SandboxError(`Failed to get sandbox: ${err.message}`);
+  }
+}
+
 export async function destroySandbox(sandbox: Sandbox) {
   try {
     const s = sandbox as any;

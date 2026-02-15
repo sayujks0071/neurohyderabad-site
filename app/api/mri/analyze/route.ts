@@ -2,10 +2,7 @@ import { NextResponse } from "next/server";
 import { rateLimit } from "@/src/lib/rate-limit";
 import { extractPdfTextInSandbox } from "@/lib/mri/pdfExtract";
 import { interpretReportText } from "@/lib/interpretReport";
-
-// Validation constants
-const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
-const ALLOWED_MIME = 'application/pdf';
+import { validatePdf } from "@/lib/mri/validation";
 
 export const runtime = "nodejs"; // Sandbox SDK requires nodejs runtime
 export const maxDuration = 60; // 60 seconds
@@ -43,21 +40,12 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "No file uploaded" }, { status: 400 });
     }
 
-    if (file.type !== ALLOWED_MIME) {
-      return NextResponse.json({ error: "Invalid file type. Only PDF is allowed." }, { status: 400 });
+    const validation = await validatePdf(file);
+    if (!validation.isValid) {
+      return NextResponse.json({ error: validation.error }, { status: validation.status || 400 });
     }
 
-    if (file.size > MAX_FILE_SIZE) {
-      return NextResponse.json({ error: "File too large. Max size is 10MB." }, { status: 413 });
-    }
-
-    // Basic magic bytes check (best effort)
     const buffer = Buffer.from(await file.arrayBuffer());
-    const header = buffer.subarray(0, 5).toString();
-    if (!header.startsWith('%PDF-')) {
-       // Ideally we check more bytes but %PDF- is standard for PDF 1.x
-       return NextResponse.json({ error: "Invalid file format. Not a PDF." }, { status: 400 });
-    }
 
     // Extract text in sandbox
     const extraction = await extractPdfTextInSandbox(buffer);
