@@ -186,15 +186,20 @@ export default function RootLayout({
         </a>
         <Header />
         <TrustStrip />
+        <main id="main-content" tabIndex={-1} role="main">
+          {children}
+        </main>
+        <Footer />
+        {/*
+          HypertuneWrapper is placed at the end to prevent blocking LCP of the main content.
+          Components inside <main> that use Hypertune hooks will use fallback values during SSR/initial render.
+          Floating widgets that strictly require Hypertune context are kept inside the wrapper here.
+        */}
         <HypertuneWrapper>
           <FlagValuesEmitter />
-          <main id="main-content" tabIndex={-1} role="main">
-            {children}
-          </main>
           <FloatingChatWidget />
           <DynamicStickyCTA />
         </HypertuneWrapper>
-        <Footer />
         <StandaloneFlagValues />
         {process.env.VERCEL ? <Analytics /> : null}
       </body>
