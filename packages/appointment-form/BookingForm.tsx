@@ -311,9 +311,8 @@ export default function BookingForm({
                 )}
               </div>
 
-              <div
-                className="flex items-center p-4 bg-slate-50 rounded-xl border border-slate-200 hover:border-cyan-300 transition-colors"
-                title="Check this if you have digital or physical copies of your scans"
+              <label
+                className="flex items-center p-4 bg-slate-50 rounded-xl border border-slate-200 hover:border-cyan-300 hover:bg-slate-100 transition-all cursor-pointer group"
               >
                 {/* Clinical Context: MRI Availability */}
                 <input
@@ -322,13 +321,12 @@ export default function BookingForm({
                   className="w-5 h-5 text-cyan-600 rounded focus:ring-cyan-500 border-gray-300"
                   {...register("mriScanAvailable")}
                 />
-                <label
-                  htmlFor="mriScanAvailable"
-                  className="ml-3 text-sm font-medium text-slate-700 cursor-pointer select-none"
+                <span
+                  className="ml-3 text-sm font-medium text-slate-700 select-none group-hover:text-cyan-800 transition-colors"
                 >
                   I have recent MRI/CT Scan reports available
-                </label>
-              </div>
+                </span>
+              </label>
 
               <Textarea
                 label="Reason for Visit / Chief Complaint"
