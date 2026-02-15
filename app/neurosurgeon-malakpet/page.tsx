@@ -10,6 +10,7 @@ import TrustProof from "@/app/_components/TrustProof";
 import { patientStories } from "@/src/content/stories";
 import { notFound } from "next/navigation";
 import CostTransparencySection from "@/src/components/CostTransparencySection";
+import PatientJourneySection from "@/src/components/PatientJourneySection";
 
 // Force static generation
 export const dynamic = 'force-static';
@@ -110,6 +111,33 @@ export default function MalakpetNeurosurgeonPage() {
       { name: "Osteoporotic Fracture", url: "/conditions/osteoporotic-spine-fracture-hyderabad" }
   ];
 
+  const MALAKPET_JOURNEY_STEPS = [
+    {
+      title: 'Arrival',
+      description: 'Enter via Main Gate (Gate 1). Valet parking is available. Wheelchair assistance at the entrance.'
+    },
+    {
+      title: 'Registration',
+      description: 'Head to the Registration Desk on the Ground Floor. Mention "Dr. Sayuj Krishnan - Neurosurgery".'
+    },
+    {
+      title: 'Consultation',
+      description: 'Proceed to the OPD Block, 3rd Floor. Report to Room No. 317 for your consultation.'
+    },
+    {
+      title: 'Diagnostics',
+      description: 'If MRI/CT is needed, our team will guide you to the Radiology Suite on the Ground Floor.'
+    },
+    {
+      title: 'Treatment Plan',
+      description: 'Return to Room 317 with reports. Dr. Sayuj will discuss the diagnosis and treatment options.'
+    },
+    {
+      title: 'Pharmacy',
+      description: 'Collect prescribed medications from the 24/7 Pharmacy on the Ground Floor before leaving.'
+    }
+  ];
+
   return (
     <main className="bg-white">
       <LocationSchema location={location} breadcrumb={breadcrumb} faq={FAQ} />
@@ -157,13 +185,19 @@ export default function MalakpetNeurosurgeonPage() {
         </div>
       </section>
 
+      <div className="max-w-6xl mx-auto px-4 mt-12">
+        <PatientJourneySection title="Your Visit at Yashoda Malakpet" steps={MALAKPET_JOURNEY_STEPS} />
+      </div>
+
       {/* Serving East Hyderabad Section */}
       <section className="bg-gray-50 py-10 border-b border-gray-200">
         <div className="mx-auto max-w-5xl px-4">
           <h2 className="text-xl font-bold text-gray-900 mb-6">Serving Patients Across East Hyderabad</h2>
           <div className="grid md:grid-cols-3 gap-6">
              <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-                <h3 className="font-bold text-blue-900 mb-2">Dilsukhnagar & LB Nagar</h3>
+                <h3 className="font-bold text-blue-900 mb-2">
+                  <Link href="/locations/neurosurgeon-dilsukhnagar" className="hover:underline">Dilsukhnagar</Link> & <Link href="/locations/lb-nagar" className="hover:underline">LB Nagar</Link>
+                </h3>
                 <p className="text-sm text-gray-600">Just 5-10 mins drive via NH65. <strong>Metro Red Line:</strong> Direct access from Dilsukhnagar/LB Nagar to Malakpet Station (200m walk).</p>
              </div>
              <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
