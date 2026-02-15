@@ -14,7 +14,8 @@ Analyze SEO performance for the last 7 days.
 - Identify any "quick wins" for the next week.
 
 <!-- Jules Automation -->
+<!-- Schedule: Daily 09:15 IST -->
 <!-- Managed by Jules -->
 <!-- v2.4 -->
 
-<!-- Verified by Jules 2026-02-13 -->
+<!-- Verified by Jules 2026-02-14 -->
