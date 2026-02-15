@@ -26,17 +26,17 @@ const SERVICE_SLUG = 'endoscopic-spine-surgery-hyderabad';
 export const revalidate = 3600; // Revalidate every hour
 
 const baseMetadata = makeMetadata({
-  title: 'Endoscopic Spine Surgery Hyderabad | Same-Day Discharge',
+  title: 'Endoscopic Spine Surgery Hyderabad | Keyhole Spine Specialist',
   description:
-    'Endoscopic spine surgery in Hyderabad by Dr. Sayuj Krishnan (1000+ cases). 7mm keyhole, 90% same-day discharge, ₹95K–₹1.35L. Book now.',
+    'Best Endoscopic Spine Surgery in Hyderabad. Dr. Sayuj performs 7mm Keyhole Surgery with Same-Day Discharge. Check Cost & Recovery Time.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
 });
 
 export const metadata: Metadata = {
   ...baseMetadata,
-  title: 'Endoscopic Spine Surgery Hyderabad | Same-Day Discharge',
+  title: 'Endoscopic Spine Surgery Hyderabad | Keyhole Spine Specialist',
   description:
-    'Endoscopic spine surgery in Hyderabad by Dr. Sayuj Krishnan (1000+ cases). 7mm keyhole, 90% same-day discharge, ₹95K–₹1.35L. Book now.',
+    'Best Endoscopic Spine Surgery in Hyderabad. Dr. Sayuj performs 7mm Keyhole Surgery with Same-Day Discharge. Check Cost & Recovery Time.',
   keywords: [
     'endoscopic spine surgery hyderabad',
     'minimally invasive spine surgery hyderabad',
