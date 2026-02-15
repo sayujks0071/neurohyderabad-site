@@ -30,6 +30,13 @@ const VERCEL_AI_GATEWAY_BASE_URL = process.env.AI_GATEWAY_BASE_URL ||
   'https://ai-gateway.vercel.sh/v1';
 
 /**
+ * Get the configured Vercel AI Gateway Base URL
+ */
+export function getGatewayBaseUrl(): string {
+  return VERCEL_AI_GATEWAY_BASE_URL;
+}
+
+/**
  * Check if Vercel AI Gateway is configured
  * 
  * Supports both:
@@ -98,7 +105,7 @@ export function createAIGatewayClient() {
   // Create OpenAI client configured for Vercel AI Gateway
   return createOpenAI({
     apiKey: apiKey || undefined, // OIDC token is used automatically on Vercel if no API key
-    baseURL: VERCEL_AI_GATEWAY_BASE_URL,
+    baseURL: getGatewayBaseUrl(),
   });
 }
 
