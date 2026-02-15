@@ -14,15 +14,15 @@ import { LocalPathways } from '@/src/components/locations/LocalPathways';
 export const revalidate = 86400;
 export const dynamic = 'error';
 
-const CANONICAL = `${SITE_URL}/conditions/brain-tumor-surgery-hyderabad`;
+const CANONICAL = `${SITE_URL}/conditions/brain-tumor-symptoms-hyderabad`;
 
 const schemaData = [
   {
     "@context": "https://schema.org",
     "@type": "MedicalWebPage",
-    name: "Brain Tumor Surgery in Hyderabad",
+    name: "Brain Tumor Symptoms & Diagnosis in Hyderabad",
     description:
-      "Detailed guidance on brain tumour diagnosis, microsurgery, radiosurgery, and recovery with Dr. Sayuj Krishnan at Yashoda Hospital, Malakpet.",
+      "Detailed guidance on brain tumour symptoms, diagnosis, microsurgery, radiosurgery, and recovery with Dr. Sayuj Krishnan at Yashoda Hospital, Malakpet.",
     url: CANONICAL,
     inLanguage: "en-IN",
     isPartOf: {
@@ -98,7 +98,7 @@ const schemaData = [
       {
         "@type": "ListItem",
         position: 3,
-        name: "Brain Tumor Surgery Hyderabad",
+        name: "Brain Tumor Symptoms Hyderabad",
         item: CANONICAL,
       },
     ],
@@ -149,9 +149,9 @@ const references = [
 ] as const;
 
 export const metadata: Metadata = {
-  title: "Brain Tumor Treatment Hyderabad | Diagnosis & Care Options",
+  title: "Brain Tumor Symptoms & Treatment Hyderabad | Diagnosis & Care Options",
   description:
-    "Comprehensive guide to brain tumor diagnosis, treatment options, and recovery. Learn about microsurgery, radiosurgery, and expert care in Hyderabad.",
+    "Comprehensive guide to brain tumor symptoms, diagnosis, and care options. Learn about warning signs and expert diagnosis in Hyderabad.",
   alternates: {
     canonical: CANONICAL,
     languages: {
@@ -160,9 +160,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Brain Tumor Surgery in Hyderabad",
+    title: "Brain Tumor Symptoms & Diagnosis in Hyderabad",
     description:
-      "Advanced neurosurgical care including awake craniotomy, endoscopic techniques, and multidisciplinary tumour board support.",
+      "Learn the warning signs of brain tumors and the diagnostic process. Expert neurosurgical evaluation in Hyderabad.",
     url: CANONICAL,
     type: "article",
     images: [
@@ -170,25 +170,25 @@ export const metadata: Metadata = {
         url: `${SITE_URL}/images/og-default.jpg`,
         width: 1200,
         height: 630,
-        alt: "Brain Tumor Surgery — Dr Sayuj Krishnan",
+        alt: "Brain Tumor Diagnosis — Dr Sayuj Krishnan",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Brain Tumor Surgery in Hyderabad",
+    title: "Brain Tumor Symptoms & Diagnosis in Hyderabad",
     description:
-      "Advanced neurosurgical care including awake craniotomy, endoscopic techniques, and multidisciplinary tumour board support.",
+      "Learn the warning signs of brain tumors and the diagnostic process. Expert neurosurgical evaluation in Hyderabad.",
     images: [
       {
         url: `${SITE_URL}/images/og-default.jpg`,
-        alt: "Brain Tumor Surgery — Dr Sayuj Krishnan",
+        alt: "Brain Tumor Diagnosis — Dr Sayuj Krishnan",
       },
     ],
   },
 };
 
-export default function BrainTumorSurgeryConditionPage() {
+export default function BrainTumorSymptomsConditionPage() {
   return (
     <main className="bg-white">
       <SchemaScript id="brain-tumor-condition-jsonld" data={schemaData} />
@@ -199,20 +199,18 @@ export default function BrainTumorSurgeryConditionPage() {
             Brain Tumour Programme · Hyderabad
           </p>
           <h1 className="mt-4 text-3xl font-bold md:text-4xl">
-            Brain Tumor Surgery in Hyderabad
+            Brain Tumor Symptoms &amp; Diagnosis in Hyderabad
           </h1>
           <p className="mt-4 text-lg text-slate-100">
-            Precision planning, neuronavigation, and intraoperative monitoring
-            help us remove tumours safely while protecting speech, memory, and
-            motor function. Each plan is reviewed in a multidisciplinary tumour
-            board to align surgery, radiosurgery, and oncologic care.
+            Recognizing the early signs of a brain tumor is crucial for effective treatment.
+            We provide comprehensive diagnostic evaluation using advanced imaging and multidisciplinary review to determine the best course of action.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <a
               href="https://www.drsayuj.info/appointments?utm_source=seo&utm_medium=page&utm_campaign=brain_tumor_condition"
               className="rounded-full bg-blue-500 px-6 py-3 text-sm font-semibold text-white shadow hover:bg-blue-600"
             >
-              Request Surgical Opinion
+              Request Consultation
             </a>
             <a
               href="https://wa.me/919778280044"
@@ -231,17 +229,12 @@ export default function BrainTumorSurgeryConditionPage() {
               Understanding Brain Tumours
             </h2>
             <p className="mt-4 text-gray-700">
-              Brain tumours may be benign, atypical, or malignant. Surgery often
-              relieves pressure, improves symptoms, and provides tissue for
-              precise diagnosis. Decisions account for tumour size, location,
-              growth rate, and your overall health. We help patients and families
-              understand options clearly before proceeding.
+              Brain tumours may be benign, atypical, or malignant. Symptoms often depend on the tumor's size, location, and rate of growth.
+              Common symptoms include persistent headaches, seizures, vision changes, and weakness.
             </p>
             <p className="mt-4 text-gray-700">
-              Many lesions benefit from early removal—especially when causing
-              seizures, neurological deficits, or mass effect. Others can be
-              observed under close MRI surveillance. Together, we decide which
-              pathway best protects long-term function.
+              Early diagnosis allows for more treatment options and often leads to better outcomes.
+              If you experience persistent or worrying symptoms, a neurological evaluation is recommended.
             </p>
           </div>
           <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
@@ -262,7 +255,7 @@ export default function BrainTumorSurgeryConditionPage() {
       <section className="bg-gray-50 py-12">
         <div className="mx-auto max-w-5xl px-4">
           <h2 className="text-2xl font-semibold text-gray-900">
-            Surgical &amp; Adjunct Options
+            Treatment Options Overview
           </h2>
           <div className="mt-8 grid gap-6 md:grid-cols-2">
             <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
@@ -270,110 +263,44 @@ export default function BrainTumorSurgeryConditionPage() {
                 Microsurgical Resection
               </h3>
               <p className="mt-3 text-gray-700">
-                Standard craniotomy using high-powered microscopes, ultrasonic
-                aspirators, and neuromonitoring. Awake craniotomy preserves speech
-                and motor function when tumours rest in eloquent cortex.
+                Surgery is often the first step for accessible tumors. We use high-powered microscopes and neuronavigation for precision.
               </p>
             </div>
             <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
               <h3 className="text-lg font-semibold text-blue-700">
-                Endoscopic &amp; Keyhole Surgery
+                Minimally Invasive Options
               </h3>
               <p className="mt-3 text-gray-700">
-                Ideal for ventricular tumours, pituitary adenomas, and select
-                meningiomas. Smaller incisions reduce bone removal and accelerate
-                recovery time.
+                Endoscopic and keyhole approaches are used for select tumors to minimize recovery time.
               </p>
             </div>
-            <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
-              <h3 className="text-lg font-semibold text-blue-700">
-                Stereotactic Biopsy
-              </h3>
-              <p className="mt-3 text-gray-700">
-                Needle biopsy obtains tissue in high-risk or deep-seated lesions
-                when open surgery is not immediately feasible. Results guide
-                oncology planning.
-              </p>
-            </div>
-            <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
-              <h3 className="text-lg font-semibold text-blue-700">
-                Radiosurgery &amp; Adjuvant Therapy
-              </h3>
-              <p className="mt-3 text-gray-700">
-                Gamma Knife, LINAC-based radiosurgery, fractionated radiotherapy,
-                and chemotherapy are coordinated with partnering oncologists to
-                consolidate control after surgery.
-              </p>
-            </div>
+          </div>
+          <div className="mt-8 text-center">
+             <Link href="/services/brain-tumor-surgery-hyderabad" className="text-blue-600 hover:underline font-semibold">
+                View Detailed Surgical Procedures →
+             </Link>
           </div>
         </div>
       </section>
 
       <section className="mx-auto max-w-5xl px-4 py-12">
         <h2 className="text-2xl font-semibold text-gray-900">
-          Safety Measures in Theatre
+          When to Seek Medical Attention
         </h2>
         <ul className="mt-6 grid gap-4 text-gray-700 md:grid-cols-2">
-          <li className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
-            • Intraoperative neuromonitoring to protect motor, sensory, and
-            cranial nerve function.
-          </li>
-          <li className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
-            • 3D neuronavigation ensuring precise localisation and minimal brain
-            retraction.
-          </li>
-          <li className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
-            • Advanced haemostasis techniques to limit blood loss; neuro-anaesthesia
-            expertise for complex cases.
-          </li>
-          <li className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
-            • Early post-operative MRI/CT to confirm resection extent and rule out
-            complications.
-          </li>
+            <li className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+            • <strong>New or changing headaches:</strong> Headaches that are worse in the morning or accompanied by vomiting.
+            </li>
+            <li className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+            • <strong>Seizures:</strong> Sudden onset of seizures in an adult with no history of epilepsy.
+            </li>
+            <li className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+            • <strong>Cognitive or personality changes:</strong> Memory loss, confusion, or behavioral changes.
+            </li>
+             <li className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+            • <strong>Focal neurological deficits:</strong> Weakness, numbness, vision loss, or speech difficulties.
+            </li>
         </ul>
-      </section>
-
-      <section className="bg-gray-50 py-12">
-        <div className="mx-auto max-w-5xl px-4">
-          <h2 className="text-2xl font-semibold text-gray-900">
-            Recovery &amp; Support
-          </h2>
-          <div className="mt-6 grid gap-6 md:grid-cols-3">
-            <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
-              <h3 className="font-semibold text-blue-700">Hospital Stay</h3>
-              <p className="mt-2 text-gray-700">
-                Most patients stay three to five days. Early mobilisation, pain
-                control, and DVT prophylaxis start in ICU.
-              </p>
-            </div>
-            <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
-              <h3 className="font-semibold text-blue-700">Rehabilitation</h3>
-              <p className="mt-2 text-gray-700">
-                Physiotherapy, occupational therapy, and speech therapy support
-                recovery. Return to desk work in four to six weeks for many
-                patients.
-              </p>
-            </div>
-            <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
-              <h3 className="font-semibold text-blue-700">Follow-up</h3>
-              <p className="mt-2 text-gray-700">
-                MRI at 48 hours, three months, and then tailored to histology.
-                Survivorship plans integrate oncology appointments and imaging.
-              </p>
-            </div>
-          </div>
-          <div className="mt-8 rounded-lg border border-blue-100 bg-blue-50 p-6">
-            <h3 className="text-lg font-semibold text-blue-700">
-              When to Seek Urgent Care
-            </h3>
-            <ul className="mt-4 space-y-2 text-gray-700">
-              <li>• Sudden severe headache with vomiting</li>
-              <li>• New-onset seizures</li>
-              <li>• Worsening weakness, speech difficulty, or vision loss</li>
-              <li>• Discharge from wound, fever, or altered consciousness</li>
-            </ul>
-          </div>
-        </div>
       </section>
 
       <section className="mx-auto max-w-5xl px-4 py-12">
@@ -392,7 +319,7 @@ export default function BrainTumorSurgeryConditionPage() {
             className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm hover:border-blue-400"
           >
             <h3 className="font-semibold text-blue-700">
-              Explore the Brain Tumor Surgery Service
+              Explore Surgical Treatment
             </h3>
             <p className="mt-2 text-gray-700">
               Learn about operative techniques, technology, and day-by-day
@@ -400,15 +327,14 @@ export default function BrainTumorSurgeryConditionPage() {
             </p>
           </Link>
           <Link
-            href="/symptoms/signs-of-brain-tumor"
+            href="/appointments"
             className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm hover:border-blue-400"
           >
             <h3 className="font-semibold text-blue-700">
-              Recognise Early Warning Signs
+              Book a Consultation
             </h3>
             <p className="mt-2 text-gray-700">
-              Understand headache, seizure, and cognitive red flags that require
-              urgent imaging.
+              Schedule an appointment to discuss your symptoms and diagnosis.
             </p>
           </Link>
         </div>

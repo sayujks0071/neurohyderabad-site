@@ -34,10 +34,8 @@ export function GET(_req: NextRequest) {
 
   for (const path of DISALLOW_PATHS) lines.push(`Disallow: ${path}`);
 
-  // Sitemaps (all should be HTTP 200 and valid XML)
+  // Sitemap Index
   lines.push(`Sitemap: ${SITE_URL}/sitemap.xml`);
-  lines.push(`Sitemap: ${SITE_URL}/sitemap-images.xml`);
-  lines.push(`Sitemap: ${SITE_URL}/sitemap-videos.xml`);
 
   return new Response(lines.join('\n') + '\n', {
     headers: {
