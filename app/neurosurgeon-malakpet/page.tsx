@@ -9,6 +9,7 @@ import { LocationSchema } from "@/src/components/locations/LocationSchema";
 import TrustProof from "@/app/_components/TrustProof";
 import { patientStories } from "@/src/content/stories";
 import { notFound } from "next/navigation";
+import CostTransparencySection from "@/src/components/CostTransparencySection";
 
 // Force static generation
 export const dynamic = 'force-static';
@@ -16,10 +17,10 @@ export const dynamicParams = false;
 export const revalidate = 86400;
 
 export const metadata = {
-  title: "Neurosurgeon Malakpet | Dr. Sayuj | Yashoda Hospital",
+  title: "Neurosurgeon Malakpet | Best Spine Surgeon Dilsukhnagar | Yashoda",
   description:
     "Dr. Sayuj Krishnan at Yashoda Hospital Malakpet offers Daycare Endoscopic Spine Surgery, brain tumor care, and 24/7 emergency neurosurgery. Book a visit.",
-  keywords: "neurosurgeon malakpet, yashoda hospital malakpet neurosurgeon, spine surgeon malakpet, daycare spine surgery malakpet, endoscopic spine surgery malakpet, spine fracture treatment malakpet, vertebroplasty malakpet",
+  keywords: "neurosurgeon malakpet, neurosurgeon dilsukhnagar, yashoda hospital malakpet neurosurgeon, spine surgeon malakpet, daycare spine surgery malakpet, endoscopic spine surgery malakpet, spine fracture treatment malakpet",
   alternates: { canonical: "https://www.drsayuj.info/neurosurgeon-malakpet" },
   openGraph: {
     title: "Neurosurgeon in Malakpet | Dr. Sayuj | Yashoda Hospitals",
@@ -69,6 +70,33 @@ export default function MalakpetNeurosurgeonPage() {
   const relevantStories = patientStories.filter(s =>
     s.tags.includes('spine') || s.tags.includes('brain')
   ).slice(0, 2);
+
+  const MALAKPET_COSTS = [
+    {
+      procedure: "Neurosurgeon Consultation",
+      range: "₹800 - ₹1,000",
+      recovery: "Immediate",
+      includes: ["Clinical Examination", "MRI Review", "Treatment Plan"]
+    },
+    {
+      procedure: "Endoscopic Discectomy (Daycare)",
+      range: "₹1,20,000 - ₹1,60,000",
+      recovery: "1-2 Weeks",
+      includes: ["Surgery Charges", "Consumables", "Daycare Stay"]
+    },
+    {
+      procedure: "Spine Fixation Surgery (TLIF)",
+      range: "₹2,50,000 - ₹3,50,000",
+      recovery: "3-6 Weeks",
+      includes: ["Implants (Screws/Cage)", "Hospital Stay (3-4 Days)", "OT Charges"]
+    },
+    {
+      procedure: "Brain Tumor Surgery",
+      range: "₹2,00,000 - ₹3,50,000",
+      recovery: "2-4 Weeks",
+      includes: ["Neuronavigation", "ICU Stay", "Ward Charges"]
+    }
+  ];
 
   const commonConditions = [
       { name: "Sciatica & Leg Pain", url: "/conditions/sciatica-pain-treatment-hyderabad" },
@@ -136,7 +164,7 @@ export default function MalakpetNeurosurgeonPage() {
           <div className="grid md:grid-cols-3 gap-6">
              <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
                 <h3 className="font-bold text-blue-900 mb-2">Dilsukhnagar & LB Nagar</h3>
-                <p className="text-sm text-gray-600">Just 5-10 mins drive via NH65. Direct Metro access (Red Line) from Dilsukhnagar to Malakpet Station.</p>
+                <p className="text-sm text-gray-600">Just 5-10 mins drive via NH65. <strong>Metro Red Line:</strong> Direct access from Dilsukhnagar/LB Nagar to Malakpet Station (200m walk).</p>
              </div>
              <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
                 <h3 className="font-bold text-blue-900 mb-2">Saidabad & Santosh Nagar</h3>
@@ -347,6 +375,12 @@ export default function MalakpetNeurosurgeonPage() {
               </div>
           </div>
       </section>
+
+      <CostTransparencySection
+        costs={MALAKPET_COSTS}
+        disclaimer="*Approximate estimates for general ward/twin sharing at Yashoda Hospitals Malakpet. Final cost depends on room category, insurance approval, and specific implants required."
+        showInsurance={true}
+      />
 
       <section className="bg-white py-12">
         <div className="mx-auto max-w-5xl px-4">
