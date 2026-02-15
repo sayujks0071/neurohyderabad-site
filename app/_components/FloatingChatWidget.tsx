@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useMemo } from 'react';
 import { useStatsigEvents } from '../../src/lib/statsig-events';
-import { trackMiddlewareEvent } from '@/src/lib/middleware/rum';
+import { analytics } from '@/src/lib/analytics';
 import { MessageCircle, X, Send, AlertTriangle, Loader2, Sparkles, Minus } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { useChat } from '@ai-sdk/react';
@@ -39,6 +39,8 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
   const [pageTitle, setPageTitle] = useState('');
   const [pageDescription, setPageDescription] = useState('');
   const pathname = usePathname();
+
+  const startTimeRef = useRef<number>(0);
 
   // Update page context on navigation
   useEffect(() => {
@@ -79,11 +81,9 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
     initialMessages,
     onFinish: (message: any) => {
       const content = message.content;
+      const duration = performance.now() - startTimeRef.current;
 
-      trackMiddlewareEvent('chat_response_received', {
-        source: 'floating_widget',
-        success: true
-      });
+      analytics.chat.responseReceived('floating_widget', Math.round(duration), true);
 
       // Check for emergency keywords
       const emergencyKeywords = ['emergency', 'urgent', 'immediately', 'call', 'stroke', 'seizure'];
@@ -93,7 +93,7 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
 
       if (hasEmergency) {
         setShowEmergencyAlert(true);
-        trackMiddlewareEvent('chat_emergency_detected', {
+        analytics.track('chat_emergency_detected', {
           source: 'floating_widget'
         });
       }
@@ -102,11 +102,14 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
     },
     onError: (error: any) => {
       console.error('Chat error:', error);
+      const duration = performance.now() - startTimeRef.current;
+
       logContactFormSubmit('ai_chat_widget', false);
-      trackMiddlewareEvent('chat_error', {
-        source: 'floating_widget',
-        error: error.message
-      });
+      analytics.chat.error(
+        'floating_widget',
+        Math.round(duration),
+        error.message || 'Unknown error'
+      );
     }
   } as any);
 
@@ -123,9 +126,7 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
       setTimeout(() => inputRef.current?.focus(), 100);
 
       // Track widget open
-      trackMiddlewareEvent('chat_widget_open', {
-        page_slug: pathname || 'unknown'
-      });
+      analytics.chat.open('floating_widget');
     }
   }, [isOpen, isMinimized]);
 
@@ -139,12 +140,11 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
   const handleSendMessage = async (content: string) => {
     if (!content.trim() || isLoading) return;
 
+    startTimeRef.current = performance.now();
+
     // Log user interaction
     logAppointmentBooking('ai_chat_widget_interaction', 'general');
-    trackMiddlewareEvent('chat_message_sent', {
-      source: 'floating_widget',
-      page_slug: pathname || 'unknown'
-    });
+    analytics.chat.messageSent('floating_widget');
 
     await sendMessage({ role: 'user', content: content.trim() } as any);
   };
@@ -153,12 +153,11 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
     e.preventDefault();
     if (!input.trim() || isLoading) return;
 
+    startTimeRef.current = performance.now();
+
     // Log interaction
     logAppointmentBooking('ai_chat_widget_interaction', 'general');
-    trackMiddlewareEvent('chat_message_sent', {
-      source: 'floating_widget',
-      page_slug: pathname || 'unknown'
-    });
+    analytics.chat.messageSent('floating_widget');
 
     const content = input;
     setInput('');
