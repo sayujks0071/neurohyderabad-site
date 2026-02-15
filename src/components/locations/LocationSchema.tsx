@@ -72,6 +72,7 @@ export const LocationSchema: React.FC<LocationSchemaProps> = ({
         "@type": "Place",
         "name": location.areaServedName
     },
+    "openingHours": location.openingHours || "Mo-Sa 10:00-16:00",
     "openingHoursSpecification": [
       {
         "@type": "OpeningHoursSpecification",

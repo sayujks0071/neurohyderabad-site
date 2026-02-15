@@ -38,6 +38,7 @@ export interface LocationData {
   top_services_slugs: string[];
   top_conditions_slugs: string[];
   sameAs?: string[];
+  openingHours?: string;
 }
 
 export const CANONICAL_PHYSICIAN_NAME = "Dr. Sayuj Krishnan – Neurosurgeon";
@@ -200,7 +201,8 @@ export const locations: LocationData[] = [
     areaServedName: "Malakpet",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES
+    sameAs: SOCIAL_PROFILES,
+    openingHours: "Mo-Sa 10:00-16:00"
   },
   {
     id: "hyderabad",

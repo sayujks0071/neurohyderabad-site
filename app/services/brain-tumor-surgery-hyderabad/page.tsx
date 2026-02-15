@@ -24,7 +24,7 @@ const SERVICE_SLUG = 'brain-tumor-surgery-hyderabad';
 const baseMetadata = makeMetadata({
   title: 'Brain Tumor Surgery Hyderabad | Top Neurosurgeon | Dr Sayuj',
   description:
-    'Expert Brain Tumor Surgery in Hyderabad. Advanced Awake Craniotomy & Neuronavigation for safe removal. Dr Sayuj Krishnan - Best Neurosurgeon. Consult now.',
+    'Expert Brain Tumor Surgery in Hyderabad. Cost: ₹3-5 Lakhs approx. Insurance accepted. Advanced Awake Craniotomy & Neuronavigation for safe removal. Dr Sayuj Krishnan.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
 });
 

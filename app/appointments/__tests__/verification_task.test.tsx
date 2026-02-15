@@ -24,7 +24,7 @@ describe('Verification Task: Appointment SEO', () => {
   it('Task Requirement 4: Metadata verification', () => {
     // Check title
     const title = typeof metadata.title === 'string' ? metadata.title : (metadata.title as any)?.default || '';
-    expect(title).toContain('Best Neurosurgeon Hyderabad');
+    expect(title).toContain('Best Neurosurgeon in Hyderabad');
     expect(title).toContain('Book Appointment');
 
     // Check description
