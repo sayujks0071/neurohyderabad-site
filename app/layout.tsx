@@ -27,6 +27,7 @@ declare global {
   }
 }
 import Header from "./components/HeaderRefactored";
+import Breadcrumbs from "./_components/Breadcrumbs";
 import Footer from "./components/Footer";
 import WebsiteSchema from "./components/schemas/WebsiteSchema";
 import BreadcrumbSchema from "./components/schemas/BreadcrumbSchema";
@@ -187,6 +188,7 @@ export default function RootLayout({
         <Header />
         <TrustStrip />
         <main id="main-content" tabIndex={-1} role="main">
+          <Breadcrumbs />
           {children}
         </main>
         <Footer />
