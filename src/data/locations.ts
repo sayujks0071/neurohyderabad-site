@@ -11,6 +11,13 @@ export interface LocationGeo {
   longitude: number;
 }
 
+export interface OpeningHoursSpecification {
+  "@type": "OpeningHoursSpecification";
+  dayOfWeek: string[];
+  opens: string;
+  closes: string;
+}
+
 /**
  * Single Source of Truth for Location Data
  * This file centralizes all NAP (Name, Address, Phone) and location-specific data.
@@ -38,6 +45,7 @@ export interface LocationData {
   top_services_slugs: string[];
   top_conditions_slugs: string[];
   sameAs?: string[];
+  openingHoursSpecification?: OpeningHoursSpecification[];
 }
 
 export const CANONICAL_PHYSICIAN_NAME = "Dr. Sayuj Krishnan – Neurosurgeon";
@@ -61,6 +69,15 @@ export const YASHODA_GEO: LocationGeo = {
   latitude: 17.3750,
   longitude: 78.5147,
 };
+
+export const YASHODA_OPENING_HOURS_SPEC: OpeningHoursSpecification[] = [
+  {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    opens: "10:00",
+    closes: "16:00"
+  }
+];
 
 // Common map links
 export const YASHODA_DIRECTIONS = "https://maps.google.com/?q=Yashoda+Hospitals+Malakpet+Hyderabad";
@@ -115,7 +132,8 @@ export const locations: LocationData[] = [
     areaServedName: "Secunderabad",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES
+    sameAs: SOCIAL_PROFILES,
+    openingHoursSpecification: YASHODA_OPENING_HOURS_SPEC
   },
   {
     id: "hitech-city",
@@ -132,7 +150,8 @@ export const locations: LocationData[] = [
     areaServedName: "Hitech City",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES
+    sameAs: SOCIAL_PROFILES,
+    openingHoursSpecification: YASHODA_OPENING_HOURS_SPEC
   },
   {
     id: "banjara-hills",
@@ -149,7 +168,8 @@ export const locations: LocationData[] = [
     areaServedName: "Banjara Hills",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES
+    sameAs: SOCIAL_PROFILES,
+    openingHoursSpecification: YASHODA_OPENING_HOURS_SPEC
   },
   {
     id: "gachibowli",
@@ -166,7 +186,8 @@ export const locations: LocationData[] = [
     areaServedName: "Gachibowli",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES
+    sameAs: SOCIAL_PROFILES,
+    openingHoursSpecification: YASHODA_OPENING_HOURS_SPEC
   },
   {
     id: "jubilee-hills",
@@ -183,7 +204,8 @@ export const locations: LocationData[] = [
     areaServedName: "Jubilee Hills",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES
+    sameAs: SOCIAL_PROFILES,
+    openingHoursSpecification: YASHODA_OPENING_HOURS_SPEC
   },
   {
     id: "malakpet",
@@ -200,7 +222,8 @@ export const locations: LocationData[] = [
     areaServedName: "Malakpet",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES
+    sameAs: SOCIAL_PROFILES,
+    openingHoursSpecification: YASHODA_OPENING_HOURS_SPEC
   },
   {
     id: "hyderabad",
@@ -217,7 +240,8 @@ export const locations: LocationData[] = [
     areaServedName: "Hyderabad",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES
+    sameAs: SOCIAL_PROFILES,
+    openingHoursSpecification: YASHODA_OPENING_HOURS_SPEC
   },
   {
     id: "lb-nagar",
@@ -234,7 +258,8 @@ export const locations: LocationData[] = [
     areaServedName: "LB Nagar",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES
+    sameAs: SOCIAL_PROFILES,
+    openingHoursSpecification: YASHODA_OPENING_HOURS_SPEC
   },
   {
     id: "kukatpally",
@@ -251,7 +276,8 @@ export const locations: LocationData[] = [
     areaServedName: "Kukatpally",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES
+    sameAs: SOCIAL_PROFILES,
+    openingHoursSpecification: YASHODA_OPENING_HOURS_SPEC
   },
   {
     id: "manikonda",
@@ -268,7 +294,8 @@ export const locations: LocationData[] = [
     areaServedName: "Manikonda",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES
+    sameAs: SOCIAL_PROFILES,
+    openingHoursSpecification: YASHODA_OPENING_HOURS_SPEC
   },
   {
     id: "nizampet",
@@ -285,7 +312,8 @@ export const locations: LocationData[] = [
     areaServedName: "Nizampet",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES
+    sameAs: SOCIAL_PROFILES,
+    openingHoursSpecification: YASHODA_OPENING_HOURS_SPEC
   },
   {
     id: "kondapur",
@@ -302,7 +330,8 @@ export const locations: LocationData[] = [
     areaServedName: "Kondapur",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES
+    sameAs: SOCIAL_PROFILES,
+    openingHoursSpecification: YASHODA_OPENING_HOURS_SPEC
   },
   {
     id: "kothapet",
@@ -319,7 +348,8 @@ export const locations: LocationData[] = [
     areaServedName: "Kothapet",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES
+    sameAs: SOCIAL_PROFILES,
+    openingHoursSpecification: YASHODA_OPENING_HOURS_SPEC
   },
   {
     id: "madhapur",
@@ -336,7 +366,8 @@ export const locations: LocationData[] = [
     areaServedName: "Madhapur",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES
+    sameAs: SOCIAL_PROFILES,
+    openingHoursSpecification: YASHODA_OPENING_HOURS_SPEC
   },
   {
     id: "dilsukhnagar",
@@ -353,7 +384,8 @@ export const locations: LocationData[] = [
     areaServedName: "Dilsukhnagar",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES
+    sameAs: SOCIAL_PROFILES,
+    openingHoursSpecification: YASHODA_OPENING_HOURS_SPEC
   },
   {
     id: "vanasthalipuram",
@@ -370,7 +402,8 @@ export const locations: LocationData[] = [
     areaServedName: "Vanasthalipuram",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES
+    sameAs: SOCIAL_PROFILES,
+    openingHoursSpecification: YASHODA_OPENING_HOURS_SPEC
   },
   {
     id: "miyapur",
@@ -387,7 +420,8 @@ export const locations: LocationData[] = [
     areaServedName: "Miyapur",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES
+    sameAs: SOCIAL_PROFILES,
+    openingHoursSpecification: YASHODA_OPENING_HOURS_SPEC
   },
   {
     id: "uppal",
@@ -404,7 +438,8 @@ export const locations: LocationData[] = [
     areaServedName: "Uppal",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES
+    sameAs: SOCIAL_PROFILES,
+    openingHoursSpecification: YASHODA_OPENING_HOURS_SPEC
   },
   {
     id: "kachiguda",
@@ -421,7 +456,8 @@ export const locations: LocationData[] = [
     areaServedName: "Kachiguda",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES
+    sameAs: SOCIAL_PROFILES,
+    openingHoursSpecification: YASHODA_OPENING_HOURS_SPEC
   }
 ];
 

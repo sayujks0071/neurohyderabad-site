@@ -22,8 +22,8 @@ import SurgeryComparisonTable from '@/src/components/SurgeryComparisonTable';
 import EndoscopicProcedureSteps from '@/src/components/EndoscopicProcedureSteps';
 
 const baseMetadata = makeMetadata({
-  title: 'Minimally Invasive Spine Surgery Hyderabad | Dr Sayuj',
-  description: 'Minimally Invasive Spine Surgery Hyderabad: Day Care procedure with same-day discharge. 1000+ successful endoscopic surgeries by Dr Sayuj. Book Consult.',
+  title: 'Minimally Invasive Spine Surgery Hyderabad | Best Spine Surgeon',
+  description: 'Looking for Minimally Invasive Spine Surgery? Dr. Sayuj specializes in Day-Care Endoscopic Spine Surgery with same-day discharge. 1000+ Success Stories.',
   canonicalPath: '/services/minimally-invasive-spine-surgery',
 });
 

@@ -35,8 +35,8 @@ import RemotionVideoEmbedWrapper from "./_components/RemotionVideoEmbedWrapper";
 const HOME_CANONICAL = SITE_URL.endsWith("/") ? SITE_URL : `${SITE_URL}/`;
 
 const baseMetadata = makeMetadata({
-  title: "Best Neurosurgeon Hyderabad | Spine & Brain Specialist",
-  description: "Top-rated neurosurgeon in Hyderabad (Yashoda Hospital). Expert in endoscopic spine surgery, brain tumors & sciatica. Book appointment now.",
+  title: "Best Neurosurgeon Hyderabad | Top Spine & Brain Doctor",
+  description: "Looking for the Best Neurosurgeon in Hyderabad? Dr. Sayuj is a German-trained expert in Endoscopic Spine & Brain Surgery at Yashoda Hospital. Book Now.",
   canonicalPath: "/",
   ogImage: "https://www.drsayuj.info/images/og-default.jpg",
   ogImageAlt: "Dr. Sayuj Krishnan - Premier Neurosurgeon in Hyderabad | Endoscopic Spine Surgery & Brain Tumor Surgery"

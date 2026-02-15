@@ -24,7 +24,7 @@ const PatientEducationVideos = dynamic(() => import('@/app/_components/PatientEd
 
 const baseMetadata = makeMetadata({
   title: "Sciatica Treatment Hyderabad | 90% Non-Surgical | Dr Sayuj",
-  description: "Best Sciatica treatment in Hyderabad. 90% patients recover without surgery using nerve blocks & meds. Endoscopic cure available. Book Dr Sayuj.",
+  description: "Sciatica Treatment Hyderabad: 90% non-surgical recovery with nerve blocks. Endoscopic cure for severe cases by Dr. Sayuj. Book Consult.",
   canonicalPath: '/conditions/sciatica-pain-treatment-hyderabad',
 });
 
@@ -260,6 +260,49 @@ export default function SciaticaTreatmentPage() {
         />
       </div>
 
+      {/* Comparison Table Section (New) */}
+      <section className="mb-12">
+        <h2 className="text-2xl font-bold text-blue-900 mb-6">Injection vs. Surgery vs. Conservative Care</h2>
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-sm text-gray-700 border border-gray-200 rounded-lg shadow-sm">
+            <thead className="bg-blue-50 text-blue-900 font-semibold">
+              <tr>
+                <th className="px-4 py-3 border-b border-gray-200">Feature</th>
+                <th className="px-4 py-3 border-b border-gray-200">Conservative</th>
+                <th className="px-4 py-3 border-b border-gray-200">Nerve Block (Injection)</th>
+                <th className="px-4 py-3 border-b border-gray-200">Endoscopic Surgery</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="px-4 py-3 font-medium border-b border-gray-100">Pain Relief Speed</td>
+                <td className="px-4 py-3 border-b border-gray-100">Slow (Weeks)</td>
+                <td className="px-4 py-3 border-b border-gray-100 text-green-700 font-semibold">Immediate / Fast</td>
+                <td className="px-4 py-3 border-b border-gray-100 text-green-700 font-semibold">Immediate</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-medium border-b border-gray-100">Invasiveness</td>
+                <td className="px-4 py-3 border-b border-gray-100">None</td>
+                <td className="px-4 py-3 border-b border-gray-100">Minimal (Needle only)</td>
+                <td className="px-4 py-3 border-b border-gray-100">Low (7mm Incision)</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-medium border-b border-gray-100">Recovery Time</td>
+                <td className="px-4 py-3 border-b border-gray-100">Variable</td>
+                <td className="px-4 py-3 border-b border-gray-100">Same Day</td>
+                <td className="px-4 py-3 border-b border-gray-100">3-5 Days (Desk Work)</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-medium border-b border-gray-100">Best For</td>
+                <td className="px-4 py-3 border-b border-gray-100">Mild pain, First episode</td>
+                <td className="px-4 py-3 border-b border-gray-100">Severe inflammation</td>
+                <td className="px-4 py-3 border-b border-gray-100">Nerve compression, Weakness</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
       {/* Elderly Safety Section (Competitor Gap) */}
       <section className="mb-12 bg-white border border-blue-100 rounded-2xl p-8 shadow-sm">
         <h2 className="text-2xl font-bold text-blue-900 mb-4">Is Endoscopic Spine Surgery Safe for Elderly Patients?</h2>
@@ -311,14 +354,14 @@ export default function SciaticaTreatmentPage() {
           <div className="bg-white p-6 rounded-lg shadow-md border-t-4 border-yellow-500">
             <h3 className="text-lg font-bold mb-3 text-gray-900">Step 2: Pain Interventions</h3>
             <p className="text-gray-700 mb-3">
-              If pain persists, we use <strong>Transforaminal Nerve Root Blocks</strong>. This is a day-care procedure that delivers medication directly to the nerve root.
+              If pain persists, we use <Link href="/services/minimally-invasive-spine-surgery" className="text-blue-600 hover:underline">Transforaminal Nerve Root Blocks</Link>. This is a day-care procedure that delivers medication directly to the nerve root.
             </p>
             <p className="text-sm font-semibold text-yellow-700">Success Rate: ~20% (of remaining)</p>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-md border-t-4 border-blue-500">
             <h3 className="text-lg font-bold mb-3 text-gray-900">Step 3: Surgical Solution</h3>
             <p className="text-gray-700 mb-3">
-              <strong>Endoscopic Discectomy</strong> is the gold standard when conservative care fails. It's a keyhole procedure with same-day walking.
+              <Link href="/services/endoscopic-discectomy-hyderabad" className="text-blue-600 hover:underline font-semibold">Endoscopic Discectomy</Link> is the gold standard when conservative care fails. It's a keyhole procedure with same-day walking.
             </p>
             <p className="text-sm font-semibold text-blue-700">Reserved for: ~10% of cases</p>
           </div>
@@ -330,6 +373,36 @@ export default function SciaticaTreatmentPage() {
         costs={sciaticaCosts}
         disclaimer="Estimates for general guidance. Final cost depends on hospital category (Economy/Private/Deluxe), specific implants (if any), and medical complexity. Insurance cashless facility available."
       />
+
+      {/* New Second Opinion & Insurance Block */}
+      <section className="mb-12 bg-indigo-50 border border-indigo-100 rounded-2xl p-8">
+        <h2 className="text-2xl font-bold text-indigo-900 mb-4">Insurance Coverage & Second Opinions</h2>
+        <div className="grid md:grid-cols-2 gap-8">
+          <div>
+            <h3 className="font-semibold text-indigo-800 mb-2">Health Insurance</h3>
+            <p className="text-gray-700 mb-4">
+              Sciatica treatment, including nerve blocks and endoscopic surgery, is generally covered by most comprehensive health insurance policies. We assist with:
+            </p>
+            <ul className="space-y-2 text-sm text-gray-600">
+              <li>✓ Cashless Pre-Authorization</li>
+              <li>✓ Documentation for Reimbursement</li>
+              <li>✓ Clear Cost Estimates</li>
+            </ul>
+          </div>
+          <div>
+            <h3 className="font-semibold text-indigo-800 mb-2">Advised Open Surgery?</h3>
+            <p className="text-gray-700 mb-4">
+              If you have been advised traditional open spine surgery, consider a <Link href="/appointments" className="text-indigo-600 hover:underline font-medium">Second Opinion</Link>. In many cases, an endoscopic approach or even a nerve block may be sufficient.
+            </p>
+            <Link
+              href="/services/awake-spine-surgery-hyderabad"
+              className="text-sm text-indigo-600 font-medium hover:text-indigo-800"
+            >
+              Learn about Awake Spine Surgery →
+            </Link>
+          </div>
+        </div>
+      </section>
 
       <section className="mb-12 rounded-lg border border-green-200 bg-green-50 p-6">
         <h2 className="text-2xl font-semibold mb-4 text-green-800">Is it a Slip Disc?</h2>

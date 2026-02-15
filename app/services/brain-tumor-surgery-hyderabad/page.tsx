@@ -22,9 +22,9 @@ import FAQPageSchema from '@/app/_components/FAQPageSchema';
 const SERVICE_SLUG = 'brain-tumor-surgery-hyderabad';
 
 const baseMetadata = makeMetadata({
-  title: 'Brain Tumor Surgery Hyderabad | Top Neurosurgeon | Dr Sayuj',
+  title: 'Brain Tumor Surgery Hyderabad | Best Neurosurgeon Dr. Sayuj',
   description:
-    'Expert Brain Tumor Surgery in Hyderabad. Advanced Awake Craniotomy & Neuronavigation for safe removal. Dr Sayuj Krishnan - Best Neurosurgeon. Consult now.',
+    'Looking for Brain Tumor Surgery in Hyderabad? Dr. Sayuj uses Awake Craniotomy & Neuronavigation for 100% safe tumor removal. Check Cost & Recovery.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
 });
 
