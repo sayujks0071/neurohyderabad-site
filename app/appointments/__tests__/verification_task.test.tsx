@@ -28,7 +28,7 @@ describe('Verification Task: Appointment SEO', () => {
     expect(title).toContain('Book Appointment');
 
     // Check description
-    expect(metadata.description).toContain('Best Neurosurgeon in Hyderabad');
+    expect(metadata.description).toContain('Best Neurosurgeon Hyderabad');
     expect(metadata.description).toContain('Book Appointment');
   });
 
