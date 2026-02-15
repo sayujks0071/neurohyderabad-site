@@ -30,6 +30,7 @@ const { mockSandbox, mockCommand } = vi.hoisted(() => {
 
 vi.mock('@/lib/sandbox/client', () => ({
   createSandbox: vi.fn().mockResolvedValue(mockSandbox),
+  getSandbox: vi.fn().mockResolvedValue(mockSandbox),
   runSandboxCommand: vi.fn().mockResolvedValue({
     stdout: '',
     stderr: '',
