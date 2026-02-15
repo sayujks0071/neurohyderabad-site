@@ -1,6 +1,6 @@
 export default function TrustSignals() {
   return (
-    <div className="relative bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-6 mb-8 transition-all duration-300 hover:shadow-2xl">
+    <div className="relative bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-8 mb-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
       <div className="flex flex-wrap justify-center items-center gap-4 text-sm">
         <div className="flex items-center bg-white/80 border border-white/40 px-4 py-3 rounded-xl shadow-sm hover:shadow-md motion-safe:hover:scale-[1.02] transition-all duration-300">
           <span className="text-xl mr-3" role="img" aria-label="Globe">🌐</span>
