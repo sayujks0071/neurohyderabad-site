@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
-import { Sandbox } from "@vercel/sandbox";
+import { getSandbox, destroySandbox } from "@/lib/sandbox/client";
 import { verifyAdminAccess } from "@/src/lib/security";
-import { destroySandbox } from "@/lib/sandbox/client";
 
 export const runtime = "nodejs";
 
@@ -22,7 +21,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    const sandbox = await Sandbox.get({ sandboxId });
+    const sandbox = await getSandbox(sandboxId);
     await destroySandbox(sandbox);
     return NextResponse.json({ success: true });
   } catch (error: any) {

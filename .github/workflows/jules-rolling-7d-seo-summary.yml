@@ -13,6 +13,7 @@ permissions:
 jobs:
   create-jules-issue:
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -95,4 +96,4 @@ jobs:
 
             console.log(`Created issue: ${newIssue.html_url}`);
 
-# Verified by Jules 2026-02-13
+# Verified by Jules 2026-02-14

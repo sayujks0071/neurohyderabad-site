@@ -15,8 +15,8 @@ import RemotionVideoEmbedWrapper from "../_components/RemotionVideoEmbedWrapper"
 export const revalidate = 3600; // Revalidate every hour
 
 export const metadata: Metadata = {
-  title: "About Dr Sayuj Krishnan | Neurosurgeon Hyderabad",
-  description: "Learn about Dr. Sayuj Krishnan's exceptional training, over 9 years of neurosurgical experience, German fellowship, and pioneering work in minimally invasive brain & spine surgery in Hyderabad.",
+  title: "Best Neurosurgeon Hyderabad | Dr. Sayuj Krishnan",
+  description: "Dr. Sayuj Krishnan is a German-trained Neurosurgeon in Hyderabad with 9+ Years of experience. Specialist in Endoscopic Spine & Brain Surgery. Read Profile.",
   keywords: [
     "dr sayuj krishnan credentials",
     "neurosurgeon hyderabad experience",

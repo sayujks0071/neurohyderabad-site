@@ -7,7 +7,7 @@
 - [ ] **Structure:** Check for other orphan pages in `sitemap.ts` that might be duplicates.
 - [ ] **Local SEO:** Enhance "Areas We Serve" section on location pages with specific landmarks.
 - [ ] **Internal Linking:** Add links from "Condition" pages (e.g., Sciatica) to the new "Spine Surgery" FAQs.
-- [ ] **Multimedia:** Add `VideoObject` schema to Brain Surgery page if we can source or create an explainer video (Competitor Gap).
+- [x] **Multimedia:** Add `VideoObject` schema to Brain Surgery page if we can source or create an explainer video (Competitor Gap). (Done 2026-02-23 via PatientEducationVideos component)
 - [ ] **Content:** Expand "Patient Journey" section on Brain Surgery page to match competitor depth.
 - [x] [Content] Add specific cost guide for Brain Tumor Surgery (similar to Spine). (Done 2026-02-22)
 - [ ] **Audit:** Check all "Patient Education Resources" sections on other Condition pages for broken links or missing content.
@@ -17,7 +17,7 @@
 
 ## 2026-01-26
 - **Content Gap:** "Risks & Safety Protocols" section for Endoscopic Spine Surgery. Competitors list specific risks (dural tear, infection) to build trust.
-- **Content Gap:** "Patient Education Video" embed. A 30-second animated explainer of the "Keyhole" vs "Open" difference.
+- [x] **Content Gap:** "Patient Education Video" embed. A 30-second animated explainer of the "Keyhole" vs "Open" difference. (Done 2026-02-23)
 - **Content Gap:** "Anesthesia Protocol" dedicated page. "Awake vs Asleep" is a big patient concern.
 - [ ] **Location Pages:** Apply 'Why Travel' pattern to other location pages (Banjara Hills, Gachibowli, etc.) to address distance objections.
 
@@ -44,3 +44,8 @@
 - [x] **Content Improvement:** Added "Red Flags" emergency section to Spine Surgery page. (Done 2026-02-12)
 - [ ] **Content Gap:** Add similar "Red Flags" sections to other critical pages (Brain Tumor, Epilepsy).
 - [ ] **Technical Fix:** Investigate `middleware.ts` type definition properly (currently using `@ts-ignore`).
+
+## 2026-02-15
+*   **Opportunity:** Interactive "Symptom Checker" for Sciatica/Back Pain.
+*   **Opportunity:** "Recovery Timeline" visualizer for key surgeries (Endoscopic Discectomy).
+*   **Opportunity:** Video Testimonials embedded directly in service pages.

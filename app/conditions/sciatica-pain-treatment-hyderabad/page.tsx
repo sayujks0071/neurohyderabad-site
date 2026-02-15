@@ -24,7 +24,7 @@ const PatientEducationVideos = dynamic(() => import('@/app/_components/PatientEd
 
 const baseMetadata = makeMetadata({
   title: "Sciatica Treatment Hyderabad | 90% Non-Surgical | Dr Sayuj",
-  description: "Best Sciatica treatment in Hyderabad. 90% patients recover without surgery using nerve blocks & meds. Endoscopic cure available. Book Dr Sayuj.",
+  description: "Sciatica Treatment Hyderabad: 90% non-surgical recovery with nerve blocks. Endoscopic cure for severe cases by Dr. Sayuj. Book Consult.",
   canonicalPath: '/conditions/sciatica-pain-treatment-hyderabad',
 });
 
@@ -260,6 +260,49 @@ export default function SciaticaTreatmentPage() {
         />
       </div>
 
+      {/* Comparison Table Section (New) */}
+      <section className="mb-12">
+        <h2 className="text-2xl font-bold text-blue-900 mb-6">Injection vs. Surgery vs. Conservative Care</h2>
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-sm text-gray-700 border border-gray-200 rounded-lg shadow-sm">
+            <thead className="bg-blue-50 text-blue-900 font-semibold">
+              <tr>
+                <th className="px-4 py-3 border-b border-gray-200">Feature</th>
+                <th className="px-4 py-3 border-b border-gray-200">Conservative</th>
+                <th className="px-4 py-3 border-b border-gray-200">Nerve Block (Injection)</th>
+                <th className="px-4 py-3 border-b border-gray-200">Endoscopic Surgery</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="px-4 py-3 font-medium border-b border-gray-100">Pain Relief Speed</td>
+                <td className="px-4 py-3 border-b border-gray-100">Slow (Weeks)</td>
+                <td className="px-4 py-3 border-b border-gray-100 text-green-700 font-semibold">Immediate / Fast</td>
+                <td className="px-4 py-3 border-b border-gray-100 text-green-700 font-semibold">Immediate</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-medium border-b border-gray-100">Invasiveness</td>
+                <td className="px-4 py-3 border-b border-gray-100">None</td>
+                <td className="px-4 py-3 border-b border-gray-100">Minimal (Needle only)</td>
+                <td className="px-4 py-3 border-b border-gray-100">Low (7mm Incision)</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-medium border-b border-gray-100">Recovery Time</td>
+                <td className="px-4 py-3 border-b border-gray-100">Variable</td>
+                <td className="px-4 py-3 border-b border-gray-100">Same Day</td>
+                <td className="px-4 py-3 border-b border-gray-100">3-5 Days (Desk Work)</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-3 font-medium border-b border-gray-100">Best For</td>
+                <td className="px-4 py-3 border-b border-gray-100">Mild pain, First episode</td>
+                <td className="px-4 py-3 border-b border-gray-100">Severe inflammation</td>
+                <td className="px-4 py-3 border-b border-gray-100">Nerve compression, Weakness</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
       {/* Elderly Safety Section (Competitor Gap) */}
       <section className="mb-12 bg-white border border-blue-100 rounded-2xl p-8 shadow-sm">
         <h2 className="text-2xl font-bold text-blue-900 mb-4">Is Endoscopic Spine Surgery Safe for Elderly Patients?</h2>
@@ -311,14 +354,14 @@ export default function SciaticaTreatmentPage() {
           <div className="bg-white p-6 rounded-lg shadow-md border-t-4 border-yellow-500">
             <h3 className="text-lg font-bold mb-3 text-gray-900">Step 2: Pain Interventions</h3>
             <p className="text-gray-700 mb-3">
-              If pain persists, we use <strong>Transforaminal Nerve Root Blocks</strong>. This is a day-care procedure that delivers medication directly to the nerve root.
+              If pain persists, we use <Link href="/services/minimally-invasive-spine-surgery" className="text-blue-600 hover:underline">Transforaminal Nerve Root Blocks</Link>. This is a day-care procedure that delivers medication directly to the nerve root.
             </p>
             <p className="text-sm font-semibold text-yellow-700">Success Rate: ~20% (of remaining)</p>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-md border-t-4 border-blue-500">
             <h3 className="text-lg font-bold mb-3 text-gray-900">Step 3: Surgical Solution</h3>
             <p className="text-gray-700 mb-3">
-              <strong>Endoscopic Discectomy</strong> is the gold standard when conservative care fails. It's a keyhole procedure with same-day walking.
+              <Link href="/services/endoscopic-discectomy-hyderabad" className="text-blue-600 hover:underline font-semibold">Endoscopic Discectomy</Link> is the gold standard when conservative care fails. It's a keyhole procedure with same-day walking.
             </p>
             <p className="text-sm font-semibold text-blue-700">Reserved for: ~10% of cases</p>
           </div>
@@ -330,6 +373,36 @@ export default function SciaticaTreatmentPage() {
         costs={sciaticaCosts}
         disclaimer="Estimates for general guidance. Final cost depends on hospital category (Economy/Private/Deluxe), specific implants (if any), and medical complexity. Insurance cashless facility available."
       />
+
+      {/* New Second Opinion & Insurance Block */}
+      <section className="mb-12 bg-indigo-50 border border-indigo-100 rounded-2xl p-8">
+        <h2 className="text-2xl font-bold text-indigo-900 mb-4">Insurance Coverage & Second Opinions</h2>
+        <div className="grid md:grid-cols-2 gap-8">
+          <div>
+            <h3 className="font-semibold text-indigo-800 mb-2">Health Insurance</h3>
+            <p className="text-gray-700 mb-4">
+              Sciatica treatment, including nerve blocks and endoscopic surgery, is generally covered by most comprehensive health insurance policies. We assist with:
+            </p>
+            <ul className="space-y-2 text-sm text-gray-600">
+              <li>✓ Cashless Pre-Authorization</li>
+              <li>✓ Documentation for Reimbursement</li>
+              <li>✓ Clear Cost Estimates</li>
+            </ul>
+          </div>
+          <div>
+            <h3 className="font-semibold text-indigo-800 mb-2">Advised Open Surgery?</h3>
+            <p className="text-gray-700 mb-4">
+              If you have been advised traditional open spine surgery, consider a <Link href="/appointments" className="text-indigo-600 hover:underline font-medium">Second Opinion</Link>. In many cases, an endoscopic approach or even a nerve block may be sufficient.
+            </p>
+            <Link
+              href="/services/awake-spine-surgery-hyderabad"
+              className="text-sm text-indigo-600 font-medium hover:text-indigo-800"
+            >
+              Learn about Awake Spine Surgery →
+            </Link>
+          </div>
+        </div>
+      </section>
 
       <section className="mb-12 rounded-lg border border-green-200 bg-green-50 p-6">
         <h2 className="text-2xl font-semibold mb-4 text-green-800">Is it a Slip Disc?</h2>
@@ -353,31 +426,39 @@ export default function SciaticaTreatmentPage() {
 
       <section className="mb-12">
         <h2 className="text-2xl font-semibold mb-6 text-blue-700">Red Flags: When to See a Doctor Urgently</h2>
-        <div className="bg-red-50 p-6 rounded-lg border border-red-100">
-          <p className="text-gray-700 mb-4 font-semibold">
-            Do not ignore sciatica if you have:
+        <div className="bg-red-50 p-6 rounded-lg border-l-4 border-red-500 shadow-sm">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="bg-red-100 p-2 rounded-full text-red-600">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            </div>
+            <h3 className="text-xl font-bold text-red-800 m-0">EMERGENCY CHECKLIST</h3>
+          </div>
+          <p className="text-gray-800 mb-4 font-medium pl-1">
+            Do not wait. Seek immediate medical attention if you have:
           </p>
-          <ul className="space-y-2 text-gray-700">
+          <ul className="space-y-3 text-gray-700 pl-1">
             <li className="flex items-start">
-              <span className="text-red-600 mr-2 mt-1">!</span>
-              <span>Sudden, severe pain or numbness in both legs</span>
+              <span className="text-red-600 mr-3 mt-1 font-bold">!</span>
+              <span><strong>Sudden, severe pain or numbness in both legs</strong> (Bilateral symptoms)</span>
             </li>
             <li className="flex items-start">
-              <span className="text-red-600 mr-2 mt-1">!</span>
-              <span>Loss of bowel or bowel control (incontinence)</span>
+              <span className="text-red-600 mr-3 mt-1 font-bold">!</span>
+              <span><strong>Loss of bowel or bladder control</strong> (Incontinence or inability to pass urine)</span>
             </li>
             <li className="flex items-start">
-              <span className="text-red-600 mr-2 mt-1">!</span>
-              <span>"Saddle anesthesia" - numbness in the groin area</span>
+              <span className="text-red-600 mr-3 mt-1 font-bold">!</span>
+              <span><strong>"Saddle anesthesia"</strong> - numbness in the groin/buttock area where you would sit on a saddle</span>
             </li>
             <li className="flex items-start">
-              <span className="text-red-600 mr-2 mt-1">!</span>
-              <span>Foot drop (difficulty lifting the front of your foot)</span>
+              <span className="text-red-600 mr-3 mt-1 font-bold">!</span>
+              <span><strong>Foot drop</strong> (Sudden difficulty lifting the front of your foot while walking)</span>
             </li>
           </ul>
-          <p className="text-sm text-red-700 mt-4">
-            These could be signs of Cauda Equina Syndrome, a medical emergency requiring immediate surgery.
-          </p>
+          <div className="mt-6 p-4 bg-white/60 rounded border border-red-200">
+            <p className="text-sm text-red-800 font-semibold">
+              ⚠️ These are signs of Cauda Equina Syndrome, a rare but serious medical emergency requiring immediate decompression surgery to prevent permanent paralysis.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -503,8 +584,29 @@ export default function SciaticaTreatmentPage() {
         description="Best Sciatica treatment in Hyderabad. 90% patients recover without surgery using nerve blocks & meds. Endoscopic cure available. Book Dr Sayuj."
         pageSlug="/conditions/sciatica-pain-treatment-hyderabad/"
         pageType="condition"
-        serviceOrCondition="Sciatica Treatment"
+        serviceOrCondition="Sciatica"
         breadcrumbs={breadcrumbs}
+        symptoms={[
+          "Radiating leg pain",
+          "Numbness in leg or foot",
+          "Weakness in leg",
+          "Foot drop (difficulty lifting foot)",
+          "Burning sensation down the leg",
+          "Pain worsening with coughing or sitting"
+        ]}
+        treatments={[
+          "Conservative Management (Medication, Rest)",
+          "Specialized Physiotherapy",
+          "Transforaminal Nerve Root Block (Injection)",
+          "Endoscopic Discectomy (Minimally Invasive Surgery)"
+        ]}
+        riskFactors={[
+          "Prolonged sitting",
+          "Herniated disc (Slip Disc)",
+          "Spinal stenosis",
+          "Obesity",
+          "Heavy lifting"
+        ]}
       />
 
       <FAQPageSchema

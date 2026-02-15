@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { spring, useCurrentFrame, useVideoConfig } from 'remotion';
+import { spring, useCurrentFrame, useVideoConfig, interpolate } from 'remotion';
 import { COLORS, FONTS, SPACING } from '../../utils/colorTokens';
 import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
 
@@ -66,7 +66,7 @@ export const PrepStepItem: React.FC<PrepStepItemProps> = ({ step, delay = 0 }) =
     },
   }), [frame, fps, prefersReducedMotion]);
 
-  // 4. Circle Pop Animation
+  // 4. Circle Pop Animation (Initial appearance)
   const circleScale = useMemo(() => prefersReducedMotion ? 1 : spring({
     frame: frame - 5,
     fps,
@@ -78,6 +78,34 @@ export const PrepStepItem: React.FC<PrepStepItemProps> = ({ step, delay = 0 }) =
       stiffness: 100,
     },
   }), [frame, fps, prefersReducedMotion]);
+
+  // 5. Success Pop (Pulse after checkmark completes)
+  // Checkmark finishes at frame ~45 (10 delay + 35 duration)
+  const successPopDriver = useMemo(() => prefersReducedMotion ? 0 : spring({
+    frame: frame - 45,
+    fps,
+    from: 0,
+    to: 1,
+    durationInFrames: 20,
+    config: { damping: 10, stiffness: 200 }
+  }), [frame, fps, prefersReducedMotion]);
+
+  const popScale = interpolate(successPopDriver, [0, 0.5, 1], [1, 1.2, 1]);
+
+  // 6. Sheen Effect (Sweeps across card)
+  const sheenDriver = useMemo(() => prefersReducedMotion ? 0 : spring({
+    frame: frame - 55, // Start after success pop
+    fps,
+    from: 0,
+    to: 1,
+    durationInFrames: 50, // Slower sweep
+    config: { damping: 100 }
+  }), [frame, fps, prefersReducedMotion]);
+
+  // Use transform translateX for better performance (GPU accelerated)
+  // From -150% (fully left out) to 400% (fully right out)
+  const sheenTranslateX = interpolate(sheenDriver, [0, 1], [-150, 400]);
+  const sheenOpacity = interpolate(sheenDriver, [0, 0.5, 1], [0, 0.5, 0]); // Lower opacity for subtlety
 
   return (
     <div
@@ -92,12 +120,32 @@ export const PrepStepItem: React.FC<PrepStepItemProps> = ({ step, delay = 0 }) =
         borderRadius: '16px',
         border: `3px solid ${COLORS.accent}`,
         boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+        position: 'relative',
+        overflow: 'hidden', // Contain sheen
       }}
     >
+      {/* Sheen Effect - Positioned above content (zIndex 3) */}
+      {!prefersReducedMotion && (
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            bottom: 0,
+            left: 0,
+            width: '50%',
+            background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent)',
+            transform: `translateX(${sheenTranslateX}%) skewX(-20deg)`,
+            opacity: sheenOpacity,
+            pointerEvents: 'none',
+            zIndex: 3,
+          }}
+        />
+      )}
+
       {/* Checkmark icon container */}
       <div
         style={{
-          transform: `scale(${circleScale})`,
+          transform: `scale(${circleScale * popScale})`,
           width: '64px',
           height: '64px',
           borderRadius: '50%',
@@ -106,6 +154,7 @@ export const PrepStepItem: React.FC<PrepStepItemProps> = ({ step, delay = 0 }) =
           alignItems: 'center',
           justifyContent: 'center',
           flexShrink: 0,
+          zIndex: 2,
         }}
       >
         <svg
@@ -130,7 +179,7 @@ export const PrepStepItem: React.FC<PrepStepItemProps> = ({ step, delay = 0 }) =
       </div>
 
       {/* Text content */}
-      <div style={{ flex: 1 }}>
+      <div style={{ flex: 1, zIndex: 2 }}>
         <h3
           style={{
             fontFamily: FONTS.primary,

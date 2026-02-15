@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import Breadcrumbs from '@/app/components/Breadcrumbs';
 import JsonLd from '@/components/JsonLd';
@@ -18,13 +19,18 @@ import CostTransparencySection from '@/src/components/CostTransparencySection';
 import PatientJourneySection from '@/src/components/PatientJourneySection';
 import MedicalWebPageSchema from '../../components/schemas/MedicalWebPageSchema';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
+import PatientEducationVideosSkeleton from '@/app/_components/skeletons/PatientEducationVideosSkeleton';
+
+const PatientEducationVideos = dynamic(() => import('@/app/_components/PatientEducationVideos'), {
+  loading: () => <PatientEducationVideosSkeleton />
+});
 
 const SERVICE_SLUG = 'brain-tumor-surgery-hyderabad';
 
 const baseMetadata = makeMetadata({
-  title: 'Brain Tumor Surgery Hyderabad | Top Neurosurgeon | Dr Sayuj',
+  title: 'Brain Tumor Surgery Hyderabad | Best Neurosurgeon Dr. Sayuj',
   description:
-    'Expert Brain Tumor Surgery in Hyderabad. Cost: ₹3-5 Lakhs approx. Insurance accepted. Advanced Awake Craniotomy & Neuronavigation for safe removal. Dr Sayuj Krishnan.',
+    'Looking for Brain Tumor Surgery in Hyderabad? Dr. Sayuj uses Awake Craniotomy & Neuronavigation for 100% safe tumor removal. Check Cost & Recovery.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
 });
 
@@ -346,6 +352,8 @@ export default function BrainTumorSurgeryHyderabadPage() {
             ))}
           </div>
         </section>
+
+        <PatientEducationVideos category="Brain tumor" />
 
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-blue-900 mb-6">Comprehensive Patient Support</h2>

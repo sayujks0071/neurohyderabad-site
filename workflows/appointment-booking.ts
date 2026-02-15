@@ -659,23 +659,33 @@ async function findAlternativeSlots(
     altDate.setDate(altDate.getDate() + i);
     const dateString = formatDateString(altDate);
 
-    for (const slot of candidateSlots) {
-      const availability = evaluateAvailability(dateString, slot);
-      if (availability.available) {
+    // Filter statically valid slots first
+    const validSlots = candidateSlots.filter(
+      (slot) => evaluateAvailability(dateString, slot).available
+    );
+
+    if (validSlots.length > 0) {
+      // Check database availability in parallel for this day
+      const availabilityChecks = validSlots.map(async (slot) => {
         try {
-          // Double check against database to ensure slot is truly free
           const bookedCount = await appointments.checkSlot(dateString, slot);
-          if (bookedCount === 0) {
-            alternatives.push({ date: dateString, time: slot });
-            break;
-          }
+          return { slot, available: bookedCount === 0 };
         } catch (error) {
           console.warn(
             `[Appointment Workflow] Failed to check slot availability: ${dateString} ${slot}`,
             error
           );
-          continue;
+          return { slot, available: false }; // Assume booked on error
         }
+      });
+
+      const results = await Promise.all(availabilityChecks);
+
+      // Find the first available slot (preserving time order)
+      const firstAvailable = results.find((r) => r.available);
+
+      if (firstAvailable) {
+        alternatives.push({ date: dateString, time: firstAvailable.slot });
       }
     }
 

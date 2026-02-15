@@ -22,6 +22,7 @@
     "check:sitemap": "node scripts/check-sitemap.js",
     "verify:opengraph": "npx tsx scripts/verify-opengraph.ts",
     "sandbox:test": "node scripts/sandbox-test.js",
+    "sandbox:exec": "node scripts/sandbox-exec.js",
     "gsc:verify": "npx tsx scripts/verify-gsc-setup.ts",
     "gsc:list": "npx tsx scripts/google-seo-automation.ts --list",
     "gsc:status": "npx tsx scripts/google-seo-automation.ts --status",
