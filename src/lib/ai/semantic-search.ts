@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { getAllBlogPosts } from '@/src/lib/blog';
 import { getTextModel, hasAIConfig } from '@/src/lib/ai/gateway';
 import { SEARCH_INDEX } from '@/src/data/searchIndex';
+import { unstable_cache } from 'next/cache';
 
 export interface SearchResult {
   href: string;
@@ -16,9 +17,11 @@ export interface SearchResult {
 
 /**
  * Perform a semantic search using Vercel AI Gateway (if configured)
- * Falls back to keyword search if AI is unavailable or fails
+ * Falls back to keyword search if AI is unavailable or fails.
+ *
+ * Note: This function is uncached. Use `semanticSearch` for cached access.
  */
-export async function semanticSearch(query: string, limit: number = 10): Promise<SearchResult[]> {
+export async function performSemanticSearch(query: string, limit: number = 10): Promise<SearchResult[]> {
   let allPosts: Awaited<ReturnType<typeof getAllBlogPosts>> = [];
 
   try {
@@ -169,3 +172,16 @@ Return ONLY a JSON object with an "ids" array containing the IDs (URLs) of the $
     return performKeywordSearch();
   }
 }
+
+/**
+ * Cached semantic search using Vercel AI Gateway.
+ * Caches results for 1 hour to reduce API costs.
+ */
+export const semanticSearch = unstable_cache(
+  performSemanticSearch,
+  ['semantic-search-v1'],
+  {
+    revalidate: 3600,
+    tags: ['search', 'content']
+  }
+);
