@@ -1,23 +1,33 @@
-# Prioritized Fix List (SEO Reprint 2026-02-13)
+# SEO Audit Priorities & Fix Backlog
 
-| Issue | Evidence | Affected URLs | Fix Summary | Impact | Effort | Risk | Do Now? |
-|-------|----------|---------------|-------------|--------|--------|------|---------|
-| Title Tags Too Long | Audit JSON (39 pages) | Homepage, About, Appointments, etc. | Shorten titles to <60 chars. Move brand to end or remove if needed. | High | Low | Low | Yes |
-| Missing Breadcrumb Schema | Schema Audit | All Pages | Add `BreadcrumbList` JSON-LD to `app/layout.tsx` or `src/components/Schema.tsx`. | High | Med | Low | Yes |
-| Missing MedicalClinic Schema | Schema Audit | Location/Contact Pages | Add `MedicalClinic` schema for Yashoda Hospital Malakpet on location pages. | High | Med | Low | Yes |
-| Meta Description Length | Audit JSON (11 pages) | Service Pages | Truncate or rewrite to <160 chars. Focus on CTR. | Med | Low | Low | Yes |
-| Competitor Keyword Gap | Competitor Analysis | New Content | Create "Cost of Spine Surgery" guide. | High | High | Low | No |
-| Video Schema | Competitor Analysis | Service Pages | Implement `VideoObject` schema for embedded videos. | Med | Med | Low | No |
+| ID | Issue | Affected URLs | Impact (1-5) | Effort (1-5) | Risk | Status |
+|---|---|---|---|---|---|---|
+| **P1** | **Critical LCP (16s)** | Global (Homepage, Service Pages) | 5 (High) | 3 (Med) | Low | **DO NOW** |
+| **P2** | **Missing Metadata & H1** | `/brain-tumor-surgery` | 5 (High) | 1 (Low) | Low | **DO NOW** |
+| **P3** | **Schema Gaps (MedicalClinic)** | Location Pages (`/locations/*`) | 4 (High) | 2 (Low) | Low | **DO NOW** |
+| P4 | CTR Optimization (Meta Desc) | Service Pages | 3 (Med) | 2 (Low) | Low | Backlog |
+| P5 | Thin Content | `/drafts`, `/knowledge-base` | 2 (Low) | 2 (Low) | Low | Backlog |
+| P6 | Missing H1 | `/knowledge-base` | 2 (Low) | 1 (Low) | Low | Backlog |
 
-## "Do Now" Execution Plan
-1. **Fix Metadata Length:**
-   - Audit `src/lib/seo.ts` or `app/layout.tsx` for default templates.
-   - Update individual page `metadata` exports in `app/**/page.tsx` to be concise.
-   - Target: Homepage, About, Appointments, core Service pages.
+## Detailed Execution Plan for Top 3
 
-2. **Enhance Schema:**
-   - Verify/Add `BreadcrumbList` in a global component or layout.
-   - Verify/Add `MedicalClinic` schema in `app/neurosurgeon-malakpet/page.tsx` and contact page.
+### 1. Fix LCP (Hero Image Optimization)
+- **Problem**: LCP is 16s. Likely late loading of hero image.
+- **Solution**:
+    - Identify the Hero component (likely in `app/page.tsx` or `app/_components/Hero.tsx`).
+    - Add `priority` prop to `next/image`.
+    - Use `sizes` attribute correctly.
+    - Ensure font loading is optimized (e.g. `next/font` with `swap`).
 
-3. **Verify:**
-   - Re-run `seo:audit` or manual checks on fixed pages.
+### 2. Fix Metadata & H1 on `/brain-tumor-surgery`
+- **Problem**: Page lacks `metadata` export and explicit H1.
+- **Solution**:
+    - Add `export const metadata: Metadata = { ... }` to `app/brain-tumor-surgery/page.tsx`.
+    - Ensure H1 tag wraps the main title.
+
+### 3. Enhance Schema on Location Pages
+- **Problem**: Location pages need strong Local SEO signals.
+- **Solution**:
+    - Verify `app/locations/[slug]/page.tsx` uses `MedicalClinic` schema.
+    - Ensure it pulls data from `src/data/locations.ts` correctly.
+    - Add `geo` coordinates and `openingHours` if missing.
