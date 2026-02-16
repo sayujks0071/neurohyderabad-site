@@ -20,6 +20,7 @@ import PatientJourneySection from '@/src/components/PatientJourneySection';
 import MedicalWebPageSchema from '../../components/schemas/MedicalWebPageSchema';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
 import PatientEducationVideosSkeleton from '@/app/_components/skeletons/PatientEducationVideosSkeleton';
+import BrainSurgeryComparisonTable from '@/src/components/BrainSurgeryComparisonTable';
 
 const PatientEducationVideos = dynamic(() => import('@/app/_components/PatientEducationVideos'), {
   loading: () => <PatientEducationVideosSkeleton />
@@ -351,6 +352,14 @@ export default function BrainTumorSurgeryHyderabadPage() {
               </div>
             ))}
           </div>
+        </section>
+
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-blue-900 mb-6">Traditional vs. Advanced Techniques</h2>
+          <p className="text-gray-700 mb-6">
+            Understanding the difference between standard surgery and modern neuronavigation-guided techniques helps in making informed decisions.
+          </p>
+          <BrainSurgeryComparisonTable />
         </section>
 
         <PatientEducationVideos category="Brain tumor" />
