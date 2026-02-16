@@ -43,7 +43,7 @@ describe('CRM Client', () => {
           method: 'POST',
           headers: expect.objectContaining({
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer password',
+            'neon-connection-string': 'postgresql://user:password@host/database',
           }),
           body: JSON.stringify({
             query: 'SELECT * FROM patients',
