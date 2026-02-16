@@ -58,7 +58,7 @@ export async function queryDb(sql: string, params?: any[]): Promise<QueryResult>
 
     // Get the host from the URL
     const hostPart = urlParts[1];
-    const host = hostPart.split('/')[0];
+    const host = hostPart.split('?')[0].split('/')[0];
 
     // Construct Neon SQL API endpoint
     const apiUrl = `https://${host}/sql`;
