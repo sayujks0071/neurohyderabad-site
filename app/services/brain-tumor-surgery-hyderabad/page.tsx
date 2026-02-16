@@ -28,7 +28,7 @@ const PatientEducationVideos = dynamic(() => import('@/app/_components/PatientEd
 const SERVICE_SLUG = 'brain-tumor-surgery-hyderabad';
 
 const baseMetadata = makeMetadata({
-  title: 'Brain Tumor Surgery Hyderabad | Best Neurosurgeon Dr. Sayuj',
+  title: 'Brain Tumor Surgery Hyderabad: Cost, Safety & Dr. Sayuj',
   description:
     'Looking for Brain Tumor Surgery in Hyderabad? Dr. Sayuj uses Awake Craniotomy & Neuronavigation for 100% safe tumor removal. Check Cost & Recovery.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
