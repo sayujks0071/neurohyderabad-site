@@ -64,7 +64,7 @@ const SPINE_SURGERY_FAQS = [
 ];
 
 export const metadata: Metadata = {
-  title: "Endoscopic Spine Surgery Hyderabad | Minimally Invasive Specialist",
+  title: "Endoscopic Spine Surgery Hyderabad: Minimally Invasive Care",
   description: "Expert endoscopic spine surgery in Hyderabad. Minimally invasive slip disc & stenosis treatment. Same-day discharge. Dr. Sayuj Krishnan.",
   keywords: [
     "spine surgery hyderabad",

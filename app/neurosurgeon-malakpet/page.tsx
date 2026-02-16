@@ -18,7 +18,7 @@ export const dynamicParams = false;
 export const revalidate = 86400;
 
 export const metadata = {
-  title: "Neurosurgeon Malakpet | Best Spine Surgeon Dilsukhnagar | Yashoda",
+  title: "Neurosurgeon Malakpet: Spine & Brain Specialist Dr. Sayuj",
   description:
     "Dr. Sayuj Krishnan at Yashoda Hospital Malakpet offers Daycare Endoscopic Spine Surgery, brain tumor care, and 24/7 emergency neurosurgery. Book a visit.",
   keywords: "neurosurgeon malakpet, neurosurgeon dilsukhnagar, yashoda hospital malakpet neurosurgeon, spine surgeon malakpet, daycare spine surgery malakpet, endoscopic spine surgery malakpet, spine fracture treatment malakpet",
@@ -388,6 +388,43 @@ export default function MalakpetNeurosurgeonPage() {
                   </Link>
               ))}
            </div>
+        </div>
+      </section>
+
+      {/* Sciatica & Leg Pain Section - Local SEO & Content Cluster */}
+      <section className="bg-white py-12">
+        <div className="mx-auto max-w-5xl px-4">
+          <div className="rounded-2xl border border-blue-100 bg-gradient-to-r from-blue-50 to-white p-8">
+            <h2 className="text-2xl font-bold text-blue-900 mb-4">Sciatica & Leg Pain Treatment in Malakpet</h2>
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <p className="text-gray-700 mb-4">
+                  Many patients in Dilsukhnagar and Malakpet suffer from <strong>sciatica</strong> (shooting leg pain) due to slip discs.
+                  Dr. Sayuj specializes in a <strong>90% Non-Surgical Protocol</strong> using targeted nerve blocks and physiotherapy available right here at Yashoda Malakpet.
+                </p>
+                <ul className="space-y-2 text-sm text-gray-700 mb-6">
+                  <li className="flex items-center"><span className="text-green-600 mr-2">✓</span> Precise Nerve Root Diagnosis</li>
+                  <li className="flex items-center"><span className="text-green-600 mr-2">✓</span> Day-care Nerve Block Injections</li>
+                  <li className="flex items-center"><span className="text-green-600 mr-2">✓</span> Endoscopic Decompression (if needed)</li>
+                </ul>
+                <Link
+                  href="/conditions/sciatica-pain-treatment-hyderabad/"
+                  className="inline-flex items-center text-blue-700 font-semibold hover:underline"
+                >
+                  Read our Full Guide to Sciatica Treatment →
+                </Link>
+              </div>
+              <div className="hidden md:block">
+                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                   <p className="text-sm text-gray-500 mb-2 font-semibold uppercase tracking-wider">Patient Insight</p>
+                   <p className="text-gray-800 italic">
+                     "I thought I needed surgery for my leg pain. Dr. Sayuj treated me with a nerve block injection at Malakpet, and I was back to work in 2 days."
+                   </p>
+                   <p className="text-xs text-gray-400 mt-2 text-right">— Patient from LB Nagar</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
