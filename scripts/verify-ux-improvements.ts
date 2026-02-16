@@ -3,43 +3,51 @@ import fs from 'fs';
 import path from 'path';
 
 const filesToCheck = [
+  'packages/appointment-form/constants.tsx',
   'packages/appointment-form/BookingForm.tsx',
-  'packages/appointment-form/AppointmentFormExperience.tsx', // Success message is here for BookingForm
+  'packages/appointment-form/AppointmentFormExperience.tsx',
   'app/appointments/_components/neuralink/PatientPortal.tsx',
   'components/LeadForm.tsx',
   'components/TeleconsultationForm.tsx',
+  'public/widgets/appointment-booking.html',
 ];
 
 const requirements = {
+  'packages/appointment-form/constants.tsx': [
+    { pattern: /export const APPOINTMENT_SUCCESS_MESSAGE =\s*"Appointment request received\. Please bring any MRI\/CT scans with you\. We will confirm via phone shortly\.";/, description: 'Success message constant definition' }
+  ],
   'packages/appointment-form/BookingForm.tsx': [
     { pattern: /isLoading={isSubmitting}/, description: 'Loading state on button' },
     { pattern: /"Sending..."/, description: 'Sending text' },
     { pattern: /reset\(/, description: 'Form reset logic' },
   ],
   'packages/appointment-form/AppointmentFormExperience.tsx': [
-     { pattern: /Appointment request received\. Please bring any MRI\/CT scans with you\. We will confirm via phone shortly\./, description: 'Success message' }
+     { pattern: /APPOINTMENT_SUCCESS_MESSAGE/, description: 'Uses success message constant' }
   ],
   'app/appointments/_components/neuralink/PatientPortal.tsx': [
     { pattern: /disabled={.*(isAnalyzing|isSyncing).*}/, description: 'Disabled state on button' },
     { pattern: /Loader2/, description: 'Spinner icon' },
     { pattern: /Sending\.\.\./, description: 'Sending text' },
-    { pattern: /Appointment request received\. Please bring any MRI\/CT scans with you\. We will confirm via phone shortly\./, description: 'Success message' },
+    { pattern: /APPOINTMENT_SUCCESS_MESSAGE/, description: 'Uses success message constant' },
     { pattern: /setFormData\(INITIAL_FORM_STATE\)/, description: 'Form reset logic' },
   ],
   'components/LeadForm.tsx': [
     { pattern: /disabled={isSubmitting}/, description: 'Disabled state on button' },
     { pattern: /Loader2/, description: 'Spinner icon' },
     { pattern: /"Sending..."/, description: 'Sending text' },
-    { pattern: /Appointment request received\. Please bring any MRI\/CT scans with you\. We will confirm via phone shortly\./, description: 'Success message' },
+    { pattern: /APPOINTMENT_SUCCESS_MESSAGE/, description: 'Uses success message constant' },
     { pattern: /reset\(\)/, description: 'Form reset logic' },
   ],
   'components/TeleconsultationForm.tsx': [
     { pattern: /disabled={status === 'submitting'}/, description: 'Disabled state on button' },
     { pattern: /Loader2/, description: 'Spinner icon' },
     { pattern: /Sending\.\.\./, description: 'Sending text' },
-    { pattern: /Appointment request received\. Please bring any MRI\/CT scans with you\. We will confirm via phone shortly\./, description: 'Success message' },
+    { pattern: /APPOINTMENT_SUCCESS_MESSAGE/, description: 'Uses success message constant' },
     { pattern: /setFormState\(initialState\)/, description: 'Form reset logic' },
   ],
+  'public/widgets/appointment-booking.html': [
+    { pattern: /Appointment request received\. Please bring any MRI\/CT scans with you\. We will confirm via phone shortly\./, description: 'Success message (hardcoded)' }
+  ]
 };
 
 let allPassed = true;
@@ -61,10 +69,13 @@ for (const file of filesToCheck) {
 
   console.log(`\nChecking ${file}...`);
   for (const check of checks) {
+    // Normalize newlines and whitespace for regex matching if needed
+    // But simplistic check should work for single line patterns
     if (check.pattern.test(content)) {
       console.log(`  ✅ ${check.description}`);
     } else {
       console.error(`  ❌ Missing: ${check.description}`);
+      console.error(`     Pattern: ${check.pattern}`);
       allPassed = false;
     }
   }
