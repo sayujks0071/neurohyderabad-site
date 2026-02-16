@@ -108,6 +108,7 @@ export async function POST(request: NextRequest) {
     };
 
     // 🏥 CRM Integration: Save lead to patient database
+    let crmErrorDetail = null;
     try {
       const { createPatient, findPatientByEmail, updatePatient } = await import('@/lib/crm-client');
 
@@ -157,6 +158,7 @@ export async function POST(request: NextRequest) {
       // Log CRM errors but don't fail the request
       // This ensures lead submission still works even if CRM is down
       console.error('[CRM] Failed to save to CRM database:', crmError);
+      crmErrorDetail = crmError instanceof Error ? crmError.message : String(crmError);
     }
 
     // Submit to Google Sheets (if configured)
@@ -176,7 +178,8 @@ export async function POST(request: NextRequest) {
       ok: true,
       message: "Lead received successfully",
       requestId: payload.requestId,
-      note: "Data processed"
+      note: "Data processed",
+      crmError: crmErrorDetail // Expose CRM error for debugging
     });
   } catch (error) {
     console.error("Error in /api/lead:", error);
