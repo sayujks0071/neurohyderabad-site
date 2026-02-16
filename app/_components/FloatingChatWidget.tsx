@@ -38,6 +38,7 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
   // Page context state
   const [pageTitle, setPageTitle] = useState('');
   const [pageDescription, setPageDescription] = useState('');
+  const [pageContent, setPageContent] = useState('');
   const pathname = usePathname();
 
   const startTimeRef = useRef<number>(0);
@@ -49,6 +50,19 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
       setPageTitle(document.title);
       const metaDesc = document.querySelector('meta[name="description"]');
       setPageDescription(metaDesc ? metaDesc.getAttribute('content') || '' : '');
+
+      // Extract main content for context-aware answers
+      try {
+        const mainElement = document.querySelector('main') || document.querySelector('article') || document.body;
+        let content = (mainElement as HTMLElement).innerText || '';
+        // Truncate to reasonable length (approx 2000 chars) to save tokens but provide context
+        if (content.length > 2000) {
+          content = content.substring(0, 2000) + '...';
+        }
+        setPageContent(content);
+      } catch (e) {
+        console.warn('Failed to extract page content', e);
+      }
     }, 500);
 
     return () => clearTimeout(timer);
@@ -76,6 +90,7 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
       pageSlug: pathname || 'global',
       pageTitle,
       pageDescription,
+      pageContent,
       service: 'floating_widget',
     },
     initialMessages,

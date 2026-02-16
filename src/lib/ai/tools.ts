@@ -4,6 +4,7 @@ import { processBooking } from '@/src/lib/appointments/service';
 import { appointments } from '@/src/lib/db';
 import { locations } from '@/src/data/locations';
 import { semanticSearch } from '@/src/lib/ai/semantic-search';
+import { analyzeSymptoms } from '@/src/lib/ai/symptoms';
 import type { BookingData } from '@/packages/appointment-form/types';
 
 const SERVICES = [
@@ -33,6 +34,20 @@ export const tools = {
         url: r.href,
         category: r.category
       }));
+    },
+  } as any),
+
+  analyzeSymptoms: tool({
+    description: 'Analyze medical symptoms to provide preliminary guidance, urgency assessment, and possible related conditions.',
+    parameters: z.object({
+      symptoms: z.string().describe('The description of symptoms provided by the user'),
+      age: z.string().optional().describe('Age of the patient if provided'),
+      gender: z.enum(['male', 'female', 'other']).optional().describe('Gender of the patient if provided'),
+      duration: z.string().optional().describe('Duration of symptoms if provided'),
+    }),
+    execute: async ({ symptoms, age, gender, duration }: any) => {
+      const result = await analyzeSymptoms(symptoms, age, gender, duration);
+      return result;
     },
   } as any),
 
