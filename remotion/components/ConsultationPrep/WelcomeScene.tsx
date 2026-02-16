@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { spring, useCurrentFrame, useVideoConfig, AbsoluteFill } from 'remotion';
+import { spring, useCurrentFrame, useVideoConfig, AbsoluteFill, interpolate } from 'remotion';
 import { COLORS, FONTS } from '../../utils/colorTokens';
 import { GradientBackground } from '../shared/GradientBackground';
 import { WelcomeCharacter } from './WelcomeCharacter';
@@ -7,9 +7,10 @@ import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
 
 export interface WelcomeSceneProps {
   patientName: string;
+  exitFrame?: number;
 }
 
-const FloatingParticles: React.FC<{ reducedMotion: boolean }> = ({ reducedMotion }) => {
+const FloatingParticles: React.FC<{ reducedMotion: boolean; opacity: number }> = ({ reducedMotion, opacity }) => {
   const frame = useCurrentFrame();
 
   // Static particle configuration
@@ -24,7 +25,7 @@ const FloatingParticles: React.FC<{ reducedMotion: boolean }> = ({ reducedMotion
   if (reducedMotion) return null;
 
   return (
-    <AbsoluteFill style={{ overflow: 'hidden' }}>
+    <AbsoluteFill style={{ overflow: 'hidden', opacity }}>
       {particles.map((p, i) => {
         const xOffset = Math.sin(frame / 100 * p.speed + i) * 30;
         const yOffset = Math.cos(frame / 120 * p.speed + i) * 30;
@@ -50,13 +51,13 @@ const FloatingParticles: React.FC<{ reducedMotion: boolean }> = ({ reducedMotion
   );
 };
 
-export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
+export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName, exitFrame = 150 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const prefersReducedMotion = usePrefersReducedMotion();
 
   // Spring-based fade-in animation for main container
-  const opacity = prefersReducedMotion ? 1 : spring({
+  const entranceOpacity = prefersReducedMotion ? 1 : spring({
     frame,
     fps,
     from: 0,
@@ -98,9 +99,27 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
     config: { damping: 12 },
   });
 
+  // --- EXIT ANIMATIONS ---
+  // Start exiting at exitFrame, take 20 frames to slide out/fade
+  const exitDuration = 20;
+
+  const exitOpacity = interpolate(
+    frame,
+    [exitFrame, exitFrame + exitDuration],
+    [1, 0],
+    { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }
+  );
+
+  const exitY = prefersReducedMotion ? 0 : interpolate(
+    frame,
+    [exitFrame, exitFrame + exitDuration],
+    [0, -50], // Slide up by 50px
+    { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }
+  );
+
   return (
     <GradientBackground preset="clinical-blue" animated={!prefersReducedMotion}>
-      <FloatingParticles reducedMotion={prefersReducedMotion} />
+      <FloatingParticles reducedMotion={prefersReducedMotion} opacity={exitOpacity} />
       <div
         style={{
           width: '100%',
@@ -109,7 +128,8 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          opacity,
+          opacity: entranceOpacity * exitOpacity, // Combine entrance and exit opacity
+          transform: `translateY(${exitY}px)`, // Apply exit slide
           zIndex: 1, // Ensure text is above particles
         }}
       >
