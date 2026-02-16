@@ -108,7 +108,20 @@ export async function POST(request: NextRequest) {
     };
 
     // 🏥 CRM Integration: Save lead to patient database
+    let crmErrorDetail = null;
+    let createdPatientId = null;
+    let dbHost = null;
+
     try {
+      const dbUrl = process.env.CRM_DATABASE_URL;
+      if (dbUrl) {
+        // Mask the database URL to only show the host for debugging
+        const parts = dbUrl.split('@');
+        dbHost = parts.length > 1 ? parts[1].split('/')[0] : "Malformed URL";
+      } else {
+        dbHost = "Not Set";
+      }
+
       const { createPatient, findPatientByEmail, updatePatient } = await import('@/lib/crm-client');
 
       // Split full name into first and last name
@@ -139,7 +152,8 @@ export async function POST(request: NextRequest) {
             : clinicalNote.join(', ');
         }
 
-        await updatePatient(existingPatient.id!, updates);
+        const updated = await updatePatient(existingPatient.id!, updates);
+        createdPatientId = updated.id;
         console.log('[CRM] Updated existing patient:', existingPatient.id);
       } else {
         // Create new patient record
@@ -151,12 +165,14 @@ export async function POST(request: NextRequest) {
           city: city || null,
           notes: concern || 'Lead from website contact form',
         });
+        createdPatientId = newPatient.id;
         console.log('[CRM] Created new patient:', newPatient.id);
       }
     } catch (crmError) {
       // Log CRM errors but don't fail the request
       // This ensures lead submission still works even if CRM is down
       console.error('[CRM] Failed to save to CRM database:', crmError);
+      crmErrorDetail = crmError instanceof Error ? crmError.message : String(crmError);
     }
 
     // Submit to Google Sheets (if configured)
@@ -176,7 +192,10 @@ export async function POST(request: NextRequest) {
       ok: true,
       message: "Lead received successfully",
       requestId: payload.requestId,
-      note: "Data processed"
+      note: "Data processed",
+      crmError: crmErrorDetail, // Expose CRM error for debugging
+      dbHost: dbHost, // Expose DB host for debugging
+      patientId: createdPatientId // Expose patient ID for debugging
     });
   } catch (error) {
     console.error("Error in /api/lead:", error);
