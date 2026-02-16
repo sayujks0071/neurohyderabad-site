@@ -9,6 +9,7 @@ import Select from "./ui/Select";
 import Textarea from "./ui/Textarea";
 import Button from "./ui/Button";
 import Calendar from "./ui/Calendar";
+import { PainScoreSlider } from "./ui/PainScoreSlider";
 import { appointmentSchema, BookingFormParsedValues, BookingFormValues } from "./schema";
 import { formatLocalDate, parseLocalDate } from "@/src/lib/dates";
 
@@ -56,15 +57,12 @@ export default function BookingForm({
     handleSubmit,
     control,
     reset,
-    watch,
     formState: { errors, isSubmitting },
   } = useForm<BookingFormValues>({
     resolver: zodResolver(appointmentSchema) as any,
     defaultValues: defaultValues as BookingFormValues,
     mode: "onTouched", // Trigger validation on blur
   });
-
-  const painScoreValue = watch("painScore");
 
   useEffect(() => {
     if (initialData) {
@@ -253,63 +251,12 @@ export default function BookingForm({
             </div>
 
             <div className="md:col-span-2 space-y-6">
-              <div>
-                {/* Clinical Context: Pain Score (1-10) */}
-                <label
-                  htmlFor="painScore-slider"
-                  className="block text-sm font-medium text-slate-700 mb-2"
-                >
-                  Pain Score (1-10)
-                </label>
-                <div className="flex items-center gap-4">
-                  <div className="text-center">
-                    <span className="block text-sm font-bold text-slate-400" aria-hidden="true">1</span>
-                    <span className="block text-xs text-slate-400">No Pain</span>
-                  </div>
-                  <input
-                    id="painScore-slider"
-                    type="range"
-                    min="1"
-                    max="10"
-                    step="1"
-                    className={`w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors ${
-                      (painScoreValue || 5) <= 3
-                        ? "accent-green-600 focus:ring-green-500"
-                        : (painScoreValue || 5) <= 7
-                        ? "accent-yellow-500 focus:ring-yellow-500"
-                        : "accent-red-600 focus:ring-red-500"
-                    }`}
-                    aria-valuetext={painScoreValue ? `Score: ${painScoreValue}${painScoreValue >= 8 ? ' (Severe)' : painScoreValue <= 3 ? ' (Mild)' : ''}` : "Score: 5"}
-                    {...register("painScore")}
-                  />
-                  <div className="text-center">
-                    <span className="block text-sm font-bold text-slate-400" aria-hidden="true">10</span>
-                    <span className="block text-xs text-slate-400">Severe</span>
-                  </div>
-                </div>
-                <div className="text-center mt-2">
-                  {painScoreValue && (
-                    <span
-                      className={`inline-block px-3 py-1 rounded-lg text-sm font-bold ${
-                        painScoreValue <= 3
-                          ? "bg-green-100 text-green-700"
-                          : painScoreValue <= 7
-                          ? "bg-yellow-100 text-yellow-700"
-                          : "bg-red-100 text-red-700"
-                      }`}
-                    >
-                      Score: {painScoreValue}
-                      {painScoreValue >= 8 && " (Severe)"}
-                      {painScoreValue <= 3 && " (Mild)"}
-                    </span>
-                  )}
-                </div>
-                {errors.painScore && (
-                  <p className="mt-1 text-sm text-center text-red-600">
-                    {errors.painScore.message}
-                  </p>
-                )}
-              </div>
+              <PainScoreSlider
+                control={control}
+                register={register}
+                name="painScore"
+                error={errors.painScore?.message}
+              />
 
               <label
                 className="flex items-center p-4 bg-slate-50 rounded-xl border border-slate-200 hover:border-cyan-300 hover:bg-slate-100 transition-all cursor-pointer group"
