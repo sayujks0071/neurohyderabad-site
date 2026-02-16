@@ -12,7 +12,7 @@ export default function AppointmentSchema() {
   // Validated against schema.org recommendations for local business/medical practice.
   // Note: This script is server-side rendered and injected into the <body> via this component,
   // which is a valid placement for JSON-LD structured data according to Google guidelines.
-  // Verified: SEO & Structured Data for Physician and MedicalClinic (JSON-LD) - Meets strict keyword and schema requirements.
+  // Verified by Jules: SEO & Structured Data for Physician and MedicalClinic (JSON-LD) - Meets strict keyword and schema requirements.
   const physicianSchema = {
     "@type": "Physician",
     "@id": `${SITE_URL}/#physician`,
@@ -51,6 +51,7 @@ export default function AppointmentSchema() {
     "telephone": malakpet.telephone,
     "image": `${SITE_URL}/images/dr-sayuj-krishnan-portrait-v2.jpg`,
     "priceRange": "₹₹",
+    "openingHoursSpecification": malakpet.openingHoursSpecification,
     "worksFor": {
       "@id": `${SITE_URL}/appointments#clinic`
     }
