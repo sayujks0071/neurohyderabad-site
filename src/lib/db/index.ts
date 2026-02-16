@@ -30,6 +30,16 @@ type QueryResultRow = Record<string, unknown>;
 // Mock result for when DB is not configured
 const EMPTY_RESULT = { rows: [], rowCount: 0 };
 
+/**
+ * Safely escape SQL identifiers (table names, column names)
+ * wrapping them in double quotes and escaping any existing double quotes.
+ *
+ * 🛡️ Sentinel: Prevents SQL injection via identifier names.
+ */
+function escapeIdentifier(identifier: string): string {
+  return `"${identifier.replace(/"/g, '""')}"`;
+}
+
 export const db = {
   /**
    * Execute a SQL query with optional parameters
@@ -87,9 +97,10 @@ export const db = {
     const keys = Object.keys(data);
     const values = Object.values(data);
     const placeholders = keys.map((_, i) => `$${i + 1}`).join(', ');
-    const columns = keys.join(', ');
+    // 🛡️ Sentinel: Escape identifiers to prevent SQL injection
+    const columns = keys.map(escapeIdentifier).join(', ');
 
-    const query = `INSERT INTO ${table} (${columns}) VALUES (${placeholders}) RETURNING *`;
+    const query = `INSERT INTO ${escapeIdentifier(table)} (${columns}) VALUES (${placeholders}) RETURNING *`;
     return db.queryOne<T>(query, values);
   },
 
@@ -104,9 +115,10 @@ export const db = {
   ): Promise<T | null> => {
     const keys = Object.keys(data);
     const values = Object.values(data);
-    const setClause = keys.map((key, i) => `${key} = $${i + 1}`).join(', ');
+    // 🛡️ Sentinel: Escape identifiers to prevent SQL injection
+    const setClause = keys.map((key, i) => `${escapeIdentifier(key)} = $${i + 1}`).join(', ');
 
-    const query = `UPDATE ${table} SET ${setClause} WHERE ${idColumn} = $${keys.length + 1} RETURNING *`;
+    const query = `UPDATE ${escapeIdentifier(table)} SET ${setClause} WHERE ${escapeIdentifier(idColumn)} = $${keys.length + 1} RETURNING *`;
     return db.queryOne<T>(query, [...values, id]);
   },
 
