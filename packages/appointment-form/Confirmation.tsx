@@ -19,7 +19,7 @@ export default function Confirmation({
 }: ConfirmationProps) {
   return (
     <div className="max-w-2xl mx-auto my-8 md:my-16 px-4">
-      <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-10 text-center">
+      <div className="bg-white/95 backdrop-blur-xl border border-white/20 rounded-2xl shadow-xl p-6 sm:p-10 text-center animate-in fade-in zoom-in-95 duration-500">
         <CheckCircleIcon className="h-16 w-16 text-green-500 mx-auto mb-4" />
         <h2 className="text-3xl font-bold text-slate-800 mb-3">
           Request Received!
