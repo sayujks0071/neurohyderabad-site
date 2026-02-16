@@ -355,7 +355,7 @@ export default function ServicesPage() {
           </div>
         </section>
 
-        <section className="bg-blue-50 p-8 rounded-lg text-center mb-16">
+        <section className="relative bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 text-center mb-16">
           <h2 className="text-2xl font-bold text-blue-800 mb-4">Ready to Discuss Your Treatment Options?</h2>
           <p className="text-gray-600 mb-6">
             Dr. Sayuj Krishnan provides personalized treatment plans based on your specific condition and needs.
@@ -363,13 +363,13 @@ export default function ServicesPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 
               href="/appointments/"
-              className="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-colors"
+              className="inline-flex items-center justify-center bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-[0.98] no-underline"
             >
               Book Consultation
             </Link>
             <Link 
               href="/contact/"
-              className="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-full hover:bg-blue-600 hover:text-white transition-colors"
+              className="inline-flex items-center justify-center bg-white border border-slate-200 text-slate-600 font-medium py-3 px-6 rounded-xl transition-all duration-300 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 no-underline"
             >
               Contact Us
             </Link>
