@@ -257,3 +257,59 @@ export const analytics = {
   },
 };
 ```
+
+### 5. Advanced Monitoring & Automation
+
+For complex use cases like **Deployment Health Monitoring (Use Case #5)** or **Creating Dashboards Programmatically (Use Cases #6, #7, #10)**, you can use the Middleware API directly.
+
+#### Deployment Health Alert (Use Case #5)
+
+This script sets up an alert to trigger if the error rate spikes > 5% after a deployment.
+
+```typescript
+// scripts/setup-deployment-alerts.ts
+import { middlewareApi } from '../src/lib/middleware/api-client';
+
+async function setupDeploymentAlerts() {
+  const errorAlert = await middlewareApi.createAlert('deployment-rule-id', {
+    name: 'Post-Deployment Error Spike',
+    condition: {
+      metric: 'error.rate',
+      threshold: 0.05, // 5% error rate
+      operator: '>',
+      window: '5m', // 5 minute window
+    },
+    actions: [
+      {
+        type: 'webhook',
+        url: 'https://www.drsayuj.info/api/webhooks/middleware',
+        method: 'POST',
+      },
+    ],
+  });
+  console.log('Alert created:', errorAlert);
+}
+```
+
+*See `docs/middleware-api-integration.md` for full implementation details.*
+
+#### Dashboard Creation Script (Use Case #10)
+
+You can automate the creation of performance dashboards using the `scripts/middleware-api-examples.ts` script.
+
+```bash
+# Run the example script to create a "Website Performance" dashboard
+pnpm tsx scripts/middleware-api-examples.ts create-dashboard
+```
+
+This creates a dashboard monitoring **LCP** and **API Response Times**, directly addressing Use Cases #3 and #10.
+
+---
+
+## Related Documentation
+
+For more detailed technical implementation and configuration, refer to:
+
+- **[Middleware API Integration Guide](./middleware-api-integration.md)**: Detailed guide on using the API for alerts, dashboards, and metrics.
+- **[Middleware Configuration Guide](./middleware-configuration.md)**: Reference for API keys, tokens, and environment setup.
+- **[Middleware API Examples Script](../scripts/middleware-api-examples.ts)**: A runnable script demonstrating how to query metrics, list dashboards, and manage alerts programmatically.
