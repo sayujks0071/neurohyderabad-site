@@ -53,9 +53,6 @@ export async function queryDb(sql: string, params?: any[]): Promise<QueryResult>
       throw new Error('Invalid CRM_DATABASE_URL format');
     }
 
-    const credentials = urlParts[0].split('://')[1];
-    const token = credentials.split(':')[1]; // Extract password as token
-
     // Get the host from the URL
     const hostPart = urlParts[1];
     const host = hostPart.split('?')[0].split('/')[0];
@@ -67,7 +64,7 @@ export async function queryDb(sql: string, params?: any[]): Promise<QueryResult>
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
+        'neon-connection-string': databaseUrl,
       },
       body: JSON.stringify({
         query: sql,
