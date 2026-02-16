@@ -107,6 +107,58 @@ export async function POST(request: NextRequest) {
       },
     };
 
+    // 🏥 CRM Integration: Save lead to patient database
+    try {
+      const { createPatient, findPatientByEmail, updatePatient } = await import('@/lib/crm-client');
+
+      // Split full name into first and last name
+      const nameParts = fullName.split(' ');
+      const firstName = nameParts[0] || fullName;
+      const lastName = nameParts.slice(1).join(' ') || '';
+
+      // Check if patient already exists
+      const existingPatient = email ? await findPatientByEmail(email) : null;
+
+      if (existingPatient) {
+        // Update existing patient with new information
+        const updates: any = {
+          phone: phone || existingPatient.phone,
+          notes: existingPatient.notes
+            ? `${existingPatient.notes}\n\n[${new Date().toISOString()}] New inquiry: ${concern || 'General inquiry'}`
+            : concern || 'General inquiry',
+        };
+
+        // Add clinical metadata if available
+        if (body.painScore !== undefined || body.mriScanAvailable !== undefined) {
+          const clinicalNote = [];
+          if (body.painScore !== undefined) clinicalNote.push(`Pain Score: ${body.painScore}/10`);
+          if (body.mriScanAvailable !== undefined) clinicalNote.push(`MRI Scan: ${body.mriScanAvailable ? 'Available' : 'Not Available'}`);
+
+          updates.notes = existingPatient.notes
+            ? `${existingPatient.notes}\n\n[${new Date().toISOString()}] ${clinicalNote.join(', ')}`
+            : clinicalNote.join(', ');
+        }
+
+        await updatePatient(existingPatient.id!, updates);
+        console.log('[CRM] Updated existing patient:', existingPatient.id);
+      } else {
+        // Create new patient record
+        const newPatient = await createPatient({
+          email: email || `unknown-${Date.now()}@neurohyderabad.com`,
+          firstName,
+          lastName,
+          phone: phone || null,
+          city: city || null,
+          notes: concern || 'Lead from website contact form',
+        });
+        console.log('[CRM] Created new patient:', newPatient.id);
+      }
+    } catch (crmError) {
+      // Log CRM errors but don't fail the request
+      // This ensures lead submission still works even if CRM is down
+      console.error('[CRM] Failed to save to CRM database:', crmError);
+    }
+
     // Submit to Google Sheets (if configured)
     // Use `after` to process Google Sheet submission in the background
     // This reduces the response time for the user significantly (300-1500ms -> <50ms)
