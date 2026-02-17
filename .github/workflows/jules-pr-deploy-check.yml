@@ -1,8 +1,7 @@
 name: Jules PR & Deploy Check
-# v2.4 - Managed by Jules
 on:
   schedule:
-    # 08:45 IST (India Standard Time) = 03:15 UTC
+    # 08:45 IST = 03:15 UTC
     - cron: "15 3 * * *"
   workflow_dispatch:
 
@@ -95,5 +94,3 @@ jobs:
             });
 
             console.log(`Created issue: ${newIssue.html_url}`);
-
-# Verified by Jules 2026-02-15
