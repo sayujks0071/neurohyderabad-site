@@ -51,22 +51,34 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
       const metaDesc = document.querySelector('meta[name="description"]');
       setPageDescription(metaDesc ? metaDesc.getAttribute('content') || '' : '');
 
-      // Extract main content for context-aware answers
-      try {
-        const mainElement = document.querySelector('main') || document.querySelector('article') || document.body;
-        let content = (mainElement as HTMLElement).innerText || '';
-        // Truncate to reasonable length (approx 2000 chars) to save tokens but provide context
-        if (content.length > 2000) {
-          content = content.substring(0, 2000) + '...';
+      // ⚡ Bolt: Only extract heavy page content if widget is open.
+      // This prevents expensive innerText reflows on every page navigation.
+      if (!isOpen) return;
+
+      const extractContent = () => {
+        // Extract main content for context-aware answers
+        try {
+          const mainElement = document.querySelector('main') || document.querySelector('article') || document.body;
+          let content = (mainElement as HTMLElement).innerText || '';
+          // Truncate to reasonable length (approx 2000 chars) to save tokens but provide context
+          if (content.length > 2000) {
+            content = content.substring(0, 2000) + '...';
+          }
+          setPageContent(content);
+        } catch (e) {
+          console.warn('Failed to extract page content', e);
         }
-        setPageContent(content);
-      } catch (e) {
-        console.warn('Failed to extract page content', e);
+      };
+
+      if ('requestIdleCallback' in window) {
+        (window as any).requestIdleCallback(extractContent);
+      } else {
+        extractContent();
       }
     }, 500);
 
     return () => clearTimeout(timer);
-  }, [pathname]);
+  }, [pathname, isOpen]);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
