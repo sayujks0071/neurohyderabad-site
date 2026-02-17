@@ -118,6 +118,14 @@ const faqs = [
       'Most cases are day-care procedures. You arrive for pre-op checks, undergo the keyhole surgery, and begin walking within hours. Discharge is usually the same evening or next morning with a written recovery plan.',
   },
   {
+    question: 'How does the Day Care Spine Surgery program work?',
+    answer: 'Our Day Care protocol is designed for rapid recovery. You are admitted in the morning, undergo the 45-minute keyhole procedure under local or spinal anesthesia, and begin walking within 3 hours. Once you are comfortable and mobile, you are discharged the same evening to sleep in your own bed.',
+  },
+  {
+    question: 'Why is Endoscopic Surgery safer than Open Surgery?',
+    answer: 'Endoscopic surgery eliminates the need to cut or detach back muscles, which is the main cause of post-surgical pain and infection in open surgery. By using a 7mm camera, we visualize the nerve with 4K clarity while leaving the structural stability of the spine completely untouched.',
+  },
+  {
     question: 'Is Yashoda Hospital, Malakpet easy to reach for day-care surgery?',
     answer:
       'Yes. The hospital is centrally located in Malakpet, making it convenient for patients travelling from Dilsukhnagar, LB Nagar, Charminar, Koti, and other parts of Hyderabad. Parking and attendant lounges are available on-site.',

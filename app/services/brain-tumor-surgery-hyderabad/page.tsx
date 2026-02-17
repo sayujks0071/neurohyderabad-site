@@ -85,6 +85,8 @@ const treatmentHighlights = [
     title: 'Awake Craniotomy & Functional Mapping',
     description:
       'Speech and motor mapping techniques protect critical pathways during tumor removal in eloquent cortex.',
+    link: '/blog/awake-craniotomy-brain-tumor-guide',
+    linkText: 'Read Awake Surgery Guide',
   },
   {
     title: 'Multidisciplinary Tumor Board',
@@ -314,20 +316,32 @@ export default function BrainTumorSurgeryHyderabadPage() {
           </p>
           <ul className="grid md:grid-cols-2 gap-4 text-sm text-gray-700">
             <li className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
-              <strong className="text-blue-800">Gliomas &amp; Glioblastoma:</strong> Customized planning with adjuvant oncology
-              coordination.
+              <strong className="text-blue-800">
+                <Link href="/blog/glioblastoma-multiforme-treatment-survival-guide-hyderabad" className="hover:underline hover:text-blue-600">
+                  Gliomas &amp; Glioblastoma:
+                </Link>
+              </strong>{' '}
+              Customized planning with adjuvant oncology coordination.
             </li>
             <li className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
-              <strong className="text-blue-800">Meningiomas &amp; Skull Base Tumors:</strong> Precision microsurgery preserving
-              cranial nerve function (often relevant for <Link href="/conditions/trigeminal-neuralgia-treatment-hyderabad" className="text-blue-700 hover:underline">trigeminal neuralgia</Link>).
+              <strong className="text-blue-800">
+                <Link href="/blog/meningioma-brain-tumor-treatment-hyderabad" className="hover:underline hover:text-blue-600">
+                  Meningiomas &amp; Skull Base Tumors:
+                </Link>
+              </strong>{' '}
+              Precision microsurgery preserving cranial nerve function (often relevant for <Link href="/conditions/trigeminal-neuralgia-treatment-hyderabad" className="text-blue-700 hover:underline">trigeminal neuralgia</Link>).
             </li>
             <li className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
               <strong className="text-blue-800">Pituitary &amp; Sellar Lesions:</strong> Endoscopic and minimally invasive
               approaches when appropriate.
             </li>
             <li className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
-              <strong className="text-blue-800">Metastatic &amp; Pediatric Tumors:</strong> Integrated care with oncology and
-              rehabilitation services.
+              <strong className="text-blue-800">
+                <Link href="/blog/brain-metastases-treatment-survival-guide-hyderabad" className="hover:underline hover:text-blue-600">
+                  Metastatic &amp; Pediatric Tumors:
+                </Link>
+              </strong>{' '}
+              Integrated care with oncology and rehabilitation services.
             </li>
           </ul>
         </section>
@@ -346,9 +360,14 @@ export default function BrainTumorSurgeryHyderabadPage() {
           <h2 className="text-3xl font-bold text-blue-900 mb-8 text-center">Advanced Surgical Techniques</h2>
           <div className="grid md:grid-cols-3 gap-6">
             {treatmentHighlights.map((tech, idx) => (
-              <div key={idx} className="bg-white p-6 rounded-xl shadow-sm border border-blue-50">
+              <div key={idx} className="bg-white p-6 rounded-xl shadow-sm border border-blue-50 flex flex-col">
                 <h3 className="font-semibold text-blue-800 mb-3">{tech.title}</h3>
-                <p className="text-sm text-gray-700">{tech.description}</p>
+                <p className="text-sm text-gray-700 flex-grow">{tech.description}</p>
+                {tech.link && (
+                  <Link href={tech.link} className="mt-4 text-sm font-semibold text-blue-600 hover:text-blue-800 hover:underline inline-flex items-center">
+                    {tech.linkText || 'Learn more'} <span className="ml-1">→</span>
+                  </Link>
+                )}
               </div>
             ))}
           </div>
