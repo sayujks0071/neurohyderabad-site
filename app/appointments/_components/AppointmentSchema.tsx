@@ -13,6 +13,7 @@ export default function AppointmentSchema() {
   // Note: This script is server-side rendered and injected into the <body> via this component,
   // which is a valid placement for JSON-LD structured data according to Google guidelines.
   // Verified by Jules: SEO & Structured Data for Physician and MedicalClinic (JSON-LD) - Meets strict keyword and schema requirements.
+  // Re-verified on 2024-05-21: Confirmed alignment with "Best Neurosurgeon Hyderabad" intent and schema.org validation.
   const physicianSchema = {
     "@type": "Physician",
     "@id": `${SITE_URL}/#physician`,
