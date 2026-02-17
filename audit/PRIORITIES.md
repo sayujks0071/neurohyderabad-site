@@ -2,32 +2,26 @@
 
 | ID | Issue | Affected URLs | Impact (1-5) | Effort (1-5) | Risk | Status |
 |---|---|---|---|---|---|---|
-| **P1** | **Critical LCP (16s)** | Global (Homepage, Service Pages) | 5 (High) | 3 (Med) | Low | **DO NOW** |
-| **P2** | **Missing Metadata & H1** | `/brain-tumor-surgery` | 5 (High) | 1 (Low) | Low | **DO NOW** |
-| **P3** | **Schema Gaps (MedicalClinic)** | Location Pages (`/locations/*`) | 4 (High) | 2 (Low) | Low | **DO NOW** |
-| P4 | CTR Optimization (Meta Desc) | Service Pages | 3 (Med) | 2 (Low) | Low | Backlog |
-| P5 | Thin Content | `/drafts`, `/knowledge-base` | 2 (Low) | 2 (Low) | Low | Backlog |
-| P6 | Missing H1 | `/knowledge-base` | 2 (Low) | 1 (Low) | Low | Backlog |
+| **P1** | **Critical LCP (16s)** | Global (Homepage, Service Pages) | 5 (High) | 3 (Med) | Low | **Investigating** |
+| **P2** | **Missing Metadata & H1** | `/brain-tumor-surgery` | 5 (High) | 1 (Low) | Low | **Resolved** (Redirects) |
+| **P3** | **Schema Gaps (MedicalClinic)** | Location Pages (`/locations/*`) | 4 (High) | 2 (Low) | Low | **Resolved** |
+| **P4** | **Canonical Mismatches** | Blog Pages (Trailing Slash) | 4 (High) | 1 (Low) | Low | **Resolved** |
+| **P5** | **Title Too Long** | Global | 3 (Med) | 1 (Low) | Low | **In Progress** |
+| P6 | Thin Content | `/drafts`, `/knowledge-base` | 2 (Low) | 2 (Low) | Low | Backlog |
 
-## Detailed Execution Plan for Top 3
+## Status Updates (2026-02-16)
 
-### 1. Fix LCP (Hero Image Optimization)
-- **Problem**: LCP is 16s. Likely late loading of hero image.
-- **Solution**:
-    - Identify the Hero component (likely in `app/page.tsx` or `app/_components/Hero.tsx`).
-    - Add `priority` prop to `next/image`.
-    - Use `sizes` attribute correctly.
-    - Ensure font loading is optimized (e.g. `next/font` with `swap`).
+### Resolved: Canonical Mismatches & Title Optimization
+- **Fix:** Removed trailing slashes from `canonicalUrl` in `src/lib/blog-seo.ts` and `app/_components/BlogLayout.tsx` to align with `next.config.mjs` (`trailingSlash: false`).
+- **Fix:** Shortened blog title suffix from ` | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad` to ` | Dr. Sayuj Krishnan` to prevent SERP truncation and improve CTR.
 
-### 2. Fix Metadata & H1 on `/brain-tumor-surgery`
-- **Problem**: Page lacks `metadata` export and explicit H1.
-- **Solution**:
-    - Add `export const metadata: Metadata = { ... }` to `app/brain-tumor-surgery/page.tsx`.
-    - Ensure H1 tag wraps the main title.
+### Resolved: Schema Gaps
+- Validated `MedicalClinic`, `Physician`, and `BreadcrumbList` schemas are present and valid on key pages.
 
-### 3. Enhance Schema on Location Pages
-- **Problem**: Location pages need strong Local SEO signals.
-- **Solution**:
-    - Verify `app/locations/[slug]/page.tsx` uses `MedicalClinic` schema.
-    - Ensure it pulls data from `src/data/locations.ts` correctly.
-    - Add `geo` coordinates and `openingHours` if missing.
+### Resolved: Multiple H1 False Positives
+- Updated audit script to correctly count H1 tags, confirming only single H1s exist on key pages like Homepage and Appointments.
+
+### Next Steps (P1 LCP)
+- The LCP issue needs deeper profiling. Hero images already use `priority`.
+- Potential causes: Blocking JS (Middleware/Analytics) or server response time (TTFB).
+- **Action:** Monitor TTFB in Vercel Analytics after deployment.
