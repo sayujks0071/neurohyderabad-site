@@ -24,6 +24,8 @@ interface BookingData {
   symptoms?: string[];
   previousTreatment?: string;
   insurance?: string;
+  painScore?: number;
+  mriScanAvailable?: boolean;
 }
 
 interface AIBookingAgentProps {
@@ -59,7 +61,7 @@ export default function AIBookingAgent({ pageSlug, service }: AIBookingAgentProp
   const [isLoading, setIsLoading] = useState(false);
   const [bookingData, setBookingData] = useState<BookingData>({});
   const [showEmergencyAlert, setShowEmergencyAlert] = useState(false);
-  const [currentStep, setCurrentStep] = useState<'greeting' | 'condition' | 'urgency' | 'details' | 'scheduling' | 'confirmation'>('greeting');
+  const [currentStep, setCurrentStep] = useState<'greeting' | 'condition' | 'urgency' | 'painScore' | 'mriScan' | 'details' | 'scheduling' | 'confirmation'>('greeting');
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { logAppointmentBooking, logContactFormSubmit } = useStatsigEvents();
@@ -71,6 +73,12 @@ export default function AIBookingAgent({ pageSlug, service }: AIBookingAgentProp
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  useEffect(() => {
+    if (currentStep === 'painScore') {
+      setInputValue('5');
+    }
+  }, [currentStep]);
 
   const detectEmergency = (text: string): boolean => {
     const lowerText = text.toLowerCase();
@@ -140,8 +148,23 @@ export default function AIBookingAgent({ pageSlug, service }: AIBookingAgentProp
       case 'urgency':
         const urgencyLevel = userMessage.toLowerCase().includes('severe') || userMessage.toLowerCase().includes('urgent') ? 'urgent' : 'routine';
         setBookingData(prev => ({ ...prev, urgency: urgencyLevel }));
+        setCurrentStep('painScore');
+        return `Thank you. I'll mark this as a ${urgencyLevel} appointment. To help us understand your discomfort better, please rate your pain on a scale of 1 to 10.`;
+
+      case 'painScore':
+        const painScore = parseInt(userMessage, 10);
+        if (!isNaN(painScore) && painScore >= 1 && painScore <= 10) {
+            setBookingData(prev => ({ ...prev, painScore }));
+            setCurrentStep('mriScan');
+            return `Noted, pain score ${painScore}. Do you have any recent MRI or CT scan reports available?`;
+        }
+        return "Please provide a valid pain score between 1 and 10.";
+
+      case 'mriScan':
+        const hasScan = userMessage.toLowerCase() === 'yes' || userMessage.toLowerCase() === 'true';
+        setBookingData(prev => ({ ...prev, mriScanAvailable: hasScan }));
         setCurrentStep('details');
-        return `Thank you. I'll mark this as a ${urgencyLevel} appointment. Now, could you please provide your name and contact information? I'll need your phone number for confirmation.`;
+        return `Thank you. Now, could you please provide your name and contact information? I'll need your phone number for confirmation.`;
 
       case 'details':
         if (phoneNumber) {
@@ -162,14 +185,13 @@ export default function AIBookingAgent({ pageSlug, service }: AIBookingAgentProp
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!inputValue.trim() || isLoading) return;
+  const processMessage = async (text: string) => {
+    if (!text.trim() || isLoading) return;
 
     const userMessage: Message = {
       id: Date.now().toString(),
       type: 'user',
-      content: inputValue,
+      content: text,
       timestamp: new Date()
     };
 
@@ -181,14 +203,14 @@ export default function AIBookingAgent({ pageSlug, service }: AIBookingAgentProp
       // Log user interaction
       logAppointmentBooking('ai_chat_interaction', service || 'general');
 
-      const aiResponse = await generateAIResponse(inputValue);
+      const aiResponse = await generateAIResponse(text);
       
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
         type: 'assistant',
         content: aiResponse,
         timestamp: new Date(),
-        isEmergency: detectEmergency(inputValue)
+        isEmergency: detectEmergency(text)
       };
 
       setMessages(prev => [...prev, assistantMessage]);
@@ -210,6 +232,11 @@ export default function AIBookingAgent({ pageSlug, service }: AIBookingAgentProp
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await processMessage(inputValue);
   };
 
   const submitBooking = async () => {
@@ -244,6 +271,8 @@ Preferred Time: ${bookingData.preferredTime || 'Not specified'}
 Symptoms: ${bookingData.symptoms?.join(', ') || 'Not specified'}
 Previous Treatment: ${bookingData.previousTreatment || 'Not specified'}
 Insurance: ${bookingData.insurance || 'Not specified'}
+Pain Score: ${bookingData.painScore !== undefined ? bookingData.painScore + '/10' : 'Not specified'}
+MRI Available: ${bookingData.mriScanAvailable !== undefined ? (bookingData.mriScanAvailable ? 'Yes' : 'No') : 'Not specified'}
 
 This booking was created through our AI chat assistant.`;
 
@@ -355,30 +384,74 @@ This booking was created through our AI chat assistant.`;
 
         {/* Input Form */}
         <form onSubmit={handleSubmit} className="p-4 border-t border-gray-200">
-          <div className="flex space-x-2">
-            <input
-              type="text"
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              placeholder="Type your message here..."
-              className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              disabled={isLoading}
-            />
-            <button
-              type="submit"
-              disabled={!inputValue.trim() || isLoading}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center min-w-[80px] justify-center"
-            >
-              {isLoading ? (
-                <>
-                  <Loader2 className="w-4 h-4 animate-spin mr-1" />
-                  Sending...
-                </>
-              ) : (
-                'Send'
-              )}
-            </button>
-          </div>
+          {currentStep === 'painScore' ? (
+            <div className="flex flex-col space-y-4 w-full animate-in fade-in duration-300">
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-medium text-gray-700">Pain Level: {inputValue || 5}</span>
+                <span className="text-xs text-gray-500">1 (Mild) - 10 (Severe)</span>
+              </div>
+              <input
+                type="range"
+                min="1"
+                max="10"
+                step="1"
+                value={inputValue || 5}
+                onChange={(e) => setInputValue(e.target.value)}
+                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+              />
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center font-medium"
+              >
+                Confirm Score
+              </button>
+            </div>
+          ) : currentStep === 'mriScan' ? (
+            <div className="flex space-x-4 w-full animate-in fade-in duration-300">
+              <button
+                type="button"
+                onClick={() => processMessage('Yes')}
+                disabled={isLoading}
+                className="flex-1 py-3 bg-blue-50 text-blue-700 border border-blue-200 rounded-lg hover:bg-blue-100 font-medium transition-colors"
+              >
+                Yes, I have reports
+              </button>
+              <button
+                type="button"
+                onClick={() => processMessage('No')}
+                disabled={isLoading}
+                className="flex-1 py-3 bg-gray-50 text-gray-700 border border-gray-200 rounded-lg hover:bg-gray-100 font-medium transition-colors"
+              >
+                No reports available
+              </button>
+            </div>
+          ) : (
+            <div className="flex space-x-2">
+              <input
+                type="text"
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                placeholder="Type your message here..."
+                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                disabled={isLoading}
+              />
+              <button
+                type="submit"
+                disabled={!inputValue.trim() || isLoading}
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center min-w-[80px] justify-center"
+              >
+                {isLoading ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin mr-1" />
+                    Sending...
+                  </>
+                ) : (
+                  'Send'
+                )}
+              </button>
+            </div>
+          )}
         </form>
       </div>
 
