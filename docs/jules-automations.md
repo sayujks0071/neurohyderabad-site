@@ -50,4 +50,4 @@ To pause a specific automation:
 
 <!-- Documentation v2.4 - Verified setup -->
 
-<!-- Verified on Sun Feb 15 22:47:21 UTC 2026 -->
+<!-- Verified by Jules -->
