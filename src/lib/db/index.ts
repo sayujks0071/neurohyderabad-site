@@ -257,21 +257,41 @@ export const patients = {
     gender?: string;
     primary_condition?: string;
     acquisition_source?: string;
+    pain_score?: number;
+    mri_scan_available?: boolean;
+    notes?: string;
   }) => {
     // Insert or update based on email
     return db.queryOne(`
-      INSERT INTO patients (email, name, phone, age, gender, primary_condition, acquisition_source)
-      VALUES ($1, $2, $3, $4, $5, $6, $7)
+      INSERT INTO patients (email, name, phone, age, gender, primary_condition, acquisition_source, latest_pain_score, mri_scan_available, notes)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
       ON CONFLICT (email) DO UPDATE SET
         name = COALESCE(EXCLUDED.name, patients.name),
         phone = COALESCE(EXCLUDED.phone, patients.phone),
         age = COALESCE(EXCLUDED.age, patients.age),
         gender = COALESCE(EXCLUDED.gender, patients.gender),
         primary_condition = COALESCE(EXCLUDED.primary_condition, patients.primary_condition),
+        latest_pain_score = COALESCE(EXCLUDED.latest_pain_score, patients.latest_pain_score),
+        mri_scan_available = COALESCE(EXCLUDED.mri_scan_available, patients.mri_scan_available),
+        notes = CASE
+            WHEN patients.notes IS NOT NULL AND EXCLUDED.notes IS NOT NULL THEN patients.notes || E'\n\n' || EXCLUDED.notes
+            ELSE COALESCE(patients.notes, EXCLUDED.notes)
+        END,
         last_contact_date = CURRENT_TIMESTAMP,
         total_appointments = patients.total_appointments + 1
       RETURNING *
-    `, [data.email, data.name, data.phone, data.age, data.gender, data.primary_condition, data.acquisition_source]);
+    `, [
+      data.email,
+      data.name,
+      data.phone,
+      data.age,
+      data.gender,
+      data.primary_condition,
+      data.acquisition_source,
+      data.pain_score ?? null,
+      data.mri_scan_available ?? null,
+      data.notes ?? null
+    ]);
   },
 
   findByEmail: async (email: string) => {
