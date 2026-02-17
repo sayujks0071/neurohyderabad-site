@@ -12,7 +12,6 @@ from html.parser import HTMLParser
 BASE_URL = "http://localhost:3000"
 PROD_URL = "https://www.drsayuj.info"
 SITEMAP_URL = f"{BASE_URL}/sitemap.xml"
-BACKUP_SITEMAP_URL = f"{BASE_URL}/sitemap-images.xml"
 
 CRAWL_DIR = "audit/crawl"
 ONPAGE_DIR = "audit/onpage"
@@ -32,6 +31,7 @@ class MetadataParser(HTMLParser):
         self.title = None
         self.meta_description = None
         self.h1 = []
+        self.h1_count = 0
         self.canonical = None
         self.robots = None
         self.scripts = []
@@ -54,6 +54,7 @@ class MetadataParser(HTMLParser):
                 self.robots = attrs_dict.get('content')
         elif tag == 'h1':
             self.in_h1 = True
+            self.h1_count += 1
         elif tag == 'link':
             rel = attrs_dict.get('rel', '').lower()
             if rel == 'canonical':
@@ -108,13 +109,12 @@ def fetch_url(url):
 
 def parse_sitemap(sitemap_content):
     urls = []
+    is_index = False
     try:
         root = ET.fromstring(sitemap_content)
-        # Handle namespaces which might vary
-        # Try finding all 'loc' tags regardless of namespace if possible, or use explicit namespace map
-        # ElementTree requires explicit namespace handling usually
+        if 'sitemapindex' in root.tag:
+            is_index = True
 
-        # Simple hack: iterate all elements and check tag name ending in 'loc'
         for elem in root.iter():
             if elem.tag.endswith('loc'):
                 if elem.text:
@@ -122,37 +122,45 @@ def parse_sitemap(sitemap_content):
 
     except Exception as e:
         print(f"Error parsing sitemap: {e}")
-    return urls
+    return urls, is_index
+
+def get_all_sitemap_urls(start_url):
+    all_urls = []
+    queue = [start_url]
+    processed_sitemaps = set()
+
+    while queue:
+        url = queue.pop(0)
+        if url in processed_sitemaps:
+            continue
+        processed_sitemaps.add(url)
+
+        print(f"Fetching sitemap: {url}")
+        res = fetch_url(url)
+        if res['status'] == 200:
+            urls, is_index = parse_sitemap(res['content'])
+
+            # If it's an index, add child sitemaps to queue
+            # Note: The parsed URLs are PROD URLs usually. We need to map them to local if needed for fetching.
+            if is_index:
+                print(f"Found sitemap index with {len(urls)} sitemaps")
+                for u in urls:
+                    # Convert to local URL for fetching
+                    local_u = u.replace(PROD_URL, BASE_URL)
+                    queue.append(local_u)
+            else:
+                print(f"Found {len(urls)} URLs in sitemap")
+                # Filter out XML files (like other sitemaps or image/video sitemaps if they got mixed in)
+                page_urls = [u for u in urls if not u.endswith('.xml')]
+                all_urls.extend(page_urls)
+        else:
+            print(f"Failed to fetch sitemap {url}: {res['status']}")
+
+    return list(set(all_urls))
 
 def run_audit():
-    print(f"Fetching sitemap from {SITEMAP_URL}")
-    sitemap_res = fetch_url(SITEMAP_URL)
-
-    urls = []
-    if sitemap_res['status'] == 200:
-        urls = parse_sitemap(sitemap_res['content'])
-        print(f"Found {len(urls)} URLs in sitemap")
-    else:
-        print(f"Failed to fetch sitemap (Status: {sitemap_res['status']}). Trying backup {BACKUP_SITEMAP_URL}")
-        backup_res = fetch_url(BACKUP_SITEMAP_URL)
-        if backup_res['status'] == 200:
-            urls = parse_sitemap(backup_res['content'])
-            print(f"Found {len(urls)} URLs in backup sitemap")
-        else:
-            print("Failed to fetch backup sitemap. Using fallback list.")
-            # Fallback list based on file structure I saw
-            urls = [
-                f"{PROD_URL}/",
-                f"{PROD_URL}/about",
-                f"{PROD_URL}/services",
-                f"{PROD_URL}/conditions",
-                f"{PROD_URL}/locations",
-                f"{PROD_URL}/contact",
-                f"{PROD_URL}/blog",
-                f"{PROD_URL}/services/spine-surgery-hyderabad",
-                f"{PROD_URL}/conditions/sciatica-pain-treatment-hyderabad",
-                f"{PROD_URL}/locations/banjara-hills"
-            ]
+    print(f"Starting sitemap discovery from {SITEMAP_URL}")
+    urls = get_all_sitemap_urls(SITEMAP_URL)
 
     # Process URLs: replace prod domain with localhost
     local_urls = []
@@ -162,13 +170,11 @@ def run_audit():
         elif u.startswith(BASE_URL):
             local_urls.append(u)
         else:
-            # Maybe relative URL?
             if u.startswith('/'):
                 local_urls.append(f"{BASE_URL}{u}")
             else:
-                local_urls.append(u) # Leave as is?
+                local_urls.append(u)
 
-    # Remove duplicates
     local_urls = list(set(local_urls))
 
     crawl_results = []
@@ -180,8 +186,7 @@ def run_audit():
     print(f"Starting crawl of {len(local_urls)} pages...")
 
     count = 0
-    # Safety limit
-    max_pages = 200
+    max_pages = 20
 
     for url in local_urls:
         if count >= max_pages: break
@@ -193,7 +198,6 @@ def run_audit():
         end_time = time.time()
         ttfb = int((end_time - start_time) * 1000)
 
-        # Map back to prod URL for reporting
         prod_url_report = url.replace(BASE_URL, PROD_URL)
 
         result = {
@@ -206,7 +210,6 @@ def run_audit():
 
         content_type = res.get('headers', {}).get('Content-Type', '').lower()
         if 'text/html' not in content_type:
-            # Skip non-HTML content
             print(f"Skipping non-HTML content: {content_type}")
             continue
 
@@ -226,38 +229,31 @@ def run_audit():
             result['inlinks_count'] = 0
             result['schema_types'] = []
 
-            # Schema Analysis
             schemas = []
             for script in parser.scripts:
                 try:
                     data = json.loads(script)
                     schemas.append(data)
-
                     def extract_types(obj):
                         types = []
                         if isinstance(obj, dict):
                             t = obj.get('@type')
                             if t:
-                                if isinstance(t, list):
-                                    types.extend(t)
-                                else:
-                                    types.append(t)
+                                if isinstance(t, list): types.extend(t)
+                                else: types.append(t)
                             for k, v in obj.items():
                                 types.extend(extract_types(v))
                         elif isinstance(obj, list):
                             for item in obj:
                                 types.extend(extract_types(item))
                         return types
-
                     result['schema_types'].extend(extract_types(data))
                 except:
                     pass
 
             schema_inventory[result['url']] = schemas
-            # Remove duplicates and ensure all are strings
             result['schema_types'] = list(set([str(x) for x in result['schema_types']]))
 
-            # On-page Checks
             if not result['title']:
                 onpage_issues.append([result['url'], 'Missing Title', 'High', 'Add title tag'])
             elif len(result['title']) > 60:
@@ -268,7 +264,7 @@ def run_audit():
 
             if not result['h1']:
                 onpage_issues.append([result['url'], 'Missing H1', 'High', 'Add H1 tag'])
-            elif len(result['h1']) > 1:
+            elif parser.h1_count > 1:
                 onpage_issues.append([result['url'], 'Multiple H1', 'Medium', 'Use only one H1'])
 
             if not result['canonical']:
@@ -277,19 +273,13 @@ def run_audit():
             if result['word_count'] < 300:
                 onpage_issues.append([result['url'], 'Thin Content', 'Medium', 'Add more content'])
 
-            # Tech Checks
-            if result['canonical']:
-                 # Check if canonical matches current URL
-                 # Note: result['canonical'] is likely absolute prod URL
-                 # result['url'] is also prod URL (mapped)
-                 if result['canonical'] != result['url']:
-                     tech_issues.append([result['url'], 'Canonical Mismatch', 'Medium', f"Canonical points to {result['canonical']}"])
+            if result['canonical'] and result['canonical'] != result['url']:
+                 tech_issues.append([result['url'], 'Canonical Mismatch', 'Medium', f"Canonical points to {result['canonical']}"])
 
         else:
             tech_issues.append([result['url'], f"Status {res['status']}", 'High', 'Check server logs'])
             result['error'] = res.get('error')
 
-        # Headers Report
         headers_report.append({
             'url': result['url'],
             'status': result['status'],
@@ -300,8 +290,6 @@ def run_audit():
 
         crawl_results.append(result)
 
-        # Simple recursive crawl (discover internal links)
-        # If we have capacity left
         if len(local_urls) < max_pages and res['status'] == 200:
             for link in parser.links:
                 if link.startswith('/'):
@@ -316,9 +304,6 @@ def run_audit():
                     if mapped not in local_urls:
                         local_urls.append(mapped)
 
-    # Save Results
-
-    # 1. URL Inventory
     with open(f'{CRAWL_DIR}/url_inventory.csv', 'w', newline='') as f:
         writer = csv.writer(f)
         writer.writerow(['URL', 'Status', 'Title', 'Meta Description', 'H1', 'Word Count', 'Canonical', 'Robots', 'Schema Types'])
@@ -338,23 +323,19 @@ def run_audit():
     with open(f'{CRAWL_DIR}/url_inventory.json', 'w') as f:
         json.dump(crawl_results, f, indent=2)
 
-    # 2. On-page Issues
     with open(f'{ONPAGE_DIR}/onpage_issues.csv', 'w', newline='') as f:
         writer = csv.writer(f)
         writer.writerow(['URL', 'Issue Type', 'Severity', 'Recommended Fix'])
         writer.writerows(onpage_issues)
 
-    # 3. Tech Issues
     with open(f'{TECH_DIR}/tech_issues.csv', 'w', newline='') as f:
         writer = csv.writer(f)
         writer.writerow(['URL', 'Issue', 'Severity', 'Details'])
         writer.writerows(tech_issues)
 
-    # 4. Schema Inventory
     with open(f'{SCHEMA_DIR}/schema_inventory.json', 'w') as f:
         json.dump(schema_inventory, f, indent=2)
 
-    # 5. Headers Report
     with open(f'{HEADERS_DIR}/headers_report.md', 'w') as f:
         f.write("# Headers Report\n\n")
         f.write("| URL | Status | TTFB (ms) | Cache-Control | Content-Type |\n")
@@ -362,7 +343,6 @@ def run_audit():
         for h in headers_report:
             f.write(f"| {h['url']} | {h['status']} | {h['ttfb']} | {h['cache_control']} | {h['content_type']} |\n")
 
-    # 6. Crawl Summary
     with open(f'{CRAWL_DIR}/crawl_summary.md', 'w') as f:
         f.write("# Crawl Summary\n\n")
         f.write(f"- Total URLs Discovered: {len(local_urls)}\n")
