@@ -16,7 +16,7 @@ export default function AppointmentSchema() {
   // Re-verified on 2024-05-21: Confirmed alignment with "Best Neurosurgeon Hyderabad" intent and schema.org validation.
   const physicianSchema = {
     "@type": "Physician",
-    "@id": `${SITE_URL}/#physician`,
+    "@id": `${SITE_URL}/appointments#physician`,
     "name": "Dr. Sayuj Krishnan",
     // SEO: Medical Specialty as 'Neurosurgeon'
     "medicalSpecialty": "Neurosurgeon",
@@ -84,7 +84,7 @@ export default function AppointmentSchema() {
       "@id": `${SITE_URL}/#hospital`
     },
     "department": {
-      "@id": `${SITE_URL}/#physician`
+      "@id": `${SITE_URL}/appointments#physician`
     }
   };
 
