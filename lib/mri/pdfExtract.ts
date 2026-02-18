@@ -52,9 +52,11 @@ export interface ExtractionResult {
 }
 
 export async function extractPdfTextInSandbox(pdfBuffer: Buffer): Promise<ExtractionResult> {
+  const timeoutMs = process.env.SANDBOX_PDF_TIMEOUT_MS ? parseInt(process.env.SANDBOX_PDF_TIMEOUT_MS, 10) : 120000;
+
   const sandbox = await createSandbox({
     runtime: 'node',
-    timeoutMs: 120000,
+    timeoutMs,
     vcpus: 1,
     network: NETWORK_POLICIES.PDF_EXTRACTION,
   });
@@ -69,7 +71,7 @@ export async function extractPdfTextInSandbox(pdfBuffer: Buffer): Promise<Extrac
       sandbox,
       cmd: 'sh',
       args: ['-c', 'npm i pdf-parse@1.1.1 --silent && node extract.mjs'],
-      timeoutMs: 120000,
+      timeoutMs,
     })) as { stdout: string; stderr: string; exitCode: number };
 
     if (result.exitCode !== 0) {

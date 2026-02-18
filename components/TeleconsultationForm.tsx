@@ -101,11 +101,14 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
     return valid;
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!validate()) return;
 
     setStatus('submitting');
+
+    // Simulate network delay for better UX
+    await new Promise(resolve => setTimeout(resolve, 800));
 
     try {
       // Log Analytics events (Middleware RUM + Statsig)

@@ -15,6 +15,7 @@ import Section from "./_components/Section";
 import FAQPageSchema from "./_components/FAQPageSchema";
 import HeroCTAButtons from "./_components/HeroCTAButtons";
 import TrustSignals from "./_components/TrustSignals";
+import Memberships from "./_components/Memberships";
 import { LocationNAPCard } from "@/src/components/locations/LocationNAPCard";
 import { CANONICAL_TELEPHONE } from "@/src/data/locations";
 
@@ -312,43 +313,7 @@ export default function Home() {
         </Section>
 
         {/* Memberships & Certifications */}
-        <Section background="white" className="py-12 border-t border-gray-100">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-2xl font-bold mb-8 text-gray-800">Memberships & Certifications</h2>
-            <div className="flex flex-wrap justify-center gap-8 items-center opacity-80 grayscale hover:grayscale-0 transition-all duration-300">
-              <a
-                href="https://www.aospine.org/"
-                target="_blank"
-                rel="noopener noreferrer nofollow"
-                className="flex flex-col items-center group"
-                aria-label="AO Spine International (opens in a new tab)"
-              >
-                  <span className="text-4xl mb-2 group-hover:scale-110 transition-transform">🌍</span>
-                  <span className="font-semibold text-gray-700 group-hover:text-blue-700">AO Spine International</span>
-              </a>
-              <a
-                href="https://neurosocietyindia.org/"
-                target="_blank"
-                rel="noopener noreferrer nofollow"
-                className="flex flex-col items-center group"
-                aria-label="Neurological Society of India (opens in a new tab)"
-              >
-                  <span className="text-4xl mb-2 group-hover:scale-110 transition-transform">🇮🇳</span>
-                  <span className="font-semibold text-gray-700 group-hover:text-blue-700">Neurological Society of India</span>
-              </a>
-              <a
-                href="https://www.cns.org/"
-                target="_blank"
-                rel="noopener noreferrer nofollow"
-                className="flex flex-col items-center group"
-                aria-label="Congress of Neurological Surgeons (opens in a new tab)"
-              >
-                  <span className="text-4xl mb-2 group-hover:scale-110 transition-transform">🧠</span>
-                  <span className="font-semibold text-gray-700 group-hover:text-blue-700">Congress of Neurological Surgeons</span>
-              </a>
-            </div>
-          </div>
-        </Section>
+        <Memberships />
 
         {/* Trust Bridge Section - Connect Services to Credentials */}
         <Section id="trust-bridge-section" background="blue" className="py-16 bg-gradient-to-r from-blue-50 to-indigo-50">

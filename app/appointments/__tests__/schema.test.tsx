@@ -10,7 +10,7 @@ describe('Appointment Page SEO', () => {
   it('has correct metadata', () => {
     // Check title string or object (Next.js metadata title can be object)
     const title = typeof metadata.title === 'string' ? metadata.title : (metadata.title as any)?.default || '';
-    expect(title).toContain('Best Neurosurgeon in Hyderabad');
+    expect(title).toContain('Best Neurosurgeon Hyderabad');
     expect(title).toContain('Book Appointment');
 
     expect(metadata.description).toContain('Best Neurosurgeon in Hyderabad');

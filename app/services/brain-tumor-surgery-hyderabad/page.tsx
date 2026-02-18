@@ -132,6 +132,10 @@ const faqs = [
     answer: 'Most patients spend 1-2 days in the ICU for monitoring and move to the ward for another 3-4 days. You can usually return to light daily activities within 2-3 weeks, though full recovery depends on the specific tumor type and location.'
   },
   {
+    question: 'Can I get a second opinion for my brain tumor diagnosis?',
+    answer: 'Yes. We frequently provide second opinions for complex cases like skull base tumors and recurrent gliomas. Bring your MRI scans and reports for a comprehensive review to explore all surgical and non-surgical options.'
+  },
+  {
     question: 'What is the cost of brain tumor surgery in Hyderabad?',
     answer: 'The cost of brain tumor surgery varies significantly based on tumor complexity, ICU stay duration, and technology used (neuronavigation, monitoring). Biopsies may start from ₹1,00,000, while complex craniotomies can range higher. We provide transparent estimates after scan review.'
   }
@@ -344,6 +348,24 @@ export default function BrainTumorSurgeryHyderabadPage() {
               Integrated care with oncology and rehabilitation services.
             </li>
           </ul>
+
+          <div className="mt-8 bg-blue-50 border border-blue-100 rounded-xl p-6">
+            <h3 className="text-lg font-semibold text-blue-800 mb-4">Comprehensive Condition Guides</h3>
+            <div className="grid md:grid-cols-3 gap-4">
+              <Link href="/blog/meningioma-brain-tumor-treatment-hyderabad/" className="block p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border border-blue-100 group">
+                <span className="text-blue-700 font-medium group-hover:text-blue-900 block mb-1">Meningioma Treatment Guide →</span>
+                <span className="text-xs text-gray-600">Diagnosis, surgery risks, and recovery timeline.</span>
+              </Link>
+              <Link href="/blog/glioblastoma-multiforme-treatment-survival-guide-hyderabad/" className="block p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border border-blue-100 group">
+                <span className="text-blue-700 font-medium group-hover:text-blue-900 block mb-1">Glioblastoma Survival Guide →</span>
+                <span className="text-xs text-gray-600">Latest treatments and survival statistics.</span>
+              </Link>
+              <Link href="/blog/awake-craniotomy-brain-tumor-guide/" className="block p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border border-blue-100 group">
+                <span className="text-blue-700 font-medium group-hover:text-blue-900 block mb-1">Awake Craniotomy Explained →</span>
+                <span className="text-xs text-gray-600">How we protect speech during surgery.</span>
+              </Link>
+            </div>
+          </div>
         </section>
 
         <section className="mb-16">

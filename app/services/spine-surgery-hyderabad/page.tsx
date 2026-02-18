@@ -12,6 +12,7 @@ import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import { getServiceSources } from '../sources';
 import MedicalWebPageSchema from '../../components/schemas/MedicalWebPageSchema';
+import FAQPageSchema from '@/app/_components/FAQPageSchema';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import SurgeryComparisonTable from '@/src/components/SurgeryComparisonTable';
 
@@ -20,7 +21,7 @@ const SERVICE_SLUG = 'spine-surgery-hyderabad';
 const baseMetadata = makeMetadata({
   title: 'Spine Surgery Hyderabad | Endoscopic Specialist | Dr Sayuj',
   description:
-    'Advanced Spine Surgery in Hyderabad by Dr. Sayuj. Keyhole Endoscopic treatment for Slip Disc & Sciatica. 90% Success, Same-Day Discharge. Book Now.',
+    'Top Spine Surgeon Hyderabad. Endoscopic keyhole surgery for slip disc & sciatica. 90% success, affordable cost. Walk same day. Book at Yashoda Malakpet.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
 });
 
@@ -85,6 +86,11 @@ const faqs = [
     answer:
       'Yes, we accept all major insurance providers and offer cashless facilities at Yashoda Hospitals. Our team handles the pre-authorization paperwork for seamless processing.',
   },
+  {
+    question: 'How do robotic and endoscopic spine surgeries differ?',
+    answer:
+      'Endoscopic surgery uses a keyhole camera for decompression. Robotic surgery uses a mechanical arm for precise screw placement during fusion. We offer both technologies at Yashoda Malakpet for optimal results.',
+  },
 ];
 
 export default function SpineSurgeryHyderabadPage() {
@@ -105,6 +111,7 @@ export default function SpineSurgeryHyderabadPage() {
         serviceOrCondition="Spine Surgery"
         breadcrumbs={breadcrumbs}
       />
+      <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/${SERVICE_SLUG}`} />
       <main className="container mx-auto px-4 py-16">
         <Breadcrumbs
           items={[
@@ -161,9 +168,51 @@ export default function SpineSurgeryHyderabadPage() {
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-blue-900 mb-6">Endoscopic vs. Traditional Spine Surgery</h2>
           <p className="text-gray-700 mb-6">
-            Understanding the difference between traditional open surgery and modern endoscopic techniques is crucial for making an informed decision. Dr. Sayuj prioritizes tissue-preserving methods that allow for faster recovery.
+            Understanding the difference between traditional open surgery and modern endoscopic techniques is crucial for making an informed decision. Dr. Sayuj prioritizes tissue-preserving methods, especially <Link href="/services/endoscopic-spine-surgery-hyderabad/" className="text-blue-700 underline hover:text-blue-800">endoscopic spine surgery</Link>, that allow for faster recovery.
           </p>
           <SurgeryComparisonTable />
+        </section>
+
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-blue-900 mb-6">Advanced Surgical Solutions</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+              <h3 className="text-xl font-bold text-blue-800 mb-2">Endoscopic Spine Surgery</h3>
+              <p className="text-gray-700 text-sm mb-4">
+                Ultra-minimally invasive &quot;keyhole&quot; surgery for slip discs and sciatica. 7mm incision, no muscle cutting, and same-day walking.
+              </p>
+              <Link href="/services/endoscopic-spine-surgery-hyderabad/" className="text-blue-600 font-semibold hover:underline text-sm">
+                Learn about Keyhole Surgery →
+              </Link>
+            </div>
+            <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+              <h3 className="text-xl font-bold text-blue-800 mb-2">Microdiscectomy</h3>
+              <p className="text-gray-700 text-sm mb-4">
+                Gold-standard microscopic removal of herniated disc fragments relieving nerve compression. Precise visualization ensures nerve safety.
+              </p>
+              <Link href="/services/microdiscectomy-surgery-hyderabad/" className="text-blue-600 font-semibold hover:underline text-sm">
+                Explore Microdiscectomy →
+              </Link>
+            </div>
+            <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+              <h3 className="text-xl font-bold text-blue-800 mb-2">Spinal Fusion (TLIF/PLIF)</h3>
+              <p className="text-gray-700 text-sm mb-4">
+                Stabilization for slipped vertebrae (spondylolisthesis) or spinal instability. Uses screws and cages to restore alignment and relieve pain.
+              </p>
+              <Link href="/services/spinal-fusion-surgery-hyderabad/" className="text-blue-600 font-semibold hover:underline text-sm">
+                View Fusion Details →
+              </Link>
+            </div>
+            <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+              <h3 className="text-xl font-bold text-blue-800 mb-2">Cervical Disc Replacement</h3>
+              <p className="text-gray-700 text-sm mb-4">
+                Motion-preserving surgery for neck disc herniations. Maintains natural neck movement unlike traditional fusion surgery.
+              </p>
+              <Link href="/services/cervical-disc-replacement-hyderabad/" className="text-blue-600 font-semibold hover:underline text-sm">
+                Check Disc Replacement →
+              </Link>
+            </div>
+          </div>
         </section>
 
         <section className="mb-16">
@@ -206,6 +255,33 @@ export default function SpineSurgeryHyderabadPage() {
               Lesions requiring biopsy, decompression, or stabilization for spinal cord protection.
             </li>
           </ul>
+        </section>
+
+        <section className="mb-16">
+          <div className="bg-white border border-green-100 rounded-2xl p-8 shadow-sm">
+            <h2 className="text-2xl font-bold text-green-800 mb-4">Is Spine Surgery Safe for Elderly Patients?</h2>
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <p className="text-gray-700 mb-4">
+                  Advanced age is no longer a barrier to spine surgery. Our &quot;Awake&quot; and &quot;Twilight&quot; anesthesia protocols allow many procedures to be performed without general anesthesia, significantly reducing risks for heart and lung complications.
+                </p>
+                <ul className="space-y-2 mb-4 text-sm text-gray-700">
+                  <li className="flex items-center"><span className="text-green-500 mr-2">✓</span> No General Anesthesia (Awake/Twilight options)</li>
+                  <li className="flex items-center"><span className="text-green-500 mr-2">✓</span> Minimal Blood Loss (Endoscopic technique)</li>
+                  <li className="flex items-center"><span className="text-green-500 mr-2">✓</span> Early Mobilization (Walk same day)</li>
+                </ul>
+                <Link href="/services/awake-spine-surgery-hyderabad" className="text-green-700 font-semibold hover:underline">
+                  Learn about Awake Spine Surgery →
+                </Link>
+              </div>
+              <div className="bg-green-50 p-6 rounded-xl">
+                 <h3 className="font-bold text-green-900 mb-2">Robotic Precision</h3>
+                 <p className="text-sm text-gray-700 mb-4">
+                   For complex cases in older adults, we utilize <Link href="/services/robotic-spine-surgery-hyderabad" className="text-green-700 font-medium hover:underline">Robotic Spine Surgery</Link> to ensure 99.9% accuracy in implant placement, further enhancing safety.
+                 </p>
+              </div>
+            </div>
+          </div>
         </section>
 
         <section className="mb-16">
