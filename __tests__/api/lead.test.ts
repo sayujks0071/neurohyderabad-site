@@ -1,5 +1,5 @@
 
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { POST } from '@/app/api/lead/route';
 import { NextRequest } from 'next/server';
 
@@ -21,14 +21,13 @@ vi.mock('@/lib/google-sheets', () => ({
   submitToGoogleSheets: vi.fn(),
 }));
 
-// Mock the CRM client which is dynamically imported
-vi.mock('@/lib/crm-client', () => ({
-  createPatient: vi.fn(),
-  findPatientByEmail: vi.fn(),
-  updatePatient: vi.fn(),
+// Mock DB
+const mockUpsert = vi.fn();
+vi.mock('@/src/lib/db', () => ({
+  patients: {
+    upsert: mockUpsert,
+  },
 }));
-
-import { createPatient, findPatientByEmail, updatePatient } from '@/lib/crm-client';
 
 describe('Lead API (POST)', () => {
   beforeEach(() => {
@@ -76,11 +75,11 @@ describe('Lead API (POST)', () => {
     const body = await res.json();
     expect(body.message).toBe('Received');
 
-    // Should not call CRM or Sheets
-    expect(createPatient).not.toHaveBeenCalled();
+    // Should not call DB
+    expect(mockUpsert).not.toHaveBeenCalled();
   });
 
-  it('should create a new patient in CRM if not exists', async () => {
+  it('should upsert patient in CRM', async () => {
     const payload = {
       fullName: 'New Patient',
       email: 'new@example.com',
@@ -89,8 +88,7 @@ describe('Lead API (POST)', () => {
       city: 'Hyderabad',
     };
 
-    (findPatientByEmail as any).mockResolvedValue(null);
-    (createPatient as any).mockResolvedValue({ id: 100, ...payload });
+    mockUpsert.mockResolvedValue({ id: 100 });
 
     const req = new NextRequest('http://localhost/api/lead', {
       method: 'POST',
@@ -100,54 +98,13 @@ describe('Lead API (POST)', () => {
     const res = await POST(req);
     expect(res.status).toBe(200);
 
-    expect(findPatientByEmail).toHaveBeenCalledWith(payload.email);
-    expect(createPatient).toHaveBeenCalledWith(expect.objectContaining({
+    expect(mockUpsert).toHaveBeenCalledWith(expect.objectContaining({
       email: payload.email,
-      firstName: 'New',
-      lastName: 'Patient',
+      name: payload.fullName,
       phone: payload.phone,
-      city: payload.city,
       notes: payload.concern,
+      acquisition_source: 'website',
     }));
-  });
-
-  it('should update existing patient in CRM if exists', async () => {
-    const payload = {
-      fullName: 'Existing Patient',
-      email: 'existing@example.com',
-      phone: '9876543210',
-      concern: 'Neck pain',
-    };
-
-    const existingPatient = {
-      id: 200,
-      email: payload.email,
-      phone: '1111111111',
-      notes: 'Previous note',
-    };
-
-    (findPatientByEmail as any).mockResolvedValue(existingPatient);
-    (updatePatient as any).mockResolvedValue({ ...existingPatient, phone: payload.phone });
-
-    const req = new NextRequest('http://localhost/api/lead', {
-      method: 'POST',
-      body: JSON.stringify(payload),
-    });
-
-    const res = await POST(req);
-    expect(res.status).toBe(200);
-
-    expect(findPatientByEmail).toHaveBeenCalledWith(payload.email);
-    expect(updatePatient).toHaveBeenCalledWith(
-      200,
-      expect.objectContaining({
-        phone: payload.phone,
-        notes: expect.stringContaining('Previous note'),
-      })
-    );
-    // Should verify the new note is appended
-    const updateCall = (updatePatient as any).mock.calls[0];
-    expect(updateCall[1].notes).toContain('Neck pain');
   });
 
   it('should handle clinical metadata (painScore, mriScanAvailable)', async () => {
@@ -159,15 +116,7 @@ describe('Lead API (POST)', () => {
       concern: 'Severe pain',
     };
 
-    (findPatientByEmail as any).mockResolvedValue(null);
-    (createPatient as any).mockResolvedValue({ id: 300 });
-
-    const existingPatient = {
-      id: 300,
-      email: payload.email,
-      notes: 'Old note',
-    };
-    (findPatientByEmail as any).mockResolvedValue(existingPatient);
+    mockUpsert.mockResolvedValue({ id: 300 });
 
     const req = new NextRequest('http://localhost/api/lead', {
       method: 'POST',
@@ -176,14 +125,12 @@ describe('Lead API (POST)', () => {
 
     await POST(req);
 
-    expect(updatePatient).toHaveBeenCalledWith(
-      300,
+    expect(mockUpsert).toHaveBeenCalledWith(
       expect.objectContaining({
-        notes: expect.stringContaining('Pain Score: 8/10'),
+        pain_score: 8,
+        mri_scan_available: true,
       })
     );
-     const updateCall = (updatePatient as any).mock.calls[0];
-     expect(updateCall[1].notes).toContain('MRI Scan: Available');
   });
 
   it('should not fail request if CRM throws error', async () => {
@@ -192,7 +139,7 @@ describe('Lead API (POST)', () => {
       email: 'error@example.com',
     };
 
-    (findPatientByEmail as any).mockRejectedValue(new Error('DB Connection Failed'));
+    mockUpsert.mockRejectedValue(new Error('DB Connection Failed'));
 
     const req = new NextRequest('http://localhost/api/lead', {
       method: 'POST',
@@ -203,5 +150,7 @@ describe('Lead API (POST)', () => {
     expect(res.status).toBe(200); // Should still return success to the client
     const body = await res.json();
     expect(body.ok).toBe(true);
+    // Verify security fix: no crmError exposed
+    expect(body.crmError).toBeUndefined();
   });
 });
