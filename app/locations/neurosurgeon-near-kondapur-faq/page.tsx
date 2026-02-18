@@ -56,7 +56,7 @@ export default function NeurosurgeonNearKondapurFAQPage() {
   // Mapping Kondapur to Hitech City as it is the closest and most relevant cluster
   // But strictly using 'kondapur' location data if available might be better if it exists.
   // We have 'kondapur' in locations.ts. Let's use it.
-  const location = getLocationById("kondapur") || getLocationById("hitech-city");
+  const location = getLocationById("kondapur");
 
   if (!location) {
     return notFound();

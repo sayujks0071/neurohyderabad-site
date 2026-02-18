@@ -192,7 +192,7 @@ export default function HeaderRefactored() {
                     )}
                   </Link>
                   {item.dropdown && (
-                    <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-[var(--color-border)] opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-200 p-4">
+                    <div className="absolute top-full left-0 mt-2 w-64 bg-white/90 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-200 p-6">
                       <ul className="space-y-2">
                         {item.dropdown.map((link) => (
                           <li key={link.href}>
@@ -305,7 +305,7 @@ export default function HeaderRefactored() {
         {/* Mobile Navigation Menu */}
         <nav
           id="mobile-navigation"
-          className={`fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-white shadow-xl transform transition-transform duration-300 ease-in-out lg:hidden ${
+          className={`fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-white/90 backdrop-blur-lg border-l border-white/20 shadow-2xl transform transition-transform duration-300 ease-in-out lg:hidden ${
             isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
           aria-label="Mobile navigation"

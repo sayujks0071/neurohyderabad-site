@@ -1,8 +1,7 @@
 name: Jules Rolling 7-Day SEO Summary
-# v2.4 - Managed by Jules
 on:
   schedule:
-    # 09:15 IST (India Standard Time) = 03:45 UTC
+    # 09:15 IST = 03:45 UTC
     - cron: "45 3 * * *"
   workflow_dispatch:
 
@@ -95,5 +94,3 @@ jobs:
             });
 
             console.log(`Created issue: ${newIssue.html_url}`);
-
-# Verified by Jules 2026-02-15

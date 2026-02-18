@@ -112,7 +112,7 @@ const DEFAULT_SERVICES = [
 const DEFAULT_CONDITIONS = [
   "sciatica-pain-treatment-hyderabad",
   "slip-disc-treatment-hyderabad",
-  "brain-tumor-surgery-hyderabad",
+  "brain-tumor-symptoms-hyderabad",
   "trigeminal-neuralgia-treatment-hyderabad"
 ];
 

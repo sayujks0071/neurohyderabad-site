@@ -8,6 +8,7 @@
 
 import { useState, FormEvent } from 'react';
 import Link from 'next/link';
+import { CANONICAL_TELEPHONE } from '@/src/data/locations';
 
 interface SearchResult {
   answer: string;
@@ -161,7 +162,7 @@ export default function KnowledgeBaseClient() {
             <p className="text-red-800 font-medium">Error</p>
             <p className="text-red-600 text-sm mt-1">{error}</p>
             <p className="text-sm text-red-600 mt-2">
-              Please try again or contact us at +91-9778280044
+              Please try again or contact us at {CANONICAL_TELEPHONE}
             </p>
           </div>
         )}
@@ -257,7 +258,7 @@ export default function KnowledgeBaseClient() {
             is for educational purposes only and does not replace professional medical advice,
             diagnosis, or treatment. Always seek the advice of your physician or other qualified
             health provider with any questions you may have regarding a medical condition. For
-            immediate medical concerns, please contact Dr. Sayuj at +91-9778280044 or visit the
+            immediate medical concerns, please contact Dr. Sayuj at {CANONICAL_TELEPHONE} or visit the
             nearest emergency room.
           </p>
         </div>

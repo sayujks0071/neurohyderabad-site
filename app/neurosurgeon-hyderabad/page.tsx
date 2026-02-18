@@ -150,33 +150,21 @@ export default function HyderabadNeurosurgeonPage() {
                 <LocationCTAs location={location} />
               </div>
 
-              <div className="mt-8 flex items-center gap-2 text-sm text-blue-200">
-                <span className="flex items-center"><span className="text-green-400 mr-1">✓</span> 9+ Years Exp</span>
-                <span className="w-1 h-1 bg-blue-500 rounded-full"></span>
-                <span className="flex items-center"><span className="text-green-400 mr-1">✓</span> 1000+ Surgeries</span>
-                <span className="w-1 h-1 bg-blue-500 rounded-full"></span>
-                <span className="flex items-center"><span className="text-green-400 mr-1">✓</span> Yashoda Hospitals</span>
-              </div>
-            </div>
-            <div className="hidden md:block relative">
-               {/* Abstract visual or doctor image placeholder could go here */}
-               <div className="bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-6 text-center">
-                  <div className="text-5xl font-bold text-white mb-2">1000+</div>
-                  <div className="text-blue-200 font-medium uppercase tracking-widest text-sm mb-6">Successful Procedures</div>
-                  <div className="h-px bg-white/10 w-full mb-6"></div>
-                  <div className="grid grid-cols-2 gap-4 text-left">
-                     <div>
-                        <div className="text-2xl font-bold text-white">90%</div>
-                        <div className="text-xs text-blue-200">Non-Surgical Spine Relief</div>
-                     </div>
-                     <div>
-                        <div className="text-2xl font-bold text-white">24hr</div>
-                        <div className="text-xs text-blue-200">Discharge for Endoscopy</div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-          </div>
+          <h2 className="text-2xl font-semibold">OPD Timings & Location</h2>
+          <ul className="mt-3 list-disc pl-5">
+            <li>Yashoda Hospitals – Malakpet, Hyderabad</li>
+            <li>OPD: Mon–Sat, 10:00–16:00 (IST) • By appointment</li>
+            <li>Emergency: 24×7 via hospital triage</li>
+          </ul>
+        </div>
+        <div>
+          <h2 className="text-2xl font-semibold">Conditions & Procedures</h2>
+          <ul className="mt-3 list-disc pl-5">
+            <li>Endoscopic cervical & lumbar discectomy, foraminotomy, ULBD</li>
+            <li>Cervical/lumbar radiculopathy, <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 hover:underline">Sciatica Treatment</Link>, spinal stenosis, disc herniation</li>
+            <li>Trigeminal neuralgia (MVD), epilepsy surgery pathways</li>
+            <li><Link href="/services/brain-tumor-surgery-hyderabad" className="text-blue-600 hover:underline">Advanced Brain Tumor Surgery</Link> (Neuronavigation)</li>
+          </ul>
         </div>
       </section>
 
