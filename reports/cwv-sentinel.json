@@ -1,19 +1,21 @@
 {
-  "timestamp": "2025-02-27T00:00:00Z",
+  "timestamp": "2026-02-17T06:04:01.000Z",
   "commit_hash": "HEAD",
-  "notes": {
-    "Home": {
-      "bottleneck": "CLS on mobile due to fixed-height video placeholders (450px) vs actual video height (~180px).",
-      "fix": "Updated placeholders in `app/page.tsx` and loading state in `RemotionVideoEmbedWrapper.tsx` to use `aspect-video` and `max-w-[800px]`, ensuring consistent aspect ratio and width during loading.",
-      "impact": "Eliminated large layout shift on mobile devices when videos load. Placeholder now matches the video dimensions exactly."
+  "changes": [
+    {
+      "file": "app/_components/ClientAnalytics.tsx",
+      "description": "Staggered loading of StatsigAnalytics and FloatingWhatsApp by 2500ms after initial analytics load."
     }
-  },
-  "metrics": {
-    "before": {
-      "home-cls-mobile": "High (estimated > 0.25)"
+  ],
+  "impact": {
+    "rationale": "Breaking up the hydration and execution of multiple third-party scripts (analytics, chat widget) into two phases reduces the main thread blocking time (TBT) during the critical first few seconds of page load. This lowers the risk of INP issues when users attempt to interact early.",
+    "metrics": {
+      "note": "Lab data (Lighthouse) shows stable scores. Real-world impact on INP is expected to be positive due to reduced main thread contention."
     },
-    "after": {
-      "home-cls-mobile": "Low (estimated < 0.1)"
-    }
+    "verification_steps": [
+      "pnpm build",
+      "pnpm lhci --config=lighthouserc-cwv.js",
+      "Observe that ClientAnalytics.tsx logic now includes a 2.5s delay for 'heavy' scripts."
+    ]
   }
 }

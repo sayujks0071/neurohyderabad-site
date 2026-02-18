@@ -37,6 +37,20 @@ const PrivacyFriendlyAnalytics = dynamic(
 export default function ClientAnalytics() {
   const [enableAnalytics, setEnableAnalytics] = React.useState(false);
   const [shouldLoad, setShouldLoad] = React.useState(false);
+  // Separate heavier scripts to load later to reduce TBT
+  const [shouldLoadHeavy, setShouldLoadHeavy] = React.useState(false);
+
+  React.useEffect(() => {
+    if (shouldLoad) {
+      // Stagger heavy scripts by 2.5s to avoid main thread blocking
+      const timer = setTimeout(() => {
+        setShouldLoadHeavy(true);
+      }, 2500);
+      return () => clearTimeout(timer);
+    } else {
+      setShouldLoadHeavy(false);
+    }
+  }, [shouldLoad]);
 
   React.useEffect(() => {
     if (typeof window === "undefined") return;
@@ -144,8 +158,12 @@ export default function ClientAnalytics() {
       {shouldLoad && (
         <>
           <WebVitals />
-          <StatsigAnalytics />
           <PrivacyFriendlyAnalytics />
+        </>
+      )}
+      {shouldLoadHeavy && (
+        <>
+          <StatsigAnalytics />
           <FloatingWhatsApp />
         </>
       )}
