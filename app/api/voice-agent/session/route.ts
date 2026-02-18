@@ -65,7 +65,24 @@ export async function POST(req: NextRequest) {
       ? getGatewayBaseUrl()
       : 'https://api.openai.com/v1';
 
+    // If using Gateway, we might need provider prefix. If direct, we use bare model name.
     const finalModel = isGateway ? getGatewayModel(safeModel) : safeModel;
+
+    // Prepare session config
+    const sessionConfig = {
+      model: finalModel,
+      voice: safeVoice,
+      instructions: cleanInstructions,
+      modalities: ['text', 'audio'],
+      input_audio_format: 'pcm16',
+      output_audio_format: 'pcm16',
+      turn_detection: {
+        type: 'server_vad', // Voice Activity Detection
+        threshold: 0.5,
+        prefix_padding_ms: 300,
+        silence_duration_ms: 500,
+      },
+    };
 
     // Create a session with OpenAI Realtime API (or via Gateway)
     const response = await fetch(`${baseUrl}/realtime/sessions`, {
@@ -74,27 +91,60 @@ export async function POST(req: NextRequest) {
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        model: finalModel,
-        voice: safeVoice,
-        instructions: cleanInstructions,
-        modalities: ['text', 'audio'],
-        input_audio_format: 'pcm16',
-        output_audio_format: 'pcm16',
-        turn_detection: {
-          type: 'server_vad', // Voice Activity Detection
-          threshold: 0.5,
-          prefix_padding_ms: 300,
-          silence_duration_ms: 500,
-        },
-      }),
+      body: JSON.stringify(sessionConfig),
     });
 
     if (!response.ok) {
-      const error = await response.json();
+      const errorText = await response.text();
+      let error;
+      try {
+        error = JSON.parse(errorText);
+      } catch {
+        error = { message: errorText };
+      }
+
       console.error('OpenAI/Gateway API error:', error);
+
+      // 🛡️ Fallback Strategy: If Gateway fails (e.g., 404/400 due to Realtime API incompatibility),
+      // attempt direct connection to OpenAI if we have a direct key available.
+      if (isGateway) {
+        const directApiKey = process.env.OPENAI_API_KEY;
+        // Only try fallback if we have a specific OpenAI key and it's different/available
+        if (directApiKey) {
+          console.warn('Falling back to direct OpenAI API for Realtime Session...');
+
+          try {
+            const fallbackResponse = await fetch('https://api.openai.com/v1/realtime/sessions', {
+              method: 'POST',
+              headers: {
+                'Authorization': `Bearer ${directApiKey}`,
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                ...sessionConfig,
+                model: safeModel, // Use the bare model name without provider prefix
+              }),
+            });
+
+            if (fallbackResponse.ok) {
+              const session = await fallbackResponse.json();
+              return NextResponse.json({
+                sessionId: session.id,
+                sessionUrl: session.client_secret?.url || session.url,
+                expiresAt: session.expires_at,
+              });
+            } else {
+              const fallbackError = await fallbackResponse.json();
+              console.error('Fallback Direct OpenAI API error:', fallbackError);
+            }
+          } catch (fallbackErr) {
+            console.error('Fallback attempt failed:', fallbackErr);
+          }
+        }
+      }
+
       return NextResponse.json(
-        { error: 'Failed to create voice session' },
+        { error: 'Failed to create voice session', details: error },
         { status: response.status }
       );
     }

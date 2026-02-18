@@ -13,6 +13,10 @@
  * 2. Option B: OIDC Token - Run `vercel link` and `vercel env pull` (auto-refreshes)
  * 
  * Model format: Use provider/model (e.g., 'openai/gpt-4o-mini')
+ * Supported Providers: openai, anthropic, google, huggingface, etc.
+ *
+ * Note: When using Gateway, always use `getTextModel()` or `getGatewayModel()` helpers
+ * to ensure correct model string formatting (e.g. 'openai/gpt-4o-mini' vs 'gpt-4o-mini').
  */
 
 import { createOpenAI } from '@ai-sdk/openai';
@@ -74,7 +78,8 @@ export function hasAIConfig(): boolean {
  * Get the appropriate model identifier for Vercel AI Gateway
  * 
  * Vercel AI Gateway requires provider/model format (e.g., 'openai/gpt-4o-mini')
- * If already in correct format, returns as-is
+ * If already in correct format, returns as-is.
+ * If not, prepends the default provider (usually 'openai').
  */
 export function getGatewayModel(modelName: string = DEFAULT_TEXT_MODEL): string {
   // If already in provider/model format, return as-is
