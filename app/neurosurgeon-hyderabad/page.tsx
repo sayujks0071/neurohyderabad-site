@@ -166,6 +166,8 @@ export default function HyderabadNeurosurgeonPage() {
             <li><Link href="/services/brain-tumor-surgery-hyderabad" className="text-blue-600 hover:underline">Advanced Brain Tumor Surgery</Link> (Neuronavigation)</li>
           </ul>
         </div>
+        </div>
+        </div>
       </section>
 
       {/* Stats Bar */}

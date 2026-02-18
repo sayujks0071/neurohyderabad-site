@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import Breadcrumbs from '@/app/components/Breadcrumbs';
 import JsonLd from '@/components/JsonLd';
 import NAP from '@/app/_components/NAP';
@@ -15,13 +16,16 @@ import MedicalWebPageSchema from '../../components/schemas/MedicalWebPageSchema'
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import SurgeryComparisonTable from '@/src/components/SurgeryComparisonTable';
+import CostTransparencySection from '@/src/components/CostTransparencySection';
+import TrustProof from '@/app/_components/TrustProof';
+import { patientStories } from '@/src/content/stories';
 
 const SERVICE_SLUG = 'spine-surgery-hyderabad';
 
 const baseMetadata = makeMetadata({
-  title: 'Spine Surgery Hyderabad | Endoscopic Specialist | Dr Sayuj',
+  title: 'Spine Surgery Hyderabad | Best Spine Surgeon | Cost & Reviews',
   description:
-    'Top Spine Surgeon Hyderabad. Endoscopic keyhole surgery for slip disc & sciatica. 90% success, affordable cost. Walk same day. Book at Yashoda Malakpet.',
+    'Best Spine Surgeon Hyderabad. Dr. Sayuj specializes in Endoscopic & Microscopic Spine Surgery. Check Cost, Recovery Time & Patient Reviews. Walk Same Day.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
 });
 
@@ -29,11 +33,13 @@ export const metadata: Metadata = {
   ...baseMetadata,
   keywords: [
     'spine surgery hyderabad',
-    'spine surgeon near me',
+    'best spine surgeon in hyderabad',
+    'spine surgery cost hyderabad',
     'minimally invasive spine surgery hyderabad',
     'spine specialist yashoda hospital',
     'endoscopic spine surgery hyderabad',
-    'spine surgery consultation hyderabad',
+    'microdiscectomy cost hyderabad',
+    'spine fusion surgery cost hyderabad',
   ],
   openGraph: {
     title: 'Spine Surgery Hyderabad | Minimally Invasive Specialist',
@@ -65,6 +71,33 @@ const serviceSchema = buildLocalServiceSchema({
 
 const ARTICLE_SOURCES = getServiceSources(SERVICE_SLUG);
 
+const COSTS = [
+  {
+    procedure: 'Microdiscectomy (Lumbar)',
+    range: '₹1,10,000 - ₹1,50,000',
+    recovery: '2-3 Days',
+    includes: ['Surgeon Fees', 'Microscope Usage', 'Standard Room (2 Days)', 'Medications']
+  },
+  {
+    procedure: 'Endoscopic Spine Surgery',
+    range: '₹1,30,000 - ₹1,80,000',
+    recovery: '1 Day (Day Care)',
+    includes: ['Keyhole Surgery', '4K Endoscope', 'Same Day Discharge', 'Fast Recovery']
+  },
+  {
+    procedure: 'Laminectomy (Decompression)',
+    range: '₹1,00,000 - ₹1,40,000',
+    recovery: '2-3 Days',
+    includes: ['Canal Decompression', 'Nursing Care', 'Post-op Physio (Inpatient)']
+  },
+  {
+    procedure: 'Spinal Fusion (TLIF - Single Level)',
+    range: '₹2,50,000 - ₹3,50,000',
+    recovery: '3-5 Days',
+    includes: ['Implants (Screws/Cage)', 'Neuromonitoring', 'Private Room (3 Days)']
+  }
+];
+
 const faqs = [
   {
     question: 'How do I know if I need spine surgery instead of physiotherapy?',
@@ -91,6 +124,14 @@ const faqs = [
     answer:
       'Endoscopic surgery uses a keyhole camera for decompression. Robotic surgery uses a mechanical arm for precise screw placement during fusion. We offer both technologies at Yashoda Malakpet for optimal results.',
   },
+  {
+    question: 'How much does spine surgery cost in Hyderabad?',
+    answer: 'The cost varies by procedure type. A Microdiscectomy typically ranges from ₹1.1L to ₹1.5L, while Endoscopic surgery ranges from ₹1.3L to ₹1.8L. Complex fusion surgeries (TLIF) start from ₹2.5L depending on implants. We provide transparent package estimates before admission.'
+  },
+  {
+    question: 'Why choose Dr. Sayuj as the best spine surgeon in Hyderabad?',
+    answer: 'Dr. Sayuj combines international fellowship training (Germany) with over 1000+ successful endoscopic procedures. His philosophy focuses on preserving natural anatomy, resulting in 90% same-day discharge rates for decompression surgeries.'
+  }
 ];
 
 export default function SpineSurgeryHyderabadPage() {
@@ -99,6 +140,11 @@ export default function SpineSurgeryHyderabadPage() {
     { name: 'Services', path: '/services/' },
     { name: 'Spine Surgery in Hyderabad', path: `/services/${SERVICE_SLUG}/` },
   ];
+
+  const relevantStories = patientStories.filter(story => {
+    const tags = story.tags.join(' ').toLowerCase();
+    return tags.includes('spine') || tags.includes('tlif') || tags.includes('sciatica');
+  }).slice(0, 3);
 
   return (
     <>
@@ -164,6 +210,8 @@ export default function SpineSurgeryHyderabadPage() {
             </ul>
           </div>
         </header>
+
+        <TrustProof serviceType="spine" className="mb-16" stories={relevantStories} />
 
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-blue-900 mb-6">Endoscopic vs. Traditional Spine Surgery</h2>
@@ -258,6 +306,61 @@ export default function SpineSurgeryHyderabadPage() {
         </section>
 
         <section className="mb-16">
+          <h2 className="text-3xl font-bold text-blue-900 mb-6">Meet Dr. Sayuj Krishnan</h2>
+          <div className="flex flex-col md:flex-row gap-8 items-start bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
+            <div className="w-full md:w-1/3">
+               <div className="aspect-[3/4] relative bg-gray-200 rounded-xl overflow-hidden mb-4">
+                 <Image
+                   src="/images/dr-sayuj-krishnan-portrait-v2.jpg"
+                   alt="Dr Sayuj Krishnan - Spine Specialist Hyderabad"
+                   className="object-cover"
+                   fill
+                   sizes="(max-width: 768px) 100vw, 33vw"
+                 />
+               </div>
+               <div className="text-center">
+                  <p className="font-bold text-blue-900">Dr. Sayuj Krishnan</p>
+                  <p className="text-sm text-gray-500">Neurosurgeon & Spine Specialist</p>
+               </div>
+            </div>
+            <div className="w-full md:w-2/3">
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Why Choose Dr. Sayuj for Spine Care?</h3>
+              <p className="text-gray-700 mb-4 leading-relaxed">
+                Dr. Sayuj Krishnan is a highly regarded neurosurgeon in Hyderabad with specialized fellowship training in <strong>Minimally Invasive Spine Surgery (Germany)</strong>. His approach prioritizes saving the natural spine anatomy, helping thousands of patients avoid major open surgery.
+              </p>
+              <ul className="space-y-3 text-gray-700 mb-6">
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-600 font-bold">✓</span>
+                  <div>
+                    <strong>1000+ Successful Procedures:</strong> Extensive experience in endoscopic discectomy, microscopic decompression, and complex fusion surgeries.
+                  </div>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-600 font-bold">✓</span>
+                  <div>
+                    <strong>Advanced Technology:</strong> Expert in 4K Endoscopy, Neuronavigation, and Robotic-assisted spine surgery for maximum precision.
+                  </div>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-600 font-bold">✓</span>
+                  <div>
+                    <strong>Patient-First Philosophy:</strong> "We only operate when necessary. 80% of our spine patients get better without surgery."
+                  </div>
+                </li>
+              </ul>
+              <div className="flex flex-wrap gap-4">
+                <Link href="/about" className="text-blue-600 font-semibold hover:underline">
+                  Read Full Profile →
+                </Link>
+                <Link href="/patient-stories" className="text-blue-600 font-semibold hover:underline">
+                  Read Patient Reviews →
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="mb-16">
           <div className="bg-white border border-green-100 rounded-2xl p-8 shadow-sm">
             <h2 className="text-2xl font-bold text-green-800 mb-4">Is Spine Surgery Safe for Elderly Patients?</h2>
             <div className="grid md:grid-cols-2 gap-8 items-center">
@@ -323,6 +426,12 @@ export default function SpineSurgeryHyderabadPage() {
             </div>
           </div>
         </section>
+
+        <CostTransparencySection
+          costs={COSTS}
+          showInsurance={true}
+          disclaimer="Estimated package costs for self-pay patients at Yashoda Hospital Malakpet. Final pricing depends on room category (General/Sharing/Private), implants used (e.g., Titanium screws), and medical complexity. We assist with full insurance pre-authorization."
+        />
 
         <section className="mb-16 grid md:grid-cols-2 gap-10">
           <div>
@@ -407,8 +516,6 @@ export default function SpineSurgeryHyderabadPage() {
             </Link>
           </div>
         </section>
-
-
 
       <div className="mt-12">
         <LocalPathways mode="service" />
