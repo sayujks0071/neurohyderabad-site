@@ -361,7 +361,7 @@ export default function SciaticaTreatmentPage() {
           <div className="bg-white p-6 rounded-lg shadow-md border-t-4 border-blue-500">
             <h3 className="text-lg font-bold mb-3 text-gray-900">Step 3: Surgical Solution</h3>
             <p className="text-gray-700 mb-3">
-              <Link href="/services/endoscopic-discectomy-hyderabad" className="text-blue-600 hover:underline font-semibold">Endoscopic Discectomy</Link> is the gold standard when conservative care fails. It's a keyhole procedure with same-day walking.
+              <Link href="/services/endoscopic-discectomy-hyderabad" className="text-blue-600 hover:underline font-semibold">Endoscopic Discectomy</Link> is the gold standard. For instability, <Link href="/services/spinal-fusion-surgery-hyderabad" className="text-blue-600 hover:underline">spinal fusion</Link> may be needed.
             </p>
             <p className="text-sm font-semibold text-blue-700">Reserved for: ~10% of cases</p>
           </div>

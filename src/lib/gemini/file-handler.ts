@@ -144,7 +144,9 @@ export async function uploadFileBufferToGemini(
 
   // Create temporary file
   const tempDir = os.tmpdir();
-  const tempFilePath = path.join(tempDir, `gemini-upload-${Date.now()}-${fileName}`);
+  // 🛡️ Sentinel: Sanitize filename to prevent path traversal
+  const safeFileName = path.basename(fileName);
+  const tempFilePath = path.join(tempDir, `gemini-upload-${Date.now()}-${safeFileName}`);
 
   try {
     // Write buffer to temp file
