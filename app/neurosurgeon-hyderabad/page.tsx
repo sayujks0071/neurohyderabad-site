@@ -18,9 +18,9 @@ export const dynamicParams = false;
 export const revalidate = 86400;
 
 export const metadata = {
-  title: "Best Neurosurgeon Hyderabad | Dr. Sayuj | Spine & Brain Specialist",
+  title: "Best Neurosurgeon Hyderabad | Dr Sayuj | Spine & Brain Specialist",
   description:
-    "Dr. Sayuj Krishnan is a leading Neurosurgeon in Hyderabad with German training. Expert in Endoscopic Spine Surgery, Brain Tumors & Sciatica. 1000+ Surgeries.",
+    "Consult Dr. Sayuj, top Neurosurgeon in Hyderabad. Expert in Endoscopic Spine & Brain Tumor Surgery. 1000+ Success Stories. Book at Yashoda Malakpet.",
   alternates: { canonical: "https://www.drsayuj.info/neurosurgeon-hyderabad" },
   openGraph: {
     title: "Best Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan",

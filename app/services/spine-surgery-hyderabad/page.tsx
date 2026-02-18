@@ -19,7 +19,7 @@ import SurgeryComparisonTable from '@/src/components/SurgeryComparisonTable';
 const SERVICE_SLUG = 'spine-surgery-hyderabad';
 
 const baseMetadata = makeMetadata({
-  title: 'Best Spine Surgeon Hyderabad | Endoscopic Expert | Dr Sayuj',
+  title: 'Spine Surgery Hyderabad | Endoscopic Specialist | Dr Sayuj',
   description:
     'Top Spine Surgeon Hyderabad. Endoscopic keyhole surgery for slip disc & sciatica. 90% success, affordable cost. Walk same day. Book at Yashoda Malakpet.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
