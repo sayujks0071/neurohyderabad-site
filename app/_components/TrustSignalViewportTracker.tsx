@@ -17,24 +17,16 @@ export default function TrustSignalViewportTracker() {
     const findTrustSignals = () => {
       const signals: HTMLElement[] = [];
       
-      // Find TrustProof components
-      const trustProofSections = document.querySelectorAll('section[class*="border-blue-100"]');
-      trustProofSections.forEach(section => {
-        const text = section.textContent || '';
-        if (text.includes('Why Patients Trust') || text.includes('Meet Dr. Sayuj')) {
-          signals.push(section as HTMLElement);
-        }
-      });
+      // ⚡ Bolt: Use specific data attribute for O(1) lookup instead of O(n) text scan
+      const trustProofComponents = document.querySelectorAll('[data-trust-signal="trust_proof_component"]');
+      trustProofComponents.forEach(el => signals.push(el as HTMLElement));
 
-      // Find Trust Bridge section on homepage
+      // ⚡ Bolt: Use ID lookup for homepage bridge instead of iterating all sections
       if (pathname === '/') {
-        const sections = document.querySelectorAll('section');
-        sections.forEach(section => {
-          const text = section.textContent || '';
-          if (text.includes('Meet Dr. Sayuj Krishnan') && text.includes('Patient Success Stories')) {
-            signals.push(section as HTMLElement);
-          }
-        });
+        const trustBridge = document.getElementById('trust-bridge-section');
+        if (trustBridge) {
+          signals.push(trustBridge);
+        }
       }
 
       return signals;
@@ -54,10 +46,13 @@ export default function TrustSignalViewportTracker() {
               trackedElements.current.add(elementId);
               
               // Determine signal type
-              const text = element.textContent || '';
+              // ⚡ Bolt: Optimized detection using ID and data attributes
               let signalType = 'trust_proof_component';
-              if (text.includes('Meet Dr. Sayuj Krishnan') && pathname === '/') {
+
+              if (element.id === 'trust-bridge-section') {
                 signalType = 'trust_bridge_homepage';
+              } else if (element.getAttribute('data-trust-signal') === 'trust_proof_component') {
+                signalType = 'trust_proof_component';
               }
 
               // Track view
