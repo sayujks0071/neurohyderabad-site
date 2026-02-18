@@ -1,1 +1,1 @@
-[Latest Report](./2026-01-20/report.md)
+[Daily SEO Report 2026-02-17](/seo/ranking-ops/2026-02-17/report.md)

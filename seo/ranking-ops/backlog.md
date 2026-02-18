@@ -49,3 +49,8 @@
 *   **Opportunity:** Interactive "Symptom Checker" for Sciatica/Back Pain.
 *   **Opportunity:** "Recovery Timeline" visualizer for key surgeries (Endoscopic Discectomy).
 *   **Opportunity:** Video Testimonials embedded directly in service pages.
+
+## 2026-02-17
+*   **Content Gap:** The `app/conditions/brain-tumor-symptoms-hyderabad` page is duplicate content with `app/symptoms/signs-of-brain-tumor`. Consider redirecting or merging.
+*   **Internal Linking:** Other service pages (e.g., `spine-surgery`) could benefit from a similar "Comprehensive Condition Guides" section linking to blog posts.
+*   **Technical SEO:** Audit all other `app/symptoms/` pages for broken links to service pages.
