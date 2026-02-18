@@ -14,7 +14,7 @@ export const dynamicParams = false;
 export const revalidate = 86400;
 
 export const metadata = {
-  title: "Best Neurosurgeon Hyderabad | Endoscopic Spine Specialist",
+  title: "Best Neurosurgeon Hyderabad | Dr Sayuj | Top Spine Specialist",
   description:
     "Consult Dr. Sayuj Krishnan, neurosurgeon in Hyderabad. Expert in endoscopic spine & minimally invasive brain surgery. OPD timings & booking.",
   alternates: { canonical: "https://www.drsayuj.info/neurosurgeon-hyderabad" },
@@ -115,7 +115,7 @@ export default function Page() {
           <h2 className="text-2xl font-semibold">Conditions & Procedures</h2>
           <ul className="mt-3 list-disc pl-5">
             <li>Endoscopic cervical & lumbar discectomy, foraminotomy, ULBD</li>
-            <li>Cervical/lumbar radiculopathy, spinal stenosis, disc herniation</li>
+            <li>Cervical/lumbar radiculopathy, <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 hover:underline">Sciatica Treatment</Link>, spinal stenosis, disc herniation</li>
             <li>Trigeminal neuralgia (MVD), epilepsy surgery pathways</li>
             <li><Link href="/services/brain-tumor-surgery-hyderabad" className="text-blue-600 hover:underline">Advanced Brain Tumor Surgery</Link> (Neuronavigation)</li>
           </ul>

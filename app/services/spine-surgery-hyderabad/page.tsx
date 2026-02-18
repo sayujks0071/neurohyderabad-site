@@ -12,6 +12,7 @@ import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import { getServiceSources } from '../sources';
 import MedicalWebPageSchema from '../../components/schemas/MedicalWebPageSchema';
+import FAQPageSchema from '@/app/_components/FAQPageSchema';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import SurgeryComparisonTable from '@/src/components/SurgeryComparisonTable';
 
@@ -20,7 +21,7 @@ const SERVICE_SLUG = 'spine-surgery-hyderabad';
 const baseMetadata = makeMetadata({
   title: 'Best Spine Surgeon Hyderabad | Endoscopic Expert | Dr Sayuj',
   description:
-    'Expert spine surgeon in Hyderabad. Endoscopic keyhole surgery for slip disc & sciatica with 90% success. Book at Yashoda Malakpet.',
+    'Top Spine Surgeon Hyderabad. Endoscopic keyhole surgery for slip disc & sciatica. 90% success, affordable cost. Walk same day. Book at Yashoda Malakpet.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
 });
 
@@ -85,6 +86,11 @@ const faqs = [
     answer:
       'Yes, we accept all major insurance providers and offer cashless facilities at Yashoda Hospitals. Our team handles the pre-authorization paperwork for seamless processing.',
   },
+  {
+    question: 'How do robotic and endoscopic spine surgeries differ?',
+    answer:
+      'Endoscopic surgery uses a keyhole camera for decompression. Robotic surgery uses a mechanical arm for precise screw placement during fusion. We offer both technologies at Yashoda Malakpet for optimal results.',
+  },
 ];
 
 export default function SpineSurgeryHyderabadPage() {
@@ -105,6 +111,7 @@ export default function SpineSurgeryHyderabadPage() {
         serviceOrCondition="Spine Surgery"
         breadcrumbs={breadcrumbs}
       />
+      <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/${SERVICE_SLUG}`} />
       <main className="container mx-auto px-4 py-16">
         <Breadcrumbs
           items={[
@@ -206,6 +213,33 @@ export default function SpineSurgeryHyderabadPage() {
               Lesions requiring biopsy, decompression, or stabilization for spinal cord protection.
             </li>
           </ul>
+        </section>
+
+        <section className="mb-16">
+          <div className="bg-white border border-green-100 rounded-2xl p-8 shadow-sm">
+            <h2 className="text-2xl font-bold text-green-800 mb-4">Is Spine Surgery Safe for Elderly Patients?</h2>
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <p className="text-gray-700 mb-4">
+                  Advanced age is no longer a barrier to spine surgery. Our &quot;Awake&quot; and &quot;Twilight&quot; anesthesia protocols allow many procedures to be performed without general anesthesia, significantly reducing risks for heart and lung complications.
+                </p>
+                <ul className="space-y-2 mb-4 text-sm text-gray-700">
+                  <li className="flex items-center"><span className="text-green-500 mr-2">✓</span> No General Anesthesia (Awake/Twilight options)</li>
+                  <li className="flex items-center"><span className="text-green-500 mr-2">✓</span> Minimal Blood Loss (Endoscopic technique)</li>
+                  <li className="flex items-center"><span className="text-green-500 mr-2">✓</span> Early Mobilization (Walk same day)</li>
+                </ul>
+                <Link href="/services/awake-spine-surgery-hyderabad" className="text-green-700 font-semibold hover:underline">
+                  Learn about Awake Spine Surgery →
+                </Link>
+              </div>
+              <div className="bg-green-50 p-6 rounded-xl">
+                 <h3 className="font-bold text-green-900 mb-2">Robotic Precision</h3>
+                 <p className="text-sm text-gray-700 mb-4">
+                   For complex cases in older adults, we utilize <Link href="/services/robotic-spine-surgery-hyderabad" className="text-green-700 font-medium hover:underline">Robotic Spine Surgery</Link> to ensure 99.9% accuracy in implant placement, further enhancing safety.
+                 </p>
+              </div>
+            </div>
+          </div>
         </section>
 
         <section className="mb-16">
