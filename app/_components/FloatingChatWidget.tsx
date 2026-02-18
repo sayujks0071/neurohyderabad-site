@@ -82,6 +82,7 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
 
   // Statsig hooks
   const { logAppointmentBooking, logContactFormSubmit } = useStatsigEvents();
@@ -157,6 +158,25 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
     }
   }, [isOpen, isMinimized]);
 
+  // Handle Escape key to close chat
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen && !isMinimized) {
+        setIsOpen(false);
+        // Return focus to trigger button
+        setTimeout(() => triggerRef.current?.focus(), 0);
+      }
+    };
+
+    if (isOpen && !isMinimized) {
+      document.addEventListener('keydown', handleEscape);
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [isOpen, isMinimized]);
+
   // Scroll on new messages
   useEffect(() => {
     if (isOpen && !isMinimized) {
@@ -202,6 +222,7 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
     <>
       {/* Floating Button */}
       <button
+        ref={triggerRef}
         onClick={() => {
           if (isOpen && isMinimized) {
             setIsMinimized(false);
@@ -264,7 +285,11 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
                 <Minus size={18} />
               </button>
               <button
-                onClick={() => setIsOpen(false)}
+                onClick={() => {
+                  setIsOpen(false);
+                  // Return focus to trigger button
+                  setTimeout(() => triggerRef.current?.focus(), 0);
+                }}
                 className="p-1 hover:bg-white/20 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-white/50"
                 aria-label="Close chat"
               >
