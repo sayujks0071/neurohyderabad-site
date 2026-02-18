@@ -168,9 +168,51 @@ export default function SpineSurgeryHyderabadPage() {
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-blue-900 mb-6">Endoscopic vs. Traditional Spine Surgery</h2>
           <p className="text-gray-700 mb-6">
-            Understanding the difference between traditional open surgery and modern endoscopic techniques is crucial for making an informed decision. Dr. Sayuj prioritizes tissue-preserving methods that allow for faster recovery.
+            Understanding the difference between traditional open surgery and modern endoscopic techniques is crucial for making an informed decision. Dr. Sayuj prioritizes tissue-preserving methods, especially <Link href="/services/endoscopic-spine-surgery-hyderabad/" className="text-blue-700 underline hover:text-blue-800">endoscopic spine surgery</Link>, that allow for faster recovery.
           </p>
           <SurgeryComparisonTable />
+        </section>
+
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-blue-900 mb-6">Advanced Surgical Solutions</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+              <h3 className="text-xl font-bold text-blue-800 mb-2">Endoscopic Spine Surgery</h3>
+              <p className="text-gray-700 text-sm mb-4">
+                Ultra-minimally invasive &quot;keyhole&quot; surgery for slip discs and sciatica. 7mm incision, no muscle cutting, and same-day walking.
+              </p>
+              <Link href="/services/endoscopic-spine-surgery-hyderabad/" className="text-blue-600 font-semibold hover:underline text-sm">
+                Learn about Keyhole Surgery →
+              </Link>
+            </div>
+            <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+              <h3 className="text-xl font-bold text-blue-800 mb-2">Microdiscectomy</h3>
+              <p className="text-gray-700 text-sm mb-4">
+                Gold-standard microscopic removal of herniated disc fragments relieving nerve compression. Precise visualization ensures nerve safety.
+              </p>
+              <Link href="/services/microdiscectomy-surgery-hyderabad/" className="text-blue-600 font-semibold hover:underline text-sm">
+                Explore Microdiscectomy →
+              </Link>
+            </div>
+            <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+              <h3 className="text-xl font-bold text-blue-800 mb-2">Spinal Fusion (TLIF/PLIF)</h3>
+              <p className="text-gray-700 text-sm mb-4">
+                Stabilization for slipped vertebrae (spondylolisthesis) or spinal instability. Uses screws and cages to restore alignment and relieve pain.
+              </p>
+              <Link href="/services/spinal-fusion-surgery-hyderabad/" className="text-blue-600 font-semibold hover:underline text-sm">
+                View Fusion Details →
+              </Link>
+            </div>
+            <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+              <h3 className="text-xl font-bold text-blue-800 mb-2">Cervical Disc Replacement</h3>
+              <p className="text-gray-700 text-sm mb-4">
+                Motion-preserving surgery for neck disc herniations. Maintains natural neck movement unlike traditional fusion surgery.
+              </p>
+              <Link href="/services/cervical-disc-replacement-hyderabad/" className="text-blue-600 font-semibold hover:underline text-sm">
+                Check Disc Replacement →
+              </Link>
+            </div>
+          </div>
         </section>
 
         <section className="mb-16">
