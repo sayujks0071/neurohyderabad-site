@@ -3,6 +3,7 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 
+// Dynamically import WebVitals to reduce initial bundle size
 const WebVitals = dynamic(
   () => import("../../src/components/WebVitals"),
   { ssr: false }

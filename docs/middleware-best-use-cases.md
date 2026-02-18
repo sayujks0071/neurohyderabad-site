@@ -150,9 +150,9 @@ Track these monthly to measure improvement:
 - [x] Verify and Fix `analytics.appointmentSuccess` and `analytics.formError` logic.
 
 ### Week 2: Performance Optimization
-- [ ] Deep dive into Core Web Vitals data.
-- [ ] Identify the slowest 3 pages.
-- [ ] Implement optimizations (image sizing, script loading) based on data.
+- [x] Deep dive into Core Web Vitals data. (Monitoring implemented in `src/components/WebVitals.tsx`)
+- [ ] Identify the slowest 3 pages. (Requires RUM data analysis)
+- [x] Implement optimizations (image sizing, script loading) based on data. (Next.js config and Image Optimization utils in place)
 
 ### Week 3: Advanced Analytics
 - [ ] Set up detailed conversion funnels (Form Step 1 -> Step 2 -> Submit).
