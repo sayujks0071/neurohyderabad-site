@@ -47,7 +47,7 @@ const availableTimes = [
 ];
 
 // Refactored to use enhanced Zod validation for strict type safety.
-// Uses `appointmentSchema` to enforce strict rules for patientName, Indian mobile numbers, painScore, and requestedDate.
+// Uses `appointmentSchema` to enforce strict rules for patientName, Indian mobile numbers, painScore (1-10), and requestedDate.
 export default function BookingForm({
   onSubmit,
   initialData,
