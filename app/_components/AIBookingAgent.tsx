@@ -43,14 +43,14 @@ export default function AIBookingAgent({ pageSlug, service }: AIBookingAgentProp
         content: "Hello! I'm Dr. Sayuj's AI assistant. I can help you book appointments, understand your condition, or answer questions about our clinic. How can I assist you today?"
       }
     ],
-    onFinish: (message) => {
+    onFinish: (message: any) => {
       // Log interaction when AI responds
       logAppointmentBooking('ai_chat_interaction', service || 'general');
     },
-    onError: (error) => {
+    onError: (error: any) => {
       console.error('AI Chat Error:', error);
     }
-  });
+  } as any) as any;
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -136,7 +136,7 @@ export default function AIBookingAgent({ pageSlug, service }: AIBookingAgentProp
 
         {/* Messages */}
         <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50">
-          {messages.map((message) => (
+          {messages.map((message: any) => (
             <div
               key={message.id}
               className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
