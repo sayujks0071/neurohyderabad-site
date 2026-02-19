@@ -29,6 +29,8 @@ const FloatingParticles: React.FC<{ reducedMotion: boolean; opacity: number }> =
       {particles.map((p, i) => {
         const xOffset = Math.sin(frame / 100 * p.speed + i) * 30;
         const yOffset = Math.cos(frame / 120 * p.speed + i) * 30;
+        // Adding scale variation for more organic feel
+        const scale = 1 + Math.sin(frame / 80 * p.speed + i) * 0.1;
 
         return (
           <div
@@ -41,7 +43,7 @@ const FloatingParticles: React.FC<{ reducedMotion: boolean; opacity: number }> =
               height: p.size,
               borderRadius: '50%',
               backgroundColor: p.color,
-              transform: `translate(-50%, -50%) translate(${xOffset}px, ${yOffset}px)`,
+              transform: `translate(-50%, -50%) translate(${xOffset}px, ${yOffset}px) scale(${scale})`,
               filter: 'blur(40px)',
             }}
           />
