@@ -26,7 +26,7 @@ const SERVICE_SLUG = 'endoscopic-spine-surgery-hyderabad';
 export const revalidate = 3600; // Revalidate every hour
 
 const baseMetadata = makeMetadata({
-  title: 'Endoscopic Spine Surgery Hyderabad | Keyhole Spine Specialist',
+  title: 'Endoscopic Spine Surgery Hyderabad | Keyhole Specialist',
   description:
     'Best Endoscopic Spine Surgery in Hyderabad. Dr. Sayuj performs 7mm Keyhole Surgery with Same-Day Discharge. Check Cost & Recovery Time.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
@@ -34,7 +34,7 @@ const baseMetadata = makeMetadata({
 
 export const metadata: Metadata = {
   ...baseMetadata,
-  title: 'Endoscopic Spine Surgery Hyderabad | Keyhole Spine Specialist',
+  title: 'Endoscopic Spine Surgery Hyderabad | Keyhole Specialist',
   description:
     'Best Endoscopic Spine Surgery in Hyderabad. Dr. Sayuj performs 7mm Keyhole Surgery with Same-Day Discharge. Check Cost & Recovery Time.',
   keywords: [

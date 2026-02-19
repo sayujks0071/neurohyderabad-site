@@ -138,6 +138,10 @@ const faqs = [
   {
     question: 'What is the cost of brain tumor surgery in Hyderabad?',
     answer: 'The cost of brain tumor surgery varies significantly based on tumor complexity, ICU stay duration, and technology used (neuronavigation, monitoring). Biopsies may start from ₹1,00,000, while complex craniotomies can range higher. We provide transparent estimates after scan review.'
+  },
+  {
+    question: 'Do you perform Endoscopic Skull Base Surgery?',
+    answer: 'Yes, Dr. Sayuj specializes in Endoscopic Anterior Skull Base Surgery for pituitary adenomas and anterior skull base tumors, offering a scarless trans-nasal approach.'
   }
 ];
 

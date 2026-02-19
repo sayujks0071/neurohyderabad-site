@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { makeMetadata } from '@/app/_lib/meta';
 import SchemaScript from '@/app/_schema/Script';
 import { awakeCraniotomySchemas } from '@/app/_schema/pages/awakeCraniotomy';
@@ -45,7 +46,7 @@ export default function Page() {
         Awake craniotomy is a specialised brain surgery technique where you participate during critical portions of the operation. It is used
         for tumours, cavernomas, arteriovenous malformations, and epilepsy focus resections located near areas controlling speech, movement,
         or sensation. Being responsive allows Dr. Sayuj Krishnan and the neurophysiology team to test function moment-to-moment, ensuring only
-        diseased tissue is removed.
+        diseased tissue is removed. This procedure is a cornerstone of our <Link href="/services/brain-tumor-surgery-hyderabad" className="text-blue-600 hover:underline">Comprehensive Brain Tumor Surgery Program</Link> at Yashoda Hospitals.
       </p>
 
       <h2>When is it recommended?</h2>
