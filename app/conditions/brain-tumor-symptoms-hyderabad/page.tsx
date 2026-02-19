@@ -149,7 +149,7 @@ const references = [
 ] as const;
 
 export const metadata: Metadata = {
-  title: "Brain Tumor Symptoms & Treatment Hyderabad | Diagnosis & Care Options",
+  title: "Brain Tumor Symptoms Hyderabad | Diagnosis & Treatment",
   description:
     "Comprehensive guide to brain tumor symptoms, diagnosis, and care options. Learn about warning signs and expert diagnosis in Hyderabad.",
   alternates: {

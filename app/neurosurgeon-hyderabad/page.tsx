@@ -18,9 +18,9 @@ export const dynamicParams = false;
 export const revalidate = 86400;
 
 export const metadata = {
-  title: "Best Neurosurgeon Hyderabad | Dr Sayuj | Spine & Brain Specialist",
+  title: "Best Neurosurgeon Hyderabad | Dr Sayuj | Spine & Brain",
   description:
-    "Consult Dr. Sayuj, top Neurosurgeon in Hyderabad. Expert in Endoscopic Spine & Brain Tumor Surgery. 1000+ Success Stories. Book at Yashoda Malakpet.",
+    "Dr. Sayuj: Best Neurosurgeon in Hyderabad. Endoscopic Spine & Brain Tumor Expert. Same-Day Discharge. 1,000+ Surgeries at Yashoda Hospital Malakpet.",
   alternates: { canonical: "https://www.drsayuj.info/neurosurgeon-hyderabad" },
   openGraph: {
     title: "Best Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan",
@@ -165,6 +165,8 @@ export default function HyderabadNeurosurgeonPage() {
             <li>Trigeminal neuralgia (MVD), epilepsy surgery pathways</li>
             <li><Link href="/services/brain-tumor-surgery-hyderabad" className="text-blue-600 hover:underline">Advanced Brain Tumor Surgery</Link> (Neuronavigation)</li>
           </ul>
+        </div>
+        </div>
         </div>
       </section>
 
