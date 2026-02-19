@@ -483,7 +483,7 @@ export default function Home() {
               <div className="container mx-auto px-4">
                 <div className="max-w-6xl mx-auto">
                   {/* CLS Optimization: Height aligned with dynamic import loading state */}
-                  <div className="animate-pulse bg-gray-200 h-[1100px] md:h-[600px] rounded-lg"></div>
+                  <div className="animate-pulse bg-gray-200 h-[1500px] md:h-[750px] lg:h-[600px] rounded-lg"></div>
                 </div>
               </div>
             </div>
