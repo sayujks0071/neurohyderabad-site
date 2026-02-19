@@ -61,6 +61,7 @@ export const LocationSchema: React.FC<LocationSchemaProps> = ({
       "longitude": location.geo.longitude
     } : undefined,
     "hasMap": location.google_maps_place_url,
+    "sameAs": location.sameAs,
     // Establish relationship with the main Hospital entity
     "containedInPlace": {
         "@id": `${siteUrl}/#hospital`

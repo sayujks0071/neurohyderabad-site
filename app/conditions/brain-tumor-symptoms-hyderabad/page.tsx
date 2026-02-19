@@ -235,6 +235,7 @@ export default function BrainTumorSymptomsConditionPage() {
             <p className="mt-4 text-gray-700">
               Early diagnosis allows for more treatment options and often leads to better outcomes.
               If you experience persistent or worrying symptoms, a neurological evaluation is recommended.
+              For confirmed diagnoses, our <Link href="/services/brain-tumor-surgery-hyderabad" className="text-blue-600 hover:underline">Brain Tumor Surgery</Link> program offers advanced care including neuronavigation and awake craniotomy.
             </p>
           </div>
           <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
