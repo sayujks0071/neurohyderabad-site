@@ -225,19 +225,24 @@ export default function BookingForm({
                       className="grid grid-cols-2 sm:grid-cols-3 gap-2"
                     >
                       {availableTimes.map((time) => (
-                        <button
+                        <label
                           key={time}
-                          type="button"
-                          onClick={() => field.onChange(time)}
-                          aria-pressed={field.value === time}
-                          className={`w-full text-center px-2 py-2.5 border rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-1 ${
+                          className={`w-full text-center px-2 py-2.5 border rounded-md text-sm font-medium transition-colors cursor-pointer block focus-within:ring-2 focus-within:ring-cyan-500 focus-within:ring-offset-1 ${
                             field.value === time
                               ? "bg-cyan-600 text-white border-cyan-600"
                               : "bg-white text-slate-700 border-slate-300 hover:bg-slate-50"
                           }`}
                         >
+                          <input
+                            type="radio"
+                            name={field.name}
+                            value={time}
+                            checked={field.value === time}
+                            onChange={() => field.onChange(time)}
+                            className="sr-only"
+                          />
                           {time}
-                        </button>
+                        </label>
                       ))}
                     </div>
                     {errors.appointmentTime && (
