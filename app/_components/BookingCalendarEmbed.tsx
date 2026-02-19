@@ -20,9 +20,9 @@ export default function BookingCalendarEmbed({
   }, []);
 
   return (
-    <div className="bg-white border border-slate-200 rounded-2xl shadow-sm p-8 text-center space-y-6">
-      <div className="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto">
-        <Calendar className="w-8 h-8 text-blue-600" />
+    <div className="relative bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 text-center space-y-6">
+      <div className="w-16 h-16 bg-blue-50/50 backdrop-blur-sm border border-blue-100 rounded-full flex items-center justify-center mx-auto">
+        <Calendar className="w-8 h-8 text-blue-600" aria-hidden="true" />
       </div>
 
       <div className="space-y-2">
@@ -39,10 +39,11 @@ export default function BookingCalendarEmbed({
         target="_blank"
         rel="noreferrer"
         onClick={trackOnce}
-        className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-8 rounded-xl shadow-lg shadow-blue-500/30 hover:scale-[1.02] transition-transform duration-200 group"
+        className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-[0.98] group"
+        aria-label="Open secure booking calendar in a new tab"
       >
         <span>Open Booking App</span>
-        <ExternalLink className="w-4 h-4 opacity-90 group-hover:translate-x-0.5 transition-transform" />
+        <ExternalLink className="w-4 h-4 opacity-90 group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />
       </a>
 
       <p className="text-xs text-slate-500">
