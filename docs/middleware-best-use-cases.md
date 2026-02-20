@@ -243,6 +243,20 @@ export const analytics = {
       ...additionalProps
     });
   },
-  // ... other events
+
+  formError: (formName: string, error: string) => {
+    track('Form_Error', {
+      form_name: formName,
+      error_message: error
+    });
+  },
+
+  apiError: (endpoint: string, status: number, message: string) => {
+    track('API_Error', {
+      endpoint: endpoint,
+      status_code: status,
+      error_message: message
+    });
+  }
 };
 ```
