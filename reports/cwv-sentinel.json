@@ -1,31 +1,21 @@
 {
-  "timestamp": "2025-10-29T18:30:00Z",
-  "commit": "HEAD",
-  "analysis": {
-    "measurement_source": "Lighthouse Report (lighthouse-detailed.json) + Static Analysis",
-    "metrics": {
-      "FCP": "1.1s",
-      "LCP": "2.0s",
-      "CLS": "0.00",
-      "TBT": "220ms"
+  "timestamp": "2025-05-23T10:15:00Z",
+  "commit_hash": "current",
+  "page_types": {
+    "Home": {
+      "bottleneck": "CLS risk and TBT due to unnecessary lazy loading of LocalReputationPanel",
+      "fix": "Replaced lazy-loaded LocalReputationPanelWrapper with static LocalReputationPanel in app/page.tsx.",
+      "expected_impact": "Eliminated CLS risk from placeholder height mismatch. Reduced hydration cost (TBT) by removing LazySection wrapper. Improved SEO by including content in initial HTML.",
+      "verification": "Manual code verification confirming the removal of LazySection and direct rendering of LocalReputationPanel. Build failed due to unrelated 'dicom-parser' error, preventing bundle size verification."
     },
-    "observations": {
-      "home": "LCP is good (text hero). Potential CLS risk in lazy-loaded LocalReputationPanel due to inaccurate placeholder height. Unused JS is high but mostly unavoidable third-party scripts which are already deferred.",
-      "location": "Map embed uses 'click-to-load' pattern (excellent).",
-      "appointment": "Hero content is server-rendered (excellent).",
-      "condition": "Uses force-static and next/image with priority (excellent)."
+    "Location": {
+      "notes": "Location pages use client-side map embedding with 'click to load' pattern, which is good for performance."
+    },
+    "Condition": {
+      "notes": "Condition pages are static server components with some dynamic imports (videos). TrustProof component is imported statically but is a client component."
+    },
+    "Appointment": {
+      "notes": "Appointment page lazy loads heavy components (PatientPortal, ChatBot), which is good."
     }
-  },
-  "bottleneck": {
-    "type": "CLS Risk (Layout Stability)",
-    "description": "The placeholder for the lazy-loaded `LocalReputationPanel` on the Home page had a fixed height estimate that underestimated the mobile content height (~1350px vs 1100px) and didn't account for tablet/desktop layout differences, creating a risk of layout shift (CLS) upon scroll-triggered loading."
-  },
-  "fix": {
-    "description": "Refined the `LazySection` placeholder height classes in `app/page.tsx` to better match the rendered content across breakpoints.",
-    "change": "Updated `h-[1100px] md:h-[600px]` to `h-[1500px] md:h-[750px] lg:h-[600px]`.",
-    "impact": "Prevents layout shifts when the reputation panel loads while scrolling, maintaining visual stability."
-  },
-  "verification": {
-    "manual_steps": "1. Open Home page on Mobile (375px width). 2. Scroll down to Reputation Panel placeholder. 3. Observe smooth transition when content loads without footer jumping down."
   }
 }
