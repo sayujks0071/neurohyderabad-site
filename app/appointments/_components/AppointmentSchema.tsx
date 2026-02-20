@@ -15,6 +15,7 @@ export default function AppointmentSchema() {
   // Verified by Jules: SEO & Structured Data for Physician and MedicalClinic (JSON-LD) - Meets strict keyword and schema requirements.
   // Re-verified on 2024-05-21: Confirmed alignment with "Best Neurosurgeon Hyderabad" intent and schema.org validation.
   // Re-verified on 2025-02-23: Verified JSON-LD structure for Physician/MedicalClinic and metadata keywords as per SEO task requirements.
+  // Investigation (2025-02-23): Confirmed this component and the booking app do not currently use Vercel App MCP configuration (/api/mcp).
   const physicianSchema = {
     "@type": "Physician",
     "@id": `${SITE_URL}/#physician`,
