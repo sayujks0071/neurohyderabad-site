@@ -8,12 +8,13 @@ interface BreadcrumbItem {
 
 interface BreadcrumbsProps {
   items: BreadcrumbItem[];
+  disableSchema?: boolean;
 }
 
-export default function Breadcrumbs({ items }: BreadcrumbsProps) {
+export default function Breadcrumbs({ items, disableSchema = false }: BreadcrumbsProps) {
   return (
     <>
-      <BreadcrumbListSchema items={items} />
+      {!disableSchema && <BreadcrumbListSchema items={items} />}
       <nav className="bg-gray-50 py-3" aria-label="Breadcrumb">
         <div className="container mx-auto px-4">
           <ol className="flex items-center space-x-2 text-sm">
