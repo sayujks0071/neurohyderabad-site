@@ -20,6 +20,7 @@ vi.mock('next/server', async (importOriginal) => {
 // Mock dependencies
 vi.mock('@/src/lib/rate-limit', () => ({
   rateLimit: vi.fn().mockReturnValue({ success: true }),
+  getClientIp: vi.fn().mockReturnValue('127.0.0.1'),
 }));
 
 vi.mock('@/lib/google-sheets', () => ({
@@ -157,6 +158,6 @@ describe('Lead API (POST)', () => {
     expect(res.status).toBe(200); // Should still return success to the client
     const body = await res.json();
     expect(body.ok).toBe(true);
-    expect(body.crmError).toBe('DB Connection Failed'); // Optional check
+    expect(body.crmError).toBe('CRM Sync Failed'); // Optional check
   });
 });
