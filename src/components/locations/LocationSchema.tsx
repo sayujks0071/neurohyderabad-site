@@ -47,6 +47,8 @@ export const LocationSchema: React.FC<LocationSchemaProps> = ({
     "telephone": location.telephone,
     "medicalSpecialty": ["Neurosurgery", "Spine Surgery"],
     "priceRange": "₹₹",
+    "paymentAccepted": "Cash, Credit Card, Insurance",
+    "currenciesAccepted": "INR",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": location.address.streetAddress,
