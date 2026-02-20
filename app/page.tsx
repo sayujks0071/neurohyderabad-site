@@ -19,7 +19,7 @@ import Memberships from "./_components/Memberships";
 import { LocationNAPCard } from "@/src/components/locations/LocationNAPCard";
 import { CANONICAL_TELEPHONE } from "@/src/data/locations";
 
-import LocalReputationPanelWrapper from "./_components/wrappers/LocalReputationPanelWrapper";
+import LocalReputationPanel from "./_components/LocalReputationPanel";
 
 const HOME_CANONICAL = SITE_URL.endsWith("/") ? SITE_URL : `${SITE_URL}/`;
 
@@ -475,22 +475,26 @@ export default function Home() {
         </Section>
 
         {/* Disable internal schema as it is already handled by FAQPageSchema above */}
-        <ExpandedFAQ faqs={HOME_FAQS} className="bg-gray-50" disableSchema={true} />
-        {/* Lazy load reputation panel - only loads when user scrolls */}
+        {/* Lazy load FAQ section to improve initial page performance */}
         <LazySection
           placeholder={
-            <div className="py-8 bg-gray-50">
+            <div className="py-16 bg-gray-50">
               <div className="container mx-auto px-4">
-                <div className="max-w-6xl mx-auto">
-                  {/* CLS Optimization: Height aligned with dynamic import loading state */}
-                  <div className="animate-pulse bg-gray-200 h-[1100px] md:h-[600px] rounded-lg"></div>
+                <div className="max-w-5xl mx-auto">
+                  <div className="h-10 w-64 bg-gray-200 rounded mx-auto mb-12 animate-pulse" aria-hidden="true" />
+                  <div className="space-y-4">
+                    {[1, 2, 3, 4, 5].map((i) => (
+                      <div key={i} className="h-20 bg-white/70 rounded-2xl border border-white/20 shadow-sm animate-pulse" aria-hidden="true" />
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
           }
         >
-          <LocalReputationPanelWrapper />
+          <ExpandedFAQ faqs={HOME_FAQS} className="bg-gray-50" disableSchema={true} />
         </LazySection>
+        <LocalReputationPanel />
 
         {/* Contact Section */}
         <Section id="appointment" className="py-16">

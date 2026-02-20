@@ -16,8 +16,8 @@ import { patientStories } from '@/src/content/stories';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
 
 const baseMetadata = makeMetadata({
-  title: "Slip Disc Treatment in Hyderabad | Endoscopic Discectomy | Dr. Sayuj Krishnan",
-  description: "Comprehensive slip disc treatment in Hyderabad: Conservative care, Pain Management, and Minimally Invasive Endoscopic Discectomy. Expert care by Dr. Sayuj Krishnan.",
+  title: "Slip Disc Treatment Hyderabad | Endoscopic Surgery",
+  description: "Expert slip disc treatment in Hyderabad: Conservative care, pain management & same-day endoscopic discectomy. 85-95% success rate. Dr. Sayuj Krishnan.",
   canonicalPath: '/conditions/slip-disc-treatment-hyderabad',
 });
 

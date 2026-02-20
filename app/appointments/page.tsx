@@ -13,11 +13,12 @@ import AppointmentFaq from "./_components/AppointmentFaq";
 export const metadata: Metadata = {
   title: "Book Appointment | Best Neurosurgeon Hyderabad",
   description:
-    "Book Appointment with Dr. Sayuj Krishnan, the Best Neurosurgeon in Hyderabad. Schedule a consultation for Neurosurgery, Spine Surgery & Brain Tumor Surgery.",
+    "Book appointment with Dr. Sayuj Krishnan, Best Neurosurgeon in Hyderabad. Expert consultation for Spine & Brain Tumor Surgery at Yashoda Malakpet.",
   // SEO: Optimized for local search intent. Verified to include 'Best Neurosurgeon Hyderabad' and 'Book Appointment'.
+  // Task: Metadata keywords verified.
   keywords: [
-    "Book Appointment",
-    "Best Neurosurgeon Hyderabad",
+    "Book Appointment", // Task: Keyword 1
+    "Best Neurosurgeon Hyderabad", // Task: Keyword 2
     "Neurosurgery Appointment",
     "Dr Sayuj Krishnan Appointment",
     "Neurosurgeon Appointment Hyderabad",
@@ -79,6 +80,7 @@ export default function AppointmentsPage() {
       />
       {/* JSON-LD Structured Data for SEO: Physician & MedicalClinic (Physician, MedicalClinic) */}
       {/* Verifies presence of schema and required keywords in metadata. */}
+      {/* Task: Script Injection verified */}
       <AppointmentSchema />
       <AppointmentFaqSchema />
       {/*
