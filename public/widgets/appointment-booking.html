@@ -51,6 +51,14 @@
           
           if (result && (result.success || result.id || !result.error)) {
             setStatus("success");
+            setFormData({
+              patientName: toolInput.patientName || "",
+              service: toolInput.service || "",
+              phone: "",
+              appointmentDate: toolInput.preferredDate || "",
+              appointmentTime: "",
+              reason: "",
+            });
             // Optionally send a follow-up message to the assistant
             window.openai.sendFollowUpMessage({ 
                 prompt: `I have successfully filled the booking form for ${formData.patientName} for ${formData.service} on ${formData.appointmentDate} at ${formData.appointmentTime}. The system returned a success response. Please inform the user.` 
