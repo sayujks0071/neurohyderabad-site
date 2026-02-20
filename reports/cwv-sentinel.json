@@ -1,21 +1,31 @@
 {
-  "timestamp": "2026-02-17T06:04:01.000Z",
-  "commit_hash": "HEAD",
-  "changes": [
-    {
-      "file": "app/_components/ClientAnalytics.tsx",
-      "description": "Staggered loading of StatsigAnalytics and FloatingWhatsApp by 2500ms after initial analytics load."
-    }
-  ],
-  "impact": {
-    "rationale": "Breaking up the hydration and execution of multiple third-party scripts (analytics, chat widget) into two phases reduces the main thread blocking time (TBT) during the critical first few seconds of page load. This lowers the risk of INP issues when users attempt to interact early.",
+  "timestamp": "2025-10-29T18:30:00Z",
+  "commit": "HEAD",
+  "analysis": {
+    "measurement_source": "Lighthouse Report (lighthouse-detailed.json) + Static Analysis",
     "metrics": {
-      "note": "Lab data (Lighthouse) shows stable scores. Real-world impact on INP is expected to be positive due to reduced main thread contention."
+      "FCP": "1.1s",
+      "LCP": "2.0s",
+      "CLS": "0.00",
+      "TBT": "220ms"
     },
-    "verification_steps": [
-      "pnpm build",
-      "pnpm lhci --config=lighthouserc-cwv.js",
-      "Observe that ClientAnalytics.tsx logic now includes a 2.5s delay for 'heavy' scripts."
-    ]
+    "observations": {
+      "home": "LCP is good (text hero). Potential CLS risk in lazy-loaded LocalReputationPanel due to inaccurate placeholder height. Unused JS is high but mostly unavoidable third-party scripts which are already deferred.",
+      "location": "Map embed uses 'click-to-load' pattern (excellent).",
+      "appointment": "Hero content is server-rendered (excellent).",
+      "condition": "Uses force-static and next/image with priority (excellent)."
+    }
+  },
+  "bottleneck": {
+    "type": "CLS Risk (Layout Stability)",
+    "description": "The placeholder for the lazy-loaded `LocalReputationPanel` on the Home page had a fixed height estimate that underestimated the mobile content height (~1350px vs 1100px) and didn't account for tablet/desktop layout differences, creating a risk of layout shift (CLS) upon scroll-triggered loading."
+  },
+  "fix": {
+    "description": "Refined the `LazySection` placeholder height classes in `app/page.tsx` to better match the rendered content across breakpoints.",
+    "change": "Updated `h-[1100px] md:h-[600px]` to `h-[1500px] md:h-[750px] lg:h-[600px]`.",
+    "impact": "Prevents layout shifts when the reputation panel loads while scrolling, maintaining visual stability."
+  },
+  "verification": {
+    "manual_steps": "1. Open Home page on Mobile (375px width). 2. Scroll down to Reputation Panel placeholder. 3. Observe smooth transition when content loads without footer jumping down."
   }
 }
