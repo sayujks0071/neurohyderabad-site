@@ -329,10 +329,19 @@ export const patients = {
     return db.queryOne('SELECT * FROM patients WHERE email = $1', [email]);
   },
 
-  updateLeadScore: async (id: string, score: number, status?: string) => {
-    const data: Record<string, unknown> = { lead_score: score };
+  updateLeadScore: async (id: string, score?: number, status?: string) => {
+    const data: Record<string, unknown> = {};
+    if (score !== undefined) data.lead_score = score;
     if (status) data.lead_status = status;
+    if (Object.keys(data).length === 0) return null;
     return db.update('patients', id, data);
+  },
+
+  getRecent: async (limit = 50) => {
+    return db.queryRows(
+      'SELECT * FROM patients ORDER BY last_contact_date DESC LIMIT $1',
+      [limit]
+    );
   },
 };
 

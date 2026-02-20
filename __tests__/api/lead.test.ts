@@ -147,7 +147,7 @@ describe('Lead API (POST)', () => {
       email: 'error@example.com',
     };
 
-    upsertMock.mockRejectedValue(new Error('DB Connection Failed'));
+    upsertMock.mockRejectedValue(new Error('CRM Sync Failed'));
 
     const req = new NextRequest('http://localhost/api/lead', {
       method: 'POST',
