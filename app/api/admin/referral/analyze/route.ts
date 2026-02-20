@@ -1,34 +1,26 @@
 import { NextResponse } from "next/server";
 import { rateLimit } from "@/src/lib/rate-limit";
+import { verifyAdminAccess } from "@/src/lib/security";
 import { extractPdfTextInSandbox } from "@/lib/pdf/extract-sandbox";
-import { interpretReportText } from "@/lib/interpretReport";
 import { validatePdf } from "@/lib/pdf/validation";
+import { analyzeReferralText } from "@/lib/referral/analyze";
 
-export const runtime = "nodejs"; // Sandbox SDK requires nodejs runtime
+export const runtime = "nodejs";
 export const maxDuration = 60; // 60 seconds
 
 export async function POST(request: Request) {
-  // Feature Flag Check
-  if (process.env.MRI_ANALYZER_ENABLED !== '1') {
-    return NextResponse.json({ error: "Feature disabled" }, { status: 404 });
-  }
+  // 1. Admin Verification
+  const { isAuthorized, response } = await verifyAdminAccess(request);
+  if (!isAuthorized) return response!;
 
-  // Rate Limiting: 3 requests per 10 minutes per IP
+  // 2. Rate Limiting (Generous for admin)
   const ip = request.headers.get("x-forwarded-for")?.split(',')[0] || "127.0.0.1";
-  const limit = rateLimit(ip, 3, 10 * 60 * 1000);
+  const limit = rateLimit(ip, 10, 60 * 1000); // 10 requests per minute
 
   if (!limit.success) {
     return NextResponse.json(
-      { error: "Too many requests. Please try again later." },
-      {
-        status: 429,
-        headers: {
-          "Retry-After": String(Math.ceil((limit.reset - Date.now()) / 1000)),
-          "X-RateLimit-Limit": String(limit.limit),
-          "X-RateLimit-Remaining": String(limit.remaining),
-          "X-RateLimit-Reset": String(limit.reset)
-        }
-      }
+      { error: "Too many requests" },
+      { status: 429 }
     );
   }
 
@@ -40,6 +32,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "No file uploaded" }, { status: 400 });
     }
 
+    // 3. Validate PDF
     const validation = await validatePdf(file);
     if (!validation.isValid) {
       return NextResponse.json({ error: validation.error }, { status: validation.status || 400 });
@@ -47,11 +40,11 @@ export async function POST(request: Request) {
 
     const buffer = Buffer.from(await file.arrayBuffer());
 
-    // Extract text in sandbox
+    // 4. Extract Text (Sandbox)
     const extraction = await extractPdfTextInSandbox(buffer);
 
-    // Interpret text
-    const analysis = await interpretReportText(extraction.text);
+    // 5. Analyze Text (AI)
+    const analysis = await analyzeReferralText(extraction.text);
 
     return NextResponse.json({
       extraction: {
@@ -59,14 +52,11 @@ export async function POST(request: Request) {
         extractedChars: extraction.text.length,
         truncated: extraction.truncated
       },
-      analysis
+      referral: analysis
     });
 
   } catch (error: any) {
-    console.error("[MRI Analyzer] Error:", error);
-    const message = error.message || "An unexpected error occurred.";
-
-    // Don't leak internal details if possible, but for debugging V1 we return message
-    return NextResponse.json({ error: message }, { status: 500 });
+    console.error("[Referral Analyzer] Error:", error);
+    return NextResponse.json({ error: error.message || "Internal Server Error" }, { status: 500 });
   }
 }
