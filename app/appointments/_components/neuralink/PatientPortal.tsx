@@ -764,6 +764,7 @@ const PatientPortal = () => {
                           : "accent-red-600 focus:ring-red-500"
                       }`}
                       aria-valuetext={`Score: ${formData.painScore}${formData.painScore >= 8 ? ' (Severe)' : formData.painScore <= 3 ? ' (Mild)' : ''}`}
+                      title={`Pain Score: ${formData.painScore}`}
                     />
                     <span className="text-sm font-bold text-slate-400" aria-hidden="true">10</span>
                   </div>

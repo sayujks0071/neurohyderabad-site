@@ -114,6 +114,10 @@ describe('PatientPortal', () => {
     // Pain score
     fireEvent.change(screen.getByLabelText(/Current Pain Score/i), { target: { value: '8' } });
 
+    // MRI Scan Available
+    const mriCheckbox = screen.getByLabelText(/I have recent MRI\/CT Scan reports/i);
+    fireEvent.click(mriCheckbox);
+
     // Submit
     const submitBtn = screen.getByText('Confirm Booking');
     fireEvent.click(submitBtn);
@@ -135,7 +139,16 @@ describe('PatientPortal', () => {
 
     // Verify API calls
     expect(neuralinkApi.analyzeSymptoms).toHaveBeenCalledWith('Severe headache', 30, 'male');
-    expect(fetchMock).toHaveBeenCalledWith('/api/workflows/booking', expect.anything());
+
+    // Verify payload includes painScore and mriScanAvailable
+    expect(fetchMock).toHaveBeenCalledWith('/api/workflows/booking', expect.objectContaining({
+      method: 'POST',
+      body: expect.stringContaining('"painScore":8'),
+    }));
+    expect(fetchMock).toHaveBeenCalledWith('/api/workflows/booking', expect.objectContaining({
+      method: 'POST',
+      body: expect.stringContaining('"mriScanAvailable":true'),
+    }));
 
     // --- VERIFY RESET ---
     // Find "Book another appointment" button
