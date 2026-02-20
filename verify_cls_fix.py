@@ -1,34 +1,33 @@
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import sync_playwright, expect
 
-def verify_cls_fix():
+def run():
     with sync_playwright() as p:
-        browser = p.chromium.launch()
+        browser = p.chromium.launch(headless=True)
         page = browser.new_page()
-        page.goto("http://localhost:3000/")
+        try:
+            # Wait for server to be ready (naive wait)
+            page.wait_for_timeout(5000)
 
-        # Locate the placeholder element by its distinct class
-        placeholder = page.locator(".animate-pulse.bg-gray-200")
+            page.goto("http://localhost:3000/")
 
-        # Verify it exists
-        if placeholder.count() > 0:
-            print("Placeholder found.")
+            # Verify LocalReputationPanel is present
+            # Look for "Trusted by Patients Across Hyderabad"
+            header = page.get_by_role("heading", name="Trusted by Patients Across Hyderabad")
+            expect(header).to_be_visible(timeout=30000)
 
-            # Get the class attribute
-            classes = placeholder.get_attribute("class")
-            print(f"Classes: {classes}")
-
-            # Verify new classes are present
-            if "h-[1500px]" in classes and "md:h-[750px]" in classes and "lg:h-[600px]" in classes:
-                print("SUCCESS: New height classes found.")
-            else:
-                print("FAILURE: New height classes NOT found.")
+            # Verify Testimonials are present
+            testimonial = page.get_by_text("Dr. Sayuj performed my endoscopic spine surgery")
+            expect(testimonial).to_be_visible()
 
             # Take screenshot
-            page.screenshot(path="verification_cls_fix.png")
-        else:
-            print("FAILURE: Placeholder not found (maybe already loaded?).")
+            page.screenshot(path="verification_screenshot.png", full_page=True)
+            print("Verification successful!")
 
-        browser.close()
+        except Exception as e:
+            print(f"Verification failed: {e}")
+            page.screenshot(path="verification_failure.png")
+        finally:
+            browser.close()
 
 if __name__ == "__main__":
-    verify_cls_fix()
+    run()
