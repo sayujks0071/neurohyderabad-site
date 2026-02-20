@@ -18,8 +18,8 @@ export default function AppointmentSchema() {
   // Investigation (2025-02-23): Confirmed this component and the booking app do not currently use Vercel App MCP configuration (/api/mcp).
   const physicianSchema = {
     "@type": "Physician",
-    "@id": `${SITE_URL}/#physician`,
-    "name": "Dr. Sayuj Krishnan", // Task: Physician Name
+    "@id": `${SITE_URL}/appointments#physician`,
+    "name": "Dr. Sayuj Krishnan",
     // SEO: Medical Specialty as 'Neurosurgeon'
     "medicalSpecialty": "Neurosurgeon", // Task: Medical Specialty
     // SEO: Clinic Location (Yashoda Hospitals, Malakpet, Hyderabad)
@@ -86,7 +86,7 @@ export default function AppointmentSchema() {
       "@id": `${SITE_URL}/#hospital`
     },
     "department": {
-      "@id": `${SITE_URL}/#physician`
+      "@id": `${SITE_URL}/appointments#physician`
     }
   };
 
