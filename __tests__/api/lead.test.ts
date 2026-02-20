@@ -146,7 +146,7 @@ describe('Lead API (POST)', () => {
       email: 'error@example.com',
     };
 
-    upsertMock.mockRejectedValue(new Error('DB Connection Failed'));
+    upsertMock.mockRejectedValue(new Error('CRM Sync Failed'));
 
     const req = new NextRequest('http://localhost/api/lead', {
       method: 'POST',
@@ -157,6 +157,6 @@ describe('Lead API (POST)', () => {
     expect(res.status).toBe(200); // Should still return success to the client
     const body = await res.json();
     expect(body.ok).toBe(true);
-    expect(body.crmError).toBe('DB Connection Failed'); // Optional check
+    expect(body.crmError).toBe('CRM Sync Failed'); // Optional check
   });
 });
