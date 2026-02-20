@@ -82,16 +82,19 @@ export async function runDailySEOOptimization(): Promise<SEOResult> {
       improvements.push("All internal links are valid");
     }
 
-    // Phase 2: Sequential tasks that depend on Phase 1
-    // Request indexing for pages (after sitemap is submitted)
-    const indexingResult = await requestIndexingForNewPages();
+    // Phase 2: Parallel tasks that depend on Phase 1
+    const [indexingResult, freshnessResult] = await Promise.all([
+      requestIndexingForNewPages(),
+      updateContentFreshness(),
+    ]);
+
+    // Process indexing result
     tasksCompleted += indexingResult.indexed;
     if (indexingResult.indexed > 0) {
       improvements.push(`Requested indexing for ${indexingResult.indexed} pages`);
     }
 
-    // Update content freshness
-    const freshnessResult = await updateContentFreshness();
+    // Process freshness result
     tasksCompleted += freshnessResult.updated;
     if (freshnessResult.updated > 0) {
       improvements.push(`Updated freshness signals for ${freshnessResult.updated} pages`);
@@ -126,17 +129,27 @@ async function submitSitemapToGoogle(): Promise<{ success: boolean; error?: stri
   "use step";
 
   const metadata = getStepMetadata();
-  console.log(`[SEO Workflow] Submitting sitemap to Google (attempt ${metadata.attempt + 1})`);
+  const stepInfo = {
+    workflow: "seo-optimization",
+    step: "submitSitemapToGoogle",
+    attempt: metadata.attempt + 1,
+  };
+
+  console.log(JSON.stringify({ ...stepInfo, status: "starting" }));
+
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
 
   try {
     // Ping Google with sitemap URL
     const sitemapUrl = `${SITE_URL}/sitemap.xml`;
     const pingUrl = `https://www.google.com/ping?sitemap=${encodeURIComponent(sitemapUrl)}`;
 
-    const response = await fetch(pingUrl);
+    const response = await fetch(pingUrl, { signal: controller.signal });
+    clearTimeout(timeoutId);
 
     if (response.ok) {
-      console.log("[SEO Workflow] Sitemap ping successful");
+      console.log(JSON.stringify({ ...stepInfo, status: "success" }));
       return { success: true };
     }
 
@@ -156,16 +169,24 @@ async function submitSitemapToGoogle(): Promise<{ success: boolean; error?: stri
 
     // Client errors - don't retry
     if (response.status >= 400) {
-      throw new FatalError(`Sitemap ping failed: HTTP ${response.status}`);
+      const errorMsg = `Sitemap ping failed: HTTP ${response.status}`;
+      console.error(JSON.stringify({ ...stepInfo, status: "failed", error: errorMsg }));
+      throw new FatalError(errorMsg);
     }
 
     return { success: false, error: `HTTP ${response.status}` };
   } catch (error) {
+    clearTimeout(timeoutId);
+
     if (error instanceof FatalError || error instanceof RetryableError) {
       throw error;
     }
+
+    const errorMsg = String(error);
+    console.error(JSON.stringify({ ...stepInfo, status: "error", error: errorMsg }));
+
     // Network errors - retry with backoff
-    throw new RetryableError(`Network error: ${error}`, {
+    throw new RetryableError(`Network error: ${errorMsg}`, {
       retryAfter: (metadata.attempt + 1) * 5000,
     });
   }
