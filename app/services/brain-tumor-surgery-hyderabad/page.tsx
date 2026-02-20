@@ -21,6 +21,7 @@ import MedicalWebPageSchema from '../../components/schemas/MedicalWebPageSchema'
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
 import PatientEducationVideosSkeleton from '@/app/_components/skeletons/PatientEducationVideosSkeleton';
 import BrainSurgeryComparisonTable from '@/src/components/BrainSurgeryComparisonTable';
+import ProcedureHighlights from '@/src/components/ProcedureHighlights';
 
 const PatientEducationVideos = dynamic(() => import('@/app/_components/PatientEducationVideos'), {
   loading: () => <PatientEducationVideosSkeleton />
@@ -278,6 +279,15 @@ export default function BrainTumorSurgeryHyderabadPage() {
             </ul>
           </div>
         </header>
+
+        <ProcedureHighlights
+          duration="3-6 Hours"
+          anesthesia="General / Awake"
+          stay="3-5 Days"
+          recovery="2-3 Weeks"
+          incision="Minimally Invasive"
+          className="mb-16"
+        />
 
         {/* Red Flag Symptoms Section - Added for SEO & User Intent */}
         <section className="mb-16 bg-red-50 border border-red-100 rounded-2xl p-8">

@@ -54,6 +54,12 @@ export default function BreadcrumbSchema({ items: customItems }: BreadcrumbSchem
     return null;
   }
 
+  // Exclude routes that provide their own server-side breadcrumb schema to avoid duplication
+  const EXCLUDED_PREFIXES = ['/locations', '/services', '/conditions'];
+  if (EXCLUDED_PREFIXES.some(prefix => pathname.startsWith(prefix))) {
+    return null;
+  }
+
   const pathSegments = pathname.split('/').filter(Boolean);
 
   const items = [

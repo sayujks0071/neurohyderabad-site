@@ -19,6 +19,7 @@ import SurgeryComparisonTable from '@/src/components/SurgeryComparisonTable';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
 import EndoscopicProcedureSteps from '@/src/components/EndoscopicProcedureSteps';
+import ProcedureHighlights from '@/src/components/ProcedureHighlights';
 
 const SERVICE_SLUG = 'endoscopic-spine-surgery-hyderabad';
 
@@ -26,7 +27,7 @@ const SERVICE_SLUG = 'endoscopic-spine-surgery-hyderabad';
 export const revalidate = 3600; // Revalidate every hour
 
 const baseMetadata = makeMetadata({
-  title: 'Endoscopic Spine Surgery Hyderabad | Keyhole Specialist',
+  title: 'Endoscopic Spine Surgery Hyderabad | Same Day Discharge',
   description:
     'Best Endoscopic Spine Surgery in Hyderabad. Dr. Sayuj performs 7mm Keyhole Surgery with Same-Day Discharge. Check Cost & Recovery Time.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
@@ -34,7 +35,7 @@ const baseMetadata = makeMetadata({
 
 export const metadata: Metadata = {
   ...baseMetadata,
-  title: 'Endoscopic Spine Surgery Hyderabad | Keyhole Specialist',
+  title: 'Endoscopic Spine Surgery Hyderabad | Same Day Discharge',
   description:
     'Best Endoscopic Spine Surgery in Hyderabad. Dr. Sayuj performs 7mm Keyhole Surgery with Same-Day Discharge. Check Cost & Recovery Time.',
   keywords: [
@@ -381,6 +382,15 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
             </ul>
           </div>
         </header>
+
+        <ProcedureHighlights
+          duration="45-60 Mins"
+          anesthesia="Local + Sedation"
+          stay="6-8 Hours"
+          recovery="3-5 Days"
+          incision="7-8 mm (Keyhole)"
+          className="mb-12"
+        />
 
         <section className="mb-12 bg-green-50 border border-green-200 rounded-2xl p-6 shadow-sm">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
