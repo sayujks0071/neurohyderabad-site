@@ -128,7 +128,8 @@ export async function POST(request: NextRequest) {
       // Log CRM errors but don't fail the request
       // This ensures lead submission still works even if CRM is down
       console.error('[CRM] Failed to save to CRM database:', crmError);
-      crmErrorDetail = crmError instanceof Error ? crmError.message : String(crmError);
+      // 🛡️ Sentinel: Do NOT leak internal database errors to the client
+      crmErrorDetail = "CRM Sync Failed";
     }
 
     // Submit to Google Sheets (if configured)
