@@ -93,13 +93,13 @@ export default function ServicesPage() {
     {
       title: 'Microvascular Decompression (MVD)',
       description: 'Microsurgical relief for trigeminal neuralgia and hemifacial spasm while preserving nerve function.',
-      href: '/services/microvascular-decompression-hyderabad',
+      href: '/conditions/trigeminal-neuralgia-treatment-hyderabad',
       features: ['Retrosigmoid keyhole', 'Neuromonitoring', 'Teflon interposition', 'Facial pain relief']
     },
     {
       title: 'Gamma Knife Radiosurgery',
       description: 'Stereotactic radiosurgery for brain tumours and trigeminal neuralgia with sub-millimetre precision.',
-      href: '/services/gamma-knife-radiosurgery-hyderabad',
+      href: '/services/brain-tumor-surgery-hyderabad',
       features: ['Non-incisional', 'High-dose precision', 'Outpatient workflow', 'Rapid recovery']
     },
     {
