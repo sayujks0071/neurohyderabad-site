@@ -2,13 +2,13 @@ import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 import { isAIGatewayConfigured, getGatewayModel, getGatewayBaseUrl } from '@/src/lib/ai/gateway';
-import { rateLimit } from '@/src/lib/rate-limit';
+import { rateLimit, getClientIp } from '@/src/lib/rate-limit';
 import { sanitizeForPrompt } from '@/src/lib/validation';
 import { DR_SAYUJ_SYSTEM_PROMPT } from '@/src/lib/ai/prompts';
 
 export async function POST(req: NextRequest) {
   // 🛡️ Sentinel: Rate limiting - 10 requests per minute per IP to prevent cost exhaustion
-  const ip = (req as any).ip ?? req.headers.get("x-forwarded-for") ?? "unknown";
+  const ip = getClientIp(req);
   const limit = rateLimit(ip, 10, 60 * 1000);
 
   if (!limit.success) {
