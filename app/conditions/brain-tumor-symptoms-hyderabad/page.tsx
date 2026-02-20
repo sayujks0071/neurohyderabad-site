@@ -149,9 +149,9 @@ const references = [
 ] as const;
 
 export const metadata: Metadata = {
-  title: "Brain Tumor Symptoms & Treatment Hyderabad | Diagnosis & Care Options",
+  title: "Brain Tumor Symptoms Hyderabad | Diagnosis & Treatment",
   description:
-    "Comprehensive guide to brain tumor symptoms, diagnosis, and care options. Learn about warning signs and expert diagnosis in Hyderabad.",
+    "Learn warning signs of brain tumors (headaches, seizures). Expert diagnosis & advanced treatment options with Dr. Sayuj in Hyderabad.",
   alternates: {
     canonical: CANONICAL,
     languages: {
@@ -218,6 +218,42 @@ export default function BrainTumorSymptomsConditionPage() {
             >
               WhatsApp CT / MRI
             </a>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-5xl px-4 py-12 border-t border-gray-100">
+        <div className="grid md:grid-cols-2 gap-10 items-center">
+          <div>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+              Recovery &amp; Life After Diagnosis
+            </h2>
+            <p className="text-gray-700 mb-4">
+              Recovery timelines vary by tumor type (benign vs. malignant) and location. Most patients spend <strong>1-2 days in the ICU</strong> for close monitoring before moving to the ward.
+            </p>
+            <p className="text-gray-700 mb-6">
+              Rehabilitation for speech, balance, or motor skills begins early. Our team provides a structured roadmap to help you return to daily life safely.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Link href="/blog/brain-tumor-surgery-recovery-timeline-hyderabad" className="inline-flex items-center justify-center px-5 py-2.5 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 shadow-sm">
+                View Recovery Timeline
+              </Link>
+              <Link href="/services/brain-tumor-surgery-hyderabad" className="inline-flex items-center justify-center px-5 py-2.5 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 shadow-sm">
+                Explore Surgical Options
+              </Link>
+            </div>
+          </div>
+          <div className="bg-blue-50 p-6 rounded-xl border border-blue-100">
+             <h3 className="font-semibold text-blue-900 mb-2">Second Opinion Service</h3>
+             <p className="text-sm text-blue-800 mb-4">
+               Unsure about a diagnosis or surgical plan suggested elsewhere? We offer comprehensive second opinions for complex brain tumors.
+             </p>
+             <p className="text-sm text-gray-600 mb-4">
+               Bring your MRI scans and biopsy reports for an unbiased review of surgical and non-surgical options.
+             </p>
+             <Link href="/appointments" className="text-blue-700 font-semibold hover:underline text-sm">
+               Schedule a Second Opinion →
+             </Link>
           </div>
         </div>
       </section>
