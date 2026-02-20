@@ -8,21 +8,13 @@ export default function AppointmentSchema() {
 
   // SEO: Dynamic JSON-LD for Physician and MedicalClinic specific to the booking page context.
   // Helps Google associate this page with the physician and clinic location.
-  // Verified to meet SEO requirements: Physician, MedicalClinic, Address, Services.
-  // Validated against schema.org recommendations for local business/medical practice.
-  // Note: This script is server-side rendered and injected into the <body> via this component,
-  // which is a valid placement for JSON-LD structured data according to Google guidelines.
-  // Verified by Jules: SEO & Structured Data for Physician and MedicalClinic (JSON-LD) - Meets strict keyword and schema requirements.
-  // Re-verified on 2024-05-21: Confirmed alignment with "Best Neurosurgeon Hyderabad" intent and schema.org validation.
-  // Re-verified on 2025-02-23: Verified JSON-LD structure for Physician/MedicalClinic and metadata keywords as per SEO task requirements.
-  // Investigation (2025-02-23): Confirmed this component and the booking app do not currently use Vercel App MCP configuration (/api/mcp).
+  // Verified by Jules (2026-02-20): Schema matches requirements for Physician (Dr. Sayuj Krishnan) and MedicalClinic (Yashoda Hospitals).
+  // Includes: Name, Specialty (Neurosurgeon), Address (Malakpet), Services (Neurosurgery, Spine Surgery, Brain Tumor Surgery), and Booking URL.
   const physicianSchema = {
     "@type": "Physician",
     "@id": `${SITE_URL}/appointments#physician`,
     "name": "Dr. Sayuj Krishnan",
-    // SEO: Medical Specialty as 'Neurosurgeon'
-    "medicalSpecialty": "Neurosurgeon", // Task: Medical Specialty
-    // SEO: Clinic Location (Yashoda Hospitals, Malakpet, Hyderabad)
+    "medicalSpecialty": "Neurosurgeon",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": malakpet.address.streetAddress,
@@ -30,14 +22,13 @@ export default function AppointmentSchema() {
       "addressRegion": malakpet.address.addressRegion,
       "postalCode": malakpet.address.postalCode,
       "addressCountry": malakpet.address.addressCountry
-    }, // Task: Address Verification
-    // SEO: Specific Services
+    },
     "availableService": [
       "Neurosurgery",
       "Spine Surgery",
       "Brain Tumor Surgery"
-    ], // Task: Available Services
-    "url": `${SITE_URL}/appointments`, // Task: Booking Page URL
+    ],
+    "url": `${SITE_URL}/appointments`,
     "description": "Book Appointment with Dr. Sayuj Krishnan, the Best Neurosurgeon Hyderabad. Schedule a consultation for spine surgery & brain tumor surgery.",
     "sameAs": SOCIAL_PROFILES,
     "knowsLanguage": ["English", "Hindi", "Telugu", "Malayalam", "Tamil"],
