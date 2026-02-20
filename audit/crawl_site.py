@@ -186,7 +186,7 @@ def run_audit():
     print(f"Starting crawl of {len(local_urls)} pages...")
 
     count = 0
-    max_pages = 20
+    max_pages = 500
 
     for url in local_urls:
         if count >= max_pages: break

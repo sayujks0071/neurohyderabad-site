@@ -39,8 +39,26 @@ export default function BreadcrumbSchema({ items: customItems }: BreadcrumbSchem
   }
 
   // Auto-generation logic
-  // Don't render on home page if no custom items (Home usually doesn't need breadcrumb schema self-ref unless part of site structure)
-  if (pathname === '/') return null;
+
+  // Don't render on home page if no custom items
+  if (!pathname || pathname === '/') return null;
+
+  // Exclude pages that manage their own breadcrumbs (via LocationSchema or MedicalWebPageSchema)
+  // to avoid duplicate BreadcrumbList entities.
+  if (
+    pathname.startsWith('/locations/') ||
+    pathname.startsWith('/services/') ||
+    pathname.startsWith('/conditions/') ||
+    pathname.startsWith('/neurosurgeon-')
+  ) {
+    return null;
+  }
+
+  // Exclude routes that provide their own server-side breadcrumb schema to avoid duplication
+  const EXCLUDED_PREFIXES = ['/locations', '/services', '/conditions'];
+  if (EXCLUDED_PREFIXES.some(prefix => pathname.startsWith(prefix))) {
+    return null;
+  }
 
   const pathSegments = pathname.split('/').filter(Boolean);
 

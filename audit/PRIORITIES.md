@@ -1,27 +1,38 @@
-# SEO Audit Priorities & Fix Backlog
+# Prioritized SEO Fixes
 
-| ID | Issue | Affected URLs | Impact (1-5) | Effort (1-5) | Risk | Status |
-|---|---|---|---|---|---|---|
-| **P1** | **Critical LCP (16s)** | Global (Homepage, Service Pages) | 5 (High) | 3 (Med) | Low | **Investigating** |
-| **P2** | **Missing Metadata & H1** | `/brain-tumor-surgery` | 5 (High) | 1 (Low) | Low | **Resolved** (Redirects) |
-| **P3** | **Schema Gaps (MedicalClinic)** | Location Pages (`/locations/*`) | 4 (High) | 2 (Low) | Low | **Resolved** |
-| **P4** | **Canonical Mismatches** | Blog Pages (Trailing Slash) | 4 (High) | 1 (Low) | Low | **Resolved** |
-| **P5** | **Title Too Long** | Global | 3 (Med) | 1 (Low) | Low | **In Progress** |
-| P6 | Thin Content | `/drafts`, `/knowledge-base` | 2 (Low) | 2 (Low) | Low | Backlog |
+**Date:** 2025-02-18
+**Based on:** Full Site Crawl, Lighthouse Audit, Competitor Benchmark
 
-## Status Updates (2026-02-16)
+## 🚨 Critical Issues (Do Now)
 
-### Resolved: Canonical Mismatches & Title Optimization
-- **Fix:** Removed trailing slashes from `canonicalUrl` in `src/lib/blog-seo.ts` and `app/_components/BlogLayout.tsx` to align with `next.config.mjs` (`trailingSlash: false`).
-- **Fix:** Shortened blog title suffix from ` | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad` to ` | Dr. Sayuj Krishnan` to prevent SERP truncation and improve CTR.
+| Issue | Impact (1-5) | Effort (1-5) | Risk | Action Plan |
+|---|---|---|---|---|
+| **LCP & TBT High** (LCP: ~3.1s, TBT: ~522ms) | 5 | 3 | Med | Optimize fonts (preload critical), lazy load non-critical resources, review `next/script` usage. |
+| **Title Tags Too Long** (>60 chars) | 4 | 1 | Low | Truncate and optimize titles for 28 pages. Inject "Same Day Discharge" where possible. |
+| **Competitor Content Gap** (Lack of Procedure Details) | 4 | 2 | Low | Add "Procedure at a Glance" table (Duration, Anesthesia, Recovery) to service pages. |
+| **Schema Duplication** | 3 | 2 | Low | De-duplicate `Physician` and `Breadcrumb` schema injections in `layout.tsx` vs individual pages. |
 
-### Resolved: Schema Gaps
-- Validated `MedicalClinic`, `Physician`, and `BreadcrumbList` schemas are present and valid on key pages.
+## ⚠️ High Priority (Do Next)
 
-### Resolved: Multiple H1 False Positives
-- Updated audit script to correctly count H1 tags, confirming only single H1s exist on key pages like Homepage and Appointments.
+| Issue | Impact | Effort | Risk | Notes |
+|---|---|---|---|---|
+| **Keyword Gap: "Full Endoscopic"** | 4 | 2 | Low | Update content to include "Full Endoscopic" and "Uniportal" terminology. |
+| **Accessibility (Color Contrast)** | 3 | 2 | Low | Fix color contrast issues flagged by Lighthouse (likely blue text on light blue bg). |
+| **Unused JavaScript** | 4 | 4 | Med | Analyze bundle analyzer report and tree-shake unused dependencies. |
 
-### Next Steps (P1 LCP)
-- The LCP issue needs deeper profiling. Hero images already use `priority`.
-- Potential causes: Blocking JS (Middleware/Analytics) or server response time (TTFB).
-- **Action:** Monitor TTFB in Vercel Analytics after deployment.
+## ℹ️ Maintenance (Backlog)
+
+- Monitor 404s (None found in this crawl).
+- Expand blog content for "recovery" keywords.
+- Create more video testimonials.
+
+## Selected Top 3 Fixes for Implementation
+
+1.  **Metadata & Content Polish**:
+    - Fix "Title Too Long" for 28 pages.
+    - Add "Procedure Highlights" table to `endoscopic-spine-surgery-hyderabad` and `brain-tumor-surgery-hyderabad`.
+2.  **Performance Quick Wins**:
+    - Ensure fonts are preloaded/swapped correctly.
+    - Defer non-critical scripts (chat widget, analytics) further.
+3.  **Schema Deduplication**:
+    - Clean up schema injection logic to prevent duplicate JSON-LD blocks.

@@ -135,6 +135,7 @@ export default function UniportalPage() {
             { name: 'Services', href: '/services/' },
             { name: 'Uniportal Endoscopic Surgery', href: `/services/${SERVICE_SLUG}/` },
           ]}
+          disableSchema={true}
         />
 
         <header className="grid md:grid-cols-2 gap-10 items-start mb-16">

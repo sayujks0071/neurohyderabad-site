@@ -37,12 +37,21 @@ export default function DynamicFloatingChatWidget() {
   const openClawUrl = process.env.NEXT_PUBLIC_OPENCLAW_URL;
 
   useEffect(() => {
-    // Defer loading until idle (4s) to reduce Total Blocking Time (TBT)
-    const timer = setTimeout(() => {
-      setShouldLoad(true);
-    }, 4000);
+    // ⚡ Bolt: Use requestIdleCallback to load heavy widget only when main thread is free
+    // This reduces Total Blocking Time (TBT) by avoiding execution during busy hydration
+    if ('requestIdleCallback' in window) {
+      const handle = (window as any).requestIdleCallback(() => {
+        setShouldLoad(true);
+      }, { timeout: 5000 }); // Ensure it loads within 5s even if busy
 
-    return () => clearTimeout(timer);
+      return () => (window as any).cancelIdleCallback(handle);
+    } else {
+      // Fallback for Safari < 16.4
+      const timer = setTimeout(() => {
+        setShouldLoad(true);
+      }, 4000);
+      return () => clearTimeout(timer);
+    }
   }, []);
 
   const handleInteraction = () => {

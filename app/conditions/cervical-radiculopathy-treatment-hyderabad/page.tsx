@@ -9,6 +9,7 @@ import ReviewedBy from '@/app/_components/ReviewedBy';
 import { SITE_URL } from "@/src/lib/seo";
 import { sources } from '../../blog/sources';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
+import CostTransparencySection from '@/src/components/CostTransparencySection';
 
 // Static generation with 24-hour revalidation
 export const revalidate = 86400;
@@ -20,9 +21,9 @@ const schemaData = [
   {
     "@context": "https://schema.org",
     "@type": "MedicalWebPage",
-    name: "Cervical Radiculopathy Treatment in Hyderabad",
+    name: "Cervical Spondylosis & Radiculopathy Treatment Hyderabad",
     description:
-      "Expert treatment for cervical radiculopathy (pinched nerve) in Hyderabad. Endoscopic keyhole surgery for arm pain, numbness, and neck pain by Dr. Sayuj Krishnan.",
+      "Expert treatment for cervical spondylosis and pinched nerves (radiculopathy) in Hyderabad. Endoscopic keyhole surgery for arm pain, numbness, and neck pain by Dr. Sayuj Krishnan.",
     url: CANONICAL,
     inLanguage: "en-IN",
     isPartOf: {
@@ -33,7 +34,7 @@ const schemaData = [
     about: {
       "@type": "MedicalCondition",
       name: "Cervical Radiculopathy",
-      alternateName: ["Pinched Nerve in Neck", "Cervical Nerve Root Compression"],
+      alternateName: ["Cervical Spondylosis", "Neck Arthritis", "Pinched Nerve in Neck", "Cervical Nerve Root Compression"],
       medicalSpecialty: "Neurosurgery",
       signOrSymptom: [
         "Shooting pain down the arm",
@@ -99,7 +100,7 @@ const schemaData = [
       {
         "@type": "ListItem",
         position: 3,
-        name: "Cervical Radiculopathy Treatment Hyderabad",
+        name: "Cervical Radiculopathy & Spondylosis",
         item: CANONICAL,
       },
     ],
@@ -197,10 +198,31 @@ const references = [
   },
 ] as const;
 
+const CERVICAL_COSTS = [
+  {
+    procedure: 'Post. Cervical Foraminotomy (Keyhole)',
+    range: '₹1,50,000 - ₹2,00,000',
+    recovery: '1-2 Days',
+    includes: ['Endoscopic Surgery', 'No Implants', 'Day Care Stay', 'Medications']
+  },
+  {
+    procedure: 'ACDF (Fusion)',
+    range: '₹2,50,000 - ₹3,50,000',
+    recovery: '2-3 Days',
+    includes: ['Titanium Cage/Plate', 'Bone Graft', 'Hospital Stay', 'Post-op Collar']
+  },
+  {
+    procedure: 'Artificial Disc Replacement',
+    range: '₹3,50,000 - ₹4,50,000',
+    recovery: '2-3 Days',
+    includes: ['Artificial Disc Device', 'Motion Preservation', 'Specialized Instrumentation']
+  }
+];
+
 export const metadata: Metadata = {
-  title: "Cervical Radiculopathy Treatment Hyderabad | Pinched Nerve Surgery",
+  title: "Cervical Radiculopathy & Spondylosis Treatment Hyderabad | Neck Specialist",
   description:
-    "Expert treatment for cervical radiculopathy (pinched nerve) in Hyderabad. Keyhole surgery (Foraminotomy) and ACDF by Dr. Sayuj Krishnan.",
+    "Expert treatment for Cervical Spondylosis & Radiculopathy in Hyderabad. 90% non-surgical relief. Keyhole surgery & ACDF cost and recovery details.",
   alternates: {
     canonical: CANONICAL,
     languages: {
@@ -208,10 +230,19 @@ export const metadata: Metadata = {
       "x-default": CANONICAL,
     },
   },
+  keywords: [
+    "cervical spondylosis treatment hyderabad",
+    "cervical radiculopathy treatment",
+    "pinched nerve in neck",
+    "neck pain doctor hyderabad",
+    "keyhole neck surgery cost",
+    "acdf surgery cost hyderabad",
+    "spondylosis exercises"
+  ],
   openGraph: {
-    title: "Cervical Radiculopathy (Pinched Nerve) Treatment in Hyderabad",
+    title: "Cervical Spondylosis & Radiculopathy Treatment in Hyderabad",
     description:
-      "Expert care for radiating arm pain and neck pain caused by cervical radiculopathy. Minimally invasive surgical options available.",
+      "Expert care for neck pain, spondylosis, and radiating arm pain. Minimally invasive surgical options available.",
     url: CANONICAL,
     type: "article",
     images: [
@@ -219,15 +250,15 @@ export const metadata: Metadata = {
         url: `${SITE_URL}/images/og-default.jpg`,
         width: 1200,
         height: 630,
-        alt: "Cervical Radiculopathy Treatment — Dr Sayuj Krishnan",
+        alt: "Cervical Spondylosis & Radiculopathy Treatment — Dr Sayuj Krishnan",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Cervical Radiculopathy Treatment in Hyderabad",
+    title: "Cervical Spondylosis & Radiculopathy Treatment Hyderabad",
     description:
-      "Expert care for radiating arm pain and neck pain caused by cervical radiculopathy. Minimally invasive surgical options available.",
+      "Expert care for neck pain and spondylosis. Minimally invasive options available.",
   },
 };
 
@@ -251,12 +282,12 @@ export default function CervicalRadiculopathyPage() {
             Spine Conditions · Hyderabad
           </p>
           <h1 className="mt-4 text-3xl font-bold md:text-4xl">
-            Cervical Radiculopathy (Pinched Nerve) Treatment in Hyderabad
+            Cervical Spondylosis & Radiculopathy Treatment in Hyderabad
           </h1>
           <p className="mt-4 text-lg text-slate-100">
-            Suffering from severe arm pain, numbness, or "pins and needles"? Dr. Sayuj Krishnan provides
-            advanced diagnosis and minimally invasive treatment for cervical radiculopathy, helping you get
-            back to a pain-free life faster.
+            Suffering from <strong>severe neck pain</strong>, radiating arm pain, or "pins and needles"?
+            Dr. Sayuj Krishnan provides advanced diagnosis for Cervical Spondylosis (Neck Arthritis) and
+            Radiculopathy, helping you get back to a pain-free life.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <a
@@ -280,10 +311,10 @@ export default function CervicalRadiculopathyPage() {
         <div className="mx-auto max-w-5xl px-4">
           <div className="rounded-lg border border-blue-200 bg-white p-6 shadow-lg">
             <h2 className="text-2xl font-bold text-blue-800">
-              Signs of a Pinched Nerve (Radiculopathy)
+              Is it Cervical Spondylosis or Radiculopathy?
             </h2>
             <p className="mt-3 text-lg font-semibold text-gray-900">
-              Cervical radiculopathy happens when a nerve root in the neck is compressed. Common symptoms include:
+              Often, age-related wear (Spondylosis) causes the nerve pinching (Radiculopathy).
             </p>
             <div className="mt-4 grid gap-3 md:grid-cols-2">
               <div className="flex items-start gap-3 rounded-lg border border-blue-100 bg-blue-50 p-4">
@@ -308,10 +339,10 @@ export default function CervicalRadiculopathyPage() {
                 </div>
               </div>
               <div className="flex items-start gap-3 rounded-lg border border-blue-100 bg-blue-50 p-4">
-                <span className="text-2xl">🛌</span>
+                <span className="text-2xl">🐢</span>
                 <div>
-                  <h3 className="font-bold text-blue-800">Relief Position</h3>
-                  <p className="text-sm text-gray-700">Many patients feel relief by resting their hand on top of their head (Shoulder Abduction Sign).</p>
+                  <h3 className="font-bold text-blue-800">Stiffness & Grinding</h3>
+                  <p className="text-sm text-gray-700">Neck stiffness in the morning or grinding sounds (crepitus) when turning the head.</p>
                 </div>
               </div>
             </div>
@@ -326,7 +357,7 @@ export default function CervicalRadiculopathyPage() {
               What Causes Cervical Radiculopathy?
             </h2>
             <p className="mt-4 text-gray-700">
-              As we age, the discs in our spine lose height and water content. This degenerative process can lead
+              As we age, the discs in our spine lose height and water content. This degenerative process (Cervical Spondylosis) can lead
               to two main causes of nerve compression:
             </p>
             <ul className="mt-4 list-disc space-y-2 pl-6 text-gray-700">
@@ -352,6 +383,35 @@ export default function CervicalRadiculopathyPage() {
         </div>
       </section>
 
+      {/* New Self-Care Section */}
+      <section className="bg-indigo-50 py-12 border-y border-indigo-100">
+        <div className="mx-auto max-w-5xl px-4">
+          <h2 className="text-2xl font-semibold text-indigo-900 mb-6">
+            Self-Care for Neck Pain & Spondylosis
+          </h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="bg-white p-5 rounded-xl shadow-sm border border-indigo-100">
+              <h3 className="font-bold text-indigo-800 mb-3">🛌 Pillow Height</h3>
+              <p className="text-sm text-gray-700">
+                Your pillow should keep your neck aligned with your spine. If you sleep on your back, use a thin pillow or a cervical contour pillow. Avoid stacking two pillows, as this flexes the neck forward all night.
+              </p>
+            </div>
+            <div className="bg-white p-5 rounded-xl shadow-sm border border-indigo-100">
+              <h3 className="font-bold text-indigo-800 mb-3">📱 Avoid "Tech Neck"</h3>
+              <p className="text-sm text-gray-700">
+                Looking down at a phone puts up to 27kg of pressure on your cervical spine. Lift your phone to eye level. When using a laptop, use a stand to raise the screen.
+              </p>
+            </div>
+            <div className="bg-white p-5 rounded-xl shadow-sm border border-indigo-100">
+              <h3 className="font-bold text-indigo-800 mb-3">🧘 Chin Tucks</h3>
+              <p className="text-sm text-gray-700">
+                Sit straight and gently pull your chin straight back (like making a double chin). Hold for 5 seconds. Repeat 10 times. This strengthens deep neck flexors and improves posture.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="bg-gray-50 py-12">
         <div className="mx-auto max-w-5xl px-4">
           <h2 className="text-2xl font-semibold text-gray-900">
@@ -361,7 +421,7 @@ export default function CervicalRadiculopathyPage() {
             While most patients recover without surgery, those with severe pain or weakness may need intervention.
             Dr. Sayuj Krishnan specializes in minimally invasive options:
           </p>
-          <div className="mt-8 grid gap-6 md:grid-cols-2">
+          <div className="mt-8 grid gap-6 md:grid-cols-2 mb-12">
             <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
               <h3 className="text-lg font-semibold text-blue-700">
                 1. Posterior Cervical Foraminotomy (Keyhole)
@@ -405,6 +465,12 @@ export default function CervicalRadiculopathyPage() {
               </ul>
             </div>
           </div>
+
+          <CostTransparencySection
+            costs={CERVICAL_COSTS}
+            disclaimer="Approximate cost estimates for self-pay patients at Yashoda Hospital Malakpet. Final pricing depends on room category (General/Sharing/Private) and specific implants used. We offer full assistance with insurance pre-authorization."
+            showInsurance={true}
+          />
         </div>
       </section>
 

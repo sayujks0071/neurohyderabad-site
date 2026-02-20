@@ -21,6 +21,7 @@ import MedicalWebPageSchema from '../../components/schemas/MedicalWebPageSchema'
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
 import PatientEducationVideosSkeleton from '@/app/_components/skeletons/PatientEducationVideosSkeleton';
 import BrainSurgeryComparisonTable from '@/src/components/BrainSurgeryComparisonTable';
+import ProcedureHighlights from '@/src/components/ProcedureHighlights';
 
 const PatientEducationVideos = dynamic(() => import('@/app/_components/PatientEducationVideos'), {
   loading: () => <PatientEducationVideosSkeleton />
@@ -138,6 +139,10 @@ const faqs = [
   {
     question: 'What is the cost of brain tumor surgery in Hyderabad?',
     answer: 'The cost of brain tumor surgery varies significantly based on tumor complexity, ICU stay duration, and technology used (neuronavigation, monitoring). Biopsies may start from ₹1,00,000, while complex craniotomies can range higher. We provide transparent estimates after scan review.'
+  },
+  {
+    question: 'Do you perform Endoscopic Skull Base Surgery?',
+    answer: 'Yes, Dr. Sayuj specializes in Endoscopic Anterior Skull Base Surgery for pituitary adenomas and anterior skull base tumors, offering a scarless trans-nasal approach.'
   }
 ];
 
@@ -229,6 +234,7 @@ export default function BrainTumorSurgeryHyderabadPage() {
             { name: 'Services', href: '/services/' },
             { name: 'Brain Tumor Surgery in Hyderabad', href: `/services/${SERVICE_SLUG}/` },
           ]}
+          disableSchema={true}
         />
 
         <header className="grid md:grid-cols-2 gap-10 items-start mb-16">
@@ -273,6 +279,15 @@ export default function BrainTumorSurgeryHyderabadPage() {
             </ul>
           </div>
         </header>
+
+        <ProcedureHighlights
+          duration="3-6 Hours"
+          anesthesia="General / Awake"
+          stay="3-5 Days"
+          recovery="2-3 Weeks"
+          incision="Minimally Invasive"
+          className="mb-16"
+        />
 
         {/* Red Flag Symptoms Section - Added for SEO & User Intent */}
         <section className="mb-16 bg-red-50 border border-red-100 rounded-2xl p-8">
