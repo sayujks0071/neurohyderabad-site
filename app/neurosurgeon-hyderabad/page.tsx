@@ -18,7 +18,7 @@ export const dynamicParams = false;
 export const revalidate = 86400;
 
 export const metadata = {
-  title: "Best Neurosurgeon Hyderabad | Dr Sayuj | Spine & Brain Specialist",
+  title: "Best Neurosurgeon Hyderabad | Dr Sayuj | Spine & Brain",
   description:
     "Consult Dr. Sayuj, top Neurosurgeon in Hyderabad. Expert in Endoscopic Spine & Brain Tumor Surgery. 1000+ Success Stories. Book at Yashoda Malakpet.",
   alternates: { canonical: "https://www.drsayuj.info/neurosurgeon-hyderabad" },
@@ -166,6 +166,8 @@ export default function HyderabadNeurosurgeonPage() {
             <li><Link href="/services/brain-tumor-surgery-hyderabad" className="text-blue-600 hover:underline">Advanced Brain Tumor Surgery</Link> (Neuronavigation)</li>
           </ul>
         </div>
+        </div>
+        </div>
       </section>
 
       {/* Stats Bar */}
@@ -292,22 +294,22 @@ export default function HyderabadNeurosurgeonPage() {
               <div className="mb-12">
                  <h2 className="text-2xl font-bold text-gray-900 mb-6">Serving Patients Across Hyderabad</h2>
                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    <Link href="/locations/neurosurgeon-malakpet" className="block p-4 bg-gray-50 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-colors text-center font-medium text-gray-700 border border-gray-100">
+                    <Link href="/neurosurgeon-malakpet" className="block p-4 bg-gray-50 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-colors text-center font-medium text-gray-700 border border-gray-100">
                        Malakpet
                     </Link>
                     <Link href="/locations/neurosurgeon-dilsukhnagar" className="block p-4 bg-gray-50 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-colors text-center font-medium text-gray-700 border border-gray-100">
                        Dilsukhnagar
                     </Link>
-                    <Link href="/locations/neurosurgeon-hitech-city" className="block p-4 bg-gray-50 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-colors text-center font-medium text-gray-700 border border-gray-100">
+                    <Link href="/neurosurgeon-hitech-city" className="block p-4 bg-gray-50 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-colors text-center font-medium text-gray-700 border border-gray-100">
                        Hitech City
                     </Link>
-                    <Link href="/locations/neurosurgeon-jubilee-hills" className="block p-4 bg-gray-50 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-colors text-center font-medium text-gray-700 border border-gray-100">
+                    <Link href="/neurosurgeon-jubilee-hills" className="block p-4 bg-gray-50 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-colors text-center font-medium text-gray-700 border border-gray-100">
                        Jubilee Hills
                     </Link>
-                    <Link href="/locations/neurosurgeon-secunderabad" className="block p-4 bg-gray-50 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-colors text-center font-medium text-gray-700 border border-gray-100">
+                    <Link href="/neurosurgeon-secunderabad" className="block p-4 bg-gray-50 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-colors text-center font-medium text-gray-700 border border-gray-100">
                        Secunderabad
                     </Link>
-                    <Link href="/locations/neurosurgeon-gachibowli" className="block p-4 bg-gray-50 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-colors text-center font-medium text-gray-700 border border-gray-100">
+                    <Link href="/neurosurgeon-gachibowli" className="block p-4 bg-gray-50 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-colors text-center font-medium text-gray-700 border border-gray-100">
                        Gachibowli
                     </Link>
                  </div>

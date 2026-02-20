@@ -26,7 +26,7 @@ const SERVICE_SLUG = 'endoscopic-spine-surgery-hyderabad';
 export const revalidate = 3600; // Revalidate every hour
 
 const baseMetadata = makeMetadata({
-  title: 'Endoscopic Spine Surgery Hyderabad | Keyhole Spine Specialist',
+  title: 'Endoscopic Spine Surgery Hyderabad | Keyhole Specialist',
   description:
     'Best Endoscopic Spine Surgery in Hyderabad. Dr. Sayuj performs 7mm Keyhole Surgery with Same-Day Discharge. Check Cost & Recovery Time.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
@@ -34,7 +34,7 @@ const baseMetadata = makeMetadata({
 
 export const metadata: Metadata = {
   ...baseMetadata,
-  title: 'Endoscopic Spine Surgery Hyderabad | Keyhole Spine Specialist',
+  title: 'Endoscopic Spine Surgery Hyderabad | Keyhole Specialist',
   description:
     'Best Endoscopic Spine Surgery in Hyderabad. Dr. Sayuj performs 7mm Keyhole Surgery with Same-Day Discharge. Check Cost & Recovery Time.',
   keywords: [
@@ -332,6 +332,7 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
             { name: 'Services', href: '/services/' },
             { name: 'Endoscopic Spine Surgery in Hyderabad', href: `/services/${SERVICE_SLUG}/` },
           ]}
+          disableSchema={true}
         />
 
         <header className="grid md:grid-cols-2 gap-10 items-start mb-16">

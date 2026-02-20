@@ -189,10 +189,36 @@ export default function MedicalWebPageSchema({
     baseSchema.mainEntity = conditionSchema;
   }
 
+  // Generate BreadcrumbSchema if items are provided
+  // This replaces the global BreadcrumbSchema for service/condition pages
+  let breadcrumbSchema = null;
+  if (breadcrumbs && breadcrumbs.length > 0) {
+    const itemListElement = breadcrumbs.map((item, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "name": item.name,
+      "item": item.path.startsWith('http') ? item.path : `${SITE_URL}${item.path}`
+    }));
+
+    breadcrumbSchema = {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": itemListElement
+    };
+  }
+
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(baseSchema) }}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(baseSchema) }}
+      />
+      {breadcrumbSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        />
+      )}
+    </>
   );
 }
