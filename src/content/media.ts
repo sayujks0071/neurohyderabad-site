@@ -12,6 +12,16 @@ export interface MediaPublication {
 
 export const mediaPublications: MediaPublication[] = [
   {
+    id: 'aristocrat-2026-01',
+    title: 'Spine Health: The Key to Active Aging',
+    publication: 'Aristocrat Media',
+    url: 'https://aristocrat-media.com/spine-health-the-key-to-active-aging/',
+    date: '2026-01-28',
+    type: 'article',
+    description: 'An expert overview on protecting spine health to stay active as you age, with practical guidance on exercise, posture, and daily habits.',
+    featured: false
+  },
+  {
     id: 'socialpost-health-2025-11',
     title: 'What causes Neurological Disorders | Spine Health | Brain Health',
     publication: 'Socialpost Health Podcast',
