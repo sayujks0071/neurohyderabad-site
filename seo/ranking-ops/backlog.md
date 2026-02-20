@@ -56,4 +56,5 @@
 *   **Technical SEO:** Audit all other `app/symptoms/` pages for broken links to service pages.
 
 ## 2026-02-18
-*   **Structure:** Replicate "Advanced Surgical Solutions" (Hub & Spoke procedure linking) section on other major service hubs like Brain Tumor Surgery to match competitor depth.
+*   **Structure:** Replicate "Advanced Surgical Solutions" (Hub & Spoke procedure linking) section on other major service hubs like Brain Tumor Surgery to match competitor depth. (Done 2026-02-24)
+*   **Content Gap:** Create dedicated service pages for "Endoscopic Skull Base Surgery" and "Stereotactic Biopsy" to fully support the Hub & Spoke model (currently just descriptions in the new component).
