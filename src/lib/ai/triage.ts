@@ -5,6 +5,7 @@
 import { generateObject } from 'ai';
 import { z } from 'zod';
 import { getTextModel, hasAIConfig } from './gateway';
+import { sanitizeForPrompt } from '@/src/lib/validation';
 
 export interface TriageRequest {
   symptoms: string[];
@@ -66,10 +67,17 @@ export async function analyzeTriage(request: TriageRequest): Promise<TriageResul
   }
 
   try {
+    // 🛡️ Sentinel: Sanitize user input to prevent prompt injection
+    const sanitizedDescription = sanitizeForPrompt(request.description);
+    const sanitizedSymptoms = request.symptoms.map(s => sanitizeForPrompt(s));
+
     const { object } = await generateObject({
       model: getTextModel(),
       schema: TriageResultSchema,
-      prompt: `You are a medical triage AI for neurosurgery. Analyze: Symptoms: ${request.symptoms.join(', ')}, Description: ${request.description}`,
+      messages: [
+        { role: 'system', content: 'You are a medical triage AI for neurosurgery.' },
+        { role: 'user', content: `Analyze: Symptoms: ${sanitizedSymptoms.join(', ')}, Description: ${sanitizedDescription}` }
+      ],
       temperature: 0.3,
     });
     return object;
