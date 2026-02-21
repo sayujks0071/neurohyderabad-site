@@ -5,8 +5,8 @@ import { useStatsigEvents } from '../../src/lib/statsig-events';
 import { trackMiddlewareEvent } from '@/src/lib/middleware/rum';
 import { MessageCircle, X, Send, AlertTriangle, Loader2, Sparkles, Minus } from 'lucide-react';
 import { usePathname } from 'next/navigation';
-import { useChat } from '@ai-sdk/react';
-import { type Message } from 'ai';
+import { useChat, type UIMessage } from '@ai-sdk/react';
+import { DefaultChatTransport } from 'ai';
 
 /**
  * Floating AI Chat Widget using Vercel AI Gateway
@@ -21,6 +21,12 @@ import { type Message } from 'ai';
 interface FloatingChatWidgetProps {
   autoOpen?: boolean;
 }
+
+// Helper to safely get content from UIMessage
+const getMessageContent = (message: UIMessage) => {
+  if ((message as any).content) return (message as any).content as string;
+  return message.parts.filter(part => part.type === 'text').map(part => part.text).join('');
+};
 
 export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWidgetProps) {
   const [isOpen, setIsOpen] = useState(autoOpen);
@@ -60,26 +66,28 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
   const { logAppointmentBooking, logContactFormSubmit } = useStatsigEvents();
 
   // Initial greeting
-  const initialMessages = useMemo<Message[]>(() => [
+  const initialMessages = useMemo<UIMessage[]>(() => [
     {
       id: 'initial',
       role: 'assistant',
-      content: "Hello! I'm Dr. Sayuj's AI assistant. I can help you with appointments, condition info, and more. How can I help?"
+      parts: [{ type: 'text', text: "Hello! I'm Dr. Sayuj's AI assistant. I can help you with appointments, condition info, and more. How can I help?" }]
     },
   ], []);
 
   // Use Vercel AI SDK useChat hook
-  const { messages, append, status, error } = useChat({
-    api: '/api/ai/chat',
-    body: {
-      pageSlug: pathname || 'global',
-      pageTitle,
-      pageDescription,
-      service: 'floating_widget',
-    },
-    initialMessages,
-    onFinish: (message) => {
-      const content = message.content;
+  const { messages, sendMessage, status, error } = useChat({
+    transport: new DefaultChatTransport({
+      api: '/api/ai/chat',
+      body: {
+        pageSlug: pathname || 'global',
+        pageTitle,
+        pageDescription,
+        service: 'floating_widget',
+      },
+    }),
+    messages: initialMessages,
+    onFinish: ({ message }) => {
+      const content = getMessageContent(message);
 
       trackMiddlewareEvent('chat_response_received', {
         source: 'floating_widget',
@@ -147,7 +155,7 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
       page_slug: pathname || 'unknown'
     });
 
-    await append({ role: 'user', content: content.trim() });
+    await sendMessage({ role: 'user', parts: [{ type: 'text', text: content.trim() }] });
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -163,7 +171,7 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
 
     const content = input;
     setInput('');
-    await append({ role: 'user', content: content.trim() });
+    await sendMessage({ role: 'user', parts: [{ type: 'text', text: content.trim() }] });
   };
 
   const quickActions = [
@@ -266,7 +274,7 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
           >
             {messages.map((message) => {
               // Extract text content directly
-              const content = message.content;
+              const content = getMessageContent(message);
 
               // Skip messages with empty content (e.g. tool calls) unless we want to show a spinner
               if (!content && message.role !== 'assistant') return null;

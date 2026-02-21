@@ -1,4 +1,4 @@
-import { streamText } from 'ai';
+import { streamText, stepCountIs } from 'ai';
 import { NextRequest } from 'next/server';
 import { rateLimit } from '@/src/lib/rate-limit';
 import { getTextModel, hasAIConfig } from '@/src/lib/ai/gateway';
@@ -61,12 +61,12 @@ export async function POST(request: NextRequest) {
       system: systemPrompt,
       messages,
       temperature: 0.7,
-      maxSteps: 5, // Allow multi-step tool execution
+      stopWhen: stepCountIs(5), // Allow multi-step tool execution
       tools: tools,
     });
 
-    // Return data stream response (standard for AI SDK 3+)
-    return result.toDataStreamResponse();
+    // Return text stream response (AI SDK 3+)
+    return result.toTextStreamResponse();
 
   } catch (error) {
     console.error('Error processing AI chat request:', error);

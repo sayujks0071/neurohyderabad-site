@@ -1,17 +1,42 @@
 'use client'
 
-import { useChat } from 'ai/react'
+import { useChat, type UIMessage } from '@ai-sdk/react'
+import { DefaultChatTransport } from 'ai'
 import { useState, useRef, useEffect } from 'react'
-import Header from '../_components/layout/Header'
-import Footer from '../_components/layout/Footer'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+
+// Helper to safely get content from UIMessage
+const getMessageContent = (message: UIMessage) => {
+  if ((message as any).content) return (message as any).content as string;
+  return message.parts.filter(part => part.type === 'text').map(part => part.text).join('');
+};
 
 export default function AISandboxPage() {
-    const { messages, input, handleInputChange, handleSubmit, isLoading, error } = useChat({
-        api: '/api/ai/sandbox',
-        body: {
-            requestedModel: 'openai/gpt-5.2' // Requested snippet
-        }
+    const { messages, sendMessage, status, error } = useChat({
+        transport: new DefaultChatTransport({
+            api: '/api/ai/sandbox',
+            body: {
+                requestedModel: 'openai/gpt-5.2' // Requested snippet
+            }
+        })
     })
+
+    const [input, setInput] = useState('')
+    const isLoading = status === 'submitted' || status === 'streaming'
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setInput(e.target.value)
+    }
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault()
+        if (!input.trim() || isLoading) return
+
+        const currentInput = input
+        setInput('')
+        await sendMessage({ role: 'user', parts: [{ type: 'text', text: currentInput }] })
+    }
 
     const messagesEndRef = useRef<HTMLDivElement>(null)
 
@@ -24,10 +49,10 @@ export default function AISandboxPage() {
     }, [messages])
 
     return (
-        <div className="min-h-screen bg-slate-50 flex flex-col font-sans selection:bg-blue-200">
-            <Header />
-
-            <main className="flex-1 flex justify-center items-center p-4 sm:p-8 relative overflow-hidden bg-gradient-to-br from-indigo-50 via-white to-blue-50">
+        <div className="min-h-[calc(100vh-200px)] flex flex-col font-sans selection:bg-blue-200">
+             <Header />
+            {/* Main content wrapper */}
+            <div className="flex-1 flex justify-center items-center p-4 sm:p-8 relative overflow-hidden bg-gradient-to-br from-indigo-50 via-white to-blue-50">
 
                 {/* Decorative Blurred Background Blobs */}
                 <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-indigo-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob"></div>
@@ -36,7 +61,7 @@ export default function AISandboxPage() {
 
                 <div className="w-full max-w-4xl bg-white/70 backdrop-blur-xl rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] ring-1 ring-slate-900/5 overflow-hidden flex flex-col h-[80vh] relative z-10 transition-all duration-300 hover:shadow-[0_8px_40px_rgb(0,0,0,0.08)]">
 
-                    {/* Header */}
+                    {/* Header inside the chat UI */}
                     <div className="px-6 py-5 border-b border-slate-100 flex items-center justify-between bg-white/50">
                         <div className="flex items-center gap-3">
                             <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white shadow-md shadow-blue-500/20">
@@ -70,7 +95,9 @@ export default function AISandboxPage() {
                                 <p className="text-sm max-w-sm text-center">Try asking "Why is the sky blue?" to see real-time streaming using the <code className="bg-slate-100 px-1 py-0.5 rounded text-indigo-500">openai/gpt-5.2</code> configuration.</p>
                             </div>
                         ) : (
-                            messages.map(m => (
+                            messages.map(m => {
+                                const content = getMessageContent(m);
+                                return (
                                 <div key={m.id} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'} group animate-in slide-in-from-bottom-2 duration-300`}>
                                     <div className={`max-w-[80%] rounded-2xl p-4 shadow-sm relative ${m.role === 'user'
                                             ? 'bg-gradient-to-br from-blue-600 to-indigo-600 text-white rounded-tr-sm'
@@ -84,19 +111,19 @@ export default function AISandboxPage() {
 
                                         {/* Message Content */}
                                         <div className="prose prose-sm max-w-none prose-p:leading-relaxed prose-pre:bg-slate-800 prose-pre:text-slate-100">
-                                            {m.role !== 'user' && m.content === '' && isLoading ? (
+                                            {m.role !== 'user' && content === '' && isLoading ? (
                                                 <div className="flex items-center gap-1.5 h-6">
                                                     <div className="w-1.5 h-1.5 bg-slate-300 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
                                                     <div className="w-1.5 h-1.5 bg-slate-300 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
                                                     <div className="w-1.5 h-1.5 bg-slate-300 rounded-full animate-bounce"></div>
                                                 </div>
                                             ) : (
-                                                <p className={m.role === 'user' ? 'text-white' : ''}>{m.content}</p>
+                                                <p className={m.role === 'user' ? 'text-white' : ''}>{content}</p>
                                             )}
                                         </div>
                                     </div>
                                 </div>
-                            ))
+                            )})
                         )}
 
                         {error && (
@@ -143,8 +170,7 @@ export default function AISandboxPage() {
                     </div>
 
                 </div>
-            </main>
-
+            </div>
             <Footer />
         </div>
     )
