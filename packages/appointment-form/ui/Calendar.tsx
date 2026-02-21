@@ -74,27 +74,16 @@ export default function Calendar({
     }
   }, [selectedDate]);
 
-  const currentMonthStart = useMemo(
-    () => new Date(today.getFullYear(), today.getMonth(), 1),
-    [today]
-  );
-  const isPrevDisabled = viewDate <= currentMonthStart;
-
   const handlePrevMonth = () => {
-    const newDate = new Date(viewDate.getFullYear(), viewDate.getMonth() - 1, 1);
-    setViewDate(newDate);
-
-    // When going back, if we land on current month, focus Today.
-    // Otherwise (future->future), just focus 1st.
-    const candidate = newDate < today ? today : newDate;
-    setFocusedDate(candidate);
+    setViewDate(
+      new Date(viewDate.getFullYear(), viewDate.getMonth() - 1, 1)
+    );
   };
 
   const handleNextMonth = () => {
-    const newDate = new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 1);
-    setViewDate(newDate);
-    // When going forward, focus 1st of month so user can tab in.
-    setFocusedDate(newDate);
+    setViewDate(
+      new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 1)
+    );
   };
 
   const handleDateClick = (day: number) => {
@@ -191,14 +180,8 @@ export default function Calendar({
             <button
               type="button"
               onClick={handlePrevMonth}
-              disabled={isPrevDisabled}
-              aria-disabled={isPrevDisabled}
               aria-label="Previous month"
-              className={`p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-cyan-500 ${
-                isPrevDisabled
-                  ? "opacity-50 cursor-not-allowed"
-                  : "hover:bg-slate-100"
-              }`}
+              className="p-2 rounded-full hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-cyan-500"
             >
               <ChevronLeftIcon className="w-5 h-5 text-slate-600" />
             </button>

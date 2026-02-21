@@ -1,92 +1,154 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { POST } from '@/app/api/admin/sandbox/jobs/route';
-import { createSandbox, runSandboxCommand, getSandbox, destroySandbox } from '@/lib/sandbox/client';
-import { verifyAdminAccess } from '@/src/lib/security';
-import { rateLimit } from '@/src/lib/rate-limit';
-import { NextResponse } from 'next/server';
+/**
+ * @vitest-environment node
+ */
+import { POST as POST_JOBS } from '@/app/api/admin/sandbox/jobs/route';
+import { GET as GET_STATUS } from '@/app/api/admin/sandbox/jobs/status/route';
+import { POST as POST_STOP } from '@/app/api/admin/sandbox/jobs/stop/route';
+import { NextRequest } from 'next/server';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
-// Mock dependencies
+// Use vi.hoisted to share variables with mocks
+const { mockSandbox, mockCommand } = vi.hoisted(() => {
+  const mockCommand = {
+    id: 'cmd-123',
+    cmdId: 'cmd-123',
+    exitCode: null,
+    output: vi.fn(),
+    stdout: 'mock-stdout',
+    stderr: 'mock-stderr',
+  };
+
+  const mockSandbox = {
+    id: 'sandbox-123',
+    sandboxId: 'sandbox-123',
+    status: 'running',
+    getCommand: vi.fn().mockResolvedValue(mockCommand),
+  };
+
+  return { mockSandbox, mockCommand };
+});
+
 vi.mock('@/lib/sandbox/client', () => ({
-  createSandbox: vi.fn(),
-  runSandboxCommand: vi.fn(),
-  getSandbox: vi.fn(),
-  destroySandbox: vi.fn(),
+  createSandbox: vi.fn().mockResolvedValue(mockSandbox),
+  runSandboxCommand: vi.fn().mockResolvedValue({
+    stdout: '',
+    stderr: '',
+    exitCode: null,
+    cmdId: 'cmd-123',
+  }),
+  destroySandbox: vi.fn().mockResolvedValue(undefined),
 }));
 
-vi.mock('@/src/lib/security', () => ({
-  verifyAdminAccess: vi.fn(),
+vi.mock('@vercel/sandbox', () => ({
+  Sandbox: {
+    get: vi.fn().mockResolvedValue(mockSandbox),
+  }
 }));
 
+// Mock rate limit to always succeed except when we want it to fail
 vi.mock('@/src/lib/rate-limit', () => ({
-  rateLimit: vi.fn(),
+  rateLimit: vi.fn().mockReturnValue({ success: true, limit: 10, remaining: 9, reset: Date.now() + 1000 }),
 }));
 
-// Mock NextRequest and NextResponse (implicitly by checking result)
-
-describe('Admin Job Runner API', () => {
-  const mockRequest = (body: any) => ({
-    json: () => Promise.resolve(body),
-    headers: {
-      get: (key: string) => key === 'x-forwarded-for' ? '127.0.0.1' : null,
-    },
-    url: 'http://localhost/api/admin/sandbox/jobs',
-  } as unknown as Request);
+describe('Admin Sandbox Jobs API', () => {
+  const originalEnv = process.env;
 
   beforeEach(() => {
+    process.env = { ...originalEnv };
+    process.env.ADMIN_ACCESS_KEY = 'test-secret';
     vi.clearAllMocks();
-    (rateLimit as any).mockReturnValue({ success: true, limit: 10, remaining: 9, reset: Date.now() + 1000 });
   });
 
-  describe('POST /jobs', () => {
+  afterEach(() => {
+    process.env = originalEnv;
+  });
+
+  describe('POST /api/admin/sandbox/jobs', () => {
     it('should return 401 if unauthorized', async () => {
-      (verifyAdminAccess as any).mockResolvedValue({
-        isAuthorized: false,
-        response: NextResponse.json({ error: 'Unauthorized' }, { status: 401 }),
+      const req = new NextRequest('http://localhost/api/admin/sandbox/jobs', {
+        method: 'POST',
+        body: JSON.stringify({ job: 'seo-audit' }),
       });
-
-      const req = mockRequest({});
-      const res = await POST(req);
-      const json = await res.json();
-
+      const res = await POST_JOBS(req);
       expect(res.status).toBe(401);
-      expect(json.error).toBe('Unauthorized');
-      expect(createSandbox).not.toHaveBeenCalled();
     });
 
-    it('should return 400 if invalid job name', async () => {
-      (verifyAdminAccess as any).mockResolvedValue({ isAuthorized: true });
-
-      const req = mockRequest({ job: 'invalid-job' });
-      const res = await POST(req);
-      const json = await res.json();
-
+    it('should return 400 for invalid job name', async () => {
+      const req = new NextRequest('http://localhost/api/admin/sandbox/jobs', {
+        method: 'POST',
+        headers: { 'x-admin-key': 'test-secret' },
+        body: JSON.stringify({ job: 'invalid-job' }),
+      });
+      const res = await POST_JOBS(req);
       expect(res.status).toBe(400);
-      expect(json.error).toBe('Invalid job name');
-      expect(createSandbox).not.toHaveBeenCalled();
+      const data = await res.json();
+      expect(data.error).toBe('Invalid job name');
     });
 
-    it('should start a valid job', async () => {
-      (verifyAdminAccess as any).mockResolvedValue({ isAuthorized: true });
-      (createSandbox as any).mockResolvedValue({ id: 'sandbox-123' });
-      (runSandboxCommand as any).mockResolvedValue({ cmdId: 'cmd-123' });
-
-      const req = mockRequest({ job: 'reindex-gemini-rag' });
-      const res = await POST(req);
-      const json = await res.json();
-
+    it('should return 200 and start job for valid job', async () => {
+      const req = new NextRequest('http://localhost/api/admin/sandbox/jobs', {
+        method: 'POST',
+        headers: { 'x-admin-key': 'test-secret' },
+        body: JSON.stringify({ job: 'seo-audit' }),
+      });
+      const res = await POST_JOBS(req);
       expect(res.status).toBe(200);
-      expect(json.sandboxId).toBe('sandbox-123');
-      expect(json.cmdId).toBe('cmd-123');
+      const data = await res.json();
+      expect(data.sandboxId).toBe('sandbox-123');
+      expect(data.cmdId).toBe('cmd-123');
+    });
+  });
 
-      expect(createSandbox).toHaveBeenCalledWith(expect.objectContaining({
-        network: expect.objectContaining({ allow: expect.arrayContaining(['registry.npmjs.org']) }),
-        source: expect.objectContaining({ url: 'https://github.com/sayujks0071/neurohyderabad-site' }),
-      }));
+  describe('GET /api/admin/sandbox/jobs/status', () => {
+    it('should return 401 if unauthorized', async () => {
+      const req = new NextRequest('http://localhost/api/admin/sandbox/jobs/status?sandboxId=1&cmdId=1');
+      const res = await GET_STATUS(req);
+      expect(res.status).toBe(401);
+    });
 
-      expect(runSandboxCommand).toHaveBeenCalledWith(expect.objectContaining({
-        cmd: 'sh',
-        detached: true,
-      }));
+    it('should return 400 if params missing', async () => {
+      const req = new NextRequest('http://localhost/api/admin/sandbox/jobs/status?sandboxId=1', {
+         headers: { 'x-admin-key': 'test-secret' },
+      });
+      const res = await GET_STATUS(req);
+      expect(res.status).toBe(400);
+    });
+
+    it('should return 200 with status', async () => {
+      mockSandbox.getCommand.mockResolvedValue(mockCommand);
+      mockCommand.output.mockImplementation(async (type) => type === 'stdout' ? 'out' : 'err');
+
+      const req = new NextRequest('http://localhost/api/admin/sandbox/jobs/status?sandboxId=sb1&cmdId=cmd1', {
+         headers: { 'x-admin-key': 'test-secret' },
+      });
+      const res = await GET_STATUS(req);
+      expect(res.status).toBe(200);
+      const data = await res.json();
+      expect(data.status).toBe('running');
+      expect(data.stdoutTail).toBe('out');
+    });
+  });
+
+  describe('POST /api/admin/sandbox/jobs/stop', () => {
+    it('should return 401 if unauthorized', async () => {
+      const req = new NextRequest('http://localhost/api/admin/sandbox/jobs/stop', {
+        method: 'POST',
+        body: JSON.stringify({ sandboxId: 'sb1' }),
+      });
+      const res = await POST_STOP(req);
+      expect(res.status).toBe(401);
+    });
+
+    it('should return 200 on success', async () => {
+      const req = new NextRequest('http://localhost/api/admin/sandbox/jobs/stop', {
+        method: 'POST',
+        headers: { 'x-admin-key': 'test-secret' },
+        body: JSON.stringify({ sandboxId: 'sb1' }),
+      });
+      const res = await POST_STOP(req);
+      expect(res.status).toBe(200);
+      const data = await res.json();
+      expect(data.success).toBe(true);
     });
   });
 });

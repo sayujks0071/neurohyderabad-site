@@ -11,13 +11,6 @@ export interface LocationGeo {
   longitude: number;
 }
 
-export interface OpeningHoursSpecification {
-  "@type": "OpeningHoursSpecification";
-  dayOfWeek: string[];
-  opens: string;
-  closes: string;
-}
-
 /**
  * Single Source of Truth for Location Data
  * This file centralizes all NAP (Name, Address, Phone) and location-specific data.
@@ -45,7 +38,6 @@ export interface LocationData {
   top_services_slugs: string[];
   top_conditions_slugs: string[];
   sameAs?: string[];
-  openingHoursSpecification?: OpeningHoursSpecification[];
 }
 
 export const CANONICAL_PHYSICIAN_NAME = "Dr. Sayuj Krishnan – Neurosurgeon";
@@ -70,15 +62,6 @@ export const YASHODA_GEO: LocationGeo = {
   longitude: 78.5147,
 };
 
-export const YASHODA_OPENING_HOURS_SPEC: OpeningHoursSpecification[] = [
-  {
-    "@type": "OpeningHoursSpecification",
-    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-    opens: "10:00",
-    closes: "16:00"
-  }
-];
-
 // Common map links
 export const YASHODA_DIRECTIONS = "https://maps.google.com/?q=Yashoda+Hospitals+Malakpet+Hyderabad";
 export const CANONICAL_MAPS_URL = "https://www.google.com/maps/place/Dr+Sayuj+Krishnan";
@@ -98,9 +81,7 @@ export const SOCIAL_PROFILES = [
   "https://www.practo.com/hyderabad/doctor/dr-sayuj-krishnan-neurosurgeon",
   "https://www.justdial.com/Hyderabad/Dr-Sayuj-Krishnan-Neurosurgeon-Yashoda-Hospital-Malakpet/040PXX40-XX40-210816155554-Q2H6_BZDET",
   "https://www.lybrate.com/hyderabad/doctor/dr-sayuj-krishnan-neurosurgeon",
-  "https://www.clinicspots.com/doctor/dr-sayuj-krishnan",
-  "https://www.skedoc.com/hyderabad/doctor/dr-sayuj-krishnan-s-neuro-surgeon",
-  "https://medigence.com/doctor/neurosurgeon/sayuj-krishnan-s"
+  "https://www.clinicspots.com/doctor/dr-sayuj-krishnan"
 ];
 
 const DEFAULT_SERVICES = [
@@ -113,7 +94,7 @@ const DEFAULT_SERVICES = [
 const DEFAULT_CONDITIONS = [
   "sciatica-pain-treatment-hyderabad",
   "slip-disc-treatment-hyderabad",
-  "brain-tumor-symptoms-hyderabad",
+  "brain-tumor-surgery-hyderabad",
   "trigeminal-neuralgia-treatment-hyderabad"
 ];
 
@@ -134,8 +115,7 @@ export const locations: LocationData[] = [
     areaServedName: "Secunderabad",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES,
-    openingHoursSpecification: YASHODA_OPENING_HOURS_SPEC
+    sameAs: SOCIAL_PROFILES
   },
   {
     id: "hitech-city",
@@ -152,8 +132,7 @@ export const locations: LocationData[] = [
     areaServedName: "Hitech City",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES,
-    openingHoursSpecification: YASHODA_OPENING_HOURS_SPEC
+    sameAs: SOCIAL_PROFILES
   },
   {
     id: "banjara-hills",
@@ -170,8 +149,7 @@ export const locations: LocationData[] = [
     areaServedName: "Banjara Hills",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES,
-    openingHoursSpecification: YASHODA_OPENING_HOURS_SPEC
+    sameAs: SOCIAL_PROFILES
   },
   {
     id: "gachibowli",
@@ -188,8 +166,7 @@ export const locations: LocationData[] = [
     areaServedName: "Gachibowli",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES,
-    openingHoursSpecification: YASHODA_OPENING_HOURS_SPEC
+    sameAs: SOCIAL_PROFILES
   },
   {
     id: "jubilee-hills",
@@ -206,8 +183,7 @@ export const locations: LocationData[] = [
     areaServedName: "Jubilee Hills",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES,
-    openingHoursSpecification: YASHODA_OPENING_HOURS_SPEC
+    sameAs: SOCIAL_PROFILES
   },
   {
     id: "malakpet",
@@ -224,8 +200,7 @@ export const locations: LocationData[] = [
     areaServedName: "Malakpet",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES,
-    openingHoursSpecification: YASHODA_OPENING_HOURS_SPEC
+    sameAs: SOCIAL_PROFILES
   },
   {
     id: "hyderabad",
@@ -242,8 +217,7 @@ export const locations: LocationData[] = [
     areaServedName: "Hyderabad",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES,
-    openingHoursSpecification: YASHODA_OPENING_HOURS_SPEC
+    sameAs: SOCIAL_PROFILES
   },
   {
     id: "lb-nagar",
@@ -260,8 +234,7 @@ export const locations: LocationData[] = [
     areaServedName: "LB Nagar",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES,
-    openingHoursSpecification: YASHODA_OPENING_HOURS_SPEC
+    sameAs: SOCIAL_PROFILES
   },
   {
     id: "kukatpally",
@@ -278,8 +251,7 @@ export const locations: LocationData[] = [
     areaServedName: "Kukatpally",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES,
-    openingHoursSpecification: YASHODA_OPENING_HOURS_SPEC
+    sameAs: SOCIAL_PROFILES
   },
   {
     id: "manikonda",
@@ -296,8 +268,7 @@ export const locations: LocationData[] = [
     areaServedName: "Manikonda",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES,
-    openingHoursSpecification: YASHODA_OPENING_HOURS_SPEC
+    sameAs: SOCIAL_PROFILES
   },
   {
     id: "nizampet",
@@ -314,8 +285,7 @@ export const locations: LocationData[] = [
     areaServedName: "Nizampet",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES,
-    openingHoursSpecification: YASHODA_OPENING_HOURS_SPEC
+    sameAs: SOCIAL_PROFILES
   },
   {
     id: "kondapur",
@@ -332,8 +302,7 @@ export const locations: LocationData[] = [
     areaServedName: "Kondapur",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES,
-    openingHoursSpecification: YASHODA_OPENING_HOURS_SPEC
+    sameAs: SOCIAL_PROFILES
   },
   {
     id: "kothapet",
@@ -350,8 +319,7 @@ export const locations: LocationData[] = [
     areaServedName: "Kothapet",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES,
-    openingHoursSpecification: YASHODA_OPENING_HOURS_SPEC
+    sameAs: SOCIAL_PROFILES
   },
   {
     id: "madhapur",
@@ -368,8 +336,7 @@ export const locations: LocationData[] = [
     areaServedName: "Madhapur",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES,
-    openingHoursSpecification: YASHODA_OPENING_HOURS_SPEC
+    sameAs: SOCIAL_PROFILES
   },
   {
     id: "dilsukhnagar",
@@ -386,8 +353,7 @@ export const locations: LocationData[] = [
     areaServedName: "Dilsukhnagar",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES,
-    openingHoursSpecification: YASHODA_OPENING_HOURS_SPEC
+    sameAs: SOCIAL_PROFILES
   },
   {
     id: "vanasthalipuram",
@@ -404,8 +370,7 @@ export const locations: LocationData[] = [
     areaServedName: "Vanasthalipuram",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES,
-    openingHoursSpecification: YASHODA_OPENING_HOURS_SPEC
+    sameAs: SOCIAL_PROFILES
   },
   {
     id: "miyapur",
@@ -422,8 +387,7 @@ export const locations: LocationData[] = [
     areaServedName: "Miyapur",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES,
-    openingHoursSpecification: YASHODA_OPENING_HOURS_SPEC
+    sameAs: SOCIAL_PROFILES
   },
   {
     id: "uppal",
@@ -440,26 +404,7 @@ export const locations: LocationData[] = [
     areaServedName: "Uppal",
     top_services_slugs: DEFAULT_SERVICES,
     top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES,
-    openingHoursSpecification: YASHODA_OPENING_HOURS_SPEC
-  },
-  {
-    id: "kachiguda",
-    name: "Dr Sayuj Krishnan - Neurosurgeon near Kachiguda",
-    canonical_display_name: CANONICAL_PHYSICIAN_NAME,
-    slug: "/locations/neurosurgeon-near-kachiguda-faq",
-    address: YASHODA_MALAKPET_ADDRESS,
-    telephone: CANONICAL_TELEPHONE,
-    whatsapp: CANONICAL_WHATSAPP,
-    directions_url: YASHODA_DIRECTIONS,
-    google_maps_place_url: CANONICAL_MAPS_URL,
-    embed_url: REPO_EMBED,
-    geo: YASHODA_GEO,
-    areaServedName: "Kachiguda",
-    top_services_slugs: DEFAULT_SERVICES,
-    top_conditions_slugs: DEFAULT_CONDITIONS,
-    sameAs: SOCIAL_PROFILES,
-    openingHoursSpecification: YASHODA_OPENING_HOURS_SPEC
+    sameAs: SOCIAL_PROFILES
   }
 ];
 
@@ -481,8 +426,7 @@ export type LocationId =
   | "dilsukhnagar"
   | "vanasthalipuram"
   | "miyapur"
-  | "uppal"
-  | "kachiguda";
+  | "uppal";
 
 export function getLocationById(id: string): LocationData | undefined {
   return locations.find(loc => loc.id === id);

@@ -31,14 +31,6 @@ export const metadata: Metadata = {
       },
     ],
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Blog | Dr Sayuj Krishnan - Neurosurgery Insights',
-    description: 'Latest insights, research, and updates in neurosurgery from Dr Sayuj Krishnan. Expert articles on brain and spine conditions, treatments, and innovations.',
-    images: [`${SITE_URL}/images/og-default.jpg`],
-    site: '@drsayuj',
-    creator: '@drsayuj',
-  },
 };
 
 // Helper function to extract title from content
@@ -82,6 +74,14 @@ export default async function BlogPage() {
 
   // Static blog posts (legacy, can be combined with WordPress posts later)
   const staticPosts = [
+    {
+      id: 'world-stroke-day-2025-hyderabad-stroke-code',
+      title: 'World Stroke Day 2025: Recognize Stroke Fast, Act Faster',
+      slug: 'world-stroke-day-2025-hyderabad-stroke-code',
+      excerpt: 'World Stroke Day 2025 guide for Hyderabad families—BE-FAST checklist, 108 emergency actions, treatment windows, and Dr Sayuj’s Stroke Code pathway.',
+      date: '2025-10-29',
+      featuredImage: '/images/og-default.jpg'
+    },
     {
       id: 'endoscopic-discectomy-cost-hyderabad',
       title: 'Endoscopic Discectomy Cost in Hyderabad: Complete Pricing Guide',

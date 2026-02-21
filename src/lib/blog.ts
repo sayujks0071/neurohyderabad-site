@@ -7,6 +7,7 @@
 
 import fs from 'fs/promises';
 import path from 'path';
+import { unstable_cache } from 'next/cache';
 import matter from 'gray-matter';
 import type { BlogPost, BlogCategory } from '@/src/types/blog';
 import { BLOG_DEFAULTS, validateBlogPost } from '@/src/types/blog';
@@ -70,9 +71,9 @@ async function parseBlogFile(filePath: string): Promise<BlogPost | null> {
 }
 
 /**
- * Get all blog posts, sorted by published date (newest first)
+ * Internal function to get all blog posts (uncached)
  */
-export async function getAllBlogPosts(): Promise<BlogPost[]> {
+async function _getAllBlogPosts(): Promise<BlogPost[]> {
   try {
     // Check if blog directory exists
     try {
@@ -114,6 +115,19 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
     return [];
   }
 }
+
+/**
+ * Get all blog posts, sorted by published date (newest first).
+ * Cached for 1 hour using Next.js unstable_cache.
+ */
+export const getAllBlogPosts = unstable_cache(
+  _getAllBlogPosts,
+  ['all-blog-posts'],
+  {
+    revalidate: 3600,
+    tags: ['blog-posts']
+  }
+);
 
 /**
  * Get a single blog post by slug

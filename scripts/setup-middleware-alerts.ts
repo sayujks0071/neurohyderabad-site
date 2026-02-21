@@ -89,18 +89,6 @@ const ALERTS: AlertConfig[] = [
     severity: 'high',
   },
   {
-    name: 'Mobile LCP High',
-    description: 'Mobile LCP > 3s',
-    condition: {
-      metric: 'web_vitals.lcp',
-      threshold: 3000,
-      operator: '>',
-      window: '10m',
-      filters: [{ key: 'device', value: 'mobile' }],
-    },
-    severity: 'high',
-  },
-  {
     name: 'Chatbot API Latency',
     description: 'Chatbot API taking longer than 3s',
     condition: {

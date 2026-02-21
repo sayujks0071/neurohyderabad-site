@@ -8,11 +8,11 @@ export default function AppointmentSchema() {
 
   // SEO: Dynamic JSON-LD for Physician and MedicalClinic specific to the booking page context.
   // Helps Google associate this page with the physician and clinic location.
-  // Verified by Jules (2026-02-20): Schema matches requirements for Physician (Dr. Sayuj Krishnan) and MedicalClinic (Yashoda Hospitals).
-  // Includes: Name, Specialty (Neurosurgeon), Address (Malakpet), Services (Neurosurgery, Spine Surgery, Brain Tumor Surgery), and Booking URL.
+  // Verified to meet SEO requirements: Physician, MedicalClinic, Address, Services.
+  // Validated against schema.org recommendations for local business/medical practice.
   const physicianSchema = {
     "@type": "Physician",
-    "@id": `${SITE_URL}/appointments#physician`,
+    "@id": `${SITE_URL}/#physician`,
     "name": "Dr. Sayuj Krishnan",
     "medicalSpecialty": "Neurosurgeon",
     "address": {
@@ -45,7 +45,6 @@ export default function AppointmentSchema() {
     "telephone": malakpet.telephone,
     "image": `${SITE_URL}/images/dr-sayuj-krishnan-portrait-v2.jpg`,
     "priceRange": "₹₹",
-    "openingHoursSpecification": malakpet.openingHoursSpecification,
     "worksFor": {
       "@id": `${SITE_URL}/appointments#clinic`
     }
@@ -77,7 +76,7 @@ export default function AppointmentSchema() {
       "@id": `${SITE_URL}/#hospital`
     },
     "department": {
-      "@id": `${SITE_URL}/appointments#physician`
+      "@id": `${SITE_URL}/#physician`
     }
   };
 

@@ -4,6 +4,7 @@ import { generateObject } from 'ai';
 import { rateLimit } from '@/src/lib/rate-limit';
 import { escapeHtml } from '@/src/lib/validation';
 import { getTextModel } from '@/src/lib/ai/gateway';
+import { slack } from '@/src/lib/slack';
 
 interface BookingRequest {
   message: string;
@@ -17,7 +18,10 @@ interface BookingRequest {
     preferredTime?: string;
     symptoms?: string[];
     previousTreatment?: string;
-    insurance?: string;
+    insuranceProvider?: string;
+    insurancePolicyNumber?: string;
+    emergencyContactName?: string;
+    emergencyContactPhone?: string;
     painScore?: number;
     mriScanAvailable?: boolean;
   };
@@ -64,7 +68,10 @@ const aiBookingSchema = z.object({
     preferredTime: z.string().optional(),
     symptoms: z.array(z.string()).optional(),
     previousTreatment: z.string().optional(),
-    insurance: z.string().optional(),
+    insuranceProvider: z.string().optional(),
+    insurancePolicyNumber: z.string().optional(),
+    emergencyContactName: z.string().optional(),
+    emergencyContactPhone: z.string().optional(),
     painScore: z.number().min(1).max(10).optional(),
     mriScanAvailable: z.boolean().optional(),
   }).optional().describe("Updated booking data extracted from the conversation."),
@@ -101,7 +108,7 @@ function extractEmail(text: string): string | null {
 async function generateAIResponse(request: BookingRequest): Promise<AIResponse> {
   const { message } = request;
   const bookingData = request.bookingData || {};
-  
+
   const isEmergency = detectEmergency(message);
   const detectedCondition = detectCondition(message);
   const phoneNumber = extractPhoneNumber(message);
@@ -148,8 +155,9 @@ Instructions:
    - 'condition': If condition is unknown, ask about symptoms.
    - 'urgency': If urgency is unknown, ask about pain levels (1-10) and if they have any recent MRI scans.
    - 'details': If name/phone/email are missing, ask for them.
+   - 'insurance': If appropriate (e.g., surgery discussions), ask if they have medical insurance and the provider.
    - 'scheduling': If date/time are missing, ask for preference (OPD hours: Mon-Sat 10am-1pm, 5pm-7:30pm).
-   - 'confirmation': If all key info (name, phone, condition, urgency, painScore, mriScanAvailable, date) is present, summarize and ask to confirm.
+   - 'confirmation': If all key info (name, phone, condition, urgency, painScore, mriScanAvailable, date, insurance) is present, summarize and ask to confirm.
 4. Be empathetic and professional. Dr. Sayuj is a specialist.
 5. If the user asks unrelated medical questions, politely guide them back to booking or suggest a consultation.
 
@@ -198,7 +206,7 @@ export async function POST(request: NextRequest) {
 
   try {
     const body = await request.json();
-    
+
     // 🛡️ Sentinel: Input validation
     if (!body.message) {
       return NextResponse.json(
@@ -217,10 +225,10 @@ export async function POST(request: NextRequest) {
     if (body.bookingData) {
       for (const [key, val] of Object.entries(body.bookingData)) {
         if (typeof val === 'string' && val.length > 100) {
-           return NextResponse.json(
-             { error: `Field '${key}' too long (max 100 characters)` },
-             { status: 400 }
-           );
+          return NextResponse.json(
+            { error: `Field '${key}' too long (max 100 characters)` },
+            { status: 400 }
+          );
         }
       }
     }
@@ -238,12 +246,61 @@ export async function POST(request: NextRequest) {
       bookingData: aiResponse.bookingData
     });
 
+    // 🔔 Notify Slack on Emergency or Critical Fallback
+    // 🔔 Notify Slack on Emergency or Critical Fallback
+    if (aiResponse.isEmergency) {
+      const slackRes = await slack.notify(`🚨 *EMERGENCY DETECTED*
+*User Message:* ${body.message}
+*Condition Hint:* ${aiResponse.bookingData?.condition || 'Unknown'}
+*Phone:* ${aiResponse.bookingData?.phone || 'Not provided'}
+*Action:* User advised to call emergency hotline.`);
+
+      if (slackRes && slackRes.ts && body.threadId) {
+        await slack.saveThreadMapping(slackRes.ts, body.threadId, slackRes.channel);
+      }
+
+    } else if (aiResponse.response.includes("I apologize, I'm having trouble")) {
+      const slackRes = await slack.notify(`⚠️ *Booking Bot Fallback*
+*User Message:* ${body.message}
+*Reason:* AI failed to process request logic.`);
+
+      if (slackRes && slackRes.ts && body.threadId) {
+        await slack.saveThreadMapping(slackRes.ts, body.threadId, slackRes.channel);
+      }
+    } else {
+      // 🔔 Notify on High-Value Booking Activity (Name/Phone provided or Confirmation step)
+      const hasContactInfo = aiResponse.bookingData?.phone || aiResponse.bookingData?.email;
+      const isConfirmationStep = aiResponse.nextStep === 'confirmation';
+      const isSchedulingStep = aiResponse.nextStep === 'scheduling';
+
+      if (hasContactInfo || isConfirmationStep || isSchedulingStep) {
+        const slackRes = await slack.notify(`📅 *Booking Activity*
+*User Message:* ${body.message}
+*Status:* ${aiResponse.nextStep || 'In Progress'}
+*Data:* Name: ${aiResponse.bookingData?.name || 'N/A'}, Phone: ${aiResponse.bookingData?.phone || 'N/A'}
+*AI Response:* ${aiResponse.response.substring(0, 100)}...`);
+
+        if (slackRes && slackRes.ts && body.threadId) {
+          await slack.saveThreadMapping(slackRes.ts, body.threadId, slackRes.channel);
+        }
+      }
+    }
+
+    // Check for pending admin replies (if threadId is present)
+    if (body.threadId) {
+      const pendingReply = await slack.getPendingReply(body.threadId);
+      if (pendingReply) {
+        // Initaiate handoff or just append message
+        aiResponse.response += `\n\n[Message from ${pendingReply.admin_name}]: ${pendingReply.message_text}`;
+      }
+    }
+
     return NextResponse.json(aiResponse);
 
   } catch (error) {
     console.error('Error processing AI booking request:', error);
     return NextResponse.json(
-      { 
+      {
         error: 'Internal server error',
         response: "I apologize, but I'm having trouble processing your request right now. Please call us directly at +91-9778280044 for immediate assistance."
       },
