@@ -7,17 +7,17 @@ import { rateLimit } from "@/src/lib/rate-limit";
 const ALLOWED_JOBS = {
   "reindex-gemini-rag": {
     cmd: "sh",
-    args: ["-lc", "npm i -g pnpm && pnpm -s i --frozen-lockfile && pnpm -s reindex:gemini"],
+    args: ["-lc", "pnpm -s i --frozen-lockfile && pnpm -s reindex:gemini"],
     envKeys: ["GOOGLE_GENAI_API_KEY", "GEMINI_API_KEY"],
   },
   "seo-audit": {
     cmd: "sh",
-    args: ["-lc", "npm i -g pnpm && pnpm -s i --frozen-lockfile && pnpm -s seo:audit"],
+    args: ["-lc", "pnpm -s i --frozen-lockfile && pnpm -s seo:audit"],
     envKeys: [],
   },
   "health-full": {
     cmd: "sh",
-    args: ["-lc", "npm i -g pnpm && pnpm -s i --frozen-lockfile && pnpm -s health:full"],
+    args: ["-lc", "pnpm -s i --frozen-lockfile && pnpm -s health:full"],
     envKeys: [],
   }
 } as const;
@@ -56,13 +56,10 @@ export async function POST(request: Request) {
   }
 
   try {
-    const timeoutMs = process.env.SANDBOX_JOB_TIMEOUT_MS ? parseInt(process.env.SANDBOX_JOB_TIMEOUT_MS, 10) : 1200000; // 20 min
-    const vcpus = process.env.SANDBOX_JOB_VCPUS ? parseInt(process.env.SANDBOX_JOB_VCPUS, 10) : 2;
-
     const sandbox = await createSandbox({
         runtime: 'node',
-        timeoutMs,
-        vcpus,
+        timeoutMs: 1200000, // 20 min
+        vcpus: 2,
         network: NETWORK_POLICIES.ADMIN_JOB,
         source: {
             type: 'git',
@@ -83,7 +80,7 @@ export async function POST(request: Request) {
         sandboxId: (sandbox as any).id || (sandbox as any).sandboxId,
         cmdId: cmd.cmdId || cmd.id,
         startedAt: Date.now(),
-        timeoutMs,
+        timeoutMs: 1200000,
     });
 
   } catch (error: any) {

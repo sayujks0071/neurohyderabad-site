@@ -7,7 +7,7 @@
 - [ ] **Structure:** Check for other orphan pages in `sitemap.ts` that might be duplicates.
 - [ ] **Local SEO:** Enhance "Areas We Serve" section on location pages with specific landmarks.
 - [ ] **Internal Linking:** Add links from "Condition" pages (e.g., Sciatica) to the new "Spine Surgery" FAQs.
-- [x] **Multimedia:** Add `VideoObject` schema to Brain Surgery page if we can source or create an explainer video (Competitor Gap). (Done 2026-02-23 via PatientEducationVideos component)
+- [ ] **Multimedia:** Add `VideoObject` schema to Brain Surgery page if we can source or create an explainer video (Competitor Gap).
 - [ ] **Content:** Expand "Patient Journey" section on Brain Surgery page to match competitor depth.
 - [x] [Content] Add specific cost guide for Brain Tumor Surgery (similar to Spine). (Done 2026-02-22)
 - [ ] **Audit:** Check all "Patient Education Resources" sections on other Condition pages for broken links or missing content.
@@ -17,7 +17,7 @@
 
 ## 2026-01-26
 - **Content Gap:** "Risks & Safety Protocols" section for Endoscopic Spine Surgery. Competitors list specific risks (dural tear, infection) to build trust.
-- [x] **Content Gap:** "Patient Education Video" embed. A 30-second animated explainer of the "Keyhole" vs "Open" difference. (Done 2026-02-23)
+- **Content Gap:** "Patient Education Video" embed. A 30-second animated explainer of the "Keyhole" vs "Open" difference.
 - **Content Gap:** "Anesthesia Protocol" dedicated page. "Awake vs Asleep" is a big patient concern.
 - [ ] **Location Pages:** Apply 'Why Travel' pattern to other location pages (Banjara Hills, Gachibowli, etc.) to address distance objections.
 
@@ -44,17 +44,3 @@
 - [x] **Content Improvement:** Added "Red Flags" emergency section to Spine Surgery page. (Done 2026-02-12)
 - [ ] **Content Gap:** Add similar "Red Flags" sections to other critical pages (Brain Tumor, Epilepsy).
 - [ ] **Technical Fix:** Investigate `middleware.ts` type definition properly (currently using `@ts-ignore`).
-
-## 2026-02-15
-*   **Opportunity:** Interactive "Symptom Checker" for Sciatica/Back Pain.
-*   **Opportunity:** "Recovery Timeline" visualizer for key surgeries (Endoscopic Discectomy).
-*   **Opportunity:** Video Testimonials embedded directly in service pages.
-
-## 2026-02-17
-*   **Content Gap:** The `app/conditions/brain-tumor-symptoms-hyderabad` page is duplicate content with `app/symptoms/signs-of-brain-tumor`. Consider redirecting or merging.
-*   **Internal Linking:** Other service pages (e.g., `spine-surgery`) could benefit from a similar "Comprehensive Condition Guides" section linking to blog posts.
-*   **Technical SEO:** Audit all other `app/symptoms/` pages for broken links to service pages.
-
-## 2026-02-18
-*   **Structure:** Replicate "Advanced Surgical Solutions" (Hub & Spoke procedure linking) section on other major service hubs like Brain Tumor Surgery to match competitor depth. (Done 2026-02-24)
-*   **Content Gap:** Create dedicated service pages for "Endoscopic Skull Base Surgery" and "Stereotactic Biopsy" to fully support the Hub & Spoke model (currently just descriptions in the new component).

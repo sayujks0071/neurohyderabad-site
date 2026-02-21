@@ -11,13 +11,13 @@ export default function MedicalCitations({ className = '' }: MedicalCitationsPro
       aria-label="Medical References"
     >
       <h3 className="text-lg font-bold text-blue-900 mb-4">Medical References</h3>
-      <ul className="text-sm text-gray-700 space-y-2 list-disc pl-5">
-        <li>American Association of Neurological Surgeons (AANS). "Minimally Invasive Spine Surgery." 2024.</li>
-        <li>National Institute of Neurological Disorders and Stroke (NINDS). "Spinal Cord Injury Information Page." 2024.</li>
-        <li>Mayo Clinic. "Spinal Fusion Surgery: What You Need to Know." 2024.</li>
-        <li>NHS. "Spinal Surgery: Types and Recovery." 2024.</li>
-        <li>World Health Organization (WHO). "Surgical Safety Guidelines." 2024.</li>
-      </ul>
+      <div className="text-sm text-gray-700 space-y-2">
+        <p>• American Association of Neurological Surgeons (AANS). "Minimally Invasive Spine Surgery." 2024.</p>
+        <p>• National Institute of Neurological Disorders and Stroke (NINDS). "Spinal Cord Injury Information Page." 2024.</p>
+        <p>• Mayo Clinic. "Spinal Fusion Surgery: What You Need to Know." 2024.</p>
+        <p>• NHS. "Spinal Surgery: Types and Recovery." 2024.</p>
+        <p>• World Health Organization (WHO). "Surgical Safety Guidelines." 2024.</p>
+      </div>
     </section>
   );
 }

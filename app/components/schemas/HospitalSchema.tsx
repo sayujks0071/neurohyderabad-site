@@ -12,8 +12,8 @@ export default function HospitalSchema() {
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Nalgonda X Roads",
-      "addressLocality": "Hyderabad",
-      "addressRegion": "Telangana",
+      "addressLocality": "Malakpet",
+      "addressRegion": "Hyderabad",
       "postalCode": "500036",
       "addressCountry": "IN"
     },

@@ -7,6 +7,7 @@ import { LocationMapEmbed } from "@/src/components/locations/LocationMapEmbed";
 import { LocalPathways } from "@/src/components/locations/LocalPathways";
 import { LocationSchema } from "@/src/components/locations/LocationSchema";
 import MedicalWebPageSchema from "../components/schemas/MedicalWebPageSchema";
+import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
 import { notFound } from "next/navigation";
 
 // Force static generation
@@ -15,9 +16,9 @@ export const dynamicParams = false;
 export const revalidate = 86400;
 
 export const metadata = {
-  title: "Neurosurgeon Banjara Hills | Spine & Brain Specialist | Dr. Sayuj",
+  title: "Neurosurgeon in Banjara Hills | Endoscopic Spine | Dr. Sayuj",
   description:
-    "Consult Dr. Sayuj Krishnan near Banjara Hills. Endoscopic spine & brain surgery specialist. 90% non-surgical success. Book appointment now.",
+    "Consult Dr. Sayuj Krishnan near Banjara Hills, Hyderabad for endoscopic spine & minimally invasive brain surgery. OPD timings, parking, directions, WhatsApp booking, and FAQs.",
   alternates: { canonical: "https://www.drsayuj.info/neurosurgeon-banjara-hills" },
   openGraph: {
     title: "Neurosurgeon in Banjara Hills | Endoscopic Spine | Dr. Sayuj",
@@ -65,13 +66,16 @@ export default function Page() {
         medicalSpecialty="Neurosurgery"
         audience="Patients in Banjara Hills"
       />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Locations", path: "/locations" },
+          { name: "Neurosurgeon Banjara Hills", path: "/neurosurgeon-banjara-hills" }
+        ]}
+      />
       <LocationSchema
          location={location}
          faq={FAQ}
-         breadcrumb={[
-           { name: "Locations", item: "https://www.drsayuj.info/locations" },
-           { name: "Neurosurgeon Banjara Hills", item: "https://www.drsayuj.info/neurosurgeon-banjara-hills" }
-         ]}
       />
 
       <h1 className="text-3xl md:text-4xl font-bold">Neurosurgeon in Banjara Hills, Hyderabad</h1>
@@ -81,7 +85,7 @@ export default function Page() {
 
       <div className="mt-4 bg-blue-50 border border-blue-100 p-4 rounded-lg">
         <p className="text-sm text-blue-800">
-          <strong>Common conditions treated:</strong> <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="underline hover:text-blue-900">Sciatica</Link>, Slip Disc, <Link href="/services/brain-tumor-surgery-hyderabad" className="underline hover:text-blue-900">Brain Tumors</Link>, and Spinal Stenosis.
+          <strong>Common conditions treated:</strong> <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="underline hover:text-blue-900">Sciatica</Link>, Slip Disc, Brain Tumors, and Spinal Stenosis.
         </p>
       </div>
 

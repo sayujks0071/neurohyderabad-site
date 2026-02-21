@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 import { analytics } from '../lib/analytics';
 
 export default function WebVitals() {
-  // Monitoring Core Web Vitals for analytics
   useEffect(() => {
     // Only track if user has given consent
     const hasConsent = localStorage.getItem('analytics-consent') === 'true';
