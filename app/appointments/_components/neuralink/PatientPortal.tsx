@@ -381,7 +381,7 @@ const PatientPortal = () => {
                   {!nearbyCentersResult && !isLocatingCenters && (
                     <button
                       onClick={handleFindNearbyCenters}
-                      className="px-6 py-3 bg-blue-600 text-white rounded-xl font-bold text-sm hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-200 transition-all flex items-center"
+                      className="px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-[0.98] flex items-center"
                     >
                       <Search className="w-4 h-4 mr-2" /> Locate Centers
                     </button>
@@ -501,9 +501,9 @@ const PatientPortal = () => {
               <button
                 onClick={handleNextStep}
                 disabled={!formData.type || !formData.date || !formData.time}
-                className={`flex items-center px-8 py-3 rounded-xl font-bold text-lg transition-all ${!formData.type || !formData.date || !formData.time
+                className={`flex items-center px-8 py-3 rounded-xl font-bold text-lg transition-all duration-300 ${!formData.type || !formData.date || !formData.time
                   ? "bg-slate-100 text-slate-300 cursor-not-allowed"
-                  : "bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-200"
+                  : "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 motion-safe:hover:scale-[1.02] motion-safe:active:scale-[0.98]"
                   }`}
               >
                 Next Step <ChevronRight className="w-5 h-5 ml-2" />
@@ -682,9 +682,9 @@ const PatientPortal = () => {
                   type="button"
                   onClick={handleInterpretReport}
                   disabled={isInterpreting || !reportText.trim()}
-                  className={`w-full py-2.5 rounded-xl text-sm font-bold transition-all flex items-center justify-center ${isInterpreting
+                  className={`w-full py-2.5 rounded-xl text-sm font-bold transition-all duration-300 flex items-center justify-center ${isInterpreting
                     ? "bg-indigo-100 text-indigo-400"
-                    : "bg-indigo-600 text-white hover:bg-indigo-700 shadow-md hover:shadow-indigo-200"
+                    : "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 motion-safe:hover:scale-[1.02] motion-safe:active:scale-[0.98]"
                     }`}
                 >
                   {isInterpreting ? (
