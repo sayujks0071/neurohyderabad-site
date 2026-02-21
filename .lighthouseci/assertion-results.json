@@ -1,26 +1,9 @@
 [
   {
-    "name": "maxNumericValue",
-    "expected": 200,
-    "actual": 378,
-    "values": [
-      1833.000000000001,
-      378
-    ],
-    "operator": "<=",
-    "passed": false,
-    "auditId": "total-blocking-time",
-    "level": "warn",
-    "url": "http://localhost:3000/",
-    "auditTitle": "Total Blocking Time",
-    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/lighthouse-total-blocking-time/"
-  },
-  {
     "name": "minScore",
     "expected": 0.9,
     "actual": 0,
     "values": [
-      0,
       0
     ],
     "operator": ">=",
@@ -36,7 +19,6 @@
     "expected": 0,
     "actual": 1,
     "values": [
-      1,
       1
     ],
     "operator": "<=",
@@ -52,7 +34,6 @@
     "expected": 0.9,
     "actual": 0,
     "values": [
-      0,
       0
     ],
     "operator": ">=",
@@ -66,364 +47,15 @@
   {
     "name": "minScore",
     "expected": 0.9,
-    "actual": 0.5,
-    "values": [
-      0,
-      0.5
-    ],
-    "operator": ">=",
-    "passed": false,
-    "auditId": "duplicated-javascript-insight",
-    "level": "error",
-    "url": "http://localhost:3000/",
-    "auditTitle": "Duplicated JavaScript"
-  },
-  {
-    "name": "maxLength",
-    "expected": 0,
-    "actual": 1,
-    "values": [
-      1,
-      1
-    ],
-    "operator": "<=",
-    "passed": false,
-    "auditId": "duplicated-javascript",
-    "level": "warn",
-    "url": "http://localhost:3000/",
-    "auditTitle": "Remove duplicate modules in JavaScript bundles"
-  },
-  {
-    "name": "minScore",
-    "expected": 0.9,
     "actual": 0,
     "values": [
-      0,
-      0
-    ],
-    "operator": ">=",
-    "passed": false,
-    "auditId": "errors-in-console",
-    "level": "error",
-    "url": "http://localhost:3000/",
-    "auditTitle": "Browser errors were logged to the console",
-    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/best-practices/errors-in-console/"
-  },
-  {
-    "name": "minScore",
-    "expected": 0.9,
-    "actual": 0,
-    "values": [
-      0,
-      0
-    ],
-    "operator": ">=",
-    "passed": false,
-    "auditId": "label-content-name-mismatch",
-    "level": "error",
-    "url": "http://localhost:3000/",
-    "auditTitle": "Elements with visible text labels do not have matching accessible names.",
-    "auditDocumentationLink": "https://dequeuniversity.com/rules/axe/4.10/label-content-name-mismatch"
-  },
-  {
-    "name": "maxNumericValue",
-    "expected": 2500,
-    "actual": 3391.2219999999998,
-    "values": [
-      6252.513900000004,
-      3391.2219999999998
-    ],
-    "operator": "<=",
-    "passed": false,
-    "auditId": "largest-contentful-paint",
-    "level": "warn",
-    "url": "http://localhost:3000/",
-    "auditTitle": "Largest Contentful Paint",
-    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint/"
-  },
-  {
-    "name": "minScore",
-    "expected": 0.9,
-    "actual": 0,
-    "values": [
-      0,
-      0
-    ],
-    "operator": ">=",
-    "passed": false,
-    "auditId": "legacy-javascript-insight",
-    "level": "error",
-    "url": "http://localhost:3000/",
-    "auditTitle": "Legacy JavaScript",
-    "auditDocumentationLink": "https://web.dev/articles/baseline-and-polyfills"
-  },
-  {
-    "name": "maxLength",
-    "expected": 0,
-    "actual": 4,
-    "values": [
-      4,
-      4
-    ],
-    "operator": "<=",
-    "passed": false,
-    "auditId": "legacy-javascript",
-    "level": "warn",
-    "url": "http://localhost:3000/",
-    "auditTitle": "Avoid serving legacy JavaScript to modern browsers",
-    "auditDocumentationLink": "https://web.dev/baseline"
-  },
-  {
-    "name": "minScore",
-    "expected": 0.9,
-    "actual": 0,
-    "values": [
-      0,
-      0
-    ],
-    "operator": ">=",
-    "passed": false,
-    "auditId": "link-text",
-    "level": "error",
-    "url": "http://localhost:3000/",
-    "auditTitle": "Links do not have descriptive text",
-    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/seo/link-text/"
-  },
-  {
-    "name": "minScore",
-    "expected": 0.9,
-    "actual": 0,
-    "values": [
-      0,
-      0
-    ],
-    "operator": ">=",
-    "passed": false,
-    "auditId": "mainthread-work-breakdown",
-    "level": "warn",
-    "url": "http://localhost:3000/",
-    "auditTitle": "Minimize main-thread work",
-    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/mainthread-work-breakdown/"
-  },
-  {
-    "name": "minScore",
-    "expected": 0.9,
-    "actual": 0.5,
-    "values": [
-      0.06,
-      0.5
-    ],
-    "operator": ">=",
-    "passed": false,
-    "auditId": "max-potential-fid",
-    "level": "warn",
-    "url": "http://localhost:3000/",
-    "auditTitle": "Max Potential First Input Delay",
-    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/lighthouse-max-potential-fid/"
-  },
-  {
-    "name": "minScore",
-    "expected": 0.9,
-    "actual": 0,
-    "values": [
-      0,
-      0
-    ],
-    "operator": ">=",
-    "passed": false,
-    "auditId": "network-dependency-tree-insight",
-    "level": "error",
-    "url": "http://localhost:3000/",
-    "auditTitle": "Network dependency tree",
-    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/critical-request-chains"
-  },
-  {
-    "name": "maxLength",
-    "expected": 0,
-    "actual": 2,
-    "values": [
-      2,
-      2
-    ],
-    "operator": "<=",
-    "passed": false,
-    "auditId": "render-blocking-insight",
-    "level": "warn",
-    "url": "http://localhost:3000/",
-    "auditTitle": "Render blocking requests",
-    "auditDocumentationLink": "https://web.dev/learn/performance/understanding-the-critical-path#render-blocking_resources"
-  },
-  {
-    "name": "maxLength",
-    "expected": 0,
-    "actual": 2,
-    "values": [
-      2,
-      2
-    ],
-    "operator": "<=",
-    "passed": false,
-    "auditId": "render-blocking-resources",
-    "level": "warn",
-    "url": "http://localhost:3000/",
-    "auditTitle": "Eliminate render-blocking resources",
-    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/render-blocking-resources/"
-  },
-  {
-    "name": "maxLength",
-    "expected": 0,
-    "actual": 4,
-    "values": [
-      4,
-      4
-    ],
-    "operator": "<=",
-    "passed": false,
-    "auditId": "unused-javascript",
-    "level": "error",
-    "url": "http://localhost:3000/",
-    "auditTitle": "Reduce unused JavaScript",
-    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/"
-  },
-  {
-    "name": "maxLength",
-    "expected": 0,
-    "actual": 1,
-    "values": [
-      1,
-      1
-    ],
-    "operator": "<=",
-    "passed": false,
-    "auditId": "uses-long-cache-ttl",
-    "level": "warn",
-    "url": "http://localhost:3000/",
-    "auditTitle": "Serve static assets with an efficient cache policy",
-    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/uses-long-cache-ttl/"
-  },
-  {
-    "name": "minScore",
-    "expected": 0.9,
-    "actual": 0.43,
-    "values": [
-      0.41,
-      0.43
-    ],
-    "operator": ">=",
-    "passed": false,
-    "auditId": "interactive",
-    "level": "warn",
-    "url": "http://localhost:3000/",
-    "auditTitle": "Time to Interactive",
-    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/interactive/"
-  },
-  {
-    "name": "minScore",
-    "expected": 0.95,
-    "actual": 0.92,
-    "values": [
-      0.92,
-      0.92
-    ],
-    "operator": ">=",
-    "passed": false,
-    "auditProperty": "seo",
-    "auditId": "categories",
-    "level": "warn",
-    "url": "http://localhost:3000/"
-  },
-  {
-    "name": "minScore",
-    "expected": 0.9,
-    "actual": 0.83,
-    "values": [
-      0.48,
-      0.83
-    ],
-    "operator": ">=",
-    "passed": false,
-    "auditProperty": "performance",
-    "auditId": "categories",
-    "level": "warn",
-    "url": "http://localhost:3000/"
-  },
-  {
-    "name": "maxNumericValue",
-    "expected": 200,
-    "actual": 369.5,
-    "values": [
-      391.4999999999991,
-      369.5
-    ],
-    "operator": "<=",
-    "passed": false,
-    "auditId": "total-blocking-time",
-    "level": "warn",
-    "url": "http://localhost:3000/services/endoscopic-spine-surgery-hyderabad",
-    "auditTitle": "Total Blocking Time",
-    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/lighthouse-total-blocking-time/"
-  },
-  {
-    "name": "minScore",
-    "expected": 0.9,
-    "actual": 0,
-    "values": [
-      0,
-      0
-    ],
-    "operator": ">=",
-    "passed": false,
-    "auditId": "bootup-time",
-    "level": "warn",
-    "url": "http://localhost:3000/services/endoscopic-spine-surgery-hyderabad",
-    "auditTitle": "Reduce JavaScript execution time",
-    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/bootup-time/"
-  },
-  {
-    "name": "maxLength",
-    "expected": 0,
-    "actual": 1,
-    "values": [
-      1,
-      1
-    ],
-    "operator": "<=",
-    "passed": false,
-    "auditId": "cache-insight",
-    "level": "warn",
-    "url": "http://localhost:3000/services/endoscopic-spine-surgery-hyderabad",
-    "auditTitle": "Use efficient cache lifetimes",
-    "auditDocumentationLink": "https://web.dev/uses-long-cache-ttl/"
-  },
-  {
-    "name": "minScore",
-    "expected": 0.9,
-    "actual": 0,
-    "values": [
-      0,
-      0
-    ],
-    "operator": ">=",
-    "passed": false,
-    "auditId": "color-contrast",
-    "level": "error",
-    "url": "http://localhost:3000/services/endoscopic-spine-surgery-hyderabad",
-    "auditTitle": "Background and foreground colors do not have a sufficient contrast ratio.",
-    "auditDocumentationLink": "https://dequeuniversity.com/rules/axe/4.10/color-contrast"
-  },
-  {
-    "name": "minScore",
-    "expected": 0.9,
-    "actual": 0,
-    "values": [
-      0,
       0
     ],
     "operator": ">=",
     "passed": false,
     "auditId": "dom-size-insight",
     "level": "warn",
-    "url": "http://localhost:3000/services/endoscopic-spine-surgery-hyderabad",
+    "url": "http://localhost:3000/",
     "auditTitle": "Optimize DOM size",
     "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/dom-size/"
   },
@@ -432,30 +64,13 @@
     "expected": 0.9,
     "actual": 0.5,
     "values": [
-      0.5,
-      0.5
-    ],
-    "operator": ">=",
-    "passed": false,
-    "auditId": "dom-size",
-    "level": "warn",
-    "url": "http://localhost:3000/services/endoscopic-spine-surgery-hyderabad",
-    "auditTitle": "Avoid an excessive DOM size",
-    "auditDocumentationLink": "https://developers.google.com/web/fundamentals/performance/rendering/reduce-the-scope-and-complexity-of-style-calculations"
-  },
-  {
-    "name": "minScore",
-    "expected": 0.9,
-    "actual": 0.5,
-    "values": [
-      0.5,
       0.5
     ],
     "operator": ">=",
     "passed": false,
     "auditId": "duplicated-javascript-insight",
     "level": "error",
-    "url": "http://localhost:3000/services/endoscopic-spine-surgery-hyderabad",
+    "url": "http://localhost:3000/",
     "auditTitle": "Duplicated JavaScript"
   },
   {
@@ -463,14 +78,13 @@
     "expected": 0,
     "actual": 1,
     "values": [
-      1,
       1
     ],
     "operator": "<=",
     "passed": false,
     "auditId": "duplicated-javascript",
     "level": "warn",
-    "url": "http://localhost:3000/services/endoscopic-spine-surgery-hyderabad",
+    "url": "http://localhost:3000/",
     "auditTitle": "Remove duplicate modules in JavaScript bundles"
   },
   {
@@ -478,14 +92,13 @@
     "expected": 0.9,
     "actual": 0,
     "values": [
-      0,
       0
     ],
     "operator": ">=",
     "passed": false,
     "auditId": "errors-in-console",
     "level": "error",
-    "url": "http://localhost:3000/services/endoscopic-spine-surgery-hyderabad",
+    "url": "http://localhost:3000/",
     "auditTitle": "Browser errors were logged to the console",
     "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/best-practices/errors-in-console/"
   },
@@ -494,62 +107,28 @@
     "expected": 0.9,
     "actual": 0,
     "values": [
-      0,
-      0
-    ],
-    "operator": ">=",
-    "passed": false,
-    "auditId": "heading-order",
-    "level": "error",
-    "url": "http://localhost:3000/services/endoscopic-spine-surgery-hyderabad",
-    "auditTitle": "Heading elements are not in a sequentially-descending order",
-    "auditDocumentationLink": "https://dequeuniversity.com/rules/axe/4.10/heading-order"
-  },
-  {
-    "name": "minScore",
-    "expected": 0.9,
-    "actual": 0,
-    "values": [
-      0,
       0
     ],
     "operator": ">=",
     "passed": false,
     "auditId": "label-content-name-mismatch",
     "level": "error",
-    "url": "http://localhost:3000/services/endoscopic-spine-surgery-hyderabad",
+    "url": "http://localhost:3000/",
     "auditTitle": "Elements with visible text labels do not have matching accessible names.",
     "auditDocumentationLink": "https://dequeuniversity.com/rules/axe/4.10/label-content-name-mismatch"
-  },
-  {
-    "name": "maxNumericValue",
-    "expected": 2500,
-    "actual": 3090.6677,
-    "values": [
-      3538.4979000000003,
-      3090.6677
-    ],
-    "operator": "<=",
-    "passed": false,
-    "auditId": "largest-contentful-paint",
-    "level": "warn",
-    "url": "http://localhost:3000/services/endoscopic-spine-surgery-hyderabad",
-    "auditTitle": "Largest Contentful Paint",
-    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint/"
   },
   {
     "name": "minScore",
     "expected": 0.9,
     "actual": 0.5,
     "values": [
-      0,
       0.5
     ],
     "operator": ">=",
     "passed": false,
     "auditId": "legacy-javascript-insight",
     "level": "error",
-    "url": "http://localhost:3000/services/endoscopic-spine-surgery-hyderabad",
+    "url": "http://localhost:3000/",
     "auditTitle": "Legacy JavaScript",
     "auditDocumentationLink": "https://web.dev/articles/baseline-and-polyfills"
   },
@@ -558,14 +137,13 @@
     "expected": 0,
     "actual": 4,
     "values": [
-      4,
       4
     ],
     "operator": "<=",
     "passed": false,
     "auditId": "legacy-javascript",
     "level": "warn",
-    "url": "http://localhost:3000/services/endoscopic-spine-surgery-hyderabad",
+    "url": "http://localhost:3000/",
     "auditTitle": "Avoid serving legacy JavaScript to modern browsers",
     "auditDocumentationLink": "https://web.dev/baseline"
   },
@@ -574,14 +152,13 @@
     "expected": 0.9,
     "actual": 0,
     "values": [
-      0,
       0
     ],
     "operator": ">=",
     "passed": false,
     "auditId": "link-text",
     "level": "error",
-    "url": "http://localhost:3000/services/endoscopic-spine-surgery-hyderabad",
+    "url": "http://localhost:3000/",
     "auditTitle": "Links do not have descriptive text",
     "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/seo/link-text/"
   },
@@ -590,30 +167,28 @@
     "expected": 0.9,
     "actual": 0,
     "values": [
-      0,
       0
     ],
     "operator": ">=",
     "passed": false,
     "auditId": "mainthread-work-breakdown",
     "level": "warn",
-    "url": "http://localhost:3000/services/endoscopic-spine-surgery-hyderabad",
+    "url": "http://localhost:3000/",
     "auditTitle": "Minimize main-thread work",
     "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/mainthread-work-breakdown/"
   },
   {
     "name": "minScore",
     "expected": 0.9,
-    "actual": 0.48,
+    "actual": 0.03,
     "values": [
-      0.48,
-      0.48
+      0.03
     ],
     "operator": ">=",
     "passed": false,
     "auditId": "max-potential-fid",
     "level": "warn",
-    "url": "http://localhost:3000/services/endoscopic-spine-surgery-hyderabad",
+    "url": "http://localhost:3000/",
     "auditTitle": "Max Potential First Input Delay",
     "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/lighthouse-max-potential-fid/"
   },
@@ -622,14 +197,13 @@
     "expected": 0.9,
     "actual": 0,
     "values": [
-      0,
       0
     ],
     "operator": ">=",
     "passed": false,
     "auditId": "network-dependency-tree-insight",
     "level": "error",
-    "url": "http://localhost:3000/services/endoscopic-spine-surgery-hyderabad",
+    "url": "http://localhost:3000/",
     "auditTitle": "Network dependency tree",
     "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/critical-request-chains"
   },
@@ -638,14 +212,13 @@
     "expected": 0,
     "actual": 2,
     "values": [
-      2,
       2
     ],
     "operator": "<=",
     "passed": false,
     "auditId": "render-blocking-insight",
     "level": "warn",
-    "url": "http://localhost:3000/services/endoscopic-spine-surgery-hyderabad",
+    "url": "http://localhost:3000/",
     "auditTitle": "Render blocking requests",
     "auditDocumentationLink": "https://web.dev/learn/performance/understanding-the-critical-path#render-blocking_resources"
   },
@@ -654,30 +227,43 @@
     "expected": 0,
     "actual": 2,
     "values": [
-      2,
       2
     ],
     "operator": "<=",
     "passed": false,
     "auditId": "render-blocking-resources",
     "level": "warn",
-    "url": "http://localhost:3000/services/endoscopic-spine-surgery-hyderabad",
+    "url": "http://localhost:3000/",
     "auditTitle": "Eliminate render-blocking resources",
     "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/render-blocking-resources/"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.9,
+    "actual": 0.89,
+    "values": [
+      0.89
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditId": "speed-index",
+    "level": "warn",
+    "url": "http://localhost:3000/",
+    "auditTitle": "Speed Index",
+    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/speed-index/"
   },
   {
     "name": "maxLength",
     "expected": 0,
     "actual": 4,
     "values": [
-      4,
       4
     ],
     "operator": "<=",
     "passed": false,
     "auditId": "unused-javascript",
     "level": "error",
-    "url": "http://localhost:3000/services/endoscopic-spine-surgery-hyderabad",
+    "url": "http://localhost:3000/",
     "auditTitle": "Reduce unused JavaScript",
     "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/"
   },
@@ -686,92 +272,43 @@
     "expected": 0,
     "actual": 1,
     "values": [
-      1,
       1
     ],
     "operator": "<=",
     "passed": false,
     "auditId": "uses-long-cache-ttl",
     "level": "warn",
-    "url": "http://localhost:3000/services/endoscopic-spine-surgery-hyderabad",
+    "url": "http://localhost:3000/",
     "auditTitle": "Serve static assets with an efficient cache policy",
     "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/uses-long-cache-ttl/"
   },
   {
     "name": "minScore",
     "expected": 0.9,
-    "actual": 0.42,
+    "actual": 0.35,
     "values": [
-      0.42,
-      0.42
+      0.35
     ],
     "operator": ">=",
     "passed": false,
     "auditId": "interactive",
     "level": "warn",
-    "url": "http://localhost:3000/services/endoscopic-spine-surgery-hyderabad",
+    "url": "http://localhost:3000/",
     "auditTitle": "Time to Interactive",
     "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/interactive/"
-  },
-  {
-    "name": "minScore",
-    "expected": 0.95,
-    "actual": 0.92,
-    "values": [
-      0.92,
-      0.92
-    ],
-    "operator": ">=",
-    "passed": false,
-    "auditProperty": "seo",
-    "auditId": "categories",
-    "level": "warn",
-    "url": "http://localhost:3000/services/endoscopic-spine-surgery-hyderabad"
-  },
-  {
-    "name": "minScore",
-    "expected": 0.9,
-    "actual": 0.85,
-    "values": [
-      0.81,
-      0.85
-    ],
-    "operator": ">=",
-    "passed": false,
-    "auditProperty": "performance",
-    "auditId": "categories",
-    "level": "warn",
-    "url": "http://localhost:3000/services/endoscopic-spine-surgery-hyderabad"
-  },
-  {
-    "name": "maxNumericValue",
-    "expected": 200,
-    "actual": 522.5000000000005,
-    "values": [
-      652.5000000000014,
-      522.5000000000005
-    ],
-    "operator": "<=",
-    "passed": false,
-    "auditId": "total-blocking-time",
-    "level": "warn",
-    "url": "http://localhost:3000/services/awake-spine-surgery-hyderabad",
-    "auditTitle": "Total Blocking Time",
-    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/lighthouse-total-blocking-time/"
   },
   {
     "name": "minScore",
     "expected": 0.9,
     "actual": 0,
     "values": [
-      0,
       0
     ],
     "operator": ">=",
     "passed": false,
     "auditId": "bootup-time",
     "level": "warn",
-    "url": "http://localhost:3000/services/awake-spine-surgery-hyderabad",
+    "url": "http://localhost:3000/appointments",
     "auditTitle": "Reduce JavaScript execution time",
     "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/bootup-time/"
   },
@@ -780,14 +317,13 @@
     "expected": 0,
     "actual": 1,
     "values": [
-      1,
       1
     ],
     "operator": "<=",
     "passed": false,
     "auditId": "cache-insight",
     "level": "warn",
-    "url": "http://localhost:3000/services/awake-spine-surgery-hyderabad",
+    "url": "http://localhost:3000/appointments",
     "auditTitle": "Use efficient cache lifetimes",
     "auditDocumentationLink": "https://web.dev/uses-long-cache-ttl/"
   },
@@ -796,14 +332,13 @@
     "expected": 0.9,
     "actual": 0,
     "values": [
-      0,
       0
     ],
     "operator": ">=",
     "passed": false,
     "auditId": "color-contrast",
     "level": "error",
-    "url": "http://localhost:3000/services/awake-spine-surgery-hyderabad",
+    "url": "http://localhost:3000/appointments",
     "auditTitle": "Background and foreground colors do not have a sufficient contrast ratio.",
     "auditDocumentationLink": "https://dequeuniversity.com/rules/axe/4.10/color-contrast"
   },
@@ -812,14 +347,13 @@
     "expected": 0.9,
     "actual": 0.5,
     "values": [
-      0.5,
       0.5
     ],
     "operator": ">=",
     "passed": false,
     "auditId": "duplicated-javascript-insight",
     "level": "error",
-    "url": "http://localhost:3000/services/awake-spine-surgery-hyderabad",
+    "url": "http://localhost:3000/appointments",
     "auditTitle": "Duplicated JavaScript"
   },
   {
@@ -827,14 +361,13 @@
     "expected": 0,
     "actual": 1,
     "values": [
-      1,
       1
     ],
     "operator": "<=",
     "passed": false,
     "auditId": "duplicated-javascript",
     "level": "warn",
-    "url": "http://localhost:3000/services/awake-spine-surgery-hyderabad",
+    "url": "http://localhost:3000/appointments",
     "auditTitle": "Remove duplicate modules in JavaScript bundles"
   },
   {
@@ -842,14 +375,13 @@
     "expected": 0.9,
     "actual": 0,
     "values": [
-      0,
       0
     ],
     "operator": ">=",
     "passed": false,
     "auditId": "errors-in-console",
     "level": "error",
-    "url": "http://localhost:3000/services/awake-spine-surgery-hyderabad",
+    "url": "http://localhost:3000/appointments",
     "auditTitle": "Browser errors were logged to the console",
     "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/best-practices/errors-in-console/"
   },
@@ -858,46 +390,43 @@
     "expected": 0.9,
     "actual": 0,
     "values": [
-      0,
       0
     ],
     "operator": ">=",
     "passed": false,
     "auditId": "forced-reflow-insight",
     "level": "error",
-    "url": "http://localhost:3000/services/awake-spine-surgery-hyderabad",
+    "url": "http://localhost:3000/appointments",
     "auditTitle": "Forced reflow",
     "auditDocumentationLink": "https://developers.google.com/web/fundamentals/performance/rendering/avoid-large-complex-layouts-and-layout-thrashing#avoid-forced-synchronous-layouts"
   },
   {
-    "name": "maxNumericValue",
-    "expected": 2500,
-    "actual": 3164.7313999999997,
+    "name": "minScore",
+    "expected": 0.9,
+    "actual": 0.67,
     "values": [
-      3244.0561,
-      3164.7313999999997
+      0.67
     ],
-    "operator": "<=",
+    "operator": ">=",
     "passed": false,
     "auditId": "largest-contentful-paint",
     "level": "warn",
-    "url": "http://localhost:3000/services/awake-spine-surgery-hyderabad",
+    "url": "http://localhost:3000/appointments",
     "auditTitle": "Largest Contentful Paint",
     "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint/"
   },
   {
     "name": "minScore",
     "expected": 0.9,
-    "actual": 0.5,
+    "actual": 0,
     "values": [
-      0.5,
       0
     ],
     "operator": ">=",
     "passed": false,
     "auditId": "legacy-javascript-insight",
     "level": "error",
-    "url": "http://localhost:3000/services/awake-spine-surgery-hyderabad",
+    "url": "http://localhost:3000/appointments",
     "auditTitle": "Legacy JavaScript",
     "auditDocumentationLink": "https://web.dev/articles/baseline-and-polyfills"
   },
@@ -906,14 +435,13 @@
     "expected": 0,
     "actual": 4,
     "values": [
-      4,
       4
     ],
     "operator": "<=",
     "passed": false,
     "auditId": "legacy-javascript",
     "level": "warn",
-    "url": "http://localhost:3000/services/awake-spine-surgery-hyderabad",
+    "url": "http://localhost:3000/appointments",
     "auditTitle": "Avoid serving legacy JavaScript to modern browsers",
     "auditDocumentationLink": "https://web.dev/baseline"
   },
@@ -922,14 +450,13 @@
     "expected": 0.9,
     "actual": 0,
     "values": [
-      0,
       0
     ],
     "operator": ">=",
     "passed": false,
     "auditId": "link-text",
     "level": "error",
-    "url": "http://localhost:3000/services/awake-spine-surgery-hyderabad",
+    "url": "http://localhost:3000/appointments",
     "auditTitle": "Links do not have descriptive text",
     "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/seo/link-text/"
   },
@@ -938,30 +465,28 @@
     "expected": 0.9,
     "actual": 0,
     "values": [
-      0,
       0
     ],
     "operator": ">=",
     "passed": false,
     "auditId": "mainthread-work-breakdown",
     "level": "warn",
-    "url": "http://localhost:3000/services/awake-spine-surgery-hyderabad",
+    "url": "http://localhost:3000/appointments",
     "auditTitle": "Minimize main-thread work",
     "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/mainthread-work-breakdown/"
   },
   {
     "name": "minScore",
     "expected": 0.9,
-    "actual": 0.43,
+    "actual": 0.4,
     "values": [
-      0.22,
-      0.43
+      0.4
     ],
     "operator": ">=",
     "passed": false,
     "auditId": "max-potential-fid",
     "level": "warn",
-    "url": "http://localhost:3000/services/awake-spine-surgery-hyderabad",
+    "url": "http://localhost:3000/appointments",
     "auditTitle": "Max Potential First Input Delay",
     "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/lighthouse-max-potential-fid/"
   },
@@ -970,14 +495,13 @@
     "expected": 0.9,
     "actual": 0,
     "values": [
-      0,
       0
     ],
     "operator": ">=",
     "passed": false,
     "auditId": "network-dependency-tree-insight",
     "level": "error",
-    "url": "http://localhost:3000/services/awake-spine-surgery-hyderabad",
+    "url": "http://localhost:3000/appointments",
     "auditTitle": "Network dependency tree",
     "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/critical-request-chains"
   },
@@ -986,14 +510,13 @@
     "expected": 0,
     "actual": 2,
     "values": [
-      2,
       2
     ],
     "operator": "<=",
     "passed": false,
     "auditId": "render-blocking-insight",
     "level": "warn",
-    "url": "http://localhost:3000/services/awake-spine-surgery-hyderabad",
+    "url": "http://localhost:3000/appointments",
     "auditTitle": "Render blocking requests",
     "auditDocumentationLink": "https://web.dev/learn/performance/understanding-the-critical-path#render-blocking_resources"
   },
@@ -1002,14 +525,13 @@
     "expected": 0,
     "actual": 2,
     "values": [
-      2,
       2
     ],
     "operator": "<=",
     "passed": false,
     "auditId": "render-blocking-resources",
     "level": "warn",
-    "url": "http://localhost:3000/services/awake-spine-surgery-hyderabad",
+    "url": "http://localhost:3000/appointments",
     "auditTitle": "Eliminate render-blocking resources",
     "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/render-blocking-resources/"
   },
@@ -1018,14 +540,13 @@
     "expected": 0,
     "actual": 3,
     "values": [
-      3,
-      4
+      3
     ],
     "operator": "<=",
     "passed": false,
     "auditId": "unused-javascript",
     "level": "error",
-    "url": "http://localhost:3000/services/awake-spine-surgery-hyderabad",
+    "url": "http://localhost:3000/appointments",
     "auditTitle": "Reduce unused JavaScript",
     "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/"
   },
@@ -1034,61 +555,639 @@
     "expected": 0,
     "actual": 1,
     "values": [
-      1,
       1
     ],
     "operator": "<=",
     "passed": false,
     "auditId": "uses-long-cache-ttl",
     "level": "warn",
-    "url": "http://localhost:3000/services/awake-spine-surgery-hyderabad",
+    "url": "http://localhost:3000/appointments",
     "auditTitle": "Serve static assets with an efficient cache policy",
     "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/uses-long-cache-ttl/"
   },
   {
     "name": "minScore",
     "expected": 0.9,
-    "actual": 0.45,
+    "actual": 0.4,
     "values": [
-      0.44,
-      0.45
+      0.4
     ],
     "operator": ">=",
     "passed": false,
     "auditId": "interactive",
     "level": "warn",
-    "url": "http://localhost:3000/services/awake-spine-surgery-hyderabad",
+    "url": "http://localhost:3000/appointments",
     "auditTitle": "Time to Interactive",
     "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/interactive/"
   },
   {
     "name": "minScore",
-    "expected": 0.95,
-    "actual": 0.92,
+    "expected": 0.9,
+    "actual": 0,
     "values": [
-      0.92,
-      0.92
+      0
     ],
     "operator": ">=",
     "passed": false,
-    "auditProperty": "seo",
-    "auditId": "categories",
+    "auditId": "bootup-time",
     "level": "warn",
-    "url": "http://localhost:3000/services/awake-spine-surgery-hyderabad"
+    "url": "http://localhost:3000/neurosurgeon-banjara-hills",
+    "auditTitle": "Reduce JavaScript execution time",
+    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/bootup-time/"
+  },
+  {
+    "name": "maxLength",
+    "expected": 0,
+    "actual": 1,
+    "values": [
+      1
+    ],
+    "operator": "<=",
+    "passed": false,
+    "auditId": "cache-insight",
+    "level": "warn",
+    "url": "http://localhost:3000/neurosurgeon-banjara-hills",
+    "auditTitle": "Use efficient cache lifetimes",
+    "auditDocumentationLink": "https://web.dev/uses-long-cache-ttl/"
   },
   {
     "name": "minScore",
     "expected": 0.9,
-    "actual": 0.8,
+    "actual": 0,
     "values": [
-      0.76,
-      0.8
+      0
     ],
     "operator": ">=",
     "passed": false,
-    "auditProperty": "performance",
-    "auditId": "categories",
+    "auditId": "color-contrast",
+    "level": "error",
+    "url": "http://localhost:3000/neurosurgeon-banjara-hills",
+    "auditTitle": "Background and foreground colors do not have a sufficient contrast ratio.",
+    "auditDocumentationLink": "https://dequeuniversity.com/rules/axe/4.10/color-contrast"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.9,
+    "actual": 0.5,
+    "values": [
+      0.5
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditId": "document-latency-insight",
+    "level": "error",
+    "url": "http://localhost:3000/neurosurgeon-banjara-hills",
+    "auditTitle": "Document request latency"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.9,
+    "actual": 0,
+    "values": [
+      0
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditId": "duplicated-javascript-insight",
+    "level": "error",
+    "url": "http://localhost:3000/neurosurgeon-banjara-hills",
+    "auditTitle": "Duplicated JavaScript"
+  },
+  {
+    "name": "maxLength",
+    "expected": 0,
+    "actual": 1,
+    "values": [
+      1
+    ],
+    "operator": "<=",
+    "passed": false,
+    "auditId": "duplicated-javascript",
     "level": "warn",
-    "url": "http://localhost:3000/services/awake-spine-surgery-hyderabad"
+    "url": "http://localhost:3000/neurosurgeon-banjara-hills",
+    "auditTitle": "Remove duplicate modules in JavaScript bundles"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.9,
+    "actual": 0,
+    "values": [
+      0
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditId": "errors-in-console",
+    "level": "error",
+    "url": "http://localhost:3000/neurosurgeon-banjara-hills",
+    "auditTitle": "Browser errors were logged to the console",
+    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/best-practices/errors-in-console/"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.9,
+    "actual": 0,
+    "values": [
+      0
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditId": "heading-order",
+    "level": "error",
+    "url": "http://localhost:3000/neurosurgeon-banjara-hills",
+    "auditTitle": "Heading elements are not in a sequentially-descending order",
+    "auditDocumentationLink": "https://dequeuniversity.com/rules/axe/4.10/heading-order"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.9,
+    "actual": 0,
+    "values": [
+      0
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditId": "label-content-name-mismatch",
+    "level": "error",
+    "url": "http://localhost:3000/neurosurgeon-banjara-hills",
+    "auditTitle": "Elements with visible text labels do not have matching accessible names.",
+    "auditDocumentationLink": "https://dequeuniversity.com/rules/axe/4.10/label-content-name-mismatch"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.9,
+    "actual": 0.67,
+    "values": [
+      0.67
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditId": "largest-contentful-paint",
+    "level": "warn",
+    "url": "http://localhost:3000/neurosurgeon-banjara-hills",
+    "auditTitle": "Largest Contentful Paint",
+    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint/"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.9,
+    "actual": 0,
+    "values": [
+      0
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditId": "legacy-javascript-insight",
+    "level": "error",
+    "url": "http://localhost:3000/neurosurgeon-banjara-hills",
+    "auditTitle": "Legacy JavaScript",
+    "auditDocumentationLink": "https://web.dev/articles/baseline-and-polyfills"
+  },
+  {
+    "name": "maxLength",
+    "expected": 0,
+    "actual": 4,
+    "values": [
+      4
+    ],
+    "operator": "<=",
+    "passed": false,
+    "auditId": "legacy-javascript",
+    "level": "warn",
+    "url": "http://localhost:3000/neurosurgeon-banjara-hills",
+    "auditTitle": "Avoid serving legacy JavaScript to modern browsers",
+    "auditDocumentationLink": "https://web.dev/baseline"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.9,
+    "actual": 0,
+    "values": [
+      0
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditId": "link-text",
+    "level": "error",
+    "url": "http://localhost:3000/neurosurgeon-banjara-hills",
+    "auditTitle": "Links do not have descriptive text",
+    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/seo/link-text/"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.9,
+    "actual": 0,
+    "values": [
+      0
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditId": "mainthread-work-breakdown",
+    "level": "warn",
+    "url": "http://localhost:3000/neurosurgeon-banjara-hills",
+    "auditTitle": "Minimize main-thread work",
+    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/mainthread-work-breakdown/"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.9,
+    "actual": 0.4,
+    "values": [
+      0.4
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditId": "max-potential-fid",
+    "level": "warn",
+    "url": "http://localhost:3000/neurosurgeon-banjara-hills",
+    "auditTitle": "Max Potential First Input Delay",
+    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/lighthouse-max-potential-fid/"
+  },
+  {
+    "name": "maxLength",
+    "expected": 0,
+    "actual": 2,
+    "values": [
+      2
+    ],
+    "operator": "<=",
+    "passed": false,
+    "auditId": "render-blocking-insight",
+    "level": "warn",
+    "url": "http://localhost:3000/neurosurgeon-banjara-hills",
+    "auditTitle": "Render blocking requests",
+    "auditDocumentationLink": "https://web.dev/learn/performance/understanding-the-critical-path#render-blocking_resources"
+  },
+  {
+    "name": "maxLength",
+    "expected": 0,
+    "actual": 2,
+    "values": [
+      2
+    ],
+    "operator": "<=",
+    "passed": false,
+    "auditId": "render-blocking-resources",
+    "level": "warn",
+    "url": "http://localhost:3000/neurosurgeon-banjara-hills",
+    "auditTitle": "Eliminate render-blocking resources",
+    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/render-blocking-resources/"
+  },
+  {
+    "name": "maxLength",
+    "expected": 0,
+    "actual": 3,
+    "values": [
+      3
+    ],
+    "operator": "<=",
+    "passed": false,
+    "auditId": "unused-javascript",
+    "level": "error",
+    "url": "http://localhost:3000/neurosurgeon-banjara-hills",
+    "auditTitle": "Reduce unused JavaScript",
+    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/"
+  },
+  {
+    "name": "maxLength",
+    "expected": 0,
+    "actual": 1,
+    "values": [
+      1
+    ],
+    "operator": "<=",
+    "passed": false,
+    "auditId": "uses-long-cache-ttl",
+    "level": "warn",
+    "url": "http://localhost:3000/neurosurgeon-banjara-hills",
+    "auditTitle": "Serve static assets with an efficient cache policy",
+    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/uses-long-cache-ttl/"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.9,
+    "actual": 0.36,
+    "values": [
+      0.36
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditId": "interactive",
+    "level": "warn",
+    "url": "http://localhost:3000/neurosurgeon-banjara-hills",
+    "auditTitle": "Time to Interactive",
+    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/interactive/"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.9,
+    "actual": 0,
+    "values": [
+      0
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditId": "redirects",
+    "level": "error",
+    "url": "http://localhost:3000/neurosurgeon-banjara-hills",
+    "auditTitle": "Avoid multiple page redirects",
+    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/redirects/"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.9,
+    "actual": 0,
+    "values": [
+      0
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditId": "bootup-time",
+    "level": "warn",
+    "url": "http://localhost:3000/conditions/sciatica-pain-treatment-hyderabad",
+    "auditTitle": "Reduce JavaScript execution time",
+    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/bootup-time/"
+  },
+  {
+    "name": "maxLength",
+    "expected": 0,
+    "actual": 1,
+    "values": [
+      1
+    ],
+    "operator": "<=",
+    "passed": false,
+    "auditId": "cache-insight",
+    "level": "warn",
+    "url": "http://localhost:3000/conditions/sciatica-pain-treatment-hyderabad",
+    "auditTitle": "Use efficient cache lifetimes",
+    "auditDocumentationLink": "https://web.dev/uses-long-cache-ttl/"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.9,
+    "actual": 0,
+    "values": [
+      0
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditId": "color-contrast",
+    "level": "error",
+    "url": "http://localhost:3000/conditions/sciatica-pain-treatment-hyderabad",
+    "auditTitle": "Background and foreground colors do not have a sufficient contrast ratio.",
+    "auditDocumentationLink": "https://dequeuniversity.com/rules/axe/4.10/color-contrast"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.9,
+    "actual": 0,
+    "values": [
+      0
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditId": "dom-size-insight",
+    "level": "warn",
+    "url": "http://localhost:3000/conditions/sciatica-pain-treatment-hyderabad",
+    "auditTitle": "Optimize DOM size",
+    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/dom-size/"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.9,
+    "actual": 0,
+    "values": [
+      0
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditId": "dom-size",
+    "level": "warn",
+    "url": "http://localhost:3000/conditions/sciatica-pain-treatment-hyderabad",
+    "auditTitle": "Avoid an excessive DOM size",
+    "auditDocumentationLink": "https://developers.google.com/web/fundamentals/performance/rendering/reduce-the-scope-and-complexity-of-style-calculations"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.9,
+    "actual": 0.5,
+    "values": [
+      0.5
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditId": "duplicated-javascript-insight",
+    "level": "error",
+    "url": "http://localhost:3000/conditions/sciatica-pain-treatment-hyderabad",
+    "auditTitle": "Duplicated JavaScript"
+  },
+  {
+    "name": "maxLength",
+    "expected": 0,
+    "actual": 1,
+    "values": [
+      1
+    ],
+    "operator": "<=",
+    "passed": false,
+    "auditId": "duplicated-javascript",
+    "level": "warn",
+    "url": "http://localhost:3000/conditions/sciatica-pain-treatment-hyderabad",
+    "auditTitle": "Remove duplicate modules in JavaScript bundles"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.9,
+    "actual": 0,
+    "values": [
+      0
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditId": "errors-in-console",
+    "level": "error",
+    "url": "http://localhost:3000/conditions/sciatica-pain-treatment-hyderabad",
+    "auditTitle": "Browser errors were logged to the console",
+    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/best-practices/errors-in-console/"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.9,
+    "actual": 0.63,
+    "values": [
+      0.63
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditId": "largest-contentful-paint",
+    "level": "warn",
+    "url": "http://localhost:3000/conditions/sciatica-pain-treatment-hyderabad",
+    "auditTitle": "Largest Contentful Paint",
+    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint/"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.9,
+    "actual": 0.5,
+    "values": [
+      0.5
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditId": "legacy-javascript-insight",
+    "level": "error",
+    "url": "http://localhost:3000/conditions/sciatica-pain-treatment-hyderabad",
+    "auditTitle": "Legacy JavaScript",
+    "auditDocumentationLink": "https://web.dev/articles/baseline-and-polyfills"
+  },
+  {
+    "name": "maxLength",
+    "expected": 0,
+    "actual": 4,
+    "values": [
+      4
+    ],
+    "operator": "<=",
+    "passed": false,
+    "auditId": "legacy-javascript",
+    "level": "warn",
+    "url": "http://localhost:3000/conditions/sciatica-pain-treatment-hyderabad",
+    "auditTitle": "Avoid serving legacy JavaScript to modern browsers",
+    "auditDocumentationLink": "https://web.dev/baseline"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.9,
+    "actual": 0,
+    "values": [
+      0
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditId": "link-text",
+    "level": "error",
+    "url": "http://localhost:3000/conditions/sciatica-pain-treatment-hyderabad",
+    "auditTitle": "Links do not have descriptive text",
+    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/seo/link-text/"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.9,
+    "actual": 0,
+    "values": [
+      0
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditId": "mainthread-work-breakdown",
+    "level": "warn",
+    "url": "http://localhost:3000/conditions/sciatica-pain-treatment-hyderabad",
+    "auditTitle": "Minimize main-thread work",
+    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/mainthread-work-breakdown/"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.9,
+    "actual": 0.47,
+    "values": [
+      0.47
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditId": "max-potential-fid",
+    "level": "warn",
+    "url": "http://localhost:3000/conditions/sciatica-pain-treatment-hyderabad",
+    "auditTitle": "Max Potential First Input Delay",
+    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/lighthouse-max-potential-fid/"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.9,
+    "actual": 0,
+    "values": [
+      0
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditId": "network-dependency-tree-insight",
+    "level": "error",
+    "url": "http://localhost:3000/conditions/sciatica-pain-treatment-hyderabad",
+    "auditTitle": "Network dependency tree",
+    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/critical-request-chains"
+  },
+  {
+    "name": "maxLength",
+    "expected": 0,
+    "actual": 2,
+    "values": [
+      2
+    ],
+    "operator": "<=",
+    "passed": false,
+    "auditId": "render-blocking-insight",
+    "level": "warn",
+    "url": "http://localhost:3000/conditions/sciatica-pain-treatment-hyderabad",
+    "auditTitle": "Render blocking requests",
+    "auditDocumentationLink": "https://web.dev/learn/performance/understanding-the-critical-path#render-blocking_resources"
+  },
+  {
+    "name": "maxLength",
+    "expected": 0,
+    "actual": 2,
+    "values": [
+      2
+    ],
+    "operator": "<=",
+    "passed": false,
+    "auditId": "render-blocking-resources",
+    "level": "warn",
+    "url": "http://localhost:3000/conditions/sciatica-pain-treatment-hyderabad",
+    "auditTitle": "Eliminate render-blocking resources",
+    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/render-blocking-resources/"
+  },
+  {
+    "name": "maxLength",
+    "expected": 0,
+    "actual": 4,
+    "values": [
+      4
+    ],
+    "operator": "<=",
+    "passed": false,
+    "auditId": "unused-javascript",
+    "level": "error",
+    "url": "http://localhost:3000/conditions/sciatica-pain-treatment-hyderabad",
+    "auditTitle": "Reduce unused JavaScript",
+    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/"
+  },
+  {
+    "name": "maxLength",
+    "expected": 0,
+    "actual": 1,
+    "values": [
+      1
+    ],
+    "operator": "<=",
+    "passed": false,
+    "auditId": "uses-long-cache-ttl",
+    "level": "warn",
+    "url": "http://localhost:3000/conditions/sciatica-pain-treatment-hyderabad",
+    "auditTitle": "Serve static assets with an efficient cache policy",
+    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/uses-long-cache-ttl/"
+  },
+  {
+    "name": "minScore",
+    "expected": 0.9,
+    "actual": 0.38,
+    "values": [
+      0.38
+    ],
+    "operator": ">=",
+    "passed": false,
+    "auditId": "interactive",
+    "level": "warn",
+    "url": "http://localhost:3000/conditions/sciatica-pain-treatment-hyderabad",
+    "auditTitle": "Time to Interactive",
+    "auditDocumentationLink": "https://developer.chrome.com/docs/lighthouse/performance/interactive/"
   }
 ]
