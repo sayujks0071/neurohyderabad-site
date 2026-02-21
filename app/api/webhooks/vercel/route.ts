@@ -466,12 +466,6 @@ async function handleVercelEvent(
       await handlers.handleAlertsTriggered(payload, metadata);
       break;
 
-    // ===== SECURITY =====
-    case 'firewall-attack-blocked':
-    case 'attack.detected': // Alias for user requirement
-      await handlers.handleFirewallAttackBlocked(payload, metadata);
-      break;
-
     // ===== LEGACY EVENTS =====
     case 'deployment.checks.completed': // Deprecated - use deployment.checks.succeeded/failed
       await handlers.handleDeploymentChecksCompleted(payload, metadata);

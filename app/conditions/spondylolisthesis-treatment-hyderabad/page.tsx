@@ -118,7 +118,7 @@ export default function SpondylolisthesisPage() {
                 This is different from a "slip disc" (which involves the soft cushion). Here, the <strong>bone itself shifts position</strong>.
               </p>
               <p className="mb-4">
-                This slippage can compress the spinal cord or nerves, leading to lower back pain, <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 underline">leg pain (sciatica)</Link>, and hamstring tightness.
+                This slippage can compress the spinal cord or nerves, leading to lower back pain, leg pain (sciatica), and hamstring tightness.
                 It is common in older adults (degenerative) but can also occur in young athletes (isthmic).
               </p>
             </div>

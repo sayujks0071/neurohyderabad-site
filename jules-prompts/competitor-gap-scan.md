@@ -1,6 +1,6 @@
 # Competitor Gap Scan
 
-1. Scan top 3 competitors (as defined in `seo/keyword-research/latest/competitors.md` or similar) for new content published recently.
+1. Scan top 3 competitors (as defined in `seo/keyword-research/latest/competitors.md`) for new content published recently.
 2. Compare with our current sitemap.
 3. Identify "Content Gaps" – topics they cover that we do not.
 
@@ -10,7 +10,7 @@
 - If a high-priority gap is found, draft a plan or a new page to cover it.
 
 <!-- Jules Automation -->
-<!-- Schedule: Daily 09:00 IST -->
 <!-- Managed by Jules -->
+<!-- v2.4 -->
 
-<!-- Verified setup -->
+<!-- Verified by Jules -->

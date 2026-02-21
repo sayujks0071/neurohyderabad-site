@@ -15,6 +15,16 @@ vi.mock('@/src/lib/ai/gateway', () => ({
   getTextModel: vi.fn(),
 }));
 
+// Mock dependencies
+vi.mock('@/src/lib/ai/gateway', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('@/src/lib/ai/gateway')>();
+  return {
+    ...actual,
+    hasAIConfig: vi.fn(),
+    getTextModel: vi.fn(),
+  };
+});
+
 vi.mock('@/src/lib/blog', () => ({
   getAllBlogPosts: vi.fn(),
 }));

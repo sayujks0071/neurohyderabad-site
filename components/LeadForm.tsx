@@ -11,7 +11,6 @@ import Input from "@/packages/appointment-form/ui/Input";
 import Textarea from "@/packages/appointment-form/ui/Textarea";
 import Calendar from "@/packages/appointment-form/ui/Calendar";
 import Select from "@/packages/appointment-form/ui/Select";
-import { PainScoreSlider } from "@/packages/appointment-form/ui/PainScoreSlider";
 import { APPOINTMENT_SUCCESS_MESSAGE } from "@/packages/appointment-form/constants";
 
 const schema = z.object({
@@ -50,6 +49,7 @@ export default function LeadForm() {
     reset,
     handleSubmit,
     control,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm({
     resolver: zodResolver(schema),
@@ -60,6 +60,8 @@ export default function LeadForm() {
       mriScanAvailable: false,
     }
   });
+
+  const painScoreValue = watch("painScore");
 
   useEffect(() => {
     analytics.track('Form_View', {
@@ -187,12 +189,42 @@ export default function LeadForm() {
         />
 
         <div className="space-y-4">
-            <PainScoreSlider
-              control={control}
-              register={register}
-              name="painScore"
-              label="Pain Intensity Score (1-10)"
-            />
+            <div>
+              <label htmlFor="painScore" className="block text-sm font-medium text-slate-700 mb-2">
+                Pain Intensity Score (1-10)
+              </label>
+              <div className="flex items-center gap-4">
+                <span className="text-sm font-bold text-slate-400" aria-hidden="true">1</span>
+                <input
+                  id="painScore"
+                  type="range"
+                  min="1"
+                  max="10"
+                  step="1"
+                  className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                  aria-valuetext={painScoreValue ? `Score: ${painScoreValue}${painScoreValue >= 8 ? ' (Severe)' : painScoreValue <= 3 ? ' (Mild)' : ''}` : "Score: 5"}
+                  {...register("painScore")}
+                />
+                <span className="text-sm font-bold text-slate-400" aria-hidden="true">10</span>
+              </div>
+              <div className="text-center mt-2">
+                {painScoreValue !== undefined && (
+                  <span
+                    className={`inline-block px-3 py-1 rounded-lg text-xs font-bold ${
+                      painScoreValue <= 3
+                        ? "bg-green-100 text-green-700"
+                        : painScoreValue <= 7
+                        ? "bg-yellow-100 text-yellow-700"
+                        : "bg-red-100 text-red-700"
+                    }`}
+                  >
+                    Score: {painScoreValue}
+                    {painScoreValue >= 8 && " (Severe)"}
+                    {painScoreValue <= 3 && " (Mild)"}
+                  </span>
+                )}
+              </div>
+            </div>
 
             <label className="flex items-center p-3 bg-slate-50 rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100 transition-colors">
               <input

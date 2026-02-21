@@ -91,7 +91,7 @@ export default function JubileeHillsNeurosurgeonPage() {
             </h2>
             <p className="mt-4 text-gray-700">
               Dr. Sayuj Krishnan provides comprehensive neurosurgical services to patients from <strong>Jubilee Hills</strong>, 
-              one of Hyderabad's premier residential areas. Our clinic at <Link href="/neurosurgeon-malakpet" className="text-blue-600 underline">Yashoda Hospital Malakpet</Link> is conveniently
+              one of Hyderabad's premier residential areas. Our clinic at Yashoda Hospital Malakpet is conveniently 
               accessible (20-35 minutes) from Jubilee Hills Check Post, Film Nagar, and surrounding areas.
             </p>
             <p className="mt-4 text-gray-700">

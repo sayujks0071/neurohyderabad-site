@@ -1,8 +1,3 @@
-import {
-  CANONICAL_TELEPHONE,
-  YASHODA_MALAKPET_ADDRESS
-} from '@/src/data/locations'
-
 export default function DiseaseGuidesStructuredData() {
   const structuredData = {
     "@context": "https://schema.org",
@@ -73,13 +68,13 @@ export default function DiseaseGuidesStructuredData() {
       },
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": YASHODA_MALAKPET_ADDRESS.streetAddress,
-        "addressLocality": YASHODA_MALAKPET_ADDRESS.addressLocality,
-        "addressRegion": YASHODA_MALAKPET_ADDRESS.addressRegion,
-        "postalCode": YASHODA_MALAKPET_ADDRESS.postalCode,
-        "addressCountry": YASHODA_MALAKPET_ADDRESS.addressCountry
+        "streetAddress": "Yashoda Hospital, Malakpet",
+        "addressLocality": "Hyderabad",
+        "addressRegion": "Telangana",
+        "postalCode": "500036",
+        "addressCountry": "IN"
       },
-      "telephone": CANONICAL_TELEPHONE,
+      "telephone": "+91-9778280044",
       "email": "hellodr@drsayuj.info",
       "url": "https://www.drsayuj.info"
     },

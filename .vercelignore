@@ -1,1 +1,8 @@
-# Don't ignore anything - we want full deployment
+.github
+.jules-setup.sh
+.vscode
+AGENTS.md
+OPTIMIZATION_SUMMARY.md
+PERFORMANCE_OPTIMIZATIONS.md
+PROJECT_INFO.md
+SECURITY.md

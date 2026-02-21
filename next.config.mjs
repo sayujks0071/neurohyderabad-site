@@ -116,11 +116,6 @@ const nextConfig = {
         destination: '/services/brain-tumor-surgery-hyderabad',
         permanent: true,
       },
-      {
-        source: '/conditions/brain-tumor-surgery-hyderabad',
-        destination: '/conditions/brain-tumor-symptoms-hyderabad',
-        permanent: true,
-      },
       // Trigeminal neuralgia redirects
       {
         source: '/conditions/trigeminal-neuralgia',

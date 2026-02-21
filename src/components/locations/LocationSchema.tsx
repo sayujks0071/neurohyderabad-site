@@ -47,8 +47,6 @@ export const LocationSchema: React.FC<LocationSchemaProps> = ({
     "telephone": location.telephone,
     "medicalSpecialty": ["Neurosurgery", "Spine Surgery"],
     "priceRange": "₹₹",
-    "paymentAccepted": "Cash, Credit Card, Insurance",
-    "currenciesAccepted": "INR",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": location.address.streetAddress,
@@ -63,7 +61,6 @@ export const LocationSchema: React.FC<LocationSchemaProps> = ({
       "longitude": location.geo.longitude
     } : undefined,
     "hasMap": location.google_maps_place_url,
-    "sameAs": location.sameAs,
     // Establish relationship with the main Hospital entity
     "containedInPlace": {
         "@id": `${siteUrl}/#hospital`
@@ -75,7 +72,7 @@ export const LocationSchema: React.FC<LocationSchemaProps> = ({
         "@type": "Place",
         "name": location.areaServedName
     },
-    "openingHoursSpecification": location.openingHoursSpecification || [
+    "openingHoursSpecification": [
       {
         "@type": "OpeningHoursSpecification",
         "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],

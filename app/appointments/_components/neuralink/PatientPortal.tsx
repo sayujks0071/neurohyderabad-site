@@ -381,7 +381,7 @@ const PatientPortal = () => {
                   {!nearbyCentersResult && !isLocatingCenters && (
                     <button
                       onClick={handleFindNearbyCenters}
-                      className="px-6 py-3 bg-blue-600 text-white rounded-xl font-bold text-sm hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-200 transition-all flex items-center"
+                      className="px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-[0.98] flex items-center"
                     >
                       <Search className="w-4 h-4 mr-2" /> Locate Centers
                     </button>
@@ -501,9 +501,9 @@ const PatientPortal = () => {
               <button
                 onClick={handleNextStep}
                 disabled={!formData.type || !formData.date || !formData.time}
-                className={`flex items-center px-8 py-3 rounded-xl font-bold text-lg transition-all ${!formData.type || !formData.date || !formData.time
+                className={`flex items-center px-8 py-3 rounded-xl font-bold text-lg transition-all duration-300 ${!formData.type || !formData.date || !formData.time
                   ? "bg-slate-100 text-slate-300 cursor-not-allowed"
-                  : "bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-200"
+                  : "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 motion-safe:hover:scale-[1.02] motion-safe:active:scale-[0.98]"
                   }`}
               >
                 Next Step <ChevronRight className="w-5 h-5 ml-2" />
@@ -682,9 +682,9 @@ const PatientPortal = () => {
                   type="button"
                   onClick={handleInterpretReport}
                   disabled={isInterpreting || !reportText.trim()}
-                  className={`w-full py-2.5 rounded-xl text-sm font-bold transition-all flex items-center justify-center ${isInterpreting
+                  className={`w-full py-2.5 rounded-xl text-sm font-bold transition-all duration-300 flex items-center justify-center ${isInterpreting
                     ? "bg-indigo-100 text-indigo-400"
-                    : "bg-indigo-600 text-white hover:bg-indigo-700 shadow-md hover:shadow-indigo-200"
+                    : "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 motion-safe:hover:scale-[1.02] motion-safe:active:scale-[0.98]"
                     }`}
                 >
                   {isInterpreting ? (
@@ -764,7 +764,6 @@ const PatientPortal = () => {
                           : "accent-red-600 focus:ring-red-500"
                       }`}
                       aria-valuetext={`Score: ${formData.painScore}${formData.painScore >= 8 ? ' (Severe)' : formData.painScore <= 3 ? ' (Mild)' : ''}`}
-                      title={`Pain Score: ${formData.painScore}`}
                     />
                     <span className="text-sm font-bold text-slate-400" aria-hidden="true">10</span>
                   </div>
@@ -791,7 +790,7 @@ const PatientPortal = () => {
                   </div>
                 </div>
 
-                <label className="flex items-center p-4 bg-slate-50 rounded-xl border border-slate-200 cursor-pointer hover:bg-blue-50 hover:border-blue-300 transition-all group">
+                <div className="flex items-center p-4 bg-slate-50 rounded-xl border border-slate-200">
                   <input
                     type="checkbox"
                     id="mriScanAvailable"
@@ -804,12 +803,13 @@ const PatientPortal = () => {
                     }
                     className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500 border-gray-300"
                   />
-                  <span
-                    className="ml-3 text-sm font-medium text-slate-700 select-none group-hover:text-blue-800 transition-colors"
+                  <label
+                    htmlFor="mriScanAvailable"
+                    className="ml-3 text-sm font-medium text-slate-700 cursor-pointer select-none"
                   >
                     I have recent MRI/CT Scan reports
-                  </span>
-                </label>
+                  </label>
+                </div>
 
                 {refinementResult && (
                   <div className="bg-blue-50 border border-blue-100 rounded-2xl p-4 space-y-3">

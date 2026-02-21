@@ -16,16 +16,12 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
   const { fps } = useVideoConfig();
   const prefersReducedMotion = usePrefersReducedMotion();
 
-  // Parse the date (memoized for performance)
-  const { monthName, dayNumber, year, dayName } = useMemo(() => {
-    const date = new Date(appointmentDate + 'T00:00:00');
-    return {
-      monthName: date.toLocaleDateString('en-US', { month: 'long' }),
-      dayNumber: date.getDate(),
-      year: date.getFullYear(),
-      dayName: date.toLocaleDateString('en-US', { weekday: 'long' }),
-    };
-  }, [appointmentDate]);
+  // Parse the date
+  const date = new Date(appointmentDate + 'T00:00:00');
+  const monthName = date.toLocaleDateString('en-US', { month: 'long' });
+  const dayNumber = date.getDate();
+  const year = date.getFullYear();
+  const dayName = date.toLocaleDateString('en-US', { weekday: 'long' });
 
   // 1. Main Card Entrance (Pop in with 3D rotation)
   const calendarScale = useMemo(() => prefersReducedMotion ? 1 : spring({
@@ -146,6 +142,17 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
 
   const sheenLeft = interpolate(sheenDriver, [0, 1], [-100, 200]);
 
+  // Blur Animations
+  const calendarBlur = prefersReducedMotion ? 0 : interpolate(frame, [0, 20], [10, 0], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+  });
+
+  const dayNumberBlur = prefersReducedMotion ? 0 : interpolate(frame - 15, [0, 20], [10, 0], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+  });
+
   // Staggered Text Animation
   const successText = "Your Appointment is Scheduled";
   const words = successText.split(' ');
@@ -183,6 +190,7 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
             display: 'flex',
             flexDirection: 'column',
             position: 'relative', // For background grid
+            filter: `blur(${calendarBlur}px)`,
           }}
         >
           {/* Background Grid Pattern */}
@@ -300,7 +308,7 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
               </svg>
             </div>
 
-            <div style={{ transform: `scale(${dayNumberScale})` }}>
+            <div style={{ transform: `scale(${dayNumberScale})`, filter: `blur(${dayNumberBlur}px)` }}>
               <p
                 style={{
                   fontFamily: FONTS.primary,

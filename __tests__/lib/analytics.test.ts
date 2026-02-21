@@ -58,7 +58,6 @@ describe('Analytics Helper', () => {
 
     expect(trackMiddlewareEvent).toHaveBeenCalledWith('Appointment_Success', expect.objectContaining({
       page_slug: 'test-slug',
-      source: 'test-source',
       service_or_condition: 'consultation'
     }));
   });

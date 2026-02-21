@@ -1,6 +1,6 @@
 
 import { NextRequest, NextResponse, after } from "next/server";
-import { rateLimit, getClientIp } from "@/src/lib/rate-limit";
+import { rateLimit } from "@/src/lib/rate-limit";
 import { validateLeadPayload } from "@/src/lib/validation";
 import { submitToGoogleSheets } from "@/src/lib/google-sheets";
 import { randomUUID } from "crypto";
@@ -31,7 +31,7 @@ function normalizeString(value: unknown) {
 }
 
 export async function POST(request: NextRequest) {
-  const ip = getClientIp(request);
+  const ip = request.headers.get("x-forwarded-for") ?? "unknown";
   const limit = rateLimit(ip, 5, 60 * 1000);
 
   if (!limit.success) {
@@ -108,28 +108,62 @@ export async function POST(request: NextRequest) {
     };
 
     // 🏥 CRM Integration: Save lead to patient database
-    let crmErrorDetail = null;
     try {
-      const { patients } = await import('@/src/lib/db');
+      const { createPatient, findPatientByEmail, updatePatient } = await import('@/lib/crm-client');
 
-      const result = await patients.upsert({
-        email: email || `unknown-${Date.now()}@neurohyderabad.com`,
-        name: fullName,
-        phone: phone || undefined,
-        primary_condition: concern || 'Lead from website contact form',
-        acquisition_source: source,
-        pain_score: body.painScore,
-        mri_scan_available: body.mriScanAvailable,
-        notes: concern || undefined,
-      });
+      // Split full name into first and last name
+      const nameParts = fullName.split(' ');
+      const firstName = nameParts[0] || fullName;
+      const lastName = nameParts.slice(1).join(' ') || '';
 
-      console.log('[CRM] Upserted patient:', result?.id);
+      // Check if patient already exists
+      const existingPatient = email ? await findPatientByEmail(email) : null;
+
+      if (existingPatient) {
+        // Update existing patient with new information
+        const updates: any = {
+          phone: phone || existingPatient.phone,
+          notes: existingPatient.notes
+            ? `${existingPatient.notes}\n\n[${new Date().toISOString()}] New inquiry: ${concern || 'General inquiry'}`
+            : concern || 'General inquiry',
+        };
+
+        // Add clinical metadata if available
+        if (body.painScore !== undefined || body.mriScanAvailable !== undefined) {
+          const clinicalNote = [];
+          if (body.painScore !== undefined) clinicalNote.push(`Pain Score: ${body.painScore}/10`);
+          if (body.mriScanAvailable !== undefined) clinicalNote.push(`MRI Scan: ${body.mriScanAvailable ? 'Available' : 'Not Available'}`);
+          updates.notes = existingPatient.notes
+            ? `${existingPatient.notes}\n\n[${new Date().toISOString()}] ${clinicalNote.join(', ')}`
+            : clinicalNote.join(', ');
+        }
+
+        await updatePatient(existingPatient.id!, updates);
+        console.log('[CRM] Updated existing patient:', existingPatient.id);
+      } else {
+        // Create new patient record
+        const newPatient = await createPatient({
+          email: email || `unknown-${Date.now()}@neurohyderabad.com`,
+          firstName,
+          lastName,
+          phone: phone || null,
+          city: city || null,
+          notes: concern || 'Lead from website contact form',
+        });
+        console.log('[CRM] Created new patient:', newPatient.id);
+      }
     } catch (crmError) {
       // Log CRM errors but don't fail the request
       // This ensures lead submission still works even if CRM is down
       console.error('[CRM] Failed to save to CRM database:', crmError);
-      // 🛡️ Sentinel: Do NOT leak internal database errors to the client
-      crmErrorDetail = "CRM Sync Failed";
+
+      return NextResponse.json({
+        ok: true,
+        message: "Lead received successfully (CRM Failed)",
+        requestId: payload.requestId,
+        crmError: crmError instanceof Error ? crmError.message : String(crmError),
+        // crmStack: crmError instanceof Error ? crmError.stack : undefined // Optional
+      });
     }
 
     // Submit to Google Sheets (if configured)
@@ -150,7 +184,10 @@ export async function POST(request: NextRequest) {
       message: "Lead received successfully",
       requestId: payload.requestId,
       note: "Data processed",
-      crmError: crmErrorDetail // Expose CRM error for debugging
+      debug: {
+        crmDb: process.env.CRM_DATABASE_URL?.replace(/:.+@/, ':***@'),
+        timestamp: new Date().toISOString()
+      }
     });
   } catch (error) {
     console.error("Error in /api/lead:", error);

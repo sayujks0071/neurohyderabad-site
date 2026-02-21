@@ -9,8 +9,6 @@ import { LocationSchema } from "@/src/components/locations/LocationSchema";
 import TrustProof from "@/app/_components/TrustProof";
 import { patientStories } from "@/src/content/stories";
 import { notFound } from "next/navigation";
-import CostTransparencySection from "@/src/components/CostTransparencySection";
-import PatientJourneySection from "@/src/components/PatientJourneySection";
 
 // Force static generation
 export const dynamic = 'force-static';
@@ -18,10 +16,10 @@ export const dynamicParams = false;
 export const revalidate = 86400;
 
 export const metadata = {
-  title: "Neurosurgeon Malakpet: Spine & Brain Specialist Dr. Sayuj",
+  title: "Neurosurgeon in Malakpet | Dr. Sayuj | Yashoda Hospitals",
   description:
     "Dr. Sayuj Krishnan at Yashoda Hospital Malakpet offers Daycare Endoscopic Spine Surgery, brain tumor care, and 24/7 emergency neurosurgery. Book a visit.",
-  keywords: "neurosurgeon malakpet, neurosurgeon dilsukhnagar, yashoda hospital malakpet neurosurgeon, spine surgeon malakpet, daycare spine surgery malakpet, endoscopic spine surgery malakpet, spine fracture treatment malakpet",
+  keywords: "neurosurgeon malakpet, yashoda hospital malakpet neurosurgeon, spine surgeon malakpet, daycare spine surgery malakpet, endoscopic spine surgery malakpet, spine fracture treatment malakpet, vertebroplasty malakpet",
   alternates: { canonical: "https://www.drsayuj.info/neurosurgeon-malakpet" },
   openGraph: {
     title: "Neurosurgeon in Malakpet | Dr. Sayuj | Yashoda Hospitals",
@@ -72,33 +70,6 @@ export default function MalakpetNeurosurgeonPage() {
     s.tags.includes('spine') || s.tags.includes('brain')
   ).slice(0, 2);
 
-  const MALAKPET_COSTS = [
-    {
-      procedure: "Neurosurgeon Consultation",
-      range: "₹800 - ₹1,000",
-      recovery: "Immediate",
-      includes: ["Clinical Examination", "MRI Review", "Treatment Plan"]
-    },
-    {
-      procedure: "Endoscopic Discectomy (Daycare)",
-      range: "₹1,20,000 - ₹1,60,000",
-      recovery: "1-2 Weeks",
-      includes: ["Surgery Charges", "Consumables", "Daycare Stay"]
-    },
-    {
-      procedure: "Spine Fixation Surgery (TLIF)",
-      range: "₹2,50,000 - ₹3,50,000",
-      recovery: "3-6 Weeks",
-      includes: ["Implants (Screws/Cage)", "Hospital Stay (3-4 Days)", "OT Charges"]
-    },
-    {
-      procedure: "Brain Tumor Surgery",
-      range: "₹2,00,000 - ₹3,50,000",
-      recovery: "2-4 Weeks",
-      includes: ["Neuronavigation", "ICU Stay", "Ward Charges"]
-    }
-  ];
-
   const commonConditions = [
       { name: "Sciatica & Leg Pain", url: "/conditions/sciatica-pain-treatment-hyderabad" },
       { name: "Slip Disc (Herniated Disc)", url: "/conditions/slip-disc-treatment-hyderabad" },
@@ -109,33 +80,6 @@ export default function MalakpetNeurosurgeonPage() {
       { name: "Neck Pain (Cervical Spondylosis)", url: "/conditions/cervical-radiculopathy-treatment-hyderabad" },
       { name: "Trigeminal Neuralgia", url: "/conditions/trigeminal-neuralgia-treatment-hyderabad" },
       { name: "Osteoporotic Fracture", url: "/conditions/osteoporotic-spine-fracture-hyderabad" }
-  ];
-
-  const MALAKPET_JOURNEY_STEPS = [
-    {
-      title: 'Arrival',
-      description: 'Enter via Main Gate (Gate 1). Valet parking is available. Wheelchair assistance at the entrance.'
-    },
-    {
-      title: 'Registration',
-      description: 'Head to the Registration Desk on the Ground Floor. Mention "Dr. Sayuj Krishnan - Neurosurgery".'
-    },
-    {
-      title: 'Consultation',
-      description: 'Proceed to the OPD Block, 3rd Floor. Report to Room No. 317 for your consultation.'
-    },
-    {
-      title: 'Diagnostics',
-      description: 'If MRI/CT is needed, our team will guide you to the Radiology Suite on the Ground Floor.'
-    },
-    {
-      title: 'Treatment Plan',
-      description: 'Return to Room 317 with reports. Dr. Sayuj will discuss the diagnosis and treatment options.'
-    },
-    {
-      title: 'Pharmacy',
-      description: 'Collect prescribed medications from the 24/7 Pharmacy on the Ground Floor before leaving.'
-    }
   ];
 
   return (
@@ -182,33 +126,6 @@ export default function MalakpetNeurosurgeonPage() {
                  <div className="text-sm text-gray-600 font-medium">Fellowship Trained</div>
               </div>
            </div>
-        </div>
-      </section>
-
-      <div className="max-w-6xl mx-auto px-4 mt-12">
-        <PatientJourneySection title="Your Visit at Yashoda Malakpet" steps={MALAKPET_JOURNEY_STEPS} />
-      </div>
-
-      {/* Serving East Hyderabad Section */}
-      <section className="bg-gray-50 py-10 border-b border-gray-200">
-        <div className="mx-auto max-w-5xl px-4">
-          <h2 className="text-xl font-bold text-gray-900 mb-6">Serving Patients Across East Hyderabad</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-             <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-                <h3 className="font-bold text-blue-900 mb-2">
-                  <Link href="/locations/neurosurgeon-dilsukhnagar" className="hover:underline">Dilsukhnagar</Link> & <Link href="/locations/lb-nagar" className="hover:underline">LB Nagar</Link>
-                </h3>
-                <p className="text-sm text-gray-600">Just 5-10 mins drive via NH65. <strong>Metro Red Line:</strong> Direct access from Dilsukhnagar/LB Nagar to Malakpet Station (200m walk).</p>
-             </div>
-             <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-                <h3 className="font-bold text-blue-900 mb-2">Saidabad & Santosh Nagar</h3>
-                <p className="text-sm text-gray-600">Easy access via Champapet Road. 10-15 mins drive to Yashoda Malakpet OPD for spine & brain care.</p>
-             </div>
-             <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-                <h3 className="font-bold text-blue-900 mb-2">Amberpet & Kachiguda</h3>
-                <p className="text-sm text-gray-600">Connected via Chaderghat Bridge. 10 mins drive for emergency neurosurgery and trauma care.</p>
-             </div>
-          </div>
         </div>
       </section>
 
@@ -391,43 +308,6 @@ export default function MalakpetNeurosurgeonPage() {
         </div>
       </section>
 
-      {/* Sciatica & Leg Pain Section - Local SEO & Content Cluster */}
-      <section className="bg-white py-12">
-        <div className="mx-auto max-w-5xl px-4">
-          <div className="rounded-2xl border border-blue-100 bg-gradient-to-r from-blue-50 to-white p-8">
-            <h2 className="text-2xl font-bold text-blue-900 mb-4">Sciatica & Leg Pain Treatment in Malakpet</h2>
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div>
-                <p className="text-gray-700 mb-4">
-                  Many patients in Dilsukhnagar and Malakpet suffer from <strong>sciatica</strong> (shooting leg pain) due to slip discs.
-                  Dr. Sayuj specializes in a <strong>90% Non-Surgical Protocol</strong> using targeted nerve blocks and physiotherapy available right here at Yashoda Malakpet.
-                </p>
-                <ul className="space-y-2 text-sm text-gray-700 mb-6">
-                  <li className="flex items-center"><span className="text-green-600 mr-2">✓</span> Precise Nerve Root Diagnosis</li>
-                  <li className="flex items-center"><span className="text-green-600 mr-2">✓</span> Day-care Nerve Block Injections</li>
-                  <li className="flex items-center"><span className="text-green-600 mr-2">✓</span> Endoscopic Decompression (if needed)</li>
-                </ul>
-                <Link
-                  href="/conditions/sciatica-pain-treatment-hyderabad/"
-                  className="inline-flex items-center text-blue-700 font-semibold hover:underline"
-                >
-                  Read our Full Guide to Sciatica Treatment →
-                </Link>
-              </div>
-              <div className="hidden md:block">
-                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-                   <p className="text-sm text-gray-500 mb-2 font-semibold uppercase tracking-wider">Patient Insight</p>
-                   <p className="text-gray-800 italic">
-                     "I thought I needed surgery for my leg pain. Dr. Sayuj treated me with a nerve block injection at Malakpet, and I was back to work in 2 days."
-                   </p>
-                   <p className="text-xs text-gray-400 mt-2 text-right">— Patient from LB Nagar</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Second Opinion CTA */}
       <section className="bg-green-50 border-y border-green-100 py-10">
           <div className="mx-auto max-w-4xl px-4 text-center">
@@ -446,12 +326,6 @@ export default function MalakpetNeurosurgeonPage() {
               </div>
           </div>
       </section>
-
-      <CostTransparencySection
-        costs={MALAKPET_COSTS}
-        disclaimer="*Approximate estimates for general ward/twin sharing at Yashoda Hospitals Malakpet. Final cost depends on room category, insurance approval, and specific implants required."
-        showInsurance={true}
-      />
 
       <section className="bg-white py-12">
         <div className="mx-auto max-w-5xl px-4">
@@ -582,16 +456,6 @@ export default function MalakpetNeurosurgeonPage() {
                   </p>
                 </div>
               </div>
-            </div>
-
-            <div className="mt-6 bg-blue-50 p-4 rounded-lg border border-blue-100">
-               <h4 className="font-bold text-blue-900 mb-2 text-sm">Quick Directions</h4>
-               <ul className="grid md:grid-cols-2 gap-2 text-xs text-gray-700">
-                  <li><strong>From Dilsukhnagar:</strong> Take NH65 towards Koti → Nalgonda X Roads (Left) → Yashoda Hospital.</li>
-                  <li><strong>From LB Nagar:</strong> Via Victoria Memorial → Chaderghat Road → Malakpet.</li>
-                  <li><strong>From Kothapet:</strong> Via Dilsukhnagar Main Road → Malakpet Metro Station.</li>
-                  <li><strong>From Charminar:</strong> Via Nayapul → Chaderghat Bridge → Malakpet.</li>
-               </ul>
             </div>
           </div>
         </div>

@@ -2,10 +2,11 @@
 
 import { useState, useRef, useEffect, useMemo } from 'react';
 import { useStatsigEvents } from '../../src/lib/statsig-events';
-import { analytics } from '@/src/lib/analytics';
+import { trackMiddlewareEvent } from '@/src/lib/middleware/rum';
 import { MessageCircle, X, Send, AlertTriangle, Loader2, Sparkles, Minus } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { useChat } from '@ai-sdk/react';
+import { type Message } from 'ai';
 
 /**
  * Floating AI Chat Widget using Vercel AI Gateway
@@ -38,10 +39,7 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
   // Page context state
   const [pageTitle, setPageTitle] = useState('');
   const [pageDescription, setPageDescription] = useState('');
-  const [pageContent, setPageContent] = useState('');
   const pathname = usePathname();
-
-  const startTimeRef = useRef<number>(0);
 
   // Update page context on navigation
   useEffect(() => {
@@ -50,68 +48,43 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
       setPageTitle(document.title);
       const metaDesc = document.querySelector('meta[name="description"]');
       setPageDescription(metaDesc ? metaDesc.getAttribute('content') || '' : '');
-
-      // ⚡ Bolt: Only extract heavy page content if widget is open.
-      // This prevents expensive innerText reflows on every page navigation.
-      if (!isOpen) return;
-
-      const extractContent = () => {
-        // Extract main content for context-aware answers
-        try {
-          const mainElement = document.querySelector('main') || document.querySelector('article') || document.body;
-          let content = (mainElement as HTMLElement).innerText || '';
-          // Truncate to reasonable length (approx 2000 chars) to save tokens but provide context
-          if (content.length > 2000) {
-            content = content.substring(0, 2000) + '...';
-          }
-          setPageContent(content);
-        } catch (e) {
-          console.warn('Failed to extract page content', e);
-        }
-      };
-
-      if ('requestIdleCallback' in window) {
-        (window as any).requestIdleCallback(extractContent);
-      } else {
-        extractContent();
-      }
     }, 500);
 
     return () => clearTimeout(timer);
-  }, [pathname, isOpen]);
+  }, [pathname]);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const triggerRef = useRef<HTMLButtonElement>(null);
 
   // Statsig hooks
   const { logAppointmentBooking, logContactFormSubmit } = useStatsigEvents();
 
   // Initial greeting
-  const initialMessages = useMemo(() => [
+  const initialMessages = useMemo<Message[]>(() => [
     {
       id: 'initial',
       role: 'assistant',
       content: "Hello! I'm Dr. Sayuj's AI assistant. I can help you with appointments, condition info, and more. How can I help?"
     },
-  ] as any[], []);
+  ], []);
 
   // Use Vercel AI SDK useChat hook
-  const { messages, sendMessage, status, error } = useChat({
+  const { messages, append, status, error } = useChat({
     api: '/api/ai/chat',
     body: {
       pageSlug: pathname || 'global',
       pageTitle,
       pageDescription,
-      pageContent,
       service: 'floating_widget',
     },
     initialMessages,
-    onFinish: (message: any) => {
+    onFinish: (message) => {
       const content = message.content;
-      const duration = performance.now() - startTimeRef.current;
 
-      analytics.chat.responseReceived('floating_widget', Math.round(duration), true);
+      trackMiddlewareEvent('chat_response_received', {
+        source: 'floating_widget',
+        success: true
+      });
 
       // Check for emergency keywords
       const emergencyKeywords = ['emergency', 'urgent', 'immediately', 'call', 'stroke', 'seizure'];
@@ -121,25 +94,22 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
 
       if (hasEmergency) {
         setShowEmergencyAlert(true);
-        analytics.track('chat_emergency_detected', {
+        trackMiddlewareEvent('chat_emergency_detected', {
           source: 'floating_widget'
         });
       }
 
       logContactFormSubmit('ai_chat_widget', true);
     },
-    onError: (error: any) => {
+    onError: (error) => {
       console.error('Chat error:', error);
-      const duration = performance.now() - startTimeRef.current;
-
       logContactFormSubmit('ai_chat_widget', false);
-      analytics.chat.error(
-        'floating_widget',
-        Math.round(duration),
-        error.message || 'Unknown error'
-      );
+      trackMiddlewareEvent('chat_error', {
+        source: 'floating_widget',
+        error: error.message
+      });
     }
-  } as any);
+  });
 
   const isLoading = status === 'submitted' || status === 'streaming';
 
@@ -154,27 +124,10 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
       setTimeout(() => inputRef.current?.focus(), 100);
 
       // Track widget open
-      analytics.chat.open('floating_widget');
+      trackMiddlewareEvent('chat_widget_open', {
+        page_slug: pathname || 'unknown'
+      });
     }
-  }, [isOpen, isMinimized]);
-
-  // Handle Escape key to close chat
-  useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isOpen && !isMinimized) {
-        setIsOpen(false);
-        // Return focus to trigger button
-        setTimeout(() => triggerRef.current?.focus(), 0);
-      }
-    };
-
-    if (isOpen && !isMinimized) {
-      document.addEventListener('keydown', handleEscape);
-    }
-
-    return () => {
-      document.removeEventListener('keydown', handleEscape);
-    };
   }, [isOpen, isMinimized]);
 
   // Scroll on new messages
@@ -187,28 +140,30 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
   const handleSendMessage = async (content: string) => {
     if (!content.trim() || isLoading) return;
 
-    startTimeRef.current = performance.now();
-
     // Log user interaction
     logAppointmentBooking('ai_chat_widget_interaction', 'general');
-    analytics.chat.messageSent('floating_widget');
+    trackMiddlewareEvent('chat_message_sent', {
+      source: 'floating_widget',
+      page_slug: pathname || 'unknown'
+    });
 
-    await sendMessage({ role: 'user', content: content.trim() } as any);
+    await append({ role: 'user', content: content.trim() });
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
 
-    startTimeRef.current = performance.now();
-
     // Log interaction
     logAppointmentBooking('ai_chat_widget_interaction', 'general');
-    analytics.chat.messageSent('floating_widget');
+    trackMiddlewareEvent('chat_message_sent', {
+      source: 'floating_widget',
+      page_slug: pathname || 'unknown'
+    });
 
     const content = input;
     setInput('');
-    await sendMessage({ role: 'user', content: content.trim() } as any);
+    await append({ role: 'user', content: content.trim() });
   };
 
   const quickActions = [
@@ -222,7 +177,6 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
     <>
       {/* Floating Button */}
       <button
-        ref={triggerRef}
         onClick={() => {
           if (isOpen && isMinimized) {
             setIsMinimized(false);
@@ -285,11 +239,7 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
                 <Minus size={18} />
               </button>
               <button
-                onClick={() => {
-                  setIsOpen(false);
-                  // Return focus to trigger button
-                  setTimeout(() => triggerRef.current?.focus(), 0);
-                }}
+                onClick={() => setIsOpen(false)}
                 className="p-1 hover:bg-white/20 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-white/50"
                 aria-label="Close chat"
               >
@@ -316,7 +266,7 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
           >
             {messages.map((message) => {
               // Extract text content directly
-              const content = (message as any).content;
+              const content = message.content;
 
               // Skip messages with empty content (e.g. tool calls) unless we want to show a spinner
               if (!content && message.role !== 'assistant') return null;
