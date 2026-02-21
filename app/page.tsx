@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ExpandedFAQ from "../src/components/ExpandedFAQ";
-import LazySection from "./_components/LazySection";
 import { SITE_URL } from "../src/lib/seo";
 import { makeMetadata } from "@/app/_lib/meta";
 import BreadcrumbSchema from "./components/schemas/BreadcrumbSchema";
@@ -475,25 +474,8 @@ export default function Home() {
         </Section>
 
         {/* Disable internal schema as it is already handled by FAQPageSchema above */}
-        {/* Lazy load FAQ section to improve initial page performance */}
-        <LazySection
-          placeholder={
-            <div className="py-16 bg-gray-50">
-              <div className="container mx-auto px-4">
-                <div className="max-w-5xl mx-auto">
-                  <div className="h-10 w-64 bg-gray-200 rounded mx-auto mb-12 animate-pulse" aria-hidden="true" />
-                  <div className="space-y-4">
-                    {[1, 2, 3, 4, 5].map((i) => (
-                      <div key={i} className="h-20 bg-white/70 rounded-2xl border border-white/20 shadow-sm animate-pulse" aria-hidden="true" />
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          }
-        >
-          <ExpandedFAQ faqs={HOME_FAQS} className="bg-gray-50" disableSchema={true} />
-        </LazySection>
+        {/* Render directly to avoid CLS from placeholder mismatch and improve SEO */}
+        <ExpandedFAQ faqs={HOME_FAQS} className="bg-gray-50" disableSchema={true} />
         <LocalReputationPanel />
 
         {/* Contact Section */}

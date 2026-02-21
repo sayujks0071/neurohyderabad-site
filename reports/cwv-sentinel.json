@@ -1,21 +1,28 @@
 {
-  "timestamp": "2025-05-23T10:15:00Z",
-  "commit_hash": "current",
+  "timestamp": "2025-02-23T15:00:00Z",
+  "commit_hash": "HEAD",
   "page_types": {
-    "Home": {
-      "bottleneck": "CLS risk and TBT due to unnecessary lazy loading of LocalReputationPanel",
-      "fix": "Replaced lazy-loaded LocalReputationPanelWrapper with static LocalReputationPanel in app/page.tsx.",
-      "expected_impact": "Eliminated CLS risk from placeholder height mismatch. Reduced hydration cost (TBT) by removing LazySection wrapper. Improved SEO by including content in initial HTML.",
-      "verification": "Manual code verification confirming the removal of LazySection and direct rendering of LocalReputationPanel. Build failed due to unrelated 'dicom-parser' error, preventing bundle size verification."
+    "home": {
+      "url": "/",
+      "notes": "Fixed CLS issue by removing LazySection wrapper around ExpandedFAQ. This ensures the FAQ section is rendered immediately on the server, matching the initial HTML height and preventing layout shifts.",
+      "bottleneck": "CLS: LazySection placeholder mismatch",
+      "proposed_fix": "Remove LazySection and render ExpandedFAQ directly (server-side).",
+      "status": "Fixed",
+      "verification": "pnpm build passed. Manual verification of layout shift required on deployment."
     },
-    "Location": {
-      "notes": "Location pages use client-side map embedding with 'click to load' pattern, which is good for performance."
+    "appointment": {
+      "url": "/appointments",
+      "notes": "Already optimized with server-side hero content."
     },
-    "Condition": {
-      "notes": "Condition pages are static server components with some dynamic imports (videos). TrustProof component is imported statically but is a client component."
+    "location": {
+      "url": "/neurosurgeon-banjara-hills",
+      "notes": "Standard location page structure."
     },
-    "Appointment": {
-      "notes": "Appointment page lazy loads heavy components (PatientPortal, ChatBot), which is good."
+    "condition": {
+      "url": "/conditions/sciatica-pain-treatment-hyderabad",
+      "notes": "Standard condition page structure."
     }
-  }
+  },
+  "build_status": "Success",
+  "test_status": "Existing failures in unrelated tests (semantic-search, lead_security, stats, dicom validation, appointment SEO schema)."
 }
