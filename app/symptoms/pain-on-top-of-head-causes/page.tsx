@@ -293,7 +293,7 @@ export default function PainOnTopOfHeadCausesPage() {
           </ul>
           <p className="mt-4 text-gray-700">
             Visit the nearest emergency department immediately if any red flag is
-            present. Early intervention can rule out life-threatening causes.
+            present. Early intervention can rule out life-threatening causes like a <Link href="/services/brain-tumor-surgery-hyderabad" className="text-emerald-700 underline hover:text-emerald-900">brain tumor</Link> or bleed.
           </p>
         </div>
       </section>
