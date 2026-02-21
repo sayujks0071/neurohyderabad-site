@@ -1,6 +1,7 @@
 import { generateObject } from 'ai';
 import { z } from 'zod';
 import { getTextModel, hasAIConfig } from '@/src/lib/ai/gateway';
+import { sanitizeForPrompt } from '@/src/lib/validation';
 
 const SymptomAnalysisSchema = z.object({
   urgency: z.enum(['emergency', 'urgent', 'routine']),
@@ -40,34 +41,36 @@ export async function analyzeSymptoms(
   }
 
   try {
+    // 🛡️ Sentinel: Sanitize user input to prevent prompt injection
+    const sanitizedSymptoms = sanitizeForPrompt(symptoms);
+    const sanitizedAge = age ? sanitizeForPrompt(age) : '';
+    const sanitizedGender = gender ? sanitizeForPrompt(gender) : '';
+    const sanitizedDuration = duration ? sanitizeForPrompt(duration) : '';
+
     const { object } = await generateObject({
       model: getTextModel(),
       schema: SymptomAnalysisSchema,
-      prompt: `You are a medical assistant helping to triage symptoms for a neurosurgery practice. Analyze the following symptoms and provide guidance.
-
-Patient Information:
-- Symptoms: ${symptoms}
-${age ? `- Age: ${age}` : ''}
-${gender ? `- Gender: ${gender}` : ''}
-${duration ? `- Duration: ${duration}` : ''}
+      messages: [
+        {
+          role: 'system',
+          content: `You are a medical assistant helping to triage symptoms for a neurosurgery practice. Analyze the following symptoms and provide guidance.
 
 IMPORTANT GUIDELINES:
 1. This is NOT a diagnosis - only preliminary guidance
 2. If symptoms suggest an emergency (stroke, severe trauma, sudden paralysis, severe headache with vision changes, etc.), immediately recommend emergency care
 3. Provide general information about when to seek immediate care vs. when a scheduled appointment is appropriate
 4. Suggest relevant neurosurgical conditions that might be related (without diagnosing)
-5. Always recommend consulting with Dr. Sayuj Krishnan for proper evaluation
-
-Format your response as JSON with the following structure:
-{
-  "urgency": "emergency" | "urgent" | "routine",
-  "recommendation": "Brief recommendation text",
-  "possibleConditions": ["condition1", "condition2"],
-  "nextSteps": ["step1", "step2"],
-  "emergencyContact": "+91-9778280044"
-}
-
-Response:`,
+5. Always recommend consulting with Dr. Sayuj Krishnan for proper evaluation`
+        },
+        {
+          role: 'user',
+          content: `Patient Information:
+- Symptoms: ${sanitizedSymptoms}
+${sanitizedAge ? `- Age: ${sanitizedAge}` : ''}
+${sanitizedGender ? `- Gender: ${sanitizedGender}` : ''}
+${sanitizedDuration ? `- Duration: ${sanitizedDuration}` : ''}`
+        }
+      ],
       temperature: 0.3,
     });
 
