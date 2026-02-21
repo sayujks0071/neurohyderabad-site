@@ -273,7 +273,7 @@ select:focus {
 
 /* Hero Section Styles */
 .home-hero {
-  background: linear-gradient(90deg, #2563eb 0%, #1e3a8a 100%);
+  background: linear-gradient(90deg, #003A70 0%, #005EB8 100%);
   color: #f8fafc;
   padding-top: var(--space-16);
   padding-bottom: var(--space-16);
@@ -287,12 +287,12 @@ select:focus {
 }
 
 .home-hero__subtitle {
-  color: #dbeafe !important;
+  color: #E3F2FD !important;
   font-weight: var(--font-semibold) !important;
 }
 
 .home-hero__lead {
-  color: rgba(226, 238, 255, 0.96) !important;
+  color: #BBDEFB !important;
   font-weight: var(--font-medium);
   line-height: 1.55;
   max-width: 40rem;
