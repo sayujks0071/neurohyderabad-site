@@ -7,18 +7,16 @@ import "./globals.css";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
-  // 'swap' ensures text is visible immediately (LCP) and eventually loads the custom font (UX).
-  // next/font automatically adjusts fallback metrics to minimize CLS.
-  display: "swap",
+  // 'optional' prioritizes layout stability (zero CLS) over showing the custom font if it loads late.
+  display: "optional",
 });
 
 const merriweather = Merriweather({
   subsets: ["latin"],
   variable: "--font-merriweather",
   weight: ["400", "700"],
-  // 'swap' ensures text is visible immediately (LCP) and eventually loads the custom font (UX).
-  // next/font automatically adjusts fallback metrics to minimize CLS.
-  display: "swap",
+  // 'optional' prioritizes layout stability (zero CLS) over showing the custom font if it loads late.
+  display: "optional",
 });
 
 declare global {
@@ -27,10 +25,8 @@ declare global {
   }
 }
 import Header from "./components/HeaderRefactored";
-import Breadcrumbs from "./_components/Breadcrumbs";
 import Footer from "./components/Footer";
 import WebsiteSchema from "./components/schemas/WebsiteSchema";
-import BreadcrumbSchema from "./components/schemas/BreadcrumbSchema";
 import { PhysicianSchema } from "../src/components/schema/PhysicianSchema";
 import HospitalSchema from "./components/schemas/HospitalSchema";
 import TrustStrip from "./_components/TrustStrip";
@@ -47,11 +43,11 @@ import { SITE_URL } from "../src/lib/seo";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Best Neurosurgeon Hyderabad | Dr. Sayuj Krishnan",
+    default: "Neurosurgeon & Endoscopic Spine Specialist Hyderabad | Dr. Sayuj Krishnan",
     template: "%s"
   },
   description:
-    "German-trained neurosurgeon in Hyderabad. Minimally invasive spine & brain surgery. Same-day discharge at Yashoda Hospital, Malakpet.",
+    "German-trained neurosurgeon in Hyderabad for minimally invasive spine and brain surgery with same-day discharge at Yashoda Hospital, Malakpet.",
   keywords: [
     "neurosurgeon hyderabad",
     "brain surgeon hyderabad", 
@@ -84,10 +80,10 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Best Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan",
-    description: "Expert neurosurgeon in Hyderabad. Endoscopic spine & brain tumor surgery. Same-day discharge available. 1,000+ procedures.",
+    title: "Dr. Sayuj Krishnan S | Best Neurosurgeon in Hyderabad | Brain & Spine Surgery",
+    description: "Expert neurosurgeon Dr. Sayuj Krishnan in Hyderabad specializing in endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures. Same-day discharge available. 1,000+ endoscopic procedures performed.",
     url: SITE_URL,
-    siteName: "Dr. Sayuj Krishnan",
+    siteName: "Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
     locale: "en_IN",
     type: "website",
     images: [
@@ -123,9 +119,6 @@ export const metadata: Metadata = {
   },
   verification: {
     google: "google13e56c5ec4ac7344",
-    other: {
-      "msvalidate.01": "13FC1F5CB1F44756BDBFD421C02C29E2",
-    },
   },
   icons: {
     icon: [
@@ -135,6 +128,7 @@ export const metadata: Metadata = {
       { url: "/favicon-48x48.png", type: "image/png", sizes: "48x48" },
       { url: "/favicon-192x192.png", type: "image/png", sizes: "192x192" },
       { url: "/favicon-512x512.png", type: "image/png", sizes: "512x512" },
+      { url: "/icon.svg", type: "image/svg+xml" },
     ],
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
     shortcut: ["/favicon.ico"],
@@ -177,7 +171,6 @@ export default function RootLayout({
         <GoogleAnalytics />
         <ClientAnalytics />
         <WebsiteSchema />
-        <BreadcrumbSchema />
         <PhysicianSchema />
         <HospitalSchema />
         <a
@@ -189,21 +182,15 @@ export default function RootLayout({
         </a>
         <Header />
         <TrustStrip />
-        <main id="main-content" tabIndex={-1} role="main">
-          <Breadcrumbs />
-          {children}
-        </main>
-        <Footer />
-        {/*
-          HypertuneWrapper is placed at the end to prevent blocking LCP of the main content.
-          Components inside <main> that use Hypertune hooks will use fallback values during SSR/initial render.
-          Floating widgets that strictly require Hypertune context are kept inside the wrapper here.
-        */}
         <HypertuneWrapper>
           <FlagValuesEmitter />
+          <main id="main-content" tabIndex={-1} role="main">
+            {children}
+          </main>
           <FloatingChatWidget />
           <DynamicStickyCTA />
         </HypertuneWrapper>
+        <Footer />
         <StandaloneFlagValues />
         {process.env.VERCEL ? <Analytics /> : null}
       </body>

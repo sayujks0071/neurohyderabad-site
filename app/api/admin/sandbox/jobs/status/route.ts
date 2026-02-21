@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getSandbox } from "@/lib/sandbox/client";
+import { Sandbox } from "@vercel/sandbox";
 import { verifyAdminAccess } from "@/src/lib/security";
 
 export const runtime = "nodejs";
@@ -17,7 +17,7 @@ export async function GET(request: Request) {
   }
 
   try {
-    const sandbox = await getSandbox(sandboxId);
+    const sandbox = await Sandbox.get({ sandboxId });
 
     // Try to get command.
     const sb = sandbox as any;

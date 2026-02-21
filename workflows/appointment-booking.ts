@@ -653,69 +653,23 @@ async function findAlternativeSlots(
     ? [preferredSlot, ...CLINIC_TIME_SLOTS.filter((slot) => slot !== preferredSlot)]
     : CLINIC_TIME_SLOTS;
 
-  // Optimize search by processing days in batches (parallel DB checks)
-  // Check next 14 days in batches of 7
-  const batchSize = 7;
-  const totalDays = 14;
+  // Suggest next 3 available slots within the next two weeks
+  for (let i = 1; i <= 14; i++) {
+    const altDate = new Date(baseDate);
+    altDate.setDate(altDate.getDate() + i);
+    const dateString = formatDateString(altDate);
 
-  for (let batchStart = 1; batchStart <= totalDays; batchStart += batchSize) {
-    const batchEnd = Math.min(batchStart + batchSize - 1, totalDays);
-
-    // Create promises for each day in the batch
-    const dayPromises = [];
-    for (let i = batchStart; i <= batchEnd; i++) {
-      dayPromises.push(async () => {
-        const altDate = new Date(baseDate);
-        altDate.setDate(altDate.getDate() + i);
-        const dateString = formatDateString(altDate);
-
-        // Filter statically valid slots first
-        const validSlots = candidateSlots.filter(
-          (slot) => evaluateAvailability(dateString, slot).available
-        );
-
-        if (validSlots.length === 0) return null;
-
-        // Check database availability in parallel for this day
-        const availabilityChecks = validSlots.map(async (slot) => {
-          try {
-            const bookedCount = await appointments.checkSlot(dateString, slot);
-            return { slot, available: bookedCount === 0 };
-          } catch (error) {
-            console.warn(
-              `[Appointment Workflow] Failed to check slot availability: ${dateString} ${slot}`,
-              error
-            );
-            return { slot, available: false }; // Assume booked on error
-          }
-        });
-
-        const results = await Promise.all(availabilityChecks);
-
-        // Find the first available slot (preserving time order)
-        const firstAvailable = results.find((r) => r.available);
-
-        if (firstAvailable) {
-          return { date: dateString, time: firstAvailable.slot, dayIndex: i };
-        }
-        return null;
-      });
+    for (const slot of candidateSlots) {
+      const availability = evaluateAvailability(dateString, slot);
+      if (availability.available) {
+        alternatives.push({ date: dateString, time: slot });
+        break;
+      }
     }
 
-    // Execute batch in parallel
-    const batchResults = await Promise.all(dayPromises.map((fn) => fn()));
-
-    // Sort by day index to preserve chronological order
-    const sortedResults = batchResults
-      .filter((r): r is { date: string; time: string; dayIndex: number } => r !== null)
-      .sort((a, b) => a.dayIndex - b.dayIndex);
-
-    for (const result of sortedResults) {
-      alternatives.push({ date: result.date, time: result.time });
-      if (alternatives.length >= 3) break;
+    if (alternatives.length >= 3) {
+      break;
     }
-
-    if (alternatives.length >= 3) break;
   }
 
   logWorkflowEvent(bookingId, "alternatives-found", { count: alternatives.length }, Date.now() - start);

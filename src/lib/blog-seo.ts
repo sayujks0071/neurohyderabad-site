@@ -14,11 +14,11 @@ import { clamp } from '@/app/_lib/meta';
  */
 export function generateBlogMetadata(post: BlogPost): Metadata {
   const title = clamp(
-    `${post.title} | Dr. Sayuj Krishnan`,
+    `${post.title} | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad`,
     60
   );
   const description = clamp(post.description, 155);
-  const canonicalUrl = `${SITE_URL}/blog/${post.slug}`;
+  const canonicalUrl = `${SITE_URL}/blog/${post.slug}/`;
   
   // Generate OG image URL
   const ogImageUrl = post.ogImage 

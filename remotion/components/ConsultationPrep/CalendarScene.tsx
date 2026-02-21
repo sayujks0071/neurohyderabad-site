@@ -16,16 +16,12 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
   const { fps } = useVideoConfig();
   const prefersReducedMotion = usePrefersReducedMotion();
 
-  // Parse the date (memoized for performance)
-  const { monthName, dayNumber, year, dayName } = useMemo(() => {
-    const date = new Date(appointmentDate + 'T00:00:00');
-    return {
-      monthName: date.toLocaleDateString('en-US', { month: 'long' }),
-      dayNumber: date.getDate(),
-      year: date.getFullYear(),
-      dayName: date.toLocaleDateString('en-US', { weekday: 'long' }),
-    };
-  }, [appointmentDate]);
+  // Parse the date
+  const date = new Date(appointmentDate + 'T00:00:00');
+  const monthName = date.toLocaleDateString('en-US', { month: 'long' });
+  const dayNumber = date.getDate();
+  const year = date.getFullYear();
+  const dayName = date.toLocaleDateString('en-US', { weekday: 'long' });
 
   // 1. Main Card Entrance (Pop in with 3D rotation)
   const calendarScale = useMemo(() => prefersReducedMotion ? 1 : spring({

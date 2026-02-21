@@ -2,8 +2,7 @@
  * AI-Powered Patient Triage System
  */
 
-import { generateObject } from 'ai';
-import { z } from 'zod';
+import { generateObject, jsonSchema } from 'ai';
 import { getTextModel, hasAIConfig } from './gateway';
 
 export interface TriageRequest {
@@ -14,18 +13,16 @@ export interface TriageRequest {
   currentMedications?: string[];
 }
 
-const TriageResultSchema = z.object({
-  urgencyLevel: z.enum(['emergency', 'urgent', 'moderate', 'routine']).describe('Urgency level'),
-  urgencyScore: z.number().min(0).max(100).describe('Urgency score (0-100)'),
-  recommendedAction: z.string().describe('Recommended action'),
-  timeToSeekCare: z.string().describe('Time to seek care'),
-  suggestedSpecialty: z.string().optional().describe('Suggested specialty'),
-  riskFactors: z.array(z.string()).describe('Risk factors'),
-  reasoning: z.string().describe('Reasoning'),
-  followUpQuestions: z.array(z.string()).optional().describe('Follow-up questions')
-});
-
-export type TriageResult = z.infer<typeof TriageResultSchema>;
+export interface TriageResult {
+  urgencyLevel: 'emergency' | 'urgent' | 'moderate' | 'routine';
+  urgencyScore: number;
+  recommendedAction: string;
+  timeToSeekCare: string;
+  suggestedSpecialty?: string;
+  riskFactors: string[];
+  reasoning: string;
+  followUpQuestions?: string[];
+}
 
 const EMERGENCY_KEYWORDS = [
   'stroke', 'seizure', 'unconscious', 'paralysis', 'sudden weakness',
@@ -68,11 +65,25 @@ export async function analyzeTriage(request: TriageRequest): Promise<TriageResul
   try {
     const { object } = await generateObject({
       model: getTextModel(),
-      schema: TriageResultSchema,
+      schema: jsonSchema({
+        type: 'object',
+        properties: {
+          urgencyLevel: { type: 'string', enum: ['emergency', 'urgent', 'moderate', 'routine'], description: 'Urgency level' },
+          urgencyScore: { type: 'number', minimum: 0, maximum: 100, description: 'Urgency score (0-100)' },
+          recommendedAction: { type: 'string', description: 'Recommended action' },
+          timeToSeekCare: { type: 'string', description: 'Time to seek care' },
+          suggestedSpecialty: { type: 'string', description: 'Suggested specialty' },
+          riskFactors: { type: 'array', items: { type: 'string' }, description: 'Risk factors' },
+          reasoning: { type: 'string', description: 'Reasoning' },
+          followUpQuestions: { type: 'array', items: { type: 'string' }, description: 'Follow-up questions' }
+        },
+        required: ['urgencyLevel', 'urgencyScore', 'recommendedAction', 'timeToSeekCare', 'riskFactors', 'reasoning'],
+        additionalProperties: false
+      }),
       prompt: `You are a medical triage AI for neurosurgery. Analyze: Symptoms: ${request.symptoms.join(', ')}, Description: ${request.description}`,
       temperature: 0.3,
     });
-    return object;
+    return object as TriageResult;
   } catch (error) {
     console.error('AI triage error:', error);
     return basicTriage(request);

@@ -1,6 +1,5 @@
 # Dependencies
 node_modules/
-.pnpm-store/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -106,4 +105,4 @@ audit/lighthouse/*.json
 audit/lighthouse/*.html
 audit/crawl/*.json
 audit/crawl/*.csv
-!audit/crawl/url_inventory.csv
+.pnpm-store
