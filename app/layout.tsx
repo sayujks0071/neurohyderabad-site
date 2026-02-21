@@ -37,6 +37,7 @@ import FloatingChatWidget from "./_components/DynamicFloatingChatWidget";
 import FlagValuesEmitter from "./_components/FlagValuesEmitter";
 import StandaloneFlagValues from "./_components/StandaloneFlagValues";
 import MiddlewareRUM from "./_components/MiddlewareRUM";
+import MicrosoftClarity from "./_components/MicrosoftClarity";
 import HypertuneWrapper from "./providers/hypertune-wrapper";
 import { SITE_URL } from "../src/lib/seo";
 
@@ -50,7 +51,7 @@ export const metadata: Metadata = {
     "German-trained neurosurgeon in Hyderabad for minimally invasive spine and brain surgery with same-day discharge at Yashoda Hospital, Malakpet.",
   keywords: [
     "neurosurgeon hyderabad",
-    "brain surgeon hyderabad", 
+    "brain surgeon hyderabad",
     "spine specialist hyderabad",
     "endoscopic spine surgery hyderabad",
     "brain tumor surgery hyderabad",
@@ -157,7 +158,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-      <html lang="en" prefix="og: https://ogp.me/ns# article: https://ogp.me/ns/article#">
+    <html lang="en" prefix="og: https://ogp.me/ns# article: https://ogp.me/ns/article#">
       <head>
         <link rel="dns-prefetch" href="https://edge.hypertune.com" />
         <link rel="preconnect" href="https://edge.hypertune.com" crossOrigin="anonymous" />
@@ -168,6 +169,7 @@ export default function RootLayout({
       </head>
       <body className={`antialiased ${inter.variable} ${merriweather.variable}`}>
         <MiddlewareRUM />
+        <MicrosoftClarity />
         <GoogleAnalytics />
         <ClientAnalytics />
         <WebsiteSchema />
