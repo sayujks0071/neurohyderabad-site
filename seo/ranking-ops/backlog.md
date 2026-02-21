@@ -7,7 +7,7 @@
 - [ ] **Structure:** Check for other orphan pages in `sitemap.ts` that might be duplicates.
 - [ ] **Local SEO:** Enhance "Areas We Serve" section on location pages with specific landmarks.
 - [ ] **Internal Linking:** Add links from "Condition" pages (e.g., Sciatica) to the new "Spine Surgery" FAQs.
-- [x] **Multimedia:** Add `VideoObject` schema to Brain Surgery page if we can source or create an explainer video (Competitor Gap). (Done 2026-02-23 via PatientEducationVideos component)
+- [ ] **Multimedia:** Add `VideoObject` schema to Brain Surgery page if we can source or create an explainer video (Competitor Gap).
 - [ ] **Content:** Expand "Patient Journey" section on Brain Surgery page to match competitor depth.
 - [x] [Content] Add specific cost guide for Brain Tumor Surgery (similar to Spine). (Done 2026-02-22)
 - [ ] **Audit:** Check all "Patient Education Resources" sections on other Condition pages for broken links or missing content.
@@ -17,7 +17,7 @@
 
 ## 2026-01-26
 - **Content Gap:** "Risks & Safety Protocols" section for Endoscopic Spine Surgery. Competitors list specific risks (dural tear, infection) to build trust.
-- [x] **Content Gap:** "Patient Education Video" embed. A 30-second animated explainer of the "Keyhole" vs "Open" difference. (Done 2026-02-23)
+- **Content Gap:** "Patient Education Video" embed. A 30-second animated explainer of the "Keyhole" vs "Open" difference.
 - **Content Gap:** "Anesthesia Protocol" dedicated page. "Awake vs Asleep" is a big patient concern.
 - [ ] **Location Pages:** Apply 'Why Travel' pattern to other location pages (Banjara Hills, Gachibowli, etc.) to address distance objections.
 
@@ -58,3 +58,10 @@
 ## 2026-02-18
 *   **Structure:** Replicate "Advanced Surgical Solutions" (Hub & Spoke procedure linking) section on other major service hubs like Brain Tumor Surgery to match competitor depth. (Done 2026-02-24)
 *   **Content Gap:** Create dedicated service pages for "Endoscopic Skull Base Surgery" and "Stereotactic Biopsy" to fully support the Hub & Spoke model (currently just descriptions in the new component).
+
+## 2026-02-21
+*   **Schema Conflict:** Remove duplicate `FAQSchema` manual injection in `app/services/cervical-disc-replacement-hyderabad/page.tsx` as it conflicts with `<FAQPageSchema />` component.
+
+## 2026-02-25
+*   **Expansion:** Replicate the visual "Red Flags" grid on other emergency-related condition pages (e.g., Brain Tumor Symptoms).
+*   **Consistency:** Ensure `TrustProof` components on other pages are updated to use the latest props and styling if applicable.

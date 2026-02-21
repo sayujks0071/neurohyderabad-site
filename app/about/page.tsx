@@ -15,8 +15,8 @@ import RemotionVideoEmbedWrapper from "../_components/RemotionVideoEmbedWrapper"
 export const revalidate = 3600; // Revalidate every hour
 
 export const metadata: Metadata = {
-  title: "Dr. Sayuj Krishnan | Best Neurosurgeon Hyderabad | 9+ Years Exp",
-  description: "German-trained Neurosurgeon in Hyderabad. 9+ Years experience in Endoscopic Spine & Brain Surgery. Read Dr. Sayuj's profile and patient reviews.",
+  title: "Dr Sayuj Krishnan | Best Neurosurgeon in Hyderabad",
+  description: "Learn about Dr. Sayuj Krishnan's exceptional training, over 9 years of neurosurgical experience, German fellowship, and pioneering work in minimally invasive brain & spine surgery in Hyderabad.",
   keywords: [
     "dr sayuj krishnan credentials",
     "neurosurgeon hyderabad experience",
@@ -39,8 +39,8 @@ export const metadata: Metadata = {
     }
   },
   openGraph: {
-    title: "About Dr. Sayuj Krishnan | Premier Neurosurgeon in Hyderabad",
-    description: "Learn about Dr. Sayuj Krishnan's exceptional training, over 9 years of neurosurgical experience, German fellowship, and pioneering work in minimally invasive brain & spine surgery.",
+    title: "Dr Sayuj Krishnan | Best Neurosurgeon in Hyderabad",
+    description: "Learn about Dr. Sayuj Krishnan's exceptional training, 9+ years experience, German fellowship, and minimally invasive brain & spine surgery.",
     url: `${SITE_URL}/about`,
     siteName: "Dr. Sayuj Krishnan - Premier Neurosurgeon Hyderabad",
     locale: "en_IN",
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "About Dr. Sayuj Krishnan | Premier Neurosurgeon in Hyderabad",
+    title: "Dr Sayuj Krishnan | Best Neurosurgeon in Hyderabad",
     description: "Learn about Dr. Sayuj Krishnan's exceptional training, over 9 years of neurosurgical experience, and pioneering work in minimally invasive brain & spine surgery.",
     images: [`${SITE_URL}/images/og-default.jpg`],
     site: '@drsayuj',
@@ -223,7 +223,7 @@ export default function AboutPage() {
               <h3 className="text-xl font-semibold mb-4 text-blue-700">Specializations</h3>
               <ul className="text-gray-700 space-y-2">
                 <li><strong>Endoscopic Spine Surgery</strong></li>
-                <li><Link href="/services/brain-tumor-surgery-hyderabad" className="hover:text-blue-600 hover:underline"><strong>Awake Brain Surgery</strong></Link></li>
+                <li><strong>Awake Brain Surgery</strong></li>
                 <li><strong>ROSA DBS</strong> - Deep Brain Stimulation</li>
                 <li><strong>Minimally Invasive Techniques</strong></li>
               </ul>

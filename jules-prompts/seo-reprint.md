@@ -12,7 +12,7 @@ Analyze current blog posts and service pages. Identify content that is:
 - Submit a PR with the updated content.
 
 <!-- Jules Automation -->
-<!-- Schedule: Daily 08:00 IST -->
 <!-- Managed by Jules -->
+<!-- v2.4 -->
 
-<!-- Verified setup -->
+<!-- Verified by Jules -->

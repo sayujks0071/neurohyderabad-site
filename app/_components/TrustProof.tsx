@@ -27,10 +27,7 @@ export default function TrustProof({ serviceType = 'all', className = '', storie
   }, [pathname, serviceType]);
 
   return (
-    <section
-      className={`bg-white border-2 border-blue-100 rounded-xl p-6 shadow-sm ${className}`}
-      data-trust-signal="trust_proof_component"
-    >
+    <section className={`bg-white border-2 border-blue-100 rounded-xl p-6 shadow-sm ${className}`}>
       <h3 className="text-xl font-semibold text-blue-900 mb-4">
         Why Patients Trust Dr. Sayuj Krishnan
       </h3>

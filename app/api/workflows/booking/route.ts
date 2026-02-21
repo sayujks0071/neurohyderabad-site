@@ -8,7 +8,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import type { BookingData } from "@/packages/appointment-form/types";
 import { processBooking } from "@/src/lib/appointments/service";
-import { inngest } from "@/src/lib/inngest";
 
 type WorkflowAppointmentType = "new-consultation" | "follow-up" | "second-opinion";
 
@@ -37,10 +36,7 @@ export async function POST(request: NextRequest) {
       ? (genderRaw as BookingData["gender"])
       : "other"; // Default fallback
 
-    const rawPainScore = typeof body.painScore === "number" ? body.painScore : 5;
-    // Clamp pain score between 1 and 10
-    const painScore = Math.max(1, Math.min(10, rawPainScore));
-
+    const painScore = typeof body.painScore === "number" ? body.painScore : 5;
     const mriScanAvailable = typeof body.mriScanAvailable === "boolean" ? body.mriScanAvailable : false;
     const source = typeof body.source === "string" ? body.source : undefined;
 

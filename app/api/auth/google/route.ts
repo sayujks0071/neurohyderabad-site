@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { rateLimit, getClientIp } from "@/src/lib/rate-limit";
+import { rateLimit } from "@/src/lib/rate-limit";
 
 export async function GET() {
   return NextResponse.json({
@@ -11,7 +11,7 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   // 🛡️ Sentinel: Add rate limiting to prevent abuse
-  const ip = getClientIp(request);
+  const ip = request.headers.get("x-forwarded-for") ?? "unknown";
   const limit = rateLimit(ip, 10, 60 * 1000); // 10 requests per minute
 
   if (!limit.success) {

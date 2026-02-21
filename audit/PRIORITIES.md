@@ -1,32 +1,36 @@
-# SEO & Performance Priorities
+# Prioritized Fix Backlog
 
-## Executive Summary
-The site has strong technical foundations with valid Schema.org implementation and good Core Web Vitals on most metrics. The primary area for improvement is **Content Depth** to match competitors (specifically regarding cost and recovery specifics) and **Mobile Performance** (Lighthouse scores ~60-70).
+**Date:** 2026-02-13
+**Audit Run:** #1
 
-## Impact/Effort Matrix
+## Summary of Findings
+-   **Critical On-Page Issues:** 46 pages have missing or duplicate H1s, titles too long, or missing meta descriptions.
+-   **Performance:** Homepage LCP is poor (6.5s). Inner pages are decent (3.2s) but can be improved.
+-   **Competitor Gap:** Missing structured cost info, recovery timelines, and extensive FAQs on service pages.
+-   **Schema:** Basic schema exists but lacks depth (FAQPage, Article specific fields).
 
-| Issue | Impact (1-5) | Effort (1-5) | Risk | Do Now? |
-| :--- | :---: | :---: | :---: | :---: |
-| **Missing Cost Transparency** | 5 | 2 | Low | **YES** |
-| **Missing Recovery Timeline** | 4 | 2 | Low | **YES** |
-| **Meta Description Length (Banjara Hills)** | 2 | 1 | Low | **YES** |
-| **Lighthouse: Render Blocking Resources** | 3 | 3 | Med | No |
-| **Lighthouse: Unused JavaScript** | 3 | 4 | High | No |
-| **Accessibility: Color Contrast** | 3 | 2 | Low | No |
+## Priority Matrix
+
+| Issue | Evidence | Affected URLs | Fix Summary | Impact (1-5) | Effort (1-5) | Risk | Do now? |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Missing/Duplicate H1s & Meta Titles** | `audit/onpage/onpage_issues.csv` | 46 pages (e.g., conditions/sciatica...) | Audit and fix metadata in `page.tsx` or `layout.tsx`. Ensure unique H1 per page. | 5 | 2 | Low | **Yes** |
+| **Missing FAQPage Schema** | `audit/competitors/competitor_gap.md` | Service & Condition Pages | Add `FAQPage` JSON-LD to `app/services/[slug]/page.tsx` and `app/conditions/[slug]/page.tsx`. Populate with content. | 4 | 3 | Low | **Yes** |
+| **Homepage LCP (6.5s)** | `audit/lighthouse/home.report.json` | `/` | Optimize hero image (preload, priority), reduce unused JS, defer non-critical scripts. | 5 | 3 | Med | **Yes** |
+| **Missing Cost & Recovery Info** | `audit/competitors/competitor_gap.md` | Service Pages | Add "Cost of Surgery" and "Recovery Timeline" sections to service templates. | 4 | 4 | Med | No |
+| **Unused JavaScript** | `audit/lighthouse/summary.md` | All Pages | Analyze bundle, code split heavy components, lazy load third-party scripts. | 3 | 4 | High | No |
+| **Thin Content (<300 words)** | `audit/crawl/url_inventory.csv` | Some blog/condition pages | Expand content with "Symptoms", "Diagnosis", "Treatment" sections. | 3 | 5 | Low | No |
+| **Image Alt Text** | `audit/onpage/onpage_issues.csv` | Various | Add descriptive alt text to images. | 2 | 2 | Low | No |
 
 ## Top 3 "Do Now" Fixes
 
-### 1. Add Cost Transparency Table
-**Goal:** Match competitor (Dr. Raveesh) by providing estimated cost ranges.
-**Target:** `app/services/endoscopic-spine-surgery-hyderabad/page.tsx`
-**Action:** Insert a `CostTransparencySection` component.
+1.  **Fix Critical On-Page Issues (Metadata & H1s):**
+    -   **Why:** Direct impact on CTR and rankings. Low risk.
+    -   **Action:** Review `audit/onpage/onpage_issues.csv` and fix the top offenders in the codebase.
 
-### 2. Add Recovery Timeline
-**Goal:** Answer "return to work" queries explicitly.
-**Target:** `app/services/endoscopic-spine-surgery-hyderabad/page.tsx`
-**Action:** Insert a `RecoveryTimeline` component.
+2.  **Add FAQPage Schema to Service/Condition Pages:**
+    -   **Why:** Competitors use it. Increases SERP real estate (Rich Snippets).
+    -   **Action:** Implement `FAQSchema` component or inject JSON-LD in `page.tsx` for these routes.
 
-### 3. Fix Metadata on Location Page
-**Goal:** Avoid truncation in SERPs.
-**Target:** `app/neurosurgeon-banjara-hills/page.tsx` (or data source)
-**Action:** Shorten meta description to < 160 chars.
+3.  **Optimize Homepage LCP:**
+    -   **Why:** 6.5s is too slow. First impression matters.
+    -   **Action:** optimize Hero section images and loading strategy.

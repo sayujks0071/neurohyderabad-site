@@ -13,7 +13,7 @@ describe('Appointment Page SEO', () => {
     expect(title).toContain('Best Neurosurgeon Hyderabad');
     expect(title).toContain('Book Appointment');
 
-    expect(metadata.description).toContain('Best Neurosurgeon in Hyderabad');
+    expect(metadata.description).toContain('Best Neurosurgeon Hyderabad');
     expect(metadata.description).toContain('Book Appointment');
   });
 
