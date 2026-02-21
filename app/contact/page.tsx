@@ -16,8 +16,8 @@ import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
 const clinicSchema = getMedicalClinicSchema();
 
 export const metadata: Metadata = {
-  title: "Book Appointment: Dr. Sayuj Krishnan | Neurosurgeon Hyderabad",
-  description: "Book an appointment with Dr. Sayuj Krishnan, best neurosurgeon in Hyderabad. Call +91 9778280044 or visit Yashoda Hospital Malakpet for spine & brain care.",
+  title: "Contact Dr Sayuj Krishnan | Neurosurgeon in Hyderabad",
+  description: "Contact Dr Sayuj Krishnan for neurosurgical consultations. Phone: +91 9778280044, Email: hellodr@drsayuj.info. Located at Yashoda Hospital, Malakpet.",
   keywords: [
     "contact neurosurgeon hyderabad",
     "dr sayuj krishnan contact",

@@ -1,6 +1,0 @@
-{
-  "http://localhost:3000/": "https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1771632258085-20817.report.html",
-  "http://localhost:3000/appointments": "https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1771632258357-38477.report.html",
-  "http://localhost:3000/neurosurgeon-banjara-hills": "https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1771632258684-79475.report.html",
-  "http://localhost:3000/conditions/sciatica-pain-treatment-hyderabad": "https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1771632259354-47885.report.html"
-}

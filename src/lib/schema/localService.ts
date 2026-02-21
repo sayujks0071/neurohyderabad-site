@@ -91,14 +91,6 @@ export function buildLocalServiceSchema({
           }),
           telephone: location.telephone,
           url: SITE_URL,
-          openingHoursSpecification: location.openingHoursSpecification || [
-            {
-              "@type": "OpeningHoursSpecification",
-              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-              "opens": "10:00",
-              "closes": "16:00"
-            }
-          ]
         },
       },
       {

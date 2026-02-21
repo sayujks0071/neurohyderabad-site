@@ -199,7 +199,7 @@ export default function SpinalFusionPage() {
             <div className="prose max-w-none">
               <p className="text-lg text-gray-700 mb-6">
                 Spinal fusion (often called "Fixation Surgery") is a procedure to weld two or more vertebrae together.
-                The goal is to stop painful motion caused by instability, which often leads to severe <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 underline">sciatica</Link> and back pain. Dr. Sayuj uses advanced titanium implants and bone grafts to ensure a solid fusion.
+                The goal is to stop painful motion caused by instability. Dr. Sayuj uses advanced titanium implants and bone grafts to ensure a solid fusion.
               </p>
               <p className="text-gray-700 mb-6">
                 The most common technique we use is <strong>TLIF (Transforaminal Lumbar Interbody Fusion)</strong>, which allows for nerve decompression and 360-degree fusion with minimal nerve retraction.

@@ -3,7 +3,7 @@ import type { BookingData } from "@/packages/appointment-form/types";
 import { sendConfirmationEmail, sendAdminNotificationEmail } from "@/src/lib/appointments/email";
 import { submitToGoogleSheets } from "@/src/lib/google-sheets";
 import { buildWebhookPayload, notifyAppointmentWebhooks } from "@/src/lib/appointments/webhooks";
-import { appointments } from "@/src/lib/db";
+import { appointments, patients } from "@/src/lib/db";
 
 export interface BookingResult {
   success: boolean;
@@ -29,6 +29,17 @@ export async function processBooking(booking: BookingData, options: ProcessBooki
 
   try {
     console.log(`[Service] Processing booking for ${booking.patientName}`);
+
+    // 0. Conflict Check (CRM Logic)
+    if (booking.appointmentDate && booking.appointmentTime) {
+      const existingCount = await appointments.checkSlot(booking.appointmentDate, booking.appointmentTime);
+      if (existingCount > 0) {
+        console.warn(`[Service] Conflict detected for ${booking.appointmentDate} at ${booking.appointmentTime}`);
+        // For now, we log the conflict but proceed (soft failure), 
+        // to avoid blocking urgent cases. In a strict CRM, we would throw:
+        // throw new Error("Slot already booked");
+      }
+    }
 
     // 1. Generate AI Confirmation
     const { message: confirmationMessage, usedAI } = await generateBookingConfirmation(booking);
@@ -71,6 +82,23 @@ export async function processBooking(booking: BookingData, options: ProcessBooki
       console.error("[Service] Failed to save to Postgres:", error);
     });
 
+    // 2.6 Upsert Patient Record (CRM Logic)
+    void patients.upsert({
+      email: booking.email,
+      name: booking.patientName,
+      phone: booking.phone,
+      age: Number(booking.age) || undefined,
+      primary_condition: booking.reason.slice(0, 100), // Infer primary condition from reason
+      gender: booking.gender,
+      acquisition_source: source,
+      insurance_provider: booking.insuranceProvider,
+      insurance_policy_number: booking.insurancePolicyNumber,
+      emergency_contact_name: booking.emergencyContactName,
+      emergency_contact_phone: booking.emergencyContactPhone
+    }).catch((error) => {
+      console.error("[Service] Failed to upsert patient record:", error);
+    });
+
     // 3. Sync to Google Sheets (CRM)
     const sheetsResult = await submitToGoogleSheets({
       fullName: booking.patientName,
@@ -88,6 +116,8 @@ export async function processBooking(booking: BookingData, options: ProcessBooki
         bookingReason: booking.reason,
         painScore: booking.painScore,
         mriScanAvailable: booking.mriScanAvailable,
+        insuranceProvider: booking.insuranceProvider,
+        emergencyContactName: booking.emergencyContactName
       },
     });
 

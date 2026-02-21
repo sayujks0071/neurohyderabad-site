@@ -1,10 +1,4 @@
 import Script from 'next/script'
-import {
-  CANONICAL_TELEPHONE,
-  YASHODA_MALAKPET_ADDRESS,
-  CANONICAL_PHYSICIAN_NAME,
-  SOCIAL_PROFILES
-} from '@/src/data/locations'
 
 export function OrgJsonLd() {
   const data = {
@@ -14,16 +8,21 @@ export function OrgJsonLd() {
     name: 'Dr. Sayuj Krishnan — Brain & Spine Surgeon',
     url: 'https://www.drsayuj.info',
     logo: 'https://www.drsayuj.info/images/logo.png',
-    sameAs: SOCIAL_PROFILES,
+    sameAs: [
+      'https://www.instagram.com/TheSpineDoc/',
+      'https://www.youtube.com/@drsayujneurohyd',
+      'https://x.com/drsayuj',
+      'https://www.facebook.com/drsayuj/'
+    ],
     address: {
       '@type': 'PostalAddress',
-      streetAddress: YASHODA_MALAKPET_ADDRESS.streetAddress,
-      addressLocality: YASHODA_MALAKPET_ADDRESS.addressLocality,
-      addressRegion: YASHODA_MALAKPET_ADDRESS.addressRegion,
-      postalCode: YASHODA_MALAKPET_ADDRESS.postalCode,
-      addressCountry: YASHODA_MALAKPET_ADDRESS.addressCountry
+      streetAddress: 'Room No 317, OPD Block, Yashoda Hospital, Malakpet',
+      addressLocality: 'Hyderabad',
+      addressRegion: 'Telangana',
+      postalCode: '500036',
+      addressCountry: 'IN'
     },
-    telephone: CANONICAL_TELEPHONE,
+    telephone: '+91-9778280044',
     email: 'hellodr@drsayuj.info'
   }
   return <Script id="org-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
@@ -34,20 +33,20 @@ export function PhysicianJsonLd() {
     '@context': 'https://schema.org',
     '@type': 'Physician',
     '@id': 'https://www.drsayuj.info/#physician',
-    name: CANONICAL_PHYSICIAN_NAME,
+    name: 'Dr Sayuj Krishnan',
     url: 'https://www.drsayuj.info',
     image: 'https://www.drsayuj.info/images/og-default.jpg',
     medicalSpecialty: ['Neurosurgery','SpineSurgery','EndoscopicSpineSurgery'],
     address: { 
       '@type': 'PostalAddress', 
-      streetAddress: YASHODA_MALAKPET_ADDRESS.streetAddress,
-      addressLocality: YASHODA_MALAKPET_ADDRESS.addressLocality,
-      addressRegion: YASHODA_MALAKPET_ADDRESS.addressRegion,
-      postalCode: YASHODA_MALAKPET_ADDRESS.postalCode,
-      addressCountry: YASHODA_MALAKPET_ADDRESS.addressCountry
+      streetAddress: 'Room No 317, OPD Block, Yashoda Hospital, Malakpet', 
+      addressLocality: 'Hyderabad', 
+      addressRegion: 'Telangana', 
+      postalCode: '500036', 
+      addressCountry: 'IN' 
     },
     areaServed: 'Hyderabad',
-    telephone: CANONICAL_TELEPHONE,
+    telephone: '+91-9778280044',
     email: 'hellodr@drsayuj.info',
     credential: 'MBBS, DNB Neurosurgery (Direct 6 years)',
     affiliation: {

@@ -318,7 +318,7 @@ export default function SignsOfBrainTumorPage() {
 
         <div className="mt-8 grid gap-4 md:grid-cols-2">
           <Link
-            href="/services/brain-tumor-surgery-hyderabad"
+            href="/conditions/brain-tumor-surgery-hyderabad"
             className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm hover:border-indigo-400"
           >
             <h3 className="font-semibold text-indigo-700">

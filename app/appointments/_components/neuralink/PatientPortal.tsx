@@ -764,7 +764,6 @@ const PatientPortal = () => {
                           : "accent-red-600 focus:ring-red-500"
                       }`}
                       aria-valuetext={`Score: ${formData.painScore}${formData.painScore >= 8 ? ' (Severe)' : formData.painScore <= 3 ? ' (Mild)' : ''}`}
-                      title={`Pain Score: ${formData.painScore}`}
                     />
                     <span className="text-sm font-bold text-slate-400" aria-hidden="true">10</span>
                   </div>
@@ -791,7 +790,7 @@ const PatientPortal = () => {
                   </div>
                 </div>
 
-                <label className="flex items-center p-4 bg-slate-50 rounded-xl border border-slate-200 cursor-pointer hover:bg-blue-50 hover:border-blue-300 transition-all group">
+                <div className="flex items-center p-4 bg-slate-50 rounded-xl border border-slate-200">
                   <input
                     type="checkbox"
                     id="mriScanAvailable"
@@ -804,12 +803,13 @@ const PatientPortal = () => {
                     }
                     className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500 border-gray-300"
                   />
-                  <span
-                    className="ml-3 text-sm font-medium text-slate-700 select-none group-hover:text-blue-800 transition-colors"
+                  <label
+                    htmlFor="mriScanAvailable"
+                    className="ml-3 text-sm font-medium text-slate-700 cursor-pointer select-none"
                   >
                     I have recent MRI/CT Scan reports
-                  </span>
-                </label>
+                  </label>
+                </div>
 
                 {refinementResult && (
                   <div className="bg-blue-50 border border-blue-100 rounded-2xl p-4 space-y-3">
