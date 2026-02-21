@@ -98,7 +98,7 @@ export function createAIGatewayClient() {
   // Create OpenAI client configured for Vercel AI Gateway
   return createOpenAI({
     apiKey: apiKey || undefined, // OIDC token is used automatically on Vercel if no API key
-    baseURL: VERCEL_AI_GATEWAY_BASE_URL,
+    baseURL: getGatewayBaseUrl(),
   });
 }
 
