@@ -62,6 +62,8 @@
     "remotion:render:all": "pnpm remotion:render:local && pnpm remotion:render:services && pnpm remotion:render:dashboard && pnpm remotion:render:reel && pnpm remotion:render:intro && pnpm remotion:render:testimonials"
   },
   "dependencies": {
+    "three": "^0.160.0",
+    "gsap": "^3.12.4",
     "@ai-sdk/openai": "3.0.18",
     "@ai-sdk/react": "3.0.51",
     "@flags-sdk/hypertune": "^0.3.2",
@@ -115,6 +117,7 @@
     "zod": "^3.25.76"
   },
   "devDependencies": {
+    "@types/three": "^0.160.0",
     "@lhci/cli": "^0.15.1",
     "@next/bundle-analyzer": "^16.1.6",
     "@remotion/cli": "^4.0.286",
