@@ -24,8 +24,8 @@ import LocalReputationPanel from "./_components/LocalReputationPanel";
 const HOME_CANONICAL = SITE_URL.endsWith("/") ? SITE_URL : `${SITE_URL}/`;
 
 const baseMetadata = makeMetadata({
-  title: "Best Neurosurgeon Hyderabad | Top Spine & Brain Doctor",
-  description: "Looking for the Best Neurosurgeon in Hyderabad? Dr. Sayuj is a German-trained expert in Endoscopic Spine & Brain Surgery at Yashoda Hospital. Book Now.",
+  title: "Dr. Sayuj Krishnan - German-Trained Neurosurgeon & Spine Specialist Hyderabad",
+  description: "Consult Dr. Sayuj Krishnan, Hyderabad's premier German-trained neurosurgeon. Specialist in minimally invasive spine surgery, awake brain mapping, and ROSA robotic DBS at Yashoda Hospital.",
   canonicalPath: "/",
   ogImage: "https://www.drsayuj.info/images/og-default.jpg",
   ogImageAlt: "Dr. Sayuj Krishnan - Premier Neurosurgeon in Hyderabad | Endoscopic Spine Surgery & Brain Tumor Surgery"
@@ -34,37 +34,29 @@ const baseMetadata = makeMetadata({
 export const metadata: Metadata = {
   ...baseMetadata,
   title: {
-    absolute: "Best Neurosurgeon Hyderabad | Dr Sayuj | Spine & Brain",
+    absolute: "Dr. Sayuj Krishnan - German-Trained Neurosurgeon & Spine Specialist Hyderabad",
   },
   keywords: [
+    'neurosurgeon hyderabad',
+    'spine surgeon hyderabad',
     'dr sayuj krishnan',
-    'best spine surgeon in yashoda hospital',
-    'spine surgeon in yashoda hospital hyderabad',
-    'yashoda hospital spine surgeon',
-    'yashoda hospital malakpet spine surgeon',
-    'neurologist near me',
-    'spine specialist near me',
-    'best neurosurgeon hyderabad',
-    'endoscopic spine surgery hyderabad',
+    'endoscopic spine surgery',
     'minimally invasive spine surgery',
-    'yashoda hospital neurosurgeon',
-    'awake brain surgery hyderabad',
-    'ROSA DBS hyderabad',
     'brain tumor surgery hyderabad',
-    'spine specialist hyderabad',
-    'robotic neurosurgery hyderabad',
-    'same day spine surgery',
-    'yashoda hospital malakpet',
+    'awake brain surgery',
+    'rosa robotic dbs',
+    'yashoda hospital neurosurgeon',
     'german trained neurosurgeon',
-    'neurosurgeon near me',
-    'back pain specialist near me'
+    'sciatica treatment hyderabad',
+    'slip disc treatment',
+    'spinal stenosis surgery'
   ],
   openGraph: {
     ...baseMetadata.openGraph,
-    title: 'Dr. Sayuj Krishnan S | German-Trained Neurosurgeon in Hyderabad | Brain & Spine Surgery',
-    description: 'German-trained neurosurgeon specializing in minimally invasive spine surgery, awake brain surgery, and robotic DBS. Over 1,000 endoscopic procedures performed. Same-day discharge available at Yashoda Hospital, Malakpet.',
+    title: 'Dr. Sayuj Krishnan | German-Trained Neurosurgeon in Hyderabad | Spine & Brain',
+    description: 'Consult Dr. Sayuj Krishnan for minimally invasive spine surgery, awake brain mapping, and robotic DBS. 9+ years experience, 1000+ endoscopic procedures at Yashoda Hospital.',
     url: HOME_CANONICAL,
-    siteName: 'Dr. Sayuj Krishnan S - Neurosurgeon Hyderabad',
+    siteName: 'Dr. Sayuj Krishnan - Neurosurgeon Hyderabad',
     images: [
       {
         url: 'https://www.drsayuj.info/images/og-default.jpg',
@@ -185,10 +177,10 @@ export default function Home() {
                     Dr. Sayuj Krishnan: German-Trained Neurosurgeon in Hyderabad
                   </h1>
                   <h2 className="home-hero__subtitle block text-3xl md:text-5xl font-normal mb-6 leading-tight">
-                    Minimally invasive spine, awake brain surgery, and ROSA DBS at Yashoda Hospital, Malakpet.
+                    Minimally Invasive Spine Surgery, Awake Brain Surgery, and ROSA Robotic DBS at Yashoda Hospital.
                   </h2>
                   <p className="home-hero__lead text-xl md:text-2xl">
-                    I personally evaluate every case and perform the surgery—combining full-endoscopic spine techniques, awake mapping for complex brain tumors, and robotic guidance for DBS to deliver safer, faster recoveries.
+                    I personally evaluate every case and perform the surgery—combining full-endoscopic spine techniques, awake mapping for complex brain tumors, and robotic guidance to deliver safer, faster recoveries.
                   </p>
                   <div className="mt-6 space-y-4">
                     <ul className="grid gap-3 text-left md:grid-cols-2">
