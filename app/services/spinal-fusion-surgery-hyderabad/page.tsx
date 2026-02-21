@@ -15,7 +15,6 @@ import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
 import PatientJourneySection from '@/src/components/PatientJourneySection';
 import TrustProof from '@/app/_components/TrustProof';
-import ProcedureHighlights from '@/src/components/ProcedureHighlights';
 import { patientStories } from '@/src/content/stories';
 import PatientEducationVideosSkeleton from '@/app/_components/skeletons/PatientEducationVideosSkeleton';
 
@@ -24,8 +23,8 @@ const PatientEducationVideos = dynamic(() => import('@/app/_components/PatientEd
 });
 
 const baseMetadata = makeMetadata({
-  title: 'Spinal Fusion & Fracture Surgery Hyderabad | Best TLIF Surgeon',
-  description: 'Expert Spinal Fusion & Fracture Surgery in Hyderabad. Minimally Invasive TLIF for Spondylolisthesis and Trauma Fixation by Dr. Sayuj Krishnan.',
+  title: 'Spinal Fusion & Fracture Surgery Hyderabad | TLIF & Trauma Fixation',
+  description: 'Expert Spinal Fusion & Fracture Surgery in Hyderabad. Minimally Invasive TLIF for Spondylolisthesis and Percutaneous Fixation for Trauma by Dr. Sayuj Krishnan.',
   canonicalPath: '/services/spinal-fusion-surgery-hyderabad',
 });
 
@@ -152,11 +151,11 @@ export default function SpinalFusionPage() {
   return (
     <>
       <MedicalWebPageSchema
-        title="Spinal Fusion & Fracture Surgery Hyderabad | TLIF & Fixation"
+        title="Spinal Fusion & Fracture Surgery Hyderabad | TLIF & Trauma Fixation"
         description="Expert spinal fusion surgery (TLIF/PLIF) by Dr. Sayuj Krishnan. Stabilization for spondylolisthesis and traumatic fractures. Minimally invasive screw fixation."
         pageSlug="/services/spinal-fusion-surgery-hyderabad"
         pageType="service"
-        serviceOrCondition="Spinal Fusion Surgery"
+        serviceOrCondition="Spinal Fusion & Fracture Surgery"
         breadcrumbs={breadcrumbs}
       />
       <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/spinal-fusion-surgery-hyderabad`} />
@@ -181,17 +180,65 @@ export default function SpinalFusionPage() {
             </p>
           </section>
 
-          <ProcedureHighlights
-            duration="3-4 Hours"
-            anesthesia="General Anesthesia"
-            stay="3-5 Days"
-            recovery="3-6 Months (Fusion)"
-            incision="Minimally Invasive (TLIF)"
-            className="mb-12"
-          />
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-12 bg-blue-50 p-6 rounded-xl border border-blue-100 text-center">
+             <div>
+               <div className="font-semibold text-blue-900 text-sm mb-1">Duration</div>
+               <div className="text-gray-700 text-sm">3-4 Hours</div>
+             </div>
+             <div>
+               <div className="font-semibold text-blue-900 text-sm mb-1">Anesthesia</div>
+               <div className="text-gray-700 text-sm">General</div>
+             </div>
+             <div>
+               <div className="font-semibold text-blue-900 text-sm mb-1">Hospital Stay</div>
+               <div className="text-gray-700 text-sm">3-5 Days</div>
+             </div>
+             <div>
+               <div className="font-semibold text-blue-900 text-sm mb-1">Recovery</div>
+               <div className="text-gray-700 text-sm">3-6 Months</div>
+             </div>
+             <div>
+               <div className="font-semibold text-blue-900 text-sm mb-1">Incision</div>
+               <div className="text-gray-700 text-sm">Minimally Invasive</div>
+             </div>
+          </div>
 
           <section className="mb-12">
              <LocalPathways mode="service" />
+          </section>
+
+          <section className="mb-12 bg-white border border-orange-200 rounded-2xl p-8 shadow-sm">
+             <div className="flex items-center gap-3 mb-6">
+                <div className="bg-orange-100 p-2 rounded-full text-orange-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5 10 10 0 0 0-4 10 10 10 0 0 1-5-5" /></svg>
+                </div>
+                <h2 className="text-2xl font-bold text-orange-900 m-0">Traumatic Spine Fracture Treatment</h2>
+             </div>
+
+             <p className="text-gray-800 mb-6 font-medium">
+               For severe fractures caused by road accidents or falls (Burst Fractures), we perform <strong>Percutaneous Pedicle Screw Fixation</strong>.
+               This is a "Internal Bracing" technique that stabilizes the spine without fusing it permanently in young patients.
+             </p>
+
+             <div className="grid md:grid-cols-2 gap-6">
+               <div className="bg-orange-50 p-5 rounded-xl border border-orange-100">
+                  <h3 className="font-bold text-orange-800 mb-2">Keyhole Fixation (Minimally Invasive)</h3>
+                  <p className="text-sm text-gray-700 mb-2">
+                    Instead of a large open cut, we insert titanium screws through 1cm incisions.
+                  </p>
+                  <ul className="text-sm text-gray-700 space-y-1">
+                     <li className="flex items-center"><span className="text-orange-500 mr-2">✓</span> Less blood loss</li>
+                     <li className="flex items-center"><span className="text-orange-500 mr-2">✓</span> Low infection risk</li>
+                     <li className="flex items-center"><span className="text-orange-500 mr-2">✓</span> Early walking (Day 2)</li>
+                  </ul>
+               </div>
+               <div className="bg-orange-50 p-5 rounded-xl border border-orange-100">
+                  <h3 className="font-bold text-orange-800 mb-2">Implant Removal (Motion Preservation)</h3>
+                  <p className="text-sm text-gray-700">
+                    In young patients with healed fractures, the screws can often be removed after 9-12 months, restoring normal spine motion.
+                  </p>
+               </div>
+             </div>
           </section>
 
           <section className="mb-12">

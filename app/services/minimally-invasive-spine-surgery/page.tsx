@@ -294,57 +294,6 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
         <section className="mb-12">
           <h2 className="text-3xl font-bold text-blue-800 mb-6">What is Minimally Invasive Spine Surgery?</h2>
           <div className="prose max-w-none">
-            <p className="text-lg text-gray-700 mb-6">
-              Minimally invasive spine surgery (MISS) uses advanced endoscopic techniques to treat spine conditions through smaller incisions, 
-              resulting in less muscle damage, reduced pain, and faster recovery compared to traditional open surgery.
-            </p>
-            <p className="text-gray-700 mb-6">
-              Dr. Sayuj Krishnan specializes in endoscopic spine procedures, offering patients the benefits of modern surgical techniques 
-              with reduced trauma and quicker return to daily activities. <Link href="/services/endoscopic-spine-surgery-hyderabad/" className="text-blue-600 hover:underline">Learn more about our local patient journey for endoscopic spine surgery in Hyderabad.</Link>
-            </p>
-          </header>
-
-          <section className="bg-blue-50 p-6 rounded-lg mb-8 border border-blue-100 shadow-sm text-center">
-            <p className="text-gray-800 text-lg mb-4">
-              <strong>Yashoda Hospital, Malakpet</strong> • Room No. 317, OPD Block
-            </p>
-            <div className="flex flex-wrap justify-center gap-6 text-sm font-medium">
-              <a href="tel:+919778280044" className="flex items-center text-blue-700 hover:text-blue-900 bg-white px-4 py-2 rounded-full shadow-sm hover:shadow-md transition-all">
-                📞 +91-9778280044
-              </a>
-              <Link href="/appointments" className="flex items-center text-white bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-full shadow-sm hover:shadow-md transition-all">
-                Book Appointment
-              </Link>
-            </div>
-          </section>
-
-          <section className="mb-12">
-            <LocalPathways mode="service" />
-          </section>
-
-          <section className="mb-10 rounded-lg border border-green-200 bg-green-50 p-6">
-            <h2 className="text-2xl font-semibold text-green-800 mb-3">For high-risk or elderly patients</h2>
-            <p className="text-gray-700 mb-3">
-              If you need to avoid general anaesthesia because of cardiac, lung, or metabolic risks, we offer an <strong>awake endoscopic spine pathway</strong> using spinal/epidural blocks with light sedation.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <Link href="/services/awake-spine-surgery-hyderabad" className="rounded-full bg-green-700 px-5 py-2 text-sm font-semibold text-white hover:bg-green-800">
-                See Awake Spine Surgery
-              </Link>
-              <a
-                href="https://wa.me/919778280044"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-full border border-green-300 px-5 py-2 text-sm font-semibold text-green-800 hover:bg-green-100"
-              >
-                Share MRI on WhatsApp
-              </a>
-            </div>
-          </section>
-
-          <section className="mb-12">
-            <h2 className="text-3xl font-bold text-blue-800 mb-6">What is Minimally Invasive Spine Surgery?</h2>
-            <div className="prose max-w-none">
               <p className="text-lg text-gray-700 mb-6">
                 Minimally invasive spine surgery (MISS) uses advanced endoscopic techniques to treat spine conditions through smaller incisions,
                 resulting in less muscle damage, reduced pain, and faster recovery compared to traditional open surgery.
