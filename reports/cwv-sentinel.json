@@ -15,5 +15,7 @@
     "after": {
       "home-cls-mobile": "Low (estimated < 0.1)"
     }
-  }
+  },
+  "build_status": "Success",
+  "test_status": "Existing failures in unrelated tests (semantic-search, lead_security, stats, dicom validation, appointment SEO schema)."
 }

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import ExpandedFAQ from "../src/components/ExpandedFAQ";
-import LazySection from "./_components/LazySection";
 import { SITE_URL } from "../src/lib/seo";
 import { makeMetadata } from "@/app/_lib/meta";
 import BreadcrumbSchema from "./components/schemas/BreadcrumbSchema";
