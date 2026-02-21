@@ -15,9 +15,9 @@ export const dynamicParams = false;
 export const revalidate = 86400;
 
 export const metadata = {
-  title: "Neurosurgeon in Banjara Hills | Endoscopic Spine | Dr. Sayuj",
+  title: "Neurosurgeon Banjara Hills | Spine & Brain Specialist | Dr. Sayuj",
   description:
-    "Consult Dr. Sayuj Krishnan near Banjara Hills, Hyderabad for endoscopic spine & minimally invasive brain surgery. OPD timings, parking, directions, WhatsApp booking, and FAQs.",
+    "Consult Dr. Sayuj Krishnan near Banjara Hills. Endoscopic spine & brain surgery specialist. 90% non-surgical success. Book appointment now.",
   alternates: { canonical: "https://www.drsayuj.info/neurosurgeon-banjara-hills" },
   openGraph: {
     title: "Neurosurgeon in Banjara Hills | Endoscopic Spine | Dr. Sayuj",
@@ -81,7 +81,7 @@ export default function Page() {
 
       <div className="mt-4 bg-blue-50 border border-blue-100 p-4 rounded-lg">
         <p className="text-sm text-blue-800">
-          <strong>Common conditions treated:</strong> <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="underline hover:text-blue-900">Sciatica</Link>, Slip Disc, Brain Tumors, and Spinal Stenosis.
+          <strong>Common conditions treated:</strong> <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="underline hover:text-blue-900">Sciatica</Link>, Slip Disc, <Link href="/services/brain-tumor-surgery-hyderabad" className="underline hover:text-blue-900">Brain Tumors</Link>, and Spinal Stenosis.
         </p>
       </div>
 
