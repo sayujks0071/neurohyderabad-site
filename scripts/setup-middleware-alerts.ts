@@ -192,10 +192,28 @@ async function setupAlerts() {
       console.warn('⚠️  Warning: MIDDLEWARE_WEBHOOK_SECRET not set. Webhooks will not be authenticated.');
     }
 
-    console.log(`📡 Creating alerts for rule: ${ruleId}\n`);
+    // Fetch existing alerts to prevent duplicates
+    console.log(`🔍 Checking existing alerts for rule: ${ruleId}...`);
+    let existingAlerts: any[] = [];
+    try {
+      existingAlerts = await middlewareApi.getAlertsByRule(ruleId);
+      console.log(`   Found ${existingAlerts.length} existing alerts.\n`);
+    } catch (error: any) {
+      console.warn(`   ⚠️ Could not fetch existing alerts: ${error.message}`);
+      console.warn('   Proceeding with creation (may cause duplicates if they exist)...\n');
+    }
+
+    console.log(`📡 Configuring alerts...\n`);
 
     for (const config of ALERTS) {
       try {
+        // Check if alert already exists
+        const exists = existingAlerts.find((a: any) => a.name === config.name);
+        if (exists) {
+          console.log(`⏭️  Skipping: ${config.name} (already exists, ID: ${exists.id})`);
+          continue;
+        }
+
         console.log(`Creating: ${config.name}...`);
 
         const filters = [
