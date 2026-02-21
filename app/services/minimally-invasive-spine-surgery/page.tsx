@@ -237,23 +237,70 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
       />
       <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/minimally-invasive-spine-surgery`} />
       <div className="min-h-screen bg-white">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-        />
-        <div className="container mx-auto px-4 py-16">
-          <header className="text-center mb-8">
-            <h1 className="text-4xl font-bold mb-4">Endoscopic & Minimally Invasive Spine Surgery Hyderabad</h1>
-            <AuthorByline
-              publishedOn="2025-09-10"
-              updatedOn="2025-10-19"
-              className="justify-center mb-4"
-            />
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-              Advanced <strong>endoscopic spine surgery</strong> in Hyderabad.
-              Experience <span className="text-blue-700 font-semibold">Day Care</span> procedures,
-              <span className="text-blue-700 font-semibold"> Same-Day Discharge</span>, and
-              <span className="text-blue-700 font-semibold"> Awake Spine Surgery</span> options for faster recovery.
+      <div className="container mx-auto px-4 py-16">
+        <header className="text-center mb-8">
+          <h1 className="text-4xl font-bold mb-4">Endoscopic & Minimally Invasive Spine Surgery Hyderabad</h1>
+          <AuthorByline
+            publishedOn="2025-09-10"
+            updatedOn="2025-10-19"
+            className="justify-center mb-4"
+          />
+          <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+            Advanced <strong>endoscopic spine surgery</strong> in Hyderabad.
+            Experience <span className="text-blue-700 font-semibold">Day Care</span> procedures,
+            <span className="text-blue-700 font-semibold"> Same-Day Discharge</span>, and
+            <span className="text-blue-700 font-semibold"> Awake Spine Surgery</span> options for faster recovery.
+          </p>
+        </header>
+
+        <section className="bg-blue-50 p-6 rounded-lg mb-8 border border-blue-100 shadow-sm text-center">
+          <p className="text-gray-800 text-lg mb-4">
+            <strong>Yashoda Hospital, Malakpet</strong> • Room No. 317, OPD Block
+          </p>
+          <div className="flex flex-wrap justify-center gap-6 text-sm font-medium">
+             <a href="tel:+919778280044" className="flex items-center text-blue-700 hover:text-blue-900 bg-white px-4 py-2 rounded-full shadow-sm hover:shadow-md transition-all">
+               📞 +91-9778280044
+             </a>
+             <Link href="/appointments" className="flex items-center text-white bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-full shadow-sm hover:shadow-md transition-all">
+               Book Appointment
+             </Link>
+          </div>
+        </section>
+
+        <section className="mb-12">
+            <LocalPathways mode="service" />
+        </section>
+
+        <section className="mb-10 rounded-lg border border-green-200 bg-green-50 p-6">
+          <h2 className="text-2xl font-semibold text-green-800 mb-3">For high-risk or elderly patients</h2>
+          <p className="text-gray-700 mb-3">
+            If you need to avoid general anaesthesia because of cardiac, lung, or metabolic risks, we offer an <strong>awake endoscopic spine pathway</strong> using spinal/epidural blocks with light sedation.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <Link href="/services/awake-spine-surgery-hyderabad" className="rounded-full bg-green-700 px-5 py-2 text-sm font-semibold text-white hover:bg-green-800">
+              See Awake Spine Surgery
+            </Link>
+            <a
+              href="https://wa.me/919778280044"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full border border-green-300 px-5 py-2 text-sm font-semibold text-green-800 hover:bg-green-100"
+            >
+              Share MRI on WhatsApp
+            </a>
+          </div>
+        </section>
+
+        <section className="mb-12">
+          <h2 className="text-3xl font-bold text-blue-800 mb-6">What is Minimally Invasive Spine Surgery?</h2>
+          <div className="prose max-w-none">
+            <p className="text-lg text-gray-700 mb-6">
+              Minimally invasive spine surgery (MISS) uses advanced endoscopic techniques to treat spine conditions through smaller incisions, 
+              resulting in less muscle damage, reduced pain, and faster recovery compared to traditional open surgery.
+            </p>
+            <p className="text-gray-700 mb-6">
+              Dr. Sayuj Krishnan specializes in endoscopic spine procedures, offering patients the benefits of modern surgical techniques 
+              with reduced trauma and quicker return to daily activities. <Link href="/services/endoscopic-spine-surgery-hyderabad/" className="text-blue-600 hover:underline">Learn more about our local patient journey for endoscopic spine surgery in Hyderabad.</Link>
             </p>
           </header>
 

@@ -185,10 +185,6 @@ export default function VertebroplastyKyphoplastyPage() {
       />
       <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/kyphoplasty-vertebroplasty-hyderabad`} />
       <div className="min-h-screen bg-white">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-        />
       <div className="container mx-auto px-4 py-16">
         <header className="text-center mb-8">
           <h1 className="text-4xl font-bold mb-4">Vertebroplasty & Kyphoplasty in Hyderabad</h1>
