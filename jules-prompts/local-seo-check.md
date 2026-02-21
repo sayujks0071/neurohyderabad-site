@@ -13,3 +13,5 @@ Verify Local SEO signals for "Dr. Sayuj Krishnan".
 <!-- Jules Automation -->
 <!-- Schedule: Daily 09:30 IST -->
 <!-- Managed by Jules -->
+
+<!-- Verified setup -->

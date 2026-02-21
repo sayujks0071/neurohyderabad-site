@@ -13,3 +13,5 @@ Review PRs merged in the last 24 hours.
 <!-- Jules Automation -->
 <!-- Schedule: Daily 08:45 IST -->
 <!-- Managed by Jules -->
+
+<!-- Verified setup -->
