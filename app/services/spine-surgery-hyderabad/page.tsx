@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import Breadcrumbs from '@/app/components/Breadcrumbs';
 import JsonLd from '@/components/JsonLd';
 import NAP from '@/app/_components/NAP';
@@ -12,15 +13,19 @@ import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import { getServiceSources } from '../sources';
 import MedicalWebPageSchema from '../../components/schemas/MedicalWebPageSchema';
+import FAQPageSchema from '@/app/_components/FAQPageSchema';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import SurgeryComparisonTable from '@/src/components/SurgeryComparisonTable';
+import CostTransparencySection from '@/src/components/CostTransparencySection';
+import TrustProof from '@/app/_components/TrustProof';
+import { patientStories } from '@/src/content/stories';
 
 const SERVICE_SLUG = 'spine-surgery-hyderabad';
 
 const baseMetadata = makeMetadata({
-  title: 'Best Spine Surgeon Hyderabad | Endoscopic Expert | Dr Sayuj',
+  title: 'Spine Surgery Hyderabad | Best Spine Surgeon | Cost & Reviews',
   description:
-    'Expert spine surgeon in Hyderabad. Endoscopic keyhole surgery for slip disc & sciatica with 90% success. Book at Yashoda Malakpet.',
+    'Best Spine Surgeon Hyderabad. Dr. Sayuj specializes in Endoscopic & Microscopic Spine Surgery. Check Cost, Recovery Time & Patient Reviews. Walk Same Day.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
 });
 
@@ -28,11 +33,13 @@ export const metadata: Metadata = {
   ...baseMetadata,
   keywords: [
     'spine surgery hyderabad',
-    'spine surgeon near me',
+    'best spine surgeon in hyderabad',
+    'spine surgery cost hyderabad',
     'minimally invasive spine surgery hyderabad',
     'spine specialist yashoda hospital',
     'endoscopic spine surgery hyderabad',
-    'spine surgery consultation hyderabad',
+    'microdiscectomy cost hyderabad',
+    'spine fusion surgery cost hyderabad',
   ],
   openGraph: {
     title: 'Spine Surgery Hyderabad | Minimally Invasive Specialist',
@@ -64,6 +71,33 @@ const serviceSchema = buildLocalServiceSchema({
 
 const ARTICLE_SOURCES = getServiceSources(SERVICE_SLUG);
 
+const COSTS = [
+  {
+    procedure: 'Microdiscectomy (Lumbar)',
+    range: '₹1,10,000 - ₹1,50,000',
+    recovery: '2-3 Days',
+    includes: ['Surgeon Fees', 'Microscope Usage', 'Standard Room (2 Days)', 'Medications']
+  },
+  {
+    procedure: 'Endoscopic Spine Surgery',
+    range: '₹1,30,000 - ₹1,80,000',
+    recovery: '1 Day (Day Care)',
+    includes: ['Keyhole Surgery', '4K Endoscope', 'Same Day Discharge', 'Fast Recovery']
+  },
+  {
+    procedure: 'Laminectomy (Decompression)',
+    range: '₹1,00,000 - ₹1,40,000',
+    recovery: '2-3 Days',
+    includes: ['Canal Decompression', 'Nursing Care', 'Post-op Physio (Inpatient)']
+  },
+  {
+    procedure: 'Spinal Fusion (TLIF - Single Level)',
+    range: '₹2,50,000 - ₹3,50,000',
+    recovery: '3-5 Days',
+    includes: ['Implants (Screws/Cage)', 'Neuromonitoring', 'Private Room (3 Days)']
+  }
+];
+
 const faqs = [
   {
     question: 'How do I know if I need spine surgery instead of physiotherapy?',
@@ -85,6 +119,19 @@ const faqs = [
     answer:
       'Yes, we accept all major insurance providers and offer cashless facilities at Yashoda Hospitals. Our team handles the pre-authorization paperwork for seamless processing.',
   },
+  {
+    question: 'How do robotic and endoscopic spine surgeries differ?',
+    answer:
+      'Endoscopic surgery uses a keyhole camera for decompression. Robotic surgery uses a mechanical arm for precise screw placement during fusion. We offer both technologies at Yashoda Malakpet for optimal results.',
+  },
+  {
+    question: 'How much does spine surgery cost in Hyderabad?',
+    answer: 'The cost varies by procedure type. A Microdiscectomy typically ranges from ₹1.1L to ₹1.5L, while Endoscopic surgery ranges from ₹1.3L to ₹1.8L. Complex fusion surgeries (TLIF) start from ₹2.5L depending on implants. We provide transparent package estimates before admission.'
+  },
+  {
+    question: 'Why choose Dr. Sayuj as the best spine surgeon in Hyderabad?',
+    answer: 'Dr. Sayuj combines international fellowship training (Germany) with over 1000+ successful endoscopic procedures. His philosophy focuses on preserving natural anatomy, resulting in 90% same-day discharge rates for decompression surgeries.'
+  }
 ];
 
 export default function SpineSurgeryHyderabadPage() {
@@ -93,6 +140,11 @@ export default function SpineSurgeryHyderabadPage() {
     { name: 'Services', path: '/services/' },
     { name: 'Spine Surgery in Hyderabad', path: `/services/${SERVICE_SLUG}/` },
   ];
+
+  const relevantStories = patientStories.filter(story => {
+    const tags = story.tags.join(' ').toLowerCase();
+    return tags.includes('spine') || tags.includes('tlif') || tags.includes('sciatica');
+  }).slice(0, 3);
 
   return (
     <>
@@ -105,6 +157,7 @@ export default function SpineSurgeryHyderabadPage() {
         serviceOrCondition="Spine Surgery"
         breadcrumbs={breadcrumbs}
       />
+      <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/${SERVICE_SLUG}`} />
       <main className="container mx-auto px-4 py-16">
         <Breadcrumbs
           items={[
@@ -112,6 +165,7 @@ export default function SpineSurgeryHyderabadPage() {
             { name: 'Services', href: '/services/' },
             { name: 'Spine Surgery in Hyderabad', href: `/services/${SERVICE_SLUG}/` },
           ]}
+          disableSchema={true}
         />
 
         <header className="grid md:grid-cols-2 gap-10 items-start mb-16">
@@ -158,12 +212,56 @@ export default function SpineSurgeryHyderabadPage() {
           </div>
         </header>
 
+        <TrustProof serviceType="spine" className="mb-16" stories={relevantStories} />
+
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-blue-900 mb-6">Endoscopic vs. Traditional Spine Surgery</h2>
           <p className="text-gray-700 mb-6">
-            Understanding the difference between traditional open surgery and modern endoscopic techniques is crucial for making an informed decision. Dr. Sayuj prioritizes tissue-preserving methods that allow for faster recovery.
+            Understanding the difference between traditional open surgery and modern endoscopic techniques is crucial for making an informed decision. Dr. Sayuj prioritizes tissue-preserving methods, especially <Link href="/services/endoscopic-spine-surgery-hyderabad/" className="text-blue-700 underline hover:text-blue-800">endoscopic spine surgery</Link>, that allow for faster recovery.
           </p>
           <SurgeryComparisonTable />
+        </section>
+
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-blue-900 mb-6">Advanced Surgical Solutions</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+              <h3 className="text-xl font-bold text-blue-800 mb-2">Endoscopic Spine Surgery</h3>
+              <p className="text-gray-700 text-sm mb-4">
+                Ultra-minimally invasive &quot;keyhole&quot; surgery for slip discs and sciatica. 7mm incision, no muscle cutting, and same-day walking.
+              </p>
+              <Link href="/services/endoscopic-spine-surgery-hyderabad/" className="text-blue-600 font-semibold hover:underline text-sm">
+                Learn about Keyhole Surgery →
+              </Link>
+            </div>
+            <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+              <h3 className="text-xl font-bold text-blue-800 mb-2">Microdiscectomy</h3>
+              <p className="text-gray-700 text-sm mb-4">
+                Gold-standard microscopic removal of herniated disc fragments relieving nerve compression. Precise visualization ensures nerve safety.
+              </p>
+              <Link href="/services/microdiscectomy-surgery-hyderabad/" className="text-blue-600 font-semibold hover:underline text-sm">
+                Explore Microdiscectomy →
+              </Link>
+            </div>
+            <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+              <h3 className="text-xl font-bold text-blue-800 mb-2">Spinal Fusion (TLIF/PLIF)</h3>
+              <p className="text-gray-700 text-sm mb-4">
+                Stabilization for slipped vertebrae (spondylolisthesis) or spinal instability. Uses screws and cages to restore alignment and relieve pain.
+              </p>
+              <Link href="/services/spinal-fusion-surgery-hyderabad/" className="text-blue-600 font-semibold hover:underline text-sm">
+                View Fusion Details →
+              </Link>
+            </div>
+            <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+              <h3 className="text-xl font-bold text-blue-800 mb-2">Cervical Disc Replacement</h3>
+              <p className="text-gray-700 text-sm mb-4">
+                Motion-preserving surgery for neck disc herniations. Maintains natural neck movement unlike traditional fusion surgery.
+              </p>
+              <Link href="/services/cervical-disc-replacement-hyderabad/" className="text-blue-600 font-semibold hover:underline text-sm">
+                Check Disc Replacement →
+              </Link>
+            </div>
+          </div>
         </section>
 
         <section className="mb-16">
@@ -209,6 +307,117 @@ export default function SpineSurgeryHyderabadPage() {
         </section>
 
         <section className="mb-16">
+          <h2 className="text-3xl font-bold text-blue-900 mb-6">Meet Dr. Sayuj Krishnan</h2>
+          <div className="flex flex-col md:flex-row gap-8 items-start bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
+            <div className="w-full md:w-1/3">
+               <div className="aspect-[3/4] relative bg-gray-200 rounded-xl overflow-hidden mb-4">
+                 <Image
+                   src="/images/dr-sayuj-krishnan-portrait-v2.jpg"
+                   alt="Dr Sayuj Krishnan - Spine Specialist Hyderabad"
+                   className="object-cover"
+                   fill
+                   sizes="(max-width: 768px) 100vw, 33vw"
+                 />
+               </div>
+               <div className="text-center">
+                  <p className="font-bold text-blue-900">Dr. Sayuj Krishnan</p>
+                  <p className="text-sm text-gray-500">Neurosurgeon & Spine Specialist</p>
+               </div>
+            </div>
+            <div className="w-full md:w-2/3">
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Why Choose Dr. Sayuj for Spine Care?</h3>
+              <p className="text-gray-700 mb-4 leading-relaxed">
+                Dr. Sayuj Krishnan is a highly regarded neurosurgeon in Hyderabad with specialized fellowship training in <strong>Minimally Invasive Spine Surgery (Germany)</strong>. His approach prioritizes saving the natural spine anatomy, helping thousands of patients avoid major open surgery.
+              </p>
+              <ul className="space-y-3 text-gray-700 mb-6">
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-600 font-bold">✓</span>
+                  <div>
+                    <strong>1000+ Successful Procedures:</strong> Extensive experience in endoscopic discectomy, microscopic decompression, and complex fusion surgeries.
+                  </div>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-600 font-bold">✓</span>
+                  <div>
+                    <strong>Advanced Technology:</strong> Expert in 4K Endoscopy, Neuronavigation, and Robotic-assisted spine surgery for maximum precision.
+                  </div>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-600 font-bold">✓</span>
+                  <div>
+                    <strong>Patient-First Philosophy:</strong> "We only operate when necessary. 80% of our spine patients get better without surgery."
+                  </div>
+                </li>
+              </ul>
+              <div className="flex flex-wrap gap-4">
+                <Link href="/about" className="text-blue-600 font-semibold hover:underline">
+                  Read Full Profile →
+                </Link>
+                <Link href="/patient-stories" className="text-blue-600 font-semibold hover:underline">
+                  Read Patient Reviews →
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="mb-16 bg-gradient-to-r from-blue-900 to-slate-900 text-white rounded-2xl p-8 shadow-xl">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <h2 className="text-3xl font-bold mb-4">Second Opinion for Spine Surgery</h2>
+              <p className="text-blue-100 text-lg mb-6">
+                Have you been advised open spine surgery or fusion? Dr. Sayuj Krishnan&apos;s <strong>German Endoscopic Fellowship</strong> training allows him to offer less invasive alternatives that many surgeons may not perform.
+              </p>
+              <ul className="space-y-3 text-blue-100 mb-8">
+                <li className="flex items-center"><span className="text-green-400 mr-2">✓</span> Verify if you really need fusion (screws/rods)</li>
+                <li className="flex items-center"><span className="text-green-400 mr-2">✓</span> Explore &quot;Keyhole&quot; alternatives (7mm incision)</li>
+                <li className="flex items-center"><span className="text-green-400 mr-2">✓</span> Avoid general anesthesia risks (Awake Surgery)</li>
+              </ul>
+              <Link
+                href="/appointments"
+                className="inline-block bg-white text-blue-900 font-bold py-3 px-8 rounded-full hover:bg-blue-50 transition-colors"
+              >
+                Get a Second Opinion
+              </Link>
+            </div>
+            <div className="bg-white/10 p-6 rounded-xl border border-white/20">
+               <h3 className="text-xl font-semibold mb-3">Why Patients Switch to Dr. Sayuj</h3>
+               <p className="text-blue-200 text-sm mb-4">
+                 &quot;I was told I needed 4 screws and a 5-day hospital stay. Dr. Sayuj treated my slip disc with a 45-minute endoscopic procedure. I went home the same evening.&quot;
+               </p>
+               <p className="text-sm font-semibold">— Verified Patient Review</p>
+            </div>
+          </div>
+        </section>
+
+        <section className="mb-16">
+          <div className="bg-white border border-green-100 rounded-2xl p-8 shadow-sm">
+            <h2 className="text-2xl font-bold text-green-800 mb-4">Is Spine Surgery Safe for Elderly Patients?</h2>
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <p className="text-gray-700 mb-4">
+                  Advanced age is no longer a barrier to spine surgery. Our &quot;Awake&quot; and &quot;Twilight&quot; anesthesia protocols allow many procedures to be performed without general anesthesia, significantly reducing risks for heart and lung complications.
+                </p>
+                <ul className="space-y-2 mb-4 text-sm text-gray-700">
+                  <li className="flex items-center"><span className="text-green-500 mr-2">✓</span> No General Anesthesia (Awake/Twilight options)</li>
+                  <li className="flex items-center"><span className="text-green-500 mr-2">✓</span> Minimal Blood Loss (Endoscopic technique)</li>
+                  <li className="flex items-center"><span className="text-green-500 mr-2">✓</span> Early Mobilization (Walk same day)</li>
+                </ul>
+                <Link href="/services/awake-spine-surgery-hyderabad" className="text-green-700 font-semibold hover:underline">
+                  Learn about Awake Spine Surgery →
+                </Link>
+              </div>
+              <div className="bg-green-50 p-6 rounded-xl">
+                 <h3 className="font-bold text-green-900 mb-2">Robotic Precision</h3>
+                 <p className="text-sm text-gray-700 mb-4">
+                   For complex cases in older adults, we utilize <Link href="/services/robotic-spine-surgery-hyderabad" className="text-green-700 font-medium hover:underline">Robotic Spine Surgery</Link> to ensure 99.9% accuracy in implant placement, further enhancing safety.
+                 </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="mb-16">
           <div className="bg-red-50 border border-red-100 rounded-2xl p-8 shadow-sm">
             <h2 className="text-2xl font-bold text-red-800 mb-4 flex items-center gap-3">
               <span className="text-3xl">⚠️</span> Red Flags: When Spine Surgery Cannot Wait
@@ -247,6 +456,12 @@ export default function SpineSurgeryHyderabadPage() {
             </div>
           </div>
         </section>
+
+        <CostTransparencySection
+          costs={COSTS}
+          showInsurance={true}
+          disclaimer="Estimated package costs for self-pay patients at Yashoda Hospital Malakpet. Final pricing depends on room category (General/Sharing/Private), implants used (e.g., Titanium screws), and medical complexity. We assist with full insurance pre-authorization."
+        />
 
         <section className="mb-16 grid md:grid-cols-2 gap-10">
           <div>
@@ -331,8 +546,6 @@ export default function SpineSurgeryHyderabadPage() {
             </Link>
           </div>
         </section>
-
-
 
       <div className="mt-12">
         <LocalPathways mode="service" />

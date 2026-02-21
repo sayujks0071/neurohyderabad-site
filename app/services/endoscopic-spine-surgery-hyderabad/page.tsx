@@ -19,6 +19,7 @@ import SurgeryComparisonTable from '@/src/components/SurgeryComparisonTable';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
 import EndoscopicProcedureSteps from '@/src/components/EndoscopicProcedureSteps';
+import ProcedureHighlights from '@/src/components/ProcedureHighlights';
 
 const SERVICE_SLUG = 'endoscopic-spine-surgery-hyderabad';
 
@@ -26,7 +27,7 @@ const SERVICE_SLUG = 'endoscopic-spine-surgery-hyderabad';
 export const revalidate = 3600; // Revalidate every hour
 
 const baseMetadata = makeMetadata({
-  title: 'Endoscopic Spine Surgery Hyderabad | Keyhole Spine Specialist',
+  title: 'Endoscopic Spine Surgery Hyderabad | Same Day Discharge',
   description:
     'Best Endoscopic Spine Surgery in Hyderabad. Dr. Sayuj performs 7mm Keyhole Surgery with Same-Day Discharge. Check Cost & Recovery Time.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
@@ -34,7 +35,7 @@ const baseMetadata = makeMetadata({
 
 export const metadata: Metadata = {
   ...baseMetadata,
-  title: 'Endoscopic Spine Surgery Hyderabad | Keyhole Spine Specialist',
+  title: 'Endoscopic Spine Surgery Hyderabad | Same Day Discharge',
   description:
     'Best Endoscopic Spine Surgery in Hyderabad. Dr. Sayuj performs 7mm Keyhole Surgery with Same-Day Discharge. Check Cost & Recovery Time.',
   keywords: [
@@ -116,6 +117,14 @@ const faqs = [
     question: 'What should I expect on the day of endoscopic spine surgery?',
     answer:
       'Most cases are day-care procedures. You arrive for pre-op checks, undergo the keyhole surgery, and begin walking within hours. Discharge is usually the same evening or next morning with a written recovery plan.',
+  },
+  {
+    question: 'How does the Day Care Spine Surgery program work?',
+    answer: 'Our Day Care protocol is designed for rapid recovery. You are admitted in the morning, undergo the 45-minute keyhole procedure under local or spinal anesthesia, and begin walking within 3 hours. Once you are comfortable and mobile, you are discharged the same evening to sleep in your own bed.',
+  },
+  {
+    question: 'Why is Endoscopic Surgery safer than Open Surgery?',
+    answer: 'Endoscopic surgery eliminates the need to cut or detach back muscles, which is the main cause of post-surgical pain and infection in open surgery. By using a 7mm camera, we visualize the nerve with 4K clarity while leaving the structural stability of the spine completely untouched.',
   },
   {
     question: 'Is Yashoda Hospital, Malakpet easy to reach for day-care surgery?',
@@ -324,6 +333,7 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
             { name: 'Services', href: '/services/' },
             { name: 'Endoscopic Spine Surgery in Hyderabad', href: `/services/${SERVICE_SLUG}/` },
           ]}
+          disableSchema={true}
         />
 
         <header className="grid md:grid-cols-2 gap-10 items-start mb-16">
@@ -372,6 +382,15 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
             </ul>
           </div>
         </header>
+
+        <ProcedureHighlights
+          duration="45-60 Mins"
+          anesthesia="Local + Sedation"
+          stay="6-8 Hours"
+          recovery="3-5 Days"
+          incision="7-8 mm (Keyhole)"
+          className="mb-12"
+        />
 
         <section className="mb-12 bg-green-50 border border-green-200 rounded-2xl p-6 shadow-sm">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">

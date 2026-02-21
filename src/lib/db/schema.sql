@@ -116,6 +116,10 @@ CREATE TABLE IF NOT EXISTS patients (
   lead_score INTEGER DEFAULT 0,
   lead_status VARCHAR(50) DEFAULT 'new', -- new, contacted, qualified, converted, lost
   
+  -- Medical Context (Enriched)
+  latest_pain_score INTEGER CHECK (latest_pain_score >= 0 AND latest_pain_score <= 10),
+  mri_scan_available BOOLEAN DEFAULT FALSE,
+
   -- Preferences
   preferred_contact_method VARCHAR(20) DEFAULT 'phone', -- phone, email, whatsapp
   language_preference VARCHAR(20) DEFAULT 'english',

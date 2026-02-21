@@ -1,19 +1,21 @@
 {
-  "timestamp": "2025-02-27T00:00:00Z",
-  "commit_hash": "HEAD",
-  "notes": {
+  "timestamp": "2025-05-23T10:15:00Z",
+  "commit_hash": "current",
+  "page_types": {
     "Home": {
-      "bottleneck": "CLS on mobile due to fixed-height video placeholders (450px) vs actual video height (~180px).",
-      "fix": "Updated placeholders in `app/page.tsx` and loading state in `RemotionVideoEmbedWrapper.tsx` to use `aspect-video` and `max-w-[800px]`, ensuring consistent aspect ratio and width during loading.",
-      "impact": "Eliminated large layout shift on mobile devices when videos load. Placeholder now matches the video dimensions exactly."
-    }
-  },
-  "metrics": {
-    "before": {
-      "home-cls-mobile": "High (estimated > 0.25)"
+      "bottleneck": "CLS risk and TBT due to unnecessary lazy loading of LocalReputationPanel",
+      "fix": "Replaced lazy-loaded LocalReputationPanelWrapper with static LocalReputationPanel in app/page.tsx.",
+      "expected_impact": "Eliminated CLS risk from placeholder height mismatch. Reduced hydration cost (TBT) by removing LazySection wrapper. Improved SEO by including content in initial HTML.",
+      "verification": "Manual code verification confirming the removal of LazySection and direct rendering of LocalReputationPanel. Build failed due to unrelated 'dicom-parser' error, preventing bundle size verification."
     },
-    "after": {
-      "home-cls-mobile": "Low (estimated < 0.1)"
+    "Location": {
+      "notes": "Location pages use client-side map embedding with 'click to load' pattern, which is good for performance."
+    },
+    "Condition": {
+      "notes": "Condition pages are static server components with some dynamic imports (videos). TrustProof component is imported statically but is a client component."
+    },
+    "Appointment": {
+      "notes": "Appointment page lazy loads heavy components (PatientPortal, ChatBot), which is good."
     }
   }
 }

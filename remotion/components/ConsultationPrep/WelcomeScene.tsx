@@ -29,6 +29,8 @@ const FloatingParticles: React.FC<{ reducedMotion: boolean; opacity: number }> =
       {particles.map((p, i) => {
         const xOffset = Math.sin(frame / 100 * p.speed + i) * 30;
         const yOffset = Math.cos(frame / 120 * p.speed + i) * 30;
+        // Adding scale variation for more organic feel
+        const scale = 1 + Math.sin(frame / 80 * p.speed + i) * 0.1;
 
         return (
           <div
@@ -41,7 +43,7 @@ const FloatingParticles: React.FC<{ reducedMotion: boolean; opacity: number }> =
               height: p.size,
               borderRadius: '50%',
               backgroundColor: p.color,
-              transform: `translate(-50%, -50%) translate(${xOffset}px, ${yOffset}px)`,
+              transform: `translate(-50%, -50%) translate(${xOffset}px, ${yOffset}px) scale(${scale})`,
               filter: 'blur(40px)',
             }}
           />
@@ -80,24 +82,10 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName, exitFra
   // Subtle breathing animation for continuous movement
   const breathingScale = prefersReducedMotion ? 1 : 1 + Math.sin(frame / 45) * 0.01;
 
-  // Subtitle animation (starts after title)
-  const subtitleStartFrame = 15;
-  const subtitleOpacity = prefersReducedMotion ? 1 : spring({
-    frame: frame - subtitleStartFrame,
-    fps,
-    from: 0,
-    to: 1,
-    durationInFrames: 40,
-  });
-
-  const subtitleY = prefersReducedMotion ? 0 : spring({
-    frame: frame - subtitleStartFrame,
-    fps,
-    from: 20,
-    to: 0,
-    durationInFrames: 40,
-    config: { damping: 12 },
-  });
+  // Subtitle animation configuration
+  const subtitleText = "Welcome to Dr. Sayuj Krishnan's Practice";
+  const subtitleWords = subtitleText.split(' ');
+  const subtitleBaseDelay = 15;
 
   // --- EXIT ANIMATIONS ---
   // Start exiting at exitFrame, take 20 frames to slide out/fade
@@ -166,11 +154,40 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName, exitFra
               fontWeight: 500,
               color: 'rgba(255, 255, 255, 0.9)',
               margin: 0,
-              opacity: subtitleOpacity,
-              transform: `translateY(${subtitleY}px)`,
             }}
           >
-            Welcome to Dr. Sayuj Krishnan's Practice
+            {subtitleWords.map((word, i) => {
+              const delay = subtitleBaseDelay + i * 5;
+              const wordOpacity = prefersReducedMotion ? 1 : spring({
+                frame: frame - delay,
+                fps,
+                from: 0,
+                to: 1,
+                durationInFrames: 30,
+              });
+              const wordY = prefersReducedMotion ? 0 : spring({
+                frame: frame - delay,
+                fps,
+                from: 20,
+                to: 0,
+                durationInFrames: 30,
+                config: { damping: 12 },
+              });
+
+              return (
+                <span
+                  key={i}
+                  style={{
+                    display: 'inline-block',
+                    opacity: wordOpacity,
+                    transform: `translateY(${wordY}px)`,
+                    marginRight: i === subtitleWords.length - 1 ? 0 : '0.3em',
+                  }}
+                >
+                  {word}
+                </span>
+              );
+            })}
           </p>
         </div>
       </div>

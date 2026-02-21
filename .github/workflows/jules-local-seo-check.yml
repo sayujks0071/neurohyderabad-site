@@ -1,8 +1,7 @@
 name: Jules Local SEO Check
-# v2.4 - Managed by Jules
 on:
   schedule:
-    # 09:30 IST (India Standard Time) = 04:00 UTC
+    # 09:30 IST = 04:00 UTC
     - cron: "0 4 * * *"
   workflow_dispatch:
 
@@ -96,4 +95,4 @@ jobs:
 
             console.log(`Created issue: ${newIssue.html_url}`);
 
-# Verified by Jules 2026-02-15
+# Verified setup

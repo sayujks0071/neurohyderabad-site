@@ -54,7 +54,7 @@ const FAQ = [
 
 export default function NeurosurgeonNearKachigudaFAQPage() {
   // Mapping Kachiguda to Malakpet as it is the closest and most relevant
-  const location = getLocationById("malakpet");
+  const location = getLocationById("kachiguda");
 
   if (!location) {
     return notFound();

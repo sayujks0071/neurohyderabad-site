@@ -4,7 +4,7 @@ import path from 'path';
 
 const filesToCheck = [
   'packages/appointment-form/BookingForm.tsx',
-  'packages/appointment-form/AppointmentFormExperience.tsx', // Success message is here for BookingForm
+  'packages/appointment-form/AppointmentFormExperience.tsx',
   'app/appointments/_components/neuralink/PatientPortal.tsx',
   'components/LeadForm.tsx',
   'components/TeleconsultationForm.tsx',
@@ -12,32 +12,25 @@ const filesToCheck = [
 
 const requirements = {
   'packages/appointment-form/BookingForm.tsx': [
-    { pattern: /isLoading={isSubmitting}/, description: 'Loading state on button' },
-    { pattern: /"Sending..."/, description: 'Sending text' },
+    { pattern: /isLoading=\{isSubmitting\}/, description: 'Loading state on Button component' },
     { pattern: /reset\(/, description: 'Form reset logic' },
   ],
   'packages/appointment-form/AppointmentFormExperience.tsx': [
-     { pattern: /Appointment request received\. Please bring any MRI\/CT scans with you\. We will confirm via phone shortly\./, description: 'Success message' }
+     { pattern: /APPOINTMENT_SUCCESS_MESSAGE/, description: 'Uses standard success message constant' }
   ],
   'app/appointments/_components/neuralink/PatientPortal.tsx': [
-    { pattern: /disabled={.*(isAnalyzing|isSyncing).*}/, description: 'Disabled state on button' },
-    { pattern: /Loader2/, description: 'Spinner icon' },
-    { pattern: /Sending\.\.\./, description: 'Sending text' },
-    { pattern: /Appointment request received\. Please bring any MRI\/CT scans with you\. We will confirm via phone shortly\./, description: 'Success message' },
+    { pattern: /isLoading=\{.*(isAnalyzing|isSyncing).*}/, description: 'Loading state on Button component' },
+    { pattern: /APPOINTMENT_SUCCESS_MESSAGE/, description: 'Uses standard success message constant' },
     { pattern: /setFormData\(INITIAL_FORM_STATE\)/, description: 'Form reset logic' },
   ],
   'components/LeadForm.tsx': [
-    { pattern: /disabled={isSubmitting}/, description: 'Disabled state on button' },
-    { pattern: /Loader2/, description: 'Spinner icon' },
-    { pattern: /"Sending..."/, description: 'Sending text' },
-    { pattern: /Appointment request received\. Please bring any MRI\/CT scans with you\. We will confirm via phone shortly\./, description: 'Success message' },
+    { pattern: /isLoading=\{isSubmitting\}/, description: 'Loading state on Button component' },
+    { pattern: /APPOINTMENT_SUCCESS_MESSAGE/, description: 'Uses standard success message constant' },
     { pattern: /reset\(\)/, description: 'Form reset logic' },
   ],
   'components/TeleconsultationForm.tsx': [
-    { pattern: /disabled={status === 'submitting'}/, description: 'Disabled state on button' },
-    { pattern: /Loader2/, description: 'Spinner icon' },
-    { pattern: /Sending\.\.\./, description: 'Sending text' },
-    { pattern: /Appointment request received\. Please bring any MRI\/CT scans with you\. We will confirm via phone shortly\./, description: 'Success message' },
+    { pattern: /isLoading=\{status === 'submitting'\}/, description: 'Loading state on Button component' },
+    { pattern: /APPOINTMENT_SUCCESS_MESSAGE/, description: 'Uses standard success message constant' },
     { pattern: /setFormState\(initialState\)/, description: 'Form reset logic' },
   ],
 };
@@ -70,8 +63,28 @@ for (const file of filesToCheck) {
   }
 }
 
+// Verify the constant itself
+const constantsFile = 'packages/appointment-form/constants.tsx';
+const constantsPath = path.join(process.cwd(), constantsFile);
+if (fs.existsSync(constantsPath)) {
+    const content = fs.readFileSync(constantsPath, 'utf-8');
+    // Using loose match for whitespace/newlines
+    const successMsgPattern = /Appointment request received\. Please bring any MRI\/CT scans with you\. We will confirm via phone shortly\./;
+    if (successMsgPattern.test(content)) {
+        console.log(`\nChecking ${constantsFile}...`);
+        console.log('  ✅ Success message constant has correct text');
+    } else {
+        console.error(`\nChecking ${constantsFile}...`);
+        console.error('  ❌ Success message constant has INCORRECT text');
+        allPassed = false;
+    }
+} else {
+    console.error(`❌ Constants file not found: ${constantsFile}`);
+    allPassed = false;
+}
+
 if (allPassed) {
-  console.log('\n✅ All checks passed! The codebase already implements the requested UX improvements.');
+  console.log('\n✅ All checks passed! The codebase implements the requested UX improvements.');
   process.exit(0);
 } else {
   console.error('\n❌ Some checks failed. Please review the output.');

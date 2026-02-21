@@ -1,1 +1,1 @@
-[Latest Report](./2026-01-20/report.md)
+./2026-02-24/report.md

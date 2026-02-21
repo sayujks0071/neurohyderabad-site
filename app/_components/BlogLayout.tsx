@@ -111,18 +111,18 @@ function generateBlogSchema(post: BlogPost) {
     author: {
       '@type': 'Person',
       name: 'Dr. Sayuj Krishnan',
-      url: `${SITE_URL}/about/`,
+      url: `${SITE_URL}/about`,
     },
     reviewedBy: {
       '@type': 'Physician',
       name: post.lastReviewedBy || 'Dr. Sayuj Krishnan',
-      url: `${SITE_URL}/about/`,
+      url: `${SITE_URL}/about`,
     },
     datePublished: post.publishedAt,
     dateModified: post.updatedAt || post.publishedAt,
     mainEntityOfPage: {
       '@type': 'MedicalWebPage',
-      '@id': `${SITE_URL}/blog/${post.slug}/`,
+      '@id': `${SITE_URL}/blog/${post.slug}`,
     },
   };
 

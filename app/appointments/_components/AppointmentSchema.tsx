@@ -86,7 +86,7 @@ export default function AppointmentSchema() {
       "@id": `${SITE_URL}/#hospital`
     },
     "department": {
-      "@id": `${SITE_URL}/#physician`
+      "@id": `${SITE_URL}/appointments#physician`
     }
   };
 

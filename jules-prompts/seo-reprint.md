@@ -14,6 +14,5 @@ Analyze current blog posts and service pages. Identify content that is:
 <!-- Jules Automation -->
 <!-- Schedule: Daily 08:00 IST -->
 <!-- Managed by Jules -->
-<!-- v2.4 -->
 
-<!-- Verified by Jules 2026-02-15 -->
+<!-- Verified setup -->

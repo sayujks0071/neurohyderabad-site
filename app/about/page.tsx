@@ -15,8 +15,8 @@ import RemotionVideoEmbedWrapper from "../_components/RemotionVideoEmbedWrapper"
 export const revalidate = 3600; // Revalidate every hour
 
 export const metadata: Metadata = {
-  title: "Best Neurosurgeon Hyderabad | Dr. Sayuj Krishnan",
-  description: "Dr. Sayuj Krishnan is a German-trained Neurosurgeon in Hyderabad with 9+ Years of experience. Specialist in Endoscopic Spine & Brain Surgery. Read Profile.",
+  title: "Dr. Sayuj Krishnan | Best Neurosurgeon Hyderabad | 9+ Years Exp",
+  description: "German-trained Neurosurgeon in Hyderabad. 9+ Years experience in Endoscopic Spine & Brain Surgery. Read Dr. Sayuj's profile and patient reviews.",
   keywords: [
     "dr sayuj krishnan credentials",
     "neurosurgeon hyderabad experience",
@@ -223,7 +223,7 @@ export default function AboutPage() {
               <h3 className="text-xl font-semibold mb-4 text-blue-700">Specializations</h3>
               <ul className="text-gray-700 space-y-2">
                 <li><strong>Endoscopic Spine Surgery</strong></li>
-                <li><strong>Awake Brain Surgery</strong></li>
+                <li><Link href="/services/brain-tumor-surgery-hyderabad" className="hover:text-blue-600 hover:underline"><strong>Awake Brain Surgery</strong></Link></li>
                 <li><strong>ROSA DBS</strong> - Deep Brain Stimulation</li>
                 <li><strong>Minimally Invasive Techniques</strong></li>
               </ul>

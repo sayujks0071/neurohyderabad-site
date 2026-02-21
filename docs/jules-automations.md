@@ -48,6 +48,9 @@ To pause a specific automation:
 4. **Labeling:** It applies the label `jules`.
    - Jules (the agent) monitors issues with this label to pick up tasks.
 
-<!-- Documentation v2.4 - Verified setup -->
+## Verification
 
-<!-- Verified on Sun Feb 15 22:47:21 UTC 2026 -->
+To verify that the automations are set up correctly:
+1. Go to the **Actions** tab.
+2. Verify that the workflows listed above appear in the left sidebar.
+3. Check the workflow run history to ensure they are executing at the expected times.

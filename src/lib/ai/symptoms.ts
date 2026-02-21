@@ -1,13 +1,16 @@
-import { generateObject, jsonSchema } from 'ai';
+import { generateObject } from 'ai';
+import { z } from 'zod';
 import { getTextModel, hasAIConfig } from '@/src/lib/ai/gateway';
 
-export type SymptomAnalysis = {
-  urgency: 'emergency' | 'urgent' | 'routine';
-  recommendation: string;
-  possibleConditions: string[];
-  nextSteps: string[];
-  emergencyContact: string;
-};
+const SymptomAnalysisSchema = z.object({
+  urgency: z.enum(['emergency', 'urgent', 'routine']),
+  recommendation: z.string(),
+  possibleConditions: z.array(z.string()),
+  nextSteps: z.array(z.string()),
+  emergencyContact: z.string(),
+});
+
+export type SymptomAnalysis = z.infer<typeof SymptomAnalysisSchema>;
 
 export interface AnalyzeSymptomsResult {
   analysis: SymptomAnalysis;
@@ -39,18 +42,7 @@ export async function analyzeSymptoms(
   try {
     const { object } = await generateObject({
       model: getTextModel(),
-      schema: jsonSchema({
-        type: 'object',
-        properties: {
-          urgency: { type: 'string', enum: ['emergency', 'urgent', 'routine'] },
-          recommendation: { type: 'string' },
-          possibleConditions: { type: 'array', items: { type: 'string' } },
-          nextSteps: { type: 'array', items: { type: 'string' } },
-          emergencyContact: { type: 'string' },
-        },
-        required: ['urgency', 'recommendation', 'possibleConditions', 'nextSteps', 'emergencyContact'],
-        additionalProperties: false,
-      }),
+      schema: SymptomAnalysisSchema,
       prompt: `You are a medical assistant helping to triage symptoms for a neurosurgery practice. Analyze the following symptoms and provide guidance.
 
 Patient Information:
@@ -80,7 +72,7 @@ Response:`,
     });
 
     return {
-      analysis: object as SymptomAnalysis,
+      analysis: object,
       disclaimer
     };
 

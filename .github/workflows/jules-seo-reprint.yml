@@ -1,8 +1,7 @@
 name: Jules SEO Reprint
-# v2.4 - Managed by Jules
 on:
   schedule:
-    # 08:00 IST (India Standard Time) = 02:30 UTC
+    # 08:00 IST = 02:30 UTC
     - cron: "30 2 * * *"
   workflow_dispatch:
 
@@ -96,4 +95,4 @@ jobs:
 
             console.log(`Created issue: ${newIssue.html_url}`);
 
-# Verified by Jules 2026-02-15
+# Verified setup

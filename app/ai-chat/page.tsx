@@ -5,6 +5,7 @@ import OpenAIAgentsBooking from "../_components/OpenAIAgentsBooking";
 import AIStreamingChat from "../_components/AIStreamingChat";
 import AppointmentFormTracker from "../../src/components/AppointmentFormTracker";
 import PhoneClickTracker from "../../src/components/PhoneClickTracker";
+import { CANONICAL_TELEPHONE } from "@/src/data/locations";
 
 export const metadata: Metadata = {
   title: "AI Chat Assistant | Book Appointment with Dr Sayuj Krishnan",
@@ -91,10 +92,10 @@ export default function AIChatPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a 
-              href="tel:+919778280044"
+              href={`tel:${CANONICAL_TELEPHONE}`}
               className="bg-red-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-red-700 transition-colors"
             >
-              Emergency Hotline: +91-9778280044
+              Emergency Hotline: {CANONICAL_TELEPHONE}
             </a>
             <Link
               href="/emergency-rehabilitation"

@@ -99,7 +99,8 @@ export const SOCIAL_PROFILES = [
   "https://www.justdial.com/Hyderabad/Dr-Sayuj-Krishnan-Neurosurgeon-Yashoda-Hospital-Malakpet/040PXX40-XX40-210816155554-Q2H6_BZDET",
   "https://www.lybrate.com/hyderabad/doctor/dr-sayuj-krishnan-neurosurgeon",
   "https://www.clinicspots.com/doctor/dr-sayuj-krishnan",
-  "https://www.skedoc.com/hyderabad/doctor/dr-sayuj-krishnan-s-neuro-surgeon"
+  "https://www.skedoc.com/hyderabad/doctor/dr-sayuj-krishnan-s-neuro-surgeon",
+  "https://medigence.com/doctor/neurosurgeon/sayuj-krishnan-s"
 ];
 
 const DEFAULT_SERVICES = [
@@ -112,7 +113,7 @@ const DEFAULT_SERVICES = [
 const DEFAULT_CONDITIONS = [
   "sciatica-pain-treatment-hyderabad",
   "slip-disc-treatment-hyderabad",
-  "brain-tumor-surgery-hyderabad",
+  "brain-tumor-symptoms-hyderabad",
   "trigeminal-neuralgia-treatment-hyderabad"
 ];
 

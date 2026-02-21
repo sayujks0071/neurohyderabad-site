@@ -1,647 +1,4479 @@
 {
   "/": [
-    "MedicalWebPage",
-    "MedicalClinic",
-    "Physician",
-    "FAQPage"
-  ],
-  "/cookies": [],
-  "/research": [],
-  "/emergency-rehabilitation": [
-    "MedicalClinic"
-  ],
-  "/ai-chat": [],
-  "/drafts": [],
-  "/neurosurgeon-gachibowli": [
-    "MedicalClinic",
-    "Physician",
-    "BreadcrumbList"
-  ],
-  "/specializations": [],
-  "/terms": [],
-  "/privacy": [],
-  "/disease-guides": [],
-  "/disease-guides/degenerative-disc-disease": [
-    "MedicalWebPage",
-    "FAQPage",
-    "BreadcrumbList"
-  ],
-  "/brain-tumor-surgery": [],
-  "/neurosurgeon-hyderabad": [
-    "MedicalClinic",
-    "Physician",
-    "BreadcrumbList"
-  ],
-  "/force-cache-clear": [],
-  "/auth/callback": [],
-  "/neurosurgeon-secunderabad": [
-    "MedicalClinic",
-    "Physician",
-    "BreadcrumbList"
-  ],
-  "/knowledge-base": [],
-  "/stories/mvd-trigeminal-neuralgia-hyderabad": [
-    "Physician",
-    "FAQPage",
-    "BreadcrumbList"
-  ],
-  "/stories/endoscopic-discectomy-same-day-hyderabad": [
-    "Physician",
-    "FAQPage",
-    "BreadcrumbList"
-  ],
-  "/stories/endoscopic-ulbd-stenosis-hyderabad": [
-    "Physician",
-    "FAQPage",
-    "BreadcrumbList"
-  ],
-  "/spine-surgery": [
-    "MedicalWebPage"
-  ],
-  "/editorial-policy": [],
-  "/technology-innovation": [
-    "MedicalWebPage",
-    "FAQPage"
-  ],
-  "/media": [
-    "Article"
-  ],
-  "/neurosurgeon-malakpet": [
-    "MedicalClinic",
-    "Physician",
-    "BreadcrumbList"
-  ],
-  "/best-neurosurgeon-in-hyderabad": [
-    "FAQPage",
-    "BreadcrumbList"
-  ],
-  "/admin": [],
-  "/admin/login": [],
-  "/admin/appointments": [],
-  "/patient-stories": [],
-  "/content-integrity": [],
-  "/locations": [
-    "BreadcrumbList"
-  ],
-  "/locations/banjara-hills": [],
-  "/locations/lb-nagar": [
-    "MedicalClinic",
-    "Physician",
-    "BreadcrumbList"
-  ],
-  "/locations/neurosurgeon-manikonda": [
-    "MedicalClinic",
-    "Physician",
-    "BreadcrumbList"
-  ],
-  "/locations/neurosurgeon-near-jubilee-hills": [],
-  "/locations/neurosurgeon-uppal": [
-    "MedicalClinic",
-    "Physician",
-    "BreadcrumbList"
-  ],
-  "/locations/neurosurgeon-near-kondapur-faq": [
-    "FAQPage"
-  ],
-  "/locations/hitech-city": [],
-  "/locations/neurosurgeon-nizampet": [
-    "MedicalClinic",
-    "Physician",
-    "BreadcrumbList"
-  ],
-  "/locations/secunderabad": [],
-  "/locations/neurosurgeon-kothapet": [
-    "MedicalClinic",
-    "Physician",
-    "BreadcrumbList"
-  ],
-  "/locations/neurosurgeon-near-kachiguda-faq": [
-    "MedicalClinic",
-    "Physician",
-    "BreadcrumbList"
-  ],
-  "/locations/neurosurgeon-madhapur": [
-    "MedicalClinic",
-    "Physician",
-    "BreadcrumbList"
-  ],
-  "/locations/neurosurgeon-jubilee-hills": [],
-  "/locations/neurosurgeon-kondapur": [
-    "MedicalClinic",
-    "Physician",
-    "BreadcrumbList"
-  ],
-  "/locations/neurosurgeon-dilsukhnagar": [
-    "MedicalClinic",
-    "Physician",
-    "BreadcrumbList"
-  ],
-  "/locations/neurosurgeon-vanasthalipuram": [
-    "MedicalClinic",
-    "Physician",
-    "BreadcrumbList"
-  ],
-  "/locations/neurosurgeon-near-jubilee-hills-faq": [
-    "FAQPage"
-  ],
-  "/locations/neurosurgeon-miyapur": [
-    "MedicalClinic",
-    "Physician",
-    "BreadcrumbList"
-  ],
-  "/locations/malakpet": [],
-  "/locations/neurosurgeon-kukatpally": [
-    "MedicalClinic",
-    "Physician",
-    "BreadcrumbList"
-  ],
-  "/conditions": [],
-  "/conditions/spine-tumor-surgery-hyderabad": [
-    "MedicalClinic",
-    "Physician",
-    "FAQPage",
-    "BreadcrumbList"
-  ],
-  "/conditions/spinal-stenosis-treatment-hyderabad": [
-    "MedicalWebPage",
-    "FAQPage",
-    "BreadcrumbList"
-  ],
-  "/conditions/slip-disc-treatment-hyderabad": [
-    "MedicalWebPage",
-    "FAQPage"
-  ],
-  "/conditions/osteoporotic-spine-fracture-hyderabad": [
-    "FAQPage"
-  ],
-  "/conditions/brain-bleed-evacuation-hyderabad": [
-    "MedicalClinic",
-    "Physician",
-    "FAQPage",
-    "BreadcrumbList"
-  ],
-  "/conditions/trigeminal-neuralgia-treatment-hyderabad": [
-    "MedicalWebPage",
-    "FAQPage",
-    "BreadcrumbList"
-  ],
-  "/conditions/cervical-radiculopathy-treatment-hyderabad": [
-    "MedicalWebPage",
-    "FAQPage",
-    "BreadcrumbList"
-  ],
-  "/conditions/spondylolisthesis-treatment-hyderabad": [
-    "MedicalWebPage",
-    "FAQPage",
-    "BreadcrumbList"
-  ],
-  "/conditions/scoliosis-treatment-hyderabad": [
-    "FAQPage"
-  ],
-  "/conditions/degenerative-disc-disease-treatment-hyderabad": [
-    "MedicalWebPage",
-    "FAQPage"
-  ],
-  "/conditions/sciatica-pain-treatment-hyderabad": [
-    "MedicalWebPage",
-    "FAQPage",
-    "BreadcrumbList"
-  ],
-  "/conditions/cervical-myelopathy-decompression-hyderabad": [
-    "MedicalClinic",
-    "Physician",
-    "FAQPage",
-    "BreadcrumbList"
-  ],
-  "/conditions/brain-tumor-surgery-hyderabad": [
-    "FAQPage",
-    "BreadcrumbList"
-  ],
-  "/technology-facilities": [],
-  "/neurosurgeon-hitech-city": [
-    "MedicalClinic",
-    "Physician",
-    "BreadcrumbList"
-  ],
-  "/remotion-showcase": [],
-  "/about": [
-    "MedicalWebPage",
-    "Physician"
-  ],
-  "/blog": [],
-  "/blog/spine-health-maintenance-hyderabad": [],
-  "/blog/world-stroke-day-2025-hyderabad-stroke-code": [
-    "FAQPage",
-    "Article"
-  ],
-  "/blog/endoscopic-discectomy-cost-hyderabad": [
-    "FAQPage",
-    "BreadcrumbList"
-  ],
-  "/blog/return-to-work-after-endoscopic-discectomy-hyderabad": [
-    "FAQPage"
-  ],
-  "/blog/awake-craniotomy-guide": [],
-  "/blog/day-care-spine-surgery-insurance-hyderabad": [
-    "BreadcrumbList"
-  ],
-  "/blog/spinal-fusion-cost-hyderabad": [
-    "BreadcrumbList"
-  ],
-  "/blog/how-much-does-brain-surgery-cost-hyderabad": [
-    "FAQPage"
-  ],
-  "/blog/mvd-vs-radiosurgery-trigeminal-neuralgia": [],
-  "/blog/endoscopic-vs-microdiscectomy-hyderabad": [
-    "FAQPage"
-  ],
-  "/blog/when-to-worry-about-back-pain-neurosurgeon-hyderabad": [],
-  "/blog/disc-replacement-vs-fusion": [
-    "BreadcrumbList"
-  ],
-  "/blog/sciatica-pain-management-hyderabad": [
-    "Article"
-  ],
-  "/blog/endoscopic-spine-surgery-cost-hyderabad": [
-    "FAQPage"
-  ],
-  "/blog/brain-tumor-surgery-cost-hyderabad": [
-    "BreadcrumbList"
-  ],
-  "/blog/endoscopic-cervical-spine-surgery-hyderabad": [
-    "FAQPage"
-  ],
-  "/blog/spine-surgery-recovery-timeline-hyderabad": [],
-  "/blog/day-care-endoscopic-spine-surgery-eligibility": [],
-  "/pediatric-neurosurgery": [],
-  "/mri-analysis": [],
-  "/symptoms-checker": [],
-  "/neurosurgeon-jubilee-hills": [
-    "MedicalClinic",
-    "Physician",
-    "BreadcrumbList"
-  ],
-  "/near": [],
-  "/disclaimer": [],
-  "/symptoms/back-pain": [
-    "MedicalWebPage",
-    "FAQPage"
-  ],
-  "/symptoms/signs-of-brain-tumor": [
-    "MedicalWebPage",
-    "FAQPage",
-    "BreadcrumbList"
-  ],
-  "/symptoms/pain-on-top-of-head-causes": [
-    "MedicalClinic",
-    "Physician",
-    "FAQPage",
-    "BreadcrumbList"
-  ],
-  "/brain-surgery": [
-    "MedicalWebPage"
-  ],
-  "/neurosurgeon-banjara-hills": [
-    "MedicalClinic",
-    "Physician",
-    "BreadcrumbList"
-  ],
-  "/german-training": [],
-  "/medical-disclaimer": [],
-  "/appointments": [
-    "MedicalWebPage",
-    "MedicalClinic",
-    "Physician"
-  ],
-  "/appointments/thank-you": [],
-  "/utm-links": [],
-  "/contact": [
-    "MedicalWebPage",
-    "MedicalClinic"
-  ],
-  "/services": [
-    "MedicalWebPage"
-  ],
-  "/services/microdiscectomy-surgery-cost-hyderabad": [
-    "FAQPage"
-  ],
-  "/services/cervical-disc-replacement-hyderabad": [
-    "FAQPage"
-  ],
-  "/services/spine-surgery-cost-hyderabad": [
-    "FAQPage"
-  ],
-  "/services/spine-surgery-hyderabad": [
-    "MedicalWebPage"
-  ],
-  "/services/uniportal-endoscopic-spine-surgery-hyderabad": [
-    "FAQPage"
-  ],
-  "/services/kyphoplasty-vertebroplasty-hyderabad": [
-    "FAQPage"
-  ],
-  "/services/slip-disc-surgery-cost-hyderabad": [
-    "FAQPage"
-  ],
-  "/services/lumbar-laminectomy-surgery-hyderabad": [
-    "FAQPage"
-  ],
-  "/services/robotic-spine-surgery-hyderabad": [
-    "MedicalWebPage",
-    "FAQPage"
-  ],
-  "/services/peripheral-nerve-surgery-hyderabad": [
-    "MedicalWebPage",
-    "FAQPage",
-    "BreadcrumbList"
-  ],
-  "/services/endoscopic-discectomy-hyderabad": [
-    "MedicalWebPage",
-    "FAQPage"
-  ],
-  "/services/cooled-radiofrequency-ablation-hyderabad": [
-    "Physician",
-    "FAQPage"
-  ],
-  "/services/spinal-fusion-surgery-hyderabad": [
-    "MedicalWebPage",
-    "FAQPage"
-  ],
-  "/services/epilepsy-surgery-hyderabad": [
-    "MedicalWebPage",
-    "FAQPage",
-    "BreadcrumbList"
-  ],
-  "/services/minimally-invasive-spine-surgery": [
-    "MedicalWebPage",
-    "FAQPage",
-    "BreadcrumbList"
-  ],
-  "/services/kims-spine-surgery-second-opinion": [
-    "FAQPage",
-    "BreadcrumbList"
-  ],
-  "/services/dr-sayuj-vs-apollo-neuro-icu": [
-    "FAQPage",
-    "BreadcrumbList"
-  ],
-  "/services/compare-neurosurgeons-hyderabad": [
-    "FAQPage"
-  ],
-  "/services/awake-spine-surgery-hyderabad": [
-    "MedicalWebPage",
-    "FAQPage"
-  ],
-  "/services/cervical-endoscopic-spine-surgery-hyderabad": [
-    "FAQPage"
-  ],
-  "/services/spinal-decompression-surgery-hyderabad": [
-    "FAQPage"
-  ],
-  "/services/peripheral-nerve-surgery": [
-    "FAQPage"
-  ],
-  "/services/microdiscectomy-surgery-hyderabad": [
-    "MedicalWebPage",
-    "FAQPage"
-  ],
-  "/services/brain-tumor-surgery-hyderabad": [
-    "MedicalWebPage",
-    "FAQPage",
-    "BreadcrumbList"
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://www.drsayuj.info/#website",
+      "url": "https://www.drsayuj.info",
+      "name": "Dr Sayuj Krishnan - Neurosurgeon in Hyderabad",
+      "alternateName": [
+        "Dr. Sayuj Krishnan Neurosurgery",
+        "Sayuj Krishnan Spine Surgeon",
+        "drsayuj.info"
+      ],
+      "description": "Expert neurosurgeon in Hyderabad specializing in minimally invasive brain & spine surgery. German-trained with 1,000+ endoscopic procedures. Same-day discharge available at Yashoda Hospital, Malakpet.",
+      "inLanguage": "en-IN",
+      "publisher": {
+        "@type": "Physician",
+        "@id": "https://www.drsayuj.info/#physician",
+        "name": "Dr. Sayuj Krishnan S"
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          ".home-hero__title",
+          ".home-hero__subtitle",
+          ".home-hero__lead"
+        ]
+      },
+      "potentialAction": {
+        "@type": "ReadAction",
+        "target": [
+          "https://www.drsayuj.info/about",
+          "https://www.drsayuj.info/services",
+          "https://www.drsayuj.info/conditions"
+        ]
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Physician",
+          "@id": "https://www.drsayuj.info/#physician",
+          "name": "Dr. Sayuj Krishnan – Neurosurgeon",
+          "alternateName": [
+            "Dr Sayuj Krishnan",
+            "Dr Sayuj"
+          ],
+          "givenName": "Sayuj",
+          "familyName": "Krishnan",
+          "additionalName": "S",
+          "honorificPrefix": "Dr",
+          "description": "Premier neurosurgeon with over 9 years of experience specializing in minimally invasive brain & spine surgery, awake brain surgery, and robotic neurosurgery. Fellowship-trained with German training in endoscopic spine surgery. Performed 1,000+ endoscopic procedures with same-day discharge capability.",
+          "disambiguatingDescription": "Hyderabad (India)-based neurosurgeon and spine surgeon at Yashoda Hospital, Malakpet. Not associated with US-based internal medicine physician Dr. Sayuj Paudel.",
+          "url": "https://www.drsayuj.info",
+          "image": "https://www.drsayuj.info/images/dr-sayuj-krishnan-portrait-optimized.jpg",
+          "telephone": "+919778280044",
+          "priceRange": "₹₹",
+          "email": "hellodr@drsayuj.info",
+          "identifier": [
+            {
+              "@type": "PropertyValue",
+              "propertyID": "TCMC Registration",
+              "value": "47973"
+            }
+          ],
+          "medicalLicense": "TCMC Registration 47973 (Travancore-Cochin Medical Council)",
+          "additionalProperty": [
+            {
+              "@type": "PropertyValue",
+              "name": "Years of Experience",
+              "value": "9+"
+            },
+            {
+              "@type": "PropertyValue",
+              "name": "Fellowship Training",
+              "value": "Minimally Invasive & Complex Spine Surgery"
+            },
+            {
+              "@type": "PropertyValue",
+              "name": "International Training",
+              "value": "German Observership in Full Endoscopic Spine Surgery (2024)"
+            },
+            {
+              "@type": "PropertyValue",
+              "name": "Specialization",
+              "value": "Minimally Invasive Spine Surgery, Awake Brain Surgery, ROSA DBS, Endoscopic Spine Surgery"
+            }
+          ],
+          "medicalSpecialty": [
+            "Neurosurgery",
+            "Spine Surgery",
+            "Brain Surgery",
+            "Pediatric Neurosurgery"
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Room No 317, OPD Block, Yashoda Hospital, Nalgonda X Roads, Malakpet",
+            "addressLocality": "Hyderabad",
+            "addressRegion": "Telangana",
+            "postalCode": "500036",
+            "addressCountry": "IN"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 17.375,
+            "longitude": 78.5147
+          },
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday"
+              ],
+              "opens": "09:00",
+              "closes": "17:00"
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Saturday"
+              ],
+              "opens": "09:00",
+              "closes": "13:00"
+            }
+          ],
+          "hasCredential": [
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "degree",
+              "educationalLevel": "MBBS",
+              "recognizedBy": {
+                "@type": "Organization",
+                "name": "Medical Council of India"
+              }
+            },
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "degree",
+              "educationalLevel": "DNB Neurosurgery",
+              "recognizedBy": {
+                "@type": "Organization",
+                "name": "National Board of Examinations"
+              }
+            },
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "certification",
+              "educationalLevel": "Fellowship in Minimally Invasive & Complex Spine Surgery",
+              "recognizedBy": {
+                "@type": "Organization",
+                "name": "Yashoda Hospital, Malakpet"
+              }
+            },
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "certification",
+              "educationalLevel": "Fellowship in Minimally Invasive Spine Surgery"
+            },
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "certification",
+              "educationalLevel": "Advanced Endoscopic Spine Surgery Training"
+            },
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "certification",
+              "educationalLevel": "Observership in Full Endoscopic Spine Surgery (Germany, 2024)",
+              "recognizedBy": {
+                "@type": "Organization",
+                "name": "RIWOspine Academy"
+              }
+            }
+          ],
+          "alumniOf": [
+            {
+              "@type": "CollegeOrUniversity",
+              "name": "Kerala University of Health Sciences",
+              "sameAs": "https://www.kuhs.ac.in"
+            },
+            {
+              "@type": "CollegeOrUniversity",
+              "name": "Amrita Institute of Medical Sciences",
+              "sameAs": "https://www.amrita.edu/school/medicine"
+            }
+          ],
+          "memberOf": [
+            {
+              "@type": "Organization",
+              "name": "Neurological Society of India",
+              "sameAs": "https://www.neurosocietyindia.org"
+            },
+            {
+              "@type": "Organization",
+              "name": "Association of Spine Surgeons of India",
+              "sameAs": "https://www.assi.in"
+            },
+            {
+              "@type": "Organization",
+              "name": "Neuro Spinal Surgeons Association of India (NSSA)",
+              "sameAs": "https://www.nssa.org.in"
+            }
+          ],
+          "hospitalAffiliation": {
+            "@type": "Hospital",
+            "@id": "https://www.drsayuj.info/#hospital",
+            "name": "Yashoda Hospital, Malakpet",
+            "url": "https://www.yashodahospitals.com/malakpet/",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Nalgonda X Roads, Malakpet",
+              "addressLocality": "Hyderabad",
+              "addressRegion": "Telangana",
+              "postalCode": "500036",
+              "addressCountry": "IN"
+            }
+          },
+          "knowsAbout": [
+            "Full Endoscopic Spine Surgery",
+            "Minimally Invasive Spine Surgery (MISS)",
+            "Endoscopic Discectomy",
+            "Endoscopic Foraminotomy",
+            "Endoscopic ULBD (Unilateral Laminotomy Bilateral Decompression)",
+            "Awake Brain Surgery with Intraoperative Mapping",
+            "Brain Tumor Surgery with Neuronavigation",
+            "Epilepsy Surgery",
+            "ROSA Robotic Deep Brain Stimulation (DBS)",
+            "Spinal Fusion Surgery",
+            "Peripheral Nerve Surgery",
+            "Microvascular Decompression (MVD) for Trigeminal Neuralgia",
+            "Gamma Knife Radiosurgery",
+            "Pediatric Neurosurgery",
+            "Emergency Neurotrauma Care"
+          ],
+          "areaServed": [
+            {
+              "@type": "City",
+              "name": "Hyderabad",
+              "containedInPlace": {
+                "@type": "State",
+                "name": "Telangana",
+                "containedInPlace": {
+                  "@type": "Country",
+                  "name": "India"
+                }
+              }
+            },
+            {
+              "@type": "Place",
+              "name": "Malakpet, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Dilsukhnagar, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "LB Nagar, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Kothapet, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Jubilee Hills, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Banjara Hills, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Hitech City, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Gachibowli, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Kondapur, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Madhapur, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Secunderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Kukatpally, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Miyapur, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Uppal, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Manikonda, Hyderabad"
+            }
+          ],
+          "availableService": [
+            {
+              "@type": "MedicalService",
+              "name": "Spine Surgery",
+              "description": "Comprehensive spine care with minimally invasive, endoscopic, and fusion techniques tailored to each patient.",
+              "url": "https://www.drsayuj.info/spine-surgery"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Brain Surgery",
+              "description": "Advanced brain tumor, epilepsy, and functional neurosurgery with awake protocols and neuronavigation.",
+              "url": "https://www.drsayuj.info/brain-surgery"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Pediatric Neurosurgery",
+              "description": "Specialised neurosurgical care for children with brain and spine conditions delivered in a family-centred setting.",
+              "url": "https://www.drsayuj.info/pediatric-neurosurgery"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Minimally Invasive Spine Surgery",
+              "description": "Advanced endoscopic and keyhole spine procedures that reduce pain, blood loss, and hospital stay.",
+              "url": "https://www.drsayuj.info/services/minimally-invasive-spine-surgery"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Endoscopic Discectomy",
+              "description": "Targeted removal of herniated disc material through a 7 mm working channel for rapid recovery.",
+              "url": "https://www.drsayuj.info/services/endoscopic-discectomy-hyderabad"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Brain Tumor Surgery",
+              "description": "Microsurgical and endoscopic tumor removal using neuronavigation and intraoperative monitoring.",
+              "url": "https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Epilepsy Surgery",
+              "description": "Comprehensive evaluation and surgical treatment pathways for drug-resistant epilepsy.",
+              "url": "https://www.drsayuj.info/services/epilepsy-surgery-hyderabad"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Spinal Fusion Surgery",
+              "description": "Stabilisation procedures for instability and spondylolisthesis with minimally invasive techniques.",
+              "url": "https://www.drsayuj.info/services/spinal-fusion-surgery-hyderabad"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Peripheral Nerve Surgery",
+              "description": "Microsurgical decompression and repair for peripheral nerve entrapments and injuries.",
+              "url": "https://www.drsayuj.info/services/peripheral-nerve-surgery-hyderabad"
+            }
+          ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Neurosurgery & Spine Services",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Spine Surgery",
+                  "description": "Comprehensive spine care with minimally invasive, endoscopic, and fusion techniques tailored to each patient.",
+                  "url": "https://www.drsayuj.info/spine-surgery"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Brain Surgery",
+                  "description": "Advanced brain tumor, epilepsy, and functional neurosurgery with awake protocols and neuronavigation.",
+                  "url": "https://www.drsayuj.info/brain-surgery"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Pediatric Neurosurgery",
+                  "description": "Specialised neurosurgical care for children with brain and spine conditions delivered in a family-centred setting.",
+                  "url": "https://www.drsayuj.info/pediatric-neurosurgery"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Minimally Invasive Spine Surgery",
+                  "description": "Advanced endoscopic and keyhole spine procedures that reduce pain, blood loss, and hospital stay.",
+                  "url": "https://www.drsayuj.info/services/minimally-invasive-spine-surgery"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Endoscopic Discectomy",
+                  "description": "Targeted removal of herniated disc material through a 7 mm working channel for rapid recovery.",
+                  "url": "https://www.drsayuj.info/services/endoscopic-discectomy-hyderabad"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Brain Tumor Surgery",
+                  "description": "Microsurgical and endoscopic tumor removal using neuronavigation and intraoperative monitoring.",
+                  "url": "https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Epilepsy Surgery",
+                  "description": "Comprehensive evaluation and surgical treatment pathways for drug-resistant epilepsy.",
+                  "url": "https://www.drsayuj.info/services/epilepsy-surgery-hyderabad"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Spinal Fusion Surgery",
+                  "description": "Stabilisation procedures for instability and spondylolisthesis with minimally invasive techniques.",
+                  "url": "https://www.drsayuj.info/services/spinal-fusion-surgery-hyderabad"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Peripheral Nerve Surgery",
+                  "description": "Microsurgical decompression and repair for peripheral nerve entrapments and injuries.",
+                  "url": "https://www.drsayuj.info/services/peripheral-nerve-surgery-hyderabad"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              }
+            ]
+          },
+          "potentialAction": {
+            "@type": "ReserveAction",
+            "name": "Book Appointment",
+            "target": "https://www.drsayuj.info/appointments"
+          },
+          "worksFor": {
+            "@id": "https://www.drsayuj.info/#hospital"
+          },
+          "knowsLanguage": [
+            "English",
+            "Hindi",
+            "Telugu",
+            "Malayalam",
+            "Tamil"
+          ],
+          "sameAs": [
+            "https://www.facebook.com/drsayujneurohyd",
+            "https://www.instagram.com/drsayujneurohyd",
+            "https://in.linkedin.com/in/drsayujkrishnan",
+            "https://www.youtube.com/@drsayujneurohyd",
+            "https://twitter.com/drsayuj",
+            "https://www.google.com/maps?cid=14503792272825406246",
+            "https://www.yashodahospitals.com/doctors/dr-sayuj-krishnan/",
+            "https://www.yashodahospitals.com/doctor/malakpet/neuro-surgery/dr-sayuj-krishnan-s/",
+            "https://www.google.com/search?q=Dr+Sayuj+Krishnan+Neurosurgeon+Hyderabad",
+            "https://www.practo.com/hyderabad/doctor/dr-sayuj-krishnan-neurosurgeon",
+            "https://www.justdial.com/Hyderabad/Dr-Sayuj-Krishnan-Neurosurgeon-Yashoda-Hospital-Malakpet/040PXX40-XX40-210816155554-Q2H6_BZDET",
+            "https://www.lybrate.com/hyderabad/doctor/dr-sayuj-krishnan-neurosurgeon",
+            "https://www.clinicspots.com/doctor/dr-sayuj-krishnan",
+            "https://www.skedoc.com/hyderabad/doctor/dr-sayuj-krishnan-s-neuro-surgeon",
+            "https://medigence.com/doctor/neurosurgeon/sayuj-krishnan-s"
+          ],
+          "hasMap": "https://www.google.com/maps/place/Dr+Sayuj+Krishnan",
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "150",
+            "bestRating": "5",
+            "worstRating": "1"
+          }
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Hospital",
+      "@id": "https://www.drsayuj.info/#hospital",
+      "name": "Yashoda Hospital, Malakpet",
+      "url": "https://www.yashodahospitals.com/malakpet/",
+      "telephone": "+91-40-6769 9999",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Nalgonda X Roads",
+        "addressLocality": "Hyderabad",
+        "addressRegion": "Telangana",
+        "postalCode": "500036",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 17.375,
+        "longitude": 78.5147
+      },
+      "medicalSpecialty": [
+        "Neurosurgery",
+        "Spine Surgery",
+        "Brain Surgery",
+        "Endoscopic Surgery",
+        "Minimally Invasive Surgery",
+        "Epilepsy Surgery",
+        "Peripheral Nerve Surgery"
+      ],
+      "department": {
+        "@type": "MedicalSpecialty",
+        "name": "Department of Neurosurgery",
+        "availableService": [
+          {
+            "@type": "MedicalService",
+            "name": "Endoscopic Spine Surgery",
+            "description": "Minimally invasive spine surgery using endoscopic techniques"
+          },
+          {
+            "@type": "MedicalService",
+            "name": "Brain Tumor Surgery",
+            "description": "Advanced brain tumor surgery with neuronavigation"
+          },
+          {
+            "@type": "MedicalService",
+            "name": "Epilepsy Surgery",
+            "description": "Surgical treatment for drug-resistant epilepsy"
+          },
+          {
+            "@type": "MedicalService",
+            "name": "Trigeminal Neuralgia Treatment",
+            "description": "Microvascular decompression and radiosurgery"
+          }
+        ]
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Neurosurgery Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalService",
+              "name": "Endoscopic Discectomy",
+              "description": "Minimally invasive disc surgery"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalService",
+              "name": "Spinal Fusion Surgery",
+              "description": "Advanced spinal fusion techniques"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://www.drsayuj.info/#faq",
+      "url": "https://www.drsayuj.info/",
+      "inLanguage": "en-IN",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "@id": "https://www.drsayuj.info/#faq-1",
+          "name": "How do I know if I'm a candidate for endoscopic spine surgery?",
+          "position": 1,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Candidates usually have leg-dominant pain from a herniated disc or lumbar stenosis that has not responded to six weeks of supervised physiotherapy and medication.\nDuring consultation we review MRI scans, complete a focused neurological exam, and discuss work or sport demands before confirming the suitability of an endoscopic approach.",
+            "dateCreated": "2026-02-21"
+          }
+        },
+        {
+          "@type": "Question",
+          "@id": "https://www.drsayuj.info/#faq-2",
+          "name": "What recovery milestones should I expect after minimally invasive surgery?",
+          "position": 2,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Day 0: walk within three hours with physiotherapy support. Week 2: return to desk work once wound inspection is clear.\nWe schedule tele-follow ups at 48 hours, seven days, and 30 days, and the eight-week recovery roadmap below outlines each phase in detail.",
+            "dateCreated": "2026-02-21"
+          }
+        },
+        {
+          "@type": "Question",
+          "@id": "https://www.drsayuj.info/#faq-3",
+          "name": "How much does minimally invasive spine surgery cost with insurance?",
+          "position": 3,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Endoscopic discectomy packages typically range from INR 95,000 to 1,35,000 for self-pay patients including surgeon fees, OT charges, implants, and follow-up visits.\nCashless insurance approvals reduce out-of-pocket expense by roughly 12–18% once pre-authorisation is cleared. Contact us for a personalized quote based on your specific procedure and insurance coverage.",
+            "dateCreated": "2026-02-21"
+          }
+        },
+        {
+          "@type": "Question",
+          "@id": "https://www.drsayuj.info/#faq-4",
+          "name": "What documents do you provide for insurance or corporate approvals?",
+          "position": 4,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our coordination team issues a detailed medical estimate, necessity letter, implant invoice, and operative summary aligned to TPA requirements.\nCorporate employees also receive stamped medical leave summaries and fit-to-work certificates tailored to HR policies.",
+            "dateCreated": "2026-02-21"
+          }
+        },
+        {
+          "@type": "Question",
+          "@id": "https://www.drsayuj.info/#faq-5",
+          "name": "Do you offer teleconsultations for patients outside Hyderabad?",
+          "position": 5,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We provide secure video consultations for second opinions and post-operative reviews—share MRI scans via our encrypted portal or WhatsApp before the call.\nInternational patients receive assistance with itinerary planning, visa documentation, and extended follow-up scheduling.",
+            "dateCreated": "2026-02-21"
+          }
+        },
+        {
+          "@type": "Question",
+          "@id": "https://www.drsayuj.info/#faq-6",
+          "name": "When can I travel or return to the gym after surgery?",
+          "position": 6,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Short domestic travel is generally safe after 7–10 days once pain is controlled and the wound has healed.\nGym and strength training resume after week six with progressive loading, while high-impact sports restart after clearance during the week-eight review.",
+            "dateCreated": "2026-02-21"
+          }
+        },
+        {
+          "@type": "Question",
+          "@id": "https://www.drsayuj.info/#faq-7",
+          "name": "How do you manage pain after endoscopic procedures?",
+          "position": 7,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We combine regional anaesthesia, targeted oral medication, and physiotherapy-led movement drills to keep discomfort below three on ten.\nPatients receive breathing routines, cold-therapy guidance, and mindfulness resources with a 24/7 helpline for escalations.",
+            "dateCreated": "2026-02-21"
+          }
+        },
+        {
+          "@type": "Question",
+          "@id": "https://www.drsayuj.info/#faq-8",
+          "name": "Can I get a second opinion using my existing MRI scans?",
+          "position": 8,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Absolutely. Upload your DICOM files to our portal or bring the CD to clinic—we review images during consult and explain every treatment path in plain language.\nYou leave with a written care summary covering conservative care, surgical options, and red-flag symptoms that require urgent attention.",
+            "dateCreated": "2026-02-21"
+          }
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "MedicalWebPage",
+      "@id": "https://www.drsayuj.info/#webpage",
+      "url": "https://www.drsayuj.info/",
+      "name": "Best Neurosurgeon in Hyderabad | Spine & Brain Specialist",
+      "description": "Top-rated neurosurgeon in Hyderabad (Yashoda Hospital). Expert in endoscopic spine surgery, brain tumors & sciatica. Book appointment now.",
+      "inLanguage": "en-IN",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://www.drsayuj.info/#website",
+        "name": "Dr. Sayuj Krishnan - Neurosurgeon in Hyderabad",
+        "url": "https://www.drsayuj.info"
+      },
+      "about": {
+        "@type": "Physician",
+        "@id": "https://www.drsayuj.info/#physician",
+        "name": "Dr. Sayuj Krishnan – Neurosurgeon"
+      },
+      "reviewedBy": {
+        "@type": "Physician",
+        "@id": "https://www.drsayuj.info/#physician",
+        "name": "Dr. Sayuj Krishnan – Neurosurgeon",
+        "hasCredential": {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "degree",
+          "name": "DNB Neurosurgery"
+        }
+      },
+      "lastReviewed": "2026-02-21",
+      "datePublished": "2024-01-01",
+      "dateModified": "2026-02-21",
+      "creativeWorkStatus": "Published",
+      "medicalAudience": {
+        "@type": "MedicalAudience",
+        "audienceType": "Patient"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Dr. Sayuj Krishnan – Neurosurgeon",
+        "jobTitle": "Neurosurgeon",
+        "hasCredential": {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "degree",
+          "name": "DNB Neurosurgery"
+        },
+        "worksFor": {
+          "@type": "Hospital",
+          "@id": "https://www.drsayuj.info/#hospital",
+          "name": "Yashoda Hospital, Malakpet",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Hyderabad",
+            "addressRegion": "Telangana",
+            "addressCountry": "IN"
+          }
+        }
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Dr. Sayuj Krishnan – Neurosurgeon",
+        "url": "https://www.drsayuj.info"
+      },
+      "specialty": [
+        {
+          "@type": "MedicalSpecialty",
+          "name": "Neurosurgery"
+        },
+        {
+          "@type": "MedicalSpecialty",
+          "name": "Spine Surgery"
+        },
+        {
+          "@type": "MedicalSpecialty",
+          "name": "Endoscopic Surgery"
+        }
+      ],
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "Patients seeking neurosurgical care in Hyderabad"
+      },
+      "mainEntity": {
+        "@type": "MedicalService",
+        "name": "Neurosurgery Services",
+        "description": "Top-rated neurosurgeon in Hyderabad (Yashoda Hospital). Expert in endoscopic spine surgery, brain tumors & sciatica. Book appointment now.",
+        "provider": {
+          "@type": "Physician",
+          "@id": "https://www.drsayuj.info/#physician",
+          "name": "Dr. Sayuj Krishnan – Neurosurgeon"
+        },
+        "availableAtOrFrom": {
+          "@type": "Hospital",
+          "@id": "https://www.drsayuj.info/#hospital",
+          "name": "Yashoda Hospital, Malakpet"
+        },
+        "areaServed": {
+          "@type": "City",
+          "name": "Hyderabad",
+          "containedInPlace": {
+            "@type": "State",
+            "name": "Telangana"
+          }
+        }
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.drsayuj.info/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.drsayuj.info/"
+        }
+      ]
+    }
   ],
   "/services/endoscopic-spine-surgery-hyderabad": [
-    "FAQPage"
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://www.drsayuj.info/#website",
+      "url": "https://www.drsayuj.info",
+      "name": "Dr Sayuj Krishnan - Neurosurgeon in Hyderabad",
+      "alternateName": [
+        "Dr. Sayuj Krishnan Neurosurgery",
+        "Sayuj Krishnan Spine Surgeon",
+        "drsayuj.info"
+      ],
+      "description": "Expert neurosurgeon in Hyderabad specializing in minimally invasive brain & spine surgery. German-trained with 1,000+ endoscopic procedures. Same-day discharge available at Yashoda Hospital, Malakpet.",
+      "inLanguage": "en-IN",
+      "publisher": {
+        "@type": "Physician",
+        "@id": "https://www.drsayuj.info/#physician",
+        "name": "Dr. Sayuj Krishnan S"
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          ".home-hero__title",
+          ".home-hero__subtitle",
+          ".home-hero__lead"
+        ]
+      },
+      "potentialAction": {
+        "@type": "ReadAction",
+        "target": [
+          "https://www.drsayuj.info/about",
+          "https://www.drsayuj.info/services",
+          "https://www.drsayuj.info/conditions"
+        ]
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Physician",
+          "@id": "https://www.drsayuj.info/#physician",
+          "name": "Dr. Sayuj Krishnan – Neurosurgeon",
+          "alternateName": [
+            "Dr Sayuj Krishnan",
+            "Dr Sayuj"
+          ],
+          "givenName": "Sayuj",
+          "familyName": "Krishnan",
+          "additionalName": "S",
+          "honorificPrefix": "Dr",
+          "description": "Premier neurosurgeon with over 9 years of experience specializing in minimally invasive brain & spine surgery, awake brain surgery, and robotic neurosurgery. Fellowship-trained with German training in endoscopic spine surgery. Performed 1,000+ endoscopic procedures with same-day discharge capability.",
+          "disambiguatingDescription": "Hyderabad (India)-based neurosurgeon and spine surgeon at Yashoda Hospital, Malakpet. Not associated with US-based internal medicine physician Dr. Sayuj Paudel.",
+          "url": "https://www.drsayuj.info",
+          "image": "https://www.drsayuj.info/images/dr-sayuj-krishnan-portrait-optimized.jpg",
+          "telephone": "+919778280044",
+          "priceRange": "₹₹",
+          "email": "hellodr@drsayuj.info",
+          "identifier": [
+            {
+              "@type": "PropertyValue",
+              "propertyID": "TCMC Registration",
+              "value": "47973"
+            }
+          ],
+          "medicalLicense": "TCMC Registration 47973 (Travancore-Cochin Medical Council)",
+          "additionalProperty": [
+            {
+              "@type": "PropertyValue",
+              "name": "Years of Experience",
+              "value": "9+"
+            },
+            {
+              "@type": "PropertyValue",
+              "name": "Fellowship Training",
+              "value": "Minimally Invasive & Complex Spine Surgery"
+            },
+            {
+              "@type": "PropertyValue",
+              "name": "International Training",
+              "value": "German Observership in Full Endoscopic Spine Surgery (2024)"
+            },
+            {
+              "@type": "PropertyValue",
+              "name": "Specialization",
+              "value": "Minimally Invasive Spine Surgery, Awake Brain Surgery, ROSA DBS, Endoscopic Spine Surgery"
+            }
+          ],
+          "medicalSpecialty": [
+            "Neurosurgery",
+            "Spine Surgery",
+            "Brain Surgery",
+            "Pediatric Neurosurgery"
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Room No 317, OPD Block, Yashoda Hospital, Nalgonda X Roads, Malakpet",
+            "addressLocality": "Hyderabad",
+            "addressRegion": "Telangana",
+            "postalCode": "500036",
+            "addressCountry": "IN"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 17.375,
+            "longitude": 78.5147
+          },
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday"
+              ],
+              "opens": "09:00",
+              "closes": "17:00"
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Saturday"
+              ],
+              "opens": "09:00",
+              "closes": "13:00"
+            }
+          ],
+          "hasCredential": [
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "degree",
+              "educationalLevel": "MBBS",
+              "recognizedBy": {
+                "@type": "Organization",
+                "name": "Medical Council of India"
+              }
+            },
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "degree",
+              "educationalLevel": "DNB Neurosurgery",
+              "recognizedBy": {
+                "@type": "Organization",
+                "name": "National Board of Examinations"
+              }
+            },
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "certification",
+              "educationalLevel": "Fellowship in Minimally Invasive & Complex Spine Surgery",
+              "recognizedBy": {
+                "@type": "Organization",
+                "name": "Yashoda Hospital, Malakpet"
+              }
+            },
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "certification",
+              "educationalLevel": "Fellowship in Minimally Invasive Spine Surgery"
+            },
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "certification",
+              "educationalLevel": "Advanced Endoscopic Spine Surgery Training"
+            },
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "certification",
+              "educationalLevel": "Observership in Full Endoscopic Spine Surgery (Germany, 2024)",
+              "recognizedBy": {
+                "@type": "Organization",
+                "name": "RIWOspine Academy"
+              }
+            }
+          ],
+          "alumniOf": [
+            {
+              "@type": "CollegeOrUniversity",
+              "name": "Kerala University of Health Sciences",
+              "sameAs": "https://www.kuhs.ac.in"
+            },
+            {
+              "@type": "CollegeOrUniversity",
+              "name": "Amrita Institute of Medical Sciences",
+              "sameAs": "https://www.amrita.edu/school/medicine"
+            }
+          ],
+          "memberOf": [
+            {
+              "@type": "Organization",
+              "name": "Neurological Society of India",
+              "sameAs": "https://www.neurosocietyindia.org"
+            },
+            {
+              "@type": "Organization",
+              "name": "Association of Spine Surgeons of India",
+              "sameAs": "https://www.assi.in"
+            },
+            {
+              "@type": "Organization",
+              "name": "Neuro Spinal Surgeons Association of India (NSSA)",
+              "sameAs": "https://www.nssa.org.in"
+            }
+          ],
+          "hospitalAffiliation": {
+            "@type": "Hospital",
+            "@id": "https://www.drsayuj.info/#hospital",
+            "name": "Yashoda Hospital, Malakpet",
+            "url": "https://www.yashodahospitals.com/malakpet/",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Nalgonda X Roads, Malakpet",
+              "addressLocality": "Hyderabad",
+              "addressRegion": "Telangana",
+              "postalCode": "500036",
+              "addressCountry": "IN"
+            }
+          },
+          "knowsAbout": [
+            "Full Endoscopic Spine Surgery",
+            "Minimally Invasive Spine Surgery (MISS)",
+            "Endoscopic Discectomy",
+            "Endoscopic Foraminotomy",
+            "Endoscopic ULBD (Unilateral Laminotomy Bilateral Decompression)",
+            "Awake Brain Surgery with Intraoperative Mapping",
+            "Brain Tumor Surgery with Neuronavigation",
+            "Epilepsy Surgery",
+            "ROSA Robotic Deep Brain Stimulation (DBS)",
+            "Spinal Fusion Surgery",
+            "Peripheral Nerve Surgery",
+            "Microvascular Decompression (MVD) for Trigeminal Neuralgia",
+            "Gamma Knife Radiosurgery",
+            "Pediatric Neurosurgery",
+            "Emergency Neurotrauma Care"
+          ],
+          "areaServed": [
+            {
+              "@type": "City",
+              "name": "Hyderabad",
+              "containedInPlace": {
+                "@type": "State",
+                "name": "Telangana",
+                "containedInPlace": {
+                  "@type": "Country",
+                  "name": "India"
+                }
+              }
+            },
+            {
+              "@type": "Place",
+              "name": "Malakpet, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Dilsukhnagar, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "LB Nagar, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Kothapet, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Jubilee Hills, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Banjara Hills, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Hitech City, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Gachibowli, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Kondapur, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Madhapur, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Secunderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Kukatpally, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Miyapur, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Uppal, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Manikonda, Hyderabad"
+            }
+          ],
+          "availableService": [
+            {
+              "@type": "MedicalService",
+              "name": "Spine Surgery",
+              "description": "Comprehensive spine care with minimally invasive, endoscopic, and fusion techniques tailored to each patient.",
+              "url": "https://www.drsayuj.info/spine-surgery"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Brain Surgery",
+              "description": "Advanced brain tumor, epilepsy, and functional neurosurgery with awake protocols and neuronavigation.",
+              "url": "https://www.drsayuj.info/brain-surgery"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Pediatric Neurosurgery",
+              "description": "Specialised neurosurgical care for children with brain and spine conditions delivered in a family-centred setting.",
+              "url": "https://www.drsayuj.info/pediatric-neurosurgery"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Minimally Invasive Spine Surgery",
+              "description": "Advanced endoscopic and keyhole spine procedures that reduce pain, blood loss, and hospital stay.",
+              "url": "https://www.drsayuj.info/services/minimally-invasive-spine-surgery"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Endoscopic Discectomy",
+              "description": "Targeted removal of herniated disc material through a 7 mm working channel for rapid recovery.",
+              "url": "https://www.drsayuj.info/services/endoscopic-discectomy-hyderabad"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Brain Tumor Surgery",
+              "description": "Microsurgical and endoscopic tumor removal using neuronavigation and intraoperative monitoring.",
+              "url": "https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Epilepsy Surgery",
+              "description": "Comprehensive evaluation and surgical treatment pathways for drug-resistant epilepsy.",
+              "url": "https://www.drsayuj.info/services/epilepsy-surgery-hyderabad"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Spinal Fusion Surgery",
+              "description": "Stabilisation procedures for instability and spondylolisthesis with minimally invasive techniques.",
+              "url": "https://www.drsayuj.info/services/spinal-fusion-surgery-hyderabad"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Peripheral Nerve Surgery",
+              "description": "Microsurgical decompression and repair for peripheral nerve entrapments and injuries.",
+              "url": "https://www.drsayuj.info/services/peripheral-nerve-surgery-hyderabad"
+            }
+          ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Neurosurgery & Spine Services",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Spine Surgery",
+                  "description": "Comprehensive spine care with minimally invasive, endoscopic, and fusion techniques tailored to each patient.",
+                  "url": "https://www.drsayuj.info/spine-surgery"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Brain Surgery",
+                  "description": "Advanced brain tumor, epilepsy, and functional neurosurgery with awake protocols and neuronavigation.",
+                  "url": "https://www.drsayuj.info/brain-surgery"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Pediatric Neurosurgery",
+                  "description": "Specialised neurosurgical care for children with brain and spine conditions delivered in a family-centred setting.",
+                  "url": "https://www.drsayuj.info/pediatric-neurosurgery"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Minimally Invasive Spine Surgery",
+                  "description": "Advanced endoscopic and keyhole spine procedures that reduce pain, blood loss, and hospital stay.",
+                  "url": "https://www.drsayuj.info/services/minimally-invasive-spine-surgery"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Endoscopic Discectomy",
+                  "description": "Targeted removal of herniated disc material through a 7 mm working channel for rapid recovery.",
+                  "url": "https://www.drsayuj.info/services/endoscopic-discectomy-hyderabad"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Brain Tumor Surgery",
+                  "description": "Microsurgical and endoscopic tumor removal using neuronavigation and intraoperative monitoring.",
+                  "url": "https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Epilepsy Surgery",
+                  "description": "Comprehensive evaluation and surgical treatment pathways for drug-resistant epilepsy.",
+                  "url": "https://www.drsayuj.info/services/epilepsy-surgery-hyderabad"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Spinal Fusion Surgery",
+                  "description": "Stabilisation procedures for instability and spondylolisthesis with minimally invasive techniques.",
+                  "url": "https://www.drsayuj.info/services/spinal-fusion-surgery-hyderabad"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Peripheral Nerve Surgery",
+                  "description": "Microsurgical decompression and repair for peripheral nerve entrapments and injuries.",
+                  "url": "https://www.drsayuj.info/services/peripheral-nerve-surgery-hyderabad"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              }
+            ]
+          },
+          "potentialAction": {
+            "@type": "ReserveAction",
+            "name": "Book Appointment",
+            "target": "https://www.drsayuj.info/appointments"
+          },
+          "worksFor": {
+            "@id": "https://www.drsayuj.info/#hospital"
+          },
+          "knowsLanguage": [
+            "English",
+            "Hindi",
+            "Telugu",
+            "Malayalam",
+            "Tamil"
+          ],
+          "sameAs": [
+            "https://www.facebook.com/drsayujneurohyd",
+            "https://www.instagram.com/drsayujneurohyd",
+            "https://in.linkedin.com/in/drsayujkrishnan",
+            "https://www.youtube.com/@drsayujneurohyd",
+            "https://twitter.com/drsayuj",
+            "https://www.google.com/maps?cid=14503792272825406246",
+            "https://www.yashodahospitals.com/doctors/dr-sayuj-krishnan/",
+            "https://www.yashodahospitals.com/doctor/malakpet/neuro-surgery/dr-sayuj-krishnan-s/",
+            "https://www.google.com/search?q=Dr+Sayuj+Krishnan+Neurosurgeon+Hyderabad",
+            "https://www.practo.com/hyderabad/doctor/dr-sayuj-krishnan-neurosurgeon",
+            "https://www.justdial.com/Hyderabad/Dr-Sayuj-Krishnan-Neurosurgeon-Yashoda-Hospital-Malakpet/040PXX40-XX40-210816155554-Q2H6_BZDET",
+            "https://www.lybrate.com/hyderabad/doctor/dr-sayuj-krishnan-neurosurgeon",
+            "https://www.clinicspots.com/doctor/dr-sayuj-krishnan",
+            "https://www.skedoc.com/hyderabad/doctor/dr-sayuj-krishnan-s-neuro-surgeon",
+            "https://medigence.com/doctor/neurosurgeon/sayuj-krishnan-s"
+          ],
+          "hasMap": "https://www.google.com/maps/place/Dr+Sayuj+Krishnan",
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "150",
+            "bestRating": "5",
+            "worstRating": "1"
+          }
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Hospital",
+      "@id": "https://www.drsayuj.info/#hospital",
+      "name": "Yashoda Hospital, Malakpet",
+      "url": "https://www.yashodahospitals.com/malakpet/",
+      "telephone": "+91-40-6769 9999",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Nalgonda X Roads",
+        "addressLocality": "Hyderabad",
+        "addressRegion": "Telangana",
+        "postalCode": "500036",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 17.375,
+        "longitude": 78.5147
+      },
+      "medicalSpecialty": [
+        "Neurosurgery",
+        "Spine Surgery",
+        "Brain Surgery",
+        "Endoscopic Surgery",
+        "Minimally Invasive Surgery",
+        "Epilepsy Surgery",
+        "Peripheral Nerve Surgery"
+      ],
+      "department": {
+        "@type": "MedicalSpecialty",
+        "name": "Department of Neurosurgery",
+        "availableService": [
+          {
+            "@type": "MedicalService",
+            "name": "Endoscopic Spine Surgery",
+            "description": "Minimally invasive spine surgery using endoscopic techniques"
+          },
+          {
+            "@type": "MedicalService",
+            "name": "Brain Tumor Surgery",
+            "description": "Advanced brain tumor surgery with neuronavigation"
+          },
+          {
+            "@type": "MedicalService",
+            "name": "Epilepsy Surgery",
+            "description": "Surgical treatment for drug-resistant epilepsy"
+          },
+          {
+            "@type": "MedicalService",
+            "name": "Trigeminal Neuralgia Treatment",
+            "description": "Microvascular decompression and radiosurgery"
+          }
+        ]
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Neurosurgery Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalService",
+              "name": "Endoscopic Discectomy",
+              "description": "Minimally invasive disc surgery"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalService",
+              "name": "Spinal Fusion Surgery",
+              "description": "Advanced spinal fusion techniques"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://www.drsayuj.info"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Services",
+              "item": "https://www.drsayuj.info/services/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Full Endoscopic Spine Surgery in Hyderabad",
+              "item": "https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad"
+            }
+          ]
+        },
+        {
+          "@type": "MedicalService",
+          "@id": "https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad#service",
+          "name": "Full Endoscopic Spine Surgery in Hyderabad",
+          "description": "Ultra-minimally invasive endoscopic spine surgery program at Yashoda Hospital Malakpet delivering keyhole decompression with day-care discharge.",
+          "serviceType": "Full Endoscopic Spine Surgery in Hyderabad",
+          "url": "https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad",
+          "provider": {
+            "@id": "https://www.drsayuj.info/#physician",
+            "@type": "Physician",
+            "name": "Dr. Sayuj Krishnan – Neurosurgeon"
+          },
+          "areaServed": [
+            {
+              "@type": "AdministrativeArea",
+              "name": "Hyderabad"
+            },
+            {
+              "@type": "AdministrativeArea",
+              "name": "Telangana"
+            }
+          ],
+          "availableAtOrFrom": {
+            "@type": "MedicalClinic",
+            "@id": "https://www.drsayuj.info//neurosurgeon-malakpet#clinic",
+            "name": "Dr Sayuj Krishnan - Neurosurgeon in Malakpet",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Room No 317, OPD Block, Yashoda Hospital, Nalgonda X Roads, Malakpet",
+              "addressLocality": "Hyderabad",
+              "addressRegion": "Telangana",
+              "postalCode": "500036",
+              "addressCountry": "IN"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 17.375,
+              "longitude": 78.5147
+            },
+            "telephone": "+919778280044",
+            "url": "https://www.drsayuj.info",
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday"
+                ],
+                "opens": "09:00",
+                "closes": "17:00"
+              },
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Saturday"
+                ],
+                "opens": "09:00",
+                "closes": "13:00"
+              }
+            ]
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "127"
+          }
+        },
+        {
+          "@type": "MedicalProcedure",
+          "@id": "https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad#procedure",
+          "name": "Full Endoscopic Spine Surgery in Hyderabad",
+          "description": "Ultra-minimally invasive endoscopic spine surgery program at Yashoda Hospital Malakpet delivering keyhole decompression with day-care discharge.",
+          "url": "https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad",
+          "procedureType": "Minimally Invasive Surgical Procedure",
+          "provider": {
+            "@id": "https://www.drsayuj.info/#physician",
+            "@type": "Physician",
+            "name": "Dr. Sayuj Krishnan – Neurosurgeon"
+          },
+          "areaServed": [
+            {
+              "@type": "AdministrativeArea",
+              "name": "Hyderabad"
+            },
+            {
+              "@type": "AdministrativeArea",
+              "name": "Telangana"
+            }
+          ],
+          "availableAtOrFrom": {
+            "@id": "https://www.drsayuj.info//neurosurgeon-malakpet#clinic",
+            "@type": "MedicalClinic",
+            "name": "Dr Sayuj Krishnan - Neurosurgeon in Malakpet"
+          },
+          "bodyLocation": "Spine",
+          "timeRequired": "PT1H",
+          "howPerformed": "Endoscopic keyhole technique through 7mm incision",
+          "status": "http://schema.org/ActiveActionStatus"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad#faq",
+      "url": "https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad",
+      "inLanguage": "en-IN",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "@id": "https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad#faq-1",
+          "name": "How is this different from other minimally invasive spine surgeries?",
+          "position": 1,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Endoscopic surgery uses a high-definition camera through a “keyhole” incision that is typically less than 1 cm. This approach preserves muscle, reduces postoperative pain, and speeds recovery compared to tubular or open techniques.",
+            "dateCreated": "2026-02-21"
+          }
+        },
+        {
+          "@type": "Question",
+          "@id": "https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad#faq-2",
+          "name": "What should I expect on the day of endoscopic spine surgery?",
+          "position": 2,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most cases are day-care procedures. You arrive for pre-op checks, undergo the keyhole surgery, and begin walking within hours. Discharge is usually the same evening or next morning with a written recovery plan.",
+            "dateCreated": "2026-02-21"
+          }
+        },
+        {
+          "@type": "Question",
+          "@id": "https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad#faq-3",
+          "name": "How does the Day Care Spine Surgery program work?",
+          "position": 3,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our Day Care protocol is designed for rapid recovery. You are admitted in the morning, undergo the 45-minute keyhole procedure under local or spinal anesthesia, and begin walking within 3 hours. Once you are comfortable and mobile, you are discharged the same evening to sleep in your own bed.",
+            "dateCreated": "2026-02-21"
+          }
+        },
+        {
+          "@type": "Question",
+          "@id": "https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad#faq-4",
+          "name": "Why is Endoscopic Surgery safer than Open Surgery?",
+          "position": 4,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Endoscopic surgery eliminates the need to cut or detach back muscles, which is the main cause of post-surgical pain and infection in open surgery. By using a 7mm camera, we visualize the nerve with 4K clarity while leaving the structural stability of the spine completely untouched.",
+            "dateCreated": "2026-02-21"
+          }
+        },
+        {
+          "@type": "Question",
+          "@id": "https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad#faq-5",
+          "name": "Is Yashoda Hospital, Malakpet easy to reach for day-care surgery?",
+          "position": 5,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The hospital is centrally located in Malakpet, making it convenient for patients travelling from Dilsukhnagar, LB Nagar, Charminar, Koti, and other parts of Hyderabad. Parking and attendant lounges are available on-site.",
+            "dateCreated": "2026-02-21"
+          }
+        },
+        {
+          "@type": "Question",
+          "@id": "https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad#faq-6",
+          "name": "Why choose Dr. Sayuj for this “keyhole” procedure?",
+          "position": 6,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Endoscopic spine surgery is a specialised skill. Dr. Sayuj has focused training in full endoscopic techniques and performs them regularly at Yashoda Hospital, ensuring precision, safety, and consistent patient outcomes.",
+            "dateCreated": "2026-02-21"
+          }
+        },
+        {
+          "@type": "Question",
+          "@id": "https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad#faq-7",
+          "name": "Is endoscopic spine surgery the same as laser spine surgery?",
+          "position": 7,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Laser surgery often refers to limited surface ablation. Endoscopic surgery is a comprehensive structural correction (removing bone spurs or disc fragments) under high-definition visualization, offering far superior long-term results than laser alone.",
+            "dateCreated": "2026-02-21"
+          }
+        },
+        {
+          "@type": "Question",
+          "@id": "https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad#faq-8",
+          "name": "How does endoscopic spine surgery recovery compare to microscopic surgery?",
+          "position": 8,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Endoscopic surgery typically offers a faster recovery. Since it uses a smaller incision (8mm vs 2-3cm) and avoids cutting muscle, most patients walk within 3 hours and return to work in 3-5 days, compared to 2-3 weeks for microscopic surgery.",
+            "dateCreated": "2026-02-21"
+          }
+        },
+        {
+          "@type": "Question",
+          "@id": "https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad#faq-9",
+          "name": "Is Laser Spine Surgery better than Endoscopic Spine Surgery?",
+          "position": 9,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not necessarily. \"Laser spine surgery\" is often a marketing term for limited thermal ablation. Endoscopic spine surgery is a comprehensive structural solution that physically removes bone spurs or disc fragments under high-definition vision, offering more durable relief for complex conditions.",
+            "dateCreated": "2026-02-21"
+          }
+        },
+        {
+          "@type": "Question",
+          "@id": "https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad#faq-10",
+          "name": "What neighbourhoods does Yashoda Malakpet serve?",
+          "position": 10,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We serve patients from Dilsukhnagar, LB Nagar, Jubilee Hills, Hitech City, Secunderabad, and surrounding areas. Our location is easily accessible with a typical travel time of 30-45 minutes from most parts of Hyderabad.",
+            "dateCreated": "2026-02-21"
+          }
+        },
+        {
+          "@type": "Question",
+          "@id": "https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad#faq-11",
+          "name": "Can I book a same-day consultation online?",
+          "position": 11,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, we offer same-day consultations for urgent cases. We also provide video consultations for outstation patients before they travel to Hyderabad.",
+            "dateCreated": "2026-02-21"
+          }
+        },
+        {
+          "@type": "Question",
+          "@id": "https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad#faq-12",
+          "name": "Is endoscopic spine surgery covered by insurance in Hyderabad?",
+          "position": 12,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, it is covered by most major insurance policies. We offer cashless facilities via TPAs. Pre-authorization typically takes 5-7 days, so we recommend planning ahead.",
+            "dateCreated": "2026-02-21"
+          }
+        },
+        {
+          "@type": "Question",
+          "@id": "https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad#faq-13",
+          "name": "How does Dr Sayuj's approach differ from other Hyderabad neurosurgeons?",
+          "position": 13,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Dr. Sayuj is one of the few neurosurgeons with a dedicated fellowship in full endoscopic spine surgery (Germany). He has performed over 1,000 pure endoscopic cases with a 90% same-day discharge rate, focusing on preservation of natural anatomy.",
+            "dateCreated": "2026-02-21"
+          }
+        },
+        {
+          "@type": "Question",
+          "@id": "https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad#faq-14",
+          "name": "Should I get a second opinion?",
+          "position": 14,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Absolutely. We encourage second opinions, especially for spine surgery. In fact, 40% of our patients arrive with an existing MRI and surgical recommendation. We will provide an honest assessment of whether keyhole surgery is suitable for you.",
+            "dateCreated": "2026-02-21"
+          }
+        },
+        {
+          "@type": "Question",
+          "@id": "https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad#faq-15",
+          "name": "When can Hyderabad office workers return to work?",
+          "position": 15,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most patients with desk jobs can return to work from home by day 3-5 and to the office by week 3-4. Full activity is typically resumed by week 8.",
+            "dateCreated": "2026-02-21"
+          }
+        },
+        {
+          "@type": "Question",
+          "@id": "https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad#faq-16",
+          "name": "Do you handle revision cases from previous failed surgery?",
+          "position": 16,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Endoscopic revision surgery is particularly effective because it avoids cutting through old scar tissue, reducing the risk of complications and improving outcomes for failed back surgery syndrome.",
+            "dateCreated": "2026-02-21"
+          }
+        },
+        {
+          "@type": "Question",
+          "@id": "https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad#faq-17",
+          "name": "Are there age limits for endoscopic spine surgery?",
+          "position": 17,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We treat patients from 18 to 85+ years old. For elderly patients or those with cardiac risks, we offer an awake spine surgery option under local anesthesia, avoiding the risks of general anesthesia.",
+            "dateCreated": "2026-02-21"
+          }
+        }
+      ]
+    }
   ],
-  "/services/spinal-fusion": [],
-  "/blog/meningioma-brain-tumor-treatment-hyderabad": [
-    "Article",
-    "BreadcrumbList"
+  "/conditions/sciatica-pain-treatment-hyderabad": [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://www.drsayuj.info/#website",
+      "url": "https://www.drsayuj.info",
+      "name": "Dr Sayuj Krishnan - Neurosurgeon in Hyderabad",
+      "alternateName": [
+        "Dr. Sayuj Krishnan Neurosurgery",
+        "Sayuj Krishnan Spine Surgeon",
+        "drsayuj.info"
+      ],
+      "description": "Expert neurosurgeon in Hyderabad specializing in minimally invasive brain & spine surgery. German-trained with 1,000+ endoscopic procedures. Same-day discharge available at Yashoda Hospital, Malakpet.",
+      "inLanguage": "en-IN",
+      "publisher": {
+        "@type": "Physician",
+        "@id": "https://www.drsayuj.info/#physician",
+        "name": "Dr. Sayuj Krishnan S"
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          ".home-hero__title",
+          ".home-hero__subtitle",
+          ".home-hero__lead"
+        ]
+      },
+      "potentialAction": {
+        "@type": "ReadAction",
+        "target": [
+          "https://www.drsayuj.info/about",
+          "https://www.drsayuj.info/services",
+          "https://www.drsayuj.info/conditions"
+        ]
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Physician",
+          "@id": "https://www.drsayuj.info/#physician",
+          "name": "Dr. Sayuj Krishnan – Neurosurgeon",
+          "alternateName": [
+            "Dr Sayuj Krishnan",
+            "Dr Sayuj"
+          ],
+          "givenName": "Sayuj",
+          "familyName": "Krishnan",
+          "additionalName": "S",
+          "honorificPrefix": "Dr",
+          "description": "Premier neurosurgeon with over 9 years of experience specializing in minimally invasive brain & spine surgery, awake brain surgery, and robotic neurosurgery. Fellowship-trained with German training in endoscopic spine surgery. Performed 1,000+ endoscopic procedures with same-day discharge capability.",
+          "disambiguatingDescription": "Hyderabad (India)-based neurosurgeon and spine surgeon at Yashoda Hospital, Malakpet. Not associated with US-based internal medicine physician Dr. Sayuj Paudel.",
+          "url": "https://www.drsayuj.info",
+          "image": "https://www.drsayuj.info/images/dr-sayuj-krishnan-portrait-optimized.jpg",
+          "telephone": "+919778280044",
+          "priceRange": "₹₹",
+          "email": "hellodr@drsayuj.info",
+          "identifier": [
+            {
+              "@type": "PropertyValue",
+              "propertyID": "TCMC Registration",
+              "value": "47973"
+            }
+          ],
+          "medicalLicense": "TCMC Registration 47973 (Travancore-Cochin Medical Council)",
+          "additionalProperty": [
+            {
+              "@type": "PropertyValue",
+              "name": "Years of Experience",
+              "value": "9+"
+            },
+            {
+              "@type": "PropertyValue",
+              "name": "Fellowship Training",
+              "value": "Minimally Invasive & Complex Spine Surgery"
+            },
+            {
+              "@type": "PropertyValue",
+              "name": "International Training",
+              "value": "German Observership in Full Endoscopic Spine Surgery (2024)"
+            },
+            {
+              "@type": "PropertyValue",
+              "name": "Specialization",
+              "value": "Minimally Invasive Spine Surgery, Awake Brain Surgery, ROSA DBS, Endoscopic Spine Surgery"
+            }
+          ],
+          "medicalSpecialty": [
+            "Neurosurgery",
+            "Spine Surgery",
+            "Brain Surgery",
+            "Pediatric Neurosurgery"
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Room No 317, OPD Block, Yashoda Hospital, Nalgonda X Roads, Malakpet",
+            "addressLocality": "Hyderabad",
+            "addressRegion": "Telangana",
+            "postalCode": "500036",
+            "addressCountry": "IN"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 17.375,
+            "longitude": 78.5147
+          },
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday"
+              ],
+              "opens": "09:00",
+              "closes": "17:00"
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Saturday"
+              ],
+              "opens": "09:00",
+              "closes": "13:00"
+            }
+          ],
+          "hasCredential": [
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "degree",
+              "educationalLevel": "MBBS",
+              "recognizedBy": {
+                "@type": "Organization",
+                "name": "Medical Council of India"
+              }
+            },
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "degree",
+              "educationalLevel": "DNB Neurosurgery",
+              "recognizedBy": {
+                "@type": "Organization",
+                "name": "National Board of Examinations"
+              }
+            },
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "certification",
+              "educationalLevel": "Fellowship in Minimally Invasive & Complex Spine Surgery",
+              "recognizedBy": {
+                "@type": "Organization",
+                "name": "Yashoda Hospital, Malakpet"
+              }
+            },
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "certification",
+              "educationalLevel": "Fellowship in Minimally Invasive Spine Surgery"
+            },
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "certification",
+              "educationalLevel": "Advanced Endoscopic Spine Surgery Training"
+            },
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "certification",
+              "educationalLevel": "Observership in Full Endoscopic Spine Surgery (Germany, 2024)",
+              "recognizedBy": {
+                "@type": "Organization",
+                "name": "RIWOspine Academy"
+              }
+            }
+          ],
+          "alumniOf": [
+            {
+              "@type": "CollegeOrUniversity",
+              "name": "Kerala University of Health Sciences",
+              "sameAs": "https://www.kuhs.ac.in"
+            },
+            {
+              "@type": "CollegeOrUniversity",
+              "name": "Amrita Institute of Medical Sciences",
+              "sameAs": "https://www.amrita.edu/school/medicine"
+            }
+          ],
+          "memberOf": [
+            {
+              "@type": "Organization",
+              "name": "Neurological Society of India",
+              "sameAs": "https://www.neurosocietyindia.org"
+            },
+            {
+              "@type": "Organization",
+              "name": "Association of Spine Surgeons of India",
+              "sameAs": "https://www.assi.in"
+            },
+            {
+              "@type": "Organization",
+              "name": "Neuro Spinal Surgeons Association of India (NSSA)",
+              "sameAs": "https://www.nssa.org.in"
+            }
+          ],
+          "hospitalAffiliation": {
+            "@type": "Hospital",
+            "@id": "https://www.drsayuj.info/#hospital",
+            "name": "Yashoda Hospital, Malakpet",
+            "url": "https://www.yashodahospitals.com/malakpet/",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Nalgonda X Roads, Malakpet",
+              "addressLocality": "Hyderabad",
+              "addressRegion": "Telangana",
+              "postalCode": "500036",
+              "addressCountry": "IN"
+            }
+          },
+          "knowsAbout": [
+            "Full Endoscopic Spine Surgery",
+            "Minimally Invasive Spine Surgery (MISS)",
+            "Endoscopic Discectomy",
+            "Endoscopic Foraminotomy",
+            "Endoscopic ULBD (Unilateral Laminotomy Bilateral Decompression)",
+            "Awake Brain Surgery with Intraoperative Mapping",
+            "Brain Tumor Surgery with Neuronavigation",
+            "Epilepsy Surgery",
+            "ROSA Robotic Deep Brain Stimulation (DBS)",
+            "Spinal Fusion Surgery",
+            "Peripheral Nerve Surgery",
+            "Microvascular Decompression (MVD) for Trigeminal Neuralgia",
+            "Gamma Knife Radiosurgery",
+            "Pediatric Neurosurgery",
+            "Emergency Neurotrauma Care"
+          ],
+          "areaServed": [
+            {
+              "@type": "City",
+              "name": "Hyderabad",
+              "containedInPlace": {
+                "@type": "State",
+                "name": "Telangana",
+                "containedInPlace": {
+                  "@type": "Country",
+                  "name": "India"
+                }
+              }
+            },
+            {
+              "@type": "Place",
+              "name": "Malakpet, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Dilsukhnagar, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "LB Nagar, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Kothapet, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Jubilee Hills, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Banjara Hills, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Hitech City, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Gachibowli, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Kondapur, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Madhapur, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Secunderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Kukatpally, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Miyapur, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Uppal, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Manikonda, Hyderabad"
+            }
+          ],
+          "availableService": [
+            {
+              "@type": "MedicalService",
+              "name": "Spine Surgery",
+              "description": "Comprehensive spine care with minimally invasive, endoscopic, and fusion techniques tailored to each patient.",
+              "url": "https://www.drsayuj.info/spine-surgery"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Brain Surgery",
+              "description": "Advanced brain tumor, epilepsy, and functional neurosurgery with awake protocols and neuronavigation.",
+              "url": "https://www.drsayuj.info/brain-surgery"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Pediatric Neurosurgery",
+              "description": "Specialised neurosurgical care for children with brain and spine conditions delivered in a family-centred setting.",
+              "url": "https://www.drsayuj.info/pediatric-neurosurgery"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Minimally Invasive Spine Surgery",
+              "description": "Advanced endoscopic and keyhole spine procedures that reduce pain, blood loss, and hospital stay.",
+              "url": "https://www.drsayuj.info/services/minimally-invasive-spine-surgery"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Endoscopic Discectomy",
+              "description": "Targeted removal of herniated disc material through a 7 mm working channel for rapid recovery.",
+              "url": "https://www.drsayuj.info/services/endoscopic-discectomy-hyderabad"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Brain Tumor Surgery",
+              "description": "Microsurgical and endoscopic tumor removal using neuronavigation and intraoperative monitoring.",
+              "url": "https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Epilepsy Surgery",
+              "description": "Comprehensive evaluation and surgical treatment pathways for drug-resistant epilepsy.",
+              "url": "https://www.drsayuj.info/services/epilepsy-surgery-hyderabad"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Spinal Fusion Surgery",
+              "description": "Stabilisation procedures for instability and spondylolisthesis with minimally invasive techniques.",
+              "url": "https://www.drsayuj.info/services/spinal-fusion-surgery-hyderabad"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Peripheral Nerve Surgery",
+              "description": "Microsurgical decompression and repair for peripheral nerve entrapments and injuries.",
+              "url": "https://www.drsayuj.info/services/peripheral-nerve-surgery-hyderabad"
+            }
+          ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Neurosurgery & Spine Services",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Spine Surgery",
+                  "description": "Comprehensive spine care with minimally invasive, endoscopic, and fusion techniques tailored to each patient.",
+                  "url": "https://www.drsayuj.info/spine-surgery"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Brain Surgery",
+                  "description": "Advanced brain tumor, epilepsy, and functional neurosurgery with awake protocols and neuronavigation.",
+                  "url": "https://www.drsayuj.info/brain-surgery"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Pediatric Neurosurgery",
+                  "description": "Specialised neurosurgical care for children with brain and spine conditions delivered in a family-centred setting.",
+                  "url": "https://www.drsayuj.info/pediatric-neurosurgery"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Minimally Invasive Spine Surgery",
+                  "description": "Advanced endoscopic and keyhole spine procedures that reduce pain, blood loss, and hospital stay.",
+                  "url": "https://www.drsayuj.info/services/minimally-invasive-spine-surgery"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Endoscopic Discectomy",
+                  "description": "Targeted removal of herniated disc material through a 7 mm working channel for rapid recovery.",
+                  "url": "https://www.drsayuj.info/services/endoscopic-discectomy-hyderabad"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Brain Tumor Surgery",
+                  "description": "Microsurgical and endoscopic tumor removal using neuronavigation and intraoperative monitoring.",
+                  "url": "https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Epilepsy Surgery",
+                  "description": "Comprehensive evaluation and surgical treatment pathways for drug-resistant epilepsy.",
+                  "url": "https://www.drsayuj.info/services/epilepsy-surgery-hyderabad"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Spinal Fusion Surgery",
+                  "description": "Stabilisation procedures for instability and spondylolisthesis with minimally invasive techniques.",
+                  "url": "https://www.drsayuj.info/services/spinal-fusion-surgery-hyderabad"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Peripheral Nerve Surgery",
+                  "description": "Microsurgical decompression and repair for peripheral nerve entrapments and injuries.",
+                  "url": "https://www.drsayuj.info/services/peripheral-nerve-surgery-hyderabad"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              }
+            ]
+          },
+          "potentialAction": {
+            "@type": "ReserveAction",
+            "name": "Book Appointment",
+            "target": "https://www.drsayuj.info/appointments"
+          },
+          "worksFor": {
+            "@id": "https://www.drsayuj.info/#hospital"
+          },
+          "knowsLanguage": [
+            "English",
+            "Hindi",
+            "Telugu",
+            "Malayalam",
+            "Tamil"
+          ],
+          "sameAs": [
+            "https://www.facebook.com/drsayujneurohyd",
+            "https://www.instagram.com/drsayujneurohyd",
+            "https://in.linkedin.com/in/drsayujkrishnan",
+            "https://www.youtube.com/@drsayujneurohyd",
+            "https://twitter.com/drsayuj",
+            "https://www.google.com/maps?cid=14503792272825406246",
+            "https://www.yashodahospitals.com/doctors/dr-sayuj-krishnan/",
+            "https://www.yashodahospitals.com/doctor/malakpet/neuro-surgery/dr-sayuj-krishnan-s/",
+            "https://www.google.com/search?q=Dr+Sayuj+Krishnan+Neurosurgeon+Hyderabad",
+            "https://www.practo.com/hyderabad/doctor/dr-sayuj-krishnan-neurosurgeon",
+            "https://www.justdial.com/Hyderabad/Dr-Sayuj-Krishnan-Neurosurgeon-Yashoda-Hospital-Malakpet/040PXX40-XX40-210816155554-Q2H6_BZDET",
+            "https://www.lybrate.com/hyderabad/doctor/dr-sayuj-krishnan-neurosurgeon",
+            "https://www.clinicspots.com/doctor/dr-sayuj-krishnan",
+            "https://www.skedoc.com/hyderabad/doctor/dr-sayuj-krishnan-s-neuro-surgeon",
+            "https://medigence.com/doctor/neurosurgeon/sayuj-krishnan-s"
+          ],
+          "hasMap": "https://www.google.com/maps/place/Dr+Sayuj+Krishnan",
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "150",
+            "bestRating": "5",
+            "worstRating": "1"
+          }
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Hospital",
+      "@id": "https://www.drsayuj.info/#hospital",
+      "name": "Yashoda Hospital, Malakpet",
+      "url": "https://www.yashodahospitals.com/malakpet/",
+      "telephone": "+91-40-6769 9999",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Nalgonda X Roads",
+        "addressLocality": "Hyderabad",
+        "addressRegion": "Telangana",
+        "postalCode": "500036",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 17.375,
+        "longitude": 78.5147
+      },
+      "medicalSpecialty": [
+        "Neurosurgery",
+        "Spine Surgery",
+        "Brain Surgery",
+        "Endoscopic Surgery",
+        "Minimally Invasive Surgery",
+        "Epilepsy Surgery",
+        "Peripheral Nerve Surgery"
+      ],
+      "department": {
+        "@type": "MedicalSpecialty",
+        "name": "Department of Neurosurgery",
+        "availableService": [
+          {
+            "@type": "MedicalService",
+            "name": "Endoscopic Spine Surgery",
+            "description": "Minimally invasive spine surgery using endoscopic techniques"
+          },
+          {
+            "@type": "MedicalService",
+            "name": "Brain Tumor Surgery",
+            "description": "Advanced brain tumor surgery with neuronavigation"
+          },
+          {
+            "@type": "MedicalService",
+            "name": "Epilepsy Surgery",
+            "description": "Surgical treatment for drug-resistant epilepsy"
+          },
+          {
+            "@type": "MedicalService",
+            "name": "Trigeminal Neuralgia Treatment",
+            "description": "Microvascular decompression and radiosurgery"
+          }
+        ]
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Neurosurgery Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalService",
+              "name": "Endoscopic Discectomy",
+              "description": "Minimally invasive disc surgery"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalService",
+              "name": "Spinal Fusion Surgery",
+              "description": "Advanced spinal fusion techniques"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "MedicalWebPage",
+      "@id": "https://www.drsayuj.info/conditions/sciatica-pain-treatment-hyderabad/#webpage",
+      "url": "https://www.drsayuj.info/conditions/sciatica-pain-treatment-hyderabad/",
+      "name": "Sciatica Treatment Hyderabad | 90% Non-Surgical | Dr Sayuj",
+      "description": "Best Sciatica treatment in Hyderabad. 90% patients recover without surgery using nerve blocks & meds. Endoscopic solution available. Book Dr Sayuj.",
+      "inLanguage": "en-IN",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://www.drsayuj.info/#website",
+        "name": "Dr. Sayuj Krishnan - Neurosurgeon in Hyderabad",
+        "url": "https://www.drsayuj.info"
+      },
+      "about": {
+        "@type": "Physician",
+        "@id": "https://www.drsayuj.info/#physician",
+        "name": "Dr. Sayuj Krishnan – Neurosurgeon"
+      },
+      "reviewedBy": {
+        "@type": "Physician",
+        "@id": "https://www.drsayuj.info/#physician",
+        "name": "Dr. Sayuj Krishnan – Neurosurgeon",
+        "hasCredential": {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "degree",
+          "name": "DNB Neurosurgery"
+        }
+      },
+      "lastReviewed": "2026-02-21",
+      "datePublished": "2024-01-01",
+      "dateModified": "2026-02-21",
+      "creativeWorkStatus": "Published",
+      "medicalAudience": {
+        "@type": "MedicalAudience",
+        "audienceType": "Patient"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Dr. Sayuj Krishnan – Neurosurgeon",
+        "jobTitle": "Neurosurgeon",
+        "hasCredential": {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "degree",
+          "name": "DNB Neurosurgery"
+        },
+        "worksFor": {
+          "@type": "Hospital",
+          "@id": "https://www.drsayuj.info/#hospital",
+          "name": "Yashoda Hospital, Malakpet",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Hyderabad",
+            "addressRegion": "Telangana",
+            "addressCountry": "IN"
+          }
+        }
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Dr. Sayuj Krishnan – Neurosurgeon",
+        "url": "https://www.drsayuj.info"
+      },
+      "mainEntity": {
+        "@type": "MedicalCondition",
+        "name": "Sciatica",
+        "description": "Best Sciatica treatment in Hyderabad. 90% patients recover without surgery using nerve blocks & meds. Endoscopic solution available. Book Dr Sayuj.",
+        "possibleTreatment": [
+          {
+            "@type": "MedicalTherapy",
+            "name": "Conservative Management (Medication, Rest)",
+            "provider": {
+              "@type": "Physician",
+              "@id": "https://www.drsayuj.info/#physician",
+              "name": "Dr. Sayuj Krishnan – Neurosurgeon"
+            }
+          },
+          {
+            "@type": "MedicalTherapy",
+            "name": "Specialized Physiotherapy",
+            "provider": {
+              "@type": "Physician",
+              "@id": "https://www.drsayuj.info/#physician",
+              "name": "Dr. Sayuj Krishnan – Neurosurgeon"
+            }
+          },
+          {
+            "@type": "MedicalTherapy",
+            "name": "Transforaminal Nerve Root Block (Injection)",
+            "provider": {
+              "@type": "Physician",
+              "@id": "https://www.drsayuj.info/#physician",
+              "name": "Dr. Sayuj Krishnan – Neurosurgeon"
+            }
+          },
+          {
+            "@type": "MedicalTherapy",
+            "name": "Endoscopic Discectomy (Minimally Invasive Surgery)",
+            "provider": {
+              "@type": "Physician",
+              "@id": "https://www.drsayuj.info/#physician",
+              "name": "Dr. Sayuj Krishnan – Neurosurgeon"
+            }
+          }
+        ],
+        "signOrSymptom": [
+          {
+            "@type": "MedicalSymptom",
+            "name": "Radiating leg pain"
+          },
+          {
+            "@type": "MedicalSymptom",
+            "name": "Numbness in leg or foot"
+          },
+          {
+            "@type": "MedicalSymptom",
+            "name": "Weakness in leg"
+          },
+          {
+            "@type": "MedicalSymptom",
+            "name": "Foot drop (difficulty lifting foot)"
+          },
+          {
+            "@type": "MedicalSymptom",
+            "name": "Burning sensation down the leg"
+          },
+          {
+            "@type": "MedicalSymptom",
+            "name": "Pain worsening with coughing or sitting"
+          }
+        ],
+        "riskFactor": [
+          {
+            "@type": "MedicalRiskFactor",
+            "name": "Prolonged sitting"
+          },
+          {
+            "@type": "MedicalRiskFactor",
+            "name": "Herniated disc (Slip Disc)"
+          },
+          {
+            "@type": "MedicalRiskFactor",
+            "name": "Spinal stenosis"
+          },
+          {
+            "@type": "MedicalRiskFactor",
+            "name": "Obesity"
+          },
+          {
+            "@type": "MedicalRiskFactor",
+            "name": "Heavy lifting"
+          }
+        ]
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.drsayuj.info/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Conditions",
+          "item": "https://www.drsayuj.info/conditions/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Sciatica Treatment",
+          "item": "https://www.drsayuj.info/conditions/sciatica-pain-treatment-hyderabad/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://www.drsayuj.info/conditions/sciatica-pain-treatment-hyderabad/#faq",
+      "url": "https://www.drsayuj.info/conditions/sciatica-pain-treatment-hyderabad/",
+      "inLanguage": "en-IN",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "@id": "https://www.drsayuj.info/conditions/sciatica-pain-treatment-hyderabad/#faq-1",
+          "name": "What is sciatica?",
+          "position": 1,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sciatica is not a condition itself, but a symptom of an underlying problem. It refers to pain that radiates along the path of the sciatic nerve, which branches from your lower back through your hips and buttocks and down each leg.",
+            "dateCreated": "2026-02-21"
+          }
+        },
+        {
+          "@type": "Question",
+          "@id": "https://www.drsayuj.info/conditions/sciatica-pain-treatment-hyderabad/#faq-2",
+          "name": "Can sciatica be cured without surgery?",
+          "position": 2,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. In fact, 90% of our patients recover completely with non-surgical methods like targeted nerve blocks, medication, and specialized physiotherapy. Surgery is a last resort, not the first step.",
+            "dateCreated": "2026-02-21"
+          }
+        },
+        {
+          "@type": "Question",
+          "@id": "https://www.drsayuj.info/conditions/sciatica-pain-treatment-hyderabad/#faq-3",
+          "name": "What causes sciatica?",
+          "position": 3,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The most common cause is a herniated (slipped) disc compressing the nerve root. Other causes include spinal stenosis (narrowing of the spine), bone spurs, or rarely, a tumor or diabetic neuropathy.",
+            "dateCreated": "2026-02-21"
+          }
+        },
+        {
+          "@type": "Question",
+          "@id": "https://www.drsayuj.info/conditions/sciatica-pain-treatment-hyderabad/#faq-4",
+          "name": "Does sciatica always require surgery?",
+          "position": 4,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. 80-90% of sciatica cases resolve with conservative treatments like medication, physiotherapy, and rest. Surgery (endoscopic discectomy) is only recommended if pain persists after 6 weeks or if there is severe weakness.",
+            "dateCreated": "2026-02-21"
+          }
+        },
+        {
+          "@type": "Question",
+          "@id": "https://www.drsayuj.info/conditions/sciatica-pain-treatment-hyderabad/#faq-5",
+          "name": "How is sciatica diagnosed?",
+          "position": 5,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Diagnosis starts with a physical exam to check muscle strength and reflexes (Straight Leg Raise test). An MRI scan is the gold standard to visualize the nerve compression and identify the exact cause.",
+            "dateCreated": "2026-02-21"
+          }
+        },
+        {
+          "@type": "Question",
+          "@id": "https://www.drsayuj.info/conditions/sciatica-pain-treatment-hyderabad/#faq-6",
+          "name": "What are the warning signs of severe sciatica?",
+          "position": 6,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Seek immediate medical attention if you experience: sudden severe pain after an accident, loss of bowel/bladder control (Cauda Equina Syndrome), or progressive weakness/numbness in the leg.",
+            "dateCreated": "2026-02-21"
+          }
+        },
+        {
+          "@type": "Question",
+          "@id": "https://www.drsayuj.info/conditions/sciatica-pain-treatment-hyderabad/#faq-7",
+          "name": "What is the cost of sciatica treatment in Hyderabad?",
+          "position": 7,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The cost depends on the procedure. A simple nerve root block may cost ₹15,000–₹25,000, while endoscopic spine surgery typically ranges from ₹1.5 Lakhs to ₹2.5 Lakhs depending on the hospital category and implant requirements.",
+            "dateCreated": "2026-02-21"
+          }
+        },
+        {
+          "@type": "Question",
+          "@id": "https://www.drsayuj.info/conditions/sciatica-pain-treatment-hyderabad/#faq-8",
+          "name": "Is my office chair causing my sciatica?",
+          "position": 8,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Prolonged sitting is a major risk factor. Poor ergonomics can increase pressure on lumbar discs by 40%, potentially triggering or worsening sciatica. We recommend ergonomic adjustments and taking breaks every 30 minutes.",
+            "dateCreated": "2026-02-21"
+          }
+        },
+        {
+          "@type": "Question",
+          "@id": "https://www.drsayuj.info/conditions/sciatica-pain-treatment-hyderabad/#faq-9",
+          "name": "Is it Sciatica or Piriformis Syndrome?",
+          "position": 9,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "True sciatica comes from the spine (nerve root compression). Piriformis syndrome is when a muscle in the buttock compresses the sciatic nerve. Dr. Sayuj uses specific clinical tests to distinguish them, as treatments differ significantly (spine decompression vs. muscle release).",
+            "dateCreated": "2026-02-21"
+          }
+        },
+        {
+          "@type": "Question",
+          "@id": "https://www.drsayuj.info/conditions/sciatica-pain-treatment-hyderabad/#faq-10",
+          "name": "Is sciatica common during pregnancy?",
+          "position": 10,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, up to 50% of women experience some sciatic pain during pregnancy due to the baby's weight and postural changes. We offer safe, medication-free physiotherapy protocols to manage this pain without risking the baby's health.",
+            "dateCreated": "2026-02-21"
+          }
+        },
+        {
+          "@type": "Question",
+          "@id": "https://www.drsayuj.info/conditions/sciatica-pain-treatment-hyderabad/#faq-11",
+          "name": "Can I drive with sciatica?",
+          "position": 11,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Driving often worsens sciatica due to the vibration and leg position. We recommend short trips, using a lumbar support cushion, and stopping every 30 minutes to stretch. If you have foot weakness (foot drop), do not drive.",
+            "dateCreated": "2026-02-21"
+          }
+        },
+        {
+          "@type": "Question",
+          "@id": "https://www.drsayuj.info/conditions/sciatica-pain-treatment-hyderabad/#faq-12",
+          "name": "What exercises should I avoid with sciatica?",
+          "position": 12,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Avoid heavy hamstring stretches, straight leg raises, and twisting movements like golf until cleared by a physio. These can increase nerve tension.",
+            "dateCreated": "2026-02-21"
+          }
+        }
+      ]
+    }
   ],
-  "/blog/neuroplasticity-brain-recovery-hyderabad": [
-    "Article",
-    "BreadcrumbList"
+  "/neurosurgeon-banjara-hills": [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://www.drsayuj.info/#website",
+      "url": "https://www.drsayuj.info",
+      "name": "Dr Sayuj Krishnan - Neurosurgeon in Hyderabad",
+      "alternateName": [
+        "Dr. Sayuj Krishnan Neurosurgery",
+        "Sayuj Krishnan Spine Surgeon",
+        "drsayuj.info"
+      ],
+      "description": "Expert neurosurgeon in Hyderabad specializing in minimally invasive brain & spine surgery. German-trained with 1,000+ endoscopic procedures. Same-day discharge available at Yashoda Hospital, Malakpet.",
+      "inLanguage": "en-IN",
+      "publisher": {
+        "@type": "Physician",
+        "@id": "https://www.drsayuj.info/#physician",
+        "name": "Dr. Sayuj Krishnan S"
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          ".home-hero__title",
+          ".home-hero__subtitle",
+          ".home-hero__lead"
+        ]
+      },
+      "potentialAction": {
+        "@type": "ReadAction",
+        "target": [
+          "https://www.drsayuj.info/about",
+          "https://www.drsayuj.info/services",
+          "https://www.drsayuj.info/conditions"
+        ]
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Physician",
+          "@id": "https://www.drsayuj.info/#physician",
+          "name": "Dr. Sayuj Krishnan – Neurosurgeon",
+          "alternateName": [
+            "Dr Sayuj Krishnan",
+            "Dr Sayuj"
+          ],
+          "givenName": "Sayuj",
+          "familyName": "Krishnan",
+          "additionalName": "S",
+          "honorificPrefix": "Dr",
+          "description": "Premier neurosurgeon with over 9 years of experience specializing in minimally invasive brain & spine surgery, awake brain surgery, and robotic neurosurgery. Fellowship-trained with German training in endoscopic spine surgery. Performed 1,000+ endoscopic procedures with same-day discharge capability.",
+          "disambiguatingDescription": "Hyderabad (India)-based neurosurgeon and spine surgeon at Yashoda Hospital, Malakpet. Not associated with US-based internal medicine physician Dr. Sayuj Paudel.",
+          "url": "https://www.drsayuj.info",
+          "image": "https://www.drsayuj.info/images/dr-sayuj-krishnan-portrait-optimized.jpg",
+          "telephone": "+919778280044",
+          "priceRange": "₹₹",
+          "email": "hellodr@drsayuj.info",
+          "identifier": [
+            {
+              "@type": "PropertyValue",
+              "propertyID": "TCMC Registration",
+              "value": "47973"
+            }
+          ],
+          "medicalLicense": "TCMC Registration 47973 (Travancore-Cochin Medical Council)",
+          "additionalProperty": [
+            {
+              "@type": "PropertyValue",
+              "name": "Years of Experience",
+              "value": "9+"
+            },
+            {
+              "@type": "PropertyValue",
+              "name": "Fellowship Training",
+              "value": "Minimally Invasive & Complex Spine Surgery"
+            },
+            {
+              "@type": "PropertyValue",
+              "name": "International Training",
+              "value": "German Observership in Full Endoscopic Spine Surgery (2024)"
+            },
+            {
+              "@type": "PropertyValue",
+              "name": "Specialization",
+              "value": "Minimally Invasive Spine Surgery, Awake Brain Surgery, ROSA DBS, Endoscopic Spine Surgery"
+            }
+          ],
+          "medicalSpecialty": [
+            "Neurosurgery",
+            "Spine Surgery",
+            "Brain Surgery",
+            "Pediatric Neurosurgery"
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Room No 317, OPD Block, Yashoda Hospital, Nalgonda X Roads, Malakpet",
+            "addressLocality": "Hyderabad",
+            "addressRegion": "Telangana",
+            "postalCode": "500036",
+            "addressCountry": "IN"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 17.375,
+            "longitude": 78.5147
+          },
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday"
+              ],
+              "opens": "09:00",
+              "closes": "17:00"
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Saturday"
+              ],
+              "opens": "09:00",
+              "closes": "13:00"
+            }
+          ],
+          "hasCredential": [
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "degree",
+              "educationalLevel": "MBBS",
+              "recognizedBy": {
+                "@type": "Organization",
+                "name": "Medical Council of India"
+              }
+            },
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "degree",
+              "educationalLevel": "DNB Neurosurgery",
+              "recognizedBy": {
+                "@type": "Organization",
+                "name": "National Board of Examinations"
+              }
+            },
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "certification",
+              "educationalLevel": "Fellowship in Minimally Invasive & Complex Spine Surgery",
+              "recognizedBy": {
+                "@type": "Organization",
+                "name": "Yashoda Hospital, Malakpet"
+              }
+            },
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "certification",
+              "educationalLevel": "Fellowship in Minimally Invasive Spine Surgery"
+            },
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "certification",
+              "educationalLevel": "Advanced Endoscopic Spine Surgery Training"
+            },
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "certification",
+              "educationalLevel": "Observership in Full Endoscopic Spine Surgery (Germany, 2024)",
+              "recognizedBy": {
+                "@type": "Organization",
+                "name": "RIWOspine Academy"
+              }
+            }
+          ],
+          "alumniOf": [
+            {
+              "@type": "CollegeOrUniversity",
+              "name": "Kerala University of Health Sciences",
+              "sameAs": "https://www.kuhs.ac.in"
+            },
+            {
+              "@type": "CollegeOrUniversity",
+              "name": "Amrita Institute of Medical Sciences",
+              "sameAs": "https://www.amrita.edu/school/medicine"
+            }
+          ],
+          "memberOf": [
+            {
+              "@type": "Organization",
+              "name": "Neurological Society of India",
+              "sameAs": "https://www.neurosocietyindia.org"
+            },
+            {
+              "@type": "Organization",
+              "name": "Association of Spine Surgeons of India",
+              "sameAs": "https://www.assi.in"
+            },
+            {
+              "@type": "Organization",
+              "name": "Neuro Spinal Surgeons Association of India (NSSA)",
+              "sameAs": "https://www.nssa.org.in"
+            }
+          ],
+          "hospitalAffiliation": {
+            "@type": "Hospital",
+            "@id": "https://www.drsayuj.info/#hospital",
+            "name": "Yashoda Hospital, Malakpet",
+            "url": "https://www.yashodahospitals.com/malakpet/",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Nalgonda X Roads, Malakpet",
+              "addressLocality": "Hyderabad",
+              "addressRegion": "Telangana",
+              "postalCode": "500036",
+              "addressCountry": "IN"
+            }
+          },
+          "knowsAbout": [
+            "Full Endoscopic Spine Surgery",
+            "Minimally Invasive Spine Surgery (MISS)",
+            "Endoscopic Discectomy",
+            "Endoscopic Foraminotomy",
+            "Endoscopic ULBD (Unilateral Laminotomy Bilateral Decompression)",
+            "Awake Brain Surgery with Intraoperative Mapping",
+            "Brain Tumor Surgery with Neuronavigation",
+            "Epilepsy Surgery",
+            "ROSA Robotic Deep Brain Stimulation (DBS)",
+            "Spinal Fusion Surgery",
+            "Peripheral Nerve Surgery",
+            "Microvascular Decompression (MVD) for Trigeminal Neuralgia",
+            "Gamma Knife Radiosurgery",
+            "Pediatric Neurosurgery",
+            "Emergency Neurotrauma Care"
+          ],
+          "areaServed": [
+            {
+              "@type": "City",
+              "name": "Hyderabad",
+              "containedInPlace": {
+                "@type": "State",
+                "name": "Telangana",
+                "containedInPlace": {
+                  "@type": "Country",
+                  "name": "India"
+                }
+              }
+            },
+            {
+              "@type": "Place",
+              "name": "Malakpet, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Dilsukhnagar, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "LB Nagar, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Kothapet, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Jubilee Hills, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Banjara Hills, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Hitech City, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Gachibowli, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Kondapur, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Madhapur, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Secunderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Kukatpally, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Miyapur, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Uppal, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Manikonda, Hyderabad"
+            }
+          ],
+          "availableService": [
+            {
+              "@type": "MedicalService",
+              "name": "Spine Surgery",
+              "description": "Comprehensive spine care with minimally invasive, endoscopic, and fusion techniques tailored to each patient.",
+              "url": "https://www.drsayuj.info/spine-surgery"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Brain Surgery",
+              "description": "Advanced brain tumor, epilepsy, and functional neurosurgery with awake protocols and neuronavigation.",
+              "url": "https://www.drsayuj.info/brain-surgery"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Pediatric Neurosurgery",
+              "description": "Specialised neurosurgical care for children with brain and spine conditions delivered in a family-centred setting.",
+              "url": "https://www.drsayuj.info/pediatric-neurosurgery"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Minimally Invasive Spine Surgery",
+              "description": "Advanced endoscopic and keyhole spine procedures that reduce pain, blood loss, and hospital stay.",
+              "url": "https://www.drsayuj.info/services/minimally-invasive-spine-surgery"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Endoscopic Discectomy",
+              "description": "Targeted removal of herniated disc material through a 7 mm working channel for rapid recovery.",
+              "url": "https://www.drsayuj.info/services/endoscopic-discectomy-hyderabad"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Brain Tumor Surgery",
+              "description": "Microsurgical and endoscopic tumor removal using neuronavigation and intraoperative monitoring.",
+              "url": "https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Epilepsy Surgery",
+              "description": "Comprehensive evaluation and surgical treatment pathways for drug-resistant epilepsy.",
+              "url": "https://www.drsayuj.info/services/epilepsy-surgery-hyderabad"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Spinal Fusion Surgery",
+              "description": "Stabilisation procedures for instability and spondylolisthesis with minimally invasive techniques.",
+              "url": "https://www.drsayuj.info/services/spinal-fusion-surgery-hyderabad"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Peripheral Nerve Surgery",
+              "description": "Microsurgical decompression and repair for peripheral nerve entrapments and injuries.",
+              "url": "https://www.drsayuj.info/services/peripheral-nerve-surgery-hyderabad"
+            }
+          ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Neurosurgery & Spine Services",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Spine Surgery",
+                  "description": "Comprehensive spine care with minimally invasive, endoscopic, and fusion techniques tailored to each patient.",
+                  "url": "https://www.drsayuj.info/spine-surgery"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Brain Surgery",
+                  "description": "Advanced brain tumor, epilepsy, and functional neurosurgery with awake protocols and neuronavigation.",
+                  "url": "https://www.drsayuj.info/brain-surgery"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Pediatric Neurosurgery",
+                  "description": "Specialised neurosurgical care for children with brain and spine conditions delivered in a family-centred setting.",
+                  "url": "https://www.drsayuj.info/pediatric-neurosurgery"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Minimally Invasive Spine Surgery",
+                  "description": "Advanced endoscopic and keyhole spine procedures that reduce pain, blood loss, and hospital stay.",
+                  "url": "https://www.drsayuj.info/services/minimally-invasive-spine-surgery"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Endoscopic Discectomy",
+                  "description": "Targeted removal of herniated disc material through a 7 mm working channel for rapid recovery.",
+                  "url": "https://www.drsayuj.info/services/endoscopic-discectomy-hyderabad"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Brain Tumor Surgery",
+                  "description": "Microsurgical and endoscopic tumor removal using neuronavigation and intraoperative monitoring.",
+                  "url": "https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Epilepsy Surgery",
+                  "description": "Comprehensive evaluation and surgical treatment pathways for drug-resistant epilepsy.",
+                  "url": "https://www.drsayuj.info/services/epilepsy-surgery-hyderabad"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Spinal Fusion Surgery",
+                  "description": "Stabilisation procedures for instability and spondylolisthesis with minimally invasive techniques.",
+                  "url": "https://www.drsayuj.info/services/spinal-fusion-surgery-hyderabad"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Peripheral Nerve Surgery",
+                  "description": "Microsurgical decompression and repair for peripheral nerve entrapments and injuries.",
+                  "url": "https://www.drsayuj.info/services/peripheral-nerve-surgery-hyderabad"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              }
+            ]
+          },
+          "potentialAction": {
+            "@type": "ReserveAction",
+            "name": "Book Appointment",
+            "target": "https://www.drsayuj.info/appointments"
+          },
+          "worksFor": {
+            "@id": "https://www.drsayuj.info/#hospital"
+          },
+          "knowsLanguage": [
+            "English",
+            "Hindi",
+            "Telugu",
+            "Malayalam",
+            "Tamil"
+          ],
+          "sameAs": [
+            "https://www.facebook.com/drsayujneurohyd",
+            "https://www.instagram.com/drsayujneurohyd",
+            "https://in.linkedin.com/in/drsayujkrishnan",
+            "https://www.youtube.com/@drsayujneurohyd",
+            "https://twitter.com/drsayuj",
+            "https://www.google.com/maps?cid=14503792272825406246",
+            "https://www.yashodahospitals.com/doctors/dr-sayuj-krishnan/",
+            "https://www.yashodahospitals.com/doctor/malakpet/neuro-surgery/dr-sayuj-krishnan-s/",
+            "https://www.google.com/search?q=Dr+Sayuj+Krishnan+Neurosurgeon+Hyderabad",
+            "https://www.practo.com/hyderabad/doctor/dr-sayuj-krishnan-neurosurgeon",
+            "https://www.justdial.com/Hyderabad/Dr-Sayuj-Krishnan-Neurosurgeon-Yashoda-Hospital-Malakpet/040PXX40-XX40-210816155554-Q2H6_BZDET",
+            "https://www.lybrate.com/hyderabad/doctor/dr-sayuj-krishnan-neurosurgeon",
+            "https://www.clinicspots.com/doctor/dr-sayuj-krishnan",
+            "https://www.skedoc.com/hyderabad/doctor/dr-sayuj-krishnan-s-neuro-surgeon",
+            "https://medigence.com/doctor/neurosurgeon/sayuj-krishnan-s"
+          ],
+          "hasMap": "https://www.google.com/maps/place/Dr+Sayuj+Krishnan",
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "150",
+            "bestRating": "5",
+            "worstRating": "1"
+          }
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Hospital",
+      "@id": "https://www.drsayuj.info/#hospital",
+      "name": "Yashoda Hospital, Malakpet",
+      "url": "https://www.yashodahospitals.com/malakpet/",
+      "telephone": "+91-40-6769 9999",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Nalgonda X Roads",
+        "addressLocality": "Hyderabad",
+        "addressRegion": "Telangana",
+        "postalCode": "500036",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 17.375,
+        "longitude": 78.5147
+      },
+      "medicalSpecialty": [
+        "Neurosurgery",
+        "Spine Surgery",
+        "Brain Surgery",
+        "Endoscopic Surgery",
+        "Minimally Invasive Surgery",
+        "Epilepsy Surgery",
+        "Peripheral Nerve Surgery"
+      ],
+      "department": {
+        "@type": "MedicalSpecialty",
+        "name": "Department of Neurosurgery",
+        "availableService": [
+          {
+            "@type": "MedicalService",
+            "name": "Endoscopic Spine Surgery",
+            "description": "Minimally invasive spine surgery using endoscopic techniques"
+          },
+          {
+            "@type": "MedicalService",
+            "name": "Brain Tumor Surgery",
+            "description": "Advanced brain tumor surgery with neuronavigation"
+          },
+          {
+            "@type": "MedicalService",
+            "name": "Epilepsy Surgery",
+            "description": "Surgical treatment for drug-resistant epilepsy"
+          },
+          {
+            "@type": "MedicalService",
+            "name": "Trigeminal Neuralgia Treatment",
+            "description": "Microvascular decompression and radiosurgery"
+          }
+        ]
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Neurosurgery Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalService",
+              "name": "Endoscopic Discectomy",
+              "description": "Minimally invasive disc surgery"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalService",
+              "name": "Spinal Fusion Surgery",
+              "description": "Advanced spinal fusion techniques"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "MedicalWebPage",
+      "@id": "https://www.drsayuj.info/neurosurgeon-banjara-hills#webpage",
+      "url": "https://www.drsayuj.info/neurosurgeon-banjara-hills",
+      "name": "Neurosurgeon in Banjara Hills, Hyderabad | Endoscopic Spine | Dr. Sayuj Krishnan",
+      "description": "Consult Dr. Sayuj Krishnan near Banjara Hills, Hyderabad for endoscopic spine & minimally invasive brain surgery. OPD timings, parking, directions, WhatsApp booking, and FAQs.",
+      "inLanguage": "en-IN",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://www.drsayuj.info/#website",
+        "name": "Dr. Sayuj Krishnan - Neurosurgeon in Hyderabad",
+        "url": "https://www.drsayuj.info"
+      },
+      "about": {
+        "@type": "Physician",
+        "@id": "https://www.drsayuj.info/#physician",
+        "name": "Dr. Sayuj Krishnan – Neurosurgeon"
+      },
+      "reviewedBy": {
+        "@type": "Physician",
+        "@id": "https://www.drsayuj.info/#physician",
+        "name": "Dr. Sayuj Krishnan – Neurosurgeon",
+        "hasCredential": {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "degree",
+          "name": "DNB Neurosurgery"
+        }
+      },
+      "lastReviewed": "2026-02-21",
+      "datePublished": "2024-01-01",
+      "dateModified": "2026-02-21",
+      "creativeWorkStatus": "Published",
+      "medicalAudience": {
+        "@type": "MedicalAudience",
+        "audienceType": "Patient"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Dr. Sayuj Krishnan – Neurosurgeon",
+        "jobTitle": "Neurosurgeon",
+        "hasCredential": {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "degree",
+          "name": "DNB Neurosurgery"
+        },
+        "worksFor": {
+          "@type": "Hospital",
+          "@id": "https://www.drsayuj.info/#hospital",
+          "name": "Yashoda Hospital, Malakpet",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Hyderabad",
+            "addressRegion": "Telangana",
+            "addressCountry": "IN"
+          }
+        }
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Dr. Sayuj Krishnan – Neurosurgeon",
+        "url": "https://www.drsayuj.info"
+      },
+      "specialty": {
+        "@type": "MedicalSpecialty",
+        "name": "Neurosurgery"
+      },
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "Patients in Banjara Hills"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "MedicalClinic",
+      "@id": "https://www.drsayuj.info/neurosurgeon-banjara-hills#clinic",
+      "name": "Dr. Sayuj Krishnan – Neurosurgeon",
+      "image": "https://www.drsayuj.info/images/dr-sayuj-krishnan-portrait-v2.jpg",
+      "url": "https://www.drsayuj.info/neurosurgeon-banjara-hills",
+      "telephone": "+919778280044",
+      "medicalSpecialty": [
+        "Neurosurgery",
+        "Spine Surgery"
+      ],
+      "priceRange": "₹₹",
+      "paymentAccepted": "Cash, Credit Card, Insurance",
+      "currenciesAccepted": "INR",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Room No 317, OPD Block, Yashoda Hospital, Nalgonda X Roads, Malakpet",
+        "addressLocality": "Hyderabad",
+        "addressRegion": "Telangana",
+        "postalCode": "500036",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 17.375,
+        "longitude": 78.5147
+      },
+      "hasMap": "https://www.google.com/maps/place/Dr+Sayuj+Krishnan",
+      "sameAs": [
+        "https://www.facebook.com/drsayujneurohyd",
+        "https://www.instagram.com/drsayujneurohyd",
+        "https://in.linkedin.com/in/drsayujkrishnan",
+        "https://www.youtube.com/@drsayujneurohyd",
+        "https://twitter.com/drsayuj",
+        "https://www.google.com/maps?cid=14503792272825406246",
+        "https://www.yashodahospitals.com/doctors/dr-sayuj-krishnan/",
+        "https://www.yashodahospitals.com/doctor/malakpet/neuro-surgery/dr-sayuj-krishnan-s/",
+        "https://www.google.com/search?q=Dr+Sayuj+Krishnan+Neurosurgeon+Hyderabad",
+        "https://www.practo.com/hyderabad/doctor/dr-sayuj-krishnan-neurosurgeon",
+        "https://www.justdial.com/Hyderabad/Dr-Sayuj-Krishnan-Neurosurgeon-Yashoda-Hospital-Malakpet/040PXX40-XX40-210816155554-Q2H6_BZDET",
+        "https://www.lybrate.com/hyderabad/doctor/dr-sayuj-krishnan-neurosurgeon",
+        "https://www.clinicspots.com/doctor/dr-sayuj-krishnan",
+        "https://www.skedoc.com/hyderabad/doctor/dr-sayuj-krishnan-s-neuro-surgeon",
+        "https://medigence.com/doctor/neurosurgeon/sayuj-krishnan-s"
+      ],
+      "containedInPlace": {
+        "@id": "https://www.drsayuj.info/#hospital"
+      },
+      "department": {
+        "@id": "https://www.drsayuj.info/#physician"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Banjara Hills"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "09:00",
+          "closes": "17:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Saturday"
+          ],
+          "opens": "09:00",
+          "closes": "13:00"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.drsayuj.info"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Locations",
+          "item": "https://www.drsayuj.info/locations"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Neurosurgeon Banjara Hills",
+          "item": "https://www.drsayuj.info/neurosurgeon-banjara-hills"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How far is the OPD from Banjara Hills?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Typically 15–25 minutes by car depending on traffic; see landmark directions below."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Parking availability?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "On-site hospital parking with valet options during peak hours."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Fastest way to book?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "WhatsApp us your MRI and symptoms; we'll confirm the earliest slot."
+          }
+        }
+      ]
+    }
   ],
-  "/blog/cervical-myelopathy-symptoms-warning-signs-hyderabad": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/cervical-spondylosis-neck-pain-hyderabad": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/l4-l5-disc-bulge-treatment-hyderabad": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/scoliosis-treatment-options-in-hyderabad": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/cauda-equina-syndrome-warning-signs-hyderabad": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/spondylolisthesis-vs-herniated-disc-difference": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/sciatica-vs-normal-back-pain-guide": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/awake-spine-surgery-vs-general-anesthesia-guide": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/brain-aneurysm-vs-migraine-warning-signs-hyderabad": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/tailbone-pain-coccydynia-treatment-hyderabad": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/headache-vs-brain-tumor-warning-signs": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/trigeminal-neuralgia-vs-tooth-pain-guide": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/understanding-mri-spine-report-guide": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/normal-pressure-hydrocephalus-nph-symptoms-treatment-hyderabad": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/chiari-malformation-symptoms-treatment-hyderabad": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/deep-brain-stimulation-dbs-parkinsons-hyderabad": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/cervical-disc-replacement-vs-fusion-acdf-hyderabad": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/is-spine-surgery-safe-risks-success-rates-hyderabad": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/does-endoscopic-spine-surgery-work-for-sciatica-hyderabad": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/failed-back-surgery-syndrome-treatment-hyderabad": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/spinal-tuberculosis-symptoms-treatment-hyderabad": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/sciatica-exercises-for-office-workers-hyderabad": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/awake-craniotomy-brain-tumor-guide": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/glioblastoma-multiforme-treatment-survival-guide-hyderabad": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/spondylolisthesis-treatment-guide-hyderabad": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/spinal-stenosis-vs-pad-leg-pain-guide": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/types-of-spine-tumors-symptoms-guide": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/endoscopic-spine-surgery-recovery-timeline": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/life-after-spinal-fusion-surgery-recovery-hyderabad": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/sciatica-exercises-to-avoid-hyderabad": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/foot-drop-recovery-guide-hyderabad": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/chronic-subdural-hematoma-symptoms-elderly": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/cervical-radiculopathy-arm-pain-hyderabad": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/degenerative-disc-disease-guide-hyderabad": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/spine-injections-cost-risks-hyderabad-guide": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/understanding-brain-mri-tumor-report-guide": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/endoscopic-pituitary-tumor-surgery-hyderabad": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/spine-surgery-insurance-coverage-hyderabad": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/hemifacial-spasm-vs-eye-twitching-hyderabad": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/carpal-tunnel-vs-cervical-radiculopathy-hyderabad": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/sciatica-pain-relief-exercises-hyderabad": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/microdiscectomy-vs-laminectomy-recovery-comparison": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/osteoporotic-spine-fracture-elderly-guide": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/sleeping-positions-for-sciatica-relief-guide": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/lumbar-spondylosis-treatment-exercises-hyderabad": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/cost-of-endoscopic-spine-surgery-hyderabad": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/lumbar-canal-stenosis-walking-pain-hyderabad": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/blog/epilepsy-surgery-options-hyderabad": [
-    "Article",
-    "BreadcrumbList"
-  ],
-  "/conditions/acoustic-neuroma-treatment-hyderabad": [
-    "MedicalWebPage",
-    "FAQPage",
-    "BreadcrumbList"
-  ],
-  "/conditions/brain-aneurysm-treatment-hyderabad": [
-    "MedicalWebPage",
-    "FAQPage",
-    "BreadcrumbList"
-  ],
-  "/conditions/carpal-tunnel-syndrome-hyderabad": [
-    "MedicalWebPage",
-    "FAQPage",
-    "BreadcrumbList"
-  ],
-  "/conditions/chiari-malformation-hyderabad": [
-    "MedicalWebPage",
-    "FAQPage",
-    "BreadcrumbList"
-  ],
-  "/conditions/herniated-disc-treatment-hyderabad": [
-    "MedicalWebPage",
-    "FAQPage",
-    "BreadcrumbList"
-  ],
-  "/conditions/pituitary-adenoma-hyderabad": [
-    "MedicalWebPage",
-    "FAQPage",
-    "BreadcrumbList"
+  "/appointments": [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://www.drsayuj.info/#website",
+      "url": "https://www.drsayuj.info",
+      "name": "Dr Sayuj Krishnan - Neurosurgeon in Hyderabad",
+      "alternateName": [
+        "Dr. Sayuj Krishnan Neurosurgery",
+        "Sayuj Krishnan Spine Surgeon",
+        "drsayuj.info"
+      ],
+      "description": "Expert neurosurgeon in Hyderabad specializing in minimally invasive brain & spine surgery. German-trained with 1,000+ endoscopic procedures. Same-day discharge available at Yashoda Hospital, Malakpet.",
+      "inLanguage": "en-IN",
+      "publisher": {
+        "@type": "Physician",
+        "@id": "https://www.drsayuj.info/#physician",
+        "name": "Dr. Sayuj Krishnan S"
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          ".home-hero__title",
+          ".home-hero__subtitle",
+          ".home-hero__lead"
+        ]
+      },
+      "potentialAction": {
+        "@type": "ReadAction",
+        "target": [
+          "https://www.drsayuj.info/about",
+          "https://www.drsayuj.info/services",
+          "https://www.drsayuj.info/conditions"
+        ]
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.drsayuj.info"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Appointments",
+          "item": "https://www.drsayuj.info/appointments"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Physician",
+          "@id": "https://www.drsayuj.info/#physician",
+          "name": "Dr. Sayuj Krishnan – Neurosurgeon",
+          "alternateName": [
+            "Dr Sayuj Krishnan",
+            "Dr Sayuj"
+          ],
+          "givenName": "Sayuj",
+          "familyName": "Krishnan",
+          "additionalName": "S",
+          "honorificPrefix": "Dr",
+          "description": "Premier neurosurgeon with over 9 years of experience specializing in minimally invasive brain & spine surgery, awake brain surgery, and robotic neurosurgery. Fellowship-trained with German training in endoscopic spine surgery. Performed 1,000+ endoscopic procedures with same-day discharge capability.",
+          "disambiguatingDescription": "Hyderabad (India)-based neurosurgeon and spine surgeon at Yashoda Hospital, Malakpet. Not associated with US-based internal medicine physician Dr. Sayuj Paudel.",
+          "url": "https://www.drsayuj.info",
+          "image": "https://www.drsayuj.info/images/dr-sayuj-krishnan-portrait-optimized.jpg",
+          "telephone": "+919778280044",
+          "priceRange": "₹₹",
+          "email": "hellodr@drsayuj.info",
+          "identifier": [
+            {
+              "@type": "PropertyValue",
+              "propertyID": "TCMC Registration",
+              "value": "47973"
+            }
+          ],
+          "medicalLicense": "TCMC Registration 47973 (Travancore-Cochin Medical Council)",
+          "additionalProperty": [
+            {
+              "@type": "PropertyValue",
+              "name": "Years of Experience",
+              "value": "9+"
+            },
+            {
+              "@type": "PropertyValue",
+              "name": "Fellowship Training",
+              "value": "Minimally Invasive & Complex Spine Surgery"
+            },
+            {
+              "@type": "PropertyValue",
+              "name": "International Training",
+              "value": "German Observership in Full Endoscopic Spine Surgery (2024)"
+            },
+            {
+              "@type": "PropertyValue",
+              "name": "Specialization",
+              "value": "Minimally Invasive Spine Surgery, Awake Brain Surgery, ROSA DBS, Endoscopic Spine Surgery"
+            }
+          ],
+          "medicalSpecialty": [
+            "Neurosurgery",
+            "Spine Surgery",
+            "Brain Surgery",
+            "Pediatric Neurosurgery"
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Room No 317, OPD Block, Yashoda Hospital, Nalgonda X Roads, Malakpet",
+            "addressLocality": "Hyderabad",
+            "addressRegion": "Telangana",
+            "postalCode": "500036",
+            "addressCountry": "IN"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 17.375,
+            "longitude": 78.5147
+          },
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday"
+              ],
+              "opens": "09:00",
+              "closes": "17:00"
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Saturday"
+              ],
+              "opens": "09:00",
+              "closes": "13:00"
+            }
+          ],
+          "hasCredential": [
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "degree",
+              "educationalLevel": "MBBS",
+              "recognizedBy": {
+                "@type": "Organization",
+                "name": "Medical Council of India"
+              }
+            },
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "degree",
+              "educationalLevel": "DNB Neurosurgery",
+              "recognizedBy": {
+                "@type": "Organization",
+                "name": "National Board of Examinations"
+              }
+            },
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "certification",
+              "educationalLevel": "Fellowship in Minimally Invasive & Complex Spine Surgery",
+              "recognizedBy": {
+                "@type": "Organization",
+                "name": "Yashoda Hospital, Malakpet"
+              }
+            },
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "certification",
+              "educationalLevel": "Fellowship in Minimally Invasive Spine Surgery"
+            },
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "certification",
+              "educationalLevel": "Advanced Endoscopic Spine Surgery Training"
+            },
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "certification",
+              "educationalLevel": "Observership in Full Endoscopic Spine Surgery (Germany, 2024)",
+              "recognizedBy": {
+                "@type": "Organization",
+                "name": "RIWOspine Academy"
+              }
+            }
+          ],
+          "alumniOf": [
+            {
+              "@type": "CollegeOrUniversity",
+              "name": "Kerala University of Health Sciences",
+              "sameAs": "https://www.kuhs.ac.in"
+            },
+            {
+              "@type": "CollegeOrUniversity",
+              "name": "Amrita Institute of Medical Sciences",
+              "sameAs": "https://www.amrita.edu/school/medicine"
+            }
+          ],
+          "memberOf": [
+            {
+              "@type": "Organization",
+              "name": "Neurological Society of India",
+              "sameAs": "https://www.neurosocietyindia.org"
+            },
+            {
+              "@type": "Organization",
+              "name": "Association of Spine Surgeons of India",
+              "sameAs": "https://www.assi.in"
+            },
+            {
+              "@type": "Organization",
+              "name": "Neuro Spinal Surgeons Association of India (NSSA)",
+              "sameAs": "https://www.nssa.org.in"
+            }
+          ],
+          "hospitalAffiliation": {
+            "@type": "Hospital",
+            "@id": "https://www.drsayuj.info/#hospital",
+            "name": "Yashoda Hospital, Malakpet",
+            "url": "https://www.yashodahospitals.com/malakpet/",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Nalgonda X Roads, Malakpet",
+              "addressLocality": "Hyderabad",
+              "addressRegion": "Telangana",
+              "postalCode": "500036",
+              "addressCountry": "IN"
+            }
+          },
+          "knowsAbout": [
+            "Full Endoscopic Spine Surgery",
+            "Minimally Invasive Spine Surgery (MISS)",
+            "Endoscopic Discectomy",
+            "Endoscopic Foraminotomy",
+            "Endoscopic ULBD (Unilateral Laminotomy Bilateral Decompression)",
+            "Awake Brain Surgery with Intraoperative Mapping",
+            "Brain Tumor Surgery with Neuronavigation",
+            "Epilepsy Surgery",
+            "ROSA Robotic Deep Brain Stimulation (DBS)",
+            "Spinal Fusion Surgery",
+            "Peripheral Nerve Surgery",
+            "Microvascular Decompression (MVD) for Trigeminal Neuralgia",
+            "Gamma Knife Radiosurgery",
+            "Pediatric Neurosurgery",
+            "Emergency Neurotrauma Care"
+          ],
+          "areaServed": [
+            {
+              "@type": "City",
+              "name": "Hyderabad",
+              "containedInPlace": {
+                "@type": "State",
+                "name": "Telangana",
+                "containedInPlace": {
+                  "@type": "Country",
+                  "name": "India"
+                }
+              }
+            },
+            {
+              "@type": "Place",
+              "name": "Malakpet, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Dilsukhnagar, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "LB Nagar, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Kothapet, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Jubilee Hills, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Banjara Hills, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Hitech City, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Gachibowli, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Kondapur, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Madhapur, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Secunderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Kukatpally, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Miyapur, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Uppal, Hyderabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Manikonda, Hyderabad"
+            }
+          ],
+          "availableService": [
+            {
+              "@type": "MedicalService",
+              "name": "Spine Surgery",
+              "description": "Comprehensive spine care with minimally invasive, endoscopic, and fusion techniques tailored to each patient.",
+              "url": "https://www.drsayuj.info/spine-surgery"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Brain Surgery",
+              "description": "Advanced brain tumor, epilepsy, and functional neurosurgery with awake protocols and neuronavigation.",
+              "url": "https://www.drsayuj.info/brain-surgery"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Pediatric Neurosurgery",
+              "description": "Specialised neurosurgical care for children with brain and spine conditions delivered in a family-centred setting.",
+              "url": "https://www.drsayuj.info/pediatric-neurosurgery"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Minimally Invasive Spine Surgery",
+              "description": "Advanced endoscopic and keyhole spine procedures that reduce pain, blood loss, and hospital stay.",
+              "url": "https://www.drsayuj.info/services/minimally-invasive-spine-surgery"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Endoscopic Discectomy",
+              "description": "Targeted removal of herniated disc material through a 7 mm working channel for rapid recovery.",
+              "url": "https://www.drsayuj.info/services/endoscopic-discectomy-hyderabad"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Brain Tumor Surgery",
+              "description": "Microsurgical and endoscopic tumor removal using neuronavigation and intraoperative monitoring.",
+              "url": "https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Epilepsy Surgery",
+              "description": "Comprehensive evaluation and surgical treatment pathways for drug-resistant epilepsy.",
+              "url": "https://www.drsayuj.info/services/epilepsy-surgery-hyderabad"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Spinal Fusion Surgery",
+              "description": "Stabilisation procedures for instability and spondylolisthesis with minimally invasive techniques.",
+              "url": "https://www.drsayuj.info/services/spinal-fusion-surgery-hyderabad"
+            },
+            {
+              "@type": "MedicalService",
+              "name": "Peripheral Nerve Surgery",
+              "description": "Microsurgical decompression and repair for peripheral nerve entrapments and injuries.",
+              "url": "https://www.drsayuj.info/services/peripheral-nerve-surgery-hyderabad"
+            }
+          ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Neurosurgery & Spine Services",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Spine Surgery",
+                  "description": "Comprehensive spine care with minimally invasive, endoscopic, and fusion techniques tailored to each patient.",
+                  "url": "https://www.drsayuj.info/spine-surgery"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Brain Surgery",
+                  "description": "Advanced brain tumor, epilepsy, and functional neurosurgery with awake protocols and neuronavigation.",
+                  "url": "https://www.drsayuj.info/brain-surgery"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Pediatric Neurosurgery",
+                  "description": "Specialised neurosurgical care for children with brain and spine conditions delivered in a family-centred setting.",
+                  "url": "https://www.drsayuj.info/pediatric-neurosurgery"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Minimally Invasive Spine Surgery",
+                  "description": "Advanced endoscopic and keyhole spine procedures that reduce pain, blood loss, and hospital stay.",
+                  "url": "https://www.drsayuj.info/services/minimally-invasive-spine-surgery"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Endoscopic Discectomy",
+                  "description": "Targeted removal of herniated disc material through a 7 mm working channel for rapid recovery.",
+                  "url": "https://www.drsayuj.info/services/endoscopic-discectomy-hyderabad"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Brain Tumor Surgery",
+                  "description": "Microsurgical and endoscopic tumor removal using neuronavigation and intraoperative monitoring.",
+                  "url": "https://www.drsayuj.info/services/brain-tumor-surgery-hyderabad"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Epilepsy Surgery",
+                  "description": "Comprehensive evaluation and surgical treatment pathways for drug-resistant epilepsy.",
+                  "url": "https://www.drsayuj.info/services/epilepsy-surgery-hyderabad"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Spinal Fusion Surgery",
+                  "description": "Stabilisation procedures for instability and spondylolisthesis with minimally invasive techniques.",
+                  "url": "https://www.drsayuj.info/services/spinal-fusion-surgery-hyderabad"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "MedicalProcedure",
+                  "name": "Peripheral Nerve Surgery",
+                  "description": "Microsurgical decompression and repair for peripheral nerve entrapments and injuries.",
+                  "url": "https://www.drsayuj.info/services/peripheral-nerve-surgery-hyderabad"
+                },
+                "availability": "https://schema.org/InStock",
+                "potentialAction": {
+                  "@type": "ReserveAction",
+                  "target": "https://www.drsayuj.info/appointments"
+                }
+              }
+            ]
+          },
+          "potentialAction": {
+            "@type": "ReserveAction",
+            "name": "Book Appointment",
+            "target": "https://www.drsayuj.info/appointments"
+          },
+          "worksFor": {
+            "@id": "https://www.drsayuj.info/#hospital"
+          },
+          "knowsLanguage": [
+            "English",
+            "Hindi",
+            "Telugu",
+            "Malayalam",
+            "Tamil"
+          ],
+          "sameAs": [
+            "https://www.facebook.com/drsayujneurohyd",
+            "https://www.instagram.com/drsayujneurohyd",
+            "https://in.linkedin.com/in/drsayujkrishnan",
+            "https://www.youtube.com/@drsayujneurohyd",
+            "https://twitter.com/drsayuj",
+            "https://www.google.com/maps?cid=14503792272825406246",
+            "https://www.yashodahospitals.com/doctors/dr-sayuj-krishnan/",
+            "https://www.yashodahospitals.com/doctor/malakpet/neuro-surgery/dr-sayuj-krishnan-s/",
+            "https://www.google.com/search?q=Dr+Sayuj+Krishnan+Neurosurgeon+Hyderabad",
+            "https://www.practo.com/hyderabad/doctor/dr-sayuj-krishnan-neurosurgeon",
+            "https://www.justdial.com/Hyderabad/Dr-Sayuj-Krishnan-Neurosurgeon-Yashoda-Hospital-Malakpet/040PXX40-XX40-210816155554-Q2H6_BZDET",
+            "https://www.lybrate.com/hyderabad/doctor/dr-sayuj-krishnan-neurosurgeon",
+            "https://www.clinicspots.com/doctor/dr-sayuj-krishnan",
+            "https://www.skedoc.com/hyderabad/doctor/dr-sayuj-krishnan-s-neuro-surgeon",
+            "https://medigence.com/doctor/neurosurgeon/sayuj-krishnan-s"
+          ],
+          "hasMap": "https://www.google.com/maps/place/Dr+Sayuj+Krishnan",
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "150",
+            "bestRating": "5",
+            "worstRating": "1"
+          }
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Hospital",
+      "@id": "https://www.drsayuj.info/#hospital",
+      "name": "Yashoda Hospital, Malakpet",
+      "url": "https://www.yashodahospitals.com/malakpet/",
+      "telephone": "+91-40-6769 9999",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Nalgonda X Roads",
+        "addressLocality": "Hyderabad",
+        "addressRegion": "Telangana",
+        "postalCode": "500036",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 17.375,
+        "longitude": 78.5147
+      },
+      "medicalSpecialty": [
+        "Neurosurgery",
+        "Spine Surgery",
+        "Brain Surgery",
+        "Endoscopic Surgery",
+        "Minimally Invasive Surgery",
+        "Epilepsy Surgery",
+        "Peripheral Nerve Surgery"
+      ],
+      "department": {
+        "@type": "MedicalSpecialty",
+        "name": "Department of Neurosurgery",
+        "availableService": [
+          {
+            "@type": "MedicalService",
+            "name": "Endoscopic Spine Surgery",
+            "description": "Minimally invasive spine surgery using endoscopic techniques"
+          },
+          {
+            "@type": "MedicalService",
+            "name": "Brain Tumor Surgery",
+            "description": "Advanced brain tumor surgery with neuronavigation"
+          },
+          {
+            "@type": "MedicalService",
+            "name": "Epilepsy Surgery",
+            "description": "Surgical treatment for drug-resistant epilepsy"
+          },
+          {
+            "@type": "MedicalService",
+            "name": "Trigeminal Neuralgia Treatment",
+            "description": "Microvascular decompression and radiosurgery"
+          }
+        ]
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Neurosurgery Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalService",
+              "name": "Endoscopic Discectomy",
+              "description": "Minimally invasive disc surgery"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalService",
+              "name": "Spinal Fusion Surgery",
+              "description": "Advanced spinal fusion techniques"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "MedicalWebPage",
+      "@id": "https://www.drsayuj.info/appointments#webpage",
+      "url": "https://www.drsayuj.info/appointments",
+      "name": "Book Appointment | Best Neurosurgeon Hyderabad | Dr. Sayuj Krishnan",
+      "description": "Book Appointment with Dr. Sayuj Krishnan, the Best Neurosurgeon in Hyderabad. Schedule a consultation for spine surgery & brain tumor surgery.",
+      "inLanguage": "en-IN",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://www.drsayuj.info/#website",
+        "name": "Dr. Sayuj Krishnan - Neurosurgeon in Hyderabad",
+        "url": "https://www.drsayuj.info"
+      },
+      "about": {
+        "@type": "Physician",
+        "@id": "https://www.drsayuj.info/#physician",
+        "name": "Dr. Sayuj Krishnan – Neurosurgeon"
+      },
+      "reviewedBy": {
+        "@type": "Physician",
+        "@id": "https://www.drsayuj.info/#physician",
+        "name": "Dr. Sayuj Krishnan – Neurosurgeon",
+        "hasCredential": {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "degree",
+          "name": "DNB Neurosurgery"
+        }
+      },
+      "lastReviewed": "2026-02-21",
+      "datePublished": "2024-01-01",
+      "dateModified": "2026-02-21",
+      "creativeWorkStatus": "Published",
+      "medicalAudience": {
+        "@type": "MedicalAudience",
+        "audienceType": "Patient"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Dr. Sayuj Krishnan – Neurosurgeon",
+        "jobTitle": "Neurosurgeon",
+        "hasCredential": {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "degree",
+          "name": "DNB Neurosurgery"
+        },
+        "worksFor": {
+          "@type": "Hospital",
+          "@id": "https://www.drsayuj.info/#hospital",
+          "name": "Yashoda Hospital, Malakpet",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Hyderabad",
+            "addressRegion": "Telangana",
+            "addressCountry": "IN"
+          }
+        }
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Dr. Sayuj Krishnan – Neurosurgeon",
+        "url": "https://www.drsayuj.info"
+      },
+      "specialty": {
+        "@type": "MedicalSpecialty",
+        "name": "Neurosurgery"
+      },
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "Patients"
+      },
+      "mainEntity": {
+        "@type": "MedicalService",
+        "name": "Neurosurgery Consultation",
+        "description": "Book Appointment with Dr. Sayuj Krishnan, the Best Neurosurgeon in Hyderabad. Schedule a consultation for spine surgery & brain tumor surgery.",
+        "provider": {
+          "@type": "Physician",
+          "@id": "https://www.drsayuj.info/#physician",
+          "name": "Dr. Sayuj Krishnan – Neurosurgeon"
+        },
+        "availableAtOrFrom": {
+          "@type": "Hospital",
+          "@id": "https://www.drsayuj.info/#hospital",
+          "name": "Yashoda Hospital, Malakpet"
+        },
+        "areaServed": {
+          "@type": "City",
+          "name": "Hyderabad",
+          "containedInPlace": {
+            "@type": "State",
+            "name": "Telangana"
+          }
+        }
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.drsayuj.info/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Book Appointment",
+          "item": "https://www.drsayuj.info/appointments"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Physician",
+          "@id": "https://www.drsayuj.info/appointments#physician",
+          "name": "Dr. Sayuj Krishnan",
+          "medicalSpecialty": "Neurosurgeon",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Room No 317, OPD Block, Yashoda Hospital, Nalgonda X Roads, Malakpet",
+            "addressLocality": "Hyderabad",
+            "addressRegion": "Telangana",
+            "postalCode": "500036",
+            "addressCountry": "IN"
+          },
+          "availableService": [
+            "Neurosurgery",
+            "Spine Surgery",
+            "Brain Tumor Surgery"
+          ],
+          "url": "https://www.drsayuj.info/appointments",
+          "description": "Book Appointment with Dr. Sayuj Krishnan, the Best Neurosurgeon Hyderabad. Schedule a consultation for spine surgery & brain tumor surgery.",
+          "sameAs": [
+            "https://www.facebook.com/drsayujneurohyd",
+            "https://www.instagram.com/drsayujneurohyd",
+            "https://in.linkedin.com/in/drsayujkrishnan",
+            "https://www.youtube.com/@drsayujneurohyd",
+            "https://twitter.com/drsayuj",
+            "https://www.google.com/maps?cid=14503792272825406246",
+            "https://www.yashodahospitals.com/doctors/dr-sayuj-krishnan/",
+            "https://www.yashodahospitals.com/doctor/malakpet/neuro-surgery/dr-sayuj-krishnan-s/",
+            "https://www.google.com/search?q=Dr+Sayuj+Krishnan+Neurosurgeon+Hyderabad",
+            "https://www.practo.com/hyderabad/doctor/dr-sayuj-krishnan-neurosurgeon",
+            "https://www.justdial.com/Hyderabad/Dr-Sayuj-Krishnan-Neurosurgeon-Yashoda-Hospital-Malakpet/040PXX40-XX40-210816155554-Q2H6_BZDET",
+            "https://www.lybrate.com/hyderabad/doctor/dr-sayuj-krishnan-neurosurgeon",
+            "https://www.clinicspots.com/doctor/dr-sayuj-krishnan",
+            "https://www.skedoc.com/hyderabad/doctor/dr-sayuj-krishnan-s-neuro-surgeon",
+            "https://medigence.com/doctor/neurosurgeon/sayuj-krishnan-s"
+          ],
+          "knowsLanguage": [
+            "English",
+            "Hindi",
+            "Telugu",
+            "Malayalam",
+            "Tamil"
+          ],
+          "areaServed": {
+            "@type": "AdministrativeArea",
+            "name": "Hyderabad, Telangana, India"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 17.375,
+            "longitude": 78.5147
+          },
+          "hasMap": "https://www.google.com/maps/place/Dr+Sayuj+Krishnan",
+          "telephone": "+919778280044",
+          "image": "https://www.drsayuj.info/images/dr-sayuj-krishnan-portrait-v2.jpg",
+          "priceRange": "₹₹",
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday"
+              ],
+              "opens": "09:00",
+              "closes": "17:00"
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Saturday"
+              ],
+              "opens": "09:00",
+              "closes": "13:00"
+            }
+          ],
+          "worksFor": {
+            "@id": "https://www.drsayuj.info/appointments#clinic"
+          }
+        },
+        {
+          "@type": "MedicalClinic",
+          "@id": "https://www.drsayuj.info/appointments#clinic",
+          "name": "Yashoda Hospitals, Malakpet",
+          "telephone": "+919778280044",
+          "priceRange": "₹₹",
+          "url": "https://www.yashodahospitals.com/malakpet/",
+          "hasMap": "https://maps.google.com/?q=Yashoda+Hospitals+Malakpet+Hyderabad",
+          "sameAs": "https://www.yashodahospitals.com/malakpet/",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Room No 317, OPD Block, Yashoda Hospital, Nalgonda X Roads, Malakpet",
+            "addressLocality": "Hyderabad",
+            "addressRegion": "Telangana",
+            "postalCode": "500036",
+            "addressCountry": "IN"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 17.375,
+            "longitude": 78.5147
+          },
+          "parentOrganization": {
+            "@id": "https://www.drsayuj.info/#hospital"
+          },
+          "department": {
+            "@id": "https://www.drsayuj.info/appointments#physician"
+          }
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://www.drsayuj.info/appointments#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How quickly will I receive confirmation?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most appointment requests are confirmed within 30–60 minutes during clinic hours. We will contact you by phone or WhatsApp."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What documents should I bring?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Please bring any MRI/CT scans, previous reports, and a list of current medications."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I reschedule after submitting?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. If you need to change the date or time, reply to the confirmation message or call the clinic."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you offer teleconsultations?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Teleconsultations are available for follow-ups and initial triage. Choose the teleconsult option during scheduling."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where is the clinic located?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Dr. Sayuj Krishnan practices at Yashoda Hospitals, Malakpet, Hyderabad. The address is listed on the confirmation screen."
+          }
+        }
+      ]
+    }
   ]
 }

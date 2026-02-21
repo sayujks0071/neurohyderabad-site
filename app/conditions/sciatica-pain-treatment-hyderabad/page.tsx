@@ -17,14 +17,18 @@ import { patientStories } from '@/src/content/stories';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
 import dynamic from 'next/dynamic';
 import PatientEducationVideosSkeleton from '@/app/_components/skeletons/PatientEducationVideosSkeleton';
+import SciaticaSelfTest from '@/app/_components/SciaticaSelfTest';
+import MapCard from '@/app/_components/MapCard';
+import Image from 'next/image';
+import { Target, Syringe, Zap } from 'lucide-react';
 
 const PatientEducationVideos = dynamic(() => import('@/app/_components/PatientEducationVideos'), {
   loading: () => <PatientEducationVideosSkeleton />
 });
 
 const baseMetadata = makeMetadata({
-  title: "Sciatica Treatment Hyderabad: Non-Surgical Cure & Dr Sayuj",
-  description: "Sciatica Treatment Hyderabad: 90% non-surgical recovery with nerve blocks. Endoscopic cure for severe cases by Dr. Sayuj. Book Consult.",
+  title: "Sciatica Treatment Hyderabad: Non-Surgical Relief & Dr Sayuj",
+  description: "Sciatica Treatment Hyderabad: 90% non-surgical recovery with nerve blocks. Endoscopic solution for severe cases by Dr. Sayuj. Book Consult.",
   canonicalPath: '/conditions/sciatica-pain-treatment-hyderabad',
 });
 
@@ -251,6 +255,93 @@ export default function SciaticaTreatmentPage() {
         </div>
       </div>
 
+      <SciaticaSelfTest />
+
+      {/* Meet the Specialist Section */}
+      <section className="mb-12 bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+        <div className="flex flex-col md:flex-row">
+          <div className="md:w-1/3 relative min-h-[300px] md:min-h-full">
+            <Image
+              src="/images/dr-sayuj-krishnan-portrait-v2.jpg"
+              alt="Dr. Sayuj Krishnan - Sciatica Specialist Hyderabad"
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div className="md:w-2/3 p-8 bg-gradient-to-br from-blue-900 to-slate-900 text-white">
+            <div className="uppercase tracking-wide text-sm text-blue-300 font-semibold mb-2">Sciatica Specialist</div>
+            <h2 className="text-3xl font-bold mb-4">Dr. Sayuj Krishnan</h2>
+            <p className="text-blue-100 mb-6 text-lg leading-relaxed">
+              Dr. Sayuj is a <strong>Fellowship-trained Neurosurgeon</strong> with specialized expertise in
+              <strong> Endoscopic Spine Surgery (Keyhole)</strong>. He trained in Germany to master techniques
+              that treat sciatica at its source—the nerve root—without destabilizing the spine.
+            </p>
+
+            <div className="grid grid-cols-2 gap-6 mb-8">
+              <div>
+                <div className="text-3xl font-bold text-white mb-1">500+</div>
+                <div className="text-sm text-blue-200">Endoscopic Procedures</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-white mb-1">9 Yrs</div>
+                <div className="text-sm text-blue-200">Spine Experience</div>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap gap-4">
+              <Link
+                href="/appointments"
+                className="bg-white text-blue-900 font-bold py-3 px-6 rounded-lg hover:bg-blue-50 transition-colors"
+              >
+                Book Appointment
+              </Link>
+              <Link
+                href="/about"
+                className="border border-blue-400 text-blue-100 font-medium py-3 px-6 rounded-lg hover:bg-blue-800/50 transition-colors"
+              >
+                View Full Profile
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How Nerve Blocks Work Section */}
+      <section className="mb-12">
+        <h2 className="text-2xl font-bold text-blue-900 mb-8 text-center">How a Nerve Block Works (Non-Surgical Relief)</h2>
+        <div className="grid md:grid-cols-3 gap-8">
+          <div className="text-center group">
+            <div className="w-20 h-20 mx-auto bg-blue-100 rounded-full flex items-center justify-center mb-4 group-hover:bg-blue-200 transition-colors">
+              <Target className="w-10 h-10 text-blue-600" />
+            </div>
+            <h3 className="font-bold text-lg mb-2">1. Locate</h3>
+            <p className="text-gray-600 text-sm">
+              Using live X-ray guidance (C-Arm), Dr. Sayuj pinpoints the exact millimeter where the disc is touching the nerve.
+            </p>
+          </div>
+
+          <div className="text-center group">
+            <div className="w-20 h-20 mx-auto bg-blue-100 rounded-full flex items-center justify-center mb-4 group-hover:bg-blue-200 transition-colors">
+              <Syringe className="w-10 h-10 text-blue-600" />
+            </div>
+            <h3 className="font-bold text-lg mb-2">2. Inject</h3>
+            <p className="text-gray-600 text-sm">
+              A potent anti-inflammatory medication is injected directly onto the inflamed nerve root. No cuts, no stitches.
+            </p>
+          </div>
+
+          <div className="text-center group">
+            <div className="w-20 h-20 mx-auto bg-green-100 rounded-full flex items-center justify-center mb-4 group-hover:bg-green-200 transition-colors">
+              <Zap className="w-10 h-10 text-green-600" />
+            </div>
+            <h3 className="font-bold text-lg mb-2">3. Relief</h3>
+            <p className="text-gray-600 text-sm">
+              Swelling subsides instantly. Most patients feel 50-80% pain relief within minutes and walk home the same hour.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Trust Signals Section */}
       <div className="mb-12">
         <TrustProof
@@ -361,7 +452,7 @@ export default function SciaticaTreatmentPage() {
           <div className="bg-white p-6 rounded-lg shadow-md border-t-4 border-blue-500">
             <h3 className="text-lg font-bold mb-3 text-gray-900">Step 3: Surgical Solution</h3>
             <p className="text-gray-700 mb-3">
-              <Link href="/services/endoscopic-discectomy-hyderabad" className="text-blue-600 hover:underline font-semibold">Endoscopic Discectomy</Link> is the gold standard when conservative care fails. It's a keyhole procedure with same-day walking.
+              <Link href="/services/endoscopic-discectomy-hyderabad" className="text-blue-600 hover:underline font-semibold">Endoscopic Discectomy</Link> is the gold standard. For instability, <Link href="/services/spinal-fusion-surgery-hyderabad" className="text-blue-600 hover:underline">spinal fusion</Link> may be needed.
             </p>
             <p className="text-sm font-semibold text-blue-700">Reserved for: ~10% of cases</p>
           </div>
@@ -571,6 +662,14 @@ export default function SciaticaTreatmentPage() {
     </div>
   </section>
 
+  <section className="mb-12">
+    <h2 className="text-2xl font-bold text-blue-900 mb-6">Visit Our Sciatica Clinic</h2>
+    <MapCard
+      area="Hyderabad"
+      mapUrl="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3807.669641427599!2d78.51261531487614!3d17.37976998808307!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb99dac93a348d%3A0xc9039baf28225326!2sYashoda%20Hospitals%20-%20Malakpet!5e0!3m2!1sen!2sin!4v1628587456789!5m2!1sen!2sin"
+    />
+  </section>
+
   <LocalPathways mode="condition" />
 
   <section className="mb-12 space-y-6">
@@ -581,7 +680,7 @@ export default function SciaticaTreatmentPage() {
   {/* Schema Markup */}
   <MedicalWebPageSchema
         title="Sciatica Treatment Hyderabad | 90% Non-Surgical | Dr Sayuj"
-        description="Best Sciatica treatment in Hyderabad. 90% patients recover without surgery using nerve blocks & meds. Endoscopic cure available. Book Dr Sayuj."
+        description="Best Sciatica treatment in Hyderabad. 90% patients recover without surgery using nerve blocks & meds. Endoscopic solution available. Book Dr Sayuj."
         pageSlug="/conditions/sciatica-pain-treatment-hyderabad/"
         pageType="condition"
         serviceOrCondition="Sciatica"

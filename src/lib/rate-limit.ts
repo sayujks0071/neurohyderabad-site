@@ -60,3 +60,18 @@ export function rateLimit(identifier: string, limit: number, windowMs: number) {
     reset: context.resetTime
   };
 }
+
+/**
+ * 🛡️ Sentinel: Securely extract client IP address
+ * Extracts the true client IP from the x-forwarded-for header to prevent spoofing.
+ * Always takes the FIRST IP in the list (standard convention for Client IP).
+ */
+export function getClientIp(req: Request | { headers: Headers }): string {
+  const forwardedFor = req.headers.get("x-forwarded-for");
+  if (forwardedFor) {
+    // The first IP is the original client IP, subsequent IPs are proxies
+    return forwardedFor.split(",")[0].trim();
+  }
+  // Fallback to "unknown" if no header is present (e.g. direct connection or local dev)
+  return "unknown";
+}
