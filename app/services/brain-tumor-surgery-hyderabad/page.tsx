@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import Breadcrumbs from '@/app/components/Breadcrumbs';
 import JsonLd from '@/components/JsonLd';
@@ -19,21 +18,13 @@ import CostTransparencySection from '@/src/components/CostTransparencySection';
 import PatientJourneySection from '@/src/components/PatientJourneySection';
 import MedicalWebPageSchema from '../../components/schemas/MedicalWebPageSchema';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
-import PatientEducationVideosSkeleton from '@/app/_components/skeletons/PatientEducationVideosSkeleton';
-import BrainSurgeryComparisonTable from '@/src/components/BrainSurgeryComparisonTable';
-import ProcedureHighlights from '@/src/components/ProcedureHighlights';
-import BrainTumorProcedures from '@/src/components/BrainTumorProcedures';
-
-const PatientEducationVideos = dynamic(() => import('@/app/_components/PatientEducationVideos'), {
-  loading: () => <PatientEducationVideosSkeleton />
-});
 
 const SERVICE_SLUG = 'brain-tumor-surgery-hyderabad';
 
 const baseMetadata = makeMetadata({
-  title: 'Brain Tumor Surgery Hyderabad: Cost, Safety & Dr. Sayuj',
+  title: 'Brain Tumor Surgery Hyderabad | Top Neurosurgeon | Dr Sayuj',
   description:
-    'Looking for Brain Tumor Surgery in Hyderabad? Dr. Sayuj uses Awake Craniotomy & Neuronavigation for 100% safe tumor removal. Check Cost & Recovery.',
+    'Expert Brain Tumor Surgery in Hyderabad. Advanced Awake Craniotomy & Neuronavigation for safe removal. Dr Sayuj Krishnan - Best Neurosurgeon. Consult now.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
 });
 
@@ -87,8 +78,6 @@ const treatmentHighlights = [
     title: 'Awake Craniotomy & Functional Mapping',
     description:
       'Speech and motor mapping techniques protect critical pathways during tumor removal in eloquent cortex.',
-    link: '/blog/awake-craniotomy-brain-tumor-guide',
-    linkText: 'Read Awake Surgery Guide',
   },
   {
     title: 'Multidisciplinary Tumor Board',
@@ -134,16 +123,8 @@ const faqs = [
     answer: 'Most patients spend 1-2 days in the ICU for monitoring and move to the ward for another 3-4 days. You can usually return to light daily activities within 2-3 weeks, though full recovery depends on the specific tumor type and location.'
   },
   {
-    question: 'Can I get a second opinion for my brain tumor diagnosis?',
-    answer: 'Yes. We frequently provide second opinions for complex cases like skull base tumors and recurrent gliomas. Bring your MRI scans and reports for a comprehensive review to explore all surgical and non-surgical options.'
-  },
-  {
     question: 'What is the cost of brain tumor surgery in Hyderabad?',
     answer: 'The cost of brain tumor surgery varies significantly based on tumor complexity, ICU stay duration, and technology used (neuronavigation, monitoring). Biopsies may start from ₹1,00,000, while complex craniotomies can range higher. We provide transparent estimates after scan review.'
-  },
-  {
-    question: 'Do you perform Endoscopic Skull Base Surgery?',
-    answer: 'Yes, Dr. Sayuj specializes in Endoscopic Anterior Skull Base Surgery for pituitary adenomas and anterior skull base tumors, offering a scarless trans-nasal approach.'
   }
 ];
 
@@ -235,7 +216,6 @@ export default function BrainTumorSurgeryHyderabadPage() {
             { name: 'Services', href: '/services/' },
             { name: 'Brain Tumor Surgery in Hyderabad', href: `/services/${SERVICE_SLUG}/` },
           ]}
-          disableSchema={true}
         />
 
         <header className="grid md:grid-cols-2 gap-10 items-start mb-16">
@@ -280,24 +260,6 @@ export default function BrainTumorSurgeryHyderabadPage() {
             </ul>
           </div>
         </header>
-
-        <ProcedureHighlights
-          duration="3-6 Hours"
-          anesthesia="General / Awake"
-          stay="3-5 Days"
-          recovery="2-3 Weeks"
-          incision="Minimally Invasive"
-          className="mb-16"
-        />
-
-        {/* Advanced Surgical Procedures - Hub & Spoke Pattern */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold text-blue-900 mb-6">Advanced Surgical Procedures</h2>
-          <p className="text-gray-700 mb-8 max-w-3xl">
-            We utilize the latest neurosurgical technology to ensure precision and safety. Dr. Sayuj specializes in these advanced techniques to minimize recovery time and protect brain function.
-          </p>
-          <BrainTumorProcedures />
-        </section>
 
         {/* Red Flag Symptoms Section - Added for SEO & User Intent */}
         <section className="mb-16 bg-red-50 border border-red-100 rounded-2xl p-8">
@@ -345,52 +307,22 @@ export default function BrainTumorSurgeryHyderabadPage() {
           </p>
           <ul className="grid md:grid-cols-2 gap-4 text-sm text-gray-700">
             <li className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
-              <strong className="text-blue-800">
-                <Link href="/blog/glioblastoma-multiforme-treatment-survival-guide-hyderabad" className="hover:underline hover:text-blue-600">
-                  Gliomas &amp; Glioblastoma:
-                </Link>
-              </strong>{' '}
-              Customized planning with adjuvant oncology coordination.
+              <strong className="text-blue-800">Gliomas &amp; Glioblastoma:</strong> Customized planning with adjuvant oncology
+              coordination.
             </li>
             <li className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
-              <strong className="text-blue-800">
-                <Link href="/blog/meningioma-brain-tumor-treatment-hyderabad" className="hover:underline hover:text-blue-600">
-                  Meningiomas &amp; Skull Base Tumors:
-                </Link>
-              </strong>{' '}
-              Precision microsurgery preserving cranial nerve function (often relevant for <Link href="/conditions/trigeminal-neuralgia-treatment-hyderabad" className="text-blue-700 hover:underline">trigeminal neuralgia</Link>).
+              <strong className="text-blue-800">Meningiomas &amp; Skull Base Tumors:</strong> Precision microsurgery preserving
+              cranial nerve function (often relevant for <Link href="/conditions/trigeminal-neuralgia-treatment-hyderabad" className="text-blue-700 hover:underline">trigeminal neuralgia</Link>).
             </li>
             <li className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
               <strong className="text-blue-800">Pituitary &amp; Sellar Lesions:</strong> Endoscopic and minimally invasive
               approaches when appropriate.
             </li>
             <li className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
-              <strong className="text-blue-800">
-                <Link href="/blog/brain-metastases-treatment-survival-guide-hyderabad" className="hover:underline hover:text-blue-600">
-                  Metastatic &amp; Pediatric Tumors:
-                </Link>
-              </strong>{' '}
-              Integrated care with oncology and rehabilitation services.
+              <strong className="text-blue-800">Metastatic &amp; Pediatric Tumors:</strong> Integrated care with oncology and
+              rehabilitation services.
             </li>
           </ul>
-
-          <div className="mt-8 bg-blue-50 border border-blue-100 rounded-xl p-6">
-            <h3 className="text-lg font-semibold text-blue-800 mb-4">Comprehensive Condition Guides</h3>
-            <div className="grid md:grid-cols-3 gap-4">
-              <Link href="/blog/meningioma-brain-tumor-treatment-hyderabad/" className="block p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border border-blue-100 group">
-                <span className="text-blue-700 font-medium group-hover:text-blue-900 block mb-1">Meningioma Treatment Guide →</span>
-                <span className="text-xs text-gray-600">Diagnosis, surgery risks, and recovery timeline.</span>
-              </Link>
-              <Link href="/blog/glioblastoma-multiforme-treatment-survival-guide-hyderabad/" className="block p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border border-blue-100 group">
-                <span className="text-blue-700 font-medium group-hover:text-blue-900 block mb-1">Glioblastoma Survival Guide →</span>
-                <span className="text-xs text-gray-600">Latest treatments and survival statistics.</span>
-              </Link>
-              <Link href="/blog/awake-craniotomy-brain-tumor-guide/" className="block p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border border-blue-100 group">
-                <span className="text-blue-700 font-medium group-hover:text-blue-900 block mb-1">Awake Craniotomy Explained →</span>
-                <span className="text-xs text-gray-600">How we protect speech during surgery.</span>
-              </Link>
-            </div>
-          </div>
         </section>
 
         <section className="mb-16">
@@ -407,28 +339,13 @@ export default function BrainTumorSurgeryHyderabadPage() {
           <h2 className="text-3xl font-bold text-blue-900 mb-8 text-center">Advanced Surgical Techniques</h2>
           <div className="grid md:grid-cols-3 gap-6">
             {treatmentHighlights.map((tech, idx) => (
-              <div key={idx} className="bg-white p-6 rounded-xl shadow-sm border border-blue-50 flex flex-col">
+              <div key={idx} className="bg-white p-6 rounded-xl shadow-sm border border-blue-50">
                 <h3 className="font-semibold text-blue-800 mb-3">{tech.title}</h3>
-                <p className="text-sm text-gray-700 flex-grow">{tech.description}</p>
-                {tech.link && (
-                  <Link href={tech.link} className="mt-4 text-sm font-semibold text-blue-600 hover:text-blue-800 hover:underline inline-flex items-center">
-                    {tech.linkText || 'Learn more'} <span className="ml-1">→</span>
-                  </Link>
-                )}
+                <p className="text-sm text-gray-700">{tech.description}</p>
               </div>
             ))}
           </div>
         </section>
-
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold text-blue-900 mb-6">Traditional vs. Advanced Techniques</h2>
-          <p className="text-gray-700 mb-6">
-            Understanding the difference between standard surgery and modern neuronavigation-guided techniques helps in making informed decisions.
-          </p>
-          <BrainSurgeryComparisonTable />
-        </section>
-
-        <PatientEducationVideos category="Brain tumor" />
 
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-blue-900 mb-6">Comprehensive Patient Support</h2>

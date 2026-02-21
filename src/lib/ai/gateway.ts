@@ -13,16 +13,11 @@
  * 2. Option B: OIDC Token - Run `vercel link` and `vercel env pull` (auto-refreshes)
  * 
  * Model format: Use provider/model (e.g., 'openai/gpt-4o-mini')
- * Supported Providers: openai, anthropic, google, huggingface, etc.
- *
- * Note: When using Gateway, always use `getTextModel()` or `getGatewayModel()` helpers
- * to ensure correct model string formatting (e.g. 'openai/gpt-4o-mini' vs 'gpt-4o-mini').
  */
 
 import { createOpenAI } from '@ai-sdk/openai';
 
 const DEFAULT_TEXT_MODEL = process.env.AI_TEXT_MODEL || 'gpt-4o-mini';
-const DEFAULT_VOICE_MODEL = 'gpt-4o-realtime-preview';
 const DEFAULT_PROVIDER = process.env.AI_GATEWAY_PROVIDER || 'openai';
 
 /**
@@ -33,13 +28,6 @@ const DEFAULT_PROVIDER = process.env.AI_GATEWAY_PROVIDER || 'openai';
  */
 const VERCEL_AI_GATEWAY_BASE_URL = process.env.AI_GATEWAY_BASE_URL || 
   'https://ai-gateway.vercel.sh/v1';
-
-/**
- * Get the configured Vercel AI Gateway Base URL
- */
-export function getGatewayBaseUrl(): string {
-  return VERCEL_AI_GATEWAY_BASE_URL;
-}
 
 /**
  * Check if Vercel AI Gateway is configured
@@ -79,8 +67,7 @@ export function hasAIConfig(): boolean {
  * Get the appropriate model identifier for Vercel AI Gateway
  * 
  * Vercel AI Gateway requires provider/model format (e.g., 'openai/gpt-4o-mini')
- * If already in correct format, returns as-is.
- * If not, prepends the default provider (usually 'openai').
+ * If already in correct format, returns as-is
  */
 export function getGatewayModel(modelName: string = DEFAULT_TEXT_MODEL): string {
   // If already in provider/model format, return as-is
@@ -111,7 +98,7 @@ export function createAIGatewayClient() {
   // Create OpenAI client configured for Vercel AI Gateway
   return createOpenAI({
     apiKey: apiKey || undefined, // OIDC token is used automatically on Vercel if no API key
-    baseURL: getGatewayBaseUrl(),
+    baseURL: VERCEL_AI_GATEWAY_BASE_URL,
   });
 }
 
@@ -165,131 +152,4 @@ export function getTextModelName(modelName: string = DEFAULT_TEXT_MODEL): string
 export function getTextModel(modelName: string = DEFAULT_TEXT_MODEL) {
   const aiClient = getAIClient();
   return aiClient(getTextModelName(modelName));
-}
-
-/**
- * Get the configured voice model name.
- *
- * Similar to getTextModelName but defaults to 'gpt-4o-realtime-preview'.
- */
-export function getVoiceModel(modelName: string = DEFAULT_VOICE_MODEL): string {
-  return isAIGatewayConfigured() ? getGatewayModel(modelName) : modelName;
-}
-
-export interface VoiceSessionConfig {
-  model?: string;
-  voice?: string;
-  instructions: string;
-}
-
-export interface VoiceSessionResponse {
-  sessionId: string;
-  sessionUrl: string;
-  expiresAt?: string;
-}
-
-/**
- * Create a Realtime Voice Session via Vercel AI Gateway (or direct OpenAI).
- */
-export async function createRealtimeSession(config: VoiceSessionConfig): Promise<VoiceSessionResponse> {
-  const {
-    model = DEFAULT_VOICE_MODEL,
-    voice = 'alloy',
-    instructions
-  } = config;
-
-  const apiKey = process.env.AI_GATEWAY_API_KEY || process.env.OPENAI_API_KEY;
-
-  if (!apiKey) {
-    throw new Error('OpenAI/Gateway API key not configured');
-  }
-
-  const isGateway = isAIGatewayConfigured();
-  const baseUrl = isGateway ? getGatewayBaseUrl() : 'https://api.openai.com/v1';
-
-  // If using Gateway, we might need provider prefix. If direct, we use bare model name.
-  // Note: For Realtime API, we need to be careful with model names.
-  const finalModel = isGateway ? getGatewayModel(model) : model;
-
-  const sessionConfig = {
-    model: finalModel,
-    voice,
-    instructions,
-    modalities: ['text', 'audio'],
-    input_audio_format: 'pcm16',
-    output_audio_format: 'pcm16',
-    turn_detection: {
-      type: 'server_vad',
-      threshold: 0.5,
-      prefix_padding_ms: 300,
-      silence_duration_ms: 500,
-    },
-  };
-
-  try {
-    const response = await fetch(`${baseUrl}/realtime/sessions`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(sessionConfig),
-    });
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      let error;
-      try {
-        error = JSON.parse(errorText);
-      } catch {
-        error = { message: errorText };
-      }
-
-      console.error('OpenAI/Gateway API error:', error);
-
-      // Fallback Strategy
-      if (isGateway) {
-        const directApiKey = process.env.OPENAI_API_KEY;
-        if (directApiKey) {
-          console.warn('Falling back to direct OpenAI API for Realtime Session...');
-
-          const fallbackResponse = await fetch('https://api.openai.com/v1/realtime/sessions', {
-            method: 'POST',
-            headers: {
-              'Authorization': `Bearer ${directApiKey}`,
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              ...sessionConfig,
-              model: model, // Use bare model name
-            }),
-          });
-
-          if (fallbackResponse.ok) {
-            const session = await fallbackResponse.json();
-            return {
-              sessionId: session.id,
-              sessionUrl: session.client_secret?.url || session.url,
-              expiresAt: session.expires_at,
-            };
-          } else {
-            const fallbackError = await fallbackResponse.json();
-            console.error('Fallback Direct OpenAI API error:', fallbackError);
-            throw new Error(`Fallback failed: ${JSON.stringify(fallbackError)}`);
-          }
-        }
-      }
-
-      throw new Error(`Failed to create voice session: ${JSON.stringify(error)}`);
-    }
-
-    const session = await response.json();
-    return {
-      sessionId: session.id,
-      sessionUrl: session.client_secret?.url || session.url,
-      expiresAt: session.expires_at,
-    };
-  } catch (error) {
-    throw error;
-  }
 }

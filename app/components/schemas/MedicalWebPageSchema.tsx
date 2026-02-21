@@ -1,5 +1,4 @@
 import { SITE_URL } from '../../../src/lib/seo';
-import { CANONICAL_PHYSICIAN_NAME, getLocationById, LocationId } from '../../../src/data/locations';
 
 interface MedicalWebPageSchemaProps {
   pageType: 'service' | 'condition' | 'blog' | 'location' | 'about' | 'contact';
@@ -12,10 +11,6 @@ interface MedicalWebPageSchemaProps {
   breadcrumbs?: Array<{ name: string; path: string }>;
   medicalSpecialty?: string | string[];
   audience?: string;
-  locationId?: LocationId;
-  symptoms?: string[];
-  treatments?: string[];
-  riskFactors?: string[];
 }
 
 export default function MedicalWebPageSchema({
@@ -24,20 +19,12 @@ export default function MedicalWebPageSchema({
   title,
   description,
   lastReviewed = new Date().toISOString().split('T')[0],
-  author = CANONICAL_PHYSICIAN_NAME,
+  author = 'Dr. Sayuj Krishnan',
   serviceOrCondition,
   breadcrumbs = [],
   medicalSpecialty,
-  audience,
-  locationId = 'malakpet',
-  symptoms,
-  treatments,
-  riskFactors
+  audience
 }: MedicalWebPageSchemaProps) {
-  const location = getLocationById(locationId) || getLocationById('malakpet');
-
-  if (!location) return null;
-
   const baseSchema: any = {
     "@context": "https://schema.org",
     "@type": "MedicalWebPage",
@@ -55,12 +42,12 @@ export default function MedicalWebPageSchema({
     "about": {
       "@type": "Physician",
       "@id": `${SITE_URL}/#physician`,
-      "name": CANONICAL_PHYSICIAN_NAME
+      "name": "Dr. Sayuj Krishnan"
     },
     "reviewedBy": {
       "@type": "Physician",
       "@id": `${SITE_URL}/#physician`,
-      "name": CANONICAL_PHYSICIAN_NAME,
+      "name": "Dr. Sayuj Krishnan",
       "hasCredential": {
         "@type": "EducationalOccupationalCredential",
         "credentialCategory": "degree",
@@ -86,19 +73,18 @@ export default function MedicalWebPageSchema({
       },
       "worksFor": {
         "@type": "Hospital",
-        "@id": `${SITE_URL}/#hospital`,
-        "name": "Yashoda Hospital, Malakpet",
+        "name": "Yashoda Hospital",
         "address": {
           "@type": "PostalAddress",
-          "addressLocality": location.address.addressLocality,
-          "addressRegion": location.address.addressRegion,
-          "addressCountry": location.address.addressCountry
+          "addressLocality": "Malakpet",
+          "addressRegion": "Hyderabad",
+          "addressCountry": "IN"
         }
       }
     },
     "publisher": {
       "@type": "Organization",
-      "name": CANONICAL_PHYSICIAN_NAME,
+      "name": "Dr. Sayuj Krishnan",
       "url": SITE_URL
     }
   };
@@ -125,12 +111,12 @@ export default function MedicalWebPageSchema({
       "provider": {
         "@type": "Physician",
         "@id": `${SITE_URL}/#physician`,
-        "name": CANONICAL_PHYSICIAN_NAME
+        "name": "Dr. Sayuj Krishnan"
       },
       "availableAtOrFrom": {
         "@type": "Hospital",
         "@id": `${SITE_URL}/#hospital`,
-        "name": "Yashoda Hospital, Malakpet"
+        "name": "Yashoda Hospital"
       },
       "areaServed": {
         "@type": "City",
@@ -145,80 +131,26 @@ export default function MedicalWebPageSchema({
 
   // Add condition-specific schema
   if (pageType === 'condition' && serviceOrCondition) {
-    const treatmentsSchema = treatments && treatments.length > 0
-      ? treatments.map(t => ({
-          "@type": "MedicalTherapy",
-          "name": t,
-          "provider": {
-            "@type": "Physician",
-            "@id": `${SITE_URL}/#physician`,
-            "name": CANONICAL_PHYSICIAN_NAME
-          }
-        }))
-      : {
-          "@type": "MedicalTherapy",
-          "name": "Neurosurgical Treatment",
-          "provider": {
-            "@type": "Physician",
-            "@id": `${SITE_URL}/#physician`,
-            "name": CANONICAL_PHYSICIAN_NAME
-          }
-        };
-
-    const conditionSchema: any = {
+    baseSchema.mainEntity = {
       "@type": "MedicalCondition",
       "name": serviceOrCondition,
       "description": description,
-      "possibleTreatment": treatmentsSchema
-    };
-
-    if (symptoms && symptoms.length > 0) {
-      conditionSchema.signOrSymptom = symptoms.map(s => ({
-        "@type": "MedicalSymptom",
-        "name": s
-      }));
-    }
-
-    if (riskFactors && riskFactors.length > 0) {
-      conditionSchema.riskFactor = riskFactors.map(r => ({
-        "@type": "MedicalRiskFactor",
-        "name": r
-      }));
-    }
-
-    baseSchema.mainEntity = conditionSchema;
-  }
-
-  // Generate BreadcrumbSchema if items are provided
-  // This replaces the global BreadcrumbSchema for service/condition pages
-  let breadcrumbSchema = null;
-  if (breadcrumbs && breadcrumbs.length > 0) {
-    const itemListElement = breadcrumbs.map((item, index) => ({
-      "@type": "ListItem",
-      "position": index + 1,
-      "name": item.name,
-      "item": item.path.startsWith('http') ? item.path : `${SITE_URL}${item.path}`
-    }));
-
-    breadcrumbSchema = {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": itemListElement
+      "possibleTreatment": {
+        "@type": "MedicalTherapy",
+        "name": "Neurosurgical Treatment",
+        "provider": {
+          "@type": "Physician",
+          "@id": `${SITE_URL}/#physician`,
+          "name": "Dr. Sayuj Krishnan"
+        }
+      }
     };
   }
 
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(baseSchema) }}
-      />
-      {breadcrumbSchema && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-        />
-      )}
-    </>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(baseSchema) }}
+    />
   );
 }

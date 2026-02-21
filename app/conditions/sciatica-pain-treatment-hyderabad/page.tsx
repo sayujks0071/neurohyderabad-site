@@ -17,18 +17,14 @@ import { patientStories } from '@/src/content/stories';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
 import dynamic from 'next/dynamic';
 import PatientEducationVideosSkeleton from '@/app/_components/skeletons/PatientEducationVideosSkeleton';
-import SciaticaSelfTest from '@/app/_components/SciaticaSelfTest';
-import MapCard from '@/app/_components/MapCard';
-import Image from 'next/image';
-import { Target, Syringe, Zap } from 'lucide-react';
 
 const PatientEducationVideos = dynamic(() => import('@/app/_components/PatientEducationVideos'), {
   loading: () => <PatientEducationVideosSkeleton />
 });
 
 const baseMetadata = makeMetadata({
-  title: "Sciatica Treatment Hyderabad: Non-Surgical Relief & Dr Sayuj",
-  description: "Sciatica Treatment Hyderabad: 90% non-surgical recovery with nerve blocks. Endoscopic solution for severe cases by Dr. Sayuj. Book Consult.",
+  title: "Sciatica Treatment Hyderabad | 90% Non-Surgical | Dr Sayuj",
+  description: "Best Sciatica treatment in Hyderabad. 90% patients recover without surgery using nerve blocks & meds. Endoscopic cure available. Book Dr Sayuj.",
   canonicalPath: '/conditions/sciatica-pain-treatment-hyderabad',
 });
 
@@ -155,49 +151,49 @@ export default function SciaticaTreatmentPage() {
         <h2 className="text-2xl font-bold text-blue-900 mb-6">Avoiding Surgery for Sciatica</h2>
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div>
-             <p className="text-gray-700 mb-4 text-lg">
-               Many patients are told they need surgery too soon. At our Hyderabad clinic, we believe in exhausting all non-invasive options first.
-             </p>
-             <ul className="space-y-4">
-                <li className="flex items-start">
-                   <div className="flex-shrink-0 h-8 w-8 rounded-full bg-green-100 flex items-center justify-center text-green-600 font-bold mr-3">1</div>
-                   <div>
-                      <h3 className="font-bold text-gray-900">Precision Diagnosis</h3>
-                      <p className="text-sm text-gray-600">We don't just treat "pain". We identify the exact nerve root (L4, L5, or S1) causing your symptoms using MRI and clinical correlation.</p>
-                   </div>
-                </li>
-                <li className="flex items-start">
-                   <div className="flex-shrink-0 h-8 w-8 rounded-full bg-green-100 flex items-center justify-center text-green-600 font-bold mr-3">2</div>
-                   <div>
-                      <h3 className="font-bold text-gray-900">Targeted Nerve Blocks</h3>
-                      <p className="text-sm text-gray-600">A powerful anti-inflammatory injection placed precisely around the irritated nerve. This often provides immediate relief and prevents the need for surgery.</p>
-                   </div>
-                </li>
-                <li className="flex items-start">
-                   <div className="flex-shrink-0 h-8 w-8 rounded-full bg-green-100 flex items-center justify-center text-green-600 font-bold mr-3">3</div>
-                   <div>
-                      <h3 className="font-bold text-gray-900">Spine-Specialized Rehab</h3>
-                      <p className="text-sm text-gray-600">Once the pain is managed, we strengthen your core to prevent recurrence.</p>
-                   </div>
-                </li>
-             </ul>
-             <div className="mt-8">
-                <Link
-                  href="/appointments"
-                  className="inline-block bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors"
-                >
-                  Get a Non-Surgical Opinion
-                </Link>
-             </div>
+            <p className="text-gray-700 mb-4 text-lg">
+              Many patients are told they need surgery too soon. At our Hyderabad clinic, we believe in exhausting all non-invasive options first.
+            </p>
+            <ul className="space-y-4">
+              <li className="flex items-start">
+                <div className="flex-shrink-0 h-8 w-8 rounded-full bg-green-100 flex items-center justify-center text-green-600 font-bold mr-3">1</div>
+                <div>
+                  <h3 className="font-bold text-gray-900">Precision Diagnosis</h3>
+                  <p className="text-sm text-gray-600">We don't just treat "pain". We identify the exact nerve root (L4, L5, or S1) causing your symptoms using MRI and clinical correlation.</p>
+                </div>
+              </li>
+              <li className="flex items-start">
+                <div className="flex-shrink-0 h-8 w-8 rounded-full bg-green-100 flex items-center justify-center text-green-600 font-bold mr-3">2</div>
+                <div>
+                  <h3 className="font-bold text-gray-900">Targeted Nerve Blocks</h3>
+                  <p className="text-sm text-gray-600">A powerful anti-inflammatory injection placed precisely around the irritated nerve. This often provides immediate relief and prevents the need for surgery.</p>
+                </div>
+              </li>
+              <li className="flex items-start">
+                <div className="flex-shrink-0 h-8 w-8 rounded-full bg-green-100 flex items-center justify-center text-green-600 font-bold mr-3">3</div>
+                <div>
+                  <h3 className="font-bold text-gray-900">Spine-Specialized Rehab</h3>
+                  <p className="text-sm text-gray-600">Once the pain is managed, we strengthen your core to prevent recurrence.</p>
+                </div>
+              </li>
+            </ul>
+            <div className="mt-8">
+              <Link
+                href="/appointments"
+                className="inline-block bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors"
+              >
+                Get a Non-Surgical Opinion
+              </Link>
+            </div>
           </div>
           <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-md">
-             <div className="text-center mb-6">
-                <span className="block text-5xl font-bold text-green-600 mb-2">90%</span>
-                <span className="text-gray-600 font-medium">Success Rate Without Surgery</span>
-             </div>
-             <p className="text-sm text-gray-500 text-center italic border-t pt-4">
-                *Surgery is reserved for cases with severe weakness or loss of bladder/bowel control.
-             </p>
+            <div className="text-center mb-6">
+              <span className="block text-5xl font-bold text-green-600 mb-2">90%</span>
+              <span className="text-gray-600 font-medium">Success Rate Without Surgery</span>
+            </div>
+            <p className="text-sm text-gray-500 text-center italic border-t pt-4">
+              *Surgery is reserved for cases with severe weakness or loss of bladder/bowel control.
+            </p>
           </div>
         </div>
       </section>
@@ -255,93 +251,6 @@ export default function SciaticaTreatmentPage() {
         </div>
       </div>
 
-      <SciaticaSelfTest />
-
-      {/* Meet the Specialist Section */}
-      <section className="mb-12 bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
-        <div className="flex flex-col md:flex-row">
-          <div className="md:w-1/3 relative min-h-[300px] md:min-h-full">
-            <Image
-              src="/images/dr-sayuj-krishnan-portrait-v2.jpg"
-              alt="Dr. Sayuj Krishnan - Sciatica Specialist Hyderabad"
-              fill
-              className="object-cover"
-            />
-          </div>
-          <div className="md:w-2/3 p-8 bg-gradient-to-br from-blue-900 to-slate-900 text-white">
-            <div className="uppercase tracking-wide text-sm text-blue-300 font-semibold mb-2">Sciatica Specialist</div>
-            <h2 className="text-3xl font-bold mb-4">Dr. Sayuj Krishnan</h2>
-            <p className="text-blue-100 mb-6 text-lg leading-relaxed">
-              Dr. Sayuj is a <strong>Fellowship-trained Neurosurgeon</strong> with specialized expertise in
-              <strong> Endoscopic Spine Surgery (Keyhole)</strong>. He trained in Germany to master techniques
-              that treat sciatica at its source—the nerve root—without destabilizing the spine.
-            </p>
-
-            <div className="grid grid-cols-2 gap-6 mb-8">
-              <div>
-                <div className="text-3xl font-bold text-white mb-1">500+</div>
-                <div className="text-sm text-blue-200">Endoscopic Procedures</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-white mb-1">9 Yrs</div>
-                <div className="text-sm text-blue-200">Spine Experience</div>
-              </div>
-            </div>
-
-            <div className="flex flex-wrap gap-4">
-              <Link
-                href="/appointments"
-                className="bg-white text-blue-900 font-bold py-3 px-6 rounded-lg hover:bg-blue-50 transition-colors"
-              >
-                Book Appointment
-              </Link>
-              <Link
-                href="/about"
-                className="border border-blue-400 text-blue-100 font-medium py-3 px-6 rounded-lg hover:bg-blue-800/50 transition-colors"
-              >
-                View Full Profile
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* How Nerve Blocks Work Section */}
-      <section className="mb-12">
-        <h2 className="text-2xl font-bold text-blue-900 mb-8 text-center">How a Nerve Block Works (Non-Surgical Relief)</h2>
-        <div className="grid md:grid-cols-3 gap-8">
-          <div className="text-center group">
-            <div className="w-20 h-20 mx-auto bg-blue-100 rounded-full flex items-center justify-center mb-4 group-hover:bg-blue-200 transition-colors">
-              <Target className="w-10 h-10 text-blue-600" />
-            </div>
-            <h3 className="font-bold text-lg mb-2">1. Locate</h3>
-            <p className="text-gray-600 text-sm">
-              Using live X-ray guidance (C-Arm), Dr. Sayuj pinpoints the exact millimeter where the disc is touching the nerve.
-            </p>
-          </div>
-
-          <div className="text-center group">
-            <div className="w-20 h-20 mx-auto bg-blue-100 rounded-full flex items-center justify-center mb-4 group-hover:bg-blue-200 transition-colors">
-              <Syringe className="w-10 h-10 text-blue-600" />
-            </div>
-            <h3 className="font-bold text-lg mb-2">2. Inject</h3>
-            <p className="text-gray-600 text-sm">
-              A potent anti-inflammatory medication is injected directly onto the inflamed nerve root. No cuts, no stitches.
-            </p>
-          </div>
-
-          <div className="text-center group">
-            <div className="w-20 h-20 mx-auto bg-green-100 rounded-full flex items-center justify-center mb-4 group-hover:bg-green-200 transition-colors">
-              <Zap className="w-10 h-10 text-green-600" />
-            </div>
-            <h3 className="font-bold text-lg mb-2">3. Relief</h3>
-            <p className="text-gray-600 text-sm">
-              Swelling subsides instantly. Most patients feel 50-80% pain relief within minutes and walk home the same hour.
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* Trust Signals Section */}
       <div className="mb-12">
         <TrustProof
@@ -350,49 +259,6 @@ export default function SciaticaTreatmentPage() {
           className="bg-gradient-to-br from-white to-blue-50/50"
         />
       </div>
-
-      {/* Comparison Table Section (New) */}
-      <section className="mb-12">
-        <h2 className="text-2xl font-bold text-blue-900 mb-6">Injection vs. Surgery vs. Conservative Care</h2>
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm text-gray-700 border border-gray-200 rounded-lg shadow-sm">
-            <thead className="bg-blue-50 text-blue-900 font-semibold">
-              <tr>
-                <th className="px-4 py-3 border-b border-gray-200">Feature</th>
-                <th className="px-4 py-3 border-b border-gray-200">Conservative</th>
-                <th className="px-4 py-3 border-b border-gray-200">Nerve Block (Injection)</th>
-                <th className="px-4 py-3 border-b border-gray-200">Endoscopic Surgery</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td className="px-4 py-3 font-medium border-b border-gray-100">Pain Relief Speed</td>
-                <td className="px-4 py-3 border-b border-gray-100">Slow (Weeks)</td>
-                <td className="px-4 py-3 border-b border-gray-100 text-green-700 font-semibold">Immediate / Fast</td>
-                <td className="px-4 py-3 border-b border-gray-100 text-green-700 font-semibold">Immediate</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-medium border-b border-gray-100">Invasiveness</td>
-                <td className="px-4 py-3 border-b border-gray-100">None</td>
-                <td className="px-4 py-3 border-b border-gray-100">Minimal (Needle only)</td>
-                <td className="px-4 py-3 border-b border-gray-100">Low (7mm Incision)</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-medium border-b border-gray-100">Recovery Time</td>
-                <td className="px-4 py-3 border-b border-gray-100">Variable</td>
-                <td className="px-4 py-3 border-b border-gray-100">Same Day</td>
-                <td className="px-4 py-3 border-b border-gray-100">3-5 Days (Desk Work)</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-medium border-b border-gray-100">Best For</td>
-                <td className="px-4 py-3 border-b border-gray-100">Mild pain, First episode</td>
-                <td className="px-4 py-3 border-b border-gray-100">Severe inflammation</td>
-                <td className="px-4 py-3 border-b border-gray-100">Nerve compression, Weakness</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
 
       {/* Elderly Safety Section (Competitor Gap) */}
       <section className="mb-12 bg-white border border-blue-100 rounded-2xl p-8 shadow-sm">
@@ -418,43 +284,80 @@ export default function SciaticaTreatmentPage() {
             </ul>
           </div>
           <div className="bg-blue-50 p-6 rounded-xl">
-             <h3 className="font-bold text-blue-800 mb-2">Second Opinion Service</h3>
-             <p className="text-sm text-gray-600 mb-4">
-               Have you been advised open surgery? Get a second opinion to see if <Link href="/services/endoscopic-spine-surgery-hyderabad" className="text-blue-700 font-semibold hover:underline">Endoscopic Spine Surgery</Link> is a safer option for you or your elderly parent.
-             </p>
-             <Link
-               href="/appointments"
-               className="block w-full text-center bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
-             >
-               Get a Second Opinion
-             </Link>
+            <h3 className="font-bold text-blue-800 mb-2">Second Opinion Service</h3>
+            <p className="text-sm text-gray-600 mb-4">
+              Have you been advised open surgery? Get a second opinion to see if <Link href="/services/endoscopic-spine-surgery-hyderabad" className="text-blue-700 font-semibold hover:underline">Endoscopic Spine Surgery</Link> is a safer option for you or your elderly parent.
+            </p>
+            <Link
+              href="/appointments"
+              className="block w-full text-center bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+            >
+              Get a Second Opinion
+            </Link>
           </div>
         </div>
       </section>
 
       <section className="mb-12">
-        <h2 className="text-2xl font-semibold mb-6 text-blue-700">Our Treatment Ladder</h2>
-        <div className="grid md:grid-cols-3 gap-6">
-          <div className="bg-white p-6 rounded-lg shadow-md border-t-4 border-green-500">
-            <h3 className="text-lg font-bold mb-3 text-gray-900">Step 1: Conservative Care</h3>
-            <p className="text-gray-700 mb-3">
-              Most patients start here. We use specific anti-inflammatory medications (not just painkillers) and muscle relaxants.
-            </p>
-            <p className="text-sm font-semibold text-green-700">Success Rate: ~70%</p>
+        <h2 className="text-3xl font-bold text-blue-900 mb-6 border-b-2 border-blue-100 pb-2">Your Symptom-to-Surgery Pathway</h2>
+        <p className="text-gray-700 mb-8 max-w-3xl text-lg">
+          Navigating severe sciatica can be confusing. We follow an evidence-based, step-wise pathway. Surgery is never the first option, but we recognize its profound value when conservative measures are exhausted.
+        </p>
+
+        <div className="space-y-6">
+          {/* Phase 1 */}
+          <div className="bg-white p-6 rounded-xl shadow-sm border-l-4 border-green-500 relative">
+            <div className="absolute -left-3 top-6 w-6 h-6 rounded-full bg-green-500 flex items-center justify-center border-4 border-white shadow"></div>
+            <h3 className="text-xl font-bold text-gray-900 mb-2 pl-4">Phase 1: Diagnosis & Optimization (Weeks 1-3)</h3>
+            <div className="pl-4">
+              <p className="text-gray-700 mb-3">
+                We halt the inflammatory cascade. This involves high-resolution MRI correlation to guarantee the diagnosis is accurate, coupled with neuropathic medications and targeted pelvic control physiotherapy to offload the compressed nerve.
+              </p>
+              <span className="inline-block bg-green-50 text-green-700 text-sm font-semibold px-3 py-1 rounded-full">Success Rate: ~70% of Patients</span>
+            </div>
           </div>
-          <div className="bg-white p-6 rounded-lg shadow-md border-t-4 border-yellow-500">
-            <h3 className="text-lg font-bold mb-3 text-gray-900">Step 2: Pain Interventions</h3>
-            <p className="text-gray-700 mb-3">
-              If pain persists, we use <Link href="/services/minimally-invasive-spine-surgery" className="text-blue-600 hover:underline">Transforaminal Nerve Root Blocks</Link>. This is a day-care procedure that delivers medication directly to the nerve root.
-            </p>
-            <p className="text-sm font-semibold text-yellow-700">Success Rate: ~20% (of remaining)</p>
+
+          {/* Phase 2 */}
+          <div className="bg-white p-6 rounded-xl shadow-sm border-l-4 border-yellow-500 relative">
+            <div className="absolute -left-3 top-6 w-6 h-6 rounded-full bg-yellow-500 flex items-center justify-center border-4 border-white shadow"></div>
+            <h3 className="text-xl font-bold text-gray-900 mb-2 pl-4">Phase 2: Targeted Interventions (Weeks 4-6)</h3>
+            <div className="pl-4">
+              <p className="text-gray-700 mb-3">
+                If pain persists despite rest and physical therapy, we escalate to a <strong>Transforaminal Epidural Steroid Injection (TFESI)</strong>. Under precise live C-arm guidance, anti-inflammatory medication is bathed directly over the swollen nerve root.
+              </p>
+              <span className="inline-block bg-yellow-50 text-yellow-700 text-sm font-semibold px-3 py-1 rounded-full">Success Rate: ~20% of Remaining Patients</span>
+            </div>
           </div>
-          <div className="bg-white p-6 rounded-lg shadow-md border-t-4 border-blue-500">
-            <h3 className="text-lg font-bold mb-3 text-gray-900">Step 3: Surgical Solution</h3>
-            <p className="text-gray-700 mb-3">
-              <Link href="/services/endoscopic-discectomy-hyderabad" className="text-blue-600 hover:underline font-semibold">Endoscopic Discectomy</Link> is the gold standard. For instability, <Link href="/services/spinal-fusion-surgery-hyderabad" className="text-blue-600 hover:underline">spinal fusion</Link> may be needed.
-            </p>
-            <p className="text-sm font-semibold text-blue-700">Reserved for: ~10% of cases</p>
+
+          {/* Phase 3 */}
+          <div className="bg-white p-8 rounded-xl shadow-md border-l-4 border-blue-600 relative bg-gradient-to-r from-blue-50 to-white">
+            <div className="absolute -left-3 top-8 w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center border-4 border-white shadow"></div>
+            <h3 className="text-2xl font-bold text-blue-900 mb-4 pl-4">Phase 3: The Surgical Solution (Beyond 6 Weeks)</h3>
+            <div className="pl-4">
+              <p className="text-gray-800 font-medium mb-4 text-lg">
+                When the compressive lesion (herniated disc) is too large to resorb naturally, or if there is impending nerve damage, we proceed to surgery.
+              </p>
+
+              <div className="bg-white bg-opacity-80 p-5 rounded-lg border border-blue-200 mb-4">
+                <h4 className="font-bold text-blue-800 mb-2 flex items-center">
+                  <span className="text-xl mr-2">🔬</span> Endoscopic Spine Surgery: The Modern Gold Standard
+                </h4>
+                <p className="text-gray-700 mb-3">
+                  Unlike traditional open laminectomy which requires extensive muscle detachment, Dr. Sayuj utilizes a precision <strong>8mm endoscope</strong>. We enter through the natural foraminal window (from the side) or a microscopic interlaminar approach.
+                </p>
+                <ul className="grid md:grid-cols-2 gap-2 text-sm text-gray-800">
+                  <li className="flex items-center"><span className="text-blue-500 mr-2">✓</span> Zero bone destruction</li>
+                  <li className="flex items-center"><span className="text-blue-500 mr-2">✓</span> Negligible blood loss</li>
+                  <li className="flex items-center"><span className="text-blue-500 mr-2">✓</span> Out-of-bed in 2 hours</li>
+                  <li className="flex items-center"><span className="text-blue-500 mr-2">✓</span> Same-day discharge at Yashoda</li>
+                </ul>
+              </div>
+
+              <Link href="/services/endoscopic-spine-surgery-hyderabad" className="inline-flex items-center text-blue-700 font-bold hover:text-blue-900 transition-colors group">
+                Explore the Endoscopic Spine pathway
+                <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -464,36 +367,6 @@ export default function SciaticaTreatmentPage() {
         costs={sciaticaCosts}
         disclaimer="Estimates for general guidance. Final cost depends on hospital category (Economy/Private/Deluxe), specific implants (if any), and medical complexity. Insurance cashless facility available."
       />
-
-      {/* New Second Opinion & Insurance Block */}
-      <section className="mb-12 bg-indigo-50 border border-indigo-100 rounded-2xl p-8">
-        <h2 className="text-2xl font-bold text-indigo-900 mb-4">Insurance Coverage & Second Opinions</h2>
-        <div className="grid md:grid-cols-2 gap-8">
-          <div>
-            <h3 className="font-semibold text-indigo-800 mb-2">Health Insurance</h3>
-            <p className="text-gray-700 mb-4">
-              Sciatica treatment, including nerve blocks and endoscopic surgery, is generally covered by most comprehensive health insurance policies. We assist with:
-            </p>
-            <ul className="space-y-2 text-sm text-gray-600">
-              <li>✓ Cashless Pre-Authorization</li>
-              <li>✓ Documentation for Reimbursement</li>
-              <li>✓ Clear Cost Estimates</li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="font-semibold text-indigo-800 mb-2">Advised Open Surgery?</h3>
-            <p className="text-gray-700 mb-4">
-              If you have been advised traditional open spine surgery, consider a <Link href="/appointments" className="text-indigo-600 hover:underline font-medium">Second Opinion</Link>. In many cases, an endoscopic approach or even a nerve block may be sufficient.
-            </p>
-            <Link
-              href="/services/awake-spine-surgery-hyderabad"
-              className="text-sm text-indigo-600 font-medium hover:text-indigo-800"
-            >
-              Learn about Awake Spine Surgery →
-            </Link>
-          </div>
-        </div>
-      </section>
 
       <section className="mb-12 rounded-lg border border-green-200 bg-green-50 p-6">
         <h2 className="text-2xl font-semibold mb-4 text-green-800">Is it a Slip Disc?</h2>
@@ -517,39 +390,31 @@ export default function SciaticaTreatmentPage() {
 
       <section className="mb-12">
         <h2 className="text-2xl font-semibold mb-6 text-blue-700">Red Flags: When to See a Doctor Urgently</h2>
-        <div className="bg-red-50 p-6 rounded-lg border-l-4 border-red-500 shadow-sm">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="bg-red-100 p-2 rounded-full text-red-600">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-            </div>
-            <h3 className="text-xl font-bold text-red-800 m-0">EMERGENCY CHECKLIST</h3>
-          </div>
-          <p className="text-gray-800 mb-4 font-medium pl-1">
-            Do not wait. Seek immediate medical attention if you have:
+        <div className="bg-red-50 p-6 rounded-lg border border-red-100">
+          <p className="text-gray-700 mb-4 font-semibold">
+            Do not ignore sciatica if you have:
           </p>
-          <ul className="space-y-3 text-gray-700 pl-1">
+          <ul className="space-y-2 text-gray-700">
             <li className="flex items-start">
-              <span className="text-red-600 mr-3 mt-1 font-bold">!</span>
-              <span><strong>Sudden, severe pain or numbness in both legs</strong> (Bilateral symptoms)</span>
+              <span className="text-red-600 mr-2 mt-1">!</span>
+              <span>Sudden, severe pain or numbness in both legs</span>
             </li>
             <li className="flex items-start">
-              <span className="text-red-600 mr-3 mt-1 font-bold">!</span>
-              <span><strong>Loss of bowel or bladder control</strong> (Incontinence or inability to pass urine)</span>
+              <span className="text-red-600 mr-2 mt-1">!</span>
+              <span>Loss of bowel or bowel control (incontinence)</span>
             </li>
             <li className="flex items-start">
-              <span className="text-red-600 mr-3 mt-1 font-bold">!</span>
-              <span><strong>"Saddle anesthesia"</strong> - numbness in the groin/buttock area where you would sit on a saddle</span>
+              <span className="text-red-600 mr-2 mt-1">!</span>
+              <span>"Saddle anesthesia" - numbness in the groin area</span>
             </li>
             <li className="flex items-start">
-              <span className="text-red-600 mr-3 mt-1 font-bold">!</span>
-              <span><strong>Foot drop</strong> (Sudden difficulty lifting the front of your foot while walking)</span>
+              <span className="text-red-600 mr-2 mt-1">!</span>
+              <span>Foot drop (difficulty lifting the front of your foot)</span>
             </li>
           </ul>
-          <div className="mt-6 p-4 bg-white/60 rounded border border-red-200">
-            <p className="text-sm text-red-800 font-semibold">
-              ⚠️ These are signs of Cauda Equina Syndrome, a rare but serious medical emergency requiring immediate decompression surgery to prevent permanent paralysis.
-            </p>
-          </div>
+          <p className="text-sm text-red-700 mt-4">
+            These could be signs of Cauda Equina Syndrome, a medical emergency requiring immediate surgery.
+          </p>
         </div>
       </section>
 
@@ -560,20 +425,20 @@ export default function SciaticaTreatmentPage() {
         </p>
         <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-white p-5 rounded-xl border border-red-100 shadow-sm">
-             <h3 className="text-lg font-bold text-red-700 mb-2">1. Forward Bends (Toe Touches)</h3>
-             <p className="text-sm text-gray-700"><strong>Why Avoid:</strong> Bending forward increases pressure on the lumbar discs by up to 100%, potentially worsening a herniated disc.</p>
+            <h3 className="text-lg font-bold text-red-700 mb-2">1. Forward Bends (Toe Touches)</h3>
+            <p className="text-sm text-gray-700"><strong>Why Avoid:</strong> Bending forward increases pressure on the lumbar discs by up to 100%, potentially worsening a herniated disc.</p>
           </div>
           <div className="bg-white p-5 rounded-xl border border-red-100 shadow-sm">
-             <h3 className="text-lg font-bold text-red-700 mb-2">2. Double Leg Lifts</h3>
-             <p className="text-sm text-gray-700"><strong>Why Avoid:</strong> Lifting both legs while lying on your back puts massive strain on your core and lower back muscles, which can aggravate sciatica.</p>
+            <h3 className="text-lg font-bold text-red-700 mb-2">2. Double Leg Lifts</h3>
+            <p className="text-sm text-gray-700"><strong>Why Avoid:</strong> Lifting both legs while lying on your back puts massive strain on your core and lower back muscles, which can aggravate sciatica.</p>
           </div>
-           <div className="bg-white p-5 rounded-xl border border-red-100 shadow-sm">
-             <h3 className="text-lg font-bold text-red-700 mb-2">3. High Impact Activities</h3>
-             <p className="text-sm text-gray-700"><strong>Why Avoid:</strong> Running, jumping, or high-intensity aerobics cause repeated impact on the spine, compressing the discs further.</p>
+          <div className="bg-white p-5 rounded-xl border border-red-100 shadow-sm">
+            <h3 className="text-lg font-bold text-red-700 mb-2">3. High Impact Activities</h3>
+            <p className="text-sm text-gray-700"><strong>Why Avoid:</strong> Running, jumping, or high-intensity aerobics cause repeated impact on the spine, compressing the discs further.</p>
           </div>
-           <div className="bg-white p-5 rounded-xl border border-red-100 shadow-sm">
-             <h3 className="text-lg font-bold text-red-700 mb-2">4. Deep Hamstring Stretches</h3>
-             <p className="text-sm text-gray-700"><strong>Why Avoid:</strong> Stretching the hamstrings too aggressively can pull on the sciatic nerve (neural tension), increasing pain and inflammation.</p>
+          <div className="bg-white p-5 rounded-xl border border-red-100 shadow-sm">
+            <h3 className="text-lg font-bold text-red-700 mb-2">4. Deep Hamstring Stretches</h3>
+            <p className="text-sm text-gray-700"><strong>Why Avoid:</strong> Stretching the hamstrings too aggressively can pull on the sciatic nerve (neural tension), increasing pain and inflammation.</p>
           </div>
         </div>
       </section>
@@ -638,11 +503,11 @@ export default function SciaticaTreatmentPage() {
             <h3 className="font-bold text-lg mb-2">Week 1-2</h3>
             <p className="text-sm text-gray-600">Start gentle nerve glides. Pain should reduce by 50%. If not, consider <Link href="/services/minimally-invasive-spine-surgery" className="text-blue-600 hover:underline">injection therapy</Link>.</p>
           </div>
-           <div className="bg-white p-4 rounded-lg shadow border-l-4 border-blue-700">
+          <div className="bg-white p-4 rounded-lg shadow border-l-4 border-blue-700">
             <h3 className="font-bold text-lg mb-2">Week 3-6</h3>
             <p className="text-sm text-gray-600">Active physiotherapy. Core strengthening. Return to desk work.</p>
           </div>
-           <div className="bg-white p-4 rounded-lg shadow border-l-4 border-green-600">
+          <div className="bg-white p-4 rounded-lg shadow border-l-4 border-green-600">
             <h3 className="font-bold text-lg mb-2">Week 8+</h3>
             <p className="text-sm text-gray-600">Full activity. If pain persists &gt;6 weeks, <Link href="/services/endoscopic-spine-surgery-hyderabad" className="text-blue-600 hover:underline">endoscopic surgery</Link> may be discussed.</p>
           </div>
@@ -653,59 +518,30 @@ export default function SciaticaTreatmentPage() {
       <section id="faqs" className="mb-12">
         <h2 className="text-2xl font-semibold mb-6 text-blue-700">Frequently Asked Questions</h2>
         <div className="space-y-4">
-      {FAQ.map(({ q, a }, index) => (
-        <div key={index} className="bg-white p-6 rounded-lg shadow-md">
-          <h3 className="text-lg font-semibold mb-3 text-blue-700">{q}</h3>
-          <p className="text-gray-700">{a}</p>
+          {FAQ.map(({ q, a }, index) => (
+            <div key={index} className="bg-white p-6 rounded-lg shadow-md">
+              <h3 className="text-lg font-semibold mb-3 text-blue-700">{q}</h3>
+              <p className="text-gray-700">{a}</p>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
-  </section>
+      </section>
 
-  <section className="mb-12">
-    <h2 className="text-2xl font-bold text-blue-900 mb-6">Visit Our Sciatica Clinic</h2>
-    <MapCard
-      area="Hyderabad"
-      mapUrl="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3807.669641427599!2d78.51261531487614!3d17.37976998808307!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb99dac93a348d%3A0xc9039baf28225326!2sYashoda%20Hospitals%20-%20Malakpet!5e0!3m2!1sen!2sin!4v1628587456789!5m2!1sen!2sin"
-    />
-  </section>
+      <LocalPathways mode="condition" />
 
-  <LocalPathways mode="condition" />
+      <section className="mb-12 space-y-6">
+        <ReviewedBy />
+        <NAP />
+      </section>
 
-  <section className="mb-12 space-y-6">
-    <ReviewedBy />
-    <NAP />
-  </section>
-
-  {/* Schema Markup */}
-  <MedicalWebPageSchema
+      {/* Schema Markup */}
+      <MedicalWebPageSchema
         title="Sciatica Treatment Hyderabad | 90% Non-Surgical | Dr Sayuj"
-        description="Best Sciatica treatment in Hyderabad. 90% patients recover without surgery using nerve blocks & meds. Endoscopic solution available. Book Dr Sayuj."
+        description="Best Sciatica treatment in Hyderabad. 90% patients recover without surgery using nerve blocks & meds. Endoscopic cure available. Book Dr Sayuj."
         pageSlug="/conditions/sciatica-pain-treatment-hyderabad/"
         pageType="condition"
-        serviceOrCondition="Sciatica"
+        serviceOrCondition="Sciatica Treatment"
         breadcrumbs={breadcrumbs}
-        symptoms={[
-          "Radiating leg pain",
-          "Numbness in leg or foot",
-          "Weakness in leg",
-          "Foot drop (difficulty lifting foot)",
-          "Burning sensation down the leg",
-          "Pain worsening with coughing or sitting"
-        ]}
-        treatments={[
-          "Conservative Management (Medication, Rest)",
-          "Specialized Physiotherapy",
-          "Transforaminal Nerve Root Block (Injection)",
-          "Endoscopic Discectomy (Minimally Invasive Surgery)"
-        ]}
-        riskFactors={[
-          "Prolonged sitting",
-          "Herniated disc (Slip Disc)",
-          "Spinal stenosis",
-          "Obesity",
-          "Heavy lifting"
-        ]}
       />
 
       <FAQPageSchema
@@ -719,6 +555,6 @@ export default function SciaticaTreatmentPage() {
       />
 
       <SourceList sources={sources['sciatica-pain-treatment-hyderabad'] || []} />
-</main>
+    </main>
   );
 }

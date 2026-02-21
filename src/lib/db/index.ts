@@ -1,89 +1,80 @@
 import { neon } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-http';
-import { eq, desc, and, sql as dSql, count } from 'drizzle-orm';
-import * as schema from './schema';
 
 // Type for the Neon SQL client
 type NeonClient = ReturnType<typeof neon>;
 
 // Lazy-initialize the SQL client
 let sql: NeonClient | null = null;
-let drizzleClient: any = null; // Use any to avoid strict type mismatch during build
 
-function getClients() {
+function getSql(): NeonClient | null {
   if (!sql) {
-    const connectionString = 
-      process.env.POSTGRES_URL || 
+    // Check multiple possible env var names (Vercel/Neon integration uses storage_ prefix)
+    const connectionString =
+      process.env.POSTGRES_URL ||
       process.env.DATABASE_URL ||
       process.env.storage_POSTGRES_URL ||
       process.env.storage_DATABASE_URL;
-    
+
     if (!connectionString) {
       console.warn('Database URL not set. Checked: POSTGRES_URL, DATABASE_URL, storage_POSTGRES_URL, storage_DATABASE_URL');
-      throw new Error('Database URL not set');
+      return null;
     }
     sql = neon(connectionString);
-    drizzleClient = drizzle(sql, { schema });
   }
-  return { sql: sql!, db: drizzleClient! };
+  return sql;
 }
 
 // Type-safe query result
 type QueryResultRow = Record<string, unknown>;
 
-/**
- * Safely escape SQL identifiers (table names, column names)
- * wrapping them in double quotes and escaping any existing double quotes.
- *
- * 🛡️ Sentinel: Prevents SQL injection via identifier names.
- */
-function escapeIdentifier(identifier: string): string {
-  return `"${identifier.replace(/"/g, '""')}"`;
-}
-
-// Export the Drizzle client for new code
-export const drizzleDb = {
-  get client() {
-    return getClients().db;
-  }
-};
+// Mock result for when DB is not configured
+const EMPTY_RESULT = { rows: [], rowCount: 0 };
 
 export const db = {
   /**
    * Execute a SQL query with optional parameters
    * Uses Neon serverless driver - optimized for edge/serverless
+   * Note: Uses sql.query() for parameterized queries (Neon v1.0+ API)
    */
   query: async <T extends QueryResultRow = QueryResultRow>(
     text: string,
     params?: unknown[]
   ): Promise<{ rows: T[]; rowCount: number }> => {
-    const { sql } = getClients();
-    const rows = await (sql as any)(text, params as any[]);
-    return { rows: rows as T[], rowCount: rows.length };
+    const client = getSql();
+    if (!client) {
+      console.debug('Database not configured, skipping query:', text.substring(0, 100));
+      return EMPTY_RESULT as { rows: T[]; rowCount: number };
+    }
+    // Use sql.query() for parameterized queries (v1.0+ API)
+    const rows = await client.query(text, params ?? []) as T[];
+    return { rows, rowCount: rows.length };
   },
 
   /**
-   * Helper to get all rows
+   * Execute a query and return just the rows
    */
   queryRows: async <T extends QueryResultRow = QueryResultRow>(
     text: string,
     params?: unknown[]
   ): Promise<T[]> => {
-    const { sql } = getClients();
-    const rows = await (sql as any)(text, params as any[]);
-    return rows as T[];
+    const client = getSql();
+    if (!client) {
+      console.debug('Database not configured, skipping query');
+      return [];
+    }
+    // Use sql.query() for parameterized queries (v1.0+ API)
+    return client.query(text, params ?? []) as Promise<T[]>;
   },
 
   /**
-   * Helper to get a single row or null
+   * Execute a query and return the first row or null
    */
   queryOne: async <T extends QueryResultRow = QueryResultRow>(
     text: string,
     params?: unknown[]
   ): Promise<T | null> => {
-    const { sql } = getClients();
-    const rows = await (sql as any)(text, params as any[]);
-    return (rows[0] as T) ?? null;
+    const rows = await db.queryRows<T>(text, params);
+    return rows[0] ?? null;
   },
 
   /**
@@ -96,10 +87,9 @@ export const db = {
     const keys = Object.keys(data);
     const values = Object.values(data);
     const placeholders = keys.map((_, i) => `$${i + 1}`).join(', ');
-    // 🛡️ Sentinel: Escape identifiers to prevent SQL injection
-    const columns = keys.map(escapeIdentifier).join(', ');
+    const columns = keys.join(', ');
 
-    const query = `INSERT INTO ${escapeIdentifier(table)} (${columns}) VALUES (${placeholders}) RETURNING *`;
+    const query = `INSERT INTO ${table} (${columns}) VALUES (${placeholders}) RETURNING *`;
     return db.queryOne<T>(query, values);
   },
 
@@ -114,10 +104,9 @@ export const db = {
   ): Promise<T | null> => {
     const keys = Object.keys(data);
     const values = Object.values(data);
-    // 🛡️ Sentinel: Escape identifiers to prevent SQL injection
-    const setClause = keys.map((key, i) => `${escapeIdentifier(key)} = $${i + 1}`).join(', ');
+    const setClause = keys.map((key, i) => `${key} = $${i + 1}`).join(', ');
 
-    const query = `UPDATE ${escapeIdentifier(table)} SET ${setClause} WHERE ${escapeIdentifier(idColumn)} = $${keys.length + 1} RETURNING *`;
+    const query = `UPDATE ${table} SET ${setClause} WHERE ${idColumn} = $${keys.length + 1} RETURNING *`;
     return db.queryOne<T>(query, [...values, id]);
   },
 
@@ -126,7 +115,7 @@ export const db = {
    */
   isConfigured: (): boolean => {
     return !!(
-      process.env.POSTGRES_URL || 
+      process.env.POSTGRES_URL ||
       process.env.DATABASE_URL ||
       process.env.storage_POSTGRES_URL ||
       process.env.storage_DATABASE_URL
@@ -139,8 +128,7 @@ export const db = {
   healthCheck: async (): Promise<{ ok: boolean; latencyMs: number; error?: string }> => {
     const start = Date.now();
     try {
-      const { sql } = getClients();
-      await (sql as any)('SELECT 1 as check');
+      await db.queryOne('SELECT 1 as check');
       return { ok: true, latencyMs: Date.now() - start };
     } catch (error) {
       return {
@@ -156,7 +144,6 @@ export const db = {
    */
   close: async (): Promise<void> => {
     sql = null;
-    drizzleClient = null;
   },
 };
 
@@ -184,45 +171,14 @@ export const appointments = {
     confirmation_message?: string;
     used_ai_confirmation?: boolean;
   }) => {
-    // Migrated to Drizzle for better type safety
-    const { db: dDb } = getClients();
-    const result = await dDb.insert(schema.appointments).values({
-      patientName: data.patient_name,
-      patientEmail: data.patient_email,
-      patientPhone: data.patient_phone,
-      preferredDate: data.preferred_date,
-      preferredTime: data.preferred_time,
-      appointmentType: data.appointment_type,
-      chiefComplaint: data.chief_complaint,
-      intakeNotes: data.intake_notes,
-      patientAge: data.patient_age,
-      patientGender: data.patient_gender,
-      painScore: data.pain_score,
-      mriScanAvailable: data.mri_scan_available,
-      hasEmergencySymptoms: data.has_emergency_symptoms,
-      source: data.source,
-      workflowRunId: data.workflow_run_id,
-      confirmationMessage: data.confirmation_message,
-      usedAiConfirmation: data.used_ai_confirmation,
-      status: 'pending'
-    }).returning();
-    return result[0];
+    return db.insert('appointments', data);
   },
 
   updateStatus: async (id: string, status: string, additionalData?: Record<string, unknown>) => {
-    const { db: dDb } = getClients();
-
-    // Convert status to something Drizzle can handle if we had enums, but here plain string
-    const updateData: any = { status };
-    if (status === 'confirmed') updateData.confirmedAt = new Date();
-    if (status === 'completed') updateData.completedAt = new Date();
-
-    const result = await dDb.update(schema.appointments)
-      .set(updateData)
-      .where(eq(schema.appointments.id, id))
-      .returning();
-
-    return result[0];
+    const data: Record<string, unknown> = { status, ...additionalData };
+    if (status === 'confirmed') data.confirmed_at = new Date().toISOString();
+    if (status === 'completed') data.completed_at = new Date().toISOString();
+    return db.update('appointments', id, data);
   },
 
   findByEmail: async (email: string) => {
@@ -289,25 +245,28 @@ export const patients = {
     gender?: string;
     primary_condition?: string;
     acquisition_source?: string;
-    pain_score?: number;
-    mri_scan_available?: boolean;
-    notes?: string;
+    insurance_provider?: string;
+    insurance_policy_number?: string;
+    emergency_contact_name?: string;
+    emergency_contact_phone?: string;
   }) => {
+    // Insert or update based on email
     return db.queryOne(`
-      INSERT INTO patients (email, name, phone, age, gender, primary_condition, acquisition_source, latest_pain_score, mri_scan_available, notes)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+      INSERT INTO patients (
+        email, name, phone, age, gender, primary_condition, acquisition_source,
+        insurance_provider, insurance_policy_number, emergency_contact_name, emergency_contact_phone
+      )
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
       ON CONFLICT (email) DO UPDATE SET
         name = COALESCE(EXCLUDED.name, patients.name),
         phone = COALESCE(EXCLUDED.phone, patients.phone),
         age = COALESCE(EXCLUDED.age, patients.age),
         gender = COALESCE(EXCLUDED.gender, patients.gender),
         primary_condition = COALESCE(EXCLUDED.primary_condition, patients.primary_condition),
-        latest_pain_score = COALESCE(EXCLUDED.latest_pain_score, patients.latest_pain_score),
-        mri_scan_available = COALESCE(EXCLUDED.mri_scan_available, patients.mri_scan_available),
-        notes = CASE
-            WHEN patients.notes IS NOT NULL AND EXCLUDED.notes IS NOT NULL THEN patients.notes || E'\n\n' || EXCLUDED.notes
-            ELSE COALESCE(patients.notes, EXCLUDED.notes)
-        END,
+        insurance_provider = COALESCE(EXCLUDED.insurance_provider, patients.insurance_provider),
+        insurance_policy_number = COALESCE(EXCLUDED.insurance_policy_number, patients.insurance_policy_number),
+        emergency_contact_name = COALESCE(EXCLUDED.emergency_contact_name, patients.emergency_contact_name),
+        emergency_contact_phone = COALESCE(EXCLUDED.emergency_contact_phone, patients.emergency_contact_phone),
         last_contact_date = CURRENT_TIMESTAMP,
         total_appointments = patients.total_appointments + 1
       RETURNING *
@@ -319,9 +278,10 @@ export const patients = {
       data.gender,
       data.primary_condition,
       data.acquisition_source,
-      data.pain_score ?? null,
-      data.mri_scan_available ?? null,
-      data.notes ?? null
+      data.insurance_provider,
+      data.insurance_policy_number,
+      data.emergency_contact_name,
+      data.emergency_contact_phone
     ]);
   },
 
@@ -329,19 +289,10 @@ export const patients = {
     return db.queryOne('SELECT * FROM patients WHERE email = $1', [email]);
   },
 
-  updateLeadScore: async (id: string, score?: number, status?: string) => {
-    const data: Record<string, unknown> = {};
-    if (score !== undefined) data.lead_score = score;
+  updateLeadScore: async (id: string, score: number, status?: string) => {
+    const data: Record<string, unknown> = { lead_score: score };
     if (status) data.lead_status = status;
-    if (Object.keys(data).length === 0) return null;
     return db.update('patients', id, data);
-  },
-
-  getRecent: async (limit = 50) => {
-    return db.queryRows(
-      'SELECT * FROM patients ORDER BY last_contact_date DESC LIMIT $1',
-      [limit]
-    );
   },
 };
 

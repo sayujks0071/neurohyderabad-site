@@ -6,7 +6,6 @@
  */
 
 import { addDeploymentEvent } from './status/store';
-import { analyzeEvent } from './sre-logic';
 
 interface EventMetadata {
   eventId: string;
@@ -131,10 +130,6 @@ export async function handleDeploymentError(payload: any, metadata: EventMetadat
   
   console.error('[webhooks/vercel] Deployment error:', JSON.stringify(eventData, null, 2));
 
-  // SRE Analysis
-  const analysis = analyzeEvent('deployment.error', payload);
-  console.log('[SRE Analysis] Deployment Error:', JSON.stringify(analysis, null, 2));
-
   // Store event for status endpoint with comprehensive error details
   addDeploymentEvent({
     eventId: metadata.eventId,
@@ -178,7 +173,6 @@ export async function handleDeploymentError(payload: any, metadata: EventMetadat
             readyState: eventData.readyState,
             state: eventData.state,
           },
-          sreAnalysis: analysis,
           timestamp: new Date().toISOString(),
         }),
       });
@@ -196,10 +190,6 @@ export async function handleDeploymentCancelled(payload: any, metadata: EventMet
   };
   
   console.log('[webhooks/vercel] Deployment cancelled:', eventData);
-
-  const analysis = analyzeEvent('deployment.canceled', payload);
-  console.log('[SRE Analysis] Deployment Canceled:', JSON.stringify(analysis, null, 2));
-
 
   // Store event for status endpoint
   addDeploymentEvent({
@@ -275,9 +265,6 @@ export async function handleDeploymentChecksFailed(payload: any, metadata: Event
   
   console.error('[webhooks/vercel] Deployment checks failed:', eventData);
 
-  const analysis = analyzeEvent('deployment.checks.failed', payload);
-  console.log('[SRE Analysis] Deployment Checks Failed:', JSON.stringify(analysis, null, 2));
-
   // Store event for status endpoint
   addDeploymentEvent({
     eventId: metadata.eventId,
@@ -302,7 +289,6 @@ export async function handleDeploymentChecksFailed(payload: any, metadata: Event
           project: payload.project?.name,
           deploymentId: payload.deployment?.id,
           failedChecks: eventData.failedChecks,
-          sreAnalysis: analysis,
           timestamp: new Date().toISOString(),
         }),
       });
@@ -483,9 +469,6 @@ export async function handleDomainRenewalFailed(payload: any, metadata: EventMet
     errorReason: payload.errorReason,
     failedAt: payload.failedAt,
   });
-
-  const analysis = analyzeEvent('domain.renewal.failed', payload);
-  console.log('[SRE Analysis] Domain Renewal Failed:', JSON.stringify(analysis, null, 2));
 }
 
 export async function handleDomainCertificateAdd(payload: any, metadata: EventMetadata) {
@@ -498,9 +481,6 @@ export async function handleDomainCertificateAddFailed(payload: any, metadata: E
   console.error('[webhooks/vercel] Domain certificate add failed:', {
     dnsNames: payload.dnsNames,
   });
-
-  const analysis = analyzeEvent('domain.certificate.add.failed', payload);
-  console.log('[SRE Analysis] Domain Cert Add Failed:', JSON.stringify(analysis, null, 2));
 }
 
 export async function handleDomainCertificateRenew(payload: any, metadata: EventMetadata) {
@@ -513,9 +493,6 @@ export async function handleDomainCertificateRenewFailed(payload: any, metadata:
   console.error('[webhooks/vercel] Domain certificate renew failed:', {
     dnsNames: payload.dnsNames,
   });
-
-  const analysis = analyzeEvent('domain.certificate.renew.failed', payload);
-  console.log('[SRE Analysis] Domain Cert Renew Failed:', JSON.stringify(analysis, null, 2));
 }
 
 export async function handleDomainCertificateDeleted(payload: any, metadata: EventMetadata) {
@@ -555,9 +532,6 @@ export async function handleDomainTransferInFailed(payload: any, metadata: Event
   console.error('[webhooks/vercel] Domain transfer in failed:', {
     domainName: payload.domain?.name,
   });
-
-  const analysis = analyzeEvent('domain.transfer.in.failed', payload);
-  console.log('[SRE Analysis] Domain Transfer Failed:', JSON.stringify(analysis, null, 2));
 }
 
 // ===== INTEGRATION EVENT HANDLERS =====
@@ -669,9 +643,6 @@ export async function handleAlertsTriggered(payload: any, metadata: EventMetadat
     links: payload.links,
   });
 
-  const analysis = analyzeEvent('alerts.triggered', payload);
-  console.log('[SRE Analysis] Alerts Triggered:', JSON.stringify(analysis, null, 2));
-
   // Send to monitoring service if configured
   if (process.env.MONITORING_WEBHOOK_URL) {
     try {
@@ -683,7 +654,6 @@ export async function handleAlertsTriggered(payload: any, metadata: EventMetadat
           projectId: payload.projectId,
           projectSlug: payload.projectSlug,
           alerts: payload.alerts,
-          sreAnalysis: analysis,
           timestamp: new Date().toISOString(),
         }),
       });
@@ -691,17 +661,6 @@ export async function handleAlertsTriggered(payload: any, metadata: EventMetadat
       console.error('[webhooks/vercel] Failed to send alert notification:', error);
     }
   }
-}
-
-// ===== SECURITY HANDLERS =====
-export async function handleFirewallAttackBlocked(payload: any, metadata: EventMetadata) {
-  console.warn('[webhooks/vercel] Firewall attack blocked:', {
-    attack: payload.attack,
-    projectId: payload.projectId,
-  });
-
-  const analysis = analyzeEvent('firewall-attack-blocked', payload);
-  console.log('[SRE Analysis] Attack Detected:', JSON.stringify(analysis, null, 2));
 }
 
 // ===== GENERIC HANDLER =====

@@ -1,12 +1,11 @@
 // @vitest-environment jsdom
 import React from 'react';
-import { render, screen, fireEvent, waitFor, act, cleanup } from '@testing-library/react';
-import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { vi, describe, it, expect, beforeEach } from 'vitest';
 import * as matchers from '@testing-library/jest-dom/matchers';
 import TeleconsultationForm from './TeleconsultationForm';
 import { analytics } from '@/src/lib/analytics';
 import { trackContactConversion } from '../src/lib/google-ads-conversion';
-import { APPOINTMENT_SUCCESS_MESSAGE } from '@/packages/appointment-form/constants';
 
 // Extend expect with jest-dom matchers
 expect.extend(matchers);
@@ -41,12 +40,7 @@ describe('TeleconsultationForm Analytics', () => {
     vi.spyOn(console, 'error').mockImplementation(() => {});
   });
 
-  afterEach(() => {
-    cleanup();
-    document.body.innerHTML = '';
-  });
-
-  it('tracks appointment success on valid submission and shows correct states', async () => {
+  it('tracks appointment success on valid submission', async () => {
     render(<TeleconsultationForm pageSlug="test-page" service="Test Service" />);
 
     // Fill out the form
@@ -56,31 +50,17 @@ describe('TeleconsultationForm Analytics', () => {
     fireEvent.change(screen.getByLabelText(/Additional details/i), { target: { value: 'Test message' } });
 
     // Submit
-    const submitBtn = screen.getByRole('button', { name: /Send appointment request/i });
-    fireEvent.click(submitBtn);
+    fireEvent.click(screen.getByRole('button', { name: /Send appointment request/i }));
 
-    // Verify loading state ("Sending...") immediately after click
-    expect(screen.getByText('Sending...')).toBeInTheDocument();
-    expect(submitBtn).toBeDisabled();
-
-    // Wait for submission logic to complete (includes 800ms delay)
+    // Wait for submission logic
     await waitFor(() => {
       expect(analytics.appointmentSubmit).toHaveBeenCalledWith('test-page', 'teleconsultation_form');
       expect(analytics.appointmentSuccess).toHaveBeenCalledWith('test-page', 'teleconsultation_form', 'Test Service');
       expect(trackContactConversion).toHaveBeenCalled();
-    }, { timeout: 2000 }); // Increase timeout just in case
+    });
 
-    // Check if success message is displayed with exact text
+    // Check if success message is displayed
     expect(screen.getByRole('heading', { name: /Request Received/i })).toBeInTheDocument();
-    expect(screen.getByText(APPOINTMENT_SUCCESS_MESSAGE)).toBeInTheDocument();
-
-    // Verify "Send another request" button resets the form
-    const resetBtn = screen.getByText('Send another request');
-    fireEvent.click(resetBtn);
-
-    // Form should be back
-    expect(screen.getByLabelText(/Full name/i)).toHaveValue('');
-    expect(screen.getByRole('button', { name: /Send appointment request/i })).toBeInTheDocument();
   });
 
   it('tracks form error on submission failure', async () => {
@@ -103,7 +83,7 @@ describe('TeleconsultationForm Analytics', () => {
     // Wait for error handling
     await waitFor(() => {
       expect(analytics.formError).toHaveBeenCalledWith('test-page', 'teleconsultation_form', 'submission_error');
-    }, { timeout: 2000 });
+    });
 
     // Check if error message is displayed
     expect(screen.getByText(/Something went wrong while preparing the email/i)).toBeInTheDocument();

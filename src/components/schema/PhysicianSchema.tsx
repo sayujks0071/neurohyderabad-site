@@ -3,8 +3,7 @@ import {
   CANONICAL_PHYSICIAN_NAME,
   CANONICAL_TELEPHONE,
   getLocationById,
-  SOCIAL_PROFILES,
-  CANONICAL_MAPS_URL
+  SOCIAL_PROFILES
 } from '../../data/locations';
 import { SITE_URL } from '../../lib/seo';
 
@@ -333,7 +332,6 @@ export const PhysicianSchema: React.FC = () => {
         },
         "knowsLanguage": ["English", "Hindi", "Telugu", "Malayalam", "Tamil"],
         "sameAs": SOCIAL_PROFILES,
-        "hasMap": CANONICAL_MAPS_URL,
         "aggregateRating": {
           "@type": "AggregateRating",
           "ratingValue": "4.9",
