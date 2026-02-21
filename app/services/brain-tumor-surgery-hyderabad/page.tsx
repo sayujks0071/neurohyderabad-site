@@ -22,6 +22,7 @@ import FAQPageSchema from '@/app/_components/FAQPageSchema';
 import PatientEducationVideosSkeleton from '@/app/_components/skeletons/PatientEducationVideosSkeleton';
 import BrainSurgeryComparisonTable from '@/src/components/BrainSurgeryComparisonTable';
 import ProcedureHighlights from '@/src/components/ProcedureHighlights';
+import BrainTumorProcedures from '@/src/components/BrainTumorProcedures';
 
 const PatientEducationVideos = dynamic(() => import('@/app/_components/PatientEducationVideos'), {
   loading: () => <PatientEducationVideosSkeleton />
@@ -288,6 +289,15 @@ export default function BrainTumorSurgeryHyderabadPage() {
           incision="Minimally Invasive"
           className="mb-16"
         />
+
+        {/* Advanced Surgical Procedures - Hub & Spoke Pattern */}
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-blue-900 mb-6">Advanced Surgical Procedures</h2>
+          <p className="text-gray-700 mb-8 max-w-3xl">
+            We utilize the latest neurosurgical technology to ensure precision and safety. Dr. Sayuj specializes in these advanced techniques to minimize recovery time and protect brain function.
+          </p>
+          <BrainTumorProcedures />
+        </section>
 
         {/* Red Flag Symptoms Section - Added for SEO & User Intent */}
         <section className="mb-16 bg-red-50 border border-red-100 rounded-2xl p-8">
