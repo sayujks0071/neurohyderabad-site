@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { SITE_URL } from '../../../src/lib/seo';
 import OutcomeMetricsSection from '@/components/OutcomeMetricsSection';
 import TeleconsultationForm from '@/components/TeleconsultationForm';
@@ -13,6 +14,14 @@ import FAQPageSchema from '@/app/_components/FAQPageSchema';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
 import PatientJourneySection from '@/src/components/PatientJourneySection';
+import TrustProof from '@/app/_components/TrustProof';
+import ProcedureHighlights from '@/src/components/ProcedureHighlights';
+import { patientStories } from '@/src/content/stories';
+import PatientEducationVideosSkeleton from '@/app/_components/skeletons/PatientEducationVideosSkeleton';
+
+const PatientEducationVideos = dynamic(() => import('@/app/_components/PatientEducationVideos'), {
+  loading: () => <PatientEducationVideosSkeleton />
+});
 
 const baseMetadata = makeMetadata({
   title: 'Spinal Fusion & Fracture Surgery Hyderabad | Best TLIF Surgeon',
@@ -136,6 +145,10 @@ export default function SpinalFusionPage() {
     { name: 'Spinal Fusion', path: '/services/spinal-fusion-surgery-hyderabad' },
   ];
 
+  const relevantStories = patientStories.filter(story =>
+    story.tags.includes('fusion') || story.tags.includes('tlif') || story.tags.includes('spine')
+  ).slice(0, 2);
+
   return (
     <>
       <MedicalWebPageSchema
@@ -159,12 +172,23 @@ export default function SpinalFusionPage() {
             <p className="text-lg text-gray-600">Stabilizing the spine to treat Spondylolisthesis and Instability.</p>
           </header>
 
+          <TrustProof serviceType="spine" className="mb-8" stories={relevantStories} />
+
           <section className="bg-blue-50 p-6 rounded-lg mb-8">
             <p className="text-center">
               <strong>Diagnosed with Spondylolisthesis?</strong>
               <a href="tel:+919778280044" className="text-blue-600 hover:underline ml-2">+91-9778280044</a>
             </p>
           </section>
+
+          <ProcedureHighlights
+            duration="3-4 Hours"
+            anesthesia="General Anesthesia"
+            stay="3-5 Days"
+            recovery="3-6 Months (Fusion)"
+            incision="Minimally Invasive (TLIF)"
+            className="mb-12"
+          />
 
           <section className="mb-12">
              <LocalPathways mode="service" />
@@ -183,28 +207,42 @@ export default function SpinalFusionPage() {
             </div>
           </section>
 
-          <section className="mb-12 bg-red-50 border border-red-100 rounded-lg p-8 shadow-sm">
-             <div className="flex items-start gap-4">
-               <div className="text-4xl">🚨</div>
-               <div>
-                  <h2 className="text-2xl font-bold text-red-800 mb-3">Spine Fractures & Trauma Care</h2>
-                  <p className="text-gray-700 mb-4">
-                    Severe back pain after a fall or accident could indicate a <strong>spinal fracture</strong>.
-                    Unstable fractures can damage the spinal cord and cause paralysis if not treated urgently.
-                  </p>
-                  <p className="text-gray-700 mb-6">
-                    Dr. Sayuj performs <strong>emergency spine fixation</strong> (screws & rods) to stabilize the broken bone, protect the nerves, and get the patient out of bed immediately.
-                  </p>
-                  <div className="flex flex-wrap gap-4">
-                     <Link href="/emergency-rehabilitation" className="bg-red-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-red-700 transition-colors">
-                        Emergency Trauma Services →
-                     </Link>
-                     <Link href="/conditions/osteoporotic-spine-fracture-hyderabad" className="bg-white text-red-700 border border-red-200 px-6 py-2 rounded-full font-semibold hover:bg-red-50 transition-colors">
-                        Osteoporotic Fractures (Elderly) →
-                     </Link>
-                  </div>
+          <section className="mb-12 bg-red-50 border border-red-100 rounded-2xl p-8 shadow-sm">
+            <div className="flex items-center gap-3 mb-6">
+               <div className="bg-red-100 p-2 rounded-full text-red-600">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
                </div>
-             </div>
+               <h2 className="text-2xl font-bold text-red-900 m-0">Red Flags: Spine Fractures & Trauma</h2>
+            </div>
+
+            <p className="text-gray-800 mb-8 font-medium max-w-3xl">
+              Severe back pain after a fall, accident, or heavy lifting could indicate a <strong>spinal fracture</strong>.
+              Unstable fractures can damage the spinal cord and cause permanent paralysis if not immobilized immediately.
+            </p>
+
+            <div className="grid md:grid-cols-3 gap-6 mb-8">
+              <div className="bg-white p-5 rounded-xl border-l-4 border-red-500 shadow-sm">
+                 <h3 className="font-bold text-red-800 mb-2">Traumatic Injury</h3>
+                 <p className="text-sm text-gray-700">Sudden onset of severe pain after a fall from height or road accident.</p>
+              </div>
+              <div className="bg-white p-5 rounded-xl border-l-4 border-red-500 shadow-sm">
+                 <h3 className="font-bold text-red-800 mb-2">Neurological Deficit</h3>
+                 <p className="text-sm text-gray-700">Numbness, tingling, or weakness in legs, or loss of bowel/bladder control.</p>
+              </div>
+              <div className="bg-white p-5 rounded-xl border-l-4 border-red-500 shadow-sm">
+                 <h3 className="font-bold text-red-800 mb-2">Osteoporotic Pain</h3>
+                 <p className="text-sm text-gray-700">In elderly patients, even a minor stumble can cause a compression fracture.</p>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap gap-4 items-center">
+               <Link href="/emergency-rehabilitation" className="inline-flex items-center justify-center bg-red-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-red-700 transition-colors shadow-md">
+                  Emergency Trauma Services
+               </Link>
+               <Link href="/conditions/osteoporotic-spine-fracture-hyderabad" className="inline-flex items-center justify-center bg-white text-red-700 border border-red-200 px-6 py-3 rounded-full font-semibold hover:bg-red-50 transition-colors">
+                  Osteoporotic Fractures →
+               </Link>
+            </div>
           </section>
 
           <section className="mb-12 bg-white border border-green-200 rounded-lg p-8 shadow-sm">
@@ -266,6 +304,8 @@ export default function SpinalFusionPage() {
                 </ul>
              </div>
           </section>
+
+          <PatientEducationVideos category="spine" />
 
           <section className="mb-12">
             <TeleconsultationForm pageSlug="/services/spinal-fusion-surgery-hyderabad" service="Spinal Fusion" />

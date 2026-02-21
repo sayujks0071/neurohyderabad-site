@@ -58,3 +58,10 @@
 ## 2026-02-18
 *   **Structure:** Replicate "Advanced Surgical Solutions" (Hub & Spoke procedure linking) section on other major service hubs like Brain Tumor Surgery to match competitor depth. (Done 2026-02-24)
 *   **Content Gap:** Create dedicated service pages for "Endoscopic Skull Base Surgery" and "Stereotactic Biopsy" to fully support the Hub & Spoke model (currently just descriptions in the new component).
+
+## 2026-02-21
+*   **Schema Conflict:** Remove duplicate `FAQSchema` manual injection in `app/services/cervical-disc-replacement-hyderabad/page.tsx` as it conflicts with `<FAQPageSchema />` component.
+
+## 2026-02-25
+*   **Expansion:** Replicate the visual "Red Flags" grid on other emergency-related condition pages (e.g., Brain Tumor Symptoms).
+*   **Consistency:** Ensure `TrustProof` components on other pages are updated to use the latest props and styling if applicable.
