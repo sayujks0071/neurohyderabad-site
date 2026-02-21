@@ -55,6 +55,7 @@ export function PainScoreSlider<T extends FieldValues>({
               : "accent-red-600 focus:ring-red-500"
           }`}
           aria-valuetext={painScoreValue ? `Score: ${value}${value >= 8 ? ' (Severe)' : value <= 3 ? ' (Mild)' : ''}` : "Score: 5"}
+          title={`Pain Score: ${value}`}
           {...register(name)}
         />
         <div className="text-center">

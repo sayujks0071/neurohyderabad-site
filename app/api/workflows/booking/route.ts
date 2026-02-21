@@ -37,7 +37,10 @@ export async function POST(request: NextRequest) {
       ? (genderRaw as BookingData["gender"])
       : "other"; // Default fallback
 
-    const painScore = typeof body.painScore === "number" ? body.painScore : 5;
+    const rawPainScore = typeof body.painScore === "number" ? body.painScore : 5;
+    // Clamp pain score between 1 and 10
+    const painScore = Math.max(1, Math.min(10, rawPainScore));
+
     const mriScanAvailable = typeof body.mriScanAvailable === "boolean" ? body.mriScanAvailable : false;
     const source = typeof body.source === "string" ? body.source : undefined;
 
