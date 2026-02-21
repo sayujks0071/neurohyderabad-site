@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { spring, useCurrentFrame, useVideoConfig } from 'remotion';
+import { spring, useCurrentFrame, useVideoConfig, interpolate } from 'remotion';
 import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
 
 interface WelcomeCharacterProps {
@@ -49,6 +49,16 @@ export const WelcomeCharacter: React.FC<WelcomeCharacterProps> = ({ char, delay,
     [frame, fps, delay, prefersReducedMotion]
   );
 
+  const blur = useMemo(() =>
+    prefersReducedMotion ? 0 : interpolate(
+      frame - delay,
+      [0, 20],
+      [10, 0],
+      { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }
+    ),
+    [frame, delay, prefersReducedMotion]
+  );
+
   // Micro-animation: subtle wave after entrance
   // Only start after entrance is done (approx delay + 25 frames)
   const waveStartFrame = delay + 25;
@@ -64,6 +74,7 @@ export const WelcomeCharacter: React.FC<WelcomeCharacterProps> = ({ char, delay,
         display: 'inline-block',
         opacity,
         transform: `translateY(${yOffset + waveY}px) scale(${scale})`,
+        filter: `blur(${blur}px)`,
         whiteSpace: 'pre',
       }}
     >

@@ -3,6 +3,8 @@ import type { ConsultationPrepProps } from '../types/ConsultationPrepProps';
 import { WelcomeScene } from '../components/ConsultationPrep/WelcomeScene';
 import { CalendarScene } from '../components/ConsultationPrep/CalendarScene';
 import { PrepStepsScene } from '../components/ConsultationPrep/PrepStepsScene';
+import { TransitionFlash } from '../components/shared/TransitionFlash';
+import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion';
 
 /**
  * Personalized Consultation Prep Video (30 seconds @ 30fps = 900 frames)
@@ -111,6 +113,10 @@ export const ConsultationPrepVideo: React.FC<ConsultationPrepProps> = ({
           />
         </AbsoluteFill>
       </Sequence>
+
+      {/* Transition Flashes (Placed on top) */}
+      <TransitionFlash startFrame={165} />
+      <TransitionFlash startFrame={435} />
     </AbsoluteFill>
   );
 };
