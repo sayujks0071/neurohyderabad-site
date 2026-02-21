@@ -27,4 +27,12 @@ export const NETWORK_POLICIES = {
       '*.github.com',
     ],
   },
+  DICOM_EXTRACTION: {
+    deny: ['0.0.0.0/0'],
+    allow: [
+      'registry.npmjs.org',
+      '*.npmjs.org',
+      'registry.yarnpkg.com',
+    ],
+  },
 };

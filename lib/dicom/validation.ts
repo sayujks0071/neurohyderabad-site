@@ -1,4 +1,3 @@
-
 export interface ValidationResult {
   isValid: boolean;
   error?: string;
@@ -6,8 +5,7 @@ export interface ValidationResult {
 }
 
 export const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
-// DICOM usually has application/dicom but sometimes application/octet-stream or others
-export const ALLOWED_EXTENSIONS = ['.dcm'];
+export const ALLOWED_MIME = 'application/dicom'; // Note: Browsers might not detect this correctly
 
 export async function validateDicom(file: File): Promise<ValidationResult> {
     if (!file) {
@@ -19,19 +17,15 @@ export async function validateDicom(file: File): Promise<ValidationResult> {
     }
 
     // Basic magic bytes check
-    // DICOM file format: 128 bytes preamble + 4 bytes 'DICM'
+    // DICOM files have a 128-byte preamble followed by 'DICM'
     try {
         const buffer = Buffer.from(await file.arrayBuffer());
-
         if (buffer.length < 132) {
-            return { isValid: false, error: "Invalid file format. File too small.", status: 400 };
+             return { isValid: false, error: "Invalid file format. Too small.", status: 400 };
         }
-
         const magic = buffer.subarray(128, 132).toString();
         if (magic !== 'DICM') {
-             // Some DICOM files (Part 10 compliant) must have DICM.
-             // Non-compliant ones might not, but for security we enforce it for now.
-           return { isValid: false, error: "Invalid file format. Missing DICM header.", status: 400 };
+           return { isValid: false, error: "Invalid file format. Not a DICOM file.", status: 400 };
         }
     } catch (e) {
         return { isValid: false, error: "Failed to read file.", status: 500 };

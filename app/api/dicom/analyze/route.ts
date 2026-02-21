@@ -1,25 +1,45 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { validateDicom } from '@/lib/dicom/validation';
-import { extractDicomMetadataInSandbox } from '@/lib/dicom/extract';
+import { NextResponse } from "next/server";
+import { rateLimit } from "@/src/lib/rate-limit";
+import { extractDicomMetadataInSandbox } from "@/lib/dicom/dicomExtract";
+import { validateDicom } from "@/lib/dicom/validation";
 
-export const runtime = 'nodejs';
-export const maxDuration = 60; // 1 minute max
+export const runtime = "nodejs";
+export const maxDuration = 60; // 60 seconds
 
-export async function POST(req: NextRequest) {
+export async function POST(request: Request) {
+  // Feature Flag Check (Optional, but good practice)
+  // if (process.env.DICOM_ANALYZER_ENABLED !== '1') { ... }
+
+  // Rate Limiting: 5 requests per 10 minutes per IP
+  const ip = request.headers.get("x-forwarded-for")?.split(',')[0] || "127.0.0.1";
+  const limit = rateLimit(ip, 5, 10 * 60 * 1000);
+
+  if (!limit.success) {
+    return NextResponse.json(
+      { error: "Too many requests. Please try again later." },
+      {
+        status: 429,
+        headers: {
+          "Retry-After": String(Math.ceil((limit.reset - Date.now()) / 1000)),
+          "X-RateLimit-Limit": String(limit.limit),
+          "X-RateLimit-Remaining": String(limit.remaining),
+          "X-RateLimit-Reset": String(limit.reset)
+        }
+      }
+    );
+  }
+
   try {
-    const formData = await req.formData();
-    const file = formData.get('file') as File | null;
+    const formData = await request.formData();
+    const file = formData.get("file") as File | null;
 
     if (!file) {
-        return NextResponse.json({ error: 'No file provided' }, { status: 400 });
+      return NextResponse.json({ error: "No file uploaded" }, { status: 400 });
     }
 
     const validation = await validateDicom(file);
     if (!validation.isValid) {
-      return NextResponse.json(
-        { error: validation.error },
-        { status: validation.status || 400 }
-      );
+      return NextResponse.json({ error: validation.error }, { status: validation.status || 400 });
     }
 
     const buffer = Buffer.from(await file.arrayBuffer());
@@ -28,22 +48,13 @@ export async function POST(req: NextRequest) {
     const metadata = await extractDicomMetadataInSandbox(buffer);
 
     return NextResponse.json({
-      metadata,
+      metadata
     });
+
   } catch (error: any) {
-    console.error('DICOM analysis error:', error);
+    console.error("[DICOM Analyzer] Error:", error);
+    const message = error.message || "An unexpected error occurred.";
 
-    // Check for sandbox specific errors or timeouts
-    if (error.message?.includes('timed out')) {
-         return NextResponse.json(
-            { error: 'Processing timed out. The file might be too complex.' },
-            { status: 504 }
-          );
-    }
-
-    return NextResponse.json(
-      { error: 'Failed to process DICOM file.' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
