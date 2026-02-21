@@ -4,8 +4,15 @@ import * as gateway from '@/src/lib/ai/gateway';
 import * as blog from '@/src/lib/blog';
 import * as aiSdk from 'ai';
 
+// Mock next/cache
 vi.mock('next/cache', () => ({
   unstable_cache: (fn: any) => fn,
+}));
+
+// Mock dependencies
+vi.mock('@/src/lib/ai/gateway', () => ({
+  hasAIConfig: vi.fn(),
+  getTextModel: vi.fn(),
 }));
 
 // Mock dependencies
