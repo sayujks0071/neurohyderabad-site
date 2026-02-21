@@ -180,7 +180,28 @@ async function setupDashboards() {
   console.log('📊 Setting up Middleware dashboards for www.drsayuj.info\n');
 
   try {
+    // Fetch existing dashboards to prevent duplicates
+    console.log('🔍 Checking existing dashboards...');
+    let existingDashboards: any[] = [];
+    try {
+      existingDashboards = await middlewareApi.getDashboards();
+      console.log(`   Found ${existingDashboards.length} existing dashboards.\n`);
+    } catch (error: any) {
+      console.warn(`   ⚠️ Could not fetch existing dashboards: ${error.message}`);
+      console.warn('   Proceeding with creation (may cause duplicates if they exist)...\n');
+    }
+
+    console.log(`📡 Configuring dashboards...\n`);
+
     for (const config of DASHBOARDS) {
+      // Check if dashboard already exists
+      const exists = existingDashboards.find((d: any) => d.name === config.name);
+
+      if (exists) {
+        console.log(`⏭️  Skipping: ${config.name} (already exists, ID: ${exists.id})`);
+        continue;
+      }
+
       console.log(`Creating: ${config.name}...`);
 
       try {
