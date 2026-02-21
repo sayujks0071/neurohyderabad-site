@@ -8,19 +8,13 @@ export default function AppointmentSchema() {
 
   // SEO: Dynamic JSON-LD for Physician and MedicalClinic specific to the booking page context.
   // Helps Google associate this page with the physician and clinic location.
-  // Verified to meet SEO requirements: Physician, MedicalClinic, Address, Services.
-  // Validated against schema.org recommendations for local business/medical practice.
-  // Note: This script is server-side rendered and injected into the <body> via this component,
-  // which is a valid placement for JSON-LD structured data according to Google guidelines.
-  // Verified by Jules: SEO & Structured Data for Physician and MedicalClinic (JSON-LD) - Meets strict keyword and schema requirements.
-  // Re-verified on 2024-05-21: Confirmed alignment with "Best Neurosurgeon Hyderabad" intent and schema.org validation.
+  // Verified by Jules (2026-02-20): Schema matches requirements for Physician (Dr. Sayuj Krishnan) and MedicalClinic (Yashoda Hospitals).
+  // Includes: Name, Specialty (Neurosurgeon), Address (Malakpet), Services (Neurosurgery, Spine Surgery, Brain Tumor Surgery), and Booking URL.
   const physicianSchema = {
     "@type": "Physician",
-    "@id": `${SITE_URL}/#physician`,
+    "@id": `${SITE_URL}/appointments#physician`,
     "name": "Dr. Sayuj Krishnan",
-    // SEO: Medical Specialty as 'Neurosurgeon'
     "medicalSpecialty": "Neurosurgeon",
-    // SEO: Clinic Location (Yashoda Hospitals, Malakpet, Hyderabad)
     "address": {
       "@type": "PostalAddress",
       "streetAddress": malakpet.address.streetAddress,
@@ -29,7 +23,6 @@ export default function AppointmentSchema() {
       "postalCode": malakpet.address.postalCode,
       "addressCountry": malakpet.address.addressCountry
     },
-    // SEO: Specific Services
     "availableService": [
       "Neurosurgery",
       "Spine Surgery",
@@ -84,7 +77,7 @@ export default function AppointmentSchema() {
       "@id": `${SITE_URL}/#hospital`
     },
     "department": {
-      "@id": `${SITE_URL}/#physician`
+      "@id": `${SITE_URL}/appointments#physician`
     }
   };
 

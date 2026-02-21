@@ -12,3 +12,5 @@
 <!-- Jules Automation -->
 <!-- Schedule: Daily 09:00 IST -->
 <!-- Managed by Jules -->
+
+<!-- Verified setup -->

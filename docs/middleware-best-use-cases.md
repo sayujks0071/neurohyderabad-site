@@ -99,7 +99,9 @@ This document details the top 10 priority use cases, recommended dashboards, cri
 
 ## Recommended Dashboards
 
-To effectively monitor these use cases, we recommend setting up the following dashboards in Middleware:
+To effectively monitor these use cases, we recommend setting up the following dashboards in Middleware.
+
+**Note:** You can automatically create these dashboards using the provided script: `scripts/setup-middleware-dashboards.ts`.
 
 1.  **Business Critical Dashboard**
     *   Appointment Booking Success Rate
@@ -205,7 +207,35 @@ const ALERTS: AlertConfig[] = [
 // ... setup function using middlewareApi.createAlert()
 ```
 
-### 2. Event Tracking (`app/_components/ClientAnalytics.tsx`)
+### 2. Dashboard Configuration (`scripts/setup-middleware-dashboards.ts`)
+
+This script programmatically creates the recommended dashboards (Business Critical, Performance, Operational).
+
+```typescript
+// Example snippet from scripts/setup-middleware-dashboards.ts
+const DASHBOARDS = [
+  {
+    name: 'Business Critical Dashboard',
+    description: 'Key business metrics including appointment bookings and critical errors',
+    widgets: [
+      {
+        name: 'Appointment Booking Success Rate',
+        type: 'line',
+        query: {
+          metric: 'form.success_rate',
+          filters: [{ key: 'form_name', value: 'appointment' }],
+        },
+      },
+      // ... other widgets
+    ]
+  },
+  // ... other dashboards
+];
+
+// ... setup function using middlewareApi.createDashboard()
+```
+
+### 3. Event Tracking (`app/_components/ClientAnalytics.tsx`)
 
 The application uses a centralized analytics wrapper to send events to Middleware (and other providers).
 
@@ -243,6 +273,20 @@ export const analytics = {
       ...additionalProps
     });
   },
-  // ... other events
+
+  formError: (formName: string, error: string) => {
+    track('Form_Error', {
+      form_name: formName,
+      error_message: error
+    });
+  },
+
+  apiError: (endpoint: string, status: number, message: string) => {
+    track('API_Error', {
+      endpoint: endpoint,
+      status_code: status,
+      error_message: message
+    });
+  }
 };
 ```

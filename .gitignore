@@ -106,3 +106,4 @@ audit/lighthouse/*.json
 audit/lighthouse/*.html
 audit/crawl/*.json
 audit/crawl/*.csv
+!audit/crawl/url_inventory.csv

@@ -1,6 +1,6 @@
 
 import { NextRequest, NextResponse, after } from "next/server";
-import { rateLimit } from "@/src/lib/rate-limit";
+import { rateLimit, getClientIp } from "@/src/lib/rate-limit";
 import { validateLeadPayload } from "@/src/lib/validation";
 import { submitToGoogleSheets } from "@/src/lib/google-sheets";
 import { randomUUID } from "crypto";
@@ -31,7 +31,7 @@ function normalizeString(value: unknown) {
 }
 
 export async function POST(request: NextRequest) {
-  const ip = request.headers.get("x-forwarded-for") ?? "unknown";
+  const ip = getClientIp(request);
   const limit = rateLimit(ip, 5, 60 * 1000);
 
   if (!limit.success) {
@@ -128,7 +128,8 @@ export async function POST(request: NextRequest) {
       // Log CRM errors but don't fail the request
       // This ensures lead submission still works even if CRM is down
       console.error('[CRM] Failed to save to CRM database:', crmError);
-      crmErrorDetail = crmError instanceof Error ? crmError.message : String(crmError);
+      // 🛡️ Sentinel: Do NOT leak internal database errors to the client
+      crmErrorDetail = "CRM Sync Failed";
     }
 
     // Submit to Google Sheets (if configured)

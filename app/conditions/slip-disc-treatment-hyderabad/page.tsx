@@ -14,10 +14,11 @@ import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import TrustProof from '@/app/_components/TrustProof';
 import { patientStories } from '@/src/content/stories';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
+import RecoveryTimeline from '@/app/_components/RecoveryTimeline';
 
 const baseMetadata = makeMetadata({
-  title: "Slip Disc Treatment in Hyderabad | Endoscopic Discectomy | Dr. Sayuj Krishnan",
-  description: "Comprehensive slip disc treatment in Hyderabad: Conservative care, Pain Management, and Minimally Invasive Endoscopic Discectomy. Expert care by Dr. Sayuj Krishnan.",
+  title: "Slip Disc Treatment Hyderabad | Endoscopic Surgery",
+  description: "Expert slip disc treatment in Hyderabad: Conservative care, pain management & same-day endoscopic discectomy. 85-95% success rate. Dr. Sayuj Krishnan.",
   canonicalPath: '/conditions/slip-disc-treatment-hyderabad',
 });
 
@@ -114,6 +115,35 @@ export default function SlipDiscTreatmentPage() {
         <strong> Endoscopic Discectomy</strong>. Dr. Sayuj Krishnan ensures the right treatment
         at the right time for your spine health.
       </p>
+
+      {/* Key Stats Grid */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        <div className="bg-green-50 p-4 rounded-xl text-center border border-green-100">
+          <div className="text-3xl font-bold text-green-600 mb-1">90%</div>
+          <div className="text-sm text-green-800 font-medium">Treated Without Surgery</div>
+        </div>
+        <div className="bg-blue-50 p-4 rounded-xl text-center border border-blue-100">
+          <div className="text-3xl font-bold text-blue-600 mb-1">45m</div>
+          <div className="text-sm text-blue-800 font-medium">Procedure Time</div>
+        </div>
+        <div className="bg-purple-50 p-4 rounded-xl text-center border border-purple-100">
+          <div className="text-3xl font-bold text-purple-600 mb-1">Same Day</div>
+          <div className="text-sm text-purple-800 font-medium">Discharge</div>
+        </div>
+        <div className="bg-orange-50 p-4 rounded-xl text-center border border-orange-100">
+          <div className="text-3xl font-bold text-orange-600 mb-1">8mm</div>
+          <div className="text-sm text-orange-800 font-medium">Tiny Incision</div>
+        </div>
+      </div>
+
+      <div className="flex justify-center mb-12">
+        <Link
+          href="/appointments"
+          className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-colors font-semibold text-sm md:text-base shadow-sm"
+        >
+          Book Appointment or Second Opinion
+        </Link>
+      </div>
 
       {/* Red Flag Symptoms Section */}
       <section className="mb-12 bg-red-50 border-l-4 border-red-500 p-6 rounded-r-lg shadow-sm">
@@ -287,6 +317,15 @@ export default function SlipDiscTreatmentPage() {
           </div>
         </div>
       </section>
+
+      {/* Recovery Timeline */}
+      <div className="mb-12">
+        <RecoveryTimeline
+          title="Recovery Timeline: Endoscopic Discectomy"
+          description="Most patients walk immediately after surgery and return to desk work within a week. Here is the typical journey for those requiring surgery."
+          className="rounded-xl overflow-hidden"
+        />
+      </div>
 
       <CostTransparencySection
         costs={slipDiscCosts}

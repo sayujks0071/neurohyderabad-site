@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { rateLimit } from "@/src/lib/rate-limit";
-import { extractPdfTextInSandbox } from "@/lib/mri/pdfExtract";
+import { extractPdfTextInSandbox } from "@/lib/pdf/extract-sandbox";
 import { interpretReportText } from "@/lib/interpretReport";
-import { validatePdf } from "@/lib/mri/validation";
+import { validatePdf } from "@/lib/pdf/validation";
 
 export const runtime = "nodejs"; // Sandbox SDK requires nodejs runtime
 export const maxDuration = 60; // 60 seconds

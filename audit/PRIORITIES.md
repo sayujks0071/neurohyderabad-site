@@ -1,27 +1,32 @@
-# SEO Audit Priorities & Fix Backlog
+# SEO & Performance Priorities
 
-| ID | Issue | Affected URLs | Impact (1-5) | Effort (1-5) | Risk | Status |
-|---|---|---|---|---|---|---|
-| **P1** | **Critical LCP (16s)** | Global (Homepage, Service Pages) | 5 (High) | 3 (Med) | Low | **Investigating** |
-| **P2** | **Missing Metadata & H1** | `/brain-tumor-surgery` | 5 (High) | 1 (Low) | Low | **Resolved** (Redirects) |
-| **P3** | **Schema Gaps (MedicalClinic)** | Location Pages (`/locations/*`) | 4 (High) | 2 (Low) | Low | **Resolved** |
-| **P4** | **Canonical Mismatches** | Blog Pages (Trailing Slash) | 4 (High) | 1 (Low) | Low | **Resolved** |
-| **P5** | **Title Too Long** | Global | 3 (Med) | 1 (Low) | Low | **In Progress** |
-| P6 | Thin Content | `/drafts`, `/knowledge-base` | 2 (Low) | 2 (Low) | Low | Backlog |
+## Executive Summary
+The site has strong technical foundations with valid Schema.org implementation and good Core Web Vitals on most metrics. The primary area for improvement is **Content Depth** to match competitors (specifically regarding cost and recovery specifics) and **Mobile Performance** (Lighthouse scores ~60-70).
 
-## Status Updates (2026-02-16)
+## Impact/Effort Matrix
 
-### Resolved: Canonical Mismatches & Title Optimization
-- **Fix:** Removed trailing slashes from `canonicalUrl` in `src/lib/blog-seo.ts` and `app/_components/BlogLayout.tsx` to align with `next.config.mjs` (`trailingSlash: false`).
-- **Fix:** Shortened blog title suffix from ` | Dr. Sayuj Krishnan - Neurosurgeon Hyderabad` to ` | Dr. Sayuj Krishnan` to prevent SERP truncation and improve CTR.
+| Issue | Impact (1-5) | Effort (1-5) | Risk | Do Now? |
+| :--- | :---: | :---: | :---: | :---: |
+| **Missing Cost Transparency** | 5 | 2 | Low | **YES** |
+| **Missing Recovery Timeline** | 4 | 2 | Low | **YES** |
+| **Meta Description Length (Banjara Hills)** | 2 | 1 | Low | **YES** |
+| **Lighthouse: Render Blocking Resources** | 3 | 3 | Med | No |
+| **Lighthouse: Unused JavaScript** | 3 | 4 | High | No |
+| **Accessibility: Color Contrast** | 3 | 2 | Low | No |
 
-### Resolved: Schema Gaps
-- Validated `MedicalClinic`, `Physician`, and `BreadcrumbList` schemas are present and valid on key pages.
+## Top 3 "Do Now" Fixes
 
-### Resolved: Multiple H1 False Positives
-- Updated audit script to correctly count H1 tags, confirming only single H1s exist on key pages like Homepage and Appointments.
+### 1. Add Cost Transparency Table
+**Goal:** Match competitor (Dr. Raveesh) by providing estimated cost ranges.
+**Target:** `app/services/endoscopic-spine-surgery-hyderabad/page.tsx`
+**Action:** Insert a `CostTransparencySection` component.
 
-### Next Steps (P1 LCP)
-- The LCP issue needs deeper profiling. Hero images already use `priority`.
-- Potential causes: Blocking JS (Middleware/Analytics) or server response time (TTFB).
-- **Action:** Monitor TTFB in Vercel Analytics after deployment.
+### 2. Add Recovery Timeline
+**Goal:** Answer "return to work" queries explicitly.
+**Target:** `app/services/endoscopic-spine-surgery-hyderabad/page.tsx`
+**Action:** Insert a `RecoveryTimeline` component.
+
+### 3. Fix Metadata on Location Page
+**Goal:** Avoid truncation in SERPs.
+**Target:** `app/neurosurgeon-banjara-hills/page.tsx` (or data source)
+**Action:** Shorten meta description to < 160 chars.

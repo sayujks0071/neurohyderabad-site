@@ -1,14 +1,17 @@
 import { neon } from '@neondatabase/serverless';
+import { drizzle } from 'drizzle-orm/neon-http';
+import { eq, desc, and, sql as dSql, count } from 'drizzle-orm';
+import * as schema from './schema';
 
 // Type for the Neon SQL client
 type NeonClient = ReturnType<typeof neon>;
 
 // Lazy-initialize the SQL client
 let sql: NeonClient | null = null;
+let drizzleClient: any = null; // Use any to avoid strict type mismatch during build
 
-function getSql(): NeonClient | null {
+function getClients() {
   if (!sql) {
-    // Check multiple possible env var names (Vercel/Neon integration uses storage_ prefix)
     const connectionString = 
       process.env.POSTGRES_URL || 
       process.env.DATABASE_URL ||
@@ -17,18 +20,16 @@ function getSql(): NeonClient | null {
     
     if (!connectionString) {
       console.warn('Database URL not set. Checked: POSTGRES_URL, DATABASE_URL, storage_POSTGRES_URL, storage_DATABASE_URL');
-      return null;
+      throw new Error('Database URL not set');
     }
     sql = neon(connectionString);
+    drizzleClient = drizzle(sql, { schema });
   }
-  return sql;
+  return { sql: sql!, db: drizzleClient! };
 }
 
 // Type-safe query result
 type QueryResultRow = Record<string, unknown>;
-
-// Mock result for when DB is not configured
-const EMPTY_RESULT = { rows: [], rowCount: 0 };
 
 /**
  * Safely escape SQL identifiers (table names, column names)
@@ -40,51 +41,49 @@ function escapeIdentifier(identifier: string): string {
   return `"${identifier.replace(/"/g, '""')}"`;
 }
 
+// Export the Drizzle client for new code
+export const drizzleDb = {
+  get client() {
+    return getClients().db;
+  }
+};
+
 export const db = {
   /**
    * Execute a SQL query with optional parameters
    * Uses Neon serverless driver - optimized for edge/serverless
-   * Note: Uses sql.query() for parameterized queries (Neon v1.0+ API)
    */
   query: async <T extends QueryResultRow = QueryResultRow>(
     text: string,
     params?: unknown[]
   ): Promise<{ rows: T[]; rowCount: number }> => {
-    const client = getSql();
-    if (!client) {
-      console.debug('Database not configured, skipping query:', text.substring(0, 100));
-      return EMPTY_RESULT as { rows: T[]; rowCount: number };
-    }
-    // Use sql.query() for parameterized queries (v1.0+ API)
-    const rows = await client.query(text, params ?? []) as T[];
-    return { rows, rowCount: rows.length };
+    const { sql } = getClients();
+    const rows = await (sql as any)(text, params as any[]);
+    return { rows: rows as T[], rowCount: rows.length };
   },
 
   /**
-   * Execute a query and return just the rows
+   * Helper to get all rows
    */
   queryRows: async <T extends QueryResultRow = QueryResultRow>(
     text: string,
     params?: unknown[]
   ): Promise<T[]> => {
-    const client = getSql();
-    if (!client) {
-      console.debug('Database not configured, skipping query');
-      return [];
-    }
-    // Use sql.query() for parameterized queries (v1.0+ API)
-    return client.query(text, params ?? []) as Promise<T[]>;
+    const { sql } = getClients();
+    const rows = await (sql as any)(text, params as any[]);
+    return rows as T[];
   },
 
   /**
-   * Execute a query and return the first row or null
+   * Helper to get a single row or null
    */
   queryOne: async <T extends QueryResultRow = QueryResultRow>(
     text: string,
     params?: unknown[]
   ): Promise<T | null> => {
-    const rows = await db.queryRows<T>(text, params);
-    return rows[0] ?? null;
+    const { sql } = getClients();
+    const rows = await (sql as any)(text, params as any[]);
+    return (rows[0] as T) ?? null;
   },
 
   /**
@@ -140,7 +139,8 @@ export const db = {
   healthCheck: async (): Promise<{ ok: boolean; latencyMs: number; error?: string }> => {
     const start = Date.now();
     try {
-      await db.queryOne('SELECT 1 as check');
+      const { sql } = getClients();
+      await (sql as any)('SELECT 1 as check');
       return { ok: true, latencyMs: Date.now() - start };
     } catch (error) {
       return {
@@ -156,6 +156,7 @@ export const db = {
    */
   close: async (): Promise<void> => {
     sql = null;
+    drizzleClient = null;
   },
 };
 
@@ -183,14 +184,45 @@ export const appointments = {
     confirmation_message?: string;
     used_ai_confirmation?: boolean;
   }) => {
-    return db.insert('appointments', data);
+    // Migrated to Drizzle for better type safety
+    const { db: dDb } = getClients();
+    const result = await dDb.insert(schema.appointments).values({
+      patientName: data.patient_name,
+      patientEmail: data.patient_email,
+      patientPhone: data.patient_phone,
+      preferredDate: data.preferred_date,
+      preferredTime: data.preferred_time,
+      appointmentType: data.appointment_type,
+      chiefComplaint: data.chief_complaint,
+      intakeNotes: data.intake_notes,
+      patientAge: data.patient_age,
+      patientGender: data.patient_gender,
+      painScore: data.pain_score,
+      mriScanAvailable: data.mri_scan_available,
+      hasEmergencySymptoms: data.has_emergency_symptoms,
+      source: data.source,
+      workflowRunId: data.workflow_run_id,
+      confirmationMessage: data.confirmation_message,
+      usedAiConfirmation: data.used_ai_confirmation,
+      status: 'pending'
+    }).returning();
+    return result[0];
   },
 
   updateStatus: async (id: string, status: string, additionalData?: Record<string, unknown>) => {
-    const data: Record<string, unknown> = { status, ...additionalData };
-    if (status === 'confirmed') data.confirmed_at = new Date().toISOString();
-    if (status === 'completed') data.completed_at = new Date().toISOString();
-    return db.update('appointments', id, data);
+    const { db: dDb } = getClients();
+
+    // Convert status to something Drizzle can handle if we had enums, but here plain string
+    const updateData: any = { status };
+    if (status === 'confirmed') updateData.confirmedAt = new Date();
+    if (status === 'completed') updateData.completedAt = new Date();
+
+    const result = await dDb.update(schema.appointments)
+      .set(updateData)
+      .where(eq(schema.appointments.id, id))
+      .returning();
+
+    return result[0];
   },
 
   findByEmail: async (email: string) => {
@@ -261,7 +293,6 @@ export const patients = {
     mri_scan_available?: boolean;
     notes?: string;
   }) => {
-    // Insert or update based on email
     return db.queryOne(`
       INSERT INTO patients (email, name, phone, age, gender, primary_condition, acquisition_source, latest_pain_score, mri_scan_available, notes)
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
@@ -298,10 +329,19 @@ export const patients = {
     return db.queryOne('SELECT * FROM patients WHERE email = $1', [email]);
   },
 
-  updateLeadScore: async (id: string, score: number, status?: string) => {
-    const data: Record<string, unknown> = { lead_score: score };
+  updateLeadScore: async (id: string, score?: number, status?: string) => {
+    const data: Record<string, unknown> = {};
+    if (score !== undefined) data.lead_score = score;
     if (status) data.lead_status = status;
+    if (Object.keys(data).length === 0) return null;
     return db.update('patients', id, data);
+  },
+
+  getRecent: async (limit = 50) => {
+    return db.queryRows(
+      'SELECT * FROM patients ORDER BY last_contact_date DESC LIMIT $1',
+      [limit]
+    );
   },
 };
 

@@ -8,8 +8,8 @@ import MedicalWebPageSchema from '../components/schemas/MedicalWebPageSchema';
 import BreadcrumbSchema from '../components/schemas/BreadcrumbSchema';
 
 export const metadata: Metadata = {
-  title: 'Neurosurgical Services in Hyderabad | Dr. Sayuj Krishnan',
-  description: 'Expert neurosurgical services including endoscopic spine surgery, brain tumor surgery, epilepsy surgery, and trigeminal neuralgia treatment in Hyderabad.',
+  title: 'Brain & Spine Surgery Services Hyderabad | Dr. Sayuj Krishnan',
+  description: 'Specialized neurosurgical services in Hyderabad: Endoscopic Spine Surgery, Brain Tumor Removal, and Awake Surgery. Minimally invasive care by Dr. Sayuj.',
   keywords: [
     'neurosurgical services hyderabad',
     'spine surgery hyderabad',
@@ -93,13 +93,13 @@ export default function ServicesPage() {
     {
       title: 'Microvascular Decompression (MVD)',
       description: 'Microsurgical relief for trigeminal neuralgia and hemifacial spasm while preserving nerve function.',
-      href: '/services/microvascular-decompression-hyderabad',
+      href: '/conditions/trigeminal-neuralgia-treatment-hyderabad',
       features: ['Retrosigmoid keyhole', 'Neuromonitoring', 'Teflon interposition', 'Facial pain relief']
     },
     {
       title: 'Gamma Knife Radiosurgery',
       description: 'Stereotactic radiosurgery for brain tumours and trigeminal neuralgia with sub-millimetre precision.',
-      href: '/services/gamma-knife-radiosurgery-hyderabad',
+      href: '/services/brain-tumor-surgery-hyderabad',
       features: ['Non-incisional', 'High-dose precision', 'Outpatient workflow', 'Rapid recovery']
     },
     {

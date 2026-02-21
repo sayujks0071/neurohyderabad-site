@@ -126,9 +126,9 @@ export default function AdminDashboard() {
             </div>
           </Link>
 
-          <Link href="/admin/patients" className="block">
+          <Link href="/admin/leads" className="block">
             <div className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow">
-              <h3 className="text-lg font-medium text-gray-900">👥 Patients (CRM)</h3>
+              <h3 className="text-lg font-medium text-gray-900">👥 Leads (CRM)</h3>
               <p className="mt-2 text-sm text-gray-500">
                 Patient database and lead management
               </p>

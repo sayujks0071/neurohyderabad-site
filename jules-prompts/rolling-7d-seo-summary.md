@@ -16,3 +16,5 @@ Analyze SEO performance for the last 7 days.
 <!-- Jules Automation -->
 <!-- Schedule: Daily 09:15 IST -->
 <!-- Managed by Jules -->
+
+<!-- Verified setup -->

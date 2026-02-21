@@ -3,33 +3,26 @@ import { NextRequest } from 'next/server'
 
 // Mock dependencies
 vi.mock('@/src/lib/rate-limit', () => ({
-  rateLimit: vi.fn()
+  rateLimit: vi.fn(),
+  getClientIp: vi.fn().mockReturnValue('127.0.0.1')
 }))
 
+// Mock the gateway module including the new helper
 vi.mock('@/src/lib/ai/gateway', () => ({
-  isAIGatewayConfigured: () => false,
-  getGatewayModel: (m: string) => m,
-  getGatewayBaseUrl: () => 'https://api.openai.com/v1'
+  isAIGatewayConfigured: vi.fn(),
+  getGatewayModel: vi.fn(),
+  getGatewayBaseUrl: vi.fn(),
+  createRealtimeSession: vi.fn()
 }))
 
-// Mock fetch
-const fetchMock = vi.fn()
-global.fetch = fetchMock
-
-// Import rateLimit to mock return values
+// Import mocked functions
 import { rateLimit } from '@/src/lib/rate-limit'
-
-// Import the route handler AFTER mocking
+import { createRealtimeSession } from '@/src/lib/ai/gateway'
 import { POST } from '@/app/api/voice-agent/session/route'
 
 describe('Voice Agent Security', () => {
   beforeEach(() => {
-    process.env.OPENAI_API_KEY = 'mock-key';
-  });
-
-  afterEach(() => {
     vi.clearAllMocks();
-    delete process.env.OPENAI_API_KEY;
   });
 
   test('blocks requests when rate limit exceeded', async () => {
@@ -38,7 +31,7 @@ describe('Voice Agent Security', () => {
 
     const req = new NextRequest('http://localhost/api/voice-agent/session', {
       method: 'POST',
-      headers: { 'x-forwarded-for': '1.2.3.4' }
+      body: JSON.stringify({})
     });
 
     const res = await POST(req);
@@ -48,39 +41,55 @@ describe('Voice Agent Security', () => {
     expect(body.error).toContain('Too many requests');
   });
 
-  test('validates and sanitizes input parameters', async () => {
+  test('validates input and calls createRealtimeSession', async () => {
     const rateLimitMock = vi.mocked(rateLimit);
     rateLimitMock.mockReturnValue({ success: true, limit: 10, remaining: 9, reset: 1000 });
 
-    fetchMock.mockResolvedValue({
-      ok: true,
-      json: async () => ({ id: 'sess_123', client_secret: { url: 'ws://test' }, expires_at: 123456 })
+    const createSessionMock = vi.mocked(createRealtimeSession);
+    createSessionMock.mockResolvedValue({
+      sessionId: 'sess_123',
+      sessionUrl: 'ws://test',
+      expiresAt: '123456'
     });
 
-    const longInstructions = 'A'.repeat(3000);
-
+    const longInstructions = 'A'.repeat(6000);
     const req = new NextRequest('http://localhost/api/voice-agent/session', {
       method: 'POST',
       body: JSON.stringify({
         instructions: longInstructions,
-        voice: 'invalid-voice-should-fallback',
-        model: 'invalid-model-should-fallback'
+        voice: 'invalid-voice',
+        model: 'invalid-model'
       })
     });
 
-    await POST(req);
+    const res = await POST(req);
+    expect(res.status).toBe(200);
 
-    expect(fetchMock).toHaveBeenCalled();
-    const callArgs = fetchMock.mock.calls[0];
-    const callBody = JSON.parse(callArgs[1].body);
+    expect(createSessionMock).toHaveBeenCalledWith(expect.objectContaining({
+      voice: 'alloy', // Fallback
+      model: 'gpt-4o-realtime-preview', // Fallback
+    }));
 
-    // Verify instructions truncated to 2000 chars
-    expect(callBody.instructions.length).toBe(2000);
+    // Check instruction length in the call
+    const calledConfig = createSessionMock.mock.calls[0][0];
+    expect(calledConfig.instructions.length).toBe(5000);
+  });
 
-    // Verify voice fallback to 'alloy'
-    expect(callBody.voice).toBe('alloy');
+  test('returns 500 when createRealtimeSession fails', async () => {
+    const rateLimitMock = vi.mocked(rateLimit);
+    rateLimitMock.mockReturnValue({ success: true, limit: 10, remaining: 9, reset: 1000 });
 
-    // Verify model fallback to 'gpt-4o-realtime-preview'
-    expect(callBody.model).toBe('gpt-4o-realtime-preview');
+    const createSessionMock = vi.mocked(createRealtimeSession);
+    createSessionMock.mockRejectedValue(new Error('Gateway Error'));
+
+    const req = new NextRequest('http://localhost/api/voice-agent/session', {
+      method: 'POST',
+      body: JSON.stringify({ instructions: 'test' })
+    });
+
+    const res = await POST(req);
+    expect(res.status).toBe(500);
+    const body = await res.json();
+    expect(body.error).toBe('Failed to create voice session');
   });
 });

@@ -24,19 +24,25 @@ export const ConsultationPrepVideo: React.FC<ConsultationPrepProps> = ({
   const { fps } = useVideoConfig();
   const prefersReducedMotion = usePrefersReducedMotion();
 
-  // Scene 1 Exit: Scale up (zoom in) and fade out
+  // Scene 1 Exit: Scale up (zoom in), fade out, and blur
   const scene1ExitOpacity = interpolate(frame, [150, 180], [1, 0], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
   const scene1ExitScale = prefersReducedMotion
     ? 1
-    : interpolate(frame, [150, 180], [1, 1.1], {
+    : interpolate(frame, [150, 180], [1, 1.05], {
+        extrapolateLeft: 'clamp',
+        extrapolateRight: 'clamp',
+      });
+  const scene1ExitBlur = prefersReducedMotion
+    ? 0
+    : interpolate(frame, [150, 180], [0, 10], {
         extrapolateLeft: 'clamp',
         extrapolateRight: 'clamp',
       });
 
-  // Scene 2 Entrance: Scale up (zoom out from back) and fade in
+  // Scene 2 Entrance: Scale up (zoom out from back), fade in, and blur in
   const scene2EnterOpacity = interpolate(frame, [150, 180], [0, 1], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
@@ -47,20 +53,32 @@ export const ConsultationPrepVideo: React.FC<ConsultationPrepProps> = ({
         extrapolateLeft: 'clamp',
         extrapolateRight: 'clamp',
       });
+  const scene2EnterBlur = prefersReducedMotion
+    ? 0
+    : interpolate(frame, [150, 180], [10, 0], {
+        extrapolateLeft: 'clamp',
+        extrapolateRight: 'clamp',
+      });
 
-  // Scene 2 Exit: Scale up (zoom in) and fade out
+  // Scene 2 Exit: Scale up (zoom in), fade out, and blur out
   const scene2ExitOpacity = interpolate(frame, [420, 450], [1, 0], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
   const scene2ExitScale = prefersReducedMotion
     ? 1
-    : interpolate(frame, [420, 450], [1, 1.1], {
+    : interpolate(frame, [420, 450], [1, 1.05], {
+        extrapolateLeft: 'clamp',
+        extrapolateRight: 'clamp',
+      });
+  const scene2ExitBlur = prefersReducedMotion
+    ? 0
+    : interpolate(frame, [420, 450], [0, 10], {
         extrapolateLeft: 'clamp',
         extrapolateRight: 'clamp',
       });
 
-  // Scene 3 Entrance: Scale up (zoom out from back) and fade in
+  // Scene 3 Entrance: Scale up (zoom out from back), fade in, and blur in
   const scene3EnterOpacity = interpolate(frame, [420, 450], [0, 1], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
@@ -68,6 +86,12 @@ export const ConsultationPrepVideo: React.FC<ConsultationPrepProps> = ({
   const scene3EnterScale = prefersReducedMotion
     ? 1
     : interpolate(frame, [420, 450], [0.95, 1], {
+        extrapolateLeft: 'clamp',
+        extrapolateRight: 'clamp',
+      });
+  const scene3EnterBlur = prefersReducedMotion
+    ? 0
+    : interpolate(frame, [420, 450], [10, 0], {
         extrapolateLeft: 'clamp',
         extrapolateRight: 'clamp',
       });
@@ -80,6 +104,7 @@ export const ConsultationPrepVideo: React.FC<ConsultationPrepProps> = ({
           style={{
             opacity: scene1ExitOpacity,
             transform: `scale(${scene1ExitScale})`,
+            filter: `blur(${scene1ExitBlur}px)`,
           }}
         >
           <WelcomeScene patientName={patientName} />
@@ -92,6 +117,7 @@ export const ConsultationPrepVideo: React.FC<ConsultationPrepProps> = ({
           style={{
             opacity: scene2EnterOpacity * scene2ExitOpacity,
             transform: `scale(${scene2EnterScale * scene2ExitScale})`,
+            filter: `blur(${Math.max(scene2EnterBlur, scene2ExitBlur)}px)`,
           }}
         >
           <CalendarScene
@@ -107,6 +133,7 @@ export const ConsultationPrepVideo: React.FC<ConsultationPrepProps> = ({
           style={{
             opacity: scene3EnterOpacity,
             transform: `scale(${scene3EnterScale})`,
+            filter: `blur(${scene3EnterBlur}px)`,
           }}
         >
           <PrepStepsScene

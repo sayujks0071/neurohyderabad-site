@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { extractPdfTextInSandbox } from '@/lib/mri/pdfExtract';
+import { extractPdfTextInSandbox } from '@/lib/pdf/extract-sandbox';
 import * as sandboxClient from '@/lib/sandbox/client';
 import { NETWORK_POLICIES } from '@/lib/sandbox/network';
 

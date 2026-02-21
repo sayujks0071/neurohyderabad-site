@@ -1,21 +1,21 @@
 {
-  "timestamp": "2026-02-17T06:04:01.000Z",
-  "commit_hash": "HEAD",
-  "changes": [
-    {
-      "file": "app/_components/ClientAnalytics.tsx",
-      "description": "Staggered loading of StatsigAnalytics and FloatingWhatsApp by 2500ms after initial analytics load."
-    }
-  ],
-  "impact": {
-    "rationale": "Breaking up the hydration and execution of multiple third-party scripts (analytics, chat widget) into two phases reduces the main thread blocking time (TBT) during the critical first few seconds of page load. This lowers the risk of INP issues when users attempt to interact early.",
-    "metrics": {
-      "note": "Lab data (Lighthouse) shows stable scores. Real-world impact on INP is expected to be positive due to reduced main thread contention."
+  "timestamp": "2025-05-23T10:15:00Z",
+  "commit_hash": "current",
+  "page_types": {
+    "Home": {
+      "bottleneck": "CLS risk and TBT due to unnecessary lazy loading of LocalReputationPanel",
+      "fix": "Replaced lazy-loaded LocalReputationPanelWrapper with static LocalReputationPanel in app/page.tsx.",
+      "expected_impact": "Eliminated CLS risk from placeholder height mismatch. Reduced hydration cost (TBT) by removing LazySection wrapper. Improved SEO by including content in initial HTML.",
+      "verification": "Manual code verification confirming the removal of LazySection and direct rendering of LocalReputationPanel. Build failed due to unrelated 'dicom-parser' error, preventing bundle size verification."
     },
-    "verification_steps": [
-      "pnpm build",
-      "pnpm lhci --config=lighthouserc-cwv.js",
-      "Observe that ClientAnalytics.tsx logic now includes a 2.5s delay for 'heavy' scripts."
-    ]
+    "Location": {
+      "notes": "Location pages use client-side map embedding with 'click to load' pattern, which is good for performance."
+    },
+    "Condition": {
+      "notes": "Condition pages are static server components with some dynamic imports (videos). TrustProof component is imported statically but is a client component."
+    },
+    "Appointment": {
+      "notes": "Appointment page lazy loads heavy components (PatientPortal, ChatBot), which is good."
+    }
   }
 }

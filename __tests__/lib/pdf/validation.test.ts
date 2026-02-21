@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { validatePdf, MAX_FILE_SIZE } from '../../../lib/mri/validation';
+import { validatePdf, MAX_FILE_SIZE } from '../../../lib/pdf/validation';
 
 describe('validatePdf', () => {
   it('should return error if no file provided', async () => {
