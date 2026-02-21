@@ -146,6 +146,17 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
 
   const sheenLeft = interpolate(sheenDriver, [0, 1], [-100, 200]);
 
+  // Blur Animations
+  const calendarBlur = prefersReducedMotion ? 0 : interpolate(frame, [0, 20], [10, 0], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+  });
+
+  const dayNumberBlur = prefersReducedMotion ? 0 : interpolate(frame - 15, [0, 20], [10, 0], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+  });
+
   // Staggered Text Animation
   const successText = "Your Appointment is Scheduled";
   const words = successText.split(' ');
@@ -183,6 +194,7 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
             display: 'flex',
             flexDirection: 'column',
             position: 'relative', // For background grid
+            filter: `blur(${calendarBlur}px)`,
           }}
         >
           {/* Background Grid Pattern */}
@@ -300,7 +312,7 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
               </svg>
             </div>
 
-            <div style={{ transform: `scale(${dayNumberScale})` }}>
+            <div style={{ transform: `scale(${dayNumberScale})`, filter: `blur(${dayNumberBlur}px)` }}>
               <p
                 style={{
                   fontFamily: FONTS.primary,
