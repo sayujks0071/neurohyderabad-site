@@ -361,6 +361,35 @@ export default function SpineSurgeryHyderabadPage() {
           </div>
         </section>
 
+        <section className="mb-16 bg-gradient-to-r from-blue-900 to-slate-900 text-white rounded-2xl p-8 shadow-xl">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <h2 className="text-3xl font-bold mb-4">Second Opinion for Spine Surgery</h2>
+              <p className="text-blue-100 text-lg mb-6">
+                Have you been advised open spine surgery or fusion? Dr. Sayuj Krishnan&apos;s <strong>German Endoscopic Fellowship</strong> training allows him to offer less invasive alternatives that many surgeons may not perform.
+              </p>
+              <ul className="space-y-3 text-blue-100 mb-8">
+                <li className="flex items-center"><span className="text-green-400 mr-2">✓</span> Verify if you really need fusion (screws/rods)</li>
+                <li className="flex items-center"><span className="text-green-400 mr-2">✓</span> Explore &quot;Keyhole&quot; alternatives (7mm incision)</li>
+                <li className="flex items-center"><span className="text-green-400 mr-2">✓</span> Avoid general anesthesia risks (Awake Surgery)</li>
+              </ul>
+              <Link
+                href="/appointments"
+                className="inline-block bg-white text-blue-900 font-bold py-3 px-8 rounded-full hover:bg-blue-50 transition-colors"
+              >
+                Get a Second Opinion
+              </Link>
+            </div>
+            <div className="bg-white/10 p-6 rounded-xl border border-white/20">
+               <h3 className="text-xl font-semibold mb-3">Why Patients Switch to Dr. Sayuj</h3>
+               <p className="text-blue-200 text-sm mb-4">
+                 &quot;I was told I needed 4 screws and a 5-day hospital stay. Dr. Sayuj treated my slip disc with a 45-minute endoscopic procedure. I went home the same evening.&quot;
+               </p>
+               <p className="text-sm font-semibold">— Verified Patient Review</p>
+            </div>
+          </div>
+        </section>
+
         <section className="mb-16">
           <div className="bg-white border border-green-100 rounded-2xl p-8 shadow-sm">
             <h2 className="text-2xl font-bold text-green-800 mb-4">Is Spine Surgery Safe for Elderly Patients?</h2>
