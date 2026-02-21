@@ -58,7 +58,7 @@ export const db = {
     params?: unknown[]
   ): Promise<{ rows: T[]; rowCount: number }> => {
     const { sql } = getClients();
-    const rows = await sql(text, params as any[]);
+    const rows = await (sql as any)(text, params as any[]);
     return { rows: rows as T[], rowCount: rows.length };
   },
 
@@ -70,7 +70,7 @@ export const db = {
     params?: unknown[]
   ): Promise<T[]> => {
     const { sql } = getClients();
-    const rows = await sql(text, params as any[]);
+    const rows = await (sql as any)(text, params as any[]);
     return rows as T[];
   },
 
@@ -82,7 +82,7 @@ export const db = {
     params?: unknown[]
   ): Promise<T | null> => {
     const { sql } = getClients();
-    const rows = await sql(text, params as any[]);
+    const rows = await (sql as any)(text, params as any[]);
     return (rows[0] as T) ?? null;
   },
 
@@ -140,7 +140,7 @@ export const db = {
     const start = Date.now();
     try {
       const { sql } = getClients();
-      await sql('SELECT 1 as check');
+      await (sql as any)('SELECT 1 as check');
       return { ok: true, latencyMs: Date.now() - start };
     } catch (error) {
       return {
