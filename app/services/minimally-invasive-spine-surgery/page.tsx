@@ -22,8 +22,8 @@ import SurgeryComparisonTable from '@/src/components/SurgeryComparisonTable';
 import EndoscopicProcedureSteps from '@/src/components/EndoscopicProcedureSteps';
 
 const baseMetadata = makeMetadata({
-  title: 'Minimally Invasive Spine Surgery Hyderabad | Day Care',
-  description: 'Day-care endoscopic spine surgery in Hyderabad. Same-day discharge, 6-8mm incision, 1000+ procedures by Dr. Sayuj. Walk within hours of surgery.',
+  title: 'Minimally Invasive Spine Surgery Hyderabad | Day Care | Dr Sayuj',
+  description: 'Minimally Invasive Spine Surgery Hyderabad: Day Care procedure with same-day discharge. 1000+ successful endoscopic surgeries by Dr Sayuj. Book Consult.',
   canonicalPath: '/services/minimally-invasive-spine-surgery',
 });
 
@@ -237,10 +237,6 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
       />
       <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/minimally-invasive-spine-surgery`} />
       <div className="min-h-screen bg-white">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-        />
       <div className="container mx-auto px-4 py-16">
         <header className="text-center mb-8">
           <h1 className="text-4xl font-bold mb-4">Endoscopic & Minimally Invasive Spine Surgery Hyderabad</h1>
@@ -306,196 +302,273 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
               Dr. Sayuj Krishnan specializes in endoscopic spine procedures, offering patients the benefits of modern surgical techniques 
               with reduced trauma and quicker return to daily activities. <Link href="/services/endoscopic-spine-surgery-hyderabad/" className="text-blue-600 hover:underline">Learn more about our local patient journey for endoscopic spine surgery in Hyderabad.</Link>
             </p>
-          </div>
+          </header>
 
-          <EndoscopicProcedureSteps />
-
-          <div className="mt-8">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Compare: Endoscopic vs. Traditional Surgery</h3>
-            <p className="text-gray-600 mb-4">See why patients prefer the endoscopic approach for safer, faster recovery.</p>
-            <SurgeryComparisonTable />
-          </div>
-        </section>
-
-        <PatientJourneySection title="Your Treatment Journey" steps={JOURNEY_STEPS} />
-
-        {/* Diagnosis Section - Added to match competitor depth */}
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold text-blue-800 mb-6">Diagnosis & Eligibility</h2>
-          <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-            <p className="text-gray-700 mb-4">
-              Accurate diagnosis is the first step towards successful treatment. At Yashoda Hospital, we use advanced imaging and clinical evaluation to determine if you are a candidate for endoscopic surgery.
+          <section className="bg-blue-50 p-6 rounded-lg mb-8 border border-blue-100 shadow-sm text-center">
+            <p className="text-gray-800 text-lg mb-4">
+              <strong>Yashoda Hospital, Malakpet</strong> • Room No. 317, OPD Block
             </p>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div>
-                <h3 className="text-lg font-semibold text-blue-700 mb-3">Diagnostic Tests We Use</h3>
-                <ul className="space-y-2 text-gray-700">
-                  <li className="flex items-start">
-                    <span className="text-blue-600 mr-2 mt-1">•</span>
-                    <span><strong>MRI Spine:</strong> Essential to visualize disc herniation and nerve compression.</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-blue-600 mr-2 mt-1">•</span>
-                    <span><strong>Dynamic X-Rays:</strong> To check for spinal instability (slippage) during movement.</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-blue-600 mr-2 mt-1">•</span>
-                    <span><strong>CT Scan:</strong> Detailed bone imaging for fractures or bony spurs.</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-blue-600 mr-2 mt-1">•</span>
-                    <span><strong>Nerve Conduction Studies (NCS):</strong> To confirm nerve damage if diagnosis is unclear.</span>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-blue-700 mb-3">Who is a Candidate?</h3>
-                 <ul className="space-y-2 text-gray-700">
-                  <li className="flex items-start">
-                    <span className="text-green-600 mr-2 mt-1">✓</span>
-                    <span>Patients with radiating leg pain (sciatica) or arm pain.</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-green-600 mr-2 mt-1">✓</span>
-                    <span>Those who have failed 6 weeks of physiotherapy and medication.</span>
-                  </li>
-                   <li className="flex items-start">
-                    <span className="text-green-600 mr-2 mt-1">✓</span>
-                    <span>Difficulty walking due to spinal stenosis (claudication).</span>
-                  </li>
-                   <li className="flex items-start">
-                    <span className="text-green-600 mr-2 mt-1">✓</span>
-                    <span>Presence of progressive numbness or muscle weakness.</span>
-                  </li>
-                </ul>
-              </div>
+            <div className="flex flex-wrap justify-center gap-6 text-sm font-medium">
+              <a href="tel:+919778280044" className="flex items-center text-blue-700 hover:text-blue-900 bg-white px-4 py-2 rounded-full shadow-sm hover:shadow-md transition-all">
+                📞 +91-9778280044
+              </a>
+              <Link href="/appointments" className="flex items-center text-white bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-full shadow-sm hover:shadow-md transition-all">
+                Book Appointment
+              </Link>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold text-blue-800 mb-6">Post-Operative Care Guide</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="bg-blue-50 p-6 rounded-lg border border-blue-100">
-               <h3 className="text-lg font-semibold text-blue-800 mb-3">Diet & Hydration</h3>
-               <ul className="space-y-2 text-gray-700 text-sm">
-                 <li>• Drink plenty of water (3-4 liters)</li>
-                 <li>• High protein diet for healing</li>
-                 <li>• High fiber to prevent constipation</li>
-               </ul>
-            </div>
-            <div className="bg-blue-50 p-6 rounded-lg border border-blue-100">
-               <h3 className="text-lg font-semibold text-blue-800 mb-3">Wound Care</h3>
-               <ul className="space-y-2 text-gray-700 text-sm">
-                 <li>• Keep incision dry for 3 days</li>
-                 <li>• Change dressing if soaked</li>
-                 <li>• No swimming/tub bath for 2 weeks</li>
-               </ul>
-            </div>
-            <div className="bg-blue-50 p-6 rounded-lg border border-blue-100">
-               <h3 className="text-lg font-semibold text-blue-800 mb-3">Do's & Don'ts</h3>
-               <ul className="space-y-2 text-gray-700 text-sm">
-                 <li>• <strong>Do:</strong> Short walks every hour</li>
-                 <li>• <strong>Don't:</strong> Lift &gt;5kg for 3 weeks</li>
-                 <li>• <strong>Don't:</strong> Twist or bend excessively</li>
-               </ul>
-            </div>
-          </div>
-        </section>
+          <section className="mb-12">
+            <LocalPathways mode="service" />
+          </section>
 
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold text-blue-800 mb-6">Procedures We Offer</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            {procedures.map((procedure, index) => (
-              <div key={index} className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-                <h3 className="text-xl font-semibold text-blue-700 mb-3">
-                  {procedure.url ? (
-                    <Link href={procedure.url} className="hover:underline">
-                      {procedure.title}
-                    </Link>
-                  ) : (
-                    procedure.title
-                  )}
-                </h3>
-                <p className="text-gray-600 mb-4">{procedure.description}</p>
-                
-                <div className="mb-4">
-                  <h4 className="font-semibold text-gray-700 mb-2">Benefits:</h4>
-                  <ul className="space-y-1">
-                    {procedure.benefits.map((benefit, idx) => (
-                      <li key={idx} className="text-sm text-gray-600">• {benefit}</li>
-                    ))}
+          <section className="mb-10 rounded-lg border border-green-200 bg-green-50 p-6">
+            <h2 className="text-2xl font-semibold text-green-800 mb-3">For high-risk or elderly patients</h2>
+            <p className="text-gray-700 mb-3">
+              If you need to avoid general anaesthesia because of cardiac, lung, or metabolic risks, we offer an <strong>awake endoscopic spine pathway</strong> using spinal/epidural blocks with light sedation.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Link href="/services/awake-spine-surgery-hyderabad" className="rounded-full bg-green-700 px-5 py-2 text-sm font-semibold text-white hover:bg-green-800">
+                See Awake Spine Surgery
+              </Link>
+              <a
+                href="https://wa.me/919778280044"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full border border-green-300 px-5 py-2 text-sm font-semibold text-green-800 hover:bg-green-100"
+              >
+                Share MRI on WhatsApp
+              </a>
+            </div>
+          </section>
+
+          <section className="mb-12">
+            <h2 className="text-3xl font-bold text-blue-800 mb-6">What is Minimally Invasive Spine Surgery?</h2>
+            <div className="prose max-w-none">
+              <p className="text-lg text-gray-700 mb-6">
+                Minimally invasive spine surgery (MISS) uses advanced endoscopic techniques to treat spine conditions through smaller incisions,
+                resulting in less muscle damage, reduced pain, and faster recovery compared to traditional open surgery.
+              </p>
+              <p className="text-gray-700 mb-6">
+                Dr. Sayuj Krishnan specializes in endoscopic spine procedures, offering patients the benefits of modern surgical techniques
+                with reduced trauma and quicker return to daily activities. <Link href="/services/endoscopic-spine-surgery-hyderabad/" className="text-blue-600 hover:underline">Learn more about our local patient journey for endoscopic spine surgery in Hyderabad.</Link>
+              </p>
+            </div>
+
+            <EndoscopicProcedureSteps />
+
+            <div className="mt-8">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Compare: Endoscopic vs. Traditional Surgery</h3>
+              <p className="text-gray-600 mb-4">See why patients prefer the endoscopic approach for safer, faster recovery.</p>
+              <SurgeryComparisonTable />
+            </div>
+          </section>
+
+          <PatientJourneySection title="Your Treatment Journey" steps={JOURNEY_STEPS} />
+
+          {/* Video & Semantic Transcript Section - SEO Priority */}
+          <section className="mb-12">
+            <h2 className="text-3xl font-bold text-blue-800 mb-6">Watch: Endoscopic Management of Sciatica</h2>
+            <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+              <div className="aspect-video w-full bg-gray-100 relative">
+                <iframe
+                  className="absolute top-0 left-0 w-full h-full"
+                  src="https://www.youtube.com/embed/placeholder"
+                  title="Endoscopic Spine Surgery vs Traditional Open Surgery"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-semibold text-blue-700 mb-3">Video Transcript: Sciatica & Endoscopic Discectomy</h3>
+                <div className="h-64 overflow-y-auto text-sm text-gray-700 space-y-4 pr-4 custom-scrollbar">
+                  <p><strong>[00:00] Dr. Sayuj Krishnan:</strong> Welcome. Today we're going to discuss the paradigm shift in how we treat severe sciatica originating from a herniated lumbar disc, specifically L4-L5 and L5-S1 disc herniations.</p>
+                  <p><strong>[00:15]</strong> Many patients suffer for months with sharp, radiating leg pain, numbness, and claudication—the inability to walk long distances. Traditionally, the solution was an open laminectomy or open discectomy, which involved significant muscle stripping to access the spine.</p>
+                  <p><strong>[00:40]</strong> With Full Endoscopic Spine Surgery, we use a completely different approach. Through a tiny 6-8mm incision, smaller than a coin, we insert a specialized endoscope directly to the site of the nerve compression. This transforaminal or interlaminar approach allows us to safely remove the offending disc fragment without destroying the stability of the spine.</p>
+                  <p><strong>[01:10]</strong> Crucially, since there's negligible muscle damage, our patients are walking within two hours of surgery. This 'Day Zero' mobilization means patients can safely go home the very same day or the next morning. It's a true day-care procedure that minimizes hospital-acquired infections and dramatically accelerates recovery timelines.</p>
+                </div>
+                <p className="mt-4 text-xs text-gray-500 italic">*Placeholder video & transcript. Replace with actual Yashoda/Socialpost Health Dr. Sayuj YouTube asset.*</p>
+              </div>
+            </div>
+          </section>
+
+          {/* Diagnosis Section - Added to match competitor depth */}
+          <section className="mb-12">
+            <h2 className="text-3xl font-bold text-blue-800 mb-6">Diagnosis & Eligibility</h2>
+            <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+              <p className="text-gray-700 mb-4">
+                Accurate diagnosis is the first step towards successful treatment. At Yashoda Hospital, we use advanced imaging and clinical evaluation to determine if you are a candidate for endoscopic surgery.
+              </p>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <h3 className="text-lg font-semibold text-blue-700 mb-3">Diagnostic Tests We Use</h3>
+                  <ul className="space-y-2 text-gray-700">
+                    <li className="flex items-start">
+                      <span className="text-blue-600 mr-2 mt-1">•</span>
+                      <span><strong>MRI Spine:</strong> Essential to visualize disc herniation and nerve compression.</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-blue-600 mr-2 mt-1">•</span>
+                      <span><strong>Dynamic X-Rays:</strong> To check for spinal instability (slippage) during movement.</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-blue-600 mr-2 mt-1">•</span>
+                      <span><strong>CT Scan:</strong> Detailed bone imaging for fractures or bony spurs.</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-blue-600 mr-2 mt-1">•</span>
+                      <span><strong>Nerve Conduction Studies (NCS):</strong> To confirm nerve damage if diagnosis is unclear.</span>
+                    </li>
                   </ul>
                 </div>
-                
-                <div className="text-sm text-blue-600 font-medium">
-                  Typical Recovery: {procedure.recovery}
+                <div>
+                  <h3 className="text-lg font-semibold text-blue-700 mb-3">Who is a Candidate?</h3>
+                  <ul className="space-y-2 text-gray-700">
+                    <li className="flex items-start">
+                      <span className="text-green-600 mr-2 mt-1">✓</span>
+                      <span>Patients with radiating leg pain (sciatica) or arm pain.</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-green-600 mr-2 mt-1">✓</span>
+                      <span>Those who have failed 6 weeks of physiotherapy and medication.</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-green-600 mr-2 mt-1">✓</span>
+                      <span>Difficulty walking due to spinal stenosis (claudication).</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-green-600 mr-2 mt-1">✓</span>
+                      <span>Presence of progressive numbness or muscle weakness.</span>
+                    </li>
+                  </ul>
                 </div>
               </div>
-            ))}
-          </div>
-        </section>
+            </div>
+          </section>
 
-        <section className="mb-12 bg-white rounded-lg border border-blue-100 shadow-sm p-8">
-          <h2 className="text-3xl font-bold text-blue-800 mb-8 text-center">Why Choose Dr. Sayuj Krishnan?</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Microscope className="w-8 h-8 text-blue-600" />
+          <section className="mb-12">
+            <h2 className="text-3xl font-bold text-blue-800 mb-6">Post-Operative Care Guide</h2>
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="bg-blue-50 p-6 rounded-lg border border-blue-100">
+                <h3 className="text-lg font-semibold text-blue-800 mb-3">Diet & Hydration</h3>
+                <ul className="space-y-2 text-gray-700 text-sm">
+                  <li>• Drink plenty of water (3-4 liters)</li>
+                  <li>• High protein diet for healing</li>
+                  <li>• High fiber to prevent constipation</li>
+                </ul>
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Endoscopic Expert</h3>
-              <p className="text-sm text-gray-600">Specialized training in full endoscopic spine surgery techniques.</p>
-            </div>
-            <div className="text-center">
-              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <ShieldCheck className="w-8 h-8 text-blue-600" />
+              <div className="bg-blue-50 p-6 rounded-lg border border-blue-100">
+                <h3 className="text-lg font-semibold text-blue-800 mb-3">Wound Care</h3>
+                <ul className="space-y-2 text-gray-700 text-sm">
+                  <li>• Keep incision dry for 3 days</li>
+                  <li>• Change dressing if soaked</li>
+                  <li>• No swimming/tub bath for 2 weeks</li>
+                </ul>
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Advanced Safety</h3>
-              <p className="text-sm text-gray-600">Neuro-navigation and neuromonitoring for maximum safety.</p>
-            </div>
-            <div className="text-center">
-              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Clock className="w-8 h-8 text-blue-600" />
+              <div className="bg-blue-50 p-6 rounded-lg border border-blue-100">
+                <h3 className="text-lg font-semibold text-blue-800 mb-3">Do's & Don'ts</h3>
+                <ul className="space-y-2 text-gray-700 text-sm">
+                  <li>• <strong>Do:</strong> Short walks every hour</li>
+                  <li>• <strong>Don't:</strong> Lift &gt;5kg for 3 weeks</li>
+                  <li>• <strong>Don't:</strong> Twist or bend excessively</li>
+                </ul>
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Rapid Recovery</h3>
-              <p className="text-sm text-gray-600">Day-care procedures with same-day walking and discharge.</p>
             </div>
-            <div className="text-center">
-              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <HeartHandshake className="w-8 h-8 text-blue-600" />
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Ethical Care</h3>
-              <p className="text-sm text-gray-600">Transparent pricing and honest surgical indications.</p>
-            </div>
-          </div>
-        </section>
+          </section>
 
-        {/* Safety for Elderly Section */}
-        <section className="mb-12 bg-gradient-to-r from-green-50 to-white p-8 rounded-lg border border-green-100 shadow-sm">
-          <h2 className="text-3xl font-bold text-green-900 mb-6">Is Endoscopic Spine Surgery Safe for Elderly Patients?</h2>
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-             <div>
+          <section className="mb-12">
+            <h2 className="text-3xl font-bold text-blue-800 mb-6">Procedures We Offer</h2>
+            <div className="grid md:grid-cols-2 gap-8">
+              {procedures.map((procedure, index) => (
+                <div key={index} className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+                  <h3 className="text-xl font-semibold text-blue-700 mb-3">
+                    {procedure.url ? (
+                      <Link href={procedure.url} className="hover:underline">
+                        {procedure.title}
+                      </Link>
+                    ) : (
+                      procedure.title
+                    )}
+                  </h3>
+                  <p className="text-gray-600 mb-4">{procedure.description}</p>
+
+                  <div className="mb-4">
+                    <h4 className="font-semibold text-gray-700 mb-2">Benefits:</h4>
+                    <ul className="space-y-1">
+                      {procedure.benefits.map((benefit, idx) => (
+                        <li key={idx} className="text-sm text-gray-600">• {benefit}</li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="text-sm text-blue-600 font-medium">
+                    Typical Recovery: {procedure.recovery}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section className="mb-12 bg-white rounded-lg border border-blue-100 shadow-sm p-8">
+            <h2 className="text-3xl font-bold text-blue-800 mb-8 text-center">Why Choose Dr. Sayuj Krishnan?</h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div className="text-center">
+                <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Microscope className="w-8 h-8 text-blue-600" />
+                </div>
+                <h3 className="font-semibold text-gray-900 mb-2">Endoscopic Expert</h3>
+                <p className="text-sm text-gray-600">Specialized training in full endoscopic spine surgery techniques.</p>
+              </div>
+              <div className="text-center">
+                <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <ShieldCheck className="w-8 h-8 text-blue-600" />
+                </div>
+                <h3 className="font-semibold text-gray-900 mb-2">Advanced Safety</h3>
+                <p className="text-sm text-gray-600">Neuro-navigation and neuromonitoring for maximum safety.</p>
+              </div>
+              <div className="text-center">
+                <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Clock className="w-8 h-8 text-blue-600" />
+                </div>
+                <h3 className="font-semibold text-gray-900 mb-2">Rapid Recovery</h3>
+                <p className="text-sm text-gray-600">Day-care procedures with same-day walking and discharge.</p>
+              </div>
+              <div className="text-center">
+                <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <HeartHandshake className="w-8 h-8 text-blue-600" />
+                </div>
+                <h3 className="font-semibold text-gray-900 mb-2">Ethical Care</h3>
+                <p className="text-sm text-gray-600">Transparent pricing and honest surgical indications.</p>
+              </div>
+            </div>
+          </section>
+
+          {/* Safety for Elderly Section */}
+          <section className="mb-12 bg-gradient-to-r from-green-50 to-white p-8 rounded-lg border border-green-100 shadow-sm">
+            <h2 className="text-3xl font-bold text-green-900 mb-6">Is Endoscopic Spine Surgery Safe for Elderly Patients?</h2>
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div>
                 <p className="text-lg text-gray-800 mb-4">
                   Yes, it is often a <strong>safer option for patients over 60</strong> compared to open surgery.
                   Traditional open spine surgery carries risks due to general anesthesia and blood loss.
                   Our endoscopic technique mitigates these risks significantly.
                 </p>
                 <ul className="space-y-3">
-                   <li className="flex items-start">
-                      <span className="text-green-600 font-bold mr-2">✓</span>
-                      <span className="text-gray-700"><strong>Local Anesthesia/Sedation:</strong> Avoids the cardiac stress of general anesthesia.</span>
-                   </li>
-                   <li className="flex items-start">
-                      <span className="text-green-600 font-bold mr-2">✓</span>
-                      <span className="text-gray-700"><strong>Minimal Blood Loss:</strong> Crucial for patients on blood thinners (managed carefully).</span>
-                   </li>
-                   <li className="flex items-start">
-                      <span className="text-green-600 font-bold mr-2">✓</span>
-                      <span className="text-gray-700"><strong>Early Mobilization:</strong> Reduces risk of pneumonia and DVT (clots).</span>
-                   </li>
+                  <li className="flex items-start">
+                    <span className="text-green-600 font-bold mr-2">✓</span>
+                    <span className="text-gray-700"><strong>Local Anesthesia/Sedation:</strong> Avoids the cardiac stress of general anesthesia.</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-600 font-bold mr-2">✓</span>
+                    <span className="text-gray-700"><strong>Minimal Blood Loss:</strong> Crucial for patients on blood thinners (managed carefully).</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-600 font-bold mr-2">✓</span>
+                    <span className="text-gray-700"><strong>Early Mobilization:</strong> Reduces risk of pneumonia and DVT (clots).</span>
+                  </li>
                 </ul>
-             </div>
-             <div className="bg-white p-6 rounded-xl shadow-md border border-green-200">
+              </div>
+              <div className="bg-white p-6 rounded-xl shadow-md border border-green-200">
                 <h3 className="font-bold text-green-800 mb-2">Second Opinion for Senior Citizens</h3>
                 <p className="text-sm text-gray-600 mb-4">
                   If your parent has been advised major spine surgery, bring them for an evaluation.
@@ -504,295 +577,295 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
                 <Link href="/appointments" className="block w-full text-center bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors">
                   Book Senior Citizen Consult
                 </Link>
-             </div>
-          </div>
-        </section>
-
-        <CostTransparencySection costs={COSTS} />
-
-        <OutcomeMetricsSection procedure="Minimally Invasive Spine Surgery" />
-
-        {/* Patient Testimonials Section */}
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold text-blue-800 mb-6 text-center">Patient Success Stories</h2>
-          <p className="text-gray-700 mb-6">
-            See how minimally invasive techniques provide effective <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 underline">sciatica leg pain relief</Link> and help patients with back pain return to their active lives.
-          </p>
-          <div className="grid md:grid-cols-2 gap-6">
-            {spineStoryHighlights.map((story) => (
-              <article key={story.id} className="bg-white rounded-lg p-6 shadow-sm border-l-4 border-blue-500">
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                    <span className="text-blue-600 font-bold text-lg">
-                      {story.patientInitials.charAt(0)}
-                    </span>
-                  </div>
-                  <div className="ml-4">
-                    <div className="font-semibold text-gray-800">{story.patientInitials}</div>
-                    <div className="text-sm text-gray-600">{story.procedure}</div>
-                  </div>
-                </div>
-                <p className="text-gray-700 italic">“{story.quote}”</p>
-                <div className="mt-3 text-sm text-gray-600">
-                  <strong>Condition:</strong> {story.condition}
-                  {story.recoveryTime ? (
-                    <>
-                      {" "}• <strong>Recovery:</strong> {story.recoveryTime}
-                    </>
-                  ) : null}
-                </div>
-                <Link
-                  href={`/patient-stories/${story.slug}`}
-                  className="mt-4 inline-flex items-center text-blue-600 font-semibold hover:text-blue-700"
-                >
-                  Read full story
-                  <span aria-hidden className="ml-2">→</span>
-                </Link>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold text-blue-800 mb-6">When is MISS Recommended?</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-white p-6 rounded-lg shadow-sm border">
-              <h3 className="text-lg font-semibold mb-3 text-blue-700">Suitable Conditions</h3>
-              <ul className="space-y-2 text-gray-700">
-                <li>• Herniated discs (lumbar/cervical)</li>
-                <li>• Spinal stenosis</li>
-                <li>• Foraminal stenosis</li>
-                <li>• Nerve root compression</li>
-                <li>• Failed conservative treatment</li>
-              </ul>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-sm border">
-              <h3 className="text-lg font-semibold mb-3 text-blue-700">Patient Selection</h3>
-              <ul className="space-y-2 text-gray-700">
-                <li>• MRI-confirmed pathology</li>
-                <li>• Symptoms match imaging findings</li>
-                <li>• Failed 6+ weeks conservative care</li>
-                <li>• No significant instability</li>
-                <li>• Realistic expectations</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <section className="mb-12">
-          <TeleconsultationForm pageSlug="/services/minimally-invasive-spine-surgery" service="Minimally Invasive Spine Surgery" />
-        </section>
-
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold text-blue-800 mb-6">Frequently Asked Questions</h2>
-          <div className="space-y-6">
-            {faqs.map((faq) => (
-              <article key={faq.question} className="bg-white border border-blue-100 rounded-lg p-6 shadow-sm">
-                <h3 className="text-xl font-semibold text-blue-700 mb-3">{faq.question}</h3>
-                <p className="text-gray-700">{faq.answer}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold text-blue-800 mb-6">Recovery and Return to Activity</h2>
-          <div className="bg-white p-8 rounded-lg shadow-sm border">
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="text-center">
-                <div className="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl font-bold text-blue-600">1</span>
-                </div>
-                <h3 className="font-semibold text-blue-700 mb-2">Week 1-2</h3>
-                <p className="text-sm text-gray-600">Light walking, wound care, pain management</p>
-              </div>
-              <div className="text-center">
-                <div className="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl font-bold text-blue-600">2</span>
-                </div>
-                <h3 className="font-semibold text-blue-700 mb-2">Week 2-4</h3>
-                <p className="text-sm text-gray-600">Gradual activity increase, return to desk work</p>
-              </div>
-              <div className="text-center">
-                <div className="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl font-bold text-blue-600">3</span>
-                </div>
-                <h3 className="font-semibold text-blue-700 mb-2">Week 4-8</h3>
-                <p className="text-sm text-gray-600">Full activity, physical therapy if needed</p>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold text-blue-800 mb-6">Common Concerns</h2>
-          <div className="space-y-6">
-            <div className="bg-gray-50 p-6 rounded-lg">
-              <h3 className="text-xl font-semibold mb-3 text-blue-700">Is endoscopic surgery always better than open surgery?</h3>
-              <p className="text-gray-700">Not always. We choose the approach that safely achieves the best outcome for your specific condition. Each case is evaluated individually.</p>
-            </div>
-            <div className="bg-gray-50 p-6 rounded-lg">
-              <h3 className="text-xl font-semibold mb-3 text-blue-700">How long is the hospital stay?</h3>
-              <p className="text-gray-700">Most endoscopic procedures are day-care or require only 1-2 nights in the hospital, compared to 3-5 nights for traditional surgery.</p>
-            </div>
-            <div className="bg-gray-50 p-6 rounded-lg">
-              <h3 className="text-xl font-semibold mb-3 text-blue-700">When can I return to work?</h3>
-              <p className="text-gray-700">Desk work can often resume within 1-2 weeks, while manual labor may require 4-6 weeks depending on the procedure and your recovery.</p>
-            </div>
-          </div>
-        </section>
+          <CostTransparencySection costs={COSTS} />
 
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold text-blue-800 mb-6">Red Flag Symptoms (When to see a doctor urgently)</h2>
-          <div className="bg-red-50 border-l-4 border-red-500 p-6 rounded-r-lg">
-            <p className="text-lg font-semibold text-red-800 mb-3">
-              Seek immediate medical attention if you experience:
+          <OutcomeMetricsSection procedure="Minimally Invasive Spine Surgery" />
+
+          {/* Patient Testimonials Section */}
+          <section className="mb-12">
+            <h2 className="text-3xl font-bold text-blue-800 mb-6 text-center">Patient Success Stories</h2>
+            <p className="text-gray-700 mb-6">
+              See how minimally invasive techniques provide effective <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 underline">sciatica leg pain relief</Link> and help patients with back pain return to their active lives.
             </p>
-            <ul className="space-y-2 text-red-700">
-              <li className="flex items-start">
-                <span className="font-bold mr-2">•</span>
-                <span><strong>Cauda Equina Syndrome signs:</strong> Loss of bladder or bowel control, or numbness in the groin/saddle area.</span>
-              </li>
-              <li className="flex items-start">
-                <span className="font-bold mr-2">•</span>
-                <span><strong>Progressive weakness:</strong> Sudden inability to lift your foot (foot drop) or leg weakness that gets worse.</span>
-              </li>
-              <li className="flex items-start">
-                <span className="font-bold mr-2">•</span>
-                <span><strong>History of cancer:</strong> If you have a history of cancer and develop new, severe back pain.</span>
-              </li>
-            </ul>
-            <p className="mt-4 text-sm text-red-600 italic">
-              *These symptoms may indicate serious nerve compression requiring urgent evaluation to prevent permanent damage.
-            </p>
-          </div>
-        </section>
+            <div className="grid md:grid-cols-2 gap-6">
+              {spineStoryHighlights.map((story) => (
+                <article key={story.id} className="bg-white rounded-lg p-6 shadow-sm border-l-4 border-blue-500">
+                  <div className="flex items-center mb-4">
+                    <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                      <span className="text-blue-600 font-bold text-lg">
+                        {story.patientInitials.charAt(0)}
+                      </span>
+                    </div>
+                    <div className="ml-4">
+                      <div className="font-semibold text-gray-800">{story.patientInitials}</div>
+                      <div className="text-sm text-gray-600">{story.procedure}</div>
+                    </div>
+                  </div>
+                  <p className="text-gray-700 italic">“{story.quote}”</p>
+                  <div className="mt-3 text-sm text-gray-600">
+                    <strong>Condition:</strong> {story.condition}
+                    {story.recoveryTime ? (
+                      <>
+                        {" "}• <strong>Recovery:</strong> {story.recoveryTime}
+                      </>
+                    ) : null}
+                  </div>
+                  <Link
+                    href={`/patient-stories/${story.slug}`}
+                    className="mt-4 inline-flex items-center text-blue-600 font-semibold hover:text-blue-700"
+                  >
+                    Read full story
+                    <span aria-hidden className="ml-2">→</span>
+                  </Link>
+                </article>
+              ))}
+            </div>
+          </section>
 
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold text-blue-800 mb-6">Related Conditions & Symptoms</h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-white p-6 rounded-lg shadow-sm border">
-              <h3 className="text-xl font-semibold text-blue-700 mb-3">Spine Conditions We Treat</h3>
-              <ul className="space-y-2">
-                <li>
-                  <Link href="/conditions/spinal-stenosis-treatment-hyderabad" className="text-blue-600 hover:text-blue-800 hover:underline">
-                    Spinal Stenosis Treatment
-                  </Link>
-                  <span className="text-gray-600 text-sm ml-2">- Narrowing of spinal canal</span>
+          <section className="mb-12">
+            <h2 className="text-3xl font-bold text-blue-800 mb-6">When is MISS Recommended?</h2>
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="bg-white p-6 rounded-lg shadow-sm border">
+                <h3 className="text-lg font-semibold mb-3 text-blue-700">Suitable Conditions</h3>
+                <ul className="space-y-2 text-gray-700">
+                  <li>• Herniated discs (lumbar/cervical)</li>
+                  <li>• Spinal stenosis</li>
+                  <li>• Foraminal stenosis</li>
+                  <li>• Nerve root compression</li>
+                  <li>• Failed conservative treatment</li>
+                </ul>
+              </div>
+              <div className="bg-white p-6 rounded-lg shadow-sm border">
+                <h3 className="text-lg font-semibold mb-3 text-blue-700">Patient Selection</h3>
+                <ul className="space-y-2 text-gray-700">
+                  <li>• MRI-confirmed pathology</li>
+                  <li>• Symptoms match imaging findings</li>
+                  <li>• Failed 6+ weeks conservative care</li>
+                  <li>• No significant instability</li>
+                  <li>• Realistic expectations</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section className="mb-12">
+            <TeleconsultationForm pageSlug="/services/minimally-invasive-spine-surgery" service="Minimally Invasive Spine Surgery" />
+          </section>
+
+          <section className="mb-12">
+            <h2 className="text-3xl font-bold text-blue-800 mb-6">Frequently Asked Questions</h2>
+            <div className="space-y-6">
+              {faqs.map((faq) => (
+                <article key={faq.question} className="bg-white border border-blue-100 rounded-lg p-6 shadow-sm">
+                  <h3 className="text-xl font-semibold text-blue-700 mb-3">{faq.question}</h3>
+                  <p className="text-gray-700">{faq.answer}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className="mb-12">
+            <h2 className="text-3xl font-bold text-blue-800 mb-6">Recovery and Return to Activity</h2>
+            <div className="bg-white p-8 rounded-lg shadow-sm border">
+              <div className="grid md:grid-cols-3 gap-6">
+                <div className="text-center">
+                  <div className="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl font-bold text-blue-600">1</span>
+                  </div>
+                  <h3 className="font-semibold text-blue-700 mb-2">Week 1-2</h3>
+                  <p className="text-sm text-gray-600">Light walking, wound care, pain management</p>
+                </div>
+                <div className="text-center">
+                  <div className="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl font-bold text-blue-600">2</span>
+                  </div>
+                  <h3 className="font-semibold text-blue-700 mb-2">Week 2-4</h3>
+                  <p className="text-sm text-gray-600">Gradual activity increase, return to desk work</p>
+                </div>
+                <div className="text-center">
+                  <div className="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl font-bold text-blue-600">3</span>
+                  </div>
+                  <h3 className="font-semibold text-blue-700 mb-2">Week 4-8</h3>
+                  <p className="text-sm text-gray-600">Full activity, physical therapy if needed</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section className="mb-12">
+            <h2 className="text-3xl font-bold text-blue-800 mb-6">Patient Concerns & Recovery Realities</h2>
+            <div className="space-y-6">
+              <div className="bg-gray-50 p-6 rounded-lg">
+                <h3 className="text-xl font-semibold mb-3 text-blue-700">Is endoscopic surgery always better than open spinal fusion?</h3>
+                <p className="text-gray-700">Not always. We choose the approach that safely achieves the best outcome for your specific condition. If significant instability exists, a Minimally Invasive TLIF (fusion) may be required over a simple targeted decompression.</p>
+              </div>
+              <div className="bg-gray-50 p-6 rounded-lg">
+                <h3 className="text-xl font-semibold mb-3 text-blue-700">How long is the actual hospital stay in Hyderabad?</h3>
+                <p className="text-gray-700">Most endoscopic procedures are true day-care or require a single night's observation at Yashoda Hospital, Malakpet, compared to the 3-5 nights required for traditional open laminectomy.</p>
+              </div>
+              <div className="bg-gray-50 p-6 rounded-lg">
+                <h3 className="text-xl font-semibold mb-3 text-blue-700">Can I walk immediately after endoscopic discectomy?</h3>
+                <p className="text-gray-700">Yes. Patients are mobilized on 'Day 0', walking the corridors with physiotherapy support within 2-3 hours of waking up from the procedure.</p>
+              </div>
+            </div>
+          </section>
+
+          <section className="mb-12">
+            <h2 className="text-3xl font-bold text-blue-800 mb-6">Red Flag Symptoms (When to see a doctor urgently)</h2>
+            <div className="bg-red-50 border-l-4 border-red-500 p-6 rounded-r-lg">
+              <p className="text-lg font-semibold text-red-800 mb-3">
+                Seek immediate medical attention if you experience:
+              </p>
+              <ul className="space-y-2 text-red-700">
+                <li className="flex items-start">
+                  <span className="font-bold mr-2">•</span>
+                  <span><strong>Cauda Equina Syndrome signs:</strong> Loss of bladder or bowel control, or numbness in the groin/saddle area.</span>
                 </li>
-                <li>
-                  <Link href="/conditions/slip-disc-treatment-hyderabad" className="text-blue-600 hover:text-blue-800 hover:underline">
-                    Slip Disc / Herniated Disc
-                  </Link>
-                  <span className="text-gray-600 text-sm ml-2">- Microdiscectomy & endoscopic options</span>
+                <li className="flex items-start">
+                  <span className="font-bold mr-2">•</span>
+                  <span><strong>Progressive weakness:</strong> Sudden inability to lift your foot (foot drop) or leg weakness that gets worse.</span>
                 </li>
-                <li>
-                  <Link href="/conditions/spine-tumor-surgery-hyderabad" className="text-blue-600 hover:text-blue-800 hover:underline">
-                    Spine Tumor Surgery
-                  </Link>
-                  <span className="text-gray-600 text-sm ml-2">- Removal of spinal cord tumors</span>
+                <li className="flex items-start">
+                  <span className="font-bold mr-2">•</span>
+                  <span><strong>History of cancer:</strong> If you have a history of cancer and develop new, severe back pain.</span>
                 </li>
               </ul>
+              <p className="mt-4 text-sm text-red-600 italic">
+                *These symptoms may indicate serious nerve compression requiring urgent evaluation to prevent permanent damage.
+              </p>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow-sm border">
-              <h3 className="text-xl font-semibold text-blue-700 mb-3">Related Symptoms</h3>
-              <ul className="space-y-2">
-                <li>
-                  <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 hover:text-blue-800 hover:underline">
-                    Sciatica (Leg Pain)
-                  </Link>
-                  <span className="text-gray-600 text-sm ml-2">- Shooting pain down the leg</span>
-                </li>
-                <li>
-                  <Link href="/conditions/cervical-radiculopathy-treatment-hyderabad" className="text-blue-600 hover:text-blue-800 hover:underline">
-                    Cervical Radiculopathy
-                  </Link>
-                  <span className="text-gray-600 text-sm ml-2">- Pinched nerve in the neck</span>
-                </li>
-                <li>
-                  <Link href="/conditions/cervical-myelopathy-decompression-hyderabad" className="text-blue-600 hover:text-blue-800 hover:underline">
-                    Cervical Myelopathy
-                  </Link>
-                  <span className="text-gray-600 text-sm ml-2">- Cord compression symptoms</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </section>
+          </section>
 
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold text-blue-800 mb-6">Patient Success Stories</h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-              <h3 className="text-xl font-semibold mb-3 text-blue-700">
+          <section className="mb-12">
+            <h2 className="text-3xl font-bold text-blue-800 mb-6">Related Conditions & Symptoms</h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-white p-6 rounded-lg shadow-sm border">
+                <h3 className="text-xl font-semibold text-blue-700 mb-3">Spine Conditions We Treat</h3>
+                <ul className="space-y-2">
+                  <li>
+                    <Link href="/conditions/spinal-stenosis-treatment-hyderabad" className="text-blue-600 hover:text-blue-800 hover:underline">
+                      Spinal Stenosis Treatment
+                    </Link>
+                    <span className="text-gray-600 text-sm ml-2">- Narrowing of spinal canal</span>
+                  </li>
+                  <li>
+                    <Link href="/conditions/slip-disc-treatment-hyderabad" className="text-blue-600 hover:text-blue-800 hover:underline">
+                      Slip Disc / Herniated Disc
+                    </Link>
+                    <span className="text-gray-600 text-sm ml-2">- Microdiscectomy & endoscopic options</span>
+                  </li>
+                  <li>
+                    <Link href="/conditions/spine-tumor-surgery-hyderabad" className="text-blue-600 hover:text-blue-800 hover:underline">
+                      Spine Tumor Surgery
+                    </Link>
+                    <span className="text-gray-600 text-sm ml-2">- Removal of spinal cord tumors</span>
+                  </li>
+                </ul>
+              </div>
+              <div className="bg-white p-6 rounded-lg shadow-sm border">
+                <h3 className="text-xl font-semibold text-blue-700 mb-3">Related Symptoms</h3>
+                <ul className="space-y-2">
+                  <li>
+                    <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 hover:text-blue-800 hover:underline">
+                      Sciatica (Leg Pain)
+                    </Link>
+                    <span className="text-gray-600 text-sm ml-2">- Shooting pain down the leg</span>
+                  </li>
+                  <li>
+                    <Link href="/conditions/cervical-radiculopathy-treatment-hyderabad" className="text-blue-600 hover:text-blue-800 hover:underline">
+                      Cervical Radiculopathy
+                    </Link>
+                    <span className="text-gray-600 text-sm ml-2">- Pinched nerve in the neck</span>
+                  </li>
+                  <li>
+                    <Link href="/conditions/cervical-myelopathy-decompression-hyderabad" className="text-blue-600 hover:text-blue-800 hover:underline">
+                      Cervical Myelopathy
+                    </Link>
+                    <span className="text-gray-600 text-sm ml-2">- Cord compression symptoms</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section className="mb-12">
+            <h2 className="text-3xl font-bold text-blue-800 mb-6">Patient Success Stories</h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+                <h3 className="text-xl font-semibold mb-3 text-blue-700">
+                  <Link
+                    href="/stories/endoscopic-discectomy-same-day-hyderabad"
+                    className="underline underline-offset-4 decoration-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-sm"
+                  >
+                    Same-Day Endoscopic Discectomy
+                  </Link>
+                </h3>
+                <p className="text-gray-700 mb-4">
+                  Read about a patient who achieved same-day discharge after endoscopic discectomy for severe sciatica.
+                </p>
                 <Link
                   href="/stories/endoscopic-discectomy-same-day-hyderabad"
-                  className="underline underline-offset-4 decoration-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-sm"
+                  className="text-blue-600 hover:text-blue-700 font-medium"
                 >
-                  Same-Day Endoscopic Discectomy
+                  Read story →
                 </Link>
-              </h3>
-              <p className="text-gray-700 mb-4">
-                Read about a patient who achieved same-day discharge after endoscopic discectomy for severe sciatica.
-              </p>
-              <Link 
-                href="/stories/endoscopic-discectomy-same-day-hyderabad"
-                className="text-blue-600 hover:text-blue-700 font-medium"
-              >
-                Read story →
-              </Link>
-            </div>
-            <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-              <h3 className="text-xl font-semibold mb-3 text-blue-700">
+              </div>
+              <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+                <h3 className="text-xl font-semibold mb-3 text-blue-700">
+                  <Link
+                    href="/stories/endoscopic-ulbd-stenosis-hyderabad"
+                    className="underline underline-offset-4 decoration-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-sm"
+                  >
+                    Endoscopic ULBD for Lumbar Stenosis
+                  </Link>
+                </h3>
+                <p className="text-gray-700 mb-4">
+                  Learn how endoscopic ULBD improved walking distance and leg pain for a patient with spinal stenosis.
+                </p>
                 <Link
                   href="/stories/endoscopic-ulbd-stenosis-hyderabad"
-                  className="underline underline-offset-4 decoration-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-sm"
+                  className="text-blue-600 hover:text-blue-700 font-medium"
                 >
-                  Endoscopic ULBD for Lumbar Stenosis
+                  Read story →
                 </Link>
-              </h3>
-              <p className="text-gray-700 mb-4">
-                Learn how endoscopic ULBD improved walking distance and leg pain for a patient with spinal stenosis.
-              </p>
-              <Link 
-                href="/stories/endoscopic-ulbd-stenosis-hyderabad"
-                className="text-blue-600 hover:text-blue-700 font-medium"
+              </div>
+            </div>
+          </section>
+
+          <section className="bg-blue-50 p-8 rounded-lg text-center">
+            <h2 className="text-2xl font-bold text-blue-800 mb-4">Ready to Discuss Your Treatment Options?</h2>
+            <p className="text-gray-600 mb-6">
+              Dr. Sayuj Krishnan provides expert evaluation and personalized treatment plans for spine conditions.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                href="/appointments/"
+                className="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-colors"
               >
-                Read story →
+                Book Consultation
+              </Link>
+              <Link
+                href="/about/"
+                className="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-full hover:bg-blue-600 hover:text-white transition-colors"
+              >
+                About Dr Sayuj
               </Link>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <section className="bg-blue-50 p-8 rounded-lg text-center">
-          <h2 className="text-2xl font-bold text-blue-800 mb-4">Ready to Discuss Your Treatment Options?</h2>
-          <p className="text-gray-600 mb-6">
-            Dr. Sayuj Krishnan provides expert evaluation and personalized treatment plans for spine conditions.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link 
-              href="/appointments/"
-              className="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-colors"
-            >
-              Book Consultation
-            </Link>
-            <Link 
-              href="/about/"
-              className="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-full hover:bg-blue-600 hover:text-white transition-colors"
-            >
-              About Dr Sayuj
-            </Link>
-          </div>
-        </section>
+          <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
 
-        <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
-
-        <section className="mt-12 space-y-6">
-          <ReviewedBy lastReviewed="2025-10-19" />
-          <NAP />
-        </section>
+          <section className="mt-12 space-y-6">
+            <ReviewedBy lastReviewed="2025-10-19" />
+            <NAP />
+          </section>
+        </div>
       </div>
-    </div>
     </>
   );
 }

@@ -4,7 +4,6 @@ import { processBooking } from '@/src/lib/appointments/service';
 import { appointments } from '@/src/lib/db';
 import { locations } from '@/src/data/locations';
 import { semanticSearch } from '@/src/lib/ai/semantic-search';
-import { analyzeSymptoms } from '@/src/lib/ai/symptoms';
 import type { BookingData } from '@/packages/appointment-form/types';
 
 const SERVICES = [
@@ -26,7 +25,7 @@ export const tools = {
     parameters: z.object({
       query: z.string().describe('The search query to find relevant content.'),
     }),
-    execute: async ({ query }: any) => {
+    execute: async ({ query }) => {
       const results = await semanticSearch(query, 5);
       return results.map(r => ({
         title: r.title,
@@ -35,21 +34,7 @@ export const tools = {
         category: r.category
       }));
     },
-  } as any),
-
-  analyzeSymptoms: tool({
-    description: 'Analyze medical symptoms to provide preliminary guidance, urgency assessment, and possible related conditions.',
-    parameters: z.object({
-      symptoms: z.string().describe('The description of symptoms provided by the user'),
-      age: z.string().optional().describe('Age of the patient if provided'),
-      gender: z.enum(['male', 'female', 'other']).optional().describe('Gender of the patient if provided'),
-      duration: z.string().optional().describe('Duration of symptoms if provided'),
-    }),
-    execute: async ({ symptoms, age, gender, duration }: any) => {
-      const result = await analyzeSymptoms(symptoms, age, gender, duration);
-      return result;
-    },
-  } as any),
+  }),
 
   checkAvailability: tool({
     description: 'Check if an appointment slot is available for a specific date and time.',
@@ -57,7 +42,7 @@ export const tools = {
       date: z.string().describe('Date in YYYY-MM-DD format'),
       time: z.string().describe('Time in HH:MM format'),
     }),
-    execute: async ({ date, time }: any) => {
+    execute: async ({ date, time }) => {
       const count = await appointments.checkSlot(date, time);
       return {
         available: count === 0,
@@ -66,7 +51,7 @@ export const tools = {
         message: count === 0 ? 'Slot is available' : 'Slot is already booked',
       };
     },
-  } as any),
+  }),
 
   bookAppointment: tool({
     description: 'Book an appointment for a patient.',
@@ -82,7 +67,7 @@ export const tools = {
       painScore: z.number().optional().default(0).describe('Pain score from 0-10'),
       mriScanAvailable: z.boolean().optional().default(false).describe('Whether MRI scan is available'),
     }),
-    execute: async (input: any) => {
+    execute: async (input) => {
       const bookingData: BookingData = {
         patientName: input.patientName,
         email: input.email,
@@ -113,7 +98,7 @@ export const tools = {
         };
       }
     },
-  } as any),
+  }),
 
   getServices: tool({
     description: 'Get a list of medical services and surgeries offered by Dr. Sayuj.',
@@ -121,7 +106,7 @@ export const tools = {
     execute: async () => {
       return SERVICES;
     },
-  } as any),
+  }),
 
   getLocations: tool({
     description: 'Get the list of clinic locations where Dr. Sayuj practices.',
@@ -131,8 +116,8 @@ export const tools = {
         name: loc.name,
         address: loc.address,
         phone: loc.telephone,
-        mapUrl: loc.google_maps_place_url
+        mapUrl: loc.googleMapsUrl
       }));
     },
-  } as any),
+  }),
 };

@@ -3,8 +3,8 @@
 import { useMemo, useState } from 'react';
 import { analytics } from '@/src/lib/analytics';
 import { trackContactConversion } from '../src/lib/google-ads-conversion';
-import Button from '@/packages/appointment-form/ui/Button';
 import { APPOINTMENT_SUCCESS_MESSAGE } from '@/packages/appointment-form/constants';
+import Button from "@/packages/appointment-form/ui/Button";
 
 interface TeleconsultationFormProps {
   pageSlug: string;
@@ -101,14 +101,11 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
     return valid;
   };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!validate()) return;
 
     setStatus('submitting');
-
-    // Simulate network delay for better UX
-    await new Promise(resolve => setTimeout(resolve, 800));
 
     try {
       // Log Analytics events (Middleware RUM + Statsig)
@@ -413,7 +410,7 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
           isLoading={status === 'submitting'}
           aria-describedby="form-status"
         >
-          {status === 'submitting' ? 'Sending...' : 'Send appointment request'}
+          {status === 'submitting' ? "Sending..." : "Send appointment request"}
         </Button>
         <p className="text-xs text-gray-500">
           By submitting, you consent to being contacted on the number provided.

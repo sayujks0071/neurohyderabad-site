@@ -11,7 +11,6 @@ import SourceList from '@/app/_components/SourceList';
 import { getServiceSources } from '../sources';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import MedicalWebPageSchema from '@/app/components/schemas/MedicalWebPageSchema';
-import CostTransparencySection from '@/src/components/CostTransparencySection';
 
 const SERVICE_SLUG = 'awake-spine-surgery-hyderabad';
 
@@ -49,21 +48,6 @@ export const metadata: Metadata = {
 };
 
 const ARTICLE_SOURCES = getServiceSources(SERVICE_SLUG);
-
-const COSTS = [
-  {
-    procedure: 'Awake Endoscopic Discectomy',
-    range: '₹1,10,000 - ₹1,50,000',
-    recovery: '1 Day',
-    includes: ['Local Anesthesia', 'Surgeon Fees', 'OT & Nursing', 'Day Care Stay']
-  },
-  {
-    procedure: 'Awake Lumbar Decompression',
-    range: '₹1,30,000 - ₹1,70,000',
-    recovery: '1-2 Days',
-    includes: ['Stenosis Decompression', 'Neuromonitoring', 'Specialised Sedation']
-  }
-];
 
 const FAQS = [
   {
@@ -153,11 +137,12 @@ export default function AwakeSpineSurgeryPage() {
         </div>
       </div>
 
-      <CostTransparencySection
-        costs={COSTS}
-        disclaimer="Estimated packages for self-pay patients. Awake procedures often reduce costs by eliminating general anaesthesia charges and shortening hospital stay. Cashless insurance accepted."
-        showInsurance={true}
-      />
+      <h2 className="text-2xl font-semibold text-blue-800">Cost and logistics</h2>
+      <p>
+        Awake endoscopic procedures typically mirror our minimally invasive spine packages, with savings from shorter hospital stay and reduced
+        medication. Most patients are discharged the same day or after one night. Insurance and cashless options are available; share your MRI
+        and policy details to receive a personalised estimate.
+      </p>
 
       <h2 className="text-2xl font-semibold text-blue-800">What to expect after surgery</h2>
       <ul className="space-y-2 text-gray-700">

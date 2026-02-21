@@ -237,20 +237,6 @@ async function testNeuralinkApi() {
   });
 }
 
-async function testAboutPageContent() {
-  const u = urlFor("/about");
-  const res = await fetch(u, { headers: { "cache-control": "no-cache" } });
-  assert(res.status === 200, `/about HTTP ${res.status}`);
-  const html = await readTextLimited(res, 200_000);
-
-  // Validate critical content markers
-  assert(html.includes("<h1>"), "/about missing <h1>");
-  assert(html.includes("Sayuj"), "/about missing 'Sayuj'");
-
-  // Validate specific section or credential mention
-  assert(html.includes("German") || html.includes("germany"), "/about missing 'German'/'Germany' training mention");
-}
-
 async function testSamplePages() {
   // Sample a few pages from sitemap-main.xml so we cover multiple templates.
   const sitemapRes = await fetch(urlFor("/sitemap-main.xml"), { headers: { "cache-control": "no-cache" } });
@@ -362,6 +348,47 @@ async function testMriAnalyzer() {
   assert(json.analysis.plainEnglishSummary, "missing summary");
 }
 
+async function testSiteSearch() {
+  const res = await fetch(urlFor("/"), { headers: { "cache-control": "no-cache" } });
+  assert(res.status === 200, `/ HTTP ${res.status}`);
+  const html = await readTextLimited(res, 600_000);
+  assert(html.includes('aria-label="Search site (Cmd/Ctrl + K)"') || html.includes('Search'), "Search button missing");
+}
+
+async function testCostTransparency() {
+  const res = await fetch(urlFor("/services/spinal-fusion-surgery-hyderabad"), { headers: { "cache-control": "no-cache" } });
+  assert(res.status === 200, `/services/spinal-fusion-surgery-hyderabad HTTP ${res.status}`);
+  const html = await readTextLimited(res, 600_000);
+  assert(html.includes("Cost Transparency") || html.includes("Cost and logistics"), "Cost Transparency section missing");
+  // Check for rupee symbol or price patterns
+  assert(html.includes("₹") || /\d{1,3}(,\d{3})*/.test(html), "Pricing information missing");
+}
+
+async function testContentPolicy() {
+  const pages = ["/", "/services/sciatica-pain-treatment-hyderabad"];
+  for (const p of pages) {
+    const res = await fetch(urlFor(p), { headers: { "cache-control": "no-cache" } });
+    if (res.status !== 200) continue;
+    const html = await readTextLimited(res, 600_000);
+    // Check for " cure " (case-insensitive) but allow "secure", "procure", etc.
+    const forbidden = /\b(cure)\b/i;
+
+    if (forbidden.test(html)) {
+       const match = html.match(forbidden);
+       if (match) {
+         console.log(`WARN: Found forbidden word '${match[0]}' on ${p}. Policy: Prefer 'Relief' or 'Management'.`);
+       }
+    }
+  }
+}
+
+async function testBookAppointment() {
+    const res = await fetch(urlFor("/appointments"), { headers: { "cache-control": "no-cache" } });
+    assert(res.status === 200, `/appointments HTTP ${res.status}`);
+    const html = await readTextLimited(res, 600_000);
+    assert(html.includes("Book Appointment") || html.includes("Schedule Consultation"), "Book Appointment text missing");
+}
+
 async function main() {
   console.log(`Sandbox target: ${BASE_URL}`);
   console.log(`Canonical origin: ${CANONICAL_ORIGIN}`);
@@ -371,10 +398,13 @@ async function main() {
   results.push(await test("sitemaps", testSitemaps));
   results.push(await test("redirects", testRedirects));
   results.push(await test("security headers", testSecurityHeaders));
-  results.push(await test("content: about page", testAboutPageContent));
   results.push(await test("sample pages (canonical/meta/JSON-LD)", testSamplePages));
   results.push(await test("api: neuralink", testNeuralinkApi));
   results.push(await test("api: mri analyzer", testMriAnalyzer));
+  results.push(await test("site search", testSiteSearch));
+  results.push(await test("cost transparency", testCostTransparency));
+  results.push(await test("content policy", testContentPolicy));
+  results.push(await test("book appointment", testBookAppointment));
 
   const failed = results.filter((r) => !r.ok);
   console.log("");

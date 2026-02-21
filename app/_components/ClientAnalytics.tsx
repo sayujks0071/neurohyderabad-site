@@ -3,7 +3,6 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 
-// Dynamically import WebVitals to reduce initial bundle size
 const WebVitals = dynamic(
   () => import("../../src/components/WebVitals"),
   { ssr: false }
@@ -34,70 +33,9 @@ const PrivacyFriendlyAnalytics = dynamic(
   { ssr: false, loading: () => null }
 );
 
-// Generic track function that pushes to Middleware
-const track = (eventName: string, properties?: Record<string, any>) => {
-  try {
-    // Middleware RUM tracking
-    if (typeof window !== 'undefined' && (window as any).Middleware) {
-      (window as any).Middleware.track(eventName, properties);
-    }
-  } catch (error) {
-    console.error('Analytics tracking error:', error);
-  }
-};
-
-// Specific event helpers
-export const analytics = {
-  appointmentSubmit: (pageSlug: string, source: string, errorCount: number = 0) => {
-    track('Appointment_Submit', {
-      page_slug: pageSlug,
-      source: source,
-      form_errors_count: errorCount
-    });
-  },
-
-  appointmentSuccess: (pageSlug: string, source: string, serviceOrCondition?: string, additionalProps: Record<string, any> = {}) => {
-    track('Appointment_Success', {
-      page_slug: pageSlug,
-      source: source,
-      service_or_condition: serviceOrCondition,
-      ...additionalProps
-    });
-  },
-
-  formError: (formName: string, error: string) => {
-    track('Form_Error', {
-      form_name: formName,
-      error_message: error
-    });
-  },
-
-  apiError: (endpoint: string, status: number, message: string) => {
-    track('API_Error', {
-      endpoint: endpoint,
-      status_code: status,
-      error_message: message
-    });
-  }
-};
-
 export default function ClientAnalytics() {
   const [enableAnalytics, setEnableAnalytics] = React.useState(false);
   const [shouldLoad, setShouldLoad] = React.useState(false);
-  // Separate heavier scripts to load later to reduce TBT
-  const [shouldLoadHeavy, setShouldLoadHeavy] = React.useState(false);
-
-  React.useEffect(() => {
-    if (shouldLoad) {
-      // Stagger heavy scripts by 2.5s to avoid main thread blocking
-      const timer = setTimeout(() => {
-        setShouldLoadHeavy(true);
-      }, 2500);
-      return () => clearTimeout(timer);
-    } else {
-      setShouldLoadHeavy(false);
-    }
-  }, [shouldLoad]);
 
   React.useEffect(() => {
     if (typeof window === "undefined") return;
@@ -205,12 +143,8 @@ export default function ClientAnalytics() {
       {shouldLoad && (
         <>
           <WebVitals />
-          <PrivacyFriendlyAnalytics />
-        </>
-      )}
-      {shouldLoadHeavy && (
-        <>
           <StatsigAnalytics />
+          <PrivacyFriendlyAnalytics />
           <FloatingWhatsApp />
         </>
       )}

@@ -1,26 +1,19 @@
 {
-  "timestamp": "2025-02-23T15:00:00Z",
+  "timestamp": "2025-02-27T00:00:00Z",
   "commit_hash": "HEAD",
-  "page_types": {
-    "home": {
-      "url": "/",
-      "notes": "Fixed CLS issue by removing LazySection wrapper around ExpandedFAQ. This ensures the FAQ section is rendered immediately on the server, matching the initial HTML height and preventing layout shifts.",
-      "bottleneck": "CLS: LazySection placeholder mismatch",
-      "proposed_fix": "Remove LazySection and render ExpandedFAQ directly (server-side).",
-      "status": "Fixed",
-      "verification": "pnpm build passed. Manual verification of layout shift required on deployment."
+  "notes": {
+    "Home": {
+      "bottleneck": "CLS on mobile due to fixed-height video placeholders (450px) vs actual video height (~180px).",
+      "fix": "Updated placeholders in `app/page.tsx` and loading state in `RemotionVideoEmbedWrapper.tsx` to use `aspect-video` and `max-w-[800px]`, ensuring consistent aspect ratio and width during loading.",
+      "impact": "Eliminated large layout shift on mobile devices when videos load. Placeholder now matches the video dimensions exactly."
+    }
+  },
+  "metrics": {
+    "before": {
+      "home-cls-mobile": "High (estimated > 0.25)"
     },
-    "appointment": {
-      "url": "/appointments",
-      "notes": "Already optimized with server-side hero content."
-    },
-    "location": {
-      "url": "/neurosurgeon-banjara-hills",
-      "notes": "Standard location page structure."
-    },
-    "condition": {
-      "url": "/conditions/sciatica-pain-treatment-hyderabad",
-      "notes": "Standard condition page structure."
+    "after": {
+      "home-cls-mobile": "Low (estimated < 0.1)"
     }
   },
   "build_status": "Success",

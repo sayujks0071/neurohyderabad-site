@@ -93,7 +93,7 @@ function makeRequest(url) {
 // Parse sitemap and extract URLs
 async function parseSitemap() {
   console.log('🔍 Parsing sitemap...');
-  
+
   try {
     // Primary sitemap is a single urlset at /sitemap-main.xml (sitemap.xml redirects here)
     const sitemap = await makeRequest(`${SITE_URL}/sitemap-main.xml`);
@@ -102,10 +102,10 @@ async function parseSitemap() {
     const xmlSource = sitemap.statusCode === 200 && sitemap.body.includes('<urlset')
       ? sitemap.body
       : fallback?.body || '';
-    
+
     const urls = [];
     const urlMatches = xmlSource.match(/<loc>(.*?)<\/loc>/g);
-    
+
     if (urlMatches) {
       urlMatches.forEach(match => {
         const url = match.replace(/<\/?loc>/g, '');
@@ -114,14 +114,14 @@ async function parseSitemap() {
         }
       });
     }
-    
+
     auditResults.discovery = {
       sitemapIndex: sitemap.statusCode === 200,
       sitemapContent: Boolean(urlMatches && urlMatches.length),
       totalUrls: urls.length,
       urls: urls.slice(0, MAX_PAGES)
     };
-    
+
     console.log(`✅ Found ${urls.length} URLs in sitemap`);
     return urls.slice(0, MAX_PAGES);
   } catch (error) {
@@ -134,7 +134,7 @@ async function parseSitemap() {
 async function analyzePage(url) {
   try {
     const response = await makeRequest(url);
-    
+
     if (response.statusCode !== 200) {
       return {
         url,
@@ -142,7 +142,7 @@ async function analyzePage(url) {
         error: 'Non-200 status'
       };
     }
-    
+
     const html = response.body;
     const analysis = {
       url,
@@ -160,7 +160,7 @@ async function analyzePage(url) {
       wordCount: countWords(html),
       issues: []
     };
-    
+
     // Check for SEO issues
     if (!analysis.title) analysis.issues.push('Missing title tag');
     if (!analysis.metaDescription) analysis.issues.push('Missing meta description');
@@ -169,7 +169,7 @@ async function analyzePage(url) {
     if (analysis.h1Tags.length === 0) analysis.issues.push('Missing H1 tag');
     if (analysis.h1Tags.length > 1) analysis.issues.push('Multiple H1 tags');
     if (!analysis.canonical) analysis.issues.push('Missing canonical tag');
-    
+
     return analysis;
   } catch (error) {
     return {
@@ -224,12 +224,12 @@ function extractInternalLinks(html) {
   let match;
   REGEX_PATTERNS.internalLinks.lastIndex = 0;
   let count = 0;
-  
+
   // Pre-compile the hostname check for better performance
   const siteUrl = new URL(SITE_URL);
   const siteHostname = siteUrl.hostname;
   const siteOrigin = siteUrl.origin;
-  
+
   while ((match = REGEX_PATTERNS.internalLinks.exec(html)) !== null && count++ < 200) {
     const href = match[1];
     try {
@@ -249,18 +249,18 @@ function extractInternalLinks(html) {
     }
   }
   REGEX_PATTERNS.internalLinks.lastIndex = 0; // Reset for next use
-  
+
   return Array.from(linksSet);
 }
 
 function extractImages(html) {
   const matches = html.match(REGEX_PATTERNS.images);
   if (!matches) return [];
-  
+
   return matches.slice(0, 50).map(match => {
     const srcMatch = match.match(/src=["']([^"']*)["']/i);
     const altMatch = match.match(/alt=["']([^"']*)["']/i);
-    
+
     return {
       src: srcMatch ? srcMatch[1] : null,
       alt: altMatch ? altMatch[1] : null,
@@ -274,7 +274,7 @@ function extractStructuredData(html) {
   let match;
   REGEX_PATTERNS.structuredData.lastIndex = 0;
   let count = 0;
-  
+
   while ((match = REGEX_PATTERNS.structuredData.exec(html)) !== null && count++ < 5) {
     try {
       structuredData.push(JSON.parse(match[1]));
@@ -282,7 +282,7 @@ function extractStructuredData(html) {
       // Invalid JSON - skip
     }
   }
-  
+
   return structuredData;
 }
 
@@ -297,14 +297,14 @@ function countWords(html) {
 // Batch process URLs
 async function batchProcess(urls, batchSize = CONCURRENT_REQUESTS) {
   const results = [];
-  
+
   for (let i = 0; i < urls.length; i += batchSize) {
     const batch = urls.slice(i, i + batchSize);
-    console.log(`📊 Processing batch ${Math.floor(i/batchSize) + 1}/${Math.ceil(urls.length/batchSize)} (${batch.length} URLs)`);
-    
+    console.log(`📊 Processing batch ${Math.floor(i / batchSize) + 1}/${Math.ceil(urls.length / batchSize)} (${batch.length} URLs)`);
+
     const batchPromises = batch.map(url => analyzePage(url));
     const batchResults = await Promise.allSettled(batchPromises);
-    
+
     batchResults.forEach((result, index) => {
       if (result.status === 'fulfilled') {
         results.push(result.value);
@@ -315,18 +315,18 @@ async function batchProcess(urls, batchSize = CONCURRENT_REQUESTS) {
         });
       }
     });
-    
+
     // Small delay between batches
     await new Promise(resolve => setTimeout(resolve, 1000));
   }
-  
+
   return results;
 }
 
 // Analyze on-page SEO
 function analyzeOnPageSEO(pageResults) {
   console.log('📝 Analyzing on-page SEO...');
-  
+
   const analysis = {
     totalPages: pageResults.length,
     pagesWithIssues: 0,
@@ -362,16 +362,16 @@ function analyzeOnPageSEO(pageResults) {
       thinContent: 0
     }
   };
-  
+
   let totalTitleLength = 0;
   let totalMetaLength = 0;
   let totalH2Count = 0;
   let totalImages = 0;
   let totalWordCount = 0;
-  
+
   pageResults.forEach(page => {
     if (page.error) return;
-    
+
     // Count issues
     if (page.issues && page.issues.length > 0) {
       analysis.pagesWithIssues++;
@@ -379,7 +379,7 @@ function analyzeOnPageSEO(pageResults) {
         analysis.commonIssues[issue] = (analysis.commonIssues[issue] || 0) + 1;
       });
     }
-    
+
     // Title analysis
     if (!page.title) {
       analysis.titleAnalysis.missing++;
@@ -388,7 +388,7 @@ function analyzeOnPageSEO(pageResults) {
       if (page.title.length > 60) analysis.titleAnalysis.tooLong++;
       if (page.title.length < 30) analysis.titleAnalysis.tooShort++;
     }
-    
+
     // Meta description analysis
     if (!page.metaDescription) {
       analysis.metaDescriptionAnalysis.missing++;
@@ -397,30 +397,30 @@ function analyzeOnPageSEO(pageResults) {
       if (page.metaDescription.length > 160) analysis.metaDescriptionAnalysis.tooLong++;
       if (page.metaDescription.length < 120) analysis.metaDescriptionAnalysis.tooShort++;
     }
-    
+
     // Heading analysis
     if (page.h1Tags.length === 0) analysis.headingAnalysis.missingH1++;
     if (page.h1Tags.length > 1) analysis.headingAnalysis.multipleH1++;
     totalH2Count += page.h2Tags.length;
-    
+
     // Canonical analysis
     if (!page.canonical) {
       analysis.canonicalAnalysis.missing++;
     } else if (page.canonical === page.url) {
       analysis.canonicalAnalysis.selfReferencing++;
     }
-    
+
     // Image analysis
     totalImages += page.images.length;
     page.images.forEach(img => {
       if (!img.hasAlt) analysis.imageAnalysis.imagesWithoutAlt++;
     });
-    
+
     // Content analysis
     totalWordCount += page.wordCount;
     if (page.wordCount < 300) analysis.contentAnalysis.thinContent++;
   });
-  
+
   // Calculate averages
   const validPages = pageResults.filter(p => !p.error).length;
   analysis.titleAnalysis.averageLength = validPages > 0 ? Math.round(totalTitleLength / validPages) : 0;
@@ -429,7 +429,7 @@ function analyzeOnPageSEO(pageResults) {
   analysis.imageAnalysis.totalImages = totalImages;
   analysis.imageAnalysis.averageImagesPerPage = validPages > 0 ? Math.round(totalImages / validPages) : 0;
   analysis.contentAnalysis.averageWordCount = validPages > 0 ? Math.round(totalWordCount / validPages) : 0;
-  
+
   auditResults.onPage = analysis;
   return analysis;
 }
@@ -437,9 +437,9 @@ function analyzeOnPageSEO(pageResults) {
 // Generate recommendations
 function generateRecommendations() {
   console.log('💡 Generating recommendations...');
-  
+
   const recommendations = [];
-  
+
   // On-page recommendations
   if (auditResults.onPage.titleAnalysis.missing > 0) {
     recommendations.push({
@@ -451,7 +451,7 @@ function generateRecommendations() {
       effort: 'Low'
     });
   }
-  
+
   if (auditResults.onPage.metaDescriptionAnalysis.missing > 0) {
     recommendations.push({
       category: 'On-Page SEO',
@@ -462,7 +462,7 @@ function generateRecommendations() {
       effort: 'Low'
     });
   }
-  
+
   if (auditResults.onPage.headingAnalysis.missingH1 > 0) {
     recommendations.push({
       category: 'On-Page SEO',
@@ -473,7 +473,7 @@ function generateRecommendations() {
       effort: 'Low'
     });
   }
-  
+
   if (auditResults.onPage.canonicalAnalysis.missing > 0) {
     recommendations.push({
       category: 'Technical SEO',
@@ -484,7 +484,7 @@ function generateRecommendations() {
       effort: 'Low'
     });
   }
-  
+
   if (auditResults.onPage.imageAnalysis.imagesWithoutAlt > 0) {
     recommendations.push({
       category: 'On-Page SEO',
@@ -495,7 +495,7 @@ function generateRecommendations() {
       effort: 'Medium'
     });
   }
-  
+
   if (auditResults.onPage.contentAnalysis.thinContent > 0) {
     recommendations.push({
       category: 'Content Quality',
@@ -506,7 +506,7 @@ function generateRecommendations() {
       effort: 'High'
     });
   }
-  
+
   auditResults.recommendations = recommendations;
   return recommendations;
 }
@@ -514,52 +514,52 @@ function generateRecommendations() {
 // Main audit function
 async function runComprehensiveAudit() {
   console.log('🚀 Starting comprehensive SEO audit for drsayuj.info\n');
-  
+
   try {
     // 1. Discovery & Data Collection
     const urls = await parseSitemap();
-    
+
     if (urls.length === 0) {
       console.error('❌ No URLs found in sitemap');
       return;
     }
-    
+
     // 2. Analyze pages
     console.log(`📊 Analyzing ${urls.length} pages...`);
     const pageResults = await batchProcess(urls);
-    
+
     // 3. On-page SEO analysis
     const onPageAnalysis = analyzeOnPageSEO(pageResults);
-    
+
     // Save detailed page results
     auditResults.pages = pageResults;
 
     // 4. Generate recommendations
     const recommendations = generateRecommendations();
-    
+
     // 5. Save results
-    const reportDir = path.join(__dirname, '../reports/seo');
+    const reportDir = '/Users/mac/.gemini/antigravity/brain/a5f81c99-3651-4e4c-95a4-98b2b36e8c5d/reports-seo';
     if (!fs.existsSync(reportDir)) {
       fs.mkdirSync(reportDir, { recursive: true });
     }
-    
+
     const timestamp = new Date().toISOString().split('T')[0];
     const jsonFile = path.join(reportDir, `comprehensive-seo-audit-${timestamp}.json`);
     const mdFile = path.join(reportDir, `comprehensive-seo-audit-${timestamp}.md`);
-    
+
     fs.writeFileSync(jsonFile, JSON.stringify(auditResults, null, 2));
-    
+
     // Generate markdown report
     const mdReport = generateMarkdownReport();
     fs.writeFileSync(mdFile, mdReport);
-    
+
     console.log('\n✅ Comprehensive SEO audit completed!');
     console.log(`📄 JSON report: ${jsonFile}`);
     console.log(`📄 Markdown report: ${mdFile}`);
-    
+
     // Print summary
     printSummary();
-    
+
   } catch (error) {
     console.error('❌ Audit failed:', error.message);
   }
@@ -568,7 +568,7 @@ async function runComprehensiveAudit() {
 // Generate markdown report
 function generateMarkdownReport() {
   const { onPage, recommendations } = auditResults;
-  
+
   return `# Comprehensive SEO Audit Report - drsayuj.info
 
 **Date:** ${auditResults.timestamp.split('T')[0]}  
@@ -657,7 +657,7 @@ function printSummary() {
   console.log(`Pages with Issues: ${auditResults.onPage.pagesWithIssues}`);
   console.log(`Critical Issues: ${auditResults.recommendations.filter(r => r.priority === 'High').length}`);
   console.log(`Recommendations: ${auditResults.recommendations.length}`);
-  
+
   console.log('\n🔍 TOP ISSUES:');
   auditResults.recommendations.slice(0, 5).forEach((rec, index) => {
     console.log(`${index + 1}. ${rec.issue} (${rec.priority})`);

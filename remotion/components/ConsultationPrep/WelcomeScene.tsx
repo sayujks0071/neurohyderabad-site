@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { spring, useCurrentFrame, useVideoConfig, AbsoluteFill, interpolate } from 'remotion';
+import { spring, useCurrentFrame, useVideoConfig, AbsoluteFill } from 'remotion';
 import { COLORS, FONTS } from '../../utils/colorTokens';
 import { GradientBackground } from '../shared/GradientBackground';
 import { WelcomeCharacter } from './WelcomeCharacter';
@@ -7,10 +7,9 @@ import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
 
 export interface WelcomeSceneProps {
   patientName: string;
-  exitFrame?: number;
 }
 
-const FloatingParticles: React.FC<{ reducedMotion: boolean; opacity: number }> = ({ reducedMotion, opacity }) => {
+const FloatingParticles: React.FC<{ reducedMotion: boolean }> = ({ reducedMotion }) => {
   const frame = useCurrentFrame();
 
   // Static particle configuration
@@ -25,12 +24,10 @@ const FloatingParticles: React.FC<{ reducedMotion: boolean; opacity: number }> =
   if (reducedMotion) return null;
 
   return (
-    <AbsoluteFill style={{ overflow: 'hidden', opacity }}>
+    <AbsoluteFill style={{ overflow: 'hidden' }}>
       {particles.map((p, i) => {
         const xOffset = Math.sin(frame / 100 * p.speed + i) * 30;
         const yOffset = Math.cos(frame / 120 * p.speed + i) * 30;
-        // Adding scale variation for more organic feel
-        const scale = 1 + Math.sin(frame / 80 * p.speed + i) * 0.1;
 
         return (
           <div
@@ -43,7 +40,7 @@ const FloatingParticles: React.FC<{ reducedMotion: boolean; opacity: number }> =
               height: p.size,
               borderRadius: '50%',
               backgroundColor: p.color,
-              transform: `translate(-50%, -50%) translate(${xOffset}px, ${yOffset}px) scale(${scale})`,
+              transform: `translate(-50%, -50%) translate(${xOffset}px, ${yOffset}px)`,
               filter: 'blur(40px)',
             }}
           />
@@ -53,13 +50,13 @@ const FloatingParticles: React.FC<{ reducedMotion: boolean; opacity: number }> =
   );
 };
 
-export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName, exitFrame = 150 }) => {
+export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const prefersReducedMotion = usePrefersReducedMotion();
 
   // Spring-based fade-in animation for main container
-  const entranceOpacity = prefersReducedMotion ? 1 : spring({
+  const opacity = prefersReducedMotion ? 1 : spring({
     frame,
     fps,
     from: 0,
@@ -82,32 +79,28 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName, exitFra
   // Subtle breathing animation for continuous movement
   const breathingScale = prefersReducedMotion ? 1 : 1 + Math.sin(frame / 45) * 0.01;
 
-  // Subtitle animation configuration
-  const subtitleText = "Welcome to Dr. Sayuj Krishnan's Practice";
-  const subtitleWords = subtitleText.split(' ');
-  const subtitleBaseDelay = 15;
+  // Subtitle animation (starts after title)
+  const subtitleStartFrame = 15;
+  const subtitleOpacity = prefersReducedMotion ? 1 : spring({
+    frame: frame - subtitleStartFrame,
+    fps,
+    from: 0,
+    to: 1,
+    durationInFrames: 40,
+  });
 
-  // --- EXIT ANIMATIONS ---
-  // Start exiting at exitFrame, take 20 frames to slide out/fade
-  const exitDuration = 20;
-
-  const exitOpacity = interpolate(
-    frame,
-    [exitFrame, exitFrame + exitDuration],
-    [1, 0],
-    { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }
-  );
-
-  const exitY = prefersReducedMotion ? 0 : interpolate(
-    frame,
-    [exitFrame, exitFrame + exitDuration],
-    [0, -50], // Slide up by 50px
-    { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }
-  );
+  const subtitleY = prefersReducedMotion ? 0 : spring({
+    frame: frame - subtitleStartFrame,
+    fps,
+    from: 20,
+    to: 0,
+    durationInFrames: 40,
+    config: { damping: 12 },
+  });
 
   return (
     <GradientBackground preset="clinical-blue" animated={!prefersReducedMotion}>
-      <FloatingParticles reducedMotion={prefersReducedMotion} opacity={exitOpacity} />
+      <FloatingParticles reducedMotion={prefersReducedMotion} />
       <div
         style={{
           width: '100%',
@@ -116,8 +109,7 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName, exitFra
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          opacity: entranceOpacity * exitOpacity, // Combine entrance and exit opacity
-          transform: `translateY(${exitY}px)`, // Apply exit slide
+          opacity,
           zIndex: 1, // Ensure text is above particles
         }}
       >
@@ -154,40 +146,11 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName, exitFra
               fontWeight: 500,
               color: 'rgba(255, 255, 255, 0.9)',
               margin: 0,
+              opacity: subtitleOpacity,
+              transform: `translateY(${subtitleY}px)`,
             }}
           >
-            {subtitleWords.map((word, i) => {
-              const delay = subtitleBaseDelay + i * 5;
-              const wordOpacity = prefersReducedMotion ? 1 : spring({
-                frame: frame - delay,
-                fps,
-                from: 0,
-                to: 1,
-                durationInFrames: 30,
-              });
-              const wordY = prefersReducedMotion ? 0 : spring({
-                frame: frame - delay,
-                fps,
-                from: 20,
-                to: 0,
-                durationInFrames: 30,
-                config: { damping: 12 },
-              });
-
-              return (
-                <span
-                  key={i}
-                  style={{
-                    display: 'inline-block',
-                    opacity: wordOpacity,
-                    transform: `translateY(${wordY}px)`,
-                    marginRight: i === subtitleWords.length - 1 ? 0 : '0.3em',
-                  }}
-                >
-                  {word}
-                </span>
-              );
-            })}
+            Welcome to Dr. Sayuj Krishnan's Practice
           </p>
         </div>
       </div>

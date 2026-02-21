@@ -36,7 +36,7 @@ const SpeechButton = ({
   };
 
   const baseStyles =
-    "p-1.5 rounded-lg transition-all flex items-center justify-center disabled:opacity-50 shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500";
+    "p-1.5 rounded-lg transition-all flex items-center justify-center disabled:opacity-50 shadow-sm";
   const variants = {
     dark: "bg-slate-900 text-white hover:bg-slate-800 border border-slate-700",
     light: "bg-white text-blue-600 hover:bg-blue-50 border border-blue-100",
@@ -48,13 +48,11 @@ const SpeechButton = ({
       disabled={isPlaying}
       className={`${baseStyles} ${variants[variant]} ${className}`}
       title="Listen to AI analysis"
-      aria-label="Listen to AI analysis"
-      aria-busy={isPlaying}
     >
       {isPlaying ? (
-        <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
+        <Loader2 className="w-4 h-4 animate-spin" />
       ) : (
-        <Volume2 className="w-4 h-4" aria-hidden="true" />
+        <Volume2 className="w-4 h-4" />
       )}
     </button>
   );

@@ -8,8 +8,8 @@ import MedicalWebPageSchema from '../components/schemas/MedicalWebPageSchema';
 import BreadcrumbSchema from '../components/schemas/BreadcrumbSchema';
 
 export const metadata: Metadata = {
-  title: 'Brain & Spine Surgery Services Hyderabad | Dr. Sayuj Krishnan',
-  description: 'Specialized neurosurgical services in Hyderabad: Endoscopic Spine Surgery, Brain Tumor Removal, and Awake Surgery. Minimally invasive care by Dr. Sayuj.',
+  title: 'Neurosurgical Services in Hyderabad | Dr. Sayuj Krishnan',
+  description: 'Expert neurosurgical services in Hyderabad including endoscopic spine surgery, brain tumor removal, epilepsy surgery, and trigeminal neuralgia treatment.',
   keywords: [
     'neurosurgical services hyderabad',
     'spine surgery hyderabad',
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Neurosurgical Services in Hyderabad | Dr. Sayuj Krishnan',
-    description: 'Expert neurosurgical services including endoscopic spine surgery, brain tumor surgery, epilepsy surgery, and trigeminal neuralgia treatment in Hyderabad.',
+    description: 'Expert neurosurgical services in Hyderabad including endoscopic spine surgery, brain tumor removal, epilepsy surgery, and trigeminal neuralgia treatment.',
     url: `${SITE_URL}/services`,
     siteName: 'Dr. Sayuj Krishnan - Neurosurgeon in Hyderabad',
     images: [
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Neurosurgical Services in Hyderabad | Dr. Sayuj Krishnan',
-    description: 'Expert neurosurgical services including endoscopic spine surgery, brain tumor surgery, epilepsy surgery, and trigeminal neuralgia treatment in Hyderabad.',
+    description: 'Expert neurosurgical services in Hyderabad including endoscopic spine surgery, brain tumor removal, epilepsy surgery, and trigeminal neuralgia treatment.',
     images: [`${SITE_URL}/images/og-default.jpg`],
     site: '@drsayuj',
     creator: '@drsayuj'
@@ -93,13 +93,13 @@ export default function ServicesPage() {
     {
       title: 'Microvascular Decompression (MVD)',
       description: 'Microsurgical relief for trigeminal neuralgia and hemifacial spasm while preserving nerve function.',
-      href: '/conditions/trigeminal-neuralgia-treatment-hyderabad',
+      href: '/services/microvascular-decompression-hyderabad',
       features: ['Retrosigmoid keyhole', 'Neuromonitoring', 'Teflon interposition', 'Facial pain relief']
     },
     {
       title: 'Gamma Knife Radiosurgery',
       description: 'Stereotactic radiosurgery for brain tumours and trigeminal neuralgia with sub-millimetre precision.',
-      href: '/services/brain-tumor-surgery-hyderabad',
+      href: '/services/gamma-knife-radiosurgery-hyderabad',
       features: ['Non-incisional', 'High-dose precision', 'Outpatient workflow', 'Rapid recovery']
     },
     {
@@ -141,12 +141,12 @@ export default function ServicesPage() {
           <h2 className="text-3xl font-bold text-blue-800 mb-8">Our Specialized Neurosurgical Services</h2>
           <div className="prose max-w-none mb-8">
             <p className="text-lg text-gray-700 mb-6">
-              Dr. Sayuj Krishnan offers comprehensive neurosurgical care in Hyderabad, specializing in minimally invasive techniques 
-              that reduce recovery time and improve patient outcomes. Our services encompass both brain and spine conditions, 
+              Dr. Sayuj Krishnan offers comprehensive neurosurgical care in Hyderabad, specializing in minimally invasive techniques
+              that reduce recovery time and improve patient outcomes. Our services encompass both brain and spine conditions,
               utilizing advanced technology and evidence-based approaches.
             </p>
             <p className="text-gray-700 mb-6">
-              With over 9 years of experience and specialized training in endoscopic spine surgery, Dr. Sayuj provides 
+              With over 9 years of experience and specialized training in endoscopic spine surgery, Dr. Sayuj provides
               personalized treatment plans tailored to each patient's specific needs and condition severity.
             </p>
           </div>
@@ -167,7 +167,7 @@ export default function ServicesPage() {
               <div key={index} className="relative bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
                 <h2 className="text-2xl font-semibold text-blue-700 mb-3">{service.title}</h2>
                 <p className="text-gray-700 mb-4">{service.description}</p>
-                
+
                 <div className="mb-4">
                   <h3 className="font-semibold text-gray-700 mb-2">Key Features:</h3>
                   <ul className="space-y-1">
@@ -176,8 +176,8 @@ export default function ServicesPage() {
                     ))}
                   </ul>
                 </div>
-                
-                <Link 
+
+                <Link
                   href={service.href}
                   className="inline-block bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-[0.98]"
                   aria-label={`Learn more about ${service.title}`}
@@ -216,7 +216,7 @@ export default function ServicesPage() {
 
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-blue-800 mb-8">Detailed Service Overview</h2>
-          
+
           <div className="space-y-12">
             <div className="bg-white border border-gray-200 rounded-lg p-8 shadow-sm">
               <h3 className="text-2xl font-semibold text-blue-700 mb-4">Endoscopic Spine Surgery</h3>
@@ -224,7 +224,7 @@ export default function ServicesPage() {
                 <div>
                   <h4 className="font-semibold text-gray-700 mb-3">Endoscopic Discectomy</h4>
                   <p className="text-gray-600 mb-4">
-                    Minimally invasive removal of herniated disc material through a small 8-10mm incision. 
+                    Minimally invasive removal of herniated disc material through a small 8-10mm incision.
                     This procedure offers faster recovery, less pain, and reduced risk of complications compared to traditional open surgery.
                   </p>
                   <Link href="/services/endoscopic-discectomy-hyderabad/" className="text-blue-600 hover:underline">
@@ -234,7 +234,7 @@ export default function ServicesPage() {
                 <div>
                   <h4 className="font-semibold text-gray-700 mb-3">Endoscopic Foraminotomy</h4>
                   <p className="text-gray-600 mb-4">
-                    Decompression of nerve roots through enlarged foraminal openings using endoscopic visualization. 
+                    Decompression of nerve roots through enlarged foraminal openings using endoscopic visualization.
                     Ideal for patients with foraminal stenosis causing leg pain and weakness.
                   </p>
                   <Link href="/services/minimally-invasive-spine-surgery/" className="text-blue-600 hover:underline">
@@ -250,7 +250,7 @@ export default function ServicesPage() {
                 <div>
                   <h4 className="font-semibold text-gray-700 mb-3">ULBD (Lumbar Canal Stenosis)</h4>
                   <p className="text-gray-600 mb-4">
-                    Unilateral laminotomy bilateral decompression for spinal stenosis using endoscopic approach. 
+                    Unilateral laminotomy bilateral decompression for spinal stenosis using endoscopic approach.
                     This technique provides bilateral decompression while preserving spinal stability and reducing tissue damage.
                   </p>
                   <Link href="/services/minimally-invasive-spine-surgery/" className="text-blue-600 hover:underline">
@@ -260,7 +260,7 @@ export default function ServicesPage() {
                 <div>
                   <h4 className="font-semibold text-gray-700 mb-3">Cervical Endoscopic Procedures</h4>
                   <p className="text-gray-600 mb-4">
-                    Endoscopic cervical discectomy and foraminotomy for neck and arm pain relief. 
+                    Endoscopic cervical discectomy and foraminotomy for neck and arm pain relief.
                     These procedures preserve motion while effectively treating cervical radiculopathy and myelopathy.
                   </p>
                   <Link href="/services/minimally-invasive-spine-surgery/" className="text-blue-600 hover:underline">
@@ -276,14 +276,14 @@ export default function ServicesPage() {
                 <div>
                   <h4 className="font-semibold text-gray-700 mb-3">Brain Tumor Surgery</h4>
                   <p className="text-gray-600 mb-4">
-                    Advanced neuronavigation-guided microsurgery for brain tumors with comprehensive multidisciplinary care. 
+                    Advanced neuronavigation-guided microsurgery for brain tumors with comprehensive multidisciplinary care.
                     <Link href="/services/brain-tumor-surgery-hyderabad/" className="text-blue-600 hover:underline"> Dr. Sayuj provides expert consultations for brain tumor surgery in Hyderabad at Yashoda Hospital, Malakpet.</Link>
                   </p>
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-700 mb-3">Epilepsy Surgery</h4>
                   <p className="text-gray-600 mb-4">
-                    Comprehensive surgical treatment for drug-resistant epilepsy including LITT, resection surgery, 
+                    Comprehensive surgical treatment for drug-resistant epilepsy including LITT, resection surgery,
                     and VNS. Our multidisciplinary approach ensures optimal outcomes for patients with uncontrolled seizures.
                   </p>
                   <Link href="/services/epilepsy-surgery-hyderabad" className="text-blue-600 hover:underline">
@@ -293,7 +293,7 @@ export default function ServicesPage() {
                 <div>
                   <h4 className="font-semibold text-gray-700 mb-3">MVD and Radiosurgery (TN)</h4>
                   <p className="text-gray-600 mb-4">
-                    Advanced treatment for trigeminal neuralgia including microvascular decompression and Gamma Knife radiosurgery. 
+                    Advanced treatment for trigeminal neuralgia including microvascular decompression and Gamma Knife radiosurgery.
                     These procedures offer long-lasting relief for severe facial pain conditions.
                   </p>
                   <Link href="/conditions/trigeminal-neuralgia-treatment" className="text-blue-600 hover:underline">
@@ -355,21 +355,21 @@ export default function ServicesPage() {
           </div>
         </section>
 
-        <section className="relative bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 text-center mb-16">
+        <section className="bg-blue-50 p-8 rounded-lg text-center mb-16">
           <h2 className="text-2xl font-bold text-blue-800 mb-4">Ready to Discuss Your Treatment Options?</h2>
           <p className="text-gray-600 mb-6">
             Dr. Sayuj Krishnan provides personalized treatment plans based on your specific condition and needs.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link 
+            <Link
               href="/appointments/"
-              className="inline-flex items-center justify-center bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-[0.98] no-underline"
+              className="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-colors"
             >
               Book Consultation
             </Link>
-            <Link 
+            <Link
               href="/contact/"
-              className="inline-flex items-center justify-center bg-white border border-slate-200 text-slate-600 font-medium py-3 px-6 rounded-xl transition-all duration-300 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 no-underline"
+              className="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-full hover:bg-blue-600 hover:text-white transition-colors"
             >
               Contact Us
             </Link>
