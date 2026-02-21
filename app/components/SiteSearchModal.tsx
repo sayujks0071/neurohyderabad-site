@@ -135,6 +135,7 @@ export default function SiteSearchModal({ onClose }: SiteSearchModalProps) {
       className="fixed inset-0 z-50 flex items-start justify-center bg-black/50 px-4 py-16 backdrop-blur-sm sm:py-24"
       role="dialog"
       aria-modal="true"
+      aria-label="Site Search"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
@@ -145,6 +146,13 @@ export default function SiteSearchModal({ onClose }: SiteSearchModalProps) {
           <input
             ref={inputRef}
             type="search"
+            role="combobox"
+            aria-autocomplete="list"
+            aria-expanded={results.length > 0}
+            aria-controls="search-results-listbox"
+            aria-activedescendant={
+              results.length > 0 ? `result-option-${activeIndex}` : undefined
+            }
             placeholder="Search conditions, treatments, or resources..."
             className="w-full border-none text-base text-gray-900 placeholder:text-gray-400 focus:outline-none"
             value={query}
@@ -166,6 +174,9 @@ export default function SiteSearchModal({ onClose }: SiteSearchModalProps) {
 
         <div
           ref={resultsRef}
+          id="search-results-listbox"
+          role="listbox"
+          aria-label="Search results"
           className="max-h-80 overflow-y-auto px-2 py-3 sm:px-3"
         >
           {query.trim() === "" ? (
@@ -191,6 +202,9 @@ export default function SiteSearchModal({ onClose }: SiteSearchModalProps) {
               return (
                 <div
                   key={`${item.href}-${index}`}
+                  id={`result-option-${index}`}
+                  role="option"
+                  aria-selected={isActive}
                   data-index={index}
                   className={`group rounded-xl px-3 py-3 transition ${
                     isActive
