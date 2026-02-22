@@ -22,8 +22,14 @@ jobs:
         env:
           PROMPT_FILE: jules-prompts/local-seo-check.md
           ISSUE_TITLE: "[Jules] Local SEO Health Check"
+          JULES_ENABLED: ${{ vars.JULES_ENABLED || 'true' }}
         with:
           script: |
+            if (process.env.JULES_ENABLED === 'false') {
+              console.log('Jules automations are disabled via JULES_ENABLED env var.');
+              return;
+            }
+
             const fs = require('fs');
             const promptFile = process.env.PROMPT_FILE;
             const baseTitle = process.env.ISSUE_TITLE;
