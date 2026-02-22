@@ -133,7 +133,7 @@ async function generateAIResponse(request: BookingRequest): Promise<AIResponse> 
   // Use Vercel AI Gateway for intelligent conversation flow
   try {
     const { object } = await generateObject({
-      model: getTextModel('gpt-4o-mini'),
+      model: getTextModel('gpt-4o'),
       schema: aiBookingSchema,
       prompt: `You are a helpful medical appointment booking assistant for Dr. Sayuj Krishnan, a neurosurgeon.
 Your goal is to help patients book an appointment by collecting necessary information.

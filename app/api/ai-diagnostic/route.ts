@@ -54,7 +54,7 @@ Provide a detailed technical analysis and solution.
 `;
 
     const { text: analysis } = await generateText({
-      model: getTextModel('gpt-4'),
+      model: getTextModel('gpt-4o'),
       messages: [
         {
           role: "system",

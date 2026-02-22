@@ -132,7 +132,7 @@ export async function POST(request: NextRequest) {
     }
 
     const result = streamText({
-      model: getTextModel(),
+      model: getTextModel('gpt-4o-mini'),
       prompt: `Summarize the following medical article in approximately ${maxLength} words. Focus on key points, main findings, and actionable information. Keep it concise and easy to understand:
 
 ${content}
