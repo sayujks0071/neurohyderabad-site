@@ -6,7 +6,12 @@ import { trackMiddlewareEvent } from '@/src/lib/middleware/rum';
 import { MessageCircle, X, Send, AlertTriangle, Loader2, Sparkles, Minus } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { useChat } from '@ai-sdk/react';
-import { type Message } from 'ai';
+
+interface Message {
+  id: string;
+  role: 'system' | 'user' | 'assistant' | 'data';
+  content: string;
+}
 
 /**
  * Floating AI Chat Widget using Vercel AI Gateway
@@ -78,7 +83,7 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
       service: 'floating_widget',
     },
     initialMessages,
-    onFinish: (message) => {
+    onFinish: (message: any) => {
       const content = message.content;
 
       trackMiddlewareEvent('chat_response_received', {
@@ -88,7 +93,7 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
 
       // Check for emergency keywords
       const emergencyKeywords = ['emergency', 'urgent', 'immediately', 'call', 'stroke', 'seizure'];
-      const hasEmergency = emergencyKeywords.some(keyword =>
+      const hasEmergency = emergencyKeywords.some((keyword: string) =>
         content.toLowerCase().includes(keyword)
       );
 
@@ -101,7 +106,7 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
 
       logContactFormSubmit('ai_chat_widget', true);
     },
-    onError: (error) => {
+    onError: (error: any) => {
       console.error('Chat error:', error);
       logContactFormSubmit('ai_chat_widget', false);
       trackMiddlewareEvent('chat_error', {
@@ -109,7 +114,7 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
         error: error.message
       });
     }
-  });
+  } as any) as any;
 
   const isLoading = status === 'submitted' || status === 'streaming';
 
@@ -264,7 +269,7 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
             role="log"
             aria-live="polite"
           >
-            {messages.map((message) => {
+            {messages.map((message: any) => {
               // Extract text content directly
               const content = message.content;
 

@@ -15,12 +15,7 @@ import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import TrustProof from '@/app/_components/TrustProof';
 import { patientStories } from '@/src/content/stories';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
-import dynamic from 'next/dynamic';
-import PatientEducationVideosSkeleton from '@/app/_components/skeletons/PatientEducationVideosSkeleton';
-
-const PatientEducationVideos = dynamic(() => import('@/app/_components/PatientEducationVideos'), {
-  loading: () => <PatientEducationVideosSkeleton />
-});
+import PatientEducationVideos from '@/app/_components/PatientEducationVideos';
 
 const baseMetadata = makeMetadata({
   title: "Sciatica Treatment Hyderabad | 90% Non-Surgical | Dr Sayuj",

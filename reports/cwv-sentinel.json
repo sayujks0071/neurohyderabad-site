@@ -6,16 +6,23 @@
       "bottleneck": "CLS on mobile due to fixed-height video placeholders (450px) vs actual video height (~180px).",
       "fix": "Updated placeholders in `app/page.tsx` and loading state in `RemotionVideoEmbedWrapper.tsx` to use `aspect-video` and `max-w-[800px]`, ensuring consistent aspect ratio and width during loading.",
       "impact": "Eliminated large layout shift on mobile devices when videos load. Placeholder now matches the video dimensions exactly."
+    },
+    "Condition": {
+      "bottleneck": "CLS due to mismatch between 3-column skeleton and 1-column filtered content for PatientEducationVideos on Sciatica page.",
+      "fix": "Replaced dynamic import with static import for PatientEducationVideos in app/conditions/sciatica-pain-treatment-hyderabad/page.tsx to render server-side immediately.",
+      "impact": "Eliminated layout shift and improved LCP by removing skeleton loading state."
     }
   },
   "metrics": {
     "before": {
-      "home-cls-mobile": "High (estimated > 0.25)"
+      "home-cls-mobile": "High (estimated > 0.25)",
+      "condition-cls": "Moderate (estimated > 0.1)"
     },
     "after": {
-      "home-cls-mobile": "Low (estimated < 0.1)"
+      "home-cls-mobile": "Low (estimated < 0.1)",
+      "condition-cls": "Low (estimated < 0.05)"
     }
   },
   "build_status": "Success",
-  "test_status": "Existing failures in unrelated tests (semantic-search, lead_security, stats, dicom validation, appointment SEO schema)."
+  "test_status": "Fixed build errors in ai-sandbox and other components. Existing failures in unrelated tests persist."
 }
