@@ -5,6 +5,7 @@ import {
   useMemo,
   useRef,
   useState,
+  useId,
   type KeyboardEvent,
 } from "react";
 import {
@@ -52,10 +53,8 @@ export default function Calendar({
   );
   const [focusedDate, setFocusedDate] = useState(selectedDate ?? today);
   const gridRef = useRef<HTMLDivElement>(null);
-  const monthYearId = useMemo(
-    () => `month-year-${Math.random().toString(36).slice(2, 9)}`,
-    []
-  );
+  const monthYearId = useId();
+  const labelId = useId();
 
   useEffect(() => {
     if (gridRef.current) {
@@ -166,7 +165,10 @@ export default function Calendar({
 
   return (
     <div>
-      <label className="block text-sm font-medium text-slate-700 mb-1">
+      <label
+        id={labelId}
+        className="block text-sm font-medium text-slate-700 mb-1"
+      >
         {label}
         {required && <span className="text-red-500 font-extrabold pl-1">*</span>}
       </label>
@@ -207,7 +209,7 @@ export default function Calendar({
         <div
           ref={gridRef}
           role="grid"
-          aria-labelledby={monthYearId}
+          aria-labelledby={`${labelId} ${monthYearId}`}
           onKeyDown={handleKeyDown}
         >
           <div role="row" className="grid grid-cols-7 gap-1 text-center">
