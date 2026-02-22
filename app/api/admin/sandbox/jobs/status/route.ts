@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { Sandbox } from "@vercel/sandbox";
 import { verifyAdminAccess } from "@/src/lib/security";
+import { getSandbox } from "@/lib/sandbox/client";
 
 export const runtime = "nodejs";
 
@@ -17,34 +17,38 @@ export async function GET(request: Request) {
   }
 
   try {
-    const sandbox = await Sandbox.get({ sandboxId });
-
-    // Try to get command.
-    const sb = sandbox as any;
-    const cmd = await sb.getCommand(cmdId);
-
-    let stdout = '';
-    let stderr = '';
-
-    if (typeof cmd.output === 'function') {
-        stdout = await cmd.output("stdout");
-        stderr = await cmd.output("stderr");
-    } else {
-         stdout = String(cmd.stdout || '');
-         stderr = String(cmd.stderr || '');
+    const sandbox = await getSandbox(sandboxId);
+    if (!sandbox) {
+      return NextResponse.json({ error: "Sandbox not found" }, { status: 404 });
     }
 
-    const TAIL_SIZE = 16 * 1024; // 16KB
+    const command = await (sandbox as any).getCommand(cmdId);
+
+    // Safety check for command output
+    let stdout = "";
+    let stderr = "";
+
+    if (typeof command.stdout === 'string') {
+        stdout = command.stdout;
+    } else if (typeof command.stdout === 'function') {
+        stdout = await command.stdout();
+    }
+
+    if (typeof command.stderr === 'string') {
+        stderr = command.stderr;
+    } else if (typeof command.stderr === 'function') {
+        stderr = await command.stderr();
+    }
 
     return NextResponse.json({
-        status: sandbox.status,
-        exitCode: cmd.exitCode,
-        stdoutTail: stdout.slice(-TAIL_SIZE),
-        stderrTail: stderr.slice(-TAIL_SIZE),
+        status: command.status,
+        exitCode: command.exitCode,
+        stdoutTail: stdout.slice(-16384),
+        stderrTail: stderr.slice(-16384),
     });
 
   } catch (error: any) {
-     console.error("Job status check failed:", error);
-     return NextResponse.json({ error: error.message }, { status: 500 });
+    console.error("Job status error:", error);
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

@@ -1,11 +1,11 @@
 import { POST } from '@/app/api/mri/analyze/route';
 import { NextRequest } from 'next/server';
-import { extractPdfTextInSandbox } from '@/lib/mri/pdfExtract';
+import { extractPdfTextInSandbox } from '@/lib/pdf/extract-sandbox';
 import { interpretReportText } from '@/lib/interpretReport';
 import { rateLimit } from '@/src/lib/rate-limit';
 import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
 
-vi.mock('@/lib/mri/pdfExtract');
+vi.mock('@/lib/pdf/extract-sandbox');
 vi.mock('@/lib/interpretReport');
 vi.mock('@/src/lib/rate-limit');
 
@@ -13,6 +13,7 @@ vi.mock('@/src/lib/rate-limit');
 function createRequest(file: File | null) {
   const formData = new FormData();
   if (file) {
+    // We need to pass the file blob
     formData.append('file', file);
   }
   return new NextRequest('http://localhost/api/mri/analyze', {
@@ -28,7 +29,7 @@ describe('POST /api/mri/analyze', () => {
     process.env = { ...originalEnv };
     process.env.MRI_ANALYZER_ENABLED = '1'; // Enable feature for validation tests
     // Mock rate limit to always succeed
-    vi.mocked(rateLimit).mockReturnValue({
+    (rateLimit as any).mockReturnValue({
         success: true,
         limit: 10,
         remaining: 10,
@@ -56,7 +57,7 @@ describe('POST /api/mri/analyze', () => {
     const file = new File(['dummy'], 'test.txt', { type: 'text/plain' });
     const req = createRequest(file);
     const res = await POST(req);
-    expect(res.status).toBe(400);
+    expect(res.status).toBe(400); // 400 because validatePdf returns 400 for type
     const json = await res.json();
     expect(json.error).toBe("Invalid file type. Only PDF is allowed.");
   });
@@ -67,7 +68,7 @@ describe('POST /api/mri/analyze', () => {
     const file = new File([largeContent], 'large.pdf', { type: 'application/pdf' });
     const req = createRequest(file);
     const res = await POST(req);
-    expect(res.status).toBe(413);
+    expect(res.status).toBe(413); // validatePdf returns 413
     const json = await res.json();
     expect(json.error).toBe("File too large. Max size is 10MB.");
   });
@@ -77,8 +78,8 @@ describe('POST /api/mri/analyze', () => {
      const mockExtraction = { text: 'Report content', numpages: 1, truncated: false };
      const mockAnalysis = { plainEnglishSummary: 'Summary', keyTakeaways: ['Point 1'] };
 
-     vi.mocked(extractPdfTextInSandbox).mockResolvedValue(mockExtraction);
-     vi.mocked(interpretReportText).mockResolvedValue(mockAnalysis);
+     (extractPdfTextInSandbox as any).mockResolvedValue(mockExtraction);
+     (interpretReportText as any).mockResolvedValue(mockAnalysis);
 
      const file = new File(['%PDF-1.4 content'], 'valid.pdf', { type: 'application/pdf' });
      const req = createRequest(file);

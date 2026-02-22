@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
-import { Sandbox } from "@vercel/sandbox";
 import { verifyAdminAccess } from "@/src/lib/security";
-import { destroySandbox } from "@/lib/sandbox/client";
+import { getSandbox, destroySandbox } from "@/lib/sandbox/client";
 
 export const runtime = "nodejs";
 
@@ -17,15 +16,23 @@ export async function POST(request: Request) {
   }
 
   const { sandboxId } = body;
+
   if (!sandboxId) {
-      return NextResponse.json({ error: "Missing sandboxId" }, { status: 400 });
+    return NextResponse.json({ error: "Missing sandboxId" }, { status: 400 });
   }
 
   try {
-    const sandbox = await Sandbox.get({ sandboxId });
+    const sandbox = await getSandbox(sandboxId);
+    if (!sandbox) {
+      return NextResponse.json({ error: "Sandbox not found" }, { status: 404 });
+    }
+
     await destroySandbox(sandbox);
-    return NextResponse.json({ success: true });
+
+    return NextResponse.json({ success: true, message: "Sandbox stopped" });
+
   } catch (error: any) {
+    console.error("Stop job error:", error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

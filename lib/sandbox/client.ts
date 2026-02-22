@@ -34,15 +34,29 @@ export async function createSandbox(options: CreateSandboxOptions = {}) {
   }
 }
 
+export async function getSandbox(id: string) {
+  try {
+    // Sandbox.get is not officially documented as static in type definition maybe, but runtime check showed it.
+    // We cast Sandbox to any to access static method if TS complains.
+    const sandbox = await (Sandbox as any).get(id);
+    return sandbox;
+  } catch (err: any) {
+    console.error('Failed to get sandbox:', err);
+    throw new SandboxError(`Failed to get sandbox: ${err.message}`);
+  }
+}
+
 export async function destroySandbox(sandbox: Sandbox) {
   try {
     const s = sandbox as any;
-    if (typeof s.destroy === 'function') {
+    if (typeof s.stop === 'function') {
+      await s.stop();
+    } else if (typeof s.destroy === 'function') {
       await s.destroy();
     } else if (typeof s.close === 'function') {
       await s.close();
     } else {
-      console.warn('Sandbox instance does not have a destroy/close method');
+      console.warn('Sandbox instance does not have a stop/destroy/close method');
     }
   } catch (err: any) {
     console.warn('Failed to destroy sandbox:', err.message);

@@ -13,6 +13,7 @@ const { mockSandbox, mockCommand } = vi.hoisted(() => {
     id: 'cmd-123',
     cmdId: 'cmd-123',
     exitCode: null,
+    status: 'running',
     output: vi.fn(),
     stdout: 'mock-stdout',
     stderr: 'mock-stderr',
@@ -37,6 +38,7 @@ vi.mock('@/lib/sandbox/client', () => ({
     cmdId: 'cmd-123',
   }),
   destroySandbox: vi.fn().mockResolvedValue(undefined),
+  getSandbox: vi.fn().mockResolvedValue(mockSandbox),
 }));
 
 vi.mock('@vercel/sandbox', () => ({
@@ -116,7 +118,8 @@ describe('Admin Sandbox Jobs API', () => {
 
     it('should return 200 with status', async () => {
       mockSandbox.getCommand.mockResolvedValue(mockCommand);
-      mockCommand.output.mockImplementation(async (type) => type === 'stdout' ? 'out' : 'err');
+      // mockCommand.output is ignored because mockCommand.stdout is set
+      // mockCommand.output.mockImplementation(async (type) => type === 'stdout' ? 'out' : 'err');
 
       const req = new NextRequest('http://localhost/api/admin/sandbox/jobs/status?sandboxId=sb1&cmdId=cmd1', {
          headers: { 'x-admin-key': 'test-secret' },
@@ -125,7 +128,7 @@ describe('Admin Sandbox Jobs API', () => {
       expect(res.status).toBe(200);
       const data = await res.json();
       expect(data.status).toBe('running');
-      expect(data.stdoutTail).toBe('out');
+      expect(data.stdoutTail).toBe('mock-stdout');
     });
   });
 
