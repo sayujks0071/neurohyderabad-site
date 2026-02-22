@@ -116,6 +116,17 @@ const nextConfig = {
         destination: '/services/brain-tumor-surgery-hyderabad',
         permanent: true,
       },
+      // Patient story redirects
+      {
+        source: '/stories/minimal-invasive-meningioma-resection',
+        destination: '/patient-stories/minimal-invasive-meningioma-resection',
+        permanent: true,
+      },
+      {
+        source: '/stories/minimal-invasive-meningioma-resection-',
+        destination: '/patient-stories/minimal-invasive-meningioma-resection',
+        permanent: true,
+      },
       // Trigeminal neuralgia redirects
       {
         source: '/conditions/trigeminal-neuralgia',
