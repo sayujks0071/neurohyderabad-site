@@ -148,7 +148,7 @@ export default async function BlogPage() {
       }
     }
   } catch (error) {
-    console.log('WordPress posts not available, using static posts');
+    // console.log('WordPress posts not available, using static posts');
   }
 
   // Combine all posts: MDX (new system) first, then static, then WordPress
