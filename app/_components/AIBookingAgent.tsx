@@ -227,7 +227,7 @@ export default function AIBookingAgent({ pageSlug, service }: AIBookingAgentProp
       logContactFormSubmit('ai_appointment_booking', true);
 
       // In a real implementation, you would send this to your backend
-      console.log('Booking request:', bookingRequest);
+      // console.log('Booking request:', bookingRequest);
 
       // For now, we'll use the existing mailto approach
       const subject = `AI Booking Request - ${bookingData.name || 'New Patient'}`;
