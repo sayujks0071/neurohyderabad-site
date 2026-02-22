@@ -65,3 +65,5 @@
 ## 2026-02-25
 *   **Expansion:** Replicate the visual "Red Flags" grid on other emergency-related condition pages (e.g., Brain Tumor Symptoms).
 *   **Consistency:** Ensure `TrustProof` components on other pages are updated to use the latest props and styling if applicable.
+- [ ] Consider adding a dedicated 'Patient Journey' interactive timeline for endoscopic spine surgery.
+- [ ] Improve 'Am I a Candidate' section with a simple symptom checker quiz.

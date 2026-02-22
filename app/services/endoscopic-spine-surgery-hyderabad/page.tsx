@@ -488,13 +488,26 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
 
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-blue-900 mb-6">Recovery Timeline & Return to Work</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6">
             {RECOVERY_STEPS.map((step, idx) => (
               <div key={idx} className="bg-blue-50 border border-blue-100 rounded-xl p-4">
                 <div className="text-sm font-semibold text-blue-600 mb-2 uppercase">{step.time}</div>
                 <div className="text-gray-800 text-sm">{step.milestone}</div>
               </div>
             ))}
+          </div>
+
+          <div className="mb-8 p-4 bg-green-50 border border-green-200 rounded-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div>
+              <p className="font-semibold text-green-900">Need a day-by-day recovery guide?</p>
+              <p className="text-sm text-green-800">Read our detailed timeline covering Week 1 to Month 3 milestones.</p>
+            </div>
+            <Link
+              href="/blog/spine-surgery-recovery-timeline-hyderabad"
+              className="whitespace-nowrap bg-green-600 text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-green-700 transition-colors"
+            >
+              Read Full Recovery Guide →
+            </Link>
           </div>
 
           <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
@@ -556,6 +569,16 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
           <p className="text-gray-700 mb-6">
             Many patients ask why endoscopic surgery is preferred over traditional open methods. The key difference lies in how we approach the spine—preserving your natural anatomy rather than cutting through it.
           </p>
+
+          <div className="mb-6">
+            <Link
+              href="/blog/endoscopic-vs-microdiscectomy-hyderabad"
+              className="inline-flex items-center text-blue-600 font-semibold hover:text-blue-800 hover:underline"
+            >
+              See Detailed Comparison: Endoscopic vs Microdiscectomy →
+            </Link>
+          </div>
+
           <SurgeryComparisonTable />
 
           <div className="mt-8 bg-white border border-blue-200 rounded-xl p-6 shadow-sm mb-8">
@@ -797,6 +820,15 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
           disclaimer="Approximate package estimates for self-pay patients at Yashoda Hospital Malakpet. Final cost depends on room category (General/Sharing/Private), insurance approvals, and specific implant requirements. We offer full assistance with insurance pre-authorization."
         />
 
+        <div className="text-center mb-16">
+          <Link
+            href="/services/spine-surgery-cost-hyderabad"
+            className="text-blue-600 font-semibold hover:underline"
+          >
+            View Complete 2025 Spine Surgery Cost Guide & Implant Pricing →
+          </Link>
+        </div>
+
         {/* Insurance Section - Added for financial transparency */}
         <section className="mb-16 bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
            <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
@@ -871,6 +903,41 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
               className="inline-flex items-center justify-center rounded-full bg-blue-600 px-5 py-2 text-white font-semibold hover:bg-blue-700 transition-colors"
             >
               Understand Insurance Support
+            </Link>
+          </div>
+        </section>
+
+        {/* Related Patient Guides */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">Patient Guides & Resources</h2>
+          <div className="grid md:grid-cols-2 gap-4">
+            <Link href="/blog/spine-surgery-recovery-timeline-hyderabad" className="block group">
+              <div className="bg-white border border-gray-200 rounded-xl p-5 hover:shadow-md transition-shadow h-full">
+                <span className="text-xs font-bold text-blue-600 uppercase tracking-wide mb-2 block">Recovery Guide</span>
+                <h3 className="font-bold text-gray-900 group-hover:text-blue-700 mb-2">Day-by-Day Recovery Timeline</h3>
+                <p className="text-sm text-gray-600">Detailed milestones from hospital discharge to full sports recovery.</p>
+              </div>
+            </Link>
+            <Link href="/blog/return-to-work-after-endoscopic-discectomy-hyderabad" className="block group">
+              <div className="bg-white border border-gray-200 rounded-xl p-5 hover:shadow-md transition-shadow h-full">
+                <span className="text-xs font-bold text-green-600 uppercase tracking-wide mb-2 block">Work & Lifestyle</span>
+                <h3 className="font-bold text-gray-900 group-hover:text-green-700 mb-2">Returning to Work Guide</h3>
+                <p className="text-sm text-gray-600">When to resume desk jobs, driving, and physical labor safely.</p>
+              </div>
+            </Link>
+            <Link href="/blog/endoscopic-vs-microdiscectomy-hyderabad" className="block group">
+              <div className="bg-white border border-gray-200 rounded-xl p-5 hover:shadow-md transition-shadow h-full">
+                <span className="text-xs font-bold text-purple-600 uppercase tracking-wide mb-2 block">Comparison</span>
+                <h3 className="font-bold text-gray-900 group-hover:text-purple-700 mb-2">Endoscopic vs. Microdiscectomy</h3>
+                <p className="text-sm text-gray-600">In-depth comparison of incision size, pain, and long-term outcomes.</p>
+              </div>
+            </Link>
+            <Link href="/services/spine-surgery-cost-hyderabad" className="block group">
+              <div className="bg-white border border-gray-200 rounded-xl p-5 hover:shadow-md transition-shadow h-full">
+                <span className="text-xs font-bold text-orange-600 uppercase tracking-wide mb-2 block">Financial</span>
+                <h3 className="font-bold text-gray-900 group-hover:text-orange-700 mb-2">2025 Cost & Insurance Guide</h3>
+                <p className="text-sm text-gray-600">Transparent pricing for implants, room categories, and insurance approval.</p>
+              </div>
             </Link>
           </div>
         </section>
