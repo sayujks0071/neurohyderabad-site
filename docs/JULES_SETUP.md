@@ -10,16 +10,21 @@ The setup script (`.jules-setup.sh`) performs the following:
    - Checks Node.js version (warns if < 18)
    - Verifies pnpm installation
    - Displays environment information
+   - Prints global git URL rewrite rules (for diagnostics)
 
 2. **Package Manager Setup**
    - Installs pnpm@9.15.0 (as specified in `package.json`)
    - Ensures correct version is used
 
-3. **Dependency Installation**
+3. **Git URL Rewrite Cleanup**
+   - Removes any `url.http://git@192.168.0.1:8080/.insteadOf` entries
+   - Prevents non-interactive clone failures when mirror URLs prompt for credentials
+
+4. **Dependency Installation**
    - Runs `pnpm install --frozen-lockfile` to install all dependencies
    - Verifies installation success
 
-4. **Code Quality Checks**
+5. **Code Quality Checks**
    - TypeScript type checking (`tsc --noEmit`)
    - ESLint linting (`next lint`)
    - Build verification (`next build`)
@@ -54,6 +59,14 @@ To use this setup script in Jules:
 ### Build Fails
 - Check the build log at `/tmp/build-output.log` in the Jules VM
 - Common issues: missing environment variables, API keys, or external dependencies
+
+### Clone Fails With a Password Prompt
+If you see errors like `could not read Password for 'http://git@192.168.0.1:8080'`, remove the mirror rewrite:
+
+- `git config --global --unset-all url.http://git@192.168.0.1:8080/.insteadOf`
+- `git config --global --unset-all url.http://git@192.168.0.1:8080/.insteadof`
+
+Then retry the clone.
 
 ### Type Errors
 - Review TypeScript errors in `/tmp/tsc-output.log`
