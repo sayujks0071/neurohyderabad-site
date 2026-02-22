@@ -104,6 +104,13 @@ export async function verifyAdminAccess(request: Request): Promise<{
     return { isAuthorized: true };
   }
 
+  // Check query parameter (fallback for quick admin scripts/links)
+  const { searchParams } = new URL(request.url);
+  const queryKey = searchParams.get('key');
+  if (queryKey && await secureCompare(queryKey, adminKey)) {
+    return { isAuthorized: true };
+  }
+
   // Deny access
   return {
     isAuthorized: false,
