@@ -57,7 +57,7 @@ export async function POST(request: NextRequest) {
 
     // Stream text using AI SDK with Tools
     const result = streamText({
-      model: getTextModel(),
+      model: getTextModel('gpt-4o'),
       system: systemPrompt,
       messages,
       temperature: 0.7,

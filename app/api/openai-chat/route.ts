@@ -112,7 +112,7 @@ export async function POST(request: NextRequest) {
 
     // Call AI via Gateway
     const { text: aiResponse, usage } = await generateText({
-      model: getTextModel(), // defaults to gpt-4o-mini
+      model: getTextModel('gpt-4o'),
       messages: messages as any,
       maxOutputTokens: 500,
       temperature: 0.7,
