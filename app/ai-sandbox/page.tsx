@@ -1,17 +1,17 @@
 'use client'
 
-import { useChat } from 'ai/react'
+import { useChat } from '@ai-sdk/react'
 import { useState, useRef, useEffect } from 'react'
-import Header from '../_components/layout/Header'
-import Footer from '../_components/layout/Footer'
+import Header from '../components/HeaderRefactored'
+import Footer from '../components/Footer'
 
 export default function AISandboxPage() {
-    const { messages, input, handleInputChange, handleSubmit, isLoading, error } = useChat({
+    const { messages, input = '', handleInputChange, handleSubmit, isLoading, error } = useChat({
         api: '/api/ai/sandbox',
         body: {
             requestedModel: 'openai/gpt-5.2' // Requested snippet
         }
-    })
+    } as any) as any
 
     const messagesEndRef = useRef<HTMLDivElement>(null)
 
@@ -70,7 +70,7 @@ export default function AISandboxPage() {
                                 <p className="text-sm max-w-sm text-center">Try asking "Why is the sky blue?" to see real-time streaming using the <code className="bg-slate-100 px-1 py-0.5 rounded text-indigo-500">openai/gpt-5.2</code> configuration.</p>
                             </div>
                         ) : (
-                            messages.map(m => (
+                            messages.map((m: any) => (
                                 <div key={m.id} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'} group animate-in slide-in-from-bottom-2 duration-300`}>
                                     <div className={`max-w-[80%] rounded-2xl p-4 shadow-sm relative ${m.role === 'user'
                                             ? 'bg-gradient-to-br from-blue-600 to-indigo-600 text-white rounded-tr-sm'
