@@ -12,7 +12,7 @@ export default function AppointmentSchema() {
   // Validated against schema.org recommendations for local business/medical practice.
   const physicianSchema = {
     "@type": "Physician",
-    "@id": `${SITE_URL}/#physician`,
+    "@id": `${SITE_URL}/appointments#physician`,
     "name": "Dr. Sayuj Krishnan",
     "medicalSpecialty": "Neurosurgeon",
     "address": {
@@ -76,7 +76,7 @@ export default function AppointmentSchema() {
       "@id": `${SITE_URL}/#hospital`
     },
     "department": {
-      "@id": `${SITE_URL}/#physician`
+      "@id": `${SITE_URL}/appointments#physician`
     }
   };
 
