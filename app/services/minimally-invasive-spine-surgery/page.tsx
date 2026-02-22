@@ -14,6 +14,7 @@ import { getServiceSources } from '../sources';
 import JsonLd from '@/components/JsonLd';
 import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
 import MedicalWebPageSchema from '@/app/components/schemas/MedicalWebPageSchema';
+import MedicalProcedureSchema from '@/app/components/schemas/MedicalProcedureSchema';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
@@ -227,6 +228,18 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
         description="Minimally Invasive Spine Surgery Hyderabad: Day Care procedure with same-day discharge. 1000+ successful endoscopic surgeries by Dr Sayuj. Book Consult."
         serviceOrCondition="Minimally Invasive Spine Surgery"
         lastReviewed="2025-10-19"
+      />
+      <MedicalProcedureSchema
+        name="Endoscopic Spine Surgery"
+        description="Minimally invasive spine surgery using an endoscope to treat herniated discs and spinal stenosis."
+        bodyLocation="Spine"
+        procedureType="SurgicalProcedure"
+        howPerformed="Through a small 8mm incision, a specialized endoscope is inserted to visualize and remove the herniated disc fragment."
+        status="StandardProcedure"
+        preparation="MRI scan review and anesthesia fitness check."
+        recoveryTime="P2W"
+        postOp="Walking within 2 hours, discharge same day."
+        followUp="Wound check in 7 days."
       />
       <BreadcrumbSchema
         items={[
