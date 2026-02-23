@@ -201,6 +201,30 @@ export default function TrigeminalNeuralgiaTreatmentPage() {
       <section className="bg-gray-50 py-12">
         <div className="mx-auto max-w-5xl px-4">
           <h2 className="text-2xl font-semibold text-gray-900">
+            MVD vs. Radiofrequency Ablation: Choosing the Right Treatment
+          </h2>
+          <div className="mt-6 mb-12 grid gap-6 md:grid-cols-2">
+            <div className="bg-white p-6 rounded-xl border border-blue-100 shadow-sm">
+              <h3 className="text-lg font-bold text-blue-800 mb-3">Microvascular Decompression (MVD)</h3>
+              <ul className="space-y-2 text-sm text-gray-700">
+                <li>• <strong>Best for:</strong> Young/fit patients with classic vascular compression.</li>
+                <li>• <strong>Procedure:</strong> Microsurgery to separate nerve and vessel.</li>
+                <li>• <strong>Outcome:</strong> 90% immediate relief, lowest recurrence rate.</li>
+                <li>• <strong>Benefit:</strong> Preserves facial sensation (no numbness).</li>
+              </ul>
+            </div>
+            <div className="bg-white p-6 rounded-xl border border-green-100 shadow-sm">
+              <h3 className="text-lg font-bold text-green-800 mb-3">Radiofrequency Ablation (RFA)</h3>
+              <ul className="space-y-2 text-sm text-gray-700">
+                <li>• <strong>Best for:</strong> Elderly patients or those unfit for open surgery.</li>
+                <li>• <strong>Procedure:</strong> Needle-based day-care procedure.</li>
+                <li>• <strong>Outcome:</strong> Immediate relief, but recurrence possible after 3-5 years.</li>
+                <li>• <strong>Side Effect:</strong> Causes some facial numbness (which stops pain).</li>
+              </ul>
+            </div>
+          </div>
+
+          <h2 className="text-2xl font-semibold text-gray-900">
             Treatment Pathways We Offer
           </h2>
           <div className="mt-8 grid gap-6 md:grid-cols-2">

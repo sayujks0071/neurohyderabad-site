@@ -26,17 +26,17 @@ const SERVICE_SLUG = 'endoscopic-spine-surgery-hyderabad';
 export const revalidate = 3600; // Revalidate every hour
 
 const baseMetadata = makeMetadata({
-  title: 'Endoscopic Spine Surgery Hyderabad | Same-Day Discharge',
+  title: 'Endoscopic Spine Surgery Hyderabad | Keyhole Slip Disc Surgery | 7mm',
   description:
-    'Endoscopic spine surgery in Hyderabad by Dr. Sayuj Krishnan (1000+ cases). 7mm keyhole, 90% same-day discharge, ₹95K–₹1.35L. Book now.',
+    'True Keyhole Spine Surgery (7mm) in Hyderabad. No stitches, minimal discomfort. Walk in 4 hours. Expert Endoscopic Spine Surgeon Dr. Sayuj Krishnan.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
 });
 
 export const metadata: Metadata = {
   ...baseMetadata,
-  title: 'Endoscopic Spine Surgery Hyderabad | Same-Day Discharge',
+  title: 'Endoscopic Spine Surgery Hyderabad | Keyhole Slip Disc Surgery | 7mm',
   description:
-    'Endoscopic spine surgery in Hyderabad by Dr. Sayuj Krishnan (1000+ cases). 7mm keyhole, 90% same-day discharge, ₹95K–₹1.35L. Book now.',
+    'True Keyhole Spine Surgery (7mm) in Hyderabad. No stitches, minimal discomfort. Walk in 4 hours. Expert Endoscopic Spine Surgeon Dr. Sayuj Krishnan.',
   keywords: [
     'endoscopic spine surgery hyderabad',
     'minimally invasive spine surgery hyderabad',
@@ -415,6 +415,39 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
               </li>
             ))}
           </ul>
+        </section>
+
+        <section id="awake-spine-surgery" className="mb-16 bg-gradient-to-br from-indigo-50 to-white border border-indigo-100 rounded-2xl p-8 shadow-sm">
+          <div className="flex flex-col md:flex-row items-center gap-8">
+            <div className="w-full md:w-2/3">
+              <h2 className="text-3xl font-bold text-indigo-900 mb-4">Awake Endoscopic Spine Surgery for Elderly</h2>
+              <p className="text-gray-700 mb-4 text-lg">
+                For patients over 65 or those with cardiac/diabetic risks, general anesthesia can be dangerous. We offer a specialized <strong>"Awake" protocol</strong> using local anesthesia and mild sedation.
+              </p>
+              <ul className="grid sm:grid-cols-2 gap-3 text-sm text-gray-700 mb-6">
+                <li className="flex items-center"><span className="text-green-500 mr-2">✓</span> No General Anesthesia Risks</li>
+                <li className="flex items-center"><span className="text-green-500 mr-2">✓</span> Communicate during surgery</li>
+                <li className="flex items-start"><span className="text-green-500 mr-2">✓</span> Ideal for heart/kidney patients</li>
+                <li className="flex items-start"><span className="text-green-500 mr-2">✓</span> Walk immediately after</li>
+              </ul>
+              <div className="flex flex-wrap gap-4">
+                <Link
+                  href="/appointments"
+                  className="inline-flex items-center justify-center rounded-full bg-indigo-600 px-6 py-3 text-white font-semibold hover:bg-indigo-700 transition-colors"
+                >
+                  Get a Second Opinion
+                </Link>
+                <a href="tel:+919778280044" className="inline-flex items-center justify-center rounded-full border border-indigo-200 px-6 py-3 text-indigo-700 font-semibold hover:bg-indigo-50 transition-colors">
+                  Call for Elderly Care
+                </a>
+              </div>
+            </div>
+            <div className="w-full md:w-1/3 bg-white p-6 rounded-xl border border-gray-100 shadow-inner text-center">
+              <span className="block text-5xl font-bold text-indigo-200 mb-2">70+</span>
+              <p className="font-semibold text-gray-600">Safe for Age 70+</p>
+              <p className="text-xs text-gray-500 mt-2">We have successfully treated patients up to 88 years old using this technique.</p>
+            </div>
+          </div>
         </section>
 
         <section className="mb-16">

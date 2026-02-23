@@ -1,30 +1,18 @@
 'use client';
 
-import { useState, useEffect, useRef, ReactNode } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 
 interface LazySectionProps {
-  children: ReactNode;
-  placeholder?: ReactNode;
-  rootMargin?: string;
+  children: React.ReactNode;
+  placeholder?: React.ReactNode;
   className?: string;
 }
 
-export default function LazySection({
-  children,
-  placeholder,
-  rootMargin = '200px', // Start loading 200px before viewport
-  className = '',
-}: LazySectionProps) {
+export default function LazySection({ children, placeholder, className }: LazySectionProps) {
   const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // If IntersectionObserver is not supported, load immediately
-    if (typeof window !== 'undefined' && !window.IntersectionObserver) {
-      setIsVisible(true);
-      return;
-    }
-
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -32,18 +20,18 @@ export default function LazySection({
           observer.disconnect();
         }
       },
-      { rootMargin, threshold: 0 }
+      { rootMargin: '200px' } // Load when within 200px of view
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    if (ref.current) {
+      observer.observe(ref.current);
     }
 
     return () => observer.disconnect();
-  }, [rootMargin]);
+  }, []);
 
   return (
-    <div ref={sectionRef} className={className}>
+    <div ref={ref} className={className}>
       {isVisible ? children : placeholder}
     </div>
   );
