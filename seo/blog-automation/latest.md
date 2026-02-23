@@ -1,6 +1,1 @@
-# Latest Blog Automation Run
-
-- **Date:** 2026-02-14
-- **Topic:** Foot Drop (Drop Foot) Recovery Guide: Causes, Treatment & Surgery
-- **Status:** Success
-- **Traceability File:** [Run Details](./2026-02-14/run.md)
+[Latest Run](./2026-02-23/run.md)
