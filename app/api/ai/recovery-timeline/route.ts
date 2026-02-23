@@ -8,6 +8,7 @@ import { generateRecoveryPlan, type RecoveryPredictorRequest } from '@/src/lib/r
  */
 export async function POST(request: NextRequest) {
   try {
+    const ip = request.headers.get('x-forwarded-for') ?? 'unknown';
     const body: RecoveryPredictorRequest = await request.json();
     
     if (!body.surgeryType) {
@@ -17,7 +18,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const plan = await generateRecoveryPlan(body);
+    const plan = await generateRecoveryPlan(body, { headers: { 'X-Forwarded-For': ip } });
 
     return NextResponse.json({
       plan,

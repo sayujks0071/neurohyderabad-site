@@ -30,7 +30,8 @@ function sanitizeForPrompt(text: string | number | undefined | null, maxLength =
 }
 
 export async function generateBookingConfirmation(
-  data: BookingData
+  data: BookingData,
+  options?: { headers?: Record<string, string> }
 ): Promise<{ message: string; usedAI: boolean }> {
   try {
     // 🛡️ Sentinel: Sanitize inputs to prevent prompt injection
@@ -47,6 +48,7 @@ export async function generateBookingConfirmation(
 
     const { text } = await generateText({
       model: getTextModel(MODEL_NAME),
+      headers: options?.headers,
       system: systemInstruction,
       prompt: userPrompt,
     });

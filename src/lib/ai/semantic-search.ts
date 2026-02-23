@@ -18,7 +18,11 @@ export interface SearchResult {
  * Perform a semantic search using Vercel AI Gateway (if configured)
  * Falls back to keyword search if AI is unavailable or fails
  */
-export async function semanticSearch(query: string, limit: number = 10): Promise<SearchResult[]> {
+export async function semanticSearch(
+  query: string,
+  limit: number = 10,
+  options?: { headers?: Record<string, string> }
+): Promise<SearchResult[]> {
   let allPosts: Awaited<ReturnType<typeof getAllBlogPosts>> = [];
 
   try {
@@ -102,6 +106,7 @@ export async function semanticSearch(query: string, limit: number = 10): Promise
     // Use AI SDK for semantic search
     const { object } = await generateObject({
       model: getTextModel(),
+      headers: options?.headers,
       schema: z.object({
         ids: z.array(z.string()).describe('List of relevant content IDs (URLs), ordered by relevance'),
       }),

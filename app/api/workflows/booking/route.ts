@@ -13,6 +13,7 @@ type WorkflowAppointmentType = "new-consultation" | "follow-up" | "second-opinio
 
 export async function POST(request: NextRequest) {
   try {
+    const ip = request.headers.get('x-forwarded-for') ?? 'unknown';
     const body = await request.json();
 
     // Parse and normalize input data
@@ -69,7 +70,8 @@ export async function POST(request: NextRequest) {
       source: source || "website",
       appointmentType,
       intakeNotes,
-      chiefComplaint: chiefComplaint // Pass original chiefComplaint for DB column
+      chiefComplaint: chiefComplaint, // Pass original chiefComplaint for DB column
+      headers: { 'X-Forwarded-For': ip }
     });
 
     if (result.success) {

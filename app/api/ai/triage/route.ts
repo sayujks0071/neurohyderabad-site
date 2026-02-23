@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
     };
 
     // Perform triage analysis
-    const result = await analyzeTriage(triageRequest);
+    const result = await analyzeTriage(triageRequest, { headers: { 'X-Forwarded-For': ip } });
 
     return NextResponse.json({
       success: true,

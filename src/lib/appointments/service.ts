@@ -22,10 +22,11 @@ export interface ProcessBookingOptions {
   appointmentType?: WorkflowAppointmentType;
   intakeNotes?: string;
   chiefComplaint?: string; // Optional override for DB column if different from booking.reason
+  headers?: Record<string, string>;
 }
 
 export async function processBooking(booking: BookingData, options: ProcessBookingOptions = {}): Promise<BookingResult> {
-  const { source = "website", appointmentType = "new-consultation", intakeNotes = "", chiefComplaint } = options;
+  const { source = "website", appointmentType = "new-consultation", intakeNotes = "", chiefComplaint, headers } = options;
 
   try {
     console.log(`[Service] Processing booking for ${booking.patientName}`);
@@ -42,7 +43,7 @@ export async function processBooking(booking: BookingData, options: ProcessBooki
     }
 
     // 1. Generate AI Confirmation
-    const { message: confirmationMessage, usedAI } = await generateBookingConfirmation(booking);
+    const { message: confirmationMessage, usedAI } = await generateBookingConfirmation(booking, { headers });
 
     // 2. Send Emails (Parallel)
     const [confirmationResult, adminEmailResult] = await Promise.all([

@@ -4,7 +4,7 @@ import { rateLimit } from '@/src/lib/rate-limit';
 import { getTextModel, hasAIConfig } from '@/src/lib/ai/gateway';
 import { DR_SAYUJ_SYSTEM_PROMPT } from '@/src/lib/ai/prompts';
 import { getDefaultFlagValues, reportFlagValues } from '@/src/lib/flags';
-import { tools } from '@/src/lib/ai/tools';
+import { createTools } from '@/src/lib/ai/tools';
 
 /**
  * Streaming Chat API using Vercel AI SDK
@@ -56,13 +56,15 @@ export async function POST(request: NextRequest) {
     }
 
     // Stream text using AI SDK with Tools
+    const headers = { 'X-Forwarded-For': ip };
     const result = streamText({
       model: getTextModel(),
+      headers,
       system: systemPrompt,
       messages,
       temperature: 0.7,
       maxSteps: 5, // Allow multi-step tool execution
-      tools: tools,
+      tools: createTools({ headers }),
     });
 
     // Return data stream response (standard for AI SDK 3+)

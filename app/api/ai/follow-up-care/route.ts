@@ -6,6 +6,7 @@ import { generateFollowUpCare, type FollowUpRequest } from '@/src/lib/ai/follow-
  */
 export async function POST(request: NextRequest) {
   try {
+    const ip = request.headers.get('x-forwarded-for') ?? 'unknown';
     const body = await request.json();
     const {
       procedureType,
@@ -34,7 +35,7 @@ export async function POST(request: NextRequest) {
       previousFollowUps,
     };
 
-    const recommendations = await generateFollowUpCare(followUpRequest);
+    const recommendations = await generateFollowUpCare(followUpRequest, { headers: { 'X-Forwarded-For': ip } });
 
     return NextResponse.json({
       success: true,

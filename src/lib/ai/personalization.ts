@@ -49,7 +49,8 @@ export interface PersonalizedContent {
  * Generate personalized content recommendations
  */
 export async function personalizeContent(
-  context: PersonalizationContext
+  context: PersonalizationContext,
+  options?: { headers?: Record<string, string> }
 ): Promise<PersonalizedContent> {
   if (!hasAIConfig()) {
     return fallbackPersonalization(context);
@@ -58,6 +59,7 @@ export async function personalizeContent(
   try {
     const { object } = await generateObject({
       model: getTextModel(),
+      headers: options?.headers,
       schema: jsonSchema({
         type: 'object',
         properties: {

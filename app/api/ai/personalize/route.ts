@@ -6,6 +6,7 @@ import { personalizeContent, type PersonalizationContext } from '@/src/lib/ai/pe
  */
 export async function POST(request: NextRequest) {
   try {
+    const ip = request.headers.get('x-forwarded-for') ?? 'unknown';
     const body = await request.json();
     const {
       condition,
@@ -31,7 +32,7 @@ export async function POST(request: NextRequest) {
       referralSource,
     };
 
-    const personalizedContent = await personalizeContent(context);
+    const personalizedContent = await personalizeContent(context, { headers: { 'X-Forwarded-For': ip } });
 
     return NextResponse.json({
       success: true,

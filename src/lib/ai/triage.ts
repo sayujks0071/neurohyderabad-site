@@ -45,7 +45,10 @@ export function quickTriageCheck(description: string): 'emergency' | null {
   return null;
 }
 
-export async function analyzeTriage(request: TriageRequest): Promise<TriageResult> {
+export async function analyzeTriage(
+  request: TriageRequest,
+  options?: { headers?: Record<string, string> }
+): Promise<TriageResult> {
   const emergencyCheck = quickTriageCheck(request.description);
   if (emergencyCheck === 'emergency') {
     return {
@@ -65,6 +68,7 @@ export async function analyzeTriage(request: TriageRequest): Promise<TriageResul
   try {
     const { object } = await generateObject({
       model: getTextModel(),
+      headers: options?.headers,
       schema: jsonSchema({
         type: 'object',
         properties: {

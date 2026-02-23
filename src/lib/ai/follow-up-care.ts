@@ -53,7 +53,8 @@ export interface FollowUpRecommendation {
  * Generate follow-up care recommendations
  */
 export async function generateFollowUpCare(
-  request: FollowUpRequest
+  request: FollowUpRequest,
+  options?: { headers?: Record<string, string> }
 ): Promise<FollowUpRecommendation> {
   if (!hasAIConfig()) {
     return fallbackFollowUpCare(request);
@@ -62,6 +63,7 @@ export async function generateFollowUpCare(
   try {
     const { object } = await generateObject({
       model: getTextModel(),
+      headers: options?.headers,
       schema: jsonSchema({
         type: 'object',
         properties: {
