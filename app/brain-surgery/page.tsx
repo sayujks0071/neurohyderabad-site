@@ -34,8 +34,8 @@ const BRAIN_SURGERY_FAQS = [
 ];
 
 export const metadata: Metadata = {
-  title: "Brain Surgery Hyderabad | Awake Tumor Surgery | Dr Sayuj",
-  description: "Expert brain surgery in Hyderabad with Dr. Sayuj Krishnan. Specializing in awake brain surgery, brain tumors, ROSA DBS, and neuronavigation.",
+  title: "Brain Surgery Hyderabad | Awake Craniotomy & Tumor Removal | Dr Sayuj",
+  description: "Advanced Brain Surgery in Hyderabad. Awake Craniotomy, Neuronavigation & Tumor Removal. Safe, precise & compassionate care by Dr. Sayuj Krishnan.",
   keywords: [
     "brain surgery hyderabad",
     "awake brain surgery hyderabad",
@@ -232,12 +232,18 @@ export default function BrainSurgeryPage() {
                       <span><strong>Acoustic Neuromas:</strong> Vestibular schwannomas</span>
                     </li>
                   </ul>
-                  <div className="mt-6">
+                  <div className="mt-6 space-y-2">
                     <Link 
                       href="/services/brain-tumor-surgery-hyderabad"
-                      className="text-blue-600 hover:text-blue-800 font-medium"
+                      className="block text-blue-600 hover:text-blue-800 font-medium"
                     >
                       Learn More About Brain Tumor Surgery →
+                    </Link>
+                    <Link
+                      href="/conditions/trigeminal-neuralgia-treatment-hyderabad"
+                      className="block text-blue-600 hover:text-blue-800 font-medium"
+                    >
+                      Trigeminal Neuralgia & Facial Pain →
                     </Link>
                   </div>
                 </div>

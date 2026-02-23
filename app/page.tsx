@@ -26,6 +26,7 @@ import PatientEducationVideosSkeleton from "./_components/skeletons/PatientEduca
 import TrustSignals from "./_components/TrustSignals";
 import { LocationNAPCard } from "@/src/components/locations/LocationNAPCard";
 import { CANONICAL_TELEPHONE, CANONICAL_WHATSAPP } from "@/src/data/locations";
+import LazySection from "./_components/LazySection";
 
 const PatientEducationVideosWrapper = dynamic(() => import('./_components/wrappers/PatientEducationVideosWrapper'));
 const RecoveryTimelineWrapper = dynamic(() => import('./_components/wrappers/RecoveryTimelineWrapper'));
@@ -35,8 +36,8 @@ const RemotionVideoEmbedWrapper = dynamic(() => import('./_components/RemotionVi
 const HOME_CANONICAL = SITE_URL.endsWith("/") ? SITE_URL : `${SITE_URL}/`;
 
 const baseMetadata = makeMetadata({
-  title: "Best Neurosurgeon in Hyderabad & Spine Specialist | Dr. Sayuj Krishnan",
-  description: "German-Trained neurosurgeon in Hyderabad (Yashoda Hospital). Expert in full endoscopic spine surgery, minimally invasive brain surgery, and awake craniotomy.",
+  title: "Best Neurosurgeon in Hyderabad | Top Spine Specialist | Dr Sayuj",
+  description: "Top-rated neurosurgeon in Hyderabad (Yashoda Hospital). Expert in endoscopic spine surgery, brain tumors & sciatica. 10+ Years Exp. Book Consultation.",
   canonicalPath: "/",
   ogImage: "https://www.drsayuj.info/images/og-default.jpg",
   ogImageAlt: "Dr. Sayuj Krishnan - Premier Neurosurgeon in Hyderabad | Full Endoscopic Spine Surgery & Brain Tumor Surgery"

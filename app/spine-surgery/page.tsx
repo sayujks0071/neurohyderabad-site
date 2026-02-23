@@ -64,8 +64,8 @@ const SPINE_SURGERY_FAQS = [
 ];
 
 export const metadata: Metadata = {
-  title: "Endoscopic Spine Surgery Hyderabad | Minimally Invasive Specialist",
-  description: "Expert endoscopic spine surgery in Hyderabad. Minimally invasive slip disc & stenosis treatment. Same-day discharge. Dr. Sayuj Krishnan.",
+  title: "Endoscopic Spine Surgery Hyderabad | Keyhole Spine Specialist | Dr Sayuj",
+  description: "Best Endoscopic Spine Surgeon in Hyderabad. Keyhole surgery for slip disc & sciatica. 90% same-day discharge. Advanced German techniques. Book now.",
   keywords: [
     "spine surgery hyderabad",
     "endoscopic spine surgery hyderabad",
@@ -147,12 +147,12 @@ export default function SpineSurgeryPage() {
                     >
                       Book Consultation
                     </Link>
-                    <a 
-                      href="tel:+919778280044"
-                      className="bg-green-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-green-700 transition-colors"
+                    <Link
+                      href="/services/endoscopic-spine-surgery-hyderabad#awake-spine-surgery"
+                      className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white/10 transition-colors"
                     >
-                      Call: +91 97782 80044
-                    </a>
+                      Elderly Patient Care
+                    </Link>
                   </div>
                 </div>
                 <div className="flex justify-center">
