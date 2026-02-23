@@ -26,6 +26,7 @@ import PatientEducationVideosSkeleton from "./_components/skeletons/PatientEduca
 import TrustSignals from "./_components/TrustSignals";
 import { LocationNAPCard } from "@/src/components/locations/LocationNAPCard";
 import { CANONICAL_TELEPHONE, CANONICAL_WHATSAPP } from "@/src/data/locations";
+import LazySection from "./_components/LazySection";
 
 const PatientEducationVideosWrapper = dynamic(() => import('./_components/wrappers/PatientEducationVideosWrapper'));
 const RecoveryTimelineWrapper = dynamic(() => import('./_components/wrappers/RecoveryTimelineWrapper'));
