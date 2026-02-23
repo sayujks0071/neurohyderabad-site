@@ -39,6 +39,7 @@ import StandaloneFlagValues from "./_components/StandaloneFlagValues";
 import MiddlewareRUM from "./_components/MiddlewareRUM";
 import MicrosoftClarity from "./_components/MicrosoftClarity";
 import HypertuneWrapper from "./providers/hypertune-wrapper";
+import WebMCPProvider from "@/src/components/WebMCPProvider";
 import { SITE_URL } from "../src/lib/seo";
 
 export const metadata: Metadata = {
@@ -168,6 +169,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://hjptv.middleware.io" />
       </head>
       <body className={`antialiased ${inter.variable} ${merriweather.variable}`}>
+        <WebMCPProvider />
         <MiddlewareRUM />
         <MicrosoftClarity />
         <GoogleAnalytics />
