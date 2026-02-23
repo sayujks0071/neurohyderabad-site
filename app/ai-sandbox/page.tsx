@@ -1,17 +1,35 @@
 'use client'
 
-import { useChat } from 'ai/react'
+import { useChat } from '@ai-sdk/react'
 import { useState, useRef, useEffect } from 'react'
-import Header from '../_components/layout/Header'
-import Footer from '../_components/layout/Footer'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 
 export default function AISandboxPage() {
-    const { messages, input, handleInputChange, handleSubmit, isLoading, error } = useChat({
+    const { messages, status, sendMessage, error } = useChat({
         api: '/api/ai/sandbox',
         body: {
             requestedModel: 'openai/gpt-5.2' // Requested snippet
         }
     })
+
+    const [input, setInput] = useState('')
+    const isLoading = status === 'submitted' || status === 'streaming'
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setInput(e.target.value)
+    }
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault()
+        if (!input.trim() || isLoading) return
+
+        // sendMessage usually takes a string or message object. Assuming string works for simple case.
+        // Or append({ role: 'user', content: input })
+        // Let's try sendMessage(input) first as it is exposed.
+        await sendMessage(input)
+        setInput('')
+    }
 
     const messagesEndRef = useRef<HTMLDivElement>(null)
 
