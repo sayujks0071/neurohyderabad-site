@@ -52,7 +52,7 @@ function AppointmentFormContent({
       const payload = await response.json();
 
       // Track successful submission
-      analytics.appointmentSuccess('appointment_page', bookingSource, undefined, { used_ai: payload.usedAI });
+      analytics.appointmentSuccess('appointment_page', bookingSource, data.reason, { used_ai: payload.usedAI });
 
       setBookingData(payload.booking);
       // Use the specific reassuring message requested by the user
