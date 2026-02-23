@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import * as THREE from 'three';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -160,9 +161,18 @@ export default function Hero() {
 
     return (
         <section ref={containerRef} className="relative w-full h-screen overflow-hidden bg-black text-white">
+            {/* LCP Optimization: Static background image while 3D loads */}
+            <Image
+                src="/images/dr-sayuj-krishnan-portrait-v2.jpg"
+                alt="Dr. Sayuj Krishnan - Neurosurgeon"
+                fill
+                className="object-cover opacity-60"
+                priority
+            />
+
             {/* Loading Indicator */}
             {isLoading && (
-                <div className="absolute inset-0 flex items-center justify-center z-50 bg-black">
+                <div className="absolute inset-0 flex items-center justify-center z-50 bg-black/40 backdrop-blur-sm transition-opacity duration-500">
                     <div className="text-center">
                         <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mb-4 mx-auto"></div>
                         <p className="text-lg text-blue-400 font-medium">Loading Experience... {Math.round(progress * 100)}%</p>

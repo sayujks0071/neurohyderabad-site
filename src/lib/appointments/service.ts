@@ -91,10 +91,10 @@ export async function processBooking(booking: BookingData, options: ProcessBooki
       primary_condition: booking.reason.slice(0, 100), // Infer primary condition from reason
       gender: booking.gender,
       acquisition_source: source,
-      insurance_provider: booking.insuranceProvider,
-      insurance_policy_number: booking.insurancePolicyNumber,
-      emergency_contact_name: booking.emergencyContactName,
-      emergency_contact_phone: booking.emergencyContactPhone
+      insurance_provider: (booking as any).insuranceProvider,
+      insurance_policy_number: (booking as any).insurancePolicyNumber,
+      emergency_contact_name: (booking as any).emergencyContactName,
+      emergency_contact_phone: (booking as any).emergencyContactPhone
     }).catch((error) => {
       console.error("[Service] Failed to upsert patient record:", error);
     });
@@ -116,8 +116,8 @@ export async function processBooking(booking: BookingData, options: ProcessBooki
         bookingReason: booking.reason,
         painScore: booking.painScore,
         mriScanAvailable: booking.mriScanAvailable,
-        insuranceProvider: booking.insuranceProvider,
-        emergencyContactName: booking.emergencyContactName
+        insuranceProvider: (booking as any).insuranceProvider,
+        emergencyContactName: (booking as any).emergencyContactName
       },
     });
 
