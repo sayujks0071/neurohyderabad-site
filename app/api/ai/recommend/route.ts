@@ -98,6 +98,7 @@ export async function POST(request: NextRequest) {
     // Use AI SDK to find relevant posts
     const { object } = await generateObject({
       model: getTextModel(),
+      headers: { 'X-Forwarded-For': ip },
       schema: jsonSchema({
         type: 'object',
         properties: {

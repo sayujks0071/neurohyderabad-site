@@ -19,14 +19,14 @@ const SERVICES = [
   { name: 'Robotic Spine Surgery', url: '/services/robotic-spine-surgery-hyderabad' },
 ];
 
-export const tools = {
+export const createTools = (context: { headers?: Record<string, string> } = {}) => ({
   searchContent: tool({
     description: 'Search for medical information, conditions, treatments, and blog posts on the website.',
     parameters: z.object({
       query: z.string().describe('The search query to find relevant content.'),
     }),
     execute: async ({ query }) => {
-      const results = await semanticSearch(query, 5);
+      const results = await semanticSearch(query, 5, { headers: context.headers });
       return results.map(r => ({
         title: r.title,
         description: r.description,
@@ -83,6 +83,7 @@ export const tools = {
 
       const result = await processBooking(bookingData, {
         source: 'ai-chat-agent',
+        headers: context.headers
       });
 
       if (result.success) {
@@ -120,4 +121,4 @@ export const tools = {
       }));
     },
   }),
-};
+});

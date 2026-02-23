@@ -51,6 +51,7 @@ export async function POST(request: NextRequest) {
     try {
       const { object } = await generateObject({
         model: getTextModel(),
+        headers: { 'X-Forwarded-For': ip },
         schema: jsonSchema({
           type: 'object',
           properties: {

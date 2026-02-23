@@ -64,7 +64,10 @@ const recoveryPlanSchema = z.object({
   disclaimer: z.string().optional(),
 });
 
-export async function generateRecoveryPlan(request: RecoveryPredictorRequest): Promise<RecoveryPlan> {
+export async function generateRecoveryPlan(
+  request: RecoveryPredictorRequest,
+  options?: { headers?: Record<string, string> }
+): Promise<RecoveryPlan> {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ||
     (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` :
       'http://localhost:3000');
@@ -101,6 +104,7 @@ export async function generateRecoveryPlan(request: RecoveryPredictorRequest): P
     if (hasAIConfig()) {
       const { object } = await generateObject({
         model: getTextModel(),
+        headers: options?.headers,
         schema: recoveryPlanSchema,
         system: `You are an expert neurosurgical recovery planner for Dr. Sayuj Krishnan.
         Create a detailed, personalized recovery plan based on the provided clinical context.

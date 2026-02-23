@@ -55,7 +55,8 @@ export interface AIInsights {
  * Generate AI-powered insights from analytics data
  */
 export async function generateInsights(
-  data: AnalyticsData
+  data: AnalyticsData,
+  options?: { headers?: Record<string, string> }
 ): Promise<AIInsights> {
   if (!hasAIConfig()) {
     return fallbackInsights(data);
@@ -64,6 +65,7 @@ export async function generateInsights(
   try {
     const { object } = await generateObject({
       model: getTextModel(),
+      headers: options?.headers,
       schema: jsonSchema({
         type: 'object',
         properties: {
