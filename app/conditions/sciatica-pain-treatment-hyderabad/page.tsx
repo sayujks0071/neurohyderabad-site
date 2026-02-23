@@ -251,6 +251,47 @@ export default function SciaticaTreatmentPage() {
         </div>
       </div>
 
+      {/* Causes & Risk Factors Section (SEO Gap) */}
+      <section className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-blue-700">What Causes Sciatica?</h2>
+        <p className="text-gray-700 mb-8 max-w-3xl">
+          Sciatica is rarely a primary condition; it is usually a symptom of an underlying spine issue. Identifying the root cause is crucial for effective treatment.
+        </p>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div className="bg-white p-5 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+            <h3 className="text-lg font-bold text-blue-800 mb-2">Herniated Disc</h3>
+            <p className="text-sm text-gray-600">Also known as a 'slip disc'. The soft inner gel of a disc leaks out and presses directly on the sciatic nerve root. This is the most common cause (90%).</p>
+          </div>
+          <div className="bg-white p-5 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+            <h3 className="text-lg font-bold text-blue-800 mb-2">Spinal Stenosis</h3>
+            <p className="text-sm text-gray-600">The spinal canal narrows due to aging, putting pressure on the nerves. Common in adults over 60.</p>
+          </div>
+          <div className="bg-white p-5 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+            <h3 className="text-lg font-bold text-blue-800 mb-2">Spondylolisthesis</h3>
+            <p className="text-sm text-gray-600">A stress fracture causes one vertebra to slip forward over another, pinching the nerve.</p>
+          </div>
+          <div className="bg-white p-5 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+            <h3 className="text-lg font-bold text-blue-800 mb-2">Piriformis Syndrome</h3>
+            <p className="text-sm text-gray-600">The piriformis muscle in the buttock spasms and compresses the sciatic nerve. Often mistaken for a disc problem.</p>
+          </div>
+        </div>
+
+        <div className="bg-blue-50 p-6 rounded-lg border border-blue-100">
+          <h3 className="text-lg font-bold text-blue-900 mb-3">Common Risk Factors</h3>
+          <div className="grid md:grid-cols-2 gap-4">
+            <ul className="space-y-2 text-gray-700 text-sm">
+              <li className="flex items-center"><span className="text-blue-500 mr-2">•</span> <strong>Age:</strong> Age-related changes in the spine (bone spurs, herniated discs).</li>
+              <li className="flex items-center"><span className="text-blue-500 mr-2">•</span> <strong>Obesity:</strong> Excess body weight increases stress on the spine.</li>
+            </ul>
+            <ul className="space-y-2 text-gray-700 text-sm">
+              <li className="flex items-center"><span className="text-blue-500 mr-2">•</span> <strong>Occupation:</strong> Jobs that require twisting the back, carrying heavy loads, or driving for long periods.</li>
+              <li className="flex items-center"><span className="text-blue-500 mr-2">•</span> <strong>Diabetes:</strong> Increases the risk of nerve damage.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
       {/* Trust Signals Section */}
       <div className="mb-12">
         <TrustProof
