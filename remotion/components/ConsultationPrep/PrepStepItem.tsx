@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { spring, useCurrentFrame, useVideoConfig } from 'remotion';
+import { spring, useCurrentFrame, useVideoConfig, interpolate } from 'remotion';
 import { COLORS, FONTS, SPACING } from '../../utils/colorTokens';
 import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
 
@@ -79,6 +79,54 @@ export const PrepStepItem: React.FC<PrepStepItemProps> = ({ step, delay = 0 }) =
     },
   }), [frame, fps, prefersReducedMotion]);
 
+  // 5. Staggered Text Animations
+  const titleOpacity = useMemo(() => prefersReducedMotion ? 1 : spring({
+    frame: frame - 5,
+    fps,
+    from: 0,
+    to: 1,
+    durationInFrames: 20,
+  }), [frame, fps, prefersReducedMotion]);
+
+  const titleY = useMemo(() => prefersReducedMotion ? 0 : spring({
+    frame: frame - 5,
+    fps,
+    from: 20,
+    to: 0,
+    durationInFrames: 25,
+    config: { damping: 12 },
+  }), [frame, fps, prefersReducedMotion]);
+
+  const descOpacity = useMemo(() => prefersReducedMotion ? 1 : spring({
+    frame: frame - 10,
+    fps,
+    from: 0,
+    to: 1,
+    durationInFrames: 20,
+  }), [frame, fps, prefersReducedMotion]);
+
+  const descY = useMemo(() => prefersReducedMotion ? 0 : spring({
+    frame: frame - 10,
+    fps,
+    from: 20,
+    to: 0,
+    durationInFrames: 25,
+    config: { damping: 12 },
+  }), [frame, fps, prefersReducedMotion]);
+
+  // 6. Shimmer Effect (Micro-animation)
+  const shimmerStart = 35; // Start after entrance settles
+  const shimmerProgress = useMemo(() => prefersReducedMotion ? 0 : spring({
+    frame: frame - shimmerStart,
+    fps,
+    from: 0,
+    to: 1,
+    durationInFrames: 45,
+    config: { damping: 100 },
+  }), [frame, fps, prefersReducedMotion]);
+
+  const shimmerX = interpolate(shimmerProgress, [0, 1], [-100, 200]);
+
   return (
     <div
       style={{
@@ -92,12 +140,32 @@ export const PrepStepItem: React.FC<PrepStepItemProps> = ({ step, delay = 0 }) =
         borderRadius: '16px',
         border: `3px solid ${COLORS.accent}`,
         boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+        position: 'relative',
+        overflow: 'hidden',
       }}
     >
+      {/* Shimmer Overlay */}
+      {!prefersReducedMotion && shimmerProgress < 1 && (
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: `${shimmerX}%`,
+            width: '50%',
+            height: '100%',
+            background: `linear-gradient(90deg, transparent, rgba(0, 163, 224, 0.1), transparent)`,
+            transform: 'skewX(-20deg)',
+            pointerEvents: 'none',
+            zIndex: 0,
+          }}
+        />
+      )}
+
       {/* Checkmark icon container */}
       <div
         style={{
           transform: `scale(${circleScale})`,
+          zIndex: 1,
           width: '64px',
           height: '64px',
           borderRadius: '50%',
@@ -130,7 +198,7 @@ export const PrepStepItem: React.FC<PrepStepItemProps> = ({ step, delay = 0 }) =
       </div>
 
       {/* Text content */}
-      <div style={{ flex: 1 }}>
+      <div style={{ flex: 1, zIndex: 1 }}>
         <h3
           style={{
             fontFamily: FONTS.primary,
@@ -139,6 +207,8 @@ export const PrepStepItem: React.FC<PrepStepItemProps> = ({ step, delay = 0 }) =
             color: COLORS.text,
             margin: 0,
             marginBottom: SPACING[2],
+            opacity: titleOpacity,
+            transform: `translateY(${titleY}px)`,
           }}
         >
           {step.step}. {step.title}
@@ -151,6 +221,8 @@ export const PrepStepItem: React.FC<PrepStepItemProps> = ({ step, delay = 0 }) =
             color: COLORS.textSecondary,
             margin: 0,
             lineHeight: 1.4,
+            opacity: descOpacity,
+            transform: `translateY(${descY}px)`,
           }}
         >
           {step.description}
