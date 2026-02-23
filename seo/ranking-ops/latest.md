@@ -1,1 +1,1 @@
-./2026-02-25/report.md
+[Latest SEO Report](./2025-05-23/report.md)
