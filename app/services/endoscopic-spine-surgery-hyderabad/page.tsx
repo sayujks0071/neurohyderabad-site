@@ -19,6 +19,7 @@ import SurgeryComparisonTable from '@/src/components/SurgeryComparisonTable';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
 import EndoscopicProcedureSteps from '@/src/components/EndoscopicProcedureSteps';
+import ProcedureHighlights from '@/src/components/ProcedureHighlights';
 
 const SERVICE_SLUG = 'endoscopic-spine-surgery-hyderabad';
 
@@ -87,6 +88,9 @@ const schema = {
         howPerformed: 'Endoscopic keyhole technique through 7mm incision',
         status: 'http://schema.org/ActiveActionStatus',
         procedureType: 'Minimally Invasive Surgical Procedure',
+        preparation: 'MRI Review, Fasting 6 hours prior to surgery',
+        recoveryTime: 'P3D', // 3 Days for initial recovery
+        followup: 'First review at 7 days for wound check',
       };
     }
     if (item['@type'] === 'MedicalService') {
@@ -372,6 +376,8 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
             </ul>
           </div>
         </header>
+
+        <ProcedureHighlights />
 
         <section className="mb-12 bg-green-50 border border-green-200 rounded-2xl p-6 shadow-sm">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
