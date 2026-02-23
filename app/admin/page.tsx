@@ -117,6 +117,15 @@ export default function AdminDashboard() {
         {/* Navigation Cards */}
         <h2 className="text-xl font-semibold text-gray-900 mb-4">Management</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Link href="/admin/referrals" className="block">
+            <div className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow">
+              <h3 className="text-lg font-medium text-gray-900">📄 Referral Analyzer</h3>
+              <p className="mt-2 text-sm text-gray-500">
+                Analyze referral PDFs using AI
+              </p>
+            </div>
+          </Link>
+
           <Link href="/admin/appointments" className="block">
             <div className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow">
               <h3 className="text-lg font-medium text-gray-900">📅 Appointments</h3>
