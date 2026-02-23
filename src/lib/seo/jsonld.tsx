@@ -1,10 +1,21 @@
 // Lightweight JSON-LD injector for SEO schemas
+
+/**
+ * Safely serializes JSON for injection into a <script> tag.
+ * escapes '<' to '\u003c' to prevent XSS via </script> injection.
+ */
+export function serializeJsonLd(json: any): { __html: string } {
+  return {
+    __html: JSON.stringify(json).replace(/</g, '\\u003c')
+  };
+}
+
 export function JsonLd({ json }: { json: object }) {
   return (
     <script
       type="application/ld+json"
       // eslint-disable-next-line react/no-danger
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(json) }}
+      dangerouslySetInnerHTML={serializeJsonLd(json)}
     />
   );
 }
