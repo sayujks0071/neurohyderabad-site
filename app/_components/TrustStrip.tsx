@@ -15,7 +15,7 @@ export default function TrustStrip({ className = '' }: TrustStripProps) {
   return (
     <div className={`w-full py-4 bg-gradient-to-r from-slate-50 to-slate-100 border-y border-white/20 ${className}`}>
       <div className="max-w-7xl mx-auto px-4">
-        <div className="relative bg-white/95 border border-white/20 shadow-xl rounded-2xl p-6 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 flex flex-wrap items-center justify-center gap-6 sm:gap-8">
+        <div className="relative bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-6 md:p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 flex flex-wrap items-center justify-center gap-6 sm:gap-8">
           {TRUST_POINTS.map((item, index) => (
             <div key={index} className="flex items-center gap-3 group">
               <div className="p-2 rounded-lg bg-blue-50 text-blue-600 transition-colors duration-300 group-hover:bg-blue-100 group-hover:text-blue-700">
