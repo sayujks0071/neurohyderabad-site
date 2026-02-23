@@ -63,10 +63,10 @@ export async function POST(request: NextRequest) {
       temperature: 0.7,
       maxSteps: 5, // Allow multi-step tool execution
       tools: tools,
-    });
+    } as any);
 
     // Return data stream response (standard for AI SDK 3+)
-    return result.toDataStreamResponse();
+    return (result as any).toDataStreamResponse();
 
   } catch (error) {
     console.error('Error processing AI chat request:', error);
