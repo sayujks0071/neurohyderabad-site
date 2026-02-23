@@ -11,12 +11,18 @@ interface FAQItem {
   a?: string; // Legacy support
 }
 
+interface BreadcrumbItem {
+  name: string;
+  item?: string; // Full URL
+  path?: string; // Relative path
+}
+
 interface LocationSchemaProps {
   location: LocationData;
   siteUrl?: string;
   imageUrl?: string;
   faq?: FAQItem[] | any[]; // Allow loose typing to catch legacy q/a without strict errors
-  breadcrumb?: any[]; // Accepting breadcrumb but we generate defaults if not provided
+  breadcrumb?: BreadcrumbItem[]; // Accepting breadcrumb but we generate defaults if not provided
 }
 
 export const LocationSchema: React.FC<LocationSchemaProps> = ({
@@ -84,7 +90,7 @@ export const LocationSchema: React.FC<LocationSchemaProps> = ({
 
   // 2. BreadcrumbList Schema
   // Use passed breadcrumb if available, otherwise generate default
-  let itemListElement;
+  let itemListElement: any[] = [];
 
   if (breadcrumb && breadcrumb.length > 0) {
       // Normalize breadcrumb prop to schema structure if needed
@@ -95,12 +101,19 @@ export const LocationSchema: React.FC<LocationSchemaProps> = ({
             "name": "Home",
             "item": siteUrl
         },
-        ...breadcrumb.map((b, i) => ({
-            "@type": "ListItem",
-            "position": i + 2,
-            "name": b.name,
-            "item": b.item
-        }))
+        ...breadcrumb.map((b, i) => {
+            let itemUrl = b.item;
+            if (!itemUrl && b.path) {
+                itemUrl = b.path.startsWith('http') ? b.path : `${siteUrl}${b.path.startsWith('/') ? '' : '/'}${b.path}`;
+            }
+
+            return {
+                "@type": "ListItem",
+                "position": i + 2,
+                "name": b.name,
+                "item": itemUrl
+            };
+        })
       ];
   } else {
       itemListElement = [

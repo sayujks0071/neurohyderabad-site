@@ -7,7 +7,6 @@ import { LocationMapEmbed } from "@/src/components/locations/LocationMapEmbed";
 import { LocalPathways } from "@/src/components/locations/LocalPathways";
 import { LocationSchema } from "@/src/components/locations/LocationSchema";
 import MedicalWebPageSchema from "../components/schemas/MedicalWebPageSchema";
-import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
 import { notFound } from "next/navigation";
 
 // Force static generation
@@ -66,16 +65,13 @@ export default function Page() {
         medicalSpecialty="Neurosurgery"
         audience="Patients in Banjara Hills"
       />
-      <BreadcrumbSchema
-        items={[
-          { name: "Home", path: "/" },
-          { name: "Locations", path: "/locations" },
-          { name: "Neurosurgeon Banjara Hills", path: "/neurosurgeon-banjara-hills" }
-        ]}
-      />
       <LocationSchema
          location={location}
          faq={FAQ}
+         breadcrumb={[
+           { name: "Locations", path: "/locations" },
+           { name: "Neurosurgeon Banjara Hills", path: "/neurosurgeon-banjara-hills" }
+         ]}
       />
 
       <h1 className="text-3xl md:text-4xl font-bold">Neurosurgeon in Banjara Hills, Hyderabad</h1>
