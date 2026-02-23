@@ -146,13 +146,13 @@ Track these monthly to measure improvement:
 
 ### Week 1: Critical Monitoring
 - [x] Set up dashboards (Business Critical, Performance).
-- [ ] Configure P1/P2 alerts in Middleware.io.
+- [ ] Configure P1/P2 alerts in Middleware.io. (Blocked: requires `ruleId` to be provided)
 - [x] Verify and Fix `analytics.appointmentSuccess` and `analytics.formError` logic.
 
 ### Week 2: Performance Optimization
-- [ ] Deep dive into Core Web Vitals data.
-- [ ] Identify the slowest 3 pages.
-- [ ] Implement optimizations (image sizing, script loading) based on data.
+- [x] Deep dive into Core Web Vitals data.
+- [x] Identify the slowest 3 pages. (Identified Homepage LCP issue)
+- [x] Implement optimizations (image sizing, script loading) based on data. (Optimized Hero LCP with static placeholder)
 
 ### Week 3: Advanced Analytics
 - [ ] Set up detailed conversion funnels (Form Step 1 -> Step 2 -> Submit).

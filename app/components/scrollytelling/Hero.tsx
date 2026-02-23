@@ -7,6 +7,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrubEngine } from './ScrubEngine';
 import { vertexShader, fragmentShader } from './TunnelShader';
 import Link from 'next/link';
+import Image from 'next/image';
 
 // Register ScrollTrigger
 if (typeof window !== 'undefined') {
@@ -160,9 +161,17 @@ export default function Hero() {
 
     return (
         <section ref={containerRef} className="relative w-full h-screen overflow-hidden bg-black text-white">
+            <Image
+                src="/images/dr-sayuj-krishnan-portrait-sm.jpg"
+                alt="Dr. Sayuj Krishnan"
+                fill
+                priority
+                className={`object-cover object-top transition-opacity duration-1000 ${isLoading ? 'opacity-50' : 'opacity-0'}`}
+            />
+
             {/* Loading Indicator */}
             {isLoading && (
-                <div className="absolute inset-0 flex items-center justify-center z-50 bg-black">
+                <div className="absolute inset-0 flex items-center justify-center z-50 bg-black/50 backdrop-blur-sm">
                     <div className="text-center">
                         <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mb-4 mx-auto"></div>
                         <p className="text-lg text-blue-400 font-medium">Loading Experience... {Math.round(progress * 100)}%</p>
