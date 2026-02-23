@@ -12,9 +12,10 @@ import { generateBlogMetadata } from '@/src/lib/blog-seo';
 import BlogLayout from '@/app/_components/BlogLayout';
 import { SITE_URL } from '@/src/lib/seo';
 
-// Ensure this route is fully statically generated (no dynamic fallback SSR).
+// Ensure this route is fully statically generated.
+// Allow dynamic generation for new paths (ISR) that were not present at build time.
 export const dynamic = 'force-static';
-export const dynamicParams = false;
+export const dynamicParams = true;
 
 interface PageParams {
   params: Promise<{
@@ -76,4 +77,3 @@ export default async function BlogPostPage({ params }: PageParams) {
 
 // Revalidate every 24 hours
 export const revalidate = 86400;
-

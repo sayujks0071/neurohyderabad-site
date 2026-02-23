@@ -5,6 +5,7 @@ interface MedicalWebPageSchemaProps {
   pageSlug: string;
   title: string;
   description: string;
+  datePublished?: string;
   lastReviewed?: string;
   author?: string;
   serviceOrCondition?: string;
@@ -18,6 +19,7 @@ export default function MedicalWebPageSchema({
   pageSlug,
   title,
   description,
+  datePublished = "2024-01-01",
   lastReviewed = new Date().toISOString().split('T')[0],
   author = 'Dr. Sayuj Krishnan',
   serviceOrCondition,
@@ -55,7 +57,7 @@ export default function MedicalWebPageSchema({
       }
     },
     "lastReviewed": lastReviewed,
-    "datePublished": "2024-01-01",
+    "datePublished": datePublished,
     "dateModified": lastReviewed,
     "creativeWorkStatus": "Published",
     "medicalAudience": {

@@ -10,6 +10,7 @@ import { makeMetadata } from '@/app/_lib/meta';
 import AuthorByline from '@/app/_components/AuthorByline';
 import JsonLd from '@/components/JsonLd';
 import MedicalWebPageSchema from '@/app/components/schemas/MedicalWebPageSchema';
+import MedicalProcedureSchema from '@/app/components/schemas/MedicalProcedureSchema';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
@@ -157,6 +158,20 @@ export default function SpinalFusionPage() {
         pageType="service"
         serviceOrCondition="Spinal Fusion & Fracture Surgery"
         breadcrumbs={breadcrumbs}
+      />
+      <MedicalProcedureSchema
+        name="Spinal Fusion Surgery (TLIF)"
+        description="Spinal fusion surgery to permanently connect two or more vertebrae in the spine, eliminating motion between them."
+        procedureType="Surgical"
+        bodyLocation="Spine"
+        howPerformed={[
+          { name: "Decompression", text: "Removal of bone or disc pressing on nerves." },
+          { name: "Stabilization", text: "Insertion of screws and rods to hold vertebrae." },
+          { name: "Fusion", text: "Placement of bone graft to promote bone growth." },
+          { name: "Closure", text: "Incision closed in layers." }
+        ]}
+        recoveryTime="3-6 months"
+        followup="Regular follow-ups for X-ray monitoring."
       />
       <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/spinal-fusion-surgery-hyderabad`} />
       <div className="min-h-screen bg-white">
