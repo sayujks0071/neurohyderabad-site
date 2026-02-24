@@ -8,6 +8,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import type { BookingData } from "@/packages/appointment-form/types";
 import { processBooking } from "@/src/lib/appointments/service";
+import { inngest } from "@/src/lib/inngest";
 
 type WorkflowAppointmentType = "new-consultation" | "follow-up" | "second-opinion";
 
@@ -36,16 +37,33 @@ export async function POST(request: NextRequest) {
       ? (genderRaw as BookingData["gender"])
       : "other"; // Default fallback
 
-    const painScore = typeof body.painScore === "number" ? body.painScore : 5;
-    const mriScanAvailable = typeof body.mriScanAvailable === "boolean" ? body.mriScanAvailable : false;
+    // Robust parsing for painScore (handle string inputs and clamp)
+    let painScore = 5;
+    if (typeof body.painScore === "number") {
+      painScore = body.painScore;
+    } else if (body.painScore !== undefined && body.painScore !== null && body.painScore !== "") {
+      const p = Number(body.painScore);
+      if (Number.isFinite(p)) painScore = p;
+    }
+    // Clamp to 1-10 range
+    painScore = Math.max(1, Math.min(10, Math.floor(painScore)));
+
+    // Robust parsing for mriScanAvailable (handle "true"/"false" strings)
+    let mriScanAvailable = false;
+    if (typeof body.mriScanAvailable === "boolean") {
+      mriScanAvailable = body.mriScanAvailable;
+    } else if (typeof body.mriScanAvailable === "string") {
+      mriScanAvailable = body.mriScanAvailable.toLowerCase() === "true";
+    }
+
     const source = typeof body.source === "string" ? body.source : undefined;
 
     // Validate required fields
-    if (!name || !email || !phone || !preferredDate || !chiefComplaint || painScore === undefined || mriScanAvailable === undefined) {
+    if (!name || !email || !phone || !preferredDate || !chiefComplaint) {
       return NextResponse.json(
         {
           error: "Missing required fields",
-          required: ["name", "email", "phone", "preferredDate", "chiefComplaint", "painScore", "mriScanAvailable"],
+          required: ["name", "email", "phone", "preferredDate", "chiefComplaint"],
         },
         { status: 400 }
       );
