@@ -1,53 +1,40 @@
-# Competitor Gap Analysis
+# Competitor Gap Analysis: Hyderabad Neurosurgery Market
 
-**Date:** 2026-02-13
-**Focus:** Neuro & Spine Surgery in Hyderabad
+## Key Competitors
+1. **Apollo Hospitals Hyderabad**: Dominates "Best Neurosurgeon" and "Brain Tumor" keywords due to high Domain Authority.
+   - *Strength:* Massive content volume, strong backlink profile.
+   - *Weakness:* Generic hospital content, lacks personal touch/specific technique detail.
+2. **KIMS Hospitals**: Strong on "Cost" and "Package" keywords.
+   - *Strength:* Transparent pricing (sometimes), procedure packages.
+   - *Weakness:* User experience often cluttered.
+3. **Dr. Manas Panigrahi / Dr. Sukumar**: Individual competitor brands.
+   - *Strength:* Established reputation, personal branding.
+   - *Weakness:* Older websites, less "modern" tech stack (often WordPress).
 
-## Top Competitors
-1.  **Asian Spine Hospital** (`asianspinehospital.com`) - Domain Authority Leader
-2.  **Dr. Raveesh Sunkara** (`drraveesh.com`) - Strong Personal Brand & Content Depth
-3.  **Yashoda Hospitals** (`yashodahospitals.com`) - Big Hospital Brand
-4.  **AIG Hospitals** (`aighospitals.com`) - Big Hospital Brand
+## Content Gaps & Opportunities
 
-## Gap Analysis by Page Type
+### 1. Cost & Transparency (High Intent)
+- **Current State:** We have `spine-surgery-cost-hyderabad`.
+- **Gap:** "Endoscopic vs Open Spine Surgery Cost Comparison", "Insurance Coverage for Endoscopic Spine Surgery".
+- **Action:** Create dedicated comparison tables and insurance guides.
 
-### 1. Service Pages (e.g., Endoscopic Spine Surgery)
-**Competitor Strengths:**
--   **Asian Spine:** Extremely detailed structure (Overview, Types, Procedure, Cost, Recovery, Success Rate). Uses tables for cost ranges and recovery timelines.
--   **Dr. Raveesh:** Personal tone ("Why Choose Dr. Raveesh"), extensive FAQs, and related blog posts linked at the bottom.
--   **Gap for Dr. Sayuj:**
-    -   Lack of specific **"Cost"** sections or tables (Competitors explicitly list cost ranges).
-    -   Fewer **FAQs** on service pages compared to Dr. Raveesh.
-    -   Need more explicit **"Recovery Timeline"** visualizations or lists.
-    -   **Video integration** is better on competitor sites.
+### 2. "Vs" Comparison Pages (Education)
+- **Current State:** Some mentions in FAQs.
+- **Gap:** Dedicated pages for:
+  - "Endoscopic Discectomy vs Microdiscectomy"
+  - "Kyphoplasty vs Vertebroplasty"
+  - "Awake Craniotomy vs General Anesthesia"
+- **Action:** Build these as blog posts or service sub-pages.
 
-### 2. Condition Pages (e.g., Slipped Disc)
-**Competitor Strengths:**
--   **Yashoda/Apollo:** High authority, medical definitions, symptom checkers.
--   **Dr. Raveesh:** Focuses on "Can it be cured permanently?" and "Surgery vs Non-Surgery".
--   **Gap for Dr. Sayuj:**
-    -   Need to address **"Non-surgical options"** more prominently to build trust before pitching surgery.
-    -   **"Red Flags"** sections (When to see a doctor immediately) are effective on competitor sites.
+### 3. Patient Stories (Social Proof)
+- **Current State:** `patient-stories` section exists.
+- **Gap:** Video-first testimonials. Competitors rely on text.
+- **Action:** Leverage `remotion` to generate video snippets for social/web.
 
-### 3. Blog Strategy
-**Competitor Strengths:**
--   **Dr. Raveesh:** High frequency (daily/weekly), covers long-tail queries ("Can stress cause back pain?", "Office chair back pain").
--   **Gap for Dr. Sayuj:**
-    -   Expand content on **lifestyle/prevention** topics (Ergonomics, Sleep, Diet).
-    -   Target **"Cost"** and **"Insurance"** specific queries in blogs.
+### 4. Hyper-Local SEO (catchment)
+- **Current State:** `locations/` pages exist but may be thin/duplicate.
+- **Gap:** "Neurosurgeon near [Landmark]" (e.g., near Charminar, near Metro Station).
+- **Action:** Enhance location pages with specific landmark directions and local schema.
 
-## Keyword Gaps
-
-| Keyword | Intent | Competitor Coverage | Suggested Action |
-| :--- | :--- | :--- | :--- |
-| "endoscopic spine surgery cost in hyderabad" | Commercial | High (Tables with ranges) | Add Cost Table to Service Page |
-| "laser vs endoscopic spine surgery" | Informational | Med | Create Comparison Blog/Section |
-| "best pillow for neck pain" | Informational | Low | Create "Spine Hygiene" Blog Cluster |
-| "spine surgery insurance coverage india" | Commercial | Med | Add Insurance FAQ Section |
-| "L4-L5 disc bulge treatment without surgery" | Informational | High | Create "Conservative Management" Guide |
-| "neurosurgeon consultation fee hyderabad" | Commercial | Low | Add to FAQ or Appointment Page |
-
-## Schema Opportunities
--   **FAQPage:** Competitors use this extensively on Service/Condition pages to capture "People Also Ask".
--   **MedicalSpecialty:** Ensure `HealthTopicContent` is used for conditions.
--   **VideoObject:** For patient testimonials and procedure explainers.
+## Strategic Recommendation
+Focus on **"Endoscopic Spine Surgery"** niche dominance. Competitors are broad. Dr. Sayuj can own the "Minimally Invasive / Keyhole" vertical completely in Hyderabad.

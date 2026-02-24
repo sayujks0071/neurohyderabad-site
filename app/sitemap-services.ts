@@ -1,29 +1,50 @@
 import { MetadataRoute } from 'next';
+
 const SITE_URL = 'https://www.drsayuj.info';
+
 export default function sitemapServices(): MetadataRoute.Sitemap {
   const now = new Date().toISOString();
+
   const services = [
     // Primary services (highest priority)
     { url: '/services', priority: 0.9 },
     { url: '/services/minimally-invasive-spine-surgery', priority: 1.0 },
+    { url: '/services/endoscopic-spine-surgery-hyderabad', priority: 1.0 }, // Added: Key landing page
     { url: '/services/endoscopic-discectomy-hyderabad', priority: 1.0 },
     { url: '/services/brain-tumor-surgery-hyderabad', priority: 0.9 },
     { url: '/services/awake-spine-surgery-hyderabad', priority: 0.9 },
+
     // Spine procedures
     { url: '/services/spinal-fusion-surgery-hyderabad', priority: 0.8 },
     { url: '/services/kyphoplasty-vertebroplasty-hyderabad', priority: 0.7 },
+    { url: '/services/cervical-disc-replacement-hyderabad', priority: 0.8 }, // Added
+    { url: '/services/cervical-endoscopic-spine-surgery-hyderabad', priority: 0.8 }, // Added
+    { url: '/services/lumbar-laminectomy-surgery-hyderabad', priority: 0.7 }, // Added
+    { url: '/services/microdiscectomy-surgery-hyderabad', priority: 0.7 }, // Added
+    { url: '/services/spinal-decompression-surgery-hyderabad', priority: 0.7 }, // Added
+    { url: '/services/uniportal-endoscopic-spine-surgery-hyderabad', priority: 0.7 }, // Added
+
     // Brain procedures
     { url: '/services/epilepsy-surgery-hyderabad', priority: 0.8 },
+
     // Nerve procedures
     { url: '/services/peripheral-nerve-surgery-hyderabad', priority: 0.8 },
     { url: '/services/cooled-radiofrequency-ablation-hyderabad', priority: 0.8 },
+
     // Cost pages (high commercial intent)
     { url: '/services/spine-surgery-cost-hyderabad', priority: 0.9 },
     { url: '/services/slip-disc-surgery-cost-hyderabad', priority: 0.9 },
+    { url: '/services/microdiscectomy-surgery-cost-hyderabad', priority: 0.8 }, // Added
+
+    // Comparisons and Guides
+    { url: '/services/compare-neurosurgeons-hyderabad', priority: 0.6 }, // Added
+    { url: '/services/dr-sayuj-vs-apollo-neuro-icu', priority: 0.6 }, // Added
+    { url: '/services/kims-spine-surgery-second-opinion', priority: 0.6 }, // Added
+
     // Technology and techniques
     { url: '/services/robotic-spine-surgery-hyderabad', priority: 0.8 },
-    // Emergency services
   ];
+
   return services.map(service => ({
     url: `${SITE_URL}${service.url}`,
     lastModified: now,
