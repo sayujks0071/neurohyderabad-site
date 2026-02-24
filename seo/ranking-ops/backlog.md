@@ -65,3 +65,8 @@
 ## 2026-02-25
 *   **Expansion:** Replicate the visual "Red Flags" grid on other emergency-related condition pages (e.g., Brain Tumor Symptoms).
 *   **Consistency:** Ensure `TrustProof` components on other pages are updated to use the latest props and styling if applicable.
+
+## 2026-02-24 Opportunities (Brain/Spine)
+- **Sciatica Page:** Add "Endoscopic Management of Sciatica" video/transcript (content gap).
+- **Minimally Invasive Spine Surgery:** Add outcome metrics section (trust gap).
+- **ProcedureHighlights:** Component missing. Re-implement for service pages (visual gap).
