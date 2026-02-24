@@ -31,6 +31,14 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Blog | Dr Sayuj Krishnan - Neurosurgery Insights',
+    description: 'Latest insights, research, and updates in neurosurgery from Dr Sayuj Krishnan.',
+    images: [`${SITE_URL}/images/og-default.jpg`],
+    site: '@drsayuj',
+    creator: '@drsayuj',
+  },
 };
 
 // Helper function to extract title from content

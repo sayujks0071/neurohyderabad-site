@@ -18,7 +18,7 @@ export default function MedicalWebPageSchema({
   pageSlug,
   title,
   description,
-  lastReviewed = new Date().toISOString().split('T')[0],
+  lastReviewed = '2025-01-15',
   author = 'Dr. Sayuj Krishnan',
   serviceOrCondition,
   breadcrumbs = [],
