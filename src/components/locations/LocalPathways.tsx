@@ -41,10 +41,11 @@ export const LocalPathways: React.FC<LocalPathwaysProps> = ({
   className = '',
   location: legacyLocation // Destructure legacy prop
 }) => {
-  const containerClass = `bg-white/50 backdrop-blur-sm border border-gray-100 rounded-2xl p-6 sm:p-8 ${className}`;
+  const containerClass = `relative bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 ${className}`;
   const headingClass = "text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2";
   const gridClass = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4";
-  const linkClass = "group flex items-center justify-between p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-blue-200 hover:shadow-md transition-all";
+  const linkClass = "group flex items-center justify-between p-4 bg-white/50 backdrop-blur-md border border-white/40 rounded-xl shadow-sm hover:shadow-md hover:border-blue-300 transition-all duration-300 hover:scale-[1.01]";
+  const buttonClass = "inline-flex items-center justify-center bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-8 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-[0.98]";
 
   // Determine effective mode and data
   let effectiveMode = mode;
@@ -74,7 +75,7 @@ export const LocalPathways: React.FC<LocalPathwaysProps> = ({
               {effectiveLocation.top_services_slugs.map(slug => {
                  const title = formatSlug(slug);
                  return (
-                  <Link key={slug} href={getHref('service', slug)} className={linkClass}>
+                  <Link key={slug} href={getHref('service', slug)} className={linkClass} aria-label={`View details for ${title}`}>
                     <span className="font-medium text-gray-700 group-hover:text-blue-600 transition-colors">{title}</span>
                     <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-blue-600" />
                   </Link>
@@ -93,7 +94,7 @@ export const LocalPathways: React.FC<LocalPathwaysProps> = ({
               {effectiveLocation.top_conditions_slugs.map(slug => {
                  const title = formatSlug(slug);
                  return (
-                  <Link key={slug} href={getHref('condition', slug)} className={linkClass}>
+                  <Link key={slug} href={getHref('condition', slug)} className={linkClass} aria-label={`View details for ${title}`}>
                     <span className="font-medium text-gray-700 group-hover:text-emerald-600 transition-colors">{title}</span>
                     <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-emerald-600" />
                   </Link>
@@ -103,10 +104,10 @@ export const LocalPathways: React.FC<LocalPathwaysProps> = ({
           </div>
         </div>
 
-        <div className="mt-8 pt-6 border-t border-gray-100 flex justify-center">
+        <div className="mt-8 pt-6 border-t border-gray-100/50 flex justify-center">
            <Link
              href="/appointments"
-             className="inline-flex items-center justify-center px-8 py-3 bg-blue-600 text-white font-semibold rounded-full shadow-lg hover:bg-blue-700 transition-transform hover:scale-105"
+             className={buttonClass}
            >
              Book Appointment at {effectiveLocation.areaServedName}
            </Link>
@@ -149,17 +150,17 @@ export const LocalPathways: React.FC<LocalPathwaysProps> = ({
              // Handle slugs that might be nested or simple
              const href = loc.slug.startsWith('/') ? loc.slug : `/${loc.slug}`;
              return (
-                <Link key={loc.id} href={href} className={linkClass}>
+                <Link key={loc.id} href={href} className={linkClass} aria-label={`Visit our clinic in ${loc.areaServedName}`}>
                   <span className="font-medium text-gray-700 group-hover:text-blue-600 transition-colors">{loc.areaServedName}</span>
                   <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-blue-600" />
                 </Link>
              );
           })}
         </div>
-        <div className="mt-8 pt-6 border-t border-gray-100 flex justify-center">
+        <div className="mt-8 pt-6 border-t border-gray-100/50 flex justify-center">
              <Link
              href="/appointments"
-             className="inline-flex items-center justify-center px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-full shadow-lg hover:scale-105 transition-transform"
+             className={buttonClass}
            >
              Schedule Consultation
            </Link>
