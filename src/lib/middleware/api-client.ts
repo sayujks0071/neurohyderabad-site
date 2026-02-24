@@ -226,6 +226,13 @@ class MiddlewareApiClient {
     return this.request(`/rules/${ruleId}/alerts/stats`);
   }
 
+  /**
+   * Get all rules
+   */
+  async getRules(): Promise<any[]> {
+    return this.request('/rules');
+  }
+
   // ===== AGENT MANAGEMENT =====
 
   /**
