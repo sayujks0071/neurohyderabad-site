@@ -389,6 +389,44 @@ async function testBookAppointment() {
     assert(html.includes("Book Appointment") || html.includes("Schedule Consultation"), "Book Appointment text missing");
 }
 
+async function testAISandbox() {
+  // 1. Check UI Page
+  const uiRes = await fetch(urlFor("/ai-sandbox"), { headers: { "cache-control": "no-cache" } });
+  assert(uiRes.status === 200, `/ai-sandbox UI HTTP ${uiRes.status}`);
+  const html = await readTextLimited(uiRes, 600_000);
+  assert(html.includes("AI Sandbox"), "/ai-sandbox missing title");
+  assert(html.includes("streamText"), "/ai-sandbox missing streamText mention");
+
+  // 2. Check API Endpoint
+  const payload = {
+    messages: [{ role: 'user', content: 'Say hello.' }],
+    requestedModel: 'openai/gpt-5.2'
+  };
+
+  const apiRes = await fetch(urlFor("/api/ai/sandbox"), {
+    method: "POST",
+    headers: { "content-type": "application/json", "cache-control": "no-cache" },
+    body: JSON.stringify(payload),
+  });
+
+  if (apiRes.status === 429) {
+      console.log("WARN  api: ai-sandbox returned 429 (rate limit). Keeping suite green.");
+      return;
+  }
+
+  if (apiRes.status === 500) {
+      const errText = await apiRes.text();
+      if (errText.includes('AI Gateway is not configured')) {
+          console.log("WARN  AI Gateway not configured on server. Skipping.");
+          return;
+      }
+      // If other 500, fail
+      throw new Error(`api: ai-sandbox returned 500: ${errText.slice(0, 100)}`);
+  }
+
+  assert(apiRes.status === 200, `/api/ai/sandbox HTTP ${apiRes.status}`);
+}
+
 async function main() {
   console.log(`Sandbox target: ${BASE_URL}`);
   console.log(`Canonical origin: ${CANONICAL_ORIGIN}`);
@@ -405,6 +443,7 @@ async function main() {
   results.push(await test("cost transparency", testCostTransparency));
   results.push(await test("content policy", testContentPolicy));
   results.push(await test("book appointment", testBookAppointment));
+  results.push(await test("ai sandbox", testAISandbox));
 
   const failed = results.filter((r) => !r.ok);
   console.log("");
