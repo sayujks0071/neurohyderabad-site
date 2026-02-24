@@ -2,8 +2,8 @@
 
 import { useChat } from 'ai/react'
 import { useState, useRef, useEffect } from 'react'
-import Header from '../_components/layout/Header'
-import Footer from '../_components/layout/Footer'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 
 export default function AISandboxPage() {
     const { messages, input, handleInputChange, handleSubmit, isLoading, error } = useChat({

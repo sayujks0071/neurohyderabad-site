@@ -66,7 +66,18 @@ export async function POST(request: NextRequest) {
     });
 
     // Return data stream response (standard for AI SDK 3+)
-    return result.toDataStreamResponse();
+    // Fallback for different AI SDK versions
+    if (typeof result.toDataStreamResponse === 'function') {
+      return result.toDataStreamResponse();
+    }
+    // @ts-ignore
+    if (typeof result.toUIMessageStreamResponse === 'function') {
+      // @ts-ignore
+      return result.toUIMessageStreamResponse();
+    }
+
+    // Fallback to text stream if all else fails (tools might not work properly)
+    return result.toTextStreamResponse();
 
   } catch (error) {
     console.error('Error processing AI chat request:', error);
