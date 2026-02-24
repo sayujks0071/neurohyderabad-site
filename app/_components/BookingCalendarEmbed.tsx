@@ -42,7 +42,8 @@ export default function BookingCalendarEmbed({
         className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-8 rounded-xl shadow-lg shadow-blue-500/30 hover:scale-[1.02] transition-transform duration-200 group"
       >
         <span>Open Booking App</span>
-        <ExternalLink className="w-4 h-4 opacity-90 group-hover:translate-x-0.5 transition-transform" />
+        <span className="sr-only">(opens in a new tab)</span>
+        <ExternalLink className="w-4 h-4 opacity-90 group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />
       </a>
 
       <p className="text-xs text-slate-500">
