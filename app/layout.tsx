@@ -31,6 +31,7 @@ import { PhysicianSchema } from "../src/components/schema/PhysicianSchema";
 import HospitalSchema from "./components/schemas/HospitalSchema";
 import TrustStrip from "./_components/TrustStrip";
 import ClientAnalytics from "./_components/ClientAnalytics";
+import WebMCPProvider from "../src/components/WebMCPProvider";
 import GoogleAnalytics from "../src/components/GoogleAnalytics";
 import DynamicStickyCTA from "./_components/DynamicStickyCTA";
 import FloatingChatWidget from "./_components/DynamicFloatingChatWidget";
@@ -172,6 +173,7 @@ export default function RootLayout({
         <MicrosoftClarity />
         <GoogleAnalytics />
         <ClientAnalytics />
+        <WebMCPProvider />
         <WebsiteSchema />
         <PhysicianSchema />
         <HospitalSchema />
