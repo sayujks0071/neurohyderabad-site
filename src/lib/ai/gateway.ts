@@ -29,6 +29,17 @@ export function getGatewayBaseUrl(): string {
 }
 
 /**
+ * Get the appropriate Base URL for OpenAI-compatible clients.
+ * Returns the Vercel AI Gateway URL if configured, otherwise the standard OpenAI API URL.
+ */
+export function getOpenAIBaseUrl(): string {
+  if (isAIGatewayConfigured()) {
+    return getGatewayBaseUrl();
+  }
+  return 'https://api.openai.com/v1';
+}
+
+/**
  * Check if Vercel AI Gateway is configured
  * 
  * Supports both:
