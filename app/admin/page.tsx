@@ -170,6 +170,15 @@ export default function AdminDashboard() {
               </p>
             </div>
           </Link>
+
+          <Link href="/admin/referrals" className="block">
+            <div className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow">
+              <h3 className="text-lg font-medium text-gray-900">📄 Referral Analyzer (Sandbox)</h3>
+              <p className="mt-2 text-sm text-gray-500">
+                Analyze referral PDFs with AI
+              </p>
+            </div>
+          </Link>
         </div>
 
         {/* Quick Actions */}
