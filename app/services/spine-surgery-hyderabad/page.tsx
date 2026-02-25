@@ -14,6 +14,10 @@ import { getServiceSources } from '../sources';
 import MedicalWebPageSchema from '../../components/schemas/MedicalWebPageSchema';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import SurgeryComparisonTable from '@/src/components/SurgeryComparisonTable';
+import TrustProof from '@/app/_components/TrustProof';
+import { patientStories } from '@/src/content/stories';
+import OutcomeMetricsSection from '@/components/OutcomeMetricsSection';
+import CostTransparencySection from '@/src/components/CostTransparencySection';
 
 const SERVICE_SLUG = 'spine-surgery-hyderabad';
 
@@ -33,9 +37,11 @@ export const metadata: Metadata = {
     'spine specialist yashoda hospital',
     'endoscopic spine surgery hyderabad',
     'spine surgery consultation hyderabad',
+    'best spine surgeon hyderabad',
+    'top spine surgeon in hyderabad',
   ],
   openGraph: {
-    title: 'Spine Surgery Hyderabad | Minimally Invasive Specialist',
+    title: 'Best Spine Surgeon Hyderabad | Minimally Invasive Specialist',
     description:
       'Minimally invasive spine surgery in Hyderabad. Walk the next day with keyhole endoscopic techniques for slip disc & sciatica. Expert care at Yashoda.',
     url: `${SITE_URL}/services/${SERVICE_SLUG}`,
@@ -45,11 +51,11 @@ export const metadata: Metadata = {
     images: [
       {
         url: `${SITE_URL}/api/og?title=${encodeURIComponent(
-          'Spine Surgery in Hyderabad'
+          'Best Spine Surgeon in Hyderabad'
         )}&subtitle=${encodeURIComponent('MISS, Endoscopic & Complex Reconstruction')}`,
         width: 1200,
         height: 630,
-        alt: 'Spine Surgery in Hyderabad – Dr. Sayuj Krishnan',
+        alt: 'Best Spine Surgeon in Hyderabad – Dr. Sayuj Krishnan',
       },
     ],
   },
@@ -87,6 +93,27 @@ const faqs = [
   },
 ];
 
+const COSTS = [
+  {
+    procedure: 'Endoscopic Discectomy (Lumbar)',
+    range: '₹95,000 - ₹1,35,000',
+    recovery: '1-2 Days',
+    includes: ['Surgeon Fees', 'OT & Nursing', 'Standard Room (1 Day)', 'Medications']
+  },
+  {
+    procedure: 'Endoscopic Canal Decompression',
+    range: '₹1,20,000 - ₹1,60,000',
+    recovery: '2 Days',
+    includes: ['Stenosis Decompression', 'Advanced Endoscope Use', 'Neuromonitoring']
+  },
+  {
+    procedure: 'Cervical Endoscopic Decompression',
+    range: '₹1,20,000 - ₹1,70,000',
+    recovery: '2 Days',
+    includes: ['Neck Surgery', 'High-Definition Optics', 'Specialised Instrumentation']
+  }
+];
+
 export default function SpineSurgeryHyderabadPage() {
   const breadcrumbs = [
     { name: 'Home', path: '/' },
@@ -94,11 +121,16 @@ export default function SpineSurgeryHyderabadPage() {
     { name: 'Spine Surgery in Hyderabad', path: `/services/${SERVICE_SLUG}/` },
   ];
 
+  const relevantStories = patientStories.filter(story => {
+    const tags = story.tags.join(' ').toLowerCase();
+    return tags.includes('spine') || tags.includes('sciatica');
+  }).slice(0, 2);
+
   return (
     <>
       <JsonLd data={serviceSchema} />
       <MedicalWebPageSchema
-        title="Spine Surgery Hyderabad | Minimally Invasive Specialist - Dr. Sayuj"
+        title="Best Spine Surgeon Hyderabad | Minimally Invasive Specialist - Dr. Sayuj"
         description="Advanced minimally invasive spine surgery in Hyderabad. Walk the next day with keyhole endoscopic techniques for slip disc & sciatica. Expert care at Yashoda Malakpet."
         pageSlug={`/services/${SERVICE_SLUG}/`}
         pageType="service"
@@ -110,18 +142,21 @@ export default function SpineSurgeryHyderabadPage() {
           items={[
             { name: 'Home', href: '/' },
             { name: 'Services', href: '/services/' },
-            { name: 'Spine Surgery in Hyderabad', href: `/services/${SERVICE_SLUG}/` },
+            { name: 'Best Spine Surgeon in Hyderabad', href: `/services/${SERVICE_SLUG}/` },
           ]}
         />
 
         <header className="grid md:grid-cols-2 gap-10 items-start mb-16">
           <div>
             <p className="text-sm font-medium uppercase tracking-wide text-blue-600 mb-3">
-              Comprehensive Spine Surgery
+              Comprehensive Spine Care
             </p>
             <h1 className="text-4xl md:text-5xl font-bold text-blue-900 leading-tight mb-6">
-              Advanced Spine Surgery in Hyderabad
+              Best Spine Surgeon & Advanced Spine Care in Hyderabad
             </h1>
+            <p className="text-lg font-semibold text-blue-800 mb-4">
+              1000+ Minimally Invasive Surgeries | German-Trained Expert
+            </p>
             <AuthorByline
               publishedOn="2025-09-08"
               updatedOn="2025-10-19"
@@ -130,7 +165,7 @@ export default function SpineSurgeryHyderabadPage() {
             <p className="text-lg text-gray-700 mb-6">
               Living with chronic back or neck pain can affect every part of your life. At Yashoda Hospital, Malakpet, Dr. Sayuj
               Krishnan delivers advanced spine surgery solutions for slipped discs, stenosis, instability, and deformity with a
-              strong focus on minimally invasive techniques. If you are suffering from radiating leg pain, learn more about our specialized <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-700 underline font-medium">sciatica relief</Link> protocols.
+              strong focus on <strong>minimally invasive techniques</strong>. Our goal is to get you back to your active life safely and quickly.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
@@ -147,16 +182,23 @@ export default function SpineSurgeryHyderabadPage() {
               </Link>
             </div>
           </div>
-          <div className="bg-blue-50 border border-blue-100 rounded-2xl p-6 shadow-sm">
-            <h2 className="text-xl font-semibold text-blue-800 mb-4">What Sets Malakpet Care Apart</h2>
-            <ul className="space-y-3 text-gray-700">
-              <li>• Fellowship-trained spine surgeon with advanced endoscopic expertise</li>
-              <li>• On-site imaging and day-care MISS OT within Yashoda Hospital, Malakpet</li>
-              <li>• Dedicated physiotherapy and return-to-work planning for Hyderabad&rsquo;s workforce</li>
-              <li>• Personalised counselling for patients and family members at every step</li>
-            </ul>
+          <div className="space-y-6">
+             <TrustProof serviceType="spine" stories={relevantStories} />
+             <div className="bg-blue-50 border border-blue-100 rounded-2xl p-6 shadow-sm">
+                <h2 className="text-xl font-semibold text-blue-800 mb-4">Why Choose Dr. Sayuj as Your Spine Surgeon?</h2>
+                <ul className="space-y-3 text-gray-700">
+                  <li>• <strong>Fellowship Trained:</strong> Specialized in Minimally Invasive Spine Surgery (Germany).</li>
+                  <li>• <strong>1000+ Successful Cases:</strong> Proven track record in complex and endoscopic procedures.</li>
+                  <li>• <strong>90% Non-Surgical Focus:</strong> We prioritize conservative care; surgery is the last resort.</li>
+                  <li>• <strong>Advanced Tech:</strong> On-site 4K Endoscopy and Neuronavigation at Yashoda Malakpet.</li>
+                </ul>
+             </div>
           </div>
         </header>
+
+        <section className="mb-16">
+          <OutcomeMetricsSection procedure="Spine Surgery" />
+        </section>
 
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-blue-900 mb-6">Endoscopic vs. Traditional Spine Surgery</h2>
@@ -275,7 +317,7 @@ export default function SpineSurgeryHyderabadPage() {
         </section>
 
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-blue-900 mb-4">Serving Patients Across Hyderabad</h2>
+          <h2 className="text-3xl font-bold text-blue-900 mb-6">Serving Patients Across Hyderabad</h2>
           <p className="text-gray-700 mb-6">
             Our Malakpet location is convenient for patients travelling from Dilsukhnagar, LB Nagar, Charminar, and Koti. We
             assist with corporate and insurance approvals, travel planning for families, and tele-follow-ups for those who cannot
@@ -299,6 +341,34 @@ export default function SpineSurgeryHyderabadPage() {
               </ul>
             </div>
           </div>
+        </section>
+
+        <CostTransparencySection
+          costs={COSTS}
+          disclaimer="Approximate package estimates for self-pay patients at Yashoda Hospital Malakpet. Final cost depends on room category (General/Sharing/Private), insurance approvals, and specific implant requirements. We offer full assistance with insurance pre-authorization."
+        />
+
+        <section className="mb-16 bg-blue-900 text-white rounded-2xl p-10 text-center shadow-xl">
+           <h2 className="text-3xl font-bold mb-4">Advised Spine Surgery? Get a Second Opinion.</h2>
+           <p className="text-lg text-blue-100 mb-8 max-w-2xl mx-auto">
+              Before you proceed with open surgery, find out if you are a candidate for minimally invasive endoscopic techniques. Dr. Sayuj offers expert second opinions to help you make the right choice.
+           </p>
+           <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                href="/appointments/"
+                className="bg-white text-blue-900 px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition-colors"
+              >
+                Book Second Opinion
+              </Link>
+              <a
+                href="https://wa.me/919778280044?text=I%20want%20a%20second%20opinion%20for%20spine%20surgery"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border-2 border-white px-8 py-3 rounded-full font-bold hover:bg-white hover:text-blue-900 transition-colors"
+              >
+                WhatsApp MRI
+              </a>
+           </div>
         </section>
 
         <section className="mb-16 grid lg:grid-cols-[1.2fr_1fr] gap-10 items-start">
@@ -331,8 +401,6 @@ export default function SpineSurgeryHyderabadPage() {
             </Link>
           </div>
         </section>
-
-
 
       <div className="mt-12">
         <LocalPathways mode="service" />
