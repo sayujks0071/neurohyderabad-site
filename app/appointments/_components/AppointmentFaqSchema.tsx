@@ -1,5 +1,6 @@
 import React from "react";
 import { SITE_URL } from "@/src/lib/seo";
+import { serializeJsonLd } from '@/src/lib/seo/serialize';
 
 const FAQS = [
   {
@@ -48,7 +49,7 @@ export default function AppointmentFaqSchema() {
     <script
       type="application/ld+json"
       // eslint-disable-next-line react/no-danger
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema) }}
     />
   );
 }

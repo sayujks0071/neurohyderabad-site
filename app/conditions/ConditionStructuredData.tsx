@@ -1,5 +1,6 @@
 import { SITE_URL } from "@/src/lib/seo";
 import type { ConditionResource } from "@/src/data/conditionsIndex";
+import { serializeJsonLd } from '@/src/lib/seo/serialize';
 
 interface ConditionStructuredDataProps {
   condition: ConditionResource;
@@ -88,7 +89,7 @@ export default function ConditionStructuredData({
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
     />
   );
 }

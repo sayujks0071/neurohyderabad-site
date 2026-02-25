@@ -1,3 +1,4 @@
+import { serializeJsonLd } from '@/src/lib/seo/serialize';
 export default function SeoDoctorJsonLd() {
   const physicianData = {
     '@context': 'https://schema.org',
@@ -257,12 +258,12 @@ export default function SeoDoctorJsonLd() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(physicianData) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(physicianData) }}
         suppressHydrationWarning
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(clinicData) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(clinicData) }}
         suppressHydrationWarning
       />
     </>

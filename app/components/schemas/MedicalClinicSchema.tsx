@@ -7,6 +7,7 @@ import {
   CANONICAL_MAPS_URL,
   SOCIAL_PROFILES
 } from '@/src/data/locations';
+import { serializeJsonLd } from '@/src/lib/seo/serialize';
 
 export default function MedicalClinicSchema() {
   const schema = {
@@ -173,7 +174,7 @@ export default function MedicalClinicSchema() {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema) }}
     />
   );
 }

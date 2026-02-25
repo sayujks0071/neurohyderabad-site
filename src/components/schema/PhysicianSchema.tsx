@@ -6,6 +6,7 @@ import {
   SOCIAL_PROFILES
 } from '../../data/locations';
 import { SITE_URL } from '../../lib/seo';
+import { serializeJsonLd } from '@/src/lib/seo/serialize';
 
 const MAIN_LOCATION_ID = 'malakpet';
 
@@ -354,7 +355,7 @@ export const PhysicianSchema: React.FC = () => {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(physicianSchema) }}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(physicianSchema) }}
     />
   );
 };

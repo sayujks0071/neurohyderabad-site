@@ -1,4 +1,5 @@
 import { SITE_URL } from '../../../src/lib/seo';
+import { serializeJsonLd } from '@/src/lib/seo/serialize';
 
 interface VideoObjectSchemaProps {
   videoId: string;
@@ -48,7 +49,7 @@ export default function VideoObjectSchema({
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema) }}
     />
   );
 }

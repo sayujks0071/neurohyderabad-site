@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { SITE_URL } from '../../../src/lib/seo';
 import MedicalReviewNotice from '../../../src/components/MedicalReviewNotice';
+import { serializeJsonLd } from '@/src/lib/seo/serialize';
 
 export const metadata: Metadata = {
   title: 'Degenerative Disc Disease: Symptoms, Causes & Treatment | Dr. Sayuj Krishnan',
@@ -252,7 +253,7 @@ export default function DegenerativeDiscDiseasePage() {
       {/* Structured Data */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(structuredData) }}
       />
     </main>
   );

@@ -1,10 +1,11 @@
+import { serializeJsonLd } from '@/src/lib/seo/serialize';
 // Lightweight JSON-LD injector for SEO schemas
 export function JsonLd({ json }: { json: object }) {
   return (
     <script
       type="application/ld+json"
       // eslint-disable-next-line react/no-danger
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(json) }}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(json) }}
     />
   );
 }
