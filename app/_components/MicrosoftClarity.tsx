@@ -6,7 +6,8 @@ export default function MicrosoftClarity() {
     return (
         <Script
             id="microsoft-clarity-init"
-            strategy="afterInteractive"
+            // ⚡ Bolt: Use lazyOnload to defer loading until browser is idle, improving TTI/TBT
+            strategy="lazyOnload"
             dangerouslySetInnerHTML={{
                 __html: `
           (function(c,l,a,r,i,t,y){
