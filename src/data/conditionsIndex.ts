@@ -301,7 +301,7 @@ export const CONDITION_RESOURCES: ConditionResource[] = [
     name: "Degenerative Disc Disease",
     summary:
       "Age-related disc wear causing chronic back or neck pain managed with conservative and minimally invasive techniques.",
-    primaryPath: "/disease-guides/degenerative-disc-disease",
+    primaryPath: "/conditions/degenerative-disc-disease-treatment-hyderabad",
     relatedResources: [
       {
         href: "/services/minimally-invasive-spine-surgery",

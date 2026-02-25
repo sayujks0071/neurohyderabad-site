@@ -6,6 +6,7 @@ import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import RemotionVideoEmbedWrapper from '../_components/RemotionVideoEmbedWrapper';
 import MedicalWebPageSchema from '../components/schemas/MedicalWebPageSchema';
 import BreadcrumbSchema from '../components/schemas/BreadcrumbSchema';
+import FAQPageSchema from '@/app/_components/FAQPageSchema';
 
 export const metadata: Metadata = {
   title: 'Neurosurgical Services in Hyderabad | Dr. Sayuj Krishnan',
@@ -57,6 +58,25 @@ export const metadata: Metadata = {
     creator: '@drsayuj'
   },
 };
+
+const FAQS = [
+  {
+    question: "What makes endoscopic surgery different from traditional surgery?",
+    answer: "Endoscopic surgery uses small incisions (8-10mm) and specialized instruments to access and treat spine conditions. This results in less muscle damage, reduced pain, faster recovery, and lower risk of complications compared to traditional open surgery."
+  },
+  {
+    question: "How long is the recovery time for endoscopic procedures?",
+    answer: "Recovery times vary by procedure, but most endoscopic spine surgeries allow patients to return to desk work within 1-2 weeks and full activities within 4-6 weeks. This is significantly faster than traditional open surgery."
+  },
+  {
+    question: "Are all patients candidates for minimally invasive surgery?",
+    answer: "Not all patients are suitable for endoscopic procedures. We evaluate each case individually based on MRI findings, symptoms, and overall health. Some complex cases may require traditional open surgery for optimal outcomes."
+  },
+  {
+    question: "What should I expect during my consultation?",
+    answer: "During your consultation, Dr. Sayuj will review your MRI scans, discuss your symptoms, explain treatment options, and develop a personalized treatment plan. Bring your imaging studies and a list of current medications."
+  }
+];
 
 export default function ServicesPage() {
   const services = [
@@ -126,6 +146,7 @@ export default function ServicesPage() {
         { name: "Home", path: "/" },
         { name: "Services", path: "/services" }
       ]} />
+      <FAQPageSchema faqs={FAQS} pageUrl={`${SITE_URL}/services`} />
 
       <div className="container mx-auto px-4 py-16">
         <header className="text-center mb-12">
@@ -336,22 +357,12 @@ export default function ServicesPage() {
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-blue-800 mb-8">Frequently Asked Questions</h2>
           <div className="space-y-6">
-            <div className="bg-gray-50 p-6 rounded-lg">
-              <h3 className="text-xl font-semibold mb-3 text-blue-700">What makes endoscopic surgery different from traditional surgery?</h3>
-              <p className="text-gray-700">Endoscopic surgery uses small incisions (8-10mm) and specialized instruments to access and treat spine conditions. This results in less muscle damage, reduced pain, faster recovery, and lower risk of complications compared to traditional open surgery.</p>
-            </div>
-            <div className="bg-gray-50 p-6 rounded-lg">
-              <h3 className="text-xl font-semibold mb-3 text-blue-700">How long is the recovery time for endoscopic procedures?</h3>
-              <p className="text-gray-700">Recovery times vary by procedure, but most endoscopic spine surgeries allow patients to return to desk work within 1-2 weeks and full activities within 4-6 weeks. This is significantly faster than traditional open surgery.</p>
-            </div>
-            <div className="bg-gray-50 p-6 rounded-lg">
-              <h3 className="text-xl font-semibold mb-3 text-blue-700">Are all patients candidates for minimally invasive surgery?</h3>
-              <p className="text-gray-700">Not all patients are suitable for endoscopic procedures. We evaluate each case individually based on MRI findings, symptoms, and overall health. Some complex cases may require traditional open surgery for optimal outcomes.</p>
-            </div>
-            <div className="bg-gray-50 p-6 rounded-lg">
-              <h3 className="text-xl font-semibold mb-3 text-blue-700">What should I expect during my consultation?</h3>
-              <p className="text-gray-700">During your consultation, Dr. Sayuj will review your MRI scans, discuss your symptoms, explain treatment options, and develop a personalized treatment plan. Bring your imaging studies and a list of current medications.</p>
-            </div>
+            {FAQS.map((faq, index) => (
+              <div key={index} className="bg-gray-50 p-6 rounded-lg">
+                <h3 className="text-xl font-semibold mb-3 text-blue-700">{faq.question}</h3>
+                <p className="text-gray-700">{faq.answer}</p>
+              </div>
+            ))}
           </div>
         </section>
 
