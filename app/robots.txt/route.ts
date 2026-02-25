@@ -36,6 +36,7 @@ export function GET(_req: NextRequest) {
 
   // Sitemaps (all should be HTTP 200 and valid XML)
   lines.push(`Sitemap: ${SITE_URL}/sitemap.xml`);
+  // These are generated during `postbuild` (see scripts/generate-*-sitemap.js)
   lines.push(`Sitemap: ${SITE_URL}/sitemap-images.xml`);
   lines.push(`Sitemap: ${SITE_URL}/sitemap-videos.xml`);
 

@@ -3,7 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { SITE_URL } from "../../src/lib/seo";
 import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
-import { PhysicianSchema } from "../../src/components/schema/PhysicianSchema";
 import MedicalWebPageSchema from "../components/schemas/MedicalWebPageSchema";
 import Section from "../_components/Section";
 import Card from "../_components/Card";
@@ -72,7 +71,7 @@ export default function AboutPage() {
         { name: "Home", path: "/" },
         { name: "About Dr. Sayuj Krishnan", path: "/about" }
       ]} />
-      <PhysicianSchema />
+      {/* PhysicianSchema is already rendered globally in layout.tsx */}
       <MedicalWebPageSchema
         pageType="about"
         pageSlug="/about"
