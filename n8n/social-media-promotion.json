@@ -1,0 +1,108 @@
+{
+  "name": "Social Media Promotion",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "social-promotion",
+        "options": {}
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ],
+      "webhookId": "social-promotion-webhook-id"
+    },
+    {
+      "parameters": {
+        "prompt": "Generate a catchy tweet and a LinkedIn post for the following blog post:\nTitle: {{$node[\"Webhook\"].json[\"body\"][\"title\"]}}\nSummary: {{$node[\"Webhook\"].json[\"body\"][\"summary\"]}}\nURL: {{$node[\"Webhook\"].json[\"body\"][\"url\"]}}\n\nOutput format JSON:\n{\n  \"tweet\": \"...\",\n  \"linkedin\": \"...\"\n}",
+        "maxTokens": 500,
+        "temperature": 0.7
+      },
+      "name": "Generate Posts",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "YOUR_OPENAI_CREDENTIAL_ID",
+          "name": "OpenAI Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "text": "={{JSON.parse($node[\"Generate Posts\"].json[\"choices\"][0][\"message\"][\"content\"]).tweet}}"
+      },
+      "name": "Twitter Post",
+      "type": "n8n-nodes-base.twitter",
+      "typeVersion": 1,
+      "position": [
+        650,
+        200
+      ],
+      "credentials": {
+        "twitterOAuth2Api": {
+          "id": "YOUR_TWITTER_CREDENTIAL_ID",
+          "name": "Twitter Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "text": "={{JSON.parse($node[\"Generate Posts\"].json[\"choices\"][0][\"message\"][\"content\"]).linkedin}}"
+      },
+      "name": "LinkedIn Post",
+      "type": "n8n-nodes-base.linkedin",
+      "typeVersion": 1,
+      "position": [
+        650,
+        400
+      ],
+      "credentials": {
+        "linkedinOAuth2Api": {
+          "id": "YOUR_LINKEDIN_CREDENTIAL_ID",
+          "name": "LinkedIn Account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Generate Posts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Posts": {
+      "main": [
+        [
+          {
+            "node": "Twitter Post",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "LinkedIn Post",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {},
+  "staticData": null,
+  "tags": []
+}

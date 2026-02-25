@@ -1,0 +1,95 @@
+{
+  "name": "Weekly SEO Audit",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "seconds": 0,
+              "minutes": 0,
+              "hours": 0
+            }
+          ]
+        }
+      },
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://www.drsayuj.info/api/admin/sandbox/jobs",
+        "method": "POST",
+        "body": {
+          "job": "seo-audit"
+        },
+        "headers": {
+          "x-admin-key": "YOUR_ADMIN_KEY"
+        },
+        "options": {}
+      },
+      "name": "Trigger SEO Audit",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "admin@drsayuj.info",
+        "toEmail": "admin@drsayuj.info",
+        "subject": "SEO Audit Triggered",
+        "text": "The weekly SEO audit has been triggered via n8n workflow.",
+        "html": "<h2>SEO Audit Triggered</h2><p>The weekly SEO audit has been triggered via n8n workflow.</p><p>Check the admin dashboard for results.</p>"
+      },
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [
+        650,
+        300
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "YOUR_SMTP_CREDENTIAL_ID",
+          "name": "SMTP Account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Trigger SEO Audit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Trigger SEO Audit": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {},
+  "staticData": null,
+  "tags": []
+}

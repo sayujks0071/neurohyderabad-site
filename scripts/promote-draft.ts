@@ -142,6 +142,30 @@ export default async function Page() {
     console.log(`✅ Created layout: ${layoutFile}`);
   }
 
+  // Trigger n8n Social Media Promotion Workflow
+  if (process.env.N8N_BLOG_PROMOTION_WEBHOOK_URL) {
+    console.log(`\n📢 Triggering n8n promotion workflow...`);
+    try {
+      const response = await fetch(process.env.N8N_BLOG_PROMOTION_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title,
+          slug,
+          url: `https://www.drsayuj.info/${slug}`,
+          summary: metaDescription,
+        }),
+      });
+      if (response.ok) {
+        console.log(`✅ n8n workflow triggered successfully`);
+      } else {
+        console.warn(`⚠️ n8n workflow returned status: ${response.status}`);
+      }
+    } catch (error) {
+      console.error(`❌ Failed to trigger n8n workflow:`, error);
+    }
+  }
+
   console.log(`\\n🎉 Successfully promoted: ${slug}`);
   console.log(`📄 Page available at: /${slug}`);
   console.log(`🔍 Schema: ${schemaSrc}`);
