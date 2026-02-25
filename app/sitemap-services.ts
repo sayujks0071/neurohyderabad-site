@@ -6,6 +6,7 @@ export default function sitemapServices(): MetadataRoute.Sitemap {
     // Primary services (highest priority)
     { url: '/services', priority: 0.9 },
     { url: '/services/minimally-invasive-spine-surgery', priority: 1.0 },
+    { url: '/services/endoscopic-spine-surgery-hyderabad', priority: 1.0 },
     { url: '/services/endoscopic-discectomy-hyderabad', priority: 1.0 },
     { url: '/services/brain-tumor-surgery-hyderabad', priority: 0.9 },
     { url: '/services/awake-spine-surgery-hyderabad', priority: 0.9 },
