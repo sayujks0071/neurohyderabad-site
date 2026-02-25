@@ -1,8 +1,15 @@
-interface OutcomeMetricsSectionProps {
-  procedure: string;
+interface MetricItem {
+  label: string;
+  value: string;
+  description: string;
 }
 
-const DEFAULT_METRICS = [
+interface OutcomeMetricsSectionProps {
+  procedure: string;
+  metrics?: MetricItem[];
+}
+
+const DEFAULT_METRICS: MetricItem[] = [
   {
     label: 'Patient satisfaction',
     value: '98%',
@@ -20,7 +27,9 @@ const DEFAULT_METRICS = [
   },
 ];
 
-export default function OutcomeMetricsSection({ procedure }: OutcomeMetricsSectionProps) {
+export default function OutcomeMetricsSection({ procedure, metrics }: OutcomeMetricsSectionProps) {
+  const displayMetrics = metrics || DEFAULT_METRICS;
+
   return (
     <section className="mb-12 py-4" aria-labelledby="outcome-metrics-title">
       <h2
@@ -31,7 +40,7 @@ export default function OutcomeMetricsSection({ procedure }: OutcomeMetricsSecti
       </h2>
 
       <div className="grid gap-6 md:grid-cols-3">
-        {DEFAULT_METRICS.map((metric) => (
+        {displayMetrics.map((metric) => (
           <div
             key={metric.label}
             className="relative bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"

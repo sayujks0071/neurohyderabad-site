@@ -18,6 +18,7 @@ import CostTransparencySection from '@/src/components/CostTransparencySection';
 import PatientJourneySection from '@/src/components/PatientJourneySection';
 import MedicalWebPageSchema from '../../components/schemas/MedicalWebPageSchema';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
+import OutcomeMetricsSection from '@/components/OutcomeMetricsSection';
 
 const SERVICE_SLUG = 'brain-tumor-surgery-hyderabad';
 
@@ -179,6 +180,24 @@ const JOURNEY_STEPS = [
   {
     title: 'Histopathology & Care',
     description: 'Biopsy report discussion and referral for radiation/chemo if required.'
+  }
+];
+
+const BRAIN_TUMOR_METRICS = [
+  {
+    label: "Safe Resection Rate",
+    value: "95%+",
+    description: "Maximal safe removal of benign tumors (like Meningiomas) validated by post-op MRI."
+  },
+  {
+    label: "Neurological Safety",
+    value: "98%",
+    description: "Preservation of critical functions using intraoperative neuromonitoring and mapping."
+  },
+  {
+    label: "Infection Rate",
+    value: "< 1%",
+    description: "Maintained through strict sterile neuro-theatre protocols and antibiotic stewardship."
   }
 ];
 
@@ -345,6 +364,34 @@ export default function BrainTumorSurgeryHyderabadPage() {
               </div>
             ))}
           </div>
+        </section>
+
+        <OutcomeMetricsSection procedure="Brain Tumor Surgery" metrics={BRAIN_TUMOR_METRICS} />
+
+        <section className="mb-16 bg-blue-900 text-white rounded-2xl p-8 md:p-12 text-center relative overflow-hidden shadow-xl">
+           <div className="relative z-10 max-w-3xl mx-auto">
+             <h2 className="text-2xl md:text-3xl font-bold mb-4">Have You Been Diagnosed with a Brain Tumor?</h2>
+             <p className="text-blue-100 text-lg mb-8">
+                A second opinion can confirm your diagnosis and open up less invasive treatment options.
+                Dr. Sayuj Krishnan offers a comprehensive review of your MRI scans to determine the safest surgical approach.
+             </p>
+             <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link
+                   href="/appointments"
+                   className="inline-flex items-center justify-center bg-white text-blue-900 font-bold px-8 py-4 rounded-full hover:bg-blue-50 transition-transform hover:scale-105"
+                >
+                   Get a Second Opinion
+                </Link>
+                <a
+                   href="https://wa.me/919778280044?text=I%20need%20a%20second%20opinion%20for%20brain%20tumor"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   className="inline-flex items-center justify-center border-2 border-white/30 bg-white/10 text-white font-semibold px-8 py-4 rounded-full hover:bg-white/20 transition-colors"
+                >
+                   WhatsApp Report
+                </a>
+             </div>
+           </div>
         </section>
 
         <section className="mb-16">
