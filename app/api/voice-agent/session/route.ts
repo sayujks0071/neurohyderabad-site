@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { isAIGatewayConfigured, getGatewayModel } from '@/src/lib/ai/gateway';
+import { isAIGatewayConfigured, getGatewayModel, getOpenAIBaseUrl } from '@/src/lib/ai/gateway';
 
 export async function POST(req: NextRequest) {
   try {
@@ -16,10 +16,7 @@ export async function POST(req: NextRequest) {
     }
 
     const isGateway = isAIGatewayConfigured();
-
-    const baseUrl = isGateway
-      ? (process.env.AI_GATEWAY_BASE_URL || 'https://ai-gateway.vercel.sh/v1')
-      : 'https://api.openai.com/v1';
+    const baseUrl = getOpenAIBaseUrl();
 
     const finalModel = isGateway ? getGatewayModel(model) : model;
 
