@@ -1,0 +1,108 @@
+{
+  "name": "Lead Enrichment & Notification",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "lead-webhook",
+        "options": {}
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ],
+      "webhookId": "lead-webhook-id"
+    },
+    {
+      "parameters": {
+        "functionCode": "const data = items[0].json.body;\nreturn [\n  {\n    json: {\n      subject: `New Lead: ${data.fullName}`,\n      text: `Name: ${data.fullName}\\nEmail: ${data.email}\\nPhone: ${data.phone}\\nCity: ${data.city}\\nConcern: ${data.concern}\\nSource: ${data.source}`,\n      html: `<h2>New Lead Received</h2><p><b>Name:</b> ${data.fullName}</p><p><b>Email:</b> ${data.email}</p><p><b>Phone:</b> ${data.phone}</p><p><b>City:</b> ${data.city}</p><p><b>Concern:</b> ${data.concern}</p><p><b>Source:</b> ${data.source}</p>`\n    }\n  }\n];"
+      },
+      "name": "Format Data",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "admin@drsayuj.info",
+        "toEmail": "admin@drsayuj.info",
+        "subject": "={{$node[\"Format Data\"].json[\"subject\"]}}",
+        "text": "={{$node[\"Format Data\"].json[\"text\"]}}",
+        "html": "={{$node[\"Format Data\"].json[\"html\"]}}",
+        "options": {}
+      },
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [
+        650,
+        200
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "YOUR_SMTP_CREDENTIAL_ID",
+          "name": "SMTP Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "channel": "leads",
+        "text": "={{$node[\"Format Data\"].json[\"text\"]}}",
+        "attachments": [],
+        "otherOptions": {}
+      },
+      "name": "Slack",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 1,
+      "position": [
+        650,
+        400
+      ],
+      "credentials": {
+        "slackApi": {
+          "id": "YOUR_SLACK_CREDENTIAL_ID",
+          "name": "Slack Account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Format Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Data": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Slack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {},
+  "staticData": null,
+  "tags": []
+}
