@@ -158,7 +158,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" prefix="og: https://ogp.me/ns# article: https://ogp.me/ns/article#">
+    <html lang="en-IN" prefix="og: https://ogp.me/ns# article: https://ogp.me/ns/article#">
       <head>
         <link rel="dns-prefetch" href="https://edge.hypertune.com" />
         <link rel="preconnect" href="https://edge.hypertune.com" crossOrigin="anonymous" />

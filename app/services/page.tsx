@@ -165,7 +165,7 @@ export default function ServicesPage() {
           <div className="grid md:grid-cols-2 gap-8 mb-12">
             {services.map((service, index) => (
               <div key={index} className="relative bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
-                <h2 className="text-2xl font-semibold text-blue-700 mb-3">{service.title}</h2>
+                <h3 className="text-2xl font-semibold text-blue-700 mb-3">{service.title}</h3>
                 <p className="text-gray-700 mb-4">{service.description}</p>
 
                 <div className="mb-4">

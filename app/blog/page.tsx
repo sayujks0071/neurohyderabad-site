@@ -4,6 +4,7 @@ import { getAllBlogPosts } from "../../src/lib/blog";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
 
 // ISR: Revalidate every 24 hours
 export const revalidate = 86400;
@@ -162,6 +163,11 @@ export default async function BlogPage() {
   });
 
   return (
+    <>
+    <BreadcrumbSchema items={[
+      { name: "Home", path: "/" },
+      { name: "Blog", path: "/blog" }
+    ]} />
     <main className="container mx-auto px-4 py-16">
       <h1 className="text-4xl font-bold text-center mb-8">Neurosurgery Blog</h1>
       <p className="text-lg text-gray-600 mb-12 text-center max-w-3xl mx-auto">
@@ -252,5 +258,6 @@ export default async function BlogPage() {
         </Link>
       </div>
     </main>
+    </>
   );
 }
