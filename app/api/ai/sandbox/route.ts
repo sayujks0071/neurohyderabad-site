@@ -58,7 +58,11 @@ export async function POST(req: NextRequest) {
       Your goal is to answer questions thoughtfully and format your responses with clean Markdown.`
         });
 
-        return result.toDataStreamResponse();
+        // Fallback to toTextStreamResponse if toDataStreamResponse is missing (AI SDK version compat)
+        if (typeof result.toDataStreamResponse === 'function') {
+            return result.toDataStreamResponse();
+        }
+        return result.toTextStreamResponse();
     } catch (error) {
         console.error('Error in Sandbox streamText:', error);
         return NextResponse.json(
