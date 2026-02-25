@@ -56,7 +56,7 @@ export default function Footer() {
                 <a
                   href={`https://wa.me/${CANONICAL_WHATSAPP}`}
                   className="rounded-full border border-blue-300 px-4 py-3 min-h-[44px] text-sm font-semibold text-blue-100 hover:bg-blue-900 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950"
-                  aria-label="Contact via WhatsApp"
+                  aria-label="Contact via WhatsApp (opens in a new tab)"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -65,7 +65,7 @@ export default function Footer() {
                 <a
                   href={YASHODA_DIRECTIONS}
                   className="rounded-full border border-gray-500 px-4 py-3 min-h-[44px] text-sm font-semibold text-gray-100 hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-950"
-                  aria-label="Get directions to clinic"
+                  aria-label="Get directions to clinic (opens in a new tab)"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
