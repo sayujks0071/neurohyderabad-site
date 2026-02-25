@@ -1,3 +1,4 @@
+import { serializeJsonLd } from '@/src/lib/seo/serialize';
 interface JsonLdProps {
   data: object;
   id?: string;
@@ -8,7 +9,7 @@ export default function JsonLd({ data, id }: JsonLdProps) {
     <script
       type="application/ld+json"
       id={id}
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(data) }}
     />
   );
 }

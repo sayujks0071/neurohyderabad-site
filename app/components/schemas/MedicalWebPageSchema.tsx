@@ -1,4 +1,5 @@
 import { SITE_URL } from '../../../src/lib/seo';
+import { serializeJsonLd } from '@/src/lib/seo/serialize';
 
 interface MedicalWebPageSchemaProps {
   pageType: 'service' | 'condition' | 'blog' | 'location' | 'about' | 'contact';
@@ -150,7 +151,7 @@ export default function MedicalWebPageSchema({
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(baseSchema) }}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(baseSchema) }}
     />
   );
 }

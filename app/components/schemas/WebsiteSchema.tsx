@@ -1,4 +1,5 @@
 import { SITE_URL } from '../../../src/lib/seo';
+import { serializeJsonLd } from '@/src/lib/seo/serialize';
 
 export default function WebsiteSchema() {
   const schema = {
@@ -21,7 +22,7 @@ export default function WebsiteSchema() {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema) }}
     />
   );
 }

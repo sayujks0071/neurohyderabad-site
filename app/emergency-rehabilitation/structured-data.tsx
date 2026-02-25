@@ -1,3 +1,4 @@
+import { serializeJsonLd } from '@/src/lib/seo/serialize';
 export default function EmergencyRehabilitationStructuredData() {
   const structuredData = {
     "@context": "https://schema.org",
@@ -132,7 +133,7 @@ export default function EmergencyRehabilitationStructuredData() {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(structuredData) }}
     />
   );
 }

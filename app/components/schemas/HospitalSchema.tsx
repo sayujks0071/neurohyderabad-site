@@ -1,5 +1,6 @@
 import { SITE_URL } from '../../../src/lib/seo';
 import { YASHODA_GEO } from '@/src/data/locations';
+import { serializeJsonLd } from '@/src/lib/seo/serialize';
 
 export default function HospitalSchema() {
   const schema = {
@@ -84,7 +85,7 @@ export default function HospitalSchema() {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema) }}
     />
   );
 }

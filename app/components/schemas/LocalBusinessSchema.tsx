@@ -6,6 +6,7 @@ import {
   YASHODA_GEO,
   CANONICAL_MAPS_URL
 } from '@/src/data/locations';
+import { serializeJsonLd } from '@/src/lib/seo/serialize';
 
 export default function LocalBusinessSchema() {
   const schema = {
@@ -68,7 +69,7 @@ export default function LocalBusinessSchema() {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema) }}
     />
   );
 }

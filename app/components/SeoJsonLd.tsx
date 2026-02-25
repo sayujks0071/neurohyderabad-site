@@ -1,3 +1,4 @@
+import { serializeJsonLd } from '@/src/lib/seo/serialize';
 import Script from 'next/script'
 
 export function OrgJsonLd() {
@@ -25,7 +26,7 @@ export function OrgJsonLd() {
     telephone: '+91-9778280044',
     email: 'hellodr@drsayuj.info'
   }
-  return <Script id="org-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
+  return <Script id="org-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(data) }} />
 }
 
 export function PhysicianJsonLd() {
@@ -61,7 +62,7 @@ export function PhysicianJsonLd() {
       }
     }
   }
-  return <Script id="physician-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
+  return <Script id="physician-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(data) }} />
 }
 
 export function HospitalJsonLd() {
@@ -102,5 +103,5 @@ export function HospitalJsonLd() {
       ]
     }
   }
-  return <Script id="hospital-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
+  return <Script id="hospital-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(data) }} />
 }

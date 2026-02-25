@@ -5,6 +5,7 @@ import {
   CLINIC_OPENING_HOURS,
   getMedicalClinicSchema,
 } from "../lib/clinic";
+import { serializeJsonLd } from '@/src/lib/seo/serialize';
 
 export function GlobalStructuredData() {
   const {
@@ -313,7 +314,7 @@ export function GlobalStructuredData() {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(structuredData) }}
     />
   );
 }
