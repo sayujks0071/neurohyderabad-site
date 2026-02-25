@@ -83,10 +83,30 @@ const schema = {
       return {
         ...item,
         bodyLocation: 'Spine',
-        timeRequired: 'PT1H', // 1 Hour
-        howPerformed: 'Endoscopic keyhole technique through 7mm incision',
-        status: 'http://schema.org/ActiveActionStatus',
         procedureType: 'Minimally Invasive Surgical Procedure',
+        status: 'http://schema.org/ActiveActionStatus',
+        howPerformed: 'Endoscopic keyhole technique through 7mm incision',
+        timeRequired: 'PT1H', // 1 Hour
+        preparation: 'MRI review, cardiac clearance if >50, fasting 6 hours prior.',
+        followup: 'Wound check at 48 hours, physiotherapy assessment at 1 week.',
+        recoveryTime: 'PT3H', // Walk in 3 hours
+        indication: [
+          {
+            '@type': 'MedicalCondition',
+            name: 'Lumbar Disc Herniation (Slip Disc)',
+            possibleTreatment: { '@type': 'MedicalTherapy', name: 'Endoscopic Discectomy' },
+          },
+          {
+            '@type': 'MedicalCondition',
+            name: 'Sciatica',
+            possibleTreatment: { '@type': 'MedicalTherapy', name: 'Nerve Decompression' },
+          },
+          {
+            '@type': 'MedicalCondition',
+            name: 'Spinal Stenosis',
+            possibleTreatment: { '@type': 'MedicalTherapy', name: 'Lumbar Decompression' },
+          },
+        ],
       };
     }
     if (item['@type'] === 'MedicalService') {

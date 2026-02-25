@@ -65,3 +65,8 @@
 ## 2026-02-25
 *   **Expansion:** Replicate the visual "Red Flags" grid on other emergency-related condition pages (e.g., Brain Tumor Symptoms).
 *   **Consistency:** Ensure `TrustProof` components on other pages are updated to use the latest props and styling if applicable.
+
+- [ ] Create dedicated "Cost of Endoscopic Spine Surgery" page or detailed section schema.
+- [ ] Add "Patient Stories" schema linking.
+- [ ] Review all service pages for similar schema gaps.
+- [ ] Check if 'minimally-invasive-spine-surgery' page also needs schema uplift.
