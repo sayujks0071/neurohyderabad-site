@@ -1,17 +1,35 @@
 'use client'
 
-import { useChat } from 'ai/react'
+import { useChat } from '@ai-sdk/react'
+import { DefaultChatTransport } from 'ai'
 import { useState, useRef, useEffect } from 'react'
-import Header from '../_components/layout/Header'
-import Footer from '../_components/layout/Footer'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 
 export default function AISandboxPage() {
-    const { messages, input, handleInputChange, handleSubmit, isLoading, error } = useChat({
-        api: '/api/ai/sandbox',
-        body: {
-            requestedModel: 'openai/gpt-5.2' // Requested snippet
-        }
+    const { messages, sendMessage, status, error } = useChat({
+        transport: new DefaultChatTransport({
+            api: '/api/ai/sandbox',
+            body: {
+                requestedModel: 'openai/gpt-5.2' // Requested snippet
+            }
+        })
     })
+
+    const [input, setInput] = useState('')
+    const isLoading = status === 'submitted' || status === 'streaming'
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setInput(e.target.value)
+    }
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault()
+        if (!input.trim()) return
+        const value = input
+        setInput('')
+        await sendMessage({ role: 'user', content: value } as any)
+    }
 
     const messagesEndRef = useRef<HTMLDivElement>(null)
 
@@ -22,6 +40,15 @@ export default function AISandboxPage() {
     useEffect(() => {
         scrollToBottom()
     }, [messages])
+
+    // Helper to get text content from message
+    const getMessageContent = (m: any) => {
+        if (m.content) return m.content // fallback
+        if (m.parts) {
+            return m.parts.filter((p: any) => p.type === 'text').map((p: any) => p.text).join('')
+        }
+        return ''
+    }
 
     return (
         <div className="min-h-screen bg-slate-50 flex flex-col font-sans selection:bg-blue-200">
@@ -84,14 +111,14 @@ export default function AISandboxPage() {
 
                                         {/* Message Content */}
                                         <div className="prose prose-sm max-w-none prose-p:leading-relaxed prose-pre:bg-slate-800 prose-pre:text-slate-100">
-                                            {m.role !== 'user' && m.content === '' && isLoading ? (
+                                            {m.role !== 'user' && getMessageContent(m) === '' && isLoading ? (
                                                 <div className="flex items-center gap-1.5 h-6">
                                                     <div className="w-1.5 h-1.5 bg-slate-300 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
                                                     <div className="w-1.5 h-1.5 bg-slate-300 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
                                                     <div className="w-1.5 h-1.5 bg-slate-300 rounded-full animate-bounce"></div>
                                                 </div>
                                             ) : (
-                                                <p className={m.role === 'user' ? 'text-white' : ''}>{m.content}</p>
+                                                <p className={m.role === 'user' ? 'text-white' : ''}>{getMessageContent(m)}</p>
                                             )}
                                         </div>
                                     </div>

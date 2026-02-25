@@ -9,6 +9,10 @@ export interface BookingData {
   reason: string;
   painScore: number;
   mriScanAvailable: boolean;
+  insuranceProvider?: string;
+  insurancePolicyNumber?: string;
+  emergencyContactName?: string;
+  emergencyContactPhone?: string;
 }
 
 export interface EmailResult {

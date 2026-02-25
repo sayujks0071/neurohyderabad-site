@@ -6,7 +6,7 @@ import { trackMiddlewareEvent } from '@/src/lib/middleware/rum';
 import { MessageCircle, X, Send, AlertTriangle, Loader2, Sparkles, Minus } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { useChat } from '@ai-sdk/react';
-import { type Message } from 'ai';
+import { type UIMessage as Message, DefaultChatTransport } from 'ai';
 
 /**
  * Floating AI Chat Widget using Vercel AI Gateway
@@ -20,6 +20,15 @@ import { type Message } from 'ai';
 
 interface FloatingChatWidgetProps {
   autoOpen?: boolean;
+}
+
+// Helper to extract text from UIMessage parts
+function getTextFromMessage(message: Message): string {
+  if (!message.parts) return '';
+  return message.parts
+    .filter(part => part.type === 'text')
+    .map(part => (part as any).text)
+    .join('');
 }
 
 export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWidgetProps) {
@@ -59,27 +68,29 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
   // Statsig hooks
   const { logAppointmentBooking, logContactFormSubmit } = useStatsigEvents();
 
-  // Initial greeting
+  // Initial greeting - Updated to use parts for UIMessage compatibility
   const initialMessages = useMemo<Message[]>(() => [
     {
       id: 'initial',
       role: 'assistant',
-      content: "Hello! I'm Dr. Sayuj's AI assistant. I can help you with appointments, condition info, and more. How can I help?"
+      parts: [{ type: 'text', text: "Hello! I'm Dr. Sayuj's AI assistant. I can help you with appointments, condition info, and more. How can I help?" }]
     },
   ], []);
 
-  // Use Vercel AI SDK useChat hook
-  const { messages, append, status, error } = useChat({
-    api: '/api/ai/chat',
-    body: {
-      pageSlug: pathname || 'global',
-      pageTitle,
-      pageDescription,
-      service: 'floating_widget',
-    },
-    initialMessages,
-    onFinish: (message) => {
-      const content = message.content;
+  // Use Vercel AI SDK useChat hook with DefaultChatTransport for v6 compatibility
+  const { messages, sendMessage, status, error } = useChat({
+    transport: new DefaultChatTransport({
+      api: '/api/ai/chat',
+      body: {
+        pageSlug: pathname || 'global',
+        pageTitle,
+        pageDescription,
+        service: 'floating_widget',
+      },
+    }),
+    messages: initialMessages,
+    onFinish: ({ message }) => {
+      const content = getTextFromMessage(message);
 
       trackMiddlewareEvent('chat_response_received', {
         source: 'floating_widget',
@@ -147,7 +158,8 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
       page_slug: pathname || 'unknown'
     });
 
-    await append({ role: 'user', content: content.trim() });
+    // Use sendMessage instead of append
+    await sendMessage({ role: 'user', content: content.trim() } as any);
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -163,7 +175,8 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
 
     const content = input;
     setInput('');
-    await append({ role: 'user', content: content.trim() });
+    // Use sendMessage instead of append
+    await sendMessage({ role: 'user', content: content.trim() } as any);
   };
 
   const quickActions = [
@@ -266,7 +279,7 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
           >
             {messages.map((message) => {
               // Extract text content directly
-              const content = message.content;
+              const content = getTextFromMessage(message);
 
               // Skip messages with empty content (e.g. tool calls) unless we want to show a spinner
               if (!content && message.role !== 'assistant') return null;

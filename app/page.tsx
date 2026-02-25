@@ -16,6 +16,7 @@ import MedicalWebPageSchema from "./components/schemas/MedicalWebPageSchema";
 import DoctorCard from "./_components/DoctorCard";
 import HomeTrackers from "./_components/HomeTrackers";
 import TrustBridgeLink from "./_components/TrustBridgeLink";
+import LazySection from "./_components/LazySection";
 import { mediaPublications } from "../src/content/media";
 import Button from "./_components/Button";
 import Card from "./_components/Card";
