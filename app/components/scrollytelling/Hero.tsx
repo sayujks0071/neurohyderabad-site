@@ -174,10 +174,10 @@ export default function Hero() {
             <div className={`absolute bottom-0 left-0 w-full p-10 pb-20 z-10 transition-opacity duration-1000`}>
                 <div className="container mx-auto max-w-6xl">
                     <h2 className="text-2xl md:text-4xl font-serif italic text-gray-400 mb-2">
-                        Advancing Minimally Invasive Surgery
+                        Advancing Minimally Invasive Spine & Brain Surgery
                     </h2>
                     <h1 className="text-4xl md:text-7xl font-bold leading-tight mb-8">
-                        Dr. Sayuj Krishnan:<br />German-Trained Neurosurgeon in Hyderabad
+                        Dr. Sayuj Krishnan:<br />Best Neurosurgeon in Hyderabad & Endoscopic Spine Specialist
                     </h1>
 
                     <div className="flex flex-wrap gap-4">
