@@ -1,10 +1,9 @@
-// @ts-nocheck
 'use client'
 
 import { useChat } from '@ai-sdk/react'
-import { useState, useRef, useEffect } from 'react'
-import Header from '../_components/layout/Header'
-import Footer from '../_components/layout/Footer'
+import { useRef, useEffect } from 'react'
+import Header from '@/app/components/Header'
+import Footer from '@/app/components/Footer'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 
