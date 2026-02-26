@@ -179,7 +179,7 @@ export default function SpineSurgeryHyderabadPage() {
                   Lumbar &amp; Cervical Disc Herniation:
                 </Link>
               </strong>{' '}
-              Persistent arm/leg pain, numbness, or weakness due to nerve compression.
+              Persistent arm/leg pain, numbness, or weakness due to nerve compression. We offer advanced <strong>Endoscopic Discectomy</strong> and <strong>Microdiscectomy</strong> which allow for same-day discharge and minimal muscle disruption.
             </li>
             <li className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
               <strong className="text-blue-800">
@@ -187,7 +187,7 @@ export default function SpineSurgeryHyderabadPage() {
                   Spinal Canal Stenosis:
                 </Link>
               </strong>{' '}
-              Walking intolerance and heaviness relieved by rest, often seen in older adults.
+              Walking intolerance and heaviness relieved by rest, often seen in older adults. Treated effectively with <strong>Endoscopic ULBD</strong> or <strong>Lumbar Laminectomy</strong> to relieve pressure on the spinal cord.
             </li>
             <li className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
               <strong className="text-blue-800">
@@ -195,7 +195,7 @@ export default function SpineSurgeryHyderabadPage() {
                   Spondylolisthesis:
                 </Link>
               </strong>{' '}
-              Slippage causing mechanical back pain or nerve symptoms that require stabilization.
+              Slippage causing mechanical back pain or nerve symptoms that require stabilization. We perform advanced <strong>Spinal Fusion Surgery (TLIF/PLIF)</strong> using neuronavigation for perfect screw placement.
             </li>
             <li className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
               <strong className="text-blue-800">
@@ -203,7 +203,7 @@ export default function SpineSurgeryHyderabadPage() {
                   Spine Tumors &amp; Infections:
                 </Link>
               </strong>{' '}
-              Lesions requiring biopsy, decompression, or stabilization for spinal cord protection.
+              Lesions requiring biopsy, decompression, or stabilization for spinal cord protection via complex spinal reconstruction.
             </li>
           </ul>
         </section>
@@ -334,10 +334,10 @@ export default function SpineSurgeryHyderabadPage() {
 
 
 
-      <div className="mt-12">
-        <LocalPathways mode="service" />
-      </div>
-      <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
+        <div className="mt-12">
+          <LocalPathways mode="service" />
+        </div>
+        <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
         <ReviewedBy lastReviewed="2025-10-19" />
       </main>
     </>

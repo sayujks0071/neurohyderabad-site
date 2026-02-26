@@ -162,7 +162,7 @@ export default function Hero() {
         <section ref={containerRef} className="relative w-full h-screen overflow-hidden bg-black text-white">
             {/* Loading Indicator */}
             {isLoading && (
-                <div className="absolute inset-0 flex items-center justify-center z-50 bg-black">
+                <div className="absolute inset-0 flex items-center justify-center z-30 bg-black">
                     <div className="text-center">
                         <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mb-4 mx-auto"></div>
                         <p className="text-lg text-blue-400 font-medium">Loading Experience... {Math.round(progress * 100)}%</p>
@@ -171,13 +171,13 @@ export default function Hero() {
             )}
 
             {/* Overlay Content */}
-            <div className={`absolute bottom-0 left-0 w-full p-10 pb-20 z-10 transition-opacity duration-1000`}>
+            <div className={`absolute bottom-0 left-0 w-full p-10 pb-20 z-40 transition-opacity duration-1000`}>
                 <div className="container mx-auto max-w-6xl">
                     <h2 className="text-2xl md:text-4xl font-serif italic text-gray-400 mb-2">
-                        Advancing Minimally Invasive Surgery
+                        Advancing Minimally Invasive Spine & Brain Surgery
                     </h2>
                     <h1 className="text-4xl md:text-7xl font-bold leading-tight mb-8">
-                        Dr. Sayuj Krishnan:<br />German-Trained Neurosurgeon in Hyderabad
+                        Dr. Sayuj Krishnan:<br />Best Neurosurgeon in Hyderabad & Endoscopic Spine Specialist
                     </h1>
 
                     <div className="flex flex-wrap gap-4">

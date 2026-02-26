@@ -1,0 +1,128 @@
+{
+  "name": "Referral Processing",
+  "nodes": [
+    {
+      "parameters": {
+        "postProcessAction": "nothing"
+      },
+      "name": "Email Trigger",
+      "type": "n8n-nodes-base.emailReadImap",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ],
+      "credentials": {
+        "imap": {
+          "id": "YOUR_IMAP_CREDENTIAL_ID",
+          "name": "IMAP Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$node[\"Email Trigger\"].json[\"subject\"]}}",
+              "operation": "contains",
+              "value2": "Referral"
+            }
+          ]
+        }
+      },
+      "name": "Check Subject",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://www.drsayuj.info/api/admin/referral/analyze",
+        "method": "POST",
+        "authentication": "header",
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "x-admin-key",
+              "value": "YOUR_ADMIN_KEY"
+            }
+          ]
+        },
+        "sendBinaryData": true,
+        "binaryPropertyName": "attachment_0",
+        "options": {}
+      },
+      "name": "Analyze Referral",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        650,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "admin@drsayuj.info",
+        "toEmail": "admin@drsayuj.info",
+        "subject": "New Referral Analyzed",
+        "text": "A new referral has been analyzed. Results: {{$node[\"Analyze Referral\"].json[\"summary\"]}}",
+        "html": "<h2>New Referral Analyzed</h2><p><b>Patient Name:</b> {{$node[\"Analyze Referral\"].json[\"patientName\"]}}</p><p><b>Summary:</b> {{$node[\"Analyze Referral\"].json[\"summary\"]}}</p><p><b>Recommendation:</b> {{$node[\"Analyze Referral\"].json[\"recommendation\"]}}</p>"
+      },
+      "name": "Notify Admin",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [
+        850,
+        200
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "YOUR_SMTP_CREDENTIAL_ID",
+          "name": "SMTP Account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Email Trigger": {
+      "main": [
+        [
+          {
+            "node": "Check Subject",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Subject": {
+      "main": [
+        [
+          {
+            "node": "Analyze Referral",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze Referral": {
+      "main": [
+        [
+          {
+            "node": "Notify Admin",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {},
+  "staticData": null,
+  "tags": []
+}
