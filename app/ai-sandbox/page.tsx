@@ -3,8 +3,10 @@
 
 import { useChat } from '@ai-sdk/react'
 import { useState, useRef, useEffect } from 'react'
-import Header from '../components/HeaderRefactored'
-import Footer from '../components/Footer'
+import Header from '../_components/layout/Header'
+import Footer from '../_components/layout/Footer'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 
 export default function AISandboxPage() {
     const { messages, input = '', handleInputChange, handleSubmit, isLoading, error } = useChat({
@@ -84,7 +86,7 @@ export default function AISandboxPage() {
                                         </div>
 
                                         {/* Message Content */}
-                                        <div className="prose prose-sm max-w-none prose-p:leading-relaxed prose-pre:bg-slate-800 prose-pre:text-slate-100">
+                                        <div className={`prose prose-sm max-w-none prose-p:leading-relaxed prose-pre:bg-slate-800 prose-pre:text-slate-100 ${m.role === 'user' ? 'prose-invert' : ''}`}>
                                             {m.role !== 'user' && m.content === '' && isLoading ? (
                                                 <div className="flex items-center gap-1.5 h-6">
                                                     <div className="w-1.5 h-1.5 bg-slate-300 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
@@ -92,7 +94,9 @@ export default function AISandboxPage() {
                                                     <div className="w-1.5 h-1.5 bg-slate-300 rounded-full animate-bounce"></div>
                                                 </div>
                                             ) : (
-                                                <p className={m.role === 'user' ? 'text-white' : ''}>{m.content}</p>
+                                                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                                                    {m.content}
+                                                </ReactMarkdown>
                                             )}
                                         </div>
                                     </div>
