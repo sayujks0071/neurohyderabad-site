@@ -27,27 +27,31 @@ To change the instructions given to Jules:
 
 ## Pausing or Disabling Workflows
 
-To pause a specific automation:
+You can pause or disable the workflows in two ways:
 
-**Option 1: GitHub UI (Recommended)**
+**Option 1: Using the Environment Variable (Recommended)**
+1. Edit the workflow file in `.github/workflows/`.
+2. Change the `JULES_ENABLED` environment variable to `false`.
+   ```yaml
+   env:
+     JULES_ENABLED: false
+   ```
+3. Commit and push. The workflow will still trigger but will exit immediately without creating an issue.
+
+**Option 2: GitHub UI**
 1. Go to the **Actions** tab in the repository.
 2. Select the workflow from the left sidebar.
 3. Click the **...** (three dots) menu in the top right.
 4. Select **Disable workflow**.
 
-**Option 2: YAML Configuration**
-1. Edit the workflow file in `.github/workflows/`.
-2. Comment out the `schedule` block or add `if: false` to the job.
-
 ## How Jules Works
 
 1. **Trigger:** At the scheduled time, the workflow runs.
-2. **Duplicate Check:** It checks if an **open** issue already exists with the same title (which includes the current date, e.g., `[Jules] SEO Reprint Task - 2023-10-27`).
+2. **Enabled Check:** It checks if `JULES_ENABLED` is `true`.
+3. **Duplicate Check:** It checks if an **open** issue already exists with the same title (which includes the current date, e.g., `[Jules] SEO Reprint Task - 2023-10-27`).
    - If found, it skips creation to avoid spam.
-3. **Issue Creation:** If no duplicate exists, it creates a new issue.
-4. **Labeling:** It applies the label `jules`.
+4. **Issue Creation:** If no duplicate exists, it creates a new issue.
+5. **Labeling:** It applies the label `jules`.
    - Jules (the agent) monitors issues with this label to pick up tasks.
 
 <!-- Documentation v2.4 - Verified setup -->
-
-<!-- Verified on Thu Feb 12 23:08:29 UTC 2026 -->

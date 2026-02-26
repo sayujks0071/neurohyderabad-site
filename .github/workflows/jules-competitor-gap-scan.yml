@@ -6,6 +6,9 @@ on:
     - cron: "30 3 * * *"
   workflow_dispatch:
 
+env:
+  JULES_ENABLED: true
+
 permissions:
   issues: write
   contents: read
@@ -22,8 +25,14 @@ jobs:
         env:
           PROMPT_FILE: jules-prompts/competitor-gap-scan.md
           ISSUE_TITLE: "[Jules] Competitor Gap Scan"
+          JULES_ENABLED: ${{ env.JULES_ENABLED }}
         with:
           script: |
+            if (process.env.JULES_ENABLED !== 'true') {
+              console.log('Jules automation is disabled via JULES_ENABLED env var.');
+              return;
+            }
+
             const fs = require('fs');
             const promptFile = process.env.PROMPT_FILE;
             const baseTitle = process.env.ISSUE_TITLE;
@@ -92,5 +101,3 @@ jobs:
             });
 
             console.log(`Created issue: ${newIssue.html_url}`);
-
-# Verified by Jules

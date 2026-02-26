@@ -15,6 +15,3 @@ Analyze SEO performance for the last 7 days.
 
 <!-- Jules Automation -->
 <!-- Managed by Jules -->
-<!-- v2.4 -->
-
-<!-- Verified by Jules -->
