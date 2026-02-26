@@ -14,6 +14,7 @@ import { getServiceSources } from '../sources';
 import JsonLd from '@/components/JsonLd';
 import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
 import MedicalWebPageSchema from '@/app/components/schemas/MedicalWebPageSchema';
+import MedicalProcedureSchema from '@/app/components/schemas/MedicalProcedureSchema';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
@@ -227,6 +228,21 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
         description="Minimally Invasive Spine Surgery Hyderabad: Day Care procedure with same-day discharge. 1000+ successful endoscopic surgeries by Dr Sayuj. Book Consult."
         serviceOrCondition="Minimally Invasive Spine Surgery"
         lastReviewed="2025-10-19"
+      />
+      <MedicalProcedureSchema
+        name="Endoscopic Spine Surgery"
+        description="Minimally invasive spine surgery using an endoscope for herniated discs and spinal stenosis. Allows same-day discharge."
+        procedureType="Surgical"
+        bodyLocation="Spine"
+        howPerformed={[
+          { name: "Anesthesia", text: "Local anesthesia with sedation or general anesthesia." },
+          { name: "Incision", text: "Small 8mm keyhole incision." },
+          { name: "Access", text: "Endoscope inserted to target area." },
+          { name: "Decompression", text: "Removal of disc fragment or bone spur." },
+          { name: "Closure", text: "Incision closed with a single stitch or glue." }
+        ]}
+        recoveryTime="1-2 weeks"
+        followup="Post-operative checkup at 1 week and 6 weeks."
       />
       <BreadcrumbSchema
         items={[

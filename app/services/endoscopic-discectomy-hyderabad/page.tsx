@@ -10,6 +10,7 @@ import SourceList from '@/app/_components/SourceList';
 import { getServiceSources } from '../sources';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import MedicalWebPageSchema from '../../components/schemas/MedicalWebPageSchema';
+import MedicalProcedureSchema from '@/app/components/schemas/MedicalProcedureSchema';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
 
 const baseMetadata = makeMetadata({
@@ -81,6 +82,21 @@ export default function EndoscopicDiscectomyPage() {
         pageType="service"
         serviceOrCondition="Endoscopic Discectomy"
         breadcrumbs={breadcrumbs}
+      />
+      <MedicalProcedureSchema
+        name="Endoscopic Discectomy"
+        description="Minimally invasive removal of herniated disc material using an endoscope. Treats sciatica and slip disc with same-day discharge."
+        procedureType="Surgical"
+        bodyLocation="Lumbar Spine"
+        howPerformed={[
+          { name: "Preparation", text: "General anesthesia and positioning." },
+          { name: "Incision", text: "8mm incision in the lower back." },
+          { name: "Endoscopy", text: "Insertion of endoscope to visualize nerve." },
+          { name: "Discectomy", text: "Removal of the herniated disc fragment." },
+          { name: "Recovery", text: "Wake up and walk within 2-3 hours." }
+        ]}
+        recoveryTime="1-2 weeks"
+        followup="Checkup at 1 week."
       />
       <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/endoscopic-discectomy-hyderabad`} />
 
