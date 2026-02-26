@@ -25,6 +25,7 @@ async function main() {
     const text = data.text || '';
     const numpages = data.numpages || 0;
 
+    // Sanitize text (remove nulls/control chars)
     const sanitized = text.replace(/[\\x00-\\x08\\x0B-\\x1F\\x7F]/g, '');
 
     const truncated = sanitized.length > MAX_CHARS;

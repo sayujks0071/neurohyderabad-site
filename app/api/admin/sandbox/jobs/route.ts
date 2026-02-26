@@ -63,8 +63,11 @@ export async function POST(request: Request) {
         network: NETWORK_POLICIES.ADMIN_JOB,
         source: {
             type: 'git',
+            // Default to current repo if not overridden, and use the current commit or main branch
+            repoId: 'neurohyderabad-site', // Usually repoId or repoUrl is used depending on SDK version, assuming client wrapper handles `source` object correctly as passed to Vercel API.
+            // If using git url directly:
             url: 'https://github.com/sayujks0071/neurohyderabad-site',
-            revision: process.env.VERCEL_GIT_COMMIT_SHA || 'main',
+            ref: process.env.VERCEL_GIT_COMMIT_SHA || 'main',
         }
     });
 

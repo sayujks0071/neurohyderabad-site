@@ -2,13 +2,7 @@
 
 import React, { useState } from 'react';
 import Section from "../_components/Section";
-import Button from "../_components/Button";
 import Card from "../_components/Card";
-import { makeMetadata } from "@/app/_lib/meta";
-
-// Note: In a real app, you might want to move this metadata to a layout or use generateMetadata
-// but since this is a client component, we'll handle title via standard HTML in return or separate layout
-// For now, we focus on the functionality.
 
 export default function MriAnalysisPage() {
   const [file, setFile] = useState<File | null>(null);
