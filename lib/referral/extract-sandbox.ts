@@ -52,7 +52,7 @@ export async function extractReferralTextInSandbox(pdfBuffer: Buffer): Promise<R
   try {
     await sandbox.writeFiles([
       { path: 'input.pdf', content: pdfBuffer },
-      { path: 'extract.js', content: EXTRACT_SCRIPT },
+      { path: 'extract.js', content: Buffer.from(EXTRACT_SCRIPT) },
     ]);
 
     // Install pdf-parse and run the script

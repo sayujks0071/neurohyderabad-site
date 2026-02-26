@@ -1,5 +1,5 @@
 import { extractReferralTextInSandbox } from './extract-sandbox';
-import { getClient } from '../gemini';
+import { getClient, extractText } from '../gemini';
 
 export interface ReferralAnalysis {
   patientName: string | null;
@@ -20,12 +20,6 @@ export async function analyzeReferral(buffer: Buffer): Promise<ReferralAnalysis>
 
   // 2. Analyze with Gemini
   const client = getClient();
-  const model = client.getGenerativeModel({
-      model: "gemini-2.0-flash",
-      generationConfig: {
-          responseMimeType: "application/json"
-      }
-  });
 
   const prompt = `
     You are a medical assistant analyzing a referral letter.
@@ -44,10 +38,23 @@ export async function analyzeReferral(buffer: Buffer): Promise<ReferralAnalysis>
   `;
 
   try {
-    const result = await model.generateContent(prompt);
-    const responseText = result.response.text();
+    const result = await client.models.generateContent({
+      model: "gemini-2.0-flash",
+      contents: [{
+        role: "user",
+        parts: [{ text: prompt }]
+      }],
+      config: {
+        responseMimeType: "application/json"
+      }
+    });
 
-    const json = JSON.parse(responseText);
+    const responseText = extractText(result);
+
+    // Attempt to parse JSON from the text, handling potential markdown code blocks
+    const jsonMatch = responseText.match(/\{[\s\S]*\}/);
+    const jsonString = jsonMatch ? jsonMatch[0] : responseText;
+    const json = JSON.parse(jsonString);
     return {
         patientName: json.patientName || null,
         referringDoctor: json.referringDoctor || null,
