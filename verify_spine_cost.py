@@ -1,36 +1,50 @@
 from playwright.sync_api import sync_playwright
+import time
 
-def verify_spine_cost():
+def verify_spine_cost_page():
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
         page = browser.new_page()
-
         try:
-            # Navigate to the spine surgery page
-            page.goto("http://localhost:3000/spine-surgery")
+            # Increased timeout and waiting for network idle
+            page.goto("http://localhost:3000/services/spine-surgery-cost-hyderabad", timeout=60000, wait_until="networkidle")
 
-            # Wait for the Cost section to load
-            cost_heading = page.get_by_text("Estimated Cost of Treatment")
-            cost_heading.wait_for()
+            # Verify Insurance Grid
+            print("Verifying Insurance Grid...")
+            insurance_section = page.get_by_text("Accepted Partners Include")
+            insurance_section.scroll_into_view_if_needed()
+            page.screenshot(path="/home/jules/verification/insurance_grid.png")
 
-            # Scroll to the cost section
-            cost_heading.scroll_into_view_if_needed()
+            # Verify EMI Section
+            print("Verifying EMI Section...")
+            emi_section = page.get_by_text("Financial Aid & EMI Options")
+            emi_section.scroll_into_view_if_needed()
+            page.screenshot(path="/home/jules/verification/emi_section.png")
 
-            # Take a screenshot of the page, or specifically the cost section if possible
-            # I'll take a full page screenshot to see context, but also element screenshot
+            # Verify Hidden Costs FAQ - Using a more robust selector if exact text fails
+            print("Verifying FAQ...")
+            # The previous failure might be due to the text being inside an accordion that is not loaded/rendered yet
+            # or the text is slightly different. Let's try finding the FAQ section first.
+            faq_header = page.get_by_role("heading", name="Frequently Asked Questions")
+            faq_header.scroll_into_view_if_needed()
 
-            # Locate the section container (it has bg-white rounded-2xl border border-blue-100)
-            # It's hard to target by class, so I'll target the table or the heading's parent
-            # The structure is <section><div class="p-6 bg-blue-50 ..."><h2>...</h2></div><table>...</table></section>
+            # Try to find the specific question again
+            try:
+                faq_question = page.get_by_text("Are there any hidden costs in the package?")
+                faq_question.scroll_into_view_if_needed()
+                faq_question.click()
+                time.sleep(0.5) # Wait for animation
+                page.screenshot(path="/home/jules/verification/faq_hidden_costs.png")
+            except Exception as e:
+                print(f"Could not click specific FAQ, taking screenshot of FAQ section: {e}")
+                page.screenshot(path="/home/jules/verification/faq_section_fallback.png")
 
-            # Let's just screenshot the viewport after scrolling
-            page.screenshot(path="/home/jules/verification/spine-surgery-cost.png")
-            print("Screenshot saved to /home/jules/verification/spine-surgery-cost.png")
-
+            print("Verification successful")
         except Exception as e:
-            print(f"Error: {e}")
+            print(f"Verification failed: {e}")
+            page.screenshot(path="/home/jules/verification/error_state.png")
         finally:
             browser.close()
 
 if __name__ == "__main__":
-    verify_spine_cost()
+    verify_spine_cost_page()

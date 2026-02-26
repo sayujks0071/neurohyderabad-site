@@ -81,6 +81,14 @@ const faqSchema = {
         "@type": "Answer",
         "text": "Endoscopic surgery requires specialized disposable kits, high-definition cameras, and advanced burrs, which increases the consumable cost. However, the total cost often balances out due to shorter hospital stays (1 day vs 3-4 days) and faster return to work."
       }
+    },
+    {
+      "@type": "Question",
+      "name": "Are there any hidden costs in the package?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Our cost estimates are transparent. The package includes surgeon fees, OT charges, room rent, and standard consumables. Implants (screws/cages) are charged separately at MRP as per your choice (Indian vs Imported). Pre-op investigations (MRI/Blood tests) and post-discharge medicines are extra."
+      }
     }
   ]
 };
@@ -224,34 +232,74 @@ export default function SpineSurgeryCostPage() {
 
           <section className="mb-14">
             <h2 className="text-3xl font-bold text-gray-900 mb-6">Insurance & Cashless Facility</h2>
-            <div className="grid md:grid-cols-2 gap-10 items-center">
+            <div className="grid md:grid-cols-2 gap-10 items-start">
               <div>
                 <p className="text-gray-700 mb-6 text-lg">
                   We accept <strong>Cashless Insurance</strong> from all major TPA and Insurance providers at Yashoda Hospital. Our dedicated desk handles pre-authorization so you can focus on recovery.
                 </p>
                 <h3 className="font-bold text-gray-900 mb-4">Accepted Partners Include:</h3>
-                <div className="flex flex-wrap gap-3">
-                   {['Star Health', 'HDFC Ergo', 'Niva Bupa (Max Bupa)', 'SBI General', 'ICICI Lombard', 'Care Insurance', 'United India', 'New India Assurance'].map(insurer => (
-                     <span key={insurer} className="bg-green-50 text-green-800 px-3 py-1 rounded-md text-sm font-medium border border-green-100">
-                       {insurer}
-                     </span>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                   {['Star Health', 'HDFC Ergo', 'Niva Bupa', 'SBI General', 'ICICI Lombard', 'Care Health', 'United India', 'New India', 'Bajaj Allianz', 'MediAssist', 'Vidal Health', 'FHPL'].map(insurer => (
+                     <div key={insurer} className="flex items-center justify-center bg-white border border-gray-200 rounded-lg p-3 text-center shadow-sm hover:border-blue-300 transition-colors">
+                       <span className="text-sm font-medium text-gray-800">{insurer}</span>
+                     </div>
                    ))}
-                   <span className="text-gray-500 text-sm flex items-center">& many more...</span>
                 </div>
+                <p className="text-sm text-gray-500 mt-4 italic">*And all other IRDAI approved insurers.</p>
               </div>
-              <div className="bg-blue-600 text-white p-8 rounded-2xl shadow-lg">
+              <div className="bg-blue-600 text-white p-8 rounded-2xl shadow-lg sticky top-24">
                 <h3 className="text-xl font-bold mb-4">Insurance Checklist</h3>
-                <ul className="space-y-3">
-                   <li className="flex items-start"><span className="mr-3">📄</span> Bring your Insurance Card / Policy Copy</li>
-                   <li className="flex items-start"><span className="mr-3">🆔</span> Govt ID Proof (Aadhar/PAN) of Patient</li>
-                   <li className="flex items-start"><span className="mr-3">🕒</span> Past 2 years treatment records (if any)</li>
-                   <li className="flex items-start"><span className="mr-3">👨‍⚕️</span> Previous MRI/X-Ray Reports</li>
+                <ul className="space-y-4">
+                   <li className="flex items-start">
+                     <span className="bg-blue-500 p-1 rounded mr-3">📄</span>
+                     <span className="text-sm"><strong>Policy Copy:</strong> Bring your physical or digital insurance card.</span>
+                   </li>
+                   <li className="flex items-start">
+                     <span className="bg-blue-500 p-1 rounded mr-3">🆔</span>
+                     <span className="text-sm"><strong>KYC:</strong> Aadhar Card & PAN Card of the patient.</span>
+                   </li>
+                   <li className="flex items-start">
+                     <span className="bg-blue-500 p-1 rounded mr-3">🕒</span>
+                     <span className="text-sm"><strong>History:</strong> Past 2 years treatment records (if any).</span>
+                   </li>
+                   <li className="flex items-start">
+                     <span className="bg-blue-500 p-1 rounded mr-3">👨‍⚕️</span>
+                     <span className="text-sm"><strong>Reports:</strong> Previous MRI/X-Ray films or CDs.</span>
+                   </li>
                 </ul>
-                <div className="mt-6 pt-6 border-t border-blue-500">
-                   <p className="text-sm opacity-90">Need help checking eligibility?</p>
-                   <a href="https://wa.me/919778280044?text=Hi%20Dr%20Sayuj,%20I%20want%20to%20check%20my%20insurance%20eligibility" className="mt-2 inline-block font-bold hover:underline">Chat with Insurance Desk →</a>
+                <div className="mt-8 pt-6 border-t border-blue-500">
+                   <p className="text-sm opacity-90 mb-3">Not sure if your policy covers surgery?</p>
+                   <a
+                     href="https://wa.me/919778280044?text=Hi%20Dr%20Sayuj,%20I%20want%20to%20check%20my%20insurance%20eligibility%20for%20spine%20surgery"
+                     className="block w-full text-center bg-white text-blue-700 font-bold py-3 rounded-lg hover:bg-blue-50 transition-colors shadow-md"
+                   >
+                     Check Eligibility on WhatsApp
+                   </a>
                 </div>
               </div>
+            </div>
+          </section>
+
+          <section className="mb-14 bg-green-50 border border-green-100 rounded-2xl p-8">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+               <div>
+                 <h2 className="text-2xl font-bold text-green-900 mb-3">Financial Aid & EMI Options</h2>
+                 <p className="text-gray-700 mb-4">
+                   We understand that medical expenses can be unplanned. To make world-class spine care accessible, we support flexible payment options.
+                 </p>
+                 <ul className="space-y-2 text-sm text-green-800 font-medium">
+                    <li className="flex items-center">✓ 0% Interest EMI Options (Bajaj Finserv / Credit Cards)</li>
+                    <li className="flex items-center">✓ Medical Loan Assistance</li>
+                    <li className="flex items-center">✓ Split Payment (Insurance + Self Pay)</li>
+                 </ul>
+               </div>
+               <div className="flex-shrink-0">
+                  <div className="bg-white p-4 rounded-xl border border-green-200 shadow-sm text-center">
+                     <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">EMI Starting From</p>
+                     <p className="text-2xl font-bold text-green-700">₹8,500<span className="text-sm text-gray-400 font-normal">/mo</span></p>
+                     <p className="text-xs text-gray-400 mt-1">*Subject to approval</p>
+                  </div>
+               </div>
             </div>
           </section>
 
