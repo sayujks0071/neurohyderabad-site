@@ -21,12 +21,10 @@ import Button from "./_components/Button";
 import Card from "./_components/Card";
 import LazySection from "./_components/LazySection";
 import Section from "./_components/Section";
-import LazySection from "./_components/LazySection";
 import FAQPageSchema from "./_components/FAQPageSchema";
 import HeroCTAButtons from "./_components/HeroCTAButtons";
 import PatientEducationVideosSkeleton from "./_components/skeletons/PatientEducationVideosSkeleton";
 import TrustSignals from "./_components/TrustSignals";
-import LazySection from "./_components/LazySection";
 import { LocationNAPCard } from "@/src/components/locations/LocationNAPCard";
 import { CANONICAL_TELEPHONE, CANONICAL_WHATSAPP } from "@/src/data/locations";
 
