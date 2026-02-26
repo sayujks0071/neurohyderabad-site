@@ -135,11 +135,20 @@ export default function Hero() {
             });
         }
 
-        // Start Loading
-        scrubEngine.preload();
+        // Start Loading (Deferred to prioritize LCP content paint)
+        // Wait for main thread to be idle or use a short timeout
+        const loadTimeout = setTimeout(() => {
+            if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+                (window as any).requestIdleCallback(() => scrubEngine.preload());
+            } else {
+                // Fallback for Safari/others
+                scrubEngine.preload();
+            }
+        }, 200);
 
         // Cleanup
         return () => {
+            clearTimeout(loadTimeout);
             window.removeEventListener('resize', handleResize);
             cancelAnimationFrame(animationFrameId);
 
@@ -160,12 +169,14 @@ export default function Hero() {
 
     return (
         <section ref={containerRef} className="relative w-full h-screen overflow-hidden bg-black text-white">
-            {/* Loading Indicator */}
+            {/* Loading Indicator (Non-blocking for LCP) */}
             {isLoading && (
-                <div className="absolute inset-0 flex items-center justify-center z-50 bg-black">
-                    <div className="text-center">
-                        <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mb-4 mx-auto"></div>
-                        <p className="text-lg text-blue-400 font-medium">Loading Experience... {Math.round(progress * 100)}%</p>
+                <div className="absolute top-20 right-4 z-50 pointer-events-none animate-in fade-in duration-500">
+                    <div className="flex items-center gap-3 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 shadow-lg">
+                        <div className="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                        <p className="text-xs text-blue-200 font-medium whitespace-nowrap">
+                            Loading 3D Experience... {Math.round(progress * 100)}%
+                        </p>
                     </div>
                 </div>
             )}

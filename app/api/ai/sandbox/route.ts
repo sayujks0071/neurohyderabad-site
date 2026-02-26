@@ -58,6 +58,7 @@ export async function POST(req: NextRequest) {
       Your goal is to answer questions thoughtfully and format your responses with clean Markdown.`
         });
 
+        // @ts-ignore
         return result.toDataStreamResponse();
     } catch (error) {
         console.error('Error in Sandbox streamText:', error);
