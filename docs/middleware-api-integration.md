@@ -416,6 +416,7 @@ Authorization: Bearer <access_token>
 - `GET /builder/resources` - Get resources
 
 #### Alerts
+- `GET /rules` - Get all rules
 - `GET /rules/{rule_id}/alerts` - Get alerts by rule
 - `POST /rules/{rule_id}/alerts` - Create alert
 - `GET /rules/{rule_id}/alerts/stats` - Get alert stats
