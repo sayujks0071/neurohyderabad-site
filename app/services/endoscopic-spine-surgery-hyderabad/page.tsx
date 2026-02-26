@@ -270,6 +270,45 @@ const conditions = [
   { text: 'Failed conservative treatment (6+ weeks)' },
 ];
 
+const CONDITIONS_TREATED = [
+  {
+    title: "Sciatica (Leg Pain)",
+    description: "Shooting pain radiating down the leg caused by nerve compression.",
+    icon: "⚡",
+    link: "/conditions/sciatica-pain-treatment-hyderabad"
+  },
+  {
+    title: "Lumbar Disc Herniation",
+    description: "Slipped or bulging disc pressing on spinal nerves.",
+    icon: "🦴",
+    link: "/conditions/slip-disc-treatment-hyderabad"
+  },
+  {
+    title: "Spinal Stenosis",
+    description: "Narrowing of the spinal canal restricting nerve space.",
+    icon: "🔽",
+    link: "/conditions/spinal-stenosis-treatment-hyderabad"
+  },
+  {
+    title: "Cervical Radiculopathy",
+    description: "Pinched nerve in the neck causing arm pain or numbness.",
+    icon: "🤕",
+    link: "/conditions/cervical-radiculopathy-treatment-hyderabad"
+  },
+  {
+    title: "Degenerative Disc Disease",
+    description: "Age-related wear and tear causing chronic back pain.",
+    icon: "📉",
+    link: "/conditions/degenerative-disc-disease-treatment-hyderabad"
+  },
+  {
+    title: "Spondylolisthesis (Grade 1)",
+    description: "Vertebra slipping forward over the one below it.",
+    icon: "🪜",
+    link: "/conditions/spondylolisthesis-treatment-hyderabad"
+  }
+];
+
 const ADVANCED_TECHNIQUES = [
   {
     title: "Transforaminal Endoscopy (TESS)",
@@ -415,6 +454,27 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
               </li>
             ))}
           </ul>
+        </section>
+
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-blue-900 mb-8">Conditions Treated with Endoscopic Spine Surgery</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {CONDITIONS_TREATED.map((item) => (
+              <div key={item.title} className="bg-white p-6 rounded-xl border border-blue-100 shadow-sm hover:shadow-md transition-shadow group">
+                <div className="text-3xl mb-3 group-hover:scale-110 transition-transform duration-300">{item.icon}</div>
+                <h3 className="text-lg font-bold text-blue-900 mb-2">
+                  <Link href={item.link} className="hover:text-blue-700">
+                    {item.title}
+                  </Link>
+                </h3>
+                <p className="text-sm text-gray-600 mb-4">{item.description}</p>
+                <Link href={item.link} className="text-blue-600 text-sm font-semibold hover:underline inline-flex items-center">
+                  Learn More
+                  <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                </Link>
+              </div>
+            ))}
+          </div>
         </section>
 
         <section className="mb-16">
