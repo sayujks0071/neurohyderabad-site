@@ -27,17 +27,20 @@ To change the instructions given to Jules:
 
 ## Pausing or Disabling Workflows
 
-To pause a specific automation:
+You can control the Jules automations globally or individually.
 
-**Option 1: GitHub UI (Recommended)**
+**Global Switch (Recommended)**
+The repository uses a configuration variable `JULES_ENABLED` to control all scheduled tasks.
+- To **disable** all Jules automations: Set `JULES_ENABLED` to `false` in **Settings > Secrets and variables > Actions > Variables**.
+- To **enable**: Set it to `true` (or delete the variable, as it defaults to true).
+
+**Individual Workflow Control**
+To pause a specific automation without affecting others:
+
 1. Go to the **Actions** tab in the repository.
 2. Select the workflow from the left sidebar.
 3. Click the **...** (three dots) menu in the top right.
 4. Select **Disable workflow**.
-
-**Option 2: YAML Configuration**
-1. Edit the workflow file in `.github/workflows/`.
-2. Comment out the `schedule` block or add `if: false` to the job.
 
 ## How Jules Works
 
