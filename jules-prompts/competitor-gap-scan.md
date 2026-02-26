@@ -12,5 +12,3 @@
 <!-- Jules Automation -->
 <!-- Managed by Jules -->
 <!-- v2.4 -->
-
-<!-- Verified by Jules -->

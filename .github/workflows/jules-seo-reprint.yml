@@ -92,5 +92,3 @@ jobs:
             });
 
             console.log(`Created issue: ${newIssue.html_url}`);
-
-# Verified by Jules
