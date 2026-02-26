@@ -26,9 +26,16 @@ export async function GET(request: Request) {
     let stdout = '';
     let stderr = '';
 
+    // Check if output is a function (streaming) or property
     if (typeof cmd.output === 'function') {
-        stdout = await cmd.output("stdout");
-        stderr = await cmd.output("stderr");
+        // Fetch stdout and stderr separately if possible, or just combined if SDK differs.
+        // The Vercel Sandbox SDK usually provides promises for stdout/stderr
+        try {
+            stdout = await cmd.output("stdout");
+        } catch (e) { stdout = ''; }
+        try {
+            stderr = await cmd.output("stderr");
+        } catch (e) { stderr = ''; }
     } else {
          stdout = String(cmd.stdout || '');
          stderr = String(cmd.stderr || '');

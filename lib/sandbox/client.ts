@@ -22,6 +22,7 @@ export async function createSandbox(options: CreateSandboxOptions = {}) {
       } : undefined,
       source: options.source,
       vcpus: options.vcpus,
+      env: options.env,
     } as any);
 
     return sandbox;
@@ -60,6 +61,13 @@ export interface RunCommandOptions {
   detached?: boolean;
 }
 
+export interface SandboxCommandResult {
+  stdout: string;
+  stderr: string;
+  exitCode: number;
+  cmdId: string;
+}
+
 export async function runSandboxCommand({
   sandbox,
   cmd,
@@ -69,7 +77,7 @@ export async function runSandboxCommand({
   maxOutputBytes = 256 * 1024,
   timeoutMs,
   detached = false,
-}: RunCommandOptions) {
+}: RunCommandOptions): Promise<SandboxCommandResult | any> {
   try {
     const command = await sandbox.runCommand({
       cmd,
@@ -111,7 +119,7 @@ export async function runSandboxCommand({
       stdout: stdoutStr.slice(0, maxOutputBytes),
       stderr: stderrStr.slice(0, maxOutputBytes),
       exitCode: command.exitCode,
-      cmdId: command.cmdId,
+      cmdId: command.cmdId || command.id,
     };
   } catch (err: any) {
     if (err instanceof SandboxTimeoutError) {
