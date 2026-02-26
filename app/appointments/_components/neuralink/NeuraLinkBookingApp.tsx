@@ -51,14 +51,6 @@ const NeuraLinkBookingApp = ({ heroContent, locationInfo, faqSection }: NeuraLin
   const [shouldLoadChatBot, setShouldLoadChatBot] = useState(false);
   const formRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    // Load ChatBot after 4 seconds (idle time)
-    const timer = setTimeout(() => {
-      setShouldLoadChatBot(true);
-    }, 4000);
-    return () => clearTimeout(timer);
-  }, []);
-
   const scrollToForm = () => {
     formRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -112,7 +104,7 @@ const NeuraLinkBookingApp = ({ heroContent, locationInfo, faqSection }: NeuraLin
 
       {/* CWV Optimization: Show placeholder initially, then lazy load the real ChatBot */}
       {shouldLoadChatBot ? (
-        <ChatBot />
+        <ChatBot initialOpen={true} />
       ) : (
         <div className="fixed bottom-6 left-6 z-[90]">
           <button
