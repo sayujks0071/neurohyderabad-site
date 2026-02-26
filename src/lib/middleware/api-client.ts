@@ -203,6 +203,13 @@ class MiddlewareApiClient {
   // ===== ALERTS =====
 
   /**
+   * Get all alert rules
+   */
+  async getRules(): Promise<any[]> {
+    return this.request('/rules');
+  }
+
+  /**
    * Get alerts by rule ID
    */
   async getAlertsByRule(ruleId: string): Promise<any[]> {

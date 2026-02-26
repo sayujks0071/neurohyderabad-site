@@ -166,12 +166,31 @@ async function setupAlerts() {
 
   try {
     // Note: You'll need to create a rule first or use an existing rule ID
-    const ruleId = process.argv[2] || 'default-rule-id';
+    let ruleId = process.argv[2];
 
-    if (ruleId === 'default-rule-id') {
-      console.log('⚠️  Note: You need to provide a rule ID');
-      console.log('   Usage: pnpm tsx scripts/setup-middleware-alerts.ts <rule-id>');
-      console.log('   Or create a rule in the dashboard first\n');
+    if (!ruleId) {
+      console.log('🔍 No rule ID provided, fetching existing rules...');
+      try {
+        const rules = await middlewareApi.getRules();
+        if (rules && rules.length > 0) {
+          // Use the first available rule
+          const rule = rules[0];
+          ruleId = rule.id || rule.rule_id || rule._id;
+          console.log(`✅ Found rule: ${rule.name || 'Unnamed Rule'} (${ruleId})`);
+        } else {
+          console.log('⚠️  No rules found in Middleware account.');
+          console.log('   Please create a rule in the dashboard first.');
+          return;
+        }
+      } catch (e: any) {
+        console.log('⚠️  Failed to fetch rules automatically:', e.message);
+        console.log('   Usage: pnpm tsx scripts/setup-middleware-alerts.ts <rule-id>');
+        return;
+      }
+    }
+
+    if (!ruleId) {
+      console.log('❌ Could not determine rule ID.');
       return;
     }
 
