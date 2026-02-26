@@ -39,6 +39,13 @@ To pause a specific automation:
 1. Edit the workflow file in `.github/workflows/`.
 2. Comment out the `schedule` block or add `if: false` to the job.
 
+**Option 3: Global Variable**
+You can control all Jules scheduled automations using the repository variable `JULES_ENABLED`.
+1. Go to **Settings** > **Secrets and variables** > **Actions** > **Variables**.
+2. Create a variable named `JULES_ENABLED`.
+3. Set value to `false` to disable all scheduled issue creation.
+4. Set value to `true` (or delete the variable) to enable them.
+
 ## How Jules Works
 
 1. **Trigger:** At the scheduled time, the workflow runs.

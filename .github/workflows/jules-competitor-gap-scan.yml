@@ -12,6 +12,7 @@ permissions:
 
 jobs:
   create-jules-issue:
+    if: ${{ vars.JULES_ENABLED != 'false' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
