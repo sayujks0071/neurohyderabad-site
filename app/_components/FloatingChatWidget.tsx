@@ -233,14 +233,14 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setIsMinimized(true)}
-                className="p-1 hover:bg-white/20 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-white/50"
+                className="p-1 hover:bg-white/20 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-white"
                 aria-label="Minimize chat"
               >
                 <Minus size={18} />
               </button>
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1 hover:bg-white/20 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-white/50"
+                className="p-1 hover:bg-white/20 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-white"
                 aria-label="Close chat"
               >
                 <X size={18} />
@@ -250,7 +250,7 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
 
           {/* Emergency Alert */}
           {showEmergencyAlert && (
-            <div className="bg-red-50 p-3 border-b border-red-100 flex items-start gap-2 shrink-0">
+            <div role="alert" className="bg-red-50 p-3 border-b border-red-100 flex items-start gap-2 shrink-0">
               <AlertTriangle className="text-red-600 shrink-0 mt-0.5" size={16} />
               <p className="text-xs text-red-700 font-medium">
                 Emergency? Call <a href="tel:+919778280044" className="underline font-bold focus:outline-none focus:ring-2 focus:ring-red-500 rounded px-1">+91-9778280044</a>

@@ -19,6 +19,7 @@ import TrustBridgeLink from "./_components/TrustBridgeLink";
 import { mediaPublications } from "../src/content/media";
 import Button from "./_components/Button";
 import Card from "./_components/Card";
+import LazySection from "./_components/LazySection";
 import Section from "./_components/Section";
 import FAQPageSchema from "./_components/FAQPageSchema";
 import HeroCTAButtons from "./_components/HeroCTAButtons";
