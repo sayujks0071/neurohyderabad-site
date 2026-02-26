@@ -91,7 +91,7 @@ export async function POST(request: NextRequest) {
     // 3. Generate JWT token for your application
     // 4. Set secure HTTP-only cookies
 
-    return NextResponse.json({
+    const response = NextResponse.json({
       success: true,
       user: {
         id: userInfo.id,
@@ -100,12 +100,29 @@ export async function POST(request: NextRequest) {
         picture: userInfo.picture,
         verified_email: userInfo.verified_email,
       },
-      tokens: {
-        access_token: tokens.access_token,
-        refresh_token: tokens.refresh_token,
-        expires_in: tokens.expires_in,
-      },
+      // 🛡️ Sentinel: Removed tokens from JSON body to prevent XSS exposure
     });
+
+    // 🛡️ Sentinel: Set tokens as HTTP-only cookies
+    response.cookies.set('access_token', tokens.access_token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: tokens.expires_in,
+      path: '/',
+    });
+
+    if (tokens.refresh_token) {
+      response.cookies.set('refresh_token', tokens.refresh_token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        maxAge: 30 * 24 * 60 * 60, // 30 days
+        path: '/',
+      });
+    }
+
+    return response;
 
   } catch (error) {
     console.error('Google OAuth error:', error);
