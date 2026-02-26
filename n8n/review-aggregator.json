@@ -1,0 +1,174 @@
+{
+  "name": "Review Aggregator & Sentiment Analysis",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "days",
+              "seconds": 0,
+              "minutes": 0,
+              "hours": 9
+            }
+          ]
+        }
+      },
+      "name": "Daily Schedule",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://maps.googleapis.com/maps/api/place/details/json?place_id=YOUR_PLACE_ID&fields=reviews&key=YOUR_API_KEY",
+        "method": "GET"
+      },
+      "name": "Get Google Reviews",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "reviews",
+        "options": {}
+      },
+      "name": "Split Reviews",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 1,
+      "position": [
+        650,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "prompt": "Analyze the sentiment of the following review: \"{{$node[\"Split Reviews\"].json[\"text\"]}}\".\nOutput JSON:\n{\n  \"sentiment\": \"positive|neutral|negative\",\n  \"score\": 1-10\n}",
+        "maxTokens": 100,
+        "temperature": 0.3
+      },
+      "name": "Analyze Sentiment",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        850,
+        300
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "YOUR_OPENAI_CREDENTIAL_ID",
+          "name": "OpenAI Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{JSON.parse($node[\"Analyze Sentiment\"].json[\"choices\"][0][\"message\"][\"content\"]).score}}",
+              "operation": "largerEqual",
+              "value2": 8
+            }
+          ]
+        }
+      },
+      "name": "Filter High Ratings",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        1050,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "reviews@drsayuj.info",
+        "toEmail": "admin@drsayuj.info",
+        "subject": "New 5-Star Review!",
+        "text": "Reviewer: {{$node[\"Split Reviews\"].json[\"author_name\"]}}\nReview: {{$node[\"Split Reviews\"].json[\"text\"]}}\nSentiment Score: {{JSON.parse($node[\"Analyze Sentiment\"].json[\"choices\"][0][\"message\"][\"content\"]).score}}",
+        "html": "<h2>New Positive Review!</h2><p><b>Reviewer:</b> {{$node[\"Split Reviews\"].json[\"author_name\"]}}</p><p><b>Review:</b> {{$node[\"Split Reviews\"].json[\"text\"]}}</p><p><b>Sentiment Score:</b> {{JSON.parse($node[\"Analyze Sentiment\"].json[\"choices\"][0][\"message\"][\"content\"]).score}}</p>"
+      },
+      "name": "Email Doctor",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [
+        1250,
+        200
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "YOUR_SMTP_CREDENTIAL_ID",
+          "name": "SMTP Account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Daily Schedule": {
+      "main": [
+        [
+          {
+            "node": "Get Google Reviews",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Google Reviews": {
+      "main": [
+        [
+          {
+            "node": "Split Reviews",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Reviews": {
+      "main": [
+        [
+          {
+            "node": "Analyze Sentiment",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze Sentiment": {
+      "main": [
+        [
+          {
+            "node": "Filter High Ratings",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter High Ratings": {
+      "main": [
+        [
+          {
+            "node": "Email Doctor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {},
+  "staticData": null,
+  "tags": []
+}

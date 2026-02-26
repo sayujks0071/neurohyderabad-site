@@ -1,0 +1,132 @@
+{
+  "name": "Competitor & Rank Monitor",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "seconds": 0,
+              "minutes": 0,
+              "hours": 8
+            }
+          ]
+        }
+      },
+      "name": "Weekly Schedule",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://google.serper.dev/search",
+        "method": "POST",
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "X-API-KEY",
+              "value": "YOUR_SERPER_API_KEY"
+            }
+          ]
+        },
+        "bodyParametersUi": {
+          "parameter": [
+            {
+              "name": "q",
+              "value": "neurosurgeon hyderabad"
+            },
+            {
+              "name": "gl",
+              "value": "in"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Search Competitors",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "const results = items[0].json.organic;\nconst top5 = results.slice(0, 5).map(r => `<li><a href=\"${r.link}\">${r.title}</a> (${r.snippet})</li>`).join('');\nreturn [{ json: { html: `<h3>Top 5 Competitors for 'Neurosurgeon Hyderabad'</h3><ul>${top5}</ul>` } }];"
+      },
+      "name": "Format Report",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        650,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "seo@drsayuj.info",
+        "toEmail": "admin@drsayuj.info",
+        "subject": "Weekly Competitor Analysis",
+        "text": "Check the HTML content.",
+        "html": "={{$node[\"Format Report\"].json[\"html\"]}}"
+      },
+      "name": "Email Report",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [
+        850,
+        300
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "YOUR_SMTP_CREDENTIAL_ID",
+          "name": "SMTP Account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Weekly Schedule": {
+      "main": [
+        [
+          {
+            "node": "Search Competitors",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search Competitors": {
+      "main": [
+        [
+          {
+            "node": "Format Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Report": {
+      "main": [
+        [
+          {
+            "node": "Email Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {},
+  "staticData": null,
+  "tags": []
+}
