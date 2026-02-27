@@ -317,26 +317,32 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
 
           {/* Video & Semantic Transcript Section - SEO Priority */}
           <section className="mb-12">
-            <h2 className="text-3xl font-bold text-blue-800 mb-6">Watch: Endoscopic Management of Sciatica</h2>
+            <h2 className="text-3xl font-bold text-blue-800 mb-6">Watch: Endoscopic Discectomy for L5-S1 Herniation</h2>
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
               <div className="aspect-video w-full bg-gray-100 relative">
                 <iframe
                   className="absolute top-0 left-0 w-full h-full"
-                  src="https://www.youtube.com/embed/placeholder"
-                  title="Endoscopic Spine Surgery vs Traditional Open Surgery"
+                  src="https://www.youtube.com/embed/HPhPB5jY0xk"
+                  title="Surgery for Paracentral Disc Herniation | L5-S1 Endoscopic Discectomy | Yashoda Hospitals Hyderabad"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 ></iframe>
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-semibold text-blue-700 mb-3">Video Transcript: Sciatica & Endoscopic Discectomy</h3>
+                <h3 className="text-xl font-semibold text-blue-700 mb-3">Video Transcript: L5-S1 Endoscopic Discectomy</h3>
                 <div className="h-64 overflow-y-auto text-sm text-gray-700 space-y-4 pr-4 custom-scrollbar">
-                  <p><strong>[00:00] Dr. Sayuj Krishnan:</strong> Welcome. Today we're going to discuss the paradigm shift in how we treat severe sciatica originating from a herniated lumbar disc, specifically L4-L5 and L5-S1 disc herniations.</p>
-                  <p><strong>[00:15]</strong> Many patients suffer for months with sharp, radiating leg pain, numbness, and claudication—the inability to walk long distances. Traditionally, the solution was an open laminectomy or open discectomy, which involved significant muscle stripping to access the spine.</p>
-                  <p><strong>[00:40]</strong> With Full Endoscopic Spine Surgery, we use a completely different approach. Through a tiny 6-8mm incision, smaller than a coin, we insert a specialized endoscope directly to the site of the nerve compression. This transforaminal or interlaminar approach allows us to safely remove the offending disc fragment without destroying the stability of the spine.</p>
-                  <p><strong>[01:10]</strong> Crucially, since there's negligible muscle damage, our patients are walking within two hours of surgery. This 'Day Zero' mobilization means patients can safely go home the very same day or the next morning. It's a true day-care procedure that minimizes hospital-acquired infections and dramatically accelerates recovery timelines.</p>
+                  <p><strong>[00:00]</strong> L5-S1 paracentral disc herniation is a common condition where the nucleus pulposus pushes out, compressing nerve roots and causing lower back pain, sciatica, and weakness.</p>
+                  <p><strong>[00:30]</strong> When conservative treatments like physical therapy and injections fail, <strong>L5-S1 endoscopic discectomy</strong> offers a minimally invasive solution. This procedure involves a small incision, reduced blood loss, and lower infection risk compared to traditional surgery.</p>
+                  <p><strong>[01:00]</strong> Mr. Bandar Ramesh Babu from Saroornagar successfully underwent this procedure at Yashoda Hospitals, Hyderabad, under Dr. Sayuj Krishnan. The endoscopic approach allows for precise removal of the disc fragment while preserving spinal stability.</p>
+                  <p><strong>[01:20] Key Benefits:</strong></p>
+                  <ul className="list-disc pl-5 space-y-1">
+                    <li>Tiny incision (less than 1 cm)</li>
+                    <li>Minimal muscle damage</li>
+                    <li>Faster recovery and shorter hospital stay</li>
+                    <li>Significant pain relief and improved mobility</li>
+                  </ul>
+                  <p><strong>[01:45]</strong> If you are suffering from persistent sciatica or back pain, consult Dr. Sayuj Krishnan to see if you are a candidate for endoscopic spine surgery.</p>
                 </div>
-                <p className="mt-4 text-xs text-gray-500 italic">*Placeholder video & transcript. Replace with actual Yashoda/Socialpost Health Dr. Sayuj YouTube asset.*</p>
               </div>
             </div>
           </section>
