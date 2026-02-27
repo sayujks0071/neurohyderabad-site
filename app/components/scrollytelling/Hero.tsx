@@ -69,7 +69,13 @@ export default function Hero() {
             onLoadComplete: () => {
                 setIsLoading(false);
                 initScroll();
-            }
+
+                // Defer loading of remaining frames to prioritize LCP
+                setTimeout(() => {
+                    scrubEngine.loadRemainingFrames();
+                }, 2000);
+            },
+            defer: true // Prioritize LCP by loading only the first frame initially
         });
 
         // Resize Handler
@@ -133,6 +139,14 @@ export default function Hero() {
                     uniforms.progress.value = proxy.progress;
                 }
             });
+
+            // Initial render of first frame
+            const initialFrame = scrubEngine.getFrame(0);
+            if (initialFrame) {
+                const texture = new THREE.CanvasTexture(initialFrame);
+                uniforms.map.value = texture;
+                uniforms.map.value.needsUpdate = true;
+            }
         }
 
         // Start Loading
