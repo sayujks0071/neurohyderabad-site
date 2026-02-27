@@ -14,6 +14,11 @@ export async function secureCompare(a: string, b: string): Promise<boolean> {
     return false;
   }
 
+  // 🛡️ Sentinel: Prevent DoS via large payload hashing
+  if (a.length > 4096 || b.length > 4096) {
+    return false;
+  }
+
   const encoder = new TextEncoder();
   const aBuf = await crypto.subtle.digest('SHA-256', encoder.encode(a));
   const bBuf = await crypto.subtle.digest('SHA-256', encoder.encode(b));

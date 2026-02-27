@@ -125,4 +125,10 @@ describe('secureCompare', () => {
     // @ts-ignore
     expect(await secureCompare('secret', undefined)).toBe(false);
   });
+
+  it('should reject extremely large payloads (DoS prevention)', async () => {
+    const largePayload = 'a'.repeat(1024 * 1024); // 1MB
+    const secret = 'secret123';
+    expect(await secureCompare(largePayload, secret)).toBe(false);
+  });
 });
