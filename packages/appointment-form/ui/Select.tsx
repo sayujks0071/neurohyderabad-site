@@ -40,6 +40,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select(
         } ${className}`}
         aria-invalid={error ? "true" : "false"}
         aria-describedby={errorId}
+        aria-required={required}
         {...props}
       >
         {children}
