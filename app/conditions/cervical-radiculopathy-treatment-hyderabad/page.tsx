@@ -9,150 +9,14 @@ import ReviewedBy from '@/app/_components/ReviewedBy';
 import { SITE_URL } from "@/src/lib/seo";
 import { sources } from '../../blog/sources';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
+import MedicalWebPageSchema from "@/app/components/schemas/MedicalWebPageSchema";
+import FAQPageSchema from "@/app/_components/FAQPageSchema";
 
 // Static generation with 24-hour revalidation
 export const revalidate = 86400;
 export const dynamic = 'error';
 
 const CANONICAL = `${SITE_URL}/conditions/cervical-radiculopathy-treatment-hyderabad`;
-
-const schemaData = [
-  {
-    "@context": "https://schema.org",
-    "@type": "MedicalWebPage",
-    name: "Cervical Radiculopathy Treatment in Hyderabad",
-    description:
-      "Expert treatment for cervical radiculopathy (pinched nerve) in Hyderabad. Endoscopic keyhole surgery for arm pain, numbness, and neck pain by Dr. Sayuj Krishnan.",
-    url: CANONICAL,
-    inLanguage: "en-IN",
-    isPartOf: {
-      "@type": "WebSite",
-      name: "Dr. Sayuj Krishnan — Brain & Spine Clinic",
-      url: SITE_URL,
-    },
-    about: {
-      "@type": "MedicalCondition",
-      name: "Cervical Radiculopathy",
-      alternateName: ["Pinched Nerve in Neck", "Cervical Nerve Root Compression"],
-      medicalSpecialty: "Neurosurgery",
-      signOrSymptom: [
-        "Shooting pain down the arm",
-        "Numbness or tingling in fingers",
-        "Weakness in arm or hand muscles",
-        "Neck pain radiating to the shoulder blade",
-        "Relief when lifting the arm over the head",
-      ],
-      possibleTreatment: [
-        "Posterior Cervical Foraminotomy (Keyhole)",
-        "Anterior Cervical Discectomy and Fusion (ACDF)",
-        "Artificial Disc Replacement",
-        "Physiotherapy and Nerve Blocks",
-      ],
-    },
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: "Does a pinched nerve in the neck require surgery?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Not always. 90% of cervical radiculopathy cases improve with medication and physiotherapy within 6-8 weeks. Surgery is recommended if there is severe weakness, intractable pain, or if conservative treatment fails.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "What is the best surgery for cervical radiculopathy?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "For pure nerve pinching without instability, a Minimally Invasive Posterior Cervical Foraminotomy (Keyhole Surgery) is excellent as it preserves motion and requires no fusion. For large central discs, ACDF or Disc Replacement may be better.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "How long does it take to recover from pinched nerve surgery?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Recovery is rapid. With endoscopic keyhole surgery, patients are often discharged the same day or next day. Desk work can resume in 1-2 weeks. Full return to sports takes about 6-12 weeks.",
-        },
-      },
-    ],
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: `${SITE_URL}/`,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Conditions",
-        item: `${SITE_URL}/conditions`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: "Cervical Radiculopathy Treatment Hyderabad",
-        item: CANONICAL,
-      },
-    ],
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "Physician",
-    name: "Dr. Sayuj Krishnan",
-    medicalSpecialty: ["Neurosurgery", "Spine Surgery", "Endoscopic Spine Surgery"],
-    url: SITE_URL,
-    sameAs: ["https://www.linkedin.com/in/dr-sayuj-krishnan-s-275baa66"],
-    telephone: "+91 9778280044",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "Room 317, OPD Block, Yashoda Hospital, Malakpet",
-      addressLocality: "Hyderabad",
-      addressRegion: "Telangana",
-      postalCode: "500036",
-      addressCountry: "IN",
-    },
-    affiliation: {
-      "@type": "MedicalClinic",
-      name: "Yashoda Hospital Malakpet",
-    },
-    yearsOfExperience: 15,
-    availableService: [
-      {
-        "@type": "MedicalProcedure",
-        name: "Posterior Cervical Foraminotomy",
-      },
-      {
-        "@type": "MedicalProcedure",
-        name: "Anterior Cervical Discectomy and Fusion",
-      },
-    ],
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "MedicalClinic",
-    name: "Dr. Sayuj Krishnan - Brain & Spine Clinic, Yashoda Hospital Malakpet",
-    url: SITE_URL,
-    areaServed: ["Hyderabad", "Telangana", "Jubilee Hills", "Banjara Hills", "Hi-Tech City", "Gachibowli", "Malakpet", "Secunderabad"],
-    telephone: "+91 9778280044",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "Room 317, OPD Block, Yashoda Hospital, Malakpet",
-      addressLocality: "Hyderabad",
-      addressRegion: "Telangana",
-      postalCode: "500036",
-      addressCountry: "IN",
-    },
-  },
-] as const;
 
 const faqItems = [
   {
@@ -180,7 +44,7 @@ const faqItems = [
     answer:
       "If the nerve is severely compressed for a long time, it can lead to permanent nerve damage, resulting in chronic numbness or muscle wasting (atrophy) in the arm or hand. If pain persists beyond 6-8 weeks or if you have weakness, surgical consultation is advised to prevent permanent loss of function.",
   },
-] as const;
+];
 
 const references = [
   {
@@ -195,7 +59,7 @@ const references = [
     label: "Johns Hopkins Medicine — Cervical Radiculopathy",
     url: "https://www.hopkinsmedicine.org/health/conditions-and-diseases/cervical-radiculopathy",
   },
-] as const;
+];
 
 export const metadata: Metadata = {
   title: "Cervical Radiculopathy Treatment Hyderabad | Pinched Nerve Surgery",
@@ -234,7 +98,19 @@ export const metadata: Metadata = {
 export default function CervicalRadiculopathyPage() {
   return (
     <main className="bg-white">
-      <SchemaScript id="cervical-radiculopathy-jsonld" data={schemaData} />
+      <MedicalWebPageSchema
+        pageType="condition"
+        pageSlug="/conditions/cervical-radiculopathy-treatment-hyderabad"
+        title="Cervical Radiculopathy Treatment Hyderabad | Pinched Nerve Surgery"
+        description="Expert treatment for cervical radiculopathy (pinched nerve) in Hyderabad. Keyhole surgery (Foraminotomy) and ACDF by Dr. Sayuj Krishnan."
+        serviceOrCondition="Cervical Radiculopathy"
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Conditions", path: "/conditions" },
+          { name: "Cervical Radiculopathy Treatment Hyderabad", path: "/conditions/cervical-radiculopathy-treatment-hyderabad" },
+        ]}
+      />
+      <FAQPageSchema faqs={faqItems} pageUrl={CANONICAL} />
 
       {/* Warning Banner for Weakness */}
       <section className="bg-orange-600 py-4 text-white">
