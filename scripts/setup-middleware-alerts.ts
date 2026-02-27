@@ -78,6 +78,18 @@ const ALERTS: AlertConfig[] = [
     severity: 'high',
   },
   {
+    name: 'Mobile LCP > 3s',
+    description: 'Alert when Mobile LCP exceeds 3s (critical for SEO/User Exp)',
+    condition: {
+      metric: 'web_vitals.lcp',
+      threshold: 3000, // 3 seconds
+      operator: '>',
+      window: '10m',
+      filters: [{ key: 'device', value: 'mobile' }],
+    },
+    severity: 'high',
+  },
+  {
     name: 'Poor LCP',
     description: 'Alert when LCP exceeds 2.5s (poor user experience)',
     condition: {

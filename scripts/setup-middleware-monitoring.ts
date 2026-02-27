@@ -87,6 +87,30 @@ const DASHBOARDS: DashboardConfig[] = [
           ],
         },
       },
+      {
+        name: 'Mobile LCP',
+        type: 'line',
+        query: {
+          metric: 'web_vitals.lcp',
+          filters: [
+            { key: 'service', value: 'website' },
+            { key: 'url', value: SITE_URL },
+            { key: 'device', value: 'mobile' },
+          ],
+        },
+      },
+      {
+        name: 'Desktop LCP',
+        type: 'line',
+        query: {
+          metric: 'web_vitals.lcp',
+          filters: [
+            { key: 'service', value: 'website' },
+            { key: 'url', value: SITE_URL },
+            { key: 'device', value: 'desktop' },
+          ],
+        },
+      },
     ],
   },
   {
