@@ -956,8 +956,8 @@ packages:
     resolution: {integrity: sha512-yL/sLrpmtDaFEiUj1osRP4TI2MDz1AddJL+jZ7KSqvBuliN4xqYY54IfdN8qD8Toa6g1iloph1fxQNkjOxrrpQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@eslint/eslintrc@3.3.3':
-    resolution: {integrity: sha512-Kr+LPIUVKz2qkx1HAMH8q1q6azbqBAsXJUxBl/ODDuVPX45Z9DfwB8tPjTi6nNZ8BuM3nbJxC5zCAg5elnBUTQ==}
+  '@eslint/eslintrc@3.3.4':
+    resolution: {integrity: sha512-4h4MVF8pmBsncB60r0wSJiIeUKTSD4m7FmTFThG8RHlsg9ajqckLm9OraguFGZE4vVdpiI1Q4+hFnisopmG6gQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@eslint/js@9.39.3':
@@ -3536,8 +3536,8 @@ packages:
   '@simplewebauthn/browser@13.2.2':
     resolution: {integrity: sha512-FNW1oLQpTJyqG5kkDg5ZsotvWgmBaC6jCHR7Ej0qUNep36Wl9tj2eZu7J5rP+uhXgHaLk+QQ3lqcw2vS5MX1IA==}
 
-  '@simplewebauthn/server@13.2.2':
-    resolution: {integrity: sha512-HcWLW28yTMGXpwE9VLx9J+N2KEUaELadLrkPEEI9tpI5la70xNEVEsu/C+m3u7uoq4FulLqZQhgBCzR9IZhFpA==}
+  '@simplewebauthn/server@13.2.3':
+    resolution: {integrity: sha512-ZhcVBOw63birYx9jVfbhK6rTehckVes8PeWV324zpmdxr0BUfylospwMzcrxrdMcOi48MHWj2LCA+S528LnGvg==}
     engines: {node: '>=20.0.0'}
 
   '@sinclair/typebox@0.25.24':
@@ -7740,6 +7740,9 @@ packages:
   minimatch@3.1.2:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
 
+  minimatch@3.1.5:
+    resolution: {integrity: sha512-VgjWUsnnT6n+NUk6eZq77zeFdpW2LWDzP6zFGrCbHXiYNul5Dzqk2HHQ5uFH2DNW5Xbp8+jVzaeNt94ssEEl4w==}
+
   minimatch@5.1.6:
     resolution: {integrity: sha512-lKwV/1brpG6mBUFHtb7NUmtABCb2WZZmm2wNiOA5hAb8VdCS4B3dtMWyvcoViccwAW/COERjXLt0zP1zXUN26g==}
     engines: {node: '>=10'}
@@ -8295,8 +8298,16 @@ packages:
     peerDependencies:
       pg: '>=8.0'
 
+  pg-pool@3.12.0:
+    resolution: {integrity: sha512-eIJ0DES8BLaziFHW7VgJEBPi5hg3Nyng5iKpYtj3wbcAUV9A1wLgWiY7ajf/f/oO1wfxt83phXPY8Emztg7ITg==}
+    peerDependencies:
+      pg: '>=8.0'
+
   pg-protocol@1.11.0:
     resolution: {integrity: sha512-pfsxk2M9M3BuGgDOfuy37VNRRX3jmKgMjcvAcWqNDpZSf4cUmv8HSOl5ViRQFsfARFn0KuUQTgLxVMbNq5NW3g==}
+
+  pg-protocol@1.12.0:
+    resolution: {integrity: sha512-uOANXNRACNdElMXJ0tPz6RBM0XQ61nONGAwlt8da5zs/iUOOCLBQOHSXnrC6fMsvtjxbOJrZZl5IScGv+7mpbg==}
 
   pg-types@2.2.0:
     resolution: {integrity: sha512-qTAAlrEsl8s4OiEQY69wDvcMIdQN6wdz5ojQiOy6YRMuynxenON0O5oCpJI6lshc6scgAY8qvJ2On/p+CXY0GA==}
@@ -11164,7 +11175,7 @@ snapshots:
       '@better-auth/utils': 0.3.0
       '@better-fetch/fetch': 1.1.18
       '@simplewebauthn/browser': 13.2.2
-      '@simplewebauthn/server': 13.2.2
+      '@simplewebauthn/server': 13.2.3
       better-auth: 1.4.6(next@16.2.0-canary.6(@babel/core@7.29.0)(@opentelemetry/api@1.9.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       better-call: 1.1.5(zod@3.25.76)
       nanostores: 1.1.0
@@ -11400,7 +11411,7 @@ snapshots:
     dependencies:
       '@eslint/object-schema': 2.1.7
       debug: 4.4.3(supports-color@8.1.1)
-      minimatch: 3.1.2
+      minimatch: 3.1.5
     transitivePeerDependencies:
       - supports-color
 
@@ -11412,7 +11423,7 @@ snapshots:
     dependencies:
       '@types/json-schema': 7.0.15
 
-  '@eslint/eslintrc@3.3.3':
+  '@eslint/eslintrc@3.3.4':
     dependencies:
       ajv: 6.14.0
       debug: 4.4.3(supports-color@8.1.1)
@@ -11421,7 +11432,7 @@ snapshots:
       ignore: 5.3.2
       import-fresh: 3.3.1
       js-yaml: 4.1.1
-      minimatch: 3.1.2
+      minimatch: 3.1.5
       strip-json-comments: 3.1.1
     transitivePeerDependencies:
       - supports-color
@@ -14493,7 +14504,7 @@ snapshots:
 
   '@simplewebauthn/browser@13.2.2': {}
 
-  '@simplewebauthn/server@13.2.2':
+  '@simplewebauthn/server@13.2.3':
     dependencies:
       '@hexagon/base64': 1.1.28
       '@levischuck/tiny-cbor': 0.2.11
@@ -14901,7 +14912,7 @@ snapshots:
   '@supabase/pg@0.0.3(@supabase/pg@0.0.3)':
     dependencies:
       pg-connection-string: 2.11.0
-      pg-pool: 3.11.0(@supabase/pg@0.0.3)
+      pg-pool: 3.12.0(@supabase/pg@0.0.3)
       pg-protocol: '@supabase/pg-protocol@0.0.2'
       pg-types: 2.2.0
       pgpass: 1.0.5
@@ -15300,7 +15311,7 @@ snapshots:
   '@types/pg@8.15.6':
     dependencies:
       '@types/node': 20.19.33
-      pg-protocol: 1.11.0
+      pg-protocol: 1.12.0
       pg-types: 2.2.0
 
   '@types/pg@8.16.0':
@@ -15312,7 +15323,7 @@ snapshots:
   '@types/pg@8.6.1':
     dependencies:
       '@types/node': 20.19.33
-      pg-protocol: 1.11.0
+      pg-protocol: 1.12.0
       pg-types: 2.2.0
 
   '@types/react-dom@19.2.3(@types/react@19.2.14)':
@@ -17672,7 +17683,7 @@ snapshots:
       '@eslint/config-array': 0.21.1
       '@eslint/config-helpers': 0.4.2
       '@eslint/core': 0.17.0
-      '@eslint/eslintrc': 3.3.3
+      '@eslint/eslintrc': 3.3.4
       '@eslint/js': 9.39.3
       '@eslint/plugin-kit': 0.4.1
       '@humanfs/node': 0.16.7
@@ -17698,7 +17709,7 @@ snapshots:
       is-glob: 4.0.3
       json-stable-stringify-without-jsonify: 1.0.1
       lodash.merge: 4.6.2
-      minimatch: 3.1.2
+      minimatch: 3.1.5
       natural-compare: 1.4.0
       optionator: 0.9.4
     optionalDependencies:
@@ -19784,6 +19795,10 @@ snapshots:
     dependencies:
       brace-expansion: 1.1.12
 
+  minimatch@3.1.5:
+    dependencies:
+      brace-expansion: 1.1.12
+
   minimatch@5.1.6:
     dependencies:
       brace-expansion: 2.0.2
@@ -20309,15 +20324,17 @@ snapshots:
 
   pg-int8@1.0.1: {}
 
-  pg-pool@3.11.0(@supabase/pg@0.0.3):
-    dependencies:
-      pg: '@supabase/pg@0.0.3(@supabase/pg@0.0.3)'
-
   pg-pool@3.11.0(pg@8.18.0):
     dependencies:
       pg: 8.18.0
 
+  pg-pool@3.12.0(@supabase/pg@0.0.3):
+    dependencies:
+      pg: '@supabase/pg@0.0.3(@supabase/pg@0.0.3)'
+
   pg-protocol@1.11.0: {}
+
+  pg-protocol@1.12.0: {}
 
   pg-types@2.2.0:
     dependencies:
