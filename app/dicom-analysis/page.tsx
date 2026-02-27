@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Section from "../_components/Section";
 import Card from "../_components/Card";
+import { createContainer } from 'almostnode';
 
 export default function DicomAnalysisPage() {
   const [file, setFile] = useState<File | null>(null);
@@ -25,24 +26,90 @@ export default function DicomAnalysisPage() {
     setError(null);
     setResult(null);
 
-    const formData = new FormData();
-    formData.append("file", file);
-
     try {
-      const response = await fetch("/api/dicom/analyze", {
-        method: "POST",
-        body: formData,
-      });
+      // Client-side extraction via almostnode
+      const arrayBuffer = await file.arrayBuffer();
+      const buffer = new Uint8Array(arrayBuffer);
 
-      if (!response.ok) {
-        const errData = await response.json().catch(() => ({}));
-        throw new Error(errData.error || `Analysis failed: ${response.statusText}`);
+      const container = createContainer();
+
+      // Install dicom-parser
+      await container.npm.install('dicom-parser@1.8.21');
+
+      // Write file
+      container.vfs.writeFileSync('/input.dcm', buffer);
+
+      const extractScript = `
+        const fs = require('fs');
+        const dicomParser = require('dicom-parser');
+
+        async function extract() {
+          try {
+            const buffer = fs.readFileSync('/input.dcm');
+            const dataSet = dicomParser.parseDicom(buffer);
+
+            const getVal = (tag) => {
+              const element = dataSet.elements[tag];
+              if (element && element.length > 0) {
+                  // Basic ASCII handling
+                  const text = buffer.toString('utf8', element.dataOffset, element.dataOffset + element.length);
+                  return text.replace(/\\u0000/g, '').trim();
+              }
+              return null;
+            };
+
+            const metadata = {
+              patientName: getVal('x00100010'),
+              patientId: getVal('x00100020'),
+              studyDate: getVal('x00080020'),
+              modality: getVal('x00080060'),
+              studyDescription: getVal('x00081030'),
+            };
+
+            module.exports = { metadata };
+          } catch (err) {
+            module.exports = { error: err.message };
+          }
+        }
+
+        extract();
+      `;
+
+      const res = await container.execute(extractScript);
+
+      if (res.exports && res.exports.error) {
+        throw new Error(res.exports.error);
       }
 
-      const data = await response.json();
-      setResult(data.metadata);
+      if (res.exports && res.exports.metadata) {
+        setResult(res.exports.metadata);
+      } else {
+        // Fallback to server if client-side fails unexpectedly (though unlikely if setup is correct)
+        // For now, let's just throw error as this is intended to replace server calls
+         throw new Error("Could not extract metadata client-side.");
+      }
+
     } catch (err: any) {
-      setError(err.message || "An unexpected error occurred.");
+      // Fallback to server API if client-side fails
+       console.warn("Client-side extraction failed, trying server...", err);
+       try {
+          const formData = new FormData();
+          formData.append("file", file);
+          const response = await fetch("/api/dicom/analyze", {
+            method: "POST",
+            body: formData,
+          });
+
+          if (!response.ok) {
+             const errData = await response.json().catch(() => ({}));
+             throw new Error(errData.error || `Analysis failed: ${response.statusText}`);
+          }
+          const data = await response.json();
+          setResult(data.metadata);
+
+       } catch (serverErr: any) {
+          setError(serverErr.message || "An unexpected error occurred.");
+       }
     } finally {
       setAnalyzing(false);
     }

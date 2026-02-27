@@ -18,6 +18,10 @@ export async function analyzeReferral(buffer: Buffer): Promise<ReferralAnalysis>
     throw new Error("No text extracted from PDF");
   }
 
+  return analyzeText(text);
+}
+
+export async function analyzeText(text: string): Promise<ReferralAnalysis> {
   // 2. Analyze with Gemini
   const client = getClient();
 
