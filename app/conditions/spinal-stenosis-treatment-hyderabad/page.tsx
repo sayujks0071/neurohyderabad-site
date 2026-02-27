@@ -14,6 +14,7 @@ import CostTransparencySection from '@/src/components/CostTransparencySection';
 import TeleconsultationForm from '@/components/TeleconsultationForm';
 import OutcomeMetricsSection from '@/components/OutcomeMetricsSection';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
+import MedicalWebPageSchema from '../../components/schemas/MedicalWebPageSchema';
 
 const baseMetadata = makeMetadata({
   title: 'Spinal Stenosis Treatment Hyderabad | Walking Pain Relief',
@@ -83,6 +84,18 @@ export default function SpinalStenosisPage() {
 
   return (
     <div className="min-h-screen bg-white">
+      <MedicalWebPageSchema
+        pageType="condition"
+        pageSlug="/conditions/spinal-stenosis-treatment-hyderabad"
+        title="Spinal Stenosis Treatment Hyderabad | Walking Pain Relief"
+        description="Expert Lumbar Canal Stenosis treatment in Hyderabad. Micro-Decompression surgery for leg pain & heaviness. Dr Sayuj."
+        serviceOrCondition="Spinal Stenosis"
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Conditions", path: "/conditions" },
+          { name: "Spinal Stenosis Treatment", path: "/conditions/spinal-stenosis-treatment-hyderabad" },
+        ]}
+      />
       <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/conditions/spinal-stenosis-treatment-hyderabad`} />
 
       <Section background="blue" className="pt-24 pb-12">
@@ -140,7 +153,7 @@ export default function SpinalStenosisPage() {
               </li>
               <li className="flex gap-3 items-start text-gray-700">
                 <span className="mt-1.5 w-1.5 h-1.5 bg-blue-600 rounded-full flex-shrink-0" />
-                <span>Lower back pain (often mild compared to leg pain)</span>
+                <span>Lower back pain (often mild compared to <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 hover:underline">leg pain relief</Link>)</span>
               </li>
               <li className="flex gap-3 items-start text-gray-700">
                 <span className="mt-1.5 w-1.5 h-1.5 bg-blue-600 rounded-full flex-shrink-0" />
@@ -179,7 +192,7 @@ export default function SpinalStenosisPage() {
 
       <Section>
         <div className="bg-blue-50 border border-blue-100 rounded-2xl p-8 shadow-sm">
-          <h2 className="text-2xl font-bold text-blue-900 mb-6">Is Spine Surgery Safe for Elderly Patients (80+)?</h2>
+          <h2 className="text-2xl font-bold text-blue-900 mb-6">Awake Spine Surgery for Elderly (70+)</h2>
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
               <p className="text-gray-700 mb-4 text-lg">
@@ -191,17 +204,25 @@ export default function SpinalStenosisPage() {
               <ul className="space-y-3">
                 <li className="flex items-center text-gray-700">
                   <span className="w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center mr-3 font-bold">✓</span>
-                  No General Anesthesia (Safer for Heart/Lungs)
+                  <strong>No General Anesthesia:</strong> Safer for heart & lungs
                 </li>
                 <li className="flex items-center text-gray-700">
                   <span className="w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center mr-3 font-bold">✓</span>
-                  Walk 2 Hours After Surgery
+                  <strong>Walk 2 Hours Later:</strong> Immediate mobilization
                 </li>
                 <li className="flex items-center text-gray-700">
                   <span className="w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center mr-3 font-bold">✓</span>
-                  Minimal Blood Loss (Micro-technique)
+                  <strong>Micro-Incision:</strong> Minimal blood loss & pain
                 </li>
               </ul>
+              <div className="mt-6">
+                <Link
+                  href="/services/awake-spine-surgery-hyderabad"
+                  className="inline-block bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition-colors font-semibold shadow-sm"
+                >
+                  Learn About Awake Spine Surgery
+                </Link>
+              </div>
             </div>
             <div className="bg-white p-6 rounded-xl border border-blue-200">
                <h3 className="font-bold text-blue-800 mb-3">Case Example</h3>
@@ -299,31 +320,6 @@ export default function SpinalStenosisPage() {
         </div>
       </Section>
 
-      {/* MedicalCondition Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "MedicalCondition",
-            "name": "Lumbar Spinal Stenosis",
-            "associatedAnatomy": {
-              "@type": "AnatomicalStructure",
-              "name": "Spinal Canal"
-            },
-            "possibleTreatment": [
-              {
-                "@type": "MedicalTherapy",
-                "name": "Decompressive Laminectomy"
-              },
-              {
-                "@type": "MedicalTherapy",
-                "name": "Epidural Steroid Injection"
-              }
-            ]
-          })
-        }}
-      />
     </div>
   );
 }

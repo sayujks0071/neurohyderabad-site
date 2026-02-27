@@ -152,7 +152,7 @@ export default function SlipDiscTreatmentPage() {
              <p className="text-blue-900 text-sm font-medium">
                <strong>Did you know?</strong> 90% of sciatica cases are caused by a slip disc. If you have radiating leg pain, treating the disc is key to relief.
                <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="block mt-1 text-blue-700 hover:underline">
-                 ➜ Read our Full Guide to Sciatica Relief
+                 ➜ Read our Full Guide to Sciatica Treatment
                </Link>
              </p>
           </div>
