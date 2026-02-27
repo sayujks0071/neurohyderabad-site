@@ -4,9 +4,19 @@ export function JsonLd({ json }: { json: object }) {
     <script
       type="application/ld+json"
       // eslint-disable-next-line react/no-danger
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(json) }}
+      dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(json) }}
     />
   );
+}
+
+// 🛡️ Sentinel: Escape special characters to prevent XSS (script injection) via JSON-LD
+function safeJsonLdStringify(obj: object): string {
+  return JSON.stringify(obj)
+    .replace(/</g, '\\u003c')
+    .replace(/>/g, '\\u003e')
+    .replace(/&/g, '\\u0026')
+    .replace(/\u2028/g, '\\u2028')
+    .replace(/\u2029/g, '\\u2029');
 }
 
 // Helper to load JSON-LD from file system
