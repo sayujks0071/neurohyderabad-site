@@ -25,7 +25,7 @@ const PatientEducationVideos = dynamic(() => import('@/app/_components/PatientEd
 const baseMetadata = makeMetadata({
   title: "Sciatica Treatment Hyderabad | 90% Non-Surgical | Dr Sayuj",
   description: "Best Sciatica treatment in Hyderabad. 90% patients recover without surgery using nerve blocks & meds. Endoscopic cure available. Book Dr Sayuj.",
-  canonicalPath: '/conditions/sciatica-pain-treatment-hyderabad',
+  canonicalPath: '/conditions/sciatica-pain-treatment-hyderabad/',
 });
 
 export const metadata: Metadata = {
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     "endoscopic spine surgery for sciatica"
   ],
   alternates: {
-    canonical: `${SITE_URL}/conditions/sciatica-pain-treatment-hyderabad`,
+    canonical: `${SITE_URL}/conditions/sciatica-pain-treatment-hyderabad/`,
   },
 };
 

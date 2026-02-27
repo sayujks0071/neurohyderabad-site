@@ -7,6 +7,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrubEngine } from './ScrubEngine';
 import { vertexShader, fragmentShader } from './TunnelShader';
 import Link from 'next/link';
+import Image from 'next/image';
 
 // Register ScrollTrigger
 if (typeof window !== 'undefined') {
@@ -16,10 +17,29 @@ if (typeof window !== 'undefined') {
 export default function Hero() {
     const containerRef = useRef<HTMLDivElement>(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [isInteracted, setIsInteracted] = useState(false);
     const [progress, setProgress] = useState(0);
 
+    // Interaction check to trigger heavy loading
     useEffect(() => {
-        if (!containerRef.current) return;
+        const handleInteraction = () => setIsInteracted(true);
+        window.addEventListener('scroll', handleInteraction, { once: true });
+        window.addEventListener('mousemove', handleInteraction, { once: true });
+        window.addEventListener('touchstart', handleInteraction, { once: true });
+
+        // Fallback: Load after 3 seconds anyway if no interaction
+        const timer = setTimeout(() => setIsInteracted(true), 3000);
+
+        return () => {
+            window.removeEventListener('scroll', handleInteraction);
+            window.removeEventListener('mousemove', handleInteraction);
+            window.removeEventListener('touchstart', handleInteraction);
+            clearTimeout(timer);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (!containerRef.current || !isInteracted) return;
 
         // Configuration
         const CONFIG = {
@@ -156,13 +176,26 @@ export default function Hero() {
             material.dispose();
             renderer.dispose();
         };
-    }, []);
+    }, [isInteracted]);
 
     return (
         <section ref={containerRef} className="relative w-full h-screen overflow-hidden bg-black text-white">
+            {/* Poster Image for LCP Optimization */}
+            <div className={`absolute inset-0 z-10 transition-opacity duration-700 ${!isLoading ? 'opacity-0' : 'opacity-100'}`}>
+                <Image
+                    src="/images/dr-sayuj-krishnan-portrait-optimized.jpg"
+                    alt="Dr. Sayuj Krishnan - Neurosurgeon"
+                    fill
+                    priority
+                    fetchPriority="high"
+                    className="object-cover object-center opacity-60"
+                />
+                <div className="absolute inset-0 bg-black/40" />
+            </div>
+
             {/* Loading Indicator */}
-            {isLoading && (
-                <div className="absolute inset-0 flex items-center justify-center z-30 bg-black">
+            {isInteracted && isLoading && (
+                <div className="absolute inset-0 flex items-center justify-center z-30 pointer-events-none">
                     <div className="text-center">
                         <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mb-4 mx-auto"></div>
                         <p className="text-lg text-blue-400 font-medium">Loading Experience... {Math.round(progress * 100)}%</p>
