@@ -9,7 +9,7 @@ export interface InterpretReportResult {
 
 export async function interpretReportText(reportText: string): Promise<InterpretReportResult> {
   const result = await generateObject({
-    model: getTextModel('gpt-4o-mini'),
+    model: getTextModel(),
     schema: z.object({
       plainEnglishSummary: z.string(),
       keyTakeaways: z.array(z.string()),

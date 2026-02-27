@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
         // If the user's snippet model 'openai/gpt-5.2' is passed, map it gracefully to our known best model or try to pass it if dynamic models are supported.
         if (requestedModel === 'openai/gpt-5.2') {
             // As gpt-5.2 is not publicly available yet, we map to the closest semantic equivalent defined in the gateway (gpt-4o-mini or gpt-4)
-            aiModel = getTextModel('gpt-4');
+            aiModel = getTextModel();
         }
 
         // This is the core snippet requested by the user, implemented in a robust route
