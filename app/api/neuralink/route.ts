@@ -68,7 +68,7 @@ export async function POST(request: Request) {
         }
 
         const { object } = await generateObject({
-          model: getTextModel('gpt-4o-mini'),
+          model: getTextModel(),
           schema: z.object({
             summary: z.string(),
             suggestedPriority: z.enum(["LOW", "MEDIUM", "HIGH", "URGENT"]),
@@ -87,7 +87,7 @@ export async function POST(request: Request) {
         }
 
         const { object } = await generateObject({
-          model: getTextModel('gpt-4o-mini'),
+          model: getTextModel(),
           schema: z.object({
             refinedText: z.string(),
             clarifyingQuestions: z.array(z.string()),
