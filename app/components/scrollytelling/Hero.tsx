@@ -65,10 +65,15 @@ export default function Hero() {
         // Scrub Engine
         const scrubEngine = new ScrubEngine({
             totalFrames: CONFIG.totalFrames,
+            batchSize: 32, // Load initial 32 frames for quick start
             onProgress: (p) => setProgress(p),
-            onLoadComplete: () => {
+            onInitLoad: () => {
+                // Start experience as soon as initial batch is ready
                 setIsLoading(false);
                 initScroll();
+            },
+            onLoadComplete: () => {
+                console.log('All frames fully loaded in background');
             }
         });
 
