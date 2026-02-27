@@ -3,8 +3,8 @@
 
 import { useChat } from '@ai-sdk/react'
 import { useState, useRef, useEffect } from 'react'
-import Header from '../_components/layout/Header'
-import Footer from '../_components/layout/Footer'
+import HeaderRefactored from '../components/HeaderRefactored'
+import Footer from '../components/Footer'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 
@@ -28,7 +28,7 @@ export default function AISandboxPage() {
 
     return (
         <div className="min-h-screen bg-slate-50 flex flex-col font-sans selection:bg-blue-200">
-            <Header />
+            <HeaderRefactored />
 
             <main className="flex-1 flex justify-center items-center p-4 sm:p-8 relative overflow-hidden bg-gradient-to-br from-indigo-50 via-white to-blue-50">
 
