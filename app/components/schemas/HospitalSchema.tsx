@@ -11,9 +11,9 @@ export default function HospitalSchema() {
     "telephone": "+91-40-6769 9999",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Nalgonda X Roads",
-      "addressLocality": "Malakpet",
-      "addressRegion": "Hyderabad",
+      "streetAddress": "Nalgonda X Roads, Malakpet",
+      "addressLocality": "Hyderabad",
+      "addressRegion": "Telangana",
       "postalCode": "500036",
       "addressCountry": "IN"
     },
