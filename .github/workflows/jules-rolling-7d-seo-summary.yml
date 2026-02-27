@@ -52,11 +52,17 @@ jobs:
 
             console.log(`Checking for duplicate issue with title: ${title}`);
 
-            // Find strictly matching title to ensure only one issue per day
-            const duplicate = existingIssues.find(issue => issue.title === title);
+            // Find an open issue with the same base title created in the last 24 hours
+            const now = new Date();
+            const oneDayAgo = new Date(now.getTime() - (24 * 60 * 60 * 1000));
+
+            const duplicate = existingIssues.find(issue => {
+              const issueDate = new Date(issue.created_at);
+              return issue.title.startsWith(process.env.ISSUE_TITLE) && issueDate > oneDayAgo;
+            });
 
             if (duplicate) {
-              console.log(`Issue already exists: ${duplicate.html_url}`);
+              console.log(`Issue already exists in the last 24h: ${duplicate.html_url}`);
               return;
             }
 
