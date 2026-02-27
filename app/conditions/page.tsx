@@ -17,17 +17,17 @@ export const metadata: Metadata = {
   description:
     "Browse an A–Z index of brain, spine, and nerve conditions treated by Dr. Sayuj Krishnan with links to detailed guides and treatment options.",
   alternates: {
-    canonical: `${SITE_URL}/conditions`,
+    canonical: `${SITE_URL}/conditions/`,
     languages: {
-      "en-IN": `${SITE_URL}/conditions`,
-      "x-default": `${SITE_URL}/conditions`,
+      "en-IN": `${SITE_URL}/conditions/`,
+      "x-default": `${SITE_URL}/conditions/`,
     },
   },
   openGraph: {
     title: "Neurological Conditions A–Z | Dr. Sayuj Krishnan",
     description:
       "Explore conditions, symptoms, and minimally invasive treatments offered for brain, spine, and epilepsy care.",
-    url: `${SITE_URL}/conditions`,
+    url: `${SITE_URL}/conditions/`,
     siteName: "Dr. Sayuj Krishnan - Neurosurgeon in Hyderabad",
     images: [
       {

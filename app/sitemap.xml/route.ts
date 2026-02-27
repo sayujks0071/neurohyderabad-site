@@ -52,36 +52,38 @@ export async function GET(_req: NextRequest) {
   }
 
   const corePages = [
-    { url: '', priority: 1.0, changeFrequency: 'daily' },
-    { url: '/about', priority: 0.9, changeFrequency: 'weekly' },
-    { url: '/appointments', priority: 0.9, changeFrequency: 'weekly' },
-    { url: '/contact', priority: 0.8, changeFrequency: 'weekly' },
-    { url: '/services', priority: 0.9, changeFrequency: 'weekly' },
-    { url: '/conditions', priority: 0.9, changeFrequency: 'weekly' },
-    { url: '/locations', priority: 0.8, changeFrequency: 'weekly' },
-    { url: '/best-neurosurgeon-in-hyderabad', priority: 0.9, changeFrequency: 'monthly' },
-    { url: '/brain-surgery', priority: 0.8, changeFrequency: 'monthly' },
-    { url: '/spine-surgery', priority: 0.8, changeFrequency: 'monthly' },
-    { url: '/pediatric-neurosurgery', priority: 0.7, changeFrequency: 'monthly' },
-    { url: '/technology-innovation', priority: 0.7, changeFrequency: 'monthly' },
+    { url: '/', priority: 1.0, changeFrequency: 'daily' },
+    { url: '/about/', priority: 0.9, changeFrequency: 'weekly' },
+    { url: '/appointments/', priority: 0.9, changeFrequency: 'weekly' },
+    { url: '/contact/', priority: 0.8, changeFrequency: 'weekly' },
+    { url: '/services/', priority: 0.9, changeFrequency: 'weekly' },
+    { url: '/conditions/', priority: 0.9, changeFrequency: 'weekly' },
+    { url: '/locations/', priority: 0.8, changeFrequency: 'weekly' },
+    { url: '/best-neurosurgeon-in-hyderabad/', priority: 0.9, changeFrequency: 'monthly' },
+    { url: '/brain-surgery/', priority: 0.8, changeFrequency: 'monthly' },
+    { url: '/spine-surgery/', priority: 0.8, changeFrequency: 'monthly' },
+    { url: '/pediatric-neurosurgery/', priority: 0.7, changeFrequency: 'monthly' },
+    { url: '/technology-innovation/', priority: 0.7, changeFrequency: 'monthly' },
   ];
   for (const p of corePages) add(p.url, p.priority, p.changeFrequency);
 
   for (const e of sitemapServices()) {
-    if (unique.has(e.url)) continue;
-    unique.add(e.url);
+    const url = e.url.endsWith('/') ? e.url : `${e.url}/`;
+    if (unique.has(url)) continue;
+    unique.add(url);
     entries.push({
-      url: e.url,
+      url: url,
       lastModified: typeof e.lastModified === 'string' ? e.lastModified : now,
       changeFrequency: e.changeFrequency ?? 'weekly',
       priority: typeof e.priority === 'number' ? e.priority : 0.7,
     });
   }
   for (const e of sitemapConditions()) {
-    if (unique.has(e.url)) continue;
-    unique.add(e.url);
+    const url = e.url.endsWith('/') ? e.url : `${e.url}/`;
+    if (unique.has(url)) continue;
+    unique.add(url);
     entries.push({
-      url: e.url,
+      url: url,
       lastModified: typeof e.lastModified === 'string' ? e.lastModified : now,
       changeFrequency: e.changeFrequency ?? 'weekly',
       priority: typeof e.priority === 'number' ? e.priority : 0.7,
@@ -99,13 +101,13 @@ export async function GET(_req: NextRequest) {
   }
 
   const posts = await getAllBlogPosts();
-  for (const post of posts) add(`/blog/${post.slug}`, 0.7, 'daily');
+  for (const post of posts) add(`/blog/${post.slug}/`, 0.7, 'daily');
 
-  for (const page of ['/knowledge-base', '/blog', '/patient-stories', '/research', '/media', '/technology-facilities']) {
+  for (const page of ['/knowledge-base/', '/blog/', '/patient-stories/', '/research/', '/media/', '/technology-facilities/']) {
     add(page, 0.7, 'weekly');
   }
 
-  for (const page of ['/privacy', '/cookies', '/terms', '/disclaimer', '/medical-disclaimer', '/content-integrity', '/editorial-policy']) {
+  for (const page of ['/privacy/', '/cookies/', '/terms/', '/disclaimer/', '/medical-disclaimer/', '/content-integrity/', '/editorial-policy/']) {
     add(page, 0.3, 'yearly');
   }
 

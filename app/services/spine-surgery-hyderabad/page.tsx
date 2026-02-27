@@ -14,6 +14,7 @@ import { getServiceSources } from '../sources';
 import MedicalWebPageSchema from '../../components/schemas/MedicalWebPageSchema';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import SurgeryComparisonTable from '@/src/components/SurgeryComparisonTable';
+import FAQPageSchema from '@/app/_components/FAQPageSchema';
 
 const SERVICE_SLUG = 'spine-surgery-hyderabad';
 
@@ -21,7 +22,7 @@ const baseMetadata = makeMetadata({
   title: 'Best Spine Surgeon Hyderabad | Endoscopic Expert | Dr Sayuj',
   description:
     'Expert spine surgeon in Hyderabad. Endoscopic keyhole surgery for slip disc & sciatica with 90% success. Book at Yashoda Malakpet.',
-  canonicalPath: `/services/${SERVICE_SLUG}`,
+  canonicalPath: `/services/${SERVICE_SLUG}/`,
 });
 
 export const metadata: Metadata = {
@@ -38,7 +39,7 @@ export const metadata: Metadata = {
     title: 'Spine Surgery Hyderabad | Minimally Invasive Specialist',
     description:
       'Minimally invasive spine surgery in Hyderabad. Walk the next day with keyhole endoscopic techniques for slip disc & sciatica. Expert care at Yashoda.',
-    url: `${SITE_URL}/services/${SERVICE_SLUG}`,
+    url: `${SITE_URL}/services/${SERVICE_SLUG}/`,
     siteName: 'Dr. Sayuj Krishnan - Neurosurgeon Hyderabad',
     locale: 'en_IN',
     type: 'website',
@@ -105,6 +106,7 @@ export default function SpineSurgeryHyderabadPage() {
         serviceOrCondition="Spine Surgery"
         breadcrumbs={breadcrumbs}
       />
+      <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/${SERVICE_SLUG}/`} />
       <main className="container mx-auto px-4 py-16">
         <Breadcrumbs
           items={[

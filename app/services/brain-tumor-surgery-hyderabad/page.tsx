@@ -25,7 +25,7 @@ const baseMetadata = makeMetadata({
   title: 'Brain Tumor Surgery Hyderabad | Top Neurosurgeon | Dr Sayuj',
   description:
     'Expert Brain Tumor Surgery in Hyderabad. Advanced Awake Craniotomy & Neuronavigation for safe removal. Dr Sayuj Krishnan - Best Neurosurgeon. Consult now.',
-  canonicalPath: `/services/${SERVICE_SLUG}`,
+  canonicalPath: `/services/${SERVICE_SLUG}/`,
 });
 
 export const metadata: Metadata = {
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     title: 'Brain Tumor Surgery Hyderabad | Advanced Safety & Care',
     description:
       'Advanced brain tumor surgery in Hyderabad with Dr. Sayuj Krishnan. High success rates with Neuronavigation & Awake Craniotomy for faster recovery. Trusted Neuro-Oncology care.',
-    url: `${SITE_URL}/services/${SERVICE_SLUG}`,
+    url: `${SITE_URL}/services/${SERVICE_SLUG}/`,
     siteName: 'Dr. Sayuj Krishnan - Neurosurgeon Hyderabad',
     locale: 'en_IN',
     type: 'website',
@@ -207,7 +207,7 @@ export default function BrainTumorSurgeryHyderabadPage() {
         serviceOrCondition="Brain Tumor Surgery"
         breadcrumbs={breadcrumbs}
       />
-      <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/${SERVICE_SLUG}`} />
+      <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/${SERVICE_SLUG}/`} />
 
       <main className="container mx-auto px-4 py-16">
         <Breadcrumbs

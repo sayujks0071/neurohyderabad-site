@@ -25,16 +25,16 @@ export const metadata: Metadata = {
     'ROSA DBS hyderabad'
   ],
   alternates: {
-    canonical: `${SITE_URL}/services`,
+    canonical: `${SITE_URL}/services/`,
     languages: {
-      'en-IN': `${SITE_URL}/services`,
-      'x-default': `${SITE_URL}/services`
+      'en-IN': `${SITE_URL}/services/`,
+      'x-default': `${SITE_URL}/services/`
     }
   },
   openGraph: {
     title: 'Neurosurgical Services in Hyderabad | Dr. Sayuj Krishnan',
     description: 'Expert neurosurgical services in Hyderabad including endoscopic spine surgery, brain tumor removal, epilepsy surgery, and trigeminal neuralgia treatment.',
-    url: `${SITE_URL}/services`,
+    url: `${SITE_URL}/services/`,
     siteName: 'Dr. Sayuj Krishnan - Neurosurgeon in Hyderabad',
     images: [
       {
@@ -114,7 +114,7 @@ export default function ServicesPage() {
     <div className="min-h-screen bg-white">
       <MedicalWebPageSchema
         pageType="service"
-        pageSlug="/services"
+        pageSlug="/services/"
         title="Neurosurgical Services in Hyderabad | Dr. Sayuj Krishnan"
         description="Expert neurosurgical services including endoscopic spine surgery, brain tumor surgery, epilepsy surgery, and trigeminal neuralgia treatment in Hyderabad."
         serviceOrCondition="Neurosurgery Services"
