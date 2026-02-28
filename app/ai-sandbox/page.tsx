@@ -1,9 +1,11 @@
 'use client';
 
-import { useChat } from '@ai-sdk/react';
-import { useRef, useEffect } from 'react';
-import Header from '../components/HeaderRefactored';
-import Footer from '../components/Footer';
+import { useChat } from '@ai-sdk/react'
+import { useState, useRef, useEffect } from 'react'
+import Header from '../components/HeaderRefactored'
+import Footer from '../components/Footer'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 
 export default function AISandboxPage() {
   const { messages, input, handleInputChange, handleSubmit } = useChat({

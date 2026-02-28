@@ -65,3 +65,6 @@
 ## 2026-02-25
 *   **Expansion:** Replicate the visual "Red Flags" grid on other emergency-related condition pages (e.g., Brain Tumor Symptoms).
 *   **Consistency:** Ensure `TrustProof` components on other pages are updated to use the latest props and styling if applicable.
+
+## 2026-02-27
+*   **Schema:** Add `VideoObject` schema to `app/services/minimally-invasive-spine-surgery/page.tsx` for the newly embedded "L5-S1 Endoscopic Discectomy" video to improve rich snippets.
