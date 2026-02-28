@@ -1,48 +1,45 @@
 {
-  "name": "Patient Feedback Loop (Gemini AI)",
+  "name": "Patient Feedback Loop",
   "nodes": [
     {
       "parameters": {
-        "httpMethod": "POST",
-        "path": "patient-feedback",
-        "options": {}
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "seconds": 0,
+              "minutes": 0,
+              "hours": 9
+            }
+          ]
+        }
       },
-      "name": "Feedback Webhook",
-      "type": "n8n-nodes-base.webhook",
+      "name": "Weekly Schedule",
+      "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1,
       "position": [
         250,
         300
-      ],
-      "webhookId": "patient-feedback-webhook"
+      ]
     },
     {
       "parameters": {
-        "method": "POST",
-        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
+        "url": "https://www.drsayuj.info/api/admin/patients/recent",
+        "method": "GET",
+        "authentication": "header",
+        "headerParametersUi": {
+          "parameter": [
             {
-              "name": "key",
-              "value": "={{$env.GEMINI_API_KEY}}"
-            }
-          ]
-        },
-        "sendBody": true,
-        "bodyParameters": {
-          "parameters": [
-            {
-              "name": "contents",
-              "value": "=[{\"parts\":[{\"text\":\"Analyze this patient feedback and output a JSON object with 'sentiment' (positive, neutral, negative) and a suggested empathetic 'responseDraft'. If negative, draft an apology and invitation to discuss. If positive, draft a thank you and request for a Google Review. Feedback: \\\"{{$node[\\\"Feedback Webhook\\\"].json[\\\"body\\\"][\\\"feedback\\\"]}}\\\"\"}]}]"
+              "name": "x-admin-key",
+              "value": "YOUR_ADMIN_KEY"
             }
           ]
         },
         "options": {}
       },
-      "name": "Gemini Sentiment Analysis",
+      "name": "Get Recent Patients",
       "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.1,
+      "typeVersion": 1,
       "position": [
         450,
         300
@@ -50,10 +47,11 @@
     },
     {
       "parameters": {
-        "functionCode": "let textResp = items[0].json.candidates[0].content.parts[0].text;\n// Clean markdown wrapping\ntextResp = textResp.replace(/```json\\n?/g, '').replace(/```\\n?/g, '').trim();\ntry {\n  const aiData = JSON.parse(textResp);\n  return [{\n    json: {\n      ...items[0].json,\n      sentiment: aiData.sentiment,\n      responseDraft: aiData.responseDraft\n    }\n  }];\n} catch (e) {\n  console.error('Error parsing sentiment:', e);\n  return [{ json: { error: 'Failed to parse sentiment' } }];\n}"
+        "fieldToSplitOut": "patients",
+        "options": {}
       },
-      "name": "Parse Sentiment",
-      "type": "n8n-nodes-base.function",
+      "name": "Split Patients",
+      "type": "n8n-nodes-base.itemLists",
       "typeVersion": 1,
       "position": [
         650,
@@ -62,60 +60,18 @@
     },
     {
       "parameters": {
-        "conditions": {
-          "string": [
-            {
-              "value1": "={{$node[\"Parse Sentiment\"].json[\"sentiment\"]}}",
-              "operation": "equal",
-              "value2": "negative"
-            }
-          ]
-        }
+        "fromEmail": "care@drsayuj.info",
+        "toEmail": "={{$node[\"Split Patients\"].json[\"email\"]}}",
+        "subject": "How was your experience with Dr. Sayuj?",
+        "text": "Dear {{$node[\"Split Patients\"].json[\"firstName\"]}},\n\nWe hope you are recovering well. We would love to hear about your experience with us to help us improve.\n\nPlease take a moment to rate your visit: https://www.drsayuj.info/feedback?id={{$node[\"Split Patients\"].json[\"id\"]}}\n\nWarm regards,\nDr. Sayuj's Team",
+        "html": "<p>Dear {{$node[\"Split Patients\"].json[\"firstName\"]}},</p><p>We hope you are recovering well. We would love to hear about your experience with us to help us improve.</p><p><a href=\"https://www.drsayuj.info/feedback?id={{$node[\"Split Patients\"].json[\"id\"]}}\">Click here to rate your visit</a></p><p>Warm regards,<br>Dr. Sayuj's Team</p>"
       },
-      "name": "Is Negative?",
-      "type": "n8n-nodes-base.if",
+      "name": "Send Feedback Email",
+      "type": "n8n-nodes-base.emailSend",
       "typeVersion": 1,
       "position": [
         850,
         300
-      ]
-    },
-    {
-      "parameters": {
-        "channel": "urgent-feedback",
-        "text": "🚨 NEGATIVE PATIENT FEEDBACK 🚨\nName: {{$node[\"Feedback Webhook\"].json[\"body\"][\"patientName\"]}}\nFeedback: {{$node[\"Feedback Webhook\"].json[\"body\"][\"feedback\"]}}\n\nSuggested Response Draft: {{$node[\"Parse Sentiment\"].json[\"responseDraft\"]}}",
-        "attachments": [],
-        "otherOptions": {}
-      },
-      "name": "Slack Alert (Negative)",
-      "type": "n8n-nodes-base.slack",
-      "typeVersion": 1,
-      "position": [
-        1050,
-        150
-      ],
-      "credentials": {
-        "slackApi": {
-          "id": "YOUR_SLACK_CRED_ID",
-          "name": "Slack Account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "fromEmail": "feedback@drsayuj.info",
-        "toEmail": "={{$node[\"Feedback Webhook\"].json[\"body\"][\"patientEmail\"]}}",
-        "subject": "Thank You for Your Feedback!",
-        "text": "={{$node[\"Parse Sentiment\"].json[\"responseDraft\"]}}",
-        "html": "<p>{{$node[\"Parse Sentiment\"].json[\"responseDraft\"]}}</p>",
-        "options": {}
-      },
-      "name": "Send Draft Response",
-      "type": "n8n-nodes-base.emailSend",
-      "typeVersion": 1,
-      "position": [
-        1050,
-        450
       ],
       "credentials": {
         "smtp": {
@@ -126,51 +82,33 @@
     }
   ],
   "connections": {
-    "Feedback Webhook": {
+    "Weekly Schedule": {
       "main": [
         [
           {
-            "node": "Gemini Sentiment Analysis",
+            "node": "Get Recent Patients",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Gemini Sentiment Analysis": {
+    "Get Recent Patients": {
       "main": [
         [
           {
-            "node": "Parse Sentiment",
+            "node": "Split Patients",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Parse Sentiment": {
+    "Split Patients": {
       "main": [
         [
           {
-            "node": "Is Negative?",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Is Negative?": {
-      "main": [
-        [
-          {
-            "node": "Slack Alert (Negative)",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Send Draft Response",
+            "node": "Send Feedback Email",
             "type": "main",
             "index": 0
           }

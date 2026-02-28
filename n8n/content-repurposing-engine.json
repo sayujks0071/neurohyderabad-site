@@ -1,45 +1,42 @@
 {
-  "name": "Content Repurposing Engine (Gemini AI)",
+  "name": "Content Repurposing Engine",
   "nodes": [
     {
       "parameters": {
-        "url": "https://www.drsayuj.info/rss.xml"
+        "httpMethod": "POST",
+        "path": "content-repurpose",
+        "options": {}
       },
-      "name": "RSS Feed Trigger",
-      "type": "n8n-nodes-base.rssFeedRead",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
       "position": [
         250,
         300
-      ]
+      ],
+      "webhookId": "content-repurpose-webhook"
     },
     {
       "parameters": {
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=YOUR_GEMINI_API_KEY",
         "method": "POST",
-        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
+        "bodyParametersUi": {
+          "parameter": []
+        },
+        "headerParametersUi": {
+          "parameter": [
             {
-              "name": "key",
-              "value": "={{$env.GEMINI_API_KEY}}"
+              "name": "Content-Type",
+              "value": "application/json"
             }
           ]
         },
-        "sendBody": true,
-        "bodyParameters": {
-          "parameters": [
-            {
-              "name": "contents",
-              "value": "=[{\"parts\":[{\"text\":\"You are a specialized medical content marketer. Repurpose this blog post into engaging social media posts. The blog title is '{{$node[\\\"RSS Feed Trigger\\\"].json[\\\"title\\\"]}}', link is '{{$node[\\\"RSS Feed Trigger\\\"].json[\\\"link\\\"]}}', and content is '{{$node[\\\"RSS Feed Trigger\\\"].json[\\\"content:encoded\\\"]}}'. Output strictly a JSON object with 'linkedin' (professional, educational format with 2-3 hashtags) and 'twitter' (concise, catchy, max 280 chars with 1-2 hashtags) keys. Do not include Markdown blocks (e.g. ```json).\"}]}]"
-            }
-          ]
-        },
+        "body": "={\n  \"contents\": [{\n    \"parts\": [{\n      \"text\": \"Repurpose the following content for social media.\\n\\nURL/Content: {{$node[\\\"Webhook\\\"].json[\\\"body\\\"][\\\"content\\\"]}}\\n\\nGenerate strictly valid JSON with these fields:\\n- linkedin_post: A professional, engaging LinkedIn post.\\n- twitter_thread: An array of strings, each representing a tweet in a thread.\\n- image_prompt: A prompt for an image generator (like DALL-E) to create a relevant visual.\\n- hashtags: A string of relevant hashtags.\"\n    }]\n  }]\n}",
         "options": {}
       },
-      "name": "Gemini AI Repurpose",
+      "name": "Gemini Repurpose",
       "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.1,
+      "typeVersion": 1,
       "position": [
         450,
         300
@@ -47,9 +44,9 @@
     },
     {
       "parameters": {
-        "functionCode": "try {\n  let aiText = items[0].json.candidates[0].content.parts[0].text;\n  // Remove Markdown formatting if Gemini included it despite instructions\n  aiText = aiText.replace(/```json\\n?/gi, '').replace(/```\\n?/g, '').trim();\n  const parsedContent = JSON.parse(aiText);\n  return [{\n    json: {\n      linkedinPost: parsedContent.linkedin,\n      twitterPost: parsedContent.twitter\n    }\n  }];\n} catch (error) {\n  console.error('Error parsing Gemini output:', error);\n  return [{ json: { error: 'Failed to parse AI output' } }];\n}"
+        "functionCode": "const geminiResp = items[0].json.candidates[0].content.parts[0].text;\n// Remove markdown code blocks if present\nconst cleanJson = geminiResp.replace(/```json/g, '').replace(/```/g, '').trim();\nlet content = {};\ntry {\n  content = JSON.parse(cleanJson);\n} catch (e) {\n  content = { linkedin_post: 'Error parsing AI response', twitter_thread: [], image_prompt: '', hashtags: '' };\n}\n\nreturn [{\n  json: {\n    ...items[0].json,\n    content\n  }\n}];"
       },
-      "name": "Parse Posts",
+      "name": "Parse Content",
       "type": "n8n-nodes-base.function",
       "typeVersion": 1,
       "position": [
@@ -59,74 +56,55 @@
     },
     {
       "parameters": {
-        "text": "={{$node[\"Parse Posts\"].json[\"twitterPost\"]}}"
+        "fromEmail": "content@drsayuj.info",
+        "toEmail": "admin@drsayuj.info",
+        "subject": "Social Media Drafts Ready",
+        "text": "Your new social media content is ready for review.",
+        "html": "<h2>New Social Media Content Generated</h2>\n\n<h3>LinkedIn Post</h3>\n<p style=\"white-space: pre-wrap;\">{{$node[\"Parse Content\"].json[\"content\"][\"linkedin_post\"]}}</p>\n<p><b>Hashtags:</b> {{$node[\"Parse Content\"].json[\"content\"][\"hashtags\"]}}</p>\n<hr>\n\n<h3>Twitter Thread</h3>\n<ul>\n{{$node[\"Parse Content\"].json[\"content\"][\"twitter_thread\"].map(t => `<li>${t}</li>`).join('')}}\n</ul>\n<hr>\n\n<h3>Image Prompt</h3>\n<p><i>{{$node[\"Parse Content\"].json[\"content\"][\"image_prompt\"]}}</i></p>"
       },
-      "name": "Post to Twitter",
-      "type": "n8n-nodes-base.twitter",
+      "name": "Email Drafts",
+      "type": "n8n-nodes-base.emailSend",
       "typeVersion": 1,
       "position": [
         850,
-        150
+        300
       ],
       "credentials": {
-        "twitterOAuth2Api": {
-          "id": "YOUR_TWITTER_CRED_ID",
-          "name": "Twitter Account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "text": "={{$node[\"Parse Posts\"].json[\"linkedinPost\"]}}"
-      },
-      "name": "Post to LinkedIn",
-      "type": "n8n-nodes-base.linkedin",
-      "typeVersion": 1,
-      "position": [
-        850,
-        450
-      ],
-      "credentials": {
-        "linkedinOAuth2Api": {
-          "id": "YOUR_LINKEDIN_CRED_ID",
-          "name": "LinkedIn Account"
+        "smtp": {
+          "id": "YOUR_SMTP_CREDENTIAL_ID",
+          "name": "SMTP Account"
         }
       }
     }
   ],
   "connections": {
-    "RSS Feed Trigger": {
+    "Webhook": {
       "main": [
         [
           {
-            "node": "Gemini AI Repurpose",
+            "node": "Gemini Repurpose",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Gemini AI Repurpose": {
+    "Gemini Repurpose": {
       "main": [
         [
           {
-            "node": "Parse Posts",
+            "node": "Parse Content",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Parse Posts": {
+    "Parse Content": {
       "main": [
         [
           {
-            "node": "Post to Twitter",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Post to LinkedIn",
+            "node": "Email Drafts",
             "type": "main",
             "index": 0
           }
