@@ -65,10 +65,15 @@ export default function Hero() {
         // Scrub Engine
         const scrubEngine = new ScrubEngine({
             totalFrames: CONFIG.totalFrames,
+            batchSize: 32, // Start experience after initial 32 frames load (improves LCP)
             onProgress: (p) => setProgress(p),
-            onLoadComplete: () => {
+            onInitLoad: () => {
                 setIsLoading(false);
                 initScroll();
+            },
+            onLoadComplete: () => {
+                // Background loading continues
+                console.log('Hero scrub frames fully loaded in background');
             }
         });
 

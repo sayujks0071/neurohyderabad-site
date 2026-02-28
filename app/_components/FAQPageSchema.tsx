@@ -16,6 +16,11 @@ export default function FAQPageSchema({ faqs, pageUrl }: FAQPageSchemaProps) {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "@id": `${pageUrl}#faq`,
+    "dateModified": new Date().toISOString().split('T')[0],
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": pageUrl
+    },
     "mainEntity": faqs.map(faq => ({
       "@type": "Question",
       "name": faq.question,

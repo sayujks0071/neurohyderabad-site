@@ -1,21 +1,18 @@
 {
-  "timestamp": "2025-02-27T00:00:00Z",
-  "commit_hash": "HEAD",
-  "notes": {
-    "Home": {
-      "bottleneck": "CLS on mobile due to fixed-height video placeholders (450px) vs actual video height (~180px).",
-      "fix": "Updated placeholders in `app/page.tsx` and loading state in `RemotionVideoEmbedWrapper.tsx` to use `aspect-video` and `max-w-[800px]`, ensuring consistent aspect ratio and width during loading.",
-      "impact": "Eliminated large layout shift on mobile devices when videos load. Placeholder now matches the video dimensions exactly."
-    }
+  "timestamp": "2026-02-28T05:41:40Z",
+  "bottleneck_analysis": {
+    "pageType": "Home",
+    "url": "/",
+    "suspectedBottleneck": "LCP/TTI delayed by Hero component waiting for 190 high-resolution images to preload completely before dismissing a full-screen loading spinner and starting interaction.",
+    "metric": "LCP/INP"
   },
-  "metrics": {
-    "before": {
-      "home-cls-mobile": "High (estimated > 0.25)"
-    },
-    "after": {
-      "home-cls-mobile": "Low (estimated < 0.1)"
-    }
-  },
-  "build_status": "Success",
-  "test_status": "Existing failures in unrelated tests (semantic-search, lead_security, stats, dicom validation, appointment SEO schema)."
+  "fix": {
+    "description": "Implemented progressive batch loading in ScrubEngine.ts and Hero.tsx. The Hero animation now starts and dismisses the loading spinner after loading only the first 32 frames, letting the remaining 158 frames load in the background without blocking the critical rendering path.",
+    "expectedImpact": "Significant improvement to Largest Contentful Paint (LCP) and Time to Interactive (TTI), as the visual completeness constraint is reduced from 190 images to 32 images. Interaction responsiveness (INP) also improves since the UI is no longer blocked waiting for the background preloader.",
+    "verificationSteps": [
+      "Run the development server (`npm run dev` or `pnpm dev`).",
+      "Open the Home page (`/`).",
+      "Observe that the 'Loading Experience...' spinner dismisses rapidly, and the main hero text and animation are interactive almost immediately while the console logs 'Hero scrub frames fully loaded in background' later."
+    ]
+  }
 }
