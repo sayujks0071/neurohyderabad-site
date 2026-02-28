@@ -1,0 +1,140 @@
+{
+  "name": "Content Repurposing Engine (Gemini AI)",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "https://www.drsayuj.info/rss.xml"
+      },
+      "name": "RSS Feed Trigger",
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "key",
+              "value": "={{$env.GEMINI_API_KEY}}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "contents",
+              "value": "=[{\"parts\":[{\"text\":\"You are a specialized medical content marketer. Repurpose this blog post into engaging social media posts. The blog title is '{{$node[\\\"RSS Feed Trigger\\\"].json[\\\"title\\\"]}}', link is '{{$node[\\\"RSS Feed Trigger\\\"].json[\\\"link\\\"]}}', and content is '{{$node[\\\"RSS Feed Trigger\\\"].json[\\\"content:encoded\\\"]}}'. Output strictly a JSON object with 'linkedin' (professional, educational format with 2-3 hashtags) and 'twitter' (concise, catchy, max 280 chars with 1-2 hashtags) keys. Do not include Markdown blocks (e.g. ```json).\"}]}]"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Gemini AI Repurpose",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "try {\n  let aiText = items[0].json.candidates[0].content.parts[0].text;\n  // Remove Markdown formatting if Gemini included it despite instructions\n  aiText = aiText.replace(/```json\\n?/gi, '').replace(/```\\n?/g, '').trim();\n  const parsedContent = JSON.parse(aiText);\n  return [{\n    json: {\n      linkedinPost: parsedContent.linkedin,\n      twitterPost: parsedContent.twitter\n    }\n  }];\n} catch (error) {\n  console.error('Error parsing Gemini output:', error);\n  return [{ json: { error: 'Failed to parse AI output' } }];\n}"
+      },
+      "name": "Parse Posts",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        650,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "text": "={{$node[\"Parse Posts\"].json[\"twitterPost\"]}}"
+      },
+      "name": "Post to Twitter",
+      "type": "n8n-nodes-base.twitter",
+      "typeVersion": 1,
+      "position": [
+        850,
+        150
+      ],
+      "credentials": {
+        "twitterOAuth2Api": {
+          "id": "YOUR_TWITTER_CRED_ID",
+          "name": "Twitter Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "text": "={{$node[\"Parse Posts\"].json[\"linkedinPost\"]}}"
+      },
+      "name": "Post to LinkedIn",
+      "type": "n8n-nodes-base.linkedin",
+      "typeVersion": 1,
+      "position": [
+        850,
+        450
+      ],
+      "credentials": {
+        "linkedinOAuth2Api": {
+          "id": "YOUR_LINKEDIN_CRED_ID",
+          "name": "LinkedIn Account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "RSS Feed Trigger": {
+      "main": [
+        [
+          {
+            "node": "Gemini AI Repurpose",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini AI Repurpose": {
+      "main": [
+        [
+          {
+            "node": "Parse Posts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Posts": {
+      "main": [
+        [
+          {
+            "node": "Post to Twitter",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Post to LinkedIn",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {},
+  "staticData": null,
+  "tags": []
+}
