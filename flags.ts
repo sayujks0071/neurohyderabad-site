@@ -16,7 +16,8 @@
  *   const noindex = await seoNoindex();
  */
 
-import { flag } from "flags/next";
+import { flag, dedupe } from "flags/next";
+import { postHogAdapter } from "@flags-sdk/posthog";
 
 // ─────────────────────────────────────────────
 // 1. SEO & Crawl
@@ -298,4 +299,19 @@ export const locationPagesEnabled = flag({
   decide() {
     return this.defaultValue! as any;
   },
+});
+
+// ─────────────────────────────────────────────
+// 5. PostHog Flags
+// ─────────────────────────────────────────────
+
+export const identify = dedupe(async () => ({
+  distinctId: 'user_distinct_id'  // replace with real user ID
+}));
+
+export const myFlag = flag({
+  key: 'my-flag',
+  defaultValue: false,
+  adapter: postHogAdapter.isFeatureEnabled(),
+  identify,
 });
