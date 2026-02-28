@@ -1,0 +1,182 @@
+{
+  "name": "Advanced Lead Triage & AI Analysis",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "lead-triage",
+        "options": {}
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ],
+      "webhookId": "lead-triage-webhook"
+    },
+    {
+      "parameters": {
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=YOUR_GEMINI_API_KEY",
+        "method": "POST",
+        "bodyParametersUi": {
+          "parameter": []
+        },
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "body": "={\n  \"contents\": [{\n    \"parts\": [{\n      \"text\": \"Analyze the following patient lead.\\n\\nPatient Name: {{$node[\\\"Webhook\\\"].json[\\\"body\\\"][\\\"fullName\\\"]}}\\nConcern: {{$node[\\\"Webhook\\\"].json[\\\"body\\\"][\\\"concern\\\"]}}\\n\\nOutput strictly valid JSON with these fields:\\n- urgency: \\\"High\\\" | \\\"Medium\\\" | \\\"Low\\\"\\n- category: \\\"Spine\\\" | \\\"Brain\\\" | \\\"Nerve\\\" | \\\"General\\\"\\n- summary: One sentence medical summary.\\n- suggested_action: Recommended next step.\"\n    }]\n  }]\n}",
+        "options": {}
+      },
+      "name": "Gemini Analysis",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "const geminiResp = items[0].json.candidates[0].content.parts[0].text;\n// Remove markdown code blocks if present\nconst cleanJson = geminiResp.replace(/```json/g, '').replace(/```/g, '').trim();\nlet analysis = {};\ntry {\n  analysis = JSON.parse(cleanJson);\n} catch (e) {\n  analysis = { urgency: 'Medium', category: 'General', summary: 'Could not parse AI response', suggested_action: 'Manual Review' };\n}\n\nreturn [{\n  json: {\n    ...items[0].json,\n    analysis\n  }\n}];"
+      },
+      "name": "Parse AI Response",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        650,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$node[\"Parse AI Response\"].json[\"analysis\"][\"urgency\"]}}",
+              "operation": "equal",
+              "value2": "High"
+            }
+          ]
+        }
+      },
+      "name": "Check Urgency",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        850,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "channel": "urgent-leads",
+        "text": "🚨 *URGENT LEAD DETECTED*\n\n*Name:* {{$node[\"Webhook\"].json[\"body\"][\"fullName\"]}}\n*Concern:* {{$node[\"Webhook\"].json[\"body\"][\"concern\"]}}\n*AI Summary:* {{$node[\"Parse AI Response\"].json[\"analysis\"][\"summary\"]}}\n*Action:* {{$node[\"Parse AI Response\"].json[\"analysis\"][\"suggested_action\"]}}",
+        "attachments": [],
+        "otherOptions": {}
+      },
+      "name": "Slack Urgent",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 1,
+      "position": [
+        1100,
+        200
+      ],
+      "credentials": {
+        "slackApi": {
+          "id": "YOUR_SLACK_CREDENTIAL_ID",
+          "name": "Slack Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "admin@drsayuj.info",
+        "toEmail": "admin@drsayuj.info",
+        "subject": "New Lead: {{$node[\"Webhook\"].json[\"body\"][\"fullName\"]}} ({{$node[\"Parse AI Response\"].json[\"analysis\"][\"urgency\"]}})",
+        "text": "Name: {{$node[\"Webhook\"].json[\"body\"][\"fullName\"]}}\nConcern: {{$node[\"Webhook\"].json[\"body\"][\"concern\"]}}\n\nAI Analysis:\nUrgency: {{$node[\"Parse AI Response\"].json[\"analysis\"][\"urgency\"]}}\nCategory: {{$node[\"Parse AI Response\"].json[\"analysis\"][\"category\"]}}\nSummary: {{$node[\"Parse AI Response\"].json[\"analysis\"][\"summary\"]}}\nAction: {{$node[\"Parse AI Response\"].json[\"analysis\"][\"suggested_action\"]}}",
+        "html": "<h2>New Lead Received</h2><p><b>Name:</b> {{$node[\"Webhook\"].json[\"body\"][\"fullName\"]}}</p><p><b>Concern:</b> {{$node[\"Webhook\"].json[\"body\"][\"concern\"]}}</p><hr><h3>AI Analysis</h3><p><b>Urgency:</b> {{$node[\"Parse AI Response\"].json[\"analysis\"][\"urgency\"]}}</p><p><b>Category:</b> {{$node[\"Parse AI Response\"].json[\"analysis\"][\"category\"]}}</p><p><b>Summary:</b> {{$node[\"Parse AI Response\"].json[\"analysis\"][\"summary\"]}}</p><p><b>Recommended Action:</b> {{$node[\"Parse AI Response\"].json[\"analysis\"][\"suggested_action\"]}}</p>"
+      },
+      "name": "Email Notification",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [
+        1100,
+        400
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "YOUR_SMTP_CREDENTIAL_ID",
+          "name": "SMTP Account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Gemini Analysis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini Analysis": {
+      "main": [
+        [
+          {
+            "node": "Parse AI Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse AI Response": {
+      "main": [
+        [
+          {
+            "node": "Check Urgency",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Urgency": {
+      "main": [
+        [
+          {
+            "node": "Slack Urgent",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Email Notification",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Email Notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {},
+  "staticData": null,
+  "tags": []
+}

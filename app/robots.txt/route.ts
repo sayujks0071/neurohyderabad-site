@@ -29,13 +29,46 @@ const DISALLOW_PATHS = [
 
 export function GET(_req: NextRequest) {
   const lines: string[] = [];
+
+  // Default rules for all crawlers
   lines.push('User-agent: *');
   lines.push('Allow: /');
-
   for (const path of DISALLOW_PATHS) lines.push(`Disallow: ${path}`);
+  lines.push('');
+
+  // AI crawler rules — explicitly allow for AEO visibility
+  lines.push('# AI Search Engine Crawlers (AEO)');
+  lines.push('User-agent: GPTBot');
+  lines.push('Allow: /');
+  for (const path of DISALLOW_PATHS) lines.push(`Disallow: ${path}`);
+  lines.push('');
+
+  lines.push('User-agent: ChatGPT-User');
+  lines.push('Allow: /');
+  lines.push('');
+
+  lines.push('User-agent: PerplexityBot');
+  lines.push('Allow: /');
+  lines.push('');
+
+  lines.push('User-agent: Google-Extended');
+  lines.push('Allow: /');
+  lines.push('');
+
+  lines.push('User-agent: Applebot-Extended');
+  lines.push('Allow: /');
+  lines.push('');
+
+  lines.push('User-agent: anthropic-ai');
+  lines.push('Allow: /');
+  lines.push('');
 
   // Sitemaps (all should be HTTP 200 and valid XML)
   lines.push(`Sitemap: ${SITE_URL}/sitemap.xml`);
+  lines.push('');
+
+  // Host directive for Yandex and other crawlers
+  lines.push(`Host: www.drsayuj.info`);
 
   return new Response(lines.join('\n') + '\n', {
     headers: {

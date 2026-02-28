@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
-import { spring, useCurrentFrame, useVideoConfig, interpolate } from 'remotion';
+import { spring, useCurrentFrame, useVideoConfig, interpolate, interpolateColors } from 'remotion';
 import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
+import { COLORS } from '../../utils/colorTokens';
 
 interface WelcomeCharacterProps {
   char: string;
@@ -59,6 +60,16 @@ export const WelcomeCharacter: React.FC<WelcomeCharacterProps> = ({ char, delay,
     [frame, delay, prefersReducedMotion]
   );
 
+  // Color interpolation: Start with accent color and fade to white
+  const color = useMemo(() =>
+    prefersReducedMotion ? COLORS.surface : interpolateColors(
+      frame - delay,
+      [0, 30],
+      [COLORS.accent, COLORS.surface]
+    ),
+    [frame, delay, prefersReducedMotion]
+  );
+
   // Micro-animation: subtle wave after entrance
   // Only start after entrance is done (approx delay + 25 frames)
   const waveStartFrame = delay + 25;
@@ -75,6 +86,7 @@ export const WelcomeCharacter: React.FC<WelcomeCharacterProps> = ({ char, delay,
         opacity,
         transform: `translateY(${yOffset + waveY}px) scale(${scale})`,
         filter: `blur(${blur}px)`,
+        color: color,
         whiteSpace: 'pre',
       }}
     >
