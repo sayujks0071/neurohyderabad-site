@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { verifyAdminAccess } from "@/src/lib/security";
 import { rateLimit } from "@/src/lib/rate-limit";
 import { validateReferralFile } from "@/lib/referral/validation";
-import { analyzeReferral } from "@/lib/referral/analyze";
+import { analyzeReferral, analyzeText } from "@/lib/referral/analyze";
 
 export const runtime = "nodejs";
 export const maxDuration = 60; // 60 seconds
@@ -24,20 +24,37 @@ export async function POST(request: Request) {
   }
 
   try {
-    // 3. Parse and Validate File
-    const formData = await request.formData();
-    const file = formData.get("file") as File | null;
+    const contentType = request.headers.get("content-type") || "";
 
-    const validation = validateReferralFile(file as File);
-    if (!validation.valid) {
-      return NextResponse.json({ error: validation.error }, { status: 400 });
+    if (contentType.includes("application/json")) {
+       // Handle pre-extracted text
+       const body = await request.json();
+       const text = body.text;
+
+       if (!text) {
+         return NextResponse.json({ error: "No text provided" }, { status: 400 });
+       }
+
+       // Proceed directly to Gemini analysis (logic duplicated from analyzeReferral but skipping extraction)
+       const analysis = await analyzeText(text);
+       return NextResponse.json(analysis);
+
+    } else {
+       // Handle file upload
+       const formData = await request.formData();
+       const file = formData.get("file") as File | null;
+
+       const validation = validateReferralFile(file as File);
+       if (!validation.valid) {
+         return NextResponse.json({ error: validation.error }, { status: 400 });
+       }
+
+       // 4. Analyze
+       const buffer = Buffer.from(await (file as File).arrayBuffer());
+       const analysis = await analyzeReferral(buffer);
+
+       return NextResponse.json(analysis);
     }
-
-    // 4. Analyze
-    const buffer = Buffer.from(await (file as File).arrayBuffer());
-    const analysis = await analyzeReferral(buffer);
-
-    return NextResponse.json(analysis);
 
   } catch (error: any) {
     console.error("[Referral Analyzer] Error:", error);

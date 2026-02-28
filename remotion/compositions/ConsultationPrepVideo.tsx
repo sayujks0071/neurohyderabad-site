@@ -23,18 +23,19 @@ export const ConsultationPrepVideo: React.FC<ConsultationPrepProps> = ({
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+  const prefersReducedMotion = usePrefersReducedMotion();
 
-  // Scene 1 Exit: Push up and fade out
-  const scene1ExitOpacity = interpolate(frame, [150, 180], [1, 0], {
+  // Scene 1 Exit: Fade out and scale down slightly
+  const scene1ExitOpacity = interpolate(frame, [160, 180], [1, 0], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
-  const scene1ExitY = interpolate(frame, [150, 180], [0, -50], {
+  const scene1ExitScale = interpolate(frame, [160, 180], [1, 0.95], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
 
-  // Scene 2 Entrance: Spring up and fade in
+  // Scene 2 Entrance: Slide up and fade in
   const scene2EnterSpring = spring({
     frame: frame - 150,
     fps,
@@ -47,25 +48,25 @@ export const ConsultationPrepVideo: React.FC<ConsultationPrepProps> = ({
     extrapolateRight: 'clamp',
   });
 
-  // Scene 2 Exit: Push up and fade out
-  const scene2ExitOpacity = interpolate(frame, [420, 450], [1, 0], {
+  // Scene 2 Exit: Fade out and push up
+  const scene2ExitOpacity = interpolate(frame, [430, 460], [1, 0], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
-  const scene2ExitY = interpolate(frame, [420, 450], [0, -50], {
+  const scene2ExitY = interpolate(frame, [430, 460], [0, -50], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
 
-  // Scene 3 Entrance: Spring up and fade in
+  // Scene 3 Entrance: Slide up and fade in
   const scene3EnterSpring = spring({
-    frame: frame - 420,
+    frame: frame - 430,
     fps,
     from: 50,
     to: 0,
     config: { damping: 15 },
   });
-  const scene3EnterOpacity = interpolate(frame, [420, 440], [0, 1], {
+  const scene3EnterOpacity = interpolate(frame, [430, 450], [0, 1], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
@@ -77,19 +78,19 @@ export const ConsultationPrepVideo: React.FC<ConsultationPrepProps> = ({
         <AbsoluteFill
           style={{
             opacity: scene1ExitOpacity,
-            transform: `translateY(${scene1ExitY}px)`,
+            transform: `scale(${prefersReducedMotion ? 1 : scene1ExitScale})`,
           }}
         >
           <WelcomeScene patientName={patientName} />
         </AbsoluteFill>
       </Sequence>
 
-      {/* Scene 2: Calendar (9 seconds + 1s overlap) */}
-      <Sequence from={150} durationInFrames={300}>
+      {/* Scene 2: Calendar (10 seconds + overlap) */}
+      <Sequence from={150} durationInFrames={310}>
         <AbsoluteFill
           style={{
             opacity: scene2EnterOpacity * scene2ExitOpacity,
-            transform: `translateY(${scene2EnterSpring + scene2ExitY}px)`,
+            transform: `translateY(${prefersReducedMotion ? 0 : scene2EnterSpring + scene2ExitY}px)`,
           }}
         >
           <CalendarScene
@@ -99,12 +100,12 @@ export const ConsultationPrepVideo: React.FC<ConsultationPrepProps> = ({
         </AbsoluteFill>
       </Sequence>
 
-      {/* Scene 3: Prep Steps (15 seconds + 1s overlap) */}
-      <Sequence from={420} durationInFrames={480}>
+      {/* Scene 3: Prep Steps (16 seconds + overlap) */}
+      <Sequence from={430} durationInFrames={470}>
         <AbsoluteFill
           style={{
             opacity: scene3EnterOpacity,
-            transform: `translateY(${scene3EnterSpring}px)`,
+            transform: `translateY(${prefersReducedMotion ? 0 : scene3EnterSpring}px)`,
           }}
         >
           <PrepStepsScene
@@ -114,9 +115,9 @@ export const ConsultationPrepVideo: React.FC<ConsultationPrepProps> = ({
         </AbsoluteFill>
       </Sequence>
 
-      {/* Transition Flashes (Placed on top) */}
+      {/* Transition Flashes (Placed on top for smooth effect) */}
       <TransitionFlash startFrame={165} />
-      <TransitionFlash startFrame={435} />
+      <TransitionFlash startFrame={445} />
     </AbsoluteFill>
   );
 };
