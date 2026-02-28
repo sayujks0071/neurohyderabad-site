@@ -65,6 +65,7 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
   });
 
   // Spring-based scale animation for main container
+  // Adjusted damping for a slightly bouncier/friendlier feel (15 -> 10)
   const scale = prefersReducedMotion ? 1 : spring({
     frame,
     fps,
@@ -72,7 +73,7 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
     to: 1,
     durationInFrames: 30,
     config: {
-      damping: 15,
+      damping: 10,
     },
   });
 
