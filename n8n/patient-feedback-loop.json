@@ -1,0 +1,184 @@
+{
+  "name": "Patient Feedback Loop (Gemini AI)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "patient-feedback",
+        "options": {}
+      },
+      "name": "Feedback Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ],
+      "webhookId": "patient-feedback-webhook"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "key",
+              "value": "={{$env.GEMINI_API_KEY}}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "contents",
+              "value": "=[{\"parts\":[{\"text\":\"Analyze this patient feedback and output a JSON object with 'sentiment' (positive, neutral, negative) and a suggested empathetic 'responseDraft'. If negative, draft an apology and invitation to discuss. If positive, draft a thank you and request for a Google Review. Feedback: \\\"{{$node[\\\"Feedback Webhook\\\"].json[\\\"body\\\"][\\\"feedback\\\"]}}\\\"\"}]}]"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Gemini Sentiment Analysis",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "let textResp = items[0].json.candidates[0].content.parts[0].text;\n// Clean markdown wrapping\ntextResp = textResp.replace(/```json\\n?/g, '').replace(/```\\n?/g, '').trim();\ntry {\n  const aiData = JSON.parse(textResp);\n  return [{\n    json: {\n      ...items[0].json,\n      sentiment: aiData.sentiment,\n      responseDraft: aiData.responseDraft\n    }\n  }];\n} catch (e) {\n  console.error('Error parsing sentiment:', e);\n  return [{ json: { error: 'Failed to parse sentiment' } }];\n}"
+      },
+      "name": "Parse Sentiment",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        650,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$node[\"Parse Sentiment\"].json[\"sentiment\"]}}",
+              "operation": "equal",
+              "value2": "negative"
+            }
+          ]
+        }
+      },
+      "name": "Is Negative?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        850,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "channel": "urgent-feedback",
+        "text": "🚨 NEGATIVE PATIENT FEEDBACK 🚨\nName: {{$node[\"Feedback Webhook\"].json[\"body\"][\"patientName\"]}}\nFeedback: {{$node[\"Feedback Webhook\"].json[\"body\"][\"feedback\"]}}\n\nSuggested Response Draft: {{$node[\"Parse Sentiment\"].json[\"responseDraft\"]}}",
+        "attachments": [],
+        "otherOptions": {}
+      },
+      "name": "Slack Alert (Negative)",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 1,
+      "position": [
+        1050,
+        150
+      ],
+      "credentials": {
+        "slackApi": {
+          "id": "YOUR_SLACK_CRED_ID",
+          "name": "Slack Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "feedback@drsayuj.info",
+        "toEmail": "={{$node[\"Feedback Webhook\"].json[\"body\"][\"patientEmail\"]}}",
+        "subject": "Thank You for Your Feedback!",
+        "text": "={{$node[\"Parse Sentiment\"].json[\"responseDraft\"]}}",
+        "html": "<p>{{$node[\"Parse Sentiment\"].json[\"responseDraft\"]}}</p>",
+        "options": {}
+      },
+      "name": "Send Draft Response",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [
+        1050,
+        450
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "YOUR_SMTP_CREDENTIAL_ID",
+          "name": "SMTP Account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Feedback Webhook": {
+      "main": [
+        [
+          {
+            "node": "Gemini Sentiment Analysis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini Sentiment Analysis": {
+      "main": [
+        [
+          {
+            "node": "Parse Sentiment",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Sentiment": {
+      "main": [
+        [
+          {
+            "node": "Is Negative?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is Negative?": {
+      "main": [
+        [
+          {
+            "node": "Slack Alert (Negative)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send Draft Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {},
+  "staticData": null,
+  "tags": []
+}
