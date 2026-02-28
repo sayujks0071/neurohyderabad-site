@@ -3,8 +3,8 @@
 
 import { useChat } from '@ai-sdk/react'
 import { useState, useRef, useEffect } from 'react'
-import Header from '../components/HeaderRefactored'
-import Footer from '../components/Footer'
+import Header from '../components/HeaderRefactored';
+import Footer from '../components/Footer';
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 
