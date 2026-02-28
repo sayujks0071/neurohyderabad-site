@@ -56,17 +56,17 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
   const prefersReducedMotion = usePrefersReducedMotion();
 
   // Spring-based fade-in animation for main container
-  const opacity = prefersReducedMotion ? 1 : spring({
+  const opacity = useMemo(() => prefersReducedMotion ? 1 : spring({
     frame,
     fps,
     from: 0,
     to: 1,
     durationInFrames: 30,
-  });
+  }), [frame, fps, prefersReducedMotion]);
 
   // Spring-based scale animation for main container
   // Adjusted damping for a slightly bouncier/friendlier feel (15 -> 10)
-  const scale = prefersReducedMotion ? 1 : spring({
+  const scale = useMemo(() => prefersReducedMotion ? 1 : spring({
     frame,
     fps,
     from: 0.8,
@@ -75,29 +75,15 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
     config: {
       damping: 10,
     },
-  });
+  }), [frame, fps, prefersReducedMotion]);
 
   // Subtle breathing animation for continuous movement
-  const breathingScale = prefersReducedMotion ? 1 : 1 + Math.sin(frame / 45) * 0.01;
+  const breathingScale = useMemo(() => prefersReducedMotion ? 1 : 1 + Math.sin(frame / 45) * 0.01, [frame, prefersReducedMotion]);
 
   // Subtitle animation (starts after title)
   const subtitleStartFrame = 15;
-  const subtitleOpacity = prefersReducedMotion ? 1 : spring({
-    frame: frame - subtitleStartFrame,
-    fps,
-    from: 0,
-    to: 1,
-    durationInFrames: 40,
-  });
-
-  const subtitleY = prefersReducedMotion ? 0 : spring({
-    frame: frame - subtitleStartFrame,
-    fps,
-    from: 20,
-    to: 0,
-    durationInFrames: 40,
-    config: { damping: 12 },
-  });
+  const subtitleText = "Welcome to Dr. Sayuj Krishnan's Practice";
+  const subtitleWords = useMemo(() => subtitleText.split(' '), []);
 
   return (
     <GradientBackground preset="clinical-blue" animated={!prefersReducedMotion}>
@@ -140,19 +126,52 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
               />
             ))}
           </h1>
-          <p
+          <div
             style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
+              gap: '8px',
               fontFamily: FONTS.primary,
               fontSize: '32px',
               fontWeight: 500,
               color: 'rgba(255, 255, 255, 0.9)',
               margin: 0,
-              opacity: subtitleOpacity,
-              transform: `translateY(${subtitleY}px)`,
             }}
           >
-            Welcome to Dr. Sayuj Krishnan's Practice
-          </p>
+            {subtitleWords.map((word, index) => {
+              const delay = subtitleStartFrame + index * 3;
+              const wordOpacity = prefersReducedMotion ? 1 : spring({
+                frame: frame - delay,
+                fps,
+                from: 0,
+                to: 1,
+                durationInFrames: 40,
+              });
+
+              const wordY = prefersReducedMotion ? 0 : spring({
+                frame: frame - delay,
+                fps,
+                from: 20,
+                to: 0,
+                durationInFrames: 40,
+                config: { damping: 12 },
+              });
+
+              return (
+                <span
+                  key={index}
+                  style={{
+                    opacity: wordOpacity,
+                    transform: `translateY(${wordY}px)`,
+                    display: 'inline-block',
+                  }}
+                >
+                  {word}
+                </span>
+              );
+            })}
+          </div>
         </div>
       </div>
     </GradientBackground>
