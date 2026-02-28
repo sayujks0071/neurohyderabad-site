@@ -14,6 +14,8 @@ import { getServiceSources } from '../sources';
 import MedicalWebPageSchema from '../../components/schemas/MedicalWebPageSchema';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import SurgeryComparisonTable from '@/src/components/SurgeryComparisonTable';
+import PatientJourneySection from '@/src/components/PatientJourneySection';
+import EndoscopicProcedureSteps from '@/src/components/EndoscopicProcedureSteps';
 
 const SERVICE_SLUG = 'spine-surgery-hyderabad';
 
@@ -84,6 +86,33 @@ const faqs = [
     question: 'Is insurance and cashless treatment available for spine surgery?',
     answer:
       'Yes, we accept all major insurance providers and offer cashless facilities at Yashoda Hospitals. Our team handles the pre-authorization paperwork for seamless processing.',
+  },
+];
+
+const JOURNEY_STEPS = [
+  {
+    title: 'Assessment',
+    description: 'Detailed clinical history and physical examination.',
+  },
+  {
+    title: 'Imaging Review',
+    description: 'On-the-spot review of your MRI/CT scans.',
+  },
+  {
+    title: 'Diagnosis',
+    description: 'Clear explanation of your spine condition with models.',
+  },
+  {
+    title: 'Care Plan',
+    description: 'Discussion of conservative vs. surgical options.',
+  },
+  {
+    title: 'Procedure',
+    description: 'Minimally invasive or endoscopic surgery if needed.',
+  },
+  {
+    title: 'Recovery',
+    description: 'Structured physiotherapy and return-to-activity plan.',
   },
 ];
 
@@ -164,6 +193,7 @@ export default function SpineSurgeryHyderabadPage() {
             Understanding the difference between traditional open surgery and modern endoscopic techniques is crucial for making an informed decision. Dr. Sayuj prioritizes tissue-preserving methods that allow for faster recovery.
           </p>
           <SurgeryComparisonTable />
+          <EndoscopicProcedureSteps />
         </section>
 
         <section className="mb-16">
@@ -248,30 +278,21 @@ export default function SpineSurgeryHyderabadPage() {
           </div>
         </section>
 
-        <section className="mb-16 grid md:grid-cols-2 gap-10">
-          <div>
-            <h2 className="text-3xl font-bold text-blue-900 mb-4">What to Expect at Yashoda Hospital, Malakpet</h2>
-            <p className="text-gray-700 mb-6">
-              Every patient meets Dr. Sayuj personally for a detailed review of symptoms, neurological exam, and imaging studies.
-              When conservative therapy fails or weakness progresses, surgical decompression or stabilization provides durable
-              protection for the spinal cord and nerves. Whenever possible, full endoscopic or tubular approaches are used to
-              minimise tissue disruption.
-            </p>
-            <p className="text-gray-700">
-              For unstable or deformity cases, navigation-guided fusion constructs ensure precise alignment and long-term
-              stability. Our care team in Malakpet coordinates physiotherapy, pain management, and return-to-work planning for
-              office professionals and manual workers alike.
-            </p>
-          </div>
-          <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
-            <h3 className="text-xl font-semibold text-blue-800 mb-4">The Consultation Pathway</h3>
-            <ol className="space-y-3 text-sm text-gray-700 list-decimal list-inside">
-              <li>Bring MRI/CT scans to your first visit for an on-the-spot review.</li>
-              <li>Receive a detailed explanation of the pathology and all treatment options.</li>
-              <li>Discuss minimally invasive or fusion approaches tailored to your lifestyle.</li>
-              <li>Plan post-operative milestones with structured physiotherapy support.</li>
-            </ol>
-          </div>
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-blue-900 mb-4">What to Expect at Yashoda Hospital, Malakpet</h2>
+          <p className="text-gray-700 mb-6">
+            Every patient meets Dr. Sayuj personally for a detailed review of symptoms, neurological exam, and imaging studies.
+            When conservative therapy fails or weakness progresses, surgical decompression or stabilization provides durable
+            protection for the spinal cord and nerves. Whenever possible, full endoscopic or tubular approaches are used to
+            minimise tissue disruption.
+          </p>
+          <p className="text-gray-700 mb-8">
+            For unstable or deformity cases, navigation-guided fusion constructs ensure precise alignment and long-term
+            stability. Our care team in Malakpet coordinates physiotherapy, pain management, and return-to-work planning for
+            office professionals and manual workers alike.
+          </p>
+
+          <PatientJourneySection title="Your Spine Care Journey" steps={JOURNEY_STEPS} />
         </section>
 
         <section className="mb-16">

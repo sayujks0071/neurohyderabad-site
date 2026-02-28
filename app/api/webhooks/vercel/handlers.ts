@@ -5,12 +5,31 @@
  * See: https://vercel.com/docs/observability/webhooks-api-reference
  */
 
-import { addDeploymentEvent } from './status/store';
+import { addDeploymentEvent, getRecentDeployments } from './status/store';
+import { analyzeEvent, formatSlackMessage } from '@/src/lib/vercel-sre';
+import { slack } from '@/src/lib/slack';
 
 interface EventMetadata {
   eventId: string;
   createdAt: number | string;
   region: string | null;
+}
+
+// Helper to send SRE report
+async function sendSREReport(eventType: string, payload: any) {
+  try {
+    const history = getRecentDeployments();
+    const report = analyzeEvent(eventType, payload, history);
+    const message = formatSlackMessage(report);
+
+    // Send to Slack
+    await slack.notify(message);
+
+    // Log to console
+    console.log(`[SRE Report] Sent for ${eventType}`);
+  } catch (error) {
+    console.error('[SRE Report] Failed to generate/send report:', error);
+  }
 }
 
 // ===== DEPLOYMENT EVENT HANDLERS =====
@@ -41,6 +60,9 @@ export async function handleDeploymentCreated(payload: any, metadata: EventMetad
     createdAt: new Date(metadata.createdAt).toISOString(),
     region: metadata.region,
   });
+
+  // Optional: SRE analysis for created events (usually low value, but good for tracking)
+  // await sendSREReport('deployment.created', payload);
 }
 
 export async function handleDeploymentReady(payload: any, metadata: EventMetadata) {
@@ -65,6 +87,8 @@ export async function handleDeploymentReady(payload: any, metadata: EventMetadat
     createdAt: new Date(metadata.createdAt).toISOString(),
     region: metadata.region,
   });
+
+  await sendSREReport('deployment.ready', payload);
 }
 
 export async function handleDeploymentSucceeded(payload: any, metadata: EventMetadata) {
@@ -91,6 +115,8 @@ export async function handleDeploymentSucceeded(payload: any, metadata: EventMet
     createdAt: new Date(metadata.createdAt).toISOString(),
     region: metadata.region,
   });
+
+  await sendSREReport('deployment.succeeded', payload);
 }
 
 export async function handleDeploymentPrepared(payload: any, metadata: EventMetadata) {
@@ -153,6 +179,9 @@ export async function handleDeploymentError(payload: any, metadata: EventMetadat
     region: metadata.region,
   });
 
+  // Send SRE Report
+  await sendSREReport('deployment.error', payload);
+
   // Send to monitoring service if configured
   if (process.env.MONITORING_WEBHOOK_URL) {
     try {
@@ -202,6 +231,8 @@ export async function handleDeploymentCancelled(payload: any, metadata: EventMet
     createdAt: new Date(metadata.createdAt).toISOString(),
     region: metadata.region,
   });
+
+  await sendSREReport('deployment.canceled', payload);
 }
 
 export async function handleDeploymentCleanup(payload: any, metadata: EventMetadata) {
@@ -278,6 +309,9 @@ export async function handleDeploymentChecksFailed(payload: any, metadata: Event
     region: metadata.region,
   });
 
+  // Send SRE Report
+  await sendSREReport('deployment.checks.failed', payload);
+
   // Send to monitoring service if configured
   if (process.env.MONITORING_WEBHOOK_URL) {
     try {
@@ -319,6 +353,8 @@ export async function handleDeploymentChecksSucceeded(payload: any, metadata: Ev
     createdAt: new Date(metadata.createdAt).toISOString(),
     region: metadata.region,
   });
+
+  await sendSREReport('deployment.checks.succeeded', payload);
 }
 
 export async function handleDeploymentCheckrunStart(payload: any, metadata: EventMetadata) {
@@ -452,6 +488,7 @@ export async function handleDomainCreated(payload: any, metadata: EventMetadata)
     domainName: payload.domain?.name,
     delegated: payload.domain?.delegated,
   });
+  await sendSREReport('domain.created', payload);
 }
 
 export async function handleDomainRenewal(payload: any, metadata: EventMetadata) {
@@ -461,6 +498,7 @@ export async function handleDomainRenewal(payload: any, metadata: EventMetadata)
     expirationDate: payload.expirationDate,
     renewedAt: payload.renewedAt,
   });
+  await sendSREReport('domain.renewal', payload);
 }
 
 export async function handleDomainRenewalFailed(payload: any, metadata: EventMetadata) {
@@ -469,6 +507,7 @@ export async function handleDomainRenewalFailed(payload: any, metadata: EventMet
     errorReason: payload.errorReason,
     failedAt: payload.failedAt,
   });
+  await sendSREReport('domain.renewal.failed', payload);
 }
 
 export async function handleDomainCertificateAdd(payload: any, metadata: EventMetadata) {
@@ -481,6 +520,7 @@ export async function handleDomainCertificateAddFailed(payload: any, metadata: E
   console.error('[webhooks/vercel] Domain certificate add failed:', {
     dnsNames: payload.dnsNames,
   });
+  await sendSREReport('domain.certificate.add.failed', payload);
 }
 
 export async function handleDomainCertificateRenew(payload: any, metadata: EventMetadata) {
@@ -493,6 +533,7 @@ export async function handleDomainCertificateRenewFailed(payload: any, metadata:
   console.error('[webhooks/vercel] Domain certificate renew failed:', {
     dnsNames: payload.dnsNames,
   });
+  await sendSREReport('domain.certificate.renew.failed', payload);
 }
 
 export async function handleDomainCertificateDeleted(payload: any, metadata: EventMetadata) {
@@ -506,6 +547,7 @@ export async function handleDomainDnsRecordsChanged(payload: any, metadata: Even
     zone: payload.zone,
     changes: payload.changes,
   });
+  await sendSREReport('domain.dns.records.changed', payload);
 }
 
 export async function handleDomainAutoRenewChanged(payload: any, metadata: EventMetadata) {
@@ -532,6 +574,7 @@ export async function handleDomainTransferInFailed(payload: any, metadata: Event
   console.error('[webhooks/vercel] Domain transfer in failed:', {
     domainName: payload.domain?.name,
   });
+  await sendSREReport('domain.transfer.in.failed', payload);
 }
 
 // ===== INTEGRATION EVENT HANDLERS =====
@@ -642,6 +685,8 @@ export async function handleAlertsTriggered(payload: any, metadata: EventMetadat
     alerts: payload.alerts,
     links: payload.links,
   });
+
+  await sendSREReport('alerts.triggered', payload);
 
   // Send to monitoring service if configured
   if (process.env.MONITORING_WEBHOOK_URL) {
