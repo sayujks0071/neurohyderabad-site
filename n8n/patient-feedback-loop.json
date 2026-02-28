@@ -1,0 +1,122 @@
+{
+  "name": "Patient Feedback Loop",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "seconds": 0,
+              "minutes": 0,
+              "hours": 9
+            }
+          ]
+        }
+      },
+      "name": "Weekly Schedule",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://www.drsayuj.info/api/admin/patients/recent",
+        "method": "GET",
+        "authentication": "header",
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "x-admin-key",
+              "value": "REPLACE_WITH_YOUR_ADMIN_KEY"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Get Recent Patients",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "patients",
+        "options": {}
+      },
+      "name": "Split Patients",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 1,
+      "position": [
+        650,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "care@drsayuj.info",
+        "toEmail": "={{$node[\"Split Patients\"].json[\"email\"]}}",
+        "subject": "How was your experience with Dr. Sayuj?",
+        "text": "Dear {{$node[\"Split Patients\"].json[\"firstName\"]}},\n\nWe hope you are recovering well. We would love to hear about your experience with us to help us improve.\n\nPlease take a moment to rate your visit: https://www.drsayuj.info/feedback?id={{$node[\"Split Patients\"].json[\"id\"]}}\n\nWarm regards,\nDr. Sayuj's Team",
+        "html": "<p>Dear {{$node[\"Split Patients\"].json[\"firstName\"]}},</p><p>We hope you are recovering well. We would love to hear about your experience with us to help us improve.</p><p><a href=\"https://www.drsayuj.info/feedback?id={{$node[\"Split Patients\"].json[\"id\"]}}\">Click here to rate your visit</a></p><p>Warm regards,<br>Dr. Sayuj's Team</p>"
+      },
+      "name": "Send Feedback Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [
+        850,
+        300
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "REPLACE_WITH_YOUR_SMTP_CREDENTIAL_ID",
+          "name": "SMTP Account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Weekly Schedule": {
+      "main": [
+        [
+          {
+            "node": "Get Recent Patients",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Recent Patients": {
+      "main": [
+        [
+          {
+            "node": "Split Patients",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Patients": {
+      "main": [
+        [
+          {
+            "node": "Send Feedback Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {},
+  "staticData": null,
+  "tags": []
+}
