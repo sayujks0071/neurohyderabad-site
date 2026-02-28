@@ -64,6 +64,7 @@
   "dependencies": {
     "@ai-sdk/openai": "3.0.18",
     "@ai-sdk/react": "3.0.51",
+    "@calcom/embed-react": "^1.5.3",
     "@flags-sdk/hypertune": "^0.3.2",
     "@google-cloud/bigquery": "^8.1.1",
     "@google/genai": "^0.6.0",

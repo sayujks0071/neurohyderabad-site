@@ -1,0 +1,184 @@
+{
+  "name": "Advanced Lead Triage (Gemini AI)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "lead-webhook",
+        "options": {}
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ],
+      "webhookId": "advanced-lead-webhook-id"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "key",
+              "value": "={{$env.GEMINI_API_KEY}}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "contents",
+              "value": "=[{\"parts\":[{\"text\":\"Analyze the following patient lead information and output a JSON object with 'urgency' (high, medium, low) and 'category' (e.g., Spine Surgery, General Consultation, etc.). Lead details:\\nName: {{$node[\\\"Webhook\\\"].json[\\\"body\\\"][\\\"fullName\\\"]}}\\nConcern: {{$node[\\\"Webhook\\\"].json[\\\"body\\\"][\\\"concern\\\"]}}\"}]}]"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Gemini AI Analysis",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "let aiResponse = items[0].json.candidates[0].content.parts[0].text;\naiResponse = aiResponse.replace(/```json\\n?/g, '').replace(/```\\n?/g, '').trim();\nconst parsed = JSON.parse(aiResponse);\nreturn [{\n  json: {\n    ...items[0].json,\n    urgency: parsed.urgency,\n    category: parsed.category\n  }\n}];"
+      },
+      "name": "Parse AI Output",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        650,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$node[\"Parse AI Output\"].json[\"urgency\"]}}",
+              "operation": "equal",
+              "value2": "high"
+            }
+          ]
+        }
+      },
+      "name": "Check Urgency",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        850,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "channel": "urgent-leads",
+        "text": "HIGH URGENCY LEAD: {{$node[\"Webhook\"].json[\"body\"][\"fullName\"]}}\nCategory: {{$node[\"Parse AI Output\"].json[\"category\"]}}\nConcern: {{$node[\"Webhook\"].json[\"body\"][\"concern\"]}}",
+        "attachments": [],
+        "otherOptions": {}
+      },
+      "name": "Slack Alert (High)",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 1,
+      "position": [
+        1050,
+        150
+      ],
+      "credentials": {
+        "slackApi": {
+          "id": "YOUR_SLACK_CREDENTIAL_ID",
+          "name": "Slack Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "admin@drsayuj.info",
+        "toEmail": "admin@drsayuj.info",
+        "subject": "New Lead ({{$node[\"Parse AI Output\"].json[\"urgency\"]}} urgency)",
+        "text": "Lead Details:\nName: {{$node[\"Webhook\"].json[\"body\"][\"fullName\"]}}\nConcern: {{$node[\"Webhook\"].json[\"body\"][\"concern\"]}}\nCategory: {{$node[\"Parse AI Output\"].json[\"category\"]}}",
+        "html": "<p>Lead Details:</p><ul><li>Name: {{$node[\"Webhook\"].json[\"body\"][\"fullName\"]}}</li><li>Concern: {{$node[\"Webhook\"].json[\"body\"][\"concern\"]}}</li><li>Category: {{$node[\"Parse AI Output\"].json[\"category\"]}}</li></ul>",
+        "options": {}
+      },
+      "name": "Email Notification (Normal)",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [
+        1050,
+        450
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "YOUR_SMTP_CREDENTIAL_ID",
+          "name": "SMTP Account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Gemini AI Analysis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini AI Analysis": {
+      "main": [
+        [
+          {
+            "node": "Parse AI Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse AI Output": {
+      "main": [
+        [
+          {
+            "node": "Check Urgency",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Urgency": {
+      "main": [
+        [
+          {
+            "node": "Slack Alert (High)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Email Notification (Normal)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {},
+  "staticData": null,
+  "tags": []
+}
