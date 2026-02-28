@@ -1,8 +1,8 @@
 # Latest SEO Operation
 
-**Date**: 2026-02-27
-**Focus**: On-Page SEO / Video Engagement
+**Date**: 2026-02-28
+**Focus**: Structured Data / Video SEO
 **Page**: `app/services/minimally-invasive-spine-surgery/page.tsx`
-**Action**: Replaced generic placeholder video with specific "L5-S1 Endoscopic Discectomy" case study from Yashoda Hospitals YouTube channel.
+**Action**: Added `VideoObject` Schema to the embedded "L5-S1 Endoscopic Discectomy" video to improve chances of winning video rich snippets in Google Search results.
 
-**Report**: [View Full Report](./2026-02-27/report.md)
+**Report**: [View Full Report](./2026-02-28/report.md)
