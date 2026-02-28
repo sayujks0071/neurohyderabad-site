@@ -92,8 +92,8 @@ importers:
         specifier: ^3.1.0
         version: 3.2.0
       '@vercel/sandbox':
-        specifier: 1.4.1
-        version: 1.4.1
+        specifier: 1.7.1
+        version: 1.7.1
       '@vitejs/plugin-react':
         specifier: ^5.1.2
         version: 5.1.4(vite@7.3.1(@types/node@20.19.33)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
@@ -4633,8 +4633,8 @@ packages:
   '@vercel/rust@1.0.5':
     resolution: {integrity: sha512-Y03g59nv1uT6Da+PvB/50WqJSHlaFZ9MSkG00R82dUcTySslMbQdOeaXymZtabrmU8zQYhWDb1/CwBki8sWnaQ==}
 
-  '@vercel/sandbox@1.4.1':
-    resolution: {integrity: sha512-5jaNLv6QJ0112ZFhCv9hQDCV3IYogpbEn5LzMcY5E8TZsf5tF0avat2tBe7McOJvgVs0SDkuzjvGjUMKtTkjrA==}
+  '@vercel/sandbox@1.7.1':
+    resolution: {integrity: sha512-TI9InUQe7sqyO4/TIiGXC/3RHA0hTt5PpFaTWeWunkbKZae26nuPVsd+p10W/WN2THUKE+NPtTJ21dhp1Yw48w==}
 
   '@vercel/static-build@2.8.40':
     resolution: {integrity: sha512-h4/Z2orXHPGU0fw+K+x9D9JwVkhYZeJvKjYcTDwfvUGR4gTEEtcVB3+OKQBE2XJz6qR7i8KIP9SCK1VqbM+apg==}
@@ -16169,7 +16169,7 @@ snapshots:
       '@iarna/toml': 2.2.5
       execa: 5.1.1
 
-  '@vercel/sandbox@1.4.1':
+  '@vercel/sandbox@1.7.1':
     dependencies:
       '@vercel/oidc': 3.2.0
       async-retry: 1.3.3
