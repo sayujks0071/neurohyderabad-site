@@ -1,4 +1,5 @@
 import { SITE_URL } from '../../../src/lib/seo';
+import { SOCIAL_PROFILES } from '../../../src/data/locations';
 
 export default function WebsiteSchema() {
   const schema = {
@@ -13,7 +14,8 @@ export default function WebsiteSchema() {
       "@type": "Physician",
       "@id": `${SITE_URL}/#physician`,
       "name": "Dr. Sayuj Krishnan S"
-    }
+    },
+    "sameAs": SOCIAL_PROFILES
     // Note: SearchAction removed - no search page implemented yet
     // Can be re-added when /search route is created
   };
