@@ -40,6 +40,7 @@ import StandaloneFlagValues from "./_components/StandaloneFlagValues";
 import MiddlewareRUM from "./_components/MiddlewareRUM";
 import MicrosoftClarity from "./_components/MicrosoftClarity";
 import HypertuneWrapper from "./providers/hypertune-wrapper";
+import WebMCPProvider from "@/src/components/WebMCPProvider";
 import { SITE_URL } from "../src/lib/seo";
 
 export const metadata: Metadata = {
@@ -188,6 +189,7 @@ export default function RootLayout({
         <TrustStrip />
         <HypertuneWrapper>
           <FlagValuesEmitter />
+          <WebMCPProvider />
           <main id="main-content" tabIndex={-1} role="main">
             {children}
           </main>
