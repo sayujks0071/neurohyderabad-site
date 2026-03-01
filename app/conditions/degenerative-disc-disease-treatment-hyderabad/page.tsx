@@ -38,8 +38,8 @@ export const metadata: Metadata = {
   },
 };
 
-// ISR: Revalidate every 6 hours
-export const revalidate = 21600;
+// ISR: Revalidate every 24 hours
+export const revalidate = 86400;
 
 const FAQ = [
   {
@@ -345,7 +345,7 @@ export default function DegenerativeDiscDiseasePage() {
     </div>
   </section>
 
-  <LocalPathways mode="condition" />
+  <LocalPathways mode="condition" currentSlug="degenerative-disc-disease-treatment-hyderabad" />
 
   <section className="mb-12 space-y-6">
     <ReviewedBy />

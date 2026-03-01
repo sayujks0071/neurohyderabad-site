@@ -1,0 +1,73 @@
+name: Jules Daily OpenSandbox Improvements
+# Run Jules Coding Agents securely in a daily schedule
+on:
+  schedule:
+    # 05:00 UTC (10:30 IST)
+    - cron: '0 5 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  daily-sandbox:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install uv
+          uv pip install --system opensandbox opensandbox-code-interpreter requests httpx
+
+      - name: Start OpenSandbox Server
+        run: |
+          echo "Cloning and starting alibaba/OpenSandbox server..."
+          git clone https://github.com/alibaba/OpenSandbox.git /tmp/OpenSandbox
+          cd /tmp/OpenSandbox/server
+          uv sync
+          cp example.config.toml ~/.sandbox.toml
+
+          # Start server in the background
+          uv run python -m src.main > /tmp/sandbox-server.log 2>&1 &
+
+          echo "Waiting for OpenSandbox server to be ready..."
+          # The server uses FastAPI on port 8000. Wait for it to listen
+          for i in {1..30}; do
+            if curl -s http://127.0.0.1:8000/docs > /dev/null; then
+              echo "✅ OpenSandbox Server is up!"
+              break
+            fi
+            sleep 2
+          done
+
+          if ! curl -s http://127.0.0.1:8000/docs > /dev/null; then
+            echo "❌ OpenSandbox Server failed to start. Logs:"
+            cat /tmp/sandbox-server.log
+            exit 1
+          fi
+
+      - name: Run Daily Sandbox Task Script
+        env:
+          SANDBOX_API_URL: http://127.0.0.1:8000
+        run: |
+          python scripts/daily-sandbox-task.py
+
+      - name: Commit and Create PR
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: "[Jules] Daily OpenSandbox Incremental Checks"
+          body: |
+            Automated daily code/health checks executed inside `OpenSandbox`.
+
+            This PR contains the generated reports or modified files output directly from the isolated environment.
+          branch: "jules/daily-sandbox-checks"
+          delete-branch: true

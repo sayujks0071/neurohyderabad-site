@@ -217,7 +217,7 @@ export default async function ConditionStubPage({ params }: PageParams) {
         />
 
         <div className="mt-12">
-          <LocalPathways mode="condition" />
+          <LocalPathways mode="condition" currentSlug="[slug]" />
         </div>
       </div>
     </div>

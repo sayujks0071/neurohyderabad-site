@@ -436,7 +436,7 @@ export default function CompareNeurosurgeonsPage() {
 
 
       <div className="mt-12">
-        <LocalPathways mode="service" />
+        <LocalPathways mode="service" currentSlug="compare-neurosurgeons-hyderabad" />
       </div>
       <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
       <NAP />
