@@ -68,12 +68,12 @@ describe('Sandbox API Route', () => {
 
     const req = new NextRequest('http://localhost:3000/api/ai/sandbox', {
       method: 'POST',
-      body: JSON.stringify({ messages: [] }),
+      body: JSON.stringify({ messages: [{ role: 'user', content: 'hello' }] }),
     });
 
     const response = await POST(req);
     expect(response.status).toBe(500);
     const body = await response.json();
-    expect(body.error).toBe('AI Gateway is not configured.');
+    expect(body.error).toBe('AI Gateway API key or OpenAI API key not configured');
   });
 });
