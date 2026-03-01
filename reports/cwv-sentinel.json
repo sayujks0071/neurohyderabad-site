@@ -1,18 +1,33 @@
 {
-  "timestamp": "2026-02-28T05:41:40Z",
-  "bottleneck_analysis": {
-    "pageType": "Home",
-    "url": "/",
-    "suspectedBottleneck": "LCP/TTI delayed by Hero component waiting for 190 high-resolution images to preload completely before dismissing a full-screen loading spinner and starting interaction.",
-    "metric": "LCP/INP"
-  },
-  "fix": {
-    "description": "Implemented progressive batch loading in ScrubEngine.ts and Hero.tsx. The Hero animation now starts and dismisses the loading spinner after loading only the first 32 frames, letting the remaining 158 frames load in the background without blocking the critical rendering path.",
-    "expectedImpact": "Significant improvement to Largest Contentful Paint (LCP) and Time to Interactive (TTI), as the visual completeness constraint is reduced from 190 images to 32 images. Interaction responsiveness (INP) also improves since the UI is no longer blocked waiting for the background preloader.",
-    "verificationSteps": [
-      "Run the development server (`npm run dev` or `pnpm dev`).",
-      "Open the Home page (`/`).",
-      "Observe that the 'Loading Experience...' spinner dismisses rapidly, and the main hero text and animation are interactive almost immediately while the console logs 'Hero scrub frames fully loaded in background' later."
-    ]
+  "timestamp": "2024-05-20T00:00:00Z",
+  "commit_hash": "HEAD",
+  "pages": {
+    "home": {
+      "url": "/",
+      "type": "home",
+      "suspected_issue": "Heavy client-side Hero component. Loads 32 images before unblocking the UI.",
+      "proposed_fix": "Changed batchSize from 32 to 4 in app/components/scrollytelling/Hero.tsx.",
+      "implemented_fix": "Changed batchSize from 32 to 4 in app/components/scrollytelling/Hero.tsx.",
+      "expected_impact": "Significantly improves LCP (Largest Contentful Paint) and INP (Interaction to Next Paint) by unblocking the main thread and making the hero text visible much earlier. The loading screen disappears faster because only 4 frames are awaited initially instead of 32.",
+      "verification_steps": "Run the site locally (npm run dev) and load the homepage. Observe that the loading overlay disappears much faster than before, revealing the hero content sooner. The scrub scroll will still work as remaining images load in the background."
+    },
+    "appointment": {
+      "url": "/appointments",
+      "type": "appointment",
+      "suspected_issue": "None apparent from code structure.",
+      "proposed_fix": "None"
+    },
+    "location": {
+      "url": "/locations",
+      "type": "location",
+      "suspected_issue": "None apparent from code structure.",
+      "proposed_fix": "None"
+    },
+    "condition": {
+      "url": "/conditions",
+      "type": "condition",
+      "suspected_issue": "None apparent from code structure.",
+      "proposed_fix": "None"
+    }
   }
 }
