@@ -1,27 +1,33 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { readFile, stat } from 'fs/promises';
-import { join } from 'path';
+import { resolve } from 'path';
 
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const filePath = searchParams.get('path');
+    const rawFilePath = searchParams.get('path');
 
-    if (!filePath) {
+    if (!rawFilePath) {
       return NextResponse.json(
         { error: 'File path is required' },
         { status: 400 }
       );
     }
 
+    // Resolve to absolute path to prevent traversal (e.g., passing /schemas/../.env)
+    const filePath = resolve(rawFilePath);
+
     // Security check: ensure the file is within allowed directories
     const allowedDirs = [
-      join(process.cwd(), 'geo-bot', 'output'),
-      join(process.cwd(), 'schemas'),
+      resolve(process.cwd(), 'geo-bot', 'output'),
+      resolve(process.cwd(), 'schemas'),
     ];
 
-    const isAllowed = allowedDirs.some(dir => filePath.startsWith(dir));
+    // Check if the resolved path starts with any of the allowed directories
+    // Append separator to ensure we don't match /schemas-hacked/
+    const isAllowed = allowedDirs.some(dir => filePath.startsWith(dir + '/'));
     if (!isAllowed) {
+      console.warn(`[Security] Blocked path traversal attempt to: ${rawFilePath}`);
       return NextResponse.json(
         { error: 'Access denied' },
         { status: 403 }
