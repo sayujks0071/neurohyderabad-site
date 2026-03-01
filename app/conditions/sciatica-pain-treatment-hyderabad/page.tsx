@@ -45,8 +45,8 @@ export const metadata: Metadata = {
   },
 };
 
-// ISR: Revalidate every 6 hours
-export const revalidate = 21600;
+// ISR: Revalidate every 24 hours
+export const revalidate = 86400;
 
 const FAQ = [
   {

@@ -11,7 +11,7 @@ import LazySection from "../_components/LazySection";
 import RemotionVideoEmbedWrapper from "../_components/RemotionVideoEmbedWrapper";
 
 // Ensure page is statically generated
-export const revalidate = 3600; // Revalidate every hour
+export const revalidate = 86400; // Revalidate every 24 hours
 
 export const metadata: Metadata = {
   title: "Dr Sayuj Krishnan | Best Neurosurgeon in Hyderabad",

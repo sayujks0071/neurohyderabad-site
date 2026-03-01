@@ -22,7 +22,7 @@ import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
 const SERVICE_SLUG = 'microdiscectomy-surgery-hyderabad';
 
 // Ensure page is statically generated
-export const revalidate = 3600; // Revalidate every hour
+export const revalidate = 86400; // Revalidate every 24 hours
 
 const baseMetadata = makeMetadata({
   title: 'Microdiscectomy Surgery Hyderabad | Microscopic Spine Surgery',
