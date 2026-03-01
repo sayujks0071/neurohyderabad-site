@@ -44,7 +44,39 @@ export async function GET(_req: NextRequest) {
   const unique = new Set<string>();
   const entries: Array<{ url: string; lastModified: string; changeFrequency: string; priority: number }> = [];
 
+  // Excluded paths ported from previous next-sitemap.config.js to prevent indexing
+  const EXCLUDED_PATTERNS = [
+    '/api/',
+    '/auth/',
+    '/404',
+    '/500',
+    '/drafts',
+    '/cache-test',
+    '/force-',
+    '/statsig-test',
+    '/test-',
+    '/email-test',
+    '/locations/banjara-hills',
+    '/locations/hitech-city',
+    '/locations/malakpet',
+    '/locations/secunderabad',
+    '/locations/neurosurgeon-',
+    '/locations/brain-spine-surgeon-',
+    'example',
+    'test',
+    'draft',
+    'sample',
+    'template',
+    'placeholder'
+  ];
+
+  function isExcluded(url: string) {
+    const lower = url.toLowerCase();
+    return EXCLUDED_PATTERNS.some(pattern => lower.includes(pattern));
+  }
+
   function add(url: string, priority: number, changeFrequency: string) {
+    if (isExcluded(url)) return;
     const full = `${SITE_URL}${url}`;
     if (unique.has(full)) return;
     unique.add(full);
@@ -68,7 +100,7 @@ export async function GET(_req: NextRequest) {
   for (const p of corePages) add(p.url, p.priority, p.changeFrequency);
 
   for (const e of sitemapServices()) {
-    if (unique.has(e.url)) continue;
+    if (isExcluded(e.url) || unique.has(e.url)) continue;
     unique.add(e.url);
     entries.push({
       url: e.url,
@@ -78,7 +110,7 @@ export async function GET(_req: NextRequest) {
     });
   }
   for (const e of sitemapConditions()) {
-    if (unique.has(e.url)) continue;
+    if (isExcluded(e.url) || unique.has(e.url)) continue;
     unique.add(e.url);
     entries.push({
       url: e.url,
@@ -88,7 +120,7 @@ export async function GET(_req: NextRequest) {
     });
   }
   for (const e of sitemapLocations()) {
-    if (unique.has(e.url)) continue;
+    if (isExcluded(e.url) || unique.has(e.url)) continue;
     unique.add(e.url);
     entries.push({
       url: e.url,
