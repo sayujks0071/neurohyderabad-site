@@ -1,114 +1,121 @@
-"use client";
+'use client';
 
-import { useEffect } from "react";
-import { CLINIC } from "@/app/_lib/clinic";
-import { ModelContextTool } from "@/src/types/webmcp";
+import { useEffect } from 'react';
+import Script from 'next/script';
 
 export default function WebMCPProvider() {
   useEffect(() => {
-    if (typeof window === "undefined" || !window.navigator.modelContext) {
-      return;
-    }
+    // We register tools after the polyfill script loads and initializes window.navigator.modelContext
+    const registerWebMCPTools = () => {
+      if (typeof window === 'undefined' || !window.navigator || !(window.navigator as any).modelContext) {
+        return;
+      }
 
-    const modelContext = window.navigator.modelContext;
+      const modelContext = (window.navigator as any).modelContext;
 
-    const tools: ModelContextTool[] = [
-      {
-        name: "get_clinic_info",
-        description: "Returns the location, address, and contact details for Dr. Sayuj Krishnan.",
+      // Tool 1: Get Clinic Information
+      modelContext.registerTool({
+        name: 'get_clinic_info',
+        description: 'Get basic information about Dr. Sayuj Krishnan and the clinic (address, phone, hours).',
         inputSchema: {
-          type: "object",
-          properties: {},
+          type: 'object',
+          properties: {}
         },
-        execute: async () => {
+        async execute() {
           return {
-            clinic: "Dr. Sayuj Krishnan | Yashoda Hospitals, Malakpet",
-            address: `${CLINIC.street}, ${CLINIC.city}, ${CLINIC.region} ${CLINIC.postalCode}`,
-            phone: CLINIC.phone,
-            phoneHuman: CLINIC.phoneHuman,
-            email: CLINIC.email,
+            content: [{
+              type: 'text',
+              text: `Dr. Sayuj Krishnan - Neurosurgeon & Endoscopic Spine Specialist
+Location: Yashoda Hospital, Malakpet, Hyderabad, Telangana 500036
+Phone: +91 80088 84080
+Hours: Monday to Saturday, 10:00 AM - 5:00 PM
+Specialties: Minimally Invasive Spine Surgery, Brain Tumor Surgery, Endoscopic Spine Surgery, Trigeminal Neuralgia.`
+            }]
           };
-        },
-        annotations: { readOnlyHint: true },
-      },
-      {
-        name: "book_appointment",
-        description: "Books an appointment for a patient consultation. Provide the patient's name, email, phone, age, gender, preferredDate, preferredTime, chiefComplaint.",
+        }
+      });
+
+      // Tool 2: Book Appointment Interaction
+      modelContext.registerTool({
+        name: 'book_appointment',
+        description: 'Helps the AI agent navigate the user to the appointment booking section or provide booking instructions.',
         inputSchema: {
-          type: "object",
+          type: 'object',
           properties: {
-            name: { type: "string", description: "Patient's full name" },
-            email: { type: "string", description: "Patient's email address" },
-            phone: { type: "string", description: "Patient's phone number" },
-            age: { type: "string", description: "Patient's age" },
-            gender: { type: "string", enum: ["male", "female", "other"], description: "Patient's gender" },
-            preferredDate: { type: "string", description: "Preferred date for the appointment in YYYY-MM-DD format" },
-            preferredTime: { type: "string", description: "Preferred time for the appointment" },
-            appointmentType: { type: "string", enum: ["new-consultation", "follow-up", "second-opinion"], description: "Type of appointment" },
-            chiefComplaint: { type: "string", description: "Patient's symptoms or chief complaint" },
-            painScore: { type: "number", description: "Current pain score from 1 to 10" },
-            mriScanAvailable: { type: "boolean", description: "Whether the patient has recent MRI/CT scan reports available" },
-          },
-          required: ["name", "phone", "preferredDate", "preferredTime", "chiefComplaint"]
-        },
-        execute: async (input) => {
-          try {
-            const response = await fetch("/api/workflows/booking", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                "x-booking-source": "webmcp",
-              },
-              body: JSON.stringify({
-                name: input.name || "",
-                email: input.email || "",
-                phone: input.phone || "",
-                age: input.age || "",
-                gender: input.gender || "other",
-                preferredDate: input.preferredDate || "",
-                preferredTime: input.preferredTime || "",
-                appointmentType: input.appointmentType || "new-consultation",
-                chiefComplaint: input.chiefComplaint || "",
-                intakeNotes: `Appointment Type: ${input.appointmentType || "new-consultation"}\nPreferred Date: ${input.preferredDate || ""}\nPreferred Time: ${input.preferredTime || ""}\nSymptoms: ${input.chiefComplaint || ""}\nPain Score: ${input.painScore || 5}/10\nMRI Available: ${input.mriScanAvailable ? "Yes" : "No"}\nBooked via WebMCP.`,
-                painScore: input.painScore || 5,
-                mriScanAvailable: input.mriScanAvailable || false,
-                source: "webmcp",
-              }),
-            });
-
-            if (!response.ok) {
-              const errorData = await response.json().catch(() => null);
-              throw new Error(errorData?.error || `Error: ${response.statusText}`);
+            service: {
+              type: 'string',
+              description: 'The medical service the patient is interested in (e.g., Spine Surgery)'
             }
-
-            return await response.json();
-          } catch (error) {
-            console.error("Error booking appointment via WebMCP:", error);
-            throw error;
           }
         },
-      }
-    ];
+        async execute(args: any) {
+          // Scroll to the booking form if it exists on the page
+          const bookingSection = document.getElementById('book-appointment') || document.querySelector('form');
 
-    tools.forEach((tool) => {
-      try {
-        modelContext.registerTool(tool);
-        console.log(`[WebMCP] Registered tool: ${tool.name}`);
-      } catch (error) {
-        console.error(`[WebMCP] Failed to register tool ${tool.name}:`, error);
-      }
-    });
+          if (bookingSection) {
+            bookingSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            return {
+              content: [{
+                type: 'text',
+                text: `I have navigated to the booking form on the current page for ${args.service || 'consultation'}. The user can now fill in their details.`
+              }]
+            };
+          }
 
-    return () => {
-      tools.forEach((tool) => {
-        try {
-          modelContext.unregisterTool(tool.name);
-        } catch (e) {
-          // Ignore errors
+          // Otherwise, direct them to the contact page
+          window.location.href = '/contact';
+
+          return {
+            content: [{
+              type: 'text',
+              text: `Navigating to the contact and booking page for ${args.service || 'consultation'}.`
+            }]
+          };
+        }
+      });
+
+      // Tool 3: Get Services list
+      modelContext.registerTool({
+        name: 'get_services',
+        description: 'Get a list of medical services and treatments offered by Dr. Sayuj Krishnan.',
+        inputSchema: {
+          type: 'object',
+          properties: {}
+        },
+        async execute() {
+          return {
+            content: [{
+              type: 'text',
+              text: `Available Services:
+1. Endoscopic Spine Surgery (Microdiscectomy, Spinal Decompression)
+2. Brain Tumor Surgery (Gliomas, Meningiomas, Metastases)
+3. Minimally Invasive Spine Surgery (MISS)
+4. Trigeminal Neuralgia Treatment (Microvascular Decompression)
+5. Epilepsy Surgery
+6. Pediatric Neurosurgery
+7. Cerebrovascular Surgery (Aneurysms, AVMs)`
+            }]
+          };
         }
       });
     };
+
+    // Attach event listener to know when the polyfill is ready, or run immediately if already loaded
+    window.addEventListener('load', registerWebMCPTools);
+    // Also try immediately in case the script loaded very fast or we navigated
+    setTimeout(registerWebMCPTools, 1000);
+
+    return () => {
+      window.removeEventListener('load', registerWebMCPTools);
+    };
   }, []);
 
-  return null;
+  return (
+    <>
+      <Script
+        src="https://unpkg.com/@mcp-b/global@latest/dist/index.iife.js"
+        strategy="afterInteractive"
+      />
+    </>
+  );
 }
