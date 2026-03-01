@@ -15,8 +15,8 @@ export default function SourceList({
   if (!sources.length) return null;
 
   return (
-    <section className={`mt-12 bg-gray-50 border border-gray-200 rounded-2xl p-6 ${className}`}>
-      <h2 className="text-xl font-semibold text-gray-900 mb-4">{heading}</h2>
+    <section className={`mt-12 relative bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 ${className}`}>
+      <h2 className="text-xl font-semibold text-slate-800 mb-4">{heading}</h2>
       <ul className="space-y-3 text-sm leading-relaxed">
         {sources.map((source) => (
           <li key={source.href}>
@@ -24,14 +24,14 @@ export default function SourceList({
               href={source.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-700 underline decoration-blue-300 hover:text-blue-900 transition-colors"
+              className="text-blue-600 font-medium underline decoration-blue-200 hover:text-blue-800 hover:decoration-blue-400 transition-all duration-300"
             >
               {source.label}
             </a>
           </li>
         ))}
       </ul>
-      <p className="mt-4 text-xs text-gray-500">
+      <p className="mt-6 text-xs text-slate-500 border-t border-slate-200/60 pt-4">
         External links are provided for transparency and do not represent sponsorships. Each source was accessed on 19 Oct 2025.
       </p>
     </section>
