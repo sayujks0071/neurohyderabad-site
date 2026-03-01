@@ -4,8 +4,8 @@ export interface ScrubEngineConfig {
     extension?: string;
     totalFrames: number;
     batchSize?: number;
-    onInitLoad?: () => void;
     onProgress?: (progress: number) => void;
+    onInitLoad?: () => void;
     onLoadComplete?: () => void;
 }
 
@@ -19,97 +19,125 @@ export class ScrubEngine {
     private loadedCount: number;
     private onInitLoad: () => void;
     private onProgress: (progress: number) => void;
+    private onInitLoad: () => void;
     private onLoadComplete: () => void;
     public isLoaded: boolean;
-    private initialBatchLoaded: boolean;
+    public isReady: boolean;
+    private lastValidFrame: HTMLImageElement | null = null;
 
     constructor(config: ScrubEngineConfig) {
         this.framePath = config.path || '/model-images/';
         this.framePrefix = config.prefix || 'ezgif-frame-';
         this.extension = config.extension || '.jpg';
         this.totalFrames = config.totalFrames;
-        this.batchSize = config.batchSize || 24;
+        this.batchSize = config.batchSize || 24; // Default to loading first 24 frames
         this.images = new Array(config.totalFrames).fill(null);
         this.loadedCount = 0;
         this.onInitLoad = config.onInitLoad || (() => { });
         this.onProgress = config.onProgress || (() => { });
+        this.onInitLoad = config.onInitLoad || (() => { });
         this.onLoadComplete = config.onLoadComplete || (() => { });
         this.isLoaded = false;
-        this.initialBatchLoaded = false;
+        this.isReady = false;
     }
 
     preload() {
-        console.log(`Starting preload of ${this.totalFrames} frames in batches...`);
-        let initialBatchLoadedCount = 0;
-        const batchTarget = Math.min(this.batchSize, this.totalFrames);
+        console.log(`Starting preload of ${this.totalFrames} frames... (Batch size: ${this.batchSize})`);
 
-        // Helper function to load a range of frames
-        const loadRange = (start: number, end: number, isInitialBatch: boolean) => {
-            for (let i = start; i <= end; i++) {
-                const img = new Image();
+        // Load initial batch first
+        const batchEnd = Math.min(this.batchSize, this.totalFrames);
+        this._loadBatch(1, batchEnd, () => {
+            console.log('Initial batch loaded.');
+            this.isReady = true;
 
-                // Pad with zeros to 3 digits (e.g., 001, 010, 100)
-                const frameNum = String(i).padStart(3, '0');
-                const src = `${this.framePath}${this.framePrefix}${frameNum}${this.extension}`;
-
-                img.onload = () => {
-                    // Safe assignment ONLY after fully loaded to prevent DOM/Canvas rendering errors
-                    this.images[i - 1] = img;
-                    this.loadedCount++;
-                    this.onProgress(this.loadedCount / this.totalFrames);
-
-                    if (isInitialBatch && !this.initialBatchLoaded) {
-                        initialBatchLoadedCount++;
-                        if (initialBatchLoadedCount >= batchTarget) {
-                            this.initialBatchLoaded = true;
-                            this.isLoaded = true; // Start experience early
-                            this.onInitLoad();
-                            // Begin loading the remaining frames only after the critical batch is loaded
-                            // This prevents bandwidth contention during the crucial LCP rendering window.
-                            if (batchTarget < this.totalFrames) {
-                                loadRange(batchTarget + 1, this.totalFrames, false);
-                            }
-                        }
-                    }
-
-                    if (this.loadedCount === this.totalFrames) {
-                        this.isLoaded = true;
-                        console.log('All frames loaded.');
-                        this.onLoadComplete();
-                    }
-                };
-                img.onerror = () => {
-                    console.error(`Failed to load frame: ${src}`);
-                    // Still count as processed to avoid hanging, but don't assign to `this.images` to prevent bad draws
-                    this.loadedCount++;
-
-                    if (isInitialBatch && !this.initialBatchLoaded) {
-                        initialBatchLoadedCount++;
-                        if (initialBatchLoadedCount >= batchTarget) {
-                            this.initialBatchLoaded = true;
-                            this.isLoaded = true;
-                            this.onInitLoad();
-                            if (batchTarget < this.totalFrames) {
-                                loadRange(batchTarget + 1, this.totalFrames, false);
-                            }
-                        }
-                    }
-
-                    if (this.loadedCount === this.totalFrames) {
-                        this.isLoaded = true;
-                        this.onLoadComplete();
-                    }
-                };
-                img.src = src; // Trigger network request
+            // Set first frame as initial valid frame
+            if (this.images[0]) {
+                this.lastValidFrame = this.images[0];
             }
-        };
 
-        // Start loading ONLY the critical LCP batch
-        loadRange(1, batchTarget, true);
+            this.onInitLoad();
+
+            // Start loading the rest in background
+            if (batchEnd < this.totalFrames) {
+                // Use setTimeout to yield to main thread before continuing
+                setTimeout(() => {
+                    this._loadRemainingFrames(batchEnd + 1);
+                }, 100);
+            } else {
+                this.isLoaded = true;
+                this.onLoadComplete();
+            }
+        });
+    }
+
+    private _loadBatch(start: number, end: number, onBatchComplete: () => void) {
+        let batchLoadedCount = 0;
+        const batchTotal = end - start + 1;
+
+        if (batchTotal <= 0) {
+            onBatchComplete();
+            return;
+        }
+
+        for (let i = start; i <= end; i++) {
+            this._loadImage(i, () => {
+                batchLoadedCount++;
+                if (batchLoadedCount === batchTotal) {
+                    onBatchComplete();
+                }
+            });
+        }
+    }
+
+    private _loadRemainingFrames(start: number) {
+        console.log('Starting background load of remaining frames...');
+        // Load remaining frames with low priority
+        // We can process them in chunks or all at once depending on network strategy
+        // Here we just fire them off but could be optimized further with requestIdleCallback
+
+        for (let i = start; i <= this.totalFrames; i++) {
+            this._loadImage(i, () => {
+                // Check if all frames are loaded
+                if (this.loadedCount === this.totalFrames) {
+                    this.isLoaded = true;
+                    console.log('All frames loaded.');
+                    this.onLoadComplete();
+                }
+            });
+        }
+    }
+
+    private _loadImage(index: number, callback: () => void) {
+        // Skip if already loaded (safety check)
+        if (this.images[index - 1]) {
+            callback();
+            return;
+        }
+
+        const img = new Image();
+        // Pad with zeros to 3 digits (e.g., 001, 010, 100)
+        const frameNum = String(index).padStart(3, '0');
+        const src = `${this.framePath}${this.framePrefix}${frameNum}${this.extension}`;
+
+        img.src = src;
+        img.onload = () => {
+            // Assign only when fully loaded to prevent getFrame returning incomplete images
+            this.images[index - 1] = img;
+            this.loadedCount++;
+            this.onProgress(this.loadedCount / this.totalFrames);
+            callback();
+        };
+        img.onerror = () => {
+            console.error(`Failed to load frame: ${src}`);
+            // Still count as processed to avoid hanging, but don't add to images array
+            this.loadedCount++;
+            callback();
+        };
     }
 
     getFrame(progress: number): HTMLImageElement | null {
-        if (!this.isLoaded) return null;
+        // Return null only if not even ready (initial batch not loaded)
+        if (!this.isReady) return null;
 
         // Clamp progress between 0 and 1
         const clampedProgress = Math.max(0, Math.min(1, progress));
@@ -117,9 +145,16 @@ export class ScrubEngine {
         // Map progress to frame index
         const frameIndex = Math.floor(clampedProgress * (this.totalFrames - 1));
 
-        // Since images are only added to the array on successful load, this will be null
-        // if the user scrolls too fast, which prevents rendering incomplete Image objects.
-        return this.images[frameIndex];
+        const frame = this.images[frameIndex];
+
+        if (frame) {
+            this.lastValidFrame = frame;
+            return frame;
+        }
+
+        // If requested frame isn't loaded yet (background loading), return last valid frame
+        // This prevents flickering while scrolling into unloaded territory
+        return this.lastValidFrame;
     }
 
     // Cleanup method to help garbage collection if component unmounts
@@ -133,5 +168,7 @@ export class ScrubEngine {
         });
         this.images = [];
         this.isLoaded = false;
+        this.isReady = false;
+        this.lastValidFrame = null;
     }
 }
