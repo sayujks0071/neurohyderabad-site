@@ -33,7 +33,7 @@ export const WelcomeCharacter: React.FC<WelcomeCharacterProps> = ({ char, delay,
       from: 0.5,
       to: 1,
       durationInFrames: 25,
-      config: { damping: 12, stiffness: 100 },
+    config: { damping: 15, stiffness: 100 },
     }),
     [frame, fps, delay, prefersReducedMotion]
   );
@@ -45,7 +45,7 @@ export const WelcomeCharacter: React.FC<WelcomeCharacterProps> = ({ char, delay,
       from: 30,
       to: 0,
       durationInFrames: 25,
-      config: { damping: 12 },
+    config: { damping: 15 },
     }),
     [frame, fps, delay, prefersReducedMotion]
   );
@@ -76,7 +76,7 @@ export const WelcomeCharacter: React.FC<WelcomeCharacterProps> = ({ char, delay,
   const waveY = useMemo(() => {
     if (prefersReducedMotion || frame < waveStartFrame) return 0;
     // Continuous sine wave
-    return Math.sin((frame - waveStartFrame) / 15 + index * 0.5) * 3;
+    return Math.sin((frame - waveStartFrame) / 25 + index * 0.5) * 3;
   }, [frame, waveStartFrame, index, prefersReducedMotion]);
 
   return (

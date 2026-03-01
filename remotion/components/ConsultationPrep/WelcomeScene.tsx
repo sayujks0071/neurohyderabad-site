@@ -9,6 +9,42 @@ export interface WelcomeSceneProps {
   patientName: string;
 }
 
+const WelcomeWord: React.FC<{ word: string; index: number; startFrame: number; reducedMotion: boolean }> = ({ word, index, startFrame, reducedMotion }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  const delay = startFrame + index * 5;
+
+  const opacity = useMemo(() => reducedMotion ? 1 : spring({
+    frame: frame - delay,
+    fps,
+    from: 0,
+    to: 1,
+    durationInFrames: 30,
+  }), [frame, fps, delay, reducedMotion]);
+
+  const translateY = useMemo(() => reducedMotion ? 0 : spring({
+    frame: frame - delay,
+    fps,
+    from: 20,
+    to: 0,
+    durationInFrames: 30,
+    config: { damping: 15 },
+  }), [frame, fps, delay, reducedMotion]);
+
+  return (
+    <span
+      style={{
+        display: 'inline-block',
+        opacity,
+        transform: `translateY(${translateY}px)`,
+      }}
+    >
+      {word}
+    </span>
+  );
+};
+
 const FloatingParticles: React.FC<{ reducedMotion: boolean }> = ({ reducedMotion }) => {
   const frame = useCurrentFrame();
 
@@ -82,22 +118,6 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
 
   // Subtitle animation (starts after title)
   const subtitleStartFrame = 15;
-  const subtitleOpacity = prefersReducedMotion ? 1 : spring({
-    frame: frame - subtitleStartFrame,
-    fps,
-    from: 0,
-    to: 1,
-    durationInFrames: 40,
-  });
-
-  const subtitleY = prefersReducedMotion ? 0 : spring({
-    frame: frame - subtitleStartFrame,
-    fps,
-    from: 20,
-    to: 0,
-    durationInFrames: 40,
-    config: { damping: 12 },
-  });
 
   return (
     <GradientBackground preset="clinical-blue" animated={!prefersReducedMotion}>
@@ -147,11 +167,22 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
               fontWeight: 500,
               color: 'rgba(255, 255, 255, 0.9)',
               margin: 0,
-              opacity: subtitleOpacity,
-              transform: `translateY(${subtitleY}px)`,
+              // Flex to keep inline blocks aligned if wrapped, though simplistic
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
+              gap: '0.25em',
             }}
           >
-            Welcome to Dr. Sayuj Krishnan's Practice
+            {"Welcome to Dr. Sayuj Krishnan's Practice".split(' ').map((word, i) => (
+              <WelcomeWord
+                key={i}
+                word={word}
+                index={i}
+                startFrame={subtitleStartFrame}
+                reducedMotion={prefersReducedMotion}
+              />
+            ))}
           </p>
         </div>
       </div>
