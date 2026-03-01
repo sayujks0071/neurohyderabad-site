@@ -1,5 +1,5 @@
 import Link from "next/link";
-import BreadcrumbListSchema from "./schemas/BreadcrumbListSchema";
+import BreadcrumbSchema from "./schemas/BreadcrumbSchema";
 
 interface BreadcrumbItem {
   name: string;
@@ -13,7 +13,7 @@ interface BreadcrumbsProps {
 export default function Breadcrumbs({ items }: BreadcrumbsProps) {
   return (
     <>
-      <BreadcrumbListSchema items={items} />
+      <BreadcrumbSchema items={items.map(item => ({ name: item.name, path: item.href }))} />
       <nav className="bg-gray-50 py-3" aria-label="Breadcrumb">
         <div className="container mx-auto px-4">
           <ol className="flex items-center space-x-2 text-sm">

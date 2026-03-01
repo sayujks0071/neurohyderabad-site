@@ -83,6 +83,7 @@ function AppointmentFormContent({
           : "Failed to book appointment. Please try again later.",
         "error"
       );
+      throw error;
     } finally {
       setIsLoading(false);
     }
