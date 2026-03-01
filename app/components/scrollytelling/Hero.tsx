@@ -188,13 +188,15 @@ export default function Hero() {
                     <div className="flex flex-wrap gap-4">
                         <Link
                             href="#contact"
-                            className="px-8 py-3 bg-white text-black font-semibold rounded hover:bg-gray-200 transition-colors"
+                            className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-[0.98]"
+                            aria-label="Book Consultation"
                         >
                             Book Consultation
                         </Link>
                         <Link
                             href="/services"
-                            className="px-8 py-3 border border-white text-white font-semibold rounded hover:bg-white/10 transition-colors"
+                            className="bg-white border border-slate-200 text-slate-600 font-medium py-3 px-6 rounded-xl transition-all duration-300 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900"
+                            aria-label="View Procedures"
                         >
                             View Procedures
                         </Link>
