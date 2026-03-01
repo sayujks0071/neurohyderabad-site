@@ -65,7 +65,7 @@ export default function Hero() {
         // Scrub Engine
         const scrubEngine = new ScrubEngine({
             totalFrames: CONFIG.totalFrames,
-            batchSize: 32, // Start experience after initial 32 frames load (improves LCP)
+            batchSize: 4, // Reduce batch size from 32 to 4 to drastically improve LCP by unblocking the main UI thread earlier
             onProgress: (p) => setProgress(p),
             onInitLoad: () => {
                 setIsLoading(false);
