@@ -40,7 +40,9 @@ import StandaloneFlagValues from "./_components/StandaloneFlagValues";
 import MiddlewareRUM from "./_components/MiddlewareRUM";
 import MicrosoftClarity from "./_components/MicrosoftClarity";
 import HypertuneWrapper from "./providers/hypertune-wrapper";
+import WebMCPProvider from "../src/components/WebMCPProvider";
 import { SITE_URL } from "../src/lib/seo";
+import WebMCPProvider from "../src/components/WebMCPProvider";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -174,6 +176,7 @@ export default function RootLayout({
         <GoogleAnalytics />
         <ClientAnalytics />
         <WebsiteSchema />
+        <WebMCPProvider />
         <PhysicianSchema />
         <HospitalSchema />
         <OrganizationSchema />
@@ -197,6 +200,7 @@ export default function RootLayout({
         <Footer />
         <StandaloneFlagValues />
         {process.env.VERCEL ? <Analytics /> : null}
+        <WebMCPProvider />
       </body>
     </html>
   );

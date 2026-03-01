@@ -83,7 +83,7 @@ export default function Page() {
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
-      <LocationSchema location={location} breadcrumb={breadcrumb} faq={FAQ} />
+      <LocationSchema location={location}  faq={FAQ} />
 
       <section className="mb-8">
         <h1 className="text-3xl md:text-4xl font-bold">

@@ -9,8 +9,9 @@ const bundleAnalyzer = withBundleAnalyzer({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Enable production sourcemaps for Middleware
-  productionBrowserSourceMaps: true,
+  // Disable production browser sourcemaps to reduce JS bundle bandwidth.
+  // Server-side sourcemaps are still available via Middleware.io (when MIDDLEWARE_ACCOUNT_KEY is set).
+  productionBrowserSourceMaps: false,
 
   // Enable compression
   compress: true,
@@ -267,26 +268,6 @@ const nextConfig = {
         source: "/api/:path*",
         headers: [
           { key: "Cache-Control", value: "public, max-age=3600, s-maxage=3600" }
-        ]
-      },
-      {
-        source: "/_next/static/css/:path*",
-        headers: [
-          { key: "Content-Type", value: "text/css; charset=utf-8" },
-          { key: "Cache-Control", value: "public, max-age=31536000, immutable" }
-        ]
-      },
-      {
-        source: "/_next/static/js/:path*",
-        headers: [
-          { key: "Content-Type", value: "application/javascript; charset=utf-8" },
-          { key: "Cache-Control", value: "public, max-age=31536000, immutable" }
-        ]
-      },
-      {
-        source: "/_next/static/:path*",
-        headers: [
-          { key: "Cache-Control", value: "public, max-age=31536000, immutable" }
         ]
       },
       {
