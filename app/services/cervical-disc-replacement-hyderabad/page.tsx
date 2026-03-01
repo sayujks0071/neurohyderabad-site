@@ -160,7 +160,7 @@ export default function CervicalADRPage() {
           </section>
 
           <section className="mb-12">
-             <LocalPathways mode="service" />
+             <LocalPathways mode="service" currentSlug="cervical-disc-replacement-hyderabad" />
           </section>
 
           <section className="mb-12">

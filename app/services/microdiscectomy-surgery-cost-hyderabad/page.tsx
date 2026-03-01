@@ -235,7 +235,7 @@ export default function MicrodiscectomyCostPage() {
 
           <section className="mt-12 space-y-6">
             <div className="mt-12">
-              <LocalPathways mode="service" />
+              <LocalPathways mode="service" currentSlug="microdiscectomy-surgery-cost-hyderabad" />
             </div>
             <SourceList sources={ARTICLE_SOURCES} heading="References" />
             <ReviewedBy lastReviewed="2026-01-18" />

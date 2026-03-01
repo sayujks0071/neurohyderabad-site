@@ -65,7 +65,7 @@ export default function NeurosurgeonNearJubileeHillsFAQPage() {
 
   return (
     <main id="main" className="max-w-4xl mx-auto px-4 py-12">
-      <LocationSchema location={location} breadcrumb={breadcrumb} faq={FAQ} />
+      <LocationSchema location={location}  faq={FAQ} />
 
       <h1 className="text-3xl md:text-4xl font-bold mb-8">Neurosurgeon Near Jubilee Hills FAQ | Dr. Sayuj Krishnan</h1>
 

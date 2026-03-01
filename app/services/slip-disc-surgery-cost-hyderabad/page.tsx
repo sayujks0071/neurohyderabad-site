@@ -249,7 +249,7 @@ export default function SlipDiscSurgeryCostPage() {
 
 
       <div className="mt-12">
-        <LocalPathways mode="service" />
+        <LocalPathways mode="service" currentSlug="slip-disc-surgery-cost-hyderabad" />
       </div>
       <SourceList sources={ARTICLE_SOURCES} heading="References" />
             <ReviewedBy lastReviewed="2025-11-25" />

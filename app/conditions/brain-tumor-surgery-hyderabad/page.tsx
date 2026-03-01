@@ -432,7 +432,7 @@ export default function BrainTumorSurgeryConditionPage() {
               </details>
             ))}
           </div>
-          <LocalPathways mode="condition" />
+          <LocalPathways mode="condition" currentSlug="brain-tumor-surgery-hyderabad" />
         </div>
       </section>
 

@@ -242,7 +242,7 @@ export default function SpondylolisthesisPage() {
             </Link>
           </div>
         </div>
-        <LocalPathways mode="condition" />
+        <LocalPathways mode="condition" currentSlug="spondylolisthesis-treatment-hyderabad" />
       </Section>
 
       <Section background="gray">

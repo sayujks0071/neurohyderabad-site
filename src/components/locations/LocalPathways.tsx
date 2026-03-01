@@ -123,9 +123,19 @@ export const LocalPathways: React.FC<LocalPathwaysProps> = ({
     // Use centralized configuration for pathways
     const targetAreas = effectiveMode === 'service' ? SERVICES_PATHWAY_AREAS : CONDITIONS_PATHWAY_AREAS;
 
-    const displayLocations = locations
+    // Filter by target areas and exclude the current area if currentSlug maps to an area
+    let displayLocations = locations
         .filter(l => targetAreas.includes(l.id as any))
         .sort((a, b) => a.areaServedName.localeCompare(b.areaServedName));
+
+    // Exclude current location page if rendered on one, though mode is service/condition
+    if (currentSlug) {
+      displayLocations = displayLocations.filter(loc => {
+        const cleanLocSlug = loc.slug.startsWith('/') ? loc.slug.slice(1) : loc.slug;
+        const cleanCurrentSlug = currentSlug.startsWith('/') ? currentSlug.slice(1) : currentSlug;
+        return cleanLocSlug !== cleanCurrentSlug;
+      });
+    }
 
     const title = effectiveMode === 'service'
       ? 'Visit Our Neurosurgery Clinics in Hyderabad'

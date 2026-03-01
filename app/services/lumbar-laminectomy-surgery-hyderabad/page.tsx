@@ -172,7 +172,7 @@ export default function LumbarLaminectomyPage() {
           </section>
 
           <section className="mb-12">
-             <LocalPathways mode="service" />
+             <LocalPathways mode="service" currentSlug="lumbar-laminectomy-surgery-hyderabad" />
           </section>
 
           <section className="mb-12">

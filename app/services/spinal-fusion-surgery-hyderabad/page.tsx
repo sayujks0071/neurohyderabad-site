@@ -204,7 +204,7 @@ export default function SpinalFusionPage() {
           </div>
 
           <section className="mb-12">
-             <LocalPathways mode="service" />
+             <LocalPathways mode="service" currentSlug="spinal-fusion-surgery-hyderabad" />
           </section>
 
           <section className="mb-12 bg-white border border-orange-200 rounded-2xl p-8 shadow-sm">

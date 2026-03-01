@@ -268,7 +268,7 @@ export default function SpinalStenosisPage() {
             </Link>
           </div>
         </div>
-        <LocalPathways mode="condition" />
+        <LocalPathways mode="condition" currentSlug="spinal-stenosis-treatment-hyderabad" />
       </Section>
 
       <Section background="gray">

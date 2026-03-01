@@ -341,7 +341,7 @@ export default function EndoscopicDiscectomyPage() {
 
 
       <div className="not-prose mt-12">
-        <LocalPathways mode="service" />
+        <LocalPathways mode="service" currentSlug="endoscopic-discectomy-hyderabad" />
       </div>
       <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
 

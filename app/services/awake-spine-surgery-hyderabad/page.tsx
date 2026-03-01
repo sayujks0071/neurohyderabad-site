@@ -183,7 +183,7 @@ export default function AwakeSpineSurgeryPage() {
       </section>
 
       <div className="not-prose mt-12">
-        <LocalPathways mode="service" />
+        <LocalPathways mode="service" currentSlug="awake-spine-surgery-hyderabad" />
       </div>
       <SourceList sources={ARTICLE_SOURCES} />
       <ReviewedBy lastReviewed="2025-10-24" reviewerName="Dr. Sayuj Krishnan" />

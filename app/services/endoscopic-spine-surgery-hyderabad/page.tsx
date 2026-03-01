@@ -936,7 +936,7 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
         </section>
 
         {/* Added bottom Pathways */}
-        <LocalPathways mode="service" />
+        <LocalPathways mode="service" currentSlug="endoscopic-spine-surgery-hyderabad" />
 
         <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
         <ReviewedBy lastReviewed="2025-02-20" />
