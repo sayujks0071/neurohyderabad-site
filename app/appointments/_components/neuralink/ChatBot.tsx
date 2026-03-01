@@ -22,8 +22,12 @@ interface Message {
   sources?: any[];
 }
 
-const ChatBot = () => {
-  const [isOpen, setIsOpen] = useState(false);
+interface ChatBotProps {
+  initialOpen?: boolean;
+}
+
+const ChatBot = ({ initialOpen = false }: ChatBotProps) => {
+  const [isOpen, setIsOpen] = useState(initialOpen);
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "bot",
