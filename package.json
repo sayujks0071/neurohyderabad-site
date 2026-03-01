@@ -117,7 +117,7 @@
     "web-vitals": "^5.1.0",
     "workflow": "4.0.1-beta.50",
     "yup": "^1.4.0",
-    "zod": "^3.25.76"
+    "zod": "3.25.76"
   },
   "devDependencies": {
     "@lhci/cli": "^0.15.1",
