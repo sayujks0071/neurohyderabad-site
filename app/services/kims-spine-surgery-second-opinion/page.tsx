@@ -311,7 +311,7 @@ export default function KIMSSpineSurgerySecondOpinionPage() {
 
 
       <div className="not-prose mt-12">
-        <LocalPathways mode="service" />
+        <LocalPathways mode="service" currentSlug="kims-spine-surgery-second-opinion" />
       </div>
       <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
       <NAP />

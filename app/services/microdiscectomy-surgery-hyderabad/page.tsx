@@ -475,7 +475,7 @@ export default function MicrodiscectomySurgeryPage() {
         </section>
 
         {/* Added bottom Pathways */}
-        <LocalPathways mode="service" />
+        <LocalPathways mode="service" currentSlug="microdiscectomy-surgery-hyderabad" />
 
         <SourceList sources={ARTICLE_SOURCES} heading="Medical References" />
         <ReviewedBy lastReviewed="2026-01-27" />

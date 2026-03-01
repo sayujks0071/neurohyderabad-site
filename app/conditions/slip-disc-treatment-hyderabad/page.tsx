@@ -404,7 +404,7 @@ export default function SlipDiscTreatmentPage() {
       />
 
       <div className="mt-12">
-        <LocalPathways mode="condition" />
+        <LocalPathways mode="condition" currentSlug="slip-disc-treatment-hyderabad" />
       </div>
       <SourceList sources={sources['slip-disc-treatment-hyderabad'] || []} />
 </main>

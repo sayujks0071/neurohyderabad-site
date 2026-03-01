@@ -268,7 +268,7 @@ export default function UniportalPage() {
           <p className="text-gray-700 mb-6">
             Located in Malakpet, we are easily accessible via the Metro (Malakpet Station) and main roads. We serve patients from across the city including Dilsukhnagar, LB Nagar, and the Old City.
           </p>
-          <LocalPathways mode="service" className="mb-8" />
+          <LocalPathways mode="service" currentSlug="uniportal-endoscopic-spine-surgery-hyderabad" />
         </section>
 
         <CostTransparencySection
@@ -305,7 +305,7 @@ export default function UniportalPage() {
           </div>
         </section>
 
-        <LocalPathways mode="service" />
+        <LocalPathways mode="service" currentSlug="uniportal-endoscopic-spine-surgery-hyderabad" />
 
         <SourceList sources={ARTICLE_SOURCES} heading="Scientific References" />
         <ReviewedBy lastReviewed="2026-01-10" />
