@@ -218,6 +218,18 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
     }))
   };
 
+  const videoSchema = {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "name": "Surgery for Paracentral Disc Herniation | L5-S1 Endoscopic Discectomy | Yashoda Hospitals Hyderabad",
+    "description": "L5-S1 paracentral disc herniation is a common condition where the nucleus pulposus pushes out, compressing nerve roots and causing lower back pain, sciatica, and weakness. L5-S1 endoscopic discectomy offers a minimally invasive solution. This procedure involves a small incision, reduced blood loss, and lower infection risk compared to traditional surgery.",
+    "thumbnailUrl": "https://img.youtube.com/vi/HPhPB5jY0xk/maxresdefault.jpg",
+    "uploadDate": "2024-05-15T08:00:00+05:30",
+    "duration": "PT1M45S",
+    "contentUrl": "https://www.youtube.com/watch?v=HPhPB5jY0xk",
+    "embedUrl": "https://www.youtube.com/embed/HPhPB5jY0xk"
+  };
+
   return (
     <>
       <MedicalWebPageSchema
@@ -236,6 +248,7 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
         ]}
       />
       <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/minimally-invasive-spine-surgery`} />
+      <JsonLd data={videoSchema} />
       <div className="min-h-screen bg-white">
       <div className="container mx-auto px-4 py-16">
         <header className="text-center mb-8">
@@ -268,7 +281,7 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
         </section>
 
         <section className="mb-12">
-            <LocalPathways mode="service" />
+            <LocalPathways mode="service" currentSlug="minimally-invasive-spine-surgery" />
         </section>
 
         <section className="mb-10 rounded-lg border border-green-200 bg-green-50 p-6">

@@ -308,7 +308,7 @@ export default function SpineSurgeryCostPage() {
 
           <section className="mt-16 space-y-8">
             <div className="mt-12">
-              <LocalPathways mode="service" />
+              <LocalPathways mode="service" currentSlug="spine-surgery-cost-hyderabad" />
             </div>
             <SourceList sources={ARTICLE_SOURCES} heading="References" />
             <ReviewedBy lastReviewed="2025-11-25" />

@@ -2,6 +2,9 @@ import { ImageResponse } from "next/og";
 import type { NextRequest } from "next/server";
 
 // export const runtime = "edge"; // Commented out to use Node.js runtime
+// Cap at 10 s to avoid runaway timeouts (exceeded requests return a 504).
+// Typical OG generation completes in <3 s; 10 s is a generous safety margin.
+export const maxDuration = 10;
 
 const DEFAULT_BRAND = "#0FA3B1"; // Brand teal accent
 const TEXT = "#0B1220";

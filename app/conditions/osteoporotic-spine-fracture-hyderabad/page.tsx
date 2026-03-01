@@ -187,7 +187,7 @@ export default function OsteoporoticFracturePage() {
             </Link>
           </div>
         </div>
-        <LocalPathways mode="condition" />
+        <LocalPathways mode="condition" currentSlug="osteoporotic-spine-fracture-hyderabad" />
       </Section>
 
       <Section>

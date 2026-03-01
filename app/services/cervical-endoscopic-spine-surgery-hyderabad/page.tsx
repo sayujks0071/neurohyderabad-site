@@ -148,7 +148,7 @@ export default function CervicalEndoscopicSpineSurgeryPage() {
         </section>
 
         <section className="mb-12">
-            <LocalPathways mode="service" />
+            <LocalPathways mode="service" currentSlug="cervical-endoscopic-spine-surgery-hyderabad" />
         </section>
 
         <section className="mb-12">

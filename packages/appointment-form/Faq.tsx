@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import { useState, useId } from "react";
 import { FAQ_DATA, ChevronDownIcon } from "./constants";
 
 interface FaqItemProps {
@@ -10,23 +10,30 @@ interface FaqItemProps {
 
 function FaqItem({ question, answer }: FaqItemProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const contentId = useId();
 
   return (
     <div className="border-b border-slate-200 py-4">
-      <button
-        type="button"
-        onClick={() => setIsOpen((value) => !value)}
-        className="w-full flex justify-between items-center text-left"
-      >
-        <h3 className="text-lg font-medium text-slate-800">{question}</h3>
-        <ChevronDownIcon
-          className={`w-6 h-6 text-slate-500 transform transition-transform duration-300 ${
-            isOpen ? "rotate-180" : ""
-          }`}
-        />
-      </button>
+      <h3 className="text-lg font-medium text-slate-800">
+        <button
+          type="button"
+          id={`${contentId}-btn`}
+          onClick={() => setIsOpen((value) => !value)}
+          className="w-full flex justify-between items-center text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 rounded-sm"
+          aria-expanded={isOpen}
+          aria-controls={contentId}
+        >
+          {question}
+          <ChevronDownIcon
+            className={`w-6 h-6 text-slate-500 transform transition-transform duration-300 ${
+              isOpen ? "rotate-180" : ""
+            }`}
+            aria-hidden="true"
+          />
+        </button>
+      </h3>
       {isOpen && (
-        <div className="mt-3 text-slate-600 text-base leading-relaxed">
+        <div id={contentId} role="region" aria-labelledby={`${contentId}-btn`} className="mt-3 text-slate-600 text-base leading-relaxed">
           <p>{answer}</p>
         </div>
       )}

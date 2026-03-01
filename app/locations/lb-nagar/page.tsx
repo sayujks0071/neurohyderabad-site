@@ -59,7 +59,7 @@ export default function LBNagarLocationPage() {
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
-      <LocationSchema location={location} breadcrumb={breadcrumb} faq={FAQ} />
+      <LocationSchema location={location}  faq={FAQ} />
 
       {/* Hero Section */}
       <div className="mb-10 text-center md:text-left">
