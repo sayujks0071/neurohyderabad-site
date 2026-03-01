@@ -4,6 +4,8 @@
  */
 
 import { GoogleGenAI } from '@google/genai';
+import { generateText } from 'ai';
+import { getTextModel } from '@/src/lib/ai/gateway';
 import {
   FileSearchQuery,
   FileSearchResponse,
@@ -18,26 +20,12 @@ import { getGeminiClient } from './file-handler';
 export async function searchFiles(
   query: FileSearchQuery
 ): Promise<FileSearchResponse> {
-  const genAI = getGeminiClient();
+  // Use Vercel AI Gateway for queries without files (better monitoring/budgeting)
+  if (!query.fileUris || query.fileUris.length === 0) {
+    try {
+      const prompt = `Answer the following medical question. Since no specific documents are currently uploaded, provide general medical information with appropriate disclaimers.
 
-  try {
-    const { query: searchQuery, fileUris = [], temperature = 0.7 } = query;
-
-    // If no specific files provided, this will search across context
-    // For now, provide general knowledge answer with a note about document availability
-    const prompt = fileUris.length > 0
-      ? `Answer the following question based on the provided documents.
-If the information is not available in the documents, say so clearly.
-
-Question: ${searchQuery}
-
-Please provide:
-1. A direct answer
-2. Supporting evidence from the documents (with references)
-3. Confidence level (high/medium/low)`
-      : `Answer the following medical question. Since no specific documents are currently uploaded, provide general medical information with appropriate disclaimers.
-
-Question: ${searchQuery}
+Question: ${query.query}
 
 Please provide:
 1. A direct answer based on general medical knowledge
@@ -45,6 +33,39 @@ Please provide:
 3. Recommendation to consult with a healthcare professional
 
 Note: This answer is based on general medical knowledge. For personalized medical advice, please consult with Dr. Sayuj Krishnan at +91-9778280044.`;
+
+      const { text } = await generateText({
+        model: getTextModel('google/gemini-2.0-flash'),
+        prompt,
+        temperature: query.temperature || 0.7,
+      });
+
+      return {
+        answer: text,
+        usedFiles: [],
+        sources: [],
+      };
+    } catch (error) {
+      console.error('AI Gateway search failed:', error);
+      throw error;
+    }
+  }
+
+  // Legacy implementation for file-based search (GoogleGenAI direct usage)
+  const genAI = getGeminiClient();
+
+  try {
+    const { query: searchQuery, fileUris = [], temperature = 0.7 } = query;
+
+    const prompt = `Answer the following question based on the provided documents.
+If the information is not available in the documents, say so clearly.
+
+Question: ${searchQuery}
+
+Please provide:
+1. A direct answer
+2. Supporting evidence from the documents (with references)
+3. Confidence level (high/medium/low)`;
 
     // Build the request with file context
     const requestParts: any[] = [{ text: prompt }];
