@@ -22,7 +22,7 @@ import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
 const SERVICE_SLUG = 'microdiscectomy-surgery-hyderabad';
 
 // Ensure page is statically generated
-export const revalidate = 3600; // Revalidate every hour
+export const revalidate = 86400; // Revalidate every 24 hours
 
 const baseMetadata = makeMetadata({
   title: 'Microdiscectomy Surgery Hyderabad | Microscopic Spine Surgery',
@@ -475,7 +475,7 @@ export default function MicrodiscectomySurgeryPage() {
         </section>
 
         {/* Added bottom Pathways */}
-        <LocalPathways mode="service" />
+        <LocalPathways mode="service" currentSlug="microdiscectomy-surgery-hyderabad" />
 
         <SourceList sources={ARTICLE_SOURCES} heading="Medical References" />
         <ReviewedBy lastReviewed="2026-01-27" />

@@ -571,7 +571,7 @@ export default function CervicalMyelopathyPage() {
 
 
       <div className="mt-12">
-        <LocalPathways mode="condition" />
+        <LocalPathways mode="condition" currentSlug="cervical-myelopathy-decompression-hyderabad" />
       </div>
       <SourceList sources={sources['cervical-myelopathy-decompression-hyderabad'] || []} />
       

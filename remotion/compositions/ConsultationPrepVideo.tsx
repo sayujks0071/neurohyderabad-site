@@ -1,3 +1,4 @@
+import React, { useMemo } from 'react';
 import { AbsoluteFill, Sequence, useCurrentFrame, interpolate, spring, useVideoConfig } from 'remotion';
 import type { ConsultationPrepProps } from '../types/ConsultationPrepProps';
 import { WelcomeScene } from '../components/ConsultationPrep/WelcomeScene';
@@ -26,50 +27,54 @@ export const ConsultationPrepVideo: React.FC<ConsultationPrepProps> = ({
   const prefersReducedMotion = usePrefersReducedMotion();
 
   // Scene 1 Exit: Fade out and scale down slightly
-  const scene1ExitOpacity = interpolate(frame, [160, 180], [1, 0], {
+  const scene1ExitOpacity = useMemo(() => interpolate(frame, [160, 180], [1, 0], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
-  });
-  const scene1ExitScale = interpolate(frame, [160, 180], [1, 0.95], {
+  }), [frame]);
+
+  const scene1ExitScale = useMemo(() => interpolate(frame, [160, 180], [1, 0.95], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
-  });
+  }), [frame]);
 
   // Scene 2 Entrance: Slide up and fade in
-  const scene2EnterSpring = spring({
+  const scene2EnterSpring = useMemo(() => spring({
     frame: frame - 150,
     fps,
     from: 50,
     to: 0,
     config: { damping: 15 },
-  });
-  const scene2EnterOpacity = interpolate(frame, [150, 170], [0, 1], {
+  }), [frame, fps]);
+
+  const scene2EnterOpacity = useMemo(() => interpolate(frame, [150, 170], [0, 1], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
-  });
+  }), [frame]);
 
   // Scene 2 Exit: Fade out and push up
-  const scene2ExitOpacity = interpolate(frame, [430, 460], [1, 0], {
+  const scene2ExitOpacity = useMemo(() => interpolate(frame, [430, 460], [1, 0], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
-  });
-  const scene2ExitY = interpolate(frame, [430, 460], [0, -50], {
+  }), [frame]);
+
+  const scene2ExitY = useMemo(() => interpolate(frame, [430, 460], [0, -50], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
-  });
+  }), [frame]);
 
   // Scene 3 Entrance: Slide up and fade in
-  const scene3EnterSpring = spring({
+  const scene3EnterSpring = useMemo(() => spring({
     frame: frame - 430,
     fps,
     from: 50,
     to: 0,
     config: { damping: 15 },
-  });
-  const scene3EnterOpacity = interpolate(frame, [430, 450], [0, 1], {
+  }), [frame, fps]);
+
+  const scene3EnterOpacity = useMemo(() => interpolate(frame, [430, 450], [0, 1], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
-  });
+  }), [frame]);
 
   return (
     <AbsoluteFill style={{ backgroundColor: 'white' }}>

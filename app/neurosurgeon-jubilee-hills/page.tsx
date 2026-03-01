@@ -63,7 +63,7 @@ export default function JubileeHillsNeurosurgeonPage() {
 
   return (
     <main className="bg-white">
-      <LocationSchema location={location} breadcrumb={breadcrumb} faq={FAQ} />
+      <LocationSchema location={location}  faq={FAQ} />
 
       <section className="bg-gradient-to-r from-blue-600 to-blue-800 py-12 text-white">
         <div className="mx-auto max-w-5xl px-4">

@@ -390,7 +390,7 @@ export default function TrigeminalNeuralgiaTreatmentPage() {
 
 
       <div className="mt-12">
-        <LocalPathways mode="condition" />
+        <LocalPathways mode="condition" currentSlug="trigeminal-neuralgia-treatment-hyderabad" />
       </div>
       <SourceList sources={sources['trigeminal-neuralgia-treatment-hyderabad'] || []} />
       
