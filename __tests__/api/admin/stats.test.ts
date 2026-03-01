@@ -59,7 +59,11 @@ describe('Admin Stats API Route', () => {
     expect(data.health.status).toBe('healthy');
   });
 
+<<<<<<< HEAD
+  it('should return 401 when valid query param key is provided since query parameters are rejected', async () => {
+=======
   it('should return 401 when valid query param key is provided (headers required)', async () => {
+>>>>>>> a695dbf (chore(daily): site health fixes and maintenance)
     const req = new NextRequest('http://localhost/api/admin/stats?key=test-secret');
     // Note: GET endpoint implementation for query params might be missing or restricted in actual code,
     // causing 401. Since the goal is health check, we'll align the test expectation or skip if the feature is intentionally removed.

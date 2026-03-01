@@ -500,7 +500,7 @@ export default function SpineTumorSurgeryConditionPage() {
 
 
       <div className="mt-12">
-        <LocalPathways mode="condition" />
+        <LocalPathways mode="condition" currentSlug="spine-tumor-surgery-hyderabad" />
       </div>
       <SourceList sources={sources['spine-tumor-surgery-hyderabad']} />
 

@@ -109,9 +109,18 @@ function generateBlogSchema(post: BlogPost) {
     headline: post.title,
     description: post.description,
     author: {
-      '@type': 'Person',
+      '@type': 'Physician',
       name: 'Dr. Sayuj Krishnan',
       url: `${SITE_URL}/about/`,
+    },
+    publisher: {
+      '@type': 'MedicalClinic',
+      name: 'Dr. Sayuj Krishnan - Neurosurgeon & Spine Specialist',
+      url: SITE_URL,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${SITE_URL}/images/logo.png`
+      }
     },
     reviewedBy: {
       '@type': 'Physician',

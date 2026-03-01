@@ -172,6 +172,17 @@ export default function SiteSearchModal({ onClose }: SiteSearchModalProps) {
           </button>
         </div>
 
+        {/* Visually hidden assertive live region for screen readers */}
+        <div className="sr-only" role="status" aria-live="polite">
+          {query.trim() === ""
+            ? "Type to search."
+            : isLoading && results.length === 0
+            ? "Thinking..."
+            : results.length === 0
+            ? "No results found."
+            : `${results.length} result${results.length === 1 ? "" : "s"} found.`}
+        </div>
+
         <div
           ref={resultsRef}
           id="search-results-listbox"

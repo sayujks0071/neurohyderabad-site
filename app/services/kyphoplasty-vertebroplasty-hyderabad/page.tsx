@@ -215,7 +215,7 @@ export default function VertebroplastyKyphoplastyPage() {
         </section>
 
         <section className="mb-12">
-            <LocalPathways mode="service" />
+            <LocalPathways mode="service" currentSlug="kyphoplasty-vertebroplasty-hyderabad" />
         </section>
 
         <section className="mb-12">

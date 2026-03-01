@@ -13,6 +13,9 @@ describe('Appointment Page SEO', () => {
     expect(title).toContain('Best Neurosurgeon Hyderabad');
     expect(title).toContain('Book Appointment');
 
+<<<<<<< HEAD
+    expect(metadata.description).toContain('Best Neurosurgeon in Hyderabad');
+=======
     // Description verification
     // Actual: "Book Appointment with Dr. Sayuj Krishnan, the Best Neurosurgeon in Hyderabad..."
     // Test Expectation: "Best Neurosurgeon Hyderabad"
@@ -20,6 +23,7 @@ describe('Appointment Page SEO', () => {
     // We should check for key terms loosely or exact phrase if it matches.
     expect(metadata.description).toContain('Best Neurosurgeon');
     expect(metadata.description).toContain('Hyderabad');
+>>>>>>> a695dbf (chore(daily): site health fixes and maintenance)
     expect(metadata.description).toContain('Book Appointment');
   });
 

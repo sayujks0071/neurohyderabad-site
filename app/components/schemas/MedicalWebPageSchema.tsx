@@ -86,6 +86,10 @@ export default function MedicalWebPageSchema({
       "@type": "Organization",
       "name": "Dr. Sayuj Krishnan",
       "url": SITE_URL
+    },
+    "speakable": {
+      "@type": "SpeakableSpecification",
+      "cssSelector": ["h1", "h2", ".speakable", "[data-speakable]"]
     }
   };
 
