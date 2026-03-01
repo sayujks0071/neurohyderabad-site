@@ -395,6 +395,36 @@ export default function SlipDiscTreatmentPage() {
       </section>
 
       <section className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-blue-700">Why Choose Dr. Sayuj for Slip Disc Treatment?</h2>
+        <div className="grid md:grid-cols-3 gap-6">
+          <div className="bg-white border border-blue-100 p-6 rounded-lg shadow-sm">
+            <h3 className="text-lg font-bold text-blue-800 mb-3 flex items-center">
+              <span className="text-2xl mr-2">🎯</span> Endoscopic Expertise
+            </h3>
+            <p className="text-sm text-gray-700">
+              Advanced training from Germany in 7mm keyhole endoscopic spine surgery, ensuring minimal tissue disruption and same-day discharge.
+            </p>
+          </div>
+          <div className="bg-white border border-blue-100 p-6 rounded-lg shadow-sm">
+            <h3 className="text-lg font-bold text-blue-800 mb-3 flex items-center">
+              <span className="text-2xl mr-2">🛡️</span> Conservative First
+            </h3>
+            <p className="text-sm text-gray-700">
+              Surgery is recommended only when absolutely necessary. Over 80% of our slip disc patients recover completely with non-surgical management.
+            </p>
+          </div>
+          <div className="bg-white border border-blue-100 p-6 rounded-lg shadow-sm">
+            <h3 className="text-lg font-bold text-blue-800 mb-3 flex items-center">
+              <span className="text-2xl mr-2">⭐</span> Proven Outcomes
+            </h3>
+            <p className="text-sm text-gray-700">
+              Consistently high success rates with a focus on rapid pain relief, early mobilization, and a safe return to your active lifestyle.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="mb-12">
         <h2 className="text-2xl font-semibold mb-6 text-blue-700">Book Your Consultation</h2>
         <div className="bg-blue-50 p-8 rounded-lg text-center">
           <p className="text-lg text-gray-700 mb-6">
