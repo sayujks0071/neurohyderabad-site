@@ -82,22 +82,8 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
 
   // Subtitle animation (starts after title)
   const subtitleStartFrame = 15;
-  const subtitleOpacity = useMemo(() => prefersReducedMotion ? 1 : spring({
-    frame: frame - subtitleStartFrame,
-    fps,
-    from: 0,
-    to: 1,
-    durationInFrames: 40,
-  }), [frame, fps, subtitleStartFrame, prefersReducedMotion]);
-
-  const subtitleY = useMemo(() => prefersReducedMotion ? 0 : spring({
-    frame: frame - subtitleStartFrame,
-    fps,
-    from: 20,
-    to: 0,
-    durationInFrames: 40,
-    config: { damping: 12 },
-  }), [frame, fps, subtitleStartFrame, prefersReducedMotion]);
+  const subtitleText = "Welcome to Dr. Sayuj Krishnan's Practice";
+  const subtitleWords = useMemo(() => subtitleText.split(' '), []);
 
   return (
     <GradientBackground preset="clinical-blue" animated={!prefersReducedMotion}>
@@ -140,19 +126,52 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
               />
             ))}
           </h1>
-          <p
+          <div
             style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
+              gap: '8px',
               fontFamily: FONTS.primary,
               fontSize: '32px',
               fontWeight: 500,
               color: 'rgba(255, 255, 255, 0.9)',
               margin: 0,
-              opacity: subtitleOpacity,
-              transform: `translateY(${subtitleY}px)`,
             }}
           >
-            Welcome to Dr. Sayuj Krishnan's Practice
-          </p>
+            {subtitleWords.map((word, index) => {
+              const delay = subtitleStartFrame + index * 3;
+              const wordOpacity = prefersReducedMotion ? 1 : spring({
+                frame: frame - delay,
+                fps,
+                from: 0,
+                to: 1,
+                durationInFrames: 40,
+              });
+
+              const wordY = prefersReducedMotion ? 0 : spring({
+                frame: frame - delay,
+                fps,
+                from: 20,
+                to: 0,
+                durationInFrames: 40,
+                config: { damping: 12 },
+              });
+
+              return (
+                <span
+                  key={index}
+                  style={{
+                    opacity: wordOpacity,
+                    transform: `translateY(${wordY}px)`,
+                    display: 'inline-block',
+                  }}
+                >
+                  {word}
+                </span>
+              );
+            })}
+          </div>
         </div>
       </div>
     </GradientBackground>
