@@ -270,26 +270,6 @@ const nextConfig = {
         ]
       },
       {
-        source: "/_next/static/css/:path*",
-        headers: [
-          { key: "Content-Type", value: "text/css; charset=utf-8" },
-          { key: "Cache-Control", value: "public, max-age=31536000, immutable" }
-        ]
-      },
-      {
-        source: "/_next/static/js/:path*",
-        headers: [
-          { key: "Content-Type", value: "application/javascript; charset=utf-8" },
-          { key: "Cache-Control", value: "public, max-age=31536000, immutable" }
-        ]
-      },
-      {
-        source: "/_next/static/:path*",
-        headers: [
-          { key: "Cache-Control", value: "public, max-age=31536000, immutable" }
-        ]
-      },
-      {
         source: "/images/:path*",
         headers: [
           { key: "Cache-Control", value: "public, max-age=31536000, immutable" }
