@@ -154,7 +154,7 @@ export default function RoboticSpineSurgeryPage() {
           </section>
 
           <section className="mb-12">
-              <LocalPathways mode="service" />
+              <LocalPathways mode="service" currentSlug="robotic-spine-surgery-hyderabad" />
           </section>
 
           <section className="mb-12">

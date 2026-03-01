@@ -66,7 +66,7 @@ export default function Page() {
         medicalSpecialty="Neurosurgery"
         audience="Patients in Banjara Hills"
       />
-      <BreadcrumbSchema
+      <Breadcrumbs
         items={[
           { name: "Home", path: "/" },
           { name: "Locations", path: "/locations" },

@@ -296,7 +296,7 @@ export default function DrSayujVsApolloNeuroICUPage() {
 
 
       <div className="not-prose mt-12">
-        <LocalPathways mode="service" />
+        <LocalPathways mode="service" currentSlug="dr-sayuj-vs-apollo-neuro-icu" />
       </div>
       <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
       <NAP />

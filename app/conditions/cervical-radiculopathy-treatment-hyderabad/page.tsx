@@ -515,7 +515,7 @@ export default function CervicalRadiculopathyPage() {
       />
 
       <div className="mt-12">
-        <LocalPathways mode="condition" />
+        <LocalPathways mode="condition" currentSlug="cervical-radiculopathy-treatment-hyderabad" />
       </div>
       <SourceList sources={sources['cervical-radiculopathy-treatment-hyderabad'] || []} />
 

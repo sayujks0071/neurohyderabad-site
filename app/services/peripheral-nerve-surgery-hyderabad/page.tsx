@@ -583,7 +583,7 @@ export default function PeripheralNerveSurgeryPage() {
 
 
       <div className="not-prose mt-12">
-        <LocalPathways mode="service" />
+        <LocalPathways mode="service" currentSlug="peripheral-nerve-surgery-hyderabad" />
       </div>
       <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
 

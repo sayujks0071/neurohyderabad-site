@@ -527,7 +527,7 @@ export default function SciaticaTreatmentPage() {
         </div>
       </section>
 
-      <LocalPathways mode="condition" />
+      <LocalPathways mode="condition" currentSlug="sciatica-pain-treatment-hyderabad" />
 
       <section className="mb-12 space-y-6">
         <ReviewedBy />

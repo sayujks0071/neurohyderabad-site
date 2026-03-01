@@ -345,7 +345,7 @@ export default function DegenerativeDiscDiseasePage() {
     </div>
   </section>
 
-  <LocalPathways mode="condition" />
+  <LocalPathways mode="condition" currentSlug="degenerative-disc-disease-treatment-hyderabad" />
 
   <section className="mb-12 space-y-6">
     <ReviewedBy />

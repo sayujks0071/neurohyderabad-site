@@ -439,7 +439,7 @@ export default function BrainTumorSurgeryHyderabadPage() {
           </div>
         </section>
 
-        <LocalPathways mode="service" />
+        <LocalPathways mode="service" currentSlug="brain-tumor-surgery-hyderabad" />
 
         <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
         <ReviewedBy lastReviewed="2025-02-20" />

@@ -272,7 +272,7 @@ export default function EpilepsySurgeryPage() {
 
 
       <div className="not-prose mt-12">
-        <LocalPathways mode="service" />
+        <LocalPathways mode="service" currentSlug="epilepsy-surgery-hyderabad" />
       </div>
       <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
 

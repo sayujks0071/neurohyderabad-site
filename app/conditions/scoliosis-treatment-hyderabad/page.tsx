@@ -239,7 +239,7 @@ export default function ScoliosisPage() {
             </Link>
           </div>
         </div>
-        <LocalPathways mode="condition" />
+        <LocalPathways mode="condition" currentSlug="scoliosis-treatment-hyderabad" />
       </Section>
 
       <Section background="gray">

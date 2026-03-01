@@ -59,7 +59,7 @@ export default function Page() {
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
-      <LocationSchema location={location} breadcrumb={breadcrumb} faq={FAQ} />
+      <LocationSchema location={location}  faq={FAQ} />
 
       <h1 className="text-3xl md:text-4xl font-bold">Neurosurgeon in Secunderabad, Hyderabad</h1>
       <p className="mt-4 text-lg">

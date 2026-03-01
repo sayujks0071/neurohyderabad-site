@@ -568,7 +568,7 @@ export default function BrainBleedEvacuationPage() {
 
 
       <div className="mt-12">
-        <LocalPathways mode="condition" />
+        <LocalPathways mode="condition" currentSlug="brain-bleed-evacuation-hyderabad" />
       </div>
       <SourceList sources={sources['brain-bleed-evacuation-hyderabad'] || []} />
       

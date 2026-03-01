@@ -268,7 +268,7 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
         </section>
 
         <section className="mb-12">
-            <LocalPathways mode="service" />
+            <LocalPathways mode="service" currentSlug="minimally-invasive-spine-surgery" />
         </section>
 
         <section className="mb-10 rounded-lg border border-green-200 bg-green-50 p-6">
