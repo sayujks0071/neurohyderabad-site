@@ -18,6 +18,16 @@ export function JsonLd({ json }: { json: object }) {
   );
 }
 
+// 🛡️ Sentinel: Escape special characters to prevent XSS (script injection) via JSON-LD
+function safeJsonLdStringify(obj: object): string {
+  return JSON.stringify(obj)
+    .replace(/</g, '\\u003c')
+    .replace(/>/g, '\\u003e')
+    .replace(/&/g, '\\u0026')
+    .replace(/\u2028/g, '\\u2028')
+    .replace(/\u2029/g, '\\u2029');
+}
+
 // Helper to load JSON-LD from file system
 export async function loadJsonLd(slug: string): Promise<object | null> {
   try {
