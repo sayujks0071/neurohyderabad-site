@@ -9,8 +9,9 @@ const bundleAnalyzer = withBundleAnalyzer({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Enable production sourcemaps for Middleware
-  productionBrowserSourceMaps: true,
+  // Disable production browser sourcemaps to reduce JS bundle bandwidth.
+  // Server-side sourcemaps are still available via Middleware.io (when MIDDLEWARE_ACCOUNT_KEY is set).
+  productionBrowserSourceMaps: false,
 
   // Enable compression
   compress: true,
