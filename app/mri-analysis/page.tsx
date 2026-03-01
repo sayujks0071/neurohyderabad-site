@@ -2,9 +2,8 @@
 
 import React, { useState } from 'react';
 import Section from "../_components/Section";
-import Button from "../_components/Button";
 import Card from "../_components/Card";
-import { makeMetadata } from "@/app/_lib/meta";
+import { createContainer } from 'almostnode';
 
 // Note: In a real app, you might want to move this metadata to a layout or use generateMetadata
 // but since this is a client component, we'll handle title via standard HTML in return or separate layout
@@ -31,13 +30,98 @@ export default function MriAnalysisPage() {
     setError(null);
     setResult(null);
 
-    const formData = new FormData();
-    formData.append("file", file);
+    let extractedText = null;
+    let extractedPages = 0;
+    let isTruncated = false;
 
     try {
+      // 1. Attempt client-side extraction first
+      try {
+        const arrayBuffer = await file.arrayBuffer();
+        const buffer = new Uint8Array(arrayBuffer);
+
+        // Create a lightweight container for extraction
+        const container = createContainer();
+
+        // Install pdf-parse
+        await container.npm.install('pdf-parse@1.1.1');
+
+        // Write the PDF file to the virtual filesystem
+        const fs = container.vfs;
+        fs.writeFileSync('/input.pdf', buffer);
+
+        // Create the extraction script
+        const extractScript = `
+          const fs = require('fs');
+          const pdf = require('pdf-parse');
+
+          async function extract() {
+            try {
+              const dataBuffer = fs.readFileSync('/input.pdf');
+              const data = await pdf(dataBuffer);
+
+              const text = data.text || '';
+              const numpages = data.numpages || 0;
+              const MAX_CHARS = 120000;
+
+              // Simple sanitization
+              const sanitized = text.replace(/[\\x00-\\x08\\x0B-\\x1F\\x7F]/g, '');
+
+              const truncated = sanitized.length > MAX_CHARS;
+              const finalText = sanitized.slice(0, MAX_CHARS);
+
+              module.exports = {
+                text: finalText,
+                numpages,
+                truncated
+              };
+            } catch (err) {
+              console.error(err);
+              module.exports = { error: err.message };
+            }
+          }
+
+          extract();
+        `;
+
+        // Execute the script
+        const result = await container.execute(extractScript);
+
+        if (result.exports && !result.exports.error && result.exports.text) {
+          extractedText = result.exports.text;
+          extractedPages = result.exports.numpages;
+          isTruncated = result.exports.truncated;
+          console.log("Client-side extraction successful");
+        } else {
+            console.warn("Client-side extraction returned no text or error:", result.exports);
+        }
+
+      } catch (clientSideError) {
+        console.warn("Client-side extraction failed, falling back to server:", clientSideError);
+        // Continue to server-side fallback
+      }
+
+      // 2. Prepare payload
+      let body;
+      const headers: Record<string, string> = {};
+
+      if (extractedText) {
+        body = JSON.stringify({
+          text: extractedText,
+          numpages: extractedPages,
+          truncated: isTruncated
+        });
+        headers['Content-Type'] = 'application/json';
+      } else {
+        const formData = new FormData();
+        formData.append("file", file);
+        body = formData;
+      }
+
       const response = await fetch("/api/mri/analyze", {
         method: "POST",
-        body: formData,
+        headers,
+        body,
       });
 
       if (!response.ok) {

@@ -23,7 +23,7 @@ import EndoscopicProcedureSteps from '@/src/components/EndoscopicProcedureSteps'
 const SERVICE_SLUG = 'endoscopic-spine-surgery-hyderabad';
 
 // Ensure page is statically generated
-export const revalidate = 3600; // Revalidate every hour
+export const revalidate = 86400; // Revalidate every 24 hours
 
 const baseMetadata = makeMetadata({
   title: 'Endoscopic Spine Surgery Hyderabad | Same-Day Discharge',
@@ -936,7 +936,7 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
         </section>
 
         {/* Added bottom Pathways */}
-        <LocalPathways mode="service" />
+        <LocalPathways mode="service" currentSlug="endoscopic-spine-surgery-hyderabad" />
 
         <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
         <ReviewedBy lastReviewed="2025-02-20" />

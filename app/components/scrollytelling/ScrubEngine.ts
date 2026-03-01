@@ -17,6 +17,7 @@ export class ScrubEngine {
     private batchSize: number;
     private images: (HTMLImageElement | null)[];
     private loadedCount: number;
+    private onInitLoad: () => void;
     private onProgress: (progress: number) => void;
     private onInitLoad: () => void;
     private onLoadComplete: () => void;
@@ -32,6 +33,7 @@ export class ScrubEngine {
         this.batchSize = config.batchSize || 24; // Default to loading first 24 frames
         this.images = new Array(config.totalFrames).fill(null);
         this.loadedCount = 0;
+        this.onInitLoad = config.onInitLoad || (() => { });
         this.onProgress = config.onProgress || (() => { });
         this.onInitLoad = config.onInitLoad || (() => { });
         this.onLoadComplete = config.onLoadComplete || (() => { });

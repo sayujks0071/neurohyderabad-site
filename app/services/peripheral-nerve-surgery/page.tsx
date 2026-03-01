@@ -172,7 +172,7 @@ export default function Page() {
 
 
       <div className="not-prose mt-12">
-        <LocalPathways mode="service" />
+        <LocalPathways mode="service" currentSlug="peripheral-nerve-surgery" />
       </div>
       <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
       <ReviewedBy lastReviewed="2025-10-19" />

@@ -1,7 +1,8 @@
 "use client";
 
-import { useCallback, useRef } from "react";
+import { useCallback, useRef, useMemo, useEffect } from "react";
 import { Calendar, ExternalLink } from "lucide-react";
+import Cal, { getCalApi } from "@calcom/embed-react";
 import { trackConversionOnly } from "@/src/lib/google-ads-conversion";
 
 interface BookingCalendarEmbedProps {
@@ -18,6 +19,58 @@ export default function BookingCalendarEmbed({
     hasTrackedRef.current = true;
     trackConversionOnly();
   }, []);
+
+  // Check if it's a Cal.com URL
+  const calLink = useMemo(() => {
+    try {
+      if (!url) return null;
+
+      // Handle standard URLs like https://cal.com/drsayuj
+      const parsedUrl = new URL(url);
+      if (parsedUrl.hostname.includes("cal.com")) {
+        // Strip leading slash
+        return parsedUrl.pathname.substring(1);
+      }
+    } catch (e) {
+      // Not a valid URL, could be just the namespace like 'drsayuj'
+      if (url.includes('cal.com/')) {
+        return url.split('cal.com/')[1];
+      }
+      return null;
+    }
+    return null;
+  }, [url]);
+
+  useEffect(() => {
+    if (calLink) {
+      (async function () {
+        const cal = await getCalApi({});
+        cal("on", {
+          action: "bookingSuccessful",
+          callback: () => {
+             trackOnce();
+          }
+        });
+        cal("ui", {
+          styles: { branding: { brandColor: "#2563eb" } },
+          hideEventTypeDetails: false,
+          layout: "month_view"
+        });
+      })();
+    }
+  }, [calLink, trackOnce]);
+
+  if (calLink) {
+    return (
+      <div className="w-full bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden min-h-[600px]">
+        <Cal
+          calLink={calLink}
+          style={{ width: "100%", height: "100%", overflow: "scroll" }}
+          config={{ layout: "month_view" }}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="bg-white border border-slate-200 rounded-2xl shadow-sm p-8 text-center space-y-6">

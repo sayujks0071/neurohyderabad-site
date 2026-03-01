@@ -84,7 +84,7 @@ export default function MalakpetNeurosurgeonPage() {
 
   return (
     <main className="bg-white">
-      <LocationSchema location={location} breadcrumb={breadcrumb} faq={FAQ} />
+      <LocationSchema location={location}  faq={FAQ} />
 
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-blue-600 to-blue-800 py-12 text-white">

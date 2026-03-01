@@ -106,6 +106,28 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
     durationInFrames: 20,
   }), [frame, fps, prefersReducedMotion]);
 
+  // Time Section Pulse (Visual polish)
+  const timePulse = useMemo(() => prefersReducedMotion ? 1 : spring({
+    frame: frame - 55, // Trigger after slide-up and ring pulse
+    fps,
+    from: 1,
+    to: 1.05,
+    durationInFrames: 15,
+    config: { damping: 10, stiffness: 100 },
+  }), [frame, fps, prefersReducedMotion]);
+
+  const timePulseReset = useMemo(() => prefersReducedMotion ? 0 : spring({
+    frame: frame - 70, // Return to normal
+    fps,
+    from: 0,
+    to: 1,
+    durationInFrames: 15,
+    config: { damping: 10, stiffness: 100 },
+  }), [frame, fps, prefersReducedMotion]);
+
+  const finalTimeScale = interpolate(timePulseReset, [0, 1], [timePulse, 1]);
+
+
   // Floating animation for "alive" feel
   const floatingY = prefersReducedMotion ? 0 : Math.sin(frame / 60) * 8;
 
@@ -267,7 +289,7 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
               zIndex: 1,
             }}
           >
-            {/* Highlight Ring */}
+            {/* Highlight Ring (SVG Drawing) */}
             <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
                {/* Ripple Effect */}
                <div
@@ -356,7 +378,7 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
               padding: SPACING[6],
               textAlign: 'center',
               borderTop: `2px solid ${COLORS.accent}`,
-              transform: `translateY(${timeSlide}px)`,
+              transform: `translateY(${timeSlide}px) scale(${finalTimeScale})`,
               opacity: timeOpacity,
               zIndex: 1,
             }}
