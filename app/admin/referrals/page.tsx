@@ -53,8 +53,8 @@ export default function ReferralAnalyzerPage() {
 
         const res = await container.execute(extractScript);
 
-        if (res.exports && res.exports.text) {
-          extractedText = res.exports.text;
+        if (res.exports && (res.exports as any).text) {
+          extractedText = (res.exports as any).text;
           console.log("Client-side extraction successful");
         } else {
              console.warn("Client-side extraction failed or empty:", res.exports);

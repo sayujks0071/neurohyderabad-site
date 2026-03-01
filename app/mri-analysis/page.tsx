@@ -87,10 +87,10 @@ export default function MriAnalysisPage() {
         // Execute the script
         const result = await container.execute(extractScript);
 
-        if (result.exports && !result.exports.error && result.exports.text) {
-          extractedText = result.exports.text;
-          extractedPages = result.exports.numpages;
-          isTruncated = result.exports.truncated;
+        if (result.exports && !(result.exports as any).error && (result.exports as any).text) {
+          extractedText = (result.exports as any).text;
+          extractedPages = (result.exports as any).numpages;
+          isTruncated = (result.exports as any).truncated;
           console.log("Client-side extraction successful");
         } else {
             console.warn("Client-side extraction returned no text or error:", result.exports);

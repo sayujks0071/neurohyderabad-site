@@ -17,7 +17,6 @@ export class ScrubEngine {
     private batchSize: number;
     private images: (HTMLImageElement | null)[];
     private loadedCount: number;
-    private onInitLoad: () => void;
     private onProgress: (progress: number) => void;
     private onInitLoad: () => void;
     private onLoadComplete: () => void;

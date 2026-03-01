@@ -300,7 +300,7 @@ const nextConfig = {
   },
 
   // Webpack configuration for Middleware sourcemap uploader
-  webpack: (config, { isServer }) => {
+  webpack: (config, { isServer, webpack }) => {
     // Only add plugin for client-side builds in production if account key is present
     if (!isServer && process.env.NODE_ENV === 'production' && process.env.MIDDLEWARE_ACCOUNT_KEY) {
       config.plugins.push(
@@ -313,6 +313,28 @@ const nextConfig = {
         )
       );
     }
+    config.module.rules.push({
+      test: /\.node$/,
+      use: "node-loader",
+    });
+
+    // Ignore almostnode runtime-worker module not found issues in Next.js build
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      '/assets/runtime-worker-D6Dmsis4.js': false,
+      'node:module': false,
+      'node:zlib': false,
+    };
+
+    config.plugins.push(
+      new webpack.NormalModuleReplacementPlugin(
+        /^node:/,
+        (resource) => {
+          resource.request = resource.request.replace(/^node:/, '');
+        }
+      )
+    );
+
     return config;
   },
 };
