@@ -100,11 +100,11 @@
   "crons": [
     {
       "path": "/api/cron/reindex-rag",
-      "schedule": "0 1 * * *"
+      "schedule": "0 1 * * 1"
     },
     {
       "path": "/api/workflows/seo",
-      "schedule": "0 6 * * *"
+      "schedule": "0 6 * * 1,4"
     },
     {
       "path": "/api/workflows/health",
@@ -112,7 +112,7 @@
     },
     {
       "path": "/api/workflows/content",
-      "schedule": "0 5 * * *"
+      "schedule": "0 5 * * 2,5"
     },
     {
       "path": "/api/workflows/optimize",
@@ -120,7 +120,7 @@
     },
     {
       "path": "/api/workflows/hyderabad",
-      "schedule": "0 7 * * *"
+      "schedule": "0 7 * * 1,4"
     },
     {
       "path": "/api/workflows/competitors",
@@ -128,7 +128,7 @@
     },
     {
       "path": "/api/workflows/reviews?action=monitor",
-      "schedule": "0 9 * * *"
+      "schedule": "0 9 * * 3"
     },
     {
       "path": "/api/workflows/eeat?action=audit",
