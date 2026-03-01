@@ -207,6 +207,60 @@ export default function SlipDiscTreatmentPage() {
         </div>
       </div>
 
+      {/* Diagnosis Section */}
+      <section className="mb-12">
+        <h2 className="text-3xl font-bold text-blue-800 mb-6">Diagnosis & Evaluation</h2>
+        <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+          <p className="text-gray-700 mb-4">
+            A precise diagnosis is critical for effective slip disc treatment. Dr. Sayuj Krishnan relies on detailed clinical evaluation combined with advanced imaging to understand the exact location and severity of the nerve compression.
+          </p>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <h3 className="text-lg font-semibold text-blue-700 mb-3">Diagnostic Tests We Use</h3>
+              <ul className="space-y-2 text-gray-700">
+                <li className="flex items-start">
+                  <span className="text-blue-600 mr-2 mt-1">•</span>
+                  <span><strong>MRI Spine:</strong> The gold standard to visualize soft tissues, confirming disc herniation and nerve compression.</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-blue-600 mr-2 mt-1">•</span>
+                  <span><strong>Dynamic X-Rays:</strong> Used to rule out spinal instability (spondylolisthesis) or bone abnormalities.</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-blue-600 mr-2 mt-1">•</span>
+                  <span><strong>CT Scan:</strong> Detailed bone imaging to check for calcified discs or bony spurs.</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-blue-600 mr-2 mt-1">•</span>
+                  <span><strong>Nerve Conduction Studies (NCS/EMG):</strong> To confirm the extent of nerve damage if symptoms are unclear.</span>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-blue-700 mb-3">What We Look For</h3>
+              <ul className="space-y-2 text-gray-700">
+                <li className="flex items-start">
+                  <span className="text-green-600 mr-2 mt-1">✓</span>
+                  <span>Exact level of the slip disc (e.g., L4-L5, L5-S1).</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-600 mr-2 mt-1">✓</span>
+                  <span>Type of herniation (bulge, protrusion, or extrusion).</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-600 mr-2 mt-1">✓</span>
+                  <span>Degree of nerve root or spinal cord compression.</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-600 mr-2 mt-1">✓</span>
+                  <span>Overall health of adjacent spinal segments.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Trust Signals Section */}
       <div className="mb-12">
         <TrustProof stories={spineStories} serviceType="spine" className="bg-gradient-to-br from-white to-blue-50/50" />
