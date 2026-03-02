@@ -1,10 +1,7 @@
 import { ImageResponse } from "next/og";
 import type { NextRequest } from "next/server";
 
-// export const runtime = "edge"; // Commented out to use Node.js runtime
-// Cap at 10 s to avoid runaway timeouts (exceeded requests return a 504).
-// Typical OG generation completes in <3 s; 10 s is a generous safety margin.
-export const maxDuration = 10;
+export const runtime = "edge"; // Use Edge runtime to reduce serverless function invocations
 
 const DEFAULT_BRAND = "#0FA3B1"; // Brand teal accent
 const TEXT = "#0B1220";
@@ -18,7 +15,7 @@ const PRECISION_ICON_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0
   <line x1="86" y1="112" x2="114" y2="112" stroke="#FFFFFF" stroke-width="12" stroke-linecap="round" />
 </svg>`;
 
-const LOGO_DATA_URL = `data:image/svg+xml;base64,${Buffer.from(PRECISION_ICON_SVG).toString('base64')}`;
+const LOGO_DATA_URL = `data:image/svg+xml;base64,${typeof Buffer !== "undefined" ? Buffer.from(PRECISION_ICON_SVG).toString('base64') : btoa(PRECISION_ICON_SVG)}`;
 
 let interLoaded: Promise<void> | null = null;
 let inter600: ArrayBuffer | null = null;
