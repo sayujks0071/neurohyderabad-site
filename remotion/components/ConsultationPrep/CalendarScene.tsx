@@ -125,7 +125,7 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
     config: { damping: 10, stiffness: 100 },
   }), [frame, fps, prefersReducedMotion]);
 
-  const finalTimeScale = interpolate(timePulseReset, [0, 1], [timePulse, 1]);
+  const finalTimeScale = useMemo(() => interpolate(timePulseReset, [0, 1], [timePulse, 1]), [timePulseReset, timePulse]);
 
 
   // Floating animation for "alive" feel
@@ -135,10 +135,10 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
   const bgPos = prefersReducedMotion ? 0 : frame * 0.5;
 
   // Shadow Animation
-  const shadowBlur = interpolate(calendarScale, [0.8, 1], [20, 60], {
+  const shadowBlur = useMemo(() => interpolate(calendarScale, [0.8, 1], [20, 60], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
-  });
+  }), [calendarScale]);
 
   // Ripple Effect (Secondary Ring)
   const rippleScale = useMemo(() => prefersReducedMotion ? 1 : spring({
@@ -150,7 +150,7 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
     config: { damping: 100 },
   }), [frame, fps, prefersReducedMotion]);
 
-  const rippleOpacity = interpolate(rippleScale, [0.8, 1.4], [0.6, 0]);
+  const rippleOpacity = useMemo(() => interpolate(rippleScale, [0.8, 1.4], [0.6, 0]), [rippleScale]);
 
   // Sheen Effect (Visual Polish)
   const sheenDriver = useMemo(() => prefersReducedMotion ? 0 : spring({
@@ -162,22 +162,74 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
     config: { damping: 100 },
   }), [frame, fps, prefersReducedMotion]);
 
-  const sheenLeft = interpolate(sheenDriver, [0, 1], [-100, 200]);
+  const sheenLeft = useMemo(() => interpolate(sheenDriver, [0, 1], [-100, 200]), [sheenDriver]);
 
   // Blur Animations
-  const calendarBlur = prefersReducedMotion ? 0 : interpolate(frame, [0, 20], [10, 0], {
+  const calendarBlur = useMemo(() => prefersReducedMotion ? 0 : interpolate(frame, [0, 20], [10, 0], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
-  });
+  }), [frame, prefersReducedMotion]);
 
-  const dayNumberBlur = prefersReducedMotion ? 0 : interpolate(frame - 15, [0, 20], [10, 0], {
+  const dayNumberBlur = useMemo(() => prefersReducedMotion ? 0 : interpolate(frame - 15, [0, 20], [10, 0], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
-  });
+  }), [frame, prefersReducedMotion]);
 
   // Staggered Text Animation
   const successText = "Your Appointment is Scheduled";
-  const words = successText.split(' ');
+  const words = useMemo(() => successText.split(' '), [successText]);
+
+  // Staggered Inner Card Entrance (Visual Polish)
+  const monthNameOpacity = useMemo(() => prefersReducedMotion ? 1 : spring({
+    frame: frame - 5,
+    fps,
+    from: 0,
+    to: 1,
+    durationInFrames: 20,
+  }), [frame, fps, prefersReducedMotion]);
+
+  const monthNameY = useMemo(() => prefersReducedMotion ? 0 : spring({
+    frame: frame - 5,
+    fps,
+    from: -20,
+    to: 0,
+    durationInFrames: 25,
+    config: { damping: 12 },
+  }), [frame, fps, prefersReducedMotion]);
+
+  const dayNameOpacity = useMemo(() => prefersReducedMotion ? 1 : spring({
+    frame: frame - 20,
+    fps,
+    from: 0,
+    to: 1,
+    durationInFrames: 20,
+  }), [frame, fps, prefersReducedMotion]);
+
+  const dayNameY = useMemo(() => prefersReducedMotion ? 0 : spring({
+    frame: frame - 20,
+    fps,
+    from: 20,
+    to: 0,
+    durationInFrames: 25,
+    config: { damping: 12 },
+  }), [frame, fps, prefersReducedMotion]);
+
+  const yearOpacity = useMemo(() => prefersReducedMotion ? 1 : spring({
+    frame: frame - 25,
+    fps,
+    from: 0,
+    to: 1,
+    durationInFrames: 20,
+  }), [frame, fps, prefersReducedMotion]);
+
+  const yearY = useMemo(() => prefersReducedMotion ? 0 : spring({
+    frame: frame - 25,
+    fps,
+    from: 20,
+    to: 0,
+    durationInFrames: 25,
+    config: { damping: 12 },
+  }), [frame, fps, prefersReducedMotion]);
 
   return (
     <div
@@ -268,6 +320,8 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
                 margin: 0,
                 textTransform: 'uppercase',
                 letterSpacing: '2px',
+                opacity: monthNameOpacity,
+                transform: `translateY(${monthNameY}px)`,
               }}
             >
               {monthName}
@@ -353,6 +407,8 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
                 color: COLORS.textSecondary,
                 margin: 0,
                 marginTop: SPACING[2],
+                opacity: dayNameOpacity,
+                transform: `translateY(${dayNameY}px)`,
               }}
             >
               {dayName}
@@ -365,6 +421,8 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
                 color: COLORS.textSecondary,
                 margin: 0,
                 marginTop: SPACING[1],
+                opacity: yearOpacity,
+                transform: `translateY(${yearY}px)`,
               }}
             >
               {year}
@@ -400,42 +458,50 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
 
       {/* Bottom text */}
       <div style={{ marginTop: SPACING[12], display: 'flex', gap: '0.4em', justifyContent: 'center' }}>
-        {words.map((word, i) => {
-          const delay = 35 + i * 3;
-          const wordOpacity = prefersReducedMotion ? 1 : spring({
-            frame: frame - delay,
-            fps,
-            from: 0,
-            to: 1,
-            durationInFrames: 20,
-          });
-          const wordY = prefersReducedMotion ? 0 : spring({
-            frame: frame - delay,
-            fps,
-            from: 10,
-            to: 0,
-            durationInFrames: 20,
-          });
-
-          return (
-            <span
-              key={i}
-              style={{
-                fontFamily: FONTS.primary,
-                fontSize: '36px',
-                fontWeight: 600,
-                color: COLORS.text,
-                margin: 0,
-                opacity: wordOpacity,
-                transform: `translateY(${wordY}px)`,
-                display: 'inline-block',
-              }}
-            >
-              {word}
-            </span>
-          );
-        })}
+        {words.map((word, i) => (
+          <AnimatedWord key={i} word={word} index={i} />
+        ))}
       </div>
     </div>
+  );
+};
+
+const AnimatedWord: React.FC<{ word: string, index: number }> = ({ word, index }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const prefersReducedMotion = usePrefersReducedMotion();
+
+  const delay = 35 + index * 3;
+  const wordOpacity = useMemo(() => prefersReducedMotion ? 1 : spring({
+    frame: frame - delay,
+    fps,
+    from: 0,
+    to: 1,
+    durationInFrames: 20,
+  }), [frame, fps, delay, prefersReducedMotion]);
+
+  const wordY = useMemo(() => prefersReducedMotion ? 0 : spring({
+    frame: frame - delay,
+    fps,
+    from: 10,
+    to: 0,
+    durationInFrames: 20,
+  }), [frame, fps, delay, prefersReducedMotion]);
+
+  return (
+    <span
+      style={{
+        fontFamily: FONTS.primary,
+        fontSize: '36px',
+        fontWeight: 600,
+        color: COLORS.text,
+        margin: 0,
+        opacity: wordOpacity,
+        transform: `translateY(${wordY}px)`,
+        display: 'inline-block',
+      }}
+    >
+      {word}
+    </span>
   );
 };
