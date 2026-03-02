@@ -368,6 +368,28 @@ export default function SlipDiscTreatmentPage() {
       </section>
 
       <section className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-blue-700">Slip Disc Recovery Timeline</h2>
+        <div className="grid md:grid-cols-4 gap-4">
+          <div className="bg-white p-4 rounded-lg shadow border-l-4 border-blue-300">
+            <h3 className="font-bold text-lg mb-2">Phase 1: Acute Rest (Days 1-3)</h3>
+            <p className="text-sm text-gray-600">Relative rest, medication to control inflammation, and gentle movements to avoid stiffness.</p>
+          </div>
+          <div className="bg-white p-4 rounded-lg shadow border-l-4 border-blue-500">
+            <h3 className="font-bold text-lg mb-2">Phase 2: Early Mobility (Weeks 1-2)</h3>
+            <p className="text-sm text-gray-600">Start gentle physiotherapy. Focus on pain-free walking and specific nerve glides.</p>
+          </div>
+          <div className="bg-white p-4 rounded-lg shadow border-l-4 border-blue-700">
+            <h3 className="font-bold text-lg mb-2">Phase 3: Strengthening (Weeks 3-6)</h3>
+            <p className="text-sm text-gray-600">Active core strengthening. Return to desk work with ergonomic adjustments.</p>
+          </div>
+          <div className="bg-white p-4 rounded-lg shadow border-l-4 border-green-600">
+            <h3 className="font-bold text-lg mb-2">Phase 4: Full Activity (Weeks 8+)</h3>
+            <p className="text-sm text-gray-600">Gradual return to sports and heavy lifting. <strong>If pain persists, surgical consultation is advised.</strong></p>
+          </div>
+        </div>
+      </section>
+
+      <section className="mb-12">
         <h2 className="text-2xl font-semibold mb-6 text-blue-700">Candidates for Endoscopic Discectomy</h2>
         <div className="bg-gray-50 p-6 rounded-lg">
           <p className="text-gray-700 mb-4">

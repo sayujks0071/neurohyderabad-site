@@ -42,7 +42,6 @@ import MicrosoftClarity from "./_components/MicrosoftClarity";
 import HypertuneWrapper from "./providers/hypertune-wrapper";
 import WebMCPProvider from "../src/components/WebMCPProvider";
 import { SITE_URL } from "../src/lib/seo";
-import WebMCPProvider from "../src/components/WebMCPProvider";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
