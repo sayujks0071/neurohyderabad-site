@@ -16,6 +16,7 @@ const mockToDataStreamResponse = vi.fn(() => new Response('mock-stream-response'
 vi.mock('ai', () => ({
   streamText: vi.fn(() => ({
     toDataStreamResponse: mockToDataStreamResponse,
+    toTextStreamResponse: mockToDataStreamResponse,
   })),
 }));
 
