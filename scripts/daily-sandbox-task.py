@@ -5,6 +5,7 @@ import logging
 from datetime import timedelta
 import httpx
 
+from code_interpreter import CodeInterpreter, SupportedLanguage
 from opensandbox import Sandbox
 from opensandbox.models import WriteEntry
 
@@ -38,40 +39,94 @@ async def main() -> None:
         # For this example, we'll write a python script into the sandbox that simulates a code analysis
         # or SEO verification step, reporting findings back.
 
+        # 5. Create a code interpreter
+        interpreter = await CodeInterpreter.create(sandbox)
+
         script_code = """
 import json
 import datetime
-import os
+import urllib.request
+from html.parser import HTMLParser
+
+class SEOParser(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.in_title = False
+        self.in_h1 = False
+        self.title = ""
+        self.meta_description = ""
+        self.h1_tags = []
+
+    def handle_starttag(self, tag, attrs):
+        if tag == "title":
+            self.in_title = True
+        elif tag == "h1":
+            self.in_h1 = True
+        elif tag == "meta":
+            attrs_dict = dict(attrs)
+            if attrs_dict.get("name", "").lower() == "description":
+                self.meta_description = attrs_dict.get("content", "")
+
+    def handle_endtag(self, tag):
+        if tag == "title":
+            self.in_title = False
+        elif tag == "h1":
+            self.in_h1 = False
+
+    def handle_data(self, data):
+        if self.in_title:
+            self.title += data
+        elif self.in_h1:
+            self.h1_tags.append(data.strip())
 
 def generate_daily_report():
-    report = {
-        "date": datetime.datetime.now().isoformat(),
-        "status": "healthy",
-        "sandbox_checks": [
-            {"name": "Python Execution Environment", "passed": True},
-            {"name": "Security Check (Isolated)", "passed": True}
-        ],
-        "recommendation": "Integrate Claude Code or AI Gateway for autonomous file modifications inside this sandbox."
-    }
+    url = "https://www.drsayuj.info"
+    req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+    try:
+        with urllib.request.urlopen(req) as response:
+            html = response.read().decode('utf-8')
+
+        parser = SEOParser()
+        parser.feed(html)
+
+        report = {
+            "date": datetime.datetime.now().isoformat(),
+            "status": "success",
+            "url": url,
+            "seo_data": {
+                "title": parser.title.strip(),
+                "meta_description": parser.meta_description,
+                "h1_tags": [tag for tag in parser.h1_tags if tag]
+            },
+            "recommendation": "Review the extracted SEO tags for improvements."
+        }
+    except Exception as e:
+        report = {
+            "date": datetime.datetime.now().isoformat(),
+            "status": "error",
+            "error": str(e)
+        }
+
     with open("/tmp/daily_report.json", "w") as f:
         json.dump(report, f, indent=2)
     return "Report generated inside OpenSandbox."
 
 print(generate_daily_report())
 """
-        logger.info("Writing execution script to the sandbox...")
-        await sandbox.files.write_files([
-            WriteEntry(path="/tmp/generate_report.py", data=script_code, mode=644)
-        ])
 
-        # 3. Execute the python script inside the sandbox
-        logger.info("Executing the script in the isolated environment...")
-        execution = await sandbox.commands.run("python /tmp/generate_report.py")
+        # 6. Execute Python code using CodeInterpreter
+        logger.info("Executing the script in the isolated environment using CodeInterpreter...")
+        result = await interpreter.codes.run(
+              script_code,
+              language=SupportedLanguage.PYTHON,
+        )
 
-        if execution.logs.stdout:
-            logger.info(f"Sandbox Output: {execution.logs.stdout[0].text.strip()}")
-        if execution.logs.stderr:
-            logger.warning(f"Sandbox Errors: {execution.logs.stderr[0].text.strip()}")
+        if result.result and result.result[0].text:
+            logger.info(f"Execution Result: {result.result[0].text.strip()}")
+        if result.logs.stdout:
+            logger.info(f"Sandbox Output: {result.logs.stdout[0].text.strip()}")
+        if result.logs.stderr:
+            logger.warning(f"Sandbox Errors: {result.logs.stderr[0].text.strip()}")
 
         # 4. Read the generated report back to the host filesystem
         try:
