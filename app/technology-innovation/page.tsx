@@ -502,6 +502,69 @@ export default function TechnologyInnovationPage() {
           </div>
         </section>
 
+        {/* Digital Care Platform Architecture */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="text-3xl font-bold text-center mb-6">Digital Care Platform Architecture</h2>
+              <p className="text-lg text-gray-700 text-center max-w-3xl mx-auto mb-10">
+                To keep patient education, appointments, and research resources fast and reliable, we
+                are adopting a microfrontend approach inspired by Vercel Multi-Zones. This lets teams
+                update different sections of the site independently while keeping one trusted domain.
+              </p>
+              <div className="grid md:grid-cols-2 gap-8">
+                <div className="bg-blue-50 p-6 rounded-lg">
+                  <h3 className="text-xl font-semibold mb-4 text-blue-800">How it helps patients</h3>
+                  <ul className="space-y-3 text-blue-900">
+                    <li>• Faster updates to recovery guides and patient education.</li>
+                    <li>• Appointment and tele-consult flows stay stable during content changes.</li>
+                    <li>• Fault isolation reduces the risk of downtime during deployments.</li>
+                    <li>• SEO remains unified on a single drsayuj.info domain.</li>
+                  </ul>
+                </div>
+                <div className="bg-white border border-gray-200 p-6 rounded-lg shadow-sm">
+                  <h3 className="text-xl font-semibold mb-4 text-blue-700">Example zone split</h3>
+                  <ul className="space-y-3 text-gray-700">
+                    <li><strong>Marketing:</strong> Home, services, trust and contact pages.</li>
+                    <li><strong>Knowledge Base:</strong> Guides and education resources.</li>
+                    <li><strong>Appointments:</strong> Booking, intake, and tele-consult flows.</li>
+                    <li><strong>Research:</strong> Publications, outcomes, and media.</li>
+                  </ul>
+                  <p className="text-sm text-gray-600 mt-4">
+                    Each zone can be deployed independently while routing stays seamless.
+                  </p>
+                </div>
+              </div>
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
+                <div className="bg-gray-50 p-6 rounded-lg">
+                  <h4 className="text-lg font-semibold text-blue-700 mb-2">Independent deployments</h4>
+                  <p className="text-gray-700">
+                    Update education content without touching appointment systems.
+                  </p>
+                </div>
+                <div className="bg-gray-50 p-6 rounded-lg">
+                  <h4 className="text-lg font-semibold text-blue-700 mb-2">Team autonomy</h4>
+                  <p className="text-gray-700">
+                    Marketing, content, and clinical teams can ship on separate schedules.
+                  </p>
+                </div>
+                <div className="bg-gray-50 p-6 rounded-lg">
+                  <h4 className="text-lg font-semibold text-blue-700 mb-2">Performance focus</h4>
+                  <p className="text-gray-700">
+                    Critical flows like booking stay fast even as the library grows.
+                  </p>
+                </div>
+                <div className="bg-gray-50 p-6 rounded-lg">
+                  <h4 className="text-lg font-semibold text-blue-700 mb-2">Safer rollouts</h4>
+                  <p className="text-gray-700">
+                    Deploy changes in one zone without risking the entire site.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* FAQ Section */}
         <section className="py-16 bg-gray-50">
             <div className="container mx-auto px-4">
