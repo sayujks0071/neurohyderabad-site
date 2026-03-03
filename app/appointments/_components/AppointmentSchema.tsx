@@ -1,7 +1,7 @@
 import React from 'react';
 import { SITE_URL } from '@/src/lib/seo';
 import { getLocationById, SOCIAL_PROFILES } from '@/src/data/locations';
-import { safeJsonLdStringify } from '@/src/lib/seo/jsonld';
+import JsonLd from '@/components/JsonLd';
 
 export default function AppointmentSchema() {
   const malakpet = getLocationById('malakpet');
@@ -90,9 +90,6 @@ export default function AppointmentSchema() {
   };
 
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(schema) }}
-    />
+    <JsonLd data={schema} />
   );
 }
