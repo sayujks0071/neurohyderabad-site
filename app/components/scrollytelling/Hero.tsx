@@ -65,7 +65,7 @@ export default function Hero() {
         // Scrub Engine
         const scrubEngine = new ScrubEngine({
             totalFrames: CONFIG.totalFrames,
-            batchSize: 32, // Load initial 32 frames for quick start
+            batchSize: 4, // Load initial 4 frames for quick start (Optimizes LCP/INP by unblocking main thread earlier)
             onProgress: (p) => setProgress(p),
             onInitLoad: () => {
                 // Start experience as soon as initial batch is ready
