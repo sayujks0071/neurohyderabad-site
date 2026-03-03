@@ -9,6 +9,7 @@ export default function HospitalSchema() {
     "name": "Yashoda Hospital, Malakpet",
     "url": "https://www.yashodahospitals.com/malakpet/",
     "telephone": "+91-40-6769 9999",
+    "openingHours": "Mo-Sa 10:00-16:00",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Nalgonda X Roads",

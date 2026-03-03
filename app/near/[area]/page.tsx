@@ -166,7 +166,7 @@ export default async function AreaPage({ params }: { params: Promise<{ area: str
 
   return (
     <main className="prose max-w-3xl mx-auto px-4 py-16">
-      <LocationSchema location={location} breadcrumb={breadcrumb} />
+      <LocationSchema location={location} />
 
       <h1>Brain &amp; Spine Care near {data.name}</h1>
 

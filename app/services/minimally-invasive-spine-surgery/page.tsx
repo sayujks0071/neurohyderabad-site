@@ -314,7 +314,7 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
           <h2 className="text-3xl font-bold text-blue-800 mb-6">What is Minimally Invasive Spine Surgery?</h2>
           <div className="prose max-w-none">
               <p className="text-lg text-gray-700 mb-6">
-                Minimally invasive spine surgery (MISS) uses advanced endoscopic techniques to treat spine conditions through smaller incisions,
+                Minimally invasive spine surgery (MISS) uses advanced endoscopic techniques to treat spine conditions like <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 hover:underline">sciatica pain</Link> through smaller incisions,
                 resulting in less muscle damage, reduced pain, and faster recovery compared to traditional open surgery.
               </p>
               <p className="text-gray-700 mb-6">

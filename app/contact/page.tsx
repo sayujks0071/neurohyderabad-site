@@ -12,6 +12,7 @@ import Button from "../_components/Button";
 import LeadForm from "@/components/LeadForm";
 import MedicalWebPageSchema from "../components/schemas/MedicalWebPageSchema";
 import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
+import HospitalSchema from "../components/schemas/HospitalSchema";
 
 const clinicSchema = getMedicalClinicSchema();
 
@@ -91,6 +92,7 @@ export default function ContactPage() {
           { name: "Contact", href: "/contact/" }
         ]}
       />
+      <HospitalSchema />
       <main>
         {/* Header Section */}
         <Section background="none" className="py-12 md:py-16">

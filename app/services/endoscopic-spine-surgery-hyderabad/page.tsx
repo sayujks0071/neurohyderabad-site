@@ -26,7 +26,7 @@ const SERVICE_SLUG = 'endoscopic-spine-surgery-hyderabad';
 export const revalidate = 86400; // Revalidate every 24 hours
 
 const baseMetadata = makeMetadata({
-  title: 'Endoscopic Spine Surgery Hyderabad | Same-Day Discharge',
+  title: 'Endoscopic Spine Surgery in Hyderabad | Same-Day Discharge',
   description:
     'Endoscopic spine surgery in Hyderabad by Dr. Sayuj Krishnan (1000+ cases). 7mm keyhole, 90% same-day discharge, ₹95K–₹1.35L. Book now.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
@@ -34,7 +34,7 @@ const baseMetadata = makeMetadata({
 
 export const metadata: Metadata = {
   ...baseMetadata,
-  title: 'Endoscopic Spine Surgery Hyderabad | Same-Day Discharge',
+  title: 'Endoscopic Spine Surgery in Hyderabad | Same-Day Discharge',
   description:
     'Endoscopic spine surgery in Hyderabad by Dr. Sayuj Krishnan (1000+ cases). 7mm keyhole, 90% same-day discharge, ₹95K–₹1.35L. Book now.',
   keywords: [
@@ -171,6 +171,10 @@ const faqs = [
   {
     question: 'Are there age limits for endoscopic spine surgery?',
     answer: 'We treat patients from 18 to 85+ years old. For elderly patients or those with cardiac risks, we offer an awake spine surgery option under local anesthesia, avoiding the risks of general anesthesia.',
+  },
+  {
+    question: 'Why is Dr. Sayuj\'s endoscopic approach better for severe sciatica?',
+    answer: 'While traditional surgeons may rely on open procedures or general experience, Dr. Sayuj has fellowship-trained expertise specifically in full endoscopic spine surgery from Germany, ensuring targeted relief for severe sciatica with a 90% same-day discharge rate.'
   },
 ];
 
@@ -438,7 +442,7 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
           </p>
           <div className="mb-6 bg-blue-50 p-4 rounded-lg">
              <p className="text-sm text-blue-800">
-               <strong>Related Symptoms:</strong> If you are experiencing <Link href="/symptoms/back-pain" className="underline font-semibold hover:text-blue-900">severe back pain</Link> or shooting leg pain (<Link href="/conditions/sciatica-pain-treatment-hyderabad" className="underline font-semibold hover:text-blue-900">sciatica</Link>), this minimally invasive option might be right for you.
+               <strong>Related Symptoms:</strong> If you are experiencing <Link href="/symptoms/back-pain" className="underline font-semibold hover:text-blue-900">severe back pain</Link> or shooting leg pain (<Link href="/conditions/sciatica-pain-treatment-hyderabad" className="underline font-semibold hover:text-blue-900">sciatica treatment options</Link>), this minimally invasive option might be right for you. Find out more about <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="underline font-semibold hover:text-blue-900">resolving sciatica</Link>.
              </p>
           </div>
           <ul className="grid md:grid-cols-2 gap-4 text-sm text-gray-700">

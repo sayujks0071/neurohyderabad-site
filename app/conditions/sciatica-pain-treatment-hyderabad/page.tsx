@@ -23,7 +23,7 @@ const PatientEducationVideos = dynamic(() => import('@/app/_components/PatientEd
 });
 
 const baseMetadata = makeMetadata({
-  title: "Sciatica Treatment Hyderabad | 90% Non-Surgical | Dr Sayuj",
+  title: "Sciatica Treatment in Hyderabad | 90% Non-Surgical Relief",
   description: "Best Sciatica treatment in Hyderabad. 90% patients recover without surgery using nerve blocks & meds. Endoscopic cure available. Book Dr Sayuj.",
   canonicalPath: '/conditions/sciatica-pain-treatment-hyderabad',
 });
@@ -536,7 +536,7 @@ export default function SciaticaTreatmentPage() {
 
       {/* Schema Markup */}
       <MedicalWebPageSchema
-        title="Sciatica Treatment Hyderabad | 90% Non-Surgical | Dr Sayuj"
+        title="Sciatica Treatment in Hyderabad | 90% Non-Surgical Relief"
         description="Best Sciatica treatment in Hyderabad. 90% patients recover without surgery using nerve blocks & meds. Endoscopic cure available. Book Dr Sayuj."
         pageSlug="/conditions/sciatica-pain-treatment-hyderabad/"
         pageType="condition"

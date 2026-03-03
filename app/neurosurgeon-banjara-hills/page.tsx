@@ -8,6 +8,7 @@ import { LocalPathways } from "@/src/components/locations/LocalPathways";
 import { LocationSchema } from "@/src/components/locations/LocationSchema";
 import MedicalWebPageSchema from "../components/schemas/MedicalWebPageSchema";
 import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
+import Breadcrumbs from "../components/Breadcrumbs";
 import { notFound } from "next/navigation";
 
 // Force static generation
@@ -68,9 +69,9 @@ export default function Page() {
       />
       <Breadcrumbs
         items={[
-          { name: "Home", path: "/" },
-          { name: "Locations", path: "/locations" },
-          { name: "Neurosurgeon Banjara Hills", path: "/neurosurgeon-banjara-hills" }
+          { name: "Home", href: "/" },
+          { name: "Locations", href: "/locations" },
+          { name: "Neurosurgeon Banjara Hills", href: "/neurosurgeon-banjara-hills" }
         ]}
       />
       <LocationSchema

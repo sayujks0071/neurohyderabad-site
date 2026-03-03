@@ -7,8 +7,8 @@ export const maxDuration = 30;
 
 export async function POST(request: NextRequest) {
   try {
-    const ip = request.ip ?? request.headers.get('x-forwarded-for') ?? '127.0.0.1';
-    const { success } = await rateLimit(`ai-sandbox-${ip}`);
+    const ip = request.headers.get('x-forwarded-for') ?? '127.0.0.1';
+    const { success } = await rateLimit(`ai-sandbox-${ip}`, 5, 60000);
 
     if (!success) {
       return NextResponse.json(
@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
       messages: messages,
     });
 
-    return result.toDataStreamResponse();
+    return result.toTextStreamResponse();
   } catch (error) {
     console.error('Error in AI Sandbox:', error);
     return NextResponse.json(

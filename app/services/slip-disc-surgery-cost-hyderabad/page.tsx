@@ -12,8 +12,8 @@ import FAQPageSchema from '@/app/_components/FAQPageSchema';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 
 const baseMetadata = makeMetadata({
-  title: 'Slip Disc Surgery Cost in Hyderabad | Endoscopic Discectomy Price 2025',
-  description: 'Complete guide to slip disc (herniated disc) surgery cost in Hyderabad. Endoscopic discectomy prices, insurance coverage, and payment options at Yashoda Hospital.',
+  title: 'Slip Disc Surgery Cost in Hyderabad | Price Guide 2025',
+  description: 'Explore exact slip disc surgery cost in Hyderabad. Compare endoscopic vs open surgery prices, insurance coverage, and EMI options. Book today.',
   canonicalPath: '/services/slip-disc-surgery-cost-hyderabad',
 });
 
