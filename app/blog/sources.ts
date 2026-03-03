@@ -4,6 +4,20 @@ export type SourceEntry = {
 };
 
 export const BLOG_SOURCES: Record<string, SourceEntry[]> = {
+  "herniated-vs-bulging-disc-difference-hyderabad": [
+    {
+      label: "American Association of Neurological Surgeons – Herniated Disc",
+      href: "https://www.aans.org/Patients/Neurosurgical-Conditions-and-Treatments/Herniated-Disc",
+    },
+    {
+      label: "Mayo Clinic – Herniated disk",
+      href: "https://www.mayoclinic.org/diseases-conditions/herniated-disk/symptoms-causes/syc-20354095",
+    },
+    {
+      label: "Spine-health – What's the Difference Between a Bulging Disc and a Herniated Disc?",
+      href: "https://www.spine-health.com/conditions/herniated-disc/whats-difference-between-bulging-disc-and-herniated-disc",
+    }
+  ],
   "brain-aneurysm-vs-migraine-warning-signs-hyderabad": [
     {
       label: "Brain Aneurysm Foundation – Warning Signs",
