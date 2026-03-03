@@ -14,7 +14,7 @@ export default function GoogleOAuth({
   onSuccess, 
   onError, 
   buttonText = "Verify with Google",
-  className = "bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition-colors"
+  className = "bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-blue-500/30 disabled:active:scale-100"
 }: GoogleOAuthProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -101,7 +101,8 @@ export default function GoogleOAuth({
     return (
       <button 
         disabled 
-        className={`${className} opacity-50 cursor-not-allowed`}
+        className={className}
+        aria-label="Loading Google authentication"
       >
         Loading...
       </button>
@@ -112,7 +113,8 @@ export default function GoogleOAuth({
     <button
       onClick={handleGoogleAuth}
       disabled={isLoading}
-      className={`${className} ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+      className={className}
+      aria-label={isLoading ? 'Verifying with Google...' : buttonText}
     >
       {isLoading ? 'Verifying...' : buttonText}
     </button>
