@@ -6,6 +6,7 @@
 
 import { start, getRun } from "workflow/api";
 import { NextRequest, NextResponse } from "next/server";
+import { secureCompare } from "@/src/lib/security";
 import { 
   streamBlogGeneration,
   streamHealthDashboard,
@@ -14,10 +15,11 @@ import {
 } from "@/workflows/streaming-workflows";
 
 // Verify API key
-function verifyApiKey(request: NextRequest): boolean {
+async function verifyApiKey(request: NextRequest): Promise<boolean> {
   const apiKey = request.headers.get("x-api-key");
   const validKey = process.env.WORKFLOW_API_KEY || process.env.CRON_SECRET;
-  return apiKey === validKey;
+  if (!apiKey || !validKey) return false;
+  return await secureCompare(apiKey, validKey);
 }
 
 /**
@@ -33,7 +35,7 @@ function verifyApiKey(request: NextRequest): boolean {
  */
 export async function POST(request: NextRequest) {
   try {
-    if (!verifyApiKey(request)) {
+    if (!(await verifyApiKey(request))) {
       return NextResponse.json(
         { error: "Unauthorized" },
         { status: 401 }

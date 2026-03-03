@@ -6,16 +6,18 @@
 
 import { start } from "workflow/api";
 import { NextRequest, NextResponse } from "next/server";
+import { secureCompare } from "@/src/lib/security";
 import { 
   runSiteHealthCheck, 
   quickHealthCheck 
 } from "@/workflows/site-health";
 
 // Verify API key for protected endpoints
-function verifyApiKey(request: NextRequest): boolean {
+async function verifyApiKey(request: NextRequest): Promise<boolean> {
   const apiKey = request.headers.get("x-api-key");
   const validKey = process.env.WORKFLOW_API_KEY || process.env.CRON_SECRET;
-  return apiKey === validKey;
+  if (!apiKey || !validKey) return false;
+  return await secureCompare(apiKey, validKey);
 }
 
 /**
@@ -30,7 +32,7 @@ function verifyApiKey(request: NextRequest): boolean {
 export async function POST(request: NextRequest) {
   try {
     const isCron = request.headers.get("x-vercel-cron") === "true";
-    if (!isCron && !verifyApiKey(request)) {
+    if (!isCron && !(await verifyApiKey(request))) {
       return NextResponse.json(
         { error: "Unauthorized" },
         { status: 401 }
