@@ -68,8 +68,8 @@ describe('AI Sandbox API', () => {
     // Mock getTextModel to return a dummy model object
     const mockModel = { id: 'mock-model' };
     (getTextModel as any).mockImplementation((name: string) => {
-        if (name === 'gpt-4') return { id: 'mapped-gpt-4' };
-        return { id: 'default-model' };
+        if (name === 'openai/gpt-4o-mini') return { id: 'default-model' };
+        return { id: 'fallback-model' };
     });
 
     // Mock streamText to return a dummy response
@@ -83,17 +83,17 @@ describe('AI Sandbox API', () => {
       headers: { 'x-forwarded-for': '127.0.0.1' },
       body: JSON.stringify({
         messages: [{ role: 'user', content: 'hello' }],
-        requestedModel: 'openai/gpt-5.2', // This should trigger the mapping logic
+        requestedModel: 'openai/gpt-4o-mini', // This should trigger the mapping logic
       }),
     });
 
     const res = await POST(req);
 
-    // Check if getTextModel was called with 'gpt-4' because 'openai/gpt-5.2' maps to it in the route code
-    expect(getTextModel).toHaveBeenCalledWith('gpt-4');
+    // Check if getTextModel was called with 'openai/gpt-4o-mini' passed correctly to use configured model
+    expect(getTextModel).toHaveBeenCalledWith('openai/gpt-4o-mini');
 
     expect(streamText).toHaveBeenCalledWith(expect.objectContaining({
-      model: { id: 'mapped-gpt-4' }, // Checks if the mapped model object was passed
+      model: { id: 'default-model' }, // Checks if the fallback/configured model object was passed
       messages: [{ role: 'user', content: 'hello' }],
     }));
 
@@ -120,7 +120,7 @@ describe('AI Sandbox API', () => {
 
     await POST(req);
 
-    // Should call getTextModel with no arguments (undefined), using default
-    expect(getTextModel).toHaveBeenCalledWith();
+    // Should call getTextModel with undefined (since no requestedModel was provided)
+    expect(getTextModel).toHaveBeenCalledWith(undefined);
   });
 });

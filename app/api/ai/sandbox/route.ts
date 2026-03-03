@@ -34,15 +34,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    let modelId;
-    if (requestedModel === 'openai/gpt-5.2') {
-      modelId = getTextModel('gpt-4');
-    } else {
-      modelId = getTextModel();
-    }
-
+    // Use getTextModel with requestedModel (it defaults to configured Vercel AI Gateway model)
     const result = streamText({
-      model: modelId,
+      model: getTextModel(requestedModel),
       messages: messages,
     });
 

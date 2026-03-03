@@ -12,7 +12,7 @@ export default function AISandboxPage() {
     const { messages, input = '', handleInputChange, handleSubmit, isLoading, error } = useChat({
         api: '/api/ai/sandbox',
         body: {
-            requestedModel: 'openai/gpt-5.2' // Requested snippet
+            requestedModel: 'openai/gpt-4o-mini' // Standard model for Vercel AI Gateway fallback handling
         }
     })
 
@@ -70,7 +70,7 @@ export default function AISandboxPage() {
                                     </svg>
                                 </div>
                                 <p className="text-lg font-medium text-slate-600">Start a conversation</p>
-                                <p className="text-sm max-w-sm text-center">Try asking "Why is the sky blue?" to see real-time streaming using the <code className="bg-slate-100 px-1 py-0.5 rounded text-indigo-500">openai/gpt-5.2</code> configuration.</p>
+                                <p className="text-sm max-w-sm text-center">Try asking "Why is the sky blue?" to see real-time streaming using the <code className="bg-slate-100 px-1 py-0.5 rounded text-indigo-500">openai/gpt-4o-mini</code> configuration.</p>
                             </div>
                         ) : (
                             messages.map(m => (
