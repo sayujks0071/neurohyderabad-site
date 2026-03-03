@@ -9,6 +9,7 @@ import ReviewedBy from '@/app/_components/ReviewedBy';
 import { SITE_URL } from "@/src/lib/seo";
 import { sources } from '../../blog/sources';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
+import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
 
 // Static generation with 24-hour revalidation
 export const revalidate = 86400;
@@ -191,6 +192,13 @@ export const metadata: Metadata = {
 export default function BrainTumorSurgeryConditionPage() {
   return (
     <main className="bg-white">
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Conditions", path: "/conditions" },
+          { name: "Brain Tumor Surgery", path: "/conditions/brain-tumor-surgery-hyderabad" }
+        ]}
+      />
       <SchemaScript id="brain-tumor-condition-jsonld" data={schemaData} />
 
       <section className="bg-slate-900 py-12 text-white">

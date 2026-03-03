@@ -14,6 +14,7 @@ import Card from "../../_components/Card";
 import Button from "../../_components/Button";
 import { LocalPathways } from "@/src/components/locations/LocalPathways";
 import { getLocationById } from "@/src/data/locations";
+import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
 
 // Ensure this route is fully statically generated (no dynamic fallback SSR).
 export const dynamic = 'force-static';
@@ -110,6 +111,13 @@ export default async function ConditionDetailPage({ params }: PageParams) {
       <ConditionStructuredData
         condition={condition}
         canonicalPath={condition.primaryPath}
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Conditions", path: "/conditions" },
+          { name: condition.title, path: condition.primaryPath }
+        ]}
       />
 
       <Section background="none" className="bg-gradient-to-r from-blue-50 to-indigo-100 py-16">

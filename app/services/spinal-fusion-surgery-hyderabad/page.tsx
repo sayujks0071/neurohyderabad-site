@@ -17,6 +17,7 @@ import PatientJourneySection from '@/src/components/PatientJourneySection';
 import TrustProof from '@/app/_components/TrustProof';
 import { patientStories } from '@/src/content/stories';
 import PatientEducationVideosSkeleton from '@/app/_components/skeletons/PatientEducationVideosSkeleton';
+import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
 
 const PatientEducationVideos = dynamic(() => import('@/app/_components/PatientEducationVideos'), {
   loading: () => <PatientEducationVideosSkeleton />
@@ -157,6 +158,13 @@ export default function SpinalFusionPage() {
         pageType="service"
         serviceOrCondition="Spinal Fusion & Fracture Surgery"
         breadcrumbs={breadcrumbs}
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+          { name: "Spinal Fusion Surgery", path: "/services/spinal-fusion-surgery-hyderabad" }
+        ]}
       />
       <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/spinal-fusion-surgery-hyderabad`} />
       <div className="min-h-screen bg-white">

@@ -10,6 +10,7 @@ import { sources } from '../../blog/sources';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import MedicalWebPageSchema from '../../components/schemas/MedicalWebPageSchema';
 import FAQPageSchema from "@/app/_components/FAQPageSchema";
+import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
 
 // Static generation with 24-hour revalidation
 export const revalidate = 86400;
@@ -96,6 +97,13 @@ export default function TrigeminalNeuralgiaTreatmentPage() {
         pageType="condition"
         serviceOrCondition="Trigeminal Neuralgia"
         breadcrumbs={breadcrumbs}
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Conditions", path: "/conditions" },
+          { name: "Trigeminal Neuralgia Treatment", path: "/conditions/trigeminal-neuralgia-treatment-hyderabad" }
+        ]}
       />
       <FAQPageSchema faqs={faqItems} pageUrl={CANONICAL} />
 

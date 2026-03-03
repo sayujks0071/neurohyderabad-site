@@ -14,6 +14,7 @@ import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import TrustProof from '@/app/_components/TrustProof';
 import { patientStories } from '@/src/content/stories';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
+import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
 
 const baseMetadata = makeMetadata({
   title: "Slip Disc Treatment in Hyderabad | Endoscopic Discectomy | Dr. Sayuj Krishnan",
@@ -445,6 +446,13 @@ export default function SlipDiscTreatmentPage() {
         pageType="condition"
         serviceOrCondition="Slip Disc Treatment"
         breadcrumbs={breadcrumbs}
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Conditions", path: "/conditions" },
+          { name: "Slip Disc Treatment", path: "/conditions/slip-disc-treatment-hyderabad" }
+        ]}
       />
 
       <FAQPageSchema

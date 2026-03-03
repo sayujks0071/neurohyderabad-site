@@ -7,6 +7,7 @@ import { LocationMapEmbed } from "@/src/components/locations/LocationMapEmbed";
 import { LocalPathways } from "@/src/components/locations/LocalPathways";
 import { LocationSchema } from "@/src/components/locations/LocationSchema";
 import { notFound } from "next/navigation";
+import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
 
 // Force static generation
 export const dynamic = 'force-static';
@@ -64,6 +65,13 @@ export default function JubileeHillsNeurosurgeonPage() {
   return (
     <main className="bg-white">
       <LocationSchema location={location}  faq={FAQ} />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Locations", path: "/locations" },
+          { name: location.areaServedName, path: location.slug }
+        ]}
+      />
 
       <section className="bg-gradient-to-r from-blue-600 to-blue-800 py-12 text-white">
         <div className="mx-auto max-w-5xl px-4">

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { getLocationById } from "@/src/data/locations";
 import { LocationNAPCard } from "@/src/components/locations/LocationNAPCard";
 import { LocationCTAs } from "@/src/components/locations/LocationCTAs";
+import { LocationMapEmbed } from "@/src/components/locations/LocationMapEmbed";
 import { LocationSchema } from "@/src/components/locations/LocationSchema";
 import { LocalPathways } from "@/src/components/locations/LocalPathways";
 import { notFound } from "next/navigation";
@@ -10,6 +11,7 @@ import ReviewedBy from '@/app/_components/ReviewedBy';
 import MedicalCitations from '@/app/_components/MedicalCitations';
 import SmartImage from '@/components/SmartImage';
 import LocationPageTracker from '@/src/components/LocationPageTracker';
+import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
 
 // Force static generation
 export const dynamic = 'force-static';
@@ -66,6 +68,13 @@ export default function NeurosurgeonNearJubileeHillsFAQPage() {
   return (
     <main id="main" className="max-w-4xl mx-auto px-4 py-12">
       <LocationSchema location={location}  faq={FAQ} />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Locations", path: "/locations" },
+          { name: location.areaServedName, path: location.slug }
+        ]}
+      />
 
       <h1 className="text-3xl md:text-4xl font-bold mb-8">Neurosurgeon Near Jubilee Hills FAQ | Dr. Sayuj Krishnan</h1>
 
@@ -110,6 +119,8 @@ export default function NeurosurgeonNearJubileeHillsFAQPage() {
 
       <h2 className="text-2xl font-bold mb-6 text-gray-900">Getting to Dr. Sayuj from Jubilee Hills</h2>
       
+      <LocationMapEmbed location={location} className="mb-8" />
+
       <div className="grid gap-6 md:grid-cols-2 mb-12">
         <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
           <h3 className="text-xl font-semibold mb-4 text-blue-800">By Road</h3>

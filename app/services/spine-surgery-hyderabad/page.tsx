@@ -16,6 +16,7 @@ import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import SurgeryComparisonTable from '@/src/components/SurgeryComparisonTable';
 import PatientJourneySection from '@/src/components/PatientJourneySection';
 import EndoscopicProcedureSteps from '@/src/components/EndoscopicProcedureSteps';
+import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
 
 const SERVICE_SLUG = 'spine-surgery-hyderabad';
 
@@ -133,6 +134,13 @@ export default function SpineSurgeryHyderabadPage() {
         pageType="service"
         serviceOrCondition="Spine Surgery"
         breadcrumbs={breadcrumbs}
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+          { name: "Spine Surgery", path: "/services/spine-surgery-hyderabad" }
+        ]}
       />
       <main className="container mx-auto px-4 py-16">
         <Breadcrumbs

@@ -11,6 +11,7 @@ import { getServiceSources } from '../sources';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import MedicalWebPageSchema from '../../components/schemas/MedicalWebPageSchema';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
+import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
 
 const baseMetadata = makeMetadata({
   title: 'Endoscopic Discectomy Hyderabad',
@@ -81,6 +82,13 @@ export default function EndoscopicDiscectomyPage() {
         pageType="service"
         serviceOrCondition="Endoscopic Discectomy"
         breadcrumbs={breadcrumbs}
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+          { name: "Endoscopic Discectomy", path: "/services/endoscopic-discectomy-hyderabad" }
+        ]}
       />
       <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/endoscopic-discectomy-hyderabad`} />
 

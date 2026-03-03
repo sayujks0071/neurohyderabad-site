@@ -9,6 +9,7 @@ import ReviewedBy from '@/app/_components/ReviewedBy';
 import { SITE_URL } from "@/src/lib/seo";
 import { sources } from '../../blog/sources';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
+import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
 
 // Static generation with 24-hour revalidation
 export const revalidate = 86400;
@@ -234,6 +235,13 @@ export const metadata: Metadata = {
 export default function CervicalRadiculopathyPage() {
   return (
     <main className="bg-white">
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Conditions", path: "/conditions" },
+          { name: "Cervical Radiculopathy Treatment", path: "/conditions/cervical-radiculopathy-treatment-hyderabad" }
+        ]}
+      />
       <SchemaScript id="cervical-radiculopathy-jsonld" data={schemaData} />
 
       {/* Warning Banner for Weakness */}

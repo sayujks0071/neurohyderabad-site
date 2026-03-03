@@ -10,6 +10,7 @@ import { getServiceSources } from '../sources';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import MedicalWebPageSchema from '../../components/schemas/MedicalWebPageSchema';
+import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
 
 const baseMetadata = makeMetadata({
   title: 'Peripheral Nerve Surgery in Hyderabad | Carpal Tunnel Expert',
@@ -155,6 +156,13 @@ export default function PeripheralNerveSurgeryPage() {
         pageType="service"
         serviceOrCondition="Peripheral Nerve Surgery"
         breadcrumbs={breadcrumbs}
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+          { name: "Peripheral Nerve Surgery", path: "/services/peripheral-nerve-surgery-hyderabad" }
+        ]}
       />
       <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/peripheral-nerve-surgery-hyderabad`} />
 

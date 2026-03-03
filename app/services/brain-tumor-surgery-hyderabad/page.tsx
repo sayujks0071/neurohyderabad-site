@@ -18,6 +18,7 @@ import CostTransparencySection from '@/src/components/CostTransparencySection';
 import PatientJourneySection from '@/src/components/PatientJourneySection';
 import MedicalWebPageSchema from '../../components/schemas/MedicalWebPageSchema';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
+import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
 
 const SERVICE_SLUG = 'brain-tumor-surgery-hyderabad';
 
@@ -206,6 +207,13 @@ export default function BrainTumorSurgeryHyderabadPage() {
         pageType="service"
         serviceOrCondition="Brain Tumor Surgery"
         breadcrumbs={breadcrumbs}
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+          { name: "Brain Tumor Surgery", path: "/services/brain-tumor-surgery-hyderabad" }
+        ]}
       />
       <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/${SERVICE_SLUG}`} />
 

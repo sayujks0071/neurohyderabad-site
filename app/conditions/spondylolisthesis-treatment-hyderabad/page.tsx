@@ -14,6 +14,7 @@ import CostTransparencySection from '@/src/components/CostTransparencySection';
 import TeleconsultationForm from '@/components/TeleconsultationForm';
 import OutcomeMetricsSection from '@/components/OutcomeMetricsSection';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
+import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
 
 const baseMetadata = makeMetadata({
   title: 'Spondylolisthesis Treatment Hyderabad | Slipped Vertebra',
@@ -83,6 +84,13 @@ export default function SpondylolisthesisPage() {
 
   return (
     <div className="min-h-screen bg-white">
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Conditions", path: "/conditions" },
+          { name: "Spondylolisthesis Treatment", path: "/conditions/spondylolisthesis-treatment-hyderabad" }
+        ]}
+      />
       <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/conditions/spondylolisthesis-treatment-hyderabad`} />
 
       <Section background="blue" className="pt-24 pb-12">

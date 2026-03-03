@@ -16,6 +16,7 @@ import { getServiceSources } from '../sources';
 import { patientStories } from '@/src/content/stories';
 import SurgeryComparisonTable from '@/src/components/SurgeryComparisonTable';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
+import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
 
 const SERVICE_SLUG = 'uniportal-endoscopic-spine-surgery-hyderabad';
 
@@ -129,6 +130,13 @@ export default function UniportalPage() {
     <>
       <JsonLd data={schema} />
       <main className="container mx-auto px-4 py-16">
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+          { name: "Uniportal Endoscopic Spine Surgery", path: "/services/uniportal-endoscopic-spine-surgery-hyderabad" }
+        ]}
+      />
         <Breadcrumbs
           items={[
             { name: 'Home', href: '/' },

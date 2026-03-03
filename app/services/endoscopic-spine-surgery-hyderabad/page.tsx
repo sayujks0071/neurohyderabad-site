@@ -19,6 +19,7 @@ import SurgeryComparisonTable from '@/src/components/SurgeryComparisonTable';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
 import EndoscopicProcedureSteps from '@/src/components/EndoscopicProcedureSteps';
+import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
 
 const SERVICE_SLUG = 'endoscopic-spine-surgery-hyderabad';
 
@@ -357,6 +358,13 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
       <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/${SERVICE_SLUG}`} />
 
       <main className="container mx-auto px-4 py-16">
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+          { name: "Endoscopic Spine Surgery", path: "/services/endoscopic-spine-surgery-hyderabad" }
+        ]}
+      />
         <Breadcrumbs
           items={[
             { name: 'Home', href: '/' },
