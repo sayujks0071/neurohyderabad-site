@@ -126,6 +126,7 @@ export default function SandboxClient() {
                             disabled={isLoading || !input.trim()}
                             type="submit"
                             className="bg-blue-600 hover:bg-blue-700 disabled:bg-slate-200 disabled:text-slate-400 text-white rounded-xl p-4 transition-all duration-200 shadow-sm active:scale-95 shrink-0 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                            aria-label={isLoading ? 'Sending message...' : 'Send message'}
                         >
                             {isLoading ? (
                                 <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
