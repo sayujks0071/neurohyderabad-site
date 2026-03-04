@@ -58,7 +58,7 @@
     },
     {
       "parameters": {
-        "functionCode": "const results = items[0].json.organic;\nconst top5 = results.slice(0, 5).map(r => `<li><a href=\"${r.link}\">${r.title}</a> (${r.snippet})</li>`).join('');\nreturn [{ json: { html: `<h3>Top 5 Competitors for 'Neurosurgeon Hyderabad'</h3><ul>${top5}</ul>` } }];"
+        "functionCode": "const results = items[0].json.organic;\nconst top5 = results.slice(0, 5).map(r => `<li style=\"margin-bottom: 10px;\"><b><a href=\"${r.link}\" style=\"color: #0056b3; text-decoration: none;\">${r.title}</a></b><br><span style=\"color: #555; font-size: 0.9em;\">${r.snippet}</span></li>`).join('');\nreturn [{ json: { html: `<div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: auto;\"><h2 style=\"color: #333; border-bottom: 2px solid #0056b3; padding-bottom: 10px;\">Weekly Local SEO SERP Analysis</h2><p>Top 5 ranking pages for <b>'Neurosurgeon Hyderabad'</b>:</p><ul style=\"list-style-type: none; padding: 0;\">${top5}</ul><p style=\"font-size: 0.8em; color: #888; margin-top: 20px;\">Review these snippets to identify content gaps and optimization opportunities for www.drsayuj.info.</p></div>` } }];"
       },
       "name": "Format Report",
       "type": "n8n-nodes-base.function",
@@ -128,5 +128,6 @@
   },
   "settings": {},
   "staticData": null,
-  "tags": []
+  "tags": [],
+  "id": "e6517b32-7e6a-4549-a3e6-626adf9e39e8"
 }
