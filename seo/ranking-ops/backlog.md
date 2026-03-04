@@ -68,3 +68,7 @@
 
 ## 2026-02-27
 *   [x] **Schema:** Add `VideoObject` schema to `app/services/minimally-invasive-spine-surgery/page.tsx` for the newly embedded "L5-S1 Endoscopic Discectomy" video to improve rich snippets. (Done 2026-02-28)
+
+## 2025-03-04
+*   [x] **Schema:** Add `FAQPageSchema` to `app/services/spine-surgery-hyderabad/page.tsx` to capture FAQ rich snippets for Spine Surgery intents. (Done 2025-03-04)
+*   **Schema Audit:** Verify other older pages like `brain-tumor-surgery` under `/app/services/` for missing `FAQPageSchema` or inconsistent schema setups.
