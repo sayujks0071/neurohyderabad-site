@@ -73,6 +73,13 @@ export default function Page() {
           { name: "Neurosurgeon Banjara Hills", path: "/neurosurgeon-banjara-hills" }
         ]}
       />
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', path: '/' },
+          { name: 'Locations', path: '/locations' },
+          { name: 'Neurosurgeon in Banjara Hills, Hyderabad', path: '/neurosurgeon-banjara-hills' },
+        ]}
+      />
       <LocationSchema
          location={location}
          faq={FAQ}
