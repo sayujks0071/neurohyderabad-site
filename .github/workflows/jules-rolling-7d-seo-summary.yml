@@ -99,4 +99,4 @@ jobs:
 
             console.log(`Created issue: ${newIssue.html_url}`);
 
-# Verified by Jules
+# Verified by Jules 2.0

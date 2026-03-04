@@ -1,6 +1,6 @@
 # Jules Automations
 
-This document explains the automated workflows managed by Jules for https://www.drsayuj.info.
+This document explains the automated scheduled workflows managed by Jules for https://www.drsayuj.info.
 
 ## Overview
 

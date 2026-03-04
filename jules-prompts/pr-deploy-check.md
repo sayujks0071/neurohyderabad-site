@@ -14,4 +14,4 @@ Review PRs merged in the last 24 hours.
 <!-- Managed by Jules -->
 <!-- v2.4 -->
 
-<!-- Verified by Jules -->
+<!-- Verified by Jules 2.0 -->
