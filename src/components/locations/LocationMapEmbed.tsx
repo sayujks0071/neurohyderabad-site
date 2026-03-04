@@ -25,17 +25,17 @@ export const LocationMapEmbed: React.FC<LocationMapEmbedProps> = ({
   if (!location) return null;
 
   return (
-    <div className={`relative w-full rounded-2xl overflow-hidden shadow-xl border border-gray-200 bg-gray-100 ${className}`} style={{ height }}>
+    <div className={`relative w-full rounded-2xl overflow-hidden shadow-xl border border-[var(--color-border)] bg-[var(--color-background)] ${className}`} style={{ height }}>
       {!isLoaded && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center bg-gray-50 z-10">
-          <MapPin className="w-12 h-12 text-blue-600 mb-4 animate-bounce" aria-hidden="true" />
-          <h3 className="text-xl font-semibold text-gray-900 mb-2">View Location on Map</h3>
-          <p className="text-gray-500 mb-6 text-center max-w-md px-4">
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-[var(--color-background)] z-10">
+          <MapPin className="w-12 h-12 text-[var(--color-primary-500)] mb-4 animate-bounce" aria-hidden="true" />
+          <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-2">View Location on Map</h3>
+          <p className="text-[var(--color-text-secondary)] mb-6 text-center max-w-md px-4">
             Click below to load the interactive Google Map for {location.name}
           </p>
           <button
             onClick={() => setIsLoaded(true)}
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition-all transform hover:scale-105"
+            className="bg-[var(--color-primary-500)] hover:bg-[var(--color-primary-700)] text-white font-semibold py-3 px-8 rounded-full shadow-lg transition-all transform hover:scale-105"
             aria-label={`Load interactive map for ${location.name}`}
           >
             Load Map
@@ -44,8 +44,8 @@ export const LocationMapEmbed: React.FC<LocationMapEmbedProps> = ({
       )}
 
       {isLoaded && !isIframeLoaded && (
-        <div className="absolute inset-0 flex items-center justify-center bg-gray-50 z-20">
-          <Loader2 className="w-8 h-8 text-blue-600 animate-spin" />
+        <div className="absolute inset-0 flex items-center justify-center bg-[var(--color-background)] z-20">
+          <Loader2 className="w-8 h-8 text-[var(--color-primary-500)] animate-spin" />
           <span className="sr-only">Loading map...</span>
         </div>
       )}

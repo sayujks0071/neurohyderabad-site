@@ -54,24 +54,24 @@ export default function CookieConsent() {
         isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0 pointer-events-none'
       }`}
     >
-      <div className="bg-white/80 backdrop-blur-lg border border-white/20 shadow-2xl rounded-2xl p-6 md:p-8">
+      <div className="bg-[var(--color-surface)]/80 backdrop-blur-lg border border-white/20 shadow-2xl rounded-2xl p-6 md:p-8">
         <div className="flex flex-col gap-6">
           <div>
             <h3 
               id="cookie-consent-title" 
-              className="text-lg font-bold text-slate-800 mb-3"
+              className="text-lg font-bold text-[var(--color-text-primary)] mb-3"
             >
               We value your privacy
             </h3>
             <p 
               id="cookie-consent-description" 
-              className="text-slate-600 text-sm leading-relaxed"
+              className="text-[var(--color-text-secondary)] text-sm leading-relaxed"
             >
               We use essential cookies for website functionality and analytics cookies to understand how you use our site. 
               By continuing to use our website, you consent to our use of cookies. 
               <Link 
                 href="/cookies" 
-                className="text-blue-600 hover:text-blue-700 font-medium ml-1 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-1"
+                className="text-[var(--color-primary-500)] hover:text-[var(--color-primary-700)] font-medium ml-1 hover:underline focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)] rounded px-1"
               >
                 Learn more
               </Link>
@@ -82,7 +82,7 @@ export default function CookieConsent() {
             <button
               type="button"
               onClick={handleDecline}
-              className="flex-1 bg-white border border-slate-200 text-slate-600 font-medium py-3 px-6 rounded-xl transition-all duration-300 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2"
+              className="flex-1 bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-secondary)] font-medium py-3 px-6 rounded-xl transition-all duration-300 hover:border-[var(--color-border)] hover:bg-[var(--color-background)] hover:text-[var(--color-text-primary)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-border)] focus:ring-offset-2"
               aria-label="Decline cookies"
             >
               Decline
@@ -90,7 +90,7 @@ export default function CookieConsent() {
             <button
               type="button"
               onClick={handleAccept}
-              className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-[0.98] text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              className="flex-1 bg-gradient-to-r from-[var(--color-primary-500)] to-[var(--color-primary-700)] text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-[0.98] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)] focus:ring-offset-2"
               aria-label="Accept all cookies"
             >
               Accept All

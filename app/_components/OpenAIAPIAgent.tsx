@@ -66,16 +66,16 @@ export default function OpenAIAPIAgent({ pageSlug, service }: OpenAIAPIAgentProp
   return (
     <div className="max-w-4xl mx-auto">
       {/* Chat Interface */}
-      <div className="bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden">
+      <div className="bg-[var(--color-surface)] rounded-2xl border border-[var(--color-border)] shadow-lg overflow-hidden">
         {/* Chat Header */}
-        <div className="bg-blue-600 text-white p-4">
+        <div className="bg-[var(--color-primary-500)] text-white p-4">
           <div className="flex items-center">
-            <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center mr-3">
+            <div className="w-10 h-10 bg-[var(--color-primary-50)]0 rounded-full flex items-center justify-center mr-3">
               <span className="text-lg">🤖</span>
             </div>
             <div>
               <h3 className="font-semibold">Dr. Sayuj's AI Assistant</h3>
-              <p className="text-blue-100 text-sm">Powered by OpenAI & Vercel AI Gateway</p>
+              <p className="text-[var(--color-primary-100)] text-sm">Powered by OpenAI & Vercel AI Gateway</p>
             </div>
           </div>
         </div>
@@ -101,8 +101,8 @@ export default function OpenAIAPIAgent({ pageSlug, service }: OpenAIAPIAgentProp
                 <div
                   className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
                     message.role === 'user'
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-gray-100 text-gray-800'
+                      ? 'bg-[var(--color-primary-500)] text-white'
+                      : 'bg-[var(--color-background)] text-[var(--color-text-primary)]'
                   }`}
                 >
                   <p className="text-sm whitespace-pre-wrap">{content}</p>
@@ -116,9 +116,9 @@ export default function OpenAIAPIAgent({ pageSlug, service }: OpenAIAPIAgentProp
           
           {isLoading && (
             <div className="flex justify-start">
-              <div className="bg-gray-100 text-gray-800 px-4 py-2 rounded-lg">
+              <div className="bg-[var(--color-background)] text-[var(--color-text-primary)] px-4 py-2 rounded-lg">
                 <div className="flex items-center space-x-2">
-                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-[var(--color-primary-500)]"></div>
                   <span className="text-sm">AI is thinking...</span>
                 </div>
               </div>
@@ -129,20 +129,20 @@ export default function OpenAIAPIAgent({ pageSlug, service }: OpenAIAPIAgentProp
         </div>
 
         {/* Input Form */}
-        <form onSubmit={onFormSubmit} className="p-4 border-t border-gray-200">
+        <form onSubmit={onFormSubmit} className="p-4 border-t border-[var(--color-border)]">
           <div className="flex space-x-2">
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Type your message here..."
-              className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="flex-1 px-3 py-2 border border-[var(--color-border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)] focus:border-transparent"
               disabled={isLoading}
             />
             <button
               type="submit"
               disabled={!input.trim() || isLoading}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="px-4 py-2 bg-[var(--color-primary-500)] text-white rounded-lg hover:bg-[var(--color-primary-700)] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               Send
             </button>
@@ -152,9 +152,9 @@ export default function OpenAIAPIAgent({ pageSlug, service }: OpenAIAPIAgentProp
 
       {/* Fallback Contact Info */}
       <div className="mt-6 text-center">
-        <p className="text-sm text-gray-600">
+        <p className="text-sm text-[var(--color-text-secondary)]">
           Prefer to speak directly? Call us at{' '}
-          <a href="tel:+919778280044" className="text-blue-600 hover:underline font-medium">
+          <a href="tel:+919778280044" className="text-[var(--color-primary-500)] hover:underline font-medium">
             +91-9778280044
           </a>
         </p>

@@ -2,7 +2,7 @@ export default function SearchPlaceholder() {
   return (
     <button
       type="button"
-      className="flex items-center gap-2 rounded-full border border-gray-200 px-3 py-1.5 text-sm text-gray-600 transition hover:border-blue-300 hover:text-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
+      className="flex items-center gap-2 rounded-full border border-[var(--color-border)] px-3 py-1.5 text-sm text-[var(--color-text-secondary)] transition hover:border-[var(--color-primary-300)] hover:text-[var(--color-primary-500)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
       aria-label="Search site (Cmd/Ctrl + K)"
     >
       <svg
@@ -25,7 +25,7 @@ export default function SearchPlaceholder() {
         />
       </svg>
       <span className="hidden sm:inline">Search</span>
-      <span className="rounded border border-gray-200 bg-gray-50 px-1.5 text-xs text-gray-500 sm:inline">
+      <span className="rounded border border-[var(--color-border)] bg-[var(--color-background)] px-1.5 text-xs text-[var(--color-text-secondary)] sm:inline">
         ⌘K
       </span>
     </button>

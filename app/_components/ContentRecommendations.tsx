@@ -78,8 +78,8 @@ export default function ContentRecommendations({
     return (
       <div className={`flex items-center justify-center p-12 ${className}`}>
         <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-3"></div>
-          <p className="text-slate-500 font-medium">Finding relevant articles...</p>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--color-primary-500)] mx-auto mb-3"></div>
+          <p className="text-[var(--color-text-secondary)] font-medium">Finding relevant articles...</p>
         </div>
       </div>
     );
@@ -95,12 +95,12 @@ export default function ContentRecommendations({
   }
 
   return (
-    <div className={`relative bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 ${className}`}>
-      <div className="flex items-center gap-3 mb-6 border-b border-blue-100/50 pb-4">
-        <div className="p-2 bg-blue-100/50 rounded-lg text-blue-600">
+    <div className={`relative bg-[var(--color-surface)]/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 ${className}`}>
+      <div className="flex items-center gap-3 mb-6 border-b border-[var(--color-primary-100)]/50 pb-4">
+        <div className="p-2 bg-[var(--color-primary-100)]/50 rounded-lg text-[var(--color-primary-500)]">
           <Sparkles className="w-5 h-5" />
         </div>
-        <h3 className="text-2xl font-bold text-slate-800">
+        <h3 className="text-2xl font-bold text-[var(--color-text-primary)]">
           {query ? 'Recommended Articles' : 'You May Also Like'}
         </h3>
       </div>
@@ -110,29 +110,29 @@ export default function ContentRecommendations({
           <Link
             key={post.slug}
             href={`/blog/${post.slug}`}
-            className="flex flex-col h-full bg-white/50 border border-blue-50/50 rounded-xl p-5 hover:bg-white/80 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 group"
+            className="flex flex-col h-full bg-[var(--color-surface)]/50 border border-[var(--color-primary-50)] rounded-xl p-5 hover:bg-[var(--color-surface)]/80 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 group"
           >
             {post.category && (
-              <span className="text-xs uppercase tracking-wider text-blue-600 font-bold mb-2">
+              <span className="text-xs uppercase tracking-wider text-[var(--color-primary-500)] font-bold mb-2">
                 {post.category}
               </span>
             )}
-            <h4 className="font-bold text-slate-800 text-lg mb-2 line-clamp-2 group-hover:text-blue-700 transition-colors">
+            <h4 className="font-bold text-[var(--color-text-primary)] text-lg mb-2 line-clamp-2 group-hover:text-[var(--color-primary-700)] transition-colors">
               {post.title}
             </h4>
             {post.excerpt && (
-              <p className="text-sm text-slate-600 line-clamp-3 mb-4 flex-grow">
+              <p className="text-sm text-[var(--color-text-secondary)] line-clamp-3 mb-4 flex-grow">
                 {post.excerpt}
               </p>
             )}
 
-            <div className="mt-auto pt-4 border-t border-slate-100">
+            <div className="mt-auto pt-4 border-t border-[var(--color-border)]">
               {post.tags && post.tags.length > 0 ? (
                 <div className="flex flex-wrap gap-2 mb-3">
                   {post.tags.slice(0, 2).map((tag) => (
                     <span
                       key={tag}
-                      className="flex items-center gap-1 text-[10px] bg-blue-50 text-blue-600 px-2 py-1 rounded-full font-medium border border-blue-100"
+                      className="flex items-center gap-1 text-[10px] bg-[var(--color-primary-50)] text-[var(--color-primary-500)] px-2 py-1 rounded-full font-medium border border-[var(--color-primary-100)]"
                     >
                       <Tag className="w-3 h-3" />
                       {tag}
@@ -141,7 +141,7 @@ export default function ContentRecommendations({
                 </div>
               ) : null}
 
-              <div className="flex items-center text-blue-600 font-medium text-sm group/link">
+              <div className="flex items-center text-[var(--color-primary-500)] font-medium text-sm group/link">
                 Read Article
                 <ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover/link:translate-x-1" />
               </div>

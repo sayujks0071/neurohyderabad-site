@@ -19,8 +19,8 @@ export default function ReassuranceMicrocopy({
   const copy = COPY_BY_SERVICE[serviceType] ?? COPY_BY_SERVICE.spine;
 
   return (
-    <div className={`bg-blue-50 border-l-4 border-blue-500 p-4 ${className}`}>
-      <p className="text-blue-800 font-medium">
+    <div className={`bg-[var(--color-primary-50)] border-l-4 border-[var(--color-primary-500)] p-4 ${className}`}>
+      <p className="text-[var(--color-primary-800)] font-medium">
         {copy}
       </p>
     </div>
