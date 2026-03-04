@@ -73,9 +73,9 @@ export default function RealWorldExample() {
 
   // CTA Button Styles
   const ctaStyles = {
-    primary: 'bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold',
-    secondary: 'bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-semibold',
-    minimal: 'border-2 border-blue-600 text-blue-600 hover:bg-blue-50 px-8 py-3 rounded-lg font-semibold',
+    primary: 'bg-[var(--color-primary-500)] hover:bg-[var(--color-primary-700)] text-white px-8 py-3 rounded-lg font-semibold',
+    secondary: 'bg-[var(--color-success)] hover:bg-[var(--color-success-700)] text-white px-8 py-3 rounded-lg font-semibold',
+    minimal: 'border-2 border-[var(--color-primary-500)] text-[var(--color-primary-500)] hover:bg-[var(--color-primary-50)] px-8 py-3 rounded-lg font-semibold',
   };
 
   // Headlines
@@ -102,7 +102,7 @@ export default function RealWorldExample() {
         <h1 className="text-4xl font-bold">
           {headlines[headlineVariant as keyof typeof headlines] || headlines.control}
         </h1>
-        <p className="text-gray-600 text-lg">
+        <p className="text-[var(--color-text-secondary)] text-lg">
           German-trained neurosurgeon specializing in minimally invasive procedures
         </p>
 
@@ -128,14 +128,14 @@ export default function RealWorldExample() {
 
       {/* Personalization Section */}
       {userSegment === 'new' && showWelcomeOffer && (
-        <section className="bg-gradient-to-r from-blue-500 to-purple-500 text-white p-6 rounded-lg">
+        <section className="bg-gradient-to-r from-[var(--color-primary-500)] to-purple-500 text-white p-6 rounded-lg">
           <h3 className="text-xl font-bold mb-2">Welcome! Special Offer</h3>
           <p>Get 10% off your first consultation. Book now!</p>
         </section>
       )}
 
       {userSegment === 'returning' && showLoyaltyProgram && (
-        <section className="bg-gradient-to-r from-green-500 to-teal-500 text-white p-6 rounded-lg">
+        <section className="bg-gradient-to-r from-[var(--color-success)] to-[var(--color-success)] text-white p-6 rounded-lg">
           <h3 className="text-xl font-bold mb-2">Loyalty Rewards</h3>
           <p>Thank you for being a valued patient. Earn points with every visit!</p>
         </section>
@@ -143,17 +143,17 @@ export default function RealWorldExample() {
 
       {/* Progressive Rollout Feature */}
       {shouldShowNewFeature && (
-        <section className="border-2 border-blue-500 rounded-lg p-6 bg-blue-50">
+        <section className="border-2 border-[var(--color-primary-500)] rounded-lg p-6 bg-[var(--color-primary-50)]">
           <div className="flex items-center gap-2 mb-4">
-            <span className="bg-blue-500 text-white px-2 py-1 rounded text-xs font-bold">
+            <span className="bg-[var(--color-primary-50)]0 text-white px-2 py-1 rounded text-xs font-bold">
               NEW FEATURE
             </span>
-            <span className="text-sm text-gray-600">
+            <span className="text-sm text-[var(--color-text-secondary)]">
               Rollout: {newFeatureRollout}%
             </span>
           </div>
           <h3 className="text-lg font-semibold mb-2">Enhanced Patient Portal</h3>
-          <p className="text-gray-700">
+          <p className="text-[var(--color-text-secondary)]">
             Access your medical records, schedule appointments, and communicate with your care team.
           </p>
         </section>
@@ -161,13 +161,13 @@ export default function RealWorldExample() {
 
       {/* Conditional Content */}
       {showTestimonials && (
-        <section className="bg-gray-50 p-6 rounded-lg">
+        <section className="bg-[var(--color-background)] p-6 rounded-lg">
           <h3 className="text-xl font-bold mb-4">Patient Testimonials</h3>
           <div className="grid md:grid-cols-2 gap-4">
-            <blockquote className="border-l-4 border-blue-500 pl-4">
+            <blockquote className="border-l-4 border-[var(--color-primary-500)] pl-4">
               "Excellent care and professional service. Highly recommended!"
             </blockquote>
-            <blockquote className="border-l-4 border-blue-500 pl-4">
+            <blockquote className="border-l-4 border-[var(--color-primary-500)] pl-4">
               "Dr. Sayuj provided exceptional treatment for my spine condition."
             </blockquote>
           </div>
@@ -176,14 +176,14 @@ export default function RealWorldExample() {
 
       {/* Live Chat Widget */}
       {enableLiveChat && (
-        <div className="fixed bottom-4 right-4 bg-green-500 text-white p-4 rounded-full shadow-lg cursor-pointer hover:bg-green-600 transition-colors">
+        <div className="fixed bottom-4 right-4 bg-[var(--color-success)] text-white p-4 rounded-full shadow-lg cursor-pointer hover:bg-[var(--color-success)] transition-colors">
           💬 Chat
         </div>
       )}
 
       {/* Debug Panel (remove in production) */}
       {process.env.NODE_ENV === 'development' && (
-        <div className="mt-8 p-4 bg-gray-100 rounded-lg text-xs space-y-1">
+        <div className="mt-8 p-4 bg-[var(--color-background)] rounded-lg text-xs space-y-1">
           <p><strong>Feature Flags Status:</strong></p>
           <p>New Booking Flow: {enableNewBookingFlow ? 'ON' : 'OFF'}</p>
           <p>Testimonials: {showTestimonials ? 'ON' : 'OFF'}</p>

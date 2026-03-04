@@ -70,10 +70,10 @@ export default function OptimizedImage({
   if (hasError) {
     return (
       <div 
-        className={`bg-gray-200 flex items-center justify-center ${className}`}
+        className={`bg-[var(--color-border)] flex items-center justify-center ${className}`}
         style={fill ? {} : { width, height }}
       >
-        <span className="text-gray-500 text-sm">Image unavailable</span>
+        <span className="text-[var(--color-text-secondary)] text-sm">Image unavailable</span>
       </div>
     );
   }
@@ -82,10 +82,10 @@ export default function OptimizedImage({
     <div className={`relative ${className}`} style={fill ? {} : { width, height }}>
       {isLoading && (
         <div 
-          className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center"
+          className="absolute inset-0 bg-[var(--color-border)] animate-pulse flex items-center justify-center"
           style={fill ? {} : { width, height }}
         >
-          <div className="w-8 h-8 border-2 border-gray-300 border-t-blue-600 rounded-full animate-spin"></div>
+          <div className="w-8 h-8 border-2 border-[var(--color-border)] border-t-blue-600 rounded-full animate-spin"></div>
         </div>
       )}
       

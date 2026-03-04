@@ -100,7 +100,7 @@ const TestimonialCarousel: React.FC<TestimonialCarouselProps> = ({
               key={i}
               className={`h-5 w-5 ${
                 i < t.rating
-                  ? 'text-yellow-400 fill-yellow-400'
+                  ? 'text-[var(--color-warning)] fill-yellow-400'
                   : 'text-[var(--color-border)]'
               }`}
               aria-hidden="true"
