@@ -62,7 +62,7 @@ export default function BookingCalendarEmbed({
 
   if (calLink) {
     return (
-      <div className="w-full bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden min-h-[600px]">
+      <div className="w-full bg-[var(--color-surface)] border border-[var(--color-border)] rounded-2xl shadow-sm overflow-hidden min-h-[600px]">
         <Cal
           calLink={calLink}
           style={{ width: "100%", height: "100%", overflow: "scroll" }}
@@ -73,16 +73,16 @@ export default function BookingCalendarEmbed({
   }
 
   return (
-    <div className="bg-white border border-slate-200 rounded-2xl shadow-sm p-8 text-center space-y-6">
-      <div className="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto">
-        <Calendar className="w-8 h-8 text-blue-600" />
+    <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-2xl shadow-sm p-8 text-center space-y-6">
+      <div className="w-16 h-16 bg-[var(--color-primary-50)] rounded-full flex items-center justify-center mx-auto">
+        <Calendar className="w-8 h-8 text-[var(--color-primary-500)]" />
       </div>
 
       <div className="space-y-2">
-        <h3 className="text-xl font-semibold text-slate-900">
+        <h3 className="text-xl font-semibold text-[var(--color-text-primary)]">
           Book Your Appointment Online
         </h3>
-        <p className="text-slate-600 max-w-md mx-auto">
+        <p className="text-[var(--color-text-secondary)] max-w-md mx-auto">
           Our secure booking assistant is hosted on Google. Click the button below to open the calendar in a new secure window.
         </p>
       </div>
@@ -92,13 +92,13 @@ export default function BookingCalendarEmbed({
         target="_blank"
         rel="noreferrer"
         onClick={trackOnce}
-        className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-8 rounded-xl shadow-lg shadow-blue-500/30 hover:scale-[1.02] transition-transform duration-200 group"
+        className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[var(--color-primary-500)] to-[var(--color-primary-700)] text-white font-semibold py-3 px-8 rounded-xl shadow-lg shadow-blue-500/30 hover:scale-[1.02] transition-transform duration-200 group"
       >
         <span>Open Booking App</span>
         <ExternalLink className="w-4 h-4 opacity-90 group-hover:translate-x-0.5 transition-transform" />
       </a>
 
-      <p className="text-xs text-slate-500">
+      <p className="text-xs text-[var(--color-text-secondary)]">
         Opens in a new tab • Secure via Google Opal
       </p>
     </div>

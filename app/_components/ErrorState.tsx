@@ -28,7 +28,7 @@ const ErrorState: React.FC<ErrorStateProps> = ({
   if (compact) {
     return (
       <div
-        className={`flex items-center gap-3 p-[var(--space-4)] rounded-[var(--radius-md)] bg-red-50 border border-red-200 ${className}`}
+        className={`flex items-center gap-3 p-[var(--space-4)] rounded-[var(--radius-md)] bg-[var(--color-error-light)] border border-[var(--color-error-light)] ${className}`}
         role="alert"
       >
         <AlertTriangle className="h-5 w-5 text-[var(--color-error)] shrink-0" aria-hidden="true" />
@@ -36,7 +36,7 @@ const ErrorState: React.FC<ErrorStateProps> = ({
         {onRetry && (
           <button
             onClick={onRetry}
-            className="ml-auto shrink-0 text-sm text-[var(--color-error)] hover:text-red-800 underline focus-ring"
+            className="ml-auto shrink-0 text-sm text-[var(--color-error)] hover:text-[var(--color-error-800)] underline focus-ring"
             type="button"
           >
             Retry
@@ -51,7 +51,7 @@ const ErrorState: React.FC<ErrorStateProps> = ({
       className={`flex flex-col items-center justify-center text-center py-[var(--space-16)] px-[var(--space-4)] ${className}`}
       role="alert"
     >
-      <div className="w-16 h-16 rounded-full bg-red-50 flex items-center justify-center mb-[var(--space-6)]">
+      <div className="w-16 h-16 rounded-full bg-[var(--color-error-light)] flex items-center justify-center mb-[var(--space-6)]">
         <AlertTriangle className="h-8 w-8 text-[var(--color-error)]" aria-hidden="true" />
       </div>
       <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-2">

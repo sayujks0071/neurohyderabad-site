@@ -43,14 +43,14 @@ function ConsentBanner({ onConsent }: { onConsent: () => void }) {
   };
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 shadow-lg z-50">
+    <div className="fixed bottom-0 left-0 right-0 bg-[var(--color-surface)] border-t border-[var(--color-border)] p-4 shadow-lg z-50">
       <div className="max-w-4xl mx-auto">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex-1">
-            <h3 className="font-semibold text-gray-900 mb-2">
+            <h3 className="font-semibold text-[var(--color-text-primary)] mb-2">
               Privacy & Analytics
             </h3>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-[var(--color-text-secondary)]">
               We use analytics to improve your experience. All data is anonymized and no personal information is collected. 
               You can opt out at any time.
             </p>
@@ -58,13 +58,13 @@ function ConsentBanner({ onConsent }: { onConsent: () => void }) {
           <div className="flex gap-3">
             <button
               onClick={handleDecline}
-              className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800 transition-colors"
+              className="px-4 py-2 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
             >
               Decline
             </button>
             <button
               onClick={handleAccept}
-              className="px-4 py-2 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700 transition-colors"
+              className="px-4 py-2 bg-[var(--color-primary-500)] text-white text-sm rounded-md hover:bg-[var(--color-primary-700)] transition-colors"
             >
               Accept
             </button>

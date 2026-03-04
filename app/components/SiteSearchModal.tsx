@@ -140,9 +140,9 @@ export default function SiteSearchModal({ onClose }: SiteSearchModalProps) {
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="w-full max-w-2xl rounded-2xl bg-white shadow-2xl ring-1 ring-black/10">
-        <div className="flex items-center gap-3 border-b border-gray-200 px-5 py-4">
-          <SearchIcon className="h-5 w-5 text-gray-400" />
+      <div className="w-full max-w-2xl rounded-2xl bg-[var(--color-surface)] shadow-2xl ring-1 ring-black/10">
+        <div className="flex items-center gap-3 border-b border-[var(--color-border)] px-5 py-4">
+          <SearchIcon className="h-5 w-5 text-[var(--color-text-secondary)]" />
           <input
             ref={inputRef}
             type="search"
@@ -154,19 +154,19 @@ export default function SiteSearchModal({ onClose }: SiteSearchModalProps) {
               results.length > 0 ? `result-option-${activeIndex}` : undefined
             }
             placeholder="Search conditions, treatments, or resources..."
-            className="w-full border-none text-base text-gray-900 placeholder:text-gray-400 focus:outline-none"
+            className="w-full border-none text-base text-[var(--color-text-primary)] placeholder:text-[var(--color-text-secondary)] focus:outline-none"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             autoCapitalize="none"
             spellCheck={false}
           />
           {isLoading && (
-            <div className="h-4 w-4 animate-spin rounded-full border-2 border-gray-200 border-t-blue-600" />
+            <div className="h-4 w-4 animate-spin rounded-full border-2 border-[var(--color-border)] border-t-blue-600" />
           )}
           <button
             type="button"
             onClick={onClose}
-            className="rounded-full border border-gray-200 px-2 py-1 text-xs text-gray-500 transition hover:border-gray-300 hover:text-gray-700"
+            className="rounded-full border border-[var(--color-border)] px-2 py-1 text-xs text-[var(--color-text-secondary)] transition hover:border-[var(--color-border)] hover:text-[var(--color-text-secondary)]"
           >
             Esc
           </button>
@@ -192,19 +192,19 @@ export default function SiteSearchModal({ onClose }: SiteSearchModalProps) {
         >
           {query.trim() === "" ? (
             <div className="px-4 py-8 text-center">
-               <p className="text-sm text-gray-500 mb-2">
+               <p className="text-sm text-[var(--color-text-secondary)] mb-2">
                 Ask me anything about neurosurgery, symptoms, or treatments.
               </p>
-              <p className="text-xs text-blue-600 font-medium bg-blue-50 inline-block px-3 py-1 rounded-full">
+              <p className="text-xs text-[var(--color-primary-500)] font-medium bg-[var(--color-primary-50)] inline-block px-3 py-1 rounded-full">
                 ✨ Powered by AI Semantic Search
               </p>
             </div>
           ) : isLoading && results.length === 0 ? (
-            <div className="px-4 py-8 text-center text-sm text-gray-500">
+            <div className="px-4 py-8 text-center text-sm text-[var(--color-text-secondary)]">
               <p>Thinking...</p>
             </div>
           ) : results.length === 0 ? (
-            <p className="px-4 py-8 text-center text-sm text-gray-500">
+            <p className="px-4 py-8 text-center text-sm text-[var(--color-text-secondary)]">
               No results found. Try describing your symptoms or using different keywords.
             </p>
           ) : (
@@ -219,8 +219,8 @@ export default function SiteSearchModal({ onClose }: SiteSearchModalProps) {
                   data-index={index}
                   className={`group rounded-xl px-3 py-3 transition ${
                     isActive
-                      ? "bg-blue-50 ring-1 ring-inset ring-blue-200"
-                      : "hover:bg-gray-50"
+                      ? "bg-[var(--color-primary-50)] ring-1 ring-inset ring-[var(--color-primary-200)]"
+                      : "hover:bg-[var(--color-background)]"
                   }`}
                 >
                   <button
@@ -228,13 +228,13 @@ export default function SiteSearchModal({ onClose }: SiteSearchModalProps) {
                     onClick={() => handleSelect(item)}
                     className="flex w-full flex-col gap-1 text-left"
                   >
-                    <span className="text-sm font-semibold text-gray-900">
+                    <span className="text-sm font-semibold text-[var(--color-text-primary)]">
                       {item.title}
                     </span>
-                    <span className="text-xs uppercase tracking-wide text-blue-600">
+                    <span className="text-xs uppercase tracking-wide text-[var(--color-primary-500)]">
                       {item.category}
                     </span>
-                    <span className="text-sm text-gray-600 line-clamp-2">
+                    <span className="text-sm text-[var(--color-text-secondary)] line-clamp-2">
                       {item.description}
                     </span>
                   </button>
@@ -244,13 +244,13 @@ export default function SiteSearchModal({ onClose }: SiteSearchModalProps) {
           )}
         </div>
 
-        <div className="flex items-center justify-between border-t border-gray-100 px-4 py-3 text-xs text-gray-500">
+        <div className="flex items-center justify-between border-t border-[var(--color-border)] px-4 py-3 text-xs text-[var(--color-text-secondary)]">
           <span>Press Enter to open the highlighted result</span>
           <span className="hidden sm:flex items-center gap-2">
-            <kbd className="rounded border border-gray-300 bg-gray-100 px-1.5 py-0.5">
+            <kbd className="rounded border border-[var(--color-border)] bg-[var(--color-background)] px-1.5 py-0.5">
               ↑
             </kbd>
-            <kbd className="rounded border border-gray-300 bg-gray-100 px-1.5 py-0.5">
+            <kbd className="rounded border border-[var(--color-border)] bg-[var(--color-background)] px-1.5 py-0.5">
               ↓
             </kbd>
             navigate

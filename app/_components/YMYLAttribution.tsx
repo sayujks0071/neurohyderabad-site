@@ -21,8 +21,8 @@ export default function YMYLAttribution({
   };
 
   return (
-    <div className={`bg-gray-50 border border-gray-200 rounded-lg p-4 ${className}`}>
-      <div className="text-sm text-gray-700">
+    <div className={`bg-[var(--color-background)] border border-[var(--color-border)] rounded-lg p-4 ${className}`}>
+      <div className="text-sm text-[var(--color-text-secondary)]">
         {authoredBy && (
           <p className="mb-2">
             <strong>Authored by:</strong> Dr. Sayuj Krishnan S, Neurosurgeon
@@ -34,7 +34,7 @@ export default function YMYLAttribution({
         <p className="mb-2">
           <strong>Last reviewed:</strong> {formatDate(lastReviewed)}
         </p>
-        <p className="text-xs text-gray-600">
+        <p className="text-xs text-[var(--color-text-secondary)]">
           <strong>Disclaimer:</strong> This content is for informational purposes only and should not replace professional medical advice. Always consult with a qualified healthcare provider for diagnosis and treatment.
         </p>
       </div>

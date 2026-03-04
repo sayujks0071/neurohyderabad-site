@@ -105,37 +105,37 @@ export default function SEOAuditDashboard({ pageSlug, pageType, serviceOrConditi
   }, [runSEOAudit]);
 
   const getScoreColor = (score: number) => {
-    if (score >= 80) return 'text-green-600';
-    if (score >= 60) return 'text-yellow-600';
-    return 'text-red-600';
+    if (score >= 80) return 'text-[var(--color-success-700)]';
+    if (score >= 60) return 'text-[var(--color-warning-700)]';
+    return 'text-[var(--color-error)]';
   };
 
   const getScoreBgColor = (score: number) => {
-    if (score >= 80) return 'bg-green-100';
-    if (score >= 60) return 'bg-yellow-100';
-    return 'bg-red-100';
+    if (score >= 80) return 'bg-[var(--color-success-light)]';
+    if (score >= 60) return 'bg-[var(--color-warning-light)]';
+    return 'bg-[var(--color-error-light)]';
   };
 
   if (!auditResults) {
     return (
-      <div className="fixed bottom-4 right-4 bg-white p-4 rounded-lg shadow-lg border border-gray-200 z-50 max-w-sm">
+      <div className="fixed bottom-4 right-4 bg-[var(--color-surface)] p-4 rounded-lg shadow-lg border border-[var(--color-border)] z-50 max-w-sm">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-2"></div>
-          <p className="text-sm text-gray-600">Running SEO Audit...</p>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--color-primary-500)] mx-auto mb-2"></div>
+          <p className="text-sm text-[var(--color-text-secondary)]">Running SEO Audit...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="fixed bottom-4 right-4 bg-white rounded-lg shadow-lg border border-gray-200 z-50 max-w-md max-h-96 overflow-hidden">
-      <div className="p-4 border-b border-gray-200">
+    <div className="fixed bottom-4 right-4 bg-[var(--color-surface)] rounded-lg shadow-lg border border-[var(--color-border)] z-50 max-w-md max-h-96 overflow-hidden">
+      <div className="p-4 border-b border-[var(--color-border)]">
         <div className="flex items-center justify-between mb-2">
           <h3 className="text-lg font-bold">SEO Audit Dashboard</h3>
           <button
             onClick={runSEOAudit}
             disabled={isRunning}
-            className="px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 disabled:bg-blue-300"
+            className="px-3 py-1 text-sm bg-[var(--color-primary-500)] text-white rounded hover:bg-[var(--color-primary-700)] disabled:bg-[var(--color-primary-300)]"
           >
             {isRunning ? 'Running...' : 'Refresh'}
           </button>
@@ -147,7 +147,7 @@ export default function SEOAuditDashboard({ pageSlug, pageType, serviceOrConditi
               Overall: {auditResults.overall_score}/100
             </span>
           </div>
-          <div className="text-xs text-gray-500">
+          <div className="text-xs text-[var(--color-text-secondary)]">
             {auditResults.critical_issues.length} critical, {auditResults.warnings.length} warnings
           </div>
         </div>
@@ -161,8 +161,8 @@ export default function SEOAuditDashboard({ pageSlug, pageType, serviceOrConditi
               onClick={() => setActiveTab(tab)}
               className={`px-3 py-1 text-sm rounded ${
                 activeTab === tab 
-                  ? 'bg-blue-600 text-white' 
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? 'bg-[var(--color-primary-500)] text-white' 
+                  : 'bg-[var(--color-background)] text-[var(--color-text-secondary)] hover:bg-[var(--color-border)]'
               }`}
             >
               {tab.charAt(0).toUpperCase() + tab.slice(1)}
@@ -178,22 +178,22 @@ export default function SEOAuditDashboard({ pageSlug, pageType, serviceOrConditi
                   <div className={`text-2xl font-bold ${getScoreColor(auditResults.content_quality.overall_score)}`}>
                     {auditResults.content_quality.overall_score}
                   </div>
-                  <div className="text-xs text-gray-600">Content Quality</div>
+                  <div className="text-xs text-[var(--color-text-secondary)]">Content Quality</div>
                 </div>
                 <div className="text-center">
                   <div className={`text-2xl font-bold ${getScoreColor(auditResults.technical_seo.overall_score)}`}>
                     {auditResults.technical_seo.overall_score}
                   </div>
-                  <div className="text-xs text-gray-600">Technical SEO</div>
+                  <div className="text-xs text-[var(--color-text-secondary)]">Technical SEO</div>
                 </div>
               </div>
 
               {auditResults.critical_issues.length > 0 && (
                 <div>
-                  <h4 className="font-semibold text-red-600 mb-2">Critical Issues</h4>
+                  <h4 className="font-semibold text-[var(--color-error)] mb-2">Critical Issues</h4>
                   <div className="space-y-1">
                     {auditResults.critical_issues.slice(0, 3).map((issue, index) => (
-                      <div key={index} className="text-xs text-red-600">
+                      <div key={index} className="text-xs text-[var(--color-error)]">
                         • {issue.issue}
                       </div>
                     ))}
@@ -203,10 +203,10 @@ export default function SEOAuditDashboard({ pageSlug, pageType, serviceOrConditi
 
               {auditResults.warnings.length > 0 && (
                 <div>
-                  <h4 className="font-semibold text-yellow-600 mb-2">Warnings</h4>
+                  <h4 className="font-semibold text-[var(--color-warning-700)] mb-2">Warnings</h4>
                   <div className="space-y-1">
                     {auditResults.warnings.slice(0, 3).map((warning, index) => (
-                      <div key={index} className="text-xs text-yellow-600">
+                      <div key={index} className="text-xs text-[var(--color-warning-700)]">
                         • {warning.issue}
                       </div>
                     ))}
@@ -221,19 +221,19 @@ export default function SEOAuditDashboard({ pageSlug, pageType, serviceOrConditi
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
                   <div className="font-semibold">Word Count</div>
-                  <div className="text-gray-600">{auditResults.content_quality.word_count}</div>
+                  <div className="text-[var(--color-text-secondary)]">{auditResults.content_quality.word_count}</div>
                 </div>
                 <div>
                   <div className="font-semibold">Readability</div>
-                  <div className="text-gray-600">{auditResults.content_quality.readability_score.toFixed(1)}</div>
+                  <div className="text-[var(--color-text-secondary)]">{auditResults.content_quality.readability_score.toFixed(1)}</div>
                 </div>
                 <div>
                   <div className="font-semibold">H1 Count</div>
-                  <div className="text-gray-600">{auditResults.content_quality.heading_structure.h1_count}</div>
+                  <div className="text-[var(--color-text-secondary)]">{auditResults.content_quality.heading_structure.h1_count}</div>
                 </div>
                 <div>
                   <div className="font-semibold">H2 Count</div>
-                  <div className="text-gray-600">{auditResults.content_quality.heading_structure.h2_count}</div>
+                  <div className="text-[var(--color-text-secondary)]">{auditResults.content_quality.heading_structure.h2_count}</div>
                 </div>
               </div>
 
@@ -244,9 +244,9 @@ export default function SEOAuditDashboard({ pageSlug, pageType, serviceOrConditi
                     .filter(rec => rec.type?.includes('content') || rec.category?.includes('Content'))
                     .slice(0, 3)
                     .map((rec, index) => (
-                      <div key={index} className="text-xs p-2 bg-gray-50 rounded">
+                      <div key={index} className="text-xs p-2 bg-[var(--color-background)] rounded">
                         <div className="font-medium">{rec.message}</div>
-                        <div className="text-gray-600 mt-1">{rec.action}</div>
+                        <div className="text-[var(--color-text-secondary)] mt-1">{rec.action}</div>
                       </div>
                     ))}
                 </div>
@@ -259,25 +259,25 @@ export default function SEOAuditDashboard({ pageSlug, pageType, serviceOrConditi
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
                   <div className="font-semibold">Meta Tags</div>
-                  <div className="text-gray-600">
+                  <div className="text-[var(--color-text-secondary)]">
                     {auditResults.technical_seo.categories.meta_tags.overall_score}/100
                   </div>
                 </div>
                 <div>
                   <div className="font-semibold">Structured Data</div>
-                  <div className="text-gray-600">
+                  <div className="text-[var(--color-text-secondary)]">
                     {auditResults.technical_seo.categories.structured_data.score}/100
                   </div>
                 </div>
                 <div>
                   <div className="font-semibold">Mobile</div>
-                  <div className="text-gray-600">
+                  <div className="text-[var(--color-text-secondary)]">
                     {auditResults.technical_seo.categories.mobile_optimization.score}/100
                   </div>
                 </div>
                 <div>
                   <div className="font-semibold">Images</div>
-                  <div className="text-gray-600">
+                  <div className="text-[var(--color-text-secondary)]">
                     {auditResults.technical_seo.categories.image_optimization.score}/100
                   </div>
                 </div>
@@ -290,9 +290,9 @@ export default function SEOAuditDashboard({ pageSlug, pageType, serviceOrConditi
                     .filter(rec => rec.category && !rec.category.includes('Content'))
                     .slice(0, 3)
                     .map((rec, index) => (
-                      <div key={index} className="text-xs p-2 bg-gray-50 rounded">
+                      <div key={index} className="text-xs p-2 bg-[var(--color-background)] rounded">
                         <div className="font-medium">{rec.message}</div>
-                        <div className="text-gray-600 mt-1">{rec.actions?.[0] || rec.action}</div>
+                        <div className="text-[var(--color-text-secondary)] mt-1">{rec.actions?.[0] || rec.action}</div>
                       </div>
                     ))}
                 </div>
@@ -305,25 +305,25 @@ export default function SEOAuditDashboard({ pageSlug, pageType, serviceOrConditi
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
                   <div className="font-semibold">LCP</div>
-                  <div className="text-gray-600">
+                  <div className="text-[var(--color-text-secondary)]">
                     {auditResults.technical_seo.categories.core_web_vitals.LCP.value || 'N/A'}ms
                   </div>
                 </div>
                 <div>
                   <div className="font-semibold">CLS</div>
-                  <div className="text-gray-600">
+                  <div className="text-[var(--color-text-secondary)]">
                     {auditResults.technical_seo.categories.core_web_vitals.CLS.value || 'N/A'}
                   </div>
                 </div>
                 <div>
                   <div className="font-semibold">FID</div>
-                  <div className="text-gray-600">
+                  <div className="text-[var(--color-text-secondary)]">
                     {auditResults.technical_seo.categories.core_web_vitals.FID.value || 'N/A'}ms
                   </div>
                 </div>
                 <div>
                   <div className="font-semibold">TTFB</div>
-                  <div className="text-gray-600">
+                  <div className="text-[var(--color-text-secondary)]">
                     {auditResults.technical_seo.categories.core_web_vitals.TTFB.value || 'N/A'}ms
                   </div>
                 </div>

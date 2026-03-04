@@ -33,8 +33,12 @@
   /* Primary Brand Palette - Clinical Blue */
   --color-primary-50: #E3F2FD;
   --color-primary-100: #BBDEFB;
+  --color-primary-200: #90CAF9;
+  --color-primary-300: #64B5F6;
   --color-primary-500: #005EB8; /* Main - WCAG 5.6:1 (AA Pass) */
   --color-primary-700: #003A70; /* Dark/Hover - WCAG 9.7:1 (AAA Pass) */
+  --color-primary-800: #002952;
+  --color-primary-900: #001A3A;
   
   /* Secondary - Surgical Teal */
   --color-secondary-500: #009688;
@@ -51,9 +55,19 @@
   
   /* Functional Status Palette */
   --color-success: #2E7D32;  /* Emerald */
+  --color-success-light: #E8F5E9;
+  --color-success-700: #388E3C;
   --color-warning: #FF9800;   /* Amber */
+  --color-warning-light: #FFF3E0;
+  --color-warning-700: #F57C00;
   --color-error: #D32F2F;     /* Crimson */
+  --color-error-light: #FFEBEE;
+  --color-error-700: #C62828;
+  --color-error-800: #B71C1C;
   --color-info: #0288D1;      /* Sky Blue */
+
+  /* Extended Surface Variants */
+  --color-surface-muted: #F8FAFC; /* Slightly tinted white */
   
   /* 8-Point Grid System */
   --space-1: 4px;   /* Minimal separation */

@@ -66,11 +66,11 @@ export default function NewsletterSignup({
 
   if (variant === 'card') {
     return (
-      <div className={`relative bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 ${className}`}>
-        <h3 className="text-xl font-semibold text-slate-900 mb-2">
+      <div className={`relative bg-[var(--color-surface)]/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 ${className}`}>
+        <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-2">
           Stay Updated with Health Insights
         </h3>
-        <p className="text-sm text-slate-600 mb-4">
+        <p className="text-sm text-[var(--color-text-secondary)] mb-4">
           Subscribe to receive expert neurosurgical insights, patient education, and health tips.
         </p>
         {/* noValidate: Disable native browser validation to use custom validation with styled error messages and ARIA attributes */}
@@ -82,7 +82,7 @@ export default function NewsletterSignup({
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
               autoComplete="email"
-              className="w-full px-4 py-2 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white/50 backdrop-blur-sm"
+              className="w-full px-4 py-2 border border-[var(--color-border)] rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)] bg-[var(--color-surface)]/50 backdrop-blur-sm"
               disabled={status === 'submitting'}
               required
               aria-label="Email address"
@@ -90,7 +90,7 @@ export default function NewsletterSignup({
               aria-describedby={error ? errorId : undefined}
             />
             {error && (
-              <p className="mt-1 text-sm text-red-600" role="alert" id={errorId}>
+              <p className="mt-1 text-sm text-[var(--color-error)]" role="alert" id={errorId}>
                 {error}
               </p>
             )}
@@ -105,7 +105,7 @@ export default function NewsletterSignup({
           </Button>
         </form>
         {status === 'success' && (
-          <p className="mt-2 text-sm text-green-700" role="alert" id={successId}>
+          <p className="mt-2 text-sm text-[var(--color-success-700)]" role="alert" id={successId}>
             Thank you for subscribing! Check your email for confirmation.
           </p>
         )}
@@ -122,7 +122,7 @@ export default function NewsletterSignup({
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Enter your email for health insights"
         autoComplete="email"
-        className="flex-1 px-4 py-2 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white/50 backdrop-blur-sm"
+        className="flex-1 px-4 py-2 border border-[var(--color-border)] rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)] bg-[var(--color-surface)]/50 backdrop-blur-sm"
         disabled={status === 'submitting'}
         required
         aria-label="Email address"
@@ -137,12 +137,12 @@ export default function NewsletterSignup({
         {status === 'success' ? '✓' : 'Subscribe'}
       </Button>
       {error && (
-        <p className="text-sm text-red-600 mt-1" role="alert" id={errorId}>
+        <p className="text-sm text-[var(--color-error)] mt-1" role="alert" id={errorId}>
           {error}
         </p>
       )}
       {status === 'success' && (
-        <p className="text-sm text-green-700 mt-1" role="alert" id={successId}>
+        <p className="text-sm text-[var(--color-success-700)] mt-1" role="alert" id={successId}>
           Thank you for subscribing!
         </p>
       )}
