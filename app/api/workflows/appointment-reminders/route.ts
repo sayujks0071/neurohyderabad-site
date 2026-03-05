@@ -17,7 +17,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { sendPreAppointmentBriefingEmail } from '@/lib/email';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resendApiKey = process.env.RESEND_API_KEY?.trim();
+const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
 /** POST — Register a new appointment for reminder */
 export async function POST(request: NextRequest) {
@@ -33,7 +34,7 @@ export async function POST(request: NextRequest) {
       }
 
       const audienceId = process.env.RESEND_APPOINTMENTS_AUDIENCE_ID;
-          if (!audienceId) {
+                  if (!audienceId || !resend) {
                   console.warn('[Appointments] RESEND_APPOINTMENTS_AUDIENCE_ID not configured — skipping reminder registration');
                   return NextResponse.json({ success: true, stored: false, reason: 'audience_not_configured' });
           }
@@ -80,7 +81,7 @@ export async function GET(request: NextRequest) {
     }
 
   const audienceId = process.env.RESEND_APPOINTMENTS_AUDIENCE_ID;
-    if (!audienceId) {
+            if (!audienceId || !resend) {
           return NextResponse.json(
             { error: 'RESEND_APPOINTMENTS_AUDIENCE_ID not configured. Set it in Vercel environment variables.' },
             { status: 500 }
