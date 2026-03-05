@@ -77,12 +77,12 @@ export default function DicomAnalysisPage() {
 
       const res = await container.execute(extractScript);
 
-      if (res.exports && res.exports.error) {
-        throw new Error(res.exports.error);
+      if (res.exports && (res.exports as any)?.error) {
+        throw new Error((res.exports as any)?.error);
       }
 
-      if (res.exports && res.exports.metadata) {
-        setResult(res.exports.metadata);
+      if (res.exports && (res.exports as any)?.metadata) {
+        setResult((res.exports as any)?.metadata);
       } else {
         // Fallback to server if client-side fails unexpectedly (though unlikely if setup is correct)
         // For now, let's just throw error as this is intended to replace server calls
