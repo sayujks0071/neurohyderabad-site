@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { Resend } from 'resend';
 import { sendNewsletterSubscriptionEmail } from '@/lib/email';
 import { rateLimit } from '@/src/lib/rate-limit';
 import { slack } from '@/src/lib/slack';
@@ -47,8 +48,29 @@ export async function POST(request: NextRequest) {
 *Email:* ${body.email}
 *Name:* ${body.name || 'Not provided'}`).catch(e => console.error('Slack notify failed:', e));
 
-      // TODO: Store subscription in database (e.g., Resend contacts, Mailchimp, etc.)
-      // For now, just send confirmation email
+      // Store subscription in Resend contacts audience
+      const audienceId = process.env.RESEND_NEWSLETTER_AUDIENCE_ID;
+      if (audienceId && process.env.RESEND_API_KEY) {
+        try {
+          const resend = new Resend(process.env.RESEND_API_KEY);
+          const nameParts = ((body.name as string) || '').trim().split(' ');
+          const firstName = nameParts[0] || '';
+          const lastName = nameParts.slice(1).join(' ') || '';
+          await resend.contacts.create({
+            audienceId,
+            email: body.email,
+            firstName,
+            lastName,
+            unsubscribed: false,
+          });
+          console.log(`[Newsletter] Added ${body.email} to Resend audience ${audienceId}`);
+        } catch (contactError) {
+          // Non-fatal: contact may already exist or audience not yet set up
+          console.error('[Newsletter] Failed to add contact to Resend audience:', contactError);
+        }
+      } else {
+        console.warn('[Newsletter] RESEND_NEWSLETTER_AUDIENCE_ID not configured — skipping contact storage');
+      }
 
       const messageId = "messageId" in result ? result.messageId : undefined;
       return NextResponse.json({
