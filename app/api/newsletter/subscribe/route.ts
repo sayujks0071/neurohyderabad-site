@@ -57,7 +57,7 @@ export async function POST(request: NextRequest) {
           const first_name = nameParts[0] || '';
           const last_name = nameParts.slice(1).join(' ') || '';
           await resend.contacts.create({
-            audienceId,
+            audience_id: audienceId,
             email: body.email,
             first_name,
             last_name,
