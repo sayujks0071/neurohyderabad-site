@@ -92,7 +92,7 @@ export default function SEODashboard() {
 
   if (loading) {
     return (
-      <div className="p-6 bg-[var(--color-surface)] rounded-lg shadow-lg">
+      <div className="relative bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
         <div className="animate-pulse">
           <div className="h-4 bg-[var(--color-border)] rounded w-1/4 mb-4"></div>
           <div className="space-y-3">
@@ -105,7 +105,7 @@ export default function SEODashboard() {
   }
 
   return (
-    <div className="p-6 bg-[var(--color-surface)] rounded-lg shadow-lg">
+    <div className="relative bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
       <h2 className="text-2xl font-bold mb-6">SEO Dashboard</h2>
       
       {/* Core Metrics */}
@@ -194,16 +194,16 @@ export default function SEODashboard() {
       <div className="border-t pt-6">
         <h3 className="text-lg font-semibold mb-4">Quick Actions</h3>
         <div className="flex flex-wrap gap-3">
-          <button className="px-4 py-2 bg-[var(--color-primary-500)] text-white rounded-lg hover:bg-[var(--color-primary-700)]">
+          <button aria-label="Submit Sitemap" className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-[0.98]">
             Submit Sitemap
           </button>
-          <button className="px-4 py-2 bg-[var(--color-success)] text-white rounded-lg hover:bg-[var(--color-success-700)]">
+          <button aria-label="Request Indexing" className="bg-white border border-slate-200 text-slate-600 font-medium py-3 px-6 rounded-xl transition-all duration-300 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900">
             Request Indexing
           </button>
-          <button className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">
+          <button aria-label="Check Schema" className="bg-white border border-slate-200 text-slate-600 font-medium py-3 px-6 rounded-xl transition-all duration-300 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900">
             Check Schema
           </button>
-          <button className="px-4 py-2 bg-[var(--color-text-secondary)] text-white rounded-lg hover:bg-[var(--color-text-secondary)]">
+          <button aria-label="View Full Report" className="bg-white border border-slate-200 text-slate-600 font-medium py-3 px-6 rounded-xl transition-all duration-300 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900">
             View Full Report
           </button>
         </div>
