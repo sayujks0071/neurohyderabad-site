@@ -132,7 +132,12 @@ export default function BookingForm({
           </p>
         </div>
 
-        <form onSubmit={handleSubmit(handleFormSubmit as any)} noValidate>
+        <form
+          onSubmit={handleSubmit(handleFormSubmit as any)}
+          noValidate
+          toolname="requestAppointment"
+          tooldescription="Request a medical appointment with Dr. Sayuj Krishnan"
+        >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
             <div className="md:col-span-2">
               <Input

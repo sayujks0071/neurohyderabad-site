@@ -8,7 +8,8 @@ export const maxDuration = 30;
 export async function POST(request: NextRequest) {
   try {
     const ip = request.headers.get('x-forwarded-for') ?? '127.0.0.1';
-    const { success } = await rateLimit(`ai-sandbox-${ip}`);
+    // Provide default rate limit parameters if they are missing
+    const { success } = await rateLimit(`ai-sandbox-${ip}`, 50, 60000);
 
     if (!success) {
       return NextResponse.json(
