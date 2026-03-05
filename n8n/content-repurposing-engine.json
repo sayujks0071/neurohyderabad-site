@@ -31,7 +31,7 @@
             }
           ]
         },
-        "body": "={\n  \"contents\": [{\n    \"parts\": [{\n      \"text\": \"Repurpose the following content for social media.\\n\\nURL/Content: {{$node[\\\"Webhook\\\"].json[\\\"body\\\"][\\\"content\\\"]}}\\n\\nGenerate strictly valid JSON with these fields:\\n- linkedin_post: A professional, engaging LinkedIn post.\\n- twitter_thread: An array of strings, each representing a tweet in a thread.\\n- image_prompt: A prompt for an image generator (like DALL-E) to create a relevant visual.\\n- hashtags: A string of relevant hashtags.\"\n    }]\n  }]\n}",
+        "body": "={\n  \"contents\": [{\n    \"parts\": [{\n      \"text\": \"You are an expert medical copywriter for Dr. Sayuj, a leading Neurosurgeon. Repurpose the following clinical content for patient-facing social media.\\n\\nURL/Content: {{$node[\\\"Webhook\\\"].json[\\\"body\\\"][\\\"content\\\"]}}\\n\\nGenerate strictly valid JSON with these fields:\\n- linkedin_post: A professional, engaging LinkedIn post highlighting neurosurgical expertise, patient outcomes, or surgical innovations. Must include line breaks.\\n- twitter_thread: An array of strings, each representing a tweet in an educational thread simplifying complex spine/brain topics.\\n- image_prompt: A descriptive prompt for an image generator to create a relevant, professional, and anatomical visual (non-gory).\\n- hashtags: A string of relevant hashtags (e.g., #Neurosurgery #SpineHealth).\"\n    }]\n  }]\n}",
         "options": {}
       },
       "name": "Gemini Repurpose",
@@ -114,5 +114,6 @@
   },
   "settings": {},
   "staticData": null,
-  "tags": []
+  "tags": [],
+  "id": "3805914b-51d8-40d6-99de-8bb16cd70049"
 }

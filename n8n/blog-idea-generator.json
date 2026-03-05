@@ -1,0 +1,125 @@
+{
+  "name": "Blog Idea Generator",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "seconds": 0,
+              "minutes": 0,
+              "hours": 0
+            }
+          ]
+        }
+      },
+      "name": "Weekly Schedule",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=YOUR_GEMINI_API_KEY",
+        "method": "POST",
+        "bodyParametersUi": {
+          "parameter": []
+        },
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "body": "={\n  \"contents\": [{\n    \"parts\": [{\n      \"text\": \"You are an expert SEO strategist for a leading Neurosurgeon's website (www.drsayuj.info). Based on current search trends and common patient concerns regarding spine surgery, brain tumors, and peripheral nerve disorders, generate 5 high-converting, SEO-optimized blog post ideas.\\n\\nOutput strictly valid JSON:\\n{\\n  \\\"ideas\\\": [\\n    {\\n      \\\"title\\\": \\\"Proposed H1 Title\\\",\\n      \\\"target_keyword\\\": \\\"Primary SEO keyword\\\",\\n      \\\"rationale\\\": \\\"Why this topic is valuable for patients and search engines\\\"\\n    }\\n  ]\\n}\"\n    }]\n  }]\n}",
+        "options": {}
+      },
+      "name": "Generate Ideas",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "const geminiResp = items[0].json.candidates[0].content.parts[0].text;\nconst cleanJson = geminiResp.replace(/```json/g, '').replace(/```/g, '').trim();\nlet ideas = [];\ntry {\n  ideas = JSON.parse(cleanJson).ideas;\n} catch (e) {\n  ideas = [{ title: 'Error generating ideas', target_keyword: '', rationale: e.message }];\n}\n\nconst htmlList = ideas.map(idea => `<li><b>Title:</b> ${idea.title}<br><b>Keyword:</b> ${idea.target_keyword}<br><b>Rationale:</b> ${idea.rationale}</li>`).join('');\nreturn [{ json: { html: `<h2>Weekly SEO Blog Ideas</h2><ul>${htmlList}</ul>` } }];"
+      },
+      "name": "Format HTML",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        650,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "seo@drsayuj.info",
+        "toEmail": "admin@drsayuj.info",
+        "subject": "New Blog Post Ideas Generated",
+        "text": "Check HTML content for ideas.",
+        "html": "={{$node[\"Format HTML\"].json[\"html\"]}}"
+      },
+      "name": "Email Doctor",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [
+        850,
+        300
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "YOUR_SMTP_CREDENTIAL_ID",
+          "name": "SMTP Account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Weekly Schedule": {
+      "main": [
+        [
+          {
+            "node": "Generate Ideas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Ideas": {
+      "main": [
+        [
+          {
+            "node": "Format HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format HTML": {
+      "main": [
+        [
+          {
+            "node": "Email Doctor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "id": "2e0070c1-7f04-4dae-b1e3-0490797e0596"
+}

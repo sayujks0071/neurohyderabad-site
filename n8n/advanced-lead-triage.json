@@ -31,7 +31,7 @@
             }
           ]
         },
-        "body": "={\n  \"contents\": [{\n    \"parts\": [{\n      \"text\": \"Analyze the following patient lead.\\n\\nPatient Name: {{$node[\\\"Webhook\\\"].json[\\\"body\\\"][\\\"fullName\\\"]}}\\nConcern: {{$node[\\\"Webhook\\\"].json[\\\"body\\\"][\\\"concern\\\"]}}\\n\\nOutput strictly valid JSON with these fields:\\n- urgency: \\\"High\\\" | \\\"Medium\\\" | \\\"Low\\\"\\n- category: \\\"Spine\\\" | \\\"Brain\\\" | \\\"Nerve\\\" | \\\"General\\\"\\n- summary: One sentence medical summary.\\n- suggested_action: Recommended next step.\"\n    }]\n  }]\n}",
+        "body": "={\n  \"contents\": [{\n    \"parts\": [{\n      \"text\": \"Analyze the following patient lead for Dr. Sayuj, a Neurosurgeon.\\n\\nPatient Name: {{$node[\\\"Webhook\\\"].json[\\\"body\\\"][\\\"fullName\\\"]}}\\nConcern: {{$node[\\\"Webhook\\\"].json[\\\"body\\\"][\\\"concern\\\"]}}\\n\\nOutput strictly valid JSON with these fields:\\n- urgency: \\\"Critical\\\" | \\\"High\\\" | \\\"Medium\\\" | \\\"Low\\\"\\n- category: \\\"Spine Surgery\\\" | \\\"Brain Surgery\\\" | \\\"Peripheral Nerve\\\" | \\\"General Consultation\\\"\\n- summary: A concise, one-sentence medical summary prioritizing neurological symptoms.\\n- suggested_action: Recommended next step (e.g., Immediate ER referral, Schedule urgent MRI, Routine clinical evaluation).\"\n    }]\n  }]\n}",
         "options": {}
       },
       "name": "Gemini Analysis",
@@ -77,7 +77,7 @@
     {
       "parameters": {
         "channel": "urgent-leads",
-        "text": "🚨 *URGENT LEAD DETECTED*\n\n*Name:* {{$node[\"Webhook\"].json[\"body\"][\"fullName\"]}}\n*Concern:* {{$node[\"Webhook\"].json[\"body\"][\"concern\"]}}\n*AI Summary:* {{$node[\"Parse AI Response\"].json[\"analysis\"][\"summary\"]}}\n*Action:* {{$node[\"Parse AI Response\"].json[\"analysis\"][\"suggested_action\"]}}",
+        "text": "\ud83d\udea8 *URGENT NEUROSURGERY LEAD DETECTED*\n\n*Patient Name:* {{$node[\"Webhook\"].json[\"body\"][\"fullName\"]}}\n*Primary Concern:* {{$node[\"Webhook\"].json[\"body\"][\"concern\"]}}\n\n*\ud83e\udde0 AI Clinical Triage:*\n*Category:* {{$node[\"Parse AI Response\"].json[\"analysis\"][\"category\"]}}\n*Summary:* {{$node[\"Parse AI Response\"].json[\"analysis\"][\"summary\"]}}\n*Action Required:* {{$node[\"Parse AI Response\"].json[\"analysis\"][\"suggested_action\"]}}",
         "attachments": [],
         "otherOptions": {}
       },
@@ -100,7 +100,7 @@
         "fromEmail": "admin@drsayuj.info",
         "toEmail": "admin@drsayuj.info",
         "subject": "New Lead: {{$node[\"Webhook\"].json[\"body\"][\"fullName\"]}} ({{$node[\"Parse AI Response\"].json[\"analysis\"][\"urgency\"]}})",
-        "text": "Name: {{$node[\"Webhook\"].json[\"body\"][\"fullName\"]}}\nConcern: {{$node[\"Webhook\"].json[\"body\"][\"concern\"]}}\n\nAI Analysis:\nUrgency: {{$node[\"Parse AI Response\"].json[\"analysis\"][\"urgency\"]}}\nCategory: {{$node[\"Parse AI Response\"].json[\"analysis\"][\"category\"]}}\nSummary: {{$node[\"Parse AI Response\"].json[\"analysis\"][\"summary\"]}}\nAction: {{$node[\"Parse AI Response\"].json[\"analysis\"][\"suggested_action\"]}}",
+        "text": "Name: {{$node[\"Webhook\"].json[\"body\"][\"fullName\"]}}\nConcern: {{$node[\"Webhook\"].json[\"body\"][\"concern\"]}}\n\nAI Analysis:\nUrgency: {{$node[\"Parse AI Response\"].json[\"analysis\"][\"urgency\"]}}\nCategory: {{$node[\"Parse AI Response\"].json[\"analysis\"][\"category\"]}}\nSummary: {{$node[\"Parse AI Response\"].json[\"analysis\"][\"summary\"]}}\nAction Required: {{$node[\"Parse AI Response\"].json[\"analysis\"][\"suggested_action\"]}}",
         "html": "<h2>New Lead Received</h2><p><b>Name:</b> {{$node[\"Webhook\"].json[\"body\"][\"fullName\"]}}</p><p><b>Concern:</b> {{$node[\"Webhook\"].json[\"body\"][\"concern\"]}}</p><hr><h3>AI Analysis</h3><p><b>Urgency:</b> {{$node[\"Parse AI Response\"].json[\"analysis\"][\"urgency\"]}}</p><p><b>Category:</b> {{$node[\"Parse AI Response\"].json[\"analysis\"][\"category\"]}}</p><p><b>Summary:</b> {{$node[\"Parse AI Response\"].json[\"analysis\"][\"summary\"]}}</p><p><b>Recommended Action:</b> {{$node[\"Parse AI Response\"].json[\"analysis\"][\"suggested_action\"]}}</p>"
       },
       "name": "Email Notification",
@@ -178,5 +178,6 @@
   },
   "settings": {},
   "staticData": null,
-  "tags": []
+  "tags": [],
+  "id": "14051115-c7bb-49be-9f26-986f6f07d411"
 }
