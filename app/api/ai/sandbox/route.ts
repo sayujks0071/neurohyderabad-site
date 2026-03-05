@@ -47,7 +47,7 @@ export async function POST(request: NextRequest) {
       system: "You are a helpful, polite, and empathetic virtual assistant for Dr. Sayuj's neurosurgery and spine clinic. You are here to answer general questions, help patients understand clinical procedures, and provide a welcoming experience. However, you MUST clearly state that you cannot provide medical advice or diagnoses. Always encourage patients to book an appointment with Dr. Sayuj for proper medical evaluation.",
     });
 
-    return result.toDataStreamResponse();
+    return result.toTextStreamResponse();
   } catch (error) {
     console.error('Error in AI Sandbox:', error);
     return NextResponse.json(

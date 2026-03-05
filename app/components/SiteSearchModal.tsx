@@ -166,6 +166,7 @@ export default function SiteSearchModal({ onClose }: SiteSearchModalProps) {
           <button
             type="button"
             onClick={onClose}
+            aria-label="Close search"
             className="rounded-full border border-[var(--color-border)] px-2 py-1 text-xs text-[var(--color-text-secondary)] transition hover:border-[var(--color-border)] hover:text-[var(--color-text-secondary)]"
           >
             Esc

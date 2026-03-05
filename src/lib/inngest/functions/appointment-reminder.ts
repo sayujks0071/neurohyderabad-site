@@ -1,6 +1,6 @@
 import { inngest } from "@/src/lib/inngest";
 import type { Events } from "@/src/lib/inngest";
-import EmailService from "@/src/lib/email";
+import EmailService from "@/lib/email";
 
 // Example function: Send appointment reminder
 export const appointmentReminder = inngest.createFunction(

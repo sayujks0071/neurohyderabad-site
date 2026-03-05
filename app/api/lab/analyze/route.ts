@@ -1,0 +1,99 @@
+import { NextResponse } from "next/server";
+import { rateLimit } from "@/src/lib/rate-limit";
+import { extractLabPdfTextInSandbox } from "@/lib/lab/pdfExtract";
+import { interpretLabReportText } from "@/lib/interpretLabReport";
+
+// Validation constants
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+const ALLOWED_MIME = 'application/pdf';
+
+export const runtime = "nodejs"; // Sandbox SDK requires nodejs runtime
+export const maxDuration = 60; // 60 seconds
+
+export async function POST(request: Request) {
+  // Rate Limiting: 3 requests per 10 minutes per IP
+  const ip = request.headers.get("x-forwarded-for")?.split(',')[0] || "127.0.0.1";
+  const limit = rateLimit(ip, 3, 10 * 60 * 1000);
+
+  if (!limit.success) {
+    return NextResponse.json(
+      { error: "Too many requests. Please try again later." },
+      {
+        status: 429,
+        headers: {
+          "Retry-After": String(Math.ceil((limit.reset - Date.now()) / 1000)),
+          "X-RateLimit-Limit": String(limit.limit),
+          "X-RateLimit-Remaining": String(limit.remaining),
+          "X-RateLimit-Reset": String(limit.reset)
+        }
+      }
+    );
+  }
+
+  try {
+    const contentType = request.headers.get("content-type") || "";
+
+    let text = "";
+    let numpages = 0;
+    let truncated = false;
+
+    // Handle JSON body (extracted text from client)
+    if (contentType.includes("application/json")) {
+      const body = await request.json();
+      if (!body.text) {
+         return NextResponse.json({ error: "No text provided in request body" }, { status: 400 });
+      }
+      text = body.text;
+      numpages = body.numpages || 0;
+      truncated = body.truncated || false;
+
+    } else {
+      // Handle FormData (fallback for server-side extraction)
+      const formData = await request.formData();
+      const file = formData.get("file") as File | null;
+
+      if (!file) {
+        return NextResponse.json({ error: "No file uploaded" }, { status: 400 });
+      }
+
+      if (file.type !== ALLOWED_MIME) {
+        return NextResponse.json({ error: "Invalid file type. Only PDF is allowed." }, { status: 400 });
+      }
+
+      if (file.size > MAX_FILE_SIZE) {
+        return NextResponse.json({ error: "File too large. Max size is 10MB." }, { status: 413 });
+      }
+
+      // Basic magic bytes check (best effort)
+      const buffer = Buffer.from(await file.arrayBuffer());
+      const header = buffer.subarray(0, 5).toString();
+      if (!header.startsWith('%PDF-')) {
+         return NextResponse.json({ error: "Invalid file format. Not a PDF." }, { status: 400 });
+      }
+
+      // Extract text in sandbox
+      const extraction = await extractLabPdfTextInSandbox(buffer);
+      text = extraction.text;
+      numpages = extraction.numpages;
+      truncated = extraction.truncated;
+    }
+
+    // Interpret text
+    const analysis = await interpretLabReportText(text);
+
+    return NextResponse.json({
+      extraction: {
+        numpages: numpages,
+        extractedChars: text.length,
+        truncated: truncated
+      },
+      analysis
+    });
+
+  } catch (error: any) {
+    console.error("[Lab Analyzer] Error:", error);
+    const message = error.message || "An unexpected error occurred.";
+
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
+}
