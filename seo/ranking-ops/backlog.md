@@ -68,3 +68,8 @@
 
 ## 2026-02-27
 *   [x] **Schema:** Add `VideoObject` schema to `app/services/minimally-invasive-spine-surgery/page.tsx` for the newly embedded "L5-S1 Endoscopic Discectomy" video to improve rich snippets. (Done 2026-02-28)
+
+## 2025-02-23
+*   [x] **Local SEO:** Enhanced "Areas We Serve" section on homepage with specific landmarks (PVNR Expressway, ORR) and internal links to location pages. (Done 2025-02-23)
+*   [ ] **Local SEO:** Expand this enhancement to the individual location pages (`/neurosurgeon-banjara-hills`, etc.) by detailing specific nearby landmarks.
+*   [ ] **Content Gap:** Review high-volume condition pages to ensure clear "Cost of" guides or internal linking to cost-specific pages are present.
