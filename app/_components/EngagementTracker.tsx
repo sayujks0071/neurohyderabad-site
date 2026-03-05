@@ -38,9 +38,16 @@ export default function EngagementTracker({
     const milestoneThresholds = [30, 60, 120, 300];
     
     // Track user activity (scroll, click, keypress)
+    let isThrottled = false;
     let activityTimeout: NodeJS.Timeout | null = null;
     const handleActivity = () => {
-      if (activityTimeout) return;
+      if (isThrottled) return;
+      
+      // Mark as throttled immediately to prevent subsequent calls
+      isThrottled = true;
+
+      // Trailing edge throttle execution
+      if (activityTimeout) clearTimeout(activityTimeout);
       activityTimeout = setTimeout(() => {
         lastActivityRef.current = Date.now();
 
@@ -56,8 +63,9 @@ export default function EngagementTracker({
             });
           }
         }
-        activityTimeout = null;
-      }, 500); // 500ms trailing edge throttle
+
+        isThrottled = false;
+      }, 1000); // ⚡ Bolt: trailing-edge throttle for high-frequency events to capture final state
     };
 
     // Track time milestones
@@ -119,6 +127,7 @@ export default function EngagementTracker({
       if (activityTimeout) clearTimeout(activityTimeout);
       clearInterval(milestoneInterval);
       clearInterval(timeTrackingInterval);
+      if (activityTimeout) clearTimeout(activityTimeout);
       window.removeEventListener('scroll', handleActivity);
       window.removeEventListener('click', handleActivity);
       window.removeEventListener('keypress', handleActivity);

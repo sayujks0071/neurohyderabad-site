@@ -75,30 +75,33 @@ export default function SEOOptimizer({ pageType, pageSlug, serviceOrCondition }:
       }
 
       let maxScrollDepth = 0;
+      let isThrottled = false;
       let scrollTimeout: NodeJS.Timeout | null = null;
       const trackScrollDepth = () => {
-        if (scrollTimeout) return;
+        if (isThrottled) return;
+        isThrottled = true;
+
+        if (scrollTimeout) clearTimeout(scrollTimeout);
         scrollTimeout = setTimeout(() => {
           const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
           const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-          if (docHeight <= 0) {
-            scrollTimeout = null;
-            return;
-          }
-          const scrollPercent = Math.round((scrollTop / docHeight) * 100);
+          if (docHeight > 0) {
+            const scrollPercent = Math.round((scrollTop / docHeight) * 100);
 
-          if (scrollPercent > maxScrollDepth) {
-            maxScrollDepth = scrollPercent;
-            analytics.scrollDepth(pageSlug, scrollPercent);
+            if (scrollPercent > maxScrollDepth) {
+              maxScrollDepth = scrollPercent;
+              analytics.scrollDepth(pageSlug, scrollPercent);
+            }
           }
-          scrollTimeout = null;
-        }, 500); // 500ms trailing edge throttle
+
+          isThrottled = false;
+        }, 500); // ⚡ Bolt: trailing-edge throttle to prevent synchronous layout recalculations every frame without missing final position
       };
 
       window.addEventListener('scroll', trackScrollDepth, { passive: true });
       cleanupCallbacks.push(() => {
-        window.removeEventListener('scroll', trackScrollDepth);
         if (scrollTimeout) clearTimeout(scrollTimeout);
+        window.removeEventListener('scroll', trackScrollDepth);
       });
 
       const trackTimeOnPage = () => {
