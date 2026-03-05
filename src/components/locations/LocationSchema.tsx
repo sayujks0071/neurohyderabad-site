@@ -16,13 +16,18 @@ interface LocationSchemaProps {
   siteUrl?: string;
   imageUrl?: string;
   faq?: FAQItem[] | any[]; // Allow loose typing to catch legacy q/a without strict errors
+  aggregateRating?: {
+    ratingValue: string;
+    reviewCount: string;
+  };
 }
 
 export const LocationSchema: React.FC<LocationSchemaProps> = ({
   location,
   siteUrl = 'https://www.drsayuj.info',
   imageUrl = 'https://www.drsayuj.info/images/dr-sayuj-krishnan-portrait-v2.jpg',
-  faq
+  faq,
+  aggregateRating
 }) => {
 
   // Note: Physician Schema is injected globally by RootLayout via <PhysicianSchema />.
@@ -77,7 +82,15 @@ export const LocationSchema: React.FC<LocationSchemaProps> = ({
         "opens": "10:00",
         "closes": "16:00"
       }
-    ]
+    ],
+    ...(faq ? {} : {}), // just an anchor
+    ...(aggregateRating ? {
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": aggregateRating.ratingValue,
+        "reviewCount": aggregateRating.reviewCount
+      }
+    } : {})
   };
 
   // 2. FAQPage Schema
