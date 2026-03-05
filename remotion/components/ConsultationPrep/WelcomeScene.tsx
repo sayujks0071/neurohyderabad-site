@@ -9,6 +9,53 @@ export interface WelcomeSceneProps {
   patientName: string;
 }
 
+const AnimatedSubtitleWord: React.FC<{
+  word: string;
+  index: number;
+  subtitleStartFrame: number;
+  prefersReducedMotion: boolean;
+}> = ({ word, index, subtitleStartFrame, prefersReducedMotion }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  const delay = subtitleStartFrame + index * 3;
+
+  const wordOpacity = useMemo(() =>
+    prefersReducedMotion ? 1 : spring({
+      frame: frame - delay,
+      fps,
+      from: 0,
+      to: 1,
+      durationInFrames: 40,
+    }),
+    [frame, fps, delay, prefersReducedMotion]
+  );
+
+  const wordY = useMemo(() =>
+    prefersReducedMotion ? 0 : spring({
+      frame: frame - delay,
+      fps,
+      from: 20,
+      to: 0,
+      durationInFrames: 40,
+      config: { damping: 12 },
+    }),
+    [frame, fps, delay, prefersReducedMotion]
+  );
+
+  return (
+    <span
+      style={{
+        opacity: wordOpacity,
+        transform: `translateY(${wordY}px)`,
+        display: 'inline-block',
+      }}
+    >
+      {word}
+    </span>
+  );
+};
+
 const FloatingParticles: React.FC<{ reducedMotion: boolean }> = ({ reducedMotion }) => {
   const frame = useCurrentFrame();
 
@@ -139,38 +186,15 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
               margin: 0,
             }}
           >
-            {subtitleWords.map((word, index) => {
-              const delay = subtitleStartFrame + index * 3;
-              const wordOpacity = prefersReducedMotion ? 1 : spring({
-                frame: frame - delay,
-                fps,
-                from: 0,
-                to: 1,
-                durationInFrames: 40,
-              });
-
-              const wordY = prefersReducedMotion ? 0 : spring({
-                frame: frame - delay,
-                fps,
-                from: 20,
-                to: 0,
-                durationInFrames: 40,
-                config: { damping: 12 },
-              });
-
-              return (
-                <span
-                  key={index}
-                  style={{
-                    opacity: wordOpacity,
-                    transform: `translateY(${wordY}px)`,
-                    display: 'inline-block',
-                  }}
-                >
-                  {word}
-                </span>
-              );
-            })}
+            {subtitleWords.map((word, index) => (
+              <AnimatedSubtitleWord
+                key={index}
+                word={word}
+                index={index}
+                subtitleStartFrame={subtitleStartFrame}
+                prefersReducedMotion={prefersReducedMotion}
+              />
+            ))}
           </div>
         </div>
       </div>
