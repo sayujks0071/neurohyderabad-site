@@ -60,7 +60,7 @@ export function isAIGatewayConfigured(): boolean {
  * Check if any AI configuration is available
  */
 export function hasAIConfig(): boolean {
-  return !!process.env.OPENAI_API_KEY || isAIGatewayConfigured();
+  return isAIGatewayConfigured();
 }
 
 /**
@@ -89,10 +89,10 @@ export function getGatewayModel(modelName: string = DEFAULT_TEXT_MODEL): string 
  * - Base URL points to Vercel AI Gateway
  */
 export function createAIGatewayClient() {
-  const apiKey = process.env.AI_GATEWAY_API_KEY || process.env.OPENAI_API_KEY;
+  const apiKey = process.env.AI_GATEWAY_API_KEY;
   
   if (!apiKey && !process.env.VERCEL) {
-    throw new Error('AI_GATEWAY_API_KEY or OPENAI_API_KEY must be set, or deploy on Vercel for OIDC token');
+    throw new Error('AI_GATEWAY_API_KEY must be set, or deploy on Vercel for OIDC token');
   }
 
   // Create OpenAI client configured for Vercel AI Gateway
@@ -104,7 +104,6 @@ export function createAIGatewayClient() {
 
 /**
  * Get AI client function (works like openai() from @ai-sdk/openai)
- * Falls back to direct provider if Gateway is not configured
  */
 export function getAIClient() {
   if (isAIGatewayConfigured()) {
@@ -114,55 +113,27 @@ export function getAIClient() {
       // createOpenAI returns a function that takes a model name
       return (model: string) => gatewayClient(model);
     } catch (error) {
-      console.error('Failed to create AI Gateway client, falling back to direct OpenAI:', error);
-      // Fallback to direct OpenAI if gateway fails
+      console.error('Failed to create AI Gateway client:', error);
+      throw error;
     }
   }
 
-  // Fallback to direct OpenAI
-  const apiKey = process.env.OPENAI_API_KEY;
-  if (!apiKey) {
-    throw new Error('OPENAI_API_KEY must be set for direct OpenAI access');
-  }
-  const directClient = createOpenAI({ apiKey });
-  return (model: string) => directClient(model);
+  throw new Error('Vercel AI Gateway is not configured. Please set AI_GATEWAY_API_KEY or deploy on Vercel.');
 }
 
 /**
- * Get the configured text model name, accounting for gateway formatting and fallback logic.
+ * Get the configured text model name, accounting for gateway formatting.
  * 
  * For Vercel AI Gateway: returns provider/model format (e.g., 'openai/gpt-4o-mini')
- * For direct OpenAI (Fallback):
- *  - Strips 'openai/' prefix if present
- *  - Falls back to DEFAULT_TEXT_MODEL (e.g. 'gpt-4o-mini') if a non-OpenAI model is requested (e.g. 'google/gemini')
  */
 export function getTextModelName(modelName: string = DEFAULT_TEXT_MODEL): string {
-  if (isAIGatewayConfigured()) {
-    return getGatewayModel(modelName);
-  }
-
-  // Fallback Logic for Direct OpenAI Usage
-
-  // 1. Strip 'openai/' prefix if present (e.g. 'openai/gpt-4' -> 'gpt-4')
-  if (modelName.startsWith('openai/')) {
-    return modelName.replace('openai/', '');
-  }
-
-  // 2. If using another provider (e.g. 'google/gemini') but Gateway is not configured,
-  // we must fall back to a supported OpenAI model to avoid crashing.
-  if (modelName.includes('/') && !modelName.startsWith('openai/')) {
-    console.warn(`[AI Gateway] Gateway not configured. Falling back from '${modelName}' to '${DEFAULT_TEXT_MODEL}' to use direct OpenAI connection.`);
-    return DEFAULT_TEXT_MODEL;
-  }
-
-  // 3. Return as-is (e.g. 'gpt-4', 'gpt-4o-mini')
-  return modelName;
+  return getGatewayModel(modelName);
 }
 
 /**
  * Get a text model instance for the configured provider.
  * 
- * Works with both Vercel AI Gateway (provider/model format) and direct OpenAI
+ * Works with Vercel AI Gateway (provider/model format)
  */
 export function getTextModel(modelName: string = DEFAULT_TEXT_MODEL) {
   const aiClient = getAIClient();
