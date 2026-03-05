@@ -26,7 +26,7 @@ function getNewsletterHtml(dateStr: string): string {
 <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #1a1a1a; background: #f9fafb;">
   <div style="background: linear-gradient(135deg, #005EB8 0%, #0073E6 100%); padding: 36px 32px; border-radius: 12px; text-align: center; margin-bottom: 32px;">
     <h1 style="color: #ffffff; margin: 0 0 8px; font-size: 26px; letter-spacing: -0.5px;">NeuroHyderabad Insights</h1>
-    <p style="color: rgba(255,255,255,0.85); margin: 0; font-size: 15px;">\${dateStr}</p>
+    <p style="color: rgba(255,255,255,0.85); margin: 0; font-size: 15px;">${dateStr}</p>
   </div>
 
   <div style="background: #ffffff; border-radius: 12px; padding: 32px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.08);">
@@ -62,13 +62,13 @@ function getNewsletterHtml(dateStr: string): string {
     <a href="https://www.drsayuj.info/unsubscribe" style="color: #9ca3af; text-decoration: none;">Unsubscribe</a>
   </p>
 </body>
-</html>\`;
+</html>`;
 }
 
 export async function GET(request: NextRequest) {
   // Verify Vercel Cron authorization
   const authHeader = request.headers.get('authorization');
-  if (authHeader !== \`Bearer \${process.env.CRON_SECRET}\`) {
+  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
@@ -94,7 +94,7 @@ export async function GET(request: NextRequest) {
       audienceId,
       from: 'Dr. Sayuj Krishnan <newsletter@drsayuj.info>',
       replyTo: 'hellodr@drsayuj.info',
-      subject: \`NeuroHyderabad Insights — \${dateStr}\`,
+      subject: `NeuroHyderabad Insights — ${dateStr}`,
       html: getNewsletterHtml(dateStr),
     });
 
@@ -108,7 +108,7 @@ export async function GET(request: NextRequest) {
       throw new Error(sendError.message);
     }
 
-    console.log(\`[Newsletter] Broadcast \${broadcast.id} sent to audience \${audienceId}\`);
+    console.log(`[Newsletter] Broadcast ${broadcast.id} sent to audience ${audienceId}`);
     return NextResponse.json({
       success: true,
       broadcastId: broadcast.id,
