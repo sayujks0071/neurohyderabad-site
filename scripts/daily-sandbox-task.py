@@ -6,7 +6,7 @@ from datetime import timedelta
 import httpx
 
 from opensandbox import Sandbox
-from opensandbox.models import WriteEntry
+from code_interpreter import CodeInterpreter, SupportedLanguage
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("daily-sandbox")
@@ -39,34 +39,71 @@ async def main() -> None:
         # or SEO verification step, reporting findings back.
 
         script_code = """
+import urllib.request
+from html.parser import HTMLParser
 import json
-import datetime
-import os
 
-def generate_daily_report():
-    report = {
-        "date": datetime.datetime.now().isoformat(),
-        "status": "healthy",
-        "sandbox_checks": [
-            {"name": "Python Execution Environment", "passed": True},
-            {"name": "Security Check (Isolated)", "passed": True}
-        ],
-        "recommendation": "Integrate Claude Code or AI Gateway for autonomous file modifications inside this sandbox."
+class SEOHTMLParser(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.in_title = False
+        self.in_h1 = False
+        self.title = ""
+        self.h1 = ""
+        self.meta_desc = ""
+
+    def handle_starttag(self, tag, attrs):
+        if tag == "title":
+            self.in_title = True
+        elif tag == "h1":
+            self.in_h1 = True
+        elif tag == "meta":
+            attrs_dict = dict(attrs)
+            if attrs_dict.get("name", "").lower() == "description":
+                self.meta_desc = attrs_dict.get("content", "")
+
+    def handle_endtag(self, tag):
+        if tag == "title":
+            self.in_title = False
+        elif tag == "h1":
+            self.in_h1 = False
+
+    def handle_data(self, data):
+        if self.in_title:
+            self.title += data
+        elif self.in_h1:
+            self.h1 += data
+
+url = "https://www.drsayuj.info"
+req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+try:
+    with urllib.request.urlopen(req) as response:
+        html_content = response.read().decode('utf-8')
+
+    parser = SEOHTMLParser()
+    parser.feed(html_content)
+
+    seo_data = {
+        "url": url,
+        "title": parser.title.strip(),
+        "h1": parser.h1.strip(),
+        "meta_description": parser.meta_desc.strip()
     }
+
     with open("/tmp/daily_report.json", "w") as f:
-        json.dump(report, f, indent=2)
-    return "Report generated inside OpenSandbox."
-
-print(generate_daily_report())
+        json.dump(seo_data, f, indent=2)
+    print("SEO data generated successfully inside OpenSandbox.")
+except Exception as e:
+    print(f"Error: {e}")
 """
-        logger.info("Writing execution script to the sandbox...")
-        await sandbox.files.write_files([
-            WriteEntry(path="/tmp/generate_report.py", data=script_code, mode=644)
-        ])
+        # 3. Create a code interpreter and execute Python code
+        logger.info("Executing the script in the isolated environment using CodeInterpreter...")
+        interpreter = await CodeInterpreter.create(sandbox)
 
-        # 3. Execute the python script inside the sandbox
-        logger.info("Executing the script in the isolated environment...")
-        execution = await sandbox.commands.run("python /tmp/generate_report.py")
+        execution = await interpreter.codes.run(
+            script_code,
+            language=SupportedLanguage.PYTHON,
+        )
 
         if execution.logs.stdout:
             logger.info(f"Sandbox Output: {execution.logs.stdout[0].text.strip()}")

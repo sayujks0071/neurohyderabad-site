@@ -8,6 +8,56 @@ export interface CalendarSceneProps {
   appointmentTime: string;
 }
 
+const AnimatedWord: React.FC<{
+  word: string;
+  i: number;
+  prefersReducedMotion: boolean;
+}> = ({ word, i, prefersReducedMotion }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  const delay = 35 + i * 3;
+
+  const wordOpacity = useMemo(() =>
+    prefersReducedMotion ? 1 : spring({
+      frame: frame - delay,
+      fps,
+      from: 0,
+      to: 1,
+      durationInFrames: 20,
+    }),
+    [frame, fps, delay, prefersReducedMotion]
+  );
+
+  const wordY = useMemo(() =>
+    prefersReducedMotion ? 0 : spring({
+      frame: frame - delay,
+      fps,
+      from: 10,
+      to: 0,
+      durationInFrames: 20,
+    }),
+    [frame, fps, delay, prefersReducedMotion]
+  );
+
+  return (
+    <span
+      style={{
+        fontFamily: FONTS.primary,
+        fontSize: '36px',
+        fontWeight: 600,
+        color: COLORS.text,
+        margin: 0,
+        opacity: wordOpacity,
+        transform: `translateY(${wordY}px)`,
+        display: 'inline-block',
+      }}
+    >
+      {word}
+    </span>
+  );
+};
+
 export const CalendarScene: React.FC<CalendarSceneProps> = ({
   appointmentDate,
   appointmentTime,
@@ -400,41 +450,14 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
 
       {/* Bottom text */}
       <div style={{ marginTop: SPACING[12], display: 'flex', gap: '0.4em', justifyContent: 'center' }}>
-        {words.map((word, i) => {
-          const delay = 35 + i * 3;
-          const wordOpacity = prefersReducedMotion ? 1 : spring({
-            frame: frame - delay,
-            fps,
-            from: 0,
-            to: 1,
-            durationInFrames: 20,
-          });
-          const wordY = prefersReducedMotion ? 0 : spring({
-            frame: frame - delay,
-            fps,
-            from: 10,
-            to: 0,
-            durationInFrames: 20,
-          });
-
-          return (
-            <span
-              key={i}
-              style={{
-                fontFamily: FONTS.primary,
-                fontSize: '36px',
-                fontWeight: 600,
-                color: COLORS.text,
-                margin: 0,
-                opacity: wordOpacity,
-                transform: `translateY(${wordY}px)`,
-                display: 'inline-block',
-              }}
-            >
-              {word}
-            </span>
-          );
-        })}
+        {words.map((word, i) => (
+          <AnimatedWord
+            key={i}
+            word={word}
+            i={i}
+            prefersReducedMotion={prefersReducedMotion}
+          />
+        ))}
       </div>
     </div>
   );

@@ -125,6 +125,7 @@ export default function SandboxClient() {
                         <button
                             disabled={isLoading || !input.trim()}
                             type="submit"
+                            aria-label={isLoading ? "Sending message..." : "Send message"}
                             className="bg-blue-600 hover:bg-blue-700 disabled:bg-slate-200 disabled:text-slate-400 text-white rounded-xl p-4 transition-all duration-200 shadow-sm active:scale-95 shrink-0 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                         >
                             {isLoading ? (

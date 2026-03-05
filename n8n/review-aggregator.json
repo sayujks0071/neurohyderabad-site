@@ -50,7 +50,7 @@
     },
     {
       "parameters": {
-        "prompt": "Analyze the sentiment of the following review: \"{{$node[\"Split Reviews\"].json[\"text\"]}}\".\nOutput JSON:\n{\n  \"sentiment\": \"positive|neutral|negative\",\n  \"score\": 1-10\n}",
+        "prompt": "Analyze the sentiment of the following patient review for a neurosurgeon: \"{{$node[\"Split Reviews\"].json[\"text\"]}}\".\n\nPay special attention to mentions of surgical outcomes, bedside manner, pain relief, and staff interaction.\nOutput strictly valid JSON:\n{\n  \"sentiment\": \"positive|neutral|negative\",\n  \"score\": 1-10,\n  \"key_theme\": \"A brief 2-3 word summary of the main point (e.g., 'Successful spine surgery', 'Long wait time')\"\n}",
         "maxTokens": 100,
         "temperature": 0.3
       },
@@ -170,5 +170,6 @@
   },
   "settings": {},
   "staticData": null,
-  "tags": []
+  "tags": [],
+  "id": "6c425898-7b0c-4bf2-a399-5d42ae2c1ad2"
 }

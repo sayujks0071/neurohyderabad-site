@@ -112,25 +112,25 @@ export default function StickyCTA({ className = '' }: StickyCTAProps) {
   }
 
   const buttonToneClasses: Record<CTAIntent, string> = {
-    call: "bg-gradient-to-r from-green-600 to-emerald-600 text-white shadow-lg shadow-green-500/30 hover:shadow-green-500/50",
-    whatsapp: "bg-gradient-to-r from-green-600 to-emerald-600 text-white shadow-lg shadow-green-500/30 hover:shadow-green-500/50",
-    appointment: "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50",
+    call: "bg-gradient-to-r from-[var(--color-success)] to-[var(--color-success)] text-white shadow-lg shadow-green-500/30 hover:shadow-green-500/50",
+    whatsapp: "bg-gradient-to-r from-[var(--color-success)] to-[var(--color-success)] text-white shadow-lg shadow-green-500/30 hover:shadow-green-500/50",
+    appointment: "bg-gradient-to-r from-[var(--color-primary-500)] to-[var(--color-primary-700)] text-white shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50",
   };
 
   return (
     <div 
-      className={`fixed bottom-0 left-0 right-0 bg-white/70 backdrop-blur-lg border-t border-white/20 shadow-[0_-4px_20px_-5px_rgba(0,0,0,0.1)] z-50 p-4 transition-all duration-300 ${className}`}
+      className={`fixed bottom-0 left-0 right-0 bg-[var(--color-surface)]/70 backdrop-blur-lg border-t border-white/20 shadow-[0_-4px_20px_-5px_rgba(0,0,0,0.1)] z-50 p-4 transition-all duration-300 ${className}`}
       role="region"
       aria-label="Quick contact options"
     >
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between gap-4">
           <div className="flex-1">
-            <p className="text-sm font-semibold text-gray-900">
+            <p className="text-sm font-semibold text-[var(--color-text-primary)]">
               {config.headline}
             </p>
             {config.subhead && (
-              <p className="text-xs text-gray-600">
+              <p className="text-xs text-[var(--color-text-secondary)]">
                 {config.subhead}
               </p>
             )}
@@ -143,7 +143,7 @@ export default function StickyCTA({ className = '' }: StickyCTAProps) {
                 target={button.target}
                 rel={button.rel}
                 onClick={() => handleCTAClick(button)}
-                className={`${buttonToneClasses[button.intent]} font-semibold rounded-xl transition-all duration-300 motion-safe:hover:scale-[1.02] motion-safe:active:scale-[0.98] px-4 py-3 min-h-[44px] text-sm flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2`}
+                className={`${buttonToneClasses[button.intent]} font-semibold rounded-xl transition-all duration-300 motion-safe:hover:scale-[1.02] motion-safe:active:scale-[0.98] px-4 py-3 min-h-[44px] text-sm flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)] focus:ring-offset-2`}
                 aria-label={button.ariaLabel || button.label}
               >
                 <CTAIcon intent={button.intent} />

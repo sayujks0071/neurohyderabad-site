@@ -18,21 +18,21 @@ export default function FeatureToggleExample() {
   return (
     <div>
       {enableNewChatWidget && (
-        <div className="bg-blue-100 p-4 rounded">
+        <div className="bg-[var(--color-primary-100)] p-4 rounded">
           <h3>New AI Chat Widget</h3>
           <p>This feature is enabled via feature flag</p>
         </div>
       )}
 
       {enableAdvancedBooking && (
-        <div className="bg-green-100 p-4 rounded mt-4">
+        <div className="bg-[var(--color-success-light)] p-4 rounded mt-4">
           <h3>Advanced Booking Flow</h3>
           <p>New booking experience is active</p>
         </div>
       )}
 
       {!enableNewChatWidget && !enableAdvancedBooking && (
-        <p className="text-gray-500">No new features enabled</p>
+        <p className="text-[var(--color-text-secondary)]">No new features enabled</p>
       )}
     </div>
   );

@@ -215,14 +215,14 @@ export default function SEOAudit() {
 
   if (!auditData) {
     return (
-      <div className="p-4 bg-gray-100 rounded-lg">
+      <div className="p-4 bg-[var(--color-background)] rounded-lg">
         <h3 className="text-lg font-semibold mb-2">SEO Audit</h3>
         {isRunning ? (
           <p>Running SEO audit...</p>
         ) : (
           <button 
             onClick={runSEOAudit}
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+            className="bg-[var(--color-primary-500)] text-white px-4 py-2 rounded hover:bg-[var(--color-primary-700)]"
           >
             Run SEO Audit
           </button>
@@ -232,21 +232,21 @@ export default function SEOAudit() {
   }
 
   const getScoreColor = (score: number, thresholds: { good: number; needsImprovement: number }) => {
-    if (score >= thresholds.good) return 'text-green-600';
-    if (score >= thresholds.needsImprovement) return 'text-yellow-600';
-    return 'text-red-600';
+    if (score >= thresholds.good) return 'text-[var(--color-success-700)]';
+    if (score >= thresholds.needsImprovement) return 'text-[var(--color-warning-700)]';
+    return 'text-[var(--color-error)]';
   };
 
   const getBooleanIcon = (value: boolean) => value ? '✅' : '❌';
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-lg">
+    <div className="p-6 bg-[var(--color-surface)] rounded-lg shadow-lg">
       <div className="flex justify-between items-center mb-4">
         <h3 className="text-xl font-semibold">SEO Audit Results</h3>
         <button 
           onClick={runSEOAudit}
           disabled={isRunning}
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:opacity-50"
+          className="bg-[var(--color-primary-500)] text-white px-4 py-2 rounded hover:bg-[var(--color-primary-700)] disabled:opacity-50"
         >
           {isRunning ? 'Running...' : 'Refresh Audit'}
         </button>
@@ -254,7 +254,7 @@ export default function SEOAudit() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {/* Core Web Vitals */}
-        <div className="bg-gray-50 p-4 rounded-lg">
+        <div className="bg-[var(--color-background)] p-4 rounded-lg">
           <h4 className="font-semibold mb-3">Core Web Vitals</h4>
           <div className="space-y-2 text-sm">
             <div>LCP: <span className={getScoreColor(auditData.lcp || 0, { good: 2500, needsImprovement: 4000 })}>
@@ -276,7 +276,7 @@ export default function SEOAudit() {
         </div>
 
         {/* Content Analysis */}
-        <div className="bg-gray-50 p-4 rounded-lg">
+        <div className="bg-[var(--color-background)] p-4 rounded-lg">
           <h4 className="font-semibold mb-3">Content Analysis</h4>
           <div className="space-y-2 text-sm">
             <div>Word Count: {auditData.wordCount.toLocaleString()}</div>
@@ -290,7 +290,7 @@ export default function SEOAudit() {
         </div>
 
         {/* Technical SEO */}
-        <div className="bg-gray-50 p-4 rounded-lg">
+        <div className="bg-[var(--color-background)] p-4 rounded-lg">
           <h4 className="font-semibold mb-3">Technical SEO</h4>
           <div className="space-y-2 text-sm">
             <div>Title Length: <span className={getScoreColor(auditData.titleLength, { good: 30, needsImprovement: 60 })}>
@@ -308,7 +308,7 @@ export default function SEOAudit() {
         </div>
 
         {/* Links */}
-        <div className="bg-gray-50 p-4 rounded-lg">
+        <div className="bg-[var(--color-background)] p-4 rounded-lg">
           <h4 className="font-semibold mb-3">Link Analysis</h4>
           <div className="space-y-2 text-sm">
             <div>Internal Links: {auditData.internalLinkCount}</div>
@@ -318,7 +318,7 @@ export default function SEOAudit() {
         </div>
 
         {/* Mobile Optimization */}
-        <div className="bg-gray-50 p-4 rounded-lg">
+        <div className="bg-[var(--color-background)] p-4 rounded-lg">
           <h4 className="font-semibold mb-3">Mobile Optimization</h4>
           <div className="space-y-2 text-sm">
             <div>Mobile Friendly: {getBooleanIcon(auditData.isMobileFriendly)}</div>
@@ -328,7 +328,7 @@ export default function SEOAudit() {
         </div>
 
         {/* Page Info */}
-        <div className="bg-gray-50 p-4 rounded-lg">
+        <div className="bg-[var(--color-background)] p-4 rounded-lg">
           <h4 className="font-semibold mb-3">Page Information</h4>
           <div className="space-y-2 text-sm">
             <div>Page Type: {auditData.pageType}</div>

@@ -76,28 +76,28 @@ export default function SEODashboard() {
   }, []);
 
   const getScoreColor = (score: number) => {
-    if (score >= 90) return 'text-green-600';
-    if (score >= 70) return 'text-yellow-600';
-    return 'text-red-600';
+    if (score >= 90) return 'text-[var(--color-success-700)]';
+    if (score >= 70) return 'text-[var(--color-warning-700)]';
+    return 'text-[var(--color-error)]';
   };
 
   const getSeverityColor = (severity: string) => {
     switch (severity) {
-      case 'critical': return 'bg-red-100 text-red-800 border-red-200';
-      case 'warning': return 'bg-yellow-100 text-yellow-800 border-yellow-200';
-      case 'info': return 'bg-blue-100 text-blue-800 border-blue-200';
-      default: return 'bg-gray-100 text-gray-800 border-gray-200';
+      case 'critical': return 'bg-[var(--color-error-light)] text-[var(--color-error-800)] border-[var(--color-error-light)]';
+      case 'warning': return 'bg-[var(--color-warning-light)] text-[var(--color-warning-700)] border-[var(--color-warning)]';
+      case 'info': return 'bg-[var(--color-primary-100)] text-[var(--color-primary-800)] border-[var(--color-primary-200)]';
+      default: return 'bg-[var(--color-background)] text-[var(--color-text-primary)] border-[var(--color-border)]';
     }
   };
 
   if (loading) {
     return (
-      <div className="p-6 bg-white rounded-lg shadow-lg">
+      <div className="relative bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
         <div className="animate-pulse">
-          <div className="h-4 bg-gray-200 rounded w-1/4 mb-4"></div>
+          <div className="h-4 bg-[var(--color-border)] rounded w-1/4 mb-4"></div>
           <div className="space-y-3">
-            <div className="h-3 bg-gray-200 rounded"></div>
-            <div className="h-3 bg-gray-200 rounded"></div>
+            <div className="h-3 bg-[var(--color-border)] rounded"></div>
+            <div className="h-3 bg-[var(--color-border)] rounded"></div>
           </div>
         </div>
       </div>
@@ -105,35 +105,35 @@ export default function SEODashboard() {
   }
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-lg">
+    <div className="relative bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
       <h2 className="text-2xl font-bold mb-6">SEO Dashboard</h2>
       
       {/* Core Metrics */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
         <div className="p-4 border rounded-lg">
-          <div className="text-sm text-gray-600">Page Speed</div>
+          <div className="text-sm text-[var(--color-text-secondary)]">Page Speed</div>
           <div className={`text-2xl font-bold ${getScoreColor(metrics.pageSpeed)}`}>
             {metrics.pageSpeed}/100
           </div>
         </div>
         
         <div className="p-4 border rounded-lg">
-          <div className="text-sm text-gray-600">Mobile Score</div>
+          <div className="text-sm text-[var(--color-text-secondary)]">Mobile Score</div>
           <div className={`text-2xl font-bold ${getScoreColor(metrics.mobileScore)}`}>
             {metrics.mobileScore}/100
           </div>
         </div>
         
         <div className="p-4 border rounded-lg">
-          <div className="text-sm text-gray-600">SEO Score</div>
+          <div className="text-sm text-[var(--color-text-secondary)]">SEO Score</div>
           <div className={`text-2xl font-bold ${getScoreColor(metrics.seoScore)}`}>
             {metrics.seoScore}/100
           </div>
         </div>
         
         <div className="p-4 border rounded-lg">
-          <div className="text-sm text-gray-600">Bounce Rate</div>
-          <div className={`text-2xl font-bold ${metrics.bounceRate < 40 ? 'text-green-600' : 'text-yellow-600'}`}>
+          <div className="text-sm text-[var(--color-text-secondary)]">Bounce Rate</div>
+          <div className={`text-2xl font-bold ${metrics.bounceRate < 40 ? 'text-[var(--color-success-700)]' : 'text-[var(--color-warning-700)]'}`}>
             {metrics.bounceRate}%
           </div>
         </div>
@@ -141,28 +141,28 @@ export default function SEODashboard() {
 
       {/* Growth Metrics */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-        <div className="p-4 bg-blue-50 rounded-lg">
-          <div className="text-sm text-gray-600">Backlinks</div>
+        <div className="p-4 bg-[var(--color-primary-50)] rounded-lg">
+          <div className="text-sm text-[var(--color-text-secondary)]">Backlinks</div>
           <div className="text-xl font-semibold">{metrics.backlinks}</div>
-          <div className="text-xs text-green-600">↑ 12% this month</div>
+          <div className="text-xs text-[var(--color-success-700)]">↑ 12% this month</div>
         </div>
         
-        <div className="p-4 bg-blue-50 rounded-lg">
-          <div className="text-sm text-gray-600">Keywords Ranking</div>
+        <div className="p-4 bg-[var(--color-primary-50)] rounded-lg">
+          <div className="text-sm text-[var(--color-text-secondary)]">Keywords Ranking</div>
           <div className="text-xl font-semibold">{metrics.keywords}</div>
-          <div className="text-xs text-green-600">↑ 23 new keywords</div>
+          <div className="text-xs text-[var(--color-success-700)]">↑ 23 new keywords</div>
         </div>
         
-        <div className="p-4 bg-blue-50 rounded-lg">
-          <div className="text-sm text-gray-600">Indexed Pages</div>
+        <div className="p-4 bg-[var(--color-primary-50)] rounded-lg">
+          <div className="text-sm text-[var(--color-text-secondary)]">Indexed Pages</div>
           <div className="text-xl font-semibold">{metrics.indexedPages}</div>
-          <div className="text-xs text-gray-600">of 112 total</div>
+          <div className="text-xs text-[var(--color-text-secondary)]">of 112 total</div>
         </div>
         
-        <div className="p-4 bg-blue-50 rounded-lg">
-          <div className="text-sm text-gray-600">Organic Traffic</div>
+        <div className="p-4 bg-[var(--color-primary-50)] rounded-lg">
+          <div className="text-sm text-[var(--color-text-secondary)]">Organic Traffic</div>
           <div className="text-xl font-semibold">{metrics.organicTraffic}</div>
-          <div className="text-xs text-green-600">↑ 34% vs last month</div>
+          <div className="text-xs text-[var(--color-success-700)]">↑ 34% vs last month</div>
         </div>
       </div>
 
@@ -178,9 +178,9 @@ export default function SEODashboard() {
                   <div className="text-sm mt-1 opacity-80">{issue.fix}</div>
                 </div>
                 <span className={`px-2 py-1 text-xs rounded-full ml-4 ${
-                  issue.severity === 'critical' ? 'bg-red-600 text-white' :
-                  issue.severity === 'warning' ? 'bg-yellow-600 text-white' :
-                  'bg-blue-600 text-white'
+                  issue.severity === 'critical' ? 'bg-[var(--color-error)] text-white' :
+                  issue.severity === 'warning' ? 'bg-[var(--color-warning-700)] text-white' :
+                  'bg-[var(--color-primary-500)] text-white'
                 }`}>
                   {issue.severity}
                 </span>
@@ -194,16 +194,16 @@ export default function SEODashboard() {
       <div className="border-t pt-6">
         <h3 className="text-lg font-semibold mb-4">Quick Actions</h3>
         <div className="flex flex-wrap gap-3">
-          <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+          <button aria-label="Submit Sitemap" className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-[0.98]">
             Submit Sitemap
           </button>
-          <button className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
+          <button aria-label="Request Indexing" className="bg-white border border-slate-200 text-slate-600 font-medium py-3 px-6 rounded-xl transition-all duration-300 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900">
             Request Indexing
           </button>
-          <button className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">
+          <button aria-label="Check Schema" className="bg-white border border-slate-200 text-slate-600 font-medium py-3 px-6 rounded-xl transition-all duration-300 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900">
             Check Schema
           </button>
-          <button className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700">
+          <button aria-label="View Full Report" className="bg-white border border-slate-200 text-slate-600 font-medium py-3 px-6 rounded-xl transition-all duration-300 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900">
             View Full Report
           </button>
         </div>
@@ -213,17 +213,17 @@ export default function SEODashboard() {
       <div className="mt-8 border-t pt-6">
         <h3 className="text-lg font-semibold mb-4">Top Performing Pages</h3>
         <div className="space-y-2">
-          <div className="flex justify-between items-center p-3 bg-gray-50 rounded">
+          <div className="flex justify-between items-center p-3 bg-[var(--color-background)] rounded">
             <span className="text-sm">/services/endoscopic-spine-surgery</span>
-            <span className="text-sm text-green-600">2,341 visits</span>
+            <span className="text-sm text-[var(--color-success-700)]">2,341 visits</span>
           </div>
-          <div className="flex justify-between items-center p-3 bg-gray-50 rounded">
+          <div className="flex justify-between items-center p-3 bg-[var(--color-background)] rounded">
             <span className="text-sm">/conditions/herniated-disc</span>
-            <span className="text-sm text-green-600">1,876 visits</span>
+            <span className="text-sm text-[var(--color-success-700)]">1,876 visits</span>
           </div>
-          <div className="flex justify-between items-center p-3 bg-gray-50 rounded">
+          <div className="flex justify-between items-center p-3 bg-[var(--color-background)] rounded">
             <span className="text-sm">/blog/spine-surgery-cost-guide</span>
-            <span className="text-sm text-green-600">1,234 visits</span>
+            <span className="text-sm text-[var(--color-success-700)]">1,234 visits</span>
           </div>
         </div>
       </div>
@@ -233,7 +233,7 @@ export default function SEODashboard() {
         <h3 className="text-lg font-semibold mb-4">Competitor Rankings</h3>
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <div className="text-sm text-gray-600 mb-2">Your Rankings</div>
+            <div className="text-sm text-[var(--color-text-secondary)] mb-2">Your Rankings</div>
             <div className="space-y-1">
               <div className="text-sm">• "neurosurgeon hyderabad" - #3</div>
               <div className="text-sm">• "endoscopic spine surgery" - #1</div>
@@ -241,7 +241,7 @@ export default function SEODashboard() {
             </div>
           </div>
           <div>
-            <div className="text-sm text-gray-600 mb-2">Competitor Average</div>
+            <div className="text-sm text-[var(--color-text-secondary)] mb-2">Competitor Average</div>
             <div className="space-y-1">
               <div className="text-sm">• Apollo Hospitals - #2</div>
               <div className="text-sm">• KIMS Hospital - #4</div>

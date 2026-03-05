@@ -14,9 +14,9 @@ export default function NAP({
   variant = 'default',
   locationId = 'malakpet'
 }: NAPProps) {
-  const baseClasses = "text-gray-700";
+  const baseClasses = "text-[var(--color-text-secondary)]";
   const compactClasses = "text-sm";
-  const footerClasses = "text-gray-600 text-sm";
+  const footerClasses = "text-[var(--color-text-secondary)] text-sm";
   
   const location = getLocationById(locationId) || getLocationById('malakpet');
 
@@ -36,7 +36,7 @@ export default function NAP({
 
   return (
     <div className={getClasses()}>
-      <div className="font-semibold text-gray-900 mb-2">
+      <div className="font-semibold text-[var(--color-text-primary)] mb-2">
         {location.canonical_display_name}
       </div>
       <div className="space-y-1">
@@ -48,7 +48,7 @@ export default function NAP({
           <span className="font-medium min-w-[80px]">Phone:</span>
           <a 
             href={`tel:${location.telephone}`}
-            className="text-blue-600 hover:text-blue-800 font-medium"
+            className="text-[var(--color-primary-500)] hover:text-[var(--color-primary-800)] font-medium"
           >
             {location.telephone}
           </a>
@@ -58,7 +58,7 @@ export default function NAP({
             <span className="font-medium min-w-[80px]">Email:</span>
             <a 
               href="mailto:hellodr@drsayuj.info" 
-              className="text-blue-600 hover:text-blue-800"
+              className="text-[var(--color-primary-500)] hover:text-[var(--color-primary-800)]"
             >
               hellodr@drsayuj.info
             </a>
