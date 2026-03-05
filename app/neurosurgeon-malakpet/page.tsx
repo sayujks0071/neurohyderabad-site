@@ -1,3 +1,4 @@
+import Breadcrumbs from "@/app/components/Breadcrumbs";
 import React from "react";
 import Link from "next/link";
 import { getLocationById } from "@/src/data/locations";
@@ -9,6 +10,8 @@ import { LocationSchema } from "@/src/components/locations/LocationSchema";
 import TrustProof from "@/app/_components/TrustProof";
 import { patientStories } from "@/src/content/stories";
 import { notFound } from "next/navigation";
+import BreadcrumbSchema from "@/app/components/schemas/BreadcrumbSchema";
+
 
 // Force static generation
 export const dynamic = 'force-static';
@@ -84,6 +87,13 @@ export default function MalakpetNeurosurgeonPage() {
 
   return (
     <main className="bg-white">
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', path: '/' },
+          { name: 'Locations', path: '/locations' },
+          { name: 'Dr. Sayuj Krishnan - Neurosurgeon in Malakpet & Brain-Spine Specialist', path: '/neurosurgeon-malakpet' },
+        ]}
+      />
       <LocationSchema location={location}  faq={FAQ} />
 
       {/* Hero Section */}

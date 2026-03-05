@@ -20,7 +20,7 @@ export const LocationCTAs: React.FC<LocationCTAsProps> = ({ location: legacyLoca
       {/* Call */}
       <a
         href={`tel:${location.telephone}`}
-        className="flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold shadow-lg shadow-green-500/30 hover:scale-[1.02] transition-transform"
+        className="flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-gradient-to-r from-[var(--color-success)] to-[var(--color-success)] text-white font-semibold shadow-lg shadow-green-500/30 hover:scale-[1.02] transition-transform"
       >
         <Phone className="w-5 h-5" />
         <span>Call Now</span>
@@ -46,7 +46,7 @@ export const LocationCTAs: React.FC<LocationCTAsProps> = ({ location: legacyLoca
         target="_blank"
         rel="noopener noreferrer"
         aria-label={`Get directions to ${location.name} (opens in a new tab)`}
-        className="flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-white border-2 border-blue-600 text-blue-600 font-semibold hover:bg-blue-50 transition-colors"
+        className="flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-[var(--color-surface)] border-2 border-[var(--color-primary-500)] text-[var(--color-primary-500)] font-semibold hover:bg-[var(--color-primary-50)] transition-colors"
       >
         <Map className="w-5 h-5" />
         <span>Get Directions</span>
@@ -55,7 +55,7 @@ export const LocationCTAs: React.FC<LocationCTAsProps> = ({ location: legacyLoca
       {/* Book Appointment */}
       <Link
         href="/appointments"
-        className="flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold shadow-lg shadow-blue-500/30 hover:scale-[1.02] transition-transform"
+        className="flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-gradient-to-r from-[var(--color-primary-500)] to-[var(--color-primary-700)] text-white font-semibold shadow-lg shadow-blue-500/30 hover:scale-[1.02] transition-transform"
       >
         <Calendar className="w-5 h-5" />
         <span>Book Appointment</span>

@@ -33,38 +33,38 @@ export default function ProgressiveRolloutExample() {
       <h2 className="text-2xl font-bold">Appointment Booking</h2>
 
       {shouldShowNewFlow ? (
-        <div className="border-2 border-blue-500 rounded-lg p-6">
+        <div className="border-2 border-[var(--color-primary-500)] rounded-lg p-6">
           <div className="flex items-center gap-2 mb-4">
-            <span className="bg-blue-500 text-white px-2 py-1 rounded text-xs font-bold">
+            <span className="bg-[var(--color-primary-50)]0 text-white px-2 py-1 rounded text-xs font-bold">
               NEW
             </span>
-            <span className="text-sm text-gray-600">
+            <span className="text-sm text-[var(--color-text-secondary)]">
               Rollout: {newAppointmentFlowRollout}%
             </span>
           </div>
           <h3 className="text-lg font-semibold mb-2">New Appointment Flow</h3>
-          <p className="text-gray-700 mb-4">
+          <p className="text-[var(--color-text-secondary)] mb-4">
             Experience our improved booking system with faster scheduling and better availability.
           </p>
-          <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+          <button className="bg-[var(--color-primary-500)] text-white px-4 py-2 rounded hover:bg-[var(--color-primary-700)]">
             Book with New Flow
           </button>
         </div>
       ) : (
         <div className="border rounded-lg p-6">
           <h3 className="text-lg font-semibold mb-2">Standard Appointment Flow</h3>
-          <p className="text-gray-700 mb-4">
+          <p className="text-[var(--color-text-secondary)] mb-4">
             Use our standard booking system.
           </p>
-          <button className="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700">
+          <button className="bg-[var(--color-text-secondary)] text-white px-4 py-2 rounded hover:bg-[var(--color-text-secondary)]">
             Book Appointment
           </button>
         </div>
       )}
 
       {enableNewPaymentSystem && (
-        <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded">
-          <p className="text-sm text-green-800">
+        <div className="mt-4 p-4 bg-[var(--color-success-light)] border border-[var(--color-success)] rounded">
+          <p className="text-sm text-[var(--color-success)]">
             ✓ New payment system is enabled
           </p>
         </div>

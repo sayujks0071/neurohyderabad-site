@@ -11,6 +11,8 @@ import ReviewedBy from '@/app/_components/ReviewedBy';
 import MedicalCitations from '@/app/_components/MedicalCitations';
 import SmartImage from '@/components/SmartImage';
 import LocationPageTracker from '@/src/components/LocationPageTracker';
+import BreadcrumbSchema from "@/app/components/schemas/BreadcrumbSchema";
+
 
 // Force static generation
 export const dynamic = 'force-static';
@@ -69,6 +71,13 @@ export default function NeurosurgeonNearKondapurFAQPage() {
 
   return (
     <main id="main" className="max-w-4xl mx-auto px-4 py-12">
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', path: '/' },
+          { name: 'Locations', path: '/locations' },
+          { name: 'Neurosurgeon Near Kondapur FAQ | Dr. Sayuj Krishnan', path: '/locations/neurosurgeon-near-kondapur-faq' },
+        ]}
+      />
       <LocationSchema location={location}  faq={FAQ} />
 
       <h1 className="text-3xl md:text-4xl font-bold mb-8">Neurosurgeon Near Kondapur FAQ | Dr. Sayuj Krishnan</h1>

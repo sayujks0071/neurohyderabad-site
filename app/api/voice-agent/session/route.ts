@@ -5,25 +5,27 @@ export async function POST(req: NextRequest) {
   try {
     const { instructions, voice = 'alloy', model = 'gpt-4o-realtime-preview' } = await req.json();
 
-    const apiKey = process.env.AI_GATEWAY_API_KEY || process.env.OPENAI_API_KEY;
+    const apiKey = process.env.AI_GATEWAY_API_KEY;
 
     // Validate API key
     if (!apiKey) {
       return NextResponse.json(
-        { error: 'OpenAI/Gateway API key not configured' },
+        { error: 'AI Gateway API key not configured' },
         { status: 500 }
       );
     }
 
-    const isGateway = isAIGatewayConfigured();
+    if (!isAIGatewayConfigured()) {
+      return NextResponse.json(
+        { error: 'Vercel AI Gateway is not configured. Please set AI_GATEWAY_API_KEY or deploy on Vercel.' },
+        { status: 500 }
+      );
+    }
 
-    const baseUrl = isGateway
-      ? (process.env.AI_GATEWAY_BASE_URL || 'https://ai-gateway.vercel.sh/v1')
-      : 'https://api.openai.com/v1';
+    const baseUrl = process.env.AI_GATEWAY_BASE_URL || 'https://ai-gateway.vercel.sh/v1';
+    const finalModel = getGatewayModel(model);
 
-    const finalModel = isGateway ? getGatewayModel(model) : model;
-
-    // Create a session with OpenAI Realtime API (or via Gateway)
+    // Create a session via Gateway
     const response = await fetch(`${baseUrl}/realtime/sessions`, {
       method: 'POST',
       headers: {
@@ -48,7 +50,7 @@ export async function POST(req: NextRequest) {
 
     if (!response.ok) {
       const error = await response.json();
-      console.error('OpenAI/Gateway API error:', error);
+      console.error('Gateway API error:', error);
       return NextResponse.json(
         { error: 'Failed to create voice session' },
         { status: response.status }

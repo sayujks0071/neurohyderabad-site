@@ -12,6 +12,7 @@ import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import { getServiceSources } from '../sources';
 import MedicalWebPageSchema from '../../components/schemas/MedicalWebPageSchema';
+import FAQPageSchema from '@/app/_components/FAQPageSchema';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import SurgeryComparisonTable from '@/src/components/SurgeryComparisonTable';
 import PatientJourneySection from '@/src/components/PatientJourneySection';
@@ -321,6 +322,8 @@ export default function SpineSurgeryHyderabadPage() {
             </div>
           </div>
         </section>
+
+        <FAQPageSchema faqs={faqs} pageUrl={`${SITE_URL}/services/${SERVICE_SLUG}`} />
 
         <section className="mb-16 grid lg:grid-cols-[1.2fr_1fr] gap-10 items-start">
           <div className="space-y-6">

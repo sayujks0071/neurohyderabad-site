@@ -326,8 +326,8 @@ Speak naturally and conversationally. Keep responses concise (2-3 sentences max)
     <div className="voice-agent-widget bg-white rounded-lg shadow-lg p-6 max-w-md mx-auto">
       {/* Header */}
       <div className="text-center mb-4">
-        <h3 className="text-xl font-semibold text-gray-900">AI Voice Assistant</h3>
-        <p className="text-sm text-gray-600">
+        <h3 className="text-xl font-semibold text-[var(--color-text-primary)]">AI Voice Assistant</h3>
+        <p className="text-sm text-[var(--color-text-secondary)]">
           {isConnected ? 'Connected - Start talking!' :
            isInitializing ? 'Connecting...' :
            'Click to start voice conversation'}
@@ -337,30 +337,30 @@ Speak naturally and conversationally. Keep responses concise (2-3 sentences max)
       {/* Visual Feedback */}
       <div className="flex justify-center mb-6" aria-hidden="true">
         <div className={`relative w-32 h-32 rounded-full flex items-center justify-center transition-all duration-300 ${
-          isListening ? 'bg-green-100 animate-pulse' :
-          isSpeaking ? 'bg-blue-100 animate-pulse' :
-          isConnected ? 'bg-gray-100' :
-          isInitializing ? 'bg-yellow-100' :
-          'bg-gray-50'
+          isListening ? 'bg-[var(--color-success-light)] animate-pulse' :
+          isSpeaking ? 'bg-[var(--color-primary-100)] animate-pulse' :
+          isConnected ? 'bg-[var(--color-background)]' :
+          isInitializing ? 'bg-[var(--color-warning-light)]' :
+          'bg-[var(--color-background)]'
         }`}>
           <div className={`absolute inset-0 rounded-full ${
-            isListening ? 'bg-green-500 opacity-20 animate-ping' :
-            isSpeaking ? 'bg-blue-500 opacity-20 animate-ping' : ''
+            isListening ? 'bg-[var(--color-success)] opacity-20 animate-ping' :
+            isSpeaking ? 'bg-[var(--color-primary-500)] opacity-20 animate-ping' : ''
           }`} />
 
           {isInitializing ? (
-            <div className="w-12 h-12 border-4 border-yellow-600 border-t-transparent rounded-full animate-spin z-10" />
+            <div className="w-12 h-12 border-4 border-[var(--color-warning-700)] border-t-transparent rounded-full animate-spin z-10" />
           ) : isListening ? (
-            <Mic className="w-12 h-12 text-green-600 z-10" />
+            <Mic className="w-12 h-12 text-[var(--color-success-700)] z-10" />
           ) : isSpeaking ? (
             <div className="flex gap-1 z-10">
-              <div className="w-1 h-8 bg-blue-600 animate-pulse" style={{ animationDelay: '0ms' }} />
-              <div className="w-1 h-12 bg-blue-600 animate-pulse" style={{ animationDelay: '150ms' }} />
-              <div className="w-1 h-6 bg-blue-600 animate-pulse" style={{ animationDelay: '300ms' }} />
-              <div className="w-1 h-10 bg-blue-600 animate-pulse" style={{ animationDelay: '450ms' }} />
+              <div className="w-1 h-8 bg-[var(--color-primary-500)] animate-pulse" style={{ animationDelay: '0ms' }} />
+              <div className="w-1 h-12 bg-[var(--color-primary-500)] animate-pulse" style={{ animationDelay: '150ms' }} />
+              <div className="w-1 h-6 bg-[var(--color-primary-500)] animate-pulse" style={{ animationDelay: '300ms' }} />
+              <div className="w-1 h-10 bg-[var(--color-primary-500)] animate-pulse" style={{ animationDelay: '450ms' }} />
             </div>
           ) : (
-            <MicOff className="w-12 h-12 text-gray-400 z-10" />
+            <MicOff className="w-12 h-12 text-[var(--color-text-secondary)] z-10" />
           )}
         </div>
       </div>
@@ -373,21 +373,21 @@ Speak naturally and conversationally. Keep responses concise (2-3 sentences max)
         aria-atomic="true"
       >
         {error ? (
-          <p className="text-sm text-red-600">{error}</p>
+          <p className="text-sm text-[var(--color-error)]">{error}</p>
         ) : isInitializing ? (
-          <p className="text-sm text-yellow-600 font-medium">Initializing voice assistant...</p>
+          <p className="text-sm text-[var(--color-warning-700)] font-medium">Initializing voice assistant...</p>
         ) : isListening ? (
-          <p className="text-sm text-green-600 font-medium">Listening...</p>
+          <p className="text-sm text-[var(--color-success-700)] font-medium">Listening...</p>
         ) : isSpeaking ? (
-          <p className="text-sm text-blue-600 font-medium">Priya is speaking...</p>
+          <p className="text-sm text-[var(--color-primary-500)] font-medium">Priya is speaking...</p>
         ) : isConnected ? (
-          <p className="text-sm text-gray-600">Ready to help you</p>
+          <p className="text-sm text-[var(--color-text-secondary)]">Ready to help you</p>
         ) : (
-          <p className="text-sm text-gray-500">Start a conversation with Priya</p>
+          <p className="text-sm text-[var(--color-text-secondary)]">Start a conversation with Priya</p>
         )}
 
         {transcript && (
-          <p className="text-xs text-gray-500 mt-2 italic">&quot;{transcript}&quot;</p>
+          <p className="text-xs text-[var(--color-text-secondary)] mt-2 italic">&quot;{transcript}&quot;</p>
         )}
       </div>
 
@@ -396,7 +396,7 @@ Speak naturally and conversationally. Keep responses concise (2-3 sentences max)
         {!isConnected && !isInitializing ? (
           <button
             onClick={connect}
-            className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors font-medium"
+            className="flex items-center gap-2 px-6 py-3 bg-[var(--color-primary-500)] text-white rounded-full hover:bg-[var(--color-primary-700)] transition-colors font-medium"
           >
             <Phone className="w-5 h-5" />
             Start Conversation
@@ -405,7 +405,7 @@ Speak naturally and conversationally. Keep responses concise (2-3 sentences max)
           <button
             onClick={disconnect}
             disabled={isInitializing}
-            className="flex items-center gap-2 px-6 py-3 bg-red-600 text-white rounded-full hover:bg-red-700 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex items-center gap-2 px-6 py-3 bg-[var(--color-error)] text-white rounded-full hover:bg-[var(--color-error-700)] transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <PhoneOff className="w-5 h-5" />
             End Call
@@ -414,9 +414,9 @@ Speak naturally and conversationally. Keep responses concise (2-3 sentences max)
       </div>
 
       {/* Instructions */}
-      <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-        <h4 className="text-sm font-semibold text-blue-900 mb-2">How to use:</h4>
-        <ul className="text-xs text-blue-800 space-y-1">
+      <div className="mt-6 p-4 bg-[var(--color-primary-50)] rounded-lg">
+        <h4 className="text-sm font-semibold text-[var(--color-primary-900)] mb-2">How to use:</h4>
+        <ul className="text-xs text-[var(--color-primary-800)] space-y-1">
           <li>• Click &quot;Start Conversation&quot; to begin</li>
           <li>• Allow microphone access when prompted</li>
           <li>• Speak naturally - Priya will respond in real-time</li>
@@ -438,9 +438,9 @@ Speak naturally and conversationally. Keep responses concise (2-3 sentences max)
       {/* Fallback Notice */}
       {error && (
         <div className="mt-4 text-center">
-          <p className="text-xs text-gray-500">
+          <p className="text-xs text-[var(--color-text-secondary)]">
             Having trouble? Try our{' '}
-            <Link href="/appointments" className="text-blue-600 hover:underline">
+            <Link href="/appointments" className="text-[var(--color-primary-500)] hover:underline">
               traditional booking form
             </Link>
           </p>

@@ -11,7 +11,7 @@ import Button from './Button';
 
 function intentTone(intent: CTAIntent) {
   if (intent === 'whatsapp' || intent === 'call') {
-    return 'bg-green-700 hover:bg-green-800 text-white';
+    return 'bg-[var(--color-success-700)] hover:bg-[var(--color-success-700)] text-white';
   }
   return '';
 }
@@ -49,7 +49,7 @@ export default function HeroCTAButtons() {
   return (
     <div className="space-y-3">
       {config.heroKicker && (
-        <p className="text-sm text-blue-100">
+        <p className="text-sm text-[var(--color-primary-100)]">
           {config.heroKicker}
         </p>
       )}
@@ -84,7 +84,7 @@ export default function HeroCTAButtons() {
         </Button>
       </div>
       {config.heroHelper && (
-        <p className="text-sm text-blue-50">
+        <p className="text-sm text-[var(--color-primary-50)]">
           {config.heroHelper}
         </p>
       )}

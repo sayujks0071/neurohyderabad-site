@@ -124,6 +124,7 @@ export default function EngagementTracker({
     window.addEventListener('beforeunload', handleBeforeUnload);
 
     return () => {
+      if (activityTimeout) clearTimeout(activityTimeout);
       clearInterval(milestoneInterval);
       clearInterval(timeTrackingInterval);
       if (activityTimeout) clearTimeout(activityTimeout);

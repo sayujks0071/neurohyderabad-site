@@ -203,7 +203,7 @@ export default function SEODashboard({ pageType, pageSlug, serviceOrCondition }:
     return (
       <button
         onClick={() => setIsVisible(true)}
-        className="fixed bottom-4 right-4 bg-blue-600 text-white px-4 py-2 rounded-lg shadow-lg z-50"
+        className="fixed bottom-4 right-4 bg-[var(--color-primary-500)] text-white px-4 py-2 rounded-lg shadow-lg z-50"
       >
         SEO Dashboard
       </button>
@@ -212,7 +212,7 @@ export default function SEODashboard({ pageType, pageSlug, serviceOrCondition }:
 
   if (!metrics) {
     return (
-      <div className="fixed bottom-4 right-4 bg-gray-100 p-4 rounded-lg shadow-lg z-50 max-w-sm">
+      <div className="fixed bottom-4 right-4 bg-[var(--color-background)] p-4 rounded-lg shadow-lg z-50 max-w-sm">
         <h3 className="text-lg font-semibold mb-2">SEO Dashboard</h3>
         <p>Running SEO audit...</p>
       </div>
@@ -220,27 +220,27 @@ export default function SEODashboard({ pageType, pageSlug, serviceOrCondition }:
   }
 
   const getScoreColor = (score: number, thresholds: { good: number; needsImprovement: number }) => {
-    if (score >= thresholds.good) return 'text-green-600';
-    if (score >= thresholds.needsImprovement) return 'text-yellow-600';
-    return 'text-red-600';
+    if (score >= thresholds.good) return 'text-[var(--color-success-700)]';
+    if (score >= thresholds.needsImprovement) return 'text-[var(--color-warning-700)]';
+    return 'text-[var(--color-error)]';
   };
 
   const getBooleanIcon = (value: boolean) => value ? '✅' : '❌';
 
   return (
-    <div className="fixed bottom-4 right-4 bg-white p-6 rounded-lg shadow-lg z-50 max-w-md max-h-96 overflow-y-auto">
+    <div className="fixed bottom-4 right-4 bg-[var(--color-surface)] p-6 rounded-lg shadow-lg z-50 max-w-md max-h-96 overflow-y-auto">
       <div className="flex justify-between items-center mb-4">
         <h3 className="text-lg font-semibold">SEO Dashboard</h3>
         <button 
           onClick={runSEOAudit}
-          className="bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700"
+          className="bg-[var(--color-primary-500)] text-white px-3 py-1 rounded text-sm hover:bg-[var(--color-primary-700)]"
         >
           Refresh
         </button>
         {process.env.NODE_ENV === 'development' && (
           <button 
             onClick={() => setIsVisible(false)}
-            className="ml-2 text-gray-500 hover:text-gray-700"
+            className="ml-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text-secondary)]"
           >
             ×
           </button>
@@ -249,7 +249,7 @@ export default function SEODashboard({ pageType, pageSlug, serviceOrCondition }:
 
       <div className="space-y-4 text-sm">
         {/* Core Web Vitals */}
-        <div className="bg-gray-50 p-3 rounded">
+        <div className="bg-[var(--color-background)] p-3 rounded">
           <h4 className="font-semibold mb-2">Core Web Vitals</h4>
           <div className="space-y-1">
             <div>LCP: <span className={getScoreColor(metrics.lcp || 0, { good: 2500, needsImprovement: 4000 })}>
@@ -268,7 +268,7 @@ export default function SEODashboard({ pageType, pageSlug, serviceOrCondition }:
         </div>
 
         {/* Content Analysis */}
-        <div className="bg-gray-50 p-3 rounded">
+        <div className="bg-[var(--color-background)] p-3 rounded">
           <h4 className="font-semibold mb-2">Content</h4>
           <div className="space-y-1">
             <div>Words: {metrics.wordCount.toLocaleString()}</div>
@@ -281,7 +281,7 @@ export default function SEODashboard({ pageType, pageSlug, serviceOrCondition }:
         </div>
 
         {/* Technical SEO */}
-        <div className="bg-gray-50 p-3 rounded">
+        <div className="bg-[var(--color-background)] p-3 rounded">
           <h4 className="font-semibold mb-2">Technical SEO</h4>
           <div className="space-y-1">
             <div>Title: <span className={getScoreColor(metrics.titleLength, { good: 30, needsImprovement: 60 })}>
@@ -297,7 +297,7 @@ export default function SEODashboard({ pageType, pageSlug, serviceOrCondition }:
         </div>
 
         {/* Links */}
-        <div className="bg-gray-50 p-3 rounded">
+        <div className="bg-[var(--color-background)] p-3 rounded">
           <h4 className="font-semibold mb-2">Links</h4>
           <div className="space-y-1">
             <div>Internal: {metrics.internalLinkCount}</div>
@@ -306,12 +306,12 @@ export default function SEODashboard({ pageType, pageSlug, serviceOrCondition }:
         </div>
 
         {/* Page Info */}
-        <div className="bg-gray-50 p-3 rounded">
+        <div className="bg-[var(--color-background)] p-3 rounded">
           <h4 className="font-semibold mb-2">Page Info</h4>
           <div className="space-y-1">
             <div>Type: {metrics.pageType}</div>
             <div>Mobile: {getBooleanIcon(metrics.isMobileFriendly)}</div>
-            <div className="text-xs text-gray-500">
+            <div className="text-xs text-[var(--color-text-secondary)]">
               {new Date(metrics.timestamp).toLocaleTimeString()}
             </div>
           </div>
