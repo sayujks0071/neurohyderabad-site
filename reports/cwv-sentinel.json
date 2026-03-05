@@ -1,5 +1,5 @@
 {
-  "timestamp": "2024-05-20T00:00:00Z",
+  "timestamp": "2025-03-05T00:00:00Z",
   "commit_hash": "HEAD",
   "pages": {
     "home": {
@@ -10,24 +10,6 @@
       "implemented_fix": "Changed batchSize from 32 to 4 in app/components/scrollytelling/Hero.tsx.",
       "expected_impact": "Significantly improves LCP (Largest Contentful Paint) and INP (Interaction to Next Paint) by unblocking the main thread and making the hero text visible much earlier. The loading screen disappears faster because only 4 frames are awaited initially instead of 32.",
       "verification_steps": "Run the site locally (npm run dev) and load the homepage. Observe that the loading overlay disappears much faster than before, revealing the hero content sooner. The scrub scroll will still work as remaining images load in the background."
-    },
-    "appointment": {
-      "url": "/appointments",
-      "type": "appointment",
-      "suspected_issue": "None apparent from code structure.",
-      "proposed_fix": "None"
-    },
-    "location": {
-      "url": "/locations",
-      "type": "location",
-      "suspected_issue": "None apparent from code structure.",
-      "proposed_fix": "None"
-    },
-    "condition": {
-      "url": "/conditions",
-      "type": "condition",
-      "suspected_issue": "None apparent from code structure.",
-      "proposed_fix": "None"
     }
   }
 }

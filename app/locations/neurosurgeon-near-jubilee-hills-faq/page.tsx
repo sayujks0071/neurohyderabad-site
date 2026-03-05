@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { getLocationById } from "@/src/data/locations";
 import { LocationNAPCard } from "@/src/components/locations/LocationNAPCard";
+import { LocationMapEmbed } from "@/src/components/locations/LocationMapEmbed";
 import { LocationCTAs } from "@/src/components/locations/LocationCTAs";
 import { LocationSchema } from "@/src/components/locations/LocationSchema";
 import { LocalPathways } from "@/src/components/locations/LocalPathways";
@@ -10,6 +11,8 @@ import ReviewedBy from '@/app/_components/ReviewedBy';
 import MedicalCitations from '@/app/_components/MedicalCitations';
 import SmartImage from '@/components/SmartImage';
 import LocationPageTracker from '@/src/components/LocationPageTracker';
+import BreadcrumbSchema from "@/app/components/schemas/BreadcrumbSchema";
+
 
 // Force static generation
 export const dynamic = 'force-static';
@@ -65,6 +68,13 @@ export default function NeurosurgeonNearJubileeHillsFAQPage() {
 
   return (
     <main id="main" className="max-w-4xl mx-auto px-4 py-12">
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', path: '/' },
+          { name: 'Locations', path: '/locations' },
+          { name: 'Neurosurgeon Near Jubilee Hills FAQ | Dr. Sayuj Krishnan', path: '/locations/neurosurgeon-near-jubilee-hills-faq' },
+        ]}
+      />
       <LocationSchema location={location}  faq={FAQ} />
 
       <h1 className="text-3xl md:text-4xl font-bold mb-8">Neurosurgeon Near Jubilee Hills FAQ | Dr. Sayuj Krishnan</h1>
@@ -187,7 +197,12 @@ export default function NeurosurgeonNearJubileeHillsFAQPage() {
         <LocationCTAs location={location} className="grid-cols-1 sm:grid-cols-2" />
       </div>
 
+
       <div className="mt-12">
+        <h2 className="text-2xl font-bold mb-6 text-gray-900">Map & Directions</h2>
+        <LocationMapEmbed location={location} />
+      </div>
+<div className="mt-12">
         <LocalPathways mode="location" locationId={location.id} />
       </div>
 

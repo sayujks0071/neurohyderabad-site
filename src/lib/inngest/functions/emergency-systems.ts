@@ -1,7 +1,7 @@
 import { inngest } from "@/src/lib/inngest";
 import type { Events } from "@/src/lib/inngest";
 import { emergencyCaseRepository } from "@/src/lib/emergency/repository";
-import EmailService from "@/src/lib/email";
+import EmailService from "@/lib/email";
 
 // Emergency Notification System
 export const emergencyNotificationSystem = inngest.createFunction(

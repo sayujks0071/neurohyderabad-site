@@ -236,6 +236,9 @@ importers:
       next-seo:
         specifier: ^6.0.0
         version: 6.8.0(next@16.2.0-canary.6(@babel/core@7.29.0)(@opentelemetry/api@1.9.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      node-loader:
+        specifier: ^2.1.0
+        version: 2.1.0(webpack@5.105.0(@swc/core@1.15.3))
       opentype.js:
         specifier: ^1.3.4
         version: 1.3.4
@@ -8157,6 +8160,12 @@ packages:
     resolution: {integrity: sha512-s0KzNOWwOJJgPG6wxg6cKohnAl9Wk/oW1KrQaVzJBjQwVcUGPQCzpR46Ximygjqj/3KhOrtJXnYMp/xYAXp75g==}
     engines: {node: '>=16.0.0'}
     hasBin: true
+
+  node-loader@2.1.0:
+    resolution: {integrity: sha512-OwjPkyh8+7jW8DMd/iq71uU1Sspufr/C2+c3t0p08J3CrM9ApZ4U53xuisNrDXOHyGi5OYHgtfmmh+aK9zJA6g==}
+    engines: {node: '>= 10.13.0'}
+    peerDependencies:
+      webpack: ^5.0.0
 
   node-releases@2.0.27:
     resolution: {integrity: sha512-nmh3lCkYZ3grZvqcCH+fjmQ7X+H0OeZgP40OierEaAptX4XofMh5kwNbWh7lBduUzCcV/8kZ+NDLCwm2iorIlA==}
@@ -20446,6 +20455,11 @@ snapshots:
       node-addon-api: 8.6.0
       node-gyp-build: 4.8.4
     optional: true
+
+  node-loader@2.1.0(webpack@5.105.0(@swc/core@1.15.3)):
+    dependencies:
+      loader-utils: 2.0.4
+      webpack: 5.105.0(@swc/core@1.15.3)(esbuild@0.25.12)
 
   node-releases@2.0.27: {}
 

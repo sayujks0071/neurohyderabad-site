@@ -33,27 +33,27 @@ export default function PersonalizationExample() {
   return (
     <div className="space-y-4">
       {userSegment === 'new' && showWelcomeOffer && (
-        <div className="bg-gradient-to-r from-blue-500 to-purple-500 text-white p-6 rounded-lg">
+        <div className="bg-gradient-to-r from-[var(--color-primary-500)] to-purple-500 text-white p-6 rounded-lg">
           <h3 className="text-xl font-bold mb-2">Welcome! Special Offer</h3>
           <p>Get 10% off your first consultation. Book now!</p>
         </div>
       )}
 
       {userSegment === 'returning' && showLoyaltyProgram && (
-        <div className="bg-gradient-to-r from-green-500 to-teal-500 text-white p-6 rounded-lg">
+        <div className="bg-gradient-to-r from-[var(--color-success)] to-[var(--color-success)] text-white p-6 rounded-lg">
           <h3 className="text-xl font-bold mb-2">Loyalty Rewards</h3>
           <p>Thank you for being a valued patient. Earn points with every visit!</p>
         </div>
       )}
 
       {userSegment === 'vip' && showVIPBenefits && (
-        <div className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white p-6 rounded-lg">
+        <div className="bg-gradient-to-r from-[var(--color-warning)] to-[var(--color-warning-700)] text-white p-6 rounded-lg">
           <h3 className="text-xl font-bold mb-2">VIP Benefits</h3>
           <p>Priority scheduling, dedicated coordinator, and exclusive services.</p>
         </div>
       )}
 
-      <div className="text-sm text-gray-600">
+      <div className="text-sm text-[var(--color-text-secondary)]">
         Current segment: <strong>{userSegment}</strong>
       </div>
     </div>

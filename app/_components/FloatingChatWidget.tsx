@@ -187,17 +187,17 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
             setIsMinimized(false);
           }
         }}
-        className={`fixed bottom-24 right-4 z-[60] p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300 ${
+        className={`fixed bottom-24 right-4 z-[60] p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-[var(--color-primary-300)] ${
           isOpen && !isMinimized
-            ? 'bg-gray-800 text-white rotate-90'
-            : 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white animate-bounce-subtle'
+            ? 'bg-[var(--color-text-primary)] text-white rotate-90'
+            : 'bg-gradient-to-r from-[var(--color-primary-500)] to-[var(--color-primary-700)] text-white animate-bounce-subtle'
         }`}
         aria-label={isOpen ? (isMinimized ? "Expand chat" : "Close chat") : "Open AI Assistant"}
         aria-expanded={isOpen && !isMinimized}
       >
         {isOpen && !isMinimized ? <X size={24} /> : <MessageCircle size={28} />}
         {!isOpen && (
-          <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full shadow-sm animate-pulse">
+          <span className="absolute -top-2 -right-2 bg-[var(--color-error-light)]0 text-white text-xs font-bold px-2 py-0.5 rounded-full shadow-sm animate-pulse">
             AI
           </span>
         )}
@@ -205,10 +205,10 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
 
       {/* Minimized State */}
       {isOpen && isMinimized && (
-        <div className="fixed bottom-24 right-4 w-[200px] bg-white rounded-lg shadow-lg border border-gray-200 z-[60] p-3 animate-in slide-in-from-bottom-4 fade-in duration-200">
+        <div className="fixed bottom-24 right-4 w-[200px] bg-[var(--color-surface)] rounded-lg shadow-lg border border-[var(--color-border)] z-[60] p-3 animate-in slide-in-from-bottom-4 fade-in duration-200">
           <button
             onClick={() => setIsMinimized(false)}
-            className="w-full text-left text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
+            className="w-full text-left text-sm font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-primary-500)] transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)] rounded"
           >
             Click to expand chat
           </button>
@@ -217,17 +217,17 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
 
       {/* Chat Window */}
       {isOpen && !isMinimized && (
-        <div className="fixed bottom-40 right-4 w-[350px] max-w-[calc(100vw-32px)] h-[500px] max-h-[calc(100vh-180px)] bg-white rounded-2xl shadow-2xl border border-gray-200 z-[60] flex flex-col overflow-hidden animate-in slide-in-from-bottom-10 fade-in duration-300">
+        <div className="fixed bottom-40 right-4 w-[350px] max-w-[calc(100vw-32px)] h-[500px] max-h-[calc(100vh-180px)] bg-[var(--color-surface)] rounded-2xl shadow-2xl border border-[var(--color-border)] z-[60] flex flex-col overflow-hidden animate-in slide-in-from-bottom-10 fade-in duration-300">
           {/* Header */}
-          <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-4 flex justify-between items-center shrink-0">
+          <div className="bg-gradient-to-r from-[var(--color-primary-500)] to-[var(--color-primary-700)] text-white p-4 flex justify-between items-center shrink-0">
             <div className="flex items-center gap-2">
-              <div className="bg-white/20 p-1.5 rounded-lg">
+              <div className="bg-[var(--color-surface)]/20 p-1.5 rounded-lg">
                 <Sparkles size={18} />
               </div>
               <div>
                 <h3 className="font-semibold text-sm">Dr. Sayuj's AI Assistant</h3>
-                <p className="text-xs text-blue-100 flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span>
+                <p className="text-xs text-[var(--color-primary-100)] flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 bg-[var(--color-success)] rounded-full animate-pulse"></span>
                   Online
                 </p>
               </div>
@@ -235,14 +235,14 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setIsMinimized(true)}
-                className="p-1 hover:bg-white/20 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-white"
+                className="p-1 hover:bg-[var(--color-surface)]/20 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-white"
                 aria-label="Minimize chat"
               >
                 <Minus size={18} />
               </button>
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1 hover:bg-white/20 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-white"
+                className="p-1 hover:bg-[var(--color-surface)]/20 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-white"
                 aria-label="Close chat"
               >
                 <X size={18} />
@@ -252,17 +252,17 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
 
           {/* Emergency Alert */}
           {showEmergencyAlert && (
-            <div role="alert" className="bg-red-50 p-3 border-b border-red-100 flex items-start gap-2 shrink-0">
-              <AlertTriangle className="text-red-600 shrink-0 mt-0.5" size={16} />
-              <p className="text-xs text-red-700 font-medium">
-                Emergency? Call <a href="tel:+919778280044" className="underline font-bold focus:outline-none focus:ring-2 focus:ring-red-500 rounded px-1">+91-9778280044</a>
+            <div role="alert" className="bg-[var(--color-error-light)] p-3 border-b border-[var(--color-error-light)] flex items-start gap-2 shrink-0">
+              <AlertTriangle className="text-[var(--color-error)] shrink-0 mt-0.5" size={16} />
+              <p className="text-xs text-[var(--color-error-700)] font-medium">
+                Emergency? Call <a href="tel:+919778280044" className="underline font-bold focus:outline-none focus:ring-2 focus:ring-[var(--color-error)] rounded px-1">+91-9778280044</a>
               </p>
             </div>
           )}
 
           {/* Messages Area */}
           <div
-            className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50/50 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
+            className="flex-1 overflow-y-auto p-4 space-y-4 bg-[var(--color-background)]/50 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
             role="log"
             aria-live="polite"
           >
@@ -286,8 +286,8 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
                   <div
                     className={`max-w-[85%] px-3 py-2 rounded-2xl text-sm ${
                       message.role === 'user'
-                        ? 'bg-blue-600 text-white rounded-br-none'
-                        : 'bg-white text-gray-800 border border-gray-100 shadow-sm rounded-bl-none'
+                        ? 'bg-[var(--color-primary-500)] text-white rounded-br-none'
+                        : 'bg-[var(--color-surface)] text-[var(--color-text-primary)] border border-[var(--color-border)] shadow-sm rounded-bl-none'
                     }`}
                   >
                     <p className="whitespace-pre-wrap break-words">{content || '...'}</p>
@@ -298,10 +298,10 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
 
             {isLoading && (
               <div className="flex justify-start">
-                <div className="bg-white border border-gray-100 shadow-sm px-3 py-2 rounded-2xl rounded-bl-none">
+                <div className="bg-[var(--color-surface)] border border-[var(--color-border)] shadow-sm px-3 py-2 rounded-2xl rounded-bl-none">
                   <div className="flex items-center space-x-2">
-                    <Loader2 size={14} className="animate-spin text-blue-600" />
-                    <span className="text-xs text-gray-500">
+                    <Loader2 size={14} className="animate-spin text-[var(--color-primary-500)]" />
+                    <span className="text-xs text-[var(--color-text-secondary)]">
                        {messages[messages.length - 1]?.role === 'assistant' ? 'Typing...' : 'Thinking...'}
                     </span>
                   </div>
@@ -311,8 +311,8 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
             
             {error && (
               <div className="flex justify-start">
-                <div className="bg-red-50 border border-red-200 shadow-sm px-3 py-2 rounded-2xl rounded-bl-none">
-                  <p className="text-xs text-red-700">
+                <div className="bg-[var(--color-error-light)] border border-[var(--color-error-light)] shadow-sm px-3 py-2 rounded-2xl rounded-bl-none">
+                  <p className="text-xs text-[var(--color-error-700)]">
                     {error.message || "I'm having trouble right now. Please call +91-9778280044 for immediate assistance."}
                   </p>
                 </div>
@@ -323,12 +323,12 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
 
           {/* Quick Actions (only if few messages) */}
           {messages.length <= 2 && !isLoading && (
-            <div className="px-4 py-2 bg-gray-50/50 flex gap-2 overflow-x-auto no-scrollbar shrink-0">
+            <div className="px-4 py-2 bg-[var(--color-background)]/50 flex gap-2 overflow-x-auto no-scrollbar shrink-0">
               {quickActions.map((action, i) => (
                 <button
                   key={i}
                   onClick={() => handleSendMessage(action)}
-                  className="whitespace-nowrap px-3 py-1 bg-white border border-blue-100 text-blue-600 text-xs rounded-full hover:bg-blue-50 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
+                  className="whitespace-nowrap px-3 py-1 bg-[var(--color-surface)] border border-[var(--color-primary-100)] text-[var(--color-primary-500)] text-xs rounded-full hover:bg-[var(--color-primary-50)] transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)] focus:ring-offset-1"
                 >
                   {action}
                 </button>
@@ -337,7 +337,7 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
           )}
 
           {/* Input Area */}
-          <form onSubmit={onSubmit} className="p-3 border-t border-gray-100 bg-white shrink-0">
+          <form onSubmit={onSubmit} className="p-3 border-t border-[var(--color-border)] bg-[var(--color-surface)] shrink-0">
             <div className="flex items-center gap-2 relative">
               <label htmlFor="chat-input" className="sr-only">Ask a question</label>
               <input
@@ -347,19 +347,19 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask anything..."
-                className="w-full pl-4 pr-10 py-2.5 bg-gray-100 border-none rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:bg-white transition-all"
+                className="w-full pl-4 pr-10 py-2.5 bg-[var(--color-background)] border-none rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)]/50 focus:bg-[var(--color-surface)] transition-all"
                 disabled={isLoading}
               />
               <button
                 type="submit"
                 aria-label="Send message"
                 disabled={!input.trim() || isLoading}
-                className="absolute right-1.5 p-1.5 bg-blue-600 text-white rounded-full hover:bg-blue-700 disabled:opacity-50 disabled:hover:bg-blue-600 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
+                className="absolute right-1.5 p-1.5 bg-[var(--color-primary-500)] text-white rounded-full hover:bg-[var(--color-primary-700)] disabled:opacity-50 disabled:hover:bg-[var(--color-primary-500)] transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)] focus:ring-offset-1"
               >
                 <Send size={14} />
               </button>
             </div>
-            <p className="text-[10px] text-center text-gray-400 mt-2">
+            <p className="text-[10px] text-center text-[var(--color-text-secondary)] mt-2">
               AI can make mistakes. For emergencies call +91-9778280044.
             </p>
           </form>

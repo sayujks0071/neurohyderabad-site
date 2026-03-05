@@ -2,7 +2,7 @@ import { inngest } from "@/src/lib/inngest";
 import type { Events } from "@/src/lib/inngest";
 import { crm } from "@/src/lib/crm/index";
 import { CalendarService } from "@/src/lib/calendar/index";
-import { EmailService } from "@/src/lib/email";
+import { EmailService } from "@/lib/email";
 import { generatePatientEducation } from "@/src/lib/gemini/file-search";
 
 // Patient Journey: Initial Contact to Consultation

@@ -7,7 +7,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import crypto from 'crypto';
-import { EmailService } from '@/src/lib/email';
+import { EmailService } from '@/lib/email';
 
 interface MiddlewareAlert {
   id: string;

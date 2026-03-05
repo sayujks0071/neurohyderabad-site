@@ -63,7 +63,7 @@ export default function LazyImage({
     >
       {!isInView && (
         <div
-          className="absolute inset-0 bg-gray-200 animate-pulse"
+          className="absolute inset-0 bg-[var(--color-border)] animate-pulse"
           style={{ width, height }}
         />
       )}

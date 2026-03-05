@@ -239,6 +239,8 @@ const ChatBot = () => {
           </div>
 
           <form
+            toolname="askMedicalAssistantChatbot"
+            tooldescription="Ask the virtual medical assistant about symptoms, available appointments, or neurosurgery procedures."
             onSubmit={handleSend}
             className="p-4 bg-white border-t border-slate-100 flex items-center space-x-2"
           >

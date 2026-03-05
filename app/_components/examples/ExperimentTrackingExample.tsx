@@ -52,9 +52,9 @@ export default function ExperimentTrackingExample() {
       <h2 className="text-2xl font-bold">Appointment Form</h2>
 
       {showProgressBar && (
-        <div className="w-full bg-gray-200 rounded-full h-2">
+        <div className="w-full bg-[var(--color-border)] rounded-full h-2">
           <div 
-            className="bg-blue-600 h-2 rounded-full transition-all"
+            className="bg-[var(--color-primary-500)] h-2 rounded-full transition-all"
             style={{ width: `${Math.min(interactions * 25, 100)}%` }}
           />
         </div>
@@ -99,7 +99,7 @@ export default function ExperimentTrackingExample() {
         <div className={formLayout === 'two-column' ? 'col-span-2' : ''}>
           <button
             type="submit"
-            className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
+            className="bg-[var(--color-primary-500)] text-white px-6 py-2 rounded hover:bg-[var(--color-primary-700)]"
             onClick={() => handleInteraction('button_click')}
           >
             {buttonText}
@@ -107,7 +107,7 @@ export default function ExperimentTrackingExample() {
         </div>
       </form>
 
-      <div className="text-xs text-gray-500 space-y-1 border-t pt-4">
+      <div className="text-xs text-[var(--color-text-secondary)] space-y-1 border-t pt-4">
         <p><strong>Experiment Tracking:</strong></p>
         <p>Layout: {formLayout}</p>
         <p>Button Text: {buttonText}</p>

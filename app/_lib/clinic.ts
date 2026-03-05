@@ -32,7 +32,7 @@ const fallback: LocationData = {
 const location = malakpet || fallback;
 
 export const CLINIC = {
-  name: location.name,
+  name: location.canonical_display_name,
   opdrm: 'Room 317, OPD Block', // Keep as specific detail, matches address
   phone: location.telephone,
   phoneHuman: location.telephone.replace('+91', '+91 '),

@@ -15,6 +15,9 @@
 - [ ] **Content:** Strengthen "Why Dr. Sayuj" sections on service pages with stronger USPs.
 - [ ] **Schema:** Verify MedicalProcedure schema includes specific procedure codes (CPT/ICD-10) where possible.
 
+## 2026-03-05
+- **Automation Task:** Improved daily OpenSandbox script to fetch SEO title, H1, and meta descriptions via `CodeInterpreter`.
+
 ## 2026-01-26
 - **Content Gap:** "Risks & Safety Protocols" section for Endoscopic Spine Surgery. Competitors list specific risks (dural tear, infection) to build trust.
 - **Content Gap:** "Patient Education Video" embed. A 30-second animated explainer of the "Keyhole" vs "Open" difference.
@@ -68,3 +71,7 @@
 
 ## 2026-02-27
 *   [x] **Schema:** Add `VideoObject` schema to `app/services/minimally-invasive-spine-surgery/page.tsx` for the newly embedded "L5-S1 Endoscopic Discectomy" video to improve rich snippets. (Done 2026-02-28)
+
+## 2025-03-04
+*   [x] **Schema:** Add `FAQPageSchema` to `app/services/spine-surgery-hyderabad/page.tsx` to capture FAQ rich snippets for Spine Surgery intents. (Done 2025-03-04)
+*   **Schema Audit:** Verify other older pages like `brain-tumor-surgery` under `/app/services/` for missing `FAQPageSchema` or inconsistent schema setups.

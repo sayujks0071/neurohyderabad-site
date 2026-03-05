@@ -7,6 +7,7 @@ import httpx
 
 from opensandbox import Sandbox
 from opensandbox.models import WriteEntry
+from code_interpreter import CodeInterpreter, SupportedLanguage
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("daily-sandbox")
@@ -34,46 +35,95 @@ async def main() -> None:
     async with sandbox:
         logger.info(f"✅ Sandbox created (ID: {sandbox.id})")
 
-        # 2. Example Daily Task: Verify health, run a mock script, or use an LLM
-        # For this example, we'll write a python script into the sandbox that simulates a code analysis
-        # or SEO verification step, reporting findings back.
+        interpreter = await CodeInterpreter.create(sandbox)
 
-        script_code = """
+        python_code = """
 import json
 import datetime
-import os
+import urllib.request
+from html.parser import HTMLParser
+
+class SEOParser(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.title = ""
+        self.description = ""
+        self.h1_tags = []
+        self.in_title = False
+        self.in_h1 = False
+
+    def handle_starttag(self, tag, attrs):
+        if tag == "title":
+            self.in_title = True
+        elif tag == "meta":
+            attrs_dict = dict(attrs)
+            if attrs_dict.get("name") == "description":
+                self.description = attrs_dict.get("content", "")
+        elif tag == "h1":
+            self.in_h1 = True
+
+    def handle_endtag(self, tag):
+        if tag == "title":
+            self.in_title = False
+        elif tag == "h1":
+            self.in_h1 = False
+
+    def handle_data(self, data):
+        if self.in_title:
+            self.title += data
+        elif self.in_h1:
+            self.h1_tags.append(data.strip())
 
 def generate_daily_report():
-    report = {
-        "date": datetime.datetime.now().isoformat(),
-        "status": "healthy",
-        "sandbox_checks": [
-            {"name": "Python Execution Environment", "passed": True},
-            {"name": "Security Check (Isolated)", "passed": True}
-        ],
-        "recommendation": "Integrate Claude Code or AI Gateway for autonomous file modifications inside this sandbox."
-    }
+    url = "https://www.drsayuj.info"
+    req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+    try:
+        with urllib.request.urlopen(req) as response:
+            html = response.read().decode('utf-8')
+
+        parser = SEOParser()
+        parser.feed(html)
+
+        report = {
+            "date": datetime.datetime.now().isoformat(),
+            "status": "success",
+            "url": url,
+            "seo_data": {
+                "title": parser.title.strip(),
+                "description": parser.description.strip(),
+                "h1_tags": [tag for tag in parser.h1_tags if tag]
+            }
+        }
+    except Exception as e:
+        report = {
+            "date": datetime.datetime.now().isoformat(),
+            "status": "error",
+            "url": url,
+            "error": str(e)
+        }
+
     with open("/tmp/daily_report.json", "w") as f:
         json.dump(report, f, indent=2)
+
     return "Report generated inside OpenSandbox."
 
-print(generate_daily_report())
+generate_daily_report()
 """
-        logger.info("Writing execution script to the sandbox...")
-        await sandbox.files.write_files([
-            WriteEntry(path="/tmp/generate_report.py", data=script_code, mode=644)
-        ])
 
-        # 3. Execute the python script inside the sandbox
-        logger.info("Executing the script in the isolated environment...")
-        execution = await sandbox.commands.run("python /tmp/generate_report.py")
+        logger.info("Executing Python code via CodeInterpreter...")
+        result = await interpreter.codes.run(
+            python_code,
+            language=SupportedLanguage.PYTHON,
+        )
 
-        if execution.logs.stdout:
-            logger.info(f"Sandbox Output: {execution.logs.stdout[0].text.strip()}")
-        if execution.logs.stderr:
-            logger.warning(f"Sandbox Errors: {execution.logs.stderr[0].text.strip()}")
+        if result.result and result.result[0].text:
+            logger.info(f"Interpreter Result: {result.result[0].text.strip()}")
+        if result.logs.stdout and result.logs.stdout[0].text:
+            logger.info(f"Sandbox Output: {result.logs.stdout[0].text.strip()}")
+        if result.logs.stderr and result.logs.stderr[0].text:
+            logger.warning(f"Sandbox Errors: {result.logs.stderr[0].text.strip()}")
 
-        # 4. Read the generated report back to the host filesystem
+        # Read the generated report back to the host filesystem
         try:
             report_content = await sandbox.files.read_file("/tmp/daily_report.json")
 

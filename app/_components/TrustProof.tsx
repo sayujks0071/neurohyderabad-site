@@ -27,8 +27,8 @@ export default function TrustProof({ serviceType = 'all', className = '', storie
   }, [pathname, serviceType]);
 
   return (
-    <section className={`bg-white border-2 border-blue-100 rounded-xl p-6 shadow-sm ${className}`}>
-      <h3 className="text-xl font-semibold text-blue-900 mb-4">
+    <section className={`bg-[var(--color-surface)] border-2 border-[var(--color-primary-100)] rounded-xl p-6 shadow-sm ${className}`}>
+      <h3 className="text-xl font-semibold text-[var(--color-primary-900)] mb-4">
         Why Patients Trust Dr. Sayuj Krishnan
       </h3>
       
@@ -47,24 +47,24 @@ export default function TrustProof({ serviceType = 'all', className = '', storie
               analytics.trustPathwayStart(pathname || '/', 'service_page_trust_proof');
             }}
           >
-            <div className="flex items-center justify-between p-3 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-colors">
+            <div className="flex items-center justify-between p-3 rounded-lg border border-[var(--color-border)] hover:border-[var(--color-primary-300)] hover:bg-[var(--color-primary-50)] transition-colors">
               <div>
-                <h4 className="font-semibold text-gray-900 group-hover:text-blue-700">Meet Dr. Sayuj Krishnan</h4>
-                <p className="text-sm text-gray-600">9+ years experience • AO Spine Member • German training • MBBS, DNB Neurosurgery</p>
+                <h4 className="font-semibold text-[var(--color-text-primary)] group-hover:text-[var(--color-primary-700)]">Meet Dr. Sayuj Krishnan</h4>
+                <p className="text-sm text-[var(--color-text-secondary)]">9+ years experience • AO Spine Member • German training • MBBS, DNB Neurosurgery</p>
               </div>
-              <span className="text-blue-600 ml-3">→</span>
+              <span className="text-[var(--color-primary-500)] ml-3">→</span>
             </div>
           </Link>
         </div>
 
         {stories.length > 0 && (
           <div className="space-y-3">
-            <h4 className="font-semibold text-gray-900 text-sm mb-2">Patient Success Stories:</h4>
+            <h4 className="font-semibold text-[var(--color-text-primary)] text-sm mb-2">Patient Success Stories:</h4>
             {stories.map((story) => (
               <Link
                 key={story.id}
                 href={`/patient-stories/${story.slug}`}
-                className="block p-3 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-colors group"
+                className="block p-3 rounded-lg border border-[var(--color-border)] hover:border-[var(--color-primary-300)] hover:bg-[var(--color-primary-50)] transition-colors group"
                 onClick={() => {
                   analytics.trustSignalClick(
                     pathname || '/',
@@ -85,13 +85,13 @@ export default function TrustProof({ serviceType = 'all', className = '', storie
               >
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
-                    <h5 className="font-medium text-gray-900 group-hover:text-blue-700 text-sm mb-1">
+                    <h5 className="font-medium text-[var(--color-text-primary)] group-hover:text-[var(--color-primary-700)] text-sm mb-1">
                       {story.title}
                     </h5>
-                    <p className="text-xs text-gray-600 line-clamp-2">
+                    <p className="text-xs text-[var(--color-text-secondary)] line-clamp-2">
                       "{story.quote}"
                     </p>
-                    <span className="text-xs text-blue-600 mt-1 inline-block">
+                    <span className="text-xs text-[var(--color-primary-500)] mt-1 inline-block">
                       Read full story →
                     </span>
                   </div>
@@ -101,10 +101,10 @@ export default function TrustProof({ serviceType = 'all', className = '', storie
           </div>
         )}
 
-        <div className="pt-4 border-t border-gray-200">
+        <div className="pt-4 border-t border-[var(--color-border)]">
           <Link
             href="/patient-stories"
-            className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm"
+            className="inline-flex items-center text-[var(--color-primary-500)] hover:text-[var(--color-primary-800)] font-medium text-sm"
             onClick={() => {
               analytics.trustSignalClick(
                 pathname || '/',
