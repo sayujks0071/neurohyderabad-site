@@ -74,7 +74,13 @@ export default function NewsletterSignup({
           Subscribe to receive expert neurosurgical insights, patient education, and health tips.
         </p>
         {/* noValidate: Disable native browser validation to use custom validation with styled error messages and ARIA attributes */}
-        <form onSubmit={handleSubmit} className="space-y-3" noValidate>
+        <form
+          toolname="subscribeToNewsletter"
+          tooldescription="Subscribe to Dr. Sayuj Krishnan's neurosurgery and spine health newsletter."
+          onSubmit={handleSubmit}
+          className="space-y-3"
+          noValidate
+        >
           <div>
             <input
               type="email"
@@ -115,7 +121,13 @@ export default function NewsletterSignup({
 
   return (
     // noValidate: Disable native browser validation to use custom validation with styled error messages and ARIA attributes
-    <form onSubmit={handleSubmit} className={`flex flex-col sm:flex-row gap-2 ${className}`} noValidate>
+    <form
+      toolname="subscribeToNewsletter"
+      tooldescription="Subscribe to Dr. Sayuj Krishnan's neurosurgery and spine health newsletter."
+      onSubmit={handleSubmit}
+      className={`flex flex-col sm:flex-row gap-2 ${className}`}
+      noValidate
+    >
       <input
         type="email"
         value={email}
