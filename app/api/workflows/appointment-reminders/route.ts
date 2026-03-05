@@ -45,11 +45,12 @@ export async function POST(request: NextRequest) {
     const appointmentDate = new Date(preferredDate);
     const isoDate = appointmentDate.toISOString().split('T')[0]; // YYYY-MM-DD
 
+    // lastName stores the appointment date (YYYY-MM-DD) for the daily cron filter
     const { data: contact, error } = await resend.contacts.create({
       audienceId,
       email,
-      first_name: name,
-      last_name: isoDate, // Appointment date used by the daily cron for filtering
+      firstName: name,
+      lastName: isoDate, // Appointment date used by the daily cron for filtering
       unsubscribed: false,
     });
 

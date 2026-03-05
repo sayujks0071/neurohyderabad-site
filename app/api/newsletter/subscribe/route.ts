@@ -54,13 +54,13 @@ export async function POST(request: NextRequest) {
         try {
           const resend = new Resend(process.env.RESEND_API_KEY);
           const nameParts = ((body.name as string) || '').trim().split(' ');
-          const first_name = nameParts[0] || '';
-          const last_name = nameParts.slice(1).join(' ') || '';
+          const firstName = nameParts[0] || '';
+          const lastName = nameParts.slice(1).join(' ') || '';
           await resend.contacts.create({
             audienceId,
             email: body.email,
-            first_name,
-            last_name,
+            firstName,
+            lastName,
             unsubscribed: false,
           });
           console.log(`[Newsletter] Added ${body.email} to Resend audience ${audienceId}`);
