@@ -733,27 +733,27 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-12">
             <div>
               <p className="text-lg text-[var(--color-text-secondary)] mb-6">
-                Dr. Sayuj Krishnan provides expert neurosurgical care at Yashoda Hospital, Malakpet, serving patients across Hyderabad and throughout Telangana.
-                As a pioneering endoscopic spine surgeon, Dr. Krishnan specializes in advanced, minimally invasive procedures that enable faster recovery
-                and same-day discharge for most patients. Our Malakpet location is conveniently accessible for patients throughout the region.
+                Dr. Sayuj Krishnan provides expert neurosurgical care at Yashoda Hospital, Malakpet. As a pioneering endoscopic spine surgeon,
+                he specializes in advanced, minimally invasive procedures offering faster recovery. Our facility is conveniently accessible
+                via the PVNR Expressway and Outer Ring Road (ORR), making it a straight drive for patients traveling from major IT corridors and central neighborhoods.
               </p>
               <div className="grid grid-cols-2 gap-4">
                 <Card padding="sm" className="shadow-md">
-                  <h3 className="font-semibold text-[var(--color-primary-700)] mb-2">Central Hyderabad</h3>
-                  <ul className="text-sm text-[var(--color-text-secondary)] space-y-1">
-                    <li>• Jubilee Hills</li>
-                    <li>• Banjara Hills</li>
-                    <li>• Hi-Tech City</li>
-                    <li>• Gachibowli</li>
+                  <h3 className="font-semibold text-[var(--color-primary-700)] mb-2">Central & IT Hubs</h3>
+                  <ul className="text-sm text-[var(--color-text-secondary)] space-y-2">
+                    <li>• <Link href="/neurosurgeon-jubilee-hills" className="text-[var(--color-primary-600)] hover:underline">Jubilee Hills</Link></li>
+                    <li>• <Link href="/neurosurgeon-banjara-hills" className="text-[var(--color-primary-600)] hover:underline">Banjara Hills</Link></li>
+                    <li>• <Link href="/neurosurgeon-hitech-city" className="text-[var(--color-primary-600)] hover:underline">Hitech City</Link></li>
+                    <li>• <Link href="/neurosurgeon-gachibowli" className="text-[var(--color-primary-600)] hover:underline">Gachibowli</Link></li>
                   </ul>
                 </Card>
                 <Card padding="sm" className="shadow-md">
-                  <h3 className="font-semibold text-[var(--color-primary-700)] mb-2">Other Areas</h3>
-                  <ul className="text-sm text-[var(--color-text-secondary)] space-y-1">
-                    <li>• Madhapur</li>
-                    <li>• Kondapur</li>
-                    <li>• Malakpet</li>
-                    <li>• Secunderabad</li>
+                  <h3 className="font-semibold text-[var(--color-primary-700)] mb-2">Other Key Areas</h3>
+                  <ul className="text-sm text-[var(--color-text-secondary)] space-y-2">
+                    <li>• <Link href="/locations/neurosurgeon-madhapur" className="text-[var(--color-primary-600)] hover:underline">Madhapur</Link></li>
+                    <li>• <Link href="/locations/neurosurgeon-kondapur" className="text-[var(--color-primary-600)] hover:underline">Kondapur</Link></li>
+                    <li>• <Link href="/neurosurgeon-secunderabad" className="text-[var(--color-primary-600)] hover:underline">Secunderabad</Link></li>
+                    <li>• <Link href="/neurosurgeon-malakpet" className="text-[var(--color-primary-600)] hover:underline">Malakpet</Link></li>
                   </ul>
                 </Card>
               </div>

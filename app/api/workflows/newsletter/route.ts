@@ -13,7 +13,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resendApiKey = process.env.RESEND_API_KEY?.trim();
+const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
 function getNewsletterHtml(dateStr: string): string {
   return `<!DOCTYPE html>
@@ -73,7 +74,7 @@ export async function GET(request: NextRequest) {
   }
 
   const audienceId = process.env.RESEND_NEWSLETTER_AUDIENCE_ID;
-  if (!audienceId) {
+    if (!audienceId || !resend) {
     console.error('[Newsletter] RESEND_NEWSLETTER_AUDIENCE_ID not configured');
     return NextResponse.json(
       { error: 'Newsletter audience not configured. Set RESEND_NEWSLETTER_AUDIENCE_ID in Vercel environment variables.' },
