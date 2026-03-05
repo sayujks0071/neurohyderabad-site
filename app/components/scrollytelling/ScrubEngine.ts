@@ -19,7 +19,6 @@ export class ScrubEngine {
     private loadedCount: number;
     private onInitLoad: () => void;
     private onProgress: (progress: number) => void;
-    private onInitLoad: () => void;
     private onLoadComplete: () => void;
     public isLoaded: boolean;
     public isReady: boolean;

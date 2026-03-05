@@ -79,21 +79,21 @@ export default function RealAIBookingAgent({ pageSlug, service }: RealAIBookingA
   if (!isInitialized) {
     return (
       <div className="max-w-4xl mx-auto">
-        <div className="bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden">
-          <div className="bg-blue-600 text-white p-4">
+        <div className="bg-[var(--color-surface)] rounded-2xl border border-[var(--color-border)] shadow-lg overflow-hidden">
+          <div className="bg-[var(--color-primary-500)] text-white p-4">
             <div className="flex items-center">
-              <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center mr-3">
+              <div className="w-10 h-10 bg-[var(--color-primary-50)]0 rounded-full flex items-center justify-center mr-3">
                 <span className="text-lg">🤖</span>
               </div>
               <div>
                 <h3 className="font-semibold">Dr. Sayuj's AI Assistant</h3>
-                <p className="text-blue-100 text-sm">Loading AI assistant...</p>
+                <p className="text-[var(--color-primary-100)] text-sm">Loading AI assistant...</p>
               </div>
             </div>
           </div>
           <div className="p-8 text-center">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
-            <p className="text-gray-600">Initializing AI assistant...</p>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--color-primary-500)] mx-auto mb-4"></div>
+            <p className="text-[var(--color-text-secondary)]">Initializing AI assistant...</p>
           </div>
         </div>
       </div>
@@ -105,15 +105,15 @@ export default function RealAIBookingAgent({ pageSlug, service }: RealAIBookingA
       {/* OpenAI Chat Widget Container */}
       <div 
         ref={chatContainerRef}
-        className="bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden"
+        className="bg-[var(--color-surface)] rounded-2xl border border-[var(--color-border)] shadow-lg overflow-hidden"
         style={{ minHeight: '500px' }}
       />
       
       {/* Fallback Contact Info */}
       <div className="mt-6 text-center">
-        <p className="text-sm text-gray-600">
+        <p className="text-sm text-[var(--color-text-secondary)]">
           Having trouble with the AI assistant? Call us directly at{' '}
-          <a href="tel:+919778280044" className="text-blue-600 hover:underline font-medium">
+          <a href="tel:+919778280044" className="text-[var(--color-primary-500)] hover:underline font-medium">
             +91-9778280044
           </a>
         </p>

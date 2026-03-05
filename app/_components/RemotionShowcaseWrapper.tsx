@@ -13,8 +13,8 @@ const RemotionShowcase = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="w-full h-96 bg-gray-100 rounded-xl animate-pulse flex items-center justify-center">
-        <span className="text-gray-400 text-lg">Loading video previews...</span>
+      <div className="w-full h-96 bg-[var(--color-background)] rounded-xl animate-pulse flex items-center justify-center">
+        <span className="text-[var(--color-text-secondary)] text-lg">Loading video previews...</span>
       </div>
     ),
   }

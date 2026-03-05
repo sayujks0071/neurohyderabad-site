@@ -31,10 +31,10 @@ const Button: React.FC<ButtonProps> = ({
   const baseStyles = 'inline-flex items-center justify-center font-semibold transition-all duration-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
 
   const variants = {
-    primary: 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 motion-safe:hover:scale-[1.02] motion-safe:active:scale-[0.98] border border-transparent focus:ring-blue-500',
-    secondary: 'bg-white border border-slate-200 text-slate-600 font-medium hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 shadow-sm focus:ring-slate-400',
-    ghost: 'bg-transparent text-blue-600 hover:bg-blue-50 hover:text-blue-800 focus:ring-blue-500',
-    outline: 'bg-transparent border-2 border-blue-600 text-blue-600 hover:bg-blue-50 focus:ring-blue-500',
+    primary: 'btn-gradient-primary motion-safe:hover:scale-[1.02] motion-safe:active:scale-[0.98] border border-transparent focus:ring-[var(--color-primary-500)]',
+    secondary: 'bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-secondary)] font-medium hover:border-[var(--color-primary-100)] hover:bg-[var(--color-background)] hover:text-[var(--color-text-primary)] shadow-[var(--shadow-sm)] focus:ring-[var(--color-text-secondary)]',
+    ghost: 'bg-transparent text-[var(--color-primary-500)] hover:bg-[var(--color-primary-50)] hover:text-[var(--color-primary-700)] focus:ring-[var(--color-primary-500)]',
+    outline: 'bg-transparent border-2 border-[var(--color-primary-500)] text-[var(--color-primary-500)] hover:bg-[var(--color-primary-50)] focus:ring-[var(--color-primary-500)]',
   };
 
   const sizes = {

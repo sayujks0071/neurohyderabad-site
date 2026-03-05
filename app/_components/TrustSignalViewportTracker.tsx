@@ -18,7 +18,7 @@ export default function TrustSignalViewportTracker() {
       const signals: HTMLElement[] = [];
       
       // Find TrustProof components
-      const trustProofSections = document.querySelectorAll('section[class*="border-blue-100"]');
+      const trustProofSections = document.querySelectorAll('section[class*="border-[var(--color-primary-100)]"]');
       trustProofSections.forEach(section => {
         const text = section.textContent || '';
         if (text.includes('Why Patients Trust') || text.includes('Meet Dr. Sayuj')) {

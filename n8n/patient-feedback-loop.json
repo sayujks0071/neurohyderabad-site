@@ -63,8 +63,8 @@
         "fromEmail": "care@drsayuj.info",
         "toEmail": "={{$node[\"Split Patients\"].json[\"email\"]}}",
         "subject": "How was your experience with Dr. Sayuj?",
-        "text": "Dear {{$node[\"Split Patients\"].json[\"firstName\"]}},\n\nWe hope you are recovering well. We would love to hear about your experience with us to help us improve.\n\nPlease take a moment to rate your visit: https://www.drsayuj.info/feedback?id={{$node[\"Split Patients\"].json[\"id\"]}}\n\nWarm regards,\nDr. Sayuj's Team",
-        "html": "<p>Dear {{$node[\"Split Patients\"].json[\"firstName\"]}},</p><p>We hope you are recovering well. We would love to hear about your experience with us to help us improve.</p><p><a href=\"https://www.drsayuj.info/feedback?id={{$node[\"Split Patients\"].json[\"id\"]}}\">Click here to rate your visit</a></p><p>Warm regards,<br>Dr. Sayuj's Team</p>"
+        "text": "Dear {{$node[\"Split Patients\"].json[\"firstName\"]}},\n\nWe hope you are recovering well following your recent visit with Dr. Sayuj.\n\nYour health and comfort are our top priorities. We would be incredibly grateful if you could take a brief moment to share your experience with us. Your feedback directly helps us improve the quality of care for all our neurosurgery patients.\n\nPlease click here to share your thoughts: https://www.drsayuj.info/feedback?id={{$node[\"Split Patients\"].json[\"id\"]}}\n\nWishing you continued health and a smooth recovery,\n\nThe Team at Dr. Sayuj's Clinic",
+        "html": "<p>Dear {{$node[\"Split Patients\"].json[\"firstName\"]}},</p><p>We hope you are recovering well following your recent visit with Dr. Sayuj.</p><p>Your health and comfort are our top priorities. We would be incredibly grateful if you could take a brief moment to share your experience with us. Your feedback directly helps us improve the quality of care for all our neurosurgery patients.</p><p><a href=\"https://www.drsayuj.info/feedback?id={{$node[\"Split Patients\"].json[\"id\"]}}\">Click here to share your thoughts</a></p><p>Wishing you continued health and a smooth recovery,</p><p>The Team at Dr. Sayuj's Clinic</p>"
       },
       "name": "Send Feedback Email",
       "type": "n8n-nodes-base.emailSend",
@@ -118,5 +118,6 @@
   },
   "settings": {},
   "staticData": null,
-  "tags": []
+  "tags": [],
+  "id": "eb983808-0554-4ed3-8920-de01d3a8fac3"
 }

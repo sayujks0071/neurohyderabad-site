@@ -60,7 +60,7 @@ export default function FloatingWhatsApp() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={handleClick}
-            className="bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 flex items-center justify-center"
+            className="bg-[var(--color-success)] hover:bg-[var(--color-success)] text-white p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[var(--color-success)] focus:ring-offset-2 flex items-center justify-center"
             aria-label="Contact Dr. Sayuj on WhatsApp for consultation"
           >
             <WhatsAppIcon className="w-6 h-6" />

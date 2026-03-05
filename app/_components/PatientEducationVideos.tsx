@@ -56,18 +56,18 @@ export default function PatientEducationVideos({ category }: PatientEducationVid
   }
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-[var(--color-surface)]">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-4">
             <div>
-              <span className="text-sm uppercase tracking-wide text-blue-600 font-semibold">
+              <span className="text-sm uppercase tracking-wide text-[var(--color-primary-500)] font-semibold">
                 Video Library
               </span>
-              <h2 className="text-3xl font-bold text-blue-900 mt-2">
+              <h2 className="text-3xl font-bold text-[var(--color-primary-900)] mt-2">
                 Watch How We Plan & Deliver Neurosurgical Care
               </h2>
-              <p className="text-gray-600 mt-3 max-w-2xl">
+              <p className="text-[var(--color-text-secondary)] mt-3 max-w-2xl">
                 Short, evidence-based explainers curated from global centres of excellence. Learn what to expect
                 before, during, and after your procedure.
               </p>
@@ -76,7 +76,7 @@ export default function PatientEducationVideos({ category }: PatientEducationVid
               href="https://www.youtube.com/results?search_query=endoscopic+spine+surgery"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-5 py-3 bg-blue-600 text-white rounded-full font-semibold shadow-lg hover:bg-blue-700 transition-colors"
+              className="inline-flex items-center justify-center px-5 py-3 bg-[var(--color-primary-500)] text-white rounded-full font-semibold shadow-lg hover:bg-[var(--color-primary-700)] transition-colors"
             >
               Explore More Videos
             </a>
@@ -86,9 +86,9 @@ export default function PatientEducationVideos({ category }: PatientEducationVid
             {filteredVideos.map((video) => (
               <article
                 key={video.id}
-                className="bg-gray-50 rounded-2xl shadow-lg overflow-hidden border border-gray-100 flex flex-col"
+                className="bg-[var(--color-background)] rounded-2xl shadow-lg overflow-hidden border border-[var(--color-border)] flex flex-col"
               >
-                        <div className="relative aspect-video bg-gray-200">
+                        <div className="relative aspect-video bg-[var(--color-border)]">
                           <Image
                             src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`}
                             alt={video.title}
@@ -104,28 +104,28 @@ export default function PatientEducationVideos({ category }: PatientEducationVid
                     className="absolute inset-0 flex items-center justify-center bg-black/40 text-white hover:bg-black/50 transition-colors"
                     aria-label={`Play ${video.title}`}
                   >
-                    <span className="inline-flex items-center justify-center h-16 w-16 bg-white/90 text-blue-600 rounded-full shadow-xl">
+                    <span className="inline-flex items-center justify-center h-16 w-16 bg-[var(--color-surface)]/90 text-[var(--color-primary-500)] rounded-full shadow-xl">
                       ▶
                     </span>
                   </a>
                 </div>
                 <div className="p-6 flex flex-col flex-1">
-                  <div className="flex items-center text-sm text-blue-600 font-medium mb-2">
+                  <div className="flex items-center text-sm text-[var(--color-primary-500)] font-medium mb-2">
                     <span>{video.focus}</span>
-                    <span className="mx-2 text-gray-400">•</span>
+                    <span className="mx-2 text-[var(--color-text-secondary)]">•</span>
                     <span>{video.duration}</span>
                   </div>
-                  <h3 className="text-xl font-semibold text-blue-900 leading-snug">
+                  <h3 className="text-xl font-semibold text-[var(--color-primary-900)] leading-snug">
                     {video.title}
                   </h3>
-                  <p className="text-gray-600 mt-3 flex-1">{video.description}</p>
-                  <div className="mt-4 flex items-center justify-between text-sm text-gray-500">
+                  <p className="text-[var(--color-text-secondary)] mt-3 flex-1">{video.description}</p>
+                  <div className="mt-4 flex items-center justify-between text-sm text-[var(--color-text-secondary)]">
                     <span>Source: {video.source}</span>
                     <a
                       href={`https://www.youtube.com/watch?v=${video.id}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-blue-600 hover:text-blue-800 font-semibold"
+                      className="text-[var(--color-primary-500)] hover:text-[var(--color-primary-800)] font-semibold"
                     >
                       Watch on YouTube →
                     </a>
