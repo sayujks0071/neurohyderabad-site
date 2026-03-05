@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
       console.error('[Appointments] Failed to store contact (may already exist):', error);
     }
 
-    console.log(\`[Appointments] Registered reminder for \${email} on \${isoDate}\`);
+    console.log(`[Appointments] Registered reminder for ${email} on ${isoDate}`);
     return NextResponse.json({
       success: true,
       stored: !!contact,
@@ -75,7 +75,7 @@ export async function POST(request: NextRequest) {
 export async function GET(request: NextRequest) {
   // Verify Vercel Cron authorization
   const authHeader = request.headers.get('authorization');
-  if (authHeader !== \`Bearer \${process.env.CRON_SECRET}\`) {
+  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
@@ -94,12 +94,12 @@ export async function GET(request: NextRequest) {
     const tomorrowIST = new Date(nowUTC.getTime() + istOffset + 24 * 60 * 60 * 1000);
     const tomorrowISO = tomorrowIST.toISOString().split('T')[0]; // YYYY-MM-DD
 
-    console.log(\`[Appointment Reminders] Running daily check for appointments on \${tomorrowISO}\`);
+    console.log(`[Appointment Reminders] Running daily check for appointments on ${tomorrowISO}`);
 
     // Fetch all contacts in the appointments audience
     const { data: contactsData, error: listError } = await resend.contacts.list({ audienceId });
     if (listError) {
-      throw new Error(\`Failed to list contacts: \${listError.message}\`);
+      throw new Error(`Failed to list contacts: ${listError.message}`);
     }
 
     const allContacts = contactsData?.data ?? [];
@@ -109,7 +109,7 @@ export async function GET(request: NextRequest) {
       (c) => c.lastName === tomorrowISO && !c.unsubscribed
     );
 
-    console.log(\`[Appointment Reminders] \${upcomingContacts.length} appointments found for \${tomorrowISO}\`);
+    console.log(`[Appointment Reminders] ${upcomingContacts.length} appointments found for ${tomorrowISO}`);
 
     const results: Array<{ email: string; sent: boolean; error?: string }> = [];
 
@@ -126,14 +126,14 @@ export async function GET(request: NextRequest) {
           results.push({ email: contact.email, sent: true });
           // Remove from pending audience after successful send
           await resend.contacts.remove({ audienceId, email: contact.email }).catch((e) => {
-            console.error(\`[Appointments] Failed to remove \${contact.email} post-reminder:\`, e);
+            console.error(`[Appointments] Failed to remove ${contact.email} post-reminder:`, e);
           });
         } else {
           results.push({ email: contact.email, sent: false, error: result.error });
         }
       } catch (emailError) {
         const msg = emailError instanceof Error ? emailError.message : 'Unknown error';
-        console.error(\`[Appointments] Reminder failed for \${contact.email}:\`, msg);
+        console.error(`[Appointments] Reminder failed for ${contact.email}:`, msg);
         results.push({ email: contact.email, sent: false, error: msg });
       }
     }
