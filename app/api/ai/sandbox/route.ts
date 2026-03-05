@@ -7,8 +7,8 @@ export const maxDuration = 30;
 
 export async function POST(request: NextRequest) {
   try {
-    const ip = request.ip ?? request.headers.get('x-forwarded-for') ?? '127.0.0.1';
-    const { success } = await rateLimit(`ai-sandbox-${ip}`);
+    const ip = (request as any).ip ?? request.headers.get('x-forwarded-for') ?? '127.0.0.1';
+    const { success } = await rateLimit(`ai-sandbox-${ip}`, 5, 60);
 
     if (!success) {
       return NextResponse.json(
@@ -47,7 +47,7 @@ export async function POST(request: NextRequest) {
       system: "You are a helpful, polite, and empathetic virtual assistant for Dr. Sayuj's neurosurgery and spine clinic. You are here to answer general questions, help patients understand clinical procedures, and provide a welcoming experience. However, you MUST clearly state that you cannot provide medical advice or diagnoses. Always encourage patients to book an appointment with Dr. Sayuj for proper medical evaluation.",
     });
 
-    return result.toDataStreamResponse();
+    return result.toTextStreamResponse();
   } catch (error) {
     console.error('Error in AI Sandbox:', error);
     return NextResponse.json(
