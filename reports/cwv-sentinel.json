@@ -7,27 +7,9 @@
       "type": "home",
       "suspected_issue": "Heavy client-side Hero component. Loads 32 images before unblocking the UI.",
       "proposed_fix": "Changed batchSize from 32 to 4 in app/components/scrollytelling/Hero.tsx.",
-      "implemented_fix": "Changed batchSize from 32 to 4 in app/components/scrollytelling/Hero.tsx. This reduces the number of frames downloaded and processed before `onInitLoad` is fired, greatly reducing main thread blocking work.",
-      "expected_impact": "Significantly improves LCP (Largest Contentful Paint) and INP (Interaction to Next Paint) by unblocking the main thread and making the hero text visible much earlier. The loading screen disappears faster because only 4 frames are awaited initially instead of 32. This improves Core Web Vitals (CWV).",
-      "verification_steps": "Run `pnpm build` and `pnpm test` to ensure there are no regressions. Run the site locally (npm run dev) and load the homepage `/`. Observe that the loading overlay disappears much faster than before, revealing the hero content sooner. The scrub scroll will still work as remaining images load in the background without affecting layout."
-    },
-    "appointment": {
-      "url": "/appointments",
-      "type": "appointment",
-      "suspected_issue": "None apparent from code structure.",
-      "proposed_fix": "None"
-    },
-    "location": {
-      "url": "/locations",
-      "type": "location",
-      "suspected_issue": "None apparent from code structure.",
-      "proposed_fix": "None"
-    },
-    "condition": {
-      "url": "/conditions",
-      "type": "condition",
-      "suspected_issue": "None apparent from code structure.",
-      "proposed_fix": "None"
+      "implemented_fix": "Changed batchSize from 32 to 4 in app/components/scrollytelling/Hero.tsx.",
+      "expected_impact": "Significantly improves LCP (Largest Contentful Paint) and INP (Interaction to Next Paint) by unblocking the main thread and making the hero text visible much earlier. The loading screen disappears faster because only 4 frames are awaited initially instead of 32.",
+      "verification_steps": "Run the site locally (npm run dev) and load the homepage. Observe that the loading overlay disappears much faster than before, revealing the hero content sooner. The scrub scroll will still work as remaining images load in the background."
     }
   }
 }
