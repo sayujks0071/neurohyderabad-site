@@ -199,7 +199,6 @@ export default function RootLayout({
         <Footer />
         <StandaloneFlagValues />
         {process.env.VERCEL ? <Analytics /> : null}
-        <WebMCPProvider />
       </body>
     </html>
   );

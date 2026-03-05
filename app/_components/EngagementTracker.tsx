@@ -38,21 +38,26 @@ export default function EngagementTracker({
     const milestoneThresholds = [30, 60, 120, 300];
     
     // Track user activity (scroll, click, keypress)
+    let activityTimeout: NodeJS.Timeout | null = null;
     const handleActivity = () => {
-      lastActivityRef.current = Date.now();
-      
-      // Check if user is engaged (spent threshold time on page)
-      if (!isEngagedRef.current) {
-        const timeSpent = Math.floor((Date.now() - startTimeRef.current) / 1000);
-        if (timeSpent >= engagementThreshold) {
-          isEngagedRef.current = true;
-          analytics.track('Page_Engagement', {
-            page_slug: pathname || '/',
-            engagement_type: 'threshold_reached',
-            time_spent: timeSpent
-          });
+      if (activityTimeout) return;
+      activityTimeout = setTimeout(() => {
+        lastActivityRef.current = Date.now();
+
+        // Check if user is engaged (spent threshold time on page)
+        if (!isEngagedRef.current) {
+          const timeSpent = Math.floor((Date.now() - startTimeRef.current) / 1000);
+          if (timeSpent >= engagementThreshold) {
+            isEngagedRef.current = true;
+            analytics.track('Page_Engagement', {
+              page_slug: pathname || '/',
+              engagement_type: 'threshold_reached',
+              time_spent: timeSpent
+            });
+          }
         }
-      }
+        activityTimeout = null;
+      }, 500); // 500ms trailing edge throttle
     };
 
     // Track time milestones
@@ -111,6 +116,7 @@ export default function EngagementTracker({
     window.addEventListener('beforeunload', handleBeforeUnload);
 
     return () => {
+      if (activityTimeout) clearTimeout(activityTimeout);
       clearInterval(milestoneInterval);
       clearInterval(timeTrackingInterval);
       window.removeEventListener('scroll', handleActivity);

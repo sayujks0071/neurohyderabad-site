@@ -1,3 +1,4 @@
+import Breadcrumbs from "@/app/components/Breadcrumbs";
 import React from "react";
 import Link from "next/link";
 import { getLocationById } from "@/src/data/locations";
@@ -68,9 +69,16 @@ export default function Page() {
       />
       <Breadcrumbs
         items={[
-          { name: "Home", path: "/" },
-          { name: "Locations", path: "/locations" },
-          { name: "Neurosurgeon Banjara Hills", path: "/neurosurgeon-banjara-hills" }
+          { name: "Home", href: "/" },
+          { name: "Locations", href: "/locations" },
+          { name: "Neurosurgeon Banjara Hills", href: "/neurosurgeon-banjara-hills" }
+        ]}
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', path: '/' },
+          { name: 'Locations', path: '/locations' },
+          { name: 'Neurosurgeon in Banjara Hills, Hyderabad', path: '/neurosurgeon-banjara-hills' },
         ]}
       />
       <LocationSchema

@@ -1,3 +1,7 @@
+import path from 'path';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 import pkg from "workflow/next";
 const { withWorkflow } = pkg;
 import MiddlewareWebpackPlugin from "@middleware.io/sourcemap-uploader/dist/webpack-plugin";
@@ -300,7 +304,13 @@ const nextConfig = {
   },
 
   // Webpack configuration for Middleware sourcemap uploader
-  webpack: (config, { isServer }) => {
+
+
+
+
+
+
+  webpack: (config, { isServer, webpack }) => {
     // Only add plugin for client-side builds in production if account key is present
     if (!isServer && process.env.NODE_ENV === 'production' && process.env.MIDDLEWARE_ACCOUNT_KEY) {
       config.plugins.push(
@@ -313,6 +323,48 @@ const nextConfig = {
         )
       );
     }
+
+    // Configure almostnode requirements
+    if (!isServer) {
+      // Fallback for node builtins required by almostnode
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        "module": false,
+        "zlib": false,
+      };
+
+      // NodeProtocolPlugin for 'node:' prefixed builtins
+      config.plugins.push(
+        new webpack.NormalModuleReplacementPlugin(
+          /^node:/,
+          (resource) => {
+            resource.request = resource.request.replace(/^node:/, '');
+          }
+        )
+      );
+    }
+
+    config.plugins.push(
+      new webpack.IgnorePlugin({
+        checkResource: (resource) => {
+          return resource.includes('/assets/runtime-worker') || resource.includes('almostnode/dist/__sw__.js');
+        }
+      })
+    );
+
+    // Add node-loader for .node binary files (almostnode dependency requirement)
+    config.module.rules.push({
+      test: /\.node$/,
+      use: [
+        {
+          loader: "node-loader",
+          options: {
+            name: "[name].[ext]"
+          }
+        }
+      ]
+    });
+
     return config;
   },
 };

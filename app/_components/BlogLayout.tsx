@@ -44,7 +44,7 @@ function getCTAComponent(ctaType?: CTAType, overrideText?: string) {
       return (
         <Link
           href="/ai-chat"
-          className="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition-colors inline-block"
+          className="bg-[var(--color-primary-500)] text-white px-6 py-3 rounded-full hover:bg-[var(--color-primary-700)] transition-colors inline-block"
         >
           {overrideText || 'Chat with AI Assistant'}
         </Link>
@@ -55,7 +55,7 @@ function getCTAComponent(ctaType?: CTAType, overrideText?: string) {
           href="https://wa.me/919778280044"
           target="_blank"
           rel="noopener noreferrer"
-          className="bg-green-500 text-white px-6 py-3 rounded-full hover:bg-green-600 transition-colors inline-block"
+          className="bg-[var(--color-success)] text-white px-6 py-3 rounded-full hover:bg-[var(--color-success)] transition-colors inline-block"
         >
           {overrideText || 'WhatsApp Us'}
         </Link>
@@ -64,7 +64,7 @@ function getCTAComponent(ctaType?: CTAType, overrideText?: string) {
       return (
         <Link
           href="tel:+919778280044"
-          className="bg-green-600 text-white px-6 py-3 rounded-full hover:bg-green-700 transition-colors inline-block"
+          className="bg-[var(--color-success)] text-white px-6 py-3 rounded-full hover:bg-[var(--color-success-700)] transition-colors inline-block"
         >
           {overrideText || 'Call +91 97782 80044'}
         </Link>
@@ -73,7 +73,7 @@ function getCTAComponent(ctaType?: CTAType, overrideText?: string) {
       return (
         <Link
           href="/services"
-          className="border-2 border-blue-600 text-blue-600 px-6 py-3 rounded-full hover:bg-blue-600 hover:text-white transition-colors inline-block"
+          className="border-2 border-[var(--color-primary-500)] text-[var(--color-primary-500)] px-6 py-3 rounded-full hover:bg-[var(--color-primary-500)] hover:text-white transition-colors inline-block"
         >
           {overrideText || 'Learn More About Our Services'}
         </Link>
@@ -84,13 +84,13 @@ function getCTAComponent(ctaType?: CTAType, overrideText?: string) {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
             href="/appointments"
-            className="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition-colors text-center"
+            className="bg-[var(--color-primary-500)] text-white px-6 py-3 rounded-full hover:bg-[var(--color-primary-700)] transition-colors text-center"
           >
             {overrideText || 'Book Consultation'}
           </Link>
           <Link
             href="/services/endoscopic-discectomy-hyderabad/"
-            className="border-2 border-blue-600 text-blue-600 px-6 py-3 rounded-full hover:bg-blue-600 hover:text-white transition-colors text-center"
+            className="border-2 border-[var(--color-primary-500)] text-[var(--color-primary-500)] px-6 py-3 rounded-full hover:bg-[var(--color-primary-500)] hover:text-white transition-colors text-center"
           >
             Learn About Our Services
           </Link>
@@ -197,17 +197,17 @@ export default function BlogLayout({ post, content, className = '' }: BlogLayout
           {/* Header */}
           <header className="mb-8">
             {post.category && (
-              <div className="text-sm uppercase tracking-wide text-blue-600 mb-2">
+              <div className="text-sm uppercase tracking-wide text-[var(--color-primary-500)] mb-2">
                 {post.category}
               </div>
             )}
             <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
             {post.subtitle && (
-              <p className="text-xl text-gray-600 mb-4">{post.subtitle}</p>
+              <p className="text-xl text-[var(--color-text-secondary)] mb-4">{post.subtitle}</p>
             )}
             
             {/* Meta Information */}
-            <div className="text-sm text-gray-600 mb-4 space-y-1">
+            <div className="text-sm text-[var(--color-text-secondary)] mb-4 space-y-1">
               <div className="flex flex-wrap items-center gap-2">
                 <span>Published: {formattedPublishedDate}</span>
                 {formattedUpdatedDate && (
@@ -236,7 +236,7 @@ export default function BlogLayout({ post, content, className = '' }: BlogLayout
                 {post.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm"
+                    className="px-3 py-1 bg-[var(--color-primary-100)] text-[var(--color-primary-700)] rounded-full text-sm"
                   >
                     {tag}
                   </span>
@@ -251,13 +251,13 @@ export default function BlogLayout({ post, content, className = '' }: BlogLayout
           </div>
 
           {/* Blog-to-Reel Video Summary */}
-          <div className="my-8 p-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-100">
+          <div className="my-8 p-6 bg-[var(--color-primary-50)] rounded-xl border border-[var(--color-primary-100)]">
             <div className="flex flex-col md:flex-row gap-6 items-start">
               <div className="flex-1">
-                <p className="text-sm font-semibold text-blue-700 uppercase tracking-wide mb-2">
+                <p className="text-sm font-semibold text-[var(--color-primary-700)] uppercase tracking-wide mb-2">
                   Video Summary
                 </p>
-                <p className="text-gray-600 text-sm mb-3">
+                <p className="text-[var(--color-text-secondary)] text-sm mb-3">
                   Watch a short animated reel summarizing the key takeaways from this article.
                 </p>
               </div>
@@ -294,34 +294,34 @@ export default function BlogLayout({ post, content, className = '' }: BlogLayout
                   <h1 className="text-4xl font-bold mb-4 mt-8 first:mt-0">{children}</h1>
                 ),
                 h2: ({ children }) => (
-                  <h2 className="text-3xl font-semibold mb-4 mt-8 text-blue-800">{children}</h2>
+                  <h2 className="text-3xl font-semibold mb-4 mt-8 text-[var(--color-primary-800)]">{children}</h2>
                 ),
                 h3: ({ children }) => (
-                  <h3 className="text-2xl font-medium mb-3 mt-6 text-blue-700">{children}</h3>
+                  <h3 className="text-2xl font-medium mb-3 mt-6 text-[var(--color-primary-700)]">{children}</h3>
                 ),
                 h4: ({ children }) => (
-                  <h4 className="text-xl font-medium mb-2 mt-4 text-gray-800">{children}</h4>
+                  <h4 className="text-xl font-medium mb-2 mt-4 text-[var(--color-text-primary)]">{children}</h4>
                 ),
                 p: ({ children }) => (
-                  <p className="text-gray-700 mb-4 leading-relaxed">{children}</p>
+                  <p className="text-[var(--color-text-secondary)] mb-4 leading-relaxed">{children}</p>
                 ),
                 ul: ({ children }) => (
-                  <ul className="list-disc list-inside mb-4 text-gray-700 space-y-2 ml-4">{children}</ul>
+                  <ul className="list-disc list-inside mb-4 text-[var(--color-text-secondary)] space-y-2 ml-4">{children}</ul>
                 ),
                 ol: ({ children }) => (
-                  <ol className="list-decimal list-inside mb-4 text-gray-700 space-y-2 ml-4">{children}</ol>
+                  <ol className="list-decimal list-inside mb-4 text-[var(--color-text-secondary)] space-y-2 ml-4">{children}</ol>
                 ),
                 li: ({ children }) => (
                   <li className="mb-1">{children}</li>
                 ),
                 strong: ({ children }) => (
-                  <strong className="font-semibold text-gray-900">{children}</strong>
+                  <strong className="font-semibold text-[var(--color-text-primary)]">{children}</strong>
                 ),
                 em: ({ children }) => (
-                  <em className="italic text-gray-800">{children}</em>
+                  <em className="italic text-[var(--color-text-primary)]">{children}</em>
                 ),
                 blockquote: ({ children }) => (
-                  <blockquote className="border-l-4 border-blue-500 pl-4 italic text-gray-600 my-4 bg-blue-50 py-2">
+                  <blockquote className="border-l-4 border-[var(--color-primary-500)] pl-4 italic text-[var(--color-text-secondary)] my-4 bg-[var(--color-primary-50)] py-2">
                     {children}
                   </blockquote>
                 ),
@@ -330,7 +330,7 @@ export default function BlogLayout({ post, content, className = '' }: BlogLayout
                   return (
                     <Link
                       href={href || '#'}
-                      className="text-blue-600 hover:text-blue-800 underline"
+                      className="text-[var(--color-primary-500)] hover:text-[var(--color-primary-800)] underline"
                       target={isExternal ? '_blank' : undefined}
                       rel={isExternal ? 'noopener noreferrer' : undefined}
                     >
@@ -339,30 +339,30 @@ export default function BlogLayout({ post, content, className = '' }: BlogLayout
                   );
                 },
                 code: ({ children }) => (
-                  <code className="bg-gray-100 px-1 py-0.5 rounded text-sm font-mono text-gray-800">
+                  <code className="bg-[var(--color-background)] px-1 py-0.5 rounded text-sm font-mono text-[var(--color-text-primary)]">
                     {children}
                   </code>
                 ),
                 pre: ({ children }) => (
-                  <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto mb-4">
+                  <pre className="bg-[var(--color-text-primary)] text-[var(--color-surface)] p-4 rounded-lg overflow-x-auto mb-4">
                     {children}
                   </pre>
                 ),
                 table: ({ children }) => (
-                  <div className="my-6 overflow-x-auto rounded-lg border border-gray-200 bg-white">
+                  <div className="my-6 overflow-x-auto rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)]">
                     <table className="min-w-full border-collapse text-sm">{children}</table>
                   </div>
                 ),
-                thead: ({ children }) => <thead className="bg-gray-50">{children}</thead>,
-                tbody: ({ children }) => <tbody className="divide-y divide-gray-200">{children}</tbody>,
+                thead: ({ children }) => <thead className="bg-[var(--color-background)]">{children}</thead>,
+                tbody: ({ children }) => <tbody className="divide-y divide-[var(--color-border)]">{children}</tbody>,
                 tr: ({ children }) => <tr className="align-top">{children}</tr>,
                 th: ({ children }) => (
-                  <th className="border-b border-gray-200 px-4 py-2 text-left font-semibold text-gray-900">
+                  <th className="border-b border-[var(--color-border)] px-4 py-2 text-left font-semibold text-[var(--color-text-primary)]">
                     {children}
                   </th>
                 ),
                 td: ({ children }) => (
-                  <td className="px-4 py-2 text-gray-700 [&_p]:m-0 [&_ul]:my-0 [&_ol]:my-0">
+                  <td className="px-4 py-2 text-[var(--color-text-secondary)] [&_p]:m-0 [&_ul]:my-0 [&_ol]:my-0">
                     {children}
                   </td>
                 ),
@@ -383,11 +383,11 @@ export default function BlogLayout({ post, content, className = '' }: BlogLayout
           </div>
 
           {/* CTA Section */}
-          <section className="mb-8 bg-blue-50 p-6 rounded-lg text-center">
+          <section className="mb-8 bg-[var(--color-primary-50)] p-6 rounded-lg text-center">
             <h3 className="text-lg font-semibold mb-4">
               {post.ctaOverrideText || 'Ready to Take the Next Step?'}
             </h3>
-            <p className="mb-4 text-gray-700">
+            <p className="mb-4 text-[var(--color-text-secondary)]">
               {post.targetLocations && post.targetLocations.length > 0
                 ? `Get expert neurosurgery care in ${post.targetLocations.join(', ')}.`
                 : 'Get expert neurosurgery care with Dr. Sayuj Krishnan.'}
@@ -398,11 +398,11 @@ export default function BlogLayout({ post, content, className = '' }: BlogLayout
           {/* Medical Disclaimer */}
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">Medical Disclaimer</h2>
-            <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4">
-              <p className="text-sm text-gray-700">
+            <div className="bg-[var(--color-warning-light)] border-l-4 border-[var(--color-warning)] p-4">
+              <p className="text-sm text-[var(--color-text-secondary)]">
                 <strong>Important:</strong> This information is for educational purposes only and should not replace professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition. Never disregard professional medical advice or delay in seeking it because of something you have read on this website.
               </p>
-              <p className="text-sm text-gray-700 mt-2">
+              <p className="text-sm text-[var(--color-text-secondary)] mt-2">
                 If you think you may have a medical emergency, call your doctor or emergency services (108) immediately.
               </p>
             </div>

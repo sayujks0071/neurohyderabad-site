@@ -192,7 +192,7 @@ export default function HeaderRefactored() {
                     )}
                   </Link>
                   {item.dropdown && (
-                    <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-[var(--color-border)] opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-200 p-4">
+                    <div className="absolute top-full left-0 mt-2 w-64 bg-[var(--color-surface)] rounded-lg shadow-lg border border-[var(--color-border)] opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-200 p-4">
                       <ul className="space-y-2">
                         {item.dropdown.map((link) => (
                           <li key={link.href}>
@@ -229,7 +229,7 @@ export default function HeaderRefactored() {
               href={`https://wa.me/${CANONICAL_WHATSAPP}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm font-semibold text-green-800 hover:text-green-700 inline-flex items-center gap-2 px-3 py-2 min-h-[44px] border border-green-200 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+              className="text-sm font-semibold text-[var(--color-success)] hover:text-[var(--color-success-700)] inline-flex items-center gap-2 px-3 py-2 min-h-[44px] border border-[var(--color-success)] rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--color-success)] focus:ring-offset-2"
               aria-label="WhatsApp the care coordinator (opens in a new tab)"
             >
               <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -239,7 +239,7 @@ export default function HeaderRefactored() {
             </a>
             <Link
               href="/appointments"
-              className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 motion-safe:hover:scale-[1.02] motion-safe:active:scale-[0.98]"
+              className="btn-gradient-primary py-3 px-6 motion-safe:hover:scale-[1.02] motion-safe:active:scale-[0.98]"
               aria-label="Book an appointment"
             >
               Book Appointment
@@ -305,7 +305,7 @@ export default function HeaderRefactored() {
         {/* Mobile Navigation Menu */}
         <nav
           id="mobile-navigation"
-          className={`fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-white shadow-xl transform transition-transform duration-300 ease-in-out lg:hidden ${
+          className={`fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-[var(--color-surface)] shadow-xl transform transition-transform duration-300 ease-in-out lg:hidden ${
             isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
           aria-label="Mobile navigation"
@@ -381,7 +381,7 @@ export default function HeaderRefactored() {
               <Link
                 href="/appointments"
                 onClick={toggleMobileMenu}
-                className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 motion-safe:hover:scale-[1.02] motion-safe:active:scale-[0.98] w-full text-center block"
+                className="btn-gradient-primary py-3 px-6 motion-safe:hover:scale-[1.02] motion-safe:active:scale-[0.98] w-full text-center block"
               >
                 Book Appointment
               </Link>
@@ -401,7 +401,7 @@ export default function HeaderRefactored() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={toggleMobileMenu}
-                  className="flex items-center justify-center gap-2 rounded-lg border border-green-200 px-4 py-3 text-sm font-semibold text-green-700 hover:bg-green-50 transition-colors focus:outline-none focus:ring-2 focus:ring-green-500"
+                  className="flex items-center justify-center gap-2 rounded-lg border border-[var(--color-success)] px-4 py-3 text-sm font-semibold text-[var(--color-success-700)] hover:bg-[var(--color-success-light)] transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--color-success)]"
                   aria-label="WhatsApp the care coordinator (opens in a new tab)"
                 >
                   <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">

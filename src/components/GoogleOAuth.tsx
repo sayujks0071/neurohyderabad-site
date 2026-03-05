@@ -14,7 +14,7 @@ export default function GoogleOAuth({
   onSuccess, 
   onError, 
   buttonText = "Verify with Google",
-  className = "bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition-colors"
+  className = "bg-[var(--color-primary-500)] text-white px-6 py-3 rounded-full hover:bg-[var(--color-primary-700)] transition-colors"
 }: GoogleOAuthProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
