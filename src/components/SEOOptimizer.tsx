@@ -75,22 +75,31 @@ export default function SEOOptimizer({ pageType, pageSlug, serviceOrCondition }:
       }
 
       let maxScrollDepth = 0;
+      let scrollTimeout: NodeJS.Timeout | null = null;
       const trackScrollDepth = () => {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        if (docHeight <= 0) {
-          return;
-        }
-        const scrollPercent = Math.round((scrollTop / docHeight) * 100);
+        if (scrollTimeout) return;
+        scrollTimeout = setTimeout(() => {
+          const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+          const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+          if (docHeight <= 0) {
+            scrollTimeout = null;
+            return;
+          }
+          const scrollPercent = Math.round((scrollTop / docHeight) * 100);
 
-        if (scrollPercent > maxScrollDepth) {
-          maxScrollDepth = scrollPercent;
-          analytics.scrollDepth(pageSlug, scrollPercent);
-        }
+          if (scrollPercent > maxScrollDepth) {
+            maxScrollDepth = scrollPercent;
+            analytics.scrollDepth(pageSlug, scrollPercent);
+          }
+          scrollTimeout = null;
+        }, 500); // 500ms trailing edge throttle
       };
 
       window.addEventListener('scroll', trackScrollDepth, { passive: true });
-      cleanupCallbacks.push(() => window.removeEventListener('scroll', trackScrollDepth));
+      cleanupCallbacks.push(() => {
+        window.removeEventListener('scroll', trackScrollDepth);
+        if (scrollTimeout) clearTimeout(scrollTimeout);
+      });
 
       const trackTimeOnPage = () => {
         const timeOnPage = Date.now() - startTime;
