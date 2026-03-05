@@ -48,8 +48,8 @@ export async function POST(request: NextRequest) {
     const { data: contact, error } = await resend.contacts.create({
       audienceId,
       email,
-      firstName: name,
-      lastName: isoDate, // Appointment date used by the daily cron for filtering
+      first_name: name,
+      last_name: isoDate, // Appointment date used by the daily cron for filtering
       unsubscribed: false,
     });
 
@@ -106,7 +106,7 @@ export async function GET(request: NextRequest) {
 
     // Filter contacts whose appointment date (stored in lastName) matches tomorrow
     const upcomingContacts = allContacts.filter(
-      (c) => c.lastName === tomorrowISO && !c.unsubscribed
+      (c) => c.last_name === tomorrowISO && !c.unsubscribed
     );
 
     console.log(`[Appointment Reminders] ${upcomingContacts.length} appointments found for ${tomorrowISO}`);
