@@ -18,7 +18,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { sendPreAppointmentBriefingEmail } from '@/lib/email';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resendApiKey = process.env.RESEND_API_KEY?.trim();
+const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
 /** POST — Register a new appointment for reminder */
 export async function POST(request: NextRequest) {
@@ -44,6 +45,11 @@ export async function POST(request: NextRequest) {
     // The daily cron filters contacts by this date to send reminders.
     const appointmentDate = new Date(preferredDate);
     const isoDate = appointmentDate.toISOString().split('T')[0]; // YYYY-MM-DD
+
+    if (!resend) {
+      console.warn('[Appointments] RESEND_API_KEY not configured — skipping reminder registration');
+      return NextResponse.json({ success: true, stored: false, reason: 'api_key_missing' });
+    }
 
     // lastName stores the appointment date (YYYY-MM-DD) for the daily cron filter
     const { data: contact, error } = await resend.contacts.create({
@@ -88,6 +94,13 @@ export async function GET(request: NextRequest) {
     );
   }
 
+  if (!resend) {
+    return NextResponse.json(
+      { error: 'RESEND_API_KEY not configured. Set it in Vercel environment variables.' },
+      { status: 500 }
+    );
+  }
+
   try {
     // Calculate tomorrow's date in IST (UTC+5:30)
     const nowUTC = new Date();
@@ -117,10 +130,12 @@ export async function GET(request: NextRequest) {
     for (const contact of upcomingContacts) {
       try {
         const result = await sendPreAppointmentBriefingEmail({
-          name: contact.firstName || 'Patient',
-          email: contact.email,
-          procedure: 'your upcoming neurosurgery consultation',
-          date: tomorrowISO,
+          patientName: contact.first_name || 'Patient',
+          patientEmail: contact.email,
+          condition: 'General Consultation',
+          procedureType: 'your upcoming neurosurgery consultation',
+          appointmentDate: tomorrowISO,
+          briefingContent: 'Please bring any relevant medical records and imaging to your appointment.',
         });
 
         if (result.success) {
