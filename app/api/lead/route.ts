@@ -161,8 +161,8 @@ export async function POST(request: NextRequest) {
         ok: true,
         message: "Lead received successfully (CRM Failed)",
         requestId: payload.requestId,
-        crmError: crmError instanceof Error ? crmError.message : String(crmError),
-        // crmStack: crmError instanceof Error ? crmError.stack : undefined // Optional
+        // 🛡️ Sentinel: Don't expose internal error details to client
+        crmError: "An internal error occurred while saving CRM data.",
       });
     }
 
