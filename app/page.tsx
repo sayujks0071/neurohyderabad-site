@@ -46,7 +46,7 @@ const baseMetadata = makeMetadata({
 export const metadata: Metadata = {
   ...baseMetadata,
   title: {
-    absolute: "Best Neurosurgeon & Endoscopic Spine Surgeon Hyderabad",
+    absolute: "Top Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan",
   },
   keywords: [
     'dr sayuj krishnan',
@@ -759,6 +759,35 @@ export default function Home() {
               </div>
             </div>
             <LocationNAPCard locationId="malakpet" />
+          </div>
+        </Section>
+
+        {/* Conditions We Treat Mini-Cluster */}
+        <Section background="white" className="py-12 bg-slate-50">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl font-bold mb-4">Common Conditions We Treat</h2>
+            <p className="text-[var(--color-text-secondary)] mb-8">
+              Explore specialized care and minimally invasive options for frequent neurological concerns.
+            </p>
+            <div className="flex justify-center flex-wrap gap-4">
+               <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="bg-white border border-blue-200 text-blue-700 px-6 py-3 rounded-full hover:bg-blue-50 font-medium transition-colors">
+                  Sciatica Pain
+               </Link>
+               <Link href="/conditions/slip-disc-treatment-hyderabad" className="bg-white border border-blue-200 text-blue-700 px-6 py-3 rounded-full hover:bg-blue-50 font-medium transition-colors">
+                  Slipped Disc
+               </Link>
+               <Link href="/conditions/brain-tumor-surgery-hyderabad" className="bg-white border border-blue-200 text-blue-700 px-6 py-3 rounded-full hover:bg-blue-50 font-medium transition-colors">
+                  Brain Tumor
+               </Link>
+               <Link href="/conditions/trigeminal-neuralgia-treatment-hyderabad" className="bg-white border border-blue-200 text-blue-700 px-6 py-3 rounded-full hover:bg-blue-50 font-medium transition-colors">
+                  Trigeminal Neuralgia
+               </Link>
+            </div>
+            <div className="mt-8">
+                <Link href="/conditions" className="text-blue-600 font-semibold hover:underline">
+                    View All Conditions →
+                </Link>
+            </div>
           </div>
         </Section>
 

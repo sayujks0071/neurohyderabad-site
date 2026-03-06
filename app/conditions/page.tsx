@@ -11,11 +11,12 @@ import Section from "../_components/Section";
 import Card from "../_components/Card";
 import Button from "../_components/Button";
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
+import MedicalWebPageSchema from "../components/schemas/MedicalWebPageSchema";
 
 export const metadata: Metadata = {
-  title: "Neurological Conditions A–Z | Dr. Sayuj Krishnan",
+  title: "Brain & Spine Conditions Treated | Dr. Sayuj",
   description:
-    "Browse an A–Z index of brain, spine, and nerve conditions treated by Dr. Sayuj Krishnan with links to detailed guides and treatment options.",
+    "Expert treatment for brain, spine & nerve conditions in Hyderabad. Browse Dr. Sayuj's guide to symptoms, diagnosis & minimally invasive care.",
   alternates: {
     canonical: `${SITE_URL}/conditions`,
     languages: {
@@ -24,9 +25,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Neurological Conditions A–Z | Dr. Sayuj Krishnan",
+    title: "Brain & Spine Conditions Treated | Dr. Sayuj",
     description:
-      "Explore conditions, symptoms, and minimally invasive treatments offered for brain, spine, and epilepsy care.",
+      "Expert treatment for brain, spine & nerve conditions in Hyderabad. Browse Dr. Sayuj's guide to symptoms, diagnosis & minimally invasive care.",
     url: `${SITE_URL}/conditions`,
     siteName: "Dr. Sayuj Krishnan - Neurosurgeon in Hyderabad",
     images: [
@@ -42,9 +43,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Neurological Conditions A–Z | Dr. Sayuj Krishnan",
+    title: "Brain & Spine Conditions Treated | Dr. Sayuj",
     description:
-      "Find information about conditions treated, diagnostic pathways, and evidence-based neurosurgical care.",
+      "Expert treatment for brain, spine & nerve conditions in Hyderabad. Browse Dr. Sayuj's guide to symptoms, diagnosis & minimally invasive care.",
     images: [
       `${SITE_URL}/api/og?title=Conditions%20A%E2%80%93Z&subtitle=Brain%20%26%20Spine%20Care%20Index`,
     ],
@@ -134,6 +135,18 @@ export default function ConditionsPage() {
       <div className="mx-auto max-w-5xl px-6 pb-16">
          <LocalPathways mode="condition" />
       </div>
+
+      <MedicalWebPageSchema
+        title="Brain &amp; Spine Conditions Treated | Dr. Sayuj"
+        description="Expert treatment for brain, spine &amp; nerve conditions in Hyderabad. Browse Dr. Sayuj's guide to symptoms, diagnosis &amp; minimally invasive care."
+        pageSlug="/conditions/"
+        pageType="condition"
+        serviceOrCondition="Neurological Conditions"
+        breadcrumbs={[
+          { name: "Home", path: "/" },
+          { name: "Conditions", path: "/conditions" }
+        ]}
+      />
     </div>
   );
 }
