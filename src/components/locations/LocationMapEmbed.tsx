@@ -18,7 +18,7 @@ const CONFIGURATION = {
     {"title":"Yashoda Hospitals | Best Hospital in Malakpet","address1":"16-10-29","address2":"Nalgonda X Roads, near New Market Metro station, Jamal Colony, Malakpet, Hyderabad, Telangana 500036, India","coords":{"lat":17.3753412757495,"lng":78.49999799510651},"placeId":"ChIJrc-0BgCZyzsRvCybCuS3I90"}
   ],
   "mapOptions": {"center":{"lat":38.0,"lng":-100.0},"fullscreenControl":true,"mapTypeControl":false,"streetViewControl":false,"zoom":4,"zoomControl":true,"maxZoom":17,"mapId":""},
-  "mapsApiKey": "AIzaSyDs0HmqhBJA4pNcQk1PPyCqdM9KFNfRKww",
+  "mapsApiKey": process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "",
   "capabilities": {"input":false,"autocomplete":false,"directions":false,"distanceMatrix":false,"details":false,"actions":false}
 };
 
@@ -118,7 +118,7 @@ export const LocationMapEmbed: React.FC<LocationMapEmbedProps> = ({
             strategy="lazyOnload"
           />
           {/* @ts-ignore */}
-          <gmpx-api-loader key="AIzaSyDs0HmqhBJA4pNcQk1PPyCqdM9KFNfRKww" solution-channel="GMP_QB_locatorplus_v11_c"></gmpx-api-loader>
+          <gmpx-api-loader key={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ""} solution-channel="GMP_QB_locatorplus_v11_c"></gmpx-api-loader>
           {/* @ts-ignore */}
           <gmpx-store-locator ref={locatorRef} map-id="DEMO_MAP_ID" class="animate-in fade-in duration-500"></gmpx-store-locator>
         </>
