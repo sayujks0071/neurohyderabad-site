@@ -122,7 +122,7 @@ const schemaData = [
       addressCountry: "IN",
     },
     affiliation: {
-      "@type": "MedicalClinic",
+      "@type": "Hospital",
       name: "Yashoda Hospital Malakpet",
     },
     yearsOfExperience: 15,
@@ -137,29 +137,7 @@ const schemaData = [
       },
     ],
   },
-  {
-    "@context": "https://schema.org",
-    "@type": "MedicalClinic",
-    name: "Dr. Sayuj Krishnan - Brain & Spine Clinic, Yashoda Hospital Malakpet",
-    url: SITE_URL,
-    areaServed: ["Hyderabad", "Telangana", "Jubilee Hills", "Banjara Hills", "Hi-Tech City", "Gachibowli", "Malakpet", "Secunderabad"],
-    telephone: "+91 9778280044",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "Room 317, OPD Block, Yashoda Hospital, Malakpet",
-      addressLocality: "Hyderabad",
-      addressRegion: "Telangana",
-      postalCode: "500036",
-      addressCountry: "IN",
-    },
-    openingHoursSpecification: {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-      opens: "00:00",
-      closes: "23:59",
-      description: "24/7 Emergency Neurosurgical Care",
-    },
-  },
+
 ] as const;
 
 const faqItems = [

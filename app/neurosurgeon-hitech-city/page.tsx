@@ -8,7 +8,6 @@ import { LocationMapEmbed } from "@/src/components/locations/LocationMapEmbed";
 import { LocalPathways } from "@/src/components/locations/LocalPathways";
 import { LocationSchema } from "@/src/components/locations/LocationSchema";
 import { notFound } from "next/navigation";
-import BreadcrumbSchema from "@/app/components/schemas/BreadcrumbSchema";
 
 
 // Force static generation
@@ -72,11 +71,11 @@ export default function Page() {
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
-      <BreadcrumbSchema
+      <Breadcrumbs
         items={[
-          { name: 'Home', path: '/' },
-          { name: 'Locations', path: '/locations' },
-          { name: 'Neurosurgeon in Hitech City, Hyderabad', path: '/neurosurgeon-hitech-city' },
+          { name: 'Home', href: '/' },
+          { name: 'Locations', href: '/locations' },
+          { name: 'Neurosurgeon in Hitech City, Hyderabad', href: '/neurosurgeon-hitech-city' },
         ]}
       />
       <LocationSchema location={location}  faq={FAQ} />

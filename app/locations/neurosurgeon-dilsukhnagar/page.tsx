@@ -6,7 +6,7 @@ import { LocationMapEmbed } from "@/src/components/locations/LocationMapEmbed";
 import { LocalPathways } from "@/src/components/locations/LocalPathways";
 import { LocationSchema } from "@/src/components/locations/LocationSchema";
 import { notFound } from "next/navigation";
-import BreadcrumbSchema from "@/app/components/schemas/BreadcrumbSchema";
+import Breadcrumbs from "@/app/components/Breadcrumbs";
 
 
 // Force static generation
@@ -56,11 +56,11 @@ export default function DilsukhnagarLocationPage() {
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
-      <BreadcrumbSchema
+      <Breadcrumbs
         items={[
-          { name: 'Home', path: '/' },
-          { name: 'Locations', path: '/locations' },
-          { name: 'Best Neurosurgeon Near Dilsukhnagar', path: '/locations/neurosurgeon-dilsukhnagar' },
+          { name: 'Home', href: '/' },
+          { name: 'Locations', href: '/locations' },
+          { name: 'Best Neurosurgeon Near Dilsukhnagar', href: '/locations/neurosurgeon-dilsukhnagar' },
         ]}
       />
       <LocationSchema location={location}  faq={FAQ} />

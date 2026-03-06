@@ -10,7 +10,6 @@ import { LocationSchema } from "@/src/components/locations/LocationSchema";
 import TrustProof from "@/app/_components/TrustProof";
 import { patientStories } from "@/src/content/stories";
 import { notFound } from "next/navigation";
-import BreadcrumbSchema from "@/app/components/schemas/BreadcrumbSchema";
 
 
 // Force static generation
@@ -87,11 +86,11 @@ export default function MalakpetNeurosurgeonPage() {
 
   return (
     <main className="bg-white">
-      <BreadcrumbSchema
+      <Breadcrumbs
         items={[
-          { name: 'Home', path: '/' },
-          { name: 'Locations', path: '/locations' },
-          { name: 'Dr. Sayuj Krishnan - Neurosurgeon in Malakpet & Brain-Spine Specialist', path: '/neurosurgeon-malakpet' },
+          { name: 'Home', href: '/' },
+          { name: 'Locations', href: '/locations' },
+          { name: 'Dr. Sayuj Krishnan - Neurosurgeon in Malakpet & Brain-Spine Specialist', href: '/neurosurgeon-malakpet' },
         ]}
       />
       <LocationSchema location={location}  faq={FAQ} />
