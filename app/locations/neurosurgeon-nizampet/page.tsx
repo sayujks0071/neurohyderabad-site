@@ -6,7 +6,7 @@ import { LocationMapEmbed } from "@/src/components/locations/LocationMapEmbed";
 import { LocalPathways } from "@/src/components/locations/LocalPathways";
 import { LocationSchema } from "@/src/components/locations/LocationSchema";
 import { notFound } from "next/navigation";
-import BreadcrumbSchema from "@/app/components/schemas/BreadcrumbSchema";
+import Breadcrumbs from "@/app/components/Breadcrumbs";
 
 
 // Force static generation
@@ -55,11 +55,11 @@ export default function NizampetLocationPage() {
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
-      <BreadcrumbSchema
+      <Breadcrumbs
         items={[
-          { name: 'Home', path: '/' },
-          { name: 'Locations', path: '/locations' },
-          { name: 'Neurosurgeon Near Nizampet, Hyderabad', path: '/locations/neurosurgeon-nizampet' },
+          { name: 'Home', href: '/' },
+          { name: 'Locations', href: '/locations' },
+          { name: 'Neurosurgeon Near Nizampet, Hyderabad', href: '/locations/neurosurgeon-nizampet' },
         ]}
       />
       <LocationSchema location={location}  faq={FAQ} />
@@ -71,7 +71,7 @@ export default function NizampetLocationPage() {
       </p>
 
       <div className="mt-6 flex justify-center">
-        <LocationCTAs mode="location" locationId={location.id} />
+        <LocationCTAs location={location} />
       </div>
 
       <section className="grid md:grid-cols-2 gap-8 mt-10">
@@ -96,7 +96,7 @@ export default function NizampetLocationPage() {
 
         <div>
           <h2 className="text-2xl font-semibold mb-3">Map</h2>
-          <LocationMapEmbed mode="location" locationId={location.id} />
+          <LocationMapEmbed location={location} />
         </div>
       </section>
 

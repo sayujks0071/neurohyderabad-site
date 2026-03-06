@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import Breadcrumbs from "@/app/components/Breadcrumbs";
 import React from "react";
 import Link from "next/link";
@@ -7,8 +8,6 @@ import { LocationCTAs } from "@/src/components/locations/LocationCTAs";
 import { LocationMapEmbed } from "@/src/components/locations/LocationMapEmbed";
 import { LocalPathways } from "@/src/components/locations/LocalPathways";
 import { LocationSchema } from "@/src/components/locations/LocationSchema";
-import { notFound } from "next/navigation";
-import BreadcrumbSchema from "@/app/components/schemas/BreadcrumbSchema";
 
 
 // Force static generation
@@ -62,11 +61,11 @@ export default function Page() {
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
-      <BreadcrumbSchema
+      <Breadcrumbs
         items={[
-          { name: 'Home', path: '/' },
-          { name: 'Locations', path: '/locations' },
-          { name: 'Neurosurgeon in Secunderabad, Hyderabad', path: '/neurosurgeon-secunderabad' },
+          { name: 'Home', href: '/' },
+          { name: 'Locations', href: '/locations' },
+          { name: 'Neurosurgeon in Secunderabad, Hyderabad', href: '/neurosurgeon-secunderabad' },
         ]}
       />
       <LocationSchema location={location}  faq={FAQ} />

@@ -59,7 +59,7 @@ const schemaData = [
         acceptedAnswer: {
           "@type": "Answer",
           text: "No. Many spinal tumours are benign (non-cancerous) but can still cause paralysis by compressing the spinal cord. Others may be metastases from cancer elsewhere.",
-        },
+        }
       },
       {
         "@type": "Question",
@@ -67,7 +67,7 @@ const schemaData = [
         acceptedAnswer: {
           "@type": "Answer",
           text: "With modern intraoperative neuromonitoring and microsurgical techniques, the risk of new deficits is significantly minimised. The goal is often to prevent paralysis.",
-        },
+        }
       },
       {
         "@type": "Question",
@@ -75,7 +75,7 @@ const schemaData = [
         acceptedAnswer: {
           "@type": "Answer",
           text: "Hospital stay is typically 4-7 days depending on whether spinal fusion was performed. Full rehabilitation may take weeks to months.",
-        },
+        }
       },
       {
         "@type": "Question",
@@ -83,7 +83,7 @@ const schemaData = [
         acceptedAnswer: {
           "@type": "Answer",
           text: "Spinal fusion is only recommended when a tumour or its removal makes the spine unstable. Your surgeon will assess tumour location, bone involvement, and your overall health to decide whether fusion is necessary in your case.",
-        },
+        }
       },
       {
         "@type": "Question",
@@ -91,7 +91,7 @@ const schemaData = [
         acceptedAnswer: {
           "@type": "Answer",
           text: "Nerves are protected using an operating microscope, fine microsurgical instruments, and continuous intraoperative neuromonitoring of spinal cord and nerve function. This helps the surgeon separate tumour from healthy tissue and detect any stress on the nerves early.",
-        },
+        }
       },
       {
         "@type": "Question",
@@ -99,7 +99,7 @@ const schemaData = [
         acceptedAnswer: {
           "@type": "Answer",
           text: "Stereotactic radiosurgery is a focused form of radiotherapy used for selected spinal tumours, such as small residual or inoperable lesions and certain metastatic spine tumours. It delivers high-dose radiation precisely to the tumour while limiting exposure to the spinal cord.",
-        },
+        }
       },
       {
         "@type": "Question",
@@ -107,7 +107,7 @@ const schemaData = [
         acceptedAnswer: {
           "@type": "Answer",
           text: "Yes. Metastatic spine tumours are managed in a multidisciplinary way, combining surgery when needed with radiation and systemic cancer treatments. The aim is to relieve spinal cord compression, stabilise the spine, and improve quality of life.",
-        },
+        }
       },
     ],
   },
@@ -152,7 +152,7 @@ const schemaData = [
       addressCountry: "IN",
     },
     affiliation: {
-      "@type": "MedicalClinic",
+      "@type": "Hospital",
       name: "Yashoda Hospital Malakpet",
     },
   },
