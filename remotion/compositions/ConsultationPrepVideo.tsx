@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { AbsoluteFill, Sequence, useCurrentFrame, interpolate, spring, useVideoConfig } from 'remotion';
+import { AbsoluteFill, Sequence, useCurrentFrame, interpolate, spring, useVideoConfig, Easing } from 'remotion';
 import type { ConsultationPrepProps } from '../types/ConsultationPrepProps';
 import { WelcomeScene } from '../components/ConsultationPrep/WelcomeScene';
 import { CalendarScene } from '../components/ConsultationPrep/CalendarScene';
@@ -26,18 +26,23 @@ export const ConsultationPrepVideo: React.FC<ConsultationPrepProps> = ({
   const { fps } = useVideoConfig();
   const prefersReducedMotion = usePrefersReducedMotion();
 
-  // Scene 1 Exit: Fade out and scale down slightly
+  // Transition Easing
+  const smoothEase = Easing.inOut(Easing.ease);
+
+  // Scene 1 Exit: Fade out, scale down slightly
   const scene1ExitOpacity = useMemo(() => interpolate(frame, [160, 180], [1, 0], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
+    easing: smoothEase,
   }), [frame]);
 
   const scene1ExitScale = useMemo(() => interpolate(frame, [160, 180], [1, 0.95], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
+    easing: smoothEase,
   }), [frame]);
 
-  // Scene 2 Entrance: Slide up and fade in
+  // Scene 2 Entrance: Slide up, fade in
   const scene2EnterSpring = useMemo(() => spring({
     frame: frame - 150,
     fps,
@@ -49,20 +54,23 @@ export const ConsultationPrepVideo: React.FC<ConsultationPrepProps> = ({
   const scene2EnterOpacity = useMemo(() => interpolate(frame, [150, 170], [0, 1], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
+    easing: smoothEase,
   }), [frame]);
 
-  // Scene 2 Exit: Fade out and push up
+  // Scene 2 Exit: Fade out, push up
   const scene2ExitOpacity = useMemo(() => interpolate(frame, [430, 460], [1, 0], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
+    easing: smoothEase,
   }), [frame]);
 
   const scene2ExitY = useMemo(() => interpolate(frame, [430, 460], [0, -50], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
+    easing: smoothEase,
   }), [frame]);
 
-  // Scene 3 Entrance: Slide up and fade in
+  // Scene 3 Entrance: Slide up, fade in
   const scene3EnterSpring = useMemo(() => spring({
     frame: frame - 430,
     fps,
@@ -74,6 +82,7 @@ export const ConsultationPrepVideo: React.FC<ConsultationPrepProps> = ({
   const scene3EnterOpacity = useMemo(() => interpolate(frame, [430, 450], [0, 1], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
+    easing: smoothEase,
   }), [frame]);
 
   return (
