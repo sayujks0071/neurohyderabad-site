@@ -11,7 +11,7 @@ import ReviewedBy from '@/app/_components/ReviewedBy';
 import MedicalCitations from '@/app/_components/MedicalCitations';
 import SmartImage from '@/components/SmartImage';
 import LocationPageTracker from '@/src/components/LocationPageTracker';
-import BreadcrumbSchema from "@/app/components/schemas/BreadcrumbSchema";
+import Breadcrumbs from "@/app/components/Breadcrumbs";
 
 
 // Force static generation
@@ -68,11 +68,11 @@ export default function NeurosurgeonNearJubileeHillsFAQPage() {
 
   return (
     <main id="main" className="max-w-4xl mx-auto px-4 py-12">
-      <BreadcrumbSchema
+      <Breadcrumbs
         items={[
-          { name: 'Home', path: '/' },
-          { name: 'Locations', path: '/locations' },
-          { name: 'Neurosurgeon Near Jubilee Hills FAQ | Dr. Sayuj Krishnan', path: '/locations/neurosurgeon-near-jubilee-hills-faq' },
+          { name: 'Home', href: '/' },
+          { name: 'Locations', href: '/locations' },
+          { name: 'Neurosurgeon Near Jubilee Hills FAQ | Dr. Sayuj Krishnan', href: '/locations/neurosurgeon-near-jubilee-hills-faq' },
         ]}
       />
       <LocationSchema location={location}  faq={FAQ} />

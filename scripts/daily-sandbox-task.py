@@ -25,9 +25,6 @@ async def main() -> None:
             timeout=timedelta(minutes=10),
             env={"PYTHON_VERSION": "3.11"},
         )
-    except httpx.ConnectError:
-        logger.error("❌ Failed to connect to OpenSandbox server. Is it running on http://127.0.0.1:8000 ?")
-        return
     except Exception as e:
         logger.error(f"❌ Sandbox creation failed: {e}")
         return
@@ -84,15 +81,36 @@ def generate_daily_report():
         parser = SEOParser()
         parser.feed(html)
 
+        title = parser.title.strip()
+        description = parser.description.strip()
+        h1_tags = [tag for tag in parser.h1_tags if tag]
+
+        recommendations = []
+        if len(title) > 60:
+            recommendations.append(f"Title is {len(title)} characters long. SEO best practices recommend keeping meta titles under 60 characters to avoid truncation on search engines. Consider shortening it.")
+        elif not title:
+            recommendations.append("Title tag is missing or empty. A title tag is crucial for SEO and user experience. Please add one.")
+
+        if len(description) > 155:
+            recommendations.append(f"Description is {len(description)} characters long. SEO best practices recommend keeping meta descriptions under 155 characters. Consider shortening it.")
+        elif not description:
+            recommendations.append("Meta description is missing or empty. A well-written description improves click-through rates. Please add one.")
+
+        if len(h1_tags) == 0:
+            recommendations.append("No H1 tag found on the page. Every page should have exactly one H1 tag summarizing its content for better SEO.")
+        elif len(h1_tags) > 1:
+            recommendations.append(f"Found {len(h1_tags)} H1 tags. It is generally recommended to have only one H1 tag per page to maintain clear document structure.")
+
         report = {
             "date": datetime.datetime.now().isoformat(),
             "status": "success",
             "url": url,
             "seo_data": {
-                "title": parser.title.strip(),
-                "description": parser.description.strip(),
-                "h1_tags": [tag for tag in parser.h1_tags if tag]
-            }
+                "title": title,
+                "description": description,
+                "h1_tags": h1_tags
+            },
+            "recommendations": recommendations
         }
     except Exception as e:
         report = {

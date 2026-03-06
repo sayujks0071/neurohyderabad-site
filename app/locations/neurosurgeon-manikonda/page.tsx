@@ -6,7 +6,7 @@ import { LocationMapEmbed } from "@/src/components/locations/LocationMapEmbed";
 import { LocalPathways } from "@/src/components/locations/LocalPathways";
 import { LocationSchema } from "@/src/components/locations/LocationSchema";
 import { notFound } from "next/navigation";
-import BreadcrumbSchema from "@/app/components/schemas/BreadcrumbSchema";
+import Breadcrumbs from "@/app/components/Breadcrumbs";
 
 
 // Force static generation
@@ -55,11 +55,11 @@ export default function ManikondaLocationPage() {
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
-      <BreadcrumbSchema
+      <Breadcrumbs
         items={[
-          { name: 'Home', path: '/' },
-          { name: 'Locations', path: '/locations' },
-          { name: 'Neurosurgeon Near Manikonda, Hyderabad', path: '/locations/neurosurgeon-manikonda' },
+          { name: 'Home', href: '/' },
+          { name: 'Locations', href: '/locations' },
+          { name: 'Neurosurgeon Near Manikonda, Hyderabad', href: '/locations/neurosurgeon-manikonda' },
         ]}
       />
       <LocationSchema location={location}  faq={FAQ} />
@@ -71,7 +71,7 @@ export default function ManikondaLocationPage() {
       </p>
 
       <div className="mt-6 flex justify-center">
-        <LocationCTAs mode="location" locationId={location.id} />
+        <LocationCTAs location={location} />
       </div>
 
       <section className="grid md:grid-cols-2 gap-8 mt-10">
@@ -95,7 +95,7 @@ export default function ManikondaLocationPage() {
 
         <div>
           <h2 className="text-2xl font-semibold mb-3">Map</h2>
-          <LocationMapEmbed mode="location" locationId={location.id} />
+          <LocationMapEmbed location={location} />
         </div>
       </section>
 

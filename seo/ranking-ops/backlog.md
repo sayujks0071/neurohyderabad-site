@@ -45,7 +45,7 @@
 
 ## 2026-02-12
 - [x] **Content Improvement:** Added "Red Flags" emergency section to Spine Surgery page. (Done 2026-02-12)
-- [ ] **Content Gap:** Add similar "Red Flags" sections to other critical pages (Brain Tumor, Epilepsy).
+- [x] **Content Gap:** Add similar "Red Flags" sections to other critical pages (Brain Tumor, Epilepsy). (Done 2026-03-06)
 - [ ] **Technical Fix:** Investigate `middleware.ts` type definition properly (currently using `@ts-ignore`).
 
 ## 2026-02-15
@@ -75,3 +75,6 @@
 ## 2025-03-04
 *   [x] **Schema:** Add `FAQPageSchema` to `app/services/spine-surgery-hyderabad/page.tsx` to capture FAQ rich snippets for Spine Surgery intents. (Done 2025-03-04)
 *   **Schema Audit:** Verify other older pages like `brain-tumor-surgery` under `/app/services/` for missing `FAQPageSchema` or inconsistent schema setups.
+
+## 2026-03-06
+- [x] **Content Gap:** Added 'Red Flags' emergency section to Epilepsy Surgery page to improve topical depth and YMYL safety signals.
