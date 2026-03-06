@@ -278,13 +278,13 @@ export default function BookingForm({
                     max="10"
                     step="1"
                     className={`w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors ${
-                      (painScoreValue || 5) <= 3
+                      (Number(painScoreValue) || 5) <= 3
                         ? "accent-green-600 focus:ring-green-500"
-                        : (painScoreValue || 5) <= 7
+                        : (Number(painScoreValue) || 5) <= 7
                         ? "accent-yellow-500 focus:ring-yellow-500"
                         : "accent-red-600 focus:ring-red-500"
                     }`}
-                    aria-valuetext={painScoreValue ? `Score: ${painScoreValue}${painScoreValue >= 8 ? ' (Severe)' : painScoreValue <= 3 ? ' (Mild)' : ''}` : "Score: 5"}
+                    aria-valuetext={painScoreValue ? `Score: ${Number(painScoreValue)}${Number(painScoreValue) >= 8 ? ' (Severe)' : Number(painScoreValue) <= 3 ? ' (Mild)' : ''}` : "Score: 5"}
                     {...register("painScore")}
                   />
                   <div className="text-center">
@@ -293,19 +293,19 @@ export default function BookingForm({
                   </div>
                 </div>
                 <div className="text-center mt-2">
-                  {painScoreValue && (
+                  {painScoreValue !== undefined && (
                     <span
                       className={`inline-block px-3 py-1 rounded-lg text-sm font-bold ${
-                        painScoreValue <= 3
+                        Number(painScoreValue) <= 3
                           ? "bg-green-100 text-green-700"
-                          : painScoreValue <= 7
+                          : Number(painScoreValue) <= 7
                           ? "bg-yellow-100 text-yellow-700"
                           : "bg-red-100 text-red-700"
                       }`}
                     >
-                      Score: {painScoreValue}
-                      {painScoreValue >= 8 && " (Severe)"}
-                      {painScoreValue <= 3 && " (Mild)"}
+                      Score: {Number(painScoreValue)}
+                      {Number(painScoreValue) >= 8 && " (Severe)"}
+                      {Number(painScoreValue) <= 3 && " (Mild)"}
                     </span>
                   )}
                 </div>

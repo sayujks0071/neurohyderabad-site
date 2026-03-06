@@ -8,7 +8,7 @@ export const appointmentSchema = z.object({
     const n = Number(val);
     return Number.isFinite(n) && n > 0 && n <= 120;
   }, "Age seems too high"),
-  gender: z.enum(["male", "female", "other"], { errorMap: () => ({ message: "Please select a gender" }) }),
+  gender: z.enum(["male", "female", "other"], { message: "Please select a gender" }),
   requestedDate: z.date().min(new Date(), "Date must be in the future"),
   appointmentTime: z.string().min(1, "Please select a time"),
   reason: z.string().trim().min(10, "Please provide more details (min 10 characters)"),

@@ -208,7 +208,7 @@ export default function LeadForm() {
                   max="10"
                   step="1"
                   className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                  aria-valuetext={painScoreValue ? `Score: ${painScoreValue}${painScoreValue >= 8 ? ' (Severe)' : painScoreValue <= 3 ? ' (Mild)' : ''}` : "Score: 5"}
+                  aria-valuetext={painScoreValue !== undefined ? `Score: ${painScoreValue}${Number(painScoreValue) >= 8 ? ' (Severe)' : Number(painScoreValue) <= 3 ? ' (Mild)' : ''}` : "Score: 5"}
                   {...register("painScore")}
                 />
                 <span className="text-sm font-bold text-slate-400" aria-hidden="true">10</span>
@@ -217,16 +217,16 @@ export default function LeadForm() {
                 {painScoreValue !== undefined && (
                   <span
                     className={`inline-block px-3 py-1 rounded-lg text-xs font-bold ${
-                      painScoreValue <= 3
+                      Number(painScoreValue) <= 3
                         ? "bg-green-100 text-green-700"
-                        : painScoreValue <= 7
+                        : Number(painScoreValue) <= 7
                         ? "bg-yellow-100 text-yellow-700"
                         : "bg-red-100 text-red-700"
                     }`}
                   >
-                    Score: {painScoreValue}
-                    {painScoreValue >= 8 && " (Severe)"}
-                    {painScoreValue <= 3 && " (Mild)"}
+                    Score: {Number(painScoreValue)}
+                    {Number(painScoreValue) >= 8 && " (Severe)"}
+                    {Number(painScoreValue) <= 3 && " (Mild)"}
                   </span>
                 )}
               </div>
