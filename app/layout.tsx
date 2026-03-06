@@ -154,6 +154,8 @@ export const viewport: Viewport = {
   themeColor: "#0B2E4E",
 };
 
+import { TooltipProvider } from "@/components/ui/tooltip"
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -176,6 +178,7 @@ export default function RootLayout({
         <ClientAnalytics />
         <WebsiteSchema />
         <WebMCPProvider />
+        <TooltipProvider>
         <PhysicianSchema />
         <HospitalSchema />
         <OrganizationSchema />
@@ -199,6 +202,7 @@ export default function RootLayout({
         <Footer />
         <StandaloneFlagValues />
         {process.env.VERCEL ? <Analytics /> : null}
+        </TooltipProvider>
       </body>
     </html>
   );
