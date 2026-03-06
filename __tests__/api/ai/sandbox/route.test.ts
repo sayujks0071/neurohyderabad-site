@@ -77,6 +77,7 @@ describe('AI Sandbox API', () => {
     (streamText as any).mockReturnValue({
       toDataStreamResponse: mockToDataStreamResponse,
       toTextStreamResponse: mockToDataStreamResponse,
+      toUIMessageStreamResponse: mockToDataStreamResponse,
     });
 
     const req = new NextRequest('http://localhost/api/ai/sandbox', {
@@ -111,6 +112,7 @@ describe('AI Sandbox API', () => {
     (streamText as any).mockReturnValue({
       toDataStreamResponse: mockToDataStreamResponse,
       toTextStreamResponse: mockToDataStreamResponse,
+      toUIMessageStreamResponse: mockToDataStreamResponse,
     });
 
     const req = new NextRequest('http://localhost/api/ai/sandbox', {

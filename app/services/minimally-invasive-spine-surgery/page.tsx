@@ -327,7 +327,7 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
 
             <div className="mt-8">
               <h3 className="text-2xl font-bold text-gray-900 mb-4">Compare: Endoscopic vs. Traditional Surgery</h3>
-              <p className="text-gray-600 mb-4">See why patients prefer the endoscopic approach for safer, faster recovery.</p>
+              <p className="text-gray-600 mb-4">See why patients prefer the endoscopic approach for safer, faster recovery, especially for conditions like <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 hover:underline">sciatica</Link> and slipped discs.</p>
               <SurgeryComparisonTable />
             </div>
           </section>
