@@ -59,11 +59,11 @@ describe('Admin Stats API Route', () => {
     expect(data.health.status).toBe('healthy');
   });
 
-  it('should return 200 when valid query param key is provided', async () => {
+  it('should return 401 when valid query param key is provided since query parameters are rejected', async () => {
     const req = new NextRequest('http://localhost/api/admin/stats?key=test-secret');
     const response = await GET(req);
 
-    expect(response.status).toBe(200);
+    expect(response.status).toBe(401);
   });
 
   it('should return 500 if ADMIN_ACCESS_KEY is not configured', async () => {

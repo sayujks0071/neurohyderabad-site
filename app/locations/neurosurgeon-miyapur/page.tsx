@@ -6,6 +6,8 @@ import { LocationMapEmbed } from "@/src/components/locations/LocationMapEmbed";
 import { LocalPathways } from "@/src/components/locations/LocalPathways";
 import { LocationSchema } from "@/src/components/locations/LocationSchema";
 import { notFound } from "next/navigation";
+import Breadcrumbs from "@/app/components/Breadcrumbs";
+
 
 // Force static generation
 export const dynamic = 'force-static';
@@ -53,7 +55,14 @@ export default function MiyapurLocationPage() {
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
-      <LocationSchema location={location} breadcrumb={breadcrumb} faq={FAQ} />
+      <Breadcrumbs
+        items={[
+          { name: 'Home', href: '/' },
+          { name: 'Locations', href: '/locations' },
+          { name: 'Neurosurgeon Near Miyapur, Hyderabad', href: '/locations/neurosurgeon-miyapur' },
+        ]}
+      />
+      <LocationSchema location={location}  faq={FAQ} />
 
       <h1 className="text-3xl md:text-4xl font-bold text-center mb-6">Neurosurgeon Near Miyapur, Hyderabad</h1>
       <p className="text-lg text-gray-700 mb-8 text-center max-w-3xl mx-auto">

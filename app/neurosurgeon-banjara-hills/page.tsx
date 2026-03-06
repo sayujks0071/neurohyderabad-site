@@ -1,3 +1,4 @@
+import Breadcrumbs from "@/app/components/Breadcrumbs";
 import React from "react";
 import Link from "next/link";
 import { getLocationById } from "@/src/data/locations";
@@ -66,11 +67,18 @@ export default function Page() {
         medicalSpecialty="Neurosurgery"
         audience="Patients in Banjara Hills"
       />
-      <BreadcrumbSchema
+      <Breadcrumbs
         items={[
-          { name: "Home", path: "/" },
-          { name: "Locations", path: "/locations" },
-          { name: "Neurosurgeon Banjara Hills", path: "/neurosurgeon-banjara-hills" }
+          { name: "Home", href: "/" },
+          { name: "Locations", href: "/locations" },
+          { name: "Neurosurgeon Banjara Hills", href: "/neurosurgeon-banjara-hills" }
+        ]}
+      />
+      <Breadcrumbs
+        items={[
+          { name: 'Home', href: '/' },
+          { name: 'Locations', href: '/locations' },
+          { name: 'Neurosurgeon in Banjara Hills, Hyderabad', href: '/neurosurgeon-banjara-hills' },
         ]}
       />
       <LocationSchema
@@ -90,7 +98,7 @@ export default function Page() {
       </div>
 
       <div className="mt-6">
-        <LocationCTAs mode="location" locationId={location.id} />
+        <LocationCTAs location={location} />
       </div>
 
       <section className="grid md:grid-cols-2 gap-8 mt-10">
@@ -113,7 +121,7 @@ export default function Page() {
 
         <div>
           <h2 className="text-2xl font-semibold mb-3">Map</h2>
-          <LocationMapEmbed mode="location" locationId={location.id} />
+          <LocationMapEmbed location={location} />
         </div>
       </section>
 

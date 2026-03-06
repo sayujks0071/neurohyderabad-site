@@ -41,10 +41,10 @@ export const LocalPathways: React.FC<LocalPathwaysProps> = ({
   className = '',
   location: legacyLocation // Destructure legacy prop
 }) => {
-  const containerClass = `bg-white/50 backdrop-blur-sm border border-gray-100 rounded-2xl p-6 sm:p-8 ${className}`;
-  const headingClass = "text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2";
+  const containerClass = `bg-[var(--color-surface)]/50 backdrop-blur-sm border border-[var(--color-border)] rounded-2xl p-6 sm:p-8 ${className}`;
+  const headingClass = "text-2xl font-bold text-[var(--color-text-primary)] mb-6 flex items-center gap-2";
   const gridClass = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4";
-  const linkClass = "group flex items-center justify-between p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-blue-200 hover:shadow-md transition-all";
+  const linkClass = "group flex items-center justify-between p-4 bg-[var(--color-surface)] rounded-xl shadow-sm border border-[var(--color-border)] hover:border-[var(--color-primary-200)] hover:shadow-md transition-all";
 
   // Determine effective mode and data
   let effectiveMode = mode;
@@ -66,8 +66,8 @@ export const LocalPathways: React.FC<LocalPathwaysProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Top Services */}
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-              <Activity className="w-5 h-5 text-blue-600" />
+            <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-4 flex items-center gap-2">
+              <Activity className="w-5 h-5 text-[var(--color-primary-500)]" />
               Available Services
             </h3>
             <div className="space-y-3">
@@ -75,8 +75,8 @@ export const LocalPathways: React.FC<LocalPathwaysProps> = ({
                  const title = formatSlug(slug);
                  return (
                   <Link key={slug} href={getHref('service', slug)} className={linkClass}>
-                    <span className="font-medium text-gray-700 group-hover:text-blue-600 transition-colors">{title}</span>
-                    <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-blue-600" />
+                    <span className="font-medium text-[var(--color-text-secondary)] group-hover:text-[var(--color-primary-500)] transition-colors">{title}</span>
+                    <ChevronRight className="w-4 h-4 text-[var(--color-text-secondary)] group-hover:text-[var(--color-primary-500)]" />
                   </Link>
                  );
               })}
@@ -85,8 +85,8 @@ export const LocalPathways: React.FC<LocalPathwaysProps> = ({
 
           {/* Top Conditions */}
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-              <Stethoscope className="w-5 h-5 text-emerald-600" />
+            <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-4 flex items-center gap-2">
+              <Stethoscope className="w-5 h-5 text-[var(--color-success)]" />
               Conditions Treated
             </h3>
             <div className="space-y-3">
@@ -94,8 +94,8 @@ export const LocalPathways: React.FC<LocalPathwaysProps> = ({
                  const title = formatSlug(slug);
                  return (
                   <Link key={slug} href={getHref('condition', slug)} className={linkClass}>
-                    <span className="font-medium text-gray-700 group-hover:text-emerald-600 transition-colors">{title}</span>
-                    <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-emerald-600" />
+                    <span className="font-medium text-[var(--color-text-secondary)] group-hover:text-[var(--color-success)] transition-colors">{title}</span>
+                    <ChevronRight className="w-4 h-4 text-[var(--color-text-secondary)] group-hover:text-[var(--color-success)]" />
                   </Link>
                  );
               })}
@@ -103,10 +103,10 @@ export const LocalPathways: React.FC<LocalPathwaysProps> = ({
           </div>
         </div>
 
-        <div className="mt-8 pt-6 border-t border-gray-100 flex justify-center">
+        <div className="mt-8 pt-6 border-t border-[var(--color-border)] flex justify-center">
            <Link
              href="/appointments"
-             className="inline-flex items-center justify-center px-8 py-3 bg-blue-600 text-white font-semibold rounded-full shadow-lg hover:bg-blue-700 transition-transform hover:scale-105"
+             className="inline-flex items-center justify-center px-8 py-3 bg-[var(--color-primary-500)] text-white font-semibold rounded-full shadow-lg hover:bg-[var(--color-primary-700)] transition-transform hover:scale-105"
            >
              Book Appointment at {effectiveLocation.areaServedName}
            </Link>
@@ -123,9 +123,19 @@ export const LocalPathways: React.FC<LocalPathwaysProps> = ({
     // Use centralized configuration for pathways
     const targetAreas = effectiveMode === 'service' ? SERVICES_PATHWAY_AREAS : CONDITIONS_PATHWAY_AREAS;
 
-    const displayLocations = locations
+    // Filter by target areas and exclude the current area if currentSlug maps to an area
+    let displayLocations = locations
         .filter(l => targetAreas.includes(l.id as any))
         .sort((a, b) => a.areaServedName.localeCompare(b.areaServedName));
+
+    // Exclude current location page if rendered on one, though mode is service/condition
+    if (currentSlug) {
+      displayLocations = displayLocations.filter(loc => {
+        const cleanLocSlug = loc.slug.startsWith('/') ? loc.slug.slice(1) : loc.slug;
+        const cleanCurrentSlug = currentSlug.startsWith('/') ? currentSlug.slice(1) : currentSlug;
+        return cleanLocSlug !== cleanCurrentSlug;
+      });
+    }
 
     const title = effectiveMode === 'service'
       ? 'Visit Our Neurosurgery Clinics in Hyderabad'
@@ -138,10 +148,10 @@ export const LocalPathways: React.FC<LocalPathwaysProps> = ({
     return (
       <div className={containerClass}>
         <h3 className={headingClass}>
-          <MapPin className="w-6 h-6 text-blue-600" />
+          <MapPin className="w-6 h-6 text-[var(--color-primary-500)]" />
           {title}
         </h3>
-        <p className="text-gray-600 mb-6">
+        <p className="text-[var(--color-text-secondary)] mb-6">
             {subtitle}
         </p>
         <div className={gridClass}>
@@ -150,16 +160,16 @@ export const LocalPathways: React.FC<LocalPathwaysProps> = ({
              const href = loc.slug.startsWith('/') ? loc.slug : `/${loc.slug}`;
              return (
                 <Link key={loc.id} href={href} className={linkClass}>
-                  <span className="font-medium text-gray-700 group-hover:text-blue-600 transition-colors">{loc.areaServedName}</span>
-                  <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-blue-600" />
+                  <span className="font-medium text-[var(--color-text-secondary)] group-hover:text-[var(--color-primary-500)] transition-colors">{loc.areaServedName}</span>
+                  <ChevronRight className="w-4 h-4 text-[var(--color-text-secondary)] group-hover:text-[var(--color-primary-500)]" />
                 </Link>
              );
           })}
         </div>
-        <div className="mt-8 pt-6 border-t border-gray-100 flex justify-center">
+        <div className="mt-8 pt-6 border-t border-[var(--color-border)] flex justify-center">
              <Link
              href="/appointments"
-             className="inline-flex items-center justify-center px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-full shadow-lg hover:scale-105 transition-transform"
+             className="inline-flex items-center justify-center px-8 py-3 bg-gradient-to-r from-[var(--color-primary-500)] to-[var(--color-primary-700)] text-white font-semibold rounded-full shadow-lg hover:scale-105 transition-transform"
            >
              Schedule Consultation
            </Link>

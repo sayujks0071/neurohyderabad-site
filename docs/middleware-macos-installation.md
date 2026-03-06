@@ -17,7 +17,7 @@ Middleware Agent collects and analyzes infrastructure data on macOS systems. Thi
 Run the following command to automatically install the Middleware Agent:
 
 ```bash
-MW_API_KEY="fygjftkluglwjxlwyhqdwshcbwtvfavastli" \
+MW_API_KEY="<your_api_key>" \
 MW_TARGET="https://hjptv.middleware.io" \
 bash -c "$(curl -L https://install.middleware.io/scripts/mw-macos-agent-install.sh)"
 ```
@@ -85,7 +85,7 @@ If you prefer to install manually:
 
 2. **Set environment variables:**
    ```bash
-   export MW_API_KEY="fygjftkluglwjxlwyhqdwshcbwtvfavastli"
+   export MW_API_KEY="<your_api_key>"
    export MW_TARGET="https://hjptv.middleware.io"
    ```
 

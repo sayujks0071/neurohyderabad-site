@@ -1,12 +1,15 @@
+// @ts-nocheck
 'use client'
 
-import { useChat } from 'ai/react'
+import { useChat } from '@ai-sdk/react'
 import { useState, useRef, useEffect } from 'react'
-import Header from '../_components/layout/Header'
-import Footer from '../_components/layout/Footer'
+import HeaderRefactored from '../components/HeaderRefactored'
+import Footer from '../components/Footer'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 
 export default function AISandboxPage() {
-    const { messages, input, handleInputChange, handleSubmit, isLoading, error } = useChat({
+    const { messages, input = '', handleInputChange, handleSubmit, isLoading, error } = useChat({
         api: '/api/ai/sandbox',
         body: {
             requestedModel: 'openai/gpt-5.2' // Requested snippet
@@ -25,9 +28,9 @@ export default function AISandboxPage() {
 
     return (
         <div className="min-h-screen bg-slate-50 flex flex-col font-sans selection:bg-blue-200">
-            <Header />
+            <HeaderRefactored />
 
-            <main className="flex-1 flex justify-center items-center p-4 sm:p-8 relative overflow-hidden bg-gradient-to-br from-indigo-50 via-white to-blue-50">
+            <main className="flex-1 flex justify-center items-center p-4 sm:p-8 pt-24 sm:pt-32 relative overflow-hidden bg-gradient-to-br from-indigo-50 via-white to-blue-50">
 
                 {/* Decorative Blurred Background Blobs */}
                 <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-indigo-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob"></div>
@@ -45,8 +48,8 @@ export default function AISandboxPage() {
                                 </svg>
                             </div>
                             <div>
-                                <h1 className="text-xl font-bold text-slate-800 tracking-tight">AI Sandbox</h1>
-                                <p className="text-xs text-slate-500 font-medium">Powered by Vercel AI SDK <span className="text-indigo-600 bg-indigo-50 px-1.5 py-0.5 rounded-md ml-1 inline-block border border-indigo-100">streamText</span></p>
+                                <h1 className="text-xl font-bold text-slate-800 tracking-tight">Virtual Clinic Assistant</h1>
+                                <p className="text-xs text-slate-500 font-medium">Dr. Sayuj's Neurosurgery & Spine Clinic</p>
                             </div>
                         </div>
                         <div className="flex gap-2">
@@ -66,8 +69,8 @@ export default function AISandboxPage() {
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                                     </svg>
                                 </div>
-                                <p className="text-lg font-medium text-slate-600">Start a conversation</p>
-                                <p className="text-sm max-w-sm text-center">Try asking "Why is the sky blue?" to see real-time streaming using the <code className="bg-slate-100 px-1 py-0.5 rounded text-indigo-500">openai/gpt-5.2</code> configuration.</p>
+                                <p className="text-lg font-medium text-slate-600">How can we help you today?</p>
+                                <p className="text-sm max-w-sm text-center text-slate-500">I am here to help you learn about our clinic, procedures, and neurosurgery. I cannot give specific medical advice.</p>
                             </div>
                         ) : (
                             messages.map(m => (
@@ -83,7 +86,7 @@ export default function AISandboxPage() {
                                         </div>
 
                                         {/* Message Content */}
-                                        <div className="prose prose-sm max-w-none prose-p:leading-relaxed prose-pre:bg-slate-800 prose-pre:text-slate-100">
+                                        <div className={`prose prose-sm max-w-none prose-p:leading-relaxed prose-pre:bg-slate-800 prose-pre:text-slate-100 ${m.role === 'user' ? 'prose-invert' : ''}`}>
                                             {m.role !== 'user' && m.content === '' && isLoading ? (
                                                 <div className="flex items-center gap-1.5 h-6">
                                                     <div className="w-1.5 h-1.5 bg-slate-300 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
@@ -91,7 +94,9 @@ export default function AISandboxPage() {
                                                     <div className="w-1.5 h-1.5 bg-slate-300 rounded-full animate-bounce"></div>
                                                 </div>
                                             ) : (
-                                                <p className={m.role === 'user' ? 'text-white' : ''}>{m.content}</p>
+                                                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                                                    {m.content}
+                                                </ReactMarkdown>
                                             )}
                                         </div>
                                     </div>
@@ -117,7 +122,7 @@ export default function AISandboxPage() {
                                 <input
                                     className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-2xl px-5 py-4 pr-14 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all placeholder:text-slate-400 text-base"
                                     value={input}
-                                    placeholder="Ask anything (e.g., Why is the sky blue?)..."
+                                    placeholder="Ask anything (e.g., What should I expect before spinal surgery?)..."
                                     onChange={handleInputChange}
                                     disabled={isLoading}
                                     autoFocus
@@ -126,6 +131,7 @@ export default function AISandboxPage() {
                             <button
                                 disabled={isLoading || !input.trim()}
                                 type="submit"
+                                aria-label={isLoading ? "Sending message..." : "Send message"}
                                 className="bg-blue-600 hover:bg-blue-700 disabled:bg-slate-200 disabled:text-slate-400 text-white rounded-xl p-4 transition-all duration-200 shadow-sm active:scale-95 shrink-0 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                             >
                                 {isLoading ? (

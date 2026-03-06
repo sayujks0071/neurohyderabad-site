@@ -25,6 +25,18 @@
         "--header",
         "authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MjZiNTdlNi0xYmMxLTQzMGYtYmU0Yy1lMjFiZjk1NGRlMzkiLCJpc3MiOiJuOG4iLCJhdWQiOiJtY3Atc2VydmVyLWFwaSIsImp0aSI6ImExM2JkZTU0LTMzYmYtNGY5OC1hZmM1LTQ3MmY3NDE0OTJkZiIsImlhdCI6MTc2ODY4MTgzOH0.QaWqpg7EERwf8Xx2RanjXogrTTVt_SkKvpl4YYPMDh4"
       ]
+    },
+    "resend": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "resend-mcp",
+        "--sender",
+        "appointments@drsayuj.info"
+      ],
+      "env": {
+        "RESEND_API_KEY": "re_asCX14Ja_313BjmRCdiVvg8kg9nLRfJ6D"
+      }
     }
   }
 }

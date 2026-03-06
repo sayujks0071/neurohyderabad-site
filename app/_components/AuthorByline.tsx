@@ -25,7 +25,7 @@ export default function AuthorByline({
 
   return (
     <div
-      className={`flex flex-col sm:flex-row sm:items-center gap-2 text-sm text-gray-600 ${className}`}
+      className={`flex flex-col sm:flex-row sm:items-center gap-2 text-sm text-[var(--color-text-secondary)] ${className}`}
       aria-label="Article authorship"
     >
       <span>
@@ -33,7 +33,7 @@ export default function AuthorByline({
         <Link
           href="/about"
           rel="author"
-          className="font-semibold text-blue-700 hover:text-blue-900 underline decoration-blue-300"
+          className="font-semibold text-[var(--color-primary-700)] hover:text-[var(--color-primary-900)] underline decoration-blue-300"
         >
           Dr. Sayuj Krishnan
         </Link>

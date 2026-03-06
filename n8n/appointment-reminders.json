@@ -1,0 +1,154 @@
+{
+  "name": "Appointment Reminders",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "days",
+              "seconds": 0,
+              "minutes": 0,
+              "hours": 8
+            }
+          ]
+        }
+      },
+      "name": "Daily Schedule",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://www.drsayuj.info/api/admin/appointments",
+        "method": "GET",
+        "authentication": "header",
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "x-admin-key",
+              "value": "YOUR_ADMIN_KEY"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Fetch Appointments",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "appointments",
+        "options": {}
+      },
+      "name": "Split Appointments",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 1,
+      "position": [
+        650,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$node[\"Split Appointments\"].json[\"status\"]}}",
+              "operation": "equal",
+              "value2": "confirmed"
+            }
+          ]
+        }
+      },
+      "name": "Filter Confirmed",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        850,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "care@drsayuj.info",
+        "toEmail": "={{$node[\"Split Appointments\"].json[\"patientEmail\"]}}",
+        "subject": "Reminder: Your Upcoming Appointment with Dr. Sayuj",
+        "text": "Dear {{$node[\"Split Appointments\"].json[\"patientName\"]}},\n\nThis is a friendly reminder of your upcoming consultation with Dr. Sayuj on {{$node[\"Split Appointments\"].json[\"date\"]}}.\n\nPlease remember to bring any recent MRI/CT scans or relevant medical records.\n\nIf you need to reschedule, please contact the clinic.\n\nWarm regards,\nDr. Sayuj's Clinic",
+        "html": "<h2>Appointment Reminder</h2><p>Dear {{$node[\"Split Appointments\"].json[\"patientName\"]}},</p><p>This is a friendly reminder of your upcoming consultation with Dr. Sayuj on <b>{{$node[\"Split Appointments\"].json[\"date\"]}}</b>.</p><p><b>Important:</b> Please remember to bring any recent MRI/CT scans, referral letters, or relevant medical records.</p><p>If you need to reschedule, please contact the clinic at your earliest convenience.</p><p>Warm regards,<br>Dr. Sayuj's Clinic</p>"
+      },
+      "name": "Send Reminder",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [
+        1050,
+        200
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "YOUR_SMTP_CREDENTIAL_ID",
+          "name": "SMTP Account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Daily Schedule": {
+      "main": [
+        [
+          {
+            "node": "Fetch Appointments",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Appointments": {
+      "main": [
+        [
+          {
+            "node": "Split Appointments",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Appointments": {
+      "main": [
+        [
+          {
+            "node": "Filter Confirmed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter Confirmed": {
+      "main": [
+        [
+          {
+            "node": "Send Reminder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "id": "2560c722-7bbc-47d5-8976-f57cc88bad69"
+}

@@ -1,3 +1,4 @@
+import React, { useMemo } from 'react';
 import { spring, useCurrentFrame, useVideoConfig } from 'remotion';
 import { COLORS, FONTS, SPACING } from '../../utils/colorTokens';
 import { PrepStepItem } from './PrepStepItem';
@@ -16,21 +17,21 @@ export const PrepStepsScene: React.FC<PrepStepsSceneProps> = ({ surgeryType, pre
   const prefersReducedMotion = usePrefersReducedMotion();
 
   // Title animation
-  const titleOpacity = prefersReducedMotion ? 1 : spring({
+  const titleOpacity = useMemo(() => prefersReducedMotion ? 1 : spring({
     frame,
     fps,
     from: 0,
     to: 1,
     durationInFrames: 20,
-  });
+  }), [frame, fps, prefersReducedMotion]);
 
-  const titleY = prefersReducedMotion ? 0 : spring({
+  const titleY = useMemo(() => prefersReducedMotion ? 0 : spring({
     frame,
     fps,
     from: -30,
     to: 0,
     durationInFrames: 25,
-  });
+  }), [frame, fps, prefersReducedMotion]);
 
   return (
     <GradientBackground preset="light-clean" animated={!prefersReducedMotion}>

@@ -1,5 +1,5 @@
 import type { BookingData, EmailResult } from "@/packages/appointment-form/types";
-import { EmailService } from "@/src/lib/email";
+import { EmailService } from "@/lib/email";
 
 export async function sendConfirmationEmail(
   data: BookingData,

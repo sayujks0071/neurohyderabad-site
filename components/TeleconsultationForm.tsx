@@ -163,6 +163,8 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
       className="space-y-6 relative bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
       aria-label="Teleconsultation appointment request form"
       noValidate
+      toolname="requestTeleconsultation"
+      tooldescription="Request a teleconsultation or medical inquiry"
     >
       {/* Live region for form status announcements */}
       <div 

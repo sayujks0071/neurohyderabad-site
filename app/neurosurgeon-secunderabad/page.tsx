@@ -1,3 +1,5 @@
+import { notFound } from "next/navigation";
+import Breadcrumbs from "@/app/components/Breadcrumbs";
 import React from "react";
 import Link from "next/link";
 import { getLocationById } from "@/src/data/locations";
@@ -6,7 +8,7 @@ import { LocationCTAs } from "@/src/components/locations/LocationCTAs";
 import { LocationMapEmbed } from "@/src/components/locations/LocationMapEmbed";
 import { LocalPathways } from "@/src/components/locations/LocalPathways";
 import { LocationSchema } from "@/src/components/locations/LocationSchema";
-import { notFound } from "next/navigation";
+
 
 // Force static generation
 export const dynamic = 'force-static';
@@ -59,7 +61,14 @@ export default function Page() {
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
-      <LocationSchema location={location} breadcrumb={breadcrumb} faq={FAQ} />
+      <Breadcrumbs
+        items={[
+          { name: 'Home', href: '/' },
+          { name: 'Locations', href: '/locations' },
+          { name: 'Neurosurgeon in Secunderabad, Hyderabad', href: '/neurosurgeon-secunderabad' },
+        ]}
+      />
+      <LocationSchema location={location}  faq={FAQ} />
 
       <h1 className="text-3xl md:text-4xl font-bold">Neurosurgeon in Secunderabad, Hyderabad</h1>
       <p className="mt-4 text-lg">

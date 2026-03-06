@@ -161,15 +161,26 @@ export async function POST(request: NextRequest) {
         ok: true,
         message: "Lead received successfully (CRM Failed)",
         requestId: payload.requestId,
-        crmError: crmError instanceof Error ? crmError.message : String(crmError),
-        // crmStack: crmError instanceof Error ? crmError.stack : undefined // Optional
+        // 🛡️ Sentinel: Don't expose internal error details to client
+        crmError: "An internal error occurred while saving CRM data.",
       });
     }
 
     // Submit to Google Sheets (if configured)
     // Use `after` to process Google Sheet submission in the background
     // This reduces the response time for the user significantly (300-1500ms -> <50ms)
-    after(() => submitToGoogleSheets(payload));
+    after(async () => {
+      await submitToGoogleSheets(payload).catch((err) => console.error("Google Sheets error:", err));
+
+      // n8n Workflow Trigger
+      if (process.env.N8N_LEAD_WEBHOOK_URL) {
+        await fetch(process.env.N8N_LEAD_WEBHOOK_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }).catch((err) => console.error("Failed to trigger n8n lead webhook:", err));
+      }
+    });
 
     // 🛡️ Sentinel: Redact sensitive PII from logs
     console.log("[api/lead] Lead received:", {

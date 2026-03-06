@@ -66,10 +66,15 @@ export default function Hero() {
         // Scrub Engine
         const scrubEngine = new ScrubEngine({
             totalFrames: CONFIG.totalFrames,
+            batchSize: 4, // Load initial 4 frames for quick start
             onProgress: (p) => setProgress(p),
-            onLoadComplete: () => {
+            onInitLoad: () => {
+                // Start experience as soon as initial batch is ready
                 setIsLoading(false);
                 initScroll();
+            },
+            onLoadComplete: () => {
+                console.log('All frames fully loaded in background');
             }
         });
 
@@ -173,32 +178,34 @@ export default function Hero() {
             {isLoading && (
                 <div className="absolute inset-0 flex items-center justify-center z-50 bg-black/50 backdrop-blur-sm">
                     <div className="text-center">
-                        <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mb-4 mx-auto"></div>
-                        <p className="text-lg text-blue-400 font-medium">Loading Experience... {Math.round(progress * 100)}%</p>
+                        <div className="w-16 h-16 border-4 border-[var(--color-primary-500)] border-t-transparent rounded-full animate-spin mb-4 mx-auto"></div>
+                        <p className="text-lg text-[var(--color-primary-300)] font-medium">Loading Experience... {Math.round(progress * 100)}%</p>
                     </div>
                 </div>
             )}
 
             {/* Overlay Content */}
-            <div className={`absolute bottom-0 left-0 w-full p-10 pb-20 z-10 transition-opacity duration-1000`}>
+            <div className={`absolute bottom-0 left-0 w-full p-10 pb-20 z-40 transition-opacity duration-1000`}>
                 <div className="container mx-auto max-w-6xl">
-                    <h2 className="text-2xl md:text-4xl font-serif italic text-gray-400 mb-2">
-                        Advancing Minimally Invasive Surgery
+                    <h2 className="text-2xl md:text-4xl font-serif italic text-[var(--color-text-secondary)] mb-2">
+                        Advancing Minimally Invasive Spine & Brain Surgery
                     </h2>
                     <h1 className="text-4xl md:text-7xl font-bold leading-tight mb-8">
-                        Dr. Sayuj Krishnan:<br />German-Trained Neurosurgeon in Hyderabad
+                        Dr. Sayuj Krishnan:<br />Best Neurosurgeon in Hyderabad & Endoscopic Spine Specialist
                     </h1>
 
                     <div className="flex flex-wrap gap-4">
                         <Link
                             href="#contact"
-                            className="px-8 py-3 bg-white text-black font-semibold rounded hover:bg-gray-200 transition-colors"
+                            className="bg-gradient-to-r from-[var(--color-primary-500)] to-[var(--color-primary-700)] text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-[0.98]"
+                            aria-label="Book Consultation"
                         >
                             Book Consultation
                         </Link>
                         <Link
                             href="/services"
-                            className="px-8 py-3 border border-white text-white font-semibold rounded hover:bg-white/10 transition-colors"
+                            className="bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-secondary)] font-medium py-3 px-6 rounded-xl transition-all duration-300 hover:border-[var(--color-border)] hover:bg-[var(--color-background)] hover:text-[var(--color-text-primary)]"
+                            aria-label="View Procedures"
                         >
                             View Procedures
                         </Link>

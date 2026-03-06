@@ -148,7 +148,13 @@ export default function LeadForm() {
         </div>
       )}
 
-      <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-4">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        noValidate
+        className="space-y-4"
+        toolname="contactClinic"
+        tooldescription="Contact the clinic for general inquiries or lead generation"
+      >
         <Input
           label="Full Name"
           id="fullName"

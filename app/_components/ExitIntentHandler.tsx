@@ -49,12 +49,12 @@ export default function ExitIntentHandler({
           modal.innerHTML = `
             <div class="bg-white rounded-lg p-6 max-w-md mx-4">
               <h3 class="text-xl font-bold mb-4">Before you go...</h3>
-              <p class="text-gray-700 mb-6">${offerMessage}</p>
+              <p class="text-[var(--color-text-secondary)] mb-6">${offerMessage}</p>
               <div class="flex gap-3">
-                <a href="/appointments" class="flex-1 bg-blue-600 text-white px-4 py-2 rounded-lg text-center hover:bg-blue-700">
+                <a href="/appointments" class="flex-1 bg-[var(--color-primary-500)] text-white px-4 py-2 rounded-lg text-center hover:bg-[var(--color-primary-700)]">
                   Schedule Consultation
                 </a>
-                <button onclick="this.closest('.fixed').remove()" class="px-4 py-2 text-gray-600 hover:text-gray-800">
+                <button onclick="this.closest('.fixed').remove()" class="px-4 py-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]">
                   Not Now
                 </button>
               </div>

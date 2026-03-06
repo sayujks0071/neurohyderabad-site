@@ -27,22 +27,22 @@ const steps = [
 export default function EndoscopicProcedureSteps() {
   return (
     <div className="my-12">
-      <h2 className="text-3xl font-bold text-center text-blue-800 mb-8">
+      <h2 className="text-3xl font-bold text-center text-[var(--color-primary-800)] mb-8">
         How Endoscopic Spine Surgery Works
       </h2>
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
         {steps.map((step, index) => (
           <div
             key={index}
-            className="bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-6 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 group text-center h-full"
+            className="bg-[var(--color-surface)]/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-6 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 group text-center h-full"
           >
-            <div className="w-16 h-16 mx-auto bg-blue-50 rounded-full flex items-center justify-center mb-4 group-hover:bg-blue-100 transition-colors">
-              <step.icon className="w-8 h-8 text-blue-600" />
+            <div className="w-16 h-16 mx-auto bg-[var(--color-primary-50)] rounded-full flex items-center justify-center mb-4 group-hover:bg-[var(--color-primary-100)] transition-colors">
+              <step.icon className="w-8 h-8 text-[var(--color-primary-500)]" />
             </div>
-            <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-blue-700 transition-colors">
+            <h3 className="text-lg font-bold text-[var(--color-text-primary)] mb-3 group-hover:text-[var(--color-primary-700)] transition-colors">
               {step.title}
             </h3>
-            <p className="text-sm text-gray-600 leading-relaxed">
+            <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">
               {step.description}
             </p>
           </div>

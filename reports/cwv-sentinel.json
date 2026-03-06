@@ -1,21 +1,15 @@
 {
-  "timestamp": "2025-02-27T00:00:00Z",
+  "timestamp": "2025-03-05T00:00:00Z",
   "commit_hash": "HEAD",
-  "notes": {
-    "Home": {
-      "bottleneck": "CLS on mobile due to fixed-height video placeholders (450px) vs actual video height (~180px).",
-      "fix": "Updated placeholders in `app/page.tsx` and loading state in `RemotionVideoEmbedWrapper.tsx` to use `aspect-video` and `max-w-[800px]`, ensuring consistent aspect ratio and width during loading.",
-      "impact": "Eliminated large layout shift on mobile devices when videos load. Placeholder now matches the video dimensions exactly."
+  "pages": {
+    "home": {
+      "url": "/",
+      "type": "home",
+      "suspected_issue": "Heavy client-side Hero component. Loads 32 images before unblocking the UI.",
+      "proposed_fix": "Changed batchSize from 32 to 4 in app/components/scrollytelling/Hero.tsx.",
+      "implemented_fix": "Changed batchSize from 32 to 4 in app/components/scrollytelling/Hero.tsx.",
+      "expected_impact": "Significantly improves LCP (Largest Contentful Paint) and INP (Interaction to Next Paint) by unblocking the main thread and making the hero text visible much earlier. The loading screen disappears faster because only 4 frames are awaited initially instead of 32.",
+      "verification_steps": "Run the site locally (npm run dev) and load the homepage. Observe that the loading overlay disappears much faster than before, revealing the hero content sooner. The scrub scroll will still work as remaining images load in the background."
     }
-  },
-  "metrics": {
-    "before": {
-      "home-cls-mobile": "High (estimated > 0.25)"
-    },
-    "after": {
-      "home-cls-mobile": "Low (estimated < 0.1)"
-    }
-  },
-  "build_status": "Success",
-  "test_status": "Existing failures in unrelated tests (semantic-search, lead_security, stats, dicom validation, appointment SEO schema)."
+  }
 }

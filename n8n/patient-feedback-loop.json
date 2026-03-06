@@ -1,0 +1,123 @@
+{
+  "name": "Patient Feedback Loop",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "seconds": 0,
+              "minutes": 0,
+              "hours": 9
+            }
+          ]
+        }
+      },
+      "name": "Weekly Schedule",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://www.drsayuj.info/api/admin/patients/recent",
+        "method": "GET",
+        "authentication": "header",
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "x-admin-key",
+              "value": "YOUR_ADMIN_KEY"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Get Recent Patients",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "patients",
+        "options": {}
+      },
+      "name": "Split Patients",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 1,
+      "position": [
+        650,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "care@drsayuj.info",
+        "toEmail": "={{$node[\"Split Patients\"].json[\"email\"]}}",
+        "subject": "How was your experience with Dr. Sayuj?",
+        "text": "Dear {{$node[\"Split Patients\"].json[\"firstName\"]}},\n\nWe hope you are recovering well following your recent visit with Dr. Sayuj.\n\nYour health and comfort are our top priorities. We would be incredibly grateful if you could take a brief moment to share your experience with us. Your feedback directly helps us improve the quality of care for all our neurosurgery patients.\n\nPlease click here to share your thoughts: https://www.drsayuj.info/feedback?id={{$node[\"Split Patients\"].json[\"id\"]}}\n\nWishing you continued health and a smooth recovery,\n\nThe Team at Dr. Sayuj's Clinic",
+        "html": "<p>Dear {{$node[\"Split Patients\"].json[\"firstName\"]}},</p><p>We hope you are recovering well following your recent visit with Dr. Sayuj.</p><p>Your health and comfort are our top priorities. We would be incredibly grateful if you could take a brief moment to share your experience with us. Your feedback directly helps us improve the quality of care for all our neurosurgery patients.</p><p><a href=\"https://www.drsayuj.info/feedback?id={{$node[\"Split Patients\"].json[\"id\"]}}\">Click here to share your thoughts</a></p><p>Wishing you continued health and a smooth recovery,</p><p>The Team at Dr. Sayuj's Clinic</p>"
+      },
+      "name": "Send Feedback Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [
+        850,
+        300
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "YOUR_SMTP_CREDENTIAL_ID",
+          "name": "SMTP Account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Weekly Schedule": {
+      "main": [
+        [
+          {
+            "node": "Get Recent Patients",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Recent Patients": {
+      "main": [
+        [
+          {
+            "node": "Split Patients",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Patients": {
+      "main": [
+        [
+          {
+            "node": "Send Feedback Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "id": "eb983808-0554-4ed3-8920-de01d3a8fac3"
+}

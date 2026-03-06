@@ -61,11 +61,13 @@ export async function POST(request: NextRequest) {
       system: systemPrompt,
       messages,
       temperature: 0.7,
+      // @ts-ignore
       maxSteps: 5, // Allow multi-step tool execution
       tools: tools,
     });
 
     // Return data stream response (standard for AI SDK 3+)
+    // @ts-ignore
     return result.toDataStreamResponse();
 
   } catch (error) {

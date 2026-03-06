@@ -133,12 +133,12 @@ export default function RemotionVideoEmbed({
       {(title || description) && (
         <div className="mb-6 text-center">
           {title && (
-            <h3 className="text-2xl md:text-3xl font-bold text-blue-800 mb-2">
+            <h3 className="text-2xl md:text-3xl font-bold text-[var(--color-primary-800)] mb-2">
               {title}
             </h3>
           )}
           {description && (
-            <p className="text-gray-600 max-w-2xl mx-auto">{description}</p>
+            <p className="text-[var(--color-text-secondary)] max-w-2xl mx-auto">{description}</p>
           )}
         </div>
       )}
@@ -155,7 +155,7 @@ export default function RemotionVideoEmbed({
           <Suspense
             fallback={
               <div
-                className="bg-gray-900 rounded-xl flex items-center justify-center"
+                className="bg-[var(--color-text-primary)] rounded-xl flex items-center justify-center"
                 style={{ aspectRatio }}
               >
                 <div className="text-white text-sm font-medium animate-pulse">
@@ -181,7 +181,7 @@ export default function RemotionVideoEmbed({
           </Suspense>
         ) : (
           <div
-            className="bg-gradient-to-br from-blue-900 to-blue-950 rounded-xl flex items-center justify-center"
+            className="bg-gradient-to-br from-[var(--color-primary-900)] to-[var(--color-primary-900)] rounded-xl flex items-center justify-center"
             style={{ aspectRatio }}
           >
             <div className="text-center text-white/60">

@@ -6,6 +6,8 @@ interface SectionProps {
     background?: 'white' | 'gray' | 'blue' | 'none';
     container?: boolean;
     id?: string;
+    /** Section heading for accessibility (screen readers) */
+    'aria-labelledby'?: string;
 }
 
 const Section: React.FC<SectionProps> = ({
@@ -14,22 +16,25 @@ const Section: React.FC<SectionProps> = ({
     background = 'white',
     container = true,
     id,
+    'aria-labelledby': ariaLabelledBy,
 }) => {
     const backgrounds = {
-        white: 'bg-white',
-        gray: 'bg-[var(--color-background)]', // Using the variable from globals.css which is usually a light gray/off-white
+        white: 'bg-[var(--color-surface)]',
+        gray: 'bg-[var(--color-background)]',
         blue: 'bg-[var(--color-primary-50)]',
         none: '',
     };
 
-    const containerClass = container ? 'container mx-auto px-4 md:px-8 max-w-7xl' : '';
+    const containerClass = container ? 'container mx-auto px-[var(--space-4)] md:px-[var(--space-8)] max-w-7xl' : '';
 
-    // Use a consistent padding class, e.g., py-16 from Tailwind or a custom class if defined
-    // globals.css defines .section with padding, but we can also use utility classes for flexibility
-    const paddingClass = 'py-12 md:py-16';
+    const paddingClass = 'py-[var(--space-12)] md:py-[var(--space-16)]';
 
     return (
-        <section id={id} className={`${backgrounds[background]} ${paddingClass} ${className}`}>
+        <section
+            id={id}
+            className={`${backgrounds[background]} ${paddingClass} ${className}`}
+            aria-labelledby={ariaLabelledBy}
+        >
             {container ? (
                 <div className={containerClass}>
                     {children}

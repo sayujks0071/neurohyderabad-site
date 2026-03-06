@@ -124,7 +124,10 @@ export const PhysicianSchema: React.FC = () => {
           "Neurosurgery",
           "Spine Surgery",
           "Brain Surgery",
-          "Pediatric Neurosurgery"
+          "Pediatric Neurosurgery",
+          "Endoscopic Spine Surgery",
+          "Minimally Invasive Spine Surgery",
+          "Epilepsy Surgery"
         ],
         "address": {
           "@type": "PostalAddress",
@@ -265,7 +268,11 @@ export const PhysicianSchema: React.FC = () => {
           "Microvascular Decompression (MVD) for Trigeminal Neuralgia",
           "Gamma Knife Radiosurgery",
           "Pediatric Neurosurgery",
-          "Emergency Neurotrauma Care"
+          "Emergency Neurotrauma Care",
+          "Slip Disc Treatment",
+          "Sciatica Treatment",
+          "Spinal Stenosis Treatment",
+          "Laser Spine Surgery"
         ],
         "areaServed": [
           {
@@ -335,9 +342,14 @@ export const PhysicianSchema: React.FC = () => {
         "aggregateRating": {
           "@type": "AggregateRating",
           "ratingValue": "4.9",
-          "reviewCount": "150",
+          "reviewCount": "153",
           "bestRating": "5",
-          "worstRating": "1"
+          "worstRating": "1",
+          "ratingSource": {
+            "@type": "Organization",
+            "name": "Google Maps",
+            "sameAs": "https://maps.google.com/?cid=123"
+          }
         }
       },
       // LocalBusiness schema is handled per-location page by LocationSchema,

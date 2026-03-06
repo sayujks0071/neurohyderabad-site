@@ -68,7 +68,7 @@ export default function DynamicFAQ({
       <div className={`${className} flex items-center justify-center p-8`}>
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600 mx-auto mb-2"></div>
-          <p className="text-gray-600">Loading FAQs about {topic}...</p>
+          <p className="text-[var(--color-text-secondary)]">Loading FAQs about {topic}...</p>
         </div>
       </div>
     );
@@ -76,9 +76,9 @@ export default function DynamicFAQ({
 
   if (error) {
     return (
-      <div className={`${className} p-4 bg-red-50 border border-red-200 rounded-lg`}>
-        <p className="text-red-800">Error: {error}</p>
-        <p className="text-sm text-red-600 mt-2">
+      <div className={`${className} p-4 bg-[var(--color-error-light)] border border-[var(--color-error-light)] rounded-lg`}>
+        <p className="text-[var(--color-error-800)]">Error: {error}</p>
+        <p className="text-sm text-[var(--color-error)] mt-2">
           Please try again later or contact us at +91-9778280044
         </p>
       </div>
@@ -87,7 +87,7 @@ export default function DynamicFAQ({
 
   if (faqs.length === 0) {
     return (
-      <div className={`${className} p-4 text-center text-gray-600`}>
+      <div className={`${className} p-4 text-center text-[var(--color-text-secondary)]`}>
         <p>No FAQs found for "{topic}".</p>
         <p className="text-sm mt-2">
           Please upload relevant documents to generate FAQs.
@@ -106,11 +106,11 @@ export default function DynamicFAQ({
         {faqs.map((faq) => (
           <div
             key={faq.id}
-            className="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+            className="border border-[var(--color-border)] rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
           >
             <button
               onClick={() => setOpenId(openId === faq.id ? null : faq.id)}
-              className="w-full text-left p-4 font-semibold flex justify-between items-center hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-inset"
+              className="w-full text-left p-4 font-semibold flex justify-between items-center hover:bg-[var(--color-background)] transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-inset"
               aria-expanded={openId === faq.id}
               aria-controls={`faq-content-${componentId}-${faq.id}`}
               id={`faq-trigger-${componentId}-${faq.id}`}
@@ -123,12 +123,12 @@ export default function DynamicFAQ({
             
             {openId === faq.id && (
               <div
-                className="px-4 pb-4 pt-2 border-t border-gray-100"
+                className="px-4 pb-4 pt-2 border-t border-[var(--color-border)]"
                 id={`faq-content-${componentId}-${faq.id}`}
                 role="region"
                 aria-labelledby={`faq-trigger-${componentId}-${faq.id}`}
               >
-                <div className="prose prose-sm max-w-none text-gray-700">
+                <div className="prose prose-sm max-w-none text-[var(--color-text-secondary)]">
                   {faq.answer.split('\n').map((paragraph, idx) => (
                     <p key={idx} className="mb-2 last:mb-0">
                       {paragraph}
@@ -137,11 +137,11 @@ export default function DynamicFAQ({
                 </div>
                 
                 {faq.sources && faq.sources.length > 0 && (
-                  <div className="mt-4 pt-4 border-t border-gray-100">
-                    <p className="text-xs text-gray-500 mb-1">
+                  <div className="mt-4 pt-4 border-t border-[var(--color-border)]">
+                    <p className="text-xs text-[var(--color-text-secondary)] mb-1">
                       <strong>Sources:</strong>
                     </p>
-                    <ul className="text-xs text-gray-600 space-y-1">
+                    <ul className="text-xs text-[var(--color-text-secondary)] space-y-1">
                       {faq.sources.map((source, idx) => (
                         <li key={idx} className="flex items-start">
                           <span className="mr-2">•</span>
@@ -157,8 +157,8 @@ export default function DynamicFAQ({
         ))}
       </div>
 
-      <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-        <p className="text-sm text-blue-800">
+      <div className="mt-6 p-4 bg-[var(--color-primary-50)] border border-[var(--color-primary-200)] rounded-lg">
+        <p className="text-sm text-[var(--color-primary-800)]">
           <strong>Note:</strong> These FAQs are automatically generated from our medical documents. 
           For personalized medical advice, please consult with Dr. Sayuj directly at +91-9778280044.
         </p>

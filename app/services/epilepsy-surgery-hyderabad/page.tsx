@@ -93,6 +93,36 @@ export default function EpilepsySurgeryPage() {
             <Link href="/appointments" className="text-blue-600 hover:underline ml-2">Appointments</Link>
           </p>
         </section>
+
+        {/* This change should improve rankings for emergency/severe epilepsy intents by improving topical depth and YMYL safety signals. */}
+        <section className="mb-12 bg-red-50 border border-red-100 rounded-2xl p-8 shadow-sm">
+          <h2 className="text-2xl font-bold text-red-900 mb-4 flex items-center gap-3">
+            <span className="text-3xl">⚠️</span> When to Seek Immediate Emergency Care (Red Flags)
+          </h2>
+          <p className="text-red-900 mb-6 font-medium">
+            While epilepsy surgery is typically an elective procedure planned over time, certain seizure activities are medical emergencies that require immediate intervention to prevent brain damage or life-threatening complications.
+          </p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+            <div className="bg-white p-5 rounded-xl shadow-sm border border-red-100">
+              <h3 className="font-bold text-red-800 mb-2">Status Epilepticus</h3>
+              <p className="text-sm text-gray-700">A seizure lasting more than 5 minutes, or multiple seizures without regaining consciousness in between. This is a life-threatening emergency.</p>
+            </div>
+            <div className="bg-white p-5 rounded-xl shadow-sm border border-red-100">
+              <h3 className="font-bold text-red-800 mb-2">First-Time Seizures</h3>
+              <p className="text-sm text-gray-700">Any new-onset seizure in an adult requires urgent evaluation, especially if accompanied by confusion, fever, or a severe headache.</p>
+            </div>
+            <div className="bg-white p-5 rounded-xl shadow-sm border border-red-100">
+              <h3 className="font-bold text-red-800 mb-2">New Focal Deficits</h3>
+              <p className="text-sm text-gray-700">Prolonged weakness, numbness, or inability to speak after a seizure (Todd&apos;s paralysis) that does not quickly resolve.</p>
+            </div>
+          </div>
+          <div className="flex flex-wrap gap-4 items-center">
+            <a href="tel:+919778280044" className="inline-flex items-center gap-2 bg-red-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-red-700 transition-colors">
+              Call Emergency Helpline
+            </a>
+          </div>
+        </section>
+
         <section className="mb-12">
           <h2 className="text-3xl font-bold text-blue-800 mb-6">When is Epilepsy Surgery Considered?</h2>
           <div className="prose max-w-none">
@@ -272,7 +302,7 @@ export default function EpilepsySurgeryPage() {
 
 
       <div className="not-prose mt-12">
-        <LocalPathways mode="service" />
+        <LocalPathways mode="service" currentSlug="epilepsy-surgery-hyderabad" />
       </div>
       <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
 

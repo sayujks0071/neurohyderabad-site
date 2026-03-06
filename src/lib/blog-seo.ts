@@ -18,7 +18,7 @@ export function generateBlogMetadata(post: BlogPost): Metadata {
     60
   );
   const description = clamp(post.description, 155);
-  const canonicalUrl = `${SITE_URL}/blog/${post.slug}/`;
+  const canonicalUrl = `${SITE_URL}/blog/${post.slug}`;
   
   // Generate OG image URL
   const ogImageUrl = post.ogImage 

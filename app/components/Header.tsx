@@ -96,7 +96,7 @@ const NAV_SECTIONS: NavSection[] = [
 
 export default function Header() {
   return (
-    <header className="relative border-b bg-white">
+    <header className="relative border-b bg-[var(--color-surface)]">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-4">
         <Link href="/" className="flex items-center gap-3" aria-label="Dr Sayuj — Neurosurgeon and Endoscopic Spine Surgery homepage">
           <OptimizedImage
@@ -118,26 +118,26 @@ export default function Header() {
           <SiteSearch />
           <details className="relative">
             <summary
-              className="inline-flex cursor-pointer items-center justify-center rounded-full border border-gray-200 p-2 text-gray-600 transition hover:border-blue-300 hover:text-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
+              className="inline-flex cursor-pointer items-center justify-center rounded-full border border-[var(--color-border)] p-2 text-[var(--color-text-secondary)] transition hover:border-[var(--color-primary-300)] hover:text-[var(--color-primary-500)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
             >
               <span className="sr-only">Toggle primary navigation</span>
               <MenuIcon className="h-5 w-5" />
             </summary>
-            <div className="absolute right-0 z-30 mt-3 max-h-[70vh] w-72 overflow-y-auto rounded-2xl border border-gray-100 bg-white p-4 shadow-2xl">
+            <div className="absolute right-0 z-30 mt-3 max-h-[70vh] w-72 overflow-y-auto rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 shadow-2xl">
               {NAV_SECTIONS.map((section, index) => (
                 <div key={section.title} className="space-y-3">
                   <div>
-                    <p className="text-sm font-semibold text-gray-900">
+                    <p className="text-sm font-semibold text-[var(--color-text-primary)]">
                       {section.title}
                     </p>
-                    <p className="text-xs text-gray-500">{section.description}</p>
+                    <p className="text-xs text-[var(--color-text-secondary)]">{section.description}</p>
                   </div>
                   <ul className="space-y-2">
                     {section.links.map((link) => (
                       <li key={link.href}>
                         <Link
                           href={link.href}
-                          className="block rounded-lg border border-gray-200 px-3 py-2 text-sm text-gray-700 transition hover:border-blue-300 hover:text-blue-600"
+                          className="block rounded-lg border border-[var(--color-border)] px-3 py-2 text-sm text-[var(--color-text-secondary)] transition hover:border-[var(--color-primary-300)] hover:text-[var(--color-primary-500)]"
                         >
                           {link.label}
                         </Link>
@@ -145,7 +145,7 @@ export default function Header() {
                     ))}
                   </ul>
                   {index !== NAV_SECTIONS.length - 1 && (
-                    <hr className="border-gray-100" />
+                    <hr className="border-[var(--color-border)]" />
                   )}
                 </div>
               ))}
@@ -153,13 +153,13 @@ export default function Header() {
                 <Link
                   href="/appointments"
                   aria-label="Book a clinic consultation from the mobile menu"
-                  className="rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-2 text-center text-sm font-semibold text-white transition hover:from-blue-700 hover:to-purple-700"
+                  className="rounded-full bg-gradient-to-r from-[var(--color-primary-500)] to-purple-600 px-4 py-2 text-center text-sm font-semibold text-white transition hover:from-[var(--color-primary-700)] hover:to-purple-700"
                 >
                   Book Consultation
                 </Link>
                 <Link
                   href="/ai-chat"
-                  className="rounded-full border border-blue-200 px-4 py-2 text-center text-sm font-semibold text-blue-600 transition hover:border-blue-300 hover:bg-blue-50"
+                  className="rounded-full border border-[var(--color-primary-200)] px-4 py-2 text-center text-sm font-semibold text-[var(--color-primary-500)] transition hover:border-[var(--color-primary-300)] hover:bg-[var(--color-primary-50)]"
                 >
                   Chat with Care Team
                 </Link>
@@ -172,16 +172,16 @@ export default function Header() {
           {NAV_SECTIONS.map((section) => (
             <details key={section.title} className="group relative">
               <summary
-                className="flex cursor-pointer items-center gap-1 rounded-full px-3 py-2 text-sm font-medium text-gray-700 transition hover:text-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
+                className="flex cursor-pointer items-center gap-1 rounded-full px-3 py-2 text-sm font-medium text-[var(--color-text-secondary)] transition hover:text-[var(--color-primary-500)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
               >
                 {section.title}
-                <ChevronDownIcon className="h-4 w-4 text-gray-400 transition group-open:rotate-180 group-hover:text-blue-600" />
+                <ChevronDownIcon className="h-4 w-4 text-[var(--color-text-secondary)] transition group-open:rotate-180 group-hover:text-[var(--color-primary-500)]" />
               </summary>
-              <div className="absolute right-0 top-full z-40 mt-3 hidden w-72 rounded-2xl border border-gray-100 bg-white p-4 shadow-2xl group-open:block group-hover:block group-focus-within:block">
-                <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-blue-600">
+              <div className="absolute right-0 top-full z-40 mt-3 hidden w-72 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 shadow-2xl group-open:block group-hover:block group-focus-within:block">
+                <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-[var(--color-primary-500)]">
                   {section.title}
                 </p>
-                <p className="mb-4 text-sm text-gray-600">
+                <p className="mb-4 text-sm text-[var(--color-text-secondary)]">
                   {section.description}
                 </p>
                 <ul className="space-y-2">
@@ -189,10 +189,10 @@ export default function Header() {
                     <li key={link.href}>
                       <Link
                         href={link.href}
-                        className="flex items-center justify-between rounded-lg px-3 py-2 text-sm text-gray-700 transition hover:bg-blue-50 hover:text-blue-700"
+                        className="flex items-center justify-between rounded-lg px-3 py-2 text-sm text-[var(--color-text-secondary)] transition hover:bg-[var(--color-primary-50)] hover:text-[var(--color-primary-700)]"
                       >
                         {link.label}
-                        <span aria-hidden className="text-gray-300">
+                        <span aria-hidden className="text-[var(--color-border)]">
                           →
                         </span>
                       </Link>
@@ -206,7 +206,7 @@ export default function Header() {
           <Link
             href="/appointments"
             aria-label="Book a consultation via the primary navigation"
-            className="rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-2 text-sm font-semibold text-white outline-offset-2 transition hover:from-blue-700 hover:to-purple-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500"
+            className="rounded-full bg-gradient-to-r from-[var(--color-primary-500)] to-purple-600 px-4 py-2 text-sm font-semibold text-white outline-offset-2 transition hover:from-[var(--color-primary-700)] hover:to-purple-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500"
           >
             Book Consultation
           </Link>

@@ -19,6 +19,7 @@ import TrustBridgeLink from "./_components/TrustBridgeLink";
 import { mediaPublications } from "../src/content/media";
 import Button from "./_components/Button";
 import Card from "./_components/Card";
+import LazySection from "./_components/LazySection";
 import Section from "./_components/Section";
 import FAQPageSchema from "./_components/FAQPageSchema";
 import HeroCTAButtons from "./_components/HeroCTAButtons";
@@ -45,7 +46,7 @@ const baseMetadata = makeMetadata({
 export const metadata: Metadata = {
   ...baseMetadata,
   title: {
-    absolute: "Best Neurosurgeon & Endoscopic Spine Surgeon Hyderabad",
+    absolute: "Top Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan",
   },
   keywords: [
     'dr sayuj krishnan',
@@ -199,7 +200,7 @@ export default function Home() {
       />
 
       <HomeTrackers />
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-[var(--color-surface)]">
 
         {/* Scrollytelling Hero Section */}
         <Hero />
@@ -221,23 +222,23 @@ export default function Home() {
             {mediaPublications.filter(pub => pub.featured).slice(0, 3).map((publication) => (
               <Card key={publication.id} hover={true} className="h-full">
                 <div className="mb-4">
-                  <span className="inline-block bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">
+                  <span className="inline-block bg-[var(--color-primary-100)] text-[var(--color-primary-800)] text-xs font-semibold px-2.5 py-0.5 rounded-full">
                     {publication.type.replace('-', ' ').toUpperCase()}
                   </span>
-                  <span className="ml-2 text-sm text-gray-500">
+                  <span className="ml-2 text-sm text-[var(--color-text-secondary)]">
                     {publication.date}
                   </span>
                 </div>
 
-                <h3 className="text-lg font-bold text-gray-900 mb-3">
+                <h3 className="text-lg font-bold text-[var(--color-text-primary)] mb-3">
                   {publication.title}
                 </h3>
 
-                <p className="text-gray-600 text-sm mb-3">
+                <p className="text-[var(--color-text-secondary)] text-sm mb-3">
                   <strong>{publication.publication}</strong>
                 </p>
 
-                <p className="text-gray-700 text-sm mb-4">
+                <p className="text-[var(--color-text-secondary)] text-sm mb-4">
                   {publication.description}
                 </p>
 
@@ -245,7 +246,7 @@ export default function Home() {
                   href={publication.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm"
+                  className="inline-flex items-center text-[var(--color-primary-500)] hover:text-[var(--color-primary-800)] font-medium text-sm"
                   aria-label={
                     publication.type === 'interview'
                       ? `Watch Interview: ${publication.title} (opens in a new tab)`
@@ -278,18 +279,18 @@ export default function Home() {
         {/* Animated Service Showcase Video */}
         <LazySection
           placeholder={
-            <div className="py-12 md:py-16 bg-blue-50">
+            <div className="py-12 md:py-16 bg-[var(--color-primary-50)]">
               <div className="container mx-auto px-4">
                 <div className="max-w-4xl mx-auto text-center">
                   {/* Header Placeholder */}
                   <div className="mb-6">
-                    <div className="h-8 md:h-9 w-3/4 md:w-1/2 bg-blue-200 rounded animate-pulse mx-auto mb-2"></div>
-                    <div className="h-4 w-full md:w-2/3 bg-blue-100 rounded animate-pulse mx-auto"></div>
-                    <div className="h-4 w-5/6 md:w-1/2 bg-blue-100 rounded animate-pulse mx-auto mt-1"></div>
+                    <div className="h-8 md:h-9 w-3/4 md:w-1/2 bg-[var(--color-primary-200)] rounded animate-pulse mx-auto mb-2"></div>
+                    <div className="h-4 w-full md:w-2/3 bg-[var(--color-primary-100)] rounded animate-pulse mx-auto"></div>
+                    <div className="h-4 w-5/6 md:w-1/2 bg-[var(--color-primary-100)] rounded animate-pulse mx-auto mt-1"></div>
                   </div>
                   {/* Video Placeholder - Aspect Ratio Match */}
-                  <div className="max-w-[800px] mx-auto w-full aspect-video rounded-xl overflow-hidden shadow-lg bg-blue-100 animate-pulse">
-                    <div className="h-full w-full flex items-center justify-center text-blue-300">
+                  <div className="max-w-[800px] mx-auto w-full aspect-video rounded-xl overflow-hidden shadow-lg bg-[var(--color-primary-100)] animate-pulse">
+                    <div className="h-full w-full flex items-center justify-center text-[var(--color-primary-300)]">
                       <span className="sr-only">Loading video...</span>
                     </div>
                   </div>
@@ -298,7 +299,7 @@ export default function Home() {
             </div>
           }
         >
-          <Section background="none" className="py-16 bg-gradient-to-b from-blue-50 to-white">
+          <Section background="none" className="py-16 bg-gradient-to-b from-[var(--color-primary-50)] to-[var(--color-surface)]">
             <RemotionVideoEmbedWrapper
               compositionId="ServiceShowcase"
               title="Our Neurosurgical Services"
@@ -315,9 +316,9 @@ export default function Home() {
 
 
         {/* Memberships & Certifications */}
-        <Section background="white" className="py-12 border-t border-gray-100">
+        <Section background="white" className="py-12 border-t border-[var(--color-border)]">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-2xl font-bold mb-8 text-gray-800">Memberships & Certifications</h2>
+            <h2 className="text-2xl font-bold mb-8 text-[var(--color-text-primary)]">Memberships & Certifications</h2>
             <div className="flex flex-wrap justify-center gap-8 items-center opacity-80 grayscale hover:grayscale-0 transition-all duration-300">
               <a
                 href="https://www.aospine.org/"
@@ -327,7 +328,7 @@ export default function Home() {
                 aria-label="AO Spine International (opens in a new tab)"
               >
                 <span className="text-4xl mb-2 group-hover:scale-110 transition-transform">🌍</span>
-                <span className="font-semibold text-gray-700 group-hover:text-blue-700">AO Spine International</span>
+                <span className="font-semibold text-[var(--color-text-secondary)] group-hover:text-[var(--color-primary-700)]">AO Spine International</span>
               </a>
               <a
                 href="https://neurosocietyindia.org/"
@@ -337,7 +338,7 @@ export default function Home() {
                 aria-label="Neurological Society of India (opens in a new tab)"
               >
                 <span className="text-4xl mb-2 group-hover:scale-110 transition-transform">🇮🇳</span>
-                <span className="font-semibold text-gray-700 group-hover:text-blue-700">Neurological Society of India</span>
+                <span className="font-semibold text-[var(--color-text-secondary)] group-hover:text-[var(--color-primary-700)]">Neurological Society of India</span>
               </a>
               <a
                 href="https://www.cns.org/"
@@ -347,75 +348,75 @@ export default function Home() {
                 aria-label="Congress of Neurological Surgeons (opens in a new tab)"
               >
                 <span className="text-4xl mb-2 group-hover:scale-110 transition-transform">🧠</span>
-                <span className="font-semibold text-gray-700 group-hover:text-blue-700">Congress of Neurological Surgeons</span>
+                <span className="font-semibold text-[var(--color-text-secondary)] group-hover:text-[var(--color-primary-700)]">Congress of Neurological Surgeons</span>
               </a>
             </div>
           </div>
         </Section>
 
         {/* Trust Bridge Section - Connect Services to Credentials */}
-        <Section id="trust-bridge-section" background="blue" className="py-16 bg-gradient-to-r from-blue-50 to-indigo-50">
+        <Section id="trust-bridge-section" background="blue" className="py-16 bg-[var(--color-primary-50)]">
           <div className="grid md:grid-cols-2 gap-8">
             <TrustBridgeLink
               href="/about"
-              className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow group"
+              className="bg-[var(--color-surface)] rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow group"
               eventLabel="homepage_trust_bridge_about"
             >
-              <h3 className="text-2xl font-bold text-blue-900 mb-4 group-hover:text-blue-700">
+              <h3 className="text-2xl font-bold text-[var(--color-primary-900)] mb-4 group-hover:text-[var(--color-primary-700)]">
                 Meet Dr. Sayuj Krishnan
               </h3>
-              <p className="text-gray-700 mb-4">
+              <p className="text-[var(--color-text-secondary)] mb-4">
                 Learn about over 9 years of neurosurgical experience, German fellowship training, and his approach to compassionate, minimally invasive care.
               </p>
-              <ul className="space-y-2 text-gray-600 mb-4">
+              <ul className="space-y-2 text-[var(--color-text-secondary)] mb-4">
                 <li className="flex items-start">
-                  <span className="text-blue-600 mr-2">✓</span>
+                  <span className="text-[var(--color-primary-500)] mr-2">✓</span>
                   <span>MBBS, DNB Neurosurgery • Fellowship in Minimally Invasive Spine Surgery</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-blue-600 mr-2">✓</span>
+                  <span className="text-[var(--color-primary-500)] mr-2">✓</span>
                   <span>Observer-ship in Full Endoscopic Spine Surgery (Germany)</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-blue-600 mr-2">✓</span>
+                  <span className="text-[var(--color-primary-500)] mr-2">✓</span>
                   <span>Affiliated with Yashoda Hospital, Malakpet</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-blue-600 mr-2">✓</span>
+                  <span className="text-[var(--color-primary-500)] mr-2">✓</span>
                   <span>Member: AO Spine (International), Neurological Society of India (NSI), Congress of Neurological Surgeons (CNS)</span>
                 </li>
               </ul>
-              <span className="text-blue-600 font-semibold group-hover:text-blue-800">
+              <span className="text-[var(--color-primary-500)] font-semibold group-hover:text-[var(--color-primary-800)]">
                 Learn More About Dr. Sayuj →
               </span>
             </TrustBridgeLink>
 
             <TrustBridgeLink
               href="/patient-stories"
-              className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow group"
+              className="bg-[var(--color-surface)] rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow group"
               eventLabel="homepage_trust_bridge_patient_stories"
             >
-              <h3 className="text-2xl font-bold text-blue-900 mb-4 group-hover:text-blue-700">
+              <h3 className="text-2xl font-bold text-[var(--color-primary-900)] mb-4 group-hover:text-[var(--color-primary-700)]">
                 Patient Success Stories
               </h3>
-              <p className="text-gray-700 mb-4">
+              <p className="text-[var(--color-text-secondary)] mb-4">
                 Read real stories from patients who have successfully undergone neurosurgery and spine surgery with Dr. Sayuj Krishnan.
               </p>
               <div className="space-y-3 mb-4">
-                <div className="border-l-4 border-green-500 pl-4">
-                  <p className="text-gray-700 italic text-sm">
+                <div className="border-l-4 border-[var(--color-success)] pl-4">
+                  <p className="text-[var(--color-text-secondary)] italic text-sm">
                     "I was speaking normally the next day and felt safe throughout the awake mapping."
                   </p>
-                  <p className="text-xs text-gray-500 mt-1">— Patient with Meningioma Surgery</p>
+                  <p className="text-xs text-[var(--color-text-secondary)] mt-1">— Patient with Meningioma Surgery</p>
                 </div>
-                <div className="border-l-4 border-blue-500 pl-4">
-                  <p className="text-gray-700 italic text-sm">
+                <div className="border-l-4 border-[var(--color-primary-500)] pl-4">
+                  <p className="text-[var(--color-text-secondary)] italic text-sm">
                     "I could stand straight the very next morning and walked the corridor with the physio."
                   </p>
-                  <p className="text-xs text-gray-500 mt-1">— Patient after TLIF Spine Surgery</p>
+                  <p className="text-xs text-[var(--color-text-secondary)] mt-1">— Patient after TLIF Spine Surgery</p>
                 </div>
               </div>
-              <span className="text-blue-600 font-semibold group-hover:text-blue-800">
+              <span className="text-[var(--color-primary-500)] font-semibold group-hover:text-[var(--color-primary-800)]">
                 Read All Patient Stories →
               </span>
             </TrustBridgeLink>
@@ -428,41 +429,41 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <Card padding="lg" className="shadow-lg">
               <div className="mb-6">
-                <div className="w-full h-64 bg-gradient-to-r from-green-100 to-green-200 rounded-lg shadow-lg flex items-center justify-center">
+                <div className="w-full h-64 bg-gradient-to-r from-[var(--color-success-light)] to-[var(--color-success-light)] rounded-lg shadow-lg flex items-center justify-center">
                   <div className="text-center">
                     <div className="text-4xl mb-2">🧠</div>
-                    <h3 className="text-xl font-semibold text-green-800">Brain Tumor Surgery</h3>
-                    <p className="text-green-700">Microsurgical Techniques</p>
+                    <h3 className="text-xl font-semibold text-[var(--color-success)]">Brain Tumor Surgery</h3>
+                    <p className="text-[var(--color-success-700)]">Microsurgical Techniques</p>
                   </div>
                 </div>
               </div>
-              <h3 className="text-xl font-semibold mb-4 text-blue-700">Advanced Microsurgical Techniques</h3>
-              <ul className="space-y-3 text-gray-700">
+              <h3 className="text-xl font-semibold mb-4 text-[var(--color-primary-700)]">Advanced Microsurgical Techniques</h3>
+              <ul className="space-y-3 text-[var(--color-text-secondary)]">
                 <li className="flex items-start">
-                  <span className="text-blue-600 mr-2">✓</span>
+                  <span className="text-[var(--color-primary-500)] mr-2">✓</span>
                   <span><strong>Neuronavigation:</strong> Precise tumor localization and removal</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-blue-600 mr-2">✓</span>
+                  <span className="text-[var(--color-primary-500)] mr-2">✓</span>
                   <span><strong>Intraoperative Monitoring:</strong> Real-time brain function protection</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-blue-600 mr-2">✓</span>
+                  <span className="text-[var(--color-primary-500)] mr-2">✓</span>
                   <span><strong>Awake Craniotomy:</strong> For tumors near speech/motor areas</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-blue-600 mr-2">✓</span>
+                  <span className="text-[var(--color-primary-500)] mr-2">✓</span>
                   <span><strong>Minimal Access:</strong> Smaller incisions, faster recovery</span>
                 </li>
               </ul>
             </Card>
             <div>
-              <p className="text-lg text-gray-700 mb-6">
+              <p className="text-lg text-[var(--color-text-secondary)] mb-6">
                 Dr Sayuj Krishnan performs advanced brain tumor surgery. He uses the latest
                 microsurgical techniques, neuronavigation, and monitoring to safely remove tumors
                 while protecting brain function.
               </p>
-              <p className="text-gray-700 mb-6">
+              <p className="text-[var(--color-text-secondary)] mb-6">
                 Dr. Krishnan has extensive experience with both benign and malignant brain tumors.
                 He works with oncologists, radiologists, and rehabilitation specialists to provide complete care.
               </p>
@@ -475,8 +476,8 @@ export default function Home() {
                   Learn More About Brain Tumor Surgery →
                 </Button>
                 <div className="mt-4">
-                  <Link href="/services/epilepsy-surgery-hyderabad/" className="text-blue-600 hover:underline mr-4">Epilepsy Surgery</Link>
-                  <Link href="/conditions/trigeminal-neuralgia-treatment-hyderabad/" className="text-blue-600 hover:underline">Trigeminal Neuralgia</Link>
+                  <Link href="/services/epilepsy-surgery-hyderabad/" className="text-[var(--color-primary-500)] hover:underline mr-4">Epilepsy Surgery</Link>
+                  <Link href="/conditions/trigeminal-neuralgia-treatment-hyderabad/" className="text-[var(--color-primary-500)] hover:underline">Trigeminal Neuralgia</Link>
                 </div>
               </div>
             </div>
@@ -486,11 +487,11 @@ export default function Home() {
         {/* Lazy load recovery timeline - only loads when user scrolls */}
         <LazySection
           placeholder={
-            <div className="py-16 bg-slate-950">
+            <div className="py-16 bg-[#0B1120]">
               <div className="container mx-auto px-4">
                 <div className="max-w-5xl mx-auto">
                   {/* CLS Optimization: Height aligned with dynamic import loading state */}
-                  <div className="animate-pulse bg-slate-800 h-[1500px] md:h-[1400px] rounded-lg"></div>
+                  <div className="animate-pulse bg-[#1E293B] h-[1500px] md:h-[1400px] rounded-lg"></div>
                 </div>
               </div>
             </div>
@@ -504,14 +505,14 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-center mb-12">Trigeminal Neuralgia Care</h2>
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <p className="text-lg text-gray-700 mb-6">
+              <p className="text-lg text-[var(--color-text-secondary)] mb-6">
                 Trigeminal neuralgia causes severe facial pain that can be debilitating. Dr Sayuj Krishnan
                 offers comprehensive treatment options from medical therapy to advanced surgical procedures
                 including microvascular decompression (MVD) and radiosurgery.
               </p>
               <Card padding="md" className="mb-6 shadow-md">
-                <h3 className="font-semibold text-blue-700 mb-3">Treatment Options:</h3>
-                <ul className="space-y-2 text-gray-700">
+                <h3 className="font-semibold text-[var(--color-primary-700)] mb-3">Treatment Options:</h3>
+                <ul className="space-y-2 text-[var(--color-text-secondary)]">
                   <li>• Medical therapy (first-line treatment)</li>
                   <li>• Microvascular decompression (MVD)</li>
                   <li>• Gamma Knife radiosurgery</li>
@@ -529,27 +530,27 @@ export default function Home() {
               </div>
             </div>
             <Card padding="lg" className="shadow-lg">
-              <h3 className="text-xl font-semibold mb-4 text-blue-700">Symptoms of Trigeminal Neuralgia</h3>
-              <ul className="space-y-3 text-gray-700">
+              <h3 className="text-xl font-semibold mb-4 text-[var(--color-primary-700)]">Symptoms of Trigeminal Neuralgia</h3>
+              <ul className="space-y-3 text-[var(--color-text-secondary)]">
                 <li className="flex items-start">
-                  <span className="text-red-500 mr-2">•</span>
+                  <span className="text-[var(--color-error)] mr-2">•</span>
                   <span>Severe, electric shock-like facial pain</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-red-500 mr-2">•</span>
+                  <span className="text-[var(--color-error)] mr-2">•</span>
                   <span>Pain triggered by light touch, eating, or talking</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-red-500 mr-2">•</span>
+                  <span className="text-[var(--color-error)] mr-2">•</span>
                   <span>Brief episodes lasting seconds to minutes</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-red-500 mr-2">•</span>
+                  <span className="text-[var(--color-error)] mr-2">•</span>
                   <span>Pain in jaw, cheek, or forehead areas</span>
                 </li>
               </ul>
-              <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-                <p className="text-sm text-blue-800">
+              <div className="mt-6 p-4 bg-[var(--color-primary-50)] rounded-lg">
+                <p className="text-sm text-[var(--color-primary-800)]">
                   <strong>Don't suffer in silence.</strong> Early diagnosis and treatment can provide
                   significant relief and improve your quality of life.
                 </p>
@@ -563,12 +564,12 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-center mb-12">Epilepsy Surgery</h2>
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <Card padding="lg" className="shadow-lg">
-              <h3 className="text-xl font-semibold mb-4 text-blue-700">Comprehensive Epilepsy Evaluation</h3>
-              <p className="text-gray-700 mb-4">
+              <h3 className="text-xl font-semibold mb-4 text-[var(--color-primary-700)]">Comprehensive Epilepsy Evaluation</h3>
+              <p className="text-[var(--color-text-secondary)] mb-4">
                 For patients with drug-resistant epilepsy, surgical treatment can offer the best
                 chance for seizure freedom. Dr. Krishnan provides comprehensive evaluation including:
               </p>
-              <ul className="space-y-2 text-gray-700">
+              <ul className="space-y-2 text-[var(--color-text-secondary)]">
                 <li>• Video-EEG monitoring</li>
                 <li>• Advanced brain imaging (MRI, PET)</li>
                 <li>• Neuropsychological testing</li>
@@ -577,14 +578,14 @@ export default function Home() {
               </ul>
             </Card>
             <div>
-              <p className="text-lg text-gray-700 mb-6">
+              <p className="text-lg text-[var(--color-text-secondary)] mb-6">
                 Dr Sayuj Krishnan specializes in epilepsy surgery for patients who don't respond
                 to medications. With advanced techniques including laser ablation, resection surgery,
                 and vagus nerve stimulation (VNS), he helps patients achieve better seizure control.
               </p>
-              <div className="bg-blue-50 p-6 rounded-lg mb-6">
-                <h3 className="font-semibold text-blue-800 mb-3">Surgical Options:</h3>
-                <ul className="space-y-2 text-blue-700">
+              <div className="bg-[var(--color-primary-50)] p-6 rounded-lg mb-6">
+                <h3 className="font-semibold text-[var(--color-primary-800)] mb-3">Surgical Options:</h3>
+                <ul className="space-y-2 text-[var(--color-primary-700)]">
                   <li>• Temporal lobectomy</li>
                   <li>• Laser interstitial thermal therapy (LITT)</li>
                   <li>• Vagus nerve stimulation (VNS)</li>
@@ -611,30 +612,30 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-8">
             <Card padding="lg" className="shadow-lg text-center">
               <div className="text-4xl mb-4">🎓</div>
-              <h3 className="text-xl font-semibold mb-4 text-blue-700">Exceptional Training</h3>
-              <p className="text-gray-700">
+              <h3 className="text-xl font-semibold mb-4 text-[var(--color-primary-700)]">Exceptional Training</h3>
+              <p className="text-[var(--color-text-secondary)]">
                 MBBS, DNB Neurosurgery (Direct 6 years), Fellowship in Minimally Invasive and
                 Advanced Spine Surgery, Observer-ship in Full Endoscopic Spine Surgery (Germany)
               </p>
             </Card>
             <Card padding="lg" className="shadow-lg text-center">
               <div className="text-4xl mb-4">🏥</div>
-              <h3 className="text-xl font-semibold mb-4 text-blue-700">9+ Years Experience</h3>
-              <p className="text-gray-700">
+              <h3 className="text-xl font-semibold mb-4 text-[var(--color-primary-700)]">9+ Years Experience</h3>
+              <p className="text-[var(--color-text-secondary)]">
                 Successfully treated thousands of patients with various neurological conditions,
                 always prioritizing patient safety and optimal outcomes.
               </p>
             </Card>
             <Card padding="lg" className="shadow-lg text-center">
               <div className="text-4xl mb-4">🔬</div>
-              <h3 className="text-xl font-semibold mb-4 text-blue-700">Advanced Technology</h3>
-              <p className="text-gray-700 mb-4">
+              <h3 className="text-xl font-semibold mb-4 text-[var(--color-primary-700)]">Advanced Technology</h3>
+              <p className="text-[var(--color-text-secondary)] mb-4">
                 State-of-the-art equipment including neuronavigation, intraoperative monitoring,
                 and minimally invasive surgical techniques.
               </p>
               <Link
                 href="/technology-facilities"
-                className="text-blue-600 hover:text-blue-800 font-medium"
+                className="text-[var(--color-primary-500)] hover:text-[var(--color-primary-800)] font-medium"
               >
                 Explore Our Technology →
               </Link>
@@ -650,12 +651,12 @@ export default function Home() {
                 <div className="max-w-4xl mx-auto text-center">
                   {/* Header Placeholder */}
                   <div className="mb-6">
-                    <div className="h-8 md:h-9 w-3/4 md:w-1/2 bg-gray-200 rounded animate-pulse mx-auto mb-2"></div>
-                    <div className="h-4 w-full md:w-2/3 bg-gray-100 rounded animate-pulse mx-auto"></div>
+                    <div className="h-8 md:h-9 w-3/4 md:w-1/2 bg-[var(--color-border)] rounded animate-pulse mx-auto mb-2"></div>
+                    <div className="h-4 w-full md:w-2/3 bg-[var(--color-background)] rounded animate-pulse mx-auto"></div>
                   </div>
                   {/* Video Placeholder - Aspect Ratio Match */}
-                  <div className="max-w-[800px] mx-auto w-full aspect-video rounded-xl overflow-hidden shadow-lg bg-gray-200 animate-pulse">
-                    <div className="h-full w-full flex items-center justify-center text-gray-400">
+                  <div className="max-w-[800px] mx-auto w-full aspect-video rounded-xl overflow-hidden shadow-lg bg-[var(--color-border)] animate-pulse">
+                    <div className="h-full w-full flex items-center justify-center text-[var(--color-text-secondary)]">
                       <span className="sr-only">Loading video...</span>
                     </div>
                   </div>
@@ -677,48 +678,48 @@ export default function Home() {
         </LazySection>
 
         {/* Emergency Services */}
-        <Section background="none" className="py-16 bg-red-50">
+        <Section background="none" className="py-16 bg-[var(--color-error-light)]">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-red-800 mb-4">24/7 Emergency Neurosurgical Care</h2>
-            <p className="text-lg text-red-700">
+            <h2 className="text-3xl font-bold text-[var(--color-error-800)] mb-4">24/7 Emergency Neurosurgical Care</h2>
+            <p className="text-lg text-[var(--color-error-700)]">
               Immediate access to expert neurosurgical consultation for brain and spine emergencies
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="text-center border-l-4 border-red-500 shadow-lg">
+            <Card className="text-center border-l-4 border-[var(--color-error)] shadow-lg">
               <div className="text-4xl mb-4">🚨</div>
-              <h3 className="text-xl font-semibold text-red-700 mb-3">Emergency Hotline</h3>
-              <p className="text-2xl font-bold text-red-600 mb-2">{CANONICAL_TELEPHONE}</p>
-              <p className="text-gray-600 mb-4">Available 24/7 for urgent consultations</p>
+              <h3 className="text-xl font-semibold text-[var(--color-error-700)] mb-3">Emergency Hotline</h3>
+              <p className="text-2xl font-bold text-[var(--color-error)] mb-2">{CANONICAL_TELEPHONE}</p>
+              <p className="text-[var(--color-text-secondary)] mb-4">Available 24/7 for urgent consultations</p>
               <Link
                 href="/emergency-rehabilitation"
-                className="text-red-600 hover:text-red-800 font-medium"
+                className="text-[var(--color-error)] hover:text-[var(--color-error-800)] font-medium"
               >
                 Learn More About Emergency Care →
               </Link>
             </Card>
-            <Card className="text-center border-l-4 border-orange-500 shadow-lg">
+            <Card className="text-center border-l-4 border-[var(--color-warning)] shadow-lg">
               <div className="text-4xl mb-4">⚡</div>
-              <h3 className="text-xl font-semibold text-orange-700 mb-3">Rapid Response</h3>
-              <p className="text-gray-600 mb-4">
+              <h3 className="text-xl font-semibold text-[var(--color-warning-700)] mb-3">Rapid Response</h3>
+              <p className="text-[var(--color-text-secondary)] mb-4">
                 Immediate triage and assessment for traumatic brain injuries, spinal cord injuries, and stroke
               </p>
               <Link
                 href="/emergency-rehabilitation"
-                className="text-orange-700 hover:text-orange-900 font-medium"
+                className="text-[var(--color-warning-700)] hover:text-[var(--color-warning-700)] font-medium"
               >
                 Emergency Conditions →
               </Link>
             </Card>
-            <Card className="text-center border-l-4 border-green-500 shadow-lg">
+            <Card className="text-center border-l-4 border-[var(--color-success)] shadow-lg">
               <div className="text-4xl mb-4">🏥</div>
-              <h3 className="text-xl font-semibold text-green-700 mb-3">Hospital Partnership</h3>
-              <p className="text-gray-600 mb-4">
+              <h3 className="text-xl font-semibold text-[var(--color-success-700)] mb-3">Hospital Partnership</h3>
+              <p className="text-[var(--color-text-secondary)] mb-4">
                 Coordinated care with Yashoda Hospital emergency department for seamless patient care
               </p>
               <Link
                 href="/emergency-rehabilitation"
-                className="text-green-700 hover:text-green-900 font-medium"
+                className="text-[var(--color-success-700)] hover:text-[var(--color-success)] font-medium"
               >
                 Rehabilitation Services →
               </Link>
@@ -731,33 +732,62 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-center mb-12">Spine Specialist & Neurosurgeon Near You in Hyderabad</h2>
           <div className="grid md:grid-cols-2 gap-12">
             <div>
-              <p className="text-lg text-gray-700 mb-6">
-                Dr. Sayuj Krishnan provides expert neurosurgical care at Yashoda Hospital, Malakpet, serving patients across Hyderabad and throughout Telangana.
-                As a pioneering endoscopic spine surgeon, Dr. Krishnan specializes in advanced, minimally invasive procedures that enable faster recovery
-                and same-day discharge for most patients. Our Malakpet location is conveniently accessible for patients throughout the region.
+              <p className="text-lg text-[var(--color-text-secondary)] mb-6">
+                Dr. Sayuj Krishnan provides expert neurosurgical care at Yashoda Hospital, Malakpet. As a pioneering endoscopic spine surgeon,
+                he specializes in advanced, minimally invasive procedures offering faster recovery. Our facility is conveniently accessible
+                via the PVNR Expressway and Outer Ring Road (ORR), making it a straight drive for patients traveling from major IT corridors and central neighborhoods.
               </p>
               <div className="grid grid-cols-2 gap-4">
                 <Card padding="sm" className="shadow-md">
-                  <h3 className="font-semibold text-blue-700 mb-2">Central Hyderabad</h3>
-                  <ul className="text-sm text-gray-600 space-y-1">
-                    <li>• Jubilee Hills</li>
-                    <li>• Banjara Hills</li>
-                    <li>• Hi-Tech City</li>
-                    <li>• Gachibowli</li>
+                  <h3 className="font-semibold text-[var(--color-primary-700)] mb-2">Central & IT Hubs</h3>
+                  <ul className="text-sm text-[var(--color-text-secondary)] space-y-2">
+                    <li>• <Link href="/neurosurgeon-jubilee-hills" className="text-[var(--color-primary-600)] hover:underline">Jubilee Hills</Link></li>
+                    <li>• <Link href="/neurosurgeon-banjara-hills" className="text-[var(--color-primary-600)] hover:underline">Banjara Hills</Link></li>
+                    <li>• <Link href="/neurosurgeon-hitech-city" className="text-[var(--color-primary-600)] hover:underline">Hitech City</Link></li>
+                    <li>• <Link href="/neurosurgeon-gachibowli" className="text-[var(--color-primary-600)] hover:underline">Gachibowli</Link></li>
                   </ul>
                 </Card>
                 <Card padding="sm" className="shadow-md">
-                  <h3 className="font-semibold text-blue-700 mb-2">Other Areas</h3>
-                  <ul className="text-sm text-gray-600 space-y-1">
-                    <li>• Madhapur</li>
-                    <li>• Kondapur</li>
-                    <li>• Malakpet</li>
-                    <li>• Secunderabad</li>
+                  <h3 className="font-semibold text-[var(--color-primary-700)] mb-2">Other Key Areas</h3>
+                  <ul className="text-sm text-[var(--color-text-secondary)] space-y-2">
+                    <li>• <Link href="/locations/neurosurgeon-madhapur" className="text-[var(--color-primary-600)] hover:underline">Madhapur</Link></li>
+                    <li>• <Link href="/locations/neurosurgeon-kondapur" className="text-[var(--color-primary-600)] hover:underline">Kondapur</Link></li>
+                    <li>• <Link href="/neurosurgeon-secunderabad" className="text-[var(--color-primary-600)] hover:underline">Secunderabad</Link></li>
+                    <li>• <Link href="/neurosurgeon-malakpet" className="text-[var(--color-primary-600)] hover:underline">Malakpet</Link></li>
                   </ul>
                 </Card>
               </div>
             </div>
             <LocationNAPCard locationId="malakpet" />
+          </div>
+        </Section>
+
+        {/* Conditions We Treat Mini-Cluster */}
+        <Section background="white" className="py-12 bg-slate-50">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl font-bold mb-4">Common Conditions We Treat</h2>
+            <p className="text-[var(--color-text-secondary)] mb-8">
+              Explore specialized care and minimally invasive options for frequent neurological concerns.
+            </p>
+            <div className="flex justify-center flex-wrap gap-4">
+               <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="bg-white border border-blue-200 text-blue-700 px-6 py-3 rounded-full hover:bg-blue-50 font-medium transition-colors">
+                  Sciatica Pain
+               </Link>
+               <Link href="/conditions/slip-disc-treatment-hyderabad" className="bg-white border border-blue-200 text-blue-700 px-6 py-3 rounded-full hover:bg-blue-50 font-medium transition-colors">
+                  Slipped Disc
+               </Link>
+               <Link href="/conditions/brain-tumor-surgery-hyderabad" className="bg-white border border-blue-200 text-blue-700 px-6 py-3 rounded-full hover:bg-blue-50 font-medium transition-colors">
+                  Brain Tumor
+               </Link>
+               <Link href="/conditions/trigeminal-neuralgia-treatment-hyderabad" className="bg-white border border-blue-200 text-blue-700 px-6 py-3 rounded-full hover:bg-blue-50 font-medium transition-colors">
+                  Trigeminal Neuralgia
+               </Link>
+            </div>
+            <div className="mt-8">
+                <Link href="/conditions" className="text-blue-600 font-semibold hover:underline">
+                    View All Conditions →
+                </Link>
+            </div>
           </div>
         </Section>
 
@@ -767,19 +797,19 @@ export default function Home() {
             <h2 className="text-2xl font-bold text-center mb-8">References & Sources</h2>
             <div className="grid md:grid-cols-2 gap-6">
               <Card padding="md" hover={true}>
-                <h3 className="font-semibold text-blue-700 mb-3">Medical Guidelines</h3>
-                <ul className="space-y-2 text-sm text-gray-600">
-                  <li>• <a href="https://www.aans.org/patients/conditions-and-treatments" target="_blank" rel="noopener" className="text-blue-600 hover:underline" aria-label="AANS: Conditions and Treatments (opens in a new tab)">AANS: Conditions and Treatments</a></li>
-                  <li>• <a href="https://www.ninds.nih.gov/health-information/disorders" target="_blank" rel="noopener" className="text-blue-600 hover:underline" aria-label="NINDS: Neurological Disorders (opens in a new tab)">NINDS: Neurological Disorders</a></li>
-                  <li>• <a href="https://www.cancer.gov/types/brain/patient/brain-treatment-pdq" target="_blank" rel="noopener" className="text-blue-600 hover:underline" aria-label="NCI: Brain Tumor Treatment (opens in a new tab)">NCI: Brain Tumor Treatment</a></li>
+                <h3 className="font-semibold text-[var(--color-primary-700)] mb-3">Medical Guidelines</h3>
+                <ul className="space-y-2 text-sm text-[var(--color-text-secondary)]">
+                  <li>• <a href="https://www.aans.org/patients/conditions-and-treatments" target="_blank" rel="noopener" className="text-[var(--color-primary-500)] hover:underline" aria-label="AANS: Conditions and Treatments (opens in a new tab)">AANS: Conditions and Treatments</a></li>
+                  <li>• <a href="https://www.ninds.nih.gov/health-information/disorders" target="_blank" rel="noopener" className="text-[var(--color-primary-500)] hover:underline" aria-label="NINDS: Neurological Disorders (opens in a new tab)">NINDS: Neurological Disorders</a></li>
+                  <li>• <a href="https://www.cancer.gov/types/brain/patient/brain-treatment-pdq" target="_blank" rel="noopener" className="text-[var(--color-primary-500)] hover:underline" aria-label="NCI: Brain Tumor Treatment (opens in a new tab)">NCI: Brain Tumor Treatment</a></li>
                 </ul>
               </Card>
               <Card padding="md" hover={true}>
-                <h3 className="font-semibold text-blue-700 mb-3">Research & Evidence</h3>
-                <ul className="space-y-2 text-sm text-gray-600">
-                  <li>• <a href="https://www.epilepsy.com/treatment/surgery" target="_blank" rel="noopener" className="text-blue-600 hover:underline" aria-label="Epilepsy Foundation: Surgery (opens in a new tab)">Epilepsy Foundation: Surgery</a></li>
-                  <li>• <a href="https://www.nhs.uk/conditions/brain-tumours/treatment/" target="_blank" rel="noopener" className="text-blue-600 hover:underline" aria-label="NHS: Brain Tumor Treatment (opens in a new tab)">NHS: Brain Tumor Treatment</a></li>
-                  <li>• <a href="https://www.mayoclinic.org/diseases-conditions/trigeminal-neuralgia/diagnosis-treatment/drc-20353347" target="_blank" rel="noopener" className="text-blue-600 hover:underline" aria-label="Mayo Clinic: Trigeminal Neuralgia (opens in a new tab)">Mayo Clinic: Trigeminal Neuralgia</a></li>
+                <h3 className="font-semibold text-[var(--color-primary-700)] mb-3">Research & Evidence</h3>
+                <ul className="space-y-2 text-sm text-[var(--color-text-secondary)]">
+                  <li>• <a href="https://www.epilepsy.com/treatment/surgery" target="_blank" rel="noopener" className="text-[var(--color-primary-500)] hover:underline" aria-label="Epilepsy Foundation: Surgery (opens in a new tab)">Epilepsy Foundation: Surgery</a></li>
+                  <li>• <a href="https://www.nhs.uk/conditions/brain-tumours/treatment/" target="_blank" rel="noopener" className="text-[var(--color-primary-500)] hover:underline" aria-label="NHS: Brain Tumor Treatment (opens in a new tab)">NHS: Brain Tumor Treatment</a></li>
+                  <li>• <a href="https://www.mayoclinic.org/diseases-conditions/trigeminal-neuralgia/diagnosis-treatment/drc-20353347" target="_blank" rel="noopener" className="text-[var(--color-primary-500)] hover:underline" aria-label="Mayo Clinic: Trigeminal Neuralgia (opens in a new tab)">Mayo Clinic: Trigeminal Neuralgia</a></li>
                 </ul>
               </Card>
             </div>
@@ -787,15 +817,15 @@ export default function Home() {
         </Section>
 
         {/* Disable internal schema as it is already handled by FAQPageSchema above */}
-        <ExpandedFAQ faqs={HOME_FAQS} className="bg-gray-50" disableSchema={true} />
+        <ExpandedFAQ faqs={HOME_FAQS} className="bg-[var(--color-background)]" disableSchema={true} />
         {/* Lazy load reputation panel - only loads when user scrolls */}
         <LazySection
           placeholder={
-            <div className="py-8 bg-gray-50">
+            <div className="py-8 bg-[var(--color-background)]">
               <div className="container mx-auto px-4">
                 <div className="max-w-6xl mx-auto">
                   {/* CLS Optimization: Height aligned with dynamic import loading state */}
-                  <div className="animate-pulse bg-gray-200 h-[1100px] md:h-[600px] rounded-lg"></div>
+                  <div className="animate-pulse bg-[var(--color-border)] h-[1100px] md:h-[600px] rounded-lg"></div>
                 </div>
               </div>
             </div>
@@ -807,52 +837,52 @@ export default function Home() {
         {/* Disease Guides Section */}
         <Section background="gray" className="py-16">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-blue-800 mb-4">Comprehensive Disease Guides</h2>
-            <p className="text-lg text-gray-700">
+            <h2 className="text-3xl font-bold text-[var(--color-primary-800)] mb-4">Comprehensive Disease Guides</h2>
+            <p className="text-lg text-[var(--color-text-secondary)]">
               Expert information about neurological and spinal conditions, their symptoms, causes, and treatment options
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <Card padding="md" className="text-center shadow-lg">
               <div className="text-4xl mb-4">🦴</div>
-              <h3 className="text-lg font-semibold text-blue-700 mb-3">Degenerative Disc Disease</h3>
-              <p className="text-gray-600 text-sm mb-4">Age-related wear and tear of spinal discs</p>
+              <h3 className="text-lg font-semibold text-[var(--color-primary-700)] mb-3">Degenerative Disc Disease</h3>
+              <p className="text-[var(--color-text-secondary)] text-sm mb-4">Age-related wear and tear of spinal discs</p>
               <Link
                 href="/disease-guides/degenerative-disc-disease"
-                className="text-blue-600 hover:text-blue-800 font-medium"
+                className="text-[var(--color-primary-500)] hover:text-[var(--color-primary-800)] font-medium"
               >
                 Learn More About Degenerative Disc Disease →
               </Link>
             </Card>
             <Card padding="md" className="text-center shadow-lg">
               <div className="text-4xl mb-4">🔗</div>
-              <h3 className="text-lg font-semibold text-blue-700 mb-3">Spinal Stenosis</h3>
-              <p className="text-gray-600 text-sm mb-4">Narrowing of spinal canal causing nerve compression</p>
+              <h3 className="text-lg font-semibold text-[var(--color-primary-700)] mb-3">Spinal Stenosis</h3>
+              <p className="text-[var(--color-text-secondary)] text-sm mb-4">Narrowing of spinal canal causing nerve compression</p>
               <Link
                 href="/disease-guides"
-                className="text-blue-600 hover:text-blue-800 font-medium"
+                className="text-[var(--color-primary-500)] hover:text-[var(--color-primary-800)] font-medium"
               >
                 Learn More About Spinal Stenosis →
               </Link>
             </Card>
             <Card padding="md" className="text-center shadow-lg">
               <div className="text-4xl mb-4">😣</div>
-              <h3 className="text-lg font-semibold text-blue-700 mb-3">Trigeminal Neuralgia</h3>
-              <p className="text-gray-600 text-sm mb-4">Severe facial pain from nerve compression</p>
+              <h3 className="text-lg font-semibold text-[var(--color-primary-700)] mb-3">Trigeminal Neuralgia</h3>
+              <p className="text-[var(--color-text-secondary)] text-sm mb-4">Severe facial pain from nerve compression</p>
               <Link
                 href="/conditions/trigeminal-neuralgia-treatment-hyderabad"
-                className="text-blue-600 hover:text-blue-800 font-medium"
+                className="text-[var(--color-primary-500)] hover:text-[var(--color-primary-800)] font-medium"
               >
                 Learn More About Trigeminal Neuralgia Treatment →
               </Link>
             </Card>
             <Card padding="md" className="text-center shadow-lg">
               <div className="text-4xl mb-4">🧠</div>
-              <h3 className="text-lg font-semibold text-blue-700 mb-3">Epilepsy</h3>
-              <p className="text-gray-600 text-sm mb-4">Neurological disorder causing recurrent seizures</p>
+              <h3 className="text-lg font-semibold text-[var(--color-primary-700)] mb-3">Epilepsy</h3>
+              <p className="text-[var(--color-text-secondary)] text-sm mb-4">Neurological disorder causing recurrent seizures</p>
               <Link
                 href="/services/epilepsy-surgery-hyderabad"
-                className="text-blue-600 hover:text-blue-800 font-medium"
+                className="text-[var(--color-primary-500)] hover:text-[var(--color-primary-800)] font-medium"
               >
                 Learn More About Epilepsy Surgery →
               </Link>
@@ -877,33 +907,33 @@ export default function Home() {
               <LocationNAPCard locationId="malakpet" />
 
               {/* Concluding Paragraph */}
-              <Card padding="lg" className="border border-gray-200 mb-8 shadow-none">
-                <p className="text-lg text-gray-700 leading-relaxed">
+              <Card padding="lg" className="border border-[var(--color-border)] mb-8 shadow-none">
+                <p className="text-lg text-[var(--color-text-secondary)] leading-relaxed">
                   If you're facing persistent neck or back pain, sciatica, or a diagnosed brain or spine condition, we'll help you understand safe options step by step. Book a consultation at Yashoda Hospitals – Malakpet to review your MRI, get a clear plan, and know what to expect in recovery.
                 </p>
               </Card>
 
-              <div className="bg-blue-50 p-8 rounded-lg">
-                <h3 className="text-2xl font-semibold mb-6 text-blue-800">Why Choose Dr Sayuj Krishnan?</h3>
-                <ul className="space-y-4 text-blue-700">
+              <div className="bg-[var(--color-primary-50)] p-8 rounded-lg">
+                <h3 className="text-2xl font-semibold mb-6 text-[var(--color-primary-800)]">Why Choose Dr Sayuj Krishnan?</h3>
+                <ul className="space-y-4 text-[var(--color-primary-700)]">
                   <li className="flex items-start">
-                    <span className="text-blue-600 mr-3 mt-1">✓</span>
+                    <span className="text-[var(--color-primary-500)] mr-3 mt-1">✓</span>
                     <span>Over 9 years of neurosurgical experience</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-blue-600 mr-3 mt-1">✓</span>
+                    <span className="text-[var(--color-primary-500)] mr-3 mt-1">✓</span>
                     <span>Advanced training in Germany</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-blue-600 mr-3 mt-1">✓</span>
+                    <span className="text-[var(--color-primary-500)] mr-3 mt-1">✓</span>
                     <span>Minimally invasive techniques</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-blue-600 mr-3 mt-1">✓</span>
+                    <span className="text-[var(--color-primary-500)] mr-3 mt-1">✓</span>
                     <span>Patient-centered approach</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-blue-600 mr-3 mt-1">✓</span>
+                    <span className="text-[var(--color-primary-500)] mr-3 mt-1">✓</span>
                     <span>State-of-the-art technology</span>
                   </li>
                 </ul>

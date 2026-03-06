@@ -13,8 +13,8 @@ const RemotionVideoEmbed = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="max-w-[800px] mx-auto w-full aspect-video rounded-xl overflow-hidden shadow-lg bg-gray-200 animate-pulse">
-        <div className="h-full w-full flex items-center justify-center text-gray-400">
+      <div className="max-w-[800px] mx-auto w-full aspect-video rounded-xl overflow-hidden shadow-lg bg-[var(--color-border)] animate-pulse">
+        <div className="h-full w-full flex items-center justify-center text-[var(--color-text-secondary)]">
           <span className="sr-only">Loading video...</span>
         </div>
       </div>

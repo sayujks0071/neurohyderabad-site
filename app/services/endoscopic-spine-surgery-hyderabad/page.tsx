@@ -23,7 +23,7 @@ import EndoscopicProcedureSteps from '@/src/components/EndoscopicProcedureSteps'
 const SERVICE_SLUG = 'endoscopic-spine-surgery-hyderabad';
 
 // Ensure page is statically generated
-export const revalidate = 3600; // Revalidate every hour
+export const revalidate = 86400; // Revalidate every 24 hours
 
 const baseMetadata = makeMetadata({
   title: 'Endoscopic Spine Surgery Hyderabad | Same-Day Discharge',
@@ -270,6 +270,45 @@ const conditions = [
   { text: 'Failed conservative treatment (6+ weeks)' },
 ];
 
+const CONDITIONS_TREATED = [
+  {
+    title: "Sciatica (Leg Pain)",
+    description: "Shooting pain radiating down the leg caused by nerve compression.",
+    icon: "⚡",
+    link: "/conditions/sciatica-pain-treatment-hyderabad"
+  },
+  {
+    title: "Lumbar Disc Herniation",
+    description: "Slipped or bulging disc pressing on spinal nerves.",
+    icon: "🦴",
+    link: "/conditions/slip-disc-treatment-hyderabad"
+  },
+  {
+    title: "Spinal Stenosis",
+    description: "Narrowing of the spinal canal restricting nerve space.",
+    icon: "🔽",
+    link: "/conditions/spinal-stenosis-treatment-hyderabad"
+  },
+  {
+    title: "Cervical Radiculopathy",
+    description: "Pinched nerve in the neck causing arm pain or numbness.",
+    icon: "🤕",
+    link: "/conditions/cervical-radiculopathy-treatment-hyderabad"
+  },
+  {
+    title: "Degenerative Disc Disease",
+    description: "Age-related wear and tear causing chronic back pain.",
+    icon: "📉",
+    link: "/conditions/degenerative-disc-disease-treatment-hyderabad"
+  },
+  {
+    title: "Spondylolisthesis (Grade 1)",
+    description: "Vertebra slipping forward over the one below it.",
+    icon: "🪜",
+    link: "/conditions/spondylolisthesis-treatment-hyderabad"
+  }
+];
+
 const ADVANCED_TECHNIQUES = [
   {
     title: "Transforaminal Endoscopy (TESS)",
@@ -373,6 +412,30 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
           </div>
         </header>
 
+        <section className="mb-12">
+          <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+            <h2 className="text-2xl font-bold text-blue-900 mb-4">Procedure at a Glance</h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="bg-blue-50/50 rounded-xl p-4 border border-blue-50">
+                <div className="text-sm text-gray-500 font-medium mb-1">Procedure Time</div>
+                <div className="font-semibold text-blue-900">~1 Hour</div>
+              </div>
+              <div className="bg-blue-50/50 rounded-xl p-4 border border-blue-50">
+                <div className="text-sm text-gray-500 font-medium mb-1">Anesthesia</div>
+                <div className="font-semibold text-blue-900">Local / General / Spinal</div>
+              </div>
+              <div className="bg-blue-50/50 rounded-xl p-4 border border-blue-50">
+                <div className="text-sm text-gray-500 font-medium mb-1">Hospital Stay</div>
+                <div className="font-semibold text-blue-900">Day Care (6-8 hours)</div>
+              </div>
+              <div className="bg-blue-50/50 rounded-xl p-4 border border-blue-50">
+                <div className="text-sm text-gray-500 font-medium mb-1">Return to Work</div>
+                <div className="font-semibold text-blue-900">3-5 Days</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section className="mb-12 bg-green-50 border border-green-200 rounded-2xl p-6 shadow-sm">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
@@ -415,6 +478,27 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
               </li>
             ))}
           </ul>
+        </section>
+
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-blue-900 mb-8">Conditions Treated with Endoscopic Spine Surgery</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {CONDITIONS_TREATED.map((item) => (
+              <div key={item.title} className="bg-white p-6 rounded-xl border border-blue-100 shadow-sm hover:shadow-md transition-shadow group">
+                <div className="text-3xl mb-3 group-hover:scale-110 transition-transform duration-300">{item.icon}</div>
+                <h3 className="text-lg font-bold text-blue-900 mb-2">
+                  <Link href={item.link} className="hover:text-blue-700">
+                    {item.title}
+                  </Link>
+                </h3>
+                <p className="text-sm text-gray-600 mb-4">{item.description}</p>
+                <Link href={item.link} className="text-blue-600 text-sm font-semibold hover:underline inline-flex items-center">
+                  Learn More
+                  <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                </Link>
+              </div>
+            ))}
+          </div>
         </section>
 
         <section className="mb-16">
@@ -876,7 +960,7 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
         </section>
 
         {/* Added bottom Pathways */}
-        <LocalPathways mode="service" />
+        <LocalPathways mode="service" currentSlug="endoscopic-spine-surgery-hyderabad" />
 
         <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
         <ReviewedBy lastReviewed="2025-02-20" />

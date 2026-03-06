@@ -1,3 +1,4 @@
+import Breadcrumbs from "@/app/components/Breadcrumbs";
 import React from "react";
 import Link from "next/link";
 import { getLocationById } from "@/src/data/locations";
@@ -7,6 +8,7 @@ import { LocationMapEmbed } from "@/src/components/locations/LocationMapEmbed";
 import { LocalPathways } from "@/src/components/locations/LocalPathways";
 import { LocationSchema } from "@/src/components/locations/LocationSchema";
 import { notFound } from "next/navigation";
+
 
 // Force static generation
 export const dynamic = 'force-static';
@@ -63,7 +65,14 @@ export default function JubileeHillsNeurosurgeonPage() {
 
   return (
     <main className="bg-white">
-      <LocationSchema location={location} breadcrumb={breadcrumb} faq={FAQ} />
+      <Breadcrumbs
+        items={[
+          { name: 'Home', href: '/' },
+          { name: 'Locations', href: '/locations' },
+          { name: 'Best Neurosurgeon in Jubilee Hills, Hyderabad', href: '/neurosurgeon-jubilee-hills' },
+        ]}
+      />
+      <LocationSchema location={location}  faq={FAQ} />
 
       <section className="bg-gradient-to-r from-blue-600 to-blue-800 py-12 text-white">
         <div className="mx-auto max-w-5xl px-4">

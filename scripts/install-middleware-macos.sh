@@ -12,9 +12,16 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 # Configuration
-MW_API_KEY="fygjftkluglwjxlwyhqdwshcbwtvfavastli"
-MW_TARGET="https://hjptv.middleware.io"
+MW_API_KEY="${MW_API_KEY:-""}"
+MW_TARGET="${MW_TARGET:-"https://hjptv.middleware.io"}"
 INSTALL_SCRIPT_URL="https://install.middleware.io/scripts/mw-macos-agent-install.sh"
+
+if [ -z "$MW_API_KEY" ]; then
+  echo -e "${RED}❌ Error: MW_API_KEY environment variable is not set.${NC}"
+  echo -e "${RED}   Please set it before running this script:${NC}"
+  echo -e "${BLUE}   export MW_API_KEY=\"your_api_key\"${NC}"
+  exit 1
+fi
 
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 echo -e "${GREEN}🚀 Middleware Agent Installation for macOS${NC}"

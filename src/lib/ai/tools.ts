@@ -25,7 +25,7 @@ export const tools = {
     parameters: z.object({
       query: z.string().describe('The search query to find relevant content.'),
     }),
-    execute: async ({ query }) => {
+    execute: async ({ query }: { query: string }) => {
       const results = await semanticSearch(query, 5);
       return results.map(r => ({
         title: r.title,
@@ -34,7 +34,7 @@ export const tools = {
         category: r.category
       }));
     },
-  }),
+  } as any),
 
   checkAvailability: tool({
     description: 'Check if an appointment slot is available for a specific date and time.',
@@ -42,7 +42,7 @@ export const tools = {
       date: z.string().describe('Date in YYYY-MM-DD format'),
       time: z.string().describe('Time in HH:MM format'),
     }),
-    execute: async ({ date, time }) => {
+    execute: async ({ date, time }: { date: string, time: string }) => {
       const count = await appointments.checkSlot(date, time);
       return {
         available: count === 0,
@@ -51,7 +51,7 @@ export const tools = {
         message: count === 0 ? 'Slot is available' : 'Slot is already booked',
       };
     },
-  }),
+  } as any),
 
   bookAppointment: tool({
     description: 'Book an appointment for a patient.',
@@ -67,7 +67,7 @@ export const tools = {
       painScore: z.number().optional().default(0).describe('Pain score from 0-10'),
       mriScanAvailable: z.boolean().optional().default(false).describe('Whether MRI scan is available'),
     }),
-    execute: async (input) => {
+    execute: async (input: any) => {
       const bookingData: BookingData = {
         patientName: input.patientName,
         email: input.email,
@@ -98,7 +98,7 @@ export const tools = {
         };
       }
     },
-  }),
+  } as any),
 
   getServices: tool({
     description: 'Get a list of medical services and surgeries offered by Dr. Sayuj.',
@@ -106,7 +106,7 @@ export const tools = {
     execute: async () => {
       return SERVICES;
     },
-  }),
+  } as any),
 
   getLocations: tool({
     description: 'Get the list of clinic locations where Dr. Sayuj practices.',
@@ -116,8 +116,8 @@ export const tools = {
         name: loc.name,
         address: loc.address,
         phone: loc.telephone,
-        mapUrl: loc.googleMapsUrl
+        mapUrl: (loc as any).directions_url || (loc as any).googleMapsUrl
       }));
     },
-  }),
+  } as any),
 };

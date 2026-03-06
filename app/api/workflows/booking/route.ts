@@ -8,6 +8,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import type { BookingData } from "@/packages/appointment-form/types";
 import { processBooking } from "@/src/lib/appointments/service";
+import { inngest } from "@/src/lib/inngest";
 
 type WorkflowAppointmentType = "new-consultation" | "follow-up" | "second-opinion";
 

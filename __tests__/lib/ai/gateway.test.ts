@@ -71,45 +71,21 @@ describe('AI Gateway Configuration', () => {
     });
   });
 
-  describe('When Gateway is NOT configured (Direct OpenAI fallback)', () => {
+  describe('When Gateway is NOT configured', () => {
     beforeEach(() => {
       vi.stubEnv('AI_GATEWAY_API_KEY', '');
       vi.stubEnv('AI_GATEWAY_BASE_URL', '');
       vi.stubEnv('VERCEL', ''); // Unset VERCEL to force false for isAIGatewayConfigured
-      vi.stubEnv('OPENAI_API_KEY', 'test-openai-key');
     });
 
     it('isAIGatewayConfigured returns false', () => {
       expect(isAIGatewayConfigured()).toBe(false);
     });
 
-    it('getTextModelName sanitizes non-OpenAI models to fallback', () => {
-      // This expectation will fail until I implement the fix
-      expect(getTextModelName('google/gemini-2.0-flash')).toBe('gpt-4o-mini');
-      expect(getTextModelName('anthropic/claude-3-opus')).toBe('gpt-4o-mini');
-    });
-
-    it('getTextModelName strips openai/ prefix for direct usage', () => {
-       // Ideally direct OpenAI client handles "gpt-4", but if we pass "openai/gpt-4" it might be weird.
-       expect(getTextModelName('openai/gpt-4')).toBe('gpt-4');
-    });
-
-    it('getTextModelName keeps simple model names', () => {
-      expect(getTextModelName('gpt-4')).toBe('gpt-4');
-      expect(getTextModelName('gpt-3.5-turbo')).toBe('gpt-3.5-turbo');
-    });
-
-    it('getTextModel uses direct OpenAI client with sanitized model', () => {
-      getTextModel('google/gemini-2.0-flash');
-
-      // Should create client with OpenAI key (no gateway URL)
-      expect(mockCreateOpenAI).toHaveBeenCalledWith(expect.objectContaining({
-        apiKey: 'test-openai-key'
-      }));
-
-      // Should call client with FALLBACK model (gpt-4o-mini)
-      // This will fail until fix
-      expect(mockOpenAIClient).toHaveBeenCalledWith('gpt-4o-mini');
+    it('getTextModel throws an error', () => {
+      expect(() => getTextModel('google/gemini-2.0-flash')).toThrow(
+        'Vercel AI Gateway is not configured. Please set AI_GATEWAY_API_KEY or deploy on Vercel.'
+      );
     });
   });
 });
