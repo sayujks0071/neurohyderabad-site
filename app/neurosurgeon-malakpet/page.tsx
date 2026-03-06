@@ -21,12 +21,12 @@ export const revalidate = 86400;
 export const metadata = {
   title: "Neurosurgeon in Malakpet | Dr. Sayuj | Yashoda Hospitals",
   description:
-    "Dr. Sayuj Krishnan at Yashoda Hospital Malakpet offers Daycare Endoscopic Spine Surgery, brain tumor care, and 24/7 emergency neurosurgery. Book a visit.",
+    "Dr. Sayuj Krishnan at Yashoda Hospital Malakpet offers spinal decompression, endoscopic brain surgery, slip disc treatment, and 24/7 emergency neurosurgery.",
   keywords: "neurosurgeon malakpet, yashoda hospital malakpet neurosurgeon, spine surgeon malakpet, daycare spine surgery malakpet, endoscopic spine surgery malakpet, spine fracture treatment malakpet, vertebroplasty malakpet",
   alternates: { canonical: "https://www.drsayuj.info/neurosurgeon-malakpet" },
   openGraph: {
     title: "Neurosurgeon in Malakpet | Dr. Sayuj | Yashoda Hospitals",
-    description: "Neurosurgeon at Yashoda Hospital Malakpet with endoscopic spine surgery and brain tumor expertise.",
+    description: "Neurosurgeon at Yashoda Hospital Malakpet offering spinal decompression, endoscopic brain surgery, slip disc treatment, and 24/7 emergency care.",
     url: "https://www.drsayuj.info/neurosurgeon-malakpet",
     type: "website",
     images: [
@@ -41,7 +41,7 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Neurosurgeon in Malakpet | Dr. Sayuj Krishnan at Yashoda Hospital",
-    description: "Expert neurosurgeon practicing at Yashoda Hospital Malakpet with endoscopic spine surgery and brain surgery expertise.",
+    description: "Expert neurosurgeon practicing at Yashoda Hospital Malakpet offering spinal decompression, endoscopic brain surgery, and slip disc treatment.",
     images: ["https://www.drsayuj.info/images/og-default.jpg"],
   },
 };
