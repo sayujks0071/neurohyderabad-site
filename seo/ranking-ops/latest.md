@@ -1,8 +1,8 @@
 # Latest SEO Operation
 
-**Date**: 2025-03-04
-**Focus**: Structured Data / FAQ SEO
-**Page**: `app/services/spine-surgery-hyderabad/page.tsx`
-**Action**: Added `<FAQPageSchema>` component wrapper to existing `faqs` list to inject JSON-LD FAQPage schema, unlocking eligibility for Google's "People Also Ask" rich snippets for high-intent spine surgery queries.
+**Date**: 2026-03-06
+**Focus**: Content Gap Patch / YMYL Safety Signals
+**Page**: `app/services/epilepsy-surgery-hyderabad/page.tsx`
+**Action**: Added a dedicated "When to Seek Immediate Emergency Care (Red Flags)" section to the Epilepsy Surgery page, improving topical depth and aligning with Google's YMYL quality rater guidelines by providing safe, actionable emergency advice (e.g., Status Epilepticus).
 
-**Report**: [View Full Report](./2025-03-04/report.md)
+**Report**: [View Full Report](./2026-03-06/report.md)
