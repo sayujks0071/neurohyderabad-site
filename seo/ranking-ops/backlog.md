@@ -40,7 +40,7 @@
 - **Schema:** Enhance `FAQSchema` to include "acceptedAnswer" schema for more nuanced questions (e.g., specific recovery timelines).
 
 ## 2026-02-10
-- **Opportunity:** Replicate "Endoscopic Procedure Steps" component on other procedure pages (e.g., Microdiscectomy, Brain Tumor Surgery) for consistent visual storytelling.
+- [x] **Opportunity:** Replicate "Endoscopic Procedure Steps" component on other procedure pages (e.g., Microdiscectomy, Brain Tumor Surgery) for consistent visual storytelling. (Done for Microdiscectomy 2026-03-07)
 - **Optimization:** Check LCP/CLS impact of new component on mobile devices.
 
 ## 2026-02-12
