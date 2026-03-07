@@ -13,13 +13,13 @@ export const dynamicParams = false;
 export const revalidate = 86400;
 
 export const metadata = {
-  title: "Neurosurgeon near Vanasthalipuram, Hyderabad | Dr Sayuj Krishnan",
+  title: "Neurosurgeon near Vanasthalipuram Hyderabad | Dr. Sayuj",
   description: "Expert neurosurgeon serving Vanasthalipuram. Dr Sayuj Krishnan is located at Yashoda Malakpet, accessible via NH65. Advanced spine & brain care.",
   alternates: {
     canonical: "https://www.drsayuj.info/locations/neurosurgeon-vanasthalipuram",
   },
   openGraph: {
-    title: "Neurosurgeon near Vanasthalipuram, Hyderabad | Dr Sayuj Krishnan",
+    title: "Neurosurgeon near Vanasthalipuram Hyderabad | Dr. Sayuj",
     description: "Expert neurosurgeon serving Vanasthalipuram. Dr Sayuj Krishnan is located at Yashoda Malakpet, accessible via NH65.",
     url: "https://www.drsayuj.info/locations/neurosurgeon-vanasthalipuram",
     type: "article",

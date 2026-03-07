@@ -6,8 +6,8 @@ import { serviceJsonLd } from "../../src/lib/seo";
 import MedicalWebPageSchema from "../components/schemas/MedicalWebPageSchema";
 
 export const metadata: Metadata = {
-  title: "Advanced Neurosurgery Technology Hyderabad | AI, Robotics & Safety",
-  description: "Experience safer spine & brain surgery with AI-driven neuronavigation, ROSA Robotics, and real-time monitoring. Dr. Sayuj Krishnan uses advanced technology for precision & faster recovery.",
+  title: "Neurosurgery Technology Hyderabad | AI, Robotics & Safety",
+  description: "Safer brain & spine surgery with AI neuronavigation, ROSA Robotics, and real-time monitoring. Expert precision care by Dr. Sayuj Krishnan in Hyderabad.",
   keywords: [
     "neurosurgical technology hyderabad",
     "neuronavigation hyderabad",
@@ -30,8 +30,8 @@ export const metadata: Metadata = {
     }
   },
   openGraph: {
-    title: "Advanced Neurosurgery Technology Hyderabad | AI, Robotics & Safety",
-    description: "Experience safer spine & brain surgery with AI-driven neuronavigation, ROSA Robotics, and real-time monitoring. Dr. Sayuj Krishnan uses advanced technology for precision & faster recovery.",
+    title: "Neurosurgery Technology Hyderabad | AI, Robotics & Safety",
+    description: "Safer brain & spine surgery with AI neuronavigation, ROSA Robotics, and real-time monitoring. Expert precision care by Dr. Sayuj Krishnan in Hyderabad.",
     url: `${SITE_URL}/technology-innovation`,
     siteName: "Dr. Sayuj Krishnan - Premier Neurosurgeon Hyderabad",
     locale: "en_IN",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Advanced Neurosurgery Technology Hyderabad | AI, Robotics & Safety",
+    title: "Neurosurgery Technology Hyderabad | AI, Robotics & Safety",
     description: "Experience safer spine & brain surgery with AI-driven neuronavigation, ROSA Robotics, and real-time monitoring."
   }
 };

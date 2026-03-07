@@ -6,8 +6,8 @@ import MedicalReviewNotice from '../../src/components/MedicalReviewNotice';
 import DiseaseGuidesStructuredData from './structured-data';
 
 export const metadata: Metadata = {
-  title: 'Disease Guides & Medical Conditions | Dr. Sayuj Krishnan | Comprehensive Health Information',
-  description: 'Comprehensive disease guides for degenerative disc disease, spinal stenosis, trigeminal neuralgia, epilepsy, herniated disc, and other neurological conditions. Expert medical information.',
+  title: 'Neurological Disease Guides Hyderabad | Dr. Sayuj Krishnan',
+  description: 'Disease guides for disc disease, spinal stenosis, trigeminal neuralgia, and neurological conditions. Expert information by Dr. Sayuj Krishnan, Hyderabad.',
   keywords: 'disease guides, degenerative disc disease, spinal stenosis, trigeminal neuralgia, epilepsy, herniated disc, neurological conditions, medical information, Hyderabad',
   alternates: {
     canonical: `${SITE_URL}/disease-guides/`,
