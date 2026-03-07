@@ -54,6 +54,7 @@ export const tools = {
   } as any),
 
   bookAppointment: tool({
+    requireApproval: true,
     description: 'Book an appointment for a patient.',
     parameters: z.object({
       patientName: z.string().describe('Full name of the patient'),
