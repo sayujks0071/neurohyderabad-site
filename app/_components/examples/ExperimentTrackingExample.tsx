@@ -66,6 +66,8 @@ export default function ExperimentTrackingExample() {
           e.preventDefault();
           handleInteraction('form_submit');
         }}
+        toolname="experimentChat"
+        tooldescription="Chat interface for evaluating AI response variations and experimental features"
       >
         <div>
           <label className="block text-sm font-medium mb-1">Name</label>
