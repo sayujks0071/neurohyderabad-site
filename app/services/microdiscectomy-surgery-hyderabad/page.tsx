@@ -18,6 +18,7 @@ import MicroVsEndoTable from '@/src/components/MicroVsEndoTable';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
 import MedicalWebPageSchema from '@/app/components/schemas/MedicalWebPageSchema';
 import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
+import MicrodiscectomyProcedureSteps from '@/src/components/MicrodiscectomyProcedureSteps';
 
 const SERVICE_SLUG = 'microdiscectomy-surgery-hyderabad';
 
@@ -180,34 +181,6 @@ const ADVANCED_TECHNIQUES = [
   }
 ];
 
-const SURGERY_STEPS = [
-  {
-    step: "Step 1: Anesthesia",
-    title: "General Anesthesia",
-    description: "You will be asleep under general anesthesia. This ensures safety and immobility while we work with high-power magnification."
-  },
-  {
-    step: "Step 2: Incision",
-    title: "Small Incision",
-    description: "A 2-3 cm incision is made in the midline of the back. This is significantly smaller than open surgery (5-10 cm)."
-  },
-  {
-    step: "Step 3: Microscope Setup",
-    title: "High-Definition View",
-    description: "The operating microscope is brought in. It magnifies the nerve roots and disc material 10-20 times, making them clearly visible."
-  },
-  {
-    step: "Step 4: Decompression",
-    title: "Precise Removal",
-    description: "Using micro-instruments, a small window is made in the bone (laminotomy) and the herniated disc fragment pressing the nerve is removed."
-  },
-  {
-    step: "Step 5: Closure",
-    title: "Hidden Sutures",
-    description: "The muscles are allowed to fall back into place. The skin is closed with absorbable sutures that do not need removal."
-  }
-];
-
 export default function MicrodiscectomySurgeryPage() {
   const relevantStories = patientStories.filter(story => {
     const tags = story.tags.join(' ').toLowerCase();
@@ -349,21 +322,8 @@ export default function MicrodiscectomySurgeryPage() {
         </section>
 
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-blue-900 mb-8">How is Microdiscectomy Performed?</h2>
-          <div className="relative border-l-2 border-blue-200 ml-3 space-y-10 pb-2">
-            {SURGERY_STEPS.map((item, index) => (
-              <div key={index} className="relative pl-8">
-                {/* Timeline Dot */}
-                <span className="absolute -left-[9px] top-1 h-5 w-5 rounded-full bg-blue-600 border-4 border-white shadow-sm ring-1 ring-blue-100"></span>
-
-                <div className="bg-white border border-gray-100 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
-                   <div className="text-xs font-bold text-blue-600 uppercase tracking-wide mb-1">{item.step}</div>
-                   <h3 className="text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
-                   <p className="text-gray-700 leading-relaxed">{item.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <h2 className="text-3xl font-bold text-blue-900 mb-8 text-center">How is Microdiscectomy Performed?</h2>
+          <MicrodiscectomyProcedureSteps />
         </section>
 
         <section className="mb-16">
