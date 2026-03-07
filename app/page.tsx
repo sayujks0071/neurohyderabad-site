@@ -36,7 +36,7 @@ const RemotionVideoEmbedWrapper = dynamic(() => import('./_components/RemotionVi
 const HOME_CANONICAL = SITE_URL.endsWith("/") ? SITE_URL : `${SITE_URL}/`;
 
 const baseMetadata = makeMetadata({
-  title: "Best Neurosurgeon in Hyderabad & Spine Specialist | Dr. Sayuj Krishnan",
+  title: "Best Neurosurgeon & Spine Specialist Hyderabad | Dr. Sayuj",
   description: "German-Trained neurosurgeon in Hyderabad (Yashoda Hospital). Expert in full endoscopic spine surgery, minimally invasive brain surgery, and awake craniotomy.",
   canonicalPath: "/",
   ogImage: "https://www.drsayuj.info/images/og-default.jpg",
