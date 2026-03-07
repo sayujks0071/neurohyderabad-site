@@ -1,0 +1,68 @@
+
+> neurosurgery-nextjs-site@0.1.0 check:lighthouse /app
+> node scripts/check-lighthouse.ts
+
+🎯 Running Lighthouse and performance checks...
+
+🔍 Checking codebase for performance issues...
+
+⚠️  Performance issues found:
+   - Wildcard import in /app/app/.well-known/vercel/flags/route.ts
+   - Console.log in production code: /app/app/_components/AIBookingAgent.tsx
+   - Wildcard import in /app/app/_components/FloatingChatWidget.test.tsx
+   - Console.log in production code: /app/app/_components/PerformanceMonitor.tsx
+   - Console.log in production code: /app/app/_components/RealAIBookingAgent.tsx
+   - Console.log in production code: /app/app/_components/VoiceAgent/OpenAIVoiceAgent.tsx
+   - Wildcard import in /app/app/_components/__tests__/Button.test.tsx
+   - Wildcard import in /app/app/_components/__tests__/DynamicFAQ.test.tsx
+   - Wildcard import in /app/app/admin/appointments/page.test.tsx
+   - Console.log in production code: /app/app/admin/referrals/page.tsx
+   - Console.log in production code: /app/app/api/ai-booking/route.ts
+   - Console.log in production code: /app/app/api/appointments/briefing/route.ts
+   - Console.log in production code: /app/app/api/appointments/submit/route.ts
+   - Console.log in production code: /app/app/api/cron/reindex-rag/route.ts
+   - Console.log in production code: /app/app/api/drafts/list/route.ts
+   - Console.log in production code: /app/app/api/gemini-files/list/route.ts
+   - Console.log in production code: /app/app/api/gemini-files/manage/route.ts
+   - Console.log in production code: /app/app/api/gemini-files/search/route.ts
+   - Console.log in production code: /app/app/api/gemini-files/upload/route.ts
+   - Console.log in production code: /app/app/api/lead/route.ts
+   - Console.log in production code: /app/app/api/mcp/route.ts
+   - Console.log in production code: /app/app/api/neuralink/route.ts
+   - Console.log in production code: /app/app/api/newsletter/subscribe/route.ts
+   - Console.log in production code: /app/app/api/openai-agents-simple/route.ts
+   - Console.log in production code: /app/app/api/openai-chat/route.ts
+   - Console.log in production code: /app/app/api/remotion/progress/[renderId]/route.ts
+   - Console.log in production code: /app/app/api/remotion/render/route.ts
+   - Console.log in production code: /app/app/api/remotion/webhook/route.ts
+   - Console.log in production code: /app/app/api/webhooks/cursor/route.ts
+   - Console.log in production code: /app/app/api/webhooks/middleware/route.ts
+   - Wildcard import in /app/app/api/webhooks/resend/route.ts
+   - Console.log in production code: /app/app/api/webhooks/resend/route.ts
+   - Console.log in production code: /app/app/api/webhooks/slack/route.ts
+   - Console.log in production code: /app/app/api/webhooks/vercel/handlers.ts
+   - Wildcard import in /app/app/api/webhooks/vercel/route.ts
+   - Console.log in production code: /app/app/api/webhooks/vercel/route.ts
+   - Console.log in production code: /app/app/api/workflows/appointment-reminders/route.ts
+   - Console.log in production code: /app/app/api/workflows/education/route.ts
+   - Console.log in production code: /app/app/api/workflows/follow-up/route.ts
+   - Console.log in production code: /app/app/api/workflows/newsletter/route.ts
+   - Console.log in production code: /app/app/api/workflows/search/route.ts
+   - Console.log in production code: /app/app/appointments/_components/VoiceBookingOption.tsx
+   - Console.log in production code: /app/app/auth/callback/AuthCallbackClient.tsx
+   - Console.log in production code: /app/app/blog/page.tsx
+   - Wildcard import in /app/app/components/scrollytelling/Hero.tsx
+   - Console.log in production code: /app/app/components/scrollytelling/Hero.tsx
+   - Console.log in production code: /app/app/components/scrollytelling/ScrubEngine.ts
+   - Console.log in production code: /app/app/mri-analysis/page.tsx
+🚀 Running Lighthouse performance checks...
+
+📊 Checking: http://localhost:3000
+🔍 Checking Lighthouse metrics for: http://localhost:3000
+  ✅ first-contentful-paint: 1.5 s (budget: 2000)
+  ✅ largest-contentful-paint: 2.2 s (budget: 2500)
+  ✅ cumulative-layout-shift: 0.05 (budget: 0.1)
+  ✅ total-blocking-time: 250 ms (budget: 300)
+  ✅ speed-index: 2.8 s (budget: 3000)
+
+✅ All Lighthouse budgets passed!

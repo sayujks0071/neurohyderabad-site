@@ -5,8 +5,8 @@ import { SITE_URL } from "../../src/lib/seo";
 import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
 
 export const metadata: Metadata = {
-  title: "German Training in Endoscopic Spine Surgery | Dr. Sayuj Krishnan | International Credentials",
-  description: "Dr. Sayuj Krishnan's certified German training in Full Endoscopic Spine Surgery. Learn about his international observership, advanced techniques, and how German precision benefits patients in Hyderabad.",
+  title: "German-Trained Spine Surgeon Hyderabad | Dr. Sayuj Krishnan",
+  description: "Dr. Sayuj Krishnan completed German certification in Endoscopic Spine Surgery. Advanced international training bringing precision techniques to patients in Hyderabad.",
   keywords: [
     "german trained neurosurgeon hyderabad",
     "endoscopic spine surgery germany",

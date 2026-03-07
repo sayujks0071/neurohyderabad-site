@@ -183,7 +183,7 @@ const references = [
 ] as const;
 
 export const metadata: Metadata = {
-  title: "Cervical Radiculopathy Treatment Hyderabad | Pinched Nerve Surgery",
+  title: "Cervical Radiculopathy Treatment Hyderabad | Pinched Nerve",
   description:
     "Expert treatment for cervical radiculopathy (pinched nerve) in Hyderabad. Keyhole surgery (Foraminotomy) and ACDF by Dr. Sayuj Krishnan.",
   alternates: {

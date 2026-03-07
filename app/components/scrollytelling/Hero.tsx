@@ -171,6 +171,7 @@ export default function Hero() {
                 alt="Dr. Sayuj Krishnan"
                 fill
                 priority
+                sizes="100vw"
                 className={`object-cover object-top transition-opacity duration-1000 ${isLoading ? 'opacity-50' : 'opacity-0'}`}
             />
 

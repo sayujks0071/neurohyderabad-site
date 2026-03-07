@@ -1,9 +1,10 @@
 'use client';
 
-import { useState, useRef, useEffect, useMemo } from 'react';
+import React, { useState, useRef, useEffect, useMemo, Fragment } from 'react';
 import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport, type UIMessage } from 'ai';
 import { analytics } from "@/src/lib/analytics";
+import { Suggestion, Suggestions } from "@/src/components/ai-elements/suggestion";
 
 interface AIStreamingChatProps {
   pageSlug: string;
@@ -27,6 +28,8 @@ export default function AIStreamingChat({
 }: AIStreamingChatProps) {
   const [showEmergencyAlert, setShowEmergencyAlert] = useState(false);
   const [input, setInput] = useState('');
+  const [files, setFiles] = useState<FileList | undefined>(undefined);
+  const [checkpoints, setCheckpoints] = useState<{messageIndex: number}[]>([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Create transport with dependencies
@@ -44,7 +47,7 @@ export default function AIStreamingChat({
   ], [initialMessage]);
 
   // Initialize useChat hook with explicit generic type to prevent excessive narrowing
-  const { messages, sendMessage, status, error } = useChat<UIMessage>({
+  const { messages, setMessages, sendMessage, status, error, addToolApprovalResponse } = useChat<UIMessage>({
     transport,
     messages: initialMessages,
     onFinish: (options) => {
@@ -82,6 +85,21 @@ export default function AIStreamingChat({
     scrollToBottom();
   }, [messages]);
 
+  useEffect(() => {
+    // Create checkpoint every 5 messages
+    if (messages.length > 0 && messages.length % 5 === 0) {
+      const isAlreadyCheckpoint = checkpoints.some(cp => cp.messageIndex === messages.length - 1);
+      if (!isAlreadyCheckpoint) {
+        setCheckpoints([...checkpoints, { messageIndex: messages.length - 1 }]);
+      }
+    }
+  }, [messages.length, checkpoints]);
+
+  const restoreToCheckpoint = (messageIndex: number) => {
+    setMessages(messages.slice(0, messageIndex + 1));
+    setCheckpoints(checkpoints.filter(cp => cp.messageIndex <= messageIndex));
+  };
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
   };
@@ -95,7 +113,12 @@ export default function AIStreamingChat({
     const userMessage = input;
     setInput('');
     // Use helper object with text property for convenience
-    await sendMessage({ text: userMessage });
+    // Pass files to the API
+    await sendMessage({
+      text: userMessage,
+      files: files
+    });
+    setFiles(undefined);
   };
 
   // Wrapper for quick actions
@@ -148,7 +171,7 @@ export default function AIStreamingChat({
 
         {/* Messages */}
         <div className="h-96 overflow-y-auto p-4 space-y-4">
-          {messages.map((message) => {
+          {messages.map((message, index) => {
             // Helper to get text content from parts
             const textContent = message.parts
               .filter(part => part.type === 'text')
@@ -156,8 +179,8 @@ export default function AIStreamingChat({
               .join('');
 
             return (
+              <Fragment key={message.id}>
               <div
-                key={message.id}
                 className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 <div
@@ -168,8 +191,138 @@ export default function AIStreamingChat({
                   }`}
                 >
                   <p className="text-sm whitespace-pre-wrap">{textContent}</p>
+
+                  {((message as any).experimental_attachments || message.parts?.filter(p => (p.type as string) === "file" || (p.type as string) === "image")).length > 0 && (
+                    <div className="mt-2">
+                      <Attachments variant="list">
+                        {((message as any).experimental_attachments || message.parts?.filter(p => (p.type as string) === "file" || (p.type as string) === "image")).map((file: any, i: number) => (
+                          <Attachment key={`${message.id}-file-${i}`} data={file as any}>
+                            <AttachmentInfo />
+                          </Attachment>
+                        ))}
+                      </Attachments>
+                    </div>
+                  )}
+
+                  {message.parts?.filter(part => part.type === "tool-invocation").map((part: any) => {
+                    const tool = part;
+
+                    // Determine chain of thought icon and label
+                    let icon = StethoscopeIcon;
+                    let label = "Processing tool: " + tool.toolName;
+                    if (tool.toolName === "searchContent") {
+                      icon = SearchIcon;
+                      label = "Searching medical information...";
+                    } else if (tool.toolName === "checkAvailability") {
+                      icon = CalendarIcon;
+                      label = "Checking schedule availability...";
+                    } else if (tool.toolName === "getServices" || tool.toolName === "getLocations") {
+                      icon = StethoscopeIcon;
+                      label = "Retrieving clinic details...";
+                    }
+
+                    const isCompleted = tool.state === "result";
+
+                    return (
+                      <div key={tool.toolInvocationId} className="mt-4">
+                        {/* Display Chain of Thought for non-approval tools or tools that haven't required approval yet */}
+                        {tool.toolName !== "bookAppointment" && (
+                          <div className="mb-2">
+                            <ChainOfThought defaultOpen={!isCompleted}>
+                              <ChainOfThoughtHeader>
+                                {isCompleted ? `Completed: ${label}` : `Thinking: ${label}`}
+                              </ChainOfThoughtHeader>
+                              <ChainOfThoughtContent>
+                                <ChainOfThoughtStep
+                                  icon={icon}
+                                  label={label}
+                                  description={isCompleted ? "Tool executed successfully" : "Tool is currently executing"}
+                                  status={isCompleted ? "complete" : "active"}
+                                />
+                                {isCompleted && tool.result && (
+                                  <div className="text-xs mt-2 bg-black/5 p-2 rounded max-h-32 overflow-y-auto">
+                                    <pre className="whitespace-pre-wrap font-mono">
+                                      {typeof tool.result === 'string' ? tool.result : JSON.stringify(tool.result).slice(0, 150) + "..."}
+                                    </pre>
+                                  </div>
+                                )}
+                              </ChainOfThoughtContent>
+                            </ChainOfThought>
+                          </div>
+                        )}
+
+                        {tool.approval && (
+                          <Confirmation approval={tool.approval} state={tool.state}>
+                            <ConfirmationRequest>
+                              <p>This action requires your confirmation:</p>
+                              <div className="bg-[var(--color-surface)] p-2 rounded text-xs mt-2 overflow-x-auto text-[var(--color-text-primary)] border border-[var(--color-border)]">
+                                {tool.toolName === "bookAppointment" ? (
+                                  <div>
+                                    <p className="font-semibold mb-1">Book Appointment</p>
+                                    <ul className="list-disc pl-4">
+                                      <li><strong>Patient:</strong> {tool.args.patientName}</li>
+                                      <li><strong>Date:</strong> {tool.args.appointmentDate} at {tool.args.appointmentTime}</li>
+                                      <li><strong>Reason:</strong> {tool.args.reason}</li>
+                                      <li><strong>Contact:</strong> {tool.args.phone}</li>
+                                    </ul>
+                                  </div>
+                                ) : (
+                                  <pre>{JSON.stringify(tool.args, null, 2)}</pre>
+                                )}
+                              </div>
+                              <p className="mt-2 text-sm">Do you approve this booking?</p>
+                            </ConfirmationRequest>
+                            <ConfirmationAccepted>
+                              <CheckIcon className="size-4" />
+                              <span>You approved this booking request</span>
+                            </ConfirmationAccepted>
+                            <ConfirmationRejected>
+                              <XIcon className="size-4" />
+                              <span>You rejected this booking request</span>
+                            </ConfirmationRejected>
+                            <ConfirmationActions>
+                              <ConfirmationAction
+                                variant="outline"
+                                onClick={() =>
+                                  addToolApprovalResponse({
+                                    id: tool.toolInvocationId,
+                                    approved: false,
+                                  })
+                                }
+                              >
+                                Reject
+                              </ConfirmationAction>
+                              <ConfirmationAction
+                                variant="default"
+                                className="bg-[var(--color-primary-600)] text-white hover:bg-[var(--color-primary-700)]"
+                                onClick={() =>
+                                  addToolApprovalResponse({
+                                    id: tool.toolInvocationId,
+                                    approved: true,
+                                  })
+                                }
+                              >
+                                Approve
+                              </ConfirmationAction>
+                            </ConfirmationActions>
+                          </Confirmation>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
+              {checkpoints.find(cp => cp.messageIndex === index) && (
+                <div className="flex justify-center my-4">
+                  <Checkpoint>
+                    <CheckpointIcon />
+                    <CheckpointTrigger onClick={() => restoreToCheckpoint(index)}>
+                      Restore previous conversation state
+                    </CheckpointTrigger>
+                  </Checkpoint>
+                </div>
+              )}
+              </Fragment>
             );
           })}
           
@@ -201,24 +354,53 @@ export default function AIStreamingChat({
         {messages.length <= 1 && (
           <div className="p-4 border-t border-[var(--color-border)]">
             <p className="text-sm text-[var(--color-text-secondary)] mb-3">Quick actions:</p>
-            <div className="flex flex-wrap gap-2">
+            <Suggestions>
               {quickActions.map((action, index) => (
-                <button
+                <Suggestion
                   key={index}
                   onClick={() => handleQuickAction(action)}
                   disabled={isLoading}
-                  className="text-xs bg-[var(--color-primary-50)] text-[var(--color-primary-700)] px-3 py-1 rounded-full hover:bg-[var(--color-primary-100)] transition-colors disabled:opacity-50"
-                >
-                  {action}
-                </button>
+                  suggestion={action}
+                  className="text-xs bg-[var(--color-primary-50)] text-[var(--color-primary-700)] hover:bg-[var(--color-primary-100)] transition-colors disabled:opacity-50 whitespace-nowrap"
+                />
               ))}
-            </div>
+            </Suggestions>
           </div>
         )}
 
         {/* Input Form */}
         <form onSubmit={onFormSubmit} className="p-4 border-t border-[var(--color-border)]">
+          {files && files.length > 0 && (
+            <div className="mb-2">
+              <Attachments variant="inline">
+                {Array.from(files).map((file, i) => (
+                  <Attachment
+                    key={`upload-${i}`}
+                    data={{ id: `upload-${i}`, name: file.name, contentType: file.type } as any}
+                    onRemove={() => {
+                      setFiles(undefined);
+                    }}
+                  >
+                    <AttachmentPreview />
+                    <AttachmentInfo />
+                    <AttachmentRemove />
+                  </Attachment>
+                ))}
+              </Attachments>
+            </div>
+          )}
           <div className="flex space-x-2">
+            <label className="flex items-center justify-center px-4 py-2 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-lg cursor-pointer hover:bg-[var(--color-primary-50)] text-[var(--color-text-secondary)] transition-colors">
+              <span className="sr-only">Upload file</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+              <input
+                type="file"
+                className="hidden"
+                onChange={(e) => setFiles(e.target.files || undefined)}
+                multiple
+                disabled={isLoading}
+              />
+            </label>
             <input
               type="text"
               value={input}

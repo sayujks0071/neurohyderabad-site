@@ -9,7 +9,7 @@ import LazySection from '@/app/_components/LazySection';
 import RemotionVideoEmbedWrapper from '@/app/_components/RemotionVideoEmbedWrapper';
 
 export const metadata: Metadata = {
-  title: 'Patient Success Stories | Neurosurgery & Spine Surgery Hyderabad',
+  title: 'Patient Stories | Neurosurgery & Spine Surgery Hyderabad',
   description: 'Real patient stories of successful neurosurgery and spine surgery outcomes at Yashoda Hospital Malakpet with Dr. Sayuj Krishnan.',
   keywords: 'patient stories, neurosurgery success, spine surgery outcomes, brain surgery recovery, Hyderabad',
   alternates: {

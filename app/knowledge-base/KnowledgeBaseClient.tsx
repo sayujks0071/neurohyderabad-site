@@ -86,7 +86,12 @@ export default function KnowledgeBaseClient() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Search Form */}
         <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-          <form onSubmit={handleSearch} className="space-y-4">
+          <form
+            onSubmit={handleSearch}
+            className="space-y-4"
+            toolname="searchKnowledgeBase"
+            tooldescription="Search Dr. Sayuj Krishnan's neurosurgery knowledge base for articles and resources."
+          >
             <div>
               <label htmlFor="query" className="block text-sm font-medium text-gray-700 mb-2">
                 Search Query

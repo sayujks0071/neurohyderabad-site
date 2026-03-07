@@ -275,6 +275,10 @@ export default function EndoscopicDiscectomyPage() {
               <h2 className="text-3xl font-bold text-blue-800 mb-6">Frequently Asked Questions</h2>
           <div className="space-y-6">
             <div className="bg-gray-50 p-6 rounded-lg">
+              <h3 className="text-xl font-semibold mb-3 text-blue-700">Is Endoscopic Spine Surgery the same as Laser Spine Surgery?</h3>
+              <p className="text-gray-700">No. Laser spine surgery is heavily marketed but not the clinical standard. True Endoscopic Spine Surgery uses advanced HD cameras to mechanically remove herniated discs safely, providing better outcomes than laser techniques.</p>
+            </div>
+            <div className="bg-gray-50 p-6 rounded-lg">
               <h3 className="text-xl font-semibold mb-3 text-blue-700">How long does the surgery take?</h3>
               <p className="text-gray-700">Endoscopic discectomy typically takes 45-90 minutes, depending on the complexity of the case.</p>
             </div>

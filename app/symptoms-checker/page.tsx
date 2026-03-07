@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import SmartSymptomChecker from "../_components/SmartSymptomChecker";
 
 export const metadata: Metadata = {
-  title: "Symptom Checker | Dr Sayuj Krishnan - AI-Powered Symptom Analysis",
+  title: "AI Symptom Checker | Neurosurgery Hyderabad | Dr. Sayuj",
   description: "Use our AI-powered symptom checker to get preliminary guidance about your symptoms. Not a diagnosis - always consult with Dr. Sayuj for proper evaluation.",
   alternates: {
     canonical: "/symptoms-checker",
