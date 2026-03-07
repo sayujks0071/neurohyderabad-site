@@ -23,8 +23,8 @@ const PatientEducationVideos = dynamic(() => import('@/app/_components/PatientEd
 });
 
 const baseMetadata = makeMetadata({
-  title: 'Spinal Fusion & Fracture Surgery Hyderabad | TLIF & Trauma Fixation',
-  description: 'Expert Spinal Fusion & Fracture Surgery in Hyderabad. Minimally Invasive TLIF for Spondylolisthesis and Percutaneous Fixation for Trauma by Dr. Sayuj Krishnan.',
+  title: 'Spinal Fusion Surgery Hyderabad | Top Specialist & Fixation',
+  description: 'Expert Spinal Fusion Surgery in Hyderabad by Dr. Sayuj Krishnan. Minimally invasive TLIF for slip discs, and percutaneous fixation for spine trauma.',
   canonicalPath: '/services/spinal-fusion-surgery-hyderabad',
 });
 

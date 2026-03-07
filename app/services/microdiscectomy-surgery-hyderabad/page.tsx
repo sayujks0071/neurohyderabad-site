@@ -25,17 +25,17 @@ const SERVICE_SLUG = 'microdiscectomy-surgery-hyderabad';
 export const revalidate = 86400; // Revalidate every 24 hours
 
 const baseMetadata = makeMetadata({
-  title: 'Microdiscectomy Surgery Hyderabad | Microscopic Spine Surgery',
+  title: 'Microdiscectomy Surgery Hyderabad | Microscopic Discectomy',
   description:
-    'Gold standard microscopic spine surgery (Microdiscectomy) in Hyderabad by Dr. Sayuj Krishnan. High precision removal of slip disc using Zeiss operating microscope.',
+    'Expert Microdiscectomy Surgery in Hyderabad. Gold standard treatment for Slip Disc & Sciatica using high-magnification microscope by Dr Sayuj Krishnan.',
   canonicalPath: `/services/${SERVICE_SLUG}`,
 });
 
 export const metadata: Metadata = {
   ...baseMetadata,
-  title: 'Microdiscectomy Surgery Hyderabad | Microscopic Spine Surgery',
+  title: 'Microdiscectomy Surgery Hyderabad | Microscopic Discectomy',
   description:
-    'Expert Microdiscectomy Surgery in Hyderabad. Gold standard treatment for Slip Disc & Sciatica using high-magnification microscope. Proven results.',
+    'Expert Microdiscectomy Surgery in Hyderabad. Gold standard treatment for Slip Disc & Sciatica using high-magnification microscope by Dr Sayuj Krishnan.',
   keywords: [
     'microdiscectomy surgery hyderabad',
     'microscopic spine surgery hyderabad',
