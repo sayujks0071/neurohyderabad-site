@@ -55,18 +55,24 @@ export default function StatsigAnalytics() {
         }
       };
 
-      // Throttle scroll events
-      let scrollTimeout: NodeJS.Timeout;
+      // Throttle scroll events using requestAnimationFrame for better performance
+      let isTicking = false;
+      let rafId: number;
       const throttledScroll = () => {
-        if (scrollTimeout) clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(handleScroll, 100);
+        if (!isTicking) {
+          rafId = window.requestAnimationFrame(() => {
+            handleScroll();
+            isTicking = false;
+          });
+          isTicking = true;
+        }
       };
 
       window.addEventListener('scroll', throttledScroll, { passive: true });
 
       return () => {
         window.removeEventListener('scroll', throttledScroll);
-        if (scrollTimeout) clearTimeout(scrollTimeout);
+        if (rafId) window.cancelAnimationFrame(rafId);
       };
     };
 
