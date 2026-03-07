@@ -5,6 +5,33 @@ import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport, type UIMessage } from 'ai';
 import { analytics } from "@/src/lib/analytics";
 import { Suggestion, Suggestions } from "@/src/components/ai-elements/suggestion";
+import {
+  Attachments,
+  Attachment,
+  AttachmentInfo,
+  AttachmentPreview,
+  AttachmentRemove
+} from "@/components/ai-elements/attachments";
+import {
+  ChainOfThought,
+  ChainOfThoughtHeader,
+  ChainOfThoughtContent,
+  ChainOfThoughtStep
+} from "@/components/ai-elements/chain-of-thought";
+import {
+  Confirmation,
+  ConfirmationRequest,
+  ConfirmationAccepted,
+  ConfirmationRejected,
+  ConfirmationActions,
+  ConfirmationAction
+} from "@/components/ai-elements/confirmation";
+import {
+  Checkpoint,
+  CheckpointIcon,
+  CheckpointTrigger
+} from "@/components/ai-elements/checkpoint";
+import { CalendarIcon, SearchIcon, StethoscopeIcon, CheckIcon, XIcon } from "lucide-react";
 
 interface AIStreamingChatProps {
   pageSlug: string;
@@ -133,11 +160,14 @@ export default function AIStreamingChat({
     "I have severe headache and dizziness",
     "I need information about spine surgery",
     "What are your clinic hours?",
-    "Tell me about endoscopic spine surgery"
+    "Tell me about endoscopic spine surgery",
+    "Cost of slip disc surgery",
+    "Book an appointment",
+    "How does machine learning work?"
   ];
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-4xl mx-auto h-[600px] flex flex-col relative size-full rounded-lg border">
       {/* Emergency Alert */}
       {showEmergencyAlert && (
         <div className="mb-6 p-4 bg-[var(--color-error-light)] border border-[var(--color-error)] text-[var(--color-error-700)] rounded-lg animate-pulse">
@@ -155,7 +185,7 @@ export default function AIStreamingChat({
       )}
 
       {/* Chat Interface */}
-      <div className="bg-[var(--color-surface)] rounded-2xl border border-[var(--color-border)] shadow-lg overflow-hidden">
+      <div className="bg-[var(--color-surface)] rounded-2xl shadow-lg overflow-hidden flex-1 flex flex-col h-full">
         {/* Chat Header */}
         <div className="bg-gradient-to-r from-[var(--color-primary-500)] to-purple-600 text-white p-4">
           <div className="flex items-center">
@@ -170,7 +200,7 @@ export default function AIStreamingChat({
         </div>
 
         {/* Messages */}
-        <div className="h-96 overflow-y-auto p-4 space-y-4">
+        <div className="flex-1 overflow-y-auto p-4 space-y-4 h-full">
           {messages.map((message, index) => {
             // Helper to get text content from parts
             const textContent = message.parts
@@ -352,8 +382,8 @@ export default function AIStreamingChat({
 
         {/* Quick Actions - Only show if just initial message */}
         {messages.length <= 1 && (
-          <div className="p-4 border-t border-[var(--color-border)]">
-            <p className="text-sm text-[var(--color-text-secondary)] mb-3">Quick actions:</p>
+          <div className="p-4">
+            <p className="text-sm text-[var(--color-text-secondary)] mb-3 font-semibold">Quick actions:</p>
             <Suggestions>
               {quickActions.map((action, index) => (
                 <Suggestion
@@ -361,7 +391,7 @@ export default function AIStreamingChat({
                   onClick={() => handleQuickAction(action)}
                   disabled={isLoading}
                   suggestion={action}
-                  className="text-xs bg-[var(--color-primary-50)] text-[var(--color-primary-700)] hover:bg-[var(--color-primary-100)] transition-colors disabled:opacity-50 whitespace-nowrap"
+                  className="text-xs border-[var(--color-primary-500)] text-[var(--color-primary-700)] hover:bg-[var(--color-primary-100)] transition-colors disabled:opacity-50 whitespace-nowrap"
                 />
               ))}
             </Suggestions>
