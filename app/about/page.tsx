@@ -3,7 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { SITE_URL } from "../../src/lib/seo";
 import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
-import { PhysicianSchema } from "../../src/components/schema/PhysicianSchema";
 import MedicalWebPageSchema from "../components/schemas/MedicalWebPageSchema";
 import Section from "../_components/Section";
 import Card from "../_components/Card";
@@ -12,7 +11,7 @@ import LazySection from "../_components/LazySection";
 import RemotionVideoEmbedWrapper from "../_components/RemotionVideoEmbedWrapper";
 
 // Ensure page is statically generated
-export const revalidate = 3600; // Revalidate every hour
+export const revalidate = 86400; // Revalidate every 24 hours
 
 export const metadata: Metadata = {
   title: "Dr Sayuj Krishnan | Best Neurosurgeon in Hyderabad",
@@ -72,7 +71,7 @@ export default function AboutPage() {
         { name: "Home", path: "/" },
         { name: "About Dr. Sayuj Krishnan", path: "/about" }
       ]} />
-      <PhysicianSchema />
+      {/* PhysicianSchema is already injected globally via layout.tsx */}
       <MedicalWebPageSchema
         pageType="about"
         pageSlug="/about"

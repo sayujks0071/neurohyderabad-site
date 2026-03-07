@@ -9,6 +9,8 @@ import { LocationSchema } from "@/src/components/locations/LocationSchema";
 import { notFound } from "next/navigation";
 import TrustProof from "@/app/_components/TrustProof";
 import { patientStories } from "@/src/content/stories";
+import Breadcrumbs from "@/app/components/Breadcrumbs";
+
 
 // Force static generation
 export const dynamic = 'force-static';
@@ -59,7 +61,14 @@ export default function LBNagarLocationPage() {
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
-      <LocationSchema location={location} breadcrumb={breadcrumb} faq={FAQ} />
+      <Breadcrumbs
+        items={[
+          { name: 'Home', href: '/' },
+          { name: 'Locations', href: '/locations' },
+          { name: 'Best Neurosurgeon near LB Nagar, Hyderabad', href: '/locations/lb-nagar' },
+        ]}
+      />
+      <LocationSchema location={location}  faq={FAQ} />
 
       {/* Hero Section */}
       <div className="mb-10 text-center md:text-left">

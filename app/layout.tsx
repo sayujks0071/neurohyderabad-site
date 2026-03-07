@@ -29,6 +29,7 @@ import Footer from "./components/Footer";
 import WebsiteSchema from "./components/schemas/WebsiteSchema";
 import { PhysicianSchema } from "../src/components/schema/PhysicianSchema";
 import HospitalSchema from "./components/schemas/HospitalSchema";
+import OrganizationSchema from "./components/schemas/OrganizationSchema";
 import TrustStrip from "./_components/TrustStrip";
 import ClientAnalytics from "./_components/ClientAnalytics";
 import GoogleAnalytics from "../src/components/GoogleAnalytics";
@@ -39,6 +40,7 @@ import StandaloneFlagValues from "./_components/StandaloneFlagValues";
 import MiddlewareRUM from "./_components/MiddlewareRUM";
 import MicrosoftClarity from "./_components/MicrosoftClarity";
 import HypertuneWrapper from "./providers/hypertune-wrapper";
+import WebMCPProvider from "../src/components/WebMCPProvider";
 import { SITE_URL } from "../src/lib/seo";
 
 export const metadata: Metadata = {
@@ -152,13 +154,15 @@ export const viewport: Viewport = {
   themeColor: "#0B2E4E",
 };
 
+import { TooltipProvider } from "@/components/ui/tooltip"
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" prefix="og: https://ogp.me/ns# article: https://ogp.me/ns/article#">
+    <html lang="en-IN" prefix="og: https://ogp.me/ns# article: https://ogp.me/ns/article#">
       <head>
         <link rel="dns-prefetch" href="https://edge.hypertune.com" />
         <link rel="preconnect" href="https://edge.hypertune.com" crossOrigin="anonymous" />
@@ -173,8 +177,11 @@ export default function RootLayout({
         <GoogleAnalytics />
         <ClientAnalytics />
         <WebsiteSchema />
+        <WebMCPProvider />
+        <TooltipProvider>
         <PhysicianSchema />
         <HospitalSchema />
+        <OrganizationSchema />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-1/2 focus:-translate-x-1/2 bg-blue-600 text-white px-4 py-2 rounded-md shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 z-50"
@@ -195,6 +202,7 @@ export default function RootLayout({
         <Footer />
         <StandaloneFlagValues />
         {process.env.VERCEL ? <Analytics /> : null}
+        </TooltipProvider>
       </body>
     </html>
   );

@@ -171,7 +171,7 @@ export default function SpinalDecompressionPage() {
           </section>
 
           <section className="mb-12">
-             <LocalPathways mode="service" />
+             <LocalPathways mode="service" currentSlug="spinal-decompression-surgery-hyderabad" />
           </section>
 
           <section className="mb-12">

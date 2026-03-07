@@ -9,6 +9,53 @@ export interface WelcomeSceneProps {
   patientName: string;
 }
 
+const AnimatedSubtitleWord: React.FC<{
+  word: string;
+  index: number;
+  subtitleStartFrame: number;
+  prefersReducedMotion: boolean;
+}> = ({ word, index, subtitleStartFrame, prefersReducedMotion }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  const delay = subtitleStartFrame + index * 3;
+
+  const wordOpacity = useMemo(() =>
+    prefersReducedMotion ? 1 : spring({
+      frame: frame - delay,
+      fps,
+      from: 0,
+      to: 1,
+      durationInFrames: 40,
+    }),
+    [frame, fps, delay, prefersReducedMotion]
+  );
+
+  const wordY = useMemo(() =>
+    prefersReducedMotion ? 0 : spring({
+      frame: frame - delay,
+      fps,
+      from: 20,
+      to: 0,
+      durationInFrames: 40,
+      config: { damping: 12 },
+    }),
+    [frame, fps, delay, prefersReducedMotion]
+  );
+
+  return (
+    <span
+      style={{
+        opacity: wordOpacity,
+        transform: `translateY(${wordY}px)`,
+        display: 'inline-block',
+      }}
+    >
+      {word}
+    </span>
+  );
+};
+
 const FloatingParticles: React.FC<{ reducedMotion: boolean }> = ({ reducedMotion }) => {
   const frame = useCurrentFrame();
 
@@ -56,47 +103,34 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
   const prefersReducedMotion = usePrefersReducedMotion();
 
   // Spring-based fade-in animation for main container
-  const opacity = prefersReducedMotion ? 1 : spring({
+  const opacity = useMemo(() => prefersReducedMotion ? 1 : spring({
     frame,
     fps,
     from: 0,
     to: 1,
     durationInFrames: 30,
-  });
+  }), [frame, fps, prefersReducedMotion]);
 
   // Spring-based scale animation for main container
-  const scale = prefersReducedMotion ? 1 : spring({
+  // Adjusted damping for a slightly bouncier/friendlier feel (15 -> 10)
+  const scale = useMemo(() => prefersReducedMotion ? 1 : spring({
     frame,
     fps,
     from: 0.8,
     to: 1,
     durationInFrames: 30,
     config: {
-      damping: 15,
+      damping: 10,
     },
-  });
+  }), [frame, fps, prefersReducedMotion]);
 
   // Subtle breathing animation for continuous movement
-  const breathingScale = prefersReducedMotion ? 1 : 1 + Math.sin(frame / 45) * 0.01;
+  const breathingScale = useMemo(() => prefersReducedMotion ? 1 : 1 + Math.sin(frame / 45) * 0.01, [frame, prefersReducedMotion]);
 
   // Subtitle animation (starts after title)
   const subtitleStartFrame = 15;
-  const subtitleOpacity = prefersReducedMotion ? 1 : spring({
-    frame: frame - subtitleStartFrame,
-    fps,
-    from: 0,
-    to: 1,
-    durationInFrames: 40,
-  });
-
-  const subtitleY = prefersReducedMotion ? 0 : spring({
-    frame: frame - subtitleStartFrame,
-    fps,
-    from: 20,
-    to: 0,
-    durationInFrames: 40,
-    config: { damping: 12 },
-  });
+  const subtitleText = "Welcome to Dr. Sayuj Krishnan's Practice";
+  const subtitleWords = useMemo(() => subtitleText.split(' '), []);
 
   return (
     <GradientBackground preset="clinical-blue" animated={!prefersReducedMotion}>
@@ -139,19 +173,29 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
               />
             ))}
           </h1>
-          <p
+          <div
             style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
+              gap: '8px',
               fontFamily: FONTS.primary,
               fontSize: '32px',
               fontWeight: 500,
               color: 'rgba(255, 255, 255, 0.9)',
               margin: 0,
-              opacity: subtitleOpacity,
-              transform: `translateY(${subtitleY}px)`,
             }}
           >
-            Welcome to Dr. Sayuj Krishnan's Practice
-          </p>
+            {subtitleWords.map((word, index) => (
+              <AnimatedSubtitleWord
+                key={index}
+                word={word}
+                index={index}
+                subtitleStartFrame={subtitleStartFrame}
+                prefersReducedMotion={prefersReducedMotion}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </GradientBackground>

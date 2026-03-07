@@ -2,137 +2,70 @@
   "version": 2,
   "buildCommand": "pnpm run build",
   "devCommand": "pnpm run dev",
-  "installCommand": "pnpm install",
+  "installCommand": "pnpm install --no-frozen-lockfile",
   "framework": "nextjs",
   "rewrites": [
     {
       "source": "/wp-json/:path*",
-      "destination": "https://api.drsayuj.com/wp-json/:path*"
+      "destination": "https://api.drsayuju.com/wp-json/:path*"
     },
     {
       "source": "/media/:path*",
-      "destination": "https://api.drsayuj.com/wp-content/uploads/:path*"
+      "destination": "https://api.drsayuju.com/wp-content/uploads/:path*"
     }
   ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "SAMEORIGIN"
-        },
-        {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
-        },
-        {
-          "key": "Referrer-Policy",
-          "value": "strict-origin-when-cross-origin"
-        },
-        {
-          "key": "Permissions-Policy",
-          "value": "camera=(), microphone=(), geolocation=()"
-        },
-        {
-          "key": "Strict-Transport-Security",
-          "value": "max-age=31536000; includeSubDomains; preload"
-        },
-        {
-          "key": "Vary",
-          "value": "Accept-Encoding"
-        }
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "X-XSS-Protection", "value": "1; mode=block" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" },
+        { "key": "Strict-Transport-Security", "value": "max-age=31536000; includeSubDomains; preload" },
+        { "key": "Vary", "value": "Accept-Encoding" }
       ]
     },
     {
       "source": "/assets/(.*)",
       "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
     },
     {
       "source": "/_next/static/css/(.*)",
       "headers": [
-        {
-          "key": "Content-Type",
-          "value": "text/css; charset=utf-8"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
+        { "key": "Content-Type", "value": "text/css; charset=utf-8" },
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
     },
     {
       "source": "/_next/static/js/(.*)",
       "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/javascript; charset=utf-8"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
+        { "key": "Content-Type", "value": "application/javascript; charset=utf-8" },
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
     },
     {
       "source": "/sitemap.xml",
       "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/xml; charset=utf-8"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400"
-        }
+        { "key": "Content-Type", "value": "application/xml; charset=utf-8" },
+        { "key": "Cache-Control", "value": "public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400" }
       ]
     }
   ],
   "crons": [
-    {
-      "path": "/api/cron/reindex-rag",
-      "schedule": "0 1 * * *"
-    },
-    {
-      "path": "/api/workflows/seo",
-      "schedule": "0 6 * * *"
-    },
-    {
-      "path": "/api/workflows/health",
-      "schedule": "0 0 * * *"
-    },
-    {
-      "path": "/api/workflows/content",
-      "schedule": "0 5 * * *"
-    },
-    {
-      "path": "/api/workflows/optimize",
-      "schedule": "0 3 * * 0"
-    },
-    {
-      "path": "/api/workflows/hyderabad",
-      "schedule": "0 7 * * *"
-    },
-    {
-      "path": "/api/workflows/competitors",
-      "schedule": "0 8 * * 1"
-    },
-    {
-      "path": "/api/workflows/reviews?action=monitor",
-      "schedule": "0 9 * * *"
-    },
-    {
-      "path": "/api/workflows/eeat?action=audit",
-      "schedule": "0 4 * * 0"
-    }
+    { "path": "/api/cron/reindex-rag", "schedule": "0 1 * * 1" },
+    { "path": "/api/workflows/seo", "schedule": "0 6 * * 1,4" },
+    { "path": "/api/workflows/health", "schedule": "0 0 * * *" },
+    { "path": "/api/workflows/content", "schedule": "0 5 * * 2,5" },
+    { "path": "/api/workflows/optimize", "schedule": "0 3 * * 0" },
+    { "path": "/api/workflows/hyderabad", "schedule": "0 7 * * 1,4" },
+    { "path": "/api/workflows/competitors", "schedule": "0 8 * * 1" },
+    { "path": "/api/workflows/reviews?action=monitor", "schedule": "0 9 * * 3" },
+    { "path": "/api/workflows/eeat?action=audit", "schedule": "0 4 * * 0" },
+    { "path": "/api/workflows/newsletter", "schedule": "30 3 * * 1" },
+    { "path": "/api/workflows/appointment-reminders", "schedule": "30 2 * * *" }
   ]
 }

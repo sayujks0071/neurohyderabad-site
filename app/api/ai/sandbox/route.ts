@@ -1,70 +1,59 @@
-import { NextRequest, NextResponse } from 'next/server';
 import { streamText } from 'ai';
+import { NextRequest, NextResponse } from 'next/server';
 import { getTextModel, hasAIConfig } from '@/src/lib/ai/gateway';
 import { rateLimit } from '@/src/lib/rate-limit';
 
-export const runtime = 'nodejs';
-export const maxDuration = 60;
+export const maxDuration = 30;
 
-/**
- * Ask AI Sandbox API - Demonstrates Vercel AI SDK `streamText`
- */
-export async function POST(req: NextRequest) {
-    // 1. Rate Limit: 20 requests per minute per IP
-    const ip = req.headers.get('x-forwarded-for') ?? 'unknown';
-    const limit = rateLimit(ip, 20, 60 * 1000);
+export async function POST(request: NextRequest) {
+  try {
+    const ip = request.headers.get('x-forwarded-for') ?? '127.0.0.1';
+    // Provide default rate limit parameters if they are missing
+    const { success } = await rateLimit(`ai-sandbox-${ip}`, 50, 60000);
 
-    if (!limit.success) {
-        return NextResponse.json(
-            { error: 'Too many requests. Please try again later.' },
-            {
-                status: 429,
-                headers: {
-                    'X-RateLimit-Limit': limit.limit.toString(),
-                    'X-RateLimit-Remaining': limit.remaining.toString(),
-                    'X-RateLimit-Reset': limit.reset.toString(),
-                }
-            }
-        );
+    if (!success) {
+      return NextResponse.json(
+        { error: 'Too many requests. Please try again later.' },
+        { status: 429 }
+      );
     }
 
     if (!hasAIConfig()) {
-        return NextResponse.json(
-            { error: 'AI Gateway is not configured.' },
-            { status: 500 }
-        );
+      return NextResponse.json(
+        { error: 'AI Gateway is not configured.' },
+        { status: 500 }
+      );
     }
 
-    try {
-        const { messages, requestedModel } = await req.json();
+    const json = await request.json();
+    const { messages, requestedModel } = json;
 
-        // Determine requested model, but default to our standardized Gateway models
-        let aiModel = getTextModel();
-
-        // If the user's snippet model 'openai/gpt-5.2' is passed, map it gracefully to our known best model or try to pass it if dynamic models are supported.
-        if (requestedModel === 'openai/gpt-5.2') {
-            // As gpt-5.2 is not publicly available yet, we map to the closest semantic equivalent defined in the gateway (gpt-4o-mini or gpt-4)
-            aiModel = getTextModel('gpt-4');
-        }
-
-        // This is the core snippet requested by the user, implemented in a robust route
-        const result = streamText({
-            model: aiModel,
-            messages,
-            temperature: 0.7,
-            maxOutputTokens: 1000,
-            system: `You are a helpful, extremely intelligent AI assistant. 
-      You are running in a special "Sandbox" mode on Dr. Sayuj Krishnan's neurosurgery website.
-      Your goal is to answer questions thoughtfully and format your responses with clean Markdown.`
-        });
-
-        // @ts-ignore
-        return result.toDataStreamResponse();
-    } catch (error) {
-        console.error('Error in Sandbox streamText:', error);
-        return NextResponse.json(
-            { error: 'Failed to process AI request', details: error instanceof Error ? error.message : String(error) },
-            { status: 500 }
-        );
+    if (!messages || !Array.isArray(messages)) {
+      return NextResponse.json(
+        { error: 'Messages are required' },
+        { status: 400 }
+      );
     }
+
+    let modelId;
+    if (requestedModel === 'openai/gpt-5.2') {
+      modelId = getTextModel('gpt-4');
+    } else {
+      modelId = getTextModel();
+    }
+
+    const result = streamText({
+      model: modelId,
+      messages: messages,
+      system: "You are a helpful, polite, and empathetic virtual assistant for Dr. Sayuj's neurosurgery and spine clinic. You are here to answer general questions, help patients understand clinical procedures, and provide a welcoming experience. However, you MUST clearly state that you cannot provide medical advice or diagnoses. Always encourage patients to book an appointment with Dr. Sayuj for proper medical evaluation.",
+    });
+
+    return result.toTextStreamResponse();
+  } catch (error) {
+    console.error('Error in AI Sandbox:', error);
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
+  }
 }

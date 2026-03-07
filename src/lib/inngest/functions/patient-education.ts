@@ -1,6 +1,6 @@
 import { inngest } from "@/src/lib/inngest";
 import type { Events } from "@/src/lib/inngest";
-import EmailService from "@/src/lib/email";
+import EmailService from "@/lib/email";
 
 // Patient Education Content Delivery
 export const patientEducationDelivery = inngest.createFunction(

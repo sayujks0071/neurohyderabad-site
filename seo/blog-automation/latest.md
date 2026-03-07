@@ -1,6 +1,6 @@
 # Latest Blog Automation Run
 
-- **Date:** 2026-02-26
-- **Topic:** Acoustic Neuroma (Vestibular Schwannoma): Symptoms and Treatment Guide
+- **Date:** 2026-03-06
+- **Topic:** TIA (Mini-Stroke) vs. Stroke: Warning Signs You Cannot Ignore
 - **Status:** Success
-- **Traceability File:** [Run Details](./2026-02-26/run.md)
+- **Traceability File:** [Run Details](./2026-03-06/run.md)

@@ -8,6 +8,56 @@ export interface CalendarSceneProps {
   appointmentTime: string;
 }
 
+const AnimatedWord: React.FC<{
+  word: string;
+  i: number;
+  prefersReducedMotion: boolean;
+}> = ({ word, i, prefersReducedMotion }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  const delay = 35 + i * 3;
+
+  const wordOpacity = useMemo(() =>
+    prefersReducedMotion ? 1 : spring({
+      frame: frame - delay,
+      fps,
+      from: 0,
+      to: 1,
+      durationInFrames: 20,
+    }),
+    [frame, fps, delay, prefersReducedMotion]
+  );
+
+  const wordY = useMemo(() =>
+    prefersReducedMotion ? 0 : spring({
+      frame: frame - delay,
+      fps,
+      from: 10,
+      to: 0,
+      durationInFrames: 20,
+    }),
+    [frame, fps, delay, prefersReducedMotion]
+  );
+
+  return (
+    <span
+      style={{
+        fontFamily: FONTS.primary,
+        fontSize: '36px',
+        fontWeight: 600,
+        color: COLORS.text,
+        margin: 0,
+        opacity: wordOpacity,
+        transform: `translateY(${wordY}px)`,
+        display: 'inline-block',
+      }}
+    >
+      {word}
+    </span>
+  );
+};
+
 export const CalendarScene: React.FC<CalendarSceneProps> = ({
   appointmentDate,
   appointmentTime,
@@ -105,6 +155,28 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
     to: 1,
     durationInFrames: 20,
   }), [frame, fps, prefersReducedMotion]);
+
+  // Time Section Pulse (Visual polish)
+  const timePulse = useMemo(() => prefersReducedMotion ? 1 : spring({
+    frame: frame - 55, // Trigger after slide-up and ring pulse
+    fps,
+    from: 1,
+    to: 1.05,
+    durationInFrames: 15,
+    config: { damping: 10, stiffness: 100 },
+  }), [frame, fps, prefersReducedMotion]);
+
+  const timePulseReset = useMemo(() => prefersReducedMotion ? 0 : spring({
+    frame: frame - 70, // Return to normal
+    fps,
+    from: 0,
+    to: 1,
+    durationInFrames: 15,
+    config: { damping: 10, stiffness: 100 },
+  }), [frame, fps, prefersReducedMotion]);
+
+  const finalTimeScale = interpolate(timePulseReset, [0, 1], [timePulse, 1]);
+
 
   // Floating animation for "alive" feel
   const floatingY = prefersReducedMotion ? 0 : Math.sin(frame / 60) * 8;
@@ -267,7 +339,7 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
               zIndex: 1,
             }}
           >
-            {/* Highlight Ring */}
+            {/* Highlight Ring (SVG Drawing) */}
             <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
                {/* Ripple Effect */}
                <div
@@ -356,7 +428,7 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
               padding: SPACING[6],
               textAlign: 'center',
               borderTop: `2px solid ${COLORS.accent}`,
-              transform: `translateY(${timeSlide}px)`,
+              transform: `translateY(${timeSlide}px) scale(${finalTimeScale})`,
               opacity: timeOpacity,
               zIndex: 1,
             }}
@@ -378,41 +450,14 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
 
       {/* Bottom text */}
       <div style={{ marginTop: SPACING[12], display: 'flex', gap: '0.4em', justifyContent: 'center' }}>
-        {words.map((word, i) => {
-          const delay = 35 + i * 3;
-          const wordOpacity = prefersReducedMotion ? 1 : spring({
-            frame: frame - delay,
-            fps,
-            from: 0,
-            to: 1,
-            durationInFrames: 20,
-          });
-          const wordY = prefersReducedMotion ? 0 : spring({
-            frame: frame - delay,
-            fps,
-            from: 10,
-            to: 0,
-            durationInFrames: 20,
-          });
-
-          return (
-            <span
-              key={i}
-              style={{
-                fontFamily: FONTS.primary,
-                fontSize: '36px',
-                fontWeight: 600,
-                color: COLORS.text,
-                margin: 0,
-                opacity: wordOpacity,
-                transform: `translateY(${wordY}px)`,
-                display: 'inline-block',
-              }}
-            >
-              {word}
-            </span>
-          );
-        })}
+        {words.map((word, i) => (
+          <AnimatedWord
+            key={i}
+            word={word}
+            i={i}
+            prefersReducedMotion={prefersReducedMotion}
+          />
+        ))}
       </div>
     </div>
   );

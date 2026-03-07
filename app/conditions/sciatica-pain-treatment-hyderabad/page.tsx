@@ -45,8 +45,8 @@ export const metadata: Metadata = {
   },
 };
 
-// ISR: Revalidate every 6 hours
-export const revalidate = 21600;
+// ISR: Revalidate every 24 hours
+export const revalidate = 86400;
 
 const FAQ = [
   {
@@ -68,6 +68,14 @@ const FAQ = [
   {
     q: "How is sciatica diagnosed?",
     a: "Diagnosis starts with a physical exam to check muscle strength and reflexes (Straight Leg Raise test). An MRI scan is the gold standard to visualize the nerve compression and identify the exact cause."
+  },
+  {
+    q: "How long does it take to recover from sciatica surgery?",
+    a: "With minimally invasive endoscopic spine surgery, recovery is significantly faster than traditional surgery. Most patients are discharged the same day, can walk immediately, and return to light activities within 1-2 weeks."
+  },
+  {
+    q: "Is surgery for sciatica safe?",
+    a: "Yes. Endoscopic spine surgery for sciatica is highly safe and precise. It involves a tiny incision (less than 1 cm), minimizing damage to surrounding muscles and tissues, leading to less pain and lower risk of complications."
   },
   {
     q: "What are the warning signs of severe sciatica?",
@@ -527,7 +535,7 @@ export default function SciaticaTreatmentPage() {
         </div>
       </section>
 
-      <LocalPathways mode="condition" />
+      <LocalPathways mode="condition" currentSlug="sciatica-pain-treatment-hyderabad" />
 
       <section className="mb-12 space-y-6">
         <ReviewedBy />

@@ -11,6 +11,8 @@ import ReviewedBy from '@/app/_components/ReviewedBy';
 import MedicalCitations from '@/app/_components/MedicalCitations';
 import SmartImage from '@/components/SmartImage';
 import LocationPageTracker from '@/src/components/LocationPageTracker';
+import Breadcrumbs from "@/app/components/Breadcrumbs";
+
 
 // Force static generation
 export const dynamic = 'force-static';
@@ -67,7 +69,14 @@ export default function NeurosurgeonNearKachigudaFAQPage() {
 
   return (
     <main id="main" className="max-w-4xl mx-auto px-4 py-12">
-      <LocationSchema location={location} breadcrumb={breadcrumb} faq={FAQ} />
+      <Breadcrumbs
+        items={[
+          { name: 'Home', href: '/' },
+          { name: 'Locations', href: '/locations' },
+          { name: 'Neurosurgeon Near Kachiguda FAQ | Dr. Sayuj Krishnan', href: '/locations/neurosurgeon-near-kachiguda-faq' },
+        ]}
+      />
+      <LocationSchema location={location}  faq={FAQ} />
 
       <h1 className="text-3xl md:text-4xl font-bold mb-8">Neurosurgeon Near Kachiguda FAQ | Dr. Sayuj Krishnan</h1>
 

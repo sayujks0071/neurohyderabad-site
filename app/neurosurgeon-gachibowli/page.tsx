@@ -7,6 +7,8 @@ import { LocationMapEmbed } from "@/src/components/locations/LocationMapEmbed";
 import { LocalPathways } from "@/src/components/locations/LocalPathways";
 import { LocationSchema } from "@/src/components/locations/LocationSchema";
 import { notFound } from "next/navigation";
+import Breadcrumbs from "@/app/components/Breadcrumbs";
+
 
 // Force static generation
 export const dynamic = 'force-static';
@@ -55,6 +57,13 @@ export default function Page() {
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
+      <Breadcrumbs
+        items={[
+          { name: 'Home', href: '/' },
+          { name: 'Locations', href: '/locations' },
+          { name: 'Neurosurgeon in Gachibowli, Hyderabad', href: '/neurosurgeon-gachibowli' },
+        ]}
+      />
       <LocationSchema
          location={location}
          faq={FAQ}

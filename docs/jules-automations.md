@@ -1,53 +1,54 @@
 # Jules Automations
 
-This repository uses GitHub Actions to schedule daily SEO and maintenance tasks managed by the Jules AI agent.
+This document explains the automated workflows managed by Jules for https://www.drsayuj.info.
+
+## Overview
+
+Jules runs scheduled GitHub Actions workflows to perform routine tasks such as SEO checks, PR reviews, and competitor analysis. These workflows automatically create GitHub issues with instructions (prompts) for Jules to execute.
 
 ## Schedules (UTC vs IST)
 
-GitHub Actions schedules run in UTC. We have configured them to map to Indian Standard Time (IST), which is UTC + 5:30.
+The workflows are scheduled using `cron` syntax based on UTC (Coordinated Universal Time). India Standard Time (IST) is UTC + 5:30.
+
+Here is the current schedule for the automated tasks:
 
 | Workflow | IST Time | UTC Time | Cron Expression |
 | :--- | :--- | :--- | :--- |
-| **SEO Reprint** | 08:00 IST | 02:30 UTC | `30 2 * * *` |
-| **PR & Deploy Check** | 08:45 IST | 03:15 UTC | `15 3 * * *` |
-| **Competitor Gap Scan** | 09:00 IST | 03:30 UTC | `30 3 * * *` |
-| **Rolling 7-Day SEO Summary** | 09:15 IST | 03:45 UTC | `45 3 * * *` |
-| **Local SEO Check** | 09:30 IST | 04:00 UTC | `0 4 * * *` |
+| **SEO Reprint** | 08:00 | 02:30 | `30 2 * * *` |
+| **PR & Deploy Check** | 08:45 | 03:15 | `15 3 * * *` |
+| **Competitor Gap Scan** | 09:00 | 03:30 | `30 3 * * *` |
+| **Rolling 7-Day SEO Summary** | 09:15 | 03:45 | `45 3 * * *` |
+| **Local SEO Check** | 09:30 | 04:00 | `0 4 * * *` |
 
-*Note: GitHub Actions schedules are approximate and may be delayed during periods of high load.*
+## Editing Prompt Files
 
-## Editing Prompts
+The instructions (issue bodies) for each task are stored as Markdown files in the `jules-prompts/` directory.
 
-Each scheduled workflow creates a GitHub Issue using a prompt template located in the `jules-prompts/` directory.
+To update the instructions for a specific task, simply edit the corresponding file:
+- `jules-prompts/seo-reprint.md`
+- `jules-prompts/pr-deploy-check.md`
+- `jules-prompts/competitor-gap-scan.md`
+- `jules-prompts/rolling-7d-seo-summary.md`
+- `jules-prompts/local-seo-check.md`
 
-To change the instructions given to Jules:
-1. Edit the corresponding Markdown file in `jules-prompts/` (e.g., `jules-prompts/seo-reprint.md`).
-2. Commit and push the changes to the `main` branch.
-3. The next scheduled run will use the updated content as the issue body.
+Commit and push your changes. The next time the workflow runs, it will use the updated prompt.
 
 ## Pausing or Disabling Workflows
 
-To pause a specific automation:
-
-**Option 1: GitHub UI (Recommended)**
-1. Go to the **Actions** tab in the repository.
-2. Select the workflow from the left sidebar.
-3. Click the **...** (three dots) menu in the top right.
+To pause or disable a specific workflow:
+1. Go to the **Actions** tab in the GitHub repository.
+2. Select the workflow you want to disable from the left sidebar.
+3. Click the `...` (three dots) menu on the top right of the workflow runs list.
 4. Select **Disable workflow**.
 
-**Option 2: YAML Configuration**
-1. Edit the workflow file in `.github/workflows/`.
-2. Comment out the `schedule` block or add `if: false` to the job.
+You can re-enable it later using the same menu.
 
-## How Jules Works
+## How Jules Picks Issues
 
-1. **Trigger:** At the scheduled time, the workflow runs.
-2. **Duplicate Check:** It checks if an **open** issue already exists with the same title (which includes the current date, e.g., `[Jules] SEO Reprint Task - 2023-10-27`).
-   - If found, it skips creation to avoid spam.
-3. **Issue Creation:** If no duplicate exists, it creates a new issue.
-4. **Labeling:** It applies the label `jules`.
-   - Jules (the agent) monitors issues with this label to pick up tasks.
+Jules is configured to monitor the repository for new issues. When a scheduled workflow creates an issue, it automatically applies the label `jules`.
 
-<!-- Documentation v2.4 - Verified setup -->
+Jules identifies issues that need its attention by looking for this `jules` label. Once Jules picks up the issue, it will execute the instructions provided in the issue body. To prevent duplicates, the workflows check if an open issue with the same base title has been created in the last 24 hours before creating a new one.
 
-<!-- Verified on Thu Feb 12 23:08:29 UTC 2026 -->
+## Note on Configurable Schedules
+
+GitHub Actions does not natively support using workflow environment variables within the `on.schedule.cron` block. The cron schedule must be a hardcoded string in the YAML file. Therefore, to change a schedule, you must edit the cron string directly in the corresponding `.github/workflows/jules-*.yml` file.

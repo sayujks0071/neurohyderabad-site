@@ -1,5 +1,5 @@
 import Link from "next/link";
-import BreadcrumbListSchema from "./schemas/BreadcrumbListSchema";
+import BreadcrumbSchema from "./schemas/BreadcrumbSchema";
 
 interface BreadcrumbItem {
   name: string;
@@ -13,15 +13,15 @@ interface BreadcrumbsProps {
 export default function Breadcrumbs({ items }: BreadcrumbsProps) {
   return (
     <>
-      <BreadcrumbListSchema items={items} />
-      <nav className="bg-gray-50 py-3" aria-label="Breadcrumb">
+      <BreadcrumbSchema items={items.map(item => ({ name: item.name, path: item.href }))} />
+      <nav className="bg-[var(--color-background)] py-3" aria-label="Breadcrumb">
         <div className="container mx-auto px-4">
           <ol className="flex items-center space-x-2 text-sm">
             {items.map((item, index) => (
               <li key={index} className="flex items-center">
                 {index > 0 && (
                   <svg
-                    className="w-4 h-4 text-gray-400 mx-2"
+                    className="w-4 h-4 text-[var(--color-text-secondary)] mx-2"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                     aria-hidden="true"
@@ -34,13 +34,13 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
                   </svg>
                 )}
                 {index === items.length - 1 ? (
-                  <span className="text-gray-600 font-medium" aria-current="page">
+                  <span className="text-[var(--color-text-secondary)] font-medium" aria-current="page">
                     {item.name}
                   </span>
                 ) : (
                   <Link
                     href={item.href}
-                    className="text-blue-600 hover:text-blue-800 hover:underline"
+                    className="text-[var(--color-primary-500)] hover:text-[var(--color-primary-700)] hover:underline"
                   >
                     {item.name}
                   </Link>

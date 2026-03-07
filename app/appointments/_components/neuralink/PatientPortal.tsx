@@ -513,6 +513,9 @@ const PatientPortal = () => {
         </div>
       ) : (
         <form
+          toolname="bookNeurosurgeryAppointment"
+          tooldescription="Book a consultation appointment with Dr. Sayuj Krishnan, Neurosurgeon, for spine, brain, or general neurosurgery evaluations."
+          toolautosubmit="true"
           onSubmit={handleSubmit}
           className="grid grid-cols-1 lg:grid-cols-2 gap-10 animate-in slide-in-from-right-8 duration-500"
         >
@@ -537,6 +540,7 @@ const PatientPortal = () => {
                   </label>
                   <input
                     id="patient-name"
+                    name="name"
                     required
                     type="text"
                     value={formData.name}
@@ -555,6 +559,7 @@ const PatientPortal = () => {
                     </label>
                     <input
                       id="patient-age"
+                      name="age"
                       required
                       type="number"
                       value={formData.age}
@@ -570,6 +575,7 @@ const PatientPortal = () => {
                     </label>
                     <select
                       id="patient-gender"
+                      name="gender"
                       value={formData.gender}
                       onChange={(e) =>
                         setFormData({ ...formData, gender: e.target.value })
@@ -589,6 +595,7 @@ const PatientPortal = () => {
                   </label>
                   <input
                     id="patient-phone"
+                    name="phone"
                     required
                     type="tel"
                     value={formData.phone}
@@ -605,6 +612,7 @@ const PatientPortal = () => {
                   </label>
                   <input
                     id="patient-email"
+                    name="email"
                     required
                     type="email"
                     value={formData.email}
@@ -726,6 +734,7 @@ const PatientPortal = () => {
                   </div>
                   <textarea
                     id="patient-symptoms"
+                    name="symptoms"
                     required
                     value={formData.symptoms}
                     onChange={(e) =>
@@ -745,6 +754,7 @@ const PatientPortal = () => {
                     <span className="text-sm font-bold text-slate-400" aria-hidden="true">1</span>
                     <input
                       id="patient-pain-score"
+                      name="painScore"
                       type="range"
                       min="1"
                       max="10"
@@ -794,6 +804,7 @@ const PatientPortal = () => {
                   <input
                     type="checkbox"
                     id="mriScanAvailable"
+                    name="mriScanAvailable"
                     checked={formData.mriScanAvailable}
                     onChange={(e) =>
                       setFormData({

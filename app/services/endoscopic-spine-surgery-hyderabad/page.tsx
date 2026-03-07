@@ -23,7 +23,7 @@ import EndoscopicProcedureSteps from '@/src/components/EndoscopicProcedureSteps'
 const SERVICE_SLUG = 'endoscopic-spine-surgery-hyderabad';
 
 // Ensure page is statically generated
-export const revalidate = 3600; // Revalidate every hour
+export const revalidate = 86400; // Revalidate every 24 hours
 
 const baseMetadata = makeMetadata({
   title: 'Endoscopic Spine Surgery Hyderabad | Same-Day Discharge',
@@ -411,6 +411,30 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
             </ul>
           </div>
         </header>
+
+        <section className="mb-12">
+          <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+            <h2 className="text-2xl font-bold text-blue-900 mb-4">Procedure at a Glance</h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="bg-blue-50/50 rounded-xl p-4 border border-blue-50">
+                <div className="text-sm text-gray-500 font-medium mb-1">Procedure Time</div>
+                <div className="font-semibold text-blue-900">~1 Hour</div>
+              </div>
+              <div className="bg-blue-50/50 rounded-xl p-4 border border-blue-50">
+                <div className="text-sm text-gray-500 font-medium mb-1">Anesthesia</div>
+                <div className="font-semibold text-blue-900">Local / General / Spinal</div>
+              </div>
+              <div className="bg-blue-50/50 rounded-xl p-4 border border-blue-50">
+                <div className="text-sm text-gray-500 font-medium mb-1">Hospital Stay</div>
+                <div className="font-semibold text-blue-900">Day Care (6-8 hours)</div>
+              </div>
+              <div className="bg-blue-50/50 rounded-xl p-4 border border-blue-50">
+                <div className="text-sm text-gray-500 font-medium mb-1">Return to Work</div>
+                <div className="font-semibold text-blue-900">3-5 Days</div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         <section className="mb-12 bg-green-50 border border-green-200 rounded-2xl p-6 shadow-sm">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
@@ -936,7 +960,7 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
         </section>
 
         {/* Added bottom Pathways */}
-        <LocalPathways mode="service" />
+        <LocalPathways mode="service" currentSlug="endoscopic-spine-surgery-hyderabad" />
 
         <SourceList sources={ARTICLE_SOURCES} heading="Clinical References" />
         <ReviewedBy lastReviewed="2025-02-20" />

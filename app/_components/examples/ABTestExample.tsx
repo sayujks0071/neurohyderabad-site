@@ -28,9 +28,9 @@ export default function ABTestExample() {
   }, [buttonColor]);
 
   const buttonColors = {
-    blue: 'bg-blue-600 hover:bg-blue-700',
-    green: 'bg-green-600 hover:bg-green-700',
-    red: 'bg-red-600 hover:bg-red-700',
+    blue: 'bg-[var(--color-primary-500)] hover:bg-[var(--color-primary-700)]',
+    green: 'bg-[var(--color-success)] hover:bg-[var(--color-success-700)]',
+    red: 'bg-[var(--color-error)] hover:bg-[var(--color-error-700)]',
   };
 
   const headlines = {
@@ -58,7 +58,7 @@ export default function ABTestExample() {
         Book Consultation
       </button>
 
-      <p className="text-sm text-gray-500">
+      <p className="text-sm text-[var(--color-text-secondary)]">
         Testing: Button Color = {buttonColor} | Headline = {headlineVariant}
       </p>
     </div>

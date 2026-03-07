@@ -16,7 +16,10 @@ interface LocationSchemaProps {
   siteUrl?: string;
   imageUrl?: string;
   faq?: FAQItem[] | any[]; // Allow loose typing to catch legacy q/a without strict errors
-  breadcrumb?: any[]; // Accepting breadcrumb but we generate defaults if not provided
+  aggregateRating?: {
+    ratingValue: string;
+    reviewCount: string;
+  };
 }
 
 export const LocationSchema: React.FC<LocationSchemaProps> = ({
@@ -24,7 +27,7 @@ export const LocationSchema: React.FC<LocationSchemaProps> = ({
   siteUrl = 'https://www.drsayuj.info',
   imageUrl = 'https://www.drsayuj.info/images/dr-sayuj-krishnan-portrait-v2.jpg',
   faq,
-  breadcrumb
+  aggregateRating
 }) => {
 
   // Note: Physician Schema is injected globally by RootLayout via <PhysicianSchema />.
@@ -79,59 +82,18 @@ export const LocationSchema: React.FC<LocationSchemaProps> = ({
         "opens": "10:00",
         "closes": "16:00"
       }
-    ]
+    ],
+    ...(faq ? {} : {}), // just an anchor
+    ...(aggregateRating ? {
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": aggregateRating.ratingValue,
+        "reviewCount": aggregateRating.reviewCount
+      }
+    } : {})
   };
 
-  // 2. BreadcrumbList Schema
-  // Use passed breadcrumb if available, otherwise generate default
-  let itemListElement;
-
-  if (breadcrumb && breadcrumb.length > 0) {
-      // Normalize breadcrumb prop to schema structure if needed
-      itemListElement = [
-        {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": siteUrl
-        },
-        ...breadcrumb.map((b, i) => ({
-            "@type": "ListItem",
-            "position": i + 2,
-            "name": b.name,
-            "item": b.item
-        }))
-      ];
-  } else {
-      itemListElement = [
-        {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": siteUrl
-        },
-        {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Locations",
-            "item": `${siteUrl}/locations`
-        },
-        {
-            "@type": "ListItem",
-            "position": 3,
-            "name": location.areaServedName,
-            "item": `${siteUrl}/${cleanSlug}`
-        }
-      ];
-  }
-
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": itemListElement
-  };
-
-  // 3. FAQPage Schema
+  // 2. FAQPage Schema
   const faqSchema = faq ? {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -156,10 +118,6 @@ export const LocationSchema: React.FC<LocationSchemaProps> = ({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: toJson(clinicSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: toJson(breadcrumbSchema) }}
       />
       {faqSchema && (
         <script

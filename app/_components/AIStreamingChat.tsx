@@ -117,7 +117,7 @@ export default function AIStreamingChat({
     <div className="max-w-4xl mx-auto">
       {/* Emergency Alert */}
       {showEmergencyAlert && (
-        <div className="mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg animate-pulse">
+        <div className="mb-6 p-4 bg-[var(--color-error-light)] border border-[var(--color-error)] text-[var(--color-error-700)] rounded-lg animate-pulse">
           <div className="flex items-center">
             <div className="text-2xl mr-3">🚨</div>
             <div>
@@ -132,16 +132,16 @@ export default function AIStreamingChat({
       )}
 
       {/* Chat Interface */}
-      <div className="bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden">
+      <div className="bg-[var(--color-surface)] rounded-2xl border border-[var(--color-border)] shadow-lg overflow-hidden">
         {/* Chat Header */}
-        <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4">
+        <div className="bg-gradient-to-r from-[var(--color-primary-500)] to-purple-600 text-white p-4">
           <div className="flex items-center">
-            <div className="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-3">
+            <div className="w-10 h-10 bg-[var(--color-surface)] bg-opacity-20 rounded-full flex items-center justify-center mr-3">
               <span className="text-lg">🤖</span>
             </div>
             <div>
               <h3 className="font-semibold">Dr. Sayuj's AI Assistant</h3>
-              <p className="text-blue-100 text-sm">Powered by Vercel AI SDK</p>
+              <p className="text-[var(--color-primary-100)] text-sm">Powered by Vercel AI SDK</p>
             </div>
           </div>
         </div>
@@ -163,8 +163,8 @@ export default function AIStreamingChat({
                 <div
                   className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
                     message.role === 'user'
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-gray-100 text-gray-800'
+                      ? 'bg-[var(--color-primary-500)] text-white'
+                      : 'bg-[var(--color-background)] text-[var(--color-text-primary)]'
                   }`}
                 >
                   <p className="text-sm whitespace-pre-wrap">{textContent}</p>
@@ -175,9 +175,9 @@ export default function AIStreamingChat({
           
           {isLoading && (
             <div className="flex justify-start">
-              <div className="bg-gray-100 text-gray-800 px-4 py-2 rounded-lg">
+              <div className="bg-[var(--color-background)] text-[var(--color-text-primary)] px-4 py-2 rounded-lg">
                 <div className="flex items-center space-x-2">
-                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-[var(--color-primary-500)]"></div>
                   <span className="text-sm">AI is thinking...</span>
                 </div>
               </div>
@@ -186,7 +186,7 @@ export default function AIStreamingChat({
 
           {error && (
             <div className="flex justify-start">
-              <div className="bg-red-100 text-red-800 px-4 py-2 rounded-lg">
+              <div className="bg-[var(--color-error-light)] text-[var(--color-error-800)] px-4 py-2 rounded-lg">
                 <p className="text-sm">
                   {error.message || "I'm having trouble right now. Please call +91-9778280044 for immediate assistance."}
                 </p>
@@ -199,15 +199,15 @@ export default function AIStreamingChat({
 
         {/* Quick Actions - Only show if just initial message */}
         {messages.length <= 1 && (
-          <div className="p-4 border-t border-gray-200">
-            <p className="text-sm text-gray-600 mb-3">Quick actions:</p>
+          <div className="p-4 border-t border-[var(--color-border)]">
+            <p className="text-sm text-[var(--color-text-secondary)] mb-3">Quick actions:</p>
             <div className="flex flex-wrap gap-2">
               {quickActions.map((action, index) => (
                 <button
                   key={index}
                   onClick={() => handleQuickAction(action)}
                   disabled={isLoading}
-                  className="text-xs bg-blue-50 text-blue-700 px-3 py-1 rounded-full hover:bg-blue-100 transition-colors disabled:opacity-50"
+                  className="text-xs bg-[var(--color-primary-50)] text-[var(--color-primary-700)] px-3 py-1 rounded-full hover:bg-[var(--color-primary-100)] transition-colors disabled:opacity-50"
                 >
                   {action}
                 </button>
@@ -217,20 +217,20 @@ export default function AIStreamingChat({
         )}
 
         {/* Input Form */}
-        <form onSubmit={onFormSubmit} className="p-4 border-t border-gray-200">
+        <form onSubmit={onFormSubmit} className="p-4 border-t border-[var(--color-border)]">
           <div className="flex space-x-2">
             <input
               type="text"
               value={input}
               onChange={handleInputChange}
               placeholder="Type your message here..."
-              className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="flex-1 px-3 py-2 border border-[var(--color-border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)] focus:border-transparent"
               disabled={isLoading}
             />
             <button
               type="submit"
               disabled={!input.trim() || isLoading}
-              className="px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="px-4 py-2 bg-gradient-to-r from-[var(--color-primary-500)] to-purple-600 text-white rounded-lg hover:from-[var(--color-primary-700)] hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               {isLoading ? 'Sending...' : 'Send'}
             </button>
@@ -240,15 +240,15 @@ export default function AIStreamingChat({
 
       {/* Features Info */}
       <div className="mt-6 grid md:grid-cols-3 gap-4 text-center">
-        <div className="bg-blue-50 p-4 rounded-lg">
+        <div className="bg-[var(--color-primary-50)] p-4 rounded-lg">
           <div className="text-2xl mb-2">⚡</div>
-          <h4 className="font-semibold text-blue-800">Streaming Responses</h4>
-          <p className="text-sm text-blue-600">Real-time AI responses</p>
+          <h4 className="font-semibold text-[var(--color-primary-800)]">Streaming Responses</h4>
+          <p className="text-sm text-[var(--color-primary-500)]">Real-time AI responses</p>
         </div>
-        <div className="bg-green-50 p-4 rounded-lg">
+        <div className="bg-[var(--color-success-light)] p-4 rounded-lg">
           <div className="text-2xl mb-2">🔒</div>
-          <h4 className="font-semibold text-green-800">Secure & Private</h4>
-          <p className="text-sm text-green-600">HIPAA-compliant handling</p>
+          <h4 className="font-semibold text-[var(--color-success)]">Secure & Private</h4>
+          <p className="text-sm text-[var(--color-success-700)]">HIPAA-compliant handling</p>
         </div>
         <div className="bg-purple-50 p-4 rounded-lg">
           <div className="text-2xl mb-2">🧠</div>
@@ -259,9 +259,9 @@ export default function AIStreamingChat({
 
       {/* Fallback Contact Info */}
       <div className="mt-6 text-center">
-        <p className="text-sm text-gray-600">
+        <p className="text-sm text-[var(--color-text-secondary)]">
           Prefer to speak directly? Call us at{' '}
-          <a href="tel:+919778280044" className="text-blue-600 hover:underline font-medium">
+          <a href="tel:+919778280044" className="text-[var(--color-primary-500)] hover:underline font-medium">
             +91-9778280044
           </a>
         </p>

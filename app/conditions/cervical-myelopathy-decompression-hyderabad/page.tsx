@@ -121,7 +121,7 @@ const schemaData = [
       addressCountry: "IN",
     },
     affiliation: {
-      "@type": "MedicalClinic",
+      "@type": "Hospital",
       name: "Yashoda Hospital Malakpet",
     },
     yearsOfExperience: 15,
@@ -136,22 +136,7 @@ const schemaData = [
       },
     ],
   },
-  {
-    "@context": "https://schema.org",
-    "@type": "MedicalClinic",
-    name: "Dr. Sayuj Krishnan - Brain & Spine Clinic, Yashoda Hospital Malakpet",
-    url: SITE_URL,
-    areaServed: ["Hyderabad", "Telangana", "Jubilee Hills", "Banjara Hills", "Hi-Tech City", "Gachibowli", "Malakpet", "Secunderabad"],
-    telephone: "+91 9778280044",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "Room 317, OPD Block, Yashoda Hospital, Malakpet",
-      addressLocality: "Hyderabad",
-      addressRegion: "Telangana",
-      postalCode: "500036",
-      addressCountry: "IN",
-    },
-  },
+
 ] as const;
 
 const faqItems = [
@@ -571,7 +556,7 @@ export default function CervicalMyelopathyPage() {
 
 
       <div className="mt-12">
-        <LocalPathways mode="condition" />
+        <LocalPathways mode="condition" currentSlug="cervical-myelopathy-decompression-hyderabad" />
       </div>
       <SourceList sources={sources['cervical-myelopathy-decompression-hyderabad'] || []} />
       

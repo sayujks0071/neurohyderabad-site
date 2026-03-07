@@ -76,6 +76,8 @@ describe('AI Sandbox API', () => {
     const mockToDataStreamResponse = vi.fn().mockReturnValue(new Response('stream data'));
     (streamText as any).mockReturnValue({
       toDataStreamResponse: mockToDataStreamResponse,
+      toTextStreamResponse: mockToDataStreamResponse,
+      toUIMessageStreamResponse: mockToDataStreamResponse,
     });
 
     const req = new NextRequest('http://localhost/api/ai/sandbox', {
@@ -109,6 +111,8 @@ describe('AI Sandbox API', () => {
     const mockToDataStreamResponse = vi.fn().mockReturnValue(new Response('stream data'));
     (streamText as any).mockReturnValue({
       toDataStreamResponse: mockToDataStreamResponse,
+      toTextStreamResponse: mockToDataStreamResponse,
+      toUIMessageStreamResponse: mockToDataStreamResponse,
     });
 
     const req = new NextRequest('http://localhost/api/ai/sandbox', {
