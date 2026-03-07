@@ -11,7 +11,7 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   // 🛡️ Sentinel: Add rate limiting to prevent abuse
-  const ip = request.headers.get("x-forwarded-for") ?? "unknown";
+  const ip = request.headers.get("x-forwarded-for")?.split(",")[0].trim() || "127.0.0.1";
   const limit = rateLimit(ip, 10, 60 * 1000); // 10 requests per minute
 
   if (!limit.success) {
