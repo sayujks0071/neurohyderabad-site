@@ -352,6 +352,30 @@ const nextConfig = {
       })
     );
 
+    // ContextReplacementPlugin to ignore the expression dependency warning from almostnode
+    config.plugins.push(
+      new webpack.ContextReplacementPlugin(
+        /almostnode\/dist/,
+        (data) => {
+          delete data.dependencies;
+        }
+      )
+    );
+
+    config.module.rules.push({
+      test: /node_modules\/almostnode\/dist\/index\.mjs$/,
+      parser: {
+        exprContextCritical: false,
+      },
+    });
+
+    config.module.rules.push({
+      test: /node_modules\/just-bash\/dist\/bundle\/browser\.js$/,
+      parser: {
+        topLevelAwait: true,
+      },
+    });
+
     // Add node-loader for .node binary files (almostnode dependency requirement)
     config.module.rules.push({
       test: /\.node$/,
