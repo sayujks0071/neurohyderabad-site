@@ -1,5 +1,11 @@
 'use client';
 
+import { Checkpoint, CheckpointIcon, CheckpointTrigger } from "@/components/ai-elements/checkpoint";
+import { ChainOfThought, ChainOfThoughtHeader, ChainOfThoughtContent, ChainOfThoughtStep } from "@/components/ai-elements/chain-of-thought";
+import { Confirmation, ConfirmationRequest, ConfirmationAccepted, ConfirmationRejected, ConfirmationActions, ConfirmationAction } from "@/components/ai-elements/confirmation";
+import { Attachments, Attachment, AttachmentInfo, AttachmentPreview, AttachmentRemove } from "@/components/ai-elements/attachments";
+import { StethoscopeIcon, SearchIcon, CalendarIcon, CheckIcon, XIcon } from "lucide-react";
+
 import React, { useState, useRef, useEffect, useMemo, Fragment } from 'react';
 import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport, type UIMessage } from 'ai';
