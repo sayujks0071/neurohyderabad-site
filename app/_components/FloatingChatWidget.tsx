@@ -337,7 +337,12 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
           )}
 
           {/* Input Area */}
-          <form onSubmit={onSubmit} className="p-3 border-t border-[var(--color-border)] bg-[var(--color-surface)] shrink-0">
+          <form
+            onSubmit={onSubmit}
+            className="p-3 border-t border-[var(--color-border)] bg-[var(--color-surface)] shrink-0"
+            toolname="askMedicalAssistant"
+            tooldescription="Chat with Dr. Sayuj's AI Assistant to ask medical questions, clinic hours, or book a consultation"
+          >
             <div className="flex items-center gap-2 relative">
               <label htmlFor="chat-input" className="sr-only">Ask a question</label>
               <input

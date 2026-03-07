@@ -43,7 +43,12 @@ export default function AdminLoginPage() {
           </p>
         </div>
 
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+        <form
+          className="mt-8 space-y-6"
+          onSubmit={handleSubmit}
+          toolname="adminLogin"
+          tooldescription="Authenticate as an administrator to access the dashboard"
+        >
           {error && (
             <div className="rounded-md bg-red-50 p-4">
               <p className="text-sm text-red-700">{error}</p>

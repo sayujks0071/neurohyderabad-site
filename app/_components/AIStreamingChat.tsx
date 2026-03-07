@@ -369,7 +369,12 @@ export default function AIStreamingChat({
         )}
 
         {/* Input Form */}
-        <form onSubmit={onFormSubmit} className="p-4 border-t border-[var(--color-border)]">
+        <form
+          onSubmit={onFormSubmit}
+          className="p-4 border-t border-[var(--color-border)]"
+          toolname="aiStreamingChat"
+          tooldescription="Stream responses from the AI medical assistant"
+        >
           {files && files.length > 0 && (
             <div className="mb-2">
               <Attachments variant="inline">

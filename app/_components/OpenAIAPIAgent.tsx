@@ -129,7 +129,12 @@ export default function OpenAIAPIAgent({ pageSlug, service }: OpenAIAPIAgentProp
         </div>
 
         {/* Input Form */}
-        <form onSubmit={onFormSubmit} className="p-4 border-t border-[var(--color-border)]">
+        <form
+          onSubmit={onFormSubmit}
+          className="p-4 border-t border-[var(--color-border)]"
+          toolname="chatWithOpenAI"
+          tooldescription="Interact with the OpenAI-powered medical assistant"
+        >
           <div className="flex space-x-2">
             <input
               type="text"
