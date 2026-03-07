@@ -66,6 +66,10 @@ export default function MedicalWebPageSchema({
       "@type": "Person",
       "name": author,
       "jobTitle": "Neurosurgeon",
+      "sameAs": [
+        "https://www.linkedin.com/in/drsayujkrishnan/",
+        "https://scholar.google.com/citations?user=drsayujkrishnan"
+      ],
       "hasCredential": {
         "@type": "EducationalOccupationalCredential",
         "credentialCategory": "degree",
