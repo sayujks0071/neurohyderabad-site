@@ -5,6 +5,9 @@ import { trackMiddlewareEvent } from '@/src/lib/middleware/rum';
 // Export GA4 measurement ID for GoogleAnalytics component
 export const GA4_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID || 'G-BBTYBBDWMR';
 
+// Google Tag ID (unified tag for Ads, GA4, etc.)
+export const GOOGLE_TAG_ID = process.env.NEXT_PUBLIC_GOOGLE_TAG_ID || 'GT-MJKVR5ZT';
+
 // Event tracking interface
 interface EventProps {
   page_type?: string;
