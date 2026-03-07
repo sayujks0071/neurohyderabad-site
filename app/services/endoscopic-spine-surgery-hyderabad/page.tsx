@@ -92,11 +92,6 @@ const schema = {
     if (item['@type'] === 'MedicalService') {
        return {
          ...item,
-         aggregateRating: {
-           '@type': 'AggregateRating',
-           ratingValue: '4.9',
-           reviewCount: '127', // Based on approximate patient feedback
-         },
        };
     }
     return item;

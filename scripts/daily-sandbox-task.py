@@ -27,7 +27,7 @@ async def main() -> None:
         )
     except Exception as e:
         logger.error(f"❌ Sandbox creation failed: {e}")
-        return
+        raise
 
     async with sandbox:
         logger.info(f"✅ Sandbox created (ID: {sandbox.id})")
