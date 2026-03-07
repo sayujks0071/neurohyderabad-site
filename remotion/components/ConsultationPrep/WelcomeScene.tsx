@@ -86,9 +86,8 @@ const FloatingParticles: React.FC<{ reducedMotion: boolean }> = ({ reducedMotion
               width: p.size,
               height: p.size,
               borderRadius: '50%',
-              backgroundColor: p.color,
+              background: `radial-gradient(circle, ${p.color} 0%, transparent 70%)`,
               transform: `translate(-50%, -50%) translate(${xOffset}px, ${yOffset}px)`,
-              filter: 'blur(40px)',
             }}
           />
         );
