@@ -4,29 +4,7 @@ import React, { useState, useRef, useEffect, useMemo, Fragment } from 'react';
 import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport, type UIMessage } from 'ai';
 import { analytics } from "@/src/lib/analytics";
-import { CheckIcon, XIcon, SearchIcon, CalendarIcon, StethoscopeIcon } from "lucide-react";
-import { Checkpoint, CheckpointIcon, CheckpointTrigger } from "@/components/ai-elements/checkpoint";
-import {
-  ChainOfThought,
-  ChainOfThoughtHeader,
-  ChainOfThoughtContent,
-  ChainOfThoughtStep,
-} from "@/components/ai-elements/chain-of-thought";
-import {
-  Confirmation,
-  ConfirmationRequest,
-  ConfirmationAccepted,
-  ConfirmationRejected,
-  ConfirmationActions,
-  ConfirmationAction,
-} from "@/components/ai-elements/confirmation";
-import {
-  Attachments,
-  Attachment,
-  AttachmentPreview,
-  AttachmentInfo,
-  AttachmentRemove,
-} from "@/components/ai-elements/attachments";
+import { Suggestion, Suggestions } from "@/src/components/ai-elements/suggestion";
 
 interface AIStreamingChatProps {
   pageSlug: string;
@@ -376,18 +354,17 @@ export default function AIStreamingChat({
         {messages.length <= 1 && (
           <div className="p-4 border-t border-[var(--color-border)]">
             <p className="text-sm text-[var(--color-text-secondary)] mb-3">Quick actions:</p>
-            <div className="flex flex-wrap gap-2">
+            <Suggestions>
               {quickActions.map((action, index) => (
-                <button
+                <Suggestion
                   key={index}
                   onClick={() => handleQuickAction(action)}
                   disabled={isLoading}
-                  className="text-xs bg-[var(--color-primary-50)] text-[var(--color-primary-700)] px-3 py-1 rounded-full hover:bg-[var(--color-primary-100)] transition-colors disabled:opacity-50"
-                >
-                  {action}
-                </button>
+                  suggestion={action}
+                  className="text-xs bg-[var(--color-primary-50)] text-[var(--color-primary-700)] hover:bg-[var(--color-primary-100)] transition-colors disabled:opacity-50 whitespace-nowrap"
+                />
               ))}
-            </div>
+            </Suggestions>
           </div>
         )}
 
