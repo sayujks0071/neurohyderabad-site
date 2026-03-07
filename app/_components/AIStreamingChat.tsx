@@ -5,6 +5,11 @@ import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport, type UIMessage } from 'ai';
 import { analytics } from "@/src/lib/analytics";
 import { Suggestion, Suggestions } from "@/src/components/ai-elements/suggestion";
+import { Attachments, Attachment, AttachmentInfo, AttachmentPreview, AttachmentRemove } from "@/components/ai-elements/attachments";
+import { Confirmation, ConfirmationRequest, ConfirmationAccepted, ConfirmationRejected, ConfirmationActions, ConfirmationAction } from "@/components/ai-elements/confirmation";
+import { ChainOfThought, ChainOfThoughtHeader, ChainOfThoughtContent, ChainOfThoughtStep } from "@/components/ai-elements/chain-of-thought";
+import { Checkpoint, CheckpointIcon, CheckpointTrigger } from "@/components/ai-elements/checkpoint";
+import { CheckIcon, XIcon, StethoscopeIcon, SearchIcon, CalendarIcon } from "lucide-react";
 
 interface AIStreamingChatProps {
   pageSlug: string;
