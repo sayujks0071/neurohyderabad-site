@@ -37,12 +37,14 @@ export async function createSandbox(options: CreateSandboxOptions = {}) {
 export async function destroySandbox(sandbox: Sandbox) {
   try {
     const s = sandbox as any;
-    if (typeof s.destroy === 'function') {
+    if (typeof s.stop === 'function') {
+      await s.stop();
+    } else if (typeof s.destroy === 'function') {
       await s.destroy();
     } else if (typeof s.close === 'function') {
       await s.close();
     } else {
-      console.warn('Sandbox instance does not have a destroy/close method');
+      console.warn('Sandbox instance does not have a stop/destroy/close method');
     }
   } catch (err: any) {
     console.warn('Failed to destroy sandbox:', err.message);
