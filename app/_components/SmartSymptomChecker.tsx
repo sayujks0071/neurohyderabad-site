@@ -85,7 +85,12 @@ export default function SmartSymptomChecker() {
           Describe your symptoms and get preliminary guidance. This is not a diagnosis - always consult with Dr. Sayuj for proper evaluation.
         </p>
 
-        <form onSubmit={handleAnalyze} className="space-y-4">
+        <form
+          onSubmit={handleAnalyze}
+          className="space-y-4"
+          toolname="analyzeSymptoms"
+          tooldescription="Analyze medical symptoms to get preliminary guidance and potential causes."
+        >
           <div>
             <label htmlFor="symptoms" className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">
               Describe your symptoms *
