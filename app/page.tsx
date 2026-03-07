@@ -37,7 +37,7 @@ const HOME_CANONICAL = SITE_URL.endsWith("/") ? SITE_URL : `${SITE_URL}/`;
 
 const baseMetadata = makeMetadata({
   title: "Best Neurosurgeon & Spine Specialist Hyderabad | Dr. Sayuj",
-  description: "German-Trained neurosurgeon in Hyderabad (Yashoda Hospital). Expert in full endoscopic spine surgery, minimally invasive brain surgery, and awake craniotomy.",
+  description: "German-trained neurosurgeon in Hyderabad (Yashoda Hospital). Expert in minimally invasive spine & brain surgery, sciatica, and awake craniotomy. Book now.",
   canonicalPath: "/",
   ogImage: "https://www.drsayuj.info/images/og-default.jpg",
   ogImageAlt: "Dr. Sayuj Krishnan - Premier Neurosurgeon in Hyderabad | Full Endoscopic Spine Surgery & Brain Tumor Surgery"
@@ -46,7 +46,7 @@ const baseMetadata = makeMetadata({
 export const metadata: Metadata = {
   ...baseMetadata,
   title: {
-    absolute: "Top Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan",
+    absolute: "Dr. Sayuj Krishnan | Best Neurosurgeon in Hyderabad | Brain & Spine",
   },
   keywords: [
     'dr sayuj krishnan',
@@ -191,8 +191,8 @@ export default function Home() {
       <MedicalWebPageSchema
         pageType="service"
         pageSlug="/"
-        title="Best Neurosurgeon in Hyderabad | Spine & Brain Specialist"
-        description="Top-rated neurosurgeon in Hyderabad (Yashoda Hospital). Expert in endoscopic spine surgery, brain tumors & sciatica. Book appointment now."
+        title="Dr. Sayuj Krishnan | Best Neurosurgeon in Hyderabad"
+        description="Top-rated, German-trained neurosurgeon in Hyderabad (Yashoda Hospital). Expert in minimally invasive spine & brain surgery, sciatica, and awake craniotomy."
         serviceOrCondition="Neurosurgery Services"
         breadcrumbs={[{ name: "Home", path: "/" }]}
         medicalSpecialty={["Neurosurgery", "Spine Surgery", "Endoscopic Surgery"]}

@@ -180,7 +180,7 @@ const nextConfig = {
       // Location typo redirects (hitec vs hitech)
       {
         source: '/locations/brain-spine-surgeon-hitech-city',
-        destination: '/locations/brain-spine-surgeon-hitec-city',
+        destination: '/neurosurgeon-hitech-city',
         permanent: true,
       },
       {
