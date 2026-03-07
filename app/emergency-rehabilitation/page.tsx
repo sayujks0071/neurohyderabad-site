@@ -10,8 +10,8 @@ import { CLINIC_INFO, getMedicalClinicSchema } from '../../src/lib/clinic';
 const clinicSchema = getMedicalClinicSchema();
 
 export const metadata: Metadata = {
-  title: 'Emergency Neurosurgery & Rehabilitation Services | Dr. Sayuj Krishnan | 24/7 Care',
-  description: '24/7 emergency neurosurgical consultation, hotline support, and comprehensive rehabilitation partnerships in Hyderabad. Immediate care for brain and spine emergencies.',
+  title: 'Emergency Neurosurgery Hyderabad | 24/7 Care | Dr. Sayuj Krishnan',
+  description: '24/7 emergency neurosurgery in Hyderabad. Hotline, teleconsultation, and rehabilitation partnerships. Immediate care for brain and spine emergencies.',
   keywords: 'emergency neurosurgery, 24/7 neurosurgeon, brain emergency, spine emergency, rehabilitation services, physiotherapy, post-surgical care, Hyderabad',
   alternates: {
     canonical: `${SITE_URL}/emergency-rehabilitation/`,

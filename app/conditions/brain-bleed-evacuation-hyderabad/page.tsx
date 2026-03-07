@@ -184,9 +184,9 @@ const references = [
 ] as const;
 
 export const metadata: Metadata = {
-  title: "Emergency Brain Bleed Evacuation Hyderabad | Intracerebral Hemorrhage Surgery | Dr. Sayuj Krishnan",
+  title: "Brain Bleed Surgery Hyderabad | Intracerebral Hemorrhage Care",
   description:
-    "24/7 emergency endoscopic and microsurgical brain bleed evacuation in Hyderabad. Expert treatment for intracerebral hemorrhage, subdural hematoma, and epidural hematoma by Dr. Sayuj Krishnan at Yashoda Hospital.",
+    "Expert brain bleed evacuation in Hyderabad. Treatment for intracerebral hemorrhage, subdural & epidural hematoma. Dr. Sayuj Krishnan at Yashoda Hospital.",
   alternates: {
     canonical: CANONICAL,
     languages: {

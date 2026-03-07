@@ -4,7 +4,7 @@ import { SITE_URL } from '../../../src/lib/seo';
 import MedicalReviewNotice from '../../../src/components/MedicalReviewNotice';
 
 export const metadata: Metadata = {
-  title: 'Degenerative Disc Disease: Symptoms, Causes & Treatment | Dr. Sayuj Krishnan',
+  title: 'Degenerative Disc Disease Symptoms & Treatment | Dr. Sayuj',
   description: 'Comprehensive guide to degenerative disc disease: symptoms, causes, diagnosis, and treatment options including endoscopic discectomy in Hyderabad.',
   keywords: 'degenerative disc disease, DDD, spinal disc degeneration, back pain, endoscopic discectomy, spine surgery, Hyderabad',
   alternates: {

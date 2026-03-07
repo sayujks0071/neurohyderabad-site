@@ -1,15 +1,10 @@
 {
-  "timestamp": "2025-03-05T00:00:00Z",
-  "commit_hash": "HEAD",
-  "pages": {
-    "home": {
-      "url": "/",
-      "type": "home",
-      "suspected_issue": "Heavy client-side Hero component. Loads 32 images before unblocking the UI.",
-      "proposed_fix": "Changed batchSize from 32 to 4 in app/components/scrollytelling/Hero.tsx.",
-      "implemented_fix": "Changed batchSize from 32 to 4 in app/components/scrollytelling/Hero.tsx.",
-      "expected_impact": "Significantly improves LCP (Largest Contentful Paint) and INP (Interaction to Next Paint) by unblocking the main thread and making the hero text visible much earlier. The loading screen disappears faster because only 4 frames are awaited initially instead of 32.",
-      "verification_steps": "Run the site locally (npm run dev) and load the homepage. Observe that the loading overlay disappears much faster than before, revealing the hero content sooner. The scrub scroll will still work as remaining images load in the background."
-    }
-  }
+  "timestamp": "2024-03-07T05:27:00Z",
+  "commit_hash": "latest",
+  "page_type": "Home",
+  "suspected_lcp_element": "Hero image (dr-sayuj-krishnan-portrait-sm.jpg)",
+  "bottleneck_identified": "The hero image uses next/image with 'fill' and 'priority' but lacks 'sizes'. Without 'sizes', Next.js defaults to generating srcsets assuming a 100vw image width, which may load a sub-optimally sized version initially.",
+  "fix_applied": "Added 'sizes=\"100vw\"' to the hero image in app/components/scrollytelling/Hero.tsx to ensure optimal responsive image generation.",
+  "expected_improvement": "A better sized initial image might be selected, improving the time it takes to display the image fully, thereby marginally improving the LCP proxy.",
+  "how_to_verify": "1. Run `pnpm dev`. 2. Open `http://localhost:3000`. 3. Inspect the hero image element and verify it has `sizes=\"100vw\"`. 4. Observe the Network tab to see if a more appropriately sized image is downloaded initially."
 }

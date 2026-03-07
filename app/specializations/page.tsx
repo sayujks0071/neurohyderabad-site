@@ -5,9 +5,9 @@ import { SITE_URL } from "../../src/lib/seo";
 
 export const metadata: Metadata = {
   title:
-    "Neurosurgical Specializations | Brain, Spine, and Pediatric Programs | Dr. Sayuj Krishnan",
+    "Neurosurgical Specializations Hyderabad | Dr. Sayuj Krishnan",
   description:
-    "Explore Dr. Sayuj Krishnan's brain, spine, pediatric, and peripheral nerve specializations. Discover minimally invasive programs, technology, and recovery protocols.",
+    "Brain, spine, pediatric, and peripheral nerve neurosurgery by Dr. Sayuj Krishnan. Minimally invasive programs and advanced recovery protocols in Hyderabad.",
   alternates: {
     canonical: `${SITE_URL}/specializations`,
     languages: {
