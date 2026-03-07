@@ -46,44 +46,6 @@ export const metadata: Metadata = {
 const ARTICLE_SOURCES = getServiceSources('spine-surgery-cost-hyderabad') || [];
 
 // FAQ Schema
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "How much does endoscopic spine surgery cost in Hyderabad?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "The cost of endoscopic spine surgery in Hyderabad typically ranges from ₹2,50,000 to ₹4,00,000 depending on the technique (TESS vs Interlaminar) and hospital category. This includes surgeon fees, theatre charges, and a 1-night hospital stay."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What is the cost of titanium spine implants?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Spine implants (screws and rods) are charged separately. High-grade Indian titanium implants cost approx. ₹35,000–₹50,000 per level, while imported (US/German) FDA-approved implants range from ₹60,000–₹1,00,000 per level."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is spine surgery covered by insurance in Hyderabad?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, nearly all comprehensive health insurance policies cover spine surgery (discectomy, fusion, laminectomy). We accept cashless claims from major providers like Star Health, HDFC Ergo, Niva Bupa, SBI General, and ICICI Lombard at Yashoda Hospital."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Why is endoscopic surgery cost higher than open surgery?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Endoscopic surgery requires specialized disposable kits, high-definition cameras, and advanced burrs, which increases the consumable cost. However, the total cost often balances out due to shorter hospital stays (1 day vs 3-4 days) and faster return to work."
-      }
-    }
-  ]
-};
 
 export default function SpineSurgeryCostPage() {
   const pageUrl = `${SITE_URL}/services/spine-surgery-cost-hyderabad`;
