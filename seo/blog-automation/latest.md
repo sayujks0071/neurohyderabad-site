@@ -1,6 +1,6 @@
 # Latest Blog Automation Run
 
-- **Date:** 2026-03-07
-- **Topic:** Herniated Disc vs. Bulging Disc: What's the Difference and Do You Need Surgery?
+- **Date:** 2026-03-08
+- **Topic:** Neck Pain or Shoulder Problem? Cervical Radiculopathy vs. Rotator Cuff Tear
 - **Status:** Success
-- **Traceability File:** [Run Details](./2026-03-07/run.md)
+- **Traceability File:** [Run Details](./2026-03-08/run.md)
