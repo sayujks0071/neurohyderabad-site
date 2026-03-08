@@ -332,8 +332,102 @@ export default function BestNeurosurgeonPage() {
           </div>
         </section>
 
+        {/* Comprehensive Neurosurgical Treatments */}
+        <section className="py-16 bg-white border-b border-gray-200">
+          <div className="container mx-auto px-4 max-w-4xl">
+            {/* SEO Hypothesis: Adding a structured hub-and-spoke internal linking section to the 'best neurosurgeon' pillar page will pass topical authority to specific condition/service spoke pages and improve overall rankings for Hyderabad neurosurgery queries. */}
+            <h2 className="text-3xl font-bold text-center text-blue-800 mb-10">
+              Comprehensive Neurosurgical Treatments
+            </h2>
+            <div className="grid md:grid-cols-2 gap-8">
+              <div>
+                <h3 className="text-xl font-semibold mb-4 text-blue-700 border-b pb-2 border-blue-100">Spine Services & Conditions</h3>
+                <ul className="space-y-3">
+                  <li>
+                    <Link href="/services/minimally-invasive-spine-surgery/" className="text-gray-700 hover:text-blue-600 hover:underline flex items-center group">
+                      <span className="text-blue-600 mr-2 group-hover:translate-x-1 transition-transform">→</span>
+                      Minimally Invasive Spine Surgery
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/services/endoscopic-spine-surgery-hyderabad/" className="text-gray-700 hover:text-blue-600 hover:underline flex items-center group">
+                      <span className="text-blue-600 mr-2 group-hover:translate-x-1 transition-transform">→</span>
+                      Endoscopic Spine Surgery
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/services/cervical-disc-replacement-hyderabad/" className="text-gray-700 hover:text-blue-600 hover:underline flex items-center group">
+                      <span className="text-blue-600 mr-2 group-hover:translate-x-1 transition-transform">→</span>
+                      Cervical Disc Replacement
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/conditions/sciatica-pain-treatment-hyderabad/" className="text-gray-700 hover:text-blue-600 hover:underline flex items-center group">
+                      <span className="text-blue-600 mr-2 group-hover:translate-x-1 transition-transform">→</span>
+                      Sciatica Pain Treatment
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/conditions/slip-disc-treatment-hyderabad/" className="text-gray-700 hover:text-blue-600 hover:underline flex items-center group">
+                      <span className="text-blue-600 mr-2 group-hover:translate-x-1 transition-transform">→</span>
+                      Slip Disc (Herniated Disc) Treatment
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/conditions/spinal-stenosis-treatment-hyderabad/" className="text-gray-700 hover:text-blue-600 hover:underline flex items-center group">
+                      <span className="text-blue-600 mr-2 group-hover:translate-x-1 transition-transform">→</span>
+                      Spinal Stenosis Treatment
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold mb-4 text-blue-700 border-b pb-2 border-blue-100">Brain & Nerve Services</h3>
+                <ul className="space-y-3">
+                  <li>
+                    <Link href="/services/brain-tumor-surgery-hyderabad/" className="text-gray-700 hover:text-blue-600 hover:underline flex items-center group">
+                      <span className="text-blue-600 mr-2 group-hover:translate-x-1 transition-transform">→</span>
+                      Brain Tumor Surgery
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/services/epilepsy-surgery-hyderabad/" className="text-gray-700 hover:text-blue-600 hover:underline flex items-center group">
+                      <span className="text-blue-600 mr-2 group-hover:translate-x-1 transition-transform">→</span>
+                      Epilepsy Surgery
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/conditions/trigeminal-neuralgia-treatment-hyderabad/" className="text-gray-700 hover:text-blue-600 hover:underline flex items-center group">
+                      <span className="text-blue-600 mr-2 group-hover:translate-x-1 transition-transform">→</span>
+                      Trigeminal Neuralgia Treatment
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/services/awake-spine-surgery-hyderabad/" className="text-gray-700 hover:text-blue-600 hover:underline flex items-center group">
+                      <span className="text-blue-600 mr-2 group-hover:translate-x-1 transition-transform">→</span>
+                      Awake Spine Surgery
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/services/peripheral-nerve-surgery-hyderabad/" className="text-gray-700 hover:text-blue-600 hover:underline flex items-center group">
+                      <span className="text-blue-600 mr-2 group-hover:translate-x-1 transition-transform">→</span>
+                      Peripheral Nerve Surgery
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/conditions/brain-bleed-evacuation-hyderabad/" className="text-gray-700 hover:text-blue-600 hover:underline flex items-center group">
+                      <span className="text-blue-600 mr-2 group-hover:translate-x-1 transition-transform">→</span>
+                      Brain Bleed Evacuation
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Costs and Insurance */}
-        <section className="py-16 bg-white">
+        <section className="py-16 bg-gray-50">
           <div className="container mx-auto px-4 max-w-4xl">
             <h2 className="text-3xl font-bold text-center text-blue-800 mb-10">
               Costs and Insurance
