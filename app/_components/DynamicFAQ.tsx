@@ -106,24 +106,24 @@ export default function DynamicFAQ({
         {faqs.map((faq) => (
           <div
             key={faq.id}
-            className="border border-[var(--color-border)] rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+            className="relative bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-2 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
           >
             <button
               onClick={() => setOpenId(openId === faq.id ? null : faq.id)}
-              className="w-full text-left p-4 font-semibold flex justify-between items-center hover:bg-[var(--color-background)] transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-inset"
+              className="w-full text-left p-4 font-semibold text-[var(--color-primary-900)] flex justify-between items-center rounded-xl hover:bg-white/50 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-inset"
               aria-expanded={openId === faq.id}
               aria-controls={`faq-content-${componentId}-${faq.id}`}
               id={`faq-trigger-${componentId}-${faq.id}`}
             >
-              <span className="pr-4">{faq.question}</span>
-              <span className="text-primary-600 text-xl flex-shrink-0">
+              <span className="pr-4 text-lg">{faq.question}</span>
+              <span className="text-primary-600 text-xl flex-shrink-0 inline-flex h-8 w-8 items-center justify-center rounded-full bg-[var(--color-primary-100)]/50 text-[var(--color-primary-500)] transition-transform duration-300">
                 {openId === faq.id ? '−' : '+'}
               </span>
             </button>
             
             {openId === faq.id && (
               <div
-                className="px-4 pb-4 pt-2 border-t border-[var(--color-border)]"
+                className="px-4 pb-4 pt-2 mt-2 border-t border-white/20"
                 id={`faq-content-${componentId}-${faq.id}`}
                 role="region"
                 aria-labelledby={`faq-trigger-${componentId}-${faq.id}`}
