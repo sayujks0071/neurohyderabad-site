@@ -63,7 +63,7 @@
   },
   "dependencies": {
     "@ai-sdk/openai": "3.0.18",
-    "@ai-sdk/react": "3.0.51",
+    "@ai-sdk/react": "3.0.118",
     "@calcom/embed-react": "^1.5.3",
     "@flags-sdk/hypertune": "^0.3.2",
     "@google-cloud/bigquery": "^8.1.1",
@@ -93,7 +93,7 @@
     "@vercel/oidc": "^3.1.0",
     "@vercel/sandbox": "1.7.1",
     "@vitejs/plugin-react": "^5.1.2",
-    "ai": "6.0.49",
+    "ai": "6.0.116",
     "almostnode": "^0.2.14",
     "botid": "^1.5.10",
     "class-variance-authority": "^0.7.1",
@@ -133,6 +133,7 @@
   "devDependencies": {
     "@lhci/cli": "^0.15.1",
     "@next/bundle-analyzer": "^16.1.6",
+    "@playwright/test": "^1.58.2",
     "@remotion/cli": "^4.0.286",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20.19.17",
