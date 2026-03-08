@@ -5,6 +5,7 @@ import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport, type UIMessage } from 'ai';
 import { analytics } from "@/src/lib/analytics";
 import { Suggestion, Suggestions } from "@/src/components/ai-elements/suggestion";
+import { Shimmer } from "@/src/components/ai-elements/shimmer";
 
 interface AIStreamingChatProps {
   pageSlug: string;
@@ -331,7 +332,7 @@ export default function AIStreamingChat({
               <div className="bg-[var(--color-background)] text-[var(--color-text-primary)] px-4 py-2 rounded-lg">
                 <div className="flex items-center space-x-2">
                   <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-[var(--color-primary-500)]"></div>
-                  <span className="text-sm">AI is thinking...</span>
+                  <Shimmer as="span" className="text-sm">AI is thinking...</Shimmer>
                 </div>
               </div>
             </div>
