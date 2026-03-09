@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 };
 
 // Ensure page is statically generated
-export const revalidate = 3600; // Revalidate every hour
+export const revalidate = 86400; // Revalidate every 24 hours
 
 export default function PatientStoriesPage() {
   // Safety check - ensure patientStories exists
