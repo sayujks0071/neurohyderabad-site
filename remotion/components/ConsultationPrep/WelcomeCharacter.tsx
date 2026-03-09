@@ -65,7 +65,7 @@ export const WelcomeCharacter: React.FC<WelcomeCharacterProps> = ({ char, delay,
       style={{
         display: 'inline-block',
         opacity,
-        transform: `translateY(${yOffset + waveY}px) scale(${scale})`,
+        transform: `translateY(${yOffset}px) scale(${scale})`,
         color: color,
         whiteSpace: 'pre',
       }}
