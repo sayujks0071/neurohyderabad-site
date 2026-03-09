@@ -46,20 +46,43 @@ export default function ExitIntentHandler({
           // Create a simple modal (you can enhance this with a proper modal component)
           const modal = document.createElement('div');
           modal.className = 'fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center';
-          modal.innerHTML = `
-            <div class="bg-white rounded-lg p-6 max-w-md mx-4">
-              <h3 class="text-xl font-bold mb-4">Before you go...</h3>
-              <p class="text-[var(--color-text-secondary)] mb-6">${offerMessage}</p>
-              <div class="flex gap-3">
-                <a href="/appointments" class="flex-1 bg-[var(--color-primary-500)] text-white px-4 py-2 rounded-lg text-center hover:bg-[var(--color-primary-700)]">
-                  Schedule Consultation
-                </a>
-                <button onclick="this.closest('.fixed').remove()" class="px-4 py-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]">
-                  Not Now
-                </button>
-              </div>
-            </div>
-          `;
+
+          // Create elements safely instead of using innerHTML
+          const container = document.createElement('div');
+          container.className = 'bg-white rounded-lg p-6 max-w-md mx-4';
+
+          const title = document.createElement('h3');
+          title.className = 'text-xl font-bold mb-4';
+          title.textContent = 'Before you go...';
+
+          const message = document.createElement('p');
+          message.className = 'text-[var(--color-text-secondary)] mb-6';
+          message.textContent = offerMessage; // Safe assignment, prevents XSS
+
+          const buttonContainer = document.createElement('div');
+          buttonContainer.className = 'flex gap-3';
+
+          const scheduleLink = document.createElement('a');
+          scheduleLink.href = '/appointments';
+          scheduleLink.className = 'flex-1 bg-[var(--color-primary-500)] text-white px-4 py-2 rounded-lg text-center hover:bg-[var(--color-primary-700)]';
+          scheduleLink.textContent = 'Schedule Consultation';
+
+          const dismissButton = document.createElement('button');
+          dismissButton.className = 'px-4 py-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]';
+          dismissButton.textContent = 'Not Now';
+          dismissButton.onclick = function() {
+            modal.remove();
+          };
+
+          buttonContainer.appendChild(scheduleLink);
+          buttonContainer.appendChild(dismissButton);
+
+          container.appendChild(title);
+          container.appendChild(message);
+          container.appendChild(buttonContainer);
+
+          modal.appendChild(container);
+
           document.body.appendChild(modal);
           
           // Track modal shown
