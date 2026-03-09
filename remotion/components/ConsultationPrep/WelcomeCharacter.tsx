@@ -50,16 +50,6 @@ export const WelcomeCharacter: React.FC<WelcomeCharacterProps> = ({ char, delay,
     [frame, fps, delay, prefersReducedMotion]
   );
 
-  const blur = useMemo(() =>
-    prefersReducedMotion ? 0 : interpolate(
-      frame - delay,
-      [0, 20],
-      [10, 0],
-      { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }
-    ),
-    [frame, delay, prefersReducedMotion]
-  );
-
   // Color interpolation: Start with accent color and fade to white
   const color = useMemo(() =>
     prefersReducedMotion ? COLORS.surface : interpolateColors(

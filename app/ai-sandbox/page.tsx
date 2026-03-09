@@ -9,7 +9,7 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 
 export default function AISandboxPage() {
-    const { messages, input = '', handleInputChange, handleSubmit, isLoading, error } = useChat({
+    const { messages, input = '', handleInputChange, handleSubmit, isLoading, error, addToolResult } = useChat({
         api: '/api/ai/sandbox',
         body: {
             requestedModel: 'openai/gpt-5.2' // Requested snippet
@@ -87,7 +87,7 @@ export default function AISandboxPage() {
 
                                         {/* Message Content */}
                                         <div className={`prose prose-sm max-w-none prose-p:leading-relaxed prose-pre:bg-slate-800 prose-pre:text-slate-100 ${m.role === 'user' ? 'prose-invert' : ''}`}>
-                                            {m.role !== 'user' && m.content === '' && isLoading ? (
+                                            {m.role !== 'user' && m.content === '' && (!m.toolInvocations || m.toolInvocations.length === 0) && isLoading ? (
                                                 <div className="flex items-center gap-1.5 h-6">
                                                     <div className="w-1.5 h-1.5 bg-slate-300 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
                                                     <div className="w-1.5 h-1.5 bg-slate-300 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
@@ -98,6 +98,70 @@ export default function AISandboxPage() {
                                                     {m.content}
                                                 </ReactMarkdown>
                                             )}
+
+                                            {m.toolInvocations?.map((toolInvocation, index) => {
+                                                const toolCallId = toolInvocation.toolCallId;
+
+                                                return (
+                                                    <div key={toolCallId} className="mt-4 first:mt-2">
+                                                        {toolInvocation.state === 'call' ? (
+                                                            <div className="flex flex-col gap-3">
+                                                              <div className="flex items-center gap-2 text-sm text-blue-600 bg-blue-50 px-3 py-2 rounded-lg border border-blue-100 w-fit">
+                                                                  <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                                                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                                                  </svg>
+                                                                  <span className="font-medium">Using {toolInvocation.toolName}...</span>
+                                                              </div>
+
+                                                              {toolInvocation.toolName === 'bookAppointment' && (
+                                                                  <div className="mt-2 bg-white border border-slate-200 rounded-xl p-4 shadow-sm w-full max-w-sm">
+                                                                      <h4 className="font-semibold text-slate-800 mb-1 flex items-center gap-2">
+                                                                          <svg className="w-4 h-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                                                                          Confirm Appointment
+                                                                      </h4>
+                                                                      <div className="text-xs text-slate-500 mb-3 space-y-1 bg-slate-50 p-2 rounded border border-slate-100">
+                                                                          <div><strong>Patient:</strong> {toolInvocation.args.patientName}</div>
+                                                                          <div><strong>Date:</strong> {toolInvocation.args.appointmentDate} at {toolInvocation.args.appointmentTime}</div>
+                                                                          <div><strong>Reason:</strong> {toolInvocation.args.reason}</div>
+                                                                      </div>
+                                                                      <div className="flex gap-2">
+                                                                          <button
+                                                                              onClick={() => addToolResult({ toolCallId, result: 'Approved by user.' })}
+                                                                              className="flex-1 bg-green-600 hover:bg-green-700 text-white text-sm font-medium py-2 rounded-lg transition-colors focus:ring-2 focus:ring-green-500 focus:ring-offset-1"
+                                                                          >
+                                                                              Approve
+                                                                          </button>
+                                                                          <button
+                                                                              onClick={() => addToolResult({ toolCallId, result: 'Denied by user.' })}
+                                                                              className="flex-1 bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 text-sm font-medium py-2 rounded-lg transition-colors focus:ring-2 focus:ring-slate-200 focus:ring-offset-1"
+                                                                          >
+                                                                              Cancel
+                                                                          </button>
+                                                                      </div>
+                                                                  </div>
+                                                              )}
+                                                            </div>
+                                                        ) : (
+                                                            <div className="flex flex-col gap-2">
+                                                                <div className="flex items-center gap-2 text-sm text-green-700 bg-green-50 px-3 py-1.5 rounded-lg border border-green-100 w-fit">
+                                                                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                                                    </svg>
+                                                                    <span className="font-medium">Completed {toolInvocation.toolName}</span>
+                                                                </div>
+
+                                                                {/* Only show result details for certain tools nicely, or leave it to the AI to summarize */}
+                                                                {toolInvocation.toolName === 'bookAppointment' && toolInvocation.result?.status === 'success' && (
+                                                                     <div className="bg-emerald-50 border border-emerald-100 text-emerald-800 text-sm rounded-lg p-3">
+                                                                         Appointment successfully booked! A confirmation email has been sent.
+                                                                     </div>
+                                                                )}
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                );
+                                            })}
                                         </div>
                                     </div>
                                 </div>
