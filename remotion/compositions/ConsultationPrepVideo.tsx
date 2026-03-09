@@ -7,6 +7,9 @@ import { PrepStepsScene } from '../components/ConsultationPrep/PrepStepsScene';
 import { TransitionFlash } from '../components/shared/TransitionFlash';
 import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion';
 
+// Transition Easing
+const smoothEase = Easing.inOut(Easing.ease);
+
 /**
  * Personalized Consultation Prep Video (30 seconds @ 30fps = 900 frames)
  *
@@ -25,9 +28,6 @@ export const ConsultationPrepVideo: React.FC<ConsultationPrepProps> = ({
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const prefersReducedMotion = usePrefersReducedMotion();
-
-  // Transition Easing
-  const smoothEase = Easing.inOut(Easing.ease);
 
   // Scene 1 Exit: Fade out, scale down slightly
   const scene1ExitOpacity = useMemo(() => interpolate(frame, [160, 180], [1, 0], {
