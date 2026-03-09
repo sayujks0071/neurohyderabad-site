@@ -29,7 +29,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function Textare
         className="block text-sm font-medium text-slate-700 mb-1"
       >
         {label}
-        {required && <span className="text-red-500 font-extrabold pl-1">*</span>}
+        {required && <span className="text-red-500 font-extrabold pl-1" aria-hidden="true">*</span>}
       </label>
       <textarea
         id={id}
