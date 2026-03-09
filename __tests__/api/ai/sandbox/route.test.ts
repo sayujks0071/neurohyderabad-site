@@ -12,9 +12,13 @@ vi.mock('@/src/lib/ai/gateway', () => ({
   getTextModel: vi.fn(),
 }));
 
-vi.mock('ai', () => ({
-  streamText: vi.fn(),
-}));
+vi.mock('ai', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('ai')>();
+  return {
+    ...actual,
+    streamText: vi.fn(),
+  };
+});
 
 import { rateLimit } from '@/src/lib/rate-limit';
 import { hasAIConfig, getTextModel } from '@/src/lib/ai/gateway';

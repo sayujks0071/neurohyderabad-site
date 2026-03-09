@@ -154,6 +154,7 @@ export default function LeadForm() {
         className="space-y-4"
         toolname="contactClinic"
         tooldescription="Contact the clinic for general inquiries or lead generation"
+        toolautosubmit="false"
       >
         <Input
           label="Full Name"

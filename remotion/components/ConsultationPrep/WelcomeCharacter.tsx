@@ -60,15 +60,6 @@ export const WelcomeCharacter: React.FC<WelcomeCharacterProps> = ({ char, delay,
     [frame, delay, prefersReducedMotion]
   );
 
-  // Micro-animation: subtle wave after entrance
-  // Only start after entrance is done (approx delay + 25 frames)
-  const waveStartFrame = delay + 25;
-  const waveY = useMemo(() => {
-    if (prefersReducedMotion || frame < waveStartFrame) return 0;
-    // Continuous sine wave
-    return Math.sin((frame - waveStartFrame) / 15 + index * 0.5) * 3;
-  }, [frame, waveStartFrame, index, prefersReducedMotion]);
-
   return (
     <span
       style={{

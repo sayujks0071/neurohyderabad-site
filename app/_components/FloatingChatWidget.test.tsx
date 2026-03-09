@@ -27,11 +27,11 @@ vi.mock('@/src/lib/middleware/rum', () => ({
 
 // Mock useChat
 const mockAppend = vi.fn();
-let mockMessages = [];
+let mockMessages: any[] = [];
 let mockSetMessages;
 
 vi.mock('@ai-sdk/react', () => ({
-  useChat: ({ onFinish }) => {
+  useChat: ({ onFinish }: { onFinish?: (msg: any) => void }) => {
     // We can simulate onFinish being called to test the emergency logic
     // But onFinish is a callback passed to useChat.
     // We need to trigger it manually or expose a way to trigger it.

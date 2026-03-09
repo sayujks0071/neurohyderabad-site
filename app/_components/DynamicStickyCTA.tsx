@@ -13,11 +13,20 @@ export default function DynamicStickyCTA() {
     if (shouldLoad) return;
 
     // Handler for scroll interaction
+    let rafId: number;
+    let isTicking = false;
+
     const handleScroll = () => {
-      // ⚡ Bolt: Only load when user has scrolled significantly (> 100px)
-      // avoiding eager load on minor movements or initial bounce.
-      if (window.scrollY > 100) {
-        setShouldLoad(true);
+      if (!isTicking) {
+        rafId = window.requestAnimationFrame(() => {
+          // ⚡ Bolt: Only load when user has scrolled significantly (> 100px)
+          // avoiding eager load on minor movements or initial bounce.
+          if (window.scrollY > 100) {
+            setShouldLoad(true);
+          }
+          isTicking = false;
+        }); // ⚡ Bolt: wrap in requestAnimationFrame to prevent synchronous style reads
+        isTicking = true;
       }
     };
 
@@ -32,6 +41,7 @@ export default function DynamicStickyCTA() {
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      if (rafId) window.cancelAnimationFrame(rafId);
       clearTimeout(timer);
     };
   }, [shouldLoad]); // ⚡ Bolt: Depend on shouldLoad to cleanup listener once loaded

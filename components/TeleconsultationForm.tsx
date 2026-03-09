@@ -165,6 +165,7 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
       noValidate
       toolname="requestTeleconsultation"
       tooldescription="Request a teleconsultation or medical inquiry"
+      toolautosubmit="false"
     >
       {/* Live region for form status announcements */}
       <div 

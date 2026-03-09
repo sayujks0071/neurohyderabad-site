@@ -49,7 +49,7 @@ const ARTICLE_SOURCES = getServiceSources('slip-disc-surgery-cost-hyderabad') ||
 
 export default function SlipDiscSurgeryCostPage() {
   const pageUrl = `${SITE_URL}/services/slip-disc-surgery-cost-hyderabad`;
-  const faqs = faqSchema.mainEntity.map((item: any) => ({
+  const faqs = [].map((item: any) => ({
     question: item.name,
     answer: item.acceptedAnswer.text,
   }));
