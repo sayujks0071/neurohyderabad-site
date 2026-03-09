@@ -6,24 +6,10 @@ import { DefaultChatTransport, type UIMessage } from 'ai';
 import { ChainOfThought, ChainOfThoughtHeader, ChainOfThoughtContent, ChainOfThoughtStep } from "@/src/components/ai-elements/chain-of-thought";
 import { Checkpoint, CheckpointTrigger, CheckpointIcon } from "@/src/components/ai-elements/checkpoint";
 import { Confirmation, ConfirmationRequest, ConfirmationAccepted, ConfirmationRejected, ConfirmationActions, ConfirmationAction } from "@/src/components/ai-elements/confirmation";
-import { StethoscopeIcon, SearchIcon, CalendarIcon, CheckIcon, XIcon } from "lucide-react";
 import { Attachments, Attachment, AttachmentPreview, AttachmentInfo, AttachmentRemove } from "@/src/components/ai-elements/attachments";
 import { analytics } from "@/src/lib/analytics";
 import { Suggestion, Suggestions } from "@/src/components/ai-elements/suggestion";
-import { Attachments, Attachment, AttachmentInfo, AttachmentRemove, AttachmentPreview } from "@/src/components/ai-elements/attachments";
-import { ChainOfThought, ChainOfThoughtHeader, ChainOfThoughtContent, ChainOfThoughtStep } from "@/src/components/ai-elements/chain-of-thought";
-import { Checkpoint, CheckpointIcon, CheckpointTrigger } from "@/src/components/ai-elements/checkpoint";
-import { Confirmation, ConfirmationRequest, ConfirmationAccepted, ConfirmationRejected, ConfirmationActions, ConfirmationAction } from "@/src/components/ai-elements/confirmation";
-import { StethoscopeIcon, SearchIcon, CalendarIcon, CheckIcon, XIcon } from "lucide-react";
 
-import {
-  Confirmation,
-  ConfirmationRequest,
-  ConfirmationAccepted,
-  ConfirmationRejected,
-  ConfirmationActions,
-  ConfirmationAction,
-} from "@/src/components/ai-elements/confirmation";
 import { CheckIcon, XIcon, SearchIcon, CalendarIcon, StethoscopeIcon, RefreshCcwIcon, CopyIcon, InfoIcon } from "lucide-react";
 
 import {
@@ -49,25 +35,14 @@ import {
   ContextContentFooter,
 } from "@/src/components/ai-elements/context";
 
-
+import { Shimmer } from "@/src/components/ai-elements/shimmer";
 import {
-  Attachments,
-  Attachment,
-  AttachmentPreview,
-  AttachmentInfo,
-  AttachmentRemove,
-} from "@/src/components/ai-elements/attachments";
-import {
-  ChainOfThought,
-  ChainOfThoughtHeader,
-  ChainOfThoughtContent,
-  ChainOfThoughtStep,
-} from "@/src/components/ai-elements/chain-of-thought";
-import {
-  Checkpoint,
-  CheckpointIcon,
-  CheckpointTrigger,
-} from "@/src/components/ai-elements/checkpoint";
+  PromptInput,
+  PromptInputTextarea,
+  PromptInputFooter,
+  PromptInputTools,
+  PromptInputSubmit,
+} from "@/src/components/ai-elements/prompt-input";
 
 
 interface AIStreamingChatProps {
@@ -380,8 +355,8 @@ export default function AIStreamingChat({
 
             {isLoading && (
               <div className="flex justify-start items-center gap-2 p-2 pl-4 text-slate-500">
-                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-slate-400"></div>
-                <span className="text-sm">AI is thinking...</span>
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-[var(--color-primary-500)]"></div>
+                <Shimmer className="text-sm font-medium text-[var(--color-primary-600)]" duration={1.5} spread={2}>AI is analyzing your request...</Shimmer>
               </div>
             )}
             {error && (
