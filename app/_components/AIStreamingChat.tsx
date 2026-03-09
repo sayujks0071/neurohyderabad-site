@@ -3,8 +3,72 @@
 import React, { useState, useRef, useEffect, useMemo, Fragment } from 'react';
 import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport, type UIMessage } from 'ai';
+import { ChainOfThought, ChainOfThoughtHeader, ChainOfThoughtContent, ChainOfThoughtStep } from "@/src/components/ai-elements/chain-of-thought";
+import { Checkpoint, CheckpointTrigger, CheckpointIcon } from "@/src/components/ai-elements/checkpoint";
+import { Confirmation, ConfirmationRequest, ConfirmationAccepted, ConfirmationRejected, ConfirmationActions, ConfirmationAction } from "@/src/components/ai-elements/confirmation";
+import { StethoscopeIcon, SearchIcon, CalendarIcon, CheckIcon, XIcon } from "lucide-react";
+import { Attachments, Attachment, AttachmentPreview, AttachmentInfo, AttachmentRemove } from "@/src/components/ai-elements/attachments";
 import { analytics } from "@/src/lib/analytics";
 import { Suggestion, Suggestions } from "@/src/components/ai-elements/suggestion";
+import { Attachments, Attachment, AttachmentInfo, AttachmentRemove, AttachmentPreview } from "@/src/components/ai-elements/attachments";
+import { ChainOfThought, ChainOfThoughtHeader, ChainOfThoughtContent, ChainOfThoughtStep } from "@/src/components/ai-elements/chain-of-thought";
+import { Checkpoint, CheckpointIcon, CheckpointTrigger } from "@/src/components/ai-elements/checkpoint";
+import { Confirmation, ConfirmationRequest, ConfirmationAccepted, ConfirmationRejected, ConfirmationActions, ConfirmationAction } from "@/src/components/ai-elements/confirmation";
+import { StethoscopeIcon, SearchIcon, CalendarIcon, CheckIcon, XIcon } from "lucide-react";
+
+import {
+  Confirmation,
+  ConfirmationRequest,
+  ConfirmationAccepted,
+  ConfirmationRejected,
+  ConfirmationActions,
+  ConfirmationAction,
+} from "@/src/components/ai-elements/confirmation";
+import { CheckIcon, XIcon, SearchIcon, CalendarIcon, StethoscopeIcon, RefreshCcwIcon, CopyIcon, InfoIcon } from "lucide-react";
+
+import {
+  Conversation,
+  ConversationContent,
+  ConversationScrollButton,
+} from "@/src/components/ai-elements/conversation";
+import {
+  Message,
+  MessageContent,
+  MessageResponse,
+  MessageActions,
+  MessageAction,
+} from "@/src/components/ai-elements/message";
+import {
+  Context,
+  ContextTrigger,
+  ContextContent as AIContextContent,
+  ContextContentHeader,
+  ContextContentBody,
+  ContextInputUsage,
+  ContextOutputUsage,
+  ContextContentFooter,
+} from "@/src/components/ai-elements/context";
+
+
+import {
+  Attachments,
+  Attachment,
+  AttachmentPreview,
+  AttachmentInfo,
+  AttachmentRemove,
+} from "@/src/components/ai-elements/attachments";
+import {
+  ChainOfThought,
+  ChainOfThoughtHeader,
+  ChainOfThoughtContent,
+  ChainOfThoughtStep,
+} from "@/src/components/ai-elements/chain-of-thought";
+import {
+  Checkpoint,
+  CheckpointIcon,
+  CheckpointTrigger,
+} from "@/src/components/ai-elements/checkpoint";
+
 
 interface AIStreamingChatProps {
   pageSlug: string;
@@ -104,19 +168,16 @@ export default function AIStreamingChat({
     setInput(e.target.value);
   };
 
-  const onFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!input.trim() || isLoading) return;
+  const onFormSubmit = async (message: { text: string; files?: File[] }) => {
+    if (!message.text.trim() && (!message.files || message.files.length === 0)) return;
+    if (isLoading) return;
 
     analytics.aiAssistant.message('user');
 
-    const userMessage = input;
     setInput('');
-    // Use helper object with text property for convenience
-    // Pass files to the API
     await sendMessage({
-      text: userMessage,
-      files: files
+      text: message.text,
+      files: message.files
     });
     setFiles(undefined);
   };
@@ -209,18 +270,34 @@ export default function AIStreamingChat({
             </div>
           )}
 
-          {error && (
-            <div className="flex justify-start">
-              <div className="bg-[var(--color-error-light)] text-[var(--color-error-800)] px-4 py-2 rounded-lg">
-                <p className="text-sm">
-                  {error.message || "I'm having trouble right now. Please call +91-9778280044 for immediate assistance."}
-                </p>
+                  {/* Checkpoints */}
+                  {checkpoints.find(cp => cp.messageIndex === index) && (
+                    <div className="flex justify-center my-4">
+                      <Checkpoint>
+                        <CheckpointIcon />
+                        <CheckpointTrigger onClick={() => restoreToCheckpoint(index)}>Restore previous conversation state</CheckpointTrigger>
+                      </Checkpoint>
+                    </div>
+                  )}
+                </Fragment>
+              );
+            })}
+
+            {isLoading && (
+              <div className="flex justify-start items-center gap-2 p-2 pl-4 text-slate-500">
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-slate-400"></div>
+                <span className="text-sm">AI is thinking...</span>
               </div>
-            </div>
-          )}
-          
-          <div ref={messagesEndRef} />
-        </div>
+            )}
+            {error && (
+              <div className="p-3 bg-red-50 text-red-600 rounded-lg text-sm m-4">
+                {error.message || "An error occurred. Please try again or call +91-9778280044."}
+              </div>
+            )}
+            <div ref={messagesEndRef} className="h-px" />
+          </ConversationContent>
+          <ConversationScrollButton className="absolute bottom-4 left-1/2 -translate-x-1/2" />
+        </Conversation>
 
         {/* Quick Actions - Only show if just initial message */}
         {messages.length <= 1 && (
@@ -231,9 +308,9 @@ export default function AIStreamingChat({
                 <Suggestion
                   key={index}
                   onClick={() => handleQuickAction(action)}
-                  disabled={isLoading}
                   suggestion={action}
-                  className="text-xs bg-[var(--color-primary-50)] text-[var(--color-primary-700)] hover:bg-[var(--color-primary-100)] transition-colors disabled:opacity-50 whitespace-nowrap"
+                  disabled={isLoading}
+                  className="bg-[var(--color-primary-50)] text-[var(--color-primary-700)] hover:bg-[var(--color-primary-100)] transition-colors disabled:opacity-50"
                 />
               ))}
             </Suggestions>
@@ -257,20 +334,30 @@ export default function AIStreamingChat({
             <input
               type="text"
               value={input}
-              onChange={handleInputChange}
+              onChange={(e) => setInput(e.target.value)}
               placeholder="Type your message here..."
-              className="flex-1 px-3 py-2 border border-[var(--color-border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)] focus:border-transparent"
               disabled={isLoading}
             />
-            <button
-              type="submit"
-              disabled={!input.trim() || isLoading}
-              className="px-4 py-2 bg-gradient-to-r from-[var(--color-primary-500)] to-purple-600 text-white rounded-lg hover:from-[var(--color-primary-700)] hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-            >
-              {isLoading ? 'Sending...' : 'Send'}
-            </button>
-          </div>
-        </form>
+            <PromptInputFooter>
+              <PromptInputTools>
+                <label className="flex items-center justify-center p-2 rounded-lg cursor-pointer hover:bg-[var(--color-primary-50)] text-[var(--color-text-secondary)] transition-colors">
+                  <span className="sr-only">Upload file</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+                  <input
+                    type="file"
+                    className="hidden"
+                    onChange={(e) => setFiles(e.target.files || undefined)}
+                    multiple
+                    disabled={isLoading}
+                  />
+                </label>
+              </PromptInputTools>
+              <PromptInputSubmit
+                disabled={!input.trim() || isLoading}
+              />
+            </PromptInputFooter>
+          </PromptInput>
+        </div>
       </div>
 
       {/* Features Info */}
