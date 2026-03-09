@@ -124,9 +124,6 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
     },
   }), [frame, fps, prefersReducedMotion]);
 
-  // Subtle breathing animation for continuous movement
-  const breathingScale = useMemo(() => prefersReducedMotion ? 1 : 1 + Math.sin(frame / 45) * 0.01, [frame, prefersReducedMotion]);
-
   // Subtitle animation (starts after title)
   const subtitleStartFrame = 15;
   const subtitleText = "Welcome to Dr. Sayuj Krishnan's Practice";
@@ -149,7 +146,7 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
       >
         <div
           style={{
-            transform: `scale(${scale * breathingScale})`,
+            transform: `scale(${scale})`,
             textAlign: 'center',
           }}
         >
