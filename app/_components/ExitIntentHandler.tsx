@@ -25,17 +25,14 @@ export default function ExitIntentHandler({
     if (!hasConsent) return;
 
     let isTracking = true;
-    let mouseY = 0;
     let hasTrackedExitIntent = false;
 
-    // Track mouse movement to detect exit intent (moving mouse toward top of screen)
-    const handleMouseMove = (e: MouseEvent) => {
+    // Track when mouse leaves the document to detect exit intent (moving mouse toward top of screen)
+    const handleMouseLeave = (e: MouseEvent) => {
       if (!isTracking || hasTrackedExitIntent) return;
       
-      mouseY = e.clientY;
-      
-      // Exit intent: mouse moves to top of viewport (typically to close tab/window)
-      if (mouseY <= 10 && e.clientY <= 10) {
+      // Exit intent: mouse leaves from the top of the viewport (typically to close tab/window)
+      if (e.clientY <= 10) {
         hasTrackedExitIntent = true;
         
         // Track exit intent event
@@ -85,13 +82,13 @@ export default function ExitIntentHandler({
       }
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseleave', handleMouseLeave);
     document.addEventListener('visibilitychange', handleVisibilityChange);
     window.addEventListener('beforeunload', handleBeforeUnload);
 
     return () => {
       isTracking = false;
-      window.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
