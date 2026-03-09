@@ -1,0 +1,90 @@
+{
+  "name": "Referral Network Nurture",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "new-referral",
+        "options": {}
+      },
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ],
+      "webhookId": "referral-network-webhook"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$node[\"Webhook Trigger\"].json[\"body\"][\"referringDoctorEmail\"]}}",
+              "operation": "notEqual",
+              "value2": ""
+            }
+          ]
+        }
+      },
+      "name": "Check Referring Doctor",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "admin@drsayuj.info",
+        "toEmail": "={{$node[\"Webhook Trigger\"].json[\"body\"][\"referringDoctorEmail\"]}}",
+        "subject": "Thank you for referring {{$node[\"Webhook Trigger\"].json[\"body\"][\"patientName\"]}}",
+        "text": "Dear Dr. {{$node[\"Webhook Trigger\"].json[\"body\"][\"referringDoctorName\"]}},\n\nThank you for referring {{$node[\"Webhook Trigger\"].json[\"body\"][\"patientName\"]}} to my practice. I wanted to let you know that they have successfully booked their initial consultation for {{$node[\"Webhook Trigger\"].json[\"body\"][\"appointmentDate\"]}}.\n\nI will keep you updated on their diagnosis and treatment plan after their visit.\n\nThank you again for entrusting me with the neurological care of your patient. I value our ongoing professional relationship.\n\nWarm regards,\n\nDr. Sayuj\nConsultant Neurosurgeon",
+        "html": "<h2>Thank you for your referral!</h2><p>Dear Dr. {{$node[\"Webhook Trigger\"].json[\"body\"][\"referringDoctorName\"]}},</p><p>Thank you for referring <b>{{$node[\"Webhook Trigger\"].json[\"body\"][\"patientName\"]}}</b> to my practice. I wanted to let you know that they have successfully booked their initial consultation for <b>{{$node[\"Webhook Trigger\"].json[\"body\"][\"appointmentDate\"]}}</b>.</p><p>I will provide a full clinical update on their diagnosis and treatment plan following their evaluation.</p><p>Thank you again for entrusting me with the neurological care of your patient. I deeply value our ongoing professional relationship.</p><p>Warm regards,<br><br><b>Dr. Sayuj</b><br>Consultant Neurosurgeon</p>"
+      },
+      "name": "Send Thank You Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [
+        650,
+        200
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "YOUR_SMTP_CREDENTIAL_ID",
+          "name": "SMTP Account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Check Referring Doctor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Referring Doctor": {
+      "main": [
+        [
+          {
+            "node": "Send Thank You Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "id": "7b13a968-0b28-442a-a5f9-2c3f85e492bb"
+}

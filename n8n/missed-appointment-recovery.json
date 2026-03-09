@@ -1,0 +1,59 @@
+{
+  "name": "Missed Appointment Recovery",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "missed-appointment",
+        "options": {}
+      },
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ],
+      "webhookId": "missed-appointment-webhook"
+    },
+    {
+      "parameters": {
+        "fromEmail": "care@drsayuj.info",
+        "toEmail": "={{$node[\"Webhook Trigger\"].json[\"body\"][\"patientEmail\"]}}",
+        "subject": "Missed Appointment with Dr. Sayuj",
+        "text": "Dear {{$node[\"Webhook Trigger\"].json[\"body\"][\"patientName\"]}},\n\nWe missed you at your scheduled appointment on {{$node[\"Webhook Trigger\"].json[\"body\"][\"appointmentDate\"]}}.\n\nWe understand that unexpected things come up. Your health is important to us, and we want to ensure you receive the care you need.\n\nPlease reschedule your appointment at your earliest convenience using this link: https://www.drsayuj.info/book\n\nWarm regards,\nDr. Sayuj's Team",
+        "html": "<h2>We missed you!</h2><p>Dear {{$node[\"Webhook Trigger\"].json[\"body\"][\"patientName\"]}},</p><p>We missed you at your scheduled appointment on <b>{{$node[\"Webhook Trigger\"].json[\"body\"][\"appointmentDate\"]}}</b>.</p><p>We understand that unexpected things come up. Your neurological health is important to us, and we want to ensure you receive the care you need.</p><p><b>Please reschedule your appointment at your earliest convenience:</b></p><p><a href=\"https://www.drsayuj.info/book\">Click here to reschedule your appointment</a></p><p>Warm regards,<br>Dr. Sayuj's Clinical Team</p>"
+      },
+      "name": "Send Re-engagement Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "YOUR_SMTP_CREDENTIAL_ID",
+          "name": "SMTP Account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Send Re-engagement Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "id": "e8c2f10b-8d76-43a9-b4f1-9c1d85b6a32d"
+}
