@@ -50,16 +50,6 @@ export const WelcomeCharacter: React.FC<WelcomeCharacterProps> = ({ char, delay,
     [frame, fps, delay, prefersReducedMotion]
   );
 
-  const blur = useMemo(() =>
-    prefersReducedMotion ? 0 : interpolate(
-      frame - delay,
-      [0, 20],
-      [10, 0],
-      { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }
-    ),
-    [frame, delay, prefersReducedMotion]
-  );
-
   // Color interpolation: Start with accent color and fade to white
   const color = useMemo(() =>
     prefersReducedMotion ? COLORS.surface : interpolateColors(
@@ -70,21 +60,12 @@ export const WelcomeCharacter: React.FC<WelcomeCharacterProps> = ({ char, delay,
     [frame, delay, prefersReducedMotion]
   );
 
-  // Micro-animation: subtle wave after entrance
-  // Only start after entrance is done (approx delay + 25 frames)
-  const waveStartFrame = delay + 25;
-  const waveY = useMemo(() => {
-    if (prefersReducedMotion || frame < waveStartFrame) return 0;
-    // Continuous sine wave
-    return Math.sin((frame - waveStartFrame) / 15 + index * 0.5) * 3;
-  }, [frame, waveStartFrame, index, prefersReducedMotion]);
-
   return (
     <span
       style={{
         display: 'inline-block',
         opacity,
-        transform: `translateY(${yOffset + waveY}px) scale(${scale})`,
+        transform: `translateY(${yOffset}px) scale(${scale})`,
         filter: `blur(${blur}px)`,
         color: color,
         whiteSpace: 'pre',
