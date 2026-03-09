@@ -3,6 +3,11 @@
 import React, { useState, useRef, useEffect, useMemo, Fragment } from 'react';
 import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport, type UIMessage } from 'ai';
+import { ChainOfThought, ChainOfThoughtHeader, ChainOfThoughtContent, ChainOfThoughtStep } from "@/src/components/ai-elements/chain-of-thought";
+import { Checkpoint, CheckpointTrigger, CheckpointIcon } from "@/src/components/ai-elements/checkpoint";
+import { Confirmation, ConfirmationRequest, ConfirmationAccepted, ConfirmationRejected, ConfirmationActions, ConfirmationAction } from "@/src/components/ai-elements/confirmation";
+import { StethoscopeIcon, SearchIcon, CalendarIcon, CheckIcon, XIcon } from "lucide-react";
+import { Attachments, Attachment, AttachmentPreview, AttachmentInfo, AttachmentRemove } from "@/src/components/ai-elements/attachments";
 import { analytics } from "@/src/lib/analytics";
 import { Suggestion, Suggestions } from "@/src/components/ai-elements/suggestion";
 import { Attachments, Attachment, AttachmentInfo, AttachmentRemove, AttachmentPreview } from "@/src/components/ai-elements/attachments";
@@ -109,19 +114,16 @@ export default function AIStreamingChat({
     setInput(e.target.value);
   };
 
-  const onFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!input.trim() || isLoading) return;
+  const onFormSubmit = async (message: { text: string; files?: File[] }) => {
+    if (!message.text.trim() && (!message.files || message.files.length === 0)) return;
+    if (isLoading) return;
 
     analytics.aiAssistant.message('user');
 
-    const userMessage = input;
     setInput('');
-    // Use helper object with text property for convenience
-    // Pass files to the API
     await sendMessage({
-      text: userMessage,
-      files: files
+      text: message.text,
+      files: message.files
     });
     setFiles(undefined);
   };
@@ -364,9 +366,9 @@ export default function AIStreamingChat({
                 <Suggestion
                   key={index}
                   onClick={() => handleQuickAction(action)}
-                  disabled={isLoading}
                   suggestion={action}
-                  className="text-xs bg-[var(--color-primary-50)] text-[var(--color-primary-700)] hover:bg-[var(--color-primary-100)] transition-colors disabled:opacity-50 whitespace-nowrap"
+                  disabled={isLoading}
+                  className="bg-[var(--color-primary-50)] text-[var(--color-primary-700)] hover:bg-[var(--color-primary-100)] transition-colors disabled:opacity-50"
                 />
               ))}
             </Suggestions>
@@ -374,7 +376,7 @@ export default function AIStreamingChat({
         )}
 
         {/* Input Form */}
-        <form onSubmit={onFormSubmit} className="p-4 border-t border-[var(--color-border)]">
+        <div className="p-4 border-t border-[var(--color-border)]">
           {files && files.length > 0 && (
             <div className="mb-2">
               <Attachments variant="inline">
@@ -394,35 +396,39 @@ export default function AIStreamingChat({
               </Attachments>
             </div>
           )}
-          <div className="flex space-x-2">
-            <label className="flex items-center justify-center px-4 py-2 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-lg cursor-pointer hover:bg-[var(--color-primary-50)] text-[var(--color-text-secondary)] transition-colors">
-              <span className="sr-only">Upload file</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
-              <input
-                type="file"
-                className="hidden"
-                onChange={(e) => setFiles(e.target.files || undefined)}
-                multiple
-                disabled={isLoading}
-              />
-            </label>
-            <input
-              type="text"
+
+          <PromptInput
+            onSubmit={(msg) => {
+              const fileList = files ? Array.from(files) : undefined;
+              onFormSubmit({ text: msg.text, files: fileList });
+            }}
+          >
+            <PromptInputTextarea
               value={input}
-              onChange={handleInputChange}
+              onChange={(e) => setInput(e.target.value)}
               placeholder="Type your message here..."
-              className="flex-1 px-3 py-2 border border-[var(--color-border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)] focus:border-transparent"
               disabled={isLoading}
             />
-            <button
-              type="submit"
-              disabled={!input.trim() || isLoading}
-              className="px-4 py-2 bg-gradient-to-r from-[var(--color-primary-500)] to-purple-600 text-white rounded-lg hover:from-[var(--color-primary-700)] hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-            >
-              {isLoading ? 'Sending...' : 'Send'}
-            </button>
-          </div>
-        </form>
+            <PromptInputFooter>
+              <PromptInputTools>
+                <label className="flex items-center justify-center p-2 rounded-lg cursor-pointer hover:bg-[var(--color-primary-50)] text-[var(--color-text-secondary)] transition-colors">
+                  <span className="sr-only">Upload file</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+                  <input
+                    type="file"
+                    className="hidden"
+                    onChange={(e) => setFiles(e.target.files || undefined)}
+                    multiple
+                    disabled={isLoading}
+                  />
+                </label>
+              </PromptInputTools>
+              <PromptInputSubmit
+                disabled={!input.trim() || isLoading}
+              />
+            </PromptInputFooter>
+          </PromptInput>
+        </div>
       </div>
 
       {/* Features Info */}
