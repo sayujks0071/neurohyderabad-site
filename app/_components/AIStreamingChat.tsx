@@ -10,14 +10,11 @@ import { StethoscopeIcon, SearchIcon, CalendarIcon, CheckIcon, XIcon } from "luc
 import { Attachments, Attachment, AttachmentPreview, AttachmentInfo, AttachmentRemove } from "@/src/components/ai-elements/attachments";
 import { analytics } from "@/src/lib/analytics";
 import { Suggestion, Suggestions } from "@/src/components/ai-elements/suggestion";
-import {
-  PromptInput,
-  PromptInputTextarea,
-  PromptInputSubmit,
-  PromptInputTools,
-  PromptInputButton,
-  PromptInputFooter
-} from "@/src/components/ai-elements/prompt-input";
+import { Attachments, Attachment, AttachmentInfo, AttachmentRemove, AttachmentPreview } from "@/src/components/ai-elements/attachments";
+import { ChainOfThought, ChainOfThoughtHeader, ChainOfThoughtContent, ChainOfThoughtStep } from "@/src/components/ai-elements/chain-of-thought";
+import { Checkpoint, CheckpointIcon, CheckpointTrigger } from "@/src/components/ai-elements/checkpoint";
+import { Confirmation, ConfirmationRequest, ConfirmationAccepted, ConfirmationRejected, ConfirmationActions, ConfirmationAction } from "@/src/components/ai-elements/confirmation";
+import { StethoscopeIcon, SearchIcon, CalendarIcon, CheckIcon, XIcon } from "lucide-react";
 
 interface AIStreamingChatProps {
   pageSlug: string;

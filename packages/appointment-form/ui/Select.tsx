@@ -30,7 +30,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select(
         className="block text-sm font-medium text-slate-700 mb-1"
       >
         {label}
-        {required && <span className="text-red-500 font-extrabold pl-1">*</span>}
+        {required && <span className="text-red-500 font-extrabold pl-1" aria-hidden="true">*</span>}
       </label>
       <select
         id={id}

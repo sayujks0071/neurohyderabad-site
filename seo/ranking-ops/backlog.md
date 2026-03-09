@@ -66,7 +66,7 @@
 *   **Schema Conflict:** Remove duplicate `FAQSchema` manual injection in `app/services/cervical-disc-replacement-hyderabad/page.tsx` as it conflicts with `<FAQPageSchema />` component.
 
 ## 2026-02-25
-*   **Expansion:** Replicate the visual "Red Flags" grid on other emergency-related condition pages (e.g., Brain Tumor Symptoms).
+*   [x] **Expansion:** Replicate the visual "Red Flags" grid on other emergency-related condition pages (e.g., Brain Tumor Symptoms). (Done 2026-03-09)
 *   **Consistency:** Ensure `TrustProof` components on other pages are updated to use the latest props and styling if applicable.
 
 ## 2026-02-27
