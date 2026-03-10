@@ -83,3 +83,7 @@
 - [x] **Internal Linking:** Added "Comprehensive Neurosurgical Treatments" section to 'best neurosurgeon' pillar page, connecting 12 specific service and condition pages.
 - [ ] **Technical Fix:** Implement more specific semantic HTML structures (e.g., proper article/section tags) for better content parsing.
 - [ ] **Rich Media:** Add extensive video testimonials and patient stories on doctor profiles to close competitor gap.
+
+## 2026-03-10
+- **Opportunity Identified:** Competitors use extensive video testimonials and patient stories on doctor profiles.
+- **Opportunity Identified:** Aggregators (Practo, Lybrate) have strong review Schema with aggregateRatings.
