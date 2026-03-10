@@ -6,24 +6,9 @@ import { DefaultChatTransport, type UIMessage } from 'ai';
 import { ChainOfThought, ChainOfThoughtHeader, ChainOfThoughtContent, ChainOfThoughtStep } from "@/src/components/ai-elements/chain-of-thought";
 import { Checkpoint, CheckpointTrigger, CheckpointIcon } from "@/src/components/ai-elements/checkpoint";
 import { Confirmation, ConfirmationRequest, ConfirmationAccepted, ConfirmationRejected, ConfirmationActions, ConfirmationAction } from "@/src/components/ai-elements/confirmation";
-import { StethoscopeIcon, SearchIcon, CalendarIcon, CheckIcon, XIcon } from "lucide-react";
 import { Attachments, Attachment, AttachmentPreview, AttachmentInfo, AttachmentRemove } from "@/src/components/ai-elements/attachments";
 import { analytics } from "@/src/lib/analytics";
 import { Suggestion, Suggestions } from "@/src/components/ai-elements/suggestion";
-import { Attachments, Attachment, AttachmentInfo, AttachmentRemove, AttachmentPreview } from "@/src/components/ai-elements/attachments";
-import { ChainOfThought, ChainOfThoughtHeader, ChainOfThoughtContent, ChainOfThoughtStep } from "@/src/components/ai-elements/chain-of-thought";
-import { Checkpoint, CheckpointIcon, CheckpointTrigger } from "@/src/components/ai-elements/checkpoint";
-import { Confirmation, ConfirmationRequest, ConfirmationAccepted, ConfirmationRejected, ConfirmationActions, ConfirmationAction } from "@/src/components/ai-elements/confirmation";
-import { StethoscopeIcon, SearchIcon, CalendarIcon, CheckIcon, XIcon } from "lucide-react";
-
-import {
-  Confirmation,
-  ConfirmationRequest,
-  ConfirmationAccepted,
-  ConfirmationRejected,
-  ConfirmationActions,
-  ConfirmationAction,
-} from "@/src/components/ai-elements/confirmation";
 import { CheckIcon, XIcon, SearchIcon, CalendarIcon, StethoscopeIcon, RefreshCcwIcon, CopyIcon, InfoIcon } from "lucide-react";
 
 import {
@@ -48,26 +33,13 @@ import {
   ContextOutputUsage,
   ContextContentFooter,
 } from "@/src/components/ai-elements/context";
-
-
 import {
-  Attachments,
-  Attachment,
-  AttachmentPreview,
-  AttachmentInfo,
-  AttachmentRemove,
-} from "@/src/components/ai-elements/attachments";
-import {
-  ChainOfThought,
-  ChainOfThoughtHeader,
-  ChainOfThoughtContent,
-  ChainOfThoughtStep,
-} from "@/src/components/ai-elements/chain-of-thought";
-import {
-  Checkpoint,
-  CheckpointIcon,
-  CheckpointTrigger,
-} from "@/src/components/ai-elements/checkpoint";
+  PromptInput,
+  PromptInputTextarea,
+  PromptInputFooter,
+  PromptInputTools,
+  PromptInputSubmit,
+} from "@/src/components/ai-elements/prompt-input";
 
 
 interface AIStreamingChatProps {
@@ -168,7 +140,7 @@ export default function AIStreamingChat({
     setInput(e.target.value);
   };
 
-  const onFormSubmit = async (message: { text: string; files?: File[] }) => {
+  const onFormSubmit = async (message: { text: string; files?: FileList | undefined }) => {
     if (!message.text.trim() && (!message.files || message.files.length === 0)) return;
     if (isLoading) return;
 
@@ -177,8 +149,8 @@ export default function AIStreamingChat({
     setInput('');
     await sendMessage({
       text: message.text,
-      files: message.files
-    });
+      experimental_attachments: message.files
+    } as any);
     setFiles(undefined);
   };
 
@@ -436,8 +408,7 @@ export default function AIStreamingChat({
 
           <PromptInput
             onSubmit={(msg) => {
-              const fileList = files ? Array.from(files) : undefined;
-              onFormSubmit({ text: msg.text, files: fileList });
+              onFormSubmit({ text: msg.text, files: files });
             }}
           >
             <PromptInputTextarea
