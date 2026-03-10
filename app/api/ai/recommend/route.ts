@@ -95,9 +95,9 @@ export async function POST(request: NextRequest) {
       tags: post.tags || [],
     }));
 
-    // Use AI SDK to find relevant posts
+    // Use AI SDK to find relevant posts. Recommendations should be cached to save costs
     const { object } = await generateObject({
-      model: getTextModel(),
+      model: getTextModel(undefined, { cache: true }),
       schema: jsonSchema({
         type: 'object',
         properties: {
