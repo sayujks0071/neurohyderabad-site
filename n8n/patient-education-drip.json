@@ -1,0 +1,119 @@
+{
+  "name": "Patient Education Drip Campaign",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "education-signup",
+        "options": {}
+      },
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ],
+      "webhookId": "education-signup-webhook"
+    },
+    {
+      "parameters": {
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key={{$env.GEMINI_API_KEY}}",
+        "method": "POST",
+        "bodyParametersUi": {
+          "parameter": []
+        },
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "body": "={\n  \"contents\": [{\n    \"parts\": [{\n      \"text\": \"You are the patient education AI assistant for Dr. Sayuj, a leading Neurosurgeon in Hyderabad. A patient just signed up for an educational email series regarding a specific neurological condition.\\n\\nPatient Name: {{$node[\\\"Webhook Trigger\\\"].json[\\\"body\\\"][\\\"name\\\"]}}\\nCondition/Topic: {{$node[\\\"Webhook Trigger\\\"].json[\\\"body\\\"][\\\"topic\\\"]}}\\n\\nWrite the first introductory email for a 3-part educational series. The email should:\\n1. Welcome them and validate their concerns.\\n2. Provide a brief, easy-to-understand overview of the condition (e.g., Spine Surgery, Brain Tumor, Sciatica).\\n3. Explain the common symptoms and when to seek medical attention.\\n4. Tease what will be covered in the next email (treatment options).\\n5. Include a clear call-to-action to book a consultation at Dr. Sayuj's clinic in Hyderabad.\\n\\nDo not include generic placeholders. Keep it informative, empathetic, and authoritative.\"\n    }]\n  }]\n}",
+        "options": {}
+      },
+      "name": "Generate Welcome Email",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "const geminiResp = items[0].json.candidates[0].content.parts[0].text;\nreturn [{\n  json: {\n    ...items[0].json,\n    emailBody: geminiResp\n  }\n}];"
+      },
+      "name": "Parse Welcome Email",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        650,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "education@drsayuj.info",
+        "toEmail": "={{$node[\"Webhook Trigger\"].json[\"body\"][\"email\"]}}",
+        "subject": "Understanding {{$node[\"Webhook Trigger\"].json[\"body\"][\"topic\"]}} (Part 1) - Dr. Sayuj",
+        "text": "={{$node[\"Parse Welcome Email\"].json[\"emailBody\"]}}",
+        "html": "=<p>{{$node[\"Parse Welcome Email\"].json[\"emailBody\"].replace(/\\n/g, '<br>')}}</p>"
+      },
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [
+        850,
+        300
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "YOUR_SMTP_CREDENTIAL_ID",
+          "name": "SMTP Account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Generate Welcome Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Welcome Email": {
+      "main": [
+        [
+          {
+            "node": "Parse Welcome Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Welcome Email": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "id": "7a8b9c0d-1e2f-3a4b-5c6d-7e8f9a0b1c2d"
+}

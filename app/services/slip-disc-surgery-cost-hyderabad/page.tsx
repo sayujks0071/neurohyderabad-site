@@ -46,6 +46,28 @@ export const metadata: Metadata = {
 const ARTICLE_SOURCES = getServiceSources('slip-disc-surgery-cost-hyderabad') || [];
 
 // FAQ Schema
+const faqSchema = {
+  mainEntity: [
+    {
+      name: "How much does slip disc surgery cost in Hyderabad?",
+      acceptedAnswer: {
+        text: "The cost of slip disc surgery in Hyderabad generally ranges between ₹1,50,000 and ₹3,50,000, depending on the hospital, surgeon's expertise, and the specific procedure performed."
+      }
+    },
+    {
+      name: "Is slip disc surgery covered by insurance?",
+      acceptedAnswer: {
+        text: "Yes, most health insurance policies cover slip disc surgery if it is deemed medically necessary. Coverage varies by provider and policy terms."
+      }
+    },
+    {
+      name: "What is the recovery time after slip disc surgery?",
+      acceptedAnswer: {
+        text: "Recovery time varies but most patients can walk the same or next day. Full recovery may take 4 to 6 weeks depending on the type of work and surgery."
+      }
+    }
+  ]
+};
 
 export default function SlipDiscSurgeryCostPage() {
   const pageUrl = `${SITE_URL}/services/slip-disc-surgery-cost-hyderabad`;

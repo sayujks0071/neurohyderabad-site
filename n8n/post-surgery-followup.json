@@ -1,0 +1,183 @@
+{
+  "name": "Post-Surgery Patient Follow-Up",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "days",
+              "seconds": 0,
+              "minutes": 0,
+              "hours": 10
+            }
+          ]
+        }
+      },
+      "name": "Daily Schedule",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://www.drsayuj.info/api/admin/patients/recent-surgeries",
+        "method": "GET",
+        "authentication": "header",
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "x-admin-key",
+              "value": "YOUR_ADMIN_KEY"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Fetch Recent Surgeries",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "patients",
+        "options": {}
+      },
+      "name": "Iterate Patients",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 1,
+      "position": [
+        650,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key={{$env.GEMINI_API_KEY}}",
+        "method": "POST",
+        "bodyParametersUi": {
+          "parameter": []
+        },
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "body": "={\n  \"contents\": [{\n    \"parts\": [{\n      \"text\": \"You are Dr. Sayuj, a compassionate and expert neurosurgeon in Hyderabad. Write a brief, personalized follow-up email to a patient who had surgery recently. Do not include any placeholder text.\\n\\nPatient Name: {{$node[\\\"Iterate Patients\\\"].json[\\\"name\\\"]}}\\nSurgery Type: {{$node[\\\"Iterate Patients\\\"].json[\\\"surgeryType\\\"]}}\\nDays Since Surgery: {{$node[\\\"Iterate Patients\\\"].json[\\\"daysPostOp\\\"]}}\\n\\nIf the surgery was spine-related, ask about mobility and pain levels. If brain-related, ask about cognitive function, headaches, or wound healing. Instruct them to reply to the email or call the clinic if they experience any concerning symptoms. Keep the tone warm, professional, and reassuring.\"\n    }]\n  }]\n}",
+        "options": {}
+      },
+      "name": "Generate Follow-Up Email",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        850,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "const geminiResp = items[0].json.candidates[0].content.parts[0].text;\nreturn [{\n  json: {\n    ...items[0].json,\n    emailBody: geminiResp\n  }\n}];"
+      },
+      "name": "Parse Email Body",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        1050,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "care@drsayuj.info",
+        "toEmail": "={{$node[\"Iterate Patients\"].json[\"email\"]}}",
+        "subject": "Checking in on your recovery - Dr. Sayuj",
+        "text": "={{$node[\"Parse Email Body\"].json[\"emailBody\"]}}",
+        "html": "=<p>{{$node[\"Parse Email Body\"].json[\"emailBody\"].replace(/\\n/g, '<br>')}}</p>"
+      },
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [
+        1250,
+        300
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "YOUR_SMTP_CREDENTIAL_ID",
+          "name": "SMTP Account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Daily Schedule": {
+      "main": [
+        [
+          {
+            "node": "Fetch Recent Surgeries",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Recent Surgeries": {
+      "main": [
+        [
+          {
+            "node": "Iterate Patients",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Iterate Patients": {
+      "main": [
+        [
+          {
+            "node": "Generate Follow-Up Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Follow-Up Email": {
+      "main": [
+        [
+          {
+            "node": "Parse Email Body",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Email Body": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "id": "2b3c4d5e-6f7a-8b9c-0d1e-2f3a4b5c6d7e"
+}

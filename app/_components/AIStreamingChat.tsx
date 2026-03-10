@@ -231,139 +231,44 @@ export default function AIStreamingChat({
         </div>
 
         {/* Messages */}
+        <div className="h-96 overflow-y-auto p-4 space-y-4">
+          {messages.map((message, index) => {
+            // Helper to get text content from parts
+            const textContent = message.parts
+              .filter(part => part.type === 'text')
+              .map(part => (part as any).text)
+              .join('');
 
-        <Conversation className="h-96 relative bg-[var(--color-surface)]">
-          <ConversationContent className="p-4 space-y-6">
-            {messages.map((message, index) => {
-              const textContent = message.parts
-                .filter(part => part.type === 'text')
-                .map(part => (part as any).text)
-                .join('');
+            return (
+              <Fragment key={message.id}>
+              <div
+                className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+              >
+                <div
+                  className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
+                    message.role === 'user'
+                      ? 'bg-[var(--color-primary-500)] text-white'
+                      : 'bg-[var(--color-background)] text-[var(--color-text-primary)]'
+                  }`}
+                >
+                  <p className="text-sm whitespace-pre-wrap">{textContent}</p>
 
-              const isLastMessage = index === messages.length - 1;
-
-              return (
-                <Fragment key={message.id}>
-                  <Message from={message.role} className="w-full">
-                    <MessageContent className={message.role === 'user' ? 'bg-[var(--color-primary-500)] text-white p-3 rounded-lg max-w-[85%] ml-auto' : 'w-full'}>
-                      {textContent && (
-                        <div className={message.role === 'user' ? 'text-sm' : ''}>
-                          {message.role === 'assistant' ? (
-                            <MessageResponse>{textContent}</MessageResponse>
-                          ) : (
-                            textContent
-                          )}
-                        </div>
-                      )}
-
-                      {/* Attachments */}
-                      {((message as any).experimental_attachments || message.parts?.filter(p => (p.type as string) === "file" || (p.type as string) === "image")).length > 0 && (
-                        <div className="mt-2">
-                          <Attachments variant="list">
-                            {((message as any).experimental_attachments || message.parts?.filter(p => (p.type as string) === "file" || (p.type as string) === "image")).map((file: any, i: number) => (
-                              <Attachment key={`${message.id}-file-${i}`} data={file as any}>
-                                <AttachmentInfo />
-                              </Attachment>
-                            ))}
-                          </Attachments>
-                        </div>
-                      )}
-
-                      {/* Tools (Confirmation / CoT) */}
-                      {message.parts?.filter(part => part.type === "tool-invocation").map((part: any) => {
-                        const tool = part;
-                        let icon = StethoscopeIcon;
-                        let label = "Processing tool: " + tool.toolName;
-                        if (tool.toolName === "searchContent") { icon = SearchIcon; label = "Searching medical information..."; }
-                        else if (tool.toolName === "checkAvailability") { icon = CalendarIcon; label = "Checking schedule availability..."; }
-                        else if (tool.toolName === "getServices" || tool.toolName === "getLocations") { icon = StethoscopeIcon; label = "Retrieving clinic details..."; }
-                        const isCompleted = tool.state === "result";
-
-                        return (
-                          <div key={tool.toolInvocationId} className="mt-4">
-                            {tool.toolName !== "bookAppointment" && (
-                              <div className="mb-2">
-                                <ChainOfThought defaultOpen={!isCompleted}>
-                                  <ChainOfThoughtHeader>{isCompleted ? `Completed: ${label}` : `Thinking: ${label}`}</ChainOfThoughtHeader>
-                                  <ChainOfThoughtContent>
-                                    <ChainOfThoughtStep icon={icon} label={label} description={isCompleted ? "Tool executed successfully" : "Tool is currently executing"} status={isCompleted ? "complete" : "active"} />
-                                    {isCompleted && tool.result && (
-                                      <div className="text-xs mt-2 bg-black/5 p-2 rounded max-h-32 overflow-y-auto">
-                                        <pre className="whitespace-pre-wrap font-mono">{typeof tool.result === 'string' ? tool.result : JSON.stringify(tool.result).slice(0, 150) + "..."}</pre>
-                                      </div>
-                                    )}
-                                  </ChainOfThoughtContent>
-                                </ChainOfThought>
-                              </div>
-                            )}
-
-                            {tool.approval && (
-                              <Confirmation approval={tool.approval} state={tool.state}>
-                                <ConfirmationRequest>
-                                  <p className="font-medium text-sm text-[var(--color-text-primary)] mb-2">This action requires your confirmation:</p>
-                                  <div className="bg-slate-50 p-3 rounded border border-slate-200 text-xs">
-                                    {tool.toolName === "bookAppointment" ? (
-                                      <div className="text-slate-700">
-                                        <p className="font-semibold mb-2 text-slate-900">Appointment Request</p>
-                                        <ul className="space-y-1">
-                                          <li><span className="font-medium">Patient:</span> {tool.args.patientName}</li>
-                                          <li><span className="font-medium">Date/Time:</span> {tool.args.appointmentDate} at {tool.args.appointmentTime}</li>
-                                          <li><span className="font-medium">Reason:</span> {tool.args.reason}</li>
-                                          <li><span className="font-medium">Contact:</span> {tool.args.phone}</li>
-                                        </ul>
-                                      </div>
-                                    ) : (
-                                      <pre className="text-slate-700">{JSON.stringify(tool.args, null, 2)}</pre>
-                                    )}
-                                  </div>
-                                </ConfirmationRequest>
-                                <ConfirmationAccepted>
-                                  <CheckIcon className="size-4 text-green-600" />
-                                  <span className="text-green-700 font-medium text-sm">You approved this request</span>
-                                </ConfirmationAccepted>
-                                <ConfirmationRejected>
-                                  <XIcon className="size-4 text-red-600" />
-                                  <span className="text-red-700 font-medium text-sm">You rejected this request</span>
-                                </ConfirmationRejected>
-                                <ConfirmationActions className="mt-3">
-                                  <ConfirmationAction variant="outline" onClick={() => addToolApprovalResponse({ id: tool.toolInvocationId, approved: false })}>Reject</ConfirmationAction>
-                                  <ConfirmationAction variant="default" className="bg-[var(--color-primary-600)]" onClick={() => addToolApprovalResponse({ id: tool.toolInvocationId, approved: true })}>Approve</ConfirmationAction>
-                                </ConfirmationActions>
-                              </Confirmation>
-                            )}
-                          </div>
-                        );
-                      })}
-                    </MessageContent>
-                  </Message>
-
-                  {/* Message Actions */}
-                  {message.role === 'assistant' && isLastMessage && textContent && (
-                    <div className="flex justify-between items-center mt-2 pl-12">
-                      <MessageActions className="opacity-100 flex gap-2">
-                        <MessageAction tooltip="Copy message" label="Copy" onClick={() => navigator.clipboard.writeText(textContent)}>
-                          <CopyIcon className="size-3" />
-                        </MessageAction>
-                        <div className="inline-block relative">
-                          <Context maxTokens={8000} usedTokens={textContent.length * 2} usage={{ inputTokens: textContent.length, outputTokens: textContent.length, totalTokens: textContent.length * 2 } as any} modelId="openai:gpt-4">
-                            <ContextTrigger asChild>
-                              <button className="h-6 text-xs gap-1 px-2 hover:bg-slate-100 rounded border border-transparent flex items-center text-slate-500">
-                                <InfoIcon className="size-3" /> Context
-                              </button>
-                            </ContextTrigger>
-                            <AIContextContent className="w-64">
-                              <ContextContentHeader>AI Model Usage</ContextContentHeader>
-                              <ContextContentBody>
-                                <ContextInputUsage />
-                                <ContextOutputUsage />
-                              </ContextContentBody>
-                              <ContextContentFooter />
-                            </AIContextContent>
-                          </Context>
-                        </div>
-                      </MessageActions>
-                    </div>
-                  )}
+                </div>
+              </div>
+              </Fragment>
+            );
+          })}
+          
+          {isLoading && (
+            <div className="flex justify-start">
+              <div className="bg-[var(--color-background)] text-[var(--color-text-primary)] px-4 py-2 rounded-lg">
+                <div className="flex items-center space-x-2">
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-[var(--color-primary-500)]"></div>
+                  <span className="text-sm">AI is thinking...</span>
+                </div>
+              </div>
+            </div>
+          )}
 
                   {/* Checkpoints */}
                   {checkpoints.find(cp => cp.messageIndex === index) && (
@@ -413,34 +318,21 @@ export default function AIStreamingChat({
         )}
 
         {/* Input Form */}
-        <div className="p-4 border-t border-[var(--color-border)]">
-          {files && files.length > 0 && (
-            <div className="mb-2">
-              <Attachments variant="inline">
-                {Array.from(files).map((file, i) => (
-                  <Attachment
-                    key={`upload-${i}`}
-                    data={{ id: `upload-${i}`, name: file.name, contentType: file.type } as any}
-                    onRemove={() => {
-                      setFiles(undefined);
-                    }}
-                  >
-                    <AttachmentPreview />
-                    <AttachmentInfo />
-                    <AttachmentRemove />
-                  </Attachment>
-                ))}
-              </Attachments>
-            </div>
-          )}
-
-          <PromptInput
-            onSubmit={(msg) => {
-              const fileList = files ? Array.from(files) : undefined;
-              onFormSubmit({ text: msg.text, files: fileList });
-            }}
-          >
-            <PromptInputTextarea
+        <form onSubmit={onFormSubmit} className="p-4 border-t border-[var(--color-border)]">
+          <div className="flex space-x-2">
+            <label className="flex items-center justify-center px-4 py-2 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-lg cursor-pointer hover:bg-[var(--color-primary-50)] text-[var(--color-text-secondary)] transition-colors">
+              <span className="sr-only">Upload file</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+              <input
+                type="file"
+                className="hidden"
+                onChange={(e) => setFiles(e.target.files || undefined)}
+                multiple
+                disabled={isLoading}
+              />
+            </label>
+            <input
+              type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Type your message here..."

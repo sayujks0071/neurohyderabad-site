@@ -1,0 +1,196 @@
+{
+  "name": "Medical Research Alert",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "seconds": 0,
+              "minutes": 0,
+              "hours": 0
+            }
+          ]
+        }
+      },
+      "name": "Weekly Schedule",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=neurosurgery[Title/Abstract]+OR+spine+surgery[Title/Abstract]+OR+brain+tumor[Title/Abstract]&retmode=json&retmax=5&sort=date",
+        "method": "GET"
+      },
+      "name": "Search PubMed",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id={{$node[\"Search PubMed\"].json[\"esearchresult\"][\"idlist\"].join(',')}}&retmode=json",
+        "method": "GET"
+      },
+      "name": "Fetch Summaries",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        650,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "const ids = items[0].json.result.uids;\nconst summaries = ids.map(id => items[0].json.result[id].title);\nreturn [{ json: { summaries } }];"
+      },
+      "name": "Extract Titles",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        850,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key={{$env.GEMINI_API_KEY}}",
+        "method": "POST",
+        "bodyParametersUi": {
+          "parameter": []
+        },
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "body": "={\n  \"contents\": [{\n    \"parts\": [{\n      \"text\": \"You are a medical intelligence AI for Dr. Sayuj, a leading neurosurgeon. Summarize the following recent PubMed article titles in a brief, easily readable email format. Highlight the clinical significance for spine surgery, neuro-oncology, or general neurosurgery.\\n\\nTitles:\\n{{$node[\\\"Extract Titles\\\"].json[\\\"summaries\\\"].join('\\\\n')}}\\n\\nKeep the summary concise and focused on how this research might impact patient care or surgical techniques.\"\n    }]\n  }]\n}",
+        "options": {}
+      },
+      "name": "Generate AI Summary",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        1050,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "const geminiResp = items[0].json.candidates[0].content.parts[0].text;\nreturn [{\n  json: {\n    emailBody: geminiResp\n  }\n}];"
+      },
+      "name": "Parse AI Output",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        1250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "alerts@drsayuj.info",
+        "toEmail": "dr@drsayuj.info",
+        "subject": "Weekly Neurosurgery Research Alert - PubMed",
+        "text": "={{$node[\"Parse AI Output\"].json[\"emailBody\"]}}",
+        "html": "=<p>{{$node[\"Parse AI Output\"].json[\"emailBody\"].replace(/\\n/g, '<br>')}}</p>"
+      },
+      "name": "Email Doctor",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [
+        1450,
+        300
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "YOUR_SMTP_CREDENTIAL_ID",
+          "name": "SMTP Account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Weekly Schedule": {
+      "main": [
+        [
+          {
+            "node": "Search PubMed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search PubMed": {
+      "main": [
+        [
+          {
+            "node": "Fetch Summaries",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Summaries": {
+      "main": [
+        [
+          {
+            "node": "Extract Titles",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Titles": {
+      "main": [
+        [
+          {
+            "node": "Generate AI Summary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate AI Summary": {
+      "main": [
+        [
+          {
+            "node": "Parse AI Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse AI Output": {
+      "main": [
+        [
+          {
+            "node": "Email Doctor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "id": "8f9e0d1c-2b3a-4c5b-6d7e-8a9b0c1d2e3f"
+}
