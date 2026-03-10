@@ -77,11 +77,11 @@ describe('AI Sandbox API', () => {
     });
 
     // Mock streamText to return a dummy response
-    const mockToDataStreamResponse = vi.fn().mockReturnValue(new Response('stream data'));
+    const mockToTextStreamResponse = vi.fn().mockReturnValue(new Response('stream data'));
     (streamText as any).mockReturnValue({
-      toDataStreamResponse: mockToDataStreamResponse,
-      toTextStreamResponse: mockToDataStreamResponse,
-      toUIMessageStreamResponse: mockToDataStreamResponse,
+      toDataStreamResponse: mockToTextStreamResponse,
+      toTextStreamResponse: mockToTextStreamResponse,
+      toUIMessageStreamResponse: mockToTextStreamResponse,
     });
 
     const req = new NextRequest('http://localhost/api/ai/sandbox', {
@@ -103,7 +103,7 @@ describe('AI Sandbox API', () => {
       messages: [{ role: 'user', content: 'hello' }],
     }));
 
-    expect(mockToDataStreamResponse).toHaveBeenCalled();
+    expect(mockToTextStreamResponse).toHaveBeenCalled();
   });
 
   it('should use default model if no requestedModel provided', async () => {
@@ -112,11 +112,11 @@ describe('AI Sandbox API', () => {
 
     (getTextModel as any).mockReturnValue({ id: 'default-model' });
 
-    const mockToDataStreamResponse = vi.fn().mockReturnValue(new Response('stream data'));
+    const mockToTextStreamResponse = vi.fn().mockReturnValue(new Response('stream data'));
     (streamText as any).mockReturnValue({
-      toDataStreamResponse: mockToDataStreamResponse,
-      toTextStreamResponse: mockToDataStreamResponse,
-      toUIMessageStreamResponse: mockToDataStreamResponse,
+      toDataStreamResponse: mockToTextStreamResponse,
+      toTextStreamResponse: mockToTextStreamResponse,
+      toUIMessageStreamResponse: mockToTextStreamResponse,
     });
 
     const req = new NextRequest('http://localhost/api/ai/sandbox', {
