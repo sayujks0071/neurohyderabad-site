@@ -242,8 +242,8 @@ export default function AIStreamingChat({
                       )}
 
                       {/* Tools (Confirmation / CoT) */}
-                      {message.parts?.filter(part => part.type === "tool-invocation").map((part: any) => {
-                        const tool = part;
+                      {message.parts?.filter(part => part.type.startsWith("tool-")).map((part: any) => {
+                        const tool = Object.keys(part).includes('toolInvocationId') ? part : { ...part, toolInvocationId: part.toolCallId, args: part.args || part.input, state: part.state || 'approval-requested' };
                         let icon = StethoscopeIcon;
                         let label = "Processing tool: " + tool.toolName;
                         if (tool.toolName === "searchContent") { icon = SearchIcon; label = "Searching medical information..."; }
@@ -298,8 +298,8 @@ export default function AIStreamingChat({
                                   <span className="text-red-700 font-medium text-sm">You rejected this request</span>
                                 </ConfirmationRejected>
                                 <ConfirmationActions className="mt-3">
-                                  <ConfirmationAction variant="outline" onClick={() => addToolApprovalResponse({ id: tool.toolInvocationId, approved: false })}>Reject</ConfirmationAction>
-                                  <ConfirmationAction variant="default" className="bg-[var(--color-primary-600)]" onClick={() => addToolApprovalResponse({ id: tool.toolInvocationId, approved: true })}>Approve</ConfirmationAction>
+                                  <ConfirmationAction variant="outline" onClick={() => addToolApprovalResponse({ id: tool.approval!.id, approved: false })}>Reject</ConfirmationAction>
+                                  <ConfirmationAction variant="default" className="bg-[var(--color-primary-600)]" onClick={() => addToolApprovalResponse({ id: tool.approval!.id, approved: true })}>Approve</ConfirmationAction>
                                 </ConfirmationActions>
                               </Confirmation>
                             )}
