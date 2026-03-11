@@ -231,7 +231,12 @@ export default function AIStreamingChat({
                       </Attachments>
                     </div>
                   )}
-
+                </div>
+              </div>
+            </Fragment>
+          );
+        })}
+        </div>
         <Conversation className="h-96 relative bg-[var(--color-surface)]">
           <ConversationContent className="p-4 space-y-6">
             {messages.map((message, index) => {

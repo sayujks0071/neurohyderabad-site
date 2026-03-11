@@ -287,6 +287,7 @@ export default function BookingForm({
                     }`}
                     aria-valuetext={painScoreValue ? `Score: ${painScoreValue}${painScoreValue >= 8 ? ' (Severe)' : painScoreValue <= 3 ? ' (Mild)' : ''}` : "Score: 5"}
                     {...register("painScore")}
+                    name="painScore"
                   />
                   <div className="text-center">
                     <span className="block text-sm font-bold text-slate-400" aria-hidden="true">10</span>
@@ -327,6 +328,7 @@ export default function BookingForm({
                   id="mriScanAvailable"
                   className="w-5 h-5 text-cyan-600 rounded focus:ring-cyan-500 border-gray-300 cursor-pointer"
                   {...register("mriScanAvailable")}
+                  name="mriScanAvailable"
                 />
                 <label
                   htmlFor="mriScanAvailable"
