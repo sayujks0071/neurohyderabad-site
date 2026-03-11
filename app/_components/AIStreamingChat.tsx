@@ -129,14 +129,12 @@ export default function AIStreamingChat({
 
   const quickActions = [
     "I need to book a new consultation",
-    "I want to reschedule my appointment",
     "I have severe headache and dizziness",
     "I need information about spine surgery",
     "What are your clinic hours?",
     "Tell me about endoscopic spine surgery",
     "Cost of slip disc surgery",
-    "Book an appointment",
-    "How does machine learning work?"
+    "Where is the clinic located?"
   ];
 
   return (
@@ -226,25 +224,24 @@ export default function AIStreamingChat({
             <div ref={messagesEndRef} className="h-px" />
         </div>
 
-        {/* Quick Actions - Only show if just initial message */}
-        {messages.length <= 1 && (
-          <div className="p-4">
-            <p className="text-sm text-[var(--color-text-secondary)] mb-3 font-semibold">Quick actions:</p>
-            <Suggestions>
-              {quickActions.map((action, index) => (
-                <Suggestion
-                  key={index}
-                  onClick={() => handleQuickAction(action)}
-                  suggestion={action}
-                  className="text-xs border-[var(--color-primary-500)] text-[var(--color-primary-700)] hover:bg-[var(--color-primary-100)] transition-colors disabled:opacity-50 whitespace-nowrap"
-                />
-              ))}
-            </Suggestions>
-          </div>
-        )}
-
         {/* Input Form */}
-        <div className="p-4 border-t border-[var(--color-border)]">
+        <div className="p-4 border-t border-[var(--color-border)] flex flex-col gap-3">
+          {/* Quick Actions - Only show if just initial message */}
+          {messages.length <= 1 && (
+            <div className="w-full">
+              <Suggestions>
+                {quickActions.map((action, index) => (
+                  <Suggestion
+                    key={index}
+                    onClick={() => handleQuickAction(action)}
+                    suggestion={action}
+                    className="text-xs border-[var(--color-primary-500)] text-[var(--color-primary-700)] hover:bg-[var(--color-primary-100)] transition-colors disabled:opacity-50 whitespace-nowrap"
+                  />
+                ))}
+              </Suggestions>
+            </div>
+          )}
+
           {files && files.length > 0 && (
             <div className="mb-2">
               <Attachments variant="inline">
