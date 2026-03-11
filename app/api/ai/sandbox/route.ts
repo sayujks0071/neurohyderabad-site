@@ -1,12 +1,13 @@
 import { streamText } from 'ai';
 import { getAIClient, hasAIConfig } from '@/src/lib/ai/gateway';
 import { rateLimit } from '@/src/lib/rate-limit';
+import { NextResponse } from 'next/server';
 
 export const maxDuration = 30;
 
 export async function POST(req: Request) {
   try {
-    const rawIp = request.headers.get('x-forwarded-for') ?? '127.0.0.1';
+    const rawIp = req.headers.get('x-forwarded-for') ?? '127.0.0.1';
     const ip = rawIp.split(',')[0].trim();
     // Provide default rate limit parameters if they are missing
     const { success } = await rateLimit(`ai-sandbox-${ip}`, 50, 60000);

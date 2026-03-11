@@ -5,6 +5,7 @@ import { useStatsigEvents } from '../../src/lib/statsig-events';
 import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport, type UIMessage } from 'ai';
 import { Shimmer } from "@/src/components/ai-elements/shimmer";
+import { Suggestion, Suggestions } from "@/src/components/ai-elements/suggestion";
 
 interface OpenAIAPIAgentProps {
   pageSlug: string;
