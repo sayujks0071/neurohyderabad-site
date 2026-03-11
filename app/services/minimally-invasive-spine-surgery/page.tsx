@@ -23,8 +23,8 @@ import SurgeryComparisonTable from '@/src/components/SurgeryComparisonTable';
 import EndoscopicProcedureSteps from '@/src/components/EndoscopicProcedureSteps';
 
 const baseMetadata = makeMetadata({
-  title: 'Minimally Invasive Spine Surgery Hyderabad | Day Care | Dr Sayuj',
-  description: 'Minimally Invasive Spine Surgery Hyderabad: Day Care procedure with same-day discharge. 1000+ successful endoscopic surgeries by Dr Sayuj. Book Consult.',
+  title: 'Minimally Invasive Spine Surgery Hyderabad | Dr Sayuj',
+  description: 'Minimally Invasive Spine Surgery in Hyderabad. Day care procedure with same-day discharge. 1000+ successful endoscopic surgeries. Book now.',
   canonicalPath: '/services/minimally-invasive-spine-surgery',
 });
 
@@ -168,6 +168,11 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
       question: 'What is Minimally Invasive Spine Surgery?',
       answer:
         'Minimally invasive spine surgery (MISS) uses smaller incisions and endoscopic or microscopic instruments to reach the spine while gently moving muscles instead of cutting them. This approach reduces tissue trauma, pain, and blood loss compared to traditional open surgery.'
+    },
+    {
+      question: 'Laser vs Endoscopic Spine Surgery: Which is better?',
+      answer:
+        'Laser spine surgery uses heat to shrink disc material, but it is often less effective for structural issues like large herniations or bone spurs. Endoscopic spine surgery uses a tiny camera and specialized instruments to physically remove the compression, offering more definitive relief and a higher success rate for most patients.'
     },
     {
       question: 'What conditions can be treated with Minimally Invasive Spine Surgery?',

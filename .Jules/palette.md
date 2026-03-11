@@ -6,3 +6,7 @@
 ## 2025-05-18 - [Add aria-hidden to decorative required asterisks]
 **Learning:** Decorative characters like `*` for required form fields should be hidden from screen readers using `aria-hidden="true"`. This prevents redundant announcements like "asterisk". The `required` or `aria-required` attribute on the input itself is what should convey this state to assistive technologies.
 **Action:** Added `aria-hidden="true"` to the `*` span elements in `Input.tsx`, `Select.tsx`, and `Textarea.tsx` within `packages/appointment-form/ui/`.
+
+## 2024-05-15 - Dynamic ARIA Labels for Feedback Buttons
+**Learning:** For interactive buttons that change state without navigating (like "Copy to clipboard"), `title` is often not read reliably by screen readers when state changes.
+**Action:** Used `aria-live="polite"` combined with a dynamic `aria-label={copied ? "Copied" : "Copy"}` to provide immediate, accessible feedback for micro-interactions without using visual toast notifications.
