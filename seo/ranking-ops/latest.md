@@ -1,8 +1,8 @@
 # Latest SEO Operation
 
-**Date**: 2026-03-06
-**Focus**: Content Gap Patch / YMYL Safety Signals
-**Page**: `app/services/epilepsy-surgery-hyderabad/page.tsx`
-**Action**: Added a dedicated "When to Seek Immediate Emergency Care (Red Flags)" section to the Epilepsy Surgery page, improving topical depth and aligning with Google's YMYL quality rater guidelines by providing safe, actionable emergency advice (e.g., Status Epilepticus).
+**Date**: 2026-03-10
+**Focus**: On-page SEO uplift (Content Gap)
+**Page**: `app/spine-surgery/page.tsx`
+**Action**: Added a "Risks & Safety Protocols" section to the Spine Surgery pillar page. Addressing risks transparently is a key E-E-A-T factor for medical (YMYL) pages. It pairs potential risks (like dural tears and infection) with Dr. Sayuj's specific mitigation strategies (like endoscopic magnification and awake surgery capabilities).
 
-**Report**: [View Full Report](./2026-03-06/report.md)
+**Report**: [View Full Report](./2026-03-10/report.md)

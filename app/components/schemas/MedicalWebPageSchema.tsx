@@ -68,7 +68,9 @@ export default function MedicalWebPageSchema({
       "jobTitle": "Neurosurgeon",
       "sameAs": [
         "https://www.linkedin.com/in/drsayujkrishnan/",
-        "https://scholar.google.com/citations?user=drsayujkrishnan"
+        "https://scholar.google.com/citations?user=drsayujkrishnan",
+        "https://www.practo.com/hyderabad/doctor/dr-sayuj-krishnan-1-neurosurgeon",
+        "https://www.justdial.com/Hyderabad/Dr-Sayuj-Krishnan-Yashoda-Hospitals-Malakpet/040PXX40-XX40-190314164828-M7U7_BZDET"
       ],
       "hasCredential": {
         "@type": "EducationalOccupationalCredential",

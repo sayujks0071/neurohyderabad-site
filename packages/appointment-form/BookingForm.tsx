@@ -116,7 +116,7 @@ export default function BookingForm({
       mriScanAvailable: parsed.mriScanAvailable,
     };
     await onSubmit(submissionData);
-    reset();
+    reset(defaultValues as BookingFormValues);
   };
 
   return (
@@ -137,6 +137,7 @@ export default function BookingForm({
           noValidate
           toolname="requestAppointment"
           tooldescription="Request a medical appointment with Dr. Sayuj Krishnan"
+          toolautosubmit="false"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
             <div className="md:col-span-2">
@@ -317,21 +318,21 @@ export default function BookingForm({
               </div>
 
               <div
-                className="flex items-center p-4 bg-slate-50 rounded-xl border border-slate-200 hover:border-cyan-300 transition-colors"
+                className="flex items-center p-4 bg-slate-50 rounded-xl border border-slate-300 hover:border-cyan-400 transition-colors shadow-sm"
                 title="Check this if you have digital or physical copies of your scans"
               >
                 {/* Clinical Context: MRI Availability */}
                 <input
                   type="checkbox"
                   id="mriScanAvailable"
-                  className="w-5 h-5 text-cyan-600 rounded focus:ring-cyan-500 border-gray-300"
+                  className="w-5 h-5 text-cyan-600 rounded focus:ring-cyan-500 border-gray-300 cursor-pointer"
                   {...register("mriScanAvailable")}
                 />
                 <label
                   htmlFor="mriScanAvailable"
-                  className="ml-3 text-sm font-medium text-slate-700 cursor-pointer select-none"
+                  className="ml-3 text-sm font-medium text-slate-800 cursor-pointer select-none"
                 >
-                  I have recent MRI/CT Scan reports available
+                  I have a recent MRI/CT Scan report available
                 </label>
               </div>
 
@@ -347,7 +348,7 @@ export default function BookingForm({
           </div>
 
           <div className="mt-10 pt-6 border-t border-slate-200 text-center">
-            <Button type="submit" isLoading={isSubmitting}>
+            <Button type="submit" isLoading={isSubmitting} disabled={isSubmitting}>
               {isSubmitting ? "Sending..." : "Submit Request"}
             </Button>
           </div>

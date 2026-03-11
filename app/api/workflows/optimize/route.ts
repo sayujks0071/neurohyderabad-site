@@ -6,17 +6,24 @@
 
 import { start } from "workflow/api";
 import { NextRequest, NextResponse } from "next/server";
+import crypto from "crypto";
 import { 
   runWeeklyOptimization,
   runOptimizationWithCallback,
   runOptimizationWithDeadline,
 } from "@/workflows/comprehensive-optimization";
 
-// Verify API key
+// Verify API key securely
 function verifyApiKey(request: NextRequest): boolean {
   const apiKey = request.headers.get("x-api-key");
   const validKey = process.env.WORKFLOW_API_KEY || process.env.CRON_SECRET;
-  return apiKey === validKey;
+
+  if (!apiKey || !validKey) return false;
+
+  const h1 = crypto.createHash("sha256").update(apiKey).digest();
+  const h2 = crypto.createHash("sha256").update(validKey).digest();
+
+  return crypto.timingSafeEqual(h1, h2);
 }
 
 /**

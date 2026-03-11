@@ -6,6 +6,7 @@
 
 import { start } from "workflow/api";
 import { NextRequest, NextResponse } from "next/server";
+import crypto from "crypto";
 import { 
   runDailyContentOptimization,
   generateBlogOutline,
@@ -13,11 +14,17 @@ import {
   scheduleContent
 } from "@/workflows/content-automation";
 
-// Verify API key for protected endpoints
+// Verify API key for protected endpoints securely
 function verifyApiKey(request: NextRequest): boolean {
   const apiKey = request.headers.get("x-api-key");
   const validKey = process.env.WORKFLOW_API_KEY || process.env.CRON_SECRET;
-  return apiKey === validKey;
+
+  if (!apiKey || !validKey) return false;
+
+  const h1 = crypto.createHash("sha256").update(apiKey).digest();
+  const h2 = crypto.createHash("sha256").update(validKey).digest();
+
+  return crypto.timingSafeEqual(h1, h2);
 }
 
 /**

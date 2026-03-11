@@ -12,14 +12,18 @@ vi.mock('@/src/lib/rate-limit', () => ({
 }));
 
 // Mock streamText from ai
-const mockToDataStreamResponse = vi.fn(() => new Response('mock-stream-response'));
-vi.mock('ai', () => ({
-  streamText: vi.fn(() => ({
-    toDataStreamResponse: mockToDataStreamResponse,
-    toTextStreamResponse: mockToDataStreamResponse,
-    toUIMessageStreamResponse: mockToDataStreamResponse,
-  })),
-}));
+const mockToTextStreamResponse = vi.fn(() => new Response('mock-stream-response'));
+vi.mock('ai', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('ai')>();
+  return {
+    ...actual,
+    streamText: vi.fn(() => ({
+      toDataStreamResponse: mockToTextStreamResponse,
+      toTextStreamResponse: mockToTextStreamResponse,
+      toUIMessageStreamResponse: mockToTextStreamResponse,
+    })),
+  };
+});
 
 // Import the route handler after mocks are set up
 import { POST } from './route';

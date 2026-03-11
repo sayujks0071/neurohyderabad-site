@@ -5,7 +5,11 @@ import { WelcomeScene } from '../components/ConsultationPrep/WelcomeScene';
 import { CalendarScene } from '../components/ConsultationPrep/CalendarScene';
 import { PrepStepsScene } from '../components/ConsultationPrep/PrepStepsScene';
 import { TransitionFlash } from '../components/shared/TransitionFlash';
+import { ProgressBar } from '../components/shared/ProgressBar';
 import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion';
+
+// Transition Easing
+const smoothEase = Easing.inOut(Easing.ease);
 
 /**
  * Personalized Consultation Prep Video (30 seconds @ 30fps = 900 frames)
@@ -25,9 +29,6 @@ export const ConsultationPrepVideo: React.FC<ConsultationPrepProps> = ({
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const prefersReducedMotion = usePrefersReducedMotion();
-
-  // Transition Easing
-  const smoothEase = Easing.inOut(Easing.ease);
 
   // Scene 1 Exit: Fade out, scale down slightly
   const scene1ExitOpacity = useMemo(() => interpolate(frame, [160, 180], [1, 0], {
@@ -132,6 +133,9 @@ export const ConsultationPrepVideo: React.FC<ConsultationPrepProps> = ({
       {/* Transition Flashes (Placed on top for smooth effect) */}
       <TransitionFlash startFrame={165} />
       <TransitionFlash startFrame={445} />
+
+      {/* Global Progress Indicator */}
+      <ProgressBar />
     </AbsoluteFill>
   );
 };

@@ -237,7 +237,10 @@ export default function SciaticaTreatmentPage() {
         </div>
 
         <div className="bg-blue-50 p-6 rounded-lg">
-          <h3 className="text-xl font-semibold mb-4 text-blue-700">Why Choose Dr. Sayuj?</h3>
+          <h3 className="text-xl font-semibold mb-4 text-blue-700">Why Choose Dr. Sayuj as Your Sciatica Specialist in Hyderabad?</h3>
+          <p className="text-gray-700 mb-4">
+            As a leading spine and sciatica specialist in Hyderabad, Dr. Sayuj Krishnan focuses on an evidence-based, conservative-first approach to provide lasting relief from radiating leg pain.
+          </p>
           <ul className="space-y-3 text-gray-700">
             <li className="flex items-start">
               <span className="text-green-600 mr-2 mt-1">✓</span>
@@ -258,6 +261,41 @@ export default function SciaticaTreatmentPage() {
           </ul>
         </div>
       </div>
+
+      <section className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-blue-700">When to See a Doctor for Sciatica in Hyderabad (Red Flags)</h2>
+        <div className="bg-red-50 p-6 rounded-lg border border-red-100">
+          <p className="text-gray-700 mb-4 font-semibold">
+            Do not ignore sciatica if you have:
+          </p>
+          <ul className="space-y-2 text-gray-700">
+            <li className="flex items-start">
+              <span className="text-red-600 mr-2 mt-1">!</span>
+              <span>Sudden, severe pain or numbness in both legs</span>
+            </li>
+            <li className="flex items-start">
+              <span className="text-red-600 mr-2 mt-1">!</span>
+              <span>Loss of bowel or bowel control (incontinence)</span>
+            </li>
+            <li className="flex items-start">
+              <span className="text-red-600 mr-2 mt-1">!</span>
+              <span>"Saddle anesthesia" - numbness in the groin area</span>
+            </li>
+            <li className="flex items-start">
+              <span className="text-red-600 mr-2 mt-1">!</span>
+              <span>Foot drop (difficulty lifting the front of your foot)</span>
+            </li>
+          </ul>
+          <p className="text-sm text-red-700 mt-4 mb-4">
+            These could be signs of Cauda Equina Syndrome, a medical emergency requiring immediate surgery.
+          </p>
+          <div className="mt-4">
+            <Link href="/appointments" className="inline-block bg-red-600 text-white px-5 py-2.5 rounded-lg font-semibold hover:bg-red-700 transition-colors shadow-sm">
+              Book Urgent Appointment
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* Trust Signals Section */}
       <div className="mb-12">
@@ -393,36 +431,6 @@ export default function SciaticaTreatmentPage() {
           >
             Chat with Doctor
           </a>
-        </div>
-      </section>
-
-      <section className="mb-12">
-        <h2 className="text-2xl font-semibold mb-6 text-blue-700">Red Flags: When to See a Doctor Urgently</h2>
-        <div className="bg-red-50 p-6 rounded-lg border border-red-100">
-          <p className="text-gray-700 mb-4 font-semibold">
-            Do not ignore sciatica if you have:
-          </p>
-          <ul className="space-y-2 text-gray-700">
-            <li className="flex items-start">
-              <span className="text-red-600 mr-2 mt-1">!</span>
-              <span>Sudden, severe pain or numbness in both legs</span>
-            </li>
-            <li className="flex items-start">
-              <span className="text-red-600 mr-2 mt-1">!</span>
-              <span>Loss of bowel or bowel control (incontinence)</span>
-            </li>
-            <li className="flex items-start">
-              <span className="text-red-600 mr-2 mt-1">!</span>
-              <span>"Saddle anesthesia" - numbness in the groin area</span>
-            </li>
-            <li className="flex items-start">
-              <span className="text-red-600 mr-2 mt-1">!</span>
-              <span>Foot drop (difficulty lifting the front of your foot)</span>
-            </li>
-          </ul>
-          <p className="text-sm text-red-700 mt-4">
-            These could be signs of Cauda Equina Syndrome, a medical emergency requiring immediate surgery.
-          </p>
         </div>
       </section>
 

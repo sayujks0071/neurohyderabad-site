@@ -1,0 +1,154 @@
+{
+  "name": "Post-Op Care Sequence",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "days",
+              "seconds": 0,
+              "minutes": 0,
+              "hours": 8
+            }
+          ]
+        }
+      },
+      "name": "Daily Schedule",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://www.drsayuj.info/api/admin/surgeries/recent",
+        "method": "GET",
+        "authentication": "header",
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "x-admin-key",
+              "value": "YOUR_ADMIN_KEY"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Fetch Recent Surgeries",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "surgeries",
+        "options": {}
+      },
+      "name": "Split Surgeries",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 1,
+      "position": [
+        650,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{Math.floor((new Date() - new Date($node[\"Split Surgeries\"].json[\"surgeryDate\"])) / (1000 * 60 * 60 * 24))}}",
+              "operation": "equal",
+              "value2": 3
+            }
+          ]
+        }
+      },
+      "name": "Check Days Post-Op",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        850,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "care@drsayuj.info",
+        "toEmail": "={{$node[\"Split Surgeries\"].json[\"patientEmail\"]}}",
+        "subject": "Checking in: 3 Days Post-Op",
+        "text": "Dear {{$node[\"Split Surgeries\"].json[\"patientName\"]}},\n\nIt has been 3 days since your {{$node[\"Split Surgeries\"].json[\"surgeryType\"]}}. We hope your recovery is progressing smoothly.\n\nPlease remember to keep your incision dry and follow your prescribed medication schedule.\n\nIf you experience severe pain, fever, or excessive swelling, please contact the clinic immediately.\n\nWarm regards,\nDr. Sayuj's Team",
+        "html": "<h2>Checking in on your recovery</h2><p>Dear {{$node[\"Split Surgeries\"].json[\"patientName\"]}},</p><p>It has been 3 days since your <b>{{$node[\"Split Surgeries\"].json[\"surgeryType\"]}}</b>. We hope your recovery is progressing smoothly.</p><p><b>Important Reminders:</b></p><ul><li>Keep your incision dry and clean.</li><li>Take your prescribed medications as directed.</li><li>Get plenty of rest.</li></ul><p><b>When to call us:</b></p><p>If you experience severe pain not controlled by medication, fever above 101°F, or excessive redness/swelling at the incision site, please contact the clinic immediately.</p><p>Warm regards,<br>Dr. Sayuj's Clinical Team</p>"
+      },
+      "name": "Send Day 3 Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [
+        1050,
+        200
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "YOUR_SMTP_CREDENTIAL_ID",
+          "name": "SMTP Account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Daily Schedule": {
+      "main": [
+        [
+          {
+            "node": "Fetch Recent Surgeries",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Recent Surgeries": {
+      "main": [
+        [
+          {
+            "node": "Split Surgeries",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Surgeries": {
+      "main": [
+        [
+          {
+            "node": "Check Days Post-Op",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Days Post-Op": {
+      "main": [
+        [
+          {
+            "node": "Send Day 3 Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "id": "f5e9d8b7-6a54-4c32-b1d9-8f7e6d5c4b3a"
+}
