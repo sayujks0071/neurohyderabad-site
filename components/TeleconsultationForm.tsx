@@ -411,6 +411,7 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
         <Button
           type="submit"
           isLoading={status === 'submitting'}
+          disabled={status === 'submitting'}
           aria-describedby="form-status"
         >
           {status === 'submitting' ? "Sending..." : "Send appointment request"}
