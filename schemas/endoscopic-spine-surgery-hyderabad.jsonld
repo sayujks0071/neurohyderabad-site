@@ -12,5 +12,10 @@
     "addressRegion": "Telangana",
     "postalCode": "500036",
     "addressCountry": "IN"
-  }
+  },
+  "sameAs": [
+    "https://www.practo.com/hyderabad/doctor/dr-sayuj-krishnan-1-neurosurgeon",
+    "https://www.justdial.com/Hyderabad/Dr-Sayuj-Krishnan-Yashoda-Hospitals-Malakpet/040PXX40-XX40-190314164828-M7U7_BZDET",
+    "https://www.linkedin.com/in/drsayujkrishnan/"
+  ]
 }

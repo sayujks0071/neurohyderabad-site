@@ -3,13 +3,13 @@
 import React, { useState, useRef, useEffect, useMemo, Fragment } from 'react';
 import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport, type UIMessage } from 'ai';
-import { ChainOfThought, ChainOfThoughtHeader, ChainOfThoughtContent, ChainOfThoughtStep } from "@/src/components/ai-elements/chain-of-thought";
+import { ChainOfThought, ChainOfThoughtHeader, ChainOfThoughtContent, ChainOfThoughtStep, ChainOfThoughtSearchResults, ChainOfThoughtSearchResult } from "@/src/components/ai-elements/chain-of-thought";
 import { Checkpoint, CheckpointTrigger, CheckpointIcon } from "@/src/components/ai-elements/checkpoint";
 import { Confirmation, ConfirmationRequest, ConfirmationAccepted, ConfirmationRejected, ConfirmationActions, ConfirmationAction } from "@/src/components/ai-elements/confirmation";
 import { Attachments, Attachment, AttachmentPreview, AttachmentInfo, AttachmentRemove } from "@/src/components/ai-elements/attachments";
 import { analytics } from "@/src/lib/analytics";
 import { Suggestion, Suggestions } from "@/src/components/ai-elements/suggestion";
-import { CheckIcon, XIcon, SearchIcon, CalendarIcon, StethoscopeIcon, RefreshCcwIcon, CopyIcon, InfoIcon } from "lucide-react";
+import { CheckIcon, XIcon, SearchIcon, CalendarIcon, StethoscopeIcon, RefreshCcwIcon, CopyIcon, InfoIcon, BookmarkIcon } from "lucide-react";
 
 import {
   Conversation,
@@ -33,6 +33,8 @@ import {
   ContextOutputUsage,
   ContextContentFooter,
 } from "@/src/components/ai-elements/context";
+
+import { Shimmer } from "@/src/components/ai-elements/shimmer";
 import {
   PromptInput,
   PromptInputTextarea,
@@ -121,15 +123,12 @@ export default function AIStreamingChat({
     scrollToBottom();
   }, [messages]);
 
-  useEffect(() => {
-    // Create checkpoint every 5 messages
-    if (messages.length > 0 && messages.length % 5 === 0) {
-      const isAlreadyCheckpoint = checkpoints.some(cp => cp.messageIndex === messages.length - 1);
-      if (!isAlreadyCheckpoint) {
-        setCheckpoints([...checkpoints, { messageIndex: messages.length - 1 }]);
-      }
+  const createCheckpoint = (messageIndex: number) => {
+    const isAlreadyCheckpoint = checkpoints.some(cp => cp.messageIndex === messageIndex);
+    if (!isAlreadyCheckpoint) {
+      setCheckpoints([...checkpoints, { messageIndex }]);
     }
-  }, [messages.length, checkpoints]);
+  };
 
   const restoreToCheckpoint = (messageIndex: number) => {
     setMessages(messages.slice(0, messageIndex + 1));
@@ -166,7 +165,7 @@ export default function AIStreamingChat({
     "I have severe headache and dizziness",
     "I need information about spine surgery",
     "What are your clinic hours?",
-    "Tell me about endoscopic spine surgery"
+    "I want to upload my MRI report for review"
   ];
 
   return (
@@ -233,8 +232,9 @@ export default function AIStreamingChat({
                         <div className="mt-2">
                           <Attachments variant="list">
                             {((message as any).experimental_attachments || message.parts?.filter(p => (p.type as string) === "file" || (p.type as string) === "image")).map((file: any, i: number) => (
-                              <Attachment key={`${message.id}-file-${i}`} data={file as any}>
-                                <AttachmentInfo />
+                              <Attachment key={`${message.id}-file-${i}`} data={{ id: `${message.id}-file-${i}`, filename: file.name || file.filename || "Attachment", mediaType: file.contentType || file.mediaType || "", type: "file", url: file.url } as any}>
+                                <AttachmentPreview />
+                                <AttachmentInfo showMediaType />
                               </Attachment>
                             ))}
                           </Attachments>
@@ -242,8 +242,8 @@ export default function AIStreamingChat({
                       )}
 
                       {/* Tools (Confirmation / CoT) */}
-                      {message.parts?.filter(part => part.type === "tool-invocation").map((part: any) => {
-                        const tool = part;
+                      {message.parts?.filter(part => part.type.startsWith("tool-")).map((part: any) => {
+                        const tool = Object.keys(part).includes('toolInvocationId') ? part : { ...part, toolInvocationId: part.toolCallId, args: part.args || part.input, state: part.state || 'approval-requested' };
                         let icon = StethoscopeIcon;
                         let label = "Processing tool: " + tool.toolName;
                         if (tool.toolName === "searchContent") { icon = SearchIcon; label = "Searching medical information..."; }
@@ -260,8 +260,22 @@ export default function AIStreamingChat({
                                   <ChainOfThoughtContent>
                                     <ChainOfThoughtStep icon={icon} label={label} description={isCompleted ? "Tool executed successfully" : "Tool is currently executing"} status={isCompleted ? "complete" : "active"} />
                                     {isCompleted && tool.result && (
-                                      <div className="text-xs mt-2 bg-black/5 p-2 rounded max-h-32 overflow-y-auto">
-                                        <pre className="whitespace-pre-wrap font-mono">{typeof tool.result === 'string' ? tool.result : JSON.stringify(tool.result).slice(0, 150) + "..."}</pre>
+                                      <div className="mt-2">
+                                        {tool.toolName === "searchContent" && Array.isArray(tool.result) ? (
+                                          <ChainOfThoughtSearchResults>
+                                            {tool.result.map((res: any, idx: number) => (
+                                              <a key={idx} href={res.url} target="_blank" rel="noopener noreferrer">
+                                                <ChainOfThoughtSearchResult className="hover:bg-slate-200 transition-colors cursor-pointer">
+                                                  {res.title}
+                                                </ChainOfThoughtSearchResult>
+                                              </a>
+                                            ))}
+                                          </ChainOfThoughtSearchResults>
+                                        ) : (
+                                          <div className="text-xs bg-black/5 p-2 rounded max-h-32 overflow-y-auto">
+                                            <pre className="whitespace-pre-wrap font-mono">{typeof tool.result === 'string' ? tool.result : JSON.stringify(tool.result).slice(0, 150) + "..."}</pre>
+                                          </div>
+                                        )}
                                       </div>
                                     )}
                                   </ChainOfThoughtContent>
@@ -298,8 +312,8 @@ export default function AIStreamingChat({
                                   <span className="text-red-700 font-medium text-sm">You rejected this request</span>
                                 </ConfirmationRejected>
                                 <ConfirmationActions className="mt-3">
-                                  <ConfirmationAction variant="outline" onClick={() => addToolApprovalResponse({ id: tool.toolInvocationId, approved: false })}>Reject</ConfirmationAction>
-                                  <ConfirmationAction variant="default" className="bg-[var(--color-primary-600)]" onClick={() => addToolApprovalResponse({ id: tool.toolInvocationId, approved: true })}>Approve</ConfirmationAction>
+                                  <ConfirmationAction variant="outline" onClick={() => addToolApprovalResponse({ id: tool.approval!.id, approved: false })}>Reject</ConfirmationAction>
+                                  <ConfirmationAction variant="default" className="bg-[var(--color-primary-600)]" onClick={() => addToolApprovalResponse({ id: tool.approval!.id, approved: true })}>Approve</ConfirmationAction>
                                 </ConfirmationActions>
                               </Confirmation>
                             )}
@@ -310,11 +324,14 @@ export default function AIStreamingChat({
                   </Message>
 
                   {/* Message Actions */}
-                  {message.role === 'assistant' && isLastMessage && textContent && (
+                  {message.role === 'assistant' && textContent && (
                     <div className="flex justify-between items-center mt-2 pl-12">
                       <MessageActions className="opacity-100 flex gap-2">
                         <MessageAction tooltip="Copy message" label="Copy" onClick={() => navigator.clipboard.writeText(textContent)}>
                           <CopyIcon className="size-3" />
+                        </MessageAction>
+                        <MessageAction tooltip="Bookmark this point in conversation" label="Bookmark" onClick={() => createCheckpoint(index)}>
+                          <BookmarkIcon className="size-3" />
                         </MessageAction>
                         <div className="inline-block relative">
                           <Context maxTokens={8000} usedTokens={textContent.length * 2} usage={{ inputTokens: textContent.length, outputTokens: textContent.length, totalTokens: textContent.length * 2 } as any} modelId="openai:gpt-4">
@@ -342,7 +359,7 @@ export default function AIStreamingChat({
                     <div className="flex justify-center my-4">
                       <Checkpoint>
                         <CheckpointIcon />
-                        <CheckpointTrigger onClick={() => restoreToCheckpoint(index)}>Restore previous conversation state</CheckpointTrigger>
+                        <CheckpointTrigger onClick={() => restoreToCheckpoint(index)}>Restore to before this topic</CheckpointTrigger>
                       </Checkpoint>
                     </div>
                   )}
@@ -352,8 +369,8 @@ export default function AIStreamingChat({
 
             {isLoading && (
               <div className="flex justify-start items-center gap-2 p-2 pl-4 text-slate-500">
-                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-slate-400"></div>
-                <span className="text-sm">AI is thinking...</span>
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-[var(--color-primary-500)]"></div>
+                <Shimmer className="text-sm font-medium text-[var(--color-primary-600)]" duration={1.5} spread={2}>AI is analyzing your request...</Shimmer>
               </div>
             )}
             {error && (
@@ -392,9 +409,16 @@ export default function AIStreamingChat({
                 {Array.from(files).map((file, i) => (
                   <Attachment
                     key={`upload-${i}`}
-                    data={{ id: `upload-${i}`, name: file.name, contentType: file.type } as any}
+                    data={{ id: `upload-${i}`, filename: file.name, mediaType: file.type, type: "file" } as any}
                     onRemove={() => {
-                      setFiles(undefined);
+                      // Remove specific file from FileList object
+                      if (files) {
+                        const dt = new DataTransfer();
+                        Array.from(files).forEach((f, index) => {
+                          if (index !== i) dt.items.add(f);
+                        });
+                        setFiles(dt.files.length > 0 ? dt.files : undefined);
+                      }
                     }}
                   >
                     <AttachmentPreview />
@@ -419,8 +443,11 @@ export default function AIStreamingChat({
             />
             <PromptInputFooter>
               <PromptInputTools>
-                <label className="flex items-center justify-center p-2 rounded-lg cursor-pointer hover:bg-[var(--color-primary-50)] text-[var(--color-text-secondary)] transition-colors">
-                  <span className="sr-only">Upload file</span>
+                <label
+                  className="flex items-center justify-center p-2 rounded-lg cursor-pointer hover:bg-[var(--color-primary-50)] text-[var(--color-text-secondary)] transition-colors"
+                  title="Upload MRI scans or medical reports"
+                >
+                  <span className="sr-only">Upload MRI scans or medical reports</span>
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
                   <input
                     type="file"

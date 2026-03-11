@@ -58,10 +58,18 @@ export class ScrubEngine {
 
             // Start loading the rest in background
             if (batchEnd < this.totalFrames) {
-                // Use setTimeout to yield to main thread before continuing
-                setTimeout(() => {
-                    this._loadRemainingFrames(batchEnd + 1);
-                }, 100);
+                // Yield to main thread using requestIdleCallback to avoid blocking INP
+                // and defer heavy network requests that might delay LCP.
+                if ('requestIdleCallback' in window) {
+                    window.requestIdleCallback(() => {
+                        this._loadRemainingFrames(batchEnd + 1);
+                    });
+                } else {
+                    // Fallback for browsers without requestIdleCallback (like Safari)
+                    setTimeout(() => {
+                        this._loadRemainingFrames(batchEnd + 1);
+                    }, 2000);
+                }
             } else {
                 this.isLoaded = true;
                 this.onLoadComplete();

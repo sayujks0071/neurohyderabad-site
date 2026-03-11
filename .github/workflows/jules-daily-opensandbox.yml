@@ -36,6 +36,8 @@ jobs:
           sed -i 's/port = 8080/port = 8000/g' ~/.sandbox.toml
 
           # Start server in the background
+          # Default port is 8080, we force it to 8000 to match previous workflow conventions
+          sed -i 's/port = 8080/port = 8000/g' ~/.sandbox.toml
           opensandbox-server > /tmp/sandbox-server.log 2>&1 &
 
           echo "Waiting for OpenSandbox server to be ready..."
