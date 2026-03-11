@@ -1,0 +1,40 @@
+name: OpenClaw Daily Combined Automation
+
+on:
+  schedule:
+    # 14:30 UTC is 20:00 IST (8 PM IST)
+    - cron: '30 14 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  run-automation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: Run OpenClaw Daily Automation
+        # xvfb-run is used to support the --headed flag requested in the prompt
+        run: xvfb-run --auto-servernum ./scripts/openclaw-daily-automation.sh
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: openclaw-daily-reports
+          path: reports/openclaw-daily-*/
+          retention-days: 7
