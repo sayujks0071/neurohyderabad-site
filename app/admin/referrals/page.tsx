@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Loader2, Upload, FileText, AlertCircle } from "lucide-react";
-import { createContainer } from 'almostnode';
 
 export default function ReferralAnalyzerPage() {
   const [adminKey, setAdminKey] = useState("");
@@ -18,72 +17,18 @@ export default function ReferralAnalyzerPage() {
     setError(null);
     setResult(null);
 
-    let extractedText = null;
-
     try {
-      // 1. Attempt client-side extraction first
-      try {
-        const arrayBuffer = await file.arrayBuffer();
-        const buffer = new Uint8Array(arrayBuffer);
-
-        const container = createContainer();
-        await container.npm.install('pdf-parse@1.1.1');
-
-        container.vfs.writeFileSync('/input.pdf', buffer);
-
-        const extractScript = `
-          const fs = require('fs');
-          const pdf = require('pdf-parse');
-
-          async function extract() {
-            try {
-              const dataBuffer = fs.readFileSync('/input.pdf');
-              const data = await pdf(dataBuffer);
-
-              const text = data.text ? data.text.replace(/\\u0000/g, '') : '';
-
-              module.exports = { text };
-            } catch (err) {
-              module.exports = { error: err.message };
-            }
-          }
-
-          extract();
-        `;
-
-        const res = await container.execute(extractScript);
-
-        if (res.exports && (res.exports as any)?.text) {
-          extractedText = (res.exports as any)?.text;
-          console.log("Client-side extraction successful");
-        } else {
-             console.warn("Client-side extraction failed or empty:", res.exports);
-        }
-
-      } catch (clientErr) {
-        console.warn("Client-side extraction error:", clientErr);
-        // Fallback to server
-      }
-
-      // 2. Send to API (either extracted text or original file)
-      let body;
       const headers: Record<string, string> = {
           "x-admin-key": adminKey,
       };
 
-      if (extractedText) {
-          body = JSON.stringify({ text: extractedText });
-          headers['Content-Type'] = 'application/json';
-      } else {
-          const formData = new FormData();
-          formData.append("file", file);
-          body = formData;
-      }
+      const formData = new FormData();
+      formData.append("file", file);
 
       const res = await fetch("/api/admin/referral/analyze", {
         method: "POST",
         headers,
-        body,
+        body: formData,
       });
 
       const data = await res.json();
