@@ -33,6 +33,8 @@ import {
   ContextOutputUsage,
   ContextContentFooter,
 } from "@/src/components/ai-elements/context";
+
+import { Shimmer } from "@/src/components/ai-elements/shimmer";
 import {
   PromptInput,
   PromptInputTextarea,
@@ -230,8 +232,9 @@ export default function AIStreamingChat({
                         <div className="mt-2">
                           <Attachments variant="list">
                             {((message as any).experimental_attachments || message.parts?.filter(p => (p.type as string) === "file" || (p.type as string) === "image")).map((file: any, i: number) => (
-                              <Attachment key={`${message.id}-file-${i}`} data={file as any}>
-                                <AttachmentInfo />
+                              <Attachment key={`${message.id}-file-${i}`} data={{ id: `${message.id}-file-${i}`, filename: file.name || file.filename || "Attachment", mediaType: file.contentType || file.mediaType || "", type: "file", url: file.url } as any}>
+                                <AttachmentPreview />
+                                <AttachmentInfo showMediaType />
                               </Attachment>
                             ))}
                           </Attachments>
@@ -239,8 +242,8 @@ export default function AIStreamingChat({
                       )}
 
                       {/* Tools (Confirmation / CoT) */}
-                      {message.parts?.filter(part => part.type === "tool-invocation").map((part: any) => {
-                        const tool = part;
+                      {message.parts?.filter(part => part.type.startsWith("tool-")).map((part: any) => {
+                        const tool = Object.keys(part).includes('toolInvocationId') ? part : { ...part, toolInvocationId: part.toolCallId, args: part.args || part.input, state: part.state || 'approval-requested' };
                         let icon = StethoscopeIcon;
                         let label = "Processing tool: " + tool.toolName;
                         if (tool.toolName === "searchContent") { icon = SearchIcon; label = "Searching medical information..."; }
@@ -309,8 +312,8 @@ export default function AIStreamingChat({
                                   <span className="text-red-700 font-medium text-sm">You rejected this request</span>
                                 </ConfirmationRejected>
                                 <ConfirmationActions className="mt-3">
-                                  <ConfirmationAction variant="outline" onClick={() => addToolApprovalResponse({ id: tool.toolInvocationId, approved: false })}>Reject</ConfirmationAction>
-                                  <ConfirmationAction variant="default" className="bg-[var(--color-primary-600)]" onClick={() => addToolApprovalResponse({ id: tool.toolInvocationId, approved: true })}>Approve</ConfirmationAction>
+                                  <ConfirmationAction variant="outline" onClick={() => addToolApprovalResponse({ id: tool.approval!.id, approved: false })}>Reject</ConfirmationAction>
+                                  <ConfirmationAction variant="default" className="bg-[var(--color-primary-600)]" onClick={() => addToolApprovalResponse({ id: tool.approval!.id, approved: true })}>Approve</ConfirmationAction>
                                 </ConfirmationActions>
                               </Confirmation>
                             )}
@@ -366,8 +369,8 @@ export default function AIStreamingChat({
 
             {isLoading && (
               <div className="flex justify-start items-center gap-2 p-2 pl-4 text-slate-500">
-                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-slate-400"></div>
-                <span className="text-sm">AI is thinking...</span>
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-[var(--color-primary-500)]"></div>
+                <Shimmer className="text-sm font-medium text-[var(--color-primary-600)]" duration={1.5} spread={2}>AI is analyzing your request...</Shimmer>
               </div>
             )}
             {error && (
@@ -406,9 +409,16 @@ export default function AIStreamingChat({
                 {Array.from(files).map((file, i) => (
                   <Attachment
                     key={`upload-${i}`}
-                    data={{ id: `upload-${i}`, name: file.name, contentType: file.type } as any}
+                    data={{ id: `upload-${i}`, filename: file.name, mediaType: file.type, type: "file" } as any}
                     onRemove={() => {
-                      setFiles(undefined);
+                      // Remove specific file from FileList object
+                      if (files) {
+                        const dt = new DataTransfer();
+                        Array.from(files).forEach((f, index) => {
+                          if (index !== i) dt.items.add(f);
+                        });
+                        setFiles(dt.files.length > 0 ? dt.files : undefined);
+                      }
                     }}
                   >
                     <AttachmentPreview />

@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Loader2 } from 'lucide-react';
 import { useStatsigEvents } from '../../src/lib/statsig-events';
+import { Suggestion, Suggestions } from "@/src/components/ai-elements/suggestion";
 
 interface Message {
   id: string;
@@ -226,17 +227,17 @@ export default function OpenAIAgentsBooking({ pageSlug, service }: OpenAIAgentsB
         {messages.length <= 1 && (
           <div className="p-4 border-t border-[var(--color-border)]">
             <p className="text-sm text-[var(--color-text-secondary)] mb-3">Quick actions:</p>
-            <div className="flex flex-wrap gap-2">
+            <Suggestions>
               {quickActions.map((action, index) => (
-                <button
+                <Suggestion
                   key={index}
                   onClick={() => setInputValue(action)}
-                  className="text-xs bg-[var(--color-primary-50)] text-[var(--color-primary-700)] px-3 py-1 rounded-full hover:bg-[var(--color-primary-100)] transition-colors"
-                >
-                  {action}
-                </button>
+                  suggestion={action}
+                  disabled={isLoading}
+                  className="bg-[var(--color-primary-50)] text-[var(--color-primary-700)] hover:bg-[var(--color-primary-100)] transition-colors disabled:opacity-50"
+                />
               ))}
-            </div>
+            </Suggestions>
           </div>
         )}
 

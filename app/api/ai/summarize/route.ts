@@ -131,8 +131,9 @@ export async function POST(request: NextRequest) {
       return new Response(summary);
     }
 
+    // Use Vercel AI Gateway caching for summarization since same URL should yield same summary
     const result = streamText({
-      model: getTextModel(),
+      model: getTextModel(undefined, { cache: true }),
       prompt: `Summarize the following medical article in approximately ${maxLength} words. Focus on key points, main findings, and actionable information. Keep it concise and easy to understand:
 
 ${content}
