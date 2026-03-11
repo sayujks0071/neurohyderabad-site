@@ -223,6 +223,7 @@ export default function LeadForm() {
                   className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                   aria-valuetext={painScoreValue ? `Score: ${painScoreValue}${painScoreValue >= 8 ? ' (Severe)' : painScoreValue <= 3 ? ' (Mild)' : ''}` : "Score: 5"}
                   {...register("painScore")}
+                name="painScore"
                 />
                 <span className="text-sm font-bold text-slate-400" aria-hidden="true">10</span>
               </div>
@@ -251,6 +252,7 @@ export default function LeadForm() {
                 id="mriScanAvailable"
                 className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500 border-gray-300"
                 {...register("mriScanAvailable")}
+                name="mriScanAvailable"
               />
               <span className="ml-3 text-sm font-medium text-slate-700 select-none">
                 I have MRI/CT Scan reports available

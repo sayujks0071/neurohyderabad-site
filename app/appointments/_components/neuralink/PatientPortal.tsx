@@ -649,6 +649,7 @@ const PatientPortal = () => {
 
                 <textarea
                   id="patient-report-text"
+                  name="reportText"
                   value={reportText}
                   onChange={(event) => setReportText(event.target.value)}
                   rows={3}
