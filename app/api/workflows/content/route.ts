@@ -4,6 +4,7 @@
  * Automates content tasks for www.drsayuj.info
  */
 
+import crypto from "crypto";
 import { start } from "workflow/api";
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
@@ -16,8 +17,8 @@ import {
 
 // Verify API key for protected endpoints securely
 function verifyApiKey(request: NextRequest): boolean {
-  const apiKey = request.headers.get("x-api-key");
-  const validKey = process.env.WORKFLOW_API_KEY || process.env.CRON_SECRET;
+  const apiKey = request.headers.get("x-api-key") || "";
+  const validKey = process.env.WORKFLOW_API_KEY || process.env.CRON_SECRET || "";
 
   if (!apiKey || !validKey) return false;
 
