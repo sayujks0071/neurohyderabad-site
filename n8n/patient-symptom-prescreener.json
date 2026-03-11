@@ -1,0 +1,119 @@
+{
+  "name": "Patient Symptom Pre-Screener",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "symptom-prescreener",
+        "options": {}
+      },
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ],
+      "webhookId": "symptom-prescreener-webhook"
+    },
+    {
+      "parameters": {
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key={{$env.GEMINI_API_KEY}}",
+        "method": "POST",
+        "bodyParametersUi": {
+          "parameter": []
+        },
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "body": "={\n  \"contents\": [{\n    \"parts\": [{\n      \"text\": \"You are an expert medical AI assistant for Dr. Sayuj, a leading Neurosurgeon specializing in spine surgery, brain conditions, and peripheral nerve issues. Analyze the following patient-reported symptoms.\\n\\nPatient Name: {{$node[\\\"Webhook Trigger\\\"].json[\\\"body\\\"][\\\"patientName\\\"]}}\\nSymptoms: {{$node[\\\"Webhook Trigger\\\"].json[\\\"body\\\"][\\\"symptoms\\\"]}}\\nDuration: {{$node[\\\"Webhook Trigger\\\"].json[\\\"body\\\"][\\\"duration\\\"]}}\\n\\nGenerate strictly valid JSON with these fields:\\n- category: \\\"Spine\\\" | \\\"Brain\\\" | \\\"Peripheral Nerve\\\" | \\\"Other/General\\\"\\n- preliminary_summary: A concise, layperson-friendly summary of the potential neurological implications.\\n- suggested_urgency: \\\"High (Schedule Soon)\\\" | \\\"Routine\\\" | \\\"Emergency Room (Immediate)\\\"\\n- key_questions: 2-3 important follow-up questions the clinic should ask the patient.\"\n    }]\n  }]\n}",
+        "options": {}
+      },
+      "name": "Gemini Symptom Analysis",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "const geminiResp = items[0].json.candidates[0].content.parts[0].text;\n// Remove markdown code blocks if present\nconst cleanJson = geminiResp.replace(/```json/g, '').replace(/```/g, '').trim();\nlet analysis = {};\ntry {\n  analysis = JSON.parse(cleanJson);\n} catch (e) {\n  analysis = { category: 'Other/General', preliminary_summary: 'Could not parse AI response', suggested_urgency: 'Routine', key_questions: ['Please describe your symptoms in more detail.'] };\n}\n\nreturn [{\n  json: {\n    ...items[0].json,\n    analysis\n  }\n}];"
+      },
+      "name": "Parse AI Response",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        650,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "screener@drsayuj.info",
+        "toEmail": "admin@drsayuj.info",
+        "subject": "New Symptom Screener: {{$node[\"Webhook Trigger\"].json[\"body\"][\"patientName\"]}} - {{$node[\"Parse AI Response\"].json[\"analysis\"][\"suggested_urgency\"]}}",
+        "text": "Name: {{$node[\"Webhook Trigger\"].json[\"body\"][\"patientName\"]}}\nSymptoms: {{$node[\"Webhook Trigger\"].json[\"body\"][\"symptoms\"]}}\nDuration: {{$node[\"Webhook Trigger\"].json[\"body\"][\"duration\"]}}\n\nAI Analysis:\nCategory: {{$node[\"Parse AI Response\"].json[\"analysis\"][\"category\"]}}\nUrgency: {{$node[\"Parse AI Response\"].json[\"analysis\"][\"suggested_urgency\"]}}\nSummary: {{$node[\"Parse AI Response\"].json[\"analysis\"][\"preliminary_summary\"]}}\nKey Questions to Ask: {{$node[\"Parse AI Response\"].json[\"analysis\"][\"key_questions\"].join(', ')}}",
+        "html": "<h2>New Patient Symptom Screener</h2><p><b>Name:</b> {{$node[\"Webhook Trigger\"].json[\"body\"][\"patientName\"]}}</p><p><b>Symptoms:</b> {{$node[\"Webhook Trigger\"].json[\"body\"][\"symptoms\"]}}</p><p><b>Duration:</b> {{$node[\"Webhook Trigger\"].json[\"body\"][\"duration\"]}}</p><hr><h3>AI Clinical Pre-Screening</h3><p><b>Category:</b> {{$node[\"Parse AI Response\"].json[\"analysis\"][\"category\"]}}</p><p><b>Urgency:</b> <strong style=\"color: #d9534f;\">{{$node[\"Parse AI Response\"].json[\"analysis\"][\"suggested_urgency\"]}}</strong></p><p><b>Summary:</b> {{$node[\"Parse AI Response\"].json[\"analysis\"][\"preliminary_summary\"]}}</p><h4>Follow-up Questions to Ask:</h4><ul>{{$node[\"Parse AI Response\"].json[\"analysis\"][\"key_questions\"].map(q => `<li>${q}</li>`).join('')}}</ul>"
+      },
+      "name": "Email Clinic Notification",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [
+        850,
+        300
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "YOUR_SMTP_CREDENTIAL_ID",
+          "name": "SMTP Account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Gemini Symptom Analysis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini Symptom Analysis": {
+      "main": [
+        [
+          {
+            "node": "Parse AI Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse AI Response": {
+      "main": [
+        [
+          {
+            "node": "Email Clinic Notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "id": "d2cde5cf-2881-4de6-8c56-211a1a0f0600"
+}

@@ -1,0 +1,200 @@
+{
+  "name": "Post-Consultation Educational Drip",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "consultation-drip",
+        "options": {}
+      },
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ],
+      "webhookId": "consultation-drip-webhook"
+    },
+    {
+      "parameters": {
+        "amount": 1,
+        "unit": "days"
+      },
+      "name": "Wait 1 Day",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$node[\"Webhook Trigger\"].json[\"body\"][\"condition\"]}}",
+              "operation": "contains",
+              "value2": "herniated disc"
+            }
+          ]
+        }
+      },
+      "name": "Check Condition",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        650,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "care@drsayuj.info",
+        "toEmail": "={{$node[\"Webhook Trigger\"].json[\"body\"][\"patientEmail\"]}}",
+        "subject": "Understanding Your Herniated Disc Diagnosis",
+        "text": "Dear {{$node[\"Webhook Trigger\"].json[\"body\"][\"patientName\"]}},\n\nIt was a pleasure seeing you in the clinic.\n\nTo help you better understand your herniated disc diagnosis, we have put together a comprehensive guide detailing symptoms, conservative treatments, and surgical options.\n\nRead more on our blog: https://www.drsayuj.info/blog/herniated-disc-treatment-options\n\nWarm regards,\nDr. Sayuj's Clinical Team",
+        "html": "<h2>Your Post-Consultation Resources</h2><p>Dear {{$node[\"Webhook Trigger\"].json[\"body\"][\"patientName\"]}},</p><p>It was a pleasure seeing you in the clinic recently to discuss your spinal health.</p><p>To help you better understand your <b>herniated disc</b> diagnosis and available treatment options (both conservative and surgical), we recommend reading our comprehensive patient guide:</p><p><a href=\"https://www.drsayuj.info/blog/herniated-disc-treatment-options\">Understanding Herniated Discs & Treatment Options</a></p><p>If you have any questions before your follow-up, please reply to this email.</p><p>Warm regards,<br>Dr. Sayuj's Clinical Team</p>"
+      },
+      "name": "Send Email 1 (Herniated Disc)",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [
+        850,
+        200
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "YOUR_SMTP_CREDENTIAL_ID",
+          "name": "SMTP Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 3,
+        "unit": "days"
+      },
+      "name": "Wait 3 Days",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [
+        1050,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "care@drsayuj.info",
+        "toEmail": "={{$node[\"Webhook Trigger\"].json[\"body\"][\"patientEmail\"]}}",
+        "subject": "Is Spine Surgery Right For You?",
+        "text": "Dear {{$node[\"Webhook Trigger\"].json[\"body\"][\"patientName\"]}},\n\nFollowing up on our recent consultation regarding your herniated disc.\n\nMany patients wonder when conservative therapy is enough and when spine surgery becomes necessary. We've compiled a video resource to help answer your most pressing questions.\n\nWatch our FAQ video: https://www.drsayuj.info/videos/spine-surgery-faq\n\nWarm regards,\nDr. Sayuj's Clinical Team",
+        "html": "<h2>When is Spine Surgery the Right Step?</h2><p>Dear {{$node[\"Webhook Trigger\"].json[\"body\"][\"patientName\"]}},</p><p>Following up on our recent consultation, many patients with a herniated disc wonder when conservative therapy is enough and when spine surgery might become necessary to restore quality of life.</p><p>We have created an educational video addressing the most common questions and concerns patients have regarding spinal procedures.</p><p><a href=\"https://www.drsayuj.info/videos/spine-surgery-faq\">Watch the Spine Surgery FAQ Video</a></p><p>Warm regards,<br>Dr. Sayuj's Clinical Team</p>"
+      },
+      "name": "Send Email 2 (Herniated Disc)",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [
+        1250,
+        200
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "YOUR_SMTP_CREDENTIAL_ID",
+          "name": "SMTP Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "care@drsayuj.info",
+        "toEmail": "={{$node[\"Webhook Trigger\"].json[\"body\"][\"patientEmail\"]}}",
+        "subject": "Your Post-Consultation Resources",
+        "text": "Dear {{$node[\"Webhook Trigger\"].json[\"body\"][\"patientName\"]}},\n\nIt was a pleasure seeing you in the clinic.\n\nBased on your consultation, we have curated a selection of resources tailored to your neurological health needs.\n\nVisit our patient education portal: https://www.drsayuj.info/patient-resources\n\nWarm regards,\nDr. Sayuj's Clinical Team",
+        "html": "<h2>Your Post-Consultation Resources</h2><p>Dear {{$node[\"Webhook Trigger\"].json[\"body\"][\"patientName\"]}},</p><p>It was a pleasure seeing you in the clinic recently.</p><p>Based on your consultation, we have curated a selection of educational resources to help you manage your neurological health effectively.</p><p><a href=\"https://www.drsayuj.info/patient-resources\">Explore the Patient Education Portal</a></p><p>If you have any questions before your follow-up, please reply to this email.</p><p>Warm regards,<br>Dr. Sayuj's Clinical Team</p>"
+      },
+      "name": "Send Email 1 (General)",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [
+        850,
+        400
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "YOUR_SMTP_CREDENTIAL_ID",
+          "name": "SMTP Account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Wait 1 Day",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait 1 Day": {
+      "main": [
+        [
+          {
+            "node": "Check Condition",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Condition": {
+      "main": [
+        [
+          {
+            "node": "Send Email 1 (Herniated Disc)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send Email 1 (General)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Email 1 (Herniated Disc)": {
+      "main": [
+        [
+          {
+            "node": "Wait 3 Days",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait 3 Days": {
+      "main": [
+        [
+          {
+            "node": "Send Email 2 (Herniated Disc)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "id": "4000e9b4-b129-46b3-90a5-730cdb5db8f4"
+}
