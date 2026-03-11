@@ -9,7 +9,41 @@ import { Confirmation, ConfirmationRequest, ConfirmationAccepted, ConfirmationRe
 import { Attachments, Attachment, AttachmentPreview, AttachmentInfo, AttachmentRemove } from "@/src/components/ai-elements/attachments";
 import { analytics } from "@/src/lib/analytics";
 import { Suggestion, Suggestions } from "@/src/components/ai-elements/suggestion";
+
+import { CheckIcon, XIcon, SearchIcon, CalendarIcon, StethoscopeIcon, RefreshCcwIcon, CopyIcon, InfoIcon } from "lucide-react";
+
+import {
+  Conversation,
+  ConversationContent,
+  ConversationScrollButton,
+} from "@/src/components/ai-elements/conversation";
+import {
+  Message,
+  MessageContent,
+  MessageResponse,
+  MessageActions,
+  MessageAction,
+} from "@/src/components/ai-elements/message";
+import {
+  Context,
+  ContextTrigger,
+  ContextContent as AIContextContent,
+  ContextContentHeader,
+  ContextContentBody,
+  ContextInputUsage,
+  ContextOutputUsage,
+  ContextContentFooter,
+} from "@/src/components/ai-elements/context";
+
 import { Shimmer } from "@/src/components/ai-elements/shimmer";
+import {
+  PromptInput,
+  PromptInputTextarea,
+  PromptInputFooter,
+  PromptInputTools,
+  PromptInputSubmit,
+} from "@/src/components/ai-elements/prompt-input";
+
 
 interface AIStreamingChatProps {
   pageSlug: string;
@@ -377,8 +411,8 @@ export default function AIStreamingChat({
 
             {isLoading && (
               <div className="flex justify-start items-center gap-2 p-2 pl-4 text-slate-500">
-                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-slate-400"></div>
-                <span className="text-sm">AI is thinking...</span>
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-[var(--color-primary-500)]"></div>
+                <Shimmer className="text-sm font-medium text-[var(--color-primary-600)]" duration={1.5} spread={2}>AI is analyzing your request...</Shimmer>
               </div>
             )}
             {error && (
