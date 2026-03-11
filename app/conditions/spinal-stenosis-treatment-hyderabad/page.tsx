@@ -16,8 +16,8 @@ import OutcomeMetricsSection from '@/components/OutcomeMetricsSection';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
 
 const baseMetadata = makeMetadata({
-  title: 'Spinal Stenosis Treatment Hyderabad | Walking Pain Relief',
-  description: 'Can\'t walk more than 10 mins? Expert Lumbar Canal Stenosis treatment in Hyderabad. Micro-Decompression surgery for leg pain & heaviness. Dr Sayuj.',
+  title: 'Spinal Stenosis Treatment Hyderabad | Pain Relief',
+  description: 'Can\'t walk over 10 mins? Expert Lumbar Canal Stenosis treatment in Hyderabad. Micro-Decompression surgery for leg pain. Consult Dr Sayuj.',
   canonicalPath: '/conditions/spinal-stenosis-treatment-hyderabad',
 });
 
