@@ -289,6 +289,7 @@ export default function LeadForm() {
           <Button
             type="submit"
             isLoading={isSubmitting}
+            disabled={isSubmitting}
             className="w-full sm:w-full"
           >
             {isSubmitting ? "Sending..." : "Request Call Back"}
