@@ -362,16 +362,34 @@ export default function BrainTumorSurgeryConditionPage() {
               </p>
             </div>
           </div>
-          <div className="mt-8 rounded-lg border border-blue-100 bg-blue-50 p-6">
-            <h3 className="text-lg font-semibold text-blue-700">
-              When to Seek Urgent Care
-            </h3>
-            <ul className="mt-4 space-y-2 text-gray-700">
-              <li>• Sudden severe headache with vomiting</li>
-              <li>• New-onset seizures</li>
-              <li>• Worsening weakness, speech difficulty, or vision loss</li>
-              <li>• Discharge from wound, fever, or altered consciousness</li>
-            </ul>
+          <div className="mt-12 bg-red-50 border border-red-100 rounded-2xl p-8 shadow-sm">
+            <h2 className="text-2xl font-bold text-red-900 mb-4 flex items-center gap-3">
+              <span className="text-3xl">⚠️</span> When to Seek Immediate Emergency Care (Red Flags)
+            </h2>
+            <p className="text-red-900 mb-6 font-medium">
+              Certain symptoms associated with brain tumors or post-operative recovery are medical emergencies that require immediate intervention to prevent severe complications.
+            </p>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+              <div className="bg-white p-5 rounded-xl shadow-sm border border-red-100">
+                <h3 className="font-bold text-red-800 mb-2">Severe Headaches & Vomiting</h3>
+                <p className="text-sm text-gray-700">Sudden, severe "thunderclap" headaches, especially upon waking, often accompanied by repeated vomiting, which may indicate increased intracranial pressure.</p>
+              </div>
+              <div className="bg-white p-5 rounded-xl shadow-sm border border-red-100">
+                <h3 className="font-bold text-red-800 mb-2">New-Onset Seizures</h3>
+                <p className="text-sm text-gray-700">Any first-time seizure, or a seizure lasting more than 5 minutes (status epilepticus), requires urgent medical evaluation.</p>
+              </div>
+              <div className="bg-white p-5 rounded-xl shadow-sm border border-red-100">
+                <h3 className="font-bold text-red-800 mb-2">Progressive Neurological Deficits</h3>
+                <p className="text-sm text-gray-700">Rapid-onset or worsening weakness in limbs, sudden vision loss or double vision, and difficulty speaking or understanding speech.</p>
+              </div>
+              <div className="bg-white p-5 rounded-xl shadow-sm border border-red-100">
+                <h3 className="font-bold text-red-800 mb-2">Post-Operative Infections</h3>
+                <p className="text-sm text-gray-700">Fever, neck stiffness, clear fluid leaking from the nose or ear (CSF leak), or discharge from the surgical wound.</p>
+              </div>
+            </div>
+            <p className="text-red-900 font-medium">
+              Visit the nearest emergency department or call local medical services immediately if you experience these red flags. Early intervention can be life-saving.
+            </p>
           </div>
         </div>
       </section>

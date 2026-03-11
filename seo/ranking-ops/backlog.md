@@ -66,7 +66,7 @@
 *   **Schema Conflict:** Remove duplicate `FAQSchema` manual injection in `app/services/cervical-disc-replacement-hyderabad/page.tsx` as it conflicts with `<FAQPageSchema />` component.
 
 ## 2026-02-25
-*   **Expansion:** Replicate the visual "Red Flags" grid on other emergency-related condition pages (e.g., Brain Tumor Symptoms).
+*   [x] **Expansion:** Replicate the visual "Red Flags" grid on other emergency-related condition pages (e.g., Brain Tumor Symptoms). (Done 2026-03-09)
 *   **Consistency:** Ensure `TrustProof` components on other pages are updated to use the latest props and styling if applicable.
 
 ## 2026-02-27
@@ -78,3 +78,8 @@
 
 ## 2026-03-06
 - [x] **Content Gap:** Added 'Red Flags' emergency section to Epilepsy Surgery page to improve topical depth and YMYL safety signals.
+
+## 2026-03-08
+- [x] **Internal Linking:** Added "Comprehensive Neurosurgical Treatments" section to 'best neurosurgeon' pillar page, connecting 12 specific service and condition pages.
+- [ ] **Technical Fix:** Implement more specific semantic HTML structures (e.g., proper article/section tags) for better content parsing.
+- [ ] **Rich Media:** Add extensive video testimonials and patient stories on doctor profiles to close competitor gap.

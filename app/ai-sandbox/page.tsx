@@ -1,157 +1,124 @@
-// @ts-nocheck
-'use client'
+'use client';
 
-import { useChat } from '@ai-sdk/react'
-import { useState, useRef, useEffect } from 'react'
-import HeaderRefactored from '../components/HeaderRefactored'
-import Footer from '../components/Footer'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
+import { useChat } from '@ai-sdk/react';
+import { useRef, useEffect, useState, useMemo } from 'react';
+import { DefaultChatTransport, type UIMessage } from 'ai';
 
-export default function AISandboxPage() {
-    const { messages, input = '', handleInputChange, handleSubmit, isLoading, error } = useChat({
-        api: '/api/ai/sandbox',
-        body: {
-            requestedModel: 'openai/gpt-5.2' // Requested snippet
-        }
-    })
+export default function AISandbox() {
+  const [input, setInput] = useState('');
 
-    const messagesEndRef = useRef<HTMLDivElement>(null)
+  const transport = useMemo(() => new DefaultChatTransport({
+    api: '/api/ai/sandbox',
+  }), []);
 
-    const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  const initialMessages = useMemo<UIMessage[]>(() => [
+    {
+      id: 'initial',
+      role: 'assistant',
+      parts: [{ type: 'text', text: 'Welcome to the AI Sandbox. Ask me anything, like "Why is the sky blue?"' }]
+    },
+  ], []);
+
+  const { messages, sendMessage, status } = useChat<UIMessage>({
+    transport,
+    messages: initialMessages,
+  });
+
+  const isLoading = status === 'submitted' || status === 'streaming';
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!input.trim() || isLoading) return;
+    sendMessage({ text: input });
+    setInput('');
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInput(e.target.value);
+  };
+
+  const renderMessageContent = (m: UIMessage) => {
+    if (m.parts && m.parts.length > 0) {
+      return m.parts
+        .filter(part => part.type === 'text')
+        .map(part => (part as any).text)
+        .join(' ');
     }
+    return '';
+  };
 
-    useEffect(() => {
-        scrollToBottom()
-    }, [messages])
+  return (
+    <div className="flex flex-col min-h-screen pt-24 pb-8 bg-slate-950 text-slate-50 font-sans">
+      <div className="flex-1 overflow-y-auto p-4 md:p-8 space-y-6">
+        <div className="max-w-3xl mx-auto space-y-6">
+          <div className="text-center mb-8">
+            <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400">
+              AI Sandbox
+            </h1>
+            <p className="text-slate-400 mt-2">Real-time Vercel AI SDK Streaming</p>
+          </div>
 
-    return (
-        <div className="min-h-screen bg-slate-50 flex flex-col font-sans selection:bg-blue-200">
-            <HeaderRefactored />
-
-            <main className="flex-1 flex justify-center items-center p-4 sm:p-8 pt-24 sm:pt-32 relative overflow-hidden bg-gradient-to-br from-indigo-50 via-white to-blue-50">
-
-                {/* Decorative Blurred Background Blobs */}
-                <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-indigo-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob"></div>
-                <div className="absolute top-[20%] right-[-10%] w-[400px] h-[400px] bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob animation-delay-2000"></div>
-                <div className="absolute bottom-[-20%] left-[20%] w-[600px] h-[600px] bg-pink-100 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob animation-delay-4000"></div>
-
-                <div className="w-full max-w-4xl bg-white/70 backdrop-blur-xl rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] ring-1 ring-slate-900/5 overflow-hidden flex flex-col h-[80vh] relative z-10 transition-all duration-300 hover:shadow-[0_8px_40px_rgb(0,0,0,0.08)]">
-
-                    {/* Header */}
-                    <div className="px-6 py-5 border-b border-slate-100 flex items-center justify-between bg-white/50">
-                        <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white shadow-md shadow-blue-500/20">
-                                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                </svg>
-                            </div>
-                            <div>
-                                <h1 className="text-xl font-bold text-slate-800 tracking-tight">Virtual Clinic Assistant</h1>
-                                <p className="text-xs text-slate-500 font-medium">Dr. Sayuj's Neurosurgery & Spine Clinic</p>
-                            </div>
-                        </div>
-                        <div className="flex gap-2">
-                            <div className="flex h-3 w-3 relative">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                                <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Chat Messages Area */}
-                    <div className="flex-1 overflow-y-auto p-6 space-y-6 scroll-smooth">
-                        {messages.length === 0 ? (
-                            <div className="h-full flex flex-col justify-center items-center text-slate-400 space-y-4 animate-in fade-in duration-700">
-                                <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mb-2">
-                                    <svg className="w-10 h-10 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                                    </svg>
-                                </div>
-                                <p className="text-lg font-medium text-slate-600">How can we help you today?</p>
-                                <p className="text-sm max-w-sm text-center text-slate-500">I am here to help you learn about our clinic, procedures, and neurosurgery. I cannot give specific medical advice.</p>
-                            </div>
-                        ) : (
-                            messages.map(m => (
-                                <div key={m.id} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'} group animate-in slide-in-from-bottom-2 duration-300`}>
-                                    <div className={`max-w-[80%] rounded-2xl p-4 shadow-sm relative ${m.role === 'user'
-                                            ? 'bg-gradient-to-br from-blue-600 to-indigo-600 text-white rounded-tr-sm'
-                                            : 'bg-white text-slate-800 rounded-tl-sm border border-slate-100'
-                                        }`}>
-
-                                        {/* Role Badge */}
-                                        <div className={`text-[10px] font-bold uppercase tracking-wider mb-2 ${m.role === 'user' ? 'text-blue-100' : 'text-slate-400'}`}>
-                                            {m.role === 'user' ? 'You' : 'AI Assistant'}
-                                        </div>
-
-                                        {/* Message Content */}
-                                        <div className={`prose prose-sm max-w-none prose-p:leading-relaxed prose-pre:bg-slate-800 prose-pre:text-slate-100 ${m.role === 'user' ? 'prose-invert' : ''}`}>
-                                            {m.role !== 'user' && m.content === '' && isLoading ? (
-                                                <div className="flex items-center gap-1.5 h-6">
-                                                    <div className="w-1.5 h-1.5 bg-slate-300 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
-                                                    <div className="w-1.5 h-1.5 bg-slate-300 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
-                                                    <div className="w-1.5 h-1.5 bg-slate-300 rounded-full animate-bounce"></div>
-                                                </div>
-                                            ) : (
-                                                <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                                                    {m.content}
-                                                </ReactMarkdown>
-                                            )}
-                                        </div>
-                                    </div>
-                                </div>
-                            ))
-                        )}
-
-                        {error && (
-                            <div className="p-4 bg-red-50 text-red-600 text-sm rounded-xl border border-red-100 flex items-start gap-3 animate-in fade-in">
-                                <svg className="w-5 h-5 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                <span>{error.message || 'An error occurred during streaming.'}</span>
-                            </div>
-                        )}
-                        <div ref={messagesEndRef} />
-                    </div>
-
-                    {/* Input Area */}
-                    <div className="p-4 sm:p-6 bg-white border-t border-slate-100 relative z-20">
-                        <form onSubmit={handleSubmit} className="relative flex items-end gap-3">
-                            <div className="relative flex-1">
-                                <input
-                                    className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-2xl px-5 py-4 pr-14 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all placeholder:text-slate-400 text-base"
-                                    value={input}
-                                    placeholder="Ask anything (e.g., What should I expect before spinal surgery?)..."
-                                    onChange={handleInputChange}
-                                    disabled={isLoading}
-                                    autoFocus
-                                />
-                            </div>
-                            <button
-                                disabled={isLoading || !input.trim()}
-                                type="submit"
-                                aria-label={isLoading ? "Sending message..." : "Send message"}
-                                className="bg-blue-600 hover:bg-blue-700 disabled:bg-slate-200 disabled:text-slate-400 text-white rounded-xl p-4 transition-all duration-200 shadow-sm active:scale-95 shrink-0 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                            >
-                                {isLoading ? (
-                                    <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                    </svg>
-                                ) : (
-                                    <svg className="w-5 h-5 translate-x-[1px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                                    </svg>
-                                )}
-                            </button>
-                        </form>
-                    </div>
-
+          {messages.map((m) => (
+            <div
+              key={m.id}
+              className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}
+            >
+              <div
+                className={`max-w-[80%] rounded-2xl px-6 py-4 shadow-sm backdrop-blur-sm ${
+                  m.role === 'user'
+                    ? 'bg-blue-600/20 text-blue-50 border border-blue-500/30'
+                    : 'bg-slate-800/50 text-slate-200 border border-slate-700/50'
+                }`}
+              >
+                <div className="font-semibold text-xs opacity-50 mb-1 uppercase tracking-wider">
+                  {m.role === 'user' ? 'You' : 'AI Assistant'}
                 </div>
-            </main>
-
-            <Footer />
+                <div className="whitespace-pre-wrap leading-relaxed">{renderMessageContent(m)}</div>
+              </div>
+            </div>
+          ))}
+          <div ref={messagesEndRef} />
         </div>
-    )
+      </div>
+
+      <div className="p-4 bg-slate-900/50 backdrop-blur-md border-t border-slate-800/50 sticky bottom-0 z-10">
+        <div className="max-w-3xl mx-auto">
+          <form
+            onSubmit={handleSubmit}
+            className="relative flex items-center shadow-lg rounded-full bg-slate-800/80 border border-slate-700/50 overflow-hidden focus-within:ring-2 focus-within:ring-blue-500/50 focus-within:border-blue-500/50 transition-all"
+          >
+            <input
+              className="w-full bg-transparent px-6 py-4 outline-none text-slate-100 placeholder-slate-500"
+              value={input}
+              placeholder="Type your message..."
+              onChange={handleInputChange}
+              disabled={isLoading}
+            />
+            <button
+              type="submit"
+              disabled={isLoading || !input.trim()}
+              className="absolute right-2 p-2 rounded-full bg-blue-500 hover:bg-blue-400 disabled:opacity-50 disabled:hover:bg-blue-500 transition-colors text-white"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="w-5 h-5"
+              >
+                <path d="M3.478 2.404a.75.75 0 0 0-.926.941l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.404Z" />
+              </svg>
+            </button>
+          </form>
+          <div className="text-center mt-3 text-xs text-slate-500">
+            Powered by Vercel AI SDK &amp; streamText
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }

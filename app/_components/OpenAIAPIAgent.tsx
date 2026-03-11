@@ -64,6 +64,22 @@ export default function OpenAIAPIAgent({ pageSlug, service }: OpenAIAPIAgentProp
     await sendMessage({ text: content });
   };
 
+
+  const handleQuickAction = async (action: string) => {
+    // Log user interaction
+    logAppointmentBooking('ai_chat_interaction_quick_action', service || 'general');
+
+    await sendMessage({ text: action });
+  };
+
+  const quickActions = [
+    "I need to book a new consultation",
+    "I want to reschedule my appointment",
+    "I have severe headache and dizziness",
+    "I need information about spine surgery",
+    "What are your clinic hours?",
+    "Tell me about endoscopic spine surgery"
+  ];
   return (
     <div className="max-w-4xl mx-auto">
       {/* Chat Interface */}
@@ -128,6 +144,24 @@ export default function OpenAIAPIAgent({ pageSlug, service }: OpenAIAPIAgentProp
           
           <div ref={messagesEndRef} />
         </div>
+
+        {/* Quick Actions */}
+        {messages.length <= 1 && (
+          <div className="p-4 border-t border-[var(--color-border)]">
+            <p className="text-sm text-[var(--color-text-secondary)] mb-3">Quick actions:</p>
+            <Suggestions>
+              {quickActions.map((action, index) => (
+                <Suggestion
+                  key={index}
+                  onClick={() => handleQuickAction(action)}
+                  suggestion={action}
+                  disabled={isLoading}
+                  className="bg-[var(--color-primary-50)] text-[var(--color-primary-700)] hover:bg-[var(--color-primary-100)] transition-colors disabled:opacity-50"
+                />
+              ))}
+            </Suggestions>
+          </div>
+        )}
 
         {/* Input Form */}
         <form onSubmit={onFormSubmit} className="p-4 border-t border-[var(--color-border)]">
