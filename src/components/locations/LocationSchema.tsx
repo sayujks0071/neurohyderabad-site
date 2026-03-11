@@ -1,8 +1,6 @@
 import React from 'react';
 import { LocationData } from '@/src/data/locations';
-
-// Helper to sanitize and format JSON-LD
-const toJson = (data: any) => JSON.stringify(data, null, 2);
+import { safeJsonLdStringify } from '@/src/lib/seo/jsonld';
 
 interface FAQItem {
   question?: string;
@@ -117,12 +115,12 @@ export const LocationSchema: React.FC<LocationSchemaProps> = ({
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: toJson(clinicSchema) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(clinicSchema) }}
       />
       {faqSchema && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: toJson(faqSchema) }}
+          dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(faqSchema) }}
         />
       )}
     </>
