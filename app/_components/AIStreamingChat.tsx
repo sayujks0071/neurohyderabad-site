@@ -202,8 +202,9 @@ export default function AIStreamingChat({
                         <div className="mt-2">
                           <Attachments variant="list">
                             {((message as any).experimental_attachments || message.parts?.filter(p => (p.type as string) === "file" || (p.type as string) === "image")).map((file: any, i: number) => (
-                              <Attachment key={`${message.id}-file-${i}`} data={file as any}>
-                                <AttachmentInfo />
+                              <Attachment key={`${message.id}-file-${i}`} data={{ id: `${message.id}-file-${i}`, filename: file.name || file.filename || "Attachment", mediaType: file.contentType || file.mediaType || "", type: "file", url: file.url } as any}>
+                                <AttachmentPreview />
+                                <AttachmentInfo showMediaType />
                               </Attachment>
                             ))}
                           </Attachments>
@@ -416,9 +417,16 @@ export default function AIStreamingChat({
                 {Array.from(files).map((file, i) => (
                   <Attachment
                     key={`upload-${i}`}
-                    data={{ id: `upload-${i}`, name: file.name, contentType: file.type } as any}
+                    data={{ id: `upload-${i}`, filename: file.name, mediaType: file.type, type: "file" } as any}
                     onRemove={() => {
-                      setFiles(undefined);
+                      // Remove specific file from FileList object
+                      if (files) {
+                        const dt = new DataTransfer();
+                        Array.from(files).forEach((f, index) => {
+                          if (index !== i) dt.items.add(f);
+                        });
+                        setFiles(dt.files.length > 0 ? dt.files : undefined);
+                      }
                     }}
                   >
                     <AttachmentPreview />
