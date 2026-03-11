@@ -3,14 +3,13 @@
 import React, { useState, useRef, useEffect, useMemo, Fragment } from 'react';
 import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport, type UIMessage } from 'ai';
-import { ChainOfThought, ChainOfThoughtHeader, ChainOfThoughtContent, ChainOfThoughtStep } from "@/src/components/ai-elements/chain-of-thought";
+import { ChainOfThought, ChainOfThoughtHeader, ChainOfThoughtContent, ChainOfThoughtStep, ChainOfThoughtSearchResults, ChainOfThoughtSearchResult } from "@/src/components/ai-elements/chain-of-thought";
 import { Checkpoint, CheckpointTrigger, CheckpointIcon } from "@/src/components/ai-elements/checkpoint";
 import { Confirmation, ConfirmationRequest, ConfirmationAccepted, ConfirmationRejected, ConfirmationActions, ConfirmationAction } from "@/src/components/ai-elements/confirmation";
 import { Attachments, Attachment, AttachmentPreview, AttachmentInfo, AttachmentRemove } from "@/src/components/ai-elements/attachments";
 import { analytics } from "@/src/lib/analytics";
 import { Suggestion, Suggestions } from "@/src/components/ai-elements/suggestion";
-
-import { CheckIcon, XIcon, SearchIcon, CalendarIcon, StethoscopeIcon, RefreshCcwIcon, CopyIcon, InfoIcon } from "lucide-react";
+import { CheckIcon, XIcon, SearchIcon, CalendarIcon, StethoscopeIcon, RefreshCcwIcon, CopyIcon, InfoIcon, BookmarkIcon } from "lucide-react";
 
 import {
   Conversation,
@@ -124,15 +123,12 @@ export default function AIStreamingChat({
     scrollToBottom();
   }, [messages]);
 
-  useEffect(() => {
-    // Create checkpoint every 5 messages
-    if (messages.length > 0 && messages.length % 5 === 0) {
-      const isAlreadyCheckpoint = checkpoints.some(cp => cp.messageIndex === messages.length - 1);
-      if (!isAlreadyCheckpoint) {
-        setCheckpoints([...checkpoints, { messageIndex: messages.length - 1 }]);
-      }
+  const createCheckpoint = (messageIndex: number) => {
+    const isAlreadyCheckpoint = checkpoints.some(cp => cp.messageIndex === messageIndex);
+    if (!isAlreadyCheckpoint) {
+      setCheckpoints([...checkpoints, { messageIndex }]);
     }
-  }, [messages.length, checkpoints]);
+  };
 
   const restoreToCheckpoint = (messageIndex: number) => {
     setMessages(messages.slice(0, messageIndex + 1));
@@ -169,7 +165,7 @@ export default function AIStreamingChat({
     "I have severe headache and dizziness",
     "I need information about spine surgery",
     "What are your clinic hours?",
-    "Tell me about endoscopic spine surgery"
+    "I want to upload my MRI report for review"
   ];
 
   return (
@@ -264,8 +260,22 @@ export default function AIStreamingChat({
                                   <ChainOfThoughtContent>
                                     <ChainOfThoughtStep icon={icon} label={label} description={isCompleted ? "Tool executed successfully" : "Tool is currently executing"} status={isCompleted ? "complete" : "active"} />
                                     {isCompleted && tool.result && (
-                                      <div className="text-xs mt-2 bg-black/5 p-2 rounded max-h-32 overflow-y-auto">
-                                        <pre className="whitespace-pre-wrap font-mono">{typeof tool.result === 'string' ? tool.result : JSON.stringify(tool.result).slice(0, 150) + "..."}</pre>
+                                      <div className="mt-2">
+                                        {tool.toolName === "searchContent" && Array.isArray(tool.result) ? (
+                                          <ChainOfThoughtSearchResults>
+                                            {tool.result.map((res: any, idx: number) => (
+                                              <a key={idx} href={res.url} target="_blank" rel="noopener noreferrer">
+                                                <ChainOfThoughtSearchResult className="hover:bg-slate-200 transition-colors cursor-pointer">
+                                                  {res.title}
+                                                </ChainOfThoughtSearchResult>
+                                              </a>
+                                            ))}
+                                          </ChainOfThoughtSearchResults>
+                                        ) : (
+                                          <div className="text-xs bg-black/5 p-2 rounded max-h-32 overflow-y-auto">
+                                            <pre className="whitespace-pre-wrap font-mono">{typeof tool.result === 'string' ? tool.result : JSON.stringify(tool.result).slice(0, 150) + "..."}</pre>
+                                          </div>
+                                        )}
                                       </div>
                                     )}
                                   </ChainOfThoughtContent>
@@ -308,100 +318,48 @@ export default function AIStreamingChat({
                               </Confirmation>
                             )}
                           </div>
-                        )}
+                        );
+                      })}
+                    </MessageContent>
+                  </Message>
 
-                        {tool.approval && (
-                          <Confirmation approval={tool.approval} state={tool.state}>
-                            <ConfirmationRequest>
-                              <p>This action requires your confirmation:</p>
-                              <div className="bg-[var(--color-surface)] p-2 rounded text-xs mt-2 overflow-x-auto text-[var(--color-text-primary)] border border-[var(--color-border)]">
-                                {tool.toolName === "bookAppointment" ? (
-                                  <div>
-                                    <p className="font-semibold mb-1">Book Appointment</p>
-                                    <ul className="list-disc pl-4">
-                                      <li><strong>Patient:</strong> {tool.args.patientName}</li>
-                                      <li><strong>Date:</strong> {tool.args.appointmentDate} at {tool.args.appointmentTime}</li>
-                                      <li><strong>Reason:</strong> {tool.args.reason}</li>
-                                      <li><strong>Contact:</strong> {tool.args.phone}</li>
-                                    </ul>
-                                  </div>
-                                ) : (
-                                  <pre>{JSON.stringify(tool.args, null, 2)}</pre>
-                                )}
-                              </div>
-                              <p className="mt-2 text-sm">Do you approve this booking?</p>
-                            </ConfirmationRequest>
-                            <ConfirmationAccepted>
-                              <CheckIcon className="size-4" />
-                              <span>You approved this booking request</span>
-                            </ConfirmationAccepted>
-                            <ConfirmationRejected>
-                              <XIcon className="size-4" />
-                              <span>You rejected this booking request</span>
-                            </ConfirmationRejected>
-                            <ConfirmationActions>
-                              <ConfirmationAction
-                                variant="outline"
-                                onClick={() =>
-                                  addToolApprovalResponse({
-                                    id: tool.toolInvocationId,
-                                    approved: false,
-                                  })
-                                }
-                              >
-                                Reject
-                              </ConfirmationAction>
-                              <ConfirmationAction
-                                variant="default"
-                                className="bg-[var(--color-primary-600)] text-white hover:bg-[var(--color-primary-700)]"
-                                onClick={() =>
-                                  addToolApprovalResponse({
-                                    id: tool.toolInvocationId,
-                                    approved: true,
-                                  })
-                                }
-                              >
-                                Approve
-                              </ConfirmationAction>
-                            </ConfirmationActions>
-                          </Confirmation>
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-              {checkpoints.find(cp => cp.messageIndex === index) && (
-                <div className="flex justify-center my-4">
-                  <Checkpoint>
-                    <CheckpointIcon />
-                    <CheckpointTrigger onClick={() => restoreToCheckpoint(index)}>
-                      Restore previous conversation state
-                    </CheckpointTrigger>
-                  </Checkpoint>
-                </div>
-              )}
-              </Fragment>
-            );
-          })}
-          
-          {isLoading && (
-            <div className="flex justify-start">
-              <div className="bg-[var(--color-background)] text-[var(--color-text-primary)] px-4 py-2 rounded-lg">
-                <div className="flex items-center space-x-2">
-                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-[var(--color-primary-500)]"></div>
-                  <Shimmer as="span" className="text-sm">AI is thinking...</Shimmer>
-                </div>
-              </div>
-            </div>
-          )}
+                  {/* Message Actions */}
+                  {message.role === 'assistant' && textContent && (
+                    <div className="flex justify-between items-center mt-2 pl-12">
+                      <MessageActions className="opacity-100 flex gap-2">
+                        <MessageAction tooltip="Copy message" label="Copy" onClick={() => navigator.clipboard.writeText(textContent)}>
+                          <CopyIcon className="size-3" />
+                        </MessageAction>
+                        <MessageAction tooltip="Bookmark this point in conversation" label="Bookmark" onClick={() => createCheckpoint(index)}>
+                          <BookmarkIcon className="size-3" />
+                        </MessageAction>
+                        <div className="inline-block relative">
+                          <Context maxTokens={8000} usedTokens={textContent.length * 2} usage={{ inputTokens: textContent.length, outputTokens: textContent.length, totalTokens: textContent.length * 2 } as any} modelId="openai:gpt-4">
+                            <ContextTrigger asChild>
+                              <button className="h-6 text-xs gap-1 px-2 hover:bg-slate-100 rounded border border-transparent flex items-center text-slate-500">
+                                <InfoIcon className="size-3" /> Context
+                              </button>
+                            </ContextTrigger>
+                            <AIContextContent className="w-64">
+                              <ContextContentHeader>AI Model Usage</ContextContentHeader>
+                              <ContextContentBody>
+                                <ContextInputUsage />
+                                <ContextOutputUsage />
+                              </ContextContentBody>
+                              <ContextContentFooter />
+                            </AIContextContent>
+                          </Context>
+                        </div>
+                      </MessageActions>
+                    </div>
+                  )}
 
                   {/* Checkpoints */}
                   {checkpoints.find(cp => cp.messageIndex === index) && (
                     <div className="flex justify-center my-4">
                       <Checkpoint>
                         <CheckpointIcon />
-                        <CheckpointTrigger onClick={() => restoreToCheckpoint(index)}>Restore previous conversation state</CheckpointTrigger>
+                        <CheckpointTrigger onClick={() => restoreToCheckpoint(index)}>Restore to before this topic</CheckpointTrigger>
                       </Checkpoint>
                     </div>
                   )}
@@ -485,8 +443,11 @@ export default function AIStreamingChat({
             />
             <PromptInputFooter>
               <PromptInputTools>
-                <label className="flex items-center justify-center p-2 rounded-lg cursor-pointer hover:bg-[var(--color-primary-50)] text-[var(--color-text-secondary)] transition-colors">
-                  <span className="sr-only">Upload file</span>
+                <label
+                  className="flex items-center justify-center p-2 rounded-lg cursor-pointer hover:bg-[var(--color-primary-50)] text-[var(--color-text-secondary)] transition-colors"
+                  title="Upload MRI scans or medical reports"
+                >
+                  <span className="sr-only">Upload MRI scans or medical reports</span>
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
                   <input
                     type="file"
