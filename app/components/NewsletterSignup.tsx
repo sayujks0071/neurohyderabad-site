@@ -77,6 +77,7 @@ export default function NewsletterSignup({
         <form
           toolname="subscribeToNewsletter"
           tooldescription="Subscribe to Dr. Sayuj Krishnan's neurosurgery and spine health newsletter."
+          toolautosubmit="true"
           onSubmit={handleSubmit}
           className="space-y-3"
           noValidate
@@ -84,6 +85,7 @@ export default function NewsletterSignup({
           <div>
             <input
               type="email"
+              name="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
@@ -124,12 +126,14 @@ export default function NewsletterSignup({
     <form
       toolname="subscribeToNewsletter"
       tooldescription="Subscribe to Dr. Sayuj Krishnan's neurosurgery and spine health newsletter."
+      toolautosubmit="true"
       onSubmit={handleSubmit}
       className={`flex flex-col sm:flex-row gap-2 ${className}`}
       noValidate
     >
       <input
         type="email"
+        name="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Enter your email for health insights"

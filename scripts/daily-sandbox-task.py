@@ -34,96 +34,133 @@ async def main() -> None:
 
         interpreter = await CodeInterpreter.create(sandbox)
 
+        # Install beautifulsoup4 and requests inside the code-interpreter sandbox
+        logger.info("Installing beautifulsoup4 and requests...")
+        await sandbox.commands.run("pip install beautifulsoup4 requests")
+
         python_code = """
 import json
 import datetime
-import urllib.request
-from html.parser import HTMLParser
+import requests
+from bs4 import BeautifulSoup
+import time
 
-class SEOParser(HTMLParser):
-    def __init__(self):
-        super().__init__()
-        self.title = ""
-        self.description = ""
-        self.h1_tags = []
-        self.in_title = False
-        self.in_h1 = False
+def check_url(url, timeout=10):
+    try:
+        start_time = time.time()
+        response = requests.get(url, timeout=timeout, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'})
+        response_time = time.time() - start_time
+        return response, response_time, None
+    except requests.RequestException as e:
+        return None, None, str(e)
 
-    def handle_starttag(self, tag, attrs):
-        if tag == "title":
-            self.in_title = True
-        elif tag == "meta":
-            attrs_dict = dict(attrs)
-            if attrs_dict.get("name") == "description":
-                self.description = attrs_dict.get("content", "")
-        elif tag == "h1":
-            self.in_h1 = True
+def analyze_page(url, response, response_time):
+    soup = BeautifulSoup(response.text, 'html.parser')
 
-    def handle_endtag(self, tag):
-        if tag == "title":
-            self.in_title = False
-        elif tag == "h1":
-            self.in_h1 = False
+    title = soup.title.string.strip() if soup.title and soup.title.string else ""
+    desc_tag = soup.find('meta', attrs={'name': 'description'})
+    description = desc_tag['content'].strip() if desc_tag and 'content' in desc_tag.attrs else ""
 
-    def handle_data(self, data):
-        if self.in_title:
-            self.title += data
-        elif self.in_h1:
-            self.h1_tags.append(data.strip())
+    h1_tags = [h1.get_text(strip=True) for h1 in soup.find_all('h1')]
+    h2_tags = [h2.get_text(strip=True) for h2 in soup.find_all('h2')]
+
+    links = soup.find_all('a', href=True)
+    internal_links = []
+    external_links = []
+
+    for link in links:
+        href = link['href']
+        if href.startswith('/') or url in href:
+            internal_links.append(href)
+        elif href.startswith('http'):
+            external_links.append(href)
+
+    images = soup.find_all('img')
+    images_without_alt = [img['src'] for img in images if not img.get('alt')]
+
+    recommendations = []
+    if response_time > 2.0:
+        recommendations.append(f"Page load time is {response_time:.2f}s. Consider optimizing images or server response time to get it under 2.0s.")
+
+    if len(title) > 60:
+        recommendations.append(f"Title is {len(title)} characters long. SEO best practices recommend keeping meta titles under 60 characters.")
+    elif not title:
+        recommendations.append("Title tag is missing or empty. Please add one.")
+
+    if len(description) > 155:
+        recommendations.append(f"Description is {len(description)} characters long. Keep meta descriptions under 155 characters.")
+    elif not description:
+        recommendations.append("Meta description is missing or empty. Please add one.")
+
+    if len(h1_tags) == 0:
+        recommendations.append("No H1 tag found on the page. Every page should have exactly one H1 tag summarizing its content.")
+    elif len(h1_tags) > 1:
+        recommendations.append(f"Found {len(h1_tags)} H1 tags. It is generally recommended to have only one H1 tag per page.")
+
+    if len(images_without_alt) > 0:
+        recommendations.append(f"Found {len(images_without_alt)} images without alt text. Add alt text for better accessibility and SEO.")
+
+    return {
+        "url": url,
+        "status_code": response.status_code,
+        "response_time_seconds": round(response_time, 2),
+        "seo_data": {
+            "title": title,
+            "description": description,
+            "h1_count": len(h1_tags),
+            "h2_count": len(h2_tags),
+            "internal_links_count": len(internal_links),
+            "external_links_count": len(external_links),
+            "images_without_alt_count": len(images_without_alt)
+        },
+        "recommendations": recommendations
+    }
 
 def generate_daily_report():
-    url = "https://www.drsayuj.info"
-    req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-    try:
-        with urllib.request.urlopen(req) as response:
-            html = response.read().decode('utf-8')
+    base_url = "https://www.drsayuj.info"
+    urls_to_check = [
+        base_url,
+        f"{base_url}/sitemap.xml",
+        f"{base_url}/robots.txt"
+    ]
 
-        parser = SEOParser()
-        parser.feed(html)
+    report = {
+        "date": datetime.datetime.now().isoformat(),
+        "site": base_url,
+        "pages": [],
+        "overall_recommendations": []
+    }
 
-        title = parser.title.strip()
-        description = parser.description.strip()
-        h1_tags = [tag for tag in parser.h1_tags if tag]
+    for url in urls_to_check:
+        response, response_time, error = check_url(url)
 
-        recommendations = []
-        if len(title) > 60:
-            recommendations.append(f"Title is {len(title)} characters long. SEO best practices recommend keeping meta titles under 60 characters to avoid truncation on search engines. Consider shortening it.")
-        elif not title:
-            recommendations.append("Title tag is missing or empty. A title tag is crucial for SEO and user experience. Please add one.")
+        if error:
+            report["pages"].append({
+                "url": url,
+                "status": "error",
+                "error": error
+            })
+            report["overall_recommendations"].append(f"Failed to access {url}: {error}")
+            continue
 
-        if len(description) > 155:
-            recommendations.append(f"Description is {len(description)} characters long. SEO best practices recommend keeping meta descriptions under 155 characters. Consider shortening it.")
-        elif not description:
-            recommendations.append("Meta description is missing or empty. A well-written description improves click-through rates. Please add one.")
-
-        if len(h1_tags) == 0:
-            recommendations.append("No H1 tag found on the page. Every page should have exactly one H1 tag summarizing its content for better SEO.")
-        elif len(h1_tags) > 1:
-            recommendations.append(f"Found {len(h1_tags)} H1 tags. It is generally recommended to have only one H1 tag per page to maintain clear document structure.")
-
-        report = {
-            "date": datetime.datetime.now().isoformat(),
-            "status": "success",
-            "url": url,
-            "seo_data": {
-                "title": title,
-                "description": description,
-                "h1_tags": h1_tags
-            },
-            "recommendations": recommendations
-        }
-    except Exception as e:
-        report = {
-            "date": datetime.datetime.now().isoformat(),
-            "status": "error",
-            "url": url,
-            "error": str(e)
-        }
+        if "sitemap" in url or "robots" in url:
+            report["pages"].append({
+                "url": url,
+                "status": "success",
+                "status_code": response.status_code,
+                "response_time_seconds": round(response_time, 2)
+            })
+            if response.status_code != 200:
+                report["overall_recommendations"].append(f"{url} returned status code {response.status_code}. Ensure it is accessible.")
+        else:
+            page_data = analyze_page(url, response, response_time)
+            page_data["status"] = "success"
+            report["pages"].append(page_data)
 
     with open("/tmp/daily_report.json", "w") as f:
         json.dump(report, f, indent=2)
 
-    return "Report generated inside OpenSandbox."
+    return "Comprehensive Report generated inside OpenSandbox."
 
 generate_daily_report()
 """

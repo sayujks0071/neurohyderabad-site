@@ -25,18 +25,20 @@ jobs:
       - name: Install dependencies
         run: |
           pip install uv
-          uv pip install --system opensandbox opensandbox-code-interpreter requests httpx
+          uv pip install --system opensandbox opensandbox-code-interpreter opensandbox-server requests httpx
 
       - name: Start OpenSandbox Server
         run: |
-          echo "Cloning and starting alibaba/OpenSandbox server..."
-          git clone https://github.com/alibaba/OpenSandbox.git /tmp/OpenSandbox
-          cd /tmp/OpenSandbox/server
-          uv sync
-          cp example.config.toml ~/.sandbox.toml
+          echo "Starting OpenSandbox server..."
+          opensandbox-server init-config ~/.sandbox.toml --example docker
+
+          # Force port to match health checks and GHA expectations
+          sed -i 's/port = 8080/port = 8000/g' ~/.sandbox.toml
 
           # Start server in the background
-          uv run python -m src.main > /tmp/sandbox-server.log 2>&1 &
+          # Default port is 8080, we force it to 8000 to match previous workflow conventions
+          sed -i 's/port = 8080/port = 8000/g' ~/.sandbox.toml
+          opensandbox-server > /tmp/sandbox-server.log 2>&1 &
 
           echo "Waiting for OpenSandbox server to be ready..."
           # The server uses FastAPI on port 8000. Wait for it to listen
@@ -56,7 +58,7 @@ jobs:
 
       - name: Run Daily Sandbox Task Script
         env:
-          SANDBOX_API_URL: http://127.0.0.1:8000
+          OPEN_SANDBOX_DOMAIN: 127.0.0.1:8000
         run: |
           python scripts/daily-sandbox-task.py
 

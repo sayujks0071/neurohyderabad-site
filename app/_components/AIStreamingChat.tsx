@@ -3,8 +3,46 @@
 import React, { useState, useRef, useEffect, useMemo, Fragment } from 'react';
 import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport, type UIMessage } from 'ai';
+import { ChainOfThought, ChainOfThoughtHeader, ChainOfThoughtContent, ChainOfThoughtStep, ChainOfThoughtSearchResults, ChainOfThoughtSearchResult } from "@/src/components/ai-elements/chain-of-thought";
+import { Checkpoint, CheckpointTrigger, CheckpointIcon } from "@/src/components/ai-elements/checkpoint";
+import { Confirmation, ConfirmationRequest, ConfirmationAccepted, ConfirmationRejected, ConfirmationActions, ConfirmationAction } from "@/src/components/ai-elements/confirmation";
+import { Attachments, Attachment, AttachmentPreview, AttachmentInfo, AttachmentRemove } from "@/src/components/ai-elements/attachments";
 import { analytics } from "@/src/lib/analytics";
 import { Suggestion, Suggestions } from "@/src/components/ai-elements/suggestion";
+import { CheckIcon, XIcon, SearchIcon, CalendarIcon, StethoscopeIcon, RefreshCcwIcon, CopyIcon, InfoIcon, BookmarkIcon } from "lucide-react";
+
+import {
+  Conversation,
+  ConversationContent,
+  ConversationScrollButton,
+} from "@/src/components/ai-elements/conversation";
+import {
+  Message,
+  MessageContent,
+  MessageResponse,
+  MessageActions,
+  MessageAction,
+} from "@/src/components/ai-elements/message";
+import {
+  Context,
+  ContextTrigger,
+  ContextContent as AIContextContent,
+  ContextContentHeader,
+  ContextContentBody,
+  ContextInputUsage,
+  ContextOutputUsage,
+  ContextContentFooter,
+} from "@/src/components/ai-elements/context";
+
+import { Shimmer } from "@/src/components/ai-elements/shimmer";
+import {
+  PromptInput,
+  PromptInputTextarea,
+  PromptInputFooter,
+  PromptInputTools,
+  PromptInputSubmit,
+} from "@/src/components/ai-elements/prompt-input";
+
 
 interface AIStreamingChatProps {
   pageSlug: string;
@@ -85,15 +123,12 @@ export default function AIStreamingChat({
     scrollToBottom();
   }, [messages]);
 
-  useEffect(() => {
-    // Create checkpoint every 5 messages
-    if (messages.length > 0 && messages.length % 5 === 0) {
-      const isAlreadyCheckpoint = checkpoints.some(cp => cp.messageIndex === messages.length - 1);
-      if (!isAlreadyCheckpoint) {
-        setCheckpoints([...checkpoints, { messageIndex: messages.length - 1 }]);
-      }
+  const createCheckpoint = (messageIndex: number) => {
+    const isAlreadyCheckpoint = checkpoints.some(cp => cp.messageIndex === messageIndex);
+    if (!isAlreadyCheckpoint) {
+      setCheckpoints([...checkpoints, { messageIndex }]);
     }
-  }, [messages.length, checkpoints]);
+  };
 
   const restoreToCheckpoint = (messageIndex: number) => {
     setMessages(messages.slice(0, messageIndex + 1));
@@ -104,20 +139,17 @@ export default function AIStreamingChat({
     setInput(e.target.value);
   };
 
-  const onFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!input.trim() || isLoading) return;
+  const onFormSubmit = async (message: { text: string; files?: FileList | undefined }) => {
+    if (!message.text.trim() && (!message.files || message.files.length === 0)) return;
+    if (isLoading) return;
 
     analytics.aiAssistant.message('user');
 
-    const userMessage = input;
     setInput('');
-    // Use helper object with text property for convenience
-    // Pass files to the API
     await sendMessage({
-      text: userMessage,
-      files: files
-    });
+      text: message.text,
+      experimental_attachments: message.files
+    } as any);
     setFiles(undefined);
   };
 
@@ -133,7 +165,7 @@ export default function AIStreamingChat({
     "I have severe headache and dizziness",
     "I need information about spine surgery",
     "What are your clinic hours?",
-    "Tell me about endoscopic spine surgery"
+    "I want to upload my MRI report for review"
   ];
 
   return (
@@ -170,185 +202,186 @@ export default function AIStreamingChat({
         </div>
 
         {/* Messages */}
-        <div className="h-96 overflow-y-auto p-4 space-y-4">
-          {messages.map((message, index) => {
-            // Helper to get text content from parts
-            const textContent = message.parts
-              .filter(part => part.type === 'text')
-              .map(part => (part as any).text)
-              .join('');
 
-            return (
-              <Fragment key={message.id}>
-              <div
-                className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
-              >
-                <div
-                  className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
-                    message.role === 'user'
-                      ? 'bg-[var(--color-primary-500)] text-white'
-                      : 'bg-[var(--color-background)] text-[var(--color-text-primary)]'
-                  }`}
-                >
-                  <p className="text-sm whitespace-pre-wrap">{textContent}</p>
+        <Conversation className="h-96 relative bg-[var(--color-surface)]">
+          <ConversationContent className="p-4 space-y-6">
+            {messages.map((message, index) => {
+              const textContent = message.parts
+                .filter(part => part.type === 'text')
+                .map(part => (part as any).text)
+                .join('');
 
-                  {((message as any).experimental_attachments || message.parts?.filter(p => (p.type as string) === "file" || (p.type as string) === "image")).length > 0 && (
-                    <div className="mt-2">
-                      <Attachments variant="list">
-                        {((message as any).experimental_attachments || message.parts?.filter(p => (p.type as string) === "file" || (p.type as string) === "image")).map((file: any, i: number) => (
-                          <Attachment key={`${message.id}-file-${i}`} data={file as any}>
-                            <AttachmentInfo />
-                          </Attachment>
-                        ))}
-                      </Attachments>
+              const isLastMessage = index === messages.length - 1;
+
+              return (
+                <Fragment key={message.id}>
+                  <Message from={message.role} className="w-full">
+                    <MessageContent className={message.role === 'user' ? 'bg-[var(--color-primary-500)] text-white p-3 rounded-lg max-w-[85%] ml-auto' : 'w-full'}>
+                      {textContent && (
+                        <div className={message.role === 'user' ? 'text-sm' : ''}>
+                          {message.role === 'assistant' ? (
+                            <MessageResponse>{textContent}</MessageResponse>
+                          ) : (
+                            textContent
+                          )}
+                        </div>
+                      )}
+
+                      {/* Attachments */}
+                      {((message as any).experimental_attachments || message.parts?.filter(p => (p.type as string) === "file" || (p.type as string) === "image")).length > 0 && (
+                        <div className="mt-2">
+                          <Attachments variant="list">
+                            {((message as any).experimental_attachments || message.parts?.filter(p => (p.type as string) === "file" || (p.type as string) === "image")).map((file: any, i: number) => (
+                              <Attachment key={`${message.id}-file-${i}`} data={{ id: `${message.id}-file-${i}`, filename: file.name || file.filename || "Attachment", mediaType: file.contentType || file.mediaType || "", type: "file", url: file.url } as any}>
+                                <AttachmentPreview />
+                                <AttachmentInfo showMediaType />
+                              </Attachment>
+                            ))}
+                          </Attachments>
+                        </div>
+                      )}
+
+                      {/* Tools (Confirmation / CoT) */}
+                      {message.parts?.filter(part => part.type.startsWith("tool-")).map((part: any) => {
+                        const tool = Object.keys(part).includes('toolInvocationId') ? part : { ...part, toolInvocationId: part.toolCallId, args: part.args || part.input, state: part.state || 'approval-requested' };
+                        let icon = StethoscopeIcon;
+                        let label = "Processing tool: " + tool.toolName;
+                        if (tool.toolName === "searchContent") { icon = SearchIcon; label = "Searching medical information..."; }
+                        else if (tool.toolName === "checkAvailability") { icon = CalendarIcon; label = "Checking schedule availability..."; }
+                        else if (tool.toolName === "getServices" || tool.toolName === "getLocations") { icon = StethoscopeIcon; label = "Retrieving clinic details..."; }
+                        const isCompleted = tool.state === "result";
+
+                        return (
+                          <div key={tool.toolInvocationId} className="mt-4">
+                            {tool.toolName !== "bookAppointment" && (
+                              <div className="mb-2">
+                                <ChainOfThought defaultOpen={!isCompleted}>
+                                  <ChainOfThoughtHeader>{isCompleted ? `Completed: ${label}` : `Thinking: ${label}`}</ChainOfThoughtHeader>
+                                  <ChainOfThoughtContent>
+                                    <ChainOfThoughtStep icon={icon} label={label} description={isCompleted ? "Tool executed successfully" : "Tool is currently executing"} status={isCompleted ? "complete" : "active"} />
+                                    {isCompleted && tool.result && (
+                                      <div className="mt-2">
+                                        {tool.toolName === "searchContent" && Array.isArray(tool.result) ? (
+                                          <ChainOfThoughtSearchResults>
+                                            {tool.result.map((res: any, idx: number) => (
+                                              <a key={idx} href={res.url} target="_blank" rel="noopener noreferrer">
+                                                <ChainOfThoughtSearchResult className="hover:bg-slate-200 transition-colors cursor-pointer">
+                                                  {res.title}
+                                                </ChainOfThoughtSearchResult>
+                                              </a>
+                                            ))}
+                                          </ChainOfThoughtSearchResults>
+                                        ) : (
+                                          <div className="text-xs bg-black/5 p-2 rounded max-h-32 overflow-y-auto">
+                                            <pre className="whitespace-pre-wrap font-mono">{typeof tool.result === 'string' ? tool.result : JSON.stringify(tool.result).slice(0, 150) + "..."}</pre>
+                                          </div>
+                                        )}
+                                      </div>
+                                    )}
+                                  </ChainOfThoughtContent>
+                                </ChainOfThought>
+                              </div>
+                            )}
+
+                            {tool.approval && (
+                              <Confirmation approval={tool.approval} state={tool.state}>
+                                <ConfirmationRequest>
+                                  <p className="font-medium text-sm text-[var(--color-text-primary)] mb-2">This action requires your confirmation:</p>
+                                  <div className="bg-slate-50 p-3 rounded border border-slate-200 text-xs">
+                                    {tool.toolName === "bookAppointment" ? (
+                                      <div className="text-slate-700">
+                                        <p className="font-semibold mb-2 text-slate-900">Appointment Request</p>
+                                        <ul className="space-y-1">
+                                          <li><span className="font-medium">Patient:</span> {tool.args.patientName}</li>
+                                          <li><span className="font-medium">Date/Time:</span> {tool.args.appointmentDate} at {tool.args.appointmentTime}</li>
+                                          <li><span className="font-medium">Reason:</span> {tool.args.reason}</li>
+                                          <li><span className="font-medium">Contact:</span> {tool.args.phone}</li>
+                                        </ul>
+                                      </div>
+                                    ) : (
+                                      <pre className="text-slate-700">{JSON.stringify(tool.args, null, 2)}</pre>
+                                    )}
+                                  </div>
+                                </ConfirmationRequest>
+                                <ConfirmationAccepted>
+                                  <CheckIcon className="size-4 text-green-600" />
+                                  <span className="text-green-700 font-medium text-sm">You approved this request</span>
+                                </ConfirmationAccepted>
+                                <ConfirmationRejected>
+                                  <XIcon className="size-4 text-red-600" />
+                                  <span className="text-red-700 font-medium text-sm">You rejected this request</span>
+                                </ConfirmationRejected>
+                                <ConfirmationActions className="mt-3">
+                                  <ConfirmationAction variant="outline" onClick={() => addToolApprovalResponse({ id: tool.approval!.id, approved: false })}>Reject</ConfirmationAction>
+                                  <ConfirmationAction variant="default" className="bg-[var(--color-primary-600)]" onClick={() => addToolApprovalResponse({ id: tool.approval!.id, approved: true })}>Approve</ConfirmationAction>
+                                </ConfirmationActions>
+                              </Confirmation>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </MessageContent>
+                  </Message>
+
+                  {/* Message Actions */}
+                  {message.role === 'assistant' && textContent && (
+                    <div className="flex justify-between items-center mt-2 pl-12">
+                      <MessageActions className="opacity-100 flex gap-2">
+                        <MessageAction tooltip="Copy message" label="Copy" onClick={() => navigator.clipboard.writeText(textContent)}>
+                          <CopyIcon className="size-3" />
+                        </MessageAction>
+                        <MessageAction tooltip="Bookmark this point in conversation" label="Bookmark" onClick={() => createCheckpoint(index)}>
+                          <BookmarkIcon className="size-3" />
+                        </MessageAction>
+                        <div className="inline-block relative">
+                          <Context maxTokens={8000} usedTokens={textContent.length * 2} usage={{ inputTokens: textContent.length, outputTokens: textContent.length, totalTokens: textContent.length * 2 } as any} modelId="openai:gpt-4">
+                            <ContextTrigger asChild>
+                              <button className="h-6 text-xs gap-1 px-2 hover:bg-slate-100 rounded border border-transparent flex items-center text-slate-500">
+                                <InfoIcon className="size-3" /> Context
+                              </button>
+                            </ContextTrigger>
+                            <AIContextContent className="w-64">
+                              <ContextContentHeader>AI Model Usage</ContextContentHeader>
+                              <ContextContentBody>
+                                <ContextInputUsage />
+                                <ContextOutputUsage />
+                              </ContextContentBody>
+                              <ContextContentFooter />
+                            </AIContextContent>
+                          </Context>
+                        </div>
+                      </MessageActions>
                     </div>
                   )}
 
-                  {message.parts?.filter(part => part.type === "tool-invocation").map((part: any) => {
-                    const tool = part;
+                  {/* Checkpoints */}
+                  {checkpoints.find(cp => cp.messageIndex === index) && (
+                    <div className="flex justify-center my-4">
+                      <Checkpoint>
+                        <CheckpointIcon />
+                        <CheckpointTrigger onClick={() => restoreToCheckpoint(index)}>Restore to before this topic</CheckpointTrigger>
+                      </Checkpoint>
+                    </div>
+                  )}
+                </Fragment>
+              );
+            })}
 
-                    // Determine chain of thought icon and label
-                    let icon = StethoscopeIcon;
-                    let label = "Processing tool: " + tool.toolName;
-                    if (tool.toolName === "searchContent") {
-                      icon = SearchIcon;
-                      label = "Searching medical information...";
-                    } else if (tool.toolName === "checkAvailability") {
-                      icon = CalendarIcon;
-                      label = "Checking schedule availability...";
-                    } else if (tool.toolName === "getServices" || tool.toolName === "getLocations") {
-                      icon = StethoscopeIcon;
-                      label = "Retrieving clinic details...";
-                    }
-
-                    const isCompleted = tool.state === "result";
-
-                    return (
-                      <div key={tool.toolInvocationId} className="mt-4">
-                        {/* Display Chain of Thought for non-approval tools or tools that haven't required approval yet */}
-                        {tool.toolName !== "bookAppointment" && (
-                          <div className="mb-2">
-                            <ChainOfThought defaultOpen={!isCompleted}>
-                              <ChainOfThoughtHeader>
-                                {isCompleted ? `Completed: ${label}` : `Thinking: ${label}`}
-                              </ChainOfThoughtHeader>
-                              <ChainOfThoughtContent>
-                                <ChainOfThoughtStep
-                                  icon={icon}
-                                  label={label}
-                                  description={isCompleted ? "Tool executed successfully" : "Tool is currently executing"}
-                                  status={isCompleted ? "complete" : "active"}
-                                />
-                                {isCompleted && tool.result && (
-                                  <div className="text-xs mt-2 bg-black/5 p-2 rounded max-h-32 overflow-y-auto">
-                                    <pre className="whitespace-pre-wrap font-mono">
-                                      {typeof tool.result === 'string' ? tool.result : JSON.stringify(tool.result).slice(0, 150) + "..."}
-                                    </pre>
-                                  </div>
-                                )}
-                              </ChainOfThoughtContent>
-                            </ChainOfThought>
-                          </div>
-                        )}
-
-                        {tool.approval && (
-                          <Confirmation approval={tool.approval} state={tool.state}>
-                            <ConfirmationRequest>
-                              <p>This action requires your confirmation:</p>
-                              <div className="bg-[var(--color-surface)] p-2 rounded text-xs mt-2 overflow-x-auto text-[var(--color-text-primary)] border border-[var(--color-border)]">
-                                {tool.toolName === "bookAppointment" ? (
-                                  <div>
-                                    <p className="font-semibold mb-1">Book Appointment</p>
-                                    <ul className="list-disc pl-4">
-                                      <li><strong>Patient:</strong> {tool.args.patientName}</li>
-                                      <li><strong>Date:</strong> {tool.args.appointmentDate} at {tool.args.appointmentTime}</li>
-                                      <li><strong>Reason:</strong> {tool.args.reason}</li>
-                                      <li><strong>Contact:</strong> {tool.args.phone}</li>
-                                    </ul>
-                                  </div>
-                                ) : (
-                                  <pre>{JSON.stringify(tool.args, null, 2)}</pre>
-                                )}
-                              </div>
-                              <p className="mt-2 text-sm">Do you approve this booking?</p>
-                            </ConfirmationRequest>
-                            <ConfirmationAccepted>
-                              <CheckIcon className="size-4" />
-                              <span>You approved this booking request</span>
-                            </ConfirmationAccepted>
-                            <ConfirmationRejected>
-                              <XIcon className="size-4" />
-                              <span>You rejected this booking request</span>
-                            </ConfirmationRejected>
-                            <ConfirmationActions>
-                              <ConfirmationAction
-                                variant="outline"
-                                onClick={() =>
-                                  addToolApprovalResponse({
-                                    id: tool.toolInvocationId,
-                                    approved: false,
-                                  })
-                                }
-                              >
-                                Reject
-                              </ConfirmationAction>
-                              <ConfirmationAction
-                                variant="default"
-                                className="bg-[var(--color-primary-600)] text-white hover:bg-[var(--color-primary-700)]"
-                                onClick={() =>
-                                  addToolApprovalResponse({
-                                    id: tool.toolInvocationId,
-                                    approved: true,
-                                  })
-                                }
-                              >
-                                Approve
-                              </ConfirmationAction>
-                            </ConfirmationActions>
-                          </Confirmation>
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
+            {isLoading && (
+              <div className="flex justify-start items-center gap-2 p-2 pl-4 text-slate-500">
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-[var(--color-primary-500)]"></div>
+                <Shimmer className="text-sm font-medium text-[var(--color-primary-600)]" duration={1.5} spread={2}>AI is analyzing your request...</Shimmer>
               </div>
-              {checkpoints.find(cp => cp.messageIndex === index) && (
-                <div className="flex justify-center my-4">
-                  <Checkpoint>
-                    <CheckpointIcon />
-                    <CheckpointTrigger onClick={() => restoreToCheckpoint(index)}>
-                      Restore previous conversation state
-                    </CheckpointTrigger>
-                  </Checkpoint>
-                </div>
-              )}
-              </Fragment>
-            );
-          })}
-          
-          {isLoading && (
-            <div className="flex justify-start">
-              <div className="bg-[var(--color-background)] text-[var(--color-text-primary)] px-4 py-2 rounded-lg">
-                <div className="flex items-center space-x-2">
-                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-[var(--color-primary-500)]"></div>
-                  <span className="text-sm">AI is thinking...</span>
-                </div>
+            )}
+            {error && (
+              <div className="p-3 bg-red-50 text-red-600 rounded-lg text-sm m-4">
+                {error.message || "An error occurred. Please try again or call +91-9778280044."}
               </div>
-            </div>
-          )}
-
-          {error && (
-            <div className="flex justify-start">
-              <div className="bg-[var(--color-error-light)] text-[var(--color-error-800)] px-4 py-2 rounded-lg">
-                <p className="text-sm">
-                  {error.message || "I'm having trouble right now. Please call +91-9778280044 for immediate assistance."}
-                </p>
-              </div>
-            </div>
-          )}
-          
-          <div ref={messagesEndRef} />
-        </div>
+            )}
+            <div ref={messagesEndRef} className="h-px" />
+          </ConversationContent>
+          <ConversationScrollButton className="absolute bottom-4 left-1/2 -translate-x-1/2" />
+        </Conversation>
 
         {/* Quick Actions - Only show if just initial message */}
         {messages.length <= 1 && (
@@ -359,9 +392,9 @@ export default function AIStreamingChat({
                 <Suggestion
                   key={index}
                   onClick={() => handleQuickAction(action)}
-                  disabled={isLoading}
                   suggestion={action}
-                  className="text-xs bg-[var(--color-primary-50)] text-[var(--color-primary-700)] hover:bg-[var(--color-primary-100)] transition-colors disabled:opacity-50 whitespace-nowrap"
+                  disabled={isLoading}
+                  className="bg-[var(--color-primary-50)] text-[var(--color-primary-700)] hover:bg-[var(--color-primary-100)] transition-colors disabled:opacity-50"
                 />
               ))}
             </Suggestions>
@@ -369,16 +402,23 @@ export default function AIStreamingChat({
         )}
 
         {/* Input Form */}
-        <form onSubmit={onFormSubmit} className="p-4 border-t border-[var(--color-border)]">
+        <div className="p-4 border-t border-[var(--color-border)]">
           {files && files.length > 0 && (
             <div className="mb-2">
               <Attachments variant="inline">
                 {Array.from(files).map((file, i) => (
                   <Attachment
                     key={`upload-${i}`}
-                    data={{ id: `upload-${i}`, name: file.name, contentType: file.type } as any}
+                    data={{ id: `upload-${i}`, filename: file.name, mediaType: file.type, type: "file" } as any}
                     onRemove={() => {
-                      setFiles(undefined);
+                      // Remove specific file from FileList object
+                      if (files) {
+                        const dt = new DataTransfer();
+                        Array.from(files).forEach((f, index) => {
+                          if (index !== i) dt.items.add(f);
+                        });
+                        setFiles(dt.files.length > 0 ? dt.files : undefined);
+                      }
                     }}
                   >
                     <AttachmentPreview />
@@ -389,35 +429,41 @@ export default function AIStreamingChat({
               </Attachments>
             </div>
           )}
-          <div className="flex space-x-2">
-            <label className="flex items-center justify-center px-4 py-2 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-lg cursor-pointer hover:bg-[var(--color-primary-50)] text-[var(--color-text-secondary)] transition-colors">
-              <span className="sr-only">Upload file</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
-              <input
-                type="file"
-                className="hidden"
-                onChange={(e) => setFiles(e.target.files || undefined)}
-                multiple
-                disabled={isLoading}
-              />
-            </label>
-            <input
-              type="text"
+
+          <PromptInput
+            onSubmit={(msg) => {
+              onFormSubmit({ text: msg.text, files: files });
+            }}
+          >
+            <PromptInputTextarea
               value={input}
-              onChange={handleInputChange}
+              onChange={(e) => setInput(e.target.value)}
               placeholder="Type your message here..."
-              className="flex-1 px-3 py-2 border border-[var(--color-border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)] focus:border-transparent"
               disabled={isLoading}
             />
-            <button
-              type="submit"
-              disabled={!input.trim() || isLoading}
-              className="px-4 py-2 bg-gradient-to-r from-[var(--color-primary-500)] to-purple-600 text-white rounded-lg hover:from-[var(--color-primary-700)] hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-            >
-              {isLoading ? 'Sending...' : 'Send'}
-            </button>
-          </div>
-        </form>
+            <PromptInputFooter>
+              <PromptInputTools>
+                <label
+                  className="flex items-center justify-center p-2 rounded-lg cursor-pointer hover:bg-[var(--color-primary-50)] text-[var(--color-text-secondary)] transition-colors"
+                  title="Upload MRI scans or medical reports"
+                >
+                  <span className="sr-only">Upload MRI scans or medical reports</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+                  <input
+                    type="file"
+                    className="hidden"
+                    onChange={(e) => setFiles(e.target.files || undefined)}
+                    multiple
+                    disabled={isLoading}
+                  />
+                </label>
+              </PromptInputTools>
+              <PromptInputSubmit
+                disabled={!input.trim() || isLoading}
+              />
+            </PromptInputFooter>
+          </PromptInput>
+        </div>
       </div>
 
       {/* Features Info */}

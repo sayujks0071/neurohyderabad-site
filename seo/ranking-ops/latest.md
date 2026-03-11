@@ -1,8 +1,8 @@
 # Latest SEO Operation
 
-**Date**: 2026-03-06
-**Focus**: Content Gap Patch / YMYL Safety Signals
-**Page**: `app/services/epilepsy-surgery-hyderabad/page.tsx`
-**Action**: Added a dedicated "When to Seek Immediate Emergency Care (Red Flags)" section to the Epilepsy Surgery page, improving topical depth and aligning with Google's YMYL quality rater guidelines by providing safe, actionable emergency advice (e.g., Status Epilepticus).
+**Date**: 2026-03-08
+**Focus**: Internal Linking Improvement
+**Page**: `app/best-neurosurgeon-in-hyderabad/page.tsx`
+**Action**: Added a "Comprehensive Neurosurgical Treatments" section to the 'best neurosurgeon' pillar page, linking to 12 specific service and condition pages. This hub-and-spoke architecture improvement passes topical authority down the site structure, as identified in competitor analysis of top-ranking hospital pages.
 
-**Report**: [View Full Report](./2026-03-06/report.md)
+**Report**: [View Full Report](./2026-03-08/report.md)
