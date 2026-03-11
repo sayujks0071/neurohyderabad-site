@@ -357,6 +357,11 @@ export default function EndoscopicDiscectomyCostPage() {
               "name": "Dr Sayuj Krishnan",
               "url": `${SITE_URL}/about/`
             },
+            "reviewer": {
+              "@type": "Person",
+              "name": "Dr Sayuj Krishnan",
+              "url": `${SITE_URL}/about/`
+            },
             "publisher": {
               "@type": "Organization",
               "name": "Dr Sayuj Krishnan - Neurosurgeon",

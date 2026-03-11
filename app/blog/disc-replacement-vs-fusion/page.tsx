@@ -27,6 +27,7 @@ export default function Page() {
       name: 'Disc Replacement vs Fusion Hyderabad',
       description: 'Compare disc replacement vs spinal fusion: benefits, risks, recovery, and candidacy with Dr. Sayuj Krishnan in Hyderabad.',
       author: { '@id': 'https://www.drsayuj.info/#physician' },
+      reviewer: { '@id': 'https://www.drsayuj.info/#physician' },
       publisher: { '@id': 'https://www.drsayuj.info/#physician' },
       datePublished: '2025-01-15',
       dateModified: '2025-01-15',

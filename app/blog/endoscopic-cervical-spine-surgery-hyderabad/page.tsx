@@ -59,6 +59,7 @@ const blogPostingSchema = {
   "datePublished": "2025-11-25",
   "dateModified": "2025-11-25",
   "author": { "@id": "https://www.drsayuj.info/#physician" },
+      "reviewer": { "@id": "https://www.drsayuj.info/#physician" },
   "publisher": { "@id": "https://www.drsayuj.info/#hospital" },
   "articleSection": "Spine Surgery",
   "wordCount": "1150",

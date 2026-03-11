@@ -15,7 +15,7 @@ export const revalidate = 86400; // Revalidate every 24 hours
 
 export const metadata: Metadata = {
   title: "Dr Sayuj Krishnan | Best Neurosurgeon in Hyderabad",
-  description: "Learn about Dr. Sayuj Krishnan's exceptional training, over 9 years of neurosurgical experience, German fellowship, and pioneering work in minimally invasive brain & spine surgery in Hyderabad.",
+  description: "Learn about Dr. Sayuj Krishnan's training, 9+ years experience, German fellowship, and pioneering minimally invasive brain & spine surgery in Hyderabad.",
   keywords: [
     "dr sayuj krishnan credentials",
     "neurosurgeon hyderabad experience",

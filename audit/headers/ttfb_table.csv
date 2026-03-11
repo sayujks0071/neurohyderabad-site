@@ -1,6 +1,11 @@
-URL,Type,TTFB(s),Cache-Control,Content-Encoding,X-NextJS-Cache
-http://localhost:3000/,Homepage,0.525635,"no-store, must-revalidate",NONE,N/A
-http://localhost:3000/services/minimally-invasive-spine-surgery,Service,0.398932,"no-store, must-revalidate",NONE,N/A
-http://localhost:3000/conditions/sciatica-pain-treatment-hyderabad,Condition,1.543075,"no-store, must-revalidate",NONE,N/A
-http://localhost:3000/neurosurgeon-hitech-city,Location,1.125940,"no-store, must-revalidate",NONE,N/A
-http://localhost:3000/blog/awake-craniotomy-guide,Blog,0.924011,"no-store, must-revalidate",NONE,N/A
+url,ttfb_ms,cache_control
+"https://www.drsayuj.info",449,"no-store, must-revalidate"
+"https://www.drsayuj.info/about",249,"no-store, must-revalidate"
+"https://www.drsayuj.info/appointments",423,"no-store, must-revalidate"
+"https://www.drsayuj.info/contact",381,"no-store, must-revalidate"
+"https://www.drsayuj.info/services",414,"no-store, must-revalidate"
+"https://www.drsayuj.info/conditions",1293,"no-store, must-revalidate"
+"https://www.drsayuj.info/locations",1093,"no-store, must-revalidate"
+"https://www.drsayuj.info/best-neurosurgeon-in-hyderabad",343,"no-store, must-revalidate"
+"https://www.drsayuj.info/brain-surgery",218,"no-store, must-revalidate"
+"https://www.drsayuj.info/spine-surgery",228,"no-store, must-revalidate"
