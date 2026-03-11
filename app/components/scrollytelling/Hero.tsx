@@ -98,9 +98,25 @@ export default function Hero() {
 
         window.addEventListener('resize', handleResize);
 
-        // Animation Loop
+        // Animation Loop & Viewport Optimization
         let animationFrameId: number;
+        let isVisible = true; // Assume visible initially
+
+        // ⚡ Bolt: Pause WebGL rendering when hero is off-screen to save CPU/GPU
+        const observer = new IntersectionObserver((entries) => {
+            const wasVisible = isVisible;
+            isVisible = entries[0].isIntersecting;
+
+            // Restart animation loop when scrolling back into view
+            if (isVisible && !wasVisible) {
+                animate();
+            }
+        }, { threshold: 0 });
+
+        observer.observe(containerRef.current);
+
         const animate = () => {
+            if (!isVisible) return; // Halt loop when off-screen
             animationFrameId = requestAnimationFrame(animate);
             renderer.render(scene, camera);
         };
@@ -146,6 +162,7 @@ export default function Hero() {
 
         // Cleanup
         return () => {
+            observer.disconnect();
             window.removeEventListener('resize', handleResize);
             cancelAnimationFrame(animationFrameId);
 
