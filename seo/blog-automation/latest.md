@@ -12,3 +12,7 @@
 - **Topic:** Cervical Spine Surgery Recovery Timeline: What to Expect Week by Week
 - **Status:** Success
 - **Traceability File:** [Run Details](./2026-03-10/run.md)
+- **Date:** 2026-03-11
+- **Topic:** Frequent Headaches in Children: When to See a Pediatric Neurosurgeon
+- **Status:** Success
+- **Traceability File:** [Run Details](./2026-03-11/run.md)

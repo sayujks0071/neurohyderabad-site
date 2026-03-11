@@ -12,15 +12,15 @@ vi.mock('@/src/lib/rate-limit', () => ({
 }));
 
 // Mock streamText from ai
-const mockToDataStreamResponse = vi.fn(() => new Response('mock-stream-response'));
+const mockToTextStreamResponse = vi.fn(() => new Response('mock-stream-response'));
 vi.mock('ai', async (importOriginal) => {
   const actual = await importOriginal<typeof import('ai')>();
   return {
     ...actual,
     streamText: vi.fn(() => ({
-      toDataStreamResponse: mockToDataStreamResponse,
-      toTextStreamResponse: mockToDataStreamResponse,
-      toUIMessageStreamResponse: mockToDataStreamResponse,
+      toDataStreamResponse: mockToTextStreamResponse,
+      toTextStreamResponse: mockToTextStreamResponse,
+      toUIMessageStreamResponse: mockToTextStreamResponse,
     })),
   };
 });
