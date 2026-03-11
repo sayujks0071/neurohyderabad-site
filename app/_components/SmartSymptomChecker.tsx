@@ -97,6 +97,7 @@ export default function SmartSymptomChecker() {
             </label>
             <textarea
               id="symptoms"
+              name="symptoms"
               value={symptoms}
               onChange={(e) => setSymptoms(e.target.value)}
               placeholder="e.g., I've been experiencing severe headaches for the past week, along with dizziness and blurred vision..."
@@ -114,6 +115,7 @@ export default function SmartSymptomChecker() {
               <input
                 type="number"
                 id="age"
+                name="age"
                 value={age}
                 onChange={(e) => setAge(e.target.value)}
                 className="w-full px-3 py-2 border border-[var(--color-border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)]"
@@ -128,6 +130,7 @@ export default function SmartSymptomChecker() {
               </label>
               <select
                 id="gender"
+                name="gender"
                 value={gender}
                 onChange={(e) => setGender(e.target.value)}
                 className="w-full px-3 py-2 border border-[var(--color-border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)]"
@@ -146,6 +149,7 @@ export default function SmartSymptomChecker() {
               <input
                 type="text"
                 id="duration"
+                name="duration"
                 value={duration}
                 onChange={(e) => setDuration(e.target.value)}
                 placeholder="e.g., 2 weeks"

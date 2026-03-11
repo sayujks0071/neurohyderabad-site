@@ -98,6 +98,7 @@ export default function KnowledgeBaseClient() {
               </label>
               <input
                 id="query"
+                name="query"
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
@@ -113,6 +114,7 @@ export default function KnowledgeBaseClient() {
               </label>
               <select
                 id="searchType"
+                name="searchType"
                 value={searchType}
                 onChange={(e) => setSearchType(e.target.value as any)}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"

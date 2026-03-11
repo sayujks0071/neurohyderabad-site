@@ -246,6 +246,7 @@ const ChatBot = () => {
           >
             <input
               type="text"
+              name="message"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Ask about symptoms, appointments, or reports..."
