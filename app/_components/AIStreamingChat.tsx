@@ -9,38 +9,7 @@ import { Confirmation, ConfirmationRequest, ConfirmationAccepted, ConfirmationRe
 import { Attachments, Attachment, AttachmentPreview, AttachmentInfo, AttachmentRemove } from "@/src/components/ai-elements/attachments";
 import { analytics } from "@/src/lib/analytics";
 import { Suggestion, Suggestions } from "@/src/components/ai-elements/suggestion";
-import { CheckIcon, XIcon, SearchIcon, CalendarIcon, StethoscopeIcon, RefreshCcwIcon, CopyIcon, InfoIcon } from "lucide-react";
-
-import {
-  Conversation,
-  ConversationContent,
-  ConversationScrollButton,
-} from "@/src/components/ai-elements/conversation";
-import {
-  Message,
-  MessageContent,
-  MessageResponse,
-  MessageActions,
-  MessageAction,
-} from "@/src/components/ai-elements/message";
-import {
-  Context,
-  ContextTrigger,
-  ContextContent as AIContextContent,
-  ContextContentHeader,
-  ContextContentBody,
-  ContextInputUsage,
-  ContextOutputUsage,
-  ContextContentFooter,
-} from "@/src/components/ai-elements/context";
-import {
-  PromptInput,
-  PromptInputTextarea,
-  PromptInputFooter,
-  PromptInputTools,
-  PromptInputSubmit,
-} from "@/src/components/ai-elements/prompt-input";
-
+import { Shimmer } from "@/src/components/ai-elements/shimmer";
 
 interface AIStreamingChatProps {
   pageSlug: string;
@@ -304,38 +273,93 @@ export default function AIStreamingChat({
                               </Confirmation>
                             )}
                           </div>
-                        );
-                      })}
-                    </MessageContent>
-                  </Message>
+                        )}
 
-                  {/* Message Actions */}
-                  {message.role === 'assistant' && isLastMessage && textContent && (
-                    <div className="flex justify-between items-center mt-2 pl-12">
-                      <MessageActions className="opacity-100 flex gap-2">
-                        <MessageAction tooltip="Copy message" label="Copy" onClick={() => navigator.clipboard.writeText(textContent)}>
-                          <CopyIcon className="size-3" />
-                        </MessageAction>
-                        <div className="inline-block relative">
-                          <Context maxTokens={8000} usedTokens={textContent.length * 2} usage={{ inputTokens: textContent.length, outputTokens: textContent.length, totalTokens: textContent.length * 2 } as any} modelId="openai:gpt-4">
-                            <ContextTrigger asChild>
-                              <button className="h-6 text-xs gap-1 px-2 hover:bg-slate-100 rounded border border-transparent flex items-center text-slate-500">
-                                <InfoIcon className="size-3" /> Context
-                              </button>
-                            </ContextTrigger>
-                            <AIContextContent className="w-64">
-                              <ContextContentHeader>AI Model Usage</ContextContentHeader>
-                              <ContextContentBody>
-                                <ContextInputUsage />
-                                <ContextOutputUsage />
-                              </ContextContentBody>
-                              <ContextContentFooter />
-                            </AIContextContent>
-                          </Context>
-                        </div>
-                      </MessageActions>
-                    </div>
-                  )}
+                        {tool.approval && (
+                          <Confirmation approval={tool.approval} state={tool.state}>
+                            <ConfirmationRequest>
+                              <p>This action requires your confirmation:</p>
+                              <div className="bg-[var(--color-surface)] p-2 rounded text-xs mt-2 overflow-x-auto text-[var(--color-text-primary)] border border-[var(--color-border)]">
+                                {tool.toolName === "bookAppointment" ? (
+                                  <div>
+                                    <p className="font-semibold mb-1">Book Appointment</p>
+                                    <ul className="list-disc pl-4">
+                                      <li><strong>Patient:</strong> {tool.args.patientName}</li>
+                                      <li><strong>Date:</strong> {tool.args.appointmentDate} at {tool.args.appointmentTime}</li>
+                                      <li><strong>Reason:</strong> {tool.args.reason}</li>
+                                      <li><strong>Contact:</strong> {tool.args.phone}</li>
+                                    </ul>
+                                  </div>
+                                ) : (
+                                  <pre>{JSON.stringify(tool.args, null, 2)}</pre>
+                                )}
+                              </div>
+                              <p className="mt-2 text-sm">Do you approve this booking?</p>
+                            </ConfirmationRequest>
+                            <ConfirmationAccepted>
+                              <CheckIcon className="size-4" />
+                              <span>You approved this booking request</span>
+                            </ConfirmationAccepted>
+                            <ConfirmationRejected>
+                              <XIcon className="size-4" />
+                              <span>You rejected this booking request</span>
+                            </ConfirmationRejected>
+                            <ConfirmationActions>
+                              <ConfirmationAction
+                                variant="outline"
+                                onClick={() =>
+                                  addToolApprovalResponse({
+                                    id: tool.toolInvocationId,
+                                    approved: false,
+                                  })
+                                }
+                              >
+                                Reject
+                              </ConfirmationAction>
+                              <ConfirmationAction
+                                variant="default"
+                                className="bg-[var(--color-primary-600)] text-white hover:bg-[var(--color-primary-700)]"
+                                onClick={() =>
+                                  addToolApprovalResponse({
+                                    id: tool.toolInvocationId,
+                                    approved: true,
+                                  })
+                                }
+                              >
+                                Approve
+                              </ConfirmationAction>
+                            </ConfirmationActions>
+                          </Confirmation>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              {checkpoints.find(cp => cp.messageIndex === index) && (
+                <div className="flex justify-center my-4">
+                  <Checkpoint>
+                    <CheckpointIcon />
+                    <CheckpointTrigger onClick={() => restoreToCheckpoint(index)}>
+                      Restore previous conversation state
+                    </CheckpointTrigger>
+                  </Checkpoint>
+                </div>
+              )}
+              </Fragment>
+            );
+          })}
+          
+          {isLoading && (
+            <div className="flex justify-start">
+              <div className="bg-[var(--color-background)] text-[var(--color-text-primary)] px-4 py-2 rounded-lg">
+                <div className="flex items-center space-x-2">
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-[var(--color-primary-500)]"></div>
+                  <Shimmer as="span" className="text-sm">AI is thinking...</Shimmer>
+                </div>
+              </div>
+            </div>
+          )}
 
                   {/* Checkpoints */}
                   {checkpoints.find(cp => cp.messageIndex === index) && (
