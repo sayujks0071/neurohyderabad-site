@@ -32,6 +32,9 @@ jobs:
           echo "Starting OpenSandbox server..."
           opensandbox-server init-config ~/.sandbox.toml --example docker
 
+          # Force port to match health checks and GHA expectations
+          sed -i 's/port = 8080/port = 8000/g' ~/.sandbox.toml
+
           # Start server in the background
           opensandbox-server > /tmp/sandbox-server.log 2>&1 &
 
@@ -53,7 +56,7 @@ jobs:
 
       - name: Run Daily Sandbox Task Script
         env:
-          SANDBOX_API_URL: http://127.0.0.1:8000
+          OPEN_SANDBOX_DOMAIN: 127.0.0.1:8000
         run: |
           python scripts/daily-sandbox-task.py
 
