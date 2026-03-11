@@ -68,7 +68,7 @@ export async function POST(request: NextRequest) {
 
     // Return data stream response (standard for AI SDK 3+)
     // @ts-ignore
-    return result.toDataStreamResponse();
+    return result.toUIMessageStreamResponse();
 
   } catch (error) {
     console.error('Error processing AI chat request:', error);
