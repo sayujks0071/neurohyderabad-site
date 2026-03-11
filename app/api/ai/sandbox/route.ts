@@ -6,19 +6,16 @@ export const maxDuration = 30;
 
 export async function POST(req: Request) {
   try {
-    const ip = req.headers.get('x-forwarded-for') || '127.0.0.1';
-    const limitRes = await rateLimit(ip.split(',')[0].trim(), 5, 10);
+    const rawIp = request.headers.get('x-forwarded-for') ?? '127.0.0.1';
+    const ip = rawIp.split(',')[0].trim();
+    // Provide default rate limit parameters if they are missing
+    const { success } = await rateLimit(`ai-sandbox-${ip}`, 50, 60000);
 
-    if (!limitRes.success) {
-      return new Response(JSON.stringify({ error: 'Too many requests. Please try again later.' }), {
-        status: 429,
-        headers: {
-          'Content-Type': 'application/json',
-          'X-RateLimit-Limit': limitRes.limit.toString(),
-          'X-RateLimit-Remaining': limitRes.remaining.toString(),
-          'X-RateLimit-Reset': limitRes.reset.toString(),
-        },
-      });
+    if (!success) {
+      return NextResponse.json(
+        { error: 'Too many requests. Please try again later.' },
+        { status: 429 }
+      );
     }
 
     if (!hasAIConfig()) {
