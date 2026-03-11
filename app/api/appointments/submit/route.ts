@@ -7,12 +7,25 @@ import {
 import { buildWebhookPayload, notifyAppointmentWebhooks } from "@/src/lib/appointments/webhooks";
 import { submitToGoogleSheets } from "@/src/lib/google-sheets";
 import { rateLimit } from "@/src/lib/rate-limit";
+import { checkBotId } from "botid/server";
 import { appointments } from "@/src/lib/db";
 import { analyzeTriage } from "@/src/lib/ai/triage";
 import { parseBookingData, ValidationError } from "./validation";
 
 export async function POST(request: Request) {
   try {
+    const verification = await checkBotId();
+
+    if (verification.isBot) {
+      console.warn("BotID detected a bot submission", {
+        reason: 'classificationReason' in verification ? verification.classificationReason : 'unknown',
+      });
+      return NextResponse.json(
+        { error: "Access denied" },
+        { status: 403 }
+      );
+    }
+
     // Get IP from x-forwarded-for (first IP is the real client IP) or fallback
     const forwardedFor = request.headers.get("x-forwarded-for");
     const ip = forwardedFor ? forwardedFor.split(",")[0].trim() : "127.0.0.1";
