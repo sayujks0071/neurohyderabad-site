@@ -5,6 +5,7 @@ import { WelcomeScene } from '../components/ConsultationPrep/WelcomeScene';
 import { CalendarScene } from '../components/ConsultationPrep/CalendarScene';
 import { PrepStepsScene } from '../components/ConsultationPrep/PrepStepsScene';
 import { TransitionFlash } from '../components/shared/TransitionFlash';
+import { ProgressBar } from '../components/shared/ProgressBar';
 import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion';
 
 // Transition Easing
@@ -132,6 +133,9 @@ export const ConsultationPrepVideo: React.FC<ConsultationPrepProps> = ({
       {/* Transition Flashes (Placed on top for smooth effect) */}
       <TransitionFlash startFrame={165} />
       <TransitionFlash startFrame={445} />
+
+      {/* Global Progress Indicator */}
+      <ProgressBar />
     </AbsoluteFill>
   );
 };
