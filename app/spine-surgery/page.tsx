@@ -678,6 +678,98 @@ export default function SpineSurgeryPage() {
           </div>
         </section>
 
+        {/* Risks & Safety Protocols */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl font-bold text-gray-900 mb-4">Risks & Safety Protocols</h2>
+                <p className="text-gray-600 max-w-3xl mx-auto">
+                  Every surgical procedure carries some level of risk. However, with minimally invasive endoscopic techniques and stringent safety protocols, we significantly reduce the likelihood of complications compared to traditional open spine surgery.
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-8">
+                {/* Potential Risks */}
+                <div className="bg-red-50 p-8 rounded-xl border border-red-100">
+                  <div className="flex items-center gap-3 mb-6">
+                    <AlertCircle className="w-8 h-8 text-red-600" />
+                    <h3 className="text-2xl font-semibold text-gray-900">Potential Risks</h3>
+                  </div>
+                  <ul className="space-y-4">
+                    <li className="flex items-start gap-3">
+                      <span className="text-red-500 font-bold mt-1">•</span>
+                      <div>
+                        <strong className="text-gray-900 block">Dural Tear (CSF Leak)</strong>
+                        <span className="text-gray-700">A small tear in the covering of the spinal cord. While rare in endoscopic procedures, it can occur.</span>
+                      </div>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-red-500 font-bold mt-1">•</span>
+                      <div>
+                        <strong className="text-gray-900 block">Infection</strong>
+                        <span className="text-gray-700">Any incision carries a risk of surgical site infection.</span>
+                      </div>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-red-500 font-bold mt-1">•</span>
+                      <div>
+                        <strong className="text-gray-900 block">Nerve Irritation</strong>
+                        <span className="text-gray-700">Temporary numbness or weakness due to working close to delicate spinal nerves.</span>
+                      </div>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-red-500 font-bold mt-1">•</span>
+                      <div>
+                        <strong className="text-gray-900 block">Recurrence</strong>
+                        <span className="text-gray-700">A small percentage of patients may experience a re-herniation at the same spinal level.</span>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Our Safety Protocols */}
+                <div className="bg-green-50 p-8 rounded-xl border border-green-100">
+                  <div className="flex items-center gap-3 mb-6">
+                    <CheckCircle className="w-8 h-8 text-green-600" />
+                    <h3 className="text-2xl font-semibold text-gray-900">Our Mitigation Strategies</h3>
+                  </div>
+                  <ul className="space-y-4">
+                    <li className="flex items-start gap-3">
+                      <span className="text-green-600 font-bold mt-1">✓</span>
+                      <div>
+                        <strong className="text-gray-900 block">Endoscopic Magnification</strong>
+                        <span className="text-gray-700">High-definition 4K cameras provide unparalleled visibility, drastically reducing the risk of dural tears and nerve injury.</span>
+                      </div>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-green-600 font-bold mt-1">✓</span>
+                      <div>
+                        <strong className="text-gray-900 block">Micro-Incision (8mm)</strong>
+                        <span className="text-gray-700">Smaller incisions mean less tissue disruption, significantly lowering infection rates compared to traditional surgery.</span>
+                      </div>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-green-600 font-bold mt-1">✓</span>
+                      <div>
+                        <strong className="text-gray-900 block">Awake Surgery Capabilities</strong>
+                        <span className="text-gray-700">Using local anesthesia allows the patient to provide real-time feedback, ensuring nerve safety throughout the procedure.</span>
+                      </div>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-green-600 font-bold mt-1">✓</span>
+                      <div>
+                        <strong className="text-gray-900 block">Strict Rehabilitation Protocol</strong>
+                        <span className="text-gray-700">Post-operative core strengthening programs are implemented immediately to minimize the chance of recurrence.</span>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Why Choose Dr. Krishnan */}
         <section className="py-16 bg-gray-50">
           <div className="container mx-auto px-4">
