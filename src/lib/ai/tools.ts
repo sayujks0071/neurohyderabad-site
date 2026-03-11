@@ -135,7 +135,7 @@ export const tools = {
       endTime: z.string().describe('The end time of the event in ISO string format (e.g., "2024-12-25T11:00:00Z")'),
       attendeeEmail: z.string().email().optional().describe('Optional patient email to invite to the calendar event'),
     }),
-    execute: async ({ summary, description, startTime, endTime, attendeeEmail }) => {
+    execute: async ({ summary, description, startTime, endTime, attendeeEmail }: { summary: string; description: string; startTime: string; endTime: string; attendeeEmail?: string }) => {
       try {
         const eventPayload: any = {
           summary,
