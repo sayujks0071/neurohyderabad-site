@@ -34,14 +34,14 @@ export default function DicomAnalysisPage() {
       });
 
       if (!response.ok) {
-          const errData = await response.json().catch(() => ({}));
-          throw new Error(errData.error || `Analysis failed: ${response.statusText}`);
+         const errData = await response.json().catch(() => ({}));
+         throw new Error(errData.error || `Analysis failed: ${response.statusText}`);
       }
       const data = await response.json();
       setResult(data.metadata);
 
-    } catch (err: any) {
-      setError(err.message || "An unexpected error occurred.");
+    } catch (serverErr: any) {
+      setError(serverErr.message || "An unexpected error occurred.");
     } finally {
       setAnalyzing(false);
     }

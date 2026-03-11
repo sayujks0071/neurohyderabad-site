@@ -30,11 +30,14 @@ export default function MriAnalysisPage() {
     setResult(null);
 
     try {
+      const headers: Record<string, string> = {};
+
       const formData = new FormData();
       formData.append("file", file);
 
       const response = await fetch("/api/mri/analyze", {
         method: "POST",
+        headers,
         body: formData,
       });
 
