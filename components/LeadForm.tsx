@@ -101,7 +101,19 @@ export default function LeadForm() {
       analytics.leadSuccess('lead_form_component', data.source);
 
       setIsSubmitted(true);
-      reset();
+      reset({
+        fullName: "",
+        phone: "",
+        email: "",
+        city: "",
+        concern: "",
+        preferredDate: "",
+        preferredTime: "",
+        painScore: 5,
+        mriScanAvailable: false,
+        company: "",
+        source: "website",
+      });
     } catch (err: any) {
       console.error("Submission error:", err);
 

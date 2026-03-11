@@ -60,7 +60,7 @@ describe('LeadForm', () => {
     });
 
     // Verify exact success text
-    expect(screen.getByText("Appointment request received. Please bring any MRI/CT scans with you. We will confirm via phone shortly.")).toBeInTheDocument();
+    expect(screen.getByText("Your appointment request has been successfully received. We will call you shortly to confirm the exact time. Please remember to bring any recent MRI or CT scans with you to your appointment.")).toBeInTheDocument();
 
     // Verify fetch was called
     expect(fetchMock).toHaveBeenCalledWith('/api/lead', expect.anything());
