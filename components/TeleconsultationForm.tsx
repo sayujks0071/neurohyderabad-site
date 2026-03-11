@@ -122,6 +122,15 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
       
       setStatus('success');
       setFormState(initialState);
+      setErrors({
+        name: '',
+        phone: '',
+        email: '',
+        condition: '',
+        message: '',
+        painScore: '',
+        mriScanAvailable: '',
+      });
     } catch (error) {
       console.error(error);
       analytics.formError(pageSlug, 'teleconsultation_form', 'submission_error');
@@ -411,6 +420,7 @@ export default function TeleconsultationForm({ pageSlug, service }: Teleconsulta
         <Button
           type="submit"
           isLoading={status === 'submitting'}
+          disabled={status === 'submitting'}
           aria-describedby="form-status"
         >
           {status === 'submitting' ? "Sending..." : "Send appointment request"}

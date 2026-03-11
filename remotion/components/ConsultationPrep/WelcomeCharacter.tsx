@@ -60,6 +60,8 @@ export const WelcomeCharacter: React.FC<WelcomeCharacterProps> = ({ char, delay,
     [frame, delay, prefersReducedMotion]
   );
 
+  const waveY = 0;
+
   return (
     <span
       style={{

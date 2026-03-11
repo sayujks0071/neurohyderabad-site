@@ -133,6 +133,7 @@ export function DraftViewer() {
               <div className="flex bg-gray-100 rounded-lg p-1">
                 <button
                   onClick={() => setViewMode('preview')}
+                  aria-pressed={viewMode === 'preview'}
                   className={`px-3 py-1 text-sm rounded-md transition-colors ${
                     viewMode === 'preview'
                       ? 'bg-white text-gray-900 shadow-sm'
@@ -143,6 +144,7 @@ export function DraftViewer() {
                 </button>
                 <button
                   onClick={() => setViewMode('source')}
+                  aria-pressed={viewMode === 'source'}
                   className={`px-3 py-1 text-sm rounded-md transition-colors ${
                     viewMode === 'source'
                       ? 'bg-white text-gray-900 shadow-sm'
@@ -158,6 +160,8 @@ export function DraftViewer() {
               onClick={copyToClipboard}
               className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
               title="Copy to clipboard"
+              aria-label={copied ? "Copied to clipboard" : "Copy to clipboard"}
+              aria-live="polite"
             >
               {copied ? (
                 <Check className="w-4 h-4 text-green-600" />
@@ -170,6 +174,7 @@ export function DraftViewer() {
               onClick={downloadFile}
               className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
               title="Download file"
+              aria-label="Download file"
             >
               <Download className="w-4 h-4" />
             </button>
