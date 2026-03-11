@@ -3,8 +3,8 @@
   "commit_hash": "latest",
   "page_type": "Home",
   "suspected_lcp_element": "Hero image (dr-sayuj-krishnan-portrait-sm.jpg)",
-  "bottleneck_identified": "The hero image uses next/image with 'fill' and 'priority' but lacks 'sizes'. Without 'sizes', Next.js defaults to generating srcsets assuming a 100vw image width, which may load a sub-optimally sized version initially.",
-  "fix_applied": "Added 'sizes=\"100vw\"' to the hero image in app/components/scrollytelling/Hero.tsx to ensure optimal responsive image generation.",
-  "expected_improvement": "A better sized initial image might be selected, improving the time it takes to display the image fully, thereby marginally improving the LCP proxy.",
-  "how_to_verify": "1. Run `pnpm dev`. 2. Open `http://localhost:3000`. 3. Inspect the hero image element and verify it has `sizes=\"100vw\"`. 4. Observe the Network tab to see if a more appropriately sized image is downloaded initially."
+  "bottleneck_identified": "The ScrubEngine preloads 190 frames for the Three.js Hero animation shortly after the initial load. It uses `setTimeout(..., 100)` to trigger the download of the remaining 186 images. This floods the network and main thread right at hydration, severely harming INP (Interaction to Next Paint) and potentially delaying other critical resources like LCP images if network congestion occurs.",
+  "fix_applied": "Updated `preload()` in `app/components/scrollytelling/ScrubEngine.ts` to defer `_loadRemainingFrames` until the browser is idle using `requestIdleCallback` (with a 2000ms `setTimeout` fallback).",
+  "expected_improvement": "Massively improved INP by removing main thread congestion during hydration and avoiding immediate network congestion that competes with LCP assets.",
+  "how_to_verify": "1. Run `pnpm dev`. 2. Open `http://localhost:3000`. 3. Open Network tab and Performance tab. 4. Verify that the massive burst of `ezgif-frame-*.jpg` downloads doesn't happen until the browser is idle (or 2 seconds later). 5. Run a Lighthouse performance audit."
 }

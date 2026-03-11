@@ -49,12 +49,12 @@ describe('BookingForm Component', () => {
     render(<BookingForm onSubmit={vi.fn()} />);
 
     // Check if the label is present
-    const labels = screen.getAllByText(/I have recent MRI\/CT Scan reports available/i);
+    const labels = screen.getAllByText(/I have a recent MRI\/CT Scan report available/i);
     expect(labels.length).toBeGreaterThan(0);
     expect(labels[0]).toBeInTheDocument();
 
     // Check if the checkbox is present and has correct attributes
-    const checkbox = screen.getByLabelText(/I have recent MRI\/CT Scan reports available/i);
+    const checkbox = screen.getByLabelText(/I have a recent MRI\/CT Scan report available/i);
     expect(checkbox).toBeInTheDocument();
     expect(checkbox).toHaveAttribute('type', 'checkbox');
   });
@@ -70,7 +70,7 @@ describe('BookingForm Component', () => {
   it('allows toggling MRI Scan Available', () => {
     render(<BookingForm onSubmit={vi.fn()} />);
 
-    const checkbox = screen.getByLabelText(/I have recent MRI\/CT Scan reports available/i) as HTMLInputElement;
+    const checkbox = screen.getByLabelText(/I have a recent MRI\/CT Scan report available/i) as HTMLInputElement;
     expect(checkbox.checked).toBe(false); // Default
 
     fireEvent.click(checkbox);

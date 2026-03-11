@@ -187,7 +187,7 @@ export function DraftsList() {
       {/* Refresh Button */}
       <button
         onClick={fetchDrafts}
-        className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors"
+        className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-[0.98]"
       >
         Refresh Drafts
       </button>
