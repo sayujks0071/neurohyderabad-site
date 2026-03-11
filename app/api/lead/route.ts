@@ -1,6 +1,7 @@
 
 import { NextRequest, NextResponse, after } from "next/server";
 import { rateLimit } from "@/src/lib/rate-limit";
+import { checkBotId } from "botid/server";
 import { validateLeadPayload } from "@/src/lib/validation";
 import { submitToGoogleSheets } from "@/src/lib/google-sheets";
 import { randomUUID } from "crypto";
@@ -42,6 +43,19 @@ export async function POST(request: NextRequest) {
   }
 
   try {
+    const verification = await checkBotId();
+
+    if (verification.isBot) {
+      console.warn("BotID detected a bot submission", {
+        ip,
+        reason: 'classificationReason' in verification ? verification.classificationReason : 'unknown',
+      });
+      return NextResponse.json(
+        { error: "Access denied" },
+        { status: 403 }
+      );
+    }
+
     const body = (await request.json()) as LeadPayload;
 
     if (body.company) {

@@ -6,6 +6,7 @@ import pkg from "workflow/next";
 const { withWorkflow } = pkg;
 import MiddlewareWebpackPlugin from "@middleware.io/sourcemap-uploader/dist/webpack-plugin";
 import withBundleAnalyzer from '@next/bundle-analyzer';
+import { withBotId } from 'botid/next/config';
 
 const bundleAnalyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
@@ -395,4 +396,4 @@ const nextConfig = {
 
 // Wrap with withWorkflow to enable workflow directives
 // The workflow package handles both webpack and turbopack configurations internally
-export default withWorkflow(bundleAnalyzer(nextConfig));
+export default withBotId(withWorkflow(bundleAnalyzer(nextConfig)));
