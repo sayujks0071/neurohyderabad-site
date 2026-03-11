@@ -49,7 +49,7 @@ const ARTICLE_SOURCES = getServiceSources('spine-surgery-cost-hyderabad') || [];
 
 export default function SpineSurgeryCostPage() {
   const pageUrl = `${SITE_URL}/services/spine-surgery-cost-hyderabad`;
-  const faqs = faqSchema.mainEntity.map((item: any) => ({
+  const faqs = [].map((item: any) => ({
     question: item.name,
     answer: item.acceptedAnswer.text,
   }));

@@ -1,10 +1,14 @@
 import { tool } from 'ai';
 import { z } from 'zod';
+import { exec } from 'child_process';
+import { promisify } from 'util';
 import { processBooking } from '@/src/lib/appointments/service';
 import { appointments } from '@/src/lib/db';
 import { locations } from '@/src/data/locations';
 import { semanticSearch } from '@/src/lib/ai/semantic-search';
 import type { BookingData } from '@/packages/appointment-form/types';
+
+const execAsync = promisify(exec);
 
 const SERVICES = [
   { name: 'Minimally Invasive Spine Surgery', url: '/services/minimally-invasive-spine-surgery' },
@@ -119,6 +123,53 @@ export const tools = {
         phone: loc.telephone,
         mapUrl: (loc as any).directions_url || (loc as any).googleMapsUrl
       }));
+    },
+  } as any),
+
+  createCalendarEvent: tool({
+    description: 'Create a Google Calendar event for a scheduled appointment to secure the timeslot and notify the patient via email.',
+    parameters: z.object({
+      summary: z.string().describe('The title of the event (e.g. "Dr. Sayuj Consultation - John Doe")'),
+      description: z.string().describe('The description of the event including patient details and reason for visit'),
+      startTime: z.string().describe('The start time of the event in ISO string format (e.g., "2024-12-25T10:00:00Z")'),
+      endTime: z.string().describe('The end time of the event in ISO string format (e.g., "2024-12-25T11:00:00Z")'),
+      attendeeEmail: z.string().email().optional().describe('Optional patient email to invite to the calendar event'),
+    }),
+    execute: async ({ summary, description, startTime, endTime, attendeeEmail }) => {
+      try {
+        const eventPayload: any = {
+          summary,
+          description,
+          start: { dateTime: startTime },
+          end: { dateTime: endTime },
+        };
+
+        if (attendeeEmail) {
+          eventPayload.attendees = [{ email: attendeeEmail }];
+        }
+
+        const jsonString = JSON.stringify(eventPayload).replace(/'/g, "'\\''");
+        const command = `gws calendar events insert --params '{"calendarId": "primary"}' --json '${jsonString}'`;
+
+        const { stdout, stderr } = await execAsync(command);
+        if (stderr && !stderr.includes('success')) {
+          console.warn('[tools/createCalendarEvent] gws stderr:', stderr);
+        }
+
+        const response = JSON.parse(stdout);
+        return {
+          success: true,
+          eventId: response.id,
+          link: response.htmlLink,
+          message: 'Calendar event created successfully.'
+        };
+      } catch (error: any) {
+        console.error('[tools/createCalendarEvent] failed to create event via gws:', error);
+        return {
+          success: false,
+          error: error.message || 'Failed to create calendar event'
+        };
+      }
     },
   } as any),
 };

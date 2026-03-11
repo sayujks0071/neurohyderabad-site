@@ -88,27 +88,36 @@ export function getGatewayModel(modelName: string = DEFAULT_TEXT_MODEL): string 
  * - API key or OIDC token is automatically used
  * - Base URL points to Vercel AI Gateway
  */
-export function createAIGatewayClient() {
+export function createAIGatewayClient(options?: { cache?: boolean }) {
   const apiKey = process.env.AI_GATEWAY_API_KEY;
   
   if (!apiKey && !process.env.VERCEL) {
     throw new Error('AI_GATEWAY_API_KEY must be set, or deploy on Vercel for OIDC token');
   }
 
+  // Set up headers for Vercel AI Gateway features
+  const headers: Record<string, string> = {};
+
+  // Enable caching if requested (great for summarization/recommendations to save cost)
+  if (options?.cache) {
+    headers['vercel-ai-gateway-cache'] = 'true';
+  }
+
   // Create OpenAI client configured for Vercel AI Gateway
   return createOpenAI({
     apiKey: apiKey || undefined, // OIDC token is used automatically on Vercel if no API key
     baseURL: getGatewayBaseUrl(),
+    headers,
   });
 }
 
 /**
  * Get AI client function (works like openai() from @ai-sdk/openai)
  */
-export function getAIClient() {
+export function getAIClient(options?: { cache?: boolean }) {
   if (isAIGatewayConfigured()) {
     try {
-      const gatewayClient = createAIGatewayClient();
+      const gatewayClient = createAIGatewayClient(options);
       // Return a function that matches the openai() API
       // createOpenAI returns a function that takes a model name
       return (model: string) => gatewayClient(model);
@@ -135,7 +144,7 @@ export function getTextModelName(modelName: string = DEFAULT_TEXT_MODEL): string
  * 
  * Works with Vercel AI Gateway (provider/model format)
  */
-export function getTextModel(modelName: string = DEFAULT_TEXT_MODEL) {
-  const aiClient = getAIClient();
+export function getTextModel(modelName: string = DEFAULT_TEXT_MODEL, options?: { cache?: boolean }) {
+  const aiClient = getAIClient(options);
   return aiClient(getTextModelName(modelName));
 }
