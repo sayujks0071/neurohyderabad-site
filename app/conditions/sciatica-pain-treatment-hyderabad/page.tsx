@@ -237,7 +237,10 @@ export default function SciaticaTreatmentPage() {
         </div>
 
         <div className="bg-blue-50 p-6 rounded-lg">
-          <h3 className="text-xl font-semibold mb-4 text-blue-700">Why Choose Dr. Sayuj?</h3>
+          <h3 className="text-xl font-semibold mb-4 text-blue-700">Why Choose Dr. Sayuj as Your Sciatica Specialist in Hyderabad?</h3>
+          <p className="text-gray-700 mb-4">
+            As a leading spine and sciatica specialist in Hyderabad, Dr. Sayuj Krishnan focuses on an evidence-based, conservative-first approach to provide lasting relief from radiating leg pain.
+          </p>
           <ul className="space-y-3 text-gray-700">
             <li className="flex items-start">
               <span className="text-green-600 mr-2 mt-1">✓</span>

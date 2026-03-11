@@ -85,6 +85,7 @@ export default function NewsletterSignup({
           <div>
             <input
               type="email"
+              name="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
@@ -132,6 +133,7 @@ export default function NewsletterSignup({
     >
       <input
         type="email"
+        name="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Enter your email for health insights"

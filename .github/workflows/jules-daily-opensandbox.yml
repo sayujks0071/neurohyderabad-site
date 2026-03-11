@@ -33,6 +33,8 @@ jobs:
           opensandbox-server init-config ~/.sandbox.toml --example docker
 
           # Start server in the background
+          # Default port is 8080, we force it to 8000 to match previous workflow conventions
+          sed -i 's/port = 8080/port = 8000/g' ~/.sandbox.toml
           opensandbox-server > /tmp/sandbox-server.log 2>&1 &
 
           echo "Waiting for OpenSandbox server to be ready..."
@@ -54,6 +56,7 @@ jobs:
       - name: Run Daily Sandbox Task Script
         env:
           SANDBOX_API_URL: http://127.0.0.1:8000
+          OPEN_SANDBOX_DOMAIN: 127.0.0.1:8000
         run: |
           python scripts/daily-sandbox-task.py
 
