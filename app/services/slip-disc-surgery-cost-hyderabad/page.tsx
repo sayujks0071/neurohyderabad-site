@@ -46,6 +46,22 @@ export const metadata: Metadata = {
 const ARTICLE_SOURCES = getServiceSources('slip-disc-surgery-cost-hyderabad') || [];
 
 // FAQ Schema
+const faqSchema = {
+  mainEntity: [
+    {
+      name: "How much does slip disc surgery cost in Hyderabad?",
+      acceptedAnswer: {
+        text: "The cost of slip disc surgery in Hyderabad typically ranges from ₹2,00,000 to ₹4,00,000, depending on the type of procedure (endoscopic vs open) and hospital stay."
+      }
+    },
+    {
+      name: "Is endoscopic discectomy covered by insurance?",
+      acceptedAnswer: {
+        text: "Yes, endoscopic discectomy is covered by most health insurance providers. We assist with pre-authorization and offer cashless insurance options."
+      }
+    }
+  ]
+};
 
 export default function SlipDiscSurgeryCostPage() {
   const pageUrl = `${SITE_URL}/services/slip-disc-surgery-cost-hyderabad`;

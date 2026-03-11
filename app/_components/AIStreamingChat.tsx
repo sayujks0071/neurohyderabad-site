@@ -9,40 +9,33 @@ import { Confirmation, ConfirmationRequest, ConfirmationAccepted, ConfirmationRe
 import { Attachments, Attachment, AttachmentPreview, AttachmentInfo, AttachmentRemove } from "@/src/components/ai-elements/attachments";
 import { analytics } from "@/src/lib/analytics";
 import { Suggestion, Suggestions } from "@/src/components/ai-elements/suggestion";
-import { CheckIcon, XIcon, SearchIcon, CalendarIcon, StethoscopeIcon, RefreshCcwIcon, CopyIcon, InfoIcon, BookmarkIcon } from "lucide-react";
-
 import {
-  Conversation,
-  ConversationContent,
-  ConversationScrollButton,
-} from "@/src/components/ai-elements/conversation";
+  Attachments,
+  Attachment,
+  AttachmentInfo,
+  AttachmentPreview,
+  AttachmentRemove
+} from "@/components/ai-elements/attachments";
 import {
-  Message,
-  MessageContent,
-  MessageResponse,
-  MessageActions,
-  MessageAction,
-} from "@/src/components/ai-elements/message";
+  ChainOfThought,
+  ChainOfThoughtHeader,
+  ChainOfThoughtContent,
+  ChainOfThoughtStep
+} from "@/components/ai-elements/chain-of-thought";
 import {
-  Context,
-  ContextTrigger,
-  ContextContent as AIContextContent,
-  ContextContentHeader,
-  ContextContentBody,
-  ContextInputUsage,
-  ContextOutputUsage,
-  ContextContentFooter,
-} from "@/src/components/ai-elements/context";
-
-import { Shimmer } from "@/src/components/ai-elements/shimmer";
+  Confirmation,
+  ConfirmationRequest,
+  ConfirmationAccepted,
+  ConfirmationRejected,
+  ConfirmationActions,
+  ConfirmationAction
+} from "@/components/ai-elements/confirmation";
 import {
-  PromptInput,
-  PromptInputTextarea,
-  PromptInputFooter,
-  PromptInputTools,
-  PromptInputSubmit,
-} from "@/src/components/ai-elements/prompt-input";
-
+  Checkpoint,
+  CheckpointIcon,
+  CheckpointTrigger
+} from "@/components/ai-elements/checkpoint";
+import { CalendarIcon, SearchIcon, StethoscopeIcon, CheckIcon, XIcon } from "lucide-react";
 
 interface AIStreamingChatProps {
   pageSlug: string;
@@ -165,11 +158,14 @@ export default function AIStreamingChat({
     "I have severe headache and dizziness",
     "I need information about spine surgery",
     "What are your clinic hours?",
-    "I want to upload my MRI report for review"
+    "Tell me about endoscopic spine surgery",
+    "Cost of slip disc surgery",
+    "Book an appointment",
+    "How does machine learning work?"
   ];
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-4xl mx-auto h-[600px] flex flex-col relative size-full rounded-lg border">
       {/* Emergency Alert */}
       {showEmergencyAlert && (
         <div className="mb-6 p-4 bg-[var(--color-error-light)] border border-[var(--color-error)] text-[var(--color-error-700)] rounded-lg animate-pulse">
@@ -187,7 +183,7 @@ export default function AIStreamingChat({
       )}
 
       {/* Chat Interface */}
-      <div className="bg-[var(--color-surface)] rounded-2xl border border-[var(--color-border)] shadow-lg overflow-hidden">
+      <div className="bg-[var(--color-surface)] rounded-2xl shadow-lg overflow-hidden flex-1 flex flex-col h-full">
         {/* Chat Header */}
         <div className="bg-gradient-to-r from-[var(--color-primary-500)] to-purple-600 text-white p-4">
           <div className="flex items-center">
@@ -202,6 +198,39 @@ export default function AIStreamingChat({
         </div>
 
         {/* Messages */}
+        <div className="flex-1 overflow-y-auto p-4 space-y-4 h-full">
+          {messages.map((message, index) => {
+            // Helper to get text content from parts
+            const textContent = message.parts
+              .filter(part => part.type === 'text')
+              .map(part => (part as any).text)
+              .join('');
+
+            return (
+              <Fragment key={message.id}>
+              <div
+                className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+              >
+                <div
+                  className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
+                    message.role === 'user'
+                      ? 'bg-[var(--color-primary-500)] text-white'
+                      : 'bg-[var(--color-background)] text-[var(--color-text-primary)]'
+                  }`}
+                >
+                  <p className="text-sm whitespace-pre-wrap">{textContent}</p>
+
+                  {((message as any).experimental_attachments || message.parts?.filter(p => (p.type as string) === "file" || (p.type as string) === "image")).length > 0 && (
+                    <div className="mt-2">
+                      <Attachments variant="list">
+                        {((message as any).experimental_attachments || message.parts?.filter(p => (p.type as string) === "file" || (p.type as string) === "image")).map((file: any, i: number) => (
+                          <Attachment key={`${message.id}-file-${i}`} data={file as any}>
+                            <AttachmentInfo />
+                          </Attachment>
+                        ))}
+                      </Attachments>
+                    </div>
+                  )}
 
         <Conversation className="h-96 relative bg-[var(--color-surface)]">
           <ConversationContent className="p-4 space-y-6">
@@ -385,16 +414,15 @@ export default function AIStreamingChat({
 
         {/* Quick Actions - Only show if just initial message */}
         {messages.length <= 1 && (
-          <div className="p-4 border-t border-[var(--color-border)]">
-            <p className="text-sm text-[var(--color-text-secondary)] mb-3">Quick actions:</p>
+          <div className="p-4">
+            <p className="text-sm text-[var(--color-text-secondary)] mb-3 font-semibold">Quick actions:</p>
             <Suggestions>
               {quickActions.map((action, index) => (
                 <Suggestion
                   key={index}
                   onClick={() => handleQuickAction(action)}
                   suggestion={action}
-                  disabled={isLoading}
-                  className="bg-[var(--color-primary-50)] text-[var(--color-primary-700)] hover:bg-[var(--color-primary-100)] transition-colors disabled:opacity-50"
+                  className="text-xs border-[var(--color-primary-500)] text-[var(--color-primary-700)] hover:bg-[var(--color-primary-100)] transition-colors disabled:opacity-50 whitespace-nowrap"
                 />
               ))}
             </Suggestions>

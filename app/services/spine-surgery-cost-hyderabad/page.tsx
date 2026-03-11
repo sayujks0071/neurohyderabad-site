@@ -46,6 +46,22 @@ export const metadata: Metadata = {
 const ARTICLE_SOURCES = getServiceSources('spine-surgery-cost-hyderabad') || [];
 
 // FAQ Schema
+const faqSchema = {
+  mainEntity: [
+    {
+      name: "How much does spine surgery cost in Hyderabad?",
+      acceptedAnswer: {
+        text: "The cost of spine surgery in Hyderabad typically ranges from ₹2,00,000 to ₹6,00,000, depending on the complexity of the procedure, hospital choice, and whether it's minimally invasive or open surgery."
+      }
+    },
+    {
+      name: "Are minimally invasive spine surgeries more expensive?",
+      acceptedAnswer: {
+        text: "While the initial procedure cost might be slightly higher due to advanced technology, the overall cost is often lower due to shorter hospital stays and faster return to work."
+      }
+    }
+  ]
+};
 
 export default function SpineSurgeryCostPage() {
   const pageUrl = `${SITE_URL}/services/spine-surgery-cost-hyderabad`;
