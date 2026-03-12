@@ -1,5 +1,9 @@
 # Latest Blog Automation Run
 
+- **Date:** 2026-03-12
+- **Topic:** How to Prepare for Spine Surgery: A Patient's Guide to Pre-Op and Recovery Planning in Hyderabad
+- **Status:** Success
+- **Traceability File:** [Run Details](./2026-03-12/run.md)
 - **Date:** 2026-03-08
 - **Topic:** Neck Pain or Shoulder Problem? Cervical Radiculopathy vs. Rotator Cuff Tear
 - **Status:** Success
