@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect, useMemo, Fragment } from 'react';
 import { useChat } from '@ai-sdk/react';
-import { DefaultChatTransport, type UIMessage } from 'ai';
+import { DefaultChatTransport, type UIMessage, type ToolUIPart } from 'ai';
 import { ChainOfThought, ChainOfThoughtHeader, ChainOfThoughtContent, ChainOfThoughtStep, ChainOfThoughtSearchResults, ChainOfThoughtSearchResult } from "@/src/components/ai-elements/chain-of-thought";
 import { Checkpoint, CheckpointTrigger, CheckpointIcon } from "@/src/components/ai-elements/checkpoint";
 import { Confirmation, ConfirmationRequest, ConfirmationAccepted, ConfirmationRejected, ConfirmationActions, ConfirmationAction } from "@/src/components/ai-elements/confirmation";
@@ -194,6 +194,63 @@ export default function AIStreamingChat({
                   }`}
                 >
                   <p className="text-sm whitespace-pre-wrap">{textContent}</p>
+
+                  {message.parts.filter(part => part.type === "tool-bookAppointment").map((part: any, i: number) => {
+                    const bookingTool = part as ToolUIPart<{
+                      bookAppointment: {
+                        input: any;
+                        output: any;
+                      }
+                    }>;
+
+                    if (!bookingTool.approval) return null;
+
+                    return (
+                      <div key={`tool-${i}`} className="mt-4">
+                        <Confirmation approval={bookingTool.approval} state={bookingTool.state}>
+                          <ConfirmationRequest>
+                            <span className="font-semibold block mb-2">Appointment Booking Request</span>
+                            <div className="text-xs bg-black/5 p-2 rounded mb-2">
+                              <div><strong>Patient:</strong> {bookingTool.input?.patientName}</div>
+                              <div><strong>Date:</strong> {bookingTool.input?.appointmentDate}</div>
+                              <div><strong>Time:</strong> {bookingTool.input?.appointmentTime}</div>
+                              <div><strong>Reason:</strong> {bookingTool.input?.reason}</div>
+                            </div>
+                            Do you approve this appointment booking?
+                          </ConfirmationRequest>
+                          <ConfirmationAccepted>
+                            <CheckIcon className="size-4 mr-2" />
+                            <span>You approved this booking</span>
+                          </ConfirmationAccepted>
+                          <ConfirmationRejected>
+                            <XIcon className="size-4 mr-2" />
+                            <span>You rejected this booking</span>
+                          </ConfirmationRejected>
+                          <ConfirmationActions>
+                            <ConfirmationAction
+                              variant="outline"
+                              onClick={() => addToolApprovalResponse({ id: bookingTool.approval!.id, approved: false })}
+                            >
+                              Reject
+                            </ConfirmationAction>
+                            <ConfirmationAction
+                              variant="default"
+                              onClick={() => addToolApprovalResponse({ id: bookingTool.approval!.id, approved: true })}
+                            >
+                              Approve
+                            </ConfirmationAction>
+                          </ConfirmationActions>
+                        </Confirmation>
+                        {bookingTool.output && (
+                          <div className="mt-2 text-sm p-2 rounded bg-white/50 border">
+                            {bookingTool.output.status === "success"
+                              ? `✅ ${bookingTool.output.message}`
+                              : `❌ ${bookingTool.output.message}`}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
 
                   {((message as any).experimental_attachments || message.parts?.filter((p: any) => (p.type as string) === "file" || (p.type as string) === "image")).length > 0 && (
                     <div className="mt-2">
