@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { exec } from 'child_process';
 import { promisify } from 'util';
+import crypto from 'crypto';
 
 const execAsync = promisify(exec);
 
@@ -23,15 +24,21 @@ export async function GET(request: NextRequest) {
   
   // For manual triggers, allow if CRON_SECRET is set and matches
   const cronSecret = process.env.CRON_SECRET;
-  const authHeader = request.headers.get('authorization');
+  const authHeader = request.headers.get('authorization') || '';
   
   if (!isVercelCron) {
     // Manual trigger - check secret if configured
-    if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
-      return NextResponse.json(
-        { error: 'Unauthorized. Use Vercel cron or provide CRON_SECRET.' },
-        { status: 401 }
-      );
+    if (cronSecret) {
+      const expectedHeader = `Bearer ${cronSecret}`;
+      const h1 = crypto.createHash("sha256").update(authHeader).digest();
+      const h2 = crypto.createHash("sha256").update(expectedHeader).digest();
+
+      if (!crypto.timingSafeEqual(h1, h2)) {
+        return NextResponse.json(
+          { error: 'Unauthorized. Use Vercel cron or provide CRON_SECRET.' },
+          { status: 401 }
+        );
+      }
     }
   }
 
