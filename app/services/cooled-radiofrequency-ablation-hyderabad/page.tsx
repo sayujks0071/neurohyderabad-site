@@ -173,7 +173,7 @@ export default function CooledRadiofrequencyAblationPage() {
               </p>
               <ul className="text-sm text-gray-600 space-y-1">
                 <li>• Atypical trigeminal neuralgia</li>
-                <li>• Refractory facial pain</li>
+                <li>• Refractory facial pain (e.g., <Link href="/conditions/trigeminal-neuralgia-treatment-hyderabad" className="text-blue-700 hover:underline">trigeminal neuralgia</Link>)</li>
                 <li>• Post-herpetic neuralgia</li>
               </ul>
             </div>

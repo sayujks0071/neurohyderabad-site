@@ -23,8 +23,8 @@ const PatientEducationVideos = dynamic(() => import('@/app/_components/PatientEd
 });
 
 const baseMetadata = makeMetadata({
-  title: "Sciatica Treatment Hyderabad | 90% Non-Surgical | Dr Sayuj",
-  description: "Best Sciatica treatment in Hyderabad. 90% patients recover without surgery using nerve blocks & meds. Endoscopic cure available. Book Dr Sayuj.",
+  title: "Best Sciatica Treatment in Hyderabad | 90% Non-Surgical",
+  description: "Struggling with leg pain? Top sciatica treatment in Hyderabad. 90% recover without surgery via nerve blocks & meds. Endoscopic cure available.",
   canonicalPath: '/conditions/sciatica-pain-treatment-hyderabad',
 });
 
