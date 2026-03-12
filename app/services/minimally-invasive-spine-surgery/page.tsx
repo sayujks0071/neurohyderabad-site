@@ -30,6 +30,12 @@ const baseMetadata = makeMetadata({
 
 export const metadata: Metadata = {
   ...baseMetadata,
+  keywords: [
+    "endoscopic spine surgery hyderabad",
+    "laser spine surgery hyderabad",
+    "minimally invasive spine surgery hyderabad",
+    "endoscopic spine surgery success rate"
+  ],
   openGraph: {
     title: baseMetadata.title,
     description: baseMetadata.description,
@@ -801,6 +807,36 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
                   Read story →
                 </Link>
               </div>
+            </div>
+          </section>
+
+          {/* Red Flags Section */}
+          <section className="mb-12">
+            <h2 className="text-2xl font-semibold mb-6 text-blue-700">When to Seek Urgent Care (Red Flags)</h2>
+            <div className="bg-red-50 p-6 rounded-lg border border-red-100">
+              <p className="text-gray-700 mb-4 font-semibold">
+                While minimally invasive procedures are highly elective, severe spine conditions can become medical emergencies. Do not delay if you experience:
+              </p>
+              <ul className="space-y-2 text-gray-700 mb-4">
+                <li className="flex items-start">
+                  <span className="text-red-600 mr-2 mt-1">!</span>
+                  <span>Sudden or progressive weakness in your legs or feet (e.g., foot drop).</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-red-600 mr-2 mt-1">!</span>
+                  <span>Loss of bowel or bladder control.</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-red-600 mr-2 mt-1">!</span>
+                  <span>Numbness in the groin or saddle area (saddle anesthesia).</span>
+                </li>
+              </ul>
+              <p className="text-sm text-red-700 mb-4">
+                These symptoms may indicate Cauda Equina Syndrome, requiring immediate surgical decompression. Endoscopic and minimally invasive options may still be viable depending on the pathology.
+              </p>
+              <Link href="/appointments" className="inline-block bg-red-600 text-white px-5 py-2.5 rounded-lg font-semibold hover:bg-red-700 transition-colors shadow-sm">
+                Book Urgent Appointment
+              </Link>
             </div>
           </section>
 
