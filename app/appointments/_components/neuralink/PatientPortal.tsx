@@ -519,6 +519,10 @@ const PatientPortal = () => {
           onSubmit={handleSubmit}
           className="grid grid-cols-1 lg:grid-cols-2 gap-10 animate-in slide-in-from-right-8 duration-500"
         >
+          <input type="hidden" name="type" value={formData.type || ""} />
+          <input type="hidden" name="date" value={formData.date || ""} />
+          <input type="hidden" name="time" value={formData.time || ""} />
+
           <div className="space-y-8">
             <button
               type="button"
