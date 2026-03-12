@@ -16,14 +16,13 @@ export const WelcomeCharacter: React.FC<WelcomeCharacterProps> = ({ char, delay,
 
   // Entrance animations
   const opacity = useMemo(() =>
-    prefersReducedMotion ? 1 : spring({
-      frame: frame - delay,
-      fps,
-      from: 0,
-      to: 1,
-      durationInFrames: 25,
-    }),
-    [frame, fps, delay, prefersReducedMotion]
+    prefersReducedMotion ? 1 : interpolate(
+      frame - delay,
+      [0, 25],
+      [0, 1],
+      { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }
+    ),
+    [frame, delay, prefersReducedMotion]
   );
 
   const scale = useMemo(() =>
@@ -60,7 +59,11 @@ export const WelcomeCharacter: React.FC<WelcomeCharacterProps> = ({ char, delay,
     [frame, delay, prefersReducedMotion]
   );
 
-  const waveY = 0;
+  // Subtle continuous floating wave animation after entrance
+  const waveY = useMemo(() =>
+    prefersReducedMotion ? 0 : Math.sin((frame - delay) / 15) * 4,
+    [frame, delay, prefersReducedMotion]
+  );
 
   return (
     <span
