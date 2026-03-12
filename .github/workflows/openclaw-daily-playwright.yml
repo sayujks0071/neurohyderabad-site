@@ -1,0 +1,66 @@
+name: Daily OpenClaw Playwright Automation
+
+on:
+  schedule:
+    # 8:00 PM IST is 14:30 UTC
+    - cron: '30 14 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  daily-playwright-automation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Playwright
+        run: npx playwright install --with-deps
+
+      - name: Run Daily Automation Script
+        run: |
+          # Use xvfb-run for headed browser tests in CI
+          xvfb-run --auto-servernum bash openclaw/workflows/daily-playwright-automation.sh
+
+      - name: Archive test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-automation-reports
+          path: health-reports/daily-automation/
+          retention-days: 7
+
+      - name: Commit reports
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add health-reports/daily-automation/ || echo "No new reports"
+          git diff --quiet && git diff --staged --quiet || git commit -m "chore: add daily automation reports for $(date +%F)"
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: "Automated Daily Playwright Checks - $(date +%F)"
+          body: |
+            Automated daily QA tests, mobile responsiveness, and WhatsApp flow results.
+            Reports are attached in the PR diff and uploaded as an artifact.
+          branch: "openclaw/daily-automation-$(date +%F)"
+          delete-branch: true
