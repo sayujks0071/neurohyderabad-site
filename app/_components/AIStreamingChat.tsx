@@ -226,25 +226,25 @@ export default function AIStreamingChat({
             <div ref={messagesEndRef} className="h-px" />
         </div>
 
-        {/* Quick Actions - Only show if just initial message */}
-        {messages.length <= 1 && (
-          <div className="p-4">
-            <p className="text-sm text-[var(--color-text-secondary)] mb-3 font-semibold">Quick actions:</p>
-            <Suggestions>
-              {quickActions.map((action, index) => (
-                <Suggestion
-                  key={index}
-                  onClick={() => handleQuickAction(action)}
-                  suggestion={action}
-                  className="text-xs border-[var(--color-primary-500)] text-[var(--color-primary-700)] hover:bg-[var(--color-primary-100)] transition-colors disabled:opacity-50 whitespace-nowrap"
-                />
-              ))}
-            </Suggestions>
-          </div>
-        )}
+        {/* Input Form with Quick Actions */}
+        <div className="p-4 border-t border-[var(--color-border)] flex flex-col gap-4">
+          {/* Quick Actions - Only show if just initial message */}
+          {messages.length <= 1 && (
+            <div>
+              <p className="text-sm text-[var(--color-text-secondary)] mb-3 font-semibold">Quick actions:</p>
+              <Suggestions>
+                {quickActions.map((action, index) => (
+                  <Suggestion
+                    key={index}
+                    onClick={() => handleQuickAction(action)}
+                    suggestion={action}
+                    className="text-xs border-[var(--color-primary-500)] text-[var(--color-primary-700)] hover:bg-[var(--color-primary-100)] transition-colors disabled:opacity-50 whitespace-nowrap"
+                  />
+                ))}
+              </Suggestions>
+            </div>
+          )}
 
-        {/* Input Form */}
-        <div className="p-4 border-t border-[var(--color-border)]">
           {files && files.length > 0 && (
             <div className="mb-2">
               <Attachments variant="inline">
