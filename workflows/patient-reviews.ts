@@ -86,9 +86,7 @@ export async function requestPatientReview(
     await sendReviewRequest(request);
 
     // Create webhook for review submission
-    const webhook = createWebhook({
-      token: `review:${patientId}`,
-    });
+    const webhook = createWebhook();
 
     // Wait for review with 7-day timeout
     const result = await Promise.race([

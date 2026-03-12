@@ -140,9 +140,8 @@ export async function appointmentConfirmationWorkflow(
 
   console.log(`[Appointment] Waiting for confirmation: ${appointment.appointmentId}`);
 
-  // Create webhook with custom token for this appointment
+  // Create webhook for this appointment
   const webhook = createWebhook({
-    token: `appointment-confirm:${appointment.appointmentId}`,
     respondWith: "manual",
   });
 
@@ -353,7 +352,6 @@ export async function paymentConfirmationWorkflow(
 
   // Create webhook for payment gateway callback
   const webhook = createWebhook({
-    token: `payment:${payment.orderId}`,
     // Static response for payment gateway
     respondWith: Response.json({ received: true }, { status: 200 }),
   });
