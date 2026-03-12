@@ -86,13 +86,15 @@ export const getAttachmentLabel = (data: AttachmentData): string => {
   return data.filename || (category === "image" ? "Image" : "Attachment");
 };
 
+import Image from "next/image";
+
 const renderAttachmentImage = (
   url: string,
   filename: string | undefined,
   isGrid: boolean
 ) =>
   isGrid ? (
-    <img
+    <Image
       alt={filename || "Image"}
       className="size-full object-cover"
       height={96}
@@ -100,7 +102,7 @@ const renderAttachmentImage = (
       width={96}
     />
   ) : (
-    <img
+    <Image
       alt={filename || "Image"}
       className="size-full rounded object-cover"
       height={20}
