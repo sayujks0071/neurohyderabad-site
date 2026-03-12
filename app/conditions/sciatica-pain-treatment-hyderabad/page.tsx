@@ -17,6 +17,10 @@ import { patientStories } from '@/src/content/stories';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
 import dynamic from 'next/dynamic';
 import PatientEducationVideosSkeleton from '@/app/_components/skeletons/PatientEducationVideosSkeleton';
+import { getLocationById } from "@/src/data/locations";
+import { LocationNAPCard } from "@/src/components/locations/LocationNAPCard";
+import { LocationCTAs } from "@/src/components/locations/LocationCTAs";
+import { LocationMapEmbed } from "@/src/components/locations/LocationMapEmbed";
 
 const PatientEducationVideos = dynamic(() => import('@/app/_components/PatientEducationVideos'), {
   loading: () => <PatientEducationVideosSkeleton />
@@ -129,6 +133,8 @@ const sciaticaCosts = [
 ];
 
 export default function SciaticaTreatmentPage() {
+  const location = getLocationById("malakpet");
+
   const breadcrumbs = [
     { name: "Home", path: "/" },
     { name: "Conditions", path: "/conditions/" },
@@ -482,6 +488,26 @@ export default function SciaticaTreatmentPage() {
           </Link>
         </div>
       </section>
+
+      {location && (
+        <section className="mb-12 bg-gray-50 p-8 rounded-2xl border border-gray-200 shadow-sm">
+          <h2 className="text-2xl font-bold text-blue-900 mb-4">Visit Our Clinic in Hyderabad</h2>
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <p className="text-gray-700 mb-6 text-lg">
+                Dr. Sayuj Krishnan provides expert sciatica care at <strong>Yashoda Hospitals, Malakpet</strong>. Conveniently located for patients across Hyderabad, we offer comprehensive diagnosis, targeted treatments, and advanced endoscopic solutions.
+              </p>
+              <LocationNAPCard location={location} className="mb-6 bg-white" />
+              <div className="flex gap-4">
+                <LocationCTAs location={location} />
+              </div>
+            </div>
+            <div className="rounded-xl overflow-hidden shadow-sm border border-gray-200 bg-white">
+              <LocationMapEmbed location={location} />
+            </div>
+          </div>
+        </section>
+      )}
 
       <section className="mb-12">
         <h2 className="text-2xl font-semibold mb-6 text-blue-700">Book Your Consultation</h2>
