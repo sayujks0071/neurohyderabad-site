@@ -9,8 +9,9 @@ const bundleAnalyzer = withBundleAnalyzer({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Enable production sourcemaps for Middleware
-  productionBrowserSourceMaps: true,
+  // Disable production browser sourcemaps (SEC-2: prevents exposing client source code)
+  // Middleware.io sourcemap uploader still works with build-time sourcemaps
+  productionBrowserSourceMaps: false,
 
   // Enable compression
   compress: true,
@@ -234,6 +235,17 @@ const nextConfig = {
         destination: '/neurosurgeon-secunderabad',
         permanent: true,
       },
+      // ARCH-2: Consolidate duplicate service paths to geo-qualified canonical versions
+      {
+        source: '/services/peripheral-nerve-surgery',
+        destination: '/services/peripheral-nerve-surgery-hyderabad',
+        permanent: true,
+      },
+      {
+        source: '/services/spinal-fusion',
+        destination: '/services/spinal-fusion-surgery-hyderabad',
+        permanent: true,
+      },
     ];
   },
 
@@ -250,6 +262,8 @@ const nextConfig = {
       {
         source: "/((?!_next|api|images|favicon.ico|robots.txt|sitemap.xml|site.webmanifest).*)",
         headers: [
+          // SEC-1: Content Security Policy (report-only mode to detect violations without breaking functionality)
+          { key: "Content-Security-Policy-Report-Only", value: "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://cdnjs.middleware.io https://cdn.vercel-insights.com https://va.vercel-scripts.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https:; frame-ancestors 'self'" },
           // Security headers
           { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },

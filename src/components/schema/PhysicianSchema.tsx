@@ -345,11 +345,7 @@ export const PhysicianSchema: React.FC = () => {
           "reviewCount": "153",
           "bestRating": "5",
           "worstRating": "1",
-          "ratingSource": {
-            "@type": "Organization",
-            "name": "Google Maps",
-            "sameAs": "https://maps.google.com/?cid=123"
-          }
+          "description": "Patient ratings from Google Maps reviews"
         }
       },
       // LocalBusiness schema is handled per-location page by LocationSchema,

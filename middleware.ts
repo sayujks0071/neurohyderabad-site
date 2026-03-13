@@ -101,7 +101,11 @@ export async function middleware(req: NextRequest) {
     const adminKey = process.env.ADMIN_ACCESS_KEY;
 
     // Check for admin key in query params (simple auth)
+    // SEC-3: Query-param auth is deprecated — prefer x-admin-key header
     const providedKey = req.nextUrl.searchParams.get('key');
+    if (providedKey) {
+      console.warn('[SEC-3] Query-param admin auth (?key=) is deprecated. Use x-admin-key header instead.');
+    }
     // Check for admin key in headers (API auth)
     const headerKey = req.headers.get('x-admin-key');
 

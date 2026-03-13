@@ -538,7 +538,7 @@ async function runComprehensiveAudit() {
     const recommendations = generateRecommendations();
 
     // 5. Save results
-    const reportDir = '/Users/mac/.gemini/antigravity/brain/a5f81c99-3651-4e4c-95a4-98b2b36e8c5d/reports-seo';
+    const reportDir = 'reports/seo';
     if (!fs.existsSync(reportDir)) {
       fs.mkdirSync(reportDir, { recursive: true });
     }

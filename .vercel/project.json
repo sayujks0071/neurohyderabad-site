@@ -1,1 +1,16 @@
-{"projectId":"prj_Sp8qt5LhVKzI077GMtUU0C5ZxZAd","orgId":"team_zBoAVy1pt23H29JyY4IPMUdt","projectName":"neurohyderabad-site"}
+{
+  "projectId": "prj_Sp8qt5LhVKzI077GMtUU0C5ZxZAd",
+  "orgId": "team_zBoAVy1pt23H29JyY4IPMUdt",
+  "projectName": "neurohyderabad-site",
+  "settings": {
+    "createdAt": 1766570995780,
+    "framework": "nextjs",
+    "devCommand": "npm run dev",
+    "installCommand": "pnpm install",
+    "buildCommand": "NODE_OPTIONS=--max-old-space-size=8192 pnpm run build",
+    "outputDirectory": null,
+    "rootDirectory": null,
+    "directoryListing": false,
+    "nodeVersion": "24.x"
+  }
+}
