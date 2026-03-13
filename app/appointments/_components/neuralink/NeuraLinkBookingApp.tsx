@@ -6,6 +6,8 @@ import dynamic from "next/dynamic";
 import VoiceBookingOption from "../VoiceBookingOption";
 import PatientPortalSkeleton from "./PatientPortalSkeleton";
 import LazySection from "../../../_components/LazySection";
+import BookingCalendarEmbed from "../../../_components/BookingCalendarEmbed";
+
 
 // CWV Optimization: Lazy load heavy Client Component (PatientPortal)
 // This reduces Initial JS Payload by code-splitting the heavy form logic.
@@ -49,6 +51,7 @@ const NeuraLinkBookingApp = ({ heroContent, locationInfo, faqSection }: NeuraLin
   const [isAssistantOpen, setIsAssistantOpen] = useState(false);
   // CWV Optimization: Defer ChatBot loading to reduce TBT
   const [shouldLoadChatBot, setShouldLoadChatBot] = useState(false);
+  const [bookingMethod, setBookingMethod] = useState<'cal' | 'form'>('cal');
   const formRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -97,9 +100,36 @@ const NeuraLinkBookingApp = ({ heroContent, locationInfo, faqSection }: NeuraLin
       <section ref={formRef} className="pb-20">
         <div className="max-w-6xl mx-auto px-4">
           <VoiceBookingOption />
-          <LazySection placeholder={<PatientPortalSkeleton />}>
-            <PatientPortal />
-          </LazySection>
+
+
+          {/* Booking Method Toggle */}
+          <div className="flex justify-center mb-8">
+            <div className="bg-white p-1 rounded-xl shadow-sm border border-slate-200 inline-flex">
+              <button
+                onClick={() => setBookingMethod('cal')}
+                className={`px-6 py-2.5 rounded-lg text-sm font-bold transition-all ${bookingMethod === 'cal' ? 'bg-blue-600 text-white shadow-md' : 'text-slate-600 hover:bg-slate-50'}`}
+              >
+                Book Online (Cal.com)
+              </button>
+              <button
+                onClick={() => setBookingMethod('form')}
+                className={`px-6 py-2.5 rounded-lg text-sm font-bold transition-all ${bookingMethod === 'form' ? 'bg-blue-600 text-white shadow-md' : 'text-slate-600 hover:bg-slate-50'}`}
+              >
+                Detailed Triage Form
+              </button>
+            </div>
+          </div>
+
+
+          {bookingMethod === 'cal' ? (
+            <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-200">
+            <BookingCalendarEmbed url="https://cal.com/drsayuj" />
+            </div>
+          ) : (
+            <LazySection placeholder={<PatientPortalSkeleton />}>
+              <PatientPortal />
+            </LazySection>
+          )}
         </div>
       </section>
 
