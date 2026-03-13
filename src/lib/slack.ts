@@ -69,7 +69,8 @@ export class SlackClient {
 
         const crypto = require('crypto');
         const hmac = crypto.createHmac('sha256', this.signingSecret);
-        const [version, hash] = signature.split('=');
+        // Fallback to empty string for hash if '=' is missing to prevent split errors
+        const [version, hash = ''] = signature.split('=');
 
         // Check if timestamp is too old (replay attack)
         const fiveMinutesAgo = Math.floor(Date.now() / 1000) - 60 * 5;
@@ -79,7 +80,14 @@ export class SlackClient {
         hmac.update(base);
         const generatedHash = hmac.digest('hex');
 
-        return crypto.timingSafeEqual(Buffer.from(hash), Buffer.from(generatedHash));
+        // SECURITY: Hash both strings before timingSafeEqual to guarantee identical buffer lengths.
+        // If an attacker provides a malformed signature of a different length, Buffer.from()
+        // would create unequal length buffers, causing timingSafeEqual to throw an exception
+        // (TypeError: Input buffers must have the same byte length), leading to a Denial of Service.
+        const hashBuffer = crypto.createHash('sha256').update(hash).digest();
+        const expectedBuffer = crypto.createHash('sha256').update(generatedHash).digest();
+
+        return crypto.timingSafeEqual(hashBuffer, expectedBuffer);
     }
 
     /**
