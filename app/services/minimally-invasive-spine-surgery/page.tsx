@@ -336,6 +336,7 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
                   className="absolute top-0 left-0 w-full h-full"
                   src="https://www.youtube.com/embed/HPhPB5jY0xk"
                   title="Surgery for Paracentral Disc Herniation | L5-S1 Endoscopic Discectomy | Yashoda Hospitals Hyderabad"
+                  loading="lazy"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 ></iframe>
