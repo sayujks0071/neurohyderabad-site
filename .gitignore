@@ -106,3 +106,14 @@ audit/lighthouse/*.html
 audit/crawl/*.json
 audit/crawl/*.csv
 .pnpm-store
+
+# Agent Skills
+.*
+!.jules-setup.sh
+!.gitignore
+!.eslintrc.json
+!.env.example
+!.env.local.example
+!.firebaserc
+!.cursorrules
+!.cspell.json
