@@ -87,3 +87,4 @@
 ## 2026-03-10
 - **Opportunity Identified:** Competitors use extensive video testimonials and patient stories on doctor profiles.
 - **Opportunity Identified:** Aggregators (Practo, Lybrate) have strong review Schema with aggregateRatings.
+- Adding 'Red Flags' sections to remaining condition pages (e.g., Cervical Myelopathy, Degenerative Disc Disease).

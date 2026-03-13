@@ -304,6 +304,34 @@ export default function CervicalRadiculopathyPage() {
         </div>
       </section>
 
+      {/* Red Flag Symptoms Section */}
+      <section className="bg-white py-12">
+        <div className="mx-auto max-w-5xl px-4">
+          <div className="mb-12 bg-red-50 border-l-4 border-red-500 p-6 rounded-r-lg shadow-sm">
+            <h2 className="text-xl font-bold text-red-700 mb-4 flex items-center">
+              <span className="text-2xl mr-2">⚠️</span> When to Seek Urgent Care (Red Flags)
+            </h2>
+            <p className="text-gray-800 mb-4">
+              Most cervical radiculopathy pain can be managed conservatively, but seek immediate medical attention if you experience:
+            </p>
+            <ul className="space-y-3">
+              <li className="flex items-start">
+                <span className="text-red-500 mr-2 font-bold mt-1">•</span>
+                <span className="text-gray-700"><strong>Sudden Arm Weakness:</strong> Inability to lift your arm or severe loss of grip strength.</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-red-500 mr-2 font-bold mt-1">•</span>
+                <span className="text-gray-700"><strong>Loss of Fine Motor Skills:</strong> Difficulty with precise movements like buttoning a shirt or writing.</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-red-500 mr-2 font-bold mt-1">•</span>
+                <span className="text-gray-700"><strong>Signs of Myelopathy:</strong> Balance issues, difficulty walking, or numbness extending to the legs (indicating spinal cord compression).</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
       <section className="mx-auto max-w-5xl px-4 py-12">
         <div className="grid gap-10 md:grid-cols-2">
           <div>
