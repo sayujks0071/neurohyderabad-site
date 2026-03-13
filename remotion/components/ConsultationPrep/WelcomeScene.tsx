@@ -9,49 +9,77 @@ export interface WelcomeSceneProps {
   patientName: string;
 }
 
-const AnimatedSubtitleWord: React.FC<{
-  word: string;
-  index: number;
-  subtitleStartFrame: number;
+const AnimatedSubtitleCharacter: React.FC<{
+  char: string;
+  charDelay: number;
   prefersReducedMotion: boolean;
-}> = ({ word, index, subtitleStartFrame, prefersReducedMotion }) => {
+}> = ({ char, charDelay, prefersReducedMotion }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  const delay = subtitleStartFrame + index * 3;
-
-  const wordOpacity = useMemo(() =>
+  const charOpacity = useMemo(() =>
     prefersReducedMotion ? 1 : spring({
-      frame: frame - delay,
+      frame: frame - charDelay,
       fps,
       from: 0,
       to: 1,
-      durationInFrames: 40,
+      durationInFrames: 25,
     }),
-    [frame, fps, delay, prefersReducedMotion]
+    [frame, fps, charDelay, prefersReducedMotion]
   );
 
-  const wordY = useMemo(() =>
+  const charY = useMemo(() =>
     prefersReducedMotion ? 0 : spring({
-      frame: frame - delay,
+      frame: frame - charDelay,
       fps,
-      from: 20,
+      from: 15,
       to: 0,
-      durationInFrames: 40,
+      durationInFrames: 25,
       config: { damping: 12 },
     }),
-    [frame, fps, delay, prefersReducedMotion]
+    [frame, fps, charDelay, prefersReducedMotion]
   );
 
   return (
     <span
       style={{
-        opacity: wordOpacity,
-        transform: `translateY(${wordY}px)`,
+        opacity: charOpacity,
+        transform: `translateY(${charY}px)`,
         display: 'inline-block',
       }}
     >
-      {word}
+      {char}
+    </span>
+  );
+};
+
+const AnimatedSubtitleWord: React.FC<{
+  word: string;
+  wordIndex: number;
+  subtitleStartFrame: number;
+  prefersReducedMotion: boolean;
+}> = ({ word, wordIndex, subtitleStartFrame, prefersReducedMotion }) => {
+  // Character level staggered animation inside the word
+  return (
+    <span
+      style={{
+        display: 'inline-block',
+        whiteSpace: 'pre', // Preserve spaces if any
+      }}
+    >
+      {word.split('').map((char, charIndex) => {
+        // Base delay for the word + staggered delay for each character
+        const charDelay = subtitleStartFrame + wordIndex * 5 + charIndex * 1.5;
+
+        return (
+          <AnimatedSubtitleCharacter
+            key={charIndex}
+            char={char}
+            charDelay={charDelay}
+            prefersReducedMotion={prefersReducedMotion}
+          />
+        );
+      })}
     </span>
   );
 };
@@ -186,7 +214,7 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
               <AnimatedSubtitleWord
                 key={index}
                 word={word}
-                index={index}
+                wordIndex={index}
                 subtitleStartFrame={subtitleStartFrame}
                 prefersReducedMotion={prefersReducedMotion}
               />
