@@ -153,7 +153,7 @@ export default function MalakpetNeurosurgeonPage() {
               Using advanced <strong>Keyhole (Endoscopic) Spine Surgery</strong> techniques, Dr. Sayuj treats slip discs and sciatica without major open surgery.
               Most patients walk within hours and go home the same day. He is also a leading expert in <strong>Neuronavigation-guided Brain Tumor Surgery</strong>, ensuring maximum safety for delicate brain procedures.
             </p>
-            
+
             <div className="rounded-xl border border-blue-100 bg-blue-50/50 p-6 mb-8">
               <h3 className="font-semibold text-blue-900 mb-3 text-lg">Why Choose Dr. Sayuj at Yashoda Malakpet?</h3>
               <ul className="grid sm:grid-cols-2 gap-3">
@@ -336,33 +336,6 @@ export default function MalakpetNeurosurgeonPage() {
           </div>
       </section>
 
-      {/* Red Flags Section */}
-      <section className="bg-white py-12">
-        <div className="mx-auto max-w-5xl px-4">
-          <div className="bg-red-50 border-l-4 border-red-500 rounded-r-xl p-6 md:p-8 shadow-sm">
-            <h2 className="text-2xl font-bold text-red-900 mb-4">Red Flag Symptoms: When to See a Neurosurgeon Urgently</h2>
-            <p className="text-red-800 mb-4">
-              Seek immediate medical attention at Yashoda Hospital Malakpet Emergency if you experience any of the following:
-            </p>
-            <ul className="space-y-3 text-red-900">
-              <li className="flex items-start">
-                <span className="font-bold text-red-600 mr-2 text-lg">•</span>
-                <span><strong>Cauda Equina Syndrome signs:</strong> Sudden loss of bladder or bowel control, or numbness in the groin/saddle area.</span>
-              </li>
-              <li className="flex items-start">
-                <span className="font-bold text-red-600 mr-2 text-lg">•</span>
-                <span><strong>Progressive Weakness:</strong> Sudden inability to lift your foot (foot drop), arm weakness, or difficulty walking.</span>
-              </li>
-              <li className="flex items-start">
-                <span className="font-bold text-red-600 mr-2 text-lg">•</span>
-                <span><strong>Severe Trauma or Sudden Headache:</strong> A "thunderclap" headache, loss of consciousness, or severe spinal pain following a fall or accident.</span>
-              </li>
-            </ul>
-            <p className="mt-5 text-sm font-medium text-red-700 italic">*Dr. Sayuj Krishnan is available 24/7 for neurosurgical emergencies at Malakpet.</p>
-          </div>
-        </div>
-      </section>
-
       <section className="bg-white py-12">
         <div className="mx-auto max-w-5xl px-4">
           <h2 className="mb-8 text-center text-2xl font-bold text-gray-900 md:text-3xl">
@@ -423,7 +396,7 @@ export default function MalakpetNeurosurgeonPage() {
             <div>
               <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
                 <LocationNAPCard location={location} />
-                
+
                 <div className="mt-6 border-t pt-4">
                   <h4 className="font-semibold text-gray-900 mb-2">OPD Timings</h4>
                   <ul className="space-y-1 text-sm text-gray-700">
