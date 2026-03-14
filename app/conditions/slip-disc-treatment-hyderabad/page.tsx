@@ -207,6 +207,56 @@ export default function SlipDiscTreatmentPage() {
         </div>
       </div>
 
+      {/* Causes Section */}
+      <section className="mb-12">
+        <h2 className="text-3xl font-bold text-blue-800 mb-6">Causes & Risk Factors of Slip Disc</h2>
+        <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+          <p className="text-gray-700 mb-4">
+            Understanding the underlying cause of a slip disc is key to preventing future episodes. Most slip discs occur due to gradual, age-related wear and tear called disc degeneration. As we age, our spinal discs lose some of their water content, making them less flexible and more prone to tearing or rupturing with even a minor strain or twist.
+          </p>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <h3 className="text-lg font-semibold text-blue-700 mb-3">Common Causes</h3>
+              <ul className="space-y-2 text-gray-700">
+                <li className="flex items-start">
+                  <span className="text-blue-600 mr-2 mt-1">•</span>
+                  <span><strong>Age-Related Degeneration:</strong> The natural aging process is the most common cause.</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-blue-600 mr-2 mt-1">•</span>
+                  <span><strong>Improper Lifting:</strong> Using your back muscles instead of your leg and thigh muscles to lift heavy, large objects can lead to a slipped disc, as can twisting while lifting.</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-blue-600 mr-2 mt-1">•</span>
+                  <span><strong>Trauma:</strong> Rarely, a traumatic event such as a fall or a blow to the back can cause a herniated disc.</span>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-blue-700 mb-3">Risk Factors</h3>
+              <ul className="space-y-2 text-gray-700">
+                <li className="flex items-start">
+                  <span className="text-blue-600 mr-2 mt-1">•</span>
+                  <span><strong>Weight:</strong> Excess body weight causes extra stress on the discs in your lower back.</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-blue-600 mr-2 mt-1">•</span>
+                  <span><strong>Genetics:</strong> Some people inherit a predisposition to developing a herniated disc.</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-blue-600 mr-2 mt-1">•</span>
+                  <span><strong>Smoking:</strong> It&apos;s thought that smoking lessens the oxygen supply to the disc and causes more rapid breakdown.</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-blue-600 mr-2 mt-1">•</span>
+                  <span><strong>Occupation:</strong> People with physically demanding jobs have a greater risk of back problems.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Diagnosis Section */}
       <section className="mb-12">
         <h2 className="text-3xl font-bold text-blue-800 mb-6">Diagnosis & Evaluation</h2>
