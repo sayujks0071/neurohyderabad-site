@@ -172,4 +172,90 @@ export const tools = {
       }
     },
   } as any),
-};
+
+  logLeadToSheets: tool({
+    description: 'Save lead information (name, phone, symptom) directly to a Google Sheet to capture early intent before a full booking.',
+    parameters: z.object({
+      name: z.string().describe('Name of the patient'),
+      phone: z.string().describe('Phone number of the patient'),
+      symptom: z.string().describe('Primary symptom or concern'),
+    }),
+    execute: async ({ name, phone, symptom }: { name: string; phone: string; symptom: string }) => {
+      try {
+        const spreadsheetId = process.env.LEADS_SPREADSHEET_ID || '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms';
+
+        const params = {
+          spreadsheetId,
+          range: 'Sheet1!A1',
+          valueInputOption: 'USER_ENTERED'
+        };
+        const body = {
+          values: [[name, phone, symptom, new Date().toISOString()]]
+        };
+
+        // Use JSON.stringify and proper escaping to prevent command injection
+        const paramsStr = JSON.stringify(params).replace(/'/g, "'\\''");
+        const bodyStr = JSON.stringify(body).replace(/'/g, "'\\''");
+
+        const command = `gws sheets spreadsheets values append --params '${paramsStr}' --json '${bodyStr}'`;
+
+        const { stdout, stderr } = await execAsync(command);
+        if (stderr && !stderr.includes('success')) {
+          console.warn('[tools/logLeadToSheets] gws stderr:', stderr);
+        }
+
+        return { success: true, message: 'Lead logged successfully.' };
+      } catch (error: any) {
+        console.error('[tools/logLeadToSheets] failed to log lead via gws:', error);
+        return { success: false, error: error.message || 'Failed to log lead' };
+      }
+    },
+  } as any),
+
+
+  sendPersonalizedFollowUp: tool({
+    description: 'Send a highly personalized, empathetic follow-up email from Dr. Sayuj to the patient.',
+    parameters: z.object({
+      toEmail: z.string().email().describe('Email address of the patient'),
+      patientName: z.string().describe('Name of the patient'),
+      symptom: z.string().describe('The primary symptom discussed'),
+    }),
+    execute: async ({ toEmail, patientName, symptom }: { toEmail: string; patientName: string; symptom: string }) => {
+      try {
+        const subject = `Following up regarding your ${symptom} - Dr. Sayuj Krishnan`;
+        const bodyText = `Dear ${patientName},\n\nI noticed you were looking for information regarding ${symptom}. Please let me know if you would like to schedule a consultation so we can discuss the best treatment options for you.\n\nWarm regards,\nDr. Sayuj Krishnan\nConsultant Neurosurgeon, Hyderabad`;
+
+        const emailLines = [
+          `To: ${toEmail}`,
+          'Content-Type: text/plain; charset="UTF-8"',
+          'MIME-Version: 1.0',
+          `Subject: ${subject}`,
+          '',
+          bodyText
+        ];
+        const rawEmail = Buffer.from(emailLines.join('\r\n')).toString('base64url');
+
+        const params = { userId: 'me' };
+        const body = { raw: rawEmail };
+
+        // Use JSON.stringify and proper escaping to prevent command injection
+        const paramsStr = JSON.stringify(params).replace(/'/g, "'\\''");
+        const bodyStr = JSON.stringify(body).replace(/'/g, "'\\''");
+
+        const command = `gws gmail users messages send --params '${paramsStr}' --json '${bodyStr}'`;
+
+        const { stdout, stderr } = await execAsync(command);
+        if (stderr && !stderr.includes('success')) {
+          console.warn('[tools/sendPersonalizedFollowUp] gws stderr:', stderr);
+        }
+
+        return { success: true, message: 'Follow-up email sent successfully.' };
+      } catch (error: any) {
+        console.error('[tools/sendPersonalizedFollowUp] failed to send email via gws:', error);
+        return { success: false, error: error.message || 'Failed to send email' };
+      }
+    },
+  } as any),
+
+
+  };
