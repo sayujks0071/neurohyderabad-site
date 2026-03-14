@@ -15,9 +15,21 @@ export default function AISandbox() {
     {
       id: 'initial',
       role: 'assistant',
-      parts: [{ type: 'text', text: 'Welcome to the AI Sandbox. Ask me anything, like "Why is the sky blue?"' }]
+      parts: [{ type: 'text', text: 'Welcome to Dr. Sayuj Krishnan\'s Neuro AI Assistant. How can I help you today with questions about spine health, brain conditions, or neurosurgery?' }]
     },
   ], []);
+
+  const suggestedQuestions = [
+    "What is the recovery time for endoscopic spine surgery?",
+    "Is a slip disc dangerous?",
+    "What are the signs of a brain tumor?",
+    "How do I know if I need spine surgery?"
+  ];
+
+  const handleSuggestionClick = (question: string) => {
+    if (isLoading) return;
+    sendMessage({ text: question });
+  };
 
   const { messages, sendMessage, status } = useChat<UIMessage>({
     transport,
@@ -58,9 +70,22 @@ export default function AISandbox() {
         <div className="max-w-3xl mx-auto space-y-6">
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400">
-              AI Sandbox
+              Spine & Neuro Health AI
             </h1>
-            <p className="text-slate-400 mt-2">Real-time Vercel AI SDK Streaming</p>
+            <p className="text-slate-400 mt-2">Powered by Vercel AI SDK Streaming</p>
+          </div>
+
+          <div className="flex flex-wrap gap-2 justify-center mb-6">
+            {suggestedQuestions.map((q, idx) => (
+              <button
+                key={idx}
+                onClick={() => handleSuggestionClick(q)}
+                disabled={isLoading}
+                className="text-xs px-3 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-200 hover:bg-blue-500/20 hover:border-blue-500/50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {q}
+              </button>
+            ))}
           </div>
 
           {messages.map((m) => (
@@ -114,8 +139,9 @@ export default function AISandbox() {
               </svg>
             </button>
           </form>
-          <div className="text-center mt-3 text-xs text-slate-500">
-            Powered by Vercel AI SDK &amp; streamText
+          <div className="text-center mt-3 text-xs text-slate-500 max-w-2xl mx-auto">
+            <p className="mb-1">Powered by Vercel AI SDK &amp; streamText</p>
+            <p className="text-slate-600"><strong>Disclaimer:</strong> This AI assistant provides general information only and is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of Dr. Sayuj Krishnan or other qualified health providers with any questions you may have regarding a medical condition.</p>
           </div>
         </div>
       </div>
