@@ -196,6 +196,10 @@ openclaw cron add \
 | `uptime-check` | `*/15 * * * *` | Every 15 min |
 | `weekly-blog-draft` | `30 0 * * 1` | Mon 6:00 AM |
 | `competitor-scan` | `30 14 * * 0` | Sun 8:00 PM |
+| `daily-review-harvester` | `00 18 * * *` | 6:00 PM daily |
+| `weekly-local-faqs` | `00 02 * * 2` | Tue 2:00 AM |
+| `hourly-abandoned-cart-check` | Every 1h | Every hour |
+| `weekly-social-video` | `00 03 * * 3` | Wed 3:00 AM |
 
 ---
 
@@ -217,6 +221,107 @@ openclaw cron run uptime-check  # Manual trigger for spot-test
 - **Blog PRs** are always draft — never auto-merged to `main`
 - **No PII logged** — patient names/phone numbers from booking flow go directly to `/api/appointments` endpoint, not stored in OpenClaw state
 - **Gateway token** set in `openclaw.json` prevents unauthorized dashboard access
+
+---
+
+## Use Case 7 — 💬 In-Chat OP Booking Closer
+
+**Goal:** Reduce conversion friction by allowing patients to book completely inside WhatsApp without clicking away to a form.
+
+This modifies the standard Triage bot interaction. Add to `~/.openclaw/agents/main/BOOTSTRAP.md`:
+
+```markdown
+**Step 1. Collect Details**
+Ask the patient for the following information, one by one:
+1. **Name**
+2. **Preferred Date** (We're available Mon–Sat, 9 AM–5 PM)
+3. **Chief Complaint** (e.g., back pain, brain tumor, spine issue)
+
+**Step 2. Execute Webhook**
+Once you have all 3 details, use your built-in \`web\` skill to send a POST request:
+- **URL**: \`https://www.drsayuj.info/api/webhooks/whatsapp-booking\`
+- **Method**: \`POST\`
+- **Body**: \`{"name": "[Name]", "date": "[Date]", "complaint": "[Complaint]", "phone": "from-whatsapp"}\`
+
+**Step 3. Confirm**
+Tell the patient: "Thank you [name]. Dr. Sayuj's team will call you to confirm your [date] appointment. For urgent help: +91 97782 80044."
+```
+
+---
+
+## Use Case 8 — ⭐ Auto-Review Request Engine
+
+**Goal:** Dramatically improve local map rankings for "Neurosurgeon near me" by generating a consistent velocity of 5-star Google Reviews from recent OP patients.
+
+**Setup:** Provide a CSV at `https://www.drsayuj.info/data/recent-patients.csv` containing `Name,Phone,VisitDate`.
+
+```bash
+openclaw cron add \
+  --name "daily-review-harvester" \
+  --schedule "00 18 * * *" \
+  --message "Fetch the list of patients from https://www.drsayuj.info/data/recent-patients.csv. For any patient whose VisitDate was exactly 3 days ago, send them a highly personalized WhatsApp message. Ask how their recovery is going, and politely request a Google Review using this link: https://g.page/r/YOUR_GOOGLE_LINK/review. Keep it warm and professional."
+```
+
+---
+
+## Use Case 9 — 🧠 Hyper-Local SEO FAQ Schema Generator
+
+**Goal:** Generate hyper-localized Next.js `FAQPage` JSON-LD schema based on trending Hyderabad neurosurgery queries to capture zero-click SEO traffic.
+
+```bash
+openclaw cron add \
+  --name "weekly-local-faqs" \
+  --schedule "00 02 * * 2" \
+  --message "Search the web for top trending queries about 'spine surgery cost in Hyderabad' and 'best neurosurgeon in Malakpet'. Generate a strict JSON-LD FAQPage array with 3 highly detailed Q&A pairs reflecting current local data. Save to src/data/seo/live-faqs.json. Commit to branch 'seo/auto-faqs' and open a draft PR."
+```
+
+---
+
+## Use Case 10 — 🧠 AI MRI & Clinical Report Assessor
+
+**Goal:** Let patients instantly share MRI/CT scans via WhatsApp. The AI parses the report using Vision, explains findings in simple language, assigns an urgency level, and fast-tracks urgent bookings.
+
+**Setup:** This is embedded in the agent's `BOOTSTRAP.md` system prompt and uses the priority booking webhook:
+- **Webhook**: `POST https://www.drsayuj.info/api/webhooks/priority-booking`
+- **Body**: `{"name": "...", "findings": "...", "urgencyLevel": "urgent|emergency", "reportType": "MRI"}`
+
+---
+
+## Use Case 11 — ⏳ Abandoned Inquiry Recovery
+
+**Goal:** Recover patients who start a booking conversation but drop off before confirming. Every hour, the bot automatically checks for stale sessions and sends a warm follow-up.
+
+```bash
+openclaw cron add \
+  --name "hourly-abandoned-cart-check" \
+  --every "1h" \
+  --channel "whatsapp" \
+  --to "+919778280044" \
+  --announce \
+  --message "Check recent WhatsApp conversations for patients who asked about booking but never confirmed. Send a gentle follow-up: 'Hi [Name], I noticed we didn't finalize your appointment. We have a slot available tomorrow — shall I hold it for you?'"
+```
+
+---
+
+## Use Case 12 — 🎬 Auto-Generated Social Media Videos
+
+**Goal:** Every Wednesday, OpenClaw researches a trending Hyderabad medical topic, writes a 30-second script, and triggers the Remotion video engine to render a branded Instagram Reel / YouTube Short.
+
+- **Webhook**: `POST https://www.drsayuj.info/api/webhooks/generate-video`
+- **Body**: `{"title": "...", "keyPoints": [{"heading": "...", "body": "...", "icon": "..."}], ...}`
+- **Output**: MP4 at `https://www.drsayuj.info/generated-videos/YYYY-MM-DD-slug.mp4`
+
+```bash
+openclaw cron add \
+  --name "weekly-social-video" \
+  --cron "00 03 * * 3" \
+  --tz "Asia/Kolkata" \
+  --channel "whatsapp" \
+  --to "+919778280044" \
+  --announce \
+  --timeout-seconds 180 \
+  --message "Research a trending topic, write a script, POST to /api/webhooks/generate-video, report the MP4 URL on WhatsApp."
+```
 
 ---
 
