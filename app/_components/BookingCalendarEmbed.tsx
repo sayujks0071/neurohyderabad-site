@@ -62,7 +62,7 @@ export default function BookingCalendarEmbed({
 
   if (calLink) {
     return (
-      <div className="w-full bg-[var(--color-surface)] border border-[var(--color-border)] rounded-2xl shadow-sm overflow-hidden min-h-[600px]">
+      <div className="w-full relative bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl overflow-hidden min-h-[600px] transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
         <Cal
           calLink={calLink}
           style={{ width: "100%", height: "100%", overflow: "scroll" }}
@@ -73,7 +73,7 @@ export default function BookingCalendarEmbed({
   }
 
   return (
-    <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-2xl shadow-sm p-8 text-center space-y-6">
+    <div className="relative bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 text-center space-y-6 flex flex-col items-center">
       <div className="w-16 h-16 bg-[var(--color-primary-50)] rounded-full flex items-center justify-center mx-auto">
         <Calendar className="w-8 h-8 text-[var(--color-primary-500)]" />
       </div>
@@ -92,7 +92,8 @@ export default function BookingCalendarEmbed({
         target="_blank"
         rel="noreferrer"
         onClick={trackOnce}
-        className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[var(--color-primary-500)] to-[var(--color-primary-700)] text-white font-semibold py-3 px-8 rounded-xl shadow-lg shadow-blue-500/30 hover:scale-[1.02] transition-transform duration-200 group"
+        aria-label="Open Booking Calendar"
+        className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-[0.98] inline-flex items-center justify-center gap-2 group"
       >
         <span>Open Booking App</span>
         <ExternalLink className="w-4 h-4 opacity-90 group-hover:translate-x-0.5 transition-transform" />
