@@ -158,7 +158,7 @@ export default function SpineSurgeryHyderabadPage() {
               className="mb-6"
             />
             <p className="text-lg text-gray-700 mb-6">
-              Living with chronic back or neck pain can affect every part of your life. At Yashoda Hospital, Malakpet, Dr. Sayuj
+              Living with chronic back or neck pain can affect every part of your life. Recognized as one of the best spine surgeons in Hyderabad, Dr. Sayuj
               Krishnan delivers advanced spine surgery solutions for slipped discs, stenosis, instability, and deformity with a
               strong focus on minimally invasive techniques. If you are suffering from radiating leg pain, learn more about our specialized <Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-700 underline font-medium">sciatica relief</Link> protocols.
             </p>

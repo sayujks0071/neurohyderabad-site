@@ -12,6 +12,7 @@ export default function OrganizationSchema() {
     "@type": "MedicalOrganization",
     "@id": `${SITE_URL}/#organization`,
     "name": CANONICAL_PHYSICIAN_NAME,
+    "priceRange": "$$",
     "alternateName": "Dr Sayuj Krishnan Neurosurgery Practice",
     "url": SITE_URL,
     "logo": {
