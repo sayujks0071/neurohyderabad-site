@@ -66,12 +66,18 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
   const { fps } = useVideoConfig();
   const prefersReducedMotion = usePrefersReducedMotion();
 
-  // Parse the date
-  const date = new Date(appointmentDate + 'T00:00:00');
-  const monthName = date.toLocaleDateString('en-US', { month: 'long' });
-  const dayNumber = date.getDate();
-  const year = date.getFullYear();
-  const dayName = date.toLocaleDateString('en-US', { weekday: 'long' });
+  // Parse the date (Memoized for performance)
+  const dateInfo = useMemo(() => {
+    const d = new Date(appointmentDate + 'T00:00:00');
+    return {
+      monthName: d.toLocaleDateString('en-US', { month: 'long' }),
+      dayNumber: d.getDate(),
+      year: d.getFullYear(),
+      dayName: d.toLocaleDateString('en-US', { weekday: 'long' })
+    };
+  }, [appointmentDate]);
+
+  const { monthName, dayNumber, year, dayName } = dateInfo;
 
   // 1. Main Card Entrance (Pop in with 3D rotation)
   const calendarScale = useMemo(() => prefersReducedMotion ? 1 : spring({
@@ -183,6 +189,13 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
 
   // Background Grid Animation
   const bgPos = prefersReducedMotion ? 0 : frame * 0.5;
+  const gridOpacity = useMemo(() => prefersReducedMotion ? 0.1 : spring({
+    frame,
+    fps,
+    from: 0,
+    to: 0.1,
+    durationInFrames: 30,
+  }), [frame, fps, prefersReducedMotion]);
 
   // Shadow Animation
   const shadowBlur = interpolate(calendarScale, [0.8, 1], [20, 60], {
@@ -264,7 +277,7 @@ export const CalendarScene: React.FC<CalendarSceneProps> = ({
               backgroundImage: `radial-gradient(${COLORS.textSecondary} 1px, transparent 1px)`,
               backgroundSize: '20px 20px',
               backgroundPosition: `${bgPos}px ${bgPos}px`,
-              opacity: 0.1,
+              opacity: gridOpacity,
               pointerEvents: 'none',
               zIndex: 0,
             }}
