@@ -206,6 +206,67 @@ export default function AIStreamingChat({
                       </Attachments>
                     </div>
                   )}
+
+                  {message.parts?.map((part: any, i: number) => {
+                    if (part.type === 'tool-bookAppointment' || (part.type === 'tool-invocation' && part.toolName === 'bookAppointment')) {
+                      return (
+                        <div key={`${message.id}-tool-${i}`} className="mt-4">
+                          {part.approval && (
+                            <Confirmation approval={part.approval} state={part.state}>
+                              <ConfirmationRequest>
+                                This tool wants to book an appointment for:{" "}
+                                <strong>{part.input?.patientName}</strong> on {part.input?.appointmentDate} at {part.input?.appointmentTime}.
+                                <br />
+                                Reason: {part.input?.reason}
+                                <br />
+                                Do you approve this booking?
+                              </ConfirmationRequest>
+                              <ConfirmationAccepted>
+                                <CheckIcon className="size-4" />
+                                <span>You approved the booking.</span>
+                              </ConfirmationAccepted>
+                              <ConfirmationRejected>
+                                <XIcon className="size-4" />
+                                <span>You rejected the booking.</span>
+                              </ConfirmationRejected>
+                              <ConfirmationActions>
+                                <ConfirmationAction
+                                  variant="outline"
+                                  onClick={() =>
+                                    addToolApprovalResponse({
+                                      id: part.approval!.id,
+                                      approved: false,
+                                    })
+                                  }
+                                >
+                                  Reject
+                                </ConfirmationAction>
+                                <ConfirmationAction
+                                  variant="default"
+                                  onClick={() =>
+                                    addToolApprovalResponse({
+                                      id: part.approval!.id,
+                                      approved: true,
+                                    })
+                                  }
+                                >
+                                  Approve
+                                </ConfirmationAction>
+                              </ConfirmationActions>
+                            </Confirmation>
+                          )}
+                          {part.output && (
+                            <div className="mt-2 p-3 bg-[var(--color-success-light)] text-[var(--color-success-800)] rounded-md text-sm border border-[var(--color-success-300)]">
+                              {part.output.status === 'success'
+                                ? part.output.message
+                                : `Error: ${part.output.message || part.output.error}`}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    }
+                    return null;
+                  })}
                 </div>
               </div>
               </Fragment>
