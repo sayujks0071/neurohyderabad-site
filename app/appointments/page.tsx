@@ -1,7 +1,7 @@
 import { SITE_URL } from "@/src/lib/seo";
 // Verified by Jules: Metadata includes 'Best Neurosurgeon Hyderabad' and 'Book Appointment'.
 import type { Metadata } from "next";
-import NeuraLinkBookingApp from "./_components/neuralink/NeuraLinkBookingApp";
+import BookingCalendarEmbed from "@/app/_components/BookingCalendarEmbed";
 import AppointmentSchema from "./_components/AppointmentSchema";
 import AppointmentFaqSchema from "./_components/AppointmentFaqSchema";
 import MedicalWebPageSchema from "../components/schemas/MedicalWebPageSchema";
@@ -87,11 +87,27 @@ export default function AppointmentsPage() {
         to the client wrapper. This improves LCP significantly compared to client-side rendering.
         Removed duplicate hidden H1 since BookingHeroContent renders the semantic H1.
       */}
-      <NeuraLinkBookingApp
-        heroContent={<BookingHeroContent />}
-        locationInfo={<BookingLocationInfo />}
-        faqSection={<AppointmentFaq />}
-      />
+      <div className="bg-slate-50/50">
+        <section className="relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+            <div className="absolute -top-[20%] -right-[10%] w-[700px] h-[700px] rounded-full bg-blue-100/40 blur-3xl opacity-60" />
+            <div className="absolute top-[20%] -left-[10%] w-[500px] h-[500px] rounded-full bg-indigo-100/40 blur-3xl opacity-60" />
+          </div>
+
+          <div className="max-w-5xl mx-auto py-20 px-4 text-center">
+            <BookingHeroContent />
+            <BookingLocationInfo />
+          </div>
+        </section>
+
+        <section className="pb-20">
+          <div className="max-w-6xl mx-auto px-4">
+            <BookingCalendarEmbed url="https://cal.com/drsayuj" />
+          </div>
+        </section>
+
+        <AppointmentFaq />
+      </div>
     </>
   );
 }
