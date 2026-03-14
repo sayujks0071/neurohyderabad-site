@@ -363,6 +363,53 @@ export default function CervicalMyelopathyPage() {
         </div>
       </section>
 
+      {/* Red Flags Section */}
+      <section className="mx-auto max-w-5xl px-4 py-8">
+        <div className="rounded-xl border-2 border-red-100 bg-red-50 p-6 md:p-8">
+          <h2 className="text-2xl font-semibold mb-4 text-red-700 flex items-center">
+            <span className="text-3xl mr-3">⚠️</span> When to Seek Immediate Care (Red Flags)
+          </h2>
+          <p className="text-gray-800 mb-6 font-medium">
+            While cervical myelopathy is usually a slowly progressive condition, sudden worsening or severe symptoms can indicate critical spinal cord compression requiring urgent evaluation and potentially emergency surgery. Seek immediate medical attention if you experience:
+          </p>
+          <div className="grid md:grid-cols-2 gap-4">
+            <div className="flex items-start bg-white p-4 rounded-lg shadow-sm border border-red-100">
+              <span className="text-red-500 mr-3 text-xl">🚨</span>
+              <div>
+                <strong className="block text-gray-900 mb-1">Sudden Loss of Function</strong>
+                <p className="text-gray-700 text-sm">Rapid onset of weakness or complete inability to use hands, arms, or legs.</p>
+              </div>
+            </div>
+            <div className="flex items-start bg-white p-4 rounded-lg shadow-sm border border-red-100">
+              <span className="text-red-500 mr-3 text-xl">🚨</span>
+              <div>
+                <strong className="block text-gray-900 mb-1">Bowel or Bladder Dysfunction</strong>
+                <p className="text-gray-700 text-sm">New onset incontinence (loss of control) or urinary retention.</p>
+              </div>
+            </div>
+            <div className="flex items-start bg-white p-4 rounded-lg shadow-sm border border-red-100">
+              <span className="text-red-500 mr-3 text-xl">🚨</span>
+              <div>
+                <strong className="block text-gray-900 mb-1">Severe Balance Loss</strong>
+                <p className="text-gray-700 text-sm">Sudden inability to walk or stand without assistance.</p>
+              </div>
+            </div>
+            <div className="flex items-start bg-white p-4 rounded-lg shadow-sm border border-red-100">
+              <span className="text-red-500 mr-3 text-xl">🚨</span>
+              <div>
+                <strong className="block text-gray-900 mb-1">Post-Trauma Worsening</strong>
+                <p className="text-gray-700 text-sm">Rapid deterioration of myelopathy symptoms after a fall or minor neck injury.</p>
+              </div>
+            </div>
+          </div>
+          <div className="mt-6 pt-6 border-t border-red-200">
+            <p className="text-sm text-gray-600">
+              <strong>Disclaimer:</strong> This information is for educational purposes. If you experience these symptoms, please visit the nearest emergency department or contact Dr. Sayuj Krishnan's clinic immediately.
+            </p>
+          </div>
+        </div>
+      </section>
+
       <section className="bg-gray-50 py-12">
         <div className="mx-auto max-w-5xl px-4">
           <h2 className="text-2xl font-semibold text-gray-900">
