@@ -63,6 +63,7 @@ docs/internal/
 !jules-prompts/*.md
 !docs/jules-automations.md
 !docs/VERCEL_PROJECT_INFO.md
+!docs/openclaw-best-use-cases.md
 !PROJECT_INFO.md
 !scripts/fix-jules-git-config.sh
 *.patch
