@@ -104,6 +104,20 @@ export async function verifyAdminAccess(request: Request): Promise<{
     return { isAuthorized: true };
   }
 
+  // Check query param (deprecated, but kept for backward compatibility)
+  let queryKey: string | null = null;
+  try {
+    const url = new URL(request.url);
+    queryKey = url.searchParams.get('key');
+  } catch (e) {
+    // Ignore URL parse error
+  }
+  
+  if (queryKey && await secureCompare(queryKey, adminKey)) {
+    console.warn('[SEC-3] Query-param admin auth (?key=) is deprecated in verifyAdminAccess. Use x-admin-key header instead.');
+    return { isAuthorized: true };
+  }
+
   // Deny access
   return {
     isAuthorized: false,

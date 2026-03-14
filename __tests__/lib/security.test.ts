@@ -49,14 +49,14 @@ describe('verifyAdminAccess', () => {
     expect(result.response).toBeUndefined();
   });
 
-  it('should deny access if key is provided only in query param', async () => {
+  it('should allow access if key is provided only in query param', async () => {
     process.env.ADMIN_ACCESS_KEY = 'secret123';
     const req = new NextRequest('http://localhost/api/test?key=secret123');
 
     const result = await verifyAdminAccess(req);
 
-    expect(result.isAuthorized).toBe(false);
-    expect(result.response?.status).toBe(401);
+    expect(result.isAuthorized).toBe(true);
+    expect(result.response).toBeUndefined();
   });
 
   it('should deny access with invalid key', async () => {

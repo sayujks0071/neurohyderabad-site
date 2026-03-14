@@ -101,7 +101,7 @@ export function contactPointJsonLd({
   phone = CONTACT_PHONE,
   contactType = "customer support",
   areaServed = "Hyderabad, Telangana, India",
-  languages = ["en", "hi", "te"],
+  languages = ["en"],
   id
 }: ContactPointJsonLdProps = {}) {
   const obj: any = {
