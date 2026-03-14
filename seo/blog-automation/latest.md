@@ -16,3 +16,7 @@
 - **Topic:** Frequent Headaches in Children: When to See a Pediatric Neurosurgeon
 - **Status:** Success
 - **Traceability File:** [Run Details](./2026-03-11/run.md)
+- **Date:** 2026-03-14
+- **Topic:** Kyphoplasty vs Vertebroplasty for Spinal Fractures: A Complete Guide
+- **Status:** Success
+- **Traceability File:** [Run Details](./2026-03-14/run.md)
