@@ -20,6 +20,7 @@ import {
   XIcon,
 } from "lucide-react";
 import { createContext, useCallback, useContext, useMemo } from "react";
+import Image from "next/image";
 
 // ============================================================================
 // Types
@@ -92,7 +93,7 @@ const renderAttachmentImage = (
   isGrid: boolean
 ) =>
   isGrid ? (
-    <img
+    <Image
       alt={filename || "Image"}
       className="size-full object-cover"
       height={96}
@@ -100,7 +101,7 @@ const renderAttachmentImage = (
       width={96}
     />
   ) : (
-    <img
+    <Image
       alt={filename || "Image"}
       className="size-full rounded object-cover"
       height={20}
