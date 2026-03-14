@@ -14,6 +14,7 @@
  *   CRON_SECRET                       — Shared secret for cron auth
  */
 import { NextRequest, NextResponse } from 'next/server';
+import crypto from 'crypto';
 import { Resend } from 'resend';
 import { sendPreAppointmentBriefingEmail } from '@/lib/email';
 
@@ -76,7 +77,10 @@ export async function POST(request: NextRequest) {
 export async function GET(request: NextRequest) {
     // Verify Vercel Cron authorization
   const authHeader = request.headers.get('authorization');
-    if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+    const expectedAuth = process.env.CRON_SECRET ? `Bearer ${process.env.CRON_SECRET}` : '';
+    const h1 = crypto.createHash('sha256').update(authHeader || '').digest();
+    const h2 = crypto.createHash('sha256').update(expectedAuth).digest();
+    if (!expectedAuth || !crypto.timingSafeEqual(h1, h2)) {
           return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
