@@ -83,6 +83,8 @@ export default function ClientAnalytics() {
       cancelIdleCallback?: (handle: number) => void;
     };
 
+    let interactionCleanup: (() => void) | null = null;
+
     // Try multiple strategies for optimal loading
     const strategies = [
       // Strategy 1: Idle callback (preferred)
@@ -98,15 +100,19 @@ export default function ClientAnalytics() {
       () => {
         const handleInteraction = () => {
           enable();
-          document.removeEventListener('mousedown', handleInteraction);
-          document.removeEventListener('touchstart', handleInteraction);
-          document.removeEventListener('keydown', handleInteraction);
+          if (interactionCleanup) interactionCleanup();
         };
         
         document.addEventListener('mousedown', handleInteraction, { passive: true });
         document.addEventListener('touchstart', handleInteraction, { passive: true });
         document.addEventListener('keydown', handleInteraction, { passive: true });
         
+        interactionCleanup = () => {
+          document.removeEventListener('mousedown', handleInteraction);
+          document.removeEventListener('touchstart', handleInteraction);
+          document.removeEventListener('keydown', handleInteraction);
+        };
+
         // Fallback timeout
         interactionHandle = window.setTimeout(enable, 2000);
         return true;
@@ -132,6 +138,9 @@ export default function ClientAnalytics() {
       }
       if (interactionHandle !== null) {
         clearTimeout(interactionHandle);
+      }
+      if (interactionCleanup !== null) {
+        interactionCleanup();
       }
     };
   }, [enableAnalytics]);
