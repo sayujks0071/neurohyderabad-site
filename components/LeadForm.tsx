@@ -272,12 +272,23 @@ export default function LeadForm() {
             control={control}
             name="preferredDate"
             render={({ field }) => (
-              <Calendar
-                label="Preferred Date (Optional)"
-                value={field.value || ""}
-                onChange={field.onChange}
-                error={errors.preferredDate?.message}
-              />
+              <div>
+                <Calendar
+                  label="Preferred Date (Optional)"
+                  value={field.value || ""}
+                  onChange={field.onChange}
+                  error={errors.preferredDate?.message}
+                />
+                <input
+                  type="date"
+                  name="preferredDate"
+                  className="sr-only"
+                  aria-hidden="true"
+                  tabIndex={-1}
+                  value={field.value || ""}
+                  onChange={(e) => field.onChange(e.target.value)}
+                />
+              </div>
             )}
           />
 
