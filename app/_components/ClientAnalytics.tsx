@@ -83,6 +83,13 @@ export default function ClientAnalytics() {
       cancelIdleCallback?: (handle: number) => void;
     };
 
+    const handleInteraction = () => {
+      enable();
+      document.removeEventListener('mousedown', handleInteraction);
+      document.removeEventListener('touchstart', handleInteraction);
+      document.removeEventListener('keydown', handleInteraction);
+    };
+
     // Try multiple strategies for optimal loading
     const strategies = [
       // Strategy 1: Idle callback (preferred)
@@ -96,13 +103,6 @@ export default function ClientAnalytics() {
       },
       // Strategy 2: User interaction
       () => {
-        const handleInteraction = () => {
-          enable();
-          document.removeEventListener('mousedown', handleInteraction);
-          document.removeEventListener('touchstart', handleInteraction);
-          document.removeEventListener('keydown', handleInteraction);
-        };
-        
         document.addEventListener('mousedown', handleInteraction, { passive: true });
         document.addEventListener('touchstart', handleInteraction, { passive: true });
         document.addEventListener('keydown', handleInteraction, { passive: true });
@@ -133,6 +133,10 @@ export default function ClientAnalytics() {
       if (interactionHandle !== null) {
         clearTimeout(interactionHandle);
       }
+      // ⚡ Bolt: properly clean up event listeners to prevent memory and main-thread leaks
+      document.removeEventListener('mousedown', handleInteraction);
+      document.removeEventListener('touchstart', handleInteraction);
+      document.removeEventListener('keydown', handleInteraction);
     };
   }, [enableAnalytics]);
 
