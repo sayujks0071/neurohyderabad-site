@@ -30,24 +30,23 @@ function getDevice(): 'mobile' | 'desktop' | 'tablet' {
 
 // Privacy-safe value masking
 function maskSensitiveValue(value: string): string {
-  const sensitivePatterns = [
-    /email/i,
-    /phone/i,
-    /name/i,
-    /address/i,
-    /ssn/i,
-    /credit/i,
-    /card/i,
-    /password/i
-  ];
+  if (typeof value !== 'string') return value;
   
-  for (const pattern of sensitivePatterns) {
-    if (pattern.test(value)) {
-      return 'masked_field';
-    }
-  }
+  let masked = value;
+
+  // Mask Email addresses
+  masked = masked.replace(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g, '[EMAIL]');
+
+  // Mask Phone numbers (matches typical formats like +1234567890, 123-456-7890, (123) 456-7890)
+  masked = masked.replace(/(?:\+\d{1,3}[\s-]?)?\(?\d{3}\)?[\s-]?\d{3}[\s-]?\d{4}/g, '[PHONE]');
+
+  // Mask Credit Cards (13-16 digits)
+  masked = masked.replace(/(?:\d[ -]*?){13,16}/g, '[CREDIT_CARD]');
+
+  // Mask SSN (XXX-XX-XXXX)
+  masked = masked.replace(/\b\d{3}[-.]?\d{2}[-.]?\d{4}\b/g, '[SSN]');
   
-  return value;
+  return masked;
 }
 
 // Main tracking function
@@ -211,7 +210,7 @@ export const analytics = {
   formError: (pageSlug: string, fieldName: string, errorType: string) => {
     track('Form_Error', {
       page_slug: pageSlug,
-      field_name: maskSensitiveValue(fieldName),
+      field_name: fieldName,
       error_type: errorType
     });
   },
