@@ -242,7 +242,12 @@ export default function OpenAIAgentsBooking({ pageSlug, service }: OpenAIAgentsB
         )}
 
         {/* Input Form */}
-        <form onSubmit={handleSubmit} className="p-4 border-t border-[var(--color-border)]">
+        <form
+          onSubmit={handleSubmit}
+          className="p-4 border-t border-[var(--color-border)]"
+          toolname="aiBookingAssistant"
+          tooldescription="Chat with the AI booking assistant to schedule an appointment"
+        >
           <div className="flex space-x-2">
             <input
               type="text"

@@ -165,7 +165,12 @@ export default function OpenAIAPIAgent({ pageSlug, service }: OpenAIAPIAgentProp
         )}
 
         {/* Input Form */}
-        <form onSubmit={onFormSubmit} className="p-4 border-t border-[var(--color-border)]">
+        <form
+          onSubmit={onFormSubmit}
+          className="p-4 border-t border-[var(--color-border)]"
+          toolname="askMedicalAssistant"
+          tooldescription="Ask Dr. Sayuj Krishnan's AI assistant medical questions or general inquiries"
+        >
           <div className="flex space-x-2">
             <input
               type="text"

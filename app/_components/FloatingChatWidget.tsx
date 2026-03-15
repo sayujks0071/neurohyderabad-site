@@ -337,7 +337,12 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
           )}
 
           {/* Input Area */}
-          <form onSubmit={onSubmit} className="p-3 border-t border-[var(--color-border)] bg-[var(--color-surface)] shrink-0">
+          <form
+            onSubmit={onSubmit}
+            className="p-3 border-t border-[var(--color-border)] bg-[var(--color-surface)] shrink-0"
+            toolname="chatWithClinicAssistant"
+            tooldescription="Chat with the clinic AI assistant for help and inquiries"
+          >
             <div className="flex items-center gap-2 relative">
               <label htmlFor="chat-input" className="sr-only">Ask a question</label>
               <input

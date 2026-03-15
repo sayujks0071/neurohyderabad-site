@@ -355,7 +355,12 @@ This booking was created through our AI chat assistant.`;
         )}
 
         {/* Input Form */}
-        <form onSubmit={handleSubmit} className="p-4 border-t border-[var(--color-border)]">
+        <form
+          onSubmit={handleSubmit}
+          className="p-4 border-t border-[var(--color-border)]"
+          toolname="bookAppointmentWithAI"
+          tooldescription="Book a medical appointment using the AI assistant"
+        >
           <div className="flex space-x-2">
             <input
               type="text"
