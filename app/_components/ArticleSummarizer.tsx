@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useCompletion } from '@ai-sdk/react';
 import { Loader2 } from 'lucide-react';
+import { Shimmer } from "@/src/components/ai-elements/shimmer";
 
 interface ArticleSummarizerProps {
   content: string;
@@ -73,7 +74,7 @@ export default function ArticleSummarizer({
       {isLoading && completion.length === 0 && (
         <div className="flex items-center gap-2 mb-2">
           <Loader2 className="animate-spin h-5 w-5 text-[var(--color-primary-500)]" />
-          <span className="text-sm text-[var(--color-text-secondary)]">Generating summary...</span>
+          <Shimmer as="span" className="text-sm text-[var(--color-text-secondary)]">Generating summary...</Shimmer>
         </div>
       )}
 
@@ -88,7 +89,7 @@ export default function ArticleSummarizer({
           <div className="flex items-center justify-between mb-4">
             <h3 className="font-semibold text-[var(--color-primary-800)] flex items-center gap-2 text-lg">
               Article Summary
-              {isLoading && <span className="animate-pulse text-[var(--color-primary-500)] text-xs bg-[var(--color-primary-100)] px-2 py-0.5 rounded-full">Generating...</span>}
+              {isLoading && <Shimmer as="span" className="text-[var(--color-primary-500)] text-xs bg-[var(--color-primary-100)] px-2 py-0.5 rounded-full">Generating...</Shimmer>}
             </h3>
             <button
               onClick={() => setIsExpanded(!isExpanded)}

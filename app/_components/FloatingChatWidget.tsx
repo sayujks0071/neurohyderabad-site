@@ -7,6 +7,7 @@ import { trackMiddlewareEvent } from '@/src/lib/middleware/rum';
 import { MessageCircle, X, Send, AlertTriangle, Loader2, Sparkles, Minus } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { useChat } from '@ai-sdk/react';
+import { Shimmer } from "@/src/components/ai-elements/shimmer";
 // @ts-ignore
 type Message = any;
 
@@ -301,9 +302,9 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
                 <div className="bg-[var(--color-surface)] border border-[var(--color-border)] shadow-sm px-3 py-2 rounded-2xl rounded-bl-none">
                   <div className="flex items-center space-x-2">
                     <Loader2 size={14} className="animate-spin text-[var(--color-primary-500)]" />
-                    <span className="text-xs text-[var(--color-text-secondary)]">
+                    <Shimmer as="span" className="text-xs text-[var(--color-text-secondary)]">
                        {messages[messages.length - 1]?.role === 'assistant' ? 'Typing...' : 'Thinking...'}
-                    </span>
+                    </Shimmer>
                   </div>
                 </div>
               </div>
