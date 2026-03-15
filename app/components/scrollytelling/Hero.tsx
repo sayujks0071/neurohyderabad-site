@@ -209,7 +209,7 @@ export default function Hero() {
                         Advancing Minimally Invasive Spine & Brain Surgery
                     </h2>
                     <h1 className="text-4xl md:text-7xl font-bold leading-tight mb-8">
-                        Dr. Sayuj Krishnan:<br />Best Neurosurgeon in Hyderabad & Endoscopic Spine Specialist
+                        Expert Neurosurgery & Spine Care
                     </h1>
 
                     <div className="flex flex-wrap gap-4">
