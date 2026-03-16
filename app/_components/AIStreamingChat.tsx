@@ -9,6 +9,7 @@ import { Confirmation, ConfirmationRequest, ConfirmationAccepted, ConfirmationRe
 import { Attachments, Attachment, AttachmentPreview, AttachmentInfo, AttachmentRemove } from "@/src/components/ai-elements/attachments";
 import { analytics } from "@/src/lib/analytics";
 import { Suggestion, Suggestions } from "@/src/components/ai-elements/suggestion";
+
 import { CalendarIcon, SearchIcon, StethoscopeIcon, CheckIcon, XIcon } from "lucide-react";
 import { PromptInput, PromptInputTextarea, PromptInputFooter, PromptInputTools, PromptInputSubmit } from "@/src/components/ai-elements/prompt-input";
 
@@ -181,6 +182,7 @@ export default function AIStreamingChat({
               .map(part => (part as any).text)
               .join('');
 
+
             return (
               <Fragment key={message.id}>
               <div
@@ -195,8 +197,63 @@ export default function AIStreamingChat({
                 >
                   <p className="text-sm whitespace-pre-wrap">{textContent}</p>
 
+                  {message.parts?.map((part, partIndex) => {
+                    const isToolCall = part.type === 'tool-invocation' || (typeof part.type === 'string' && part.type.startsWith('tool-'));
+                    if (isToolCall && (part as any).approval) {
+                      const toolPart = part as any;
+                      const toolName = toolPart.toolName || (toolPart.type.startsWith('tool-') ? toolPart.type.replace('tool-', '') : 'unknown tool');
+                      const confirmationId = toolPart.approval.id;
+                      return (
+                        <div key={`${message.id}-tool-${partIndex}`} className="mt-4 max-w-sm">
+                          <Confirmation approval={toolPart.approval} state={toolPart.state}>
+                            <ConfirmationRequest>
+                              This tool wants to run:{" "}
+                              <strong>{toolName}</strong>
+                              <br />
+                              Do you approve this action?
+                            </ConfirmationRequest>
+                            <ConfirmationAccepted>
+                              <CheckIcon className="size-4" />
+                              <span>You approved this tool execution</span>
+                            </ConfirmationAccepted>
+                            <ConfirmationRejected>
+                              <XIcon className="size-4" />
+                              <span>You rejected this tool execution</span>
+                            </ConfirmationRejected>
+                            <ConfirmationActions>
+                              <ConfirmationAction
+                                variant="outline"
+                                onClick={() =>
+                                  addToolApprovalResponse({
+                                    id: confirmationId,
+                                    approved: false,
+                                  })
+                                }
+                              >
+                                Reject
+                              </ConfirmationAction>
+                              <ConfirmationAction
+                                variant="default"
+                                onClick={() =>
+                                  addToolApprovalResponse({
+                                    id: confirmationId,
+                                    approved: true,
+                                  })
+                                }
+                              >
+                                Approve
+                              </ConfirmationAction>
+                            </ConfirmationActions>
+                          </Confirmation>
+                        </div>
+                      );
+                    }
+                    return null;
+                  })}
+
                   {((message as any).experimental_attachments || message.parts?.filter((p: any) => (p.type as string) === "file" || (p.type as string) === "image")).length > 0 && (
                     <div className="mt-2">
+
                       <Attachments variant="list">
                         {((message as any).experimental_attachments || message.parts?.filter((p: any) => (p.type as string) === "file" || (p.type as string) === "image")).map((file: any, i: number) => (
                           <Attachment key={`${message.id}-file-${i}`} data={file as any}>
