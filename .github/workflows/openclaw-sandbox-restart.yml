@@ -1,0 +1,77 @@
+name: OpenClaw Sandbox Daily Restart
+
+on:
+  schedule:
+    # Every day at 4:00 AM IST (22:30 UTC previous day)
+    - cron: '30 22 * * *'
+  workflow_dispatch:
+    inputs:
+      snapshot_id:
+        description: 'Snapshot ID to restore from (leave blank to use default)'
+        required: false
+        default: 'snap_M9HfNXr8iL9U2SXmIU0HiAnqszal'
+
+env:
+  SNAPSHOT_ID: ${{ github.event.inputs.snapshot_id || 'snap_M9HfNXr8iL9U2SXmIU0HiAnqszal' }}
+  OPENCLAW_PORT: '18789'
+
+jobs:
+  restart-sandbox:
+    name: Restart OpenClaw Sandbox
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Install Sandbox CLI
+        run: npm install -g sandbox
+
+      - name: Authenticate with Vercel
+        run: echo "${{ secrets.VERCEL_TOKEN }}" | sandbox login --token -
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+
+      - name: Create Sandbox from Snapshot
+        id: create_sandbox
+        run: |
+          OUTPUT=$(sandbox create \
+            --snapshot ${{ env.SNAPSHOT_ID }} \
+            --timeout 4h \
+            --publish-port ${{ env.OPENCLAW_PORT }} \
+            --json 2>/dev/null || \
+          sandbox create \
+            --snapshot ${{ env.SNAPSHOT_ID }} \
+            --timeout 4h \
+            --publish-port ${{ env.OPENCLAW_PORT }})
+          echo "$OUTPUT"
+          SANDBOX_ID=$(echo "$OUTPUT" | grep -oP '(?<=sbx_)[a-zA-Z0-9]+' | head -1 | sed 's/^/sbx_/')
+          PUB_URL=$(echo "$OUTPUT" | grep -oP 'https://sb-[a-z0-9]+\.vercel\.run' | head -1)
+          echo "sandbox_id=$SANDBOX_ID" >> $GITHUB_OUTPUT
+          echo "public_url=$PUB_URL" >> $GITHUB_OUTPUT
+          echo "Created sandbox: $SANDBOX_ID at $PUB_URL"
+
+      - name: Wait for Gateway to Start
+        run: sleep 8
+
+      - name: Start OpenClaw Gateway
+        run: |
+          sandbox exec ${{ steps.create_sandbox.outputs.sandbox_id }} \
+            sh -c "nohup openclaw gateway run > /tmp/gateway.log 2>&1 &"
+        continue-on-error: true
+
+      - name: Verify Gateway is Running
+        run: |
+          sleep 5
+          sandbox exec ${{ steps.create_sandbox.outputs.sandbox_id }} \
+            cat /tmp/gateway.log | grep -q "listening on" && \
+            echo "✅ Gateway is up" || \
+            echo "⚠️ Gateway may still be starting"
+
+      - name: Report Status
+        if: always()
+        run: |
+          echo "### OpenClaw Sandbox Restarted" >> $GITHUB_STEP_SUMMARY
+          echo "- **Sandbox ID**: ${{ steps.create_sandbox.outputs.sandbox_id }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Public URL**: ${{ steps.create_sandbox.outputs.public_url }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Port**: ${{ env.OPENCLAW_PORT }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Runs until**: ~4h after start (next restart at 4:00 AM IST)" >> $GITHUB_STEP_SUMMARY
+          echo "- **Snapshot**: ${{ env.SNAPSHOT_ID }}" >> $GITHUB_STEP_SUMMARY
