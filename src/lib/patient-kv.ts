@@ -8,7 +8,7 @@
  * KV set for TTL: 30 days (patients older than 30 days pruned automatically)
  */
 
-import { kv } from '@vercel/kv'
+import Redis from 'ioredis'
 
 export interface PatientRecord {
   name: string
@@ -18,37 +18,52 @@ export interface PatientRecord {
   source?: string
 }
 
+const REDIS_URL = process.env.openclaw_REDIS_URL || process.env.REDIS_URL || process.env.KV_URL
 const TTL_SECONDS = 30 * 24 * 60 * 60 // 30 days
 
+// Initialize Redis client lazily
+let redis: Redis | null = null
+
+function getRedis() {
+  if (!redis && REDIS_URL) {
+    redis = new Redis(REDIS_URL)
+  }
+  return redis
+}
+
 /**
- * Store a patient visit in KV after a confirmed booking.
- * Idempotent — safe to call multiple times for the same booking.
+ * Store a patient visit in Redis after a confirmed booking.
  */
 export async function storePatientVisit(record: PatientRecord): Promise<void> {
+  const client = getRedis()
+  if (!client) throw new Error('Redis connection not configured')
+
   const key = `patient:${record.visitDate}:${record.phone.replace(/\D/g, '')}`
-  await kv.set(key, JSON.stringify(record), { ex: TTL_SECONDS })
+  await client.set(key, JSON.stringify(record), 'EX', TTL_SECONDS)
 }
 
 /**
  * Return all patients whose visitDate was exactly `daysAgo` days ago.
- * Used by the review harvester (daysAgo = 3).
  */
 export async function getPatientsByDaysAgo(daysAgo: number): Promise<PatientRecord[]> {
+  const client = getRedis()
+  if (!client) return []
+
   const date = new Date()
   date.setDate(date.getDate() - daysAgo)
   const targetDate = date.toISOString().split('T')[0]
 
   const pattern = `patient:${targetDate}:*`
-  const keys = await kv.keys(pattern)
+  const keys = await client.keys(pattern)
 
   if (!keys.length) return []
 
   const records = await Promise.all(
     keys.map(async (key) => {
-      const raw = await kv.get<string>(key)
+      const raw = await client.get(key)
       if (!raw) return null
       try {
-        return typeof raw === 'string' ? (JSON.parse(raw) as PatientRecord) : (raw as PatientRecord)
+        return JSON.parse(raw) as PatientRecord
       } catch {
         return null
       }
