@@ -9,6 +9,7 @@ import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
 import BookingHeroContent from "./_components/neuralink/BookingHeroContent";
 import BookingLocationInfo from "./_components/neuralink/BookingLocationInfo";
 import AppointmentFaq from "./_components/AppointmentFaq";
+import BookingCalendarEmbed from "../_components/BookingCalendarEmbed";
 
 export const metadata: Metadata = {
   title: "Book Appointment | Best Neurosurgeon Hyderabad",
@@ -92,6 +93,16 @@ export default function AppointmentsPage() {
         locationInfo={<BookingLocationInfo />}
         faqSection={<AppointmentFaq />}
       />
+
+      <section id="cal-booking" className="py-16 bg-white border-t border-slate-100">
+        <div className="max-w-4xl mx-auto px-4">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold text-slate-900 mb-4">Book Directly via Cal.com</h2>
+            <p className="text-slate-600">Select a time that works best for you and schedule an appointment instantly.</p>
+          </div>
+          <BookingCalendarEmbed url="https://cal.com/drsayuj" />
+        </div>
+      </section>
     </>
   );
 }
