@@ -39,7 +39,10 @@ async function verifyResendSignature(request: Request, rawBody: string): Promise
 
     // svix-signature can contain multiple signatures (e.g. "v1,<sig>")
     const signatures = svixSignature.split(' ').map((s) => s.split(',')[1]);
-    const isValid = signatures.some((sig) => sig === expectedSignature);
+    const isValid = signatures.some((sig) => {
+        if (!sig || sig.length !== expectedSignature.length) return false;
+        return crypto.timingSafeEqual(Buffer.from(sig), Buffer.from(expectedSignature));
+    });
 
     if (!isValid) {
         console.error('[Resend Webhook] Signature mismatch.');

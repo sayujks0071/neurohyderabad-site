@@ -54,11 +54,13 @@ export async function POST(request: NextRequest) {
       .update(rawBody)
       .digest('hex');
 
-    // Method 2: Compare with provided signature (could be prefixed)
-    const isValid =
-      signature === expectedSignature ||
-      signature === `sha256=${expectedSignature}` ||
-      `sha256=${expectedSignature}` === signature;
+    // Method 2: Compare with provided signature using constant-time comparison
+    const signatureToVerify = signature.replace(/^sha256=/, '');
+
+    let isValid = false;
+    if (signatureToVerify.length === expectedSignature.length) {
+      isValid = crypto.timingSafeEqual(Buffer.from(signatureToVerify), Buffer.from(expectedSignature));
+    }
 
     if (!isValid) {
       console.error('[webhooks/cursor] Security: Invalid signature');
