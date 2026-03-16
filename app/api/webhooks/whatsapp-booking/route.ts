@@ -13,6 +13,11 @@ interface BookingPayload {
   date: string       // Patient's preferred appointment date
   complaint: string
   phone: string      // "from-whatsapp" or actual E.164 number
+  // --- Metadata passed by OpenClaw agent ---
+  utmSource?: string
+  utmMedium?: string
+  utmCampaign?: string
+  procedureType?: 'consultation' | 'surgery' | 'follow-up'
 }
 
 export const runtime = 'nodejs'
@@ -34,6 +39,11 @@ export async function POST(request: Request) {
       visitDate,
       complaint: body.complaint,
       source: 'whatsapp',
+      utmSource: body.utmSource,
+      utmMedium: body.utmMedium,
+      utmCampaign: body.utmCampaign,
+      procedureType: body.procedureType ?? 'consultation',
+      status: 'confirmed',
     })
 
     console.log(`[WhatsApp Booking] Stored patient: ${body.name} (${visitDate})`)

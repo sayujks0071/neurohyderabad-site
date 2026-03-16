@@ -103,6 +103,7 @@
     "critters": "^0.0.23",
     "embla-carousel-react": "^8.6.0",
     "flags": "^4.0.2",
+    "framer-motion": "^12.36.0",
     "googleapis": "^170.0.0",
     "gsap": "^3.12.4",
     "hypertune": "^2.10.1",

@@ -8,6 +8,7 @@ import { ScrubEngine } from './ScrubEngine';
 import { vertexShader, fragmentShader } from './TunnelShader';
 import Link from 'next/link';
 import Image from 'next/image';
+import SlotAvailabilityWidget from '../../_components/SlotAvailabilityWidget';
 
 // Register ScrollTrigger
 if (typeof window !== 'undefined') {
@@ -211,6 +212,10 @@ export default function Hero() {
                     <h1 className="text-4xl md:text-7xl font-bold leading-tight mb-8">
                         Dr. Sayuj Krishnan:<br />Best Neurosurgeon in Hyderabad & Endoscopic Spine Specialist
                     </h1>
+                    
+                    <div className="max-w-md mb-8">
+                        <SlotAvailabilityWidget />
+                    </div>
 
                     <div className="flex flex-wrap gap-4">
                         <Link

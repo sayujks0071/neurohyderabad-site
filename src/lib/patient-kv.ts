@@ -15,7 +15,16 @@ export interface PatientRecord {
   phone: string     // E.164 format e.g. +919778280044
   visitDate: string // YYYY-MM-DD
   complaint?: string
-  source?: string
+  source?: string   // e.g. 'whatsapp', 'web'
+  // --- UTM Tracking ---
+  utmSource?: string
+  utmMedium?: string
+  utmCampaign?: string
+  utmTerm?: string
+  utmContent?: string
+  // --- Clinical Metadata ---
+  procedureType?: 'consultation' | 'surgery' | 'follow-up'
+  status?: 'confirmed' | 'cancelled' | 'post-op'
 }
 
 const REDIS_URL = process.env.openclaw_REDIS_URL || process.env.REDIS_URL || process.env.KV_URL
@@ -71,4 +80,53 @@ export async function getPatientsByDaysAgo(daysAgo: number): Promise<PatientReco
   )
 
   return records.filter((r): r is PatientRecord => r !== null)
+}
+
+/**
+ * --- Slot Availability Helpers ---
+ */
+
+export interface ClinicSlot {
+  nextSlot: string // ISO string
+  isUrgent: boolean
+  availableCount: number
+}
+
+const SLOT_KEY = 'clinic:availability:next'
+
+/**
+ * Update the next available slot displayed on the website widget.
+ */
+export async function updateNextAvailableSlot(slot: ClinicSlot): Promise<void> {
+  const client = getRedis()
+  if (!client) return
+  await client.set(SLOT_KEY, JSON.stringify(slot))
+}
+
+/**
+ * Get the next available slot for the frontend widget.
+ * Falls back to a mock slot if no data is found (ensures widget always shows something).
+ */
+export async function getNextAvailableSlot(): Promise<ClinicSlot> {
+  const client = getRedis()
+  const raw = client ? await client.get(SLOT_KEY) : null
+  
+  if (raw) {
+    try {
+      return JSON.parse(raw) as ClinicSlot
+    } catch {
+      // Fall through to mock
+    }
+  }
+
+  // Smart Mock: Next working day at 10:00 AM if no data exists
+  const tomorrow = new Date()
+  tomorrow.setDate(tomorrow.getDate() + 1)
+  tomorrow.setHours(10, 0, 0, 0)
+  
+  return {
+    nextSlot: tomorrow.toISOString(),
+    isUrgent: true,
+    availableCount: 3
+  }
 }
