@@ -1,10 +1,10 @@
 {
   "timestamp": "2024-03-07T05:27:00Z",
   "commit_hash": "latest",
-  "page_type": "Home",
-  "suspected_lcp_element": "Hero image (dr-sayuj-krishnan-portrait-sm.jpg)",
-  "bottleneck_identified": "The ScrubEngine preloads 190 frames for the Three.js Hero animation shortly after the initial load. It uses `setTimeout(..., 100)` to trigger the download of the remaining 186 images. This floods the network and main thread right at hydration, severely harming INP (Interaction to Next Paint) and potentially delaying other critical resources like LCP images if network congestion occurs.",
-  "fix_applied": "Updated `preload()` in `app/components/scrollytelling/ScrubEngine.ts` to defer `_loadRemainingFrames` until the browser is idle using `requestIdleCallback` (with a 2000ms `setTimeout` fallback).",
-  "expected_improvement": "Massively improved INP by removing main thread congestion during hydration and avoiding immediate network congestion that competes with LCP assets.",
-  "how_to_verify": "1. Run `pnpm dev`. 2. Open `http://localhost:3000`. 3. Open Network tab and Performance tab. 4. Verify that the massive burst of `ezgif-frame-*.jpg` downloads doesn't happen until the browser is idle (or 2 seconds later). 5. Run a Lighthouse performance audit."
+  "page_type": "Condition",
+  "suspected_lcp_element": "N/A",
+  "bottleneck_identified": "Synchronous re-rendering of the entire conditions grid on every keystroke in ConditionsExplorer.tsx causing poor INP.",
+  "fix_applied": "Debounced the search input using a 300ms timeout so the heavy filtering and DOM update runs after the user pauses typing.",
+  "expected_improvement": "Better Interaction to Next Paint (INP) during search by decoupling typing from heavy DOM updates.",
+  "how_to_verify": "1. Run pnpm dev. 2. Navigate to /conditions. 3. Type quickly in the search box while observing the performance tab. It should not stutter on each keystroke."
 }
