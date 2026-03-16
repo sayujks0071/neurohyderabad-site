@@ -33,7 +33,7 @@ const TTL_SECONDS = 30 * 24 * 60 * 60 // 30 days
 // Initialize Redis client lazily
 let redis: Redis | null = null
 
-function getRedis() {
+export function getRedis() {
   if (!redis && REDIS_URL) {
     redis = new Redis(REDIS_URL)
   }
