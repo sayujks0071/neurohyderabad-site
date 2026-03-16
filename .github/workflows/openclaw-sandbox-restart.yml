@@ -21,15 +21,12 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     environment: vercel_token
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
 
     steps:
       - name: Install Sandbox CLI
         run: npm install -g sandbox
-
-      - name: Authenticate with Vercel
-        run: echo "${{ secrets.VERCEL_TOKEN }}" | sandbox login --token -
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
 
       - name: Create Sandbox from Snapshot
         id: create_sandbox
