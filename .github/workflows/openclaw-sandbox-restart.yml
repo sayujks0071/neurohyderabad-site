@@ -20,6 +20,7 @@ jobs:
     name: Restart OpenClaw Sandbox
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    environment: vercel_token
 
     steps:
       - name: Install Sandbox CLI
