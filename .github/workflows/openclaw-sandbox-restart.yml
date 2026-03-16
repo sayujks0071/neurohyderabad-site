@@ -9,10 +9,10 @@ on:
       snapshot_id:
         description: 'Snapshot ID to restore from (leave blank to use default)'
         required: false
-        default: 'snap_8PmnfIhAjjhul686vCWLH8zmP2iC'
+        default: ''
 
 env:
-  SNAPSHOT_ID: ${{ github.event.inputs.snapshot_id || 'snap_8PmnfIhAjjhul686vCWLH8zmP2iC' }}
+  SNAPSHOT_ID: ${{ github.event.inputs.snapshot_id || '' }}
   OPENCLAW_PORT: '18789'
   # Vercel Sandbox CLI reads this env var for authentication
   VERCEL_AUTH_TOKEN: ${{ secrets.VERCEL_TOKEN }}
