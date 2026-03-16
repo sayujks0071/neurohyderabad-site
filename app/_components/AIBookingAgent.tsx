@@ -355,13 +355,21 @@ This booking was created through our AI chat assistant.`;
         )}
 
         {/* Input Form */}
-        <form onSubmit={handleSubmit} className="p-4 border-t border-[var(--color-border)]">
+        <form
+          onSubmit={handleSubmit}
+          className="p-4 border-t border-[var(--color-border)]"
+          toolname="bookAppointmentViaAI"
+          tooldescription="Book an appointment with Dr. Sayuj using the AI assistant."
+          toolautosubmit="false"
+        >
           <div className="flex space-x-2">
             <input
               type="text"
+              name="prompt"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               placeholder="Type your message here..."
+              aria-label="Ask to book an appointment"
               className="flex-1 px-3 py-2 border border-[var(--color-border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)] focus:border-transparent"
               disabled={isLoading}
             />

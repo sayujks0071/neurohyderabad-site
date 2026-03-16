@@ -111,9 +111,17 @@ export default function SandboxClient() {
 
                 {/* Input Area */}
                 <div className="p-4 sm:p-6 bg-white border-t border-slate-100 relative z-20">
-                    <form onSubmit={handleSubmit} className="relative flex items-end gap-3">
+                    <form
+                        onSubmit={handleSubmit}
+                        className="relative flex items-end gap-3"
+                        toolname="sandboxAIChat"
+                        tooldescription="Interact with the AI sandbox to test the Vercel AI SDK."
+                        toolautosubmit="false"
+                    >
                         <div className="relative flex-1">
                             <input
+                                name="prompt"
+                                aria-label="Ask anything"
                                 className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-2xl px-5 py-4 pr-14 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all placeholder:text-slate-400 text-base"
                                 value={input}
                                 placeholder="Ask anything (e.g., Why is the sky blue?)..."
