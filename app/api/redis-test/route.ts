@@ -9,6 +9,7 @@ import { NextResponse } from "next/server";
 import { getRedis } from "@/src/lib/patient-kv";
 
 export const runtime = "nodejs";
+// Force redeploy - 1773664758002
 
 export async function GET() {
   try {
