@@ -206,6 +206,68 @@ export default function AIStreamingChat({
                       </Attachments>
                     </div>
                   )}
+
+                  {message.parts?.map((part: any, i: number) => {
+                    const isBookAppointment =
+                      (part.type === 'tool-invocation' && part.toolName === 'bookAppointment') ||
+                      part.type === 'tool-bookAppointment';
+
+                    if (isBookAppointment && part.approval) {
+                      const args = part.args || part.input || {};
+                      return (
+                        <div key={`${message.id}-tool-${i}`} className="mt-4">
+                          <Confirmation approval={part.approval} state={part.state}>
+                            <ConfirmationRequest>
+                              <div className="space-y-2 text-sm text-left">
+                                <p className="font-semibold text-slate-800">Book Appointment Request</p>
+                                <ul className="list-disc pl-4 space-y-1 text-slate-600">
+                                  <li><strong>Patient:</strong> {args.patientName}</li>
+                                  <li><strong>Date:</strong> {args.appointmentDate} at {args.appointmentTime}</li>
+                                  <li><strong>Contact:</strong> {args.phone}</li>
+                                  <li><strong>Reason:</strong> {args.reason}</li>
+                                </ul>
+                              </div>
+                              <br />
+                              <span className="text-slate-700">Do you approve booking this appointment?</span>
+                            </ConfirmationRequest>
+                            <ConfirmationAccepted>
+                              <CheckIcon className="size-4" />
+                              <span>Appointment booking approved</span>
+                            </ConfirmationAccepted>
+                            <ConfirmationRejected>
+                              <XIcon className="size-4" />
+                              <span>Appointment booking rejected</span>
+                            </ConfirmationRejected>
+                            <ConfirmationActions>
+                              <ConfirmationAction
+                                variant="outline"
+                                onClick={() =>
+                                  addToolApprovalResponse({
+                                    id: part.approval!.id,
+                                    approved: false,
+                                  })
+                                }
+                              >
+                                Reject
+                              </ConfirmationAction>
+                              <ConfirmationAction
+                                variant="default"
+                                onClick={() =>
+                                  addToolApprovalResponse({
+                                    id: part.approval!.id,
+                                    approved: true,
+                                  })
+                                }
+                              >
+                                Approve
+                              </ConfirmationAction>
+                            </ConfirmationActions>
+                          </Confirmation>
+                        </div>
+                      );
+                    }
+                    return null;
+                  })}
                 </div>
               </div>
               </Fragment>
