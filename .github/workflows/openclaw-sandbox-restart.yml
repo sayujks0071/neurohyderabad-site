@@ -12,7 +12,7 @@ on:
         default: ''
 
 env:
-  SNAPSHOT_ID: ${{ github.event.inputs.snapshot_id || '' }}
+  SNAPSHOT_ID: ${{ github.event.inputs.snapshot_id || 'snap_j4UMlT5byYBJn2pB1FFvSKbSX58C' }}
   OPENCLAW_PORT: '18789'
   # Vercel Sandbox CLI reads this env var for authentication
   VERCEL_AUTH_TOKEN: ${{ secrets.VERCEL_TOKEN }}
