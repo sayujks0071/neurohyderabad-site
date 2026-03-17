@@ -16,3 +16,7 @@
 - **Topic:** Frequent Headaches in Children: When to See a Pediatric Neurosurgeon
 - **Status:** Success
 - **Traceability File:** [Run Details](./2026-03-11/run.md)
+- **Date:** 2026-03-13
+- **Topic:** Can a Herniated Disc Heal Without Surgery? Understanding Spontaneous Resorption
+- **Status:** Success
+- **Traceability File:** [Run Details](./2026-03-13/run.md)
