@@ -519,6 +519,38 @@ const PatientPortal = () => {
           onSubmit={handleSubmit}
           className="grid grid-cols-1 lg:grid-cols-2 gap-10 animate-in slide-in-from-right-8 duration-500"
         >
+          {/* Hidden inputs for WebMCP agents to populate step 1 data directly */}
+          <div className="sr-only" aria-hidden="true">
+            <select
+              name="type"
+              value={formData.type || ""}
+              onChange={(e) => setFormData({ ...formData, type: e.target.value as AppointmentType })}
+              tabIndex={-1}
+            >
+              <option value="" disabled>Select Appointment Type</option>
+              <option value={AppointmentType.NEW_CONSULTATION}>New Consultation</option>
+              <option value={AppointmentType.FOLLOW_UP}>Follow-up</option>
+              <option value={AppointmentType.REPORT_REVIEW}>Report Review</option>
+              <option value={AppointmentType.POST_OP_CHECK}>Post-op Check</option>
+              <option value={AppointmentType.BRAIN_SPECIALIST}>Brain Specialist</option>
+              <option value={AppointmentType.SPINE_SPECIALIST}>Spine Specialist</option>
+            </select>
+            <input
+              type="date"
+              name="date"
+              value={formData.date}
+              onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+              tabIndex={-1}
+            />
+            <input
+              type="time"
+              name="time"
+              value={formData.time}
+              onChange={(e) => setFormData({ ...formData, time: e.target.value })}
+              tabIndex={-1}
+            />
+          </div>
+
           <div className="space-y-8">
             <button
               type="button"

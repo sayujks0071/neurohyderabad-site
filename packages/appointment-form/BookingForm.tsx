@@ -203,17 +203,37 @@ export default function BookingForm({
                 name="requestedDate"
                 control={control}
                 render={({ field }) => (
-                  <Calendar
-                    label="Preferred Date"
-                    value={field.value ? formatLocalDate(field.value) : ""}
-                    onChange={(dateString) => {
-                        const [year, month, day] = dateString.split("-").map(Number);
-                        const date = new Date(year, month - 1, day);
-                        field.onChange(date);
-                    }}
-                    error={errors.requestedDate?.message}
-                    required
-                  />
+                  <div>
+                    <Calendar
+                      label="Preferred Date"
+                      value={field.value ? formatLocalDate(field.value) : ""}
+                      onChange={(dateString) => {
+                          const [year, month, day] = dateString.split("-").map(Number);
+                          const date = new Date(year, month - 1, day);
+                          field.onChange(date);
+                      }}
+                      error={errors.requestedDate?.message}
+                      required
+                    />
+                    <input
+                      type="date"
+                      name="requestedDate"
+                      className="sr-only"
+                      aria-hidden="true"
+                      tabIndex={-1}
+                      value={field.value ? formatLocalDate(field.value) : ""}
+                      onChange={(e) => {
+                        if (!e.target.value) {
+                          field.onChange(undefined);
+                          return;
+                        }
+                        const [year, month, day] = e.target.value.split("-").map(Number);
+                        if (year && month && day) {
+                          field.onChange(new Date(year, month - 1, day));
+                        }
+                      }}
+                    />
+                  </div>
                 )}
               />
 
@@ -226,6 +246,19 @@ export default function BookingForm({
                       Preferred Time{" "}
                       <span className="text-red-500 font-extrabold pl-1">*</span>
                     </div>
+                    <select
+                      name="appointmentTime"
+                      className="sr-only"
+                      aria-hidden="true"
+                      tabIndex={-1}
+                      value={field.value}
+                      onChange={(e) => field.onChange(e.target.value)}
+                    >
+                      <option value="" disabled>Select a time</option>
+                      {availableTimes.map((time) => (
+                        <option key={time} value={time}>{time}</option>
+                      ))}
+                    </select>
                     <div
                       role="group"
                       aria-labelledby="appointment-time-label"
