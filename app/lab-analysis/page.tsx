@@ -137,84 +137,86 @@ export default function LabAnalysisPage() {
             </div>
           </Card>
 
-          {error && (
-            <div className="mt-8 p-6 bg-red-50 border-l-4 border-red-500 rounded-r-lg shadow-md">
-              <h3 className="text-red-800 font-bold mb-2">Error</h3>
-              <p className="text-red-700">{error}</p>
-            </div>
-          )}
+          <div aria-live="polite" aria-atomic="true" className="flex flex-col">
+            {error && (
+              <div role="alert" className="mt-8 p-6 bg-red-50 border-l-4 border-red-500 rounded-r-lg shadow-md">
+                <h3 className="text-red-800 font-bold mb-2">Error</h3>
+                <p className="text-red-700">{error}</p>
+              </div>
+            )}
 
-          {result && (
-            <div className="mt-8 space-y-6">
-              {result.extraction?.truncated && (
-                <div className="p-4 bg-orange-50 border-l-4 border-orange-400 text-orange-700">
-                  <p>Warning: The document was very large and has been truncated. The analysis may be incomplete.</p>
-                </div>
-              )}
-
-              <Card className="p-8 shadow-xl bg-white border-t-4 border-blue-500 rounded-xl animate-fade-in">
-                <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b pb-4">Analysis Result</h2>
-
-                {result.analysis?.plainEnglishSummary && (
-                  <div className="mb-6">
-                    <h3 className="text-lg font-semibold text-blue-900 mb-2">Summary</h3>
-                    <p className="text-gray-700 leading-relaxed">{result.analysis.plainEnglishSummary}</p>
+            {result && (
+              <div className="mt-8 space-y-6">
+                {result.extraction?.truncated && (
+                  <div className="p-4 bg-orange-50 border-l-4 border-orange-400 text-orange-700">
+                    <p>Warning: The document was very large and has been truncated. The analysis may be incomplete.</p>
                   </div>
                 )}
 
-                {result.analysis?.abnormalFindings && result.analysis.abnormalFindings.length > 0 && (
-                  <div className="mb-6">
-                    <h3 className="text-lg font-semibold text-red-700 mb-2">Abnormal Findings</h3>
-                    <ul className="list-disc pl-5 space-y-2">
-                      {result.analysis.abnormalFindings.map((item: string, index: number) => (
-                        <li key={index} className="text-gray-700">{item}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
+                <Card className="p-8 shadow-xl bg-white border-t-4 border-blue-500 rounded-xl animate-fade-in">
+                  <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b pb-4">Analysis Result</h2>
 
-                {result.analysis?.keyTakeaways && result.analysis.keyTakeaways.length > 0 && (
-                  <div className="mb-6">
-                    <h3 className="text-lg font-semibold text-blue-900 mb-2">Key Takeaways</h3>
-                    <ul className="list-disc pl-5 space-y-2">
-                      {result.analysis.keyTakeaways.map((item: string, index: number) => (
-                        <li key={index} className="text-gray-700">{item}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
+                  {result.analysis?.plainEnglishSummary && (
+                    <div className="mb-6">
+                      <h3 className="text-lg font-semibold text-blue-900 mb-2">Summary</h3>
+                      <p className="text-gray-700 leading-relaxed">{result.analysis.plainEnglishSummary}</p>
+                    </div>
+                  )}
 
-                <div className="prose prose-blue max-w-none mt-4">
-                    {!result.analysis && (
-                        <div className="whitespace-pre-wrap text-gray-700 leading-relaxed font-normal">
-                             {JSON.stringify(result, null, 2)}
-                        </div>
-                    )}
-                </div>
-              </Card>
+                  {result.analysis?.abnormalFindings && result.analysis.abnormalFindings.length > 0 && (
+                    <div className="mb-6">
+                      <h3 className="text-lg font-semibold text-red-700 mb-2">Abnormal Findings</h3>
+                      <ul className="list-disc pl-5 space-y-2">
+                        {result.analysis.abnormalFindings.map((item: string, index: number) => (
+                          <li key={index} className="text-gray-700">{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
 
-              <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg">
-                <div className="flex">
-                  <div className="flex-shrink-0">
-                    <svg className="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                    </svg>
+                  {result.analysis?.keyTakeaways && result.analysis.keyTakeaways.length > 0 && (
+                    <div className="mb-6">
+                      <h3 className="text-lg font-semibold text-blue-900 mb-2">Key Takeaways</h3>
+                      <ul className="list-disc pl-5 space-y-2">
+                        {result.analysis.keyTakeaways.map((item: string, index: number) => (
+                          <li key={index} className="text-gray-700">{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  <div className="prose prose-blue max-w-none mt-4">
+                      {!result.analysis && (
+                          <div className="whitespace-pre-wrap text-gray-700 leading-relaxed font-normal">
+                               {JSON.stringify(result, null, 2)}
+                          </div>
+                      )}
                   </div>
-                  <div className="ml-3">
-                    <h3 className="text-sm leading-5 font-medium text-yellow-800">
-                      Medical Disclaimer
-                    </h3>
-                    <div className="mt-2 text-sm leading-5 text-yellow-700">
-                      <p>
-                        This AI analysis is for informational purposes only and does not constitute a medical diagnosis.
-                        Always consult Dr. Sayuj Krishnan or your primary care physician for clinical interpretation and treatment planning.
-                      </p>
+                </Card>
+
+                <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg">
+                  <div className="flex">
+                    <div className="flex-shrink-0">
+                      <svg className="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    <div className="ml-3">
+                      <h3 className="text-sm leading-5 font-medium text-yellow-800">
+                        Medical Disclaimer
+                      </h3>
+                      <div className="mt-2 text-sm leading-5 text-yellow-700">
+                        <p>
+                          This AI analysis is for informational purposes only and does not constitute a medical diagnosis.
+                          Always consult Dr. Sayuj Krishnan or your primary care physician for clinical interpretation and treatment planning.
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </Section>
     </div>

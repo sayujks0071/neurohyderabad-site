@@ -89,6 +89,8 @@ const NAV_SECTIONS: NavSection[] = [
       { label: "Book Consultation", href: "/appointments" },
       { label: "Clinic Contacts", href: "/contact" },
       { label: "Clinic Locations", href: "/locations" },
+      { label: "Refer a Patient", href: "/refer" },
+      { label: "International Patients", href: "/international" },
       { label: "AI Booking Assistant", href: "/ai-chat" },
     ],
   },
@@ -150,6 +152,13 @@ export default function Header() {
                 </div>
               ))}
               <div className="flex flex-col gap-3 pt-2">
+
+                <Link
+                  href="/refer"
+                  className="rounded-full border border-slate-300 px-4 py-2 text-center text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+                >
+                  Refer a Patient
+                </Link>
                 <Link
                   href="/appointments"
                   aria-label="Book a clinic consultation from the mobile menu"
@@ -203,6 +212,13 @@ export default function Header() {
             </details>
           ))}
           <SiteSearch />
+
+          <Link
+            href="/refer"
+            className="rounded-full border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 outline-offset-2 transition hover:bg-slate-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 hidden xl:inline-block"
+          >
+            Refer a Patient
+          </Link>
           <Link
             href="/appointments"
             aria-label="Book a consultation via the primary navigation"
