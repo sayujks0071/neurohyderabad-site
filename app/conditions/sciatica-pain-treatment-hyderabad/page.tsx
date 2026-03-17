@@ -23,7 +23,7 @@ const PatientEducationVideos = dynamic(() => import('@/app/_components/PatientEd
 });
 
 const baseMetadata = makeMetadata({
-  title: "Sciatica Treatment Hyderabad | 90% Non-Surgical | Dr Sayuj",
+  title: "Sciatica Treatment Hyderabad | Expert Care | Dr Sayuj",
   description: "Best Sciatica treatment in Hyderabad. 90% patients recover without surgery using nerve blocks & meds. Endoscopic cure available. Book Dr Sayuj.",
   canonicalPath: '/conditions/sciatica-pain-treatment-hyderabad',
 });
@@ -104,6 +104,10 @@ const FAQ = [
   {
     q: "What exercises should I avoid with sciatica?",
     a: "Avoid heavy hamstring stretches, straight leg raises, and twisting movements like golf until cleared by a physio. These can increase nerve tension."
+  },
+  {
+    q: "How does Dr. Sayuj's endoscopic technique compare to laser spine surgery for sciatica?",
+    a: "While some clinics heavily market 'laser' spine surgery, true full-endoscopic spine surgery is the international gold standard for treating the root cause of sciatica (like a herniated disc). Laser cannot safely remove bone spurs or hard disc fragments pressing on the nerve. Dr. Sayuj uses high-definition endoscopic cameras and precision micro-instruments to physically remove the compression through an incision smaller than a dime, without damaging surrounding muscle, resulting in a much lower recurrence rate than laser procedures."
   }
 ];
 
@@ -552,9 +556,9 @@ export default function SciaticaTreatmentPage() {
 
       {/* Schema Markup */}
       <MedicalWebPageSchema
-        title="Sciatica Treatment Hyderabad | 90% Non-Surgical | Dr Sayuj"
+        title="Sciatica Treatment Hyderabad | Expert Care | Dr Sayuj"
         description="Best Sciatica treatment in Hyderabad. 90% patients recover without surgery using nerve blocks & meds. Endoscopic cure available. Book Dr Sayuj."
-        pageSlug="/conditions/sciatica-pain-treatment-hyderabad/"
+        pageSlug="/conditions/sciatica-pain-treatment-hyderabad"
         pageType="condition"
         serviceOrCondition="Sciatica Treatment"
         breadcrumbs={breadcrumbs}

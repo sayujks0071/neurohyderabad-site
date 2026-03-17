@@ -35,7 +35,11 @@ export function serviceJsonLd({
     sameAs: [
       "https://g.co/kgs/9366939683880052414",
       "https://www.google.com/maps/place/Dr+Sayuj+Krishnan",
-      "https://www.yashodahospitals.com/doctor/dr-sayuj-krishnan/"
+      "https://www.yashodahospitals.com/doctor/dr-sayuj-krishnan/",
+      "https://www.linkedin.com/in/drsayujkrishnan/",
+      "https://scholar.google.com/citations?user=drsayujkrishnan",
+      "https://www.practo.com/hyderabad/doctor/dr-sayuj-krishnan-1-neurosurgeon",
+      "https://www.justdial.com/Hyderabad/Dr-Sayuj-Krishnan-Yashoda-Hospitals-Malakpet/040PXX40-XX40-190314164828-M7U7_BZDET"
     ],
     medicalSpecialty: ["Neurosurgery", "Brain Surgery", "Spine Surgery"]
   },
@@ -200,7 +204,11 @@ export const ORGANIZATION_LOGO = {
   sameAs: [
     "https://g.co/kgs/9366939683880052414",
     "https://www.google.com/maps/place/Dr+Sayuj+Krishnan",
-    "https://www.yashodahospitals.com/doctor/dr-sayuj-krishnan/"
+    "https://www.yashodahospitals.com/doctor/dr-sayuj-krishnan/",
+    "https://www.linkedin.com/in/drsayujkrishnan/",
+    "https://scholar.google.com/citations?user=drsayujkrishnan",
+    "https://www.practo.com/hyderabad/doctor/dr-sayuj-krishnan-1-neurosurgeon",
+    "https://www.justdial.com/Hyderabad/Dr-Sayuj-Krishnan-Yashoda-Hospitals-Malakpet/040PXX40-XX40-190314164828-M7U7_BZDET"
   ]
 };
 

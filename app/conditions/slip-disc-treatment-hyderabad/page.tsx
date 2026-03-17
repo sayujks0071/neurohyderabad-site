@@ -376,7 +376,7 @@ export default function SlipDiscTreatmentPage() {
           <ul className="space-y-2 text-gray-700">
             <li className="flex items-start">
               <span className="text-blue-600 mr-2 mt-1">•</span>
-              <span>Patients with leg-dominant pain from herniated discs</span>
+              <span>Patients with leg-dominant pain (<Link href="/conditions/sciatica-pain-treatment-hyderabad" className="text-blue-600 hover:underline">sciatica</Link>) from herniated discs</span>
             </li>
             <li className="flex items-start">
               <span className="text-blue-600 mr-2 mt-1">•</span>
@@ -441,7 +441,7 @@ export default function SlipDiscTreatmentPage() {
   <MedicalWebPageSchema
         title="Slip Disc Treatment in Hyderabad | Endoscopic Discectomy"
         description="Expert slip disc treatment in Hyderabad. From conservative care to endoscopic discectomy. Same-day discharge, minimal pain. Book consultation with Dr. Sayuj Krishnan."
-        pageSlug="/conditions/slip-disc-treatment-hyderabad/"
+        pageSlug="/conditions/slip-disc-treatment-hyderabad"
         pageType="condition"
         serviceOrCondition="Slip Disc Treatment"
         breadcrumbs={breadcrumbs}
