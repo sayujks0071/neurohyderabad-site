@@ -1,5 +1,6 @@
-# Latest Blog Automation Run
+# Latest Run
 
+[2026-03-15](2026-03-15/run.md)
 - **Date:** 2026-03-08
 - **Topic:** Neck Pain or Shoulder Problem? Cervical Radiculopathy vs. Rotator Cuff Tear
 - **Status:** Success
