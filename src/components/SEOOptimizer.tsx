@@ -75,32 +75,31 @@ export default function SEOOptimizer({ pageType, pageSlug, serviceOrCondition }:
       }
 
       let maxScrollDepth = 0;
-      let isThrottled = false;
-      let scrollTimeout: NodeJS.Timeout | null = null;
+      let isTicking = false;
+      let rafId: number | null = null;
+
       const trackScrollDepth = () => {
-        if (isThrottled) return;
-        isThrottled = true;
+        if (!isTicking) {
+          rafId = window.requestAnimationFrame(() => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            if (docHeight > 0) {
+              const scrollPercent = Math.round((scrollTop / docHeight) * 100);
 
-        if (scrollTimeout) clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(() => {
-          const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-          const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-          if (docHeight > 0) {
-            const scrollPercent = Math.round((scrollTop / docHeight) * 100);
-
-            if (scrollPercent > maxScrollDepth) {
-              maxScrollDepth = scrollPercent;
-              analytics.scrollDepth(pageSlug, scrollPercent);
+              if (scrollPercent > maxScrollDepth) {
+                maxScrollDepth = scrollPercent;
+                analytics.scrollDepth(pageSlug, scrollPercent);
+              }
             }
-          }
-
-          isThrottled = false;
-        }, 500); // ⚡ Bolt: trailing-edge throttle to prevent synchronous layout recalculations every frame without missing final position
-      };
+            isTicking = false;
+          });
+          isTicking = true;
+        }
+      }; // ⚡ Bolt: requestAnimationFrame throttle to decouple synchronous layout reads from the scroll event thread
 
       window.addEventListener('scroll', trackScrollDepth, { passive: true });
       cleanupCallbacks.push(() => {
-        if (scrollTimeout) clearTimeout(scrollTimeout);
+        if (rafId) window.cancelAnimationFrame(rafId);
         window.removeEventListener('scroll', trackScrollDepth);
       });
 
