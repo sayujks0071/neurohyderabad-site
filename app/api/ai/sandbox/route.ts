@@ -48,7 +48,7 @@ export async function POST(req: Request) {
         messages: messages,
       });
 
-      return result.toTextStreamResponse();
+      return result.toDataStreamResponse();
     } catch (streamingError) {
       console.error('Error during AI streamText execution:', streamingError);
       return new Response(JSON.stringify({ error: 'Failed to generate AI response stream' }), {
