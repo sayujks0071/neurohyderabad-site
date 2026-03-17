@@ -10,3 +10,7 @@
 ## 2024-05-15 - Dynamic ARIA Labels for Feedback Buttons
 **Learning:** For interactive buttons that change state without navigating (like "Copy to clipboard"), `title` is often not read reliably by screen readers when state changes.
 **Action:** Used `aria-live="polite"` combined with a dynamic `aria-label={copied ? "Copied" : "Copy"}` to provide immediate, accessible feedback for micro-interactions without using visual toast notifications.
+
+## 2025-05-18 - [Add aria-live regions for dynamic analysis results]
+**Learning:** For asynchronous AI analysis tools (like DICOM or PDF extractors) where results or errors populate dynamically after a loading state, the wrapper containing these outputs needs `aria-live="polite"` and `aria-atomic="true"`. Otherwise, screen reader users are left unaware when the long-running process completes and content appears on screen. Errors should ideally use `role="alert"`.
+**Action:** Wrapped the dynamic `error` and `result` JSX elements in `app/dicom-analysis/page.tsx` and `app/lab-analysis/page.tsx` with a `<div aria-live="polite" aria-atomic="true">` container and added `role="alert"` to the error messages.

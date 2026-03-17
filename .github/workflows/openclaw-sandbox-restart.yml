@@ -33,7 +33,7 @@ jobs:
         run: |
           OUTPUT=$(sandbox create \
             --snapshot ${{ env.SNAPSHOT_ID }} \
-            --timeout 4h \
+            --timeout 24h \
             --publish-port ${{ env.OPENCLAW_PORT }} \
             --token "$VERCEL_AUTH_TOKEN")
           echo "$OUTPUT"
@@ -66,4 +66,4 @@ jobs:
           echo "- **Sandbox ID**: ${{ steps.create_sandbox.outputs.sandbox_id }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Public URL**: ${{ steps.create_sandbox.outputs.public_url }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Snapshot**: ${{ env.SNAPSHOT_ID }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Runs until**: ~4h from now (restarts daily at 4:00 AM IST)" >> $GITHUB_STEP_SUMMARY
+          echo "- **Runs until**: ~24h from now (restarts daily to maintain continuous 24/7 uptime)" >> $GITHUB_STEP_SUMMARY

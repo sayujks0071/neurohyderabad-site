@@ -92,6 +92,15 @@ export default function AppointmentsPage() {
         locationInfo={<BookingLocationInfo />}
         faqSection={<AppointmentFaq />}
       />
+
+      <div className="bg-blue-50/50 py-12 mt-12 border-t border-blue-100">
+        <div className="container mx-auto px-4 max-w-4xl text-center">
+          <h2 className="text-2xl font-bold text-slate-800 mb-4">Already had surgery?</h2>
+          <p className="text-lg text-slate-600 mb-6">If you are an existing patient with post-operative concerns or need guidance during your recovery, please use our dedicated follow-up portal.</p>
+          <a href="/followup" className="inline-block rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-blue-700">Submit Post-Op Follow-Up</a>
+        </div>
+      </div>
+
     </>
   );
 }

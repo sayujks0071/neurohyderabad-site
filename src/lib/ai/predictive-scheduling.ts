@@ -53,7 +53,7 @@ export async function predictOptimalSlots(
 
   try {
     const { object } = await generateObject({
-      model: getTextModel(),
+      model: getTextModel(undefined, { cache: true }),
       schema: jsonSchema({
         type: 'object',
         properties: {

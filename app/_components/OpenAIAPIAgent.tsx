@@ -165,13 +165,21 @@ export default function OpenAIAPIAgent({ pageSlug, service }: OpenAIAPIAgentProp
         )}
 
         {/* Input Form */}
-        <form onSubmit={onFormSubmit} className="p-4 border-t border-[var(--color-border)]">
+        <form
+          onSubmit={onFormSubmit}
+          className="p-4 border-t border-[var(--color-border)]"
+          toolname="askAIAssistant"
+          tooldescription="Ask Dr. Sayuj's AI assistant a question about neurosurgery, appointments, or clinic information."
+          toolautosubmit="false"
+        >
           <div className="flex space-x-2">
             <input
               type="text"
+              name="prompt"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Type your message here..."
+              aria-label="Ask a question"
               className="flex-1 px-3 py-2 border border-[var(--color-border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)] focus:border-transparent"
               disabled={isLoading}
             />

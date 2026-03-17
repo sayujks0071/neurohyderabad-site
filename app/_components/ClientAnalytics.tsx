@@ -83,6 +83,12 @@ export default function ClientAnalytics() {
       cancelIdleCallback?: (handle: number) => void;
     };
 
+    // ⚡ Bolt: Extracted handleInteraction reference to module scope
+    // so we can properly remove the global event listeners during the
+    // useEffect cleanup phase, preventing memory leaks and main-thread overhead
+    // from firing unnecessary events after the analytics load or unmount.
+    let handleInteraction: (() => void) | null = null;
+
     // Try multiple strategies for optimal loading
     const strategies = [
       // Strategy 1: Idle callback (preferred)
@@ -96,11 +102,13 @@ export default function ClientAnalytics() {
       },
       // Strategy 2: User interaction
       () => {
-        const handleInteraction = () => {
+        handleInteraction = () => {
           enable();
-          document.removeEventListener('mousedown', handleInteraction);
-          document.removeEventListener('touchstart', handleInteraction);
-          document.removeEventListener('keydown', handleInteraction);
+          if (handleInteraction) {
+            document.removeEventListener('mousedown', handleInteraction);
+            document.removeEventListener('touchstart', handleInteraction);
+            document.removeEventListener('keydown', handleInteraction);
+          }
         };
         
         document.addEventListener('mousedown', handleInteraction, { passive: true });
@@ -132,6 +140,11 @@ export default function ClientAnalytics() {
       }
       if (interactionHandle !== null) {
         clearTimeout(interactionHandle);
+      }
+      if (handleInteraction) {
+        document.removeEventListener('mousedown', handleInteraction);
+        document.removeEventListener('touchstart', handleInteraction);
+        document.removeEventListener('keydown', handleInteraction);
       }
     };
   }, [enableAnalytics]);
