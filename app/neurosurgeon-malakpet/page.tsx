@@ -105,7 +105,7 @@ export default function MalakpetNeurosurgeonPage() {
             Dr. Sayuj Krishnan - Neurosurgeon in Malakpet <span className="opacity-80 font-light block text-2xl md:text-3xl mt-2">& Brain-Spine Specialist</span>
           </h1>
           <p className="mt-4 text-xl text-blue-50 max-w-3xl">
-            Fellowship-trained Expert in <strong>Minimally Invasive Spine Surgery</strong> & <strong>Brain Tumor Removal</strong>.
+            Fellowship-trained Expert in <strong>Minimally Invasive Spine Surgery</strong> (Slip Disc & Sciatica) & <strong>Brain Tumor Removal</strong>.
             Practicing at Yashoda Hospital Malakpet with 24/7 Emergency Care.
           </p>
           <div className="mt-8">
