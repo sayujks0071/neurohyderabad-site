@@ -9,7 +9,7 @@ import { Confirmation, ConfirmationRequest, ConfirmationAccepted, ConfirmationRe
 import { Attachments, Attachment, AttachmentPreview, AttachmentInfo, AttachmentRemove } from "@/src/components/ai-elements/attachments";
 import { analytics } from "@/src/lib/analytics";
 import { Suggestion, Suggestions } from "@/src/components/ai-elements/suggestion";
-import { CalendarIcon, SearchIcon, StethoscopeIcon, CheckIcon, XIcon } from "lucide-react";
+import { CalendarIcon, SearchIcon, StethoscopeIcon, CheckIcon, XIcon, BookmarkIcon } from "lucide-react";
 import { PromptInput, PromptInputTextarea, PromptInputFooter, PromptInputTools, PromptInputSubmit } from "@/src/components/ai-elements/prompt-input";
 import { Shimmer } from "@/src/components/ai-elements/shimmer";
 
@@ -234,9 +234,86 @@ export default function AIStreamingChat({
                       : 'bg-[var(--color-background)] text-[var(--color-text-primary)]'
                   }`}
                 >
-                  <p className="text-sm whitespace-pre-wrap">{textContent}</p>
+                  {textContent && <p className="text-sm whitespace-pre-wrap">{textContent}</p>}
 
-                  {((message as any).experimental_attachments || message.parts?.filter((p: any) => (p.type as string) === "file" || (p.type as string) === "image")).length > 0 && (
+                  {message.parts?.map((part: any, partIndex: number) => {
+                    if (part.type === 'tool-invocation') {
+                      const isApproval = part.state === 'approval-requested' || part.state === 'approval-responded' || part.state === 'output-denied' || part.state === 'output-available';
+                      const needsApproval = part.toolName === 'bookAppointment';
+
+                      if (needsApproval && part.approval) {
+                        return (
+                          <div key={partIndex} className="mt-4">
+                            <Confirmation approval={part.approval} state={part.state}>
+                              <ConfirmationRequest>
+                                The AI wants to book an appointment.
+                                <br />
+                                Do you approve this action?
+                              </ConfirmationRequest>
+                              <ConfirmationAccepted>
+                                <CheckIcon className="size-4" />
+                                <span>You approved the appointment booking.</span>
+                              </ConfirmationAccepted>
+                              <ConfirmationRejected>
+                                <XIcon className="size-4" />
+                                <span>You rejected the appointment booking.</span>
+                              </ConfirmationRejected>
+                              <ConfirmationActions>
+                                <ConfirmationAction
+                                  variant="outline"
+                                  onClick={() =>
+                                    addToolApprovalResponse({
+                                      id: part.toolCallId,
+                                      approved: false,
+                                    })
+                                  }
+                                >
+                                  Reject
+                                </ConfirmationAction>
+                                <ConfirmationAction
+                                  variant="default"
+                                  onClick={() =>
+                                    addToolApprovalResponse({
+                                      id: part.toolCallId,
+                                      approved: true,
+                                    })
+                                  }
+                                >
+                                  Approve
+                                </ConfirmationAction>
+                              </ConfirmationActions>
+                            </Confirmation>
+                          </div>
+                        );
+                      } else {
+                        return (
+                          <div key={partIndex} className="mt-4">
+                            <ChainOfThought>
+                              <ChainOfThoughtHeader>
+                                Executing {part.toolName}...
+                              </ChainOfThoughtHeader>
+                              <ChainOfThoughtContent>
+                                <ChainOfThoughtStep
+                                  icon={SearchIcon}
+                                  label={`Tool: ${part.toolName}`}
+                                  description="Running tool execution..."
+                                  status={part.state === 'result' ? 'complete' : 'active'}
+                                />
+                                {part.state === 'result' && (
+                                  <div className="mt-2 text-xs text-[var(--color-text-secondary)] opacity-70">
+                                    Tool execution finished.
+                                  </div>
+                                )}
+                              </ChainOfThoughtContent>
+                            </ChainOfThought>
+                          </div>
+                        );
+                      }
+                    }
+                    return null;
+                  })}
+
+                  {((message as any).experimental_attachments || message.parts?.filter((p: any) => (p.type as string) === "file" || (p.type as string) === "image"))?.length > 0 && (
                     <div className="mt-2">
                       <Attachments variant="list">
                         {((message as any).experimental_attachments || message.parts?.filter((p: any) => (p.type as string) === "file" || (p.type as string) === "image")).map((file: any, i: number) => (
@@ -248,126 +325,31 @@ export default function AIStreamingChat({
                     </div>
                   )}
 
-                  {message.parts?.map((part: any, i: number) => {
-                    const isBookAppointment =
-                      (part.type === 'tool-invocation' && part.toolName === 'bookAppointment') ||
-                      part.type === 'tool-bookAppointment';
-
-                    if (isBookAppointment && part.approval) {
-                      const args = part.args || part.input || {};
-                      return (
-                        <div key={`${message.id}-tool-${i}`} className="mt-4">
-                          <Confirmation approval={part.approval} state={part.state}>
-                            <ConfirmationRequest>
-                              <div className="space-y-2 text-sm text-left">
-                                <p className="font-semibold text-slate-800">Book Appointment Request</p>
-                                <ul className="list-disc pl-4 space-y-1 text-slate-600">
-                                  <li><strong>Patient:</strong> {args.patientName}</li>
-                                  <li><strong>Date:</strong> {args.appointmentDate} at {args.appointmentTime}</li>
-                                  <li><strong>Contact:</strong> {args.phone}</li>
-                                  <li><strong>Reason:</strong> {args.reason}</li>
-                                </ul>
-                              </div>
-                              <br />
-                              <span className="text-slate-700">Do you approve booking this appointment?</span>
-                            </ConfirmationRequest>
-                            <ConfirmationAccepted>
-                              <CheckIcon className="size-4" />
-                              <span>Appointment booking approved</span>
-                            </ConfirmationAccepted>
-                            <ConfirmationRejected>
-                              <XIcon className="size-4" />
-                              <span>Appointment booking rejected</span>
-                            </ConfirmationRejected>
-                            <ConfirmationActions>
-                              <ConfirmationAction
-                                variant="outline"
-                                onClick={() =>
-                                  addToolApprovalResponse({
-                                    id: part.approval!.id,
-                                    approved: false,
-                                  })
-                                }
-                              >
-                                Reject
-                              </ConfirmationAction>
-                              <ConfirmationAction
-                                variant="default"
-                                onClick={() =>
-                                  addToolApprovalResponse({
-                                    id: part.approval!.id,
-                                    approved: true,
-                                  })
-                                }
-                              >
-                                Approve
-                              </ConfirmationAction>
-                            </ConfirmationActions>
-                          </Confirmation>
-                        </div>
-                      );
-                    }
-                    return null;
-                  })}
+                  {message.role !== 'user' && !checkpoints.some(cp => cp.messageIndex === index) && (
+                    <div className="mt-2 flex justify-end">
+                      <button
+                        onClick={() => createCheckpoint(index)}
+                        className="text-xs text-[var(--color-primary-500)] hover:underline opacity-50 hover:opacity-100 flex items-center"
+                      >
+                        <BookmarkIcon className="size-3 mr-1" /> Save Checkpoint
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
 
-              {toolInvocations?.map((tool: any) => {
-                if (!tool.approval) return null;
-
-                return (
-                  <Confirmation key={tool.toolCallId || tool.type} approval={tool.approval} state={tool.state}>
-                    <ConfirmationRequest>
-                      This action requires your approval:{" "}
-                      <code>{tool.toolName || tool.type.replace('tool-', '')}</code>
-                      <br />
-                      Do you approve this action?
-                    </ConfirmationRequest>
-                    <ConfirmationAccepted>
-                      <CheckIcon className="size-4" />
-                      <span>You approved this tool execution</span>
-                    </ConfirmationAccepted>
-                    <ConfirmationRejected>
-                      <XIcon className="size-4" />
-                      <span>You rejected this tool execution</span>
-                    </ConfirmationRejected>
-                    <ConfirmationActions>
-                      <ConfirmationAction
-                        variant="outline"
-                        onClick={() =>
-                          addToolApprovalResponse({
-                            id: tool.approval!.id,
-                            approved: false,
-                          })
-                        }
-                      >
-                        Reject
-                      </ConfirmationAction>
-                      <ConfirmationAction
-                        variant="default"
-                        onClick={() =>
-                          addToolApprovalResponse({
-                            id: tool.approval!.id,
-                            approved: true,
-                          })
-                        }
-                      >
-                        Approve
-                      </ConfirmationAction>
-                    </ConfirmationActions>
-                  </Confirmation>
-                );
-              })}
-
-              {checkpoint && (
-                <Checkpoint>
-                  <CheckpointIcon />
-                  <CheckpointTrigger
-                    onClick={() => restoreToCheckpoint(checkpoint.messageIndex)}
-                  >
-                    Restore checkpoint
-                  </CheckpointTrigger>
-                </Checkpoint>
+              {checkpoints.some(cp => cp.messageIndex === index) && (
+                <div className="my-4">
+                  <Checkpoint>
+                    <CheckpointIcon />
+                    <CheckpointTrigger
+                      onClick={() => restoreToCheckpoint(index)}
+                      tooltip="Restore to this point in conversation"
+                    >
+                      Restore checkpoint
+                    </CheckpointTrigger>
+                  </Checkpoint>
+                </div>
               )}
               </Fragment>
             );
