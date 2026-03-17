@@ -55,24 +55,26 @@ export default function StatsigAnalytics() {
         }
       };
 
-      // Throttle scroll events using requestAnimationFrame for better performance
-      let isTicking = false;
-      let rafId: number;
+      // ⚡ Bolt: Use timeout-based debounce for non-visual analytics instead of
+      // requestAnimationFrame, which triggers up to 60fps and drains CPU
+      let scrollTimeout: NodeJS.Timeout | null = null;
+      let isThrottled = false;
       const throttledScroll = () => {
-        if (!isTicking) {
-          rafId = window.requestAnimationFrame(() => {
-            handleScroll();
-            isTicking = false;
-          });
-          isTicking = true;
-        }
+        if (isThrottled) return;
+        isThrottled = true;
+
+        if (scrollTimeout) clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+          handleScroll();
+          isThrottled = false;
+        }, 500); // Trigger only every 500ms
       };
 
       window.addEventListener('scroll', throttledScroll, { passive: true });
 
       return () => {
+        if (scrollTimeout) clearTimeout(scrollTimeout);
         window.removeEventListener('scroll', throttledScroll);
-        if (rafId) window.cancelAnimationFrame(rafId);
       };
     };
 

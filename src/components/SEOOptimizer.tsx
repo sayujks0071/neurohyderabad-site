@@ -75,27 +75,28 @@ export default function SEOOptimizer({ pageType, pageSlug, serviceOrCondition }:
       }
 
       let maxScrollDepth = 0;
-      let isThrottled = false;
+      let isTicking = false;
+      // ⚡ Bolt: Use timeout-based debounce for non-visual analytics instead of
+      // requestAnimationFrame, which triggers up to 60fps and drains CPU
       let scrollTimeout: NodeJS.Timeout | null = null;
       const trackScrollDepth = () => {
-        if (isThrottled) return;
-        isThrottled = true;
+        if (!isTicking) {
+          if (scrollTimeout) clearTimeout(scrollTimeout);
+          scrollTimeout = setTimeout(() => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            if (docHeight > 0) {
+              const scrollPercent = Math.round((scrollTop / docHeight) * 100);
 
-        if (scrollTimeout) clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(() => {
-          const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-          const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-          if (docHeight > 0) {
-            const scrollPercent = Math.round((scrollTop / docHeight) * 100);
-
-            if (scrollPercent > maxScrollDepth) {
-              maxScrollDepth = scrollPercent;
-              analytics.scrollDepth(pageSlug, scrollPercent);
+              if (scrollPercent > maxScrollDepth) {
+                maxScrollDepth = scrollPercent;
+                analytics.scrollDepth(pageSlug, scrollPercent);
+              }
             }
-          }
-
-          isThrottled = false;
-        }, 500); // ⚡ Bolt: trailing-edge throttle to prevent synchronous layout recalculations every frame without missing final position
+            isTicking = false;
+          }, 500);
+          isTicking = true;
+        }
       };
 
       window.addEventListener('scroll', trackScrollDepth, { passive: true });
