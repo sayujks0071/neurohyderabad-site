@@ -9,7 +9,7 @@ import { Confirmation, ConfirmationRequest, ConfirmationAccepted, ConfirmationRe
 import { Attachments, Attachment, AttachmentPreview, AttachmentInfo, AttachmentRemove } from "@/src/components/ai-elements/attachments";
 import { analytics } from "@/src/lib/analytics";
 import { Suggestion, Suggestions } from "@/src/components/ai-elements/suggestion";
-import { CalendarIcon, SearchIcon, StethoscopeIcon, CheckIcon, XIcon } from "lucide-react";
+import { CalendarIcon, SearchIcon, StethoscopeIcon, CheckIcon, XIcon, BookmarkIcon } from "lucide-react";
 import { PromptInput, PromptInputTextarea, PromptInputFooter, PromptInputTools, PromptInputSubmit } from "@/src/components/ai-elements/prompt-input";
 
 interface AIStreamingChatProps {
@@ -193,9 +193,86 @@ export default function AIStreamingChat({
                       : 'bg-[var(--color-background)] text-[var(--color-text-primary)]'
                   }`}
                 >
-                  <p className="text-sm whitespace-pre-wrap">{textContent}</p>
+                  {textContent && <p className="text-sm whitespace-pre-wrap">{textContent}</p>}
 
-                  {((message as any).experimental_attachments || message.parts?.filter((p: any) => (p.type as string) === "file" || (p.type as string) === "image")).length > 0 && (
+                  {message.parts?.map((part: any, partIndex: number) => {
+                    if (part.type === 'tool-invocation') {
+                      const isApproval = part.state === 'approval-requested' || part.state === 'approval-responded' || part.state === 'output-denied' || part.state === 'output-available';
+                      const needsApproval = part.toolName === 'bookAppointment';
+
+                      if (needsApproval && part.approval) {
+                        return (
+                          <div key={partIndex} className="mt-4">
+                            <Confirmation approval={part.approval} state={part.state}>
+                              <ConfirmationRequest>
+                                The AI wants to book an appointment.
+                                <br />
+                                Do you approve this action?
+                              </ConfirmationRequest>
+                              <ConfirmationAccepted>
+                                <CheckIcon className="size-4" />
+                                <span>You approved the appointment booking.</span>
+                              </ConfirmationAccepted>
+                              <ConfirmationRejected>
+                                <XIcon className="size-4" />
+                                <span>You rejected the appointment booking.</span>
+                              </ConfirmationRejected>
+                              <ConfirmationActions>
+                                <ConfirmationAction
+                                  variant="outline"
+                                  onClick={() =>
+                                    addToolApprovalResponse({
+                                      id: part.toolCallId,
+                                      approved: false,
+                                    })
+                                  }
+                                >
+                                  Reject
+                                </ConfirmationAction>
+                                <ConfirmationAction
+                                  variant="default"
+                                  onClick={() =>
+                                    addToolApprovalResponse({
+                                      id: part.toolCallId,
+                                      approved: true,
+                                    })
+                                  }
+                                >
+                                  Approve
+                                </ConfirmationAction>
+                              </ConfirmationActions>
+                            </Confirmation>
+                          </div>
+                        );
+                      } else {
+                        return (
+                          <div key={partIndex} className="mt-4">
+                            <ChainOfThought>
+                              <ChainOfThoughtHeader>
+                                Executing {part.toolName}...
+                              </ChainOfThoughtHeader>
+                              <ChainOfThoughtContent>
+                                <ChainOfThoughtStep
+                                  icon={SearchIcon}
+                                  label={`Tool: ${part.toolName}`}
+                                  description="Running tool execution..."
+                                  status={part.state === 'result' ? 'complete' : 'active'}
+                                />
+                                {part.state === 'result' && (
+                                  <div className="mt-2 text-xs text-[var(--color-text-secondary)] opacity-70">
+                                    Tool execution finished.
+                                  </div>
+                                )}
+                              </ChainOfThoughtContent>
+                            </ChainOfThought>
+                          </div>
+                        );
+                      }
+                    }
+                    return null;
+                  })}
+
+                  {((message as any).experimental_attachments || message.parts?.filter((p: any) => (p.type as string) === "file" || (p.type as string) === "image"))?.length > 0 && (
                     <div className="mt-2">
                       <Attachments variant="list">
                         {((message as any).experimental_attachments || message.parts?.filter((p: any) => (p.type as string) === "file" || (p.type as string) === "image")).map((file: any, i: number) => (
@@ -206,8 +283,33 @@ export default function AIStreamingChat({
                       </Attachments>
                     </div>
                   )}
+
+                  {message.role !== 'user' && !checkpoints.some(cp => cp.messageIndex === index) && (
+                    <div className="mt-2 flex justify-end">
+                      <button
+                        onClick={() => createCheckpoint(index)}
+                        className="text-xs text-[var(--color-primary-500)] hover:underline opacity-50 hover:opacity-100 flex items-center"
+                      >
+                        <BookmarkIcon className="size-3 mr-1" /> Save Checkpoint
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
+
+              {checkpoints.some(cp => cp.messageIndex === index) && (
+                <div className="my-4">
+                  <Checkpoint>
+                    <CheckpointIcon />
+                    <CheckpointTrigger
+                      onClick={() => restoreToCheckpoint(index)}
+                      tooltip="Restore to this point in conversation"
+                    >
+                      Restore checkpoint
+                    </CheckpointTrigger>
+                  </Checkpoint>
+                </div>
+              )}
               </Fragment>
             );
             })}
