@@ -103,6 +103,7 @@ export default function AISandbox() {
               type="submit"
               disabled={isLoading || !input.trim()}
               className="absolute right-2 p-2 rounded-full bg-blue-500 hover:bg-blue-400 disabled:opacity-50 disabled:hover:bg-blue-500 transition-colors text-white"
+              aria-label="Send message"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
