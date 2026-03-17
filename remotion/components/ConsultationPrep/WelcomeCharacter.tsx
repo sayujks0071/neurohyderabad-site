@@ -32,8 +32,7 @@ export const WelcomeCharacter: React.FC<WelcomeCharacterProps> = ({ char, delay,
       fps,
       from: 0.5,
       to: 1,
-      durationInFrames: 25,
-      config: { damping: 12, stiffness: 100 },
+      config: { damping: 10, stiffness: 150 }, // Bouncier, natural spring without fixed duration
     }),
     [frame, fps, delay, prefersReducedMotion]
   );
@@ -44,8 +43,7 @@ export const WelcomeCharacter: React.FC<WelcomeCharacterProps> = ({ char, delay,
       fps,
       from: 30,
       to: 0,
-      durationInFrames: 25,
-      config: { damping: 12 },
+      config: { damping: 14, stiffness: 120 }, // Smoother slide up
     }),
     [frame, fps, delay, prefersReducedMotion]
   );

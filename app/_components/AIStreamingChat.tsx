@@ -11,6 +11,7 @@ import { analytics } from "@/src/lib/analytics";
 import { Suggestion, Suggestions } from "@/src/components/ai-elements/suggestion";
 import { CalendarIcon, SearchIcon, StethoscopeIcon, CheckIcon, XIcon } from "lucide-react";
 import { PromptInput, PromptInputTextarea, PromptInputFooter, PromptInputTools, PromptInputSubmit } from "@/src/components/ai-elements/prompt-input";
+import { Shimmer } from "@/src/components/ai-elements/shimmer";
 
 interface AIStreamingChatProps {
   pageSlug: string;
@@ -90,6 +91,13 @@ export default function AIStreamingChat({
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  useEffect(() => {
+    // Create checkpoint every 5 messages
+    if (messages.length > 0 && messages.length % 5 === 0) {
+      createCheckpoint(messages.length - 1);
+    }
+  }, [messages.length]);
 
   const createCheckpoint = (messageIndex: number) => {
     const isAlreadyCheckpoint = checkpoints.some(cp => cp.messageIndex === messageIndex);
@@ -181,8 +189,41 @@ export default function AIStreamingChat({
               .map(part => (part as any).text)
               .join('');
 
+            const checkpoint = checkpoints.find(cp => cp.messageIndex === index);
+
+            // Find tool invocations that need approval
+            const toolInvocations = message.parts?.filter(
+              (part) => part.type === "tool-invocation" || part.type.startsWith("tool-")
+            ) as any[];
+
+            // Find reasoning parts
+            const reasoningParts = message.parts?.filter(
+              (part) => part.type === "reasoning"
+            ) as any[];
+
             return (
               <Fragment key={message.id}>
+              {reasoningParts?.length > 0 && (
+                <div className="flex justify-start mb-2">
+                  <ChainOfThought>
+                    <ChainOfThoughtHeader>
+                      <span className="text-sm font-medium text-[var(--color-primary-600)]">AI Clinical Analysis</span>
+                    </ChainOfThoughtHeader>
+                    <ChainOfThoughtContent>
+                      {reasoningParts.map((part, index) => (
+                        <ChainOfThoughtStep
+                          key={`reasoning-${index}`}
+                          icon={StethoscopeIcon}
+                          label="Analysis step"
+                          description={(part as any).text}
+                          status="complete"
+                        />
+                      ))}
+                    </ChainOfThoughtContent>
+                  </ChainOfThought>
+                </div>
+              )}
+
               <div
                 className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
@@ -208,6 +249,64 @@ export default function AIStreamingChat({
                   )}
                 </div>
               </div>
+
+              {toolInvocations?.map((tool: any) => {
+                if (!tool.approval) return null;
+
+                return (
+                  <Confirmation key={tool.toolCallId || tool.type} approval={tool.approval} state={tool.state}>
+                    <ConfirmationRequest>
+                      This action requires your approval:{" "}
+                      <code>{tool.toolName || tool.type.replace('tool-', '')}</code>
+                      <br />
+                      Do you approve this action?
+                    </ConfirmationRequest>
+                    <ConfirmationAccepted>
+                      <CheckIcon className="size-4" />
+                      <span>You approved this tool execution</span>
+                    </ConfirmationAccepted>
+                    <ConfirmationRejected>
+                      <XIcon className="size-4" />
+                      <span>You rejected this tool execution</span>
+                    </ConfirmationRejected>
+                    <ConfirmationActions>
+                      <ConfirmationAction
+                        variant="outline"
+                        onClick={() =>
+                          addToolApprovalResponse({
+                            id: tool.approval!.id,
+                            approved: false,
+                          })
+                        }
+                      >
+                        Reject
+                      </ConfirmationAction>
+                      <ConfirmationAction
+                        variant="default"
+                        onClick={() =>
+                          addToolApprovalResponse({
+                            id: tool.approval!.id,
+                            approved: true,
+                          })
+                        }
+                      >
+                        Approve
+                      </ConfirmationAction>
+                    </ConfirmationActions>
+                  </Confirmation>
+                );
+              })}
+
+              {checkpoint && (
+                <Checkpoint>
+                  <CheckpointIcon />
+                  <CheckpointTrigger
+                    onClick={() => restoreToCheckpoint(checkpoint.messageIndex)}
+                  >
+                    Restore checkpoint
+                  </CheckpointTrigger>
+                </Checkpoint>
+              )}
               </Fragment>
             );
             })}
@@ -215,7 +314,7 @@ export default function AIStreamingChat({
             {isLoading && (
               <div className="flex justify-start items-center gap-2 p-2 pl-4 text-slate-500">
                 <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-[var(--color-primary-500)]"></div>
-                <div className="text-sm font-medium text-[var(--color-primary-600)]">AI is analyzing your request...</div>
+                <Shimmer className="text-sm font-medium text-[var(--color-primary-600)]">AI is analyzing your request...</Shimmer>
               </div>
             )}
             {error && (

@@ -100,6 +100,18 @@ def analyze_page(url, response, response_time):
     if len(images_without_alt) > 0:
         recommendations.append(f"Found {len(images_without_alt)} images without alt text. Add alt text for better accessibility and SEO.")
 
+    # --- OPD Conversion specific checks ---
+    has_booking_cta = "book appointment" in response.text.lower() or "schedule consultation" in response.text.lower() or "book now" in response.text.lower()
+    has_internal_booking_link = 'href="/appointments"' in response.text or "href='/appointments'" in response.text
+    has_whatsapp_cta = "wa.me" in response.text or "api.whatsapp.com" in response.text or "whatsapp" in response.text.lower()
+
+    if not has_booking_cta:
+        recommendations.append("Missing Booking CTA (e.g. 'Book Appointment'). Crucial for OPD conversion.")
+    if not has_internal_booking_link and url != "https://www.drsayuj.info/appointments":
+        recommendations.append("Missing internal link to /appointments. Crucial for patient navigation.")
+    if not has_whatsapp_cta:
+        recommendations.append("Missing WhatsApp CTA link. Patients prefer instant messaging options.")
+
     return {
         "url": url,
         "status_code": response.status_code,
@@ -112,6 +124,11 @@ def analyze_page(url, response, response_time):
             "internal_links_count": len(internal_links),
             "external_links_count": len(external_links),
             "images_without_alt_count": len(images_without_alt)
+        },
+        "conversion_data": {
+            "has_booking_cta": has_booking_cta,
+            "has_internal_booking_link": has_internal_booking_link,
+            "has_whatsapp_cta": has_whatsapp_cta
         },
         "recommendations": recommendations
     }
@@ -156,6 +173,17 @@ def generate_daily_report():
             page_data = analyze_page(url, response, response_time)
             page_data["status"] = "success"
             report["pages"].append(page_data)
+
+    # Aggregate Conversion Metrics
+    pages_analyzed = [p for p in report["pages"] if p.get("status") == "success" and "conversion_data" in p]
+    if pages_analyzed:
+        total = len(pages_analyzed)
+        with_cta = sum(1 for p in pages_analyzed if p["conversion_data"]["has_booking_cta"])
+        report["conversion_summary"] = {
+            "pages_with_cta": f"{with_cta}/{total} ({round(with_cta/total*100)}%)"
+        }
+        if with_cta / total < 0.8:
+            report["overall_recommendations"].append(f"Warning: Only {with_cta}/{total} pages have a clear Booking CTA. Add CTAs to the remaining pages to increase OPD bookings.")
 
     with open("/tmp/daily_report.json", "w") as f:
         json.dump(report, f, indent=2)

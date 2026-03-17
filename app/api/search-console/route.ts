@@ -12,6 +12,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { google } from 'googleapis';
+import crypto from 'crypto';
 
 const GOOGLE_SEARCH_CONSOLE_API = 'https://searchconsole.googleapis.com/v1';
 const BING_WEBMASTER_API = 'https://ssl.bing.com/webmaster/api.svc/json';
@@ -224,11 +225,24 @@ export async function POST(request: NextRequest) {
     // Verify API key if required (optional security layer)
     const apiKey = request.headers.get('x-api-key');
     const requiredApiKey = process.env.SEARCH_CONSOLE_API_KEY;
-    if (requiredApiKey && apiKey !== requiredApiKey) {
-      return NextResponse.json(
-        { success: false, error: 'Invalid API key' },
-        { status: 401 }
-      );
+
+    if (requiredApiKey) {
+      if (!apiKey) {
+        return NextResponse.json(
+          { success: false, error: 'Invalid API key' },
+          { status: 401 }
+        );
+      }
+
+      const h1 = crypto.createHash('sha256').update(apiKey).digest();
+      const h2 = crypto.createHash('sha256').update(requiredApiKey).digest();
+
+      if (!crypto.timingSafeEqual(h1, h2)) {
+        return NextResponse.json(
+          { success: false, error: 'Invalid API key' },
+          { status: 401 }
+        );
+      }
     }
 
     switch (action) {

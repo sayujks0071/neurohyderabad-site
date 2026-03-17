@@ -13,136 +13,180 @@ import {
 import React, { useEffect } from "react";
 import { useReactFlow, ReactFlowProvider } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
+import {
+  Stethoscope,
+  AlertTriangle,
+  Pill,
+  Activity,
+  Bone,
+  Syringe,
+  ClipboardList,
+  CalendarCheck,
+  FileSearch,
+  CheckCircle2,
+  Crosshair
+} from "lucide-react";
 
 const nodeIds = {
-  symptoms: "node-symptoms",
-  aiAnalysis: "node-ai-analysis",
-  mriRequired: "node-mri-required",
+  presentation: "node-presentation",
+  clinicalExam: "node-clinical-exam",
+  redFlags: "node-red-flags",
+  emergencyMri: "node-emergency-mri",
+  emergencySurgery: "node-emergency-surgery",
   conservative: "node-conservative",
-  surgeryReview: "node-surgery-review",
-  teleconsult: "node-teleconsult",
-  inPerson: "node-in-person",
+  reassess: "node-reassess",
+  electiveMri: "node-elective-mri",
+  mriReview: "node-mri-review",
+  painManagement: "node-pain-management",
+  surgicalConsult: "node-surgical-consult",
 };
 
 const nodes = [
   {
     data: {
-      description: "Patient inputs symptoms (e.g., severe back pain, sciatica).",
+      label: "Patient Presentation",
+      description: "Back pain, sciatica, numbness, or weakness reported.",
+      icon: "clipboard",
+      status: "neutral",
       handles: { source: true, target: false },
-      label: "Symptom Logging",
-      status: "completed",
     },
-    id: nodeIds.symptoms,
+    id: nodeIds.presentation,
     position: { x: 0, y: 0 },
     type: "medicalWorkflow",
   },
   {
     data: {
-      description: "AI triage evaluates urgency and condition likelihood.",
+      label: "Clinical Assessment",
+      description: "Detailed neurological and physical examination.",
+      icon: "stethoscope",
+      status: "neutral",
       handles: { source: true, target: true },
-      label: "AI Triage Analysis",
-      status: "active",
     },
-    id: nodeIds.aiAnalysis,
-    position: { x: 400, y: 0 },
+    id: nodeIds.clinicalExam,
+    position: { x: 350, y: 0 },
     type: "medicalWorkflow",
   },
   {
     data: {
-      description: "Red flags detected. AI suggests immediate scan.",
+      label: "Red Flag Screening",
+      description: "Check for Cauda Equina, severe progressive weakness, or infection.",
+      icon: "alert",
+      status: "warning",
       handles: { source: true, target: true },
-      label: "Diagnostic Imaging (MRI)",
-      status: "pending",
     },
-    id: nodeIds.mriRequired,
-    position: { x: 800, y: -150 },
+    id: nodeIds.redFlags,
+    position: { x: 700, y: -150 },
     type: "medicalWorkflow",
   },
   {
     data: {
-      description: "Mild symptoms. Recommend physical therapy & meds.",
+      label: "Urgent MRI",
+      description: "Immediate diagnostic imaging required.",
+      icon: "search",
+      status: "critical",
       handles: { source: true, target: true },
+    },
+    id: nodeIds.emergencyMri,
+    position: { x: 1050, y: -250 },
+    type: "medicalWorkflow",
+  },
+  {
+    data: {
+      label: "Emergency Surgery",
+      description: "Decompression surgery to prevent permanent damage.",
+      icon: "crosshair",
+      status: "critical",
+      handles: { source: false, target: true },
+    },
+    id: nodeIds.emergencySurgery,
+    position: { x: 1400, y: -250 },
+    type: "medicalWorkflow",
+  },
+  {
+    data: {
       label: "Conservative Treatment",
-      status: "pending",
+      description: "Physical therapy, NSAIDs, rest, and activity modification.",
+      icon: "pill",
+      status: "active",
+      handles: { source: true, target: true },
     },
     id: nodeIds.conservative,
-    position: { x: 800, y: 150 },
+    position: { x: 700, y: 150 },
     type: "medicalWorkflow",
   },
   {
     data: {
-      description: "AI analyzes MRI. Flags structural abnormalities for Dr. Sayuj.",
+      label: "6-Week Reassessment",
+      description: "Evaluate progress and symptom relief.",
+      icon: "calendar",
+      status: "active",
       handles: { source: true, target: true },
+    },
+    id: nodeIds.reassess,
+    position: { x: 1050, y: 150 },
+    type: "medicalWorkflow",
+  },
+  {
+    data: {
+      label: "Elective MRI",
+      description: "Imaging for persistent or worsening symptoms.",
+      icon: "search",
+      status: "neutral",
+      handles: { source: true, target: true },
+    },
+    id: nodeIds.electiveMri,
+    position: { x: 1400, y: 150 },
+    type: "medicalWorkflow",
+  },
+  {
+    data: {
       label: "Surgical Case Review",
-      status: "pending",
+      description: "Analyze MRI for structural lesions (e.g., herniated disc).",
+      icon: "bone",
+      status: "neutral",
+      handles: { source: true, target: true },
     },
-    id: nodeIds.surgeryReview,
-    position: { x: 1250, y: -150 },
+    id: nodeIds.mriReview,
+    position: { x: 1750, y: 150 },
     type: "medicalWorkflow",
   },
   {
     data: {
-      description: "Schedule online follow-up to review conservative progress.",
+      label: "Pain Management",
+      description: "Epidural injections and advanced non-surgical care.",
+      icon: "syringe",
+      status: "success",
       handles: { source: false, target: true },
-      label: "Teleconsultation",
-      status: "pending",
     },
-    id: nodeIds.teleconsult,
-    position: { x: 1250, y: 150 },
+    id: nodeIds.painManagement,
+    position: { x: 2150, y: 50 },
     type: "medicalWorkflow",
   },
   {
     data: {
-      description: "Dr. Sayuj confirms surgery plan in-clinic.",
+      label: "Surgical Consultation",
+      description: "Discuss minimally invasive spine surgery options.",
+      icon: "crosshair",
+      status: "active",
       handles: { source: false, target: true },
-      label: "In-Person Consultation",
-      status: "pending",
     },
-    id: nodeIds.inPerson,
-    position: { x: 1700, y: -150 },
+    id: nodeIds.surgicalConsult,
+    position: { x: 2150, y: 250 },
     type: "medicalWorkflow",
   },
 ];
 
 const edges = [
-  {
-    id: "edge-symptoms-ai",
-    source: nodeIds.symptoms,
-    target: nodeIds.aiAnalysis,
-    type: "animated",
-  },
-  {
-    id: "edge-ai-mri",
-    source: nodeIds.aiAnalysis,
-    target: nodeIds.mriRequired,
-    type: "animated",
-    label: "High Urgency",
-  },
-  {
-    id: "edge-ai-conservative",
-    source: nodeIds.aiAnalysis,
-    target: nodeIds.conservative,
-    type: "temporary",
-    label: "Low Urgency",
-  },
-  {
-    id: "edge-mri-surgery",
-    source: nodeIds.mriRequired,
-    target: nodeIds.surgeryReview,
-    type: "animated",
-  },
-  {
-    id: "edge-conservative-tele",
-    source: nodeIds.conservative,
-    target: nodeIds.teleconsult,
-    type: "temporary",
-  },
-  {
-    id: "edge-surgery-inperson",
-    source: nodeIds.surgeryReview,
-    target: nodeIds.inPerson,
-    type: "animated",
-  },
+  { id: "e-pres-exam", source: nodeIds.presentation, target: nodeIds.clinicalExam, type: "animated" },
+  { id: "e-exam-red", source: nodeIds.clinicalExam, target: nodeIds.redFlags, type: "animated" },
+  { id: "e-exam-cons", source: nodeIds.clinicalExam, target: nodeIds.conservative, type: "animated" },
+  { id: "e-red-emri", source: nodeIds.redFlags, target: nodeIds.emergencyMri, type: "animated", label: "Red flags present" },
+  { id: "e-emri-esurg", source: nodeIds.emergencyMri, target: nodeIds.emergencySurgery, type: "animated" },
+  { id: "e-cons-reassess", source: nodeIds.conservative, target: nodeIds.reassess, type: "temporary" },
+  { id: "e-reassess-mri", source: nodeIds.reassess, target: nodeIds.electiveMri, type: "animated", label: "No improvement" },
+  { id: "e-mri-review", source: nodeIds.electiveMri, target: nodeIds.mriReview, type: "animated" },
+  { id: "e-review-pain", source: nodeIds.mriReview, target: nodeIds.painManagement, type: "temporary", label: "No clear structural lesion" },
+  { id: "e-review-surg", source: nodeIds.mriReview, target: nodeIds.surgicalConsult, type: "animated", label: "Structural lesion found" },
 ];
 
 const nodeTypes = {
@@ -154,32 +198,58 @@ const nodeTypes = {
       description: string;
       handles: { target: boolean; source: boolean };
       status: string;
+      icon: string;
     };
   }) => {
-    let statusColor = "bg-white border-slate-200";
-    let badgeColor = "bg-slate-100 text-slate-600";
+    let statusClasses = "bg-white border-slate-200";
+    let badgeClasses = "bg-slate-100 text-slate-600";
+    let IconComponent = Activity;
 
-    if (data.status === "completed") {
-      statusColor = "bg-emerald-50 border-emerald-200";
-      badgeColor = "bg-emerald-100 text-emerald-700";
+    switch (data.icon) {
+      case "clipboard": IconComponent = ClipboardList; break;
+      case "stethoscope": IconComponent = Stethoscope; break;
+      case "alert": IconComponent = AlertTriangle; break;
+      case "search": IconComponent = FileSearch; break;
+      case "pill": IconComponent = Pill; break;
+      case "calendar": IconComponent = CalendarCheck; break;
+      case "bone": IconComponent = Bone; break;
+      case "syringe": IconComponent = Syringe; break;
+      case "crosshair": IconComponent = Crosshair; break;
+      case "success": IconComponent = CheckCircle2; break;
+    }
+
+    if (data.status === "warning") {
+      statusClasses = "bg-amber-50 border-amber-200 shadow-sm ring-1 ring-amber-500/10";
+      badgeClasses = "bg-amber-100 text-amber-700";
+    } else if (data.status === "critical") {
+      statusClasses = "bg-red-50 border-red-200 shadow-md ring-1 ring-red-500/20";
+      badgeClasses = "bg-red-100 text-red-700";
     } else if (data.status === "active") {
-      statusColor = "bg-blue-50 border-blue-200 shadow-md ring-1 ring-blue-500/20";
-      badgeColor = "bg-blue-100 text-blue-700";
+      statusClasses = "bg-blue-50 border-blue-200 shadow-md ring-1 ring-blue-500/20";
+      badgeClasses = "bg-blue-100 text-blue-700";
+    } else if (data.status === "success") {
+      statusClasses = "bg-emerald-50 border-emerald-200";
+      badgeClasses = "bg-emerald-100 text-emerald-700";
     }
 
     return (
-      <Node handles={data.handles} className={`${statusColor} transition-all duration-300 w-72`}>
-        <NodeHeader className="pb-2">
-          <div className="flex justify-between items-start w-full gap-2">
-            <NodeTitle className="text-base font-semibold text-slate-800 leading-tight">{data.label}</NodeTitle>
+      <Node handles={data.handles} className={`${statusClasses} transition-all duration-300 w-80`}>
+        <NodeHeader className="pb-3 pt-4 px-4 bg-transparent border-b-0">
+          <div className="flex items-center gap-3 w-full">
+            <div className={`p-2 rounded-lg ${badgeClasses}`}>
+              <IconComponent className="w-5 h-5" />
+            </div>
+            <NodeTitle className="text-base font-semibold text-slate-800 leading-tight">
+              {data.label}
+            </NodeTitle>
           </div>
         </NodeHeader>
-        <NodeContent>
+        <NodeContent className="px-4 pb-2 pt-0">
           <p className="text-sm text-slate-600 leading-relaxed">{data.description}</p>
         </NodeContent>
-        <NodeFooter>
-          <span className={`text-xs px-2 py-1 rounded-full font-medium ${badgeColor}`}>
-            {data.status.charAt(0).toUpperCase() + data.status.slice(1)}
+        <NodeFooter className="px-4 py-3 bg-slate-50/50 border-t border-slate-100">
+          <span className={`text-xs px-2.5 py-1 rounded-full font-medium ${badgeClasses}`}>
+            {data.status.charAt(0).toUpperCase() + data.status.slice(1)} Phase
           </span>
         </NodeFooter>
       </Node>
@@ -225,8 +295,8 @@ export default function AIWorkflowPage() {
       <header className="bg-white border-b border-slate-200 py-4 px-6 sticky top-0 z-10 shadow-sm">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-slate-900">AI Diagnostic Triage & Workflow</h1>
-            <p className="text-sm text-slate-500 mt-1">Interactive visualization of our AI-assisted patient intake process</p>
+            <h1 className="text-2xl font-bold text-slate-900">Spine Surgery Decision Tree</h1>
+            <p className="text-sm text-slate-500 mt-1">Interactive patient care pathway for structural spinal conditions</p>
           </div>
         </div>
       </header>

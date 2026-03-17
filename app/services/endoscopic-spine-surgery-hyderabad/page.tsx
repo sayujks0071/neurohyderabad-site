@@ -601,6 +601,75 @@ export default function EndoscopicSpineSurgeryHyderabadPage() {
           </div>
         </section>
 
+
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-blue-900 mb-6">Risks & Safety Protocols</h2>
+          <p className="text-gray-700 mb-8">
+            While endoscopic spine surgery is significantly safer than traditional open surgery, it is still a medical procedure. Transparently discussing potential risks and our advanced mitigation strategies is part of our commitment to your safety and trust.
+          </p>
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Potential Risks */}
+            <div className="bg-red-50 p-8 rounded-xl border border-red-100">
+              <h3 className="text-2xl font-semibold text-gray-900 mb-6 flex items-center gap-3">
+                <span className="text-red-600 text-3xl mb-1">!</span> Potential Risks
+              </h3>
+              <ul className="space-y-4">
+                <li className="flex items-start gap-3">
+                  <span className="text-red-500 font-bold mt-1">•</span>
+                  <div>
+                    <strong className="text-gray-900 block">Dural Tear (CSF Leak)</strong>
+                    <span className="text-gray-700">A small tear in the covering of the spinal cord. Exceedingly rare ({"<1%"}) in endoscopic procedures due to high magnification.</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-red-500 font-bold mt-1">•</span>
+                  <div>
+                    <strong className="text-gray-900 block">Nerve Irritation</strong>
+                    <span className="text-gray-700">Temporary numbness or tingling as the nerve adjusts after being freed from long-term compression.</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-red-500 font-bold mt-1">•</span>
+                  <div>
+                    <strong className="text-gray-900 block">Infection</strong>
+                    <span className="text-gray-700">The risk of surgical site infection is nearly eliminated compared to open surgery, but remains a non-zero possibility.</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            {/* Our Mitigation Strategies */}
+            <div className="bg-green-50 p-8 rounded-xl border border-green-100">
+              <h3 className="text-2xl font-semibold text-gray-900 mb-6 flex items-center gap-3">
+                <span className="text-green-600 text-3xl mb-1">✓</span> Our Safety Protocols
+              </h3>
+              <ul className="space-y-4">
+                <li className="flex items-start gap-3">
+                  <span className="text-green-600 font-bold mt-1">✓</span>
+                  <div>
+                    <strong className="text-gray-900 block">4K High-Definition Magnification</strong>
+                    <span className="text-gray-700">The endoscope provides unparalleled clarity, allowing precise removal of tissue while safeguarding delicate nerves.</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-green-600 font-bold mt-1">✓</span>
+                  <div>
+                    <strong className="text-gray-900 block">Awake Surgery (Local Anesthesia)</strong>
+                    <span className="text-gray-700">Many procedures are done while you are awake. Real-time patient feedback is the ultimate nerve-safety monitor.</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-green-600 font-bold mt-1">✓</span>
+                  <div>
+                    <strong className="text-gray-900 block">8mm Micro-Incision</strong>
+                    <span className="text-gray-700">The tiny puncture wound minimizes tissue exposure, drastically reducing infection rates to near zero.</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-blue-900 mb-6">Laser vs. Endoscopic Spine Surgery</h2>
           <p className="text-gray-700 mb-6">

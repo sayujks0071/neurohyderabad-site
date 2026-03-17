@@ -21,3 +21,7 @@
 - **Topic:** When to See a Neurosurgeon for Back Pain: 5 Red Flag Symptoms
 - **Status:** Success
 - **Traceability File:** [Run Details](./2026-03-17/run.md)
+- **Date:** 2026-03-16
+- **Topic:** Can a Slip Disc Heal Without Surgery? Non-Surgical Treatment Guide
+- **Status:** Success
+- **Traceability File:** [Run Details](./2026-03-16/run.md)
