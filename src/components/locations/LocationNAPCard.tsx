@@ -15,9 +15,9 @@ export const LocationNAPCard: React.FC<LocationNAPCardProps> = ({ location: lega
   if (!location) return null;
 
   return (
-    <div itemScope itemType="https://schema.org/MedicalClinic" className={`bg-[var(--color-surface)]/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-6 ${className}`}>
+    <div className={`bg-[var(--color-surface)]/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-6 ${className}`}>
       <div className="mb-4">
-        <h3 itemProp="name" className="text-xl font-bold text-[var(--color-text-primary)]">{location.canonical_display_name}</h3>
+        <h3 className="text-xl font-bold text-[var(--color-text-primary)]">{location.canonical_display_name}</h3>
         <p className="text-sm text-[var(--color-primary-800)] font-medium mt-1">
           Serving {location.areaServedName}
         </p>
@@ -27,12 +27,12 @@ export const LocationNAPCard: React.FC<LocationNAPCardProps> = ({ location: lega
         {/* Address */}
         <div className="flex items-start gap-3">
           <MapPin className="w-5 h-5 text-[var(--color-primary-500)] mt-1 shrink-0" aria-hidden="true" />
-          <div itemProp="address" itemScope itemType="https://schema.org/PostalAddress">
-            <p className="text-[var(--color-text-secondary)]" itemProp="streetAddress">{location.address.streetAddress}</p>
+          <div>
+            <p className="text-[var(--color-text-secondary)]">{location.address.streetAddress}</p>
             <p className="text-[var(--color-text-secondary)]">
-              <span itemProp="addressLocality">{location.address.addressLocality}</span>,{' '}
-              <span itemProp="addressRegion">{location.address.addressRegion}</span> -{' '}
-              <span itemProp="postalCode">{location.address.postalCode}</span>
+              <span>{location.address.addressLocality}</span>,{' '}
+              <span>{location.address.addressRegion}</span> -{' '}
+              <span>{location.address.postalCode}</span>
             </p>
           </div>
         </div>
@@ -42,7 +42,6 @@ export const LocationNAPCard: React.FC<LocationNAPCardProps> = ({ location: lega
           <Phone className="w-5 h-5 text-[var(--color-primary-500)] shrink-0" aria-hidden="true" />
           <a
             href={`tel:${location.telephone}`}
-            itemProp="telephone"
             className="text-[var(--color-text-secondary)] hover:text-[var(--color-primary-500)] font-medium transition-colors rounded-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)] focus:ring-offset-2"
             aria-label={`Call ${location.telephone}`}
           >

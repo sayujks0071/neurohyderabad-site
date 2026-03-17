@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import SchemaScript from "@/app/_components/SchemaScript";
-import LocalNAP from "@/app/_components/LocalNAP";
+import { LocationNAPCard } from "@/src/components/locations/LocationNAPCard";
 import YMYLAttribution from "@/app/_components/YMYLAttribution";
 import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
@@ -524,7 +524,7 @@ export default function CervicalMyelopathyPage() {
 
       <section className="bg-gray-50 py-12">
         <div className="mx-auto max-w-5xl px-4">
-          <LocalNAP />
+          <LocationNAPCard locationId="malakpet" />
           <div className="mt-8">
             <YMYLAttribution lastReviewed="2025-11-01" />
           </div>
