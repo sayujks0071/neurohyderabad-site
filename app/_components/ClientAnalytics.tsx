@@ -83,11 +83,12 @@ export default function ClientAnalytics() {
       cancelIdleCallback?: (handle: number) => void;
     };
 
-    // ⚡ Bolt: Extracted handleInteraction reference to module scope
-    // so we can properly remove the global event listeners during the
-    // useEffect cleanup phase, preventing memory leaks and main-thread overhead
-    // from firing unnecessary events after the analytics load or unmount.
-    let handleInteraction: (() => void) | null = null;
+    const handleInteraction = () => {
+      enable();
+      document.removeEventListener('mousedown', handleInteraction);
+      document.removeEventListener('touchstart', handleInteraction);
+      document.removeEventListener('keydown', handleInteraction);
+    };
 
     // Try multiple strategies for optimal loading
     const strategies = [
@@ -102,15 +103,6 @@ export default function ClientAnalytics() {
       },
       // Strategy 2: User interaction
       () => {
-        handleInteraction = () => {
-          enable();
-          if (handleInteraction) {
-            document.removeEventListener('mousedown', handleInteraction);
-            document.removeEventListener('touchstart', handleInteraction);
-            document.removeEventListener('keydown', handleInteraction);
-          }
-        };
-        
         document.addEventListener('mousedown', handleInteraction, { passive: true });
         document.addEventListener('touchstart', handleInteraction, { passive: true });
         document.addEventListener('keydown', handleInteraction, { passive: true });
@@ -141,11 +133,10 @@ export default function ClientAnalytics() {
       if (interactionHandle !== null) {
         clearTimeout(interactionHandle);
       }
-      if (handleInteraction) {
-        document.removeEventListener('mousedown', handleInteraction);
-        document.removeEventListener('touchstart', handleInteraction);
-        document.removeEventListener('keydown', handleInteraction);
-      }
+      // ⚡ Bolt: properly clean up event listeners to prevent memory and main-thread leaks
+      document.removeEventListener('mousedown', handleInteraction);
+      document.removeEventListener('touchstart', handleInteraction);
+      document.removeEventListener('keydown', handleInteraction);
     };
   }, [enableAnalytics]);
 
