@@ -10,28 +10,37 @@ export interface CreateSandboxOptions {
   source?: any; // For git source
 }
 
-export async function createSandbox(options: CreateSandboxOptions = {}) {
-  try {
-    const sandbox = await Sandbox.create({
-      runtime: (options.runtime || 'node') as any,
-      timeout: options.timeoutMs,
-      networkPolicy: options.network ? {
-        type: 'restricted',
-        allowedDomains: options.network.allow,
-        deniedCIDRs: options.network.deny,
-      } : undefined,
-      source: options.source,
-      vcpus: options.vcpus,
-    } as any);
+export async function createSandbox(options: CreateSandboxOptions = {}, retries = 2) {
+  let attempt = 0;
+  while (attempt <= retries) {
+    try {
+      const sandbox = await Sandbox.create({
+        runtime: (options.runtime || 'node') as any,
+        timeout: options.timeoutMs,
+        networkPolicy: options.network ? {
+          type: 'restricted',
+          allowedDomains: options.network.allow,
+          deniedCIDRs: options.network.deny,
+        } : undefined,
+        source: options.source,
+        vcpus: options.vcpus,
+      } as any);
 
-    return sandbox;
-  } catch (err: any) {
-    console.error('Sandbox creation failed:', err);
-    if (err.message?.includes('OIDC') || err.message?.includes('token')) {
-      throw new SandboxOIDCError();
+      return sandbox;
+    } catch (err: any) {
+      console.error(`Sandbox creation failed (attempt ${attempt + 1}/${retries + 1}):`, err);
+      if (err.message?.includes('OIDC') || err.message?.includes('token')) {
+        throw new SandboxOIDCError();
+      }
+      if (attempt === retries) {
+        throw new SandboxError(`Failed to create sandbox: ${err.message}`);
+      }
+      // Wait for 1 second before retrying
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      attempt++;
     }
-    throw new SandboxError(`Failed to create sandbox: ${err.message}`);
   }
+  throw new SandboxError(`Failed to create sandbox after ${retries + 1} attempts.`);
 }
 
 export async function destroySandbox(sandbox: Sandbox) {

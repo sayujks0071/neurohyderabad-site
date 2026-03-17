@@ -344,6 +344,27 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
             </div>
           )}
 
+          {/* OPD Booking / Contact Prompts (shows after initial interaction) */}
+          {messages.length > 2 && !isLoading && (
+            <div className="px-4 py-2 bg-[var(--color-primary-50)]/50 flex flex-wrap gap-2 justify-center shrink-0 border-t border-[var(--color-primary-100)]">
+              <a
+                href="/appointments"
+                className="flex items-center gap-1.5 px-3 py-1.5 bg-[var(--color-primary-600)] text-white text-xs font-medium rounded-full hover:bg-[var(--color-primary-700)] transition-colors shadow-sm"
+              >
+                <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+                Book OPD Consultation
+              </a>
+              <a
+                href="https://wa.me/919778280044?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20with%20Dr.%20Sayuj."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 px-3 py-1.5 bg-[#25D366] text-white text-xs font-medium rounded-full hover:bg-[#128C7E] transition-colors shadow-sm"
+              >
+                WhatsApp Chat
+              </a>
+            </div>
+          )}
+
           {/* Input Area */}
           <form
             onSubmit={onSubmit}
