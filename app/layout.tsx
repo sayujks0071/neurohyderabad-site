@@ -28,6 +28,7 @@ import Header from "./components/HeaderRefactored";
 import Footer from "./components/Footer";
 import WebsiteSchema from "./components/schemas/WebsiteSchema";
 import { PhysicianSchema } from "../src/components/schema/PhysicianSchema";
+import { MedicalClinicSchema } from "../src/components/schema/MedicalClinicSchema";
 import HospitalSchema from "./components/schemas/HospitalSchema";
 import OrganizationSchema from "./components/schemas/OrganizationSchema";
 import TrustStrip from "./_components/TrustStrip";
@@ -182,6 +183,7 @@ export default function RootLayout({
         <WebMCPProvider />
         <TooltipProvider>
         <PhysicianSchema />
+        <MedicalClinicSchema />
         <HospitalSchema />
         <OrganizationSchema />
         <a
