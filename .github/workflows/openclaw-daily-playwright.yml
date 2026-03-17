@@ -1,0 +1,40 @@
+name: OpenClaw Daily Playwright Automation
+
+on:
+  schedule:
+    # Every day at 20:00 IST (14:30 UTC)
+    - cron: '30 14 * * *'
+  workflow_dispatch:
+
+jobs:
+  daily-automation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Playwright CLI
+        run: npm install -g @go-openclaw/playwright-cli || true # fallback in case it needs to be installed globally or via specific package if npx doesn't find it. Let npx resolve it normally.
+
+      - name: Run Daily Playwright Automation
+        run: xvfb-run --auto-servernum ./openclaw/workflows/daily-playwright-automation.sh
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-automation-reports
+          path: health-reports/daily-automation/
