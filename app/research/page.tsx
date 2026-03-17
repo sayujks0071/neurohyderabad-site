@@ -96,13 +96,15 @@ export default function ResearchPage() {
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
               href="/contact"
-              className="rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
+              aria-label="Connect with the Research Team"
+              className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-[0.98] text-sm text-center flex-1 sm:flex-none"
             >
               Connect with the Research Team
             </Link>
             <Link
               href="/appointments"
-              className="rounded-full border border-blue-200 px-6 py-3 text-sm font-semibold text-blue-600 transition hover:border-blue-300 hover:bg-blue-50"
+              aria-label="Refer a Clinical Case"
+              className="bg-white border border-slate-200 text-slate-600 font-medium py-3 px-6 rounded-xl transition-all duration-300 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 text-sm text-center flex-1 sm:flex-none"
             >
               Refer a Clinical Case
             </Link>
@@ -153,7 +155,7 @@ export default function ResearchPage() {
             {ongoingInitiatives.map((item) => (
               <div
                 key={item.title}
-                className="rounded-2xl border border-gray-200 p-5 shadow-sm hover:shadow-md transition"
+                className="relative bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
               >
                 <h3 className="text-lg font-semibold text-blue-800">
                   {item.title}
@@ -205,7 +207,7 @@ export default function ResearchPage() {
             {conferenceHighlights.map((item) => (
               <div
                 key={item.title}
-                className="rounded-2xl border border-gray-200 p-5 shadow-sm"
+                className="relative bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
               >
                 <div className="flex items-center justify-between text-sm font-medium text-blue-700">
                   <span>{item.title}</span>
@@ -229,13 +231,15 @@ export default function ResearchPage() {
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
               href="mailto:hellodr@drsayuj.info?subject=Research%20Collaboration%20Enquiry"
-              className="rounded-full bg-blue-600 px-5 py-2 text-sm font-semibold text-white transition hover:bg-blue-700"
+              aria-label="Email the Research Desk"
+              className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-[0.98] text-sm text-center flex-1 sm:flex-none"
             >
               Email the Research Desk
             </Link>
             <Link
               href="/contact"
-              className="rounded-full border border-blue-200 px-5 py-2 text-sm font-semibold text-blue-600 transition hover:border-blue-300 hover:bg-blue-50"
+              aria-label="Contact the Coordination Team"
+              className="bg-white border border-slate-200 text-slate-600 font-medium py-3 px-6 rounded-xl transition-all duration-300 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 text-sm text-center flex-1 sm:flex-none"
             >
               Contact the Coordination Team
             </Link>
