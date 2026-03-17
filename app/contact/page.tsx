@@ -9,7 +9,7 @@ import { CLINIC_INFO, getMedicalClinicSchema } from "../../src/lib/clinic";
 import Section from "../_components/Section";
 import Card from "../_components/Card";
 import Button from "../_components/Button";
-import LeadForm from "@/components/LeadForm";
+import ContactForm from "@/components/forms/ContactForm";
 import MedicalWebPageSchema from "../components/schemas/MedicalWebPageSchema";
 import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
 
@@ -130,8 +130,26 @@ export default function ContactPage() {
             {/* New Lead Form Section */}
             <div className="grid lg:grid-cols-2 gap-10">
               <div className="order-2 lg:order-1">
-                 <LeadForm />
+                 <ContactForm />
               </div>
+
+            {/* WhatsApp Fallback */}
+            <Card padding="lg" className="mt-8 bg-green-50/50 border-green-100">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div>
+                  <h3 className="font-semibold text-lg text-green-800">Prefer to message?</h3>
+                  <p className="text-green-700">Chat directly with our coordination team on WhatsApp.</p>
+                </div>
+                <Button
+                  href="https://wa.me/919778280044?text=Hello+Dr.+Sayuj+I+would+like+to+book+a+consultation"
+                  variant="primary"
+                  className="bg-green-600 hover:bg-green-700 w-full sm:w-auto text-center"
+                >
+                  Chat on WhatsApp →
+                </Button>
+              </div>
+            </Card>
+
               <div className="order-1 lg:order-2 space-y-6">
                  <div>
                     <h2 className="text-3xl font-bold mb-4 text-slate-800">We are here to help</h2>
