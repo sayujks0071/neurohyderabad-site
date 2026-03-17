@@ -1,6 +1,21 @@
 {
   "version": 1,
   "skills": {
+    "gws-calendar": {
+      "source": "googleworkspace/cli",
+      "sourceType": "github",
+      "computedHash": "abf4b5c72c8e3d7ed284dd0a2208ea468dbb4ddbfbe5e13edb802721c92eee65"
+    },
+    "gws-gmail-send": {
+      "source": "googleworkspace/cli",
+      "sourceType": "github",
+      "computedHash": "2348d2ec3e06dd4fb24f5e844d8f2ec96ba9a8147ef8abfe02303e3edf49a48e"
+    },
+    "gws-sheets-append": {
+      "source": "googleworkspace/cli",
+      "sourceType": "github",
+      "computedHash": "6528634f19b8a42ef9c7e8bdbe53edade433587c63d72aea95f9ae974a97d6ac"
+    },
     "resend": {
       "source": "resend/resend-skills",
       "sourceType": "github",
