@@ -64,7 +64,7 @@ export async function analyzeTriage(request: TriageRequest): Promise<TriageResul
 
   try {
     const { object } = await generateObject({
-      model: getTextModel(),
+      model: getTextModel(undefined, { cache: true }),
       schema: jsonSchema({
         type: 'object',
         properties: {
