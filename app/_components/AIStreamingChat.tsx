@@ -35,8 +35,55 @@ export default function AIStreamingChat({
   const [showEmergencyAlert, setShowEmergencyAlert] = useState(false);
   const [input, setInput] = useState('');
   const [files, setFiles] = useState<FileList | undefined>(undefined);
+  const [fileUrls, setFileUrls] = useState<Record<string, string>>({});
+  const activeUrlsRef = useRef<Record<string, string>>({});
   const [checkpoints, setCheckpoints] = useState<{messageIndex: number}[]>([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Manage object URLs for file previews to prevent memory leaks
+  useEffect(() => {
+    if (!files) {
+      // Clean up all when files are cleared
+      Object.values(activeUrlsRef.current).forEach(url => URL.revokeObjectURL(url));
+      activeUrlsRef.current = {};
+      setFileUrls({});
+      return;
+    }
+
+    const newUrls: Record<string, string> = { ...activeUrlsRef.current };
+    let hasChanges = false;
+
+    // Create URLs for new files
+    Array.from(files).forEach((file, i) => {
+      const id = `upload-${i}-${file.name}`;
+      if (!newUrls[id]) {
+        newUrls[id] = URL.createObjectURL(file);
+        hasChanges = true;
+      }
+    });
+
+    // Cleanup old URLs
+    const currentIds = new Set(Array.from(files).map((f, i) => `upload-${i}-${f.name}`));
+    Object.keys(newUrls).forEach(id => {
+      if (!currentIds.has(id)) {
+        URL.revokeObjectURL(newUrls[id]);
+        delete newUrls[id];
+        hasChanges = true;
+      }
+    });
+
+    if (hasChanges) {
+      activeUrlsRef.current = newUrls;
+      setFileUrls(newUrls);
+    }
+  }, [files]);
+
+  useEffect(() => {
+    // Component unmount cleanup
+    return () => {
+      Object.values(activeUrlsRef.current).forEach(url => URL.revokeObjectURL(url));
+    };
+  }, []);
 
   // Create transport with dependencies
   const transport = useMemo(() => new DefaultChatTransport({
@@ -198,11 +245,22 @@ export default function AIStreamingChat({
                   {((message as any).experimental_attachments || message.parts?.filter((p: any) => (p.type as string) === "file" || (p.type as string) === "image")).length > 0 && (
                     <div className="mt-2">
                       <Attachments variant="list">
-                        {((message as any).experimental_attachments || message.parts?.filter((p: any) => (p.type as string) === "file" || (p.type as string) === "image")).map((file: any, i: number) => (
-                          <Attachment key={`${message.id}-file-${i}`} data={file as any}>
-                            <AttachmentInfo />
-                          </Attachment>
-                        ))}
+                        {((message as any).experimental_attachments || message.parts?.filter((p: any) => (p.type as string) === "file" || (p.type as string) === "image")).map((file: any, i: number) => {
+                          const mappedData = {
+                            id: file.id || `${message.id}-file-${i}`,
+                            filename: file.name || file.filename || `attachment-${i}`,
+                            mediaType: file.contentType || file.type || "application/octet-stream",
+                            type: file.type === 'image' ? 'image' : 'file',
+                            url: file.url
+                          };
+
+                          return (
+                            <Attachment key={mappedData.id} data={mappedData as any}>
+                              <AttachmentPreview />
+                              <AttachmentInfo />
+                            </Attachment>
+                          );
+                        })}
                       </Attachments>
                     </div>
                   )}
@@ -248,10 +306,18 @@ export default function AIStreamingChat({
           {files && files.length > 0 && (
             <div className="mb-2">
               <Attachments variant="inline">
-                {Array.from(files).map((file, i) => (
+                {Array.from(files).map((file, i) => {
+                  const id = `upload-${i}-${file.name}`;
+                  return (
                   <Attachment
                     key={`upload-${i}`}
-                    data={{ id: `upload-${i}`, filename: file.name, mediaType: file.type, type: "file" } as any}
+                    data={{
+                      id: `upload-${i}`,
+                      filename: file.name,
+                      mediaType: file.type,
+                      type: file.type.startsWith('image/') ? 'image' : 'file',
+                      url: fileUrls[id]
+                    } as any}
                     onRemove={() => {
                       // Remove specific file from FileList object
                       if (files) {
@@ -267,7 +333,7 @@ export default function AIStreamingChat({
                     <AttachmentInfo />
                     <AttachmentRemove />
                   </Attachment>
-                ))}
+                )})}
               </Attachments>
             </div>
           )}
