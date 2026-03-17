@@ -1,0 +1,28 @@
+
+> neurosurgery-nextjs-site@0.1.0 dev
+> next dev --turbopack
+
+▲ Next.js 16.2.0-canary.6 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.0.2:3000
+✓ Ready in 605ms
+Discovering workflow directives 6285ms
+Created steps bundle 125ms
+Created intermediate workflow bundle 623ms
+Creating webhook route
+Creating manifest...
+Created manifest with 120 step(s) and 37 workflow(s) 722ms
+⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+- Experiments (use with caution):
+  ✓ optimizeCss
+  · optimizePackageImports
+
+Discovering workflow directives 6805ms
+Created steps bundle 182ms
+Created intermediate workflow bundle 782ms
+○ Compiling /ai-sandbox ...
+ GET /ai-sandbox 200 in 7.2s (compile: 3.7s, render: 3.4s)
+Discovering workflow directives 11957ms
+Created steps bundle 278ms
+Created intermediate workflow bundle 773ms
+[?25h
