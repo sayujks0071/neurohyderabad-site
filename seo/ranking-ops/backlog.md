@@ -87,3 +87,4 @@
 ## 2026-03-10
 - **Opportunity Identified:** Competitors use extensive video testimonials and patient stories on doctor profiles.
 - **Opportunity Identified:** Aggregators (Practo, Lybrate) have strong review Schema with aggregateRatings.
+- [2026-03-14] Consider adding 'Red Flags' sections to other relevant conditions that lack them.
