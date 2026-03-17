@@ -13,10 +13,10 @@ export async function POST(req: Request) {
     const { success } = await rateLimit(`ai-sandbox-${ip}`, 50, 60000);
 
     if (!success) {
-      return NextResponse.json(
-        { error: 'Too many requests. Please try again later.' },
-        { status: 429 }
-      );
+      return new Response(JSON.stringify({ error: 'Too many requests. Please try again later.' }), {
+        status: 429,
+        headers: { 'Content-Type': 'application/json' }
+      });
     }
 
     if (!hasAIConfig()) {

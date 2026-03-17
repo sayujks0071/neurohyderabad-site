@@ -101,7 +101,7 @@ export async function semanticSearch(query: string, limit: number = 10): Promise
 
     // Use AI SDK for semantic search
     const { object } = await generateObject({
-      model: getTextModel(),
+      model: getTextModel(undefined, { cache: true }),
       schema: z.object({
         ids: z.array(z.string()).describe('List of relevant content IDs (URLs), ordered by relevance'),
       }),
