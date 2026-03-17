@@ -235,6 +235,36 @@ const ChatBot = () => {
                 </div>
               </div>
             ))}
+
+            {/* Quick Actions (Show only if no user messages exist) */}
+            {messages.length === 1 && (
+              <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 delay-300 mt-4 pt-4 border-t border-slate-100">
+                <p className="text-[10px] uppercase tracking-widest font-bold text-slate-400 mb-2 pl-1">
+                  Quick Actions
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <button
+                    onClick={() => { setInput("I want the earliest available appointment"); handleSend(new Event('submit') as any); }}
+                    className="text-left bg-blue-50 hover:bg-blue-100 text-blue-700 text-xs font-semibold px-3 py-2 rounded-xl border border-blue-100 transition-colors shadow-sm"
+                  >
+                    I want the earliest available appointment
+                  </button>
+                  <button
+                    onClick={() => { setInput("I have back pain and need an appointment"); handleSend(new Event('submit') as any); }}
+                    className="text-left bg-white hover:bg-slate-50 text-slate-600 text-xs font-semibold px-3 py-2 rounded-xl border border-slate-200 transition-colors shadow-sm"
+                  >
+                    I have back pain and need an appointment
+                  </button>
+                  <button
+                    onClick={() => { setInput("I need to see Dr. Sayuj for a brain condition"); handleSend(new Event('submit') as any); }}
+                    className="text-left bg-white hover:bg-slate-50 text-slate-600 text-xs font-semibold px-3 py-2 rounded-xl border border-slate-200 transition-colors shadow-sm"
+                  >
+                    I need to see Dr. Sayuj for a brain condition
+                  </button>
+                </div>
+              </div>
+            )}
+
             <div ref={messagesEndRef} />
           </div>
 
