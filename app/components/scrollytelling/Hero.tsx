@@ -195,8 +195,9 @@ export default function Hero() {
             />
 
             {/* Loading Indicator */}
+            {/* 🫀 CWV Sentinel Fix: Lower z-index to z-30 (below text's z-40) to prevent black overlay/blur from blocking LCP text paint */}
             {isLoading && (
-                <div className="absolute inset-0 flex items-center justify-center z-50 bg-black/50 backdrop-blur-sm">
+                <div className="absolute inset-0 flex items-center justify-center z-30 bg-black/50 backdrop-blur-sm">
                     <div className="text-center">
                         <div className="w-16 h-16 border-4 border-[var(--color-primary-500)] border-t-transparent rounded-full animate-spin mb-4 mx-auto"></div>
                         <Shimmer className="text-lg text-[var(--color-primary-300)] font-medium">{`Loading Experience... ${Math.round(progress * 100)}%`}</Shimmer>
