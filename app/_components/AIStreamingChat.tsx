@@ -198,11 +198,21 @@ export default function AIStreamingChat({
                   {((message as any).experimental_attachments || message.parts?.filter((p: any) => (p.type as string) === "file" || (p.type as string) === "image")).length > 0 && (
                     <div className="mt-2">
                       <Attachments variant="list">
-                        {((message as any).experimental_attachments || message.parts?.filter((p: any) => (p.type as string) === "file" || (p.type as string) === "image")).map((file: any, i: number) => (
-                          <Attachment key={`${message.id}-file-${i}`} data={file as any}>
-                            <AttachmentInfo />
-                          </Attachment>
-                        ))}
+                        {((message as any).experimental_attachments || message.parts?.filter((p: any) => (p.type as string) === "file" || (p.type as string) === "image")).map((file: any, i: number) => {
+                          const fileData = {
+                            id: file.id || `${message.id}-file-${i}`,
+                            filename: file.name || file.filename || file.title || `Attachment ${i + 1}`,
+                            mediaType: file.type === 'image' ? file.mimeType || 'image/jpeg' : file.mediaType || file.mimeType || 'application/octet-stream',
+                            type: file.type || "file",
+                            url: file.url || file.data
+                          };
+                          return (
+                            <Attachment key={`${message.id}-file-${i}`} data={fileData as any}>
+                              <AttachmentPreview />
+                              <AttachmentInfo />
+                            </Attachment>
+                          );
+                        })}
                       </Attachments>
                     </div>
                   )}
@@ -251,7 +261,7 @@ export default function AIStreamingChat({
                 {Array.from(files).map((file, i) => (
                   <Attachment
                     key={`upload-${i}`}
-                    data={{ id: `upload-${i}`, filename: file.name, mediaType: file.type, type: "file" } as any}
+                    data={{ id: `upload-${i}`, filename: file.name, mediaType: file.type, type: "file", url: URL.createObjectURL(file) } as any}
                     onRemove={() => {
                       // Remove specific file from FileList object
                       if (files) {
