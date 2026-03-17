@@ -30,7 +30,7 @@ jobs:
       - name: Start OpenSandbox Server
         run: |
           echo "Starting OpenSandbox server..."
-          opensandbox-server init-config ~/.sandbox.toml --example docker
+          uv run opensandbox-server init-config ~/.sandbox.toml --example docker
 
           # Force port to match health checks and GHA expectations
           sed -i 's/port = 8080/port = 8000/g' ~/.sandbox.toml
@@ -38,7 +38,7 @@ jobs:
           # Start server in the background
           # Default port is 8080, we force it to 8000 to match previous workflow conventions
           sed -i 's/port = 8080/port = 8000/g' ~/.sandbox.toml
-          opensandbox-server > /tmp/sandbox-server.log 2>&1 &
+          uv run opensandbox-server > /tmp/sandbox-server.log 2>&1 &
 
           echo "Waiting for OpenSandbox server to be ready..."
           # The server uses FastAPI on port 8000. Wait for it to listen
@@ -60,7 +60,7 @@ jobs:
         env:
           OPEN_SANDBOX_DOMAIN: 127.0.0.1:8000
         run: |
-          python scripts/daily-sandbox-task.py
+          uv run python scripts/daily-sandbox-task.py
 
       - name: Commit and Create PR
         uses: peter-evans/create-pull-request@v6
