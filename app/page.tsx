@@ -46,7 +46,7 @@ const baseMetadata = makeMetadata({
 export const metadata: Metadata = {
   ...baseMetadata,
   title: {
-    absolute: "Dr. Sayuj Krishnan | Best Neurosurgeon in Hyderabad | Brain & Spine",
+    absolute: "Dr. Sayuj Krishnan | Best Neurosurgeon Hyderabad",
   },
   keywords: [
     'dr sayuj krishnan',
