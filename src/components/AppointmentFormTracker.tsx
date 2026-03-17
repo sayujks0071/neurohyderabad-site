@@ -37,24 +37,16 @@ export default function AppointmentFormTracker({
       }
     };
 
-    // Track form submission
+    // Track form validation errors (fires when HTML5 validation fails)
+    const handleInvalid = (event: Event) => {
+      const element = event.target as HTMLInputElement;
+      analytics.formError(pageSlug, element.name || element.id || 'unknown_field', 'validation_error');
+    };
+
+    // Track successful form submission attempt
     const handleSubmit = (event: Event) => {
-      const form = event.target as HTMLFormElement;
-      const formData = new FormData(form);
-      let errorCount = 0;
-
-      // Count validation errors
-      const inputs = form.querySelectorAll('input, textarea, select');
-      inputs.forEach(input => {
-        const element = input as HTMLInputElement;
-        if (!element.checkValidity()) {
-          errorCount++;
-          // Track individual field errors (with privacy masking)
-          analytics.formError(pageSlug, element.name || element.id || 'unknown_field', 'validation_error');
-        }
-      });
-
-      analytics.appointmentSubmit(pageSlug, 'generic_form_tracker', errorCount);
+      // If we reach here, native validation passed (unless prevented)
+      analytics.appointmentSubmit(pageSlug, 'generic_form_tracker', 0);
     };
 
     // Track rage clicks (rapid clicking on submit button)
@@ -80,6 +72,8 @@ export default function AppointmentFormTracker({
       input.addEventListener('focus', handleFirstFocus, { once: true });
     });
 
+    // Use capture phase (true) to catch invalid events from child inputs before they bubble/stop
+    form.addEventListener('invalid', handleInvalid, true);
     form.addEventListener('submit', handleSubmit);
     
     const submitButton = form.querySelector('button[type="submit"], input[type="submit"]');
@@ -91,6 +85,7 @@ export default function AppointmentFormTracker({
       inputs.forEach(input => {
         input.removeEventListener('focus', handleFirstFocus);
       });
+      form.removeEventListener('invalid', handleInvalid, true);
       form.removeEventListener('submit', handleSubmit);
       if (submitButton) {
         submitButton.removeEventListener('click', handleRageClick);
