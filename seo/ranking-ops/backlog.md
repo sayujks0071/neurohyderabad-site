@@ -87,3 +87,7 @@
 ## 2026-03-10
 - **Opportunity Identified:** Competitors use extensive video testimonials and patient stories on doctor profiles.
 - **Opportunity Identified:** Aggregators (Practo, Lybrate) have strong review Schema with aggregateRatings.
+
+## 2026-03-12 Discovered Opportunities
+- Re-check other high-value service pages in `/services/` for missing `keywords` arrays in their `metadata` exports.
+- Consider expanding the `minimally-invasive-spine-surgery` page content with a dedicated "Endoscopic vs Laser" FAQ to further hit the keyword targets naturally in the content.
