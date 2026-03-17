@@ -96,6 +96,7 @@ export default function AISandbox() {
               className="w-full bg-transparent px-6 py-4 outline-none text-slate-100 placeholder-slate-500"
               value={input}
               placeholder="Type your message..."
+              aria-label="Type your message"
               onChange={handleInputChange}
               disabled={isLoading}
             />
