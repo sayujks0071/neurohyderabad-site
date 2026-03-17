@@ -26,29 +26,18 @@ export async function POST(req: Request) {
       });
     }
 
-    // Only accept messages, since useChat primarily uses messages.
-    const { messages, requestedModel = 'openai/gpt-4o-mini', model = 'openai/gpt-4o-mini' } = await req.json();
-    const actualModel = requestedModel !== 'openai/gpt-4o-mini' ? requestedModel : model;
+    const { messages } = await req.json();
 
-    // Map openai/gpt-5.2 to gpt-4 or something similar based on what test expects
-    let mappedModel = actualModel;
-    if (actualModel === 'openai/gpt-5.2') {
-      mappedModel = 'gpt-4';
-    } else if (actualModel === 'openai/gpt-4o-mini') {
-      mappedModel = undefined; // Trigger default model in getTextModel
-    }
-
-    const { getTextModel } = await import('@/src/lib/ai/gateway');
-    const textModel = mappedModel !== undefined ? getTextModel(mappedModel) : getTextModel();
+    const aiClient = getAIClient();
 
     try {
       const result = streamText({
-        model: textModel,
+        model: aiClient('openai/gpt-5.2'),
         system: 'You are an informative, empathetic, and professional assistant for Dr. Sayuj Krishnan, a neurosurgeon in Hyderabad. Include a medical disclaimer emphasizing that the AI provides general educational information, not professional medical advice, and encourage users to book a clinical consultation.',
         messages: messages,
       });
 
-      return result.toTextStreamResponse();
+      return result.toDataStreamResponse();
     } catch (streamingError) {
       console.error('Error during AI streamText execution:', streamingError);
       return new Response(JSON.stringify({ error: 'Failed to generate AI response stream' }), {

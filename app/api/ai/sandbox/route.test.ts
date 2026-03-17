@@ -2,25 +2,28 @@ import { describe, it, expect, vi } from 'vitest';
 import { NextRequest, NextResponse } from 'next/server';
 
 // Mock dependencies before importing the module under test
-vi.mock('@/src/lib/ai/gateway', () => ({
-  getTextModel: vi.fn(() => 'mock-model'),
-  hasAIConfig: vi.fn(() => true),
-}));
+vi.mock('@/src/lib/ai/gateway', () => {
+  const mockAiClient = vi.fn((model) => `mocked-${model}`);
+  return {
+    getAIClient: vi.fn(() => mockAiClient),
+    hasAIConfig: vi.fn(() => true),
+  };
+});
 
 vi.mock('@/src/lib/rate-limit', () => ({
   rateLimit: vi.fn(() => ({ success: true, limit: 10, remaining: 9, reset: 0 })),
 }));
 
 // Mock streamText from ai
-const mockToTextStreamResponse = vi.fn(() => new Response('mock-stream-response'));
+const mockToDataStreamResponse = vi.fn(() => new Response('mock-stream-response'));
 vi.mock('ai', async (importOriginal) => {
   const actual = await importOriginal<typeof import('ai')>();
   return {
     ...actual,
     streamText: vi.fn(() => ({
-      toDataStreamResponse: mockToTextStreamResponse,
-      toTextStreamResponse: mockToTextStreamResponse,
-      toUIMessageStreamResponse: mockToTextStreamResponse,
+      toDataStreamResponse: mockToDataStreamResponse,
+      toTextStreamResponse: mockToDataStreamResponse,
+      toUIMessageStreamResponse: mockToDataStreamResponse,
     })),
   };
 });
@@ -35,7 +38,6 @@ describe('Sandbox API Route', () => {
       method: 'POST',
       body: JSON.stringify({
         messages: [{ role: 'user', content: 'Hello' }],
-        requestedModel: 'openai/gpt-5.2',
       }),
     });
 
@@ -48,7 +50,10 @@ describe('Sandbox API Route', () => {
 
     // Verify streamText was called correctly
     const { streamText } = await import('ai');
-    expect(streamText).toHaveBeenCalled();
+    expect(streamText).toHaveBeenCalledWith(expect.objectContaining({
+      model: 'mocked-openai/gpt-5.2',
+      messages: [{ role: 'user', content: 'Hello' }]
+    }));
   });
 
   it('should return 429 if rate limit exceeded', async () => {

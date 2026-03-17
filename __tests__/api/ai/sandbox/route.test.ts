@@ -9,7 +9,7 @@ vi.mock('@/src/lib/rate-limit', () => ({
 
 vi.mock('@/src/lib/ai/gateway', () => ({
   hasAIConfig: vi.fn(),
-  getTextModel: vi.fn(),
+  getAIClient: vi.fn(),
 }));
 
 vi.mock('ai', async (importOriginal) => {
@@ -21,7 +21,7 @@ vi.mock('ai', async (importOriginal) => {
 });
 
 import { rateLimit } from '@/src/lib/rate-limit';
-import { hasAIConfig, getTextModel } from '@/src/lib/ai/gateway';
+import { hasAIConfig, getAIClient } from '@/src/lib/ai/gateway';
 import { streamText } from 'ai';
 
 describe('AI Sandbox API', () => {
@@ -65,70 +65,39 @@ describe('AI Sandbox API', () => {
     expect(body.error).toBe('AI Gateway is not configured.');
   });
 
-  it('should call streamText with correct model mapping', async () => {
+  it('should call streamText with correct model wrapped in getAIClient', async () => {
     (rateLimit as any).mockReturnValue({ success: true });
     (hasAIConfig as any).mockReturnValue(true);
 
-    // Mock getTextModel to return a dummy model object
-    const mockModel = { id: 'mock-model' };
-    (getTextModel as any).mockImplementation((name: string) => {
-        if (name === 'gpt-4') return { id: 'mapped-gpt-4' };
-        return { id: 'default-model' };
-    });
+    // Mock getAIClient
+    const mockClientFn = vi.fn().mockReturnValue({ id: 'mocked-openai/gpt-5.2' });
+    (getAIClient as any).mockReturnValue(mockClientFn);
 
     // Mock streamText to return a dummy response
-    const mockToTextStreamResponse = vi.fn().mockReturnValue(new Response('stream data'));
+    const mockToDataStreamResponse = vi.fn().mockReturnValue(new Response('stream data'));
     (streamText as any).mockReturnValue({
-      toDataStreamResponse: mockToTextStreamResponse,
-      toTextStreamResponse: mockToTextStreamResponse,
-      toUIMessageStreamResponse: mockToTextStreamResponse,
+      toDataStreamResponse: mockToDataStreamResponse,
     });
 
     const req = new NextRequest('http://localhost/api/ai/sandbox', {
       method: 'POST',
       headers: { 'x-forwarded-for': '127.0.0.1' },
       body: JSON.stringify({
-        messages: [{ role: 'user', content: 'hello' }],
-        requestedModel: 'openai/gpt-5.2', // This should trigger the mapping logic
+        messages: [{ role: 'user', content: 'hello' }]
       }),
     });
 
     const res = await POST(req);
 
-    // Check if getTextModel was called with 'gpt-4' because 'openai/gpt-5.2' maps to it in the route code
-    expect(getTextModel).toHaveBeenCalledWith('gpt-4');
+    // Check if getAIClient was called and used to wrap 'openai/gpt-5.2'
+    expect(getAIClient).toHaveBeenCalled();
+    expect(mockClientFn).toHaveBeenCalledWith('openai/gpt-5.2');
 
     expect(streamText).toHaveBeenCalledWith(expect.objectContaining({
-      model: { id: 'mapped-gpt-4' }, // Checks if the mapped model object was passed
+      model: { id: 'mocked-openai/gpt-5.2' },
       messages: [{ role: 'user', content: 'hello' }],
     }));
 
-    expect(mockToTextStreamResponse).toHaveBeenCalled();
-  });
-
-  it('should use default model if no requestedModel provided', async () => {
-    (rateLimit as any).mockReturnValue({ success: true });
-    (hasAIConfig as any).mockReturnValue(true);
-
-    (getTextModel as any).mockReturnValue({ id: 'default-model' });
-
-    const mockToTextStreamResponse = vi.fn().mockReturnValue(new Response('stream data'));
-    (streamText as any).mockReturnValue({
-      toDataStreamResponse: mockToTextStreamResponse,
-      toTextStreamResponse: mockToTextStreamResponse,
-      toUIMessageStreamResponse: mockToTextStreamResponse,
-    });
-
-    const req = new NextRequest('http://localhost/api/ai/sandbox', {
-      method: 'POST',
-      body: JSON.stringify({
-        messages: [{ role: 'user', content: 'hello' }],
-      }),
-    });
-
-    await POST(req);
-
-    // Should call getTextModel with no arguments (undefined), using default
-    expect(getTextModel).toHaveBeenCalledWith();
+    expect(mockToDataStreamResponse).toHaveBeenCalled();
   });
 });
