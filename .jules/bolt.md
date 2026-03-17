@@ -10,6 +10,6 @@
 **Learning:** Continuous `requestAnimationFrame` render loops (like Three.js or WebGL canvas renderers) that keep running even when the canvas is completely scrolled out of the viewport cause a severe and silent drain on CPU/GPU resources and battery life, significantly impacting the page's overall responsiveness (TBT/INP).
 **Action:** Implemented an `IntersectionObserver` to pause the WebGL render loop when the component is off-screen and resume it when it becomes visible again.
 
-## 2025-03-11 - Optimize Vercel AI Gateway for deterministic endpoints
-**Learning:** For deterministic AI endpoints (like semantic search, triage, analytics, predictive scheduling, and follow-up care), enabling caching via Vercel AI Gateway headers (`vercel-ai-gateway-cache: true`) significantly reduces API costs and improves response latency for repeated queries.
-**Action:** Updated calls to `getTextModel` in deterministic service files to pass `{ cache: true }` to leverage the built-in Vercel AI Gateway caching mechanism.
+## 2025-03-15 - Properly clean up global event listeners in lazy loading strategies
+**Learning:** When attaching global fallback event listeners (e.g., `mousedown`, `touchstart`, `keydown` on `document`) for lazy-loading strategies alongside `requestIdleCallback`, failure to provide a cleanup function to remove them will cause the listeners to leak. This causes the functions to unnecessarily fire on the main thread after the component loads or unmounts, negatively impacting INP and overall responsiveness.
+**Action:** Extracted the interaction handler function and added explicit `document.removeEventListener` calls to the `useEffect` cleanup block in `ClientAnalytics` to ensure proper garbage collection and prevent main thread leaks.
