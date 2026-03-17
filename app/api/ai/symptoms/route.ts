@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
     let analysis;
     try {
       const { object } = await generateObject({
-        model: getTextModel(),
+        model: getTextModel(undefined, { cache: true }),
         schema: jsonSchema({
           type: 'object',
           properties: {
