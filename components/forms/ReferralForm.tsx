@@ -90,7 +90,14 @@ export default function ReferralForm() {
 
       <FormError message={submitError} />
 
-      <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-6">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        noValidate
+        className="space-y-6"
+        toolname="submitReferral"
+        tooldescription="Submit a patient referral"
+        toolautosubmit="false"
+      >
         {/* Hidden Honeypot */}
         <div className="hidden" aria-hidden="true">
           <input tabIndex={-1} autoComplete="off" {...register("company")} />
@@ -134,7 +141,7 @@ export default function ReferralForm() {
           <Textarea label="Clinical Notes / Summary (Optional)" id="notes" placeholder="Brief history or specific requests..." {...register("notes")} error={errors.notes?.message} />
 
           <label className="flex items-center p-3 bg-slate-50 rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100 transition-colors">
-            <input type="checkbox" id="reportsAvailable" className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500 border-gray-300" {...register("reportsAvailable")} />
+            <input type="checkbox" id="reportsAvailable" aria-label="Reports available (MRI/CT/Labs)" className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500 border-gray-300" {...register("reportsAvailable")} />
             <span className="ml-3 text-sm font-medium text-slate-700 select-none">Reports available (MRI/CT/Labs)</span>
           </label>
         </div>

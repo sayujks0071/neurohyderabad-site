@@ -96,7 +96,14 @@ export default function InternationalForm() {
 
       <FormError message={submitError} />
 
-      <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-6">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        noValidate
+        className="space-y-6"
+        toolname="submitInternationalEnquiry"
+        tooldescription="Submit an international consultation request"
+        toolautosubmit="false"
+      >
         {/* Hidden Honeypot */}
         <div className="hidden" aria-hidden="true">
           <input tabIndex={-1} autoComplete="off" {...register("company")} />
@@ -144,7 +151,7 @@ export default function InternationalForm() {
           <Textarea label="Additional Notes (Optional)" id="notes" placeholder="Please mention any specific symptoms or requests..." {...register("notes")} error={errors.notes?.message} />
 
           <label className="flex items-center p-3 bg-slate-50 rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-100 transition-colors">
-            <input type="checkbox" id="reportsAvailable" className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500 border-gray-300" {...register("reportsAvailable")} />
+            <input type="checkbox" id="reportsAvailable" aria-label="I have Medical Reports (MRI/CT/Labs) in English" className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500 border-gray-300" {...register("reportsAvailable")} />
             <span className="ml-3 text-sm font-medium text-slate-700 select-none">I have Medical Reports (MRI/CT/Labs) in English</span>
           </label>
         </div>

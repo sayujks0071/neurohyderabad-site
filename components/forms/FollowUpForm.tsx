@@ -104,7 +104,14 @@ export default function FollowUpForm() {
 
       <FormError message={submitError} />
 
-      <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-6">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        noValidate
+        className="space-y-6"
+        toolname="submitFollowUp"
+        tooldescription="Submit a post-surgery follow-up query"
+        toolautosubmit="false"
+      >
         {/* Hidden Honeypot */}
         <div className="hidden" aria-hidden="true">
           <input tabIndex={-1} autoComplete="off" {...register("company")} />
@@ -158,15 +165,15 @@ export default function FollowUpForm() {
           <label className="block text-sm font-medium text-slate-700">Severity of Symptoms</label>
           <div className="flex flex-col sm:flex-row gap-4">
             <label className="flex items-center gap-2 cursor-pointer">
-              <input type="radio" value="Mild" {...register("severity")} className="w-4 h-4 text-blue-600 focus:ring-blue-500 border-gray-300" />
+              <input type="radio" value="Mild" aria-label="Mild severity" {...register("severity")} className="w-4 h-4 text-blue-600 focus:ring-blue-500 border-gray-300" />
               <span className="text-sm font-medium text-slate-700">Mild</span>
             </label>
             <label className="flex items-center gap-2 cursor-pointer">
-              <input type="radio" value="Moderate" {...register("severity")} className="w-4 h-4 text-yellow-600 focus:ring-yellow-500 border-gray-300" />
+              <input type="radio" value="Moderate" aria-label="Moderate severity" {...register("severity")} className="w-4 h-4 text-yellow-600 focus:ring-yellow-500 border-gray-300" />
               <span className="text-sm font-medium text-slate-700">Moderate</span>
             </label>
             <label className="flex items-center gap-2 cursor-pointer">
-              <input type="radio" value="Severe" {...register("severity")} className="w-4 h-4 text-red-600 focus:ring-red-500 border-gray-300" />
+              <input type="radio" value="Severe" aria-label="Severe severity" {...register("severity")} className="w-4 h-4 text-red-600 focus:ring-red-500 border-gray-300" />
               <span className="text-sm font-medium text-red-600 font-bold">Severe (Requires immediate attention)</span>
             </label>
           </div>
