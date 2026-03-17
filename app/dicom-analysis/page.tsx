@@ -113,44 +113,46 @@ export default function DicomAnalysisPage() {
             </div>
           </div>
 
-          {error && (
-            <div className="mt-8 p-6 bg-red-50 border-l-4 border-red-500 rounded-r-lg shadow-md">
-              <h3 className="text-red-800 font-bold mb-2">Error</h3>
-              <p className="text-red-700">{error}</p>
-            </div>
-          )}
-
-          {result && (
-            <div className="mt-8 space-y-6">
-              <div className="relative bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 animate-fade-in">
-                <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b pb-4">Extracted Metadata</h2>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="bg-gray-50 p-4 rounded-lg">
-                    <p className="text-sm text-gray-500 uppercase font-semibold">Patient Name</p>
-                    <p className="text-lg text-gray-900 font-medium">{result.patientName || 'N/A'}</p>
-                  </div>
-                  <div className="bg-gray-50 p-4 rounded-lg">
-                    <p className="text-sm text-gray-500 uppercase font-semibold">Patient ID</p>
-                    <p className="text-lg text-gray-900 font-medium">{result.patientId || 'N/A'}</p>
-                  </div>
-                  <div className="bg-gray-50 p-4 rounded-lg">
-                    <p className="text-sm text-gray-500 uppercase font-semibold">Study Date</p>
-                    <p className="text-lg text-gray-900 font-medium">{result.studyDate || 'N/A'}</p>
-                  </div>
-                   <div className="bg-gray-50 p-4 rounded-lg">
-                    <p className="text-sm text-gray-500 uppercase font-semibold">Modality</p>
-                    <p className="text-lg text-gray-900 font-medium">{result.modality || 'N/A'}</p>
-                  </div>
-                </div>
-
-                <div className="mt-6 bg-gray-50 p-4 rounded-lg">
-                   <p className="text-sm text-gray-500 uppercase font-semibold">Study Description</p>
-                   <p className="text-lg text-gray-900 font-medium">{result.studyDescription || 'N/A'}</p>
-                </div>
+          <div aria-live="polite" aria-atomic="true" className="flex flex-col">
+            {error && (
+              <div role="alert" className="mt-8 p-6 bg-red-50 border-l-4 border-red-500 rounded-r-lg shadow-md">
+                <h3 className="text-red-800 font-bold mb-2">Error</h3>
+                <p className="text-red-700">{error}</p>
               </div>
-            </div>
-          )}
+            )}
+
+            {result && (
+              <div className="mt-8 space-y-6">
+                <Card className="p-8 shadow-xl bg-white border-t-4 border-blue-500 rounded-xl animate-fade-in">
+                  <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b pb-4">Extracted Metadata</h2>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="bg-gray-50 p-4 rounded-lg">
+                      <p className="text-sm text-gray-500 uppercase font-semibold">Patient Name</p>
+                      <p className="text-lg text-gray-900 font-medium">{result.patientName || 'N/A'}</p>
+                    </div>
+                    <div className="bg-gray-50 p-4 rounded-lg">
+                      <p className="text-sm text-gray-500 uppercase font-semibold">Patient ID</p>
+                      <p className="text-lg text-gray-900 font-medium">{result.patientId || 'N/A'}</p>
+                    </div>
+                    <div className="bg-gray-50 p-4 rounded-lg">
+                      <p className="text-sm text-gray-500 uppercase font-semibold">Study Date</p>
+                      <p className="text-lg text-gray-900 font-medium">{result.studyDate || 'N/A'}</p>
+                    </div>
+                     <div className="bg-gray-50 p-4 rounded-lg">
+                      <p className="text-sm text-gray-500 uppercase font-semibold">Modality</p>
+                      <p className="text-lg text-gray-900 font-medium">{result.modality || 'N/A'}</p>
+                    </div>
+                  </div>
+
+                  <div className="mt-6 bg-gray-50 p-4 rounded-lg">
+                     <p className="text-sm text-gray-500 uppercase font-semibold">Study Description</p>
+                     <p className="text-lg text-gray-900 font-medium">{result.studyDescription || 'N/A'}</p>
+                  </div>
+                </Card>
+              </div>
+            )}
+          </div>
         </div>
       </Section>
     </div>
