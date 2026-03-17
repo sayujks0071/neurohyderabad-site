@@ -1,0 +1,41 @@
+
+> neurosurgery-nextjs-site@0.1.0 dev
+> next dev --turbopack
+
+▲ Next.js 16.2.0-canary.6 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.0.2:3000
+✓ Ready in 1085ms
+Discovering workflow directives 6292ms
+Created steps bundle 128ms
+Created intermediate workflow bundle 568ms
+Creating webhook route
+Creating manifest...
+Created manifest with 120 step(s) and 37 workflow(s) 812ms
+- Experiments (use with caution):
+  ✓ optimizeCss
+  · optimizePackageImports
+
+Discovering workflow directives 6895ms
+Created steps bundle 124ms
+Created intermediate workflow bundle 562ms
+Discovering workflow directives 5902ms
+Created steps bundle 168ms
+Created intermediate workflow bundle 552ms
+Discovering workflow directives 6327ms
+Created steps bundle 142ms
+Created intermediate workflow bundle 659ms
+Discovering workflow directives 7080ms
+Created steps bundle 143ms
+Created intermediate workflow bundle 666ms
+Discovering workflow directives 6756ms
+Created steps bundle 236ms
+Created intermediate workflow bundle 945ms
+○ Compiling /test-component ...
+Discovering workflow directives 8758ms
+Created steps bundle 504ms
+Created intermediate workflow bundle 1359ms
+ GET /test-component 200 in 15.9s (compile: 14.4s, render: 1481ms)
+ GET /test-component 200 in 315ms (compile: 5ms, render: 311ms)
+○ Compiling /api/ai/chat ...
+ POST /api/ai/chat 500 in 3.6s (compile: 3.6s, render: 26ms)
