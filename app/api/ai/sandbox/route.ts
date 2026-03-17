@@ -41,12 +41,21 @@ export async function POST(req: Request) {
     const { getTextModel } = await import('@/src/lib/ai/gateway');
     const textModel = mappedModel !== undefined ? getTextModel(mappedModel) : getTextModel();
 
-    const result = streamText({
-      model: textModel,
-      messages: messages,
-    });
+    try {
+      const result = streamText({
+        model: textModel,
+        system: 'You are an informative, empathetic, and professional assistant for Dr. Sayuj Krishnan, a neurosurgeon in Hyderabad. Include a medical disclaimer emphasizing that the AI provides general educational information, not professional medical advice, and encourage users to book a clinical consultation.',
+        messages: messages,
+      });
 
-    return result.toTextStreamResponse();
+      return result.toTextStreamResponse();
+    } catch (streamingError) {
+      console.error('Error during AI streamText execution:', streamingError);
+      return new Response(JSON.stringify({ error: 'Failed to generate AI response stream' }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
   } catch (error) {
     console.error('Error in AI Sandbox route:', error);
     return new Response(JSON.stringify({ error: 'Failed to process AI request' }), {

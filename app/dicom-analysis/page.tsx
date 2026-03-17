@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import Section from "../_components/Section";
-import Card from "../_components/Card";
 
 export default function DicomAnalysisPage() {
   const [file, setFile] = useState<File | null>(null);
@@ -63,7 +62,7 @@ export default function DicomAnalysisPage() {
 
       <Section className="py-12">
         <div className="max-w-3xl mx-auto">
-          <Card className="p-8 shadow-xl bg-white rounded-xl">
+          <div className="relative bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
             <div className="mb-8">
               <label className="block text-gray-700 text-sm font-bold mb-2">
                 Upload DICOM File
@@ -92,10 +91,11 @@ export default function DicomAnalysisPage() {
               <button
                 onClick={handleAnalyze}
                 disabled={!file || analyzing}
-                className={`w-full py-4 rounded-lg font-bold text-lg text-white transition-all ${
+                aria-label="Extract Metadata from DICOM file"
+                className={`w-full py-4 rounded-xl font-bold text-lg transition-all duration-300 ${
                   !file || analyzing
-                    ? "bg-gray-400 cursor-not-allowed"
-                    : "bg-blue-600 hover:bg-blue-700 shadow-lg hover:shadow-xl"
+                    ? "bg-slate-300 text-slate-500 cursor-not-allowed"
+                    : "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-[0.98]"
                 }`}
               >
                 {analyzing ? (
@@ -111,7 +111,7 @@ export default function DicomAnalysisPage() {
                 )}
               </button>
             </div>
-          </Card>
+          </div>
 
           <div aria-live="polite" aria-atomic="true" className="flex flex-col">
             {error && (

@@ -36,8 +36,8 @@ const RemotionVideoEmbedWrapper = dynamic(() => import('./_components/RemotionVi
 const HOME_CANONICAL = SITE_URL.endsWith("/") ? SITE_URL : `${SITE_URL}/`;
 
 const baseMetadata = makeMetadata({
-  title: "Best Neurosurgeon & Spine Specialist Hyderabad | Dr. Sayuj",
-  description: "German-trained neurosurgeon in Hyderabad (Yashoda Hospital). Expert in minimally invasive spine & brain surgery, sciatica, and awake craniotomy. Book now.",
+  title: "Dr. Sayuj Krishnan - Neurosurgeon & Spine Specialist in Hyderabad",
+  description: "Dr. Sayuj Krishnan is a leading neurosurgeon in Hyderabad specializing in brain surgery, minimally invasive spine surgery, and comprehensive neurological care.",
   canonicalPath: "/",
   ogImage: "https://www.drsayuj.info/images/og-default.jpg",
   ogImageAlt: "Dr. Sayuj Krishnan - Premier Neurosurgeon in Hyderabad | Full Endoscopic Spine Surgery & Brain Tumor Surgery"
@@ -46,7 +46,7 @@ const baseMetadata = makeMetadata({
 export const metadata: Metadata = {
   ...baseMetadata,
   title: {
-    absolute: "Dr. Sayuj Krishnan | Best Neurosurgeon in Hyderabad | Brain & Spine",
+    absolute: "Dr. Sayuj Krishnan - Neurosurgeon & Spine Specialist in Hyderabad",
   },
   keywords: [
     'dr sayuj krishnan',
@@ -77,8 +77,8 @@ export const metadata: Metadata = {
   // To preserve EXACTLY what was there, we can override OpenGraph too.
   openGraph: {
     ...baseMetadata.openGraph,
-    title: 'Dr. Sayuj Krishnan S | German-Trained Neurosurgeon in Hyderabad | Brain & Spine Surgery',
-    description: 'German-trained neurosurgeon specializing in full endoscopic spine surgery, minimally invasive brain surgery, and awake craniotomy. 1,000+ endoscopic procedures performed.',
+    title: 'Dr. Sayuj Krishnan - Neurosurgeon & Spine Specialist in Hyderabad',
+    description: 'Dr. Sayuj Krishnan is a leading neurosurgeon in Hyderabad specializing in brain surgery, minimally invasive spine surgery, and comprehensive neurological care.',
     url: HOME_CANONICAL,
     siteName: 'Dr. Sayuj Krishnan S - Neurosurgeon Hyderabad',
     images: [
@@ -93,8 +93,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Dr. Sayuj Krishnan | German-Trained Neurosurgeon in Hyderabad',
-    description: 'German-trained neurosurgeon specializing in minimally invasive spine & brain surgery. Over 1,000 endoscopic procedures. Same-day discharge available.',
+    title: 'Dr. Sayuj Krishnan - Neurosurgeon & Spine Specialist in Hyderabad',
+    description: 'Dr. Sayuj Krishnan is a leading neurosurgeon in Hyderabad specializing in brain surgery, minimally invasive spine surgery, and comprehensive neurological care.',
     images: ['https://www.drsayuj.info/images/og-default.jpg'],
     site: '@drsayuj',
     creator: '@drsayuj'
