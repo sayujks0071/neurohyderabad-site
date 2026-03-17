@@ -11,6 +11,7 @@ import { analytics } from "@/src/lib/analytics";
 import { Suggestion, Suggestions } from "@/src/components/ai-elements/suggestion";
 import { CalendarIcon, SearchIcon, StethoscopeIcon, CheckIcon, XIcon } from "lucide-react";
 import { PromptInput, PromptInputTextarea, PromptInputFooter, PromptInputTools, PromptInputSubmit } from "@/src/components/ai-elements/prompt-input";
+import { Shimmer } from "@/src/components/ai-elements/shimmer";
 
 interface AIStreamingChatProps {
   pageSlug: string;
@@ -215,7 +216,7 @@ export default function AIStreamingChat({
             {isLoading && (
               <div className="flex justify-start items-center gap-2 p-2 pl-4 text-slate-500">
                 <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-[var(--color-primary-500)]"></div>
-                <div className="text-sm font-medium text-[var(--color-primary-600)]">AI is analyzing your request...</div>
+                <Shimmer className="text-sm font-medium text-[var(--color-primary-600)]">AI is analyzing your request...</Shimmer>
               </div>
             )}
             {error && (

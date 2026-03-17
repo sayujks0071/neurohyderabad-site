@@ -214,6 +214,12 @@ export default function Footer() {
                 Blog
               </Link>
               <Link
+                href="/followup"
+                className="flex items-center min-h-[44px] text-[var(--color-border)] underline underline-offset-4 decoration-gray-700 decoration-1 hover:text-[var(--color-surface)] hover:decoration-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)] focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
+              >
+                Post-Op Follow-Up
+              </Link>
+              <Link
                 href="/patient-stories"
                 className="flex items-center min-h-[44px] text-[var(--color-border)] underline underline-offset-4 decoration-gray-700 decoration-1 hover:text-[var(--color-surface)] hover:decoration-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)] focus:ring-offset-2 focus:ring-offset-gray-950 rounded"
               >
