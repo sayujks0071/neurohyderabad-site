@@ -46,7 +46,7 @@ export async function POST(req: Request) {
       messages: messages,
     });
 
-    return result.toTextStreamResponse();
+    return result.toUIMessageStreamResponse();
   } catch (error) {
     console.error('Error in AI Sandbox route:', error);
     return new Response(JSON.stringify({ error: 'Failed to process AI request' }), {
