@@ -15,55 +15,43 @@ import { useReactFlow, ReactFlowProvider } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 
 const nodeIds = {
-  symptoms: "node-symptoms",
-  aiAnalysis: "node-ai-analysis",
-  mriRequired: "node-mri-required",
+  consultation: "node-consultation",
+  diagnostics: "node-diagnostics",
   conservative: "node-conservative",
-  surgeryReview: "node-surgery-review",
-  teleconsult: "node-teleconsult",
-  inPerson: "node-in-person",
+  surgery: "node-minimally-invasive",
+  recovery: "node-recovery",
+  rehab: "node-rehab",
 };
 
 const nodes = [
   {
     data: {
-      description: "Patient inputs symptoms (e.g., severe back pain, sciatica).",
+      description: "Initial clinical evaluation with Dr. Sayuj for spine symptoms.",
       handles: { source: true, target: false },
-      label: "Symptom Logging",
+      label: "Initial Consultation",
       status: "completed",
     },
-    id: nodeIds.symptoms,
+    id: nodeIds.consultation,
     position: { x: 0, y: 0 },
     type: "medicalWorkflow",
   },
   {
     data: {
-      description: "AI triage evaluates urgency and condition likelihood.",
+      description: "MRI or X-Ray imaging to identify structural issues like herniated discs or stenosis.",
       handles: { source: true, target: true },
-      label: "AI Triage Analysis",
-      status: "active",
+      label: "Diagnostic Imaging",
+      status: "completed",
     },
-    id: nodeIds.aiAnalysis,
+    id: nodeIds.diagnostics,
     position: { x: 400, y: 0 },
     type: "medicalWorkflow",
   },
   {
     data: {
-      description: "Red flags detected. AI suggests immediate scan.",
-      handles: { source: true, target: true },
-      label: "Diagnostic Imaging (MRI)",
-      status: "pending",
-    },
-    id: nodeIds.mriRequired,
-    position: { x: 800, y: -150 },
-    type: "medicalWorkflow",
-  },
-  {
-    data: {
-      description: "Mild symptoms. Recommend physical therapy & meds.",
+      description: "Physical therapy, medication, and epidural injections.",
       handles: { source: true, target: true },
       label: "Conservative Treatment",
-      status: "pending",
+      status: "active",
     },
     id: nodeIds.conservative,
     position: { x: 800, y: 150 },
@@ -71,76 +59,83 @@ const nodes = [
   },
   {
     data: {
-      description: "AI analyzes MRI. Flags structural abnormalities for Dr. Sayuj.",
+      description: "Endoscopic Spine Surgery for targeted decompression or discectomy.",
       handles: { source: true, target: true },
-      label: "Surgical Case Review",
+      label: "Minimally Invasive Surgery",
       status: "pending",
     },
-    id: nodeIds.surgeryReview,
+    id: nodeIds.surgery,
+    position: { x: 800, y: -150 },
+    type: "medicalWorkflow",
+  },
+  {
+    data: {
+      description: "Post-operative care and regular check-ins with Dr. Sayuj.",
+      handles: { source: true, target: true },
+      label: "Recovery & Follow-up",
+      status: "pending",
+    },
+    id: nodeIds.recovery,
     position: { x: 1250, y: -150 },
     type: "medicalWorkflow",
   },
   {
     data: {
-      description: "Schedule online follow-up to review conservative progress.",
+      description: "Long-term core strengthening and posture correction.",
       handles: { source: false, target: true },
-      label: "Teleconsultation",
+      label: "Rehabilitation",
       status: "pending",
     },
-    id: nodeIds.teleconsult,
-    position: { x: 1250, y: 150 },
-    type: "medicalWorkflow",
-  },
-  {
-    data: {
-      description: "Dr. Sayuj confirms surgery plan in-clinic.",
-      handles: { source: false, target: true },
-      label: "In-Person Consultation",
-      status: "pending",
-    },
-    id: nodeIds.inPerson,
-    position: { x: 1700, y: -150 },
+    id: nodeIds.rehab,
+    position: { x: 1700, y: 0 },
     type: "medicalWorkflow",
   },
 ];
 
 const edges = [
   {
-    id: "edge-symptoms-ai",
-    source: nodeIds.symptoms,
-    target: nodeIds.aiAnalysis,
+    id: "edge-consult-diagnostics",
+    source: nodeIds.consultation,
+    target: nodeIds.diagnostics,
     type: "animated",
   },
   {
-    id: "edge-ai-mri",
-    source: nodeIds.aiAnalysis,
-    target: nodeIds.mriRequired,
-    type: "animated",
-    label: "High Urgency",
-  },
-  {
-    id: "edge-ai-conservative",
-    source: nodeIds.aiAnalysis,
+    id: "edge-diagnostics-conservative",
+    source: nodeIds.diagnostics,
     target: nodeIds.conservative,
-    type: "temporary",
-    label: "Low Urgency",
+    type: "animated",
+    label: "Mild Symptoms",
   },
   {
-    id: "edge-mri-surgery",
-    source: nodeIds.mriRequired,
-    target: nodeIds.surgeryReview,
+    id: "edge-diagnostics-surgery",
+    source: nodeIds.diagnostics,
+    target: nodeIds.surgery,
+    type: "temporary",
+    label: "Red Flags / Severe",
+  },
+  {
+    id: "edge-conservative-surgery",
+    source: nodeIds.conservative,
+    target: nodeIds.surgery,
+    type: "temporary",
+    label: "Failed Conservative",
+  },
+  {
+    id: "edge-surgery-recovery",
+    source: nodeIds.surgery,
+    target: nodeIds.recovery,
     type: "animated",
   },
   {
-    id: "edge-conservative-tele",
+    id: "edge-conservative-rehab",
     source: nodeIds.conservative,
-    target: nodeIds.teleconsult,
-    type: "temporary",
+    target: nodeIds.rehab,
+    type: "animated",
   },
   {
-    id: "edge-surgery-inperson",
-    source: nodeIds.surgeryReview,
-    target: nodeIds.inPerson,
+    id: "edge-recovery-rehab",
+    source: nodeIds.recovery,
+    target: nodeIds.rehab,
     type: "animated",
   },
 ];
@@ -225,8 +220,8 @@ export default function AIWorkflowPage() {
       <header className="bg-white border-b border-slate-200 py-4 px-6 sticky top-0 z-10 shadow-sm">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-slate-900">AI Diagnostic Triage & Workflow</h1>
-            <p className="text-sm text-slate-500 mt-1">Interactive visualization of our AI-assisted patient intake process</p>
+            <h1 className="text-2xl font-bold text-slate-900">Spine Care Pathway</h1>
+            <p className="text-sm text-slate-500 mt-1">Interactive visualization of Dr. Sayuj's patient journey</p>
           </div>
         </div>
       </header>
