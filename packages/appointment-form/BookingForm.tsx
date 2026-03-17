@@ -203,17 +203,24 @@ export default function BookingForm({
                 name="requestedDate"
                 control={control}
                 render={({ field }) => (
-                  <Calendar
-                    label="Preferred Date"
-                    value={field.value ? formatLocalDate(field.value) : ""}
-                    onChange={(dateString) => {
-                        const [year, month, day] = dateString.split("-").map(Number);
-                        const date = new Date(year, month - 1, day);
-                        field.onChange(date);
-                    }}
-                    error={errors.requestedDate?.message}
-                    required
-                  />
+                  <>
+                    <Calendar
+                      label="Preferred Date"
+                      value={field.value ? formatLocalDate(field.value) : ""}
+                      onChange={(dateString) => {
+                          const [year, month, day] = dateString.split("-").map(Number);
+                          const date = new Date(year, month - 1, day);
+                          field.onChange(date);
+                      }}
+                      error={errors.requestedDate?.message}
+                      required
+                    />
+                    <input
+                      type="hidden"
+                      name={field.name}
+                      value={field.value ? formatLocalDate(field.value) : ""}
+                    />
+                  </>
                 )}
               />
 
@@ -222,6 +229,11 @@ export default function BookingForm({
                 control={control}
                 render={({ field }) => (
                   <div>
+                    <input
+                      type="hidden"
+                      name={field.name}
+                      value={field.value || ""}
+                    />
                     <div id="appointment-time-label" className="block text-sm font-medium text-slate-700 mb-1">
                       Preferred Time{" "}
                       <span className="text-red-500 font-extrabold pl-1">*</span>
