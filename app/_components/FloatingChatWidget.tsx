@@ -150,7 +150,11 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
       page_slug: pathname || 'unknown'
     });
 
-    await append({ role: 'user', content: content.trim() });
+    if (typeof append === 'function') {
+      await append({ role: 'user', content: content.trim() });
+    } else {
+      console.error('Chat append is not a function. Fallback active.');
+    }
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -170,11 +174,14 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
   };
 
   const quickActions = [
+    "I want the earliest available appointment",
     "Book consultation",
     "Clinic hours?",
     "Cost of surgery?",
-    "Emergency help"
   ];
+
+  // Hide on appointments page to avoid clash with specific booking chat
+  if (pathname === '/appointments') return null;
 
   return (
     <>
