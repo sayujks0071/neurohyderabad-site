@@ -337,16 +337,24 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
           )}
 
           {/* Input Area */}
-          <form onSubmit={onSubmit} className="p-3 border-t border-[var(--color-border)] bg-[var(--color-surface)] shrink-0">
+          <form
+            onSubmit={onSubmit}
+            className="p-3 border-t border-[var(--color-border)] bg-[var(--color-surface)] shrink-0"
+            toolname="chatWithAIAssistant"
+            tooldescription="Chat with Dr. Sayuj's AI assistant for quick answers."
+            toolautosubmit="false"
+          >
             <div className="flex items-center gap-2 relative">
               <label htmlFor="chat-input" className="sr-only">Ask a question</label>
               <input
                 id="chat-input"
+                name="prompt"
                 ref={inputRef}
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask anything..."
+                aria-label="Ask a question"
                 className="w-full pl-4 pr-10 py-2.5 bg-[var(--color-background)] border-none rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)]/50 focus:bg-[var(--color-surface)] transition-all"
                 disabled={isLoading}
               />
