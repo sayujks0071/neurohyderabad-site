@@ -43,15 +43,27 @@ const AnimatedSubtitleWord: React.FC<{
     [frame, fps, delay, prefersReducedMotion]
   );
 
+  const wordScale = useMemo(() =>
+    prefersReducedMotion ? 1 : spring({
+      frame: frame - delay,
+      fps,
+      from: 0.9,
+      to: 1,
+      durationInFrames: 30,
+      config: { damping: 14 },
+    }),
+    [frame, fps, delay, prefersReducedMotion]
+  );
+
   return (
     <span
       style={{
         opacity: wordOpacity,
-        transform: `translateY(${wordY}px)`,
+        transform: `translateY(${wordY}px) scale(${wordScale})`,
         display: 'inline-block',
       }}
     >
-      {word}
+      {word}&nbsp;
     </span>
   );
 };
@@ -107,21 +119,26 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
     fps,
     from: 0,
     to: 1,
-    durationInFrames: 30,
+    config: {
+      damping: 100, // Smooth ease-in for opacity
+      stiffness: 100,
+    },
   }), [frame, fps, prefersReducedMotion]);
 
   // Spring-based scale animation for main container
-  // Adjusted damping for a slightly bouncier/friendlier feel (15 -> 10)
   const scale = useMemo(() => prefersReducedMotion ? 1 : spring({
     frame,
     fps,
     from: 0.8,
     to: 1,
-    durationInFrames: 30,
     config: {
-      damping: 10,
+      damping: 14,
+      stiffness: 120, // More natural bounce than fixed duration
     },
   }), [frame, fps, prefersReducedMotion]);
+
+  // Subtle continuous floating animation to keep scene alive
+  const floatY = prefersReducedMotion ? 0 : Math.sin(frame / 40) * 4;
 
   // Subtitle animation (starts after title)
   const subtitleStartFrame = 15;
@@ -145,7 +162,7 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
       >
         <div
           style={{
-            transform: `scale(${scale})`,
+            transform: `scale(${scale}) translateY(${floatY}px)`,
             textAlign: 'center',
           }}
         >
@@ -174,7 +191,6 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
               display: 'flex',
               flexWrap: 'wrap',
               justifyContent: 'center',
-              gap: '8px',
               fontFamily: FONTS.primary,
               fontSize: '32px',
               fontWeight: 500,

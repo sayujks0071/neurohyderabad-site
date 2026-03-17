@@ -125,16 +125,16 @@ export default function AIBookingAgent({ pageSlug, service }: AIBookingAgentProp
     // Generate contextual response based on current step and user input
     switch (currentStep) {
       case 'greeting':
-        if (detectedCondition || userMessage.toLowerCase().includes('appointment') || userMessage.toLowerCase().includes('book')) {
+        if (detectedCondition || userMessage.toLowerCase().includes('appointment') || userMessage.toLowerCase().includes('book') || userMessage.toLowerCase().includes('earliest')) {
           setCurrentStep('condition');
-          return "I'd be happy to help you book an appointment with Dr. Sayuj Krishnan. Could you tell me more about your condition or symptoms? This will help me understand how urgent your appointment should be.";
+          return `I'd be happy to help you book an appointment with Dr. Sayuj Krishnan. Could you tell me more about your condition or symptoms? This will help me understand how urgent your appointment should be.\n\n👉 [**Book your appointment directly here →**](/appointments)`;
         }
         return "I'm here to help you with your neurosurgical care needs. Are you looking to book an appointment, or do you have questions about a specific condition?";
 
       case 'condition':
         if (detectedCondition) {
           setCurrentStep('urgency');
-          return `I understand you're dealing with ${detectedCondition.replace('_', ' ')}. How urgent is your condition? Are you experiencing severe pain, or is this for a routine consultation?`;
+          return `I understand you're dealing with ${detectedCondition.replace('_', ' ')}. How urgent is your condition? Are you experiencing severe pain, or is this for a routine consultation?\n\n👉 [**Skip this and book directly →**](/appointments)`;
         }
         return "Could you describe your symptoms or condition in more detail? This helps me determine the best type of appointment for you.";
 
@@ -262,7 +262,8 @@ This booking was created through our AI chat assistant.`;
     "I need to see Dr. Sayuj for a brain condition",
     "I have severe headaches",
     "I need a second opinion",
-    "I want to book a routine consultation"
+    "I want to book a routine consultation",
+    "I want the earliest available appointment"
   ];
 
   return (
@@ -355,13 +356,21 @@ This booking was created through our AI chat assistant.`;
         )}
 
         {/* Input Form */}
-        <form onSubmit={handleSubmit} className="p-4 border-t border-[var(--color-border)]">
+        <form
+          onSubmit={handleSubmit}
+          className="p-4 border-t border-[var(--color-border)]"
+          toolname="bookAppointmentViaAI"
+          tooldescription="Book an appointment with Dr. Sayuj using the AI assistant."
+          toolautosubmit="false"
+        >
           <div className="flex space-x-2">
             <input
               type="text"
+              name="prompt"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               placeholder="Type your message here..."
+              aria-label="Ask to book an appointment"
               className="flex-1 px-3 py-2 border border-[var(--color-border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)] focus:border-transparent"
               disabled={isLoading}
             />
@@ -391,6 +400,19 @@ This booking was created through our AI chat assistant.`;
             +91-9778280044
           </a>
         </p>
+      </div>
+
+      {/* Floating Book Now CTA */}
+      <div className="mt-4 flex justify-center">
+        <a
+          href="/appointments"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[var(--color-primary-500)] text-white font-semibold shadow-lg hover:bg-[var(--color-primary-700)] transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)] focus:ring-offset-2"
+          aria-label="Book appointment with Dr Sayuj Krishnan"
+        >
+          <span>📅</span>
+          <span>Book OPD Appointment</span>
+          <span aria-hidden="true">→</span>
+        </a>
       </div>
     </div>
   );

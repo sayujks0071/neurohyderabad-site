@@ -1,134 +1,63 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import { secureCompare } from '@/src/lib/security'
-import { rateLimit } from '@/src/lib/rate-limit'
 
-// NOTE:
-// We intentionally keep this middleware narrowly scoped via `config.matcher`
-// to avoid running on public pages/assets (Edge Requests reduction).
+// Simple in-memory rate limiting map for middleware (IP -> {count, timestamp})
+const rateLimitMap = new Map<string, { count: number; timestamp: number }>();
+const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute
+const MAX_REQUESTS_PER_WINDOW = 60;
 
-const ALLOWED_CRAWLER_UA = [
-  /Googlebot/i,
-  /bingbot/i,
-  /BingPreview/i,
-  /DuckDuckBot/i,
-  /Slurp/i, // Yahoo
-]
+export function middleware(request: NextRequest) {
+  const url = request.nextUrl.clone()
+  const isAdminRoute = url.pathname.startsWith('/admin')
+  const isApiAdminRoute = url.pathname.startsWith('/api/admin')
 
-// Common abusive scrapers/scanners. Keep this conservative to avoid false positives.
-const BLOCKED_UA_SUBSTRINGS = [
-  'ahrefsbot',
-  'semrushbot',
-  'mj12bot',
-  'dotbot',
-  'bytespider',
-  'petalbot',
-  'serpstatbot',
-  'seznambot',
-  'censysinspect',
-  'zgrab',
-  'masscan',
-  'sqlmap',
-  'nikto',
-  'nmap',
-  'gobuster',
-  'dirbuster',
-  'acunetix',
-  'nessus',
-  'python-requests',
-  'aiohttp',
-  'httpx',
-  'okhttp',
-  'go-http-client',
-  'node-fetch',
-  'curl',
-  'wget',
-  'libwww-perl',
-  'scrapy',
-]
+  // Apply rate limiting or check keys for admin routes
+  if (isAdminRoute || isApiAdminRoute) {
+    // Apply rate limiting for admin routes
+    const ip = request.ip || request.headers.get('x-forwarded-for') || '127.0.0.1';
 
-function isAllowedCrawler(userAgent: string) {
-  return ALLOWED_CRAWLER_UA.some((re) => re.test(userAgent))
-}
+    const now = Date.now();
+    const windowStart = now - RATE_LIMIT_WINDOW_MS;
 
-function isBlockedUserAgent(userAgent: string) {
-  const ua = userAgent.toLowerCase()
-  return BLOCKED_UA_SUBSTRINGS.some((substr) => ua.includes(substr))
-}
-
-export async function middleware(req: NextRequest) {
-  const pathname = req.nextUrl.pathname
-  const userAgent = req.headers.get('user-agent') ?? ''
-
-  // Basic bad-bot blocking for sensitive paths only.
-  // We explicitly allow major search crawlers to prevent SEO impact.
-  if (userAgent && !isAllowedCrawler(userAgent) && isBlockedUserAgent(userAgent)) {
-    if (pathname.startsWith('/api/')) {
-      return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
-    }
-    return new NextResponse('Forbidden', { status: 403 })
-  }
-
-  // Protect drafts and admin routes - redirect to home if accessed publicly
-  if (pathname.startsWith('/drafts') || pathname.startsWith('/admin') || pathname.startsWith('/api/admin')) {
-    // 🛡️ Sentinel: Rate limiting protection against brute-force attacks
-    // Use IP address as identifier (fallback to localhost if undefined)
-    // @ts-ignore
-    const ip = req.ip ?? '127.0.0.1'
-    // Limit to 60 requests per minute
-    const limit = rateLimit(ip, 60, 60 * 1000)
-
-    if (!limit.success) {
-      return NextResponse.json(
-        {
-          error: 'Too Many Requests',
-          message: 'Rate limit exceeded. Please try again later.',
-        },
-        {
-          status: 429,
-          headers: {
-            'Retry-After': Math.ceil((limit.reset - Date.now()) / 1000).toString(),
-            'X-RateLimit-Limit': limit.limit.toString(),
-            'X-RateLimit-Remaining': limit.remaining.toString(),
-            'X-RateLimit-Reset': Math.ceil(limit.reset / 1000).toString(),
-          },
-        },
-      )
-    }
-
-    // Check for admin access key in environment
-    // 🛡️ Sentinel: Removed default fallback to prevent unauthorized access in production if env var is missing.
-    const adminKey = process.env.ADMIN_ACCESS_KEY;
-
-    // Check for admin key in query params (simple auth)
-    const providedKey = req.nextUrl.searchParams.get('key');
-    // Check for admin key in headers (API auth)
-    const headerKey = req.headers.get('x-admin-key');
-
-    // 🛡️ Sentinel: Use constant-time comparison to prevent timing attacks
-    const isProvidedValid = providedKey && adminKey ? await secureCompare(providedKey, adminKey) : false;
-    const isHeaderValid = headerKey && adminKey ? await secureCompare(headerKey, adminKey) : false;
-
-    // If adminKey is not configured (undefined/empty) OR provided keys do not match, deny access.
-    // This ensures that if the secret is missing in production, the route is closed by default (fail secure).
-    if (!adminKey || (!isProvidedValid && !isHeaderValid)) {
-      if (pathname.startsWith('/api/')) {
-        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    // Clean up old entries
+    for (const [key, data] of rateLimitMap.entries()) {
+      if (data.timestamp < windowStart) {
+        rateLimitMap.delete(key);
       }
-      return NextResponse.redirect(new URL('/', req.url));
+    }
+
+    const currentRate = rateLimitMap.get(ip);
+
+    if (currentRate && currentRate.timestamp > windowStart) {
+      if (currentRate.count >= MAX_REQUESTS_PER_WINDOW) {
+        return new NextResponse(JSON.stringify({ error: 'Too Many Requests' }), {
+          status: 429,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+      currentRate.count++;
+      currentRate.timestamp = now;
+    } else {
+      rateLimitMap.set(ip, { count: 1, timestamp: now });
+    }
+
+    const key = request.nextUrl.searchParams.get('key') || request.headers.get('x-admin-key')
+    const validKey = process.env.ADMIN_ACCESS_KEY
+
+    // If an ADMIN_ACCESS_KEY is configured but not provided or doesn't match, block access
+    if (validKey && key !== validKey) {
+      if (isApiAdminRoute) {
+        return new NextResponse('Unauthorized', { status: 401 })
+      }
+      url.pathname = '/'
+      return NextResponse.redirect(url, { status: 307 })
     }
   }
 
+  // Allow all other routes to proceed normally
   return NextResponse.next()
 }
 
 export const config = {
-  matcher: [
-    // Keep middleware off public pages/assets to reduce Edge Requests.
-    '/admin/:path*',
-    '/drafts/:path*',
-    '/api/admin/:path*',
-    '/api/wp-proxy/:path*',
-    '/utm-links/:path*',
-  ],
+  matcher: ['/admin/:path*', '/api/admin/:path*'],
 }
