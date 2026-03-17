@@ -58,7 +58,12 @@ export const WelcomeCharacter: React.FC<WelcomeCharacterProps> = ({ char, delay,
     [frame, delay, prefersReducedMotion]
   );
 
-  const waveY = 0;
+  // Subtle continuous floating wave effect after entrance
+  const waveY = useMemo(() => {
+    if (prefersReducedMotion || frame <= delay + 25) return 0;
+    // Slow wave oscillation for floating effect
+    return Math.sin((frame - delay - 25) / 15) * 4;
+  }, [frame, delay, prefersReducedMotion]);
 
   return (
     <span

@@ -39,7 +39,15 @@ async function verifyResendSignature(request: Request, rawBody: string): Promise
 
     // svix-signature can contain multiple signatures (e.g. "v1,<sig>")
     const signatures = svixSignature.split(' ').map((s) => s.split(',')[1]);
-    const isValid = signatures.some((sig) => sig === expectedSignature);
+
+    // 🛡️ Sentinel: Use constant-time comparison to prevent timing attacks
+    const expectedBuffer = Buffer.from(expectedSignature);
+    const isValid = signatures.some((sig) => {
+        if (!sig) return false;
+        const sigBuffer = Buffer.from(sig);
+        if (sigBuffer.length !== expectedBuffer.length) return false;
+        return crypto.timingSafeEqual(sigBuffer, expectedBuffer);
+    });
 
     if (!isValid) {
         console.error('[Resend Webhook] Signature mismatch.');
