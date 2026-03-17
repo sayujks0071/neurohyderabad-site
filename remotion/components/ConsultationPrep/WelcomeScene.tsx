@@ -26,7 +26,7 @@ const AnimatedSubtitleWord: React.FC<{
       fps,
       from: 0,
       to: 1,
-      durationInFrames: 40,
+      config: { damping: 20, stiffness: 80 }, // Gentle, natural fade
     }),
     [frame, fps, delay, prefersReducedMotion]
   );
@@ -37,8 +37,7 @@ const AnimatedSubtitleWord: React.FC<{
       fps,
       from: 20,
       to: 0,
-      durationInFrames: 40,
-      config: { damping: 12 },
+      config: { damping: 18, stiffness: 120 }, // Smooth slide
     }),
     [frame, fps, delay, prefersReducedMotion]
   );
@@ -49,8 +48,7 @@ const AnimatedSubtitleWord: React.FC<{
       fps,
       from: 0.9,
       to: 1,
-      durationInFrames: 30,
-      config: { damping: 14 },
+      config: { damping: 12, stiffness: 200 }, // Snappy pop for scale
     }),
     [frame, fps, delay, prefersReducedMotion]
   );
