@@ -24,7 +24,7 @@ export function parseBookingData(payload: unknown): BookingData {
   }
 
   const email = String(raw.email ?? "").trim();
-  if (!EMAIL_REGEX.test(email)) {
+  if (email && !EMAIL_REGEX.test(email)) {
     throw new ValidationError("Email is invalid.");
   }
 
