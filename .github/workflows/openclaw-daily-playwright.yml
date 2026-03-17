@@ -1,0 +1,49 @@
+name: OpenClaw Daily Playwright Automation
+
+on:
+  schedule:
+    - cron: '30 14 * * *'  # 14:30 UTC / 8:00 PM IST
+  workflow_dispatch:
+
+jobs:
+  run-daily-playwright:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies
+        run: |
+          npm install
+          npm install playwright playwright-core --no-save
+          npx playwright install --with-deps
+
+      - name: Prepare WhatsApp Session
+        env:
+          WHATSAPP_SECRET: ${{ secrets.WHATSAPP_SESSION_JSON }}
+        run: |
+          if [ -n "$WHATSAPP_SECRET" ]; then
+            echo "$WHATSAPP_SECRET" > whatsapp_session.json
+          else
+            echo "WHATSAPP_SESSION_JSON secret is not set. WhatsApp step may be skipped."
+          fi
+
+      - name: Install xvfb
+        run: sudo apt-get update && sudo apt-get install -y xvfb
+
+      - name: Run Daily Playwright Automation
+        run: |
+          chmod +x openclaw/workflows/daily-playwright-automation.sh
+          xvfb-run --auto-servernum ./openclaw/workflows/daily-playwright-automation.sh
+
+      - name: Upload Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-automation-reports
+          path: health-reports/daily-automation/
