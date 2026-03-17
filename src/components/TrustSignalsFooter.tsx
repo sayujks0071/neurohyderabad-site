@@ -24,7 +24,7 @@ export default function TrustSignalsFooter() {
               <li><Link href="/services/minimally-invasive-spine-surgery" className="text-[var(--color-border)] hover:text-white">Endoscopic Spine Surgery</Link></li>
               <li><Link href="/services/brain-tumor-surgery-hyderabad" className="text-[var(--color-border)] hover:text-white">Brain Tumor Surgery</Link></li>
               <li><Link href="/services/epilepsy-surgery-hyderabad" className="text-[var(--color-border)] hover:text-white">Epilepsy Surgery</Link></li>
-              <li><Link href="/conditions/trigeminal-neuralgia-treatment" className="text-[var(--color-border)] hover:text-white">Trigeminal Neuralgia</Link></li>
+              <li><Link href="/conditions/trigeminal-neuralgia-treatment-hyderabad" className="text-[var(--color-border)] hover:text-white">Trigeminal Neuralgia</Link></li>
             </ul>
           </div>
 

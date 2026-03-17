@@ -153,7 +153,7 @@ export const CONDITION_RESOURCES: ConditionResource[] = [
     primaryPath: "/symptoms/signs-of-brain-tumor",
     relatedResources: [
       {
-        href: "/conditions/brain-tumor",
+        href: "/conditions/brain-tumor-surgery-hyderabad",
         label: "Brain Tumor Treatment Overview",
       },
       {
