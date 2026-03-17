@@ -48,6 +48,7 @@ export function MapPinIcon(props: SVGProps<SVGSVGElement>) {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
+      aria-hidden="true"
       {...props}
     >
       <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
@@ -68,6 +69,7 @@ export function CheckCircleIcon(props: SVGProps<SVGSVGElement>) {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
+      aria-hidden="true"
       {...props}
     >
       <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
@@ -88,6 +90,7 @@ export function ChevronDownIcon(props: SVGProps<SVGSVGElement>) {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
+      aria-hidden="true"
       {...props}
     >
       <polyline points="6 9 12 15 18 9"></polyline>
@@ -107,6 +110,7 @@ export function ChevronLeftIcon(props: SVGProps<SVGSVGElement>) {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
+      aria-hidden="true"
       {...props}
     >
       <polyline points="15 18 9 12 15 6"></polyline>
@@ -126,6 +130,7 @@ export function ChevronRightIcon(props: SVGProps<SVGSVGElement>) {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
+      aria-hidden="true"
       {...props}
     >
       <polyline points="9 18 15 12 9 6"></polyline>

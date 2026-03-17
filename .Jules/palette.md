@@ -1,12 +1,5 @@
-## 2024-03-05 - Add aria-labels to icon-only interactive controls
+## 2024-10-24 - SVG Icons Accessibility
 
-**Learning:** It's important to verify that interactive controls (like buttons with SVG icons) have `aria-label` attributes to ensure they are accessible. Often when implementing complex features like AI chat widgets, the submit button is styled with an SVG and can lack an accessible name. A simple search for `<button` combined with `<svg` can highlight these instances.
-**Action:** Added `aria-label` attributes to the submit buttons in `app/ai-sandbox/page.tsx` and `app/ai-sandbox/_components/SandboxClient.tsx` that previously only contained an SVG. Also added an `aria-label` to the Escape button in the `SiteSearchModal` which didn't have a screen reader friendly descriptive text.
+**Learning:** Sighted users perceive SVG icons alongside their text labels or inside self-explanatory interactive elements intuitively, but screen readers may explicitly announce every rendered `<svg>` component (e.g., as "graphic" or "image") if it lacks an `aria-hidden` attribute. Decorative and supplemental SVGs should be explicitly hidden from assistive technologies to reduce "noise."
 
-## 2025-05-18 - [Add aria-hidden to decorative required asterisks]
-**Learning:** Decorative characters like `*` for required form fields should be hidden from screen readers using `aria-hidden="true"`. This prevents redundant announcements like "asterisk". The `required` or `aria-required` attribute on the input itself is what should convey this state to assistive technologies.
-**Action:** Added `aria-hidden="true"` to the `*` span elements in `Input.tsx`, `Select.tsx`, and `Textarea.tsx` within `packages/appointment-form/ui/`.
-
-## 2024-05-15 - Dynamic ARIA Labels for Feedback Buttons
-**Learning:** For interactive buttons that change state without navigating (like "Copy to clipboard"), `title` is often not read reliably by screen readers when state changes.
-**Action:** Used `aria-live="polite"` combined with a dynamic `aria-label={copied ? "Copied" : "Copy"}` to provide immediate, accessible feedback for micro-interactions without using visual toast notifications.
+**Action:** Added `aria-hidden="true"` to common reusable SVG icon components (like `ChevronDownIcon` and `MapPinIcon`) inside `packages/appointment-form/constants.tsx` to ensure screen readers skip over them naturally, relying on adjacent ARIA labels or visible text instead.
