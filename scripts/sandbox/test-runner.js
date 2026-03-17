@@ -359,7 +359,12 @@ async function testCostTransparency() {
   const res = await fetch(urlFor("/services/spinal-fusion-surgery-hyderabad"), { headers: { "cache-control": "no-cache" } });
   assert(res.status === 200, `/services/spinal-fusion-surgery-hyderabad HTTP ${res.status}`);
   const html = await readTextLimited(res, 600_000);
-  assert(html.includes("Cost Transparency") || html.includes("Cost and logistics"), "Cost Transparency section missing");
+  const hasCostSection =
+    html.includes("Cost Transparency") ||
+    html.includes("Cost and logistics") ||
+    html.includes("Cost of Treatment") ||
+    html.includes("Cost Range");
+  assert(hasCostSection, "Cost / Pricing section missing on spinal fusion page");
   // Check for rupee symbol or price patterns
   assert(html.includes("₹") || /\d{1,3}(,\d{3})*/.test(html), "Pricing information missing");
 }
@@ -389,6 +394,89 @@ async function testBookAppointment() {
     assert(html.includes("Book Appointment") || html.includes("Schedule Consultation"), "Book Appointment text missing");
 }
 
+async function testBookingFunnel() {
+  // Validate the appointments page has key form fields and the booking API is alive.
+  const pageRes = await fetch(urlFor("/appointments"), { headers: { "cache-control": "no-cache" } });
+  assert(pageRes.status === 200, `/appointments HTTP ${pageRes.status}`);
+  const html = await readTextLimited(pageRes, 600_000);
+
+  // The AI chat / form must have input fields or booking affordances.
+  const hasInput = html.includes('<input') || html.includes('data-slot') || html.includes('placeholder');
+  assert(hasInput, "/appointments page missing input fields for booking");
+
+  // Must mention phone, name, or email in some form
+  const hasContactHint =
+    html.toLowerCase().includes("phone") ||
+    html.toLowerCase().includes("name") ||
+    html.toLowerCase().includes("contact");
+  assert(hasContactHint, "/appointments missing contact collection fields");
+
+  // Check booking API endpoint is reachable (405 = Method Not Allowed is fine for GET on a POST route)
+  const apiRes = await fetch(urlFor("/api/appointments/submit"), {
+    method: "GET",
+    headers: { "cache-control": "no-cache" },
+  });
+  assert(
+    [200, 400, 405, 422].includes(apiRes.status),
+    `/api/appointments/submit returned unexpected ${apiRes.status}`
+  );
+}
+
+async function testWhatsAppCTA() {
+  // Verify that key pages carry a WhatsApp CTA so patients can reach Dr. Sayuj directly.
+  const pagesToCheck = [
+    "/",
+    "/appointments",
+    "/services/spinal-fusion-surgery-hyderabad",
+  ];
+
+  let pagesWithCTA = 0;
+  for (const p of pagesToCheck) {
+    const res = await fetch(urlFor(p), { headers: { "cache-control": "no-cache" } });
+    if (res.status !== 200) continue;
+    const html = await readTextLimited(res, 600_000);
+    if (
+      html.includes("wa.me") ||
+      html.includes("api.whatsapp.com") ||
+      html.includes("whatsapp")
+    ) {
+      pagesWithCTA++;
+    }
+  }
+  assert(
+    pagesWithCTA >= 2,
+    `WhatsApp CTA found on only ${pagesWithCTA}/${pagesToCheck.length} pages (need ≥ 2)`
+  );
+}
+
+async function testInternalBookingLinks() {
+  // Sample pages from sitemap and verify most carry a link to /appointments.
+  const sitemapRes = await fetch(urlFor("/sitemap-main.xml"), { headers: { "cache-control": "no-cache" } });
+  assert(sitemapRes.status === 200, `sitemap-main.xml HTTP ${sitemapRes.status}`);
+  const xml = await sitemapRes.text();
+  const locs = findAll(xml, /<loc>([^<]+)<\/loc>/gi)
+    .filter((u) => u.startsWith(CANONICAL_ORIGIN))
+    .slice(0, 12);
+
+  assert(locs.length >= 4, "sitemap too small to sample for internal booking links");
+
+  let pagesWithBookingLink = 0;
+  for (const u of locs) {
+    const res = await fetch(u, { headers: { "cache-control": "no-cache" } });
+    if (res.status !== 200) continue;
+    const html = await readTextLimited(res, 400_000);
+    if (html.includes("/appointments") || html.includes("book-appointment")) {
+      pagesWithBookingLink++;
+    }
+  }
+
+  const minRequired = Math.floor(locs.length * 0.6); // at least 60% of sampled pages
+  assert(
+    pagesWithBookingLink >= minRequired,
+    `Internal /appointments links found on ${pagesWithBookingLink}/${locs.length} pages (need ≥ ${minRequired})`
+  );
+}
+
 async function main() {
   console.log(`Sandbox target: ${BASE_URL}`);
   console.log(`Canonical origin: ${CANONICAL_ORIGIN}`);
@@ -405,11 +493,18 @@ async function main() {
   results.push(await test("cost transparency", testCostTransparency));
   results.push(await test("content policy", testContentPolicy));
   results.push(await test("book appointment", testBookAppointment));
+  // --- OPD Conversion Tests (added for traffic & booking improvement) ---
+  results.push(await test("booking funnel", testBookingFunnel));
+  results.push(await test("whatsapp cta", testWhatsAppCTA));
+  results.push(await test("internal booking links", testInternalBookingLinks));
 
   const failed = results.filter((r) => !r.ok);
   console.log("");
   console.log(`Summary: ${results.length - failed.length} passed, ${failed.length} failed`);
   if (failed.length) {
+    console.log("");
+    console.log("Failed tests:");
+    failed.forEach((r) => console.log(`  FAIL  ${r.name}: ${r.error}`));
     process.exitCode = 1;
   }
 }

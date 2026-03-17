@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Loader2 } from 'lucide-react';
+import { Shimmer } from "@/src/components/ai-elements/shimmer";
 
 interface SymptomAnalysis {
   urgency: 'emergency' | 'urgent' | 'routine';
@@ -165,7 +166,7 @@ export default function SmartSymptomChecker() {
             className="w-full bg-[var(--color-primary-500)] text-white px-6 py-3 rounded-lg hover:bg-[var(--color-primary-700)] disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
           >
             {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden="true" />}
-            {isLoading ? 'Analyzing...' : 'Analyze Symptoms'}
+            {isLoading ? <Shimmer as="span">Analyzing...</Shimmer> : 'Analyze Symptoms'}
           </button>
         </form>
 

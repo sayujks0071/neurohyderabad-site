@@ -84,7 +84,7 @@ export async function POST(request: NextRequest) {
     // 2. Generate final response via Vercel AI Gateway (OpenAI)
     // This ensures consistent tone, safety checks, and better instruction following
     const { text: information } = await generateText({
-      model: getTextModel(), // defaults to gpt-4o-mini via Gateway
+      model: getTextModel(undefined, { cache: true }), // defaults to gpt-4o-mini via Gateway
       system: `${DR_SAYUJ_SYSTEM_PROMPT}
 
 You are analyzing patient symptoms. Use the provided MEDICAL EVIDENCE (RAG) to inform your response.

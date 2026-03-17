@@ -8,6 +8,8 @@ import { ScrubEngine } from './ScrubEngine';
 import { vertexShader, fragmentShader } from './TunnelShader';
 import Link from 'next/link';
 import Image from 'next/image';
+import SlotAvailabilityWidget from '../../_components/SlotAvailabilityWidget';
+import { Shimmer } from "@/src/components/ai-elements/shimmer";
 
 // Register ScrollTrigger
 if (typeof window !== 'undefined') {
@@ -193,11 +195,12 @@ export default function Hero() {
             />
 
             {/* Loading Indicator */}
+            {/* 🫀 CWV Sentinel Fix: Lower z-index to z-30 (below text's z-40) to prevent black overlay/blur from blocking LCP text paint */}
             {isLoading && (
-                <div className="absolute inset-0 flex items-center justify-center z-50 bg-black/50 backdrop-blur-sm">
+                <div className="absolute inset-0 flex items-center justify-center z-30 bg-black/50 backdrop-blur-sm">
                     <div className="text-center">
                         <div className="w-16 h-16 border-4 border-[var(--color-primary-500)] border-t-transparent rounded-full animate-spin mb-4 mx-auto"></div>
-                        <p className="text-lg text-[var(--color-primary-300)] font-medium">Loading Experience... {Math.round(progress * 100)}%</p>
+                        <Shimmer className="text-lg text-[var(--color-primary-300)] font-medium">{`Loading Experience... ${Math.round(progress * 100)}%`}</Shimmer>
                     </div>
                 </div>
             )}
@@ -209,8 +212,12 @@ export default function Hero() {
                         Advancing Minimally Invasive Spine & Brain Surgery
                     </h2>
                     <h1 className="text-4xl md:text-7xl font-bold leading-tight mb-8">
-                        Dr. Sayuj Krishnan:<br />Best Neurosurgeon in Hyderabad & Endoscopic Spine Specialist
+                        Expert Neurosurgery & Spine Care
                     </h1>
+                    
+                    <div className="max-w-md mb-8">
+                        <SlotAvailabilityWidget />
+                    </div>
 
                     <div className="flex flex-wrap gap-4">
                         <Link
