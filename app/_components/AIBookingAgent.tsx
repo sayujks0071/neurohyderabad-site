@@ -5,6 +5,7 @@ import { Loader2 } from 'lucide-react';
 import { useStatsigEvents } from '../../src/lib/statsig-events';
 import { APPOINTMENT_SUCCESS_MESSAGE } from '@/packages/appointment-form/constants';
 import { Suggestion, Suggestions } from "@/src/components/ai-elements/suggestion";
+import { Shimmer } from "@/src/components/ai-elements/shimmer";
 
 interface Message {
   id: string;
@@ -328,7 +329,7 @@ This booking was created through our AI chat assistant.`;
               <div className="bg-[var(--color-background)] text-[var(--color-text-primary)] px-4 py-2 rounded-lg">
                 <div className="flex items-center space-x-2">
                   <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-[var(--color-primary-500)]"></div>
-                  <span className="text-sm">Dr. Sayuj's assistant is typing...</span>
+                  <Shimmer as="span" className="text-sm">Dr. Sayuj's assistant is typing...</Shimmer>
                 </div>
               </div>
             </div>
