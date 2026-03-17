@@ -55,7 +55,7 @@ export async function POST(request: Request) {
     }
 
     const { message, usedAI } = await generateBookingConfirmation(booking);
-    const emailResult = await sendConfirmationEmail(booking, message);
+    const emailResult = booking.email ? await sendConfirmationEmail(booking, message) : { success: false, error: "No email provided" };
     const adminEmailResult = await sendAdminNotificationEmail(
       booking,
       request.headers.get("x-booking-source") || "website",
@@ -64,7 +64,7 @@ export async function POST(request: Request) {
     if (!adminEmailResult.success) {
       console.error(
         "[appointments/submit] Admin notification failed:",
-        adminEmailResult.error
+        adminEmailResult.error || "Unknown error"
       );
     }
 
@@ -126,7 +126,7 @@ export async function POST(request: Request) {
     console.log("[appointments/submit] Appointment received:", {
       patientName: booking.patientName,
       phone: booking.phone ? `${booking.phone.slice(0, 3)}***${booking.phone.slice(-3)}` : undefined,
-      email: booking.email ? `${booking.email[0]}***@${booking.email.split('@')[1]}` : undefined,
+      email: booking.email && booking.email.includes("@") ? `${booking.email[0]}***@${booking.email.split('@')[1]}` : undefined,
       appointmentDate: booking.appointmentDate,
       source
     });

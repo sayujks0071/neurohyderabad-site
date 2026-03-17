@@ -42,11 +42,11 @@ export async function POST(request: NextRequest) {
     const source = typeof body.source === "string" ? body.source : undefined;
 
     // Validate required fields
-    if (!name || !email || !phone || !preferredDate || !chiefComplaint || painScore === undefined || mriScanAvailable === undefined) {
+    if (!name || !phone || !preferredDate || !chiefComplaint || painScore === undefined || mriScanAvailable === undefined) {
       return NextResponse.json(
         {
           error: "Missing required fields",
-          required: ["name", "email", "phone", "preferredDate", "chiefComplaint", "painScore", "mriScanAvailable"],
+          required: ["name", "phone", "preferredDate", "chiefComplaint", "painScore", "mriScanAvailable"],
         },
         { status: 400 }
       );
