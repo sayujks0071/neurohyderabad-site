@@ -16,3 +16,8 @@
 - **Topic:** Frequent Headaches in Children: When to See a Pediatric Neurosurgeon
 - **Status:** Success
 - **Traceability File:** [Run Details](./2026-03-11/run.md)
+
+- **Date:** 2026-03-17
+- **Topic:** When to See a Neurosurgeon for Back Pain: 5 Red Flag Symptoms
+- **Status:** Success
+- **Traceability File:** [Run Details](./2026-03-17/run.md)
