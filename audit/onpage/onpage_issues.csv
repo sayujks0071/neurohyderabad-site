@@ -1,3 +1,1 @@
-url,title,issue_type,severity,recommended_fix
-https://www.drsayuj.info/about,"About Dr. Sayuj Krishnan | Premier Neurosurgeon in Hyderabad | Credentials &amp; Experience",Title too long,Low,Truncate title to 60-70 characters
-https://www.drsayuj.info/brain-surgery,"Brain Surgery Hyderabad | Awake Brain Surgery &amp; Brain Tumor Surgery | Dr. Sayuj Krishnan",Title too long,Low,Truncate title to 60-70 characters
+URL,Issue Type,Severity,Recommended Fix

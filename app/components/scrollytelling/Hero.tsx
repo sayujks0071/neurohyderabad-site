@@ -188,7 +188,7 @@ export default function Hero() {
                 src="/images/dr-sayuj-krishnan-portrait-sm.jpg"
                 alt="Dr. Sayuj Krishnan"
                 fill
-                priority
+                priority={true}
                 sizes="100vw"
                 className={`object-cover object-top transition-opacity duration-1000 ${isLoading ? 'opacity-50' : 'opacity-0'}`}
             />

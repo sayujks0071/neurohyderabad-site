@@ -1,5 +1,1 @@
-url,issue_type,severity,recommended_fix
-https://www.drsayuj.info/sitemap-main.xml,sitemap_duplication,Medium,Remove next-sitemap.config.js and next-sitemap package since app/sitemap.xml/route.ts handles generation
-https://www.drsayuj.info/,cache_headers,High,Remove custom Cache-Control headers for Next.js static assets in next.config.mjs to resolve build warnings and restore default caching
-https://www.drsayuj.info/sitemap-main.xml,sitemap_leakage,High,Migrated exclusions from old next-sitemap to new route.ts to prevent /drafts/ and /test-*/ indexing
-https://www.drsayuj.info/,unused_js,Medium,Homepage lighthouse flagged 243kb of unused JS. Refactor to use next/dynamic for third party widgets (Clarity, etc).
+URL,Issue
