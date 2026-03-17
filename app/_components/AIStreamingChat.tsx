@@ -9,8 +9,9 @@ import { Confirmation, ConfirmationRequest, ConfirmationAccepted, ConfirmationRe
 import { Attachments, Attachment, AttachmentPreview, AttachmentInfo, AttachmentRemove } from "@/src/components/ai-elements/attachments";
 import { analytics } from "@/src/lib/analytics";
 import { Suggestion, Suggestions } from "@/src/components/ai-elements/suggestion";
-import { CalendarIcon, SearchIcon, StethoscopeIcon, CheckIcon, XIcon, BookmarkIcon } from "lucide-react";
+import { CalendarIcon, SearchIcon, StethoscopeIcon, CheckIcon, XIcon, BookmarkIcon, CopyIcon, RefreshCcwIcon } from "lucide-react";
 import { PromptInput, PromptInputTextarea, PromptInputFooter, PromptInputTools, PromptInputSubmit } from "@/src/components/ai-elements/prompt-input";
+import { Message, MessageContent, MessageResponse, MessageActions, MessageAction } from "@/src/components/ai-elements/message";
 import { Shimmer } from "@/src/components/ai-elements/shimmer";
 
 interface AIStreamingChatProps {
@@ -54,7 +55,7 @@ export default function AIStreamingChat({
   ], [initialMessage]);
 
   // Initialize useChat hook with explicit generic type to prevent excessive narrowing
-  const { messages, setMessages, sendMessage, status, error, addToolApprovalResponse } = useChat<UIMessage>({
+  const { messages, setMessages, sendMessage, status, error, addToolApprovalResponse, reload } = useChat<UIMessage>({
     transport,
     messages: initialMessages,
     onFinish: (options) => {
@@ -223,17 +224,9 @@ export default function AIStreamingChat({
                 </div>
               )}
 
-              <div
-                className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
-              >
-                <div
-                  className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
-                    message.role === 'user'
-                      ? 'bg-[var(--color-primary-500)] text-white'
-                      : 'bg-[var(--color-background)] text-[var(--color-text-primary)]'
-                  }`}
-                >
-                  {textContent && <p className="text-sm whitespace-pre-wrap">{textContent}</p>}
+              <Message from={message.role}>
+                <MessageContent>
+                  {textContent && <MessageResponse>{textContent}</MessageResponse>}
 
                   {message.parts?.map((part: any, partIndex: number) => {
                     if (part.type === 'tool-invocation') {
@@ -328,14 +321,31 @@ export default function AIStreamingChat({
                     <div className="mt-2 flex justify-end">
                       <button
                         onClick={() => createCheckpoint(index)}
-                        className="text-xs text-[var(--color-primary-500)] hover:underline opacity-50 hover:opacity-100 flex items-center"
+                        className="text-xs text-muted-foreground hover:text-foreground flex items-center"
                       >
                         <BookmarkIcon className="size-3 mr-1" /> Save Checkpoint
                       </button>
                     </div>
                   )}
-                </div>
-              </div>
+                </MessageContent>
+              </Message>
+
+              {message.role === 'assistant' && index === messages.length - 1 && (
+                <MessageActions>
+                  <MessageAction
+                    onClick={() => reload()}
+                    label="Retry"
+                  >
+                    <RefreshCcwIcon className="size-3" />
+                  </MessageAction>
+                  <MessageAction
+                    onClick={() => navigator.clipboard.writeText(textContent || "")}
+                    label="Copy"
+                  >
+                    <CopyIcon className="size-3" />
+                  </MessageAction>
+                </MessageActions>
+              )}
 
               {checkpoints.some(cp => cp.messageIndex === index) && (
                 <div className="my-4">
