@@ -55,10 +55,16 @@ export async function POST(request: NextRequest) {
       .digest('hex');
 
     // Method 2: Compare with provided signature (could be prefixed)
+    // 🛡️ Sentinel: Use constant-time comparison to prevent timing attacks
+    const expectedBuffer = Buffer.from(expectedSignature);
+    const expectedPrefixedBuffer = Buffer.from(`sha256=${expectedSignature}`);
+    const signatureBuffer = Buffer.from(signature);
+
     const isValid =
-      signature === expectedSignature ||
-      signature === `sha256=${expectedSignature}` ||
-      `sha256=${expectedSignature}` === signature;
+      (signatureBuffer.length === expectedBuffer.length &&
+        crypto.timingSafeEqual(signatureBuffer, expectedBuffer)) ||
+      (signatureBuffer.length === expectedPrefixedBuffer.length &&
+        crypto.timingSafeEqual(signatureBuffer, expectedPrefixedBuffer));
 
     if (!isValid) {
       console.error('[webhooks/cursor] Security: Invalid signature');
