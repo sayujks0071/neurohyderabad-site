@@ -1,10 +1,10 @@
 {
-  "timestamp": "2024-03-07T05:27:00Z",
+  "timestamp": "2024-03-13T05:30:00Z",
   "commit_hash": "latest",
-  "page_type": "Home",
-  "suspected_lcp_element": "Hero image (dr-sayuj-krishnan-portrait-sm.jpg)",
-  "bottleneck_identified": "The ScrubEngine preloads 190 frames for the Three.js Hero animation shortly after the initial load. It uses `setTimeout(..., 100)` to trigger the download of the remaining 186 images. This floods the network and main thread right at hydration, severely harming INP (Interaction to Next Paint) and potentially delaying other critical resources like LCP images if network congestion occurs.",
-  "fix_applied": "Updated `preload()` in `app/components/scrollytelling/ScrubEngine.ts` to defer `_loadRemainingFrames` until the browser is idle using `requestIdleCallback` (with a 2000ms `setTimeout` fallback).",
-  "expected_improvement": "Massively improved INP by removing main thread congestion during hydration and avoiding immediate network congestion that competes with LCP assets.",
-  "how_to_verify": "1. Run `pnpm dev`. 2. Open `http://localhost:3000`. 3. Open Network tab and Performance tab. 4. Verify that the massive burst of `ezgif-frame-*.jpg` downloads doesn't happen until the browser is idle (or 2 seconds later). 5. Run a Lighthouse performance audit."
+  "page_type": "Service",
+  "suspected_lcp_element": "YouTube iframe",
+  "bottleneck_identified": "The `minimally-invasive-spine-surgery` service page embedded a YouTube iframe without `loading=\"lazy\"`. This caused immediate network congestion and heavy third-party script execution during initial page load, delaying LCP and severely blocking the main thread (harming INP).",
+  "fix_applied": "Added `loading=\"lazy\"` to the YouTube `<iframe ...>` inside `app/services/minimally-invasive-spine-surgery/page.tsx`.",
+  "expected_improvement": "Directly improves LCP and INP metrics on this service page by deferring the download and execution of the heavy YouTube player until the user scrolls near the video section, freeing up the main thread during initial page load.",
+  "how_to_verify": "1. Run `pnpm dev`. 2. Open `http://localhost:3000/services/minimally-invasive-spine-surgery`. 3. Open Network tab and Performance tab. 4. Verify that the YouTube assets (like `base.js`, `player_ias.vflset/en_US/base.js`) and iframe document are not downloaded immediately upon page load, but only when you scroll down to the 'Watch: Endoscopic Discectomy' section. 5. Run a Lighthouse performance audit."
 }
