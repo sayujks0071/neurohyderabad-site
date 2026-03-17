@@ -294,7 +294,7 @@ export default function ServicesPage() {
                   <h4 className="font-semibold text-gray-700 mb-3">MVD and Radiosurgery (TN)</h4>
                   <p className="text-gray-600 mb-4">
                     Advanced treatment for trigeminal neuralgia including microvascular decompression and Gamma Knife radiosurgery.
-                    These procedures offer long-lasting relief for severe facial pain conditions.
+                    These procedures offer long-lasting relief for severe facial pain conditions such as <Link href="/conditions/trigeminal-neuralgia-treatment-hyderabad" className="text-blue-700 hover:underline">trigeminal neuralgia</Link>.
                   </p>
                   <Link href="/conditions/trigeminal-neuralgia-treatment" className="text-blue-600 hover:underline">
                     Learn more about Trigeminal Neuralgia Treatment →
