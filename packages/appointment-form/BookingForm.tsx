@@ -22,7 +22,7 @@ const defaultValues: Partial<BookingFormValues> = {
   email: "",
   contactNumber: "",
   age: "",
-  gender: undefined,
+  gender: "" as any, // Cast to any to bypass strict type check for default placeholder state
   requestedDate: undefined,
   appointmentTime: "",
   reason: "",
