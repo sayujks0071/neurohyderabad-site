@@ -16,6 +16,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { sendPreAppointmentBriefingEmail } from '@/lib/email';
+import crypto from 'crypto';
 
 const resendApiKey = process.env.RESEND_API_KEY?.trim();
 const resend = resendApiKey ? new Resend(resendApiKey) : null;
@@ -74,11 +75,20 @@ export async function POST(request: NextRequest) {
 
 /** GET — Daily cron: send reminders for tomorrow's appointments */
 export async function GET(request: NextRequest) {
-    // Verify Vercel Cron authorization
-  const authHeader = request.headers.get('authorization');
-    if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
-          return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
+  // Verify Vercel Cron authorization securely
+  const authHeader = request.headers.get('authorization') || '';
+  const expectedHeader = `Bearer ${process.env.CRON_SECRET || ''}`;
+
+  if (!authHeader || !process.env.CRON_SECRET) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  const h1 = crypto.createHash("sha256").update(authHeader).digest();
+  const h2 = crypto.createHash("sha256").update(expectedHeader).digest();
+
+  if (!crypto.timingSafeEqual(h1, h2)) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
 
   const audienceId = process.env.RESEND_APPOINTMENTS_AUDIENCE_ID;
             if (!audienceId || !resend) {

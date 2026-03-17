@@ -12,6 +12,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import crypto from 'crypto';
 
 const resendApiKey = process.env.RESEND_API_KEY?.trim();
 const resend = resendApiKey ? new Resend(resendApiKey) : null;
@@ -67,9 +68,18 @@ function getNewsletterHtml(dateStr: string): string {
 }
 
 export async function GET(request: NextRequest) {
-  // Verify Vercel Cron authorization
-  const authHeader = request.headers.get('authorization');
-  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+  // Verify Vercel Cron authorization securely
+  const authHeader = request.headers.get('authorization') || '';
+  const expectedHeader = `Bearer ${process.env.CRON_SECRET || ''}`;
+
+  if (!authHeader || !process.env.CRON_SECRET) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  const h1 = crypto.createHash("sha256").update(authHeader).digest();
+  const h2 = crypto.createHash("sha256").update(expectedHeader).digest();
+
+  if (!crypto.timingSafeEqual(h1, h2)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
