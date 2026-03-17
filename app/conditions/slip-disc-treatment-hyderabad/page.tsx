@@ -14,6 +14,7 @@ import { LocalPathways } from '@/src/components/locations/LocalPathways';
 import TrustProof from '@/app/_components/TrustProof';
 import { patientStories } from '@/src/content/stories';
 import CostTransparencySection from '@/src/components/CostTransparencySection';
+import { getLocationById } from '@/src/data/locations';
 
 const baseMetadata = makeMetadata({
   title: "Slip Disc Treatment Hyderabad | Expert Endoscopic Care",
@@ -460,7 +461,7 @@ export default function SlipDiscTreatmentPage() {
                 Book Appointment Online
               </Link>
               <a
-                href="https://wa.me/919778280044"
+                href={`https://wa.me/${getLocationById('hyderabad')?.whatsapp || '919778280044'}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-green-500 text-white px-6 py-3 rounded-full hover:-translate-y-1 hover:shadow-lg transition-all text-center font-semibold flex items-center justify-center gap-2"
@@ -469,10 +470,10 @@ export default function SlipDiscTreatmentPage() {
                 Chat on WhatsApp
               </a>
               <a
-                href="tel:+919778280044"
+                href={`tel:${getLocationById('hyderabad')?.telephone || '+919778280044'}`}
                 className="bg-white border-2 border-slate-200 text-slate-600 px-6 py-3 rounded-full hover:bg-slate-50 hover:border-slate-300 transition-all text-center font-semibold"
               >
-                Call: +91 9778280044
+                Call: {getLocationById('hyderabad')?.telephone || '+91 9778280044'}
               </a>
             </div>
           </div>
@@ -481,7 +482,7 @@ export default function SlipDiscTreatmentPage() {
             <NAP variant="default" showEmail={false} />
             <div className="mt-4 pt-3 border-t">
               <a
-                href="https://maps.google.com/?q=Yashoda+Hospitals+Malakpet"
+                href={getLocationById('hyderabad')?.directions_url || "https://maps.google.com/?q=Yashoda+Hospitals+Malakpet"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-600 hover:text-blue-800 font-medium flex items-center gap-1 text-sm"
