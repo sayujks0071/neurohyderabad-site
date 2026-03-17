@@ -386,6 +386,27 @@ export default function AIStreamingChat({
             </div>
           )}
 
+          {/* Booking Action prompts after interaction */}
+          {messages.length > 2 && !isLoading && (
+            <div className="mb-3 px-2 flex flex-wrap gap-2 justify-center">
+              <a
+                href="/appointments"
+                className="flex items-center gap-1.5 px-4 py-2 bg-[var(--color-primary-600)] text-white text-xs font-semibold rounded-full hover:bg-[var(--color-primary-700)] transition-colors shadow-sm"
+              >
+                <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+                Book OPD Consultation
+              </a>
+              <a
+                href="https://wa.me/919778280044?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20with%20Dr.%20Sayuj."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 px-4 py-2 bg-[#25D366] text-white text-xs font-semibold rounded-full hover:bg-[#128C7E] transition-colors shadow-sm"
+              >
+                WhatsApp Us
+              </a>
+            </div>
+          )}
+
           {files && files.length > 0 && (
             <div className="mb-2">
               <Attachments variant="inline">

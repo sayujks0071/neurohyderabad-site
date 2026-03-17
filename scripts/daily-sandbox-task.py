@@ -101,9 +101,14 @@ def analyze_page(url, response, response_time):
         recommendations.append(f"Found {len(images_without_alt)} images without alt text. Add alt text for better accessibility and SEO.")
 
     # --- OPD Conversion specific checks ---
-    has_booking_cta = "book appointment" in response.text.lower() or "schedule consultation" in response.text.lower() or "book now" in response.text.lower()
-    has_internal_booking_link = 'href="/appointments"' in response.text or "href='/appointments'" in response.text
-    has_whatsapp_cta = "wa.me" in response.text or "api.whatsapp.com" in response.text or "whatsapp" in response.text.lower()
+    text_lower = response.text.lower()
+    has_booking_cta = "book appointment" in text_lower or "schedule consultation" in text_lower or "book now" in text_lower or "request phone confirmation" in text_lower
+    has_internal_booking_link = 'href="/appointments"' in text_lower or "href='/appointments'" in text_lower
+    has_whatsapp_cta = "wa.me" in text_lower or "api.whatsapp.com" in text_lower or "whatsapp" in text_lower
+
+    # --- Chat Widget specific checks ---
+    has_chat_widget = "aistreamingchat" in text_lower or "floatingchatwidget" in text_lower or "dr. sayuj's ai assistant" in text_lower
+    has_sandbox_integration = "openclaw" in text_lower or "sandbox" in text_lower
 
     if not has_booking_cta:
         recommendations.append("Missing Booking CTA (e.g. 'Book Appointment'). Crucial for OPD conversion.")
@@ -111,6 +116,8 @@ def analyze_page(url, response, response_time):
         recommendations.append("Missing internal link to /appointments. Crucial for patient navigation.")
     if not has_whatsapp_cta:
         recommendations.append("Missing WhatsApp CTA link. Patients prefer instant messaging options.")
+    if not has_chat_widget:
+        recommendations.append("Missing FloatingChatWidget or AI Assistant on this page. Adding it could increase patient engagement.")
 
     return {
         "url": url,
@@ -128,7 +135,9 @@ def analyze_page(url, response, response_time):
         "conversion_data": {
             "has_booking_cta": has_booking_cta,
             "has_internal_booking_link": has_internal_booking_link,
-            "has_whatsapp_cta": has_whatsapp_cta
+            "has_whatsapp_cta": has_whatsapp_cta,
+            "has_chat_widget": has_chat_widget,
+            "has_sandbox_integration": has_sandbox_integration
         },
         "recommendations": recommendations
     }
