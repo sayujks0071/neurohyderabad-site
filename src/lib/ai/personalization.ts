@@ -57,7 +57,7 @@ export async function personalizeContent(
 
   try {
     const { object } = await generateObject({
-      model: getTextModel(),
+      model: getTextModel(undefined, { cache: true }),
       schema: jsonSchema({
         type: 'object',
         properties: {

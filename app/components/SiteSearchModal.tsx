@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { SearchItem } from "@/src/data/searchIndex";
+import { Shimmer } from "@/src/components/ai-elements/shimmer";
 
 interface SiteSearchModalProps {
   onClose: () => void;
@@ -202,7 +203,7 @@ export default function SiteSearchModal({ onClose }: SiteSearchModalProps) {
             </div>
           ) : isLoading && results.length === 0 ? (
             <div className="px-4 py-8 text-center text-sm text-[var(--color-text-secondary)]">
-              <p>Thinking...</p>
+              <Shimmer as="p">Thinking...</Shimmer>
             </div>
           ) : results.length === 0 ? (
             <p className="px-4 py-8 text-center text-sm text-[var(--color-text-secondary)]">
