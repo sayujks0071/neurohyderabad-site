@@ -11,7 +11,7 @@ import {
   NodeTitle,
 } from "@/src/components/ai-elements/node";
 import React, { useEffect } from "react";
-import { useReactFlow, ReactFlowProvider } from "@xyflow/react";
+import { useReactFlow, ReactFlowProvider, Panel, Controls, MiniMap } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import {
   Stethoscope,
@@ -285,7 +285,48 @@ function CanvasWithControls() {
       minZoom={0.2}
       maxZoom={1.5}
       className="opacity-100 transition-opacity duration-500"
-    />
+    >
+      <Panel position="top-right" className="bg-white/90 backdrop-blur-sm p-4 rounded-xl shadow-lg border border-slate-200 w-64">
+        <h3 className="text-sm font-bold text-slate-800 mb-3 border-b border-slate-100 pb-2">Legend</h3>
+        <div className="space-y-3">
+          <div className="flex items-center gap-3">
+            <div className="w-3 h-3 rounded-full bg-slate-400"></div>
+            <span className="text-xs text-slate-600 font-medium">Evaluation / Review</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <div className="w-3 h-3 rounded-full bg-amber-500"></div>
+            <span className="text-xs text-slate-600 font-medium">Warning / Red Flags</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <div className="w-3 h-3 rounded-full bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.5)]"></div>
+            <span className="text-xs text-slate-600 font-medium">Critical Action Required</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <div className="w-3 h-3 rounded-full bg-blue-500"></div>
+            <span className="text-xs text-slate-600 font-medium">Active Treatment</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <div className="w-3 h-3 rounded-full bg-emerald-500"></div>
+            <span className="text-xs text-slate-600 font-medium">Successful Outcome</span>
+          </div>
+        </div>
+      </Panel>
+      <Controls className="bg-white shadow-lg border-slate-200 fill-slate-600" />
+      <MiniMap
+        className="bg-slate-50 border-slate-200 shadow-md rounded-lg overflow-hidden"
+        nodeColor={(node) => {
+          const status = (node.data as any).status;
+          switch (status) {
+            case 'warning': return '#f59e0b';
+            case 'critical': return '#ef4444';
+            case 'active': return '#3b82f6';
+            case 'success': return '#10b981';
+            default: return '#94a3b8';
+          }
+        }}
+        maskColor="rgba(248, 250, 252, 0.7)"
+      />
+    </Canvas>
   );
 }
 
