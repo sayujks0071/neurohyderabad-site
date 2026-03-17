@@ -43,15 +43,27 @@ const AnimatedSubtitleWord: React.FC<{
     [frame, fps, delay, prefersReducedMotion]
   );
 
+  const wordScale = useMemo(() =>
+    prefersReducedMotion ? 1 : spring({
+      frame: frame - delay,
+      fps,
+      from: 0.9,
+      to: 1,
+      durationInFrames: 30,
+      config: { damping: 14 },
+    }),
+    [frame, fps, delay, prefersReducedMotion]
+  );
+
   return (
     <span
       style={{
         opacity: wordOpacity,
-        transform: `translateY(${wordY}px)`,
+        transform: `translateY(${wordY}px) scale(${wordScale})`,
         display: 'inline-block',
       }}
     >
-      {word}
+      {word}&nbsp;
     </span>
   );
 };
@@ -179,7 +191,6 @@ export const WelcomeScene: React.FC<WelcomeSceneProps> = ({ patientName }) => {
               display: 'flex',
               flexWrap: 'wrap',
               justifyContent: 'center',
-              gap: '8px',
               fontFamily: FONTS.primary,
               fontSize: '32px',
               fontWeight: 500,
