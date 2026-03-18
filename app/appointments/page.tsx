@@ -9,6 +9,7 @@ import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
 import BookingHeroContent from "./_components/neuralink/BookingHeroContent";
 import BookingLocationInfo from "./_components/neuralink/BookingLocationInfo";
 import AppointmentFaq from "./_components/AppointmentFaq";
+import BookingCalendarEmbed from "../_components/BookingCalendarEmbed";
 
 export const metadata: Metadata = {
   title: "Book Appointment | Best Neurosurgeon Hyderabad",
@@ -92,6 +93,11 @@ export default function AppointmentsPage() {
         locationInfo={<BookingLocationInfo />}
         faqSection={<AppointmentFaq />}
       />
+
+      <div className="container mx-auto px-4 max-w-4xl mt-12 mb-12">
+        <h2 className="text-3xl font-bold text-center text-slate-800 mb-8">Or Book Directly via Calendar</h2>
+        <BookingCalendarEmbed url="https://cal.com/drsayuj" />
+      </div>
 
       <div className="bg-blue-50/50 py-12 mt-12 border-t border-blue-100">
         <div className="container mx-auto px-4 max-w-4xl text-center">
