@@ -121,7 +121,6 @@ export default function SandboxClient() {
                         <div className="relative flex-1">
                             <input
                                 name="prompt"
-                                aria-label="Ask anything"
                                 className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-2xl px-5 py-4 pr-14 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all placeholder:text-slate-400 text-base"
                                 value={input}
                                 placeholder="Ask anything (e.g., Why is the sky blue?)..."
