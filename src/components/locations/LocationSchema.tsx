@@ -111,6 +111,32 @@ export const LocationSchema: React.FC<LocationSchemaProps> = ({
     }).filter(Boolean)
   } : null;
 
+  // 3. BreadcrumbList Schema
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": siteUrl
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Locations",
+        "item": `${siteUrl}/locations`
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": location.name,
+        "item": `${siteUrl}/${cleanSlug}`
+      }
+    ]
+  };
+
   return (
     <>
       <script
@@ -123,6 +149,10 @@ export const LocationSchema: React.FC<LocationSchemaProps> = ({
           dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(faqSchema) }}
         />
       )}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(breadcrumbSchema) }}
+      />
     </>
   );
 };

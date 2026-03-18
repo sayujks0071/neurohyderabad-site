@@ -189,43 +189,57 @@ async function handleCallTool(name: string, args: any, id: any) {
         });
 
       case 'submit_appointment':
-        const submitResponse = await fetch(`${baseUrl}/api/appointments/submit`, {
-          method: 'POST',
-          headers: { 
-            'Content-Type': 'application/json',
-            'x-booking-source': 'openai-apps-sdk'
-          },
-          body: JSON.stringify({
-            patientName: args.patientName,
-            phone: args.phone,
-            email: args.email || `guest_${Date.now()}@drsayuj.info`, // Fallback for email if not provided
-            age: args.age || "30",
-            gender: args.gender || "other",
-            appointmentDate: args.appointmentDate,
-            appointmentTime: args.appointmentTime,
-            reason: args.reason,
-            painScore: args.painScore !== undefined ? args.painScore : 5,
-            mriScanAvailable: args.mriScanAvailable !== undefined ? args.mriScanAvailable : false
-          })
-        });
-        
-        const submitData = await submitResponse.json();
-        if (submitResponse.ok) {
-          return NextResponse.json({
-            jsonrpc: '2.0',
-            id,
-            result: {
-              success: true,
-              confirmation: submitData.confirmationMessage,
-              content: [{ type: 'text', text: `Appointment request submitted successfully! ${submitData.confirmationMessage}` }]
-            }
+        try {
+          const submitResponse = await fetch(`${baseUrl}/api/appointments/submit`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-booking-source': 'openai-apps-sdk'
+            },
+            body: JSON.stringify({
+              patientName: args.patientName,
+              phone: args.phone,
+              email: args.email || `guest_${Date.now()}@drsayuj.info`, // Fallback for email if not provided
+              age: args.age || "30",
+              gender: args.gender || "other",
+              appointmentDate: args.appointmentDate,
+              appointmentTime: args.appointmentTime,
+              reason: args.reason,
+              painScore: args.painScore !== undefined ? args.painScore : 5,
+              mriScanAvailable: args.mriScanAvailable !== undefined ? args.mriScanAvailable : false
+            })
           });
-        } else {
-          return NextResponse.json({
-            jsonrpc: '2.0',
-            id,
-            error: { code: -32000, message: submitData.error || 'Submission failed' }
-          });
+
+          let submitData: any = {};
+          try {
+            submitData = await submitResponse.json();
+          } catch (e) {
+            submitData = { error: `Failed to parse response. Status: ${submitResponse.status}` };
+          }
+
+          if (submitResponse.ok) {
+            return NextResponse.json({
+              jsonrpc: '2.0',
+              id,
+              result: {
+                success: true,
+                confirmation: submitData.confirmationMessage,
+                content: [{ type: 'text', text: `Appointment request submitted successfully! ${submitData.confirmationMessage || ''}` }]
+              }
+            });
+          } else {
+            return NextResponse.json({
+              jsonrpc: '2.0',
+              id,
+              error: { code: -32000, message: submitData.error || 'Submission failed' }
+            });
+          }
+        } catch (submitError: any) {
+           return NextResponse.json({
+             jsonrpc: '2.0',
+             id,
+             error: { code: -32000, message: `Submission request failed: ${submitError.message}` }
+           });
         }
 
       case 'check_site_health':

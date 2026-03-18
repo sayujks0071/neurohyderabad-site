@@ -10,3 +10,7 @@
 ## 2024-05-15 - Dynamic ARIA Labels for Feedback Buttons
 **Learning:** For interactive buttons that change state without navigating (like "Copy to clipboard"), `title` is often not read reliably by screen readers when state changes.
 **Action:** Used `aria-live="polite"` combined with a dynamic `aria-label={copied ? "Copied" : "Copy"}` to provide immediate, accessible feedback for micro-interactions without using visual toast notifications.
+
+## 2025-03-15 - Add aria-label and aria-busy to interactive loading buttons
+**Learning:** Icon-only interactive buttons (like the `SpeechButton` using the `Volume2` or `Loader2` lucide-react icons) often rely solely on a `title` attribute for accessibility. While `title` provides a tooltip, it is not consistently read by all screen readers. Providing an explicit `aria-label` guarantees that an accessible name is provided. Additionally, when a button has an interactive loading state (e.g., waiting for speech generation), adding `aria-busy={true}` informs assistive technologies that the element is currently updating.
+**Action:** Added `aria-label="Listen to AI analysis"` and `aria-busy={isPlaying}` to the `<button>` in `app/appointments/_components/neuralink/SpeechButton.tsx`.

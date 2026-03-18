@@ -111,12 +111,21 @@ export default function SandboxClient() {
 
                 {/* Input Area */}
                 <div className="p-4 sm:p-6 bg-white border-t border-slate-100 relative z-20">
-                    <form onSubmit={handleSubmit} className="relative flex items-end gap-3">
+                    <form
+                        onSubmit={handleSubmit}
+                        className="relative flex items-end gap-3"
+                        toolname="sandboxAIChat"
+                        tooldescription="Interact with the AI sandbox to test the Vercel AI SDK."
+                        toolautosubmit="false"
+                    >
                         <div className="relative flex-1">
                             <input
+                                name="prompt"
+                                aria-label="Ask anything"
                                 className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-2xl px-5 py-4 pr-14 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all placeholder:text-slate-400 text-base"
                                 value={input}
                                 placeholder="Ask anything (e.g., Why is the sky blue?)..."
+                                aria-label="Ask anything"
                                 onChange={handleInputChange}
                                 disabled={isLoading}
                                 autoFocus
@@ -125,7 +134,6 @@ export default function SandboxClient() {
                         <button
                             disabled={isLoading || !input.trim()}
                             type="submit"
-                            aria-label={isLoading ? "Sending message..." : "Send message"}
                             className="bg-blue-600 hover:bg-blue-700 disabled:bg-slate-200 disabled:text-slate-400 text-white rounded-xl p-4 transition-all duration-200 shadow-sm active:scale-95 shrink-0 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                             aria-label={isLoading ? 'Sending message...' : 'Send message'}
                         >

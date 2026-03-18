@@ -797,6 +797,9 @@ export const PromptInput = ({
         className={cn("w-full", className)}
         onSubmit={handleSubmit}
         ref={formRef}
+        toolname="submitAIPrompt"
+        tooldescription="Submit a prompt to the AI."
+        toolautosubmit="false"
         {...props}
       >
         <InputGroup className="overflow-hidden">{children}</InputGroup>

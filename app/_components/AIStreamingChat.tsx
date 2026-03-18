@@ -9,8 +9,9 @@ import { Confirmation, ConfirmationRequest, ConfirmationAccepted, ConfirmationRe
 import { Attachments, Attachment, AttachmentPreview, AttachmentInfo, AttachmentRemove } from "@/src/components/ai-elements/attachments";
 import { analytics } from "@/src/lib/analytics";
 import { Suggestion, Suggestions } from "@/src/components/ai-elements/suggestion";
-import { CalendarIcon, SearchIcon, StethoscopeIcon, CheckIcon, XIcon } from "lucide-react";
+import { CalendarIcon, SearchIcon, StethoscopeIcon, CheckIcon, XIcon, BookmarkIcon } from "lucide-react";
 import { PromptInput, PromptInputTextarea, PromptInputFooter, PromptInputTools, PromptInputSubmit } from "@/src/components/ai-elements/prompt-input";
+import { Shimmer } from "@/src/components/ai-elements/shimmer";
 
 interface AIStreamingChatProps {
   pageSlug: string;
@@ -91,6 +92,13 @@ export default function AIStreamingChat({
     scrollToBottom();
   }, [messages]);
 
+  useEffect(() => {
+    // Create checkpoint every 5 messages
+    if (messages.length > 0 && messages.length % 5 === 0) {
+      createCheckpoint(messages.length - 1);
+    }
+  }, [messages.length]);
+
   const createCheckpoint = (messageIndex: number) => {
     const isAlreadyCheckpoint = checkpoints.some(cp => cp.messageIndex === messageIndex);
     if (!isAlreadyCheckpoint) {
@@ -128,15 +136,14 @@ export default function AIStreamingChat({
   };
 
   const quickActions = [
+    "Where is the clinic located?",
+    "Tell me about endoscopic spine surgery",
     "I need to book a new consultation",
     "I want to reschedule my appointment",
     "I have severe headache and dizziness",
     "I need information about spine surgery",
     "What are your clinic hours?",
-    "Tell me about endoscopic spine surgery",
-    "Cost of slip disc surgery",
-    "Book an appointment",
-    "How does machine learning work?"
+    "Cost of slip disc surgery"
   ];
 
   return (
@@ -181,8 +188,41 @@ export default function AIStreamingChat({
               .map(part => (part as any).text)
               .join('');
 
+            const checkpoint = checkpoints.find(cp => cp.messageIndex === index);
+
+            // Find tool invocations that need approval
+            const toolInvocations = message.parts?.filter(
+              (part) => part.type === "tool-invocation" || part.type.startsWith("tool-")
+            ) as any[];
+
+            // Find reasoning parts
+            const reasoningParts = message.parts?.filter(
+              (part) => part.type === "reasoning"
+            ) as any[];
+
             return (
               <Fragment key={message.id}>
+              {reasoningParts?.length > 0 && (
+                <div className="flex justify-start mb-2">
+                  <ChainOfThought>
+                    <ChainOfThoughtHeader>
+                      <span className="text-sm font-medium text-[var(--color-primary-600)]">AI Clinical Analysis</span>
+                    </ChainOfThoughtHeader>
+                    <ChainOfThoughtContent>
+                      {reasoningParts.map((part, index) => (
+                        <ChainOfThoughtStep
+                          key={`reasoning-${index}`}
+                          icon={StethoscopeIcon}
+                          label="Analysis step"
+                          description={(part as any).text}
+                          status="complete"
+                        />
+                      ))}
+                    </ChainOfThoughtContent>
+                  </ChainOfThought>
+                </div>
+              )}
+
               <div
                 className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
@@ -193,9 +233,86 @@ export default function AIStreamingChat({
                       : 'bg-[var(--color-background)] text-[var(--color-text-primary)]'
                   }`}
                 >
-                  <p className="text-sm whitespace-pre-wrap">{textContent}</p>
+                  {textContent && <p className="text-sm whitespace-pre-wrap">{textContent}</p>}
 
-                  {((message as any).experimental_attachments || message.parts?.filter((p: any) => (p.type as string) === "file" || (p.type as string) === "image")).length > 0 && (
+                  {message.parts?.map((part: any, partIndex: number) => {
+                    if (part.type === 'tool-invocation') {
+                      const isApproval = part.state === 'approval-requested' || part.state === 'approval-responded' || part.state === 'output-denied' || part.state === 'output-available';
+                      const needsApproval = part.toolName === 'bookAppointment';
+
+                      if (needsApproval && part.approval) {
+                        return (
+                          <div key={partIndex} className="mt-4">
+                            <Confirmation approval={part.approval} state={part.state}>
+                              <ConfirmationRequest>
+                                The AI wants to book an appointment.
+                                <br />
+                                Do you approve this action?
+                              </ConfirmationRequest>
+                              <ConfirmationAccepted>
+                                <CheckIcon className="size-4" />
+                                <span>You approved the appointment booking.</span>
+                              </ConfirmationAccepted>
+                              <ConfirmationRejected>
+                                <XIcon className="size-4" />
+                                <span>You rejected the appointment booking.</span>
+                              </ConfirmationRejected>
+                              <ConfirmationActions>
+                                <ConfirmationAction
+                                  variant="outline"
+                                  onClick={() =>
+                                    addToolApprovalResponse({
+                                      id: part.toolCallId,
+                                      approved: false,
+                                    })
+                                  }
+                                >
+                                  Reject
+                                </ConfirmationAction>
+                                <ConfirmationAction
+                                  variant="default"
+                                  onClick={() =>
+                                    addToolApprovalResponse({
+                                      id: part.toolCallId,
+                                      approved: true,
+                                    })
+                                  }
+                                >
+                                  Approve
+                                </ConfirmationAction>
+                              </ConfirmationActions>
+                            </Confirmation>
+                          </div>
+                        );
+                      } else {
+                        return (
+                          <div key={partIndex} className="mt-4">
+                            <ChainOfThought>
+                              <ChainOfThoughtHeader>
+                                Executing {part.toolName}...
+                              </ChainOfThoughtHeader>
+                              <ChainOfThoughtContent>
+                                <ChainOfThoughtStep
+                                  icon={SearchIcon}
+                                  label={`Tool: ${part.toolName}`}
+                                  description="Running tool execution..."
+                                  status={part.state === 'result' ? 'complete' : 'active'}
+                                />
+                                {part.state === 'result' && (
+                                  <div className="mt-2 text-xs text-[var(--color-text-secondary)] opacity-70">
+                                    Tool execution finished.
+                                  </div>
+                                )}
+                              </ChainOfThoughtContent>
+                            </ChainOfThought>
+                          </div>
+                        );
+                      }
+                    }
+                    return null;
+                  })}
+
+                  {((message as any).experimental_attachments || message.parts?.filter((p: any) => (p.type as string) === "file" || (p.type as string) === "image"))?.length > 0 && (
                     <div className="mt-2">
                       <Attachments variant="list">
                         {((message as any).experimental_attachments || message.parts?.filter((p: any) => (p.type as string) === "file" || (p.type as string) === "image")).map((file: any, i: number) => (
@@ -206,8 +323,33 @@ export default function AIStreamingChat({
                       </Attachments>
                     </div>
                   )}
+
+                  {message.role !== 'user' && !checkpoints.some(cp => cp.messageIndex === index) && (
+                    <div className="mt-2 flex justify-end">
+                      <button
+                        onClick={() => createCheckpoint(index)}
+                        className="text-xs text-[var(--color-primary-500)] hover:underline opacity-50 hover:opacity-100 flex items-center"
+                      >
+                        <BookmarkIcon className="size-3 mr-1" /> Save Checkpoint
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
+
+              {checkpoints.some(cp => cp.messageIndex === index) && (
+                <div className="my-4">
+                  <Checkpoint>
+                    <CheckpointIcon />
+                    <CheckpointTrigger
+                      onClick={() => restoreToCheckpoint(index)}
+                      tooltip="Restore to this point in conversation"
+                    >
+                      Restore checkpoint
+                    </CheckpointTrigger>
+                  </Checkpoint>
+                </div>
+              )}
               </Fragment>
             );
             })}
@@ -215,7 +357,7 @@ export default function AIStreamingChat({
             {isLoading && (
               <div className="flex justify-start items-center gap-2 p-2 pl-4 text-slate-500">
                 <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-[var(--color-primary-500)]"></div>
-                <div className="text-sm font-medium text-[var(--color-primary-600)]">AI is analyzing your request...</div>
+                <Shimmer className="text-sm font-medium text-[var(--color-primary-600)]">AI is analyzing your request...</Shimmer>
               </div>
             )}
             {error && (
@@ -226,25 +368,45 @@ export default function AIStreamingChat({
             <div ref={messagesEndRef} className="h-px" />
         </div>
 
-        {/* Quick Actions - Only show if just initial message */}
-        {messages.length <= 1 && (
-          <div className="p-4">
-            <p className="text-sm text-[var(--color-text-secondary)] mb-3 font-semibold">Quick actions:</p>
-            <Suggestions>
-              {quickActions.map((action, index) => (
-                <Suggestion
-                  key={index}
-                  onClick={() => handleQuickAction(action)}
-                  suggestion={action}
-                  className="text-xs border-[var(--color-primary-500)] text-[var(--color-primary-700)] hover:bg-[var(--color-primary-100)] transition-colors disabled:opacity-50 whitespace-nowrap"
-                />
-              ))}
-            </Suggestions>
-          </div>
-        )}
-
         {/* Input Form */}
-        <div className="p-4 border-t border-[var(--color-border)]">
+        <div className="p-4 border-t border-[var(--color-border)] flex flex-col gap-4">
+          {/* Quick Actions - Only show if just initial message */}
+          {messages.length <= 1 && (
+            <div className="mb-2">
+              <Suggestions>
+                {quickActions.map((action, index) => (
+                  <Suggestion
+                    key={index}
+                    onClick={() => handleQuickAction(action)}
+                    suggestion={action}
+                    className="text-xs border-[var(--color-primary-500)] text-[var(--color-primary-700)] hover:bg-[var(--color-primary-100)] transition-colors disabled:opacity-50 whitespace-nowrap"
+                  />
+                ))}
+              </Suggestions>
+            </div>
+          )}
+
+          {/* Booking Action prompts after interaction */}
+          {messages.length > 2 && !isLoading && (
+            <div className="mb-3 px-2 flex flex-wrap gap-2 justify-center">
+              <a
+                href="/appointments"
+                className="flex items-center gap-1.5 px-4 py-2 bg-[var(--color-primary-600)] text-white text-xs font-semibold rounded-full hover:bg-[var(--color-primary-700)] transition-colors shadow-sm"
+              >
+                <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+                Book OPD Consultation
+              </a>
+              <a
+                href="https://wa.me/919778280044?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20with%20Dr.%20Sayuj."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 px-4 py-2 bg-[#25D366] text-white text-xs font-semibold rounded-full hover:bg-[#128C7E] transition-colors shadow-sm"
+              >
+                WhatsApp Us
+              </a>
+            </div>
+          )}
+
           {files && files.length > 0 && (
             <div className="mb-2">
               <Attachments variant="inline">

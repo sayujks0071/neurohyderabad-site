@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import Link from "next/link";
 import type { ConditionResource } from "@/src/data/conditionsIndex";
 import { groupConditionsByLetter } from "@/src/data/conditionsIndex";
@@ -12,7 +12,19 @@ interface ConditionsExplorerProps {
 export default function ConditionsExplorer({
   conditions,
 }: ConditionsExplorerProps) {
+  const [inputValue, setInputValue] = useState("");
   const [search, setSearch] = useState("");
+
+  // Debounce search input to improve INP by avoiding heavy filtering and re-renders on every keystroke
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setSearch(inputValue);
+    }, 300);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [inputValue]);
 
   const filtered = useMemo(() => {
     const query = search.trim().toLowerCase();
@@ -48,15 +60,18 @@ export default function ConditionsExplorer({
           <input
             id="condition-search"
             type="search"
-            value={search}
-            onChange={(event) => setSearch(event.target.value)}
+            value={inputValue}
+            onChange={(event) => setInputValue(event.target.value)}
             placeholder="Type a condition, symptom, or keyword (e.g., sciatica, epilepsy)"
             className="ml-3 w-full border-none text-sm text-gray-700 placeholder:text-gray-400 focus:outline-none"
           />
-          {search && (
+          {inputValue && (
             <button
               type="button"
-              onClick={() => setSearch("")}
+              onClick={() => {
+                setInputValue("");
+                setSearch("");
+              }}
               className="rounded-full border border-gray-200 px-2 py-1 text-xs text-gray-500 transition hover:border-gray-300 hover:text-gray-700"
             >
               Clear

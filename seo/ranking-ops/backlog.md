@@ -87,3 +87,7 @@
 ## 2026-03-10
 - **Opportunity Identified:** Competitors use extensive video testimonials and patient stories on doctor profiles.
 - **Opportunity Identified:** Aggregators (Practo, Lybrate) have strong review Schema with aggregateRatings.
+
+## 2026-03-16
+- **Opportunity Identified:** Update FAQ sections across all specific service pages to answer exact query strings mapped in Search Console (e.g., "Is keyhole spine surgery painful").
+- **Schema:** Ensure `MedicalProcedure` schema on service pages includes specific procedure codes (CPT/ICD-10) where applicable to enhance rich snippets.
