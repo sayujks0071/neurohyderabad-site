@@ -152,6 +152,96 @@ export default function SpinalStenosisPage() {
       </Section>
 
       <Section background="gray">
+        <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Causes & Risk Factors</h2>
+        <div className="max-w-4xl mx-auto mb-12">
+          <p className="text-gray-700 text-lg mb-6 text-center">
+            Lumbar canal stenosis is most often a gradual, age-related condition. As we age, the components of our spine undergo changes that can crowd the spinal canal.
+          </p>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
+              <h3 className="text-xl font-bold text-blue-800 mb-3">Common Causes</h3>
+              <ul className="space-y-3">
+                <li className="flex gap-3 items-start text-gray-700">
+                  <span className="mt-1.5 w-1.5 h-1.5 bg-blue-600 rounded-full flex-shrink-0" />
+                  <span><strong>Osteoarthritis:</strong> Wear and tear of the spinal joints can lead to bone spurs that grow into the spinal canal.</span>
+                </li>
+                <li className="flex gap-3 items-start text-gray-700">
+                  <span className="mt-1.5 w-1.5 h-1.5 bg-blue-600 rounded-full flex-shrink-0" />
+                  <span><strong>Thickened Ligaments:</strong> The ligaments that hold the bones of the spine together can become stiff and thick over time, taking up space in the canal.</span>
+                </li>
+                <li className="flex gap-3 items-start text-gray-700">
+                  <span className="mt-1.5 w-1.5 h-1.5 bg-blue-600 rounded-full flex-shrink-0" />
+                  <span><strong>Herniated Discs:</strong> The soft inner material of a disc can leak out and press on the spinal cord or nerves.</span>
+                </li>
+              </ul>
+            </div>
+            <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
+              <h3 className="text-xl font-bold text-blue-800 mb-3">Risk Factors</h3>
+              <ul className="space-y-3">
+                <li className="flex gap-3 items-start text-gray-700">
+                  <span className="mt-1.5 w-1.5 h-1.5 bg-blue-600 rounded-full flex-shrink-0" />
+                  <span><strong>Age:</strong> Most common in individuals over 50 years old.</span>
+                </li>
+                <li className="flex gap-3 items-start text-gray-700">
+                  <span className="mt-1.5 w-1.5 h-1.5 bg-blue-600 rounded-full flex-shrink-0" />
+                  <span><strong>Genetics:</strong> Some people are born with a smaller spinal canal, leading to symptoms earlier in life.</span>
+                </li>
+                <li className="flex gap-3 items-start text-gray-700">
+                  <span className="mt-1.5 w-1.5 h-1.5 bg-blue-600 rounded-full flex-shrink-0" />
+                  <span><strong>Past Spinal Injury/Surgery:</strong> Trauma or previous procedures can accelerate degenerative changes.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      <Section>
+        <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Diagnosis & Evaluation</h2>
+        <div className="max-w-4xl mx-auto mb-8 bg-blue-50 border border-blue-100 rounded-2xl p-8 shadow-sm">
+          <p className="text-gray-700 mb-6">
+            Accurate diagnosis is crucial to rule out other conditions like peripheral neuropathy or vascular issues. Dr. Sayuj Krishnan uses a combination of clinical exams and advanced imaging.
+          </p>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <h3 className="text-xl font-bold text-blue-900 mb-4">Diagnostic Tests We Use</h3>
+              <ul className="space-y-3">
+                <li className="flex items-start text-gray-700">
+                  <span className="text-blue-600 font-bold mr-2">•</span>
+                  <span><strong>MRI Spine:</strong> The gold standard to visualize nerves, discs, and ligaments, showing exactly where the compression occurs.</span>
+                </li>
+                <li className="flex items-start text-gray-700">
+                  <span className="text-blue-600 font-bold mr-2">•</span>
+                  <span><strong>Dynamic X-Rays:</strong> Taken while bending forward and backward to check for spinal instability (e.g., spondylolisthesis).</span>
+                </li>
+                <li className="flex items-start text-gray-700">
+                  <span className="text-blue-600 font-bold mr-2">•</span>
+                  <span><strong>CT Scan:</strong> Often used if an MRI cannot be performed or to get a detailed view of bone spurs.</span>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-xl font-bold text-blue-900 mb-4">Clinical Evaluation</h3>
+              <ul className="space-y-3">
+                <li className="flex items-start text-gray-700">
+                  <span className="text-green-600 font-bold mr-2">✓</span>
+                  <span>Testing muscle strength and reflexes.</span>
+                </li>
+                <li className="flex items-start text-gray-700">
+                  <span className="text-green-600 font-bold mr-2">✓</span>
+                  <span>Assessing your walking posture and distance limits.</span>
+                </li>
+                <li className="flex items-start text-gray-700">
+                  <span className="text-green-600 font-bold mr-2">✓</span>
+                  <span>Checking for sensory changes in the legs and feet.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      <Section background="gray">
         <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Treatment Options</h2>
 
         <div className="grid md:grid-cols-2 gap-8">
