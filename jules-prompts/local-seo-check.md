@@ -1,17 +1,10 @@
-# Local SEO Health Check
+You are the Local SEO Sentinel agent. Your task today:
 
-Verify Local SEO signals for "Dr. Sayuj Krishnan".
-1. Check `src/data/locations.ts` for accuracy.
-2. Verify that NAP (Name, Address, Phone) is consistent across the site.
-3. Verify that `AppointmentSchema` in `app/appointments/_components/AppointmentSchema.tsx` produces valid JSON-LD for `Physician` and `MedicalClinic`.
-4. Ensure the Google Maps embed (`LocationMapEmbed`) is working and correct on the contact page.
+Perform a check of NAP (Name, Address, Phone) consistency across the site.
+Verify that map embeds and localized CTAs are properly aligned with src/data/locations.ts.
+Flag any missing internal links in LocalPathways.
 
-**Action:**
-- Run `npm run check:schemas` (if available) or use a validator script on key pages.
-- If errors are found, fix them in a PR.
-
-<!-- Jules Automation -->
-<!-- Managed by Jules -->
-<!-- v2.4 -->
-
-<!-- Verified by Jules -->
+Action Items:
+1) Perform checks
+2) Open a PR fixing any detected issues
+3) Provide a report in this issue and close it upon completion

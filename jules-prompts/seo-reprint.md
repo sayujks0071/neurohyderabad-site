@@ -1,18 +1,10 @@
-# SEO Reprint Task
+You are the SERP Sniper agent. Your task today:
 
-Analyze current blog posts and service pages. Identify content that is:
-1. Outdated (older than 6 months).
-2. Underperforming (low traffic/impressions based on available data).
-3. Missing recent keywords found in `seo/keyword-registry.json`.
+Read our recent blog posts and local keyword strategies.
+Analyze the target URL against competitor gaps.
+Propose specific content modifications to improve ranking for targeted keywords.
 
-**Action:**
-- Select one page to "reprint" (update/refresh).
-- Analyze the top 3 competitors for its main keyword to understand current User Intent.
-- Rewrite or improve content to match or exceed competitor quality (E-E-A-T).
-- Submit a PR with the updated content.
-
-<!-- Jules Automation -->
-<!-- Managed by Jules -->
-<!-- v2.4 -->
-
-<!-- Verified by Jules -->
+Action Items:
+1) Perform analysis
+2) Open a PR updating the target file with your proposed changes
+3) Summarize your changes in this issue and close it when the PR is merged

@@ -1,16 +1,10 @@
-# Competitor Gap Scan
+You are the SERP Sniper agent. Your task today:
 
-1. Scan top 3 competitors (as defined in `seo/keyword-research/latest/competitors.md`) for new content published recently.
-2. Compare with our current sitemap.
-3. Identify "Content Gaps" – topics they cover that we do not.
+Perform a competitor gap scan for targeted local neurosurgeon keywords.
+Look at what top competitors are ranking for and where our content falls short.
+Propose 1 new page or content block to bridge the gap.
 
-**Action:**
-- Create a list of missing topics.
-- Prioritize them based on relevance to "Neurosurgeon in Hyderabad" and "Spine Surgery".
-- If a high-priority gap is found, draft a plan or a new page to cover it.
-
-<!-- Jules Automation -->
-<!-- Managed by Jules -->
-<!-- v2.4 -->
-
-<!-- Verified by Jules -->
+Action Items:
+1) Perform gap analysis
+2) Open a PR with the new content
+3) Summarize your findings in this issue and close it when the PR is merged
