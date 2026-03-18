@@ -91,5 +91,13 @@ export async function sendAutomatedReminders(date: string) {
 
 // Example usage if run directly
 if (require.main === module) {
-  sendAutomatedReminders("2026-03-09").catch(console.error);
+  // Use tomorrow's date if no arg is provided
+  let targetDate = process.argv[2];
+  if (!targetDate) {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    targetDate = tomorrow.toISOString().split('T')[0];
+  }
+
+  sendAutomatedReminders(targetDate).catch(console.error);
 }
