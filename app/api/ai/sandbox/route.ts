@@ -41,12 +41,11 @@ export async function POST(req: Request) {
     const { getTextModel } = await import('@/src/lib/ai/gateway');
     const textModel = mappedModel !== undefined ? getTextModel(mappedModel) : getTextModel();
 
-    try {
-      const result = streamText({
-        model: textModel,
-        system: 'You are an informative, empathetic, and professional assistant for Dr. Sayuj Krishnan, a neurosurgeon in Hyderabad. Include a medical disclaimer emphasizing that the AI provides general educational information, not professional medical advice, and encourage users to book a clinical consultation.',
-        messages: messages,
-      });
+    const result = streamText({
+      model: textModel,
+      messages: messages,
+      system: "You are an informative, empathetic, and professional assistant for Dr. Sayuj Krishnan, a neurosurgeon in Hyderabad. Your responses must include a medical disclaimer emphasizing that you provide general educational information, not professional medical advice, and you should encourage users to book a clinical consultation.",
+    });
 
       return result.toTextStreamResponse();
     } catch (streamingError) {
