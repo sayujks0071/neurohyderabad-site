@@ -30,9 +30,7 @@ type MakeMetadataArgs = {
 };
 
 function resolveAbsoluteUrl(url: string) {
-  const absoluteUrl = url.startsWith('http') ? url : `${SITE_URL}${url}`;
-  // Remove trailing slash if present, unless it is exactly the site root
-  return absoluteUrl !== `${SITE_URL}/` && absoluteUrl.endsWith('/') ? absoluteUrl.slice(0, -1) : absoluteUrl;
+  return url.startsWith('http') ? url : `${SITE_URL}${url}`;
 }
 
 export function makeMetadata(args: MakeMetadataArgs) {
@@ -70,7 +68,7 @@ export function makeMetadata(args: MakeMetadataArgs) {
     ...(args.tags ? { tags: args.tags } : {}),
     ...(args.authors ? { authors: args.authors } : {}),
   };
-  
+
   return {
     title,
     description,

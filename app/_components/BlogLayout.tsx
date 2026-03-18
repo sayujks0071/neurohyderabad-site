@@ -103,6 +103,16 @@ function getCTAComponent(ctaType?: CTAType, overrideText?: string) {
  * Generate JSON-LD schema for blog post
  */
 function generateBlogSchema(post: BlogPost) {
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE_URL}/blog/` },
+      { '@type': 'ListItem', position: 3, name: post.title, item: `${SITE_URL}/blog/${post.slug}/` }
+    ]
+  };
+
   const baseSchema = {
     '@context': 'https://schema.org',
     '@type': post.schemaType || 'BlogPosting',
@@ -140,6 +150,7 @@ function generateBlogSchema(post: BlogPost) {
     return {
       '@context': 'https://schema.org',
       '@graph': [
+        breadcrumbSchema,
         baseSchema,
         {
           '@type': 'FAQPage',
@@ -156,7 +167,10 @@ function generateBlogSchema(post: BlogPost) {
     };
   }
 
-  return baseSchema;
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [breadcrumbSchema, baseSchema],
+  };
 }
 
 export default function BlogLayout({ post, content, className = '' }: BlogLayoutProps) {
