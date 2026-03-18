@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import Section from "../_components/Section";
-import Card from "../_components/Card";
 // import { createContainer } from 'almostnode';
 
 export default function LabAnalysisPage() {
@@ -87,7 +86,7 @@ export default function LabAnalysisPage() {
 
       <Section className="py-12">
         <div className="max-w-3xl mx-auto">
-          <Card className="p-8 shadow-xl bg-white rounded-xl">
+          <div className="relative bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
             <div className="mb-8">
               <label className="block text-gray-700 text-sm font-bold mb-2">
                 Upload Lab Report (PDF)
@@ -116,10 +115,11 @@ export default function LabAnalysisPage() {
               <button
                 onClick={handleAnalyze}
                 disabled={!file || analyzing}
-                className={`w-full py-4 rounded-lg font-bold text-lg text-white transition-all ${
+                aria-label="Analyze Report"
+                className={`w-full py-4 rounded-xl font-bold text-lg text-white transition-all duration-300 ${
                   !file || analyzing
-                    ? "bg-gray-400 cursor-not-allowed"
-                    : "bg-blue-600 hover:bg-blue-700 shadow-lg hover:shadow-xl"
+                    ? "bg-slate-300 text-slate-500 cursor-not-allowed"
+                    : "bg-gradient-to-r from-blue-600 to-indigo-600 shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-[0.98]"
                 }`}
               >
                 {analyzing ? (
@@ -135,7 +135,7 @@ export default function LabAnalysisPage() {
                 )}
               </button>
             </div>
-          </Card>
+          </div>
 
           <div aria-live="polite" aria-atomic="true" className="flex flex-col">
             {error && (
@@ -153,7 +153,7 @@ export default function LabAnalysisPage() {
                   </div>
                 )}
 
-                <Card className="p-8 shadow-xl bg-white border-t-4 border-blue-500 rounded-xl animate-fade-in">
+                <div className="relative bg-white/70 backdrop-blur-lg border-t-4 border-t-blue-500 border-x border-b border-x-white/20 border-b-white/20 shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 animate-fade-in">
                   <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b pb-4">Analysis Result</h2>
 
                   {result.analysis?.plainEnglishSummary && (
@@ -192,7 +192,7 @@ export default function LabAnalysisPage() {
                           </div>
                       )}
                   </div>
-                </Card>
+                </div>
 
                 <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg">
                   <div className="flex">
