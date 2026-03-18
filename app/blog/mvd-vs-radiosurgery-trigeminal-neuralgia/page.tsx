@@ -476,6 +476,11 @@ export default function MVDvsRadiosurgeryPage() {
               "name": "Dr Sayuj Krishnan",
               "url": `${SITE_URL}/about/`
             },
+            "reviewer": {
+              "@type": "Person",
+              "name": "Dr Sayuj Krishnan",
+              "url": `${SITE_URL}/about/`
+            },
             "datePublished": "2025-10-02",
             "dateModified": "2025-10-02",
             "mainEntityOfPage": {

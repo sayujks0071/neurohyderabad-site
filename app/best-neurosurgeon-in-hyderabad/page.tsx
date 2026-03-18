@@ -9,7 +9,7 @@ import { LocalPathways } from "@/src/components/locations/LocalPathways";
 
 export const metadata: Metadata = {
   title: "Best Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan | Yashoda Hospital",
-  description: "Looking for the best neurosurgeon in Hyderabad? Dr. Sayuj Krishnan at Yashoda Hospital specializes in minimally invasive spine & brain surgery. 1,000+ cases. Book now.",
+  description: "Looking for the best neurosurgeon in Hyderabad? Dr. Sayuj Krishnan specializes in minimally invasive spine & brain surgery. 1,000+ cases. Book now.",
   keywords: [
     "best neurosurgeon in hyderabad",
     "best spine surgeon hyderabad",

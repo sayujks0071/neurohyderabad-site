@@ -27,6 +27,7 @@ export default function Page() {
       name: 'Brain Tumor Surgery Cost Hyderabad | Transparent Pricing',
       description: 'Brain tumor surgery cost breakdown, insurance coverage, and payment options with Dr. Sayuj Krishnan at Yashoda Hospital Malakpet.',
       author: { '@id': 'https://www.drsayuj.info/#physician' },
+      reviewer: { '@id': 'https://www.drsayuj.info/#physician' },
       publisher: { '@id': 'https://www.drsayuj.info/#physician' },
       datePublished: '2025-01-15',
       dateModified: '2025-10-19',

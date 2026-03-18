@@ -7,7 +7,7 @@ import { LocalPathways } from "@/src/components/locations/LocalPathways";
 
 export const metadata: Metadata = {
   title: "Pediatric Neurosurgery Hyderabad | Children's Care",
-  description: "Expert pediatric neurosurgery in Hyderabad with Dr. Sayuj Krishnan. Specializing in children's brain surgery, spine surgery, and neurological conditions with compassionate care.",
+  description: "Expert pediatric neurosurgery in Hyderabad with Dr. Sayuj Krishnan. Specializing in children's brain surgery, spine surgery, and compassionate neurological care.",
   keywords: [
     "pediatric neurosurgeon hyderabad",
     "children brain surgery hyderabad",
