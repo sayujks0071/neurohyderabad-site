@@ -40,19 +40,10 @@ export default function MedicalWebPageSchema({
       "url": SITE_URL
     },
     "about": {
-      "@type": "Physician",
-      "@id": `${SITE_URL}/#physician`,
-      "name": "Dr. Sayuj Krishnan"
+      "@id": `${SITE_URL}/#physician`
     },
     "reviewedBy": {
-      "@type": "Physician",
-      "@id": `${SITE_URL}/#physician`,
-      "name": "Dr. Sayuj Krishnan",
-      "hasCredential": {
-        "@type": "EducationalOccupationalCredential",
-        "credentialCategory": "degree",
-        "name": "DNB Neurosurgery"
-      }
+      "@id": `${SITE_URL}/#physician`
     },
     "lastReviewed": lastReviewed,
     "datePublished": "2024-01-01",
@@ -119,9 +110,7 @@ export default function MedicalWebPageSchema({
       "name": serviceOrCondition,
       "description": description,
       "provider": {
-        "@type": "Physician",
-        "@id": `${SITE_URL}/#physician`,
-        "name": "Dr. Sayuj Krishnan"
+        "@id": `${SITE_URL}/#physician`
       },
       "availableAtOrFrom": {
         "@type": "Hospital",
@@ -149,9 +138,7 @@ export default function MedicalWebPageSchema({
         "@type": "MedicalTherapy",
         "name": "Neurosurgical Treatment",
         "provider": {
-          "@type": "Physician",
-          "@id": `${SITE_URL}/#physician`,
-          "name": "Dr. Sayuj Krishnan"
+          "@id": `${SITE_URL}/#physician`
         }
       }
     };

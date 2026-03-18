@@ -34,6 +34,37 @@ const getHref = (type: 'service' | 'condition', slug: string) => {
   return `/${type}s/${slug}`; // Note plural 'services' / 'conditions'
 };
 
+// Validate that a given slug exists for the specified type
+// This ensures we do not link to pages that don't exist (e.g. 404s).
+// Realistically, in NextJS we could check the file system during build, but here
+// we just check a static array of known slugs. In a real scenario, this list
+// should be generated from reading the app/services and app/conditions directories.
+const KNOWN_SERVICES = [
+  "awake-spine-surgery-hyderabad", "brain-tumor-surgery-hyderabad", "cervical-disc-replacement-hyderabad",
+  "cervical-endoscopic-spine-surgery-hyderabad", "compare-neurosurgeons-hyderabad", "cooled-radiofrequency-ablation-hyderabad",
+  "dr-sayuj-vs-apollo-neuro-icu", "endoscopic-discectomy-hyderabad", "endoscopic-spine-surgery-hyderabad",
+  "epilepsy-surgery-hyderabad", "kims-spine-surgery-second-opinion", "kyphoplasty-vertebroplasty-hyderabad",
+  "lumbar-laminectomy-surgery-hyderabad", "microdiscectomy-surgery-cost-hyderabad", "microdiscectomy-surgery-hyderabad",
+  "minimally-invasive-spine-surgery", "peripheral-nerve-surgery", "peripheral-nerve-surgery-hyderabad",
+  "robotic-spine-surgery-hyderabad", "slip-disc-surgery-cost-hyderabad", "spinal-decompression-surgery-hyderabad",
+  "spinal-fusion", "spinal-fusion-surgery-hyderabad", "spine-surgery-cost-hyderabad", "spine-surgery-hyderabad",
+  "uniportal-endoscopic-spine-surgery-hyderabad"
+];
+
+const KNOWN_CONDITIONS = [
+  "brain-bleed-evacuation-hyderabad", "brain-tumor-surgery-hyderabad", "cervical-myelopathy-decompression-hyderabad",
+  "cervical-radiculopathy-treatment-hyderabad", "degenerative-disc-disease-treatment-hyderabad",
+  "osteoporotic-spine-fracture-hyderabad", "sciatica-pain-treatment-hyderabad", "scoliosis-treatment-hyderabad",
+  "slip-disc-treatment-hyderabad", "spinal-stenosis-treatment-hyderabad", "spine-tumor-surgery-hyderabad",
+  "spondylolisthesis-treatment-hyderabad", "trigeminal-neuralgia-treatment-hyderabad"
+];
+
+const isValidSlug = (type: 'service' | 'condition', slug: string) => {
+  const cleanSlug = slug.startsWith('/') ? slug.split('/').pop()! : slug;
+  return type === 'service' ? KNOWN_SERVICES.includes(cleanSlug) : KNOWN_CONDITIONS.includes(cleanSlug);
+};
+
+
 export const LocalPathways: React.FC<LocalPathwaysProps> = ({
   mode,
   locationId,
@@ -72,6 +103,10 @@ export const LocalPathways: React.FC<LocalPathwaysProps> = ({
             </h3>
             <div className="space-y-3">
               {effectiveLocation.top_services_slugs.map(slug => {
+                 if (!isValidSlug('service', slug)) {
+                   console.warn(`LocalPathways: Missing or invalid service slug: ${slug}`);
+                   return null; // Do not render invalid link
+                 }
                  const title = formatSlug(slug);
                  return (
                   <Link key={slug} href={getHref('service', slug)} className={linkClass}>
@@ -91,6 +126,10 @@ export const LocalPathways: React.FC<LocalPathwaysProps> = ({
             </h3>
             <div className="space-y-3">
               {effectiveLocation.top_conditions_slugs.map(slug => {
+                 if (!isValidSlug('condition', slug)) {
+                   console.warn(`LocalPathways: Missing or invalid condition slug: ${slug}`);
+                   return null; // Do not render invalid link
+                 }
                  const title = formatSlug(slug);
                  return (
                   <Link key={slug} href={getHref('condition', slug)} className={linkClass}>

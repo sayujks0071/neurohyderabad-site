@@ -64,8 +64,7 @@ const medicalWebPageSchema = {
     "name": "Dr. Sayuj Krishnan - Neurosurgeon"
   },
   "reviewedBy": {
-    "@type": "Physician",
-    "name": "Dr. Sayuj Krishnan"
+    "@id": "https://www.drsayuj.info/#physician"
   },
   "mainEntity": {
     "@type": "FAQPage",

@@ -58,22 +58,6 @@ export default function Page() {
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
-      <MedicalWebPageSchema
-        pageType="location"
-        pageSlug="/neurosurgeon-banjara-hills"
-        title="Neurosurgeon in Banjara Hills, Hyderabad | Endoscopic Spine | Dr. Sayuj Krishnan"
-        description="Consult Dr. Sayuj Krishnan near Banjara Hills, Hyderabad for endoscopic spine & minimally invasive brain surgery. OPD timings, parking, directions, WhatsApp booking, and FAQs."
-        serviceOrCondition="Neurosurgical Consultation"
-        medicalSpecialty="Neurosurgery"
-        audience="Patients in Banjara Hills"
-      />
-      <Breadcrumbs
-        items={[
-          { name: "Home", href: "/" },
-          { name: "Locations", href: "/locations" },
-          { name: "Neurosurgeon Banjara Hills", href: "/neurosurgeon-banjara-hills" }
-        ]}
-      />
       <Breadcrumbs
         items={[
           { name: 'Home', href: '/' },
@@ -103,7 +87,7 @@ export default function Page() {
 
       <section className="grid md:grid-cols-2 gap-8 mt-10">
         <div>
-          <LocationNAPCard mode="location" locationId={location.id} className="mb-6" />
+          <LocationNAPCard location={location} className="mb-6" />
 
           <h2 className="text-2xl font-semibold">OPD Timings</h2>
           <ul className="mt-3 list-disc pl-5">
