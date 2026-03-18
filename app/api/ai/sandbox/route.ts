@@ -38,14 +38,15 @@ export async function POST(req: Request) {
       mappedModel = undefined; // Trigger default model in getTextModel
     }
 
-    const { getTextModel } = await import('@/src/lib/ai/gateway');
+    const { getAIClient, getTextModel } = await import('@/src/lib/ai/gateway');
     const textModel = mappedModel !== undefined ? getTextModel(mappedModel) : getTextModel();
 
-    const result = streamText({
-      model: textModel,
-      messages: messages,
-      system: "You are an informative, empathetic, and professional assistant for Dr. Sayuj Krishnan, a neurosurgeon in Hyderabad. Your responses must include a medical disclaimer emphasizing that you provide general educational information, not professional medical advice, and you should encourage users to book a clinical consultation.",
-    });
+    try {
+      const result = streamText({
+        model: getAIClient()(mappedModel !== undefined ? mappedModel : 'openai/gpt-4o-mini'),
+        messages: messages,
+        system: "You are an informative, empathetic, and professional assistant for Dr. Sayuj Krishnan, a neurosurgeon in Hyderabad. Your responses must include a medical disclaimer emphasizing that you provide general educational information, not professional medical advice, and you should encourage users to book a clinical consultation.",
+      });
 
       return result.toTextStreamResponse();
     } catch (streamingError) {

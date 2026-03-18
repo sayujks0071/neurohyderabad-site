@@ -10,6 +10,7 @@ vi.mock('@/src/lib/rate-limit', () => ({
 vi.mock('@/src/lib/ai/gateway', () => ({
   hasAIConfig: vi.fn(),
   getTextModel: vi.fn(),
+  getAIClient: vi.fn(() => vi.fn((model) => ({ id: `mapped-${model}` }))),
 }));
 
 vi.mock('ai', async (importOriginal) => {
