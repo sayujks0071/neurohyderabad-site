@@ -28,7 +28,14 @@ export default function LazySection({
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true);
+          // 🫀 CWV Sentinel Fix: Defer heavy child rendering to reduce INP/TBT during scroll.
+          // By yielding to the main thread before updating state, the browser can paint
+          // the current scroll frame smoothly without jank.
+          if ('requestIdleCallback' in window) {
+            window.requestIdleCallback(() => setIsVisible(true));
+          } else {
+            setTimeout(() => setIsVisible(true), 1);
+          }
           observer.disconnect();
         }
       },

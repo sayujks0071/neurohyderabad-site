@@ -1,10 +1,10 @@
 {
   "timestamp": "2024-03-08T12:00:00Z",
   "commit_hash": "latest",
-  "page_type": "Home",
-  "suspected_lcp_element": "H1 text ('Dr. Sayuj Krishnan: Best Neurosurgeon...') or fallback Hero image (dr-sayuj-krishnan-portrait-sm.jpg)",
-  "bottleneck_identified": "The Home page's `Hero` component uses a heavy Three.js canvas. During hydration and initial texture loading, a `z-50` full-screen black overlay (`bg-black/50 backdrop-blur-sm`) covers the entire viewport. This overlay obscures the primary H1 text (which is `z-40`), preventing the browser from registering the text as a meaningful Largest Contentful Paint until JS finishes loading images.",
-  "fix_applied": "Modified `app/components/scrollytelling/Hero.tsx` to lower the loading indicator's z-index from `z-50` to `z-30`. This places it behind the Overlay Content (`z-40`), allowing the critical text to be painted and visible immediately without being obscured by a dark blurred overlay.",
-  "expected_improvement": "Significantly improves LCP and perceived performance. Text content is no longer visually blocked during hydration, allowing browsers to record a much earlier LCP timestamp for the text elements.",
-  "how_to_verify": "1. Run `pnpm dev`. 2. Open `http://localhost:3000`. 3. Reload the page on slow 3G. 4. Verify that the H1 text is visible and readable immediately, not covered by the loading spinner's dark blurred backdrop."
+  "page_type": "Home, Condition, Appointments",
+  "suspected_lcp_element": "N/A (Focusing on INP)",
+  "bottleneck_identified": "The `LazySection` component used an IntersectionObserver to defer rendering of heavy child components (like `PatientPortal` and Video Wrappers). However, the state update `setIsVisible(true)` was executed synchronously on the main thread the moment the element intersected the viewport. For heavy components, this sudden synchronous render during scrolling causes a long task, blocking the main thread and leading to layout jank and poor Interaction to Next Paint (INP) scores.",
+  "fix_applied": "Modified `app/_components/LazySection.tsx` to wrap the `setIsVisible(true)` state update in `window.requestIdleCallback` (with a `setTimeout` fallback). This yields the main thread, allowing the browser to paint pending scroll frames smoothly before triggering the heavy child component render.",
+  "expected_improvement": "Significantly improves Interaction to Next Paint (INP) and reduces Total Blocking Time (TBT) by preventing main thread blocking during scroll interactions when lazy-loaded sections enter the viewport.",
+  "how_to_verify": "1. Run `pnpm dev`. 2. Open `http://localhost:3000` or `http://localhost:3000/appointments` on a throttled CPU (e.g., 4x slowdown). 3. Scroll down quickly past the hero section. 4. Verify that scrolling feels significantly smoother without stutter or freezing when the `LazySection` wrappers (like videos or forms) enter the viewport."
 }
