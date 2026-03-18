@@ -96,7 +96,14 @@ export default function InternationalForm() {
 
       <FormError message={submitError} />
 
-      <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-6">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        noValidate
+        className="space-y-6"
+        toolname="requestInternationalConsultation"
+        tooldescription="Request an international consultation"
+        toolautosubmit="false"
+      >
         {/* Hidden Honeypot */}
         <div className="hidden" aria-hidden="true">
           <input tabIndex={-1} autoComplete="off" {...register("company")} />

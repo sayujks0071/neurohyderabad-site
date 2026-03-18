@@ -104,7 +104,14 @@ export default function FollowUpForm() {
 
       <FormError message={submitError} />
 
-      <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-6">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        noValidate
+        className="space-y-6"
+        toolname="submitFollowUp"
+        tooldescription="Submit a post-surgery follow-up query"
+        toolautosubmit="false"
+      >
         {/* Hidden Honeypot */}
         <div className="hidden" aria-hidden="true">
           <input tabIndex={-1} autoComplete="off" {...register("company")} />

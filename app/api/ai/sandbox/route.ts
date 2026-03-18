@@ -47,14 +47,7 @@ export async function POST(req: Request) {
       system: "You are an informative, empathetic, and professional assistant for Dr. Sayuj Krishnan, a neurosurgeon in Hyderabad. Your responses must include a medical disclaimer emphasizing that you provide general educational information, not professional medical advice, and you should encourage users to book a clinical consultation.",
     });
 
-      return result.toTextStreamResponse();
-    } catch (streamingError) {
-      console.error('Error during AI streamText execution:', streamingError);
-      return new Response(JSON.stringify({ error: 'Failed to generate AI response stream' }), {
-        status: 500,
-        headers: { 'Content-Type': 'application/json' },
-      });
-    }
+    return result.toTextStreamResponse();
   } catch (error) {
     console.error('Error in AI Sandbox route:', error);
     return new Response(JSON.stringify({ error: 'Failed to process AI request' }), {
