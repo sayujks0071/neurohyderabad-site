@@ -1,12 +1,13 @@
 import { Activity } from "lucide-react";
 import Link from 'next/link';
+import { Shimmer } from "@/src/components/ai-elements/shimmer";
 
 export default function BookingHeroContent() {
   return (
     <>
       <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-blue-50/80 border border-blue-100 text-blue-700 text-sm font-bold mb-6 backdrop-blur-sm shadow-sm animate-in fade-in slide-in-from-bottom-4 duration-700">
         <Activity className="w-4 h-4 mr-2 text-blue-500" />
-        Advanced Neurosurgical Booking
+        <Shimmer as="span" duration={3} className="text-blue-700">Advanced Neurosurgical Booking</Shimmer>
       </div>
 
       {/* LCP Optimization: content moved to Server Component for immediate paint */}
