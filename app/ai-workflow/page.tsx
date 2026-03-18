@@ -11,7 +11,7 @@ import {
   NodeTitle,
 } from "@/src/components/ai-elements/node";
 import React, { useEffect } from "react";
-import { useReactFlow, ReactFlowProvider } from "@xyflow/react";
+import { useReactFlow, ReactFlowProvider, Controls, Panel } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import {
   Stethoscope,
@@ -285,7 +285,34 @@ function CanvasWithControls() {
       minZoom={0.2}
       maxZoom={1.5}
       className="opacity-100 transition-opacity duration-500"
-    />
+    >
+      <Controls className="bg-white shadow-md border border-slate-200 rounded-md" />
+      <Panel position="bottom-left" className="bg-white/90 backdrop-blur-md p-4 rounded-xl shadow-lg border border-slate-200 m-6">
+        <h3 className="text-sm font-semibold text-slate-800 mb-3">Legend</h3>
+        <div className="grid grid-cols-2 gap-x-6 gap-y-2 text-xs">
+          <div className="flex items-center gap-2">
+            <span className="w-3 h-3 rounded-full bg-slate-200 border border-slate-300"></span>
+            <span className="text-slate-600">Neutral</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="w-3 h-3 rounded-full bg-amber-400 border border-amber-500"></span>
+            <span className="text-slate-600">Warning</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="w-3 h-3 rounded-full bg-red-500 border border-red-600"></span>
+            <span className="text-slate-600">Critical</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="w-3 h-3 rounded-full bg-blue-500 border border-blue-600"></span>
+            <span className="text-slate-600">Active</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="w-3 h-3 rounded-full bg-emerald-500 border border-emerald-600"></span>
+            <span className="text-slate-600">Success</span>
+          </div>
+        </div>
+      </Panel>
+    </Canvas>
   );
 }
 
