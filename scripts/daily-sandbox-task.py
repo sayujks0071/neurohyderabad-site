@@ -101,8 +101,16 @@ def analyze_page(url, target_keyword):
         recommendations.append("YMYL Risk: Avoid absolute claims like '100% success' or 'guarantee'.")
 
     # Local SEO / Conversion
-    if "book appointment" not in text_content and "schedule consultation" not in text_content:
+    has_booking_cta = any(x in text_content for x in ["book appointment", "schedule consultation", "book now", "book a consultation"])
+    if not has_booking_cta:
         recommendations.append("Missing clear Booking CTA.")
+
+    # Check internal booking link
+    html_content = str(soup)
+    has_internal_booking_link = "href=\"/appointments\"" in html_content or "href='/appointments'" in html_content or 'href="/appointments' in html_content or "/appointments" in html_content
+
+    # Check WhatsApp CTA
+    has_whatsapp_cta = "wa.me" in html_content or "api.whatsapp.com" in html_content or "whatsapp" in text_content
 
     if response_time > 2.0:
         recommendations.append(f"Page load time ({response_time:.2f}s) may impact Core Web Vitals (LCP).")
@@ -118,6 +126,9 @@ def analyze_page(url, target_keyword):
             "description_length": len(description),
             "h1_count": len(h1_tags)
         },
+        "has_booking_cta": has_booking_cta,
+        "has_internal_booking_link": has_internal_booking_link,
+        "has_whatsapp_cta": has_whatsapp_cta,
         "recommendations": recommendations
     }
 
@@ -152,6 +163,21 @@ def run_analysis():
         full_url = base_url + target["target_page"] if target["target_page"].startswith("/") else target["target_page"]
         result = analyze_page(full_url, target.get("term", ""))
         report["pages_analyzed"].append(result)
+
+    # Check 80% CTA coverage threshold
+    total_pages = len(report["pages_analyzed"])
+    successful_pages = [p for p in report["pages_analyzed"] if p.get("status") == "success"]
+    if successful_pages:
+        cta_count = sum(1 for p in successful_pages if p.get("has_booking_cta"))
+        cta_coverage = cta_count / len(successful_pages)
+        if cta_coverage < 0.8:
+            report["overall_summary"] += " | WARNING: CTA coverage is below 80%."
+            report["cta_coverage_warning"] = True
+            for p in successful_pages:
+                if not p.get("has_booking_cta"):
+                    p["recommendations"].append("FLAGGED: Missing Booking CTA (Site coverage < 80%).")
+        else:
+            report["cta_coverage_warning"] = False
 
     with open("/tmp/daily_report.json", "w") as f:
         json.dump(report, f, indent=2)
