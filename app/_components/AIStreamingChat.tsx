@@ -12,6 +12,46 @@ import { Suggestion, Suggestions } from "@/src/components/ai-elements/suggestion
 import { CalendarIcon, SearchIcon, StethoscopeIcon, CheckIcon, XIcon, BookmarkIcon } from "lucide-react";
 import { PromptInput, PromptInputTextarea, PromptInputFooter, PromptInputTools, PromptInputSubmit } from "@/src/components/ai-elements/prompt-input";
 import { Shimmer } from "@/src/components/ai-elements/shimmer";
+import { nanoid } from "nanoid";
+import { memo, useCallback } from "react";
+
+interface SuggestionItemProps {
+  suggestion: { key: string; value: string };
+  onSuggestionClick: (value: string) => void;
+  className?: string;
+  disabled?: boolean;
+}
+
+const SuggestionItem = memo(
+  ({ suggestion, onSuggestionClick, className, disabled }: SuggestionItemProps) => {
+    const handleClick = useCallback(
+      () => onSuggestionClick(suggestion.value),
+      [onSuggestionClick, suggestion.value]
+    );
+    return (
+      <Suggestion
+        key={suggestion.key}
+        onClick={handleClick}
+        suggestion={suggestion.value}
+        className={className}
+        disabled={disabled}
+      />
+    );
+  }
+);
+
+SuggestionItem.displayName = "SuggestionItem";
+
+const quickActions: { key: string; value: string }[] = [
+  { key: nanoid(), value: "Where is the clinic located?" },
+  { key: nanoid(), value: "Tell me about endoscopic spine surgery" },
+  { key: nanoid(), value: "I need to book a new consultation" },
+  { key: nanoid(), value: "I want to reschedule my appointment" },
+  { key: nanoid(), value: "I have severe headache and dizziness" },
+  { key: nanoid(), value: "I need information about spine surgery" },
+  { key: nanoid(), value: "What are your clinic hours?" },
+  { key: nanoid(), value: "Cost of slip disc surgery" }
+];
 
 interface AIStreamingChatProps {
   pageSlug: string;
@@ -134,18 +174,6 @@ export default function AIStreamingChat({
     analytics.aiAssistant.message('user');
     await sendMessage({ text: action });
   };
-
-  const quickActions = [
-    "I need to book a new consultation",
-    "I want to reschedule my appointment",
-    "I have severe headache and dizziness",
-    "I need information about spine surgery",
-    "What are your clinic hours?",
-    "Tell me about endoscopic spine surgery",
-    "Cost of slip disc surgery",
-    "Book an appointment",
-    "How does machine learning work?"
-  ];
 
   return (
     <div className="max-w-4xl mx-auto h-[600px] flex flex-col relative size-full rounded-lg border">
@@ -369,25 +397,46 @@ export default function AIStreamingChat({
             <div ref={messagesEndRef} className="h-px" />
         </div>
 
-        {/* Quick Actions - Only show if just initial message */}
-        {messages.length <= 1 && (
-          <div className="p-4">
-            <p className="text-sm text-[var(--color-text-secondary)] mb-3 font-semibold">Quick actions:</p>
-            <Suggestions>
-              {quickActions.map((action, index) => (
-                <Suggestion
-                  key={index}
-                  onClick={() => handleQuickAction(action)}
-                  suggestion={action}
-                  className="text-xs border-[var(--color-primary-500)] text-[var(--color-primary-700)] hover:bg-[var(--color-primary-100)] transition-colors disabled:opacity-50 whitespace-nowrap"
-                />
-              ))}
-            </Suggestions>
-          </div>
-        )}
-
         {/* Input Form */}
-        <div className="p-4 border-t border-[var(--color-border)]">
+        <div className="p-4 border-t border-[var(--color-border)] flex flex-col gap-4">
+          {/* Quick Actions - Only show if just initial message */}
+          {messages.length <= 1 && (
+            <div className="mb-2">
+              <Suggestions>
+                {quickActions.map((suggestion) => (
+                  <SuggestionItem
+                    key={suggestion.key}
+                    onSuggestionClick={handleQuickAction}
+                    suggestion={suggestion}
+                    className="text-xs border-[var(--color-primary-500)] text-[var(--color-primary-700)] hover:bg-[var(--color-primary-100)] transition-colors disabled:opacity-50 whitespace-nowrap"
+                    disabled={isLoading}
+                  />
+                ))}
+              </Suggestions>
+            </div>
+          )}
+
+          {/* Booking Action prompts after interaction */}
+          {messages.length > 2 && !isLoading && (
+            <div className="mb-3 px-2 flex flex-wrap gap-2 justify-center">
+              <a
+                href="/appointments"
+                className="flex items-center gap-1.5 px-4 py-2 bg-[var(--color-primary-600)] text-white text-xs font-semibold rounded-full hover:bg-[var(--color-primary-700)] transition-colors shadow-sm"
+              >
+                <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+                Book OPD Consultation
+              </a>
+              <a
+                href="https://wa.me/919778280044?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20with%20Dr.%20Sayuj."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 px-4 py-2 bg-[#25D366] text-white text-xs font-semibold rounded-full hover:bg-[#128C7E] transition-colors shadow-sm"
+              >
+                WhatsApp Us
+              </a>
+            </div>
+          )}
+
           {files && files.length > 0 && (
             <div className="mb-2">
               <Attachments variant="inline">

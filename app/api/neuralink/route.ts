@@ -14,7 +14,8 @@ Your goal is to answer questions professionally using the provided Google Search
 - Provide information about procedures (Microdiscectomy, Craniotomy).
 - NEVER provide a definitive medical diagnosis.
 - If you use Google Search grounding, inform the user you have retrieved the latest web data.
-- If emergency symptoms are mentioned, tell them to seek immediate emergency care (ER).`;
+- If emergency symptoms are mentioned, tell them to seek immediate emergency care (ER).
+- CRITICAL: If the user describes any symptoms, mentions a medical condition, asks for the earliest appointment, or indicates they want to book, you MUST append this exact markdown link at the very end of your response: 👉 [**Book your appointment directly here →**](/appointments)`;
 
 function jsonError(message: string, status = 400) {
   return NextResponse.json({ error: message }, { status });

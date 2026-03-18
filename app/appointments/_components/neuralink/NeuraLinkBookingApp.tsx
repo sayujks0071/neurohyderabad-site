@@ -127,6 +127,19 @@ const NeuraLinkBookingApp = ({ heroContent, locationInfo, faqSection }: NeuraLin
           </button>
         </div>
       )}
+
+      {/* Persistent Floating Book Now CTA for Mobile & Desktop Conversions */}
+      <div className="fixed bottom-6 right-6 z-[90] flex justify-end">
+        <button
+          onClick={scrollToForm}
+          className="inline-flex items-center gap-2 px-6 py-4 rounded-full bg-[var(--color-primary-600)] bg-blue-600 text-white font-bold shadow-2xl shadow-blue-500/30 hover:bg-blue-700 hover:shadow-blue-500/50 transition-all duration-300 hover:scale-105 active:scale-95 group border border-blue-400/50"
+          aria-label="Scroll to Book appointment with Dr Sayuj Krishnan"
+        >
+          <span className="text-lg">📅</span>
+          <span className="max-w-xs overflow-hidden leading-none whitespace-nowrap">Book OPD Appointment</span>
+          <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+        </button>
+      </div>
     </div>
   );
 };

@@ -48,6 +48,8 @@ const SpeechButton = ({
       disabled={isPlaying}
       className={`${baseStyles} ${variants[variant]} ${className}`}
       title="Listen to AI analysis"
+      aria-label="Listen to AI analysis"
+      aria-busy={isPlaying}
     >
       {isPlaying ? (
         <Loader2 className="w-4 h-4 animate-spin" />

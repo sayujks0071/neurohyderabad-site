@@ -57,6 +57,12 @@ jobs:
           sandbox exec ${{ steps.create_sandbox.outputs.sandbox_id }} \
             --token "$VERCEL_AUTH_TOKEN" \
             cat /tmp/gateway.log
+
+          # Basic health check if gateway is actually up
+          # We check if process exists using simple sh command
+          sandbox exec ${{ steps.create_sandbox.outputs.sandbox_id }} \
+            --token "$VERCEL_AUTH_TOKEN" \
+            sh -c "ps aux | grep '[o]penclaw gateway' || echo 'Gateway not found in ps'"
         continue-on-error: true
 
       - name: Report Status

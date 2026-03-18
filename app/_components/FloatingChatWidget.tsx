@@ -7,6 +7,7 @@ import { trackMiddlewareEvent } from '@/src/lib/middleware/rum';
 import { MessageCircle, X, Send, AlertTriangle, Loader2, Sparkles, Minus } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { useChat } from '@ai-sdk/react';
+import { Shimmer } from "@/src/components/ai-elements/shimmer";
 // @ts-ignore
 type Message = any;
 
@@ -149,7 +150,11 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
       page_slug: pathname || 'unknown'
     });
 
-    await append({ role: 'user', content: content.trim() });
+    if (typeof append === 'function') {
+      await append({ role: 'user', content: content.trim() });
+    } else {
+      console.error('Chat append is not a function. Fallback active.');
+    }
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -169,11 +174,14 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
   };
 
   const quickActions = [
+    "I want the earliest available appointment",
     "Book consultation",
     "Clinic hours?",
     "Cost of surgery?",
-    "Emergency help"
   ];
+
+  // Hide on appointments page to avoid clash with specific booking chat
+  if (pathname === '/appointments') return null;
 
   return (
     <>
@@ -301,9 +309,9 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
                 <div className="bg-[var(--color-surface)] border border-[var(--color-border)] shadow-sm px-3 py-2 rounded-2xl rounded-bl-none">
                   <div className="flex items-center space-x-2">
                     <Loader2 size={14} className="animate-spin text-[var(--color-primary-500)]" />
-                    <span className="text-xs text-[var(--color-text-secondary)]">
+                    <Shimmer as="span" className="text-xs text-[var(--color-text-secondary)]">
                        {messages[messages.length - 1]?.role === 'assistant' ? 'Typing...' : 'Thinking...'}
-                    </span>
+                    </Shimmer>
                   </div>
                 </div>
               </div>
@@ -333,6 +341,27 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
                   {action}
                 </button>
               ))}
+            </div>
+          )}
+
+          {/* OPD Booking / Contact Prompts (shows after initial interaction) */}
+          {messages.length > 2 && !isLoading && (
+            <div className="px-4 py-2 bg-[var(--color-primary-50)]/50 flex flex-wrap gap-2 justify-center shrink-0 border-t border-[var(--color-primary-100)]">
+              <a
+                href="/appointments"
+                className="flex items-center gap-1.5 px-3 py-1.5 bg-[var(--color-primary-600)] text-white text-xs font-medium rounded-full hover:bg-[var(--color-primary-700)] transition-colors shadow-sm"
+              >
+                <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+                Book OPD Consultation
+              </a>
+              <a
+                href="https://wa.me/919778280044?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20with%20Dr.%20Sayuj."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 px-3 py-1.5 bg-[#25D366] text-white text-xs font-medium rounded-full hover:bg-[#128C7E] transition-colors shadow-sm"
+              >
+                WhatsApp Chat
+              </a>
             </div>
           )}
 

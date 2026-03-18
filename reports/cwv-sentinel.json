@@ -1,10 +1,10 @@
 {
-  "timestamp": "2024-03-07T05:27:00Z",
+  "timestamp": "2024-03-08T12:00:00Z",
   "commit_hash": "latest",
-  "page_type": "Condition",
-  "suspected_lcp_element": "N/A",
-  "bottleneck_identified": "Synchronous re-rendering of the entire conditions grid on every keystroke in ConditionsExplorer.tsx causing poor INP.",
-  "fix_applied": "Debounced the search input using a 300ms timeout so the heavy filtering and DOM update runs after the user pauses typing.",
-  "expected_improvement": "Better Interaction to Next Paint (INP) during search by decoupling typing from heavy DOM updates.",
-  "how_to_verify": "1. Run pnpm dev. 2. Navigate to /conditions. 3. Type quickly in the search box while observing the performance tab. It should not stutter on each keystroke."
+  "page_type": "Home",
+  "suspected_lcp_element": "H1 text ('Dr. Sayuj Krishnan: Best Neurosurgeon...') or fallback Hero image (dr-sayuj-krishnan-portrait-sm.jpg)",
+  "bottleneck_identified": "The Home page's `Hero` component uses a heavy Three.js canvas. During hydration and initial texture loading, a `z-50` full-screen black overlay (`bg-black/50 backdrop-blur-sm`) covers the entire viewport. This overlay obscures the primary H1 text (which is `z-40`), preventing the browser from registering the text as a meaningful Largest Contentful Paint until JS finishes loading images.",
+  "fix_applied": "Modified `app/components/scrollytelling/Hero.tsx` to lower the loading indicator's z-index from `z-50` to `z-30`. This places it behind the Overlay Content (`z-40`), allowing the critical text to be painted and visible immediately without being obscured by a dark blurred overlay.",
+  "expected_improvement": "Significantly improves LCP and perceived performance. Text content is no longer visually blocked during hydration, allowing browsers to record a much earlier LCP timestamp for the text elements.",
+  "how_to_verify": "1. Run `pnpm dev`. 2. Open `http://localhost:3000`. 3. Reload the page on slow 3G. 4. Verify that the H1 text is visible and readable immediately, not covered by the loading spinner's dark blurred backdrop."
 }
