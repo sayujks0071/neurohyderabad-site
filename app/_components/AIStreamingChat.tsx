@@ -42,15 +42,32 @@ const SuggestionItem = memo(
 
 SuggestionItem.displayName = "SuggestionItem";
 
-const quickActions: { key: string; value: string }[] = [
+const defaultSuggestions: { key: string; value: string }[] = [
   { key: nanoid(), value: "Where is the clinic located?" },
+  { key: nanoid(), value: "I need to book a new consultation" },
+  { key: nanoid(), value: "What are your clinic hours?" },
+  { key: nanoid(), value: "Do you offer online consultations?" }
+];
+
+const spineSuggestions: { key: string; value: string }[] = [
   { key: nanoid(), value: "Tell me about endoscopic spine surgery" },
+  { key: nanoid(), value: "What is the recovery time for slip disc surgery?" },
+  { key: nanoid(), value: "I need information about spine surgery" },
+  { key: nanoid(), value: "Cost of slip disc surgery" }
+];
+
+const brainSuggestions: { key: string; value: string }[] = [
+  { key: nanoid(), value: "I have severe headache and dizziness" },
+  { key: nanoid(), value: "What are the symptoms of a brain tumor?" },
+  { key: nanoid(), value: "Tell me about brain surgery options" },
+  { key: nanoid(), value: "How is hydrocephalus treated?" }
+];
+
+const appointmentSuggestions: { key: string; value: string }[] = [
   { key: nanoid(), value: "I need to book a new consultation" },
   { key: nanoid(), value: "I want to reschedule my appointment" },
-  { key: nanoid(), value: "I have severe headache and dizziness" },
-  { key: nanoid(), value: "I need information about spine surgery" },
-  { key: nanoid(), value: "What are your clinic hours?" },
-  { key: nanoid(), value: "Cost of slip disc surgery" }
+  { key: nanoid(), value: "What documents should I bring?" },
+  { key: nanoid(), value: "Do you accept insurance?" }
 ];
 
 interface AIStreamingChatProps {
@@ -155,6 +172,20 @@ export default function AIStreamingChat({
     setInput(e.target.value);
   };
 
+  const currentSuggestions = useMemo(() => {
+    const slug = pageSlug?.toLowerCase() || '';
+    if (slug.includes('spine') || slug.includes('slip-disc') || slug.includes('sciatica')) {
+      return spineSuggestions;
+    }
+    if (slug.includes('brain') || slug.includes('tumor') || slug.includes('headache')) {
+      return brainSuggestions;
+    }
+    if (slug.includes('appointment') || slug.includes('book') || slug.includes('contact')) {
+      return appointmentSuggestions;
+    }
+    return defaultSuggestions;
+  }, [pageSlug]);
+
   const onFormSubmit = async (message: { text: string; files?: FileList | undefined }) => {
     if (!message.text.trim() && (!message.files || message.files.length === 0)) return;
     if (isLoading) return;
@@ -170,10 +201,10 @@ export default function AIStreamingChat({
   };
 
   // Wrapper for quick actions
-  const handleQuickAction = async (action: string) => {
+  const handleQuickAction = useCallback(async (action: string) => {
     analytics.aiAssistant.message('user');
     await sendMessage({ text: action });
-  };
+  }, [sendMessage]);
 
   return (
     <div className="max-w-4xl mx-auto h-[600px] flex flex-col relative size-full rounded-lg border">
@@ -403,7 +434,7 @@ export default function AIStreamingChat({
           {messages.length <= 1 && (
             <div className="mb-2">
               <Suggestions>
-                {quickActions.map((suggestion) => (
+                {currentSuggestions.map((suggestion) => (
                   <SuggestionItem
                     key={suggestion.key}
                     onSuggestionClick={handleQuickAction}
