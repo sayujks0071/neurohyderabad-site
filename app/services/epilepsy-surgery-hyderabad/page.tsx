@@ -11,6 +11,7 @@ import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import { getServiceSources } from '../sources';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
+import MedicalWebPageSchema from '../../components/schemas/MedicalWebPageSchema';
 
 const baseMetadata = makeMetadata({
   title: 'Epilepsy Surgery in Hyderabad | Drug-Resistant Epilepsy Treatment',
@@ -74,6 +75,20 @@ export default function EpilepsySurgeryPage() {
 
   return (
     <div className="min-h-screen bg-white">
+
+      <MedicalWebPageSchema
+        title="Epilepsy Surgery in Hyderabad | Drug-Resistant Epilepsy Treatment"
+        description="Expert epilepsy surgery for drug-resistant epilepsy in Hyderabad. LITT, resection surgery, VNS. Comprehensive evaluation and advanced techniques."
+        pageSlug="/services/epilepsy-surgery-hyderabad"
+        pageType="service"
+        serviceOrCondition="Epilepsy Surgery"
+        breadcrumbs={[
+          { name: 'Home', path: '/' },
+          { name: 'Services', path: '/services/' },
+          { name: 'Epilepsy Surgery in Hyderabad', path: '/services/epilepsy-surgery-hyderabad' },
+        ]}
+      />
+
       <div className="container mx-auto px-4 py-16">
         <header className="text-center mb-8">
           <h1 className="text-4xl font-bold mb-4">Epilepsy Surgery in Hyderabad</h1>

@@ -91,3 +91,6 @@
 ## 2026-03-16
 - **Opportunity Identified:** Update FAQ sections across all specific service pages to answer exact query strings mapped in Search Console (e.g., "Is keyhole spine surgery painful").
 - **Schema:** Ensure `MedicalProcedure` schema on service pages includes specific procedure codes (CPT/ICD-10) where applicable to enhance rich snippets.
+
+## 2026-03-17
+- [x] **Schema:** Add `MedicalWebPageSchema` to `app/services/epilepsy-surgery-hyderabad/page.tsx` to improve structured data signaling. (Done 2026-03-17)
