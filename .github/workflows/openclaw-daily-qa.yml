@@ -1,0 +1,43 @@
+name: OpenClaw Daily QA
+
+on:
+  schedule:
+    - cron: '0 1 * * *' # Run daily at 1:00 AM UTC
+  workflow_dispatch:
+
+jobs:
+  run-daily-qa:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci || npm install
+
+      - name: Cache WhatsApp Session
+        uses: actions/cache@v4
+        with:
+          path: whatsapp_session
+          key: whatsapp-session-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: |
+            whatsapp-session-${{ runner.os }}-
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Run Daily QA Automation
+        run: npx tsx openclaw/workflows/combined-daily-qa.ts
+
+      - name: Upload Health Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: health-reports
+          path: health-reports/daily-automation/
