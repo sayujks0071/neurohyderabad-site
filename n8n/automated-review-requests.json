@@ -1,0 +1,119 @@
+{
+  "name": "Automated Review Requests (Local SEO)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "positive-outcome",
+        "options": {}
+      },
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ],
+      "webhookId": "positive-outcome-webhook"
+    },
+    {
+      "parameters": {
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key={{$env.GEMINI_API_KEY}}",
+        "method": "POST",
+        "bodyParametersUi": {
+          "parameter": []
+        },
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "body": "={\n  \"contents\": [{\n    \"parts\": [{\n      \"text\": \"You are an empathetic clinical assistant for Dr. Sayuj, a Neurosurgeon. Write a short, warm, personalized email message to a patient thanking them for their trust after a positive post-op outcome, and kindly asking them to leave a review on Google My Business.\\n\\nPatient Name: {{$node[\\\"Webhook Trigger\\\"].json[\\\"body\\\"][\\\"patientName\\\"]}}\\nProcedure/Condition: {{$node[\\\"Webhook Trigger\\\"].json[\\\"body\\\"][\\\"procedure\\\"]}}\\n\\nGenerate strictly valid JSON with these fields:\\n- subject: An engaging email subject line.\\n- email_body_html: The HTML body of the email. Include a placeholder '[GMB_LINK]' where the review link will go. Be empathetic, acknowledge their specific procedure, and explain how reviews help other patients find the right neurosurgical care.\"\n    }]\n  }]\n}",
+        "options": {}
+      },
+      "name": "Gemini Personalization",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "const geminiResp = items[0].json.candidates[0].content.parts[0].text;\n// Remove markdown code blocks if present\nconst cleanJson = geminiResp.replace(/```json/g, '').replace(/```/g, '').trim();\nlet emailContent = {};\ntry {\n  emailContent = JSON.parse(cleanJson);\n  // Inject the actual GMB link\n  emailContent.email_body_html = emailContent.email_body_html.replace('[GMB_LINK]', '<a href=\"https://g.page/r/drsayuj/review\">Leave a Review for Dr. Sayuj on Google</a>');\n} catch (e) {\n  emailContent = { subject: 'Thank you from Dr. Sayuj', email_body_html: '<p>Dear Patient, thank you for your trust. Please <a href=\"https://g.page/r/drsayuj/review\">leave us a review</a> to help others.</p>' };\n}\n\nreturn [{\n  json: {\n    ...items[0].json,\n    emailContent\n  }\n}];"
+      },
+      "name": "Format Email & Link",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        650,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "reviews@drsayuj.info",
+        "toEmail": "={{$node[\"Webhook Trigger\"].json[\"body\"][\"patientEmail\"]}}",
+        "subject": "={{$node[\"Format Email & Link\"].json[\"emailContent\"][\"subject\"]}}",
+        "text": "Please view this email in a client that supports HTML.",
+        "html": "={{$node[\"Format Email & Link\"].json[\"emailContent\"][\"email_body_html\"]}}"
+      },
+      "name": "Send Review Request Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [
+        850,
+        300
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "YOUR_SMTP_CREDENTIAL_ID",
+          "name": "SMTP Account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Gemini Personalization",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini Personalization": {
+      "main": [
+        [
+          {
+            "node": "Format Email & Link",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Email & Link": {
+      "main": [
+        [
+          {
+            "node": "Send Review Request Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "id": "8873a997-c681-4e57-9dbf-164def131a35"
+}
