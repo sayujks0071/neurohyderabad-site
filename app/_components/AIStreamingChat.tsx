@@ -12,6 +12,46 @@ import { Suggestion, Suggestions } from "@/src/components/ai-elements/suggestion
 import { CalendarIcon, SearchIcon, StethoscopeIcon, CheckIcon, XIcon, BookmarkIcon } from "lucide-react";
 import { PromptInput, PromptInputTextarea, PromptInputFooter, PromptInputTools, PromptInputSubmit } from "@/src/components/ai-elements/prompt-input";
 import { Shimmer } from "@/src/components/ai-elements/shimmer";
+import { nanoid } from "nanoid";
+import { memo, useCallback } from "react";
+
+interface SuggestionItemProps {
+  suggestion: { key: string; value: string };
+  onSuggestionClick: (value: string) => void;
+  className?: string;
+  disabled?: boolean;
+}
+
+const SuggestionItem = memo(
+  ({ suggestion, onSuggestionClick, className, disabled }: SuggestionItemProps) => {
+    const handleClick = useCallback(
+      () => onSuggestionClick(suggestion.value),
+      [onSuggestionClick, suggestion.value]
+    );
+    return (
+      <Suggestion
+        key={suggestion.key}
+        onClick={handleClick}
+        suggestion={suggestion.value}
+        className={className}
+        disabled={disabled}
+      />
+    );
+  }
+);
+
+SuggestionItem.displayName = "SuggestionItem";
+
+const quickActions: { key: string; value: string }[] = [
+  { key: nanoid(), value: "Where is the clinic located?" },
+  { key: nanoid(), value: "Tell me about endoscopic spine surgery" },
+  { key: nanoid(), value: "I need to book a new consultation" },
+  { key: nanoid(), value: "I want to reschedule my appointment" },
+  { key: nanoid(), value: "I have severe headache and dizziness" },
+  { key: nanoid(), value: "I need information about spine surgery" },
+  { key: nanoid(), value: "What are your clinic hours?" },
+  { key: nanoid(), value: "Cost of slip disc surgery" }
+];
 
 interface AIStreamingChatProps {
   pageSlug: string;
@@ -134,17 +174,6 @@ export default function AIStreamingChat({
     analytics.aiAssistant.message('user');
     await sendMessage({ text: action });
   };
-
-  const quickActions = [
-    "Where is the clinic located?",
-    "Tell me about endoscopic spine surgery",
-    "I need to book a new consultation",
-    "I want to reschedule my appointment",
-    "I have severe headache and dizziness",
-    "I need information about spine surgery",
-    "What are your clinic hours?",
-    "Cost of slip disc surgery"
-  ];
 
   return (
     <div className="max-w-4xl mx-auto h-[600px] flex flex-col relative size-full rounded-lg border">
@@ -374,12 +403,13 @@ export default function AIStreamingChat({
           {messages.length <= 1 && (
             <div className="mb-2">
               <Suggestions>
-                {quickActions.map((action, index) => (
-                  <Suggestion
-                    key={index}
-                    onClick={() => handleQuickAction(action)}
-                    suggestion={action}
+                {quickActions.map((suggestion) => (
+                  <SuggestionItem
+                    key={suggestion.key}
+                    onSuggestionClick={handleQuickAction}
+                    suggestion={suggestion}
                     className="text-xs border-[var(--color-primary-500)] text-[var(--color-primary-700)] hover:bg-[var(--color-primary-100)] transition-colors disabled:opacity-50 whitespace-nowrap"
+                    disabled={isLoading}
                   />
                 ))}
               </Suggestions>
