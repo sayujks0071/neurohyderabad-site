@@ -82,7 +82,7 @@ export async function POST(request: NextRequest) {
     });
 
     const { text: content } = await generateText({
-      model: getTextModel(), // Uses 'gpt-4o-mini' via Vercel AI Gateway
+      model: getTextModel(undefined, { cache: true }), // Uses 'gpt-4o-mini' via Vercel AI Gateway
       prompt: blogPrompt,
       temperature: 0.7,
       maxOutputTokens: 4000, // Ensure enough tokens for a full blog post
