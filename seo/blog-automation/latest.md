@@ -1,5 +1,10 @@
 # Latest Run
 
+- **Date:** 2026-03-19
+- **Topic:** Sciatica vs Piriformis Syndrome: Leg Pain Causes
+- **Status:** Success
+- **Traceability File:** [Run Details](./2026-03-19/run.md)
+
 - **Date:** 2026-03-18
 - **Topic:** Sciatica Treatment Without Surgery: A Comprehensive Guide for Hyderabad Patients
 - **Status:** Success
