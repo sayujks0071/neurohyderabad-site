@@ -9,8 +9,11 @@ import { Confirmation, ConfirmationRequest, ConfirmationAccepted, ConfirmationRe
 import { Attachments, Attachment, AttachmentPreview, AttachmentInfo, AttachmentRemove } from "@/src/components/ai-elements/attachments";
 import { analytics } from "@/src/lib/analytics";
 import { Suggestion, Suggestions } from "@/src/components/ai-elements/suggestion";
-import { CalendarIcon, SearchIcon, StethoscopeIcon, CheckIcon, XIcon, BookmarkIcon } from "lucide-react";
+import { CalendarIcon, SearchIcon, StethoscopeIcon, CheckIcon, XIcon, BookmarkIcon, CopyIcon } from "lucide-react";
 import { PromptInput, PromptInputTextarea, PromptInputFooter, PromptInputTools, PromptInputSubmit } from "@/src/components/ai-elements/prompt-input";
+import { Conversation, ConversationContent, ConversationScrollButton } from "@/src/components/ai-elements/conversation";
+import { Message, MessageContent, MessageResponse, MessageActions, MessageAction } from "@/src/components/ai-elements/message";
+import { Context, ContextContent, ContextContentHeader, ContextContentBody, ContextContentFooter, ContextInputUsage, ContextOutputUsage, ContextReasoningUsage, ContextCacheUsage, ContextTrigger } from "@/src/components/ai-elements/context";
 import { Shimmer } from "@/src/components/ai-elements/shimmer";
 import { nanoid } from "nanoid";
 import { memo, useCallback } from "react";
@@ -77,7 +80,7 @@ export default function AIStreamingChat({
   const [input, setInput] = useState('');
   const [files, setFiles] = useState<FileList | undefined>(undefined);
   const [checkpoints, setCheckpoints] = useState<{messageIndex: number}[]>([]);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const [usage, setUsage] = useState<any>(undefined);
 
   // Create transport with dependencies
   const transport = useMemo(() => new DefaultChatTransport({
@@ -99,10 +102,13 @@ export default function AIStreamingChat({
     messages: initialMessages,
     onFinish: (options) => {
       const message = options.message;
+      if ((options as any).usage) {
+        setUsage((options as any).usage);
+      }
       // Get text content from parts
-      const textContent = message.parts
-        .filter(part => part.type === 'text')
-        .map(part => (part as any).text)
+      const textContent = (message as any).parts
+        .filter((part: any) => part.type === 'text')
+        .map((part: any) => (part as any).text)
         .join(' ');
 
       const emergencyKeywords = ['emergency', 'urgent', 'immediately', 'call', 'stroke', 'seizure'];
@@ -123,14 +129,6 @@ export default function AIStreamingChat({
   });
 
   const isLoading = status === 'submitted' || status === 'streaming';
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
 
   useEffect(() => {
     // Create checkpoint every 5 messages
@@ -196,7 +194,7 @@ export default function AIStreamingChat({
       {/* Chat Interface */}
       <div className="bg-[var(--color-surface)] rounded-2xl shadow-lg overflow-hidden flex-1 flex flex-col h-full">
         {/* Chat Header */}
-        <div className="bg-gradient-to-r from-[var(--color-primary-500)] to-purple-600 text-white p-4">
+        <div className="bg-gradient-to-r from-[var(--color-primary-500)] to-purple-600 text-white p-4 flex justify-between items-center">
           <div className="flex items-center">
             <div className="w-10 h-10 bg-[var(--color-surface)] bg-opacity-20 rounded-full flex items-center justify-center mr-3">
               <span className="text-lg">🤖</span>
@@ -206,16 +204,41 @@ export default function AIStreamingChat({
               <p className="text-[var(--color-primary-100)] text-sm">Powered by Vercel AI SDK</p>
             </div>
           </div>
+          {usage && (
+            <div className="bg-white/20 rounded-lg backdrop-blur-sm">
+              <Context
+                maxTokens={128_000}
+                modelId="openai:gpt-4o"
+                usage={usage}
+                usedTokens={usage.totalTokens || 0}
+              >
+                <ContextTrigger className="text-white hover:text-white hover:bg-white/30 transition-colors" />
+                <ContextContent>
+                  <ContextContentHeader />
+                  <ContextContentBody>
+                    <ContextInputUsage />
+                    <ContextOutputUsage />
+                    <ContextReasoningUsage />
+                    <ContextCacheUsage />
+                  </ContextContentBody>
+                  <ContextContentFooter />
+                </ContextContent>
+              </Context>
+            </div>
+          )}
         </div>
 
         {/* Messages */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4 h-full">
-          {messages.map((message, index) => {
-            // Helper to get text content from parts
-            const textContent = message.parts
-              .filter(part => part.type === 'text')
-              .map(part => (part as any).text)
-              .join('');
+        <div className="flex-1 overflow-hidden relative">
+          <Conversation className="h-full">
+            <ConversationContent className="p-4 space-y-4">
+              {messages.map((message, index) => {
+                const isLastMessage = index === messages.length - 1;
+                // Helper to get text content from parts
+                const textContent = message.parts
+                  .filter((part: any) => part.type === 'text')
+                  .map((part: any) => (part as any).text)
+                  .join('');
 
             const checkpoint = checkpoints.find(cp => cp.messageIndex === index);
 
@@ -238,9 +261,9 @@ export default function AIStreamingChat({
                       <span className="text-sm font-medium text-[var(--color-primary-600)]">AI Clinical Analysis</span>
                     </ChainOfThoughtHeader>
                     <ChainOfThoughtContent>
-                      {reasoningParts.map((part, index) => (
+                      {reasoningParts.map((part, i) => (
                         <ChainOfThoughtStep
-                          key={`reasoning-${index}`}
+                          key={`reasoning-${i}`}
                           icon={StethoscopeIcon}
                           label="Analysis step"
                           description={(part as any).text}
@@ -252,17 +275,9 @@ export default function AIStreamingChat({
                 </div>
               )}
 
-              <div
-                className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
-              >
-                <div
-                  className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
-                    message.role === 'user'
-                      ? 'bg-[var(--color-primary-500)] text-white'
-                      : 'bg-[var(--color-background)] text-[var(--color-text-primary)]'
-                  }`}
-                >
-                  {textContent && <p className="text-sm whitespace-pre-wrap">{textContent}</p>}
+              <Message from={message.role}>
+                <MessageContent className={message.role === 'user' ? 'bg-[var(--color-primary-500)] text-white' : 'bg-[var(--color-background)] text-[var(--color-text-primary)]'}>
+                  {textContent && <MessageResponse className={message.role === 'user' ? 'text-white' : ''}>{textContent}</MessageResponse>}
 
                   {message.parts?.map((part: any, partIndex: number) => {
                     if (part.type === 'tool-invocation') {
@@ -352,19 +367,30 @@ export default function AIStreamingChat({
                       </Attachments>
                     </div>
                   )}
-
-                  {message.role !== 'user' && !checkpoints.some(cp => cp.messageIndex === index) && (
-                    <div className="mt-2 flex justify-end">
-                      <button
-                        onClick={() => createCheckpoint(index)}
-                        className="text-xs text-[var(--color-primary-500)] hover:underline opacity-50 hover:opacity-100 flex items-center"
-                      >
-                        <BookmarkIcon className="size-3 mr-1" /> Save Checkpoint
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </div>
+                </MessageContent>
+                {message.role !== 'user' && !checkpoints.some(cp => cp.messageIndex === index) && (
+                  <MessageActions className="mt-1">
+                    <MessageAction
+                      onClick={() => createCheckpoint(index)}
+                      label="Save Checkpoint"
+                      tooltip="Save Checkpoint"
+                    >
+                      <BookmarkIcon className="size-3" />
+                    </MessageAction>
+                    {isLastMessage && (
+                      <>
+                        <MessageAction
+                          onClick={() => navigator.clipboard.writeText(textContent)}
+                          label="Copy"
+                          tooltip="Copy message"
+                        >
+                          <CopyIcon className="size-3" />
+                        </MessageAction>
+                      </>
+                    )}
+                  </MessageActions>
+                )}
+              </Message>
 
               {checkpoints.some(cp => cp.messageIndex === index) && (
                 <div className="my-4">
@@ -394,7 +420,9 @@ export default function AIStreamingChat({
                 {error.message || "An error occurred. Please try again or call +91-9778280044."}
               </div>
             )}
-            <div ref={messagesEndRef} className="h-px" />
+            </ConversationContent>
+            <ConversationScrollButton />
+          </Conversation>
         </div>
 
         {/* Input Form */}
