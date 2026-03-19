@@ -18,7 +18,7 @@ import { getLocationById } from '@/src/data/locations';
 
 const baseMetadata = makeMetadata({
   title: "Slip Disc Treatment Hyderabad | Expert Endoscopic Care",
-  description: "Comprehensive slip disc treatment in Hyderabad. Expert conservative care and minimally invasive endoscopic discectomy by Dr. Sayuj Krishnan.",
+  description: "Slip disc treatment in Hyderabad by Dr. Sayuj Krishnan. Expert conservative care & minimally invasive endoscopic discectomy at Yashoda Hospital. Book now.",
   canonicalPath: '/conditions/slip-disc-treatment-hyderabad',
 });
 
