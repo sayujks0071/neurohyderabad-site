@@ -1,9 +1,9 @@
 import type { NextRequest } from 'next/server';
 import { getAllBlogPosts } from '@/src/lib/blog';
 import { SITE_URL } from '@/src/lib/seo';
-import sitemapServices from '../sitemap-services';
-import sitemapConditions from '../sitemap-conditions';
-import sitemapLocations from '../sitemap-locations';
+// Services, conditions, and locations are now served by their own sub-sitemap endpoints:
+// /sitemap-services.xml, /sitemap-conditions.xml, /sitemap-locations.xml
+// This file (sitemap-main.xml) covers core pages, blog, and miscellaneous pages only.
 
 export const runtime = 'nodejs';
 export const revalidate = 86400; // regenerate daily
@@ -98,36 +98,8 @@ export async function GET(_req: NextRequest) {
   ];
   for (const p of corePages) add(p.url, p.priority, p.changeFrequency);
 
-  for (const e of sitemapServices()) {
-    if (isExcluded(e.url) || unique.has(e.url)) continue;
-    unique.add(e.url);
-    entries.push({
-      url: e.url,
-      lastModified: typeof e.lastModified === 'string' ? e.lastModified : now,
-      changeFrequency: e.changeFrequency ?? 'weekly',
-      priority: typeof e.priority === 'number' ? e.priority : 0.7,
-    });
-  }
-  for (const e of sitemapConditions()) {
-    if (isExcluded(e.url) || unique.has(e.url)) continue;
-    unique.add(e.url);
-    entries.push({
-      url: e.url,
-      lastModified: typeof e.lastModified === 'string' ? e.lastModified : now,
-      changeFrequency: e.changeFrequency ?? 'weekly',
-      priority: typeof e.priority === 'number' ? e.priority : 0.7,
-    });
-  }
-  for (const e of sitemapLocations()) {
-    if (isExcluded(e.url) || unique.has(e.url)) continue;
-    unique.add(e.url);
-    entries.push({
-      url: e.url,
-      lastModified: typeof e.lastModified === 'string' ? e.lastModified : now,
-      changeFrequency: e.changeFrequency ?? 'weekly',
-      priority: typeof e.priority === 'number' ? e.priority : 0.7,
-    });
-  }
+  // Services, conditions, and locations are now in their own sub-sitemaps.
+  // See /sitemap-services.xml, /sitemap-conditions.xml, /sitemap-locations.xml
 
   const posts = await getAllBlogPosts();
   for (const post of posts) add(`/blog/${post.slug}`, 0.7, 'daily');
