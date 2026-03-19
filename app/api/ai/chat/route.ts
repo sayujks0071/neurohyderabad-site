@@ -71,11 +71,15 @@ export async function POST(request: NextRequest) {
     return result.toDataStreamResponse();
 
   } catch (error) {
-    console.error('Error processing AI chat request:', error);
+    const errorDetail = error instanceof Error ? error.message : String(error);
+    console.error('Error processing AI chat request:', errorDetail, error);
     return new Response(
       JSON.stringify({ 
         error: 'Internal server error',
-        message: "I apologize, but I'm having trouble processing your request right now. Please call us directly at +91-9778280044 for immediate assistance."
+        message: "I apologize, but I'm having trouble processing your request right now. Please call us directly at +91-9778280044 for immediate assistance.",
+        // Include error detail in non-production or for debugging
+        ...(process.env.NODE_ENV !== 'production' ? { debug: errorDetail } : {}),
+        _debug_hint: errorDetail.substring(0, 100),
       }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }
     );
