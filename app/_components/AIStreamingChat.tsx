@@ -23,10 +23,12 @@ interface SuggestionItemProps {
   onSuggestionClick: (value: string) => void;
   className?: string;
   disabled?: boolean;
+  variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
+  size?: "default" | "sm" | "lg" | "icon";
 }
 
 const SuggestionItem = memo(
-  ({ suggestion, onSuggestionClick, className, disabled }: SuggestionItemProps) => {
+  ({ suggestion, onSuggestionClick, className, disabled, variant, size }: SuggestionItemProps) => {
     const handleClick = useCallback(
       () => onSuggestionClick(suggestion.value),
       [onSuggestionClick, suggestion.value]
@@ -38,6 +40,8 @@ const SuggestionItem = memo(
         suggestion={suggestion.value}
         className={className}
         disabled={disabled}
+        variant={variant}
+        size={size}
       />
     );
   }
@@ -467,8 +471,9 @@ export default function AIStreamingChat({
                     key={suggestion.key}
                     onSuggestionClick={handleQuickAction}
                     suggestion={suggestion}
-                    className="text-xs border-[var(--color-primary-500)] text-[var(--color-primary-700)] hover:bg-[var(--color-primary-100)] transition-colors disabled:opacity-50 whitespace-nowrap"
+                    className="text-xs border-[var(--color-primary-500)] text-[var(--color-primary-700)] hover:bg-[var(--color-primary-100)] transition-colors disabled:opacity-50"
                     disabled={isLoading}
+                    variant="outline"
                   />
                 ))}
               </Suggestions>
