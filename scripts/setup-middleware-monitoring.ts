@@ -293,6 +293,106 @@ const DASHBOARDS: DashboardConfig[] = [
       },
     ],
   },
+  {
+    name: 'Form Submission Funnel',
+    description: 'Track patient conversion from start to success',
+    widgets: [
+      {
+        name: 'Appointment Process Started',
+        type: 'number',
+        query: {
+          metric: 'Appointment_Start',
+          filters: [
+            { key: 'url', value: SITE_URL },
+          ],
+        },
+      },
+      {
+        name: 'Appointment Step Completed',
+        type: 'number',
+        query: {
+          metric: 'Appointment_Step_Complete',
+          filters: [
+            { key: 'url', value: SITE_URL },
+          ],
+        },
+      },
+      {
+        name: 'Appointment Submitted',
+        type: 'number',
+        query: {
+          metric: 'Appointment_Submit',
+          filters: [
+            { key: 'url', value: SITE_URL },
+          ],
+        },
+      },
+      {
+        name: 'Appointment Success',
+        type: 'number',
+        query: {
+          metric: 'Appointment_Success',
+          filters: [
+            { key: 'url', value: SITE_URL },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    name: 'Mobile vs Desktop Performance',
+    description: 'Compare Core Web Vitals across devices',
+    widgets: [
+      {
+        name: 'Mobile vs Desktop LCP',
+        type: 'line',
+        query: {
+          metric: 'web_vitals.lcp',
+          filters: [
+            { key: 'url', value: SITE_URL },
+          ],
+          groupBy: ['device'],
+        },
+      },
+      {
+        name: 'Mobile vs Desktop Error Rates',
+        type: 'line',
+        query: {
+          metric: 'error.rate',
+          filters: [
+            { key: 'url', value: SITE_URL },
+          ],
+          groupBy: ['device'],
+        },
+      },
+    ],
+  },
+  {
+    name: 'Peak Traffic Performance',
+    description: 'Monitor requests and latency during peak hours',
+    widgets: [
+      {
+        name: 'Requests per Minute',
+        type: 'line',
+        query: {
+          metric: 'http.requests',
+          filters: [
+            { key: 'url', value: SITE_URL },
+          ],
+        },
+      },
+      {
+        name: 'Response Latency Distribution',
+        type: 'line',
+        query: {
+          metric: 'http.response_time',
+          filters: [
+            { key: 'url', value: SITE_URL },
+          ],
+        },
+      },
+    ],
+  },
 ];
 
 async function setupMonitoring() {
