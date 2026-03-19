@@ -313,24 +313,34 @@ export default function AIStreamingChat({
                   {message.parts?.map((part: any, partIndex: number) => {
                     if (part.type === 'tool-invocation') {
                       const isApproval = part.state === 'approval-requested' || part.state === 'approval-responded' || part.state === 'output-denied' || part.state === 'output-available';
-                      const needsApproval = part.toolName === 'bookAppointment';
+                      const needsApproval = part.toolName === 'bookAppointment' || part.toolName === 'createCalendarEvent';
 
                       if (needsApproval && part.approval) {
                         return (
                           <div key={partIndex} className="mt-4">
                             <Confirmation approval={part.approval} state={part.state}>
                               <ConfirmationRequest>
-                                The AI wants to book an appointment.
+                                {part.toolName === 'bookAppointment'
+                                  ? 'The AI wants to book an appointment.'
+                                  : `The AI wants to create a calendar event: ${part.args?.summary || 'New Event'}.`}
                                 <br />
                                 Do you approve this action?
                               </ConfirmationRequest>
                               <ConfirmationAccepted>
                                 <CheckIcon className="size-4" />
-                                <span>You approved the appointment booking.</span>
+                                <span>
+                                  {part.toolName === 'bookAppointment'
+                                    ? 'You approved the appointment booking.'
+                                    : 'You approved creating the calendar event.'}
+                                </span>
                               </ConfirmationAccepted>
                               <ConfirmationRejected>
                                 <XIcon className="size-4" />
-                                <span>You rejected the appointment booking.</span>
+                                <span>
+                                  {part.toolName === 'bookAppointment'
+                                    ? 'You rejected the appointment booking.'
+                                    : 'You rejected creating the calendar event.'}
+                                </span>
                               </ConfirmationRejected>
                               <ConfirmationActions>
                                 <ConfirmationAction

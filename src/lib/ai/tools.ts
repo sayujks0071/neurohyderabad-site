@@ -129,6 +129,7 @@ export const tools = {
   } as any),
 
   createCalendarEvent: tool({
+    requireApproval: true,
     description: 'Create a Google Calendar event for a scheduled appointment to secure the timeslot and notify the patient via email.',
     parameters: z.object({
       summary: z.string().describe('The title of the event (e.g. "Dr. Sayuj Consultation - John Doe")'),
