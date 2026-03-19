@@ -125,6 +125,30 @@ const ALERTS: AlertConfig[] = [
     severity: 'high',
   },
 
+  // --- Deployment Health Checks ---
+  {
+    name: 'Post-Deployment Error Spike',
+    description: 'Alert when error rate spikes immediately after a deployment',
+    condition: {
+      metric: 'error.rate',
+      threshold: 0.05, // 5%
+      operator: '>',
+      window: '5m',
+    },
+    severity: 'high',
+  },
+  {
+    name: 'Post-Deployment Performance Degradation',
+    description: 'Alert when API response time degrades significantly',
+    condition: {
+      metric: 'http.response_time',
+      threshold: 2000, // 2s
+      operator: '>',
+      window: '10m',
+    },
+    severity: 'high',
+  },
+
   // --- Priority 3: Monitor (Optimization) ---
   {
     name: 'High CLS',
@@ -169,10 +193,8 @@ async function setupAlerts() {
     const ruleId = process.argv[2] || 'default-rule-id';
 
     if (ruleId === 'default-rule-id') {
-      console.log('⚠️  Note: You need to provide a rule ID');
-      console.log('   Usage: pnpm tsx scripts/setup-middleware-alerts.ts <rule-id>');
-      console.log('   Or create a rule in the dashboard first\n');
-      return;
+      console.log('⚠️  Note: No rule ID provided. Using "default-rule-id".');
+      console.log('   You can provide a rule ID via: pnpm tsx scripts/setup-middleware-alerts.ts <rule-id>\n');
     }
 
     const webhookSecret = process.env.MIDDLEWARE_WEBHOOK_SECRET;
