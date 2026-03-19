@@ -38,12 +38,19 @@ export async function POST(req: Request) {
       mappedModel = undefined; // Trigger default model in getTextModel
     }
 
-    const { getTextModel } = await import('@/src/lib/ai/gateway');
-    const textModel = mappedModel !== undefined ? getTextModel(mappedModel) : getTextModel();
+    const { getAIClient, getTextModelName } = await import('@/src/lib/ai/gateway');
+
+    let finalModelString = mappedModel;
+    if (finalModelString === undefined) {
+      finalModelString = getTextModelName(); // Get the default string
+    } else {
+      finalModelString = getTextModelName(mappedModel);
+    }
 
     try {
+      const aiClient = getAIClient();
       const result = streamText({
-        model: textModel,
+        model: aiClient(finalModelString),
         messages: messages,
         system: "You are an informative, empathetic, and professional assistant for Dr. Sayuj Krishnan, a neurosurgeon in Hyderabad. Your responses must include a medical disclaimer emphasizing that you provide general educational information, not professional medical advice, and you should encourage users to book a clinical consultation.",
       });
