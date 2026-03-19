@@ -216,6 +216,7 @@ const LiveAssistant = ({
             </div>
           </div>
           <button
+            aria-label="Close Voice Assistant"
             onClick={onClose}
             className="p-2 hover:bg-white/10 rounded-full transition-colors"
           >
