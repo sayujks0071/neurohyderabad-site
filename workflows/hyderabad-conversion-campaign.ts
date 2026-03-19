@@ -1,8 +1,8 @@
-import { exec } from "child_process";
+import { execFile } from "child_process";
 import { promisify } from "util";
 import { appointments } from "../src/lib/db";
 
-const execAsync = promisify(exec);
+const execFileAsync = promisify(execFile);
 
 // Mock data or query from DB for unconverted leads in Hyderabad
 const HYDERABAD_LEADS = [
@@ -14,10 +14,10 @@ const HYDERABAD_LEADS = [
 async function createCampaignTrackerSheet(): Promise<string | null> {
   console.log("Creating Google Sheet for Hyderabad Conversion Campaign...");
   const title = `Hyderabad Conversion Campaign - ${new Date().toISOString().split("T")[0]}`;
-  const command = `gws sheets spreadsheets create --json '{"properties": {"title": "${title}"}}'`;
+  const args = ["sheets", "spreadsheets", "create", "--json", JSON.stringify({ properties: { title } })];
 
   try {
-    const { stdout, stderr } = await execAsync(command);
+    const { stdout, stderr } = await execFileAsync("gws", args);
     if (stderr && !stderr.includes("success") && !stderr.includes("200 OK")) {
       console.warn("gws sheets stderr:", stderr);
     }
@@ -36,10 +36,19 @@ async function addHeaderRow(spreadsheetId: string) {
     values: [["Date", "Name", "Email", "Condition", "Status"]]
   });
 
-  const command = `gws sheets spreadsheets values append --params '{"spreadsheetId": "${spreadsheetId}", "range": "${range}", "valueInputOption": "USER_ENTERED"}' --json '${jsonPayload}'`;
+  const args = [
+    "sheets",
+    "spreadsheets",
+    "values",
+    "append",
+    "--params",
+    JSON.stringify({ spreadsheetId, range, valueInputOption: "USER_ENTERED" }),
+    "--json",
+    jsonPayload,
+  ];
 
   try {
-    await execAsync(command);
+    await execFileAsync("gws", args);
     console.log("Header row added to sheet.");
   } catch (error) {
     console.error("Failed to add header row:", error);
@@ -52,10 +61,19 @@ async function logLeadToSheet(spreadsheetId: string, lead: any) {
     values: [[new Date().toISOString().split("T")[0], lead.name, lead.email, lead.condition, lead.status]]
   });
 
-  const command = `gws sheets spreadsheets values append --params '{"spreadsheetId": "${spreadsheetId}", "range": "${range}", "valueInputOption": "USER_ENTERED"}' --json '${jsonPayload}'`;
+  const args = [
+    "sheets",
+    "spreadsheets",
+    "values",
+    "append",
+    "--params",
+    JSON.stringify({ spreadsheetId, range, valueInputOption: "USER_ENTERED" }),
+    "--json",
+    jsonPayload,
+  ];
 
   try {
-    await execAsync(command);
+    await execFileAsync("gws", args);
     console.log(`Logged ${lead.name} to tracker.`);
   } catch (error) {
     console.error(`Failed to log ${lead.name} to tracker:`, error);
@@ -77,10 +95,13 @@ The Clinic of Dr. Sayuj Krishnan
 Yashoda Hospital, Hyderabad`;
 
   // Use gws gmail +send
-  const command = `gws gmail +send --to "${lead.email}" --subject "${subject}" --body "${body}"${dryRun ? " --dry-run" : ""}`;
+  const args = ["gmail", "+send", "--to", lead.email, "--subject", subject, "--body", body];
+  if (dryRun) {
+    args.push("--dry-run");
+  }
 
   try {
-    const { stdout, stderr } = await execAsync(command);
+    const { stdout, stderr } = await execFileAsync("gws", args);
     if (stderr && !stderr.includes("success") && !stderr.includes("200 OK")) {
       console.warn("gws gmail stderr:", stderr);
     }
