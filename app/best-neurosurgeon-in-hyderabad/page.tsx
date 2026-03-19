@@ -6,6 +6,7 @@ import SmartImage from '@/components/SmartImage';
 // import SocialProofBand from "../../src/components/Experiments/SocialProofBand";
 import { LocationCTAs } from "@/src/components/locations/LocationCTAs";
 import { LocalPathways } from "@/src/components/locations/LocalPathways";
+import { safeJsonLdStringify } from '@/src/lib/seo/jsonld';
 
 export const metadata: Metadata = {
   title: "Best Neurosurgeon in Hyderabad | Dr. Sayuj Krishnan | Yashoda Hospital",
@@ -639,8 +640,7 @@ export default function BestNeurosurgeonPage() {
       {/* JSON-LD Structured Data */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify({
             "@context": "https://schema.org",
             "@graph": [
               {
@@ -784,8 +784,7 @@ export default function BestNeurosurgeonPage() {
                 }
               }
             ]
-          })
-        }}
+          }) }}
       />
     </>
   );

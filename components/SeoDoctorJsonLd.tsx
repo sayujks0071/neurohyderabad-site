@@ -1,3 +1,4 @@
+import { safeJsonLdStringify } from '@/src/lib/seo/jsonld';
 export default function SeoDoctorJsonLd() {
   const physicianData = {
     '@context': 'https://schema.org',
@@ -257,12 +258,12 @@ export default function SeoDoctorJsonLd() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(physicianData) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(physicianData) }}
         suppressHydrationWarning
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(clinicData) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(clinicData) }}
         suppressHydrationWarning
       />
     </>

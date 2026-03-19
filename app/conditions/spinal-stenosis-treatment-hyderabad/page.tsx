@@ -14,6 +14,7 @@ import CostTransparencySection from '@/src/components/CostTransparencySection';
 import TeleconsultationForm from '@/components/TeleconsultationForm';
 import OutcomeMetricsSection from '@/components/OutcomeMetricsSection';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
+import { safeJsonLdStringify } from '@/src/lib/seo/jsonld';
 
 const baseMetadata = makeMetadata({
   title: 'Spinal Stenosis Treatment Hyderabad | Pain Relief',
@@ -302,8 +303,7 @@ export default function SpinalStenosisPage() {
       {/* MedicalCondition Schema */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify({
             "@context": "https://schema.org",
             "@type": "MedicalCondition",
             "name": "Lumbar Spinal Stenosis",
@@ -321,8 +321,7 @@ export default function SpinalStenosisPage() {
                 "name": "Epidural Steroid Injection"
               }
             ]
-          })
-        }}
+          }) }}
       />
     </div>
   );

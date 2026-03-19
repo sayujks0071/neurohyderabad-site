@@ -1,4 +1,5 @@
 import { SITE_URL } from "../../src/lib/seo";
+import { safeJsonLdStringify } from '@/src/lib/seo/jsonld';
 
 export function BestNeurosurgeonStructuredData() {
   const structuredData = {
@@ -236,7 +237,7 @@ export function BestNeurosurgeonStructuredData() {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(structuredData) }}
     />
   );
 }

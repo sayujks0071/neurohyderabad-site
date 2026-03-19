@@ -1,4 +1,5 @@
 import React from 'react';
+import { safeJsonLdStringify } from '@/src/lib/seo/jsonld';
 
 interface SchemaScriptProps {
   data: any;
@@ -10,9 +11,7 @@ export default function SchemaScript({ data, id }: SchemaScriptProps) {
     <script
       type="application/ld+json"
       id={id}
-      dangerouslySetInnerHTML={{
-        __html: JSON.stringify(data, null, 0)
-      }}
+      dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(data, null, 0) }}
     />
   );
 }

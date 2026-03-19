@@ -1,4 +1,5 @@
 import { SITE_URL } from "../lib/seo";
+import { safeJsonLdStringify } from '@/src/lib/seo/jsonld';
 import {
   CLINIC_AGGREGATE_RATING,
   CLINIC_INFO,
@@ -204,7 +205,7 @@ export function GlobalStructuredData() {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(structuredData) }}
     />
   );
 }

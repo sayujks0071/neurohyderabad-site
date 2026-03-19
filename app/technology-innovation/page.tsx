@@ -4,6 +4,7 @@ import { SITE_URL } from "../../src/lib/seo";
 import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
 import { serviceJsonLd } from "../../src/lib/seo";
 import MedicalWebPageSchema from "../components/schemas/MedicalWebPageSchema";
+import { safeJsonLdStringify } from '@/src/lib/seo/jsonld';
 
 export const metadata: Metadata = {
   title: "Neurosurgery Technology Hyderabad | AI, Robotics & Safety",
@@ -102,11 +103,11 @@ export default function TechnologyInnovationPage() {
       <BreadcrumbSchema items={breadcrumbs} />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(technologyServiceJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(technologyServiceJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqData) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(faqData) }}
       />
       <MedicalWebPageSchema
         title="Advanced Neurosurgery Technology Hyderabad | AI, Robotics & Safety"
