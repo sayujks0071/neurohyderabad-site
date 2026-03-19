@@ -1,5 +1,6 @@
 import { SITE_URL } from '../../../src/lib/seo';
 import { SOCIAL_PROFILES } from '../../../src/data/locations';
+import { safeJsonLdStringify } from '@/src/lib/seo/jsonld';
 
 export default function WebsiteSchema() {
   const schema = {
@@ -23,7 +24,7 @@ export default function WebsiteSchema() {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(schema) }}
     />
   );
 }

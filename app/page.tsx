@@ -762,6 +762,44 @@ export default function Home() {
           </div>
         </Section>
 
+        {/* Our Spine & Brain Surgery Services */}
+        <Section background="white" className="py-16">
+          <h2 className="text-3xl font-bold text-center mb-4">Our Spine & Brain Surgery Services</h2>
+          <p className="text-center text-[var(--color-text-secondary)] mb-10 max-w-2xl mx-auto">
+            Advanced, minimally invasive neurosurgical procedures with faster recovery and less pain.
+          </p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
+            {[
+              { href: '/services/endoscopic-spine-surgery-hyderabad', label: 'Endoscopic Spine Surgery', icon: '🔬' },
+              { href: '/services/endoscopic-discectomy-hyderabad', label: 'Endoscopic Discectomy', icon: '💉' },
+              { href: '/services/minimally-invasive-spine-surgery', label: 'Minimally Invasive Spine Surgery', icon: '🦴' },
+              { href: '/services/spinal-fusion-surgery-hyderabad', label: 'Spinal Fusion Surgery', icon: '🔗' },
+              { href: '/services/spinal-decompression-surgery-hyderabad', label: 'Spinal Decompression', icon: '⚡' },
+              { href: '/services/cervical-disc-replacement-hyderabad', label: 'Cervical Disc Replacement', icon: '🔄' },
+              { href: '/services/brain-tumor-surgery-hyderabad', label: 'Brain Tumor Surgery', icon: '🧠' },
+              { href: '/services/robotic-spine-surgery-hyderabad', label: 'Robotic Spine Surgery', icon: '🤖' },
+              { href: '/services/kyphoplasty-vertebroplasty-hyderabad', label: 'Kyphoplasty / Vertebroplasty', icon: '🏥' },
+              { href: '/services/peripheral-nerve-surgery-hyderabad', label: 'Peripheral Nerve Surgery', icon: '🔌' },
+              { href: '/services/lumbar-laminectomy-surgery-hyderabad', label: 'Lumbar Laminectomy', icon: '🦿' },
+              { href: '/services/spine-surgery-cost-hyderabad', label: 'Spine Surgery Cost Guide', icon: '💰' },
+            ].map(({ href, label, icon }) => (
+              <Link
+                key={href}
+                href={href}
+                className="flex items-center gap-3 bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 rounded-xl px-5 py-4 transition-colors group"
+              >
+                <span className="text-2xl">{icon}</span>
+                <span className="font-medium text-slate-700 group-hover:text-blue-700">{label}</span>
+              </Link>
+            ))}
+          </div>
+          <div className="text-center mt-8">
+            <Link href="/services" className="text-blue-600 font-semibold hover:underline">
+              View All Services →
+            </Link>
+          </div>
+        </Section>
+
         {/* Conditions We Treat Mini-Cluster */}
         <Section background="white" className="py-12 bg-slate-50">
           <div className="max-w-4xl mx-auto text-center">
@@ -782,11 +820,60 @@ export default function Home() {
                <Link href="/conditions/trigeminal-neuralgia-treatment-hyderabad" className="bg-white border border-blue-200 text-blue-700 px-6 py-3 rounded-full hover:bg-blue-50 font-medium transition-colors">
                   Trigeminal Neuralgia
                </Link>
+               <Link href="/conditions/spinal-stenosis-treatment-hyderabad" className="bg-white border border-blue-200 text-blue-700 px-6 py-3 rounded-full hover:bg-blue-50 font-medium transition-colors">
+                  Spinal Stenosis
+               </Link>
+               <Link href="/conditions/cervical-radiculopathy-treatment-hyderabad" className="bg-white border border-blue-200 text-blue-700 px-6 py-3 rounded-full hover:bg-blue-50 font-medium transition-colors">
+                  Cervical Radiculopathy
+               </Link>
+               <Link href="/conditions/degenerative-disc-disease-treatment-hyderabad" className="bg-white border border-blue-200 text-blue-700 px-6 py-3 rounded-full hover:bg-blue-50 font-medium transition-colors">
+                  Degenerative Disc Disease
+               </Link>
+               <Link href="/conditions/spondylolisthesis-treatment-hyderabad" className="bg-white border border-blue-200 text-blue-700 px-6 py-3 rounded-full hover:bg-blue-50 font-medium transition-colors">
+                  Spondylolisthesis
+               </Link>
+               <Link href="/conditions/brain-bleed-evacuation-hyderabad" className="bg-white border border-blue-200 text-blue-700 px-6 py-3 rounded-full hover:bg-blue-50 font-medium transition-colors">
+                  Brain Bleed
+               </Link>
             </div>
             <div className="mt-8">
                 <Link href="/conditions" className="text-blue-600 font-semibold hover:underline">
                     View All Conditions →
                 </Link>
+            </div>
+          </div>
+        </Section>
+
+        {/* Latest from Our Blog */}
+        <Section className="py-12">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl font-bold mb-4">Latest from Our Blog</h2>
+            <p className="text-[var(--color-text-secondary)] mb-8">
+              Evidence-based articles to help you make informed decisions about your spine and brain health.
+            </p>
+            <div className="grid sm:grid-cols-2 gap-4 text-left max-w-3xl mx-auto">
+              {[
+                { href: '/blog/when-to-worry-about-back-pain-neurosurgeon-hyderabad', title: 'When to Worry About Back Pain' },
+                { href: '/blog/endoscopic-spine-surgery-cost-hyderabad', title: 'Endoscopic Spine Surgery Cost Guide' },
+                { href: '/blog/sciatica-pain-management-hyderabad', title: 'Sciatica Pain Management' },
+                { href: '/blog/brain-tumor-surgery-cost-hyderabad', title: 'Brain Tumor Surgery Cost in Hyderabad' },
+                { href: '/blog/spine-surgery-recovery-timeline-hyderabad', title: 'Spine Surgery Recovery Timeline' },
+                { href: '/blog/disc-replacement-vs-fusion', title: 'Disc Replacement vs Fusion' },
+              ].map(({ href, title }) => (
+                <Link
+                  key={href}
+                  href={href}
+                  className="flex items-center gap-2 p-4 rounded-lg hover:bg-blue-50 transition-colors group"
+                >
+                  <span className="text-blue-500">📝</span>
+                  <span className="text-slate-700 group-hover:text-blue-700 font-medium">{title}</span>
+                </Link>
+              ))}
+            </div>
+            <div className="mt-6">
+              <Link href="/blog" className="text-blue-600 font-semibold hover:underline">
+                Read All Articles →
+              </Link>
             </div>
           </div>
         </Section>

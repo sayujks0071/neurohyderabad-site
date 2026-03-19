@@ -8,6 +8,7 @@ import { makeMetadata } from '@/app/_lib/meta';
 import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import { sources } from '../sources';
+import { safeJsonLdStringify } from '@/src/lib/seo/jsonld';
 
 const baseMetadata = makeMetadata({
   title: 'MVD vs Radiosurgery vs Percutaneous for Trigeminal Neuralgia | Which is Best?',
@@ -465,8 +466,7 @@ export default function MVDvsRadiosurgeryPage() {
       {/* JSON-LD */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify({
             "@context": "https://schema.org",
             "@type": "BlogPosting",
             "headline": "Trigeminal Neuralgia Treatment: MVD vs Radiosurgery vs Percutaneous Procedures",
@@ -482,8 +482,7 @@ export default function MVDvsRadiosurgeryPage() {
               "@type": "WebPage",
               "@id": `${SITE_URL}/blog/mvd-vs-radiosurgery-trigeminal-neuralgia/`
             }
-          })
-        }}
+          }) }}
       />
     </>
   );

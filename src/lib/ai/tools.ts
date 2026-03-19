@@ -1,6 +1,6 @@
 import { tool } from 'ai';
 import { z } from 'zod';
-import { exec } from 'child_process';
+import { execFile } from 'child_process';
 import { promisify } from 'util';
 import { processBooking } from '@/src/lib/appointments/service';
 import { appointments } from '@/src/lib/db';
@@ -8,7 +8,7 @@ import { locations } from '@/src/data/locations';
 import { semanticSearch } from '@/src/lib/ai/semantic-search';
 import type { BookingData } from '@/packages/appointment-form/types';
 
-const execAsync = promisify(exec);
+const execFileAsync = promisify(execFile);
 
 const SERVICES = [
   { name: 'Minimally Invasive Spine Surgery', url: '/services/minimally-invasive-spine-surgery' },
@@ -94,7 +94,9 @@ export const tools = {
         return {
           status: 'success',
           message: 'Appointment booked successfully. A confirmation email has been sent.',
-          details: result
+          details: result,
+          // Signal for client-side tracking (chat_form_submit event)
+          _trackEvent: 'chat_form_submit',
         };
       } else {
         return {
@@ -148,10 +150,17 @@ export const tools = {
           eventPayload.attendees = [{ email: attendeeEmail }];
         }
 
-        const jsonString = JSON.stringify(eventPayload).replace(/'/g, "'\\''");
-        const command = `gws calendar events insert --params '{"calendarId": "primary"}' --json '${jsonString}'`;
+        const args = [
+          'calendar',
+          'events',
+          'insert',
+          '--params',
+          JSON.stringify({ calendarId: 'primary' }),
+          '--json',
+          JSON.stringify(eventPayload)
+        ];
 
-        const { stdout, stderr } = await execAsync(command);
+        const { stdout, stderr } = await execFileAsync('gws', args);
         if (stderr && !stderr.includes('success')) {
           console.warn('[tools/createCalendarEvent] gws stderr:', stderr);
         }

@@ -14,6 +14,7 @@ import CostTransparencySection from '@/src/components/CostTransparencySection';
 import TeleconsultationForm from '@/components/TeleconsultationForm';
 import OutcomeMetricsSection from '@/components/OutcomeMetricsSection';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
+import { safeJsonLdStringify } from '@/src/lib/seo/jsonld';
 
 const baseMetadata = makeMetadata({
   title: 'Osteoporotic Spine Fracture Treatment in Hyderabad | Vertebroplasty Cost',
@@ -221,8 +222,7 @@ export default function OsteoporoticFracturePage() {
       {/* MedicalCondition Schema */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify({
             "@context": "https://schema.org",
             "@type": "MedicalCondition",
             "name": "Osteoporotic Spinal Compression Fracture",
@@ -241,8 +241,7 @@ export default function OsteoporoticFracturePage() {
                 "name": "Kyphoplasty"
               }
             ]
-          })
-        }}
+          }) }}
       />
     </div>
   );

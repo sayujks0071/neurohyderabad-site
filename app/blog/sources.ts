@@ -204,6 +204,42 @@ export const BLOG_SOURCES: Record<string, SourceEntry[]> = {
       href: "https://www.ninds.nih.gov/health-information/disorders/sciatica",
     },
   ],
+  "neck-pain-arm-numbness-causes-treatment-hyderabad": [
+    {
+      label: "American Academy of Orthopaedic Surgeons – Cervical Radiculopathy (Pinched Nerve)",
+      href: "https://orthoinfo.aaos.org/en/diseases--conditions/cervical-radiculopathy-pinched-nerve/",
+    },
+    {
+      label: "Mayo Clinic – Herniated Disk: Symptoms & Causes",
+      href: "https://www.mayoclinic.org/diseases-conditions/herniated-disk/symptoms-causes/syc-20354095",
+    },
+    {
+      label: "National Institute of Neurological Disorders and Stroke – Cervical Spondylosis",
+      href: "https://www.ninds.nih.gov/health-information/disorders/cervical-spondylosis",
+    },
+    {
+      label: "National Health Service (UK) – Cervical Spondylosis",
+      href: "https://www.nhs.uk/conditions/cervical-spondylosis/",
+    },
+  ],
+  "life-after-spine-surgery-long-term-outcomes": [
+    {
+      label: "Hospital for Special Surgery – Spine Surgery Recovery Guidelines",
+      href: "https://www.hss.edu/conditions_spine-surgery-recovery.asp",
+    },
+    {
+      label: "National Health Service (UK) – Recovering from Back Surgery",
+      href: "https://www.nhs.uk/conditions/back-surgery/recovery/",
+    },
+    {
+      label: "The Spine Journal – Long-Term Outcomes After Lumbar Discectomy",
+      href: "https://www.thespinejournalonline.com/article/S1529-9430(13)01509-4/fulltext",
+    },
+    {
+      label: "Mayo Clinic – Spinal Fusion: Recovery & Risks",
+      href: "https://www.mayoclinic.org/tests-procedures/spinal-fusion/about/pac-20384523",
+    },
+  ],
   "brain-spine-surgeon-banjara-hills": [
     {
       label: "Yashoda Hospital – Official Website and Location Information",
@@ -296,6 +332,64 @@ export const BLOG_SOURCES: Record<string, SourceEntry[]> = {
     {
       label: "Mayo Clinic – Scoliosis Symptoms & Causes",
       href: "https://www.mayoclinic.org/diseases-conditions/scoliosis/symptoms-causes/syc-20350716",
+    },
+  ],
+  "second-opinion-spine-surgery-hyderabad": [
+    {
+      label: "The Spine Journal – Impact of Spine Surgeon's Advice on Second Opinion Patients",
+      href: "https://www.thespinejournalonline.com/article/S1529-9430(17)30096-5/fulltext",
+    },
+    {
+      label: "JAMA Network Open – Variation in Lumbar Spine Surgery Recommendation Across Surgeons",
+      href: "https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2762825",
+    },
+    {
+      label: "Dartmouth Atlas of Health Care – Variation in Spinal Fusion Rates",
+      href: "https://www.dartmouthatlas.org/interactive-apps/surgical-rates/",
+    },
+    {
+      label: "American Academy of Orthopaedic Surgeons – Choosing Wisely: Spinal Fusion Recommendations",
+      href: "https://www.choosingwisely.org/societies/american-academy-of-orthopaedic-surgeons/",
+    },
+    {
+      label: "Insurance Regulatory and Development Authority of India – Policyholder Rights",
+      href: "https://irdai.gov.in/ADMINCMS/cms/Uploadedfiles/Publications/Handbook_Policyholder.pdf",
+    },
+  ],
+  "neurosurgeon-vs-neurologist-when-to-see-which": [
+    {
+      label: "American Association of Neurological Surgeons – What Is a Neurosurgeon?",
+      href: "https://www.aans.org/en/Patients/What-is-a-Neurosurgeon",
+    },
+    {
+      label: "National Institute of Neurological Disorders and Stroke – Neurological Diagnostic Tests",
+      href: "https://www.ninds.nih.gov/health-information/patient-caregiver-education/fact-sheets/neurological-diagnostic-tests-and-procedures-fact-sheet",
+    },
+    {
+      label: "Mayo Clinic – When to See a Neurologist",
+      href: "https://www.mayoclinic.org/departments-centers/neurology/overview/ovc-20399399",
+    },
+    {
+      label: "NHS UK – Neurosurgery Overview",
+      href: "https://www.nhs.uk/conditions/neurosurgery/",
+    },
+  ],
+  "understanding-spine-mri-report-patient-guide": [
+    {
+      label: "Spine-health – Understanding Spinal Disc Problems: Bulge, Herniation, Protrusion",
+      href: "https://www.spine-health.com/conditions/herniated-disc/whats-a-herniated-disc-pinched-nerve-bulging-disc",
+    },
+    {
+      label: "National Institute of Neurological Disorders and Stroke – Low Back Pain Fact Sheet",
+      href: "https://www.ninds.nih.gov/health-information/disorders/low-back-pain",
+    },
+    {
+      label: "The New England Journal of Medicine – MRI of the Lumbar Spine in Asymptomatic Individuals",
+      href: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4464797/",
+    },
+    {
+      label: "Mayo Clinic – Spinal Stenosis",
+      href: "https://www.mayoclinic.org/diseases-conditions/spinal-stenosis/symptoms-causes/syc-20352961",
     },
   ],
   "failed-back-surgery-syndrome-treatment-hyderabad": [

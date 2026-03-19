@@ -1,4 +1,5 @@
 import { SITE_URL } from '../../../src/lib/seo';
+import { safeJsonLdStringify } from '@/src/lib/seo/jsonld';
 
 interface MedicalWebPageSchemaProps {
   pageType: 'service' | 'condition' | 'blog' | 'location' | 'about' | 'contact';
@@ -160,7 +161,7 @@ export default function MedicalWebPageSchema({
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(baseSchema) }}
+      dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(baseSchema) }}
     />
   );
 }

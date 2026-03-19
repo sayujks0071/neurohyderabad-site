@@ -12,7 +12,7 @@ export default function NotFound() {
         <Link
           href="/"
           aria-label="Go to Homepage"
-          className="inline-flex items-center justify-center bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-8 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-[0.98] mb-8"
+          className="inline-flex items-center justify-center bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-[0.98] mb-8"
         >
           Go to Homepage
         </Link>
@@ -22,19 +22,19 @@ export default function NotFound() {
           <div className="flex flex-wrap justify-center gap-3">
             <Link
               href="/services/"
-              className="inline-flex items-center justify-center bg-white border border-slate-200 text-slate-600 font-medium py-2 px-4 rounded-xl transition-all duration-300 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 text-sm shadow-sm hover:shadow-md"
+              className="inline-flex items-center justify-center bg-white border border-slate-200 text-slate-600 font-medium py-3 px-6 rounded-xl transition-all duration-300 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 text-sm shadow-sm hover:shadow-md"
             >
               Services
             </Link>
             <Link
               href="/conditions/"
-              className="inline-flex items-center justify-center bg-white border border-slate-200 text-slate-600 font-medium py-2 px-4 rounded-xl transition-all duration-300 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 text-sm shadow-sm hover:shadow-md"
+              className="inline-flex items-center justify-center bg-white border border-slate-200 text-slate-600 font-medium py-3 px-6 rounded-xl transition-all duration-300 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 text-sm shadow-sm hover:shadow-md"
             >
               Conditions
             </Link>
             <Link
               href="/contact/"
-              className="inline-flex items-center justify-center bg-white border border-slate-200 text-slate-600 font-medium py-2 px-4 rounded-xl transition-all duration-300 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 text-sm shadow-sm hover:shadow-md"
+              className="inline-flex items-center justify-center bg-white border border-slate-200 text-slate-600 font-medium py-3 px-6 rounded-xl transition-all duration-300 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 text-sm shadow-sm hover:shadow-md"
             >
               Contact
             </Link>

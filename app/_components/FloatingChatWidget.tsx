@@ -1,25 +1,42 @@
 // @ts-nocheck
 'use client';
 
-import { useState, useRef, useEffect, useMemo } from 'react';
-import { useStatsigEvents } from '../../src/lib/statsig-events';
+import { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import { trackMiddlewareEvent } from '@/src/lib/middleware/rum';
-import { MessageCircle, X, Send, AlertTriangle, Loader2, Sparkles, Minus } from 'lucide-react';
+import { MessageCircle, X, Send, AlertTriangle, Loader2, Sparkles, Minus, Phone } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { useChat } from '@ai-sdk/react';
 import { Shimmer } from "@/src/components/ai-elements/shimmer";
-// @ts-ignore
 type Message = any;
 
 /**
- * Floating AI Chat Widget using Vercel AI Gateway
+ * Floating AI Chat Widget — Scoped Booking & Navigation Assistant
  *
- * Features:
- * - Global availability via floating button
- * - Real-time streaming responses (via useChat)
- * - Emergency detection
- * - Compact design
+ * Scope: appointment booking, clinic info, procedure discovery, published FAQs.
+ * Escalates clinical/diagnostic questions to WhatsApp/phone.
+ *
+ * Tracking events (7):
+ *   1. widget_open          — widget opened
+ *   2. chat_first_message   — first user message in session
+ *   3. chat_appointments_click — CTA click to appointments
+ *   4. chat_whatsapp_click  — CTA click to WhatsApp
+ *   5. chat_phone_click     — phone number clicked
+ *   6. chat_form_submit     — lead/booking form submitted
+ *   7. chat_qualified_handoff — clinical question escalated to human
  */
+
+const WHATSAPP_URL = 'https://wa.me/919778280044?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20with%20Dr.%20Sayuj.';
+const PHONE_NUMBER = '+919778280044';
+const PHONE_DISPLAY = '+91 97782 80044';
+
+// Track events to GA4 + middleware RUM
+function trackEvent(name: string, props: Record<string, string> = {}) {
+  trackMiddlewareEvent(name, { source: 'chat_widget', ...props });
+  // Also push to GA4 dataLayer if available
+  if (typeof window !== 'undefined' && window.dataLayer) {
+    window.dataLayer.push({ event: name, ...props });
+  }
+}
 
 interface FloatingChatWidgetProps {
   autoOpen?: boolean;
@@ -28,50 +45,38 @@ interface FloatingChatWidgetProps {
 export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWidgetProps) {
   const [isOpen, setIsOpen] = useState(autoOpen);
   const [isMinimized, setIsMinimized] = useState(false);
-
-  useEffect(() => {
-    if (autoOpen) {
-      setIsOpen(true);
-    }
-  }, [autoOpen]);
+  const [hasTrackedFirstMessage, setHasTrackedFirstMessage] = useState(false);
   const [showEmergencyAlert, setShowEmergencyAlert] = useState(false);
-
-  // Manual input state
   const [input, setInput] = useState('');
-
-  // Page context state
   const [pageTitle, setPageTitle] = useState('');
   const [pageDescription, setPageDescription] = useState('');
   const pathname = usePathname();
 
+  useEffect(() => {
+    if (autoOpen) setIsOpen(true);
+  }, [autoOpen]);
+
   // Update page context on navigation
   useEffect(() => {
-    // Small delay to ensure document title and meta tags are updated by Next.js
     const timer = setTimeout(() => {
       setPageTitle(document.title);
       const metaDesc = document.querySelector('meta[name="description"]');
       setPageDescription(metaDesc ? metaDesc.getAttribute('content') || '' : '');
     }, 500);
-
     return () => clearTimeout(timer);
   }, [pathname]);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Statsig hooks
-  const { logAppointmentBooking, logContactFormSubmit } = useStatsigEvents();
-
-  // Initial greeting
   const initialMessages = useMemo<Message[]>(() => [
     {
       id: 'initial',
       role: 'assistant',
-      content: "Hello! I'm Dr. Sayuj's AI assistant. I can help you with appointments, condition info, and more. How can I help?"
+      content: "Hi! I can help you book an appointment with Dr. Sayuj, find information about our services, or connect you with our team. How can I help?"
     },
   ], []);
 
-  // Use Vercel AI SDK useChat hook
   const { messages, append, status, error } = useChat({
     api: '/api/ai/chat',
     body: {
@@ -82,105 +87,109 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
     },
     initialMessages,
     onFinish: (message) => {
-      const content = message.content;
+      const content = message.content?.toLowerCase() || '';
 
-      trackMiddlewareEvent('chat_response_received', {
-        source: 'floating_widget',
-        success: true
-      });
-
-      // Check for emergency keywords
-      const emergencyKeywords = ['emergency', 'urgent', 'immediately', 'call', 'stroke', 'seizure'];
-      const hasEmergency = emergencyKeywords.some(keyword =>
-        content.toLowerCase().includes(keyword)
-      );
-
-      if (hasEmergency) {
+      // Detect emergency keywords
+      const emergencyKeywords = ['emergency', 'immediately', 'call +91', 'nearest emergency'];
+      if (emergencyKeywords.some(kw => content.includes(kw))) {
         setShowEmergencyAlert(true);
-        trackMiddlewareEvent('chat_emergency_detected', {
-          source: 'floating_widget'
-        });
       }
 
-      logContactFormSubmit('ai_chat_widget', true);
+      // EVENT 6: chat_form_submit — detect successful booking via tool result or assistant confirmation
+      const bookingSuccessIndicators = [
+        'appointment booked successfully',
+        'confirmation email has been sent',
+        'coordinator will call you shortly to confirm',
+      ];
+      if (bookingSuccessIndicators.some(indicator => content.includes(indicator))) {
+        trackEvent('chat_form_submit', { page_slug: pathname || '/' });
+      }
+
+      // EVENT 7: qualified_handoff — detect when assistant escalates to human
+      const handoffIndicators = [
+        'whatsapp us',
+        'call directly',
+        'dr. sayuj would assess',
+        'dr. sayuj would need to evaluate',
+        'speak with our team',
+        'book a consultation',
+      ];
+      if (handoffIndicators.some(indicator => content.includes(indicator))) {
+        trackEvent('chat_qualified_handoff', { page_slug: pathname || '/' });
+      }
     },
-    onError: (error) => {
-      console.error('Chat error:', error);
-      logContactFormSubmit('ai_chat_widget', false);
-      trackMiddlewareEvent('chat_error', {
-        source: 'floating_widget',
-        error: error.message
-      });
+    onError: (err) => {
+      console.error('Chat error:', err);
+      trackEvent('chat_error', { error: err.message });
     }
   });
 
   const isLoading = status === 'submitted' || status === 'streaming';
 
-  const scrollToBottom = () => {
+  const scrollToBottom = useCallback(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
+  }, []);
 
+  // EVENT 1: widget_open
   useEffect(() => {
     if (isOpen && !isMinimized) {
       scrollToBottom();
-      // Focus input when opened
       setTimeout(() => inputRef.current?.focus(), 100);
-
-      // Track widget open
-      trackMiddlewareEvent('chat_widget_open', {
-        page_slug: pathname || 'unknown'
-      });
+      trackEvent('widget_open', { page_slug: pathname || '/' });
     }
-  }, [isOpen, isMinimized]);
+  }, [isOpen, isMinimized, pathname, scrollToBottom]);
 
-  // Scroll on new messages
   useEffect(() => {
-    if (isOpen && !isMinimized) {
-      scrollToBottom();
-    }
-  }, [messages, isOpen, isMinimized]);
-
-  const handleSendMessage = async (content: string) => {
-    if (!content.trim() || isLoading) return;
-
-    // Log user interaction
-    logAppointmentBooking('ai_chat_widget_interaction', 'general');
-    trackMiddlewareEvent('chat_message_sent', {
-      source: 'floating_widget',
-      page_slug: pathname || 'unknown'
-    });
-
-    if (typeof append === 'function') {
-      await append({ role: 'user', content: content.trim() });
-    } else {
-      console.error('Chat append is not a function. Fallback active.');
-    }
-  };
+    if (isOpen && !isMinimized) scrollToBottom();
+  }, [messages, isOpen, isMinimized, scrollToBottom]);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
 
-    // Log interaction
-    logAppointmentBooking('ai_chat_widget_interaction', 'general');
-    trackMiddlewareEvent('chat_message_sent', {
-      source: 'floating_widget',
-      page_slug: pathname || 'unknown'
-    });
+    // EVENT 2: first_message (only once per session)
+    if (!hasTrackedFirstMessage) {
+      trackEvent('chat_first_message', { page_slug: pathname || '/' });
+      setHasTrackedFirstMessage(true);
+    }
 
     const content = input;
     setInput('');
     await append({ role: 'user', content: content.trim() });
   };
 
+  const handleQuickAction = async (content: string) => {
+    if (isLoading) return;
+    if (!hasTrackedFirstMessage) {
+      trackEvent('chat_first_message', { page_slug: pathname || '/', via: 'quick_action' });
+      setHasTrackedFirstMessage(true);
+    }
+    await append({ role: 'user', content });
+  };
+
+  // EVENT 3: appointments_click
+  const handleAppointmentsClick = () => {
+    trackEvent('chat_appointments_click', { page_slug: pathname || '/' });
+  };
+
+  // EVENT 4: whatsapp_click
+  const handleWhatsAppClick = () => {
+    trackEvent('chat_whatsapp_click', { page_slug: pathname || '/' });
+  };
+
+  // EVENT 5: phone_click
+  const handlePhoneClick = () => {
+    trackEvent('chat_phone_click', { page_slug: pathname || '/' });
+  };
+
   const quickActions = [
-    "I want the earliest available appointment",
-    "Book consultation",
-    "Clinic hours?",
-    "Cost of surgery?",
+    "Book an appointment",
+    "Clinic hours & location",
+    "What services do you offer?",
+    "Cost of spine surgery?",
   ];
 
-  // Hide on appointments page to avoid clash with specific booking chat
+  // Hide on appointments page
   if (pathname === '/appointments') return null;
 
   return (
@@ -200,13 +209,13 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
             ? 'bg-[var(--color-text-primary)] text-white rotate-90'
             : 'bg-gradient-to-r from-[var(--color-primary-500)] to-[var(--color-primary-700)] text-white animate-bounce-subtle'
         }`}
-        aria-label={isOpen ? (isMinimized ? "Expand chat" : "Close chat") : "Open AI Assistant"}
+        aria-label={isOpen ? (isMinimized ? "Expand chat" : "Close chat") : "Open booking assistant"}
         aria-expanded={isOpen && !isMinimized}
       >
         {isOpen && !isMinimized ? <X size={24} /> : <MessageCircle size={28} />}
         {!isOpen && (
-          <span className="absolute -top-2 -right-2 bg-[var(--color-error-light)]0 text-white text-xs font-bold px-2 py-0.5 rounded-full shadow-sm animate-pulse">
-            AI
+          <span className="absolute -top-2 -right-2 bg-green-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-sm">
+            Book
           </span>
         )}
       </button>
@@ -229,11 +238,11 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
           {/* Header */}
           <div className="bg-gradient-to-r from-[var(--color-primary-500)] to-[var(--color-primary-700)] text-white p-4 flex justify-between items-center shrink-0">
             <div className="flex items-center gap-2">
-              <div className="bg-[var(--color-surface)]/20 p-1.5 rounded-lg">
+              <div className="bg-white/20 p-1.5 rounded-lg">
                 <Sparkles size={18} />
               </div>
               <div>
-                <h3 className="font-semibold text-sm">Dr. Sayuj's AI Assistant</h3>
+                <h3 className="font-semibold text-sm">Booking Assistant</h3>
                 <p className="text-xs text-[var(--color-primary-100)] flex items-center gap-1">
                   <span className="w-1.5 h-1.5 bg-[var(--color-success)] rounded-full animate-pulse"></span>
                   Online
@@ -243,14 +252,14 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setIsMinimized(true)}
-                className="p-1 hover:bg-[var(--color-surface)]/20 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-white"
+                className="p-1 hover:bg-white/20 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-white"
                 aria-label="Minimize chat"
               >
                 <Minus size={18} />
               </button>
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1 hover:bg-[var(--color-surface)]/20 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-white"
+                className="p-1 hover:bg-white/20 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-white"
                 aria-label="Close chat"
               >
                 <X size={18} />
@@ -260,10 +269,13 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
 
           {/* Emergency Alert */}
           {showEmergencyAlert && (
-            <div role="alert" className="bg-[var(--color-error-light)] p-3 border-b border-[var(--color-error-light)] flex items-start gap-2 shrink-0">
-              <AlertTriangle className="text-[var(--color-error)] shrink-0 mt-0.5" size={16} />
-              <p className="text-xs text-[var(--color-error-700)] font-medium">
-                Emergency? Call <a href="tel:+919778280044" className="underline font-bold focus:outline-none focus:ring-2 focus:ring-[var(--color-error)] rounded px-1">+91-9778280044</a>
+            <div role="alert" className="bg-red-50 p-3 border-b border-red-200 flex items-start gap-2 shrink-0">
+              <AlertTriangle className="text-red-600 shrink-0 mt-0.5" size={16} />
+              <p className="text-xs text-red-800 font-medium">
+                Emergency? Call{' '}
+                <a href={`tel:${PHONE_NUMBER}`} onClick={handlePhoneClick} className="underline font-bold">
+                  {PHONE_DISPLAY}
+                </a>
               </p>
             </div>
           )}
@@ -275,16 +287,8 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
             aria-live="polite"
           >
             {messages.map((message) => {
-              // Extract text content directly
               const content = message.content;
-
-              // Skip messages with empty content (e.g. tool calls) unless we want to show a spinner
-              if (!content && message.role !== 'assistant') return null;
-              if (!content && message.role === 'assistant') {
-                 // Check if it has tool invocations, if so maybe show "Processing..."
-                 // For now, just skip empty messages to avoid empty bubbles
-                 return null;
-              }
+              if (!content) return null;
 
               return (
                 <div
@@ -298,7 +302,7 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
                         : 'bg-[var(--color-surface)] text-[var(--color-text-primary)] border border-[var(--color-border)] shadow-sm rounded-bl-none'
                     }`}
                   >
-                    <p className="whitespace-pre-wrap break-words">{content || '...'}</p>
+                    <p className="whitespace-pre-wrap break-words">{content}</p>
                   </div>
                 </div>
               );
@@ -310,18 +314,22 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
                   <div className="flex items-center space-x-2">
                     <Loader2 size={14} className="animate-spin text-[var(--color-primary-500)]" />
                     <Shimmer as="span" className="text-xs text-[var(--color-text-secondary)]">
-                       {messages[messages.length - 1]?.role === 'assistant' ? 'Typing...' : 'Thinking...'}
+                      {messages[messages.length - 1]?.role === 'assistant' ? 'Typing...' : 'Thinking...'}
                     </Shimmer>
                   </div>
                 </div>
               </div>
             )}
-            
+
             {error && (
               <div className="flex justify-start">
-                <div className="bg-[var(--color-error-light)] border border-[var(--color-error-light)] shadow-sm px-3 py-2 rounded-2xl rounded-bl-none">
-                  <p className="text-xs text-[var(--color-error-700)]">
-                    {error.message || "I'm having trouble right now. Please call +91-9778280044 for immediate assistance."}
+                <div className="bg-red-50 border border-red-200 shadow-sm px-3 py-2 rounded-2xl rounded-bl-none">
+                  <p className="text-xs text-red-700">
+                    Sorry, something went wrong. Please call{' '}
+                    <a href={`tel:${PHONE_NUMBER}`} onClick={handlePhoneClick} className="underline font-bold">
+                      {PHONE_DISPLAY}
+                    </a>{' '}
+                    for immediate help.
                   </p>
                 </div>
               </div>
@@ -329,13 +337,13 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Quick Actions (only if few messages) */}
+          {/* Quick Actions (first interaction only) */}
           {messages.length <= 2 && !isLoading && (
             <div className="px-4 py-2 bg-[var(--color-background)]/50 flex gap-2 overflow-x-auto no-scrollbar shrink-0">
               {quickActions.map((action, i) => (
                 <button
                   key={i}
-                  onClick={() => handleSendMessage(action)}
+                  onClick={() => handleQuickAction(action)}
                   className="whitespace-nowrap px-3 py-1 bg-[var(--color-surface)] border border-[var(--color-primary-100)] text-[var(--color-primary-500)] text-xs rounded-full hover:bg-[var(--color-primary-50)] transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)] focus:ring-offset-1"
                 >
                   {action}
@@ -344,35 +352,39 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
             </div>
           )}
 
-          {/* OPD Booking / Contact Prompts (shows after initial interaction) */}
+          {/* Contact CTAs (shows after initial interaction) */}
           {messages.length > 2 && !isLoading && (
             <div className="px-4 py-2 bg-[var(--color-primary-50)]/50 flex flex-wrap gap-2 justify-center shrink-0 border-t border-[var(--color-primary-100)]">
               <a
                 href="/appointments"
+                onClick={handleAppointmentsClick}
                 className="flex items-center gap-1.5 px-3 py-1.5 bg-[var(--color-primary-600)] text-white text-xs font-medium rounded-full hover:bg-[var(--color-primary-700)] transition-colors shadow-sm"
               >
                 <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
-                Book OPD Consultation
+                Book Appointment
               </a>
               <a
-                href="https://wa.me/919778280044?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20with%20Dr.%20Sayuj."
+                href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={handleWhatsAppClick}
                 className="flex items-center gap-1.5 px-3 py-1.5 bg-[#25D366] text-white text-xs font-medium rounded-full hover:bg-[#128C7E] transition-colors shadow-sm"
               >
-                WhatsApp Chat
+                WhatsApp
+              </a>
+              <a
+                href={`tel:${PHONE_NUMBER}`}
+                onClick={handlePhoneClick}
+                className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-600 text-white text-xs font-medium rounded-full hover:bg-slate-700 transition-colors shadow-sm"
+              >
+                <Phone size={12} />
+                Call
               </a>
             </div>
           )}
 
           {/* Input Area */}
-          <form
-            onSubmit={onSubmit}
-            className="p-3 border-t border-[var(--color-border)] bg-[var(--color-surface)] shrink-0"
-            toolname="chatWithAIAssistant"
-            tooldescription="Chat with Dr. Sayuj's AI assistant for quick answers."
-            toolautosubmit="false"
-          >
+          <form onSubmit={onSubmit} className="p-3 border-t border-[var(--color-border)] bg-[var(--color-surface)] shrink-0">
             <div className="flex items-center gap-2 relative">
               <label htmlFor="chat-input" className="sr-only">Ask a question</label>
               <input
@@ -382,7 +394,7 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask anything..."
+                placeholder="Ask about appointments, services..."
                 aria-label="Ask a question"
                 className="w-full pl-4 pr-10 py-2.5 bg-[var(--color-background)] border-none rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)]/50 focus:bg-[var(--color-surface)] transition-all"
                 disabled={isLoading}
@@ -397,7 +409,7 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
               </button>
             </div>
             <p className="text-[10px] text-center text-[var(--color-text-secondary)] mt-2">
-              AI can make mistakes. For emergencies call +91-9778280044.
+              For medical advice, please book a consultation. Emergencies: {PHONE_DISPLAY}
             </p>
           </form>
         </div>

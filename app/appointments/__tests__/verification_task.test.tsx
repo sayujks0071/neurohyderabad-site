@@ -28,8 +28,8 @@ describe('Verification Task: Appointment SEO', () => {
     expect(title).toContain('Book Appointment');
 
     // Check description
-    expect(metadata.description).toContain('Best Neurosurgeon in Hyderabad');
-    expect(metadata.description).toContain('Book Appointment');
+    expect(metadata.description).toContain('top neurosurgeon in Hyderabad');
+    expect(metadata.description).toContain('Book an appointment with Dr. Sayuj Krishnan');
   });
 
   it('Task Requirement 1 & 2: JSON-LD Structured Data verification', () => {

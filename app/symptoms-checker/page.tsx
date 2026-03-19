@@ -1,6 +1,7 @@
 import { SITE_URL } from "../../src/lib/seo";
 import type { Metadata } from "next";
 import SmartSymptomChecker from "../_components/SmartSymptomChecker";
+import { safeJsonLdStringify } from '@/src/lib/seo/jsonld';
 
 export const metadata: Metadata = {
   title: "AI Symptom Checker | Neurosurgery Hyderabad | Dr. Sayuj",
@@ -55,8 +56,7 @@ export default function SymptomsCheckerPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(generateSymptomCheckerSchema()),
-        }}
+          __html: safeJsonLdStringify(generateSymptomCheckerSchema()), }}
       />
       <div className="max-w-4xl mx-auto">
         {/* Header Section */}

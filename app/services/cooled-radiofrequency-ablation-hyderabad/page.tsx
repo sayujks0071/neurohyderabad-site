@@ -10,6 +10,7 @@ import SourceList from '@/app/_components/SourceList';
 import { getServiceSources } from '../sources';
 import BreadcrumbSchema from '@/app/components/schemas/BreadcrumbSchema';
 import { LocalPathways } from '@/src/components/locations/LocalPathways';
+import { safeJsonLdStringify } from '@/src/lib/seo/jsonld';
 
 const baseMetadata = makeMetadata({
   title: 'Cooled Radiofrequency Ablation Hyderabad | Pain Relief',
@@ -519,8 +520,7 @@ export default function CooledRadiofrequencyAblationPage() {
       {/* Schema Markup */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify({
             "@context": "https://schema.org",
             "@type": "MedicalProcedure",
             "name": "Cooled Radiofrequency Ablation",
@@ -549,15 +549,13 @@ export default function CooledRadiofrequencyAblationPage() {
               "@id": `${SITE_URL}/#hospital`,
               "name": "Yashoda Hospital Malakpet"
             }
-          })
-        }}
+          }) }}
       />
 
       {/* FAQ Schema */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify({
             "@context": "https://schema.org",
             "@type": "FAQPage",
             "mainEntity": [
@@ -594,8 +592,7 @@ export default function CooledRadiofrequencyAblationPage() {
                 }
               }
             ]
-          })
-        }}
+          }) }}
       />
     </div>
   );

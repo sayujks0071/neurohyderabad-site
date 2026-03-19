@@ -28,6 +28,7 @@ import ContentRecommendations from '@/app/_components/ContentRecommendations';
 import RemotionVideoEmbedWrapper from '@/app/_components/RemotionVideoEmbedWrapper';
 import type { BlogPost, CTAType } from '@/src/types/blog';
 import { SITE_URL } from '@/src/lib/seo';
+import { safeJsonLdStringify } from '@/src/lib/seo/jsonld';
 
 interface BlogLayoutProps {
   post: BlogPost;
@@ -433,8 +434,7 @@ export default function BlogLayout({ post, content, className = '' }: BlogLayout
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(generateBlogSchema(post)),
-        }}
+          __html: safeJsonLdStringify(generateBlogSchema(post)), }}
       />
     </>
   );

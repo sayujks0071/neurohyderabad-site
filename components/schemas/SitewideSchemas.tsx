@@ -1,5 +1,6 @@
 import React from "react";
 import { SITE_URL, physicianJsonLd, contactPointJsonLd, idFor } from "../../src/lib/seo";
+import { safeJsonLdStringify } from '@/src/lib/seo/jsonld';
 
 export default function SitewideSchemas() {
   // Stable @id references
@@ -120,12 +121,10 @@ export default function SitewideSchemas() {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{
-        __html: JSON.stringify({
+      dangerouslySetInnerHTML={{ __html: safeJsonLdStringify({
           "@context": "https://schema.org",
           "@graph": graph
-        })
-      }}
+        }) }}
     />
   );
 }

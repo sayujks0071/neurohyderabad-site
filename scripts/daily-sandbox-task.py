@@ -101,7 +101,11 @@ def analyze_page(url, target_keyword):
         recommendations.append("YMYL Risk: Avoid absolute claims like '100% success' or 'guarantee'.")
 
     # Local SEO / Conversion
-    if "book appointment" not in text_content and "schedule consultation" not in text_content:
+    has_booking_cta = any(cta in text_content for cta in ["book appointment", "schedule consultation", "book now", "book a consultation"])
+    has_internal_booking_link = "/appointments" in response.text or "book-appointment" in response.text
+    has_whatsapp_cta = "wa.me" in response.text or "api.whatsapp.com" in response.text or "whatsapp" in text_content
+
+    if not has_booking_cta:
         recommendations.append("Missing clear Booking CTA.")
 
     if response_time > 2.0:
@@ -116,7 +120,10 @@ def analyze_page(url, target_keyword):
         "seo_data": {
             "title": title,
             "description_length": len(description),
-            "h1_count": len(h1_tags)
+            "h1_count": len(h1_tags),
+            "has_booking_cta": has_booking_cta,
+            "has_internal_booking_link": has_internal_booking_link,
+            "has_whatsapp_cta": has_whatsapp_cta
         },
         "recommendations": recommendations
     }
@@ -152,6 +159,14 @@ def run_analysis():
         full_url = base_url + target["target_page"] if target["target_page"].startswith("/") else target["target_page"]
         result = analyze_page(full_url, target.get("term", ""))
         report["pages_analyzed"].append(result)
+
+    total_pages = len(report["pages_analyzed"])
+    pages_with_cta = sum(1 for p in report["pages_analyzed"] if p.get("seo_data", {}).get("has_booking_cta", False))
+    cta_coverage = (pages_with_cta / total_pages) * 100 if total_pages > 0 else 0
+
+    report["cta_coverage_percent"] = round(cta_coverage, 2)
+    if cta_coverage < 80.0:
+        report["overall_summary"] += f" | WARNING: CTA coverage is {round(cta_coverage, 1)}%, which is below the 80% threshold."
 
     with open("/tmp/daily_report.json", "w") as f:
         json.dump(report, f, indent=2)

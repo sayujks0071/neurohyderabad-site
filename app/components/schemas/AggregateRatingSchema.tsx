@@ -1,4 +1,5 @@
 import { SITE_URL } from '../../../src/lib/seo';
+import { safeJsonLdStringify } from '@/src/lib/seo/jsonld';
 
 interface AggregateRatingSchemaProps {
   ratingValue?: string;
@@ -42,7 +43,7 @@ export default function AggregateRatingSchema({
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(schema) }}
     />
   );
 }

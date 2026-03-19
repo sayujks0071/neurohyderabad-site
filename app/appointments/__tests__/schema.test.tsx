@@ -13,8 +13,8 @@ describe('Appointment Page SEO', () => {
     expect(title).toContain('Best Neurosurgeon Hyderabad');
     expect(title).toContain('Book Appointment');
 
-    expect(metadata.description).toContain('Best Neurosurgeon in Hyderabad');
-    expect(metadata.description).toContain('Book Appointment');
+    expect(metadata.description).toContain('top neurosurgeon in Hyderabad');
+    expect(metadata.description).toContain('Book an appointment with Dr. Sayuj Krishnan');
   });
 
   it('renders correct JSON-LD schema', () => {

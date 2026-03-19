@@ -28,7 +28,18 @@ export default function LazySection({
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true);
+          // 🫀 CWV INP Optimization: Wrap state update in requestIdleCallback
+          // Heavy components loaded via next/dynamic inside LazySection can block the main thread
+          // if rendered immediately during scroll. Yielding to requestIdleCallback defers rendering
+          // until the browser is idle, preventing scroll jank and improving Interaction to Next Paint (INP).
+          const loadComponent = () => setIsVisible(true);
+
+          if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+            window.requestIdleCallback(loadComponent);
+          } else {
+            // Fallback for Safari/unsupported browsers
+            setTimeout(loadComponent, 1);
+          }
           observer.disconnect();
         }
       },

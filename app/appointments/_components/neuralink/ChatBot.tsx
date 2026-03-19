@@ -117,6 +117,7 @@ const ChatBot = () => {
   return (
     <div className="fixed bottom-6 left-6 z-[90]">
       <button
+        aria-label={isOpen ? "Close AI chat" : "Open AI chat"}
         onClick={toggleChat}
         className={`p-4 rounded-full shadow-2xl transition-all duration-300 flex items-center justify-center group ${
           isOpen
@@ -151,6 +152,7 @@ const ChatBot = () => {
               </div>
             </div>
             <button
+              aria-label="Close AI chat window"
               onClick={toggleChat}
               className="p-1.5 hover:bg-white/10 rounded-lg transition-colors"
             >
@@ -283,6 +285,7 @@ const ChatBot = () => {
               className="flex-1 bg-slate-100 border-none rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
             />
             <button
+              aria-label="Send message"
               type="submit"
               disabled={!input.trim() || isTyping}
               className={`p-2.5 rounded-xl transition-all shadow-md ${

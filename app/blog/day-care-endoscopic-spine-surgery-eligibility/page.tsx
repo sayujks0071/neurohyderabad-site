@@ -8,6 +8,7 @@ import { makeMetadata } from '@/app/_lib/meta';
 import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import { sources } from '../sources';
+import { safeJsonLdStringify } from '@/src/lib/seo/jsonld';
 
 const baseMetadata = makeMetadata({
   title: 'Day-Care Spine Surgery Eligibility | When Can You Go Home Same Day?',
@@ -453,8 +454,7 @@ export default function DayCareEligibilityPage() {
       {/* JSON-LD */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify({
             "@context": "https://schema.org",
             "@type": "BlogPosting",
             "headline": "Day-Care Spine Surgery: Are You a Candidate for Same-Day Discharge?",
@@ -470,8 +470,7 @@ export default function DayCareEligibilityPage() {
               "@type": "WebPage",
               "@id": `${SITE_URL}/blog/day-care-endoscopic-spine-surgery-eligibility/`
             }
-          })
-        }}
+          }) }}
       />
     </>
   );

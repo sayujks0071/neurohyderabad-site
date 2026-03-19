@@ -51,14 +51,14 @@ function getNewsletterHtml(dateStr: string): string {
 
   <div style="background: #fffbeb; border: 1px solid #fcd34d; padding: 20px 24px; border-radius: 12px; margin-bottom: 24px;">
     <p style="margin: 0 0 10px; font-size: 15px; font-weight: 600; color: #92400e;">&#x1F4C5; Need a Consultation?</p>
-    <p style="margin: 0 0 12px; font-size: 14px; color: #78350f; line-height: 1.6;">Book an appointment with Dr. Sayuj Krishnan — Senior Neurosurgeon at KIMS Hospitals, Hyderabad. Expert in spine surgery, brain tumors, and neurotrauma.</p>
-    <a href="https://www.drsayuj.info/appointment" style="color: #005EB8; font-size: 14px; font-weight: 600; text-decoration: none;">Schedule Your Consultation &#x2192;</a>
+    <p style="margin: 0 0 12px; font-size: 14px; color: #78350f; line-height: 1.6;">Book an appointment with Dr. Sayuj Krishnan — Consultant Neurosurgeon at Yashoda Hospital, Malakpet, Hyderabad. Expert in endoscopic spine surgery, brain tumors, and awake craniotomy.</p>
+    <a href="https://www.drsayuj.info/appointments" style="color: #005EB8; font-size: 14px; font-weight: 600; text-decoration: none;">Schedule Your Consultation &#x2192;</a>
   </div>
 
   <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 28px 0;">
 
   <p style="font-size: 12px; color: #9ca3af; text-align: center; line-height: 1.8; margin: 0;">
-    Dr. Sayuj Krishnan | Neurosurgeon | KIMS Hospitals, Hyderabad<br>
+    Dr. Sayuj Krishnan | Neurosurgeon | Yashoda Hospital, Malakpet, Hyderabad<br>
     <a href="https://www.drsayuj.info" style="color: #9ca3af; text-decoration: none;">www.drsayuj.info</a> &nbsp;|&nbsp;
     <a href="https://www.drsayuj.info/unsubscribe" style="color: #9ca3af; text-decoration: none;">Unsubscribe</a>
   </p>

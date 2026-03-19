@@ -3,6 +3,7 @@
 import { useRef, useState, useEffect, ReactNode } from "react";
 import { ChevronRight, MessageSquareCode, MessageSquare } from "lucide-react";
 import dynamic from "next/dynamic";
+import { Shimmer } from "@/src/components/ai-elements/shimmer";
 import VoiceBookingOption from "../VoiceBookingOption";
 import PatientPortalSkeleton from "./PatientPortalSkeleton";
 import LazySection from "../../../_components/LazySection";
@@ -83,10 +84,10 @@ const NeuraLinkBookingApp = ({ heroContent, locationInfo, faqSection }: NeuraLin
             </button>
             <button
               onClick={() => setIsAssistantOpen(true)}
-              className="inline-flex items-center justify-center px-6 py-3 rounded-xl border border-slate-200 bg-white text-slate-700 font-bold shadow-sm hover:border-blue-200 hover:text-blue-600 transition-all"
+              className="inline-flex items-center justify-center px-6 py-3 rounded-xl border border-slate-200 bg-white text-slate-700 font-bold shadow-sm hover:border-blue-200 hover:text-blue-600 transition-all group"
             >
               <MessageSquareCode className="w-5 h-5 mr-2 text-blue-600" />
-              Voice AI Assistant
+              <Shimmer as="span" duration={4} className="group-hover:text-blue-600 transition-colors">Voice AI Assistant</Shimmer>
             </button>
           </div>
 

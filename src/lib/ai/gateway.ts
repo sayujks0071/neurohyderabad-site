@@ -1,18 +1,13 @@
 /**
- * Vercel AI Gateway Configuration
- * 
- * Provides unified API to multiple AI providers with:
- * - Budget management
- * - Monitoring
- * - Load balancing
- * - Fallbacks
- * - OIDC token authentication (auto-refreshes every 12 hours)
- * 
- * Setup:
- * 1. Option A: API Key - Set AI_GATEWAY_API_KEY in Vercel
- * 2. Option B: OIDC Token - Run `vercel link` and `vercel env pull` (auto-refreshes)
- * 
- * Model format: Use provider/model (e.g., 'openai/gpt-4o-mini')
+ * AI Provider Configuration
+ *
+ * Priority:
+ * 1. Vercel AI Gateway (if AI_GATEWAY_API_KEY is set and non-empty)
+ * 2. Direct OpenAI (if OPENAI_API_KEY is set)
+ * 3. Error
+ *
+ * Previously this assumed any Vercel deployment had gateway access,
+ * which caused 500 errors when AI_GATEWAY_API_KEY was empty.
  */
 
 import { createOpenAI } from '@ai-sdk/openai';
@@ -22,127 +17,119 @@ const DEFAULT_PROVIDER = process.env.AI_GATEWAY_PROVIDER || 'openai';
 
 /**
  * Get the configured Vercel AI Gateway Base URL
- * Official endpoint: https://ai-gateway.vercel.sh/v1
  */
 export function getGatewayBaseUrl(): string {
   return process.env.AI_GATEWAY_BASE_URL || 'https://ai-gateway.vercel.sh/v1';
 }
 
 /**
- * Check if Vercel AI Gateway is configured
- * 
- * Supports both:
- * - API Key: AI_GATEWAY_API_KEY
- * - OIDC Token: Automatically available when deployed on Vercel (via vercel link)
+ * Check if Vercel AI Gateway is configured with a real key
  */
 export function isAIGatewayConfigured(): boolean {
-  // Check for API key
-  if (process.env.AI_GATEWAY_API_KEY) {
-    return true;
-  }
-  
-  // Check for OIDC token (available when deployed on Vercel)
-  // Vercel automatically provides this when using `vercel link`
-  if (process.env.VERCEL && process.env.AI_GATEWAY_BASE_URL) {
-    return true;
-  }
-  
-  // If on Vercel and using provider/model format, assume gateway is available
-  // This check is a bit loose but maintains backward compatibility
-  if (process.env.VERCEL) {
-    return true;
-  }
-  
-  return false;
+  const key = process.env.AI_GATEWAY_API_KEY?.trim();
+  return Boolean(key && key.length > 0);
+}
+
+/**
+ * Check if direct OpenAI is configured
+ */
+export function isOpenAIConfigured(): boolean {
+  const key = process.env.OPENAI_API_KEY?.trim();
+  return Boolean(key && key.length > 0);
 }
 
 /**
  * Check if any AI configuration is available
  */
 export function hasAIConfig(): boolean {
-  return isAIGatewayConfigured();
+  return isAIGatewayConfigured() || isOpenAIConfigured();
 }
 
 /**
- * Get the appropriate model identifier for Vercel AI Gateway
- * 
- * Vercel AI Gateway requires provider/model format (e.g., 'openai/gpt-4o-mini')
- * If already in correct format, returns as-is
+ * Get the appropriate model identifier
+ * For AI Gateway: requires provider/model format (e.g., 'openai/gpt-4o-mini')
+ * For direct OpenAI: plain model name (e.g., 'gpt-4o-mini')
  */
 export function getGatewayModel(modelName: string = DEFAULT_TEXT_MODEL): string {
-  // If already in provider/model format, return as-is
-  if (modelName.includes('/') || modelName.includes(':')) {
-    return modelName;
+  if (isAIGatewayConfigured()) {
+    // AI Gateway needs provider/model format
+    if (modelName.includes('/') || modelName.includes(':')) {
+      return modelName;
+    }
+    const provider = process.env.AI_GATEWAY_PROVIDER || DEFAULT_PROVIDER;
+    return `${provider}/${modelName}`;
   }
-  
-  // Convert to provider/model format for Vercel AI Gateway
-  const provider = process.env.AI_GATEWAY_PROVIDER || DEFAULT_PROVIDER;
-  return `${provider}/${modelName}`;
+  // Direct OpenAI — strip provider prefix if present
+  if (modelName.includes('/')) {
+    return modelName.split('/').pop() || modelName;
+  }
+  return modelName;
 }
 
 /**
- * Create OpenAI client configured for Vercel AI Gateway
- * 
- * When using Vercel AI Gateway:
- * - Use provider/model format in model names (e.g., 'openai/gpt-4o-mini')
- * - API key or OIDC token is automatically used
- * - Base URL points to Vercel AI Gateway
+ * Create AI Gateway client (only when gateway key is available)
  */
-export function createAIGatewayClient(options?: { cache?: boolean }) {
-  const apiKey = process.env.AI_GATEWAY_API_KEY;
-  
-  if (!apiKey && !process.env.VERCEL) {
-    throw new Error('AI_GATEWAY_API_KEY must be set, or deploy on Vercel for OIDC token');
-  }
+function createAIGatewayClient(options?: { cache?: boolean }) {
+  const apiKey = process.env.AI_GATEWAY_API_KEY!.trim();
 
-  // Set up headers for Vercel AI Gateway features
   const headers: Record<string, string> = {};
-
-  // Enable caching if requested (great for summarization/recommendations to save cost)
   if (options?.cache) {
     headers['vercel-ai-gateway-cache'] = 'true';
   }
 
-  // Create OpenAI client configured for Vercel AI Gateway
   return createOpenAI({
-    apiKey: apiKey || undefined, // OIDC token is used automatically on Vercel if no API key
+    apiKey,
     baseURL: getGatewayBaseUrl(),
     headers,
   });
 }
 
 /**
- * Get AI client function (works like openai() from @ai-sdk/openai)
+ * Create direct OpenAI client
+ */
+function createDirectOpenAIClient() {
+  const apiKey = process.env.OPENAI_API_KEY!.trim();
+
+  return createOpenAI({
+    apiKey,
+    // Default OpenAI base URL (no gateway)
+  });
+}
+
+/**
+ * Get AI client function
+ * Returns a function that takes a model name and returns a model instance
  */
 export function getAIClient(options?: { cache?: boolean }) {
   if (isAIGatewayConfigured()) {
     try {
-      const gatewayClient = createAIGatewayClient(options);
-      // Return a function that matches the openai() API
-      // createOpenAI returns a function that takes a model name
-      return (model: string) => gatewayClient(model);
+      const client = createAIGatewayClient(options);
+      return (model: string) => client(model);
     } catch (error) {
-      console.error('Failed to create AI Gateway client:', error);
-      throw error;
+      console.error('[AI] Gateway client creation failed, trying direct OpenAI:', error);
+      // Fall through to direct OpenAI
     }
   }
 
-  throw new Error('Vercel AI Gateway is not configured. Please set AI_GATEWAY_API_KEY or deploy on Vercel.');
+  if (isOpenAIConfigured()) {
+    const client = createDirectOpenAIClient();
+    return (model: string) => client(model);
+  }
+
+  throw new Error(
+    'No AI provider configured. Set AI_GATEWAY_API_KEY (for Vercel AI Gateway) or OPENAI_API_KEY (for direct OpenAI).'
+  );
 }
 
 /**
- * Get the configured text model name, accounting for gateway formatting.
- * 
- * For Vercel AI Gateway: returns provider/model format (e.g., 'openai/gpt-4o-mini')
+ * Get the configured text model name
  */
 export function getTextModelName(modelName: string = DEFAULT_TEXT_MODEL): string {
   return getGatewayModel(modelName);
 }
 
 /**
- * Get a text model instance for the configured provider.
- * 
- * Works with Vercel AI Gateway (provider/model format)
+ * Get a text model instance
  */
 export function getTextModel(modelName: string = DEFAULT_TEXT_MODEL, options?: { cache?: boolean }) {
   const aiClient = getAIClient(options);
