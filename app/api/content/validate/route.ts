@@ -62,7 +62,7 @@ export async function POST(request: NextRequest) {
     // STEP 2: Validate the claim using Vercel AI Gateway (OpenAI)
     // Use generateObject for strict JSON structure
     const { object } = await generateObject({
-      model: getTextModel(), // Uses 'gpt-4o-mini' via Vercel AI Gateway
+      model: getTextModel(undefined, { cache: true }), // Uses 'gpt-4o-mini' via Vercel AI Gateway
       schema: z.object({
         isValid: z.boolean().describe('Whether the claim is medically accurate and supported'),
         confidence: z.enum(['high', 'medium', 'low']).describe('Confidence in the validation'),
