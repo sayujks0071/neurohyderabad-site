@@ -60,7 +60,6 @@ export async function GET(_req: NextRequest) {
     '/locations/hitech-city',
     '/locations/malakpet',
     '/locations/secunderabad',
-    '/locations/neurosurgeon-',
     '/locations/brain-spine-surgeon-',
     'example',
     'test',
@@ -135,6 +134,23 @@ export async function GET(_req: NextRequest) {
 
   for (const page of ['/knowledge-base', '/blog', '/patient-stories', '/research', '/media', '/technology-facilities']) {
     add(page, 0.7, 'weekly');
+  }
+
+  // Additional important pages
+  for (const page of [
+    '/cost-of-spine-surgery-hyderabad',
+    '/spine-care-pathway',
+    '/specializations',
+    '/german-training',
+    '/symptoms/back-pain',
+    '/disease-guides/degenerative-disc-disease',
+    '/refer',
+    '/followup',
+    '/stories/endoscopic-discectomy-same-day-hyderabad',
+    '/stories/endoscopic-ulbd-stenosis-hyderabad',
+    '/stories/mvd-trigeminal-neuralgia-hyderabad',
+  ]) {
+    add(page, 0.6, 'monthly');
   }
 
   for (const page of ['/privacy', '/cookies', '/terms', '/disclaimer', '/medical-disclaimer', '/content-integrity', '/editorial-policy']) {

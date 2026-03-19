@@ -29,6 +29,14 @@ export default function sitemapLocations(): MetadataRoute.Sitemap {
     { url: '/locations/neurosurgeon-nizampet', priority: 0.7 },
     { url: '/locations/neurosurgeon-madhapur', priority: 0.7 },
 
+    // Additional secondary locations
+    { url: '/locations/neurosurgeon-uppal', priority: 0.7 },
+    { url: '/locations/neurosurgeon-vanasthalipuram', priority: 0.7 },
+    { url: '/locations/neurosurgeon-miyapur', priority: 0.7 },
+    { url: '/locations/neurosurgeon-dilsukhnagar', priority: 0.7 },
+    { url: '/locations/neurosurgeon-jubilee-hills', priority: 0.8 },
+    { url: '/locations/neurosurgeon-near-jubilee-hills', priority: 0.7 },
+
     // FAQ location pages
     { url: '/locations/neurosurgeon-near-jubilee-hills-faq', priority: 0.6 },
     { url: '/locations/neurosurgeon-near-kachiguda-faq', priority: 0.6 },
