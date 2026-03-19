@@ -1,0 +1,39 @@
+name: OpenClaw Daily Reminders
+
+on:
+  schedule:
+    # Run every day at 2:00 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+jobs:
+  run-reminders:
+    name: Automate Patient Reminders
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: '9.15.0'
+
+      - name: Install Dependencies
+        run: pnpm install
+
+      - name: Install Google Workspace CLI (gws)
+        run: npm install -g @google/gws-cli
+
+      - name: Execute Daily Reminders Script
+        run: npx tsx openclaw/workflows/send-reminders.ts
+        env:
+          NODE_ENV: production
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+          GWS_CREDENTIALS: ${{ secrets.GWS_CREDENTIALS }}
