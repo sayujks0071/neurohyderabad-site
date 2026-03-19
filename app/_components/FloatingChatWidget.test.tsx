@@ -64,17 +64,17 @@ describe('FloatingChatWidget', () => {
 
   it('renders the chat button initially', () => {
     render(<FloatingChatWidget />);
-    const button = screen.getByLabelText('Open AI Assistant');
+    const button = screen.getByLabelText('Open booking assistant');
     expect(button).toBeInTheDocument();
   });
 
   it('opens the chat window when clicked', async () => {
     render(<FloatingChatWidget />);
-    const button = screen.getByLabelText('Open AI Assistant');
+    const button = screen.getByLabelText('Open booking assistant');
     fireEvent.click(button);
 
     await waitFor(() => {
-        expect(screen.getByText("Dr. Sayuj's AI Assistant")).toBeInTheDocument();
+        expect(screen.getByText("Booking Assistant")).toBeInTheDocument();
     });
   });
 
