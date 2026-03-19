@@ -1,4 +1,5 @@
 import { SITE_URL } from '../../../src/lib/seo';
+import { safeJsonLdStringify } from '@/src/lib/seo/jsonld';
 
 interface BreadcrumbSchemaProps {
   items: Array<{
@@ -24,7 +25,7 @@ export default function BreadcrumbSchema({ items }: BreadcrumbSchemaProps) {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(schema) }}
     />
   );
 }

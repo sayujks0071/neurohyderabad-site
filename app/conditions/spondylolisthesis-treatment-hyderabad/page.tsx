@@ -14,6 +14,7 @@ import CostTransparencySection from '@/src/components/CostTransparencySection';
 import TeleconsultationForm from '@/components/TeleconsultationForm';
 import OutcomeMetricsSection from '@/components/OutcomeMetricsSection';
 import FAQPageSchema from '@/app/_components/FAQPageSchema';
+import { safeJsonLdStringify } from '@/src/lib/seo/jsonld';
 
 const baseMetadata = makeMetadata({
   title: 'Spondylolisthesis Treatment Hyderabad | Slipped Vertebra',
@@ -276,8 +277,7 @@ export default function SpondylolisthesisPage() {
       {/* MedicalCondition Schema */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify({
             "@context": "https://schema.org",
             "@type": "MedicalCondition",
             "name": "Spondylolisthesis",
@@ -296,8 +296,7 @@ export default function SpondylolisthesisPage() {
                 "name": "Physical Therapy"
               }
             ]
-          })
-        }}
+          }) }}
       />
     </div>
   );

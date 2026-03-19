@@ -1,4 +1,5 @@
 import React from 'react';
+import { safeJsonLdStringify } from '@/src/lib/seo/jsonld';
 
 interface FAQItem {
   question: string;
@@ -27,9 +28,7 @@ export default function FAQSchema({ faqs, pageTitle = "Frequently Asked Question
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{
-        __html: JSON.stringify(faqSchema, null, 2)
-      }}
+      dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(faqSchema, null, 2) }}
     />
   );
 }

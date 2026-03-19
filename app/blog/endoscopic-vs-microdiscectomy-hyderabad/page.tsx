@@ -8,6 +8,7 @@ import { makeMetadata } from '@/app/_lib/meta';
 import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import { sources } from '../sources';
+import { safeJsonLdStringify } from '@/src/lib/seo/jsonld';
 
 const baseMetadata = makeMetadata({
   title: 'Endoscopic vs Microdiscectomy in Hyderabad | Which is Right for You?',
@@ -483,8 +484,7 @@ export default function EndoscopicVsMicrodiscectomyPage() {
       {/* JSON-LD Structured Data */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify({
             "@context": "https://schema.org",
             "@type": "BlogPosting",
             "headline": "Endoscopic vs Microdiscectomy: Choosing the Right Approach for Your Herniated Disc",
@@ -506,15 +506,13 @@ export default function EndoscopicVsMicrodiscectomyPage() {
               "@id": `${SITE_URL}/blog/endoscopic-vs-microdiscectomy-hyderabad/`
             },
             "image": `${SITE_URL}/api/og?title=${encodeURIComponent("Endoscopic vs Microdiscectomy")}`
-          })
-        }}
+          }) }}
       />
 
       {/* FAQ Schema */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify({
             "@context": "https://schema.org",
             "@type": "FAQPage",
             "mainEntity": [
@@ -543,8 +541,7 @@ export default function EndoscopicVsMicrodiscectomyPage() {
                 }
               }
             ]
-          })
-        }}
+          }) }}
       />
     </>
   );

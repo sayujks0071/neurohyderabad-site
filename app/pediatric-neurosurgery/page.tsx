@@ -4,6 +4,7 @@ import { SITE_URL } from "../../src/lib/seo";
 import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
 import { serviceJsonLd } from "../../src/lib/seo";
 import { LocalPathways } from "@/src/components/locations/LocalPathways";
+import { safeJsonLdStringify } from '@/src/lib/seo/jsonld';
 
 export const metadata: Metadata = {
   title: "Pediatric Neurosurgery Hyderabad | Children's Care",
@@ -67,7 +68,7 @@ export default function PediatricNeurosurgeryPage() {
       ]} />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(pediatricServiceJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(pediatricServiceJsonLd) }}
       />
       
       <div className="min-h-screen bg-white">

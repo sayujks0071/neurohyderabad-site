@@ -8,6 +8,7 @@ import { makeMetadata } from '@/app/_lib/meta';
 import AuthorByline from '@/app/_components/AuthorByline';
 import SourceList from '@/app/_components/SourceList';
 import { getBlogSources } from '../sources';
+import { safeJsonLdStringify } from '@/src/lib/seo/jsonld';
 
 const baseMetadata = makeMetadata({
   title: 'Endoscopic Discectomy Cost in Hyderabad | What to Expect',
@@ -346,8 +347,7 @@ export default function EndoscopicDiscectomyCostPage() {
       {/* JSON-LD Structured Data */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify({
             "@context": "https://schema.org",
             "@type": "BlogPosting",
             "headline": "Endoscopic Discectomy Cost in Hyderabad: What Affects Your Estimate?",
@@ -370,15 +370,13 @@ export default function EndoscopicDiscectomyCostPage() {
             },
             "image": `${SITE_URL}/api/og?title=${encodeURIComponent("Endoscopic Discectomy Cost in Hyderabad")}`,
             "articleBody": "Comprehensive guide to understanding endoscopic discectomy costs in Hyderabad, including what's included, insurance coverage, and cost factors."
-          })
-        }}
+          }) }}
       />
 
       {/* FAQ Schema */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify({
             "@context": "https://schema.org",
             "@type": "FAQPage",
             "mainEntity": [
@@ -407,15 +405,13 @@ export default function EndoscopicDiscectomyCostPage() {
                 }
               }
             ]
-          })
-        }}
+          }) }}
       />
 
       {/* Breadcrumb Schema */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify({
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             "itemListElement": [
@@ -438,8 +434,7 @@ export default function EndoscopicDiscectomyCostPage() {
                 "item": `${SITE_URL}/blog/endoscopic-discectomy-cost-hyderabad/`
               }
             ]
-          })
-        }}
+          }) }}
       />
     </>
   );

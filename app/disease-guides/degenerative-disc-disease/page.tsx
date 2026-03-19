@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { SITE_URL } from '../../../src/lib/seo';
 import MedicalReviewNotice from '../../../src/components/MedicalReviewNotice';
+import { safeJsonLdStringify } from '@/src/lib/seo/jsonld';
 
 export const metadata: Metadata = {
   title: 'Degenerative Disc Disease Symptoms & Treatment | Dr. Sayuj',
@@ -252,7 +253,7 @@ export default function DegenerativeDiscDiseasePage() {
       {/* Structured Data */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(structuredData) }}
       />
     </main>
   );
