@@ -84,7 +84,7 @@ describe('AI Gateway Configuration', () => {
 
     it('getTextModel throws an error', () => {
       expect(() => getTextModel('google/gemini-2.0-flash')).toThrow(
-        'Vercel AI Gateway is not configured. Please set AI_GATEWAY_API_KEY or deploy on Vercel.'
+        'No AI provider configured. Set AI_GATEWAY_API_KEY (for Vercel AI Gateway) or OPENAI_API_KEY (for direct OpenAI).'
       );
     });
   });

@@ -135,7 +135,8 @@ export class ScrubEngine {
             callback();
         };
         img.onerror = () => {
-            console.error(`Failed to load frame: ${src}`);
+            // Mute the console error to prevent flooding
+            // console.error(`Failed to load frame: ${src}`);
             // Still count as processed to avoid hanging, but don't add to images array
             this.loadedCount++;
             callback();

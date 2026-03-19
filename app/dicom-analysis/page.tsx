@@ -124,7 +124,7 @@ export default function DicomAnalysisPage() {
 
             {result && (
               <div className="mt-8 space-y-6">
-                <Card className="p-8 shadow-xl bg-white border-t-4 border-blue-500 rounded-xl animate-fade-in">
+                <div className="p-8 shadow-xl bg-white border-t-4 border-blue-500 rounded-xl animate-fade-in">
                   <h2 className="text-2xl font-bold mb-6 text-gray-800 border-b pb-4">Extracted Metadata</h2>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -150,7 +150,7 @@ export default function DicomAnalysisPage() {
                      <p className="text-sm text-gray-500 uppercase font-semibold">Study Description</p>
                      <p className="text-lg text-gray-900 font-medium">{result.studyDescription || 'N/A'}</p>
                   </div>
-                </Card>
+                </div>
               </div>
             )}
           </div>
