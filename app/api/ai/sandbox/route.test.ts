@@ -5,6 +5,8 @@ import { NextRequest, NextResponse } from 'next/server';
 vi.mock('@/src/lib/ai/gateway', () => ({
   getTextModel: vi.fn(() => 'mock-model'),
   hasAIConfig: vi.fn(() => true),
+  getAIClient: vi.fn(() => vi.fn(() => 'mock-model-instance')),
+  getTextModelName: vi.fn(() => 'mock-model-name'),
 }));
 
 vi.mock('@/src/lib/rate-limit', () => ({
