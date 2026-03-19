@@ -94,7 +94,9 @@ export const tools = {
         return {
           status: 'success',
           message: 'Appointment booked successfully. A confirmation email has been sent.',
-          details: result
+          details: result,
+          // Signal for client-side tracking (chat_form_submit event)
+          _trackEvent: 'chat_form_submit',
         };
       } else {
         return {

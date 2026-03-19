@@ -95,6 +95,16 @@ export default function FloatingChatWidget({ autoOpen = false }: FloatingChatWid
         setShowEmergencyAlert(true);
       }
 
+      // EVENT 6: chat_form_submit — detect successful booking via tool result or assistant confirmation
+      const bookingSuccessIndicators = [
+        'appointment booked successfully',
+        'confirmation email has been sent',
+        'coordinator will call you shortly to confirm',
+      ];
+      if (bookingSuccessIndicators.some(indicator => content.includes(indicator))) {
+        trackEvent('chat_form_submit', { page_slug: pathname || '/' });
+      }
+
       // EVENT 7: qualified_handoff — detect when assistant escalates to human
       const handoffIndicators = [
         'whatsapp us',
