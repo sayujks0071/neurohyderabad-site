@@ -263,7 +263,105 @@ export default function SciaticaTreatmentPage() {
         </div>
       </div>
 
+
+
+      {/* Causes & Risk Factors Section */}
       <section className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-blue-700">Causes & Risk Factors of Sciatica</h2>
+        <p className="text-gray-700 mb-6 leading-relaxed">
+          Sciatica is a symptom rather than a primary condition. It occurs when the sciatic nerve—the longest nerve in the human body—is pinched, irritated, or compressed.
+        </p>
+        <div className="grid md:grid-cols-2 gap-8">
+          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+            <h3 className="text-xl font-bold text-blue-800 mb-4">Common Medical Causes</h3>
+            <ul className="space-y-4">
+              <li className="flex items-start">
+                <span className="text-blue-600 mr-3 mt-1">●</span>
+                <div>
+                  <strong className="text-gray-900">Herniated (Slip) Disc:</strong> The most frequent cause. The soft inner core of a spinal disc leaks out and presses on the nerve root.
+                </div>
+              </li>
+              <li className="flex items-start">
+                <span className="text-blue-600 mr-3 mt-1">●</span>
+                <div>
+                  <strong className="text-gray-900">Spinal Stenosis:</strong> Narrowing of the spinal canal in the lower back, putting pressure on the spinal cord and nerves.
+                </div>
+              </li>
+              <li className="flex items-start">
+                <span className="text-blue-600 mr-3 mt-1">●</span>
+                <div>
+                  <strong className="text-gray-900">Bone Spurs:</strong> Overgrowth of bone on the vertebrae, often due to osteoarthritis, irritating the sciatic nerve.
+                </div>
+              </li>
+              <li className="flex items-start">
+                <span className="text-blue-600 mr-3 mt-1">●</span>
+                <div>
+                  <strong className="text-gray-900">Spondylolisthesis:</strong> A condition where one vertebra slips forward over another, pinching the nerve.
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+            <h3 className="text-xl font-bold text-blue-800 mb-4">Lifestyle Risk Factors</h3>
+            <ul className="space-y-4">
+              <li className="flex items-start">
+                <span className="text-blue-600 mr-3 mt-1">●</span>
+                <div>
+                  <strong className="text-gray-900">Prolonged Sitting:</strong> Sedentary jobs or long drives can increase the pressure on the lumbar discs.
+                </div>
+              </li>
+              <li className="flex items-start">
+                <span className="text-blue-600 mr-3 mt-1">●</span>
+                <div>
+                  <strong className="text-gray-900">Age & Weight:</strong> Age-related changes in the spine and excess body weight contribute to spinal stress.
+                </div>
+              </li>
+              <li className="flex items-start">
+                <span className="text-blue-600 mr-3 mt-1">●</span>
+                <div>
+                  <strong className="text-gray-900">Occupational Strain:</strong> Jobs requiring heavy lifting, twisting, or driving for long periods.
+                </div>
+              </li>
+              <li className="flex items-start">
+                <span className="text-blue-600 mr-3 mt-1">●</span>
+                <div>
+                  <strong className="text-gray-900">Diabetes:</strong> Increases the risk of nerve damage over time.
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Diagnosis & Evaluation Section */}
+      <section className="mb-12">
+        <h2 className="text-2xl font-semibold mb-6 text-blue-700">Diagnosis & Evaluation</h2>
+        <p className="text-gray-700 mb-6 leading-relaxed">
+          A precise diagnosis is critical. Sciatica-like pain can sometimes originate from hip joint issues or the piriformis muscle. We use a structured clinical approach to pinpoint the exact source of your pain.
+        </p>
+        <div className="grid md:grid-cols-3 gap-6">
+          <div className="bg-white p-6 rounded-xl shadow-sm border border-blue-100">
+            <h3 className="font-bold text-gray-900 mb-2">1. Physical & Neurological Exam</h3>
+            <p className="text-sm text-gray-600 leading-relaxed">
+              We test your muscle strength, reflexes, and sensation. The straight leg raise (SLR) test helps identify exact nerve root irritation.
+            </p>
+          </div>
+          <div className="bg-white p-6 rounded-xl shadow-sm border border-blue-100">
+            <h3 className="font-bold text-gray-900 mb-2">2. MRI Scan (Gold Standard)</h3>
+            <p className="text-sm text-gray-600 leading-relaxed">
+              A high-resolution MRI of the lumbar spine visualizes herniated discs, stenosis, and the exact location of nerve compression.
+            </p>
+          </div>
+          <div className="bg-white p-6 rounded-xl shadow-sm border border-blue-100">
+            <h3 className="font-bold text-gray-900 mb-2">3. X-Rays / CT Scans</h3>
+            <p className="text-sm text-gray-600 leading-relaxed">
+              Used if bone spurs, fractures, or spinal instability (spondylolisthesis) are suspected alongside nerve issues.
+            </p>
+          </div>
+        </div>
+      </section>
+
+<section className="mb-12">
         <h2 className="text-2xl font-semibold mb-6 text-blue-700">When to See a Doctor for Sciatica in Hyderabad (Red Flags)</h2>
         <div className="bg-red-50 p-6 rounded-lg border border-red-100">
           <p className="text-gray-700 mb-4 font-semibold">
