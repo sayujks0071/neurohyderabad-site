@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Star, Users, Calendar, Phone } from 'lucide-react';
+import doctorPortrait from '@/src/assets/dr-sayuj-krishnan-portrait-v2.jpg';
 
 interface DoctorCardProps {
   priority?: boolean;
@@ -13,14 +14,13 @@ export default function DoctorCard({ priority = false }: DoctorCardProps) {
         {/* Doctor Photo - Professional Portrait */}
         <div className="w-32 h-32 rounded-full mx-auto mb-4 relative overflow-hidden shadow-lg border-2 border-white/50">
           <Image
-            src="/images/dr-sayuj-krishnan-portrait-v2.jpg"
+            src={doctorPortrait}
             alt="Dr. Sayuj Krishnan - Premier Neurosurgeon in Hyderabad"
-            width={128}
-            height={128}
             sizes="128px"
             className="object-cover w-full h-full rounded-full"
             quality={75}
             priority={priority}
+            placeholder="blur"
           />
         </div>
         
