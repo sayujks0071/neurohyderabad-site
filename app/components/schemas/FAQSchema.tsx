@@ -28,7 +28,7 @@ export default function FAQSchema({ faqs, pageTitle = "Frequently Asked Question
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(faqSchema, null, 2) }}
+      dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(faqSchema) }}
     />
   );
 }

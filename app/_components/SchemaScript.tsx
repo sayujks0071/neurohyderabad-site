@@ -11,7 +11,7 @@ export default function SchemaScript({ data, id }: SchemaScriptProps) {
     <script
       type="application/ld+json"
       id={id}
-      dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(data, null, 0) }}
+      dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(data) }}
     />
   );
 }
