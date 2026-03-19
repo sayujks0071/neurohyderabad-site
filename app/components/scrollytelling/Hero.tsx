@@ -159,11 +159,23 @@ export default function Hero() {
             });
         }
 
-        // Start Loading
-        scrubEngine.preload();
+        // Start Loading lazily to prevent blocking LCP
+        let loadTimeout: NodeJS.Timeout;
+        if ('requestIdleCallback' in window) {
+            (window as any).requestIdleCallback(() => {
+                loadTimeout = setTimeout(() => {
+                    scrubEngine.preload();
+                }, 100);
+            }, { timeout: 2000 });
+        } else {
+            loadTimeout = setTimeout(() => {
+                scrubEngine.preload();
+            }, 500);
+        }
 
         // Cleanup
         return () => {
+            if (loadTimeout) clearTimeout(loadTimeout);
             observer.disconnect();
             window.removeEventListener('resize', handleResize);
             cancelAnimationFrame(animationFrameId);
@@ -190,6 +202,7 @@ export default function Hero() {
                 alt="Dr. Sayuj Krishnan"
                 fill
                 priority
+                fetchPriority="high"
                 sizes="100vw"
                 className={`object-cover object-top transition-opacity duration-1000 ${isLoading ? 'opacity-50' : 'opacity-0'}`}
             />

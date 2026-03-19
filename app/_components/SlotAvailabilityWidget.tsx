@@ -21,6 +21,7 @@ export default function SlotAvailabilityWidget() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
     async function fetchAvailability() {
       try {
         const res = await fetch('/api/clinic/availability');
@@ -35,15 +36,21 @@ export default function SlotAvailabilityWidget() {
       }
     }
 
-    fetchAvailability();
+    timeoutId = setTimeout(() => {
+      fetchAvailability();
+    }, 1000); // defer fetch slightly to avoid blocking LCP
+
     // Refresh availability every 5 minutes
     const interval = setInterval(fetchAvailability, 5 * 60 * 1000);
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timeoutId);
+    };
   }, []);
 
   if (loading) {
     return (
-      <div className="h-24 w-full bg-slate-900/50 animate-pulse rounded-2xl border border-blue-500/20" />
+      <div className="h-[90px] w-full bg-slate-900/50 animate-pulse rounded-2xl border border-blue-500/20" />
     );
   }
 
