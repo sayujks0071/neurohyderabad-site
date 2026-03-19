@@ -298,6 +298,28 @@ export const BLOG_SOURCES: Record<string, SourceEntry[]> = {
       href: "https://www.mayoclinic.org/diseases-conditions/scoliosis/symptoms-causes/syc-20350716",
     },
   ],
+  "second-opinion-spine-surgery-hyderabad": [
+    {
+      label: "The Spine Journal – Impact of Spine Surgeon's Advice on Second Opinion Patients",
+      href: "https://www.thespinejournalonline.com/article/S1529-9430(17)30096-5/fulltext",
+    },
+    {
+      label: "JAMA Network Open – Variation in Lumbar Spine Surgery Recommendation Across Surgeons",
+      href: "https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2762825",
+    },
+    {
+      label: "Dartmouth Atlas of Health Care – Variation in Spinal Fusion Rates",
+      href: "https://www.dartmouthatlas.org/interactive-apps/surgical-rates/",
+    },
+    {
+      label: "American Academy of Orthopaedic Surgeons – Choosing Wisely: Spinal Fusion Recommendations",
+      href: "https://www.choosingwisely.org/societies/american-academy-of-orthopaedic-surgeons/",
+    },
+    {
+      label: "Insurance Regulatory and Development Authority of India – Policyholder Rights",
+      href: "https://irdai.gov.in/ADMINCMS/cms/Uploadedfiles/Publications/Handbook_Policyholder.pdf",
+    },
+  ],
   "failed-back-surgery-syndrome-treatment-hyderabad": [
     {
       label: "American Association of Neurological Surgeons – Failed Back Surgery Syndrome",
