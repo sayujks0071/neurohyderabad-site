@@ -21,7 +21,7 @@ export const WelcomeCharacter: React.FC<WelcomeCharacterProps> = ({ char, delay,
       fps,
       from: 0,
       to: 1,
-      durationInFrames: 25,
+      config: { damping: 100, stiffness: 100 }, // Smooth ease-in for opacity
     }),
     [frame, fps, delay, prefersReducedMotion]
   );
