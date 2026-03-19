@@ -12,6 +12,7 @@ import Button from "../_components/Button";
 import ContactForm from "@/components/forms/ContactForm";
 import MedicalWebPageSchema from "../components/schemas/MedicalWebPageSchema";
 import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
+import BookingCalendarEmbed from "../_components/BookingCalendarEmbed";
 
 const clinicSchema = getMedicalClinicSchema();
 
@@ -129,12 +130,17 @@ export default function ContactPage() {
 
             {/* New Lead Form Section */}
             <div className="grid lg:grid-cols-2 gap-10">
-              <div className="order-2 lg:order-1">
+              <div className="order-2 lg:order-1 space-y-8">
                  <ContactForm />
+
+                 <div id="booking-calendar">
+                   <h3 className="text-2xl font-bold text-slate-800 mb-6 text-center">Or Book Instantly Online</h3>
+                   <BookingCalendarEmbed url="https://cal.com/drsayuj" />
+                 </div>
               </div>
 
             {/* WhatsApp Fallback */}
-            <Card padding="lg" className="mt-8 bg-green-50/50 border-green-100">
+            <Card padding="lg" className="mt-8 bg-green-50/50 border-green-100 order-3 lg:col-span-2">
               <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div>
                   <h3 className="font-semibold text-lg text-green-800">Prefer to message?</h3>

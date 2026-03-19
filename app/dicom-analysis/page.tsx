@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 
 import React, { useState } from 'react';
 import Section from "../_components/Section";
-import Card from "../_components/Card";
+// import Card from "../_components/Card";
 
 export default function DicomAnalysisPage() {
   const [file, setFile] = useState<File | null>(null);
