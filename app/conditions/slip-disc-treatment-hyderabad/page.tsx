@@ -17,9 +17,9 @@ import CostTransparencySection from '@/src/components/CostTransparencySection';
 import { getLocationById } from '@/src/data/locations';
 
 const baseMetadata = makeMetadata({
-  title: "Slip Disc Treatment Hyderabad | Expert Endoscopic Care",
-  description: "Slip disc treatment in Hyderabad by Dr. Sayuj Krishnan. Expert conservative care & minimally invasive endoscopic discectomy at Yashoda Hospital. Book now.",
-  canonicalPath: '/conditions/slip-disc-treatment-hyderabad',
+  title: "Slip Disc Treatment Hyderabad | Endoscopic Surgery Expert",
+  description: "Expert slip disc treatment in Hyderabad by Dr. Sayuj Krishnan. Proven conservative care & minimally invasive endoscopic discectomy at Yashoda Hospital.",
+  canonicalPath: '/conditions/slip-disc-treatment-hyderabad/',
 });
 
 export const metadata: Metadata = {

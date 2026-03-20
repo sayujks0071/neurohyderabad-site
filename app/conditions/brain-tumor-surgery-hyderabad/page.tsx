@@ -20,9 +20,9 @@ const schemaData = [
   {
     "@context": "https://schema.org",
     "@type": "MedicalWebPage",
-    name: "Brain Tumor Surgery in Hyderabad",
+    name: "Brain Tumor Surgery Hyderabad | Top Neurosurgeon Dr Sayuj",
     description:
-      "Detailed guidance on brain tumour diagnosis, microsurgery, radiosurgery, and recovery with Dr. Sayuj Krishnan at Yashoda Hospital, Malakpet.",
+      "Advanced brain tumor diagnosis & microsurgery by Dr Sayuj Krishnan at Yashoda Hospital Hyderabad. Expert neurosurgical care for all intracranial neoplasms.",
     url: CANONICAL,
     inLanguage: "en-IN",
     isPartOf: {

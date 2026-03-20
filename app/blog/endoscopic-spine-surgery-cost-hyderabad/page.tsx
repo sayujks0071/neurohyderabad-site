@@ -127,7 +127,7 @@ export default function EndoscopicSpineSurgeryCostPage() {
               Endoscopic techniques can help selected patients with:
             </p>
             <ul className="list-disc pl-6 mb-4 space-y-2">
-              <li>Herniated (slip) disc causing leg pain/sciatica not improving with medicines and physiotherapy</li>
+              <li>Herniated (slip) disc causing leg pain/<Link href="/conditions/sciatica-pain-treatment-hyderabad/" className="text-blue-600 hover:underline">sciatica</Link> not improving with medicines and physiotherapy</li>
               <li>Foraminal stenosis where the exiting nerve is compressed</li>
               <li>Certain recurrent disc herniations</li>
               <li>Some patterns of lumbar canal stenosis that suit endoscopic ULBD (unilateral approach to bilateral decompression)</li>

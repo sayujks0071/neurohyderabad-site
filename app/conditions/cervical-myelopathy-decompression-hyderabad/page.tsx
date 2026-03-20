@@ -20,9 +20,9 @@ const schemaData = [
   {
     "@context": "https://schema.org",
     "@type": "MedicalWebPage",
-    name: "Cervical Myelopathy Decompression Surgery in Hyderabad",
+    name: "Cervical Myelopathy Surgery Hyderabad | Neck Decompression",
     description:
-      "Endoscopic and minimally invasive cervical decompression surgery for spinal cord compression (myelopathy) in Hyderabad with Dr. Sayuj Krishnan.",
+      "Expert cervical myelopathy decompression surgery in Hyderabad. Dr Sayuj Krishnan offers minimally invasive spine surgery for spinal cord compression relief.",
     url: CANONICAL,
     inLanguage: "en-IN",
     isPartOf: {
