@@ -1,6 +1,3 @@
-URL,Type,TTFB(s),Cache-Control,Content-Encoding,X-NextJS-Cache
-http://localhost:3000/,Homepage,0.525635,"no-store, must-revalidate",NONE,N/A
-http://localhost:3000/services/minimally-invasive-spine-surgery,Service,0.398932,"no-store, must-revalidate",NONE,N/A
-http://localhost:3000/conditions/sciatica-pain-treatment-hyderabad,Condition,1.543075,"no-store, must-revalidate",NONE,N/A
-http://localhost:3000/neurosurgeon-hitech-city,Location,1.125940,"no-store, must-revalidate",NONE,N/A
-http://localhost:3000/blog/awake-craniotomy-guide,Blog,0.924011,"no-store, must-revalidate",NONE,N/A
+URL,TTFB (ms),Cache-Control,Content-Encoding,Vercel-Cache
+https://www.drsayuj.info/,203,"public, max-age=0, must-revalidate","","HIT"
+https://www.drsayuj.info/services/endoscopic-spine-surgery-hyderabad,425,"public, max-age=0, must-revalidate","","PRERENDER"
