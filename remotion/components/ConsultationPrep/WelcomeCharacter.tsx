@@ -32,7 +32,7 @@ export const WelcomeCharacter: React.FC<WelcomeCharacterProps> = ({ char, delay,
       fps,
       from: 0.5,
       to: 1,
-      config: { damping: 10, stiffness: 150 }, // Bouncier, natural spring without fixed duration
+      config: { damping: 100, stiffness: 100 }, // Calm, overdamped spring for YMYL compliance
     }),
     [frame, fps, delay, prefersReducedMotion]
   );
@@ -43,7 +43,7 @@ export const WelcomeCharacter: React.FC<WelcomeCharacterProps> = ({ char, delay,
       fps,
       from: 30,
       to: 0,
-      config: { damping: 14, stiffness: 120 }, // Smoother slide up
+      config: { damping: 100, stiffness: 100 }, // Calm, overdamped slide up
     }),
     [frame, fps, delay, prefersReducedMotion]
   );
