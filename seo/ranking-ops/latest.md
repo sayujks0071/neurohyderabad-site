@@ -1,8 +1,8 @@
 # Latest SEO Operation
 
-**Date**: 2026-03-16
+**Date**: 2026-03-20
 **Focus**: On-page SEO uplift (Content Gap)
-**Page**: `app/services/endoscopic-spine-surgery-hyderabad/page.tsx`
-**Action**: Added a comprehensive "Risks & Safety Protocols" section to the Endoscopic Spine Surgery service page. By transparently detailing potential risks (like dural tears and infection) and matching them with specific mitigation strategies (like 4K magnification and 8mm micro-incisions), the page significantly strengthens its YMYL E-E-A-T signals.
+**Page**: `app/services/minimally-invasive-spine-surgery/page.tsx`
+**Action**: Added a comprehensive "What to Expect at Your First Consultation" section immediately preceding the "Diagnosis & Eligibility" section on the Minimally Invasive Spine Surgery page. It explains the consultation process: Medical history review, physical examination, MRI/imaging review, and discussion of treatment options, using a conservative and patient-focused tone suitable for YMYL. This directly addresses user intent and anxiety about the first visit, improving topical depth.
 
-**Report**: [View Full Report](./2026-03-16/report.md)
+**Report**: [View Full Report](./2026-03-20/report.md)
