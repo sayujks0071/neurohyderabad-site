@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
     // STEP 2: Generate Structured FAQs using Vercel AI Gateway (OpenAI)
     // Use generateObject for strict JSON structure
     const { object } = await generateObject({
-      model: getTextModel(), // Uses 'gpt-4o-mini' via Vercel AI Gateway
+      model: getTextModel(undefined, { cache: true }), // Uses 'gpt-4o-mini' via Vercel AI Gateway with caching enabled
       schema: z.object({
         faqs: z.array(z.object({
           question: z.string().describe('The question asked by a patient'),
