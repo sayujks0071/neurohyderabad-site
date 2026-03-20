@@ -1,55 +1,31 @@
 'use client';
 
 import { useChat } from '@ai-sdk/react';
-import { useRef, useEffect, useState, useMemo } from 'react';
-import { DefaultChatTransport, type UIMessage } from 'ai';
+import { useRef, useEffect } from 'react';
+import type { Message } from 'ai';
 
 export default function AISandbox() {
-  const [input, setInput] = useState('');
-
-  const transport = useMemo(() => new DefaultChatTransport({
-    api: '/api/ai/sandbox',
-  }), []);
-
-  const initialMessages = useMemo<UIMessage[]>(() => [
+  const initialMessages: Message[] = [
     {
       id: 'initial',
       role: 'assistant',
-      parts: [{ type: 'text', text: 'Welcome to the AI Sandbox. Ask me anything, like "Why is the sky blue?"' }]
+      content: 'Welcome to the AI Sandbox. Ask me anything, like "Why is the sky blue?"'
     },
-  ], []);
+  ];
 
-  const { messages, sendMessage, status } = useChat<UIMessage>({
-    transport,
-    messages: initialMessages,
+  const { messages, input = '', handleInputChange, handleSubmit, isLoading } = useChat({
+    api: '/api/ai/sandbox',
+    initialMessages,
   });
 
-  const isLoading = status === 'submitted' || status === 'streaming';
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!input.trim() || isLoading) return;
-    sendMessage({ text: input });
-    setInput('');
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInput(e.target.value);
-  };
-
-  const renderMessageContent = (m: UIMessage) => {
-    if (m.parts && m.parts.length > 0) {
-      return m.parts
-        .filter(part => part.type === 'text')
-        .map(part => (part as any).text)
-        .join(' ');
-    }
-    return '';
+  const renderMessageContent = (m: Message) => {
+    return m.content;
   };
 
   return (
@@ -102,7 +78,7 @@ export default function AISandbox() {
             />
             <button
               type="submit"
-              disabled={isLoading || !input.trim()}
+              disabled={isLoading || !input?.trim()}
               className="absolute right-2 p-2 rounded-full bg-blue-500 hover:bg-blue-400 disabled:opacity-50 disabled:hover:bg-blue-500 transition-colors text-white"
             >
               <svg
