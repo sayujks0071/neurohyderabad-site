@@ -8,14 +8,12 @@ interface ConfirmationProps {
   message: string;
   bookingData: BookingData;
   onBookAnother: () => void;
-  onEdit: () => void;
 }
 
 export default function Confirmation({
   message,
   bookingData,
   onBookAnother,
-  onEdit,
 }: ConfirmationProps) {
   return (
     <div className="max-w-2xl mx-auto my-8 md:my-16 px-4">
@@ -96,9 +94,6 @@ export default function Confirmation({
 
         <div className="flex flex-col sm:flex-row-reverse items-center justify-center gap-4">
           <Button onClick={onBookAnother}>Book Another Appointment</Button>
-          <Button onClick={onEdit} variant="secondary">
-            Edit Details
-          </Button>
         </div>
       </div>
     </div>

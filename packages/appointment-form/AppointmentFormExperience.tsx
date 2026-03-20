@@ -95,10 +95,6 @@ function AppointmentFormContent({
     setView("form");
   };
 
-  const handleEdit = () => {
-    setView("form");
-  };
-
   return (
     <div className="relative">
       {view === "form" && (
@@ -113,7 +109,6 @@ function AppointmentFormContent({
           message={confirmationMessage}
           bookingData={bookingData}
           onBookAnother={handleBookAnother}
-          onEdit={handleEdit}
         />
       )}
     </div>
