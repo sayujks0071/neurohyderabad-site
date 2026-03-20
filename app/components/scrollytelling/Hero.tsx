@@ -20,9 +20,16 @@ export default function Hero() {
     const containerRef = useRef<HTMLDivElement>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [progress, setProgress] = useState(0);
+    const [initWebGL, setInitWebGL] = useState(false);
 
     useEffect(() => {
-        if (!containerRef.current) return;
+        // Delay WebGL initialization to unblock main thread and improve TBT/LCP
+        const timer = setTimeout(() => setInitWebGL(true), 2000);
+        return () => clearTimeout(timer);
+    }, []);
+
+    useEffect(() => {
+        if (!containerRef.current || !initWebGL) return;
 
         // Configuration
         const CONFIG = {
@@ -174,6 +181,7 @@ export default function Hero() {
         }
 
         // Cleanup
+        const container = containerRef.current;
         return () => {
             if (loadTimeout) clearTimeout(loadTimeout);
             observer.disconnect();
@@ -185,15 +193,15 @@ export default function Hero() {
 
             scrubEngine.dispose();
 
-            if (containerRef.current && containerRef.current.contains(renderer.domElement)) {
-                containerRef.current.removeChild(renderer.domElement);
+            if (container && container.contains(renderer.domElement)) {
+                container.removeChild(renderer.domElement);
             }
 
             geometry.dispose();
             material.dispose();
             renderer.dispose();
         };
-    }, []);
+    }, [initWebGL]);
 
     return (
         <section ref={containerRef} className="relative w-full h-screen overflow-hidden bg-black text-white">
@@ -204,12 +212,12 @@ export default function Hero() {
                 priority
                 fetchPriority="high"
                 sizes="100vw"
-                className={`object-cover object-top transition-opacity duration-1000 ${isLoading ? 'opacity-50' : 'opacity-0'}`}
+                className={`object-cover object-top transition-opacity duration-1000 ${isLoading ? 'opacity-100' : 'opacity-0'}`}
             />
 
             {/* Loading Indicator */}
             {/* 🫀 CWV Sentinel Fix: Lower z-index to z-30 (below text's z-40) to prevent black overlay/blur from blocking LCP text paint */}
-            {isLoading && (
+            {initWebGL && isLoading && (
                 <div className="absolute inset-0 flex items-center justify-center z-30 bg-black/50 backdrop-blur-sm">
                     <div className="text-center">
                         <div className="w-16 h-16 border-4 border-[var(--color-primary-500)] border-t-transparent rounded-full animate-spin mb-4 mx-auto"></div>
