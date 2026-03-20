@@ -78,7 +78,7 @@ export default function SmartSymptomChecker() {
 
   return (
     <div className="max-w-2xl mx-auto">
-      <div className="bg-[var(--color-surface)] rounded-lg shadow-lg p-6">
+      <div className="relative bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
         <h2 className="text-2xl font-bold mb-4 text-[var(--color-primary-800)]">
           Symptom Checker
         </h2>
@@ -163,7 +163,7 @@ export default function SmartSymptomChecker() {
             type="submit"
             disabled={isLoading || !symptoms.trim()}
             aria-busy={isLoading}
-            className="w-full bg-[var(--color-primary-500)] text-white px-6 py-3 rounded-lg hover:bg-[var(--color-primary-700)] disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
+            className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-blue-500/50 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
           >
             {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden="true" />}
             {isLoading ? <Shimmer as="span">Analyzing...</Shimmer> : 'Analyze Symptoms'}
