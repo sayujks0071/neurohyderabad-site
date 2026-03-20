@@ -373,7 +373,20 @@ export default function AIStreamingChat({
                                   description="Running tool execution..."
                                   status={part.state === 'result' ? 'complete' : 'active'}
                                 />
-                                {part.state === 'result' && (
+                                {part.state === 'result' && part.toolName === 'searchContent' && (
+                                  <ChainOfThoughtSearchResults className="mt-2">
+                                    {Array.isArray(part.result) ? part.result.map((r: any, idx: number) => (
+                                      <ChainOfThoughtSearchResult key={idx} className="cursor-pointer" onClick={() => window.open(r.url, '_blank')}>
+                                        {r.title}
+                                      </ChainOfThoughtSearchResult>
+                                    )) : (
+                                      <div className="text-xs text-[var(--color-text-secondary)] opacity-70">
+                                        Tool execution finished.
+                                      </div>
+                                    )}
+                                  </ChainOfThoughtSearchResults>
+                                )}
+                                {part.state === 'result' && part.toolName !== 'searchContent' && (
                                   <div className="mt-2 text-xs text-[var(--color-text-secondary)] opacity-70">
                                     Tool execution finished.
                                   </div>
