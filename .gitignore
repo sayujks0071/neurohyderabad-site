@@ -106,3 +106,10 @@ audit/lighthouse/*.html
 audit/crawl/*.json
 audit/crawl/*.csv
 .pnpm-store
+
+# Playwright and Automation Session outputs
+whatsapp_session/
+openclaw/reports/
+health-reports/
+*.webm
+*.pdf
