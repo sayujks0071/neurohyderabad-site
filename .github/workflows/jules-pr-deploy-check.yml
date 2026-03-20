@@ -1,72 +1,68 @@
-name: Jules PR & Deploy Check
-# v2.4 - Managed by Jules
+name: "Jules: PR & Deploy Check"
+
 on:
   schedule:
-    # 08:45 IST (India Standard Time) = 03:15 UTC
     - cron: "15 3 * * *"
   workflow_dispatch:
 
+env:
+  PROMPT_FILE: "jules-prompts/pr-deploy-check.md"
+  ISSUE_TITLE_BASE: "Daily PR & Deploy Check"
+
 permissions:
-  issues: write
   contents: read
+  issues: write
 
 jobs:
-  create-jules-issue:
+  create-issue:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Create Issue
         uses: actions/github-script@v7
         env:
-          PROMPT_FILE: jules-prompts/pr-deploy-check.md
-          ISSUE_TITLE: "[Jules] Daily PR & Deploy Check"
+          PROMPT_FILE: ${{ env.PROMPT_FILE }}
+          ISSUE_TITLE_BASE: ${{ env.ISSUE_TITLE_BASE }}
         with:
           script: |
             const fs = require('fs');
-            const promptFile = process.env.PROMPT_FILE;
-            const baseTitle = process.env.ISSUE_TITLE;
+            const titleBase = process.env.ISSUE_TITLE_BASE;
+            const dateStr = new Date().toISOString().split('T')[0];
+            const issueTitle = `${titleBase} - ${dateStr}`;
 
-            // Generate today's date (YYYY-MM-DD) for uniqueness
-            const date = new Date().toISOString().split('T')[0];
-            const title = `${baseTitle} - ${date}`;
+            const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
 
-            // Read the prompt file
-            let body = '';
-            try {
-              body = fs.readFileSync(promptFile, 'utf8');
-            } catch (error) {
-              console.error(`Error reading prompt file: ${error.message}`);
-              core.setFailed('Failed to read prompt file.');
-              return;
-            }
-
-            // Check for existing open issues with the same title
-            const { data: existingIssues } = await github.rest.issues.listForRepo({
+            // Fetch issues to check for duplicates created within the last 24h
+            const { data: issues } = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
               state: 'open',
+              labels: 'jules',
               per_page: 100
             });
 
-            console.log(`Checking for duplicate issue with title: ${title}`);
-
-            // Find an open issue with the same base title created in the last 24 hours
-            const now = new Date();
-            const oneDayAgo = new Date(now.getTime() - (24 * 60 * 60 * 1000));
-
-            const duplicate = existingIssues.find(issue => {
-              const issueDate = new Date(issue.created_at);
-              return issue.title.startsWith(process.env.ISSUE_TITLE) && issueDate > oneDayAgo;
+            const isDuplicate = issues.some(issue => {
+              const createdDate = new Date(issue.created_at);
+              return issue.title.includes(titleBase) && createdDate > oneDayAgo;
             });
 
-            if (duplicate) {
-              console.log(`Issue already exists in the last 24h: ${duplicate.html_url}`);
+            if (isDuplicate) {
+              console.log(`An open issue with base title "${titleBase}" created in the last 24h already exists. Skipping.`);
               return;
             }
 
-            // Ensure the 'jules' label exists
+            let body;
+            try {
+              body = fs.readFileSync(process.env.PROMPT_FILE, 'utf8');
+            } catch (error) {
+              console.error(`Failed to read prompt file ${process.env.PROMPT_FILE}: ${error.message}`);
+              core.setFailed(`Prompt file missing or unreadable: ${process.env.PROMPT_FILE}`);
+              return;
+            }
+
+            // Ensure label 'jules' exists
             try {
               await github.rest.issues.getLabel({
                 owner: context.repo.owner,
@@ -75,28 +71,23 @@ jobs:
               });
             } catch (error) {
               if (error.status === 404) {
-                console.log('Label "jules" not found. Creating it...');
+                console.log("Label 'jules' not found. Creating it...");
                 await github.rest.issues.createLabel({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   name: 'jules',
-                  color: '0E8A16', // Green color
-                  description: 'Tasks for Jules AI'
+                  color: '0052cc',
+                  description: 'Automated tasks for Jules'
                 });
               } else {
                 throw error;
               }
             }
 
-            // Create the issue
-            const { data: newIssue } = await github.rest.issues.create({
+            await github.rest.issues.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              title: title,
+              title: issueTitle,
               body: body,
               labels: ['jules']
             });
-
-            console.log(`Created issue: ${newIssue.html_url}`);
-
-# Verified by Jules
