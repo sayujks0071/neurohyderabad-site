@@ -1,3 +1,97 @@
-url,title,issue_type,severity,recommended_fix
-https://www.drsayuj.info/about,"About Dr. Sayuj Krishnan | Premier Neurosurgeon in Hyderabad | Credentials &amp; Experience",Title too long,Low,Truncate title to 60-70 characters
-https://www.drsayuj.info/brain-surgery,"Brain Surgery Hyderabad | Awake Brain Surgery &amp; Brain Tumor Surgery | Dr. Sayuj Krishnan",Title too long,Low,Truncate title to 60-70 characters
+URL,Issue Type,Severity,Recommended Fix
+https://www.drsayuj.info/_global-error,Title Length (29),Medium,Keep title between 30 and 70 characters
+https://www.drsayuj.info/_global-error,Missing Description,High,Add a <meta name="description">
+https://www.drsayuj.info/admin/appointments,Title Length (77),Medium,Keep title between 30 and 70 characters
+https://www.drsayuj.info/admin/login,Title Length (77),Medium,Keep title between 30 and 70 characters
+https://www.drsayuj.info/admin/login,Missing H1,High,Add a single <h1> tag
+https://www.drsayuj.info/admin/referrals,Title Length (77),Medium,Keep title between 30 and 70 characters
+https://www.drsayuj.info/admin,Title Length (77),Medium,Keep title between 30 and 70 characters
+https://www.drsayuj.info/admin,Missing H1,High,Add a single <h1> tag
+https://www.drsayuj.info/ai-sandbox,Title Length (77),Medium,Keep title between 30 and 70 characters
+https://www.drsayuj.info/ai-workflow,Title Length (77),Medium,Keep title between 30 and 70 characters
+https://www.drsayuj.info/auth/callback,Missing H1,High,Add a single <h1> tag
+https://www.drsayuj.info/best-neurosurgeon-in-hyderabad,Description Length (171),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/blog/chiari-malformation-symptoms-treatment-hyderabad,Description Length (165),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/blog/life-after-spine-surgery-long-term-outcomes,Title Length (86),Medium,Keep title between 30 and 70 characters
+https://www.drsayuj.info/blog/life-after-spine-surgery-long-term-outcomes,Description Length (192),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/blog/neck-pain-arm-numbness-causes-treatment-hyderabad,Title Length (96),Medium,Keep title between 30 and 70 characters
+https://www.drsayuj.info/blog/neck-pain-arm-numbness-causes-treatment-hyderabad,Description Length (200),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/blog/neurosurgeon-vs-neurologist-when-to-see-which,Description Length (177),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/blog/robotic-spine-surgery-vs-traditional-hyderabad,Multiple H1s (2),Medium,Ensure only one <h1> tag is present
+https://www.drsayuj.info/blog/second-opinion-spine-surgery-hyderabad,Title Length (76),Medium,Keep title between 30 and 70 characters
+https://www.drsayuj.info/blog/second-opinion-spine-surgery-hyderabad,Description Length (183),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/blog/understanding-spine-mri-report-patient-guide,Title Length (80),Medium,Keep title between 30 and 70 characters
+https://www.drsayuj.info/blog/understanding-spine-mri-report-patient-guide,Description Length (177),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/brain-tumor-surgery,Title Length (77),Medium,Keep title between 30 and 70 characters
+https://www.drsayuj.info/brain-tumor-surgery,Missing H1,High,Add a single <h1> tag
+https://www.drsayuj.info/conditions/a-z/acoustic-neuroma,Description Length (221),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/conditions/a-z/acoustic-neuroma,Missing H1,High,Add a single <h1> tag
+https://www.drsayuj.info/conditions/a-z/aneurysm,Description Length (212),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/conditions/a-z/aneurysm,Missing H1,High,Add a single <h1> tag
+https://www.drsayuj.info/conditions/a-z/brachial-plexus,Description Length (202),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/conditions/a-z/brain-tumor-symptoms,Description Length (223),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/conditions/a-z/brain-tumor,Description Length (213),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/conditions/a-z/carpal-tunnel,Description Length (209),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/conditions/a-z/carpal-tunnel,Missing H1,High,Add a single <h1> tag
+https://www.drsayuj.info/conditions/a-z/cervical-disc,Description Length (202),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/conditions/a-z/cervical-disc,Missing H1,High,Add a single <h1> tag
+https://www.drsayuj.info/conditions/a-z/cervical-myelopathy,Description Length (216),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/conditions/a-z/chiari-malformation,Description Length (218),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/conditions/a-z/chiari-malformation,Missing H1,High,Add a single <h1> tag
+https://www.drsayuj.info/conditions/a-z/degenerative-disc-disease,Description Length (224),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/conditions/a-z/disc-herniation,Description Length (211),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/conditions/a-z/disc-herniation,Missing H1,High,Add a single <h1> tag
+https://www.drsayuj.info/conditions/a-z/epilepsy,Description Length (215),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/conditions/a-z/glioma,Description Length (215),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/conditions/a-z/hydrocephalus,Description Length (208),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/conditions/a-z/lumbar-stenosis,Description Length (205),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/conditions/a-z/lumbar-stenosis,Missing H1,High,Add a single <h1> tag
+https://www.drsayuj.info/conditions/a-z/meningioma,Description Length (211),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/conditions/a-z/metastasis,Description Length (215),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/conditions/a-z/normal-pressure-hydrocephalus,Description Length (213),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/conditions/a-z/pituitary-adenoma,Description Length (214),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/conditions/a-z/pituitary-adenoma,Missing H1,High,Add a single <h1> tag
+https://www.drsayuj.info/conditions/a-z/radiculopathy,Description Length (215),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/conditions/a-z/radiculopathy,Missing H1,High,Add a single <h1> tag
+https://www.drsayuj.info/conditions/a-z/sciatica,Description Length (211),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/conditions/a-z/sciatica,Missing H1,High,Add a single <h1> tag
+https://www.drsayuj.info/conditions/a-z/seizure-disorders,Description Length (216),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/conditions/a-z/spinal-cord-tumour,Description Length (206),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/conditions/a-z/spondylolisthesis,Description Length (205),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/conditions/a-z/spondylolisthesis,Missing H1,High,Add a single <h1> tag
+https://www.drsayuj.info/conditions/a-z/trigeminal-neuralgia,Description Length (209),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/conditions/a-z/trigeminal-neuralgia,Missing H1,High,Add a single <h1> tag
+https://www.drsayuj.info/conditions/a-z/vascular-malformations,Description Length (210),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/conditions/degenerative-disc-disease-treatment-hyderabad,Description Length (170),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/conditions/spine-tumor-surgery-hyderabad,Description Length (164),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/dicom-analysis,Title Length (77),Medium,Keep title between 30 and 70 characters
+https://www.drsayuj.info/discharge-summary-analysis,Title Length (77),Medium,Keep title between 30 and 70 characters
+https://www.drsayuj.info/drafts,Description Length (53),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/followup,Description Length (65),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/german-training,Description Length (166),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/international,Description Length (161),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/lab-analysis,Title Length (77),Medium,Keep title between 30 and 70 characters
+https://www.drsayuj.info/locations/banjara-hills,Title Length (77),Medium,Keep title between 30 and 70 characters
+https://www.drsayuj.info/locations/banjara-hills,Missing H1,High,Add a single <h1> tag
+https://www.drsayuj.info/locations/hitech-city,Title Length (77),Medium,Keep title between 30 and 70 characters
+https://www.drsayuj.info/locations/hitech-city,Missing H1,High,Add a single <h1> tag
+https://www.drsayuj.info/locations/lb-nagar,Description Length (173),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/locations/malakpet,Title Length (77),Medium,Keep title between 30 and 70 characters
+https://www.drsayuj.info/locations/malakpet,Missing H1,High,Add a single <h1> tag
+https://www.drsayuj.info/locations/neurosurgeon-jubilee-hills,Title Length (77),Medium,Keep title between 30 and 70 characters
+https://www.drsayuj.info/locations/neurosurgeon-jubilee-hills,Missing H1,High,Add a single <h1> tag
+https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills-faq,Description Length (164),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/locations/neurosurgeon-near-jubilee-hills,Missing H1,High,Add a single <h1> tag
+https://www.drsayuj.info/locations/secunderabad,Title Length (77),Medium,Keep title between 30 and 70 characters
+https://www.drsayuj.info/locations/secunderabad,Missing H1,High,Add a single <h1> tag
+https://www.drsayuj.info/media,Description Length (173),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/mri-analysis,Title Length (77),Medium,Keep title between 30 and 70 characters
+https://www.drsayuj.info/neurosurgeon-banjara-hills,Description Length (179),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/neurosurgeon-hitech-city,Description Length (177),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/patient-journey,Title Length (77),Medium,Keep title between 30 and 70 characters
+https://www.drsayuj.info/pediatric-neurosurgery,Description Length (182),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/services/awake-spine-surgery-hyderabad,Title Length (29),Medium,Keep title between 30 and 70 characters
+https://www.drsayuj.info/spine-care-pathway,Title Length (77),Medium,Keep title between 30 and 70 characters
+https://www.drsayuj.info/technology-facilities,Description Length (178),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/utm-links,Description Length (69),Medium,Keep description between 70 and 160 characters
+https://www.drsayuj.info/utm-links,Missing H1,High,Add a single <h1> tag
