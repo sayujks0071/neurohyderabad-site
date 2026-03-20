@@ -1,0 +1,42 @@
+name: OpenClaw Hyderabad Campaign
+
+on:
+  schedule:
+    # Run every Monday and Thursday at 3:00 AM UTC
+    - cron: '0 3 * * 1,4'
+  workflow_dispatch:
+
+jobs:
+  run-campaign:
+    name: Run Hyderabad Conversion Campaign
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: '9.15.0'
+
+      - name: Install Dependencies
+        run: pnpm install
+
+      - name: Install Google Workspace CLI (gws)
+        run: npm install -g @googleworkspace/cli
+
+      - name: Execute Hyderabad Campaign Script
+        run: npx tsx workflows/hyderabad-conversion-campaign.ts
+        env:
+          NODE_ENV: production
+          DRY_RUN: 'false'
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          POSTGRES_URL: ${{ secrets.POSTGRES_URL }}
+          GOOGLE_WORKSPACE_CLI_CREDENTIALS_FILE: ${{ secrets.GOOGLE_WORKSPACE_CLI_CREDENTIALS_FILE }}
+          GOOGLE_WORKSPACE_CLI_TOKEN: ${{ secrets.GOOGLE_WORKSPACE_CLI_TOKEN }}

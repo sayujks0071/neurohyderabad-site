@@ -1,24 +1,69 @@
-import { exec } from "child_process";
+import { execFile } from "child_process";
 import { promisify } from "util";
-import { appointments } from "../src/lib/db";
+import { patients } from "../src/lib/db";
 
-const execAsync = promisify(exec);
+const execFileAsync = promisify(execFile);
 
-// Mock data or query from DB for unconverted leads in Hyderabad
-const HYDERABAD_LEADS = [
-  { name: "Rahul S.", email: "rahul.hyderabad@example.com", condition: "Lower Back Pain", status: "Inquired" },
-  { name: "Priya M.", email: "priya.m@example.com", condition: "Neck Pain", status: "Inquired" },
-  { name: "Suresh K.", email: "suresh.k@example.com", condition: "Sciatica", status: "Inquired" }
-];
+// Encode email to base64url for standard `gws gmail users messages send`
+function encodeBase64Url(str: string): string {
+  return Buffer.from(str)
+    .toString("base64")
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_")
+    .replace(/=+$/, "");
+}
+
+async function getHyderabadLeads() {
+  // If database is not configured, fallback to mock data
+  if (!process.env.POSTGRES_URL && !process.env.DATABASE_URL) {
+    console.log("No database configured, using mock leads for Hyderabad.");
+    return [
+      { name: "Rahul S.", email: "rahul.hyderabad@example.com", condition: "Lower Back Pain", status: "Inquired" },
+      { name: "Priya M.", email: "priya.m@example.com", condition: "Neck Pain", status: "Inquired" },
+      { name: "Suresh K.", email: "suresh.k@example.com", condition: "Sciatica", status: "Inquired" }
+    ];
+  }
+
+  try {
+    // In a real scenario, this would be a specialized query to find unconverted leads from Hyderabad
+    // Since we don't have a direct location query in the patients table schema shown, we'll
+    // fetch recent patients and filter for demonstration if they don't have completed appointments
+    const { getRecent } = require("../src/lib/db").appointments;
+    const recent = await getRecent(100);
+
+    // Filter for those who only have 'pending' or 'inquired' status
+    const unconverted = recent.filter((a: any) =>
+      a.status === 'pending' || a.status === 'inquired'
+    );
+
+    // Limit to a small batch and map to expected lead format
+    return unconverted.slice(0, 10).map((a: any) => ({
+      name: a.patient_name,
+      email: a.patient_email,
+      condition: a.chief_complaint || "Spine/Brain condition",
+      status: a.status
+    }));
+  } catch (error) {
+    console.error("Failed to fetch leads from DB:", error);
+    return [];
+  }
+}
 
 async function createCampaignTrackerSheet(): Promise<string | null> {
   console.log("Creating Google Sheet for Hyderabad Conversion Campaign...");
   const title = `Hyderabad Conversion Campaign - ${new Date().toISOString().split("T")[0]}`;
-  const command = `gws sheets spreadsheets create --json '{"properties": {"title": "${title}"}}'`;
+
+  const args = [
+    "sheets",
+    "spreadsheets",
+    "create",
+    "--json",
+    JSON.stringify({ properties: { title } })
+  ];
 
   try {
-    const { stdout, stderr } = await execAsync(command);
-    if (stderr && !stderr.includes("success") && !stderr.includes("200 OK")) {
+    const { stdout, stderr } = await execFileAsync("gws", args);
+    if (stderr) {
       console.warn("gws sheets stderr:", stderr);
     }
     const response = JSON.parse(stdout);
@@ -36,10 +81,19 @@ async function addHeaderRow(spreadsheetId: string) {
     values: [["Date", "Name", "Email", "Condition", "Status"]]
   });
 
-  const command = `gws sheets spreadsheets values append --params '{"spreadsheetId": "${spreadsheetId}", "range": "${range}", "valueInputOption": "USER_ENTERED"}' --json '${jsonPayload}'`;
+  const args = [
+    "sheets",
+    "spreadsheets",
+    "values",
+    "append",
+    "--params",
+    JSON.stringify({ spreadsheetId, range, valueInputOption: "USER_ENTERED" }),
+    "--json",
+    jsonPayload
+  ];
 
   try {
-    await execAsync(command);
+    await execFileAsync("gws", args);
     console.log("Header row added to sheet.");
   } catch (error) {
     console.error("Failed to add header row:", error);
@@ -52,10 +106,19 @@ async function logLeadToSheet(spreadsheetId: string, lead: any) {
     values: [[new Date().toISOString().split("T")[0], lead.name, lead.email, lead.condition, lead.status]]
   });
 
-  const command = `gws sheets spreadsheets values append --params '{"spreadsheetId": "${spreadsheetId}", "range": "${range}", "valueInputOption": "USER_ENTERED"}' --json '${jsonPayload}'`;
+  const args = [
+    "sheets",
+    "spreadsheets",
+    "values",
+    "append",
+    "--params",
+    JSON.stringify({ spreadsheetId, range, valueInputOption: "USER_ENTERED" }),
+    "--json",
+    jsonPayload
+  ];
 
   try {
-    await execAsync(command);
+    await execFileAsync("gws", args);
     console.log(`Logged ${lead.name} to tracker.`);
   } catch (error) {
     console.error(`Failed to log ${lead.name} to tracker:`, error);
@@ -65,23 +128,47 @@ async function logLeadToSheet(spreadsheetId: string, lead: any) {
 async function sendOutreachEmail(lead: any, dryRun = false) {
   console.log(`Preparing outreach email for ${lead.name}...`);
 
-  const subject = "Following up on your spine health query - Dr. Sayuj Krishnan";
+  const subject = "Following up on your health query - Dr. Sayuj Krishnan";
   const body = `Hi ${lead.name},
 
-I am Dr. Sayuj Krishnan's automated assistant. We noticed you inquired about ${lead.condition} but haven't booked a consultation yet.
+I am Dr. Sayuj Krishnan's automated assistant. We noticed you recently reached out regarding your ${lead.condition} but haven't proceeded with a consultation.
 
-We are currently offering priority scheduling for patients in the Hyderabad region to ensure timely care. Please let us know if you'd like to proceed with booking a consultation or if you have any further questions regarding your ${lead.condition}.
+To ensure timely care, we are currently offering priority scheduling for patients in the Hyderabad region. Would you like to proceed with booking a consultation or do you have any questions regarding your ${lead.condition}?
+
+You can book directly at: https://www.drsayuj.info/appointments
 
 Best regards,
 The Clinic of Dr. Sayuj Krishnan
 Yashoda Hospital, Hyderabad`;
 
-  // Use gws gmail +send
-  const command = `gws gmail +send --to "${lead.email}" --subject "${subject}" --body "${body}"${dryRun ? " --dry-run" : ""}`;
+  // Use standard gws email sending format
+  const encodedEmail = encodeBase64Url(
+    `To: ${lead.email}\nSubject: ${subject}\n\n${body}`
+  );
+
+  const payload = {
+    raw: encodedEmail,
+    subject: subject
+  };
+
+  const args = [
+    "gmail",
+    "users",
+    "messages",
+    "send",
+    "--params",
+    JSON.stringify({ userId: "me" }),
+    "--json",
+    JSON.stringify(payload)
+  ];
+
+  if (dryRun) {
+    args.push("--dry-run");
+  }
 
   try {
-    const { stdout, stderr } = await execAsync(command);
-    if (stderr && !stderr.includes("success") && !stderr.includes("200 OK")) {
+    const { stdout, stderr } = await execFileAsync("gws", args);
+    if (stderr) {
       console.warn("gws gmail stderr:", stderr);
     }
     console.log(`Sent outreach to ${lead.email}`);
@@ -99,14 +186,26 @@ async function runCampaign() {
     await addHeaderRow(spreadsheetId);
   }
 
-  // 2. Execute outreach
-  for (const lead of HYDERABAD_LEADS) {
-    // We pass --dry-run for safety unless explicitly disabled
-    await sendOutreachEmail(lead, true);
+  // 2. Get Leads
+  const leads = await getHyderabadLeads();
+  console.log(`Found ${leads.length} leads for outreach.`);
 
-    // 3. Log to CRM
-    if (spreadsheetId) {
-      await logLeadToSheet(spreadsheetId, lead);
+  // 3. Execute outreach
+  const dryRun = process.env.DRY_RUN !== 'false';
+  if (dryRun) {
+    console.log("Running in DRY RUN mode. No emails will be sent.");
+  }
+
+  for (const lead of leads) {
+    if (lead.email) {
+      await sendOutreachEmail(lead, dryRun);
+
+      // 4. Log to CRM
+      if (spreadsheetId) {
+        await logLeadToSheet(spreadsheetId, lead);
+      }
+    } else {
+      console.log(`Skipping ${lead.name} due to missing email.`);
     }
   }
 
