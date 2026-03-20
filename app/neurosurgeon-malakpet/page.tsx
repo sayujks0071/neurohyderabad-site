@@ -18,13 +18,13 @@ export const dynamicParams = false;
 export const revalidate = 86400;
 
 export const metadata = {
-  title: "Neurosurgeon in Malakpet | Dr. Sayuj | Yashoda Hospitals",
+  title: "Neurosurgeon & Spine Surgeon in Malakpet | Dr. Sayuj | Yashoda Hospitals",
   description:
     "Dr. Sayuj Krishnan at Yashoda Hospital Malakpet offers spinal decompression, endoscopic brain surgery, slip disc treatment, and 24/7 emergency neurosurgery.",
   keywords: "neurosurgeon malakpet, yashoda hospital malakpet neurosurgeon, spine surgeon malakpet, daycare spine surgery malakpet, endoscopic spine surgery malakpet, spine fracture treatment malakpet, vertebroplasty malakpet",
   alternates: { canonical: "https://www.drsayuj.info/neurosurgeon-malakpet" },
   openGraph: {
-    title: "Neurosurgeon in Malakpet | Dr. Sayuj | Yashoda Hospitals",
+    title: "Neurosurgeon & Spine Surgeon in Malakpet | Dr. Sayuj | Yashoda Hospitals",
     description: "Neurosurgeon at Yashoda Hospital Malakpet offering spinal decompression, endoscopic brain surgery, slip disc treatment, and 24/7 emergency care.",
     url: "https://www.drsayuj.info/neurosurgeon-malakpet",
     type: "website",
@@ -39,7 +39,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Neurosurgeon in Malakpet | Dr. Sayuj Krishnan at Yashoda Hospital",
+    title: "Neurosurgeon & Spine Surgeon in Malakpet | Dr. Sayuj at Yashoda Hospital",
     description: "Expert neurosurgeon practicing at Yashoda Hospital Malakpet offering spinal decompression, endoscopic brain surgery, and slip disc treatment.",
     images: ["https://www.drsayuj.info/images/og-default.jpg"],
   },
@@ -102,7 +102,7 @@ export default function MalakpetNeurosurgeonPage() {
             Yashoda Hospital Malakpet · Hyderabad
           </p>
           <h1 className="text-3xl font-bold md:text-5xl leading-tight text-white">
-            Dr. Sayuj Krishnan - Neurosurgeon in Malakpet <span className="opacity-80 font-light block text-2xl md:text-3xl mt-2">& Brain-Spine Specialist</span>
+            Dr. Sayuj Krishnan - Neurosurgeon & Spine Surgeon in Malakpet <span className="opacity-80 font-light block text-2xl md:text-3xl mt-2">& Minimally Invasive Specialist</span>
           </h1>
           <p className="mt-4 text-xl text-blue-50 max-w-3xl">
             Fellowship-trained Expert in <strong>Minimally Invasive Spine Surgery</strong> & <strong>Brain Tumor Removal</strong>.
@@ -143,13 +143,22 @@ export default function MalakpetNeurosurgeonPage() {
           {/* Left Column: Intro & Trust */}
           <div>
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
-              World-Class Neurosurgical Care in Malakpet
+              World-Class Neurosurgical & Spine Care in Malakpet
             </h2>
             <p className="text-gray-700 leading-relaxed mb-4">
               Residents of <strong>Malakpet, Dilsukhnagar, and LB Nagar</strong> no longer need to travel far for advanced brain and spine care.
               <strong>Dr. Sayuj Krishnan</strong> brings international expertise to the heart of Malakpet at Yashoda Hospitals, <Link href="/services/endoscopic-spine-surgery-hyderabad" className="text-blue-600 underline font-semibold">specialising in endoscopic spine surgery with 90% same-day discharge</Link>.
             </p>
-            <p className="text-gray-700 leading-relaxed mb-6">
+            <div className="mt-8 bg-blue-50 border border-blue-100 p-6 rounded-xl">
+              <h3 className="text-xl font-bold text-blue-900 mb-3">Convenient Access for South & East Hyderabad</h3>
+              <p className="text-gray-700 text-sm leading-relaxed">
+                Yashoda Hospitals Malakpet is strategically located to provide immediate access to advanced brain and spine surgery for patients from <strong>Dilsukhnagar, L.B. Nagar, Kothapet, Vanasthalipuram, Santosh Nagar, and Chaderghat</strong>.
+                If you have been advised spine surgery, seek a trusted second opinion near your home.
+              </p>
+            </div>
+          </div>
+
+            <p className="text-gray-700 leading-relaxed mt-6 mb-6">
               Using advanced <strong>Keyhole (Endoscopic) Spine Surgery</strong> techniques, Dr. Sayuj treats slip discs and sciatica without major open surgery.
               Most patients walk within hours and go home the same day. He is also a leading expert in <strong>Neuronavigation-guided Brain Tumor Surgery</strong>, ensuring maximum safety for delicate brain procedures.
             </p>
