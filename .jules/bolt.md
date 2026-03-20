@@ -13,3 +13,7 @@
 ## 2025-03-11 - Optimize Vercel AI Gateway for deterministic endpoints
 **Learning:** For deterministic AI endpoints (like semantic search, triage, analytics, predictive scheduling, and follow-up care), enabling caching via Vercel AI Gateway headers (`vercel-ai-gateway-cache: true`) significantly reduces API costs and improves response latency for repeated queries.
 **Action:** Updated calls to `getTextModel` in deterministic service files to pass `{ cache: true }` to leverage the built-in Vercel AI Gateway caching mechanism.
+
+## 2025-03-20 - Replace standard img with next/image in AI Attachments
+**Learning:** Vercel AI Elements components, when generated, may use standard `<img>` tags for attachments which degrade LCP and increase bandwidth, especially when external user-uploaded content or sources are rendered.
+**Action:** Replaced `<img>` tags in `src/components/ai-elements/attachments.tsx` with `<Image>` from `next/image` using the `unoptimized` prop to ensure layout stability (preventing CLS) without throwing errors on unregistered external domains.
