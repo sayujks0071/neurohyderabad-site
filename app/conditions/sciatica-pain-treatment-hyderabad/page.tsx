@@ -24,8 +24,8 @@ const PatientEducationVideos = dynamic(() => import('@/app/_components/PatientEd
 });
 
 const baseMetadata = makeMetadata({
-  title: "Sciatica Treatment Hyderabad | 90% Non-Surgical | Dr Sayuj",
-  description: "Best Sciatica treatment in Hyderabad. 90% patients recover without surgery using nerve blocks & meds. Endoscopic cure available. Book Dr Sayuj.",
+  title: "Sciatica Treatment Hyderabad | Non-Surgical Cure | Dr Sayuj",
+  description: "Expert Sciatica treatment in Hyderabad. 90% recover without surgery using advanced blocks & meds. Endoscopic spine surgery available. Book Dr Sayuj today.",
   canonicalPath: '/conditions/sciatica-pain-treatment-hyderabad',
 });
 
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     "endoscopic spine surgery for sciatica"
   ],
   alternates: {
-    canonical: `${SITE_URL}/conditions/sciatica-pain-treatment-hyderabad`,
+    canonical: `${SITE_URL}/conditions/sciatica-pain-treatment-hyderabad/`,
   },
 };
 
@@ -50,6 +50,10 @@ export const metadata: Metadata = {
 export const revalidate = 86400;
 
 const FAQ = [
+  {
+    q: "What are the latest non-surgical treatments for Sciatica in Hyderabad?",
+    a: "Recent advancements include targeted epidural steroid injections, cooled radiofrequency ablation, and specialized decompression physiotherapy, which help the vast majority of our patients avoid surgery."
+  },
   {
     q: "What is sciatica?",
     a: "Sciatica is not a condition itself, but a symptom of an underlying problem. It refers to pain that radiates along the path of the sciatic nerve, which branches from your lower back through your hips and buttocks and down each leg."
@@ -579,8 +583,8 @@ export default function SciaticaTreatmentPage() {
 
       {/* Schema Markup */}
       <MedicalWebPageSchema
-        title="Sciatica Treatment Hyderabad | 90% Non-Surgical | Dr Sayuj"
-        description="Best Sciatica treatment in Hyderabad. 90% patients recover without surgery using nerve blocks & meds. Endoscopic cure available. Book Dr Sayuj."
+        title="Sciatica Treatment Hyderabad | Non-Surgical Cure | Dr Sayuj"
+        description="Expert Sciatica treatment in Hyderabad. 90% recover without surgery using advanced blocks & meds. Endoscopic spine surgery available. Book Dr Sayuj today."
         pageSlug="/conditions/sciatica-pain-treatment-hyderabad/"
         pageType="condition"
         serviceOrCondition="Sciatica Treatment"
