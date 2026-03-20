@@ -359,6 +359,39 @@ export default function MinimallyInvasiveSpineSurgeryPage() {
             </div>
           </section>
 
+          {/* First Consultation Section - Added for SEO Content Gap */}
+          <section className="mb-12">
+            <h2 className="text-3xl font-bold text-blue-800 mb-6">What to Expect at Your First Consultation</h2>
+            <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+              <p className="text-gray-700 mb-6">
+                We understand that considering spine surgery can be stressful. Your initial consultation with Dr. Sayuj Krishnan is designed to be informative, thorough, and focused on finding the least invasive path to pain relief.
+              </p>
+              <div className="grid md:grid-cols-3 gap-6">
+                <div>
+                  <div className="flex items-center mb-3">
+                    <span className="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold mr-3">1</span>
+                    <h3 className="text-lg font-semibold text-blue-700">Detailed Evaluation</h3>
+                  </div>
+                  <p className="text-sm text-gray-700">We begin with a comprehensive review of your medical history, symptoms, and a focused neurological physical exam to pinpoint the source of your pain.</p>
+                </div>
+                <div>
+                  <div className="flex items-center mb-3">
+                    <span className="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold mr-3">2</span>
+                    <h3 className="text-lg font-semibold text-blue-700">MRI & Imaging Review</h3>
+                  </div>
+                  <p className="text-sm text-gray-700">Dr. Krishnan personally reviews your MRI and X-ray scans with you on-screen, explaining the structural issues in plain, easy-to-understand language.</p>
+                </div>
+                <div>
+                  <div className="flex items-center mb-3">
+                    <span className="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold mr-3">3</span>
+                    <h3 className="text-lg font-semibold text-blue-700">Custom Treatment Plan</h3>
+                  </div>
+                  <p className="text-sm text-gray-700">You will leave with a clear, step-by-step roadmap. We always explore conservative treatments (physiotherapy, medications) before recommending endoscopic surgery.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
           {/* Diagnosis Section - Added to match competitor depth */}
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-blue-800 mb-6">Diagnosis & Eligibility</h2>

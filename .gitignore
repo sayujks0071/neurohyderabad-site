@@ -53,6 +53,7 @@ temp/
 docs/internal/
 *.md
 !docs/MAINTENANCE_REPORT.md
+!seo/ranking-ops/**/*.md
 !integrations/apps-script/README.md
 !docs/JULES_SETUP.md
 !docs/JULES_API_SETUP.md
