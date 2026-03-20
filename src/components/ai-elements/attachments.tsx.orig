@@ -17,7 +17,6 @@ import {
   VideoIcon,
   XIcon,
 } from "lucide-react";
-import Image from "next/image";
 import type { ComponentProps, HTMLAttributes, ReactNode } from "react";
 import { createContext, useCallback, useContext, useMemo } from "react";
 
@@ -92,22 +91,20 @@ const renderAttachmentImage = (
   isGrid: boolean
 ) =>
   isGrid ? (
-    <Image
+    <img
       alt={filename || "Image"}
       className="size-full object-cover"
       height={96}
       src={url}
       width={96}
-      unoptimized // ⚡ Bolt: Prevent error if URL is external and domain isn't registered
     />
   ) : (
-    <Image
+    <img
       alt={filename || "Image"}
       className="size-full rounded object-cover"
       height={20}
       src={url}
       width={20}
-      unoptimized // ⚡ Bolt: Prevent error if URL is external and domain isn't registered
     />
   );
 
