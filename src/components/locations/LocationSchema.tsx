@@ -69,6 +69,18 @@ export const LocationSchema: React.FC<LocationSchemaProps> = ({
     "department": {
         "@id": `${siteUrl}/#physician`
     },
+    "employee": [
+      {
+        "@type": "Physician",
+        "@id": `${siteUrl}/#physician`,
+        "name": "Dr. Sayuj Krishnan"
+      }
+    ],
+    "founder": {
+      "@type": "Physician",
+      "@id": `${siteUrl}/#physician`,
+      "name": "Dr. Sayuj Krishnan"
+    },
     "areaServed": {
         "@type": "Place",
         "name": location.areaServedName
