@@ -1,5 +1,10 @@
 # Latest Run
 
+- **Date:** 2026-03-20
+- **Topic:** Endoscopic Discectomy vs. Microdiscectomy: Which Spine Surgery is Right for You?
+- **Status:** Success
+- **Traceability File:** [Run Details](./2026-03-20/run.md)
+
 - **Date:** 2026-03-19
 - **Topic:** Sciatica vs Piriformis Syndrome: Leg Pain Causes
 - **Status:** Success
