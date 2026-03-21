@@ -36,7 +36,7 @@
 
 ## 2026-02-09
 - **Internal Linking:** Ensure all "Service" pages link to "Symptoms Checker" as a CTA.
-- **Content Gap:** Add "What to Expect at Your First Consultation" section to Service pages.
+- [x] **Content Gap:** Add "What to Expect at Your First Consultation" section to Service pages. (Done 2026-03-21)
 - **Schema:** Enhance `FAQSchema` to include "acceptedAnswer" schema for more nuanced questions (e.g., specific recovery timelines).
 
 ## 2026-02-10
