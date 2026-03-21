@@ -47,11 +47,11 @@ import { SITE_URL } from "../src/lib/seo";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Neurosurgeon & Endoscopic Spine Specialist Hyderabad | Dr. Sayuj Krishnan",
+    default: "Dr. Sayuj Krishnan - Neurosurgeon & Spine Specialist in Hyderabad",
     template: "%s"
   },
   description:
-    "German-trained neurosurgeon in Hyderabad for minimally invasive spine and brain surgery with same-day discharge at Yashoda Hospital, Malakpet.",
+    "Dr. Sayuj Krishnan is a leading neurosurgeon in Hyderabad specializing in brain surgery, minimally invasive spine surgery, and comprehensive neurological care.",
   keywords: [
     "neurosurgeon hyderabad",
     "brain surgeon hyderabad",
@@ -84,8 +84,8 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Dr. Sayuj Krishnan S | Best Neurosurgeon in Hyderabad | Brain & Spine Surgery",
-    description: "Expert neurosurgeon Dr. Sayuj Krishnan in Hyderabad specializing in endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures. Same-day discharge available. 1,000+ endoscopic procedures performed.",
+    title: "Dr. Sayuj Krishnan - Neurosurgeon & Spine Specialist in Hyderabad",
+    description: "Dr. Sayuj Krishnan is a leading neurosurgeon in Hyderabad specializing in brain surgery, minimally invasive spine surgery, and comprehensive neurological care.",
     url: SITE_URL,
     siteName: "Dr. Sayuj Krishnan - Neurosurgeon Hyderabad",
     locale: "en_IN",
@@ -102,8 +102,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dr. Sayuj Krishnan S | Best Neurosurgeon in Hyderabad",
-    description: "German-trained neurosurgeon specializing in endoscopic spine surgery, brain tumor surgery, and minimally invasive procedures. 1,000+ endoscopic procedures. Same-day discharge available.",
+    title: "Dr. Sayuj Krishnan - Neurosurgeon & Spine Specialist in Hyderabad",
+    description: "Dr. Sayuj Krishnan is a leading neurosurgeon in Hyderabad specializing in brain surgery, minimally invasive spine surgery, and comprehensive neurological care.",
     images: [`${SITE_URL}/images/og-default.jpg`],
     site: "@drsayuj",
     creator: "@drsayuj",
