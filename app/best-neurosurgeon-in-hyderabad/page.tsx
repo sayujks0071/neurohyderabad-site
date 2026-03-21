@@ -5,7 +5,10 @@ import SmartImage from '@/components/SmartImage';
 // import { HeroCTA } from "../../src/components/Experiments";
 // import SocialProofBand from "../../src/components/Experiments/SocialProofBand";
 import { LocationCTAs } from "@/src/components/locations/LocationCTAs";
+import { LocationNAPCard } from "@/src/components/locations/LocationNAPCard";
+import { LocationSchema } from "@/src/components/locations/LocationSchema";
 import { LocalPathways } from "@/src/components/locations/LocalPathways";
+import { getLocationById } from "@/src/data/locations";
 import { safeJsonLdStringify } from '@/src/lib/seo/jsonld';
 
 export const metadata: Metadata = {
@@ -596,6 +599,9 @@ export default function BestNeurosurgeonPage() {
              </h2>
              <div className="mb-12">
                <LocationCTAs locationId="malakpet" />
+             </div>
+             <div className="mb-12">
+               <LocationNAPCard locationId="malakpet" />
              </div>
              <LocalPathways mode="service" />
           </div>
