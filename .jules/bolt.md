@@ -13,3 +13,7 @@
 ## 2025-03-11 - Optimize Vercel AI Gateway for deterministic endpoints
 **Learning:** For deterministic AI endpoints (like semantic search, triage, analytics, predictive scheduling, and follow-up care), enabling caching via Vercel AI Gateway headers (`vercel-ai-gateway-cache: true`) significantly reduces API costs and improves response latency for repeated queries.
 **Action:** Updated calls to `getTextModel` in deterministic service files to pass `{ cache: true }` to leverage the built-in Vercel AI Gateway caching mechanism.
+
+## 2025-03-21 - Replace setTimeout debounce with timestamp throttle for high-frequency events
+**Learning:** Using `setTimeout` and `clearTimeout` on every single iteration of a high-frequency event listener (like `scroll`, `mousemove`, or `click` in global engagement trackers) creates excessive overhead due to constant event loop scheduling and garbage collection.
+**Action:** Replaced the `setTimeout` trailing-edge debounce pattern with a direct timestamp delta check (`Date.now() - lastExecution < throttleMs`), effectively eliminating the event loop overhead for basic activity tracking.
