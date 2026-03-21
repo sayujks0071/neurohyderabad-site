@@ -6,6 +6,7 @@ import SourceList from '@/app/_components/SourceList';
 import ReviewedBy from '@/app/_components/ReviewedBy';
 import NAP from '@/app/_components/NAP';
 import { sources } from '../sources';
+import { safeJsonLdStringify } from '@/src/lib/seo/jsonld';
 
 export const metadata: Metadata = {
   title: "Getting a Second Opinion for Spine Surgery in Hyderabad | Dr. Sayuj Krishnan",
@@ -53,7 +54,7 @@ export default function SecondOpinionSpineSurgeryPage() {
     <div className="min-h-screen bg-white">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(articleSchema) }}
       />
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto">
