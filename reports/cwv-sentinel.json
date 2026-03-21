@@ -1,10 +1,10 @@
 {
-  "timestamp": "2025-03-19T05:32:00Z",
+  "timestamp": "2025-03-21T06:12:00Z",
   "commit_hash": "latest",
-  "page_type": "Home, Location, Condition, Appointment",
-  "suspected_lcp_element": "N/A (Focus is on INP)",
-  "bottleneck_identified": "Interaction to Next Paint (INP) regression risk caused by `LazySection.tsx` component. The `setIsVisible(true)` state update inside the `IntersectionObserver` triggers immediately upon intersection, causing heavy dynamically imported child components to render on the main thread during scrolling, which causes scroll jank and poor responsiveness.",
-  "fix_applied": "Modified `app/_components/LazySection.tsx` to wrap the `setIsVisible(true)` state update inside `window.requestIdleCallback()` (with a `setTimeout` fallback).",
-  "expected_improvement": "Improves INP by deferring the rendering of heavy lazy-loaded components to browser idle periods, preventing main thread blocking and layout thrashing during scroll events.",
-  "how_to_verify": "1. Run `pnpm dev`. 2. Open `http://localhost:3000` (or any page using LazySection). 3. Scroll down the page quickly. 4. Verify that scrolling remains smooth and the lazy-loaded sections appear without causing noticeable scroll jank."
+  "page_type": "Home",
+  "suspected_lcp_element": "LCP is primarily the critical hero text overlay, but the render thread is blocked heavily by WebGL initialization.",
+  "bottleneck_identified": "Significant Total Blocking Time (TBT) and Largest Contentful Paint (LCP) regression risk due to synchronous `THREE.WebGLRenderer` initialization inside `Hero.tsx` `useEffect`. The heavy WebGL instantiation blocks the main thread during initial page load, delaying the painting of critical text and interactive elements.",
+  "fix_applied": "Modified `app/components/scrollytelling/Hero.tsx` to defer the initialization of the Three.js scene, camera, renderer, and related logic by 2 seconds (`setTimeout(initWebGL, 2000)`).",
+  "expected_improvement": "Dramatically improves LCP, TBT, and potentially INP by yielding the main thread during the critical rendering path. The browser can prioritize painting the hero text, processing LCP events, and handling immediate user interactions before the heavy WebGL canvas initializes in the background.",
+  "how_to_verify": "1. Run `pnpm dev`. 2. Open `http://localhost:3000`. 3. Open Chrome DevTools > Performance and record a page load. 4. Verify that the initial page load has minimal blocking time before the first paint, and the WebGL canvas initializes seamlessly a few seconds later."
 }

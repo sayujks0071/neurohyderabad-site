@@ -30,6 +30,18 @@ export default function Hero() {
             scrollDuration: '150%', // 1.5x viewport height
         };
 
+        // 🫀 CWV Sentinel Fix: Initialize WebGL renderer and textures asynchronously to unblock main thread LCP paint
+        let renderer: THREE.WebGLRenderer | null = null;
+        let geometry: THREE.PlaneGeometry | null = null;
+        let material: THREE.ShaderMaterial | null = null;
+        let plane: THREE.Mesh | null = null;
+        let scrubEngine: ScrubEngine | null = null;
+        let animationFrameId: number;
+        let timeline: gsap.core.Timeline | null = null;
+        let observer: IntersectionObserver | null = null;
+        let loadTimeout: NodeJS.Timeout;
+        let webglInitTimeout: NodeJS.Timeout;
+
         // Scene Setup
         const scene = new THREE.Scene();
         const camera = new THREE.OrthographicCamera(
@@ -42,11 +54,6 @@ export default function Hero() {
         );
         camera.position.z = 10;
 
-        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Cap pixel ratio for performance
-        containerRef.current.appendChild(renderer.domElement);
-
         // Material & Geometry
         const uniforms = {
             map: { value: null as THREE.Texture | null },
@@ -54,35 +61,82 @@ export default function Hero() {
             distortionStrength: { value: 0.1 }
         };
 
-        const geometry = new THREE.PlaneGeometry(window.innerWidth, window.innerHeight);
-        const material = new THREE.ShaderMaterial({
-            uniforms: uniforms,
-            vertexShader: vertexShader,
-            fragmentShader: fragmentShader,
-            transparent: true
-        });
+        const initWebGL = () => {
+            if (!containerRef.current) return;
+            renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Cap pixel ratio for performance
+            containerRef.current.appendChild(renderer.domElement);
 
-        const plane = new THREE.Mesh(geometry, material);
-        scene.add(plane);
+            geometry = new THREE.PlaneGeometry(window.innerWidth, window.innerHeight);
+            material = new THREE.ShaderMaterial({
+                uniforms: uniforms,
+                vertexShader: vertexShader,
+                fragmentShader: fragmentShader,
+                transparent: true
+            });
 
-        // Scrub Engine
-        const scrubEngine = new ScrubEngine({
-            totalFrames: CONFIG.totalFrames,
-            batchSize: 4, // Load initial 4 frames for quick start
-            onProgress: (p) => setProgress(p),
-            onInitLoad: () => {
-                // Start experience as soon as initial batch is ready
-                setIsLoading(false);
-                initScroll();
-            },
-            onLoadComplete: () => {
-                console.log('All frames fully loaded in background');
+            plane = new THREE.Mesh(geometry, material);
+            scene.add(plane);
+
+            // Scrub Engine
+            scrubEngine = new ScrubEngine({
+                totalFrames: CONFIG.totalFrames,
+                batchSize: 4, // Load initial 4 frames for quick start
+                onProgress: (p) => setProgress(p),
+                onInitLoad: () => {
+                    // Start experience as soon as initial batch is ready
+                    setIsLoading(false);
+                    initScroll();
+                },
+                onLoadComplete: () => {
+                    console.log('All frames fully loaded in background');
+                }
+            });
+
+            // Start Loading lazily to prevent blocking LCP
+            if ('requestIdleCallback' in window) {
+                (window as any).requestIdleCallback(() => {
+                    loadTimeout = setTimeout(() => {
+                        if (scrubEngine) scrubEngine.preload();
+                    }, 50);
+                }, { timeout: 1000 });
+            } else {
+                loadTimeout = setTimeout(() => {
+                    if (scrubEngine) scrubEngine.preload();
+                }, 200);
             }
-        });
+
+            // Animation Loop & Viewport Optimization
+            let isVisible = true; // Assume visible initially
+
+            // ⚡ Bolt: Pause WebGL rendering when hero is off-screen to save CPU/GPU
+            observer = new IntersectionObserver((entries) => {
+                const wasVisible = isVisible;
+                isVisible = entries[0].isIntersecting;
+
+                // Restart animation loop when scrolling back into view
+                if (isVisible && !wasVisible) {
+                    animate();
+                }
+            }, { threshold: 0 });
+
+            observer.observe(containerRef.current);
+
+            const animate = () => {
+                if (!isVisible || !renderer || !scene || !camera) return; // Halt loop when off-screen
+                animationFrameId = requestAnimationFrame(animate);
+                renderer.render(scene, camera);
+            };
+            animate();
+        };
+
+        // Yield main thread briefly to allow HTML/CSS LCP text to paint first
+        webglInitTimeout = setTimeout(initWebGL, 10);
 
         // Resize Handler
         const handleResize = () => {
-            if (!containerRef.current) return;
+            if (!containerRef.current || !renderer || !plane || !geometry) return;
 
             renderer.setSize(window.innerWidth, window.innerHeight);
 
@@ -95,38 +149,13 @@ export default function Hero() {
 
             // Update geometry size
             plane.geometry.dispose();
-            plane.geometry = new THREE.PlaneGeometry(window.innerWidth, window.innerHeight);
+            geometry = new THREE.PlaneGeometry(window.innerWidth, window.innerHeight);
+            plane.geometry = geometry;
         };
 
         window.addEventListener('resize', handleResize);
 
-        // Animation Loop & Viewport Optimization
-        let animationFrameId: number;
-        let isVisible = true; // Assume visible initially
-
-        // ⚡ Bolt: Pause WebGL rendering when hero is off-screen to save CPU/GPU
-        const observer = new IntersectionObserver((entries) => {
-            const wasVisible = isVisible;
-            isVisible = entries[0].isIntersecting;
-
-            // Restart animation loop when scrolling back into view
-            if (isVisible && !wasVisible) {
-                animate();
-            }
-        }, { threshold: 0 });
-
-        observer.observe(containerRef.current);
-
-        const animate = () => {
-            if (!isVisible) return; // Halt loop when off-screen
-            animationFrameId = requestAnimationFrame(animate);
-            renderer.render(scene, camera);
-        };
-        animate();
-
         // Scroll Logic
-        let timeline: gsap.core.Timeline;
-
         function initScroll() {
             timeline = gsap.timeline({
                 scrollTrigger: {
@@ -144,6 +173,7 @@ export default function Hero() {
                 progress: 1,
                 ease: "none",
                 onUpdate: () => {
+                    if (!scrubEngine) return;
                     const frame = scrubEngine.getFrame(proxy.progress);
                     if (frame) {
                         if (!uniforms.map.value) {
@@ -159,39 +189,26 @@ export default function Hero() {
             });
         }
 
-        // Start Loading lazily to prevent blocking LCP
-        let loadTimeout: NodeJS.Timeout;
-        if ('requestIdleCallback' in window) {
-            (window as any).requestIdleCallback(() => {
-                loadTimeout = setTimeout(() => {
-                    scrubEngine.preload();
-                }, 100);
-            }, { timeout: 2000 });
-        } else {
-            loadTimeout = setTimeout(() => {
-                scrubEngine.preload();
-            }, 500);
-        }
-
         // Cleanup
         return () => {
+            if (webglInitTimeout) clearTimeout(webglInitTimeout);
             if (loadTimeout) clearTimeout(loadTimeout);
-            observer.disconnect();
+            if (observer) observer.disconnect();
             window.removeEventListener('resize', handleResize);
-            cancelAnimationFrame(animationFrameId);
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
 
             if (timeline) timeline.kill();
             ScrollTrigger.getAll().forEach(t => t.kill());
 
-            scrubEngine.dispose();
+            if (scrubEngine) scrubEngine.dispose();
 
-            if (containerRef.current && containerRef.current.contains(renderer.domElement)) {
+            if (containerRef.current && renderer && containerRef.current.contains(renderer.domElement)) {
                 containerRef.current.removeChild(renderer.domElement);
             }
 
-            geometry.dispose();
-            material.dispose();
-            renderer.dispose();
+            if (geometry) geometry.dispose();
+            if (material) material.dispose();
+            if (renderer) renderer.dispose();
         };
     }, []);
 
