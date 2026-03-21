@@ -144,7 +144,7 @@ async function generateMissingMetaDescriptions(): Promise<{
   for (const page of pagesToOptimize) {
     try {
       const { text } = await generateText({
-        model: getTextModel(),
+        model: getTextModel(undefined, { cache: true }),
         prompt: `Generate a compelling SEO meta description (150-160 characters) for a page about "${page.title}" by Dr. Sayuj, a neurosurgeon in Hyderabad. Focus on: ${page.focus}. Include a call to action.`,
         temperature: 0.7,
       });
@@ -258,7 +258,7 @@ export async function generateBlogOutline(topic: string): Promise<{
 
   try {
     const { text } = await generateText({
-      model: getTextModel(),
+      model: getTextModel(undefined, { cache: true }),
       prompt: `Create a detailed blog post outline for a neurosurgery practice in Hyderabad about: "${topic}"
 
 Include:
