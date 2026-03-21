@@ -1,21 +1,24 @@
-import { SITE_URL } from "@/src/lib/seo";
 import type { Metadata } from "next";
-import Section from "../_components/Section";
-import Card from "../_components/Card";
-import Button from "../_components/Button";
+import { SITE_URL } from "@/src/lib/seo";
+import { CANONICAL_TELEPHONE } from "@/src/data/locations";
+import Section from "@/app/_components/Section";
+import Card from "@/app/_components/Card";
+import Button from "@/app/_components/Button";
+import Breadcrumbs from "@/app/components/Breadcrumbs";
 import ReferralForm from "@/components/forms/ReferralForm";
-import MedicalWebPageSchema from "../components/schemas/MedicalWebPageSchema";
-import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
+import MedicalWebPageSchema from "@/app/components/schemas/MedicalWebPageSchema";
+import BreadcrumbSchema from "@/app/components/schemas/BreadcrumbSchema";
 
 export const metadata: Metadata = {
-  title: "Refer a Patient | Dr. Sayuj Krishnan S",
-  description: "Refer a patient to Dr. Sayuj Krishnan S, Neurosurgeon in Hyderabad. Trusted by specialists for complex and urgent neurosurgical cases.",
-  alternates: { canonical: "/refer" },
+  title: "Refer a Patient | Dr. Sayuj Krishnan",
+  description: "Refer a patient to Dr. Sayuj Krishnan for expert neurosurgical care in Hyderabad. Trusted by surgeons and specialists for complex brain and spine cases.",
+  alternates: {
+    canonical: "/refer",
+  },
   openGraph: {
-    title: "Refer a Patient | Dr. Sayuj Krishnan S",
-    description: "Trusted by surgeons and specialists across Hyderabad for complex cases. Submit a secure patient referral.",
+    title: "Refer a Patient | Dr. Sayuj Krishnan",
+    description: "Refer a patient to Dr. Sayuj Krishnan for expert neurosurgical care in Hyderabad.",
     url: `${SITE_URL}/refer`,
-    type: "website",
   },
 };
 
@@ -23,11 +26,10 @@ export default function ReferralPage() {
   return (
     <>
       <MedicalWebPageSchema
-        pageType="about"
+        pageType="contact"
         pageSlug="/refer"
-        title="Refer a Patient | Dr. Sayuj Krishnan S"
-        description="Refer a patient to Dr. Sayuj Krishnan S, Neurosurgeon in Hyderabad."
-        audience="Physicians"
+        title="Refer a Patient | Dr. Sayuj Krishnan"
+        description="Refer a patient to Dr. Sayuj Krishnan for expert neurosurgical care in Hyderabad."
       />
       <BreadcrumbSchema
         items={[
@@ -35,73 +37,64 @@ export default function ReferralPage() {
           { name: "Refer a Patient", path: "/refer" }
         ]}
       />
-
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-16 lg:pt-40 lg:pb-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-slate-900 to-slate-950 -z-10" />
-        <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-10 -z-10" />
-
-        <div className="container mx-auto px-4 relative z-10 text-center">
-          <div className="max-w-3xl mx-auto space-y-6">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight text-balance">
+      <Breadcrumbs
+        items={[
+          { name: "Home", href: "/" },
+          { name: "Refer a Patient", href: "/refer" }
+        ]}
+      />
+      <main>
+        <Section background="blue" className="py-16 text-center">
+          <div className="max-w-4xl mx-auto">
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
               Refer a Patient to Dr. Sayuj Krishnan S
             </h1>
-            <p className="text-xl md:text-2xl text-blue-100 font-medium text-balance leading-relaxed">
-              Trusted by surgeons and specialists across Hyderabad for complex cases
+            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+              Trusted by surgeons and specialists across Hyderabad for complex neurosurgical cases, endoscopic spine surgery, and robotic brain procedures.
             </p>
+            <div className="inline-flex items-center gap-3 bg-red-600/20 border border-red-500/30 text-white px-6 py-3 rounded-full font-medium">
+              <span className="flex-shrink-0 text-xl">🚑</span>
+              <span>For urgent referrals, please call <a href={`tel:${CANONICAL_TELEPHONE}`} className="font-bold underline underline-offset-2 hover:text-red-200">{CANONICAL_TELEPHONE}</a></span>
+            </div>
           </div>
-        </div>
-      </section>
+        </Section>
 
-      <main>
-        <Section className="bg-slate-50/50 py-16">
-          <div className="container mx-auto px-4 max-w-6xl">
-            <div className="grid lg:grid-cols-2 gap-10">
-              <div className="order-2 lg:order-1">
-                 <ReferralForm />
-              </div>
+        <Section className="py-16">
+          <div className="max-w-6xl mx-auto grid lg:grid-cols-12 gap-12 items-start">
+            <div className="lg:col-span-8">
+              <ReferralForm />
+            </div>
 
-              <div className="order-1 lg:order-2 space-y-6">
-                 <div>
-                    <h2 className="text-3xl font-bold mb-4 text-slate-800">Why Refer to Us?</h2>
-                    <ul className="space-y-4 text-slate-600 mb-8 list-disc list-inside">
-                        <li><strong>Advanced Techniques:</strong> Expertise in endoscopic, minimally invasive, and robotic-assisted spine and brain surgeries.</li>
-                        <li><strong>Complex Cases:</strong> Specialized in managing high-risk and complex neurosurgical pathologies.</li>
-                        <li><strong>Prompt Communication:</strong> We prioritize clear and timely updates to referring physicians regarding patient status and treatment plans.</li>
-                        <li><strong>Urgent Access:</strong> Same-day slots are reserved for urgent and emergent cases.</li>
-                    </ul>
+            <div className="lg:col-span-4 space-y-8">
+              <Card padding="lg">
+                <h3 className="text-xl font-semibold mb-4 text-slate-800">Why Refer to Us?</h3>
+                <ul className="space-y-4 text-slate-600">
+                  <li className="flex gap-3">
+                    <span className="text-blue-600 flex-shrink-0">✓</span>
+                    <span><strong>Complex Cases:</strong> Specialized in advanced endoscopic and robotic procedures.</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="text-blue-600 flex-shrink-0">✓</span>
+                    <span><strong>Rapid Access:</strong> Same-day slots guaranteed for urgent neurosurgical referrals.</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="text-blue-600 flex-shrink-0">✓</span>
+                    <span><strong>Collaborative Care:</strong> We maintain open communication and return patients to your primary care after specialized treatment.</span>
+                  </li>
+                </ul>
+              </Card>
 
-                    <Card padding="lg" className="bg-blue-50/50 border-blue-100">
-                      <h3 className="font-semibold text-xl text-blue-800 mb-2">Urgent Referrals</h3>
-                      <p className="text-blue-700 mb-4">
-                        For emergencies or time-sensitive referrals requiring immediate attention, please contact us directly.
-                      </p>
-                      <Button
-                        href="tel:+919778280044"
-                        className="bg-red-600 hover:bg-red-700 text-white w-full sm:w-auto"
-                      >
-                        Call +91 9778280044
-                      </Button>
-                    </Card>
-
-                    {/* WhatsApp Fallback */}
-                    <Card padding="lg" className="mt-8 bg-green-50/50 border-green-100">
-                      <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-                        <div>
-                          <h3 className="font-semibold text-lg text-green-800">Prefer to message?</h3>
-                          <p className="text-green-700">Chat directly with our coordination team on WhatsApp.</p>
-                        </div>
-                        <Button
-                          href="https://wa.me/919778280044?text=Hello+Dr.+Sayuj+I+am+a+doctor+and+would+like+to+refer+a+patient"
-                          variant="primary"
-                          className="bg-green-600 hover:bg-green-700 w-full sm:w-auto text-center"
-                        >
-                          Chat on WhatsApp →
-                        </Button>
-                      </div>
-                    </Card>
-                 </div>
-              </div>
+              <Card padding="lg" className="bg-green-50 border-green-100">
+                <h3 className="font-semibold text-lg text-green-800 mb-2">Prefer WhatsApp?</h3>
+                <p className="text-green-700 mb-4 text-sm">Send a quick message to our coordination team to initiate a referral.</p>
+                <Button
+                  href="https://wa.me/919778280044?text=Hello+Dr.+Sayuj+I+am+a+doctor+and+would+like+to+refer+a+patient"
+                  variant="primary"
+                  className="bg-green-600 hover:bg-green-700 w-full justify-center"
+                >
+                  Chat on WhatsApp →
+                </Button>
+              </Card>
             </div>
           </div>
         </Section>

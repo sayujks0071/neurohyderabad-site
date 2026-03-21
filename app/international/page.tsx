@@ -1,21 +1,24 @@
-import { SITE_URL } from "@/src/lib/seo";
 import type { Metadata } from "next";
-import Section from "../_components/Section";
-import Card from "../_components/Card";
-import Button from "../_components/Button";
+import { SITE_URL } from "@/src/lib/seo";
+import { CANONICAL_TELEPHONE } from "@/src/data/locations";
+import Section from "@/app/_components/Section";
+import Card from "@/app/_components/Card";
+import Button from "@/app/_components/Button";
+import Breadcrumbs from "@/app/components/Breadcrumbs";
 import InternationalForm from "@/components/forms/InternationalForm";
-import MedicalWebPageSchema from "../components/schemas/MedicalWebPageSchema";
-import BreadcrumbSchema from "../components/schemas/BreadcrumbSchema";
+import MedicalWebPageSchema from "@/app/components/schemas/MedicalWebPageSchema";
+import BreadcrumbSchema from "@/app/components/schemas/BreadcrumbSchema";
 
 export const metadata: Metadata = {
-  title: "International & NRI Patient Services | Dr. Sayuj Krishnan S",
-  description: "Dedicated medical services for international and NRI patients seeking neurosurgical care in Hyderabad. Telemedicine, visa assistance, and specialized care plans.",
-  alternates: { canonical: "/international" },
+  title: "International Patients | Dr. Sayuj Krishnan",
+  description: "Dedicated neurosurgical care and coordination for international and NRI patients traveling to Hyderabad.",
+  alternates: {
+    canonical: "/international",
+  },
   openGraph: {
-    title: "International & NRI Patient Services | Dr. Sayuj Krishnan S",
-    description: "Dedicated medical services for international and NRI patients seeking neurosurgical care in Hyderabad. Get personalized treatment plans and travel assistance.",
+    title: "International Patients | Dr. Sayuj Krishnan",
+    description: "Dedicated neurosurgical care and coordination for international and NRI patients traveling to Hyderabad.",
     url: `${SITE_URL}/international`,
-    type: "website",
   },
 };
 
@@ -23,11 +26,10 @@ export default function InternationalPage() {
   return (
     <>
       <MedicalWebPageSchema
-        pageType="about"
+        pageType="service"
         pageSlug="/international"
-        title="International & NRI Patient Services | Dr. Sayuj Krishnan S"
-        description="Dedicated medical services for international and NRI patients seeking neurosurgical care in Hyderabad."
-        audience="Patients"
+        title="International Patients | Dr. Sayuj Krishnan"
+        description="Dedicated neurosurgical care and coordination for international and NRI patients traveling to Hyderabad."
       />
       <BreadcrumbSchema
         items={[
@@ -35,65 +37,80 @@ export default function InternationalPage() {
           { name: "International Patients", path: "/international" }
         ]}
       />
-
-      <section className="relative pt-32 pb-16 lg:pt-40 lg:pb-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-900 via-slate-900 to-slate-950 -z-10" />
-        <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-10 -z-10" />
-
-        <div className="container mx-auto px-4 relative z-10 text-center">
-          <div className="max-w-3xl mx-auto space-y-6">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight text-balance">
+      <Breadcrumbs
+        items={[
+          { name: "Home", href: "/" },
+          { name: "International Patients", href: "/international" }
+        ]}
+      />
+      <main>
+        <Section background="blue" className="py-16 text-center">
+          <div className="max-w-4xl mx-auto">
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
               International & NRI Patient Services
             </h1>
-            <p className="text-xl md:text-2xl text-indigo-100 font-medium text-balance leading-relaxed">
-              World-class neurosurgical care in Hyderabad, tailored for patients traveling from abroad.
+            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+              World-class neurosurgical care in Hyderabad. We provide end-to-end coordination for patients traveling from abroad, ensuring a seamless experience from consultation to recovery.
             </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <Button href="#form" variant="primary" className="bg-white text-blue-900 hover:bg-blue-50">Request Consultation</Button>
+              <Button href="https://wa.me/919778280044?text=Hello+Dr.+Sayuj+I+am+an+international+patient+seeking+consultation" className="bg-green-500 hover:bg-green-600 border-none text-white">WhatsApp Us</Button>
+            </div>
           </div>
-        </div>
-      </section>
+        </Section>
 
-      <main>
-        <Section className="bg-slate-50/50 py-16">
-          <div className="container mx-auto px-4 max-w-6xl">
-            <div className="grid lg:grid-cols-2 gap-10">
-              <div className="order-2 lg:order-1">
-                 <InternationalForm />
-              </div>
+        <Section className="py-16">
+          <div className="max-w-6xl mx-auto grid lg:grid-cols-12 gap-12 items-start">
+            <div className="lg:col-span-8" id="form">
+              <InternationalForm />
+            </div>
 
-              <div className="order-1 lg:order-2 space-y-6">
-                 <div>
-                    <h2 className="text-3xl font-bold mb-4 text-slate-800">Your Health, Our Priority</h2>
-                    <p className="text-lg text-slate-600 mb-6">
-                      We understand that seeking medical treatment far from home can be daunting. Our dedicated international patient coordination team ensures a seamless experience from initial consultation to post-operative recovery.
-                    </p>
+            <div className="lg:col-span-4 space-y-8">
+              <Card padding="lg">
+                <h3 className="text-xl font-semibold mb-4 text-slate-800">Our Services Include:</h3>
+                <ul className="space-y-4 text-slate-600">
+                  <li className="flex gap-3 items-start">
+                    <span className="text-blue-600 flex-shrink-0 mt-1">✓</span>
+                    <div>
+                      <strong>Dedicated Coordinator</strong>
+                      <p className="text-sm">A single point of contact for all your needs.</p>
+                    </div>
+                  </li>
+                  <li className="flex gap-3 items-start">
+                    <span className="text-blue-600 flex-shrink-0 mt-1">✓</span>
+                    <div>
+                      <strong>Telemedicine Consultations</strong>
+                      <p className="text-sm">Pre-travel video consultations to review MRI/CT scans.</p>
+                    </div>
+                  </li>
+                  <li className="flex gap-3 items-start">
+                    <span className="text-blue-600 flex-shrink-0 mt-1">✓</span>
+                    <div>
+                      <strong>Visa Letter Support</strong>
+                      <p className="text-sm">Medical visa invitation letters provided promptly.</p>
+                    </div>
+                  </li>
+                  <li className="flex gap-3 items-start">
+                    <span className="text-blue-600 flex-shrink-0 mt-1">✓</span>
+                    <div>
+                      <strong>Airport Transfer</strong>
+                      <p className="text-sm">Complimentary airport pickup and coordination.</p>
+                    </div>
+                  </li>
+                </ul>
+              </Card>
 
-                    <h3 className="text-2xl font-bold mt-8 mb-4 text-slate-800">Services We Provide</h3>
-                    <ul className="space-y-4 text-slate-600 mb-8 list-disc list-inside">
-                        <li><strong>Telemedicine Consultations:</strong> Discuss your diagnosis and treatment options before traveling.</li>
-                        <li><strong>Medical Visa Assistance:</strong> Official invitation letters and documentation support for visa applications.</li>
-                        <li><strong>Dedicated Coordinator:</strong> A single point of contact to assist with all logistics and clinical scheduling.</li>
-                        <li><strong>Airport & Travel Coordination:</strong> Assistance with airport transfers and accommodation near Yashoda Hospitals.</li>
-                        <li><strong>English Medical Records:</strong> Comprehensive discharge summaries and operative notes provided in English.</li>
-                    </ul>
-
-                    {/* WhatsApp Fallback */}
-                    <Card padding="lg" className="mt-8 bg-green-50/50 border-green-100">
-                      <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-                        <div>
-                          <h3 className="font-semibold text-lg text-green-800">Prefer to message?</h3>
-                          <p className="text-green-700">Chat directly with our coordination team on WhatsApp.</p>
-                        </div>
-                        <Button
-                          href="https://wa.me/919778280044?text=Hello+Dr.+Sayuj+I+am+an+international+patient+seeking+consultation"
-                          variant="primary"
-                          className="bg-green-600 hover:bg-green-700 w-full sm:w-auto text-center"
-                        >
-                          Chat on WhatsApp →
-                        </Button>
-                      </div>
-                    </Card>
-                 </div>
-              </div>
+              <Card padding="lg" className="bg-green-50 border-green-100">
+                <h3 className="font-semibold text-lg text-green-800 mb-2">Prefer WhatsApp?</h3>
+                <p className="text-green-700 mb-4 text-sm">Our international coordinator is available on WhatsApp for quick responses.</p>
+                <Button
+                  href="https://wa.me/919778280044?text=Hello+Dr.+Sayuj+I+am+an+international+patient+seeking+consultation"
+                  variant="primary"
+                  className="bg-green-600 hover:bg-green-700 w-full justify-center"
+                >
+                  Chat on WhatsApp →
+                </Button>
+              </Card>
             </div>
           </div>
         </Section>
