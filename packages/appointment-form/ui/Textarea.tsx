@@ -35,7 +35,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function Textare
         id={id}
         ref={ref}
         rows={4}
-        className={`block w-full rounded-md border border-slate-300 px-4 py-2.5 text-slate-800 shadow-sm focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 ${
+        className={`apple-style-input-field block w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-800 transition-all duration-300 focus:bg-white focus:border-clinical-blue focus:ring-4 focus:ring-clinical-blue/20 focus:outline-none placeholder:text-slate-400 ${
           error ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""
         } ${className}`}
         aria-invalid={error ? "true" : "false"}
