@@ -115,9 +115,9 @@ async function auditPage(url) {
 
   // 3. WhatsApp CTA
   const hasWhatsApp =
-    html.includes("wa.me") || html.includes("api.whatsapp.com") || html.toLowerCase().includes("whatsapp");
+    html.includes("wa.me") || html.includes("api.whatsapp.com") || html.toLowerCase().includes("whatsapp") || html.includes("tel:");
   info.hasWhatsAppCTA = hasWhatsApp;
-  if (!hasWhatsApp) issues.push("No WhatsApp CTA");
+  if (!hasWhatsApp) issues.push("No WhatsApp CTA (or phone number link)");
 
   // 4. JSON-LD schema action
   const jsonLdBlocks = extractJsonLdBlocks(html);

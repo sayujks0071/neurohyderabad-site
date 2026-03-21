@@ -406,7 +406,7 @@ This booking was created through our AI chat assistant.`;
       <div className="mt-4 flex justify-center">
         <a
           href="/appointments"
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[var(--color-primary-500)] text-white font-semibold shadow-lg hover:bg-[var(--color-primary-700)] transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)] focus:ring-offset-2"
+          className="animate-pulse inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[var(--color-primary-500)] text-white font-semibold shadow-lg hover:bg-[var(--color-primary-700)] transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-500)] focus:ring-offset-2"
           aria-label="Book appointment with Dr Sayuj Krishnan"
         >
           <span>📅</span>

@@ -103,7 +103,7 @@ def analyze_page(url, target_keyword):
     # Local SEO / Conversion
     has_booking_cta = any(cta in text_content for cta in ["book appointment", "schedule consultation", "book now", "book a consultation"])
     has_internal_booking_link = "/appointments" in response.text or "book-appointment" in response.text
-    has_whatsapp_cta = "wa.me" in response.text or "api.whatsapp.com" in response.text or "whatsapp" in text_content
+    has_whatsapp_cta = "wa.me" in response.text or "api.whatsapp.com" in response.text or "whatsapp" in text_content or "tel:" in response.text
 
     if not has_booking_cta:
         recommendations.append("Missing clear Booking CTA.")
