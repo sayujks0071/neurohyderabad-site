@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse, after } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { getRateLimit } from "@/lib/ratelimit";
 import { sendEmail, CONTACT_EMAIL } from "@/lib/mailer";
 import { logToSheets } from "@/lib/sheets";
@@ -8,55 +8,59 @@ export async function POST(request: NextRequest) {
   const limit = getRateLimit(ip);
 
   if (!limit.success) {
-    return NextResponse.json({ error: "Too many requests. Please try again later." }, { status: 429 });
+    return NextResponse.json(
+      { error: "Too many requests. Please try again later." },
+      { status: 429 }
+    );
   }
 
   try {
     const body = await request.json();
 
-    if (body.company) {
-      console.warn("Honeypot field filled");
-      return NextResponse.json({ ok: true });
-    }
-
     const {
-      patientName, phone, email, procedure, surgeryDate,
-      concern, description, severity
+      patientName,
+      phone,
+      email,
+      procedure,
+      dateOfSurgery,
+      concernType,
+      concernDescription,
+      severity
     } = body;
 
-    if (!patientName || !phone || !procedure || !surgeryDate || !concern || !description || !severity) {
-      return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
-    }
+    const subject = `Post-Op Follow-Up — ${patientName} | ${procedure} | ${concernType}`;
 
-    const subject = `Post-Op Follow-Up — ${patientName} | ${procedure} | ${concern}`;
     const htmlBody = `
-      <h2>New Post-Operative Follow-Up Query</h2>
+      <h2>Post-Op Follow-Up Query</h2>
       <p><strong>Patient Name:</strong> ${patientName}</p>
       <p><strong>Phone:</strong> ${phone}</p>
       <p><strong>Email:</strong> ${email || 'N/A'}</p>
-      <p><strong>Procedure:</strong> ${procedure}</p>
-      <p><strong>Surgery Date:</strong> ${surgeryDate}</p>
-      <p><strong>Concern Category:</strong> ${concern}</p>
-      <p><strong>Description:</strong> ${description}</p>
-      <p><strong>Severity:</strong> <span style="color: ${severity === 'Severe' ? 'red' : 'black'}; font-weight: bold;">${severity}</span></p>
+      <p><strong>Procedure Performed:</strong> ${procedure}</p>
+      <p><strong>Date of Surgery:</strong> ${dateOfSurgery}</p>
+      <p><strong>Type of Concern:</strong> ${concernType}</p>
+      <p><strong>Severity:</strong> <strong style="color: ${severity === 'Severe' ? 'red' : 'inherit'}">${severity}</strong></p>
+
+      <h3>Concern Description:</h3>
+      <p>${concernDescription}</p>
     `;
 
-    // Send to clinic
-    await sendEmail({
+    const clinicResult = await sendEmail({
       to: CONTACT_EMAIL,
       subject,
       html: htmlBody,
-      replyTo: email || undefined,
+      replyTo: email,
     });
 
-    // Send acknowledgement to patient (if email provided)
+    if (!clinicResult.success) {
+      throw new Error(clinicResult.error?.toString() || "Failed to send clinic email");
+    }
+
     if (email) {
       const patientSubject = `Your follow-up query has been received`;
       const patientHtml = `
         <p>Dear ${patientName},</p>
-        <p>Thank you for sending your follow-up query.</p>
-        <p>Dr. Sayuj's team will review your concern regarding "${concern}" and respond shortly with guidance.</p>
-        <p><strong>If you are experiencing severe symptoms, please call +91 9778280044 immediately or visit the nearest emergency department.</strong></p>
+        <p>Thank you for sending your follow-up query. Dr. Sayuj's team will review your concern and respond shortly with guidance.</p>
+        <p>If you are experiencing severe symptoms, please call +91 9778280044 immediately or visit the nearest emergency department.</p>
         <br/>
         <p>Take care,<br/>
         Team Dr. Sayuj | Yashoda Hospitals</p>
@@ -69,21 +73,19 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    after(async () => {
-      await logToSheets({
-        source: 'Website – Follow-up',
-        name: patientName,
-        phone,
-        email: email || '',
-        condition: procedure,
-        notes: `Date: ${surgeryDate}. Concern: ${concern}. Description: ${description}. Severity: ${severity}`,
-        status: 'New'
-      });
+    logToSheets({
+      source: 'Website – Follow-up',
+      name: patientName,
+      phone,
+      email: email || '',
+      condition: `${procedure} Post-Op - ${concernType}`,
+      notes: `Surgery Date: ${dateOfSurgery}, Severity: ${severity}\nDescription: ${concernDescription}`,
+      status: 'New'
     });
 
     return NextResponse.json({ success: true });
-  } catch (error) {
+  } catch (error: any) {
     console.error("Follow-up API error", error);
-    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    return NextResponse.json({ error: error.message || "Internal Server Error" }, { status: 500 });
   }
 }
