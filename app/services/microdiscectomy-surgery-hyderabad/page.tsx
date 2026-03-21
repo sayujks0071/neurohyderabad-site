@@ -450,6 +450,61 @@ export default function MicrodiscectomySurgeryPage() {
           </div>
         </section>
 
+        <section className="mb-16 bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
+          <h2 className="text-3xl font-bold text-blue-900 mb-6">What to Expect at Your First Consultation</h2>
+          <p className="text-gray-700 mb-8">
+            Making the decision for spine surgery is significant. Dr. Sayuj Krishnan believes in a transparent, patient-first approach to ensure you understand every aspect of your diagnosis and the potential benefits of microdiscectomy.
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-8 mb-8">
+            <div className="space-y-6">
+              <div className="flex gap-4 items-start">
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-lg">
+                  1
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Clinical Evaluation</h3>
+                  <p className="text-gray-600">A thorough review of your medical history and a physical examination to pinpoint symptoms like leg pain (sciatica), numbness, or weakness.</p>
+                </div>
+              </div>
+
+              <div className="flex gap-4 items-start">
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-lg">
+                  2
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Detailed MRI Review</h3>
+                  <p className="text-gray-600">Dr. Sayuj will walk you through your MRI scans on a large screen, showing you exactly where the disc is pressing on the nerve root.</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-6">
+              <div className="flex gap-4 items-start">
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-lg">
+                  3
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Treatment Plan</h3>
+                  <p className="text-gray-600">A jargon-free discussion on whether microdiscectomy is the right choice, the expected outcomes, and any non-surgical alternatives.</p>
+                </div>
+              </div>
+
+              <div className="bg-blue-50 p-6 rounded-xl border border-blue-100 mt-4">
+                <h4 className="font-semibold text-blue-900 mb-3 flex items-center gap-2">
+                  <span className="text-blue-600">📝</span> What to Bring
+                </h4>
+                <ul className="space-y-2 text-sm text-gray-700">
+                  <li className="flex items-center gap-2"><span className="text-green-500">✓</span> Recent MRI Films & Reports (within 3-6 months)</li>
+                  <li className="flex items-center gap-2"><span className="text-green-500">✓</span> Previous medical records and X-rays</li>
+                  <li className="flex items-center gap-2"><span className="text-green-500">✓</span> List of current medications</li>
+                  <li className="flex items-center gap-2"><span className="text-green-500">✓</span> Insurance card / ID proof</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section className="mb-16 grid lg:grid-cols-[1.2fr_1fr] gap-10 items-start">
           <div className="space-y-6">
             <h2 className="text-3xl font-bold text-blue-900">Expert Care at Yashoda Malakpet</h2>
