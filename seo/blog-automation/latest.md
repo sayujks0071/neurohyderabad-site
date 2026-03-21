@@ -1,5 +1,10 @@
 # Latest Run
 
+- **Date:** 2026-03-21
+- **Topic:** Numbness in Legs or Feet: When to Worry About Your Spine
+- **Status:** Success
+- **Traceability File:** [Run Details](./2026-03-21/run.md)
+
 - **Date:** 2026-03-19
 - **Topic:** Sciatica vs Piriformis Syndrome: Leg Pain Causes
 - **Status:** Success
