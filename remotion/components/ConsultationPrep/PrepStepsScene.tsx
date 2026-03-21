@@ -22,7 +22,7 @@ export const PrepStepsScene: React.FC<PrepStepsSceneProps> = ({ surgeryType, pre
     fps,
     from: 0,
     to: 1,
-    durationInFrames: 20,
+    config: { damping: 100, stiffness: 100 },
   }), [frame, fps, prefersReducedMotion]);
 
   const titleY = useMemo(() => prefersReducedMotion ? 0 : spring({
@@ -30,7 +30,24 @@ export const PrepStepsScene: React.FC<PrepStepsSceneProps> = ({ surgeryType, pre
     fps,
     from: -30,
     to: 0,
-    durationInFrames: 25,
+    config: { damping: 14, stiffness: 120 },
+  }), [frame, fps, prefersReducedMotion]);
+
+  // Subtitle staggered animation
+  const subtitleOpacity = useMemo(() => prefersReducedMotion ? 1 : spring({
+    frame: frame - 10,
+    fps,
+    from: 0,
+    to: 1,
+    config: { damping: 100, stiffness: 100 },
+  }), [frame, fps, prefersReducedMotion]);
+
+  const subtitleY = useMemo(() => prefersReducedMotion ? 0 : spring({
+    frame: frame - 10,
+    fps,
+    from: -20,
+    to: 0,
+    config: { damping: 14, stiffness: 120 },
   }), [frame, fps, prefersReducedMotion]);
 
   return (
@@ -45,34 +62,37 @@ export const PrepStepsScene: React.FC<PrepStepsSceneProps> = ({ surgeryType, pre
           paddingTop: SPACING[12],
         }}
       >
-        {/* Title */}
-        <div style={{ opacity: titleOpacity, transform: `translateY(${titleY}px)` }}>
-          <h2
-            style={{
-              fontFamily: FONTS.primary,
-              fontSize: '48px',
-              fontWeight: 700,
-              color: COLORS.text,
-              margin: 0,
-              marginBottom: SPACING[2],
-              textAlign: 'center',
-            }}
-          >
-            Preparing for Your {surgeryType}
-          </h2>
-          <p
-            style={{
-              fontFamily: FONTS.primary,
-              fontSize: '24px',
-              fontWeight: 400,
-              color: COLORS.textSecondary,
-              margin: 0,
-              marginBottom: SPACING[12],
-              textAlign: 'center',
-            }}
-          >
-            Follow these important steps:
-          </p>
+        {/* Title & Subtitle */}
+        <div style={{ marginBottom: SPACING[12] }}>
+          <div style={{ opacity: titleOpacity, transform: `translateY(${titleY}px)` }}>
+            <h2
+              style={{
+                fontFamily: FONTS.primary,
+                fontSize: '48px',
+                fontWeight: 700,
+                color: COLORS.text,
+                margin: 0,
+                marginBottom: SPACING[2],
+                textAlign: 'center',
+              }}
+            >
+              Preparing for Your {surgeryType}
+            </h2>
+          </div>
+          <div style={{ opacity: subtitleOpacity, transform: `translateY(${subtitleY}px)` }}>
+            <p
+              style={{
+                fontFamily: FONTS.primary,
+                fontSize: '24px',
+                fontWeight: 400,
+                color: COLORS.textSecondary,
+                margin: 0,
+                textAlign: 'center',
+              }}
+            >
+              Follow these important steps:
+            </p>
+          </div>
         </div>
 
         {/* Prep steps */}
