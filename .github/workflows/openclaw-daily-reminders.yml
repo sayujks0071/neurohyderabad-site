@@ -29,7 +29,7 @@ jobs:
         run: pnpm install
 
       - name: Install Google Workspace CLI (gws)
-        run: npm install -g @google/gws-cli
+        run: npm install -g @googleworkspace/cli
 
       - name: Execute Daily Reminders Script
         run: npx tsx openclaw/workflows/send-reminders.ts
